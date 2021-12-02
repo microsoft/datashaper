@@ -14,11 +14,11 @@ export interface ExamplesDropdownProps {
 	onChange?: (spec: Specification | undefined) => void
 }
 
-const specs = [
-	aggregatedLookup as any,
-	compoundBinarize as any,
-	everyOperation as any,
-	multistepBinarize as any,
+const specs: Array<Specification> = [
+	aggregatedLookup as unknown as Specification,
+	compoundBinarize as unknown as Specification,
+	everyOperation as unknown as Specification,
+	multistepBinarize as unknown as Specification,
 ]
 
 export const ExamplesDropdown: React.FC<ExamplesDropdownProps> = memo(
@@ -35,7 +35,12 @@ export const ExamplesDropdown: React.FC<ExamplesDropdownProps> = memo(
 		const handleDropdownChange = useCallback(
 			(e, opt) => {
 				setCurrentOption(opt.key)
-				onChange && onChange(specs.find(s => s.name === opt.key))
+				if (onChange) {
+					const found = specs.find(s => s.name === opt.key)
+					if (found) {
+						onChange(found)
+					}
+				}
 			},
 			[onChange],
 		)

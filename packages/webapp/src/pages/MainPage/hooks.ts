@@ -8,7 +8,7 @@ import {
 	Pipeline,
 } from '@data-wrangling-components/core'
 import { fromCSV, internal as ArqueroTypes, loadCSV } from 'arquero'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 const TABLES = [
 	`data/companies.csv`,
@@ -16,7 +16,10 @@ const TABLES = [
 	`data/products.csv`,
 ]
 
-export function useInputTableList() {
+export function useInputTableList(): [
+	string[],
+	React.Dispatch<React.SetStateAction<string[]>>,
+] {
 	return useState<string[]>(TABLES)
 }
 
@@ -54,7 +57,9 @@ export function usePipeline(store: TableStore): Pipeline {
 	return useMemo(() => new Pipeline(store), [store])
 }
 
-export function useLoadTableFiles() {
+export function useLoadTableFiles(): (
+	files: File[],
+) => Promise<Map<string, ArqueroTypes.ColumnTable>> {
 	return useCallback(
 		async (files: File[]): Promise<Map<string, ArqueroTypes.ColumnTable>> => {
 			const list = await Promise.all(files.map(readTable))
@@ -67,8 +72,8 @@ export function useLoadTableFiles() {
 	)
 }
 
-export function useLoadSpecFile() {
-	return useCallback(async (file): Promise<Specification> => {
+export function useLoadSpecFile(): (file: File) => Promise<Specification> {
+	return useCallback(async (file: File): Promise<Specification> => {
 		return readSpec(file)
 	}, [])
 }

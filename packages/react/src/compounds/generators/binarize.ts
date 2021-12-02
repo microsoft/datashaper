@@ -64,7 +64,7 @@ export function update(
 
 function workflow(
 	parent: CompoundBinarizeStep,
-	criteria: any,
+	criteria: any[],
 ): CompoundBinarizeStep {
 	const post = [
 		...makeDerives(parent, criteria),
