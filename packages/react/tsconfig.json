@@ -11,15 +11,13 @@
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
 		"declaration": true,
-		"incremental": true,
 		"noImplicitAny": true,
 		"target": "ESNext",
 		"allowJs": false,
 		"skipLibCheck": true,
 		"esModuleInterop": false,
-		"isolatedModules": true,
-		"noEmit": true
+		"isolatedModules": true	
 	},
-	"include": ["./src/"],
+	"include": ["src/**/*"],
 	"exclude": ["**/__tests__/**"]
 }

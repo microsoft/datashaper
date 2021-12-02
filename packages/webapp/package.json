@@ -1,12 +1,8 @@
 {
 	"name": "@data-wrangling-components/webapp",
+	"private": true,
 	"version": "0.0.1",
 	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/cjs/index.js",
-		"module": "dist/esm/index.js",
-		"typings": "dist/typings/index.d.ts"
-	},
 	"scripts": {
 		"clean": "essex clean build",
 		"build": "tsc && vite build",

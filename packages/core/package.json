@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/core",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"main": "src/index.ts",
 	"publishConfig": {
 		"main": "dist/cjs/index.js",
@@ -8,8 +8,8 @@
 		"typings": "dist/typings/index.d.ts"
 	},
 	"scripts": {
-		"clean": "essex clean build",
-		"build": "tsc"
+		"clean": "essex clean dist lib",
+		"build": "essex build"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^18.2.0",
