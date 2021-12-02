@@ -4,6 +4,7 @@
  */
 module.exports = {
 	extends: '@essex/eslint-config',
+	parser: '@typescript-eslint/parser',
 	rules: {
 		'@typescript-eslint/no-explicit-any': 'off',
 		'no-redeclare': 'off',

@@ -13,7 +13,8 @@
 		"prettify:": "essex prettify",
 		"test:": "jest",
 		"ci": "run-s build: lint: test: git_is_clean",
-		"publish:": "yarn workspaces foreach --exclude '@data-wrangling-components/project' -pv npm publish --tolerate-republish --access public"
+		"publish:": "yarn workspaces foreach --exclude '@data-wrangling-components/project' -pv npm publish --tolerate-republish --access public",
+		"update_sdks:": "yarn dlx @yarnpkg/sdks vscode"
 	},
 	"prettier": "@essex/prettier-config",
 	"devDependencies": {
@@ -32,7 +33,6 @@
 		"@types/prettier": "^2.4.2",
 		"@typescript-eslint/eslint-plugin": "^5.5.0",
 		"@typescript-eslint/parser": "^5.5.0",
-		"@yarnpkg/sdks": "^2.5.1-rc.4",
 		"babel-jest": "^27.4.2",
 		"eslint": "^8.3.0",
 		"eslint-import-resolver-node": "^0.3.6",
