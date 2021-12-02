@@ -12,7 +12,8 @@
 		"git_is_clean": "essex git-is-clean",
 		"prettify:": "essex prettify",
 		"test:": "jest",
-		"ci": "run-s build: lint: test: git_is_clean"
+		"ci": "run-s build: lint: test: git_is_clean",
+		"publish:": "yarn workspaces foreach --exclude '@data-wrangling-components/project' -pv npm publish --tolerate-republish --access public"
 	},
 	"prettier": "@essex/prettier-config",
 	"devDependencies": {
