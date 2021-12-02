@@ -1,0 +1,61 @@
+name: Data Wrangling Components CI
+pool:
+  vmImage: ubuntu-latest
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - main
+
+stages:
+  - stage: Compliance
+    dependsOn: []
+    jobs:
+      - job: ComplianceJob
+        pool:
+          vmImage: windows-latest
+        steps:
+          - task: CredScan@3
+            inputs:
+              outputFormat: sarif
+              debugMode: false
+
+          - task: ComponentGovernanceComponentDetection@0
+            inputs:
+              scanType: 'Register'
+              verbosity: 'Verbose'
+              alertWarningLevel: 'High'
+
+          - task: PublishSecurityAnalysisLogs@3
+            inputs:
+              ArtifactName: 'CodeAnalysisLogs'
+              ArtifactType: 'Container'
+
+  - stage: Verification
+    dependsOn: []
+    jobs:
+      - job: VerificationJob
+        steps:
+          # Install Tooling
+          - task: NodeTool@0
+            displayName: Install Node
+            inputs:
+              versionSpec: '14.x'
+
+          # Install Dependencies
+          - task: Bash@3
+            displayName: Install Dependencies
+            inputs:
+              targetType: 'inline'
+              script: yarn install
+            env:
+              CI: true
+          # Verify Packages
+          - task: Bash@3
+            displayName: Verify Packages
+            inputs:
+              targetType: 'inline'
+              script: yarn ci
+            env:
+              CI: true

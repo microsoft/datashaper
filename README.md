@@ -1,14 +1,84 @@
-# Project
+# data-wrangling-components
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+This project provides a collection of web components for doing lightweight data wrangling.
 
-As the maintainer of this project, please make a few updates:
+There are three goals of the project:
+ 1. Create a shareable client/server schema for serialized wrangling instructions
+ 2. Maintain an implementation of a basic client-side wrangling engine (largely based on [Arquero](https://github.com/uwdata/arquero))
+ 3. Provide some reusable React components so wrangling operations can be incorporated into webapps easily.
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+The first goal is nascent, and currently covered by typings in the core package. However, our intent is to eventually extract a JSONSchema specification that is more readily consumable by cross-platform services. In addition, our API largely mirrors Arquero's for now; we'll review for areas of parameter commonality and make some generalizations in the future.
+
+We currently have three packages:
+ * [core](packages/core) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables. The pipeline is essentially an implementation of async chain-of-command, executing verbs serially based on an input table context and set of step configurations.
+ * [react](packages/react) - this is a set of React components for each verb that you can include in web apps that enable tranformation pipeline building.
+ * [webapp](packages/webapp) - this is an example/test webapp that includes all of the verb components and allows creation, execution, and saving of pipeline JSON files.
+
+## Building
+
+ * You need node and yarn installed
+ * Run: `yarn`
+ * Then: `yarn build:`
+ * Run the webapp locally: `yarn start:`
+
+## Usage
+
+The webapp uses both the core engine and React components to build a small application that demonstrates how to use the wrangling components. At a basic level, you need a set of input tables, which you place in a TableStore (basically a chain execution context). You add wrangling steps to a Pipeline, then run it to generate an output table.
+
+Tables in the store are referenced by key. Steps can create any number of output tables that are also written to the store. Future steps can therefore build upon previous/intermediate outputs however you'd like. See the [every-operation.json](packages/webapp/src/pages/MainPage/specs/every-operation.json) example for a sample of every verb we currently support.
+
+Example joining two tables:
+```
+    import { table } from 'arquero'
+    import { TableStore, Pipeline } from '@data-wrangling-components/core'
+
+    // id   name
+    // 1    bob
+    // 2    joe
+    // 3    jane
+    const parents = table({
+        id: [1, 2, 3],
+        name: ['bob', 'joe', 'jane']
+    })
+    
+    // id   kid
+    // 1    billy
+    // 1    jill
+    // 2    kaden
+    // 2    kyle
+    // 3    moe
+    const kids = table({
+        id: [1, 1, 2, 2, 3],
+        kid: ['billy', 'jill', 'kaden', 'kyle', 'moe]
+    })
+
+    const store = new TableStore()
+    
+    store.set('parents', parents)
+    store.set('kids', kids)
+
+	const pipeline = new Pipeline(store)
+
+    pipeline.add({
+        type: 'verb',
+        verb: 'join',
+        input: 'parents',
+        output: 'output',
+        args: {
+            other: 'kids',
+            on: ['id']
+        }
+    })
+
+    // id   name    kid
+    // 1    bob     billy
+    // 1    bob     jill
+    // 2    joe     kaden
+    // 2    joe     kyle
+    // 3    jane    moe
+    const result = await pipeline.run()
+    
+```
 
 ## Contributing
 

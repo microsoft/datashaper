@@ -1,0 +1,75 @@
+{
+	"name": "Compound: binarize",
+	"description": "Use a compound binarize step to produce a final output without showing every step.",
+	"steps": [
+		{
+			"type": "compound",
+			"verb": "binarize",
+			"input": "data/companies.csv",
+			"output": "compound-binarize-1",
+			"as": "Smallest & Largest",
+			"steps": [
+				{
+					"type": "verb",
+					"verb": "binarize",
+					"input": "data/companies.csv",
+					"output": "collector-1",
+					"args": {
+						"column": "Employees",
+						"operator": "<",
+						"value": 150000,
+						"type": "value",
+						"as": "Smallest"
+					}
+				},
+				{
+					"type": "verb",
+					"verb": "binarize",
+					"input": "collector-1",
+					"output": "collector-1",
+					"args": {
+						"column": "Employees",
+						"operator": ">",
+						"value": 200000,
+						"type": "value",
+						"as": "Largest"
+					}
+				},
+				{
+					"type": "verb",
+					"verb": "derive",
+					"input": "collector-1",
+					"output": "collector-1",
+					"args": {
+						"column1": "Smallest",
+						"column2": "Largest",
+						"operator": "+",
+						"as": "Combined"
+					}
+				},
+				{
+					"type": "verb",
+					"verb": "binarize",
+					"input": "collector-1",
+					"output": "collector-1",
+					"args": {
+						"column": "Combined",
+						"operator": ">",
+						"value": 0,
+						"type": "value",
+						"as": "Smallest & Largest"
+					}
+				},
+				{
+					"type": "verb",
+					"verb": "select",
+					"input": "collector-1",
+					"output": "final-1",
+					"args": {
+						"not": ["Smallest", "Largest", "Combined"]
+					}
+				}
+			]
+		}
+	]
+}

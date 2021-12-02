@@ -1,0 +1,47 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { Step, StepType, Verb } from '../../types'
+import { sample } from '../verbs/sample'
+import { TestStore } from './TestStore'
+
+describe('test for sample verb', () => {
+	test('sample test with percentage', () => {
+		const step: Step = {
+			type: StepType.Verb,
+			verb: Verb.Sample,
+			input: 'table6',
+			output: 'output',
+			args: {
+				proportion: 0.4,
+			},
+		}
+
+		const store = new TestStore()
+
+		return sample(step, store).then(result => {
+			expect(result.numCols()).toBe(3)
+			expect(result.numRows()).toBe(2)
+		})
+	})
+
+	test('sample test with size', () => {
+		const step: Step = {
+			type: StepType.Verb,
+			verb: Verb.Sample,
+			input: 'table6',
+			output: 'output',
+			args: {
+				size: 4,
+			},
+		}
+
+		const store = new TestStore()
+
+		return sample(step, store).then(result => {
+			expect(result.numCols()).toBe(3)
+			expect(result.numRows()).toBe(4)
+		})
+	})
+})

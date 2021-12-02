@@ -1,0 +1,13 @@
+node_modules/
+storybook-static/
+build/
+dist/
+lib/
+coverage/
+public/
+.yarn/
+.pnp.js
+.pnp.cjs
+.cache/
+node_modules/
+venv/

@@ -1,0 +1,59 @@
+{
+	"name": "Multistep binarize",
+	"description": "Use multiple steps chained together to create a boolean condition set for a single binarized output column.",
+	"steps": [
+		{
+			"type": "verb",
+			"verb": "binarize",
+			"input": "data/companies.csv",
+			"output": "binarize-1",
+			"args": {
+				"column": "Employees",
+				"operator": "<",
+				"value": 150000,
+				"type": "value",
+				"as": "Smallest"
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "binarize",
+			"input": "binarize-1",
+			"output": "binarize-2",
+			"args": {
+				"column": "Employees",
+				"operator": ">",
+				"value": 200000,
+				"type": "value",
+				"as": "Largest"
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "derive",
+			"input": "binarize-2",
+			"output": "derive-1",
+			"args": {
+				"column1": "Smallest",
+				"column2": "Largest",
+				"operator": "+",
+				"as": "Smallest and Largest"
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "select",
+			"input": "derive-1",
+			"output": "select-1",
+			"args": {
+				"columns": {
+					"ID": "ID",
+					"Name": "Name",
+					"Employees": "Employees",
+					"US": "US",
+					"Smallest and Largest": "Smallest and Largest"
+				}
+			}
+		}
+	]
+}
