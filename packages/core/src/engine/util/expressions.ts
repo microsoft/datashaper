@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { escape, op } from 'arquero'
+import { Op } from 'arquero/dist/types/op/op'
 import {
 	NumericComparisonOperator,
 	FieldAggregateOperation,
@@ -28,7 +29,7 @@ export function compare(
 	operator: NumericComparisonOperator | StringComparisonOperator,
 	type: FilterCompareType,
 ): CompareWrapper {
-	return escape((d: any) => {
+	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
 		const left = d[column]
 		const right = type === FilterCompareType.Column ? d[`${value}`] : value
 
@@ -127,7 +128,7 @@ const fieldOps = new Set(Object.values(FieldAggregateOperation))
 export function singleRollup(
 	field: string,
 	operation: FieldAggregateOperation,
-) {
+): number | Op {
 	if (operation === 'count') {
 		return op.count()
 	} else if (!fieldOps.has(operation)) {

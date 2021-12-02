@@ -62,15 +62,6 @@ function useOthers(
 ) {
 	return useMemo(() => {
 		return step.args.others.map((other, index) => {
-			const handleTableChange = (
-				evt: React.FormEvent<HTMLDivElement>,
-				option: any,
-			) => {
-				const update = { ...step }
-				update.args.others[index] = option.key
-				onChange && onChange(update)
-			}
-
 			const handleDeleteClick = () => {
 				const update = { ...step }
 				update.args.others.splice(index, 1)
@@ -83,7 +74,13 @@ function useOthers(
 						label={''}
 						store={store}
 						selectedKey={other}
-						onChange={handleTableChange}
+						onChange={(_evt, option) => {
+							const update = { ...step }
+							if (option) {
+								update.args.others[index] = `${option.key}`
+							}
+							onChange && onChange(update)
+						}}
 					/>
 					<IconButton
 						title={'Remove this table'}
