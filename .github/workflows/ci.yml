@@ -1,0 +1,28 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+
+    steps:
+      - name: Use Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: actions/checkout@v1
+
+      - run: yarn version check
+        if: "!contains(github.ref , 'release/') && !contains(github.head_ref , 'release/')"
+        name: Version Check
+
+      - run: yarn install
+        name: Install Dependencies
+
+      - run: yarn ci
+        name: Execute Tests
+        env:
+          CI: true
