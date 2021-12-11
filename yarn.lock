@@ -1916,6 +1916,7 @@ __metadata:
     office-ui-fabric-react: ^7.180.0
     react: ^17.0.2
     react-dom: ^17.0.2
+    react-if: ^4.1.1
     styled-components: ^5.3.3
     typescript: ^4.5.2
     vite: ^2.6.14
@@ -11039,6 +11040,15 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ">= 16.8"
   checksum: f8dc6af69193133efe30ed11dd8c2212a180abd3833e91d03dab4bdc9546d47dcad311d7f72b4968b7d016871884555b9e16f7a490913b78dbfec8ce8f569193
+  languageName: node
+  linkType: hard
+
+"react-if@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "react-if@npm:4.1.1"
+  peerDependencies:
+    react: ^16.x || ^17.x
+  checksum: ea7c343eca1edb4b26221c41149fcf32073d89af763916ae2b49d4340a9e5e02961c1b7977397f2f4875117ed8c94db84875de4538995bf2a68daedb5990ede0
   languageName: node
   linkType: hard
 

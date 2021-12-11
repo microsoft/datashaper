@@ -39,6 +39,7 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 
 const VERBS = [
 	'aggregate',
+	'bin',
 	'binarize',
 	'concat',
 	'derive',

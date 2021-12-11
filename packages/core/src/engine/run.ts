@@ -43,7 +43,6 @@ export async function run(
 			throw e
 		}
 	}
-	console.log('pipeline result', store)
 	// return the final table
 	return output
 }
