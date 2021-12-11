@@ -265,7 +265,7 @@ export interface BinArgs extends OutputColumnArgs {
 	/**
 	 * Exact step size between bins
 	 */
-	fixedsize?: number
+	fixedwidth?: number
 	/**
 	 * Min boundary to categorize values into.
 	 * If cell values are below this, they will default to -Infinity unless clamped.

@@ -6,6 +6,7 @@ import { Specification } from '@data-wrangling-components/core'
 import { Dropdown } from '@fluentui/react'
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import aggregatedLookup from './specs/aggregated-lookup.json'
+import binning from './specs/binning.json'
 import compoundBinarize from './specs/compound-binarize.json'
 import everyOperation from './specs/every-operation.json'
 import multistepBinarize from './specs/multistep-binarize.json'
@@ -16,6 +17,7 @@ export interface ExamplesDropdownProps {
 
 const specs: Array<Specification> = [
 	aggregatedLookup as unknown as Specification,
+	binning as unknown as Specification,
 	compoundBinarize as unknown as Specification,
 	everyOperation as unknown as Specification,
 	multistepBinarize as unknown as Specification,

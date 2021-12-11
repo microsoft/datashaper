@@ -41,14 +41,14 @@ type Stats = {
  * @returns
  */
 function binExpr(input: ArqueroTypes.ColumnTable, args: BinArgs) {
-	const { strategy, field, fixedsize, fixedcount, min, max, clamped } = args
+	const { strategy, field, fixedwidth, fixedcount, min, max, clamped } = args
 	const stats = getStats(input, field, min, max)
 	switch (strategy) {
 		case BinStrategy.Auto:
 			// just let arquero do its thing
 			return aqbin(field)
 		case BinStrategy.FixedWidth:
-			return fixedStepExpr(field, stats, fixedsize || 1, clamped)
+			return fixedStepExpr(field, stats, fixedwidth || 1, clamped)
 		case BinStrategy.FixedCount:
 			return fixedCountExpr(field, stats, fixedcount || 1, clamped)
 		default:

@@ -64,7 +64,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	)
 	const handleBinSizeChange = useHandleTextfieldChange(
 		internal,
-		'args.fixedsize',
+		'args.fixedwidth',
 		onChange,
 	)
 
@@ -132,8 +132,8 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 							label={'Bin size'}
 							placeholder={'width per bin'}
 							value={
-								internal.args.fixedsize
-									? `${internal.args.fixedsize}`
+								internal.args.fixedwidth
+									? `${internal.args.fixedwidth}`
 									: undefined
 							}
 							styles={columnDropdownStyles}
