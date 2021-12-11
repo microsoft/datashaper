@@ -56,6 +56,13 @@ export class TestStore extends TableStore {
 			count: [80, 90, 100, 110, 120],
 		})
 
+		const table9 = table({
+			count: [
+				10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160,
+				170, 180, 190, 200,
+			],
+		})
+
 		this.set('table1', table1)
 		this.set('table2', table2)
 		this.set('table3', table3)
@@ -64,5 +71,6 @@ export class TestStore extends TableStore {
 		this.set('table6', table6)
 		this.set('table7', table7)
 		this.set('table8', table8)
+		this.set('table9', table9)
 	}
 }
