@@ -110,7 +110,6 @@ function compareValues(left: number, right: number, operator: string): 1 | 0 {
 		case NumericComparisonOperator.Lt:
 			return left < right ? 1 : 0
 		case NumericComparisonOperator.Empty:
-			console.log('checking empty number', left)
 			if (left === null || left === undefined || isNaN(left)) {
 				return 1
 			}

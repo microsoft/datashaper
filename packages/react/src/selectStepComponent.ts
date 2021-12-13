@@ -8,6 +8,7 @@ import { CompoundBinarize, FilterAggregateLookup } from './compounds'
 import { StepComponentProps } from './types'
 import {
 	Aggregate,
+	Bin,
 	Binarize,
 	Derive,
 	Fill,
@@ -32,6 +33,7 @@ const compound: Record<string, React.FC<StepComponentProps>> = {
 
 const verb: Record<string, React.FC<StepComponentProps>> = {
 	aggregate: Aggregate,
+	bin: Bin,
 	binarize: Binarize,
 	concat: SetOperation,
 	derive: Derive,

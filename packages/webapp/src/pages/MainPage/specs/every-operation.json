@@ -28,6 +28,17 @@
 		},
 		{
 			"type": "verb",
+			"verb": "bin",
+			"input": "data/products.csv",
+			"output": "bin-1",
+			"args": {
+				"field": "FY21 Sales",
+				"strategy": "auto",
+				"as": "Binned"
+			}
+		},
+		{
+			"type": "verb",
 			"verb": "binarize",
 			"input": "data/products.csv",
 			"output": "binarize-1",

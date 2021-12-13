@@ -55,6 +55,7 @@ export enum FilterCompareType {
 	Value = 'value',
 	Column = 'column',
 }
+
 /**
  * This is the subset of aggregate functions that can operate
  * on a single field so we don't accommodate additional args.
@@ -78,6 +79,12 @@ export enum FieldAggregateOperation {
 	Variance = 'variance',
 	ArraryAgg = 'array_agg',
 	ArrayAggDistinct = 'array_agg_distinct',
+}
+
+export enum BinStrategy {
+	Auto = 'auto',
+	FixedCount = 'fixed count',
+	FixedWidth = 'fixed width',
 }
 
 export interface Specification {
@@ -104,6 +111,7 @@ export type StepFunction = (
 
 export enum Verb {
 	Aggregate = 'aggregate',
+	Bin = 'bin',
 	Binarize = 'binarize',
 	Derive = 'derive',
 	Fill = 'fill',
@@ -134,6 +142,10 @@ export interface CompoundBinarizeStep extends CompoundStep {
 
 export interface AggregateStep extends Step {
 	args: AggregateArgs
+}
+
+export interface BinStep extends Step {
+	args: BinArgs
 }
 
 export interface BinarizeStep extends Step {
@@ -204,6 +216,7 @@ export interface SetOperationStep extends Step {
 
 export type Args =
 	| AggregateArgs
+	| BinArgs
 	| BinarizeArgs
 	| DeriveArgs
 	| FillArgs
@@ -219,7 +232,14 @@ export type Args =
 	| SetOperationArgs
 	| UnrollArgs
 
-export interface AggregateArgs {
+export interface OutputColumnArgs {
+	/**
+	 * Name of the output column to receive the operation's result.
+	 */
+	as: string
+}
+
+export interface AggregateArgs extends OutputColumnArgs {
 	/**
 	 * Column to group by
 	 */
@@ -232,18 +252,40 @@ export interface AggregateArgs {
 	 * Aggregate operation
 	 */
 	operation: FieldAggregateOperation
-	/**
-	 * Output column to receive the aggregate result.
-	 */
-	as: string
 }
 
-export interface BinarizeArgs extends FilterArgs {
+export interface BinArgs extends OutputColumnArgs {
+	field: string
+
+	strategy: BinStrategy
 	/**
-	 * Output column to receive the binary result.
+	 * Fixed number of bins.
+	 * Note that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -
+	 * this means there is always one extra bin for the max value when using fixed count.
 	 */
-	as: string
+	fixedcount?: number
+	/**
+	 * Exact step size between bins
+	 */
+	fixedwidth?: number
+	/**
+	 * Min boundary to categorize values into.
+	 * If cell values are below this, they will default to -Infinity unless clamped.
+	 */
+	min?: number
+	/**
+	 * Max boundary to categorize values into.
+	 * If cell values are above this, they will default to +Infinity unless clamped.
+	 */
+	max?: number
+	/**
+	 * If true, values outside of the min/max boundaries will be clamped to those
+	 * boundaries rather than +/-Infinity.
+	 */
+	clamped?: boolean
 }
+
+export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {}
 
 /**
  * Base interface for a number of operations that work on a column list.

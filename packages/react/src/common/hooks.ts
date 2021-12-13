@@ -110,6 +110,26 @@ export function useHandleTextfieldChange(
 	)
 }
 
+export function useHandleCheckboxChange(
+	step: Step,
+	path: string,
+	onChange?: (update: Step) => void,
+): (
+	event?: React.FormEvent<HTMLElement | HTMLInputElement>,
+	checked?: boolean,
+) => void {
+	return useCallback(
+		(event, checked) => {
+			const update = {
+				...step,
+			}
+			set(update, path, checked)
+			onChange && onChange(update)
+		},
+		[step, path, onChange],
+	)
+}
+
 export function useLoadTable(
 	name: string | undefined,
 	store: TableStore,

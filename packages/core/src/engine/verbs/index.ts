@@ -7,6 +7,7 @@ import { TableStore } from '../..'
 import { Step, StepFunction, StepType, Verb } from '../../types'
 
 import { aggregate } from './aggregate'
+import { bin } from './bin'
 import { binarize } from './binarize'
 import { concat } from './concat'
 import { derive } from './derive'
@@ -28,6 +29,7 @@ import { unroll } from './unroll'
 
 const verbs: Record<string, StepFunction> = {
 	aggregate,
+	bin,
 	binarize,
 	concat,
 	derive,
@@ -76,6 +78,7 @@ export function factory(
 	}
 	switch (verb) {
 		case Verb.Aggregate:
+		case Verb.Bin:
 		case Verb.Binarize:
 		case Verb.Derive:
 		case Verb.Fill:

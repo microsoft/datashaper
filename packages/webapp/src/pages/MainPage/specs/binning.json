@@ -1,0 +1,70 @@
+{
+	"name": "Binning",
+	"description": "Shows how different binning strategies and clamping work.",
+	"steps": [
+		{
+			"type": "verb",
+			"verb": "bin",
+			"input": "data/products.csv",
+			"output": "bin-1",
+			"args": {
+				"field": "FY21 Sales",
+				"strategy": "auto",
+				"as": "Binned"
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "bin",
+			"input": "data/products.csv",
+			"output": "bin-2",
+			"args": {
+				"field": "FY21 Sales",
+				"strategy": "fixed width",
+				"as": "Binned",
+				"fixedwidth": 100000
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "bin",
+			"input": "data/products.csv",
+			"output": "bin-3",
+			"args": {
+				"field": "FY21 Sales",
+				"strategy": "fixed count",
+				"as": "Binned",
+				"fixedcount": 100
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "bin",
+			"input": "data/products.csv",
+			"output": "bin-4",
+			"args": {
+				"field": "FY21 Sales",
+				"strategy": "fixed width",
+				"as": "Binned",
+				"fixedwidth": 100000,
+				"min": 20000,
+				"max": 1000000
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "bin",
+			"input": "data/products.csv",
+			"output": "bin-5",
+			"args": {
+				"field": "FY21 Sales",
+				"strategy": "fixed width",
+				"as": "Binned",
+				"fixedwidth": 100000,
+				"min": 20000,
+				"max": 1000000,
+				"clamped": true
+			}
+		}
+	]
+}
