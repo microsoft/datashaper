@@ -27,7 +27,7 @@ describe('test for bin verb', () => {
 
 		return bin(step, store).then(result => {
 			const b = bins(result)
-			expect(b.length).toBe(6)
+			expect(b).toHaveLength(6)
 			expect(b[0]).toBe(10)
 			expect(b[1]).toBe(48)
 			expect(b[5]).toBe(200)
@@ -52,7 +52,7 @@ describe('test for bin verb', () => {
 
 		return bin(step, store).then(result => {
 			const b = bins(result)
-			expect(b.length).toBe(7)
+			expect(b).toHaveLength(7)
 			expect(b[0]).toBe(10)
 			expect(b[1]).toBe(40)
 		})
