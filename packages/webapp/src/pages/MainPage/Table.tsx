@@ -2,8 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnConfigMap, ArqueroTable } from '@data-wrangling-components/react'
-import { IconButton } from '@fluentui/react'
+import {
+	ColumnConfigMap,
+	ArqueroDetailsList,
+	useColumnDefaults,
+} from '@data-wrangling-components/react'
+import { IColumn, IconButton } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { internal as ArqueroTypes } from 'arquero'
 import React, { memo, useMemo } from 'react'
@@ -18,7 +22,7 @@ export interface TableProps {
 export const Table: React.FC<TableProps> = memo(function Table({
 	name,
 	table,
-	config,
+	config = {},
 }) {
 	// note that we always reify the table for display, because some arquero operations
 	// only create backing indexes (i.e., orderby, filter)
@@ -36,6 +40,16 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		const blob = new Blob([table.toCSV()])
 		return URL.createObjectURL(blob)
 	}, [table])
+
+	const configDefaults = useMemo(() => {
+		return Object.entries(config).map(([key, conf]) => ({
+			key,
+			name: key,
+			fieldName: key,
+			minWidth: conf.width,
+		})) as IColumn[]
+	}, [config])
+	const columns = useColumnDefaults(table, configDefaults, true)
 	return (
 		<Container className="table-container">
 			<Header>
@@ -51,7 +65,8 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				/>
 			</Header>
 			<TableContainer>
-				<ArqueroTable table={table.reify()} columnConfig={config} />
+				<ArqueroDetailsList table={table.reify()} columns={columns} />
+				{/* <ArqueroTable table={table.reify()} columnConfig={config} /> */}
 			</TableContainer>
 		</Container>
 	)
@@ -73,6 +88,7 @@ const Header = styled.div`
 
 const TableContainer = styled.div`
 	overflow-y: scroll;
+	overflow-x: scroll;
 	height: 264px;
 `
 

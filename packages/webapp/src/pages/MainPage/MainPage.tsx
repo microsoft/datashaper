@@ -26,7 +26,7 @@ import {
 
 const columns = {
 	ID: {
-		width: 40,
+		width: 30,
 	},
 }
 export const MainPage: React.FC = memo(function MainMage() {

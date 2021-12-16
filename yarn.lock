@@ -1900,9 +1900,9 @@ __metadata:
     "@fluentui/react": ^8.46.0
     "@fluentui/react-hooks": ^8.3.7
     "@fluentui/utilities": ^8.3.7
-    "@thematic/core": ^1.2.2
-    "@thematic/fluent": ^1.2.4
-    "@thematic/react": ^1.2.3
+    "@thematic/core": ^1.3.0
+    "@thematic/fluent": ^1.3.0
+    "@thematic/react": ^1.3.0
     "@types/lodash": ^4.14.177
     "@types/node": ^16.11.11
     "@types/react": ^17.0.37
@@ -1927,9 +1927,9 @@ __metadata:
     "@fluentui/react": ^8.24.0
     "@fluentui/react-hooks": ^8.2.4
     "@fluentui/utilities": ^8.2.1
-    "@thematic/core": ^1.2.2
-    "@thematic/fluent": ^1.2.2
-    "@thematic/react": ^1.2.2
+    "@thematic/core": ^1.3.0
+    "@thematic/fluent": ^1.3.0
+    "@thematic/react": ^1.3.0
     "@uifabric/icons": ^7.5.23
     arquero: ^4.8.7
     office-ui-fabric-react: ^7.173.1
@@ -1952,11 +1952,9 @@ __metadata:
     "@fluentui/react": ^8.46.0
     "@fluentui/react-hooks": ^8.3.7
     "@fluentui/utilities": ^8.3.7
-    "@thematic/core": ^1.2.2
-    "@thematic/d3": ^1.2.2
-    "@thematic/fluent": ^1.2.4
-    "@thematic/react": ^1.2.3
-    "@thematic/vega": ^1.2.2
+    "@thematic/core": ^1.3.0
+    "@thematic/fluent": ^1.3.0
+    "@thematic/react": ^1.3.0
     "@types/lodash": ^4.14.177
     "@types/node": ^16.11.11
     "@types/react": ^17.0.37
@@ -3042,9 +3040,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/color@npm:1.2.2":
-  version: 1.2.2
-  resolution: "@thematic/color@npm:1.2.2"
+"@thematic/color@npm:1.3.0":
+  version: 1.3.0
+  resolution: "@thematic/color@npm:1.3.0"
   dependencies:
     chroma-js: ^2.1.1
     color-blind: ^0.1.1
@@ -3058,15 +3056,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: f54b150bd083fe5c3e96bb5e49ae87a3024dbd153350fab8c0a37c0c69808451cdc1e7a86b4aa1a4c82e8fe7be4ed9b296cba77e6e4eea134427ac6aae5ba1bd
+  checksum: b7e62f34484b2ba4661d4cd60b52e24087c183922a12e1704d063522c9e85b2e7c3b051ead8961809512793db49184f3dd71d0564bdb0c79e8f7b1ff6bcad568
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:1.2.2, @thematic/core@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@thematic/core@npm:1.2.2"
+"@thematic/core@npm:1.3.0, @thematic/core@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@thematic/core@npm:1.3.0"
   dependencies:
-    "@thematic/color": 1.2.2
+    "@thematic/color": 1.3.0
     core-js: ^3.12.1
     d3-scale: ^3.2.3
     lodash: ^4.17.20
@@ -3084,41 +3082,18 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 449874cd64f5c8c70af183bf1ab19ea105921d6f5fb35de26322b86e5b507609ab0b02e69161a6b60342133807f2af244541fa68756cb93df856f5de992588c8
+  checksum: 644d01bac8b41af877373350dece5ed8d1f0d97a3f60620a30e97430508482ea5fe429bda69f99ac62b2fc09ad95d1451c500fcf41b368688d2a7b3726813625
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@thematic/d3@npm:1.2.2"
-  dependencies:
-    "@thematic/core": 1.2.2
-    core-js: ^3.12.1
-    d3-axis: ^1.0.12
-    d3-selection: ^1.4.2
-  peerDependencies:
-    "@types/d3-axis": ">= 1"
-    "@types/d3-selection": ">= 1"
-    "@types/node": "*"
-  peerDependenciesMeta:
-    "@types/d3-axis":
-      optional: true
-    "@types/d3-selection":
-      optional: true
-    "@types/node":
-      optional: true
-  checksum: aff6c4b2c699577df331d80429b912149e45e1c4284c6e92b21817a26c393471757e3dedc892351ad0725236fb75d6e4e17dbcfbb7681b09445a514dd17b249c
-  languageName: node
-  linkType: hard
-
-"@thematic/fluent@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "@thematic/fluent@npm:1.2.4"
+"@thematic/fluent@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@thematic/fluent@npm:1.3.0"
   dependencies:
     "@essex-js-toolkit/hooks": ^1.1.5
-    "@thematic/color": 1.2.2
-    "@thematic/core": 1.2.2
-    "@thematic/react": 1.2.3
+    "@thematic/color": 1.3.0
+    "@thematic/core": 1.3.0
+    "@thematic/react": 1.3.0
     core-js: ^3.12.1
     d3-scale: ^3.3.0
   peerDependencies:
@@ -3138,16 +3113,16 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 15c98160e64cc944631dbf0ff7f43a71e9e5a33ef7b601fccb01405555afdef0dfc5effd224fa53e2d8fc969e826b9fa96f6d268ad0f2a447ca29abdb4b2c648
+  checksum: ac26d590f008058d2ecb998c34428a975e94af09961855e369c0b0543bdfddb9ba7a3299931721d90d2e41924a963acacc806a7e157fce61b270d69cb071fca9
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:1.2.3, @thematic/react@npm:^1.2.3":
-  version: 1.2.3
-  resolution: "@thematic/react@npm:1.2.3"
+"@thematic/react@npm:1.3.0, @thematic/react@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@thematic/react@npm:1.3.0"
   dependencies:
-    "@thematic/color": 1.2.2
-    "@thematic/core": 1.2.2
+    "@thematic/color": 1.3.0
+    "@thematic/core": 1.3.0
     core-js: ^3.12.1
   peerDependencies:
     "@types/node": "*"
@@ -3160,22 +3135,7 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: a873f48099febeea5e4fd8b49a59383705d83aa60d2fee5aa4e135c6e6807d6f66820680d05d7f8ee9a9bb1d8da6d5d3906e73a0ba7c665f9bcd9412b29fce47
-  languageName: node
-  linkType: hard
-
-"@thematic/vega@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@thematic/vega@npm:1.2.2"
-  dependencies:
-    "@thematic/core": 1.2.2
-    core-js: ^3.12.1
-  peerDependencies:
-    vega: ">= 5.13.0"
-  peerDependenciesMeta:
-    vega:
-      optional: false
-  checksum: a8688074a7f4501f6cb850ce9880b59398f72bbb206a0f835da68e09382efcfcc8ff19c8b99e92d01abd5827bdf30c6756f8b1dffbdde9e7d37716f9432fdafd
+  checksum: 06caf208c61d3281b23ce030395f529bb37dcd8031ab1ea12f55dff9b97e1a8ff1af03c4db28edfe2c59650ba165e4e655c18d90160542486678be2f29976056
   languageName: node
   linkType: hard
 
