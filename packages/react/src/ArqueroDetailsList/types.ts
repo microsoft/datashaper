@@ -9,3 +9,8 @@ export type ColumnRenderFunction = (
 	index?: number,
 	column?: IColumn,
 ) => any
+
+export type ColumnHeaderClickFunction = (
+	ev?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+	column?: IColumn | undefined,
+) => void

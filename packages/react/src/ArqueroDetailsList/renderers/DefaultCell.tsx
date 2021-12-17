@@ -4,6 +4,7 @@
  */
 
 import { IColumn } from '@fluentui/react'
+import { isArray } from 'lodash'
 import React, { memo } from 'react'
 
 export interface DefaultCellProps {
@@ -18,8 +19,9 @@ export const DefaultCell: React.FC<DefaultCellProps> = memo(
 		let value = column?.fieldName && item[column.fieldName]
 		if (typeof value === 'boolean') {
 			value = value.toString()
+		} else if (isArray(value)) {
+			value = value.join(',')
 		}
-		console.log(value)
 		return (
 			<div
 				style={{

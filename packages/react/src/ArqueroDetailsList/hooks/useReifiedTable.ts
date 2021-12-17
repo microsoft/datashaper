@@ -5,15 +5,8 @@
 import type { internal as ArqueroTypes } from 'arquero'
 import { useMemo } from 'react'
 
-export function useSlice(
+export function useReifiedTable(
 	table: ArqueroTypes.ColumnTable,
-	offset: number,
-	limit: number,
 ): ArqueroTypes.ColumnTable {
-	return useMemo(() => {
-		if (offset === 0 && limit === Infinity) {
-			return table
-		}
-		return table.slice(offset, offset + limit)
-	}, [table, limit, offset])
+	return useMemo(() => table.reify(), [table])
 }

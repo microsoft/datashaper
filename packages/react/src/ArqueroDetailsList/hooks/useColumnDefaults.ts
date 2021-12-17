@@ -5,7 +5,7 @@
 import { IColumn } from '@fluentui/react'
 import type { internal as ArqueroTypes } from 'arquero'
 import { useMemo } from 'react'
-import { renderDefaultCell } from '../renderers/renderers'
+import { renderDefaultCell } from '../renderers'
 
 const DEFAULT_COLUMN_WIDTH = 80
 

@@ -3,4 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './useColumnDefaults'
-export * from './useSlice'
+export * from './useColumns'
+export * from './useReifiedTable'
+export * from './useSlicedTable'
+export * from './useSortedTable'
+export * from './useSortHandling'
