@@ -14,6 +14,8 @@ const TABLES = [
 	`data/companies.csv`,
 	`data/companies2.csv`,
 	`data/products.csv`,
+	'data/stocks.csv',
+	'data/large.csv',
 ]
 
 export function useInputTableList(): [

@@ -1,0 +1,18 @@
+{
+	"name": "Sparkline",
+	"description": "Aggregates a daily prices into an array to demonstrate Sparkline cells",
+	"steps": [
+		{
+			"type": "verb",
+			"verb": "aggregate",
+			"input": "data/stocks.csv",
+			"output": "sparkline",
+			"args": {
+				"groupby": "Symbol",
+				"field": "Close",
+				"operation": "array_agg",
+				"as": "Daily"
+			}
+		}
+	]
+}

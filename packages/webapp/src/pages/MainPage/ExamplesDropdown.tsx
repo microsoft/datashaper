@@ -10,6 +10,8 @@ import binning from './specs/binning.json'
 import compoundBinarize from './specs/compound-binarize.json'
 import everyOperation from './specs/every-operation.json'
 import multistepBinarize from './specs/multistep-binarize.json'
+import sparkbar from './specs/sparkbar.json'
+import sparkline from './specs/sparkline.json'
 
 export interface ExamplesDropdownProps {
 	onChange?: (spec: Specification | undefined) => void
@@ -21,6 +23,8 @@ const specs: Array<Specification> = [
 	compoundBinarize as unknown as Specification,
 	everyOperation as unknown as Specification,
 	multistepBinarize as unknown as Specification,
+	sparkbar as unknown as Specification,
+	sparkline as unknown as Specification,
 ]
 
 export const ExamplesDropdown: React.FC<ExamplesDropdownProps> = memo(

@@ -13,8 +13,12 @@ export interface DefaultCellProps {
 	column?: IColumn
 }
 
+/**
+ * Default text rendering of cell contents.
+ * Designed to look like a basic Excel-style sheet (e.g., right-align numbers by default).
+ */
 export const DefaultCell: React.FC<DefaultCellProps> = memo(
-	function DefaultCell({ item, index, column }) {
+	function DefaultCell({ item, column }) {
 		// TODO: how do we want to handle null/undefined? optional text?
 		let value = column?.fieldName && item[column.fieldName]
 		if (typeof value === 'boolean') {

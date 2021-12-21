@@ -15,7 +15,6 @@ import React, { memo, useMemo } from 'react'
 import {
 	useColumns,
 	useSlicedTable,
-	useReifiedTable,
 	useSortedTable,
 	useSortHandling,
 } from './hooks'
@@ -23,6 +22,11 @@ import {
 export interface ArqueroDetailsListProps
 	extends Omit<IDetailsListProps, 'items'> {
 	table: ArqueroTypes.ColumnTable
+	/**
+	 * Indicates to introspect the data columns and provide full rich rendering automatically for everything.
+	 * TODO: we could use an enum and specify levels of richness. For example, basic formatting -> header details -> full-blown smart cells.
+	 */
+	autoRender?: boolean
 	offset?: number
 	limit?: number
 	allowSorting?: boolean
@@ -50,15 +54,13 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(allowSorting, onColumnHeaderClick)
 
-		// NOTE: these all copy the table. if we see perf issues, we can perform inline operations and then use a table scan to extract a subset for render
 		// first apply sort to internal table copy
 		const sorted = useSortedTable(table, sortColumn, sortDirection)
 		// slice any potential page
 		const sliced = useSlicedTable(sorted, offset, limit)
-		// reify before display in order to materialize the orderby and filter settings in an Arquero table
-		const copied = useReifiedTable(sliced)
 		// last, copy these items to actual JS objects for the DetailsList
-		const items = useMemo(() => copied.objects(), [copied])
+		// TODO: an iterator facade over the table compatible with DetailsList to avoid this copy?
+		const items = useMemo(() => sliced.objects(), [sliced])
 
 		const displayColumns = useColumns(table, columns, sortColumn, sortDirection)
 

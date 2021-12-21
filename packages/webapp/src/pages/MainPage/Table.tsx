@@ -65,8 +65,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				/>
 			</Header>
 			<TableContainer>
-				<ArqueroDetailsList table={table.reify()} columns={columns} />
-				{/* <ArqueroTable table={table.reify()} columnConfig={config} /> */}
+				<ArqueroDetailsList table={table} columns={columns} />
 			</TableContainer>
 		</Container>
 	)
