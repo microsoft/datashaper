@@ -10,7 +10,7 @@ import {
 	SelectionMode,
 	IDetailsListProps,
 } from '@fluentui/react'
-import type { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo } from 'react'
 import {
 	useColumns,
@@ -18,11 +18,10 @@ import {
 	useSortedTable,
 	useSortHandling,
 } from './hooks'
-import { useTableMetadata } from './hooks/useTableMetadata'
 
 export interface ArqueroDetailsListProps
 	extends Omit<IDetailsListProps, 'items'> {
-	table: ArqueroTypes.ColumnTable
+	table: ColumnTable
 	/**
 	 * Indicates to introspect the data columns and provide full rich rendering automatically for everything.
 	 * TODO: we could use an enum and specify levels of richness. For example, basic formatting -> header details -> full-blown smart cells.
@@ -65,10 +64,9 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// TODO: an iterator facade over the table compatible with DetailsList to avoid this copy?
 		const items = useMemo(() => sliced.objects(), [sliced])
 
-		const meta = useTableMetadata(table, autoRender)
 		const displayColumns = useColumns(
 			table,
-			meta,
+			autoRender,
 			columns,
 			sortColumn,
 			sortDirection,

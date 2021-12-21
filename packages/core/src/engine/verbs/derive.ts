@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { escape, internal as ArqueroTypes } from 'arquero'
+import { escape } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { ExprObject } from 'arquero/dist/types/table/transformable'
 import { TableStore } from '../..'
 import { DeriveArgs, MathOperator, Step } from '../../types'
@@ -17,7 +18,7 @@ import { DeriveArgs, MathOperator, Step } from '../../types'
 export async function derive(
 	step: Step,
 	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	const { input, args } = step
 	const { column1, column2, operator, as } = args as DeriveArgs
 	const inputTable = await store.get(input)

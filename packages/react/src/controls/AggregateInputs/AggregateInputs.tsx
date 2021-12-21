@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { AggregateStep } from '@data-wrangling-components/core'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { TableColumnDropdown, FieldAggregateOperationDropdown } from '..'
@@ -22,7 +23,7 @@ export const AggregateInputs: React.FC<StepComponentProps> = memo(
 	function AggregateInputs({ step, store, onChange, input }) {
 		const internal = useMemo(() => step as AggregateStep, [step])
 
-		const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+		const [table, setTable] = useState<ColumnTable | undefined>()
 		useLoadTable(input || internal.input, store, setTable)
 
 		const handleGroupColumnChange = useHandleDropdownChange(

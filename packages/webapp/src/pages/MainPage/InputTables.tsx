@@ -3,13 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ColumnConfigMap } from '@data-wrangling-components/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Table } from './Table'
 
 export interface InputTablesProps {
-	tables: Map<string, ArqueroTypes.ColumnTable>
+	tables: Map<string, ColumnTable>
 	config: ColumnConfigMap
 	autoRender?: boolean
 }

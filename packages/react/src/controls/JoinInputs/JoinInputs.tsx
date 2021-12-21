@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { JoinStep, Step } from '@data-wrangling-components/core'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { TableColumnDropdown, TableDropdown } from '..'
@@ -23,14 +24,10 @@ export const JoinInputs: React.FC<StepComponentProps> = memo(
 	function JoinInputs({ step, store, onChange, input }) {
 		const internal = useMemo(() => step as JoinStep, [step])
 
-		const [leftTable, setLeftTable] = useState<
-			ArqueroTypes.ColumnTable | undefined
-		>()
+		const [leftTable, setLeftTable] = useState<ColumnTable | undefined>()
 		useLoadTable(input || internal.input, store, setLeftTable)
 
-		const [rightTable, setRightTable] = useState<
-			ArqueroTypes.ColumnTable | undefined
-		>()
+		const [rightTable, setRightTable] = useState<ColumnTable | undefined>()
 		useLoadTable(internal.args?.other, store, setRightTable)
 
 		const leftColumn = useLeftColumn(internal)

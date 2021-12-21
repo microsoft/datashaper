@@ -4,12 +4,12 @@
  */
 import { SortDirection } from '@data-wrangling-components/core'
 import { IColumn } from '@fluentui/react'
-import type { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 import { useColumnDefaults } from '.'
 
 export function useColumns(
-	table: ArqueroTypes.ColumnTable,
+	table: ColumnTable,
 	autoRender = false,
 	columns?: IColumn[],
 	sortColumn?: string,

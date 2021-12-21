@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { internal as ArqueroTypes, op, bin as aqbin } from 'arquero'
+import { op, bin as aqbin } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore, BinArgs, BinStrategy, Step } from '../..'
 
 /**
@@ -11,10 +12,7 @@ import { TableStore, BinArgs, BinStrategy, Step } from '../..'
  * @param store
  * @returns
  */
-export async function bin(
-	step: Step,
-	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+export async function bin(step: Step, store: TableStore): Promise<ColumnTable> {
 	const { input, args } = step
 	const { as } = args as BinArgs
 
@@ -40,7 +38,7 @@ type Stats = {
  * @param args
  * @returns
  */
-function binExpr(input: ArqueroTypes.ColumnTable, args: BinArgs) {
+function binExpr(input: ColumnTable, args: BinArgs) {
 	const { strategy, field, fixedwidth, fixedcount, min, max, clamped } = args
 	const stats = getStats(input, field, min, max)
 	switch (strategy) {
@@ -92,7 +90,7 @@ function coreExpr(
 
 // compute the min/max from the table but allow user override of these bounds
 function getStats(
-	table: ArqueroTypes.ColumnTable,
+	table: ColumnTable,
 	field: string,
 	min?: number,
 	max?: number,

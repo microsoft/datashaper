@@ -4,7 +4,8 @@
  */
 import { Specification } from '@data-wrangling-components/core'
 import { Toggle } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
 import { ExamplesDropdown } from './ExamplesDropdown'
@@ -14,7 +15,7 @@ import { FileDrop } from '~components/FileDrop'
 export interface ControlBarProps {
 	selected?: Specification
 	onSelectSpecification?: (spec: Specification | undefined) => void
-	onLoadFiles?: (files: Map<string, ArqueroTypes.ColumnTable>) => void
+	onLoadFiles?: (files: Map<string, ColumnTable>) => void
 	autoRender: boolean
 	onAutoRenderChange?: (auto: boolean) => void
 }

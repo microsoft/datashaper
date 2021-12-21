@@ -9,7 +9,8 @@ import {
 	WithTableDropdown,
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useState, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { ControlBar } from './ControlBar'
@@ -36,9 +37,9 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const store = useTableStore()
 	const inputTables = useInputTables(inputList, store)
 	const pipeline = usePipeline(store)
-	const [result, setResult] = useState<ArqueroTypes.ColumnTable | undefined>()
-	const [outputs, setOutputs] = useState<Map<string, ArqueroTypes.ColumnTable>>(
-		new Map<string, ArqueroTypes.ColumnTable>(),
+	const [result, setResult] = useState<ColumnTable | undefined>()
+	const [outputs, setOutputs] = useState<Map<string, ColumnTable>>(
+		new Map<string, ColumnTable>(),
 	)
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
@@ -83,7 +84,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	)
 
 	const handleDropFiles = useCallback(
-		async (loaded: Map<string, ArqueroTypes.ColumnTable>) => {
+		async (loaded: Map<string, ColumnTable>) => {
 			loaded.forEach((table, name) => {
 				store.set(name, table)
 			})

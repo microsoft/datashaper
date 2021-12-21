@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { internal as ArqueroTypes, table } from 'arquero'
+import { table } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '..'
 import { CompoundStep, Step, StepFunction } from '../types'
 import { verb } from './verbs'
@@ -31,8 +32,8 @@ const functions: Record<string, StepFunction> = {
 export async function run(
 	steps: Step[],
 	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
-	let output: ArqueroTypes.ColumnTable = table({})
+): Promise<ColumnTable> {
+	let output: ColumnTable = table({})
 	for (let index = 0; index < steps.length; index++) {
 		const step = steps[index]
 		try {

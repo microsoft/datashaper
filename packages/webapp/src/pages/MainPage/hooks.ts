@@ -7,7 +7,8 @@ import {
 	TableStore,
 	Pipeline,
 } from '@data-wrangling-components/core'
-import { fromCSV, internal as ArqueroTypes, loadCSV } from 'arquero'
+import { fromCSV, loadCSV } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 const TABLES = [
@@ -41,9 +42,9 @@ export function useTableStore(): TableStore {
 export function useInputTables(
 	list: string[],
 	store: TableStore,
-): Map<string, ArqueroTypes.ColumnTable> {
-	const [tables, setTables] = useState<Map<string, ArqueroTypes.ColumnTable>>(
-		new Map<string, ArqueroTypes.ColumnTable>(),
+): Map<string, ColumnTable> {
+	const [tables, setTables] = useState<Map<string, ColumnTable>>(
+		new Map<string, ColumnTable>(),
 	)
 	useEffect(() => {
 		const f = async () => {
@@ -61,14 +62,14 @@ export function usePipeline(store: TableStore): Pipeline {
 
 export function useLoadTableFiles(): (
 	files: File[],
-) => Promise<Map<string, ArqueroTypes.ColumnTable>> {
+) => Promise<Map<string, ColumnTable>> {
 	return useCallback(
-		async (files: File[]): Promise<Map<string, ArqueroTypes.ColumnTable>> => {
+		async (files: File[]): Promise<Map<string, ColumnTable>> => {
 			const list = await Promise.all(files.map(readTable))
 			return list.reduce((acc, cur) => {
 				acc.set(cur[0], cur[1])
 				return acc
-			}, new Map<string, ArqueroTypes.ColumnTable>())
+			}, new Map<string, ColumnTable>())
 		},
 		[],
 	)
@@ -96,9 +97,7 @@ async function readSpec(file: File): Promise<Specification> {
 	})
 }
 
-async function readTable(
-	file: File,
-): Promise<[string, ArqueroTypes.ColumnTable]> {
+async function readTable(file: File): Promise<[string, ColumnTable]> {
 	return new Promise((resolve, reject) => {
 		const reader = createReader()
 		reader.onload = () => {

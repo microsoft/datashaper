@@ -4,7 +4,8 @@
  */
 import { ColumnListStep, Step } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import { set } from 'lodash'
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
@@ -19,7 +20,7 @@ export const ColumnListInputs: React.FC<StepComponentProps> = memo(
 	function ColumnListInputs({ step, store, onChange, input }) {
 		const internal = useMemo(() => step as ColumnListStep, [step])
 
-		const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+		const [table, setTable] = useState<ColumnTable | undefined>()
 		useLoadTable(input || internal.input, store, setTable)
 
 		const columns = useColumns(internal, table, onChange)
@@ -50,13 +51,13 @@ export const ColumnListInputs: React.FC<StepComponentProps> = memo(
 	},
 )
 
-function first(table?: ArqueroTypes.ColumnTable): string {
+function first(table?: ColumnTable): string {
 	return table?.columnNames()[0] as string
 }
 
 function useColumns(
 	step: ColumnListStep,
-	table?: ArqueroTypes.ColumnTable,
+	table?: ColumnTable,
 	onChange?: (step: Step) => void,
 ) {
 	return useMemo(() => {

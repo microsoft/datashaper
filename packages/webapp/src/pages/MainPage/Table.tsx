@@ -9,13 +9,14 @@ import {
 } from '@data-wrangling-components/react'
 import { IColumn, IconButton } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 export interface TableProps {
 	name?: string
-	table: ArqueroTypes.ColumnTable
+	table: ColumnTable
 	config: ColumnConfigMap
 	autoRender?: boolean
 }

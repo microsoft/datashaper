@@ -7,13 +7,14 @@ import {
 	SortDirection,
 } from '@data-wrangling-components/core'
 import { IconButton } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 import { TableColumnDropdown } from './dropdowns/TableColumnDropdown'
 
 export interface SortInstructionProps {
-	table?: ArqueroTypes.ColumnTable
+	table?: ColumnTable
 	order: OrderbyInstruction
 	onChange?: (order: OrderbyInstruction) => void
 	onDelete?: () => void

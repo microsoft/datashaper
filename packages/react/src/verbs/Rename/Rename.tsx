@@ -4,7 +4,8 @@
  */
 import { RenameStep } from '@data-wrangling-components/core'
 import { Icon, TextField } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
@@ -22,7 +23,7 @@ export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 }) {
 	const internal = useMemo(() => step as RenameStep, [step])
 
-	const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+	const [table, setTable] = useState<ColumnTable | undefined>()
 	useLoadTable(internal.input, store, setTable)
 
 	const handleColumnChange = useCallback(
@@ -47,7 +48,7 @@ export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 })
 
 function useColumnPairs(
-	table: ArqueroTypes.ColumnTable | undefined,
+	table: ColumnTable | undefined,
 	internal: RenameStep,
 	onChange: (oldName: string, newName: string) => void,
 ) {

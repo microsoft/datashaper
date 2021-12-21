@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from './TableStore'
 
 export type ColumnStats = {
@@ -138,7 +138,7 @@ export interface Step {
 export type StepFunction = (
 	step: Step,
 	store: TableStore,
-) => Promise<ArqueroTypes.ColumnTable>
+) => Promise<ColumnTable>
 
 export enum Verb {
 	Aggregate = 'aggregate',

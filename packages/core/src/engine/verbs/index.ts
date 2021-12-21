@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
 import { Step, StepFunction, StepType, Verb } from '../../types'
 
@@ -53,7 +53,7 @@ const verbs: Record<string, StepFunction> = {
 export async function verb(
 	step: Step,
 	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	return verbs[step.verb](step, store)
 }
 

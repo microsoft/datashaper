@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from './TableStore'
 import { run } from './engine'
 import { factory } from './engine/verbs'
@@ -72,7 +72,7 @@ export class Pipeline {
 		this._steps[index] = step
 		return this.steps
 	}
-	async run(): Promise<ArqueroTypes.ColumnTable> {
+	async run(): Promise<ColumnTable> {
 		return run(this._steps, this._store)
 	}
 }

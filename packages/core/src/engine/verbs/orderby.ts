@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { desc, internal as ArqueroTypes } from 'arquero'
+import { desc } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
 import { OrderbyArgs, SortDirection, Step } from '../../types'
 
@@ -15,7 +16,7 @@ import { OrderbyArgs, SortDirection, Step } from '../../types'
 export async function orderby(
 	step: Step,
 	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	const { input, args } = step
 	const inputTable = await store.get(input)
 
