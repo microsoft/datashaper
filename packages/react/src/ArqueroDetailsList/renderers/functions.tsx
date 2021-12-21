@@ -2,38 +2,35 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IColumn } from '@fluentui/react'
 import { ColumnRenderFunction } from '..'
-import { BooleanCell, DefaultCell, SmartCell, SparklineCell } from '.'
+import { DefaultCell, SmartCell } from '.'
 
-export const renderDefaultCell: ColumnRenderFunction = (
-	item?: any,
-	index?: number,
-	column?: IColumn,
-) => {
-	return <DefaultCell item={item} index={index} column={column} />
-}
+export const createRenderDefaultCell = (
+	metadata: ColumnMetadata,
+): ColumnRenderFunction =>
+	function renderDefaultCell(item?: any, index?: number, column?: IColumn) {
+		return (
+			<DefaultCell
+				item={item}
+				index={index}
+				column={column}
+				metadata={metadata}
+			/>
+		)
+	}
 
-export const renderSmartCell: ColumnRenderFunction = (
-	item?: any,
-	index?: number,
-	column?: IColumn,
-) => {
-	return <SmartCell item={item} index={index} column={column} />
-}
-
-export const renderBooleanCell: ColumnRenderFunction = (
-	item?: any,
-	index?: number,
-	column?: IColumn,
-) => {
-	return <BooleanCell item={item} index={index} column={column} />
-}
-
-export const renderSparklineCell: ColumnRenderFunction = (
-	item?: any,
-	index?: number,
-	column?: IColumn,
-) => {
-	return <SparklineCell item={item} index={index} column={column} />
-}
+export const createRenderSmartCell = (
+	metadata: ColumnMetadata,
+): ColumnRenderFunction =>
+	function renderSmartCell(item?: any, index?: number, column?: IColumn) {
+		return (
+			<SmartCell
+				item={item}
+				index={index}
+				column={column}
+				metadata={metadata}
+			/>
+		)
+	}

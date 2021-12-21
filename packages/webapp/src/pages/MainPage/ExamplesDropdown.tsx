@@ -7,6 +7,7 @@ import { Dropdown } from '@fluentui/react'
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import aggregatedLookup from './specs/aggregated-lookup.json'
 import binning from './specs/binning.json'
+import categorical from './specs/categorical.json'
 import compoundBinarize from './specs/compound-binarize.json'
 import everyOperation from './specs/every-operation.json'
 import multistepBinarize from './specs/multistep-binarize.json'
@@ -25,6 +26,7 @@ const specs: Array<Specification> = [
 	multistepBinarize as unknown as Specification,
 	sparkbar as unknown as Specification,
 	sparkline as unknown as Specification,
+	categorical as unknown as Specification,
 ]
 
 export const ExamplesDropdown: React.FC<ExamplesDropdownProps> = memo(

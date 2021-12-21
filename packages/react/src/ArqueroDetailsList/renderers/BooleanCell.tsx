@@ -6,20 +6,15 @@
 import { IColumn } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import React, { memo, useMemo } from 'react'
+import { getValue } from '../util'
 import { useCellDimensions } from './hooks'
-import { Dimensions } from './types'
-
-export interface BooleanCellProps {
-	item?: any
-	index?: number
-	column?: IColumn
-}
+import { ColumnCellProps, Dimensions } from './types'
 
 /**
  * Symbolic rendering of boolean values.
  * TODO: this should probably be a check versus x
  */
-export const BooleanCell: React.FC<BooleanCellProps> = memo(
+export const BooleanCell: React.FC<ColumnCellProps> = memo(
 	function BooleanCell({ item, column }) {
 		const dimensions = useCellDimensions(column)
 		const attrs = useBooleanCircleAttrs(dimensions, item, column)
@@ -39,7 +34,7 @@ function useBooleanCircleAttrs(
 	const theme = useThematic()
 	return useMemo(() => {
 		// TODO: helpers for extracting steeltoe table value defaults with all these optionals
-		const value = item[column?.fieldName || ''] as boolean
+		const value = !!getValue(item, column)
 		const { width, height } = dimensions
 		return {
 			cx: width / 2,

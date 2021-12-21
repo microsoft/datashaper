@@ -3,37 +3,45 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { IColumn } from '@fluentui/react'
-import { isArray } from 'lodash'
+import { isNil } from 'lodash'
 import React, { memo } from 'react'
-
-export interface DefaultCellProps {
-	item?: any
-	index?: number
-	column?: IColumn
-}
+import { Case, Default, Switch } from 'react-if'
+import { getValue } from '../util'
+import { ArrayCell } from './ArrayCell'
+import { RichCellProps } from './types'
+import { DateCell, EmptyCell, NumberCell, ObjectCell, TextCell } from '.'
 
 /**
- * Default text rendering of cell contents.
+ * Default rendering of cell contents.
  * Designed to look like a basic Excel-style sheet (e.g., right-align numbers by default).
+ * But with no fancy/costly visualization
  */
-export const DefaultCell: React.FC<DefaultCellProps> = memo(
-	function DefaultCell({ item, column }) {
-		// TODO: how do we want to handle null/undefined? optional text?
-		let value = column?.fieldName && item[column.fieldName]
-		if (typeof value === 'boolean') {
-			value = value.toString()
-		} else if (isArray(value)) {
-			value = value.join(',')
-		}
-		return (
-			<div
-				style={{
-					textAlign: typeof value === 'number' ? 'right' : 'left',
-				}}
-			>
-				{value}
-			</div>
-		)
-	},
-)
+export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
+	props,
+) {
+	const { metadata, item, column } = props
+	const { type } = metadata
+	const value = getValue(item, column)
+	return (
+		<Switch>
+			<Case condition={isNil(value)}>
+				<EmptyCell textAlign={type === 'number' ? 'right' : 'left'} />
+			</Case>
+			<Case condition={type === 'string'}>
+				<TextCell {...props} />
+			</Case>
+			<Case condition={type === 'number'}>
+				<NumberCell {...props} />
+			</Case>
+			<Case condition={type === 'date'}>
+				<DateCell {...props} />
+			</Case>
+			<Case condition={type === 'array'}>
+				<ArrayCell {...props} />
+			</Case>
+			<Default>
+				<ObjectCell {...props} />
+			</Default>
+		</Switch>
+	)
+})

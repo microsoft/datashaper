@@ -10,11 +10,12 @@ import { useColumnDefaults } from '.'
 
 export function useColumns(
 	table: ArqueroTypes.ColumnTable,
+	autoRender = false,
 	columns?: IColumn[],
 	sortColumn?: string,
 	sortDirection?: SortDirection,
 ): IColumn[] {
-	const columnDefaults = useColumnDefaults(table, columns)
+	const columnDefaults = useColumnDefaults(table, autoRender, columns)
 	return useMemo(() => {
 		return columnDefaults.map(column => ({
 			...column,

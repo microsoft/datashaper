@@ -17,12 +17,14 @@ export interface TableProps {
 	name?: string
 	table: ArqueroTypes.ColumnTable
 	config: ColumnConfigMap
+	autoRender?: boolean
 }
 
 export const Table: React.FC<TableProps> = memo(function Table({
 	name,
 	table,
 	config = {},
+	autoRender,
 }) {
 	// note that we always reify the table for display, because some arquero operations
 	// only create backing indexes (i.e., orderby, filter)
@@ -49,7 +51,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 			minWidth: conf.width,
 		})) as IColumn[]
 	}, [config])
-	const columns = useColumnDefaults(table, configDefaults, true)
+	const columns = useColumnDefaults(table, autoRender, configDefaults, true)
 	return (
 		<Container className="table-container">
 			<Header>
@@ -65,7 +67,11 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				/>
 			</Header>
 			<TableContainer>
-				<ArqueroDetailsList table={table} columns={columns} />
+				<ArqueroDetailsList
+					table={table}
+					columns={columns}
+					autoRender={autoRender}
+				/>
 			</TableContainer>
 		</Container>
 	)

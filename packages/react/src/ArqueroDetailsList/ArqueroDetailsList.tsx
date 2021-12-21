@@ -18,6 +18,7 @@ import {
 	useSortedTable,
 	useSortHandling,
 } from './hooks'
+import { useTableMetadata } from './hooks/useTableMetadata'
 
 export interface ArqueroDetailsListProps
 	extends Omit<IDetailsListProps, 'items'> {
@@ -39,6 +40,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	function ArqueroDetailsList(props) {
 		const {
 			table,
+			autoRender = false,
 			offset = 0,
 			limit = Infinity,
 			allowSorting = true,
@@ -50,11 +52,12 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			// passthrough the remainder as props
 			...rest
 		} = props
-
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(allowSorting, onColumnHeaderClick)
 
 		// first apply sort to internal table copy
+		// note that this is different than the orderby of a pipeline step
+		// this is a temporary sort only for the table display
 		const sorted = useSortedTable(table, sortColumn, sortDirection)
 		// slice any potential page
 		const sliced = useSlicedTable(sorted, offset, limit)
@@ -62,7 +65,14 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// TODO: an iterator facade over the table compatible with DetailsList to avoid this copy?
 		const items = useMemo(() => sliced.objects(), [sliced])
 
-		const displayColumns = useColumns(table, columns, sortColumn, sortDirection)
+		const meta = useTableMetadata(table, autoRender)
+		const displayColumns = useColumns(
+			table,
+			meta,
+			columns,
+			sortColumn,
+			sortDirection,
+		)
 
 		return (
 			<DetailsList

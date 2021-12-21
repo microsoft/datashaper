@@ -11,10 +11,11 @@ import { Table } from './Table'
 export interface InputTablesProps {
 	tables: Map<string, ArqueroTypes.ColumnTable>
 	config: ColumnConfigMap
+	autoRender?: boolean
 }
 
 export const InputTables: React.FC<InputTablesProps> = memo(
-	function InputTables({ tables, config }) {
+	function InputTables({ tables, config, autoRender }) {
 		return (
 			<TablesContainer>
 				{Array.from(tables).map(([key, table]) => (
@@ -23,6 +24,7 @@ export const InputTables: React.FC<InputTablesProps> = memo(
 						name={key}
 						table={table}
 						config={config}
+						autoRender={autoRender}
 					/>
 				))}
 			</TablesContainer>

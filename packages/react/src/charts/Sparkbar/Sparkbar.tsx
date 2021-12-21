@@ -5,6 +5,7 @@
 
 import { line as themeLine } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
+import { isArray } from 'lodash'
 
 import React, { memo, useLayoutEffect, useMemo, useRef } from 'react'
 import {
@@ -18,29 +19,43 @@ export interface SparkbarProps {
 	data: number[]
 	width: number
 	height: number
-	color?: string
+	categorical?: boolean
+	color?: string | string[]
 }
 
 /**
- * Renders a basic Sparkbar
+ * Renders a basic Sparkbar. This is a Sparkline-style bar chart.
  */
 export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	data,
 	width,
 	height,
+	categorical = false,
 	color,
 }) {
 	const theme = useThematic()
 	const ref = useRef(null)
 
-	const lineColor = useMemo(() => {
+	const colors = useMemo(() => {
+		if (categorical) {
+			if (isArray(color)) {
+				return color
+			} else {
+				return theme.scales().nominal(data.length).toArray()
+			}
+		}
 		return color || theme.line().stroke().hex()
-	}, [theme, color])
+	}, [theme, data, color, categorical])
 
-	const barWidth = useMemo(() => Math.floor(width / data.length), [data, width])
+	// subtracting a small amount from the width ensures we have at least a small amount of gap
+	const barWidth = useMemo(
+		() => Math.floor((width - 4) / data.length),
+		[data, width],
+	)
 
 	const xScale = useIndexedScale(data, [barWidth / 2, width - barWidth / 2])
-	const yScale = useNumericLinearScale(data, [0, height])
+	// two pixels off the height means min values will still have slight visibility
+	const yScale = useNumericLinearScale(data, [0, height - 2])
 
 	useChartSVG(ref, width, height)
 	const group = usePlotGroup(ref, width, height)
@@ -61,8 +76,18 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 				.attr('y2', height)
 				.call(themeLine as any, theme.line())
 				.attr('stroke-width', barWidth)
-				.attr('stroke', lineColor)
+				.attr('stroke', (d, i) => (categorical ? colors[i] : colors))
 		}
-	}, [theme, group, data, height, xScale, yScale, lineColor, barWidth])
+	}, [
+		theme,
+		group,
+		data,
+		height,
+		xScale,
+		yScale,
+		colors,
+		categorical,
+		barWidth,
+	])
 	return <svg ref={ref} />
 })

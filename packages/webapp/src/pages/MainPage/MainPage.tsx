@@ -12,7 +12,7 @@ import { IconButton, PrimaryButton } from '@fluentui/react'
 import { internal as ArqueroTypes } from 'arquero'
 import React, { memo, useState, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { FileBar } from './FileBar'
+import { ControlBar } from './ControlBar'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { StepSelector } from './StepSelector'
@@ -41,6 +41,8 @@ export const MainPage: React.FC = memo(function MainMage() {
 		new Map<string, ArqueroTypes.ColumnTable>(),
 	)
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
+
+	const [autoRender, setAutoRender] = useState<boolean>(true)
 
 	const [steps, setSteps] = useState<Step[]>([])
 
@@ -99,14 +101,20 @@ export const MainPage: React.FC = memo(function MainMage() {
 	return (
 		<Container>
 			<Workspace className="arquero-workspace">
-				<FileBar
+				<ControlBar
 					selected={exampleSpec}
 					onSelectSpecification={handleExampleSpecChange}
 					onLoadFiles={handleDropFiles}
+					autoRender={autoRender}
+					onAutoRenderChange={setAutoRender}
 				/>
 				<InputsSection>
 					<Section title="Inputs">
-						<InputTables tables={inputTables} config={columns} />
+						<InputTables
+							tables={inputTables}
+							config={columns}
+							autoRender={autoRender}
+						/>
 					</Section>
 				</InputsSection>
 				{steps.map((step, index) => {
@@ -137,6 +145,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 												name={step.output}
 												table={output}
 												config={columns}
+												autoRender={autoRender}
 											/>
 										</TableSection>
 									) : null}

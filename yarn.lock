@@ -1843,8 +1843,10 @@ __metadata:
     "@essex/scripts": ^18.2.1
     "@essex/vite-config": ^18.0.2
     "@types/jest": ^27.0.3
+    "@types/lodash": ^4.14.178
     "@types/node": ^16.11.11
     arquero: ^4.8.7
+    lodash: ^4.17.21
     typescript: ^4.5.2
     vite: ^2.6.14
   peerDependencies:
@@ -3454,6 +3456,13 @@ __metadata:
   version: 4.14.177
   resolution: "@types/lodash@npm:4.14.177"
   checksum: 00f9eb300ed5219cfbabb3448d4a71744895edad60dcfda9f028c0808a50eb6ad1ca9f673b56a85f85668a4ea54b9870643625468a747039c435643e52253a75
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4.14.178":
+  version: 4.14.178
+  resolution: "@types/lodash@npm:4.14.178"
+  checksum: a69a04a60bfc5257c3130a554b4efa0c383f0141b7b3db8ab7cf07ad2a46ea085fce66d0242da41da7e5647b133d5dfb2c15add9cbed8d7fef955e4a1e5b3128
   languageName: node
   linkType: hard
 

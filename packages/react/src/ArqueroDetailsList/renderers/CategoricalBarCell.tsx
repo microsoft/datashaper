@@ -2,26 +2,24 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import React, { memo } from 'react'
-import { Sparkline } from '../../charts'
-import { getValue } from '../util'
+import React, { memo, useMemo } from 'react'
+import { Sparkbar } from '../../charts'
 import { useCellDimensions } from './hooks'
 import { ColumnCellChartProps } from './types'
 
 /**
- * Renders an array-valued cell as a sparkline.
+ * Renders an array-valued cell as a CategoricalBar.
  */
-export const SparklineCell: React.FC<ColumnCellChartProps> = memo(
-	function SparklineCell({ item, column, color }) {
-		const values = getValue(item, column) || []
+export const CategoricalBarCell: React.FC<ColumnCellChartProps> = memo(
+	function CategoricalBarCell({ column, categories = {} }) {
+		const values = useMemo(() => Object.values(categories), [categories])
 		const dimensions = useCellDimensions(column)
 		return (
-			<Sparkline
+			<Sparkbar
 				data={values}
+				categorical
 				width={dimensions.width}
 				height={dimensions.height}
-				color={color}
 			/>
 		)
 	},

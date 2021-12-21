@@ -15,6 +15,7 @@
 		"@essex/scripts": "^18.2.1",
 		"@essex/vite-config": "^18.0.2",
 		"@types/jest": "^27.0.3",
+		"@types/lodash": "^4.14.178",
 		"@types/node": "^16.11.11",
 		"arquero": "^4.8.7",
 		"typescript": "^4.5.2",
@@ -28,5 +29,8 @@
 		"@types/node": {
 			"optional": true
 		}
+	},
+	"dependencies": {
+		"lodash": "^4.17.21"
 	}
 }

@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Specification } from '@data-wrangling-components/core'
+import { Toggle } from '@fluentui/react'
 import { internal as ArqueroTypes } from 'arquero'
 import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
@@ -10,16 +11,20 @@ import { ExamplesDropdown } from './ExamplesDropdown'
 import { useLoadSpecFile, useLoadTableFiles } from './hooks'
 import { FileDrop } from '~components/FileDrop'
 
-export interface FileBarProps {
+export interface ControlBarProps {
 	selected?: Specification
 	onSelectSpecification?: (spec: Specification | undefined) => void
 	onLoadFiles?: (files: Map<string, ArqueroTypes.ColumnTable>) => void
+	autoRender: boolean
+	onAutoRenderChange?: (auto: boolean) => void
 }
 
-export const FileBar: React.FC<FileBarProps> = memo(function FileBar({
+export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	selected,
 	onSelectSpecification,
 	onLoadFiles,
+	autoRender,
+	onAutoRenderChange,
 }) {
 	const loadFiles = useLoadTableFiles()
 	const loadSpec = useLoadSpecFile()
@@ -40,6 +45,11 @@ export const FileBar: React.FC<FileBarProps> = memo(function FileBar({
 		[onSelectSpecification, loadSpec],
 	)
 
+	const handleAutoRenderChange = useCallback(
+		(e, checked) => onAutoRenderChange && onAutoRenderChange(checked),
+		[onAutoRenderChange],
+	)
+
 	return (
 		<Container>
 			<Examples>
@@ -48,6 +58,11 @@ export const FileBar: React.FC<FileBarProps> = memo(function FileBar({
 			<Description>
 				{selected ? <p>{selected.description}</p> : null}
 			</Description>
+			<Toggle
+				label={'Rich tables'}
+				checked={autoRender}
+				onChange={handleAutoRenderChange}
+			/>
 			<Drop>
 				<FileDrop onDrop={handleDropCSV} />
 			</Drop>

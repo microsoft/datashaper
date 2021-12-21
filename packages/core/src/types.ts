@@ -5,6 +5,37 @@
 import { internal as ArqueroTypes } from 'arquero'
 import { TableStore } from './TableStore'
 
+export type ColumnStats = {
+	type: string
+	count: number
+	distinct: number
+	invalid: number
+	mode: any
+	min?: number
+	max?: number
+	mean?: number
+	median?: number
+	stdev?: number
+}
+
+/**
+ * Stores basic meta and stats about a column
+ */
+export type ColumnMetadata = {
+	name: string
+	type: string
+	stats?: ColumnStats
+}
+
+export type TableMetadata = {
+	rows: number
+	cols: number
+	/**
+	 * Metadata for each column
+	 */
+	columns: Record<string, ColumnMetadata>
+}
+
 export enum MathOperator {
 	Add = '+',
 	Subtract = '-',
