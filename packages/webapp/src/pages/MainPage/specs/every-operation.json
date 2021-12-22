@@ -95,9 +95,9 @@
 			"input": "data/companies.csv",
 			"output": "filter-1",
 			"args": {
-				"column": "ID",
+				"column": "Employees",
 				"operator": "<=",
-				"value": 3
+				"value": 300000
 			}
 		},
 		{
