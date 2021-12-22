@@ -9,7 +9,14 @@ import { Case, Default, Switch } from 'react-if'
 import { getValue } from '../util'
 import { ArrayCell } from './ArrayCell'
 import { RichCellProps } from './types'
-import { DateCell, EmptyCell, NumberCell, ObjectCell, TextCell } from '.'
+import {
+	BooleanTextCell,
+	DateCell,
+	EmptyCell,
+	NumberCell,
+	ObjectCell,
+	TextCell,
+} from '.'
 
 /**
  * Default rendering of cell contents.
@@ -26,6 +33,9 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 		<Switch>
 			<Case condition={isNil(value)}>
 				<EmptyCell textAlign={type === 'number' ? 'right' : 'left'} />
+			</Case>
+			<Case condition={type === 'boolean'}>
+				<BooleanTextCell {...props} />
 			</Case>
 			<Case condition={type === 'string'}>
 				<TextCell {...props} />

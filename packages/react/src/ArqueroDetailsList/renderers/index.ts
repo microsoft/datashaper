@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './ArrayCell'
-export * from './BooleanCell'
+export * from './BooleanSymbolCell'
+export * from './BooleanTextCell'
 export * from './CategoricalBarCell'
 export * from './DateCell'
 export * from './DefaultCell'

@@ -9,7 +9,7 @@ import { getValue } from '../util'
 import { EmptyCell } from './EmptyCell'
 import { RichCellProps } from './types'
 import {
-	BooleanCell,
+	BooleanSymbolCell,
 	DateCell,
 	ObjectCell,
 	SmartArrayCell,
@@ -35,7 +35,7 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 				<TextCell {...props} />
 			</Case>
 			<Case condition={type === 'boolean'}>
-				<BooleanCell {...props} />
+				<BooleanSymbolCell {...props} />
 			</Case>
 			<Case condition={type === 'number'}>
 				<NumberCell {...props} numberFormat={','} />

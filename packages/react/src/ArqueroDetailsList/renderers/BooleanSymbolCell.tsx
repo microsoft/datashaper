@@ -14,8 +14,8 @@ import { ColumnCellProps, Dimensions } from './types'
  * Symbolic rendering of boolean values.
  * TODO: this should probably be a check versus x
  */
-export const BooleanCell: React.FC<ColumnCellProps> = memo(
-	function BooleanCell({ item, column }) {
+export const BooleanSymbolCell: React.FC<ColumnCellProps> = memo(
+	function BooleanSymbolCell({ item, column }) {
 		const dimensions = useCellDimensions(column)
 		const attrs = useBooleanCircleAttrs(dimensions, item, column)
 		return (
