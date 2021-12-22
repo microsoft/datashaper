@@ -32,6 +32,14 @@ export interface FormattedCellProps extends ColumnCellProps {
 	 * https://github.com/d3/d3-format
 	 */
 	numberFormat?: string
+	color?: string
+}
+
+export interface MagnitudeCellProps extends FormattedCellProps {
+	/**
+	 * Value from 0-1 indicating relative magnitude within the column
+	 */
+	magnitude?: number
 }
 
 export interface RichCellProps extends FormattedCellProps {

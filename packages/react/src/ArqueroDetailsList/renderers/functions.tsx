@@ -23,6 +23,7 @@ export const createRenderDefaultCell = (
 
 export const createRenderSmartCell = (
 	metadata: ColumnMetadata,
+	color?: string,
 ): ColumnRenderFunction =>
 	function renderSmartCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -31,6 +32,7 @@ export const createRenderSmartCell = (
 				index={index}
 				column={column}
 				metadata={metadata}
+				color={color}
 			/>
 		)
 	}

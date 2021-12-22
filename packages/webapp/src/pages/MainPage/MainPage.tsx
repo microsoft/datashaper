@@ -44,7 +44,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
 	const [autoRender, setAutoRender] = useState<boolean>(true)
-	const [compact, setCompact] = useState<boolean>(false)
+	const [compact, setCompact] = useState<boolean>(true)
 
 	const [steps, setSteps] = useState<Step[]>([])
 
@@ -166,7 +166,12 @@ export const MainPage: React.FC = memo(function MainMage() {
 				>
 					{result ? (
 						<TableSection className="table-section">
-							<Table table={result} config={columns} />
+							<Table
+								table={result}
+								config={columns}
+								autoRender={autoRender}
+								compact={compact}
+							/>
 						</TableSection>
 					) : null}
 				</Section>

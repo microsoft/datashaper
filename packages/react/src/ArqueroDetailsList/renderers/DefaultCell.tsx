@@ -41,7 +41,7 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 				<TextCell {...props} />
 			</Case>
 			<Case condition={type === 'number'}>
-				<NumberCell {...props} />
+				<NumberCell {...props} numberFormat={','} />
 			</Case>
 			<Case condition={type === 'date'}>
 				<DateCell {...props} />

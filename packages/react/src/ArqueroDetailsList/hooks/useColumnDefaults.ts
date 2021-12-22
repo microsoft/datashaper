@@ -4,6 +4,7 @@
  */
 import { TableMetadata, introspect } from '@data-wrangling-components/core'
 import { IColumn } from '@fluentui/react'
+import { useThematic } from '@thematic/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 import { createRenderDefaultCell, createRenderSmartCell } from '../renderers'
@@ -29,16 +30,20 @@ export function useColumnDefaults(
 		[table, autoRender],
 	)
 
+	const colorScale = useIncrementingColorScale(meta)
+
 	return useMemo(() => {
 		if (columns && !includeAll) {
 			return columns
 		}
 		const columnMap = reduce(columns)
 		const names = table.columnNames()
+
 		return names.map(name => {
 			const m = meta.columns[name]
+			const color = m.type === 'number' ? colorScale() : undefined
 			const onRender = autoRender
-				? createRenderSmartCell(m)
+				? createRenderSmartCell(m, color)
 				: createRenderDefaultCell(m)
 			return (
 				columnMap[name] || {
@@ -50,7 +55,23 @@ export function useColumnDefaults(
 				}
 			)
 		})
-	}, [table, autoRender, meta, columns, includeAll])
+	}, [table, autoRender, meta, columns, colorScale, includeAll])
+}
+
+function useIncrementingColorScale(meta: TableMetadata) {
+	const theme = useThematic()
+	const count = useMemo(() => countNumeric(meta), [meta])
+	const scale = useMemo(() => theme.scales().nominal(count), [theme, count])
+	return useMemo(() => {
+		let index = 0
+		return () => scale(index++).hex()
+	}, [scale])
+}
+
+function countNumeric(meta: TableMetadata): number {
+	return Object.values(meta.columns).reduce((acc, cur) => {
+		return acc + (cur.type === 'number' ? 1 : 0)
+	}, 0)
 }
 
 function reduce(columns?: IColumn[]): Record<string, IColumn> {
