@@ -19,6 +19,14 @@ const TABLES = [
 	'data/large.csv',
 ]
 
+const identity = (d: any) => d
+
+// default parsers to keep these columns as strings
+const parse = {
+	ID: identity,
+	Group: identity,
+}
+
 export function useInputTableList(): [
 	string[],
 	React.Dispatch<React.SetStateAction<string[]>>,
@@ -32,7 +40,7 @@ export function useTableStore(): TableStore {
 	return useMemo(() => {
 		const store = new TableStore()
 		TABLES.forEach(name => {
-			store.queue(name, async name => loadCSV(name, {}))
+			store.queue(name, async name => loadCSV(name, { parse }))
 		})
 		return store
 	}, [])
