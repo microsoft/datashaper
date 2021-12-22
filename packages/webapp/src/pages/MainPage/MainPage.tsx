@@ -44,6 +44,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
 	const [autoRender, setAutoRender] = useState<boolean>(true)
+	const [compact, setCompact] = useState<boolean>(false)
 
 	const [steps, setSteps] = useState<Step[]>([])
 
@@ -108,6 +109,8 @@ export const MainPage: React.FC = memo(function MainMage() {
 					onLoadFiles={handleDropFiles}
 					autoRender={autoRender}
 					onAutoRenderChange={setAutoRender}
+					compact={compact}
+					onCompactChange={setCompact}
 				/>
 				<InputsSection>
 					<Section title="Inputs">
@@ -115,6 +118,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 							tables={inputTables}
 							config={columns}
 							autoRender={autoRender}
+							compact={compact}
 						/>
 					</Section>
 				</InputsSection>
@@ -147,6 +151,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 												table={output}
 												config={columns}
 												autoRender={autoRender}
+												compact={compact}
 											/>
 										</TableSection>
 									) : null}

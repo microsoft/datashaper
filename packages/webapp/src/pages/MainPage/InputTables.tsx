@@ -13,10 +13,11 @@ export interface InputTablesProps {
 	tables: Map<string, ColumnTable>
 	config: ColumnConfigMap
 	autoRender?: boolean
+	compact?: boolean
 }
 
 export const InputTables: React.FC<InputTablesProps> = memo(
-	function InputTables({ tables, config, autoRender }) {
+	function InputTables({ tables, config, autoRender, compact }) {
 		return (
 			<TablesContainer>
 				{Array.from(tables).map(([key, table]) => (
@@ -26,6 +27,7 @@ export const InputTables: React.FC<InputTablesProps> = memo(
 						table={table}
 						config={config}
 						autoRender={autoRender}
+						compact={compact}
 					/>
 				))}
 			</TablesContainer>

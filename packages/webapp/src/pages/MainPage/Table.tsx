@@ -19,6 +19,7 @@ export interface TableProps {
 	table: ColumnTable
 	config: ColumnConfigMap
 	autoRender?: boolean
+	compact?: boolean
 }
 
 export const Table: React.FC<TableProps> = memo(function Table({
@@ -26,6 +27,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	table,
 	config = {},
 	autoRender,
+	compact,
 }) {
 	// note that we always reify the table for display, because some arquero operations
 	// only create backing indexes (i.e., orderby, filter)
@@ -72,6 +74,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					table={table}
 					columns={columns}
 					autoRender={autoRender}
+					compact={compact}
 				/>
 			</TableContainer>
 		</Container>

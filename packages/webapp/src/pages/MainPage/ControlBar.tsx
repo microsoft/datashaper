@@ -18,6 +18,8 @@ export interface ControlBarProps {
 	onLoadFiles?: (files: Map<string, ColumnTable>) => void
 	autoRender: boolean
 	onAutoRenderChange?: (auto: boolean) => void
+	compact: boolean
+	onCompactChange?: (auto: boolean) => void
 }
 
 export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
@@ -26,6 +28,8 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	onLoadFiles,
 	autoRender,
 	onAutoRenderChange,
+	compact,
+	onCompactChange,
 }) {
 	const loadFiles = useLoadTableFiles()
 	const loadSpec = useLoadSpecFile()
@@ -51,6 +55,11 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 		[onAutoRenderChange],
 	)
 
+	const handleCompactChange = useCallback(
+		(e, checked) => onCompactChange && onCompactChange(checked),
+		[onCompactChange],
+	)
+
 	return (
 		<Container>
 			<Examples>
@@ -59,11 +68,20 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			<Description>
 				{selected ? <p>{selected.description}</p> : null}
 			</Description>
-			<Toggle
-				label={'Rich tables'}
-				checked={autoRender}
-				onChange={handleAutoRenderChange}
-			/>
+			<Control>
+				<Toggle
+					label={'Rich tables'}
+					checked={autoRender}
+					onChange={handleAutoRenderChange}
+				/>
+			</Control>
+			<Control>
+				<Toggle
+					label={'Compact'}
+					checked={compact}
+					onChange={handleCompactChange}
+				/>
+			</Control>
 			<Drop>
 				<FileDrop onDrop={handleDropCSV} />
 			</Drop>
@@ -92,6 +110,10 @@ const Description = styled.div`
 	padding-left: 12px;
 	flex-direction: column;
 	justify-content: center;
+`
+
+const Control = styled.div`
+	width: 200px;
 `
 
 const Drop = styled.div`
