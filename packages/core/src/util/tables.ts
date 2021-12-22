@@ -83,7 +83,7 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 			mode,
 		}
 		const opt =
-			type !== 'string'
+			type === 'number'
 				? {
 						min: rollup[`${cur}.min`],
 						max: rollup[`${cur}.max`],

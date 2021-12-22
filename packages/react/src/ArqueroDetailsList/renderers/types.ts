@@ -27,6 +27,10 @@ export interface ColumnCellChartProps extends ColumnCellProps {
 
 export interface FormattedCellProps extends ColumnCellProps {
 	textAlign?: 'left' | 'center' | 'right'
+	/**
+	 * d3-format compatible format specifier for numbers
+	 * https://github.com/d3/d3-format
+	 */
 	numberFormat?: string
 }
 
