@@ -18,4 +18,7 @@ export * from './SparkbarCell'
 export * from './SparklineCell'
 export * from './TextCell'
 
+export * from './DefaultColumnHeader'
+export * from './HistogramColumnHeader'
+
 export * from './functions'

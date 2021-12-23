@@ -4,11 +4,16 @@
  */
 
 import { ColumnMetadata } from '@data-wrangling-components/core'
-import { IColumn } from '@fluentui/react'
+import { IColumn, IDetailsColumnProps } from '@fluentui/react'
 
 export type Dimensions = {
 	width: number
 	height: number
+}
+
+export type Bin = {
+	min: number
+	count: number
 }
 
 /**
@@ -44,4 +49,10 @@ export interface MagnitudeCellProps extends FormattedCellProps {
 
 export interface RichCellProps extends FormattedCellProps {
 	metadata: ColumnMetadata
+}
+
+export interface RichHeaderProps extends IDetailsColumnProps {
+	metadata: ColumnMetadata
+	bins?: Bin[]
+	color?: string
 }

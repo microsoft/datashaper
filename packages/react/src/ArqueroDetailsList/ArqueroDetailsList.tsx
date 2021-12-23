@@ -9,11 +9,13 @@ import {
 	IColumn,
 	SelectionMode,
 	IDetailsListProps,
+	IDetailsListStyles,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo } from 'react'
 import {
 	useColumns,
+	useDetailsListStyles,
 	useSlicedTable,
 	useSortedTable,
 	useSortHandling,
@@ -48,6 +50,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			layoutMode = DetailsListLayoutMode.fixedColumns,
 			columns,
 			onColumnHeaderClick,
+			styles,
 			// passthrough the remainder as props
 			...rest
 		} = props
@@ -72,6 +75,13 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			sortDirection,
 		)
 
+		const headerStyle = useDetailsListStyles(
+			{
+				autoRender,
+			},
+			styles as IDetailsListStyles,
+		)
+
 		return (
 			<DetailsList
 				items={items}
@@ -80,6 +90,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				columns={displayColumns as IColumn[]}
 				onColumnHeaderClick={handleColumnHeaderClick}
 				{...rest}
+				styles={headerStyle}
 			/>
 		)
 	},
