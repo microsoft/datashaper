@@ -82,8 +82,8 @@ export const Table: React.FC<TableProps> = memo(function Table({
 })
 
 const Container = styled.div`
-	width: 600px;
-	height: 600px;
+	width: 400px;
+	height: 300px;
 	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
@@ -98,7 +98,7 @@ const Header = styled.div`
 const TableContainer = styled.div`
 	overflow-y: scroll;
 	overflow-x: scroll;
-	height: 564px;
+	height: 264px;
 `
 
 const H2 = styled.h3`

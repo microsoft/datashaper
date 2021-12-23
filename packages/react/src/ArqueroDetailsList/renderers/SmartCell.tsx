@@ -55,7 +55,11 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	)
 })
 
-function useNumberMagnitude(type, value, meta: ColumnMetadata): number {
+function useNumberMagnitude(
+	type: string,
+	value: any,
+	meta: ColumnMetadata,
+): number {
 	return useMemo(() => {
 		if (type !== 'number' || isNil(value)) {
 			return 0

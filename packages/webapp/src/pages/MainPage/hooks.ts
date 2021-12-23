@@ -12,11 +12,11 @@ import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 const TABLES = [
-	// `data/companies.csv`,
-	// `data/companies2.csv`,
-	// `data/products.csv`,
+	`data/companies.csv`,
+	`data/companies2.csv`,
+	`data/products.csv`,
 	'data/stocks.csv',
-	//'data/large.csv',
+	'data/large.csv',
 ]
 
 const identity = (d: any) => d

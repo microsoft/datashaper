@@ -32,7 +32,7 @@ export function useColumnBins(
 				acc[name] = bin(name, { maxbins: 10 })
 			}
 			return acc
-		}, {})
+		}, {} as Record<string, any>)
 
 		const binned = table.derive(args)
 

@@ -13,6 +13,9 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const { column } = props
 		const dimensions = useCellDimensions(column)
 		const values = useMemo(() => (bins || []).map(b => b.count), [bins])
+		// TODO: move the default bit to an outer component such as the renderer function
+		// we should make these more composable, and each rich header type should not include
+		// the default
 		return (
 			<div>
 				<DefaultColumnHeader {...props} />
