@@ -5,7 +5,8 @@
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { isDate, isArray } from 'lodash'
-import { ColumnMetadata, ColumnStats, TableMetadata } from '..'
+import { Bin, ColumnMetadata, ColumnStats, TableMetadata } from '..'
+import { fixedBinCount } from '../engine/util'
 
 // arquero uses 1000 as default, but we're sampling the table so assuming higher odds of valid values
 const SAMPLE_MAX = 100
@@ -57,39 +58,29 @@ function basicMeta(table: ColumnTable): Record<string, ColumnMetadata> {
  * @returns
  */
 export function stats(table: ColumnTable): Record<string, ColumnStats> {
-	const rArgs = table.columnNames().reduce((acc, cur) => {
-		acc[`${cur}.count`] = op.count()
-		acc[`${cur}.distinct`] = op.distinct(cur)
-		acc[`${cur}.invalid`] = op.invalid(cur)
-		acc[`${cur}.min`] = op.min(cur)
-		acc[`${cur}.max`] = op.max(cur)
-		acc[`${cur}.mean`] = op.mean(cur)
-		acc[`${cur}.median`] = op.median(cur)
-		acc[`${cur}.mode`] = op.mode(cur)
-		acc[`${cur}.stdev`] = op.stdev(cur)
-		return acc
-	}, {} as Record<string, any>)
-	const rollup = table.rollup(rArgs).objects()[0]
-	return table.columnNames().reduce((acc, cur) => {
+	const reqStats = requiredStats(table)
+	const optStats = optionalStats(table)
+	const bins = binning(table, reqStats, optStats)
+	const results = table.columnNames().reduce((acc, cur) => {
 		// mode should only include valid values, so a reasonable value for checking type
-		const mode = rollup[`${cur}.mode`]
-		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
+		const mode = reqStats[`${cur}.mode`]
 		const type = determineType(mode)
 		const req = {
 			type,
-			count: rollup[`${cur}.count`],
-			distinct: rollup[`${cur}.distinct`],
-			invalid: rollup[`${cur}.invalid`],
+			count: reqStats[`${cur}.count`],
+			distinct: reqStats[`${cur}.distinct`],
+			invalid: reqStats[`${cur}.invalid`],
 			mode,
 		}
 		const opt =
 			type === 'number'
 				? {
-						min: rollup[`${cur}.min`],
-						max: rollup[`${cur}.max`],
-						mean: rollup[`${cur}.mean`],
-						median: rollup[`${cur}.median`],
-						stdev: rollup[`${cur}.stdev`],
+						min: optStats[`${cur}.min`],
+						max: optStats[`${cur}.max`],
+						mean: optStats[`${cur}.mean`],
+						median: optStats[`${cur}.median`],
+						stdev: optStats[`${cur}.stdev`],
+						bins: bins[`${cur}.bins`],
 				  }
 				: {}
 		acc[cur] = {
@@ -98,6 +89,72 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 		}
 		return acc
 	}, {} as Record<string, ColumnStats>)
+	console.log(results)
+	return results
+}
+
+function requiredStats(table: ColumnTable): Record<string, any> {
+	const args = table.columnNames().reduce((acc, cur) => {
+		acc[`${cur}.count`] = op.count()
+		acc[`${cur}.distinct`] = op.distinct(cur)
+		acc[`${cur}.invalid`] = op.invalid(cur)
+		acc[`${cur}.mode`] = op.mode(cur)
+		return acc
+	}, {} as Record<string, any>)
+	return table.rollup(args).objects()[0]
+}
+
+function optionalStats(table: ColumnTable): Record<string, any> {
+	const args = table.columnNames().reduce((acc, cur) => {
+		acc[`${cur}.min`] = op.min(cur)
+		acc[`${cur}.max`] = op.max(cur)
+		acc[`${cur}.mean`] = op.mean(cur)
+		acc[`${cur}.median`] = op.median(cur)
+		acc[`${cur}.stdev`] = op.stdev(cur)
+		return acc
+	}, {} as Record<string, any>)
+	return table.rollup(args).objects()[0]
+}
+
+function binning(
+	table: ColumnTable,
+	reqStats: Record<string, any>,
+	optStats: Record<string, any>,
+) {
+	const numeric = table.columnNames(name => {
+		const mode = reqStats[`${name}.mode`]
+		const type = determineType(mode)
+		return type === 'number'
+	})
+	const binArgs = numeric.reduce((acc, cur) => {
+		const min = optStats[`${cur}.min`]
+		// note the slight over on max to avoid arquero binning into exclusive max
+		const max = optStats[`${cur}.max`] + 1e-6
+		acc[cur] = fixedBinCount(cur, min, max, 10)
+		return acc
+	}, {} as Record<string, any>)
+
+	const binRollup = table.select(numeric).derive(binArgs)
+
+	// for each binned column, derive a sorted & counted subtable
+	// note that only bins with at least one entry will have a row,
+	// so we could have less than 10 bins
+	const counted = numeric.reduce((acc, cur) => {
+		const bins = binRollup
+			.orderby(cur)
+			.groupby(cur)
+			.count()
+			.objects()
+			.sort((a, b) => a[cur] - b[cur])
+			.map(d => ({
+				min: d[cur],
+				count: d.count,
+			}))
+		acc[`${cur}.bins`] = bins
+		return acc
+	}, {} as Record<string, Bin[]>)
+
+	return counted
 }
 
 // TODO: arquero does autotyping on load, is this meta stored internally?
@@ -124,7 +181,13 @@ export function types(table: ColumnTable): Record<string, string> {
 	}, {} as Record<string, string>)
 }
 
-function determineType(value: any): string {
+/**
+ * Guess the type of a table value with more discernment than typeof
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
+ * @param value
+ * @returns
+ */
+export function determineType(value: any): string {
 	let type = typeof value as string
 	if (type === 'object') {
 		if (isDate(value)) {

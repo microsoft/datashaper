@@ -7,7 +7,6 @@ import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { ColumnRenderFunction } from '..'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
-import { Bin } from './types'
 import { DefaultCell, SmartCell } from '.'
 
 export const createRenderDefaultCell = (
@@ -57,7 +56,6 @@ export const createRenderDefaultColumnHeader =
 
 export const createRenderHistogramColumnHeader = (
 	metadata: ColumnMetadata,
-	bins: Bin[],
 	color?: string,
 ): IRenderFunction<IDetailsColumnProps> =>
 	function renderHistogramColumnHeader(props?, defaultRender?) {
@@ -67,12 +65,7 @@ export const createRenderHistogramColumnHeader = (
 		return (
 			<>
 				<DefaultColumnHeader {...props} />
-				<HistogramColumnHeader
-					metadata={metadata}
-					bins={bins}
-					color={color}
-					{...props}
-				/>
+				<HistogramColumnHeader metadata={metadata} color={color} {...props} />
 			</>
 		)
 	}

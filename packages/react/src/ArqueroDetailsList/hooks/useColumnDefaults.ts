@@ -12,7 +12,7 @@ import {
 	createRenderHistogramColumnHeader,
 	createRenderSmartCell,
 } from '../renderers'
-import { useColumnBins, useIncrementingColumnColorScale } from '.'
+import { useIncrementingColumnColorScale } from '.'
 
 const DEFAULT_COLUMN_WIDTH = 80
 
@@ -37,8 +37,6 @@ export function useColumnDefaults(
 
 	const colorScale = useIncrementingColumnColorScale(meta)
 
-	const bins = useColumnBins(table, meta, autoRender)
-
 	return useMemo(() => {
 		if (columns && !includeAll) {
 			return columns
@@ -48,14 +46,13 @@ export function useColumnDefaults(
 
 		return names.map(name => {
 			const m = meta.columns[name]
-			const b = bins[name]
 			const color = m.type === 'number' ? colorScale() : undefined
 			const onRender = autoRender
 				? createRenderSmartCell(m, color)
 				: createRenderDefaultCell(m)
 			// TODO: this gets buried under a sub-span. we may want to override entire header rendering for the table
 			const onRenderHeader = autoRender
-				? createRenderHistogramColumnHeader(m, b, color)
+				? createRenderHistogramColumnHeader(m, color)
 				: createRenderDefaultColumnHeader()
 			return (
 				columnMap[name] || {
@@ -69,7 +66,7 @@ export function useColumnDefaults(
 				}
 			)
 		})
-	}, [table, autoRender, meta, columns, bins, colorScale, includeAll])
+	}, [table, autoRender, meta, columns, colorScale, includeAll])
 }
 
 const styles = {

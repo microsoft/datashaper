@@ -11,11 +11,6 @@ export type Dimensions = {
 	height: number
 }
 
-export type Bin = {
-	min: number
-	count: number
-}
-
 /**
  * Basic props for a column cell's render function
  */
@@ -53,6 +48,5 @@ export interface RichCellProps extends FormattedCellProps {
 
 export interface RichHeaderProps extends IDetailsColumnProps {
 	metadata: ColumnMetadata
-	bins?: Bin[]
 	color?: string
 }

@@ -8,9 +8,10 @@ import { useCellDimensions } from './hooks'
 import { RichHeaderProps } from './types'
 
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
-	function HistogramColumnHeader({ metadata, bins, color, ...props }) {
+	function HistogramColumnHeader({ metadata, color, ...props }) {
 		const { column } = props
 		const dimensions = useCellDimensions(column)
+		const bins = metadata.stats?.bins
 		const values = useMemo(() => (bins || []).map(b => b.count), [bins])
 		return (
 			<div>

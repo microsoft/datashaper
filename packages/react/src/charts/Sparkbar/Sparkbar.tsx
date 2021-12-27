@@ -55,7 +55,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 
 	const xScale = useIndexedScale(data, [barWidth / 2, width - barWidth / 2])
 	// two pixels off the height means min values will still have slight visibility
-	const yScale = useNumericLinearScale(data, [0, height - 2])
+	const yScale = useNumericLinearScale(data, [height - 2, 0])
 
 	useChartSVG(ref, width, height)
 	const group = usePlotGroup(ref, width, height)

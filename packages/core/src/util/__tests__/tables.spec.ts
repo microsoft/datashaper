@@ -46,6 +46,9 @@ describe('table utilities', () => {
 			expect(num.min).toBe(1)
 			expect(num.max).toBe(5)
 			expect(num.mean).toBe(3)
+			// for our default stats we specify 10 bins
+			// if there are less than 10 rows in the table it can be smaller
+			expect(num.bins).toHaveLength(5)
 		})
 
 		test('string stats', () => {
@@ -102,6 +105,17 @@ describe('table utilities', () => {
 			expect(arr.mode).toStrictEqual([1, 2, 3])
 			// should be no numeric stats
 			expect(arr.min).toBeUndefined()
+		})
+
+		test('bins', () => {
+			// for our default stats we specify 10 bins - let's test with a column that has enough rows for this
+			const binnable: ColumnTable = table({
+				values: [1, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6, 7, 8, 9, 10],
+			})
+			const { values } = stats(binnable)
+			expect(values.count).toBe(15)
+			expect(values.distinct).toBe(10)
+			expect(values.bins).toHaveLength(10)
 		})
 	})
 
