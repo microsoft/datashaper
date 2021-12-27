@@ -89,7 +89,6 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 		}
 		return acc
 	}, {} as Record<string, ColumnStats>)
-	console.log(results)
 	return results
 }
 

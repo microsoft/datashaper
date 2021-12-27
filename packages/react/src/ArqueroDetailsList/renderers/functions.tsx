@@ -48,7 +48,7 @@ export const createRenderSmartCell = (
 export const createRenderDefaultColumnHeader =
 	(): IRenderFunction<IDetailsColumnProps> =>
 		function renderDefaultColumnHeader(props?, defaultRender?) {
-			if (!props) {
+			if (!props || !defaultRender) {
 				return null
 			}
 			return <DefaultColumnHeader {...props} />
@@ -59,7 +59,7 @@ export const createRenderHistogramColumnHeader = (
 	color?: string,
 ): IRenderFunction<IDetailsColumnProps> =>
 	function renderHistogramColumnHeader(props?, defaultRender?) {
-		if (!props) {
+		if (!props || !defaultRender) {
 			return null
 		}
 		return (

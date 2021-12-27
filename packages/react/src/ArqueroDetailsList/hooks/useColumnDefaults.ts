@@ -54,17 +54,17 @@ export function useColumnDefaults(
 			const onRenderHeader = autoRender
 				? createRenderHistogramColumnHeader(m, color)
 				: createRenderDefaultColumnHeader()
-			return (
-				columnMap[name] || {
-					key: name,
-					name,
-					minWidth: DEFAULT_COLUMN_WIDTH,
-					fieldName: name,
-					onRender,
-					onRenderHeader,
-					styles: styles,
-				}
-			)
+			const existing = columnMap[name] as Partial<IColumn>
+			return {
+				key: name,
+				name,
+				minWidth: DEFAULT_COLUMN_WIDTH,
+				fieldName: name,
+				onRender,
+				onRenderHeader,
+				styles: styles,
+				...existing,
+			}
 		})
 	}, [table, autoRender, meta, columns, colorScale, includeAll])
 }

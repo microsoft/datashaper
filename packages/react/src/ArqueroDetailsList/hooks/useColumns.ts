@@ -15,7 +15,7 @@ export function useColumns(
 	sortColumn?: string,
 	sortDirection?: SortDirection,
 ): IColumn[] {
-	const columnDefaults = useColumnDefaults(table, autoRender, columns)
+	const columnDefaults = useColumnDefaults(table, autoRender, columns, true)
 	return useMemo(() => {
 		return columnDefaults.map(column => ({
 			...column,
