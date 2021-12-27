@@ -60,16 +60,19 @@ export const createRenderHistogramColumnHeader = (
 	bins: Bin[],
 	color?: string,
 ): IRenderFunction<IDetailsColumnProps> =>
-	function renderDefaultColumnHeader(props?, defaultRender?) {
+	function renderHistogramColumnHeader(props?, defaultRender?) {
 		if (!props) {
 			return null
 		}
 		return (
-			<HistogramColumnHeader
-				metadata={metadata}
-				bins={bins}
-				color={color}
-				{...props}
-			/>
+			<>
+				<DefaultColumnHeader {...props} />
+				<HistogramColumnHeader
+					metadata={metadata}
+					bins={bins}
+					color={color}
+					{...props}
+				/>
+			</>
 		)
 	}
