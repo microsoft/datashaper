@@ -338,7 +338,7 @@ export interface ColumnRecordArgs {
 	columns: Record<string, string>
 }
 
-export interface DeriveArgs {
+export interface DeriveArgs extends OutputColumnArgs {
 	/**
 	 * Column on the left side of the operation
 	 */
@@ -347,21 +347,15 @@ export interface DeriveArgs {
 	 * Column on the right side of the operation
 	 */
 	column2: string
-	/**
-	 * Column name to save the result as
-	 */
-	as: string
+
 	operator: MathOperator
 }
 
-export interface FillArgs {
+export interface FillArgs extends OutputColumnArgs {
 	/**
 	 * Value to fill in the new column
 	 */
 	value: string | number | boolean
-	/**
-	 * Columns to save result as
-	 */
 	as: string
 }
 

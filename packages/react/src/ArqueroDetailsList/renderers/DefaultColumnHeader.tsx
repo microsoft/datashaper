@@ -26,6 +26,15 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 			[theme, dimensions, column],
 		)
 
+		const fontStyle = useMemo(
+			() => ({
+				color: column.data?.selected
+					? theme.application().accent().hex()
+					: theme.application().foreground().hex(),
+			}),
+			[theme, column],
+		)
+
 		const iconStyles = useMemo(
 			() => ({
 				root: {
@@ -38,7 +47,7 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 
 		return (
 			<div style={containerStyle}>
-				<div>{column.name}</div>
+				<div style={fontStyle}>{column.name}</div>
 				{/* the standard details list renders its icon at far left. should we replicate? */}
 				{iconName ? (
 					<Icon className={iconClassName} iconName={iconName} />
