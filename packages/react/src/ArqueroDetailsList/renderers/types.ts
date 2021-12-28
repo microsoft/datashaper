@@ -4,7 +4,7 @@
  */
 
 import { ColumnMetadata } from '@data-wrangling-components/core'
-import { IColumn, IDetailsColumnProps } from '@fluentui/react'
+import { IColumn, IDetailsColumnProps, IDetailsRowProps } from '@fluentui/react'
 
 export type Dimensions = {
 	width: number
@@ -44,9 +44,14 @@ export interface MagnitudeCellProps extends FormattedCellProps {
 
 export interface RichCellProps extends FormattedCellProps {
 	metadata: ColumnMetadata
+	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column?: IColumn) => void
 }
 
 export interface RichHeaderProps extends IDetailsColumnProps {
 	metadata: ColumnMetadata
 	color?: string
+}
+
+export interface RichRowProps extends IDetailsRowProps {
+	striped?: boolean
 }

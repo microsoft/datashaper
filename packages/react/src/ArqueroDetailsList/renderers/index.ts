@@ -21,4 +21,6 @@ export * from './TextCell'
 export * from './DefaultColumnHeader'
 export * from './HistogramColumnHeader'
 
+export * from './StripedRow'
+
 export * from './functions'

@@ -5,7 +5,6 @@
 import {
 	ColumnConfigMap,
 	ArqueroDetailsList,
-	useColumnDefaults,
 } from '@data-wrangling-components/react'
 import { IColumn, IconButton } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
@@ -29,8 +28,6 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	autoRender,
 	compact,
 }) {
-	// note that we always reify the table for display, because some arquero operations
-	// only create backing indexes (i.e., orderby, filter)
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 	const theme = useThematic()
 	const buttonStyles = useMemo(
@@ -47,7 +44,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		return URL.createObjectURL(blob)
 	}, [table])
 
-	const configDefaults = useMemo(() => {
+	const columns = useMemo(() => {
 		return Object.entries(config).map(([key, conf]) => ({
 			key,
 			name: key,
@@ -56,11 +53,13 @@ export const Table: React.FC<TableProps> = memo(function Table({
 			iconName: conf.iconName,
 		})) as IColumn[]
 	}, [config])
-	const columns = useColumnDefaults(table, autoRender, configDefaults, true)
+
 	const handleColumnClick = useCallback(
-		(evt, column) => setSelectedColumn(column.key),
+		(ev: React.MouseEvent<HTMLElement>, column?: IColumn) =>
+			setSelectedColumn(column?.key),
 		[setSelectedColumn],
 	)
+
 	return (
 		<Container className="table-container">
 			<Header>
@@ -83,6 +82,9 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					compact={compact}
 					selectedColumn={selectedColumn}
 					onColumnClick={handleColumnClick}
+					isStriped={true}
+					isColumnClickable={true}
+					isSortable={true}
 				/>
 			</TableContainer>
 		</Container>
