@@ -2,8 +2,45 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from './TableStore'
+
+export type ColumnStats = {
+	type: string
+	count: number
+	distinct: number
+	invalid: number
+	mode: any
+	min?: number
+	max?: number
+	mean?: number
+	median?: number
+	stdev?: number
+	bins?: Bin[]
+}
+
+export type Bin = {
+	min: number
+	count: number
+}
+
+/**
+ * Stores basic meta and stats about a column
+ */
+export type ColumnMetadata = {
+	name: string
+	type: string
+	stats?: ColumnStats
+}
+
+export type TableMetadata = {
+	rows: number
+	cols: number
+	/**
+	 * Metadata for each column
+	 */
+	columns: Record<string, ColumnMetadata>
+}
 
 export enum MathOperator {
 	Add = '+',
@@ -107,7 +144,7 @@ export interface Step {
 export type StepFunction = (
 	step: Step,
 	store: TableStore,
-) => Promise<ArqueroTypes.ColumnTable>
+) => Promise<ColumnTable>
 
 export enum Verb {
 	Aggregate = 'aggregate',
@@ -301,7 +338,7 @@ export interface ColumnRecordArgs {
 	columns: Record<string, string>
 }
 
-export interface DeriveArgs {
+export interface DeriveArgs extends OutputColumnArgs {
 	/**
 	 * Column on the left side of the operation
 	 */
@@ -310,21 +347,15 @@ export interface DeriveArgs {
 	 * Column on the right side of the operation
 	 */
 	column2: string
-	/**
-	 * Column name to save the result as
-	 */
-	as: string
+
 	operator: MathOperator
 }
 
-export interface FillArgs {
+export interface FillArgs extends OutputColumnArgs {
 	/**
 	 * Value to fill in the new column
 	 */
 	value: string | number | boolean
-	/**
-	 * Columns to save result as
-	 */
 	as: string
 }
 

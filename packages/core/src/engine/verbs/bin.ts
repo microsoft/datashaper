@@ -2,8 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { internal as ArqueroTypes, op, bin as aqbin } from 'arquero'
+import { op, bin as aqbin } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore, BinArgs, BinStrategy, Step } from '../..'
+import { fixedBinCount, fixedBinStep } from '../util'
 
 /**
  * Executes a bin aggregate, which effectively truncates values to a bin boundary for histograms.
@@ -11,10 +13,7 @@ import { TableStore, BinArgs, BinStrategy, Step } from '../..'
  * @param store
  * @returns
  */
-export async function bin(
-	step: Step,
-	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+export async function bin(step: Step, store: TableStore): Promise<ColumnTable> {
 	const { input, args } = step
 	const { as } = args as BinArgs
 
@@ -27,11 +26,6 @@ export async function bin(
 	return inputTable.derive(rArgs)
 }
 
-type Stats = {
-	min: number
-	max: number
-}
-
 /**
  * Generate a bin expression that uses either auto or a fixed step
  * to force arquero to a predictable bin set.
@@ -40,70 +34,34 @@ type Stats = {
  * @param args
  * @returns
  */
-function binExpr(input: ArqueroTypes.ColumnTable, args: BinArgs) {
-	const { strategy, field, fixedwidth, fixedcount, min, max, clamped } = args
-	const stats = getStats(input, field, min, max)
+function binExpr(input: ColumnTable, args: BinArgs) {
+	const { strategy, field, fixedwidth, fixedcount, clamped } = args
+	const stats = getStats(input, field, args.min, args.max)
+	const [min, max] = stats
 	switch (strategy) {
 		case BinStrategy.Auto:
 			// just let arquero do its thing
 			return aqbin(field)
 		case BinStrategy.FixedWidth:
-			return fixedStepExpr(field, stats, fixedwidth || 1, clamped)
+			return fixedBinStep(field, min, max, fixedwidth || 1, clamped)
 		case BinStrategy.FixedCount:
-			return fixedCountExpr(field, stats, fixedcount || 1, clamped)
+			return fixedBinCount(field, min, max, fixedcount || 1, clamped)
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
 	}
 }
 
-function fixedCountExpr(
-	field: string,
-	stats: Stats,
-	count: number,
-	clamped?: boolean,
-) {
-	const { min, max } = stats
-	const step = (max - min) / count
-	return coreExpr(field, min, max, step, clamped)
-}
-
-function fixedStepExpr(
-	field: string,
-	stats: Stats,
-	step: number,
-	clamped?: boolean,
-) {
-	return coreExpr(field, stats.min, stats.max, step, clamped)
-}
-
-function coreExpr(
-	field: string,
-	min: number,
-	max: number,
-	step: number,
-	clamped?: boolean,
-) {
-	const core = `op.bin(d['${field}'],${min},${max},${step})`
-	if (clamped) {
-		return `d['${field}'] < ${min} ? ${min} : d['${field}'] > ${max} ? ${max} : ${core}`
-	}
-	return core
-}
-
 // compute the min/max from the table but allow user override of these bounds
 function getStats(
-	table: ArqueroTypes.ColumnTable,
+	table: ColumnTable,
 	field: string,
 	min?: number,
 	max?: number,
-) {
+): [number, number] {
 	const rollup = table.rollup({
 		min: op.min(field),
 		max: op.max(field),
 	})
 	const stats = rollup.objects()[0]
-	return {
-		min: min || stats.min,
-		max: max || stats.max,
-	}
+	return [min || stats.min, max || stats.max]
 }

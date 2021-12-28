@@ -4,7 +4,8 @@
  */
 import { BinStep, BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, TextField } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo, useMemo, useState } from 'react'
 import { Switch, Case, If, Then } from 'react-if'
 import styled from 'styled-components'
@@ -40,7 +41,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 		[step],
 	)
 
-	const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+	const [table, setTable] = useState<ColumnTable | undefined>()
 	useLoadTable(input || internal.input, store, setTable)
 
 	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)

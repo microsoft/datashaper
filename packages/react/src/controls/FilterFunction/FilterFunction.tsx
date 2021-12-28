@@ -8,7 +8,8 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import { set } from 'lodash'
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import {
@@ -28,7 +29,7 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 	function FilterFunction({ step, store, onChange, input }) {
 		const internal = useMemo(() => step as FilterStep, [step])
 
-		const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+		const [table, setTable] = useState<ColumnTable | undefined>()
 		useLoadTable(input || internal.input, store, setTable)
 
 		const handleOpChange = useHandleDropdownChange(

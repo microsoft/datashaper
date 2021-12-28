@@ -4,7 +4,8 @@
  */
 import { DeriveStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import {
@@ -27,7 +28,7 @@ export const Derive: React.FC<StepComponentProps> = memo(function Derive({
 }) {
 	const internal = useMemo(() => step as DeriveStep, [step])
 
-	const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+	const [table, setTable] = useState<ColumnTable | undefined>()
 	useLoadTable(internal.input, store, setTable)
 
 	const handleLeftColumnChange = useHandleDropdownChange(

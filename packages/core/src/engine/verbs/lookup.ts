@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
 import { LookupArgs, Step } from '../../types'
 
@@ -15,7 +15,7 @@ import { LookupArgs, Step } from '../../types'
 export async function lookup(
 	step: Step,
 	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	const { input, args } = step
 	const { other, on = [], columns } = args as LookupArgs
 	const [inputTable, otherTable] = await Promise.all([

@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { internal as ArqueroTypes } from 'arquero'
+
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
 import { SampleArgs, Step } from '../../types'
 
@@ -16,7 +17,7 @@ import { SampleArgs, Step } from '../../types'
 export async function sample(
 	step: Step,
 	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	const { input, args } = step
 	const { size, proportion } = args as SampleArgs
 	const inputTable = await store.get(input)

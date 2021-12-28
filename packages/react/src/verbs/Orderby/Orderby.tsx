@@ -9,7 +9,8 @@ import {
 	Step,
 } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import { set } from 'lodash'
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
@@ -27,7 +28,7 @@ export const Orderby: React.FC<StepComponentProps> = memo(function Orderby({
 }) {
 	const internal = useMemo(() => step as OrderbyStep, [step])
 
-	const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+	const [table, setTable] = useState<ColumnTable | undefined>()
 	useLoadTable(internal.input, store, setTable)
 
 	const sorts = useSorts(internal, table, onChange)
@@ -57,7 +58,7 @@ export const Orderby: React.FC<StepComponentProps> = memo(function Orderby({
 	)
 })
 
-function newSort(table?: ArqueroTypes.ColumnTable): OrderbyInstruction {
+function newSort(table?: ColumnTable): OrderbyInstruction {
 	const column = table?.columnNames()[0] as string
 	const direction = SortDirection.Ascending
 	return {
@@ -68,7 +69,7 @@ function newSort(table?: ArqueroTypes.ColumnTable): OrderbyInstruction {
 
 function useSorts(
 	step: OrderbyStep,
-	table?: ArqueroTypes.ColumnTable,
+	table?: ColumnTable,
 	onChange?: (step: Step) => void,
 ) {
 	return useMemo(() => {

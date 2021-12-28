@@ -137,3 +137,38 @@ export function singleRollup(
 	}
 	return op[operation](field)
 }
+
+export function fixedBinCount(
+	field: string,
+	min: number,
+	max: number,
+	count: number,
+	clamped?: boolean,
+): string {
+	const step = (max - min) / count
+	return fixedBinStep(field, min, max, step, clamped)
+}
+
+export function fixedBinStep(
+	field: string,
+	min: number,
+	max: number,
+	step: number,
+	clamped?: boolean,
+): string {
+	return coreExpr(field, min, max, step, clamped)
+}
+
+function coreExpr(
+	field: string,
+	min: number,
+	max: number,
+	step: number,
+	clamped?: boolean,
+): string {
+	const core = `op.bin(d['${field}'],${min},${max},${step})`
+	if (clamped) {
+		return `d['${field}'] < ${min} ? ${min} : d['${field}'] > ${max} ? ${max} : ${core}`
+	}
+	return core
+}

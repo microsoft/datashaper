@@ -9,10 +9,11 @@ import {
 	WithTableDropdown,
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useState, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { FileBar } from './FileBar'
+import { ControlBar } from './ControlBar'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { StepSelector } from './StepSelector'
@@ -26,7 +27,8 @@ import {
 
 const columns = {
 	ID: {
-		width: 40,
+		width: 42,
+		iconName: 'FavoriteStarFill',
 	},
 }
 export const MainPage: React.FC = memo(function MainMage() {
@@ -36,11 +38,14 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const store = useTableStore()
 	const inputTables = useInputTables(inputList, store)
 	const pipeline = usePipeline(store)
-	const [result, setResult] = useState<ArqueroTypes.ColumnTable | undefined>()
-	const [outputs, setOutputs] = useState<Map<string, ArqueroTypes.ColumnTable>>(
-		new Map<string, ArqueroTypes.ColumnTable>(),
+	const [result, setResult] = useState<ColumnTable | undefined>()
+	const [outputs, setOutputs] = useState<Map<string, ColumnTable>>(
+		new Map<string, ColumnTable>(),
 	)
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
+
+	const [autoRender, setAutoRender] = useState<boolean>(true)
+	const [compact, setCompact] = useState<boolean>(true)
 
 	const [steps, setSteps] = useState<Step[]>([])
 
@@ -81,7 +86,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	)
 
 	const handleDropFiles = useCallback(
-		async (loaded: Map<string, ArqueroTypes.ColumnTable>) => {
+		async (loaded: Map<string, ColumnTable>) => {
 			loaded.forEach((table, name) => {
 				store.set(name, table)
 			})
@@ -99,14 +104,23 @@ export const MainPage: React.FC = memo(function MainMage() {
 	return (
 		<Container>
 			<Workspace className="arquero-workspace">
-				<FileBar
+				<ControlBar
 					selected={exampleSpec}
 					onSelectSpecification={handleExampleSpecChange}
 					onLoadFiles={handleDropFiles}
+					autoRender={autoRender}
+					onAutoRenderChange={setAutoRender}
+					compact={compact}
+					onCompactChange={setCompact}
 				/>
 				<InputsSection>
 					<Section title="Inputs">
-						<InputTables tables={inputTables} config={columns} />
+						<InputTables
+							tables={inputTables}
+							config={columns}
+							autoRender={autoRender}
+							compact={compact}
+						/>
 					</Section>
 				</InputsSection>
 				{steps.map((step, index) => {
@@ -137,6 +151,8 @@ export const MainPage: React.FC = memo(function MainMage() {
 												name={step.output}
 												table={output}
 												config={columns}
+												autoRender={autoRender}
+												compact={compact}
 											/>
 										</TableSection>
 									) : null}
@@ -151,7 +167,12 @@ export const MainPage: React.FC = memo(function MainMage() {
 				>
 					{result ? (
 						<TableSection className="table-section">
-							<Table table={result} config={columns} />
+							<Table
+								table={result}
+								config={columns}
+								autoRender={autoRender}
+								compact={compact}
+							/>
 						</TableSection>
 					) : null}
 				</Section>

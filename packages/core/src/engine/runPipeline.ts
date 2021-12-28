@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { Pipeline, TableStore } from '../'
 import { Step } from '../types'
 
@@ -14,9 +14,9 @@ import { Step } from '../types'
  * @param steps
  */
 export async function runPipeline(
-	input: ArqueroTypes.ColumnTable,
+	input: ColumnTable,
 	steps: Step[],
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	const store = new TableStore()
 	const pipeline = new Pipeline(store)
 

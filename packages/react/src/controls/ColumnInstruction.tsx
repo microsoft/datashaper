@@ -3,13 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 import { TableColumnDropdown } from './dropdowns/TableColumnDropdown'
 
 export interface ColumnInstructionProps {
-	table?: ArqueroTypes.ColumnTable
+	table?: ColumnTable
 	column: string
 	onChange?: (column: string) => void
 	onDelete?: () => void
