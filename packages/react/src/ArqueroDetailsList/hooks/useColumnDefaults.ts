@@ -28,7 +28,7 @@ export function useColumnDefaults(
 	table: ColumnTable,
 	autoRender = false,
 	columns?: IColumn[],
-	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void,
+	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column?: IColumn) => void,
 	includeAll = false,
 	isSortable = false,
 ): IColumn[] {
@@ -75,7 +75,16 @@ export function useColumnDefaults(
 				...defaults,
 			}
 		})
-	}, [table, autoRender, meta, columns, colorScale, onColumnClick, includeAll])
+	}, [
+		table,
+		autoRender,
+		meta,
+		columns,
+		colorScale,
+		onColumnClick,
+		includeAll,
+		styles,
+	])
 }
 
 function useStyles(onColumnClick, isSortable) {

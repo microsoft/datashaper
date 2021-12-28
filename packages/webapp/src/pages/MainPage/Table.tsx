@@ -58,7 +58,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	}, [config])
 	const columns = useColumnDefaults(table, autoRender, configDefaults, true)
 	const handleColumnClick = useCallback(
-		(evt, column) => setSelectedColumn(column.key),
+		(evt, column?) => setSelectedColumn(column?.key),
 		[setSelectedColumn],
 	)
 	return (

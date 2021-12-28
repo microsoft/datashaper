@@ -47,7 +47,7 @@ export interface ArqueroDetailsListProps
 	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick
 	 * and they will both fire.
 	 */
-	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void
+	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column?: IColumn) => void
 	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */

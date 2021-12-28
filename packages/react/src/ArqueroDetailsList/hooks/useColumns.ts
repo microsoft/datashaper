@@ -15,14 +15,14 @@ export function useColumns(
 	sortColumn?: string,
 	sortDirection?: SortDirection,
 	selectedColumn?: string,
-	onClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void,
+	onClick?: (ev: React.MouseEvent<HTMLElement>, column?: IColumn) => void,
 	isColumnClickable = false,
 	isSortable = false,
 ): IColumn[] {
 	const handleCellClick = useMemo(
 		() =>
 			isColumnClickable
-				? (ev: React.MouseEvent<HTMLElement>, column: IColumn) =>
+				? (ev: React.MouseEvent<HTMLElement>, column?: IColumn) =>
 						onClick && onClick(ev, column)
 				: undefined,
 		[isColumnClickable, onClick],

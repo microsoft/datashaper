@@ -30,13 +30,22 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	const magnitude = useNumberMagnitude(type, value, metadata)
 	const handleColumnClick = useCallback(
 		ev => {
-			column && onColumnClick && onColumnClick(ev, column)
+			column &&
+				onColumnClick &&
+				onColumnClick(ev, column?.data?.selected ? undefined : column)
 		},
 		[column, onColumnClick],
 	)
 	const cellStyle = useMemo(() => {
-		return onColumnClick ? { cursor: 'pointer ' } : {}
-	}, [onColumnClick])
+		const style: React.CSSProperties = {}
+		if (onColumnClick) {
+			style.cursor = 'pointer'
+		}
+		if (column?.data?.selected) {
+			style.fontWeight = 'bold'
+		}
+		return style
+	}, [onColumnClick, column])
 	return (
 		<div onClick={handleColumnClick} style={cellStyle}>
 			<Switch>
