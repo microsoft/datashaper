@@ -87,7 +87,7 @@ export function useColumnDefaults(
 	])
 }
 
-function useStyles(onColumnClick, isSortable) {
+function useStyles(onColumnClick: any, isSortable: boolean) {
 	return useMemo(
 		() => ({
 			// we add our own sort icon in the DefaultColumnHeader component

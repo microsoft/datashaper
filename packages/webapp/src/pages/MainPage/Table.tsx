@@ -56,10 +56,18 @@ export const Table: React.FC<TableProps> = memo(function Table({
 			iconName: conf.iconName,
 		})) as IColumn[]
 	}, [config])
-	const columns = useColumnDefaults(table, autoRender, configDefaults, true)
 	const handleColumnClick = useCallback(
-		(evt, column?) => setSelectedColumn(column?.key),
+		(v: React.MouseEvent<HTMLElement>, column?: IColumn) =>
+			setSelectedColumn(column?.key),
 		[setSelectedColumn],
+	)
+	const columns = useColumnDefaults(
+		table,
+		autoRender,
+		configDefaults,
+		handleColumnClick,
+		true,
+		true,
 	)
 	return (
 		<Container className="table-container">
