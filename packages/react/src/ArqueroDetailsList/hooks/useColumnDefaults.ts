@@ -28,7 +28,9 @@ export function useColumnDefaults(
 	table: ColumnTable,
 	autoRender = false,
 	columns?: IColumn[],
+	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void,
 	includeAll = false,
+	isSortable = false,
 ): IColumn[] {
 	const meta: TableMetadata = useMemo(
 		() => introspect(table, autoRender),
@@ -36,6 +38,8 @@ export function useColumnDefaults(
 	)
 
 	const colorScale = useIncrementingColumnColorScale(meta)
+
+	const styles = useStyles(onColumnClick, isSortable)
 
 	return useMemo(() => {
 		if (columns && !includeAll) {
@@ -48,8 +52,8 @@ export function useColumnDefaults(
 			const m = meta.columns[name]
 			const color = m.type === 'number' ? colorScale() : undefined
 			const onRender = autoRender
-				? createRenderSmartCell(m, color)
-				: createRenderDefaultCell(m)
+				? createRenderSmartCell(m, color, onColumnClick)
+				: createRenderDefaultCell(m, onColumnClick)
 			// HACK: if we let an iconName through, the rendering messes with our layout
 			// in order to control this we'll pass the original props to the generators,
 			// but omit from what gets sent to the top-level table
@@ -71,17 +75,25 @@ export function useColumnDefaults(
 				...defaults,
 			}
 		})
-	}, [table, autoRender, meta, columns, colorScale, includeAll])
+	}, [table, autoRender, meta, columns, colorScale, onColumnClick, includeAll])
 }
 
-const styles = {
-	// we add our own sort icon in the DefaultColumnHeader component
-	// this is because the onRenderHeader column function only
-	// affects an inner div, which can be compressed when sorting is present
-	// we therefore render it ourselves so we can control the layout completely.
-	sortIcon: {
-		display: 'none',
-	},
+function useStyles(onColumnClick, isSortable) {
+	return useMemo(
+		() => ({
+			// we add our own sort icon in the DefaultColumnHeader component
+			// this is because the onRenderHeader column function only
+			// affects an inner div, which can be compressed when sorting is present
+			// we therefore render it ourselves so we can control the layout completely.
+			sortIcon: {
+				display: 'none',
+			},
+			root: {
+				cursor: onColumnClick || isSortable ? 'pointer' : 'default',
+			},
+		}),
+		[onColumnClick, isSortable],
+	)
 }
 
 function reduce(columns?: IColumn[]): Record<string, IColumn> {

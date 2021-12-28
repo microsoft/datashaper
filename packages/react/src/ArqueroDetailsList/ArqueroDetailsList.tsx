@@ -38,7 +38,14 @@ export interface ArqueroDetailsListProps
 	 */
 	isStriped?: boolean
 	/**
-	 * Passthrough to the column click handler
+	 * Indicates that the entire column is clickable for selection.
+	 */
+	isColumnClickable?: boolean
+	/**
+	 * Passthrough to the column click handler.
+	 * Will be applied to the column header only unless isColumnClickable === true.
+	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick
+	 * and they will both fire.
 	 */
 	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void
 	/**
@@ -59,6 +66,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			limit = Infinity,
 			isSortable = true,
 			isStriped = false,
+			isColumnClickable = false,
 			selectedColumn,
 			onColumnClick,
 			// extract props we want to set data-centric defaults for
@@ -90,6 +98,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			sortDirection,
 			selectedColumn,
 			onColumnClick,
+			isColumnClickable,
+			isSortable,
 		)
 
 		const headerStyle = useDetailsListStyles(

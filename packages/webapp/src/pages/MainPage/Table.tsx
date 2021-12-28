@@ -84,6 +84,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					selectedColumn={selectedColumn}
 					onColumnClick={handleColumnClick}
 					isStriped={true}
+					isColumnClickable={true}
 				/>
 			</TableContainer>
 		</Container>

@@ -29,5 +29,6 @@ export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow(
 		}
 		return styles
 	}, [theme, striped, styles, index])
+
 	return <DetailsRow {...rest} styles={customStyles} />
 })

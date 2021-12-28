@@ -44,6 +44,7 @@ export interface MagnitudeCellProps extends FormattedCellProps {
 
 export interface RichCellProps extends FormattedCellProps {
 	metadata: ColumnMetadata
+	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void
 }
 
 export interface RichHeaderProps extends IDetailsColumnProps {

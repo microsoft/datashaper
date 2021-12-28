@@ -11,6 +11,7 @@ import { DefaultCell, SmartCell } from '.'
 
 export const createRenderDefaultCell = (
 	metadata: ColumnMetadata,
+	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void,
 ): ColumnRenderFunction =>
 	function renderDefaultCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -19,6 +20,7 @@ export const createRenderDefaultCell = (
 				index={index}
 				column={column}
 				metadata={metadata}
+				onColumnClick={onColumnClick}
 			/>
 		)
 	}
@@ -26,6 +28,7 @@ export const createRenderDefaultCell = (
 export const createRenderSmartCell = (
 	metadata: ColumnMetadata,
 	color?: string,
+	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void,
 ): ColumnRenderFunction =>
 	function renderSmartCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -35,6 +38,7 @@ export const createRenderSmartCell = (
 				column={column}
 				metadata={metadata}
 				color={color}
+				onColumnClick={onColumnClick}
 			/>
 		)
 	}

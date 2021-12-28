@@ -16,8 +16,25 @@ export function useColumns(
 	sortDirection?: SortDirection,
 	selectedColumn?: string,
 	onClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void,
+	isColumnClickable = false,
+	isSortable = false,
 ): IColumn[] {
-	const columnDefaults = useColumnDefaults(table, autoRender, columns, true)
+	const handleCellClick = useMemo(
+		() =>
+			isColumnClickable
+				? (ev: React.MouseEvent<HTMLElement>, column: IColumn) =>
+						onClick && onClick(ev, column)
+				: undefined,
+		[isColumnClickable, onClick],
+	)
+	const columnDefaults = useColumnDefaults(
+		table,
+		autoRender,
+		columns,
+		handleCellClick,
+		true,
+		isSortable,
+	)
 	return useMemo(() => {
 		return columnDefaults.map(column => ({
 			...column,
