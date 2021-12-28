@@ -11,7 +11,7 @@ import { IColumn, IconButton } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
-import React, { memo, useMemo } from 'react'
+import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 export interface TableProps {
@@ -31,6 +31,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 }) {
 	// note that we always reify the table for display, because some arquero operations
 	// only create backing indexes (i.e., orderby, filter)
+	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 	const theme = useThematic()
 	const buttonStyles = useMemo(
 		() => ({
@@ -52,9 +53,14 @@ export const Table: React.FC<TableProps> = memo(function Table({
 			name: key,
 			fieldName: key,
 			minWidth: conf.width,
+			iconName: conf.iconName,
 		})) as IColumn[]
 	}, [config])
 	const columns = useColumnDefaults(table, autoRender, configDefaults, true)
+	const handleColumnClick = useCallback(
+		(evt, column) => setSelectedColumn(column.key),
+		[setSelectedColumn],
+	)
 	return (
 		<Container className="table-container">
 			<Header>
@@ -75,6 +81,8 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					columns={columns}
 					autoRender={autoRender}
 					compact={compact}
+					selectedColumn={selectedColumn}
+					onColumnClick={handleColumnClick}
 				/>
 			</TableContainer>
 		</Container>

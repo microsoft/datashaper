@@ -50,11 +50,16 @@ export function useColumnDefaults(
 			const onRender = autoRender
 				? createRenderSmartCell(m, color)
 				: createRenderDefaultCell(m)
-			// TODO: this gets buried under a sub-span. we may want to override entire header rendering for the table
+			// HACK: if we let an iconName through, the rendering messes with our layout
+			// in order to control this we'll pass the original props to the generators,
+			// but omit from what gets sent to the top-level table
+			// as far as I can tell there's no other way to force the table to let us control this icon rendering
+			// without completely recreating the details header render
+			const original = (columnMap[name] || {}) as Partial<IColumn>
+			const { iconName, ...defaults } = original
 			const onRenderHeader = autoRender
-				? createRenderHistogramColumnHeader(m, color)
-				: createRenderDefaultColumnHeader()
-			const existing = columnMap[name] as Partial<IColumn>
+				? createRenderHistogramColumnHeader(original, m, color)
+				: createRenderDefaultColumnHeader(original)
 			return {
 				key: name,
 				name,
@@ -63,7 +68,7 @@ export function useColumnDefaults(
 				onRender,
 				onRenderHeader,
 				styles: styles,
-				...existing,
+				...defaults,
 			}
 		})
 	}, [table, autoRender, meta, columns, colorScale, includeAll])

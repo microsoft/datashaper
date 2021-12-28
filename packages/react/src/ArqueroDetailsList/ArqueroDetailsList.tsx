@@ -31,7 +31,15 @@ export interface ArqueroDetailsListProps
 	autoRender?: boolean
 	offset?: number
 	limit?: number
-	allowSorting?: boolean
+	isSortable?: boolean
+	/**
+	 * Passthrough to the column click handler
+	 */
+	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void
+	/**
+	 * Key for a selected column - this is not normally an option in DetailsList
+	 */
+	selectedColumn?: string
 }
 
 /**
@@ -44,7 +52,9 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			autoRender = false,
 			offset = 0,
 			limit = Infinity,
-			allowSorting = true,
+			isSortable = true,
+			selectedColumn,
+			onColumnClick,
 			// extract props we want to set data-centric defaults for
 			selectionMode = SelectionMode.none,
 			layoutMode = DetailsListLayoutMode.fixedColumns,
@@ -55,8 +65,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			...rest
 		} = props
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
-			useSortHandling(allowSorting, onColumnHeaderClick)
-
+			useSortHandling(isSortable, onColumnHeaderClick)
 		// first apply sort to internal table copy
 		// note that this is different than the orderby of a pipeline step
 		// this is a temporary sort only for the table display
@@ -73,6 +82,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			columns,
 			sortColumn,
 			sortDirection,
+			selectedColumn,
+			onColumnClick,
 		)
 
 		const headerStyle = useDetailsListStyles(

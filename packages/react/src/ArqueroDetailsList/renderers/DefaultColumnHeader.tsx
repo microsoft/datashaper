@@ -11,7 +11,7 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 	function DefaultColumnHeader(props) {
 		const theme = useThematic()
 		const { column } = props
-		const { isSorted, isSortedDescending } = column
+		const { isSorted, isSortedDescending, iconName, iconClassName } = column
 		const dimensions = useCellDimensions(column)
 
 		const containerStyle = useMemo(
@@ -19,8 +19,11 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 				display: 'flex',
 				justifyContent: 'space-between',
 				width: dimensions.width,
+				borderBottom: column.data?.selected
+					? `2px solid ${theme.application().accent().hex()}`
+					: `2px solid transparent`,
 			}),
-			[dimensions],
+			[theme, dimensions, column],
 		)
 
 		const iconStyles = useMemo(
@@ -36,6 +39,10 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 		return (
 			<div style={containerStyle}>
 				<div>{column.name}</div>
+				{/* the standard details list renders its icon at far left. should we replicate? */}
+				{iconName ? (
+					<Icon className={iconClassName} iconName={iconName} />
+				) : null}
 				{isSorted ? (
 					<Icon
 						iconName={isSortedDescending ? 'SortDown' : 'SortUp'}

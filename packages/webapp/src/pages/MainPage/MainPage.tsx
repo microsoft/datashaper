@@ -27,7 +27,8 @@ import {
 
 const columns = {
 	ID: {
-		width: 30,
+		width: 42,
+		iconName: 'FavoriteStarFill',
 	},
 }
 export const MainPage: React.FC = memo(function MainMage() {

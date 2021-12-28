@@ -14,6 +14,8 @@ export function useColumns(
 	columns?: IColumn[],
 	sortColumn?: string,
 	sortDirection?: SortDirection,
+	selectedColumn?: string,
+	onClick?: (ev: React.MouseEvent<HTMLElement>, column: IColumn) => void,
 ): IColumn[] {
 	const columnDefaults = useColumnDefaults(table, autoRender, columns, true)
 	return useMemo(() => {
@@ -21,6 +23,11 @@ export function useColumns(
 			...column,
 			isSorted: column.fieldName === sortColumn ? true : false,
 			isSortedDescending: sortDirection === SortDirection.Descending,
+			onColumnClick: onClick,
+			data: {
+				selected: column.key === selectedColumn,
+				...column.data,
+			},
 		}))
-	}, [columnDefaults, sortColumn, sortDirection])
+	}, [columnDefaults, sortColumn, sortDirection, selectedColumn, onClick])
 }

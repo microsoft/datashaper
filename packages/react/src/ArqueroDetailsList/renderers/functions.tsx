@@ -45,27 +45,49 @@ export const createRenderSmartCell = (
  * handle the default while also stacking in advanced render features.
  * @returns
  */
-export const createRenderDefaultColumnHeader =
-	(): IRenderFunction<IDetailsColumnProps> =>
-		function renderDefaultColumnHeader(props?, defaultRender?) {
-			if (!props || !defaultRender) {
-				return null
-			}
-			return <DefaultColumnHeader {...props} />
-		}
-
-export const createRenderHistogramColumnHeader = (
-	metadata: ColumnMetadata,
-	color?: string,
+export const createRenderDefaultColumnHeader = (
+	originalProps: Partial<IColumn>,
 ): IRenderFunction<IDetailsColumnProps> =>
-	function renderHistogramColumnHeader(props?, defaultRender?) {
+	function renderDefaultColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
 			return null
 		}
+		const p = fixProps(originalProps, props)
+		return <DefaultColumnHeader {...p} />
+	}
+
+export const createRenderHistogramColumnHeader = (
+	originalProps: Partial<IColumn>,
+	metadata: ColumnMetadata,
+	color?: string,
+): IRenderFunction<IDetailsColumnProps> => {
+	return function renderHistogramColumnHeader(props?, defaultRender?) {
+		if (!props || !defaultRender) {
+			return null
+		}
+		const p = fixProps(originalProps, props)
 		return (
 			<>
-				<DefaultColumnHeader {...props} />
-				<HistogramColumnHeader metadata={metadata} color={color} {...props} />
+				<DefaultColumnHeader {...p} />
+				<HistogramColumnHeader metadata={metadata} color={color} {...p} />
 			</>
 		)
 	}
+}
+
+function fixProps(
+	original: Partial<IColumn>,
+	updated: IDetailsColumnProps,
+): IDetailsColumnProps {
+	const iconName = original?.iconName
+	if (iconName) {
+		return {
+			...updated,
+			column: {
+				...updated.column,
+				iconName,
+			},
+		}
+	}
+	return updated
+}
