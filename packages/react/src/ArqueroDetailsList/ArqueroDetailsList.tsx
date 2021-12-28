@@ -32,6 +32,11 @@ export interface ArqueroDetailsListProps
 	autoRender?: boolean
 	offset?: number
 	limit?: number
+	/**
+	 * Indicates whether we should include all of the columns in the table by default.
+	 * If false, a columns array must be provided.
+	 */
+	includeAllColumns?: boolean
 	isSortable?: boolean
 	/**
 	 * Indicates whether to use even/odd row coloring.
@@ -46,6 +51,7 @@ export interface ArqueroDetailsListProps
 	 * Will be applied to the column header only unless isColumnClickable === true.
 	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick
 	 * and they will both fire.
+	 * TODO: maybe turn this into onColumnSelect?
 	 */
 	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column?: IColumn) => void
 	/**
@@ -64,7 +70,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			autoRender = false,
 			offset = 0,
 			limit = Infinity,
-			isSortable = true,
+			includeAllColumns = true,
+			isSortable = false,
 			isStriped = false,
 			isColumnClickable = false,
 			selectedColumn,
@@ -78,8 +85,10 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			// passthrough the remainder as props
 			...rest
 		} = props
+
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(isSortable, onColumnHeaderClick)
+
 		// first apply sort to internal table copy
 		// note that this is different than the orderby of a pipeline step
 		// this is a temporary sort only for the table display
@@ -87,20 +96,18 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// slice any potential page
 		const sliced = useSlicedTable(sorted, offset, limit)
 		// last, copy these items to actual JS objects for the DetailsList
-		// TODO: an iterator facade over the table compatible with DetailsList to avoid this copy?
 		const items = useMemo(() => sliced.objects(), [sliced])
 
-		const displayColumns = useColumns(
-			table,
+		const displayColumns = useColumns(table, columns, {
 			autoRender,
-			columns,
 			sortColumn,
 			sortDirection,
 			selectedColumn,
 			onColumnClick,
+			includeAllColumns,
 			isColumnClickable,
 			isSortable,
-		)
+		})
 
 		const headerStyle = useDetailsListStyles(
 			{

@@ -2,8 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+export * from './useCellClickHandler'
 export * from './useCellDimensions'
-export * from './useColumnDefaults'
+export * from './useColumnNamesList'
+export * from './useColumnStyles'
 export * from './useColumns'
 export * from './useDetailsListStyles'
 export * from './useFormattedNumber'

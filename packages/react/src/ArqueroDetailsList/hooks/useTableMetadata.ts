@@ -14,15 +14,5 @@ export function useTableMetadata(
 	table: ColumnTable,
 	discover = false,
 ): TableMetadata {
-	return useMemo(() => {
-		if (discover) {
-			return introspect(table)
-		}
-		// don't expend any compute on detailed column meta unless asked
-		return {
-			rows: table.numRows(),
-			cols: table.numCols(),
-			columns: {},
-		}
-	}, [table, discover])
+	return useMemo(() => introspect(table, discover), [table, discover])
 }
