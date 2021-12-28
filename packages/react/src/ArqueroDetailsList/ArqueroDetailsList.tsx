@@ -19,6 +19,7 @@ import {
 	useSlicedTable,
 	useSortedTable,
 	useSortHandling,
+	useStripedRowsRenderer,
 } from './hooks'
 
 export interface ArqueroDetailsListProps
@@ -32,6 +33,10 @@ export interface ArqueroDetailsListProps
 	offset?: number
 	limit?: number
 	isSortable?: boolean
+	/**
+	 * Indicates whether to use even/odd row coloring.
+	 */
+	isStriped?: boolean
 	/**
 	 * Passthrough to the column click handler
 	 */
@@ -53,6 +58,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			offset = 0,
 			limit = Infinity,
 			isSortable = true,
+			isStriped = false,
 			selectedColumn,
 			onColumnClick,
 			// extract props we want to set data-centric defaults for
@@ -93,6 +99,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			styles as IDetailsListStyles,
 		)
 
+		const renderRow = useStripedRowsRenderer(isStriped)
+
 		return (
 			<DetailsList
 				items={items}
@@ -100,6 +108,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				layoutMode={layoutMode}
 				columns={displayColumns as IColumn[]}
 				onColumnHeaderClick={handleColumnHeaderClick}
+				onRenderRow={renderRow}
 				{...rest}
 				styles={headerStyle}
 			/>

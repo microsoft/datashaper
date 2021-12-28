@@ -4,7 +4,7 @@
  */
 
 import { ColumnMetadata } from '@data-wrangling-components/core'
-import { IColumn, IDetailsColumnProps } from '@fluentui/react'
+import { IColumn, IDetailsColumnProps, IDetailsRowProps } from '@fluentui/react'
 
 export type Dimensions = {
 	width: number
@@ -49,4 +49,8 @@ export interface RichCellProps extends FormattedCellProps {
 export interface RichHeaderProps extends IDetailsColumnProps {
 	metadata: ColumnMetadata
 	color?: string
+}
+
+export interface RichRowProps extends IDetailsRowProps {
+	striped?: boolean
 }

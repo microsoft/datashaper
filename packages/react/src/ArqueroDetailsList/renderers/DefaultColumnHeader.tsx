@@ -5,7 +5,7 @@
 import { Icon, IDetailsColumnProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import React, { memo, useMemo } from 'react'
-import { useCellDimensions } from './hooks'
+import { useCellDimensions } from '../hooks'
 
 export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 	function DefaultColumnHeader(props) {

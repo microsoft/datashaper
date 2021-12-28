@@ -4,8 +4,8 @@
  */
 
 import React, { memo } from 'react'
+import { useFormattedNumber } from '../hooks'
 import { getValue } from '../util'
-import { useFormattedNumber } from './hooks'
 import { FormattedCellProps } from './types'
 /**
  * Basic endering of number values.

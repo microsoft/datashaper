@@ -4,7 +4,7 @@
  */
 import React, { memo, useMemo } from 'react'
 import { Sparkbar } from '../../charts'
-import { useCellDimensions } from './hooks'
+import { useCellDimensions } from '../hooks'
 import { RichHeaderProps } from './types'
 
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(

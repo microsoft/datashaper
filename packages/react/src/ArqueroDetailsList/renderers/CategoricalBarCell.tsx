@@ -4,7 +4,7 @@
  */
 import React, { memo, useMemo } from 'react'
 import { Sparkbar } from '../../charts'
-import { useCellDimensions } from './hooks'
+import { useCellDimensions } from '../hooks'
 import { ColumnCellChartProps } from './types'
 
 /**
