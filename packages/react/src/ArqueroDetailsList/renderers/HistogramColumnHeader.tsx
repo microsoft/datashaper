@@ -20,7 +20,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 				{bins ? (
 					<Sparkbar
 						data={values}
-						width={dimensions.width}
+						width={dimensions.width - 1}
 						height={dimensions.height}
 						color={color}
 					/>
