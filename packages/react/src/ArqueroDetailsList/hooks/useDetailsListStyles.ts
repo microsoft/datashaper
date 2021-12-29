@@ -8,7 +8,8 @@ import { useMemo } from 'react'
 import { DetailsListFeatures } from '..'
 
 // this is the default built into fluent
-const DEFAULT_HEADER_HEIGHT = 60
+// minus the excess header top padding
+const DEFAULT_HEADER_HEIGHT = 45
 // add this for histograms
 const HISTOGRAM_HEIGHT = 28
 // add this for a stats data block
