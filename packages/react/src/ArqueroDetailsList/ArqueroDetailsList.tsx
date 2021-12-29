@@ -8,10 +8,8 @@ import {
 	DetailsListLayoutMode,
 	IColumn,
 	SelectionMode,
-	IDetailsListProps,
 	IDetailsListStyles,
 } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo } from 'react'
 import {
 	useColumns,
@@ -21,44 +19,7 @@ import {
 	useSortHandling,
 	useStripedRowsRenderer,
 } from './hooks'
-
-export interface ArqueroDetailsListProps
-	extends Omit<IDetailsListProps, 'items'> {
-	table: ColumnTable
-	/**
-	 * Indicates to introspect the data columns and provide full rich rendering automatically for everything.
-	 * TODO: we could use an enum and specify levels of richness. For example, basic formatting -> header details -> full-blown smart cells.
-	 */
-	autoRender?: boolean
-	offset?: number
-	limit?: number
-	/**
-	 * Indicates whether we should include all of the columns in the table by default.
-	 * If false, a columns array must be provided.
-	 */
-	includeAllColumns?: boolean
-	isSortable?: boolean
-	/**
-	 * Indicates whether to use even/odd row coloring.
-	 */
-	isStriped?: boolean
-	/**
-	 * Indicates that the entire column is clickable for selection.
-	 */
-	isColumnClickable?: boolean
-	/**
-	 * Passthrough to the column click handler.
-	 * Will be applied to the column header only unless isColumnClickable === true.
-	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick
-	 * and they will both fire.
-	 * TODO: maybe turn this into onColumnSelect?
-	 */
-	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column?: IColumn) => void
-	/**
-	 * Key for a selected column - this is not normally an option in DetailsList
-	 */
-	selectedColumn?: string
-}
+import { ArqueroDetailsListProps } from '.'
 
 /**
  * Renders an arquero table using a fluent DetailsList.
@@ -67,7 +28,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	function ArqueroDetailsList(props) {
 		const {
 			table,
-			autoRender = false,
+			features = {},
 			offset = 0,
 			limit = Infinity,
 			includeAllColumns = true,
@@ -99,7 +60,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const items = useMemo(() => sliced.objects(), [sliced])
 
 		const displayColumns = useColumns(table, columns, {
-			autoRender,
+			features,
 			sortColumn,
 			sortDirection,
 			selectedColumn,
@@ -110,9 +71,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		})
 
 		const headerStyle = useDetailsListStyles(
-			{
-				autoRender,
-			},
+			features,
 			styles as IDetailsListStyles,
 		)
 

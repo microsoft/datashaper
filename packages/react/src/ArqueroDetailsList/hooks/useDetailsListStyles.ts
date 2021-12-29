@@ -5,11 +5,15 @@
 import { IDetailsListStyles } from '@fluentui/react'
 import { merge } from 'lodash'
 import { useMemo } from 'react'
+import { DetailsListFeatures } from '..'
 
 // this is the default built into fluent
 const DEFAULT_HEADER_HEIGHT = 60
 // add this for histograms
-const AUTO_RENDER_HEIGHT = 28
+const HISTOGRAM_HEIGHT = 28
+// add this for a stats data block
+const STATS_HEIGHT = 56
+
 /**
  * Create a DetailsHeader style with enough height to handle the options we've turned on.
  * Each one requires a small amount of vertical space that stacks up.
@@ -17,7 +21,7 @@ const AUTO_RENDER_HEIGHT = 28
  * @returns
  */
 export function useDetailsListStyles(
-	options: { autoRender?: boolean },
+	features?: DetailsListFeatures,
 	styles?: IDetailsListStyles,
 ): IDetailsListStyles {
 	return useMemo(
@@ -28,11 +32,16 @@ export function useDetailsListStyles(
 					headerWrapper: {
 						height:
 							DEFAULT_HEADER_HEIGHT +
-							(options.autoRender ? AUTO_RENDER_HEIGHT : 0),
+							(features?.autoRender || features?.histogramColumnHeaders
+								? HISTOGRAM_HEIGHT
+								: 0) +
+							(features?.autoRender || features?.statsColumnHeaders
+								? STATS_HEIGHT
+								: 0),
 					},
 				},
 				styles,
 			),
-		[styles, options],
+		[styles, features],
 	)
 }

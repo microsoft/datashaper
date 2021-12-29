@@ -55,7 +55,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	}, [config])
 
 	const handleColumnClick = useCallback(
-		(ev: React.MouseEvent<HTMLElement>, column?: IColumn) =>
+		(evt?: React.MouseEvent<HTMLElement>, column?: IColumn) =>
 			setSelectedColumn(column?.key),
 		[setSelectedColumn],
 	)
@@ -78,7 +78,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				<ArqueroDetailsList
 					table={table}
 					columns={columns}
-					autoRender={autoRender}
+					features={{ autoRender }}
 					compact={compact}
 					selectedColumn={selectedColumn}
 					onColumnClick={handleColumnClick}

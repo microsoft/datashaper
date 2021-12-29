@@ -20,6 +20,7 @@ export * from './TextCell'
 
 export * from './DefaultColumnHeader'
 export * from './HistogramColumnHeader'
+export * from './StatsColumnHeader'
 
 export * from './StripedRow'
 

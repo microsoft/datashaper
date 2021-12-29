@@ -27,7 +27,7 @@ import {
 
 const columns = {
 	ID: {
-		width: 42,
+		width: 50,
 		iconName: 'FavoriteStarFill',
 	},
 }

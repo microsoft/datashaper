@@ -6,11 +6,14 @@ import { SortDirection, TableMetadata } from '@data-wrangling-components/core'
 import { IColumn } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
+import { ColumnClickFunction, DetailsListFeatures } from '..'
 import {
+	createRenderColumnHeader,
 	createRenderDefaultCell,
 	createRenderDefaultColumnHeader,
 	createRenderHistogramColumnHeader,
 	createRenderSmartCell,
+	createRenderStatsColumnHeader,
 } from '../renderers'
 import {
 	useCellClickhandler,
@@ -23,11 +26,11 @@ import {
 const DEFAULT_COLUMN_WIDTH = 80
 
 export interface ColumnOptions {
-	autoRender?: boolean
+	features?: DetailsListFeatures
 	sortColumn?: string
 	sortDirection?: SortDirection
 	selectedColumn?: string
-	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column?: IColumn) => void
+	onColumnClick?: ColumnClickFunction
 	includeAllColumns?: boolean
 	isColumnClickable?: boolean
 	isSortable?: boolean
@@ -47,7 +50,7 @@ export function useColumns(
 	options: ColumnOptions = {},
 ): IColumn[] {
 	const {
-		autoRender = false,
+		features = {},
 		sortColumn,
 		sortDirection,
 		selectedColumn,
@@ -57,6 +60,7 @@ export function useColumns(
 		isSortable = false,
 	} = options
 
+	const { autoRender } = features
 	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
 
 	const metadata: TableMetadata = useTableMetadata(table, autoRender)
@@ -87,17 +91,21 @@ export function useColumns(
 
 			const meta = metadata.columns[name]
 			const color = meta.type === 'number' ? colorScale() : undefined
-			const onRender = autoRender
+			const onRender = features.autoRender
 				? createRenderSmartCell(meta, color, handleCellClick)
 				: createRenderDefaultCell(meta, handleCellClick)
 
-			const onRenderHeader = autoRender
-				? createRenderHistogramColumnHeader(column, meta, color)
-				: createRenderDefaultColumnHeader(column)
+			const headerRenderers = [createRenderDefaultColumnHeader(column)]
+			if (features.autoRender || features.statsColumnHeaders) {
+				headerRenderers.push(createRenderStatsColumnHeader(meta))
+			}
+			if (features.autoRender || features.histogramColumnHeaders) {
+				headerRenderers.push(createRenderHistogramColumnHeader(meta, color))
+			}
 
 			return {
 				onRender,
-				onRenderHeader,
+				onRenderHeader: createRenderColumnHeader(headerRenderers),
 				onColumnClick,
 				isSorted: column.fieldName === sortColumn ? true : false,
 				isSortedDescending: sortDirection === SortDirection.Descending,
@@ -112,7 +120,7 @@ export function useColumns(
 	}, [
 		columns,
 		names,
-		autoRender,
+		features,
 		sortColumn,
 		sortDirection,
 		selectedColumn,

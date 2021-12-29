@@ -5,6 +5,7 @@
 
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IColumn, IDetailsColumnProps, IDetailsRowProps } from '@fluentui/react'
+import { ColumnClickFunction } from '..'
 
 export type Dimensions = {
 	width: number
@@ -44,12 +45,13 @@ export interface MagnitudeCellProps extends FormattedCellProps {
 
 export interface RichCellProps extends FormattedCellProps {
 	metadata: ColumnMetadata
-	onColumnClick?: (ev: React.MouseEvent<HTMLElement>, column?: IColumn) => void
+	onColumnClick?: ColumnClickFunction
 }
 
 export interface RichHeaderProps extends IDetailsColumnProps {
 	metadata: ColumnMetadata
 	color?: string
+	stats?: string[]
 }
 
 export interface RichRowProps extends IDetailsRowProps {
