@@ -34,6 +34,7 @@ export interface ColumnOptions {
 	includeAllColumns?: boolean
 	isColumnClickable?: boolean
 	isSortable?: boolean
+	showColumnBorders?: boolean
 }
 
 /**
@@ -58,6 +59,7 @@ export function useColumns(
 		includeAllColumns = false,
 		isColumnClickable = false,
 		isSortable = false,
+		showColumnBorders = false,
 	} = options
 
 	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
@@ -69,7 +71,11 @@ export function useColumns(
 
 	const colorScale = useIncrementingColumnColorScale(metadata)
 
-	const styles = useColumnStyles(isColumnClickable, isSortable)
+	const styles = useColumnStyles(
+		isColumnClickable,
+		isSortable,
+		showColumnBorders,
+	)
 
 	const names = useColumnNamesList(table, columns, includeAllColumns)
 

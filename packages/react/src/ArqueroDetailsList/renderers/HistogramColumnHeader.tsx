@@ -7,6 +7,8 @@ import { Sparkbar } from '../../charts'
 import { useCellDimensions } from '../hooks'
 import { RichHeaderProps } from './types'
 
+const PADDING_HEIGHT = 20
+
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 	function HistogramColumnHeader({ metadata, color, ...props }) {
 		const { column } = props
@@ -14,7 +16,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const bins = metadata.stats?.bins
 		const values = useMemo(() => (bins || []).map(b => b.count), [bins])
 		return (
-			<div>
+			<div style={{ height: dimensions.height + PADDING_HEIGHT }}>
 				{bins ? (
 					<Sparkbar
 						data={values}

@@ -36,6 +36,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			isSortable = false,
 			isStriped = false,
 			isColumnClickable = false,
+			showColumnBorders = false,
 			selectedColumn,
 			onColumnClick,
 			// extract props we want to set data-centric defaults for
@@ -69,6 +70,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			includeAllColumns,
 			isColumnClickable,
 			isSortable,
+			showColumnBorders,
 		})
 
 		const headerStyle = useDetailsListStyles(
@@ -76,7 +78,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			styles as IDetailsListStyles,
 		)
 
-		const renderRow = useStripedRowsRenderer(isStriped)
+		const renderRow = useStripedRowsRenderer(isStriped, showColumnBorders)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 
 		return (
