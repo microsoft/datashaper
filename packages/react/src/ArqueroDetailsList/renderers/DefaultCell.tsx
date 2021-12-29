@@ -3,10 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { isNil } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { getValue } from '../util'
+import { isEmpty, getValue } from '../util'
 import { ArrayCell } from './ArrayCell'
 import { RichCellProps } from './types'
 import {
@@ -50,7 +49,7 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	return (
 		<div onClick={handleColumnClick} style={cellStyle}>
 			<Switch>
-				<Case condition={isNil(value)}>
+				<Case condition={isEmpty(value)}>
 					<EmptyCell textAlign={type === 'number' ? 'right' : 'left'} />
 				</Case>
 				<Case condition={type === 'boolean'}>
