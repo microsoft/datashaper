@@ -60,10 +60,12 @@ export function useColumns(
 		isSortable = false,
 	} = options
 
-	const { autoRender } = features
 	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
 
-	const metadata: TableMetadata = useTableMetadata(table, autoRender)
+	const metadata: TableMetadata = useTableMetadata(
+		table,
+		anyStatsFeatures(features),
+	)
 
 	const colorScale = useIncrementingColumnColorScale(metadata)
 
@@ -132,6 +134,9 @@ export function useColumns(
 	])
 }
 
+function anyStatsFeatures(features?: DetailsListFeatures) {
+	return Object.values(features || {}).some(v => v)
+}
 function reduce(columns?: IColumn[]): Record<string, IColumn> {
 	return (columns || []).reduce((acc, cur) => {
 		acc[cur.name] = cur

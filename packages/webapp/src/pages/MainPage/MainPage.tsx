@@ -7,6 +7,7 @@ import { Step, StepType, Specification } from '@data-wrangling-components/core'
 import {
 	selectStepComponent,
 	WithTableDropdown,
+	DetailsListFeatures,
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 
@@ -44,7 +45,9 @@ export const MainPage: React.FC = memo(function MainMage() {
 	)
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
-	const [autoRender, setAutoRender] = useState<boolean>(true)
+	const [features, setFeatures] = useState<DetailsListFeatures>({
+		autoRender: true,
+	})
 	const [compact, setCompact] = useState<boolean>(true)
 
 	const [steps, setSteps] = useState<Step[]>([])
@@ -108,8 +111,8 @@ export const MainPage: React.FC = memo(function MainMage() {
 					selected={exampleSpec}
 					onSelectSpecification={handleExampleSpecChange}
 					onLoadFiles={handleDropFiles}
-					autoRender={autoRender}
-					onAutoRenderChange={setAutoRender}
+					features={features}
+					onFeaturesChange={setFeatures}
 					compact={compact}
 					onCompactChange={setCompact}
 				/>
@@ -118,7 +121,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 						<InputTables
 							tables={inputTables}
 							config={columns}
-							autoRender={autoRender}
+							features={features}
 							compact={compact}
 						/>
 					</Section>
@@ -151,7 +154,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 												name={step.output}
 												table={output}
 												config={columns}
-												autoRender={autoRender}
+												features={features}
 												compact={compact}
 											/>
 										</TableSection>
@@ -170,7 +173,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 							<Table
 								table={result}
 								config={columns}
-								autoRender={autoRender}
+								features={features}
 								compact={compact}
 							/>
 						</TableSection>
