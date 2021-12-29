@@ -1919,6 +1919,7 @@ __metadata:
     "@types/styled-components": ^5.1.16
     "@uifabric/icons": ^7.6.2
     arquero: ^4.8.7
+    core-js: ^3.12.1
     d3-format: ^3.1.0
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
