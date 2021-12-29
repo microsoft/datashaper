@@ -61,6 +61,10 @@ export interface ArqueroDetailsListProps
 	 */
 	isColumnClickable?: boolean
 	/**
+	 * Indicates to use borders between columns so the cells look more like a spreadsheet (row borders are always on).
+	 */
+	showColumnBorders?: boolean
+	/**
 	 * Passthrough to the column click handler.
 	 * Will be applied to the column header only unless isColumnClickable === true.
 	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick

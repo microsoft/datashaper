@@ -83,9 +83,9 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					compact={compact}
 					selectedColumn={selectedColumn}
 					onColumnClick={handleColumnClick}
-					isStriped={true}
-					isColumnClickable={true}
-					isSortable={true}
+					isColumnClickable
+					isSortable
+					showColumnBorders
 				/>
 			</TableContainer>
 		</Container>

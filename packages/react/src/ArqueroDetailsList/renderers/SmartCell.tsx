@@ -6,7 +6,7 @@ import { ColumnMetadata } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { getValue } from '../util'
+import { isEmpty , getValue } from '../util'
 import { EmptyCell } from './EmptyCell'
 import { RichCellProps } from './types'
 import {
@@ -49,7 +49,7 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	return (
 		<div onClick={handleColumnClick} style={cellStyle}>
 			<Switch>
-				<Case condition={isNil(value)}>
+				<Case condition={isEmpty(value)}>
 					<EmptyCell textAlign={type === 'number' ? 'right' : 'left'} />
 				</Case>
 				<Case condition={type === 'string'}>

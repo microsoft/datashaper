@@ -15,20 +15,43 @@ export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow(
 	props,
 ) {
 	const theme = useThematic()
-	const { striped, styles, ...rest } = props
-	const index = props.itemIndex
+	const { striped, columnBorders, styles, ...rest } = props
+	const { itemIndex, compact } = props
 	const customStyles = useMemo(() => {
-		if (striped && index % 2 === 0) {
+		if (striped && itemIndex % 2 === 0) {
 			return {
 				root: {
 					width: '100%',
 					background: theme.application().faint().hex(),
 				},
+				cell: {
+					borderRight: columnBorders
+						? `1px solid ${theme.application().background().hex(0.5)}`
+						: `1px solid transparent`,
+				},
 				...styles,
 			}
 		}
-		return styles
-	}, [theme, striped, styles, index])
+		return {
+			root: {
+				width: '100%',
+				borderBottom: `1px solid ${theme.application().faint().hex()}`,
+			},
+			cell: {
+				borderRight: columnBorders
+					? `1px solid ${theme.application().faint().hex(0.5)}`
+					: `1px solid transparent`,
+				borderTop:
+					itemIndex === 0
+						? `1px solid ${theme.application().faint().hex()}`
+						: 'none',
+				borderBottom: compact
+					? `1px solid ${theme.application().faint().hex()}`
+					: 'none',
+			},
+			...styles,
+		}
+	}, [theme, striped, columnBorders, styles, itemIndex, compact])
 
 	return <DetailsRow {...rest} styles={customStyles} />
 })

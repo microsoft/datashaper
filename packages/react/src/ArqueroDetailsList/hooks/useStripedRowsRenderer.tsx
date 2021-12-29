@@ -14,14 +14,21 @@ import { StripedRow } from '../renderers'
  */
 export function useStripedRowsRenderer(
 	striped = false,
+	columnBorders = false,
 ): IRenderFunction<IDetailsRowProps> {
 	return useCallback(
 		(props?) => {
 			if (!props) {
 				return null
 			}
-			return <StripedRow {...props} striped={striped} />
+			return (
+				<StripedRow
+					{...props}
+					striped={striped}
+					columnBorders={columnBorders}
+				/>
+			)
 		},
-		[striped],
+		[striped, columnBorders],
 	)
 }
