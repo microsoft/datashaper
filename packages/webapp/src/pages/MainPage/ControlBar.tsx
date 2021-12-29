@@ -68,6 +68,13 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 		[features, onFeaturesChange],
 	)
 
+	const handleSmartCellsChange = useCallback(
+		(e, checked?: boolean) =>
+			onFeaturesChange &&
+			onFeaturesChange({ ...features, smartCells: checked }),
+		[features, onFeaturesChange],
+	)
+
 	const handleCompactChange = useCallback(
 		(e, checked) => onCompactChange && onCompactChange(checked),
 		[onCompactChange],
@@ -113,12 +120,23 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 					/>
 				</Control>
 			</ControlBlock>
-			<Drop>
-				<FileDrop onDrop={handleDropCSV} />
-			</Drop>
-			<Drop>
-				<FileDrop onDrop={handleDropJSON} extensions={['json']} />
-			</Drop>
+			<ControlBlock>
+				<Control>
+					<Checkbox
+						label={'Smart cells'}
+						checked={features.smartCells}
+						onChange={handleSmartCellsChange}
+					/>
+				</Control>
+			</ControlBlock>
+			<DropBlock>
+				<Drop>
+					<FileDrop onDrop={handleDropCSV} />
+				</Drop>
+				<Drop>
+					<FileDrop onDrop={handleDropJSON} extensions={['json']} />
+				</Drop>
+			</DropBlock>
 		</Container>
 	)
 })
@@ -151,6 +169,13 @@ const ControlBlock = styled.div`
 
 const Control = styled.div`
 	width: 200px;
+`
+
+const DropBlock = styled.div`
+	width: 400px;
+	display: flex;
+	height: 100%;
+	gap: 10px;
 `
 
 const Drop = styled.div`
