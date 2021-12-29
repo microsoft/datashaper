@@ -30,13 +30,9 @@ export interface DetailsListFeatures {
 	 */
 	statsColumnHeaders?: boolean
 	/**
-	 * Draw a magnitude bar in the background of numeric cells.
+	 * Use embedded charts and vis based on data types and cell contents.
 	 */
-	barChartColumns?: boolean
-	/**
-	 * Automatically insert sparklines and sparkbars for array-valued cells.
-	 */
-	sparkCells?: boolean
+	smartCells?: boolean
 }
 
 export interface ArqueroDetailsListProps

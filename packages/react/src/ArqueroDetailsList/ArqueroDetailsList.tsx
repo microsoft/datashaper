@@ -13,6 +13,7 @@ import {
 import React, { memo, useMemo } from 'react'
 import {
 	useColumns,
+	useDetailsHeaderRenderer,
 	useDetailsListStyles,
 	useSlicedTable,
 	useSortedTable,
@@ -76,6 +77,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		)
 
 		const renderRow = useStripedRowsRenderer(isStriped)
+		const renderDetailsHeader = useDetailsHeaderRenderer()
 
 		return (
 			<DetailsList
@@ -85,6 +87,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				columns={displayColumns as IColumn[]}
 				onColumnHeaderClick={handleColumnHeaderClick}
 				onRenderRow={renderRow}
+				onRenderDetailsHeader={renderDetailsHeader}
 				{...rest}
 				styles={headerStyle}
 			/>

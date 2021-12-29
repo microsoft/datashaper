@@ -23,7 +23,7 @@ import {
 	useTableMetadata,
 } from '.'
 
-const DEFAULT_COLUMN_WIDTH = 80
+const DEFAULT_COLUMN_WIDTH = 100
 
 export interface ColumnOptions {
 	features?: DetailsListFeatures
@@ -93,9 +93,10 @@ export function useColumns(
 
 			const meta = metadata.columns[name]
 			const color = meta.type === 'number' ? colorScale() : undefined
-			const onRender = features.autoRender
-				? createRenderSmartCell(meta, color, handleCellClick)
-				: createRenderDefaultCell(meta, handleCellClick)
+			const onRender =
+				features.autoRender || features.smartCells
+					? createRenderSmartCell(meta, color, handleCellClick)
+					: createRenderDefaultCell(meta, handleCellClick)
 
 			const headerRenderers = [createRenderDefaultColumnHeader(column)]
 			if (features.autoRender || features.statsColumnHeaders) {
