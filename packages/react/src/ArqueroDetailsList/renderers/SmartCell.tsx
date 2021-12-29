@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
-import { isEmpty } from 'lodash'
+import { isEmpty, isNil } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 import { getValue } from '../util'
