@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
-import { isEmpty, isNil } from 'lodash'
+import { isNil } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { getValue } from '../util'
+import { isEmpty , getValue } from '../util'
 import { EmptyCell } from './EmptyCell'
 import { RichCellProps } from './types'
 import {
