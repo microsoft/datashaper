@@ -5,6 +5,7 @@
 import {
 	ColumnConfigMap,
 	ArqueroDetailsList,
+	DetailsListFeatures,
 } from '@data-wrangling-components/react'
 import { IColumn, IconButton } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
@@ -17,7 +18,7 @@ export interface TableProps {
 	name?: string
 	table: ColumnTable
 	config: ColumnConfigMap
-	autoRender?: boolean
+	features?: DetailsListFeatures
 	compact?: boolean
 }
 
@@ -25,7 +26,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	name,
 	table,
 	config = {},
-	autoRender,
+	features = {},
 	compact,
 }) {
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
@@ -55,7 +56,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	}, [config])
 
 	const handleColumnClick = useCallback(
-		(ev: React.MouseEvent<HTMLElement>, column?: IColumn) =>
+		(evt?: React.MouseEvent<HTMLElement>, column?: IColumn) =>
 			setSelectedColumn(column?.key),
 		[setSelectedColumn],
 	)
@@ -78,7 +79,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				<ArqueroDetailsList
 					table={table}
 					columns={columns}
-					autoRender={autoRender}
+					features={features}
 					compact={compact}
 					selectedColumn={selectedColumn}
 					onColumnClick={handleColumnClick}
