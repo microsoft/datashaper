@@ -75,6 +75,13 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 		[features, onFeaturesChange],
 	)
 
+	const handleArrayDropdownChange = useCallback(
+		(e, checked?: boolean) =>
+			onFeaturesChange &&
+			onFeaturesChange({ ...features, arrayAsDropdown: checked }),
+		[features, onFeaturesChange],
+	)
+
 	const handleCompactChange = useCallback(
 		(e, checked) => onCompactChange && onCompactChange(checked),
 		[onCompactChange],
@@ -126,6 +133,13 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Smart cells'}
 						checked={features.smartCells}
 						onChange={handleSmartCellsChange}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Multivalues on dropdown'}
+						checked={features.arrayAsDropdown}
+						onChange={handleArrayDropdownChange}
 					/>
 				</Control>
 			</ControlBlock>

@@ -7,7 +7,7 @@ import {
 	ArqueroDetailsList,
 	DetailsListFeatures,
 } from '@data-wrangling-components/react'
-import { IColumn, IconButton } from '@fluentui/react'
+import { IColumn, IconButton, IDropdownOption } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -61,6 +61,16 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		[setSelectedColumn],
 	)
 
+	const handleCellDropdownSelect = useCallback(
+		(
+			evt: React.FormEvent<HTMLDivElement>,
+			option?: IDropdownOption<any> | undefined,
+		) => {
+			alert(`Value selected: ${option?.text}`)
+		},
+		[],
+	)
+
 	return (
 		<Container className="table-container">
 			<Header>
@@ -83,6 +93,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					compact={compact}
 					selectedColumn={selectedColumn}
 					onColumnClick={handleColumnClick}
+					onCellDropdownSelect={handleCellDropdownSelect}
 					isColumnClickable
 					isSortable
 					showColumnBorders

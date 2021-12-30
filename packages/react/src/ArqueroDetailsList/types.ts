@@ -2,14 +2,23 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IColumn, IDetailsListProps } from '@fluentui/react'
+import { IColumn, IDetailsListProps, IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type ColumnRenderFunction = (
 	item?: any,
 	index?: number,
 	column?: IColumn,
+	arrayAsDropdown?: boolean,
 ) => any
+
+export type DropdownOptionSelect =
+	| ((
+			event: React.FormEvent<HTMLDivElement>,
+			option?: IDropdownOption<any> | undefined,
+			index?: number | undefined,
+	  ) => void)
+	| undefined
 
 export type ColumnClickFunction = (
 	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
@@ -33,6 +42,10 @@ export interface DetailsListFeatures {
 	 * Use embedded charts and vis based on data types and cell contents.
 	 */
 	smartCells?: boolean
+	/**
+	 * If datatype is array, shows a dropdown with the values
+	 */
+	arrayAsDropdown?: boolean
 }
 
 export interface ArqueroDetailsListProps
@@ -72,6 +85,11 @@ export interface ArqueroDetailsListProps
 	 * TODO: maybe turn this into onColumnSelect?
 	 */
 	onColumnClick?: ColumnClickFunction
+	/**
+	 * Passthrough to the column click handler.
+	 * Will be applied to the column header only unless isColumnClickable === true.
+	 */
+	onCellDropdownSelect?: DropdownOptionSelect
 	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */

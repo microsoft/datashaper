@@ -8,6 +8,7 @@ import { ColumnClickFunction, ColumnRenderFunction } from '..'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
 import { DefaultCell, SmartCell, StatsColumnHeader } from '.'
+import { DropdownOptionSelect } from '../types'
 
 export const createRenderDefaultCell = (
 	metadata: ColumnMetadata,
@@ -29,6 +30,8 @@ export const createRenderSmartCell = (
 	metadata: ColumnMetadata,
 	color?: string,
 	onColumnClick?: ColumnClickFunction,
+	onCellDropdownSelect?: DropdownOptionSelect,
+	arrayAsDropdown?: boolean,
 ): ColumnRenderFunction =>
 	function renderSmartCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -39,6 +42,8 @@ export const createRenderSmartCell = (
 				metadata={metadata}
 				color={color}
 				onColumnClick={onColumnClick}
+				onCellDropdownSelect={onCellDropdownSelect}
+				arrayAsDropdown={arrayAsDropdown}
 			/>
 		)
 	}

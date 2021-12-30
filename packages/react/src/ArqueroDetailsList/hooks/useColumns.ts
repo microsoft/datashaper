@@ -6,7 +6,11 @@ import { SortDirection, TableMetadata } from '@data-wrangling-components/core'
 import { IColumn } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
-import { ColumnClickFunction, DetailsListFeatures } from '..'
+import {
+	ColumnClickFunction,
+	DetailsListFeatures,
+	DropdownOptionSelect,
+} from '..'
 import {
 	createRenderColumnHeader,
 	createRenderDefaultCell,
@@ -17,6 +21,7 @@ import {
 } from '../renderers'
 import {
 	useCellClickhandler,
+	useCellDropdownSelectHandler,
 	useColumnNamesList,
 	useColumnStyles,
 	useIncrementingColumnColorScale,
@@ -31,6 +36,7 @@ export interface ColumnOptions {
 	sortDirection?: SortDirection
 	selectedColumn?: string
 	onColumnClick?: ColumnClickFunction
+	onCellDropdownSelect?: DropdownOptionSelect
 	includeAllColumns?: boolean
 	isColumnClickable?: boolean
 	isSortable?: boolean
@@ -56,6 +62,7 @@ export function useColumns(
 		sortDirection,
 		selectedColumn,
 		onColumnClick,
+		onCellDropdownSelect,
 		includeAllColumns = false,
 		isColumnClickable = false,
 		isSortable = false,
@@ -63,6 +70,10 @@ export function useColumns(
 	} = options
 
 	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
+	const handleCellDropdownSelect = useCellDropdownSelectHandler(
+		isColumnClickable,
+		onCellDropdownSelect,
+	)
 
 	const metadata: TableMetadata = useTableMetadata(
 		table,
@@ -101,7 +112,13 @@ export function useColumns(
 			const color = meta.type === 'number' ? colorScale() : undefined
 			const onRender =
 				features.autoRender || features.smartCells
-					? createRenderSmartCell(meta, color, handleCellClick)
+					? createRenderSmartCell(
+							meta,
+							color,
+							handleCellClick,
+							handleCellDropdownSelect,
+							features.arrayAsDropdown,
+					  )
 					: createRenderDefaultCell(meta, handleCellClick)
 
 			const headerRenderers = [createRenderDefaultColumnHeader(column)]
@@ -138,6 +155,7 @@ export function useColumns(
 		styles,
 		metadata,
 		colorScale,
+		handleCellDropdownSelect,
 	])
 }
 

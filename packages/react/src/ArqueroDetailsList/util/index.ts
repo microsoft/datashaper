@@ -9,6 +9,16 @@ export function getValue(item: any, column?: IColumn): any {
 	return column?.fieldName && item[column.fieldName]
 }
 
+export function getDropdownValue(item: any, column?: IColumn): any {
+	const itens = column?.fieldName && item[column.fieldName]
+	return itens.map((value: any) => {
+		return {
+			key: value,
+			text: value,
+		}
+	})
+}
+
 /**
  * Bins values into strict categories
  * @param values
