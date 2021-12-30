@@ -5,10 +5,10 @@
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { ColumnClickFunction, ColumnRenderFunction } from '..'
+import { DropdownOptionSelect } from '../types'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
 import { DefaultCell, SmartCell, StatsColumnHeader } from '.'
-import { DropdownOptionSelect } from '../types'
 
 export const createRenderDefaultCell = (
 	metadata: ColumnMetadata,
