@@ -15,7 +15,7 @@ export const ArrayDropdown: React.FC<DropdownCellProps> = memo(
 	function ArrayDropdown({ item, column, onCellDropdownSelect }) {
 		const values = getDropdownValue(item, column) || []
 		const placeholderValues = getValue(item, column) || 'Open to see the values'
-		debugger
+
 		return (
 			<Dropdown
 				onChange={onCellDropdownSelect}
