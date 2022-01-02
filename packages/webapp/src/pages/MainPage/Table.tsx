@@ -5,6 +5,7 @@
 import {
 	ColumnConfigMap,
 	ArqueroDetailsList,
+	ArqueroTableHeader,
 	useColumnDefaults,
 } from '@data-wrangling-components/react'
 import { IColumn, IconButton } from '@fluentui/react'
@@ -63,18 +64,12 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	)
 	return (
 		<Container className="table-container">
-			<Header>
-				<H2>{name}</H2>
-				<H3>{table.numRows()} rows</H3>
-				<H3>{table.numCols()} cols</H3>
-				<IconButton
-					iconProps={{ iconName: 'Download' }}
-					styles={buttonStyles}
-					href={downloadUrl}
-					download={name}
-					type={'text/csv'}
-				/>
-			</Header>
+			<ArqueroTableHeader
+				name={name}
+				numRows={table.numRows()}
+				numCols={table.numCols()}
+				downloadURL={downloadUrl}			
+			/>
 			<TableContainer>
 				<ArqueroDetailsList
 					table={table}
