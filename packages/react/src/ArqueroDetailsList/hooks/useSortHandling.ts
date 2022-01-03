@@ -5,17 +5,17 @@
 import { SortDirection } from '@data-wrangling-components/core'
 import { IColumn } from '@fluentui/react'
 import { useCallback, useState } from 'react'
-import { ColumnHeaderClickFunction } from '..'
+import { ColumnClickFunction } from '..'
 
 export interface SortParameters {
 	sortColumn?: string
 	sortDirection: SortDirection
-	handleColumnHeaderClick: ColumnHeaderClickFunction
+	handleColumnHeaderClick: ColumnClickFunction
 }
 
 export function useSortHandling(
 	allowSorting: boolean,
-	onColumnHeaderClick?: ColumnHeaderClickFunction,
+	onColumnHeaderClick?: ColumnClickFunction,
 ): SortParameters {
 	const [sortColumn, setSortColumn] = useState<string | undefined>()
 	const [sortDirection, setSortDirection] = useState<SortDirection>(

@@ -5,8 +5,8 @@
 
 import React, { memo } from 'react'
 import { Sparkline } from '../../charts'
+import { useCellDimensions } from '../hooks'
 import { getValue } from '../util'
-import { useCellDimensions } from './hooks'
 import { ColumnCellChartProps } from './types'
 
 /**

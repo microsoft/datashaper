@@ -6,9 +6,9 @@ import {
 	ColumnConfigMap,
 	ArqueroDetailsList,
 	ArqueroTableHeader,
-	useColumnDefaults,
+	DetailsListFeatures,
 } from '@data-wrangling-components/react'
-import { IColumn, IconButton } from '@fluentui/react'
+import { IColumn } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -19,7 +19,7 @@ export interface TableProps {
 	name?: string
 	table: ColumnTable
 	config: ColumnConfigMap
-	autoRender?: boolean
+	features?: DetailsListFeatures
 	compact?: boolean
 }
 
@@ -27,11 +27,9 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	name,
 	table,
 	config = {},
-	autoRender,
+	features = {},
 	compact,
 }) {
-	// note that we always reify the table for display, because some arquero operations
-	// only create backing indexes (i.e., orderby, filter)
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 	const theme = useThematic()
 	const buttonStyles = useMemo(
@@ -48,7 +46,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		return URL.createObjectURL(blob)
 	}, [table])
 
-	const configDefaults = useMemo(() => {
+	const columns = useMemo(() => {
 		return Object.entries(config).map(([key, conf]) => ({
 			key,
 			name: key,
@@ -57,11 +55,13 @@ export const Table: React.FC<TableProps> = memo(function Table({
 			iconName: conf.iconName,
 		})) as IColumn[]
 	}, [config])
-	const columns = useColumnDefaults(table, autoRender, configDefaults, true)
+
 	const handleColumnClick = useCallback(
-		(evt, column) => setSelectedColumn(column.key),
+		(evt?: React.MouseEvent<HTMLElement>, column?: IColumn) =>
+			setSelectedColumn(column?.key),
 		[setSelectedColumn],
 	)
+
 	return (
 		<Container className="table-container">
 			<ArqueroTableHeader
@@ -74,10 +74,13 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				<ArqueroDetailsList
 					table={table}
 					columns={columns}
-					autoRender={autoRender}
+					features={features}
 					compact={compact}
 					selectedColumn={selectedColumn}
 					onColumnClick={handleColumnClick}
+					isColumnClickable
+					isSortable
+					showColumnBorders
 				/>
 			</TableContainer>
 		</Container>

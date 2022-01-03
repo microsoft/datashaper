@@ -5,7 +5,7 @@
 import { Icon, IDetailsColumnProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import React, { memo, useMemo } from 'react'
-import { useCellDimensions } from './hooks'
+import { useCellDimensions } from '../hooks'
 
 export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 	function DefaultColumnHeader(props) {
@@ -26,11 +26,13 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 			[theme, dimensions, column],
 		)
 
-		const fontStyle = useMemo(
+		const textStyle = useMemo(
 			() => ({
 				color: column.data?.selected
 					? theme.application().accent().hex()
 					: theme.application().foreground().hex(),
+				width: '100%',
+				textAlign: 'center' as const,
 			}),
 			[theme, column],
 		)
@@ -47,7 +49,7 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 
 		return (
 			<div style={containerStyle}>
-				<div style={fontStyle}>{column.name}</div>
+				<div style={textStyle}>{column.name}</div>
 				{/* the standard details list renders its icon at far left. should we replicate? */}
 				{iconName ? (
 					<Icon className={iconClassName} iconName={iconName} />

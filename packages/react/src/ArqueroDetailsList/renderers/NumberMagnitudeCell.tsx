@@ -5,8 +5,8 @@
 
 import { useThematic } from '@thematic/react'
 import React, { memo, useMemo } from 'react'
+import { useCellDimensions, useFormattedNumber } from '../hooks'
 import { getValue } from '../util'
-import { useCellDimensions, useFormattedNumber } from './hooks'
 import { MagnitudeCellProps } from './types'
 /**
  * Basic endering of number values.

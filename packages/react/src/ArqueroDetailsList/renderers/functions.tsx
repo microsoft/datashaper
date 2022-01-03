@@ -4,13 +4,14 @@
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
-import { ColumnRenderFunction } from '..'
+import { ColumnClickFunction, ColumnRenderFunction } from '..'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
-import { DefaultCell, SmartCell } from '.'
+import { DefaultCell, SmartCell, StatsColumnHeader } from '.'
 
 export const createRenderDefaultCell = (
 	metadata: ColumnMetadata,
+	onColumnClick?: ColumnClickFunction,
 ): ColumnRenderFunction =>
 	function renderDefaultCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -19,6 +20,7 @@ export const createRenderDefaultCell = (
 				index={index}
 				column={column}
 				metadata={metadata}
+				onColumnClick={onColumnClick}
 			/>
 		)
 	}
@@ -26,6 +28,7 @@ export const createRenderDefaultCell = (
 export const createRenderSmartCell = (
 	metadata: ColumnMetadata,
 	color?: string,
+	onColumnClick?: ColumnClickFunction,
 ): ColumnRenderFunction =>
 	function renderSmartCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -35,7 +38,30 @@ export const createRenderSmartCell = (
 				column={column}
 				metadata={metadata}
 				color={color}
+				onColumnClick={onColumnClick}
 			/>
+		)
+	}
+
+export const createRenderColumnHeader = (
+	renderers: IRenderFunction<IDetailsColumnProps>[],
+): IRenderFunction<IDetailsColumnProps> =>
+	function renderColumnHeader(props?, defaultRender?) {
+		if (!props || !defaultRender) {
+			return null
+		}
+		return (
+			<>
+				{renderers.map((r, i) =>
+					r(
+						{
+							key: `renderer-${props.column.key}${i}`,
+							...props,
+						},
+						defaultRender,
+					),
+				)}
+			</>
 		)
 	}
 
@@ -56,8 +82,19 @@ export const createRenderDefaultColumnHeader = (
 		return <DefaultColumnHeader {...p} />
 	}
 
+export const createRenderStatsColumnHeader = (
+	metadata: ColumnMetadata,
+	stats?: string[],
+): IRenderFunction<IDetailsColumnProps> => {
+	return function renderStatsColumnHeader(props?, defaultRender?) {
+		if (!props || !defaultRender) {
+			return null
+		}
+		return <StatsColumnHeader metadata={metadata} stats={stats} {...props} />
+	}
+}
+
 export const createRenderHistogramColumnHeader = (
-	originalProps: Partial<IColumn>,
 	metadata: ColumnMetadata,
 	color?: string,
 ): IRenderFunction<IDetailsColumnProps> => {
@@ -65,12 +102,8 @@ export const createRenderHistogramColumnHeader = (
 		if (!props || !defaultRender) {
 			return null
 		}
-		const p = fixProps(originalProps, props)
 		return (
-			<>
-				<DefaultColumnHeader {...p} />
-				<HistogramColumnHeader metadata={metadata} color={color} {...p} />
-			</>
+			<HistogramColumnHeader metadata={metadata} color={color} {...props} />
 		)
 	}
 }
