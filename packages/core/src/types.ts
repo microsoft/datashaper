@@ -438,6 +438,17 @@ export interface OrderbyArgs {
 	orders: OrderbyInstruction[]
 }
 
+export interface RollupArgs extends OutputColumnArgs {
+	/**
+	 * Column to perform rollup operation on
+	 */
+	field: string
+	/**
+	 * Rollup operation
+	 */
+	operation: FieldAggregateOperation
+}
+
 export interface SetOperationArgs {
 	/**
 	 * Other tables to apply this set operation to.
