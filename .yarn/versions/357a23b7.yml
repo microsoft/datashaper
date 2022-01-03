@@ -1,0 +1,4 @@
+declined:
+  - "@data-wrangling-components/core"
+  - "@data-wrangling-components/react"
+  - "@data-wrangling-components/webapp"
