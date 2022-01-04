@@ -51,7 +51,13 @@ export function useNumericLinearScale(
 		() => scaleLinear().domain(extent).range(range),
 		[extent, range],
 	)
-	return useMemo(() => (d: any, i: number) => linear(d), [linear])
+	return useMemo(() => {
+		// if there is no variation, just fill the space
+		if (extent[0] === extent[1]) {
+			return () => range[1]
+		}
+		return (d: any) => linear(d)
+	}, [linear, extent, range])
 }
 
 /**

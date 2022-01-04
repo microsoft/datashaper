@@ -5,7 +5,7 @@
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { isDate, isArray } from 'lodash'
-import { Bin, ColumnMetadata, ColumnStats, TableMetadata } from '..'
+import { Bin, Category, ColumnMetadata, ColumnStats, TableMetadata } from '..'
 import { fixedBinCount } from '../engine/util'
 
 // arquero uses 1000 as default, but we're sampling the table so assuming higher odds of valid values
@@ -61,6 +61,7 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 	const reqStats = requiredStats(table)
 	const optStats = optionalStats(table)
 	const bins = binning(table, reqStats, optStats)
+	const cats = categories(table, reqStats)
 	const results = table.columnNames().reduce((acc, cur) => {
 		// mode should only include valid values, so a reasonable value for checking type
 		const mode = reqStats[`${cur}.mode`]
@@ -72,7 +73,7 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 			invalid: reqStats[`${cur}.invalid`],
 			mode,
 		}
-		const opt =
+		const optn =
 			type === 'number'
 				? {
 						min: optStats[`${cur}.min`],
@@ -83,9 +84,16 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 						bins: bins[`${cur}.bins`],
 				  }
 				: {}
+		const optt =
+			type === 'text'
+				? {}
+				: {
+						categories: cats[`${cur}`],
+				  }
 		acc[cur] = {
 			...req,
-			...opt,
+			...optn,
+			...optt,
 		}
 		return acc
 	}, {} as Record<string, ColumnStats>)
@@ -135,7 +143,7 @@ function binning(
 
 	const binRollup = table.select(numeric).derive(binArgs)
 
-	// for each binned column, derive a sorted & counted subtable
+	// for each binned column, derive a sorted & counted subtable.
 	// note that only bins with at least one entry will have a row,
 	// so we could have less than 10 bins
 	const counted = numeric.reduce((acc, cur) => {
@@ -154,6 +162,32 @@ function binning(
 	}, {} as Record<string, Bin[]>)
 
 	return counted
+}
+
+function categories(
+	table: ColumnTable,
+	reqStats: Record<string, any>,
+	limit = 20,
+) {
+	// TODO: we could do this with numeric too if there are a small number of uniques
+	// direct bin counting could be better with numbers if there is a small variety.
+	// also note we're going to limit it this to columns with a small number of unique values.
+	// it just doesn't make sense to count everything that is distinct if we can't plot/display it
+	const text = table.columnNames(name => {
+		const mode = reqStats[`${name}.mode`]
+		const distinct = reqStats[`${name}.distinct`]
+		const type = determineType(mode)
+		return type === 'string' && distinct <= limit
+	})
+	return text.reduce((acc, cur) => {
+		const counted = table
+			.groupby(cur)
+			.count()
+			.objects()
+			.map(d => ({ name: d[cur], count: d.count }))
+		acc[cur] = counted
+		return acc
+	}, {} as Record<string, Category[]>)
 }
 
 // TODO: arquero does autotyping on load, is this meta stored internally?

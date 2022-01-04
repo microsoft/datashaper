@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/core",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"main": "src/index.ts",
 	"publishConfig": {
 		"main": "dist/cjs/index.js",
@@ -18,7 +18,7 @@
 		"@types/lodash": "^4.14.178",
 		"@types/node": "^16.11.11",
 		"arquero": "^4.8.7",
-		"typescript": "^4.5.2",
+		"typescript": "^4.5.4",
 		"vite": "^2.6.14"
 	},
 	"peerDependencies": {
@@ -31,6 +31,7 @@
 		}
 	},
 	"dependencies": {
+		"core-js": "^3.12.1",
 		"lodash": "^4.17.21"
 	}
 }
