@@ -17,6 +17,12 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const bins = metadata.stats?.bins
 		const values = useMemo(() => (bins || []).map(b => b.count), [bins])
 		const title = useTooltip(metadata.stats)
+
+		// don't render a single bar
+		if (metadata.stats?.distinct === 1) {
+			return null
+		}
+
 		return (
 			<div title={title} style={{ height: dimensions.height + PADDING_HEIGHT }}>
 				{bins ? (
