@@ -4,9 +4,9 @@
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
-import React, { memo, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { getValue } from '../util'
+import { isEmpty , getValue } from '../util'
 import { EmptyCell } from './EmptyCell'
 import { RichCellProps } from './types'
 import {
@@ -24,34 +24,54 @@ import {
 export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	props,
 ) {
-	const { metadata, item, column } = props
+	const { metadata, item, column, onColumnClick } = props
 	const { type } = metadata
 	const value = getValue(item, column)
 	const magnitude = useNumberMagnitude(type, value, metadata)
+	const handleColumnClick = useCallback(
+		ev => {
+			column &&
+				onColumnClick &&
+				onColumnClick(ev, column?.data?.selected ? undefined : column)
+		},
+		[column, onColumnClick],
+	)
+	const cellStyle = useMemo(() => {
+		const style: React.CSSProperties = {}
+		if (onColumnClick) {
+			style.cursor = 'pointer'
+		}
+		if (column?.data?.selected) {
+			style.fontWeight = 'bold'
+		}
+		return style
+	}, [onColumnClick, column])
 	return (
-		<Switch>
-			<Case condition={isNil(value)}>
-				<EmptyCell textAlign={type === 'number' ? 'right' : 'left'} />
-			</Case>
-			<Case condition={type === 'string'}>
-				<TextCell {...props} />
-			</Case>
-			<Case condition={type === 'boolean'}>
-				<BooleanSymbolCell {...props} />
-			</Case>
-			<Case condition={type === 'number'}>
-				<NumberMagnitudeCell {...props} magnitude={magnitude} />
-			</Case>
-			<Case condition={type === 'date'}>
-				<DateCell {...props} />
-			</Case>
-			<Case condition={type === 'array'}>
-				<SmartArrayCell {...props} />
-			</Case>
-			<Default>
-				<ObjectCell {...props} />
-			</Default>
-		</Switch>
+		<div onClick={handleColumnClick} style={cellStyle}>
+			<Switch>
+				<Case condition={isEmpty(value)}>
+					<EmptyCell textAlign={type === 'number' ? 'right' : 'left'} />
+				</Case>
+				<Case condition={type === 'string'}>
+					<TextCell {...props} />
+				</Case>
+				<Case condition={type === 'boolean'}>
+					<BooleanSymbolCell {...props} />
+				</Case>
+				<Case condition={type === 'number'}>
+					<NumberMagnitudeCell {...props} magnitude={magnitude} />
+				</Case>
+				<Case condition={type === 'date'}>
+					<DateCell {...props} />
+				</Case>
+				<Case condition={type === 'array'}>
+					<SmartArrayCell {...props} />
+				</Case>
+				<Default>
+					<ObjectCell {...props} />
+				</Default>
+			</Switch>
+		</div>
 	)
 })
 

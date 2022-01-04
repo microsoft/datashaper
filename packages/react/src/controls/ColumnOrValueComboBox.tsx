@@ -2,10 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ComboBox, IComboBoxProps } from '@fluentui/react'
+import {
+	ComboBox,
+	IComboBoxProps,
+	SelectableOptionMenuItemType,
+} from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-
-import { SelectableOptionMenuItemType } from 'office-ui-fabric-react'
 import React, { memo, useMemo } from 'react'
 import { useTableColumnOptions } from '../common'
 import { columnDropdownStyles } from './styles'

@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IColumn } from '@fluentui/react'
+import { isArray, isNil, isString } from 'lodash'
 
 export function getValue(item: any, column?: IColumn): any {
 	return column?.fieldName && item[column.fieldName]
@@ -28,4 +29,14 @@ export function categories(values: any[]): Record<string, number> {
  */
 export function isDistinctCategories(cats: Record<string, number>): boolean {
 	return Object.values(cats).every(value => value === 1)
+}
+
+export function isEmpty(value: any): boolean {
+	if (isNil(value)) {
+		return true
+	}
+	if ((isString(value) || isArray(value)) && value.length === 0) {
+		return true
+	}
+	return false
 }

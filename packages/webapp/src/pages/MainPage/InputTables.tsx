@@ -2,7 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnConfigMap } from '@data-wrangling-components/react'
+import {
+	ColumnConfigMap,
+	DetailsListFeatures,
+} from '@data-wrangling-components/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 import React, { memo } from 'react'
@@ -12,12 +15,12 @@ import { Table } from './Table'
 export interface InputTablesProps {
 	tables: Map<string, ColumnTable>
 	config: ColumnConfigMap
-	autoRender?: boolean
+	features?: DetailsListFeatures
 	compact?: boolean
 }
 
 export const InputTables: React.FC<InputTablesProps> = memo(
-	function InputTables({ tables, config, autoRender, compact }) {
+	function InputTables({ tables, config, features, compact }) {
 		return (
 			<TablesContainer>
 				{Array.from(tables).map(([key, table]) => (
@@ -26,7 +29,7 @@ export const InputTables: React.FC<InputTablesProps> = memo(
 						name={key}
 						table={table}
 						config={config}
-						autoRender={autoRender}
+						features={features}
 						compact={compact}
 					/>
 				))}
