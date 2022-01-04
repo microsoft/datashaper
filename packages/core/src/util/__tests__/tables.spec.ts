@@ -110,12 +110,15 @@ describe('table utilities', () => {
 		test('bins', () => {
 			// for our default stats we specify 10 bins - let's test with a column that has enough rows for this
 			const binnable: ColumnTable = table({
-				values: [1, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6, 7, 8, 9, 10],
+				values: [8, 9, 10, 1, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6, 7],
 			})
 			const { values } = stats(binnable)
 			expect(values.count).toBe(15)
 			expect(values.distinct).toBe(10)
-			expect(values.bins).toHaveLength(10)
+			const { bins = [] } = values
+			expect(bins).toHaveLength(10)
+			// ensure the bins are sorted ascending numerically
+			expect(bins[0].min).toBe(1)
 		})
 	})
 

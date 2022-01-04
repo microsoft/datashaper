@@ -148,7 +148,6 @@ function binning(
 	// so we could have less than 10 bins
 	const counted = numeric.reduce((acc, cur) => {
 		const bins = binRollup
-			.orderby(cur)
 			.groupby(cur)
 			.count()
 			.objects()
