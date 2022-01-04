@@ -22,6 +22,7 @@ export interface ColumnCellProps {
 }
 
 export interface DropdownCellProps extends ColumnCellProps {
+	rowIndex: number
 	onCellDropdownSelect?: DropdownOptionSelect
 }
 
@@ -50,8 +51,6 @@ export interface MagnitudeCellProps extends FormattedCellProps {
 export interface RichCellProps extends FormattedCellProps {
 	metadata: ColumnMetadata
 	onColumnClick?: ColumnClickFunction
-	onCellDropdownSelect?: DropdownOptionSelect
-	arrayAsDropdown?: boolean
 }
 
 export interface RichHeaderProps extends IDetailsColumnProps {

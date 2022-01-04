@@ -6,7 +6,7 @@ import { ColumnMetadata } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty , getValue } from '../util'
+import { isEmpty, getValue } from '../util'
 import { EmptyCell } from './EmptyCell'
 import { RichCellProps } from './types'
 import {
@@ -52,6 +52,7 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 				<Case condition={isEmpty(value)}>
 					<EmptyCell textAlign={type === 'number' ? 'right' : 'left'} />
 				</Case>
+				{/* TODO: can we transform this type into an enum? */}
 				<Case condition={type === 'string'}>
 					<TextCell {...props} />
 				</Case>

@@ -9,7 +9,6 @@ export type ColumnRenderFunction = (
 	item?: any,
 	index?: number,
 	column?: IColumn,
-	arrayAsDropdown?: boolean,
 ) => any
 
 export type DropdownOptionSelect =

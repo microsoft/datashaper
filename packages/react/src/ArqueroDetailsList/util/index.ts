@@ -9,12 +9,17 @@ export function getValue(item: any, column?: IColumn): any {
 	return column?.fieldName && item[column.fieldName]
 }
 
-export function getDropdownValue(item: any, column?: IColumn): any {
-	const itens = column?.fieldName && item[column.fieldName]
+export function getDropdownValue(
+	item: any,
+	rowIndex: number,
+	column?: IColumn,
+): any {
+	const itens = getValue(item, column)
 	return itens.map((value: any) => {
 		return {
-			key: value,
+			key: `${rowIndex}-${value}`,
 			text: value,
+			data: { rowIndex, column },
 		}
 	})
 }

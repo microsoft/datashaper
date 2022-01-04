@@ -6,6 +6,7 @@ import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { ColumnClickFunction, ColumnRenderFunction } from '..'
 import { DropdownOptionSelect } from '../types'
+import { ArrayDropdownCell } from './ArrayDropdownCell'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
 import { DefaultCell, SmartCell, StatsColumnHeader } from '.'
@@ -30,8 +31,6 @@ export const createRenderSmartCell = (
 	metadata: ColumnMetadata,
 	color?: string,
 	onColumnClick?: ColumnClickFunction,
-	onCellDropdownSelect?: DropdownOptionSelect,
-	arrayAsDropdown?: boolean,
 ): ColumnRenderFunction =>
 	function renderSmartCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -42,8 +41,21 @@ export const createRenderSmartCell = (
 				metadata={metadata}
 				color={color}
 				onColumnClick={onColumnClick}
+			/>
+		)
+	}
+
+export const createRenderDropdownCell = (
+	metadata: ColumnMetadata,
+	onCellDropdownSelect?: DropdownOptionSelect,
+): ColumnRenderFunction =>
+	function renderDropdownCell(item?: any, index?: number, column?: IColumn) {
+		return (
+			<ArrayDropdownCell
+				rowIndex={index || 0}
+				item={item}
+				column={column}
 				onCellDropdownSelect={onCellDropdownSelect}
-				arrayAsDropdown={arrayAsDropdown}
 			/>
 		)
 	}

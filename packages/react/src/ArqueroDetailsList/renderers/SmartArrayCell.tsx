@@ -6,7 +6,6 @@ import React, { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 import { categories, getValue, isDistinctCategories } from '../util'
 import { ArrayCell } from './ArrayCell'
-import { ArrayDropdown } from './ArrayDropdown'
 import { RichCellProps } from './types'
 import { SparkbarCell, CategoricalBarCell, SparklineCell } from './'
 
@@ -16,7 +15,7 @@ const HISTO_MAX = 20
  */
 export const SmartArrayCell: React.FC<RichCellProps> = memo(
 	function SmartArrayCell(props) {
-		const { item, column, arrayAsDropdown } = props
+		const { item, column } = props
 		const values = getValue(item, column) || []
 		const cellWidth = column?.currentWidth || 0
 		const histo = categories(values)
@@ -34,11 +33,8 @@ export const SmartArrayCell: React.FC<RichCellProps> = memo(
 				<Case condition={values.length <= cellWidth}>
 					<SparkbarCell {...props} />
 				</Case>
-				<Case condition={values.length > cellWidth && !arrayAsDropdown}>
+				<Case condition={values.length > cellWidth}>
 					<SparklineCell {...props} />
-				</Case>
-				<Case condition={values.length > cellWidth && arrayAsDropdown}>
-					<ArrayDropdown {...props} />
 				</Case>
 				<Default>
 					<ArrayCell {...props} />
