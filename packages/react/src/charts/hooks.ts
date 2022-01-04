@@ -56,8 +56,8 @@ export function useNumericLinearScale(
 		if (extent[0] === extent[1]) {
 			return () => range[1]
 		}
-		return (d: any, i: number) => linear(d)
-	}, [linear])
+		return (d: any) => linear(d)
+	}, [linear, extent, range])
 }
 
 /**

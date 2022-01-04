@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnStats, Category, Bin } from '@data-wrangling-components/core'
+import { ColumnStats, Category } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
 import { Sparkbar } from '../../charts'
 import { useCellDimensions } from '../hooks'
