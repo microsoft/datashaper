@@ -65,10 +65,11 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	return (
 		<Container className="table-container">
 			<ArqueroTableHeader
-				name={name}
-				numRows={table.numRows()}
-				numCols={table.numCols()}
-				downloadURL={downloadUrl}			
+				name={name ?? ''}
+				showRowCount={true}
+				showColumnCount={true}
+				allowDownload={true}
+				table={table}
 			/>
 			<TableContainer>
 				<ArqueroDetailsList

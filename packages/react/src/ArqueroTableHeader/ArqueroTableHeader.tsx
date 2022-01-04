@@ -4,26 +4,31 @@
  */
 
 import { IconButton } from '@fluentui/react'
+import { useThematic } from '@thematic/react'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { useThematic } from '@thematic/react'
 
-export interface ArqueroTableHeaderProps{
-	name: string,
-	numRows: number,
-	numCols: number,
-	downloadURL: () => {}
+export interface ArqueroTableHeaderProps {
+	name: string
+	showRowCount: boolean
+	showColumnCount: boolean
+	allowDownload: boolean
+	table: ColumnTable
+	downloadName?: string
 }
 
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader(props) {
 		const {
 			name,
-			numRows,
-			numCols,
-			downloadURL
+			showRowCount,
+			showColumnCount,
+			allowDownload,
+			table,
+			downloadName,
 		} = props
-		
+
 		const theme = useThematic()
 
 		const buttonStyles = useMemo(
@@ -35,18 +40,25 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 			[theme],
 		)
 
+		const downloadUrl = useMemo(() => {
+			const blob = new Blob([table.toCSV()])
+			return URL.createObjectURL(blob)
+		}, [table])
+
 		return (
-            <Header>
+			<Header>
 				<H2>{name}</H2>
-				<H3>{numRows} rows</H3>
-				<H3>{numCols} cols</H3>
-				<IconButton
-					iconProps={{ iconName: 'Download' }}
-					styles={buttonStyles}
-					href={downloadURL}
-					download={name}
-					type={'text/csv'}
-				/>
+				{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
+				{showColumnCount === true ? <H3>{table.numCols()} cols</H3> : null}
+				{allowDownload === true ? (
+					<IconButton
+						iconProps={{ iconName: 'Download' }}
+						styles={buttonStyles}
+						href={downloadUrl}
+						download={name}
+						type={'text/csv'}
+					/>
+				) : null}
 			</Header>
 		)
 	},
