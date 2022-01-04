@@ -120,6 +120,25 @@ describe('table utilities', () => {
 			// ensure the bins are sorted ascending numerically
 			expect(bins[0].min).toBe(1)
 		})
+
+		test('categories', () => {
+			const categorical: ColumnTable = table({
+				/* eslint-disable no-sparse-arrays */
+				values: ['one', 'two', 'one', 'one', 'three', , 'four'],
+			})
+			const { values } = stats(categorical)
+			expect(values.count).toBe(7)
+			expect(values.distinct).toBe(5)
+			const { categories = [] } = values
+			// logically the categories should match the unique values
+			expect(categories).toHaveLength(values.distinct)
+			// empties will be sorted first
+			expect(categories[0].name).toBe('(empty)')
+			expect(categories[0].count).toBe(1)
+			// the rest alpha
+			expect(categories[1].name).toBe('four')
+			expect(categories[1].count).toBe(1)
+		})
 	})
 
 	describe('types', () => {

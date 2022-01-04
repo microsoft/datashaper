@@ -156,6 +156,10 @@ function binning(
 				min: d[cur],
 				count: d.count,
 			}))
+		// numeric sort puts null at the front - format to match categories style if present
+		if (bins[0].min === null) {
+			bins[0].min = '(empty)'
+		}
 		acc[`${cur}.bins`] = bins
 		return acc
 	}, {} as Record<string, Bin[]>)
@@ -180,9 +184,12 @@ function categories(
 	})
 	return text.reduce((acc, cur) => {
 		const counted = table
+			// insert empty text for strings upfront, otherwise localeCompare will fail
+			.impute({ [cur]: () => '(empty)' })
 			.groupby(cur)
 			.count()
 			.objects()
+			.sort((a, b) => a[cur].localeCompare(b[cur]))
 			.map(d => ({ name: d[cur], count: d.count }))
 		acc[cur] = counted
 		return acc
