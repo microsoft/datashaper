@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SortDirection, TableMetadata } from '@data-wrangling-components/core'
+import {
+	DataType,
+	SortDirection,
+	TableMetadata,
+} from '@data-wrangling-components/core'
 import { IColumn } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
@@ -110,10 +114,10 @@ export function useColumns(
 			const { iconName, ...defaults } = column
 
 			const meta = metadata.columns[name]
-			const color = meta.type === 'number' ? colorScale() : undefined
+			const color = meta.type === DataType.Number ? colorScale() : undefined
 			const onRender =
-				features.arrayAsDropdown && meta.type === 'array'
-					? createRenderDropdownCell(meta, handleCellDropdownSelect)
+				features.arrayAsDropdown && meta.type === DataType.Array
+					? createRenderDropdownCell(handleCellDropdownSelect)
 					: features.autoRender || features.smartCells
 					? createRenderSmartCell(meta, color, handleCellClick)
 					: createRenderDefaultCell(meta, handleCellClick)

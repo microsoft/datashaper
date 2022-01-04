@@ -46,7 +46,6 @@ export const createRenderSmartCell = (
 	}
 
 export const createRenderDropdownCell = (
-	metadata: ColumnMetadata,
 	onCellDropdownSelect?: DropdownOptionSelect,
 ): ColumnRenderFunction =>
 	function renderDropdownCell(item?: any, index?: number, column?: IColumn) {

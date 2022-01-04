@@ -15,9 +15,9 @@ export function getDropdownValue(
 	column?: IColumn,
 ): any {
 	const itens = getValue(item, column)
-	return itens.map((value: any) => {
+	return itens.map((value: any, index: number) => {
 		return {
-			key: `${rowIndex}-${value}`,
+			key: `${index}-${value}`,
 			text: value,
 			data: { rowIndex, column },
 		}

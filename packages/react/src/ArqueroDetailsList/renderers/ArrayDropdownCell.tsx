@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Dropdown, IDropdownOption } from '@fluentui/react'
-import { isEqual, uniqWith } from 'lodash'
+import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 import { getDropdownValue, getValue } from '../util'
 import { DropdownCellProps } from './types'
@@ -15,14 +14,13 @@ import { DropdownCellProps } from './types'
 export const ArrayDropdownCell: React.FC<DropdownCellProps> = memo(
 	function ArrayDropdownCell({ item, column, onCellDropdownSelect, rowIndex }) {
 		const values = getDropdownValue(item, rowIndex, column) || []
-		const uniqueValues = uniqWith(values, isEqual) as IDropdownOption<any>[]
 		const placeholderValues = getValue(item, column) || 'Open to see the values'
 
 		return (
 			<Dropdown
 				onChange={onCellDropdownSelect}
 				placeholder={placeholderValues}
-				options={uniqueValues}
+				options={values}
 			></Dropdown>
 		)
 	},

@@ -66,7 +66,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 			evt: React.FormEvent<HTMLDivElement>,
 			option?: IDropdownOption<any> | undefined,
 		) => {
-			console.log('option', option)
+			console.log('option selected: ', option)
 			alert(`Value selected: ${option?.text}`)
 		},
 		[],
