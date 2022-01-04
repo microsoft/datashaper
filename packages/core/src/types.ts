@@ -17,10 +17,16 @@ export type ColumnStats = {
 	median?: number
 	stdev?: number
 	bins?: Bin[]
+	categories?: Category[]
 }
 
 export type Bin = {
 	min: number
+	count: number
+}
+
+export type Category = {
+	name: string
 	count: number
 }
 
