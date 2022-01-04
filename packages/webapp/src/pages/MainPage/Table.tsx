@@ -9,7 +9,6 @@ import {
 	DetailsListFeatures,
 } from '@data-wrangling-components/react'
 import { IColumn } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 import React, { memo, useCallback, useMemo, useState } from 'react'

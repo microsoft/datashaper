@@ -15,19 +15,11 @@ export interface ArqueroTableHeaderProps {
 	showColumnCount: boolean
 	allowDownload: boolean
 	table: ColumnTable
-	downloadName?: string
 }
 
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader(props) {
-		const {
-			name,
-			showRowCount,
-			showColumnCount,
-			allowDownload,
-			table,
-			downloadName,
-		} = props
+		const { name, showRowCount, showColumnCount, allowDownload, table } = props
 
 		const theme = useThematic()
 
