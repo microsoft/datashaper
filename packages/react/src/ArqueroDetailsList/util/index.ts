@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IColumn } from '@fluentui/react'
+import { IColumn, IDropdownOption } from '@fluentui/react'
 import { isArray, isEqual, isNil, isString, orderBy, uniqWith } from 'lodash'
 
 export function getValue(item: any, column?: IColumn): any {
@@ -13,7 +13,7 @@ export function getDropdownValue(
 	item: any,
 	rowIndex: number,
 	column?: IColumn,
-): any {
+): IDropdownOption[] {
 	const itens = getValue(item, column)
 	const uniqueValues = uniqWith(itens, isEqual)
 	const orderedValues = orderBy(uniqueValues)
