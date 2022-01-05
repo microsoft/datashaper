@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 export interface DescriptionRow {
 	pre?: string
-	value?: string
+	value?: any
 	post?: string
 	sub?: DescriptionRow[]
 }
