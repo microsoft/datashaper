@@ -24,6 +24,12 @@ export interface RowsOptions {
 	format?: Record<string, (d: any) => any>
 }
 
+/**
+ * Returns a table's rows as a two-dimensional array.
+ * @param table
+ * @param options
+ * @returns
+ */
 export function rows(table: ColumnTable, options?: RowsOptions): any[][] {
 	const { skipHeader = false, stringify = false, format = {} } = options || {}
 	const output = skipHeader ? [] : [table.columnNames()]
@@ -36,6 +42,6 @@ export function rows(table: ColumnTable, options?: RowsOptions): any[][] {
 			row.push(fn(value))
 		}
 		output.push(row)
-	})
+	}, true)
 	return output
 }
