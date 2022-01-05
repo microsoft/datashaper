@@ -6,6 +6,7 @@
 import { Step, StepType, Specification } from '@data-wrangling-components/core'
 import {
 	selectStepComponent,
+	selectStepDescription,
 	WithTableDropdown,
 	DetailsListFeatures,
 } from '@data-wrangling-components/react'
@@ -128,21 +129,24 @@ export const MainPage: React.FC = memo(function MainMage() {
 				</InputsSection>
 				{steps.map((step, index) => {
 					const Component = selectStepComponent(step)
+					const Description = selectStepDescription(step)
 					const output = outputs?.get(step.output)
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
 							<Section
+								className="section"
 								title={`Step ${index + 1}`}
 								subtitle={step.verb}
 								type={step.type}
 							>
-								<StepsColumn>
+								<StepsColumn className="steps-column">
 									<WithTableDropdown
 										Component={Component}
 										step={step}
 										store={store}
 										onChange={s => handleStepChange(s, index)}
 									/>
+									{Description ? <Description step={step} /> : null}
 								</StepsColumn>
 								<OutputsColumn className="outputs-column">
 									{output ? (

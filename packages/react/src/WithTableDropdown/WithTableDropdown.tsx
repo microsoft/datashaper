@@ -23,7 +23,7 @@ export const WithTableDropdown: React.FC<WithTableDropdownProps> = memo(
 	function WithTableDropdown({ step, store, onChange, Component, label }) {
 		const handleTableChange = useHandleDropdownChange(step, 'input', onChange)
 		return (
-			<Container>
+			<Container className="with-table-dropdown">
 				<LeftAlignedRow>
 					<TableDropdown
 						store={store}

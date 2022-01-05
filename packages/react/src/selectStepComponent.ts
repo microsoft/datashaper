@@ -58,6 +58,7 @@ const types = {
 	compound,
 	verb,
 }
+
 /**
  * Given a Step definition, returns the correct React component function.
  * @param step
