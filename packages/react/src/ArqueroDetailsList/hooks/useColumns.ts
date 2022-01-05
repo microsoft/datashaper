@@ -17,9 +17,8 @@ import {
 } from '..'
 import {
 	createRenderColumnHeader,
-	createRenderDefaultCell,
 	createRenderDefaultColumnHeader,
-	createRenderDropdownCell,
+	createRenderFeaturesCell,
 	createRenderHistogramColumnHeader,
 	createRenderSmartCell,
 	createRenderStatsColumnHeader,
@@ -115,18 +114,26 @@ export function useColumns(
 
 			const meta = metadata.columns[name]
 			const color = meta.type === DataType.Number ? colorScale() : undefined
-			const onRender =
-				features.arrayAsDropdown && meta.type === DataType.Array
-					? createRenderDropdownCell(handleCellDropdownSelect)
-					: features.autoRender || features.smartCells
-					? createRenderSmartCell(meta, color, handleCellClick)
-					: createRenderDefaultCell(meta, handleCellClick)
+			const onRender = features.smartCells
+				? createRenderSmartCell(
+						meta,
+						color,
+						handleCellClick,
+						handleCellDropdownSelect,
+				  )
+				: createRenderFeaturesCell(
+						features,
+						meta,
+						color,
+						handleCellClick,
+						handleCellDropdownSelect,
+				  )
 
 			const headerRenderers = [createRenderDefaultColumnHeader(column)]
-			if (features.autoRender || features.statsColumnHeaders) {
+			if (features.smartHeaders || features.statsColumnHeaders) {
 				headerRenderers.push(createRenderStatsColumnHeader(meta))
 			}
-			if (features.autoRender || features.histogramColumnHeaders) {
+			if (features.smartHeaders || features.histogramColumnHeaders) {
 				headerRenderers.push(createRenderHistogramColumnHeader(meta, color))
 			}
 

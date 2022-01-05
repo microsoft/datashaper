@@ -26,9 +26,9 @@ export type ColumnClickFunction = (
 
 export interface DetailsListFeatures {
 	/**
-	 * Indicates to auto-select the rendering for all features.
+	 * Includes stats and histograms in the headers of columns
 	 */
-	autoRender?: boolean
+	smartHeaders?: boolean
 	/**
 	 * Include histograms in the headers of numeric columns.
 	 */
@@ -42,9 +42,33 @@ export interface DetailsListFeatures {
 	 */
 	smartCells?: boolean
 	/**
-	 * If datatype is array, shows a dropdown with the values
+	 * Without smartCells, if datatype is boolean, shows a symbol
 	 */
-	arrayAsDropdown?: boolean
+	showBooleanSymbol?: boolean
+	/**
+	 * Without smartCells, if datatype is number, shows the magnitude of the value
+	 */
+	showNumberMagnitude?: boolean
+	/**
+	 * Without smartCells, if datatype is array, shows a categorical bar
+	 */
+	showCategoricalBar?: boolean
+	/**
+	 * Without smartCells, if datatype is date, shows the date formatted
+	 */
+	showDateFormatted?: boolean
+	/**
+	 * Without smartCells, if datatype is array, shows a sparkbar
+	 */
+	showSparkbar?: boolean
+	/**
+	 * Without smartCells, if datatype is array, shows a sparkline
+	 */
+	showSparkline?: boolean
+	/**
+	 * Without smartCells, If datatype is array, shows a dropdown with the values
+	 */
+	showDropdown?: boolean
 }
 
 export interface ArqueroDetailsListProps
@@ -54,7 +78,7 @@ export interface ArqueroDetailsListProps
 	 * Indicates to introspect the data columns and provide full rich rendering automatically for everything.
 	 * TODO: we could use an enum and specify levels of richness. For example, basic formatting -> header details -> full-blown smart cells.
 	 */
-	autoRender?: boolean
+	smartHeaders?: boolean
 	features?: DetailsListFeatures
 	offset?: number
 	limit?: number

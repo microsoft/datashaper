@@ -31,7 +31,10 @@ export function getDropdownValue(
  * @param values
  * @returns
  */
-export function categories(values: any[]): Record<string, number> {
+export function categories(values: any[]): Record<string, number> | undefined {
+	if (!isArray(values)) {
+		return undefined
+	}
 	return values.reduce((acc, cur) => {
 		const existing = acc[cur] || 0
 		acc[cur] = existing + 1
