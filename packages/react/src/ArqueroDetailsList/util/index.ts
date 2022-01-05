@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IColumn } from '@fluentui/react'
-import { isArray, isNil, isString } from 'lodash'
+import { isArray, isEqual, isNil, isString, orderBy, uniqWith } from 'lodash'
 
 export function getValue(item: any, column?: IColumn): any {
 	return column?.fieldName && item[column.fieldName]
@@ -15,7 +15,9 @@ export function getDropdownValue(
 	column?: IColumn,
 ): any {
 	const itens = getValue(item, column)
-	return itens.map((value: any, index: number) => {
+	const uniqueValues = uniqWith(itens, isEqual)
+	const orderedValues = orderBy(uniqueValues)
+	return orderedValues.map((value: any, index: number) => {
 		return {
 			key: `${index}-${value}`,
 			text: value,

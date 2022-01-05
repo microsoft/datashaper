@@ -5,7 +5,7 @@
 
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
-import { getDropdownValue, getValue } from '../util'
+import { getDropdownValue } from '../util'
 import { DropdownCellProps } from './types'
 
 /**
@@ -14,7 +14,8 @@ import { DropdownCellProps } from './types'
 export const ArrayDropdownCell: React.FC<DropdownCellProps> = memo(
 	function ArrayDropdownCell({ item, column, onCellDropdownSelect, rowIndex }) {
 		const values = getDropdownValue(item, rowIndex, column) || []
-		const placeholderValues = getValue(item, column) || 'Open to see the values'
+		const placeholderValues =
+			values.slice(0, 10).map(x => x.text) || 'Open to see the values'
 
 		return (
 			<Dropdown
