@@ -12,14 +12,14 @@
 		"build": "essex build"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^18.2.1",
+		"@essex/scripts": "^19.0.2",
 		"@essex/vite-config": "^18.0.2",
-		"@types/jest": "^27.0.3",
+		"@types/jest": "^27.4.0",
 		"@types/lodash": "^4.14.178",
-		"@types/node": "^16.11.11",
+		"@types/node": "^16.11.19",
 		"arquero": "^4.8.7",
 		"typescript": "^4.5.4",
-		"vite": "^2.6.14"
+		"vite": "^2.7.10"
 	},
 	"peerDependencies": {
 		"@types/node": "*",
@@ -31,7 +31,7 @@
 		}
 	},
 	"dependencies": {
-		"core-js": "^3.12.1",
+		"core-js": "^3.20.2",
 		"lodash": "^4.17.21"
 	}
 }
