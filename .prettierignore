@@ -1,8 +1,7 @@
 .yarn/
 .yarnrc.yml
 yarn.lock
-.pnp.js
-.pnp.cjs
+.pnp.*
 node_modules/
 storybook-static/
 build/
