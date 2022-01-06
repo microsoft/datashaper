@@ -49,7 +49,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			columns,
 			onColumnHeaderClick,
 			styles,
-			isHeadersFixed,
+			isHeadersFixed = false,
 			// passthrough the remainder as props
 			...rest
 		} = props
@@ -80,6 +80,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		})
 
 		const headerStyle = useDetailsListStyles(
+			isHeadersFixed,
 			features,
 			styles as IDetailsListStyles,
 		)
@@ -134,4 +135,8 @@ const ScrollableContainer = styled.div`
 	height: inherit;
 	position: relative;
 	max-height: inherit;
+
+	span.ms-DetailsHeader-cellTitle {
+		background-color: white;
+	}
 `
