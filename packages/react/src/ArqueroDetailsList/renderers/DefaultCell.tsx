@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { DataType } from '@data-wrangling-components/core'
 import React, { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 import { isEmpty, getValue } from '../util'
@@ -50,21 +51,21 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 		<div onClick={handleColumnClick} style={cellStyle}>
 			<Switch>
 				<Case condition={isEmpty(value)}>
-					<EmptyCell textAlign={type === 'number' ? 'right' : 'left'} />
+					<EmptyCell textAlign={type === DataType.Number ? 'right' : 'left'} />
 				</Case>
-				<Case condition={type === 'boolean'}>
+				<Case condition={type === DataType.Boolean}>
 					<BooleanTextCell {...props} />
 				</Case>
-				<Case condition={type === 'string'}>
+				<Case condition={type === DataType.String}>
 					<TextCell {...props} />
 				</Case>
-				<Case condition={type === 'number'}>
+				<Case condition={type === DataType.Number}>
 					<NumberCell {...props} numberFormat={','} />
 				</Case>
-				<Case condition={type === 'date'}>
+				<Case condition={type === DataType.Date}>
 					<DateCell {...props} />
 				</Case>
-				<Case condition={type === 'array'}>
+				<Case condition={type === DataType.Array}>
 					<ArrayCell {...props} />
 				</Case>
 				<Default>

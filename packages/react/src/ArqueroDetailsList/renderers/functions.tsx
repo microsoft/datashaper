@@ -5,30 +5,17 @@
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { ColumnClickFunction, ColumnRenderFunction } from '..'
+import { DetailsListFeatures, DropdownOptionSelect } from '../types'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
+import { FeaturesCell } from './FeaturesCell'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
-import { DefaultCell, SmartCell, StatsColumnHeader } from '.'
-
-export const createRenderDefaultCell = (
-	metadata: ColumnMetadata,
-	onColumnClick?: ColumnClickFunction,
-): ColumnRenderFunction =>
-	function renderDefaultCell(item?: any, index?: number, column?: IColumn) {
-		return (
-			<DefaultCell
-				item={item}
-				index={index}
-				column={column}
-				metadata={metadata}
-				onColumnClick={onColumnClick}
-			/>
-		)
-	}
+import { SmartCell, StatsColumnHeader } from '.'
 
 export const createRenderSmartCell = (
 	metadata: ColumnMetadata,
 	color?: string,
 	onColumnClick?: ColumnClickFunction,
+	onCellDropdownSelect?: DropdownOptionSelect,
 ): ColumnRenderFunction =>
 	function renderSmartCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -39,6 +26,29 @@ export const createRenderSmartCell = (
 				metadata={metadata}
 				color={color}
 				onColumnClick={onColumnClick}
+				onCellDropdownSelect={onCellDropdownSelect}
+			/>
+		)
+	}
+
+export const createRenderFeaturesCell = (
+	features: DetailsListFeatures,
+	metadata: ColumnMetadata,
+	color?: string,
+	onColumnClick?: ColumnClickFunction,
+	onCellDropdownSelect?: DropdownOptionSelect,
+): ColumnRenderFunction =>
+	function renderDropdownCell(item?: any, index?: number, column?: IColumn) {
+		return (
+			<FeaturesCell
+				index={index || 0}
+				item={item}
+				column={column}
+				onCellDropdownSelect={onCellDropdownSelect}
+				onColumnClick={onColumnClick}
+				metadata={metadata}
+				color={color}
+				features={features}
 			/>
 		)
 	}

@@ -6,7 +6,7 @@ import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from './TableStore'
 
 export type ColumnStats = {
-	type: string
+	type: DataType
 	count: number
 	distinct: number
 	invalid: number
@@ -35,7 +35,7 @@ export type Category = {
  */
 export type ColumnMetadata = {
 	name: string
-	type: string
+	type: DataType
 	stats?: ColumnStats
 }
 
@@ -452,3 +452,14 @@ export interface SetOperationArgs {
 }
 
 export type UnrollArgs = ColumnListArgs
+
+export enum DataType {
+	Array = 'array',
+	Boolean = 'boolean',
+	Date = 'date',
+	Number = 'number',
+	String = 'string',
+	Text = 'text',
+	Object = 'object',
+	Undefined = 'undefined',
+}

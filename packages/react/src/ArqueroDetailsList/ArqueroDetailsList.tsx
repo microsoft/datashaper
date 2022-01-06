@@ -39,6 +39,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			showColumnBorders = false,
 			selectedColumn,
 			onColumnClick,
+			onCellDropdownSelect,
 			// extract props we want to set data-centric defaults for
 			selectionMode = SelectionMode.none,
 			layoutMode = DetailsListLayoutMode.fixedColumns,
@@ -67,6 +68,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			sortDirection,
 			selectedColumn,
 			onColumnClick,
+			onCellDropdownSelect,
 			includeAllColumns,
 			isColumnClickable,
 			isSortable,

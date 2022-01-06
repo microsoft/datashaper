@@ -5,7 +5,14 @@
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { isDate, isArray } from 'lodash'
-import { Bin, Category, ColumnMetadata, ColumnStats, TableMetadata } from '..'
+import {
+	Bin,
+	Category,
+	ColumnMetadata,
+	ColumnStats,
+	DataType,
+	TableMetadata,
+} from '..'
 import { fixedBinCount } from '../engine/util'
 
 // arquero uses 1000 as default, but we're sampling the table so assuming higher odds of valid values
@@ -74,7 +81,7 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 			mode,
 		}
 		const optn =
-			type === 'number'
+			type === DataType.Number
 				? {
 						min: optStats[`${cur}.min`],
 						max: optStats[`${cur}.max`],
@@ -85,7 +92,7 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 				  }
 				: {}
 		const optt =
-			type === 'text'
+			type === DataType.Text
 				? {}
 				: {
 						categories: cats[`${cur}`],
@@ -131,7 +138,7 @@ function binning(
 	const numeric = table.columnNames(name => {
 		const mode = reqStats[`${name}.mode`]
 		const type = determineType(mode)
-		return type === 'number'
+		return type === DataType.Number
 	})
 	const binArgs = numeric.reduce((acc, cur) => {
 		const min = optStats[`${cur}.min`]
@@ -180,7 +187,7 @@ function categories(
 		const mode = reqStats[`${name}.mode`]
 		const distinct = reqStats[`${name}.distinct`]
 		const type = determineType(mode)
-		return type === 'string' && distinct <= limit
+		return type === DataType.String && distinct <= limit
 	})
 	return text.reduce((acc, cur) => {
 		const counted = table
@@ -204,7 +211,7 @@ function categories(
  * @param table
  * @returns
  */
-export function types(table: ColumnTable): Record<string, string> {
+export function types(table: ColumnTable): Record<string, DataType> {
 	const sampled = table.sample(SAMPLE_MAX)
 	return sampled.columnNames().reduce((acc, cur) => {
 		const values = table.array(cur)
@@ -217,7 +224,7 @@ export function types(table: ColumnTable): Record<string, string> {
 			return false
 		})
 		return acc
-	}, {} as Record<string, string>)
+	}, {} as Record<string, DataType>)
 }
 
 /**
@@ -226,14 +233,14 @@ export function types(table: ColumnTable): Record<string, string> {
  * @param value
  * @returns
  */
-export function determineType(value: any): string {
-	let type = typeof value as string
+export function determineType(value: any): DataType {
+	const type = typeof value as string
 	if (type === 'object') {
 		if (isDate(value)) {
-			type = 'date'
+			return DataType.Date
 		} else if (isArray(value)) {
-			type = 'array'
+			return DataType.Array
 		}
 	}
-	return type
+	return type as DataType
 }
