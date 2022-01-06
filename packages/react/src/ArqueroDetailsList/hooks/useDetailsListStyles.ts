@@ -33,10 +33,10 @@ export function useDetailsListStyles(
 					headerWrapper: {
 						height:
 							DEFAULT_HEADER_HEIGHT +
-							(features?.autoRender || features?.histogramColumnHeaders
+							(features?.smartHeaders || features?.histogramColumnHeaders
 								? HISTOGRAM_HEIGHT
 								: 0) +
-							(features?.autoRender || features?.statsColumnHeaders
+							(features?.smartHeaders || features?.statsColumnHeaders
 								? STATS_HEIGHT
 								: 0),
 					},

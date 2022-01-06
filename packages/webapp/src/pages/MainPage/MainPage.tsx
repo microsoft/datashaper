@@ -47,7 +47,8 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
 	const [features, setFeatures] = useState<DetailsListFeatures>({
-		autoRender: true,
+		smartHeaders: true,
+		smartCells: true,
 	})
 	const [compact, setCompact] = useState<boolean>(true)
 

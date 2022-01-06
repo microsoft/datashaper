@@ -2,11 +2,28 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IColumn } from '@fluentui/react'
-import { isArray, isNil, isString } from 'lodash'
+import { IColumn, IDropdownOption } from '@fluentui/react'
+import { isArray, isEqual, isNil, isString, orderBy, uniqWith } from 'lodash'
 
 export function getValue(item: any, column?: IColumn): any {
 	return column?.fieldName && item[column.fieldName]
+}
+
+export function getDropdownValue(
+	item: any,
+	rowIndex: number,
+	column?: IColumn,
+): IDropdownOption[] {
+	const itens = getValue(item, column)
+	const uniqueValues = uniqWith(itens, isEqual)
+	const orderedValues = orderBy(uniqueValues)
+	return orderedValues.map((value: any, index: number) => {
+		return {
+			key: `${index}-${value}`,
+			text: value,
+			data: { rowIndex, column },
+		}
+	})
 }
 
 /**
@@ -14,7 +31,10 @@ export function getValue(item: any, column?: IColumn): any {
  * @param values
  * @returns
  */
-export function categories(values: any[]): Record<string, number> {
+export function categories(values: any[]): Record<string, number> | undefined {
+	if (!isArray(values)) {
+		return undefined
+	}
 	return values.reduce((acc, cur) => {
 		const existing = acc[cur] || 0
 		acc[cur] = existing + 1

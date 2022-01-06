@@ -1,6 +1,6 @@
 {
-	"name": "Sparkbar",
-	"description": "Aggregates daily data to weekly averages to demonstrate automatic Sparkbars.",
+	"name": "Dropdown",
+	"description": "Aggregates daily data to monthly averages to demonstrate automatic Dropdowns.",
 	"steps": [
 		{
 			"type": "verb",
@@ -8,10 +8,10 @@
 			"input": "data/stocks.csv",
 			"output": "output-table-0",
 			"args": {
-				"as": "Week Key",
+				"as": "Month Key",
 				"column1": "Symbol",
 				"operator": "+",
-				"column2": "Week"
+				"column2": "Month"
 			}
 		},
 		{
@@ -20,8 +20,8 @@
 			"input": "output-table-0",
 			"output": "output-table-1",
 			"args": {
-				"as": "Week Average",
-				"groupby": "Week Key",
+				"as": "Monthly Average",
+				"groupby": "Month Key",
 				"field": "Close",
 				"operation": "mean"
 			}
@@ -34,7 +34,7 @@
 			"args": {
 				"columns": ["Symbol"],
 				"other": "output-table-0",
-				"on": ["Week Key"]
+				"on": ["Month Key"]
 			}
 		},
 		{
@@ -45,7 +45,7 @@
 			"args": {
 				"as": "Monthly List",
 				"groupby": "Symbol",
-				"field": "Week Average",
+				"field": "Monthly Average",
 				"operation": "array_agg"
 			}
 		}

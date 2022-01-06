@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnMetadata } from '@data-wrangling-components/core'
+import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty , getValue } from '../util'
+import { isEmpty, getValue } from '../util'
 import { EmptyCell } from './EmptyCell'
 import { RichCellProps } from './types'
 import {
@@ -50,21 +50,21 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 		<div onClick={handleColumnClick} style={cellStyle}>
 			<Switch>
 				<Case condition={isEmpty(value)}>
-					<EmptyCell textAlign={type === 'number' ? 'right' : 'left'} />
+					<EmptyCell textAlign={type === DataType.Number ? 'right' : 'left'} />
 				</Case>
-				<Case condition={type === 'string'}>
+				<Case condition={type === DataType.String}>
 					<TextCell {...props} />
 				</Case>
-				<Case condition={type === 'boolean'}>
+				<Case condition={type === DataType.Boolean}>
 					<BooleanSymbolCell {...props} />
 				</Case>
-				<Case condition={type === 'number'}>
+				<Case condition={type === DataType.Number}>
 					<NumberMagnitudeCell {...props} magnitude={magnitude} />
 				</Case>
-				<Case condition={type === 'date'}>
+				<Case condition={type === DataType.Date}>
 					<DateCell {...props} />
 				</Case>
-				<Case condition={type === 'array'}>
+				<Case condition={type === DataType.Array}>
 					<SmartArrayCell {...props} />
 				</Case>
 				<Default>
@@ -76,12 +76,12 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 })
 
 function useNumberMagnitude(
-	type: string,
+	type: DataType,
 	value: any,
 	meta: ColumnMetadata,
 ): number {
 	return useMemo(() => {
-		if (type !== 'number' || isNil(value)) {
+		if (type !== DataType.Number || isNil(value)) {
 			return 0
 		}
 		const range = (meta.stats?.max || 1) - (meta.stats?.min || 0)

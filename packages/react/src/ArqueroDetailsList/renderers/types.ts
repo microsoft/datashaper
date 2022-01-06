@@ -5,7 +5,11 @@
 
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IColumn, IDetailsColumnProps, IDetailsRowProps } from '@fluentui/react'
-import { ColumnClickFunction } from '..'
+import {
+	ColumnClickFunction,
+	DetailsListFeatures,
+	DropdownOptionSelect,
+} from '..'
 
 export type Dimensions = {
 	width: number
@@ -19,6 +23,11 @@ export interface ColumnCellProps {
 	item?: any
 	index?: number
 	column?: IColumn
+}
+
+export interface DropdownCellProps extends ColumnCellProps {
+	rowIndex: number
+	onCellDropdownSelect?: DropdownOptionSelect
 }
 
 export interface ColumnCellChartProps extends ColumnCellProps {
@@ -46,6 +55,11 @@ export interface MagnitudeCellProps extends FormattedCellProps {
 export interface RichCellProps extends FormattedCellProps {
 	metadata: ColumnMetadata
 	onColumnClick?: ColumnClickFunction
+	onCellDropdownSelect?: DropdownOptionSelect
+}
+
+export interface FeatureCellProps extends RichCellProps {
+	features: DetailsListFeatures
 }
 
 export interface RichHeaderProps extends IDetailsColumnProps {

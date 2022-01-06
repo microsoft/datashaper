@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableMetadata } from '@data-wrangling-components/core'
+import { DataType, TableMetadata } from '@data-wrangling-components/core'
 import { useThematic } from '@thematic/react'
 import { useMemo } from 'react'
 
@@ -25,6 +25,6 @@ export function useIncrementingColumnColorScale(
 
 function countNumeric(meta: TableMetadata): number {
 	return Object.values(meta.columns).reduce((acc, cur) => {
-		return acc + (cur.type === 'number' ? 1 : 0)
+		return acc + (cur.type === DataType.Number ? 1 : 0)
 	}, 0)
 }
