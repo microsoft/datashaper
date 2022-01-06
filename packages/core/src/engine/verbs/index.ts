@@ -20,6 +20,7 @@ import { intersect } from './intersect'
 import { join } from './join'
 import { lookup } from './lookup'
 import { orderby } from './orderby'
+import { recode } from './recode'
 import { rename } from './rename'
 import { sample } from './sample'
 import { select } from './select'
@@ -42,6 +43,7 @@ const verbs: Record<string, StepFunction> = {
 	join,
 	lookup,
 	orderby,
+	recode,
 	rename,
 	sample,
 	select,

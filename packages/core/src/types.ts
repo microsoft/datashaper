@@ -5,6 +5,11 @@
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from './TableStore'
 
+/**
+ * A cell value in Arquero
+ */
+export type Value = any
+
 export type ColumnStats = {
 	type: DataType
 	count: number
@@ -173,6 +178,7 @@ export enum Verb {
 	Rename = 'rename',
 	Sample = 'sample',
 	Select = 'select',
+	Recode = 'recode',
 }
 
 export interface CompoundStep extends Step {
@@ -231,6 +237,10 @@ export interface OrderbyStep extends Step {
 	args: OrderbyArgs
 }
 
+export interface RecodeStep extends Step {
+	args: RecodeArgs
+}
+
 export interface RenameStep extends Step {
 	args: RenameArgs
 }
@@ -269,6 +279,7 @@ export type Args =
 	| JoinArgs
 	| LookupArgs
 	| OrderbyArgs
+	| RecodeArgs
 	| RenameArgs
 	| SampleArgs
 	| SelectArgs
@@ -361,7 +372,7 @@ export interface FillArgs extends OutputColumnArgs {
 	/**
 	 * Value to fill in the new column
 	 */
-	value: string | number | boolean
+	value: Value
 	as: string
 }
 
@@ -373,7 +384,7 @@ export interface FilterArgs {
 	/**
 	 * Comparison value for the column
 	 */
-	value: string | number | boolean
+	value: Value
 	/**
 	 * Indicates whether the filter should be directly against a value,
 	 * or against the value of another column
@@ -408,6 +419,18 @@ export interface JoinArgs {
 }
 
 export interface LookupArgs extends JoinArgs, ColumnListArgs {}
+
+export interface RecodeArgs extends OutputColumnArgs {
+	/**
+	 * Name of the column to map new values for.
+	 */
+	column: string
+	/**
+	 * Mapping of old value to new for the recoding.
+	 * Note that the key must be coercable to a string for map lookup.
+	 */
+	map: Record<Value, Value>
+}
 
 export type RenameArgs = ColumnRecordArgs
 
