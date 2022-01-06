@@ -1893,6 +1893,7 @@ __metadata:
   resolution: "@data-wrangling-components/react@workspace:packages/react"
   dependencies:
     "@data-wrangling-components/core": "workspace:packages/core"
+    "@data-wrangling-components/utilities": "workspace:packages/utilities"
     "@essex-js-toolkit/themed-components": ^1.3.2
     "@essex/scripts": ^18.2.1
     "@essex/vite-config": ^18.0.2
@@ -1916,6 +1917,7 @@ __metadata:
     office-ui-fabric-react: ^7.180.0
     react: ^17.0.2
     react-dom: ^17.0.2
+    react-dropzone: ^11.4.2
     react-if: ^4.1.1
     styled-components: ^5.3.3
     typescript: ^4.5.2
@@ -1939,12 +1941,29 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@data-wrangling-components/utilities@workspace:packages/utilities":
+  version: 0.0.0-use.local
+  resolution: "@data-wrangling-components/utilities@workspace:packages/utilities"
+  dependencies:
+    "@essex/scripts": ^18.0.0
+    "@essex/vite-config": ^17.0.2
+    "@types/node": ^14.17.6
+    "@zip.js/zip.js": ^2.3.19
+    arquero: ^4.8.7
+    typescript: ^4.3.5
+    vite: ^2.4.4
+  peerDependencies:
+    arquero: ^4.8.7
+  languageName: unknown
+  linkType: soft
+
 "@data-wrangling-components/webapp@workspace:packages/webapp":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/webapp@workspace:packages/webapp"
   dependencies:
     "@data-wrangling-components/core": "workspace:packages/core"
     "@data-wrangling-components/react": "workspace:packages/react"
+    "@data-wrangling-components/utilities": "workspace:packages/utilities"
     "@essex-js-toolkit/themed-components": ^1.3.2
     "@essex/scripts": ^18.2.1
     "@essex/vite-config": ^18.0.2
@@ -1974,7 +1993,6 @@ __metadata:
     react: ^17.0.2
     react-animate-height: ^2.0.23
     react-dom: ^17.0.2
-    react-dropzone: 11.4.2
     react-is: ^17.0.2
     react-router-dom: ^5.3.0
     recoil: ^0.5.2
@@ -2344,7 +2362,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/scripts@npm:^18.2.1":
+"@essex/scripts@npm:^18.0.0, @essex/scripts@npm:^18.2.1":
   version: 18.2.1
   resolution: "@essex/scripts@npm:18.2.1"
   dependencies:
@@ -2425,6 +2443,19 @@ __metadata:
   dependencies:
     chalk: ^4.1.2
   checksum: 5825ccf2648d6c141620f8eff38e6b128fc3d29a73e64adaf741ebb6684d6b32cdc58f59b94826f5219f6f4fdb42a1eef50523784986e270e8e0a31c34d3f17e
+  languageName: node
+  linkType: hard
+
+"@essex/vite-config@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "@essex/vite-config@npm:17.0.2"
+  dependencies:
+    "@vitejs/plugin-react-refresh": ^1.3.6
+    vite-react-jsx: ^1.1.2
+    vite-tsconfig-paths: ^3.3.13
+  peerDependencies:
+    vite: "*"
+  checksum: 04476a9da9967d3816b1806d3d19a92903e9e75a9e62c560291ea2f237e1edc414ae6a28f91f5568ca03c1c41e6c972e13de90468f3ca95cf6cf430893e2e322
   languageName: node
   linkType: hard
 
@@ -3450,6 +3481,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^14.17.6":
+  version: 14.18.5
+  resolution: "@types/node@npm:14.18.5"
+  checksum: 5ad7090e4cd1d7cd9efa4915cc8b4f69503a1d2070b1998a55fce776ae03fef6c0703d6940197af2cd31b3516b41b552d9fced92d2a0837c28b8ed8b5ca0872c
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^16.11.11":
   version: 16.11.11
   resolution: "@types/node@npm:16.11.11"
@@ -3874,6 +3912,13 @@ __metadata:
     "@rollup/pluginutils": ^4.1.1
     react-refresh: ^0.10.0
   checksum: 013f064abd1b26a483051b80b424848b687b942f01c9e00c3e9065b093d3b32381ff768df8e0c8c446524cce1a3d59df31b26bd2e9d906805f641e3bad5daebe
+  languageName: node
+  linkType: hard
+
+"@zip.js/zip.js@npm:^2.3.19":
+  version: 2.3.23
+  resolution: "@zip.js/zip.js@npm:2.3.23"
+  checksum: 07659e3aeabd50811f250eca32ff5dbfa92926e64a8980ce765fc99f9413afd7fd17a0a67cc35121156be4ddefe3a141646d67dbb9d5f2ee64723043804107dc
   languageName: node
   linkType: hard
 
@@ -6340,7 +6385,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.13.2":
+"esbuild@npm:^0.13.12, esbuild@npm:^0.13.2":
   version: 0.13.15
   resolution: "esbuild@npm:0.13.15"
   dependencies:
@@ -10803,6 +10848,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.4.5":
+  version: 8.4.5
+  resolution: "postcss@npm:8.4.5"
+  dependencies:
+    nanoid: ^3.1.30
+    picocolors: ^1.0.0
+    source-map-js: ^1.0.1
+  checksum: b78abdd89c10f7b48f4bdcd376104a19d6e9c7495ab521729bdb3df315af6c211360e9f06887ad3bc0ab0f61a04b91d68ea11462997c79cced58b9ccd66fac07
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -11030,7 +11086,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-dropzone@npm:11.4.2":
+"react-dropzone@npm:^11.4.2":
   version: 11.4.2
   resolution: "react-dropzone@npm:11.4.2"
   dependencies:
@@ -11602,6 +11658,20 @@ resolve@^2.0.0-next.3:
   bin:
     rollup: dist/bin/rollup
   checksum: 77d7980bd5e619075c7cc67ccbe63263c4e98bd4cc41d4d77d5d4b743cb954adc81d348e38049546645651e2d0e73feeafdcac4474bd8ea333bf5cb882f0bc0c
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^2.59.0":
+  version: 2.63.0
+  resolution: "rollup@npm:2.63.0"
+  dependencies:
+    fsevents: ~2.3.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: 23db16ea9d222ad5ae9620ba51d4f45c834927038c1e43d87f7dd3d240aa54422e51c2660437479af4b771e13f9529df236a3d43a3b9f4229bf241347d5f2c8f
   languageName: node
   linkType: hard
 
@@ -12862,6 +12932,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"typescript@npm:^4.3.5":
+  version: 4.5.4
+  resolution: "typescript@npm:4.5.4"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 59f3243f9cd6fe3161e6150ff6bf795fc843b4234a655dbd938a310515e0d61afd1ac942799e7415e4334255e41c2c49b7dd5d9fd38a17acd25a6779ca7e0961
+  languageName: node
+  linkType: hard
+
 "typescript@npm:^4.5.2":
   version: 4.5.2
   resolution: "typescript@npm:4.5.2"
@@ -12869,6 +12949,16 @@ resolve@^2.0.0-next.3:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 74f9ce65d532bdf5d0214b3f60cf37992180023388c87a11ee6f838a803067ef0b63c600fa501b0deb07f989257dce1e244c9635ed79feca40bbccf6e0aa1ebc
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4.3.5#~builtin<compat/typescript>":
+  version: 4.5.4
+  resolution: "typescript@patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 2e488dde7d2c4a2fa2e79cf2470600f8ce81bc0563c276b72df8ff412d74456ae532ba824650ae936ce207440c79720ddcfaa25e3cb4477572b8534fa4e34d49
   languageName: node
   linkType: hard
 
@@ -13187,7 +13277,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"vite-tsconfig-paths@npm:^3.3.17":
+"vite-tsconfig-paths@npm:^3.3.13, vite-tsconfig-paths@npm:^3.3.17":
   version: 3.3.17
   resolution: "vite-tsconfig-paths@npm:3.3.17"
   dependencies:
@@ -13198,6 +13288,35 @@ resolve@^2.0.0-next.3:
   peerDependencies:
     vite: ">2.0.0-0"
   checksum: 3526f67f787b59bff86be1ecfb1893a806fc4421b6f3b87de3230654662f2427db5e9f3083eeaeeefc0cdeab0f37ce4351d98239db0936e75ce95c17745e55e4
+  languageName: node
+  linkType: hard
+
+"vite@npm:^2.4.4":
+  version: 2.7.10
+  resolution: "vite@npm:2.7.10"
+  dependencies:
+    esbuild: ^0.13.12
+    fsevents: ~2.3.2
+    postcss: ^8.4.5
+    resolve: ^1.20.0
+    rollup: ^2.59.0
+  peerDependencies:
+    less: "*"
+    sass: "*"
+    stylus: "*"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    less:
+      optional: true
+    sass:
+      optional: true
+    stylus:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 1757108547ca34bd01a8ee3973cb04b484492c9e5690fc75f54bbcbde5965ab6e0a5b8355c336adf0a9117aa0fdae3053af3aafa9e5eb783282fffa948cfbe11
   languageName: node
   linkType: hard
 

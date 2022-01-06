@@ -2,14 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Theme } from '@thematic/core'
-import { useThematic } from '@thematic/react'
-import { memo } from 'react'
-import { useDropzone } from 'react-dropzone'
-import styled from 'styled-components'
+import { Dropzone } from '@data-wrangling-components/react'
+import {
+	FileCollection,
+	FileMimeType,
+} from '@data-wrangling-components/utilities/common'
+import { memo, useMemo } from 'react'
 
 export interface FileDropProps {
-	onDrop?: (files: File[]) => void
+	onDrop?: (collection: FileCollection) => void
 	// full text to print in drop down
 	text?: string
 	// supported file extensions
@@ -20,55 +21,40 @@ export interface FileDropProps {
 export const FileDrop: React.FC<FileDropProps> = memo(function FileDrop({
 	onDrop,
 	text,
-	extensions = ['csv'],
+	extensions = [FileMimeType.csv],
 }) {
-	const theme = useThematic()
-	const { getRootProps, getInputProps, isDragActive } = useDropzone({
-		onDrop,
-	})
+	const style = useMemo(
+		(): any => ({
+			container: {
+				height: '100%',
+				width: '100%',
+			},
+			placeholder: {
+				fontSize: '14px',
+			},
+			dragReject: {
+				fontSize: '11px',
+				width: '90%',
+			},
+		}),
+		[],
+	)
+	const exts = useMemo(() => {
+		return extensions
+			.map(x =>
+				x.toLowerCase().includes('application') ||
+				x.toLowerCase().includes('text')
+					? FileMimeType[x as keyof typeof FileMimeType]
+					: x,
+			)
+			.join(', ')
+	}, [extensions])
 	return (
-		<DropZone theme={theme} {...getRootProps()} active={isDragActive}>
-			<input {...getInputProps()} />
-			{text ? (
-				text
-			) : (
-				<Wells>
-					Drop
-					{extensions.map(ext => (
-						<Types key={`file-drop-well-${ext}`} theme={theme}>
-							{ext}
-						</Types>
-					))}
-					files here
-				</Wells>
-			)}
-		</DropZone>
+		<Dropzone
+			placeholder={text || `Drop ${exts} files here`}
+			onDrop={onDrop}
+			acceptedFileTypes={extensions}
+			style={style}
+		/>
 	)
 })
-
-const DropZone = styled.div<{ theme: Theme; active: boolean }>`
-	cursor: pointer;
-	display: flex;
-	align-content: center;
-	justify-content: center;
-	text-align: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	border: 1px dashed
-		${({ theme, active }) =>
-			active
-				? theme.application().accent().hex()
-				: theme.application().lowContrast().hex()};
-`
-
-const Wells = styled.div`
-	display: flex;
-`
-
-const Types = styled.span<{ theme: Theme }>`
-	color: ${({ theme }) => theme.application().accent().hex()};
-	font-weight: bold;
-	margin-left: 4px;
-	margin-right: 4px;
-`

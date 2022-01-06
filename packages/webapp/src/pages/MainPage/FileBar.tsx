@@ -3,6 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Specification } from '@data-wrangling-components/core'
+import {
+	FileCollection,
+	FileType,
+	FileMimeType,
+} from '@data-wrangling-components/utilities/common'
 import { internal as ArqueroTypes } from 'arquero'
 import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
@@ -24,20 +29,29 @@ export const FileBar: React.FC<FileBarProps> = memo(function FileBar({
 	const loadFiles = useLoadTableFiles()
 	const loadSpec = useLoadSpecFile()
 	const handleDropCSV = useCallback(
-		async (files: File[]) => {
+		async (fileCollection: FileCollection) => {
+			const files = fileCollection.list(FileType.csv)
 			const loaded = await loadFiles(files)
 			onLoadFiles && onLoadFiles(loaded)
 		},
 		[onLoadFiles, loadFiles],
 	)
 	const handleDropJSON = useCallback(
-		async (files: File[]) => {
+		async (fileCollection: FileCollection) => {
 			// ignore any after the first. I suppose we could auto-link the steps, but that's dangerous
+			const files = fileCollection.list(FileType.json)
 			const first = files[0]
 			const spec = await loadSpec(first)
 			onSelectSpecification && onSelectSpecification(spec)
 		},
 		[onSelectSpecification, loadSpec],
+	)
+	const handleDropZip = useCallback(
+		async (fileCollection: FileCollection) => {
+			handleDropCSV(fileCollection)
+			handleDropJSON(fileCollection)
+		},
+		[handleDropCSV, handleDropJSON],
 	)
 
 	return (
@@ -52,7 +66,10 @@ export const FileBar: React.FC<FileBarProps> = memo(function FileBar({
 				<FileDrop onDrop={handleDropCSV} />
 			</Drop>
 			<Drop>
-				<FileDrop onDrop={handleDropJSON} extensions={['json']} />
+				<FileDrop onDrop={handleDropJSON} extensions={[FileMimeType.json]} />
+			</Drop>
+			<Drop>
+				<FileDrop onDrop={handleDropZip} extensions={[FileMimeType.zip]} />
 			</Drop>
 		</Container>
 	)
