@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IDetailsHeaderProps } from '@fluentui/react'
+import {
+	IDetailsHeaderProps,
+	Sticky,
+	StickyPositionType,
+} from '@fluentui/react'
 import { IRenderFunction } from '@fluentui/utilities'
 import { useCallback } from 'react'
 
@@ -24,6 +28,10 @@ export function useDetailsHeaderRenderer(): IRenderFunction<IDetailsHeaderProps>
 			},
 			...props,
 		}
-		return defaultRender(updated)
+		return (
+			<Sticky stickyPosition={StickyPositionType.Both}>
+				{defaultRender(updated)}
+			</Sticky>
+		)
 	}, [])
 }

@@ -9,8 +9,11 @@ import {
 	IColumn,
 	SelectionMode,
 	IDetailsListStyles,
+	ConstrainMode,
+	ScrollablePane,
 } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
+import styled from 'styled-components'
 import {
 	useColumns,
 	useDetailsHeaderRenderer,
@@ -84,17 +87,28 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 
 		return (
-			<DetailsList
-				items={items}
-				selectionMode={selectionMode}
-				layoutMode={layoutMode}
-				columns={displayColumns as IColumn[]}
-				onColumnHeaderClick={handleColumnHeaderClick}
-				onRenderRow={renderRow}
-				onRenderDetailsHeader={renderDetailsHeader}
-				{...rest}
-				styles={headerStyle}
-			/>
+			<ScrollableContainer>
+				<ScrollablePane scrollContainerFocus={true}>
+					<DetailsList
+						items={items}
+						selectionMode={selectionMode}
+						layoutMode={layoutMode}
+						columns={displayColumns as IColumn[]}
+						onColumnHeaderClick={handleColumnHeaderClick}
+						constrainMode={ConstrainMode.unconstrained}
+						onRenderRow={renderRow}
+						onRenderDetailsHeader={renderDetailsHeader}
+						{...rest}
+						styles={headerStyle}
+					/>
+				</ScrollablePane>
+			</ScrollableContainer>
 		)
 	},
 )
+
+const ScrollableContainer = styled.div`
+	height: inherit;
+	position: relative;
+	max-height: inherit;
+`
