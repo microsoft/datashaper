@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
 import * as zip from '@zip.js/zip.js'
 import { FileWithPath } from '../../common'
 import { getBlobFromEntry, getFileFromEntry, toZip } from '../zip'
