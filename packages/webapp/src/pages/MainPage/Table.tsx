@@ -67,7 +67,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				allowDownload={true}
 				table={table}
 			/>
-			<TableContainer>
+			<TableHeaderFixedContainer>
 				<ArqueroDetailsList
 					table={table}
 					columns={columns}
@@ -79,8 +79,9 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					isColumnClickable
 					isSortable
 					showColumnBorders
+					isHeadersFixed
 				/>
-			</TableContainer>
+			</TableHeaderFixedContainer>
 		</Container>
 	)
 })
@@ -92,7 +93,7 @@ const Container = styled.div`
 	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
-const TableContainer = styled.div`
+const TableHeaderFixedContainer = styled.div`
 	height: 50vh;
 	max-height: 280px;
 `

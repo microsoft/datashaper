@@ -117,4 +117,8 @@ export interface ArqueroDetailsListProps
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */
 	selectedColumn?: string
+	/**
+	 * Fixed headers on top when scrolling
+	 */
+	isHeadersFixed?: boolean
 }

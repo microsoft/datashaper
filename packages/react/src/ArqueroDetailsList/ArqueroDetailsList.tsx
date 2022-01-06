@@ -49,6 +49,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			columns,
 			onColumnHeaderClick,
 			styles,
+			isHeadersFixed,
 			// passthrough the remainder as props
 			...rest
 		} = props
@@ -86,24 +87,46 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const renderRow = useStripedRowsRenderer(isStriped, showColumnBorders)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 
-		return (
-			<ScrollableContainer>
-				<ScrollablePane scrollContainerFocus={true}>
-					<DetailsList
-						items={items}
-						selectionMode={selectionMode}
-						layoutMode={layoutMode}
-						columns={displayColumns as IColumn[]}
-						onColumnHeaderClick={handleColumnHeaderClick}
-						constrainMode={ConstrainMode.unconstrained}
-						onRenderRow={renderRow}
-						onRenderDetailsHeader={renderDetailsHeader}
-						{...rest}
-						styles={headerStyle}
-					/>
-				</ScrollablePane>
-			</ScrollableContainer>
-		)
+		const detailsList = useMemo(() => {
+			return (
+				<DetailsList
+					items={items}
+					selectionMode={selectionMode}
+					layoutMode={layoutMode}
+					columns={displayColumns as IColumn[]}
+					onColumnHeaderClick={handleColumnHeaderClick}
+					constrainMode={ConstrainMode.unconstrained}
+					onRenderRow={renderRow}
+					onRenderDetailsHeader={renderDetailsHeader}
+					{...rest}
+					styles={headerStyle}
+				/>
+			)
+		}, [
+			displayColumns,
+			handleColumnHeaderClick,
+			headerStyle,
+			items,
+			layoutMode,
+			renderDetailsHeader,
+			renderRow,
+			rest,
+			selectionMode,
+		])
+
+		const listWrapper = useMemo(() => {
+			return isHeadersFixed ? (
+				<ScrollableContainer>
+					<ScrollablePane scrollContainerFocus={true}>
+						{detailsList}
+					</ScrollablePane>
+				</ScrollableContainer>
+			) : (
+				detailsList
+			)
+		}, [isHeadersFixed, detailsList])
+
+		return listWrapper
 	},
 )
 
