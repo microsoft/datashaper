@@ -22,6 +22,7 @@ const STATS_HEIGHT = 56
  * @returns
  */
 export function useDetailsListStyles(
+	isHeadersFixed: boolean,
 	features?: DetailsListFeatures,
 	styles?: IDetailsListStyles,
 ): IDetailsListStyles {
@@ -39,10 +40,13 @@ export function useDetailsListStyles(
 							(features?.smartHeaders || features?.statsColumnHeaders
 								? STATS_HEIGHT
 								: 0),
+						position: isHeadersFixed ? 'sticky' : 'inherit',
+						zIndex: '2',
+						top: '0',
 					},
 				},
 				styles,
 			),
-		[styles, features],
+		[styles, features, isHeadersFixed],
 	)
 }
