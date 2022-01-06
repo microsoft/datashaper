@@ -3,3 +3,4 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './Lookup'
+export * from './LookupDescription'

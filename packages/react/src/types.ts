@@ -4,8 +4,11 @@
  */
 import { TableStore, Step } from '@data-wrangling-components/core'
 
-export interface StepComponentProps {
+export interface StepDependent {
 	step: Step
+}
+
+export interface StepComponentProps extends StepDependent {
 	store: TableStore
 	/**
 	 * Optional override of step input - there are many scenarios
@@ -14,4 +17,9 @@ export interface StepComponentProps {
 	 */
 	input?: string
 	onChange?: (step: Step) => void
+}
+
+export interface StepDescriptionProps extends StepDependent {
+	showInput?: boolean
+	showOutput?: boolean
 }

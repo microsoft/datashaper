@@ -196,7 +196,7 @@ function categories(
 			.groupby(cur)
 			.count()
 			.objects()
-			.sort((a, b) => a[cur].localeCompare(b[cur]))
+			.sort((a, b) => `${a[cur]}`.localeCompare(`${b[cur]}`))
 			.map(d => ({ name: d[cur], count: d.count }))
 		acc[cur] = counted
 		return acc

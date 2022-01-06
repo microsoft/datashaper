@@ -59,8 +59,9 @@ export function useTableOptions(store: TableStore): IDropdownOption[] {
  */
 export function useTableColumnOptions(
 	table: ColumnTable | undefined,
+	filter?: (name: string) => boolean,
 ): IDropdownOption[] {
-	return useSimpleOptions(table?.columnNames() || [])
+	return useSimpleOptions(table?.columnNames(filter) || [])
 }
 
 /**

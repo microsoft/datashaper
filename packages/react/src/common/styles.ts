@@ -14,6 +14,12 @@ export const CenteredColumn = styled.div`
 	align-items: center;
 `
 
+export const VerbContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+`
+
 export const LeftAlignedColumn = styled.div`
 	display: flex;
 	flex-direction: column;
