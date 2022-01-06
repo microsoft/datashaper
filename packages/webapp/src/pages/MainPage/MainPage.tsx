@@ -146,7 +146,9 @@ export const MainPage: React.FC = memo(function MainMage() {
 										onChange={s => handleStepChange(s, index)}
 									/>
 									{Description ? (
-										<Description step={step} showInput showOutput />
+										<DescriptionContainer>
+											<Description step={step} showInput showOutput />
+										</DescriptionContainer>
 									) : null}
 								</StepsColumn>
 								<OutputsColumn className="outputs-column">
@@ -252,4 +254,8 @@ const OutputsColumn = styled.div`
 	margin-left: 40px;
 	display: flex;
 	flex-direction: column;
+`
+
+const DescriptionContainer = styled.div`
+	margin-top: 8px;
 `

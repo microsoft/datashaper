@@ -3,18 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SelectStep } from '@data-wrangling-components/core'
-import { Checkbox, TextField } from '@fluentui/react'
+import { Dropdown, IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
+import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 
 /**
  * Provides inputs for a Select.
- * TODO: much like rename, this displays all columns, with a checkbox to include/exclude from the new table.
- * This could potentially be much more compact.
  */
 export const Select: React.FC<StepComponentProps> = memo(function Select({
 	step,
@@ -45,17 +44,19 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 	}, [step, table])
 
 	const handleColumnChange = useCallback(
-		(name, checked?) => {
+		(event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
 			const { columns = {} } = internal.args
 			// the format here is to construct an object where each
 			// value has a key of the name, and a value of the name
 			// the arquero select operation will only pull those with an entry
-			// so deleting is like delselecting.
+			// so deleting is like deselecting.
 			// note that we could allow rename at the same time, but are not in this current UX
-			if (checked) {
-				columns[name] = name
-			} else {
-				delete columns[name]
+			if (option) {
+				if (option.selected) {
+					columns[option.key] = option.key as string
+				} else {
+					delete columns[option.key]
+				}
 			}
 			onChange &&
 				onChange({
@@ -69,45 +70,42 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 		[internal, onChange],
 	)
 
-	const columnPairs = useColumnPairs(table, internal, handleColumnChange)
-
-	return <Container>{columnPairs}</Container>
-})
-
-function useColumnPairs(
-	table: ColumnTable | undefined,
-	internal: SelectStep,
-	onChange: (oldName: string, selected?: boolean) => void,
-) {
-	return useMemo(() => {
+	const options = useMemo(() => {
 		const columns = table?.columnNames() || []
 		return columns.map(column => {
-			const handleChange = (
-				e: React.FormEvent<HTMLElement | HTMLInputElement> | undefined,
-				checked: boolean | undefined,
-			) => {
-				onChange(column, checked)
+			const selected = internal.args?.columns && !!internal.args.columns[column]
+			return {
+				key: column,
+				text: column,
+				selected,
 			}
-			const existing = internal.args?.columns && !!internal.args.columns[column]
-			return (
-				<ColumnPair key={`column-rename-${column}`}>
-					<Checkbox checked={existing} onChange={handleChange} />
-					<TextField readOnly value={column} />
-				</ColumnPair>
-			)
 		})
-	}, [table, internal, onChange])
-}
+	}, [table, internal])
+
+	const selectedKeys = useMemo(
+		() => options.filter(o => o.selected).map(o => o.key),
+		[options],
+	)
+
+	return (
+		<Container>
+			{table ? (
+				<Dropdown
+					label={'Columns'}
+					styles={columnDropdownStyles}
+					multiSelect
+					options={options}
+					selectedKeys={selectedKeys}
+					onChange={handleColumnChange}
+				/>
+			) : null}
+		</Container>
+	)
+})
 
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 12px;
-`
-
-const ColumnPair = styled.div`
-	display: flex;
-	align-content: flex-start;
-	align-items: center;
 `
