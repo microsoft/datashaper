@@ -1758,6 +1758,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["arquero", "npm:4.8.7"],
             ["core-js", "npm:3.20.2"],
             ["lodash", "npm:4.17.21"],
+            ["regenerator-runtime", "npm:0.13.9"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"],
             ["vite", "virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:2.7.10"]
           ],
@@ -1780,6 +1781,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["arquero", "npm:4.8.7"],
             ["core-js", "npm:3.20.2"],
             ["lodash", "npm:4.17.21"],
+            ["regenerator-runtime", "npm:0.13.9"],
             ["typescript", "patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"],
             ["vite", "virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:2.7.10"]
           ],
