@@ -9,7 +9,6 @@ var PathType
 	PathType2[(PathType2['Portable'] = 1)] = 'Portable'
 	PathType2[(PathType2['Native'] = 2)] = 'Native'
 })(PathType || (PathType = {}))
-
 const npath = Object.create(path)
 const ppath = Object.create(path.posix)
 npath.cwd = () => process.cwd()
