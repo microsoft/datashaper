@@ -79,6 +79,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					isColumnClickable
 					isSortable
 					showColumnBorders
+					isHeadersFixed
 				/>
 			</TableContainer>
 		</Container>
