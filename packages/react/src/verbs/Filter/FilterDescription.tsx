@@ -1,0 +1,31 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { FilterStep, FilterCompareType } from '@data-wrangling-components/core'
+import React, { memo, useMemo } from 'react'
+import { VerbDescription } from '../..'
+import { StepDescriptionProps } from '../../types'
+
+export const FilterDescription: React.FC<StepDescriptionProps> = memo(
+	function FilterDescription(props) {
+		const rows = useMemo(() => {
+			const internal = props.step as FilterStep
+			const { args } = internal
+			return [
+				{
+					before: 'where',
+					value: args.column,
+					after: 'row value',
+					sub: [
+						{
+							value: `${args.operator || ''} ${args.value || ''}`,
+							after: args.type === FilterCompareType.Column ? 'row value' : '',
+						},
+					],
+				},
+			]
+		}, [props])
+		return <VerbDescription {...props} rows={rows} />
+	},
+)

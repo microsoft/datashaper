@@ -7,12 +7,10 @@ import { ColumnListInputs } from '../../controls'
 import { StepComponentProps } from '../../types'
 
 /**
- * Provides inputs for a Groupby step.
+ * Provides inputs for a ColumnListOperation step.
  */
-export const Groupby: React.FC<StepComponentProps> = memo(function Groupby({
-	step,
-	store,
-	onChange,
-}) {
-	return <ColumnListInputs step={step} store={store} onChange={onChange} />
-})
+export const ColumnListOperation: React.FC<StepComponentProps> = memo(
+	function ColumnListOperation({ step, store, onChange }) {
+		return <ColumnListInputs step={step} store={store} onChange={onChange} />
+	},
+)

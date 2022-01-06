@@ -9,8 +9,11 @@ import {
 	IColumn,
 	SelectionMode,
 	IDetailsListStyles,
+	ConstrainMode,
 } from '@fluentui/react'
+import { Theme } from '@thematic/core'
 import React, { memo, useMemo } from 'react'
+import styled from 'styled-components'
 import {
 	useColumns,
 	useDetailsHeaderRenderer,
@@ -46,6 +49,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			columns,
 			onColumnHeaderClick,
 			styles,
+			isHeadersFixed = false,
 			// passthrough the remainder as props
 			...rest
 		} = props
@@ -76,6 +80,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		})
 
 		const headerStyle = useDetailsListStyles(
+			isHeadersFixed,
 			features,
 			styles as IDetailsListStyles,
 		)
@@ -84,17 +89,30 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 
 		return (
-			<DetailsList
-				items={items}
-				selectionMode={selectionMode}
-				layoutMode={layoutMode}
-				columns={displayColumns as IColumn[]}
-				onColumnHeaderClick={handleColumnHeaderClick}
-				onRenderRow={renderRow}
-				onRenderDetailsHeader={renderDetailsHeader}
-				{...rest}
-				styles={headerStyle}
-			/>
+			<DetailsWrapper>
+				<DetailsList
+					items={items}
+					selectionMode={selectionMode}
+					layoutMode={layoutMode}
+					columns={displayColumns as IColumn[]}
+					onColumnHeaderClick={handleColumnHeaderClick}
+					constrainMode={ConstrainMode.unconstrained}
+					onRenderRow={renderRow}
+					onRenderDetailsHeader={renderDetailsHeader}
+					{...rest}
+					styles={headerStyle}
+				/>
+			</DetailsWrapper>
 		)
 	},
 )
+
+const DetailsWrapper = styled.div<{ theme: Theme }>`
+	height: inherit;
+	position: relative;
+	max-height: inherit;
+
+	span.ms-DetailsHeader-cellTitle {
+		background-color: ${({ theme }) => theme.application().background().hex()};
+	}
+`
