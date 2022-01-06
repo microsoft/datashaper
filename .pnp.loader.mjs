@@ -32,9 +32,8 @@ const contains = function (pathUtils, from, to) {
 		return null
 	}
 }
-npath.toPortablePath = toPortablePath
 npath.fromPortablePath = fromPortablePath
-
+npath.toPortablePath = toPortablePath
 npath.contains = (from, to) => contains(npath, from, to)
 ppath.contains = (from, to) => contains(ppath, from, to)
 const WINDOWS_PATH_REGEXP = /^([a-zA-Z]:.*)$/
