@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../../TableStore'
 import { SetOp, SetOperationArgs, Step } from '../../types'
 
@@ -18,7 +18,7 @@ export async function set(
 	step: Step,
 	store: TableStore,
 	op: SetOp,
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	const { input, args } = step
 	const { others } = args as SetOperationArgs
 	const [inputTable, ...otherTables] = await Promise.all([

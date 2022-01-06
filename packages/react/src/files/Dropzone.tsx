@@ -108,7 +108,7 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 					t => t.includes('application') || t.includes('text'),
 				) && isDragReject ? (
 					<div style={dragReject}>
-						<p>Some files will be rejected.</p>
+						<p style={{ margin: 0 }}>Some files will be rejected.</p>
 						<small>
 							The accepted file types are: {acceptedFileTypesExt.join(', ')}
 						</small>

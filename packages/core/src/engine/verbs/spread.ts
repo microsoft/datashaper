@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { internal as ArqueroTypes } from 'arquero'
+
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
 import { SpreadArgs, Step } from '../../types'
 
@@ -15,7 +16,7 @@ import { SpreadArgs, Step } from '../../types'
 export async function spread(
 	step: Step,
 	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	const { input, args } = step
 	const { columns } = args as SpreadArgs
 	const inputTable = await store.get(input)

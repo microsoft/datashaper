@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { internal as ArqueroTypes } from 'arquero'
+
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
 import { FilterArgs, Step } from '../../types'
 import { compare } from '../util'
@@ -16,7 +17,7 @@ import { compare } from '../util'
 export async function filter(
 	step: Step,
 	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	const { input, args } = step
 	const { column, value, operator, type } = args as FilterArgs
 	const inputTable = await store.get(input)

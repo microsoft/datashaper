@@ -1,0 +1,53 @@
+{
+	"name": "Dropdown",
+	"description": "Aggregates daily data to monthly averages to demonstrate automatic Dropdowns.",
+	"steps": [
+		{
+			"type": "verb",
+			"verb": "derive",
+			"input": "data/stocks.csv",
+			"output": "output-table-0",
+			"args": {
+				"as": "Month Key",
+				"column1": "Symbol",
+				"operator": "+",
+				"column2": "Month"
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "aggregate",
+			"input": "output-table-0",
+			"output": "output-table-1",
+			"args": {
+				"as": "Monthly Average",
+				"groupby": "Month Key",
+				"field": "Close",
+				"operation": "mean"
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "lookup",
+			"input": "output-table-1",
+			"output": "output-table-2",
+			"args": {
+				"columns": ["Symbol"],
+				"other": "output-table-0",
+				"on": ["Month Key"]
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "aggregate",
+			"input": "output-table-2",
+			"output": "output-table-3",
+			"args": {
+				"as": "Monthly List",
+				"groupby": "Symbol",
+				"field": "Monthly Average",
+				"operation": "array_agg"
+			}
+		}
+	]
+}

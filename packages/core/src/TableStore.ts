@@ -2,16 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { internal as ArqueroTypes } from 'arquero'
 
-export type ResolverFunction = (
-	name: string,
-) => Promise<ArqueroTypes.ColumnTable>
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
+export type ResolverFunction = (name: string) => Promise<ColumnTable>
 
 /**
  * Function callback for table change listeners.
  */
-export type ListenerFunction = (table: ArqueroTypes.ColumnTable) => void
+export type ListenerFunction = (table: ColumnTable) => void
 
 /**
  * Function callback for general activity listener.
@@ -20,7 +19,7 @@ export type ChangeListenerFunction = () => void
 
 export interface TableContainer {
 	name: string
-	table?: ArqueroTypes.ColumnTable
+	table?: ColumnTable
 	resolver?: ResolverFunction
 }
 
@@ -41,7 +40,7 @@ export class TableStore {
 	 * Uses async resolver function if necessary to lazy-load or retrieve remote tables.
 	 * @param name
 	 */
-	async get(name: string): Promise<ArqueroTypes.ColumnTable> {
+	async get(name: string): Promise<ColumnTable> {
 		const container = this._tables.get(name)
 		if (!container) {
 			throw new Error(`No table named '${name}' found in store.`)
@@ -63,7 +62,7 @@ export class TableStore {
 	 * @param name
 	 * @param table
 	 */
-	set(name: string, table: ArqueroTypes.ColumnTable): void {
+	set(name: string, table: ColumnTable): void {
 		this._tables.set(name, {
 			name,
 			table,
@@ -101,8 +100,8 @@ export class TableStore {
 	/**
 	 * Resolves all tables and converts to a name:table Map
 	 */
-	async toMap(): Promise<Map<string, ArqueroTypes.ColumnTable>> {
-		const map = new Map<string, ArqueroTypes.ColumnTable>()
+	async toMap(): Promise<Map<string, ColumnTable>> {
+		const map = new Map<string, ColumnTable>()
 		for (const container of this._tables) {
 			const [name] = container
 			const table = await this.get(name)

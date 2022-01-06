@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FilterStep } from '@data-wrangling-components/core'
-import { internal as ArqueroTypes } from 'arquero'
+
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import {
@@ -24,7 +25,7 @@ export const FilterInputs: React.FC<StepComponentProps> = memo(
 	function FilterInputs({ step, store, onChange, input }) {
 		const internal = useMemo(() => step as FilterStep, [step])
 
-		const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+		const [table, setTable] = useState<ColumnTable | undefined>()
 		useLoadTable(input || internal.input, store, setTable)
 
 		const handleLeftColumnChange = useHandleDropdownChange(

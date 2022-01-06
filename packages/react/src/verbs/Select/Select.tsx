@@ -4,7 +4,8 @@
  */
 import { SelectStep } from '@data-wrangling-components/core'
 import { Checkbox, TextField } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
@@ -20,7 +21,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 	store,
 	onChange,
 }) {
-	const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+	const [table, setTable] = useState<ColumnTable | undefined>()
 	useLoadTable(step.input, store, setTable)
 
 	// default to selecting all columns if none are (this is what we want, right?)
@@ -74,7 +75,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 })
 
 function useColumnPairs(
-	table: ArqueroTypes.ColumnTable | undefined,
+	table: ColumnTable | undefined,
 	internal: SelectStep,
 	onChange: (oldName: string, selected?: boolean) => void,
 ) {

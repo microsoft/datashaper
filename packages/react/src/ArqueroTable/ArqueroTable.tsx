@@ -5,13 +5,13 @@
 
 import { Theme } from '@thematic/core'
 import { useThematic } from '@thematic/react'
-import type { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import { ColumnConfig, ColumnConfigMap } from './types'
 
 export interface ArqueroTableProps {
-	table: ArqueroTypes.Table
+	table: ColumnTable
 	limit?: number
 	skip?: number
 	columnConfig?: ColumnConfigMap

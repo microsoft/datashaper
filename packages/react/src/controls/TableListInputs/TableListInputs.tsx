@@ -8,7 +8,8 @@ import {
 	Step,
 } from '@data-wrangling-components/core'
 import { ActionButton, IconButton } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { TableDropdown } from '..'
@@ -23,7 +24,7 @@ export const TableListInputs: React.FC<StepComponentProps> = memo(
 	function TableListInputs({ step, store, onChange }) {
 		const internal = useMemo(() => step as SetOperationStep, [step])
 
-		const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+		const [table, setTable] = useState<ColumnTable | undefined>()
 		useLoadTable(internal.input, store, setTable)
 
 		const others = useOthers(internal, store, onChange)

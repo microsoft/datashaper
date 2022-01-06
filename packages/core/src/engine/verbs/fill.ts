@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { internal as ArqueroTypes } from 'arquero'
+
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
 import { FillArgs, Step } from '../../types'
 import { ExprFunctionMap } from './types'
@@ -20,7 +21,7 @@ import { ExprFunctionMap } from './types'
 export async function fill(
 	step: Step,
 	store: TableStore,
-): Promise<ArqueroTypes.ColumnTable> {
+): Promise<ColumnTable> {
 	const { input, args } = step
 	const { value, as } = args as FillArgs
 	const inputTable = await store.get(input)

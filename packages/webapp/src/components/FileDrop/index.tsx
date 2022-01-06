@@ -28,6 +28,7 @@ export const FileDrop: React.FC<FileDropProps> = memo(function FileDrop({
 			container: {
 				height: '100%',
 				width: '100%',
+				margin: '0',
 			},
 			placeholder: {
 				fontSize: '14px',

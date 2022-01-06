@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/react",
-	"version": "0.0.2",
+	"version": "0.4.0",
 	"main": "src/index.ts",
 	"publishConfig": {
 		"main": "dist/cjs/index.js",
@@ -12,6 +12,11 @@
 		"build": "essex build"
 	},
 	"dependencies": {
+		"core-js": "^3.12.1",
+		"d3-format": "^3.1.0",
+		"d3-scale": "^4.0.2",
+		"d3-selection": "^3.0.0",
+		"d3-shape": "^3.0.1",
 		"lodash": "^4.17.21",
 		"react-dropzone": "^11.4.2",
 		"react-if": "^4.1.1"
@@ -26,9 +31,14 @@
 		"@fluentui/react": "^8.46.0",
 		"@fluentui/react-hooks": "^8.3.7",
 		"@fluentui/utilities": "^8.3.7",
-		"@thematic/core": "^1.2.2",
-		"@thematic/fluent": "^1.2.4",
-		"@thematic/react": "^1.2.3",
+		"@thematic/core": "^1.3.0",
+		"@thematic/d3": "^1.3.0",
+		"@thematic/fluent": "^1.3.0",
+		"@thematic/react": "^1.3.0",
+		"@types/d3-format": "^3.0.1",
+		"@types/d3-scale": "^4.0.2",
+		"@types/d3-selection": "^3.0.2",
+		"@types/d3-shape": "^3.0.2",
 		"@types/lodash": "^4.14.177",
 		"@types/node": "^16.11.11",
 		"@types/react": "^17.0.37",
@@ -43,7 +53,7 @@
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"styled-components": "^5.3.3",
-		"typescript": "^4.5.2",
+		"typescript": "^4.5.4",
 		"vite": "^2.6.14"
 	},
 	"peerDependencies": {
@@ -53,9 +63,10 @@
 		"@fluentui/react": "^8.24.0",
 		"@fluentui/react-hooks": "^8.2.4",
 		"@fluentui/utilities": "^8.2.1",
-		"@thematic/core": "^1.2.2",
-		"@thematic/fluent": "^1.2.2",
-		"@thematic/react": "^1.2.2",
+		"@thematic/core": "^1.3.0",
+		"@thematic/d3": "^1.3.0",
+		"@thematic/fluent": "^1.3.0",
+		"@thematic/react": "^1.3.0",
 		"@uifabric/icons": "^7.5.23",
 		"arquero": "^4.8.7",
 		"office-ui-fabric-react": "^7.173.1",

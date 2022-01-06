@@ -4,7 +4,8 @@
  */
 import { TableStore, Step } from '@data-wrangling-components/core'
 import { IDropdownOption } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import { set } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -57,7 +58,7 @@ export function useTableOptions(store: TableStore): IDropdownOption[] {
  * @returns
  */
 export function useTableColumnOptions(
-	table: ArqueroTypes.ColumnTable | undefined,
+	table: ColumnTable | undefined,
 ): IDropdownOption[] {
 	return useSimpleOptions(table?.columnNames() || [])
 }
@@ -133,7 +134,7 @@ export function useHandleCheckboxChange(
 export function useLoadTable(
 	name: string | undefined,
 	store: TableStore,
-	onLoad: (table: ArqueroTypes.ColumnTable) => void,
+	onLoad: (table: ColumnTable) => void,
 ): void {
 	useEffect(() => {
 		const fn = async (n: string) => {

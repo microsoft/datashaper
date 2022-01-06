@@ -4,6 +4,7 @@
  */
 export interface ColumnConfig {
 	width?: number
+	iconName?: string
 }
 
 export type ColumnConfigMap = Record<string, ColumnConfig>

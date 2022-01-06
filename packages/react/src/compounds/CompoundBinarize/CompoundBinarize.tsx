@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ActionButton, TextField } from '@fluentui/react'
-import { internal as ArqueroTypes } from 'arquero'
+import ColumnTable from 'arquero/dist/types/table/column-table'
+
 import React, { memo, useMemo, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useLoadTable } from '../../common'
@@ -19,7 +20,7 @@ export const CompoundBinarize: React.FC<StepComponentProps> = memo(
 	function CompoundBinarize({ step, store, onChange }) {
 		const internal = useMemo(() => defaults(step), [step])
 
-		const [table, setTable] = useState<ArqueroTypes.ColumnTable | undefined>()
+		const [table, setTable] = useState<ColumnTable | undefined>()
 		useLoadTable(internal.input, store, setTable)
 
 		const handleAsChange = useCallback(
