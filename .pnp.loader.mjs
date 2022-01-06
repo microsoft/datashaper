@@ -9,6 +9,7 @@ var PathType
 	PathType2[(PathType2['Portable'] = 1)] = 'Portable'
 	PathType2[(PathType2['Native'] = 2)] = 'Native'
 })(PathType || (PathType = {}))
+
 const npath = Object.create(path)
 const ppath = Object.create(path.posix)
 npath.cwd = () => process.cwd()
@@ -31,8 +32,9 @@ const contains = function (pathUtils, from, to) {
 		return null
 	}
 }
-npath.fromPortablePath = fromPortablePath
 npath.toPortablePath = toPortablePath
+npath.fromPortablePath = fromPortablePath
+
 npath.contains = (from, to) => contains(npath, from, to)
 ppath.contains = (from, to) => contains(ppath, from, to)
 const WINDOWS_PATH_REGEXP = /^([a-zA-Z]:.*)$/
