@@ -10,7 +10,6 @@ import {
 	SelectionMode,
 	IDetailsListStyles,
 	ConstrainMode,
-	ScrollablePane,
 } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
@@ -88,8 +87,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const renderRow = useStripedRowsRenderer(isStriped, showColumnBorders)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 
-		const detailsList = useMemo(() => {
-			return (
+		return (
+			<DetailsWrapper>
 				<DetailsList
 					items={items}
 					selectionMode={selectionMode}
@@ -102,36 +101,12 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					{...rest}
 					styles={headerStyle}
 				/>
-			)
-		}, [
-			displayColumns,
-			handleColumnHeaderClick,
-			headerStyle,
-			items,
-			layoutMode,
-			renderDetailsHeader,
-			renderRow,
-			rest,
-			selectionMode,
-		])
-
-		const listWrapper = useMemo(() => {
-			return isHeadersFixed ? (
-				<ScrollableContainer>
-					<ScrollablePane scrollContainerFocus={true}>
-						{detailsList}
-					</ScrollablePane>
-				</ScrollableContainer>
-			) : (
-				detailsList
-			)
-		}, [isHeadersFixed, detailsList])
-
-		return listWrapper
+			</DetailsWrapper>
+		)
 	},
 )
 
-const ScrollableContainer = styled.div`
+const DetailsWrapper = styled.div`
 	height: inherit;
 	position: relative;
 	max-height: inherit;

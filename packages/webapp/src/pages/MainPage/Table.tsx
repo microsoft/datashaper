@@ -67,7 +67,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				allowDownload={true}
 				table={table}
 			/>
-			<TableHeaderFixedContainer>
+			<TableContainer>
 				<ArqueroDetailsList
 					table={table}
 					columns={columns}
@@ -81,7 +81,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					showColumnBorders
 					isHeadersFixed
 				/>
-			</TableHeaderFixedContainer>
+			</TableContainer>
 		</Container>
 	)
 })
@@ -89,11 +89,11 @@ export const Table: React.FC<TableProps> = memo(function Table({
 const Container = styled.div`
 	width: 400px;
 	height: 300px;
-	margin: 5px 0px;
 	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
-const TableHeaderFixedContainer = styled.div`
-	height: 50vh;
-	max-height: 280px;
+const TableContainer = styled.div`
+	overflow-y: scroll;
+	overflow-x: scroll;
+	height: 264px;
 `
