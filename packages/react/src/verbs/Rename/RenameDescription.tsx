@@ -4,20 +4,20 @@
  */
 import { RenameStep } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
-import { DescriptionRow, VerbDescription } from '../..'
+import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
 
 export const RenameDescription: React.FC<StepDescriptionProps> = memo(
-	function RenameDescription({ step }) {
+	function RenameDescription(props) {
 		const rows = useMemo(() => {
-			const internal = step as RenameStep
+			const internal = props.step as RenameStep
 			const { args } = internal
 			return [
-				...Object.entries(args.columns).map(c => ({
+				...Object.entries(args.columns || {}).map(c => ({
 					value: `${c[0]} -> ${c[1]}`,
 				})),
-			] as DescriptionRow[]
-		}, [step])
-		return <VerbDescription verb={step.verb} rows={rows} />
+			]
+		}, [props])
+		return <VerbDescription {...props} rows={rows} />
 	},
 )

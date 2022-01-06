@@ -8,24 +8,25 @@ import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
 
 export const LookupDescription: React.FC<StepDescriptionProps> = memo(
-	function LookupDescription({ step }) {
+	function LookupDescription(props) {
 		const rows = useMemo(() => {
-			const internal = step as LookupStep
+			const internal = props.step as LookupStep
+			const { args } = internal
 			return [
 				{
-					pre: 'from',
-					value: internal.args.other,
+					before: 'lookup from',
+					value: args.other,
 				},
 				{
-					pre: 'on',
-					value: internal.args.on?.join(' | '),
+					before: 'on',
+					value: args.on?.join(' | '),
 				},
 				{
-					pre: 'copy',
-					value: internal.args.columns.join(', '),
+					before: 'copy columns',
+					value: args.columns.length > 0 ? args.columns.join(', ') : null,
 				},
 			]
-		}, [step])
-		return <VerbDescription verb={step.verb} rows={rows} />
+		}, [props])
+		return <VerbDescription {...props} rows={rows} />
 	},
 )

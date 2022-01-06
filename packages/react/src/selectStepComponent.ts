@@ -10,20 +10,17 @@ import {
 	Aggregate,
 	Bin,
 	Binarize,
+	ColumnListOperation,
 	Derive,
 	Fill,
 	Filter,
-	Fold,
-	Groupby,
 	Join,
 	Lookup,
 	Orderby,
 	Rename,
 	Sample,
 	Select,
-	Spread,
 	SetOperation,
-	Unroll,
 } from './verbs'
 
 const compound: Record<string, React.FC<StepComponentProps>> = {
@@ -40,8 +37,8 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	except: SetOperation,
 	fill: Fill,
 	filter: Filter,
-	fold: Fold,
-	groupby: Groupby,
+	fold: ColumnListOperation,
+	groupby: ColumnListOperation,
 	intersect: SetOperation,
 	join: Join,
 	lookup: Lookup,
@@ -49,9 +46,9 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	rename: Rename,
 	sample: Sample,
 	select: Select,
-	spread: Spread,
+	spread: ColumnListOperation,
 	union: SetOperation,
-	unroll: Unroll,
+	unroll: ColumnListOperation,
 }
 
 const types = {

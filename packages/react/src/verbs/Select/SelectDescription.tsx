@@ -4,18 +4,23 @@
  */
 import { SelectStep } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
-import { DescriptionRow, VerbDescription } from '../..'
+import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
 
 export const SelectDescription: React.FC<StepDescriptionProps> = memo(
-	function SelectDescription({ step }) {
+	function SelectDescription(props) {
 		const rows = useMemo(() => {
-			const internal = step as SelectStep
+			const internal = props.step as SelectStep
 			const { args } = internal
-			return Object.keys(args.columns).map(c => ({
-				value: c,
-			})) as DescriptionRow[]
-		}, [step])
-		return <VerbDescription verb={step.verb} rows={rows} />
+			return [
+				{
+					before: `column${
+						Object.keys(args.columns || {}).length !== 1 ? 's' : ''
+					}`,
+					value: args.columns ? Object.keys(args.columns).join(', ') : null,
+				},
+			]
+		}, [props])
+		return <VerbDescription {...props} rows={rows} />
 	},
 )

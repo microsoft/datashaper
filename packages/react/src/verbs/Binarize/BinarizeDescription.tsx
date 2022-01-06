@@ -7,32 +7,32 @@ import {
 	FilterCompareType,
 } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
-import { DescriptionRow, VerbDescription } from '../..'
+import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
 
 export const BinarizeDescription: React.FC<StepDescriptionProps> = memo(
-	function BinarizeDescription({ step }) {
+	function BinarizeDescription(props) {
 		const rows = useMemo(() => {
-			const internal = step as BinarizeStep
+			const internal = props.step as BinarizeStep
 			const { args } = internal
 			return [
 				{
-					pre: 'where',
+					before: 'into column',
+					value: args.as,
+				},
+				{
+					before: 'where',
 					value: args.column,
-					post: 'row value',
+					after: 'row value',
 					sub: [
 						{
-							value: `${args.operator} ${args.value}`,
-							post: args.type === FilterCompareType.Column ? 'row value' : '',
+							value: `${args.operator || ''} ${args.value || ''}`,
+							after: args.type === FilterCompareType.Column ? 'row value' : '',
 						},
 					],
 				},
-				{
-					pre: 'as',
-					value: args.as,
-				},
-			] as DescriptionRow[]
-		}, [step])
-		return <VerbDescription verb={step.verb} rows={rows} />
+			]
+		}, [props])
+		return <VerbDescription {...props} rows={rows} />
 	},
 )

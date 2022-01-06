@@ -134,7 +134,6 @@ export const MainPage: React.FC = memo(function MainMage() {
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
 							<Section
-								className="section"
 								title={`Step ${index + 1}`}
 								subtitle={step.verb}
 								type={step.type}
@@ -146,7 +145,9 @@ export const MainPage: React.FC = memo(function MainMage() {
 										store={store}
 										onChange={s => handleStepChange(s, index)}
 									/>
-									{Description ? <Description step={step} /> : null}
+									{Description ? (
+										<Description step={step} showInput showOutput />
+									) : null}
 								</StepsColumn>
 								<OutputsColumn className="outputs-column">
 									{output ? (

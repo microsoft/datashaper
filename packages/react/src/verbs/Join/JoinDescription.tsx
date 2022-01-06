@@ -8,20 +8,21 @@ import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
 
 export const JoinDescription: React.FC<StepDescriptionProps> = memo(
-	function JoinDescription({ step }) {
+	function JoinDescription(props) {
 		const rows = useMemo(() => {
-			const internal = step as JoinStep
+			const internal = props.step as JoinStep
+			const { args } = internal
 			return [
 				{
-					pre: 'with',
-					value: internal.args.other,
+					before: 'with',
+					value: args.other,
 				},
 				{
-					pre: 'on',
-					value: internal.args.on?.join(' | '),
+					before: 'on',
+					value: args.on?.join(' | '),
 				},
 			]
-		}, [step])
-		return <VerbDescription verb={step.verb} rows={rows} />
+		}, [props])
+		return <VerbDescription {...props} rows={rows} />
 	},
 )

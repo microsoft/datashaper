@@ -4,21 +4,22 @@
  */
 import { SampleStep } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
-import { DescriptionRow, VerbDescription } from '../..'
+import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
 
 export const SampleDescription: React.FC<StepDescriptionProps> = memo(
-	function SampleDescription({ step }) {
+	function SampleDescription(props) {
 		const rows = useMemo(() => {
-			const internal = step as SampleStep
+			const internal = props.step as SampleStep
 			const { args } = internal
 			return [
 				{
+					before: 'random',
 					value: args.size || (args.proportion || 0) * 100,
-					post: args.size ? 'rows' : '% of rows',
+					after: args.proportion ? '% of rows' : 'rows',
 				},
-			] as DescriptionRow[]
-		}, [step])
-		return <VerbDescription verb={step.verb} rows={rows} />
+			]
+		}, [props])
+		return <VerbDescription {...props} rows={rows} />
 	},
 )

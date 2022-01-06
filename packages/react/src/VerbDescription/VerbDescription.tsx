@@ -2,30 +2,46 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { Step } from '@data-wrangling-components/core'
+import { isNil } from 'lodash'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 export interface DescriptionRow {
-	pre?: string
+	/**
+	 * Text to display in normal font before the value
+	 */
+	before?: string
+	/**
+	 * The configuration value to display with emphasized font
+	 */
 	value?: any
-	post?: string
+	/**
+	 * Text to display in normal font after the value
+	 */
+	after?: string
+	/**
+	 * Recursive row children to render indented
+	 */
 	sub?: DescriptionRow[]
 }
 
 export interface VerbDescriptionProps {
-	verb: string
+	step: Step
 	rows: DescriptionRow[]
+	showInput?: boolean
+	showOutput?: boolean
 }
 export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
-	function VerbDescription({ verb, rows }) {
+	function VerbDescription({ step, rows, showInput, showOutput }) {
 		const rws = useMemo(() => {
-			function loop(rows) {
+			function loop(rows: DescriptionRow[]) {
 				return rows.map((row, index) => (
 					<Row key={`verb-description-row-${row.value}-${index}`}>
 						<KeyValue>
-							{row.pre ? <Key>{row.pre}</Key> : null}
-							{row.value ? <Value>{row.value}</Value> : <Unset />}
-							{row.post ? <Key>{row.post}</Key> : null}
+							{row.before ? <Key>{row.before}</Key> : null}
+							{isNil(row.value) ? <Unset /> : <Value>{row.value}</Value>}
+							{row.after ? <Key>{row.after}</Key> : null}
 						</KeyValue>
 						{row.sub ? loop(row.sub) : null}
 					</Row>
@@ -35,8 +51,24 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 		}, [rows])
 		return (
 			<Container>
-				<Verb>{verb}</Verb>
+				<Verb>{step.verb}</Verb>
+				{showInput ? (
+					<Row>
+						<KeyValue>
+							<Key>table</Key>
+							{!step.input ? <Unset /> : <Value>{step.input}</Value>}
+						</KeyValue>
+					</Row>
+				) : null}
 				{rws}
+				{showOutput ? (
+					<Row>
+						<KeyValue>
+							<Key>into table</Key>
+							{!step.output ? <Unset /> : <Value>{step.output}</Value>}
+						</KeyValue>
+					</Row>
+				) : null}
 			</Container>
 		)
 	},

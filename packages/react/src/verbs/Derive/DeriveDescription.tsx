@@ -4,24 +4,26 @@
  */
 import { DeriveStep } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
-import { DescriptionRow, VerbDescription } from '../..'
+import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
 
 export const DeriveDescription: React.FC<StepDescriptionProps> = memo(
-	function DeriveDescription({ step }) {
+	function DeriveDescription(props) {
 		const rows = useMemo(() => {
-			const internal = step as DeriveStep
+			const internal = props.step as DeriveStep
 			const { args } = internal
 			return [
 				{
-					value: `${args.column1} ${args.operator} ${args.column2}`,
-				},
-				{
-					pre: 'as',
+					before: 'into column',
 					value: args.as,
 				},
-			] as DescriptionRow[]
-		}, [step])
-		return <VerbDescription verb={step.verb} rows={rows} />
+				{
+					value: `${args.column1 || ''} ${args.operator || ''} ${
+						args.column2 || ''
+					}`,
+				},
+			]
+		}, [props])
+		return <VerbDescription {...props} rows={rows} />
 	},
 )

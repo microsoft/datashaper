@@ -9,20 +9,17 @@ import {
 	AggregateDescription,
 	BinDescription,
 	BinarizeDescription,
+	ColumnListOperationDescription,
 	DeriveDescription,
 	FillDescription,
 	FilterDescription,
-	FoldDescription,
-	GroupbyDescription,
 	JoinDescription,
 	LookupDescription,
 	OrderbyDescription,
 	RenameDescription,
 	SampleDescription,
 	SelectDescription,
-	SpreadDescription,
 	SetOperationDescription,
-	UnrollDescription,
 } from './verbs'
 
 const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
@@ -34,8 +31,8 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 	except: SetOperationDescription,
 	fill: FillDescription,
 	filter: FilterDescription,
-	fold: FoldDescription,
-	groupby: GroupbyDescription,
+	fold: ColumnListOperationDescription,
+	groupby: ColumnListOperationDescription,
 	intersect: SetOperationDescription,
 	join: JoinDescription,
 	lookup: LookupDescription,
@@ -43,9 +40,9 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 	rename: RenameDescription,
 	sample: SampleDescription,
 	select: SelectDescription,
-	spread: SpreadDescription,
+	spread: ColumnListOperationDescription,
 	union: SetOperationDescription,
-	unroll: UnrollDescription,
+	unroll: ColumnListOperationDescription,
 }
 
 /**

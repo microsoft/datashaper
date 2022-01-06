@@ -19,4 +19,7 @@ export interface StepComponentProps extends StepDependent {
 	onChange?: (step: Step) => void
 }
 
-export type StepDescriptionProps = StepDependent
+export interface StepDescriptionProps extends StepDependent {
+	showInput?: boolean
+	showOutput?: boolean
+}

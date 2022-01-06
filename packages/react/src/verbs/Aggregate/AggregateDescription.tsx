@@ -8,28 +8,31 @@ import { VerbDescription } from '../../'
 import { StepDescriptionProps } from '../../types'
 
 export const AggregateDescription: React.FC<StepDescriptionProps> = memo(
-	function AggregateDescription({ step }) {
+	function AggregateDescription(props) {
 		const rows = useMemo(() => {
-			const internal = step as AggregateStep
+			const internal = props.step as AggregateStep
+			const { args } = internal
 			return [
 				{
-					pre: 'grouping by',
-					value: internal.args.groupby,
+					before: 'into column',
+					value: args.as,
 				},
 				{
-					pre: 'aggregating',
-					value: internal.args.field,
+					before: 'group by',
+					value: args.groupby,
 				},
 				{
-					pre: 'with function',
-					value: internal.args.operation,
-				},
-				{
-					pre: 'as',
-					value: internal.args.as,
+					before: 'rollup column',
+					value: args.field,
+					sub: [
+						{
+							before: 'with function',
+							value: args.operation,
+						},
+					],
 				},
 			]
-		}, [step])
-		return <VerbDescription verb={step.verb} rows={rows} />
+		}, [props])
+		return <VerbDescription {...props} rows={rows} />
 	},
 )
