@@ -62,7 +62,7 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 		handleRecodeDelete,
 	)
 
-	const disabled = useDisabled(internal, table)
+	const disabled = useDisabled(internal, values)
 
 	return (
 		<Container>

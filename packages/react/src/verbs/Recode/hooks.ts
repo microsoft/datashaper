@@ -102,14 +102,9 @@ export function useHandleAddButtonClick(
 	}, [internal, values, onChange])
 }
 
-export function useDisabled(
-	internal: RecodeStep,
-	table?: ColumnTable,
-): boolean {
-	if (!table || !internal.args.column) {
+export function useDisabled(internal: RecodeStep, values: Value[]): boolean {
+	if (values.length === 0 || !internal.args.column) {
 		return true
 	}
-	return (
-		table.columnNames().length === Object.keys(internal.args.map || {}).length
-	)
+	return values.length === Object.keys(internal.args.map || {}).length
 }
