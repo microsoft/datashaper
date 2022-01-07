@@ -4,3 +4,4 @@
  */
 
 export * from './Dropzone'
+export * from './hooks'
