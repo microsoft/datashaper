@@ -5,6 +5,7 @@
 
 import { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { FileType, Json } from '../types'
 import {
 	fetchFile,
 	getFilesFromZip,
@@ -15,7 +16,6 @@ import {
 } from '../utils'
 import { BaseFile } from './BaseFile'
 import { FileWithPath } from './FileWithPath'
-import { FileType, Json } from '../types'
 
 export class FileCollection {
 	files: BaseFile[] = []
