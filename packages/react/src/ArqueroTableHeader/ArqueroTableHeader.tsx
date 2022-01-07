@@ -6,7 +6,7 @@
 import { IconButton } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 export interface ArqueroTableHeaderProps {
@@ -38,10 +38,17 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 			[theme],
 		)
 
-		const downloadUrl = useMemo(() => {
+		const handleDownloadClick = useCallback(() => {
+			// TODO: extract this to a reusable function in the utilities package
 			const blob = new Blob([table.toCSV()])
-			return URL.createObjectURL(blob)
-		}, [table])
+			const dataURI = URL.createObjectURL(blob)
+			const link = document.createElement('a')
+			link.href = dataURI
+			link.type = 'text/csv'
+			link.download = name || 'download.csv'
+			link.click()
+			document.removeChild(link)
+		}, [table, name])
 
 		return (
 			<Header>
@@ -52,9 +59,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					<IconButton
 						iconProps={{ iconName: 'Download' }}
 						styles={buttonStyles}
-						href={downloadUrl}
-						download={name}
-						type={'text/csv'}
+						onClick={handleDownloadClick}
 					/>
 				) : null}
 			</Header>

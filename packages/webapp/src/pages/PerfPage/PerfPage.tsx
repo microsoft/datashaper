@@ -44,7 +44,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 			<Pivot>
 				<PivotItem key={'table'} headerText={'table'}>
 					<Table>
-						<ArqueroTableHeader table={table} />
+						<ArqueroTableHeader table={table} allowDownload />
 						<ArqueroDetailsList
 							table={table}
 							metadata={metadata}
