@@ -52,6 +52,7 @@ const VERBS = [
 	'join',
 	'lookup',
 	'orderby',
+	'recode',
 	'rename',
 	'sample',
 	'select',

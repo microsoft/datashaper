@@ -2,12 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableStore, Step } from '@data-wrangling-components/core'
+import {
+	TableStore,
+	Step,
+	ColumnRecordArgs,
+	Value,
+} from '@data-wrangling-components/core'
 import { IDropdownOption } from '@fluentui/react'
+import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-
 import { set } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { DropdownOptionChangeFunction, StepChangeFunction } from '../types'
 
 const noop = (value: unknown) => value
 
@@ -64,6 +70,28 @@ export function useTableColumnOptions(
 	return useSimpleOptions(table?.columnNames(filter) || [])
 }
 
+export function useColumnValueOptions(
+	column: string,
+	table: ColumnTable | undefined,
+	values?: Value[],
+	filter?: (name: string) => boolean,
+): IDropdownOption[] {
+	const vals = useMemo(() => {
+		if (!table) {
+			return []
+		}
+		const list = values
+			? values
+			: table
+					.rollup({
+						[column]: op.array_agg(column),
+					})
+					.objects()[0][column]
+		return filter ? list.filter(filter) : list
+	}, [column, table, values, filter])
+	return useSimpleOptions(vals)
+}
+
 /**
  * Creates a callback handler for changing the step based on a dropdown value.
  * This only handles basic cases where the dropdown option key can be set on the
@@ -72,12 +100,8 @@ export function useTableColumnOptions(
 export function useHandleDropdownChange(
 	step: Step,
 	path: string,
-	onChange?: (update: Step) => void,
-): (
-	event: React.FormEvent<HTMLDivElement>,
-	option?: IDropdownOption,
-	index?: number,
-) => void {
+	onChange?: StepChangeFunction,
+): DropdownOptionChangeFunction {
 	return useCallback(
 		(event, option) => {
 			const update = {
@@ -93,7 +117,7 @@ export function useHandleDropdownChange(
 export function useHandleTextfieldChange(
 	step: Step,
 	path: string,
-	onChange?: (update: Step) => void,
+	onChange?: StepChangeFunction,
 	transformer = noop,
 ): (
 	event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -115,7 +139,7 @@ export function useHandleTextfieldChange(
 export function useHandleCheckboxChange(
 	step: Step,
 	path: string,
-	onChange?: (update: Step) => void,
+	onChange?: StepChangeFunction,
 ): (
 	event?: React.FormEvent<HTMLElement | HTMLInputElement>,
 	checked?: boolean,
@@ -129,6 +153,27 @@ export function useHandleCheckboxChange(
 			onChange && onChange(update)
 		},
 		[step, path, onChange],
+	)
+}
+
+export function useColumnRecordDelete(
+	step: Step,
+	onChange?: StepChangeFunction,
+): (column: string) => void {
+	return useCallback(
+		column => {
+			const args = { ...step.args } as ColumnRecordArgs
+			delete args.columns[column]
+			onChange &&
+				onChange({
+					...step,
+					args: {
+						...step.args,
+						...args,
+					},
+				})
+		},
+		[step, onChange],
 	)
 }
 
