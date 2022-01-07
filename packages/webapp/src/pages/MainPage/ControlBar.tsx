@@ -8,7 +8,7 @@ import {
 	FileCollection,
 	FileType,
 	FileMimeType,
-} from '@data-wrangling-components/utilities/common'
+} from '@data-wrangling-components/utilities'
 import { Checkbox } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useCallback } from 'react'

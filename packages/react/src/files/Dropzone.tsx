@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FileCollection } from '@data-wrangling-components/utilities/common'
+import { FileCollection } from '@data-wrangling-components/utilities'
 import { useThematic } from '@thematic/react'
 import React, { memo, useMemo } from 'react'
 import type { FileRejection, DropzoneOptions } from 'react-dropzone'
