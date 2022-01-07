@@ -23,7 +23,7 @@ export const FileDrop: React.FC<FileDropProps> = memo(function FileDrop({
 	text,
 	extensions = [FileMimeType.csv],
 }) {
-	const style = useMemo(
+	const styles = useMemo(
 		(): any => ({
 			container: {
 				height: '100%',
@@ -55,7 +55,7 @@ export const FileDrop: React.FC<FileDropProps> = memo(function FileDrop({
 			placeholder={text || `Drop ${exts} files here`}
 			onDrop={onDrop}
 			acceptedFileTypes={extensions}
-			style={style}
+			styles={styles}
 		/>
 	)
 })

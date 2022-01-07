@@ -244,7 +244,6 @@ const InputsSection = styled.div`
 
 const TableSection = styled.div`
 	max-height: 300px;
-	overflow-y: scroll;
 `
 
 const StepsColumn = styled.div`
