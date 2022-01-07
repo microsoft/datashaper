@@ -2,7 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IColumn, IDetailsListProps, IDropdownOption } from '@fluentui/react'
+import {
+	IColumn,
+	IDetailsListProps,
+	IDropdownOption,
+	IDetailsGroupDividerProps,
+	IRenderFunction,
+} from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type ColumnRenderFunction = (
@@ -113,6 +119,10 @@ export interface ArqueroDetailsListProps
 	 * Will be applied to the column header only unless isColumnClickable === true.
 	 */
 	onCellDropdownSelect?: DropdownOptionSelect
+	/**
+	 * Passthrough to the group header rendering, when using the group by verb
+	 */
+	onRenderGroupHeader?: IRenderFunction<IDetailsGroupDividerProps> | undefined
 	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */

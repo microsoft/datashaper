@@ -11,6 +11,7 @@ import categorical from './specs/categorical.json'
 import compoundBinarize from './specs/compound-binarize.json'
 import dropdown from './specs/dropdown.json'
 import everyOperation from './specs/every-operation.json'
+import groupby from './specs/groupby.json'
 import multistepBinarize from './specs/multistep-binarize.json'
 import sparkbar from './specs/sparkbar.json'
 import sparkline from './specs/sparkline.json'
@@ -29,6 +30,7 @@ const specs: Array<Specification> = [
 	sparkline as unknown as Specification,
 	categorical as unknown as Specification,
 	dropdown as unknown as Specification,
+	groupby as unknown as Specification,
 ]
 
 export const ExamplesDropdown: React.FC<ExamplesDropdownProps> = memo(
