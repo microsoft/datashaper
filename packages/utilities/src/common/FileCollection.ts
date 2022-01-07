@@ -14,9 +14,8 @@ import {
 	toZip,
 } from '../utils'
 import { BaseFile } from './BaseFile'
-import { FileType } from './FileType'
 import { FileWithPath } from './FileWithPath'
-import { Json } from './Json'
+import { FileType, Json } from '../types'
 
 export class FileCollection {
 	files: BaseFile[] = []

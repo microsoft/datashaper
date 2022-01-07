@@ -4,6 +4,7 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { Json } from '../types'
 import {
 	getDsvFileContent,
 	getJsonFileContentFromFile,
@@ -16,7 +17,6 @@ import {
 	loadTable,
 } from '../utils'
 import { FileWithPath } from './FileWithPath'
-import { Json } from './Json'
 
 export class BaseFile extends FileWithPath {
 	constructor(private file: FileWithPath) {

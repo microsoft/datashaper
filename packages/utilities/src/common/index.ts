@@ -6,5 +6,3 @@
 export * from './FileCollection'
 export * from './BaseFile'
 export * from './FileWithPath'
-export * from './FileType'
-export * from './Json'
