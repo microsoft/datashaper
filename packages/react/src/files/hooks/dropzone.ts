@@ -7,7 +7,7 @@ import {
 	FileCollection,
 	FileMimeType,
 	FileWithPath,
-} from '@data-wrangling-components/utilities/common'
+} from '@data-wrangling-components/utilities'
 import { useCallback } from 'react'
 import {
 	useDropzone,

@@ -58,6 +58,7 @@ export interface ColumnOptions {
 export function useColumns(
 	table: ColumnTable,
 	columns?: IColumn[],
+	metadata?: TableMetadata,
 	options: ColumnOptions = {},
 ): IColumn[] {
 	const {
@@ -79,12 +80,13 @@ export function useColumns(
 		onCellDropdownSelect,
 	)
 
-	const metadata: TableMetadata = useTableMetadata(
+	const computedMetadata: TableMetadata = useTableMetadata(
 		table,
+		metadata,
 		anyStatsFeatures(features),
 	)
 
-	const colorScale = useIncrementingColumnColorScale(metadata)
+	const colorScale = useIncrementingColumnColorScale(computedMetadata)
 
 	const styles = useColumnStyles(
 		isColumnClickable,
@@ -112,7 +114,7 @@ export function useColumns(
 			// without completely recreating the details header render
 			const { iconName, ...defaults } = column
 
-			const meta = metadata.columns[name]
+			const meta = computedMetadata.columns[name]
 			const color = meta.type === DataType.Number ? colorScale() : undefined
 			const onRender = features.smartCells
 				? createRenderSmartCell(
@@ -161,7 +163,7 @@ export function useColumns(
 		onColumnClick,
 		handleCellClick,
 		styles,
-		metadata,
+		computedMetadata,
 		colorScale,
 		handleCellDropdownSelect,
 	])

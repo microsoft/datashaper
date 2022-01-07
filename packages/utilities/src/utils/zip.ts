@@ -9,6 +9,7 @@ import { FileWithPath } from '../common'
 export async function getFilesFromZip(zipFile: Blob): Promise<FileWithPath[]> {
 	const reader = new zip.BlobReader(zipFile)
 	const zipReader = new zip.ZipReader(reader)
+	/* eslint-disable @essex/adjacent-await */
 	const entries = await zipReader.getEntries()
 	await zipReader.close()
 	return Promise.all(entries.map(entry => getFileFromEntry(entry)))

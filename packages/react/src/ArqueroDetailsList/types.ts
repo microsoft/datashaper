@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TableMetadata } from '@data-wrangling-components/core'
 import { IColumn, IDetailsListProps, IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -74,12 +75,13 @@ export interface DetailsListFeatures {
 export interface ArqueroDetailsListProps
 	extends Omit<IDetailsListProps, 'items'> {
 	table: ColumnTable
-	/**
-	 * Indicates to introspect the data columns and provide full rich rendering automatically for everything.
-	 * TODO: we could use an enum and specify levels of richness. For example, basic formatting -> header details -> full-blown smart cells.
-	 */
-	smartHeaders?: boolean
 	features?: DetailsListFeatures
+	/**
+	 * Optional metadata to use for column smart features.
+	 * Use this if you need to cache expensive stats computes separately
+	 * to prevent recompute on remounting.
+	 */
+	metadata?: TableMetadata
 	offset?: number
 	limit?: number
 	/**

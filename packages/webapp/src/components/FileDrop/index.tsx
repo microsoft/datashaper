@@ -6,7 +6,7 @@ import { Dropzone } from '@data-wrangling-components/react'
 import {
 	FileCollection,
 	FileMimeType,
-} from '@data-wrangling-components/utilities/common'
+} from '@data-wrangling-components/utilities'
 import { memo, useMemo } from 'react'
 
 export interface FileDropProps {
