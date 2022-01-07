@@ -5,7 +5,7 @@
 	"publishConfig": {
 		"main": "dist/cjs/index.js",
 		"module": "dist/esm/index.js",
-		"typings": "dist/typings/index.d.ts"
+		"typings": "dist/types/index.d.ts"
 	},
 	"scripts": {
 		"clean": "essex clean dist lib",

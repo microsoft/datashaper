@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { BaseFile, FileType, Json } from '../common'
+import { BaseFile } from '../common'
+import { FileType, Json } from '../types'
 
 export function extension(filename = ''): string {
 	const parts = filename.split('.')
