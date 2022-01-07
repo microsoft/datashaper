@@ -164,6 +164,23 @@
 		},
 		{
 			"type": "verb",
+			"verb": "recode",
+			"input": "data/companies.csv",
+			"output": "recode-1",
+			"args": {
+				"column": "ID",
+				"as": "Greetings",
+				"map": {
+					"1": "Hello",
+					"2": "Hola",
+					"3": "Aloha",
+					"4": "Yo",
+					"5": "G'day"
+				}
+			}
+		},
+		{
+			"type": "verb",
 			"verb": "rename",
 			"input": "data/companies.csv",
 			"output": "rename-1",
