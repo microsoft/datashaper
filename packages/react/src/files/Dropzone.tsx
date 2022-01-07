@@ -6,7 +6,7 @@ import { FileCollection } from '@data-wrangling-components/utilities'
 import { useThematic } from '@thematic/react'
 import React, { memo, useMemo } from 'react'
 import type { FileRejection, DropzoneOptions } from 'react-dropzone'
-import { useFileManagementDropzone } from './hooks'
+import { useDropzone } from './hooks'
 
 interface DropzoneProps {
 	onDrop?: (fileCollection: FileCollection) => void
@@ -23,7 +23,7 @@ interface DropzoneProps {
 	disabled?: boolean
 }
 export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
-	placeholder = `Drag 'n' drop some files here, or click to select files`,
+	placeholder,
 	styles = {
 		container: {},
 		dragReject: {},
@@ -34,6 +34,7 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 	onDrop,
 	onRejected,
 	dropzoneProps = {},
+	children,
 }) {
 	const thematic = useThematic()
 	const {
@@ -42,12 +43,15 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 		isDragActive,
 		isDragReject,
 		acceptedFileTypesExt,
-	} = useFileManagementDropzone({
+	} = useDropzone({
 		acceptedFileTypes,
 		onDropRejected: onRejected,
 		onDrop,
 		...dropzoneProps,
 	})
+	const placeholderText = useMemo((): string => {
+		return placeholder || `Drop ${acceptedFileTypesExt} files here`
+	}, [placeholder, acceptedFileTypesExt])
 	const container: React.CSSProperties = useMemo(
 		() => ({
 			border:
@@ -56,8 +60,8 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 					? thematic.application().accent().hex()
 					: thematic.application().lowContrast().hex()),
 			borderRadius: '5px',
-			width: '250px',
-			height: '250px',
+			width: '100%',
+			height: '100%',
 			margin: '1rem auto',
 			cursor: 'pointer',
 			opacity: isDragActive ? 0.5 : 1,
@@ -81,21 +85,22 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 	const dragReject: React.CSSProperties = useMemo(
 		() => ({
 			position: 'absolute',
-			width: '100%',
-			height: '100%',
+			width: '90%',
+			height: '90%',
 			backgroundColor: thematic.application().foreground().hex(),
 			color: thematic.application().background().hex(),
 			opacity: 0.5,
 			padding: '5px',
 			borderRadius: '5px',
 			textAlign: 'center',
-			fontSize: '1.3rem',
+			fontSize: '12px',
 			...styles.dragReject,
 		}),
 		[thematic, styles],
 	)
 	const placeholderStyles: React.CSSProperties = useMemo(
 		() => ({
+			fontSize: '14px',
 			...styles.placeholder,
 		}),
 		[styles],
@@ -114,7 +119,7 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 						</small>
 					</div>
 				) : (
-					<p style={placeholderStyles}>{placeholder}</p>
+					children || <p style={placeholderStyles}>{placeholderText}</p>
 				)}
 			</div>
 		</section>
