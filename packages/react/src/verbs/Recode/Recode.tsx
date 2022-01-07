@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { RenameStep } from '@data-wrangling-components/core'
+import { RecodeStep, Value } from '@data-wrangling-components/core'
 import {
 	ActionButton,
 	Icon,
@@ -13,75 +13,106 @@ import {
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { useColumnRecordDelete, useLoadTable } from '../../common'
-import { TableColumnDropdown } from '../../controls'
+import {
+	useHandleDropdownChange,
+	useHandleTextfieldChange,
+	useLoadTable,
+} from '../../common'
+import { ColumnValueDropdown, TableColumnDropdown } from '../../controls'
+import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 import {
+	useColumnValues,
 	useDisabled,
 	useHandleAddButtonClick,
-	useHandleColumnChange,
+	useHandleRecodeChange,
+	useRecodeDelete,
 } from './hooks'
 
 /**
- * Provides inputs for a RenameStep.
+ * Provides inputs for a RecodeStep.
  */
-export const Rename: React.FC<StepComponentProps> = memo(function Rename({
+export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 	step,
 	store,
 	onChange,
 }) {
-	const internal = useMemo(() => step as RenameStep, [step])
+	const internal = useMemo(() => step as RecodeStep, [step])
 
 	const [table, setTable] = useState<ColumnTable | undefined>()
 	useLoadTable(internal.input, store, setTable)
 
-	const handleColumnChange = useHandleColumnChange(internal, onChange)
-	const handleColumnDelete = useColumnRecordDelete(internal, onChange)
-	const handleButtonClick = useHandleAddButtonClick(internal, table, onChange)
+	const values = useColumnValues(internal, table)
 
-	const columnPairs = useColumnPairs(
+	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)
+	const handleColumnChange = useHandleDropdownChange(
+		internal,
+		'args.column',
+		onChange,
+	)
+	const handleRecodeChange = useHandleRecodeChange(internal, onChange)
+	const handleRecodeDelete = useRecodeDelete(internal, onChange)
+	const handleButtonClick = useHandleAddButtonClick(internal, values, onChange)
+
+	const columnPairs = useRecodePairs(
 		table,
 		internal,
-		handleColumnChange,
-		handleColumnDelete,
+		values,
+		handleRecodeChange,
+		handleRecodeDelete,
 	)
 
 	const disabled = useDisabled(internal, table)
 
 	return (
 		<Container>
+			<TextField
+				required
+				label={'New column name'}
+				placeholder={'Column name'}
+				value={internal.args.as}
+				styles={columnDropdownStyles}
+				onChange={handleAsChange}
+			/>
+			<TableColumnDropdown
+				table={table}
+				label={'Column to recode'}
+				selectedKey={internal.args.column}
+				onChange={handleColumnChange}
+			/>
 			{columnPairs}
 			<ActionButton
 				onClick={handleButtonClick}
 				iconProps={{ iconName: 'Add' }}
 				disabled={disabled}
 			>
-				Add rename
+				Add mapping
 			</ActionButton>
 		</Container>
 	)
 })
 
-function useColumnPairs(
+function useRecodePairs(
 	table: ColumnTable | undefined,
-	internal: RenameStep,
-	onChange: (previous: string, oldName: string, newName: string) => void,
+	internal: RecodeStep,
+	values: Value[],
+	onChange: (previous: string, oldname: string, newname: string) => void,
 	onDelete: (name: string) => void,
 ) {
 	return useMemo(() => {
-		const { columns } = internal.args
-		return Object.entries(columns || {}).map((column, index) => {
+		const { map } = internal.args
+		return Object.entries(map || {}).map((column, index) => {
 			const [oldname, newname] = column
-			const columnFilter = (name: string) => {
+			const valueFilter = (name: string) => {
 				if (name === oldname) {
 					return true
 				}
-				if (internal.args.columns && internal.args.columns[name]) {
+				if (internal.args.map && internal.args.map[name]) {
 					return false
 				}
 				return true
 			}
-			const handleColumnChange = (
+			const handleSourceChange = (
 				e: React.FormEvent<HTMLDivElement>,
 				opt?: IDropdownOption<any> | undefined,
 			) => onChange(oldname, (opt?.key as string) || oldname, newname)
@@ -93,13 +124,15 @@ function useColumnPairs(
 			}
 			const handleDeleteClick = () => onDelete(oldname)
 			return (
-				<ColumnPair key={`column-rename-${oldname}-${index}`}>
-					<TableColumnDropdown
+				<ColumnPair key={`column-Recode-${oldname}-${index}`}>
+					<ColumnValueDropdown
+						column={internal.args.column}
 						table={table}
-						filter={columnFilter}
+						values={values}
+						filter={valueFilter}
 						label={undefined}
 						selectedKey={oldname}
-						onChange={handleColumnChange}
+						onChange={handleSourceChange}
 						styles={{
 							root: {
 								width: 120,
@@ -117,14 +150,14 @@ function useColumnPairs(
 						styles={{ root: { width: 120 } }}
 					/>
 					<IconButton
-						title={'Remove this rename'}
+						title={'Remove this Recode'}
 						iconProps={{ iconName: 'Delete' }}
 						onClick={handleDeleteClick}
 					/>
 				</ColumnPair>
 			)
 		})
-	}, [table, internal, onChange, onDelete])
+	}, [table, internal, values, onChange, onDelete])
 }
 
 const Container = styled.div`
