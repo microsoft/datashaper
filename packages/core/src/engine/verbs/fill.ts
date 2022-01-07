@@ -26,8 +26,9 @@ export async function fill(
 	const { value, as } = args as FillArgs
 	const inputTable = await store.get(input)
 
-	const dArgs: ExprFunctionMap = {}
-	dArgs[as] = (d: any, $: any) => $.value
+	const dArgs: ExprFunctionMap = {
+		[as]: (d: any, $: any) => $.value,
+	}
 
 	return inputTable.params({ value }).derive(dArgs)
 }

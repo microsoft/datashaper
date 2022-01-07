@@ -3,6 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TableStore, Step } from '@data-wrangling-components/core'
+import { IDropdownOption } from '@fluentui/react'
+
+export type StepChangeFunction = (step: Step) => void
+
+export type DropdownOptionChangeFunction = (
+	event: React.FormEvent<HTMLDivElement>,
+	option?: IDropdownOption,
+	index?: number,
+) => void
 
 export interface StepDependent {
 	step: Step
@@ -16,7 +25,7 @@ export interface StepComponentProps extends StepDependent {
 	 * but the input to the actual step is an intermediate table.
 	 */
 	input?: string
-	onChange?: (step: Step) => void
+	onChange?: StepChangeFunction
 }
 
 export interface StepDescriptionProps extends StepDependent {
