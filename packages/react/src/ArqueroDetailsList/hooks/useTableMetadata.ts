@@ -12,7 +12,11 @@ import { useMemo } from 'react'
  */
 export function useTableMetadata(
 	table: ColumnTable,
+	existing?: TableMetadata,
 	discover = false,
 ): TableMetadata {
-	return useMemo(() => introspect(table, discover), [table, discover])
+	return useMemo(
+		() => existing || introspect(table, discover),
+		[table, existing, discover],
+	)
 }

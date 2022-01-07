@@ -10,16 +10,22 @@ import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 export interface ArqueroTableHeaderProps {
-	name: string
-	showRowCount: boolean
-	showColumnCount: boolean
-	allowDownload: boolean
+	name?: string
+	showRowCount?: boolean
+	showColumnCount?: boolean
+	allowDownload?: boolean
 	table: ColumnTable
 }
 
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader(props) {
-		const { name, showRowCount, showColumnCount, allowDownload, table } = props
+		const {
+			name,
+			showRowCount = true,
+			showColumnCount = true,
+			allowDownload = false,
+			table,
+		} = props
 
 		const theme = useThematic()
 
