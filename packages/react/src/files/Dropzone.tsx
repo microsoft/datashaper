@@ -14,7 +14,7 @@ interface DropzoneProps {
 	dropzoneProps?: Omit<DropzoneOptions, 'onDrop' | 'onDropRejected'>
 	acceptedFileTypes?: string[]
 	placeholder?: string
-	style?: {
+	styles?: {
 		container?: React.CSSProperties
 		dragReject?: React.CSSProperties
 		placeholder?: React.CSSProperties
@@ -24,7 +24,7 @@ interface DropzoneProps {
 }
 export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 	placeholder = `Drag 'n' drop some files here, or click to select files`,
-	style = {
+	styles = {
 		container: {},
 		dragReject: {},
 		placeholder: {},
@@ -62,9 +62,9 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 			cursor: 'pointer',
 			opacity: isDragActive ? 0.5 : 1,
 			fontSize: '1.5rem',
-			...style.container,
+			...styles.container,
 		}),
-		[style, thematic, isDragActive],
+		[styles, thematic, isDragActive],
 	)
 	const dragZone: React.CSSProperties = useMemo(
 		() => ({
@@ -74,9 +74,9 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			...style.dragZone,
+			...styles.dragZone,
 		}),
-		[style],
+		[styles],
 	)
 	const dragReject: React.CSSProperties = useMemo(
 		() => ({
@@ -90,15 +90,15 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 			borderRadius: '5px',
 			textAlign: 'center',
 			fontSize: '1.3rem',
-			...style.dragReject,
+			...styles.dragReject,
 		}),
-		[thematic, style],
+		[thematic, styles],
 	)
 	const placeholderStyles: React.CSSProperties = useMemo(
 		() => ({
-			...style.placeholder,
+			...styles.placeholder,
 		}),
-		[style],
+		[styles],
 	)
 	return (
 		<section style={container}>
