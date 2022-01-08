@@ -7,7 +7,7 @@ import {
 	FileCollection,
 	FileMimeType,
 } from '@data-wrangling-components/utilities'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 
 export interface FileDropProps {
 	onDrop?: (collection: FileCollection) => void
@@ -23,39 +23,11 @@ export const FileDrop: React.FC<FileDropProps> = memo(function FileDrop({
 	text,
 	extensions = [FileMimeType.csv],
 }) {
-	const styles = useMemo(
-		(): any => ({
-			container: {
-				height: '100%',
-				width: '100%',
-				margin: '0',
-			},
-			placeholder: {
-				fontSize: '14px',
-			},
-			dragReject: {
-				fontSize: '11px',
-				width: '90%',
-			},
-		}),
-		[],
-	)
-	const exts = useMemo(() => {
-		return extensions
-			.map(x =>
-				x.toLowerCase().includes('application') ||
-				x.toLowerCase().includes('text')
-					? FileMimeType[x as keyof typeof FileMimeType]
-					: x,
-			)
-			.join(', ')
-	}, [extensions])
 	return (
 		<Dropzone
-			placeholder={text || `Drop ${exts} files here`}
+			placeholder={text}
 			onDrop={onDrop}
 			acceptedFileTypes={extensions}
-			styles={styles}
 		/>
 	)
 })
