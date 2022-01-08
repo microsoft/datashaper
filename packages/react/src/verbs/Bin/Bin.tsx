@@ -4,9 +4,7 @@
  */
 import { BinStep, BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, TextField } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import { Switch, Case, If, Then } from 'react-if'
 import styled from 'styled-components'
 import {
@@ -21,11 +19,12 @@ import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 
 /**
- * Provides inputs for an aggregation step.
+ * Provides inputs for a binning step.
  */
 export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	step,
 	store,
+	table,
 	onChange,
 	input,
 }) {
@@ -41,8 +40,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 		[step],
 	)
 
-	const [table, setTable] = useState<ColumnTable | undefined>()
-	useLoadTable(input || internal.input, store, setTable)
+	const tbl = useLoadTable(input || step.input, table, store)
 
 	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)
 
@@ -100,7 +98,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 				/>
 				<TableColumnDropdown
 					required
-					table={table}
+					table={tbl}
 					label={'Column to bin'}
 					selectedKey={internal.args.field}
 					onChange={handleBinColumnChange}

@@ -41,18 +41,18 @@ export function useSimpleOptions(list: string[]): IDropdownOption[] {
  * @param store
  * @returns
  */
-export function useTableOptions(store: TableStore): IDropdownOption[] {
+export function useTableOptions(store?: TableStore): IDropdownOption[] {
 	// we won't actually get an updated store reference, so we'll track
 	// whether updates are needed using a change listener and flag
 	const [dirty, setDirty] = useState<boolean>(true)
 	const [list, setList] = useState<string[]>([])
 	useEffect(() => {
-		store.addChangeListener(() => setDirty(true))
+		store?.addChangeListener(() => setDirty(true))
 	}, [store, setDirty])
 	useEffect(() => {
 		if (dirty) {
 			setDirty(false)
-			setList(store.list())
+			setList(store?.list() || [])
 		}
 	}, [store, dirty, setDirty, setList])
 	return useSimpleOptions(list)
@@ -179,26 +179,28 @@ export function useColumnRecordDelete(
 
 export function useLoadTable(
 	name: string | undefined,
-	store: TableStore,
-	onLoad: (table: ColumnTable) => void,
-): void {
+	table?: ColumnTable,
+	store?: TableStore,
+): ColumnTable | undefined {
+	const [tbl, setTable] = useState<ColumnTable | undefined>()
 	useEffect(() => {
-		const fn = async (n: string) => {
+		const fn = async (n: string, s: TableStore) => {
 			try {
-				store.listen(n, onLoad)
-				const t = await store.get(n)
-				onLoad(t)
+				s.listen(n, setTable)
+				const t = await s.get(n)
+				setTable(t)
 			} catch (e) {
 				// swallow the error - we may try to request async before the table is registered
 				// it'll get picked up later by the listener
 				// TODO: should we only listen if it fails at first?
 			}
 		}
-		if (name) {
-			fn(name)
+		if (name && store) {
+			fn(name, store)
 		}
 		return () => {
-			name && store.unlisten(name)
+			name && store && store.unlisten(name)
 		}
-	}, [name, store, onLoad])
+	}, [name, table, store, setTable])
+	return tbl
 }

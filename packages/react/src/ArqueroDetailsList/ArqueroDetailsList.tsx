@@ -11,7 +11,6 @@ import {
 	IDetailsListStyles,
 	ConstrainMode,
 } from '@fluentui/react'
-import { Theme } from '@thematic/core'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import {
@@ -108,7 +107,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	},
 )
 
-const DetailsWrapper = styled.div<{ theme: Theme }>`
+const DetailsWrapper = styled.div`
 	height: inherit;
 	position: relative;
 	max-height: inherit;

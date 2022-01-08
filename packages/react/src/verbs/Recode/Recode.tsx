@@ -11,7 +11,7 @@ import {
 	TextField,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import {
 	useHandleDropdownChange,
@@ -35,14 +35,15 @@ import {
 export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 	step,
 	store,
+	table,
 	onChange,
+	input,
 }) {
 	const internal = useMemo(() => step as RecodeStep, [step])
 
-	const [table, setTable] = useState<ColumnTable | undefined>()
-	useLoadTable(internal.input, store, setTable)
+	const tbl = useLoadTable(input || step.input, table, store)
 
-	const values = useColumnValues(internal, table)
+	const values = useColumnValues(internal, tbl)
 
 	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)
 	const handleColumnChange = useHandleDropdownChange(
@@ -55,7 +56,7 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 	const handleButtonClick = useHandleAddButtonClick(internal, values, onChange)
 
 	const columnPairs = useRecodePairs(
-		table,
+		tbl,
 		internal,
 		values,
 		handleRecodeChange,
@@ -75,7 +76,7 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 				onChange={handleAsChange}
 			/>
 			<TableColumnDropdown
-				table={table}
+				table={tbl}
 				label={'Column to recode'}
 				selectedKey={internal.args.column}
 				onChange={handleColumnChange}

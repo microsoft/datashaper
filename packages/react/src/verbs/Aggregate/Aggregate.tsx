@@ -20,6 +20,7 @@ import { StepComponentProps } from '../../types'
 export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 	step,
 	store,
+	table,
 	onChange,
 }) {
 	const internal = useMemo(() => step as AggregateStep, [step])
@@ -38,7 +39,12 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 					onChange={handleAsChange}
 				/>
 			</LeftAlignedRow>
-			<AggregateInputs step={step} store={store} onChange={onChange} />
+			<AggregateInputs
+				step={step}
+				store={store}
+				table={table}
+				onChange={onChange}
+			/>
 		</VerbContainer>
 	)
 })

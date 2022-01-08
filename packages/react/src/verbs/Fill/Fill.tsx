@@ -15,7 +15,6 @@ import { StepComponentProps } from '../../types'
  */
 export const Fill: React.FC<StepComponentProps> = memo(function Fill({
 	step,
-	store,
 	onChange,
 }) {
 	const internal = useMemo(() => step as FillStep, [step])

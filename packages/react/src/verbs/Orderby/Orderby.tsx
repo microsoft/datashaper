@@ -12,7 +12,7 @@ import { ActionButton } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { set } from 'lodash'
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
 import { SortInstruction } from '../../controls'
@@ -24,14 +24,15 @@ import { StepComponentProps } from '../../types'
 export const Orderby: React.FC<StepComponentProps> = memo(function Orderby({
 	step,
 	store,
+	table,
 	onChange,
+	input,
 }) {
 	const internal = useMemo(() => step as OrderbyStep, [step])
 
-	const [table, setTable] = useState<ColumnTable | undefined>()
-	useLoadTable(internal.input, store, setTable)
+	const tbl = useLoadTable(input || step.input, table, store)
 
-	const sorts = useSorts(internal, table, onChange)
+	const sorts = useSorts(internal, tbl, onChange)
 
 	const handleButtonClick = useCallback(() => {
 		onChange &&
@@ -39,10 +40,10 @@ export const Orderby: React.FC<StepComponentProps> = memo(function Orderby({
 				...internal,
 				args: {
 					...internal.args,
-					orders: [...(internal.args.orders || []), newSort(table)],
+					orders: [...(internal.args.orders || []), newSort(tbl)],
 				},
 			})
-	}, [internal, table, onChange])
+	}, [internal, tbl, onChange])
 
 	return (
 		<Container>
@@ -50,7 +51,7 @@ export const Orderby: React.FC<StepComponentProps> = memo(function Orderby({
 			<ActionButton
 				onClick={handleButtonClick}
 				iconProps={{ iconName: 'Add' }}
-				disabled={!table}
+				disabled={!tbl}
 			>
 				Add sort
 			</ActionButton>
