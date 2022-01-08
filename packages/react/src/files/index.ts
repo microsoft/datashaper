@@ -5,3 +5,4 @@
 
 export * from './Dropzone'
 export * from './hooks'
+export * from './types'

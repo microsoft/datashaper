@@ -83,3 +83,14 @@ export const getDsvFileContent = async (file: BaseFile): Promise<string> => {
 	}
 	return getTextFromFile(file)
 }
+
+export async function getDataURL(file: BaseFile): Promise<string> {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader()
+		reader.readAsDataURL(file)
+		reader.onload = () => {
+			resolve(reader.result as string)
+		}
+		reader.onerror = reject
+	})
+}

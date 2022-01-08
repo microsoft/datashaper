@@ -2,17 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FileCollection } from '@data-wrangling-components/utilities'
 import { useThematic } from '@thematic/react'
 import React, { memo, useMemo } from 'react'
-import type { FileRejection, DropzoneOptions } from 'react-dropzone'
 import { useDropzone } from './hooks'
+import type { DzProps } from './types'
 
-interface DropzoneProps {
-	onDrop?: (fileCollection: FileCollection) => void
-	onRejected?: (message: string, files?: FileRejection[]) => void
-	dropzoneProps?: Omit<DropzoneOptions, 'onDrop' | 'onDropRejected'>
-	acceptedFileTypes?: string[]
+interface DropzoneProps extends DzProps {
 	placeholder?: string
 	styles?: {
 		container?: React.CSSProperties
@@ -23,6 +18,11 @@ interface DropzoneProps {
 	disabled?: boolean
 }
 export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
+	onDrop,
+	onDropRejected,
+	onDropAccepted,
+	acceptedFileTypes = [],
+	dropzoneOptions = {},
 	placeholder,
 	styles = {
 		container: {},
@@ -30,10 +30,6 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 		placeholder: {},
 		dragZone: {},
 	},
-	acceptedFileTypes = [],
-	onDrop,
-	onRejected,
-	dropzoneProps = {},
 	children,
 }) {
 	const thematic = useThematic()
@@ -45,9 +41,10 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 		acceptedFileTypesExt,
 	} = useDropzone({
 		acceptedFileTypes,
-		onDropRejected: onRejected,
+		onDropRejected,
+		onDropAccepted,
 		onDrop,
-		...dropzoneProps,
+		dropzoneOptions,
 	})
 	const placeholderText = useMemo((): string => {
 		return placeholder || `Drop ${acceptedFileTypesExt} files here`
