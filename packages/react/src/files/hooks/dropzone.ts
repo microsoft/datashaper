@@ -10,10 +10,10 @@ import {
 } from '@data-wrangling-components/utilities'
 import { useCallback } from 'react'
 import {
-	useDropzone,
+	useDropzone as UseDz,
 	FileRejection,
 	DropzoneOptions,
-	DropzoneState,
+	DropzoneState as DzState,
 } from 'react-dropzone'
 
 interface DropzoneProps {
@@ -23,13 +23,11 @@ interface DropzoneProps {
 	dropzoneOptions?: Omit<DropzoneOptions, 'onDrop' | 'onDropRejected'>
 }
 
-interface FileManagementState extends DropzoneState {
+interface DropzoneState extends DzState {
 	acceptedFileTypesExt: string[]
 }
 
-export const useFileManagementDropzone: (
-	props: DropzoneProps,
-) => FileManagementState = ({
+export const useDropzone: (props: DropzoneProps) => DropzoneState = ({
 	acceptedFileTypes,
 	onDrop,
 	onDropRejected,
@@ -45,7 +43,7 @@ export const useFileManagementDropzone: (
 		acceptedFileTypesExt,
 		onDropRejected,
 	)
-	const state = useDropzone({
+	const state = UseDz({
 		onDrop: async (files: File[]) =>
 			await handleOnDrop(files as FileWithPath[]),
 		onDropRejected: (files: FileRejection[]) => handleOnDropRejected(files),
