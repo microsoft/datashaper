@@ -15,6 +15,7 @@ import {
 	isTableFile,
 	isZipFile,
 	loadTable,
+	getDataURL,
 } from '../utils'
 import { FileWithPath } from './FileWithPath'
 
@@ -65,6 +66,10 @@ export class BaseFile extends FileWithPath {
 
 	async getTable(): Promise<ColumnTable> {
 		return loadTable(this)
+	}
+
+	async getDataURL(): Promise<string> {
+		return getDataURL(this)
 	}
 
 	metadata(): Json {
