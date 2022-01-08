@@ -8,10 +8,8 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-
 import { set } from 'lodash'
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import {
 	NumericComparisonOperatorDropdown,
 	StringComparisonOperatorDropdown,
@@ -26,11 +24,10 @@ import { ColumnOrValueComboBox } from '../ColumnOrValueComboBox'
  * This is split out from FilterInputs to allow just the comparison logic to be reused elsewhere.
  */
 export const FilterFunction: React.FC<StepComponentProps> = memo(
-	function FilterFunction({ step, store, onChange, input }) {
+	function FilterFunction({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => step as FilterStep, [step])
 
-		const [table, setTable] = useState<ColumnTable | undefined>()
-		useLoadTable(input || internal.input, store, setTable)
+		const tbl = useLoadTable(input || internal.input, table, store)
 
 		const handleOpChange = useHandleDropdownChange(
 			internal,
@@ -55,7 +52,7 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 		const operatorDropdown = useMemo(() => {
 			const column = internal.args.column
 			if (column) {
-				const first = table?.get(column, 0)
+				const first = tbl?.get(column, 0)
 				if (first) {
 					if (typeof first === 'string') {
 						return (
@@ -73,7 +70,7 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 					onChange={handleOpChange}
 				/>
 			)
-		}, [table, internal, handleOpChange])
+		}, [tbl, internal, handleOpChange])
 
 		const isEmptyCheck = useMemo(() => {
 			const { operator } = internal.args
@@ -89,7 +86,7 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 				{operatorDropdown}
 				<ColumnOrValueComboBox
 					required
-					table={table}
+					table={tbl}
 					disabled={isEmptyCheck}
 					label={'Comparison value'}
 					placeholder={'text, number, or column'}

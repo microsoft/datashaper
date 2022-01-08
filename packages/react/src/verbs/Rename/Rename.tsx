@@ -11,7 +11,7 @@ import {
 	TextField,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { useColumnRecordDelete, useLoadTable } from '../../common'
 import { TableColumnDropdown } from '../../controls'
@@ -28,25 +28,26 @@ import {
 export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 	step,
 	store,
+	table,
 	onChange,
+	input,
 }) {
 	const internal = useMemo(() => step as RenameStep, [step])
 
-	const [table, setTable] = useState<ColumnTable | undefined>()
-	useLoadTable(internal.input, store, setTable)
+	const tbl = useLoadTable(input || step.input, table, store)
 
 	const handleColumnChange = useHandleColumnChange(internal, onChange)
 	const handleColumnDelete = useColumnRecordDelete(internal, onChange)
-	const handleButtonClick = useHandleAddButtonClick(internal, table, onChange)
+	const handleButtonClick = useHandleAddButtonClick(internal, tbl, onChange)
 
 	const columnPairs = useColumnPairs(
-		table,
+		tbl,
 		internal,
 		handleColumnChange,
 		handleColumnDelete,
 	)
 
-	const disabled = useDisabled(internal, table)
+	const disabled = useDisabled(internal, tbl)
 
 	return (
 		<Container>

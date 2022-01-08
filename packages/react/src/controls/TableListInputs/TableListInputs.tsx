@@ -8,9 +8,7 @@ import {
 	Step,
 } from '@data-wrangling-components/core'
 import { ActionButton, IconButton } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { TableDropdown } from '..'
 import { LeftAlignedRow, useLoadTable } from '../../common'
@@ -21,11 +19,10 @@ import { StepComponentProps } from '../../types'
  * E.g., for set operations
  */
 export const TableListInputs: React.FC<StepComponentProps> = memo(
-	function TableListInputs({ step, store, onChange }) {
+	function TableListInputs({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => step as SetOperationStep, [step])
 
-		const [table, setTable] = useState<ColumnTable | undefined>()
-		useLoadTable(internal.input, store, setTable)
+		const tbl = useLoadTable(input || internal.input, table, store)
 
 		const others = useOthers(internal, store, onChange)
 
@@ -47,7 +44,7 @@ export const TableListInputs: React.FC<StepComponentProps> = memo(
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={{ iconName: 'Add' }}
-					disabled={!table}
+					disabled={!tbl}
 				>
 					Add table
 				</ActionButton>
@@ -58,7 +55,7 @@ export const TableListInputs: React.FC<StepComponentProps> = memo(
 
 function useOthers(
 	step: SetOperationStep,
-	store: TableStore,
+	store?: TableStore,
 	onChange?: (step: Step) => void,
 ) {
 	return useMemo(() => {
@@ -68,7 +65,9 @@ function useOthers(
 				update.args.others.splice(index, 1)
 				onChange && onChange(update)
 			}
-
+			if (!store) {
+				return null
+			}
 			return (
 				<LeftAlignedRow key={`set-op-${other}-${index}`}>
 					<TableDropdown

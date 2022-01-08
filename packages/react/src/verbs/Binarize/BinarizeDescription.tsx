@@ -18,16 +18,16 @@ export const BinarizeDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'into column',
-					value: args.as,
+					value: args?.as,
 				},
 				{
 					before: 'where',
-					value: args.column,
+					value: args?.column,
 					after: 'row value',
 					sub: [
 						{
-							value: `${args.operator || ''} ${args.value || ''}`,
-							after: args.type === FilterCompareType.Column ? 'row value' : '',
+							value: `${args?.operator || ''} ${args?.value || ''}`,
+							after: args?.type === FilterCompareType.Column ? 'row value' : '',
 						},
 					],
 				},
