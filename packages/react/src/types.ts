@@ -4,6 +4,7 @@
  */
 import { TableStore, Step } from '@data-wrangling-components/core'
 import { IDropdownOption } from '@fluentui/react'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type StepChangeFunction = (step: Step) => void
 
@@ -18,7 +19,14 @@ export interface StepDependent {
 }
 
 export interface StepComponentProps extends StepDependent {
-	store: TableStore
+	/**
+	 * TableStore to use for table lookups of step parameters.
+	 */
+	store?: TableStore
+	/**
+	 * ColumnTable to execute the step against if no store is provided.
+	 */
+	table?: ColumnTable
 	/**
 	 * Optional override of step input - there are many scenarios
 	 * (particularly compound) where the driving input table for UI visbility should be shared,

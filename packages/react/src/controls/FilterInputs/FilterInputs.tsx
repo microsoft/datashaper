@@ -3,9 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FilterStep } from '@data-wrangling-components/core'
-
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import {
 	useLoadTable,
@@ -22,11 +20,10 @@ import { TableColumnDropdown } from '../dropdowns/TableColumnDropdown'
  * Input table is expected to be provided in the step input.
  */
 export const FilterInputs: React.FC<StepComponentProps> = memo(
-	function FilterInputs({ step, store, onChange, input }) {
+	function FilterInputs({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => step as FilterStep, [step])
 
-		const [table, setTable] = useState<ColumnTable | undefined>()
-		useLoadTable(input || internal.input, store, setTable)
+		const tbl = useLoadTable(input || step.input, table, store)
 
 		const handleLeftColumnChange = useHandleDropdownChange(
 			internal,
@@ -38,7 +35,7 @@ export const FilterInputs: React.FC<StepComponentProps> = memo(
 			<Container>
 				<LeftAlignedRow>
 					<TableColumnDropdown
-						table={table}
+						table={tbl}
 						required
 						selectedKey={internal.args.column}
 						onChange={handleLeftColumnChange}

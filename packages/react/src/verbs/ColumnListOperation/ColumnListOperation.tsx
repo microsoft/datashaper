@@ -10,7 +10,7 @@ import { StepComponentProps } from '../../types'
  * Provides inputs for a ColumnListOperation step.
  */
 export const ColumnListOperation: React.FC<StepComponentProps> = memo(
-	function ColumnListOperation({ step, store, onChange }) {
-		return <ColumnListInputs step={step} store={store} onChange={onChange} />
+	function ColumnListOperation(props) {
+		return <ColumnListInputs {...props} />
 	},
 )

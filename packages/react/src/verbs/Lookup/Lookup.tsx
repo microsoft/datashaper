@@ -16,13 +16,14 @@ import { StepComponentProps } from '../../types'
 export const Lookup: React.FC<StepComponentProps> = memo(function Lookup({
 	step,
 	store,
+	table,
 	onChange,
 }) {
 	const internal = useMemo(() => step as LookupStep, [step])
 
 	return (
 		<Container>
-			<JoinInputs step={step} store={store} onChange={onChange} />
+			<JoinInputs step={step} store={store} table={table} onChange={onChange} />
 			<LeftAlignedColumn>
 				<Label>Columns to copy</Label>
 				<ColumnListInputs

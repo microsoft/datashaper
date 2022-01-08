@@ -4,9 +4,8 @@
  */
 import { DeriveStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
 
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import {
 	useHandleDropdownChange,
@@ -24,12 +23,13 @@ import { StepComponentProps } from '../../types'
 export const Derive: React.FC<StepComponentProps> = memo(function Derive({
 	step,
 	store,
+	table,
 	onChange,
+	input,
 }) {
 	const internal = useMemo(() => step as DeriveStep, [step])
 
-	const [table, setTable] = useState<ColumnTable | undefined>()
-	useLoadTable(internal.input, store, setTable)
+	const tbl = useLoadTable(input || step.input, table, store)
 
 	const handleLeftColumnChange = useHandleDropdownChange(
 		internal,
@@ -62,7 +62,7 @@ export const Derive: React.FC<StepComponentProps> = memo(function Derive({
 			</LeftAlignedRow>
 			<LeftAlignedRow>
 				<TableColumnDropdown
-					table={table}
+					table={tbl}
 					required
 					label={'Column one'}
 					selectedKey={internal.args.column1}
@@ -73,7 +73,7 @@ export const Derive: React.FC<StepComponentProps> = memo(function Derive({
 					onChange={handleOpChange}
 				/>
 				<TableColumnDropdown
-					table={table}
+					table={tbl}
 					required
 					label={'Column two'}
 					selectedKey={internal.args.column2}
