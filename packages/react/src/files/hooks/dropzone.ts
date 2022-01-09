@@ -9,31 +9,22 @@ import {
 	FileWithPath,
 } from '@data-wrangling-components/utilities'
 import { useCallback } from 'react'
-import {
-	useDropzone as UseDz,
-	FileRejection,
-	DropzoneOptions,
-	DropzoneState as DzState,
-} from 'react-dropzone'
+import { useDropzone as UseDz, DropzoneState as DzState } from 'react-dropzone'
+import { DzProps, FileRejection } from '../types'
 
-interface DropzoneProps {
-	acceptedFileTypes: string[]
-	onDrop?: (collection: FileCollection) => void
-	onDropRejected?: (message: string, files?: FileRejection[]) => void
-	dropzoneOptions?: Omit<DropzoneOptions, 'onDrop' | 'onDropRejected'>
-}
-
-interface DropzoneState extends DzState {
+export interface DropzoneState extends DzState {
 	acceptedFileTypesExt: string[]
 }
 
-export const useDropzone: (props: DropzoneProps) => DropzoneState = ({
+export const useDropzone: (props: DzProps) => DropzoneState = ({
 	acceptedFileTypes,
 	onDrop,
 	onDropRejected,
+	onDropAccepted,
 	dropzoneOptions,
-}: DropzoneProps) => {
+}: DzProps) => {
 	const handleOnDrop = useHandleOnDrop(onDrop)
+	const handleOnDropAccepted = useHandleOnDropAccepted(onDropAccepted)
 	const acceptedFileTypesExt = acceptedFileTypes.map(x =>
 		x.toLowerCase().includes('application') || x.toLowerCase().includes('text')
 			? FileMimeType[x as keyof typeof FileMimeType]
@@ -44,9 +35,10 @@ export const useDropzone: (props: DropzoneProps) => DropzoneState = ({
 		onDropRejected,
 	)
 	const state = UseDz({
-		onDrop: async (files: File[]) =>
-			await handleOnDrop(files as FileWithPath[]),
-		onDropRejected: (files: FileRejection[]) => handleOnDropRejected(files),
+		onDrop: (files: File[]) => handleOnDrop(files as FileWithPath[]),
+		onDropAccepted: (files: File[]) =>
+			handleOnDropAccepted(files as FileWithPath[]),
+		onDropRejected: handleOnDropRejected,
 		accept: acceptedFileTypes.toString(),
 		...dropzoneOptions,
 	})
@@ -55,6 +47,23 @@ export const useDropzone: (props: DropzoneProps) => DropzoneState = ({
 		...state,
 		acceptedFileTypesExt,
 	}
+}
+
+const useHandleOnDropAccepted = (
+	onDropAccepted?: (collection: FileCollection) => void,
+) => {
+	return useCallback(
+		async (files: FileWithPath[]) => {
+			const fileCollection = new FileCollection()
+			try {
+				await fileCollection.init(files)
+				onDropAccepted && onDropAccepted(fileCollection)
+			} catch (e) {
+				console.error(e)
+			}
+		},
+		[onDropAccepted],
+	)
 }
 
 const useHandleOnDropRejected = (

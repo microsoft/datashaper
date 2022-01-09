@@ -20,6 +20,15 @@ import { FileWithPath } from './FileWithPath'
 export class FileCollection {
 	files: BaseFile[] = []
 	private supportedFilesOnly = false
+	private _name = ''
+
+	set name(name: string) {
+		this._name = name
+	}
+
+	get name(): string {
+		return this._name
+	}
 
 	async init(files: FileWithPath[] | string): Promise<void> {
 		if (!files.length) {
@@ -30,12 +39,14 @@ export class FileCollection {
 			const blob = await fetchFile(files)
 			const filesFromZip = await getFilesFromZip(blob)
 			this.files = filesFromZip.map(f => new BaseFile(f))
+			this.name = files
 		} else if ((files as File[]).every(file => file instanceof File)) {
 			let baseFiles: BaseFile[] = []
 			for await (const file of files as FileWithPath[]) {
 				if (!isZipFile(file.name)) {
 					baseFiles = [...baseFiles, new BaseFile(file)]
 				} else {
+					this.name = file.name
 					const filesFromZip = await getFilesFromZip(file)
 					baseFiles = [
 						...baseFiles,

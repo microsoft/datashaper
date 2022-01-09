@@ -7,6 +7,7 @@ import { isDsvFile, isJsonFile, isZipFile } from '..'
 import { BaseFile, FileWithPath } from '../../common'
 import {
 	extension,
+	getDataURL,
 	getDsvFileContent,
 	getJsonFileContentFromFile,
 	getTextFromFile,
@@ -156,5 +157,14 @@ describe('returns the content of a file as a DSV string', () => {
 		const blob = new Blob(['{"key": "value"}'])
 		const file = new BaseFile(new FileWithPath(blob, 'file.json', './'))
 		await expect(getDsvFileContent(file)).rejects.toThrow(error)
+	})
+})
+
+describe('returns the content of a file as a url string', () => {
+	it('getDataURL', async () => {
+		const blob = new Blob(['{"key": "value"}'])
+		const file = new BaseFile(new FileWithPath(blob, 'file.json', './'))
+		const result = await getDataURL(file)
+		expect(typeof result).toBe('string')
 	})
 })
