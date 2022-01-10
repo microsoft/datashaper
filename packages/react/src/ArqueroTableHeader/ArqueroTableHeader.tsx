@@ -47,7 +47,6 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 			link.type = 'text/csv'
 			link.download = name || 'download.csv'
 			link.click()
-			document.removeChild(link)
 		}, [table, name])
 
 		return (
