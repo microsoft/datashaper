@@ -2899,6 +2899,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/d3-selection", "npm:3.0.2"],
             ["@types/d3-shape", "npm:3.0.2"],
             ["@types/data-wrangling-components__core", null],
+            ["@types/data-wrangling-components__utilities", null],
             ["@types/essex-js-toolkit__themed-components", null],
             ["@types/fluentui__font-icons-mdl2", null],
             ["@types/fluentui__react", null],
@@ -2936,6 +2937,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "packagePeers": [
             "@data-wrangling-components/core",
+            "@data-wrangling-components/utilities",
             "@essex-js-toolkit/themed-components",
             "@fluentui/font-icons-mdl2",
             "@fluentui/react-hooks",
@@ -2946,6 +2948,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@thematic/react",
             "@types/arquero",
             "@types/data-wrangling-components__core",
+            "@types/data-wrangling-components__utilities",
             "@types/essex-js-toolkit__themed-components",
             "@types/fluentui__font-icons-mdl2",
             "@types/fluentui__react-hooks",
