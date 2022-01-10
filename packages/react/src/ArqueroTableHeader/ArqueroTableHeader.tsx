@@ -68,6 +68,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 
 const Header = styled.div`
 	height: 36px;
+	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
