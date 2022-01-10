@@ -8,7 +8,6 @@ describe('test for fetch', () => {
 	test('fetch simple csv file', () => {
 		return fetch('packages/webapp/public/data/companies.csv', ',').then(
 			result => {
-				result.print()
 				expect(result.numCols()).toBe(4)
 				expect(result.numRows()).toBe(5)
 
