@@ -485,4 +485,5 @@ export enum DataType {
 	Text = 'text',
 	Object = 'object',
 	Undefined = 'undefined',
+	Unknown = 'unknown',
 }
