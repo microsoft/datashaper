@@ -1,7 +1,7 @@
 {
 	"name": "@data-wrangling-components/webapp",
 	"private": true,
-	"version": "0.4.4",
+	"version": "0.5.0",
 	"main": "src/index.ts",
 	"scripts": {
 		"clean": "essex clean build",
