@@ -5,8 +5,13 @@
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from './TableStore'
 
+/**
+ * A cell value in Arquero
+ */
+export type Value = any
+
 export type ColumnStats = {
-	type: string
+	type: DataType
 	count: number
 	distinct: number
 	invalid: number
@@ -17,10 +22,16 @@ export type ColumnStats = {
 	median?: number
 	stdev?: number
 	bins?: Bin[]
+	categories?: Category[]
 }
 
 export type Bin = {
 	min: number
+	count: number
+}
+
+export type Category = {
+	name: string
 	count: number
 }
 
@@ -29,7 +40,7 @@ export type Bin = {
  */
 export type ColumnMetadata = {
 	name: string
-	type: string
+	type: DataType
 	stats?: ColumnStats
 }
 
@@ -172,6 +183,7 @@ export enum Verb {
 	Select = 'select',
 	Ungroup = 'ungroup',
 	Unorder = 'unorder',
+	Recode = 'recode',
 }
 
 export interface CompoundStep extends Step {
@@ -238,6 +250,10 @@ export interface OrderbyStep extends Step {
 	args: OrderbyArgs
 }
 
+export interface RecodeStep extends Step {
+	args: RecodeArgs
+}
+
 export interface RenameStep extends Step {
 	args: RenameArgs
 }
@@ -281,6 +297,7 @@ export type Args =
 	| JoinArgs
 	| LookupArgs
 	| OrderbyArgs
+	| RecodeArgs
 	| RenameArgs
 	| RollupArgs
 	| SampleArgs
@@ -381,7 +398,7 @@ export interface FillArgs extends OutputColumnArgs {
 	/**
 	 * Value to fill in the new column
 	 */
-	value: string | number | boolean
+	value: Value
 	as: string
 }
 
@@ -393,7 +410,7 @@ export interface FilterArgs {
 	/**
 	 * Comparison value for the column
 	 */
-	value: string | number | boolean
+	value: Value
 	/**
 	 * Indicates whether the filter should be directly against a value,
 	 * or against the value of another column
@@ -430,6 +447,18 @@ export interface JoinArgs {
 }
 
 export interface LookupArgs extends JoinArgs, ColumnListArgs {}
+
+export interface RecodeArgs extends OutputColumnArgs {
+	/**
+	 * Name of the column to map new values for.
+	 */
+	column: string
+	/**
+	 * Mapping of old value to new for the recoding.
+	 * Note that the key must be coercable to a string for map lookup.
+	 */
+	map: Record<Value, Value>
+}
 
 export type RenameArgs = ColumnRecordArgs
 
@@ -474,3 +503,14 @@ export interface SetOperationArgs {
 }
 
 export type UnrollArgs = ColumnListArgs
+
+export enum DataType {
+	Array = 'array',
+	Boolean = 'boolean',
+	Date = 'date',
+	Number = 'number',
+	String = 'string',
+	Text = 'text',
+	Object = 'object',
+	Undefined = 'undefined',
+}

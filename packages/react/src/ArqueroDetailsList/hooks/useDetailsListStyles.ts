@@ -22,6 +22,7 @@ const STATS_HEIGHT = 56
  * @returns
  */
 export function useDetailsListStyles(
+	isHeadersFixed: boolean,
 	features?: DetailsListFeatures,
 	styles?: IDetailsListStyles,
 ): IDetailsListStyles {
@@ -33,16 +34,19 @@ export function useDetailsListStyles(
 					headerWrapper: {
 						height:
 							DEFAULT_HEADER_HEIGHT +
-							(features?.autoRender || features?.histogramColumnHeaders
+							(features?.smartHeaders || features?.histogramColumnHeaders
 								? HISTOGRAM_HEIGHT
 								: 0) +
-							(features?.autoRender || features?.statsColumnHeaders
+							(features?.smartHeaders || features?.statsColumnHeaders
 								? STATS_HEIGHT
 								: 0),
+						position: isHeadersFixed ? 'sticky' : 'inherit',
+						zIndex: '2',
+						top: '0',
 					},
 				},
 				styles,
 			),
-		[styles, features],
+		[styles, features, isHeadersFixed],
 	)
 }

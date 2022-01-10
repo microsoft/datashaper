@@ -3,9 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TextField } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-
-import React, { memo, useMemo, useState, useCallback } from 'react'
+import React, { memo, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useLoadTable } from '../../common'
 import {
@@ -34,18 +32,16 @@ import {
  * Provides the essential inputs for a multi-step join + filter + aggregate.
  */
 export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
-	function FilterAggregateLookup({ step, store, onChange }) {
+	function FilterAggregateLookup({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => defaults(step), [step])
 
-		const [leftTable, setLeftTable] = useState<ColumnTable | undefined>()
-		useLoadTable(internal.input, store, setLeftTable)
+		const leftTable = useLoadTable(input || internal.input, table, store)
 
 		const join = useMemo(() => getJoin(internal), [internal])
 		const filter = useMemo(() => getFilter(internal), [internal])
 		const aggregate = useMemo(() => getAggregate(internal), [internal])
 
-		const [rightTable, setRightTable] = useState<ColumnTable | undefined>()
-		useLoadTable(join.args.other, store, setRightTable)
+		const rightTable = useLoadTable(input || internal.input, table, store)
 
 		const handleLookupTableChange = useCallback(
 			(e, opt) => {

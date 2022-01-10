@@ -9,8 +9,10 @@ import {
 	IColumn,
 	SelectionMode,
 	IDetailsListStyles,
+	ConstrainMode,
 } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
+import styled from 'styled-components'
 import {
 	useColumns,
 	useDetailsHeaderRenderer,
@@ -30,6 +32,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const {
 			table,
 			features = {},
+			metadata,
 			offset = 0,
 			limit = Infinity,
 			includeAllColumns = true,
@@ -39,12 +42,14 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			showColumnBorders = false,
 			selectedColumn,
 			onColumnClick,
+			onCellDropdownSelect,
 			// extract props we want to set data-centric defaults for
 			selectionMode = SelectionMode.none,
 			layoutMode = DetailsListLayoutMode.fixedColumns,
 			columns,
 			onColumnHeaderClick,
 			styles,
+			isHeadersFixed = false,
 			// passthrough the remainder as props
 			...rest
 		} = props
@@ -61,12 +66,13 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// last, copy these items to actual JS objects for the DetailsList
 		const items = useMemo(() => sliced.objects(), [sliced])
 
-		const displayColumns = useColumns(table, columns, {
+		const displayColumns = useColumns(table, columns, metadata, {
 			features,
 			sortColumn,
 			sortDirection,
 			selectedColumn,
 			onColumnClick,
+			onCellDropdownSelect,
 			includeAllColumns,
 			isColumnClickable,
 			isSortable,
@@ -74,6 +80,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		})
 
 		const headerStyle = useDetailsListStyles(
+			isHeadersFixed,
 			features,
 			styles as IDetailsListStyles,
 		)
@@ -82,17 +89,30 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 
 		return (
-			<DetailsList
-				items={items}
-				selectionMode={selectionMode}
-				layoutMode={layoutMode}
-				columns={displayColumns as IColumn[]}
-				onColumnHeaderClick={handleColumnHeaderClick}
-				onRenderRow={renderRow}
-				onRenderDetailsHeader={renderDetailsHeader}
-				{...rest}
-				styles={headerStyle}
-			/>
+			<DetailsWrapper>
+				<DetailsList
+					items={items}
+					selectionMode={selectionMode}
+					layoutMode={layoutMode}
+					columns={displayColumns as IColumn[]}
+					onColumnHeaderClick={handleColumnHeaderClick}
+					constrainMode={ConstrainMode.unconstrained}
+					onRenderRow={renderRow}
+					onRenderDetailsHeader={renderDetailsHeader}
+					{...rest}
+					styles={headerStyle}
+				/>
+			</DetailsWrapper>
 		)
 	},
 )
+
+const DetailsWrapper = styled.div`
+	height: inherit;
+	position: relative;
+	max-height: inherit;
+
+	span.ms-DetailsHeader-cellTitle {
+		background-color: ${({ theme }) => theme.application().background().hex()};
+	}
+`

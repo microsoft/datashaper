@@ -49,7 +49,9 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 
 		return (
 			<div style={containerStyle}>
-				<div style={textStyle}>{column.name}</div>
+				<div style={textStyle} title={column.name}>
+					{column.name}
+				</div>
 				{/* the standard details list renders its icon at far left. should we replicate? */}
 				{iconName ? (
 					<Icon className={iconClassName} iconName={iconName} />

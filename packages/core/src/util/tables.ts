@@ -5,7 +5,14 @@
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { isDate, isArray } from 'lodash'
-import { Bin, ColumnMetadata, ColumnStats, TableMetadata } from '..'
+import {
+	Bin,
+	Category,
+	ColumnMetadata,
+	ColumnStats,
+	DataType,
+	TableMetadata,
+} from '..'
 import { fixedBinCount } from '../engine/util'
 
 // arquero uses 1000 as default, but we're sampling the table so assuming higher odds of valid values
@@ -61,6 +68,7 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 	const reqStats = requiredStats(table)
 	const optStats = optionalStats(table)
 	const bins = binning(table, reqStats, optStats)
+	const cats = categories(table, reqStats)
 	const results = table.columnNames().reduce((acc, cur) => {
 		// mode should only include valid values, so a reasonable value for checking type
 		const mode = reqStats[`${cur}.mode`]
@@ -72,8 +80,8 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 			invalid: reqStats[`${cur}.invalid`],
 			mode,
 		}
-		const opt =
-			type === 'number'
+		const optn =
+			type === DataType.Number
 				? {
 						min: optStats[`${cur}.min`],
 						max: optStats[`${cur}.max`],
@@ -83,9 +91,16 @@ export function stats(table: ColumnTable): Record<string, ColumnStats> {
 						bins: bins[`${cur}.bins`],
 				  }
 				: {}
+		const optt =
+			type === DataType.Text
+				? {}
+				: {
+						categories: cats[`${cur}`],
+				  }
 		acc[cur] = {
 			...req,
-			...opt,
+			...optn,
+			...optt,
 		}
 		return acc
 	}, {} as Record<string, ColumnStats>)
@@ -123,7 +138,7 @@ function binning(
 	const numeric = table.columnNames(name => {
 		const mode = reqStats[`${name}.mode`]
 		const type = determineType(mode)
-		return type === 'number'
+		return type === DataType.Number
 	})
 	const binArgs = numeric.reduce((acc, cur) => {
 		const min = optStats[`${cur}.min`]
@@ -135,12 +150,11 @@ function binning(
 
 	const binRollup = table.select(numeric).derive(binArgs)
 
-	// for each binned column, derive a sorted & counted subtable
+	// for each binned column, derive a sorted & counted subtable.
 	// note that only bins with at least one entry will have a row,
 	// so we could have less than 10 bins
 	const counted = numeric.reduce((acc, cur) => {
 		const bins = binRollup
-			.orderby(cur)
 			.groupby(cur)
 			.count()
 			.objects()
@@ -149,11 +163,44 @@ function binning(
 				min: d[cur],
 				count: d.count,
 			}))
+		// numeric sort puts null at the front - format to match categories style if present
+		if (bins[0].min === null) {
+			bins[0].min = '(empty)'
+		}
 		acc[`${cur}.bins`] = bins
 		return acc
 	}, {} as Record<string, Bin[]>)
 
 	return counted
+}
+
+function categories(
+	table: ColumnTable,
+	reqStats: Record<string, any>,
+	limit = 20,
+) {
+	// TODO: we could do this with numeric too if there are a small number of uniques
+	// direct bin counting could be better with numbers if there is a small variety.
+	// also note we're going to limit it this to columns with a small number of unique values.
+	// it just doesn't make sense to count everything that is distinct if we can't plot/display it
+	const text = table.columnNames(name => {
+		const mode = reqStats[`${name}.mode`]
+		const distinct = reqStats[`${name}.distinct`]
+		const type = determineType(mode)
+		return type === DataType.String && distinct <= limit
+	})
+	return text.reduce((acc, cur) => {
+		const counted = table
+			// insert empty text for strings upfront, otherwise localeCompare will fail
+			.impute({ [cur]: () => '(empty)' })
+			.groupby(cur)
+			.count()
+			.objects()
+			.sort((a, b) => `${a[cur]}`.localeCompare(`${b[cur]}`))
+			.map(d => ({ name: d[cur], count: d.count }))
+		acc[cur] = counted
+		return acc
+	}, {} as Record<string, Category[]>)
 }
 
 // TODO: arquero does autotyping on load, is this meta stored internally?
@@ -164,7 +211,7 @@ function binning(
  * @param table
  * @returns
  */
-export function types(table: ColumnTable): Record<string, string> {
+export function types(table: ColumnTable): Record<string, DataType> {
 	const sampled = table.sample(SAMPLE_MAX)
 	return sampled.columnNames().reduce((acc, cur) => {
 		const values = table.array(cur)
@@ -177,7 +224,7 @@ export function types(table: ColumnTable): Record<string, string> {
 			return false
 		})
 		return acc
-	}, {} as Record<string, string>)
+	}, {} as Record<string, DataType>)
 }
 
 /**
@@ -186,14 +233,14 @@ export function types(table: ColumnTable): Record<string, string> {
  * @param value
  * @returns
  */
-export function determineType(value: any): string {
-	let type = typeof value as string
+export function determineType(value: any): DataType {
+	const type = typeof value as string
 	if (type === 'object') {
 		if (isDate(value)) {
-			type = 'date'
+			return DataType.Date
 		} else if (isArray(value)) {
-			type = 'array'
+			return DataType.Array
 		}
 	}
-	return type
+	return type as DataType
 }

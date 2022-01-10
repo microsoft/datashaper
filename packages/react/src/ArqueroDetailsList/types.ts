@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IColumn, IDetailsListProps } from '@fluentui/react'
+import { TableMetadata } from '@data-wrangling-components/core'
+import { IColumn, IDetailsListProps, IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type ColumnRenderFunction = (
@@ -11,6 +12,14 @@ export type ColumnRenderFunction = (
 	column?: IColumn,
 ) => any
 
+export type DropdownOptionSelect =
+	| ((
+			event: React.FormEvent<HTMLDivElement>,
+			option?: IDropdownOption<any> | undefined,
+			index?: number | undefined,
+	  ) => void)
+	| undefined
+
 export type ColumnClickFunction = (
 	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
 	column?: IColumn | undefined,
@@ -18,9 +27,9 @@ export type ColumnClickFunction = (
 
 export interface DetailsListFeatures {
 	/**
-	 * Indicates to auto-select the rendering for all features.
+	 * Includes stats and histograms in the headers of columns
 	 */
-	autoRender?: boolean
+	smartHeaders?: boolean
 	/**
 	 * Include histograms in the headers of numeric columns.
 	 */
@@ -33,17 +42,46 @@ export interface DetailsListFeatures {
 	 * Use embedded charts and vis based on data types and cell contents.
 	 */
 	smartCells?: boolean
+	/**
+	 * Without smartCells, if datatype is boolean, shows a symbol
+	 */
+	showBooleanSymbol?: boolean
+	/**
+	 * Without smartCells, if datatype is number, shows the magnitude of the value
+	 */
+	showNumberMagnitude?: boolean
+	/**
+	 * Without smartCells, if datatype is array, shows a categorical bar
+	 */
+	showCategoricalBar?: boolean
+	/**
+	 * Without smartCells, if datatype is date, shows the date formatted
+	 */
+	showDateFormatted?: boolean
+	/**
+	 * Without smartCells, if datatype is array, shows a sparkbar
+	 */
+	showSparkbar?: boolean
+	/**
+	 * Without smartCells, if datatype is array, shows a sparkline
+	 */
+	showSparkline?: boolean
+	/**
+	 * Without smartCells, If datatype is array, shows a dropdown with the values
+	 */
+	showDropdown?: boolean
 }
 
 export interface ArqueroDetailsListProps
 	extends Omit<IDetailsListProps, 'items'> {
 	table: ColumnTable
-	/**
-	 * Indicates to introspect the data columns and provide full rich rendering automatically for everything.
-	 * TODO: we could use an enum and specify levels of richness. For example, basic formatting -> header details -> full-blown smart cells.
-	 */
-	autoRender?: boolean
 	features?: DetailsListFeatures
+	/**
+	 * Optional metadata to use for column smart features.
+	 * Use this if you need to cache expensive stats computes separately
+	 * to prevent recompute on remounting.
+	 */
+	metadata?: TableMetadata
 	offset?: number
 	limit?: number
 	/**
@@ -73,7 +111,16 @@ export interface ArqueroDetailsListProps
 	 */
 	onColumnClick?: ColumnClickFunction
 	/**
+	 * Passthrough to the column click handler.
+	 * Will be applied to the column header only unless isColumnClickable === true.
+	 */
+	onCellDropdownSelect?: DropdownOptionSelect
+	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */
 	selectedColumn?: string
+	/**
+	 * Fixed headers on top when scrolling
+	 */
+	isHeadersFixed?: boolean
 }

@@ -110,12 +110,34 @@ describe('table utilities', () => {
 		test('bins', () => {
 			// for our default stats we specify 10 bins - let's test with a column that has enough rows for this
 			const binnable: ColumnTable = table({
-				values: [1, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6, 7, 8, 9, 10],
+				values: [8, 9, 10, 1, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6, 7],
 			})
 			const { values } = stats(binnable)
 			expect(values.count).toBe(15)
 			expect(values.distinct).toBe(10)
-			expect(values.bins).toHaveLength(10)
+			const { bins = [] } = values
+			expect(bins).toHaveLength(10)
+			// ensure the bins are sorted ascending numerically
+			expect(bins[0].min).toBe(1)
+		})
+
+		test('categories', () => {
+			const categorical: ColumnTable = table({
+				/* eslint-disable no-sparse-arrays */
+				values: ['one', 'two', 'one', 'one', 'three', , 'four'],
+			})
+			const { values } = stats(categorical)
+			expect(values.count).toBe(7)
+			expect(values.distinct).toBe(5)
+			const { categories = [] } = values
+			// logically the categories should match the unique values
+			expect(categories).toHaveLength(values.distinct)
+			// empties will be sorted first
+			expect(categories[0].name).toBe('(empty)')
+			expect(categories[0].count).toBe(1)
+			// the rest alpha
+			expect(categories[1].name).toBe('four')
+			expect(categories[1].count).toBe(1)
 		})
 	})
 

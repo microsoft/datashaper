@@ -5,8 +5,11 @@
 import { AggregateStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
-import styled from 'styled-components'
-import { useHandleTextfieldChange, LeftAlignedRow } from '../../common'
+import {
+	useHandleTextfieldChange,
+	LeftAlignedRow,
+	VerbContainer,
+} from '../../common'
 import { AggregateInputs } from '../../controls'
 import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
@@ -17,6 +20,7 @@ import { StepComponentProps } from '../../types'
 export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 	step,
 	store,
+	table,
 	onChange,
 }) {
 	const internal = useMemo(() => step as AggregateStep, [step])
@@ -24,7 +28,7 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)
 
 	return (
-		<Container>
+		<VerbContainer>
 			<LeftAlignedRow>
 				<TextField
 					required
@@ -35,13 +39,12 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 					onChange={handleAsChange}
 				/>
 			</LeftAlignedRow>
-			<AggregateInputs step={step} store={store} onChange={onChange} />
-		</Container>
+			<AggregateInputs
+				step={step}
+				store={store}
+				table={table}
+				onChange={onChange}
+			/>
+		</VerbContainer>
 	)
 })
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`

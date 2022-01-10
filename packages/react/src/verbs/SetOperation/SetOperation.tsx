@@ -10,7 +10,7 @@ import { StepComponentProps } from '../../types'
  * Provides inputs for any set operation step.
  */
 export const SetOperation: React.FC<StepComponentProps> = memo(
-	function SetOperation({ step, store, onChange }) {
-		return <TableListInputs step={step} store={store} onChange={onChange} />
+	function SetOperation(props) {
+		return <TableListInputs {...props} />
 	},
 )

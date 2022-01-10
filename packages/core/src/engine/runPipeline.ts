@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { isArray } from 'lodash'
 import { Pipeline, TableStore } from '../'
 import { Step } from '../types'
 
@@ -15,16 +16,39 @@ import { Step } from '../types'
  */
 export async function runPipeline(
 	input: ColumnTable,
-	steps: Step[],
+	steps: Step | Step[],
 ): Promise<ColumnTable> {
 	const store = new TableStore()
 	const pipeline = new Pipeline(store)
 
-	store.set('input', input)
+	// make sure each step has an input/output
+	// if missing we'll just chain them sequentially
+	const internal = (isArray(steps) ? steps : [steps]).map((step, idx, arr) => {
+		const copy = {
+			...step,
+		}
+		if (idx === 0) {
+			if (!copy.input) {
+				copy.input = 'input'
+			}
+		} else {
+			const prev = arr[idx - 1]
+			if (!copy.input) {
+				copy.input = prev.output || `table-${idx - 1}`
+			}
+		}
+		if (!copy.output) {
+			copy.output = `table-${idx}`
+		}
+		return copy
+	})
 
-	// TODO: step basics such as ordering and serial table input/output
-	// allow user to submit the absolute simplest possible config
-	pipeline.addAll(steps as Step[])
+	// since we're creating the store the user has no opportunity
+	// to add the starting table, so we'll put it in place
+	const inp = internal[0].input
+	store.set(inp, input)
+
+	pipeline.addAll(internal as Step[])
 
 	return pipeline.run()
 }

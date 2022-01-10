@@ -4,6 +4,11 @@
  */
 import { Specification } from '@data-wrangling-components/core'
 import { DetailsListFeatures } from '@data-wrangling-components/react'
+import {
+	FileCollection,
+	FileType,
+	FileMimeType,
+} from '@data-wrangling-components/utilities'
 import { Checkbox } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useCallback } from 'react'
@@ -33,45 +38,59 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 }) {
 	const loadFiles = useLoadTableFiles()
 	const loadSpec = useLoadSpecFile()
+
 	const handleDropCSV = useCallback(
-		async (files: File[]) => {
+		async (fileCollection: FileCollection) => {
+			const files = fileCollection.list(FileType.csv)
 			const loaded = await loadFiles(files)
 			onLoadFiles && onLoadFiles(loaded)
 		},
 		[onLoadFiles, loadFiles],
 	)
 	const handleDropJSON = useCallback(
-		async (files: File[]) => {
+		async (fileCollection: FileCollection) => {
 			// ignore any after the first. I suppose we could auto-link the steps, but that's dangerous
+			const files = fileCollection.list(FileType.json)
 			const first = files[0]
 			const spec = await loadSpec(first)
 			onSelectSpecification && onSelectSpecification(spec)
 		},
 		[onSelectSpecification, loadSpec],
 	)
+	const handleDropZip = useCallback(
+		async (fileCollection: FileCollection) => {
+			handleDropCSV(fileCollection)
+			handleDropJSON(fileCollection)
+		},
+		[handleDropCSV, handleDropJSON],
+	)
 
-	const handleAutoRenderChange = useCallback(
-		(e, checked?: boolean) =>
-			onFeaturesChange && onFeaturesChange({ autoRender: checked }),
-		[onFeaturesChange],
-	)
-	const handleColumnHistogramsChange = useCallback(
+	const handleSmartHeadersChange = useCallback(
 		(e, checked?: boolean) =>
 			onFeaturesChange &&
-			onFeaturesChange({ ...features, histogramColumnHeaders: checked }),
-		[features, onFeaturesChange],
-	)
-	const handleColumnStatsChange = useCallback(
-		(e, checked?: boolean) =>
-			onFeaturesChange &&
-			onFeaturesChange({ ...features, statsColumnHeaders: checked }),
+			onFeaturesChange({ ...features, smartHeaders: checked }),
 		[features, onFeaturesChange],
 	)
 
-	const handleSmartCellsChange = useCallback(
-		(e, checked?: boolean) =>
+	const handleFeaturesChange = useCallback(
+		(propName: string, checked?: boolean) =>
 			onFeaturesChange &&
-			onFeaturesChange({ ...features, smartCells: checked }),
+			onFeaturesChange({ ...features, [propName]: checked }),
+		[features, onFeaturesChange],
+	)
+	const handleArrayFeaturesChange = useCallback(
+		(propName: string, checked?: boolean) => {
+			onFeaturesChange &&
+				onFeaturesChange({
+					...features,
+					showSparkline: false,
+					showSparkbar: false,
+					showCategoricalBar: false,
+					showDropdown: false,
+					[propName]: checked,
+				})
+		},
+
 		[features, onFeaturesChange],
 	)
 
@@ -82,18 +101,44 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 
 	return (
 		<Container>
-			<Examples>
-				<ExamplesDropdown onChange={onSelectSpecification} />
-			</Examples>
-			<Description>
-				{selected ? <p>{selected.description}</p> : null}
-			</Description>
+			<ExamplesContainer>
+				<Examples>
+					<ExamplesDropdown onChange={onSelectSpecification} />
+				</Examples>
+				<Description>
+					<p>
+						{selected
+							? selected.description
+							: 'Description for the selected example will show here'}
+					</p>
+				</Description>
+			</ExamplesContainer>
 			<ControlBlock>
 				<Control>
 					<Checkbox
-						label={'Auto-render everything'}
-						checked={features.autoRender}
-						onChange={handleAutoRenderChange}
+						label={'Smart headers'}
+						checked={features.smartHeaders}
+						onChange={handleSmartHeadersChange}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Column header stats'}
+						checked={features.statsColumnHeaders}
+						disabled={features.smartHeaders}
+						onChange={(e, checked) =>
+							handleFeaturesChange('statsColumnHeaders', checked)
+						}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Column header histograms'}
+						checked={features.histogramColumnHeaders}
+						disabled={features.smartHeaders}
+						onChange={(e, checked) =>
+							handleFeaturesChange('histogramColumnHeaders', checked)
+						}
 					/>
 				</Control>
 				<Control>
@@ -107,25 +152,83 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			<ControlBlock>
 				<Control>
 					<Checkbox
-						label={'Column header stats'}
-						checked={features.statsColumnHeaders}
-						onChange={handleColumnStatsChange}
+						label={'Smart cells'}
+						checked={features.smartCells}
+						onChange={(e, checked) =>
+							handleFeaturesChange('smartCells', checked)
+						}
 					/>
 				</Control>
 				<Control>
 					<Checkbox
-						label={'Column header histograms'}
-						checked={features.histogramColumnHeaders}
-						onChange={handleColumnHistogramsChange}
+						label={'Number magnitude'}
+						checked={features.showNumberMagnitude}
+						disabled={features.smartCells}
+						onChange={(e, checked) =>
+							handleFeaturesChange('showNumberMagnitude', checked)
+						}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Boolean symbol'}
+						checked={features.showBooleanSymbol}
+						disabled={features.smartCells}
+						onChange={(e, checked) =>
+							handleFeaturesChange('showBooleanSymbol', checked)
+						}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Format date'}
+						checked={features.showDateFormatted}
+						disabled={features.smartCells}
+						onChange={(e, checked) =>
+							handleFeaturesChange('showDateFormatted', checked)
+						}
 					/>
 				</Control>
 			</ControlBlock>
 			<ControlBlock>
 				<Control>
 					<Checkbox
-						label={'Smart cells'}
-						checked={features.smartCells}
-						onChange={handleSmartCellsChange}
+						label={'Sparkbar'}
+						checked={!!features.showSparkbar}
+						disabled={features.smartCells}
+						onChange={(e, checked) =>
+							handleArrayFeaturesChange('showSparkbar', checked)
+						}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Sparkline'}
+						checked={!!features.showSparkline}
+						disabled={features.smartCells}
+						onChange={(e, checked) =>
+							handleArrayFeaturesChange('showSparkline', checked)
+						}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Categorical bar'}
+						checked={!!features.showCategoricalBar}
+						disabled={features.smartCells}
+						onChange={(e, checked) =>
+							handleArrayFeaturesChange('showCategoricalBar', checked)
+						}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Multivalues on dropdown'}
+						checked={!!features.showDropdown}
+						disabled={features.smartCells}
+						onChange={(e, checked) =>
+							handleArrayFeaturesChange('showDropdown', checked)
+						}
 					/>
 				</Control>
 			</ControlBlock>
@@ -134,7 +237,10 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 					<FileDrop onDrop={handleDropCSV} />
 				</Drop>
 				<Drop>
-					<FileDrop onDrop={handleDropJSON} extensions={['json']} />
+					<FileDrop onDrop={handleDropJSON} extensions={[FileMimeType.json]} />
+				</Drop>
+				<Drop>
+					<FileDrop onDrop={handleDropZip} extensions={[FileMimeType.zip]} />
 				</Drop>
 			</DropBlock>
 		</Container>
@@ -143,20 +249,19 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 
 const Container = styled.div`
 	display: flex;
-	height: 52px;
-	padding: 12px;
-	margin-bottom: 40px;
+	padding: 0 12px 12px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 12px;
+	height: 170px;
+	margin-bottom: 2rem;
 `
 
 const Examples = styled.div``
+const ExamplesContainer = styled.div``
 
 const Description = styled.div`
 	width: 400px;
-	padding-left: 12px;
 	flex-direction: column;
 	justify-content: center;
 `
@@ -172,13 +277,13 @@ const Control = styled.div`
 `
 
 const DropBlock = styled.div`
-	width: 400px;
 	display: flex;
+	flex-direction: column;
 	height: 100%;
 	gap: 10px;
 `
 
 const Drop = styled.div`
 	width: 160px;
-	height: 100%;
+	height: 50px;
 `

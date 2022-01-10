@@ -8,10 +8,10 @@
 			"input": "data/stocks.csv",
 			"output": "output-table-0",
 			"args": {
-				"as": "Month Key",
+				"as": "Week Key",
 				"column1": "Symbol",
 				"operator": "+",
-				"column2": "Month"
+				"column2": "Week"
 			}
 		},
 		{
@@ -20,8 +20,8 @@
 			"input": "output-table-0",
 			"output": "output-table-1",
 			"args": {
-				"as": "Monthly Average",
-				"groupby": "Month Key",
+				"as": "Week Average",
+				"groupby": "Week Key",
 				"field": "Close",
 				"operation": "mean"
 			}
@@ -34,7 +34,7 @@
 			"args": {
 				"columns": ["Symbol"],
 				"other": "output-table-0",
-				"on": ["Month Key"]
+				"on": ["Week Key"]
 			}
 		},
 		{
@@ -45,7 +45,7 @@
 			"args": {
 				"as": "Monthly List",
 				"groupby": "Symbol",
-				"field": "Monthly Average",
+				"field": "Week Average",
 				"operation": "array_agg"
 			}
 		}

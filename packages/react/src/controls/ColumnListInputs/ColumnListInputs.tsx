@@ -7,7 +7,7 @@ import { ActionButton } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { set } from 'lodash'
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
 import { ColumnInstruction } from '../../controls'
@@ -17,13 +17,12 @@ import { StepComponentProps } from '../../types'
  * Provides inputs for a step that needs lists of columns.
  */
 export const ColumnListInputs: React.FC<StepComponentProps> = memo(
-	function ColumnListInputs({ step, store, onChange, input }) {
+	function ColumnListInputs({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => step as ColumnListStep, [step])
 
-		const [table, setTable] = useState<ColumnTable | undefined>()
-		useLoadTable(input || internal.input, store, setTable)
+		const tbl = useLoadTable(input || step.input, table, store)
 
-		const columns = useColumns(internal, table, onChange)
+		const columns = useColumns(internal, tbl, onChange)
 
 		const handleButtonClick = useCallback(() => {
 			onChange &&
@@ -31,10 +30,10 @@ export const ColumnListInputs: React.FC<StepComponentProps> = memo(
 					...internal,
 					args: {
 						...internal.args,
-						columns: [...internal.args.columns, first(table)],
+						columns: [...internal.args.columns, first(tbl)],
 					},
 				})
-		}, [internal, table, onChange])
+		}, [internal, tbl, onChange])
 
 		return (
 			<Container>
@@ -42,7 +41,7 @@ export const ColumnListInputs: React.FC<StepComponentProps> = memo(
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={{ iconName: 'Add' }}
-					disabled={!table}
+					disabled={!tbl}
 				>
 					Add column
 				</ActionButton>

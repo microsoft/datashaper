@@ -3,6 +3,7 @@
 yarn.lock
 .pnp.js
 .pnp.cjs
+.pnp.loader.mjs
 node_modules/
 storybook-static/
 build/

@@ -2,21 +2,30 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SortDirection, TableMetadata } from '@data-wrangling-components/core'
+import {
+	DataType,
+	SortDirection,
+	TableMetadata,
+} from '@data-wrangling-components/core'
 import { IColumn } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
-import { ColumnClickFunction, DetailsListFeatures } from '..'
+import {
+	ColumnClickFunction,
+	DetailsListFeatures,
+	DropdownOptionSelect,
+} from '..'
 import {
 	createRenderColumnHeader,
-	createRenderDefaultCell,
 	createRenderDefaultColumnHeader,
+	createRenderFeaturesCell,
 	createRenderHistogramColumnHeader,
 	createRenderSmartCell,
 	createRenderStatsColumnHeader,
 } from '../renderers'
 import {
 	useCellClickhandler,
+	useCellDropdownSelectHandler,
 	useColumnNamesList,
 	useColumnStyles,
 	useIncrementingColumnColorScale,
@@ -31,6 +40,7 @@ export interface ColumnOptions {
 	sortDirection?: SortDirection
 	selectedColumn?: string
 	onColumnClick?: ColumnClickFunction
+	onCellDropdownSelect?: DropdownOptionSelect
 	includeAllColumns?: boolean
 	isColumnClickable?: boolean
 	isSortable?: boolean
@@ -48,6 +58,7 @@ export interface ColumnOptions {
 export function useColumns(
 	table: ColumnTable,
 	columns?: IColumn[],
+	metadata?: TableMetadata,
 	options: ColumnOptions = {},
 ): IColumn[] {
 	const {
@@ -56,6 +67,7 @@ export function useColumns(
 		sortDirection,
 		selectedColumn,
 		onColumnClick,
+		onCellDropdownSelect,
 		includeAllColumns = false,
 		isColumnClickable = false,
 		isSortable = false,
@@ -63,13 +75,18 @@ export function useColumns(
 	} = options
 
 	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
+	const handleCellDropdownSelect = useCellDropdownSelectHandler(
+		isColumnClickable,
+		onCellDropdownSelect,
+	)
 
-	const metadata: TableMetadata = useTableMetadata(
+	const computedMetadata: TableMetadata = useTableMetadata(
 		table,
+		metadata,
 		anyStatsFeatures(features),
 	)
 
-	const colorScale = useIncrementingColumnColorScale(metadata)
+	const colorScale = useIncrementingColumnColorScale(computedMetadata)
 
 	const styles = useColumnStyles(
 		isColumnClickable,
@@ -97,18 +114,28 @@ export function useColumns(
 			// without completely recreating the details header render
 			const { iconName, ...defaults } = column
 
-			const meta = metadata.columns[name]
-			const color = meta.type === 'number' ? colorScale() : undefined
-			const onRender =
-				features.autoRender || features.smartCells
-					? createRenderSmartCell(meta, color, handleCellClick)
-					: createRenderDefaultCell(meta, handleCellClick)
+			const meta = computedMetadata.columns[name]
+			const color = meta.type === DataType.Number ? colorScale() : undefined
+			const onRender = features.smartCells
+				? createRenderSmartCell(
+						meta,
+						color,
+						handleCellClick,
+						handleCellDropdownSelect,
+				  )
+				: createRenderFeaturesCell(
+						features,
+						meta,
+						color,
+						handleCellClick,
+						handleCellDropdownSelect,
+				  )
 
 			const headerRenderers = [createRenderDefaultColumnHeader(column)]
-			if (features.autoRender || features.statsColumnHeaders) {
+			if (features.smartHeaders || features.statsColumnHeaders) {
 				headerRenderers.push(createRenderStatsColumnHeader(meta))
 			}
-			if (features.autoRender || features.histogramColumnHeaders) {
+			if (features.smartHeaders || features.histogramColumnHeaders) {
 				headerRenderers.push(createRenderHistogramColumnHeader(meta, color))
 			}
 
@@ -136,8 +163,9 @@ export function useColumns(
 		onColumnClick,
 		handleCellClick,
 		styles,
-		metadata,
+		computedMetadata,
 		colorScale,
+		handleCellDropdownSelect,
 	])
 }
 
