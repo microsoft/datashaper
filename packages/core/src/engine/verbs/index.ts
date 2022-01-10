@@ -10,6 +10,7 @@ import { aggregate } from './aggregate'
 import { bin } from './bin'
 import { binarize } from './binarize'
 import { concat } from './concat'
+import { dedupe } from './dedupe'
 import { derive } from './derive'
 import { except } from './except'
 import { fill } from './fill'
@@ -25,7 +26,9 @@ import { rollup } from './rollup'
 import { sample } from './sample'
 import { select } from './select'
 import { spread } from './spread'
+import { ungroup } from './ungroup'
 import { union } from './union'
+import { unorder } from './unorder'
 import { unroll } from './unroll'
 
 const verbs: Record<string, StepFunction> = {
@@ -33,6 +36,7 @@ const verbs: Record<string, StepFunction> = {
 	bin,
 	binarize,
 	concat,
+	dedupe,
 	derive,
 	except,
 	fill,
@@ -44,10 +48,13 @@ const verbs: Record<string, StepFunction> = {
 	lookup,
 	orderby,
 	rename,
+	rollup,
 	sample,
 	select,
 	spread,
+	ungroup,
 	union,
+	unorder,
 	unroll,
 }
 
@@ -82,6 +89,7 @@ export function factory(
 		case Verb.Bin:
 		case Verb.Binarize:
 		case Verb.Derive:
+		case Verb.Impute:
 		case Verb.Fill:
 			return {
 				...base,
@@ -109,6 +117,7 @@ export function factory(
 			}
 		case Verb.Lookup:
 		case Verb.Groupby:
+		case Verb.Dedupe:
 		case Verb.Spread:
 		case Verb.Unroll:
 			return {
@@ -121,8 +130,11 @@ export function factory(
 		case Verb.Join:
 		case Verb.Orderby:
 		case Verb.Rename:
+		case Verb.Rollup:
 		case Verb.Sample:
 		case Verb.Select:
+		case Verb.Ungroup:
+		case Verb.Unorder:
 	}
 	return {
 		...base,

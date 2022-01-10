@@ -16,7 +16,7 @@ export async function fetch(
 	url: string,
 	delimiter: string,
 ): Promise<ColumnTable> {
-	let tableFromCSV: Promise<ColumnTable> = loadCSV(url, {
+	const tableFromCSV: Promise<ColumnTable> = loadCSV(url, {
 		delimiter: delimiter,
 	})
 	return tableFromCSV
