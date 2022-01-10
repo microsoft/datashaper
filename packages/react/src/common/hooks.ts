@@ -74,7 +74,7 @@ export function useColumnValueOptions(
 	column: string,
 	table: ColumnTable | undefined,
 	values?: Value[],
-	filter?: (name: string) => boolean,
+	filter?: (value: Value) => boolean,
 ): IDropdownOption[] {
 	const vals = useMemo(() => {
 		if (!table) {

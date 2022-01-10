@@ -3,6 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { DataType } from '..'
+import { determineType } from '.'
 
 /**
  * Returns a map of all of the column getters for a table.
@@ -38,4 +40,18 @@ export function columnIndexesWithZeros(table: ColumnTable): number[] {
 export function columnNamesWithZeros(table: ColumnTable): string[] {
 	const indexes = columnIndexesWithZeros(table)
 	return indexes.map(i => table.columnName(i))
+}
+
+export function columnType(table: ColumnTable, column: string): DataType {
+	const values = table.array(column)
+	let dataType = DataType.Unknown
+	// use the first valid value to guess type
+	values.some((value, index) => {
+		if (value !== null && value !== undefined) {
+			dataType = determineType(value)
+			return true
+		}
+		return false
+	})
+	return dataType
 }

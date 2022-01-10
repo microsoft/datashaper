@@ -16,7 +16,7 @@ export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
 	/**
 	 * Optional filter function to apply to the values list.
 	 */
-	filter?: (name: string) => boolean
+	filter?: (value: Value) => boolean
 }
 
 /**
