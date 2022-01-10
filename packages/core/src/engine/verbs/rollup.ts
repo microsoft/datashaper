@@ -1,6 +1,6 @@
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
-import { RollupArgs, Step } from '../../types'
+import { Step, RollupArgs } from '../../types'
 import { singleRollup } from '../util'
 
 /**
@@ -10,7 +10,6 @@ import { singleRollup } from '../util'
  * @returns
  */
 
-//TODO exactly like AGGREGATE but without built-in groupby
 export async function rollup(
 	step: Step,
 	store: TableStore,

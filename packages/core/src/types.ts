@@ -98,7 +98,7 @@ export enum FilterCompareType {
  * on a single field so we don't accommodate additional args.
  * See https://uwdata.github.io/arquero/api/op#aggregate-functions
  */
-export enum FieldAggregateOperation {
+export enum FieldAggregateRollupOperation {
 	Any = 'any',
 	Count = 'count',
 	CountDistinct = 'distinct',
@@ -150,10 +150,12 @@ export enum Verb {
 	Aggregate = 'aggregate',
 	Bin = 'bin',
 	Binarize = 'binarize',
+	Dedupe = 'dedupe',
 	Derive = 'derive',
 	Fill = 'fill',
 	Concat = 'concat',
 	Except = 'except',
+	Impute = 'impute',
 	Intersect = 'intersect',
 	Union = 'union',
 	Fold = 'fold',
@@ -165,8 +167,11 @@ export enum Verb {
 	Join = 'join',
 	Orderby = 'orderby',
 	Rename = 'rename',
+	Rollup = 'rollup',
 	Sample = 'sample',
 	Select = 'select',
+	Ungroup = 'ungroup',
+	Unorder = 'unorder',
 }
 
 export interface CompoundStep extends Step {
@@ -193,8 +198,16 @@ export interface ColumnListStep extends Step {
 	args: ColumnListArgs
 }
 
+export interface DedupeStep extends Step {
+	args: DedupeArgs
+}
+
 export interface DeriveStep extends Step {
 	args: DeriveArgs
+}
+
+export interface ImputeStep extends Step {
+	args: FillArgs
 }
 
 export interface FillStep extends Step {
@@ -229,6 +242,10 @@ export interface RenameStep extends Step {
 	args: RenameArgs
 }
 
+export interface RollupStep extends Step {
+	args: RollupArgs
+}
+
 export interface SampleStep extends Step {
 	args: SampleArgs
 }
@@ -255,6 +272,7 @@ export type Args =
 	| AggregateArgs
 	| BinArgs
 	| BinarizeArgs
+	| DedupeArgs
 	| DeriveArgs
 	| FillArgs
 	| FilterArgs
@@ -264,6 +282,7 @@ export type Args =
 	| LookupArgs
 	| OrderbyArgs
 	| RenameArgs
+	| RollupArgs
 	| SampleArgs
 	| SelectArgs
 	| SetOperationArgs
@@ -276,19 +295,22 @@ export interface OutputColumnArgs {
 	as: string
 }
 
-export interface AggregateArgs extends OutputColumnArgs {
+export interface RollupArgs extends OutputColumnArgs {
+	/**
+	 * Column to perform aggregate/rollup operation on
+	 */
+	field: string
+	/**
+	 * Aggregate/rollup operation
+	 */
+	operation: FieldAggregateRollupOperation
+}
+
+export interface AggregateArgs extends RollupArgs {
 	/**
 	 * Column to group by
 	 */
 	groupby: string
-	/**
-	 * Column to perform aggregate operation on
-	 */
-	field: string
-	/**
-	 * Aggregate operation
-	 */
-	operation: FieldAggregateOperation
 }
 
 export interface BinArgs extends OutputColumnArgs {
@@ -329,6 +351,10 @@ export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {}
  */
 export interface ColumnListArgs {
 	columns: string[]
+}
+
+export interface ColumnListOptionalArgs {
+	columns?: string[]
 }
 
 export interface ColumnRecordArgs {
@@ -388,6 +414,8 @@ export interface FoldArgs extends ColumnListArgs {
 
 export type GroupbyArgs = ColumnListArgs
 
+export type DedupeArgs = ColumnListOptionalArgs
+
 export interface JoinArgs {
 	/**
 	 * Name of the other table to join to the main input
@@ -436,17 +464,6 @@ export interface OrderbyArgs {
 	 * List of ordering instructions to apply
 	 */
 	orders: OrderbyInstruction[]
-}
-
-export interface RollupArgs extends OutputColumnArgs {
-	/**
-	 * Column to perform rollup operation on
-	 */
-	field: string
-	/**
-	 * Rollup operation
-	 */
-	operation: FieldAggregateOperation
 }
 
 export interface SetOperationArgs {

@@ -5,7 +5,7 @@
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
-import { GroupbyArgs, Step } from '../../types'
+import { Step } from '../../types'
 
 /**
  * Executes an arquero ungroup operation.
@@ -13,13 +13,13 @@ import { GroupbyArgs, Step } from '../../types'
  * @param store
  * @returns
  */
-//TODO These do not take any args 
+
 export async function ungroup(
 	step: Step,
 	store: TableStore,
 ): Promise<ColumnTable> {
-	const { input, args } = step
-	const { columns } = args as GroupbyArgs
+	const { input } = step
 	const inputTable = await store.get(input)
-	return inputTable.groupby(columns)
+
+	return inputTable.ungroup()
 }

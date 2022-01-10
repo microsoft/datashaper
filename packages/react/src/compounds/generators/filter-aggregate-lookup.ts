@@ -10,7 +10,7 @@ import {
 	LookupStep,
 	Step,
 	StepType,
-	FieldAggregateOperation,
+	FieldAggregateRollupOperation,
 	JoinArgs,
 	FilterArgs,
 	AggregateArgs,
@@ -88,7 +88,7 @@ export function updateFilter(parent: StepChain, step: FilterStep): StepChain {
 
 export function updateAggregateOperation(
 	parent: StepChain,
-	operation: FieldAggregateOperation,
+	operation: FieldAggregateRollupOperation,
 ): StepChain {
 	const [join, filter, aggregate, lookup] = parent.steps
 	aggregate.args.operation = operation

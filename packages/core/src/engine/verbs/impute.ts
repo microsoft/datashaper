@@ -5,10 +5,11 @@
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
-import { GroupbyArgs, Step } from '../../types'
+import { FillArgs, Step } from '../../types'
+import { ExprFunctionMap } from './types'
 
 /**
- * Executes an arquero impute operation.
+ * Executes an arquero impute
  * @param step
  * @param store
  * @returns
@@ -18,7 +19,11 @@ export async function impute(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { columns } = args as GroupbyArgs
+	const { value, as } = args as FillArgs
 	const inputTable = await store.get(input)
-	return inputTable.groupby(columns)
+
+	const dArgs: ExprFunctionMap = {}
+	dArgs[as] = (d: any, $: any) => $.value
+
+	return inputTable.params({ value }).impute(dArgs)
 }

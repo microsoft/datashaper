@@ -4,8 +4,8 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { GroupbyArgs, Step } from '../../types'
+import { DedupeArgs, TableStore } from '../..'
+import { Step } from '../../types'
 
 /**
  * Executes an arquero dedupe operation.
@@ -14,13 +14,17 @@ import { GroupbyArgs, Step } from '../../types'
  * @returns
  */
 
-//TODO optional input column list like GROUPBY
 export async function dedupe(
 	step: Step,
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { columns } = args as GroupbyArgs
+	const { columns } = args as DedupeArgs
 	const inputTable = await store.get(input)
-	return inputTable.groupby(columns)
+
+	if (columns !== undefined) {
+		return inputTable.dedupe(columns)
+	}
+
+	return inputTable.dedupe()
 }
