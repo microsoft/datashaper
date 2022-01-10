@@ -7,7 +7,7 @@ import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 /**
- * Executes an arquero impute
+ * Executes an arquero loadCSV
  * @param step
  * @param store
  * @returns
