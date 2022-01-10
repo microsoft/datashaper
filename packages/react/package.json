@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/react",
-	"version": "0.8.0",
+	"version": "0.8.1",
 	"main": "src/index.ts",
 	"publishConfig": {
 		"main": "dist/cjs/index.js",
