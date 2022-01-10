@@ -11,12 +11,16 @@ import {
 	TextField,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable } from '../../common'
+import { useColumnRecordDelete, useLoadTable } from '../../common'
 import { TableColumnDropdown } from '../../controls'
 import { StepComponentProps } from '../../types'
+import {
+	useDisabled,
+	useHandleAddButtonClick,
+	useHandleColumnChange,
+} from './hooks'
 
 /**
  * Provides inputs for a RenameStep.
@@ -24,77 +28,26 @@ import { StepComponentProps } from '../../types'
 export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 	step,
 	store,
+	table,
 	onChange,
+	input,
 }) {
 	const internal = useMemo(() => step as RenameStep, [step])
 
-	const [table, setTable] = useState<ColumnTable | undefined>()
-	useLoadTable(internal.input, store, setTable)
+	const tbl = useLoadTable(input || step.input, table, store)
 
-	const handleColumnChange = useCallback(
-		(previous, oldName, newName) => {
-			const columns = {
-				...internal.args.columns,
-			}
-			// this is the previous column mapping - remove it in case we
-			// selected a different one to rename
-			delete columns[previous]
-			columns[oldName] = newName
-			onChange &&
-				onChange({
-					...internal,
-					args: {
-						...internal.args,
-						columns,
-					},
-				})
-		},
-		[internal, onChange],
-	)
-
-	const handleColumnDelete = useCallback(
-		column => {
-			const columns = {
-				...internal.args.columns,
-			}
-			delete columns[column]
-			onChange &&
-				onChange({
-					...internal,
-					args: {
-						...internal.args,
-						columns,
-					},
-				})
-		},
-		[internal, onChange],
-	)
+	const handleColumnChange = useHandleColumnChange(internal, onChange)
+	const handleColumnDelete = useColumnRecordDelete(internal, onChange)
+	const handleButtonClick = useHandleAddButtonClick(internal, tbl, onChange)
 
 	const columnPairs = useColumnPairs(
-		table,
+		tbl,
 		internal,
 		handleColumnChange,
 		handleColumnDelete,
 	)
 
-	const handleButtonClick = useCallback(() => {
-		const nextName = next(internal, table)
-		if (nextName) {
-			onChange &&
-				onChange({
-					...internal,
-					args: {
-						...internal.args,
-						columns: {
-							...internal.args.columns,
-							[nextName]: nextName,
-						},
-					},
-				})
-		}
-	}, [internal, table, onChange])
-
-	const disabled = useDisabled(internal, table)
+	const disabled = useDisabled(internal, tbl)
 
 	return (
 		<Container>
@@ -109,26 +62,6 @@ export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 		</Container>
 	)
 })
-
-// find the next column from the table to suggest
-function next(internal: RenameStep, table?: ColumnTable): string | undefined {
-	return table?.columnNames().find(name => {
-		if (!internal.args.columns) {
-			return true
-		}
-		return !internal.args.columns[name]
-	})
-}
-
-function useDisabled(internal: RenameStep, table?: ColumnTable) {
-	if (!table) {
-		return true
-	}
-	return (
-		table.columnNames().length ===
-		Object.keys(internal.args.columns || {}).length
-	)
-}
 
 function useColumnPairs(
 	table: ColumnTable | undefined,

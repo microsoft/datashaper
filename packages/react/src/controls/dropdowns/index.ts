@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './BinStrategyDropdown'
+export * from './ColumnValueDropdown'
 export * from './FieldAggregateOperationDropdown'
 export * from './NumericComparisonOperatorDropdown'
 export * from './MathOperatorDropdown'

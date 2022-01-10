@@ -17,6 +17,7 @@ import { StepComponentProps } from '../../types'
 export const Binarize: React.FC<StepComponentProps> = memo(function Binarize({
 	step,
 	store,
+	table,
 	onChange,
 }) {
 	const internal = useMemo(() => step as BinarizeStep, [step])
@@ -35,7 +36,12 @@ export const Binarize: React.FC<StepComponentProps> = memo(function Binarize({
 					onChange={handleAsChange}
 				/>
 			</LeftAlignedRow>
-			<FilterInputs step={step} store={store} onChange={onChange} />
+			<FilterInputs
+				step={step}
+				store={store}
+				table={table}
+				onChange={onChange}
+			/>
 		</Container>
 	)
 })

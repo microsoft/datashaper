@@ -35,6 +35,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const {
 			table,
 			features = {},
+			metadata,
 			offset = 0,
 			limit = Infinity,
 			includeAllColumns = true,
@@ -69,7 +70,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// last, copy these items to actual JS objects for the DetailsList
 		const items = useMemo(() => sliced.objects(), [sliced])
 
-		const displayColumns = useColumns(table, columns, {
+		const displayColumns = useColumns(table, columns, metadata, {
 			features,
 			sortColumn,
 			sortDirection,
@@ -171,7 +172,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	},
 )
 
-const DetailsWrapper = styled.div<{ theme: Theme }>`
+const DetailsWrapper = styled.div`
 	height: inherit;
 	position: relative;
 	max-height: inherit;

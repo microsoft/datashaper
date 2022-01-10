@@ -4,9 +4,7 @@
  */
 import { SelectStep } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownOption } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
 import { columnDropdownStyles } from '../../controls/styles'
@@ -18,17 +16,18 @@ import { StepComponentProps } from '../../types'
 export const Select: React.FC<StepComponentProps> = memo(function Select({
 	step,
 	store,
+	table,
 	onChange,
+	input,
 }) {
-	const [table, setTable] = useState<ColumnTable | undefined>()
-	useLoadTable(step.input, store, setTable)
+	const tbl = useLoadTable(input || step.input, table, store)
 
 	// default to selecting all columns if none are (this is what we want, right?)
 	const internal = useMemo(() => {
 		const { columns = {} } = (step as SelectStep).args
 		const defaults =
 			Object.keys(columns).length === 0
-				? table
+				? tbl
 						?.columnNames()
 						.reduce((acc: Record<string, string>, cur: string) => {
 							acc[cur] = cur
@@ -41,7 +40,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 				columns: defaults,
 			},
 		} as SelectStep
-	}, [step, table])
+	}, [step, tbl])
 
 	const handleColumnChange = useCallback(
 		(event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
@@ -71,7 +70,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 	)
 
 	const options = useMemo(() => {
-		const columns = table?.columnNames() || []
+		const columns = tbl?.columnNames() || []
 		return columns.map(column => {
 			const selected = internal.args?.columns && !!internal.args.columns[column]
 			return {
@@ -80,7 +79,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 				selected,
 			}
 		})
-	}, [table, internal])
+	}, [tbl, internal])
 
 	const selectedKeys = useMemo(
 		() => options.filter(o => o.selected).map(o => o.key),
@@ -89,7 +88,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 
 	return (
 		<Container>
-			{table ? (
+			{tbl ? (
 				<Dropdown
 					label={'Columns'}
 					styles={columnDropdownStyles}

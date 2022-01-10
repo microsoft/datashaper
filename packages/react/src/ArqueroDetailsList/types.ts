@@ -9,6 +9,7 @@ import {
 	IDetailsGroupDividerProps,
 	IRenderFunction,
 } from '@fluentui/react'
+import { TableMetadata } from '@data-wrangling-components/core'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type ColumnRenderFunction = (
@@ -80,12 +81,13 @@ export interface DetailsListFeatures {
 export interface ArqueroDetailsListProps
 	extends Omit<IDetailsListProps, 'items'> {
 	table: ColumnTable
-	/**
-	 * Indicates to introspect the data columns and provide full rich rendering automatically for everything.
-	 * TODO: we could use an enum and specify levels of richness. For example, basic formatting -> header details -> full-blown smart cells.
-	 */
-	smartHeaders?: boolean
 	features?: DetailsListFeatures
+	/**
+	 * Optional metadata to use for column smart features.
+	 * Use this if you need to cache expensive stats computes separately
+	 * to prevent recompute on remounting.
+	 */
+	metadata?: TableMetadata
 	offset?: number
 	limit?: number
 	/**

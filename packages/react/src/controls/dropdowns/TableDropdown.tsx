@@ -9,7 +9,7 @@ import { useTableOptions } from '../../common'
 import { tableDropdownStyles } from '../styles'
 
 export interface TableDropdownProps extends Partial<IDropdownProps> {
-	store: TableStore
+	store?: TableStore
 }
 
 /**
