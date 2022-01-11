@@ -2,7 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { RecodeStep, RecodeArgs, Value } from '@data-wrangling-components/core'
+import {
+	RecodeStep,
+	RecodeArgs,
+	Value,
+	DataType,
+	columnType,
+} from '@data-wrangling-components/core'
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
@@ -22,6 +28,15 @@ export function useColumnValues(
 		}
 		return table.orderby(column).rollup(args).objects()[0][column] as Value[]
 	}, [table, internal])
+}
+
+export function useColumnType(table?: ColumnTable, column?: string): DataType {
+	return useMemo(() => {
+		if (!table || !column) {
+			return DataType.Unknown
+		}
+		return columnType(table, column)
+	}, [table, column])
 }
 
 export function useHandleRecodeChange(
@@ -70,12 +85,12 @@ export function useRecodeDelete(
 }
 
 // find the next value from the table to suggest
-function next(internal: RecodeStep, values: Value[]): string | undefined {
-	return values.find(name => {
+function next(internal: RecodeStep, values: Value[]): Value | undefined {
+	return values.find(value => {
 		if (!internal.args.map) {
 			return true
 		}
-		return !internal.args.map[name]
+		return internal.args.map[value] === undefined
 	})
 }
 
@@ -85,8 +100,9 @@ export function useHandleAddButtonClick(
 	onChange?: StepChangeFunction,
 ): () => void {
 	return useCallback(() => {
-		const nextName = next(internal, values)
-		if (nextName) {
+		const nextValue = next(internal, values)
+		if (nextValue !== undefined) {
+			// could be a 0 or false...
 			onChange &&
 				onChange({
 					...internal,
@@ -94,7 +110,7 @@ export function useHandleAddButtonClick(
 						...internal.args,
 						map: {
 							...internal.args.map,
-							[nextName]: nextName,
+							[nextValue]: nextValue,
 						},
 					},
 				})

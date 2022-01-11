@@ -33,6 +33,9 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 					: theme.application().foreground().hex(),
 				width: '100%',
 				textAlign: 'center' as const,
+				overflow: 'hidden' as const,
+				whiteSpace: 'nowrap' as const,
+				textOverflow: 'ellipsis' as const,
 			}),
 			[theme, column],
 		)

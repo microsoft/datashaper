@@ -2,7 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { RecodeStep, Value } from '@data-wrangling-components/core'
+import {
+	RecodeStep,
+	Value,
+	DataType,
+	coerce,
+} from '@data-wrangling-components/core'
 import {
 	ActionButton,
 	Icon,
@@ -22,6 +27,7 @@ import { ColumnValueDropdown, TableColumnDropdown } from '../../controls'
 import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 import {
+	useColumnType,
 	useColumnValues,
 	useDisabled,
 	useHandleAddButtonClick,
@@ -44,6 +50,7 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 	const tbl = useLoadTable(input || step.input, table, store)
 
 	const values = useColumnValues(internal, tbl)
+	const dataType = useColumnType(tbl, internal.args.column)
 
 	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)
 	const handleColumnChange = useHandleDropdownChange(
@@ -59,6 +66,7 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 		tbl,
 		internal,
 		values,
+		dataType,
 		handleRecodeChange,
 		handleRecodeDelete,
 	)
@@ -97,18 +105,22 @@ function useRecodePairs(
 	table: ColumnTable | undefined,
 	internal: RecodeStep,
 	values: Value[],
-	onChange: (previous: string, oldname: string, newname: string) => void,
-	onDelete: (name: string) => void,
+	dataType: DataType,
+	onChange: (previous: Value, oldvalue: Value, newvalue: Value) => void,
+	onDelete: (value: Value) => void,
 ) {
 	return useMemo(() => {
 		const { map } = internal.args
-		return Object.entries(map || {}).map((column, index) => {
-			const [oldname, newname] = column
-			const valueFilter = (name: string) => {
-				if (name === oldname) {
+		return Object.entries(map || {}).map((valuePair, index) => {
+			// the old value will always come off the map as a string key
+			// coerce it to the column type for proper comparison
+			const [o, newvalue] = valuePair
+			const oldvalue = coerce(o, dataType)
+			const valueFilter = (value: Value) => {
+				if (value === oldvalue) {
 					return true
 				}
-				if (internal.args.map && internal.args.map[name]) {
+				if (internal.args.map && internal.args.map[value]) {
 					return false
 				}
 				return true
@@ -116,23 +128,25 @@ function useRecodePairs(
 			const handleSourceChange = (
 				e: React.FormEvent<HTMLDivElement>,
 				opt?: IDropdownOption<any> | undefined,
-			) => onChange(oldname, (opt?.key as string) || oldname, newname)
+			) => onChange(oldvalue, opt?.key || oldvalue, newvalue)
 			const handleTextChange = (
 				e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 				newValue?: string,
 			) => {
-				onChange(oldname, oldname, newValue ?? '')
+				// this does force the new value to match the old type, preventing mappings like 0 -> false
+				const val = coerce(newValue, dataType)
+				onChange(oldvalue, oldvalue, val)
 			}
-			const handleDeleteClick = () => onDelete(oldname)
+			const handleDeleteClick = () => onDelete(oldvalue)
 			return (
-				<ColumnPair key={`column-Recode-${oldname}-${index}`}>
+				<ColumnPair key={`column-Recode-${oldvalue}-${index}`}>
 					<ColumnValueDropdown
 						column={internal.args.column}
 						table={table}
 						values={values}
 						filter={valueFilter}
 						label={undefined}
-						selectedKey={oldname}
+						selectedKey={oldvalue}
 						onChange={handleSourceChange}
 						styles={{
 							root: {
@@ -145,8 +159,8 @@ function useRecodePairs(
 						styles={{ root: { marginLeft: 4, marginRight: 4 } }}
 					/>
 					<TextField
-						placeholder={'New name'}
-						value={newname}
+						placeholder={'New value'}
+						value={newvalue}
 						onChange={handleTextChange}
 						styles={{ root: { width: 120 } }}
 					/>
@@ -158,7 +172,7 @@ function useRecodePairs(
 				</ColumnPair>
 			)
 		})
-	}, [table, internal, values, onChange, onDelete])
+	}, [table, internal, values, dataType, onChange, onDelete])
 }
 
 const Container = styled.div`

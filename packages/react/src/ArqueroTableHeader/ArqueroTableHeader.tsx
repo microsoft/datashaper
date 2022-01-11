@@ -14,6 +14,7 @@ export interface ArqueroTableHeaderProps {
 	showRowCount?: boolean
 	showColumnCount?: boolean
 	allowDownload?: boolean
+	downloadFilename?: string
 	table: ColumnTable
 }
 
@@ -24,6 +25,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 			showRowCount = true,
 			showColumnCount = true,
 			allowDownload = false,
+			downloadFilename = 'download.csv',
 			table,
 		} = props
 
@@ -45,9 +47,9 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 			const link = document.createElement('a')
 			link.href = dataURI
 			link.type = 'text/csv'
-			link.download = name || 'download.csv'
+			link.download = downloadFilename
 			link.click()
-		}, [table, name])
+		}, [table, downloadFilename])
 
 		return (
 			<Header>
@@ -68,6 +70,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 
 const Header = styled.div`
 	height: 36px;
+	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
