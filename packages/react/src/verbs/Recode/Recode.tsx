@@ -22,12 +22,12 @@ import {
 	useHandleDropdownChange,
 	useHandleTextfieldChange,
 	useLoadTable,
+	useColumnType,
 } from '../../common'
 import { ColumnValueDropdown, TableColumnDropdown } from '../../controls'
 import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 import {
-	useColumnType,
 	useColumnValues,
 	useDisabled,
 	useHandleAddButtonClick,

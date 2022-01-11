@@ -7,6 +7,8 @@ import {
 	Step,
 	ColumnRecordArgs,
 	Value,
+	DataType,
+	columnType,
 } from '@data-wrangling-components/core'
 import { IDropdownOption } from '@fluentui/react'
 import { op } from 'arquero'
@@ -209,4 +211,13 @@ export function useLoadTable(
 		}
 	}, [name, table, store, setTable])
 	return tbl
+}
+
+export function useColumnType(table?: ColumnTable, column?: string): DataType {
+	return useMemo(() => {
+		if (!table || !column) {
+			return DataType.Unknown
+		}
+		return columnType(table, column)
+	}, [table, column])
 }
