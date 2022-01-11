@@ -38,6 +38,10 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 			[theme],
 		)
 
+		const groupCount = useMemo((): any => {
+			return table.isGrouped() ? table.groups().size : 0
+		}, [table])
+
 		const handleDownloadClick = useCallback(() => {
 			// TODO: extract this to a reusable function in the utilities package
 			const blob = new Blob([table.toCSV()])
@@ -55,6 +59,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 				<H2>{name}</H2>
 				{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
 				{showColumnCount === true ? <H3>{table.numCols()} cols</H3> : null}
+				{groupCount ? <H3>{groupCount} groups</H3> : null}
 				{allowDownload === true ? (
 					<IconButton
 						iconProps={{ iconName: 'Download' }}

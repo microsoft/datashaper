@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { SortDirection } from '@data-wrangling-components/core'
 import {
 	DetailsList,
 	DetailsListLayoutMode,
@@ -12,7 +13,6 @@ import {
 	ConstrainMode,
 	IGroup,
 } from '@fluentui/react'
-import { Theme } from '@thematic/core'
 import { RowObject, GroupBySpec } from 'arquero/dist/types/table/table'
 import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -21,6 +21,7 @@ import {
 	useDetailsHeaderRenderer,
 	useDetailsListStyles,
 	useSlicedTable,
+	useSortedGroups,
 	useSortedTable,
 	useSortHandling,
 	useStripedRowsRenderer,
@@ -70,6 +71,21 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// last, copy these items to actual JS objects for the DetailsList
 		const items = useMemo(() => sliced.objects(), [sliced])
 
+		// if the table is grouped, groups the information in a way we can iterate
+		const groupedEntries = useMemo(
+			() =>
+				table.isGrouped() ? sliced.objects({ grouped: 'entries' }) : undefined,
+			[sliced, table],
+		)
+
+		// sorts first level group headers
+		const sortedGroups = useSortedGroups(
+			table,
+			sortColumn,
+			sortDirection,
+			groupedEntries,
+		)
+
 		const displayColumns = useColumns(table, columns, metadata, {
 			features,
 			sortColumn,
@@ -92,62 +108,80 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const renderRow = useStripedRowsRenderer(isStriped, showColumnBorders)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 
+		const sortValueGroupsItems = useCallback(
+			(
+				entries: RowObject[],
+				existingGroups: any,
+				nextLevel: number,
+			): RowObject[] => {
+				const columnName = existingGroups.names[nextLevel]
+				if (sortColumn && sortColumn !== columnName) return entries
+				return sortDirection === SortDirection.Ascending
+					? entries.sort((a, b) => a[0] - b[0])
+					: entries.sort((a, b) => b[0] - a[0])
+			},
+			[sortDirection, sortColumn],
+		)
+
 		const buildGroup = useCallback(
 			(
 				row: RowObject,
 				existingGroups: GroupBySpec,
 				actualLevel: number,
+				totalLevelCount: number,
+				fatherIndex = 0,
 			): IGroup => {
 				const value = row[0]
 				const valueGroups = row[1]
 				const columnName = existingGroups.names[actualLevel]
-				const totalLevelCount = existingGroups.names.length
 
-				const startIndex = sliced
-					.data()
-					[columnName].data.findIndex(x => x === value)
+				const startIndex =
+					items.slice(fatherIndex).findIndex(x => x[columnName] === value) +
+					fatherIndex
 
 				const group = {
 					key: value.toString(),
-					name: value.toString(),
+					name: `${columnName} - ${value.toString()}`,
 					startIndex: startIndex,
 					level: actualLevel,
 					count: valueGroups.length,
 				} as IGroup
 
 				if (actualLevel + 1 < totalLevelCount) {
-					const child: IGroup[] = []
-
-					valueGroups.forEach(valueGroup => {
-						const group2 = buildGroup(
+					const nextLevel = actualLevel + 1
+					const children = sortValueGroupsItems(
+						valueGroups,
+						existingGroups,
+						nextLevel,
+					).map(valueGroup => {
+						return buildGroup(
 							valueGroup,
 							existingGroups,
-							actualLevel + 1,
+							nextLevel,
+							totalLevelCount,
+							startIndex,
 						)
-						child.push(group2)
 					})
-					group.children = child
+					group.children = children
 				}
 				return group
 			},
-			[sliced],
+			[items, sortValueGroupsItems],
 		)
 
 		const groups = useMemo(() => {
 			if (!sliced.isGrouped()) {
 				return undefined
 			}
-			const existingGroups = sliced.groups()
-			const groups: IGroup[] = []
-			const entries = sliced.objects({ grouped: 'entries' })
 
-			entries.forEach((row: RowObject) => {
+			const existingGroups = sliced.groups()
+			const totalLevelCount = existingGroups.names.length
+
+			return sortedGroups?.map((row: RowObject) => {
 				const initialLevel = 0
-				const group = buildGroup(row, existingGroups, initialLevel)
-				groups.push(group)
+				return buildGroup(row, existingGroups, initialLevel, totalLevelCount)
 			})
-			return groups
-		}, [sliced, buildGroup])
+		}, [sliced, buildGroup, sortedGroups])
 
 		return (
 			<DetailsWrapper>

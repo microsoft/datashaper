@@ -4,21 +4,11 @@
 	"steps": [
 		{
 			"type": "verb",
-			"verb": "join",
-			"input": "data/products.csv",
-			"output": "join-1",
-			"args": {
-				"other": "data/companies.csv",
-				"on": ["ID", "ID"]
-			}
-		},
-		{
-			"type": "verb",
 			"verb": "groupby",
-			"input": "join-1",
+			"input": "data/stocks.csv",
 			"output": "groupby-2",
 			"args": {
-				"columns": ["US", "ID"]
+				"columns": ["Symbol", "Month"]
 			}
 		}
 	]
