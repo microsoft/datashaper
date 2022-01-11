@@ -19,8 +19,10 @@ export function useGroupHeaderRenderer(
 ): IRenderFunction<IDetailsGroupDividerProps> {
 	return useCallback(
 		(props?, defaultRender?) => {
-			if (!props || !defaultRender || !groupHeaderFunction) {
+			if (!props || !defaultRender) {
 				return null
+			} else if (!groupHeaderFunction) {
+				return defaultRender && defaultRender(props)
 			}
 			const columnName = table.groups().names[props.groupLevel as number]
 			const meta = computedMetadata.columns[columnName]

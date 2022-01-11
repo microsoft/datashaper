@@ -18,6 +18,10 @@ import styled from 'styled-components'
  */
 export const PerfPage: React.FC = memo(function PerfMage() {
 	const [table, setTable] = useState<ColumnTable | undefined>()
+	const [groupedTable, setGroupedTable] = useState<ColumnTable | undefined>()
+	const [groupedMetadata, setGroupedMetadata] = useState<
+		TableMetadata | undefined
+	>()
 	const [metadata, setMetadata] = useState<TableMetadata | undefined>()
 	useEffect(() => {
 		const f = async () => {
@@ -26,13 +30,19 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 			for (let i = 0; i < 6; i++) {
 				root = root.concat(root)
 			}
-			const meta = introspect(root, true)
+			let meta = introspect(root, true)
 			setTable(root)
 			setMetadata(meta)
+
+			root = root.groupby(['Symbol', 'Month'])
+			meta = introspect(root, true)
+			setGroupedTable(root)
+			setGroupedMetadata(meta)
 		}
 		f()
 	}, [])
-	if (!table || !metadata) {
+
+	if (!table || !metadata || !groupedTable || !groupedMetadata) {
 		return null
 	}
 	return (
@@ -56,6 +66,20 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 					</Table>
 				</PivotItem>
 				<PivotItem key={'empty'} headerText={'empty'} />
+				<PivotItem key={'grouped'} headerText={'grouped'}>
+					<Table>
+						<ArqueroTableHeader table={groupedTable} allowDownload />
+						<ArqueroDetailsList
+							table={groupedTable}
+							metadata={groupedMetadata}
+							features={{
+								smartCells: true,
+								smartHeaders: true,
+							}}
+							isSortable
+						/>
+					</Table>
+				</PivotItem>
 			</Pivot>
 		</Container>
 	)
