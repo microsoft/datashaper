@@ -11,7 +11,7 @@
 				"groupby": "ID",
 				"field": "FY21 Sales",
 				"operation": "sum",
-				"as": "Total sales"
+				"to": "Total sales"
 			}
 		},
 		{
@@ -23,7 +23,7 @@
 				"groupby": "ID",
 				"field": "Product",
 				"operation": "array_agg",
-				"as": "Product List"
+				"to": "Product List"
 			}
 		},
 		{
@@ -34,7 +34,7 @@
 			"args": {
 				"field": "FY21 Sales",
 				"strategy": "auto",
-				"as": "Binned"
+				"to": "Binned"
 			}
 		},
 		{
@@ -46,7 +46,7 @@
 				"column": "FY21 Sales",
 				"operator": "<",
 				"value": 10000,
-				"as": "FY21 Sales < 10k"
+				"to": "FY21 Sales < 10k"
 			}
 		},
 		{
@@ -67,14 +67,14 @@
 				"column1": "FY20 Sales",
 				"operator": "+",
 				"column2": "FY21 Sales",
-				"as": "Combined Sales"
+				"to": "Combined Sales"
 			}
 		},
 		{
 			"type": "verb",
-			"verb": "except",
+			"verb": "difference",
 			"input": "data/companies.csv",
-			"output": "except-1",
+			"output": "difference-1",
 			"args": {
 				"others": ["data/companies2.csv"]
 			}
@@ -86,7 +86,7 @@
 			"output": "fill-1",
 			"args": {
 				"value": 1,
-				"as": "New Column"
+				"to": "New Column"
 			}
 		},
 		{
@@ -169,7 +169,7 @@
 			"output": "recode-1",
 			"args": {
 				"column": "ID",
-				"as": "Greetings",
+				"to": "Greetings",
 				"map": {
 					"1": "Hello",
 					"2": "Hola",

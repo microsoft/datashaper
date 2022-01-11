@@ -15,12 +15,12 @@ import { fixedBinCount, fixedBinStep } from '../util'
  */
 export async function bin(step: Step, store: TableStore): Promise<ColumnTable> {
 	const { input, args } = step
-	const { as } = args as BinArgs
+	const { to } = args as BinArgs
 
 	const inputTable = await store.get(input)
 
 	const rArgs = {
-		[`${as}`]: binExpr(inputTable, args as BinArgs),
+		[to]: binExpr(inputTable, args as BinArgs),
 	}
 
 	return inputTable.derive(rArgs)

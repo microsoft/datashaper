@@ -20,11 +20,11 @@ export const CompoundBinarize: React.FC<StepComponentProps> = memo(
 
 		const tbl = useLoadTable(input || internal.input, table, store)
 
-		const handleAsChange = useCallback(
+		const handleToChange = useCallback(
 			(e, v) => {
 				const updated = update({
 					...internal,
-					as: v,
+					to: v,
 				})
 				onChange && onChange(updated)
 			},
@@ -65,9 +65,9 @@ export const CompoundBinarize: React.FC<StepComponentProps> = memo(
 						required
 						label={'New column name'}
 						placeholder={'Column name'}
-						value={internal.as}
+						value={internal.to}
 						styles={columnDropdownStyles}
-						onChange={handleAsChange}
+						onChange={handleToChange}
 					/>
 				</LeftAlignedRow>
 				{stepInputs}

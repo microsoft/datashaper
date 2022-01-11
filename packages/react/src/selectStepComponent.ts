@@ -35,7 +35,7 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	binarize: Binarize,
 	concat: SetOperation,
 	derive: Derive,
-	except: SetOperation,
+	difference: SetOperation,
 	fill: Fill,
 	filter: Filter,
 	fold: ColumnListOperation,

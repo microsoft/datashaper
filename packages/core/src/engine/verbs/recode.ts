@@ -21,11 +21,11 @@ export async function recode(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { column, as, map } = args as RecodeArgs
+	const { column, to, map } = args as RecodeArgs
 	const inputTable = await store.get(input)
 
 	const dArgs: ExprObject = {
-		[as]: escape((d: any) => op.recode(d[column], map)),
+		[to]: escape((d: any) => op.recode(d[column], map)),
 	}
 
 	return inputTable.derive(dArgs)

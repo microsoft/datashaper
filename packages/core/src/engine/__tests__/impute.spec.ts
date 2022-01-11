@@ -13,7 +13,7 @@ describe('test for impute verb', () => {
 			verb: Verb.Impute,
 			input: 'table5',
 			output: 'output',
-			args: { as: 'item', value: 'emptyValue' },
+			args: { to: 'item', value: 'emptyValue' },
 		}
 
 		const store = new TestStore()
@@ -34,7 +34,7 @@ describe('test for impute verb', () => {
 			verb: Verb.Impute,
 			input: 'table11',
 			output: 'output',
-			args: { as: 'y', value: 5000 },
+			args: { to: 'y', value: 5000 },
 		}
 
 		const store = new TestStore()

@@ -10,7 +10,7 @@
 			"args": {
 				"field": "FY21 Sales",
 				"strategy": "auto",
-				"as": "Binned"
+				"to": "Binned"
 			}
 		},
 		{
@@ -21,7 +21,7 @@
 			"args": {
 				"field": "FY21 Sales",
 				"strategy": "fixed width",
-				"as": "Binned",
+				"to": "Binned",
 				"fixedwidth": 100000
 			}
 		},
@@ -33,7 +33,7 @@
 			"args": {
 				"field": "FY21 Sales",
 				"strategy": "fixed count",
-				"as": "Binned",
+				"to": "Binned",
 				"fixedcount": 100
 			}
 		},
@@ -45,7 +45,7 @@
 			"args": {
 				"field": "FY21 Sales",
 				"strategy": "fixed width",
-				"as": "Binned",
+				"to": "Binned",
 				"fixedwidth": 100000,
 				"min": 20000,
 				"max": 1000000
@@ -59,7 +59,7 @@
 			"args": {
 				"field": "FY21 Sales",
 				"strategy": "fixed width",
-				"as": "Binned",
+				"to": "Binned",
 				"fixedwidth": 100000,
 				"min": 20000,
 				"max": 1000000,

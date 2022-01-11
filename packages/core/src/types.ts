@@ -86,7 +86,7 @@ export enum SetOp {
 	Concat = 'concat',
 	Union = 'union',
 	Intersect = 'intersect',
-	Except = 'except',
+	Difference = 'difference',
 }
 
 export enum SortDirection {
@@ -161,30 +161,30 @@ export enum Verb {
 	Aggregate = 'aggregate',
 	Bin = 'bin',
 	Binarize = 'binarize',
+	Concat = 'concat',
 	Dedupe = 'dedupe',
 	Derive = 'derive',
+	Difference = 'difference',
 	Fetch = 'fetch',
 	Fill = 'fill',
-	Concat = 'concat',
-	Except = 'except',
+	Filter = 'filter',
+	Fold = 'fold',
+	Groupby = 'groupby',
 	Impute = 'impute',
 	Intersect = 'intersect',
-	Union = 'union',
-	Fold = 'fold',
-	Lookup = 'lookup',
-	Groupby = 'groupby',
-	Spread = 'spread',
-	Unroll = 'unroll',
-	Filter = 'filter',
 	Join = 'join',
+	Lookup = 'lookup',
 	Orderby = 'orderby',
+	Recode = 'recode',
 	Rename = 'rename',
 	Rollup = 'rollup',
 	Sample = 'sample',
 	Select = 'select',
+	Spread = 'spread',
 	Ungroup = 'ungroup',
+	Union = 'union',
 	Unorder = 'unorder',
-	Recode = 'recode',
+	Unroll = 'unroll',
 }
 
 export interface CompoundStep extends Step {
@@ -192,7 +192,7 @@ export interface CompoundStep extends Step {
 }
 
 export interface CompoundBinarizeStep extends CompoundStep {
-	as: string
+	to: string
 }
 
 export interface AggregateStep extends Step {
@@ -315,7 +315,7 @@ export interface OutputColumnArgs {
 	/**
 	 * Name of the output column to receive the operation's result.
 	 */
-	as: string
+	to: string
 }
 
 export interface RollupArgs extends OutputColumnArgs {
@@ -416,7 +416,6 @@ export interface FillArgs extends OutputColumnArgs {
 	 * Value to fill in the new column
 	 */
 	value: Value
-	as: string
 }
 
 export interface FilterArgs {
@@ -443,7 +442,7 @@ export interface FoldArgs extends ColumnListArgs {
 	 * it's overloaded. Usually just a single string, but some verbs
 	 * it is even an arbitrary length array.
 	 */
-	as?: [string, string]
+	to?: [string, string]
 }
 
 export type GroupbyArgs = ColumnListArgs

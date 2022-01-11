@@ -3,14 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, StepType, Verb } from '../../types'
-import { except } from '../verbs/except'
+import { difference } from '../verbs/difference'
 import { TestStore } from './TestStore'
 
-describe('test for except verb', () => {
-	test('except test with no duplicates', () => {
+describe('test for difference verb', () => {
+	test('difference test with no duplicates', () => {
 		const step: Step = {
 			type: StepType.Verb,
-			verb: Verb.Except,
+			verb: Verb.Difference,
 			input: 'table1',
 			output: 'output',
 			args: { others: ['table2'] },
@@ -18,7 +18,7 @@ describe('test for except verb', () => {
 
 		const store = new TestStore()
 
-		return except(step, store).then(result => {
+		return difference(step, store).then(result => {
 			// no dups in table2, so output should match original
 			expect(result.numCols()).toBe(3)
 			expect(result.numRows()).toBe(5)

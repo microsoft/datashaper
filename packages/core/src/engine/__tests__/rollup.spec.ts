@@ -15,7 +15,7 @@ describe('test for rollup verb', () => {
 			input: 'table3',
 			output: 'output',
 			args: {
-				as: 'count',
+				to: 'count',
 				field: 'item',
 				operation: FieldAggregateOperation.Count,
 			},
@@ -37,7 +37,7 @@ describe('test for rollup verb', () => {
 			input: 'table4',
 			output: 'output',
 			args: {
-				as: 'total',
+				to: 'total',
 				field: 'quantity',
 				operation: FieldAggregateOperation.Sum,
 			},
@@ -59,7 +59,7 @@ describe('test for rollup verb', () => {
 			input: 'table4',
 			output: 'output',
 			args: {
-				as: 'min',
+				to: 'min',
 				field: 'quantity',
 				operation: FieldAggregateOperation.Min,
 			},

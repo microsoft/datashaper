@@ -11,7 +11,7 @@
 				"groupby": "Symbol",
 				"field": "Close",
 				"operation": "array_agg",
-				"as": "Daily"
+				"to": "Daily"
 			}
 		}
 	]

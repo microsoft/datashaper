@@ -8,14 +8,14 @@ import { SetOp, Step } from '../../types'
 import { set } from '../util'
 
 /**
- * Executes an arquero table except.
+ * Executes an arquero table difference.
  * @param step
  * @param store
  * @returns
  */
-export async function except(
+export async function difference(
 	step: Step,
 	store: TableStore,
 ): Promise<ColumnTable> {
-	return set(step, store, SetOp.Except)
+	return set(step, store, SetOp.Difference)
 }

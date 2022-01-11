@@ -13,7 +13,7 @@ describe('test for fold verb', () => {
 			verb: Verb.Fold,
 			input: 'table1',
 			output: 'output',
-			args: { as: ['key', 'value'], columns: ['ID'] },
+			args: { to: ['key', 'value'], columns: ['ID'] },
 		}
 
 		const store = new TestStore()
@@ -37,7 +37,7 @@ describe('test for fold verb', () => {
 			verb: Verb.Fold,
 			input: 'table1',
 			output: 'output',
-			args: { as: ['key', 'value'], columns: ['ID', 'name'] },
+			args: { to: ['key', 'value'], columns: ['ID', 'name'] },
 		}
 
 		const store = new TestStore()

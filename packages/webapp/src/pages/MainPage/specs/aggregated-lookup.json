@@ -33,7 +33,7 @@
 				"groupby": "ID",
 				"field": "FY21 Sales",
 				"operation": "sum",
-				"as": "Total sales >= 10k"
+				"to": "Total sales >= 10k"
 			}
 		},
 		{

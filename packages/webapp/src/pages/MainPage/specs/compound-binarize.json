@@ -7,7 +7,7 @@
 			"verb": "binarize",
 			"input": "data/companies.csv",
 			"output": "compound-binarize-1",
-			"as": "Smallest & Largest",
+			"to": "Smallest & Largest",
 			"steps": [
 				{
 					"type": "verb",
@@ -19,7 +19,7 @@
 						"operator": "<",
 						"value": 150000,
 						"type": "value",
-						"as": "Smallest"
+						"to": "Smallest"
 					}
 				},
 				{
@@ -32,7 +32,7 @@
 						"operator": ">",
 						"value": 200000,
 						"type": "value",
-						"as": "Largest"
+						"to": "Largest"
 					}
 				},
 				{
@@ -44,7 +44,7 @@
 						"column1": "Smallest",
 						"column2": "Largest",
 						"operator": "+",
-						"as": "Combined"
+						"to": "Combined"
 					}
 				},
 				{
@@ -57,7 +57,7 @@
 						"operator": ">",
 						"value": 0,
 						"type": "value",
-						"as": "Smallest & Largest"
+						"to": "Smallest & Largest"
 					}
 				},
 				{

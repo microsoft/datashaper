@@ -46,10 +46,10 @@ function mergeSteps(
 	return { ...parent, steps: [join, filter, aggregate, lookup] }
 }
 
-export function updateAs(parent: StepChain, as: string): StepChain {
+export function updateAs(parent: StepChain, to: string): StepChain {
 	const [join, filter, aggregate, lookup] = parent.steps
-	aggregate.args.as = as
-	lookup.args.columns = [as]
+	aggregate.args.to = to
+	lookup.args.columns = [to]
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
 
@@ -122,7 +122,7 @@ function defaultAggregate(_parent: Step): AggregateStep {
 		input: 'compound-filter',
 		output: 'compound-aggregate',
 		args: {
-			as: 'aggregate',
+			to: 'aggregate',
 		} as AggregateArgs,
 	}
 }

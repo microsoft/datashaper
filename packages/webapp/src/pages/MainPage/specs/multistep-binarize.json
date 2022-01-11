@@ -12,7 +12,7 @@
 				"operator": "<",
 				"value": 150000,
 				"type": "value",
-				"as": "Smallest"
+				"to": "Smallest"
 			}
 		},
 		{
@@ -25,7 +25,7 @@
 				"operator": ">",
 				"value": 200000,
 				"type": "value",
-				"as": "Largest"
+				"to": "Largest"
 			}
 		},
 		{
@@ -37,7 +37,7 @@
 				"column1": "Smallest",
 				"column2": "Largest",
 				"operator": "+",
-				"as": "Smallest and Largest"
+				"to": "Smallest and Largest"
 			}
 		},
 		{

@@ -11,7 +11,7 @@
 				"groupby": "Symbol",
 				"field": "Month",
 				"operation": "array_agg",
-				"as": "Categories"
+				"to": "Categories"
 			}
 		}
 	]
