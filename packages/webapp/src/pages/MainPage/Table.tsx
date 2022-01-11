@@ -65,11 +65,11 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		[],
 	)
 
-	const getTotalCount = useCallback((children: IGroup[]) => {
+	const countChildren = useCallback((children: IGroup[]) => {
 		let total = 0
 		children.forEach(child => {
 			total += child.count
-			total += child.children ? getTotalCount(child.children) : 0
+			total += child.children ? countChildren(child.children) : 0
 		})
 		return total
 	}, [])
@@ -98,13 +98,13 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					<HeaderDetailsText>Children: {group?.count}</HeaderDetailsText>
 					{group?.children && (
 						<HeaderDetailsText>
-							Total Items: {getTotalCount(group?.children)}
+							Total Items: {countChildren(group?.children)}
 						</HeaderDetailsText>
 					)}
 				</HeaderContainer>
 			)
 		},
-		[getTotalCount],
+		[countChildren],
 	)
 
 	return (
