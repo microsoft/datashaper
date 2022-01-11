@@ -163,6 +163,7 @@ export enum Verb {
 	Binarize = 'binarize',
 	Dedupe = 'dedupe',
 	Derive = 'derive',
+	Fetch = 'fetch',
 	Fill = 'fill',
 	Concat = 'concat',
 	Except = 'except',
@@ -220,6 +221,10 @@ export interface DeriveStep extends Step {
 
 export interface ImputeStep extends Step {
 	args: FillArgs
+}
+
+export interface FetchStep extends Step {
+	args: FetchArgs
 }
 
 export interface FillStep extends Step {
@@ -290,6 +295,7 @@ export type Args =
 	| BinarizeArgs
 	| DedupeArgs
 	| DeriveArgs
+	| FetchArgs
 	| FillArgs
 	| FilterArgs
 	| FoldArgs
@@ -392,6 +398,17 @@ export interface DeriveArgs extends OutputColumnArgs {
 	column2: string
 
 	operator: MathOperator
+}
+
+export interface FetchArgs {
+	/**
+	 * URL where the csv file is located
+	 */
+	url: string
+	/**
+	 * Optional delimiter for csv
+	 */
+	delimiter?: string
 }
 
 export interface FillArgs extends OutputColumnArgs {

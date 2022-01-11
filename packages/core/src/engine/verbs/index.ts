@@ -13,6 +13,7 @@ import { concat } from './concat'
 import { dedupe } from './dedupe'
 import { derive } from './derive'
 import { except } from './except'
+import { fetch } from './fetch'
 import { fill } from './fill'
 import { filter } from './filter'
 import { fold } from './fold'
@@ -40,6 +41,7 @@ const verbs: Record<string, StepFunction> = {
 	dedupe,
 	derive,
 	except,
+	fetch,
 	fill,
 	filter,
 	fold,
@@ -128,6 +130,7 @@ export function factory(
 					columns: [],
 				},
 			}
+		case Verb.Fetch:
 		case Verb.Filter:
 		case Verb.Join:
 		case Verb.Orderby:

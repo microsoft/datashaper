@@ -5,6 +5,7 @@
 
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { FetchArgs, Step, TableStore } from '../..'
 
 /**
  * Executes an arquero loadCSV
@@ -13,9 +14,12 @@ import ColumnTable from 'arquero/dist/types/table/column-table'
  * @returns
  */
 export async function fetch(
-	url: string,
-	delimiter: string,
+	step: Step,
+	store: TableStore,
 ): Promise<ColumnTable> {
+	const { args } = step
+	const { url, delimiter } = args as FetchArgs
+
 	const tableFromCSV: Promise<ColumnTable> = loadCSV(url, {
 		delimiter: delimiter,
 	})
