@@ -59,9 +59,10 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(isSortable, onColumnHeaderClick)
 
-		// first subset the talbe using the visible columns
+		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
 		const subset = useSubsetTable(table, visibleColumns)
+		// sort the table internally
 		// note that this is different than the orderby of a pipeline step
 		// this is a temporary sort only for the table display
 		const sorted = useSortedTable(subset, sortColumn, sortDirection)
