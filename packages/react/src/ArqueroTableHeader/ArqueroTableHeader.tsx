@@ -53,7 +53,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 
 		return (
 			<Header>
-				<H2>{name}</H2>
+				{name ? <H2>{name}</H2> : null}
 				{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
 				{showColumnCount === true ? <H3>{table.numCols()} cols</H3> : null}
 				{allowDownload === true ? (
