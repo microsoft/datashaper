@@ -7,12 +7,11 @@ import { TableStore } from '../..'
 import { Step } from '../../types'
 
 /**
- * Executes an arquero orderby.
+ * Executes an arquero unorder.
  * @param step
  * @param store
  * @returns
  */
-//TODO These do not take any args
 export async function unorder(
 	step: Step,
 	store: TableStore,

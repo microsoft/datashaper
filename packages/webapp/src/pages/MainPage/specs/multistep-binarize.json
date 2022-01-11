@@ -46,13 +46,7 @@
 			"input": "derive-1",
 			"output": "select-1",
 			"args": {
-				"columns": {
-					"ID": "ID",
-					"Name": "Name",
-					"Employees": "Employees",
-					"US": "US",
-					"Smallest and Largest": "Smallest and Largest"
-				}
+				"columns": ["ID", "Name", "Employees", "US", "Smallest and Largest"]
 			}
 		}
 	]

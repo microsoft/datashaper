@@ -13,7 +13,7 @@ import {
 import { IColumn, IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { SetterOrUpdater } from 'recoil'
 import styled from 'styled-components'
 
@@ -36,6 +36,10 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	const [visibleColumns, setVisibleColumns] = useState<string[]>(
 		table.columnNames(),
 	)
+
+	useEffect(() => {
+		setVisibleColumns(table.columnNames())
+	}, [table, setVisibleColumns])
 
 	const columns = useMemo(() => {
 		return Object.entries(config).map(([key, conf]) => ({
@@ -105,12 +109,9 @@ function useCommands(
 			updateColumns(previous => {
 				if (checked) {
 					// order doesn't matter here
-					return [...previous, column]
+					return [...(previous || []), column]
 				} else {
-					const idx = previous.findIndex(col => col === column)
-					const update = [...previous]
-					update.splice(idx, 1)
-					return update
+					return [...(previous || [])].filter(col => col !== column)
 				}
 			})
 		},

@@ -492,10 +492,7 @@ export interface SampleArgs {
 	proportion?: number
 }
 
-export interface SelectArgs extends ColumnRecordArgs {
-	// TODO: spruce this up for consistency (columns is an object - maybe it should combine with true/false)
-	not?: string[]
-}
+export type SelectArgs = ColumnListArgs
 
 export type SpreadArgs = ColumnListArgs
 

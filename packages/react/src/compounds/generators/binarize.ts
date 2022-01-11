@@ -125,15 +125,13 @@ function makeOutputSelect(
 	parent: CompoundBinarizeStep,
 	derives: DeriveStep[],
 ): SelectStep {
-	const not = [...derives.map(d => d.args.to), COMBINED_COLUMN]
 	return {
 		type: StepType.Verb,
 		verb: 'select',
 		input: COLLECTOR,
 		output: parent.output,
 		args: {
-			columns: {},
-			not,
+			columns: [],
 		},
 	}
 }

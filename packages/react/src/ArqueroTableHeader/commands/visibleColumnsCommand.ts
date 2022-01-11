@@ -17,7 +17,7 @@ import { checkedItemsCommand } from './checkedItemsCommand'
  */
 export function visibleColumnsCommand(
 	table: ColumnTable,
-	columns: string[],
+	columns?: string[],
 	onCheckChange?: (column: string, checked: boolean) => void,
 ): ICommandBarItemProps {
 	return checkedItemsCommand(table.columnNames(), columns, onCheckChange, {

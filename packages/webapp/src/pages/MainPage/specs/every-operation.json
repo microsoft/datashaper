@@ -205,10 +205,7 @@
 			"input": "data/companies.csv",
 			"output": "select-1",
 			"args": {
-				"columns": {
-					"ID": "ID",
-					"Name": "Name"
-				}
+				"columns": ["ID", "Name"]
 			}
 		},
 		{

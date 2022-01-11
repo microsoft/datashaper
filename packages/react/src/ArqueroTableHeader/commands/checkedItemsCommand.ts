@@ -15,14 +15,14 @@ import { merge } from 'lodash'
  */
 export function checkedItemsCommand(
 	list: string[],
-	checked: string[],
+	checked?: string[],
 	onCheckChange?: (name: string, checked: boolean) => void,
 	props?: ICommandBarItemProps,
 ): ICommandBarItemProps {
 	const click = (name: string, checked: boolean) => {
 		onCheckChange && onCheckChange(name, checked)
 	}
-	const hash = checked.reduce((acc, cur) => {
+	const hash = (checked || []).reduce((acc, cur) => {
 		acc[cur] = true
 		return acc
 	}, {} as Record<string, boolean>)
