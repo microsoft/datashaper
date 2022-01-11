@@ -1,15 +1,11 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { ICommandBarItemProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
-/**
- * Table options specific to command execution
- */
-export interface CommandOptions {
-	allowDownload?: boolean
-	downloadFilename?: string
-}
-
-export interface ArqueroTableHeaderProps extends CommandOptions {
+export interface ArqueroTableHeaderProps {
 	table: ColumnTable
 	name?: string
 	showRowCount?: boolean

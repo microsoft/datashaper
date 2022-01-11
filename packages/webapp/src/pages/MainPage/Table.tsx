@@ -7,6 +7,8 @@ import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	DetailsListFeatures,
+	downloadCommand,
+	visibleColumnsCommand,
 } from '@data-wrangling-components/react'
 import { IColumn, IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
@@ -30,6 +32,9 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	compact,
 }) {
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
+	const [visibleColumns, setVisibleColumns] = useState<string[]>(
+		table.columnNames(),
+	)
 
 	const columns = useMemo(() => {
 		return Object.entries(config).map(([key, conf]) => ({
@@ -58,14 +63,37 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		[],
 	)
 
+	const handleColumnCheckChange = useCallback(
+		(column: string, checked: boolean) => {
+			setVisibleColumns(previous => {
+				if (checked) {
+					// order doesn't matter here
+					return [...previous, column]
+				} else {
+					const idx = previous.findIndex(col => col === column)
+					const update = [...previous]
+					update.splice(idx, 1)
+					return update
+				}
+			})
+		},
+		[setVisibleColumns],
+	)
+
+	const dlcmd = useMemo(() => downloadCommand(table), [table])
+	const vccmd = useMemo(
+		() => visibleColumnsCommand(table, visibleColumns, handleColumnCheckChange),
+		[table, visibleColumns, handleColumnCheckChange],
+	)
+
 	return (
 		<Container className="table-container">
 			<ArqueroTableHeader
+				table={table}
 				name={name ?? ''}
 				showRowCount={true}
 				showColumnCount={true}
-				allowDownload={true}
-				table={table}
+				commands={[dlcmd, vccmd]}
 			/>
 			<TableContainer>
 				<ArqueroDetailsList
@@ -80,6 +108,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					isSortable
 					showColumnBorders
 					isHeadersFixed
+					visibleColumns={visibleColumns}
 				/>
 			</TableContainer>
 		</Container>

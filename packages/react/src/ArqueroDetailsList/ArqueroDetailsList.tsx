@@ -21,6 +21,7 @@ import {
 	useSortedTable,
 	useSortHandling,
 	useStripedRowsRenderer,
+	useSubsetTable,
 } from './hooks'
 import { ArqueroDetailsListProps } from '.'
 
@@ -36,6 +37,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			offset = 0,
 			limit = Infinity,
 			includeAllColumns = true,
+			visibleColumns,
 			isSortable = false,
 			isStriped = false,
 			isColumnClickable = false,
@@ -57,27 +59,35 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(isSortable, onColumnHeaderClick)
 
-		// first apply sort to internal table copy
+		// first subset the talbe using the visible columns
+		// this will prevent any further operations on columns we aren't going to show
+		const subset = useSubsetTable(table, visibleColumns)
 		// note that this is different than the orderby of a pipeline step
 		// this is a temporary sort only for the table display
-		const sorted = useSortedTable(table, sortColumn, sortDirection)
+		const sorted = useSortedTable(subset, sortColumn, sortDirection)
 		// slice any potential page
 		const sliced = useSlicedTable(sorted, offset, limit)
 		// last, copy these items to actual JS objects for the DetailsList
 		const items = useMemo(() => sliced.objects(), [sliced])
 
-		const displayColumns = useColumns(table, columns, metadata, {
-			features,
-			sortColumn,
-			sortDirection,
-			selectedColumn,
-			onColumnClick,
-			onCellDropdownSelect,
-			includeAllColumns,
-			isColumnClickable,
-			isSortable,
-			showColumnBorders,
-		})
+		const displayColumns = useColumns(
+			table,
+			columns,
+			metadata,
+			visibleColumns,
+			{
+				features,
+				sortColumn,
+				sortDirection,
+				selectedColumn,
+				onColumnClick,
+				onCellDropdownSelect,
+				includeAllColumns,
+				isColumnClickable,
+				isSortable,
+				showColumnBorders,
+			},
+		)
 
 		const headerStyle = useDetailsListStyles(
 			isHeadersFixed,

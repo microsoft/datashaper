@@ -1,36 +1,23 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { ICommandBarItemProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
 import { merge } from 'lodash'
 import { useMemo } from 'react'
-import { download, visiblecolumns } from '../commands'
-import { CommandOptions } from '../types'
 
+/**
+ * This hooks just centralizes default command item styling for the header
+ * @param commands
+ * @returns
+ */
 export function useCommands(
-	table: ColumnTable,
 	commands: ICommandBarItemProps[] = [],
-	options: CommandOptions = {},
-) {
+): ICommandBarItemProps[] {
 	const theme = useThematic()
 	return useMemo(() => {
-		const { allowDownload, downloadFilename } = options
-		const cmds: ICommandBarItemProps[] = [...commands]
-		// if commands are not supplied, add a few based on options
-		if (cmds.length === 0) {
-			if (allowDownload) {
-				cmds.push(download(table, downloadFilename))
-			}
-			cmds.push(
-				visiblecolumns(
-					table.columnNames().map(c => ({
-						name: c,
-						checked: true,
-					})),
-				),
-			)
-		}
-		// all commands get style overrides to match theming
-		return cmds.map(c =>
+		return commands.map(command =>
 			merge(
 				{},
 				{
@@ -46,10 +33,13 @@ export function useCommands(
 							background: theme.application().accent().hex(),
 							color: theme.application().background().hex(),
 						},
+						menuIcon: {
+							color: theme.application().background().hex(),
+						},
 					},
 				},
-				c,
+				command,
 			),
 		)
-	}, [theme, commands, options])
+	}, [theme, commands])
 }

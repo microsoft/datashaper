@@ -1,7 +1,18 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { ICommandBarItemProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
-export function download(
+/**
+ * Constructs a download command.
+ * When clicked, will save the current table to a csv.
+ * @param table
+ * @param downloadFilename
+ * @returns
+ */
+export function downloadCommand(
 	table: ColumnTable,
 	downloadFilename = 'download.csv',
 ): ICommandBarItemProps {

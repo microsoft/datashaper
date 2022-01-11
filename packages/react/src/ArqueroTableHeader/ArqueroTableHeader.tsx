@@ -17,14 +17,9 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		name,
 		showRowCount = true,
 		showColumnCount = true,
-		allowDownload = false,
-		downloadFilename = 'download.csv',
 		commands,
 	}) {
-		const commandItems = useCommands(table, commands, {
-			allowDownload,
-			downloadFilename,
-		})
+		const commandItems = useCommands(commands)
 
 		return (
 			<Header>

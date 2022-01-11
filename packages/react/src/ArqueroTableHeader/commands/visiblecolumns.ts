@@ -1,28 +1,45 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { ICommandBarItemProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
-export function visiblecolumns(
+/**
+ * Constructs a visible columns command.
+ * This is a dropdown button that lists all of the
+ * columns in a table, with checks next to the visible ones.
+ * @param table
+ * @param columns
+ * @param onCheckChange
+ * @returns
+ */
+export function visibleColumnsCommand(
 	table: ColumnTable,
-	selectedColumns: string[],
+	columns: string[],
 	onCheckChange?: (column: string, checked: boolean) => void,
 ): ICommandBarItemProps {
-	const click = () => {}
-
-	// const items = table.columnNames().map(column => )
+	const click = (name: string, checked: boolean) => {
+		onCheckChange && onCheckChange(name, checked)
+	}
+	const hash = columns.reduce((acc, cur) => {
+		acc[cur] = true
+		return acc
+	}, {} as Record<string, boolean>)
+	const items = table.columnNames().map(column => ({
+		key: column,
+		text: column,
+		canCheck: true,
+		checked: hash[column],
+		onClick: () => click(column, !hash[column]),
+	}))
 	return {
 		key: 'visible-columns',
 		iconProps: {
 			iconName: 'ColumnVerticalSection',
 		},
-		onClick: click,
-		split: false,
 		subMenuProps: {
-			items: columns.map(column => ({
-				key: column.name,
-				text: column.name,
-				canCheck: true,
-				checked: column.checked,
-			})),
+			items,
 		},
 	}
 }
