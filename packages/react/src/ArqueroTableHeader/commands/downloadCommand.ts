@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { download } from '@data-wrangling-components/utilities'
 import { ICommandBarItemProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-
 /**
  * Constructs a download command.
  * When clicked, will save the current table to a csv.
@@ -14,23 +14,14 @@ import ColumnTable from 'arquero/dist/types/table/column-table'
  */
 export function downloadCommand(
 	table: ColumnTable,
-	downloadFilename = 'download.csv',
+	downloadFilename?: string,
 ): ICommandBarItemProps {
-	const click = () => {
-		// TODO: extract this to a reusable function in the utilities package
-		const blob = new Blob([table.toCSV()])
-		const dataURI = URL.createObjectURL(blob)
-		const link = document.createElement('a')
-		link.href = dataURI
-		link.type = 'text/csv'
-		link.download = downloadFilename
-		link.click()
-	}
 	return {
 		key: 'download',
+		title: 'Download table',
 		iconProps: {
 			iconName: 'Download',
 		},
-		onClick: click,
+		onClick: () => download(table, downloadFilename),
 	}
 }

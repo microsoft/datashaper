@@ -14,6 +14,7 @@ import { IColumn, IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 import React, { memo, useCallback, useMemo, useState } from 'react'
+import { SetterOrUpdater } from 'recoil'
 import styled from 'styled-components'
 
 export interface TableProps {
@@ -63,28 +64,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		[],
 	)
 
-	const handleColumnCheckChange = useCallback(
-		(column: string, checked: boolean) => {
-			setVisibleColumns(previous => {
-				if (checked) {
-					// order doesn't matter here
-					return [...previous, column]
-				} else {
-					const idx = previous.findIndex(col => col === column)
-					const update = [...previous]
-					update.splice(idx, 1)
-					return update
-				}
-			})
-		},
-		[setVisibleColumns],
-	)
-
-	const dlcmd = useMemo(() => downloadCommand(table), [table])
-	const vccmd = useMemo(
-		() => visibleColumnsCommand(table, visibleColumns, handleColumnCheckChange),
-		[table, visibleColumns, handleColumnCheckChange],
-	)
+	const commands = useCommands(table, visibleColumns, setVisibleColumns)
 
 	return (
 		<Container className="table-container">
@@ -93,7 +73,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				name={name ?? ''}
 				showRowCount={true}
 				showColumnCount={true}
-				commands={[dlcmd, vccmd]}
+				commands={commands}
 			/>
 			<TableContainer>
 				<ArqueroDetailsList
@@ -114,6 +94,35 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		</Container>
 	)
 })
+
+function useCommands(
+	table: ColumnTable,
+	visibleColumns: string[],
+	updateColumns: SetterOrUpdater<string[]>,
+) {
+	const handleColumnCheckChange = useCallback(
+		(column: string, checked: boolean) => {
+			updateColumns(previous => {
+				if (checked) {
+					// order doesn't matter here
+					return [...previous, column]
+				} else {
+					const idx = previous.findIndex(col => col === column)
+					const update = [...previous]
+					update.splice(idx, 1)
+					return update
+				}
+			})
+		},
+		[updateColumns],
+	)
+	const dlcmd = useMemo(() => downloadCommand(table), [table])
+	const vccmd = useMemo(
+		() => visibleColumnsCommand(table, visibleColumns, handleColumnCheckChange),
+		[table, visibleColumns, handleColumnCheckChange],
+	)
+	return useMemo(() => [dlcmd, vccmd], [dlcmd, vccmd])
+}
 
 const Container = styled.div`
 	width: 400px;
