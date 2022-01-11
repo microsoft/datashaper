@@ -149,8 +149,9 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				const columnName = existingGroups.names[actualLevel]
 
 				const startIndex =
-					items.slice(fatherIndex).findIndex(x => x[columnName] === value) +
-					fatherIndex
+					items
+						.slice(fatherIndex)
+						.findIndex((item: any) => item[columnName] === value) + fatherIndex
 
 				const group = {
 					key: value.toString(),
@@ -160,13 +161,13 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					count: valueGroups.length,
 				} as IGroup
 
-				if (actualLevel + 1 < totalLevelCount) {
-					const nextLevel = actualLevel + 1
+				const nextLevel = actualLevel + 1
+				if (nextLevel < totalLevelCount) {
 					const children = sortValueGroupsItems(
 						valueGroups,
 						existingGroups,
 						nextLevel,
-					).map(valueGroup => {
+					).map((valueGroup: any) => {
 						return buildGroup(
 							valueGroup,
 							existingGroups,
