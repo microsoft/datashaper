@@ -74,7 +74,7 @@ export function useColumnValueOptions(
 	column: string,
 	table: ColumnTable | undefined,
 	values?: Value[],
-	filter?: (name: string) => boolean,
+	filter?: (value: Value) => boolean,
 ): IDropdownOption[] {
 	const vals = useMemo(() => {
 		if (!table) {
@@ -195,7 +195,13 @@ export function useLoadTable(
 				// TODO: should we only listen if it fails at first?
 			}
 		}
-		if (name && store) {
+		// if a table already exists, use it directly
+		// TODO: should we set it in the store also?
+		// the expectation here is that a table will be provided if the step component is used directly without a builder
+		// interface that is managing a pipeline
+		if (table) {
+			setTable(table)
+		} else if (name && store) {
 			fn(name, store)
 		}
 		return () => {

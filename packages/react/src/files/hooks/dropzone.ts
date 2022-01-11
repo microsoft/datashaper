@@ -93,3 +93,29 @@ const useHandleOnDrop = (onDrop?: (collection: FileCollection) => void) => {
 		[onDrop],
 	)
 }
+
+export const useHandleOnUploadClick = (
+	acceptedFileTypes: string[],
+	handleCollection?: (fileCollection: FileCollection) => void,
+): (() => void) => {
+	return useCallback(() => {
+		let input: HTMLInputElement | null = document.createElement('input')
+		input.type = 'file'
+		input.multiple = true
+		input.accept = acceptedFileTypes.toString()
+		input.onchange = async (e: any) => {
+			if (e?.target?.files?.length) {
+				const { files } = e.target
+				const fileCollection = new FileCollection()
+				try {
+					await fileCollection.init([files[0]])
+					handleCollection && handleCollection(fileCollection)
+				} catch (e) {
+					console.error(e)
+				}
+			}
+		}
+		input.click()
+		input = null
+	}, [acceptedFileTypes, handleCollection])
+}
