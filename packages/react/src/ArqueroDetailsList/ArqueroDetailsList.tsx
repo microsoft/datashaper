@@ -20,13 +20,15 @@ import {
 	useColumns,
 	useDetailsHeaderRenderer,
 	useDetailsListStyles,
+	useGroupHeaderRenderer,
 	useSlicedTable,
 	useSortedGroups,
 	useSortedTable,
 	useSortHandling,
 	useStripedRowsRenderer,
+	useTableMetadata,
 } from './hooks'
-import { ArqueroDetailsListProps } from '.'
+import { ArqueroDetailsListProps, DetailsListFeatures } from '.'
 
 /**
  * Renders an arquero table using a fluent DetailsList.
@@ -86,7 +88,13 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			groupedEntries,
 		)
 
-		const displayColumns = useColumns(table, columns, metadata, {
+		const computedMetadata = useTableMetadata(
+			table,
+			metadata,
+			anyStatsFeatures(features),
+		)
+
+		const displayColumns = useColumns(table, computedMetadata, columns, {
 			features,
 			sortColumn,
 			sortDirection,
@@ -107,6 +115,11 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const renderRow = useStripedRowsRenderer(isStriped, showColumnBorders)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
+		const renderGroupHeader = useGroupHeaderRenderer(
+			table,
+			computedMetadata,
+			onRenderGroupHeader,
+		)
 
 		const sortValueGroupsItems = useCallback(
 			(
@@ -141,7 +154,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 				const group = {
 					key: value.toString(),
-					name: `${columnName} - ${value.toString()}`,
+					name: value.toString(),
 					startIndex: startIndex,
 					level: actualLevel,
 					count: valueGroups.length,
@@ -191,7 +204,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					layoutMode={layoutMode}
 					groups={groups}
 					groupProps={{
-						onRenderHeader: onRenderGroupHeader,
+						onRenderHeader: renderGroupHeader,
 					}}
 					columns={displayColumns as IColumn[]}
 					onColumnHeaderClick={handleColumnHeaderClick}
@@ -215,3 +228,7 @@ const DetailsWrapper = styled.div`
 		background-color: ${({ theme }) => theme.application().background().hex()};
 	}
 `
+
+function anyStatsFeatures(features?: DetailsListFeatures) {
+	return Object.values(features || {}).some(v => v)
+}

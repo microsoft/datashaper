@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ColumnMetadata, TableMetadata } from '@data-wrangling-components/core'
 import {
 	IColumn,
 	IDetailsListProps,
 	IDropdownOption,
 	IDetailsGroupDividerProps,
-	IRenderFunction,
 } from '@fluentui/react'
-import { TableMetadata } from '@data-wrangling-components/core'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type ColumnRenderFunction = (
@@ -25,6 +24,11 @@ export type DropdownOptionSelect =
 			index?: number | undefined,
 	  ) => void)
 	| undefined
+
+export type GroupHeaderFunction = (
+	meta?: ColumnMetadata,
+	props?: IDetailsGroupDividerProps | undefined,
+) => any
 
 export type ColumnClickFunction = (
 	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
@@ -124,7 +128,8 @@ export interface ArqueroDetailsListProps
 	/**
 	 * Passthrough to the group header rendering, when using the group by verb
 	 */
-	onRenderGroupHeader?: IRenderFunction<IDetailsGroupDividerProps> | undefined
+	onRenderGroupHeader?: GroupHeaderFunction
+	// IRenderFunction<IDetailsGroupDividerProps> | undefined
 	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */

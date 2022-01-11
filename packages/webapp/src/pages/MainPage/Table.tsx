@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ColumnMetadata } from '@data-wrangling-components/core'
 import {
 	ColumnConfigMap,
 	ArqueroDetailsList,
@@ -74,7 +75,10 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	}, [])
 
 	const handleRenderGroupHeader = useCallback(
-		(props: IDetailsGroupDividerProps | undefined) => {
+		(
+			columnMeta: ColumnMetadata | undefined,
+			props: IDetailsGroupDividerProps | undefined,
+		) => {
 			if (!props) return null
 			const { group, onToggleCollapse } = props
 
@@ -89,7 +93,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 						}}
 					></LevelButton>
 					<HeaderDetailsText>
-						<Bold>{group?.name}</Bold>
+						<Bold>{`${columnMeta?.name} - ${group?.name}` || group?.name}</Bold>
 					</HeaderDetailsText>
 					<HeaderDetailsText>Children: {group?.count}</HeaderDetailsText>
 					{group?.children && (
