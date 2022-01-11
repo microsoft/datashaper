@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FieldAggregateRollupOperation } from '@data-wrangling-components/core'
+import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
 import React, { memo } from 'react'
 import { opDropdownStyles } from '../styles'
@@ -25,7 +25,7 @@ export const FieldAggregateOperationDropdown: React.FC<FieldAggregateOperationDr
 		)
 	})
 
-const options = Object.values(FieldAggregateRollupOperation).map(o => ({
+const options = Object.values(FieldAggregateOperation).map(o => ({
 	key: o,
 	text: o,
 }))

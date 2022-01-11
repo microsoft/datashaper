@@ -109,7 +109,7 @@ export enum FilterCompareType {
  * on a single field so we don't accommodate additional args.
  * See https://uwdata.github.io/arquero/api/op#aggregate-functions
  */
-export enum FieldAggregateRollupOperation {
+export enum FieldAggregateOperation {
 	Any = 'any',
 	Count = 'count',
 	CountDistinct = 'distinct',
@@ -326,7 +326,7 @@ export interface RollupArgs extends OutputColumnArgs {
 	/**
 	 * Aggregate/rollup operation
 	 */
-	operation: FieldAggregateRollupOperation
+	operation: FieldAggregateOperation
 }
 
 export interface AggregateArgs extends RollupArgs {

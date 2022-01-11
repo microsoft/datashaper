@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FieldAggregateRollupOperation } from '../../../../core'
+import { FieldAggregateOperation } from '../../../../core'
 import { Step, StepType, Verb } from '../../types'
 import { rollup } from '../verbs/rollup'
 import { TestStore } from './TestStore'
@@ -17,7 +17,7 @@ describe('test for rollup verb', () => {
 			args: {
 				as: 'count',
 				field: 'item',
-				operation: FieldAggregateRollupOperation.Count,
+				operation: FieldAggregateOperation.Count,
 			},
 		}
 
@@ -39,7 +39,7 @@ describe('test for rollup verb', () => {
 			args: {
 				as: 'total',
 				field: 'quantity',
-				operation: FieldAggregateRollupOperation.Sum,
+				operation: FieldAggregateOperation.Sum,
 			},
 		}
 
@@ -61,7 +61,7 @@ describe('test for rollup verb', () => {
 			args: {
 				as: 'min',
 				field: 'quantity',
-				operation: FieldAggregateRollupOperation.Min,
+				operation: FieldAggregateOperation.Min,
 			},
 		}
 

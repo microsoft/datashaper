@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FieldAggregateRollupOperation } from '../../../../core'
+import { FieldAggregateOperation } from '../../../../core'
 import { Step, StepType, Verb } from '../../types'
 import { aggregate } from '../verbs/aggregate'
 import { TestStore } from './TestStore'
@@ -18,7 +18,7 @@ describe('test for aggregate verb', () => {
 				as: 'newColumn',
 				groupby: 'ID',
 				field: 'item',
-				operation: FieldAggregateRollupOperation.Count,
+				operation: FieldAggregateOperation.Count,
 			},
 		}
 
@@ -49,7 +49,7 @@ describe('test for aggregate verb', () => {
 				as: 'newColumn',
 				groupby: 'ID',
 				field: 'quantity',
-				operation: FieldAggregateRollupOperation.Sum,
+				operation: FieldAggregateOperation.Sum,
 			},
 		}
 
@@ -80,7 +80,7 @@ describe('test for aggregate verb', () => {
 				as: 'newColumn',
 				groupby: 'ID',
 				field: 'quantity',
-				operation: FieldAggregateRollupOperation.Min,
+				operation: FieldAggregateOperation.Min,
 			},
 		}
 
@@ -111,7 +111,7 @@ describe('test for aggregate verb', () => {
 				as: 'newColumn',
 				groupby: 'ID',
 				field: 'quantity',
-				operation: FieldAggregateRollupOperation.Median,
+				operation: FieldAggregateOperation.Median,
 			},
 		}
 

@@ -6,7 +6,7 @@ import { escape, op } from 'arquero'
 import { Op } from 'arquero/dist/types/op/op'
 import {
 	NumericComparisonOperator,
-	FieldAggregateRollupOperation,
+	FieldAggregateOperation,
 	StringComparisonOperator,
 	FilterCompareType,
 } from '../../types'
@@ -119,14 +119,14 @@ function compareValues(left: number, right: number, operator: string): 1 | 0 {
 	}
 }
 
-const fieldOps = new Set(Object.values(FieldAggregateRollupOperation))
+const fieldOps = new Set(Object.values(FieldAggregateOperation))
 
 // this currently only supports operations that take a single field name
 // TODO: we can support a bunch of the window operations too
 // note that this uses the aggregate op functions to generate an expression
 export function singleRollup(
 	field: string,
-	operation: FieldAggregateRollupOperation,
+	operation: FieldAggregateOperation,
 ): number | Op {
 	if (operation === 'count') {
 		return op.count()
