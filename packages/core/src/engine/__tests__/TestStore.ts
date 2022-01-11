@@ -63,6 +63,18 @@ export class TestStore extends TableStore {
 			],
 		})
 
+		const table10 = table({
+			x: ['A', 'B', 'A'],
+			y: [1, 2, 1],
+			z: [4, 5, 4],
+		})
+
+		const table11 = table({
+			x: ['A', 'B', 'A'],
+			y: [1, undefined, 1],
+			z: [4, 5, 4],
+		})
+
 		this.set('table1', table1)
 		this.set('table2', table2)
 		this.set('table3', table3)
@@ -72,5 +84,7 @@ export class TestStore extends TableStore {
 		this.set('table7', table7)
 		this.set('table8', table8)
 		this.set('table9', table9)
+		this.set('table10', table10)
+		this.set('table11', table11)
 	}
 }
