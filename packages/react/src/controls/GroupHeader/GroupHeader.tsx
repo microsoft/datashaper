@@ -4,17 +4,26 @@
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IconButton, IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
+import React, {
+	memo,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react'
+import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
 import { useIntersection } from '../../common'
 
 interface GroupHeaderProps {
 	columnMeta: ColumnMetadata
 	props: IDetailsGroupDividerProps
+	lazyLoadGroups: boolean
 }
 
 export const GroupHeader: React.FC<GroupHeaderProps> = memo(
-	function GroupHeader({ columnMeta, props }) {
+	function GroupHeader({ columnMeta, props, children, lazyLoadGroups }) {
 		const { group, onToggleCollapse } = props
 		const ref = useRef<HTMLDivElement>()
 		// whether the element toggle is manual or by visibility on scroll
@@ -33,25 +42,25 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 		}, [])
 
 		useEffect(() => {
-			if (
-				inViewport &&
-				group?.isCollapsed &&
-				!manualToggle &&
-				onToggleCollapse
-			) {
+			if (inViewport && group?.isCollapsed && onToggleCollapse) {
 				onToggleCollapse(group as IGroup)
 			}
-		}, [inViewport, group, onToggleCollapse, manualToggle])
+		}, [inViewport, group, onToggleCollapse])
 
 		const onManualLevelToggle = useCallback(() => {
 			setManualToggle(true)
 			onToggleCollapse && onToggleCollapse(group as IGroup)
 		}, [group, onToggleCollapse, setManualToggle])
 
+		const shouldLazyLoad = useMemo((): boolean => {
+			return lazyLoadGroups && (group?.level as number) > 0 && !manualToggle
+		}, [group, lazyLoadGroups, manualToggle])
+
 		return (
 			<HeaderContainer
+				// uses the ref to toggle if element is into view if the user didn't toggled it with the button
 				ref={(element: HTMLDivElement) =>
-					(ref.current = (group?.level as number) > 0 ? element : undefined)
+					(ref.current = shouldLazyLoad ? element : undefined)
 				}
 				groupLevel={group?.level as number}
 			>
@@ -61,17 +70,24 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 						iconName: group?.isCollapsed ? 'ChevronRight' : 'ChevronDown',
 					}}
 				></LevelButton>
-				<HeaderDetailsText>
-					<Bold>
-						{columnMeta?.name ? `${columnMeta?.name}  - ` : '' + group?.name}
-					</Bold>
-				</HeaderDetailsText>
-				<HeaderDetailsText>Children: {group?.count}</HeaderDetailsText>
-				{group?.children && (
-					<HeaderDetailsText>
-						Total Items: {countChildren(group?.children)}
-					</HeaderDetailsText>
-				)}
+				<If condition={!!children}>
+					<Then>{children}</Then>
+					<Else>
+						<HeaderDetailsText>
+							<Bold>
+								{columnMeta?.name
+									? `${columnMeta?.name}  - `
+									: '' + group?.name}
+							</Bold>
+						</HeaderDetailsText>
+						<HeaderDetailsText>Children: {group?.count}</HeaderDetailsText>
+						{group?.children && (
+							<HeaderDetailsText>
+								Total Items: {countChildren(group?.children)}
+							</HeaderDetailsText>
+						)}
+					</Else>
+				</If>
 			</HeaderContainer>
 		)
 	},

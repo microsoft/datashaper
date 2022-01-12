@@ -17,6 +17,7 @@ export function useGroupHeaderRenderer(
 	table: ColumnTable,
 	computedMetadata: TableMetadata,
 	groupHeaderFunction?: GroupHeaderFunction,
+	lazyLoadGroups = true,
 ): IRenderFunction<IDetailsGroupDividerProps> {
 	return useCallback(
 		(props?, defaultRender?) => {
@@ -27,11 +28,17 @@ export function useGroupHeaderRenderer(
 			const columnName = table.groups().names[props.groupLevel as number]
 			const meta = computedMetadata.columns[columnName]
 			if (!groupHeaderFunction) {
-				return <GroupHeader props={props} columnMeta={meta} />
+				return (
+					<GroupHeader
+						props={props}
+						columnMeta={meta}
+						lazyLoadGroups={lazyLoadGroups}
+					/>
+				)
 			}
 
 			return groupHeaderFunction(meta, props)
 		},
-		[groupHeaderFunction, computedMetadata, table],
+		[groupHeaderFunction, computedMetadata, table, lazyLoadGroups],
 	)
 }

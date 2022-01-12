@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { SortDirection } from '@data-wrangling-components/core'
 import {
 	DetailsList,
 	DetailsListLayoutMode,
@@ -11,11 +10,11 @@ import {
 	SelectionMode,
 	IDetailsListStyles,
 	ConstrainMode,
-	IGroup,
 } from '@fluentui/react'
-import { RowObject, GroupBySpec } from 'arquero/dist/types/table/table'
-import React, { memo, useCallback, useMemo } from 'react'
+import { RowObject } from 'arquero/dist/types/table/table'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
+import { groupBuilder } from '../common/'
 import {
 	useColumns,
 	useDetailsHeaderRenderer,
@@ -119,71 +118,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			table,
 			computedMetadata,
 			onRenderGroupHeader,
-		)
-
-		const sortValueGroupsItems = useCallback(
-			(
-				entries: RowObject[],
-				existingGroups: any,
-				nextLevel: number,
-			): RowObject[] => {
-				const columnName = existingGroups.names[nextLevel]
-				if (sortColumn && sortColumn !== columnName) return entries
-				return sortDirection === SortDirection.Ascending
-					? entries.sort((a, b) => a[0] - b[0])
-					: entries.sort((a, b) => b[0] - a[0])
-			},
-			[sortDirection, sortColumn],
-		)
-
-		const buildGroup = useCallback(
-			(
-				row: RowObject,
-				existingGroups: GroupBySpec,
-				actualLevel: number,
-				totalLevelCount: number,
-				fatherIndex = 0,
-			): IGroup => {
-				const value = row[0]
-				const valueGroups = row[1]
-				const columnName = existingGroups.names[actualLevel]
-
-				const startIndex =
-					items
-						.slice(fatherIndex)
-						.findIndex((item: any) => item[columnName] === value) + fatherIndex
-
-				const group = {
-					key: value.toString(),
-					name: value.toString(),
-					startIndex: startIndex,
-					level: actualLevel,
-					count: valueGroups.length,
-					isCollapsed: !onRenderGroupHeader
-						? actualLevel !== 0 && startIndex !== 0
-						: false,
-				} as IGroup
-
-				const nextLevel = actualLevel + 1
-				if (nextLevel < totalLevelCount) {
-					const children = sortValueGroupsItems(
-						valueGroups,
-						existingGroups,
-						nextLevel,
-					).map((valueGroup: any) => {
-						return buildGroup(
-							valueGroup,
-							existingGroups,
-							nextLevel,
-							totalLevelCount,
-							startIndex,
-						)
-					})
-					group.children = children
-				}
-				return group
-			},
-			[items, sortValueGroupsItems, onRenderGroupHeader],
+			features.lazyLoadGroups,
 		)
 
 		const groups = useMemo(() => {
@@ -196,9 +131,18 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 			return sortedGroups?.map((row: RowObject) => {
 				const initialLevel = 0
-				return buildGroup(row, existingGroups, initialLevel, totalLevelCount)
+				return groupBuilder(
+					row,
+					existingGroups,
+					initialLevel,
+					totalLevelCount,
+					items,
+					sortDirection,
+					features.lazyLoadGroups,
+					sortColumn,
+				)
 			})
-		}, [sliced, buildGroup, sortedGroups])
+		}, [sliced, sortedGroups, items, sortColumn, sortDirection, features])
 
 		return (
 			<DetailsWrapper>

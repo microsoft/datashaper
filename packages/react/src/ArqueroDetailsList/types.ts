@@ -80,6 +80,10 @@ export interface DetailsListFeatures {
 	 * Without smartCells, If datatype is array, shows a dropdown with the values
 	 */
 	showDropdown?: boolean
+	/**
+	 * Collapse most groups so we can lazy load them. Default as true
+	 */
+	lazyLoadGroups?: boolean
 }
 
 export interface ArqueroDetailsListProps
@@ -129,7 +133,6 @@ export interface ArqueroDetailsListProps
 	 * Passthrough to the group header rendering, when using the group by verb
 	 */
 	onRenderGroupHeader?: GroupHeaderFunction
-	// IRenderFunction<IDetailsGroupDividerProps> | undefined
 	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */

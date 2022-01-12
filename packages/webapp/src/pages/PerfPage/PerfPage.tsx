@@ -3,15 +3,20 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { TableMetadata, introspect } from '@data-wrangling-components/core'
+import {
+	TableMetadata,
+	introspect,
+	ColumnMetadata,
+} from '@data-wrangling-components/core'
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 } from '@data-wrangling-components/react'
-import { Pivot, PivotItem } from '@fluentui/react'
+import { createLazyLoadingGroupHeader } from '@data-wrangling-components/react/src/ArqueroDetailsList/renderers'
+import { IDetailsGroupDividerProps, Pivot, PivotItem } from '@fluentui/react'
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 /**
  * This is just a rudimentary page to load a large table for profiling the ArqueroDetailsList rendering.
@@ -42,9 +47,19 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		f()
 	}, [])
 
+	const customGroupHeader = useCallback(
+		(meta?: ColumnMetadata, props?: IDetailsGroupDividerProps | undefined) => {
+			const custom = <h3>{meta?.name}</h3>
+
+			return createLazyLoadingGroupHeader(props, meta, custom)
+		},
+		[],
+	)
+
 	if (!table || !metadata || !groupedTable || !groupedMetadata) {
 		return null
 	}
+
 	return (
 		<Container>
 			<p>
@@ -76,6 +91,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 								smartCells: true,
 								smartHeaders: true,
 							}}
+							onRenderGroupHeader={customGroupHeader}
 							isSortable
 						/>
 					</Table>
