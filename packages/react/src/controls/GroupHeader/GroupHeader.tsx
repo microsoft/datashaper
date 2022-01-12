@@ -18,7 +18,7 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 		const { group, onToggleCollapse } = props
 		const ref = useRef<HTMLDivElement>()
 		// whether the element toggle is manual or by visibility on scroll
-		const [manual, setManual] = useState(false)
+		const [manualToggle, setManualToggle] = useState(false)
 
 		// trigger as soon as the element becomes visible
 		const inViewport = useIntersection(ref.current, '0px')
@@ -33,15 +33,20 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 		}, [])
 
 		useEffect(() => {
-			if (inViewport && group?.isCollapsed && !manual && onToggleCollapse) {
+			if (
+				inViewport &&
+				group?.isCollapsed &&
+				!manualToggle &&
+				onToggleCollapse
+			) {
 				onToggleCollapse(group as IGroup)
 			}
-		}, [inViewport, group, onToggleCollapse, manual])
+		}, [inViewport, group, onToggleCollapse, manualToggle])
 
 		const onManualLevelToggle = useCallback(() => {
-			setManual(true)
+			setManualToggle(true)
 			onToggleCollapse && onToggleCollapse(group as IGroup)
-		}, [group, onToggleCollapse, setManual])
+		}, [group, onToggleCollapse, setManualToggle])
 
 		return (
 			<HeaderContainer
@@ -57,7 +62,9 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 					}}
 				></LevelButton>
 				<HeaderDetailsText>
-					<Bold>{`${columnMeta?.name} - ${group?.name}` || group?.name}</Bold>
+					<Bold>
+						{columnMeta?.name ? `${columnMeta?.name}  - ` : '' + group?.name}
+					</Bold>
 				</HeaderDetailsText>
 				<HeaderDetailsText>Children: {group?.count}</HeaderDetailsText>
 				{group?.children && (
