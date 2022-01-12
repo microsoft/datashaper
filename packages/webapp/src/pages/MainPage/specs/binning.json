@@ -8,7 +8,7 @@
 			"input": "data/products.csv",
 			"output": "bin-1",
 			"args": {
-				"field": "FY21 Sales",
+				"column": "FY21 Sales",
 				"strategy": "auto",
 				"to": "Binned"
 			}
@@ -19,7 +19,7 @@
 			"input": "data/products.csv",
 			"output": "bin-2",
 			"args": {
-				"field": "FY21 Sales",
+				"column": "FY21 Sales",
 				"strategy": "fixed width",
 				"to": "Binned",
 				"fixedwidth": 100000
@@ -31,7 +31,7 @@
 			"input": "data/products.csv",
 			"output": "bin-3",
 			"args": {
-				"field": "FY21 Sales",
+				"column": "FY21 Sales",
 				"strategy": "fixed count",
 				"to": "Binned",
 				"fixedcount": 100
@@ -43,7 +43,7 @@
 			"input": "data/products.csv",
 			"output": "bin-4",
 			"args": {
-				"field": "FY21 Sales",
+				"column": "FY21 Sales",
 				"strategy": "fixed width",
 				"to": "Binned",
 				"fixedwidth": 100000,
@@ -57,7 +57,7 @@
 			"input": "data/products.csv",
 			"output": "bin-5",
 			"args": {
-				"field": "FY21 Sales",
+				"column": "FY21 Sales",
 				"strategy": "fixed width",
 				"to": "Binned",
 				"fixedwidth": 100000,

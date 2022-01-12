@@ -70,7 +70,7 @@ export function updateLookupColumn(
 ): StepChain {
 	const [join, filter, aggregate, lookup] = parent.steps
 	filter.args.column = column
-	aggregate.args.field = column
+	aggregate.args.column = column
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
 

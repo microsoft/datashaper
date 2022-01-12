@@ -19,7 +19,7 @@ export const BinDescription: React.FC<StepDescriptionProps> = memo(
 				},
 				{
 					before: 'using column',
-					value: args.field,
+					value: args.column,
 					sub: [
 						{
 							before: 'with',

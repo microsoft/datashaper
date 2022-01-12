@@ -17,7 +17,7 @@ describe('test for bin verb', () => {
 			output: 'output',
 			args: {
 				to: 'newColumn',
-				field: 'count',
+				column: 'count',
 				strategy: BinStrategy.FixedCount,
 				fixedcount: 5,
 			},
@@ -42,7 +42,7 @@ describe('test for bin verb', () => {
 			output: 'output',
 			args: {
 				to: 'newColumn',
-				field: 'count',
+				column: 'count',
 				strategy: BinStrategy.FixedWidth,
 				fixedwidth: 30,
 			},

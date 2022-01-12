@@ -22,7 +22,7 @@
 			"args": {
 				"to": "Monthly Average",
 				"groupby": "Month Key",
-				"field": "Close",
+				"column": "Close",
 				"operation": "mean"
 			}
 		},
@@ -45,7 +45,7 @@
 			"args": {
 				"to": "Monthly List",
 				"groupby": "Symbol",
-				"field": "Monthly Average",
+				"column": "Monthly Average",
 				"operation": "array_agg"
 			}
 		}

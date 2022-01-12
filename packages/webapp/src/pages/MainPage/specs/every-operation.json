@@ -9,7 +9,7 @@
 			"output": "aggregate-1",
 			"args": {
 				"groupby": "ID",
-				"field": "FY21 Sales",
+				"column": "FY21 Sales",
 				"operation": "sum",
 				"to": "Total sales"
 			}
@@ -21,7 +21,7 @@
 			"output": "aggregate-2",
 			"args": {
 				"groupby": "ID",
-				"field": "Product",
+				"column": "Product",
 				"operation": "array_agg",
 				"to": "Product List"
 			}
@@ -32,7 +32,7 @@
 			"input": "data/products.csv",
 			"output": "bin-1",
 			"args": {
-				"field": "FY21 Sales",
+				"column": "FY21 Sales",
 				"strategy": "auto",
 				"to": "Binned"
 			}

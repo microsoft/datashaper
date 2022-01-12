@@ -5,7 +5,7 @@
 import {
 	TableStore,
 	Step,
-	ColumnRecordArgs,
+	InputColumnRecordArgs,
 	Value,
 	DataType,
 	columnType,
@@ -164,13 +164,14 @@ export function useColumnRecordDelete(
 ): (column: string) => void {
 	return useCallback(
 		column => {
-			const args = { ...step.args } as ColumnRecordArgs
+			const internal = step as Step<InputColumnRecordArgs>
+			const args = { ...internal.args }
 			delete args.columns[column]
 			onChange &&
 				onChange({
 					...step,
 					args: {
-						...step.args,
+						...internal.args,
 						...args,
 					},
 				})

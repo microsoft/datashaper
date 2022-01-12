@@ -22,7 +22,7 @@
 			"args": {
 				"to": "Week Average",
 				"groupby": "Week Key",
-				"field": "Close",
+				"column": "Close",
 				"operation": "mean"
 			}
 		},
@@ -45,7 +45,7 @@
 			"args": {
 				"to": "Monthly List",
 				"groupby": "Symbol",
-				"field": "Week Average",
+				"column": "Week Average",
 				"operation": "array_agg"
 			}
 		}
