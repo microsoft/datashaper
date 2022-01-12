@@ -353,9 +353,6 @@ export interface FilterArgs extends InputColumnArgs {
 export interface FoldArgs extends InputColumnListArgs {
 	/**
 	 * Two-element array of names for the output [key, value]
-	 * TODO: consider renaming - while this is the arg name in arquero,
-	 * it's overloaded. Usually just a single string, but some verbs
-	 * it is even an arbitrary length array.
 	 */
 	to?: [string, string]
 }
