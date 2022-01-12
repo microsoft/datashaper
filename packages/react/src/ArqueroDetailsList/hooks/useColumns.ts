@@ -95,13 +95,16 @@ export function useColumns(
 		showColumnBorders,
 	)
 
-	const names = useColumnNamesList(table, columns, includeAllColumns)
+	const names = useColumnNamesList(
+		table,
+		columns,
+		includeAllColumns,
+		visibleColumns,
+	)
 
 	return useMemo(() => {
 		const columnMap = reduce(columns)
-		const visibleMap = hash(visibleColumns)
-		const visible = names.filter(name => visibleMap[name])
-		return visible.map(name => {
+		return names.map(name => {
 			const column = columnMap[name] || {
 				key: name,
 				name,
@@ -168,7 +171,6 @@ export function useColumns(
 		computedMetadata,
 		colorScale,
 		handleCellDropdownSelect,
-		visibleColumns,
 	])
 }
 
@@ -180,11 +182,4 @@ function reduce(columns?: IColumn[]): Record<string, IColumn> {
 		acc[cur.name] = cur
 		return acc
 	}, {} as Record<string, IColumn>)
-}
-
-function hash(names?: string[]): Record<string, boolean> {
-	return (names || []).reduce((acc, cur) => {
-		acc[cur] = true
-		return acc
-	}, {} as Record<string, boolean>)
 }
