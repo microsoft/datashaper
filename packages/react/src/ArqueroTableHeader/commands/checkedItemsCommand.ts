@@ -35,7 +35,7 @@ export function checkedItemsCommand(
 			key: 'checked-items',
 			title: 'Select items',
 			iconProps: {
-				iconName: 'CheckMark',
+				iconName: 'MultiSelect',
 			},
 			subMenuProps: {
 				items,
