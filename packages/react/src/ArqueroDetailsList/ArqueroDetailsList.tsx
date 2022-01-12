@@ -122,8 +122,4 @@ const DetailsWrapper = styled.div`
 	height: inherit;
 	position: relative;
 	max-height: inherit;
-
-	span.ms-DetailsHeader-cellTitle {
-		background-color: ${({ theme }) => theme.application().background().hex()};
-	}
 `
