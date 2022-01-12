@@ -13,7 +13,7 @@ describe('test for fill verb', () => {
 			verb: Verb.Fill,
 			input: 'table1',
 			output: 'output',
-			args: { as: 'newColumn', value: 'false' },
+			args: { to: 'newColumn', value: 'false' },
 		}
 
 		const store = new TestStore()
@@ -38,7 +38,7 @@ describe('test for fill verb', () => {
 			verb: Verb.Fill,
 			input: 'table1',
 			output: 'output',
-			args: { as: 'newColumn', value: 20 },
+			args: { to: 'newColumn', value: 20 },
 		}
 
 		const store = new TestStore()

@@ -125,7 +125,7 @@ const fieldOps = new Set(Object.values(FieldAggregateOperation))
 // TODO: we can support a bunch of the window operations too
 // note that this uses the aggregate op functions to generate an expression
 export function singleRollup(
-	field: string,
+	column: string,
 	operation: FieldAggregateOperation,
 ): number | Op {
 	if (operation === 'count') {
@@ -135,40 +135,40 @@ export function singleRollup(
 			`Unsupported operation [${operation}], too many parameters needed`,
 		)
 	}
-	return op[operation](field)
+	return op[operation](column)
 }
 
 export function fixedBinCount(
-	field: string,
+	column: string,
 	min: number,
 	max: number,
 	count: number,
 	clamped?: boolean,
 ): string {
 	const step = (max - min) / count
-	return fixedBinStep(field, min, max, step, clamped)
+	return fixedBinStep(column, min, max, step, clamped)
 }
 
 export function fixedBinStep(
-	field: string,
+	column: string,
 	min: number,
 	max: number,
 	step: number,
 	clamped?: boolean,
 ): string {
-	return coreExpr(field, min, max, step, clamped)
+	return coreExpr(column, min, max, step, clamped)
 }
 
 function coreExpr(
-	field: string,
+	column: string,
 	min: number,
 	max: number,
 	step: number,
 	clamped?: boolean,
 ): string {
-	const core = `op.bin(d['${field}'],${min},${max},${step})`
+	const core = `op.bin(d['${column}'],${min},${max},${step})`
 	if (clamped) {
-		return `d['${field}'] < ${min} ? ${min} : d['${field}'] > ${max} ? ${max} : ${core}`
+		return `d['${column}'] < ${min} ? ${min} : d['${column}'] > ${max} ? ${max} : ${core}`
 	}
 	return core
 }

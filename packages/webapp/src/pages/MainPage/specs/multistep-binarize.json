@@ -12,7 +12,7 @@
 				"operator": "<",
 				"value": 150000,
 				"type": "value",
-				"as": "Smallest"
+				"to": "Smallest"
 			}
 		},
 		{
@@ -25,7 +25,7 @@
 				"operator": ">",
 				"value": 200000,
 				"type": "value",
-				"as": "Largest"
+				"to": "Largest"
 			}
 		},
 		{
@@ -37,7 +37,7 @@
 				"column1": "Smallest",
 				"column2": "Largest",
 				"operator": "+",
-				"as": "Smallest and Largest"
+				"to": "Smallest and Largest"
 			}
 		},
 		{
@@ -46,13 +46,7 @@
 			"input": "derive-1",
 			"output": "select-1",
 			"args": {
-				"columns": {
-					"ID": "ID",
-					"Name": "Name",
-					"Employees": "Employees",
-					"US": "US",
-					"Smallest and Largest": "Smallest and Largest"
-				}
+				"columns": ["ID", "Name", "Employees", "US", "Smallest and Largest"]
 			}
 		}
 	]

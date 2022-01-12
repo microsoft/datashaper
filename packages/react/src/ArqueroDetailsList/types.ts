@@ -103,6 +103,11 @@ export interface ArqueroDetailsListProps
 	 * If false, a columns array must be provided.
 	 */
 	includeAllColumns?: boolean
+	/**
+	 * List of visible columns selected from the table.
+	 * If ommitted all configured columns are shown by default.
+	 */
+	visibleColumns?: string[]
 	isSortable?: boolean
 	/**
 	 * Indicates whether to use even/odd row coloring.

@@ -43,7 +43,7 @@ const VERBS = [
 	'binarize',
 	'concat',
 	'derive',
-	'except',
+	'difference',
 	'fill',
 	'filter',
 	'fold',

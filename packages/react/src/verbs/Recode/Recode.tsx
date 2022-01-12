@@ -22,12 +22,12 @@ import {
 	useHandleDropdownChange,
 	useHandleTextfieldChange,
 	useLoadTable,
+	useColumnType,
 } from '../../common'
 import { ColumnValueDropdown, TableColumnDropdown } from '../../controls'
 import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 import {
-	useColumnType,
 	useColumnValues,
 	useDisabled,
 	useHandleAddButtonClick,
@@ -52,7 +52,7 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 	const values = useColumnValues(internal, tbl)
 	const dataType = useColumnType(tbl, internal.args.column)
 
-	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)
+	const handleToChange = useHandleTextfieldChange(internal, 'args.to', onChange)
 	const handleColumnChange = useHandleDropdownChange(
 		internal,
 		'args.column',
@@ -79,9 +79,9 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 				required
 				label={'New column name'}
 				placeholder={'Column name'}
-				value={internal.args.as}
+				value={internal.args.to}
 				styles={columnDropdownStyles}
-				onChange={handleAsChange}
+				onChange={handleToChange}
 			/>
 			<TableColumnDropdown
 				table={tbl}

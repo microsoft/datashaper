@@ -31,9 +31,9 @@
 			"output": "aggregate-1",
 			"args": {
 				"groupby": "ID",
-				"field": "FY21 Sales",
+				"column": "FY21 Sales",
 				"operation": "sum",
-				"as": "Total sales >= 10k"
+				"to": "Total sales >= 10k"
 			}
 		},
 		{

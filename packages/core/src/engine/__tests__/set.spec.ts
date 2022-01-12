@@ -10,7 +10,7 @@ describe('test for set util', () => {
 	test('concat test', () => {
 		const step: Step = {
 			type: StepType.Verb,
-			verb: Verb.Except,
+			verb: Verb.Difference,
 			input: 'table1',
 			output: 'output',
 			args: { others: ['table2'] },
@@ -29,7 +29,7 @@ describe('test for set util', () => {
 	test('union test', () => {
 		const step: Step = {
 			type: StepType.Verb,
-			verb: Verb.Except,
+			verb: Verb.Difference,
 			input: 'table1',
 			output: 'output',
 			args: { others: ['table2'] },
@@ -47,7 +47,7 @@ describe('test for set util', () => {
 	test('intersect test', () => {
 		const step: Step = {
 			type: StepType.Verb,
-			verb: Verb.Except,
+			verb: Verb.Difference,
 			input: 'table4',
 			output: 'output',
 			args: { others: ['table5'] },
@@ -65,10 +65,10 @@ describe('test for set util', () => {
 		})
 	})
 
-	test('except test', () => {
+	test('difference test', () => {
 		const step: Step = {
 			type: StepType.Verb,
-			verb: Verb.Except,
+			verb: Verb.Difference,
 			input: 'table1',
 			output: 'output',
 			args: { others: ['table2'] },
@@ -76,7 +76,7 @@ describe('test for set util', () => {
 
 		const store = new TestStore()
 
-		return set(step, store, SetOp.Except).then(result => {
+		return set(step, store, SetOp.Difference).then(result => {
 			// no dups in table2, so output should match original
 			expect(result.numCols()).toBe(3)
 			expect(result.numRows()).toBe(5)

@@ -5,8 +5,10 @@
 import {
 	TableStore,
 	Step,
-	ColumnRecordArgs,
+	InputColumnRecordArgs,
 	Value,
+	DataType,
+	columnType,
 } from '@data-wrangling-components/core'
 import { IDropdownOption } from '@fluentui/react'
 import { op } from 'arquero'
@@ -162,13 +164,14 @@ export function useColumnRecordDelete(
 ): (column: string) => void {
 	return useCallback(
 		column => {
-			const args = { ...step.args } as ColumnRecordArgs
+			const internal = step as Step<InputColumnRecordArgs>
+			const args = { ...internal.args }
 			delete args.columns[column]
 			onChange &&
 				onChange({
 					...step,
 					args: {
-						...step.args,
+						...internal.args,
 						...args,
 					},
 				})
@@ -230,4 +233,13 @@ export function useIntersection(
 	}, [element, rootMargin])
 
 	return isVisible
+}
+
+export function useColumnType(table?: ColumnTable, column?: string): DataType {
+	return useMemo(() => {
+		if (!table || !column) {
+			return DataType.Unknown
+		}
+		return columnType(table, column)
+	}, [table, column])
 }

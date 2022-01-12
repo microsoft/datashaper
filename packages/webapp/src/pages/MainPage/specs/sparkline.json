@@ -9,9 +9,9 @@
 			"output": "sparkline",
 			"args": {
 				"groupby": "Symbol",
-				"field": "Close",
+				"column": "Close",
 				"operation": "array_agg",
-				"as": "Daily"
+				"to": "Daily"
 			}
 		}
 	]

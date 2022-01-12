@@ -14,10 +14,8 @@ export const SelectDescription: React.FC<StepDescriptionProps> = memo(
 			const { args } = internal
 			return [
 				{
-					before: `column${
-						Object.keys(args.columns || {}).length !== 1 ? 's' : ''
-					}`,
-					value: args.columns ? Object.keys(args.columns).join(', ') : null,
+					before: `column${(args.columns || []).length !== 1 ? 's' : ''}`,
+					value: args.columns ? args.columns.join(', ') : null,
 				},
 			]
 		}, [props])

@@ -9,9 +9,9 @@
 			"output": "categorical",
 			"args": {
 				"groupby": "Symbol",
-				"field": "Month",
+				"column": "Month",
 				"operation": "array_agg",
-				"as": "Categories"
+				"to": "Categories"
 			}
 		}
 	]

@@ -10,6 +10,18 @@ import { TableStore } from './TableStore'
  */
 export type Value = any
 
+export enum DataType {
+	Array = 'array',
+	Boolean = 'boolean',
+	Date = 'date',
+	Number = 'number',
+	String = 'string',
+	Text = 'text',
+	Object = 'object',
+	Undefined = 'undefined',
+	Unknown = 'unknown',
+}
+
 export type ColumnStats = {
 	type: DataType
 	count: number
@@ -86,7 +98,7 @@ export enum SetOp {
 	Concat = 'concat',
 	Union = 'union',
 	Intersect = 'intersect',
-	Except = 'except',
+	Difference = 'difference',
 }
 
 export enum SortDirection {
@@ -135,19 +147,24 @@ export enum BinStrategy {
 	FixedWidth = 'fixed width',
 }
 
+export type OrderbyInstruction = {
+	column: string
+	direction?: SortDirection
+}
+
 export interface Specification {
 	name?: string
 	description?: string
 	steps?: Step[] | CompoundStep[]
 }
 
-// TODO: split out verb/compound types instead of overloading the verb propert
-export interface Step {
+// TODO: split out verb/compound types instead of overloading the verb property
+export interface Step<T = unknown> {
 	type: StepType
 	verb: string
 	input: string
 	output: string
-	args: Partial<Args>
+	args: T
 	// helpful for documentation in JSON specs
 	description?: string
 }
@@ -161,30 +178,30 @@ export enum Verb {
 	Aggregate = 'aggregate',
 	Bin = 'bin',
 	Binarize = 'binarize',
+	Concat = 'concat',
 	Dedupe = 'dedupe',
 	Derive = 'derive',
+	Difference = 'difference',
 	Fetch = 'fetch',
 	Fill = 'fill',
-	Concat = 'concat',
-	Except = 'except',
+	Filter = 'filter',
+	Fold = 'fold',
+	Groupby = 'groupby',
 	Impute = 'impute',
 	Intersect = 'intersect',
-	Union = 'union',
-	Fold = 'fold',
-	Lookup = 'lookup',
-	Groupby = 'groupby',
-	Spread = 'spread',
-	Unroll = 'unroll',
-	Filter = 'filter',
 	Join = 'join',
+	Lookup = 'lookup',
 	Orderby = 'orderby',
+	Recode = 'recode',
 	Rename = 'rename',
 	Rollup = 'rollup',
 	Sample = 'sample',
 	Select = 'select',
+	Spread = 'spread',
 	Ungroup = 'ungroup',
+	Union = 'union',
 	Unorder = 'unorder',
-	Recode = 'recode',
+	Unroll = 'unroll',
 }
 
 export interface CompoundStep extends Step {
@@ -192,141 +209,61 @@ export interface CompoundStep extends Step {
 }
 
 export interface CompoundBinarizeStep extends CompoundStep {
-	as: string
+	to: string
 }
 
-export interface AggregateStep extends Step {
-	args: AggregateArgs
+export type AggregateStep = Step<AggregateArgs>
+export type BinStep = Step<BinArgs>
+export type BinarizeStep = Step<BinarizeArgs>
+export type ColumnListStep = Step<InputColumnListArgs>
+export type DedupeStep = Step<DedupeArgs>
+export type DeriveStep = Step<DeriveArgs>
+export type ImputeStep = Step<FillArgs>
+export type FetchStep = Step<FetchArgs>
+export type FillStep = Step<FillArgs>
+export type FilterStep = Step<FilterArgs>
+export type FoldStep = Step<FoldArgs>
+export type GroupbyStep = Step<GroupbyArgs>
+export type JoinStep = Step<JoinArgs>
+export type LookupStep = Step<LookupArgs>
+export type OrderbyStep = Step<OrderbyArgs>
+export type RecodeStep = Step<RecodeArgs>
+export type RenameStep = Step<RenameArgs>
+export type RollupStep = Step<RollupArgs>
+export type SampleStep = Step<SampleArgs>
+export type SelectStep = Step<SelectArgs>
+export type SpreadStep = Step<SpreadArgs>
+export type UnrollStep = Step<UnrollArgs>
+export type SetOperationStep = Step<SetOperationArgs>
+
+// reusable base interfaces to aid consistency
+
+export interface InputColumnArgs {
+	/**
+	 * Name of the input column for columnnar operations.
+	 */
+	column: string
 }
 
-export interface BinStep extends Step {
-	args: BinArgs
+/**
+ * Base interface for a number of operations that work on a column list.
+ */
+export interface InputColumnListArgs {
+	columns: string[]
 }
 
-export interface BinarizeStep extends Step {
-	args: BinarizeArgs
+export interface InputColumnRecordArgs {
+	/**
+	 * Map of old column to new column names
+	 */
+	columns: Record<string, string>
 }
-
-export interface ColumnListStep extends Step {
-	args: ColumnListArgs
-}
-
-export interface DedupeStep extends Step {
-	args: DedupeArgs
-}
-
-export interface DeriveStep extends Step {
-	args: DeriveArgs
-}
-
-export interface ImputeStep extends Step {
-	args: FillArgs
-}
-
-export interface FetchStep extends Step {
-	args: FetchArgs
-}
-
-export interface FillStep extends Step {
-	args: FillArgs
-}
-
-export interface FilterStep extends Step {
-	args: FilterArgs
-}
-
-export interface FoldStep extends ColumnListStep {
-	args: FoldArgs
-}
-
-export interface GroupbyStep extends ColumnListStep {
-	args: GroupbyArgs
-}
-
-export interface JoinStep extends Step {
-	args: JoinArgs
-}
-
-export interface LookupStep extends Step {
-	args: LookupArgs
-}
-
-export interface OrderbyStep extends Step {
-	args: OrderbyArgs
-}
-
-export interface RecodeStep extends Step {
-	args: RecodeArgs
-}
-
-export interface RenameStep extends Step {
-	args: RenameArgs
-}
-
-export interface RollupStep extends Step {
-	args: RollupArgs
-}
-
-export interface SampleStep extends Step {
-	args: SampleArgs
-}
-
-export interface SelectStep extends Step {
-	args: SelectArgs
-}
-
-export interface SpreadStep extends ColumnListStep {
-	args: SpreadArgs
-}
-
-export interface UnrollStep extends ColumnListStep {
-	args: UnrollArgs
-}
-
-// set operations
-// https://uwdata.github.io/arquero/api/verbs#sets
-export interface SetOperationStep extends Step {
-	args: SetOperationArgs
-}
-
-export type Args =
-	| AggregateArgs
-	| BinArgs
-	| BinarizeArgs
-	| DedupeArgs
-	| DeriveArgs
-	| FetchArgs
-	| FillArgs
-	| FilterArgs
-	| FoldArgs
-	| GroupbyArgs
-	| JoinArgs
-	| LookupArgs
-	| OrderbyArgs
-	| RecodeArgs
-	| RenameArgs
-	| RollupArgs
-	| SampleArgs
-	| SelectArgs
-	| SetOperationArgs
-	| UnrollArgs
 
 export interface OutputColumnArgs {
 	/**
 	 * Name of the output column to receive the operation's result.
 	 */
-	as: string
-}
-
-export interface RollupArgs extends OutputColumnArgs {
-	/**
-	 * Column to perform aggregate/rollup operation on
-	 */
-	field: string
-	/**
-	 * Aggregate/rollup operation
-	 */
-	operation: FieldAggregateOperation
+	to: string
 }
 
 export interface AggregateArgs extends RollupArgs {
@@ -336,9 +273,7 @@ export interface AggregateArgs extends RollupArgs {
 	groupby: string
 }
 
-export interface BinArgs extends OutputColumnArgs {
-	field: string
-
+export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 	strategy: BinStrategy
 	/**
 	 * Fixed number of bins.
@@ -369,23 +304,7 @@ export interface BinArgs extends OutputColumnArgs {
 
 export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {}
 
-/**
- * Base interface for a number of operations that work on a column list.
- */
-export interface ColumnListArgs {
-	columns: string[]
-}
-
-export interface ColumnListOptionalArgs {
-	columns?: string[]
-}
-
-export interface ColumnRecordArgs {
-	/**
-	 * Map of old column to new column names
-	 */
-	columns: Record<string, string>
-}
+export type DedupeArgs = Partial<InputColumnListArgs>
 
 export interface DeriveArgs extends OutputColumnArgs {
 	/**
@@ -416,14 +335,9 @@ export interface FillArgs extends OutputColumnArgs {
 	 * Value to fill in the new column
 	 */
 	value: Value
-	as: string
 }
 
-export interface FilterArgs {
-	/**
-	 * Column on the left side of the operation
-	 */
-	column: string
+export interface FilterArgs extends InputColumnArgs {
 	/**
 	 * Comparison value for the column
 	 */
@@ -436,19 +350,14 @@ export interface FilterArgs {
 	operator: NumericComparisonOperator | StringComparisonOperator
 }
 
-export interface FoldArgs extends ColumnListArgs {
+export interface FoldArgs extends InputColumnListArgs {
 	/**
 	 * Two-element array of names for the output [key, value]
-	 * TODO: consider renaming - while this is the arg name in arquero,
-	 * it's overloaded. Usually just a single string, but some verbs
-	 * it is even an arbitrary length array.
 	 */
-	as?: [string, string]
+	to?: [string, string]
 }
 
-export type GroupbyArgs = ColumnListArgs
-
-export type DedupeArgs = ColumnListOptionalArgs
+export type GroupbyArgs = InputColumnListArgs
 
 export interface JoinArgs {
 	/**
@@ -463,13 +372,9 @@ export interface JoinArgs {
 	on?: string[]
 }
 
-export interface LookupArgs extends JoinArgs, ColumnListArgs {}
+export interface LookupArgs extends JoinArgs, InputColumnListArgs {}
 
-export interface RecodeArgs extends OutputColumnArgs {
-	/**
-	 * Name of the column to map new values for.
-	 */
-	column: string
+export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 	/**
 	 * Mapping of old value to new for the recoding.
 	 * Note that the key must be coercable to a string for map lookup.
@@ -477,7 +382,14 @@ export interface RecodeArgs extends OutputColumnArgs {
 	map: Record<Value, Value>
 }
 
-export type RenameArgs = ColumnRecordArgs
+export type RenameArgs = InputColumnRecordArgs
+
+export interface RollupArgs extends InputColumnArgs, OutputColumnArgs {
+	/**
+	 * Aggregate/rollup operation
+	 */
+	operation: FieldAggregateOperation
+}
 
 export interface SampleArgs {
 	/**
@@ -493,17 +405,9 @@ export interface SampleArgs {
 	proportion?: number
 }
 
-export interface SelectArgs extends ColumnRecordArgs {
-	// TODO: spruce this up for consistency (columns is an object - maybe it should combine with true/false)
-	not?: string[]
-}
+export type SelectArgs = InputColumnListArgs
 
-export type SpreadArgs = ColumnListArgs
-
-export interface OrderbyInstruction {
-	column: string
-	direction?: SortDirection
-}
+export type SpreadArgs = InputColumnListArgs
 
 export interface OrderbyArgs {
 	/**
@@ -519,16 +423,4 @@ export interface SetOperationArgs {
 	others: string[]
 }
 
-export type UnrollArgs = ColumnListArgs
-
-export enum DataType {
-	Array = 'array',
-	Boolean = 'boolean',
-	Date = 'date',
-	Number = 'number',
-	String = 'string',
-	Text = 'text',
-	Object = 'object',
-	Undefined = 'undefined',
-	Unknown = 'unknown',
-}
+export type UnrollArgs = InputColumnListArgs

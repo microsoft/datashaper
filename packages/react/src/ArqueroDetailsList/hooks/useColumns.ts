@@ -58,6 +58,7 @@ export function useColumns(
 	table: ColumnTable,
 	computedMetadata: TableMetadata,
 	columns?: IColumn[],
+	visibleColumns?: string[],
 	options: ColumnOptions = {},
 ): IColumn[] {
 	const {
@@ -87,11 +88,15 @@ export function useColumns(
 		showColumnBorders,
 	)
 
-	const names = useColumnNamesList(table, columns, includeAllColumns)
+	const names = useColumnNamesList(
+		table,
+		columns,
+		includeAllColumns,
+		visibleColumns,
+	)
 
 	return useMemo(() => {
 		const columnMap = reduce(columns)
-
 		return names.map(name => {
 			const column = columnMap[name] || {
 				key: name,
