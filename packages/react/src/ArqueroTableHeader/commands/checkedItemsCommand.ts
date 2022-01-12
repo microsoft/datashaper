@@ -16,22 +16,19 @@ import { merge } from 'lodash'
 export function checkedItemsCommand(
 	list: string[],
 	checked?: string[],
-	onCheckChange?: (name: string, checked: boolean) => void,
+	onCheckChange?: (name: string, checked: boolean, index: number) => void,
 	props?: ICommandBarItemProps,
 ): ICommandBarItemProps {
-	const click = (name: string, checked: boolean) => {
-		onCheckChange && onCheckChange(name, checked)
-	}
 	const hash = (checked || []).reduce((acc, cur) => {
 		acc[cur] = true
 		return acc
 	}, {} as Record<string, boolean>)
-	const items = list.map(name => ({
+	const items = list.map((name, index) => ({
 		key: name,
 		text: name,
 		canCheck: true,
 		checked: hash[name],
-		onClick: () => click(name, !hash[name]),
+		onClick: () => onCheckChange && onCheckChange(name, !hash[name], index),
 	}))
 	return merge(
 		{
