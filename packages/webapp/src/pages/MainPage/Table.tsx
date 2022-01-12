@@ -78,6 +78,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				showRowCount={true}
 				showColumnCount={true}
 				commands={commands}
+				visibleColumns={visibleColumns}
 			/>
 			<TableContainer>
 				<ArqueroDetailsList

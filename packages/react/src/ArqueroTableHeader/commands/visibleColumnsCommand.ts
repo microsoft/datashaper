@@ -4,6 +4,7 @@
  */
 import { ICommandBarItemProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { merge } from 'lodash'
 import { checkedItemsCommand } from './checkedItemsCommand'
 
 /**
@@ -19,12 +20,22 @@ export function visibleColumnsCommand(
 	table: ColumnTable,
 	columns?: string[],
 	onCheckChange?: (column: string, checked: boolean) => void,
+	props?: ICommandBarItemProps,
 ): ICommandBarItemProps {
-	return checkedItemsCommand(table.columnNames(), columns, onCheckChange, {
-		key: 'visible-columns',
-		title: 'Select visible columns',
-		iconProps: {
-			iconName: 'ColumnVerticalSection',
-		},
-	})
+	return checkedItemsCommand(
+		table.columnNames(),
+		columns,
+		onCheckChange,
+		merge(
+			{},
+			{
+				key: 'visible-columns',
+				title: 'Select visible columns',
+				iconProps: {
+					iconName: 'ColumnVerticalSection',
+				},
+			},
+			props,
+		),
+	)
 }
