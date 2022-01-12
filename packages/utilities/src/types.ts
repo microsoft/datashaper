@@ -31,3 +31,12 @@ export enum FileMimeType {
 	'application/x-arrow' = 'arrow',
 	'application/vnd.ms-excel' = 'xlsx',
 }
+
+export enum FileExtensions {
+	csv = '.csv',
+	tsv = '.tsv',
+	txt = '.txt',
+	json = '.json',
+	zip = '.zip',
+	arrow = '.arrow',
+}

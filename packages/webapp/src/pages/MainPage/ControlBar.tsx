@@ -7,11 +7,13 @@ import { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
 	FileCollection,
 	FileType,
+	FileExtensions,
 	FileMimeType,
+	FileWithPath,
 } from '@data-wrangling-components/utilities'
 import { Checkbox } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useCallback } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { ExamplesDropdown } from './ExamplesDropdown'
 import { useLoadSpecFile, useLoadTableFiles } from './hooks'
@@ -38,31 +40,49 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 }) {
 	const loadFiles = useLoadTableFiles()
 	const loadSpec = useLoadSpecFile()
+	const [fileCollection, setFileCollection] = useState<FileCollection>(
+		new FileCollection(),
+	)
+
+	const updateFileCollection = useCallback(
+		async (files: FileWithPath[]) => {
+			if (!fileCollection.list().length) {
+				await fileCollection.init(files)
+			} else {
+				await Promise.all(files.map((f: FileWithPath) => fileCollection.add(f)))
+			}
+			setFileCollection(fileCollection)
+		},
+		[fileCollection, setFileCollection],
+	)
 
 	const handleDropCSV = useCallback(
-		async (fileCollection: FileCollection) => {
-			const files = fileCollection.list(FileType.csv)
+		async (fc: FileCollection) => {
+			const files = fc.list(FileType.csv)
+			updateFileCollection(files)
 			const loaded = await loadFiles(files)
 			onLoadFiles && onLoadFiles(loaded)
 		},
-		[onLoadFiles, loadFiles],
+		[onLoadFiles, loadFiles, updateFileCollection],
 	)
 	const handleDropJSON = useCallback(
-		async (fileCollection: FileCollection) => {
+		async (fc: FileCollection) => {
 			// ignore any after the first. I suppose we could auto-link the steps, but that's dangerous
-			const files = fileCollection.list(FileType.json)
+			const files = fc.list(FileType.json)
 			const first = files[0]
+			updateFileCollection([first])
 			const spec = await loadSpec(first)
 			onSelectSpecification && onSelectSpecification(spec)
 		},
-		[onSelectSpecification, loadSpec],
+		[onSelectSpecification, loadSpec, updateFileCollection],
 	)
 	const handleDropZip = useCallback(
 		async (fileCollection: FileCollection) => {
+			setFileCollection(fileCollection)
 			handleDropCSV(fileCollection)
 			handleDropJSON(fileCollection)
 		},
-		[handleDropCSV, handleDropJSON],
+		[handleDropCSV, handleDropJSON, setFileCollection],
 	)
 
 	const handleSmartHeadersChange = useCallback(
@@ -237,7 +257,10 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 					<FileDrop onDrop={handleDropCSV} />
 				</Drop>
 				<Drop>
-					<FileDrop onDrop={handleDropJSON} extensions={[FileMimeType.json]} />
+					<FileDrop
+						onDrop={handleDropJSON}
+						extensions={[FileExtensions.json]}
+					/>
 				</Drop>
 				<Drop>
 					<FileDrop onDrop={handleDropZip} extensions={[FileMimeType.zip]} />

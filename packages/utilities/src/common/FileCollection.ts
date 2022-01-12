@@ -11,6 +11,7 @@ import {
 	getFilesFromZip,
 	isZipFile,
 	loadTable,
+	renameDuplicatedFiles,
 	tableToHTML,
 	toZip,
 } from '../utils'
@@ -99,17 +100,34 @@ export class FileCollection {
 		return loadTable(this.find(name))
 	}
 
-	async add(file: FileWithPath): Promise<void> {
+	private async _add(file: FileWithPath): Promise<void> {
 		if (!isZipFile(file.name)) {
 			this.files = [...this.files, new BaseFile(file)]
+			this.files = await renameDuplicatedFiles(this.files)
 			return
 		}
 		const files = await getFilesFromZip(file)
 		this.files = [...this.files, ...files.map(f => new BaseFile(f))]
+		this.files = await renameDuplicatedFiles(this.files)
 	}
 
-	remove(name: string): void {
-		this.files = this.files.filter(file => file.name !== name)
+	async add(files: FileWithPath[] | FileWithPath): Promise<void> {
+		if (files instanceof File || files instanceof FileWithPath) {
+			files = [files]
+		}
+		await Promise.all(files.map(file => this._add(file)))
+	}
+
+	remove(options?: { type?: FileType; name?: string }): void {
+		const { type, name } = options || {}
+		if (name) {
+			this.files = this.files.filter(file => file.name !== name)
+		} else if (type) {
+			const files = this.list(type).map(file => file.name)
+			this.files = this.files.filter(file => !files.includes(file.name))
+		} else {
+			this.files = []
+		}
 	}
 
 	metadata(name: string): Json {
@@ -136,10 +154,22 @@ export class FileCollection {
 	}
 
 	async zip(zipName = 'file-collection'): Promise<void> {
+		/* eslint-disable @essex/adjacent-await */
+		this.files = await renameDuplicatedFiles(this.files)
 		const dataURI = await toZip(this.filtered())
 		const link = document.createElement('a')
 		link.href = dataURI
 		link.download = `${zipName}.zip`
 		link.click()
+	}
+
+	async copy(): Promise<FileCollection> {
+		const newFC = new FileCollection()
+		newFC.name = this.name
+		const files = [...(this.list() as FileWithPath[])]
+		if (files.length) {
+			await newFC.init(files)
+		}
+		return newFC
 	}
 }
