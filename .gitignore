@@ -4,6 +4,7 @@ dist/
 out/
 lib/
 coverage/
+.swc/
 
 # Classic node deps
 node_modules/
