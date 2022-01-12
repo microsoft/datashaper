@@ -24,16 +24,8 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 
 	// default to selecting all columns if none are (this is what we want, right?)
 	const internal = useMemo(() => {
-		const { columns = {} } = (step as SelectStep).args
-		const defaults =
-			Object.keys(columns).length === 0
-				? tbl
-						?.columnNames()
-						.reduce((acc: Record<string, string>, cur: string) => {
-							acc[cur] = cur
-							return acc
-						}, {})
-				: columns
+		const { columns = [] } = (step as SelectStep).args
+		const defaults = columns.length === 0 ? tbl?.columnNames() : columns
 		return {
 			...step,
 			args: {
@@ -44,17 +36,13 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 
 	const handleColumnChange = useCallback(
 		(event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
-			const { columns = {} } = internal.args
-			// the format here is to construct an object where each
-			// value has a key of the name, and a value of the name
-			// the arquero select operation will only pull those with an entry
-			// so deleting is like deselecting.
-			// note that we could allow rename at the same time, but are not in this current UX
+			const { columns = [] } = internal.args
+			let update = [...columns]
 			if (option) {
 				if (option.selected) {
-					columns[option.key] = option.key as string
+					update.push(option.key as string)
 				} else {
-					delete columns[option.key]
+					update = update.filter(c => c !== option.key)
 				}
 			}
 			onChange &&
@@ -62,7 +50,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 					...internal,
 					args: {
 						...internal.args,
-						columns,
+						columns: update,
 					},
 				})
 		},
@@ -71,8 +59,12 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 
 	const options = useMemo(() => {
 		const columns = tbl?.columnNames() || []
+		const hash = (internal.args.columns || []).reduce((acc, cur) => {
+			acc[cur] = true
+			return acc
+		}, {} as Record<string, boolean>)
 		return columns.map(column => {
-			const selected = internal.args?.columns && !!internal.args.columns[column]
+			const selected = internal.args?.columns && !!hash[column]
 			return {
 				key: column,
 				text: column,

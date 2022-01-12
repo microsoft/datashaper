@@ -18,7 +18,7 @@ describe('runPipeline', () => {
 			input: 'input',
 			output: 'output',
 			args: {
-				as: 'filled',
+				to: 'filled',
 				value: 1,
 			},
 		}
@@ -35,7 +35,7 @@ describe('runPipeline', () => {
 			input: '',
 			output: '',
 			args: {
-				as: 'filled',
+				to: 'filled',
 				value: 1,
 			},
 		}
@@ -52,7 +52,7 @@ describe('runPipeline', () => {
 				input: 'input',
 				output: 'output1',
 				args: {
-					as: 'filled',
+					to: 'filled',
 					value: 1,
 				},
 			},
@@ -62,7 +62,7 @@ describe('runPipeline', () => {
 				input: 'output1',
 				output: 'output2',
 				args: {
-					as: 'derived',
+					to: 'derived',
 					column1: 'ID',
 					column2: 'filled',
 					operator: MathOperator.Add,
@@ -83,7 +83,7 @@ describe('runPipeline', () => {
 				input: '',
 				output: '',
 				args: {
-					as: 'filled',
+					to: 'filled',
 					value: 1,
 				},
 			},
@@ -93,7 +93,7 @@ describe('runPipeline', () => {
 				input: '',
 				output: '',
 				args: {
-					as: 'derived',
+					to: 'derived',
 					column1: 'ID',
 					column2: 'filled',
 					operator: MathOperator.Add,
@@ -105,7 +105,7 @@ describe('runPipeline', () => {
 				input: '',
 				output: '',
 				args: {
-					as: 'output',
+					to: 'output',
 					columns: {
 						derived: 'derived',
 					},

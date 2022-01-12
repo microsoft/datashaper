@@ -33,7 +33,7 @@ export const RecodeDescription: React.FC<StepDescriptionProps> = memo(
 				},
 				{
 					before: 'into column',
-					value: args.as,
+					value: args.to,
 				},
 				...maps,
 			]

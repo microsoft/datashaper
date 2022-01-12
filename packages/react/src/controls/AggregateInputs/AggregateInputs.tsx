@@ -14,7 +14,7 @@ import {
 import { StepComponentProps } from '../../types'
 
 /**
- * Just the group/field/op inputs for an aggregation.
+ * Just the group/column/op inputs for an aggregation.
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const AggregateInputs: React.FC<StepComponentProps> = memo(
@@ -30,7 +30,7 @@ export const AggregateInputs: React.FC<StepComponentProps> = memo(
 		)
 		const handleAggregateColumnChange = useHandleDropdownChange(
 			internal,
-			'args.field',
+			'args.column',
 			onChange,
 		)
 		const handleOpChange = useHandleDropdownChange(
@@ -54,7 +54,7 @@ export const AggregateInputs: React.FC<StepComponentProps> = memo(
 						required
 						table={tbl}
 						label={'Column to aggregate'}
-						selectedKey={internal.args.field}
+						selectedKey={internal.args.column}
 						onChange={handleAggregateColumnChange}
 					/>
 					<FieldAggregateOperationDropdown

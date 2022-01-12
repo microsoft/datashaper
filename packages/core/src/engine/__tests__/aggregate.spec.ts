@@ -15,9 +15,9 @@ describe('test for aggregate verb', () => {
 			input: 'table3',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				groupby: 'ID',
-				field: 'item',
+				column: 'item',
 				operation: FieldAggregateOperation.Count,
 			},
 		}
@@ -46,9 +46,9 @@ describe('test for aggregate verb', () => {
 			input: 'table4',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				groupby: 'ID',
-				field: 'quantity',
+				column: 'quantity',
 				operation: FieldAggregateOperation.Sum,
 			},
 		}
@@ -77,9 +77,9 @@ describe('test for aggregate verb', () => {
 			input: 'table4',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				groupby: 'ID',
-				field: 'quantity',
+				column: 'quantity',
 				operation: FieldAggregateOperation.Min,
 			},
 		}
@@ -108,9 +108,9 @@ describe('test for aggregate verb', () => {
 			input: 'table4',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				groupby: 'ID',
-				field: 'quantity',
+				column: 'quantity',
 				operation: FieldAggregateOperation.Median,
 			},
 		}

@@ -15,7 +15,7 @@ describe('test for filter verb', () => {
 			input: 'table8',
 			output: 'output',
 			args: {
-				as: '',
+				to: '',
 				column: 'count',
 				operator: NumericComparisonOperator.Gte,
 				type: FilterCompareType.Value,
@@ -41,7 +41,7 @@ describe('test for filter verb', () => {
 			input: 'table8',
 			output: 'output',
 			args: {
-				as: '',
+				to: '',
 				column: 'count',
 				operator: NumericComparisonOperator.Gt,
 				type: FilterCompareType.Value,
@@ -66,7 +66,7 @@ describe('test for filter verb', () => {
 			input: 'table8',
 			output: 'output',
 			args: {
-				as: '',
+				to: '',
 				column: 'count',
 				operator: NumericComparisonOperator.Lt,
 				type: FilterCompareType.Value,
@@ -91,7 +91,7 @@ describe('test for filter verb', () => {
 			input: 'table8',
 			output: 'output',
 			args: {
-				as: '',
+				to: '',
 				column: 'name',
 				operator: StringComparisonOperator.Equal,
 				type: FilterCompareType.Value,
@@ -115,7 +115,7 @@ describe('test for filter verb', () => {
 			input: 'table5',
 			output: 'output',
 			args: {
-				as: '',
+				to: '',
 				column: 'item',
 				operator: StringComparisonOperator.Empty,
 				type: FilterCompareType.Value,
@@ -139,7 +139,7 @@ describe('test for filter verb', () => {
 			input: 'table3',
 			output: 'output',
 			args: {
-				as: '',
+				to: '',
 				column: 'item',
 				operator: StringComparisonOperator.Contains,
 				type: FilterCompareType.Value,

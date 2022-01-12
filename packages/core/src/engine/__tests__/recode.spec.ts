@@ -15,7 +15,7 @@ describe('test for recode verb', () => {
 			output: 'output',
 			args: {
 				column: 'name',
-				as: 'newColumn',
+				to: 'newColumn',
 				map: {
 					A: 'Z',
 					B: 'Y',

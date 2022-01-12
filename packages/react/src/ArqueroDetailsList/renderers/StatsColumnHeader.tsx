@@ -75,7 +75,7 @@ const StatCell: React.FC<{ name: string; value?: number }> = ({
 
 function useTooltip(stats?: ColumnStats): string {
 	return useMemo(() => {
-		const { bins, ...nobins } = stats || {}
+		const { bins, categories, ...nobins } = stats || {}
 		return Object.entries(nobins).reduce((acc, cur, idx) => {
 			const [key, value] = cur
 			const nice = upperFirst(pretty[key] || key)

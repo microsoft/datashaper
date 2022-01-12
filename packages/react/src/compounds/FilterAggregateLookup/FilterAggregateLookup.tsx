@@ -67,7 +67,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 			[internal, onChange],
 		)
 
-		const handleAsChange = useCallback(
+		const handleToChange = useCallback(
 			(e, as) => {
 				const updated = updateAs(internal, as)
 				onChange && onChange(updated)
@@ -139,9 +139,9 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 						required
 						label={'New column name'}
 						placeholder={'Column name'}
-						value={aggregate.args.as}
+						value={aggregate.args.to}
 						styles={columnDropdownStyles}
-						onChange={handleAsChange}
+						onChange={handleToChange}
 					/>
 				</LeftAlignedRow>
 			</Container>

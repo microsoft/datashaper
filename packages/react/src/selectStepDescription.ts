@@ -29,7 +29,7 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 	binarize: BinarizeDescription,
 	concat: SetOperationDescription,
 	derive: DeriveDescription,
-	except: SetOperationDescription,
+	difference: SetOperationDescription,
 	fill: FillDescription,
 	filter: FilterDescription,
 	fold: ColumnListOperationDescription,

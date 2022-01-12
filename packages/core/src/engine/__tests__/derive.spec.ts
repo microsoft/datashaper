@@ -14,7 +14,7 @@ describe('test for derive verb', () => {
 			input: 'table1',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column1: 'name',
 				operator: MathOperator.Add,
 				column2: 'count',
@@ -44,7 +44,7 @@ describe('test for derive verb', () => {
 			input: 'table1',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column1: 'name',
 				operator: MathOperator.Subtract,
 				column2: 'count',
@@ -73,7 +73,7 @@ describe('test for derive verb', () => {
 			input: 'table1',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column1: 'name',
 				operator: MathOperator.Multiply,
 				column2: 'count',
@@ -102,7 +102,7 @@ describe('test for derive verb', () => {
 			input: 'table1',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column1: 'name',
 				operator: MathOperator.Divide,
 				column2: 'count',
@@ -131,7 +131,7 @@ describe('test for derive verb', () => {
 			input: 'table6',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column1: 'FY20',
 				operator: MathOperator.Add,
 				column2: 'FY21',
@@ -161,7 +161,7 @@ describe('test for derive verb', () => {
 			input: 'table6',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column1: 'FY20',
 				operator: MathOperator.Subtract,
 				column2: 'FY21',
@@ -191,7 +191,7 @@ describe('test for derive verb', () => {
 			input: 'table1',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column1: 'ID',
 				operator: MathOperator.Multiply,
 				column2: 'count',
@@ -220,7 +220,7 @@ describe('test for derive verb', () => {
 			input: 'table7',
 			output: 'output',
 			args: {
-				as: 'unitPrice',
+				to: 'unitPrice',
 				column1: 'totalSale',
 				operator: MathOperator.Divide,
 				column2: 'quantity',

@@ -12,7 +12,7 @@ import { binarize } from './binarize'
 import { concat } from './concat'
 import { dedupe } from './dedupe'
 import { derive } from './derive'
-import { except } from './except'
+import { difference } from './difference'
 import { fetch } from './fetch'
 import { fill } from './fill'
 import { filter } from './filter'
@@ -40,7 +40,7 @@ const verbs: Record<string, StepFunction> = {
 	concat,
 	dedupe,
 	derive,
-	except,
+	difference,
 	fetch,
 	fill,
 	filter,
@@ -98,11 +98,11 @@ export function factory(
 			return {
 				...base,
 				args: {
-					as: 'output',
+					to: 'output',
 				},
 			}
 		case Verb.Concat:
-		case Verb.Except:
+		case Verb.Difference:
 		case Verb.Intersect:
 		case Verb.Union:
 			return {
@@ -115,7 +115,7 @@ export function factory(
 			return {
 				...base,
 				args: {
-					as: ['key', 'value'],
+					to: ['key', 'value'],
 					columns: [],
 				},
 			}

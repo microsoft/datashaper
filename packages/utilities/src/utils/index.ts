@@ -4,5 +4,6 @@
  */
 
 export * from './arquero'
+export * from './download'
 export * from './files'
 export * from './zip'

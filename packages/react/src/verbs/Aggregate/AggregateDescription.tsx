@@ -15,7 +15,7 @@ export const AggregateDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'into column',
-					value: args.as,
+					value: args.to,
 				},
 				{
 					before: 'group by',
@@ -23,7 +23,7 @@ export const AggregateDescription: React.FC<StepDescriptionProps> = memo(
 				},
 				{
 					before: 'rollup column',
-					value: args.field,
+					value: args.column,
 					sub: [
 						{
 							before: 'with function',

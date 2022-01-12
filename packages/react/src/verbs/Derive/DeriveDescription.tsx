@@ -15,7 +15,7 @@ export const DeriveDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'into column',
-					value: args.as,
+					value: args.to,
 				},
 				{
 					value: `${args.column1 || ''} ${args.operator || ''} ${

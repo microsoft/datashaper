@@ -20,7 +20,7 @@ export async function derive(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { column1, column2, operator, as } = args as DeriveArgs
+	const { column1, column2, operator, to } = args as DeriveArgs
 	const inputTable = await store.get(input)
 
 	// eslint-disable-next-line
@@ -41,8 +41,8 @@ export async function derive(
 		}
 	})
 
-	const dArgs: ExprObject = {}
-	dArgs[as] = func
-
+	const dArgs: ExprObject = {
+		[to]: func,
+	}
 	return inputTable.derive(dArgs)
 }

@@ -25,7 +25,7 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 }) {
 	const internal = useMemo(() => step as AggregateStep, [step])
 
-	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)
+	const handleToChange = useHandleTextfieldChange(internal, 'args.to', onChange)
 
 	return (
 		<VerbContainer>
@@ -34,9 +34,9 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 					required
 					label={'New column name'}
 					placeholder={'Column name'}
-					value={internal.args.as}
+					value={internal.args.to}
 					styles={columnDropdownStyles}
-					onChange={handleAsChange}
+					onChange={handleToChange}
 				/>
 			</LeftAlignedRow>
 			<AggregateInputs

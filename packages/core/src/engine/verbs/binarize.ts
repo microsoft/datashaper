@@ -15,13 +15,13 @@ export async function binarize(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { column, value, operator, type, as } = args as BinarizeArgs
+	const { column, value, operator, type, to } = args as BinarizeArgs
 	const inputTable = await store.get(input)
 
 	const expr = compare(column, value, operator, type)
 
 	const dArgs = {
-		[`${as}`]: expr,
+		[to]: expr,
 	}
 
 	return inputTable.derive(dArgs)
