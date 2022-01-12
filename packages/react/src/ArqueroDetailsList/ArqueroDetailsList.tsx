@@ -159,6 +159,9 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					startIndex: startIndex,
 					level: actualLevel,
 					count: valueGroups.length,
+					isCollapsed: !onRenderGroupHeader
+						? actualLevel !== 0 && startIndex !== 0
+						: false,
 				} as IGroup
 
 				const nextLevel = actualLevel + 1
@@ -180,7 +183,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				}
 				return group
 			},
-			[items, sortValueGroupsItems],
+			[items, sortValueGroupsItems, onRenderGroupHeader],
 		)
 
 		const groups = useMemo(() => {

@@ -7,6 +7,7 @@ import { IDetailsGroupDividerProps, IRenderFunction } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 import { GroupHeaderFunction } from '..'
+import { GroupHeader } from '../../controls'
 
 /**
  * Overrides the default group header rendering so we can inject customization
@@ -21,11 +22,13 @@ export function useGroupHeaderRenderer(
 		(props?, defaultRender?) => {
 			if (!props || !defaultRender) {
 				return null
-			} else if (!groupHeaderFunction) {
-				return defaultRender && defaultRender(props)
 			}
+
 			const columnName = table.groups().names[props.groupLevel as number]
 			const meta = computedMetadata.columns[columnName]
+			if (!groupHeaderFunction) {
+				return <GroupHeader props={props} columnMeta={meta} />
+			}
 
 			return groupHeaderFunction(meta, props)
 		},

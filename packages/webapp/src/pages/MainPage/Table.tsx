@@ -2,20 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnMetadata } from '@data-wrangling-components/core'
 import {
 	ColumnConfigMap,
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	DetailsListFeatures,
 } from '@data-wrangling-components/react'
-import {
-	IconButton,
-	IColumn,
-	IDetailsGroupDividerProps,
-	IDropdownOption,
-	IGroup,
-} from '@fluentui/react'
+import { IColumn, IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 import React, { memo, useCallback, useMemo, useState } from 'react'
@@ -65,48 +58,6 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		[],
 	)
 
-	const countChildren = useCallback((children: IGroup[]) => {
-		let total = 0
-		children.forEach(child => {
-			total += child.count
-			total += child.children ? countChildren(child.children) : 0
-		})
-		return total
-	}, [])
-
-	const handleRenderGroupHeader = useCallback(
-		(
-			columnMeta: ColumnMetadata | undefined,
-			props: IDetailsGroupDividerProps | undefined,
-		) => {
-			if (!props) return null
-			const { group, onToggleCollapse } = props
-
-			return (
-				<HeaderContainer groupLevel={group?.level as number}>
-					<LevelButton
-						onClick={() =>
-							onToggleCollapse && onToggleCollapse(group as IGroup)
-						}
-						iconProps={{
-							iconName: group?.isCollapsed ? 'ChevronRight' : 'ChevronDown',
-						}}
-					></LevelButton>
-					<HeaderDetailsText>
-						<Bold>{`${columnMeta?.name} - ${group?.name}` || group?.name}</Bold>
-					</HeaderDetailsText>
-					<HeaderDetailsText>Children: {group?.count}</HeaderDetailsText>
-					{group?.children && (
-						<HeaderDetailsText>
-							Total Items: {countChildren(group?.children)}
-						</HeaderDetailsText>
-					)}
-				</HeaderContainer>
-			)
-		},
-		[countChildren],
-	)
-
 	return (
 		<Container className="table-container">
 			<ArqueroTableHeader
@@ -125,7 +76,6 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					selectedColumn={selectedColumn}
 					onColumnClick={handleColumnClick}
 					onCellDropdownSelect={handleCellDropdownSelect}
-					onRenderGroupHeader={handleRenderGroupHeader}
 					isColumnClickable
 					isSortable
 					showColumnBorders
@@ -147,19 +97,3 @@ const TableContainer = styled.div`
 	overflow-x: scroll;
 	height: 264px;
 `
-
-const HeaderContainer = styled.div<{ groupLevel: number }>`
-	padding-left: ${({ groupLevel }) => `${groupLevel * 12}px`};
-	display: flex;
-	gap: 8px;
-`
-
-const LevelButton = styled(IconButton)`
-	width: 5%;
-`
-
-const HeaderDetailsText = styled.span`
-	align-self: center;
-`
-
-const Bold = styled.b``
