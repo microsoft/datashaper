@@ -210,3 +210,24 @@ export function useLoadTable(
 	}, [name, table, store, setTable])
 	return tbl
 }
+
+export function useIntersection(
+	element: HTMLDivElement | undefined,
+	rootMargin: string,
+): boolean {
+	const [isVisible, setState] = useState(false)
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				setState(entry.isIntersecting)
+			},
+			{ rootMargin },
+		)
+		element && observer.observe(element)
+
+		return () => element && observer.unobserve(element)
+	}, [element, rootMargin])
+
+	return isVisible
+}

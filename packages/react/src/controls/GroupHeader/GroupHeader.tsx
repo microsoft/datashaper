@@ -5,7 +5,7 @@
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IconButton, IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
-import { useIntersection } from 'src/ArqueroDetailsList'
+import { useIntersection } from 'src/common'
 import styled from 'styled-components'
 
 interface GroupHeaderProps {
