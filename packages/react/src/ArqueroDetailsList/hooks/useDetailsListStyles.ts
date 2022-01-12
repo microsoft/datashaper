@@ -33,6 +33,9 @@ export function useDetailsListStyles(
 			merge(
 				{},
 				{
+					root: {
+						overflowX: 'scroll',
+					},
 					headerWrapper: {
 						height:
 							DEFAULT_HEADER_HEIGHT +
