@@ -33,7 +33,7 @@ export function useDetailsListStyles(
 			merge(
 				{},
 				{
-					root: {
+					focusZone: {
 						overflowX: 'auto',
 					},
 					headerWrapper: {
