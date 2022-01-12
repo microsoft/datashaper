@@ -5,7 +5,7 @@
 import { Dropzone } from '@data-wrangling-components/react'
 import {
 	FileCollection,
-	FileMimeType,
+	FileExtensions,
 } from '@data-wrangling-components/utilities'
 import { memo } from 'react'
 
@@ -21,7 +21,7 @@ export interface FileDropProps {
 export const FileDrop: React.FC<FileDropProps> = memo(function FileDrop({
 	onDrop,
 	text,
-	extensions = [FileMimeType.csv],
+	extensions = [FileExtensions.csv],
 }) {
 	return (
 		<Dropzone

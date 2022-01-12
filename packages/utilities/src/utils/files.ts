@@ -94,3 +94,28 @@ export async function getDataURL(file: BaseFile): Promise<string> {
 		reader.onerror = reject
 	})
 }
+
+export async function renameDuplicatedFiles(
+	files: BaseFile[],
+): Promise<BaseFile[]> {
+	const fileNames: Record<string, number> = {}
+	for (const file of files) {
+		if (!fileNames[file.name]) {
+			fileNames[file.name] = 0
+		}
+		++fileNames[file.name]
+	}
+	const values = Object.values(fileNames)
+	if (values.every(val => val === 1)) {
+		return files
+	}
+	files.forEach(file => {
+		--fileNames[file.name]
+		const count = fileNames[file.name]
+		const ext = extension(file.name)
+		const name = file.name.replace(`.${ext}`, '')
+		const newName = !!count ? `${name}_${count}.${ext}` : file.name
+		file.rename(newName)
+	})
+	return files
+}
