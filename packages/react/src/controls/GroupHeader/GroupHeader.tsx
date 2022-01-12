@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
-import { useIntersection } from '@data-wrangling-components/react'
 import { IconButton, IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useIntersection } from 'src/ArqueroDetailsList'
 import styled from 'styled-components'
 
 interface GroupHeaderProps {
