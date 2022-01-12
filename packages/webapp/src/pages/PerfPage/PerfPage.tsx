@@ -83,7 +83,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 				<PivotItem key={'empty'} headerText={'empty'} />
 				<PivotItem key={'grouped'} headerText={'grouped'}>
 					<Table>
-						<ArqueroTableHeader table={groupedTable} allowDownload />
+						<ArqueroTableHeader table={groupedTable} />
 						<ArqueroDetailsList
 							table={groupedTable}
 							metadata={groupedMetadata}

@@ -75,9 +75,8 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 					<Else>
 						<HeaderDetailsText>
 							<Bold>
-								{columnMeta?.name
-									? `${columnMeta?.name}  - `
-									: '' + group?.name}
+								{columnMeta?.name ? `${columnMeta?.name}  - ` : ''}
+								{group?.name}
 							</Bold>
 						</HeaderDetailsText>
 						<HeaderDetailsText>Children: {group?.count}</HeaderDetailsText>
