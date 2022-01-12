@@ -4,13 +4,9 @@
  */
 const { configure } = require('@essex/jest-config')
 module.exports = {
-	...configure(),
 	projects: [
 		{
 			...configure(),
-			transform: {
-				'^.+\\.(t|j)sx?$': '@swc/jest',
-			},
 			displayName: 'dom',
 			testEnvironment: 'jsdom',
 			testMatch: ['**/__tests__/**/*.test.ts'],
@@ -19,9 +15,6 @@ module.exports = {
 		},
 		{
 			...configure(),
-			transform: {
-				'^.+\\.(t|j)sx?$': '@swc/jest',
-			},
 			displayName: 'node',
 			testEnvironment: 'node',
 			testMatch: ['**/__tests__/**/*.spec.ts'],
