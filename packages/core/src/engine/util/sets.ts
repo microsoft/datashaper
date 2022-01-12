@@ -25,5 +25,7 @@ export async function set(
 		store.get(input),
 		...others.map(other => store.get(other)),
 	])
-	return inputTable[op](...otherTables)
+	// arquero uses 'except' for the difference set operation, we need to map it
+	const fn = op === SetOp.Difference ? 'except' : op
+	return inputTable[fn](...otherTables)
 }

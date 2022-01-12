@@ -15,7 +15,7 @@ describe('test for binarize verb', () => {
 			input: 'table1',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column: 'count',
 				operator: NumericComparisonOperator.Gte,
 				type: FilterCompareType.Value,
@@ -46,7 +46,7 @@ describe('test for binarize verb', () => {
 			input: 'table1',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column: 'count',
 				operator: NumericComparisonOperator.Gt,
 				type: FilterCompareType.Value,
@@ -77,7 +77,7 @@ describe('test for binarize verb', () => {
 			input: 'table1',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column: 'count',
 				operator: NumericComparisonOperator.Lt,
 				type: FilterCompareType.Value,
@@ -108,7 +108,7 @@ describe('test for binarize verb', () => {
 			input: 'table4',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column: 'item',
 				operator: StringComparisonOperator.EndsWith,
 				type: FilterCompareType.Value,
@@ -140,7 +140,7 @@ describe('test for binarize verb', () => {
 			input: 'table5',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column: 'item',
 				operator: StringComparisonOperator.Empty,
 				type: FilterCompareType.Value,
@@ -171,7 +171,7 @@ describe('test for binarize verb', () => {
 			input: 'table5',
 			output: 'output',
 			args: {
-				as: 'newColumn',
+				to: 'newColumn',
 				column: 'item',
 				operator: StringComparisonOperator.Contains,
 				type: FilterCompareType.Value,

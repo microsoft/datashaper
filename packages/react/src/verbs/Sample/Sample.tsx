@@ -15,7 +15,6 @@ import { StepComponentProps } from '../../types'
  */
 export const Sample: React.FC<StepComponentProps> = memo(function Sample({
 	step,
-	store,
 	onChange,
 }) {
 	const internal = useMemo(() => step as SampleStep, [step])

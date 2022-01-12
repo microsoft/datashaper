@@ -3,9 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ActionButton, TextField } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-
-import React, { memo, useMemo, useState, useCallback } from 'react'
+import React, { memo, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useLoadTable } from '../../common'
 import { FilterInputs } from '../../controls'
@@ -17,17 +15,16 @@ import { create, defaults, filter, update } from '../generators/binarize'
  * Provides only the essential inputs for a multi-step binarize.
  */
 export const CompoundBinarize: React.FC<StepComponentProps> = memo(
-	function CompoundBinarize({ step, store, onChange }) {
+	function CompoundBinarize({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => defaults(step), [step])
 
-		const [table, setTable] = useState<ColumnTable | undefined>()
-		useLoadTable(internal.input, store, setTable)
+		const tbl = useLoadTable(input || internal.input, table, store)
 
-		const handleAsChange = useCallback(
+		const handleToChange = useCallback(
 			(e, v) => {
 				const updated = update({
 					...internal,
-					as: v,
+					to: v,
 				})
 				onChange && onChange(updated)
 			},
@@ -52,7 +49,7 @@ export const CompoundBinarize: React.FC<StepComponentProps> = memo(
 				return (
 					<FilterInputs
 						key={`compound-binarize-${index}`}
-						input={internal.input}
+						input={step.input}
 						step={step}
 						store={store}
 						onChange={s => handleStepChange(s, index)}
@@ -68,16 +65,16 @@ export const CompoundBinarize: React.FC<StepComponentProps> = memo(
 						required
 						label={'New column name'}
 						placeholder={'Column name'}
-						value={internal.as}
+						value={internal.to}
 						styles={columnDropdownStyles}
-						onChange={handleAsChange}
+						onChange={handleToChange}
 					/>
 				</LeftAlignedRow>
 				{stepInputs}
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={{ iconName: 'Add' }}
-					disabled={!table}
+					disabled={!tbl}
 				>
 					Add criteria
 				</ActionButton>

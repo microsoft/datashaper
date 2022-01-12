@@ -3,15 +3,40 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TableStore, Step } from '@data-wrangling-components/core'
+import { IDropdownOption } from '@fluentui/react'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 
-export interface StepComponentProps {
+export type StepChangeFunction = (step: Step) => void
+
+export type DropdownOptionChangeFunction = (
+	event: React.FormEvent<HTMLDivElement>,
+	option?: IDropdownOption,
+	index?: number,
+) => void
+
+export interface StepDependent {
 	step: Step
-	store: TableStore
+}
+
+export interface StepComponentProps extends StepDependent {
+	/**
+	 * TableStore to use for table lookups of step parameters.
+	 */
+	store?: TableStore
+	/**
+	 * ColumnTable to execute the step against if no store is provided.
+	 */
+	table?: ColumnTable
 	/**
 	 * Optional override of step input - there are many scenarios
 	 * (particularly compound) where the driving input table for UI visbility should be shared,
 	 * but the input to the actual step is an intermediate table.
 	 */
 	input?: string
-	onChange?: (step: Step) => void
+	onChange?: StepChangeFunction
+}
+
+export interface StepDescriptionProps extends StepDependent {
+	showInput?: boolean
+	showOutput?: boolean
 }

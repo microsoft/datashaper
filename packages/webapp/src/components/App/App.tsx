@@ -6,13 +6,14 @@ import { memo } from 'react'
 import styled from 'styled-components'
 import { Header } from './Header'
 import { StyleContext } from './StyleContext'
-import { MainPage } from '~pages'
+import { MainPage, PerfPage } from '~pages'
 export const App: React.FC = memo(function App() {
 	return (
 		<StyleContext>
 			<Header />
 			<PageContainer>
-				<MainPage />
+				{/* this is just a hacky router to load the perf testing page if needed */}
+				{window.location.search === '?perf' ? <PerfPage /> : <MainPage />}
 			</PageContainer>
 		</StyleContext>
 	)

@@ -2,11 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinStep, BinStrategy } from '@data-wrangling-components/core'
+import { BinStep, BinArgs, BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, TextField } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import { Switch, Case, If, Then } from 'react-if'
 import styled from 'styled-components'
 import {
@@ -21,11 +19,12 @@ import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 
 /**
- * Provides inputs for an aggregation step.
+ * Provides inputs for a binning step.
  */
 export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	step,
 	store,
+	table,
 	onChange,
 	input,
 }) {
@@ -35,20 +34,19 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 				...step,
 				args: {
 					strategy: BinStrategy.Auto,
-					...step.args,
+					...(step.args as Partial<BinArgs>),
 				},
 			} as BinStep),
 		[step],
 	)
 
-	const [table, setTable] = useState<ColumnTable | undefined>()
-	useLoadTable(input || internal.input, store, setTable)
+	const tbl = useLoadTable(input || step.input, table, store)
 
-	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)
+	const handleToChange = useHandleTextfieldChange(internal, 'args.to', onChange)
 
 	const handleBinColumnChange = useHandleDropdownChange(
 		internal,
-		'args.field',
+		'args.column',
 		onChange,
 	)
 
@@ -94,15 +92,15 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 					required
 					label={'New column name'}
 					placeholder={'Column name'}
-					value={internal.args.as}
+					value={internal.args.to}
 					styles={columnDropdownStyles}
-					onChange={handleAsChange}
+					onChange={handleToChange}
 				/>
 				<TableColumnDropdown
 					required
-					table={table}
+					table={tbl}
 					label={'Column to bin'}
-					selectedKey={internal.args.field}
+					selectedKey={internal.args.column}
 					onChange={handleBinColumnChange}
 				/>
 			</LeftAlignedRow>

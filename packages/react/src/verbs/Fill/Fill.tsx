@@ -15,12 +15,11 @@ import { StepComponentProps } from '../../types'
  */
 export const Fill: React.FC<StepComponentProps> = memo(function Fill({
 	step,
-	store,
 	onChange,
 }) {
 	const internal = useMemo(() => step as FillStep, [step])
 
-	const handleAsChange = useHandleTextfieldChange(internal, 'args.as', onChange)
+	const handleToChange = useHandleTextfieldChange(internal, 'args.to', onChange)
 
 	const handleValueChange = useHandleTextfieldChange(
 		internal,
@@ -35,9 +34,9 @@ export const Fill: React.FC<StepComponentProps> = memo(function Fill({
 					required
 					label={'New column name'}
 					placeholder={'Column name'}
-					value={internal.args.as}
+					value={internal.args.to}
 					styles={columnDropdownStyles}
-					onChange={handleAsChange}
+					onChange={handleToChange}
 				/>
 				<TextField
 					required

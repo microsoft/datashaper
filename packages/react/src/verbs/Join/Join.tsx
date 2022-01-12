@@ -14,10 +14,6 @@ import { StepComponentProps } from '../../types'
  * however, arquero join does support lookup columns on join,
  * so we could add it as optional inputs
  */
-export const Join: React.FC<StepComponentProps> = memo(function Join({
-	step,
-	store,
-	onChange,
-}) {
-	return <JoinInputs step={step} store={store} onChange={onChange} />
+export const Join: React.FC<StepComponentProps> = memo(function Join(props) {
+	return <JoinInputs {...props} />
 })

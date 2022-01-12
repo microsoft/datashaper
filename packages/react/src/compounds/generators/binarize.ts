@@ -25,7 +25,7 @@ const binarize = (index: number) => `binarize-${index}`
 export function defaults(step: Step): CompoundBinarizeStep {
 	// HACK: this is a typing workaround since output is not optional
 	const merged = {
-		as: 'output',
+		to: 'output',
 		steps: [],
 		...step,
 	}
@@ -89,7 +89,7 @@ function createNewBinarize(
 		input,
 		output: COLLECTOR,
 		args: {
-			as: binarize(index),
+			to: binarize(index),
 		},
 	}
 	return newStep as BinarizeStep
@@ -103,7 +103,7 @@ function makeDerives(
 	const first = steps[0]
 	for (let index = 1; index < steps.length; index++) {
 		const step = steps[index]
-		const column1 = index > 1 ? parent.as : first.args.as
+		const column1 = index > 1 ? parent.to : first.args.to
 		const derive: Step = {
 			type: StepType.Verb,
 			verb: 'derive',
@@ -111,8 +111,8 @@ function makeDerives(
 			output: COLLECTOR,
 			args: {
 				column1,
-				column2: step.args.as,
-				as: COMBINED_COLUMN,
+				column2: step.args.to,
+				to: COMBINED_COLUMN,
 				operator: MathOperator.Add,
 			},
 		}
@@ -125,15 +125,13 @@ function makeOutputSelect(
 	parent: CompoundBinarizeStep,
 	derives: DeriveStep[],
 ): SelectStep {
-	const not = [...derives.map(d => d.args.as), COMBINED_COLUMN]
 	return {
 		type: StepType.Verb,
 		verb: 'select',
 		input: COLLECTOR,
 		output: parent.output,
 		args: {
-			columns: {},
-			not,
+			columns: [],
 		},
 	}
 }
@@ -149,7 +147,7 @@ function makeCleanupBinarize(
 		output: COLLECTOR,
 		args: {
 			column: steps.length === 1 ? binarize(0) : COMBINED_COLUMN,
-			as: parent.as,
+			to: parent.to,
 			type: FilterCompareType.Value,
 			value: 0,
 			operator: NumericComparisonOperator.Gt,

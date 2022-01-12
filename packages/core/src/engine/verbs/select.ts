@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { all, not as arqueroNot } from 'arquero'
+import { all } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../..'
 import { SelectArgs, Step } from '../../types'
@@ -18,12 +18,10 @@ export async function select(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { columns = {}, not } = args as SelectArgs
+	const { columns = [] } = args as SelectArgs
 	const inputTable = await store.get(input)
-	const expr = Object.keys(columns) as any
-	if (not) {
-		expr.push(arqueroNot(not))
-	}
+	const expr = [columns] as any
+
 	if (expr.length === 0) {
 		expr.push(all())
 	}

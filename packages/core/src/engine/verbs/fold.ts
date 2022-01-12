@@ -19,7 +19,7 @@ export async function fold(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { columns, as } = args as FoldArgs
+	const { columns, to } = args as FoldArgs
 	const inputTable = await store.get(input)
-	return inputTable.fold(columns, { as })
+	return inputTable.fold(columns, { as: to })
 }

@@ -10,8 +10,10 @@ import { aggregate } from './aggregate'
 import { bin } from './bin'
 import { binarize } from './binarize'
 import { concat } from './concat'
+import { dedupe } from './dedupe'
 import { derive } from './derive'
-import { except } from './except'
+import { difference } from './difference'
+import { fetch } from './fetch'
 import { fill } from './fill'
 import { filter } from './filter'
 import { fold } from './fold'
@@ -20,11 +22,15 @@ import { intersect } from './intersect'
 import { join } from './join'
 import { lookup } from './lookup'
 import { orderby } from './orderby'
+import { recode } from './recode'
 import { rename } from './rename'
+import { rollup } from './rollup'
 import { sample } from './sample'
 import { select } from './select'
 import { spread } from './spread'
+import { ungroup } from './ungroup'
 import { union } from './union'
+import { unorder } from './unorder'
 import { unroll } from './unroll'
 
 const verbs: Record<string, StepFunction> = {
@@ -32,8 +38,10 @@ const verbs: Record<string, StepFunction> = {
 	bin,
 	binarize,
 	concat,
+	dedupe,
 	derive,
-	except,
+	difference,
+	fetch,
 	fill,
 	filter,
 	fold,
@@ -42,11 +50,15 @@ const verbs: Record<string, StepFunction> = {
 	join,
 	lookup,
 	orderby,
+	recode,
 	rename,
+	rollup,
 	sample,
 	select,
 	spread,
+	ungroup,
 	union,
+	unorder,
 	unroll,
 }
 
@@ -81,15 +93,16 @@ export function factory(
 		case Verb.Bin:
 		case Verb.Binarize:
 		case Verb.Derive:
+		case Verb.Impute:
 		case Verb.Fill:
 			return {
 				...base,
 				args: {
-					as: 'output',
+					to: 'output',
 				},
 			}
 		case Verb.Concat:
-		case Verb.Except:
+		case Verb.Difference:
 		case Verb.Intersect:
 		case Verb.Union:
 			return {
@@ -102,12 +115,13 @@ export function factory(
 			return {
 				...base,
 				args: {
-					as: ['key', 'value'],
+					to: ['key', 'value'],
 					columns: [],
 				},
 			}
 		case Verb.Lookup:
 		case Verb.Groupby:
+		case Verb.Dedupe:
 		case Verb.Spread:
 		case Verb.Unroll:
 			return {
@@ -116,12 +130,16 @@ export function factory(
 					columns: [],
 				},
 			}
+		case Verb.Fetch:
 		case Verb.Filter:
 		case Verb.Join:
 		case Verb.Orderby:
 		case Verb.Rename:
+		case Verb.Rollup:
 		case Verb.Sample:
 		case Verb.Select:
+		case Verb.Ungroup:
+		case Verb.Unorder:
 	}
 	return {
 		...base,

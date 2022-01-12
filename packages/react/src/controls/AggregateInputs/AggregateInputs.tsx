@@ -3,9 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { AggregateStep } from '@data-wrangling-components/core'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { TableColumnDropdown, FieldAggregateOperationDropdown } from '..'
 import {
@@ -16,15 +14,14 @@ import {
 import { StepComponentProps } from '../../types'
 
 /**
- * Just the group/field/op inputs for an aggregation.
+ * Just the group/column/op inputs for an aggregation.
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const AggregateInputs: React.FC<StepComponentProps> = memo(
-	function AggregateInputs({ step, store, onChange, input }) {
+	function AggregateInputs({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => step as AggregateStep, [step])
 
-		const [table, setTable] = useState<ColumnTable | undefined>()
-		useLoadTable(input || internal.input, store, setTable)
+		const tbl = useLoadTable(input || internal.input, table, store)
 
 		const handleGroupColumnChange = useHandleDropdownChange(
 			internal,
@@ -33,7 +30,7 @@ export const AggregateInputs: React.FC<StepComponentProps> = memo(
 		)
 		const handleAggregateColumnChange = useHandleDropdownChange(
 			internal,
-			'args.field',
+			'args.column',
 			onChange,
 		)
 		const handleOpChange = useHandleDropdownChange(
@@ -47,7 +44,7 @@ export const AggregateInputs: React.FC<StepComponentProps> = memo(
 				<LeftAlignedRow>
 					<TableColumnDropdown
 						required
-						table={table}
+						table={tbl}
 						label={'Column to group by'}
 						selectedKey={internal.args.groupby}
 						onChange={handleGroupColumnChange}
@@ -55,9 +52,9 @@ export const AggregateInputs: React.FC<StepComponentProps> = memo(
 
 					<TableColumnDropdown
 						required
-						table={table}
+						table={tbl}
 						label={'Column to aggregate'}
-						selectedKey={internal.args.field}
+						selectedKey={internal.args.column}
 						onChange={handleAggregateColumnChange}
 					/>
 					<FieldAggregateOperationDropdown

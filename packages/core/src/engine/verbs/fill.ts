@@ -23,11 +23,12 @@ export async function fill(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { value, as } = args as FillArgs
+	const { value, to } = args as FillArgs
 	const inputTable = await store.get(input)
 
-	const dArgs: ExprFunctionMap = {}
-	dArgs[as] = (d: any, $: any) => $.value
+	const dArgs: ExprFunctionMap = {
+		[to]: (d: any, $: any) => $.value,
+	}
 
 	return inputTable.params({ value }).derive(dArgs)
 }

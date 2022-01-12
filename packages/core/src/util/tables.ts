@@ -4,7 +4,6 @@
  */
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { isDate, isArray } from 'lodash'
 import {
 	Bin,
 	Category,
@@ -14,6 +13,7 @@ import {
 	TableMetadata,
 } from '..'
 import { fixedBinCount } from '../engine/util'
+import { columnType, determineType } from '.'
 
 // arquero uses 1000 as default, but we're sampling the table so assuming higher odds of valid values
 const SAMPLE_MAX = 100
@@ -196,7 +196,7 @@ function categories(
 			.groupby(cur)
 			.count()
 			.objects()
-			.sort((a, b) => a[cur].localeCompare(b[cur]))
+			.sort((a, b) => `${a[cur]}`.localeCompare(`${b[cur]}`))
 			.map(d => ({ name: d[cur], count: d.count }))
 		acc[cur] = counted
 		return acc
@@ -214,33 +214,7 @@ function categories(
 export function types(table: ColumnTable): Record<string, DataType> {
 	const sampled = table.sample(SAMPLE_MAX)
 	return sampled.columnNames().reduce((acc, cur) => {
-		const values = table.array(cur)
-		// use the first valid value to guess type
-		values.some((value, index) => {
-			if (value !== null && value !== undefined) {
-				acc[cur] = determineType(value)
-				return true
-			}
-			return false
-		})
+		acc[cur] = columnType(table, cur)
 		return acc
 	}, {} as Record<string, DataType>)
-}
-
-/**
- * Guess the type of a table value with more discernment than typeof
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
- * @param value
- * @returns
- */
-export function determineType(value: any): DataType {
-	const type = typeof value as string
-	if (type === 'object') {
-		if (isDate(value)) {
-			return DataType.Date
-		} else if (isArray(value)) {
-			return DataType.Array
-		}
-	}
-	return type as DataType
 }

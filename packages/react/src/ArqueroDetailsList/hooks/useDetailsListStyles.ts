@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IDetailsListStyles } from '@fluentui/react'
+import { useThematic } from '@thematic/react'
 import { merge } from 'lodash'
 import { useMemo } from 'react'
 import { DetailsListFeatures } from '..'
@@ -22,14 +23,19 @@ const STATS_HEIGHT = 56
  * @returns
  */
 export function useDetailsListStyles(
+	isHeadersFixed: boolean,
 	features?: DetailsListFeatures,
 	styles?: IDetailsListStyles,
 ): IDetailsListStyles {
+	const theme = useThematic()
 	return useMemo(
 		() =>
 			merge(
 				{},
 				{
+					focusZone: {
+						overflowX: 'auto',
+					},
 					headerWrapper: {
 						height:
 							DEFAULT_HEADER_HEIGHT +
@@ -39,10 +45,15 @@ export function useDetailsListStyles(
 							(features?.smartHeaders || features?.statsColumnHeaders
 								? STATS_HEIGHT
 								: 0),
+						position: isHeadersFixed ? 'sticky' : 'inherit',
+						zIndex: '2',
+						top: '0',
+						background: theme.application().background().hex(),
+						borderBottom: `1px solid ${theme.application().faint().hex()}`,
 					},
 				},
 				styles,
 			),
-		[styles, features],
+		[theme, styles, features, isHeadersFixed],
 	)
 }
