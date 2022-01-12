@@ -34,7 +34,7 @@ export function useDetailsListStyles(
 				{},
 				{
 					root: {
-						overflowX: 'scroll',
+						overflowX: 'auto',
 					},
 					headerWrapper: {
 						height:
