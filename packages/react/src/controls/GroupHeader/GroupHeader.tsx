@@ -45,7 +45,9 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 
 		return (
 			<HeaderContainer
-				ref={(element: HTMLDivElement) => (ref.current = element)}
+				ref={(element: HTMLDivElement) =>
+					(ref.current = (group?.level as number) > 0 ? element : undefined)
+				}
 				groupLevel={group?.level as number}
 			>
 				<LevelButton
