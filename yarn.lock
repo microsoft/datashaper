@@ -707,6 +707,7 @@ __metadata:
     "@zip.js/zip.js": ^2.3.19
     arquero: ^4.8.7
     core-js: ^3.12.1
+    regenerator-runtime: ^0.13.9
     typescript: ^4.5.4
     vite: ^2.7.10
   peerDependencies:
