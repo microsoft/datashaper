@@ -6,7 +6,7 @@
 import { CommandBar } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { useCommands } from './hooks'
+import { useColumnCounts, useCommands } from './hooks'
 import { ArqueroTableHeaderProps } from '.'
 
 const HEIGHT = 36
@@ -18,14 +18,21 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		showRowCount = true,
 		showColumnCount = true,
 		commands,
+		visibleColumns,
 	}) {
 		const commandItems = useCommands(commands)
-
+		// TODO: we can do the same thing for rows when a filter is applied
+		const columnCounts = useColumnCounts(table, visibleColumns)
 		return (
 			<Header>
 				{name ? <H2>{name}</H2> : null}
 				{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
-				{showColumnCount === true ? <H3>{table.numCols()} cols</H3> : null}
+				{showColumnCount === true ? (
+					<H3>
+						{columnCounts.total} cols{' '}
+						{columnCounts.hidden > 0 ? `(${columnCounts.hidden} hidden)` : ''}
+					</H3>
+				) : null}
 				{commandItems.length > 0 ? (
 					<CommandBar items={commandItems} styles={commandStyles} />
 				) : null}
