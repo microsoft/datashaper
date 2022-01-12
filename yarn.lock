@@ -613,12 +613,14 @@ __metadata:
     "@essex/jest-config": ^19.0.1
     "@essex/prettier-config": ^18.0.2
     "@essex/scripts": ^19.0.2
+    "@swc/core": ^1.2.128
+    "@swc/jest": ^0.2.16
     "@types/eslint": ^8.2.1
     "@types/jest": ^27.4.0
     "@types/node": ^16.11.19
     "@types/prettier": ^2.4.2
-    "@typescript-eslint/eslint-plugin": ^5.9.0
-    "@typescript-eslint/parser": ^5.9.0
+    "@typescript-eslint/eslint-plugin": ^5.9.1
+    "@typescript-eslint/parser": ^5.9.1
     babel-jest: ^27.4.6
     eslint: ^8.6.0
     eslint-import-resolver-node: ^0.3.6
@@ -642,7 +644,7 @@ __metadata:
     "@essex/scripts": ^19.0.2
     "@essex/vite-config": ^18.0.2
     "@fluentui/font-icons-mdl2": ^8.1.20
-    "@fluentui/react": ^8.49.0
+    "@fluentui/react": ^8.49.4
     "@fluentui/react-hooks": ^8.3.9
     "@fluentui/utilities": ^8.3.9
     "@thematic/core": ^1.3.0
@@ -702,12 +704,12 @@ __metadata:
   resolution: "@data-wrangling-components/utilities@workspace:packages/utilities"
   dependencies:
     "@essex/scripts": ^19.0.2
-    "@essex/vite-config": ^17.0.2
+    "@essex/vite-config": ^18.0.2
     "@types/node": ^14.17.6
     "@zip.js/zip.js": ^2.3.19
     arquero: ^4.8.7
     core-js: ^3.12.1
-    typescript: ^4.3.5
+    typescript: ^4.5.4
     vite: ^2.4.4
   peerDependencies:
     arquero: ^4.8.7
@@ -725,7 +727,7 @@ __metadata:
     "@essex/scripts": ^19.0.2
     "@essex/vite-config": ^18.0.2
     "@fluentui/font-icons-mdl2": ^8.1.20
-    "@fluentui/react": ^8.49.0
+    "@fluentui/react": ^8.49.4
     "@fluentui/react-hooks": ^8.3.9
     "@fluentui/utilities": ^8.3.9
     "@thematic/core": ^1.3.0
@@ -1034,19 +1036,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/vite-config@npm:^17.0.2":
-  version: 17.0.2
-  resolution: "@essex/vite-config@npm:17.0.2"
-  dependencies:
-    "@vitejs/plugin-react-refresh": ^1.3.6
-    vite-react-jsx: ^1.1.2
-    vite-tsconfig-paths: ^3.3.13
-  peerDependencies:
-    vite: "*"
-  checksum: 04476a9da9967d3816b1806d3d19a92903e9e75a9e62c560291ea2f237e1edc414ae6a28f91f5568ca03c1c41e6c972e13de90468f3ca95cf6cf430893e2e322
-  languageName: node
-  linkType: hard
-
 "@essex/vite-config@npm:^18.0.2":
   version: 18.0.2
   resolution: "@essex/vite-config@npm:18.0.2"
@@ -1234,7 +1223,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react@npm:^8.49.0":
+"@fluentui/react@npm:^8.49.4":
   version: 8.49.4
   resolution: "@fluentui/react@npm:8.49.4"
   dependencies:
@@ -1802,7 +1791,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.2.126":
+"@swc/core@npm:^1.2.126, @swc/core@npm:^1.2.128":
   version: 1.2.128
   resolution: "@swc/core@npm:1.2.128"
   dependencies:
@@ -1851,7 +1840,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/jest@npm:^0.2.15":
+"@swc/jest@npm:^0.2.15, @swc/jest@npm:^0.2.16":
   version: 0.2.16
   resolution: "@swc/jest@npm:0.2.16"
   dependencies:
@@ -2428,7 +2417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.9.0":
+"@typescript-eslint/eslint-plugin@npm:^5.9.0, @typescript-eslint/eslint-plugin@npm:^5.9.1":
   version: 5.9.1
   resolution: "@typescript-eslint/eslint-plugin@npm:5.9.1"
   dependencies:
@@ -2467,7 +2456,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.9.0":
+"@typescript-eslint/parser@npm:^5.9.0, @typescript-eslint/parser@npm:^5.9.1":
   version: 5.9.1
   resolution: "@typescript-eslint/parser@npm:5.9.1"
   dependencies:
@@ -9015,7 +9004,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.3.5, typescript@npm:^4.5.4":
+"typescript@npm:^4.5.4":
   version: 4.5.4
   resolution: "typescript@npm:4.5.4"
   bin:
@@ -9025,7 +9014,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.3.5#~builtin<compat/typescript>, typescript@patch:typescript@^4.5.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.5.4#~builtin<compat/typescript>":
   version: 4.5.4
   resolution: "typescript@patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"
   bin:
@@ -9154,7 +9143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-tsconfig-paths@npm:^3.3.13, vite-tsconfig-paths@npm:^3.3.17":
+"vite-tsconfig-paths@npm:^3.3.17":
   version: 3.3.17
   resolution: "vite-tsconfig-paths@npm:3.3.17"
   dependencies:

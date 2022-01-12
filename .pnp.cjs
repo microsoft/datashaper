@@ -60,6 +60,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@essex/jest-config", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:19.0.1"],
             ["@essex/prettier-config", "npm:18.0.2"],
             ["@essex/scripts", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:19.0.2"],
+            ["@swc/core", "npm:1.2.128"],
+            ["@swc/jest", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:0.2.16"],
             ["@types/eslint", "npm:8.2.2"],
             ["@types/jest", "npm:27.4.0"],
             ["@types/node", "npm:16.11.19"],
@@ -1303,6 +1305,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@essex/jest-config", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:19.0.1"],
             ["@essex/prettier-config", "npm:18.0.2"],
             ["@essex/scripts", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:19.0.2"],
+            ["@swc/core", "npm:1.2.128"],
+            ["@swc/jest", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:0.2.16"],
             ["@types/eslint", "npm:8.2.2"],
             ["@types/jest", "npm:27.4.0"],
             ["@types/node", "npm:16.11.19"],
@@ -1474,7 +1478,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@data-wrangling-components/utilities", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#workspace:packages/utilities"],
             ["@essex/scripts", "virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:19.0.2"],
-            ["@essex/vite-config", "virtual:dca28cb8dced26a92512adc36649d024c1afa23f36635604d395964616361a26d16c9130cb293a572b30d91416cb5245060459ac2ff30f8fb755a8f3e6e82149#npm:17.0.2"],
+            ["@essex/vite-config", "virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:18.0.2"],
             ["@types/arquero", null],
             ["@types/node", "npm:14.18.5"],
             ["@zip.js/zip.js", "npm:2.3.23"],
@@ -1494,7 +1498,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@data-wrangling-components/utilities", "workspace:packages/utilities"],
             ["@essex/scripts", "virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:19.0.2"],
-            ["@essex/vite-config", "virtual:dca28cb8dced26a92512adc36649d024c1afa23f36635604d395964616361a26d16c9130cb293a572b30d91416cb5245060459ac2ff30f8fb755a8f3e6e82149#npm:17.0.2"],
+            ["@essex/vite-config", "virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:18.0.2"],
             ["@types/node", "npm:14.18.5"],
             ["@zip.js/zip.js", "npm:2.3.23"],
             ["arquero", "npm:4.8.7"],
@@ -1986,7 +1990,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@essex/jest-config", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:19.0.1"],
             ["@swc/core", "npm:1.2.128"],
-            ["@swc/jest", "virtual:3132f4050e4f463ffe29d1f2a576b8562c746777f813f20d3c011512e37eff059285e88ad781b458bedb39720ae1f60365e7aae3e752825558ad473f21409a6a#npm:0.2.16"],
+            ["@swc/jest", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:0.2.16"],
             ["@types/jest", "npm:27.4.0"],
             ["identity-obj-proxy", "npm:3.0.0"],
             ["jest", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:27.4.7"]
@@ -2245,35 +2249,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@essex/vite-config", [
-        ["npm:17.0.2", {
-          "packageLocation": "./.yarn/cache/@essex-vite-config-npm-17.0.2-75b3c96b1a-04476a9da9.zip/node_modules/@essex/vite-config/",
-          "packageDependencies": [
-            ["@essex/vite-config", "npm:17.0.2"]
-          ],
-          "linkType": "SOFT",
-        }],
         ["npm:18.0.2", {
           "packageLocation": "./.yarn/cache/@essex-vite-config-npm-18.0.2-6355dca783-56686f3084.zip/node_modules/@essex/vite-config/",
           "packageDependencies": [
             ["@essex/vite-config", "npm:18.0.2"]
           ],
           "linkType": "SOFT",
-        }],
-        ["virtual:dca28cb8dced26a92512adc36649d024c1afa23f36635604d395964616361a26d16c9130cb293a572b30d91416cb5245060459ac2ff30f8fb755a8f3e6e82149#npm:17.0.2", {
-          "packageLocation": "./.yarn/__virtual__/@essex-vite-config-virtual-d5396472bb/0/cache/@essex-vite-config-npm-17.0.2-75b3c96b1a-04476a9da9.zip/node_modules/@essex/vite-config/",
-          "packageDependencies": [
-            ["@essex/vite-config", "virtual:dca28cb8dced26a92512adc36649d024c1afa23f36635604d395964616361a26d16c9130cb293a572b30d91416cb5245060459ac2ff30f8fb755a8f3e6e82149#npm:17.0.2"],
-            ["@types/vite", null],
-            ["@vitejs/plugin-react-refresh", "npm:1.3.6"],
-            ["vite", "virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:2.7.10"],
-            ["vite-react-jsx", "virtual:a0b78c3b4a0cb3569597bc5ad9b839a40aa529e1289f8a04278017463db557aac828074dcd3d34c85a7679cdc6d46728fb4e9c16ff48e0018721ca54990aaf7c#npm:1.1.2"],
-            ["vite-tsconfig-paths", "virtual:a0b78c3b4a0cb3569597bc5ad9b839a40aa529e1289f8a04278017463db557aac828074dcd3d34c85a7679cdc6d46728fb4e9c16ff48e0018721ca54990aaf7c#npm:3.3.17"]
-          ],
-          "packagePeers": [
-            "@types/vite",
-            "vite"
-          ],
-          "linkType": "HARD",
         }],
         ["virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:18.0.2", {
           "packageLocation": "./.yarn/__virtual__/@essex-vite-config-virtual-a0b78c3b4a/0/cache/@essex-vite-config-npm-18.0.2-6355dca783-56686f3084.zip/node_modules/@essex/vite-config/",
@@ -3315,10 +3296,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:3132f4050e4f463ffe29d1f2a576b8562c746777f813f20d3c011512e37eff059285e88ad781b458bedb39720ae1f60365e7aae3e752825558ad473f21409a6a#npm:0.2.16", {
-          "packageLocation": "./.yarn/__virtual__/@swc-jest-virtual-c97873725f/0/cache/@swc-jest-npm-0.2.16-7d5bfa6ade-5cf74edc5c.zip/node_modules/@swc/jest/",
+        ["virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:0.2.16", {
+          "packageLocation": "./.yarn/__virtual__/@swc-jest-virtual-233620b4ad/0/cache/@swc-jest-npm-0.2.16-7d5bfa6ade-5cf74edc5c.zip/node_modules/@swc/jest/",
           "packageDependencies": [
-            ["@swc/jest", "virtual:3132f4050e4f463ffe29d1f2a576b8562c746777f813f20d3c011512e37eff059285e88ad781b458bedb39720ae1f60365e7aae3e752825558ad473f21409a6a#npm:0.2.16"],
+            ["@swc/jest", "virtual:37fc401beef9ce0721ae5f3b8695d3c2604b9aabdd0a21d4440375958d474150a46013c2359eeca377c88a139efcc2d127734c089c70fa3dc3387a2302b1965d#npm:0.2.16"],
             ["@jest/create-cache-key-function", "npm:27.4.2"],
             ["@swc/core", "npm:1.2.128"],
             ["@types/swc__core", null]
