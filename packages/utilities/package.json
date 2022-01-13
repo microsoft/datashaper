@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/utilities",
-	"version": "1.0.0",
+	"version": "1.1.2",
 	"main": "src/index.ts",
 	"publishConfig": {
 		"main": "dist/cjs/index.js",
@@ -13,15 +13,16 @@
 	},
 	"dependencies": {
 		"@zip.js/zip.js": "^2.3.19",
-		"core-js": "^3.12.1"
+		"core-js": "^3.20.2"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^18.0.0",
-		"@essex/vite-config": "^17.0.2",
-		"@types/node": "^14.17.6",
+		"@essex/scripts": "^19.0.5",
+		"@essex/vite-config": "^18.0.2",
+		"@types/node": "^14.18.5",
 		"arquero": "^4.8.7",
-		"typescript": "^4.3.5",
-		"vite": "^2.4.4"
+		"regenerator-runtime": "^0.13.9",
+		"typescript": "^4.5.4",
+		"vite": "^2.7.10"
 	},
 	"peerDependencies": {
 		"arquero": "^4.8.7"

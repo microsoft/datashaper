@@ -5,6 +5,7 @@
 import { download } from '@data-wrangling-components/utilities'
 import { ICommandBarItemProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { merge } from 'lodash'
 /**
  * Constructs a download command.
  * When clicked, will save the current table to a csv.
@@ -15,13 +16,18 @@ import ColumnTable from 'arquero/dist/types/table/column-table'
 export function downloadCommand(
 	table: ColumnTable,
 	downloadFilename?: string,
+	props?: ICommandBarItemProps,
 ): ICommandBarItemProps {
-	return {
-		key: 'download',
-		title: 'Download table',
-		iconProps: {
-			iconName: 'Download',
+	return merge(
+		{},
+		{
+			key: 'download',
+			title: 'Download table',
+			iconProps: {
+				iconName: 'Download',
+			},
+			onClick: () => download(table, downloadFilename),
 		},
-		onClick: () => download(table, downloadFilename),
-	}
+		props,
+	)
 }
