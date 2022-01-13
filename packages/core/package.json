@@ -12,7 +12,7 @@
 		"build": "essex build"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^19.0.3",
+		"@essex/scripts": "^19.0.4",
 		"@essex/vite-config": "^18.0.2",
 		"@types/jest": "^27.4.0",
 		"@types/lodash": "^4.14.178",
