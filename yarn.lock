@@ -584,7 +584,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:packages/core"
   dependencies:
-    "@essex/scripts": ^19.0.3
+    "@essex/scripts": ^19.0.5
     "@essex/vite-config": ^18.0.2
     "@types/jest": ^27.4.0
     "@types/lodash": ^4.14.178
@@ -612,7 +612,7 @@ __metadata:
     "@essex/eslint-plugin": ^19.0.2
     "@essex/jest-config": ^19.0.2
     "@essex/prettier-config": ^18.0.2
-    "@essex/scripts": ^19.0.3
+    "@essex/scripts": ^19.0.5
     "@types/eslint": ^8.2.2
     "@types/jest": ^27.4.0
     "@types/node": ^16.11.19
@@ -624,7 +624,7 @@ __metadata:
     eslint-import-resolver-node: ^0.3.6
     husky: ^7.0.4
     jest: ^27.4.7
-    lint-staged: ^12.1.5
+    lint-staged: ^12.1.7
     npm-run-all: ^4.1.5
     prettier: ^2.5.1
     ts-jest: ^27.1.2
@@ -639,7 +639,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:packages/core"
     "@data-wrangling-components/utilities": "workspace:packages/utilities"
     "@essex-js-toolkit/themed-components": ^1.3.2
-    "@essex/scripts": ^19.0.3
+    "@essex/scripts": ^19.0.5
     "@essex/vite-config": ^18.0.2
     "@fluentui/font-icons-mdl2": ^8.1.20
     "@fluentui/react": ^8.49.4
@@ -701,12 +701,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/utilities@workspace:packages/utilities"
   dependencies:
-    "@essex/scripts": ^19.0.3
+    "@essex/scripts": ^19.0.5
     "@essex/vite-config": ^18.0.2
     "@types/node": ^14.18.5
     "@zip.js/zip.js": ^2.3.19
     arquero: ^4.8.7
-    core-js: ^3.12.1
+    core-js: ^3.20.2
     regenerator-runtime: ^0.13.9
     typescript: ^4.5.4
     vite: ^2.7.10
@@ -723,7 +723,7 @@ __metadata:
     "@data-wrangling-components/react": "workspace:packages/react"
     "@data-wrangling-components/utilities": "workspace:packages/utilities"
     "@essex-js-toolkit/themed-components": ^1.3.2
-    "@essex/scripts": ^19.0.3
+    "@essex/scripts": ^19.0.5
     "@essex/vite-config": ^18.0.2
     "@fluentui/font-icons-mdl2": ^8.1.20
     "@fluentui/react": ^8.49.4
@@ -959,9 +959,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/scripts@npm:^19.0.3":
-  version: 19.0.3
-  resolution: "@essex/scripts@npm:19.0.3"
+"@essex/scripts@npm:^19.0.5":
+  version: 19.0.5
+  resolution: "@essex/scripts@npm:19.0.5"
   dependencies:
     "@azure/storage-blob": ^12.8.0
     "@essex/eslint-config": 19.0.2
@@ -1021,7 +1021,7 @@ __metadata:
   bin:
     essex: ./lib/index.js
     essex-scripts: ./lib/index.js
-  checksum: 4b954bf43142ee64f2715debb88d18005efb108f2f6adfade006591a1a79db2fded94d13b4ec51daf493c3061e9b7b28f7135123f85b3b24c8351199c875f121
+  checksum: d564ed499e4ac089e144048c58615934eaec49f370d2e1db0b8ad55ddb062eac6a6a0ae6cb0337ff19ab0214b611eeddb1f7c8a020e6050cad28834c5ca39047
   languageName: node
   linkType: hard
 
@@ -6563,7 +6563,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^12.1.5":
+"lint-staged@npm:^12.1.7":
   version: 12.1.7
   resolution: "lint-staged@npm:12.1.7"
   dependencies:

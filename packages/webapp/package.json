@@ -39,7 +39,7 @@
 		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^19.0.3",
+		"@essex/scripts": "^19.0.5",
 		"@essex/vite-config": "^18.0.2",
 		"@types/node": "^16.11.19",
 		"@types/react": "^17.0.38",

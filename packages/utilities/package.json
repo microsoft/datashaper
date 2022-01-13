@@ -13,10 +13,10 @@
 	},
 	"dependencies": {
 		"@zip.js/zip.js": "^2.3.19",
-		"core-js": "^3.12.1"
+		"core-js": "^3.20.2"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^19.0.3",
+		"@essex/scripts": "^19.0.5",
 		"@essex/vite-config": "^18.0.2",
 		"@types/node": "^14.18.5",
 		"arquero": "^4.8.7",
