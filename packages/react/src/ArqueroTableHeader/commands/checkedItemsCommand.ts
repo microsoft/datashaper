@@ -17,7 +17,7 @@ export function checkedItemsCommand(
 	list: string[],
 	checked?: string[],
 	onCheckChange?: (name: string, checked: boolean, index: number) => void,
-	props?: ICommandBarItemProps,
+	props?: Partial<ICommandBarItemProps>,
 ): ICommandBarItemProps {
 	const hash = (checked || []).reduce((acc, cur) => {
 		acc[cur] = true

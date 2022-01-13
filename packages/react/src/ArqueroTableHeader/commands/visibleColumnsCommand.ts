@@ -20,7 +20,7 @@ export function visibleColumnsCommand(
 	table: ColumnTable,
 	columns?: string[],
 	onCheckChange?: (column: string, checked: boolean) => void,
-	props?: ICommandBarItemProps,
+	props?: Partial<ICommandBarItemProps>,
 ): ICommandBarItemProps {
 	return checkedItemsCommand(
 		table.columnNames(),
