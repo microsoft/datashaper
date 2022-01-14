@@ -7,8 +7,8 @@ import { Step, StepType, Specification } from '@data-wrangling-components/core'
 import {
 	selectStepComponent,
 	selectStepDescription,
-	WithTableDropdown,
 	DetailsListFeatures,
+	withTableDropdown,
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 
@@ -132,6 +132,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 					const Component = selectStepComponent(step)
 					const Description = selectStepDescription(step)
 					const output = outputs?.get(step.output)
+					const WithTableDropdown = withTableDropdown()(Component)
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
 							<Section
@@ -141,7 +142,6 @@ export const MainPage: React.FC = memo(function MainMage() {
 							>
 								<StepsColumn className="steps-column">
 									<WithTableDropdown
-										Component={Component}
 										step={step}
 										store={store}
 										onChange={s => handleStepChange(s, index)}
