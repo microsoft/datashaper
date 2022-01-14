@@ -11,10 +11,9 @@ import {
 	useHandleTextfieldChange,
 	LeftAlignedRow,
 	useHandleDropdownChange,
-	useLoadTable,
 	useHandleCheckboxChange,
 } from '../../common'
-import { TableColumnDropdown, BinStrategyDropdown } from '../../controls'
+import { BinStrategyDropdown } from '../../controls'
 import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 
@@ -23,10 +22,7 @@ import { StepComponentProps } from '../../types'
  */
 export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	step,
-	store,
-	table,
 	onChange,
-	input,
 }) {
 	const internal = useMemo(
 		() =>
@@ -40,15 +36,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 		[step],
 	)
 
-	const tbl = useLoadTable(input || step.input, table, store)
-
 	const handleToChange = useHandleTextfieldChange(internal, 'args.to', onChange)
-
-	const handleBinColumnChange = useHandleDropdownChange(
-		internal,
-		'args.column',
-		onChange,
-	)
 
 	const handleBinStrategyChange = useHandleDropdownChange(
 		internal,
@@ -95,13 +83,6 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 					value={internal.args.to}
 					styles={columnDropdownStyles}
 					onChange={handleToChange}
-				/>
-				<TableColumnDropdown
-					required
-					table={tbl}
-					label={'Column to bin'}
-					selectedKey={internal.args.column}
-					onChange={handleBinColumnChange}
 				/>
 			</LeftAlignedRow>
 			<LeftAlignedRow>

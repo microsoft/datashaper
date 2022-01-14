@@ -2,18 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FilterStep } from '@data-wrangling-components/core'
-import React, { memo, useMemo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
-import {
-	useLoadTable,
-	LeftAlignedRow,
-	useHandleDropdownChange,
-} from '../../common'
-
+import { LeftAlignedRow } from '../../common'
 import { StepComponentProps } from '../../types'
 import { FilterFunction } from '../FilterFunction'
-import { TableColumnDropdown } from '../dropdowns/TableColumnDropdown'
 
 /**
  * The filter inputs for a step.
@@ -21,29 +14,14 @@ import { TableColumnDropdown } from '../dropdowns/TableColumnDropdown'
  */
 export const FilterInputs: React.FC<StepComponentProps> = memo(
 	function FilterInputs({ step, store, table, onChange, input }) {
-		const internal = useMemo(() => step as FilterStep, [step])
-
-		const tbl = useLoadTable(input || step.input, table, store)
-
-		const handleLeftColumnChange = useHandleDropdownChange(
-			internal,
-			'args.column',
-			onChange,
-		)
-
 		return (
 			<Container>
 				<LeftAlignedRow>
-					<TableColumnDropdown
-						table={tbl}
-						required
-						selectedKey={internal.args.column}
-						onChange={handleLeftColumnChange}
-					/>
 					<FilterFunction
 						input={input}
 						step={step}
 						store={store}
+						table={table}
 						onChange={onChange}
 					/>
 				</LeftAlignedRow>

@@ -28,11 +28,7 @@ export const AggregateInputs: React.FC<StepComponentProps> = memo(
 			'args.groupby',
 			onChange,
 		)
-		const handleAggregateColumnChange = useHandleDropdownChange(
-			internal,
-			'args.column',
-			onChange,
-		)
+
 		const handleOpChange = useHandleDropdownChange(
 			internal,
 			'args.operation',
@@ -48,14 +44,6 @@ export const AggregateInputs: React.FC<StepComponentProps> = memo(
 						label={'Column to group by'}
 						selectedKey={internal.args.groupby}
 						onChange={handleGroupColumnChange}
-					/>
-
-					<TableColumnDropdown
-						required
-						table={tbl}
-						label={'Column to aggregate'}
-						selectedKey={internal.args.column}
-						onChange={handleAggregateColumnChange}
 					/>
 					<FieldAggregateOperationDropdown
 						selectedKey={internal.args.operation}
