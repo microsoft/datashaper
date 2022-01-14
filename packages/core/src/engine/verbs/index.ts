@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
+import { BinStrategy, TableStore } from '../..'
 import { Step, StepFunction, StepType, Verb } from '../../types'
 
 import { aggregate } from './aggregate'
@@ -89,8 +89,15 @@ export function factory(
 		output,
 	}
 	switch (verb) {
-		case Verb.Aggregate:
 		case Verb.Bin:
+			return {
+				...base,
+				args: {
+					to: 'output',
+					strategy: BinStrategy.Auto,
+				},
+			}
+		case Verb.Aggregate:
 		case Verb.Binarize:
 		case Verb.Derive:
 		case Verb.Impute:

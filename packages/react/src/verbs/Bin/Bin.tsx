@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinStep, BinArgs, BinStrategy } from '@data-wrangling-components/core'
+import { BinStep, BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, TextField } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import { Switch, Case, If, Then } from 'react-if'
@@ -24,17 +24,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	step,
 	onChange,
 }) {
-	const internal = useMemo(
-		() =>
-			({
-				...step,
-				args: {
-					strategy: BinStrategy.Auto,
-					...(step.args as Partial<BinArgs>),
-				},
-			} as BinStep),
-		[step],
-	)
+	const internal = useMemo(() => step as BinStep, [step])
 
 	const handleBinStrategyChange = useHandleDropdownChange(
 		internal,

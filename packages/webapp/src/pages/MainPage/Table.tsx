@@ -12,7 +12,6 @@ import {
 } from '@data-wrangling-components/react'
 import { IColumn, IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { SetterOrUpdater } from 'recoil'
 import styled from 'styled-components'
@@ -74,7 +73,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		<Container className="table-container">
 			<ArqueroTableHeader
 				table={table}
-				name={name ?? ''}
+				name={name}
 				showRowCount={true}
 				showColumnCount={true}
 				commands={commands}
@@ -118,12 +117,13 @@ function useCommands(
 		},
 		[updateColumns],
 	)
-	const dlcmd = useMemo(() => downloadCommand(table), [table])
+
 	const vccmd = useMemo(
 		() => visibleColumnsCommand(table, visibleColumns, handleColumnCheckChange),
 		[table, visibleColumns, handleColumnCheckChange],
 	)
-	return useMemo(() => [dlcmd, vccmd], [dlcmd, vccmd])
+	const dlcmd = useMemo(() => downloadCommand(table), [table])
+	return useMemo(() => [vccmd, dlcmd], [dlcmd, vccmd])
 }
 
 const Container = styled.div`

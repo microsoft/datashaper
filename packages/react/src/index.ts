@@ -5,6 +5,7 @@
 export * from './ArqueroDetailsList'
 export * from './ArqueroTableHeader'
 export * from './ArqueroTable'
+export * from './ColumnTransformModal'
 export * from './verbs'
 export * from './VerbDescription'
 export * from './common'
