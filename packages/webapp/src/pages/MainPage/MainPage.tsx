@@ -4,20 +4,15 @@
  */
 /* eslint-disable @essex/adjacent-await */
 import { Step, StepType, Specification } from '@data-wrangling-components/core'
-import {
-	selectStepComponent,
-	selectStepDescription,
-	DetailsListFeatures,
-	withTableDropdown,
-} from '@data-wrangling-components/react'
+import { DetailsListFeatures } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
-
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useState, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { ControlBar } from './ControlBar'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
+import { StepComponent } from './StepComponent'
 import { StepSelector } from './StepSelector'
 import { Table } from './Table'
 import {
@@ -129,10 +124,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 					</Section>
 				</InputsSection>
 				{steps.map((step, index) => {
-					const Component = selectStepComponent(step)
-					const Description = selectStepDescription(step)
 					const output = outputs?.get(step.output)
-					const WithTableDropdown = withTableDropdown()(Component)
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
 							<Section
@@ -141,16 +133,13 @@ export const MainPage: React.FC = memo(function MainMage() {
 								type={step.type}
 							>
 								<StepsColumn className="steps-column">
-									<WithTableDropdown
+									<StepComponent
+										key={`step-${index}`}
 										step={step}
 										store={store}
-										onChange={s => handleStepChange(s, index)}
+										index={index}
+										onChange={handleStepChange}
 									/>
-									{Description ? (
-										<DescriptionContainer>
-											<Description step={step} showInput showOutput />
-										</DescriptionContainer>
-									) : null}
 								</StepsColumn>
 								<OutputsColumn className="outputs-column">
 									{output ? (
@@ -254,8 +243,4 @@ const OutputsColumn = styled.div`
 	margin-left: 40px;
 	display: flex;
 	flex-direction: column;
-`
-
-const DescriptionContainer = styled.div`
-	margin-top: 8px;
 `

@@ -2,14 +2,21 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleDropdownChange } from './common'
 import { TableDropdown } from './controls'
-import { StepComponentProps } from './types'
+import { HOCFunction, StepComponentProps } from './types'
 
-export const withTableDropdown = (label?: string) => {
-	return (Component: React.FC<StepComponentProps>) => {
+/**
+ * Higher order component generator to wrap a Step in the input table dropdown.
+ * @param label optional label to use for the dropdown instead of the default.
+ * @returns
+ */
+export const withTableDropdown = (
+	label?: string,
+): HOCFunction<StepComponentProps> => {
+	return Component => {
 		const WithTableDropdown: React.FC<StepComponentProps> = props => {
 			const { step, store, onChange } = props
 			const handleTableChange = useHandleDropdownChange(step, 'input', onChange)

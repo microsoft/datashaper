@@ -7,6 +7,7 @@ import { IDropdownOption } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type StepChangeFunction = (step: Step) => void
+export type HOCFunction<T> = (Component: React.FC<T>) => React.FC<T>
 
 export type DropdownOptionChangeFunction = (
 	event: React.FormEvent<HTMLDivElement>,
