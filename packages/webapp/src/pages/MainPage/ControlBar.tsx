@@ -59,6 +59,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	const handleDropCSV = useCallback(
 		async (fc: FileCollection) => {
 			const files = fc.list(FileType.csv)
+			if (!files.length) return
 			updateFileCollection(files)
 			const loaded = await loadFiles(files)
 			onLoadFiles && onLoadFiles(loaded)
@@ -70,6 +71,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			// ignore any after the first. I suppose we could auto-link the steps, but that's dangerous
 			const files = fc.list(FileType.json)
 			const first = files[0]
+			if (!first) return
 			updateFileCollection([first])
 			const spec = await loadSpec(first)
 			onSelectSpecification && onSelectSpecification(spec)
