@@ -52,23 +52,23 @@ export class BaseFile extends FileWithPath {
 		return this.isDsv() || this.isJson()
 	}
 
-	async getJson(): Promise<Json> {
+	async toJson(): Promise<Json> {
 		return getJsonFileContentFromFile(this)
 	}
 
-	async getText(): Promise<string> {
+	async toText(): Promise<string> {
 		return getTextFromFile(this)
 	}
 
-	async getDsvString(): Promise<string> {
+	async toDsvString(): Promise<string> {
 		return getDsvFileContent(this)
 	}
 
-	async getTable(): Promise<ColumnTable> {
+	async toTable(): Promise<ColumnTable> {
 		return loadTable(this)
 	}
 
-	async getDataURL(): Promise<string> {
+	async toDataURL(): Promise<string> {
 		return getDataURL(this)
 	}
 
@@ -90,11 +90,10 @@ export class BaseFile extends FileWithPath {
 		}
 	}
 
-	rename(newName: string): Promise<void> {
+	rename(newName: string): void {
 		const path = this.path.replace(this.name, newName)
 		const renamedFile = new FileWithPath(this.file, newName, path)
 		this.file = renamedFile
 		this.path = path
-		return Promise.resolve()
 	}
 }

@@ -3,8 +3,20 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { BaseFile } from '../common'
+import { BaseFile, FileWithPath } from '../common'
 import { FileType, Json } from '../types'
+
+interface FileOptions {
+	name?: string
+	path?: string
+	type?: string
+}
+
+const fileDefaults = {
+	name: 'File.txt',
+	type: 'text/plain',
+	path: '',
+}
 
 export function extension(filename = ''): string {
 	const parts = filename.split('.')
@@ -56,6 +68,31 @@ export const fetchFile = async (url: string): Promise<Blob> => {
 	return fetch(url).then(response => response.blob())
 }
 
+export const createFile = (
+	content: Blob,
+	options?: Omit<FileOptions, 'path'>,
+): File => {
+	const { name, type } = { ...fileDefaults, ...options }
+	return new File([content], name, { type })
+}
+
+export const createFileWithPath = (
+	content: Blob,
+	options?: FileOptions,
+): FileWithPath => {
+	const { name, path } = { ...fileDefaults, ...options }
+	const file = createFile(content, options)
+	return new FileWithPath(file, name, path || name)
+}
+
+export const createBaseFile = (
+	content: Blob,
+	options?: FileOptions,
+): BaseFile => {
+	const file = createFileWithPath(content, options)
+	return new BaseFile(file)
+}
+
 export const getTextFromFile = async (file: BaseFile): Promise<string> => {
 	const reader = new FileReader()
 	reader.readAsText(file)
@@ -95,27 +132,35 @@ export async function getDataURL(file: BaseFile): Promise<string> {
 	})
 }
 
-export async function renameDuplicatedFiles(
-	files: BaseFile[],
-): Promise<BaseFile[]> {
+export function renameDuplicatedFiles(files: BaseFile[]): BaseFile[] {
 	const fileNames: Record<string, number> = {}
-	for (const file of files) {
-		if (!fileNames[file.name]) {
-			fileNames[file.name] = 0
+	const cleanName = (name: string): string => {
+		const ext = extension(name)
+		const clean = name
+			.replace(`.${ext}`, '')
+			.replace(/\([0-9]\)/g, '')
+			.trimEnd()
+		return `${clean}.${ext}`
+	}
+	const names = files.map(file => cleanName(file.name))
+	for (const name of names) {
+		if (!fileNames[name]) {
+			fileNames[name] = 0
 		}
-		++fileNames[file.name]
+		++fileNames[name]
 	}
 	const values = Object.values(fileNames)
 	if (values.every(val => val === 1)) {
 		return files
 	}
-	files.forEach(file => {
-		--fileNames[file.name]
-		const count = fileNames[file.name]
-		const ext = extension(file.name)
-		const name = file.name.replace(`.${ext}`, '')
-		const newName = !!count ? `${name}_${count}.${ext}` : file.name
-		file.rename(newName)
+	return files.map(file => {
+		let name = cleanName(file.name)
+		const count = fileNames[name]
+		--fileNames[name]
+		if (count > 1) {
+			const ext = extension(name)
+			name = `${name.replace(`.${ext}`, '')} (${count}).${ext}`
+		}
+		return createBaseFile(file, { name })
 	})
-	return files
 }
