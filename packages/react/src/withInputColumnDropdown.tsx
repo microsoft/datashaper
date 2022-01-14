@@ -29,7 +29,7 @@ export const withInputColumnDropdown = (
 			)
 			const tbl = useLoadTable(input || step.input, table, store)
 			if (!isInputColumnStep(step)) {
-				return <></>
+				return <Component {...props} />
 			}
 			return (
 				<Container className="with-input-column-dropdown">

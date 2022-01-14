@@ -36,8 +36,6 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 		[step],
 	)
 
-	const handleToChange = useHandleTextfieldChange(internal, 'args.to', onChange)
-
 	const handleBinStrategyChange = useHandleDropdownChange(
 		internal,
 		'args.strategy',
@@ -75,16 +73,6 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 
 	return (
 		<Container>
-			<LeftAlignedRow>
-				<TextField
-					required
-					label={'New column name'}
-					placeholder={'Column name'}
-					value={internal.args.to}
-					styles={columnDropdownStyles}
-					onChange={handleToChange}
-				/>
-			</LeftAlignedRow>
 			<LeftAlignedRow>
 				<BinStrategyDropdown
 					required

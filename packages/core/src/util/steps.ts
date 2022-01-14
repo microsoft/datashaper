@@ -11,9 +11,18 @@ const inputColumnSteps: Record<string, boolean> = {
 	filter: true,
 	recode: true,
 	rollup: true,
-	sample: true,
 	spread: true,
 	unroll: true,
+}
+
+const outputColumnSteps: Record<string, boolean> = {
+	aggregate: true,
+	bin: true,
+	binarize: true,
+	derive: true,
+	fill: true,
+	recode: true,
+	rollup: true,
 }
 
 /**
@@ -23,4 +32,13 @@ const inputColumnSteps: Record<string, boolean> = {
  */
 export function isInputColumnStep(step: Step): boolean {
 	return !!inputColumnSteps[step.verb]
+}
+
+/**
+ * Indicates whether the supplied step requires an output column.
+ * @param step
+ * @returns
+ */
+export function isOutputColumnStep(step: Step): boolean {
+	return !!outputColumnSteps[step.verb]
 }

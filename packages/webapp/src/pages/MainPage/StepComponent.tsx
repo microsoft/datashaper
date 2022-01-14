@@ -6,6 +6,7 @@ import { Step, TableStore } from '@data-wrangling-components/core'
 
 import {
 	withInputColumnDropdown,
+	withOutputColumnTextfield,
 	withTableDropdown,
 	selectStepComponent,
 	selectStepDescription,
@@ -30,7 +31,9 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		const WithAllArgs = useMemo(
 			() =>
 				// TODO: compose cleanly
-				withTableDropdown()(withInputColumnDropdown()(Component)),
+				withTableDropdown()(
+					withOutputColumnTextfield()(withInputColumnDropdown()(Component)),
+				),
 			[Component],
 		)
 		const handleStepChange = useCallback(
