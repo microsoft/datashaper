@@ -12,7 +12,7 @@ import {
 	ConstrainMode,
 } from '@fluentui/react'
 import { RowObject } from 'arquero/dist/types/table/table'
-import React, { memo, useMemo } from 'react'
+import React, { memo, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { groupBuilder } from '../common/'
 import {
@@ -62,6 +62,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			...rest
 		} = props
 
+		const [version, setVersion] = useState(0)
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(isSortable, onColumnHeaderClick)
 
@@ -155,10 +156,17 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			})
 		}, [sliced, sortedGroups, items, sortColumn, sortDirection, features])
 
+		// as in FluentUI documentation, when updating item we can update the list items with a spread operator.
+		// since when adding a new column we're changing the columns prop too, this approach doesn't work for that.
+		// a workaround found in the issues suggest to use this version property to use as comparisson to force re-render
+		useEffect(() => {
+			setVersion(prev => prev + 1)
+		}, [setVersion, displayColumns])
+
 		return (
 			<DetailsWrapper>
 				<DetailsList
-					items={items}
+					items={[...items]}
 					selectionMode={selectionMode}
 					layoutMode={layoutMode}
 					groups={groups}
@@ -171,6 +179,9 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					onRenderRow={renderRow}
 					onRenderDetailsHeader={renderDetailsHeader}
 					{...rest}
+					listProps={{
+						version,
+					}}
 					styles={headerStyle}
 				/>
 			</DetailsWrapper>

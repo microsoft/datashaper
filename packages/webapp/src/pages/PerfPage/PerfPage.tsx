@@ -13,9 +13,15 @@ import {
 	ArqueroTableHeader,
 } from '@data-wrangling-components/react'
 import { createLazyLoadingGroupHeader } from '@data-wrangling-components/react/src/ArqueroDetailsList/renderers'
-import { IDetailsGroupDividerProps, Pivot, PivotItem } from '@fluentui/react'
+import {
+	DefaultButton,
+	IDetailsGroupDividerProps,
+	Pivot,
+	PivotItem,
+} from '@fluentui/react'
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { Struct } from 'arquero/dist/types/table/transformable'
 import React, { memo, useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 /**
@@ -47,6 +53,17 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		f()
 	}, [])
 
+	const addNewColumn = useCallback(() => {
+		if (!table) return
+		const newTable = table.derive(
+			{ [Math.random()]: (d: Struct) => d.Close },
+			{ before: 'Date' },
+		)
+		const newMetadata = introspect(newTable, true)
+		setMetadata(newMetadata)
+		setTable(newTable)
+	}, [table, setMetadata, setTable])
+
 	const customGroupHeader = useCallback(
 		(meta?: ColumnMetadata, props?: IDetailsGroupDividerProps | undefined) => {
 			const custom = <h3>{meta?.name}</h3>
@@ -68,6 +85,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 			</p>
 			<Pivot>
 				<PivotItem key={'table'} headerText={'table'}>
+					<AddButton onClick={addNewColumn}>Add new column</AddButton>
 					<Table>
 						<ArqueroTableHeader table={table} />
 						<ArqueroDetailsList
@@ -107,4 +125,8 @@ const Table = styled.div`
 	margin-top: 12px;
 	width: 800ox;
 	height: 600px;
+`
+
+const AddButton = styled(DefaultButton)`
+	margin-top: 8px;
 `
