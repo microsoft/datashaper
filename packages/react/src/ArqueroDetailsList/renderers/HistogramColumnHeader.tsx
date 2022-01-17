@@ -8,7 +8,7 @@ import { Sparkbar } from '../../charts'
 import { useCellDimensions } from '../hooks'
 import { RichHeaderProps } from './types'
 
-const PADDING_HEIGHT = 20
+const PADDING_HEIGHT = 8
 
 /**
  * Renders a histogram for column values in the header.

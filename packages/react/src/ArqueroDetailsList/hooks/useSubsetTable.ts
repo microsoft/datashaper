@@ -11,7 +11,11 @@ export function useSubsetTable(
 ): ColumnTable {
 	return useMemo(() => {
 		if (columns && columns.length > 0) {
-			return table.select(columns)
+			// for some reason, it updates here first when changing a table.
+			// doing this stops the super error from arquero while the real columns aren't re-rendered
+			const tableColumns = table.columnNames()
+			const existingColumnNames = columns.filter(x => tableColumns.includes(x))
+			return table.select(existingColumnNames)
 		}
 		return table
 	}, [table, columns])
