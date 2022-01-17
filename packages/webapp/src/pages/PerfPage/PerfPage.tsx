@@ -15,6 +15,7 @@ import {
 import { createLazyLoadingGroupHeader } from '@data-wrangling-components/react/src/ArqueroDetailsList/renderers'
 import {
 	DefaultButton,
+	IColumn,
 	IDetailsGroupDividerProps,
 	Pivot,
 	PivotItem,
@@ -95,6 +96,13 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 								smartCells: true,
 								smartHeaders: true,
 							}}
+							columns={table.columnNames().map(x => {
+								return { name: x, key: x, fieldName: x } as IColumn
+							})}
+							isSortable
+							isHeadersFixed
+							isStriped
+							showColumnBorders
 						/>
 					</Table>
 				</PivotItem>
