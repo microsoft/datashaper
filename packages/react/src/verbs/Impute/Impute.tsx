@@ -5,8 +5,8 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow } from '../../common'
-import { StepComponentProps } from '../../types'
 import { ImputeInputs } from '../../controls'
+import { StepComponentProps } from '../../types'
 
 /**
  * Provides inputs for an Input step.

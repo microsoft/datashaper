@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ImputeStep } from '@data-wrangling-components/core'
+import { TextField } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { TableColumnDropdown } from '..'
@@ -13,7 +14,6 @@ import {
 	useHandleTextfieldChange,
 } from '../../common'
 import { StepComponentProps } from '../../types'
-import { TextField } from '@fluentui/react'
 
 /**
  * Just the to/value inputs for an impute.
