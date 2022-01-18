@@ -179,6 +179,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					onRenderRow={renderRow}
 					onRenderDetailsHeader={renderDetailsHeader}
 					{...rest}
+					listProps={{ version }}
 					styles={headerStyle}
 				/>
 			</DetailsWrapper>

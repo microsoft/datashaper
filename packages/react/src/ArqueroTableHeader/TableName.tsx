@@ -4,7 +4,7 @@
  */
 import { TextField } from '@fluentui/react'
 import React, { memo, useCallback, useState } from 'react'
-import { Else, If, Then } from 'react-if'
+import { If, Then } from 'react-if'
 import styled from 'styled-components'
 
 interface TableNameProps {
@@ -26,39 +26,71 @@ export const TableName: React.FC<TableNameProps> = memo(function TableName({
 		[setEditedName],
 	)
 
-	const onSend = useCallback(() => {
-		onRenameTable && name && onRenameTable(editedName || name)
-		setIsEditing(false)
-	}, [editedName])
+	const onSend = useCallback(
+		(newName: string) => {
+			onRenameTable && onRenameTable(newName)
+			setIsEditing(false)
+		},
+		[onRenameTable, setIsEditing],
+	)
+
+	const validateKeyEvent = useCallback(
+		(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+			if (e.key === 'Enter') return onSend(editedName)
+			if (e.key === 'Escape') {
+				onSend(name || '')
+			}
+		},
+		[onSend, name, editedName],
+	)
 
 	return (
-		<If condition={isEditing}>
-			<Then>
-				<TextField
-					underlined
-					borderless
-					value={editedName}
-					onKeyPress={e => e.key === 'Enter' && onSend()}
-					onChange={onChange}
-				/>
-			</Then>
-			<Else>
-				<If condition={name}>
-					<Then>
-						<H3 onClick={() => onRenameTable && setIsEditing(true)}>{name}</H3>
-					</Then>
-				</If>
-			</Else>
-		</If>
+		<>
+			<If condition={isEditing}>
+				<Then>
+					<TextInput
+						underlined
+						borderless
+						value={editedName}
+						onKeyDown={validateKeyEvent}
+						onChange={onChange}
+					/>
+				</Then>
+			</If>
+			<If condition={!!onRenameTable}>
+				<Then>
+					<H3Editable title="Edit" onClick={() => setIsEditing(true)}>
+						{name}
+					</H3Editable>
+				</Then>
+			</If>
+			<If condition={name}>
+				<Then>
+					<H3>{name}</H3>
+				</Then>
+			</If>
+		</>
 	)
 })
 
 const H3 = styled.h3`
 	font-weight: normal;
 	font-size: 0.8em;
-	cursor: pointer;
 	margin-right: 8px;
+	color: ${({ theme }) => theme.application().background().hex()};
+`
+
+const H3Editable = styled(H3)`
+	cursor: pointer;
 	border-bottom: 1px dotted
 		${({ theme }) => theme.application().background().hex()};
-	color: ${({ theme }) => theme.application().background().hex()};
+`
+
+const TextInput = styled(TextField)`
+	.ms-TextField-fieldGroup {
+		height: 25px;
+	}
+	input {
+		align-self: center;
+	}
 `
