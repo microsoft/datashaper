@@ -23,6 +23,7 @@ export interface TableProps {
 	config: ColumnConfigMap
 	features?: DetailsListFeatures
 	compact?: boolean
+	onRenameTable?: (name: string) => void
 }
 
 export const Table: React.FC<TableProps> = memo(function Table({
@@ -31,6 +32,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	config = {},
 	features = {},
 	compact,
+	onRenameTable,
 }) {
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 	const [visibleColumns, setVisibleColumns] = useState<string[]>(
@@ -79,6 +81,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				showColumnCount={true}
 				commands={commands}
 				visibleColumns={visibleColumns}
+				onRenameTable={onRenameTable}
 			/>
 			<TableContainer>
 				<ArqueroDetailsList

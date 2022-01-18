@@ -166,7 +166,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		return (
 			<DetailsWrapper>
 				<DetailsList
-					items={[...items]}
+					items={items}
 					selectionMode={selectionMode}
 					layoutMode={layoutMode}
 					groups={groups}
@@ -179,9 +179,6 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					onRenderRow={renderRow}
 					onRenderDetailsHeader={renderDetailsHeader}
 					{...rest}
-					listProps={{
-						version,
-					}}
 					styles={headerStyle}
 				/>
 			</DetailsWrapper>

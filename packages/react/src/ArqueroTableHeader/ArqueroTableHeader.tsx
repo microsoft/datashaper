@@ -8,6 +8,7 @@ import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { useColumnCounts, useCommands } from './hooks'
 import { ArqueroTableHeaderProps } from '.'
+import { TableName } from './TableName'
 
 const HEIGHT = 36
 
@@ -19,6 +20,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		showColumnCount = true,
 		commands,
 		visibleColumns,
+		onRenameTable,
 	}) {
 		const commandItems = useCommands(commands)
 
@@ -30,7 +32,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		const columnCounts = useColumnCounts(table, visibleColumns)
 		return (
 			<Header>
-				{name ? <H2>{name}</H2> : null}
+				<TableName onRenameTable={onRenameTable} name={name} />
 				{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
 				{showColumnCount === true ? (
 					<H3>
@@ -62,13 +64,6 @@ const Header = styled.div`
 	justify-content: space-around;
 	align-items: center;
 	background-color: ${({ theme }) => theme.application().accent().hex()};
-`
-
-const H2 = styled.h3`
-	font-weight: normal;
-	font-size: 0.8em;
-	margin-right: 8px;
-	color: ${({ theme }) => theme.application().background().hex()};
 `
 
 const H3 = styled.h3`
