@@ -163,7 +163,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 				})}
 				<Section
 					title={`${steps.length} step${steps.length !== 1 ? 's' : ''}`}
-					subtitle={'FINAl RESULT'}
+					subtitle={'FINAL RESULT'}
 				>
 					{result ? (
 						<TableSection className="table-section">

@@ -59,3 +59,40 @@ stages:
               script: yarn ci
             env:
               CI: true
+
+  - stage: DeploymentInteg
+    displayName: Deployment (Integ)
+    dependsOn:
+      - Compliance
+      - Verification
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
+    jobs:
+      - job: DeploymentJob
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+            fetchDepth: 1
+
+          - task: Bash@3
+            displayName: Install Dependencies
+            inputs:
+              targetType: 'inline'
+              script: yarn install
+            env:
+              CI: true
+
+          - task: Bash@3
+            displayName: Build Client
+            inputs:
+              targetType: 'inline'
+              script: yarn build:client
+
+          - task: AzureRmWebAppDeployment@4
+            displayName: Deploy Webapp
+            inputs:
+              ConnectionType: 'AzureRM'
+              appType: 'webApp'
+              ConnectedServiceName: '$(subscription)'
+              WebAppName: '$(webapp)'
+              packageForLinux: '$(System.DefaultWorkingDirectory)/packages/webapp/deploy.zip'

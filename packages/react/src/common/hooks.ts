@@ -214,6 +214,27 @@ export function useLoadTable(
 	return tbl
 }
 
+export function useIntersection(
+	element: HTMLDivElement | undefined,
+	rootMargin: string,
+): boolean {
+	const [isVisible, setState] = useState(false)
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				setState(entry.isIntersecting)
+			},
+			{ rootMargin },
+		)
+		element && observer.observe(element)
+
+		return () => element && observer.unobserve(element)
+	}, [element, rootMargin])
+
+	return isVisible
+}
+
 export function useColumnType(table?: ColumnTable, column?: string): DataType {
 	return useMemo(() => {
 		if (!table || !column) {

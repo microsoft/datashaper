@@ -19,12 +19,17 @@ import { BaseFile } from './BaseFile'
 import { FileWithPath } from './FileWithPath'
 
 export class FileCollection {
-	files: BaseFile[] = []
+	private _files: BaseFile[] = []
 	private supportedFilesOnly = false
 	private _name = ''
 
+	set files(files: BaseFile[]) {
+		this._files = files
+	}
+
 	set name(name: string) {
-		this._name = name
+		const nonExtName = name.replace(/\.[^/.]+$/, '')
+		this._name = nonExtName
 	}
 
 	get name(): string {
@@ -39,7 +44,7 @@ export class FileCollection {
 		if (typeof files === 'string') {
 			const blob = await fetchFile(files)
 			const filesFromZip = await getFilesFromZip(blob)
-			this.files = filesFromZip.map(f => new BaseFile(f))
+			this._files = filesFromZip.map(f => new BaseFile(f))
 			this.name = files
 		} else if ((files as File[]).every(file => file instanceof File)) {
 			let baseFiles: BaseFile[] = []
@@ -55,19 +60,19 @@ export class FileCollection {
 					]
 				}
 			}
-			this.files = [...baseFiles]
+			this._files = [...baseFiles]
 		}
 	}
 
 	private find(name: string): BaseFile {
-		const file = this.files.find(file => file.name === name)
+		const file = this._files.find(file => file.name === name)
 		if (!file) {
 			throw new Error(`File ${name} not found`)
 		}
 		return file
 	}
 
-	private filtered(files = this.files): BaseFile[] {
+	private filtered(files = this._files): BaseFile[] {
 		if (this.supportedFilesOnly) {
 			return files.filter(file => file.isSupported())
 		}
@@ -79,36 +84,34 @@ export class FileCollection {
 	}
 
 	list(type?: FileType): BaseFile[] {
-		let files: BaseFile[] = this.files
+		let files: BaseFile[] = this._files
 		if (type === FileType.table) {
-			files = this.files.filter(file => file.isTable())
+			files = this._files.filter(file => file.isTable())
 		} else if (type) {
-			files = this.files.filter(file => file.name.endsWith(type))
+			files = this._files.filter(file => file.name.endsWith(type))
 		}
 		return this.filtered(files)
 	}
 
-	async dsv(name: string): Promise<string> {
-		return this.find(name).getDsvString()
+	async toDsv(name: string): Promise<string> {
+		return this.find(name).toDsvString()
 	}
 
-	async json(name: string): Promise<Json> {
-		return this.find(name).getJson()
+	async toJson(name: string): Promise<Json> {
+		return this.find(name).toJson()
 	}
 
-	async table(name: string): Promise<ColumnTable> {
+	async toTable(name: string): Promise<ColumnTable> {
 		return loadTable(this.find(name))
 	}
 
 	private async _add(file: FileWithPath): Promise<void> {
 		if (!isZipFile(file.name)) {
-			this.files = [...this.files, new BaseFile(file)]
-			this.files = await renameDuplicatedFiles(this.files)
-			return
+			this._files = [...this._files, new BaseFile(file)]
+		} else {
+			const files = await getFilesFromZip(file)
+			this._files = [...this._files, ...files.map(f => new BaseFile(f))]
 		}
-		const files = await getFilesFromZip(file)
-		this.files = [...this.files, ...files.map(f => new BaseFile(f))]
-		this.files = await renameDuplicatedFiles(this.files)
 	}
 
 	async add(files: FileWithPath[] | FileWithPath): Promise<void> {
@@ -118,29 +121,31 @@ export class FileCollection {
 		await Promise.all(files.map(file => this._add(file)))
 	}
 
-	remove(options?: { type?: FileType; name?: string }): void {
-		const { type, name } = options || {}
+	remove(options: { type?: FileType; name?: string }): void {
+		const { type, name } = options
 		if (name) {
-			this.files = this.files.filter(file => file.name !== name)
+			this._files = this._files.filter(file => file.name !== name)
 		} else if (type) {
 			const files = this.list(type).map(file => file.name)
-			this.files = this.files.filter(file => !files.includes(file.name))
-		} else {
-			this.files = []
+			this._files = this._files.filter(file => !files.includes(file.name))
 		}
+	}
+
+	clear(): void {
+		this._files = []
 	}
 
 	metadata(name: string): Json {
 		return this.find(name).metadata()
 	}
 
-	async rename(name: string, newName: string): Promise<void> {
+	rename(name: string, newName: string): void {
 		const file = this.find(name)
-		await file.rename(newName)
-		this.files = [...this.files]
+		file.rename(newName)
+		this._files = [...this._files]
 	}
 
-	async htmlTable(name: string): Promise<string> {
+	async toHtml(name: string): Promise<string> {
 		const options: HTMLFormatOptions = {
 			style: {
 				table:
@@ -153,23 +158,19 @@ export class FileCollection {
 		return html
 	}
 
-	async zip(zipName = 'file-collection'): Promise<void> {
-		/* eslint-disable @essex/adjacent-await */
-		this.files = await renameDuplicatedFiles(this.files)
+	async toZip(zipName = 'file-collection'): Promise<void> {
+		this._files = renameDuplicatedFiles(this._files)
 		const dataURI = await toZip(this.filtered())
 		const link = document.createElement('a')
 		link.href = dataURI
-		link.download = `${zipName}.zip`
+		link.download = `${this.name || zipName}.zip`
 		link.click()
 	}
 
-	async copy(): Promise<FileCollection> {
+	copy(): FileCollection {
 		const newFC = new FileCollection()
 		newFC.name = this.name
-		const files = [...(this.list() as FileWithPath[])]
-		if (files.length) {
-			await newFC.init(files)
-		}
+		newFC.files = [...this._files]
 		return newFC
 	}
 }
