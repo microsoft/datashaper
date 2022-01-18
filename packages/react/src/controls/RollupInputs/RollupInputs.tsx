@@ -5,12 +5,8 @@
 import { RollupStep } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { TableColumnDropdown, FieldAggregateOperationDropdown } from '..'
-import {
-	useLoadTable,
-	LeftAlignedRow,
-	useHandleDropdownChange,
-} from '../../common'
+import { FieldAggregateOperationDropdown } from '..'
+import { LeftAlignedRow, useHandleDropdownChange } from '../../common'
 import { StepComponentProps } from '../../types'
 
 /**
@@ -18,16 +14,9 @@ import { StepComponentProps } from '../../types'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const RollupInputs: React.FC<StepComponentProps> = memo(
-	function RollupInputs({ step, store, table, onChange, input }) {
+	function RollupInputs({ step, onChange }) {
 		const internal = useMemo(() => step as RollupStep, [step])
 
-		const tbl = useLoadTable(input || internal.input, table, store)
-
-		const handleRollupColumnChange = useHandleDropdownChange(
-			internal,
-			'args.column',
-			onChange,
-		)
 		const handleOpChange = useHandleDropdownChange(
 			internal,
 			'args.operation',
@@ -37,13 +26,6 @@ export const RollupInputs: React.FC<StepComponentProps> = memo(
 		return (
 			<Container>
 				<LeftAlignedRow>
-					<TableColumnDropdown
-						required
-						table={tbl}
-						label={'Column to rollup'}
-						selectedKey={internal.args.column}
-						onChange={handleRollupColumnChange}
-					/>
 					<FieldAggregateOperationDropdown
 						selectedKey={internal.args.operation}
 						onChange={handleOpChange}
