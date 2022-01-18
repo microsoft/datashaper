@@ -4,7 +4,7 @@
  */
 import { Step } from '..'
 
-const inputColumnSteps: Record<string, boolean> = {
+const INPUT_COLUMN_STEPS: Record<string, boolean> = {
 	aggregate: true,
 	bin: true,
 	binarize: true,
@@ -16,7 +16,7 @@ const inputColumnSteps: Record<string, boolean> = {
 	unroll: true,
 }
 
-const outputColumnSteps: Record<string, boolean> = {
+const OUTPUT_COLUMN_STEPS: Record<string, boolean> = {
 	aggregate: true,
 	bin: true,
 	binarize: true,
@@ -32,7 +32,7 @@ const outputColumnSteps: Record<string, boolean> = {
  * @returns
  */
 export function isInputColumnStep(step: Step): boolean {
-	return !!inputColumnSteps[step.verb]
+	return !!INPUT_COLUMN_STEPS[step.verb]
 }
 
 /**
@@ -41,5 +41,9 @@ export function isInputColumnStep(step: Step): boolean {
  * @returns
  */
 export function isOutputColumnStep(step: Step): boolean {
-	return !!outputColumnSteps[step.verb]
+	return !!OUTPUT_COLUMN_STEPS[step.verb]
+}
+
+export function inputColumnSteps(): string[] {
+	return Object.keys(INPUT_COLUMN_STEPS)
 }

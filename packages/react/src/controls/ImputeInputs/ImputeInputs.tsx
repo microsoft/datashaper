@@ -2,12 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ImputeStep, ImputeArgs } from '@data-wrangling-components/core'
+import { ImputeArgs, InputColumnArgs } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleTextfieldChange } from '../../common'
 import { StepComponentProps } from '../../types'
+
+interface ColumnArgs extends InputColumnArgs, ImputeArgs {}
 
 /**
  * Just the to/value inputs for an impute.
@@ -16,21 +18,18 @@ import { StepComponentProps } from '../../types'
 export const ImputeInputs: React.FC<StepComponentProps> = memo(
 	function ImputeInputs({ step, onChange }) {
 		// always match the input column and output - impute is an inline replacement verb
-		const internal = useMemo(() => {
+		const args = useMemo(() => {
 			const a = {
-				...(step.args as ImputeArgs),
+				...(step.args as ColumnArgs),
 			}
 			return {
-				...step,
-				args: {
-					...a,
-					to: a.column,
-				},
-			} as ImputeStep
+				...a,
+				to: a.column,
+			} as ColumnArgs
 		}, [step])
 
 		const handleValueChange = useHandleTextfieldChange(
-			internal,
+			step,
 			'args.value',
 			onChange,
 		)
@@ -41,7 +40,7 @@ export const ImputeInputs: React.FC<StepComponentProps> = memo(
 					<TextField
 						required
 						label={'Fill value'}
-						value={internal.args.value && `${internal.args.value}`}
+						value={args.value && `${args.value}`}
 						placeholder={'text, number, or boolean'}
 						onChange={handleValueChange}
 					/>

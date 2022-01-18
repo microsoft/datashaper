@@ -2,7 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, factory } from '@data-wrangling-components/core'
+import {
+	Step,
+	StepType,
+	factory,
+	inputColumnSteps,
+} from '@data-wrangling-components/core'
 import {
 	Dropdown,
 	IconButton,
@@ -11,6 +16,7 @@ import {
 	PrimaryButton,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { upperFirst } from 'lodash'
 import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import {
@@ -43,6 +49,11 @@ export interface ColumnTransformModalProps extends IModalProps {
 	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input column.
 	 */
 	hideOutputColumn?: boolean
+	/**
+	 * Optional list of transform verbs to present to the user.
+	 * If not supplied, all verbs that operate on a single input column will be presented.
+	 */
+	verbs?: string[]
 }
 
 /**
@@ -57,6 +68,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 			onTransformRequested,
 			hideInputColumn,
 			hideOutputColumn,
+			verbs,
 			onDismiss,
 			...rest
 		} = props
@@ -101,6 +113,13 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 			[onDismiss],
 		)
 
+		const stepOptions = useMemo(() => {
+			const list = verbs || inputColumnSteps()
+			return list.map(key => ({
+				key,
+				text: upperFirst(key),
+			}))
+		}, [verbs])
 		return (
 			<Modal onDismiss={onDismiss} {...rest}>
 				<Header>
@@ -116,16 +135,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 				<Container>
 					<Dropdown
 						placeholder={'Select transform'}
-						options={[
-							{
-								key: 'bin',
-								text: 'Bin',
-							},
-							{
-								key: 'recode',
-								text: 'Recode',
-							},
-						]}
+						options={stepOptions}
 						onChange={handleVerbChange}
 					/>
 					{WithColumns && internal ? (
