@@ -136,7 +136,5 @@ const Container = styled.div`
 `
 
 const TableContainer = styled.div`
-	overflow-y: scroll;
-	overflow-x: scroll;
 	height: 264px;
 `

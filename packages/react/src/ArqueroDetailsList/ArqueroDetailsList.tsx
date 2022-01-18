@@ -164,7 +164,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		}, [columns, table])
 
 		return (
-			<DetailsWrapper>
+			<DetailsWrapper data-is-scrollable="true">
 				<DetailsList
 					items={items}
 					selectionMode={selectionMode}
@@ -190,6 +190,8 @@ const DetailsWrapper = styled.div`
 	height: inherit;
 	position: relative;
 	max-height: inherit;
+	overflow-y: scroll;
+	overflow-x: scroll;
 
 	span.ms-DetailsHeader-cellTitle {
 		background-color: ${({ theme }) => theme.application().background().hex()};
