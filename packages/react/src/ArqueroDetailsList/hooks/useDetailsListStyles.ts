@@ -49,7 +49,22 @@ export function useDetailsListStyles(
 						zIndex: '2',
 						top: '0',
 						background: theme.application().background().hex(),
-						borderBottom: `1px solid ${theme.application().faint().hex()}`,
+						borderBottom:
+							!features?.smartHeaders &&
+							!features?.histogramColumnHeaders &&
+							!features?.statsColumnHeaders
+								? `1px solid ${theme.application().faint().hex()}`
+								: 'unset',
+						selectors: {
+							'.ms-DetailsHeader': {
+								borderBottom:
+									!features?.smartHeaders &&
+									!features?.histogramColumnHeaders &&
+									!features?.statsColumnHeaders
+										? `1px solid ${theme.application().faint().hex()}`
+										: 'unset',
+							},
+						},
 					},
 				},
 				styles,

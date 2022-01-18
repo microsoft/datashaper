@@ -4,7 +4,7 @@
  */
 
 import { CommandBar } from '@fluentui/react'
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { useColumnCounts, useCommands } from './hooks'
 import { ArqueroTableHeaderProps } from '.'
@@ -21,6 +21,11 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		visibleColumns,
 	}) {
 		const commandItems = useCommands(commands)
+
+		const groupCount = useMemo((): any => {
+			return table.isGrouped() ? table.groups().size : 0
+		}, [table])
+
 		// TODO: we can do the same thing for rows when a filter is applied
 		const columnCounts = useColumnCounts(table, visibleColumns)
 		return (
@@ -33,6 +38,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 						{columnCounts.hidden > 0 ? `(${columnCounts.hidden} hidden)` : ''}
 					</H3>
 				) : null}
+				{groupCount ? <H3>{groupCount} groups</H3> : null}
 				{commandItems.length > 0 ? (
 					<CommandBar items={commandItems} styles={commandStyles} />
 				) : null}

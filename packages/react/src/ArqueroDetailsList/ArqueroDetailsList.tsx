@@ -11,19 +11,24 @@ import {
 	IDetailsListStyles,
 	ConstrainMode,
 } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import { RowObject } from 'arquero/dist/types/table/table'
+import React, { memo, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import { groupBuilder } from '../common/'
 import {
 	useColumns,
 	useDetailsHeaderRenderer,
 	useDetailsListStyles,
+	useGroupHeaderRenderer,
 	useSlicedTable,
+	useSortedGroups,
 	useSortedTable,
 	useSortHandling,
 	useStripedRowsRenderer,
+	useTableMetadata,
 	useSubsetTable,
 } from './hooks'
-import { ArqueroDetailsListProps } from '.'
+import { ArqueroDetailsListProps, DetailsListFeatures } from '.'
 
 /**
  * Renders an arquero table using a fluent DetailsList.
@@ -45,6 +50,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			selectedColumn,
 			onColumnClick,
 			onCellDropdownSelect,
+			onRenderGroupHeader,
 			// extract props we want to set data-centric defaults for
 			selectionMode = SelectionMode.none,
 			layoutMode = DetailsListLayoutMode.fixedColumns,
@@ -56,6 +62,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			...rest
 		} = props
 
+		const [version, setVersion] = useState(0)
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(isSortable, onColumnHeaderClick)
 
@@ -71,10 +78,31 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// last, copy these items to actual JS objects for the DetailsList
 		const items = useMemo(() => sliced.objects(), [sliced])
 
+		// if the table is grouped, groups the information in a way we can iterate
+		const groupedEntries = useMemo(
+			() =>
+				table.isGrouped() ? sliced.objects({ grouped: 'entries' }) : undefined,
+			[sliced, table],
+		)
+
+		// sorts first level group headers
+		const sortedGroups = useSortedGroups(
+			table,
+			sortColumn,
+			sortDirection,
+			groupedEntries,
+		)
+
+		const computedMetadata = useTableMetadata(
+			table,
+			metadata,
+			anyStatsFeatures(features),
+		)
+
 		const displayColumns = useColumns(
 			table,
+			computedMetadata,
 			columns,
-			metadata,
 			visibleColumns,
 			{
 				features,
@@ -98,19 +126,62 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const renderRow = useStripedRowsRenderer(isStriped, showColumnBorders)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
+		const renderGroupHeader = useGroupHeaderRenderer(
+			table,
+			computedMetadata,
+			onRenderGroupHeader,
+			features.lazyLoadGroups,
+		)
+
+		const groups = useMemo(() => {
+			if (!sliced.isGrouped()) {
+				return undefined
+			}
+
+			const existingGroups = sliced.groups()
+			const totalLevelCount = existingGroups.names.length
+
+			return sortedGroups?.map((row: RowObject) => {
+				const initialLevel = 0
+				return groupBuilder(
+					row,
+					existingGroups,
+					initialLevel,
+					totalLevelCount,
+					items,
+					sortDirection,
+					features.lazyLoadGroups,
+					sortColumn,
+				)
+			})
+		}, [sliced, sortedGroups, items, sortColumn, sortDirection, features])
+
+		// as in FluentUI documentation, when updating item we can update the list items with a spread operator.
+		// since when adding a new column we're changing the columns prop too, this approach doesn't work for that.
+		// a workaround found in the issues suggest to use this version property to use as comparisson to force re-render
+		useEffect(() => {
+			setVersion(prev => prev + 1)
+		}, [columns, table])
 
 		return (
 			<DetailsWrapper>
 				<DetailsList
-					items={items}
+					items={[...items]}
 					selectionMode={selectionMode}
 					layoutMode={layoutMode}
+					groups={groups}
+					groupProps={{
+						onRenderHeader: renderGroupHeader,
+					}}
 					columns={displayColumns as IColumn[]}
 					onColumnHeaderClick={handleColumnHeaderClick}
 					constrainMode={ConstrainMode.unconstrained}
 					onRenderRow={renderRow}
 					onRenderDetailsHeader={renderDetailsHeader}
 					{...rest}
+					listProps={{
+						version,
+					}}
 					styles={headerStyle}
 				/>
 			</DetailsWrapper>
@@ -127,3 +198,7 @@ const DetailsWrapper = styled.div`
 		background-color: ${({ theme }) => theme.application().background().hex()};
 	}
 `
+
+function anyStatsFeatures(features?: DetailsListFeatures) {
+	return Object.values(features || {}).some(v => v)
+}

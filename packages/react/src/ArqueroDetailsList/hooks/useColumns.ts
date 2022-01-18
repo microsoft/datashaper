@@ -29,7 +29,6 @@ import {
 	useColumnNamesList,
 	useColumnStyles,
 	useIncrementingColumnColorScale,
-	useTableMetadata,
 } from '.'
 
 const DEFAULT_COLUMN_WIDTH = 100
@@ -57,8 +56,8 @@ export interface ColumnOptions {
  */
 export function useColumns(
 	table: ColumnTable,
+	computedMetadata: TableMetadata,
 	columns?: IColumn[],
-	metadata?: TableMetadata,
 	visibleColumns?: string[],
 	options: ColumnOptions = {},
 ): IColumn[] {
@@ -79,12 +78,6 @@ export function useColumns(
 	const handleCellDropdownSelect = useCellDropdownSelectHandler(
 		isColumnClickable,
 		onCellDropdownSelect,
-	)
-
-	const computedMetadata: TableMetadata = useTableMetadata(
-		table,
-		metadata,
-		anyStatsFeatures(features),
 	)
 
 	const colorScale = useIncrementingColumnColorScale(computedMetadata)
@@ -174,9 +167,6 @@ export function useColumns(
 	])
 }
 
-function anyStatsFeatures(features?: DetailsListFeatures) {
-	return Object.values(features || {}).some(v => v)
-}
 function reduce(columns?: IColumn[]): Record<string, IColumn> {
 	return (columns || []).reduce((acc, cur) => {
 		acc[cur.name] = cur

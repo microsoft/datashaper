@@ -2,8 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableMetadata } from '@data-wrangling-components/core'
-import { IColumn, IDetailsListProps, IDropdownOption } from '@fluentui/react'
+import { ColumnMetadata, TableMetadata } from '@data-wrangling-components/core'
+import {
+	IColumn,
+	IDetailsListProps,
+	IDropdownOption,
+	IDetailsGroupDividerProps,
+} from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type ColumnRenderFunction = (
@@ -19,6 +24,11 @@ export type DropdownOptionSelect =
 			index?: number | undefined,
 	  ) => void)
 	| undefined
+
+export type GroupHeaderFunction = (
+	meta?: ColumnMetadata,
+	props?: IDetailsGroupDividerProps | undefined,
+) => any
 
 export type ColumnClickFunction = (
 	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
@@ -70,6 +80,10 @@ export interface DetailsListFeatures {
 	 * Without smartCells, If datatype is array, shows a dropdown with the values
 	 */
 	showDropdown?: boolean
+	/**
+	 * Collapse most groups so we can lazy load them. Default as true
+	 */
+	lazyLoadGroups?: boolean
 }
 
 export interface ArqueroDetailsListProps
@@ -120,6 +134,10 @@ export interface ArqueroDetailsListProps
 	 * Will be applied to the column header only unless isColumnClickable === true.
 	 */
 	onCellDropdownSelect?: DropdownOptionSelect
+	/**
+	 * Passthrough to the group header rendering, when using the group by verb
+	 */
+	onRenderGroupHeader?: GroupHeaderFunction
 	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */

@@ -37,7 +37,8 @@ export function introspect(
 }
 
 function detailedMeta(table: ColumnTable): Record<string, ColumnMetadata> {
-	const s = stats(table)
+	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
+	const s = stats(table.ungroup())
 	return table.columnNames().reduce((acc, cur) => {
 		acc[cur] = {
 			name: cur,
@@ -49,7 +50,8 @@ function detailedMeta(table: ColumnTable): Record<string, ColumnMetadata> {
 }
 
 function basicMeta(table: ColumnTable): Record<string, ColumnMetadata> {
-	const t = types(table)
+	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
+	const t = types(table.ungroup())
 	return table.columnNames().reduce((acc, cur) => {
 		acc[cur] = {
 			name: cur,

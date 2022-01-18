@@ -1,0 +1,15 @@
+{
+	"name": "Group by",
+	"description": "",
+	"steps": [
+		{
+			"type": "verb",
+			"verb": "groupby",
+			"input": "data/stocks.csv",
+			"output": "groupby-2",
+			"args": {
+				"columns": ["Symbol", "Month"]
+			}
+		}
+	]
+}
