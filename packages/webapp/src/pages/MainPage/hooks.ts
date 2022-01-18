@@ -57,13 +57,6 @@ export function useInputTables(
 		const f = async () => {
 			const results = await store.toMap()
 			setTables(results)
-
-			// if an input table updates, reload into state
-			// TODO: listend per table
-			store.addChangeListener(async () => {
-				const results = await store.toMap()
-				setTables(results)
-			})
 		}
 		f()
 	}, [list, store, setTables])
