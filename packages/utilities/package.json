@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/utilities",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"main": "src/index.ts",
 	"publishConfig": {
 		"main": "dist/cjs/index.js",
