@@ -24,8 +24,7 @@ import {
 	Sample,
 	Select,
 	SetOperation,
-	Ungroup,
-	Unorder,
+	NoParameters,
 } from './verbs'
 
 const compound: Record<string, React.FC<StepComponentProps>> = {
@@ -56,9 +55,9 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	sample: Sample,
 	select: Select,
 	spread: ColumnListOperation,
-	ungroup: Ungroup,
+	ungroup: NoParameters,
 	union: SetOperation,
-	unorder: Unorder,
+	unorder: NoParameters,
 	unroll: ColumnListOperation,
 }
 

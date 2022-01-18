@@ -62,8 +62,8 @@ const VERBS = [
 	'spread',
 	'ungroup',
 	'union',
-	'unroll',
 	'unorder',
+	'unroll',
 ]
 
 const COMPOUNDS = ['binarize', 'filter-aggregate-lookup']

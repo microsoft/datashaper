@@ -23,8 +23,7 @@ import {
 	SampleDescription,
 	SelectDescription,
 	SetOperationDescription,
-	UngroupDescription,
-	UnorderDescription,
+	NoParametersDescription,
 } from './verbs'
 
 const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
@@ -50,9 +49,9 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 	sample: SampleDescription,
 	select: SelectDescription,
 	spread: ColumnListOperationDescription,
-	ungroup: UngroupDescription,
+	ungroup: NoParametersDescription,
 	union: SetOperationDescription,
-	unorder: UnorderDescription,
+	unorder: NoParametersDescription,
 	unroll: ColumnListOperationDescription,
 }
 

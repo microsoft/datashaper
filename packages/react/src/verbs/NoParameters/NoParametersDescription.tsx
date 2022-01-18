@@ -6,8 +6,8 @@ import React, { memo, useMemo } from 'react'
 import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
 
-export const UnorderDescription: React.FC<StepDescriptionProps> = memo(
-	function UnorderDescription(props) {
+export const NoParametersDescription: React.FC<StepDescriptionProps> = memo(
+	function NoParametersDescription(props) {
 		const rows = useMemo(() => {
 			return []
 		}, [props])
