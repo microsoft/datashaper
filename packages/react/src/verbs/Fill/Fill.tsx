@@ -30,7 +30,7 @@ export const Fill: React.FC<StepComponentProps> = memo(function Fill({
 				<TextField
 					required
 					label={'Fill value'}
-					value={`${internal.args.value}`}
+					value={internal.args.value && `${internal.args.value}`}
 					placeholder={'text, number, or boolean'}
 					onChange={handleValueChange}
 				/>

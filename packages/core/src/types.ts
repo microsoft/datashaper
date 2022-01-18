@@ -359,6 +359,8 @@ export interface FoldArgs extends InputColumnListArgs {
 
 export type GroupbyArgs = InputColumnListArgs
 
+export type ImputeArgs = FillArgs
+
 export interface JoinArgs {
 	/**
 	 * Name of the other table to join to the main input

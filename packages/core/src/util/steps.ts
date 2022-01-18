@@ -9,6 +9,7 @@ const inputColumnSteps: Record<string, boolean> = {
 	bin: true,
 	binarize: true,
 	filter: true,
+	impute: true,
 	recode: true,
 	rollup: true,
 	spread: true,
