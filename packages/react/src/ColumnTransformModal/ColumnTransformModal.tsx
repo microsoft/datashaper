@@ -3,7 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, StepType, factory } from '@data-wrangling-components/core'
-import { Dropdown, IconButton, Modal, PrimaryButton } from '@fluentui/react'
+import {
+	Dropdown,
+	IconButton,
+	IModalProps,
+	Modal,
+	PrimaryButton,
+} from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
@@ -13,11 +19,30 @@ import {
 	withOutputColumnTextfield,
 } from '../'
 
-export interface ColumnTransformModalProps {
+export interface ColumnTransformModalProps extends IModalProps {
+	/**
+	 * Table to build the column transform from.
+	 */
 	table: ColumnTable
-	isModalOpen: boolean
-	onDismiss: () => void
-	onTransformRequested: (step: Step) => void
+	/**
+	 * Optional step for controlled component if pre-built config is planned.
+	 */
+	step?: Step
+	/**
+	 * Callback fired when the step is configured and "run" is clicked, indicating
+	 * the application should execute the contructed/edited step.
+	 */
+	onTransformRequested?: (step: Step) => void
+	/**
+	 * Indicates that the input column should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the modal is launched directly from a column, which would make display redundant.
+	 */
+	hideInputColumn?: boolean
+	/**
+	 * Indicates that the output column should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input column.
+	 */
+	hideOutputColumn?: boolean
 }
 
 /**
@@ -25,46 +50,59 @@ export interface ColumnTransformModalProps {
  * It is intended to be invoked from a table or column header.
  */
 export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
-	function ColumnTransformModal({
-		table,
-		isModalOpen,
-		onDismiss,
-		onTransformRequested,
-	}) {
-		// TODO: allow an existing step to be supplied
-		// ideally this is just a step change event
-		const [step, setStep] = useState<Step>()
+	function ColumnTransformModal(props) {
+		const {
+			table,
+			step,
+			onTransformRequested,
+			hideInputColumn,
+			hideOutputColumn,
+			onDismiss,
+			...rest
+		} = props
+
+		const [internal, setInternal] = useState<Step | undefined>(step)
+
 		const handleVerbChange = useCallback(
 			(ev: any, opt: any) => {
 				// TODO: the assumption here is that the consumer will use runPipeline
 				// should we be forcing the i/o table name?
 				const newStep = factory(StepType.Verb, opt.key, 'input', 'input')
-				setStep(newStep)
+				// merge with the previous step in case input/output columns have been controlled
+				setInternal(newStep)
 			},
-			[setStep],
+			[setInternal],
 		)
 		const Component = useMemo(
-			() => (step ? selectStepComponent(step) : null),
-			[step],
+			() => (internal ? selectStepComponent(internal) : null),
+			[internal],
 		)
-		const WithColumns = useMemo(
-			() =>
-				// TODO: i/o columns optional - if this is embedded in column headers as an inline transform
-				// they will be pre-supplied
-				Component
-					? withOutputColumnTextfield()(withInputColumnDropdown()(Component))
-					: null,
-			[Component],
-		)
-		const handleRunClick = useCallback(async () => {
-			if (table && step) {
-				onDismiss()
-				onTransformRequested(step)
+		const WithColumns = useMemo(() => {
+			if (Component) {
+				let comp = Component
+				if (!hideInputColumn) {
+					comp = withInputColumnDropdown()(comp)
+				}
+				if (!hideOutputColumn) {
+					comp = withOutputColumnTextfield()(comp)
+				}
+				return comp
 			}
-		}, [table, step, onDismiss, onTransformRequested])
-		// TODO: passthrough Modal props?
+		}, [Component, hideInputColumn, hideOutputColumn])
+		const handleRunClick = useCallback(async () => {
+			if (table && internal) {
+				onDismiss && onDismiss()
+				onTransformRequested && onTransformRequested(internal)
+			}
+		}, [table, internal, onDismiss, onTransformRequested])
+
+		const handleDismissClick = useCallback(
+			() => onDismiss && onDismiss(),
+			[onDismiss],
+		)
+
 		return (
-			<Modal isOpen={isModalOpen} onDismiss={onDismiss} isBlocking={false}>
+			<Modal onDismiss={onDismiss} {...rest}>
 				<Header>
 					<Title>Derive new column</Title>
 					<IconButton
@@ -72,7 +110,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 							iconName: 'Cancel',
 						}}
 						ariaLabel="Close popup modal"
-						onClick={onDismiss}
+						onClick={handleDismissClick}
 					/>
 				</Header>
 				<Container>
@@ -90,9 +128,13 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 						]}
 						onChange={handleVerbChange}
 					/>
-					{WithColumns && step ? (
+					{WithColumns && internal ? (
 						<>
-							<WithColumns step={step} table={table} onChange={setStep} />
+							<WithColumns
+								step={internal}
+								table={table}
+								onChange={setInternal}
+							/>
 							<PrimaryButton onClick={handleRunClick}>Run</PrimaryButton>
 						</>
 					) : null}
@@ -104,13 +146,14 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 
 const Header = styled.div`
 	display: flex;
-	justifycontent: space-between;
-	alignitems: center;
+	justify-content: space-between;
+	align-items: center;
 	background: ${({ theme }) => theme.application().faint().hex()};
 `
 
 const Title = styled.h3`
 	padding-left: 12px;
+	margin: 8px 0 8px 0;
 `
 
 const Container = styled.div`

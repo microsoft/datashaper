@@ -50,7 +50,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 		<Container>
 			<ColumnTransformModal
 				table={table}
-				isModalOpen={isModalOpen}
+				isOpen={isModalOpen}
 				onDismiss={hideModal}
 				onTransformRequested={handleTransformRequested}
 			/>
