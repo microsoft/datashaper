@@ -190,8 +190,8 @@ const DetailsWrapper = styled.div`
 	height: inherit;
 	position: relative;
 	max-height: inherit;
-	overflow-y: scroll;
-	overflow-x: scroll;
+	overflow-y: auto;
+	overflow-x: auto;
 
 	span.ms-DetailsHeader-cellTitle {
 		background-color: ${({ theme }) => theme.application().background().hex()};

@@ -6,9 +6,9 @@
 import { CommandBar } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
+import { TableName } from './TableName'
 import { useColumnCounts, useCommands } from './hooks'
 import { ArqueroTableHeaderProps } from '.'
-import { TableName } from './TableName'
 
 const HEIGHT = 36
 
