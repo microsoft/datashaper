@@ -80,7 +80,7 @@ export async function verb(
  */
 export function factory(
 	type: StepType,
-	verb: string,
+	verb: Verb,
 	input: string,
 	output: string,
 ): Step {

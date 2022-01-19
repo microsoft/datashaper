@@ -3,7 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import { Step, StepType, Specification } from '@data-wrangling-components/core'
+import {
+	Step,
+	StepType,
+	Verb,
+	Specification,
+} from '@data-wrangling-components/core'
 import { DetailsListFeatures } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
@@ -50,8 +55,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const [steps, setSteps] = useState<Step[]>([])
 
 	const handleCreateStep = useCallback(
-		(type: StepType, subtype: string) =>
-			setSteps(pipeline.create(type, subtype)),
+		(type: StepType, verb: Verb) => setSteps(pipeline.create(type, verb)),
 		[pipeline, setSteps],
 	)
 

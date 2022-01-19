@@ -36,6 +36,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 	const handleTransformRequested = useCallback(
 		async step => {
 			if (table && step) {
+				console.log('step update', step)
 				const output = await runPipeline(table, [step])
 				setTable(output)
 			}

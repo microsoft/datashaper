@@ -12,6 +12,7 @@ import {
 	SelectStep,
 	Step,
 	StepType,
+	Verb,
 } from '@data-wrangling-components/core'
 
 // TODO: it may make sense to chain together a series of tables for each step
@@ -85,7 +86,7 @@ function createNewBinarize(
 	const input = index === 0 ? parent.input : COLLECTOR
 	const newStep: Step = {
 		type: StepType.Verb,
-		verb: 'binarize',
+		verb: Verb.Binarize,
 		input,
 		output: COLLECTOR,
 		args: {
@@ -106,7 +107,7 @@ function makeDerives(
 		const column1 = index > 1 ? parent.to : first.args.to
 		const derive: Step = {
 			type: StepType.Verb,
-			verb: 'derive',
+			verb: Verb.Derive,
 			input: COLLECTOR,
 			output: COLLECTOR,
 			args: {
@@ -127,7 +128,7 @@ function makeOutputSelect(
 ): SelectStep {
 	return {
 		type: StepType.Verb,
-		verb: 'select',
+		verb: Verb.Select,
 		input: COLLECTOR,
 		output: parent.output,
 		args: {
@@ -142,7 +143,7 @@ function makeCleanupBinarize(
 ): BinarizeStep {
 	const newStep: BinarizeStep = {
 		type: StepType.Verb,
-		verb: 'binarize',
+		verb: Verb.Binarize,
 		input: COLLECTOR,
 		output: COLLECTOR,
 		args: {
