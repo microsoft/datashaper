@@ -3,10 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
+	Verb,
 	Step,
 	StepType,
 	factory,
-	inputColumnSteps,
+	columnTransformSteps,
 } from '@data-wrangling-components/core'
 import {
 	Dropdown,
@@ -54,6 +55,10 @@ export interface ColumnTransformModalProps extends IModalProps {
 	 * If not supplied, all verbs that operate on a single input column will be presented.
 	 */
 	verbs?: string[]
+	/**
+	 * Optional header text to display on the modal
+	 */
+	headerText?: string
 }
 
 /**
@@ -69,6 +74,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 			hideInputColumn,
 			hideOutputColumn,
 			verbs,
+			headerText,
 			onDismiss,
 			...rest
 		} = props
@@ -114,7 +120,9 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 		)
 
 		const stepOptions = useMemo(() => {
-			const list = verbs || inputColumnSteps()
+			const list =
+				verbs ||
+				columnTransformSteps(s => s !== Verb.Aggregate && s !== Verb.Rollup)
 			return list.map(key => ({
 				key,
 				text: upperFirst(key),
@@ -123,7 +131,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 		return (
 			<Modal onDismiss={onDismiss} {...rest}>
 				<Header>
-					<Title>Derive new column</Title>
+					<Title>{headerText}</Title>
 					<IconButton
 						iconProps={{
 							iconName: 'Cancel',
