@@ -18,6 +18,7 @@ import { fill } from './fill'
 import { filter } from './filter'
 import { fold } from './fold'
 import { groupby } from './groupby'
+import { impute } from './impute'
 import { intersect } from './intersect'
 import { join } from './join'
 import { lookup } from './lookup'
@@ -46,6 +47,7 @@ const verbs: Record<string, StepFunction> = {
 	filter,
 	fold,
 	groupby,
+	impute,
 	intersect,
 	join,
 	lookup,
@@ -95,6 +97,7 @@ export function factory(
 		case Verb.Derive:
 		case Verb.Impute:
 		case Verb.Fill:
+		case Verb.Rollup:
 			return {
 				...base,
 				args: {
@@ -135,7 +138,6 @@ export function factory(
 		case Verb.Join:
 		case Verb.Orderby:
 		case Verb.Rename:
-		case Verb.Rollup:
 		case Verb.Sample:
 		case Verb.Select:
 		case Verb.Ungroup:

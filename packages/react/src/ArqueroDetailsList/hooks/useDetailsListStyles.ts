@@ -33,9 +33,6 @@ export function useDetailsListStyles(
 			merge(
 				{},
 				{
-					focusZone: {
-						overflowX: 'auto',
-					},
 					headerWrapper: {
 						height:
 							DEFAULT_HEADER_HEIGHT +
