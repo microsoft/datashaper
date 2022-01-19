@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { createBaseFile, createFileWithPath } from '../../utils'
+import { FileType } from '../..'
+import { createBaseFile } from '../../utils'
 import { FileCollection } from '../FileCollection'
 
 let fileCollection
@@ -18,87 +19,95 @@ beforeEach(() => {
 	fileCollection = new FileCollection()
 })
 
-describe('creates fileCollection instance', () => {
-	it('new FileCollection()', async () => {
-		expect(fileCollection.list()).toEqual([])
+describe('new FileCollection()', () => {
+	it('should create a FileCollection instance', async () => {
+		const instance = new FileCollection()
+		expect(instance).toBeInstanceOf(FileCollection)
 	})
 })
 
-describe('rename fileCollection instance', () => {
-	it('set FileCollection name', async () => {
+describe('FileCollection.name', () => {
+	it('should set the name of the FileCollection', async () => {
 		expect(fileCollection.name).toBe('')
 		fileCollection.name = 'test'
 		expect(fileCollection.name).toBe('test')
 	})
 })
 
-describe('set and list fileCollection files', () => {
-	it('FileCollection list', async () => {
+describe('FileCollection.find', () => {
+	it('should throw an error', async () => {
+		expect(() => fileCollection.find(file.name)).toThrow(
+			`File ${file.name} not found`,
+		)
+	})
+	it('should find a file by its name', async () => {
+		fileCollection.add(file)
+		expect(fileCollection.find(file.name)).toEqual(file)
+	})
+})
+
+describe('FileCollection.setFiles | FileCollection.list()', () => {
+	it('should set and list the files', async () => {
 		const files = [file]
 		expect(fileCollection.list()).toEqual([])
-		fileCollection.files = [...files]
+		fileCollection.setFiles([...files])
 		expect(fileCollection.list()).toEqual(files)
 	})
 })
 
-describe('init fileCollection', () => {
-	it('FileCollection init', async () => {
+describe('FileCollection.add', () => {
+	it('should add a file to the FileCollection', async () => {
+		await fileCollection.add(file)
+		expect(fileCollection.list()).toEqual([file])
+	})
+
+	it('should add a list of files to the FileCollection', async () => {
 		const files = [file, file]
-		const fileWithPath = createFileWithPath(jsonBlob, {
-			...fileOpt,
-			name: 'file.json',
-		})
-		await fileCollection.init([fileWithPath, fileWithPath])
+		await fileCollection.add(files)
 		expect(fileCollection.list()).toEqual(files)
+	})
+
+	it('should add a file from a url to the FileCollection', async () => {
+		await fileCollection.add(
+			'https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv',
+		)
+		expect(fileCollection.list()).toHaveLength(1)
 	})
 })
 
-describe('add file to fileCollection', () => {
-	it('FileCollection add', async () => {
-		const files = [file]
-		const newFile = createFileWithPath(jsonBlob, {
-			...fileOpt,
-			name: 'newFile.json',
-		})
-		const newBaseFile = createBaseFile(jsonBlob, {
-			...fileOpt,
-			name: 'newFile.json',
-		})
-		fileCollection.files = [...files]
-		expect(fileCollection.list()).toEqual(files)
-		await fileCollection.add(newFile)
-		expect(fileCollection.list()).toEqual([file, newBaseFile])
-	})
-})
-
-describe('remove file form fileCollection', () => {
-	it('FileCollection remove', async () => {
+describe('FileCollection.remove', () => {
+	it('should remove a file from the collection', async () => {
 		const newFile = createBaseFile(jsonBlob, {
 			...fileOpt,
 			name: 'newFile.json',
 		})
 		const files = [file, newFile]
-		fileCollection.files = [...files]
+		await fileCollection.add(files)
 		expect(fileCollection.list()).toEqual(files)
 		fileCollection.remove({ name: 'file.json' })
 		expect(fileCollection.list()).toEqual([newFile])
 	})
+	it('should remove all json files from the collection', async () => {
+		await fileCollection.add([file, file])
+		fileCollection.remove({ type: FileType.json })
+		expect(fileCollection.list()).toEqual([])
+	})
 })
 
-describe('clear files form fileCollection', () => {
-	it('FileCollection clear', async () => {
+describe('FileCollection.clear', () => {
+	it('should clear the collection', async () => {
 		const files = [file, file]
-		fileCollection.files = [...files]
+		await fileCollection.add(files)
 		expect(fileCollection.list()).toEqual(files)
 		fileCollection.clear()
 		expect(fileCollection.list()).toEqual([])
 	})
 })
 
-describe('copy fileCollection', () => {
-	it('FileCollection copy', async () => {
+describe('FileCollection.copy', () => {
+	it('should make a copy of the collection', async () => {
 		const files = [file, file]
-		fileCollection.files = [...files]
+		await fileCollection.add(files)
 		fileCollection.name = 'OriginalCollection'
 		const copy = fileCollection.copy()
 		copy.name = 'CopyCollection'

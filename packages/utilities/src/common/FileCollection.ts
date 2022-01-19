@@ -5,8 +5,11 @@
 
 import { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { FileMimeType } from '..'
 import { FileType, Json } from '../types'
 import {
+	createFileWithPath,
+	extension,
 	fetchFile,
 	getFilesFromZip,
 	isZipFile,
@@ -23,10 +26,6 @@ export class FileCollection {
 	private supportedFilesOnly = false
 	private _name = ''
 
-	set files(files: BaseFile[]) {
-		this._files = files
-	}
-
 	set name(name: string) {
 		const nonExtName = name.replace(/\.[^/.]+$/, '')
 		this._name = nonExtName
@@ -36,35 +35,52 @@ export class FileCollection {
 		return this._name
 	}
 
-	async init(files: FileWithPath[] | string): Promise<void> {
-		if (!files.length) {
-			throw new Error('No files provided')
+	private async _addFromZip(file: FileWithPath | File) {
+		if (!this.name) {
+			this.name = file.name
+		}
+		const filesFromZip = await getFilesFromZip(file)
+		this._files = [...this._files, ...filesFromZip.map(f => new BaseFile(f))]
+	}
+
+	private async _addFile(file: FileWithPath | File): Promise<void> {
+		const { name } = file
+		if (file instanceof File) {
+			file = createFileWithPath(file, {
+				name,
+				type: FileMimeType[extension(name) as keyof typeof FileMimeType],
+			})
 		}
 
-		if (typeof files === 'string') {
-			const blob = await fetchFile(files)
-			const filesFromZip = await getFilesFromZip(blob)
-			this._files = filesFromZip.map(f => new BaseFile(f))
-			this.name = files
-		} else if ((files as File[]).every(file => file instanceof File)) {
-			let baseFiles: BaseFile[] = []
+		if (isZipFile(name)) {
+			return this._addFromZip(file)
+		}
+		this._files = [...this._files, new BaseFile(file as FileWithPath)]
+	}
+
+	private async _addFromUrl(fileUrl: string): Promise<void> {
+		const name = fileUrl.split('/').pop() || ''
+		const blob = await fetchFile(fileUrl)
+		const file = createFileWithPath(blob, {
+			name,
+			type: FileMimeType[extension(name) as keyof typeof FileMimeType],
+		})
+		return this._addFile(file)
+	}
+
+	private async _addFromArray(files: (FileWithPath | File)[]): Promise<void> {
+		if ((files as File[]).every(file => file instanceof File)) {
 			for await (const file of files as FileWithPath[]) {
-				if (!isZipFile(file.name)) {
-					baseFiles = [...baseFiles, new BaseFile(file)]
-				} else {
-					this.name = file.name
-					const filesFromZip = await getFilesFromZip(file)
-					baseFiles = [
-						...baseFiles,
-						...filesFromZip.map((f: FileWithPath) => new BaseFile(f)),
-					]
-				}
+				await this._addFile(file)
 			}
-			this._files = [...baseFiles]
 		}
 	}
 
-	private find(name: string): BaseFile {
+	setFiles(files: BaseFile[]): void {
+		this._files = files
+	}
+
+	find(name: string): BaseFile {
 		const file = this._files.find(file => file.name === name)
 		if (!file) {
 			throw new Error(`File ${name} not found`)
@@ -105,20 +121,21 @@ export class FileCollection {
 		return loadTable(this.find(name))
 	}
 
-	private async _add(file: FileWithPath): Promise<void> {
-		if (!isZipFile(file.name)) {
-			this._files = [...this._files, new BaseFile(file)]
-		} else {
-			const files = await getFilesFromZip(file)
-			this._files = [...this._files, ...files.map(f => new BaseFile(f))]
+	async add(files: FileWithPath[] | FileWithPath | string): Promise<void> {
+		if (!files) {
+			throw new Error('No files provided')
 		}
-	}
-
-	async add(files: FileWithPath[] | FileWithPath): Promise<void> {
 		if (files instanceof File || files instanceof FileWithPath) {
-			files = [files]
+			return this._addFile(files)
+		} else {
+			if (!files.length) {
+				throw new Error('No files provided')
+			}
+			if (Array.isArray(files)) {
+				return this._addFromArray(files)
+			}
+			return this._addFromUrl(files)
 		}
-		await Promise.all(files.map(file => this._add(file)))
 	}
 
 	remove(options: { type?: FileType; name?: string }): void {
@@ -170,7 +187,7 @@ export class FileCollection {
 	copy(): FileCollection {
 		const newFC = new FileCollection()
 		newFC.name = this.name
-		newFC.files = [...this._files]
+		newFC.setFiles([...this._files])
 		return newFC
 	}
 }
