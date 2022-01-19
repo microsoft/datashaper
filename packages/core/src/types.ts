@@ -359,7 +359,12 @@ export interface FoldArgs extends InputColumnListArgs {
 
 export type GroupbyArgs = InputColumnListArgs
 
-export type ImputeArgs = FillArgs
+export interface ImputeArgs extends InputColumnArgs {
+	/**
+	 * Value to fill in empty cells
+	 */
+	value: Value
+}
 
 export interface JoinArgs {
 	/**

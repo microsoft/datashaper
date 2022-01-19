@@ -7,7 +7,7 @@ import {
 	Step,
 	StepType,
 	factory,
-	columnTransformSteps,
+	columnTransformVerbs,
 } from '@data-wrangling-components/core'
 import {
 	Dropdown,
@@ -122,7 +122,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 		const stepOptions = useMemo(() => {
 			const list =
 				verbs ||
-				columnTransformSteps(s => s !== Verb.Aggregate && s !== Verb.Rollup)
+				columnTransformVerbs(s => s !== Verb.Aggregate && s !== Verb.Rollup)
 			return list.map(key => ({
 				key,
 				text: upperFirst(key),
