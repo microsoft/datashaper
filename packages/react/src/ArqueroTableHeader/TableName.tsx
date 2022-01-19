@@ -2,16 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TextField } from '@fluentui/react'
 import React, { memo, useCallback, useState } from 'react'
-import { If, Then } from 'react-if'
+import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
+import { RenameCallout } from './RenameCallout'
 
 interface TableNameProps {
 	onRenameTable?: (name: string) => void
 	name?: string
 }
 
+/**
+ * Renders the table name if passed, or the option to rename the name if the function
+ * onRenameTable is passed to be called when clicking save or pressing enter on the callout
+ */
 export const TableName: React.FC<TableNameProps> = memo(function TableName({
 	onRenameTable,
 	name,
@@ -21,55 +25,55 @@ export const TableName: React.FC<TableNameProps> = memo(function TableName({
 
 	const onChange = useCallback(
 		(e: any, value?: string) => {
-			setEditedName(value || '')
+			setEditedName(value as string)
 		},
 		[setEditedName],
 	)
 
 	const onSend = useCallback(
-		(newName: string) => {
-			onRenameTable && onRenameTable(newName)
+		(newName?: string) => {
+			// if the user enters an empty value, save the previous value
+			const incomingName = (!newName ? name : newName) as string
+			onRenameTable && onRenameTable(incomingName)
 			setIsEditing(false)
+			setEditedName(incomingName)
 		},
-		[onRenameTable, setIsEditing],
-	)
-
-	const validateKeyEvent = useCallback(
-		(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-			if (e.key === 'Enter') return onSend(editedName)
-			if (e.key === 'Escape') {
-				onSend(name || '')
-			}
-		},
-		[onSend, name, editedName],
+		[onRenameTable, setIsEditing, setEditedName, name],
 	)
 
 	return (
-		<>
-			<If condition={isEditing}>
-				<Then>
-					<TextInput
-						underlined
-						borderless
-						value={editedName}
-						onKeyDown={validateKeyEvent}
-						onChange={onChange}
-					/>
-				</Then>
-			</If>
+		<Container>
 			<If condition={!!onRenameTable}>
 				<Then>
-					<H3Editable title="Edit" onClick={() => setIsEditing(true)}>
-						{name}
-					</H3Editable>
+					<Container>
+						<H3Editable
+							id="editName"
+							title="Edit"
+							onClick={() => setIsEditing(true)}
+						>
+							{name}
+						</H3Editable>
+						<If condition={isEditing}>
+							<Then>
+								<RenameCallout
+									onSend={onSend}
+									editedName={editedName}
+									onChange={onChange}
+									name={name}
+								/>
+							</Then>
+						</If>
+					</Container>
 				</Then>
+				<Else>
+					<If condition={name}>
+						<Then>
+							<H3>{name}</H3>
+						</Then>
+					</If>
+				</Else>
 			</If>
-			<If condition={name}>
-				<Then>
-					<H3>{name}</H3>
-				</Then>
-			</If>
-		</>
+		</Container>
 	)
 })
 
@@ -86,11 +90,4 @@ const H3Editable = styled(H3)`
 		${({ theme }) => theme.application().background().hex()};
 `
 
-const TextInput = styled(TextField)`
-	.ms-TextField-fieldGroup {
-		height: 25px;
-	}
-	input {
-		align-self: center;
-	}
-`
+const Container = styled.div``
