@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
 import { RenameCallout } from './RenameCallout'
@@ -22,6 +22,10 @@ export const TableName: React.FC<TableNameProps> = memo(function TableName({
 }) {
 	const [isEditing, setIsEditing] = useState(false)
 	const [editedName, setEditedName] = useState(name || '')
+
+	useEffect(() => {
+		setEditedName(name as string)
+	}, [name, setEditedName])
 
 	const onChange = useCallback(
 		(e: any, value?: string) => {
