@@ -41,34 +41,19 @@ export const RenameCallout: React.FC<RenameCalloutProps> = memo(
 				directionalHint={DirectionalHint.topCenter}
 				onDismiss={() => onSend(name)}
 			>
-				<Title>Rename table</Title>
-				<FocusZone>
-					<TextField
-						value={editedName}
-						onKeyDown={validateKeyEvent}
-						onChange={onChange}
-					/>
-				</FocusZone>
-				<ButtonContainer>
-					<PrimaryButton onClick={() => onSend(editedName)} text="Save" />
-					<DefaultButton onClick={() => onSend(name)} text="Cancel" />
-				</ButtonContainer>
+				<TextField
+					value={editedName}
+					onKeyDown={validateKeyEvent}
+					onChange={onChange}
+					underlined
+				/>
 			</FocusCallout>
 		)
 	},
 )
 
-const ButtonContainer = styled.div`
-	margin-top: 8px;
-	display: flex;
-	gap: 12px;
-`
-
-const Title = styled.h4``
-
 const FocusCallout = styled(FocusTrapCallout)`
 	width: 320;
 	max-width: 90%;
-	padding: 0px 24px;
-	padding-bottom: 24px;
+	padding: 10px;
 `
