@@ -46,11 +46,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 
 	const updateFileCollection = useCallback(
 		async (files: FileWithPath[]) => {
-			if (!fileCollection.list().length) {
-				await fileCollection.init(files)
-			} else {
-				await Promise.all(files.map((f: FileWithPath) => fileCollection.add(f)))
-			}
+			await fileCollection.add(files)
 			setFileCollection(fileCollection)
 		},
 		[fileCollection, setFileCollection],
