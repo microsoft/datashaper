@@ -65,6 +65,9 @@ export class BaseFile extends FileWithPath {
 	}
 
 	async toTable(): Promise<ColumnTable> {
+		if (!this.isDsv()) {
+			throw Error('The provided file is not a dsv file')
+		}
 		return loadTable(this)
 	}
 
