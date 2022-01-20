@@ -56,7 +56,7 @@ const useHandleOnDropAccepted = (
 		async (files: FileWithPath[]) => {
 			const fileCollection = new FileCollection()
 			try {
-				await fileCollection.init(files)
+				await fileCollection.add(files)
 				onDropAccepted && onDropAccepted(fileCollection)
 			} catch (e) {
 				console.error(e)
@@ -84,7 +84,7 @@ const useHandleOnDrop = (onDrop?: (collection: FileCollection) => void) => {
 		async (files: FileWithPath[]) => {
 			const fileCollection = new FileCollection()
 			try {
-				await fileCollection.init(files)
+				await fileCollection.add(files)
 				onDrop && onDrop(fileCollection)
 			} catch (e) {
 				console.error(e)
@@ -108,7 +108,7 @@ export const useHandleOnUploadClick = (
 				const { files } = e.target
 				const fileCollection = new FileCollection()
 				try {
-					await fileCollection.init([files[0]])
+					await fileCollection.add(files[0])
 					handleCollection && handleCollection(fileCollection)
 				} catch (e) {
 					console.error(e)

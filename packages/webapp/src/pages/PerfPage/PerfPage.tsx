@@ -30,6 +30,7 @@ import styled from 'styled-components'
  */
 export const PerfPage: React.FC = memo(function PerfMage() {
 	const [table, setTable] = useState<ColumnTable | undefined>()
+	const [tableName, setTableName] = useState('Table1')
 	const [groupedTable, setGroupedTable] = useState<ColumnTable | undefined>()
 	const [groupedMetadata, setGroupedMetadata] = useState<
 		TableMetadata | undefined
@@ -88,7 +89,11 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 				<PivotItem key={'table'} headerText={'table'}>
 					<AddButton onClick={addNewColumn}>Add new column</AddButton>
 					<Table>
-						<ArqueroTableHeader table={table} />
+						<ArqueroTableHeader
+							table={table}
+							name={tableName}
+							onRenameTable={name => setTableName(name)}
+						/>
 						<ArqueroDetailsList
 							table={table}
 							metadata={metadata}
@@ -131,7 +136,6 @@ const Container = styled.div``
 
 const Table = styled.div`
 	margin-top: 12px;
-	width: 800ox;
 	height: 600px;
 `
 
