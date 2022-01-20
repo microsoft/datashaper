@@ -5,4 +5,5 @@
 export * from './columns'
 export * from './data'
 export * from './rows'
+export * from './steps'
 export * from './tables'

@@ -16,7 +16,7 @@ import { merge } from 'lodash'
 export function downloadCommand(
 	table: ColumnTable,
 	downloadFilename?: string,
-	props?: ICommandBarItemProps,
+	props?: Partial<ICommandBarItemProps>,
 ): ICommandBarItemProps {
 	return merge(
 		{},

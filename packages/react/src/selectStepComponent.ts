@@ -28,7 +28,7 @@ import {
 } from './verbs'
 
 const compound: Record<string, React.FC<StepComponentProps>> = {
-	binarize: CompoundBinarize,
+	'multi-binarize': CompoundBinarize,
 	'filter-aggregate-lookup': FilterAggregateLookup,
 }
 

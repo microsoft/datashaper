@@ -2,19 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinStep, BinArgs, BinStrategy } from '@data-wrangling-components/core'
-import { Checkbox, TextField } from '@fluentui/react'
+import { BinStep, BinStrategy } from '@data-wrangling-components/core'
+import { Checkbox, Position, SpinButton } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import { Switch, Case, If, Then } from 'react-if'
 import styled from 'styled-components'
 import {
-	useHandleTextfieldChange,
 	LeftAlignedRow,
 	useHandleDropdownChange,
-	useLoadTable,
 	useHandleCheckboxChange,
+	useHandleSpinButtonChange,
 } from '../../common'
-import { TableColumnDropdown, BinStrategyDropdown } from '../../controls'
+import { BinStrategyDropdown } from '../../controls'
 import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 
@@ -23,32 +22,9 @@ import { StepComponentProps } from '../../types'
  */
 export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	step,
-	store,
-	table,
 	onChange,
-	input,
 }) {
-	const internal = useMemo(
-		() =>
-			({
-				...step,
-				args: {
-					strategy: BinStrategy.Auto,
-					...(step.args as Partial<BinArgs>),
-				},
-			} as BinStep),
-		[step],
-	)
-
-	const tbl = useLoadTable(input || step.input, table, store)
-
-	const handleToChange = useHandleTextfieldChange(internal, 'args.to', onChange)
-
-	const handleBinColumnChange = useHandleDropdownChange(
-		internal,
-		'args.column',
-		onChange,
-	)
+	const internal = useMemo(() => step as BinStep, [step])
 
 	const handleBinStrategyChange = useHandleDropdownChange(
 		internal,
@@ -56,24 +32,24 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 		onChange,
 	)
 
-	const handleBinCountChange = useHandleTextfieldChange(
+	const handleBinCountChange = useHandleSpinButtonChange(
 		internal,
 		'args.fixedcount',
 		onChange,
 	)
-	const handleBinSizeChange = useHandleTextfieldChange(
+	const handleBinSizeChange = useHandleSpinButtonChange(
 		internal,
 		'args.fixedwidth',
 		onChange,
 	)
 
-	const handleMinChange = useHandleTextfieldChange(
+	const handleMinChange = useHandleSpinButtonChange(
 		internal,
 		'args.min',
 		onChange,
 	)
 
-	const handleMaxChange = useHandleTextfieldChange(
+	const handleMaxChange = useHandleSpinButtonChange(
 		internal,
 		'args.max',
 		onChange,
@@ -88,34 +64,21 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	return (
 		<Container>
 			<LeftAlignedRow>
-				<TextField
-					required
-					label={'New column name'}
-					placeholder={'Column name'}
-					value={internal.args.to}
-					styles={columnDropdownStyles}
-					onChange={handleToChange}
-				/>
-				<TableColumnDropdown
-					required
-					table={tbl}
-					label={'Column to bin'}
-					selectedKey={internal.args.column}
-					onChange={handleBinColumnChange}
-				/>
-			</LeftAlignedRow>
-			<LeftAlignedRow>
 				<BinStrategyDropdown
 					required
 					selectedKey={internal.args.strategy}
+					styles={columnDropdownStyles}
 					onChange={handleBinStrategyChange}
 				/>
 				<Switch>
 					<Case condition={internal.args.strategy === BinStrategy.FixedCount}>
-						<TextField
-							required
+						<SpinButton
+							key={`spin-count`}
 							label={'Bin count'}
-							placeholder={'number of bins'}
+							labelPosition={Position.top}
+							min={1}
+							max={100}
+							step={1}
 							value={
 								internal.args.fixedcount
 									? `${internal.args.fixedcount}`
@@ -126,10 +89,10 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 						/>
 					</Case>
 					<Case condition={internal.args.strategy === BinStrategy.FixedWidth}>
-						<TextField
-							required
+						<SpinButton
+							key={`spin-size`}
 							label={'Bin size'}
-							placeholder={'width per bin'}
+							labelPosition={Position.top}
 							value={
 								internal.args.fixedwidth
 									? `${internal.args.fixedwidth}`
@@ -144,16 +107,16 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 			<If condition={internal.args.strategy !== BinStrategy.Auto}>
 				<Then>
 					<LeftAlignedRow>
-						<TextField
+						<SpinButton
 							label={'Min boundary'}
-							placeholder={'min value'}
+							labelPosition={Position.top}
 							value={internal.args.min ? `${internal.args.min}` : undefined}
 							styles={columnDropdownStyles}
 							onChange={handleMinChange}
 						/>
-						<TextField
+						<SpinButton
 							label={'Max boundary'}
-							placeholder={'max value'}
+							labelPosition={Position.top}
 							value={internal.args.max ? `${internal.args.max}` : undefined}
 							styles={columnDropdownStyles}
 							onChange={handleMaxChange}

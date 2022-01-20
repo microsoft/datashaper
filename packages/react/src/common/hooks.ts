@@ -17,7 +17,8 @@ import { set } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { DropdownOptionChangeFunction, StepChangeFunction } from '../types'
 
-const noop = (value: unknown) => value
+const noop = (value?: string) => value
+const num = (value?: string) => value && +value
 
 /**
  * Make a basic set of string options from an array
@@ -133,6 +134,35 @@ export function useHandleTextfieldChange(
 			const value = transformer(newValue)
 			set(update, path, value)
 			onChange && onChange(update)
+		},
+		[step, path, onChange, transformer],
+	)
+}
+
+/**
+ * Enforces numeric values for a SpinButton onChange.
+ * @param step
+ * @param path
+ * @param onChange
+ * @param transformer
+ * @returns
+ */
+export function useHandleSpinButtonChange(
+	step: Step,
+	path: string,
+	onChange?: StepChangeFunction,
+	transformer = num,
+): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void {
+	return useCallback(
+		(event, newValue) => {
+			const update = {
+				...step,
+			}
+			const value = transformer(newValue)
+			if (typeof value === 'number') {
+				set(update, path, value)
+				onChange && onChange(update)
+			}
 		},
 		[step, path, onChange, transformer],
 	)

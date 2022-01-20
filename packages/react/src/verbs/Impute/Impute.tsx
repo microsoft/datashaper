@@ -4,7 +4,6 @@
  */
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow } from '../../common'
 import { ImputeInputs } from '../../controls'
 import { StepComponentProps } from '../../types'
 
@@ -19,7 +18,6 @@ export const Impute: React.FC<StepComponentProps> = memo(function Impute({
 }) {
 	return (
 		<Container>
-			<LeftAlignedRow></LeftAlignedRow>
 			<ImputeInputs
 				step={step}
 				store={store}

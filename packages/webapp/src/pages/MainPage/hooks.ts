@@ -16,7 +16,6 @@ const TABLES = [
 	`data/companies2.csv`,
 	`data/products.csv`,
 	'data/stocks.csv',
-	'data/large.csv',
 ]
 
 const identity = (d: any) => d

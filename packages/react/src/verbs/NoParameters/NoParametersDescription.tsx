@@ -10,7 +10,7 @@ export const NoParametersDescription: React.FC<StepDescriptionProps> = memo(
 	function NoParametersDescription(props) {
 		const rows = useMemo(() => {
 			return []
-		}, [props])
+		}, [])
 		return <VerbDescription {...props} rows={rows} />
 	},
 )

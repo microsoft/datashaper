@@ -3,9 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SampleStep } from '@data-wrangling-components/core'
+import { format } from 'd3-format'
 import React, { memo, useMemo } from 'react'
 import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
+
+const perc = format('.0%')
 
 export const SampleDescription: React.FC<StepDescriptionProps> = memo(
 	function SampleDescription(props) {
@@ -15,8 +18,8 @@ export const SampleDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'random',
-					value: args.size || (args.proportion || 0) * 100,
-					after: args.proportion ? '% of rows' : 'rows',
+					value: args.size || perc(args.proportion || 0),
+					after: args.size ? (args.size === 1 ? 'row' : 'rows') : ' of rows',
 				},
 			]
 		}, [props])

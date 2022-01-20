@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ICommandBarItemProps } from '@fluentui/react'
+import { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
 import { merge } from 'lodash'
 
 /**
@@ -16,8 +16,12 @@ import { merge } from 'lodash'
 export function checkedItemsCommand(
 	list: string[],
 	checked?: string[],
-	onCheckChange?: (name: string, checked: boolean, index: number) => void,
-	props?: ICommandBarItemProps,
+	onCheckChange?: (
+		name: string,
+		checked: boolean,
+		index: number,
+	) => boolean | void,
+	props?: Partial<ICommandBarItemProps>,
 ): ICommandBarItemProps {
 	const hash = (checked || []).reduce((acc, cur) => {
 		acc[cur] = true
@@ -28,7 +32,13 @@ export function checkedItemsCommand(
 		text: name,
 		canCheck: true,
 		checked: hash[name],
-		onClick: () => onCheckChange && onCheckChange(name, !hash[name], index),
+		onClick: (
+			ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+			item?: IContextualMenuItem,
+		) => {
+			ev?.preventDefault()
+			return onCheckChange && onCheckChange(name, !hash[name], index)
+		},
 	}))
 	return merge(
 		{

@@ -3,18 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DeriveStep } from '@data-wrangling-components/core'
-import { TextField } from '@fluentui/react'
-
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import {
 	useHandleDropdownChange,
-	useHandleTextfieldChange,
 	useLoadTable,
 	LeftAlignedRow,
 } from '../../common'
 import { MathOperatorDropdown, TableColumnDropdown } from '../../controls'
-import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
 
 /**
@@ -46,20 +42,9 @@ export const Derive: React.FC<StepComponentProps> = memo(function Derive({
 		'args.operator',
 		onChange,
 	)
-	const handleToChange = useHandleTextfieldChange(internal, 'args.to', onChange)
 
 	return (
 		<Container>
-			<LeftAlignedRow>
-				<TextField
-					required
-					label={'New column name'}
-					placeholder={'Column name'}
-					value={internal.args.to}
-					styles={columnDropdownStyles}
-					onChange={handleToChange}
-				/>
-			</LeftAlignedRow>
 			<LeftAlignedRow>
 				<TableColumnDropdown
 					table={tbl}

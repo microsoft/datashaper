@@ -161,7 +161,7 @@ export interface Specification {
 // TODO: split out verb/compound types instead of overloading the verb property
 export interface Step<T = unknown> {
 	type: StepType
-	verb: string
+	verb: Verb
 	input: string
 	output: string
 	args: T
@@ -358,6 +358,13 @@ export interface FoldArgs extends InputColumnListArgs {
 }
 
 export type GroupbyArgs = InputColumnListArgs
+
+export interface ImputeArgs extends InputColumnArgs {
+	/**
+	 * Value to fill in empty cells
+	 */
+	value: Value
+}
 
 export interface JoinArgs {
 	/**

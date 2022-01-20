@@ -74,8 +74,8 @@ export function useChartSVG(
 	const theme = useThematic()
 	useLayoutEffect(() => {
 		select(svgRef.current).call(chart as any, theme, {
-			width,
-			height,
+			width: width < 0 ? 0 : width,
+			height: height < 0 ? 0 : height,
 		})
 	}, [theme, svgRef, width, height])
 }

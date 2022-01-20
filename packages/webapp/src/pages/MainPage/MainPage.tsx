@@ -3,21 +3,21 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import { Step, StepType, Specification } from '@data-wrangling-components/core'
 import {
-	selectStepComponent,
-	selectStepDescription,
-	WithTableDropdown,
-	DetailsListFeatures,
-} from '@data-wrangling-components/react'
+	Step,
+	StepType,
+	Verb,
+	Specification,
+} from '@data-wrangling-components/core'
+import { DetailsListFeatures } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
-
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useState, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { ControlBar } from './ControlBar'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
+import { StepComponent } from './StepComponent'
 import { StepSelector } from './StepSelector'
 import { Table } from './Table'
 import {
@@ -55,8 +55,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const [steps, setSteps] = useState<Step[]>([])
 
 	const handleCreateStep = useCallback(
-		(type: StepType, subtype: string) =>
-			setSteps(pipeline.create(type, subtype)),
+		(type: StepType, verb: Verb) => setSteps(pipeline.create(type, verb)),
 		[pipeline, setSteps],
 	)
 
@@ -129,8 +128,6 @@ export const MainPage: React.FC = memo(function MainMage() {
 					</Section>
 				</InputsSection>
 				{steps.map((step, index) => {
-					const Component = selectStepComponent(step)
-					const Description = selectStepDescription(step)
 					const output = outputs?.get(step.output)
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
@@ -140,17 +137,13 @@ export const MainPage: React.FC = memo(function MainMage() {
 								type={step.type}
 							>
 								<StepsColumn className="steps-column">
-									<WithTableDropdown
-										Component={Component}
+									<StepComponent
+										key={`step-${index}`}
 										step={step}
 										store={store}
-										onChange={s => handleStepChange(s, index)}
+										index={index}
+										onChange={handleStepChange}
 									/>
-									{Description ? (
-										<DescriptionContainer>
-											<Description step={step} showInput showOutput />
-										</DescriptionContainer>
-									) : null}
 								</StepsColumn>
 								<OutputsColumn className="outputs-column">
 									{output ? (
@@ -254,8 +247,4 @@ const OutputsColumn = styled.div`
 	margin-left: 40px;
 	display: flex;
 	flex-direction: column;
-`
-
-const DescriptionContainer = styled.div`
-	margin-top: 8px;
 `

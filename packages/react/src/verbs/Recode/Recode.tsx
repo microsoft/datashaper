@@ -18,14 +18,8 @@ import {
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import {
-	useHandleDropdownChange,
-	useHandleTextfieldChange,
-	useLoadTable,
-	useColumnType,
-} from '../../common'
-import { ColumnValueDropdown, TableColumnDropdown } from '../../controls'
-import { columnDropdownStyles } from '../../controls/styles'
+import { useLoadTable, useColumnType } from '../../common'
+import { ColumnValueDropdown } from '../../controls'
 import { StepComponentProps } from '../../types'
 import {
 	useColumnValues,
@@ -52,12 +46,6 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 	const values = useColumnValues(internal, tbl)
 	const dataType = useColumnType(tbl, internal.args.column)
 
-	const handleToChange = useHandleTextfieldChange(internal, 'args.to', onChange)
-	const handleColumnChange = useHandleDropdownChange(
-		internal,
-		'args.column',
-		onChange,
-	)
 	const handleRecodeChange = useHandleRecodeChange(internal, onChange)
 	const handleRecodeDelete = useRecodeDelete(internal, onChange)
 	const handleButtonClick = useHandleAddButtonClick(internal, values, onChange)
@@ -75,20 +63,6 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 
 	return (
 		<Container>
-			<TextField
-				required
-				label={'New column name'}
-				placeholder={'Column name'}
-				value={internal.args.to}
-				styles={columnDropdownStyles}
-				onChange={handleToChange}
-			/>
-			<TableColumnDropdown
-				table={tbl}
-				label={'Column to recode'}
-				selectedKey={internal.args.column}
-				onChange={handleColumnChange}
-			/>
 			{columnPairs}
 			<ActionButton
 				onClick={handleButtonClick}
