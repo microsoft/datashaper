@@ -97,6 +97,7 @@ export function factory(
 				args: {
 					to: 'output',
 					strategy: BinStrategy.Auto,
+					fixedcount: 10,
 				},
 			}
 		case Verb.Aggregate:

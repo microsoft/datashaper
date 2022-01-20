@@ -3,12 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SampleStep } from '@data-wrangling-components/core'
-import { TextField } from '@fluentui/react'
+import { Position, SpinButton } from '@fluentui/react'
+import { format } from 'd3-format'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { useHandleTextfieldChange, LeftAlignedRow } from '../../common'
+import { LeftAlignedRow, useHandleSpinButtonChange } from '../../common'
 import { columnDropdownStyles } from '../../controls/styles'
 import { StepComponentProps } from '../../types'
+
+const whole = format('d')
 
 /**
  * Provides inputs for a Sample step.
@@ -19,38 +22,45 @@ export const Sample: React.FC<StepComponentProps> = memo(function Sample({
 }) {
 	const internal = useMemo(() => step as SampleStep, [step])
 
-	const handleSizeChange = useHandleTextfieldChange(
+	const handleSizeChange = useHandleSpinButtonChange(
 		internal,
 		'args.size',
 		onChange,
 	)
 
-	const handlePercentChange = useHandleTextfieldChange(
+	const handlePercentChange = useHandleSpinButtonChange(
 		internal,
 		'args.proportion',
 		onChange,
-		val => +(val as string) / 100,
+		val => val && +val / 100,
 	)
 
 	return (
 		<Container>
 			<LeftAlignedRow>
-				<TextField
+				<SpinButton
 					label={'Number of rows'}
-					placeholder={'count'}
+					labelPosition={Position.top}
+					min={0}
+					step={1}
 					disabled={!!internal.args.proportion}
 					value={internal.args.size ? `${internal.args.size}` : ''}
 					styles={columnDropdownStyles}
 					onChange={handleSizeChange}
 				/>
 				<Or>or</Or>
-				<TextField
+				<SpinButton
 					label={'Percentage of rows'}
+					labelPosition={Position.top}
+					min={0}
+					max={100}
+					step={1}
 					disabled={!!internal.args.size}
 					value={
-						internal.args.proportion ? `${internal.args.proportion * 100}` : ''
+						internal.args.proportion
+							? `${whole(internal.args.proportion * 100)}`
+							: ''
 					}
-					placeholder={'percent'}
 					styles={columnDropdownStyles}
 					onChange={handlePercentChange}
 				/>
