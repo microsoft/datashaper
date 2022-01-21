@@ -86,9 +86,9 @@ export interface DetailsListFeatures {
 	lazyLoadGroups?: boolean
 
 	/**
-	 * functions
+	 * Receive elements to render in the column header as commands
 	 */
-	commandBar?: any
+	commandBar?: JSX.Element[]
 }
 
 export interface ArqueroDetailsListProps

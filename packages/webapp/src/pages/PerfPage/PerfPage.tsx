@@ -15,6 +15,7 @@ import {
 import { createLazyLoadingGroupHeader } from '@data-wrangling-components/react/src/ArqueroDetailsList/renderers'
 import {
 	DefaultButton,
+	Dropdown,
 	IColumn,
 	IDetailsGroupDividerProps,
 	Pivot,
@@ -23,7 +24,7 @@ import {
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { Struct } from 'arquero/dist/types/table/transformable'
-import React, { memo, useState, useEffect, useCallback } from 'react'
+import React, { memo, useState, useEffect, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 /**
  * This is just a rudimentary page to load a large table for profiling the ArqueroDetailsList rendering.
@@ -75,6 +76,15 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		[],
 	)
 
+	const commandBar = useMemo(() => {
+		const def = (
+			<div>
+				<Dropdown options={[]}>a</Dropdown>
+			</div>
+		)
+		return [def]
+	}, [])
+
 	if (!table || !metadata || !groupedTable || !groupedMetadata) {
 		return null
 	}
@@ -100,7 +110,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 							features={{
 								smartCells: true,
 								smartHeaders: true,
-								commandBar: 'a',
+								commandBar: commandBar,
 							}}
 							columns={table.columnNames().map(x => {
 								return { name: x, key: x, fieldName: x } as IColumn
