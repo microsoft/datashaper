@@ -127,15 +127,17 @@ export const createRenderStatsColumnHeader = (
 }
 
 export const createRenderCommandBarColumnHeader = (
-	components: JSX.Element[],
+	renderers: IRenderFunction<IDetailsColumnProps>[],
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderCommandBarColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
 			return null
 		}
 		return (
-			<CommandBarContainer className="command-bar">
-				{components.map(c => c)}
+			<CommandBarContainer key={Math.random()} className="command-bar">
+				{renderers.map((renderer, i) => (
+					<div key={i}>{renderer(props)}</div>
+				))}
 			</CommandBarContainer>
 		)
 	}

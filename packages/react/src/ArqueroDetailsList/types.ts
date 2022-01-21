@@ -8,6 +8,8 @@ import {
 	IDetailsListProps,
 	IDropdownOption,
 	IDetailsGroupDividerProps,
+	IRenderFunction,
+	IDetailsColumnProps,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -86,9 +88,9 @@ export interface DetailsListFeatures {
 	lazyLoadGroups?: boolean
 
 	/**
-	 * Receive elements to render in the column header as commands
+	 * Receive elements to render in the column header as commands, passing the column details to be used in the component
 	 */
-	commandBar?: JSX.Element[]
+	commandBar?: IRenderFunction<IDetailsColumnProps>[]
 }
 
 export interface ArqueroDetailsListProps

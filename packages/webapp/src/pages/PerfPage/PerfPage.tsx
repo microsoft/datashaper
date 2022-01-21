@@ -17,6 +17,7 @@ import {
 	DefaultButton,
 	Dropdown,
 	IColumn,
+	IDetailsColumnProps,
 	IDetailsGroupDividerProps,
 	Pivot,
 	PivotItem,
@@ -75,15 +76,22 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		},
 		[],
 	)
-
-	const commandBar = useMemo(() => {
-		const def = (
-			<div>
-				<Dropdown options={[]}>a</Dropdown>
-			</div>
-		)
-		return [def]
+	const onClick = useCallback(props => {
+		console.log('props', props)
 	}, [])
+
+	const myCommand = useCallback(
+		(props?: IDetailsColumnProps) => {
+			return (
+				<>
+					<DefaultButton onClick={() => onClick(props)}>
+						Click here, {props?.column.name}
+					</DefaultButton>
+				</>
+			)
+		},
+		[onClick],
+	)
 
 	if (!table || !metadata || !groupedTable || !groupedMetadata) {
 		return null
@@ -110,7 +118,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 							features={{
 								smartCells: true,
 								smartHeaders: true,
-								commandBar: commandBar,
+								commandBar: [myCommand],
 							}}
 							columns={table.columnNames().map(x => {
 								return { name: x, key: x, fieldName: x } as IColumn
