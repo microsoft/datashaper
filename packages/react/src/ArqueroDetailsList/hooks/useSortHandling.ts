@@ -22,13 +22,16 @@ export function useSortHandling(
 		SortDirection.Ascending,
 	)
 	const handleColumnHeaderClick = useCallback(
-		(evt, column?: IColumn) => {
-			const isCommandBarEvent = evt.nativeEvent.path.find(
-				pathComponent =>
+		(
+			evt: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+			column?: IColumn,
+		) => {
+			const isCommandBarEvent = evt?.nativeEvent['path'].find(
+				(pathComponent: { className: string }) =>
 					pathComponent.className &&
 					pathComponent.className.includes('command-bar'),
 			)
-			if (isCommandBarEvent) return evt.preventDefault()
+			if (isCommandBarEvent) return evt?.preventDefault()
 
 			if (allowSorting) {
 				if (column?.isSorted) {
