@@ -14,10 +14,10 @@ import {
 } from '@data-wrangling-components/react'
 import { createLazyLoadingGroupHeader } from '@data-wrangling-components/react/src/ArqueroDetailsList/renderers'
 import {
+	CommandBar,
 	DefaultButton,
-	Dropdown,
 	IColumn,
-	IDetailsColumnProps,
+	ICommandBarItemProps,
 	IDetailsGroupDividerProps,
 	Pivot,
 	PivotItem,
@@ -76,22 +76,42 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		},
 		[],
 	)
-	const onClick = useCallback(props => {
-		console.log('props', props)
+
+	const myCommand = useCallback(() => {
+		const _items = [
+			{
+				key: 'edit',
+				text: 'Edit',
+				iconOnly: true,
+				iconProps: { iconName: 'Edit' },
+			},
+			{
+				key: 'delete',
+				text: 'Delete',
+				iconOnly: true,
+				iconProps: { iconName: 'Delete' },
+			},
+			{
+				key: 'add',
+				text: 'Add',
+				iconOnly: true,
+				iconProps: { iconName: 'Add' },
+			},
+		] as ICommandBarItemProps[]
+		return <CommandBar items={_items} />
 	}, [])
 
-	const myCommand = useCallback(
-		(props?: IDetailsColumnProps) => {
-			return (
-				<>
-					<DefaultButton onClick={() => onClick(props)}>
-						Click here, {props?.column.name}
-					</DefaultButton>
-				</>
-			)
-		},
-		[onClick],
-	)
+	const columns = useMemo((): IColumn[] | undefined => {
+		if (!table) return undefined
+		return table.columnNames().map(x => {
+			return {
+				name: x,
+				key: x,
+				fieldName: x,
+				minWidth: 180,
+			} as IColumn
+		})
+	}, [table])
 
 	if (!table || !metadata || !groupedTable || !groupedMetadata) {
 		return null
@@ -120,9 +140,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 								smartHeaders: true,
 								commandBar: [myCommand],
 							}}
-							columns={table.columnNames().map(x => {
-								return { name: x, key: x, fieldName: x } as IColumn
-							})}
+							columns={columns}
 							isSortable
 							isHeadersFixed
 							isStriped

@@ -133,10 +133,11 @@ export const createRenderCommandBarColumnHeader = (
 		if (!props || !defaultRender) {
 			return null
 		}
+
 		return (
-			<CommandBarContainer key={Math.random()} className="command-bar">
+			<CommandBarContainer key={props.columnIndex} className="command-bar">
 				{renderers.map((renderer, i) => (
-					<div key={i}>{renderer(props)}</div>
+					<Command key={i}>{renderer(props)}</Command>
 				))}
 			</CommandBarContainer>
 		)
@@ -174,6 +175,7 @@ function fixProps(
 	return updated
 }
 
+const Command = styled.div``
 const CommandBarContainer = styled.div`
 	display: flex;
 	flex-direction: column;
