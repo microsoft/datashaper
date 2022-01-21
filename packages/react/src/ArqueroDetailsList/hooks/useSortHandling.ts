@@ -23,6 +23,13 @@ export function useSortHandling(
 	)
 	const handleColumnHeaderClick = useCallback(
 		(evt, column?: IColumn) => {
+			const isCommandBarEvent = evt.nativeEvent.path.find(
+				pathComponent =>
+					pathComponent.className &&
+					pathComponent.className.includes('command-bar'),
+			)
+			if (isCommandBarEvent) return evt.preventDefault()
+
 			if (allowSorting) {
 				if (column?.isSorted) {
 					setSortDirection(

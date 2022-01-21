@@ -84,6 +84,11 @@ export interface DetailsListFeatures {
 	 * Collapse most groups so we can lazy load them. Default as true
 	 */
 	lazyLoadGroups?: boolean
+
+	/**
+	 * functions
+	 */
+	commandBar?: any
 }
 
 export interface ArqueroDetailsListProps

@@ -16,6 +16,7 @@ import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { FeaturesCell } from './FeaturesCell'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
 import { SmartCell, StatsColumnHeader } from '.'
+import styled from 'styled-components'
 
 export const createRenderSmartCell = (
 	metadata: ColumnMetadata,
@@ -125,6 +126,29 @@ export const createRenderStatsColumnHeader = (
 	}
 }
 
+export const createRenderCommandBarColumnHeader = (
+	buttons: any,
+): IRenderFunction<IDetailsColumnProps> => {
+	return function renderCommandBarColumnHeader(props?, defaultRender?) {
+		if (!props || !defaultRender) {
+			return null
+		}
+		return (
+			<CommandBarContainer className="command-bar">
+				<button key="1" onClick={e => alert('one')}>
+					one
+				</button>
+				<button key="2" onClick={e => alert('two')}>
+					two
+				</button>
+				<button key="3" onClick={e => alert('three')}>
+					three
+				</button>
+			</CommandBarContainer>
+		)
+	}
+}
+
 export const createRenderHistogramColumnHeader = (
 	metadata: ColumnMetadata,
 	color?: string,
@@ -155,3 +179,11 @@ function fixProps(
 	}
 	return updated
 }
+
+const CommandBarContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	padding: 8px 0px;
+	border-top: 1px solid ${({ theme }) => theme.application().faint().hex()};
+	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
+`

@@ -86,7 +86,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 				re-mounting the table.
 			</p>
 			<Pivot>
-				<PivotItem key={'table'} headerText={'table'}>
+				<PivotItem style={{ width: '96vw' }} key={'table'} headerText={'table'}>
 					<AddButton onClick={addNewColumn}>Add new column</AddButton>
 					<Table>
 						<ArqueroTableHeader
@@ -100,6 +100,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 							features={{
 								smartCells: true,
 								smartHeaders: true,
+								commandBar: 'a',
 							}}
 							columns={table.columnNames().map(x => {
 								return { name: x, key: x, fieldName: x } as IColumn

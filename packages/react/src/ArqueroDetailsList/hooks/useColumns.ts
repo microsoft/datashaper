@@ -17,6 +17,7 @@ import {
 } from '..'
 import {
 	createRenderColumnHeader,
+	createRenderCommandBarColumnHeader,
 	createRenderDefaultColumnHeader,
 	createRenderFeaturesCell,
 	createRenderHistogramColumnHeader,
@@ -32,6 +33,7 @@ import {
 } from '.'
 
 const DEFAULT_COLUMN_WIDTH = 100
+const COMMAND_BAR_COLUMN_WIDTH = 150
 
 export interface ColumnOptions {
 	features?: DetailsListFeatures
@@ -101,7 +103,6 @@ export function useColumns(
 			const column = columnMap[name] || {
 				key: name,
 				name,
-				minWidth: DEFAULT_COLUMN_WIDTH,
 				fieldName: name,
 			}
 
@@ -130,6 +131,11 @@ export function useColumns(
 				  )
 
 			const headerRenderers = [createRenderDefaultColumnHeader(column)]
+			if (features.commandBar) {
+				headerRenderers.push(
+					createRenderCommandBarColumnHeader(features.commandBar),
+				)
+			}
 			if (features.smartHeaders || features.statsColumnHeaders) {
 				headerRenderers.push(createRenderStatsColumnHeader(meta))
 			}
@@ -145,6 +151,9 @@ export function useColumns(
 				isSortedDescending: sortDirection === SortDirection.Descending,
 				styles,
 				...defaults,
+				minWidth: features.commandBar
+					? COMMAND_BAR_COLUMN_WIDTH
+					: DEFAULT_COLUMN_WIDTH,
 				data: {
 					selected: column.key === selectedColumn,
 					...column.data,
