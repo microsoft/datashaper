@@ -26,10 +26,8 @@ export function useSortHandling(
 			evt: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
 			column?: IColumn,
 		) => {
-			const isCommandBarEvent = evt?.nativeEvent['path'].find(
-				(pathComponent: { className: string }) =>
-					pathComponent.className &&
-					pathComponent.className.includes('command-bar'),
+			const isCommandBarEvent = (evt?.target as HTMLElement).closest(
+				'.command-bar',
 			)
 			if (isCommandBarEvent) return evt?.preventDefault()
 
