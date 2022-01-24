@@ -122,7 +122,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		)
 
 		const onPagesUpdated = useCallback(() => {
-			const height = commandBarDimensions().height
+			const { height } = commandBarDimensions()
 			if (commandBarHeight !== height) {
 				setCommandBarHeight(height)
 			}

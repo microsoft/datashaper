@@ -5,3 +5,4 @@
 export * from './hooks'
 export * from './styles'
 export * from './groups'
+export * from './functions'

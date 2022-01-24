@@ -11,11 +11,10 @@ import {
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
+	createDefaultCommandBar,
+	createLazyLoadingGroupHeader,
 } from '@data-wrangling-components/react'
-//TODO: create a helpers to be exported easily
-import { createLazyLoadingGroupHeader } from '@data-wrangling-components/react/src/ArqueroDetailsList/renderers'
 import {
-	CommandBar,
 	DefaultButton,
 	IColumn,
 	ICommandBarItemProps,
@@ -103,7 +102,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 				onClick: () => console.log('add', props),
 			},
 		] as ICommandBarItemProps[]
-		return <CommandBar items={items} />
+		return createDefaultCommandBar(items)
 	}, [])
 
 	const columns = useMemo((): IColumn[] | undefined => {

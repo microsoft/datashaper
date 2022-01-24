@@ -3,14 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
-import {
-	IColumn,
-	IDetailsColumnProps,
-	IDetailsGroupDividerProps,
-	IRenderFunction,
-} from '@fluentui/react'
+import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { ColumnClickFunction, ColumnRenderFunction } from '..'
-import { GroupHeader } from '../../controls'
 import { DetailsListFeatures, DropdownOptionSelect } from '../types'
 import { CommandBarContainer } from './CommandBarContainer'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
@@ -81,21 +75,6 @@ export const createRenderColumnHeader = (
 			</>
 		)
 	}
-
-export function createLazyLoadingGroupHeader(
-	props: IDetailsGroupDividerProps | undefined,
-	columnMetadata: ColumnMetadata | undefined,
-	children: any,
-): any {
-	if (!props || !columnMetadata) {
-		return null
-	}
-	return (
-		<GroupHeader props={props} columnMeta={columnMetadata} lazyLoadGroups>
-			{children}
-		</GroupHeader>
-	)
-}
 
 /**
  * Establish our own default rendering for column headers.
