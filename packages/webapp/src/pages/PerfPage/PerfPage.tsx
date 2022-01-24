@@ -12,12 +12,14 @@ import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 } from '@data-wrangling-components/react'
+//TODO: create a helpers to be exported easily
 import { createLazyLoadingGroupHeader } from '@data-wrangling-components/react/src/ArqueroDetailsList/renderers'
 import {
 	CommandBar,
 	DefaultButton,
 	IColumn,
 	ICommandBarItemProps,
+	IDetailsColumnProps,
 	IDetailsGroupDividerProps,
 	Pivot,
 	PivotItem,
@@ -77,28 +79,31 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		[],
 	)
 
-	const myCommand = useCallback(() => {
-		const _items = [
+	const myCommand = useCallback((props?: IDetailsColumnProps) => {
+		const items = [
 			{
 				key: 'edit',
 				text: 'Edit',
 				iconOnly: true,
 				iconProps: { iconName: 'Edit' },
+				onClick: () => console.log('edit', props),
 			},
 			{
 				key: 'delete',
 				text: 'Delete',
 				iconOnly: true,
 				iconProps: { iconName: 'Delete' },
+				onClick: () => console.log('delete', props),
 			},
 			{
 				key: 'add',
 				text: 'Add',
 				iconOnly: true,
 				iconProps: { iconName: 'Add' },
+				onClick: () => console.log('add', props),
 			},
 		] as ICommandBarItemProps[]
-		return <CommandBar items={_items} />
+		return <CommandBar items={items} />
 	}, [])
 
 	const columns = useMemo((): IColumn[] | undefined => {

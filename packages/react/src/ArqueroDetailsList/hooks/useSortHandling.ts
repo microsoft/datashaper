@@ -27,7 +27,7 @@ export function useSortHandling(
 			column?: IColumn,
 		) => {
 			const isCommandBarEvent = (evt?.target as HTMLElement).closest(
-				'.command-bar',
+				'.header-command-bar',
 			)
 			if (isCommandBarEvent) return evt?.preventDefault()
 

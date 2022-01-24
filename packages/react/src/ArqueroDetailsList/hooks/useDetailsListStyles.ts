@@ -24,6 +24,7 @@ const STATS_HEIGHT = 56
  */
 export function useDetailsListStyles(
 	isHeadersFixed: boolean,
+	commandBarHeight: number,
 	features?: DetailsListFeatures,
 	styles?: IDetailsListStyles,
 ): IDetailsListStyles {
@@ -39,6 +40,7 @@ export function useDetailsListStyles(
 							(features?.smartHeaders || features?.histogramColumnHeaders
 								? HISTOGRAM_HEIGHT
 								: 0) +
+							commandBarHeight +
 							(features?.smartHeaders || features?.statsColumnHeaders
 								? STATS_HEIGHT
 								: 0),
@@ -66,6 +68,6 @@ export function useDetailsListStyles(
 				},
 				styles,
 			),
-		[theme, styles, features, isHeadersFixed],
+		[theme, styles, features, isHeadersFixed, commandBarHeight],
 	)
 }

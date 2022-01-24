@@ -12,7 +12,7 @@ import {
 	ConstrainMode,
 } from '@fluentui/react'
 import { RowObject } from 'arquero/dist/types/table/table'
-import React, { memo, useEffect, useMemo, useState } from 'react'
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { groupBuilder } from '../common/'
 import {
@@ -27,6 +27,7 @@ import {
 	useStripedRowsRenderer,
 	useTableMetadata,
 	useSubsetTable,
+	useCommandBarDimensions,
 } from './hooks'
 import { ArqueroDetailsListProps, DetailsListFeatures } from '.'
 
@@ -63,6 +64,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		} = props
 
 		const [version, setVersion] = useState(0)
+		const [commandBarHeight, setCommandBarHeight] = useState(0)
+		const commandBarDimensions = useCommandBarDimensions()
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(isSortable, onColumnHeaderClick)
 
@@ -118,8 +121,16 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			},
 		)
 
+		const onPagesUpdated = useCallback(() => {
+			const height = commandBarDimensions().height
+			if (commandBarHeight !== height) {
+				setCommandBarHeight(height)
+			}
+		}, [commandBarHeight, setCommandBarHeight, commandBarDimensions])
+
 		const headerStyle = useDetailsListStyles(
 			isHeadersFixed,
+			commandBarHeight,
 			features,
 			styles as IDetailsListStyles,
 		)
@@ -179,7 +190,10 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					onRenderRow={renderRow}
 					onRenderDetailsHeader={renderDetailsHeader}
 					{...rest}
-					listProps={{ version }}
+					listProps={{
+						version,
+						onPagesUpdated: onPagesUpdated,
+					}}
 					styles={headerStyle}
 				/>
 			</DetailsWrapper>

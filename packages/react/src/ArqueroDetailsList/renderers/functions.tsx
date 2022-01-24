@@ -9,10 +9,10 @@ import {
 	IDetailsGroupDividerProps,
 	IRenderFunction,
 } from '@fluentui/react'
-import styled from 'styled-components'
 import { ColumnClickFunction, ColumnRenderFunction } from '..'
 import { GroupHeader } from '../../controls'
 import { DetailsListFeatures, DropdownOptionSelect } from '../types'
+import { CommandBarContainer } from './CommandBarContainer'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { FeaturesCell } from './FeaturesCell'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
@@ -135,11 +135,11 @@ export const createRenderCommandBarColumnHeader = (
 		}
 
 		return (
-			<CommandBarContainer key={props.columnIndex} className="command-bar">
-				{renderers.map((renderer, i) => (
-					<Command key={i}>{renderer(props)}</Command>
-				))}
-			</CommandBarContainer>
+			<CommandBarContainer
+				key={props.key}
+				props={props}
+				renderers={renderers}
+			/>
 		)
 	}
 }
@@ -174,13 +174,3 @@ function fixProps(
 	}
 	return updated
 }
-
-const Command = styled.div``
-const CommandBarContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 8px 0px;
-	border-top: 1px solid ${({ theme }) => theme.application().faint().hex()};
-	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
-`
