@@ -28,7 +28,6 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 8px 0px;
 	border-top: 1px solid ${({ theme }) => theme.application().faint().hex()};
 	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `

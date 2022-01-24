@@ -29,6 +29,10 @@ export function useColumnStyles(
 					? `1px solid ${theme.application().faint().hex(0.6)}`
 					: '1px solid transparent',
 			},
+			cellTooltip: {
+				display: 'initial',
+				position: 'relative',
+			},
 		}),
 		[theme, clickable, sortable, separator],
 	)

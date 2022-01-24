@@ -8,14 +8,6 @@ import { merge } from 'lodash'
 import { useMemo } from 'react'
 import { DetailsListFeatures } from '..'
 
-// this is the default built into fluent
-// minus the excess header top padding
-const DEFAULT_HEADER_HEIGHT = 45
-// add this for histograms
-const HISTOGRAM_HEIGHT = 28
-// add this for a stats data block
-const STATS_HEIGHT = 56
-
 /**
  * Create a DetailsHeader style with enough height to handle the options we've turned on.
  * Each one requires a small amount of vertical space that stacks up.
@@ -24,7 +16,6 @@ const STATS_HEIGHT = 56
  */
 export function useDetailsListStyles(
 	isHeadersFixed: boolean,
-	commandBarHeight: number,
 	features?: DetailsListFeatures,
 	styles?: IDetailsListStyles,
 ): IDetailsListStyles {
@@ -35,15 +26,6 @@ export function useDetailsListStyles(
 				{},
 				{
 					headerWrapper: {
-						height:
-							DEFAULT_HEADER_HEIGHT +
-							(features?.smartHeaders || features?.histogramColumnHeaders
-								? HISTOGRAM_HEIGHT
-								: 0) +
-							commandBarHeight +
-							(features?.smartHeaders || features?.statsColumnHeaders
-								? STATS_HEIGHT
-								: 0),
 						position: isHeadersFixed ? 'sticky' : 'inherit',
 						zIndex: '2',
 						top: '0',
@@ -56,6 +38,7 @@ export function useDetailsListStyles(
 								: 'unset',
 						selectors: {
 							'.ms-DetailsHeader': {
+								height: 'auto',
 								borderBottom:
 									!features?.smartHeaders &&
 									!features?.histogramColumnHeaders &&
@@ -63,11 +46,15 @@ export function useDetailsListStyles(
 										? `1px solid ${theme.application().faint().hex()}`
 										: 'unset',
 							},
+							'.ms-DetailsHeader-cell': {
+								height: 'auto',
+								padding: 'unset',
+							},
 						},
 					},
 				},
 				styles,
 			),
-		[theme, styles, features, isHeadersFixed, commandBarHeight],
+		[theme, styles, features, isHeadersFixed],
 	)
 }
