@@ -14,13 +14,14 @@ describe('test for select verb', () => {
 			input: 'table7',
 			output: 'output',
 			args: {
-				columns: { ID: 'ID', item: 'item' },
+				columns: ['ID', 'item'],
 			},
 		}
 
 		const store = new TestStore()
 
 		return select(step, store).then(result => {
+			expect(result.columnNames()).toEqual(['ID', 'item'])
 			expect(result.numCols()).toBe(2)
 			expect(result.numRows()).toBe(5)
 		})
