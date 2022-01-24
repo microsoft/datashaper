@@ -169,6 +169,10 @@ export interface Step<T = unknown> {
 	description?: string
 }
 
+export interface CompoundStep extends Step {
+	steps: Step[] | CompoundStep[]
+}
+
 export type StepFunction = (
 	step: Step,
 	store: TableStore,
@@ -202,10 +206,6 @@ export enum Verb {
 	Union = 'union',
 	Unorder = 'unorder',
 	Unroll = 'unroll',
-}
-
-export interface CompoundStep extends Step {
-	steps: Step[]
 }
 
 export interface CompoundBinarizeStep extends CompoundStep {
