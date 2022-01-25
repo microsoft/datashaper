@@ -26,11 +26,6 @@ export function useSortHandling(
 			evt: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
 			column?: IColumn,
 		) => {
-			const isCommandBarEvent = (evt?.target as HTMLElement).closest(
-				'.header-command-bar',
-			)
-			if (isCommandBarEvent) return evt?.preventDefault()
-
 			if (allowSorting) {
 				if (column?.isSorted) {
 					setSortDirection(

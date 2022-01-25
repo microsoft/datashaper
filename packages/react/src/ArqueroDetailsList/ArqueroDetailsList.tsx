@@ -58,6 +58,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			onColumnHeaderClick,
 			styles,
 			isHeadersFixed = false,
+			compact = false,
 			// passthrough the remainder as props
 			...rest
 		} = props
@@ -99,11 +100,16 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			anyStatsFeatures(features),
 		)
 
+		const isDefaultHeaderClickable = useMemo((): any => {
+			return isSortable || isColumnClickable || !!onColumnHeaderClick
+		}, [isSortable, isColumnClickable, onColumnHeaderClick])
+
 		const displayColumns = useColumns(
 			table,
 			computedMetadata,
 			columns,
 			visibleColumns,
+			handleColumnHeaderClick,
 			{
 				features,
 				sortColumn,
@@ -111,10 +117,11 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				selectedColumn,
 				onColumnClick,
 				onCellDropdownSelect,
+				isDefaultHeaderClickable,
 				includeAllColumns,
 				isColumnClickable,
-				isSortable,
 				showColumnBorders,
+				compact,
 			},
 		)
 
@@ -161,7 +168,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// a workaround found in the issues suggest to use this version property to use as comparisson to force re-render
 		useEffect(() => {
 			setVersion(prev => prev + 1)
-		}, [columns, table])
+		}, [columns, table, compact])
 
 		return (
 			<DetailsWrapper data-is-scrollable="true">
@@ -174,14 +181,15 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 						onRenderHeader: renderGroupHeader,
 					}}
 					columns={displayColumns as IColumn[]}
-					onColumnHeaderClick={handleColumnHeaderClick}
 					constrainMode={ConstrainMode.unconstrained}
 					onRenderRow={renderRow}
 					onRenderDetailsHeader={renderDetailsHeader}
+					compact={compact}
 					{...rest}
 					listProps={{
 						version,
 					}}
+					// cellStyleProps={{}}
 					styles={headerStyle}
 				/>
 			</DetailsWrapper>
@@ -198,6 +206,10 @@ const DetailsWrapper = styled.div`
 
 	span.ms-DetailsHeader-cellTitle {
 		background-color: ${({ theme }) => theme.application().background().hex()};
+	}
+
+	.ms-List-cell {
+		min-height: unset;
 	}
 `
 

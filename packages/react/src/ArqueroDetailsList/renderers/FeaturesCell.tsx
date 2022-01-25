@@ -4,10 +4,11 @@
  */
 import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
-import React, { memo, useCallback, useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 import { isEmpty, getValue, categories } from '../util'
 import { ArrayDropdownCell } from './ArrayDropdownCell'
+import { CellContainer } from './CellContainer'
 import { EmptyCell } from './EmptyCell'
 import { FeatureCellProps } from './types'
 import {
@@ -30,29 +31,10 @@ export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 		const { type } = metadata
 		const value = getValue(item, column)
 		const magnitude = useNumberMagnitude(type, value, metadata)
-		const handleColumnClick = useCallback(
-			ev => {
-				column &&
-					onColumnClick &&
-					onColumnClick(ev, column?.data?.selected ? undefined : column)
-			},
-			[column, onColumnClick],
-		)
-		const cellStyle = useMemo(() => {
-			const style: React.CSSProperties = {}
-			if (onColumnClick) {
-				style.cursor = 'pointer'
-			}
-			if (column?.data?.selected) {
-				style.fontWeight = 'bold'
-			}
-			return style
-		}, [onColumnClick, column])
-
 		const histo = categories(value)
 
 		return (
-			<div onClick={handleColumnClick} style={cellStyle}>
+			<CellContainer onClick={onColumnClick} column={column}>
 				<Switch>
 					<Case condition={isEmpty(value)}>
 						<EmptyCell
@@ -99,7 +81,7 @@ export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 						<DefaultCell {...props} />
 					</Default>
 				</Switch>
-			</div>
+			</CellContainer>
 		)
 	},
 )

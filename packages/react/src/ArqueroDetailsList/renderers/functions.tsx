@@ -84,13 +84,21 @@ export const createRenderColumnHeader = (
  */
 export const createRenderDefaultColumnHeader = (
 	originalProps: Partial<IColumn>,
+	isClickable: boolean,
+	handleColumnHeaderClick?: ColumnClickFunction,
 ): IRenderFunction<IDetailsColumnProps> =>
 	function renderDefaultColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
 			return null
 		}
 		const p = fixProps(originalProps, props)
-		return <DefaultColumnHeader {...p} />
+		return (
+			<DefaultColumnHeader
+				{...p}
+				isClickable={isClickable}
+				onClick={handleColumnHeaderClick}
+			/>
+		)
 	}
 
 export const createRenderStatsColumnHeader = (

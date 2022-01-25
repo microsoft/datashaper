@@ -18,7 +18,7 @@ const PADDING_HEIGHT = 8
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 	function HistogramColumnHeader({ metadata, color, ...props }) {
 		const { column } = props
-		const dimensions = useCellDimensions(column)
+		const dimensions = useCellDimensions(column, false)
 
 		const categorical = metadata.type === 'string'
 

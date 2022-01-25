@@ -4,9 +4,10 @@
  */
 import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
-import React, { memo, useCallback, useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 import { isEmpty, getValue } from '../util'
+import { CellContainer } from './CellContainer'
 import { EmptyCell } from './EmptyCell'
 import { RichCellProps } from './types'
 import {
@@ -28,26 +29,9 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	const { type } = metadata
 	const value = getValue(item, column)
 	const magnitude = useNumberMagnitude(type, value, metadata)
-	const handleColumnClick = useCallback(
-		ev => {
-			column &&
-				onColumnClick &&
-				onColumnClick(ev, column?.data?.selected ? undefined : column)
-		},
-		[column, onColumnClick],
-	)
-	const cellStyle = useMemo(() => {
-		const style: React.CSSProperties = {}
-		if (onColumnClick) {
-			style.cursor = 'pointer'
-		}
-		if (column?.data?.selected) {
-			style.fontWeight = 'bold'
-		}
-		return style
-	}, [onColumnClick, column])
+
 	return (
-		<div onClick={handleColumnClick} style={cellStyle}>
+		<CellContainer onClick={onColumnClick} column={column}>
 			<Switch>
 				<Case condition={isEmpty(value)}>
 					<EmptyCell textAlign={type === DataType.Number ? 'right' : 'left'} />
@@ -71,7 +55,7 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 					<ObjectCell {...props} />
 				</Default>
 			</Switch>
-		</div>
+		</CellContainer>
 	)
 })
 

@@ -5,17 +5,23 @@
 import { Icon, IDetailsColumnProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import React, { memo, useMemo } from 'react'
+import { ColumnClickFunction } from '..'
 import { useCellDimensions } from '../hooks'
 
-export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
-	function DefaultColumnHeader(props) {
+interface DefaultColumnHeaderProps extends IDetailsColumnProps {
+	isClickable: boolean
+	onClick?: ColumnClickFunction
+}
+
+export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
+	function DefaultColumnHeader({ column, isClickable, onClick }) {
 		const theme = useThematic()
-		const { column } = props
 		const { isSorted, isSortedDescending, iconName, iconClassName } = column
 		const dimensions = useCellDimensions(column)
 
 		const containerStyle = useMemo(
 			() => ({
+				cursor: isClickable ? 'pointer' : 'default',
 				display: 'flex',
 				justifyContent: 'space-between',
 				width: dimensions.width,
@@ -23,7 +29,7 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 					? `2px solid ${theme.application().accent().hex()}`
 					: `2px solid transparent`,
 			}),
-			[theme, dimensions, column],
+			[theme, dimensions, column, isClickable],
 		)
 
 		const textStyle = useMemo(
@@ -51,7 +57,7 @@ export const DefaultColumnHeader: React.FC<IDetailsColumnProps> = memo(
 		)
 
 		return (
-			<div style={containerStyle}>
+			<div onClick={e => onClick && onClick(e, column)} style={containerStyle}>
 				<div style={textStyle} title={column.name}>
 					{column.name}
 				</div>

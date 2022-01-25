@@ -31,5 +31,10 @@ export function createDefaultCommandBar(
 	items: ICommandBarItemProps[],
 	props?: ICommandBarProps | undefined,
 ): ReactElement<any, any> {
-	return <CommandBar {...props} items={items} />
+	const styles = {
+		root: {
+			height: '36px',
+		},
+	}
+	return <CommandBar styles={styles} {...props} items={items} />
 }
