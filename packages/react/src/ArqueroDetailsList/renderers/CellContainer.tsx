@@ -4,8 +4,8 @@
  */
 import { IColumn } from '@fluentui/react'
 import React, { memo, useCallback, useMemo } from 'react'
-import { ColumnClickFunction } from 'src'
 import styled from 'styled-components'
+import { ColumnClickFunction } from '..'
 
 interface CellContainerProps {
 	onClick?: ColumnClickFunction
