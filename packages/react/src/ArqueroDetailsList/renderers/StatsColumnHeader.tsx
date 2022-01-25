@@ -23,6 +23,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 		metadata,
 		stats = ['min', 'max', 'distinct', 'invalid'],
 		column,
+		onClick,
 	}) {
 		const theme = useThematic()
 		const cells = useMemo(() => {
@@ -35,17 +36,24 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 			})
 		}, [metadata, column, stats])
 		const title = useTooltip(metadata.stats)
+
+		const styles = useMemo(() => {
+			return {
+				// TODO: there is a layout issue resulting in this margin kludge
+				marginTop: -14,
+				height: 70,
+				fontWeight: 'normal',
+				fontSize: 10,
+				color: theme.application().midContrast().hex(),
+				cursor: onClick ? 'pointer' : 'default',
+			}
+		}, [onClick, theme])
+
 		return (
 			<div
+				onClick={e => onClick && onClick(e, column, metadata)}
 				title={title}
-				style={{
-					// TODO: there is a layout issue resulting in this margin kludge
-					marginTop: -14,
-					height: 70,
-					fontWeight: 'normal',
-					fontSize: 10,
-					color: theme.application().midContrast().hex(),
-				}}
+				style={styles}
 			>
 				{cells}
 			</div>

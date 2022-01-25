@@ -37,6 +37,12 @@ export type ColumnClickFunction = (
 	column?: IColumn | undefined,
 ) => void
 
+export type MetadataClickFunction = (
+	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+	column?: IColumn | undefined,
+	metadata?: ColumnMetadata,
+) => void
+
 export interface DetailsListFeatures {
 	/**
 	 * Includes stats and histograms in the headers of columns
@@ -47,9 +53,17 @@ export interface DetailsListFeatures {
 	 */
 	histogramColumnHeaders?: boolean
 	/**
+	 * If histogramColumnHeaders is true the user can pass a custom function to the click event
+	 */
+	onHistogramColumnHeaderClick?: MetadataClickFunction
+	/**
 	 * Include stats in the headers of columns.
 	 */
 	statsColumnHeaders?: boolean
+	/**
+	 * If statsColumnHeaders is true the user can pass a custom function to the click event
+	 */
+	onStatsColumnHeaderClick?: MetadataClickFunction
 	/**
 	 * Use embedded charts and vis based on data types and cell contents.
 	 */

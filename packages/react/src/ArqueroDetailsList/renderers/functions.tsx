@@ -5,7 +5,11 @@
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { ColumnClickFunction, ColumnRenderFunction } from '..'
-import { DetailsListFeatures, DropdownOptionSelect } from '../types'
+import {
+	DetailsListFeatures,
+	DropdownOptionSelect,
+	MetadataClickFunction,
+} from '../types'
 import { CommandBarContainer } from './CommandBarContainer'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { FeaturesCell } from './FeaturesCell'
@@ -103,13 +107,21 @@ export const createRenderDefaultColumnHeader = (
 
 export const createRenderStatsColumnHeader = (
 	metadata: ColumnMetadata,
+	onClick?: MetadataClickFunction,
 	stats?: string[],
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderStatsColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
 			return null
 		}
-		return <StatsColumnHeader metadata={metadata} stats={stats} {...props} />
+		return (
+			<StatsColumnHeader
+				onClick={onClick}
+				metadata={metadata}
+				stats={stats}
+				{...props}
+			/>
+		)
 	}
 }
 
@@ -134,13 +146,19 @@ export const createRenderCommandBarColumnHeader = (
 export const createRenderHistogramColumnHeader = (
 	metadata: ColumnMetadata,
 	color?: string,
+	onClick?: MetadataClickFunction,
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderHistogramColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
 			return null
 		}
 		return (
-			<HistogramColumnHeader metadata={metadata} color={color} {...props} />
+			<HistogramColumnHeader
+				onClick={onClick}
+				metadata={metadata}
+				color={color}
+				{...props}
+			/>
 		)
 	}
 }

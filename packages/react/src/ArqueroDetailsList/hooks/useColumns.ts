@@ -143,10 +143,21 @@ export function useColumns(
 				)
 			}
 			if (features.smartHeaders || features.statsColumnHeaders) {
-				headerRenderers.push(createRenderStatsColumnHeader(meta))
+				headerRenderers.push(
+					createRenderStatsColumnHeader(
+						meta,
+						features.onStatsColumnHeaderClick,
+					),
+				)
 			}
 			if (features.smartHeaders || features.histogramColumnHeaders) {
-				headerRenderers.push(createRenderHistogramColumnHeader(meta, color))
+				headerRenderers.push(
+					createRenderHistogramColumnHeader(
+						meta,
+						color,
+						features.onHistogramColumnHeaderClick,
+					),
+				)
 			}
 
 			return {

@@ -17,7 +17,7 @@ const PADDING_HEIGHT = 8
  */
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 	function HistogramColumnHeader({ metadata, color, ...props }) {
-		const { column } = props
+		const { column, onClick } = props
 		const dimensions = useCellDimensions(column, false)
 
 		const categorical = metadata.type === 'string'
@@ -27,23 +27,36 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const categories = useCategories(metadata.stats, categorical)
 		const title = useTooltip(categories)
 
+		const styles = useMemo(() => {
+			return {
+				height: dimensions.height + PADDING_HEIGHT,
+				cursor: onClick ? 'pointer' : 'default',
+			}
+		}, [onClick, dimensions])
+
 		// don't render a single bar
 		if (metadata.stats?.distinct === 1) {
 			return null
 		}
 
 		return (
-			<div title={title} style={{ height: dimensions.height + PADDING_HEIGHT }}>
+			<>
 				{bins ? (
-					<Sparkbar
-						categorical={categorical}
-						data={values}
-						width={dimensions.width - 1}
-						height={dimensions.height}
-						color={color}
-					/>
+					<div
+						onClick={e => onClick && bins && onClick(e, column, metadata)}
+						title={title}
+						style={styles}
+					>
+						<Sparkbar
+							categorical={categorical}
+							data={values}
+							width={dimensions.width - 1}
+							height={dimensions.height}
+							color={color}
+						/>
+					</div>
 				) : null}
-			</div>
+			</>
 		)
 	},
 )
