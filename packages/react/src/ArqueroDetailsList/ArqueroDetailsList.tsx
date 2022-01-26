@@ -169,12 +169,12 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// a workaround found in the issues suggest to use this version property to use as comparisson to force re-render
 		useEffect(() => {
 			setVersion(prev => prev + 1)
-		}, [columns, table, compact, features])
+		}, [columns, table, compact])
 
 		return (
 			<DetailsWrapper data-is-scrollable="true">
 				<DetailsList
-					items={items}
+					items={[...items]}
 					selectionMode={selectionMode}
 					layoutMode={layoutMode}
 					groups={groups}
