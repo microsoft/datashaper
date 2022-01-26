@@ -17,6 +17,7 @@ import {
 } from '..'
 import {
 	createRenderColumnHeader,
+	createRenderCommandBarColumnHeader,
 	createRenderDefaultColumnHeader,
 	createRenderFeaturesCell,
 	createRenderHistogramColumnHeader,
@@ -42,8 +43,9 @@ export interface ColumnOptions {
 	onCellDropdownSelect?: DropdownOptionSelect
 	includeAllColumns?: boolean
 	isColumnClickable?: boolean
-	isSortable?: boolean
+	isDefaultHeaderClickable?: boolean
 	showColumnBorders?: boolean
+	compact?: boolean
 }
 
 /**
@@ -59,6 +61,7 @@ export function useColumns(
 	computedMetadata: TableMetadata,
 	columns?: IColumn[],
 	visibleColumns?: string[],
+	handleColumnHeaderClick?: ColumnClickFunction,
 	options: ColumnOptions = {},
 ): IColumn[] {
 	const {
@@ -70,8 +73,9 @@ export function useColumns(
 		onCellDropdownSelect,
 		includeAllColumns = false,
 		isColumnClickable = false,
-		isSortable = false,
+		isDefaultHeaderClickable = false,
 		showColumnBorders = false,
+		compact = false,
 	} = options
 
 	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
@@ -82,11 +86,7 @@ export function useColumns(
 
 	const colorScale = useIncrementingColumnColorScale(computedMetadata)
 
-	const styles = useColumnStyles(
-		isColumnClickable,
-		isSortable,
-		showColumnBorders,
-	)
+	const styles = useColumnStyles(isColumnClickable, showColumnBorders)
 
 	const names = useColumnNamesList(
 		table,
@@ -129,12 +129,35 @@ export function useColumns(
 						handleCellDropdownSelect,
 				  )
 
-			const headerRenderers = [createRenderDefaultColumnHeader(column)]
+			const headerRenderers = [
+				createRenderDefaultColumnHeader(
+					column,
+					isDefaultHeaderClickable,
+					handleColumnHeaderClick,
+				),
+			]
+
+			if (features.commandBar) {
+				headerRenderers.push(
+					createRenderCommandBarColumnHeader(features.commandBar),
+				)
+			}
 			if (features.smartHeaders || features.statsColumnHeaders) {
-				headerRenderers.push(createRenderStatsColumnHeader(meta))
+				headerRenderers.push(
+					createRenderStatsColumnHeader(
+						meta,
+						features.onStatsColumnHeaderClick,
+					),
+				)
 			}
 			if (features.smartHeaders || features.histogramColumnHeaders) {
-				headerRenderers.push(createRenderHistogramColumnHeader(meta, color))
+				headerRenderers.push(
+					createRenderHistogramColumnHeader(
+						meta,
+						color,
+						features.onHistogramColumnHeaderClick,
+					),
+				)
 			}
 
 			return {
@@ -147,6 +170,7 @@ export function useColumns(
 				...defaults,
 				data: {
 					selected: column.key === selectedColumn,
+					compact,
 					...column.data,
 				},
 			}
@@ -161,9 +185,12 @@ export function useColumns(
 		onColumnClick,
 		handleCellClick,
 		styles,
+		compact,
 		computedMetadata,
 		colorScale,
 		handleCellDropdownSelect,
+		isDefaultHeaderClickable,
+		handleColumnHeaderClick,
 	])
 }
 

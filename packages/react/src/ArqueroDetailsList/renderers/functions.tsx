@@ -3,15 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
-import {
-	IColumn,
-	IDetailsColumnProps,
-	IDetailsGroupDividerProps,
-	IRenderFunction,
-} from '@fluentui/react'
+import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { ColumnClickFunction, ColumnRenderFunction } from '..'
-import { GroupHeader } from '../../controls'
-import { DetailsListFeatures, DropdownOptionSelect } from '../types'
+import {
+	DetailsListFeatures,
+	DropdownOptionSelect,
+	MetadataClickFunction,
+} from '../types'
+import { CommandBarContainer } from './CommandBarContainer'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { FeaturesCell } from './FeaturesCell'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
@@ -81,21 +80,6 @@ export const createRenderColumnHeader = (
 		)
 	}
 
-export function createLazyLoadingGroupHeader(
-	props: IDetailsGroupDividerProps | undefined,
-	columnMetadata: ColumnMetadata | undefined,
-	children: any,
-): any {
-	if (!props || !columnMetadata) {
-		return null
-	}
-	return (
-		<GroupHeader props={props} columnMeta={columnMetadata} lazyLoadGroups>
-			{children}
-		</GroupHeader>
-	)
-}
-
 /**
  * Establish our own default rendering for column headers.
  * This gives us full control over the layout so we can cleanly
@@ -104,37 +88,77 @@ export function createLazyLoadingGroupHeader(
  */
 export const createRenderDefaultColumnHeader = (
 	originalProps: Partial<IColumn>,
+	isClickable: boolean,
+	handleColumnHeaderClick?: ColumnClickFunction,
 ): IRenderFunction<IDetailsColumnProps> =>
 	function renderDefaultColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
 			return null
 		}
 		const p = fixProps(originalProps, props)
-		return <DefaultColumnHeader {...p} />
+		return (
+			<DefaultColumnHeader
+				{...p}
+				isClickable={isClickable}
+				onClick={handleColumnHeaderClick}
+			/>
+		)
 	}
 
 export const createRenderStatsColumnHeader = (
 	metadata: ColumnMetadata,
+	onClick?: MetadataClickFunction,
 	stats?: string[],
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderStatsColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
 			return null
 		}
-		return <StatsColumnHeader metadata={metadata} stats={stats} {...props} />
+		return (
+			<StatsColumnHeader
+				onClick={onClick}
+				metadata={metadata}
+				stats={stats}
+				{...props}
+			/>
+		)
+	}
+}
+
+export const createRenderCommandBarColumnHeader = (
+	renderers: IRenderFunction<IDetailsColumnProps>[],
+): IRenderFunction<IDetailsColumnProps> => {
+	return function renderCommandBarColumnHeader(props?, defaultRender?) {
+		if (!props || !defaultRender) {
+			return null
+		}
+
+		return (
+			<CommandBarContainer
+				key={props.key}
+				props={props}
+				renderers={renderers}
+			/>
+		)
 	}
 }
 
 export const createRenderHistogramColumnHeader = (
 	metadata: ColumnMetadata,
 	color?: string,
+	onClick?: MetadataClickFunction,
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderHistogramColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
 			return null
 		}
 		return (
-			<HistogramColumnHeader metadata={metadata} color={color} {...props} />
+			<HistogramColumnHeader
+				onClick={onClick}
+				metadata={metadata}
+				color={color}
+				{...props}
+			/>
 		)
 	}
 }
