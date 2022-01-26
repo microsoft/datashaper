@@ -21,7 +21,7 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 
 		const containerStyle = useMemo(
 			() => ({
-				cursor: isClickable ? 'pointer' : 'default',
+				cursor: isClickable ? 'pointer' : 'inherit',
 				display: 'flex',
 				justifyContent: 'space-between',
 				width: dimensions.width,

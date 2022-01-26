@@ -18,6 +18,7 @@ export function useDetailsListStyles(
 	isHeadersFixed: boolean,
 	features?: DetailsListFeatures,
 	styles?: IDetailsListStyles,
+	hasColumnClick?: boolean,
 ): IDetailsListStyles {
 	const theme = useThematic()
 	return useMemo(
@@ -47,6 +48,7 @@ export function useDetailsListStyles(
 										: 'unset',
 							},
 							'.ms-DetailsHeader-cell': {
+								cursor: hasColumnClick ? 'pointer' : 'default',
 								height: 'auto',
 								padding: 'unset',
 							},
@@ -55,6 +57,6 @@ export function useDetailsListStyles(
 				},
 				styles,
 			),
-		[theme, styles, features, isHeadersFixed],
+		[theme, styles, features, isHeadersFixed, hasColumnClick],
 	)
 }

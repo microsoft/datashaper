@@ -129,6 +129,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			isHeadersFixed,
 			features,
 			styles as IDetailsListStyles,
+			!!onColumnClick,
 		)
 
 		const renderRow = useStripedRowsRenderer(isStriped, showColumnBorders)

@@ -30,7 +30,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const styles = useMemo(() => {
 			return {
 				height: dimensions.height + PADDING_HEIGHT,
-				cursor: onClick ? 'pointer' : 'default',
+				cursor: onClick ? 'pointer' : 'inherit',
 			}
 		}, [onClick, dimensions])
 

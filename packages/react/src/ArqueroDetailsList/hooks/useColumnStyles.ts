@@ -20,7 +20,7 @@ export function useColumnStyles(
 			sortIcon: {
 				display: 'none',
 			},
-			cursor: clickable ? 'pointer' : 'default',
+			cursor: clickable ? 'pointer' : 'inherit',
 			cellTitle: {
 				borderRight: separator
 					? `1px solid ${theme.application().faint().hex(0.6)}`
