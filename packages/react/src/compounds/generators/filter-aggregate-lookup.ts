@@ -16,17 +16,12 @@ import {
 	FilterArgs,
 	AggregateArgs,
 } from '@data-wrangling-components/core'
+import { merge } from 'lodash'
 
 const FINAL_OUTPUT = 'filter-aggregate-lookup-final-output-table'
 
-export type StepChain = Step & {
-	output: string
-	steps: [JoinStep, FilterStep, AggregateStep, LookupStep]
-}
-
-export function defaults(parent: Step): StepChain {
-	return {
-		...parent,
+export function defaults(parent: Step): CompoundStep {
+	return merge({}, parent, {
 		output: FINAL_OUTPUT,
 		steps: [
 			defaultJoin(parent),
@@ -34,31 +29,31 @@ export function defaults(parent: Step): StepChain {
 			defaultAggregate(parent),
 			defaultLookup(parent),
 		],
-	}
+	})
 }
 
 function mergeSteps(
-	parent: StepChain,
+	parent: CompoundStep,
 	join: JoinStep,
 	filter: FilterStep,
 	aggregate: AggregateStep,
 	lookup: LookupStep,
-): StepChain {
+): CompoundStep {
 	return { ...parent, steps: [join, filter, aggregate, lookup] }
 }
 
-export function updateAs(parent: StepChain, to: string): StepChain {
-	const [join, filter, aggregate, lookup] = parent.steps
+export function updateAs(parent: CompoundStep, to: string): CompoundStep {
+	const [join, filter, aggregate, lookup] = getSteps(parent)
 	aggregate.args.to = to
 	lookup.args.columns = [to]
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
 
 export function updateIdentifierColumn(
-	parent: StepChain,
+	parent: CompoundStep,
 	column: string,
-): StepChain {
-	const [join, filter, aggregate, lookup] = parent.steps
+): CompoundStep {
+	const [join, filter, aggregate, lookup] = getSteps(parent)
 	join.args.on = [column]
 	aggregate.args.groupby = column
 	lookup.args.on = [column]
@@ -66,32 +61,38 @@ export function updateIdentifierColumn(
 }
 
 export function updateLookupColumn(
-	parent: StepChain,
+	parent: CompoundStep,
 	column: string,
-): StepChain {
-	const [join, filter, aggregate, lookup] = parent.steps
+): CompoundStep {
+	const [join, filter, aggregate, lookup] = getSteps(parent)
 	filter.args.column = column
 	aggregate.args.column = column
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
 
-export function updateLookupTable(parent: StepChain, table: string): StepChain {
-	const [join, filter, aggregate, lookup] = parent.steps
+export function updateLookupTable(
+	parent: CompoundStep,
+	table: string,
+): CompoundStep {
+	const [join, filter, aggregate, lookup] = getSteps(parent)
 	join.args.other = table
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
 
-export function updateFilter(parent: StepChain, step: FilterStep): StepChain {
-	const [join, filter, aggregate, lookup] = parent.steps
+export function updateFilter(
+	parent: CompoundStep,
+	step: FilterStep,
+): CompoundStep {
+	const [join, filter, aggregate, lookup] = getSteps(parent)
 	filter.args = step.args
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
 
 export function updateAggregateOperation(
-	parent: StepChain,
+	parent: CompoundStep,
 	operation: FieldAggregateOperation,
-): StepChain {
-	const [join, filter, aggregate, lookup] = parent.steps
+): CompoundStep {
+	const [join, filter, aggregate, lookup] = getSteps(parent)
 	aggregate.args.operation = operation
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
@@ -139,6 +140,16 @@ function defaultLookup(parent: Step): LookupStep {
 			columns: ['aggregate'],
 		},
 	}
+}
+
+function getSteps(
+	step: CompoundStep,
+): [JoinStep, FilterStep, AggregateStep, LookupStep] {
+	const join = getJoin(step)
+	const aggregate = getAggregate(step)
+	const lookup = getLookup(step)
+	const filter = getFilter(step)
+	return [join, filter, aggregate, lookup]
 }
 
 export function getJoin(step: CompoundStep): JoinStep {

@@ -8,9 +8,10 @@ import { TableStore } from '..'
 import { CompoundStep, Step, StepFunction } from '../types'
 import { verb } from './verbs'
 
-// TODO: we should just make the run method recursive
 const compound = async (step: Step | CompoundStep, store: TableStore) => {
-	return run((step as CompoundStep).steps, store)
+	// clone the store so substeps do not pollute the parent
+	const clone = store.clone()
+	return run((step as CompoundStep).steps, clone)
 }
 
 const functions: Record<string, StepFunction> = {
@@ -36,8 +37,9 @@ export async function run(
 	let output: ColumnTable = table({})
 	for (let index = 0; index < steps.length; index++) {
 		const step = steps[index]
+		const { type } = step
 		try {
-			output = await functions[step.type](step, store)
+			output = await functions[type](step, store)
 			store.set(step.output, output)
 		} catch (e) {
 			console.error(`Pipeline failed on step ${index}`, step)

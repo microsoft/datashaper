@@ -41,7 +41,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 		const filter = useMemo(() => getFilter(internal), [internal])
 		const aggregate = useMemo(() => getAggregate(internal), [internal])
 
-		const rightTable = useLoadTable(input || internal.input, table, store)
+		const rightTable = useLoadTable(join.args.other, table, store)
 
 		const handleLookupTableChange = useCallback(
 			(e, opt) => {
