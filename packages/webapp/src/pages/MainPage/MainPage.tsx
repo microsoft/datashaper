@@ -67,6 +67,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const handleRunClick = useCallback(async () => {
 		const res = await pipeline.run()
 		const output = await store.toMap()
+		pipeline.print()
 		store.print()
 		setResult(res)
 		setOutputs(output)

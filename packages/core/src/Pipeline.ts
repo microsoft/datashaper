@@ -75,4 +75,7 @@ export class Pipeline {
 	async run(): Promise<ColumnTable> {
 		return run(this._steps, this._store)
 	}
+	print(): void {
+		console.log(this._steps)
+	}
 }

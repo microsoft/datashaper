@@ -8,6 +8,8 @@ import {
 	IDetailsListProps,
 	IDropdownOption,
 	IDetailsGroupDividerProps,
+	IRenderFunction,
+	IDetailsColumnProps,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -35,6 +37,12 @@ export type ColumnClickFunction = (
 	column?: IColumn | undefined,
 ) => void
 
+export type MetadataClickFunction = (
+	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+	column?: IColumn | undefined,
+	metadata?: ColumnMetadata,
+) => void
+
 export interface DetailsListFeatures {
 	/**
 	 * Includes stats and histograms in the headers of columns
@@ -45,9 +53,17 @@ export interface DetailsListFeatures {
 	 */
 	histogramColumnHeaders?: boolean
 	/**
+	 * If histogramColumnHeaders is true the user can pass a custom function to the click event
+	 */
+	onHistogramColumnHeaderClick?: MetadataClickFunction
+	/**
 	 * Include stats in the headers of columns.
 	 */
 	statsColumnHeaders?: boolean
+	/**
+	 * If statsColumnHeaders is true the user can pass a custom function to the click event
+	 */
+	onStatsColumnHeaderClick?: MetadataClickFunction
 	/**
 	 * Use embedded charts and vis based on data types and cell contents.
 	 */
@@ -84,6 +100,11 @@ export interface DetailsListFeatures {
 	 * Collapse most groups so we can lazy load them. Default as true
 	 */
 	lazyLoadGroups?: boolean
+
+	/**
+	 * Receive elements to render in the column header as commands, passing the column details to be used in the component
+	 */
+	commandBar?: IRenderFunction<IDetailsColumnProps>[]
 }
 
 export interface ArqueroDetailsListProps

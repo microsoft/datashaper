@@ -9,6 +9,7 @@ import {
 	ColumnClickFunction,
 	DetailsListFeatures,
 	DropdownOptionSelect,
+	MetadataClickFunction,
 } from '..'
 
 export type Dimensions = {
@@ -66,6 +67,7 @@ export interface RichHeaderProps extends IDetailsColumnProps {
 	metadata: ColumnMetadata
 	color?: string
 	stats?: string[]
+	onClick?: MetadataClickFunction
 }
 
 export interface RichRowProps extends IDetailsRowProps {

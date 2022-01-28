@@ -4,6 +4,7 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { cloneDeep } from 'lodash'
 
 export type ResolverFunction = (name: string) => Promise<ColumnTable>
 
@@ -25,13 +26,14 @@ export interface TableContainer {
 
 /**
  * Manages a set of tables with async loading.
+ * TODO: enforce creation via a factory?
  */
 export class TableStore {
 	private _tables: Map<string, TableContainer>
 	private _changeListeners: ChangeListenerFunction[]
 	private _tableListeners: Record<string, ListenerFunction>
-	constructor() {
-		this._tables = new Map<string, TableContainer>()
+	constructor(tables?: Map<string, TableContainer>) {
+		this._tables = tables || new Map<string, TableContainer>()
 		this._changeListeners = []
 		this._tableListeners = {}
 	}
@@ -152,5 +154,12 @@ export class TableStore {
 			const table = await this.get(names[i])
 			table.print()
 		}
+	}
+	/**
+	 * Deeps clones the tables in this store for creating sub-contexts, etc.
+	 * @returns
+	 */
+	clone(): TableStore {
+		return new TableStore(cloneDeep(this._tables))
 	}
 }

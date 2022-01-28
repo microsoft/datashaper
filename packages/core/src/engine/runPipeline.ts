@@ -23,6 +23,7 @@ export async function runPipeline(
 
 	// make sure each step has an input/output
 	// if missing we'll just chain them sequentially
+	// TODO: do this recusively for compound steps as well
 	const internal = (isArray(steps) ? steps : [steps]).map((step, idx, arr) => {
 		const copy = {
 			...step,

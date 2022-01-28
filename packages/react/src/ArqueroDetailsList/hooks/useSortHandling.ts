@@ -22,7 +22,10 @@ export function useSortHandling(
 		SortDirection.Ascending,
 	)
 	const handleColumnHeaderClick = useCallback(
-		(evt, column?: IColumn) => {
+		(
+			evt: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+			column?: IColumn,
+		) => {
 			if (allowSorting) {
 				if (column?.isSorted) {
 					setSortDirection(
