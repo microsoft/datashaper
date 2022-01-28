@@ -3,15 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { CommandBar, ICommandBarItemProps } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
-import React, { memo, useMemo, useCallback, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
+import { CommandBar } from './CommandBar'
 import { TableName } from './TableName'
+import { HEIGHT } from './constants'
 import { useColumnCounts, useCommands } from './hooks'
 import { ArqueroTableHeaderProps } from '.'
-
-const HEIGHT = 36
 
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader({
@@ -20,26 +18,24 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		showRowCount = true,
 		showColumnCount = true,
 		commands,
+		farCommands,
 		visibleColumns,
 		onRenameTable,
 	}) {
-		const [overflowCommands, setOverflowCommands] = useState()
-		const commandItems = useCommandItems(commands, overflowCommands)
-
+		const commandItems = useCommands(commands)
+		const farCommandItems = useCommands(farCommands)
 		const groupCount = useMemo((): any => {
 			return table.isGrouped() ? table.groups().size : 0
 		}, [table])
 
 		// TODO: we can do the same thing for rows when a filter is applied
 		const columnCounts = useColumnCounts(table, visibleColumns)
-		const overflowButtonProps = useOverflowButtonProps()
-		const handleDataDidRender = useHandleDataDidRender(
-			overflowCommands,
-			setOverflowCommands,
-		)
 		return (
 			<Header>
-				<TableName onRenameTable={onRenameTable} name={name} />
+				{commandItems.length > 0 ? (
+					<CommandBar commands={commandItems} />
+				) : null}
+				{name ? <TableName onRenameTable={onRenameTable} name={name} /> : null}
 				{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
 				{showColumnCount === true ? (
 					<H3>
@@ -48,90 +44,15 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					</H3>
 				) : null}
 				{groupCount ? <H3>{groupCount} groups</H3> : null}
-				{commandItems.length > 0 ? (
-					<CommandBar
-						items={commandItems}
-						styles={commandStyles}
-						overflowButtonProps={overflowButtonProps}
-						dataDidRender={handleDataDidRender}
-						className="command-bar"
-					/>
+				{farCommandItems.length > 0 ? (
+					// Best way to have a command bar in the far right
+					// that handles overflow in case there are too many commands
+					<CommandBar commands={farCommandItems} />
 				) : null}
 			</Header>
 		)
 	},
 )
-
-const useCommandItems = (commands, overflowCommands) => {
-	const commandItems = useCommands(commands)
-	return useMemo(() => {
-		return overflowCommands || commandItems
-	}, [overflowCommands, commandItems])
-}
-
-const useHandleDataDidRender = (overflowCommands, setOverflowCommands) => {
-	const iconProps = useIconProps()
-	return useCallback(
-		data => {
-			const { overflowItems } = data
-			if (overflowItems.length) {
-				if (!overflowCommands) {
-					const commands = overflowItems.map(command => ({
-						...command,
-						iconProps: iconProps(command),
-						text: command.text || command.title || '',
-					}))
-					setOverflowCommands(commands)
-				}
-			} else {
-				setOverflowCommands(undefined)
-			}
-		},
-		[overflowCommands, iconProps, setOverflowCommands],
-	)
-}
-
-const useOverflowButtonProps = () => {
-	const theme = useThematic()
-	return useMemo(
-		() => ({
-			styles: {
-				root: {
-					background: theme.application().accent().hex(),
-				},
-				menuIcon: {
-					color: theme.application().background().hex(),
-				},
-			},
-		}),
-		[theme],
-	)
-}
-
-const useIconProps = (): ((
-	item: ICommandBarItemProps,
-) => ICommandBarItemProps) => {
-	const theme = useThematic()
-	return useCallback(
-		(item: ICommandBarItemProps) => ({
-			...item.iconProps,
-			styles: {
-				root: {
-					color: theme.application().foreground().hex(),
-				},
-			},
-		}),
-		[theme],
-	)
-}
-
-const commandStyles = {
-	root: {
-		height: HEIGHT,
-		background: 'none',
-		padding: 0,
-	},
-}
 
 const Header = styled.div`
 	height: ${HEIGHT}px;
@@ -143,9 +64,6 @@ const Header = styled.div`
 	display: inline-flex;
 	align-items: center;
 	justify-content: space-around;
-	.command-bar {
-		width: 25%;
-	}
 `
 
 const H3 = styled.h3`
