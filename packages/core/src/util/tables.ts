@@ -214,9 +214,7 @@ function categories(
 	reqStats: Record<string, any>,
 	limit = 20,
 ) {
-	// TODO: we could do this with numeric too if there are a small number of uniques
-	// direct bin counting could be better with numbers if there is a small variety.
-	// also note we're going to limit it this to columns with a small number of unique values.
+	// note we're going to limit it this to columns with a small number of unique values.
 	// it just doesn't make sense to count everything that is distinct if we can't plot/display it
 	const text = table.columnNames(name => {
 		const mode = reqStats[`${name}.mode`]
