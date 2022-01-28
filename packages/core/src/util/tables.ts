@@ -144,9 +144,9 @@ function binning(
 	})
 	const binArgs = numeric.reduce((acc, cur) => {
 		const min = optStats[`${cur}.min`]
-		// note the slight over on max to avoid arquero binning into exclusive max
-		const max = optStats[`${cur}.max`] + 1e-6
-		acc[cur] = fixedBinCount(cur, min, max, 10)
+		const max = optStats[`${cur}.max`]
+		const distinct = reqStats[`${cur}.distinct`]
+		acc[cur] = fixedBinCount(cur, min, max, 10, true, distinct)
 		return acc
 	}, {} as Record<string, any>)
 
@@ -154,8 +154,11 @@ function binning(
 
 	// for each binned column, derive a sorted & counted subtable.
 	// note that only bins with at least one entry will have a row,
-	// so we could have less than 10 bins
+	// so we could have less than 10 bins - hence the fill
 	const counted = numeric.reduce((acc, cur) => {
+		const min = optStats[`${cur}.min`]
+		const max = optStats[`${cur}.max`]
+		const distinct = reqStats[`${cur}.distinct`]
 		const bins = binRollup
 			.groupby(cur)
 			.count()
@@ -169,11 +172,41 @@ function binning(
 		if (bins[0].min === null) {
 			bins[0].min = '(empty)'
 		}
-		acc[`${cur}.bins`] = bins
+		// make sure we actually have 10
+		acc[`${cur}.bins`] = fillBins(bins, min, max, 10, distinct)
 		return acc
 	}, {} as Record<string, Bin[]>)
 
 	return counted
+}
+
+function fillBins(
+	bins: Bin[],
+	min: number,
+	max: number,
+	count: number,
+	distinct: number,
+): Bin[] {
+	if (distinct <= count) {
+		return bins
+	}
+	const step = (max - min) / count
+	const hash = bins.reduce((acc, cur) => {
+		acc[cur.min] = cur
+		return acc
+	}, {} as Record<string, Bin>)
+	const mins = new Array(10).fill(step).map((v, i) => v * i + min)
+	const filled = mins.map(
+		v =>
+			hash[v] || {
+				min: v,
+				count: 0,
+			},
+	)
+	if (bins[0].min === '(empty)') {
+		filled.unshift(bins[0])
+	}
+	return filled
 }
 
 function categories(
@@ -181,9 +214,7 @@ function categories(
 	reqStats: Record<string, any>,
 	limit = 20,
 ) {
-	// TODO: we could do this with numeric too if there are a small number of uniques
-	// direct bin counting could be better with numbers if there is a small variety.
-	// also note we're going to limit it this to columns with a small number of unique values.
+	// note we're going to limit it this to columns with a small number of unique values.
 	// it just doesn't make sense to count everything that is distinct if we can't plot/display it
 	const text = table.columnNames(name => {
 		const mode = reqStats[`${name}.mode`]

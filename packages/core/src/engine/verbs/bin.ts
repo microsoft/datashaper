@@ -37,15 +37,15 @@ export async function bin(step: Step, store: TableStore): Promise<ColumnTable> {
 function binExpr(input: ColumnTable, args: BinArgs) {
 	const { strategy, column, fixedwidth, fixedcount, clamped } = args
 	const stats = getStats(input, column, args.min, args.max)
-	const [min, max] = stats
+	const [min, max, distinct] = stats
 	switch (strategy) {
 		case BinStrategy.Auto:
 			// just let arquero do its thing
 			return aqbin(column)
 		case BinStrategy.FixedWidth:
-			return fixedBinStep(column, min, max, fixedwidth || 1, clamped)
+			return fixedBinStep(column, min, max, fixedwidth || 1, clamped, distinct)
 		case BinStrategy.FixedCount:
-			return fixedBinCount(column, min, max, fixedcount || 1, clamped)
+			return fixedBinCount(column, min, max, fixedcount || 1, clamped, distinct)
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
 	}
@@ -57,11 +57,12 @@ function getStats(
 	column: string,
 	min?: number,
 	max?: number,
-): [number, number] {
+): [number, number, number] {
 	const rollup = table.rollup({
 		min: op.min(column),
 		max: op.max(column),
+		distinct: op.distinct(column),
 	})
 	const stats = rollup.objects()[0]
-	return [min || stats.min, max || stats.max]
+	return [min || stats.min, max || stats.max, stats.distinct]
 }
