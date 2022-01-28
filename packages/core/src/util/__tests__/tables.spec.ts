@@ -108,8 +108,8 @@ describe('table utilities', () => {
 		})
 
 		describe('bins', () => {
+			// for our default stats we specify 10 bins - let's test with a column that has enough rows for this
 			test('exactly 10 distinct', () => {
-				// for our default stats we specify 10 bins - let's test with a column that has enough rows for this
 				const binnable: ColumnTable = table({
 					values: [8, 9, 10, 1, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6, 7],
 				})
@@ -123,7 +123,6 @@ describe('table utilities', () => {
 			})
 
 			test('more than 10 distinct, still 10 bins', () => {
-				// for our default stats we specify 10 bins - let's test with a column that has enough rows for this
 				const binnable: ColumnTable = table({
 					values: [
 						8, 9, 10, 1, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6, 7, 11, 12, 13, 14,
@@ -138,8 +137,43 @@ describe('table utilities', () => {
 				expect(bins[0].min).toBe(1)
 			})
 
+			test('null values add one bonus bin', () => {
+				const binnable: ColumnTable = table({
+					values: [
+						null,
+						null,
+						undefined,
+						8,
+						9,
+						10,
+						1,
+						2,
+						3,
+						3,
+						4,
+						5,
+						6,
+						6,
+						6,
+						6,
+						6,
+						7,
+						11,
+						12,
+						13,
+						14,
+					],
+				})
+				const { values } = stats(binnable)
+				expect(values.count).toBe(22)
+				expect(values.distinct).toBe(15)
+				const { bins = [] } = values
+				expect(bins).toHaveLength(11)
+				// ensure the bins are sorted ascending numerically
+				expect(bins[0].min).toBe('(empty)')
+			})
+
 			test('less than 10 distinct will use unique values', () => {
-				// for our default stats we specify 10 bins - let's test with a column that has enough rows for this
 				const binnable: ColumnTable = table({
 					values: [8, 9, 1, 2, 3, 3, 4, 5, 6, 6, 6, 6, 6],
 				})
@@ -150,6 +184,48 @@ describe('table utilities', () => {
 				expect(bins).toHaveLength(8)
 				const mins = bins.map(b => b.min)
 				expect(mins).toEqual([1, 2, 3, 4, 5, 6, 8, 9])
+			})
+
+			test('empty bins are filled in to complete 10', () => {
+				const binnable: ColumnTable = table({
+					values: [1, 2, 3, 4, 50, 60, 61, 61, 100, 101, 102, 1000, 1001],
+				})
+				const { values } = stats(binnable)
+				expect(values.count).toBe(13)
+				expect(values.distinct).toBe(12)
+				const { bins = [] } = values
+				expect(bins).toHaveLength(10)
+				// ensure the bins are sorted ascending numerically
+				expect(bins[0].min).toBe(1)
+			})
+
+			test('empty bins are filled in to complete 10, nulls still add one bin', () => {
+				const binnable: ColumnTable = table({
+					values: [
+						1,
+						2,
+						3,
+						4,
+						50,
+						60,
+						61,
+						61,
+						100,
+						101,
+						102,
+						1000,
+						1001,
+						null,
+						null,
+					],
+				})
+				const { values } = stats(binnable)
+				expect(values.count).toBe(15)
+				expect(values.distinct).toBe(13)
+				const { bins = [] } = values
+				expect(bins).toHaveLength(11)
+				// ensure the bins are sorted ascending numerically
+				expect(bins[0].min).toBe('(empty)')
 			})
 		})
 

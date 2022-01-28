@@ -38,7 +38,7 @@ export type ColumnStats = {
 }
 
 export type Bin = {
-	min: number
+	min: number | string
 	count: number
 }
 
