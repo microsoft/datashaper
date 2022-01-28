@@ -41,3 +41,54 @@ export function coerce(value: Value, dataType: DataType): Value {
 			return value
 	}
 }
+
+/**
+ * Returns a nice formatted string for a number
+ * @param value
+ * @param options
+ */
+export function format(
+	value: number,
+	options?: { minExp?: number; precision?: number },
+): string {
+	if (value === 0) {
+		return '0'
+	}
+	const { minExp = 5, precision = 2 } = options || {}
+	const getExp = (value: number, exp = 0): number =>
+		value % 10 === 0 ? getExp(value / 10, exp + 1) : exp
+	let exp
+
+	if (Number.isInteger(value)) {
+		exp = getExp(value)
+		if (!Number.isInteger(exp) || exp === 0 || exp <= minExp) {
+			return value + ''
+		}
+	} else {
+		exp = Math.floor(Math.log10(value))
+		if (Math.abs(exp) <= minExp) {
+			const fixed = value.toFixed(precision)
+			const parsed = Number.parseFloat(fixed)
+			return parsed + ''
+		}
+	}
+	const mantissa = value / Math.pow(10, exp)
+	return `${mantissa}e${exp}`
+}
+
+/**
+ * Returns a formatted string for a number, otherwise returns the original value
+ * @param value
+ */
+export function formatIfNumber(value: Value): string | Value {
+	if (typeof value === 'number') {
+		return format(value)
+	}
+	if (typeof value === 'string') {
+		const parsed = Number.parseFloat(value)
+		if (Number.isFinite(parsed)) {
+			return format(parsed)
+		}
+	}
+	return value
+}

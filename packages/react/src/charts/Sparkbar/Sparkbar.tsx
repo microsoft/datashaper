@@ -21,6 +21,8 @@ export interface SparkbarProps {
 	height: number
 	categorical?: boolean
 	color?: string | string[]
+	legend?: string[]
+	onBarHover?: (event) => void
 }
 
 /**
@@ -32,6 +34,8 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	height,
 	categorical = false,
 	color,
+	legend,
+	onBarHover,
 }) {
 	const theme = useThematic()
 	const ref = useRef(null)
@@ -65,9 +69,11 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 			// clear the line if the data changes
 			group.selectAll('*').remove()
 			group
-				.selectAll('.bar')
+				.selectAll('.bar-group')
 				.data(data)
 				.enter()
+				.append('g')
+				.attr('class', 'bar-group')
 				.append('line')
 				.attr('class', 'bar')
 				.attr('x1', xScale)
@@ -77,6 +83,20 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 				.call(themeLine as any, theme.line())
 				.attr('stroke-width', barWidth)
 				.attr('stroke', (d, i) => (categorical ? colors[i] : colors))
+				.attr('data-legend', (d, i) => (legend?.length ? legend[i] : d))
+				.attr('data-index', (d, i) => i)
+				.attr(
+					'id',
+					(d, i) => `bar-${i}-${d}-${Math.round(Math.random() * 100)}`,
+				)
+				.on('mouseover mouseout', onBarHover)
+			// Alternative to onBarHover tooltip
+			if (!onBarHover) {
+				group
+					.selectAll('.bar-group')
+					.append('title')
+					.text((d, i) => (legend?.length ? legend[i] : d))
+			}
 		}
 	}, [
 		theme,
@@ -88,6 +108,8 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 		colors,
 		categorical,
 		barWidth,
+		legend,
+		onBarHover,
 	])
 	return <svg ref={ref} />
 })
