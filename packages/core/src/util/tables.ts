@@ -144,9 +144,9 @@ function binning(
 	})
 	const binArgs = numeric.reduce((acc, cur) => {
 		const min = optStats[`${cur}.min`]
-		// note the slight over on max to avoid arquero binning into exclusive max
-		const max = optStats[`${cur}.max`] + 1e-6
-		acc[cur] = fixedBinCount(cur, min, max, 10)
+		const max = optStats[`${cur}.max`]
+		const distinct = reqStats[`${cur}.distinct`]
+		acc[cur] = fixedBinCount(cur, min, max, 10, true, distinct)
 		return acc
 	}, {} as Record<string, any>)
 
