@@ -58,7 +58,7 @@ export function format(
 	const getExp = (value: number, exp = 0): number =>
 		value % 10 === 0 ? getExp(value / 10, exp + 1) : exp
 	let exp
-
+	let mantissa
 	if (Number.isInteger(value)) {
 		exp = getExp(value)
 		if (!Number.isInteger(exp) || exp === 0 || exp <= minExp) {
@@ -66,13 +66,15 @@ export function format(
 		}
 	} else {
 		exp = Math.floor(Math.log10(value))
-		if (Math.abs(exp) <= minExp) {
+		mantissa = value / Math.pow(10, exp)
+		if (Math.abs(exp) <= minExp || !Number.isInteger(mantissa)) {
 			const fixed = value.toFixed(precision)
 			const parsed = Number.parseFloat(fixed)
 			return parsed + ''
 		}
 	}
-	const mantissa = value / Math.pow(10, exp)
+
+	mantissa = value / Math.pow(10, exp)
 	return `${mantissa}e${exp}`
 }
 
