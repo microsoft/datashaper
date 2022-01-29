@@ -2,74 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { BinStrategy, TableStore } from '../..'
-import { Step, StepFunction, StepType, Verb } from '../../types'
-
-import { aggregate } from './aggregate'
-import { bin } from './bin'
-import { binarize } from './binarize'
-import { concat } from './concat'
-import { dedupe } from './dedupe'
-import { derive } from './derive'
-import { difference } from './difference'
-import { fetch } from './fetch'
-import { fill } from './fill'
-import { filter } from './filter'
-import { fold } from './fold'
-import { groupby } from './groupby'
-import { impute } from './impute'
-import { intersect } from './intersect'
-import { join } from './join'
-import { lookup } from './lookup'
-import { orderby } from './orderby'
-import { recode } from './recode'
-import { rename } from './rename'
-import { rollup } from './rollup'
-import { sample } from './sample'
-import { select } from './select'
-import { spread } from './spread'
-import { ungroup } from './ungroup'
-import { union } from './union'
-import { unorder } from './unorder'
-import { unroll } from './unroll'
-
-const verbs: Record<string, StepFunction> = {
-	aggregate,
-	bin,
-	binarize,
-	concat,
-	dedupe,
-	derive,
-	difference,
-	fetch,
-	fill,
-	filter,
-	fold,
-	groupby,
-	impute,
-	intersect,
-	join,
-	lookup,
-	orderby,
-	recode,
-	rename,
-	rollup,
-	sample,
-	select,
-	spread,
-	ungroup,
-	union,
-	unorder,
-	unroll,
-}
-
-export async function verb(
-	step: Step,
-	store: TableStore,
-): Promise<ColumnTable> {
-	return verbs[step.verb](step, store)
-}
+import { BinStrategy } from '../..'
+import { Step, StepType, Verb } from '../../types'
 
 /**
  * Factory function to create new verb configs

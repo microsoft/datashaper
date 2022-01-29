@@ -182,6 +182,7 @@ export enum Verb {
 	Aggregate = 'aggregate',
 	Bin = 'bin',
 	Binarize = 'binarize',
+	Chain = 'chain',
 	Concat = 'concat',
 	Dedupe = 'dedupe',
 	Derive = 'derive',
@@ -303,6 +304,18 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 }
 
 export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {}
+
+export interface ChainArgs {
+	/**
+	 * List of steps to execute
+	 */
+	steps: Step<unknown>[]
+	/**
+	 * Whether to prevent forking of child context when running steps recursively.
+	 * Normally the Chain clones the parent context to prevent pollution.
+	 */
+	nofork: boolean
+}
 
 export type DedupeArgs = Partial<InputColumnListArgs>
 
