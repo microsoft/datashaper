@@ -19,7 +19,7 @@ export function useSortHandling(
 ): SortParameters {
 	const [sortColumn, setSortColumn] = useState<string | undefined>()
 	const [sortDirection, setSortDirection] = useState<SortDirection>(
-		SortDirection.Ascending,
+		SortDirection.Unsorted,
 	)
 	const handleColumnHeaderClick = useCallback(
 		(
@@ -31,6 +31,8 @@ export function useSortHandling(
 					setSortDirection(
 						sortDirection === SortDirection.Ascending
 							? SortDirection.Descending
+							: sortDirection === SortDirection.Descending
+							? SortDirection.Unsorted
 							: SortDirection.Ascending,
 					)
 				}

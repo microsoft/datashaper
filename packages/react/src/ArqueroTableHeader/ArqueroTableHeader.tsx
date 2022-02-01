@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import React, { memo, useMemo } from 'react'
+import { useDimensions } from '@essex-js-toolkit/hooks'
+import React, { memo, useMemo, useRef } from 'react'
 import styled from 'styled-components'
 import { CommandBar } from './CommandBar'
 import { TableName } from './TableName'
@@ -22,6 +23,8 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		visibleColumns,
 		onRenameTable,
 	}) {
+		const ref = useRef(null)
+		const { width } = useDimensions(ref) || { width: 0 }
 		const commandItems = useCommands(commands)
 		const farCommandItems = useCommands(farCommands)
 		const groupCount = useMemo((): any => {
@@ -31,7 +34,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		// TODO: we can do the same thing for rows when a filter is applied
 		const columnCounts = useColumnCounts(table, visibleColumns)
 		return (
-			<Header>
+			<Header ref={ref}>
 				{commandItems.length > 0 ? (
 					<CommandBar commands={commandItems} />
 				) : null}
@@ -47,7 +50,11 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 				{farCommandItems.length > 0 ? (
 					// Best way to have a command bar in the far right
 					// that handles overflow in case there are too many commands
-					<CommandBar commands={farCommandItems} />
+					// If the bar is too wide, then only use 10% of it for the commands
+					<CommandBar
+						commands={farCommandItems}
+						width={width >= 992 ? '10%' : undefined}
+					/>
 				) : null}
 			</Header>
 		)

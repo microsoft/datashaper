@@ -2,7 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { CommandBar as CB, ICommandBarItemProps } from '@fluentui/react'
+import {
+	CommandBar as CB,
+	ICommandBarItemProps,
+	IIconProps,
+} from '@fluentui/react'
+import { Application } from '@thematic/core'
 import { useThematic } from '@thematic/react'
 import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -10,16 +15,18 @@ import { HEIGHT } from './constants'
 
 interface CommandBarProps {
 	commands: ICommandBarItemProps[]
+	width?: string
 }
 
 export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	commands,
+	width,
 }) {
 	const overflowButtonProps = useOverflowButtonProps()
 	const handleOnDataReduce = useHandleOnDataReduce()
 	const handleOnDataGrown = useHandleOnDataGrown()
 	return (
-		<CommandBarWrapper>
+		<CommandBarWrapper width={width}>
 			<CB
 				items={commands}
 				styles={commandStyles}
@@ -72,14 +79,14 @@ const useOverflowButtonProps = () => {
 const useIconProps = (): ((
 	item: ICommandBarItemProps,
 	color?: string,
-) => ICommandBarItemProps) => {
+) => IIconProps) => {
 	const theme = useThematic()
 	return useCallback(
 		(item: ICommandBarItemProps, color = 'foreground') => ({
 			...item.iconProps,
 			styles: {
 				root: {
-					color: theme.application()[color]().hex(),
+					color: theme.application()[color as keyof Application]().hex(),
 				},
 			},
 		}),
@@ -95,6 +102,6 @@ const commandStyles = {
 	},
 }
 
-const CommandBarWrapper = styled.div`
-	width: 25%;
+const CommandBarWrapper = styled.div<{ width?: string }>`
+	width: ${({ width }) => width || '25%'};
 `

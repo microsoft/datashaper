@@ -22,7 +22,7 @@ export interface SparkbarProps {
 	categorical?: boolean
 	color?: string | string[]
 	legend?: string[]
-	onBarHover?: (event) => void
+	onBarHover?: (event: MouseEvent) => void
 }
 
 /**
@@ -89,13 +89,14 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 					'id',
 					(d, i) => `bar-${i}-${d}-${Math.round(Math.random() * 100)}`,
 				)
-				.on('mouseover mouseout', onBarHover)
 			// Alternative to onBarHover tooltip
 			if (!onBarHover) {
 				group
 					.selectAll('.bar-group')
 					.append('title')
-					.text((d, i) => (legend?.length ? legend[i] : d))
+					.text((d, i) => (legend?.length ? legend[i] : (d as string)))
+			} else {
+				group.selectAll('.bar').on('mouseover mouseout', onBarHover)
 			}
 		}
 	}, [

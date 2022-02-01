@@ -110,7 +110,7 @@ function useTooltip(categories: Category[]): string {
 	}, [categories])
 }
 
-function useLegend(categories: Category[]): string {
+function useLegend(categories: Category[]): string[] {
 	return useMemo(() => {
 		return categories.map(cat => `${formatIfNumber(cat.name)}: ${cat.count}`)
 	}, [categories])

@@ -7,7 +7,8 @@ import {
 	TableStore,
 	Pipeline,
 } from '@data-wrangling-components/core'
-import { fromCSV, loadCSV } from 'arquero'
+import { BaseFile } from '@data-wrangling-components/utilities'
+import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -68,10 +69,10 @@ export function usePipeline(store: TableStore): Pipeline {
 }
 
 export function useLoadTableFiles(): (
-	files: File[],
+	files: BaseFile[],
 ) => Promise<Map<string, ColumnTable>> {
 	return useCallback(
-		async (files: File[]): Promise<Map<string, ColumnTable>> => {
+		async (files: BaseFile[]): Promise<Map<string, ColumnTable>> => {
 			const list = await Promise.all(files.map(readTable))
 			return list.reduce((acc, cur) => {
 				acc.set(cur[0], cur[1])
@@ -82,47 +83,13 @@ export function useLoadTableFiles(): (
 	)
 }
 
-export function useLoadSpecFile(): (file: File) => Promise<Specification> {
-	return useCallback(async (file: File): Promise<Specification> => {
-		return readSpec(file)
+export function useLoadSpecFile(): (file: BaseFile) => Promise<Specification> {
+	return useCallback(async (file: BaseFile): Promise<Specification> => {
+		return file.toJson()
 	}, [])
 }
 
-async function readSpec(file: File): Promise<Specification> {
-	return new Promise((resolve, reject) => {
-		const reader = createReader()
-		reader.onload = () => {
-			try {
-				const text = reader.result ? reader.result.toString() : ''
-				const spec = JSON.parse(text) as Specification
-				resolve(spec)
-			} catch (e) {
-				reject(e)
-			}
-		}
-		reader.readAsBinaryString(file)
-	})
-}
-
-async function readTable(file: File): Promise<[string, ColumnTable]> {
-	return new Promise((resolve, reject) => {
-		const reader = createReader()
-		reader.onload = () => {
-			try {
-				const text = reader.result ? reader.result.toString() : ''
-				const table = fromCSV(text)
-				resolve([file.name, table])
-			} catch (e) {
-				reject(e)
-			}
-		}
-		reader.readAsBinaryString(file)
-	})
-}
-
-function createReader() {
-	const reader = new FileReader()
-	reader.onabort = () => console.log('file reading was aborted')
-	reader.onerror = () => console.log('file reading has failed')
-	return reader
+async function readTable(file: BaseFile): Promise<[string, ColumnTable]> {
+	const table = await file.toTable()
+	return [file.name, table]
 }
