@@ -144,9 +144,10 @@ export function fixedBinCount(
 	max: number,
 	count: number,
 	clamped?: boolean,
-): string {
+	distinct?: number,
+): string | object {
 	const step = (max - min) / count
-	return fixedBinStep(column, min, max, step, clamped)
+	return fixedBinStep(column, min, max, step, clamped, distinct)
 }
 
 export function fixedBinStep(
@@ -155,20 +156,29 @@ export function fixedBinStep(
 	max: number,
 	step: number,
 	clamped?: boolean,
-): string {
-	return coreExpr(column, min, max, step, clamped)
-}
-
-function coreExpr(
-	column: string,
-	min: number,
-	max: number,
-	step: number,
-	clamped?: boolean,
-): string {
-	const core = `op.bin(d['${column}'],${min},${max},${step})`
-	if (clamped) {
-		return `d['${column}'] < ${min} ? ${min} : d['${column}'] > ${max} ? ${max} : ${core}`
-	}
-	return core
+	distinct?: number,
+): string | object {
+	const count = Math.ceil((max - min) / step)
+	const ultimate = min + step * count
+	const penultimate = min + step * (count - 1)
+	// if the ultimate bin is >= the max, put those values in the prior bin
+	// this is due to arquero's exclusive max bound, which will just bin those exact
+	// matches into the final bin, disrupting the expected bin count by adding one
+	const rebinmax = ultimate >= max
+	const nobin = distinct !== undefined && distinct <= count
+	return escape((d: any) => {
+		const value = d[column]
+		if (nobin) {
+			return value
+		}
+		const candidate = op.bin(value, min, max, step)
+		if (clamped) {
+			if (candidate === -Infinity) {
+				return min
+			} else if (candidate === Infinity) {
+				return rebinmax ? penultimate : ultimate
+			}
+		}
+		return candidate === max && rebinmax ? penultimate : candidate
+	})
 }
