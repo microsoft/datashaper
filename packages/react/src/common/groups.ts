@@ -11,7 +11,7 @@ function sortValueGroupsItems(
 	entries: RowObject[],
 	existingGroups: any,
 	nextLevel: number,
-	sortDirection: SortDirection,
+	sortDirection?: SortDirection,
 	sortColumn?: string | undefined,
 ): RowObject[] {
 	const columnName = existingGroups.names[nextLevel]
@@ -27,7 +27,7 @@ export function groupBuilder(
 	actualLevel: number,
 	totalLevelCount: number,
 	items: RowObject[],
-	sortDirection: SortDirection,
+	sortDirection?: SortDirection,
 	lazyLoadGroups = true,
 	sortColumn?: string,
 	fatherIndex = 0,

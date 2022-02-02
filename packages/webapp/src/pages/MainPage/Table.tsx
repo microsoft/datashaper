@@ -78,7 +78,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				name={name}
 				showRowCount={true}
 				showColumnCount={true}
-				commands={commands}
+				farCommands={commands}
 				visibleColumns={visibleColumns}
 				onRenameTable={onRenameTable}
 			/>
