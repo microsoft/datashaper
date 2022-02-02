@@ -12,6 +12,7 @@
 		"build": "essex build"
 	},
 	"dependencies": {
+		"@essex-js-toolkit/hooks": "^3.0.2",
 		"core-js": "^3.20.2",
 		"d3-format": "^3.1.0",
 		"d3-scale": "^4.0.2",
@@ -24,7 +25,6 @@
 	"devDependencies": {
 		"@data-wrangling-components/core": "workspace:packages/core",
 		"@data-wrangling-components/utilities": "workspace:packages/utilities",
-		"@essex-js-toolkit/hooks": "^3.0.2",
 		"@essex-js-toolkit/themed-components": "^1.3.2",
 		"@essex/scripts": "^19.0.5",
 		"@essex/vite-config": "^18.0.2",
