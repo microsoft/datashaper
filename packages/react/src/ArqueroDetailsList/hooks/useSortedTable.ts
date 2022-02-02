@@ -15,7 +15,7 @@ export function useSortedTable(
 	return useMemo(() => {
 		let columns: string[] = []
 		const isColumnOnTable = table.columnNames().includes(column || '')
-		if (sort === SortDirection.Unsorted) {
+		if (!sort) {
 			return table
 		}
 		if (((!column || !sort) && !table.isGrouped()) || !isColumnOnTable) {

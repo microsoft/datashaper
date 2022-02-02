@@ -9,7 +9,7 @@ import { ColumnClickFunction } from '..'
 
 export interface SortParameters {
 	sortColumn?: string
-	sortDirection: SortDirection
+	sortDirection?: SortDirection
 	handleColumnHeaderClick: ColumnClickFunction
 }
 
@@ -18,9 +18,9 @@ export function useSortHandling(
 	onColumnHeaderClick?: ColumnClickFunction,
 ): SortParameters {
 	const [sortColumn, setSortColumn] = useState<string | undefined>()
-	const [sortDirection, setSortDirection] = useState<SortDirection>(
-		SortDirection.Unsorted,
-	)
+	const [sortDirection, setSortDirection] = useState<
+		SortDirection | undefined
+	>()
 	const handleColumnHeaderClick = useCallback(
 		(
 			evt: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
@@ -32,7 +32,7 @@ export function useSortHandling(
 						sortDirection === SortDirection.Ascending
 							? SortDirection.Descending
 							: sortDirection === SortDirection.Descending
-							? SortDirection.Unsorted
+							? undefined
 							: SortDirection.Ascending,
 					)
 				}

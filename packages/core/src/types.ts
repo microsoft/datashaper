@@ -104,7 +104,6 @@ export enum SetOp {
 export enum SortDirection {
 	Ascending = 'asc',
 	Descending = 'desc',
-	Unsorted = 'unsorted',
 }
 
 export enum StepType {

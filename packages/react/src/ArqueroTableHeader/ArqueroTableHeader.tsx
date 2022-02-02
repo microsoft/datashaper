@@ -38,15 +38,19 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 				{commandItems.length > 0 ? (
 					<CommandBar commands={commandItems} />
 				) : null}
-				{name ? <TableName onRenameTable={onRenameTable} name={name} /> : null}
-				{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
-				{showColumnCount === true ? (
-					<H3>
-						{columnCounts.total} cols{' '}
-						{columnCounts.hidden > 0 ? `(${columnCounts.hidden} hidden)` : ''}
-					</H3>
-				) : null}
-				{groupCount ? <H3>{groupCount} groups</H3> : null}
+				<Metadata>
+					{name ? (
+						<TableName onRenameTable={onRenameTable} name={name} />
+					) : null}
+					{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
+					{showColumnCount === true ? (
+						<H3>
+							{columnCounts.total} cols{' '}
+							{columnCounts.hidden > 0 ? `(${columnCounts.hidden} hidden)` : ''}
+						</H3>
+					) : null}
+					{groupCount ? <H3>{groupCount} groups</H3> : null}
+				</Metadata>
 				{farCommandItems.length > 0 ? (
 					// Best way to have a command bar in the far right
 					// that handles overflow in case there are too many commands
@@ -68,9 +72,9 @@ const Header = styled.div`
 	position: relative;
 	padding: 0 5px;
 	box-sizing: border-box;
-	display: inline-flex;
+	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 `
 
 const H3 = styled.h3`
@@ -78,4 +82,11 @@ const H3 = styled.h3`
 	font-size: 0.8em;
 	margin: 0 8px 0 0;
 	color: ${({ theme }) => theme.application().background().hex()};
+`
+
+const Metadata = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0 1rem;
 `
