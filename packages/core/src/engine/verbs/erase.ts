@@ -4,23 +4,33 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { RowObject } from 'arquero/dist/types/table/table'
 import { TableStore } from '../..'
-import { FoldArgs, Step } from '../../types'
+import { FillArgs, Step } from '../../types'
+import { from } from 'arquero'
 
 /**
- * Executes an arquero fold operation. This creates two new columns:
- * one with the column name as key, the other with the row value.
+ * Executes an arquero erase operation.
  * @param step
  * @param store
  * @returns
  */
-export async function fold(
+
+export async function erase(
 	step: Step,
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { columns, to } = args as FoldArgs
+	const { value, to } = args as FillArgs
 	const inputTable = await store.get(input)
 
-	return inputTable.fold(columns, { as: to })
+	let matrix: RowObject[] = inputTable.objects()
+
+	matrix.forEach(row => {
+		if (row[to] === value) {
+			row[to] = undefined
+		}
+	})
+
+	return from(matrix)
 }

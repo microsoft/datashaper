@@ -10,6 +10,12 @@ import { TableStore } from './TableStore'
  */
 export type Value = any
 
+export enum MergeStrategy {
+	FirstOneWins = 'firstOneWins',
+	LastOneWins = 'lastOneWins',
+	Concat = 'concat',
+}
+
 export enum DataType {
 	Array = 'array',
 	Boolean = 'boolean',
@@ -182,6 +188,7 @@ export enum Verb {
 	Dedupe = 'dedupe',
 	Derive = 'derive',
 	Difference = 'difference',
+	Erase = 'erase',
 	Fetch = 'fetch',
 	Fill = 'fill',
 	Filter = 'filter',
@@ -191,6 +198,8 @@ export enum Verb {
 	Intersect = 'intersect',
 	Join = 'join',
 	Lookup = 'lookup',
+	Merge = 'merge',
+	Pivot = 'pivot',
 	Orderby = 'orderby',
 	Recode = 'recode',
 	Rename = 'rename',
@@ -218,6 +227,7 @@ export type BinarizeStep = Step<BinarizeArgs>
 export type ColumnListStep = Step<InputColumnListArgs>
 export type DedupeStep = Step<DedupeArgs>
 export type DeriveStep = Step<DeriveArgs>
+export type EraseStep = Step<FillArgs>
 export type ImputeStep = Step<FillArgs>
 export type FetchStep = Step<FetchArgs>
 export type FillStep = Step<FillArgs>
@@ -226,6 +236,8 @@ export type FoldStep = Step<FoldArgs>
 export type GroupbyStep = Step<GroupbyArgs>
 export type JoinStep = Step<JoinArgs>
 export type LookupStep = Step<LookupArgs>
+export type MergeStep = Step<MergeArgs>
+export type PivotStep = Step<FoldArgs>
 export type OrderbyStep = Step<OrderbyArgs>
 export type RecodeStep = Step<RecodeArgs>
 export type RenameStep = Step<RenameArgs>
@@ -415,6 +427,10 @@ export interface SampleArgs {
 export type SelectArgs = InputColumnListArgs
 
 export type SpreadArgs = InputColumnListArgs
+
+export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
+	strategy: MergeStrategy
+}
 
 export interface OrderbyArgs {
 	/**

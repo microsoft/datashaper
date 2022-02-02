@@ -14,7 +14,7 @@ import { FoldArgs, Step } from '../../types'
  * @param store
  * @returns
  */
-export async function fold(
+export async function pivot(
 	step: Step,
 	store: TableStore,
 ): Promise<ColumnTable> {
@@ -22,5 +22,7 @@ export async function fold(
 	const { columns, to } = args as FoldArgs
 	const inputTable = await store.get(input)
 
-	return inputTable.fold(columns, { as: to })
+	inputTable.print()
+
+	return inputTable.pivot('key', 'value')
 }
