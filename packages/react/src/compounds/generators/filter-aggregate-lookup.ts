@@ -9,7 +9,6 @@ import {
 	JoinStep,
 	LookupStep,
 	Step,
-	StepType,
 	Verb,
 	FieldAggregateOperation,
 	JoinArgs,
@@ -100,7 +99,6 @@ export function updateAggregateOperation(
 
 function defaultJoin(parent: Step): JoinStep {
 	return {
-		type: StepType.Verb,
 		verb: Verb.Join,
 		input: parent.input,
 		output: 'compound-join',
@@ -110,7 +108,6 @@ function defaultJoin(parent: Step): JoinStep {
 
 function defaultFilter(_parent: Step): FilterStep {
 	return {
-		type: StepType.Verb,
 		verb: Verb.Filter,
 		input: 'compound-join',
 		output: 'compound-filter',
@@ -120,7 +117,6 @@ function defaultFilter(_parent: Step): FilterStep {
 
 function defaultAggregate(_parent: Step): AggregateStep {
 	return {
-		type: StepType.Verb,
 		verb: Verb.Aggregate,
 		input: 'compound-filter',
 		output: 'compound-aggregate',
@@ -130,7 +126,6 @@ function defaultAggregate(_parent: Step): AggregateStep {
 
 function defaultLookup(parent: Step): LookupStep {
 	return {
-		type: StepType.Verb,
 		verb: Verb.Lookup,
 		input: parent.input,
 		output: parent.output,

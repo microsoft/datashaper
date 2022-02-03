@@ -3,7 +3,6 @@
 	"description": "Chains every available operation together for an easy look at all UX and output examples",
 	"steps": [
 		{
-			"type": "verb",
 			"verb": "aggregate",
 			"input": "data/products.csv",
 			"output": "aggregate-1",
@@ -15,7 +14,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "aggregate",
 			"input": "data/products.csv",
 			"output": "aggregate-2",
@@ -27,7 +25,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "bin",
 			"input": "data/products.csv",
 			"output": "bin-1",
@@ -38,7 +35,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "binarize",
 			"input": "data/products.csv",
 			"output": "binarize-1",
@@ -50,7 +46,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "concat",
 			"input": "data/companies.csv",
 			"output": "concat-1",
@@ -59,7 +54,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "derive",
 			"input": "data/products.csv",
 			"output": "derive-1",
@@ -71,7 +65,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "difference",
 			"input": "data/companies.csv",
 			"output": "difference-1",
@@ -80,7 +73,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "fill",
 			"input": "data/companies.csv",
 			"output": "fill-1",
@@ -90,7 +82,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "filter",
 			"input": "data/companies.csv",
 			"output": "filter-1",
@@ -101,7 +92,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "fold",
 			"input": "data/companies.csv",
 			"output": "fold-1",
@@ -110,7 +100,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "groupby",
 			"input": "data/products.csv",
 			"output": "groupby-1",
@@ -119,7 +108,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "intersect",
 			"input": "data/companies.csv",
 			"output": "intersect-1",
@@ -128,7 +116,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "join",
 			"input": "data/companies.csv",
 			"output": "join-1",
@@ -138,7 +125,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "lookup",
 			"input": "data/companies.csv",
 			"output": "lookup-1",
@@ -149,7 +135,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "orderby",
 			"input": "data/companies.csv",
 			"output": "orderby-1",
@@ -163,7 +148,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "recode",
 			"input": "data/companies.csv",
 			"output": "recode-1",
@@ -180,7 +164,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "rename",
 			"input": "data/companies.csv",
 			"output": "rename-1",
@@ -191,7 +174,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "sample",
 			"input": "data/companies.csv",
 			"output": "sample-1",
@@ -200,7 +182,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "select",
 			"input": "data/companies.csv",
 			"output": "select-1",
@@ -209,7 +190,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "spread",
 			"input": "aggregate-2",
 			"output": "spread-1",
@@ -218,7 +198,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "union",
 			"input": "data/companies.csv",
 			"output": "union-1",
@@ -227,7 +206,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "unroll",
 			"input": "aggregate-2",
 			"output": "unroll-1",

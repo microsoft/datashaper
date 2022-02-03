@@ -106,11 +106,6 @@ export enum SortDirection {
 	Descending = 'desc',
 }
 
-export enum StepType {
-	Verb = 'verb',
-	Compound = 'compound',
-}
-
 export enum FilterCompareType {
 	Value = 'value',
 	Column = 'column',
@@ -159,8 +154,7 @@ export interface Specification {
 }
 
 export interface Step<T = unknown> {
-	type: StepType
-	verb: Verb
+	verb: Verb | string
 	input: string
 	output: string
 	args: T

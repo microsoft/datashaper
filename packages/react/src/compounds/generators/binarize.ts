@@ -9,7 +9,6 @@ import {
 	LookupStep,
 	MathOperator,
 	Step,
-	StepType,
 	Verb,
 } from '@data-wrangling-components/core'
 import { merge } from 'lodash'
@@ -150,7 +149,6 @@ function createNewBinarize(
 	const index = criteria.length
 	const input = index === 0 ? parent.input : COLLECTOR
 	const newStep: Step = {
-		type: StepType.Verb,
 		verb: Verb.Binarize,
 		input,
 		output: COLLECTOR,
@@ -170,7 +168,6 @@ function makeDerives(steps: BinarizeStep[]): DeriveStep[] {
 		const column1 = COMBINED_COLUMN
 		const column2 = index === 0 ? COMBINED_COLUMN : binarize(index)
 		const derive: Step = {
-			type: StepType.Verb,
 			verb: Verb.Derive,
 			input: COLLECTOR,
 			output: COLLECTOR,

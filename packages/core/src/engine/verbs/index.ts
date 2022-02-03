@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { BinStrategy } from '../..'
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 
 /**
  * Factory function to create new verb configs
@@ -12,14 +12,8 @@ import { Step, StepType, Verb } from '../../types'
  * to preselect.
  * @param verb
  */
-export function factory(
-	type: StepType,
-	verb: Verb,
-	input: string,
-	output: string,
-): Step {
+export function factory(verb: Verb, input: string, output: string): Step {
 	const base = {
-		type,
 		verb,
 		input,
 		output,

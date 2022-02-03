@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { sample } from '../verbs/sample'
 import { TestStore } from './TestStore'
 
 describe('test for sample verb', () => {
 	test('sample test with percentage', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Sample,
 			input: 'table6',
 			output: 'output',
@@ -28,7 +27,6 @@ describe('test for sample verb', () => {
 
 	test('sample test with size', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Sample,
 			input: 'table6',
 			output: 'output',

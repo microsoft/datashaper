@@ -4,7 +4,7 @@
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '..'
-import { StepType, Step, Verb } from '../types'
+import { Step, Verb } from '../types'
 import { chain } from './verbs/chain'
 
 /**
@@ -24,7 +24,6 @@ export async function run(
 ): Promise<ColumnTable> {
 	return chain(
 		{
-			type: StepType.Verb,
 			verb: Verb.Chain,
 			input: steps[0].input,
 			output: steps[steps.length - 1].output,

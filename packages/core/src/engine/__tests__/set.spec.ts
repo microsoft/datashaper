@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb, SetOp } from '../../types'
+import { Step, Verb, SetOp } from '../../types'
 import { set } from '../util/sets'
 import { TestStore } from './TestStore'
 
 describe('test for set util', () => {
 	test('concat test', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Difference,
 			input: 'table1',
 			output: 'output',
@@ -28,7 +27,6 @@ describe('test for set util', () => {
 
 	test('union test', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Difference,
 			input: 'table1',
 			output: 'output',
@@ -46,7 +44,6 @@ describe('test for set util', () => {
 
 	test('intersect test', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Difference,
 			input: 'table4',
 			output: 'output',
@@ -67,7 +64,6 @@ describe('test for set util', () => {
 
 	test('difference test', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Difference,
 			input: 'table1',
 			output: 'output',

@@ -3,14 +3,12 @@
 	"description": "Illustrates a chain step that combines a filtered + aggregated lookup from another table",
 	"steps": [
 		{
-			"type": "verb",
 			"verb": "filter-aggregate-lookup",
 			"input": "data/companies.csv",
 			"output": "filter-aggregate-lookup-final-output-table",
 			"args": {
 				"steps": [
 					{
-						"type": "verb",
 						"verb": "join",
 						"input": "data/companies.csv",
 						"output": "compound-join",
@@ -20,7 +18,6 @@
 						}
 					},
 					{
-						"type": "verb",
 						"verb": "filter",
 						"input": "compound-join",
 						"output": "compound-filter",
@@ -32,7 +29,6 @@
 						}
 					},
 					{
-						"type": "verb",
 						"verb": "aggregate",
 						"input": "compound-filter",
 						"output": "compound-aggregate",
@@ -44,7 +40,6 @@
 						}
 					},
 					{
-						"type": "verb",
 						"verb": "lookup",
 						"input": "data/companies.csv",
 						"output": "filter-aggregate-lookup-final-output-table",

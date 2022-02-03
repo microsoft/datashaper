@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { Verb, Step, StepType, TableStore } from '../..'
+import { Verb, Step, TableStore } from '../..'
 import { chain } from '../verbs/chain'
 
 describe('chain', () => {
@@ -20,14 +20,12 @@ describe('chain', () => {
 
 	test('runs a single step with normal input/output', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Chain,
 			input: 'input',
 			output: 'output',
 			args: {
 				steps: [
 					{
-						type: StepType.Verb,
 						verb: Verb.Fill,
 						input: 'input',
 						output: 'output',
@@ -49,14 +47,12 @@ describe('chain', () => {
 
 	test('default chain should not pollute the parent store with intermediate outputs', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Chain,
 			input: 'input',
 			output: 'output',
 			args: {
 				steps: [
 					{
-						type: StepType.Verb,
 						verb: Verb.Fill,
 						input: 'input',
 						output: 'output-1',
@@ -66,7 +62,6 @@ describe('chain', () => {
 						},
 					},
 					{
-						type: StepType.Verb,
 						verb: Verb.Fill,
 						input: 'output-1',
 						output: 'output-2',
@@ -89,14 +84,12 @@ describe('chain', () => {
 
 	test('nofork chain does set all outputs in parent store', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Chain,
 			input: 'input',
 			output: 'output',
 			args: {
 				steps: [
 					{
-						type: StepType.Verb,
 						verb: Verb.Fill,
 						input: 'input',
 						output: 'output-1',
@@ -106,7 +99,6 @@ describe('chain', () => {
 						},
 					},
 					{
-						type: StepType.Verb,
 						verb: Verb.Fill,
 						input: 'output-1',
 						output: 'output-2',
@@ -129,14 +121,12 @@ describe('chain', () => {
 
 	test('chains run recursively', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Chain,
 			input: 'input',
 			output: 'output',
 			args: {
 				steps: [
 					{
-						type: StepType.Verb,
 						verb: Verb.Fill,
 						input: 'input',
 						output: 'output-1',
@@ -146,14 +136,12 @@ describe('chain', () => {
 						},
 					},
 					{
-						type: StepType.Verb,
 						verb: Verb.Chain,
 						input: 'output-1',
 						output: 'output-2',
 						args: {
 							steps: [
 								{
-									type: StepType.Verb,
 									verb: Verb.Fill,
 									input: 'output-1',
 									output: 'output-2',

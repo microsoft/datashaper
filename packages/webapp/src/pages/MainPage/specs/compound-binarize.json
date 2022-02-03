@@ -3,7 +3,6 @@
 	"description": "Use a compound binarize step to produce a final output without showing every step.",
 	"steps": [
 		{
-			"type": "compound",
 			"verb": "multi-binarize",
 			"input": "data/companies.csv",
 			"output": "compound-binarize-1",
@@ -16,7 +15,6 @@
 						"args": {
 							"steps": [
 								{
-									"type": "verb",
 									"verb": "binarize",
 									"input": "data/companies.csv",
 									"output": "collector-1",
@@ -29,7 +27,6 @@
 									}
 								},
 								{
-									"type": "verb",
 									"verb": "binarize",
 									"input": "collector-1",
 									"output": "collector-1",
@@ -51,7 +48,6 @@
 						"args": {
 							"steps": [
 								{
-									"type": "verb",
 									"verb": "derive",
 									"input": "collector-1",
 									"output": "collector-1",
@@ -66,7 +62,6 @@
 						}
 					},
 					{
-						"type": "verb",
 						"verb": "binarize",
 						"input": "collector-1",
 						"output": "collector-1",
@@ -79,7 +74,6 @@
 						}
 					},
 					{
-						"type": "verb",
 						"verb": "lookup",
 						"input": "data/companies.csv",
 						"output": "compound-binarize-1",

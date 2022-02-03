@@ -9,13 +9,11 @@ import styled from 'styled-components'
 export interface SectionProps {
 	title: string
 	subtitle?: string
-	type?: string
 }
 
 export const Section: React.FC<SectionProps> = memo(function Section({
 	title,
 	subtitle,
-	type,
 	children,
 }) {
 	return (
@@ -23,7 +21,6 @@ export const Section: React.FC<SectionProps> = memo(function Section({
 			<Titles>
 				<H1>{title}</H1>
 				<H2>{subtitle}</H2>
-				<H3>{type}</H3>
 			</Titles>
 			<StyledSeparator vertical />
 			<ChildrenContainer>{children}</ChildrenContainer>
@@ -55,11 +52,6 @@ const H2 = styled.h2`
 	margin-top: 0;
 	margin-bottom: 0;
 	color: ${({ theme }) => theme.application().accent().hex()};
-`
-
-const H3 = styled.h3`
-	margin-top: 0;
-	color: ${({ theme }) => theme.application().faint().hex()};
 `
 
 const StyledSeparator = styled(Separator)`

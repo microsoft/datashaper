@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { Verb, Step, StepType, TableStore } from '../..'
+import { Verb, Step, TableStore } from '../..'
 import { run } from '../run'
 
 describe('run', () => {
@@ -21,7 +21,6 @@ describe('run', () => {
 	test('runs a single step with normal input/output', () => {
 		const steps: Step[] = [
 			{
-				type: StepType.Verb,
 				verb: Verb.Fill,
 				input: 'input',
 				output: 'output',
@@ -42,7 +41,6 @@ describe('run', () => {
 	test('runs multiple steps with normal input/output and all intermediates', () => {
 		const steps: Step[] = [
 			{
-				type: StepType.Verb,
 				verb: Verb.Fill,
 				input: 'input',
 				output: 'output-1',
@@ -52,7 +50,6 @@ describe('run', () => {
 				},
 			},
 			{
-				type: StepType.Verb,
 				verb: Verb.Fill,
 				input: 'output-1',
 				output: 'output-2',
