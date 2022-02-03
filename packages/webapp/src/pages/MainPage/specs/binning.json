@@ -3,7 +3,6 @@
 	"description": "Shows how different binning strategies and clamping work.",
 	"steps": [
 		{
-			"type": "verb",
 			"verb": "bin",
 			"input": "data/products.csv",
 			"output": "bin-1",
@@ -14,7 +13,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "bin",
 			"input": "data/products.csv",
 			"output": "bin-2",
@@ -26,7 +24,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "bin",
 			"input": "data/products.csv",
 			"output": "bin-3",
@@ -38,7 +35,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "bin",
 			"input": "data/products.csv",
 			"output": "bin-4",
@@ -52,7 +48,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "bin",
 			"input": "data/products.csv",
 			"output": "bin-5",

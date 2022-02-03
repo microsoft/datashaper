@@ -3,7 +3,6 @@
 	"description": "Aggregates daily data to weekly averages to demonstrate automatic Sparkbars.",
 	"steps": [
 		{
-			"type": "verb",
 			"verb": "derive",
 			"input": "data/stocks.csv",
 			"output": "output-table-0",
@@ -15,7 +14,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "aggregate",
 			"input": "output-table-0",
 			"output": "output-table-1",
@@ -27,7 +25,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "lookup",
 			"input": "output-table-1",
 			"output": "output-table-2",
@@ -38,7 +35,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "aggregate",
 			"input": "output-table-2",
 			"output": "output-table-3",

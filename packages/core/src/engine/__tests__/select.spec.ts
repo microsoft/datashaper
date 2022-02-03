@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { select } from '../verbs/select'
 import { TestStore } from './TestStore'
 
 describe('test for select verb', () => {
 	test('select test', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Select,
 			input: 'table7',
 			output: 'output',

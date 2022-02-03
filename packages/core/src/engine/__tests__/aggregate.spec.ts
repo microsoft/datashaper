@@ -3,14 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FieldAggregateOperation } from '../../../../core'
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { aggregate } from '../verbs/aggregate'
 import { TestStore } from './TestStore'
 
 describe('test for aggregate verb', () => {
 	test('aggregate test with count operation', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Aggregate,
 			input: 'table3',
 			output: 'output',
@@ -41,7 +40,6 @@ describe('test for aggregate verb', () => {
 
 	test('aggregate test with sum operation', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Aggregate,
 			input: 'table4',
 			output: 'output',
@@ -72,7 +70,6 @@ describe('test for aggregate verb', () => {
 
 	test('aggregate test with min operation', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Aggregate,
 			input: 'table4',
 			output: 'output',
@@ -103,7 +100,6 @@ describe('test for aggregate verb', () => {
 
 	test('aggregate test with median operation', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Aggregate,
 			input: 'table4',
 			output: 'output',

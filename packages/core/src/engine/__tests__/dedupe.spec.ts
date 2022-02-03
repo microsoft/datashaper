@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { dedupe } from '../verbs/dedupe'
 import { TestStore } from './TestStore'
 
 describe('test for dedupe verb', () => {
 	test('dedupe test with column', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Dedupe,
 			input: 'table3',
 			output: 'output',
@@ -28,7 +27,6 @@ describe('test for dedupe verb', () => {
 
 	test('dedupe test without columns', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Dedupe,
 			input: 'table10',
 			output: 'output',

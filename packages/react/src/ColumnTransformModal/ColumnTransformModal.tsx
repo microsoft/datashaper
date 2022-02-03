@@ -5,7 +5,6 @@
 import {
 	Verb,
 	Step,
-	StepType,
 	factory,
 	columnTransformVerbs,
 } from '@data-wrangling-components/core'
@@ -85,7 +84,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 			(ev: any, opt: any) => {
 				// TODO: the assumption here is that the consumer will use runPipeline
 				// should we be forcing the i/o table name?
-				const newStep = factory(StepType.Verb, opt.key, 'input', 'input')
+				const newStep = factory(opt.key, 'input', 'input')
 				// merge with the previous step in case input/output columns have been controlled
 				setInternal(newStep)
 			},

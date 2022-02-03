@@ -106,11 +106,6 @@ export enum SortDirection {
 	Descending = 'desc',
 }
 
-export enum StepType {
-	Verb = 'verb',
-	Compound = 'compound',
-}
-
 export enum FilterCompareType {
 	Value = 'value',
 	Column = 'column',
@@ -155,22 +150,16 @@ export type OrderbyInstruction = {
 export interface Specification {
 	name?: string
 	description?: string
-	steps?: Step[] | CompoundStep[]
+	steps?: Step[]
 }
 
-// TODO: split out verb/compound types instead of overloading the verb property
 export interface Step<T = unknown> {
-	type: StepType
-	verb: Verb
+	verb: Verb | string
 	input: string
 	output: string
 	args: T
 	// helpful for documentation in JSON specs
 	description?: string
-}
-
-export interface CompoundStep extends Step {
-	steps: Step[] | CompoundStep[]
 }
 
 export type StepFunction = (
@@ -182,6 +171,7 @@ export enum Verb {
 	Aggregate = 'aggregate',
 	Bin = 'bin',
 	Binarize = 'binarize',
+	Chain = 'chain',
 	Concat = 'concat',
 	Dedupe = 'dedupe',
 	Derive = 'derive',
@@ -208,13 +198,10 @@ export enum Verb {
 	Unroll = 'unroll',
 }
 
-export interface CompoundBinarizeStep extends CompoundStep {
-	to: string
-}
-
 export type AggregateStep = Step<AggregateArgs>
 export type BinStep = Step<BinArgs>
 export type BinarizeStep = Step<BinarizeArgs>
+export type ChainStep = Step<ChainArgs>
 export type ColumnListStep = Step<InputColumnListArgs>
 export type DedupeStep = Step<DedupeArgs>
 export type DeriveStep = Step<DeriveArgs>
@@ -303,6 +290,18 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 }
 
 export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {}
+
+export interface ChainArgs {
+	/**
+	 * List of steps to execute
+	 */
+	steps: Step[]
+	/**
+	 * Whether to prevent forking of child context when running steps recursively.
+	 * Normally the Chain clones the parent context to prevent pollution.
+	 */
+	nofork?: boolean
+}
 
 export type DedupeArgs = Partial<InputColumnListArgs>
 

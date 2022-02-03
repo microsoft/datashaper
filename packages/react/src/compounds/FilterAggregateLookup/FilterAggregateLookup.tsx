@@ -25,7 +25,7 @@ import {
 	updateIdentifierColumn,
 	updateLookupColumn,
 	updateLookupTable,
-	updateAs,
+	updateTo,
 } from '../generators/filter-aggregate-lookup'
 
 /**
@@ -68,8 +68,9 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 		)
 
 		const handleToChange = useCallback(
-			(e, as) => {
-				const updated = updateAs(internal, as)
+			(e, to) => {
+				console.log('to', to)
+				const updated = updateTo(internal, to)
 				onChange && onChange(updated)
 			},
 			[internal, onChange],
