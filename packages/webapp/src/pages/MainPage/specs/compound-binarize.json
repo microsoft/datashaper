@@ -4,72 +4,93 @@
 	"steps": [
 		{
 			"type": "compound",
-			"verb": "binarize",
+			"verb": "multi-binarize",
 			"input": "data/companies.csv",
 			"output": "compound-binarize-1",
-			"to": "Smallest & Largest",
-			"steps": [
-				{
-					"type": "verb",
-					"verb": "binarize",
-					"input": "data/companies.csv",
-					"output": "collector-1",
-					"args": {
-						"column": "Employees",
-						"operator": "<",
-						"value": 150000,
-						"type": "value",
-						"to": "Smallest"
+			"args": {
+				"steps": [
+					{
+						"verb": "chain",
+						"input": "data/companies.csv",
+						"output": "collector-1",
+						"args": {
+							"steps": [
+								{
+									"type": "verb",
+									"verb": "binarize",
+									"input": "data/companies.csv",
+									"output": "collector-1",
+									"args": {
+										"column": "Employees",
+										"operator": "<",
+										"value": 150000,
+										"type": "value",
+										"to": "Smallest"
+									}
+								},
+								{
+									"type": "verb",
+									"verb": "binarize",
+									"input": "collector-1",
+									"output": "collector-1",
+									"args": {
+										"column": "Employees",
+										"operator": ">",
+										"value": 200000,
+										"type": "value",
+										"to": "Largest"
+									}
+								}
+							]
+						}
+					},
+					{
+						"verb": "chain",
+						"input": "collector-1",
+						"output": "collector-1",
+						"args": {
+							"steps": [
+								{
+									"type": "verb",
+									"verb": "derive",
+									"input": "collector-1",
+									"output": "collector-1",
+									"args": {
+										"column1": "Smallest",
+										"column2": "Largest",
+										"operator": "+",
+										"to": "Combined"
+									}
+								}
+							]
+						}
+					},
+					{
+						"type": "verb",
+						"verb": "binarize",
+						"input": "collector-1",
+						"output": "collector-1",
+						"args": {
+							"column": "Combined",
+							"operator": ">",
+							"value": 0,
+							"type": "value",
+							"to": "Smallest & Largest"
+						}
+					},
+					{
+						"type": "verb",
+						"verb": "lookup",
+						"input": "data/companies.csv",
+						"output": "compound-binarize-1",
+						"args": {
+							"other": "collector-1",
+							"on": ["Employees"],
+							"columns": ["Smallest & Largest"]
+						}
 					}
-				},
-				{
-					"type": "verb",
-					"verb": "binarize",
-					"input": "collector-1",
-					"output": "collector-1",
-					"args": {
-						"column": "Employees",
-						"operator": ">",
-						"value": 200000,
-						"type": "value",
-						"to": "Largest"
-					}
-				},
-				{
-					"type": "verb",
-					"verb": "derive",
-					"input": "collector-1",
-					"output": "collector-1",
-					"args": {
-						"column1": "Smallest",
-						"column2": "Largest",
-						"operator": "+",
-						"to": "Combined"
-					}
-				},
-				{
-					"type": "verb",
-					"verb": "binarize",
-					"input": "collector-1",
-					"output": "collector-1",
-					"args": {
-						"column": "Combined",
-						"operator": ">",
-						"value": 0,
-						"type": "value",
-						"to": "Smallest & Largest"
-					}
-				},
-				{
-					"type": "verb",
-					"verb": "select",
-					"input": "collector-1",
-					"output": "final-1",
-					"args": {
-						"columns": ["ID", "Name", "Employees", "US", "Smallest & Largest"]
-					}
-				}
-			]
+				]
+			}
 		}
 	]
 }
