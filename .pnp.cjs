@@ -1332,6 +1332,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@data-wrangling-components/react", "virtual:c3bf11d0bcb15df8128de0ae32fc220ee3034e626b18176cea18e25609cc809fa31b52d2a52633294205dfd644904e06dd51cc6a39614771402c8c3cb8aa7a2d#workspace:packages/react"],
             ["@data-wrangling-components/core", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#workspace:packages/core"],
             ["@data-wrangling-components/utilities", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#workspace:packages/utilities"],
+            ["@essex-js-toolkit/hooks", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:3.0.2"],
             ["@essex-js-toolkit/themed-components", "virtual:c3bf11d0bcb15df8128de0ae32fc220ee3034e626b18176cea18e25609cc809fa31b52d2a52633294205dfd644904e06dd51cc6a39614771402c8c3cb8aa7a2d#npm:1.3.2"],
             ["@essex/scripts", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:19.0.5"],
             ["@essex/vite-config", "virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:18.0.2"],
@@ -1428,6 +1429,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@data-wrangling-components/react", "workspace:packages/react"],
             ["@data-wrangling-components/core", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#workspace:packages/core"],
             ["@data-wrangling-components/utilities", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#workspace:packages/utilities"],
+            ["@essex-js-toolkit/hooks", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:3.0.2"],
             ["@essex-js-toolkit/themed-components", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:1.3.2"],
             ["@essex/scripts", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:19.0.5"],
             ["@essex/vite-config", "virtual:f40c7b551eff7b5434ca7c027961bab5bf779155b3f5d80ad84de15bbb166acda6eb30448d0cb4e37f94628a1ed697bcd06cc5961942a7e038b427902f505ca4#npm:18.0.2"],
@@ -1624,26 +1626,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:05e3bce4518a1db925aa2e72ddc6847db803d8cc98e7de9b61d669b2f724dedb0b0a641f51ece9ebe50570d494ba4a9761815f4eb8b2d509fc384b2fe00198df#npm:3.0.2", {
-          "packageLocation": "./.yarn/__virtual__/@essex-js-toolkit-hooks-virtual-2c1a4052cf/0/cache/@essex-js-toolkit-hooks-npm-3.0.2-4aaae76a26-5c6184cdd1.zip/node_modules/@essex-js-toolkit/hooks/",
-          "packageDependencies": [
-            ["@essex-js-toolkit/hooks", "virtual:05e3bce4518a1db925aa2e72ddc6847db803d8cc98e7de9b61d669b2f724dedb0b0a641f51ece9ebe50570d494ba4a9761815f4eb8b2d509fc384b2fe00198df#npm:3.0.2"],
-            ["@essex-js-toolkit/toolbox", "npm:2.0.2"],
-            ["@types/node", "npm:16.11.19"],
-            ["@types/react", "npm:17.0.38"],
-            ["@types/react-dom", "npm:17.0.11"],
-            ["core-js", "npm:3.20.2"],
-            ["lodash", "npm:4.17.21"],
-            ["react", "npm:17.0.2"]
-          ],
-          "packagePeers": [
-            "@types/node",
-            "@types/react-dom",
-            "@types/react",
-            "react"
-          ],
-          "linkType": "HARD",
-        }],
         ["virtual:12b2e01a9f30731eb18bfe0259bf8ec91dce2d970f2acdc6117de3d6cd2156a2bac5e2552d8372620bfe25a1bd337d4c4d84c1f16ca9ed9ee47cf50f57dca3fd#npm:1.1.5", {
           "packageLocation": "./.yarn/__virtual__/@essex-js-toolkit-hooks-virtual-7a6532b26e/0/cache/@essex-js-toolkit-hooks-npm-1.1.5-81e3e0df00-5f0c9b9386.zip/node_modules/@essex-js-toolkit/hooks/",
           "packageDependencies": [
@@ -1666,6 +1648,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "react"
           ],
           "linkType": "HARD",
+        }],
+        ["virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:3.0.2", {
+          "packageLocation": "./.yarn/__virtual__/@essex-js-toolkit-hooks-virtual-451c82d726/0/cache/@essex-js-toolkit-hooks-npm-3.0.2-4aaae76a26-5c6184cdd1.zip/node_modules/@essex-js-toolkit/hooks/",
+          "packageDependencies": [
+            ["@essex-js-toolkit/hooks", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:3.0.2"],
+            ["@essex-js-toolkit/toolbox", "npm:2.0.2"],
+            ["@types/node", "npm:16.11.19"],
+            ["@types/react", "npm:17.0.38"],
+            ["@types/react-dom", "npm:17.0.11"],
+            ["core-js", "npm:3.20.2"],
+            ["lodash", "npm:4.17.21"],
+            ["react", "npm:17.0.2"]
+          ],
+          "packagePeers": [
+            "@types/node",
+            "@types/react-dom",
+            "@types/react",
+            "react"
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["@essex-js-toolkit/themed-components", [
@@ -1680,7 +1682,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/@essex-js-toolkit-themed-components-virtual-05e3bce451/0/cache/@essex-js-toolkit-themed-components-npm-1.3.2-bc7bafe86c-279104ea61.zip/node_modules/@essex-js-toolkit/themed-components/",
           "packageDependencies": [
             ["@essex-js-toolkit/themed-components", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:1.3.2"],
-            ["@essex-js-toolkit/hooks", "virtual:05e3bce4518a1db925aa2e72ddc6847db803d8cc98e7de9b61d669b2f724dedb0b0a641f51ece9ebe50570d494ba4a9761815f4eb8b2d509fc384b2fe00198df#npm:3.0.2"],
+            ["@essex-js-toolkit/hooks", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:3.0.2"],
             ["@essex-js-toolkit/toolbox", "npm:2.0.2"],
             ["@fluentui/react", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:8.49.4"],
             ["@thematic/color", null],
@@ -1751,7 +1753,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/@essex-js-toolkit-themed-components-virtual-3b3ab70c5b/0/cache/@essex-js-toolkit-themed-components-npm-1.3.2-bc7bafe86c-279104ea61.zip/node_modules/@essex-js-toolkit/themed-components/",
           "packageDependencies": [
             ["@essex-js-toolkit/themed-components", "virtual:c3bf11d0bcb15df8128de0ae32fc220ee3034e626b18176cea18e25609cc809fa31b52d2a52633294205dfd644904e06dd51cc6a39614771402c8c3cb8aa7a2d#npm:1.3.2"],
-            ["@essex-js-toolkit/hooks", "virtual:05e3bce4518a1db925aa2e72ddc6847db803d8cc98e7de9b61d669b2f724dedb0b0a641f51ece9ebe50570d494ba4a9761815f4eb8b2d509fc384b2fe00198df#npm:3.0.2"],
+            ["@essex-js-toolkit/hooks", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:3.0.2"],
             ["@essex-js-toolkit/toolbox", "npm:2.0.2"],
             ["@fluentui/react", "virtual:218c9a3f0f9e99e2b80eb36e90777288433cc9e78b59d4bfef15a730697196aca1f9c65acfbb1fad97c810cb9b97416645a8e1618b450acf33015ae189c8ffbb#npm:8.49.4"],
             ["@thematic/color", null],

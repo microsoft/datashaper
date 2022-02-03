@@ -639,6 +639,7 @@ __metadata:
   dependencies:
     "@data-wrangling-components/core": "workspace:packages/core"
     "@data-wrangling-components/utilities": "workspace:packages/utilities"
+    "@essex-js-toolkit/hooks": ^3.0.2
     "@essex-js-toolkit/themed-components": ^1.3.2
     "@essex/scripts": ^19.0.5
     "@essex/vite-config": ^18.0.2
@@ -806,7 +807,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/hooks@npm:3.0.2":
+"@essex-js-toolkit/hooks@npm:3.0.2, @essex-js-toolkit/hooks@npm:^3.0.2":
   version: 3.0.2
   resolution: "@essex-js-toolkit/hooks@npm:3.0.2"
   dependencies:

@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/react",
-	"version": "1.6.2",
+	"version": "1.7.1",
 	"main": "src/index.ts",
 	"publishConfig": {
 		"main": "dist/cjs/index.js",
@@ -12,6 +12,7 @@
 		"build": "essex build"
 	},
 	"dependencies": {
+		"@essex-js-toolkit/hooks": "^3.0.2",
 		"core-js": "^3.20.2",
 		"d3-format": "^3.1.0",
 		"d3-scale": "^4.0.2",

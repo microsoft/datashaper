@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnStats } from '@data-wrangling-components/core'
+import { ColumnStats, formatIfNumber } from '@data-wrangling-components/core'
 import { useThematic } from '@thematic/react'
 import { upperFirst } from 'lodash'
 import React, { memo, useMemo } from 'react'
@@ -76,7 +76,7 @@ const StatCell: React.FC<{ name: string; value?: number }> = ({
 			}}
 		>
 			<div style={{ textTransform: 'capitalize' }}>{pretty[name] || name}:</div>
-			<div>{value}</div>
+			<div>{formatIfNumber(value)}</div>
 		</div>
 	) : null
 }
@@ -87,7 +87,7 @@ function useTooltip(stats?: ColumnStats): string {
 		return Object.entries(nobins).reduce((acc, cur, idx) => {
 			const [key, value] = cur
 			const nice = upperFirst(pretty[key] || key)
-			return acc + (idx > 0 ? '\n' : '') + `${nice}: ${value}`
+			return acc + (idx > 0 ? '\n' : '') + `${nice}: ${formatIfNumber(value)}`
 		}, '')
 	}, [stats])
 }

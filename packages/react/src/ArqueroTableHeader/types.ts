@@ -11,6 +11,7 @@ export interface ArqueroTableHeaderProps {
 	showRowCount?: boolean
 	showColumnCount?: boolean
 	commands?: ICommandBarItemProps[]
+	farCommands?: ICommandBarItemProps[]
 	visibleColumns?: string[]
 	onRenameTable?: (name: string) => void
 }
