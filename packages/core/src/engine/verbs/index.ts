@@ -25,6 +25,13 @@ export function factory(
 		output,
 	}
 	switch (verb) {
+		case Verb.Chain:
+			return {
+				...base,
+				args: {
+					steps: [],
+				},
+			}
 		case Verb.Bin:
 			return {
 				...base,

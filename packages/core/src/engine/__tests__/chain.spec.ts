@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { Verb, Step, StepType, TableStore, CompoundStep } from '../..'
+import { Verb, Step, StepType, TableStore } from '../..'
 import { chain } from '../verbs/chain'
 
 describe('chain', () => {
@@ -164,7 +164,7 @@ describe('chain', () => {
 								},
 							],
 						},
-					} as CompoundStep,
+					},
 				],
 			},
 		}

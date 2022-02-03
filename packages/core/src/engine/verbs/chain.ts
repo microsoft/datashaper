@@ -77,8 +77,10 @@ async function exec(step: Step, store: TableStore): Promise<ColumnTable> {
 		const step = steps[index]
 		const { verb } = step
 		try {
+			// fallback to chain if unspecified - this allows custom names to identify different chains
+			const fn = verbs[verb] || exec
 			// child store gets intermediate outputs so chain steps can do lookups
-			output = await verbs[verb](step, substore)
+			output = await fn(step, substore)
 			substore.set(step.output, output)
 		} catch (e) {
 			console.error(`Pipeline failed on step ${index}`, step)

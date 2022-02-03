@@ -4,7 +4,7 @@
  */
 import {
 	AggregateStep,
-	CompoundStep,
+	ChainStep,
 	FilterStep,
 	JoinStep,
 	LookupStep,
@@ -20,29 +20,36 @@ import { merge } from 'lodash'
 
 const FINAL_OUTPUT = 'filter-aggregate-lookup-final-output-table'
 
-export function defaults(parent: Step): CompoundStep {
+export function defaults(parent: Step): ChainStep {
 	return merge({}, parent, {
 		output: FINAL_OUTPUT,
-		steps: [
-			defaultJoin(parent),
-			defaultFilter(parent),
-			defaultAggregate(parent),
-			defaultLookup(parent),
-		],
+		args: {
+			steps: [
+				defaultJoin(parent),
+				defaultFilter(parent),
+				defaultAggregate(parent),
+				defaultLookup(parent),
+			],
+		},
 	})
 }
 
 function mergeSteps(
-	parent: CompoundStep,
+	parent: ChainStep,
 	join: JoinStep,
 	filter: FilterStep,
 	aggregate: AggregateStep,
 	lookup: LookupStep,
-): CompoundStep {
-	return { ...parent, steps: [join, filter, aggregate, lookup] }
+): ChainStep {
+	return {
+		...parent,
+		args: {
+			steps: [join, filter, aggregate, lookup],
+		},
+	}
 }
 
-export function updateAs(parent: CompoundStep, to: string): CompoundStep {
+export function updateAs(parent: ChainStep, to: string): ChainStep {
 	const [join, filter, aggregate, lookup] = getSteps(parent)
 	aggregate.args.to = to
 	lookup.args.columns = [to]
@@ -50,9 +57,9 @@ export function updateAs(parent: CompoundStep, to: string): CompoundStep {
 }
 
 export function updateIdentifierColumn(
-	parent: CompoundStep,
+	parent: ChainStep,
 	column: string,
-): CompoundStep {
+): ChainStep {
 	const [join, filter, aggregate, lookup] = getSteps(parent)
 	join.args.on = [column]
 	aggregate.args.groupby = column
@@ -61,37 +68,31 @@ export function updateIdentifierColumn(
 }
 
 export function updateLookupColumn(
-	parent: CompoundStep,
+	parent: ChainStep,
 	column: string,
-): CompoundStep {
+): ChainStep {
 	const [join, filter, aggregate, lookup] = getSteps(parent)
 	filter.args.column = column
 	aggregate.args.column = column
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
 
-export function updateLookupTable(
-	parent: CompoundStep,
-	table: string,
-): CompoundStep {
+export function updateLookupTable(parent: ChainStep, table: string): ChainStep {
 	const [join, filter, aggregate, lookup] = getSteps(parent)
 	join.args.other = table
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
 
-export function updateFilter(
-	parent: CompoundStep,
-	step: FilterStep,
-): CompoundStep {
+export function updateFilter(parent: ChainStep, step: FilterStep): ChainStep {
 	const [join, filter, aggregate, lookup] = getSteps(parent)
 	filter.args = step.args
 	return mergeSteps(parent, join, filter, aggregate, lookup)
 }
 
 export function updateAggregateOperation(
-	parent: CompoundStep,
+	parent: ChainStep,
 	operation: FieldAggregateOperation,
-): CompoundStep {
+): ChainStep {
 	const [join, filter, aggregate, lookup] = getSteps(parent)
 	aggregate.args.operation = operation
 	return mergeSteps(parent, join, filter, aggregate, lookup)
@@ -143,7 +144,7 @@ function defaultLookup(parent: Step): LookupStep {
 }
 
 function getSteps(
-	step: CompoundStep,
+	step: ChainStep,
 ): [JoinStep, FilterStep, AggregateStep, LookupStep] {
 	const join = getJoin(step)
 	const aggregate = getAggregate(step)
@@ -152,24 +153,24 @@ function getSteps(
 	return [join, filter, aggregate, lookup]
 }
 
-export function getJoin(step: CompoundStep): JoinStep {
+export function getJoin(step: ChainStep): JoinStep {
 	return pickStep(step, 0) as JoinStep
 }
 
-export function getFilter(step: CompoundStep): FilterStep {
+export function getFilter(step: ChainStep): FilterStep {
 	return pickStep(step, 1) as FilterStep
 }
 
-export function getAggregate(step: CompoundStep): AggregateStep {
+export function getAggregate(step: ChainStep): AggregateStep {
 	return pickStep(step, 2) as AggregateStep
 }
 
-export function getLookup(step: CompoundStep): LookupStep {
+export function getLookup(step: ChainStep): LookupStep {
 	return pickStep(step, 3) as LookupStep
 }
 
-function pickStep(step: CompoundStep, index: number) {
-	if (step.steps.length > 0) {
-		return step.steps[index]
+function pickStep(step: ChainStep, index: number) {
+	if (step.args.steps.length > 0) {
+		return step.args.steps[index]
 	}
 }

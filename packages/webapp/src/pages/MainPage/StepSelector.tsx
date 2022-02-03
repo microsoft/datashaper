@@ -19,9 +19,7 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 			setCurrentOption(opt.key)
 		}, [])
 		const handleStepClick = useCallback(() => {
-			// these won't always be verbs of course
-			const type = isCompound(currentOption) ? StepType.Compound : StepType.Verb
-			onCreate && onCreate(type, currentOption as Verb)
+			onCreate && onCreate(StepType.Verb, currentOption as Verb)
 		}, [currentOption, onCreate])
 		return (
 			<Container>
@@ -58,10 +56,6 @@ function useCompoundOptions() {
 			text,
 		}))
 	}, [])
-}
-
-function isCompound(key: string): boolean {
-	return Object.values(Compound).findIndex(c => c === key) >= 0
 }
 
 function useGroupedOptions() {

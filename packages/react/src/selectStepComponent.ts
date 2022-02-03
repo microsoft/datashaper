@@ -27,11 +27,6 @@ import {
 	NoParameters,
 } from './verbs'
 
-const compound: Record<string, React.FC<StepComponentProps>> = {
-	'multi-binarize': CompoundBinarize,
-	'filter-aggregate-lookup': FilterAggregateLookup,
-}
-
 const verb: Record<string, React.FC<StepComponentProps>> = {
 	aggregate: Aggregate,
 	bin: Bin,
@@ -59,11 +54,8 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	union: SetOperation,
 	unorder: NoParameters,
 	unroll: ColumnListOperation,
-}
-
-const types = {
-	compound,
-	verb,
+	'multi-binarize': CompoundBinarize,
+	'filter-aggregate-lookup': FilterAggregateLookup,
 }
 
 /**
@@ -71,5 +63,5 @@ const types = {
  * @param step
  */
 export function selectStepComponent(step: Step): React.FC<StepComponentProps> {
-	return types[step.type][step.verb]
+	return verb[step.verb]
 }
