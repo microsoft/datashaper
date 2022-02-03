@@ -49,7 +49,7 @@ function mergeSteps(
 	}
 }
 
-export function updateAs(parent: ChainStep, to: string): ChainStep {
+export function updateTo(parent: ChainStep, to: string): ChainStep {
 	const [join, filter, aggregate, lookup] = getSteps(parent)
 	aggregate.args.to = to
 	lookup.args.columns = [to]
@@ -124,9 +124,7 @@ function defaultAggregate(_parent: Step): AggregateStep {
 		verb: Verb.Aggregate,
 		input: 'compound-filter',
 		output: 'compound-aggregate',
-		args: {
-			to: 'aggregate',
-		} as AggregateArgs,
+		args: {} as AggregateArgs,
 	}
 }
 
@@ -138,7 +136,7 @@ function defaultLookup(parent: Step): LookupStep {
 		output: parent.output,
 		args: {
 			other: 'compound-aggregate',
-			columns: ['aggregate'],
+			columns: [],
 		},
 	}
 }

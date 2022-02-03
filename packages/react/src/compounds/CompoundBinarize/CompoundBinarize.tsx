@@ -27,7 +27,7 @@ import {
 export const CompoundBinarize: React.FC<StepComponentProps> = memo(
 	function CompoundBinarize({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => defaults(step), [step])
-		console.log('internal', internal)
+
 		const tbl = useLoadTable(input || internal.input, table, store)
 
 		const [to, setTo] = useState<string | undefined>(getTo(internal))

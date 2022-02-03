@@ -1,5 +1,5 @@
 {
-	"name": "Compound: binarize",
+	"name": "Compound: Binarize",
 	"description": "Use a compound binarize step to produce a final output without showing every step.",
 	"steps": [
 		{
