@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
+import { TableStore, UnfoldArgs } from '../..'
 import { PivotArgs, Step } from '../../types'
-import { singleRollup } from '../util'
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
@@ -15,15 +15,20 @@ import { singleRollup } from '../util'
  * @param store
  * @returns
  */
-export async function pivot(
+export async function unfold(
 	step: Step,
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { key, value, operation } = args as PivotArgs
-	const inputTable = await store.get(input)
+	const { key, value } = args as UnfoldArgs
+	let inputTable = await store.get(input)
 
-	const expr = singleRollup(value, operation)
+	inputTable = inputTable
+		.groupby(key)
+		.rollup({
+			[value]: op.array_agg(value),
+		})
+		.pivot(key, value)
 
-	return inputTable.pivot(key, { [value]: expr })
+	return inputTable.unroll(inputTable.columnNames())
 }

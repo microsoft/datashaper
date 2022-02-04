@@ -100,6 +100,23 @@ export class TestStore extends TableStore {
 			z: [true, false, true],
 		})
 
+		const table16 = table({
+			key: ['A', 'B', 'C'],
+			value: [1, 2, 3],
+		})
+
+		const table17 = table({
+			type: [1, 1, 1, 2, 2],
+			name: ['A', 'A', 'B', 'A', 'B'],
+			count: [1, 2, 3, 4, 5],
+		})
+
+		const table18 = table({
+			A: [1, 3, 10],
+			B: [2, 4, 20],
+			C: [3, 5, 30],
+		})
+
 		this.set('table1', table1)
 		this.set('table2', table2)
 		this.set('table3', table3)
@@ -115,5 +132,8 @@ export class TestStore extends TableStore {
 		this.set('table13', table13)
 		this.set('table14', table14)
 		this.set('table15', table15)
+		this.set('table16', table16)
+		this.set('table17', table17)
+		this.set('table18', table18)
 	}
 }

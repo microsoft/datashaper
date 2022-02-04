@@ -21,9 +21,9 @@ describe('test for erase verb', () => {
 		return erase(step, store).then(result => {
 			expect(result.numCols()).toBe(2)
 			expect(result.numRows()).toBe(6)
-			expect(result.get('ID', 3)).toBe(undefined)
-			expect(result.get('ID', 4)).toBe(undefined)
-			expect(result.get('ID', 5)).toBe(undefined)
+			expect(result.get('ID', 3)).toBeUndefined()
+			expect(result.get('ID', 4)).toBeUndefined()
+			expect(result.get('ID', 5)).toBeUndefined()
 		})
 	})
 
@@ -41,8 +41,8 @@ describe('test for erase verb', () => {
 		return erase(step, store).then(result => {
 			expect(result.numCols()).toBe(2)
 			expect(result.numRows()).toBe(6)
-			expect(result.get('item', 2)).toBe(undefined)
-			expect(result.get('item', 3)).toBe(undefined)
+			expect(result.get('item', 2)).toBeUndefined()
+			expect(result.get('item', 3)).toBeUndefined()
 		})
 	})
 })

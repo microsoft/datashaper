@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { escape } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { RowObject } from 'arquero/dist/types/table/table'
+import { ExprObject } from 'arquero/dist/types/table/transformable'
 import { columnType, MergeStrategy, TableStore } from '../..'
 import { DataType, MergeArgs, Step } from '../../types'
-import { ExprObject } from 'arquero/dist/types/table/transformable'
-import { escape } from 'arquero'
 
 /**
  * Executes an arquero merge operation.
@@ -26,7 +26,7 @@ export async function merge(
 
 	const inputTable = await store.get(input)
 
-	let isSameDataTypeFlag: boolean = isSameDataType(inputTable, columns)
+	const isSameDataTypeFlag: boolean = isSameDataType(inputTable, columns)
 
 	// eslint-disable-next-line
 	const func: object = escape((d: any) => {
@@ -49,12 +49,12 @@ export async function merge(
 }
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {
-	let allTypesAreTheSame: boolean = true
-	let lastDataType: DataType = columnType(inputTable, columns[0])
+	let allTypesAreTheSame = true
+	const lastDataType: DataType = columnType(inputTable, columns[0])
 	let i = 1
 
 	while (allTypesAreTheSame === true && i < columns.length) {
-		let dataType: DataType = columnType(inputTable, columns[i])
+		const dataType: DataType = columnType(inputTable, columns[i])
 		allTypesAreTheSame = lastDataType === dataType
 		i++
 	}
@@ -68,15 +68,11 @@ function firstOneWinsStrategy(
 	columns: string[],
 ) {
 	let firstValidValue: object = singleRow[columns[0]]
-	let foundFirstValidValue: boolean = false
+	let foundFirstValidValue = false
 	let i = 0
 
 	while (!foundFirstValidValue && i < columns.length) {
-		if (
-			singleRow[columns[i]] !== undefined &&
-			singleRow[columns[i]] !== null &&
-			singleRow[columns[i]] != NaN
-		) {
+		if (singleRow[columns[i]] !== undefined && singleRow[columns[i]] !== null) {
 			firstValidValue = singleRow[columns[i]]
 			foundFirstValidValue = true
 		}
@@ -94,11 +90,7 @@ function lastOneWinsStrategy(
 	let lastValidValue: object = singleRow[columns[0]]
 
 	for (let i = 0; i < columns.length; i++) {
-		if (
-			singleRow[columns[i]] !== undefined &&
-			singleRow[columns[i]] !== null &&
-			singleRow[columns[i]] != NaN
-		) {
+		if (singleRow[columns[i]] !== undefined && singleRow[columns[i]] !== null) {
 			lastValidValue = singleRow[columns[i]]
 		}
 	}
@@ -107,14 +99,10 @@ function lastOneWinsStrategy(
 }
 
 function concatStrategy(singleRow: RowObject, columns: string[]) {
-	let concatValue: string = ''
+	let concatValue = ''
 
 	for (let i = 0; i < columns.length; i++) {
-		if (
-			singleRow[columns[i]] !== undefined &&
-			singleRow[columns[i]] !== null &&
-			singleRow[columns[i]] != NaN
-		) {
+		if (singleRow[columns[i]] !== undefined && singleRow[columns[i]] !== null) {
 			concatValue = concatValue + singleRow[columns[i]]
 		}
 	}

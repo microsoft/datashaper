@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { from } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { RowObject } from 'arquero/dist/types/table/table'
 import { TableStore } from '../..'
 import { FillArgs, Step } from '../../types'
-import { from } from 'arquero'
 
 /**
  * Executes an arquero erase operation.
@@ -24,7 +24,7 @@ export async function erase(
 	const { value, to } = args as FillArgs
 	const inputTable = await store.get(input)
 
-	let matrix: RowObject[] = inputTable.objects()
+	const matrix: RowObject[] = inputTable.objects()
 
 	matrix.forEach(row => {
 		if (row[to] === value) {

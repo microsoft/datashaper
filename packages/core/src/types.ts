@@ -207,6 +207,7 @@ export enum Verb {
 	Sample = 'sample',
 	Select = 'select',
 	Spread = 'spread',
+	Unfold = 'unfold',
 	Ungroup = 'ungroup',
 	Union = 'union',
 	Unorder = 'unorder',
@@ -237,7 +238,7 @@ export type GroupbyStep = Step<GroupbyArgs>
 export type JoinStep = Step<JoinArgs>
 export type LookupStep = Step<LookupArgs>
 export type MergeStep = Step<MergeArgs>
-export type PivotStep = Step<FoldArgs>
+export type PivotStep = Step<PivotArgs>
 export type OrderbyStep = Step<OrderbyArgs>
 export type RecodeStep = Step<RecodeArgs>
 export type RenameStep = Step<RenameArgs>
@@ -245,6 +246,7 @@ export type RollupStep = Step<RollupArgs>
 export type SampleStep = Step<SampleArgs>
 export type SelectStep = Step<SelectArgs>
 export type SpreadStep = Step<SpreadArgs>
+export type UnfoldStep = Step<UnfoldArgs>
 export type UnrollStep = Step<UnrollArgs>
 export type SetOperationStep = Step<SetOperationArgs>
 
@@ -367,6 +369,17 @@ export interface FoldArgs extends InputColumnListArgs {
 	 * Two-element array of names for the output [key, value]
 	 */
 	to?: [string, string]
+}
+
+export interface PivotArgs {
+	key: string
+	value: string
+	operation: FieldAggregateOperation
+}
+
+export interface UnfoldArgs {
+	key: string
+	value: string
 }
 
 export type GroupbyArgs = InputColumnListArgs

@@ -48,6 +48,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	sample: [Tags.RowModifying],
 	select: [],
 	spread: [Tags.InputColumn],
+	unfold: [Tags.RowModifying],
 	ungroup: [],
 	union: [Tags.RowModifying],
 	unorder: [],
