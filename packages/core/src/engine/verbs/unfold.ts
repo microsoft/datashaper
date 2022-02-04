@@ -6,7 +6,7 @@
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore, UnfoldArgs } from '../..'
-import { PivotArgs, Step } from '../../types'
+import { Step } from '../../types'
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
