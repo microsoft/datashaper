@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { erase } from '../verbs/erase'
 import { TestStore } from './TestStore'
 
 describe('test for erase verb', () => {
 	test('erase numeric value', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Erase,
 			input: 'table3',
 			output: 'output',
@@ -29,7 +28,6 @@ describe('test for erase verb', () => {
 
 	test('erase string value', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Erase,
 			input: 'table3',
 			output: 'output',

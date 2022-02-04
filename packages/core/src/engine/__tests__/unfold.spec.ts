@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { fold } from '../verbs/fold'
 import { unfold } from '../verbs/unfold'
 import { TestStore } from './TestStore'
@@ -10,7 +10,6 @@ import { TestStore } from './TestStore'
 describe('test for unfold verb', () => {
 	test('unfold test with multiple columns', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Fold,
 			input: 'table18',
 			output: 'output',
@@ -24,7 +23,6 @@ describe('test for unfold verb', () => {
 		})
 
 		const step2: Step = {
-			type: StepType.Verb,
 			verb: Verb.Fold,
 			input: 'newTable',
 			output: 'output',

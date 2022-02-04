@@ -3,14 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FieldAggregateOperation } from '../..'
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { pivot } from '../verbs/pivot'
 import { TestStore } from './TestStore'
 
 describe('test for pivot verb', () => {
 	test('pivot test with any operation', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Pivot,
 			input: 'table16',
 			output: 'output',
@@ -34,7 +33,6 @@ describe('test for pivot verb', () => {
 
 	test('pivot test with sum operation', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Pivot,
 			input: 'table17',
 			output: 'output',
@@ -57,7 +55,6 @@ describe('test for pivot verb', () => {
 
 	test('pivot test with max operation', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Pivot,
 			input: 'table17',
 			output: 'output',
@@ -80,7 +77,6 @@ describe('test for pivot verb', () => {
 
 	test('pivot test with min operation', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Pivot,
 			input: 'table17',
 			output: 'output',
@@ -103,7 +99,6 @@ describe('test for pivot verb', () => {
 
 	test('pivot test with mean operation', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Pivot,
 			input: 'table17',
 			output: 'output',
@@ -126,7 +121,6 @@ describe('test for pivot verb', () => {
 
 	test('pivot test with median operation', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Pivot,
 			input: 'table17',
 			output: 'output',

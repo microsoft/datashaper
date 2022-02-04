@@ -3,14 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { MergeStrategy } from '../..'
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { merge } from '../verbs/merge'
 import { TestStore } from './TestStore'
 
 describe('test for merge verb', () => {
 	test('merge numeric values and concat strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table12',
 			output: 'output',
@@ -36,7 +35,6 @@ describe('test for merge verb', () => {
 
 	test('merge string values and concat strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table13',
 			output: 'output',
@@ -62,7 +60,6 @@ describe('test for merge verb', () => {
 
 	test('merge numeric and string values and concat strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table12',
 			output: 'output',
@@ -88,7 +85,6 @@ describe('test for merge verb', () => {
 
 	test('merge with string and numeric values - different datatype values - first one wins strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table12',
 			output: 'output',
@@ -114,7 +110,6 @@ describe('test for merge verb', () => {
 
 	test('merge with numeric values - same datatype values - first one wins strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table12',
 			output: 'output',
@@ -140,7 +135,6 @@ describe('test for merge verb', () => {
 
 	test('merge with boolean and string values - different datatype values - first one wins strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table14',
 			output: 'output',
@@ -164,7 +158,6 @@ describe('test for merge verb', () => {
 
 	test('merge with boolean values - same datatype values - first one wins strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table15',
 			output: 'output',
@@ -188,7 +181,6 @@ describe('test for merge verb', () => {
 
 	test('merge with string and numeric values - different datatype values - last one wins strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table12',
 			output: 'output',
@@ -214,7 +206,6 @@ describe('test for merge verb', () => {
 
 	test('merge with numeric values - same datatype values - last one wins strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table12',
 			output: 'output',
@@ -240,7 +231,6 @@ describe('test for merge verb', () => {
 
 	test('merge with boolean and string values - different datatype values - last one wins strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table14',
 			output: 'output',
@@ -264,7 +254,6 @@ describe('test for merge verb', () => {
 
 	test('merge with boolean values - same datatype values - last one wins strategy', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Merge,
 			input: 'table15',
 			output: 'output',
