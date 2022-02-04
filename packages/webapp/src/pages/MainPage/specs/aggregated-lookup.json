@@ -3,7 +3,6 @@
 	"description": "Uses a multi-step aggregate and filter to do a custom lookup.",
 	"steps": [
 		{
-			"type": "verb",
 			"verb": "join",
 			"input": "data/companies.csv",
 			"output": "join-1",
@@ -13,7 +12,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "filter",
 			"input": "join-1",
 			"output": "filter-1",
@@ -25,7 +23,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "aggregate",
 			"input": "filter-1",
 			"output": "aggregate-1",
@@ -37,7 +34,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "lookup",
 			"input": "data/companies.csv",
 			"output": "lookup-1",

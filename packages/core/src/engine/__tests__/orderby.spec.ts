@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb, SortDirection } from '../../types'
+import { Step, Verb, SortDirection } from '../../types'
 import { orderby } from '../verbs/orderby'
 import { TestStore } from './TestStore'
 
 describe('test for orderby verb', () => {
 	test('orderby test with SortDirection Ascending and string value', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Orderby,
 			input: 'table7',
 			output: 'output',
@@ -33,7 +32,6 @@ describe('test for orderby verb', () => {
 
 	test('orderby test with SortDirection Descending and string value', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Orderby,
 			input: 'table7',
 			output: 'output',
@@ -57,7 +55,6 @@ describe('test for orderby verb', () => {
 
 	test('orderby test with SortDirection Ascending and number value', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Orderby,
 			input: 'table7',
 			output: 'output',
@@ -81,7 +78,6 @@ describe('test for orderby verb', () => {
 
 	test('orderby test with SortDirection Descending and number value', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Orderby,
 			input: 'table7',
 			output: 'output',

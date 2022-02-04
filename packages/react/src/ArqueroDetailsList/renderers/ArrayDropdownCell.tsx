@@ -25,6 +25,7 @@ export const ArrayDropdownCell: React.FC<DropdownCellProps> = memo(
 				onChange={onCellDropdownSelect}
 				placeholder={placeholderValues}
 				options={values}
+				styles={{ root: { width: '85%' } }}
 			></Dropdown>
 		)
 	},

@@ -8,7 +8,6 @@ import { useMemo } from 'react'
 
 export function useColumnStyles(
 	clickable: boolean,
-	sortable: boolean,
 	separator: boolean,
 ): Partial<IDetailsColumnStyles> {
 	const theme = useThematic()
@@ -21,15 +20,17 @@ export function useColumnStyles(
 			sortIcon: {
 				display: 'none',
 			},
-			root: {
-				cursor: clickable || sortable ? 'pointer' : 'default',
-			},
+			cursor: clickable ? 'pointer' : 'inherit',
 			cellTitle: {
 				borderRight: separator
 					? `1px solid ${theme.application().faint().hex(0.6)}`
 					: '1px solid transparent',
 			},
+			cellTooltip: {
+				display: 'initial',
+				position: 'relative',
+			},
 		}),
-		[theme, clickable, sortable, separator],
+		[theme, clickable, separator],
 	)
 }

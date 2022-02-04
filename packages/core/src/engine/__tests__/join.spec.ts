@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { join } from '../verbs/join'
 import { TestStore } from './TestStore'
 
 describe('test for join verb', () => {
 	test('join test', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Join,
 			input: 'table1',
 			output: 'output',

@@ -639,6 +639,7 @@ __metadata:
   dependencies:
     "@data-wrangling-components/core": "workspace:packages/core"
     "@data-wrangling-components/utilities": "workspace:packages/utilities"
+    "@essex-js-toolkit/hooks": ^3.0.2
     "@essex-js-toolkit/themed-components": ^1.3.2
     "@essex/scripts": ^19.0.5
     "@essex/vite-config": ^18.0.2
@@ -730,9 +731,9 @@ __metadata:
     "@fluentui/react": ^8.49.4
     "@fluentui/react-hooks": ^8.3.9
     "@fluentui/utilities": ^8.3.9
-    "@thematic/core": ^1.3.0
-    "@thematic/fluent": ^1.3.0
-    "@thematic/react": ^1.3.0
+    "@thematic/core": ^1.3.2
+    "@thematic/fluent": ^2.0.1
+    "@thematic/react": ^1.3.2
     "@types/lodash": ^4.14.178
     "@types/node": ^16.11.19
     "@types/react": ^17.0.38
@@ -806,7 +807,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/hooks@npm:3.0.2":
+"@essex-js-toolkit/hooks@npm:3.0.2, @essex-js-toolkit/hooks@npm:^3.0.2":
   version: 3.0.2
   resolution: "@essex-js-toolkit/hooks@npm:3.0.2"
   dependencies:
@@ -1871,6 +1872,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@thematic/color@npm:1.3.2":
+  version: 1.3.2
+  resolution: "@thematic/color@npm:1.3.2"
+  dependencies:
+    chroma-js: ^2.1.2
+    color-blind: ^0.1.1
+    core-js: ^3.20.2
+    hsluv: ^0.1.0
+  peerDependencies:
+    "@types/chroma-js": "*"
+    "@types/node": "*"
+  peerDependenciesMeta:
+    "@types/chroma-js":
+      optional: true
+    "@types/node":
+      optional: true
+  checksum: 314208d25ed4345fe4bd408ae7a774910c294cf7b1ed367319074471041e9871d8df82e130ffaae9abfeedcdfa92fa624445e75953f9d2656f23ba2347ffa023
+  languageName: node
+  linkType: hard
+
 "@thematic/core@npm:1.3.0, @thematic/core@npm:^1.3.0":
   version: 1.3.0
   resolution: "@thematic/core@npm:1.3.0"
@@ -1894,6 +1915,32 @@ __metadata:
     "@types/node":
       optional: true
   checksum: 644d01bac8b41af877373350dece5ed8d1f0d97a3f60620a30e97430508482ea5fe429bda69f99ac62b2fc09ad95d1451c500fcf41b368688d2a7b3726813625
+  languageName: node
+  linkType: hard
+
+"@thematic/core@npm:1.3.2, @thematic/core@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "@thematic/core@npm:1.3.2"
+  dependencies:
+    "@thematic/color": 1.3.2
+    core-js: ^3.20.2
+    d3-scale: ^3.3.0
+    lodash: ^4.17.21
+    murmurhash-js: ^1.0.0
+  peerDependencies:
+    "@types/d3-scale": ">= 2"
+    "@types/lodash": ">= 4"
+    "@types/node": "*"
+  peerDependenciesMeta:
+    "@types/d3-scale":
+      optional: true
+    "@types/lodash":
+      optional: true
+    "@types/murmurhash-js":
+      optional: true
+    "@types/node":
+      optional: true
+  checksum: 2c356bf65755468eac49931c75c2c0f71abb4c3430b0251bd0c3fc6d6438e574e6255bb676acba025af5ccac0d413f54daff6d2da4c8bffebcf6bd744365b3b6
   languageName: node
   linkType: hard
 
@@ -1951,6 +1998,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@thematic/fluent@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@thematic/fluent@npm:2.0.1"
+  dependencies:
+    "@essex-js-toolkit/hooks": ^1.1.5
+    "@thematic/color": 1.3.2
+    "@thematic/core": 1.3.2
+    "@thematic/react": 1.3.2
+    core-js: ^3.20.2
+    d3-scale: ^3.3.0
+  peerDependencies:
+    "@fluentui/font-icons-mdl2": ">= 8"
+    "@fluentui/react": ">= 8"
+    "@types/node": "*"
+    "@types/react": ">= 17"
+    react: ">= 17"
+  peerDependenciesMeta:
+    "@fluentui/font-icons-mdl2":
+      optional: false
+    "@fluentui/react":
+      optional: false
+    "@types/node":
+      optional: true
+    "@types/react":
+      optional: true
+    react:
+      optional: false
+  checksum: e2c60cdd4b95647b9d33616795fb1876dae61870181d651bfc2e999ef99d9f5e7c03eaef8381784a464d67a00247cab2c79ec5411a9b06b6375f110f303561b0
+  languageName: node
+  linkType: hard
+
 "@thematic/react@npm:1.3.0, @thematic/react@npm:^1.3.0":
   version: 1.3.0
   resolution: "@thematic/react@npm:1.3.0"
@@ -1970,6 +2048,28 @@ __metadata:
     react:
       optional: false
   checksum: 06caf208c61d3281b23ce030395f529bb37dcd8031ab1ea12f55dff9b97e1a8ff1af03c4db28edfe2c59650ba165e4e655c18d90160542486678be2f29976056
+  languageName: node
+  linkType: hard
+
+"@thematic/react@npm:1.3.2, @thematic/react@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "@thematic/react@npm:1.3.2"
+  dependencies:
+    "@thematic/color": 1.3.2
+    "@thematic/core": 1.3.2
+    core-js: ^3.20.2
+  peerDependencies:
+    "@types/node": "*"
+    "@types/react": ">= 17"
+    react: ">= 17"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    "@types/react":
+      optional: true
+    react:
+      optional: false
+  checksum: 77ac813ed9da355b41cdf9d4cff19e4733ba04c549f6f402df93fb8b3ea00e64ae4b8dd54d7d352b6fa48995ac8fe721a80f271f3336ae7d0088681179a62cc4
   languageName: node
   linkType: hard
 
@@ -3408,7 +3508,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chroma-js@npm:^2.1.1":
+"chroma-js@npm:^2.1.1, chroma-js@npm:^2.1.2":
   version: 2.1.2
   resolution: "chroma-js@npm:2.1.2"
   dependencies:

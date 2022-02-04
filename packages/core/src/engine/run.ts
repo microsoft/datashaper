@@ -2,21 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { table } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '..'
-import { CompoundStep, Step, StepFunction } from '../types'
-import { verb } from './verbs'
-
-// TODO: we should just make the run method recursive
-const compound = async (step: Step | CompoundStep, store: TableStore) => {
-	return run((step as CompoundStep).steps, store)
-}
-
-const functions: Record<string, StepFunction> = {
-	verb,
-	compound,
-}
+import { Step, Verb } from '../types'
+import { chain } from './verbs/chain'
 
 /**
  * This is a fairly simplistic processing engine that executes a series of table manipulations with our verbs.
@@ -33,17 +22,16 @@ export async function run(
 	steps: Step[],
 	store: TableStore,
 ): Promise<ColumnTable> {
-	let output: ColumnTable = table({})
-	for (let index = 0; index < steps.length; index++) {
-		const step = steps[index]
-		try {
-			output = await functions[step.type](step, store)
-			store.set(step.output, output)
-		} catch (e) {
-			console.error(`Pipeline failed on step ${index}`, step)
-			throw e
-		}
-	}
-	// return the final table
-	return output
+	return chain(
+		{
+			verb: Verb.Chain,
+			input: steps[0].input,
+			output: steps[steps.length - 1].output,
+			args: {
+				steps,
+				nofork: true,
+			},
+		},
+		store,
+	)
 }

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb, SortDirection } from '../../types'
+import { Step, Verb, SortDirection } from '../../types'
 import { orderby } from '../verbs/orderby'
 import { unorder } from '../verbs/unorder'
 import { TestStore } from './TestStore'
@@ -10,7 +10,6 @@ import { TestStore } from './TestStore'
 describe('test for unorder verb', () => {
 	test('unorder test with SortDirection Ascending and string value', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Orderby,
 			input: 'table7',
 			output: 'output',
@@ -34,7 +33,6 @@ describe('test for unorder verb', () => {
 		})
 
 		const step2: Step = {
-			type: StepType.Verb,
 			verb: Verb.Unorder,
 			input: 'newTable',
 			output: 'output',
@@ -56,7 +54,6 @@ describe('test for unorder verb', () => {
 
 	test('unorder test with SortDirection Descending and string value', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Orderby,
 			input: 'table7',
 			output: 'output',
@@ -80,7 +77,6 @@ describe('test for unorder verb', () => {
 		})
 
 		const step2: Step = {
-			type: StepType.Verb,
 			verb: Verb.Unorder,
 			input: 'newTable',
 			output: 'output',
@@ -102,7 +98,6 @@ describe('test for unorder verb', () => {
 
 	test('unorder test with SortDirection Ascending and number value', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Orderby,
 			input: 'table7',
 			output: 'output',
@@ -126,7 +121,6 @@ describe('test for unorder verb', () => {
 		})
 
 		const step2: Step = {
-			type: StepType.Verb,
 			verb: Verb.Unorder,
 			input: 'newTable',
 			output: 'output',
@@ -148,7 +142,6 @@ describe('test for unorder verb', () => {
 
 	test('unorder test with SortDirection Descending and number value', async () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Orderby,
 			input: 'table7',
 			output: 'output',
@@ -172,7 +165,6 @@ describe('test for unorder verb', () => {
 		})
 
 		const step2: Step = {
-			type: StepType.Verb,
 			verb: Verb.Unorder,
 			input: 'newTable',
 			output: 'output',

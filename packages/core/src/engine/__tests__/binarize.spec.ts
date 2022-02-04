@@ -3,14 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { NumericComparisonOperator, FilterCompareType } from '../../../src'
-import { Step, StepType, StringComparisonOperator, Verb } from '../../types'
+import { Step, StringComparisonOperator, Verb } from '../../types'
 import { binarize } from '../verbs/binarize'
 import { TestStore } from './TestStore'
 
 describe('test for binarize verb', () => {
 	test('binarize test with NumericComparisonOperator Gte', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Binarize,
 			input: 'table1',
 			output: 'output',
@@ -41,7 +40,6 @@ describe('test for binarize verb', () => {
 
 	test('binarize test with NumericComparisonOperator Gt', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Binarize,
 			input: 'table1',
 			output: 'output',
@@ -72,7 +70,6 @@ describe('test for binarize verb', () => {
 
 	test('binarize test with NumericComparisonOperator Lt', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Binarize,
 			input: 'table1',
 			output: 'output',
@@ -103,7 +100,6 @@ describe('test for binarize verb', () => {
 
 	test('binarize test with StringComparisonOperator EndsWith', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Binarize,
 			input: 'table4',
 			output: 'output',
@@ -135,7 +131,6 @@ describe('test for binarize verb', () => {
 
 	test('binarize test with StringComparisonOperator Empty', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Binarize,
 			input: 'table5',
 			output: 'output',
@@ -166,7 +161,6 @@ describe('test for binarize verb', () => {
 
 	test('binarize test with StringComparisonOperator Contains', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Binarize,
 			input: 'table5',
 			output: 'output',

@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb } from '../..'
+import { Step, Verb } from '../..'
 import { fetch } from '../verbs/fetch'
 import { TestStore } from './TestStore'
 
 describe('test for fetch', () => {
 	test('fetch simple csv file', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Fetch,
 			input: '',
 			output: 'output',

@@ -25,6 +25,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	aggregate: [Tags.InputColumn, Tags.OutputColumn, Tags.RowModifying],
 	bin: [Tags.InputColumn, Tags.OutputColumn],
 	binarize: [Tags.InputColumn, Tags.OutputColumn],
+	chain: [],
 	concat: [Tags.RowModifying],
 	dedupe: [Tags.RowModifying],
 	derive: [Tags.OutputColumn],

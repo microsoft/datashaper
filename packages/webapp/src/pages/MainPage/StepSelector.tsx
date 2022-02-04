@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { StepType, Verb } from '@data-wrangling-components/core'
+import { Verb } from '@data-wrangling-components/core'
 import { Dropdown, DropdownMenuItemType, IconButton } from '@fluentui/react'
 import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 export interface StepSelectorProps {
-	onCreate?: (type: StepType, verb: Verb) => void
+	onCreate?: (verb: Verb) => void
 }
 
 export const StepSelector: React.FC<StepSelectorProps> = memo(
@@ -19,9 +19,7 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 			setCurrentOption(opt.key)
 		}, [])
 		const handleStepClick = useCallback(() => {
-			// these won't always be verbs of course
-			const type = isCompound(currentOption) ? StepType.Compound : StepType.Verb
-			onCreate && onCreate(type, currentOption as Verb)
+			onCreate && onCreate(currentOption as Verb)
 		}, [currentOption, onCreate])
 		return (
 			<Container>
@@ -58,10 +56,6 @@ function useCompoundOptions() {
 			text,
 		}))
 	}, [])
-}
-
-function isCompound(key: string): boolean {
-	return Object.values(Compound).findIndex(c => c === key) >= 0
 }
 
 function useGroupedOptions() {

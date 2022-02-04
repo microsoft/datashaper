@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { spread } from '../verbs/spread'
 import { TestStore } from './TestStore'
 
 describe('test for spread verb', () => {
 	test('spread test', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Spread,
 			input: 'table6',
 			output: 'output',

@@ -22,6 +22,7 @@ export function getDropdownValue(
 			key: `${index}-${value}`,
 			text: value,
 			data: { rowIndex, column },
+			title: value,
 		}
 	})
 }

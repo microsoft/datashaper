@@ -11,11 +11,14 @@ import {
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
+	createDefaultCommandBar,
+	createLazyLoadingGroupHeader,
 } from '@data-wrangling-components/react'
-import { createLazyLoadingGroupHeader } from '@data-wrangling-components/react/src/ArqueroDetailsList/renderers'
 import {
 	DefaultButton,
 	IColumn,
+	ICommandBarItemProps,
+	IDetailsColumnProps,
 	IDetailsGroupDividerProps,
 	Pivot,
 	PivotItem,
@@ -23,7 +26,7 @@ import {
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { Struct } from 'arquero/dist/types/table/transformable'
-import React, { memo, useState, useEffect, useCallback } from 'react'
+import React, { memo, useState, useEffect, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 /**
  * This is just a rudimentary page to load a large table for profiling the ArqueroDetailsList rendering.
@@ -75,6 +78,45 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		[],
 	)
 
+	const myCommand = useCallback((props?: IDetailsColumnProps) => {
+		const items = [
+			{
+				key: 'edit',
+				text: 'Edit',
+				iconOnly: true,
+				iconProps: { iconName: 'Edit' },
+				onClick: () => console.log('edit', props),
+			},
+			{
+				key: 'delete',
+				text: 'Delete',
+				iconOnly: true,
+				iconProps: { iconName: 'Delete' },
+				onClick: () => console.log('delete', props),
+			},
+			{
+				key: 'add',
+				text: 'Add',
+				iconOnly: true,
+				iconProps: { iconName: 'Add' },
+				onClick: () => console.log('add', props),
+			},
+		] as ICommandBarItemProps[]
+		return createDefaultCommandBar(items)
+	}, [])
+
+	const columns = useMemo((): IColumn[] | undefined => {
+		if (!table) return undefined
+		return table.columnNames().map(x => {
+			return {
+				name: x,
+				key: x,
+				fieldName: x,
+				minWidth: 180,
+			} as IColumn
+		})
+	}, [table])
+
 	if (!table || !metadata || !groupedTable || !groupedMetadata) {
 		return null
 	}
@@ -86,7 +128,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 				re-mounting the table.
 			</p>
 			<Pivot>
-				<PivotItem key={'table'} headerText={'table'}>
+				<PivotItem style={{ width: '96vw' }} key={'table'} headerText={'table'}>
 					<AddButton onClick={addNewColumn}>Add new column</AddButton>
 					<Table>
 						<ArqueroTableHeader
@@ -100,10 +142,9 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 							features={{
 								smartCells: true,
 								smartHeaders: true,
+								commandBar: [myCommand],
 							}}
-							columns={table.columnNames().map(x => {
-								return { name: x, key: x, fieldName: x } as IColumn
-							})}
+							columns={columns}
 							isSortable
 							isHeadersFixed
 							isStriped

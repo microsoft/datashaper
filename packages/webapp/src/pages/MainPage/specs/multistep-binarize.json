@@ -3,7 +3,6 @@
 	"description": "Use multiple steps chained together to create a boolean condition set for a single binarized output column.",
 	"steps": [
 		{
-			"type": "verb",
 			"verb": "binarize",
 			"input": "data/companies.csv",
 			"output": "binarize-1",
@@ -16,7 +15,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "binarize",
 			"input": "binarize-1",
 			"output": "binarize-2",
@@ -29,7 +27,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "derive",
 			"input": "binarize-2",
 			"output": "derive-1",
@@ -41,7 +38,6 @@
 			}
 		},
 		{
-			"type": "verb",
 			"verb": "select",
 			"input": "derive-1",
 			"output": "select-1",

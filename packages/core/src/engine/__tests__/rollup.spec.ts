@@ -3,14 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FieldAggregateOperation } from '../../../../core'
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { rollup } from '../verbs/rollup'
 import { TestStore } from './TestStore'
 
 describe('test for rollup verb', () => {
 	test('rollup test with count operation', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Rollup,
 			input: 'table3',
 			output: 'output',
@@ -32,7 +31,6 @@ describe('test for rollup verb', () => {
 
 	test('rollup test with sum operation', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Rollup,
 			input: 'table4',
 			output: 'output',
@@ -54,7 +52,6 @@ describe('test for rollup verb', () => {
 
 	test('rollup test with min operation', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Rollup,
 			input: 'table4',
 			output: 'output',

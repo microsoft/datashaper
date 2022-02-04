@@ -3,7 +3,6 @@
 	"description": "",
 	"steps": [
 		{
-			"type": "verb",
 			"verb": "groupby",
 			"input": "data/stocks.csv",
 			"output": "groupby-2",

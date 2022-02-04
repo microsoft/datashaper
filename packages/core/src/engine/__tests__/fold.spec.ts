@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, StepType, Verb } from '../../types'
+import { Step, Verb } from '../../types'
 import { fold } from '../verbs/fold'
 import { TestStore } from './TestStore'
 
 describe('test for fold verb', () => {
 	test('fold test with one column', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Fold,
 			input: 'table1',
 			output: 'output',
@@ -33,7 +32,6 @@ describe('test for fold verb', () => {
 
 	test('fold test with two columns', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Fold,
 			input: 'table1',
 			output: 'output',

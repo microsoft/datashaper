@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { MathOperator, Step, StepType } from '../..'
+import { MathOperator, Step } from '../..'
 import { runPipeline } from '../runPipeline'
 
 describe('runPipeline', () => {
@@ -13,7 +13,6 @@ describe('runPipeline', () => {
 
 	test('runs a single step with normal input/output', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: 'fill',
 			input: 'input',
 			output: 'output',
@@ -29,7 +28,6 @@ describe('runPipeline', () => {
 
 	test('runs a single step with empty input/output', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: 'fill',
 			// these are required on the type but can be empty strings
 			input: '',
@@ -47,7 +45,6 @@ describe('runPipeline', () => {
 	test('runs a set of steps with normal input/output', () => {
 		const step: Step[] = [
 			{
-				type: StepType.Verb,
 				verb: 'fill',
 				input: 'input',
 				output: 'output1',
@@ -57,7 +54,6 @@ describe('runPipeline', () => {
 				},
 			},
 			{
-				type: StepType.Verb,
 				verb: 'derive',
 				input: 'output1',
 				output: 'output2',
@@ -78,7 +74,6 @@ describe('runPipeline', () => {
 	test('runs a set of steps with no input/output', () => {
 		const step: Step[] = [
 			{
-				type: StepType.Verb,
 				verb: 'fill',
 				input: '',
 				output: '',
@@ -88,7 +83,6 @@ describe('runPipeline', () => {
 				},
 			},
 			{
-				type: StepType.Verb,
 				verb: 'derive',
 				input: '',
 				output: '',
@@ -100,7 +94,6 @@ describe('runPipeline', () => {
 				},
 			},
 			{
-				type: StepType.Verb,
 				verb: 'select',
 				input: '',
 				output: '',

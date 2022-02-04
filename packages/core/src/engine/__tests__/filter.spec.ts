@@ -3,14 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { NumericComparisonOperator, FilterCompareType } from '../../../src'
-import { Step, StepType, StringComparisonOperator, Verb } from '../../types'
+import { Step, StringComparisonOperator, Verb } from '../../types'
 import { filter } from '../verbs/filter'
 import { TestStore } from './TestStore'
 
 describe('test for filter verb', () => {
 	test('filter test with NumericComparisonOperator Gte', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Filter,
 			input: 'table8',
 			output: 'output',
@@ -36,7 +35,6 @@ describe('test for filter verb', () => {
 
 	test('filter test with NumericComparisonOperator Gt', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Filter,
 			input: 'table8',
 			output: 'output',
@@ -61,7 +59,6 @@ describe('test for filter verb', () => {
 
 	test('filter test with NumericComparisonOperator Lt', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Filter,
 			input: 'table8',
 			output: 'output',
@@ -86,7 +83,6 @@ describe('test for filter verb', () => {
 
 	test('filter test with StringComparisonOperator Equals', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Filter,
 			input: 'table8',
 			output: 'output',
@@ -110,7 +106,6 @@ describe('test for filter verb', () => {
 
 	test('filter test with StringComparisonOperator Empty', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Filter,
 			input: 'table5',
 			output: 'output',
@@ -134,7 +129,6 @@ describe('test for filter verb', () => {
 
 	test('filter test with StringComparisonOperator Contains', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Filter,
 			input: 'table3',
 			output: 'output',

@@ -28,6 +28,7 @@ export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow(
 					borderRight: columnBorders
 						? `1px solid ${theme.application().background().hex(0.5)}`
 						: `1px solid transparent`,
+					padding: 'unset',
 				},
 				...styles,
 			}
@@ -38,6 +39,7 @@ export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow(
 				borderBottom: `1px solid ${theme.application().faint().hex()}`,
 			},
 			cell: {
+				padding: 'unset',
 				borderRight: columnBorders
 					? `1px solid ${theme.application().faint().hex(0.5)}`
 					: `1px solid transparent`,

@@ -2,8 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnStats, Category } from '@data-wrangling-components/core'
-import React, { memo, useMemo } from 'react'
+import {
+	ColumnStats,
+	Category,
+	formatIfNumber,
+} from '@data-wrangling-components/core'
+import { TooltipHost } from '@fluentui/react'
+import React, { memo, useMemo, useCallback, useState } from 'react'
 import { Sparkbar } from '../../charts'
 import { useCellDimensions } from '../hooks'
 import { RichHeaderProps } from './types'
@@ -17,8 +22,8 @@ const PADDING_HEIGHT = 8
  */
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 	function HistogramColumnHeader({ metadata, color, ...props }) {
-		const { column } = props
-		const dimensions = useCellDimensions(column)
+		const { column, onClick } = props
+		const dimensions = useCellDimensions(column, false)
 
 		const categorical = metadata.type === 'string'
 
@@ -26,6 +31,31 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const values = useMemo(() => (bins || []).map(b => b.count), [bins])
 		const categories = useCategories(metadata.stats, categorical)
 		const title = useTooltip(categories)
+		const legend = useLegend(categories)
+		const [hover, setHover] = useState<string>()
+		const [id, setId] = useState<string>()
+		const handleBarHover = useCallback(
+			e => {
+				const { target, type } = e
+				const index = target.dataset.index
+				const id = target.id
+				if (type === 'mouseover' && index >= 0) {
+					setHover(legend[index] || '')
+					setId(id)
+				} else {
+					setHover(undefined)
+					setId(undefined)
+				}
+			},
+			[legend, setHover, setId],
+		)
+
+		const styles = useMemo(() => {
+			return {
+				height: dimensions.height + PADDING_HEIGHT,
+				cursor: onClick ? 'pointer' : 'inherit',
+			}
+		}, [onClick, dimensions])
 
 		// don't render a single bar
 		if (metadata.stats?.distinct === 1) {
@@ -33,17 +63,31 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		}
 
 		return (
-			<div title={title} style={{ height: dimensions.height + PADDING_HEIGHT }}>
+			<>
 				{bins ? (
-					<Sparkbar
-						categorical={categorical}
-						data={values}
-						width={dimensions.width - 1}
-						height={dimensions.height}
-						color={color}
-					/>
+					<div
+						onClick={e => onClick && bins && onClick(e, column, metadata)}
+						title={title}
+						style={styles}
+					>
+						<TooltipHost
+							content={hover}
+							id={id}
+							calloutProps={{ gapSpace: 5, target: `#${id}` }}
+						>
+							<Sparkbar
+								categorical={categorical}
+								data={values}
+								width={dimensions.width - 1}
+								height={dimensions.height}
+								color={color}
+								legend={legend}
+								onBarHover={handleBarHover}
+							/>
+						</TooltipHost>
+					</div>
 				) : null}
-			</div>
+			</>
 		)
 	},
 )
@@ -61,7 +105,13 @@ function useTooltip(categories: Category[]): string {
 	return useMemo(() => {
 		return categories.reduce((acc, cur, idx) => {
 			const { name, count } = cur
-			return acc + (idx > 0 ? '\n' : '') + `${name}: ${count}`
+			return acc + (idx > 0 ? '\n' : '') + `${formatIfNumber(name)}: ${count}`
 		}, '')
+	}, [categories])
+}
+
+function useLegend(categories: Category[]): string[] {
+	return useMemo(() => {
+		return categories.map(cat => `${formatIfNumber(cat.name)}: ${cat.count}`)
 	}, [categories])
 }

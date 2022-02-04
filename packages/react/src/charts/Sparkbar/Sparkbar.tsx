@@ -21,6 +21,8 @@ export interface SparkbarProps {
 	height: number
 	categorical?: boolean
 	color?: string | string[]
+	legend?: string[]
+	onBarHover?: (event: MouseEvent) => void
 }
 
 /**
@@ -32,6 +34,8 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	height,
 	categorical = false,
 	color,
+	legend,
+	onBarHover,
 }) {
 	const theme = useThematic()
 	const ref = useRef(null)
@@ -54,8 +58,9 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 	)
 
 	const xScale = useIndexedScale(data, [barWidth / 2, width - barWidth / 2])
-	// two pixels off the height means min values will still have slight visibility
-	const yScale = useNumericLinearScale(data, [height - 2, 0])
+	// one pixel off the height means min values will still have slight visibility
+	// so the user knows something is there
+	const yScale = useNumericLinearScale(data, [height - 1, 0])
 
 	useChartSVG(ref, width, height)
 	const group = usePlotGroup(ref, width, height)
@@ -65,9 +70,11 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 			// clear the line if the data changes
 			group.selectAll('*').remove()
 			group
-				.selectAll('.bar')
+				.selectAll('.bar-group')
 				.data(data)
 				.enter()
+				.append('g')
+				.attr('class', 'bar-group')
 				.append('line')
 				.attr('class', 'bar')
 				.attr('x1', xScale)
@@ -77,6 +84,21 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 				.call(themeLine as any, theme.line())
 				.attr('stroke-width', barWidth)
 				.attr('stroke', (d, i) => (categorical ? colors[i] : colors))
+				.attr('data-legend', (d, i) => (legend?.length ? legend[i] : d))
+				.attr('data-index', (d, i) => i)
+				.attr(
+					'id',
+					(d, i) => `bar-${i}-${d}-${Math.round(Math.random() * 100)}`,
+				)
+			// Alternative to onBarHover tooltip
+			if (!onBarHover) {
+				group
+					.selectAll('.bar-group')
+					.append('title')
+					.text((d, i) => (legend?.length ? legend[i] : (d as string)))
+			} else {
+				group.selectAll('.bar').on('mouseover mouseout', onBarHover)
+			}
 		}
 	}, [
 		theme,
@@ -88,6 +110,8 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 		colors,
 		categorical,
 		barWidth,
+		legend,
+		onBarHover,
 	])
 	return <svg ref={ref} />
 })

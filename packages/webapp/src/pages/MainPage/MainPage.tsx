@@ -3,12 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import {
-	Step,
-	StepType,
-	Verb,
-	Specification,
-} from '@data-wrangling-components/core'
+import { Step, Verb, Specification } from '@data-wrangling-components/core'
 import { DetailsListFeatures } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
@@ -55,7 +50,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const [steps, setSteps] = useState<Step[]>([])
 
 	const handleCreateStep = useCallback(
-		(type: StepType, verb: Verb) => setSteps(pipeline.create(type, verb)),
+		(verb: Verb) => setSteps(pipeline.create(verb)),
 		[pipeline, setSteps],
 	)
 
@@ -67,6 +62,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const handleRunClick = useCallback(async () => {
 		const res = await pipeline.run()
 		const output = await store.toMap()
+		pipeline.print()
 		store.print()
 		setResult(res)
 		setOutputs(output)
@@ -131,11 +127,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 					const output = outputs?.get(step.output)
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
-							<Section
-								title={`Step ${index + 1}`}
-								subtitle={step.verb}
-								type={step.type}
-							>
+							<Section title={`Step ${index + 1}`} subtitle={step.verb}>
 								<StepsColumn className="steps-column">
 									<StepComponent
 										key={`step-${index}`}

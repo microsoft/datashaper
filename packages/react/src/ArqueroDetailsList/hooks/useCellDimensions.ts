@@ -6,12 +6,15 @@ import { IColumn } from '@fluentui/react'
 import { useMemo } from 'react'
 import { Dimensions } from '../renderers/types'
 
-export function useCellDimensions(column?: IColumn): Dimensions {
+export function useCellDimensions(
+	column?: IColumn,
+	considerCompactMode = true,
+): Dimensions {
 	return useMemo(
 		() => ({
 			width: column?.currentWidth || 0,
-			height: 20,
+			height: column?.data?.compact && considerCompactMode ? 15 : 20,
 		}),
-		[column],
+		[column, considerCompactMode],
 	)
 }

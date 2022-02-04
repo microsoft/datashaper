@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnStats } from '@data-wrangling-components/core'
+import { ColumnStats, formatIfNumber } from '@data-wrangling-components/core'
 import { useThematic } from '@thematic/react'
 import { upperFirst } from 'lodash'
 import React, { memo, useMemo } from 'react'
@@ -23,6 +23,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 		metadata,
 		stats = ['min', 'max', 'distinct', 'invalid'],
 		column,
+		onClick,
 	}) {
 		const theme = useThematic()
 		const cells = useMemo(() => {
@@ -35,17 +36,24 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 			})
 		}, [metadata, column, stats])
 		const title = useTooltip(metadata.stats)
+
+		const styles = useMemo(() => {
+			return {
+				// TODO: there is a layout issue resulting in this margin kludge
+				marginTop: -14,
+				height: 70,
+				fontWeight: 'normal',
+				fontSize: 10,
+				color: theme.application().midContrast().hex(),
+				cursor: onClick ? 'pointer' : 'inherit',
+			}
+		}, [onClick, theme])
+
 		return (
 			<div
+				onClick={e => onClick && onClick(e, column, metadata)}
 				title={title}
-				style={{
-					// TODO: there is a layout issue resulting in this margin kludge
-					marginTop: -14,
-					height: 70,
-					fontWeight: 'normal',
-					fontSize: 10,
-					color: theme.application().midContrast().hex(),
-				}}
+				style={styles}
 			>
 				{cells}
 			</div>
@@ -68,7 +76,7 @@ const StatCell: React.FC<{ name: string; value?: number }> = ({
 			}}
 		>
 			<div style={{ textTransform: 'capitalize' }}>{pretty[name] || name}:</div>
-			<div>{value}</div>
+			<div>{formatIfNumber(value)}</div>
 		</div>
 	) : null
 }
@@ -79,7 +87,7 @@ function useTooltip(stats?: ColumnStats): string {
 		return Object.entries(nobins).reduce((acc, cur, idx) => {
 			const [key, value] = cur
 			const nice = upperFirst(pretty[key] || key)
-			return acc + (idx > 0 ? '\n' : '') + `${nice}: ${value}`
+			return acc + (idx > 0 ? '\n' : '') + `${nice}: ${formatIfNumber(value)}`
 		}, '')
 	}, [stats])
 }

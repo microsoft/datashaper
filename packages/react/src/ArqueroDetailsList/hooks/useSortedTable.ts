@@ -14,7 +14,11 @@ export function useSortedTable(
 ): ColumnTable {
 	return useMemo(() => {
 		let columns: string[] = []
-		if ((!column || !sort) && !table.isGrouped()) {
+		const isColumnOnTable = table.columnNames().includes(column || '')
+		if (!sort) {
+			return table
+		}
+		if (((!column || !sort) && !table.isGrouped()) || !isColumnOnTable) {
 			return table.unorder()
 		} else if (column) {
 			columns.push(column)
@@ -23,7 +27,6 @@ export function useSortedTable(
 		if (table.isGrouped()) {
 			columns = [...table.groups().names, ...columns]
 		}
-
 		return table.orderby(
 			sort === SortDirection.Descending
 				? columns.map(col => aq.desc(col))

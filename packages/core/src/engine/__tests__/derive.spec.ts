@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { MathOperator, Step, StepType, Verb } from '../../types'
+import { MathOperator, Step, Verb } from '../../types'
 import { derive } from '../verbs/derive'
 import { TestStore } from './TestStore'
 
 describe('test for derive verb', () => {
 	test('derive test with MathOperator Add and string + number', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Derive,
 			input: 'table1',
 			output: 'output',
@@ -39,7 +38,6 @@ describe('test for derive verb', () => {
 
 	test('derive test with MathOperator Substract and string - number', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Derive,
 			input: 'table1',
 			output: 'output',
@@ -68,7 +66,6 @@ describe('test for derive verb', () => {
 
 	test('derive test with MathOperator Multiply and string - number', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Derive,
 			input: 'table1',
 			output: 'output',
@@ -97,7 +94,6 @@ describe('test for derive verb', () => {
 
 	test('derive test with MathOperator Divide and string - number', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Derive,
 			input: 'table1',
 			output: 'output',
@@ -126,7 +122,6 @@ describe('test for derive verb', () => {
 
 	test('derive test with MathOperator Add and number + number', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Derive,
 			input: 'table6',
 			output: 'output',
@@ -156,7 +151,6 @@ describe('test for derive verb', () => {
 
 	test('derive test with MathOperator Subtract and number - number', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Derive,
 			input: 'table6',
 			output: 'output',
@@ -186,7 +180,6 @@ describe('test for derive verb', () => {
 
 	test('derive test with MathOperator Multiply and number * number', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Derive,
 			input: 'table1',
 			output: 'output',
@@ -215,7 +208,6 @@ describe('test for derive verb', () => {
 
 	test('derive test with MathOperator Divide and number / number', () => {
 		const step: Step = {
-			type: StepType.Verb,
 			verb: Verb.Derive,
 			input: 'table7',
 			output: 'output',

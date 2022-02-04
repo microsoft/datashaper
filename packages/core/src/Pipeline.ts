@@ -6,7 +6,7 @@ import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from './TableStore'
 import { run } from './engine'
 import { factory } from './engine/verbs'
-import { CompoundStep, Step, StepType, Verb } from './types'
+import { Step, Verb } from './types'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -46,13 +46,10 @@ export class Pipeline {
 	 * @param type
 	 * @param subtype
 	 */
-	create(type: StepType, verb: Verb): Step[] {
+	create(verb: Verb): Step[] {
 		const index = this.count
 		const input = index === 0 ? '' : this._steps[index - 1].output
-		const base: Step = factory(type, verb, input, `output-table-${index}`)
-		if (type === StepType.Compound) {
-			(base as CompoundStep).steps = []
-		}
+		const base: Step = factory(verb, input, `output-table-${index}`)
 		return this.add(base)
 	}
 	add(step: Step): Step[] {
@@ -74,5 +71,8 @@ export class Pipeline {
 	}
 	async run(): Promise<ColumnTable> {
 		return run(this._steps, this._store)
+	}
+	print(): void {
+		console.log(this._steps)
 	}
 }

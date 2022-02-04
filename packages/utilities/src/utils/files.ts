@@ -93,14 +93,24 @@ export const createBaseFile = (
 	return new BaseFile(file)
 }
 
-export const getTextFromFile = async (file: BaseFile): Promise<string> => {
+function createReader() {
 	const reader = new FileReader()
-	reader.readAsText(file)
+	reader.onabort = () => console.log('file reading was aborted')
+	reader.onerror = () => console.log('file reading has failed')
+	return reader
+}
+
+export const getTextFromFile = async (file: BaseFile): Promise<string> => {
 	return new Promise<string>((resolve, reject) => {
+		const reader = createReader()
 		reader.onload = () => {
-			resolve(reader.result as string)
+			try {
+				resolve(reader.result as string)
+			} catch (e) {
+				reject(e)
+			}
 		}
-		reader.onerror = reject
+		reader.readAsText(file)
 	})
 }
 
@@ -123,12 +133,15 @@ export const getDsvFileContent = async (file: BaseFile): Promise<string> => {
 
 export async function getDataURL(file: BaseFile): Promise<string> {
 	return new Promise((resolve, reject) => {
-		const reader = new FileReader()
-		reader.readAsDataURL(file)
+		const reader = createReader()
 		reader.onload = () => {
-			resolve(reader.result as string)
+			try {
+				resolve(reader.result as string)
+			} catch (e) {
+				reject(e)
+			}
 		}
-		reader.onerror = reject
+		reader.readAsDataURL(file)
 	})
 }
 
