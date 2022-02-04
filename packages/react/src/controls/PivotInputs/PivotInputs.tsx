@@ -10,7 +10,6 @@ import {
 	useLoadTable,
 	LeftAlignedRow,
 	useHandleDropdownChange,
-	LeftAlignedColumn,
 } from '../../common'
 import { StepComponentProps } from '../../types'
 

@@ -20,7 +20,6 @@ import { StepComponentProps } from '../../types'
 export const EraseInputs: React.FC<StepComponentProps> = memo(
 	function EraseInputs({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => step as EraseStep, [step])
-		const tbl = useLoadTable(input || internal.input, table, store)
 
 		const handleValueChange = useHandleTextfieldChange(
 			step,

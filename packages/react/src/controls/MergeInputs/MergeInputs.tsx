@@ -7,8 +7,8 @@ import { Dropdown, IDropdownOption } from '@fluentui/react'
 import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
-import { StepComponentProps } from '../../types'
 import { columnDropdownStyles } from '../../controls/styles'
+import { StepComponentProps } from '../../types'
 import { MergeStrategyComponent } from '../MergeStrategyComponent/MergeStrategyComponent'
 
 /**

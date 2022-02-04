@@ -27,7 +27,7 @@ export const MergeStrategyComponent: React.FC<StepComponentProps> = memo(
 					onChange={handleOpChange}
 				/>
 			)
-		}, [tbl, internal, handleOpChange])
+		}, [internal, handleOpChange])
 
 		return <>{operatorDropdown}</>
 	},
