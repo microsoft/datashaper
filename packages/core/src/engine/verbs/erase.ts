@@ -7,7 +7,7 @@ import { from } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { RowObject } from 'arquero/dist/types/table/table'
 import { TableStore } from '../..'
-import { FillArgs, Step } from '../../types'
+import { EraseArgs, Step } from '../../types'
 
 /**
  * Executes an arquero erase operation.
@@ -21,14 +21,14 @@ export async function erase(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { value, to } = args as FillArgs
+	const { value, column } = args as EraseArgs
 	const inputTable = await store.get(input)
 
 	const matrix: RowObject[] = inputTable.objects()
 
 	matrix.forEach(row => {
-		if (row[to] === value) {
-			row[to] = undefined
+		if (row[column] === value) {
+			row[column] = undefined
 		}
 	})
 

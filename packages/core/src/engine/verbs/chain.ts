@@ -14,6 +14,7 @@ import { concat } from './concat'
 import { dedupe } from './dedupe'
 import { derive } from './derive'
 import { difference } from './difference'
+import { erase } from './erase'
 import { fetch } from './fetch'
 import { fill } from './fill'
 import { filter } from './filter'
@@ -23,13 +24,16 @@ import { impute } from './impute'
 import { intersect } from './intersect'
 import { join } from './join'
 import { lookup } from './lookup'
+import { merge } from './merge'
 import { orderby } from './orderby'
+import { pivot } from './pivot'
 import { recode } from './recode'
 import { rename } from './rename'
 import { rollup } from './rollup'
 import { sample } from './sample'
 import { select } from './select'
 import { spread } from './spread'
+import { unfold } from './unfold'
 import { ungroup } from './ungroup'
 import { union } from './union'
 import { unorder } from './unorder'
@@ -44,6 +48,7 @@ const verbs: Record<string, StepFunction> = {
 	dedupe,
 	derive,
 	difference,
+	erase,
 	fetch,
 	fill,
 	filter,
@@ -53,13 +58,16 @@ const verbs: Record<string, StepFunction> = {
 	intersect,
 	join,
 	lookup,
+	merge,
 	orderby,
+	pivot,
 	recode,
 	rename,
 	rollup,
 	sample,
 	select,
 	spread,
+	unfold,
 	ungroup,
 	union,
 	unorder,

@@ -215,7 +215,7 @@ export type ChainStep = Step<ChainArgs>
 export type ColumnListStep = Step<InputColumnListArgs>
 export type DedupeStep = Step<DedupeArgs>
 export type DeriveStep = Step<DeriveArgs>
-export type EraseStep = Step<FillArgs>
+export type EraseStep = Step<EraseArgs>
 export type ImputeStep = Step<FillArgs>
 export type FetchStep = Step<FetchArgs>
 export type FillStep = Step<FillArgs>
@@ -347,6 +347,11 @@ export interface FillArgs extends OutputColumnArgs {
 	/**
 	 * Value to fill in the new column
 	 */
+	value: Value
+}
+
+export interface EraseArgs {
+	column: string
 	value: Value
 }
 

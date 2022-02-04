@@ -85,6 +85,10 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Select:
 		case Verb.Ungroup:
 		case Verb.Unorder:
+		case Verb.Erase:
+		case Verb.Merge:
+		case Verb.Pivot:
+		case Verb.Unfold:
 	}
 	return {
 		...base,
