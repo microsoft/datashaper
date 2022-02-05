@@ -6,11 +6,7 @@ import { EraseStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import {
-	LeftAlignedRow,
-	useHandleTextfieldChange,
-	useLoadTable,
-} from '../../common'
+import { LeftAlignedRow, useHandleTextfieldChange } from '../../common'
 import { StepComponentProps } from '../../types'
 
 /**
@@ -18,7 +14,7 @@ import { StepComponentProps } from '../../types'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const EraseInputs: React.FC<StepComponentProps> = memo(
-	function EraseInputs({ step, store, table, onChange, input }) {
+	function EraseInputs({ step, onChange }) {
 		const internal = useMemo(() => step as EraseStep, [step])
 
 		const handleValueChange = useHandleTextfieldChange(
