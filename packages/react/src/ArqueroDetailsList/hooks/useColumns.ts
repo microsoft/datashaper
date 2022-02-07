@@ -147,6 +147,7 @@ export function useColumns(
 					createRenderStatsColumnHeader(
 						meta,
 						features.onStatsColumnHeaderClick,
+						features.statsColumnTypes,
 					),
 				)
 			}

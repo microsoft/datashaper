@@ -9,6 +9,7 @@ import {
 	DetailsListFeatures,
 	DropdownOptionSelect,
 	MetadataClickFunction,
+	StatsColumnType,
 } from '../types'
 import { CommandBarContainer } from './CommandBarContainer'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
@@ -108,7 +109,7 @@ export const createRenderDefaultColumnHeader = (
 export const createRenderStatsColumnHeader = (
 	metadata: ColumnMetadata,
 	onClick?: MetadataClickFunction,
-	stats?: string[],
+	stats?: StatsColumnType[],
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderStatsColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {

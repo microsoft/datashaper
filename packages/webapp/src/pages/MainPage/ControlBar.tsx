@@ -3,7 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Specification } from '@data-wrangling-components/core'
-import { DetailsListFeatures } from '@data-wrangling-components/react'
+import {
+	DetailsListFeatures,
+	StatsColumnType,
+} from '@data-wrangling-components/react'
 import {
 	FileCollection,
 	FileType,
@@ -11,7 +14,12 @@ import {
 	FileMimeType,
 	FileWithPath,
 } from '@data-wrangling-components/utilities'
-import { Checkbox } from '@fluentui/react'
+import {
+	Checkbox,
+	Dropdown,
+	IDropdownOption,
+	IDropdownStyles,
+} from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
@@ -19,6 +27,13 @@ import { ExamplesDropdown } from './ExamplesDropdown'
 import { useLoadSpecFile, useLoadTableFiles } from './hooks'
 import { FileDrop } from '~components/FileDrop'
 
+const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
+	return { key: o, text: o } as IDropdownOption
+})
+
+const dropdownStyles: Partial<IDropdownStyles> = {
+	dropdown: { marginTop: '4px' },
+}
 export interface ControlBarProps {
 	selected?: Specification
 	onSelectSpecification?: (spec: Specification | undefined) => void
@@ -96,15 +111,28 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			onFeaturesChange({ ...features, [propName]: checked }),
 		[features, onFeaturesChange],
 	)
+
+	const handleStatsColumnTypeChange = useCallback(
+		(e: any, option: IDropdownOption | undefined) => {
+			const selectedKeys = features.statsColumnTypes || []
+			const selectedTypes = option?.selected
+				? [...selectedKeys, option.key as StatsColumnType]
+				: selectedKeys.filter(key => key !== option?.key)
+
+			onFeaturesChange &&
+				option &&
+				onFeaturesChange({
+					...features,
+					statsColumnTypes: selectedTypes,
+				})
+		},
+		[features, onFeaturesChange],
+	)
 	const handleArrayFeaturesChange = useCallback(
 		(propName: string, checked?: boolean) => {
 			onFeaturesChange &&
 				onFeaturesChange({
 					...features,
-					showSparkline: false,
-					showSparkbar: false,
-					showCategoricalBar: false,
-					showDropdown: false,
 					[propName]: checked,
 				})
 		},
@@ -147,6 +175,14 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						onChange={(e, checked) =>
 							handleFeaturesChange('statsColumnHeaders', checked)
 						}
+					/>
+					<Dropdown
+						disabled={!features.statsColumnHeaders && !features.smartHeaders}
+						onChange={handleStatsColumnTypeChange}
+						multiSelect
+						options={options}
+						selectedKeys={features.statsColumnTypes}
+						styles={dropdownStyles}
 					/>
 				</Control>
 				<Control>
