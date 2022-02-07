@@ -31,10 +31,10 @@ const columns = {
 export const MainPage: React.FC = memo(function MainMage() {
 	// this is special to the test example,
 	// a running app needs to maintain its own list of uploaded files
-	const [inputList, setInputs] = useInputTableList()
-	const store = useTableStore()
-	const inputTables = useInputTables(inputList, store)
-	const pipeline = usePipeline(store)
+	const [inputList, setInputs] = useInputTableList() //table names
+	const store = useTableStore() //name, columnTables
+	const inputTables = useInputTables(inputList, store) //storing input => name and columnTables
+	const pipeline = usePipeline(store) //passing the store
 	const [result, setResult] = useState<ColumnTable | undefined>()
 	const [outputs, setOutputs] = useState<Map<string, ColumnTable>>(
 		new Map<string, ColumnTable>(),

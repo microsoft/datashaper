@@ -6,7 +6,7 @@ import { memo } from 'react'
 import styled from 'styled-components'
 import { Header } from './Header'
 import { StyleContext } from './StyleContext'
-import { MainPage, PerfPage, TransformPage } from '~pages'
+import { MainPage, PerfPage, TransformPage, PrepareDataPage } from '~pages'
 export const App: React.FC = memo(function App() {
 	const search = window.location.search
 	return (
@@ -18,6 +18,8 @@ export const App: React.FC = memo(function App() {
 					<PerfPage />
 				) : search === '?transform' ? (
 					<TransformPage />
+				) : search === '?prepare' ? (
+					<PrepareDataPage />
 				) : (
 					<MainPage />
 				)}

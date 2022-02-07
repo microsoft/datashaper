@@ -41,3 +41,8 @@ export interface StepDescriptionProps extends StepDependent {
 	showInput?: boolean
 	showOutput?: boolean
 }
+
+export interface TableFile {
+	name: string
+	table: ColumnTable
+}
