@@ -124,7 +124,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				{steps.map((step, index) => {
 					return <StepActions key={index} step={step} />
 				})}
-				{/* <StepSelector onCreate={handleCreateStep} /> */}
 			</StepsContainer>
 			<OutputContainer>
 				{result && (
@@ -132,7 +131,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 						<ArqueroTableHeader table={result} />
 						<ArqueroDetailsList
 							compact
-							styles={{ root: { maxHeight: '38vh' } }}
+							styles={{ root: { maxHeight: '40vh' } }}
 							isHeadersFixed
 							table={result}
 						/>
@@ -146,13 +145,12 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 const Container = styled.div``
 
 const InputContainer = styled.div`
-	height: 35vh;
-	max-height: 30vh;
+	height: 24vh;
 	border-bottom: 1px solid ${({ theme }) => theme.application().border().hex()};
 `
 
 const StepsContainer = styled.div`
-	height: 20vh;
+	height: 24vh;
 	display: flex;
 	column-gap: 8px;
 	overflow: auto;
@@ -160,5 +158,5 @@ const StepsContainer = styled.div`
 `
 
 const OutputContainer = styled.div`
-	height: 40vh;
+	height: 42vh;
 `

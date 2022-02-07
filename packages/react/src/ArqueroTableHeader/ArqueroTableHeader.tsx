@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import { CommandBar } from './CommandBar'
 import { TableName } from './TableName'
 import { HEIGHT } from './constants'
-import { useColumnCounts, useCommands } from './hooks'
+import { useColumnCounts, useCommands, useRowCounts } from './hooks'
 import { ArqueroTableHeaderProps } from '.'
 
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
@@ -21,6 +21,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		commands,
 		farCommands,
 		visibleColumns,
+		visibleRows,
 		onRenameTable,
 	}) {
 		const ref = useRef(null)
@@ -33,6 +34,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 
 		// TODO: we can do the same thing for rows when a filter is applied
 		const columnCounts = useColumnCounts(table, visibleColumns)
+		const rowCounts = useRowCounts(table, visibleRows)
 		return (
 			<Header ref={ref}>
 				{commandItems.length > 0 ? (
@@ -42,7 +44,12 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					{name ? (
 						<TableName onRenameTable={onRenameTable} name={name} />
 					) : null}
-					{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
+					{showRowCount === true ? (
+						<H3>
+							{rowCounts.total} rows{' '}
+							{rowCounts.hidden > 0 ? `(${rowCounts.hidden} hidden)` : ''}
+						</H3>
+					) : null}
 					{showColumnCount === true ? (
 						<H3>
 							{columnCounts.total} cols{' '}

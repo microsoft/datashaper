@@ -6,13 +6,23 @@ import React, { memo, useCallback, useMemo, useState } from 'react'
 import { TableFile } from '../types'
 import styled from 'styled-components'
 import { DetailsList, IColumn, SelectionMode } from '@fluentui/react'
-import { ArqueroDetailsList, ArqueroTableHeader } from '../'
+import { ArqueroDetailsList, ArqueroTableHeader, StatsColumnType } from '../'
 import { Else, If, Then } from 'react-if'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { introspect, TableMetadata } from '@data-wrangling-components/core'
+
+const statsColumnTypes = [
+	StatsColumnType.Type,
+	StatsColumnType.Min,
+	StatsColumnType.Max,
+	StatsColumnType.Distinct,
+	StatsColumnType.Invalid,
+]
 
 export const TablesList: React.FC<{ files: Map<string, ColumnTable> }> = memo(
 	function TablesList({ files }) {
 		const [selectedTable, setSelectedTable] = useState<TableFile>()
+		const [metadata, setMetadata] = useState<TableMetadata>()
 
 		const list = useMemo((): TableFile[] => {
 			return Array.from(files).map(([key, table]) => {
@@ -25,9 +35,12 @@ export const TablesList: React.FC<{ files: Map<string, ColumnTable> }> = memo(
 
 		const selectTable = useCallback(
 			(name: any) => {
-				setSelectedTable(list.find(x => x.name === name))
+				const table = list.find(x => x.name === name)
+				setSelectedTable(table)
+				const newMetadata = introspect(table?.table as ColumnTable, true)
+				setMetadata(newMetadata)
 			},
-			[list],
+			[list, setSelectedTable, setMetadata],
 		)
 
 		const columns = useMemo(() => {
@@ -61,14 +74,20 @@ export const TablesList: React.FC<{ files: Map<string, ColumnTable> }> = memo(
 					<Then>
 						<TableContainer>
 							<ArqueroTableHeader
+								visibleRows={1}
 								name={selectedTable?.name}
 								table={selectedTable?.table as ColumnTable}
 							/>
 							<ArqueroDetailsList
 								compact
+								metadata={metadata}
 								styles={{ root: { maxHeight: '24vh' } }}
 								isHeadersFixed
-								table={selectedTable?.table as ColumnTable}
+								features={{
+									smartHeaders: true,
+									statsColumnTypes: statsColumnTypes,
+								}}
+								table={selectedTable?.table.sample(1) as ColumnTable}
 							/>
 						</TableContainer>
 					</Then>
