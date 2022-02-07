@@ -6,12 +6,21 @@ import { ColumnStats, formatIfNumber } from '@data-wrangling-components/core'
 import { useThematic } from '@thematic/react'
 import { upperFirst } from 'lodash'
 import React, { memo, useMemo } from 'react'
+import { StatsColumnType } from '../types'
 import { RichHeaderProps } from './types'
 
 const pretty: Record<string, string> = {
 	distinct: 'unique',
 	invalid: 'empty',
 }
+
+const DEFAULT_STATS: StatsColumnType[] = [
+	StatsColumnType.Type,
+	StatsColumnType.Min,
+	StatsColumnType.Max,
+	StatsColumnType.Distinct,
+	StatsColumnType.Invalid,
+]
 
 /**
  * Renders a column header with basic stats.
@@ -21,7 +30,7 @@ const pretty: Record<string, string> = {
 export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 	function StatsColumnHeader({
 		metadata,
-		stats = ['min', 'max', 'distinct', 'invalid'],
+		stats = DEFAULT_STATS,
 		column,
 		onClick,
 	}) {
