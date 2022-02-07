@@ -19,8 +19,18 @@ export function useDetailsListStyles(
 	features?: DetailsListFeatures,
 	styles?: IDetailsListStyles,
 	hasColumnClick?: boolean,
+	compact?: boolean,
 ): IDetailsListStyles {
 	const theme = useThematic()
+
+	const isFeatureEnabled = useMemo((): any => {
+		return (
+			features?.smartHeaders ||
+			features?.histogramColumnHeaders ||
+			features?.statsColumnHeaders
+		)
+	}, [features])
+
 	return useMemo(
 		() =>
 			merge(
@@ -31,21 +41,16 @@ export function useDetailsListStyles(
 						zIndex: '2',
 						top: '0',
 						background: theme.application().background().hex(),
-						borderBottom:
-							!features?.smartHeaders &&
-							!features?.histogramColumnHeaders &&
-							!features?.statsColumnHeaders
-								? `1px solid ${theme.application().faint().hex()}`
-								: 'unset',
+						borderBottom: !isFeatureEnabled
+							? `1px solid ${theme.application().faint().hex()}`
+							: 'unset',
 						selectors: {
 							'.ms-DetailsHeader': {
+								lineHeight: compact && !isFeatureEnabled ? 'normal' : '42px',
 								height: 'auto',
-								borderBottom:
-									!features?.smartHeaders &&
-									!features?.histogramColumnHeaders &&
-									!features?.statsColumnHeaders
-										? `1px solid ${theme.application().faint().hex()}`
-										: 'unset',
+								borderBottom: !isFeatureEnabled
+									? `1px solid ${theme.application().faint().hex()}`
+									: 'unset',
 							},
 							'.ms-DetailsHeader-cell': {
 								cursor: hasColumnClick ? 'pointer' : 'default',
@@ -57,6 +62,6 @@ export function useDetailsListStyles(
 				},
 				styles,
 			),
-		[theme, styles, features, isHeadersFixed, hasColumnClick],
+		[theme, isFeatureEnabled, styles, isHeadersFixed, hasColumnClick, compact],
 	)
 }
