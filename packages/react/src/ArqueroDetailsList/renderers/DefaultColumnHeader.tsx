@@ -8,7 +8,7 @@ import React, { memo, useMemo } from 'react'
 import { ColumnClickFunction } from '..'
 import { useCellDimensions } from '../hooks'
 
-const COMPACT_LINE_HEIGHT = 1.6
+const COMPACT_LINE_HEIGHT = 2
 
 interface DefaultColumnHeaderProps extends IDetailsColumnProps {
 	isClickable: boolean
