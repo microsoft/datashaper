@@ -8,6 +8,8 @@ import React, { memo, useMemo } from 'react'
 import { ColumnClickFunction } from '..'
 import { useCellDimensions } from '../hooks'
 
+const COMPACT_LINE_HEIGHT = 2
+
 interface DefaultColumnHeaderProps extends IDetailsColumnProps {
 	isClickable: boolean
 	onClick?: ColumnClickFunction
@@ -21,6 +23,7 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 
 		const containerStyle = useMemo(
 			() => ({
+				lineHeight: column.data.compact ? COMPACT_LINE_HEIGHT : 'inherit',
 				cursor: isClickable ? 'pointer' : 'inherit',
 				display: 'flex',
 				justifyContent: 'space-between',
