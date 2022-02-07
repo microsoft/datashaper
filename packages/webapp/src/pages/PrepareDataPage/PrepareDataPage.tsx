@@ -4,11 +4,13 @@
  */
 import { Step, Verb, TableStore } from '@data-wrangling-components/core'
 import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
 	TablesList,
+	InputTable,
+	TableFile,
+	OutputTable,
+	StepsList,
 } from '@data-wrangling-components/react'
-import { StepActions } from '@data-wrangling-components/react'
+import { Separator } from '@fluentui/react'
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
@@ -49,6 +51,7 @@ export function useTableStore(tables: Table[]): TableStore {
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const [tables, setTables] = useState<Table[]>([])
+	const [selectedTable, setSelectedTable] = useState<TableFile>()
 	const [steps, setSteps] = useState<Step[]>([
 		{
 			verb: 'join',
@@ -60,6 +63,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			},
 		},
 	])
+
 	const [result, setResult] = useState<ColumnTable | undefined>()
 	const [outputs, setOutputs] = useState<Map<string, ColumnTable>>(
 		new Map<string, ColumnTable>(),
@@ -75,6 +79,14 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			handleRunClick()
 		}
 	}, [pipeline, steps, tables])
+
+	const onSelect = useCallback(
+		async (name: any) => {
+			const table = await store.get(name)
+			setSelectedTable({ table, name: name })
+		},
+		[tables, setSelectedTable],
+	)
 
 	const handleCreateStep = useCallback(
 		(verb: Verb) => setSteps(pipeline.create(verb)),
@@ -118,25 +130,17 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	return (
 		<Container>
 			<InputContainer>
-				<TablesList files={inputTables} />
+				<TablesList files={inputTables} onSelect={onSelect} />
+				<SectionSeparator vertical />
+				<InputTable table={selectedTable} />
 			</InputContainer>
+			<Separator />
 			<StepsContainer>
-				{steps.map((step, index) => {
-					return <StepActions key={index} step={step} />
-				})}
+				<StepsList steps={steps} />
 			</StepsContainer>
+			<Separator />
 			<OutputContainer>
-				{result && (
-					<div>
-						<ArqueroTableHeader table={result} />
-						<ArqueroDetailsList
-							compact
-							styles={{ root: { maxHeight: '40vh' } }}
-							isHeadersFixed
-							table={result}
-						/>
-					</div>
-				)}
+				<OutputTable table={result} />
 			</OutputContainer>
 		</Container>
 	)
@@ -145,18 +149,23 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 const Container = styled.div``
 
 const InputContainer = styled.div`
-	height: 24vh;
-	border-bottom: 1px solid ${({ theme }) => theme.application().border().hex()};
+	height: 23vh;
+	display: flex;
+	max-height: inherit;
+	overflow: hidden;
+`
+
+const SectionSeparator = styled(Separator)`
+	padding: 14px;
 `
 
 const StepsContainer = styled.div`
-	height: 24vh;
+	height: 20vh;
 	display: flex;
 	column-gap: 8px;
 	overflow: auto;
-	border-bottom: 1px solid ${({ theme }) => theme.application().border().hex()};
 `
 
 const OutputContainer = styled.div`
-	height: 42vh;
+	height: 40vh;
 `

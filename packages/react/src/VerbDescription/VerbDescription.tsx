@@ -31,9 +31,10 @@ export interface VerbDescriptionProps {
 	rows: DescriptionRow[]
 	showInput?: boolean
 	showOutput?: boolean
+	actions?: JSX.Element
 }
 export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
-	function VerbDescription({ step, rows, showInput, showOutput }) {
+	function VerbDescription({ step, rows, showInput, showOutput, actions }) {
 		const rws = useMemo(() => {
 			function loop(rows: DescriptionRow[]) {
 				return rows.map((row, index) => (
@@ -51,7 +52,10 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 		}, [rows])
 		return (
 			<Container>
-				<Verb>{step.verb}</Verb>
+				<Verb>
+					{step.verb}
+					{actions}
+				</Verb>
 				{showInput ? (
 					<Row>
 						<KeyValue>
@@ -83,6 +87,10 @@ const Container = styled.div`
 const Verb = styled.div`
 	text-transform: uppercase;
 	font-weight: bold;
+	align-items: center;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 	color: ${({ theme }) => theme.application().midContrast().hex()};
 `
 

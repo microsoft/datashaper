@@ -40,6 +40,7 @@ export interface StepComponentProps extends StepDependent {
 export interface StepDescriptionProps extends StepDependent {
 	showInput?: boolean
 	showOutput?: boolean
+	actions?: JSX.Element
 }
 
 export interface TableFile {
