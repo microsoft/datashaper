@@ -4,6 +4,8 @@
  */
 import { Step, TableStore } from '@data-wrangling-components/core'
 
+import React, { memo, useCallback, useMemo } from 'react'
+import styled from 'styled-components'
 import {
 	withInputColumnDropdown,
 	withOutputColumnTextfield,
@@ -11,10 +13,9 @@ import {
 	selectStepComponent,
 	selectStepDescription,
 } from '@data-wrangling-components/react'
-import React, { memo, useCallback, useMemo } from 'react'
-import styled from 'styled-components'
 
-export interface StepComponentProps {
+//already have something like this in types??
+interface StepComponentProps {
 	step: Step
 	store: TableStore
 	index: number

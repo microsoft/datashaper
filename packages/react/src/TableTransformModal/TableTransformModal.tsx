@@ -8,20 +8,20 @@ import {
 	TableStore,
 	Verb,
 } from '@data-wrangling-components/core'
-import { DefaultButton, IconButton, Modal } from '@fluentui/react'
+import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
 import { useId } from '@fluentui/react-hooks'
 import React, { memo, useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { StepComponent, StepSelector } from '..'
 
-export const StepModal: React.FC<{
+export const TableTransformModal: React.FC<{
 	isOpen: boolean
 	toggleModal: () => void
 	store: TableStore
 	onCreate: (step: Step, index?: number) => void
 	editStep?: Step
 	stepIndex?: number
-}> = memo(function StepModal({
+}> = memo(function TableTransformModal({
 	isOpen,
 	toggleModal,
 	store,
@@ -33,20 +33,21 @@ export const StepModal: React.FC<{
 	const [step, setStep] = useState<Step | undefined>()
 
 	useEffect(() => {
-		debugger
 		if (editStep) {
 			setStep(editStep)
-		} else {
-			setStep(undefined)
 		}
-	}, [editStep, setStep])
+	}, [editStep])
+
+	const onDismissed = useCallback(() => {
+		setStep(undefined)
+	}, [setStep])
 
 	const onSelect = useCallback(
 		(verb: Verb) => {
 			//get latest table
 			const tables = store.list()
+			//pipeline has a last, should we use it?
 			const input = tables.length === 0 ? '' : tables[tables.length - 1]
-
 			// console.log(store.toMap) //get the last step
 			const step: Step = factory(verb, input, `output-table`)
 			setStep(step)
@@ -56,37 +57,46 @@ export const StepModal: React.FC<{
 
 	return (
 		<Container>
-			<AddModal
+			<Modal
+				onDismissed={onDismissed}
 				titleAriaId={titleId}
 				isOpen={isOpen}
 				onDismiss={toggleModal}
 				isBlocking={false}
 			>
-				<ContainerHeader>
-					<span id={titleId}>New step</span>
+				<Header>
+					<Title>{editStep ? 'Edit step' : 'New step'}</Title>
 					<IconButton
 						iconProps={iconProps.cancel}
 						ariaLabel="Close popup modal"
 						onClick={toggleModal}
 					/>
-				</ContainerHeader>
+				</Header>
 
 				<ContainerBody>
-					<StepSelector verb={step?.verb} onCreate={onSelect} />
-					{step && (
-						<StepComponent
-							step={step}
-							store={store}
-							index={stepIndex as number}
-							onChange={setStep}
-							showPreview={false}
+					<StepSelectorContainer>
+						<StepSelector
+							placeholder="Select the verb"
+							verb={step?.verb || ''}
+							onCreate={onSelect}
 						/>
+					</StepSelectorContainer>
+					{step && (
+						<>
+							<StepComponent
+								step={step}
+								store={store}
+								index={stepIndex as number}
+								onChange={setStep}
+								showPreview={false}
+							/>
+							<PrimaryButton onClick={() => onCreate(step as Step, stepIndex)}>
+								Run
+							</PrimaryButton>
+						</>
 					)}
-					<DefaultButton onClick={() => onCreate(step as Step, stepIndex)}>
-						Create
-					</DefaultButton>
 				</ContainerBody>
-			</AddModal>
+			</Modal>
 		</Container>
 	)
 })
@@ -99,16 +109,20 @@ const Container = styled.div``
 const ContainerBody = styled.div`
 	padding: 0px 12px 14px 24px;
 `
-const ContainerHeader = styled.div`
-	flex: 1 1 auto;
+
+const Header = styled.div`
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
-	padding: 12px 12px 14px 24px;
+	align-items: center;
+	background: ${({ theme }) => theme.application().faint().hex()};
+	margin-bottom: 8px;
 `
 
-const AddModal = styled(Modal)`
-	/* display: flex;
-	flex-flow: column nowrap;
-	align-items: stretch; */
+const Title = styled.h3`
+	padding-left: 12px;
+	margin: 8px 0 8px 0;
+`
+
+const StepSelectorContainer = styled.div`
+	margin-bottom: 8px;
 `

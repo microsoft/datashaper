@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, useMemo } from 'react'
-import { TableFile } from '../../types'
-import styled from 'styled-components'
 import { DetailsList, IColumn, SelectionMode } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import React, { memo, useMemo } from 'react'
+import styled from 'styled-components'
+import { TableFile } from '../../types'
 
 export const TablesList: React.FC<{
 	files: Map<string, ColumnTable>

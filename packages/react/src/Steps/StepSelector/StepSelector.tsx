@@ -11,12 +11,15 @@ export interface StepSelectorProps {
 	onCreate?: (verb: Verb) => void
 	showButton?: boolean
 	verb?: string
+	placeholder?: string
 }
 
 export const StepSelector: React.FC<StepSelectorProps> = memo(
-	function StepSelector({ onCreate, showButton, verb }) {
+	function StepSelector({ onCreate, showButton, verb, placeholder }) {
 		const options = useGroupedOptions()
-		const [currentOption, setCurrentOption] = useState<string>('aggregate')
+		const [currentOption, setCurrentOption] = useState<string>(
+			!placeholder ? 'aggregate' : '',
+		)
 		const handleDropdownChange = useCallback(
 			(e, opt) => {
 				setCurrentOption(opt.key)
@@ -37,6 +40,7 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 				<Dropdown
 					options={options}
 					selectedKey={currentOption}
+					placeholder={placeholder}
 					styles={{ root: { flex: 2 } }}
 					onChange={handleDropdownChange}
 				/>

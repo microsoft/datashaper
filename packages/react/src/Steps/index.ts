@@ -5,5 +5,5 @@
 
 export * from './StepActions'
 export * from './StepSelector'
-export * from './StepModal'
 export * from './StepComponent'
+export * from './StepsList'

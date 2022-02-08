@@ -56,7 +56,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	)
 	const store = useTableStore()
 	const inputTables = useInputTables(outputs, store)
-	const pipeline = usePipeline(store) //passing the store
+	const pipeline = usePipeline(store)
 
 	const onSelect = useCallback(
 		async (name: any) => {
@@ -94,6 +94,17 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		[pipeline, setSteps, runPipeline],
 	)
 
+	const onDeleteStep = useCallback(
+		(index?: number) => {
+			const _steps = steps.slice(0, index)
+			pipeline.clear()
+			pipeline.addAll(_steps)
+			setSteps(_steps)
+			runPipeline()
+		},
+		[pipeline, setSteps, runPipeline, steps],
+	)
+
 	useEffect(() => {
 		const f = async () => {
 			const companies = await loadCSV('data/companies.csv', {})
@@ -125,6 +136,15 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 						on: ['ID'],
 					},
 				},
+				{
+					verb: 'join',
+					input: 'companies',
+					output: 'join-2',
+					args: {
+						other: 'products',
+						on: ['ID', 'ID'],
+					},
+				},
 			]
 			setSteps(steps)
 		}
@@ -140,7 +160,12 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			</InputContainer>
 			<Separator />
 			<StepsContainer>
-				<StepsList onSave={onSaveStep} store={store} steps={steps} />
+				<StepsList
+					onDelete={onDeleteStep}
+					onSave={onSaveStep}
+					store={store}
+					steps={steps}
+				/>
 			</StepsContainer>
 			<Separator />
 			<OutputContainer>

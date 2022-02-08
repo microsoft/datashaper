@@ -8,49 +8,52 @@ import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { selectStepDescription } from '../../selectStepDescription'
 
-export const StepActions: React.FC<{ step: Step; onEdit: () => void }> = memo(
-	function StepActions({ step, onEdit }) {
-		const Description = useMemo(() => selectStepDescription(step), [step])
+export const StepActions: React.FC<{
+	step: Step
+	onEdit: () => void
+	onDelete: () => void
+}> = memo(function StepActions({ step, onEdit, onDelete }) {
+	const Description = useMemo(() => selectStepDescription(step), [step])
 
-		const Actions = useMemo((): any => {
-			return (
-				<div>
-					<IconButton
-						styles={{
-							icon: {
-								fontSize: '16px',
-							},
-							root: {
-								verticalAlign: 'super',
-							},
-						}}
-						onClick={onEdit}
-						iconProps={iconProps.edit}
-						aria-label="Edit"
-					/>
-					<IconButton
-						styles={{
-							icon: {
-								fontSize: '16px',
-							},
-							root: {
-								verticalAlign: 'super',
-							},
-						}}
-						iconProps={iconProps.delete}
-						aria-label="Delete"
-					/>
-				</div>
-			)
-		}, [])
-
+	const Actions = useMemo((): any => {
 		return (
-			<Container>
-				<Description actions={Actions} step={step} showInput showOutput />
-			</Container>
+			<div>
+				<IconButton
+					styles={{
+						icon: {
+							fontSize: '16px',
+						},
+						root: {
+							verticalAlign: 'super',
+						},
+					}}
+					onClick={onEdit}
+					iconProps={iconProps.edit}
+					aria-label="Edit"
+				/>
+				<IconButton
+					styles={{
+						icon: {
+							fontSize: '16px',
+						},
+						root: {
+							verticalAlign: 'super',
+						},
+					}}
+					onClick={onDelete}
+					iconProps={iconProps.delete}
+					aria-label="Delete"
+				/>
+			</div>
 		)
-	},
-)
+	}, [])
+
+	return (
+		<Container>
+			<Description actions={Actions} step={step} showInput showOutput />
+		</Container>
+	)
+})
 
 const Container = styled.div`
 	padding: 4px 14px 8px 14px;

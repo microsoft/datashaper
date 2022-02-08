@@ -5,5 +5,4 @@
 
 export * from './InputTable'
 export * from './OutputTable'
-export * from './StepsList'
 export * from './TablesList'

@@ -6,15 +6,19 @@ import { Step, TableStore } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import React, { memo, useCallback, useState } from 'react'
+import { DialogConfirm } from '../../DialogConfirm'
 import styled from 'styled-components'
-import { StepActions, StepModal } from '../../'
+import { StepActions, TableTransformModal } from '../../'
 
 export const StepsList: React.FC<{
 	steps: Step[]
 	store: TableStore
 	onSave: (step: Step, index?: number) => void
-}> = memo(function StepsList({ steps, store, onSave }) {
-	const [isOpen, { toggle: toggleModal }] = useBoolean(true)
+	onDelete: (index?: number) => void
+}> = memo(function StepsList({ steps, store, onSave, onDelete }) {
+	const [isOpen, { toggle: toggleModal }] = useBoolean(false)
+	const [isDeleteConfirmOpen, { toggle: toggleDeleteConfirmOpen }] =
+		useBoolean(false)
 	const [editStep, setEditStep] = useState<Step>()
 	const [stepIndex, setStepIndex] = useState<number>()
 
@@ -26,6 +30,18 @@ export const StepsList: React.FC<{
 		},
 		[setEditStep, toggleModal, setStepIndex],
 	)
+
+	const onDeleteClicked = useCallback(
+		(index: number) => {
+			setStepIndex(index)
+			toggleDeleteConfirmOpen()
+		},
+		[toggleDeleteConfirmOpen, setStepIndex],
+	)
+	const onConfirmDelete = useCallback(() => {
+		onDelete(stepIndex)
+		toggleDeleteConfirmOpen()
+	}, [toggleDeleteConfirmOpen, stepIndex, onDelete])
 
 	const onToggleModal = useCallback(() => {
 		if (isOpen) {
@@ -45,10 +61,18 @@ export const StepsList: React.FC<{
 
 	return (
 		<Container>
+			<DialogConfirm
+				toggle={toggleDeleteConfirmOpen}
+				title="Are you sure you want to delete this step?"
+				subText="You will lose all the table transformations made after this step."
+				show={isDeleteConfirmOpen}
+				onConfirm={onConfirmDelete}
+			/>
 			{steps.map((step, index) => {
 				return (
 					<StepActions
 						onEdit={() => onEdit(step, index)}
+						onDelete={() => onDeleteClicked(index)}
 						key={index}
 						step={step}
 					/>
@@ -59,7 +83,7 @@ export const StepsList: React.FC<{
 					Add step
 				</DefaultButton>
 			</ButtonContainer>
-			<StepModal
+			<TableTransformModal
 				editStep={editStep}
 				onCreate={onCreate}
 				isOpen={isOpen}
