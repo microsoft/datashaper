@@ -13,7 +13,7 @@ describe('test for spread verb', () => {
 			input: 'table6',
 			output: 'output',
 			args: {
-				columns: ['ID'],
+				column: ['ID'],
 			},
 		}
 

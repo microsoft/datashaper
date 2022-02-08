@@ -4,15 +4,13 @@
  */
 import { MergeStep } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
-import { useLoadTable, useHandleDropdownChange } from '../../common'
+import { useHandleDropdownChange } from '../../common'
 import { StepComponentProps } from '../../types'
 import { MergeStrategyDropdown } from '../dropdowns/MergeStrategyDropdown'
 
 export const MergeStrategyComponent: React.FC<StepComponentProps> = memo(
-	function StrategyComponent({ step, store, table, onChange, input }) {
+	function StrategyComponent({ step, onChange }) {
 		const internal = useMemo(() => step as MergeStep, [step])
-
-		const tbl = useLoadTable(input || internal.input, table, store)
 
 		const handleOpChange = useHandleDropdownChange(
 			internal,

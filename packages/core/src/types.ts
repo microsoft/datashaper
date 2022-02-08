@@ -443,7 +443,9 @@ export interface SampleArgs {
 
 export type SelectArgs = InputColumnListArgs
 
-export type SpreadArgs = InputColumnListArgs
+export interface SpreadArgs extends InputColumnListArgs {
+	column: string
+}
 
 export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	strategy: MergeStrategy
