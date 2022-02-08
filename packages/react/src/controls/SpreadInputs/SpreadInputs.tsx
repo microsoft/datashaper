@@ -5,12 +5,12 @@
 import { SpreadArgs, SpreadStep, Step } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
+import { set } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useHandleDropdownChange, useLoadTable } from '../../common'
 import { TableColumnDropdown } from '../../controls'
 import { StepComponentProps } from '../../types'
-import { set } from 'lodash'
 import { ColumnSpread } from '../ColumnSpread'
 
 /**
@@ -95,7 +95,7 @@ function useColumns(
 				/>
 			)
 		})
-	}, [step, table, onChange])
+	}, [step, onChange])
 }
 
 const Container = styled.div`
