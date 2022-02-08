@@ -7,6 +7,8 @@ import { Step, Verb, Specification } from '@data-wrangling-components/core'
 import {
 	DetailsListFeatures,
 	StatsColumnType,
+	StepSelector,
+	StepComponent,
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
@@ -15,8 +17,6 @@ import styled from 'styled-components'
 import { ControlBar } from './ControlBar'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
-import { StepComponent } from './StepComponent'
-import { StepSelector } from './StepSelector'
 import { Table } from './Table'
 import {
 	useInputTableList,
@@ -62,7 +62,10 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const [steps, setSteps] = useState<Step[]>([])
 
 	const handleCreateStep = useCallback(
-		(verb: Verb) => setSteps(pipeline.create(verb)),
+		(verb: Verb) => {
+			debugger
+			setSteps(pipeline.create(verb))
+		},
 		[pipeline, setSteps],
 	)
 
@@ -147,6 +150,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 										store={store}
 										index={index}
 										onChange={handleStepChange}
+										showPreview
 									/>
 								</StepsColumn>
 								<OutputsColumn className="outputs-column">
@@ -185,7 +189,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 					) : null}
 				</Section>
 				<Commands>
-					<StepSelector onCreate={handleCreateStep} />
+					<StepSelector onCreate={handleCreateStep} showButton />
 					<Buttons>
 						<PrimaryButton
 							onClick={handleRunClick}

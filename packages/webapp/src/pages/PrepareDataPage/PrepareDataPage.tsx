@@ -39,46 +39,24 @@ export function useInputTables(
 	return tables
 }
 
-export function useTableStore(tables: Table[]): TableStore {
+export function useTableStore(): TableStore {
 	return useMemo(() => {
-		const store = new TableStore()
-		tables.forEach(table => {
-			store.set(table.name, table.table)
-		})
-		return store
-	}, [tables])
+		return new TableStore()
+	}, [])
 }
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const [tables, setTables] = useState<Table[]>([])
 	const [selectedTable, setSelectedTable] = useState<TableFile>()
-	const [steps, setSteps] = useState<Step[]>([
-		{
-			verb: 'join',
-			input: 'companies',
-			output: 'join-1',
-			args: {
-				other: 'products',
-				on: ['ID'],
-			},
-		},
-	])
+	const [steps, setSteps] = useState<Step[]>([])
 
 	const [result, setResult] = useState<ColumnTable | undefined>()
 	const [outputs, setOutputs] = useState<Map<string, ColumnTable>>(
 		new Map<string, ColumnTable>(),
 	)
-	const store = useTableStore(tables)
+	const store = useTableStore()
 	const inputTables = useInputTables(outputs, store)
 	const pipeline = usePipeline(store) //passing the store
-
-	useEffect(() => {
-		if (steps.length && !result && tables.length) {
-			pipeline.clear()
-			pipeline.addAll(steps)
-			handleRunClick()
-		}
-	}, [pipeline, steps, tables])
 
 	const onSelect = useCallback(
 		async (name: any) => {
@@ -88,17 +66,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		[tables, setSelectedTable],
 	)
 
-	const handleCreateStep = useCallback(
-		(verb: Verb) => setSteps(pipeline.create(verb)),
-		[pipeline, setSteps],
-	)
-
-	const handleStepChange = useCallback(
-		(step: Step, index: number) => setSteps(pipeline.update(step, index)),
-		[setSteps, pipeline],
-	)
-
-	const handleRunClick = useCallback(async () => {
+	const runPipeline = useCallback(async () => {
 		const res = await pipeline.run()
 		const output = await store.toMap()
 		pipeline.print()
@@ -108,10 +76,29 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	}, [pipeline, store, setResult, setOutputs])
 
 	useEffect(() => {
+		if (steps.length && !result && tables.length) {
+			pipeline.addAll(steps)
+			runPipeline()
+		}
+	}, [pipeline, steps, tables, runPipeline])
+
+	const onSaveStep = useCallback(
+		(step: Step, index?: number) => {
+			if (index !== undefined) {
+				setSteps(pipeline.update(step, index))
+			} else {
+				setSteps(pipeline.add(step))
+			}
+			runPipeline()
+		},
+		[pipeline, setSteps, runPipeline],
+	)
+
+	useEffect(() => {
 		const f = async () => {
 			const companies = await loadCSV('data/companies.csv', {})
 			const products = await loadCSV('data/products.csv', {})
-			// make sure we have a large enough number of rows to impact rendering perf
+
 			const tablesList = [
 				{
 					name: 'companies',
@@ -123,6 +110,23 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				},
 			] as Table[]
 			setTables(tablesList)
+
+			tablesList.forEach(table => {
+				store.set(table.name, table.table)
+			})
+
+			const steps = [
+				{
+					verb: 'join',
+					input: 'companies',
+					output: 'join-1',
+					args: {
+						other: 'products',
+						on: ['ID'],
+					},
+				},
+			]
+			setSteps(steps)
 		}
 		f()
 	}, [])
@@ -136,7 +140,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			</InputContainer>
 			<Separator />
 			<StepsContainer>
-				<StepsList steps={steps} />
+				<StepsList onSave={onSaveStep} store={store} steps={steps} />
 			</StepsContainer>
 			<Separator />
 			<OutputContainer>

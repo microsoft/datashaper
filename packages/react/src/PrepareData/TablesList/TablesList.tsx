@@ -55,6 +55,7 @@ const ListContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	max-width: 20vw;
+	overflow: auto;
 `
 
 const TableSelect = styled.div`

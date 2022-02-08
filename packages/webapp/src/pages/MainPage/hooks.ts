@@ -56,7 +56,6 @@ export function useInputTables(
 	)
 	useEffect(() => {
 		const f = async () => {
-			console.log('tablesA', store)
 			const results = await store.toMap()
 			setTables(results)
 		}

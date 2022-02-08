@@ -19,13 +19,14 @@ export interface StepComponentProps {
 	store: TableStore
 	index: number
 	onChange: (step: Step, index: number) => void
+	showPreview?: boolean
 }
 
 /**
  * Let's us render the Steps in a loop while memoing all the functions
  */
 export const StepComponent: React.FC<StepComponentProps> = memo(
-	function StepComponent({ step, store, index, onChange }) {
+	function StepComponent({ step, store, index, onChange, showPreview }) {
 		const Component = useMemo(() => selectStepComponent(step), [step])
 		const Description = useMemo(() => selectStepDescription(step), [step])
 		const WithAllArgs = useMemo(
@@ -44,7 +45,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 			<>
 				{' '}
 				<WithAllArgs step={step} store={store} onChange={handleStepChange} />
-				{Description ? (
+				{showPreview ? (
 					<DescriptionContainer>
 						<Description step={step} showInput showOutput />
 					</DescriptionContainer>

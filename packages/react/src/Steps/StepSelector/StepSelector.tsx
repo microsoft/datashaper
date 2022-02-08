@@ -4,20 +4,31 @@
  */
 import { Verb } from '@data-wrangling-components/core'
 import { Dropdown, DropdownMenuItemType, IconButton } from '@fluentui/react'
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 export interface StepSelectorProps {
 	onCreate?: (verb: Verb) => void
+	showButton?: boolean
+	verb?: string
 }
 
 export const StepSelector: React.FC<StepSelectorProps> = memo(
-	function StepSelector({ onCreate }) {
+	function StepSelector({ onCreate, showButton, verb }) {
 		const options = useGroupedOptions()
 		const [currentOption, setCurrentOption] = useState<string>('aggregate')
-		const handleDropdownChange = useCallback((e, opt) => {
-			setCurrentOption(opt.key)
-		}, [])
+		const handleDropdownChange = useCallback(
+			(e, opt) => {
+				setCurrentOption(opt.key)
+				!showButton && onCreate && onCreate(opt.key)
+			},
+			[showButton, onCreate],
+		)
+
+		useEffect(() => {
+			verb && setCurrentOption(verb)
+		}, [verb])
+
 		const handleStepClick = useCallback(() => {
 			onCreate && onCreate(currentOption as Verb)
 		}, [currentOption, onCreate])
@@ -29,7 +40,12 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 					styles={{ root: { flex: 2 } }}
 					onChange={handleDropdownChange}
 				/>
-				<IconButton iconProps={{ iconName: 'Add' }} onClick={handleStepClick} />
+				{showButton && (
+					<IconButton
+						iconProps={{ iconName: 'Add' }}
+						onClick={handleStepClick}
+					/>
+				)}
 			</Container>
 		)
 	},
