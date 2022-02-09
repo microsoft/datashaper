@@ -9,6 +9,7 @@ import {
 	Value,
 	DataType,
 	columnType,
+	Pipeline,
 } from '@data-wrangling-components/core'
 import { IDropdownOption } from '@fluentui/react'
 import { op } from 'arquero'
@@ -272,4 +273,29 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType {
 		}
 		return columnType(table, column)
 	}, [table, column])
+}
+
+export function useStore(): TableStore {
+	return useMemo(() => new TableStore(), [])
+}
+
+export function usePipeline(store: TableStore): Pipeline {
+	return useMemo(() => new Pipeline(store), [store])
+}
+
+export function useInputTables(
+	outputs: Map<string, ColumnTable>,
+	store: TableStore,
+): Map<string, ColumnTable> {
+	const [tables, setTables] = useState<Map<string, ColumnTable>>(
+		new Map<string, ColumnTable>(),
+	)
+	useEffect(() => {
+		const f = async () => {
+			const results = await store.toMap()
+			setTables(results)
+		}
+		f()
+	}, [outputs, store, setTables])
+	return tables
 }

@@ -11,7 +11,7 @@ import { StepActions, TableTransformModal } from '../../'
 import { DialogConfirm } from '../../DialogConfirm'
 
 export const StepsList: React.FC<{
-	steps: Step[]
+	steps?: Step[]
 	store: TableStore
 	onSave: (step: Step, index?: number) => void
 	onDelete: (index?: number) => void
@@ -83,18 +83,19 @@ export const StepsList: React.FC<{
 				show={isDeleteConfirmOpen}
 				onConfirm={onConfirmDelete}
 			/>
-			{steps.map((step, index) => {
-				return (
-					<StepActions
-						onEdit={() => onEdit(step, index)}
-						onDelete={() => onDeleteClicked(index)}
-						onDuplicate={() => onDuplicate(step)}
-						onClick={() => onSelect(step.output)}
-						key={index}
-						step={step}
-					/>
-				)
-			})}
+			{steps &&
+				steps.map((step, index) => {
+					return (
+						<StepActions
+							onEdit={() => onEdit(step, index)}
+							onDelete={() => onDeleteClicked(index)}
+							onDuplicate={() => onDuplicate(step)}
+							onClick={() => onSelect(step.output)}
+							key={index}
+							step={step}
+						/>
+					)
+				})}
 			<ButtonContainer>
 				<DefaultButton iconProps={iconProps.add} onClick={onToggleModal}>
 					Add step

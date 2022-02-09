@@ -31,7 +31,7 @@ export const withOutputTableTextField = (
 					<LeftAlignedRow>
 						<TextField
 							required
-							label={label || 'Output table name'}
+							label={label || 'Output table'}
 							placeholder={'Table name'}
 							value={step.output}
 							styles={columnDropdownStyles}

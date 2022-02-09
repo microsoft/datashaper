@@ -64,10 +64,6 @@ export function useInputTables(
 	return tables
 }
 
-export function usePipeline(store: TableStore): Pipeline {
-	return useMemo(() => new Pipeline(store), [store])
-}
-
 export function useLoadTableFiles(): (
 	files: BaseFile[],
 ) => Promise<Map<string, ColumnTable>> {

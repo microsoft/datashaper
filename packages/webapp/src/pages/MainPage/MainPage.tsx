@@ -9,6 +9,7 @@ import {
 	StatsColumnType,
 	StepSelector,
 	StepComponent,
+	usePipeline,
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
@@ -18,12 +19,7 @@ import { ControlBar } from './ControlBar'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { Table } from './Table'
-import {
-	useInputTableList,
-	useInputTables,
-	useTableStore,
-	usePipeline,
-} from './hooks'
+import { useInputTableList, useInputTables, useTableStore } from './hooks'
 
 const columns = {
 	ID: {
@@ -63,7 +59,6 @@ export const MainPage: React.FC = memo(function MainMage() {
 
 	const handleCreateStep = useCallback(
 		(verb: Verb) => {
-			debugger
 			setSteps(pipeline.create(verb))
 		},
 		[pipeline, setSteps],
