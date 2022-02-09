@@ -16,6 +16,7 @@ import { StepComponent, StepSelector } from '..'
 
 export const TableTransformModal: React.FC<{
 	isOpen: boolean
+	isDuplicating: boolean
 	toggleModal: () => void
 	store: TableStore
 	onCreate: (step: Step, index?: number) => void
@@ -23,6 +24,7 @@ export const TableTransformModal: React.FC<{
 	stepIndex?: number
 }> = memo(function TableTransformModal({
 	isOpen,
+	isDuplicating,
 	toggleModal,
 	store,
 	onCreate,
@@ -46,10 +48,12 @@ export const TableTransformModal: React.FC<{
 		(verb: Verb) => {
 			//get latest table
 			const tables = store.list()
+			const length = tables.length
 			//pipeline has a last, should we use it?
-			const input = tables.length === 0 ? '' : tables[tables.length - 1]
-			// console.log(store.toMap) //get the last step
-			const step: Step = factory(verb, input, `output-table`)
+			const input = length === 0 ? '' : tables[length - 1]
+
+			//GET STEPS NOT STORE
+			const step: Step = factory(verb, input, `output-${length + 1}-${verb}`)
 			setStep(step)
 		},
 		[setStep, store],
@@ -65,7 +69,13 @@ export const TableTransformModal: React.FC<{
 				isBlocking={false}
 			>
 				<Header>
-					<Title>{editStep ? 'Edit step' : 'New step'}</Title>
+					<Title>
+						{editStep
+							? isDuplicating
+								? 'Duplicate Step'
+								: 'Edit step'
+							: 'New step'}
+					</Title>
 					<IconButton
 						iconProps={iconProps.cancel}
 						ariaLabel="Close popup modal"

@@ -6,17 +6,19 @@ import { Step, TableStore } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import React, { memo, useCallback, useState } from 'react'
-import { DialogConfirm } from '../../DialogConfirm'
 import styled from 'styled-components'
 import { StepActions, TableTransformModal } from '../../'
+import { DialogConfirm } from '../../DialogConfirm'
 
 export const StepsList: React.FC<{
 	steps: Step[]
 	store: TableStore
 	onSave: (step: Step, index?: number) => void
 	onDelete: (index?: number) => void
-}> = memo(function StepsList({ steps, store, onSave, onDelete }) {
+	onSelect: (name: string) => void
+}> = memo(function StepsList({ steps, store, onSave, onDelete, onSelect }) {
 	const [isOpen, { toggle: toggleModal }] = useBoolean(false)
+	const [isDuplicating, { toggle: toggleDuplicating }] = useBoolean(false)
 	const [isDeleteConfirmOpen, { toggle: toggleDeleteConfirmOpen }] =
 		useBoolean(false)
 	const [editStep, setEditStep] = useState<Step>()
@@ -29,6 +31,19 @@ export const StepsList: React.FC<{
 			toggleModal()
 		},
 		[setEditStep, toggleModal, setStepIndex],
+	)
+
+	const onDuplicate = useCallback(
+		(step: Step) => {
+			toggleDuplicating()
+			const dupStep = {
+				...step,
+				output: `${step.output}-dup`,
+			}
+			setEditStep(dupStep)
+			toggleModal()
+		},
+		[setEditStep, toggleModal, toggleDuplicating],
 	)
 
 	const onDeleteClicked = useCallback(
@@ -56,7 +71,7 @@ export const StepsList: React.FC<{
 			onSave(step, index)
 			onToggleModal()
 		},
-		[setEditStep, toggleModal],
+		[onToggleModal, onSave],
 	)
 
 	return (
@@ -73,6 +88,8 @@ export const StepsList: React.FC<{
 					<StepActions
 						onEdit={() => onEdit(step, index)}
 						onDelete={() => onDeleteClicked(index)}
+						onDuplicate={() => onDuplicate(step)}
+						onClick={() => onSelect(step.output)}
 						key={index}
 						step={step}
 					/>
@@ -85,6 +102,7 @@ export const StepsList: React.FC<{
 			</ButtonContainer>
 			<TableTransformModal
 				editStep={editStep}
+				isDuplicating={isDuplicating}
 				onCreate={onCreate}
 				isOpen={isOpen}
 				store={store}

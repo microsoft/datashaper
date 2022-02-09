@@ -11,7 +11,8 @@ import { TableFile } from '../../types'
 export const TablesList: React.FC<{
 	files: Map<string, ColumnTable>
 	onSelect?: (name: string) => void
-}> = memo(function TablesList({ files, onSelect }) {
+	selected?: string
+}> = memo(function TablesList({ files, onSelect, selected }) {
 	const list = useMemo((): TableFile[] => {
 		return Array.from(files).map(([key, table]) => {
 			return {
@@ -30,17 +31,20 @@ export const TablesList: React.FC<{
 			},
 		] as IColumn[]
 	}, [])
-
+	console.log(selected)
 	return (
 		<ListContainer>
 			<DetailsList
 				isHeaderVisible={false}
-				items={list}
+				items={[...list]}
 				columns={columns}
 				selectionMode={SelectionMode.none}
 				onRenderRow={(props, defaultRender) =>
 					defaultRender ? (
-						<TableSelect onClick={() => onSelect && onSelect(props?.item.name)}>
+						<TableSelect
+							selected={selected === props?.item.name}
+							onClick={() => onSelect && onSelect(props?.item.name)}
+						>
 							{defaultRender(props)}
 						</TableSelect>
 					) : null
@@ -58,6 +62,10 @@ const ListContainer = styled.div`
 	overflow: auto;
 `
 
-const TableSelect = styled.div`
+const TableSelect = styled.div<{ selected: boolean }>`
 	cursor: pointer;
+	.ms-DetailsRow-cell {
+		background-color: ${({ theme, selected }) =>
+			selected ? theme.application().faint().hex() : 'inherit'};
+	}
 `

@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb, TableStore } from '@data-wrangling-components/core'
+/* eslint-disable @essex/adjacent-await */
+import { Step, TableStore } from '@data-wrangling-components/core'
 import {
 	TablesList,
 	InputTable,
@@ -63,7 +64,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			const table = await store.get(name)
 			setSelectedTable({ table, name: name })
 		},
-		[tables, setSelectedTable],
+		[setSelectedTable, store],
 	)
 
 	const runPipeline = useCallback(async () => {
@@ -80,7 +81,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			pipeline.addAll(steps)
 			runPipeline()
 		}
-	}, [pipeline, steps, tables, runPipeline])
+	}, [pipeline, steps, tables, runPipeline, result])
 
 	const onSaveStep = useCallback(
 		(step: Step, index?: number) => {
@@ -105,6 +106,15 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		[pipeline, setSteps, runPipeline, steps],
 	)
 
+	const storeTables = useCallback(
+		(tablesList: Table[]) => {
+			tablesList.forEach(table => {
+				store.set(table.name, table.table)
+			})
+		},
+		[store],
+	)
+
 	useEffect(() => {
 		const f = async () => {
 			const companies = await loadCSV('data/companies.csv', {})
@@ -121,10 +131,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				},
 			] as Table[]
 			setTables(tablesList)
-
-			tablesList.forEach(table => {
-				store.set(table.name, table.table)
-			})
+			storeTables(tablesList)
 
 			const steps = [
 				{
@@ -149,12 +156,16 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			setSteps(steps)
 		}
 		f()
-	}, [])
+	}, [storeTables])
 
 	return (
 		<Container>
 			<InputContainer>
-				<TablesList files={inputTables} onSelect={onSelect} />
+				<TablesList
+					files={inputTables}
+					selected={selectedTable?.name}
+					onSelect={onSelect}
+				/>
 				<SectionSeparator vertical />
 				<InputTable table={selectedTable} />
 			</InputContainer>
@@ -165,6 +176,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					onSave={onSaveStep}
 					store={store}
 					steps={steps}
+					onSelect={onSelect}
 				/>
 			</StepsContainer>
 			<Separator />
