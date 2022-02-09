@@ -17,7 +17,7 @@ export const withOutputTableTextField = (
 	label?: string,
 ): HOCFunction<StepComponentProps> => {
 	return Component => {
-		const withOutputTableTextField: React.FC<StepComponentProps> = props => {
+		const WithOutputTableTextField: React.FC<StepComponentProps> = props => {
 			const { step, onChange } = props
 			const handleOutputChange = useHandleTextfieldChange(
 				step,
@@ -41,7 +41,7 @@ export const withOutputTableTextField = (
 				</Container>
 			)
 		}
-		return memo(withOutputTableTextField)
+		return memo(WithOutputTableTextField)
 	}
 }
 

@@ -11,7 +11,11 @@ import {
 	columnType,
 	Pipeline,
 } from '@data-wrangling-components/core'
-import { IDropdownOption } from '@fluentui/react'
+import {
+	ICommandBarItemProps,
+	IContextualMenuItem,
+	IDropdownOption,
+} from '@fluentui/react'
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
@@ -298,4 +302,23 @@ export function useInputTables(
 		f()
 	}, [outputs, store, setTables])
 	return tables
+}
+
+export function useDeriveColumnCommand(
+	onClick: (
+		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+		item?: IContextualMenuItem,
+	) => boolean | void,
+): ICommandBarItemProps {
+	const cmd = useMemo(() => {
+		return {
+			key: 'derive-column',
+			text: 'Create column',
+			iconProps: {
+				iconName: 'Add',
+			},
+			onClick,
+		} as ICommandBarItemProps
+	}, [onClick])
+	return cmd
 }

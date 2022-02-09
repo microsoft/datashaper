@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-/* eslint-disable @essex/adjacent-await */
 import { Step, TableContainer } from '@data-wrangling-components/core'
 import { PrepareDataFull } from '@data-wrangling-components/react'
 import { loadCSV } from 'arquero'
@@ -14,8 +13,10 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	useEffect(() => {
 		const f = async () => {
-			const companies = await loadCSV('data/companies.csv', {})
-			const products = await loadCSV('data/products.csv', {})
+			const [companies, products] = await Promise.all([
+				loadCSV('data/companies.csv', {}),
+				loadCSV('data/products.csv', {}),
+			])
 
 			const tablesList = [
 				{

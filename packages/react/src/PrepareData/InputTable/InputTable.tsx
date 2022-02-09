@@ -5,7 +5,6 @@
 import { introspect, TableContainer } from '@data-wrangling-components/core'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo } from 'react'
-import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
 import { ArqueroDetailsList, ArqueroTableHeader, StatsColumnType } from '../../'
 
@@ -24,9 +23,14 @@ export const InputTable: React.FC<{
 		return table && introspect(table?.table as ColumnTable, true)
 	}, [table])
 
+	const sampleTable = useMemo(
+		(): ColumnTable | undefined => table?.table?.slice(0, 1),
+		[table],
+	)
+
 	return (
-		<If condition={!!table}>
-			<Then>
+		<>
+			{sampleTable ? (
 				<Container>
 					<ArqueroTableHeader
 						visibleRows={1}
@@ -43,16 +47,13 @@ export const InputTable: React.FC<{
 							smartHeaders: true,
 							statsColumnTypes: statsColumnTypes,
 						}}
-						table={table?.table?.sample(1) as ColumnTable}
+						table={sampleTable}
 					/>
 				</Container>
-			</Then>
-			<Else>
-				<Then>
-					<PreviewText>Select a table to preview here</PreviewText>
-				</Then>
-			</Else>
-		</If>
+			) : (
+				<PreviewText>Select a table to preview here</PreviewText>
+			)}
+		</>
 	)
 })
 

@@ -7,15 +7,15 @@ import { DefaultButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import React, { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { StepActions, TableTransformModal } from '../../'
+import { StepItem, TableTransformModal } from '../../'
 import { DialogConfirm } from '../../DialogConfirm'
 
 export const StepsList: React.FC<{
 	steps?: Step[]
 	store: TableStore
-	onSave: (step: Step, index?: number) => void
-	onDelete: (index?: number) => void
-	onSelect: (name: string) => void
+	onSave?: (step: Step, index?: number) => void
+	onDelete?: (index?: number) => void
+	onSelect?: (name: string) => void
 }> = memo(function StepsList({ steps, store, onSave, onDelete, onSelect }) {
 	const [isOpen, { toggle: toggleModal }] = useBoolean(false)
 	const [isDuplicating, { toggle: toggleDuplicating }] = useBoolean(false)
@@ -54,7 +54,7 @@ export const StepsList: React.FC<{
 		[toggleDeleteConfirmOpen, setStepIndex],
 	)
 	const onConfirmDelete = useCallback(() => {
-		onDelete(stepIndex)
+		onDelete && onDelete(stepIndex)
 		toggleDeleteConfirmOpen()
 	}, [toggleDeleteConfirmOpen, stepIndex, onDelete])
 
@@ -68,7 +68,7 @@ export const StepsList: React.FC<{
 
 	const onCreate = useCallback(
 		(step: Step, index?: number) => {
-			onSave(step, index)
+			onSave && onSave(step, index)
 			onToggleModal()
 		},
 		[onToggleModal, onSave],
@@ -76,40 +76,48 @@ export const StepsList: React.FC<{
 
 	return (
 		<Container>
-			<DialogConfirm
-				toggle={toggleDeleteConfirmOpen}
-				title="Are you sure you want to delete this step?"
-				subText="You will lose all the table transformations made after this step."
-				show={isDeleteConfirmOpen}
-				onConfirm={onConfirmDelete}
-			/>
+			{onDelete && (
+				<DialogConfirm
+					toggle={toggleDeleteConfirmOpen}
+					title="Are you sure you want to delete this step?"
+					subText="You will lose all the table transformations made after this step."
+					show={isDeleteConfirmOpen}
+					onConfirm={onConfirmDelete}
+				/>
+			)}
+
 			{steps &&
 				steps.map((step, index) => {
 					return (
-						<StepActions
-							onEdit={() => onEdit(step, index)}
-							onDelete={() => onDeleteClicked(index)}
-							onDuplicate={() => onDuplicate(step)}
-							onClick={() => onSelect(step.output)}
+						<StepItem
+							onEdit={onEdit && (() => onEdit(step, index))}
+							onDelete={onDelete && (() => onDeleteClicked(index))}
+							onDuplicate={onDuplicate && (() => onDuplicate(step))}
+							onSelect={onSelect && (() => onSelect(step.output))}
 							key={index}
 							step={step}
 						/>
 					)
 				})}
-			<ButtonContainer>
-				<DefaultButton iconProps={iconProps.add} onClick={onToggleModal}>
-					Add step
-				</DefaultButton>
-			</ButtonContainer>
-			<TableTransformModal
-				editStep={editStep}
-				isDuplicating={isDuplicating}
-				onCreate={onCreate}
-				isOpen={isOpen}
-				store={store}
-				stepIndex={stepIndex}
-				toggleModal={onToggleModal}
-			/>
+
+			{onSave && (
+				<>
+					<ButtonContainer>
+						<DefaultButton iconProps={iconProps.add} onClick={onToggleModal}>
+							Add step
+						</DefaultButton>
+					</ButtonContainer>
+					<TableTransformModal
+						editStep={editStep}
+						isDuplicating={isDuplicating}
+						onCreate={onCreate}
+						isOpen={isOpen}
+						store={store}
+						stepIndex={stepIndex}
+						toggleModal={onToggleModal}
+					/>
+				</>
+			)}
 		</Container>
 	)
 })

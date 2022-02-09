@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable @essex/adjacent-await */
 import { Step, TableContainer } from '@data-wrangling-components/core'
 import { Separator } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
@@ -111,9 +112,9 @@ export const PrepareDataFull: React.FC<{
 				<StepsList
 					onDelete={onDeleteStep}
 					onSave={onSaveStep}
+					onSelect={onSelect}
 					store={store}
 					steps={steps}
-					onSelect={onSelect}
 				/>
 			</StepsContainer>
 			<Separator />
