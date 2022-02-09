@@ -39,7 +39,7 @@ export const OutputTable: React.FC<{
 				onDismiss={hideModal}
 				onTransformRequested={onTransform}
 			/>
-			<TableContainer>
+			<Container>
 				<ArqueroTableHeader
 					visibleRows={1}
 					table={output?.table}
@@ -52,12 +52,12 @@ export const OutputTable: React.FC<{
 					isHeadersFixed
 					table={output?.table}
 				/>
-			</TableContainer>
+			</Container>
 		</>
 	)
 })
 
-const TableContainer = styled.div`
+const Container = styled.div`
 	max-height: inherit;
 `
 
