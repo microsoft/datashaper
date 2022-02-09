@@ -8,7 +8,7 @@ import { Separator } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { TablesList, InputTable, OutputTable } from '..'
+import { TablesList, PreviewTable, OutputTable } from '..'
 import { StepsList } from '../../Steps'
 import { usePipeline, useStore, useInputTables } from '../../common'
 
@@ -89,6 +89,8 @@ export const PrepareDataFull: React.FC<{
 	useEffect(() => {
 		tables.forEach(async table => {
 			try {
+				//what if it's different
+				//what if it's a delete
 				await store.get(table.name)
 			} catch (e) {
 				store.set(table.name, table?.table as ColumnTable)
@@ -99,52 +101,97 @@ export const PrepareDataFull: React.FC<{
 	return (
 		<Container>
 			<InputContainer>
-				<TablesList
-					files={inputTables}
-					selected={selectedTable?.name}
-					onSelect={onSelect}
-				/>
-				<SectionSeparator vertical />
-				<InputTable table={selectedTable} />
+				<TablesListContainer>
+					<SectionTitle>Inputs</SectionTitle>
+					<TablesList
+						files={inputTables}
+						selected={selectedTable?.name}
+						onSelect={onSelect}
+					/>
+					<SectionSeparator vertical />
+				</TablesListContainer>
+				<InputDetailsContainer>
+					<PreviewContainer>
+						<SectionTitle>Preview</SectionTitle>
+						<PreviewTable table={selectedTable} />
+					</PreviewContainer>
+					<StepsContainer>
+						<SectionTitle>Steps</SectionTitle>
+						<StepsList
+							onDelete={onDeleteStep}
+							onSave={onSaveStep}
+							onSelect={onSelect}
+							store={store}
+							steps={steps}
+						/>
+					</StepsContainer>
+				</InputDetailsContainer>
 			</InputContainer>
-			<Separator />
-			<StepsContainer>
-				<StepsList
-					onDelete={onDeleteStep}
-					onSave={onSaveStep}
-					onSelect={onSelect}
-					store={store}
-					steps={steps}
-				/>
-			</StepsContainer>
-			<Separator />
+
 			<OutputContainer>
+				<SectionTitle>Output</SectionTitle>
 				<OutputTable output={output} onTransform={onSaveStep} />
 			</OutputContainer>
 		</Container>
 	)
 })
 
-const Container = styled.div``
+const SectionTitle = styled.span`
+	font-weight: bold;
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+	font-size: 15px;
+	align-self: center;
+	text-transform: uppercase;
+	color: ${({ theme }) => theme.palette.neutralLight};
+`
+
+const Container = styled.div`
+	height: 100%;
+	position: fixed;
+	width: 100%;
+`
+
+const PreviewContainer = styled.div`
+	display: flex;
+	height: 53%;
+	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
+`
 
 const InputContainer = styled.div`
-	height: 23vh;
+	height: 47%;
 	display: flex;
-	max-height: inherit;
 	overflow: hidden;
+	padding-bottom: 10px;
+	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
+`
+
+const OutputContainer = styled.div`
+	padding: 10px;
+	height: 45%;
+	display: flex;
 `
 
 const SectionSeparator = styled(Separator)`
 	padding: 14px;
+	height: 90%;
 `
 
 const StepsContainer = styled.div`
-	height: 20vh;
+	padding-bottom: 10px;
+	/* height: 20%; */
+	height: 47%;
 	display: flex;
 	column-gap: 8px;
 	overflow: auto;
+	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
-const OutputContainer = styled.div`
-	height: 40vh;
+const TablesListContainer = styled.div`
+	display: flex;
+	width: 30%;
+`
+
+const InputDetailsContainer = styled.div`
+	width: 67%;
 `

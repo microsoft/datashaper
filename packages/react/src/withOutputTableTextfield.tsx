@@ -13,11 +13,11 @@ import { HOCFunction, StepComponentProps } from './types'
  * @param label optional label to use for the textfield instead of the default.
  * @returns
  */
-export const withOutputTableTextField = (
+export const withOutputTableTextfield = (
 	label?: string,
 ): HOCFunction<StepComponentProps> => {
 	return Component => {
-		const WithOutputTableTextField: React.FC<StepComponentProps> = props => {
+		const WithOutputTableTextfield: React.FC<StepComponentProps> = props => {
 			const { step, onChange } = props
 			const handleOutputChange = useHandleTextfieldChange(
 				step,
@@ -41,7 +41,7 @@ export const withOutputTableTextField = (
 				</Container>
 			)
 		}
-		return memo(WithOutputTableTextField)
+		return memo(WithOutputTableTextfield)
 	}
 }
 

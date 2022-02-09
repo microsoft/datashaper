@@ -48,7 +48,6 @@ export const OutputTable: React.FC<{
 				/>
 				<ArqueroDetailsList
 					showColumnBorders
-					styles={{ root: { maxHeight: '39vh' } }}
 					table={output?.table}
 					compact
 					isHeadersFixed
@@ -58,8 +57,11 @@ export const OutputTable: React.FC<{
 	)
 })
 
+//TODO: fix this
 const Container = styled.div`
-	max-height: inherit;
+	height: 90%;
+	width: 95%;
+	overflow: auto;
 `
 
 function useCommands(showModal: any): ICommandBarItemProps[] {

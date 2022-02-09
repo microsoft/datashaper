@@ -49,12 +49,76 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 						on: ['ID', 'ID'],
 					},
 				},
+				{
+					verb: 'join',
+					input: 'companies',
+					output: 'join-2',
+					args: {
+						other: 'products',
+						on: ['ID', 'ID'],
+					},
+				},
+				{
+					verb: 'join',
+					input: 'companies',
+					output: 'join-2',
+					args: {
+						other: 'products',
+						on: ['ID', 'ID'],
+					},
+				},
+				{
+					verb: 'join',
+					input: 'companies',
+					output: 'join-2',
+					args: {
+						other: 'products',
+						on: ['ID', 'ID'],
+					},
+				},
+				{
+					verb: 'join',
+					input: 'companies',
+					output: 'join-2',
+					args: {
+						other: 'products',
+						on: ['ID', 'ID'],
+					},
+				},
+				{
+					verb: 'join',
+					input: 'companies',
+					output: 'join-2',
+					args: {
+						other: 'products',
+						on: ['ID', 'ID'],
+					},
+				},
+				{
+					verb: 'join',
+					input: 'companies',
+					output: 'join-2',
+					args: {
+						other: 'products',
+						on: ['ID', 'ID'],
+					},
+				},
+				{
+					verb: 'join',
+					input: 'companies',
+					output: 'join-2',
+					args: {
+						other: 'products',
+						on: ['ID', 'ID'],
+					},
+				},
 			]
 			setSteps(steps)
 		}
 		f()
 	}, [])
 
+	//fix: what if we have other components on the same page
 	return (
 		<PrepareDataFull tables={tables} steps={steps} onUpdateSteps={setSteps} />
 	)

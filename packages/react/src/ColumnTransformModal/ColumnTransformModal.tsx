@@ -8,37 +8,18 @@ import {
 	factory,
 	columnTransformVerbs,
 } from '@data-wrangling-components/core'
-import {
-	Dropdown,
-	IconButton,
-	IModalProps,
-	Modal,
-	PrimaryButton,
-} from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import { Dropdown, IconButton, Modal, PrimaryButton } from '@fluentui/react'
 import { upperFirst } from 'lodash'
 import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import {
 	selectStepComponent,
+	TransformModalProps,
 	withInputColumnDropdown,
 	withOutputColumnTextfield,
 } from '../'
 
-export interface ColumnTransformModalProps extends IModalProps {
-	/**
-	 * Table to build the column transform from.
-	 */
-	table: ColumnTable
-	/**
-	 * Optional step for controlled component if pre-built config is planned.
-	 */
-	step?: Step
-	/**
-	 * Callback fired when the step is configured and "run" is clicked, indicating
-	 * the application should execute the contructed/edited step.
-	 */
-	onTransformRequested?: (step: Step) => void
+export interface ColumnTransformModalProps extends TransformModalProps {
 	/**
 	 * Indicates that the input column should be hidden or else shown and editable by the user.
 	 * It may be desirable to hide this if the modal is launched directly from a column, which would make display redundant.
@@ -49,15 +30,6 @@ export interface ColumnTransformModalProps extends IModalProps {
 	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input column.
 	 */
 	hideOutputColumn?: boolean
-	/**
-	 * Optional list of transform verbs to present to the user.
-	 * If not supplied, all verbs that operate on a single input column will be presented.
-	 */
-	verbs?: string[]
-	/**
-	 * Optional header text to display on the modal
-	 */
-	headerText?: string
 }
 
 /**

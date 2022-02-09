@@ -2,20 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ThematicFluentProvider } from '@thematic/fluent'
+import { loadFluentTheme, ThematicFluentProvider } from '@thematic/fluent'
 import { ApplicationStyles, useThematic } from '@thematic/react'
 
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 export const StyleContext: React.FC = memo(function StyleContext({ children }) {
 	const theme = useThematic()
+	const fluentTheme = useMemo(() => loadFluentTheme(theme), [theme])
+
 	return (
 		<>
 			<GlobalStyle />
 			<ThematicFluentProvider theme={theme}>
 				<ApplicationStyles />
-				<ThemeProvider theme={theme}>{children}</ThemeProvider>
+				<ThemeProvider theme={fluentTheme}>{children}</ThemeProvider>
 			</ThematicFluentProvider>
 		</>
 	)

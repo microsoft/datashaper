@@ -21,6 +21,14 @@ export const StepActions: React.FC<{
 					aria-label="Edit"
 				/>
 			)}
+			{onEdit && (
+				<IconButton
+					styles={iconButtonStyle}
+					onClick={onEdit}
+					iconProps={iconProps.edit}
+					aria-label="Edit"
+				/>
+			)}
 			{onDuplicate && (
 				<IconButton
 					styles={iconButtonStyle}
@@ -41,7 +49,9 @@ export const StepActions: React.FC<{
 	)
 })
 
-const Container = styled.div``
+const Container = styled.div`
+	display: flex;
+`
 
 const iconProps = {
 	edit: { iconName: 'Edit' },

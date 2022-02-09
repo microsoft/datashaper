@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TableStore, Step } from '@data-wrangling-components/core'
-import { IDropdownOption } from '@fluentui/react'
+import { IDropdownOption, IModalProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type StepChangeFunction = (step: Step) => void
@@ -14,6 +14,31 @@ export type DropdownOptionChangeFunction = (
 	option?: IDropdownOption,
 	index?: number,
 ) => void
+
+export interface TransformModalProps extends IModalProps {
+	/**
+	 * Table to build the transform from.
+	 */
+	table?: ColumnTable
+	/**
+	 * Optional step for controlled component if pre-built config is planned.
+	 */
+	step?: Step
+	/**
+	 * Callback fired when the step is configured and "run" is clicked, indicating
+	 * the application should execute the contructed/edited step.
+	 */
+	onTransformRequested?: (step: Step, index?: number) => void
+	/**
+	 * Optional list of transform verbs to present to the user.
+	 * If not supplied, all verbs for the desired operation (table or column) will be presented.
+	 */
+	verbs?: string[]
+	/**
+	 * Optional header text to display on the modal
+	 */
+	headerText?: string
+}
 
 export interface StepDependent {
 	step: Step

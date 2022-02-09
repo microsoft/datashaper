@@ -16,38 +16,31 @@ const statsColumnTypes = [
 	StatsColumnType.Invalid,
 ]
 
-export const InputTable: React.FC<{
+export const PreviewTable: React.FC<{
 	table?: TableContainer
-}> = memo(function InputTable({ table }) {
+}> = memo(function PreviewTable({ table }) {
 	const metadata = useMemo((): any => {
 		return table && introspect(table?.table as ColumnTable, true)
 	}, [table])
 
-	const sampleTable = useMemo(
-		(): ColumnTable | undefined => table?.table?.slice(0, 1),
-		[table],
-	)
-
 	return (
 		<>
-			{sampleTable ? (
+			{table?.table ? (
 				<Container>
 					<ArqueroTableHeader
-						visibleRows={1}
 						name={table?.name}
 						table={table?.table as ColumnTable}
 					/>
 					<ArqueroDetailsList
 						compact
 						showColumnBorders
-						metadata={metadata}
-						styles={{ root: { maxHeight: '24vh' } }}
 						isHeadersFixed
+						metadata={metadata}
 						features={{
 							smartHeaders: true,
 							statsColumnTypes: statsColumnTypes,
 						}}
-						table={sampleTable}
+						table={table?.table}
 					/>
 				</Container>
 			) : (
@@ -58,14 +51,17 @@ export const InputTable: React.FC<{
 })
 
 const Container = styled.div`
-	max-height: inherit;
-	max-width: 77vw;
+	height: 95%;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
 `
 
 const PreviewText = styled.div`
 	flex: 1;
 	display: flex;
 	justify-content: center;
+	height: 24%;
 	align-items: center;
 	color: ${({ theme }) => theme.application().border().hex()};
 `

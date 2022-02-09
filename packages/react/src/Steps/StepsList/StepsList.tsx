@@ -5,7 +5,7 @@
 import { Step, TableStore } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { StepItem, TableTransformModal } from '../../'
 import { DialogConfirm } from '../../DialogConfirm'
@@ -17,7 +17,8 @@ export const StepsList: React.FC<{
 	onDelete?: (index?: number) => void
 	onSelect?: (name: string) => void
 }> = memo(function StepsList({ steps, store, onSave, onDelete, onSelect }) {
-	const [isOpen, { toggle: toggleModal }] = useBoolean(false)
+	const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =
+		useBoolean(false)
 	const [isDuplicating, { toggle: toggleDuplicating }] = useBoolean(false)
 	const [isDeleteConfirmOpen, { toggle: toggleDeleteConfirmOpen }] =
 		useBoolean(false)
@@ -28,9 +29,9 @@ export const StepsList: React.FC<{
 		(step: Step, index: number) => {
 			setEditStep(step)
 			setStepIndex(index)
-			toggleModal()
+			showModal()
 		},
-		[setEditStep, toggleModal, setStepIndex],
+		[setEditStep, showModal, setStepIndex],
 	)
 
 	const onDuplicate = useCallback(
@@ -41,9 +42,9 @@ export const StepsList: React.FC<{
 				output: `${step.output}-dup`,
 			}
 			setEditStep(dupStep)
-			toggleModal()
+			showModal()
 		},
-		[setEditStep, toggleModal, toggleDuplicating],
+		[setEditStep, showModal, toggleDuplicating],
 	)
 
 	const onDeleteClicked = useCallback(
@@ -58,20 +59,27 @@ export const StepsList: React.FC<{
 		toggleDeleteConfirmOpen()
 	}, [toggleDeleteConfirmOpen, stepIndex, onDelete])
 
-	const onToggleModal = useCallback(() => {
-		if (isOpen) {
-			setEditStep(undefined)
-			setStepIndex(undefined)
-		}
-		toggleModal()
-	}, [isOpen, toggleModal, setStepIndex, setEditStep])
+	const modalHeaderText = useMemo(
+		(): any =>
+			editStep ? (isDuplicating ? 'Duplicate Step' : 'Edit step') : 'New step',
+		[editStep, isDuplicating],
+	)
+
+	//?????
+	// const onToggleModal = useCallback(() => {
+	// 	if (isOpen) {
+	// 		setEditStep(undefined)
+	// 		setStepIndex(undefined)
+	// 	}
+	// 	toggleModal()
+	// }, [isOpen, toggleModal, setStepIndex, setEditStep])
 
 	const onCreate = useCallback(
 		(step: Step, index?: number) => {
 			onSave && onSave(step, index)
-			onToggleModal()
+			hideModal()
 		},
-		[onToggleModal, onSave],
+		[hideModal, onSave],
 	)
 
 	return (
@@ -103,18 +111,18 @@ export const StepsList: React.FC<{
 			{onSave && (
 				<>
 					<ButtonContainer>
-						<DefaultButton iconProps={iconProps.add} onClick={onToggleModal}>
+						<DefaultButton iconProps={iconProps.add} onClick={showModal}>
 							Add step
 						</DefaultButton>
 					</ButtonContainer>
 					<TableTransformModal
-						editStep={editStep}
-						isDuplicating={isDuplicating}
-						onCreate={onCreate}
-						isOpen={isOpen}
+						step={editStep}
+						headerText={modalHeaderText}
+						onTransformRequested={onCreate}
+						isOpen={isModalOpen}
 						store={store}
 						stepIndex={stepIndex}
-						toggleModal={onToggleModal}
+						onDismiss={hideModal}
 					/>
 				</>
 			)}
@@ -134,4 +142,5 @@ const ButtonContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	white-space: pre;
 `

@@ -9,107 +9,135 @@ import {
 	Verb,
 } from '@data-wrangling-components/core'
 import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
-import { useId } from '@fluentui/react-hooks'
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { StepComponent, StepSelector } from '..'
+import {
+	selectStepComponent,
+	StepSelector,
+	TransformModalProps,
+	withInputColumnDropdown,
+	withOutputColumnTextfield,
+	withOutputTableTextfield,
+	withTableDropdown,
+} from '..'
 
-export const TableTransformModal: React.FC<{
-	isOpen: boolean
-	isDuplicating: boolean
-	toggleModal: () => void
-	store: TableStore
-	onCreate: (step: Step, index?: number) => void
-	editStep?: Step
+export interface TableTransformModalProps extends TransformModalProps {
+	/**
+	 * Indicates that the input table should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.
+	 */
+	hideInputTable?: boolean
+	/**
+	 * Indicates that the output table should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.
+	 */
+	hideOutputTable?: boolean
 	stepIndex?: number
-}> = memo(function TableTransformModal({
-	isOpen,
-	isDuplicating,
-	toggleModal,
-	store,
-	onCreate,
-	editStep,
-	stepIndex,
-}) {
-	const titleId = useId('title')
-	const [step, setStep] = useState<Step | undefined>()
+	store: TableStore
+}
 
-	useEffect(() => {
-		if (editStep) {
-			setStep(editStep)
-		}
-	}, [editStep])
+export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
+	function TableTransformModal(props) {
+		const {
+			onDismiss,
+			store,
+			onTransformRequested,
+			step,
+			stepIndex,
+			headerText,
+			...rest
+		} = props
+		const [internal, setInternal] = useState<Step | undefined>(step)
 
-	const onDismissed = useCallback(() => {
-		setStep(undefined)
-	}, [setStep])
+		useEffect(() => {
+			if (step) {
+				setInternal(step)
+			}
+		}, [step])
 
-	const onSelect = useCallback(
-		(verb: Verb) => {
-			//get latest table
-			const tables = store.list()
-			const length = tables.length
-			//pipeline has a last, should we use it?
-			const input = length === 0 ? '' : tables[length - 1]
+		const onDismissed = useCallback(() => {
+			setInternal(undefined)
+		}, [setInternal])
 
-			//GET STEPS NOT STORE
-			const step: Step = factory(verb, input, `output-${length + 1}-${verb}`)
-			setStep(step)
-		},
-		[setStep, store],
-	)
+		const handleVerbChange = useCallback(
+			(verb: Verb) => {
+				const tables = store.list()
+				const length = tables.length
+				//pipeline has a last, should we use it?
+				const input = length === 0 ? '' : tables[length - 1]
 
-	return (
-		<Container>
+				//GET STEPS NOT STORE
+				const step: Step = factory(verb, input, `output-${length + 1}-${verb}`)
+				setInternal(step)
+			},
+			[setInternal, store],
+		)
+
+		const handleDismissClick = useCallback(
+			() => onDismiss && onDismiss(),
+			[onDismiss],
+		)
+
+		const handleRunClick = useCallback(async () => {
+			if (internal) {
+				onDismiss && onDismiss()
+				onTransformRequested && onTransformRequested(internal, stepIndex)
+			}
+		}, [onDismiss, onTransformRequested, internal])
+
+		const Component = useMemo(
+			() => (internal ? selectStepComponent(internal) : null),
+			[internal],
+		)
+
+		const WithAllArgs = useMemo(() => {
+			if (Component) {
+				withTableDropdown()(
+					withOutputColumnTextfield()(
+						withInputColumnDropdown()(withOutputTableTextfield()(Component)),
+					),
+				)
+			}
+		}, [Component])
+
+		return (
 			<Modal
 				onDismissed={onDismissed}
-				titleAriaId={titleId}
-				isOpen={isOpen}
-				onDismiss={toggleModal}
+				onDismiss={onDismiss}
 				isBlocking={false}
+				{...rest}
 			>
 				<Header>
-					<Title>
-						{editStep
-							? isDuplicating
-								? 'Duplicate Step'
-								: 'Edit step'
-							: 'New step'}
-					</Title>
-					<IconButton
-						iconProps={iconProps.cancel}
-						ariaLabel="Close popup modal"
-						onClick={toggleModal}
-					/>
+					<Title>{headerText}</Title>
+
+					{onDismiss && (
+						<IconButton
+							iconProps={iconProps.cancel}
+							ariaLabel="Close popup modal"
+							onClick={handleDismissClick}
+						/>
+					)}
 				</Header>
 
 				<ContainerBody>
 					<StepSelectorContainer>
 						<StepSelector
 							placeholder="Select the verb"
-							verb={step?.verb || ''}
-							onCreate={onSelect}
+							verb={internal?.verb || ''}
+							onCreate={handleVerbChange}
 						/>
 					</StepSelectorContainer>
-					{step && (
+					{internal && WithAllArgs && (
 						<>
-							<StepComponent
-								step={step}
-								store={store}
-								index={stepIndex as number}
-								onChange={setStep}
-								showPreview={false}
-							/>
-							<PrimaryButton onClick={() => onCreate(step as Step, stepIndex)}>
-								Run
-							</PrimaryButton>
+							{WithAllArgs}
+							<PrimaryButton onClick={handleRunClick}>Run</PrimaryButton>
 						</>
 					)}
 				</ContainerBody>
 			</Modal>
-		</Container>
-	)
-})
+		)
+	},
+)
 
 const iconProps = {
 	cancel: { iconName: 'Cancel' },

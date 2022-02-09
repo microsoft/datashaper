@@ -65,10 +65,10 @@ const Container = styled.div`
 	border-radius: 4px;
 	margin: 8px;
 	border: 1px solid #c5c5c5;
-	height: 80%;
+	height: 100%;
 `
 
 const Pointer = styled.div`
 	cursor: pointer;
-	height: 90%;
+	height: 80%;
 `
