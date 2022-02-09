@@ -3,11 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import { Step, TableStore } from '@data-wrangling-components/core'
+import {
+	Step,
+	TableContainer,
+	TableStore,
+} from '@data-wrangling-components/core'
 import {
 	TablesList,
 	InputTable,
-	TableFile,
 	OutputTable,
 	StepsList,
 } from '@data-wrangling-components/react'
@@ -48,7 +51,7 @@ export function useTableStore(): TableStore {
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const [tables, setTables] = useState<Table[]>([])
-	const [selectedTable, setSelectedTable] = useState<TableFile>()
+	const [selectedTable, setSelectedTable] = useState<TableContainer>()
 	const [steps, setSteps] = useState<Step[]>([])
 
 	const [result, setResult] = useState<ColumnTable | undefined>()
@@ -58,6 +61,15 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const store = useTableStore()
 	const inputTables = useInputTables(outputs, store)
 	const pipeline = usePipeline(store)
+
+	const output = useMemo((): TableContainer => {
+		const name = pipeline?.last?.output
+		const table = outputs.get(name)
+		return {
+			name,
+			table,
+		} as TableContainer
+	}, [pipeline, outputs])
 
 	const onSelect = useCallback(
 		async (name: any) => {
@@ -158,6 +170,16 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		f()
 	}, [storeTables])
 
+	// const onTransform = useCallback(
+	// 	async step => {
+	// 		if (table && step) {
+	// 			const output = await runPipeline(table, [step])
+	// 			setTable(output)
+	// 		}
+	// 	},
+	// 	[table],
+	// )
+
 	return (
 		<Container>
 			<InputContainer>
@@ -181,7 +203,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			</StepsContainer>
 			<Separator />
 			<OutputContainer>
-				<OutputTable table={result} />
+				<OutputTable output={output} onTransform={onSaveStep} />
 			</OutputContainer>
 		</Container>
 	)

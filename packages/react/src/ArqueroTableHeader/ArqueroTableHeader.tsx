@@ -64,7 +64,9 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					// If the bar is too wide, then only use 10% of it for the commands
 					<CommandBar
 						commands={farCommandItems}
-						width={width >= 992 ? '10%' : undefined}
+						width={
+							width >= 992 && farCommandItems.length > 2 ? '10%' : undefined
+						}
 					/>
 				) : null}
 			</Header>

@@ -84,11 +84,13 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 			(ev: any, opt: any) => {
 				// TODO: the assumption here is that the consumer will use runPipeline
 				// should we be forcing the i/o table name?
-				const newStep = factory(opt.key, 'input', 'input')
+				const inputTable = step?.input ?? 'input'
+				const outputTable = step?.output ?? 'input'
+				const newStep = factory(opt.key, inputTable, outputTable)
 				// merge with the previous step in case input/output columns have been controlled
 				setInternal(newStep)
 			},
-			[setInternal],
+			[setInternal, step],
 		)
 		const Component = useMemo(
 			() => (internal ? selectStepComponent(internal) : null),

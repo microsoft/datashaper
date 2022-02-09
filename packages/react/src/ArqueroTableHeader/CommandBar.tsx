@@ -96,6 +96,7 @@ const useIconProps = (): ((
 
 const commandStyles = {
 	root: {
+		float: 'right',
 		height: HEIGHT,
 		background: 'none',
 		padding: 0,

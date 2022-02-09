@@ -2,23 +2,23 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TableContainer } from '@data-wrangling-components/core'
 import { DetailsList, IColumn, SelectionMode } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { TableFile } from '../../types'
 
 export const TablesList: React.FC<{
 	files: Map<string, ColumnTable>
 	onSelect?: (name: string) => void
 	selected?: string
 }> = memo(function TablesList({ files, onSelect, selected }) {
-	const list = useMemo((): TableFile[] => {
+	const list = useMemo((): TableContainer[] => {
 		return Array.from(files).map(([key, table]) => {
 			return {
 				name: key,
 				table,
-			} as TableFile
+			} as TableContainer
 		})
 	}, [files])
 

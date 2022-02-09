@@ -2,13 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { introspect } from '@data-wrangling-components/core'
+import { introspect, TableContainer } from '@data-wrangling-components/core'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo, useMemo } from 'react'
 import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
 import { ArqueroDetailsList, ArqueroTableHeader, StatsColumnType } from '../../'
-import { TableFile } from '../../types'
 
 const statsColumnTypes = [
 	StatsColumnType.Type,
@@ -19,7 +18,7 @@ const statsColumnTypes = [
 ]
 
 export const InputTable: React.FC<{
-	table?: TableFile
+	table?: TableContainer
 }> = memo(function InputTable({ table }) {
 	const metadata = useMemo((): any => {
 		return table && introspect(table?.table as ColumnTable, true)
@@ -28,7 +27,7 @@ export const InputTable: React.FC<{
 	return (
 		<If condition={!!table}>
 			<Then>
-				<TableContainer>
+				<Container>
 					<ArqueroTableHeader
 						visibleRows={1}
 						name={table?.name}
@@ -44,9 +43,9 @@ export const InputTable: React.FC<{
 							smartHeaders: true,
 							statsColumnTypes: statsColumnTypes,
 						}}
-						table={table?.table.sample(1) as ColumnTable}
+						table={table?.table?.sample(1) as ColumnTable}
 					/>
-				</TableContainer>
+				</Container>
 			</Then>
 			<Else>
 				<Then>
@@ -57,7 +56,7 @@ export const InputTable: React.FC<{
 	)
 })
 
-const TableContainer = styled.div`
+const Container = styled.div`
 	max-height: inherit;
 	max-width: 77vw;
 `
