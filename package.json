@@ -4,17 +4,17 @@
 	"scripts": {
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
-		"clean:": "yarn workspaces foreach -pv run clean",
-		"build:": "yarn workspaces foreach -pvt run build",
-		"start:": "yarn workspaces foreach -piv run start",
-		"deploy:": "yarn workspaces foreach -piv run deploy",
-		"lint:": "essex lint --fix",
+		"clean": "yarn workspaces foreach -pv run clean",
+		"build": "yarn workspaces foreach -pvt run build",
+		"start": "yarn workspaces foreach -piv run start",
+		"deploy": "yarn workspaces foreach -piv run deploy",
+		"lint": "essex lint --fix",
 		"git_is_clean": "essex git-is-clean",
 		"prettify:": "essex prettify",
-		"test:": "NODE_OPTIONS=--experimental-vm-modules yarn jest",
-		"ci": "run-s build: lint: test: git_is_clean",
+		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn jest",
+		"ci": "run-s build lint jest git_is_clean",
 		"publish:": "yarn workspaces foreach --exclude '@data-wrangling-components/project' -pv npm publish --tolerate-republish --access public",
-		"update_sdks:": "yarn dlx @yarnpkg/sdks vscode"
+		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
 	"prettier": "@essex/prettier-config",
 	"devDependencies": {

@@ -9,7 +9,7 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build"
+		"build": "essex build --mode legacy"
 	},
 	"dependencies": {
 		"@zip.js/zip.js": "^2.3.19",
