@@ -3,15 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, TableContainer } from '@data-wrangling-components/core'
-import { ICommandBarItemProps } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import React, { memo, useMemo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	ColumnTransformModal,
-	useDeriveColumnCommand,
+	useCommonCommands,
+	useToggleTableFeatures,
 } from '../../'
 import { useDefaultStep } from './hooks'
 
@@ -21,8 +21,12 @@ export const OutputTable: React.FC<{
 }> = memo(function OutputTable({ output, onTransform }) {
 	const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =
 		useBoolean(false)
-
-	const commands = useCommands(showModal)
+	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures()
+	const commands = useCommonCommands(
+		showModal,
+		changeTableFeatures,
+		tableFeatures,
+	)
 	const defaultStep = useDefaultStep(output)
 
 	return (
@@ -42,6 +46,7 @@ export const OutputTable: React.FC<{
 							farCommands={onTransform && commands}
 						/>
 						<ArqueroDetailsList
+							features={tableFeatures}
 							showColumnBorders
 							table={output?.table}
 							compact
@@ -60,8 +65,3 @@ const Container = styled.div`
 	width: 95%;
 	overflow: auto;
 `
-
-function useCommands(showModal: any): ICommandBarItemProps[] {
-	const dccmd = useDeriveColumnCommand(showModal)
-	return useMemo(() => [dccmd], [dccmd])
-}

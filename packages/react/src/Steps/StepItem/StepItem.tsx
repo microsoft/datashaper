@@ -34,7 +34,7 @@ export const StepItem: React.FC<{
 				onSelect={() => onSelect && onSelect(step?.output)}
 			/>
 		)
-	}, [onDelete, onEdit, onDuplicate, onSelect])
+	}, [onDelete, onEdit, onDuplicate, onSelect, index, step])
 
 	return (
 		<Container>

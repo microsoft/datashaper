@@ -66,6 +66,7 @@ export function useBusinessLogic(
 
 	const runPipeline = useCallback(async () => {
 		await pipeline.run()
+		//todo: what about renaming the table oputput step?
 		const output = await store.toMap()
 		setOutputs(output)
 		setIntermediaryTables(pipeline.outputs)

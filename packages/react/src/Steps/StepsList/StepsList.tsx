@@ -4,8 +4,7 @@
  */
 import { Step, TableStore } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
-import _ from 'lodash'
-import React, { memo, useCallback, useMemo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { StepItem, TableTransformModal } from '../../'
 import { DialogConfirm } from '../../DialogConfirm'

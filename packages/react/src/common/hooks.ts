@@ -20,6 +20,7 @@ import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { DetailsListFeatures } from '../'
 import {
 	DropdownOptionChangeFunction,
 	GroupedTable,
@@ -317,21 +318,113 @@ export function useGroupedTables(
 	return tables
 }
 
+export function useCommonCommands(
+	showModal: any | undefined,
+	changeTableFeatures?: (name: string) => void,
+	features?: Partial<DetailsListFeatures>,
+): ICommandBarItemProps[] {
+	const dccmd = useDeriveColumnCommand(showModal)
+	const tshcmd = useToggleStatsHeaderCommand(changeTableFeatures, features)
+
+	return useMemo(() => {
+		const commands: ICommandBarItemProps[] = []
+
+		if (dccmd) {
+			commands.push(dccmd)
+		}
+		if (tshcmd) {
+			commands.push(tshcmd)
+		}
+		return commands
+	}, [dccmd, tshcmd])
+}
+
 export function useDeriveColumnCommand(
 	onClick: (
 		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 		item?: IContextualMenuItem,
-	) => boolean | void,
-): ICommandBarItemProps {
+	) => boolean | void | undefined,
+): ICommandBarItemProps | null {
 	const cmd = useMemo(() => {
 		return {
 			key: 'derive-column',
 			text: 'Create column',
-			iconProps: {
-				iconName: 'Add',
-			},
+			iconProps: iconProps.add,
 			onClick,
 		} as ICommandBarItemProps
 	}, [onClick])
+	if (!onClick) return null
+
 	return cmd
+}
+
+export function useToggleStatsHeaderCommand(
+	toggle?: (name: string) => void,
+	features?: Partial<DetailsListFeatures>,
+): ICommandBarItemProps | null {
+	const cmd = useMemo(() => {
+		return {
+			key: 'toggle-stats',
+			iconOnly: true,
+			text: 'Toggle header features',
+			iconProps: iconProps.bar,
+			subMenuProps: {
+				items: [
+					{
+						key: 'emailMessage',
+						text: 'Column stats',
+						iconProps: iconProps.stats,
+						checked: features?.statsColumnHeaders,
+						canCheck: true,
+						onClick: () => toggle && toggle('statsColumnHeaders'),
+					},
+					{
+						key: 'calendarEvent',
+						text: 'Column histogram',
+						iconProps: iconProps.barChart,
+						checked: features?.histogramColumnHeaders,
+						canCheck: true,
+						onClick: () => toggle && toggle('histogramColumnHeaders'),
+					},
+				],
+			},
+		} as ICommandBarItemProps
+	}, [toggle, features])
+	if (!toggle && !features) return null
+
+	return cmd
+}
+
+export function useToggleTableFeatures(
+	features?: Partial<DetailsListFeatures>,
+): {
+	changeTableFeatures: (feature: string) => void
+	tableFeatures: Partial<DetailsListFeatures>
+} {
+	const [tableFeatures, setTableFeatures] = useState<
+		Partial<DetailsListFeatures>
+	>(features ?? {})
+
+	const changeTableFeatures = useCallback(
+		(feature: string) => {
+			setTableFeatures(prev => {
+				return {
+					...prev,
+					[feature]: !prev[feature],
+				}
+			})
+		},
+		[setTableFeatures],
+	)
+	return {
+		changeTableFeatures,
+		tableFeatures,
+	}
+}
+
+const iconProps = {
+	add: { iconName: 'Add' },
+	bar: { iconName: 'BarChartVerticalFilterSolid' },
+	barChart: { iconName: 'BarChart4' },
+	stats: { iconName: 'AllApps' },
 }

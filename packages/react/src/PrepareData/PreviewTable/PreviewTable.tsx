@@ -6,7 +6,13 @@ import { TableContainer, TableMetadata } from '@data-wrangling-components/core'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { ArqueroDetailsList, ArqueroTableHeader, StatsColumnType } from '../../'
+import {
+	ArqueroDetailsList,
+	ArqueroTableHeader,
+	StatsColumnType,
+	useCommonCommands,
+	useToggleTableFeatures,
+} from '../../'
 
 const statsColumnTypes = [
 	StatsColumnType.Type,
@@ -20,6 +26,12 @@ export const PreviewTable: React.FC<{
 	table?: TableContainer
 	selectedMetadata?: TableMetadata
 }> = memo(function PreviewTable({ table, selectedMetadata }) {
+	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures({
+		statsColumnHeaders: true,
+		histogramColumnHeaders: true,
+	})
+	const commands = useCommonCommands(null, changeTableFeatures, tableFeatures)
+
 	return (
 		<>
 			{table?.table ? (
@@ -27,6 +39,7 @@ export const PreviewTable: React.FC<{
 					<ArqueroTableHeader
 						name={table?.name}
 						table={table?.table as ColumnTable}
+						farCommands={commands}
 					/>
 					<ArqueroDetailsList
 						isSortable
@@ -35,7 +48,7 @@ export const PreviewTable: React.FC<{
 						isHeadersFixed
 						metadata={selectedMetadata}
 						features={{
-							smartHeaders: true,
+							...tableFeatures,
 							statsColumnTypes: statsColumnTypes,
 						}}
 						table={table?.table}
