@@ -10,20 +10,28 @@ import { StepActions } from './StepActions'
 
 export const StepItem: React.FC<{
 	step: Step
-	onEdit?: () => void
-	onDelete?: () => void
-	onDuplicate?: () => void
-	onSelect?: () => void
-}> = memo(function StepItem({ step, onEdit, onDelete, onDuplicate, onSelect }) {
+	index: number
+	onEdit?: (step: Step, index: number) => void
+	onDelete?: (index: number) => void
+	onDuplicate?: (step: Step) => void
+	onSelect?: (name: string) => void
+}> = memo(function StepItem({
+	step,
+	index,
+	onEdit,
+	onDelete,
+	onDuplicate,
+	onSelect,
+}) {
 	const Description = useMemo(() => selectStepDescription(step), [step])
 
 	const Actions = useMemo((): any => {
 		return (
 			<StepActions
-				onEdit={onEdit}
-				onDelete={onDelete}
-				onDuplicate={onDuplicate}
-				onSelect={onSelect}
+				onEdit={() => onEdit && onEdit(step, index)}
+				onDelete={() => onDelete && onDelete(index)}
+				onDuplicate={() => onDuplicate && onDuplicate(step)}
+				onSelect={() => onSelect && onSelect(step?.output)}
 			/>
 		)
 	}, [onDelete, onEdit, onDuplicate, onSelect])

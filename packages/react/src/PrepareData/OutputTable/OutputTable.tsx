@@ -13,6 +13,7 @@ import {
 	ColumnTransformModal,
 	useDeriveColumnCommand,
 } from '../../'
+import { useDefaultStep } from './hooks'
 
 export const OutputTable: React.FC<{
 	output?: TableContainer
@@ -22,37 +23,33 @@ export const OutputTable: React.FC<{
 		useBoolean(false)
 
 	const commands = useCommands(showModal)
-
-	const defaultStep = useMemo((): Step => {
-		return {
-			input: output?.name,
-			output: output?.name,
-		} as Step
-	}, [output])
-
-	if (!output || !output?.table) return null
+	const defaultStep = useDefaultStep(output)
 
 	return (
 		<>
-			<ColumnTransformModal
-				table={output?.table}
-				step={defaultStep}
-				isOpen={isModalOpen}
-				onDismiss={hideModal}
-				onTransformRequested={onTransform}
-			/>
-			<Container>
-				<ArqueroTableHeader
-					table={output?.table}
-					farCommands={onTransform && commands}
-				/>
-				<ArqueroDetailsList
-					showColumnBorders
-					table={output?.table}
-					compact
-					isHeadersFixed
-				/>
-			</Container>
+			{output && output?.table && (
+				<>
+					<ColumnTransformModal
+						table={output?.table}
+						step={defaultStep}
+						isOpen={isModalOpen}
+						onDismiss={hideModal}
+						onTransformRequested={onTransform}
+					/>
+					<Container>
+						<ArqueroTableHeader
+							table={output?.table}
+							farCommands={onTransform && commands}
+						/>
+						<ArqueroDetailsList
+							showColumnBorders
+							table={output?.table}
+							compact
+							isHeadersFixed
+						/>
+					</Container>
+				</>
+			)}
 		</>
 	)
 })

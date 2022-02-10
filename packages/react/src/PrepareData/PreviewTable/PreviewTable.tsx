@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { introspect, TableContainer } from '@data-wrangling-components/core'
+import { TableContainer, TableMetadata } from '@data-wrangling-components/core'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useMemo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { ArqueroDetailsList, ArqueroTableHeader, StatsColumnType } from '../../'
 
@@ -18,11 +18,8 @@ const statsColumnTypes = [
 
 export const PreviewTable: React.FC<{
 	table?: TableContainer
-}> = memo(function PreviewTable({ table }) {
-	const metadata = useMemo((): any => {
-		return table && introspect(table?.table as ColumnTable, true)
-	}, [table])
-
+	selectedMetadata?: TableMetadata
+}> = memo(function PreviewTable({ table, selectedMetadata }) {
 	return (
 		<>
 			{table?.table ? (
@@ -36,7 +33,7 @@ export const PreviewTable: React.FC<{
 						compact
 						showColumnBorders
 						isHeadersFixed
-						metadata={metadata}
+						metadata={selectedMetadata}
 						features={{
 							smartHeaders: true,
 							statsColumnTypes: statsColumnTypes,

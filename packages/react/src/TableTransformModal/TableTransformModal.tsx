@@ -2,24 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	factory,
-	Step,
-	TableStore,
-	Verb,
-} from '@data-wrangling-components/core'
+import { Step, TableStore } from '@data-wrangling-components/core'
 import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
+import { StepSelector, TransformModalProps } from '..'
 import {
-	selectStepComponent,
-	StepSelector,
-	TransformModalProps,
-	withInputColumnDropdown,
-	withOutputColumnTextfield,
-	withOutputTableTextfield,
-	withTableDropdown,
-} from '..'
+	useHandleDismiss,
+	useHandleRunClick,
+	useHandleStepArgs,
+	useInternalStep,
+} from './hooks'
 
 export interface TableTransformModalProps extends TransformModalProps {
 	/**
@@ -32,8 +25,9 @@ export interface TableTransformModalProps extends TransformModalProps {
 	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.
 	 */
 	hideOutputTable?: boolean
-	stepIndex?: number
 	store: TableStore
+	nextInputTable: string
+	stepsLength?: number
 }
 
 export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
@@ -43,70 +37,29 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			store,
 			onTransformRequested,
 			step,
-			stepIndex,
 			headerText,
+			nextInputTable,
+			stepsLength = 0,
 			...rest
 		} = props
-		const [internal, setInternal] = useState<Step | undefined>(step)
 
-		useEffect(() => {
-			if (step) {
-				setInternal(step)
-			}
-		}, [step])
-
-		const onDismissed = useCallback(() => {
-			setInternal(undefined)
-		}, [setInternal])
-
-		const handleVerbChange = useCallback(
-			(verb: Verb) => {
-				const tables = store.list()
-				const length = tables.length
-				//pipeline has a last, should we use it?
-				const input = length === 0 ? '' : tables[length - 1]
-
-				//GET STEPS NOT STORE
-				const step: Step = factory(verb, input, `output-${length + 1}-${verb}`)
-				setInternal(step)
-			},
-			[setInternal, store],
+		const { internal, setInternal, handleVerbChange } = useInternalStep(
+			step,
+			nextInputTable,
+			stepsLength,
 		)
 
-		const handleDismissClick = useCallback(
-			() => onDismiss && onDismiss(),
-			[onDismiss],
+		const handleDismiss = useHandleDismiss(onDismiss, setInternal)
+		const StepArgs = useHandleStepArgs(internal)
+		console.log(internal)
+		const handleRunClick = useHandleRunClick(
+			handleDismiss,
+			internal,
+			onTransformRequested,
 		)
-
-		const handleRunClick = useCallback(async () => {
-			if (internal) {
-				onDismiss && onDismiss()
-				onTransformRequested && onTransformRequested(internal, stepIndex)
-			}
-		}, [onDismiss, onTransformRequested, internal, stepIndex])
-
-		const Component = useMemo(
-			() => (internal ? selectStepComponent(internal) : null),
-			[internal],
-		)
-
-		const WithAllArgs = useMemo(() => {
-			if (Component) {
-				withTableDropdown()(
-					withOutputColumnTextfield()(
-						withInputColumnDropdown()(withOutputTableTextfield()(Component)),
-					),
-				)
-			}
-		}, [Component])
 
 		return (
-			<Modal
-				onDismissed={onDismissed}
-				onDismiss={onDismiss}
-				isBlocking={false}
-				{...rest}
-			>
+			<Modal onDismiss={handleDismiss} {...rest}>
 				<Header>
 					<Title>{headerText}</Title>
 
@@ -114,7 +67,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 						<IconButton
 							iconProps={iconProps.cancel}
 							ariaLabel="Close popup modal"
-							onClick={handleDismissClick}
+							onClick={handleDismiss}
 						/>
 					)}
 				</Header>
@@ -127,9 +80,9 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 							onCreate={handleVerbChange}
 						/>
 					</StepSelectorContainer>
-					{internal && WithAllArgs && (
+					{internal && StepArgs && (
 						<>
-							{WithAllArgs}
+							<StepArgs step={internal} store={store} onChange={setInternal} />
 							<PrimaryButton onClick={handleRunClick}>Run</PrimaryButton>
 						</>
 					)}
