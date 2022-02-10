@@ -4,11 +4,11 @@
  */
 
 import { fromCSV } from 'arquero'
-import { CSVParseOptions } from 'arquero/dist/types/format/from-csv'
-import { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { BaseFile } from '../common'
-import { getDsvFileContent, guessDelimiter } from './files'
+import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv'
+import type { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { BaseFile } from '../common/index.js'
+import { getDsvFileContent, guessDelimiter } from './files.js'
 
 export async function loadTable(
 	file: BaseFile,

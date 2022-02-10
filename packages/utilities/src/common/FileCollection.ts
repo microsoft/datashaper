@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { FileMimeType } from '..'
-import { FileType, Json } from '../types'
+import type { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { FileMimeType } from '../types.js'
+import { FileType, Json } from '../types.js'
 import {
 	createFileWithPath,
 	extension,
@@ -17,9 +17,9 @@ import {
 	renameDuplicatedFiles,
 	tableToHTML,
 	toZip,
-} from '../utils'
-import { BaseFile } from './BaseFile'
-import { FileWithPath } from './FileWithPath'
+} from '../utils/index.js'
+import { BaseFile } from './BaseFile.js'
+import { FileWithPath } from './FileWithPath.js'
 
 export class FileCollection {
 	private _files: BaseFile[] = []

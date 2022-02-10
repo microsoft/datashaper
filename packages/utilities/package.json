@@ -1,22 +1,20 @@
 {
 	"name": "@data-wrangling-components/utilities",
 	"version": "1.4.0",
-	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/cjs/index.js",
-		"module": "dist/esm/index.js",
-		"typings": "dist/types/index.d.ts"
-	},
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build --mode legacy"
+		"build": "essex build --skipExportCheck"
 	},
 	"dependencies": {
-		"@zip.js/zip.js": "^2.3.19",
+		"@zip.js/zip.js": "^2.4.3",
 		"core-js": "^3.20.2"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^20.1.2",
+		"@essex/tsconfig-base": "^1.0.1",
 		"@essex/vite-config": "^19.0.0",
 		"@types/node": "^17.0.17",
 		"arquero": "^4.8.7",
