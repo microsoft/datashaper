@@ -20,7 +20,12 @@ import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { DropdownOptionChangeFunction, StepChangeFunction } from '../types'
+import {
+	DropdownOptionChangeFunction,
+	GroupedTable,
+	StepChangeFunction,
+	TableGroup,
+} from '../types'
 
 const noop = (value?: string) => value
 const num = (value?: string) => value && +value
@@ -287,20 +292,28 @@ export function usePipeline(store: TableStore): Pipeline {
 	return useMemo(() => new Pipeline(store), [store])
 }
 
-export function useInputTables(
-	outputs: Map<string, ColumnTable>,
+export function useGroupedTables(
+	intermediary: string[],
 	store: TableStore,
-): Map<string, ColumnTable> {
-	const [tables, setTables] = useState<Map<string, ColumnTable>>(
-		new Map<string, ColumnTable>(),
-	)
+): GroupedTable[] {
+	const [tables, setTables] = useState<GroupedTable[]>([])
+
 	useEffect(() => {
 		const f = async () => {
 			const results = await store.toMap()
-			setTables(results)
+			const groupedTables = Array.from(results).map(([key, table]) => {
+				return {
+					name: key,
+					table,
+					group: intermediary.includes(key)
+						? TableGroup.Intermediary
+						: TableGroup.Input,
+				} as GroupedTable
+			})
+			setTables(groupedTables)
 		}
 		f()
-	}, [outputs, store, setTables])
+	}, [intermediary, store, setTables])
 	return tables
 }
 

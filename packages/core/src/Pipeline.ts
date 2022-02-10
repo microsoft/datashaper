@@ -41,6 +41,9 @@ export class Pipeline {
 	get count(): number {
 		return this._steps.length
 	}
+	get outputs(): string[] {
+		return this._steps.map(x => x.output)
+	}
 	/**
 	 * Creates a new Step with a starter template based on its type
 	 * @param type

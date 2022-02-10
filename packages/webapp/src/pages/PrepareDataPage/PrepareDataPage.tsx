@@ -24,6 +24,10 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					table: companies,
 				},
 				{
+					name: 'companie2s',
+					table: companies,
+				},
+				{
 					name: 'products',
 					table: products,
 				},
@@ -52,7 +56,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				{
 					verb: 'join',
 					input: 'companies',
-					output: 'join-2',
+					output: 'join-3',
 					args: {
 						other: 'products',
 						on: ['ID', 'ID'],
@@ -61,7 +65,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				{
 					verb: 'join',
 					input: 'companies',
-					output: 'join-2',
+					output: 'join-4',
 					args: {
 						other: 'products',
 						on: ['ID', 'ID'],
@@ -70,7 +74,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				{
 					verb: 'join',
 					input: 'companies',
-					output: 'join-2',
+					output: 'join-5',
 					args: {
 						other: 'products',
 						on: ['ID', 'ID'],
@@ -79,25 +83,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				{
 					verb: 'join',
 					input: 'companies',
-					output: 'join-2',
-					args: {
-						other: 'products',
-						on: ['ID', 'ID'],
-					},
-				},
-				{
-					verb: 'join',
-					input: 'companies',
-					output: 'join-2',
-					args: {
-						other: 'products',
-						on: ['ID', 'ID'],
-					},
-				},
-				{
-					verb: 'join',
-					input: 'companies',
-					output: 'join-2',
+					output: 'join-6',
 					args: {
 						other: 'products',
 						on: ['ID', 'ID'],

@@ -83,7 +83,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 				onDismiss && onDismiss()
 				onTransformRequested && onTransformRequested(internal, stepIndex)
 			}
-		}, [onDismiss, onTransformRequested, internal])
+		}, [onDismiss, onTransformRequested, internal, stepIndex])
 
 		const Component = useMemo(
 			() => (internal ? selectStepComponent(internal) : null),
@@ -143,7 +143,6 @@ const iconProps = {
 	cancel: { iconName: 'Cancel' },
 }
 
-const Container = styled.div``
 const ContainerBody = styled.div`
 	padding: 0px 12px 14px 24px;
 `

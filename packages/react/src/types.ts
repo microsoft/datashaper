@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableStore, Step } from '@data-wrangling-components/core'
+import {
+	TableStore,
+	Step,
+	TableContainer,
+} from '@data-wrangling-components/core'
 import { IDropdownOption, IModalProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -66,4 +70,13 @@ export interface StepDescriptionProps extends StepDependent {
 	showInput?: boolean
 	showOutput?: boolean
 	actions?: JSX.Element
+}
+
+export enum TableGroup {
+	Input = 'input',
+	Intermediary = 'intermediary',
+	Output = 'output',
+}
+export interface GroupedTable extends TableContainer {
+	group: TableGroup
 }

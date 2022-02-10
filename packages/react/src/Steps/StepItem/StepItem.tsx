@@ -3,8 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step } from '@data-wrangling-components/core'
-import { TooltipHost } from '@fluentui/react'
-import { useId } from '@fluentui/react-hooks'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { selectStepDescription } from '../../selectStepDescription'
@@ -16,17 +14,8 @@ export const StepItem: React.FC<{
 	onDelete?: () => void
 	onDuplicate?: () => void
 	onSelect?: () => void
-	tooltipContent?: string
-}> = memo(function StepItem({
-	step,
-	onEdit,
-	onDelete,
-	onDuplicate,
-	onSelect,
-	tooltipContent = 'Click to preview table on top panel',
-}) {
+}> = memo(function StepItem({ step, onEdit, onDelete, onDuplicate, onSelect }) {
 	const Description = useMemo(() => selectStepDescription(step), [step])
-	const tooltipId = useId('preview-tooltip')
 
 	const Actions = useMemo((): any => {
 		return (
@@ -34,28 +23,15 @@ export const StepItem: React.FC<{
 				onEdit={onEdit}
 				onDelete={onDelete}
 				onDuplicate={onDuplicate}
+				onSelect={onSelect}
 			/>
 		)
-	}, [onDelete, onEdit, onDuplicate])
-
-	const Item = useMemo((): any => {
-		return (
-			<Container>
-				<Description actions={Actions} step={step} showInput showOutput />
-			</Container>
-		)
-	}, [Actions, step, Description])
+	}, [onDelete, onEdit, onDuplicate, onSelect])
 
 	return (
-		<>
-			{onSelect ? (
-				<TooltipHost content={tooltipContent} id={tooltipId}>
-					<Pointer onClick={onSelect}>{Item}</Pointer>
-				</TooltipHost>
-			) : (
-				Item
-			)}
-		</>
+		<Container>
+			<Description actions={Actions} step={step} showInput showOutput />
+		</Container>
 	)
 })
 
@@ -65,10 +41,5 @@ const Container = styled.div`
 	border-radius: 4px;
 	margin: 8px;
 	border: 1px solid #c5c5c5;
-	height: 100%;
-`
-
-const Pointer = styled.div`
-	cursor: pointer;
 	height: 80%;
 `

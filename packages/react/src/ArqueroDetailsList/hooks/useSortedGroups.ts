@@ -19,7 +19,7 @@ import { useMemo } from 'react'
 export function useSortedGroups(
 	table: ColumnTable,
 	column?: string,
-	sort?: SortDirection,
+	sort = SortDirection.Ascending,
 	entries?: RowObject[],
 ): RowObject[] | undefined {
 	return useMemo(() => {

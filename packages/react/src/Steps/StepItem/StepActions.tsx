@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IButtonStyles, IconButton } from '@fluentui/react'
+import { IButtonStyles, IconButton, TooltipHost } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 
@@ -10,40 +10,49 @@ export const StepActions: React.FC<{
 	onEdit?: () => void
 	onDelete?: () => void
 	onDuplicate?: () => void
-}> = memo(function StepActions({ onEdit, onDelete, onDuplicate }) {
+	onSelect?: () => void
+}> = memo(function StepActions({ onEdit, onDelete, onDuplicate, onSelect }) {
 	return (
 		<Container>
-			{onEdit && (
-				<IconButton
-					styles={iconButtonStyle}
-					onClick={onEdit}
-					iconProps={iconProps.edit}
-					aria-label="Edit"
-				/>
+			{onSelect && (
+				<TooltipHost content="Preview table" setAriaDescribedBy={false}>
+					<IconButton
+						styles={iconButtonStyle}
+						onClick={onSelect}
+						iconProps={iconProps.preview}
+						aria-label="Preview"
+					/>
+				</TooltipHost>
 			)}
 			{onEdit && (
-				<IconButton
-					styles={iconButtonStyle}
-					onClick={onEdit}
-					iconProps={iconProps.edit}
-					aria-label="Edit"
-				/>
+				<TooltipHost content="Edit step" setAriaDescribedBy={false}>
+					<IconButton
+						styles={iconButtonStyle}
+						onClick={onEdit}
+						iconProps={iconProps.edit}
+						aria-label="Edit"
+					/>
+				</TooltipHost>
 			)}
 			{onDuplicate && (
-				<IconButton
-					styles={iconButtonStyle}
-					onClick={onDuplicate}
-					iconProps={iconProps.duplicate}
-					aria-label="Duplicate"
-				/>
+				<TooltipHost content="Duplicate step" setAriaDescribedBy={false}>
+					<IconButton
+						styles={iconButtonStyle}
+						onClick={onDuplicate}
+						iconProps={iconProps.duplicate}
+						aria-label="Duplicate"
+					/>
+				</TooltipHost>
 			)}
 			{onDelete && (
-				<IconButton
-					styles={iconButtonStyle}
-					onClick={onDelete}
-					iconProps={iconProps.delete}
-					aria-label="Delete"
-				/>
+				<TooltipHost content="Delete step" setAriaDescribedBy={false}>
+					<IconButton
+						styles={iconButtonStyle}
+						onClick={onDelete}
+						iconProps={iconProps.delete}
+						aria-label="Delete"
+					/>
+				</TooltipHost>
 			)}
 		</Container>
 	)
@@ -54,6 +63,7 @@ const Container = styled.div`
 `
 
 const iconProps = {
+	preview: { iconName: 'RedEye' },
 	edit: { iconName: 'Edit' },
 	duplicate: { iconName: 'DuplicateRow' },
 	delete: { iconName: 'Delete' },

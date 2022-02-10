@@ -32,6 +32,7 @@ export const PreviewTable: React.FC<{
 						table={table?.table as ColumnTable}
 					/>
 					<ArqueroDetailsList
+						isSortable
 						compact
 						showColumnBorders
 						isHeadersFixed

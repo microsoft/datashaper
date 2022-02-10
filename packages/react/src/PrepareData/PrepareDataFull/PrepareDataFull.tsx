@@ -10,7 +10,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { TablesList, PreviewTable, OutputTable } from '..'
 import { StepsList } from '../../Steps'
-import { usePipeline, useStore, useInputTables } from '../../common'
+import { usePipeline, useStore, useGroupedTables } from '../../common'
 
 export const PrepareDataFull: React.FC<{
 	tables: TableContainer[]
@@ -18,14 +18,13 @@ export const PrepareDataFull: React.FC<{
 	onUpdateSteps: (steps: Step[]) => void
 }> = memo(function PrepareDataFull({ tables, steps, onUpdateSteps }) {
 	const [selectedTable, setSelectedTable] = useState<TableContainer>()
-	const [result, setResult] = useState<ColumnTable | undefined>()
+	const [intermediaryTables, setIntermediaryTables] = useState<string[]>([])
 	const [outputs, setOutputs] = useState<Map<string, ColumnTable>>(
 		new Map<string, ColumnTable>(),
 	)
 	const store = useStore()
-	const inputTables = useInputTables(outputs, store)
-
 	const pipeline = usePipeline(store)
+	const groupedTables = useGroupedTables(intermediaryTables, store)
 
 	const output = useMemo((): TableContainer => {
 		const name = pipeline?.last?.output
@@ -45,20 +44,20 @@ export const PrepareDataFull: React.FC<{
 	)
 
 	const runPipeline = useCallback(async () => {
-		const res = await pipeline.run()
+		await pipeline.run()
 		const output = await store.toMap()
 		pipeline.print()
 		store.print()
-		setResult(res)
 		setOutputs(output)
-	}, [pipeline, store, setResult, setOutputs])
+		setIntermediaryTables(pipeline.outputs)
+	}, [pipeline, store, setOutputs])
 
 	useEffect(() => {
-		if (steps?.length && !result && tables.length) {
+		if (steps?.length && !outputs?.size && !!tables.length) {
 			pipeline.addAll(steps)
 			runPipeline()
 		}
-	}, [pipeline, steps, tables, runPipeline, result])
+	}, [pipeline, steps, tables, runPipeline, outputs])
 
 	const onSaveStep = useCallback(
 		(step: Step, index?: number) => {
@@ -104,7 +103,7 @@ export const PrepareDataFull: React.FC<{
 				<TablesListContainer>
 					<SectionTitle>Inputs</SectionTitle>
 					<TablesList
-						files={inputTables}
+						files={groupedTables}
 						selected={selectedTable?.name}
 						onSelect={onSelect}
 					/>
