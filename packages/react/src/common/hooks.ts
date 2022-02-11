@@ -10,6 +10,7 @@ import {
 	DataType,
 	columnType,
 	Pipeline,
+	TableContainer,
 } from '@data-wrangling-components/core'
 import {
 	ICommandBarItemProps,
@@ -295,27 +296,70 @@ export function usePipeline(store: TableStore): Pipeline {
 
 export function useGroupedTables(
 	intermediary: string[],
-	store: TableStore,
+	tables: TableContainer[],
+	outputs: Map<string, ColumnTable>,
 ): GroupedTable[] {
-	const [tables, setTables] = useState<GroupedTable[]>([])
-
-	useEffect(() => {
-		const f = async () => {
-			const results = await store.toMap()
-			const groupedTables = Array.from(results).map(([key, table]) => {
+	return useMemo(() => {
+		console.log('outputs', Array.from(outputs))
+		console.log(
+			'outputs',
+			Array.from(outputs).map(([key, table]) => {
 				return {
 					name: key,
-					table,
+					table: table,
 					group: intermediary.includes(key)
 						? TableGroup.Intermediary
 						: TableGroup.Input,
 				} as GroupedTable
-			})
-			setTables(groupedTables)
-		}
-		f()
-	}, [intermediary, store, setTables])
-	return tables
+			}),
+		)
+		return Array.from(outputs).map(([key, table]) => {
+			return {
+				name: key,
+				table: table,
+				group: intermediary.includes(key)
+					? TableGroup.Intermediary
+					: TableGroup.Input,
+			} as GroupedTable
+		})
+
+		// tables.map(table => {
+		// 	return {
+		// 		name: table.name,
+		// 		table: table.table,
+		// 		group: intermediary.includes(table.name)
+		// 			? TableGroup.Intermediary
+		// 			: TableGroup.Input,
+		// 	} as GroupedTable
+		// })
+	}, [tables, intermediary, outputs])
+	// useEffect(() => {
+	// 	const f = async () => {
+	// 		const results = await store.toMap()
+	// 		const groupedTables = Array.from(results).map(([key, table]) => {
+	// 			return {
+	// 				name: key,
+	// 				table: table,
+	// 				group: intermediary.includes(key)
+	// 					? TableGroup.Intermediary
+	// 					: TableGroup.Input,
+	// 			} as GroupedTable
+	// 		})
+	// 		setA(groupedTables)
+	// 	}
+	// 	f()
+	// }, [intermediary, tables, store])
+	// return a
+
+	// return tables.map(table => {
+	// 	return {
+	// 		name: table.name,
+	// 		table: table.table,
+	// 		group: intermediary.includes(table.name)
+	// 			? TableGroup.Intermediary
+	// 			: TableGroup.Input,
+	// 	} as GroupedTable
+	// })
 }
 
 export function useCommonCommands(

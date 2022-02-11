@@ -14,7 +14,7 @@ export function useRowCounts(
 	hidden: number
 } {
 	return useMemo(() => {
-		const total = table.numCols()
+		const total = table.numRows()
 		const visible = visibleRows ? visibleRows : total
 		const hidden = total - visible
 		return {

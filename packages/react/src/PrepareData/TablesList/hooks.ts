@@ -11,7 +11,9 @@ import { usePreviewTableButton } from './PreviewTableButton'
 
 export function useGroupedTable(tables: GroupedTable[]): ColumnTable {
 	return useMemo(() => {
-		return !tables.length ? from(tables) : from(tables).groupby('group')
+		return !tables.length
+			? from(tables)
+			: from(tables).groupby('group').orderby('group')
 	}, [tables])
 }
 

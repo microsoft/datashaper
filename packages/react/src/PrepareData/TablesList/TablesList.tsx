@@ -25,7 +25,7 @@ export const TablesList: React.FC<{
 			<ArqueroDetailsList
 				isHeaderVisible={false}
 				table={table}
-				columns={columns}
+				columns={[...columns]}
 				visibleColumns={['name', 'group']}
 				onRenderGroupHeader={groupHeader}
 				onRenderRow={renderRow}

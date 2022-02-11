@@ -145,7 +145,6 @@ export const MainPage: React.FC = memo(function MainMage() {
 										store={store}
 										index={index}
 										onChange={handleStepChange}
-										showPreview
 									/>
 								</StepsColumn>
 								<OutputsColumn className="outputs-column">

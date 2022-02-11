@@ -10,6 +10,7 @@ import {
 	Separator,
 } from '@fluentui/react'
 import React, { memo } from 'react'
+import { Dropzone, DropzoneProps } from '../../files'
 import styled from 'styled-components'
 import { TablesList, PreviewTable, OutputTable } from '..'
 import { StepsList } from '../../Steps'
@@ -21,12 +22,14 @@ export const PrepareDataFull: React.FC<{
 	steps?: Step[]
 	inputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
+	dropzoneProps?: DropzoneProps
 }> = memo(function PrepareDataFull({
 	tables,
 	steps,
 	onUpdateSteps,
 	inputHeaderCommandBar,
 	outputHeaderCommandBar,
+	dropzoneProps,
 }) {
 	const {
 		groupedTables,
@@ -45,11 +48,20 @@ export const PrepareDataFull: React.FC<{
 			<InputContainer>
 				<TablesListContainer>
 					<SectionTitle>Inputs</SectionTitle>
-					<TablesList
-						files={groupedTables}
-						selected={selectedTable?.name}
-						onSelect={onSelect}
-					/>
+					<InputDisplay>
+						{dropzoneProps && (
+							<Drop>
+								<Dropzone {...dropzoneProps} />
+							</Drop>
+						)}
+
+						<TablesList
+							files={groupedTables}
+							selected={selectedTable?.name}
+							onSelect={onSelect}
+						/>
+					</InputDisplay>
+
 					<SectionSeparator vertical />
 				</TablesListContainer>
 				<InputDetailsContainer>
@@ -115,6 +127,16 @@ const InputContainer = styled.div`
 	overflow: hidden;
 	padding-bottom: 10px;
 	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
+`
+
+const Drop = styled.div`
+	display: inline-table;
+	height: 50px;
+`
+
+const InputDisplay = styled.div`
+	display: flex;
+	flex-direction: column;
 `
 
 const OutputContainer = styled.div`

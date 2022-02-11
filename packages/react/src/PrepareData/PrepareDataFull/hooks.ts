@@ -39,8 +39,9 @@ export function useBusinessLogic(
 	)
 	const store = useStore()
 	const pipeline = usePipeline(store)
-	const groupedTables = useGroupedTables(intermediaryTables, store)
 
+	const groupedTables = useGroupedTables(intermediaryTables, tables, outputs)
+	console.log(groupedTables)
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
 		return (
 			selectedTable && introspect(selectedTable?.table as ColumnTable, true)
@@ -70,7 +71,7 @@ export function useBusinessLogic(
 		const output = await store.toMap()
 		setOutputs(output)
 		setIntermediaryTables(pipeline.outputs)
-	}, [pipeline, store, setOutputs])
+	}, [pipeline, store, setOutputs, setIntermediaryTables])
 
 	useEffect(() => {
 		if (steps?.length && !outputs?.size && !!tables.length) {
@@ -87,9 +88,11 @@ export function useBusinessLogic(
 				await store.get(table.name)
 			} catch (e) {
 				store.set(table.name, table?.table as ColumnTable)
+				const output = await store.toMap()
+				setOutputs(output)
 			}
 		})
-	}, [tables, store])
+	}, [tables, store, setOutputs])
 
 	const onSaveStep = useSaveStep(onUpdateSteps, pipeline, runPipeline)
 	const onSelect = useOnSelect(setSelectedTable, store)

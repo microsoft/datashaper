@@ -40,7 +40,7 @@ export const PreviewTable: React.FC<{
 				<Container>
 					<ArqueroTableHeader
 						name={table?.name}
-						table={table?.table as ColumnTable}
+						table={table?.table}
 						farCommands={commands}
 					/>
 					<ArqueroDetailsList

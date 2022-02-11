@@ -7,7 +7,7 @@ import React, { memo, useMemo } from 'react'
 import { useDropzone } from './hooks'
 import type { DzProps } from './types'
 
-interface DropzoneProps extends DzProps {
+export interface DropzoneProps extends DzProps {
 	placeholder?: string
 	styles?: {
 		container?: React.CSSProperties
