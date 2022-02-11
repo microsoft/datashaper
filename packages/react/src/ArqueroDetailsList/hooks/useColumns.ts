@@ -24,6 +24,7 @@ import {
 	createRenderSmartCell,
 	createRenderStatsColumnHeader,
 } from '../renderers'
+import { useCountMinWidth } from './useCountMinWidth'
 import {
 	useCellClickhandler,
 	useCellDropdownSelectHandler,
@@ -31,8 +32,6 @@ import {
 	useColumnStyles,
 	useIncrementingColumnColorScale,
 } from '.'
-
-const DEFAULT_COLUMN_WIDTH = 100
 
 export interface ColumnOptions {
 	features?: DetailsListFeatures
@@ -94,14 +93,16 @@ export function useColumns(
 		includeAllColumns,
 		visibleColumns,
 	)
+	const columnMinWidth = useCountMinWidth(features.commandBar)
 
 	return useMemo(() => {
 		const columnMap = reduce(columns)
 		return names.map(name => {
+			// const commands = features.commandBar?.map(x => x())
 			const column = columnMap[name] || {
 				key: name,
 				name,
-				minWidth: DEFAULT_COLUMN_WIDTH,
+				minWidth: columnMinWidth,
 				fieldName: name,
 			}
 
@@ -192,6 +193,7 @@ export function useColumns(
 		handleCellDropdownSelect,
 		isDefaultHeaderClickable,
 		handleColumnHeaderClick,
+		columnMinWidth,
 	])
 }
 

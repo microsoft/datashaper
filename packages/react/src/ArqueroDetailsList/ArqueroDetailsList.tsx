@@ -212,6 +212,14 @@ const DetailsWrapper = styled.div`
 	.ms-List-cell {
 		min-height: unset;
 	}
+
+	.ms-CommandBar {
+		padding: unset;
+	}
+
+	.ms-OverflowSet {
+		justify-content: center;
+	}
 `
 
 function anyStatsFeatures(features?: DetailsListFeatures) {

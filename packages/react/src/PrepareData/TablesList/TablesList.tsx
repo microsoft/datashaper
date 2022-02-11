@@ -29,6 +29,7 @@ export const TablesList: React.FC<{
 				visibleColumns={['name', 'group']}
 				onRenderGroupHeader={groupHeader}
 				onRenderRow={renderRow}
+				compact
 			/>
 		</ListContainer>
 	)

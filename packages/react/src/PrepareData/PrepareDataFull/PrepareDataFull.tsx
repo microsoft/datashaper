@@ -4,7 +4,11 @@
  */
 /* eslint-disable @essex/adjacent-await */
 import { Step, TableContainer } from '@data-wrangling-components/core'
-import { Separator } from '@fluentui/react'
+import {
+	IRenderFunction,
+	IDetailsColumnProps,
+	Separator,
+} from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { TablesList, PreviewTable, OutputTable } from '..'
@@ -13,9 +17,17 @@ import { useBusinessLogic } from './hooks'
 
 export const PrepareDataFull: React.FC<{
 	tables: TableContainer[]
-	steps?: Step[]
 	onUpdateSteps: (steps: Step[]) => void
-}> = memo(function PrepareDataFull({ tables, steps, onUpdateSteps }) {
+	steps?: Step[]
+	inputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
+	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
+}> = memo(function PrepareDataFull({
+	tables,
+	steps,
+	onUpdateSteps,
+	inputHeaderCommandBar,
+	outputHeaderCommandBar,
+}) {
 	const {
 		groupedTables,
 		selectedTable,
@@ -44,6 +56,7 @@ export const PrepareDataFull: React.FC<{
 					<PreviewContainer>
 						<SectionTitle>Preview</SectionTitle>
 						<PreviewTable
+							headerCommandBar={inputHeaderCommandBar}
 							selectedMetadata={selectedMetadata}
 							table={selectedTable}
 						/>
@@ -64,7 +77,11 @@ export const PrepareDataFull: React.FC<{
 
 			<OutputContainer>
 				<SectionTitle>Output</SectionTitle>
-				<OutputTable output={output} onTransform={onSaveStep} />
+				<OutputTable
+					headerCommandBar={outputHeaderCommandBar}
+					output={output}
+					onTransform={onSaveStep}
+				/>
 			</OutputContainer>
 		</Container>
 	)

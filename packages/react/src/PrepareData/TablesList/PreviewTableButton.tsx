@@ -22,7 +22,7 @@ export const PreviewTableButton: React.FC<{
 	return (
 		<Container>
 			<TooltipHost content="Preview table">
-				<IconButton
+				<EyeButton
 					iconProps={iconProps.preview}
 					onClick={() => onSelect && onSelect(item.name)}
 					aria-label="Preview"
@@ -31,6 +31,11 @@ export const PreviewTableButton: React.FC<{
 		</Container>
 	)
 })
+
+const EyeButton = styled(IconButton)`
+	height: 26px;
+	width: 26px;
+`
 
 const Container = styled.div`
 	float: right;
