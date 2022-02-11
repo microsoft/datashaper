@@ -88,7 +88,6 @@ export const createFile = (
 ): File => {
 	const { name } = { ...fileDefaults, ...options }
 	const type = options?.type || guessFileType(name)
-	// type = type ? type : fileDefaults.type
 	return new File([content], name, { type })
 }
 
