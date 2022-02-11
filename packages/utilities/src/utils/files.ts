@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { FileMimeType } from '..'
 import { BaseFile, FileWithPath } from '../common'
 import { FileType, Json } from '../types'
 
@@ -14,7 +15,7 @@ interface FileOptions {
 
 const fileDefaults = {
 	name: 'File.txt',
-	type: 'text/plain',
+	type: FileMimeType.txt,
 	path: '',
 }
 
@@ -68,11 +69,26 @@ export const fetchFile = async (url: string): Promise<Blob> => {
 	return fetch(url).then(response => response.blob())
 }
 
+export function guessFileType(name: string): string {
+	try {
+		const ext = extension(name)
+		const type = FileMimeType[ext as keyof typeof FileMimeType]
+		if (type) {
+			return type
+		}
+	} catch {
+		return fileDefaults.type
+	}
+	return fileDefaults.type
+}
+
 export const createFile = (
 	content: Blob,
 	options?: Omit<FileOptions, 'path'>,
 ): File => {
-	const { name, type } = { ...fileDefaults, ...options }
+	const { name } = { ...fileDefaults, ...options }
+	const type = options?.type || guessFileType(name)
+	// type = type ? type : fileDefaults.type
 	return new File([content], name, { type })
 }
 
