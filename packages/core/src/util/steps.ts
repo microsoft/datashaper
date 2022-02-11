@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { difference, intersection } from 'lodash'
-import { Step, Verb } from '..'
+import { Step, Verb } from '../index.js'
 
 enum Tags {
 	/**

@@ -10,7 +10,7 @@ import {
 	IDetailsGroupDividerProps,
 } from '@fluentui/react'
 import { ReactElement } from 'react'
-import { GroupHeader } from '../controls'
+import { GroupHeader } from '../controls/index.js'
 
 export function createLazyLoadingGroupHeader(
 	props: IDetailsGroupDividerProps | undefined,

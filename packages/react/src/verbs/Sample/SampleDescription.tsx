@@ -4,9 +4,9 @@
  */
 import { SampleStep } from '@data-wrangling-components/core'
 import { format } from 'd3-format'
-import React, { memo, useMemo } from 'react'
-import { VerbDescription } from '../..'
-import { StepDescriptionProps } from '../../types'
+import { memo, useMemo } from 'react'
+import { VerbDescription } from '../../index.js'
+import { StepDescriptionProps } from '../../types.js'
 
 const perc = format('.0%')
 

@@ -4,10 +4,10 @@
  */
 import { FillStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { useHandleTextfieldChange, LeftAlignedRow } from '../../common'
-import { StepComponentProps } from '../../types'
+import { useHandleTextfieldChange, LeftAlignedRow } from '../../common/index.js'
+import { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for a Fill step.

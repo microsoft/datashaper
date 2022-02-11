@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo } from 'react'
-import { Sparkbar } from '../../charts'
-import { useCellDimensions } from '../hooks'
-import { getValue } from '../util'
-import { ColumnCellChartProps } from './types'
+import { memo } from 'react'
+import { Sparkbar } from '../../charts/index.js'
+import { useCellDimensions } from '../hooks/index.js'
+import { getValue } from '../util/index.js'
+import { ColumnCellChartProps } from './types.js'
 
 /**
  * Renders an array-valued cell as a Sparkbar.

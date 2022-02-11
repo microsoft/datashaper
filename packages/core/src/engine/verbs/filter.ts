@@ -4,8 +4,8 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { FilterArgs, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { FilterArgs, Step } from '../../types.js'
 import { compare } from '../util'
 
 /**

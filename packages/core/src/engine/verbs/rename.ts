@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { RenameArgs, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { RenameArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero column rename.

@@ -3,15 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DeriveStep } from '@data-wrangling-components/core'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import {
 	useHandleDropdownChange,
 	useLoadTable,
 	LeftAlignedRow,
-} from '../../common'
-import { MathOperatorDropdown, TableColumnDropdown } from '../../controls'
-import { StepComponentProps } from '../../types'
+} from '../../common/index.js'
+import {
+	MathOperatorDropdown,
+	TableColumnDropdown,
+} from '../../controls/index.js'
+import { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for a Binarize step.

@@ -6,7 +6,7 @@ import {
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../../types'
+} from '../../types.js'
 import { compare } from '../util/expressions'
 
 describe('test-expressions', () => {

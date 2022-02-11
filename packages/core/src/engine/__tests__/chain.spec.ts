@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { Verb, Step, TableStore } from '../..'
+import { Verb, Step, TableStore } from '../../index.js'
 import { chain } from '../verbs/chain'
 
 describe('chain', () => {

@@ -3,18 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TextField } from '@fluentui/react'
-import React, { memo, useMemo, useCallback } from 'react'
+import { memo, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useLoadTable } from '../../common'
+import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
 import {
 	FieldAggregateOperationDropdown,
 	FilterFunction,
 	ReadOnlyTextField,
 	TableColumnDropdown,
 	TableDropdown,
-} from '../../controls'
-import { columnDropdownStyles } from '../../controls/styles'
-import { StepComponentProps } from '../../types'
+} from '../../controls/index.js'
+import { columnDropdownStyles } from '../../controls/styles.js'
+import { StepComponentProps } from '../../types.js'
 import {
 	getAggregate,
 	defaults,
@@ -26,7 +26,7 @@ import {
 	updateLookupColumn,
 	updateLookupTable,
 	updateTo,
-} from '../generators/filter-aggregate-lookup'
+} from '../generators/filter-aggregate-lookup.js'
 
 /**
  * Provides the essential inputs for a multi-step join + filter + aggregate.

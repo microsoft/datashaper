@@ -11,16 +11,16 @@ import {
 	TextField,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { useColumnRecordDelete, useLoadTable } from '../../common'
-import { TableColumnDropdown } from '../../controls'
-import { StepComponentProps } from '../../types'
+import { useColumnRecordDelete, useLoadTable } from '../../common/index.js'
+import { TableColumnDropdown } from '../../controls/index.js'
+import { StepComponentProps } from '../../types.js'
 import {
 	useDisabled,
 	useHandleAddButtonClick,
 	useHandleColumnChange,
-} from './hooks'
+} from './hooks.js'
 
 /**
  * Provides inputs for a RenameStep.
@@ -85,7 +85,7 @@ function useColumnPairs(
 			const handleColumnChange = (
 				e: React.FormEvent<HTMLDivElement>,
 				opt?: IDropdownOption<any> | undefined,
-			) => onChange(oldname, (opt?.key as string) || oldname, newname)
+			) => onChange(oldname, (opt?.key as string) || oldname, newname as string)
 			const handleTextChange = (
 				e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 				newValue?: string,
@@ -113,7 +113,7 @@ function useColumnPairs(
 					/>
 					<TextField
 						placeholder={'New name'}
-						value={newname}
+						value={newname as string}
 						onChange={handleTextChange}
 						styles={{ root: { width: 120 } }}
 					/>

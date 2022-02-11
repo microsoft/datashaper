@@ -4,12 +4,12 @@
  */
 import { BinarizeStep } from '@data-wrangling-components/core'
 import { ActionButton, TextField } from '@fluentui/react'
-import React, { memo, useMemo, useCallback, useState } from 'react'
+import { memo, useMemo, useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useLoadTable } from '../../common'
-import { FilterInputs, TableColumnDropdown } from '../../controls'
-import { columnDropdownStyles } from '../../controls/styles'
-import { StepComponentProps } from '../../types'
+import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
+import { FilterInputs, TableColumnDropdown } from '../../controls/index.js'
+import { columnDropdownStyles } from '../../controls/styles.js'
+import { StepComponentProps } from '../../types.js'
 import {
 	createBinarize,
 	defaults,
@@ -19,7 +19,7 @@ import {
 	updateBinarize,
 	updateColumn,
 	updateTo,
-} from '../generators/binarize'
+} from '../generators/binarize.js'
 
 /**
  * Provides only the essential inputs for a multi-step binarize.

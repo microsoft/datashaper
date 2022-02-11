@@ -4,8 +4,8 @@
  */
 import { ITextFieldProps, TextField } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import { merge } from 'lodash'
-import React, { memo, useMemo } from 'react'
+import merge from 'lodash/merge.js'
+import { memo, useMemo } from 'react'
 
 /**
  * This is a standard TextField, with default styles overridden

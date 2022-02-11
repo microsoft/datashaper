@@ -3,14 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
-import { isNil } from 'lodash'
-import React, { memo, useMemo } from 'react'
+import isNil from 'lodash/isNil.js'
+import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty, getValue, categories } from '../util'
-import { ArrayDropdownCell } from './ArrayDropdownCell'
-import { CellContainer } from './CellContainer'
-import { EmptyCell } from './EmptyCell'
-import { FeatureCellProps } from './types'
+import { isEmpty, getValue, categories } from '../util/index.js'
+import { ArrayDropdownCell } from './ArrayDropdownCell.js'
+import { CellContainer } from './CellContainer.js'
+import { EmptyCell } from './EmptyCell.js'
+import { FeatureCellProps } from './types.js'
 import {
 	BooleanSymbolCell,
 	DateCell,
@@ -20,7 +20,7 @@ import {
 	SparklineCell,
 	DefaultCell,
 	CategoricalBarCell,
-} from './'
+} from './index.js'
 
 /**
  * Chooses what to render based on the features prop

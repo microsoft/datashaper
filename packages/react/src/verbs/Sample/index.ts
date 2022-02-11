@@ -2,5 +2,5 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './Sample'
-export * from './SampleDescription'
+export * from './Sample.js'
+export * from './SampleDescription.js'

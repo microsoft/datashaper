@@ -4,10 +4,10 @@
  */
 
 import { useThematic } from '@thematic/react'
-import React, { memo, useMemo } from 'react'
-import { useCellDimensions, useFormattedNumber } from '../hooks'
-import { getValue } from '../util'
-import { MagnitudeCellProps } from './types'
+import { memo, useMemo } from 'react'
+import { useCellDimensions, useFormattedNumber } from '../hooks/index.js'
+import { getValue } from '../util/index.js'
+import { MagnitudeCellProps } from './types.js'
 /**
  * Basic endering of number values.
  */

@@ -4,7 +4,7 @@
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../../TableStore'
-import { SetOp, SetOperationArgs, Step } from '../../types'
+import { SetOp, SetOperationArgs, Step } from '../../types.js'
 
 /**
  * All of the arquero set verbs use the same args.

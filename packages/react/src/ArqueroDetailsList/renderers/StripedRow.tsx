@@ -4,9 +4,9 @@
  */
 import { DetailsRow } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
-import { RichRowProps } from './types'
+import { RichRowProps } from './types.js'
 
 /**
  * Render a striped DetailsRow

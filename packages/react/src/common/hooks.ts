@@ -13,9 +13,9 @@ import {
 import { IDropdownOption } from '@fluentui/react'
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { set } from 'lodash'
+import set from 'lodash/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { DropdownOptionChangeFunction, StepChangeFunction } from '../types'
+import { DropdownOptionChangeFunction, StepChangeFunction } from '../types.js'
 
 const noop = (value?: string) => value
 const num = (value?: string) => value && +value

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step } from '@data-wrangling-components/core'
-import { isNil } from 'lodash'
+import isNil from 'lodash/isNil.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 

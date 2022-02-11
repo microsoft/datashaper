@@ -4,7 +4,7 @@
  */
 import { IColumn } from '@fluentui/react'
 import { useMemo } from 'react'
-import { Dimensions } from '../renderers/types'
+import { Dimensions } from '../renderers/types.js'
 
 export function useCellDimensions(
 	column?: IColumn,

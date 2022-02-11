@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { format } from 'd3-format'
-import { isNil } from 'lodash'
+import isNil from 'lodash/isNil.js'
 import { useMemo } from 'react'
 
 export function useFormattedNumber(

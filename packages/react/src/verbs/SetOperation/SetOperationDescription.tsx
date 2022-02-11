@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SetOperationStep } from '@data-wrangling-components/core'
-import React, { memo, useMemo } from 'react'
-import { DescriptionRow, VerbDescription } from '../..'
-import { StepDescriptionProps } from '../../types'
+import { memo, useMemo } from 'react'
+import { DescriptionRow, VerbDescription } from '../../index.js'
+import { StepDescriptionProps } from '../../types.js'
 
 export const SetOperationDescription: React.FC<StepDescriptionProps> = memo(
 	function SetOperationDescription(props) {

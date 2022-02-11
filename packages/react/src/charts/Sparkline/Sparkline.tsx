@@ -7,13 +7,13 @@ import { line as themeLine } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
 import { line } from 'd3-shape'
 
-import React, { memo, useLayoutEffect, useMemo, useRef } from 'react'
+import { memo, useLayoutEffect, useMemo, useRef } from 'react'
 import {
 	useChartSVG,
 	useIndexedScale,
 	useNumericLinearScale,
 	usePlotGroup,
-} from '../hooks'
+} from '../hooks.js'
 
 export interface SparklineProps {
 	data: number[]

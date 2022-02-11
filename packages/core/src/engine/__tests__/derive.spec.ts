@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { MathOperator, Step, Verb } from '../../types'
+import { MathOperator, Step, Verb } from '../../types.js'
 import { derive } from '../verbs/derive'
 import { TestStore } from './TestStore'
 

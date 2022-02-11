@@ -6,8 +6,8 @@ import { TableMetadata } from '@data-wrangling-components/core'
 import { IDetailsGroupDividerProps, IRenderFunction } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
-import { GroupHeaderFunction } from '..'
-import { GroupHeader } from '../../controls'
+import { GroupHeaderFunction } from '../index.js'
+import { GroupHeader } from '../../controls/index.js'
 
 /**
  * Overrides the default group header rendering so we can inject customization

@@ -3,9 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step } from '@data-wrangling-components/core'
-import React from 'react'
-import { CompoundBinarize, FilterAggregateLookup } from './compounds'
-import { StepComponentProps } from './types'
+import { CompoundBinarize, FilterAggregateLookup } from './compounds/index.js'
+import { StepComponentProps } from './types.js'
 import {
 	Aggregate,
 	Bin,
@@ -25,7 +24,7 @@ import {
 	Select,
 	SetOperation,
 	NoParameters,
-} from './verbs'
+} from './verbs/index.js'
 
 const verb: Record<string, React.FC<StepComponentProps>> = {
 	aggregate: Aggregate,

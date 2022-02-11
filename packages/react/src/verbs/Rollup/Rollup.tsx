@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo } from 'react'
-import { VerbContainer } from '../../common'
-import { RollupInputs } from '../../controls'
-import { StepComponentProps } from '../../types'
+import { memo } from 'react'
+import { VerbContainer } from '../../common/index.js'
+import { RollupInputs } from '../../controls/index.js'
+import { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for a rollup step.

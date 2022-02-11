@@ -16,18 +16,18 @@ import {
 	TextField,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable, useColumnType } from '../../common'
-import { ColumnValueDropdown } from '../../controls'
-import { StepComponentProps } from '../../types'
+import { useLoadTable, useColumnType } from '../../common/index.js'
+import { ColumnValueDropdown } from '../../controls/index.js'
+import { StepComponentProps } from '../../types.js'
 import {
 	useColumnValues,
 	useDisabled,
 	useHandleAddButtonClick,
 	useHandleRecodeChange,
 	useRecodeDelete,
-} from './hooks'
+} from './hooks.js'
 
 /**
  * Provides inputs for a RecodeStep.
@@ -134,7 +134,7 @@ function useRecodePairs(
 					/>
 					<TextField
 						placeholder={'New value'}
-						value={newvalue}
+						value={newvalue as string}
 						onChange={handleTextChange}
 						styles={{ root: { width: 120 } }}
 					/>

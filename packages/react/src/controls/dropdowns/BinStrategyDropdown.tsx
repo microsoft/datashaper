@@ -4,8 +4,8 @@
  */
 import { BinStrategy } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
-import React, { memo } from 'react'
-import { opDropdownStyles } from '../styles'
+import { memo } from 'react'
+import { opDropdownStyles } from '../styles.js'
 
 export type BinStrategyDropdownProps = Partial<IDropdownProps>
 
@@ -27,6 +27,6 @@ export const BinStrategyDropdown: React.FC<BinStrategyDropdownProps> = memo(
 )
 
 const options = Object.values(BinStrategy).map(o => ({
-	key: o,
-	text: o,
+	key: o as string,
+	text: o as string,
 }))

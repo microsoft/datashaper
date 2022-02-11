@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { LookupArgs, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { LookupArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero lookup.

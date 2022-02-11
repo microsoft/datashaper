@@ -4,7 +4,7 @@
  */
 import { Verb } from '@data-wrangling-components/core'
 import { Dropdown, DropdownMenuItemType, IconButton } from '@fluentui/react'
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 export interface StepSelectorProps {

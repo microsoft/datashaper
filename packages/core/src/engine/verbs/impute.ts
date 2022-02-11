@@ -4,8 +4,8 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { FillArgs, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { FillArgs, Step } from '../../types.js'
 import { ExprFunctionMap } from './types'
 
 /**

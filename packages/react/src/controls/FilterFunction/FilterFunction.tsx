@@ -8,15 +8,15 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
-import { set } from 'lodash'
-import React, { memo, useCallback, useMemo } from 'react'
+import set from 'lodash/set.js'
+import { memo, useCallback, useMemo } from 'react'
 import {
 	NumericComparisonOperatorDropdown,
 	StringComparisonOperatorDropdown,
-} from '..'
-import { useLoadTable, useHandleDropdownChange } from '../../common'
-import { StepComponentProps } from '../../types'
-import { ColumnOrValueComboBox } from '../ColumnOrValueComboBox'
+} from '../index.js'
+import { useLoadTable, useHandleDropdownChange } from '../../common/index.js'
+import { StepComponentProps } from '../../types.js'
+import { ColumnOrValueComboBox } from '../ColumnOrValueComboBox.js'
 
 /**
  * Just the comparison logic/ops for a filter.

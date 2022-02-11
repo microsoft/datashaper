@@ -3,15 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { AggregateStep } from '@data-wrangling-components/core'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { TableColumnDropdown, FieldAggregateOperationDropdown } from '..'
+import {
+	TableColumnDropdown,
+	FieldAggregateOperationDropdown,
+} from '../index.js'
 import {
 	useLoadTable,
 	LeftAlignedRow,
 	useHandleDropdownChange,
-} from '../../common'
-import { StepComponentProps } from '../../types'
+} from '../../common/index.js'
+import { StepComponentProps } from '../../types.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

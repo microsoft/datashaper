@@ -12,9 +12,9 @@ import {
 	ConstrainMode,
 } from '@fluentui/react'
 import { RowObject } from 'arquero/dist/types/table/table'
-import React, { memo, useEffect, useMemo, useState } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { groupBuilder } from '../common/'
+import { groupBuilder } from '../common/index.js'
 import {
 	useColumns,
 	useDetailsHeaderRenderer,
@@ -27,8 +27,8 @@ import {
 	useStripedRowsRenderer,
 	useTableMetadata,
 	useSubsetTable,
-} from './hooks'
-import { ArqueroDetailsListProps, DetailsListFeatures } from '.'
+} from './hooks/index.js'
+import { ArqueroDetailsListProps, DetailsListFeatures } from './index.js'
 
 /**
  * Renders an arquero table using a fluent DetailsList.

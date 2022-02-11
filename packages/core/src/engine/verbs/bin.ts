@@ -4,7 +4,7 @@
  */
 import { op, bin as aqbin } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore, BinArgs, BinStrategy, Step } from '../..'
+import { TableStore, BinArgs, BinStrategy, Step } from '../../index.js'
 import { fixedBinCount, fixedBinStep } from '../util'
 
 /**

@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
-import { RenameCallout } from './RenameCallout'
+import { RenameCallout } from './RenameCallout.js'
 
 interface TableNameProps {
 	onRenameTable?: (name: string) => void

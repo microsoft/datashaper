@@ -10,7 +10,7 @@ import {
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useState, useCallback, useMemo } from 'react'
+import { memo, useState, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { ControlBar } from './ControlBar'
 import { InputTables } from './InputTables'
@@ -23,7 +23,7 @@ import {
 	useInputTables,
 	useTableStore,
 	usePipeline,
-} from './hooks'
+} from './hooks.js'
 
 const columns = {
 	ID: {

@@ -4,8 +4,8 @@
  */
 import { table } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { StepFunction, TableStore } from '../..'
-import { ChainArgs, Step } from '../../types'
+import { StepFunction, TableStore } from '../../index.js'
+import { ChainArgs, Step } from '../../types.js'
 
 import { aggregate } from './aggregate'
 import { bin } from './bin'

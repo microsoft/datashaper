@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
+import { Step, Verb } from '../../types.js'
 import { spread } from '../verbs/spread'
 import { TestStore } from './TestStore'
 

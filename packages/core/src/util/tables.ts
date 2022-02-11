@@ -11,7 +11,7 @@ import {
 	ColumnStats,
 	DataType,
 	TableMetadata,
-} from '..'
+} from '../index.js'
 import { fixedBinCount } from '../engine/util'
 import { columnType, determineType } from '.'
 

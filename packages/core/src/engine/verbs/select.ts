@@ -4,8 +4,8 @@
  */
 import { all } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { SelectArgs, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { SelectArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero select.

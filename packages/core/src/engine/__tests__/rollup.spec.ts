@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FieldAggregateOperation } from '../../../../core'
-import { Step, Verb } from '../../types'
+import { Step, Verb } from '../../types.js'
 import { rollup } from '../verbs/rollup'
 import { TestStore } from './TestStore'
 

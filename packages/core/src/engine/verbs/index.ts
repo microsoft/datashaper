@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinStrategy } from '../..'
-import { Step, Verb } from '../../types'
+import { BinStrategy } from '../../index.js'
+import { Step, Verb } from '../../types.js'
 
 /**
  * Factory function to create new verb configs

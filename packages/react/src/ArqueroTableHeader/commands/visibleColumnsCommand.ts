@@ -4,8 +4,8 @@
  */
 import { ICommandBarItemProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { merge } from 'lodash'
-import { checkedItemsCommand } from './checkedItemsCommand'
+import merge from 'lodash/merge.js'
+import { checkedItemsCommand } from './checkedItemsCommand.js'
 
 /**
  * Constructs a visible columns command.

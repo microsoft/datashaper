@@ -9,7 +9,7 @@ import {
 	FieldAggregateOperation,
 	StringComparisonOperator,
 	FilterCompareType,
-} from '../../types'
+} from '../../types.js'
 import { CompareWrapper } from './types'
 
 /**

@@ -3,15 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { JoinStep, Step } from '@data-wrangling-components/core'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { TableColumnDropdown, TableDropdown } from '..'
+import { TableColumnDropdown, TableDropdown } from '../index.js'
 import {
 	useHandleDropdownChange,
 	useLoadTable,
 	LeftAlignedRow,
-} from '../../common'
-import { StepComponentProps } from '../../types'
+} from '../../common/index.js'
+import { StepComponentProps } from '../../types.js'
 
 /**
  * Core inputs for join operations. This includes join and lookup.

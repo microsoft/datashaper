@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow } from '../../common'
-import { StepComponentProps } from '../../types'
-import { FilterFunction } from '../FilterFunction'
+import { LeftAlignedRow } from '../../common/index.js'
+import { StepComponentProps } from '../../types.js'
+import { FilterFunction } from '../FilterFunction/index.js'
 
 /**
  * The filter inputs for a step.

@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
-import { ImputeInputs } from '../../controls'
-import { StepComponentProps } from '../../types'
+import { ImputeInputs } from '../../controls/index.js'
+import { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for an Input step.

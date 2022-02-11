@@ -4,7 +4,7 @@
  */
 import { BinStep, BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, Position, SpinButton } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { Switch, Case, If, Then } from 'react-if'
 import styled from 'styled-components'
 import {
@@ -12,10 +12,10 @@ import {
 	useHandleDropdownChange,
 	useHandleCheckboxChange,
 	useHandleSpinButtonChange,
-} from '../../common'
-import { BinStrategyDropdown } from '../../controls'
-import { columnDropdownStyles } from '../../controls/styles'
-import { StepComponentProps } from '../../types'
+} from '../../common/index.js'
+import { BinStrategyDropdown } from '../../controls/index.js'
+import { columnDropdownStyles } from '../../controls/styles.js'
+import { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for a binning step.

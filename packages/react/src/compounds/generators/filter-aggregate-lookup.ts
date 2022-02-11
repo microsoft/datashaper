@@ -15,7 +15,7 @@ import {
 	FilterArgs,
 	AggregateArgs,
 } from '@data-wrangling-components/core'
-import { merge } from 'lodash'
+import merge from 'lodash/merge.js'
 
 const FINAL_OUTPUT = 'filter-aggregate-lookup-final-output-table'
 
