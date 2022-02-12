@@ -7,8 +7,21 @@ import React, { memo } from 'react'
 import { useBusinessLogic, useDropzoneProps } from './hooks'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const { setSteps, steps, tables, handleDropFiles } = useBusinessLogic()
-	const dropzone = useDropzoneProps(handleDropFiles)
+	const {
+		setSteps,
+		steps,
+		tables,
+		handleDropFiles,
+		onChangeSpecification,
+		onResetSteps,
+		onResetFullData,
+	} = useBusinessLogic()
+	const dropzone = useDropzoneProps(
+		handleDropFiles,
+		onResetSteps,
+		onResetFullData,
+		onChangeSpecification,
+	)
 
 	//fix: what if we have other components on the same page
 	return (

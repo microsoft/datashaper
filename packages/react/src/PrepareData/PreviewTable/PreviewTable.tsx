@@ -4,7 +4,6 @@
  */
 import { TableContainer, TableMetadata } from '@data-wrangling-components/core'
 import { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import {

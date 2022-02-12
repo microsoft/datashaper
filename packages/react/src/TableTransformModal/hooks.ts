@@ -58,6 +58,7 @@ export function useInternalStep(
 
 export function useHandleStepArgs(
 	step: Step | undefined,
+	disabled?: boolean,
 ): React.FC<StepComponentProps> | undefined {
 	const Component = useMemo(
 		() => (step ? selectStepComponent(step) : null),
@@ -68,11 +69,13 @@ export function useHandleStepArgs(
 		if (Component) {
 			return withTableDropdown()(
 				withOutputColumnTextfield()(
-					withInputColumnDropdown()(withOutputTableTextfield()(Component)),
+					withInputColumnDropdown()(
+						withOutputTableTextfield(undefined, disabled)(Component),
+					),
 				),
 			)
 		}
-	}, [Component])
+	}, [Component, disabled])
 
 	return WithAllArgs
 }

@@ -11,6 +11,7 @@ import {
 	introspect,
 	TableMetadata,
 } from '@data-wrangling-components/core'
+import { BaseFile } from '@data-wrangling-components/utilities'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import _ from 'lodash'
 import { useState, useMemo, useCallback, useEffect } from 'react'
@@ -18,7 +19,7 @@ import { GroupedTable } from '../../'
 import { useGroupedTables, usePipeline, useStore } from '../../common'
 
 export function useBusinessLogic(
-	tables: TableContainer[],
+	tables: BaseFile[],
 	onUpdateSteps: (steps: Step[]) => void,
 	steps?: Step[],
 ): {
@@ -34,14 +35,18 @@ export function useBusinessLogic(
 } {
 	const [selectedTable, setSelectedTable] = useState<TableContainer>()
 	const [intermediaryTables, setIntermediaryTables] = useState<string[]>([])
-	const [outputs, setOutputs] = useState<Map<string, ColumnTable>>(
+	const [storedTables, setStoredTables] = useState<Map<string, ColumnTable>>(
 		new Map<string, ColumnTable>(),
 	)
 	const store = useStore()
 	const pipeline = usePipeline(store)
 
-	const groupedTables = useGroupedTables(intermediaryTables, tables, outputs)
-	console.log(groupedTables)
+	const groupedTables = useGroupedTables(
+		intermediaryTables,
+		tables,
+		storedTables,
+	)
+
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
 		return (
 			selectedTable && introspect(selectedTable?.table as ColumnTable, true)
@@ -50,17 +55,17 @@ export function useBusinessLogic(
 
 	const output = useMemo((): TableContainer => {
 		const name = pipeline?.last?.output
-		const table = outputs.get(name)
+		const table = storedTables.get(name)
 		return {
 			name,
 			table,
 		} as TableContainer
-	}, [pipeline, outputs])
+	}, [pipeline, storedTables])
 
 	const nextInputTable = useMemo((): string => {
-		const tables = store.list()
-		const length = tables.length
-		const input = length === 0 ? '' : tables[length - 1]
+		const _tables = store.list()
+		const length = _tables.length
+		const input = length === 0 ? '' : _tables[length - 1]
 
 		return _.last(steps)?.output ?? input
 	}, [steps, store])
@@ -69,30 +74,53 @@ export function useBusinessLogic(
 		await pipeline.run()
 		//todo: what about renaming the table oputput step?
 		const output = await store.toMap()
-		setOutputs(output)
+		setStoredTables(output)
 		setIntermediaryTables(pipeline.outputs)
-	}, [pipeline, store, setOutputs, setIntermediaryTables])
+	}, [pipeline, store, setStoredTables, setIntermediaryTables])
+
+	// const clearOutputs = useCallback(async () => {
+	// 	pipeline.clear()
+	// 	const _output = await store.toMap()
+	// 	setOutputs(_output)
+	// 	setIntermediaryTables([])
+	// }, [pipeline, setOutputs, setIntermediaryTables, store])
+
+	//if steps changed, clean and run??
+	// useEffect(() => {
+	// 	if (steps?.length && !output?.name && !!tables.length) {
+	// 		pipeline.addAll(steps)
+	// 		runPipeline()
+	// 	} else if (!steps?.length && output.name) {
+	// 		clearOutputs()
+	// 	}
+	// }, [pipeline, steps, tables, runPipeline, clearOutputs, output])
+
+	const verifyAdd = useCallback(
+		async (_tables: BaseFile[]) => {
+			const existing = store.list()
+			const tabs = _tables.map(async table => {
+				const isStored = existing.includes(table.name)
+				if (!isStored) {
+					const tab = await table?.toTable()
+					store.set(table.name, tab)
+				}
+			})
+
+			await Promise.all(tabs)
+			const _storedTables = await store.toMap()
+			setStoredTables(_storedTables)
+		},
+		[store, setStoredTables],
+	)
 
 	useEffect(() => {
-		if (steps?.length && !outputs?.size && !!tables.length) {
-			pipeline.addAll(steps)
-			runPipeline()
+		debugger
+		if (tables.length) {
+			verifyAdd(tables)
+		} else {
+			store.clear()
 		}
-	}, [pipeline, steps, tables, runPipeline, outputs])
-
-	useEffect(() => {
-		tables.forEach(async table => {
-			try {
-				//what if it's different
-				//what if it's a delete
-				await store.get(table.name)
-			} catch (e) {
-				store.set(table.name, table?.table as ColumnTable)
-				const output = await store.toMap()
-				setOutputs(output)
-			}
-		})
-	}, [tables, store, setOutputs])
+	}, [tables, verifyAdd, store])
 
 	const onSaveStep = useSaveStep(onUpdateSteps, pipeline, runPipeline)
 	const onSelect = useOnSelect(setSelectedTable, store)

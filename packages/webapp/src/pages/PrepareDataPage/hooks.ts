@@ -2,103 +2,128 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, TableContainer } from '@data-wrangling-components/core'
+import { Specification, Step } from '@data-wrangling-components/core'
 import { DropzoneProps } from '@data-wrangling-components/react'
 import {
 	BaseFile,
 	FileCollection,
 	FileType,
 	FileWithPath,
-	isZipFile,
 } from '@data-wrangling-components/utilities'
-import { loadCSV } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import { useBoolean } from '@fluentui/react-hooks'
 import { useCallback, useEffect, useState } from 'react'
-import { useLoadSpecFile, useLoadTableFiles } from '~pages/MainPage/hooks'
+import { useLoadSpecFile } from '~pages/MainPage/hooks'
 
 export function useBusinessLogic(): {
 	setSteps: (steps: Step[]) => void
 	steps: Step[]
-	tables: TableContainer[]
-	handleDropFiles: (loaded: Map<string, ColumnTable>) => void
+	tables: BaseFile[]
+	handleDropFiles: (loaded: BaseFile[]) => void
+	onChangeSpecification: (spec: Specification) => void
+	onResetSteps: () => void
+	onResetFullData: () => void
 } {
-	const [tables, setTables] = useState<TableContainer[]>([])
+	const [fileCollection, setFileCollection] = useState<FileCollection>(
+		new FileCollection(),
+	)
 	const [steps, setSteps] = useState<Step[]>([])
+	const [tables, setTables] = useState<BaseFile[]>([])
+	//change to files
+	const updateFileCollection = useCallback(
+		async (files: FileCollection) => {
+			setFileCollection(files)
+			setTables(files.list(FileType.table))
+		},
+		[setFileCollection, setTables],
+	)
 
 	useEffect(() => {
 		const f = async () => {
-			const [companies, products] = await Promise.all([
-				loadCSV('data/companies.csv', {}),
-				loadCSV('data/products.csv', {}),
+			// const [companies, products] = await Promise.all([
+			// 	loadCSV('data/companies.csv', {}),
+			// 	loadCSV('data/products.csv', {}),
+			// ])
+			await Promise.all([
+				fileCollection.add('data/companies.csv'),
+				fileCollection.add('data/products.csv'),
 			])
+			updateFileCollection(fileCollection)
 
-			const tablesList = [
-				{
-					name: 'companies',
-					table: companies,
-				},
-				{
-					name: 'companie2s',
-					table: companies,
-				},
-				{
-					name: 'products',
-					table: products,
-				},
-			] as TableContainer[]
-			setTables(tablesList)
-
-			const steps = [
-				{
-					verb: 'join',
-					input: 'companies',
-					output: 'join-1',
-					args: {
-						other: 'products',
-						on: ['ID'],
-					},
-				},
-				{
-					verb: 'join',
-					input: 'companies',
-					output: 'join-2',
-					args: {
-						other: 'products',
-						on: ['ID', 'ID'],
-					},
-				},
-			]
-			setSteps(steps)
+			// const steps = [
+			// 	{
+			// 		verb: 'join',
+			// 		input: 'companies',
+			// 		output: 'join-1',
+			// 		args: {
+			// 			other: 'products',
+			// 			on: ['ID'],
+			// 		},
+			// 	},
+			// 	{
+			// 		verb: 'join',
+			// 		input: 'companies',
+			// 		output: 'join-2',
+			// 		args: {
+			// 			other: 'products',
+			// 			on: ['ID', 'ID'],
+			// 		},
+			// 	},
+			// ]
+			// setSteps(steps)
 		}
 		f()
-	}, [])
+	}, [fileCollection, updateFileCollection])
 
 	const handleDropFiles = useCallback(
-		(loaded: Map<string, ColumnTable>) => {
-			loaded.forEach((table, name) => {
-				setTables(prev => [...prev, { name, table }])
+		(loaded: BaseFile[]) => {
+			loaded.forEach(async table => {
+				await fileCollection.add(table)
+				updateFileCollection(fileCollection)
 			})
 		},
-		[setTables],
+		[updateFileCollection, fileCollection],
 	)
 
+	const onChangeSpecification = useCallback(
+		(specification: Specification) => {
+			specification.steps && setSteps(specification?.steps)
+		},
+		[setSteps],
+	)
+
+	const onResetSteps = useCallback(() => {
+		setSteps([])
+	}, [setSteps])
+
+	const onResetFullData = useCallback(() => {
+		setSteps([])
+		// setTables([])
+	}, [setSteps])
+
+	console.log(fileCollection.list(FileType.table))
 	return {
 		setSteps,
 		steps,
 		tables,
 		handleDropFiles,
+		onChangeSpecification,
+		onResetSteps,
+		onResetFullData,
 	}
 }
 
 export function useDropzoneProps(
-	handleDropFiles: (loaded: Map<string, ColumnTable>) => void,
+	handleDropFiles: (loaded: BaseFile[]) => void,
+	onResetSteps: () => void,
+	onResetFullData: () => void,
+	onChangeSpecification?: (spec: Specification) => void,
 ): DropzoneProps {
-	//TODO: move to shared hook file
-	const loadFiles = useLoadTableFiles()
 	const loadSpec = useLoadSpecFile()
 	const [fileCollection, setFileCollection] = useState<FileCollection>(
 		new FileCollection(),
 	)
+	const [loading, { setFalse: setLoadingFalse, setTrue: setLoadingTrue }] =
+		useBoolean(false)
 
 	const updateFileCollection = useCallback(
 		async (files: FileWithPath[]) => {
@@ -111,11 +136,10 @@ export function useDropzoneProps(
 	const handleDropCSV = useCallback(
 		async (files: BaseFile[]) => {
 			if (!files.length) return
-			updateFileCollection(files)
-			const loaded = await loadFiles(files)
-			handleDropFiles && handleDropFiles(loaded)
+			await updateFileCollection(files)
+			handleDropFiles && handleDropFiles(files)
 		},
-		[handleDropFiles, loadFiles, updateFileCollection],
+		[handleDropFiles, updateFileCollection],
 	)
 
 	const handleDropJSON = useCallback(
@@ -123,37 +147,40 @@ export function useDropzoneProps(
 			// ignore any after the first. I suppose we could auto-link the steps, but that's dangerous
 			const first = files[0]
 			if (!first) return
+			onResetSteps()
 			updateFileCollection([first])
 			const spec = await loadSpec(first)
-			// onSelectSpecification && onSelectSpecification(spec)
+			onChangeSpecification && onChangeSpecification(spec)
 		},
-		[loadSpec, updateFileCollection],
+		[loadSpec, updateFileCollection, onChangeSpecification, onResetSteps],
 	)
 
 	const handleDrop = useCallback(
-		(fileCollection: FileCollection) => {
-			const csv = fileCollection.list(FileType.csv)
-			const json = fileCollection.list(FileType.json)
-			handleDropCSV(csv)
-			handleDropJSON(json)
+		async (_fileCollection: FileCollection) => {
+			setFileCollection(_fileCollection)
+			const csv = _fileCollection.list(FileType.csv)
+			const json = _fileCollection.list(FileType.json)
+			if (json.length && csv.length) {
+				onResetFullData()
+			}
+			setLoadingTrue()
+			await Promise.all([handleDropCSV(csv), handleDropJSON(json)])
+			setLoadingFalse()
 		},
-		[handleDropCSV, handleDropJSON],
+		[
+			handleDropCSV,
+			handleDropJSON,
+			setLoadingTrue,
+			setLoadingFalse,
+			setFileCollection,
+			onResetFullData,
+		],
 	)
 
-	// const handleDropZip = useCallback(
-	// 	async (fileCollection: FileCollection) => {
-	// 		setFileCollection(fileCollection)
-	// 		handleDropCSV(fileCollection)
-	// 		// handleDropJSON(fileCollection)
-	// 	},
-	// 	[handleDropCSV, setFileCollection],
-	// )
-
-	const props = {
+	return {
 		onDrop: handleDrop,
 		placeholder: 'Drop .csv, .json  or zip files here',
 		acceptedFileTypes: ['.csv', '.tsv', '.json', '.zip'],
-	} as DropzoneProps
-
-	return props
+		loading: loading,
+	}
 }

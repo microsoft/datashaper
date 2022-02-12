@@ -3,21 +3,22 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import { Step, TableContainer } from '@data-wrangling-components/core'
+import { Step } from '@data-wrangling-components/core'
+import { BaseFile } from '@data-wrangling-components/utilities'
 import {
 	IRenderFunction,
 	IDetailsColumnProps,
 	Separator,
 } from '@fluentui/react'
 import React, { memo } from 'react'
-import { Dropzone, DropzoneProps } from '../../files'
 import styled from 'styled-components'
 import { TablesList, PreviewTable, OutputTable } from '..'
 import { StepsList } from '../../Steps'
+import { DropzoneContainer, DropzoneProps } from '../../files'
 import { useBusinessLogic } from './hooks'
 
 export const PrepareDataFull: React.FC<{
-	tables: TableContainer[]
+	tables: BaseFile[]
 	onUpdateSteps: (steps: Step[]) => void
 	steps?: Step[]
 	inputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
@@ -50,9 +51,7 @@ export const PrepareDataFull: React.FC<{
 					<SectionTitle>Inputs</SectionTitle>
 					<InputDisplay>
 						{dropzoneProps && (
-							<Drop>
-								<Dropzone {...dropzoneProps} />
-							</Drop>
+							<DropzoneContainer dropzoneProps={dropzoneProps} />
 						)}
 
 						<TablesList
@@ -129,14 +128,10 @@ const InputContainer = styled.div`
 	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
-const Drop = styled.div`
-	display: inline-table;
-	height: 50px;
-`
-
 const InputDisplay = styled.div`
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 `
 
 const OutputContainer = styled.div`
@@ -161,9 +156,9 @@ const StepsContainer = styled.div`
 
 const TablesListContainer = styled.div`
 	display: flex;
-	width: 30%;
+	width: 26%;
 `
 
 const InputDetailsContainer = styled.div`
-	width: 67%;
+	width: 70%;
 `

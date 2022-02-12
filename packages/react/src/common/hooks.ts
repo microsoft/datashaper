@@ -10,8 +10,8 @@ import {
 	DataType,
 	columnType,
 	Pipeline,
-	TableContainer,
 } from '@data-wrangling-components/core'
+import { BaseFile } from '@data-wrangling-components/utilities'
 import {
 	ICommandBarItemProps,
 	IContextualMenuItem,
@@ -296,23 +296,10 @@ export function usePipeline(store: TableStore): Pipeline {
 
 export function useGroupedTables(
 	intermediary: string[],
-	tables: TableContainer[],
+	tables: BaseFile[],
 	outputs: Map<string, ColumnTable>,
 ): GroupedTable[] {
 	return useMemo(() => {
-		console.log('outputs', Array.from(outputs))
-		console.log(
-			'outputs',
-			Array.from(outputs).map(([key, table]) => {
-				return {
-					name: key,
-					table: table,
-					group: intermediary.includes(key)
-						? TableGroup.Intermediary
-						: TableGroup.Input,
-				} as GroupedTable
-			}),
-		)
 		return Array.from(outputs).map(([key, table]) => {
 			return {
 				name: key,
@@ -322,17 +309,7 @@ export function useGroupedTables(
 					: TableGroup.Input,
 			} as GroupedTable
 		})
-
-		// tables.map(table => {
-		// 	return {
-		// 		name: table.name,
-		// 		table: table.table,
-		// 		group: intermediary.includes(table.name)
-		// 			? TableGroup.Intermediary
-		// 			: TableGroup.Input,
-		// 	} as GroupedTable
-		// })
-	}, [tables, intermediary, outputs])
+	}, [tables, intermediary, outputs]) //fix here
 	// useEffect(() => {
 	// 	const f = async () => {
 	// 		const results = await store.toMap()
@@ -350,16 +327,6 @@ export function useGroupedTables(
 	// 	f()
 	// }, [intermediary, tables, store])
 	// return a
-
-	// return tables.map(table => {
-	// 	return {
-	// 		name: table.name,
-	// 		table: table.table,
-	// 		group: intermediary.includes(table.name)
-	// 			? TableGroup.Intermediary
-	// 			: TableGroup.Input,
-	// 	} as GroupedTable
-	// })
 }
 
 export function useCommonCommands(

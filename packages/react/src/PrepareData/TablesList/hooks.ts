@@ -42,6 +42,7 @@ export function useColumns(onSelect?: (name: string) => void): IColumn[] {
 				name: 'group',
 				fieldName: 'group',
 				key: 'group',
+				maxWidth: 30,
 				onRender: item => renderPreviewTableButton(item, onSelect),
 			},
 		] as IColumn[]

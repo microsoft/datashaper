@@ -162,4 +162,12 @@ export class TableStore {
 	clone(): TableStore {
 		return new TableStore(cloneDeep(this._tables))
 	}
+	/**
+	 * Deletes all tables from store
+	 * @returns
+	 */
+	clear(): void {
+		const keys = Array.from(this._tables.keys())
+		keys.forEach(key => this.delete(key))
+	}
 }

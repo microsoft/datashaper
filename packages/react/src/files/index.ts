@@ -4,5 +4,6 @@
  */
 
 export * from './Dropzone'
+export * from './DropzoneContainer'
 export * from './hooks'
 export * from './types'

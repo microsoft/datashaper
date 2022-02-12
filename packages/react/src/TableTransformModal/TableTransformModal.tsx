@@ -50,8 +50,8 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 		)
 
 		const handleDismiss = useHandleDismiss(onDismiss, setInternal)
-		const StepArgs = useHandleStepArgs(internal)
-		console.log(internal)
+		const StepArgs = useHandleStepArgs(internal, !!step)
+
 		const handleRunClick = useHandleRunClick(
 			handleDismiss,
 			internal,

@@ -15,6 +15,7 @@ import { HOCFunction, StepComponentProps } from './types'
  */
 export const withOutputTableTextfield = (
 	label?: string,
+	disabled?: boolean,
 ): HOCFunction<StepComponentProps> => {
 	return Component => {
 		const WithOutputTableTextfield: React.FC<StepComponentProps> = props => {
@@ -31,6 +32,7 @@ export const withOutputTableTextfield = (
 					<LeftAlignedRow>
 						<TextField
 							required
+							disabled={disabled}
 							label={label || 'Output table'}
 							placeholder={'Table name'}
 							value={step.output}
