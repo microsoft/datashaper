@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableContainer, TableMetadata } from '@data-wrangling-components/core'
+import { TableMetadata } from '@data-wrangling-components/core'
 import { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import {
@@ -23,10 +24,16 @@ const statsColumnTypes = [
 ]
 
 export const PreviewTable: React.FC<{
-	table?: TableContainer
+	table?: ColumnTable
+	name?: string
 	selectedMetadata?: TableMetadata
 	headerCommandBar?: IRenderFunction<IDetailsColumnProps>[]
-}> = memo(function PreviewTable({ table, selectedMetadata, headerCommandBar }) {
+}> = memo(function PreviewTable({
+	table,
+	selectedMetadata,
+	headerCommandBar,
+	name,
+}) {
 	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures({
 		statsColumnHeaders: true,
 		histogramColumnHeaders: true,
@@ -35,11 +42,11 @@ export const PreviewTable: React.FC<{
 
 	return (
 		<>
-			{table?.table ? (
+			{table ? (
 				<Container>
 					<ArqueroTableHeader
-						name={table?.name}
-						table={table?.table}
+						name={name}
+						table={table}
 						farCommands={commands}
 					/>
 					<ArqueroDetailsList
@@ -53,7 +60,7 @@ export const PreviewTable: React.FC<{
 							statsColumnTypes: statsColumnTypes,
 							commandBar: headerCommandBar ? headerCommandBar : undefined,
 						}}
-						table={table?.table}
+						table={table}
 					/>
 				</Container>
 			) : (

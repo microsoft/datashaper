@@ -21,7 +21,6 @@ export interface DropzoneProps extends DzProps {
 		dragZone?: React.CSSProperties
 	}
 	disabled?: boolean
-	loading?: boolean
 	filesCount?: DropFilesCount
 }
 export interface DzProps {

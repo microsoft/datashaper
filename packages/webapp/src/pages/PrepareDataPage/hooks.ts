@@ -10,15 +10,15 @@ import {
 	FileType,
 	FileWithPath,
 } from '@data-wrangling-components/utilities'
-import { useBoolean } from '@fluentui/react-hooks'
 import { useCallback, useEffect, useState } from 'react'
 import { useLoadSpecFile } from '~pages/MainPage/hooks'
 
 export function useBusinessLogic(): {
 	setSteps: (steps: Step[]) => void
 	steps: Step[]
-	tables: BaseFile[]
+	files: BaseFile[]
 	handleDropFiles: (loaded: BaseFile[]) => void
+	handleDeleteFile: (name: string) => void
 	onChangeSpecification: (spec: Specification) => void
 	onResetSteps: () => void
 	onResetFullData: () => void
@@ -27,14 +27,14 @@ export function useBusinessLogic(): {
 		new FileCollection(),
 	)
 	const [steps, setSteps] = useState<Step[]>([])
-	const [tables, setTables] = useState<BaseFile[]>([])
+	const [files, setFiles] = useState<BaseFile[]>([])
 	//change to files
 	const updateFileCollection = useCallback(
-		async (files: FileCollection) => {
-			setFileCollection(files)
-			setTables(files.list(FileType.table))
+		async (collection: FileCollection) => {
+			setFileCollection(collection)
+			setFiles(collection.list(FileType.table))
 		},
-		[setFileCollection, setTables],
+		[setFileCollection, setFiles],
 	)
 
 	useEffect(() => {
@@ -75,11 +75,19 @@ export function useBusinessLogic(): {
 	}, [fileCollection, updateFileCollection])
 
 	const handleDropFiles = useCallback(
-		(loaded: BaseFile[]) => {
-			loaded.forEach(async table => {
-				await fileCollection.add(table)
+		(_files: BaseFile[]) => {
+			_files.forEach(async file => {
+				await fileCollection.add(file)
 				updateFileCollection(fileCollection)
 			})
+		},
+		[updateFileCollection, fileCollection],
+	)
+
+	const handleDeleteFile = useCallback(
+		(name: string) => {
+			fileCollection.remove({ name })
+			updateFileCollection(fileCollection)
 		},
 		[updateFileCollection, fileCollection],
 	)
@@ -97,15 +105,15 @@ export function useBusinessLogic(): {
 
 	const onResetFullData = useCallback(() => {
 		setSteps([])
-		// setTables([])
-	}, [setSteps])
+		setFiles([])
+	}, [setSteps, setFiles])
 
-	console.log(fileCollection.list(FileType.table))
 	return {
 		setSteps,
 		steps,
-		tables,
+		files,
 		handleDropFiles,
+		handleDeleteFile,
 		onChangeSpecification,
 		onResetSteps,
 		onResetFullData,
@@ -122,8 +130,6 @@ export function useDropzoneProps(
 	const [fileCollection, setFileCollection] = useState<FileCollection>(
 		new FileCollection(),
 	)
-	const [loading, { setFalse: setLoadingFalse, setTrue: setLoadingTrue }] =
-		useBoolean(false)
 
 	const updateFileCollection = useCallback(
 		async (files: FileWithPath[]) => {
@@ -161,26 +167,17 @@ export function useDropzoneProps(
 			const csv = _fileCollection.list(FileType.csv)
 			const json = _fileCollection.list(FileType.json)
 			if (json.length && csv.length) {
+				//if both files, reset everything
 				onResetFullData()
 			}
-			setLoadingTrue()
 			await Promise.all([handleDropCSV(csv), handleDropJSON(json)])
-			setLoadingFalse()
 		},
-		[
-			handleDropCSV,
-			handleDropJSON,
-			setLoadingTrue,
-			setLoadingFalse,
-			setFileCollection,
-			onResetFullData,
-		],
+		[handleDropCSV, handleDropJSON, setFileCollection, onResetFullData],
 	)
 
 	return {
 		onDrop: handleDrop,
 		placeholder: 'Drop .csv, .json  or zip files here',
 		acceptedFileTypes: ['.csv', '.tsv', '.json', '.zip'],
-		loading: loading,
 	}
 }

@@ -4,7 +4,6 @@
  */
 /* eslint-disable @essex/adjacent-await */
 import {
-	TableContainer,
 	Step,
 	TableStore,
 	Pipeline,
@@ -12,6 +11,7 @@ import {
 	TableMetadata,
 } from '@data-wrangling-components/core'
 import { BaseFile } from '@data-wrangling-components/utilities'
+import { useBoolean } from '@fluentui/react-hooks'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import _ from 'lodash'
 import { useState, useMemo, useCallback, useEffect } from 'react'
@@ -19,21 +19,30 @@ import { GroupedTable } from '../../'
 import { useGroupedTables, usePipeline, useStore } from '../../common'
 
 export function useBusinessLogic(
-	tables: BaseFile[],
+	files: BaseFile[],
 	onUpdateSteps: (steps: Step[]) => void,
+	onDeleteFile: (name: string) => void,
 	steps?: Step[],
 ): {
 	groupedTables: GroupedTable[]
-	selectedTable: TableContainer | undefined
-	onSelect: (name: string) => void
+	selectedTable: ColumnTable | undefined
+	onSelectTable: (name: string) => void
+	onDeleteTable: (name: string) => void
 	onDeleteStep: (index?: number) => void
 	onSaveStep: (step: Step, index?: number) => void
 	store: TableStore
-	output?: TableContainer
 	selectedMetadata: TableMetadata | undefined
-	nextInputTable: string
+	lastTableName: string
+	isLoadingList: boolean
+	output?: ColumnTable
+	selectedTableName?: string
 } {
-	const [selectedTable, setSelectedTable] = useState<TableContainer>()
+	const [selectedTable, setSelectedTable] = useState<ColumnTable>()
+	const [selectedTableName, setSelectedTableName] = useState<string>()
+	const [
+		isLoadingList,
+		{ setTrue: setLoadingListTrue, setFalse: setLoadingListFalse },
+	] = useBoolean(false)
 	const [intermediaryTables, setIntermediaryTables] = useState<string[]>([])
 	const [storedTables, setStoredTables] = useState<Map<string, ColumnTable>>(
 		new Map<string, ColumnTable>(),
@@ -43,26 +52,20 @@ export function useBusinessLogic(
 
 	const groupedTables = useGroupedTables(
 		intermediaryTables,
-		tables,
+		files,
 		storedTables,
 	)
 
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
-		return (
-			selectedTable && introspect(selectedTable?.table as ColumnTable, true)
-		)
+		return selectedTable && introspect(selectedTable, true)
 	}, [selectedTable])
 
-	const output = useMemo((): TableContainer => {
+	const output = useMemo((): ColumnTable | undefined => {
 		const name = pipeline?.last?.output
-		const table = storedTables.get(name)
-		return {
-			name,
-			table,
-		} as TableContainer
+		return storedTables.get(name)
 	}, [pipeline, storedTables])
 
-	const nextInputTable = useMemo((): string => {
+	const lastTableName = useMemo((): string => {
 		const _tables = store.list()
 		const length = _tables.length
 		const input = length === 0 ? '' : _tables[length - 1]
@@ -71,8 +74,10 @@ export function useBusinessLogic(
 	}, [steps, store])
 
 	const runPipeline = useCallback(async () => {
-		await pipeline.run()
-		//todo: what about renaming the table oputput step?
+		if (pipeline.steps.length) {
+			await pipeline.run()
+		}
+
 		const output = await store.toMap()
 		setStoredTables(output)
 		setIntermediaryTables(pipeline.outputs)
@@ -96,34 +101,40 @@ export function useBusinessLogic(
 	// }, [pipeline, steps, tables, runPipeline, clearOutputs, output])
 
 	const verifyAdd = useCallback(
-		async (_tables: BaseFile[]) => {
+		async (files: BaseFile[]) => {
+			setLoadingListTrue()
 			const existing = store.list()
-			const tabs = _tables.map(async table => {
-				const isStored = existing.includes(table.name)
+			const tabs = files.map(async file => {
+				const isStored = existing.includes(file.name)
 				if (!isStored) {
-					const tab = await table?.toTable()
-					store.set(table.name, tab)
+					const tab = await file?.toTable()
+					store.set(file.name, tab)
 				}
 			})
 
 			await Promise.all(tabs)
 			const _storedTables = await store.toMap()
 			setStoredTables(_storedTables)
+			setLoadingListFalse()
 		},
-		[store, setStoredTables],
+		[store, setStoredTables, setLoadingListFalse, setLoadingListTrue],
 	)
 
 	useEffect(() => {
-		debugger
-		if (tables.length) {
-			verifyAdd(tables)
+		if (files.length) {
+			verifyAdd(files)
 		} else {
 			store.clear()
 		}
-	}, [tables, verifyAdd, store])
+	}, [files, verifyAdd, store])
 
 	const onSaveStep = useSaveStep(onUpdateSteps, pipeline, runPipeline)
-	const onSelect = useOnSelect(setSelectedTable, store)
+	const onSelectTable = useOnSelect(
+		setSelectedTable,
+		setSelectedTableName,
+		store,
+	)
+	const onDeleteTable = useOnDeleteTable(store, onDeleteFile, setStoredTables)
 	const onDeleteStep = useDeleteStep(
 		onUpdateSteps,
 		pipeline,
@@ -135,13 +146,16 @@ export function useBusinessLogic(
 	return {
 		groupedTables,
 		selectedTable,
-		onSelect,
+		onSelectTable,
+		onDeleteTable,
 		onDeleteStep,
 		onSaveStep,
 		store,
 		output,
 		selectedMetadata,
-		nextInputTable,
+		lastTableName,
+		isLoadingList,
+		selectedTableName,
 	}
 }
 
@@ -167,7 +181,7 @@ export function useDeleteStep(
 	onUpdateSteps: (steps: Step[]) => void,
 	pipeline: Pipeline,
 	runPipeline: () => void,
-	setSelectedTable: (table: TableContainer | undefined) => void,
+	setSelectedTable: (table: ColumnTable | undefined) => void,
 	steps?: Step[],
 ): (index?: number) => void {
 	return useCallback(
@@ -187,14 +201,32 @@ export function useDeleteStep(
 }
 
 export function useOnSelect(
-	setSelectedTable: (table: TableContainer) => void,
+	setSelectedTable: (table: ColumnTable) => void,
+	setSelectedTableName: (name: string) => void,
 	store: TableStore,
 ): (name: string) => void {
 	return useCallback(
 		async (name: string) => {
 			const table = await store.get(name)
-			setSelectedTable({ table, name: name })
+			setSelectedTable(table)
+			setSelectedTableName(name)
 		},
-		[setSelectedTable, store],
+		[setSelectedTable, setSelectedTableName, store],
+	)
+}
+
+export function useOnDeleteTable(
+	store: TableStore,
+	onDeleteFile: (name: string) => void,
+	setStoredTables: (table: Map<string, ColumnTable>) => void,
+): (tableName: string) => void {
+	return useCallback(
+		async (tableName: string) => {
+			store.delete(tableName)
+			const _storedTables = await store.toMap()
+			onDeleteFile(tableName)
+			setStoredTables(_storedTables)
+		},
+		[store, setStoredTables, onDeleteFile],
 	)
 }

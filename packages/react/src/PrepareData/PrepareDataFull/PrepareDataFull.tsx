@@ -18,16 +18,18 @@ import { DropzoneContainer, DropzoneProps } from '../../files'
 import { useBusinessLogic } from './hooks'
 
 export const PrepareDataFull: React.FC<{
-	tables: BaseFile[]
+	files: BaseFile[]
 	onUpdateSteps: (steps: Step[]) => void
+	onDeleteFile: (name: string) => void
 	steps?: Step[]
 	inputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 	dropzoneProps?: DropzoneProps
 }> = memo(function PrepareDataFull({
-	tables,
+	files,
 	steps,
 	onUpdateSteps,
+	onDeleteFile,
 	inputHeaderCommandBar,
 	outputHeaderCommandBar,
 	dropzoneProps,
@@ -35,14 +37,17 @@ export const PrepareDataFull: React.FC<{
 	const {
 		groupedTables,
 		selectedTable,
-		onSelect,
+		selectedTableName,
+		onSelectTable,
 		onDeleteStep,
 		onSaveStep,
+		onDeleteTable,
 		store,
 		output,
 		selectedMetadata,
-		nextInputTable,
-	} = useBusinessLogic(tables, onUpdateSteps, steps)
+		lastTableName,
+		isLoadingList,
+	} = useBusinessLogic(files, onUpdateSteps, onDeleteFile, steps)
 
 	return (
 		<Container>
@@ -51,13 +56,18 @@ export const PrepareDataFull: React.FC<{
 					<SectionTitle>Inputs</SectionTitle>
 					<InputDisplay>
 						{dropzoneProps && (
-							<DropzoneContainer dropzoneProps={dropzoneProps} />
+							<DropzoneContainer
+								loading={isLoadingList}
+								dropzoneProps={dropzoneProps}
+							/>
 						)}
 
 						<TablesList
 							files={groupedTables}
-							selected={selectedTable?.name}
-							onSelect={onSelect}
+							selected={selectedTableName}
+							onSelect={onSelectTable}
+							onDelete={onDeleteTable}
+							steps={steps}
 						/>
 					</InputDisplay>
 
@@ -70,15 +80,16 @@ export const PrepareDataFull: React.FC<{
 							headerCommandBar={inputHeaderCommandBar}
 							selectedMetadata={selectedMetadata}
 							table={selectedTable}
+							name={selectedTableName}
 						/>
 					</PreviewContainer>
 					<StepsContainer>
 						<SectionTitle>Steps</SectionTitle>
 						<StepsList
-							nextInputTable={nextInputTable}
+							nextInputTable={lastTableName}
 							onDelete={onDeleteStep}
 							onSave={onSaveStep}
-							onSelect={onSelect}
+							onSelect={onSelectTable}
 							store={store}
 							steps={steps}
 						/>
@@ -91,6 +102,7 @@ export const PrepareDataFull: React.FC<{
 				<OutputTable
 					headerCommandBar={outputHeaderCommandBar}
 					output={output}
+					lastTableName={lastTableName}
 					onTransform={onSaveStep}
 				/>
 			</OutputContainer>

@@ -17,6 +17,7 @@ import {
 	IContextualMenuItem,
 	IDropdownOption,
 } from '@fluentui/react'
+import { useBoolean } from '@fluentui/react-hooks'
 import { op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
@@ -438,4 +439,35 @@ const iconProps = {
 	bar: { iconName: 'BarChartVerticalFilterSolid' },
 	barChart: { iconName: 'BarChart4' },
 	stats: { iconName: 'AllApps' },
+}
+
+export function useDeleteConfirm(onDelete?: (args?: any) => void): {
+	toggleDeleteModalOpen: () => void
+	onConfirmDelete: () => void
+	onDeleteClicked: (args: any) => void
+	isDeleteModalOpen: boolean
+} {
+	const [deleteArg, setDeleteArg] = useState<any>()
+	const [isDeleteModalOpen, { toggle: toggleDeleteModalOpen }] =
+		useBoolean(false)
+
+	const onDeleteClicked = useCallback(
+		(index: number) => {
+			setDeleteArg(index)
+			toggleDeleteModalOpen()
+		},
+		[toggleDeleteModalOpen, setDeleteArg],
+	)
+
+	const onConfirmDelete = useCallback(() => {
+		onDelete && onDelete(deleteArg)
+		toggleDeleteModalOpen()
+	}, [toggleDeleteModalOpen, deleteArg, onDelete])
+
+	return {
+		isDeleteModalOpen,
+		onConfirmDelete,
+		toggleDeleteModalOpen,
+		onDeleteClicked,
+	}
 }

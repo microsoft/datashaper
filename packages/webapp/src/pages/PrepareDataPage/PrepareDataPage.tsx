@@ -10,8 +10,9 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const {
 		setSteps,
 		steps,
-		tables,
+		files,
 		handleDropFiles,
+		handleDeleteFile,
 		onChangeSpecification,
 		onResetSteps,
 		onResetFullData,
@@ -27,7 +28,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	return (
 		<PrepareDataFull
 			dropzoneProps={dropzone}
-			tables={tables}
+			onDeleteFile={handleDeleteFile}
+			files={files}
 			steps={steps}
 			onUpdateSteps={setSteps}
 		/>

@@ -99,34 +99,3 @@ export function useManageSteps(
 		onCreate,
 	}
 }
-
-export function useDeleteStep(onDelete?: (index?: number) => void): {
-	toggleDeleteModalOpen: () => void
-	onConfirmDelete: () => void
-	onDeleteClicked: (index: number) => void
-	isDeleteModalOpen: boolean
-} {
-	const [deleteIndex, setDeleteIndex] = useState<number>()
-	const [isDeleteModalOpen, { toggle: toggleDeleteModalOpen }] =
-		useBoolean(false)
-
-	const onDeleteClicked = useCallback(
-		(index: number) => {
-			setDeleteIndex(index)
-			toggleDeleteModalOpen()
-		},
-		[toggleDeleteModalOpen, setDeleteIndex],
-	)
-
-	const onConfirmDelete = useCallback(() => {
-		onDelete && onDelete(deleteIndex)
-		toggleDeleteModalOpen()
-	}, [toggleDeleteModalOpen, deleteIndex, onDelete])
-
-	return {
-		isDeleteModalOpen,
-		onConfirmDelete,
-		toggleDeleteModalOpen,
-		onDeleteClicked,
-	}
-}

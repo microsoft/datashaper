@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, TableContainer } from '@data-wrangling-components/core'
+import { Step } from '@data-wrangling-components/core'
 import { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import {
@@ -17,10 +18,16 @@ import {
 import { useDefaultStep } from './hooks'
 
 export const OutputTable: React.FC<{
-	output?: TableContainer
+	output?: ColumnTable
+	lastTableName?: string
 	onTransform?: (step: Step) => void
 	headerCommandBar?: IRenderFunction<IDetailsColumnProps>[]
-}> = memo(function OutputTable({ output, onTransform, headerCommandBar }) {
+}> = memo(function OutputTable({
+	output,
+	onTransform,
+	headerCommandBar,
+	lastTableName,
+}) {
 	const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =
 		useBoolean(false)
 	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures()
@@ -29,14 +36,14 @@ export const OutputTable: React.FC<{
 		changeTableFeatures,
 		tableFeatures,
 	)
-	const defaultStep = useDefaultStep(output)
+	const defaultStep = useDefaultStep(lastTableName)
 
 	return (
 		<>
-			{output && output?.table && (
+			{output && (
 				<>
 					<ColumnTransformModal
-						table={output?.table}
+						table={output}
 						step={defaultStep}
 						isOpen={isModalOpen}
 						onDismiss={hideModal}
@@ -44,7 +51,7 @@ export const OutputTable: React.FC<{
 					/>
 					<Container>
 						<ArqueroTableHeader
-							table={output?.table}
+							table={output}
 							farCommands={onTransform && commands}
 						/>
 						<ArqueroDetailsList
@@ -53,7 +60,7 @@ export const OutputTable: React.FC<{
 								commandBar: headerCommandBar ? headerCommandBar : undefined,
 							}}
 							showColumnBorders
-							table={output?.table}
+							table={output}
 							compact
 							isHeadersFixed
 						/>
@@ -64,7 +71,6 @@ export const OutputTable: React.FC<{
 	)
 })
 
-//TODO: fix this
 const Container = styled.div`
 	height: 90%;
 	width: 95%;

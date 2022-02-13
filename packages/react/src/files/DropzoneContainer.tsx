@@ -8,15 +8,15 @@ import styled from 'styled-components'
 import { Dropzone, DropzoneProps } from '@data-wrangling-components/react'
 
 export const DropzoneContainer: FC<{
+	loading: boolean
 	dropzoneProps: DropzoneProps
-}> = memo(function DropzoneContainer({ dropzoneProps }) {
+}> = memo(function DropzoneContainer({ dropzoneProps, loading }) {
 	const {
 		onDrop,
 		onDropAccepted,
 		onDropRejected,
 		acceptedFileTypes,
 		filesCount,
-		loading,
 		placeholder = 'Drop files here',
 		disabled,
 		dropzoneOptions,

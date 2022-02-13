@@ -3,14 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Step, TableContainer } from '@data-wrangling-components/core'
+import { Step } from '@data-wrangling-components/core'
 import { useMemo } from 'react'
 
-export function useDefaultStep(output?: TableContainer): Step {
+export function useDefaultStep(lastTableName?: string): Step {
 	return useMemo((): Step => {
 		return {
-			input: output?.name,
-			output: output?.name,
+			input: lastTableName,
+			output: lastTableName,
 		} as Step
-	}, [output])
+	}, [lastTableName])
 }

@@ -6,9 +6,9 @@ import { Step, TableStore } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { StepItem, TableTransformModal } from '../../'
+import { StepItem, TableTransformModal, useDeleteConfirm } from '../../'
 import { DialogConfirm } from '../../DialogConfirm'
-import { useDeleteStep, useManageModal, useManageSteps } from './hooks'
+import { useManageModal, useManageSteps } from './hooks'
 
 export const StepsList: React.FC<{
 	steps?: Step[]
@@ -53,7 +53,7 @@ export const StepsList: React.FC<{
 		toggleDeleteModalOpen,
 		isDeleteModalOpen,
 		onConfirmDelete,
-	} = useDeleteStep(onDelete)
+	} = useDeleteConfirm(onDelete)
 
 	return (
 		<Container>
