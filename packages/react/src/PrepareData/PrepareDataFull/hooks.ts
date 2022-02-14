@@ -22,6 +22,7 @@ export function useBusinessLogic(
 	files: BaseFile[],
 	onUpdateSteps: (steps: Step[]) => void,
 	onDeleteFile: (name: string) => void,
+	onUpdateOutputTable?: (table?: ColumnTable) => void,
 	steps?: Step[],
 ): {
 	groupedTables: GroupedTable[]
@@ -58,7 +59,9 @@ export function useBusinessLogic(
 
 	const output = useMemo((): ColumnTable | undefined => {
 		const name = pipeline?.last?.output
-		return storedTables.get(name)
+		const table = storedTables.get(name)
+		onUpdateOutputTable && onUpdateOutputTable(table)
+		return table
 	}, [pipeline, storedTables])
 
 	const lastTableName = useMemo((): string => {

@@ -10,6 +10,7 @@ import {
 	IDetailsColumnProps,
 	Separator,
 } from '@fluentui/react'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { TablesList, PreviewTable, OutputTable } from '..'
@@ -21,6 +22,7 @@ export const PrepareDataFull: React.FC<{
 	files: BaseFile[]
 	onUpdateSteps: (steps: Step[]) => void
 	onDeleteFile: (name: string) => void
+	onUpdateOutputTable?: (table?: ColumnTable) => void
 	steps?: Step[]
 	inputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
@@ -30,6 +32,7 @@ export const PrepareDataFull: React.FC<{
 	steps,
 	onUpdateSteps,
 	onDeleteFile,
+	onUpdateOutputTable,
 	inputHeaderCommandBar,
 	outputHeaderCommandBar,
 	dropzoneProps,
@@ -47,7 +50,13 @@ export const PrepareDataFull: React.FC<{
 		selectedMetadata,
 		lastTableName,
 		isLoadingList,
-	} = useBusinessLogic(files, onUpdateSteps, onDeleteFile, steps)
+	} = useBusinessLogic(
+		files,
+		onUpdateSteps,
+		onDeleteFile,
+		onUpdateOutputTable,
+		steps,
+	)
 
 	return (
 		<Container>
