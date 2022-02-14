@@ -20,8 +20,8 @@ We currently have three packages:
 
 - You need node and yarn installed
 - Run: `yarn`
-- Then: `yarn build:`
-- Run the webapp locally: `yarn start:`
+- Then: `yarn build`
+- Run the webapp locally: `yarn start`
 
 ## Usage
 
