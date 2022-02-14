@@ -26,7 +26,7 @@ import {
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { Struct } from 'arquero/dist/types/table/transformable'
-import React, { memo, useState, useEffect, useCallback, useMemo } from 'react'
+import { memo, useState, useEffect, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 /**
  * This is just a rudimentary page to load a large table for profiling the ArqueroDetailsList rendering.

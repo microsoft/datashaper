@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { FileMimeType } from '..'
-import { BaseFile, FileWithPath } from '../common'
-import { FileType, Json } from '../types'
+import { BaseFile, FileWithPath } from '../common/index.js'
+import { FileMimeType } from '../index.js'
+import { FileType, Json } from '../types.js'
 
 interface FileOptions {
 	name?: string
@@ -183,7 +183,7 @@ export function renameDuplicatedFiles(files: BaseFile[]): BaseFile[] {
 	}
 	return files.map(file => {
 		let name = cleanName(file.name)
-		const count = fileNames[name]
+		const count = fileNames[name] as number
 		--fileNames[name]
 		if (count > 1) {
 			const ext = extension(name)

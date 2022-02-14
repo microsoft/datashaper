@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '..'
-import { Step, Verb } from '../types'
-import { chain } from './verbs/chain'
+import { TableStore } from '../index.js'
+import { Step, Verb } from '../types.js'
+import { chain } from './verbs/chain.js'
 
 /**
  * This is a fairly simplistic processing engine that executes a series of table manipulations with our verbs.

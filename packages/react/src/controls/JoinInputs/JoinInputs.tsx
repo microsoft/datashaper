@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { JoinStep, Step } from '@data-wrangling-components/core'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { TableColumnDropdown, TableDropdown } from '..'
 import {

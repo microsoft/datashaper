@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { FileCollection } from '@data-wrangling-components/utilities'
+import type { FileCollection } from '@data-wrangling-components/utilities'
 import type { FileRejection, DropzoneOptions } from 'react-dropzone'
 export type { FileRejection, DropzoneOptions } from 'react-dropzone'
 

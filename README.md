@@ -2,26 +2,30 @@
 
 This project provides a collection of web components for doing lightweight data wrangling.
 
-There are three goals of the project:
+There are four goals of the project:
 
 1.  Create a shareable client/server schema for serialized wrangling instructions
 2.  Maintain an implementation of a basic client-side wrangling engine (largely based on [Arquero](https://github.com/uwdata/arquero))
-3.  Provide some reusable React components so wrangling operations can be incorporated into webapps easily.
+3.  Maintain a python implementation using common wrangling libraries (e.g., [pandas](https://pandas.pydata.org/)) for backend or data science deployments
+4.  Provide some reusable React components so wrangling operations can be incorporated into webapps easily.
 
-The first goal is nascent, and currently covered by typings in the core package. However, our intent is to eventually extract a JSONSchema specification that is more readily consumable by cross-platform services. In addition, our API largely mirrors Arquero's for now; we'll review for areas of parameter commonality and make some generalizations in the future.
+The first goal is nascent, and currently covered by TypeScript typings in the core javascript package. However, our intent is to eventually extract a JSONSchema specification that is more readily consumable by cross-platform services. In addition, our API largely mirrors Arquero's for now; we'll review for areas of parameter commonality and make some generalizations in the future.
 
-We currently have three packages:
+Individual documentation for the JavaScript and Python implementations can be found in their respective folders. Broad documentation about building pipelines and the available verbs is available in the [docs](docs) folder
+
+We currently have four packages:
 
 - [core](packages/core) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables. The pipeline is essentially an implementation of async chain-of-command, executing verbs serially based on an input table context and set of step configurations.
 - [react](packages/react) - this is a set of React components for each verb that you can include in web apps that enable tranformation pipeline building.
+- [utilities](packages/utilities) - this is a set of helpers for working with files, etc., to ease building data wrangling applications.
 - [webapp](packages/webapp) - this is an example/test webapp that includes all of the verb components and allows creation, execution, and saving of pipeline JSON files.
 
 ## Building
 
 - You need node and yarn installed
 - Run: `yarn`
-- Then: `yarn build:`
-- Run the webapp locally: `yarn start:`
+- Then: `yarn build`
+- Run the webapp locally: `yarn start`
 
 ## Usage
 

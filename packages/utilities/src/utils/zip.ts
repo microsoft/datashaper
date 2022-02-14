@@ -11,7 +11,7 @@ import {
 	ZipWriter,
 	Data64URIWriter,
 } from '@zip.js/zip.js'
-import { FileWithPath } from '../common'
+import { FileWithPath } from '../common/index.js'
 
 export async function getFilesFromZip(zipFile: Blob): Promise<FileWithPath[]> {
 	const reader = new BlobReader(zipFile)

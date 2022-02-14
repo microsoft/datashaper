@@ -4,8 +4,8 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { SampleArgs, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { SampleArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero sample to extract random rows.

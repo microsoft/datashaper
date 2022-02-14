@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FieldAggregateOperation } from '../../../../core'
-import { Step, Verb } from '../../types'
-import { rollup } from '../verbs/rollup'
-import { TestStore } from './TestStore'
+import { Step, Verb, FieldAggregateOperation } from '../../types.js'
+import { rollup } from '../verbs/rollup.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for rollup verb', () => {
 	test('rollup test with count operation', () => {

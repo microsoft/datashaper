@@ -16,7 +16,7 @@ import {
 	TextField,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable, useColumnType } from '../../common'
 import { ColumnValueDropdown } from '../../controls'

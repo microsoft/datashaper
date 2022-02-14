@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
-import { dedupe } from '../verbs/dedupe'
-import { TestStore } from './TestStore'
+import { Step, Verb } from '../../types.js'
+import { dedupe } from '../verbs/dedupe.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for dedupe verb', () => {
 	test('dedupe test with column', () => {

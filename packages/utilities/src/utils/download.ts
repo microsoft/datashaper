@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { CSVFormatOptions } from 'arquero/dist/types/format/to-csv'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { CSVFormatOptions } from 'arquero/dist/types/format/to-csv'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 /**
  * Downloads a csv copy of a table

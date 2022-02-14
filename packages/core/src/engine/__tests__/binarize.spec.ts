@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NumericComparisonOperator, FilterCompareType } from '../../../src'
-import { Step, StringComparisonOperator, Verb } from '../../types'
-import { binarize } from '../verbs/binarize'
-import { TestStore } from './TestStore'
+import { NumericComparisonOperator, FilterCompareType } from '../../index.js'
+import { Step, StringComparisonOperator, Verb } from '../../types.js'
+import { binarize } from '../verbs/binarize.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for binarize verb', () => {
 	test('binarize test with NumericComparisonOperator Gte', () => {

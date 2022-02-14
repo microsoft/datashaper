@@ -4,7 +4,7 @@
  */
 
 import { useDimensions } from '@essex-js-toolkit/hooks'
-import React, { memo, useMemo, useRef } from 'react'
+import { memo, useMemo, useRef } from 'react'
 import styled from 'styled-components'
 import { CommandBar } from './CommandBar'
 import { TableName } from './TableName'

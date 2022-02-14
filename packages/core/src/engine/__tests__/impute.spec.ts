@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
-import { impute } from '../verbs/impute'
-import { TestStore } from './TestStore'
+import { Step, Verb } from '../../types.js'
+import { impute } from '../verbs/impute.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for impute verb', () => {
 	test('impute test with string value', () => {

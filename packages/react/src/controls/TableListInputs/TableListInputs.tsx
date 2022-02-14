@@ -8,7 +8,7 @@ import {
 	Step,
 } from '@data-wrangling-components/core'
 import { ActionButton, IconButton } from '@fluentui/react'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { TableDropdown } from '..'
 import { LeftAlignedRow, useLoadTable } from '../../common'

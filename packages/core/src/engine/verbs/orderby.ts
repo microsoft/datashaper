@@ -4,8 +4,8 @@
  */
 import { desc } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { OrderbyArgs, SortDirection, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { OrderbyArgs, SortDirection, Step } from '../../types.js'
 
 /**
  * Executes an arquero orderby.

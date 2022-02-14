@@ -3,8 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, TableStore } from '@data-wrangling-components/core'
-
-import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import {
 	withInputColumnDropdown,
@@ -13,6 +11,7 @@ import {
 	selectStepComponent,
 	selectStepDescription,
 } from '@data-wrangling-components/react'
+import { memo, useCallback, useMemo } from 'react'
 
 interface StepComponentProps {
 	step: Step

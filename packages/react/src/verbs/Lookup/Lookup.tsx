@@ -4,7 +4,7 @@
  */
 import { LookupStep } from '@data-wrangling-components/core'
 import { Label } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedColumn } from '../../common'
 import { ColumnListInputs, JoinInputs } from '../../controls'

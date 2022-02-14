@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { RollupStep } from '@data-wrangling-components/core'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { FieldAggregateOperationDropdown } from '..'
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common'

@@ -9,7 +9,7 @@ import {
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
 import { set } from 'lodash'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import {
 	NumericComparisonOperatorDropdown,
 	StringComparisonOperatorDropdown,

@@ -11,8 +11,8 @@ import {
 	IDetailsListStyles,
 	ConstrainMode,
 } from '@fluentui/react'
-import { RowObject } from 'arquero/dist/types/table/table'
-import React, { memo, useEffect, useMemo, useState } from 'react'
+import type { RowObject } from 'arquero/dist/types/table/table'
+import { memo, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { groupBuilder } from '../common/'
 import {
@@ -28,7 +28,7 @@ import {
 	useTableMetadata,
 	useSubsetTable,
 } from './hooks'
-import { ArqueroDetailsListProps, DetailsListFeatures } from '.'
+import type { ArqueroDetailsListProps, DetailsListFeatures } from '.'
 
 /**
  * Renders an arquero table using a fluent DetailsList.

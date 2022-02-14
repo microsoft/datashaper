@@ -5,7 +5,7 @@
 
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { FetchArgs, Step, TableStore } from '../..'
+import { FetchArgs, Step, TableStore } from '../../index.js'
 
 /**
  * Executes an arquero loadCSV

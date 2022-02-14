@@ -8,7 +8,7 @@ import {
 } from '@data-wrangling-components/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import { Table } from './Table'
 

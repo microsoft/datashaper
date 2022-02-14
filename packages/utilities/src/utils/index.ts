@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export * from './arquero'
-export * from './download'
-export * from './files'
-export * from './zip'
+export * from './arquero.js'
+export * from './download.js'
+export * from './files.js'
+export * from './zip.js'
