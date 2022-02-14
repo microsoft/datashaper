@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { Verb, Step, TableStore } from '../..'
-import { run } from '../run'
+import { Verb, Step, TableStore } from '../../index.js'
+import { run } from '../run.js'
 
 describe('run', () => {
 	const input = table({

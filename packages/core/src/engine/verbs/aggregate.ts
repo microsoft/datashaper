@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { AggregateArgs, Step } from '../../types'
-import { singleRollup } from '../util'
+import { TableStore } from '../../index.js'
+import { AggregateArgs, Step } from '../../types.js'
+import { singleRollup } from '../util/index.js'
 
 /**
  * Executes an aggregate, which is an arquero groupby + rollup.

@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
-import { recode } from '../verbs/recode'
-import { TestStore } from './TestStore'
+import { Step, Verb } from '../../types.js'
+import { recode } from '../verbs/recode.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for recode verb', () => {
 	test('recode test with string value', () => {

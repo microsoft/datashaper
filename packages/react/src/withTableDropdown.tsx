@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleDropdownChange } from './common'
 import { TableDropdown } from './controls'
-import { HOCFunction, StepComponentProps } from './types'
+import type { HOCFunction, StepComponentProps } from './types'
 
 /**
  * Higher order component generator to wrap a Step in the input table dropdown.

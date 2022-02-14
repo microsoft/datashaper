@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
-import { groupby } from '../verbs/groupby'
-import { TestStore } from './TestStore'
+import { Step, Verb } from '../../types.js'
+import { groupby } from '../verbs/groupby.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for groupby verb', () => {
 	test('groupby test', () => {

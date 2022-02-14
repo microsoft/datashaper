@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { Sparkline } from '../../charts'
 import { useCellDimensions } from '../hooks'
 import { getValue } from '../util'

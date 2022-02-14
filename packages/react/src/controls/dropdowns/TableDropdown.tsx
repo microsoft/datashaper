@@ -4,7 +4,7 @@
  */
 import { TableStore } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { useTableOptions } from '../../common'
 import { tableDropdownStyles } from '../styles'
 

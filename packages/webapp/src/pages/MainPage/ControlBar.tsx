@@ -21,10 +21,10 @@ import {
 	IDropdownStyles,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { ExamplesDropdown } from './ExamplesDropdown'
-import { useLoadSpecFile, useLoadTableFiles } from './hooks'
+import { useLoadSpecFile, useLoadTableFiles } from './hooks.js'
 import { FileDrop } from '~components/FileDrop'
 
 const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {

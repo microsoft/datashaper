@@ -4,7 +4,7 @@
  */
 import { SampleStep } from '@data-wrangling-components/core'
 import { format } from 'd3-format'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { VerbDescription } from '../..'
 import { StepDescriptionProps } from '../../types'
 

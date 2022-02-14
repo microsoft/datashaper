@@ -4,8 +4,8 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { Step } from '../../types.js'
 
 /**
  * Executes an arquero ungroup operation.

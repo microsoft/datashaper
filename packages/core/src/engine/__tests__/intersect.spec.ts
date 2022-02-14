@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
-import { intersect } from '../verbs/intersect'
-import { TestStore } from './TestStore'
+import { Step, Verb } from '../../types.js'
+import { intersect } from '../verbs/intersect.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for intersect verb', () => {
 	test('intersect test with no duplicates', () => {

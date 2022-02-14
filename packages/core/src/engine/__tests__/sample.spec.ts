@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
-import { sample } from '../verbs/sample'
-import { TestStore } from './TestStore'
+import { Step, Verb } from '../../types.js'
+import { sample } from '../verbs/sample.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for sample verb', () => {
 	test('sample test with percentage', () => {

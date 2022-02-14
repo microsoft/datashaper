@@ -6,8 +6,8 @@ import {
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../../types'
-import { compare } from '../util/expressions'
+} from '../../types.js'
+import { compare } from '../util/expressions.js'
 
 describe('test-expressions', () => {
 	test('numeric value equals', () => {

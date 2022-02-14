@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { isArray } from 'lodash'
-import { Pipeline, TableStore } from '../'
-import { Step } from '../types'
+import isArray from 'lodash-es/isArray.js'
+import { Pipeline, TableStore } from '../index.js'
+import { Step } from '../types.js'
 
 /**
  * This is a utility to execute a series of pipeline

@@ -4,8 +4,8 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { DedupeArgs, TableStore } from '../..'
-import { Step } from '../../types'
+import { DedupeArgs, TableStore } from '../../index.js'
+import { Step } from '../../types.js'
 
 /**
  * Executes an arquero dedupe operation.

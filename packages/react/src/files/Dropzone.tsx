@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useThematic } from '@thematic/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { useDropzone } from './hooks'
 import type { DzProps } from './types'
 

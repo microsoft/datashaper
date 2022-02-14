@@ -4,8 +4,8 @@
  */
 import { op, bin as aqbin } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore, BinArgs, BinStrategy, Step } from '../..'
-import { fixedBinCount, fixedBinStep } from '../util'
+import { TableStore, BinArgs, BinStrategy, Step } from '../../index.js'
+import { fixedBinCount, fixedBinStep } from '../util/index.js'
 
 /**
  * Executes a bin aggregate, which effectively truncates values to a bin boundary for histograms.

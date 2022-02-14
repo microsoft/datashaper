@@ -5,7 +5,7 @@
 import { Dropdown, IDropdownProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { useTableColumnOptions } from '../../common'
 import { columnDropdownStyles } from '../styles'
 

@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FieldAggregateOperation } from '../../../../core'
-import { Step, Verb } from '../../types'
-import { aggregate } from '../verbs/aggregate'
-import { TestStore } from './TestStore'
+import { Step, Verb, FieldAggregateOperation } from '../../types.js'
+import { aggregate } from '../verbs/aggregate.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for aggregate verb', () => {
 	test('aggregate test with count operation', () => {

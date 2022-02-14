@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { isNil } from 'lodash'
+import isNil from 'lodash-es/isNil.js'
 
 const identity = (d: any) => d
 const str = (d: any) => (isNil(d) ? '' : `${d}`)

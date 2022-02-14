@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { Json } from '../types'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { Json } from '../types.js'
 import {
 	getDsvFileContent,
 	getJsonFileContentFromFile,
@@ -16,15 +16,15 @@ import {
 	isZipFile,
 	loadTable,
 	getDataURL,
-} from '../utils'
-import { FileWithPath } from './FileWithPath'
+} from '../utils/index.js'
+import { FileWithPath } from './FileWithPath.js'
 
 export class BaseFile extends FileWithPath {
 	constructor(private file: FileWithPath) {
 		super(file, file.name, file.path)
 	}
 
-	get name(): string {
+	override get name(): string {
 		return this.file.name
 	}
 

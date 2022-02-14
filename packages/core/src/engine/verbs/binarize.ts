@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { BinarizeArgs, Step } from '../../types'
-import { compare } from '../util'
+import { TableStore } from '../../index.js'
+import { BinarizeArgs, Step } from '../../types.js'
+import { compare } from '../util/index.js'
 
 /**
  * Executes an arquero derive where the output is a 1 or 0.

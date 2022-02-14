@@ -17,6 +17,7 @@ module.exports = {
 			...configure(),
 			displayName: 'node',
 			testEnvironment: 'node',
+			extensionsToTreatAsEsm: ['.ts'],
 			testMatch: ['**/__tests__/**/*.spec.ts'],
 		},
 	],

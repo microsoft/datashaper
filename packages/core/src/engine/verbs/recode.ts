@@ -6,8 +6,8 @@
 import { escape, op } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { ExprObject } from 'arquero/dist/types/table/transformable'
-import { TableStore } from '../..'
-import { RecodeArgs, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { RecodeArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero derive to map a list of values to new values.

@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb, SetOp } from '../../types'
-import { set } from '../util/sets'
-import { TestStore } from './TestStore'
+import { Step, Verb, SetOp } from '../../types.js'
+import { set } from '../util/sets.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for set util', () => {
 	test('concat test', () => {

@@ -4,7 +4,7 @@
  */
 
 import { useThematic } from '@thematic/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { useCellDimensions, useFormattedNumber } from '../hooks'
 import { getValue } from '../util'
 import { MagnitudeCellProps } from './types'

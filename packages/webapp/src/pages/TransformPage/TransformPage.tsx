@@ -12,7 +12,7 @@ import { IContextualMenuItem } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useState, useEffect, useMemo, useCallback } from 'react'
+import { memo, useState, useEffect, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
 
 /**

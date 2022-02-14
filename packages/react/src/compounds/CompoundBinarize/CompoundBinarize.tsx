@@ -2,14 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinarizeStep } from '@data-wrangling-components/core'
+import type { BinarizeStep } from '@data-wrangling-components/core'
 import { ActionButton, TextField } from '@fluentui/react'
-import React, { memo, useMemo, useCallback, useState } from 'react'
+import { memo, useMemo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useLoadTable } from '../../common'
 import { FilterInputs, TableColumnDropdown } from '../../controls'
 import { columnDropdownStyles } from '../../controls/styles'
-import { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types'
 import {
 	createBinarize,
 	defaults,
