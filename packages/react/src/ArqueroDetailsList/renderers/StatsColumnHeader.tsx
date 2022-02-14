@@ -5,7 +5,7 @@
 import { ColumnStats, formatIfNumber } from '@data-wrangling-components/core'
 import { useThematic } from '@thematic/react'
 import { upperFirst } from 'lodash'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { StatsColumnType } from '../types'
 import { RichHeaderProps } from './types'
 

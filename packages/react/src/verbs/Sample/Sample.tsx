@@ -5,7 +5,7 @@
 import { SampleStep } from '@data-wrangling-components/core'
 import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleSpinButtonChange } from '../../common'
 import { columnDropdownStyles } from '../../controls/styles'

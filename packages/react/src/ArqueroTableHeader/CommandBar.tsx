@@ -9,7 +9,7 @@ import {
 } from '@fluentui/react'
 import { Application } from '@thematic/core'
 import { useThematic } from '@thematic/react'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { HEIGHT } from './constants'
 

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'

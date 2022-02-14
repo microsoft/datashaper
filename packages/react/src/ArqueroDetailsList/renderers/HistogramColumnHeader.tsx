@@ -8,7 +8,7 @@ import {
 	formatIfNumber,
 } from '@data-wrangling-components/core'
 import { TooltipHost } from '@fluentui/react'
-import React, { memo, useMemo, useCallback, useState } from 'react'
+import { memo, useMemo, useCallback, useState } from 'react'
 import { Sparkbar } from '../../charts'
 import { useCellDimensions } from '../hooks'
 import { RichHeaderProps } from './types'

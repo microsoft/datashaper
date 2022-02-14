@@ -4,7 +4,7 @@
  */
 import { BinStep, BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, Position, SpinButton } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { Switch, Case, If, Then } from 'react-if'
 import styled from 'styled-components'
 import {

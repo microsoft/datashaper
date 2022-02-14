@@ -5,7 +5,7 @@
 
 import { IColumn } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { useCellDimensions } from '../hooks'
 import { getValue } from '../util'
 import { ColumnCellProps, Dimensions } from './types'
