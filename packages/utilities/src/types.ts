@@ -12,6 +12,7 @@ export enum FileType {
 	zip = 'zip',
 	arrow = 'arrow',
 	table = 'table',
+	ipynb = 'ipynb',
 }
 
 export enum FileMimeType {
@@ -22,6 +23,7 @@ export enum FileMimeType {
 	zip = 'application/x-zip-compressed',
 	arrow = 'application/x-arrow',
 	excel = 'application/vnd.ms-excel',
+	ipynb = 'application/x-ipynb+json',
 	folder = '',
 	'text/csv' = 'csv',
 	'text/tab-separated-values' = 'tsv',
@@ -30,6 +32,7 @@ export enum FileMimeType {
 	'application/x-zip-compressed' = 'zip',
 	'application/x-arrow' = 'arrow',
 	'application/vnd.ms-excel' = 'xlsx',
+	'application/x-ipynb+json' = 'ipynb',
 }
 
 export enum FileExtensions {
@@ -39,4 +42,5 @@ export enum FileExtensions {
 	json = '.json',
 	zip = '.zip',
 	arrow = '.arrow',
+	ipynb = '.ipynb',
 }

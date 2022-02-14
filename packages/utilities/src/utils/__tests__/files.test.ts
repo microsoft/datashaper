@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { isDsvFile, isJsonFile, isZipFile } from '../index.js'
-import { BaseFile, FileWithPath } from '../../common/index.js'
+import { guessFileType, isDsvFile, isJsonFile, isZipFile } from '..'
+import { BaseFile, FileWithPath } from '../../common'
 import {
 	extension,
 	getDataURL,
@@ -46,6 +46,27 @@ describe('guess delimiter file functions', () => {
 		const filename = 'filename.txt'
 		const expected = '\t'
 		const result = guessDelimiter(filename)
+		expect(result).toEqual(expected)
+	})
+})
+
+describe('guess file type', () => {
+	it('guess file type default', () => {
+		const filename = 'filename.pdf'
+		const expected = 'text/plain'
+		const result = guessFileType(filename)
+		expect(result).toEqual(expected)
+	})
+	it('guess file type with no extension', () => {
+		const filename = 'filename'
+		const expected = 'text/plain'
+		const result = guessFileType(filename)
+		expect(result).toEqual(expected)
+	})
+	it('guess file type json', () => {
+		const filename = 'filename.json'
+		const expected = 'application/json'
+		const result = guessFileType(filename)
 		expect(result).toEqual(expected)
 	})
 })

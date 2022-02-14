@@ -3,13 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { FileMimeType } from '../types.js'
+import { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import { FileType, Json } from '../types.js'
 import {
 	createFileWithPath,
-	extension,
 	fetchFile,
 	getFilesFromZip,
 	isZipFile,
@@ -21,10 +19,15 @@ import {
 import { BaseFile } from './BaseFile.js'
 import { FileWithPath } from './FileWithPath.js'
 
+interface Config {
+	supportedFilesOnly?: boolean
+}
 export class FileCollection {
 	private _files: BaseFile[] = []
-	private supportedFilesOnly = false
 	private _name = ''
+	private _config: Config = {
+		supportedFilesOnly: false,
+	}
 
 	set name(name: string) {
 		const nonExtName = name.replace(/\.[^/.]+$/, '')
@@ -33,6 +36,10 @@ export class FileCollection {
 
 	get name(): string {
 		return this._name
+	}
+
+	set config(config: Config) {
+		this._config = { ...this._config, ...config }
 	}
 
 	private async _addFromZip(file: FileWithPath | File) {
@@ -46,10 +53,7 @@ export class FileCollection {
 	private async _addFile(file: FileWithPath | File): Promise<void> {
 		const { name } = file
 		if (file instanceof File) {
-			file = createFileWithPath(file, {
-				name,
-				type: FileMimeType[extension(name) as keyof typeof FileMimeType],
-			})
+			file = createFileWithPath(file, { name })
 		}
 
 		if (isZipFile(name)) {
@@ -61,10 +65,7 @@ export class FileCollection {
 	private async _addFromUrl(fileUrl: string): Promise<void> {
 		const name = fileUrl.split('/').pop() || ''
 		const blob = await fetchFile(fileUrl)
-		const file = createFileWithPath(blob, {
-			name,
-			type: FileMimeType[extension(name) as keyof typeof FileMimeType],
-		})
+		const file = createFileWithPath(blob, { name })
 		return this._addFile(file)
 	}
 
@@ -89,14 +90,10 @@ export class FileCollection {
 	}
 
 	private filtered(files = this._files): BaseFile[] {
-		if (this.supportedFilesOnly) {
+		if (this._config.supportedFilesOnly) {
 			return files.filter(file => file.isSupported())
 		}
 		return files
-	}
-
-	showOnlySupportedFiles(value: boolean): void {
-		this.supportedFilesOnly = value
 	}
 
 	list(type?: FileType): BaseFile[] {
