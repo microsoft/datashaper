@@ -7,5 +7,9 @@
 	"prettier.prettierPath": ".yarn/sdks/prettier/index.js",
 	"typescript.tsdk": ".yarn/sdks/typescript/lib",
 	"typescript.enablePromptUseWorkspaceTsdk": true,
-	"appService.showBuildDuringDeployPrompt": false
+	"appService.showBuildDuringDeployPrompt": false,
+	"javascript.preferences.importModuleSpecifier": "relative",
+	"javascript.preferences.importModuleSpecifierEnding": "js",
+	"typescript.preferences.importModuleSpecifier": "relative",
+	"typescript.preferences.importModuleSpecifierEnding": "js"
 }
