@@ -6,10 +6,10 @@ import { Step } from '@data-wrangling-components/core'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { ArqueroDetailsList, GroupedTable, useDeleteConfirm } from '../../'
-import { DialogConfirm } from '../../DialogConfirm'
 import { useGroupHeader } from './GroupHeader'
 import { useRenderRow } from './RenderTableRow'
 import { useColumns, useGroupedTable, useIsTableSelected } from './hooks'
+import { DialogConfirm } from '@essex-js-toolkit/themed-components'
 
 export const TablesList: React.FC<{
 	files: GroupedTable[]

@@ -44,19 +44,6 @@ export function useBusinessLogic(): {
 				fileCollection.add('data/products.csv'),
 			])
 			updateFileCollection(fileCollection)
-
-			const steps = [
-				{
-					verb: 'join',
-					input: 'companies.csv',
-					output: 'join-1',
-					args: {
-						other: 'products.csv',
-						on: ['ID'],
-					},
-				},
-			]
-			setSteps(steps)
 		}
 		f()
 	}, [fileCollection, updateFileCollection])

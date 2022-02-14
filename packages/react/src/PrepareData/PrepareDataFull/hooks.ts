@@ -133,7 +133,6 @@ export function useBusinessLogic(
 		store,
 	)
 
-	//if delete table or step that is selected, set as null
 	const onDeleteTable = useOnDeleteTable(
 		store,
 		setSelectedTable,

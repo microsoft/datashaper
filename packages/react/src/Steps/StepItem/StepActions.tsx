@@ -2,9 +2,31 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { Step } from '@data-wrangling-components/core'
 import { IButtonStyles, IconButton, TooltipHost } from '@fluentui/react'
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
+export function useStepActions(
+	step: Step,
+	index: number,
+	onEdit?: (step: Step, index: number) => void,
+	onDelete?: (index: number) => void,
+	onDuplicate?: (step: Step) => void,
+	onSelect?: (name: string) => void,
+) {
+	return useMemo(
+		() => (
+			<StepActions
+				onEdit={() => onEdit && onEdit(step, index)}
+				onDelete={() => onDelete && onDelete(index)}
+				onDuplicate={() => onDuplicate && onDuplicate(step)}
+				onSelect={() => onSelect && onSelect(step?.output)}
+			/>
+		),
+		[step, index, onEdit, onDelete, onDuplicate, onSelect],
+	)
+}
 
 export const StepActions: React.FC<{
 	onEdit?: () => void

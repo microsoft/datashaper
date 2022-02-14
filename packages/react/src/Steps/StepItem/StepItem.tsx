@@ -6,7 +6,7 @@ import { Step } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { selectStepDescription } from '../../selectStepDescription'
-import { StepActions } from './StepActions'
+import { useStepActions } from './StepActions'
 
 export const StepItem: React.FC<{
 	step: Step
@@ -24,17 +24,14 @@ export const StepItem: React.FC<{
 	onSelect,
 }) {
 	const Description = useMemo(() => selectStepDescription(step), [step])
-
-	const Actions = useMemo((): any => {
-		return (
-			<StepActions
-				onEdit={() => onEdit && onEdit(step, index)}
-				onDelete={() => onDelete && onDelete(index)}
-				onDuplicate={() => onDuplicate && onDuplicate(step)}
-				onSelect={() => onSelect && onSelect(step?.output)}
-			/>
-		)
-	}, [onDelete, onEdit, onDuplicate, onSelect, index, step])
+	const Actions = useStepActions(
+		step,
+		index,
+		onEdit,
+		onDelete,
+		onDuplicate,
+		onSelect,
+	)
 
 	return (
 		<Container>

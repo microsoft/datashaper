@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, TableStore } from '@data-wrangling-components/core'
+import { DialogConfirm } from '@essex-js-toolkit/themed-components'
 import { DefaultButton } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { StepItem, TableTransformModal, useDeleteConfirm } from '../../'
-import { DialogConfirm } from '../../DialogConfirm'
 import { useManageModal, useManageSteps } from './hooks'
 
 export const StepsList: React.FC<{
@@ -67,29 +67,6 @@ export const StepsList: React.FC<{
 				/>
 			)}
 
-			{steps &&
-				steps.map((_step, index) => {
-					return (
-						<StepItem
-							onEdit={onEdit}
-							onDelete={onDeleteClicked}
-							onDuplicate={onDuplicate}
-							onSelect={onSelect}
-							key={index}
-							step={_step}
-							index={index}
-						/>
-					)
-				})}
-
-			{onSave && (
-				<ButtonContainer>
-					<DefaultButton iconProps={iconProps.add} onClick={showTableModal}>
-						Add step
-					</DefaultButton>
-				</ButtonContainer>
-			)}
-
 			<TableTransformModal
 				step={step}
 				headerText={modalHeaderText}
@@ -100,6 +77,28 @@ export const StepsList: React.FC<{
 				store={store}
 				onDismiss={onDismissClearTableModal}
 			/>
+
+			{steps?.map((_step, index) => {
+				return (
+					<StepItem
+						onEdit={onEdit}
+						onDelete={onDeleteClicked}
+						onDuplicate={onDuplicate}
+						onSelect={onSelect}
+						key={index}
+						step={_step}
+						index={index}
+					/>
+				)
+			})}
+
+			{onSave && (
+				<ButtonContainer>
+					<DefaultButton iconProps={iconProps.add} onClick={showTableModal}>
+						Add step
+					</DefaultButton>
+				</ButtonContainer>
+			)}
 		</Container>
 	)
 })

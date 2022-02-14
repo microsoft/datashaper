@@ -61,6 +61,7 @@ export function useManageSteps(
 
 	const onEdit = useCallback(
 		(_step: Step, index: number) => {
+			console.log('_step', _step)
 			setStep(_step)
 			setStepIndex(index)
 			showTableModal()

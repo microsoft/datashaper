@@ -64,6 +64,7 @@ export const OutputTable: React.FC<{
 								table={output}
 								compact
 								isHeadersFixed
+								isSortable
 							/>
 						</TableContainer>
 					</Container>
