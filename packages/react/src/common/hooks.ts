@@ -416,16 +416,16 @@ export function useToggleTableFeatures(
 	>(features ?? {})
 
 	const changeTableFeatures = useCallback(
-		(feature: string) => {
-			setTableFeatures(prev => {
-				return {
-					...prev,
-					[feature]: !prev[feature],
-				}
+		(propName: string) => {
+			const key = propName as keyof DetailsListFeatures
+			setTableFeatures({
+				...tableFeatures,
+				[key]: !tableFeatures[key],
 			})
 		},
-		[setTableFeatures],
+		[tableFeatures, setTableFeatures],
 	)
+
 	return {
 		changeTableFeatures,
 		tableFeatures,
