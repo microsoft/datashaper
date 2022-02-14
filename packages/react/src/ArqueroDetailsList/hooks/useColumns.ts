@@ -93,12 +93,12 @@ export function useColumns(
 		includeAllColumns,
 		visibleColumns,
 	)
+	//get column width based on min value or on commandBar item passed
 	const columnMinWidth = useCountMinWidth(features.commandBar)
 
 	return useMemo(() => {
 		const columnMap = reduce(columns)
 		return names.map(name => {
-			// const commands = features.commandBar?.map(x => x())
 			const column = columnMap[name] || {
 				key: name,
 				name,

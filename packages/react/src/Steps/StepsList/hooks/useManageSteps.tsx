@@ -4,31 +4,9 @@
  */
 
 import { Step } from '@data-wrangling-components/core'
-import { useBoolean } from '@fluentui/react-hooks'
-import { useCallback, useMemo, useState } from 'react'
+import { useState, useCallback, useMemo } from 'react'
+import { useOnEditStep, useOnDuplicateStep } from './'
 
-export function useManageModal(): {
-	hideTableModal: () => void
-	toggleDuplicatingStep: () => void
-	showTableModal: () => void
-	isTableModalOpen: boolean
-	isDuplicatingStep: boolean
-} {
-	const [
-		isTableModalOpen,
-		{ setTrue: showTableModal, setFalse: hideTableModal },
-	] = useBoolean(false)
-	const [isDuplicatingStep, { toggle: toggleDuplicatingStep }] =
-		useBoolean(false)
-
-	return {
-		hideTableModal,
-		isTableModalOpen,
-		showTableModal,
-		isDuplicatingStep,
-		toggleDuplicatingStep,
-	}
-}
 export function useManageSteps(
 	showTableModal: () => void,
 	toggleDuplicatingStep: () => void,
@@ -38,8 +16,8 @@ export function useManageSteps(
 ): {
 	step: Step | undefined
 	onDismissClearTableModal: () => void
-	onDuplicate: (step: Step) => void
-	onEdit: (step: Step, index: number) => void
+	onDuplicateClicked: (step: Step) => void
+	onEditClicked: (step: Step, index: number) => void
 	stepIndex: number | undefined
 	modalHeaderText: string
 	onCreate: (step: Step, index?: number) => void
@@ -59,27 +37,11 @@ export function useManageSteps(
 		[step, isDuplicatingStep],
 	)
 
-	const onEdit = useCallback(
-		(_step: Step, index: number) => {
-			console.log('_step', _step)
-			setStep(_step)
-			setStepIndex(index)
-			showTableModal()
-		},
-		[setStep, showTableModal, setStepIndex],
-	)
-
-	const onDuplicate = useCallback(
-		(_step: Step) => {
-			toggleDuplicatingStep()
-			const dupStep = {
-				..._step,
-				output: `${_step.output}-dup`,
-			}
-			setStep(dupStep)
-			showTableModal()
-		},
-		[setStep, showTableModal, toggleDuplicatingStep],
+	const onEditClicked = useOnEditStep(setStep, setStepIndex, showTableModal)
+	const onDuplicateClicked = useOnDuplicateStep(
+		setStep,
+		toggleDuplicatingStep,
+		showTableModal,
 	)
 
 	const onCreate = useCallback(
@@ -92,9 +54,9 @@ export function useManageSteps(
 
 	return {
 		step,
-		onDuplicate,
+		onDuplicateClicked,
 		onDismissClearTableModal,
-		onEdit,
+		onEditClicked,
 		stepIndex,
 		modalHeaderText,
 		onCreate,

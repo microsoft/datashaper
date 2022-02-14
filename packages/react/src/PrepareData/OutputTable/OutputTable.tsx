@@ -13,8 +13,8 @@ import {
 	ArqueroTableHeader,
 	ColumnTransformModal,
 	useCommonCommands,
-	useToggleTableFeatures,
 } from '../../'
+import { useToggleTableFeatures } from '../hooks'
 import { useDefaultStep } from './hooks'
 
 export const OutputTable: React.FC<{

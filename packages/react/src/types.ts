@@ -75,7 +75,6 @@ export interface StepDescriptionProps extends StepDependent {
 export enum TableGroup {
 	Input = 'input',
 	Intermediary = 'intermediary',
-	Output = 'output',
 }
 export interface GroupedTable extends TableContainer {
 	group: TableGroup

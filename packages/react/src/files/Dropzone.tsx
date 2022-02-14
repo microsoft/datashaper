@@ -5,8 +5,18 @@
 import { useThematic } from '@thematic/react'
 import React, { memo, useMemo } from 'react'
 import { useDropzone } from './hooks'
-import { DropzoneProps } from './types'
+import type { DzProps } from './types'
 
+interface DropzoneProps extends DzProps {
+	placeholder?: string
+	styles?: {
+		container?: React.CSSProperties
+		dragReject?: React.CSSProperties
+		placeholder?: React.CSSProperties
+		dragZone?: React.CSSProperties
+	}
+	disabled?: boolean
+}
 export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 	onDrop,
 	onDropRejected,

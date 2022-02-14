@@ -35,8 +35,8 @@ export const StepsList: React.FC<{
 
 	const {
 		step,
-		onDuplicate,
-		onEdit,
+		onDuplicateClicked,
+		onEditClicked,
 		onCreate,
 		modalHeaderText,
 		onDismissClearTableModal,
@@ -81,9 +81,9 @@ export const StepsList: React.FC<{
 			{steps?.map((_step, index) => {
 				return (
 					<StepItem
-						onEdit={onEdit}
+						onEdit={onEditClicked}
 						onDelete={onDeleteClicked}
-						onDuplicate={onDuplicate}
+						onDuplicate={onDuplicateClicked}
 						onSelect={onSelect}
 						key={index}
 						step={_step}

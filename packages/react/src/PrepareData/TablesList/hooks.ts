@@ -31,6 +31,8 @@ export function useIsTableSelected(
 export function useColumns(onSelect?: (name: string) => void): IColumn[] {
 	const renderTableButtons = useTableButtons()
 
+	//The group column is needed to present the grouping (input or intermediary) but doesn't need
+	//to show in the list, so we use the same column for the buttons
 	const cmd = useMemo((): IColumn[] => {
 		return [
 			{

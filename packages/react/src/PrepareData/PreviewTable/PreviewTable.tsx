@@ -12,8 +12,8 @@ import {
 	ArqueroTableHeader,
 	StatsColumnType,
 	useCommonCommands,
-	useToggleTableFeatures,
 } from '../../'
+import { useToggleTableFeatures } from '../hooks'
 
 const statsColumnTypes = [
 	StatsColumnType.Type,

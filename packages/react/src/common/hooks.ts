@@ -310,25 +310,6 @@ export function useCommonCommands(
 	}, [dccmd, tshcmd])
 }
 
-export function useDeriveColumnCommand(
-	onClick: (
-		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
-		item?: IContextualMenuItem,
-	) => boolean | void | undefined,
-): ICommandBarItemProps | null {
-	const cmd = useMemo(() => {
-		return {
-			key: 'derive-column',
-			text: 'Create column',
-			iconProps: iconProps.add,
-			onClick,
-		} as ICommandBarItemProps
-	}, [onClick])
-	if (!onClick) return null
-
-	return cmd
-}
-
 export function useToggleStatsHeaderCommand(
 	toggle?: (name: string) => void,
 	features?: Partial<DetailsListFeatures>,
@@ -366,31 +347,23 @@ export function useToggleStatsHeaderCommand(
 	return cmd
 }
 
-export function useToggleTableFeatures(
-	features?: Partial<DetailsListFeatures>,
-): {
-	changeTableFeatures: (feature: string) => void
-	tableFeatures: Partial<DetailsListFeatures>
-} {
-	const [tableFeatures, setTableFeatures] = useState<
-		Partial<DetailsListFeatures>
-	>(features ?? {})
+export function useDeriveColumnCommand(
+	onClick: (
+		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+		item?: IContextualMenuItem,
+	) => boolean | void | undefined,
+): ICommandBarItemProps | null {
+	const cmd = useMemo(() => {
+		return {
+			key: 'derive-column',
+			text: 'Create column',
+			iconProps: iconProps.add,
+			onClick,
+		} as ICommandBarItemProps
+	}, [onClick])
+	if (!onClick) return null
 
-	const changeTableFeatures = useCallback(
-		(propName: string) => {
-			const key = propName as keyof DetailsListFeatures
-			setTableFeatures({
-				...tableFeatures,
-				[key]: !tableFeatures[key],
-			})
-		},
-		[tableFeatures, setTableFeatures],
-	)
-
-	return {
-		changeTableFeatures,
-		tableFeatures,
-	}
+	return cmd
 }
 
 const iconProps = {
