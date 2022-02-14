@@ -17,6 +17,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		onResetSteps,
 		onResetFullData,
 	} = useBusinessLogic()
+
 	const dropzone = useDropzoneProps(
 		handleDropFiles,
 		onResetSteps,

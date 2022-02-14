@@ -83,22 +83,21 @@ export function useBusinessLogic(
 		setIntermediaryTables(pipeline.outputs)
 	}, [pipeline, store, setStoredTables, setIntermediaryTables])
 
-	// const clearOutputs = useCallback(async () => {
-	// 	pipeline.clear()
-	// 	const _output = await store.toMap()
-	// 	setOutputs(_output)
-	// 	setIntermediaryTables([])
-	// }, [pipeline, setOutputs, setIntermediaryTables, store])
+	const clearOutputs = useCallback(async () => {
+		pipeline.clear()
+		const _output = await store.toMap()
+		setStoredTables(_output)
+		setIntermediaryTables([])
+	}, [pipeline, setStoredTables, setIntermediaryTables, store])
 
-	//if steps changed, clean and run??
-	// useEffect(() => {
-	// 	if (steps?.length && !output?.name && !!tables.length) {
-	// 		pipeline.addAll(steps)
-	// 		runPipeline()
-	// 	} else if (!steps?.length && output.name) {
-	// 		clearOutputs()
-	// 	}
-	// }, [pipeline, steps, tables, runPipeline, clearOutputs, output])
+	useEffect(() => {
+		if (steps?.length && !output && storedTables.size > 0) {
+			pipeline.addAll(steps)
+			runPipeline()
+		} else if (!steps?.length && output) {
+			clearOutputs()
+		}
+	}, [steps, pipeline, runPipeline, storedTables, output, clearOutputs])
 
 	const verifyAdd = useCallback(
 		async (files: BaseFile[]) => {
@@ -134,7 +133,15 @@ export function useBusinessLogic(
 		setSelectedTableName,
 		store,
 	)
-	const onDeleteTable = useOnDeleteTable(store, onDeleteFile, setStoredTables)
+
+	//if delete table or step that is selected, set as null
+	const onDeleteTable = useOnDeleteTable(
+		store,
+		setSelectedTable,
+		selectedTableName,
+		onDeleteFile,
+		setStoredTables,
+	)
 	const onDeleteStep = useDeleteStep(
 		onUpdateSteps,
 		pipeline,
@@ -217,6 +224,8 @@ export function useOnSelect(
 
 export function useOnDeleteTable(
 	store: TableStore,
+	setSelectedTable: (table: ColumnTable | undefined) => void,
+	selectedTableName: string | undefined,
 	onDeleteFile: (name: string) => void,
 	setStoredTables: (table: Map<string, ColumnTable>) => void,
 ): (tableName: string) => void {
@@ -225,8 +234,11 @@ export function useOnDeleteTable(
 			store.delete(tableName)
 			const _storedTables = await store.toMap()
 			onDeleteFile(tableName)
+			if (selectedTableName === tableName) {
+				setSelectedTable(undefined)
+			}
 			setStoredTables(_storedTables)
 		},
-		[store, setStoredTables, onDeleteFile],
+		[store, setStoredTables, onDeleteFile, selectedTableName, setSelectedTable],
 	)
 }

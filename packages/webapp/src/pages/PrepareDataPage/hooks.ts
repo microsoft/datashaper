@@ -28,9 +28,9 @@ export function useBusinessLogic(): {
 	)
 	const [steps, setSteps] = useState<Step[]>([])
 	const [files, setFiles] = useState<BaseFile[]>([])
-	//change to files
+
 	const updateFileCollection = useCallback(
-		async (collection: FileCollection) => {
+		(collection: FileCollection) => {
 			setFileCollection(collection)
 			setFiles(collection.list(FileType.table))
 		},
@@ -39,37 +39,24 @@ export function useBusinessLogic(): {
 
 	useEffect(() => {
 		const f = async () => {
-			// const [companies, products] = await Promise.all([
-			// 	loadCSV('data/companies.csv', {}),
-			// 	loadCSV('data/products.csv', {}),
-			// ])
 			await Promise.all([
 				fileCollection.add('data/companies.csv'),
 				fileCollection.add('data/products.csv'),
 			])
 			updateFileCollection(fileCollection)
 
-			// const steps = [
-			// 	{
-			// 		verb: 'join',
-			// 		input: 'companies',
-			// 		output: 'join-1',
-			// 		args: {
-			// 			other: 'products',
-			// 			on: ['ID'],
-			// 		},
-			// 	},
-			// 	{
-			// 		verb: 'join',
-			// 		input: 'companies',
-			// 		output: 'join-2',
-			// 		args: {
-			// 			other: 'products',
-			// 			on: ['ID', 'ID'],
-			// 		},
-			// 	},
-			// ]
-			// setSteps(steps)
+			const steps = [
+				{
+					verb: 'join',
+					input: 'companies.csv',
+					output: 'join-1',
+					args: {
+						other: 'products.csv',
+						on: ['ID'],
+					},
+				},
+			]
+			setSteps(steps)
 		}
 		f()
 	}, [fileCollection, updateFileCollection])
@@ -100,13 +87,16 @@ export function useBusinessLogic(): {
 	)
 
 	const onResetSteps = useCallback(() => {
+		debugger
 		setSteps([])
 	}, [setSteps])
 
 	const onResetFullData = useCallback(() => {
+		debugger
 		setSteps([])
-		setFiles([])
-	}, [setSteps, setFiles])
+		fileCollection.clear()
+		updateFileCollection(fileCollection)
+	}, [setSteps, fileCollection, updateFileCollection])
 
 	return {
 		setSteps,
