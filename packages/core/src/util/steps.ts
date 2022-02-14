@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { difference, intersection } from 'lodash'
+import difference from 'lodash-es/difference.js'
+import intersection from 'lodash-es/intersection.js'
 import { Step, Verb } from '../index.js'
 
 enum Tags {

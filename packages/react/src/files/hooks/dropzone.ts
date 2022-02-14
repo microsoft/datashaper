@@ -9,15 +9,14 @@ import {
 	FileWithPath,
 } from '@data-wrangling-components/utilities'
 import { useCallback } from 'react'
-import * as DZ from 'react-dropzone'
-import { DzProps, FileRejection } from '../types.js'
+import { useDropzone as UseDz, DropzoneState as DzState } from 'react-dropzone'
+import { DzProps, FileRejection } from '../types'
 
-const { useDropzone: UseDz } = DZ
-export interface DropzoneState extends DZ.DropzoneState {
+export interface DropzoneState extends DzState {
 	acceptedFileTypesExt: string[]
 }
 
-export const useDropzone: (props: DzProps) => DZ.DropzoneState = ({
+export const useDropzone: (props: DzProps) => DropzoneState = ({
 	acceptedFileTypes,
 	onDrop,
 	onDropRejected,

@@ -10,7 +10,7 @@ import {
 	DetailsListFeatures,
 	DropdownOptionSelect,
 	MetadataClickFunction,
-} from '../index.js'
+} from '..'
 
 export type Dimensions = {
 	width: number

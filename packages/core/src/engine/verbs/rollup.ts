@@ -5,7 +5,7 @@
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../../index.js'
 import { Step, RollupArgs } from '../../types.js'
-import { singleRollup } from '../util'
+import { singleRollup } from '../util/index.js'
 
 /**
  * Executes rollup.

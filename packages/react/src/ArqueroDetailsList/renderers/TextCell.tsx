@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo } from 'react'
-import { getValue } from '../util/index.js'
-import { FormattedCellProps } from './types.js'
+import React, { memo } from 'react'
+import { getValue } from '../util'
+import { FormattedCellProps } from './types'
 
 /**
  * Basic rendering of text values.

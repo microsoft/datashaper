@@ -8,9 +8,9 @@ import {
 	SelectableOptionMenuItemType,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useMemo } from 'react'
-import { useTableColumnOptions } from '../common/index.js'
-import { columnDropdownStyles } from './styles.js'
+import React, { memo, useMemo } from 'react'
+import { useTableColumnOptions } from '../common'
+import { columnDropdownStyles } from './styles'
 
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
 	table?: ColumnTable

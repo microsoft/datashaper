@@ -4,7 +4,7 @@
  */
 import { ICommandBarItemProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import merge from 'lodash/merge.js'
+import { merge } from 'lodash'
 import { useMemo } from 'react'
 
 /**

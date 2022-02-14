@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo } from 'react'
+import React, { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { categories, getValue, isDistinctCategories } from '../util/index.js'
-import { ArrayCell } from './ArrayCell.js'
-import { ArrayDropdownCell } from './ArrayDropdownCell.js'
-import { RichCellProps } from './types.js'
-import { SparkbarCell, CategoricalBarCell, SparklineCell } from './index.js'
+import { categories, getValue, isDistinctCategories } from '../util'
+import { ArrayCell } from './ArrayCell'
+import { ArrayDropdownCell } from './ArrayDropdownCell'
+import { RichCellProps } from './types'
+import { SparkbarCell, CategoricalBarCell, SparklineCell } from './'
 
 const HISTO_MAX = 20
 const DROPDOWN_MAX = 15

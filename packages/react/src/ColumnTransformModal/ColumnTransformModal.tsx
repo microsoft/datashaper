@@ -16,14 +16,14 @@ import {
 	PrimaryButton,
 } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import upperFirst from 'lodash/upperFirst.js'
+import { upperFirst } from 'lodash'
 import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import {
 	selectStepComponent,
 	withInputColumnDropdown,
 	withOutputColumnTextfield,
-} from '../index.js'
+} from '../'
 
 export interface ColumnTransformModalProps extends IModalProps {
 	/**

@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { RollupStep } from '@data-wrangling-components/core'
-import { memo, useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { FieldAggregateOperationDropdown } from '../index.js'
-import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
-import { StepComponentProps } from '../../types.js'
+import { FieldAggregateOperationDropdown } from '..'
+import { LeftAlignedRow, useHandleDropdownChange } from '../../common'
+import { StepComponentProps } from '../../types'
 
 /**
  * Just the column/op inputs for an rollup.

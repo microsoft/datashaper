@@ -4,7 +4,7 @@
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { DataType } from '../index.js'
-import { determineType } from '.'
+import { determineType } from './index.js'
 
 /**
  * Returns a map of all of the column getters for a table.

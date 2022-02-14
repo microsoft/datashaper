@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMemo } from 'react'
-import { DropdownOptionSelect } from '../index.js'
+import { DropdownOptionSelect } from '..'
 
 export function useCellDropdownSelectHandler(
 	clickable: boolean,

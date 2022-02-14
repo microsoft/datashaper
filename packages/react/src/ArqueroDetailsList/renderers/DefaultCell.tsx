@@ -4,11 +4,11 @@
  */
 
 import { DataType } from '@data-wrangling-components/core'
-import { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty, getValue } from '../util/index.js'
-import { ArrayCell } from './ArrayCell.js'
-import { RichCellProps } from './types.js'
+import { isEmpty, getValue } from '../util'
+import { ArrayCell } from './ArrayCell'
+import { RichCellProps } from './types'
 import {
 	BooleanTextCell,
 	DateCell,
@@ -16,7 +16,7 @@ import {
 	NumberCell,
 	ObjectCell,
 	TextCell,
-} from './index.js'
+} from '.'
 
 /**
  * Default rendering of cell contents.

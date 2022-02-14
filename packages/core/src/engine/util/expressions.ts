@@ -10,7 +10,7 @@ import {
 	StringComparisonOperator,
 	FilterCompareType,
 } from '../../types.js'
-import { CompareWrapper } from './types'
+import { CompareWrapper } from './types.js'
 
 /**
  * This creates an arquero expression suitable for comparison of direct values or columns.

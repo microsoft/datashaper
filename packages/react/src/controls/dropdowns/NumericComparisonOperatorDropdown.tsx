@@ -4,8 +4,8 @@
  */
 import { NumericComparisonOperator } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
-import { memo } from 'react'
-import { opDropdownStyles } from '../styles.js'
+import React, { memo } from 'react'
+import { opDropdownStyles } from '../styles'
 
 export type NumericComparisonOperatorDropdownProps = Partial<IDropdownProps>
 
@@ -26,6 +26,6 @@ export const NumericComparisonOperatorDropdown: React.FC<NumericComparisonOperat
 	})
 
 const options = Object.values(NumericComparisonOperator).map(o => ({
-	key: o as string,
-	text: o as string,
+	key: o,
+	text: o,
 }))

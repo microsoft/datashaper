@@ -6,9 +6,9 @@ import {
 	BinarizeStep,
 	FilterCompareType,
 } from '@data-wrangling-components/core'
-import { memo, useMemo } from 'react'
-import { VerbDescription } from '../../index.js'
-import { StepDescriptionProps } from '../../types.js'
+import React, { memo, useMemo } from 'react'
+import { VerbDescription } from '../..'
+import { StepDescriptionProps } from '../../types'
 
 export const BinarizeDescription: React.FC<StepDescriptionProps> = memo(
 	function BinarizeDescription(props) {

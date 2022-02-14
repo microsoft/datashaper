@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DirectionalHint, FocusTrapCallout, TextField } from '@fluentui/react'
-import { memo, useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
 interface RenameCalloutProps {

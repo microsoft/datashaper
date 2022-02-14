@@ -4,8 +4,8 @@
  */
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
-import { memo } from 'react'
-import { opDropdownStyles } from '../styles.js'
+import React, { memo } from 'react'
+import { opDropdownStyles } from '../styles'
 
 export type FieldAggregateOperationDropdownProps = Partial<IDropdownProps>
 
@@ -26,6 +26,6 @@ export const FieldAggregateOperationDropdown: React.FC<FieldAggregateOperationDr
 	})
 
 const options = Object.values(FieldAggregateOperation).map(o => ({
-	key: o as string,
-	text: o as string,
+	key: o,
+	text: o,
 }))

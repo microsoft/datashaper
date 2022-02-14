@@ -4,9 +4,9 @@
  */
 import { IDetailsListStyles } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import merge from 'lodash/merge.js'
+import { merge } from 'lodash'
 import { useMemo } from 'react'
-import { DetailsListFeatures } from '../index.js'
+import { DetailsListFeatures } from '..'
 
 /**
  * Create a DetailsHeader style with enough height to handle the options we've turned on.

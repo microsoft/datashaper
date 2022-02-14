@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IColumn } from '@fluentui/react'
-import { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { ColumnClickFunction } from '../index.js'
+import { ColumnClickFunction } from '..'
 
 interface CellContainerProps {
 	onClick?: ColumnClickFunction

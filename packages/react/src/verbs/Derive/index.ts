@@ -2,5 +2,5 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './Derive.js'
-export * from './DeriveDescription.js'
+export * from './Derive'
+export * from './DeriveDescription'

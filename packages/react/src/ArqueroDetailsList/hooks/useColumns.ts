@@ -14,7 +14,7 @@ import {
 	ColumnClickFunction,
 	DetailsListFeatures,
 	DropdownOptionSelect,
-} from '../index.js'
+} from '..'
 import {
 	createRenderColumnHeader,
 	createRenderCommandBarColumnHeader,
@@ -23,14 +23,14 @@ import {
 	createRenderHistogramColumnHeader,
 	createRenderSmartCell,
 	createRenderStatsColumnHeader,
-} from '../renderers/index.js'
+} from '../renderers'
 import {
 	useCellClickhandler,
 	useCellDropdownSelectHandler,
 	useColumnNamesList,
 	useColumnStyles,
 	useIncrementingColumnColorScale,
-} from './index.js'
+} from '.'
 
 const DEFAULT_COLUMN_WIDTH = 100
 

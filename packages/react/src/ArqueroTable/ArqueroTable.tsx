@@ -6,9 +6,9 @@
 import { Theme } from '@thematic/core'
 import { useThematic } from '@thematic/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled, { css } from 'styled-components'
-import { ColumnConfig, ColumnConfigMap } from './types.js'
+import { ColumnConfig, ColumnConfigMap } from './types'
 
 export interface ArqueroTableProps {
 	table: ColumnTable

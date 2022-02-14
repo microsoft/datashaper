@@ -4,18 +4,18 @@
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
-import { ColumnClickFunction, ColumnRenderFunction } from '../index.js'
+import { ColumnClickFunction, ColumnRenderFunction } from '..'
 import {
 	DetailsListFeatures,
 	DropdownOptionSelect,
 	MetadataClickFunction,
 	StatsColumnType,
-} from '../types.js'
-import { CommandBarContainer } from './CommandBarContainer.js'
-import { DefaultColumnHeader } from './DefaultColumnHeader.js'
-import { FeaturesCell } from './FeaturesCell.js'
-import { HistogramColumnHeader } from './HistogramColumnHeader.js'
-import { SmartCell, StatsColumnHeader } from './index.js'
+} from '../types'
+import { CommandBarContainer } from './CommandBarContainer'
+import { DefaultColumnHeader } from './DefaultColumnHeader'
+import { FeaturesCell } from './FeaturesCell'
+import { HistogramColumnHeader } from './HistogramColumnHeader'
+import { SmartCell, StatsColumnHeader } from '.'
 
 export const createRenderSmartCell = (
 	metadata: ColumnMetadata,

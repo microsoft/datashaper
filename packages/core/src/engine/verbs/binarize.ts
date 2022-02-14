@@ -5,7 +5,7 @@
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../../index.js'
 import { BinarizeArgs, Step } from '../../types.js'
-import { compare } from '../util'
+import { compare } from '../util/index.js'
 
 /**
  * Executes an arquero derive where the output is a 1 or 0.

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMemo } from 'react'
-import { ColumnClickFunction } from '../index.js'
+import { ColumnClickFunction } from '..'
 
 export function useCellClickhandler(
 	clickable: boolean,

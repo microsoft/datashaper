@@ -9,9 +9,9 @@ import {
 } from '@fluentui/react'
 import { Application } from '@thematic/core'
 import { useThematic } from '@thematic/react'
-import { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { HEIGHT } from './constants.js'
+import { HEIGHT } from './constants'
 
 interface CommandBarProps {
 	commands: ICommandBarItemProps[]

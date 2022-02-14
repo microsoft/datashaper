@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
-import isNil from 'lodash/isNil.js'
-import { memo, useMemo } from 'react'
+import { isNil } from 'lodash'
+import React, { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty, getValue } from '../util/index.js'
-import { CellContainer } from './CellContainer.js'
-import { EmptyCell } from './EmptyCell.js'
-import { RichCellProps } from './types.js'
+import { isEmpty, getValue } from '../util'
+import { CellContainer } from './CellContainer'
+import { EmptyCell } from './EmptyCell'
+import { RichCellProps } from './types'
 import {
 	BooleanSymbolCell,
 	DateCell,
@@ -17,7 +17,7 @@ import {
 	SmartArrayCell,
 	TextCell,
 	NumberMagnitudeCell,
-} from './index.js'
+} from './'
 
 /**
  * Chooses what to render based on data type.

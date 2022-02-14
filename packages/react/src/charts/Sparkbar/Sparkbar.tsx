@@ -5,15 +5,15 @@
 
 import { line as themeLine } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
-import isArray from 'lodash/isArray.js'
+import { isArray } from 'lodash'
 
-import { memo, useLayoutEffect, useMemo, useRef } from 'react'
+import React, { memo, useLayoutEffect, useMemo, useRef } from 'react'
 import {
 	useChartSVG,
 	useIndexedScale,
 	useNumericLinearScale,
 	usePlotGroup,
-} from '../hooks.js'
+} from '../hooks'
 
 export interface SparkbarProps {
 	data: number[]

@@ -11,7 +11,7 @@ import {
 	Step,
 	Verb,
 } from '@data-wrangling-components/core'
-import merge from 'lodash/merge.js'
+import { merge } from 'lodash'
 
 const COLLECTOR = 'compound-binarize-collector-table'
 const FINAL_OUTPUT = 'compound-binarize-final-output-table'

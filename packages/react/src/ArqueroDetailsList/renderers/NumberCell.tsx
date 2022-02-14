@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { memo } from 'react'
-import { useFormattedNumber } from '../hooks/index.js'
-import { getValue } from '../util/index.js'
-import { FormattedCellProps } from './types.js'
+import React, { memo } from 'react'
+import { useFormattedNumber } from '../hooks'
+import { getValue } from '../util'
+import { FormattedCellProps } from './types'
 /**
  * Basic endering of number values.
  */

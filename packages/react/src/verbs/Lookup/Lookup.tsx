@@ -4,11 +4,11 @@
  */
 import { LookupStep } from '@data-wrangling-components/core'
 import { Label } from '@fluentui/react'
-import { memo, useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedColumn } from '../../common/index.js'
-import { ColumnListInputs, JoinInputs } from '../../controls/index.js'
-import { StepComponentProps } from '../../types.js'
+import { LeftAlignedColumn } from '../../common'
+import { ColumnListInputs, JoinInputs } from '../../controls'
+import { StepComponentProps } from '../../types'
 
 /**
  * Provides inputs for a Lookup step.

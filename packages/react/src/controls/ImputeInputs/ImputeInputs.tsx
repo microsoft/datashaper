@@ -4,10 +4,10 @@
  */
 import { ImputeArgs, InputColumnArgs } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
-import { memo, useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useHandleTextfieldChange } from '../../common/index.js'
-import { StepComponentProps } from '../../types.js'
+import { LeftAlignedRow, useHandleTextfieldChange } from '../../common'
+import { StepComponentProps } from '../../types'
 
 interface ColumnArgs extends InputColumnArgs, ImputeArgs {}
 
@@ -18,10 +18,13 @@ interface ColumnArgs extends InputColumnArgs, ImputeArgs {}
 export const ImputeInputs: React.FC<StepComponentProps> = memo(
 	function ImputeInputs({ step, onChange }) {
 		// always match the input column and output - impute is an inline replacement verb
-		const args = useMemo<ColumnArgs>(() => {
-			return {
+		const args = useMemo(() => {
+			const a = {
 				...(step.args as ColumnArgs),
-				to: (step as any).column,
+			}
+			return {
+				...a,
+				to: a.column,
 			} as ColumnArgs
 		}, [step])
 
@@ -37,7 +40,7 @@ export const ImputeInputs: React.FC<StepComponentProps> = memo(
 					<TextField
 						required
 						label={'Fill value'}
-						value={(args as any).value && `${(args as any).value}`}
+						value={args.value && `${args.value}`}
 						placeholder={'text, number, or boolean'}
 						onChange={handleValueChange}
 					/>

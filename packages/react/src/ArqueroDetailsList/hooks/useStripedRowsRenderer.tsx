@@ -5,7 +5,7 @@
 import { IDetailsRowProps } from '@fluentui/react'
 import { IRenderFunction } from '@fluentui/utilities'
 import { useCallback } from 'react'
-import { StripedRow } from '../renderers/index.js'
+import { StripedRow } from '../renderers'
 
 /**
  *

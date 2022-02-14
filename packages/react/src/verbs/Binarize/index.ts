@@ -2,5 +2,5 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './Binarize.js'
-export * from './BinarizeDescription.js'
+export * from './Binarize'
+export * from './BinarizeDescription'

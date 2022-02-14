@@ -1,21 +1,19 @@
 {
 	"name": "@data-wrangling-components/core",
 	"version": "2.0.0",
-	"main": "dist/cjs/index.js",
-	"publishConfig": {
-		"main": "dist/cjs/index.js",
-		"module": "dist/esm/index.js",
-		"typings": "dist/types/index.d.ts"
-	},
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build --mode legacy"
+		"build": "essex build",
+		"start": "essex watch"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.1.2",
+		"@essex/scripts": "^20.2.0",
 		"@essex/vite-config": "^19.0.0",
 		"@types/jest": "^27.4.0",
-		"@types/lodash": "^4.14.178",
+		"@types/lodash-es": "^4",
 		"@types/node": "^17.0.17",
 		"arquero": "^4.8.7",
 		"regenerator-runtime": "^0.13.9",
@@ -33,6 +31,6 @@
 	},
 	"dependencies": {
 		"core-js": "^3.20.2",
-		"lodash": "^4.17.21"
+		"lodash-es": "^4.17.21"
 	}
 }

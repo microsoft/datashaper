@@ -6,7 +6,7 @@
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../../index.js'
 import { FillArgs, Step } from '../../types.js'
-import { ExprFunctionMap } from './types'
+import { ExprFunctionMap } from './types.js'
 
 /**
  * Executes an arquero derive to fill a new column with fixed values.

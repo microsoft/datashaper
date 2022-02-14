@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { OrderbyStep } from '@data-wrangling-components/core'
-import { memo, useMemo } from 'react'
-import { VerbDescription } from '../../index.js'
-import { StepDescriptionProps } from '../../types.js'
+import React, { memo, useMemo } from 'react'
+import { VerbDescription } from '../..'
+import { StepDescriptionProps } from '../../types'
 
 export const OrderbyDescription: React.FC<StepDescriptionProps> = memo(
 	function OrderbyDescription(props) {

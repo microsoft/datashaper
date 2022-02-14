@@ -8,10 +8,10 @@ import {
 	formatIfNumber,
 } from '@data-wrangling-components/core'
 import { TooltipHost } from '@fluentui/react'
-import { memo, useMemo, useCallback, useState } from 'react'
-import { Sparkbar } from '../../charts/index.js'
-import { useCellDimensions } from '../hooks/index.js'
-import { RichHeaderProps } from './types.js'
+import React, { memo, useMemo, useCallback, useState } from 'react'
+import { Sparkbar } from '../../charts'
+import { useCellDimensions } from '../hooks'
+import { RichHeaderProps } from './types'
 
 const PADDING_HEIGHT = 8
 

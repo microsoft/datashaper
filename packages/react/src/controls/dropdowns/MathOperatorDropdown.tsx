@@ -4,8 +4,8 @@
  */
 import { MathOperator } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
-import { memo } from 'react'
-import { opDropdownStyles } from '../styles.js'
+import React, { memo } from 'react'
+import { opDropdownStyles } from '../styles'
 
 export type MathOperatorDropdownProps = Partial<IDropdownProps>
 
@@ -27,6 +27,6 @@ export const MathOperatorDropdown: React.FC<MathOperatorDropdownProps> = memo(
 )
 
 const options = Object.values(MathOperator).map(o => ({
-	key: o as string,
-	text: o as string,
+	key: o,
+	text: o,
 }))

@@ -4,13 +4,13 @@
  */
 
 import { useDimensions } from '@essex-js-toolkit/hooks'
-import { memo, useMemo, useRef } from 'react'
+import React, { memo, useMemo, useRef } from 'react'
 import styled from 'styled-components'
-import { CommandBar } from './CommandBar.js'
-import { TableName } from './TableName.js'
-import { HEIGHT } from './constants.js'
-import { useColumnCounts, useCommands } from './hooks/index.js'
-import { ArqueroTableHeaderProps } from './index.js'
+import { CommandBar } from './CommandBar'
+import { TableName } from './TableName'
+import { HEIGHT } from './constants'
+import { useColumnCounts, useCommands } from './hooks'
+import { ArqueroTableHeaderProps } from '.'
 
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader({

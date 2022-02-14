@@ -4,11 +4,11 @@
  */
 import { SelectStep } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownOption } from '@fluentui/react'
-import { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable } from '../../common/index.js'
-import { columnDropdownStyles } from '../../controls/styles.js'
-import { StepComponentProps } from '../../types.js'
+import { useLoadTable } from '../../common'
+import { columnDropdownStyles } from '../../controls/styles'
+import { StepComponentProps } from '../../types'
 
 /**
  * Provides inputs for a Select.

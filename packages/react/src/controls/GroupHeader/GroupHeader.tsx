@@ -4,10 +4,17 @@
  */
 import { ColumnMetadata } from '@data-wrangling-components/core'
 import { IconButton, IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+	memo,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react'
 import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
-import { useIntersection } from '../../common/index.js'
+import { useIntersection } from '../../common'
 
 interface GroupHeaderProps {
 	columnMeta: ColumnMetadata

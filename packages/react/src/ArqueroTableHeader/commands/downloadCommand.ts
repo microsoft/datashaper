@@ -5,7 +5,7 @@
 import { download } from '@data-wrangling-components/utilities'
 import { ICommandBarItemProps } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import merge from 'lodash/merge.js'
+import { merge } from 'lodash'
 /**
  * Constructs a download command.
  * When clicked, will save the current table to a csv.

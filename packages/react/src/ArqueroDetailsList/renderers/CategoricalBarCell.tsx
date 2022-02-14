@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo, useMemo } from 'react'
-import { Sparkbar } from '../../charts/index.js'
-import { useCellDimensions } from '../hooks/index.js'
-import { ColumnCellChartProps } from './types.js'
+import React, { memo, useMemo } from 'react'
+import { Sparkbar } from '../../charts'
+import { useCellDimensions } from '../hooks'
+import { ColumnCellChartProps } from './types'
 
 /**
  * Renders an array-valued cell as a CategoricalBar.

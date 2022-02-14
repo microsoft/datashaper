@@ -5,7 +5,7 @@
 import { RenameStep } from '@data-wrangling-components/core'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
-import { StepChangeFunction } from '../../types.js'
+import { StepChangeFunction } from '../../types'
 
 export function useHandleColumnChange(
 	internal: RenameStep,

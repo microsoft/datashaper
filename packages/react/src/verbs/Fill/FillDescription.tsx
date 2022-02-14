@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FillStep } from '@data-wrangling-components/core'
-import { memo, useMemo } from 'react'
-import { VerbDescription } from '../../index.js'
-import { StepDescriptionProps } from '../../types.js'
+import React, { memo, useMemo } from 'react'
+import { VerbDescription } from '../..'
+import { StepDescriptionProps } from '../../types'
 
 export const FillDescription: React.FC<StepDescriptionProps> = memo(
 	function FillDescription(props) {

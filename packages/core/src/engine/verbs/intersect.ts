@@ -5,7 +5,7 @@
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { TableStore } from '../../index.js'
 import { SetOp, Step } from '../../types.js'
-import { set } from '../util'
+import { set } from '../util/index.js'
 
 /**
  * Executes an arquero table intersect.

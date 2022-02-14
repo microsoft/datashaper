@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step } from '@data-wrangling-components/core'
-import { StepDescriptionProps } from './types.js'
+import React from 'react'
+import { StepDescriptionProps } from './types'
 import {
 	AggregateDescription,
 	BinDescription,
@@ -23,7 +24,7 @@ import {
 	SelectDescription,
 	SetOperationDescription,
 	NoParametersDescription,
-} from './verbs/index.js'
+} from './verbs'
 
 const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 	aggregate: AggregateDescription,
