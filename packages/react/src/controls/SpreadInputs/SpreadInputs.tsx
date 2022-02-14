@@ -88,7 +88,7 @@ function useColumns(
 
 			return (
 				<ColumnSpread
-					key={`column-list-${column}-${index}`}
+					key={`column-list-${index}`}
 					column={column}
 					onChange={handleColumnChange}
 					onDelete={handleDeleteClick}
