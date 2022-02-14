@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { rename } from '../verbs/rename'
-import { TestStore } from './TestStore'
+import { rename } from '../verbs/rename.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for rename verb', () => {
 	test('rename test', () => {

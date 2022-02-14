@@ -4,7 +4,7 @@
  */
 
 import { formatIfNumber } from '../index.js'
-import { format } from '../data'
+import { format } from '../data.js'
 
 describe('data utilities', () => {
 	describe('format', () => {

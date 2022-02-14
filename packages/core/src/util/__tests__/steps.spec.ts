@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Verb } from '../../types.js'
-import { verbs } from '../steps'
+import { verbs } from '../steps.js'
 
 describe('step utilities', () => {
 	test('all verbs tagged', () => {

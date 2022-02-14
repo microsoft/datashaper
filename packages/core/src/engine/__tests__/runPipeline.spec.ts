@@ -4,7 +4,7 @@
  */
 import { table } from 'arquero'
 import { MathOperator, Step } from '../../index.js'
-import { runPipeline } from '../runPipeline'
+import { runPipeline } from '../runPipeline.js'
 
 describe('runPipeline', () => {
 	const tbl = table({

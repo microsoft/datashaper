@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { fill } from '../verbs/fill'
-import { TestStore } from './TestStore'
+import { fill } from '../verbs/fill.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for fill verb', () => {
 	test('fill test with string value', () => {

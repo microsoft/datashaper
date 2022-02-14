@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { fold } from '../verbs/fold'
-import { TestStore } from './TestStore'
+import { fold } from '../verbs/fold.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for fold verb', () => {
 	test('fold test with one column', () => {

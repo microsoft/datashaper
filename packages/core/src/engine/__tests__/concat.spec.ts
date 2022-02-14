@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { concat } from '../verbs/concat'
-import { TestStore } from './TestStore'
+import { concat } from '../verbs/concat.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for concat verb', () => {
 	test('concat test', () => {

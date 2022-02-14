@@ -4,7 +4,7 @@
  */
 
 import { guessFileType, isDsvFile, isJsonFile, isZipFile } from '..'
-import { BaseFile, FileWithPath } from '../../common'
+import { BaseFile, FileWithPath } from '../../common/index.js'
 import {
 	extension,
 	getDataURL,
@@ -13,7 +13,7 @@ import {
 	getTextFromFile,
 	guessDelimiter,
 	isTableFile,
-} from '../files'
+} from '../files.js'
 
 describe('extension file functions', () => {
 	it('returns txt as extension extension', () => {

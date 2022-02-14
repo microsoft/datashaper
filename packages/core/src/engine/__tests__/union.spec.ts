@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { union } from '../verbs/union'
-import { TestStore } from './TestStore'
+import { union } from '../verbs/union.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for union verb', () => {
 	test('union test', () => {

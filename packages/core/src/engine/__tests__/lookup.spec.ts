@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { lookup } from '../verbs/lookup'
-import { TestStore } from './TestStore'
+import { lookup } from '../verbs/lookup.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for lookup verb', () => {
 	test('lookup test', () => {

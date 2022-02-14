@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { rows } from '../rows'
+import { rows } from '../rows.js'
 
 describe('row utilities', () => {
 	describe('rows', () => {

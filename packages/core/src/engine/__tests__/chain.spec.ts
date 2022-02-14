@@ -4,7 +4,7 @@
  */
 import { table } from 'arquero'
 import { Verb, Step, TableStore } from '../../index.js'
-import { chain } from '../verbs/chain'
+import { chain } from '../verbs/chain.js'
 
 describe('chain', () => {
 	const input = table({

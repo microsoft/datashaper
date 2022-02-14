@@ -5,7 +5,7 @@
 
 import { Entry } from '@zip.js/zip.js'
 import { FileWithPath } from '../../common/index.js'
-import { getBlobFromEntry, getFileFromEntry, toZip } from '../zip'
+import { getBlobFromEntry, getFileFromEntry, toZip } from '../zip.js'
 
 describe('gets the blob of a zip.Entry', () => {
 	it('getBlobFromEntry', async () => {

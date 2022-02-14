@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { groupby } from '../verbs/groupby'
-import { ungroup } from '../verbs/ungroup'
-import { TestStore } from './TestStore'
+import { groupby } from '../verbs/groupby.js'
+import { ungroup } from '../verbs/ungroup.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for ungroup verb', () => {
 	test('ungroup test', async () => {

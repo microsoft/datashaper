@@ -4,7 +4,7 @@
  */
 import { table } from 'arquero'
 import { Verb, Step, TableStore } from '../../index.js'
-import { run } from '../run'
+import { run } from '../run.js'
 
 describe('run', () => {
 	const input = table({

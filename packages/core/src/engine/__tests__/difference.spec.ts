@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { difference } from '../verbs/difference'
-import { TestStore } from './TestStore'
+import { difference } from '../verbs/difference.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for difference verb', () => {
 	test('difference test with no duplicates', () => {

@@ -5,8 +5,8 @@
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { BinArgs, BinStrategy } from '../../index.js'
 import { Step, Verb } from '../../types.js'
-import { bin } from '../verbs/bin'
-import { TestStore } from './TestStore'
+import { bin } from '../verbs/bin.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for bin verb', () => {
 	const base: Step<BinArgs> = {

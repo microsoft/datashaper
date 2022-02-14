@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { spread } from '../verbs/spread'
-import { TestStore } from './TestStore'
+import { spread } from '../verbs/spread.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for spread verb', () => {
 	test('spread test', () => {

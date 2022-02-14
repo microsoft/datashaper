@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step, Verb } from '../../types.js'
-import { unroll } from '../verbs/unroll'
-import { TestStore } from './TestStore'
+import { unroll } from '../verbs/unroll.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for unroll verb', () => {
 	test('unroll test', () => {

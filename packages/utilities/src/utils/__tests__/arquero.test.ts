@@ -4,7 +4,7 @@
  */
 
 import { BaseFile, FileWithPath } from '../../common/index.js'
-import { loadTable, tableToHTML } from '../arquero'
+import { loadTable, tableToHTML } from '../arquero.js'
 
 describe('returns an Arquero table', () => {
 	it('loadTable', async () => {

@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { MathOperator, Step, Verb } from '../../types.js'
-import { derive } from '../verbs/derive'
-import { TestStore } from './TestStore'
+import { derive } from '../verbs/derive.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for derive verb', () => {
 	test('derive test with MathOperator Add and string + number', () => {
