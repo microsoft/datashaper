@@ -6,7 +6,8 @@
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build --skipExportCheck"
+		"build": "essex build --skipExportCheck",
+		"start": "essex watch"
 	},
 	"dependencies": {
 		"@zip.js/zip.js": "^2.4.3",

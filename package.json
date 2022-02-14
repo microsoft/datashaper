@@ -22,7 +22,7 @@
 		"@essex/eslint-plugin": "^20.0.0",
 		"@essex/jest-config": "^20.1.0",
 		"@essex/prettier-config": "^18.0.2",
-		"@essex/scripts": "^20.1.2",
+		"@essex/scripts": "^20.2.0",
 		"@types/eslint": "^8.4.1",
 		"@types/jest": "^27.4.0",
 		"@types/node": "^17.0.17",
