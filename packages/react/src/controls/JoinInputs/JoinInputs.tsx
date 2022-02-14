@@ -24,7 +24,7 @@ export const JoinInputs: React.FC<StepComponentProps> = memo(
 
 		const leftTable = useLoadTable(input || internal.input, table, store)
 
-		const rightTable = useLoadTable(input || internal.input, table, store)
+		const rightTable = useLoadTable(internal.args.other, table, store)
 
 		const leftColumn = useLeftColumn(internal)
 		const rightColumn = useRightColumn(internal)

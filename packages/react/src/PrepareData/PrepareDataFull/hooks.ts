@@ -50,11 +50,7 @@ export function useBusinessLogic(
 	const store = useStore()
 	const pipeline = usePipeline(store)
 
-	const groupedTables = useGroupedTables(
-		intermediaryTables,
-		files,
-		storedTables,
-	)
+	const groupedTables = useGroupedTables(intermediaryTables, storedTables)
 
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
 		return selectedTable && introspect(selectedTable, true)

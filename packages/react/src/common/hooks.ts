@@ -297,7 +297,6 @@ export function usePipeline(store: TableStore): Pipeline {
 
 export function useGroupedTables(
 	intermediary: string[],
-	tables: BaseFile[],
 	outputs: Map<string, ColumnTable>,
 ): GroupedTable[] {
 	return useMemo(() => {
@@ -310,7 +309,7 @@ export function useGroupedTables(
 					: TableGroup.Input,
 			} as GroupedTable
 		})
-	}, [tables, intermediary, outputs]) //fix here
+	}, [intermediary, outputs])
 	// useEffect(() => {
 	// 	const f = async () => {
 	// 		const results = await store.toMap()
