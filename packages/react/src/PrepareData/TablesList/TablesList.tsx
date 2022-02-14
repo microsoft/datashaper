@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Step } from '@data-wrangling-components/core'
+import { DialogConfirm } from '@essex-js-toolkit/themed-components'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { ArqueroDetailsList, GroupedTable, useDeleteConfirm } from '../../'
 import { useGroupHeader } from './GroupHeader'
 import { useRenderRow } from './RenderTableRow'
 import { useColumns, useGroupedTable, useIsTableSelected } from './hooks'
-import { DialogConfirm } from '@essex-js-toolkit/themed-components'
 
 export const TablesList: React.FC<{
 	files: GroupedTable[]

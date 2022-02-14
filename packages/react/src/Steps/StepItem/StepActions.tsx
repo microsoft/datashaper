@@ -14,7 +14,7 @@ export function useStepActions(
 	onDelete?: (index: number) => void,
 	onDuplicate?: (step: Step) => void,
 	onSelect?: (name: string) => void,
-) {
+): JSX.Element {
 	return useMemo(
 		() => (
 			<StepActions

@@ -59,9 +59,7 @@ export function useBusinessLogic(
 
 	const output = useMemo((): ColumnTable | undefined => {
 		const name = pipeline?.last?.output
-		const table = storedTables.get(name)
-		onUpdateOutputTable && onUpdateOutputTable(table)
-		return table
+		return storedTables.get(name)
 	}, [pipeline, storedTables])
 
 	const lastTableName = useMemo((): string => {
@@ -77,17 +75,33 @@ export function useBusinessLogic(
 			await pipeline.run()
 		}
 
-		const output = await store.toMap()
-		setStoredTables(output)
+		const _storedTables = await store.toMap()
+		setStoredTables(_storedTables)
 		setIntermediaryTables(pipeline.outputs)
-	}, [pipeline, store, setStoredTables, setIntermediaryTables])
+
+		onUpdateOutputTable && onUpdateOutputTable(output)
+	}, [
+		pipeline,
+		store,
+		setStoredTables,
+		setIntermediaryTables,
+		onUpdateOutputTable,
+		output,
+	])
 
 	const clearOutputs = useCallback(async () => {
 		pipeline.clear()
-		const _output = await store.toMap()
-		setStoredTables(_output)
+		const _storedTables = await store.toMap()
+		setStoredTables(_storedTables)
 		setIntermediaryTables([])
-	}, [pipeline, setStoredTables, setIntermediaryTables, store])
+		onUpdateOutputTable && onUpdateOutputTable(undefined)
+	}, [
+		pipeline,
+		setStoredTables,
+		setIntermediaryTables,
+		onUpdateOutputTable,
+		store,
+	])
 
 	useEffect(() => {
 		if (steps?.length && !output && storedTables.size > 0) {
