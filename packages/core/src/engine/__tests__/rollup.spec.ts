@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FieldAggregateOperation } from '../../types.js'
-import { Step, Verb } from '../../types.js'
+import { Step, Verb, FieldAggregateOperation } from '../../types.js'
 import { rollup } from '../verbs/rollup.js'
 import { TestStore } from './TestStore.js'
 

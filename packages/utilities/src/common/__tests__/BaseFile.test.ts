@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { BaseFile } from '../index.js'
 import { createFileWithPath } from '../../utils/index.js'
+import { BaseFile } from '../index.js'
 
 let jsonFile
 let csvFile

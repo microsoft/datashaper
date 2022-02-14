@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { FileMimeType } from '../index.js'
 import { BaseFile, FileWithPath } from '../common/index.js'
+import { FileMimeType } from '../index.js'
 import { FileType, Json } from '../types.js'
 
 interface FileOptions {
