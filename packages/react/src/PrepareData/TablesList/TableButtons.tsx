@@ -2,50 +2,26 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step } from '@data-wrangling-components/core'
 import { IconButton, IIconProps, TooltipHost } from '@fluentui/react'
 import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { useCanDelete, useHasDelete } from './hooks'
 
-export function useTableButtons(
-	steps?: Step[],
-): (
+export function useTableButtons(): (
 	item: any,
 	onSelect?: (name: string) => void,
-	onDelete?: (name: string) => void,
 ) => JSX.Element {
-	const hasDelete = useHasDelete()
-	const canDelete = useCanDelete(steps)
-
-	return useCallback(
-		(
-			item: any,
-			onSelect?: (name: string) => void,
-			onDelete?: (name: string) => void,
-		) => {
-			return (
-				<ContainerButton>
-					{hasDelete(item) && (
-						<TableButton
-							title="Delete table"
-							iconProps={iconProps.delete}
-							item={item}
-							disabled={!canDelete(item)}
-							fn={onDelete}
-						/>
-					)}
-					<TableButton
-						title="Preview table"
-						iconProps={iconProps.preview}
-						item={item}
-						fn={onSelect}
-					/>
-				</ContainerButton>
-			)
-		},
-		[canDelete, hasDelete],
-	)
+	return useCallback((item: any, onSelect?: (name: string) => void) => {
+		return (
+			<ContainerButton>
+				<TableButton
+					title="Preview table"
+					iconProps={iconProps.preview}
+					item={item}
+					fn={onSelect}
+				/>
+			</ContainerButton>
+		)
+	}, [])
 }
 
 export const TableButton: React.FC<{
@@ -92,5 +68,4 @@ const ContainerButton = styled.div`
 
 const iconProps = {
 	preview: { iconName: 'RedEye' },
-	delete: { iconName: 'Delete' },
 }

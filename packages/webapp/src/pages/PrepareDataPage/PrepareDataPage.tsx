@@ -5,36 +5,14 @@
 import { PrepareDataFull } from '@data-wrangling-components/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { useBusinessLogic, useDropzoneProps } from './hooks'
+import { useBusinessLogic } from './hooks'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const {
-		setSteps,
-		steps,
-		files,
-		handleDropFiles,
-		handleDeleteFile,
-		onChangeSpecification,
-		onResetSteps,
-		onResetFullData,
-	} = useBusinessLogic()
-
-	const dropzone = useDropzoneProps(
-		handleDropFiles,
-		onResetSteps,
-		onResetFullData,
-		onChangeSpecification,
-	)
+	const { setSteps, steps, files } = useBusinessLogic()
 
 	return (
 		<Container>
-			<PrepareDataFull
-				dropzoneProps={dropzone}
-				onDeleteFile={handleDeleteFile}
-				files={files}
-				steps={steps}
-				onUpdateSteps={setSteps}
-			/>
+			<PrepareDataFull files={files} steps={steps} onUpdateSteps={setSteps} />
 		</Container>
 	)
 })

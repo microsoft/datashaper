@@ -22,12 +22,7 @@ import ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { DetailsListFeatures } from '../'
-import {
-	DropdownOptionChangeFunction,
-	GroupedTable,
-	StepChangeFunction,
-	TableGroup,
-} from '../types'
+import { DropdownOptionChangeFunction, StepChangeFunction } from '../types'
 
 const noop = (value?: string) => value
 const num = (value?: string) => value && +value
@@ -294,40 +289,6 @@ export function usePipeline(store: TableStore): Pipeline {
 	return useMemo(() => new Pipeline(store), [store])
 }
 
-export function useGroupedTables(
-	intermediary: string[],
-	outputs: Map<string, ColumnTable>,
-): GroupedTable[] {
-	return useMemo(() => {
-		return Array.from(outputs).map(([key, table]) => {
-			return {
-				name: key,
-				table: table,
-				group: intermediary.includes(key)
-					? TableGroup.Intermediary
-					: TableGroup.Input,
-			} as GroupedTable
-		})
-	}, [intermediary, outputs])
-	// useEffect(() => {
-	// 	const f = async () => {
-	// 		const results = await store.toMap()
-	// 		const groupedTables = Array.from(results).map(([key, table]) => {
-	// 			return {
-	// 				name: key,
-	// 				table: table,
-	// 				group: intermediary.includes(key)
-	// 					? TableGroup.Intermediary
-	// 					: TableGroup.Input,
-	// 			} as GroupedTable
-	// 		})
-	// 		setA(groupedTables)
-	// 	}
-	// 	f()
-	// }, [intermediary, tables, store])
-	// return a
-}
-
 export function useCommonCommands(
 	showModal: any | undefined,
 	changeTableFeatures?: (name: string) => void,
@@ -439,7 +400,7 @@ const iconProps = {
 	stats: { iconName: 'AllApps' },
 }
 
-export function useDeleteConfirm(onDelete?: (args?: any) => void): {
+export function useDeleteConfirm(onDelete?: (args: any) => void): {
 	toggleDeleteModalOpen: () => void
 	onConfirmDelete: () => void
 	onDeleteClicked: (args: any) => void
@@ -450,8 +411,8 @@ export function useDeleteConfirm(onDelete?: (args?: any) => void): {
 		useBoolean(false)
 
 	const onDeleteClicked = useCallback(
-		(index: number) => {
-			setDeleteArg(index)
+		(args: any) => {
+			setDeleteArg(args)
 			toggleDeleteModalOpen()
 		},
 		[toggleDeleteModalOpen, setDeleteArg],

@@ -112,19 +112,20 @@ export class TableStore {
 		return map
 	}
 	/**
-	 * Add a listener for a particular table.
-	 * @param name
-	 * @param listener
-	 */
-	listen(name: string, listener: ListenerFunction): void {
-		this._tableListeners[name] = listener
-	}
-	/**
 	 * Stop listening for a particular table.
 	 * @param name
 	 */
 	unlisten(name: string): void {
 		delete this._tableListeners[name]
+	}
+	/**
+	 * Add a listener for a particular table.
+	 * @param name
+	 * @param listener
+	 */
+	listen(name: string, listener: ListenerFunction): () => void {
+		this._tableListeners[name] = listener
+		return () => this.unlisten(name)
 	}
 	/**
 	 * Get alerted for any changes in the store.

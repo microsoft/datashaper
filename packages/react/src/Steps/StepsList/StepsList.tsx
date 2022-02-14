@@ -14,7 +14,7 @@ export const StepsList: React.FC<{
 	steps?: Step[]
 	store: TableStore
 	onSave?: (step: Step, index?: number) => void
-	onDelete?: (index?: number) => void
+	onDelete?: (index: number) => void
 	onSelect?: (name: string) => void
 	nextInputTable: string
 }> = memo(function StepsList({

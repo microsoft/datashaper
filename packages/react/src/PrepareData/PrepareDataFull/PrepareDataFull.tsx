@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-/* eslint-disable @essex/adjacent-await */
 import { Step } from '@data-wrangling-components/core'
 import { BaseFile } from '@data-wrangling-components/utilities'
 import {
@@ -10,53 +9,37 @@ import {
 	IDetailsColumnProps,
 	Separator,
 } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { TablesList, PreviewTable, OutputTable } from '..'
 import { StepsList } from '../../Steps'
-import { DropzoneContainer, DropzoneProps } from '../../files'
 import { useBusinessLogic } from './hooks'
 
 export const PrepareDataFull: React.FC<{
 	files: BaseFile[]
 	onUpdateSteps: (steps: Step[]) => void
-	onDeleteFile: (name: string) => void
-	onUpdateOutputTable?: (table?: ColumnTable) => void
 	steps?: Step[]
 	inputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
-	dropzoneProps?: DropzoneProps
 }> = memo(function PrepareDataFull({
 	files,
-	steps,
 	onUpdateSteps,
-	onDeleteFile,
-	onUpdateOutputTable,
+	steps,
 	inputHeaderCommandBar,
 	outputHeaderCommandBar,
-	dropzoneProps,
 }) {
 	const {
 		groupedTables,
 		selectedTable,
 		selectedTableName,
-		onSelectTable,
+		setSelectedTableName,
 		onDeleteStep,
 		onSaveStep,
-		onDeleteTable,
 		store,
 		output,
 		selectedMetadata,
 		lastTableName,
-		isLoadingList,
-	} = useBusinessLogic(
-		files,
-		onUpdateSteps,
-		onDeleteFile,
-		onUpdateOutputTable,
-		steps,
-	)
+	} = useBusinessLogic(files, onUpdateSteps, steps)
 
 	return (
 		<Container>
@@ -64,19 +47,10 @@ export const PrepareDataFull: React.FC<{
 				<TablesListContainer>
 					<SectionTitle>Inputs</SectionTitle>
 					<InputDisplay>
-						{dropzoneProps && (
-							<DropzoneContainer
-								loading={isLoadingList}
-								dropzoneProps={dropzoneProps}
-							/>
-						)}
-
 						<TablesList
 							files={groupedTables}
 							selected={selectedTableName}
-							onSelect={onSelectTable}
-							onDelete={onDeleteTable}
-							steps={steps}
+							onSelect={setSelectedTableName}
 						/>
 					</InputDisplay>
 
@@ -98,7 +72,7 @@ export const PrepareDataFull: React.FC<{
 							nextInputTable={lastTableName}
 							onDelete={onDeleteStep}
 							onSave={onSaveStep}
-							onSelect={onSelectTable}
+							onSelect={setSelectedTableName}
 							store={store}
 							steps={steps}
 						/>

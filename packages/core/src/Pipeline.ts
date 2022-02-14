@@ -68,6 +68,12 @@ export class Pipeline {
 		this._steps.forEach(step => this._store.delete(step.output))
 		this._steps = []
 	}
+	delete(index: number): Step[] {
+		const _steps = this.steps.slice(0, index)
+		this.clear()
+		this.addAll(_steps)
+		return this.steps
+	}
 	update(step: Step, index: number): Step[] {
 		this._steps[index] = step
 		return this.steps
