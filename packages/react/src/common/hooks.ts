@@ -11,7 +11,6 @@ import {
 	columnType,
 	Pipeline,
 } from '@data-wrangling-components/core'
-import { BaseFile } from '@data-wrangling-components/utilities'
 import {
 	ICommandBarItemProps,
 	IContextualMenuItem,

@@ -110,6 +110,7 @@ const iconProps = {
 
 const Container = styled.div`
 	display: flex;
+	overflow: auto;
 `
 
 const ButtonContainer = styled.div`

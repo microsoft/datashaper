@@ -4,6 +4,7 @@
  */
 import { PrepareDataFull } from '@data-wrangling-components/react'
 import React, { memo } from 'react'
+import styled from 'styled-components'
 import { useBusinessLogic, useDropzoneProps } from './hooks'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
@@ -25,14 +26,21 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		onChangeSpecification,
 	)
 
-	//fix: what if we have other components on the same page
 	return (
-		<PrepareDataFull
-			dropzoneProps={dropzone}
-			onDeleteFile={handleDeleteFile}
-			files={files}
-			steps={steps}
-			onUpdateSteps={setSteps}
-		/>
+		<Container>
+			<PrepareDataFull
+				dropzoneProps={dropzone}
+				onDeleteFile={handleDeleteFile}
+				files={files}
+				steps={steps}
+				onUpdateSteps={setSteps}
+			/>
+		</Container>
 	)
 })
+
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+`

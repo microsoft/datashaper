@@ -72,6 +72,7 @@ export const PreviewTable: React.FC<{
 
 const Container = styled.div`
 	height: 95%;
+	width: 97%;
 	overflow: auto;
 	display: flex;
 	flex-direction: column;

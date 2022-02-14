@@ -87,12 +87,10 @@ export function useBusinessLogic(): {
 	)
 
 	const onResetSteps = useCallback(() => {
-		debugger
 		setSteps([])
 	}, [setSteps])
 
 	const onResetFullData = useCallback(() => {
-		debugger
 		setSteps([])
 		fileCollection.clear()
 		updateFileCollection(fileCollection)

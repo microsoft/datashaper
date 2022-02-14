@@ -11,23 +11,33 @@ export const App: React.FC = memo(function App() {
 	const search = window.location.search
 	return (
 		<StyleContext>
-			<Header />
-			<PageContainer>
-				{/* this is just a hacky router to load the perf testing page if needed */}
-				{search === '?perf' ? (
-					<PerfPage />
-				) : search === '?transform' ? (
-					<TransformPage />
-				) : search === '?prepare' ? (
-					<PrepareDataPage />
-				) : (
-					<MainPage />
-				)}
-			</PageContainer>
+			<Container>
+				<Header />
+				<PageContainer>
+					{/* this is just a hacky router to load the perf testing page if needed */}
+					{search === '?perf' ? (
+						<PerfPage />
+					) : search === '?transform' ? (
+						<TransformPage />
+					) : search === '?prepare' ? (
+						<PrepareDataPage />
+					) : (
+						<MainPage />
+					)}
+				</PageContainer>
+			</Container>
 		</StyleContext>
 	)
 })
 
+const Container = styled.div`
+	margin: 0px;
+	height: 100vh;
+	display: flex;
+	flex-flow: column;
+`
+
 const PageContainer = styled.div`
-	padding: 20px;
+	padding: 20px 20px 0px 20px;
+	height: 90%;
 `

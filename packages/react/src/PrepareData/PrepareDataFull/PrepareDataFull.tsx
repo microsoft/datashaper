@@ -121,19 +121,20 @@ const SectionTitle = styled.span`
 `
 
 const Container = styled.div`
+	display: flex;
+	flex-direction: column;
 	height: 100%;
-	position: fixed;
 	width: 100%;
 `
 
 const PreviewContainer = styled.div`
 	display: flex;
-	height: 53%;
+	height: 50%;
 	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
 const InputContainer = styled.div`
-	height: 47%;
+	height: 50%;
 	display: flex;
 	overflow: hidden;
 	padding-bottom: 10px;
@@ -150,6 +151,7 @@ const OutputContainer = styled.div`
 	padding: 10px;
 	height: 45%;
 	display: flex;
+	width: 100%;
 `
 
 const SectionSeparator = styled(Separator)`
@@ -159,7 +161,7 @@ const SectionSeparator = styled(Separator)`
 
 const StepsContainer = styled.div`
 	padding-bottom: 10px;
-	height: 47%;
+	height: 50%;
 	display: flex;
 	column-gap: 8px;
 	overflow: auto;
@@ -172,5 +174,5 @@ const TablesListContainer = styled.div`
 `
 
 const InputDetailsContainer = styled.div`
-	width: 70%;
+	width: 76%;
 `

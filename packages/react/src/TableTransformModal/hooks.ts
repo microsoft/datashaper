@@ -16,7 +16,7 @@ import {
 
 export function useHandleDismiss(
 	onDismiss: (() => void) | undefined,
-	setInternal: (step?: Step) => void,
+	setInternal: (step: Step | undefined) => void,
 ): () => void {
 	return useCallback(() => {
 		setInternal(undefined)
@@ -43,12 +43,12 @@ export function useInternalStep(
 
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {
-			const step = factory(
+			const _step = factory(
 				verb,
 				lastOutput ?? '',
 				`output-${stepsLength + 1}-${verb}`,
 			)
-			setInternal(step)
+			setInternal(_step)
 		},
 		[lastOutput, stepsLength, setInternal],
 	)
