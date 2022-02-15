@@ -7,8 +7,8 @@ import { escape } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { RowObject } from 'arquero/dist/types/table/table'
 import { ExprObject } from 'arquero/dist/types/table/transformable'
-import { columnType, MergeStrategy, TableStore } from '../..'
-import { DataType, MergeArgs, Step } from '../../types'
+import { columnType, MergeStrategy, TableStore } from '../../index.js'
+import { DataType, MergeArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero merge operation.

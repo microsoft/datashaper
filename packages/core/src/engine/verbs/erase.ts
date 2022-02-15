@@ -6,8 +6,8 @@
 import { from } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { RowObject } from 'arquero/dist/types/table/table'
-import { TableStore } from '../..'
-import { EraseArgs, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { EraseArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero erase operation.

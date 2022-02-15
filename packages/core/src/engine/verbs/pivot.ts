@@ -4,9 +4,9 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { PivotArgs, Step } from '../../types'
-import { singleRollup } from '../util'
+import { TableStore } from '../../index.js'
+import { PivotArgs, Step } from '../../types.js'
+import { singleRollup } from '../util/index.js'
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
