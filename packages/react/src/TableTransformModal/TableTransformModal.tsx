@@ -47,6 +47,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			step,
 			nextInputTable,
 			stepsLength,
+			store,
 		)
 
 		const handleDismiss = useHandleDismiss(onDismiss, setInternal)

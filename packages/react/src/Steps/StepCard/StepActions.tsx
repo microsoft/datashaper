@@ -19,22 +19,22 @@ export function useStepActions(
 			{
 				iconProps: iconProps.preview,
 				onClick: () => onSelect && onSelect(step?.output),
-				ariaLabel: 'preview table',
+				title: 'Preview table',
 			},
 			{
 				iconProps: iconProps.edit,
 				onClick: () => onEdit && onEdit(step, index),
-				ariaLabel: 'edit step',
+				title: 'Edit step',
 			},
 			{
 				iconProps: iconProps.duplicate,
 				onClick: () => onDuplicate && onDuplicate(step),
-				ariaLabel: 'duplicate step',
+				title: 'Duplicate step',
 			},
 			{
 				iconProps: iconProps.delete,
 				onClick: () => onDelete && onDelete(index),
-				ariaLabel: 'delete step',
+				title: 'Delete step',
 			},
 		] as IButtonProps[]
 	}, [step, index, onEdit, onDelete, onDuplicate, onSelect])

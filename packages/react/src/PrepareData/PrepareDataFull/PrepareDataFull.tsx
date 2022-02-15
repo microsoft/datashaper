@@ -105,6 +105,7 @@ const Container = styled.div`
 
 const PreviewContainer = styled.div`
 	width: 78%;
+	min-width: 300px;
 `
 
 const InputContainer = styled.div`
@@ -128,6 +129,7 @@ const OutputContainer = styled.div`
 
 const StepsTrayContainer = styled.div`
 	min-height: 20%;
+	max-height: 200px;
 	padding: 10px 20px 10px 20px;
 	margin: 20px 0px 20px 0px;
 	background-color: ${({ theme }) => theme.palette.neutralLight};
@@ -142,4 +144,5 @@ const StepsContainer = styled.div`
 const TablesListContainer = styled.div`
 	display: flex;
 	width: 26%;
+	min-width: 295px;
 `
