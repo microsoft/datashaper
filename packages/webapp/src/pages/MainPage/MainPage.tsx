@@ -209,6 +209,7 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
+	padding: 0px 20px 0px 20px;
 `
 
 const Workspace = styled.div`

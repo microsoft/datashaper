@@ -4,11 +4,7 @@
  */
 import type { Step } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
-import {
-	IRenderFunction,
-	IDetailsColumnProps,
-	Separator,
-} from '@fluentui/react'
+import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { StepsList } from '../../Steps/index.js'
@@ -54,9 +50,7 @@ export const PrepareDataFull: React.FC<{
 					</InputDisplay>
 				</TablesListContainer>
 
-				<SectionSeparator vertical />
 				<PreviewContainer>
-					<SectionTitle>Preview</SectionTitle>
 					<PreviewTable
 						headerCommandBar={inputHeaderCommandBar}
 						selectedMetadata={selectedMetadata}
@@ -66,17 +60,19 @@ export const PrepareDataFull: React.FC<{
 				</PreviewContainer>
 			</InputContainer>
 
-			<StepsContainer>
-				<SectionTitle>Steps</SectionTitle>
-				<StepsList
-					nextInputTable={lastTableName}
-					onDelete={onDeleteStep}
-					onSave={onSaveStep}
-					onSelect={setSelectedTableName}
-					store={store}
-					steps={steps}
-				/>
-			</StepsContainer>
+			<StepsTrayContainer>
+				<StepsContainer>
+					<SectionTitle>Steps</SectionTitle>
+					<StepsList
+						nextInputTable={lastTableName}
+						onDelete={onDeleteStep}
+						onSave={onSaveStep}
+						onSelect={setSelectedTableName}
+						store={store}
+						steps={steps}
+					/>
+				</StepsContainer>
+			</StepsTrayContainer>
 
 			<OutputContainer>
 				<SectionTitle>Output</SectionTitle>
@@ -97,7 +93,7 @@ const SectionTitle = styled.span`
 	font-size: 15px;
 	align-self: center;
 	text-transform: uppercase;
-	color: ${({ theme }) => theme.palette.neutralLight};
+	color: ${({ theme }) => theme.palette.neutralTertiary};
 `
 
 const Container = styled.div`
@@ -108,15 +104,16 @@ const Container = styled.div`
 `
 
 const PreviewContainer = styled.div`
-	display: flex;
+	width: 100%;
 `
 
 const InputContainer = styled.div`
-	height: 30%;
+	min-height: 30%;
+	max-height: 30%;
 	display: flex;
 	overflow: hidden;
-	padding-bottom: 10px;
-	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
+	padding: 0px 20px 0px 20px;
+	column-gap: 40px;
 `
 
 const InputDisplay = styled.div`
@@ -126,23 +123,24 @@ const InputDisplay = styled.div`
 `
 
 const OutputContainer = styled.div`
-	padding: 10px;
-	height: 35%;
+	padding: 0px 20px 10px 20px;
+	min-height: 35%;
+	max-height: 35%;
 	display: flex;
-	width: 100%;
 `
 
-const SectionSeparator = styled(Separator)`
-	padding: 14px;
-	height: 90%;
+const StepsTrayContainer = styled.div`
+	min-height: 20%;
+	max-height: 20%;
+	padding: 10px 20px 10px 20px;
+	margin: 20px 0px 20px 0px;
+	background-color: ${({ theme }) => theme.palette.neutralLight};
 `
-
 const StepsContainer = styled.div`
-	padding-bottom: 10px;
 	display: flex;
 	column-gap: 8px;
 	overflow: auto;
-	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
+	height: 100%;
 `
 
 const TablesListContainer = styled.div`

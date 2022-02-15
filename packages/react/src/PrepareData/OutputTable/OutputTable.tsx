@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step } from '@data-wrangling-components/core'
-import { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { Step } from '@data-wrangling-components/core'
+import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import {
@@ -55,7 +55,7 @@ export const OutputTable: React.FC<{
 })
 
 const Container = styled.div`
-	width: 95%;
+	width: 100%;
 `
 
 const TableContainer = styled.div`

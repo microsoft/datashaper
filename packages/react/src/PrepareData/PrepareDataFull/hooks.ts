@@ -7,7 +7,6 @@ import {
 	TableStore,
 	introspect,
 	TableMetadata,
-	TableContainer,
 } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -17,7 +16,6 @@ import { usePipeline, useStore } from '../../common/index.js'
 import {
 	useOnDeleteStep,
 	useOnSaveStep,
-	useTables,
 	useRunPipeline,
 	useAddNewTables,
 } from '../hooks'

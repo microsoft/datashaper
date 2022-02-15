@@ -3,19 +3,20 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
+import { DocumentCard, DocumentCardActions } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { selectStepDescription } from '../../selectStepDescription.js'
 import { useStepActions } from './StepActions.js'
 
-export const StepItem: React.FC<{
+export const StepCard: React.FC<{
 	step: Step
 	index: number
 	onEdit?: (step: Step, index: number) => void
 	onDelete?: (index: number) => void
 	onDuplicate?: (step: Step) => void
 	onSelect?: (name: string) => void
-}> = memo(function StepItem({
+}> = memo(function StepCard({
 	step,
 	index,
 	onEdit,
@@ -24,7 +25,7 @@ export const StepItem: React.FC<{
 	onSelect,
 }) {
 	const Description = useMemo(() => selectStepDescription(step), [step])
-	const Actions = useStepActions(
+	const stepActions = useStepActions(
 		step,
 		index,
 		onEdit,
@@ -34,17 +35,30 @@ export const StepItem: React.FC<{
 	)
 
 	return (
-		<Container>
-			<Description actions={Actions} step={step} showInput showOutput />
-		</Container>
+		<Card styles={styles.card}>
+			<CardContent>
+				<Description step={step} showInput showOutput />
+			</CardContent>
+			<DocumentCardActions styles={styles.actions} actions={stepActions} />
+		</Card>
 	)
 })
 
-const Container = styled.div`
-	padding: 4px 14px 8px 14px;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 4px;
-	margin: 8px;
-	border: 1px solid #c5c5c5;
-	height: 80%;
+const styles = {
+	card: {
+		root: {
+			minWidth: 'unset',
+		},
+	},
+	actions: { root: { padding: 'unset' } },
+}
+
+const CardContent = styled.div`
+	padding: 8px 8px 0px 8px;
+`
+
+const Card = styled(DocumentCard)`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 `

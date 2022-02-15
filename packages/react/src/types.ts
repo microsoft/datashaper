@@ -2,11 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	TableStore,
-	Step,
-	TableContainer,
-} from '@data-wrangling-components/core'
+import type { TableStore, Step } from '@data-wrangling-components/core'
 import type { IDropdownOption, IModalProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 

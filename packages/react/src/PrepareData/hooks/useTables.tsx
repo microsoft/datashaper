@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { TableContainer } from '@data-wrangling-components/core'
-import { BaseFile } from '@data-wrangling-components/utilities'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { TableContainer } from '@data-wrangling-components/core'
+import type { BaseFile } from '@data-wrangling-components/utilities'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
 export function useTables(

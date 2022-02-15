@@ -16,6 +16,7 @@ import { HEIGHT } from './constants.js'
 interface CommandBarProps {
 	commands: ICommandBarItemProps[]
 	width?: string
+	bgColor?: string
 }
 
 export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
@@ -25,6 +26,7 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	const overflowButtonProps = useOverflowButtonProps()
 	const handleOnDataReduce = useHandleOnDataReduce()
 	const handleOnDataGrown = useHandleOnDataGrown()
+
 	return (
 		<CommandBarWrapper width={width}>
 			<CB

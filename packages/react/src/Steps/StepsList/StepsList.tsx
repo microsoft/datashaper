@@ -4,10 +4,10 @@
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { DialogConfirm } from '@essex-js-toolkit/themed-components'
-import { DefaultButton } from '@fluentui/react'
+import { IconButton, TooltipHost } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { StepItem, TableTransformModal, useDeleteConfirm } from '../../index.js'
+import { StepCard, TableTransformModal, useDeleteConfirm } from '../../index.js'
 import { useManageModal, useManageSteps } from './hooks'
 
 export const StepsList: React.FC<{
@@ -57,30 +57,9 @@ export const StepsList: React.FC<{
 
 	return (
 		<Container>
-			{onDelete && (
-				<DialogConfirm
-					toggle={toggleDeleteModalOpen}
-					title="Are you sure you want to delete this step?"
-					subText="You will lose all the table transformations made after this step."
-					show={isDeleteModalOpen}
-					onConfirm={onConfirmDelete}
-				/>
-			)}
-
-			<TableTransformModal
-				step={step}
-				headerText={modalHeaderText}
-				nextInputTable={nextInputTable}
-				stepsLength={steps?.length}
-				onTransformRequested={onCreate}
-				isOpen={isTableModalOpen}
-				store={store}
-				onDismiss={onDismissClearTableModal}
-			/>
-
 			{steps?.map((_step, index) => {
 				return (
-					<StepItem
+					<StepCard
 						onEdit={onEditClicked}
 						onDelete={onDeleteClicked}
 						onDuplicate={onDuplicateClicked}
@@ -94,10 +73,36 @@ export const StepsList: React.FC<{
 
 			{onSave && (
 				<ButtonContainer>
-					<DefaultButton iconProps={iconProps.add} onClick={showTableModal}>
-						Add step
-					</DefaultButton>
+					{!steps?.length && (
+						<EmptyStepTexts>Add here the first preparation step</EmptyStepTexts>
+					)}
+					<TooltipHost content="Add step" setAriaDescribedBy={false}>
+						<IconButton
+							iconProps={iconProps.add}
+							onClick={showTableModal}
+						></IconButton>
+					</TooltipHost>
 				</ButtonContainer>
+			)}
+
+			<TableTransformModal
+				step={step}
+				headerText={modalHeaderText}
+				nextInputTable={nextInputTable}
+				stepsLength={steps?.length}
+				onTransformRequested={onCreate}
+				isOpen={isTableModalOpen}
+				store={store}
+				onDismiss={onDismissClearTableModal}
+			/>
+			{onDelete && (
+				<DialogConfirm
+					toggle={toggleDeleteModalOpen}
+					title="Are you sure you want to delete this step?"
+					subText="You will lose all the table transformations made after this step."
+					show={isDeleteModalOpen}
+					onConfirm={onConfirmDelete}
+				/>
 			)}
 		</Container>
 	)
@@ -107,9 +112,14 @@ const iconProps = {
 	add: { iconName: 'Add' },
 }
 
+const EmptyStepTexts = styled.div`
+	color: ${({ theme }) => theme.application().border().hex()};
+`
+
 const Container = styled.div`
 	display: flex;
 	overflow: auto;
+	column-gap: 8px;
 `
 
 const ButtonContainer = styled.div`
@@ -117,4 +127,5 @@ const ButtonContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	white-space: pre;
+	align-items: center;
 `

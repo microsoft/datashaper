@@ -14,6 +14,7 @@ import { useMemo } from 'react'
  */
 export function useCommands(
 	commands: ICommandBarItemProps[] = [],
+	bgColor?: string,
 ): ICommandBarItemProps[] {
 	const theme = useThematic()
 	return useMemo(() => {
@@ -30,7 +31,9 @@ export function useCommands(
 					},
 					buttonStyles: {
 						root: {
-							background: theme.application().accent().hex(),
+							background: bgColor
+								? bgColor
+								: theme.application().accent().hex(),
 							color: theme.application().background().hex(),
 						},
 						menuIcon: {
@@ -41,5 +44,5 @@ export function useCommands(
 				command,
 			),
 		)
-	}, [theme, commands])
+	}, [theme, commands, bgColor])
 }

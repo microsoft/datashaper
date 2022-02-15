@@ -83,7 +83,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 					{internal && StepArgs && (
 						<>
 							<StepArgs step={internal} store={store} onChange={setInternal} />
-							<PrimaryButton onClick={handleRunClick}>Run</PrimaryButton>
+							<PrimaryButton onClick={handleRunClick}>Save</PrimaryButton>
 						</>
 					)}
 				</ContainerBody>
