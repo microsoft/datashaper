@@ -76,6 +76,8 @@ const Container = styled.div`
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
+	height: 100%;
+	margin-left: 40px;
 `
 
 const PreviewText = styled.div`

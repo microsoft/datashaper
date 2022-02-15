@@ -104,16 +104,14 @@ const Container = styled.div`
 `
 
 const PreviewContainer = styled.div`
-	width: 100%;
+	width: 78%;
 `
 
 const InputContainer = styled.div`
-	min-height: 30%;
-	max-height: 30%;
+	height: 30%;
 	display: flex;
 	overflow: hidden;
 	padding: 0px 20px 0px 20px;
-	column-gap: 40px;
 `
 
 const InputDisplay = styled.div`
@@ -124,14 +122,12 @@ const InputDisplay = styled.div`
 
 const OutputContainer = styled.div`
 	padding: 0px 20px 10px 20px;
-	min-height: 35%;
-	max-height: 35%;
+	height: 35%;
 	display: flex;
 `
 
 const StepsTrayContainer = styled.div`
 	min-height: 20%;
-	max-height: 20%;
 	padding: 10px 20px 10px 20px;
 	margin: 20px 0px 20px 0px;
 	background-color: ${({ theme }) => theme.palette.neutralLight};
