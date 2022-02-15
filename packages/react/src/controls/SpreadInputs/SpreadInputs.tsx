@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SpreadArgs, SpreadStep, Step } from '@data-wrangling-components/core'
-import { ActionButton } from '@fluentui/react'
+import { ActionButton, Label } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
@@ -29,7 +29,7 @@ export const SpreadInputs: React.FC<StepComponentProps> = memo(
 					...internal,
 					args: {
 						...internal.args,
-						columns: [...internal.args.columns, first(tbl)],
+						to: [...internal.args.to, first(tbl)],
 					},
 				})
 		}, [internal, tbl, onChange])
@@ -49,6 +49,8 @@ export const SpreadInputs: React.FC<StepComponentProps> = memo(
 					selectedKey={(step.args as SpreadArgs).column}
 					onChange={handleColumnChange}
 				/>
+
+				<Label>New column names</Label>
 
 				{columns}
 				<ActionButton
@@ -73,16 +75,16 @@ function useColumns(
 	onChange?: (step: Step) => void,
 ) {
 	return useMemo(() => {
-		return step.args.columns.map((column: string, index: number) => {
+		return step.args.to.map((column: string, index: number) => {
 			const handleColumnChange = (col: string) => {
 				const update = { ...step }
-				set(update, `args.columns[${index}]`, col)
+				set(update, `args.to[${index}]`, col)
 				onChange && onChange(update)
 			}
 
 			const handleDeleteClick = () => {
 				const update = { ...step }
-				update.args.columns.splice(index, 1)
+				update.args.to.splice(index, 1)
 				onChange && onChange(update)
 			}
 

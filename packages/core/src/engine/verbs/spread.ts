@@ -18,8 +18,8 @@ export async function spread(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { columns, column } = args as SpreadArgs
+	const { to, column } = args as SpreadArgs
 	const inputTable = await store.get(input)
 
-	return inputTable.spread(column, { as: columns })
+	return inputTable.spread(column, { as: to })
 }

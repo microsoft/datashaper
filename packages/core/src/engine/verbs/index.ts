@@ -68,12 +68,18 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Lookup:
 		case Verb.Groupby:
 		case Verb.Dedupe:
-		case Verb.Spread:
 		case Verb.Unroll:
 			return {
 				...base,
 				args: {
 					columns: [],
+				},
+			}
+		case Verb.Spread:
+			return {
+				...base,
+				args: {
+					to: [],
 				},
 			}
 		case Verb.Fetch:

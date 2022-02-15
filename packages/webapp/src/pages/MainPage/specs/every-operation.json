@@ -54,6 +54,14 @@
 			}
 		},
 		{
+			"verb": "dedupe",
+			"input": "data/products.csv",
+			"output": "dedupe-1",
+			"args": {
+				"columns": "ID"
+			}
+		},
+		{
 			"verb": "derive",
 			"input": "data/products.csv",
 			"output": "derive-1",
@@ -70,6 +78,15 @@
 			"output": "difference-1",
 			"args": {
 				"others": ["data/companies2.csv"]
+			}
+		},
+		{
+			"verb": "erase",
+			"input": "data/companies.csv",
+			"output": "erase-1",
+			"args": {
+				"value": 150000,
+				"column": "Employees"
 			}
 		},
 		{
@@ -96,7 +113,8 @@
 			"input": "data/companies.csv",
 			"output": "fold-1",
 			"args": {
-				"columns": ["Name", "Employees"]
+				"columns": ["Name", "Employees"],
+				"to": ["key", "value"]
 			}
 		},
 		{
@@ -105,6 +123,15 @@
 			"output": "groupby-1",
 			"args": {
 				"columns": ["ID"]
+			}
+		},
+		{
+			"verb": "impute",
+			"input": "data/companies.csv",
+			"output": "impute-1",
+			"args": {
+				"to": "Name",
+				"value": "emptyValue"
 			}
 		},
 		{
@@ -132,6 +159,26 @@
 				"other": "data/products.csv",
 				"on": ["ID", "ID"],
 				"columns": ["Product"]
+			}
+		},
+		{
+			"verb": "merge",
+			"input": "data/companies.csv",
+			"output": "merge-1",
+			"args": {
+				"strategy": "concat",
+				"to": "result",
+				"columns": ["FY20 Sales", "FY21 Sales"]
+			}
+		},
+		{
+			"verb": "pivot",
+			"input": "data/companies.csv",
+			"output": "pivot-1",
+			"args": {
+				"key": "key",
+				"value": "value",
+				"operation": "any"
 			}
 		},
 		{
@@ -174,6 +221,16 @@
 			}
 		},
 		{
+			"verb": "rollup",
+			"input": "data/companies.csv",
+			"output": "rollup-1",
+			"args": {
+				"to": "count",
+				"column": "Product",
+				"operation": "count"
+			}
+		},
+		{
 			"verb": "sample",
 			"input": "data/companies.csv",
 			"output": "sample-1",
@@ -194,7 +251,24 @@
 			"input": "aggregate-2",
 			"output": "spread-1",
 			"args": {
-				"columns": ["Product List"]
+				"column": "Product List"
+			}
+		},
+		{
+			"verb": "unfold",
+			"input": "data/companies.csv",
+			"output": "unfold-1",
+			"args": {
+				"to": ["key", "value"],
+				"columns": ["Name"]
+			}
+		},
+		{
+			"verb": "ungroup",
+			"input": "data/companies.csv",
+			"output": "ungroup-1",
+			"args": {
+				"columns": ["Name", "Employees"]
 			}
 		},
 		{
@@ -203,6 +277,14 @@
 			"output": "union-1",
 			"args": {
 				"others": ["data/companies2.csv"]
+			}
+		},
+		{
+			"verb": "unorder",
+			"input": "data/companies.csv",
+			"output": "unorder-1",
+			"args": {
+				"orders": [{ "column": "Name", "direction": "asc" }]
 			}
 		},
 		{

@@ -18,8 +18,8 @@ export const SpreadDescription: React.FC<StepDescriptionProps> = memo(
 					value: args.column,
 				},
 				{
-					before: `column${(args.columns || []).length !== 1 ? 's' : ''}`,
-					value: args.columns ? args.columns.join(', ') : null,
+					before: `column${(args.to || []).length !== 1 ? 's' : ''}`,
+					value: args.to ? args.to.join(', ') : null,
 				},
 			]
 		}, [props])
