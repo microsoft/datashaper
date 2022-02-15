@@ -69,7 +69,6 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 
 		const handleToChange = useCallback(
 			(e, to) => {
-				console.log('to', to)
 				const updated = updateTo(internal, to)
 				onChange && onChange(updated)
 			},

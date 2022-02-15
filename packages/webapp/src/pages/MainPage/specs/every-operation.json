@@ -58,7 +58,7 @@
 			"input": "data/products.csv",
 			"output": "dedupe-1",
 			"args": {
-				"columns": "ID"
+				"columns": ["ID"]
 			}
 		},
 		{
@@ -163,7 +163,7 @@
 		},
 		{
 			"verb": "merge",
-			"input": "data/companies.csv",
+			"input": "data/products.csv",
 			"output": "merge-1",
 			"args": {
 				"strategy": "concat",
@@ -176,8 +176,8 @@
 			"input": "data/companies.csv",
 			"output": "pivot-1",
 			"args": {
-				"key": "key",
-				"value": "value",
+				"key": "ID",
+				"value": "Name",
 				"operation": "any"
 			}
 		},
@@ -256,11 +256,11 @@
 		},
 		{
 			"verb": "unfold",
-			"input": "data/companies.csv",
+			"input": "data/products.csv",
 			"output": "unfold-1",
 			"args": {
 				"to": ["key", "value"],
-				"columns": ["Name"]
+				"columns": ["ID", "Product"]
 			}
 		},
 		{

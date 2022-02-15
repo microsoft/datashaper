@@ -59,7 +59,7 @@ function useColumns(
 	onChange?: (step: Step) => void,
 ) {
 	return useMemo(() => {
-		return step.args.columns.map((column: string, index: number) => {
+		return (step.args.columns || []).map((column: string, index: number) => {
 			const handleColumnChange = (col: string) => {
 				const update = { ...step }
 				set(update, `args.columns[${index}]`, col)
