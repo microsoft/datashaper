@@ -71,11 +71,3 @@ export interface StepDescriptionProps extends StepDependent {
 	showOutput?: boolean
 	actions?: JSX.Element
 }
-
-export enum TableGroup {
-	Input = 'input',
-	Intermediary = 'intermediary',
-}
-export interface GroupedTable extends TableContainer {
-	group: TableGroup
-}

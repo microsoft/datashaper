@@ -295,7 +295,7 @@ export function usePipeline(store: TableStore): Pipeline {
 }
 
 export function useCommonCommands(
-	showModal: any | undefined,
+	showModal?: any | undefined,
 	changeTableFeatures?: (name: string) => void,
 	features?: Partial<DetailsListFeatures>,
 ): ICommandBarItemProps[] {
@@ -324,7 +324,7 @@ export function useToggleStatsHeaderCommand(
 			key: 'toggle-stats',
 			iconOnly: true,
 			text: 'Toggle header features',
-			iconProps: iconProps.bar,
+			iconProps: iconProps.settings,
 			subMenuProps: {
 				items: [
 					{
@@ -373,7 +373,7 @@ export function useDeriveColumnCommand(
 
 const iconProps = {
 	add: { iconName: 'Add' },
-	bar: { iconName: 'BarChartVerticalFilterSolid' },
+	settings: { iconName: 'Settings' },
 	barChart: { iconName: 'BarChart4' },
 	stats: { iconName: 'AllApps' },
 }

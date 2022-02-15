@@ -2,53 +2,33 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
-import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
-import { useBoolean } from '@fluentui/react-hooks'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { Step } from '@data-wrangling-components/core'
+import { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
+import ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
-	ColumnTransformModal,
 	useCommonCommands,
 } from '../../index.js'
 import { useToggleTableFeatures } from '../hooks'
-import { useDefaultStep } from './hooks'
 
 export const OutputTable: React.FC<{
 	output?: ColumnTable
-	lastTableName?: string
 	onTransform?: (step: Step) => void
 	headerCommandBar?: IRenderFunction<IDetailsColumnProps>[]
-}> = memo(function OutputTable({
-	output,
-	onTransform,
-	headerCommandBar,
-	lastTableName,
-}) {
-	const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =
-		useBoolean(false)
+}> = memo(function OutputTable({ output, onTransform, headerCommandBar }) {
 	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures()
 	const commands = useCommonCommands(
-		showModal,
+		undefined,
 		changeTableFeatures,
 		tableFeatures,
 	)
-	const defaultStep = useDefaultStep(lastTableName)
-
 	return (
 		<>
 			{output && (
 				<>
-					<ColumnTransformModal
-						table={output}
-						step={defaultStep}
-						isOpen={isModalOpen}
-						onDismiss={hideModal}
-						onTransformRequested={onTransform}
-					/>
 					<Container>
 						<ArqueroTableHeader
 							table={output}

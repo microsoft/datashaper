@@ -7,17 +7,17 @@ import {
 	TableStore,
 	introspect,
 	TableMetadata,
+	TableContainer,
 } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { last } from 'lodash'
 import { useState, useMemo, useEffect } from 'react'
 import { usePipeline, useStore } from '../../common/index.js'
-import type { GroupedTable } from '../../index.js'
 import {
 	useOnDeleteStep,
 	useOnSaveStep,
-	useGroupedTables,
+	useTables,
 	useRunPipeline,
 	useAddNewTables,
 } from '../hooks'
@@ -27,7 +27,6 @@ export function useBusinessLogic(
 	onUpdateSteps: (steps: Step[]) => void,
 	steps?: Step[],
 ): {
-	groupedTables: GroupedTable[]
 	selectedTable: ColumnTable | undefined
 	setSelectedTableName: (name: string) => void
 	onDeleteStep: (index: number) => void
@@ -45,7 +44,6 @@ export function useBusinessLogic(
 	const store = useStore()
 	const pipeline = usePipeline(store)
 	const runPipeline = useRunPipeline(pipeline, setStoredTables)
-	const groupedTables = useGroupedTables(files, storedTables)
 	const addNewTables = useAddNewTables(store, setStoredTables)
 
 	const selectedTable = useMemo((): ColumnTable | undefined => {
@@ -93,7 +91,6 @@ export function useBusinessLogic(
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
 
 	return {
-		groupedTables,
 		selectedTable,
 		setSelectedTableName,
 		onDeleteStep,

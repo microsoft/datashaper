@@ -33,7 +33,7 @@ export function useManageSteps(
 
 	const modalHeaderText = useMemo(
 		(): any =>
-			step ? (isDuplicatingStep ? 'Duplicate Step' : 'Edit step') : 'New step',
+			step ? (isDuplicatingStep ? 'Duplicate step' : 'Edit step') : 'New step',
 		[step, isDuplicatingStep],
 	)
 

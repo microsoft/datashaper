@@ -29,7 +29,6 @@ export const PrepareDataFull: React.FC<{
 	outputHeaderCommandBar,
 }) {
 	const {
-		groupedTables,
 		selectedTable,
 		selectedTableName,
 		setSelectedTableName,
@@ -48,44 +47,42 @@ export const PrepareDataFull: React.FC<{
 					<SectionTitle>Inputs</SectionTitle>
 					<InputDisplay>
 						<TablesList
-							files={groupedTables}
+							tables={files}
 							selected={selectedTableName}
 							onSelect={setSelectedTableName}
 						/>
 					</InputDisplay>
-
-					<SectionSeparator vertical />
 				</TablesListContainer>
-				<InputDetailsContainer>
-					<PreviewContainer>
-						<SectionTitle>Preview</SectionTitle>
-						<PreviewTable
-							headerCommandBar={inputHeaderCommandBar}
-							selectedMetadata={selectedMetadata}
-							table={selectedTable}
-							name={selectedTableName}
-						/>
-					</PreviewContainer>
-					<StepsContainer>
-						<SectionTitle>Steps</SectionTitle>
-						<StepsList
-							nextInputTable={lastTableName}
-							onDelete={onDeleteStep}
-							onSave={onSaveStep}
-							onSelect={setSelectedTableName}
-							store={store}
-							steps={steps}
-						/>
-					</StepsContainer>
-				</InputDetailsContainer>
+
+				<SectionSeparator vertical />
+				<PreviewContainer>
+					<SectionTitle>Preview</SectionTitle>
+					<PreviewTable
+						headerCommandBar={inputHeaderCommandBar}
+						selectedMetadata={selectedMetadata}
+						table={selectedTable}
+						name={selectedTableName}
+					/>
+				</PreviewContainer>
 			</InputContainer>
+
+			<StepsContainer>
+				<SectionTitle>Steps</SectionTitle>
+				<StepsList
+					nextInputTable={lastTableName}
+					onDelete={onDeleteStep}
+					onSave={onSaveStep}
+					onSelect={setSelectedTableName}
+					store={store}
+					steps={steps}
+				/>
+			</StepsContainer>
 
 			<OutputContainer>
 				<SectionTitle>Output</SectionTitle>
 				<OutputTable
 					headerCommandBar={outputHeaderCommandBar}
 					output={output}
-					lastTableName={lastTableName}
 					onTransform={onSaveStep}
 				/>
 			</OutputContainer>
@@ -112,12 +109,10 @@ const Container = styled.div`
 
 const PreviewContainer = styled.div`
 	display: flex;
-	height: 50%;
-	border-bottom: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
 const InputContainer = styled.div`
-	height: 50%;
+	height: 30%;
 	display: flex;
 	overflow: hidden;
 	padding-bottom: 10px;
@@ -132,7 +127,7 @@ const InputDisplay = styled.div`
 
 const OutputContainer = styled.div`
 	padding: 10px;
-	height: 45%;
+	height: 35%;
 	display: flex;
 	width: 100%;
 `
@@ -144,7 +139,6 @@ const SectionSeparator = styled(Separator)`
 
 const StepsContainer = styled.div`
 	padding-bottom: 10px;
-	height: 50%;
 	display: flex;
 	column-gap: 8px;
 	overflow: auto;
@@ -154,8 +148,4 @@ const StepsContainer = styled.div`
 const TablesListContainer = styled.div`
 	display: flex;
 	width: 26%;
-`
-
-const InputDetailsContainer = styled.div`
-	width: 76%;
 `
