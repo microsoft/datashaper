@@ -9,8 +9,8 @@ import {
 	FieldAggregateOperation,
 	StringComparisonOperator,
 	FilterCompareType,
-} from '../../types'
-import { CompareWrapper } from './types'
+} from '../../types.js'
+import { CompareWrapper } from './types.js'
 
 /**
  * This creates an arquero expression suitable for comparison of direct values or columns.

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Verb } from '../../types'
-import { verbs } from '../steps'
+import { Verb } from '../../types.js'
+import { verbs } from '../steps.js'
 
 describe('step utilities', () => {
 	test('all verbs tagged', () => {

@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../../TableStore'
-import { SetOp, SetOperationArgs, Step } from '../../types'
+import { TableStore } from '../../TableStore.js'
+import { SetOp, SetOperationArgs, Step } from '../../types.js'
 
 /**
  * All of the arquero set verbs use the same args.

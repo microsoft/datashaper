@@ -10,7 +10,7 @@ import {
 import { BaseFile } from '@data-wrangling-components/utilities'
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 const TABLES = [
 	`data/companies.csv`,

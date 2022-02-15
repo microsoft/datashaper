@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { BaseFile, FileWithPath } from '../common'
-import { FileType, Json } from '../types'
+import { BaseFile, FileWithPath } from '../common/index.js'
+import { FileMimeType } from '../index.js'
+import { FileType, Json } from '../types.js'
 
 interface FileOptions {
 	name?: string
@@ -14,7 +15,7 @@ interface FileOptions {
 
 const fileDefaults = {
 	name: 'File.txt',
-	type: 'text/plain',
+	type: FileMimeType.txt,
 	path: '',
 }
 
@@ -68,11 +69,25 @@ export const fetchFile = async (url: string): Promise<Blob> => {
 	return fetch(url).then(response => response.blob())
 }
 
+export function guessFileType(name: string): string {
+	try {
+		const ext = extension(name)
+		const type = FileMimeType[ext as keyof typeof FileMimeType]
+		if (type) {
+			return type
+		}
+	} catch {
+		return fileDefaults.type
+	}
+	return fileDefaults.type
+}
+
 export const createFile = (
 	content: Blob,
 	options?: Omit<FileOptions, 'path'>,
 ): File => {
-	const { name, type } = { ...fileDefaults, ...options }
+	const { name } = { ...fileDefaults, ...options }
+	const type = options?.type || guessFileType(name)
 	return new File([content], name, { type })
 }
 
@@ -168,7 +183,7 @@ export function renameDuplicatedFiles(files: BaseFile[]): BaseFile[] {
 	}
 	return files.map(file => {
 		let name = cleanName(file.name)
-		const count = fileNames[name]
+		const count = fileNames[name] as number
 		--fileNames[name]
 		if (count > 1) {
 			const ext = extension(name)

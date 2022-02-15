@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { isArray, isDate } from 'lodash'
-import { DataType, Value } from '..'
+import isArray from 'lodash-es/isArray.js'
+import isDate from 'lodash-es/isDate.js'
+import { DataType, Value } from '../index.js'
 
 /**
  * Guess the type of a table value with more discernment than typeof

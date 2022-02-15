@@ -6,11 +6,11 @@ import {
 	InputColumnArgs,
 	isInputColumnStep,
 } from '@data-wrangling-components/core'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleDropdownChange, useLoadTable } from './common'
 import { TableColumnDropdown } from './controls'
-import { HOCFunction, StepComponentProps } from './types'
+import type { HOCFunction, StepComponentProps } from './types'
 /**
  * Higher order component generator to wrap a Step in the input column dropdown.
  * @param label optional label to use for the dropdown instead of the default.

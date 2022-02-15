@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step } from '@data-wrangling-components/core'
-import React from 'react'
-import { StepDescriptionProps } from './types'
+import type { Step } from '@data-wrangling-components/core'
+import type { StepDescriptionProps } from './types'
 import {
 	AggregateDescription,
 	BinDescription,
@@ -73,5 +72,9 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 export function selectStepDescription(
 	step: Step,
 ): React.FC<StepDescriptionProps> {
-	return descriptions[step.verb]
+	const result = descriptions[step.verb]
+	if (!result) {
+		throw new Error(`could not find step with verb ${step?.verb}`)
+	}
+	return result
 }

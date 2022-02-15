@@ -4,8 +4,8 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { FoldArgs, Step } from '../../types'
+import { TableStore } from '../../index.js'
+import { FoldArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero fold operation. This creates two new columns:

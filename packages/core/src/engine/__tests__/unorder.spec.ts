@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb, SortDirection } from '../../types'
-import { orderby } from '../verbs/orderby'
-import { unorder } from '../verbs/unorder'
-import { TestStore } from './TestStore'
+import { Step, Verb, SortDirection } from '../../types.js'
+import { orderby } from '../verbs/orderby.js'
+import { unorder } from '../verbs/unorder.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for unorder verb', () => {
 	test('unorder test with SortDirection Ascending and string value', async () => {

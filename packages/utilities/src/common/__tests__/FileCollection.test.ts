@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { FileType } from '../..'
-import { createBaseFile } from '../../utils'
-import { FileCollection } from '../FileCollection'
+import { FileType } from '../../index.js'
+import { createBaseFile } from '../../utils/index.js'
+import { FileCollection } from '../FileCollection.js'
 
 let fileCollection
 const fileOpt = {

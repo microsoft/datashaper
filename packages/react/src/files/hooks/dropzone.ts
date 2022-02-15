@@ -10,7 +10,7 @@ import {
 } from '@data-wrangling-components/utilities'
 import { useCallback } from 'react'
 import { useDropzone as UseDz, DropzoneState as DzState } from 'react-dropzone'
-import { DzProps, FileRejection } from '../types'
+import type { DzProps, FileRejection } from '../types'
 
 export interface DropzoneState extends DzState {
 	acceptedFileTypesExt: string[]

@@ -4,10 +4,13 @@
  */
 /* eslint-disable @essex/adjacent-await */
 import { Step, Verb, Specification } from '@data-wrangling-components/core'
-import { DetailsListFeatures } from '@data-wrangling-components/react'
+import {
+	DetailsListFeatures,
+	StatsColumnType,
+} from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo, useState, useCallback, useMemo } from 'react'
+import { memo, useState, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { ControlBar } from './ControlBar'
 import { InputTables } from './InputTables'
@@ -20,7 +23,7 @@ import {
 	useInputTables,
 	useTableStore,
 	usePipeline,
-} from './hooks'
+} from './hooks.js'
 
 const columns = {
 	ID: {
@@ -28,6 +31,14 @@ const columns = {
 		iconName: 'FavoriteStarFill',
 	},
 }
+
+const DEFAULT_STATS = [
+	StatsColumnType.Min,
+	StatsColumnType.Max,
+	StatsColumnType.Distinct,
+	StatsColumnType.Invalid,
+]
+
 export const MainPage: React.FC = memo(function MainMage() {
 	// this is special to the test example,
 	// a running app needs to maintain its own list of uploaded files
@@ -44,6 +55,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const [features, setFeatures] = useState<DetailsListFeatures>({
 		smartHeaders: true,
 		smartCells: true,
+		statsColumnTypes: DEFAULT_STATS,
 	})
 	const [compact, setCompact] = useState<boolean>(true)
 

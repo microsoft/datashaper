@@ -1,20 +1,11 @@
 {
+	"extends": "@essex/tsconfig-base",
 	"compilerOptions": {
 		"module": "ESNext",
 		"moduleResolution": "Node",
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "ES2020.BigInt"],
-		"outDir": "lib",
-		"jsx": "react-jsx",
-		"resolveJsonModule": true,
-		"forceConsistentCasingInFileNames": true,
-		"allowSyntheticDefaultImports": true,
-		"strict": true,
-		"noImplicitAny": false,
-		"target": "ESNext",
-		"allowJs": false,
 		"skipLibCheck": true,
-		"esModuleInterop": false,
-		"isolatedModules": true
+		"skipDefaultLibCheck": true
 	},
 	"include": ["src/**/*"],
 	"exclude": ["**/__tests__/**"]

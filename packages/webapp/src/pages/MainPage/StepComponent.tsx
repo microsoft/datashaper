@@ -11,7 +11,7 @@ import {
 	selectStepComponent,
 	selectStepDescription,
 } from '@data-wrangling-components/react'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 export interface StepComponentProps {

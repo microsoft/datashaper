@@ -4,8 +4,8 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../..'
-import { Step, UnrollArgs } from '../../types'
+import { TableStore } from '../../index.js'
+import { Step, UnrollArgs } from '../../types.js'
 
 /**
  * Executes an arquero unroll operation.

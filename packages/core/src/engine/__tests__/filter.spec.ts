@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NumericComparisonOperator, FilterCompareType } from '../../../src'
-import { Step, StringComparisonOperator, Verb } from '../../types'
+import { NumericComparisonOperator, FilterCompareType } from '../../index.js'
+import { Step, StringComparisonOperator, Verb } from '../../types.js'
 import { filter } from '../verbs/filter'
 import { TestStore } from './TestStore'
 

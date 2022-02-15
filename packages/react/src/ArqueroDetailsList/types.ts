@@ -43,6 +43,19 @@ export type MetadataClickFunction = (
 	metadata?: ColumnMetadata,
 ) => void
 
+export enum StatsColumnType {
+	Type = 'type',
+	Count = 'count',
+	Distinct = 'distinct',
+	Invalid = 'invalid',
+	Mode = 'mode',
+	Min = 'min',
+	Max = 'max',
+	Mean = 'mean',
+	Median = 'median',
+	Stdev = 'stdev',
+}
+
 export interface DetailsListFeatures {
 	/**
 	 * Includes stats and histograms in the headers of columns
@@ -64,6 +77,10 @@ export interface DetailsListFeatures {
 	 * If statsColumnHeaders is true the user can pass a custom function to the click event
 	 */
 	onStatsColumnHeaderClick?: MetadataClickFunction
+	/**
+	 * If statsColumnHeaders or smartHeaders is true the user can pass which stats he wants
+	 */
+	statsColumnTypes?: StatsColumnType[]
 	/**
 	 * Use embedded charts and vis based on data types and cell contents.
 	 */

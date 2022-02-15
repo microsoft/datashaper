@@ -4,7 +4,7 @@
  */
 import { ImputeArgs, InputColumnArgs } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleTextfieldChange } from '../../common'
 import { StepComponentProps } from '../../types'

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { TableStore } from '../../TableStore'
+import { TableStore } from '../../TableStore.js'
 
 /**
  * This is a store implementation pre-loaded with test tables to ease setup.

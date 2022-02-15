@@ -4,7 +4,7 @@
  */
 
 import { DataType } from '@data-wrangling-components/core'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 import { isEmpty, getValue } from '../util'
 import { ArrayCell } from './ArrayCell'

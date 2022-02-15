@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
-import { select } from '../verbs/select'
-import { TestStore } from './TestStore'
+import { Step, Verb } from '../../types.js'
+import { select } from '../verbs/select.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for select verb', () => {
 	test('select test', () => {

@@ -4,7 +4,7 @@
  */
 
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash-es/cloneDeep.js'
 
 export type ResolverFunction = (name: string) => Promise<ColumnTable>
 

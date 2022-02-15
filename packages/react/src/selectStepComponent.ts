@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step } from '@data-wrangling-components/core'
-import React from 'react'
+import type { Step } from '@data-wrangling-components/core'
 import { CompoundBinarize, FilterAggregateLookup } from './compounds'
-import { StepComponentProps } from './types'
+import type { StepComponentProps } from './types'
 import {
 	Aggregate,
 	Bin,

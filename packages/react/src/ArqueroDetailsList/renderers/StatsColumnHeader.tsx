@@ -5,13 +5,23 @@
 import { ColumnStats, formatIfNumber } from '@data-wrangling-components/core'
 import { useThematic } from '@thematic/react'
 import { upperFirst } from 'lodash'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
+import { StatsColumnType } from '../types'
 import { RichHeaderProps } from './types'
 
 const pretty: Record<string, string> = {
 	distinct: 'unique',
 	invalid: 'empty',
 }
+
+const CELL_HEIGHT = 14
+
+const DEFAULT_STATS: StatsColumnType[] = [
+	StatsColumnType.Min,
+	StatsColumnType.Max,
+	StatsColumnType.Distinct,
+	StatsColumnType.Invalid,
+]
 
 /**
  * Renders a column header with basic stats.
@@ -21,7 +31,7 @@ const pretty: Record<string, string> = {
 export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 	function StatsColumnHeader({
 		metadata,
-		stats = ['min', 'max', 'distinct', 'invalid'],
+		stats = DEFAULT_STATS,
 		column,
 		onClick,
 	}) {
@@ -35,19 +45,18 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 				)
 			})
 		}, [metadata, column, stats])
+
 		const title = useTooltip(metadata.stats)
 
 		const styles = useMemo(() => {
 			return {
-				// TODO: there is a layout issue resulting in this margin kludge
-				marginTop: -14,
-				height: 70,
+				height: stats.length * CELL_HEIGHT,
 				fontWeight: 'normal',
 				fontSize: 10,
 				color: theme.application().midContrast().hex(),
 				cursor: onClick ? 'pointer' : 'inherit',
 			}
-		}, [onClick, theme])
+		}, [onClick, theme, stats])
 
 		return (
 			<div
@@ -68,15 +77,25 @@ const StatCell: React.FC<{ name: string; value?: number }> = ({
 	return value !== undefined ? (
 		<div
 			style={{
-				height: 14,
+				height: CELL_HEIGHT,
 				display: 'flex',
 				justifyContent: 'space-between',
 				paddingLeft: 4,
 				paddingRight: 4,
+				lineHeight: 1,
 			}}
 		>
 			<div style={{ textTransform: 'capitalize' }}>{pretty[name] || name}:</div>
-			<div>{formatIfNumber(value)}</div>
+			<div
+				style={{
+					maxWidth: '100%',
+					overflow: 'hidden',
+					whiteSpace: 'nowrap',
+					textOverflow: 'ellipsis',
+				}}
+			>
+				{formatIfNumber(value)}
+			</div>
 		</div>
 	) : null
 }

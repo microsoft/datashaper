@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
-import { join } from '../verbs/join'
-import { TestStore } from './TestStore'
+import { Step, Verb } from '../../types.js'
+import { join } from '../verbs/join.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for join verb', () => {
 	test('join test', () => {

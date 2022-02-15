@@ -4,7 +4,7 @@
  */
 import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 import { isEmpty, getValue, categories } from '../util'
 import { ArrayDropdownCell } from './ArrayDropdownCell'

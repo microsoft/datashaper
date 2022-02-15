@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { isDsvFile, isJsonFile, isZipFile } from '..'
-import { BaseFile, FileWithPath } from '../../common'
+import { guessFileType, isDsvFile, isJsonFile, isZipFile } from '..'
+import { BaseFile, FileWithPath } from '../../common/index.js'
 import {
 	extension,
 	getDataURL,
@@ -13,7 +13,7 @@ import {
 	getTextFromFile,
 	guessDelimiter,
 	isTableFile,
-} from '../files'
+} from '../files.js'
 
 describe('extension file functions', () => {
 	it('returns txt as extension extension', () => {
@@ -46,6 +46,27 @@ describe('guess delimiter file functions', () => {
 		const filename = 'filename.txt'
 		const expected = '\t'
 		const result = guessDelimiter(filename)
+		expect(result).toEqual(expected)
+	})
+})
+
+describe('guess file type', () => {
+	it('guess file type default', () => {
+		const filename = 'filename.pdf'
+		const expected = 'text/plain'
+		const result = guessFileType(filename)
+		expect(result).toEqual(expected)
+	})
+	it('guess file type with no extension', () => {
+		const filename = 'filename'
+		const expected = 'text/plain'
+		const result = guessFileType(filename)
+		expect(result).toEqual(expected)
+	})
+	it('guess file type json', () => {
+		const filename = 'filename.json'
+		const expected = 'application/json'
+		const result = guessFileType(filename)
 		expect(result).toEqual(expected)
 	})
 })
@@ -119,7 +140,7 @@ describe('validates if the file name is a table', () => {
 describe('returns the content of a file as a string', () => {
 	it('getTextFromFile', async () => {
 		const blob = new Blob(['{"key": "value"}'])
-		const file = new BaseFile(new FileWithPath(blob, 'file.json', './'))
+		const file = new BaseFile(new FileWithPath(blob, 'file.json', './index.js'))
 		const expected = '{"key": "value"}'
 		const result = await getTextFromFile(file)
 		expect(result).toEqual(expected)
@@ -129,7 +150,7 @@ describe('returns the content of a file as a string', () => {
 describe('returns the content of a file as JSON', () => {
 	it('getJsonFileContentFromFile', async () => {
 		const blob = new Blob(['{"key": "value"}'])
-		const file = new BaseFile(new FileWithPath(blob, 'file.json', './'))
+		const file = new BaseFile(new FileWithPath(blob, 'file.json', './index.js'))
 		const expected = { key: 'value' }
 		const result = await getJsonFileContentFromFile(file)
 		expect(result).toEqual(expected)
@@ -138,7 +159,7 @@ describe('returns the content of a file as JSON', () => {
 	it('throws error when file is not .json', async () => {
 		const error = 'The provided file is not a json file'
 		const blob = new Blob(['{"key": "value"}'])
-		const file = new BaseFile(new FileWithPath(blob, 'file.txt', './'))
+		const file = new BaseFile(new FileWithPath(blob, 'file.txt', './index.js'))
 		await expect(getJsonFileContentFromFile(file)).rejects.toThrow(error)
 	})
 })
@@ -146,7 +167,7 @@ describe('returns the content of a file as JSON', () => {
 describe('returns the content of a file as a DSV string', () => {
 	it('getDsvFileContent', async () => {
 		const blob = new Blob(['col1,col2\nA1,A2'])
-		const file = new BaseFile(new FileWithPath(blob, 'file.csv', './'))
+		const file = new BaseFile(new FileWithPath(blob, 'file.csv', './index.js'))
 		const expected = 'col1,col2\nA1,A2'
 		const result = await getDsvFileContent(file)
 		expect(result).toEqual(expected)
@@ -155,7 +176,7 @@ describe('returns the content of a file as a DSV string', () => {
 	it('throws error when file is not DSV', async () => {
 		const error = 'The provided file is not a dsv file'
 		const blob = new Blob(['{"key": "value"}'])
-		const file = new BaseFile(new FileWithPath(blob, 'file.json', './'))
+		const file = new BaseFile(new FileWithPath(blob, 'file.json', './index.js'))
 		await expect(getDsvFileContent(file)).rejects.toThrow(error)
 	})
 })
@@ -163,7 +184,7 @@ describe('returns the content of a file as a DSV string', () => {
 describe('returns the content of a file as a url string', () => {
 	it('getDataURL', async () => {
 		const blob = new Blob(['{"key": "value"}'])
-		const file = new BaseFile(new FileWithPath(blob, 'file.json', './'))
+		const file = new BaseFile(new FileWithPath(blob, 'file.json', './index.js'))
 		const result = await getDataURL(file)
 		expect(typeof result).toBe('string')
 	})

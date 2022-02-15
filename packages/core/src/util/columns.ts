@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import ColumnTable from 'arquero/dist/types/table/column-table'
-import { DataType } from '..'
-import { determineType } from '.'
+import { DataType } from '../index.js'
+import { determineType } from './index.js'
 
 /**
  * Returns a map of all of the column getters for a table.

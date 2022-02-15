@@ -4,7 +4,7 @@
  */
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { opDropdownStyles } from '../styles'
 
 export type FieldAggregateOperationDropdownProps = Partial<IDropdownProps>
