@@ -17,7 +17,7 @@ import {
 	TransformModalProps,
 	withInputColumnDropdown,
 	withOutputColumnTextfield,
-} from '../'
+} from '../index.js'
 
 export interface ColumnTransformModalProps extends TransformModalProps {
 	/**
@@ -53,7 +53,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 		const [internal, setInternal] = useState<Step | undefined>(step)
 
 		const handleVerbChange = useCallback(
-			(ev: any, opt: any) => {
+			(_ev: any, opt: any) => {
 				// TODO: the assumption here is that the consumer will use runPipeline
 				// should we be forcing the i/o table name?
 				const inputTable = step?.input ?? 'input'

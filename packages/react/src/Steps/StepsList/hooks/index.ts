@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export * from './useManageModal'
-export * from './useManageSteps'
-export * from './useOnEditStep'
-export * from './useOnDuplicateStep'
+export * from './useManageModal.js'
+export * from './useManageSteps.js'
+export * from './useOnEditStep.js'
+export * from './useOnDuplicateStep.js'

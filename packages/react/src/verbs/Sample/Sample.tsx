@@ -2,14 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SampleStep } from '@data-wrangling-components/core'
+import type { SampleStep } from '@data-wrangling-components/core'
 import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useHandleSpinButtonChange } from '../../common'
-import { columnDropdownStyles } from '../../controls/styles'
-import { StepComponentProps } from '../../types'
+import {
+	LeftAlignedRow,
+	useHandleSpinButtonChange,
+} from '../../common/index.js'
+import { columnDropdownStyles } from '../../controls/styles.js'
+import type { StepComponentProps } from '../../types.js'
 
 const whole = format('d')
 

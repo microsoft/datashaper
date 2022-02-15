@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IColumn } from '@fluentui/react'
+import type { IColumn } from '@fluentui/react'
 import { from } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
-import { GroupedTable } from '../../'
-import { useTableButtons } from './TableButtons'
+import type { GroupedTable } from '../../index.js'
+import { useTableButtons } from './TableButtons.js'
 
 export function useGroupedTable(tables: GroupedTable[]): ColumnTable {
 	return useMemo(() => {

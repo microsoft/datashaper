@@ -5,8 +5,8 @@
 
 import { Dropdown, IDropdownOption } from '@fluentui/react'
 import { memo } from 'react'
-import { getDropdownValue } from '../util'
-import { DropdownCellProps } from './types'
+import { getDropdownValue } from '../util/index.js'
+import type { DropdownCellProps } from './types.js'
 
 /**
  * Renders an array-valued cell as a dropdown.

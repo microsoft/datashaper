@@ -4,8 +4,8 @@
  */
 import { FilterStep, FilterCompareType } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { VerbDescription } from '../..'
-import { StepDescriptionProps } from '../../types'
+import { VerbDescription } from '../../index.js'
+import type { StepDescriptionProps } from '../../types.js'
 
 export const FilterDescription: React.FC<StepDescriptionProps> = memo(
 	function FilterDescription(props) {

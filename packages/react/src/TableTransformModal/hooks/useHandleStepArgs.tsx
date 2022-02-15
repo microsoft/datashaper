@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Step } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import { useMemo } from 'react'
 import {
 	StepComponentProps,
@@ -12,7 +12,7 @@ import {
 	withOutputColumnTextfield,
 	withInputColumnDropdown,
 	withOutputTableTextfield,
-} from '../../'
+} from '../../index.js'
 
 export function useHandleStepArgs(
 	step: Step | undefined,

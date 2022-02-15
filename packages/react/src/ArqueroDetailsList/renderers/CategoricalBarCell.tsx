@@ -5,7 +5,7 @@
 import { memo, useMemo } from 'react'
 import { Sparkbar } from '../../charts'
 import { useCellDimensions } from '../hooks'
-import { ColumnCellChartProps } from './types'
+import type { ColumnCellChartProps } from './types.js'
 
 /**
  * Renders an array-valued cell as a CategoricalBar.

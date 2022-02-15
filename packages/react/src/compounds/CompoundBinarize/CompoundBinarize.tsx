@@ -6,10 +6,10 @@ import type { BinarizeStep } from '@data-wrangling-components/core'
 import { ActionButton, TextField } from '@fluentui/react'
 import { memo, useMemo, useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useLoadTable } from '../../common'
-import { FilterInputs, TableColumnDropdown } from '../../controls'
-import { columnDropdownStyles } from '../../controls/styles'
-import type { StepComponentProps } from '../../types'
+import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
+import { FilterInputs, TableColumnDropdown } from '../../controls/index.js'
+import { columnDropdownStyles } from '../../controls/styles.js'
+import type { StepComponentProps } from '../../types.js'
 import {
 	createBinarize,
 	defaults,
@@ -19,7 +19,7 @@ import {
 	updateBinarize,
 	updateColumn,
 	updateTo,
-} from '../generators/binarize'
+} from '../generators/binarize.js'
 
 /**
  * Provides only the essential inputs for a multi-step binarize.
@@ -36,7 +36,7 @@ export const CompoundBinarize: React.FC<StepComponentProps> = memo(
 		)
 
 		const handleToChange = useCallback(
-			(e, value) => {
+			(_e, value) => {
 				setTo(value)
 				const updated = updateTo(internal, value)
 				onChange && onChange(updated)
@@ -45,7 +45,7 @@ export const CompoundBinarize: React.FC<StepComponentProps> = memo(
 		)
 
 		const handleColumnChange = useCallback(
-			(e, opt) => {
+			(_e, opt) => {
 				setColumn(opt.key)
 				const updated = updateColumn(internal, opt.key)
 				onChange && onChange(updated)

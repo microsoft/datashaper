@@ -2,8 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnMetadata, TableMetadata } from '@data-wrangling-components/core'
-import {
+import type {
+	ColumnMetadata,
+	TableMetadata,
+} from '@data-wrangling-components/core'
+import type {
 	IColumn,
 	IDetailsListProps,
 	IDropdownOption,
@@ -11,7 +14,7 @@ import {
 	IRenderFunction,
 	IDetailsColumnProps,
 } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type ColumnRenderFunction = (
 	item?: any,

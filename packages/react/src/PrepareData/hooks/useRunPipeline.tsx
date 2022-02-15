@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Pipeline } from '@data-wrangling-components/core'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { Pipeline } from '@data-wrangling-components/core'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 
 export function useRunPipeline(

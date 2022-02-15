@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
+import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { useMemo } from 'react'
 
 const DEFAULT_COLUMN_WIDTH = 100

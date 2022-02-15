@@ -9,8 +9,8 @@ import styled from 'styled-components'
 import { CommandBar } from './CommandBar'
 import { TableName } from './TableName'
 import { HEIGHT } from './constants'
-import { useColumnCounts, useCommands, useRowCounts } from './hooks'
-import { ArqueroTableHeaderProps } from '.'
+import { useColumnCounts, useCommands, useRowCounts } from './hooks/index.js'
+import type { ArqueroTableHeaderProps } from './index.js'
 
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader({

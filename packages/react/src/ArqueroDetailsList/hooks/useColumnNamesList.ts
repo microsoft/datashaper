@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IColumn } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { IColumn } from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
 /**

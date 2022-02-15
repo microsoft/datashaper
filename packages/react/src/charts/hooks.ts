@@ -29,7 +29,7 @@ export function useIndexedScale(
 				.clamp(true),
 		[values, range],
 	)
-	return useMemo(() => (d: any, i: number) => linear(i), [linear])
+	return useMemo(() => (_d: any, i: number) => linear(i), [linear])
 }
 
 /**

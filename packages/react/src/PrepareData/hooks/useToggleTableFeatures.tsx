@@ -4,7 +4,7 @@
  */
 
 import { useState, useCallback } from 'react'
-import { DetailsListFeatures } from '../../'
+import type { DetailsListFeatures } from '../../index.js'
 
 export function useToggleTableFeatures(
 	features?: Partial<DetailsListFeatures>,

@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Theme } from '@thematic/core'
+import type { Theme } from '@thematic/core'
 import { useThematic } from '@thematic/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled, { css } from 'styled-components'
-import { ColumnConfig, ColumnConfigMap } from './types'
+import type { ColumnConfig, ColumnConfigMap } from './types.js'
 
 export interface ArqueroTableProps {
 	table: ColumnTable

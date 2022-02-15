@@ -2,5 +2,5 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './Join'
-export * from './JoinDescription'
+export * from './Join.js'
+export * from './JoinDescription.js'

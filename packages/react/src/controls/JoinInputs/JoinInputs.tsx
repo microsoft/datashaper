@@ -2,16 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { JoinStep, Step } from '@data-wrangling-components/core'
+import type { JoinStep, Step } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { TableColumnDropdown, TableDropdown } from '..'
+import { TableColumnDropdown, TableDropdown } from '../index.js'
 import {
 	useHandleDropdownChange,
 	useLoadTable,
 	LeftAlignedRow,
-} from '../../common'
-import { StepComponentProps } from '../../types'
+} from '../../common/index.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Core inputs for join operations. This includes join and lookup.
@@ -95,7 +95,7 @@ function useHandleLeftColumnChange(
 	onChange?: (step: Step) => void,
 ) {
 	return useCallback(
-		(e, opt) => {
+		(_e, opt) => {
 			const on = step.args.on || []
 			on[0] = opt.key
 			onChange &&
@@ -116,7 +116,7 @@ function useHandleRightColumnChange(
 	onChange?: (step: Step) => void,
 ) {
 	return useCallback(
-		(e, opt) => {
+		(_e, opt) => {
 			const on = step.args.on
 			if (on) {
 				on[1] = opt.key

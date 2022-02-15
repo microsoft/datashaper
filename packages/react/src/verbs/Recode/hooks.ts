@@ -2,11 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { RecodeStep, RecodeArgs, Value } from '@data-wrangling-components/core'
+import type {
+	RecodeStep,
+	RecodeArgs,
+	Value,
+} from '@data-wrangling-components/core'
 import { op } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
-import { StepChangeFunction } from '../../types'
+import type { StepChangeFunction } from '../../types.js'
 
 export function useColumnValues(
 	internal: RecodeStep,
@@ -20,7 +24,8 @@ export function useColumnValues(
 		const args = {
 			[column]: op.array_agg_distinct(column),
 		}
-		return table.orderby(column).rollup(args).objects()[0][column] as Value[]
+		const objects = table.orderby(column).rollup(args).objects()
+		return objects && objects[0] ? (objects[0][column] as Value[]) : []
 	}, [table, internal])
 }
 

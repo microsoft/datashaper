@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Step } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import { useState, useCallback, useMemo } from 'react'
-import { useOnEditStep, useOnDuplicateStep } from './'
+import { useOnEditStep, useOnDuplicateStep } from './index.js'
 
 export function useManageSteps(
 	showTableModal: () => void,

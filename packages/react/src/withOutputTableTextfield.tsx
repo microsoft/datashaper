@@ -5,9 +5,9 @@
 import { TextField } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useHandleTextfieldChange } from './common'
-import { columnDropdownStyles } from './controls/styles'
-import { HOCFunction, StepComponentProps } from './types'
+import { LeftAlignedRow, useHandleTextfieldChange } from './common/index.js'
+import { columnDropdownStyles } from './controls/styles.js'
+import type { HOCFunction, StepComponentProps } from './types.js'
 /**
  * Higher order component generator to wrap a Step in the output column text field.
  * @param label optional label to use for the textfield instead of the default.

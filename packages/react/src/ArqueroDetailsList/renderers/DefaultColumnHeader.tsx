@@ -5,7 +5,7 @@
 import { Icon, IDetailsColumnProps } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
-import { ColumnClickFunction } from '..'
+import type { ColumnClickFunction } from '../index.js'
 import { useCellDimensions } from '../hooks'
 
 const COMPACT_LINE_HEIGHT = 2

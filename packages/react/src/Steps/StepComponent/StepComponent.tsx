@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, TableStore } from '@data-wrangling-components/core'
+import type { Step, TableStore } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import {
@@ -11,7 +11,7 @@ import {
 	withTableDropdown,
 	selectStepComponent,
 	selectStepDescription,
-} from '@data-wrangling-components/react'
+} from '../../index.js'
 
 interface StepComponentProps {
 	step: Step

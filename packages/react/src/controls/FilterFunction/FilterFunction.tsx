@@ -13,9 +13,9 @@ import { memo, useCallback, useMemo } from 'react'
 import {
 	NumericComparisonOperatorDropdown,
 	StringComparisonOperatorDropdown,
-} from '..'
-import { useLoadTable, useHandleDropdownChange } from '../../common'
-import { StepComponentProps } from '../../types'
+} from '../index.js'
+import { useLoadTable, useHandleDropdownChange } from '../../common/index.js'
+import type { StepComponentProps } from '../../types.js'
 import { ColumnOrValueComboBox } from '../ColumnOrValueComboBox'
 
 /**
@@ -36,7 +36,7 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 		)
 
 		const handleComboBoxChange = useCallback(
-			(e, option, index, value) => {
+			(_e, option, _index, value) => {
 				const update = {
 					...internal,
 				}
