@@ -256,11 +256,11 @@
 		},
 		{
 			"verb": "unfold",
-			"input": "data/products.csv",
+			"input": "fold-1",
 			"output": "unfold-1",
 			"args": {
-				"to": ["key", "value"],
-				"columns": ["ID", "Product"]
+				"key": "key",
+				"value": "value"
 			}
 		},
 		{
