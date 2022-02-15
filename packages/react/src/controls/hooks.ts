@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step } from '@data-wrangling-components/core'
-import { IDropdownOption } from '@fluentui/react'
+import type { Step } from '@data-wrangling-components/core'
+import type { IDropdownOption } from '@fluentui/react'
 import { set } from 'lodash'
 import { useCallback } from 'react'
 
@@ -35,7 +35,7 @@ export function useHandleDropdownChange(
 	index?: number,
 ) => void {
 	return useCallback(
-		(event, option) => updateStep(step, path, option?.key, onChange),
+		(_event, option) => updateStep(step, path, option?.key, onChange),
 		[step, path, onChange],
 	)
 }

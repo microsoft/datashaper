@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Specification, TableStore } from '@data-wrangling-components/core'
-import { BaseFile } from '@data-wrangling-components/utilities'
+import type { BaseFile } from '@data-wrangling-components/utilities'
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useMemo, useState } from 'react'

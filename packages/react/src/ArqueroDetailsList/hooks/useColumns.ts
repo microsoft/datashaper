@@ -7,14 +7,14 @@ import {
 	SortDirection,
 	TableMetadata,
 } from '@data-wrangling-components/core'
-import { IColumn } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { IColumn } from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
-import {
+import type {
 	ColumnClickFunction,
 	DetailsListFeatures,
 	DropdownOptionSelect,
-} from '..'
+} from '../index.js'
 import {
 	createRenderColumnHeader,
 	createRenderCommandBarColumnHeader,
@@ -23,15 +23,15 @@ import {
 	createRenderHistogramColumnHeader,
 	createRenderSmartCell,
 	createRenderStatsColumnHeader,
-} from '../renderers'
-import { useCountMinWidth } from './useCountMinWidth'
+} from '../renderers/index.js'
+import { useCountMinWidth } from './useCountMinWidth.js'
 import {
 	useCellClickhandler,
 	useCellDropdownSelectHandler,
 	useColumnNamesList,
 	useColumnStyles,
 	useIncrementingColumnColorScale,
-} from '.'
+} from './index.js'
 
 export interface ColumnOptions {
 	features?: DetailsListFeatures
@@ -114,6 +114,9 @@ export function useColumns(
 			const { iconName, ...defaults } = column
 
 			const meta = computedMetadata.columns[name]
+			if (!meta) {
+				throw new Error(`could not find meta for column ${name}`)
+			}
 			const color = meta.type === DataType.Number ? colorScale() : undefined
 			const onRender = features.smartCells
 				? createRenderSmartCell(

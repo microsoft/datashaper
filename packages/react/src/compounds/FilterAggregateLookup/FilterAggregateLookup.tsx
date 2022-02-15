@@ -5,16 +5,16 @@
 import { TextField } from '@fluentui/react'
 import { memo, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useLoadTable } from '../../common'
+import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
 import {
 	FieldAggregateOperationDropdown,
 	FilterFunction,
 	ReadOnlyTextField,
 	TableColumnDropdown,
 	TableDropdown,
-} from '../../controls'
-import { columnDropdownStyles } from '../../controls/styles'
-import { StepComponentProps } from '../../types'
+} from '../../controls/index.js'
+import { columnDropdownStyles } from '../../controls/styles.js'
+import type { StepComponentProps } from '../../types.js'
 import {
 	getAggregate,
 	defaults,
@@ -26,7 +26,7 @@ import {
 	updateLookupColumn,
 	updateLookupTable,
 	updateTo,
-} from '../generators/filter-aggregate-lookup'
+} from '../generators/filter-aggregate-lookup.js'
 
 /**
  * Provides the essential inputs for a multi-step join + filter + aggregate.
@@ -44,7 +44,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 		const rightTable = useLoadTable(join.args.other, table, store)
 
 		const handleLookupTableChange = useCallback(
-			(e, opt) => {
+			(_e, opt) => {
 				const updated = updateLookupTable(internal, opt.key)
 				onChange && onChange(updated)
 			},
@@ -52,7 +52,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 		)
 
 		const handleIdentifierColumnChange = useCallback(
-			(e, opt) => {
+			(_e, opt) => {
 				const updated = updateIdentifierColumn(internal, opt.key)
 				onChange && onChange(updated)
 			},
@@ -60,7 +60,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 		)
 
 		const handleLookupColumnChange = useCallback(
-			(e, opt) => {
+			(_e, opt) => {
 				const updated = updateLookupColumn(internal, opt.key)
 				onChange && onChange(updated)
 			},
@@ -68,7 +68,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 		)
 
 		const handleToChange = useCallback(
-			(e, to) => {
+			(_e, to) => {
 				console.log('to', to)
 				const updated = updateTo(internal, to)
 				onChange && onChange(updated)
@@ -85,7 +85,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 		)
 
 		const handleAggregateChange = useCallback(
-			(e, opt) => {
+			(_e, opt) => {
 				const updated = updateAggregateOperation(internal, opt.key)
 				onChange && onChange(updated)
 			},

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IDetailsHeaderProps } from '@fluentui/react'
-import { IRenderFunction } from '@fluentui/utilities'
+import type { IDetailsHeaderProps } from '@fluentui/react'
+import type { IRenderFunction } from '@fluentui/utilities'
 import { useCallback } from 'react'
 
 /**

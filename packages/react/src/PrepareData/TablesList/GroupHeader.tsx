@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnMetadata } from '@data-wrangling-components/core'
-import { IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
+import type { ColumnMetadata } from '@data-wrangling-components/core'
+import type { IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
 import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { createLazyLoadingGroupHeader } from '../../common'
+import { createLazyLoadingGroupHeader } from '../../common/index.js'
 
 export function useGroupHeader(): (
 	meta?: ColumnMetadata,

@@ -5,8 +5,9 @@
 
 import { memo } from 'react'
 import { useFormattedNumber } from '../hooks'
-import { getValue } from '../util'
-import { FormattedCellProps } from './types'
+import { getValue } from '../util/index.js'
+import type { FormattedCellProps } from './types.js'
+
 /**
  * Basic endering of number values.
  */

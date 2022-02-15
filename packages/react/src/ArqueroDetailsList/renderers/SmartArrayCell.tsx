@@ -4,11 +4,11 @@
  */
 import { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { categories, getValue, isDistinctCategories } from '../util'
+import { categories, getValue, isDistinctCategories } from '../util/index.js'
 import { ArrayCell } from './ArrayCell'
 import { ArrayDropdownCell } from './ArrayDropdownCell'
-import { RichCellProps } from './types'
-import { SparkbarCell, CategoricalBarCell, SparklineCell } from './'
+import type { RichCellProps } from './types.js'
+import { SparkbarCell, CategoricalBarCell, SparklineCell } from './index.js'
 
 const HISTO_MAX = 20
 const DROPDOWN_MAX = 15

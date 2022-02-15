@@ -4,8 +4,8 @@
  */
 
 import { SortDirection } from '@data-wrangling-components/core'
-import { IGroup } from '@fluentui/react'
-import { GroupBySpec, RowObject } from 'arquero/dist/types/table/table'
+import type { IGroup } from '@fluentui/react'
+import type { GroupBySpec, RowObject } from 'arquero/dist/types/table/table'
 
 function sortValueGroupsItems(
 	entries: RowObject[],
@@ -35,6 +35,10 @@ export function groupBuilder(
 	const value = row[0]
 	const valueGroups = row[1]
 	const columnName = existingGroups.names[actualLevel]
+
+	if (!columnName) {
+		throw new Error(`could not determine column name for level ${actualLevel}`)
+	}
 
 	const startIndex =
 		items

@@ -13,7 +13,7 @@ import {
 	useIndexedScale,
 	useNumericLinearScale,
 	usePlotGroup,
-} from '../hooks'
+} from '../hooks.js'
 
 export interface SparkbarProps {
 	data: number[]
@@ -83,9 +83,9 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 				.attr('y2', height)
 				.call(themeLine as any, theme.line())
 				.attr('stroke-width', barWidth)
-				.attr('stroke', (d, i) => (categorical ? colors[i] : colors))
-				.attr('data-legend', (d, i) => (legend?.length ? legend[i] : d))
-				.attr('data-index', (d, i) => i)
+				.attr('stroke', (_d, i) => (categorical ? colors[i] ?? null : colors))
+				.attr('data-legend', (d, i) => (legend?.length ? legend[i] ?? null : d))
+				.attr('data-index', (_d, i) => i)
 				.attr(
 					'id',
 					(d, i) => `bar-${i}-${d}-${Math.round(Math.random() * 100)}`,
@@ -95,7 +95,7 @@ export const Sparkbar: React.FC<SparkbarProps> = memo(function Sparkbar({
 				group
 					.selectAll('.bar-group')
 					.append('title')
-					.text((d, i) => (legend?.length ? legend[i] : (d as string)))
+					.text((d, i) => (legend?.length ? legend[i] ?? null : (d as string)))
 			} else {
 				group.selectAll('.bar').on('mouseover mouseout', onBarHover)
 			}

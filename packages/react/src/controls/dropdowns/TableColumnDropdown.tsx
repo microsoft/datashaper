@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Dropdown, IDropdownProps } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { memo } from 'react'
-import { useTableColumnOptions } from '../../common'
-import { columnDropdownStyles } from '../styles'
+import { useTableColumnOptions } from '../../common/index.js'
+import { columnDropdownStyles } from '../styles.js'
 
 export interface TableColumnDropdownProps extends Partial<IDropdownProps> {
 	table?: ColumnTable

@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step } from '@data-wrangling-components/core'
-import { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
+import type { Step } from '@data-wrangling-components/core'
+import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import {
@@ -13,7 +13,7 @@ import {
 	ArqueroTableHeader,
 	ColumnTransformModal,
 	useCommonCommands,
-} from '../../'
+} from '../../index.js'
 import { useToggleTableFeatures } from '../hooks'
 import { useDefaultStep } from './hooks'
 

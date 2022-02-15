@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SelectStep } from '@data-wrangling-components/core'
+import type { SelectStep } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable } from '../../common'
-import { columnDropdownStyles } from '../../controls/styles'
-import { StepComponentProps } from '../../types'
+import { useLoadTable } from '../../common/index.js'
+import { columnDropdownStyles } from '../../controls/styles.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for a Select.
@@ -35,7 +35,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 	}, [step, tbl])
 
 	const handleColumnChange = useCallback(
-		(event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
+		(_event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
 			const { columns = [] } = internal.args
 			let update = [...columns]
 			if (option) {

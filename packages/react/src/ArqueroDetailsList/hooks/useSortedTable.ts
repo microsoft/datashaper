@@ -4,7 +4,7 @@
  */
 import { SortDirection } from '@data-wrangling-components/core'
 import { desc } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
 export function useSortedTable(

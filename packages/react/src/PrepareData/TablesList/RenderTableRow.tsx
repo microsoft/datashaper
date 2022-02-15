@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IDetailsRowProps, IRenderFunction } from '@fluentui/react'
+import type { IDetailsRowProps, IRenderFunction } from '@fluentui/react'
 import React, { memo, useCallback } from 'react'
 import styled from 'styled-components'
 

@@ -11,18 +11,21 @@ import {
 	columnType,
 	Pipeline,
 } from '@data-wrangling-components/core'
-import {
+import type {
 	ICommandBarItemProps,
 	IContextualMenuItem,
 	IDropdownOption,
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { op } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { DetailsListFeatures } from '../'
-import { DropdownOptionChangeFunction, StepChangeFunction } from '../types'
+import type { DetailsListFeatures } from '../index.js'
+import type {
+	DropdownOptionChangeFunction,
+	StepChangeFunction,
+} from '../types.js'
 
 const noop = (value?: string) => value
 const num = (value?: string) => value && +value
@@ -90,13 +93,15 @@ export function useColumnValueOptions(
 		if (!table) {
 			return []
 		}
-		const list = values
-			? values
-			: table
-					.rollup({
-						[column]: op.array_agg(column),
-					})
-					.objects()[0][column]
+		const getFallback = () => {
+			const result = table
+				.rollup({
+					[column]: op.array_agg(column),
+				})
+				.objects()[0]
+			return (result && result[column]) ?? []
+		}
+		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list
 	}, [column, table, values, filter])
 	return useSimpleOptions(vals)
@@ -113,7 +118,7 @@ export function useHandleDropdownChange(
 	onChange?: StepChangeFunction,
 ): DropdownOptionChangeFunction {
 	return useCallback(
-		(event, option) => {
+		(_event, option) => {
 			const update = {
 				...step,
 			}
@@ -134,7 +139,7 @@ export function useHandleTextfieldChange(
 	newValue?: string,
 ) => void {
 	return useCallback(
-		(event, newValue) => {
+		(_event, newValue) => {
 			const update = {
 				...step,
 			}
@@ -161,7 +166,7 @@ export function useHandleSpinButtonChange(
 	transformer = num,
 ): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void {
 	return useCallback(
-		(event, newValue) => {
+		(_event, newValue) => {
 			const update = {
 				...step,
 			}
@@ -184,7 +189,7 @@ export function useHandleCheckboxChange(
 	checked?: boolean,
 ) => void {
 	return useCallback(
-		(event, checked) => {
+		(_event, checked) => {
 			const update = {
 				...step,
 			}
@@ -260,7 +265,7 @@ export function useIntersection(
 	useEffect(() => {
 		const observer = new IntersectionObserver(
 			([entry]) => {
-				setState(entry.isIntersecting)
+				setState(entry?.isIntersecting ?? false)
 			},
 			{ rootMargin },
 		)

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	TableStore,
 	SetOperationStep,
 	Step,
@@ -10,9 +10,9 @@ import {
 import { ActionButton, IconButton } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { TableDropdown } from '..'
-import { LeftAlignedRow, useLoadTable } from '../../common'
-import { StepComponentProps } from '../../types'
+import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
+import type { StepComponentProps } from '../../types.js'
+import { TableDropdown } from '../index.js'
 
 /**
  * Provides inputs to create a list of tables.

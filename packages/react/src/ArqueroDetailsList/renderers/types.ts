@@ -3,14 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { ColumnMetadata } from '@data-wrangling-components/core'
-import { IColumn, IDetailsColumnProps, IDetailsRowProps } from '@fluentui/react'
-import {
+import type { ColumnMetadata } from '@data-wrangling-components/core'
+import type {
+	IColumn,
+	IDetailsColumnProps,
+	IDetailsRowProps,
+} from '@fluentui/react'
+import type {
 	ColumnClickFunction,
 	DetailsListFeatures,
 	DropdownOptionSelect,
 	MetadataClickFunction,
-} from '..'
+} from '../index.js'
 
 export type Dimensions = {
 	width: number

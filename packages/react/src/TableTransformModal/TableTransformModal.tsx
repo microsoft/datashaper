@@ -2,17 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableStore } from '@data-wrangling-components/core'
+import type { TableStore } from '@data-wrangling-components/core'
 import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { StepSelector, TransformModalProps } from '..'
+import { StepSelector, TransformModalProps } from '../index.js'
 import {
 	useHandleDismiss,
 	useHandleRunClick,
 	useHandleStepArgs,
 	useInternalStep,
-} from './hooks'
+} from './hooks/index.js'
 
 export interface TableTransformModalProps extends TransformModalProps {
 	/**

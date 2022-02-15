@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { BaseFile } from '@data-wrangling-components/utilities'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { BaseFile } from '@data-wrangling-components/utilities'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
-import { GroupedTable, TableGroup } from '../../../'
+import { GroupedTable, TableGroup } from '../../index.js'
 
 export function useGroupedTables(
 	files: BaseFile[],

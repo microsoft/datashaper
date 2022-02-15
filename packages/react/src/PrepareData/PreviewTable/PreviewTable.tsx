@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableMetadata } from '@data-wrangling-components/core'
-import { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { TableMetadata } from '@data-wrangling-components/core'
+import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import {
@@ -12,8 +12,8 @@ import {
 	ArqueroTableHeader,
 	StatsColumnType,
 	useCommonCommands,
-} from '../../'
-import { useToggleTableFeatures } from '../hooks'
+} from '../../index.js'
+import { useToggleTableFeatures } from '../hooks/index.js'
 
 const statsColumnTypes = [
 	StatsColumnType.Type,

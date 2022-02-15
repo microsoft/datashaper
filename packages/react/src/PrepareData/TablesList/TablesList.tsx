@@ -4,10 +4,10 @@
  */
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { ArqueroDetailsList, GroupedTable } from '../../'
-import { useGroupHeader } from './GroupHeader'
-import { useRenderRow } from './RenderTableRow'
-import { useColumns, useGroupedTable, useIsTableSelected } from './hooks'
+import { ArqueroDetailsList, GroupedTable } from '../../index.js'
+import { useGroupHeader } from './GroupHeader.js'
+import { useRenderRow } from './RenderTableRow.js'
+import { useColumns, useGroupedTable, useIsTableSelected } from './hooks.js'
 
 export const TablesList: React.FC<{
 	files: GroupedTable[]

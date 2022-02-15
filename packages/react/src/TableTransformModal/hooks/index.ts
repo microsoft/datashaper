@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export * from './useHandleDismiss'
-export * from './useHandleStepArgs'
-export * from './useHandleRunClick'
-export * from './useInternalStep'
+export * from './useHandleDismiss.js'
+export * from './useHandleStepArgs.js'
+export * from './useHandleRunClick.js'
+export * from './useInternalStep.js'

@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SampleStep } from '@data-wrangling-components/core'
+import type { SampleStep } from '@data-wrangling-components/core'
 import { format } from 'd3-format'
 import { memo, useMemo } from 'react'
-import { VerbDescription } from '../..'
-import { StepDescriptionProps } from '../../types'
+import { VerbDescription } from '../../index.js'
+import type { StepDescriptionProps } from '../../types.js'
 
 const perc = format('.0%')
 

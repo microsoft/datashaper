@@ -21,7 +21,7 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 			!placeholder ? 'aggregate' : '',
 		)
 		const handleDropdownChange = useCallback(
-			(e, opt) => {
+			(_e, opt) => {
 				setCurrentOption(opt.key)
 				!showButton && onCreate && onCreate(opt.key)
 			},

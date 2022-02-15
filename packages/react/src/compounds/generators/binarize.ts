@@ -102,7 +102,12 @@ export function getBinarizeSteps(parent: ChainStep): BinarizeStep[] {
 }
 
 export function getColumn(step: ChainStep): string {
-	return getBinarizeSteps(step)[0]?.args?.column
+	const steps = getBinarizeSteps(step)
+	if (steps[0]) {
+		return steps[0].args.column
+	} else {
+		throw new Error(`could not get step details ${step.verb}`)
+	}
 }
 
 // when the column changes, make sure every binarize step gets the update
@@ -200,5 +205,9 @@ function getLookupStep(parent: ChainStep): LookupStep {
 }
 
 function getChildStep(parent: ChainStep, index: number): Step {
-	return parent.args.steps[index]
+	const result = parent.args.steps[index]
+	if (!result) {
+		throw new Error(`could not find child step@${index}`)
+	}
+	return result
 }

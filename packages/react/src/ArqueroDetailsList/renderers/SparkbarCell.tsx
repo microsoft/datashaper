@@ -5,8 +5,8 @@
 import { memo } from 'react'
 import { Sparkbar } from '../../charts'
 import { useCellDimensions } from '../hooks'
-import { getValue } from '../util'
-import { ColumnCellChartProps } from './types'
+import { getValue } from '../util/index.js'
+import type { ColumnCellChartProps } from './types.js'
 
 /**
  * Renders an array-valued cell as a Sparkbar.

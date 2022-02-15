@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, TableStore } from '@data-wrangling-components/core'
+import type { Step, TableStore } from '@data-wrangling-components/core'
 import { DialogConfirm } from '@essex-js-toolkit/themed-components'
 import { DefaultButton } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { StepItem, TableTransformModal, useDeleteConfirm } from '../../'
+import { StepItem, TableTransformModal, useDeleteConfirm } from '../../index.js'
 import { useManageModal, useManageSteps } from './hooks'
 
 export const StepsList: React.FC<{

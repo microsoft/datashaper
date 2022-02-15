@@ -8,12 +8,12 @@ import {
 	introspect,
 	TableMetadata,
 } from '@data-wrangling-components/core'
-import { BaseFile } from '@data-wrangling-components/utilities'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import _ from 'lodash'
+import type { BaseFile } from '@data-wrangling-components/utilities'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { last } from 'lodash'
 import { useState, useMemo, useEffect } from 'react'
-import { GroupedTable } from '../../'
-import { usePipeline, useStore } from '../../common'
+import { usePipeline, useStore } from '../../common/index.js'
+import type { GroupedTable } from '../../index.js'
 import {
 	useOnDeleteStep,
 	useOnSaveStep,
@@ -64,9 +64,9 @@ export function useBusinessLogic(
 	const lastTableName = useMemo((): string => {
 		const _tables = store.list()
 		const length = _tables.length
-		const input = length === 0 ? '' : _tables[length - 1]
+		const input = length === 0 ? '' : _tables[length - 1] ?? ''
 
-		return _.last(steps)?.output ?? input
+		return last(steps)?.output ?? input
 	}, [steps, store])
 
 	useEffect(() => {

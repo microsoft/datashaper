@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnMetadata } from '@data-wrangling-components/core'
+import type { ColumnMetadata } from '@data-wrangling-components/core'
 import { IconButton, IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
-import { useIntersection } from '../../common'
+import { useIntersection } from '../../common/index.js'
 
 interface GroupHeaderProps {
 	columnMeta: ColumnMetadata

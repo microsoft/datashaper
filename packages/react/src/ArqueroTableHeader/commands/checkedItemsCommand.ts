@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
+import type { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
 import { merge } from 'lodash'
 
 /**
@@ -34,7 +34,7 @@ export function checkedItemsCommand(
 		checked: hash[name],
 		onClick: (
 			ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
-			item?: IContextualMenuItem,
+			_item?: IContextualMenuItem,
 		) => {
 			ev?.preventDefault()
 			return onCheckChange && onCheckChange(name, !hash[name], index)

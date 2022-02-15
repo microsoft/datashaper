@@ -2,12 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableMetadata } from '@data-wrangling-components/core'
-import { IDetailsGroupDividerProps, IRenderFunction } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { TableMetadata } from '@data-wrangling-components/core'
+import type {
+	IDetailsGroupDividerProps,
+	IRenderFunction,
+} from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
-import { GroupHeaderFunction } from '..'
-import { GroupHeader } from '../../controls'
+import { GroupHeader } from '../../controls/index.js'
+import type { GroupHeaderFunction } from '../index.js'
 
 /**
  * Overrides the default group header rendering so we can inject customization
@@ -26,7 +29,13 @@ export function useGroupHeaderRenderer(
 			}
 
 			const columnName = table.groups().names[props.groupLevel as number]
+			if (columnName == null) {
+				return null
+			}
 			const meta = computedMetadata.columns[columnName]
+			if (meta == null) {
+				return null
+			}
 			if (!groupHeaderFunction) {
 				return (
 					<GroupHeader

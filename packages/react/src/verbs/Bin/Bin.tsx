@@ -12,10 +12,10 @@ import {
 	useHandleDropdownChange,
 	useHandleCheckboxChange,
 	useHandleSpinButtonChange,
-} from '../../common'
-import { BinStrategyDropdown } from '../../controls'
-import { columnDropdownStyles } from '../../controls/styles'
-import { StepComponentProps } from '../../types'
+} from '../../common/index.js'
+import { BinStrategyDropdown } from '../../controls/index.js'
+import { columnDropdownStyles } from '../../controls/styles.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for a binning step.

@@ -15,12 +15,12 @@ import {
 	IDropdownOption,
 	TextField,
 } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable, useColumnType } from '../../common'
-import { ColumnValueDropdown } from '../../controls'
-import { StepComponentProps } from '../../types'
+import { useLoadTable, useColumnType } from '../../common/index.js'
+import { ColumnValueDropdown } from '../../controls/index.js'
+import type { StepComponentProps } from '../../types.js'
 import {
 	useColumnValues,
 	useDisabled,
@@ -100,11 +100,11 @@ function useRecodePairs(
 				return true
 			}
 			const handleSourceChange = (
-				e: React.FormEvent<HTMLDivElement>,
+				_e: React.FormEvent<HTMLDivElement>,
 				opt?: IDropdownOption<any> | undefined,
 			) => onChange(oldvalue, opt?.key || oldvalue, newvalue)
 			const handleTextChange = (
-				e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+				_e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 				newValue?: string,
 			) => {
 				// this does force the new value to match the old type, preventing mappings like 0 -> false

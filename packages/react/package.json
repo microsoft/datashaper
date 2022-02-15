@@ -1,15 +1,12 @@
 {
 	"name": "@data-wrangling-components/react",
 	"version": "2.1.1",
-	"main": "src/index.ts",
-	"publishConfig": {
-		"main": "dist/cjs/index.js",
-		"module": "dist/esm/index.js",
-		"types": "dist/types/index.d.ts"
-	},
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build --mode legacy"
+		"build": "essex build --skipExportCheck"
 	},
 	"dependencies": {
 		"@essex-js-toolkit/hooks": "^3.0.2",

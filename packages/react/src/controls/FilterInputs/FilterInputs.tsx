@@ -4,9 +4,9 @@
  */
 import { memo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow } from '../../common'
-import { StepComponentProps } from '../../types'
-import { FilterFunction } from '../FilterFunction'
+import { LeftAlignedRow } from '../../common/index.js'
+import type { StepComponentProps } from '../../types.js'
+import { FilterFunction } from '../FilterFunction/index.js'
 
 /**
  * The filter inputs for a step.
