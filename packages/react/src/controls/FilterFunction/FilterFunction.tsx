@@ -10,13 +10,13 @@ import {
 } from '@data-wrangling-components/core'
 import { set } from 'lodash'
 import { memo, useCallback, useMemo } from 'react'
+import { useLoadTable, useHandleDropdownChange } from '../../common/index.js'
+import type { StepComponentProps } from '../../types.js'
+import { ColumnOrValueComboBox } from '../ColumnOrValueComboBox'
 import {
 	NumericComparisonOperatorDropdown,
 	StringComparisonOperatorDropdown,
 } from '../index.js'
-import { useLoadTable, useHandleDropdownChange } from '../../common/index.js'
-import type { StepComponentProps } from '../../types.js'
-import { ColumnOrValueComboBox } from '../ColumnOrValueComboBox'
 
 /**
  * Just the comparison logic/ops for a filter.

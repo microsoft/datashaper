@@ -9,8 +9,8 @@ import type {
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
-import type { GroupHeaderFunction } from '../index.js'
 import { GroupHeader } from '../../controls/index.js'
+import type { GroupHeaderFunction } from '../index.js'
 
 /**
  * Overrides the default group header rendering so we can inject customization

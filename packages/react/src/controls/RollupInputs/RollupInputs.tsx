@@ -5,9 +5,9 @@
 import type { RollupStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { FieldAggregateOperationDropdown } from '../index.js'
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { FieldAggregateOperationDropdown } from '../index.js'
 
 /**
  * Just the column/op inputs for an rollup.

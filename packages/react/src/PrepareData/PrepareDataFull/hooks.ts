@@ -12,8 +12,8 @@ import type { BaseFile } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { last } from 'lodash'
 import { useState, useMemo, useEffect } from 'react'
-import type { GroupedTable } from '../../index.js'
 import { usePipeline, useStore } from '../../common/index.js'
+import type { GroupedTable } from '../../index.js'
 import {
 	useOnDeleteStep,
 	useOnSaveStep,

@@ -11,8 +11,8 @@ import {
 } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { TablesList, PreviewTable, OutputTable } from '../index.js'
 import { StepsList } from '../../Steps/index.js'
+import { TablesList, PreviewTable, OutputTable } from '../index.js'
 import { useBusinessLogic } from './hooks.js'
 
 export const PrepareDataFull: React.FC<{

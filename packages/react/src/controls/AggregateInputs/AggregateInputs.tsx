@@ -6,15 +6,15 @@ import type { AggregateStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import {
-	TableColumnDropdown,
-	FieldAggregateOperationDropdown,
-} from '../index.js'
-import {
 	useLoadTable,
 	LeftAlignedRow,
 	useHandleDropdownChange,
 } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
+import {
+	TableColumnDropdown,
+	FieldAggregateOperationDropdown,
+} from '../index.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

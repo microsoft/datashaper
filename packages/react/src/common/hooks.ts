@@ -93,13 +93,15 @@ export function useColumnValueOptions(
 		if (!table) {
 			return []
 		}
-		const list = values
-			? values
-			: table
-					.rollup({
-						[column]: op.array_agg(column),
-					})
-					.objects()[0]![column]
+		const getFallback = () => {
+			const result = table
+				.rollup({
+					[column]: op.array_agg(column),
+				})
+				.objects()[0]
+			return (result && result[column]) ?? []
+		}
+		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list
 	}, [column, table, values, filter])
 	return useSimpleOptions(vals)
