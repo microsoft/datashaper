@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { MergeStrategy } from '../..'
-import { Step, Verb } from '../../types'
-import { merge } from '../verbs/merge'
-import { TestStore } from './TestStore'
+import { MergeStrategy } from '../../index.js'
+import { Step, Verb } from '../../types.js'
+import { merge } from '../verbs/merge.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for merge verb', () => {
 	test('merge numeric values and concat strategy', () => {
