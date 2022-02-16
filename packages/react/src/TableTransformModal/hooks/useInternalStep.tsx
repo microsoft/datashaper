@@ -26,7 +26,7 @@ export function useInternalStep(
 
 	useEffect(() => {
 		if (step) {
-			setInternal({ ...step })
+			setInternal(step)
 		}
 	}, [step, setInternal])
 

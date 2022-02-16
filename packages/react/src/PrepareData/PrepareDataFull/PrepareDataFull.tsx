@@ -136,7 +136,6 @@ const StepsTrayContainer = styled.div`
 `
 const StepsContainer = styled.div`
 	display: flex;
-	column-gap: 8px;
 	overflow: auto;
 	height: 100%;
 `
