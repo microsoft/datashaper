@@ -40,7 +40,7 @@ export function useBusinessLogic(): {
 			updateFileCollection(fileCollection)
 		}
 		f()
-	}, [fileCollection, updateFileCollection, setSteps])
+	}, [fileCollection, updateFileCollection])
 
 	return {
 		setSteps,
