@@ -21,10 +21,9 @@ export const MergeInputs: React.FC<StepComponentProps> = memo(
 		const tbl = useLoadTable(input || internal.input, table, store)
 
 		const handleColumnChange = useCallback(
-			(event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
+			(_event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
 				const { columns = [] } = internal.args
 				let update = [...columns]
-				console.log(event)
 				if (option) {
 					if (option.selected) {
 						update.push(option.key as string)

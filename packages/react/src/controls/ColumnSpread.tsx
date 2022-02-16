@@ -21,8 +21,7 @@ export interface ColumnSpreadProps {
 export const ColumnSpread: React.FC<ColumnSpreadProps> = memo(
 	function ColumnSpread({ column, onChange, onDelete }) {
 		const handleColumnChange = useCallback(
-			(e, opt) => {
-				console.log(e)
+			(_e, opt) => {
 				onChange && onChange(opt)
 			},
 			[onChange],
