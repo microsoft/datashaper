@@ -4,8 +4,8 @@
  */
 
 import { SortDirection } from '@data-wrangling-components/core'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { RowObject } from 'arquero/dist/types/table/table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { RowObject } from 'arquero/dist/types/table/table'
 import { useMemo } from 'react'
 /**
  * Sort top level group headers if the table is grouped, there isn't any column sorted or
@@ -19,7 +19,7 @@ import { useMemo } from 'react'
 export function useSortedGroups(
 	table: ColumnTable,
 	column?: string,
-	sort?: SortDirection,
+	sort = SortDirection.Ascending,
 	entries?: RowObject[],
 ): RowObject[] | undefined {
 	return useMemo(() => {

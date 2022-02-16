@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo, useMemo } from 'react'
-import { VerbDescription } from '../..'
-import type { StepDescriptionProps } from '../../types'
+import { VerbDescription } from '../../index.js'
+import type { StepDescriptionProps } from '../../types.js'
 
 export const NoParametersDescription: React.FC<StepDescriptionProps> = memo(
 	function NoParametersDescription(props) {

@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { RecodeStep } from '@data-wrangling-components/core'
+import type { RecodeStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { DescriptionRow, VerbDescription } from '../..'
-import { StepDescriptionProps } from '../../types'
+import { DescriptionRow, VerbDescription } from '../../index.js'
+import type { StepDescriptionProps } from '../../types.js'
 
 // prevent the displayed list from getting too long
 const MAX_LIST = 10

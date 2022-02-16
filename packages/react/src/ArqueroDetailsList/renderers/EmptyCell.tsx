@@ -5,7 +5,7 @@
 
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
-import { FormattedCellProps } from './types'
+import type { FormattedCellProps } from './types.js'
 
 /**
  * Standard rendering of Empty values.

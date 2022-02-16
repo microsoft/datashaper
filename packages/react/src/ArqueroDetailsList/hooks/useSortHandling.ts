@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SortDirection } from '@data-wrangling-components/core'
-import { IColumn } from '@fluentui/react'
+import type { IColumn } from '@fluentui/react'
 import { useCallback, useState } from 'react'
-import { ColumnClickFunction } from '..'
+import type { ColumnClickFunction } from '../index.js'
 
 export interface SortParameters {
 	sortColumn?: string

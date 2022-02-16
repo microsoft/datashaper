@@ -9,13 +9,23 @@ import {
 	Value,
 	DataType,
 	columnType,
+	Pipeline,
 } from '@data-wrangling-components/core'
-import { IDropdownOption } from '@fluentui/react'
+import type {
+	ICommandBarItemProps,
+	IContextualMenuItem,
+	IDropdownOption,
+} from '@fluentui/react'
+import { useBoolean } from '@fluentui/react-hooks'
 import { op } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { set } from 'lodash'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { set, cloneDeep } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { DropdownOptionChangeFunction, StepChangeFunction } from '../types'
+import type { DetailsListFeatures } from '../index.js'
+import type {
+	DropdownOptionChangeFunction,
+	StepChangeFunction,
+} from '../types.js'
 
 const noop = (value?: string) => value
 const num = (value?: string) => value && +value
@@ -83,13 +93,15 @@ export function useColumnValueOptions(
 		if (!table) {
 			return []
 		}
-		const list = values
-			? values
-			: table
-					.rollup({
-						[column]: op.array_agg(column),
-					})
-					.objects()[0][column]
+		const getFallback = () => {
+			const result = table
+				.rollup({
+					[column]: op.array_agg(column),
+				})
+				.objects()[0]
+			return (result && result[column]) ?? []
+		}
+		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list
 	}, [column, table, values, filter])
 	return useSimpleOptions(vals)
@@ -106,10 +118,8 @@ export function useHandleDropdownChange(
 	onChange?: StepChangeFunction,
 ): DropdownOptionChangeFunction {
 	return useCallback(
-		(event, option) => {
-			const update = {
-				...step,
-			}
+		(_event, option) => {
+			const update = cloneDeep(step)
 			set(update, path, option?.key)
 			onChange && onChange(update)
 		},
@@ -127,10 +137,8 @@ export function useHandleTextfieldChange(
 	newValue?: string,
 ) => void {
 	return useCallback(
-		(event, newValue) => {
-			const update = {
-				...step,
-			}
+		(_event, newValue) => {
+			const update = cloneDeep(step)
 			const value = transformer(newValue)
 			set(update, path, value)
 			onChange && onChange(update)
@@ -154,10 +162,8 @@ export function useHandleSpinButtonChange(
 	transformer = num,
 ): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void {
 	return useCallback(
-		(event, newValue) => {
-			const update = {
-				...step,
-			}
+		(_event, newValue) => {
+			const update = cloneDeep(step)
 			const value = transformer(newValue)
 			if (typeof value === 'number') {
 				set(update, path, value)
@@ -177,10 +183,8 @@ export function useHandleCheckboxChange(
 	checked?: boolean,
 ) => void {
 	return useCallback(
-		(event, checked) => {
-			const update = {
-				...step,
-			}
+		(_event, checked) => {
+			const update = cloneDeep(step)
 			set(update, path, checked)
 			onChange && onChange(update)
 		},
@@ -253,7 +257,7 @@ export function useIntersection(
 	useEffect(() => {
 		const observer = new IntersectionObserver(
 			([entry]) => {
-				setState(entry.isIntersecting)
+				setState(entry?.isIntersecting ?? false)
 			},
 			{ rootMargin },
 		)
@@ -272,4 +276,218 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType {
 		}
 		return columnType(table, column)
 	}, [table, column])
+}
+
+export function useStore(): TableStore {
+	return useMemo(() => new TableStore(), [])
+}
+
+export function usePipeline(store: TableStore): Pipeline {
+	return useMemo(() => new Pipeline(store), [store])
+}
+
+export function useCommonCommands(
+	showModal?: any | undefined,
+	changeTableFeatures?: (name: string) => void,
+	features?: Partial<DetailsListFeatures>,
+): ICommandBarItemProps[] {
+	const dccmd = useDeriveColumnCommand(showModal)
+	const tshcmd = useToggleStatsHeaderCommand(changeTableFeatures, features)
+
+	return useMemo(() => {
+		const commands: ICommandBarItemProps[] = []
+
+		if (dccmd) {
+			commands.push(dccmd)
+		}
+		if (tshcmd) {
+			commands.push(tshcmd)
+		}
+		return commands
+	}, [dccmd, tshcmd])
+}
+
+export function useToggleStatsHeaderCommand(
+	toggle?: (name: string) => void,
+	features?: Partial<DetailsListFeatures>,
+): ICommandBarItemProps | null {
+	const cmd = useMemo(() => {
+		return {
+			key: 'toggle-stats',
+			iconOnly: true,
+			text: 'Toggle header features',
+			iconProps: iconProps.settings,
+			subMenuProps: {
+				items: [
+					{
+						key: 'emailMessage',
+						text: 'Column stats',
+						iconProps: iconProps.stats,
+						checked: features?.statsColumnHeaders,
+						canCheck: true,
+						onClick: () => toggle && toggle('statsColumnHeaders'),
+					},
+					{
+						key: 'calendarEvent',
+						text: 'Column histogram',
+						iconProps: iconProps.barChart,
+						checked: features?.histogramColumnHeaders,
+						canCheck: true,
+						onClick: () => toggle && toggle('histogramColumnHeaders'),
+					},
+				],
+			},
+		} as ICommandBarItemProps
+	}, [toggle, features])
+	if (!toggle && !features) return null
+
+	return cmd
+}
+
+export function useDeriveColumnCommand(
+	onClick: (
+		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+		item?: IContextualMenuItem,
+	) => boolean | void | undefined,
+): ICommandBarItemProps | null {
+	const cmd = useMemo(() => {
+		return {
+			key: 'derive-column',
+			text: 'Create column',
+			iconProps: iconProps.add,
+			onClick,
+		} as ICommandBarItemProps
+	}, [onClick])
+	if (!onClick) return null
+
+	return cmd
+}
+
+const iconProps = {
+	add: { iconName: 'Add' },
+	settings: { iconName: 'Settings' },
+	barChart: { iconName: 'BarChart4' },
+	stats: { iconName: 'AllApps' },
+}
+
+export function useDeleteConfirm(onDelete?: (args: any) => void): {
+	toggleDeleteModalOpen: () => void
+	onConfirmDelete: () => void
+	onDeleteClicked: (args: any) => void
+	isDeleteModalOpen: boolean
+} {
+	const [deleteArg, setDeleteArg] = useState<any>()
+	const [isDeleteModalOpen, { toggle: toggleDeleteModalOpen }] =
+		useBoolean(false)
+
+	const onDeleteClicked = useCallback(
+		(args: any) => {
+			setDeleteArg(args)
+			toggleDeleteModalOpen()
+		},
+		[toggleDeleteModalOpen, setDeleteArg],
+	)
+
+	const onConfirmDelete = useCallback(() => {
+		onDelete && onDelete(deleteArg)
+		toggleDeleteModalOpen()
+	}, [toggleDeleteModalOpen, deleteArg, onDelete])
+
+	return {
+		isDeleteModalOpen,
+		onConfirmDelete,
+		toggleDeleteModalOpen,
+		onDeleteClicked,
+	}
+}
+
+//TODO: separate column and table functions into a new hooks file
+//OR move this functionality to the pipeline?
+export function useCreateTableName(
+	store: TableStore,
+): (name: string) => string {
+	const verifyTableName = useCallback(
+		(name: string): boolean => {
+			return store.list().includes(name)
+		},
+		[store],
+	)
+
+	return useCallback(
+		(name: string): string => {
+			const originalName = name.replace(/( \(\d+\))/, '')
+			let derivedName = originalName
+			let count = 1
+
+			while (verifyTableName(derivedName)) {
+				derivedName = `${originalName} (${count})`
+				count++
+			}
+			return derivedName
+		},
+		[verifyTableName],
+	)
+}
+
+export function useCreateColumnName(): (
+	name: string,
+	columnNames: string[],
+) => string {
+	const verifyColumnName = useCallback(
+		(name: string, columnNames: string[]): boolean => {
+			return columnNames.includes(name)
+		},
+		[],
+	)
+
+	return useCallback(
+		(name: string, columnNames: string[]) => {
+			const originalName = name.replace(/( \(\d+\))/, '')
+			let derivedName = originalName
+
+			let count = 1
+			while (verifyColumnName(derivedName, columnNames)) {
+				derivedName = `${originalName} (${count})`
+				count++
+			}
+			return derivedName
+		},
+		[verifyColumnName],
+	)
+}
+
+export function useFormatedColumnArg(): (
+	stepArgs: unknown,
+	newName?: string,
+) => unknown {
+	return useCallback((stepArgs: unknown, newName = 'New column') => {
+		const args = stepArgs as Record<string, unknown>
+		Object.keys(args).forEach(x => {
+			if (x === 'to') args[x] = newName
+		})
+		return args
+	}, [])
+}
+
+export function useFormatedColumnArgWithCount(
+	store: TableStore,
+): (step: Step) => Promise<unknown> {
+	const createColumnName = useCreateColumnName()
+
+	return useCallback(
+		async (step: Step) => {
+			const inputTable = await store.get(step.output)
+			const columnNames = inputTable.columnNames()
+
+			let args = step.args as Record<string, unknown>
+			Object.keys(args).forEach(x => {
+				if (x === 'to') {
+					const newColumnName = createColumnName(args[x] as string, columnNames)
+					args = { ...args, [x]: newColumnName }
+				}
+			})
+			return args
+		},
+		[store, createColumnName],
+	)
 }

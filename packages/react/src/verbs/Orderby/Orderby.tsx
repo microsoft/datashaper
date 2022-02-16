@@ -9,14 +9,14 @@ import {
 	Step,
 } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { set } from 'lodash'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable } from '../../common'
-import { SortInstruction } from '../../controls'
-import { StepComponentProps } from '../../types'
+import { useLoadTable } from '../../common/index.js'
+import { SortInstruction } from '../../controls/index.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for an OrderBy step.

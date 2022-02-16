@@ -2,12 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	Specification,
-	TableStore,
-	Pipeline,
-} from '@data-wrangling-components/core'
-import { BaseFile } from '@data-wrangling-components/utilities'
+import { Specification, TableStore } from '@data-wrangling-components/core'
+import type { BaseFile } from '@data-wrangling-components/utilities'
 import { loadCSV } from 'arquero'
 import ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -62,10 +58,6 @@ export function useInputTables(
 		f()
 	}, [list, store, setTables])
 	return tables
-}
-
-export function usePipeline(store: TableStore): Pipeline {
-	return useMemo(() => new Pipeline(store), [store])
 }
 
 export function useLoadTableFiles(): (

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
-import { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for an ungroup step.

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IDetailsColumnStyles } from '@fluentui/react'
+import type { IDetailsColumnStyles } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { useMemo } from 'react'
 

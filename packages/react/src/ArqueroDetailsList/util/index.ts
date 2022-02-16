@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IColumn, IDropdownOption } from '@fluentui/react'
+import type { IColumn, IDropdownOption } from '@fluentui/react'
 import { isArray, isEqual, isNil, isString, orderBy, uniqWith } from 'lodash'
 
 export function getValue(item: any, column?: IColumn): any {

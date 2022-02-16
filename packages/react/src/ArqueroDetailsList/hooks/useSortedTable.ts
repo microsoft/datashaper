@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SortDirection } from '@data-wrangling-components/core'
-import * as aq from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import { desc } from 'arquero'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
 export function useSortedTable(
@@ -29,7 +29,7 @@ export function useSortedTable(
 		}
 		return table.orderby(
 			sort === SortDirection.Descending
-				? columns.map(col => aq.desc(col))
+				? columns.map(col => desc(col))
 				: columns,
 		)
 	}, [table, column, sort])

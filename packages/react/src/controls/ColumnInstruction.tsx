@@ -3,11 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { TableColumnDropdown } from './dropdowns/TableColumnDropdown'
+import { TableColumnDropdown } from './dropdowns/TableColumnDropdown.js'
 
 export interface ColumnInstructionProps {
 	table?: ColumnTable
@@ -22,7 +21,7 @@ export interface ColumnInstructionProps {
 export const ColumnInstruction: React.FC<ColumnInstructionProps> = memo(
 	function ColumnInstruction({ table, column, onChange, onDelete }) {
 		const handleColumnChange = useCallback(
-			(e, opt) => {
+			(_e, opt) => {
 				onChange && onChange(opt.key)
 			},
 			[onChange],

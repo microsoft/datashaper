@@ -2,19 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, TableStore } from '@data-wrangling-components/core'
-
+import type { Step, TableStore } from '@data-wrangling-components/core'
+import { memo, useCallback, useMemo } from 'react'
+import styled from 'styled-components'
 import {
 	withInputColumnDropdown,
 	withOutputColumnTextfield,
 	withTableDropdown,
 	selectStepComponent,
 	selectStepDescription,
-} from '@data-wrangling-components/react'
-import { memo, useCallback, useMemo } from 'react'
-import styled from 'styled-components'
+} from '../../index.js'
 
-export interface StepComponentProps {
+interface StepComponentProps {
 	step: Step
 	store: TableStore
 	index: number
@@ -44,11 +43,9 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 			<>
 				{' '}
 				<WithAllArgs step={step} store={store} onChange={handleStepChange} />
-				{Description ? (
-					<DescriptionContainer>
-						<Description step={step} showInput showOutput />
-					</DescriptionContainer>
-				) : null}
+				<DescriptionContainer>
+					<Description step={step} showInput showOutput />
+				</DescriptionContainer>
 			</>
 		)
 	},

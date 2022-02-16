@@ -3,6 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export * from './Dropzone'
-export * from './hooks'
-export * from './types'
+export * from './Dropzone.js'
+export * from './hooks/index.js'
+export * from './types.js'

@@ -2,12 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ImputeArgs, InputColumnArgs } from '@data-wrangling-components/core'
+import type {
+	ImputeArgs,
+	InputColumnArgs,
+} from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useHandleTextfieldChange } from '../../common'
-import { StepComponentProps } from '../../types'
+import { LeftAlignedRow, useHandleTextfieldChange } from '../../common/index.js'
+import type { StepComponentProps } from '../../types.js'
 
 interface ColumnArgs extends InputColumnArgs, ImputeArgs {}
 

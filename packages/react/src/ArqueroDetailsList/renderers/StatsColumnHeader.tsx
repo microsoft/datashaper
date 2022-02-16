@@ -6,8 +6,8 @@ import { ColumnStats, formatIfNumber } from '@data-wrangling-components/core'
 import { useThematic } from '@thematic/react'
 import { upperFirst } from 'lodash'
 import { memo, useMemo } from 'react'
-import { StatsColumnType } from '../types'
-import { RichHeaderProps } from './types'
+import { StatsColumnType } from '../types.js'
+import type { RichHeaderProps } from './types.js'
 
 const pretty: Record<string, string> = {
 	distinct: 'unique',

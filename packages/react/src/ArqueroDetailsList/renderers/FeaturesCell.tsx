@@ -6,11 +6,11 @@ import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
 import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty, getValue, categories } from '../util'
+import { isEmpty, getValue, categories } from '../util/index.js'
 import { ArrayDropdownCell } from './ArrayDropdownCell'
 import { CellContainer } from './CellContainer'
 import { EmptyCell } from './EmptyCell'
-import { FeatureCellProps } from './types'
+import type { FeatureCellProps } from './types.js'
 import {
 	BooleanSymbolCell,
 	DateCell,
@@ -20,7 +20,7 @@ import {
 	SparklineCell,
 	DefaultCell,
 	CategoricalBarCell,
-} from './'
+} from './index.js'
 
 /**
  * Chooses what to render based on the features prop
@@ -66,7 +66,10 @@ export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 					</Case>
 					<Case
 						condition={
-							features.showSparkbar && type === DataType.Array && histo?.length
+							features.showSparkbar &&
+							type === DataType.Array &&
+							histo &&
+							histo['length' ?? 0]
 						}
 					>
 						<SparkbarCell {...props} />

@@ -7,14 +7,14 @@ import {
 	SortDirection,
 	TableMetadata,
 } from '@data-wrangling-components/core'
-import { IColumn } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type { IColumn } from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
-import {
+import type {
 	ColumnClickFunction,
 	DetailsListFeatures,
 	DropdownOptionSelect,
-} from '..'
+} from '../index.js'
 import {
 	createRenderColumnHeader,
 	createRenderCommandBarColumnHeader,
@@ -23,16 +23,15 @@ import {
 	createRenderHistogramColumnHeader,
 	createRenderSmartCell,
 	createRenderStatsColumnHeader,
-} from '../renderers'
+} from '../renderers/index.js'
+import { useCountMinWidth } from './useCountMinWidth.js'
 import {
 	useCellClickhandler,
 	useCellDropdownSelectHandler,
 	useColumnNamesList,
 	useColumnStyles,
 	useIncrementingColumnColorScale,
-} from '.'
-
-const DEFAULT_COLUMN_WIDTH = 100
+} from './index.js'
 
 export interface ColumnOptions {
 	features?: DetailsListFeatures
@@ -94,6 +93,8 @@ export function useColumns(
 		includeAllColumns,
 		visibleColumns,
 	)
+	//get column width based on min value or on commandBar item passed
+	const columnMinWidth = useCountMinWidth(features.commandBar)
 
 	return useMemo(() => {
 		const columnMap = reduce(columns)
@@ -101,7 +102,7 @@ export function useColumns(
 			const column = columnMap[name] || {
 				key: name,
 				name,
-				minWidth: DEFAULT_COLUMN_WIDTH,
+				minWidth: columnMinWidth,
 				fieldName: name,
 			}
 
@@ -113,6 +114,9 @@ export function useColumns(
 			const { iconName, ...defaults } = column
 
 			const meta = computedMetadata.columns[name]
+			if (!meta) {
+				throw new Error(`could not find meta for column ${name}`)
+			}
 			const color = meta.type === DataType.Number ? colorScale() : undefined
 			const onRender = features.smartCells
 				? createRenderSmartCell(
@@ -192,6 +196,7 @@ export function useColumns(
 		handleCellDropdownSelect,
 		isDefaultHeaderClickable,
 		handleColumnHeaderClick,
+		columnMinWidth,
 	])
 }
 

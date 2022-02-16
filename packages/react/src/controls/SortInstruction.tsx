@@ -7,11 +7,11 @@ import {
 	SortDirection,
 } from '@data-wrangling-components/core'
 import { IconButton } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { TableColumnDropdown } from './dropdowns/TableColumnDropdown'
+import { TableColumnDropdown } from './dropdowns/TableColumnDropdown.js'
 
 export interface SortInstructionProps {
 	table?: ColumnTable
@@ -30,7 +30,7 @@ export const SortInstruction: React.FC<SortInstructionProps> = memo(
 		const directionName = checked ? 'Ascending' : 'Descending'
 
 		const handleColumnChange = useCallback(
-			(e, opt) => {
+			(_e, opt) => {
 				const update = {
 					...order,
 					column: opt.key,

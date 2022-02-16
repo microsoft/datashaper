@@ -6,10 +6,10 @@ import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
 import { isNil } from 'lodash'
 import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty, getValue } from '../util'
+import { isEmpty, getValue } from '../util/index.js'
 import { CellContainer } from './CellContainer'
 import { EmptyCell } from './EmptyCell'
-import { RichCellProps } from './types'
+import type { RichCellProps } from './types.js'
 import {
 	BooleanSymbolCell,
 	DateCell,
@@ -17,7 +17,7 @@ import {
 	SmartArrayCell,
 	TextCell,
 	NumberMagnitudeCell,
-} from './'
+} from './index.js'
 
 /**
  * Chooses what to render based on data type.

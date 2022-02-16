@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableStore } from '@data-wrangling-components/core'
+import type { TableStore } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
 import { memo } from 'react'
-import { useTableOptions } from '../../common'
-import { tableDropdownStyles } from '../styles'
+import { useTableOptions } from '../../common/index.js'
+import { tableDropdownStyles } from '../styles.js'
 
 export interface TableDropdownProps extends Partial<IDropdownProps> {
 	store?: TableStore

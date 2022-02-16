@@ -9,8 +9,8 @@ import styled from 'styled-components'
 import { CommandBar } from './CommandBar'
 import { TableName } from './TableName'
 import { HEIGHT } from './constants'
-import { useColumnCounts, useCommands } from './hooks'
-import { ArqueroTableHeaderProps } from '.'
+import { useColumnCounts, useCommands, useRowCounts } from './hooks/index.js'
+import type { ArqueroTableHeaderProps } from './index.js'
 
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader({
@@ -21,20 +21,23 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		commands,
 		farCommands,
 		visibleColumns,
+		visibleRows,
 		onRenameTable,
+		bgColor,
 	}) {
 		const ref = useRef(null)
 		const { width } = useDimensions(ref) || { width: 0 }
-		const commandItems = useCommands(commands)
-		const farCommandItems = useCommands(farCommands)
+		const commandItems = useCommands(commands, bgColor)
+		const farCommandItems = useCommands(farCommands, bgColor)
 		const groupCount = useMemo((): any => {
 			return table.isGrouped() ? table.groups().size : 0
 		}, [table])
 
 		// TODO: we can do the same thing for rows when a filter is applied
 		const columnCounts = useColumnCounts(table, visibleColumns)
+		const rowCounts = useRowCounts(table, visibleRows)
 		return (
-			<Header ref={ref}>
+			<Header bgColor={bgColor} ref={ref}>
 				{commandItems.length > 0 ? (
 					<CommandBar commands={commandItems} />
 				) : null}
@@ -42,7 +45,12 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					{name ? (
 						<TableName onRenameTable={onRenameTable} name={name} />
 					) : null}
-					{showRowCount === true ? <H3>{table.numRows()} rows</H3> : null}
+					{showRowCount === true ? (
+						<H3>
+							{rowCounts.total} rows{' '}
+							{rowCounts.hidden > 0 ? `(${rowCounts.hidden} hidden)` : ''}
+						</H3>
+					) : null}
 					{showColumnCount === true ? (
 						<H3>
 							{columnCounts.total} cols{' '}
@@ -57,7 +65,9 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					// If the bar is too wide, then only use 10% of it for the commands
 					<CommandBar
 						commands={farCommandItems}
-						width={width >= 992 ? '10%' : undefined}
+						width={
+							width >= 992 && farCommandItems.length > 2 ? '10%' : undefined
+						}
 					/>
 				) : null}
 			</Header>
@@ -65,10 +75,11 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	},
 )
 
-const Header = styled.div`
+const Header = styled.div<{ bgColor?: string }>`
 	height: ${HEIGHT}px;
 	width: 100%;
-	background-color: ${({ theme }) => theme.application().accent().hex()};
+	background-color: ${({ bgColor, theme }) =>
+		bgColor ? bgColor : theme.application().accent().hex()};
 	position: relative;
 	padding: 0 5px;
 	box-sizing: border-box;

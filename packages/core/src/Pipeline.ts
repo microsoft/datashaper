@@ -41,6 +41,9 @@ export class Pipeline {
 	get count(): number {
 		return this._steps.length
 	}
+	get outputs(): string[] {
+		return this._steps.map(x => x.output)
+	}
 	/**
 	 * Creates a new Step with a starter template based on its type
 	 * @param type
@@ -64,6 +67,12 @@ export class Pipeline {
 		// clear out any output tables if the pipeline has been run already
 		this._steps.forEach(step => this._store.delete(step.output))
 		this._steps = []
+	}
+	delete(index: number): Step[] {
+		const _steps = this.steps.slice(0, index)
+		this.clear()
+		this.addAll(_steps)
+		return this.steps
 	}
 	update(step: Step, index: number): Step[] {
 		this._steps[index] = step

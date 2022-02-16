@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
-import { CompoundBinarize, FilterAggregateLookup } from './compounds'
-import type { StepComponentProps } from './types'
+import { CompoundBinarize, FilterAggregateLookup } from './compounds/index.js'
+import type { StepComponentProps } from './types.js'
 import {
 	Aggregate,
 	Bin,
@@ -24,7 +24,7 @@ import {
 	Select,
 	SetOperation,
 	NoParameters,
-} from './verbs'
+} from './verbs/index.js'
 
 const verb: Record<string, React.FC<StepComponentProps>> = {
 	aggregate: Aggregate,
@@ -62,5 +62,9 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
  * @param step
  */
 export function selectStepComponent(step: Step): React.FC<StepComponentProps> {
-	return verb[step.verb]
+	const result = verb[step.verb]
+	if (!result) {
+		throw new Error(`verb ${step.verb} not found`)
+	}
+	return result
 }

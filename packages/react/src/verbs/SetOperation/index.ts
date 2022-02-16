@@ -2,5 +2,5 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './SetOperation'
-export * from './SetOperationDescription'
+export * from './SetOperation.js'
+export * from './SetOperationDescription.js'

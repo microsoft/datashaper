@@ -2,15 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnListStep, Step } from '@data-wrangling-components/core'
+import type { ColumnListStep, Step } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable } from '../../common'
-import { ColumnInstruction } from '../../controls'
-import { StepComponentProps } from '../../types'
+import { useLoadTable } from '../../common/index.js'
+import { ColumnInstruction } from '../../controls/index.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.
