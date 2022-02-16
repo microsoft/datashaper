@@ -5,9 +5,9 @@
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import React, { memo } from 'react'
 import styled from 'styled-components'
+import { DetailText } from '../DetailText/index.js'
 import { TableCard } from './TableCard.js'
 import { useIsTableSelected } from './hooks'
-import { DetailText } from '../DetailText/index.js'
 
 export const TablesList: React.FC<{
 	tables: BaseFile[]

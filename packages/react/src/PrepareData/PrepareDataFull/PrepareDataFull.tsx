@@ -144,5 +144,5 @@ const StepsContainer = styled.div`
 const TablesListContainer = styled.div`
 	display: flex;
 	width: 26%;
-	min-width: 295px;
+	min-width: 250px;
 `

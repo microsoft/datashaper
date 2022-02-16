@@ -7,8 +7,8 @@ import { DialogConfirm } from '@essex-js-toolkit/themed-components'
 import { IconButton, TooltipHost } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { StepCard, TableTransformModal, useDeleteConfirm } from '../../index.js'
 import { DetailText } from '../../PrepareData/DetailText/index.js'
+import { StepCard, TableTransformModal, useDeleteConfirm } from '../../index.js'
 import { useManageSteps } from './hooks'
 
 export const StepsList: React.FC<{
