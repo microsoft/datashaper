@@ -11,8 +11,8 @@ import { TableStore } from './TableStore.js'
 export type Value = any
 
 export enum MergeStrategy {
-	FirstOneWins = 'firstOneWins',
-	LastOneWins = 'lastOneWins',
+	FirstOneWins = 'first one wins',
+	LastOneWins = 'last one wins',
 	Concat = 'concat',
 }
 
