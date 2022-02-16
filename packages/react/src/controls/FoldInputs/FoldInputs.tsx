@@ -2,22 +2,31 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnListStep, Step } from '@data-wrangling-components/core'
-import { ActionButton } from '@fluentui/react'
+import type {
+	ColumnListStep,
+	FoldStep,
+	Step,
+} from '@data-wrangling-components/core'
+import { ActionButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
-import { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable } from '../../common/index.js'
-import { ColumnInstruction } from '../../controls/index.js'
-import type { StepComponentProps } from '../../types.js'
+import {
+	LeftAlignedRow,
+	useHandleTextfieldChange,
+	useLoadTable,
+} from '../../common'
+import { ColumnInstruction } from '../../controls'
+import type { StepComponentProps } from '../../types'
+import { columnDropdownStyles } from '../styles'
 
 /**
  * Provides inputs for a step that needs lists of columns.
  */
-export const ColumnListInputs: React.FC<StepComponentProps> = memo(
-	function ColumnListInputs({ step, store, table, onChange, input }) {
-		const internal = useMemo(() => step as ColumnListStep, [step])
+export const FoldInputs: React.FC<StepComponentProps> = memo(
+	function FoldInputs({ step, store, table, onChange, input }) {
+		const internal = useMemo(() => step as FoldStep, [step])
 
 		const tbl = useLoadTable(input || step.input, table, store)
 
@@ -34,6 +43,17 @@ export const ColumnListInputs: React.FC<StepComponentProps> = memo(
 				})
 		}, [internal, tbl, onChange])
 
+		const handleToChange = useHandleTextfieldChange(
+			internal,
+			'args.to[0]',
+			onChange,
+		)
+		const handleToChange2 = useHandleTextfieldChange(
+			internal,
+			'args.to[1]',
+			onChange,
+		)
+
 		return (
 			<Container>
 				{columns}
@@ -44,6 +64,25 @@ export const ColumnListInputs: React.FC<StepComponentProps> = memo(
 				>
 					Add column
 				</ActionButton>
+
+				<LeftAlignedRow>
+					<TextField
+						required
+						label={'Key name to use'}
+						placeholder={'Key name to use'}
+						value={internal.args.to !== undefined ? internal.args.to[0] : ''}
+						styles={columnDropdownStyles}
+						onChange={handleToChange}
+					/>
+					<TextField
+						required
+						label={'Value name to use'}
+						placeholder={'Value name to use'}
+						value={internal.args.to !== undefined ? internal.args.to[1] : ''}
+						styles={columnDropdownStyles}
+						onChange={handleToChange2}
+					/>
+				</LeftAlignedRow>
 			</Container>
 		)
 	},

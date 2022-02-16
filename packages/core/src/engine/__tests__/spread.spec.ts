@@ -7,13 +7,13 @@ import { spread } from '../verbs/spread.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for spread verb', () => {
-	test('spread test', () => {
+	test('spread test without to argument', () => {
 		const step: Step = {
 			verb: Verb.Spread,
 			input: 'table6',
 			output: 'output',
 			args: {
-				columns: ['ID'],
+				column: ['ID'],
 			},
 		}
 

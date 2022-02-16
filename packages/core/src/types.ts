@@ -10,6 +10,12 @@ import { TableStore } from './TableStore.js'
  */
 export type Value = any
 
+export enum MergeStrategy {
+	FirstOneWins = 'first one wins',
+	LastOneWins = 'last one wins',
+	Concat = 'concat',
+}
+
 export enum DataType {
 	Array = 'array',
 	Boolean = 'boolean',
@@ -176,6 +182,7 @@ export enum Verb {
 	Dedupe = 'dedupe',
 	Derive = 'derive',
 	Difference = 'difference',
+	Erase = 'erase',
 	Fetch = 'fetch',
 	Fill = 'fill',
 	Filter = 'filter',
@@ -185,6 +192,8 @@ export enum Verb {
 	Intersect = 'intersect',
 	Join = 'join',
 	Lookup = 'lookup',
+	Merge = 'merge',
+	Pivot = 'pivot',
 	Orderby = 'orderby',
 	Recode = 'recode',
 	Rename = 'rename',
@@ -192,6 +201,7 @@ export enum Verb {
 	Sample = 'sample',
 	Select = 'select',
 	Spread = 'spread',
+	Unfold = 'unfold',
 	Ungroup = 'ungroup',
 	Union = 'union',
 	Unorder = 'unorder',
@@ -205,6 +215,7 @@ export type ChainStep = Step<ChainArgs>
 export type ColumnListStep = Step<InputColumnListArgs>
 export type DedupeStep = Step<DedupeArgs>
 export type DeriveStep = Step<DeriveArgs>
+export type EraseStep = Step<EraseArgs>
 export type ImputeStep = Step<FillArgs>
 export type FetchStep = Step<FetchArgs>
 export type FillStep = Step<FillArgs>
@@ -213,6 +224,8 @@ export type FoldStep = Step<FoldArgs>
 export type GroupbyStep = Step<GroupbyArgs>
 export type JoinStep = Step<JoinArgs>
 export type LookupStep = Step<LookupArgs>
+export type MergeStep = Step<MergeArgs>
+export type PivotStep = Step<PivotArgs>
 export type OrderbyStep = Step<OrderbyArgs>
 export type RecodeStep = Step<RecodeArgs>
 export type RenameStep = Step<RenameArgs>
@@ -220,6 +233,7 @@ export type RollupStep = Step<RollupArgs>
 export type SampleStep = Step<SampleArgs>
 export type SelectStep = Step<SelectArgs>
 export type SpreadStep = Step<SpreadArgs>
+export type UnfoldStep = Step<UnfoldArgs>
 export type UnrollStep = Step<UnrollArgs>
 export type SetOperationStep = Step<SetOperationArgs>
 
@@ -336,6 +350,11 @@ export interface FillArgs extends OutputColumnArgs {
 	value: Value
 }
 
+export interface EraseArgs {
+	column: string
+	value: Value
+}
+
 export interface FilterArgs extends InputColumnArgs {
 	/**
 	 * Comparison value for the column
@@ -354,6 +373,17 @@ export interface FoldArgs extends InputColumnListArgs {
 	 * Two-element array of names for the output [key, value]
 	 */
 	to?: [string, string]
+}
+
+export interface PivotArgs {
+	key: string
+	value: string
+	operation: FieldAggregateOperation
+}
+
+export interface UnfoldArgs {
+	key: string
+	value: string
 }
 
 export type GroupbyArgs = InputColumnListArgs
@@ -413,7 +443,14 @@ export interface SampleArgs {
 
 export type SelectArgs = InputColumnListArgs
 
-export type SpreadArgs = InputColumnListArgs
+export interface SpreadArgs {
+	column: string
+	to: string[]
+}
+
+export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
+	strategy: MergeStrategy
+}
 
 export interface OrderbyArgs {
 	/**
