@@ -19,7 +19,7 @@ import type {
 import { useBoolean } from '@fluentui/react-hooks'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { set } from 'lodash'
+import { set, cloneDeep } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { DetailsListFeatures } from '../index.js'
 import type {
@@ -119,9 +119,7 @@ export function useHandleDropdownChange(
 ): DropdownOptionChangeFunction {
 	return useCallback(
 		(_event, option) => {
-			const update = {
-				...step,
-			}
+			const update = cloneDeep(step)
 			set(update, path, option?.key)
 			onChange && onChange(update)
 		},
@@ -140,9 +138,7 @@ export function useHandleTextfieldChange(
 ) => void {
 	return useCallback(
 		(_event, newValue) => {
-			const update = {
-				...step,
-			}
+			const update = cloneDeep(step)
 			const value = transformer(newValue)
 			set(update, path, value)
 			onChange && onChange(update)
@@ -167,9 +163,7 @@ export function useHandleSpinButtonChange(
 ): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void {
 	return useCallback(
 		(_event, newValue) => {
-			const update = {
-				...step,
-			}
+			const update = cloneDeep(step)
 			const value = transformer(newValue)
 			if (typeof value === 'number') {
 				set(update, path, value)
@@ -190,9 +184,7 @@ export function useHandleCheckboxChange(
 ) => void {
 	return useCallback(
 		(_event, checked) => {
-			const update = {
-				...step,
-			}
+			const update = cloneDeep(step)
 			set(update, path, checked)
 			onChange && onChange(update)
 		},
