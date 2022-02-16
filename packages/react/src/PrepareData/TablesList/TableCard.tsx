@@ -49,12 +49,13 @@ const PreviewIcon = styled(Icon)`
 `
 
 const Card = styled(DocumentCard)<{ isSelected: boolean }>`
+	margin-top: unset !important;
 	display: flex;
 	justify-content: space-between;
 	padding: 4px;
 	margin: 2px;
 	border: 1px solid
 		${({ theme, isSelected }) =>
-			isSelected ? theme.palette.neutralSecondary : 'inherit'};
+			isSelected ? theme.palette.neutralTertiary : theme.palette.neutralLight};
 	font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
 `

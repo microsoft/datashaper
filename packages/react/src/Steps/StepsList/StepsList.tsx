@@ -7,6 +7,7 @@ import { DialogConfirm } from '@essex-js-toolkit/themed-components'
 import { IconButton, TooltipHost } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
+import { DetailText } from '../../PrepareData/DetailText/index.js'
 import { StepCard, TableTransformModal, useDeleteConfirm } from '../../index.js'
 import { useManageSteps } from './hooks'
 
@@ -61,7 +62,7 @@ export const StepsList: React.FC<{
 			{onSave && (
 				<ButtonContainer>
 					{!steps?.length && (
-						<EmptyStepTexts>Add here the first preparation step</EmptyStepTexts>
+						<DetailText text="Add here the first preparation step" />
 					)}
 					<TooltipHost content="Add step" setAriaDescribedBy={false}>
 						<IconButton
@@ -96,10 +97,6 @@ export const StepsList: React.FC<{
 const iconProps = {
 	add: { iconName: 'Add' },
 }
-
-const EmptyStepTexts = styled.div`
-	color: ${({ theme }) => theme.application().border().hex()};
-`
 
 const Container = styled.div`
 	display: flex;

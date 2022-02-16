@@ -10,8 +10,7 @@
 		"start:client": "yarn start",
 		"build:client": "yarn build && yarn archive",
 		"archive": "essex zip --baseDir dist deploy.zip '**/*'",
-		"deploy": "essex deploy --type azure-blob-storage --storageAccount $STORAGE_ACCOUNT --storageAccountKey $STORAGE_KEY --verbose",
-		"deploy:client": "yarn deploy"
+		"archive:client": "yarn archive"
 	},
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:packages/core",
