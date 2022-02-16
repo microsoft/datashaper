@@ -3,24 +3,32 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step } from '@data-wrangling-components/core'
+import type { Step, TableStore } from '@data-wrangling-components/core'
 import { useCallback } from 'react'
+import {
+	useCreateTableName,
+	useFormatedColumnArgWithCount,
+} from '../../../common/index.js'
 
 export function useOnDuplicateStep(
-	setStep: (step: Step) => void,
-	toggleDuplicatingStep: () => void,
-	showTableModal: () => void,
+	store: TableStore,
+	onSave?: (step: Step, index?: number) => void,
 ): (_step: Step) => void {
+	const createTableName = useCreateTableName(store)
+	const formattedColumnArgs = useFormatedColumnArgWithCount(store)
+
 	return useCallback(
-		(_step: Step) => {
-			toggleDuplicatingStep()
+		async (_step: Step) => {
+			const tableName = createTableName(_step.output)
+			const formattedArgs = await formattedColumnArgs(_step)
 			const dupStep = {
 				..._step,
-				output: `${_step.output}-dup`,
+				args: formattedArgs,
+				input: `${_step.output}`,
+				output: tableName,
 			}
-			setStep(dupStep)
-			showTableModal()
+			onSave && onSave(dupStep)
 		},
-		[setStep, showTableModal, toggleDuplicatingStep],
+		[onSave, createTableName, formattedColumnArgs],
 	)
 }

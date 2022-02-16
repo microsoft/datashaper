@@ -408,3 +408,94 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 		onDeleteClicked,
 	}
 }
+
+//TODO: separate column and table functions into a new hooks file
+//OR move this functionality to the pipeline?
+export function useCreateTableName(
+	store: TableStore,
+): (name: string) => string {
+	const verifyTableName = useCallback(
+		(name: string): boolean => {
+			return store.list().includes(name)
+		},
+		[store],
+	)
+
+	return useCallback(
+		(name: string): string => {
+			const originalName = name.replace(/( \(\d+\))/, '')
+			let derivedName = originalName
+			let count = 1
+
+			while (verifyTableName(derivedName)) {
+				derivedName = `${originalName} (${count})`
+				count++
+			}
+			return derivedName
+		},
+		[verifyTableName],
+	)
+}
+
+export function useCreateColumnName(): (
+	name: string,
+	columnNames: string[],
+) => string {
+	const verifyColumnName = useCallback(
+		(name: string, columnNames: string[]): boolean => {
+			return columnNames.includes(name)
+		},
+		[],
+	)
+
+	return useCallback(
+		(name: string, columnNames: string[]) => {
+			const originalName = name.replace(/( \(\d+\))/, '')
+			let derivedName = originalName
+
+			let count = 1
+			while (verifyColumnName(derivedName, columnNames)) {
+				derivedName = `${originalName} (${count})`
+				count++
+			}
+			return derivedName
+		},
+		[verifyColumnName],
+	)
+}
+
+export function useFormatedColumnArg(): (
+	stepArgs: unknown,
+	newName?: string,
+) => unknown {
+	return useCallback((stepArgs: unknown, newName = 'New column') => {
+		const args = stepArgs as Record<string, unknown>
+		Object.keys(args).forEach(x => {
+			if (x === 'to') args[x] = newName
+		})
+		return args
+	}, [])
+}
+
+export function useFormatedColumnArgWithCount(
+	store: TableStore,
+): (step: Step) => Promise<unknown> {
+	const createColumnName = useCreateColumnName()
+
+	return useCallback(
+		async (step: Step) => {
+			const inputTable = await store.get(step.output)
+			const columnNames = inputTable.columnNames()
+
+			let args = step.args as Record<string, unknown>
+			Object.keys(args).forEach(x => {
+				if (x === 'to') {
+					const newColumnName = createColumnName(args[x] as string, columnNames)
+					args = { ...args, [x]: newColumnName }
+				}
+			})
+			return args
+		},
+		[store, createColumnName],
+	)
+}

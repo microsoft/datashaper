@@ -72,12 +72,18 @@ export function useBusinessLogic(
 		f()
 	}, [steps, runPipeline])
 
-	useEffect(() => {
-		if (steps?.length && !output && storedTables.size > 0) {
-			pipeline.addAll(steps)
-			runPipeline()
-		}
-	}, [steps, pipeline, runPipeline, storedTables, output])
+	//if steps and tables are passed, the code needs to:
+	// 1. store all the tables
+	// 2. addAll the steps
+	// 3. run the pipeline
+	// useEffect(() => {
+	// 	if (steps?.length && !output && storedTables.size > 0) {
+	// 		if (!pipeline.steps.filter(s => steps.includes(s))) {
+	// 			pipeline.addAll(steps)
+	// 			runPipeline()
+	// 		}
+	// 	}
+	// }, [steps, pipeline, runPipeline, storedTables, output])
 
 	useEffect(() => {
 		if (files.length) {

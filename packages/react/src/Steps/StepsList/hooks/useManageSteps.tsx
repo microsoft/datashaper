@@ -3,15 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step } from '@data-wrangling-components/core'
-import { useState, useCallback, useMemo } from 'react'
-import { useOnEditStep, useOnDuplicateStep } from './index.js'
+import type { Step, TableStore } from '@data-wrangling-components/core'
+import { useBoolean } from '@fluentui/react-hooks'
+import { useState, useCallback } from 'react'
+import { useOnDuplicateStep, useOnEditStep } from './index.js'
 
 export function useManageSteps(
-	showTableModal: () => void,
-	toggleDuplicatingStep: () => void,
-	isDuplicatingStep: boolean,
-	onDismissTableModal: () => void,
+	store: TableStore,
 	onSave?: (step: Step, index?: number) => void,
 ): {
 	step: Step | undefined
@@ -19,30 +17,24 @@ export function useManageSteps(
 	onDuplicateClicked: (step: Step) => void
 	onEditClicked: (step: Step, index: number) => void
 	stepIndex: number | undefined
-	modalHeaderText: string
 	onCreate: (step: Step, index?: number) => void
+	showTableModal: () => void
+	isTableModalOpen: boolean
 } {
 	const [step, setStep] = useState<Step>()
 	const [stepIndex, setStepIndex] = useState<number>()
+	const [
+		isTableModalOpen,
+		{ setTrue: showTableModal, setFalse: hideTableModal },
+	] = useBoolean(false)
 
 	const onDismissClearTableModal = useCallback(() => {
-		onDismissTableModal()
+		hideTableModal()
 		setStep(undefined)
 		setStepIndex(undefined)
-	}, [setStep, setStepIndex, onDismissTableModal])
-
-	const modalHeaderText = useMemo(
-		(): any =>
-			step ? (isDuplicatingStep ? 'Duplicate step' : 'Edit step') : 'New step',
-		[step, isDuplicatingStep],
-	)
+	}, [setStep, setStepIndex, hideTableModal])
 
 	const onEditClicked = useOnEditStep(setStep, setStepIndex, showTableModal)
-	const onDuplicateClicked = useOnDuplicateStep(
-		setStep,
-		toggleDuplicatingStep,
-		showTableModal,
-	)
 
 	const onCreate = useCallback(
 		(_step: Step) => {
@@ -51,6 +43,7 @@ export function useManageSteps(
 		},
 		[onSave, onDismissClearTableModal, stepIndex],
 	)
+	const onDuplicateClicked = useOnDuplicateStep(store, onSave)
 
 	return {
 		step,
@@ -58,7 +51,8 @@ export function useManageSteps(
 		onDismissClearTableModal,
 		onEditClicked,
 		stepIndex,
-		modalHeaderText,
 		onCreate,
+		isTableModalOpen,
+		showTableModal,
 	}
 }

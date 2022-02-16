@@ -8,7 +8,7 @@ import { IconButton, TooltipHost } from '@fluentui/react'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { StepCard, TableTransformModal, useDeleteConfirm } from '../../index.js'
-import { useManageModal, useManageSteps } from './hooks'
+import { useManageSteps } from './hooks'
 
 export const StepsList: React.FC<{
 	steps?: Step[]
@@ -26,27 +26,14 @@ export const StepsList: React.FC<{
 	nextInputTable,
 }) {
 	const {
-		hideTableModal,
-		isTableModalOpen,
-		showTableModal,
-		isDuplicatingStep,
-		toggleDuplicatingStep,
-	} = useManageModal()
-
-	const {
 		step,
 		onDuplicateClicked,
 		onEditClicked,
 		onCreate,
-		modalHeaderText,
 		onDismissClearTableModal,
-	} = useManageSteps(
 		showTableModal,
-		toggleDuplicatingStep,
-		isDuplicatingStep,
-		hideTableModal,
-		onSave,
-	)
+		isTableModalOpen,
+	} = useManageSteps(store, onSave)
 
 	const {
 		onDeleteClicked,
@@ -87,9 +74,7 @@ export const StepsList: React.FC<{
 
 			<TableTransformModal
 				step={step}
-				headerText={modalHeaderText}
 				nextInputTable={nextInputTable}
-				stepsLength={steps?.length}
 				onTransformRequested={onCreate}
 				isOpen={isTableModalOpen}
 				store={store}

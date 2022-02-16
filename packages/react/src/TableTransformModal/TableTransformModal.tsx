@@ -27,7 +27,6 @@ export interface TableTransformModalProps extends TransformModalProps {
 	hideOutputTable?: boolean
 	store: TableStore
 	nextInputTable: string
-	stepsLength?: number
 }
 
 export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
@@ -37,16 +36,13 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			store,
 			onTransformRequested,
 			step,
-			headerText,
 			nextInputTable,
-			stepsLength = 0,
 			...rest
 		} = props
 
 		const { internal, setInternal, handleVerbChange } = useInternalStep(
 			step,
 			nextInputTable,
-			stepsLength,
 			store,
 		)
 
@@ -62,7 +58,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 		return (
 			<Modal onDismiss={handleDismiss} {...rest}>
 				<Header>
-					<Title>{headerText}</Title>
+					<Title>{step ? 'Edit step' : 'New step'}</Title>
 
 					{onDismiss && (
 						<IconButton

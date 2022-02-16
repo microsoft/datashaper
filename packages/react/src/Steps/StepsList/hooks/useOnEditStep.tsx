@@ -13,7 +13,7 @@ export function useOnEditStep(
 ): (_step: Step, index: number) => void {
 	return useCallback(
 		(_step: Step, index: number) => {
-			setStep(_step)
+			setStep({ ..._step })
 			setStepIndex(index)
 			showTableModal()
 		},
