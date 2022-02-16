@@ -13,6 +13,7 @@ import {
 	StatsColumnType,
 	useCommonCommands,
 } from '../../index.js'
+import { DetailText } from '../DetailText/index.js'
 import { useToggleTableFeatures } from '../hooks/index.js'
 
 const statsColumnTypes = [
@@ -66,7 +67,7 @@ export const PreviewTable: React.FC<{
 					/>
 				</Container>
 			) : (
-				<PreviewText>Select a table to preview here</PreviewText>
+				<DetailText text="Select a table to preview here" />
 			)}
 		</>
 	)
@@ -77,14 +78,5 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	margin-left: 40px;
-`
-
-const PreviewText = styled.div`
-	flex: 1;
-	display: flex;
-	justify-content: center;
-	height: 24%;
-	align-self: center;
-	color: ${({ theme }) => theme.application().border().hex()};
+	margin-left: 20px;
 `

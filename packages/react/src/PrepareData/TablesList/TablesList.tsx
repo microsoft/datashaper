@@ -7,6 +7,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { TableCard } from './TableCard.js'
 import { useIsTableSelected } from './hooks'
+import { DetailText } from '../DetailText/index.js'
 
 export const TablesList: React.FC<{
 	tables: BaseFile[]
@@ -28,6 +29,7 @@ export const TablesList: React.FC<{
 					/>
 				)
 			})}
+			{!tables.length && <DetailText text="Input tables will show here" />}
 		</ListContainer>
 	)
 })
@@ -38,4 +40,5 @@ const ListContainer = styled.div`
 	flex-direction: column;
 	overflow-y: auto;
 	width: 100%;
+	row-gap: 4px;
 `

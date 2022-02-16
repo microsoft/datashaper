@@ -87,6 +87,7 @@ export const PrepareDataFull: React.FC<{
 })
 
 const SectionTitle = styled.span`
+	padding-left: 10px;
 	font-weight: bold;
 	writing-mode: vertical-rl;
 	transform: rotate(180deg);
@@ -112,7 +113,7 @@ const InputContainer = styled.div`
 	height: 30%;
 	display: flex;
 	overflow: hidden;
-	padding: 0px 20px 0px 20px;
+	padding: 0px 20px 0px 10px;
 `
 
 const InputDisplay = styled.div`
@@ -122,7 +123,7 @@ const InputDisplay = styled.div`
 `
 
 const OutputContainer = styled.div`
-	padding: 0px 20px 10px 20px;
+	padding: 0px 20px 10px 10px;
 	height: 35%;
 	display: flex;
 `
@@ -130,7 +131,7 @@ const OutputContainer = styled.div`
 const StepsTrayContainer = styled.div`
 	min-height: 20%;
 	max-height: 200px;
-	padding: 10px 20px 10px 20px;
+	padding: 10px 20px 10px 10px;
 	margin: 20px 0px 20px 0px;
 	background-color: ${({ theme }) => theme.palette.neutralLight};
 `
