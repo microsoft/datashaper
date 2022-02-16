@@ -83,6 +83,8 @@ const Container = styled.div`
 const Verb = styled.div`
 	text-transform: uppercase;
 	font-weight: bold;
+	align-items: center;
+	width: 100%;
 	color: ${({ theme }) => theme.application().midContrast().hex()};
 `
 

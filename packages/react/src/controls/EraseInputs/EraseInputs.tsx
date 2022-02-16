@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { EraseStep } from '@data-wrangling-components/core'
+import type { EraseStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleTextfieldChange } from '../../common'
-import { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types'
 
 /**
  * Just the to/value inputs for an impute.

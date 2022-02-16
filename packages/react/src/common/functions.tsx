@@ -2,15 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnMetadata } from '@data-wrangling-components/core'
+import type { ColumnMetadata } from '@data-wrangling-components/core'
 import {
 	CommandBar,
 	ICommandBarItemProps,
 	ICommandBarProps,
 	IDetailsGroupDividerProps,
 } from '@fluentui/react'
-import { ReactElement } from 'react'
-import { GroupHeader } from '../controls'
+import type { ReactElement } from 'react'
+import { GroupHeader } from '../controls/index.js'
 
 export function createLazyLoadingGroupHeader(
 	props: IDetailsGroupDividerProps | undefined,

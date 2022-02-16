@@ -5,7 +5,7 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
-import { RenameCallout } from './RenameCallout'
+import { RenameCallout } from './RenameCallout.js'
 
 interface TableNameProps {
 	onRenameTable?: (name: string) => void
@@ -28,7 +28,7 @@ export const TableName: React.FC<TableNameProps> = memo(function TableName({
 	}, [name, setEditedName])
 
 	const onChange = useCallback(
-		(e: any, value?: string) => {
+		(_e: any, value?: string) => {
 			setEditedName(value as string)
 		},
 		[setEditedName],

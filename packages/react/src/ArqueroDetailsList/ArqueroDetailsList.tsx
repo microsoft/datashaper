@@ -14,7 +14,7 @@ import {
 import type { RowObject } from 'arquero/dist/types/table/table'
 import { memo, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { groupBuilder } from '../common/'
+import { groupBuilder } from '../common/index.js'
 import {
 	useColumns,
 	useDetailsHeaderRenderer,
@@ -27,8 +27,8 @@ import {
 	useStripedRowsRenderer,
 	useTableMetadata,
 	useSubsetTable,
-} from './hooks'
-import type { ArqueroDetailsListProps, DetailsListFeatures } from '.'
+} from './hooks/index.js'
+import type { ArqueroDetailsListProps, DetailsListFeatures } from './types.js'
 
 /**
  * Renders an arquero table using a fluent DetailsList.
@@ -211,6 +211,14 @@ const DetailsWrapper = styled.div`
 
 	.ms-List-cell {
 		min-height: unset;
+	}
+
+	.ms-CommandBar {
+		padding: unset;
+	}
+
+	.ms-OverflowSet {
+		justify-content: center;
 	}
 `
 

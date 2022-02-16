@@ -5,7 +5,7 @@
 import React, { memo } from 'react'
 import { VerbContainer } from '../../common'
 import { MergeInputs } from '../../controls'
-import { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types'
 
 /**
  * Provides inputs for an aggregation step.

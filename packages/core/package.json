@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/core",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"type": "module",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -10,7 +10,7 @@
 		"start": "essex watch"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.2.0",
+		"@essex/scripts": "^20.2.1",
 		"@essex/vite-config": "^19.0.3",
 		"@types/jest": "^27.4.0",
 		"@types/lodash-es": "^4",

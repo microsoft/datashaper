@@ -10,13 +10,13 @@ import {
 } from '@data-wrangling-components/core'
 import { set } from 'lodash'
 import { memo, useCallback, useMemo } from 'react'
+import { useLoadTable, useHandleDropdownChange } from '../../common/index.js'
+import type { StepComponentProps } from '../../types.js'
+import { ColumnOrValueComboBox } from '../ColumnOrValueComboBox'
 import {
 	NumericComparisonOperatorDropdown,
 	StringComparisonOperatorDropdown,
-} from '..'
-import { useLoadTable, useHandleDropdownChange } from '../../common'
-import { StepComponentProps } from '../../types'
-import { ColumnOrValueComboBox } from '../ColumnOrValueComboBox'
+} from '../index.js'
 
 /**
  * Just the comparison logic/ops for a filter.
@@ -36,7 +36,7 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 		)
 
 		const handleComboBoxChange = useCallback(
-			(e, option, index, value) => {
+			(_e, option, _index, value) => {
 				const update = {
 					...internal,
 				}

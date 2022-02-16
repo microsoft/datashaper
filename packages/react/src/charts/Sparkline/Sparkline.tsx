@@ -13,7 +13,7 @@ import {
 	useIndexedScale,
 	useNumericLinearScale,
 	usePlotGroup,
-} from '../hooks'
+} from '../hooks.js'
 
 export interface SparklineProps {
 	data: number[]

@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Value } from '@data-wrangling-components/core'
+import type { Value } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
-import { useColumnValueOptions } from '../../common'
-import { columnDropdownStyles } from '../styles'
+import { useColumnValueOptions } from '../../common/index.js'
+import { columnDropdownStyles } from '../styles.js'
 
 export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
 	column: string

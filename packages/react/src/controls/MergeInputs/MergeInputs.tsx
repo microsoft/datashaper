@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { MergeStep } from '@data-wrangling-components/core'
+import type { MergeStep } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownOption } from '@fluentui/react'
 import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
 import { columnDropdownStyles } from '../../controls/styles'
-import { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types'
 import { MergeStrategyComponent } from '../MergeStrategyComponent/MergeStrategyComponent'
 
 /**
@@ -24,6 +24,7 @@ export const MergeInputs: React.FC<StepComponentProps> = memo(
 			(event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
 				const { columns = [] } = internal.args
 				let update = [...columns]
+				console.log(event)
 				if (option) {
 					if (option.selected) {
 						update.push(option.key as string)

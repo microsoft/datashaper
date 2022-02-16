@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TableMetadata, introspect } from '@data-wrangling-components/core'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 /**
  * Optionally executes a series of table characterization functions.

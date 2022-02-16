@@ -69,7 +69,9 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 	)
 })
 
-const Container = styled.div``
+const Container = styled.div`
+	padding: 0px 20px 0px 20px;
+`
 
 const Table = styled.div`
 	margin-top: 12px;

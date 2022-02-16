@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton, TextField } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 import { columnDropdownStyles } from './styles'
@@ -22,6 +22,7 @@ export const ColumnSpread: React.FC<ColumnSpreadProps> = memo(
 	function ColumnSpread({ column, onChange, onDelete }) {
 		const handleColumnChange = useCallback(
 			(e, opt) => {
+				console.log(e)
 				onChange && onChange(opt)
 			},
 			[onChange],

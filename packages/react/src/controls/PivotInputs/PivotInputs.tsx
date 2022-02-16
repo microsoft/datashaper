@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { PivotStep } from '@data-wrangling-components/core'
+import type { PivotStep } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { TableColumnDropdown, FieldAggregateOperationDropdown } from '..'
@@ -11,7 +11,7 @@ import {
 	LeftAlignedRow,
 	useHandleDropdownChange,
 } from '../../common'
-import { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types'
 
 /**
  * Just the group/column/op inputs for an aggregation.

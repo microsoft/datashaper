@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { MergeStep } from '@data-wrangling-components/core'
+import type { MergeStep } from '@data-wrangling-components/core'
 import React, { memo, useMemo } from 'react'
 import { useHandleDropdownChange } from '../../common'
-import { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types'
 import { MergeStrategyDropdown } from '../dropdowns/MergeStrategyDropdown'
 
 export const MergeStrategyComponent: React.FC<StepComponentProps> = memo(

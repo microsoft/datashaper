@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IDetailsListStyles } from '@fluentui/react'
+import type { IDetailsListStyles } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { merge } from 'lodash'
 import { useMemo } from 'react'
-import { DetailsListFeatures } from '..'
+import type { DetailsListFeatures } from '../index.js'
 
 /**
  * Create a DetailsHeader style with enough height to handle the options we've turned on.

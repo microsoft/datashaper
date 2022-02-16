@@ -5,3 +5,4 @@
 export * from './MainPage'
 export * from './PerfPage'
 export * from './TransformPage'
+export * from './PrepareDataPage'

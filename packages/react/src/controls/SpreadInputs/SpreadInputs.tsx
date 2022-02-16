@@ -2,15 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SpreadArgs, SpreadStep, Step } from '@data-wrangling-components/core'
+import type {
+	SpreadArgs,
+	SpreadStep,
+	Step,
+} from '@data-wrangling-components/core'
 import { ActionButton, Label } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useHandleDropdownChange, useLoadTable } from '../../common'
 import { TableColumnDropdown } from '../../controls'
-import { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types'
 import { ColumnSpread } from '../ColumnSpread'
 
 /**
@@ -21,7 +25,7 @@ export const SpreadInputs: React.FC<StepComponentProps> = memo(
 		const internal = useMemo(() => step as SpreadStep, [step])
 
 		const tbl = useLoadTable(input || step.input, table, store)
-		const columns = useColumns(internal, tbl, onChange)
+		const columns = useColumns(internal, onChange)
 
 		const handleButtonClick = useCallback(() => {
 			onChange &&
@@ -69,11 +73,7 @@ function first(table?: ColumnTable): string {
 	return table?.columnNames()[0] as string
 }
 
-function useColumns(
-	step: SpreadStep,
-	table?: ColumnTable,
-	onChange?: (step: Step) => void,
-) {
+function useColumns(step: SpreadStep, onChange?: (step: Step) => void) {
 	return useMemo(() => {
 		return (step.args.to || []).map((column: string, index: number) => {
 			const handleColumnChange = (col: string) => {

@@ -4,9 +4,9 @@
  */
 import { memo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useHandleDropdownChange } from './common'
-import { TableDropdown } from './controls'
-import type { HOCFunction, StepComponentProps } from './types'
+import { LeftAlignedRow, useHandleDropdownChange } from './common/index.js'
+import { TableDropdown } from './controls/index.js'
+import type { HOCFunction, StepComponentProps } from './types.js'
 
 /**
  * Higher order component generator to wrap a Step in the input table dropdown.

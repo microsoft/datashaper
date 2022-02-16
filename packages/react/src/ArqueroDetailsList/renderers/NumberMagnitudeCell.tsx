@@ -6,8 +6,8 @@
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 import { useCellDimensions, useFormattedNumber } from '../hooks'
-import { getValue } from '../util'
-import { MagnitudeCellProps } from './types'
+import { getValue } from '../util/index.js'
+import type { MagnitudeCellProps } from './types.js'
 /**
  * Basic endering of number values.
  */

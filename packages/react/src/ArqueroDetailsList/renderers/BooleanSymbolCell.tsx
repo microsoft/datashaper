@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { IColumn } from '@fluentui/react'
+import type { IColumn } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 import { useCellDimensions } from '../hooks'
-import { getValue } from '../util'
-import { ColumnCellProps, Dimensions } from './types'
+import { getValue } from '../util/index.js'
+import type { ColumnCellProps, Dimensions } from './types.js'
 
 /**
  * Symbolic rendering of boolean values.

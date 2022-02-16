@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
-import { VerbContainer } from '../../common'
-import { AggregateInputs } from '../../controls'
-import { StepComponentProps } from '../../types'
+import { VerbContainer } from '../../common/index.js'
+import { AggregateInputs } from '../../controls/index.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for an aggregation step.

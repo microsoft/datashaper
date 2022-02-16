@@ -7,15 +7,16 @@ import {
 	ICommandBarItemProps,
 	IIconProps,
 } from '@fluentui/react'
-import { Application } from '@thematic/core'
+import type { Application } from '@thematic/core'
 import { useThematic } from '@thematic/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { HEIGHT } from './constants'
+import { HEIGHT } from './constants.js'
 
 interface CommandBarProps {
 	commands: ICommandBarItemProps[]
 	width?: string
+	bgColor?: string
 }
 
 export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
@@ -25,6 +26,7 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	const overflowButtonProps = useOverflowButtonProps()
 	const handleOnDataReduce = useHandleOnDataReduce()
 	const handleOnDataGrown = useHandleOnDataGrown()
+
 	return (
 		<CommandBarWrapper width={width}>
 			<CB
@@ -96,6 +98,7 @@ const useIconProps = (): ((
 
 const commandStyles = {
 	root: {
+		float: 'right',
 		height: HEIGHT,
 		background: 'none',
 		padding: 0,

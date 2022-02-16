@@ -2,9 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnListStep, FoldStep, Step } from '@data-wrangling-components/core'
+import type {
+	ColumnListStep,
+	FoldStep,
+	Step,
+} from '@data-wrangling-components/core'
 import { ActionButton, TextField } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -14,7 +18,7 @@ import {
 	useLoadTable,
 } from '../../common'
 import { ColumnInstruction } from '../../controls'
-import { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types'
 import { columnDropdownStyles } from '../styles'
 
 /**

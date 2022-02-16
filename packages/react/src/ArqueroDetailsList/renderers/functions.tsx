@@ -2,10 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnMetadata } from '@data-wrangling-components/core'
-import { IColumn, IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
-import { ColumnClickFunction, ColumnRenderFunction } from '..'
-import {
+import type { ColumnMetadata } from '@data-wrangling-components/core'
+import type {
+	IColumn,
+	IDetailsColumnProps,
+	IRenderFunction,
+} from '@fluentui/react'
+import type { ColumnClickFunction, ColumnRenderFunction } from '../index.js'
+import type {
 	DetailsListFeatures,
 	DropdownOptionSelect,
 	MetadataClickFunction,
@@ -15,7 +19,7 @@ import { CommandBarContainer } from './CommandBarContainer'
 import { DefaultColumnHeader } from './DefaultColumnHeader'
 import { FeaturesCell } from './FeaturesCell'
 import { HistogramColumnHeader } from './HistogramColumnHeader'
-import { SmartCell, StatsColumnHeader } from '.'
+import { SmartCell, StatsColumnHeader } from './index.js'
 
 export const createRenderSmartCell = (
 	metadata: ColumnMetadata,
