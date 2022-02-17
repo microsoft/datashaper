@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { StepFunction, TableStore } from '../../index.js'
-import { ChainArgs, Step } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { StepFunction, TableStore } from '../../index.js'
+import type { ChainArgs, Step } from '../../types.js'
 
 import { aggregate } from './aggregate.js'
 import { bin } from './bin.js'
@@ -82,7 +82,7 @@ async function exec(step: Step, store: TableStore): Promise<ColumnTable> {
 
 	let output: ColumnTable = table({})
 	for (let index = 0; index < steps.length; index++) {
-		const step = steps[index]
+		const step = steps[index] as Step<unknown>
 		const { verb } = step
 		try {
 			// fallback to chain if unspecified - this allows custom names to identify different chains

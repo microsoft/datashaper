@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../../index.js'
-import { AggregateArgs, Step } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { TableStore } from '../../index.js'
+import type { AggregateArgs, Step } from '../../types.js'
 import { singleRollup } from '../util/index.js'
 
 /**

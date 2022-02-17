@@ -2,23 +2,24 @@
 	"name": "@data-wrangling-components/core",
 	"version": "2.1.0",
 	"type": "module",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
+	},
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build",
-		"start": "essex watch"
+		"build": "essex build"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^20.2.1",
-		"@essex/vite-config": "^19.0.3",
+		"@essex/tsconfig-base": "^1.0.2",
 		"@types/jest": "^27.4.0",
-		"@types/lodash-es": "^4",
-		"@types/node": "^17.0.17",
-		"arquero": "^4.8.7",
+		"@types/lodash-es": "^4.17.6",
+		"@types/node": "^17.0.18",
+		"arquero": "^4.8.8",
 		"regenerator-runtime": "^0.13.9",
-		"typescript": "^4.5.5",
-		"vite": "^2.8.0"
+		"typescript": "^4.5.5"
 	},
 	"peerDependencies": {
 		"@types/node": "*",
@@ -30,7 +31,7 @@
 		}
 	},
 	"dependencies": {
-		"core-js": "^3.20.2",
+		"core-js": "^3.21.1",
 		"lodash-es": "^4.17.21"
 	}
 }

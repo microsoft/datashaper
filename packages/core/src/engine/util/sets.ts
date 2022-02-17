@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../../TableStore.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { TableStore } from '../../TableStore.js'
 import { SetOp, SetOperationArgs, Step } from '../../types.js'
 
 /**

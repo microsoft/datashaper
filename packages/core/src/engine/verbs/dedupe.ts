@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { DedupeArgs, TableStore } from '../../index.js'
-import { Step } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { DedupeArgs, TableStore } from '../../index.js'
+import type { Step } from '../../types.js'
 
 /**
  * Executes an arquero dedupe operation.

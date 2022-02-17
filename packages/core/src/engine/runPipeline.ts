@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import isArray from 'lodash-es/isArray.js'
 import { Pipeline, TableStore } from '../index.js'
-import { Step } from '../types.js'
+import type { Step } from '../types.js'
 
 /**
  * This is a utility to execute a series of pipeline
@@ -33,7 +33,7 @@ export async function runPipeline(
 				copy.input = 'input'
 			}
 		} else {
-			const prev = arr[idx - 1]
+			const prev = arr[idx - 1] as Step<unknown>
 			if (!copy.input) {
 				copy.input = prev.output || `table-${idx - 1}`
 			}
@@ -46,7 +46,7 @@ export async function runPipeline(
 
 	// since we're creating the store the user has no opportunity
 	// to add the starting table, so we'll put it in place
-	const inp = internal[0].input
+	const inp = internal[0]!.input
 	store.set(inp, input)
 
 	pipeline.addAll(internal as Step[])
