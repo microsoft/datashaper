@@ -9,8 +9,7 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build --skipExportCheck",
-		"start": "essex watch"
+		"build": "essex build --skipExportCheck"
 	},
 	"dependencies": {
 		"@zip.js/zip.js": "^2.4.4",

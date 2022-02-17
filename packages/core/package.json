@@ -9,8 +9,7 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build",
-		"start": "essex watch"
+		"build": "essex build"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^20.2.1",

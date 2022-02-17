@@ -9,8 +9,7 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build --skipExportCheck",
-		"start": "essex watch"
+		"build": "essex build --skipExportCheck"
 	},
 	"dependencies": {
 		"@essex-js-toolkit/hooks": "^3.0.2",
