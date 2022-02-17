@@ -15,7 +15,7 @@ interface FileOptions {
 
 const fileDefaults = {
 	name: 'File.txt',
-	type: FileMimeType.txt,
+	type: 'text/plain',
 	path: '',
 }
 

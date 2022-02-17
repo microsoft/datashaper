@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 
 export type ResolverFunction = (name: string) => Promise<ColumnTable>
@@ -151,7 +151,7 @@ export class TableStore {
 		const names = this.list()
 		for (let i = 0; i < names.length; i++) {
 			console.log(names[i])
-			const table = await this.get(names[i])
+			const table = await this.get(names[i] as string)
 			table.print()
 		}
 	}

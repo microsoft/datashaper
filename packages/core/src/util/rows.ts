@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import isNil from 'lodash-es/isNil.js'
 
 const identity = (d: any) => d
@@ -38,7 +38,7 @@ export function rows(table: ColumnTable, options?: RowsOptions): any[][] {
 		for (let i = 0; i < table.numCols(); i++) {
 			const name = table.columnName(i)
 			const value = table.columnAt(i)?.get(idx)
-			const fn = format[name] ? format[name] : stringify ? str : identity
+			const fn = format[name] ? format[name]! : stringify ? str : identity
 			row.push(fn(value))
 		}
 		output.push(row)

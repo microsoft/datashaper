@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from './TableStore.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { TableStore } from './TableStore.js'
 import { run } from './engine/index.js'
 import { factory } from './engine/verbs/index.js'
-import { Step, Verb } from './types.js'
+import type { Step, Verb } from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -36,7 +36,7 @@ export class Pipeline {
 		return [...this._steps]
 	}
 	get last(): Step {
-		return this._steps[this._steps.length - 1]
+		return this._steps[this._steps.length - 1] as Step
 	}
 	get count(): number {
 		return this._steps.length
@@ -51,7 +51,7 @@ export class Pipeline {
 	 */
 	create(verb: Verb): Step[] {
 		const index = this.count
-		const input = index === 0 ? '' : this._steps[index - 1].output
+		const input = index === 0 ? '' : this._steps[index - 1]!.output
 		const base: Step = factory(verb, input, `output-table-${index}`)
 		return this.add(base)
 	}

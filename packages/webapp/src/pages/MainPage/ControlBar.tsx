@@ -20,7 +20,7 @@ import {
 	IDropdownOption,
 	IDropdownStyles,
 } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { ExamplesDropdown } from './ExamplesDropdown'

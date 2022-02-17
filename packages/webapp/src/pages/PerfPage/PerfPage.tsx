@@ -24,7 +24,7 @@ import {
 	PivotItem,
 } from '@fluentui/react'
 import { loadCSV } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { Struct } from 'arquero/dist/types/table/transformable'
 import { memo, useState, useEffect, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
