@@ -3,14 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { escape, op } from 'arquero'
-import { Op } from 'arquero/dist/types/op/op'
+import type { Op } from 'arquero/dist/types/op/op'
 import {
 	NumericComparisonOperator,
 	FieldAggregateOperation,
 	StringComparisonOperator,
 	FilterCompareType,
 } from '../../types.js'
-import { CompareWrapper } from './types.js'
+import type { CompareWrapper } from './types.js'
 
 /**
  * This creates an arquero expression suitable for comparison of direct values or columns.
@@ -30,8 +30,8 @@ export function compare(
 	type: FilterCompareType,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
-		const left = d[column]
-		const right = type === FilterCompareType.Column ? d[`${value}`] : value
+		const left = d[column]!
+		const right = type === FilterCompareType.Column ? d[`${value}`]! : value
 
 		// start with the empty operators, because typeof won't work...
 		if (

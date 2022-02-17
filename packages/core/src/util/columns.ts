@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { DataType } from '../index.js'
 import { determineType } from './index.js'
 
@@ -46,7 +46,7 @@ export function columnType(table: ColumnTable, column: string): DataType {
 	const values = table.array(column)
 	let dataType = DataType.Unknown
 	// use the first valid value to guess type
-	values.some((value, index) => {
+	values.some(value => {
 		if (value !== null && value !== undefined) {
 			dataType = determineType(value)
 			return true

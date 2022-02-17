@@ -4,10 +4,10 @@
  */
 
 import { from } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { RowObject } from 'arquero/dist/types/table/table'
-import { TableStore } from '../../index.js'
-import { EraseArgs, Step } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { RowObject } from 'arquero/dist/types/table/table'
+import type { TableStore } from '../../index.js'
+import type { EraseArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero erase operation.

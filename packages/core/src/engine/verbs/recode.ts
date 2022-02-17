@@ -4,10 +4,10 @@
  */
 
 import { escape, op } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { ExprObject } from 'arquero/dist/types/table/transformable'
-import { TableStore } from '../../index.js'
-import { RecodeArgs, Step } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { ExprObject } from 'arquero/dist/types/table/transformable'
+import type { TableStore } from '../../index.js'
+import type { RecodeArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero derive to map a list of values to new values.

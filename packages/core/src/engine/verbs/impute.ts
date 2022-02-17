@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../../index.js'
-import { FillArgs, Step } from '../../types.js'
-import { ExprFunctionMap } from './types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { TableStore } from '../../index.js'
+import type { FillArgs, Step } from '../../types.js'
+import type { ExprFunctionMap } from './types.js'
 
 /**
  * Executes an arquero impute
@@ -23,7 +23,7 @@ export async function impute(
 	const inputTable = await store.get(input)
 
 	const dArgs: ExprFunctionMap = {
-		[to]: (d: any, $: any) => $.value,
+		[to]: (_d: any, $: any) => $.value,
 	}
 
 	return inputTable.params({ value }).impute(dArgs)
