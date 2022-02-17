@@ -39,5 +39,5 @@ const Container = styled.div`
 
 const PageContainer = styled.div`
 	padding-top: 20px;
-	height: 90%;
+	height: 95%;
 `

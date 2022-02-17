@@ -4,7 +4,7 @@
  */
 import type { Step } from '@data-wrangling-components/core'
 import { DocumentCard, DocumentCardActions } from '@fluentui/react'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { selectStepDescription } from '../../selectStepDescription.js'
 import { useStepActions } from './StepActions.js'
@@ -54,7 +54,7 @@ const styles = {
 }
 
 const CardContent = styled.div`
-	padding: 8px 8px 0px 8px;
+	padding: 8px;
 `
 
 const Card = styled(DocumentCard)`

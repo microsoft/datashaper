@@ -2,18 +2,25 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 
-export const DetailText: React.FC<{ text: string }> = memo(function DetailText({
+export interface DetailTextProps {
+	text: string
+	style?: React.CSSProperties
+}
+
+export const DetailText: React.FC<DetailTextProps> = memo(function DetailText({
 	text,
+	style,
 }) {
-	return <Text>{text}</Text>
+	return <Text style={style}>{text}</Text>
 })
 
 const Text = styled.div`
 	display: flex;
+	height: 100%;
 	justify-content: center;
-	align-self: center;
-	color: ${({ theme }) => theme.application().border().hex()};
+	align-items: center;
+	color: ${({ theme }) => theme.application().midContrast().hex()};
 `

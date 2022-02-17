@@ -5,7 +5,7 @@
 import type { Step } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import { StepsList } from '../../Steps/index.js'
 import { TablesList, PreviewTable, OutputTable } from '../index.js'
@@ -94,7 +94,7 @@ const SectionTitle = styled.span`
 	font-size: 15px;
 	align-self: center;
 	text-transform: uppercase;
-	color: ${({ theme }) => theme.palette.neutralTertiary};
+	color: ${({ theme }) => theme.application().lowMidContrast().hex()};
 `
 
 const Container = styled.div`
@@ -131,9 +131,9 @@ const OutputContainer = styled.div`
 const StepsTrayContainer = styled.div`
 	min-height: 20%;
 	max-height: 200px;
-	padding: 10px 20px 10px 10px;
+	padding: 12px 20px 12px 10px;
 	margin: 20px 0px 20px 0px;
-	background-color: ${({ theme }) => theme.palette.neutralLight};
+	background-color: ${({ theme }) => theme.application().faint().hex()};
 `
 const StepsContainer = styled.div`
 	display: flex;

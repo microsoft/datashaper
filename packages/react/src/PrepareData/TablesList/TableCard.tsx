@@ -9,7 +9,7 @@ import {
 	Icon,
 	TooltipHost,
 } from '@fluentui/react'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 
 export const TableCard: React.FC<{
@@ -40,7 +40,7 @@ const styles = {
 }
 
 const iconProps = {
-	preview: { iconName: 'RedEye' },
+	preview: { iconName: 'View' },
 }
 
 const PreviewIcon = styled(Icon)`
@@ -52,8 +52,7 @@ const Card = styled(DocumentCard)<{ isSelected: boolean }>`
 	margin-top: unset !important;
 	display: flex;
 	justify-content: space-between;
-	padding: 4px;
-	margin: 2px;
+	padding 4px 8px 4px 4px;
 	border: 1px solid
 		${({ theme, isSelected }) =>
 			isSelected ? theme.palette.neutralTertiary : theme.palette.neutralLight};
