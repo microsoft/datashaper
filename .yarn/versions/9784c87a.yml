@@ -1,0 +1,5 @@
+releases:
+  "@data-wrangling-components/react": patch
+
+undecided:
+  - "@data-wrangling-components/webapp"
