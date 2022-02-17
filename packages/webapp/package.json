@@ -9,7 +9,7 @@
 		"start": "vite",
 		"start:client": "yarn start",
 		"build:client": "yarn build && yarn archive",
-		"archive": "essex zip --baseDir dist deploy.zip '**/*'",
+		"archive": "essex zip --baseDir build deploy.zip '**/*'",
 		"archive:client": "yarn archive"
 	},
 	"dependencies": {
