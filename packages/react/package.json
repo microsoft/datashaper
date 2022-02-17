@@ -2,8 +2,11 @@
 	"name": "@data-wrangling-components/react",
 	"version": "2.2.1",
 	"type": "module",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
+	},
 	"scripts": {
 		"clean": "essex clean dist lib",
 		"build": "essex build --skipExportCheck",
@@ -39,7 +42,7 @@
 		"@types/d3-selection": "^3.0.2",
 		"@types/d3-shape": "^3.0.2",
 		"@types/lodash": "^4.14.178",
-		"@types/node": "^16.11.19",
+		"@types/node": "^17.0.18",
 		"@types/react": "^17.0.39",
 		"@types/react-dom": "^17.0.11",
 		"@types/react-is": "^17.0.3",
