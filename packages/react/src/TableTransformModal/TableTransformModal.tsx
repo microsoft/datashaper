@@ -4,7 +4,7 @@
  */
 import type { TableStore } from '@data-wrangling-components/core'
 import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import { StepSelector, TransformModalProps } from '../index.js'
 import {
@@ -72,7 +72,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 				<ContainerBody>
 					<StepSelectorContainer>
 						<StepSelector
-							placeholder="Select the verb"
+							placeholder="Select a verb"
 							verb={internal?.verb || ''}
 							onCreate={handleVerbChange}
 						/>
@@ -102,7 +102,7 @@ const Header = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	background: ${({ theme }) => theme.application().faint().hex()};
-	margin-bottom: 8px;
+	margin-bottom: 12px;
 `
 
 const Title = styled.h3`

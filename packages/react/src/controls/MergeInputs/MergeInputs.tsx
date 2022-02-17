@@ -4,7 +4,7 @@
  */
 import type { MergeStep } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownOption } from '@fluentui/react'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
 import { columnDropdownStyles } from '../../controls/styles'

@@ -5,7 +5,7 @@
 import type { TableMetadata } from '@data-wrangling-components/core'
 import { IDetailsColumnProps, IRenderFunction, useTheme } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import {
 	ArqueroDetailsList,
@@ -67,7 +67,7 @@ export const PreviewTable: React.FC<{
 					/>
 				</Container>
 			) : (
-				<DetailText text="Select a table to preview here" />
+				<DetailText text="Select a table to preview" />
 			)}
 		</>
 	)
@@ -77,6 +77,7 @@ const Container = styled.div`
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	height: 99%;
 	margin-left: 20px;
+	border: 1px solid ${({ theme }) => theme.application().faint().hex()}};
 `

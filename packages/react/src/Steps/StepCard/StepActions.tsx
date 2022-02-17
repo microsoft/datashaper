@@ -41,7 +41,7 @@ export function useStepActions(
 }
 
 const iconProps = {
-	preview: { iconName: 'RedEye' },
+	preview: { iconName: 'View' },
 	edit: { iconName: 'Edit' },
 	duplicate: { iconName: 'DuplicateRow' },
 	delete: { iconName: 'Delete' },
