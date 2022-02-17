@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { MergeStep } from '@data-wrangling-components/core'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { useHandleDropdownChange } from '../../common'
 import type { StepComponentProps } from '../../types'
 import { MergeStrategyDropdown } from '../dropdowns/MergeStrategyDropdown'

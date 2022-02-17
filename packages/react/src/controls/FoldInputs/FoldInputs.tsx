@@ -10,7 +10,7 @@ import type {
 import { ActionButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { set } from 'lodash'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import {
 	LeftAlignedRow,
