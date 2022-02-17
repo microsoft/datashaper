@@ -12,7 +12,7 @@ import {
 	usePipeline,
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useState, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { ControlBar } from './ControlBar'

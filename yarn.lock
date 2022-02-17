@@ -594,7 +594,7 @@ __metadata:
   resolution: "@data-wrangling-components/core@workspace:packages/core"
   dependencies:
     "@essex/scripts": ^20.2.1
-    "@essex/vite-config": ^19.0.3
+    "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.4.0
     "@types/lodash-es": ^4.17.6
     "@types/node": ^17.0.18
