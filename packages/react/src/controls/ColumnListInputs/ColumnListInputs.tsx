@@ -5,7 +5,7 @@
 import type { ColumnListStep, Step } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { set } from 'lodash'
+import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common/index.js'

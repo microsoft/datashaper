@@ -5,7 +5,7 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"clean": "essex clean build dist lib node_modules",
-		"build": "tsc && webpack && shx cp -r public/* build/",
+		"build": "tsc && webpack --mode production && shx cp -r public/* build/",
 		"start": "webpack-dev-server",
 		"start:client": "yarn start",
 		"build:client": "yarn build && yarn archive",
@@ -30,7 +30,6 @@
 		"@uifabric/icons": "^7.6.2",
 		"arquero": "^4.8.8",
 		"file-loader": "^6.2.0",
-		"lodash": "^4.17.21",
 		"office-ui-fabric-react": "^7.182.0",
 		"react": "^17.0.2",
 		"react-animate-height": "^2.0.23",

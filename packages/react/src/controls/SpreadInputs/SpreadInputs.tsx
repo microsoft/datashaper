@@ -9,7 +9,7 @@ import type {
 } from '@data-wrangling-components/core'
 import { ActionButton, Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { set } from 'lodash'
+import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useHandleDropdownChange, useLoadTable } from '../../common'
