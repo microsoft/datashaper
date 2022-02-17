@@ -1,5 +1,5 @@
 releases:
   "@data-wrangling-components/react": patch
 
-undecided:
+declined:
   - "@data-wrangling-components/webapp"
