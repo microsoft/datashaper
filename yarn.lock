@@ -600,6 +600,7 @@ __metadata:
     "@types/node": ^17.0.18
     arquero: ^4.8.8
     core-js: ^3.21.1
+    lodash: ^4.17.21
     lodash-es: ^4.17.21
     regenerator-runtime: ^0.13.9
     typescript: ^4.5.5
@@ -674,6 +675,7 @@ __metadata:
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
     d3-shape: ^3.1.0
+    lodash: ^4.17.21
     lodash-es: ^4.17.21
     office-ui-fabric-react: ^7.183.0
     react: ^17.0.2
