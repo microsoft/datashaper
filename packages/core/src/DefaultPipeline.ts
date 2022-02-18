@@ -5,7 +5,7 @@
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { run } from './engine/index.js'
 import { factory } from './engine/verbs/index.js'
-import type { TableStore, Step, Verb } from './types.js'
+import type { TableStore, Step, Verb, Pipeline } from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -21,7 +21,7 @@ import type { TableStore, Step, Verb } from './types.js'
  * - building compound steps with recursive execution.
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
-export class Pipeline {
+export class DefaultPipeline implements Pipeline {
 	private _store: TableStore
 	private _steps: Step[]
 	constructor(store: TableStore) {

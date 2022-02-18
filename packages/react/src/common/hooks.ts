@@ -12,6 +12,7 @@ import {
 	DataType,
 	columnType,
 	Pipeline,
+	createPipeline,
 } from '@data-wrangling-components/core'
 import type {
 	ICommandBarItemProps,
@@ -289,7 +290,7 @@ export function useStore(): TableStore {
 }
 
 export function usePipeline(store: TableStore): Pipeline {
-	return useMemo(() => new Pipeline(store), [store])
+	return useMemo(() => createPipeline(store), [store])
 }
 
 export function useCommonCommands(
