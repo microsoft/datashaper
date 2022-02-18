@@ -23,12 +23,13 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		visibleColumns,
 		visibleRows,
 		onRenameTable,
-		bgColor,
+		style,
 	}) {
 		const ref = useRef(null)
 		const { width } = useDimensions(ref) || { width: 0 }
-		const commandItems = useCommands(commands, bgColor)
-		const farCommandItems = useCommands(farCommands, bgColor)
+		const { bgColor, textColor } = style || {}
+		const commandItems = useCommands(commands, bgColor, textColor)
+		const farCommandItems = useCommands(farCommands, bgColor, textColor)
 		const groupCount = useMemo((): any => {
 			return table.isGrouped() ? table.groups().size : 0
 		}, [table])
@@ -39,25 +40,33 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		return (
 			<Header bgColor={bgColor} ref={ref}>
 				{commandItems.length > 0 ? (
-					<CommandBar commands={commandItems} />
+					<CommandBar
+						commands={commandItems}
+						bgColor={bgColor}
+						color={textColor}
+					/>
 				) : null}
 				<Metadata>
 					{name ? (
-						<TableName onRenameTable={onRenameTable} name={name} />
+						<TableName
+							onRenameTable={onRenameTable}
+							name={name}
+							color={textColor}
+						/>
 					) : null}
 					{showRowCount === true ? (
-						<H3>
+						<H3 color={textColor}>
 							{rowCounts.total} rows{' '}
 							{rowCounts.hidden > 0 ? `(${rowCounts.hidden} hidden)` : ''}
 						</H3>
 					) : null}
 					{showColumnCount === true ? (
-						<H3>
+						<H3 color={textColor}>
 							{columnCounts.total} cols{' '}
 							{columnCounts.hidden > 0 ? `(${columnCounts.hidden} hidden)` : ''}
 						</H3>
 					) : null}
-					{groupCount ? <H3>{groupCount} groups</H3> : null}
+					{groupCount ? <H3 color={textColor}>{groupCount} groups</H3> : null}
 				</Metadata>
 				{farCommandItems.length > 0 ? (
 					// Best way to have a command bar in the far right
@@ -68,6 +77,8 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 						width={
 							width >= 992 && farCommandItems.length > 2 ? '10%' : undefined
 						}
+						bgColor={bgColor}
+						color={textColor}
 					/>
 				) : null}
 			</Header>
@@ -79,7 +90,7 @@ const Header = styled.div<{ bgColor?: string }>`
 	height: ${HEIGHT}px;
 	width: 100%;
 	background-color: ${({ bgColor, theme }) =>
-		bgColor ? bgColor : theme.application().accent().hex()};
+		bgColor || theme.application().accent().hex()};
 	position: relative;
 	padding: 0 5px;
 	box-sizing: border-box;
@@ -88,11 +99,12 @@ const Header = styled.div<{ bgColor?: string }>`
 	justify-content: space-between;
 `
 
-const H3 = styled.h3`
+const H3 = styled.h3<{ color?: string }>`
 	font-weight: normal;
 	font-size: 0.8em;
 	margin: 0 8px 0 0;
-	color: ${({ theme }) => theme.application().background().hex()};
+	color: ${({ color, theme }) =>
+		color || theme.application().background().hex()};
 `
 
 const Metadata = styled.div`
