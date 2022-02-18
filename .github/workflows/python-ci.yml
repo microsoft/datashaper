@@ -63,4 +63,4 @@ jobs:
     - name: Publish to PyPi
       working-directory: ./python
       run: |
-        python -m poetry publish --build --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_PASSWORD }} --dry-run
+        python -m poetry publish --build --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_PASSWORD }}
