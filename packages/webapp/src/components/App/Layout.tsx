@@ -27,7 +27,7 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-	margin: 0 20px 20px 20px;
+	margin: 0;
 	flex: 1;
 	display: flex;
 	flex-flow: column;
