@@ -593,13 +593,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:packages/core"
   dependencies:
-    "@essex/scripts": ^20.3.1
+    "@essex/scripts": ^20.3.2
     "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.4.0
     "@types/lodash-es": ^4.17.6
     "@types/node": ^17.0.18
     arquero: ^4.8.8
-    lodash: ^4.17.21
     lodash-es: ^4.17.21
     regenerator-runtime: ^0.13.9
     typescript: ^4.5.5
@@ -618,9 +617,9 @@ __metadata:
   dependencies:
     "@essex/eslint-config": ^20.0.0
     "@essex/eslint-plugin": ^20.0.1
-    "@essex/jest-config": ^20.1.2
+    "@essex/jest-config": ^21.0.0
     "@essex/prettier-config": ^18.0.2
-    "@essex/scripts": ^20.3.1
+    "@essex/scripts": ^20.3.2
     "@types/jest": ^27.4.0
     "@types/node": ^17.0.18
     "@typescript-eslint/eslint-plugin": ^5.12.0
@@ -643,18 +642,18 @@ __metadata:
   dependencies:
     "@data-wrangling-components/core": "workspace:packages/core"
     "@data-wrangling-components/utilities": "workspace:packages/utilities"
-    "@essex-js-toolkit/hooks": ^4.0.0
-    "@essex-js-toolkit/themed-components": ^2.0.0
-    "@essex/scripts": ^20.3.1
+    "@essex-js-toolkit/hooks": ^4.0.1
+    "@essex-js-toolkit/themed-components": ^2.0.1
+    "@essex/scripts": ^20.3.2
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.1.24
     "@fluentui/react": ^8.55.3
     "@fluentui/react-hooks": ^8.3.13
     "@fluentui/utilities": ^8.4.2
-    "@thematic/core": ^2.0.3
-    "@thematic/d3": ^2.0.3
-    "@thematic/fluent": ^3.0.3
-    "@thematic/react": ^2.0.3
+    "@thematic/core": ^2.0.4
+    "@thematic/d3": ^2.0.4
+    "@thematic/fluent": ^3.0.4
+    "@thematic/react": ^2.0.4
     "@types/d3-format": ^3.0.1
     "@types/d3-scale": ^4.0.2
     "@types/d3-selection": ^3.0.2
@@ -673,7 +672,6 @@ __metadata:
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
     d3-shape: ^3.1.0
-    lodash: ^4.17.21
     lodash-es: ^4.17.21
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -705,7 +703,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/utilities@workspace:packages/utilities"
   dependencies:
-    "@essex/scripts": ^20.3.1
+    "@essex/scripts": ^20.3.2
     "@essex/tsconfig-base": ^1.0.2
     "@essex/vite-config": ^19.0.3
     "@types/node": ^17.0.18
@@ -725,17 +723,17 @@ __metadata:
     "@data-wrangling-components/core": "workspace:packages/core"
     "@data-wrangling-components/react": "workspace:packages/react"
     "@data-wrangling-components/utilities": "workspace:packages/utilities"
-    "@essex-js-toolkit/themed-components": ^2.0.0
-    "@essex/scripts": ^20.3.1
-    "@essex/webpack-config": ^20.1.0
+    "@essex-js-toolkit/themed-components": ^2.0.1
+    "@essex/scripts": ^20.3.2
+    "@essex/webpack-config": ^20.1.1
     "@fluentui/font-icons-mdl2": ^8.1.24
     "@fluentui/react": ^8.55.3
     "@fluentui/react-hooks": ^8.3.13
     "@fluentui/utilities": ^8.4.2
-    "@thematic/core": ^2.0.3
-    "@thematic/d3": ^2.0.3
-    "@thematic/fluent": ^3.0.3
-    "@thematic/react": ^2.0.3
+    "@thematic/core": ^2.0.4
+    "@thematic/d3": ^2.0.4
+    "@thematic/fluent": ^3.0.4
+    "@thematic/react": ^2.0.4
     "@types/lodash": ^4.14.178
     "@types/node": ^17.0.18
     "@types/react": ^17.0.39
@@ -817,7 +815,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/hooks@npm:4.0.0, @essex-js-toolkit/hooks@npm:^4.0.0":
+"@essex-js-toolkit/hooks@npm:4.0.1, @essex-js-toolkit/hooks@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "@essex-js-toolkit/hooks@npm:4.0.1"
+  dependencies:
+    "@essex-js-toolkit/toolbox": 3.0.1
+    lodash-es: ^4.17.21
+  peerDependencies:
+    "@types/node": "*"
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ">=16.8.0"
+  checksum: 3c120777bc3653b61b0e1ad4f96addf3248e330dcc7053009120443e91e878fe44daf232c62147070ff9a83f0dbeb0ece43a9ccb37c0f644cf5d622802f600ba
+  languageName: node
+  linkType: hard
+
+"@essex-js-toolkit/hooks@npm:^4.0.0":
   version: 4.0.0
   resolution: "@essex-js-toolkit/hooks@npm:4.0.0"
   dependencies:
@@ -832,18 +845,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/themed-components@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@essex-js-toolkit/themed-components@npm:2.0.0"
+"@essex-js-toolkit/themed-components@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@essex-js-toolkit/themed-components@npm:2.0.1"
   dependencies:
-    "@essex-js-toolkit/hooks": 4.0.0
-    "@essex-js-toolkit/toolbox": 3.0.0
+    "@essex-js-toolkit/hooks": 4.0.1
+    "@essex-js-toolkit/toolbox": 3.0.1
     "@types/d3-array": ^3.0.2
     "@types/d3-axis": ^3.0.1
     "@types/d3-brush": ^3.0.1
     "@types/d3-scale": ^4.0.2
     "@types/d3-selection": ^3.0.2
-    core-js: ^3.21.1
     d3-array: ^3.1.1
     d3-axis: ^3.0.0
     d3-brush: ^3.0.0
@@ -862,10 +874,9 @@ __metadata:
     "@types/node": "*"
     "@types/react": ">= 16.9"
     "@uifabric/icons": ">= 7.3.38"
-    office-ui-fabric-react: "*"
     react: ">= 16.8.6"
     react-dom: ">= 16.8.6"
-  checksum: a7b33d7fba5f922d80f2b12611df10bbff86e29a43f52d2797efb9a880893a6bda38d4c551620f86d402f7eac7be07c57d68376a21c547b734cce50eae3ba4f3
+  checksum: 4f94993f26645676654b5ed8873d90dae14e337a34979f56948f632e4bd0a2d2e3a9978ed58ed1e840db65c42035e4dc563ffc1f2389dee97a0b48b15b40d97b
   languageName: node
   linkType: hard
 
@@ -875,6 +886,13 @@ __metadata:
   dependencies:
     core-js: ^3.21.1
   checksum: cc3fa1b4337ada23aeb56b36de852852af19189e83d733681d69f0935329597b0c534ae3f6579befa1713097477fcae94be36f5c9763a037f1f1a9d0f41cdd94
+  languageName: node
+  linkType: hard
+
+"@essex-js-toolkit/toolbox@npm:3.0.1":
+  version: 3.0.1
+  resolution: "@essex-js-toolkit/toolbox@npm:3.0.1"
+  checksum: 24b864ce1819374b00ab6f5b8633232c3ea212993dc52467a7de4f606843cfaa19ad3239bb257fcfd0c6bf189319602005be372070bc1f4f98570288a3dfdac6
   languageName: node
   linkType: hard
 
@@ -920,20 +938,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/jest-config@npm:^20.1.2":
-  version: 20.1.2
-  resolution: "@essex/jest-config@npm:20.1.2"
+"@essex/jest-config@npm:^21.0.0":
+  version: 21.0.0
+  resolution: "@essex/jest-config@npm:21.0.0"
   dependencies:
+    "@essex/swc-opts": 20.0.2
     "@swc/core": ^1.2.142
     "@swc/jest": ^0.2.17
     "@types/jest": ^27.4.0
     identity-obj-proxy: ^3.0.0
+    lodash: ^4.17.21
   peerDependencies:
     jest: ">= 26.4"
   peerDependenciesMeta:
     jest:
       optional: true
-  checksum: 38157ffe0ddf2e25421daa59ada03a74a5063747b412cd318514032732fd82320fe44479a66cf7fe28f9147149feffa3792329f0eb365fc701a295902b2e7ad3
+  checksum: 3cb0569551eafdad53c282f1c08b76c31f6e813172b50440fca4d9b6a8f45b1ad3dba51e68ace15c96ec53731cbceacdcc592178634f2eb039fdf5a95703b198
   languageName: node
   linkType: hard
 
@@ -944,14 +964,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/scripts@npm:^20.3.1":
-  version: 20.3.1
-  resolution: "@essex/scripts@npm:20.3.1"
+"@essex/scripts@npm:^20.3.2":
+  version: 20.3.2
+  resolution: "@essex/scripts@npm:20.3.2"
   dependencies:
     "@azure/storage-blob": ^12.8.0
     "@essex/eslint-config": 20.0.0
     "@essex/eslint-plugin": 20.0.1
-    "@essex/shellrunner": 20.0.1
+    "@essex/shellrunner": 20.0.2
+    "@essex/swc-opts": 20.0.2
     "@swc/core": ^1.2.142
     "@typescript-eslint/eslint-plugin": ^5.12.0
     "@typescript-eslint/parser": ^5.12.0
@@ -975,7 +996,7 @@ __metadata:
     typescript: ^4.5.5
   peerDependencies:
     "@essex/eslint-config": ">=20.0.0"
-    "@essex/jest-config": ">=20.1.2"
+    "@essex/jest-config": ">=21.0.0"
     "@essex/prettier-config": ">=18.0.2"
     "@typescript-eslint/eslint-plugin": ">= 4.4.1"
     "@typescript-eslint/parser": ">= 4.4.1"
@@ -1008,17 +1029,28 @@ __metadata:
   bin:
     essex: ./lib/index.mjs
     essex-scripts: ./lib/index.mjs
-  checksum: 4a21e61f49d91e54bd9a4b20166ccf3012209570aacd9f3b337041ad4b7d9a00eaa2e747b92e797cf6b1c7c167e60d709cc6e593ec45a4ab10ff8d682444277a
+  checksum: 8b104f70a55f6b0ec458a7d580d830dde2a151ececcfa5c522cf486268bc7397c133a56062016bd9ebfaf8452f6ec2907e7f2f39548c2ea6c1b91ac02bc8326c
   languageName: node
   linkType: hard
 
-"@essex/shellrunner@npm:20.0.1":
-  version: 20.0.1
-  resolution: "@essex/shellrunner@npm:20.0.1"
+"@essex/shellrunner@npm:20.0.2":
+  version: 20.0.2
+  resolution: "@essex/shellrunner@npm:20.0.2"
   dependencies:
     cross-spawn: ^7.0.3
     debug: ^4.3.3
-  checksum: 8da89d8141057eb91111f76220cedc2957ce86201ddb1248c15b6b0185cbd0551880da2091af3b7413460e06e0c82fc27de2214ee1a80f2bb0d119c6c07452d3
+  checksum: 38b50302c83f95fad6b0f4d599a49a257d53e40cdcd481c409613faf2ab56004026e50e068d8876c8fd96716e5ab276bc8fe8dc6a2eec2e1756890f849d49e44
+  languageName: node
+  linkType: hard
+
+"@essex/swc-opts@npm:20.0.2":
+  version: 20.0.2
+  resolution: "@essex/swc-opts@npm:20.0.2"
+  dependencies:
+    "@swc/core": ^1.2.142
+    lodash: ^4.17.21
+    tslib: ^2.3.1
+  checksum: 47cd0e41b845c10f742ed2d43aa60dff13e4368f71a96d20d30432f0d26c6c2b5cff51bdb2fd974c4aa191b8632cddb1fa2e390adae66f50a87304ae36d127bd
   languageName: node
   linkType: hard
 
@@ -1042,10 +1074,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/webpack-config@npm:^20.1.0":
-  version: 20.1.0
-  resolution: "@essex/webpack-config@npm:20.1.0"
+"@essex/webpack-config@npm:^20.1.1":
+  version: 20.1.1
+  resolution: "@essex/webpack-config@npm:20.1.1"
   dependencies:
+    "@essex/swc-opts": 20.0.2
     "@swc/cli": ^0.1.55
     "@swc/core": ^1.2.142
     "@types/webpack": ^5.28.0
@@ -1067,7 +1100,7 @@ __metadata:
   peerDependencies:
     typescript: ">= 4 <5"
     webpack: ">= 4"
-  checksum: 71369ca53e2330e09e3ae3eaf3567276a95dbfc780750df35cc3318ab5248eb27b530b054e66299e2e4573f2d61e94b5222e0eba30be1e7cdd9a9a843abadeeb
+  checksum: a45cff1b22cd05c0d001160fbe6ca66f73a5a0874e6e806c90f3729ca49f15761868a10429f66d970c81ffe2d13517848e649dda3efb6885ba6eec45df48fb11
   languageName: node
   linkType: hard
 
@@ -1827,9 +1860,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/color@npm:2.0.3":
-  version: 2.0.3
-  resolution: "@thematic/color@npm:2.0.3"
+"@thematic/color@npm:2.0.4":
+  version: 2.0.4
+  resolution: "@thematic/color@npm:2.0.4"
   dependencies:
     chroma-js: ^2.4.2
     color-blind: ^0.1.1
@@ -1842,15 +1875,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 67dc12bf0429a0b70c5e23f7156b0dcdb4d5b7dbfc770418f3514f72936c94857abd8e157b05603f84427794476637209581e2389eb9f1e63d9ccd900a2c4b8f
+  checksum: b16c89f5a8c0a6ac69fd46c9c21138cac5a86496ae22c0126382313efc39be1ec99c69a1278fc8d42b3c4ae11d4a82b5d018490901773c6d0bc434b78fb3b40c
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:2.0.3, @thematic/core@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@thematic/core@npm:2.0.3"
+"@thematic/core@npm:2.0.4, @thematic/core@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@thematic/core@npm:2.0.4"
   dependencies:
-    "@thematic/color": 2.0.3
+    "@thematic/color": 2.0.4
     d3-scale: ^3.3.0
     lodash-es: ^4.17.21
     murmurhash-js: ^1.0.0
@@ -1862,15 +1895,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 6fdab6ead90c429a78b4efe646534d64547aa0863bf6ca19086c58dbe855fcbf17f02fda76c222f346113024f45214b141c85cede4fcde7026389102d16402a9
+  checksum: 8fc45b87fb9b0786559cda0f5f8ad754f70f3835085a22e565534a1dbe836502adcee4ed5918a554bedb1ca3f7d181130202707dfd61912fe13abd4962dc7ced
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@thematic/d3@npm:2.0.3"
+"@thematic/d3@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@thematic/d3@npm:2.0.4"
   dependencies:
-    "@thematic/core": 2.0.3
+    "@thematic/core": 2.0.4
     d3-axis: ^1.0.12
     d3-selection: ^1.4.2
   peerDependencies:
@@ -1884,18 +1917,18 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: e9b01ef6aaba6a972a1be7953e4612a5fb9435e56c4a5bdef5c8ffb610644da46c455752ac51b8009399595b083561d5239c1661d06ceaae2a3b95cea8718ffa
+  checksum: 4922a9549ea6e2f4cfbf7b62a01ad8f42028f4a6b06d11d495f21a4a778fb15e9aae1e26ef085158eef0e05bec388184999468e6e850b2fb9c48842fcc8aae5b
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "@thematic/fluent@npm:3.0.3"
+"@thematic/fluent@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "@thematic/fluent@npm:3.0.4"
   dependencies:
     "@essex-js-toolkit/hooks": ^4.0.0
-    "@thematic/color": 2.0.3
-    "@thematic/core": 2.0.3
-    "@thematic/react": 2.0.3
+    "@thematic/color": 2.0.4
+    "@thematic/core": 2.0.4
+    "@thematic/react": 2.0.4
     d3-scale: ^3.3.0
   peerDependencies:
     "@fluentui/font-icons-mdl2": ">= 8"
@@ -1914,16 +1947,16 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 9263d4d861ea6e20253f5b11f9a9567d402adb78aae38132c896c14d973b6aa75eba5351d04640045307d54959e98f6fd87f6821e864b9212059dac32dbec02d
+  checksum: 985b841829d73bbc25118d5abede55964fa16cb5425a5bc180ee7bc7f1c7ed9e3bdb92b9204c4a530cd729805c45037eb57fcbd07550df4ca14c06929f470536
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:2.0.3, @thematic/react@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@thematic/react@npm:2.0.3"
+"@thematic/react@npm:2.0.4, @thematic/react@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@thematic/react@npm:2.0.4"
   dependencies:
-    "@thematic/color": 2.0.3
-    "@thematic/core": 2.0.3
+    "@thematic/color": 2.0.4
+    "@thematic/core": 2.0.4
   peerDependencies:
     "@types/node": "*"
     "@types/react": ">= 17"
@@ -1935,7 +1968,7 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 3c39299e3bb6bc4c833fe5814cad4c09d1ea9c42e852c832f4f375b5bdea2ad4c97873ffac920178a4f378eb5d119cd648d089159fe1d23b71f5f5bd61d8afce
+  checksum: fc77aeb6e8f80c89bc9691110d907d0cdae8c6136868acacebb90f58065a9f2cdcc259e47b643364148b1f3182d94beceac09abfa795307864ae1b0c1c015cb9
   languageName: node
   linkType: hard
 

@@ -11,8 +11,8 @@
 		"lint": "essex lint --fix",
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
-		"test": "NODE_OPTIONS=--experimental-vm-modules yarn jest",
-		"ci": "run-s build lint test git_is_clean",
+		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest)",
+		"ci": "run-s build lint jest git_is_clean",
 		"publish": "yarn workspaces foreach --exclude '@data-wrangling-components/project' -pv npm publish --tolerate-republish --access public",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
@@ -20,9 +20,9 @@
 	"devDependencies": {
 		"@essex/eslint-config": "^20.0.0",
 		"@essex/eslint-plugin": "^20.0.1",
-		"@essex/jest-config": "^20.1.2",
+		"@essex/jest-config": "^21.0.0",
 		"@essex/prettier-config": "^18.0.2",
-		"@essex/scripts": "^20.3.1",
+		"@essex/scripts": "^20.3.2",
 		"@types/jest": "^27.4.0",
 		"@types/node": "^17.0.18",
 		"@typescript-eslint/eslint-plugin": "^5.12.0",

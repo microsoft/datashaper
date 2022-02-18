@@ -15,7 +15,7 @@
 		"@zip.js/zip.js": "^2.4.4"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.1",
+		"@essex/scripts": "^20.3.2",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@essex/vite-config": "^19.0.3",
 		"@types/node": "^17.0.18",
