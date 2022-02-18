@@ -7,7 +7,7 @@
 			"~components": ["./src/components/index.ts"],
 			"~components/*": ["./src/components/*"],
 			"~pages": ["./src/pages/index.ts"],
-			"~pages/*": ["src/pages/*"]
+			"~pages/*": ["./src/pages/*"]
 		},
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "ES2020.BigInt"],
 		"outDir": "lib",

@@ -1,6 +1,8 @@
-**aggregate** combines a [groupby](./groupby.md) with a [rollup](./rollup.md) to support all-in-one data aggregations.
+# aggregate
 
-Example
+Combines a [groupby](./groupby.md) with a [rollup](./rollup.md) to support all-in-one data aggregations.
+
+## Example
 
 | id  | value |
 | --- | ----- |

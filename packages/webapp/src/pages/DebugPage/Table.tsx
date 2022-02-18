@@ -11,7 +11,7 @@ import {
 	visibleColumnsCommand,
 } from '@data-wrangling-components/react'
 import { IColumn, IDropdownOption } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { SetterOrUpdater } from 'recoil'
 import styled from 'styled-components'

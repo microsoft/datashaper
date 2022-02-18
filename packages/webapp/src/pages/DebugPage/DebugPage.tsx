@@ -12,7 +12,7 @@ import {
 	usePipeline,
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useState, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { ControlBar } from './ControlBar'
@@ -35,7 +35,7 @@ const DEFAULT_STATS = [
 	StatsColumnType.Invalid,
 ]
 
-export const MainPage: React.FC = memo(function MainMage() {
+export const DebugPage: React.FC = memo(function DebugPage() {
 	// this is special to the test example,
 	// a running app needs to maintain its own list of uploaded files
 	const [inputList, setInputs] = useInputTableList()

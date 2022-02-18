@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { StepFunction, TableStore } from '../../index.js'
-import { ChainArgs, Step } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { StepFunction, TableStore } from '../../index.js'
+import type { ChainArgs, Step } from '../../types.js'
 
 import { aggregate } from './aggregate.js'
 import { bin } from './bin.js'
@@ -14,6 +14,7 @@ import { concat } from './concat.js'
 import { dedupe } from './dedupe.js'
 import { derive } from './derive.js'
 import { difference } from './difference.js'
+import { erase } from './erase.js'
 import { fetch } from './fetch.js'
 import { fill } from './fill.js'
 import { filter } from './filter.js'
@@ -23,13 +24,16 @@ import { impute } from './impute.js'
 import { intersect } from './intersect.js'
 import { join } from './join.js'
 import { lookup } from './lookup.js'
+import { merge } from './merge.js'
 import { orderby } from './orderby.js'
+import { pivot } from './pivot.js'
 import { recode } from './recode.js'
 import { rename } from './rename.js'
 import { rollup } from './rollup.js'
 import { sample } from './sample.js'
 import { select } from './select.js'
 import { spread } from './spread.js'
+import { unfold } from './unfold.js'
 import { ungroup } from './ungroup.js'
 import { union } from './union.js'
 import { unorder } from './unorder.js'
@@ -44,6 +48,7 @@ const verbs: Record<string, StepFunction> = {
 	dedupe,
 	derive,
 	difference,
+	erase,
 	fetch,
 	fill,
 	filter,
@@ -53,13 +58,16 @@ const verbs: Record<string, StepFunction> = {
 	intersect,
 	join,
 	lookup,
+	merge,
 	orderby,
+	pivot,
 	recode,
 	rename,
 	rollup,
 	sample,
 	select,
 	spread,
+	unfold,
 	ungroup,
 	union,
 	unorder,
@@ -74,7 +82,7 @@ async function exec(step: Step, store: TableStore): Promise<ColumnTable> {
 
 	let output: ColumnTable = table({})
 	for (let index = 0; index < steps.length; index++) {
-		const step = steps[index]
+		const step = steps[index] as Step<unknown>
 		const { verb } = step
 		try {
 			// fallback to chain if unspecified - this allows custom names to identify different chains

@@ -3,7 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IColumn, IDropdownOption } from '@fluentui/react'
-import { isArray, isEqual, isNil, isString, orderBy, uniqWith } from 'lodash'
+import isArray from 'lodash-es/isArray.js'
+import isEqual from 'lodash-es/isEqual.js'
+import isNil from 'lodash-es/isNil.js'
+import isString from 'lodash-es/isString.js'
+import orderBy from 'lodash-es/orderBy.js'
+import uniqWith from 'lodash-es/uniqWith.js'
 
 export function getValue(item: any, column?: IColumn): any {
 	return column?.fieldName && item[column.fieldName]

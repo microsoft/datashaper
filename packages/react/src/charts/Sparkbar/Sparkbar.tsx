@@ -5,7 +5,7 @@
 
 import { line as themeLine } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
-import { isArray } from 'lodash'
+import isArray from 'lodash-es/isArray.js'
 
 import { memo, useLayoutEffect, useMemo, useRef } from 'react'
 import {

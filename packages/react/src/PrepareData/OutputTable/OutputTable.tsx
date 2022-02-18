@@ -5,7 +5,7 @@
 import type { Step } from '@data-wrangling-components/core'
 import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import {
 	ArqueroDetailsList,
@@ -59,5 +59,6 @@ const Container = styled.div`
 `
 
 const TableContainer = styled.div`
-	height: 100%;
+	height: 99%;
+	border: 1px solid ${({ theme }) => theme.application().faint().hex()}};
 `

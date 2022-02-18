@@ -5,7 +5,7 @@
 import type { TableMetadata } from '@data-wrangling-components/core'
 import { IDetailsColumnProps, IRenderFunction, useTheme } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import {
 	ArqueroDetailsList,
@@ -13,6 +13,7 @@ import {
 	StatsColumnType,
 	useCommonCommands,
 } from '../../index.js'
+import { DetailText } from '../DetailText/index.js'
 import { useToggleTableFeatures } from '../hooks/index.js'
 
 const statsColumnTypes = [
@@ -68,7 +69,7 @@ export const PreviewTable: React.FC<{
 					/>
 				</Container>
 			) : (
-				<PreviewText>Select a table to preview here</PreviewText>
+				<DetailText text="Select a table to preview" />
 			)}
 		</>
 	)
@@ -78,15 +79,7 @@ const Container = styled.div`
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
-	height: 100%;
-	margin-left: 40px;
-`
-
-const PreviewText = styled.div`
-	flex: 1;
-	display: flex;
-	justify-content: center;
-	height: 24%;
-	align-self: center;
-	color: ${({ theme }) => theme.application().border().hex()};
+	height: 99%;
+	margin-left: 20px;
+	border: 1px solid ${({ theme }) => theme.application().faint().hex()}};
 `

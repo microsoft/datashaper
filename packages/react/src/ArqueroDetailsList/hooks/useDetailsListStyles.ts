@@ -4,7 +4,7 @@
  */
 import type { IDetailsListStyles } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import { merge } from 'lodash'
+import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 import type { DetailsListFeatures } from '../index.js'
 

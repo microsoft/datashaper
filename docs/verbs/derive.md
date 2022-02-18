@@ -1,6 +1,8 @@
-**derive** performs math operations across two columns to create a new combined column.
+# derive
 
-Example
+Performs math operations across two columns to create a new combined column.
+
+## Example
 
 | fy20 | fy21 |
 | ---- | ---- |

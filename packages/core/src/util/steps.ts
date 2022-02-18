@@ -4,7 +4,7 @@
  */
 import difference from 'lodash-es/difference.js'
 import intersection from 'lodash-es/intersection.js'
-import { Step, Verb } from '../index.js'
+import type { Step, Verb } from '../index.js'
 
 enum Tags {
 	/**
@@ -31,6 +31,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	dedupe: [Tags.RowModifying],
 	derive: [Tags.OutputColumn],
 	difference: [Tags.RowModifying],
+	erase: [Tags.InputColumn, Tags.RowModifying],
 	fetch: [],
 	fill: [Tags.OutputColumn],
 	filter: [Tags.InputColumn, Tags.RowModifying],
@@ -40,13 +41,16 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	intersect: [Tags.RowModifying],
 	join: [Tags.RowModifying],
 	lookup: [Tags.RowModifying],
+	merge: [Tags.OutputColumn],
+	pivot: [Tags.RowModifying],
 	orderby: [],
 	recode: [Tags.InputColumn, Tags.OutputColumn],
 	rename: [],
 	rollup: [Tags.InputColumn, Tags.OutputColumn, Tags.RowModifying],
 	sample: [Tags.RowModifying],
 	select: [],
-	spread: [Tags.InputColumn],
+	spread: [],
+	unfold: [Tags.RowModifying],
 	ungroup: [],
 	union: [Tags.RowModifying],
 	unorder: [],

@@ -1,6 +1,8 @@
-**orderby** applies a sort operation on the table using a specified column and sort direction. Multiple column + direction instructions can be supplied to produce a compound sort.
+# orderby
 
-Example
+Applies a sort operation on the table using a specified column and sort direction. Multiple column + direction instructions can be supplied to produce a compound sort.
+
+## Example
 
 | id  | name  |
 | --- | ----- |

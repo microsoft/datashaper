@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { op } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { fixedBinCount } from '../engine/util/index.js'
 import {
 	Bin,
@@ -42,7 +42,7 @@ function detailedMeta(table: ColumnTable): Record<string, ColumnMetadata> {
 	return table.columnNames().reduce((acc, cur) => {
 		acc[cur] = {
 			name: cur,
-			type: s[cur].type,
+			type: s[cur]!.type,
 			stats: s[cur],
 		}
 		return acc
@@ -55,7 +55,7 @@ function basicMeta(table: ColumnTable): Record<string, ColumnMetadata> {
 	return table.columnNames().reduce((acc, cur) => {
 		acc[cur] = {
 			name: cur,
-			type: t[cur],
+			type: t[cur]!,
 		}
 		return acc
 	}, {} as Record<string, ColumnMetadata>)
@@ -117,7 +117,7 @@ function requiredStats(table: ColumnTable): Record<string, any> {
 		acc[`${cur}.mode`] = op.mode(cur)
 		return acc
 	}, {} as Record<string, any>)
-	return table.rollup(args).objects()[0]
+	return table.rollup(args).objects()[0]!
 }
 
 function optionalStats(table: ColumnTable): Record<string, any> {
@@ -129,7 +129,7 @@ function optionalStats(table: ColumnTable): Record<string, any> {
 		acc[`${cur}.stdev`] = op.stdev(cur)
 		return acc
 	}, {} as Record<string, any>)
-	return table.rollup(args).objects()[0]
+	return table.rollup(args).objects()[0]!
 }
 
 function binning(
@@ -166,11 +166,11 @@ function binning(
 			.sort((a, b) => a[cur] - b[cur])
 			.map(d => ({
 				min: d[cur],
-				count: d.count,
+				count: d['count'],
 			}))
 		// numeric sort puts null at the front - format to match categories style if present
-		if (bins[0].min === null) {
-			bins[0].min = '(empty)'
+		if (bins[0]!.min === null) {
+			bins[0]!.min = '(empty)'
 		}
 		// make sure we actually have 10
 		acc[`${cur}.bins`] = fillBins(bins, min, max, 10, distinct)
@@ -203,8 +203,8 @@ function fillBins(
 				count: 0,
 			},
 	)
-	if (bins[0].min === '(empty)') {
-		filled.unshift(bins[0])
+	if (bins[0]!.min === '(empty)') {
+		filled.unshift(bins[0]!)
 	}
 	return filled
 }
@@ -230,7 +230,7 @@ function categories(
 			.count()
 			.objects()
 			.sort((a, b) => `${a[cur]}`.localeCompare(`${b[cur]}`))
-			.map(d => ({ name: d[cur], count: d.count }))
+			.map(d => ({ name: d[cur], count: d['count'] }))
 		acc[cur] = counted
 		return acc
 	}, {} as Record<string, Category[]>)

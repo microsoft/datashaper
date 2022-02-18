@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import ColumnTable from 'arquero/dist/types/table/column-table'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { BinArgs, BinStrategy } from '../../index.js'
 import { Step, Verb } from '../../types.js'
 import { bin } from '../verbs/bin.js'

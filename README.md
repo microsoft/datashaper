@@ -31,7 +31,7 @@ We currently have four packages:
 
 The webapp uses both the core engine and React components to build a small application that demonstrates how to use the wrangling components. At a basic level, you need a set of input tables, which you place in a TableStore (basically a chain execution context). You add wrangling steps to a Pipeline, then run it to generate an output table.
 
-Tables in the store are referenced by key. Steps can create any number of output tables that are also written to the store. Future steps can therefore build upon previous/intermediate outputs however you'd like. See the [every-operation.json](packages/webapp/src/pages/MainPage/specs/every-operation.json) example for a sample of every verb we currently support.
+Tables in the store are referenced by key. Steps can create any number of output tables that are also written to the store. Future steps can therefore build upon previous/intermediate outputs however you'd like. See the [every-operation.json](packages/webapp/src/pages/DebugPage/specs/every-operation.json) example for a sample of every verb we currently support.
 
 Example joining two tables:
 

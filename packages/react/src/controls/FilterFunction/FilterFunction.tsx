@@ -8,7 +8,7 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
-import { set } from 'lodash'
+import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import { useLoadTable, useHandleDropdownChange } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'

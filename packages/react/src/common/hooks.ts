@@ -19,7 +19,9 @@ import type {
 import { useBoolean } from '@fluentui/react-hooks'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { set, cloneDeep } from 'lodash'
+import cloneDeep from 'lodash-es/cloneDeep.js'
+import isArray from 'lodash-es/isArray.js'
+import set from 'lodash-es/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { DetailsListFeatures } from '../index.js'
 import type {
@@ -463,7 +465,7 @@ export function useFormatedColumnArg(): (
 	return useCallback((stepArgs: unknown, newName = 'New column') => {
 		const args = stepArgs as Record<string, unknown>
 		Object.keys(args).forEach(x => {
-			if (x === 'to') args[x] = newName
+			if (x === 'to' && !isArray(args[x])) args[x] = newName
 		})
 		return args
 	}, [])

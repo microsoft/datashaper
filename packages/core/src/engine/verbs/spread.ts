@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { TableStore } from '../../index.js'
-import { SpreadArgs, Step } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { TableStore } from '../../index.js'
+import type { SpreadArgs, Step } from '../../types.js'
 
 /**
  * Executes an arquero spread operation.
@@ -18,7 +18,8 @@ export async function spread(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const { columns } = args as SpreadArgs
+	const { to, column } = args as SpreadArgs
 	const inputTable = await store.get(input)
-	return inputTable.spread(columns)
+
+	return inputTable.spread(column, { as: to })
 }

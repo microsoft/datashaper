@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { BinStrategy } from '../../index.js'
-import { Step, Verb } from '../../types.js'
+import { FieldAggregateOperation, Step, Verb } from '../../types.js'
 
 /**
  * Factory function to create new verb configs
@@ -68,12 +68,25 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Lookup:
 		case Verb.Groupby:
 		case Verb.Dedupe:
-		case Verb.Spread:
 		case Verb.Unroll:
 			return {
 				...base,
 				args: {
 					columns: [],
+				},
+			}
+		case Verb.Spread:
+			return {
+				...base,
+				args: {
+					to: [],
+				},
+			}
+		case Verb.Pivot:
+			return {
+				...base,
+				args: {
+					operation: FieldAggregateOperation.Any,
 				},
 			}
 		case Verb.Fetch:
@@ -85,6 +98,9 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Select:
 		case Verb.Ungroup:
 		case Verb.Unorder:
+		case Verb.Erase:
+		case Verb.Merge:
+		case Verb.Unfold:
 	}
 	return {
 		...base,

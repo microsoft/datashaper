@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { escape } from 'arquero'
-import ColumnTable from 'arquero/dist/types/table/column-table'
-import { ExprObject } from 'arquero/dist/types/table/transformable'
-import { TableStore } from '../../index.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { ExprObject } from 'arquero/dist/types/table/transformable'
+import type { TableStore } from '../../index.js'
 import { DeriveArgs, MathOperator, Step } from '../../types.js'
 
 /**
