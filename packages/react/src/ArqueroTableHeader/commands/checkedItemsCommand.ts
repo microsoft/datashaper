@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
-import { merge } from 'lodash'
+import merge from 'lodash-es/merge.js'
 
 /**
  * Constructs a command for listing out items with checks

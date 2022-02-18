@@ -9,7 +9,7 @@ import {
 	columnTransformVerbs,
 } from '@data-wrangling-components/core'
 import { Dropdown, IconButton, Modal, PrimaryButton } from '@fluentui/react'
-import { upperFirst } from 'lodash'
+import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import {

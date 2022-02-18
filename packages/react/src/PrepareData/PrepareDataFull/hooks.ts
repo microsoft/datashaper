@@ -10,7 +10,7 @@ import {
 } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { last } from 'lodash'
+import last from 'lodash-es/last.js'
 import { useState, useMemo, useEffect } from 'react'
 import { usePipeline, useStore } from '../../common/index.js'
 import {

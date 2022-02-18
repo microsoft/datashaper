@@ -4,7 +4,7 @@
  */
 import type { Step } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
-import { set } from 'lodash'
+import set from 'lodash-es/set.js'
 import { useCallback } from 'react'
 
 function updateStep(
