@@ -36,6 +36,9 @@ export class DefaultTableStore implements TableStore {
 		if (!container) {
 			throw new Error(`No table with id '${id}' found in store.`)
 		}
+		const result = {
+			...container,
+		}
 		let table = container.table
 		if (!table) {
 			const { resolver } = container
@@ -43,13 +46,11 @@ export class DefaultTableStore implements TableStore {
 				throw new Error(`No resolver function for unloaded table '${id}'.`)
 			}
 			table = await resolver(id)
+			result.table = table
 			// cache it for next time
-			this.set({
-				...container,
-				table,
-			})
+			this.set(result)
 		}
-		return container
+		return result
 	}
 
 	async table(id: string): Promise<ColumnTable> {
