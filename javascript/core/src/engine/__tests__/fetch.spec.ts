@@ -13,7 +13,7 @@ describe('test for fetch', () => {
 			input: '',
 			output: 'output',
 			args: {
-				url: 'packages/webapp/public/data/companies.csv',
+				url: 'javascript/webapp/public/data/companies.csv',
 				delimiter: ',',
 			},
 		}

@@ -23,8 +23,8 @@
 		"react-if": "^4.1.1"
 	},
 	"devDependencies": {
-		"@data-wrangling-components/core": "workspace:packages/core",
-		"@data-wrangling-components/utilities": "workspace:packages/utilities",
+		"@data-wrangling-components/core": "workspace:javascript/core",
+		"@data-wrangling-components/utilities": "workspace:javascript/utilities",
 		"@essex-js-toolkit/themed-components": "^2.0.1",
 		"@essex/scripts": "^20.3.2",
 		"@essex/tsconfig-base": "^1.0.2",

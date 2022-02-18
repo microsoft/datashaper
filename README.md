@@ -15,10 +15,10 @@ Individual documentation for the JavaScript and Python implementations can be fo
 
 We currently have four packages:
 
-- [core](packages/core) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables. The pipeline is essentially an implementation of async chain-of-command, executing verbs serially based on an input table context and set of step configurations.
-- [react](packages/react) - this is a set of React components for each verb that you can include in web apps that enable tranformation pipeline building.
-- [utilities](packages/utilities) - this is a set of helpers for working with files, etc., to ease building data wrangling applications.
-- [webapp](packages/webapp) - this is an example/test webapp that includes all of the verb components and allows creation, execution, and saving of pipeline JSON files.
+- [core](javascript/core) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables. The pipeline is essentially an implementation of async chain-of-command, executing verbs serially based on an input table context and set of step configurations.
+- [react](javascript/react) - this is a set of React components for each verb that you can include in web apps that enable tranformation pipeline building.
+- [utilities](javascript/utilities) - this is a set of helpers for working with files, etc., to ease building data wrangling applications.
+- [webapp](javascript/webapp) - this is an example/test webapp that includes all of the verb components and allows creation, execution, and saving of pipeline JSON files.
 
 ## Building
 
@@ -31,7 +31,7 @@ We currently have four packages:
 
 The webapp uses both the core engine and React components to build a small application that demonstrates how to use the wrangling components. At a basic level, you need a set of input tables, which you place in a TableStore (basically a chain execution context). You add wrangling steps to a Pipeline, then run it to generate an output table.
 
-Tables in the store are referenced by key. Steps can create any number of output tables that are also written to the store. Future steps can therefore build upon previous/intermediate outputs however you'd like. See the [every-operation.json](packages/webapp/src/pages/DebugPage/specs/every-operation.json) example for a sample of every verb we currently support.
+Tables in the store are referenced by key. Steps can create any number of output tables that are also written to the store. Future steps can therefore build upon previous/intermediate outputs however you'd like. See the [every-operation.json](javascript/webapp/src/pages/DebugPage/specs/every-operation.json) example for a sample of every verb we currently support.
 
 Example joining two tables:
 
