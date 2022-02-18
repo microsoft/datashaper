@@ -26,8 +26,8 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	color,
 }) {
 	const overflowButtonProps = useOverflowButtonProps(bgColor, color)
-	const handleOnDataReduce = useHandleOnDataReduce(color)
-	const handleOnDataGrown = useHandleOnDataGrown()
+	const handleOnDataReduce = useHandleOnDataReduce()
+	const handleOnDataGrown = useHandleOnDataGrown(color)
 
 	return (
 		<CommandBarWrapper width={width}>
@@ -42,25 +42,28 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	)
 })
 
-const useHandleOnDataReduce = (color?: string) => {
+const useHandleOnDataReduce = () => {
 	const iconProps = useIconProps()
 	return useCallback(
 		(item: ICommandBarItemProps) => {
-			item.iconProps = iconProps(item, color)
+			item.iconProps = iconProps(item)
 			item.text = item.text || item.title || ''
 		},
-		[iconProps, color],
+		[iconProps],
 	)
 }
 
-const useHandleOnDataGrown = () => {
+const useHandleOnDataGrown = (color?: string) => {
 	const iconProps = useIconProps()
 	const theme = useThematic()
 	return useCallback(
 		(item: ICommandBarItemProps) => {
-			item.iconProps = iconProps(item, theme.application().foreground().hex())
+			item.iconProps = iconProps(
+				item,
+				color || theme.application().background().hex(),
+			)
 		},
-		[iconProps, theme],
+		[iconProps, theme, color],
 	)
 }
 
