@@ -28,6 +28,7 @@ const Container = styled.div`
 
 const Content = styled.div`
 	margin: 0;
+	height: 100%;
 	flex: 1;
 	display: flex;
 	flex-flow: column;
