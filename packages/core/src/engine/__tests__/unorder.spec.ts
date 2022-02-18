@@ -21,7 +21,7 @@ describe('test for unorder verb', () => {
 		const store = new TestStore()
 
 		await orderby(step, store).then(result => {
-			store.set('newTable', result)
+			store.set({ id: 'newTable', table: result })
 
 			expect(result.numCols()).toBe(4)
 			expect(result.numRows()).toBe(5)
@@ -65,7 +65,7 @@ describe('test for unorder verb', () => {
 		const store = new TestStore()
 
 		await orderby(step, store).then(result => {
-			store.set('newTable', result)
+			store.set({ id: 'newTable', table: result })
 
 			expect(result.numCols()).toBe(4)
 			expect(result.numRows()).toBe(5)
@@ -109,7 +109,7 @@ describe('test for unorder verb', () => {
 		const store = new TestStore()
 
 		await orderby(step, store).then(result => {
-			store.set('newTable', result)
+			store.set({ id: 'newTable', table: result })
 
 			expect(result.numCols()).toBe(4)
 			expect(result.numRows()).toBe(5)
@@ -153,7 +153,7 @@ describe('test for unorder verb', () => {
 		const store = new TestStore()
 
 		await orderby(step, store).then(result => {
-			store.set('newTable', result)
+			store.set({ id: 'newTable', table: result })
 
 			expect(result.numCols()).toBe(4)
 			expect(result.numRows()).toBe(5)

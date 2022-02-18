@@ -19,7 +19,7 @@ export function useAddNewTables(
 				const isStored = existing.includes(file.name)
 				if (!isStored) {
 					const tab = await file?.toTable()
-					store.set(file.name, tab)
+					store.set({ id: file.name, table: tab })
 				}
 			})
 

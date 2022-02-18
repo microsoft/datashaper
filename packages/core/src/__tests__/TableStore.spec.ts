@@ -3,11 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { TableStore } from '../TableStore'
+import { DefaultTableStore } from '../DefaultTableStore'
 
-describe('TableStore', () => {
+describe('DefaultTableStore', () => {
 	test('clone', () => {
-		const store = new TableStore()
 		const t1 = table({
 			ID: [1, 2, 3, 4],
 		})
@@ -15,16 +14,18 @@ describe('TableStore', () => {
 			name: ['hi', 'bye'],
 		})
 
-		store.set('t1', t1)
-		store.set('t2', t2)
+		const store = new DefaultTableStore([
+			{ id: 't1', table: t1 },
+			{ id: 't2', table: t2 },
+		])
 
-		const clone = store.clone()
+		return store.clone().then(clone => {
+			expect(store.list()).toEqual(clone.list())
 
-		expect(store.list()).toEqual(clone.list())
+			clone.delete('t1')
 
-		clone.delete('t1')
-
-		expect(store.list()).toHaveLength(2)
-		expect(clone.list()).toHaveLength(1)
+			expect(store.list()).toHaveLength(2)
+			expect(clone.list()).toHaveLength(1)
+		})
 	})
 })

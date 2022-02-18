@@ -98,7 +98,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const handleDropFiles = useCallback(
 		async (loaded: Map<string, ColumnTable>) => {
 			loaded.forEach((table, name) => {
-				store.set(name, table)
+				store.set({ id: name, table })
 			})
 			store.print()
 			setInputs(prev => [...prev, ...Array.from(loaded.keys())])

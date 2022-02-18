@@ -4,7 +4,8 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import isArray from 'lodash-es/isArray.js'
-import { Pipeline, TableStore } from '../index.js'
+import { createTableStore } from '../factories.js'
+import { Pipeline } from '../index.js'
 import type { Step } from '../types.js'
 
 /**
@@ -18,7 +19,7 @@ export async function runPipeline(
 	input: ColumnTable,
 	steps: Step | Step[],
 ): Promise<ColumnTable> {
-	const store = new TableStore()
+	const store = createTableStore()
 	const pipeline = new Pipeline(store)
 
 	// make sure each step has an input/output
@@ -47,7 +48,7 @@ export async function runPipeline(
 	// since we're creating the store the user has no opportunity
 	// to add the starting table, so we'll put it in place
 	const inp = internal[0]!.input
-	store.set(inp, input)
+	store.set({ id: inp, table: input })
 
 	pipeline.addAll(internal as Step[])
 

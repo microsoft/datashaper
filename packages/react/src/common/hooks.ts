@@ -4,6 +4,7 @@
  */
 import {
 	TableStore,
+	createTableStore,
 	Step,
 	InputColumnRecordArgs,
 	Value,
@@ -279,7 +280,7 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType {
 }
 
 export function useStore(): TableStore {
-	return useMemo(() => new TableStore(), [])
+	return useMemo(() => createTableStore(), [])
 }
 
 export function usePipeline(store: TableStore): Pipeline {

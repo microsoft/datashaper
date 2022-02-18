@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { TableStore } from '../../TableStore.js'
+import type { TableStore } from '../../types.js'
 import { SetOp, SetOperationArgs, Step } from '../../types.js'
 
 /**

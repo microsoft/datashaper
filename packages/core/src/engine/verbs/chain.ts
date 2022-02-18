@@ -78,7 +78,7 @@ async function exec(step: Step, store: TableStore): Promise<ColumnTable> {
 	const { args } = step
 	const { steps, nofork } = args as ChainArgs
 
-	const substore = nofork ? store : store.clone()
+	const substore = nofork ? store : await store.clone()
 
 	let output: ColumnTable = table({})
 	for (let index = 0; index < steps.length; index++) {
@@ -89,14 +89,14 @@ async function exec(step: Step, store: TableStore): Promise<ColumnTable> {
 			const fn = verbs[verb] || exec
 			// child store gets intermediate outputs so chain steps can do lookups
 			output = await fn(step, substore)
-			substore.set(step.output, output)
+			substore.set({ id: step.output, table: output })
 		} catch (e) {
 			console.error(`Pipeline failed on step ${index}`, step)
 			throw e
 		}
 	}
 	// parent store only gets the final output of the chain
-	store.set(step.output, output)
+	store.set({ id: step.output, table: output })
 	// return the final table
 	return output
 }

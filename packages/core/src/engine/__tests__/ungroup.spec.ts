@@ -21,7 +21,7 @@ describe('test for ungroup verb', () => {
 		const store = new TestStore()
 
 		await groupby(step, store).then(result => {
-			store.set('newTable', result)
+			store.set({ id: 'newTable', table: result })
 
 			expect(result.numCols()).toBe(3)
 			expect(result.numRows()).toBe(3)

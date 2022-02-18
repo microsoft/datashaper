@@ -37,7 +37,7 @@ Example joining two tables:
 
 ```
     import { table } from 'arquero'
-    import { TableStore, Pipeline } from '@data-wrangling-components/core'
+    import { createTableStore, Pipeline } from '@data-wrangling-components/core'
 
     // id   name
     // 1    bob
@@ -59,10 +59,16 @@ Example joining two tables:
         kid: ['billy', 'jill', 'kaden', 'kyle', 'moe]
     })
 
-    const store = new TableStore()
+    const store = createTableStore()
 
-    store.set('parents', parents)
-    store.set('kids', kids)
+    store.set({
+        id: 'parents',
+        table: parents
+    })
+    store.set({
+        id: 'kids',
+        table: kids
+    })
 
 	const pipeline = new Pipeline(store)
 

@@ -3,10 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { TableStore } from './TableStore.js'
 import { run } from './engine/index.js'
 import { factory } from './engine/verbs/index.js'
-import type { Step, Verb } from './types.js'
+import type { TableStore, Step, Verb } from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on

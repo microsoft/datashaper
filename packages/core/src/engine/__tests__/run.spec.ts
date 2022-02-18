@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
+import { DefaultTableStore } from '../../DefaultTableStore.js'
 import { Verb, Step, TableStore } from '../../index.js'
 import { run } from '../run.js'
 
@@ -14,8 +15,7 @@ describe('run', () => {
 	let store: TableStore
 
 	beforeEach(() => {
-		store = new TableStore()
-		store.set('input', input)
+		store = new DefaultTableStore([{ id: 'input', table: input }])
 	})
 
 	test('runs a single step with normal input/output', () => {

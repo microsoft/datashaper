@@ -19,7 +19,7 @@ describe('test for unfold verb', () => {
 		const store = new TestStore()
 
 		await fold(step, store).then(result => {
-			store.set('newTable', result)
+			store.set({ id: 'newTable', table: result })
 		})
 
 		const step2: Step = {

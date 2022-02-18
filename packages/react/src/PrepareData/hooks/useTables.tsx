@@ -15,6 +15,7 @@ export function useTables(
 	return useMemo(() => {
 		return files.map(f => {
 			return {
+				id: f.name,
 				name: f.name,
 				table: outputs.get(f.name),
 			}
