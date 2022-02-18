@@ -4,29 +4,27 @@
  */
 import { memo } from 'react'
 import styled from 'styled-components'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { Header } from './Header'
 import { StyleContext } from './StyleContext'
-import { MainPage, PerfPage, TransformPage, PrepareDataPage } from '~pages'
+import { Layout } from './Layout'
+import { RouteOptions } from './RouteOptions'
+
 export const App: React.FC = memo(function App() {
 	const search = window.location.search
 	return (
-		<StyleContext>
-			<Container>
-				<Header />
-				<PageContainer>
-					{/* this is just a hacky router to load the perf testing page if needed */}
-					{search === '?perf' ? (
-						<PerfPage />
-					) : search === '?transform' ? (
-						<TransformPage />
-					) : search === '?prepare' ? (
-						<PrepareDataPage />
-					) : (
-						<MainPage />
-					)}
-				</PageContainer>
-			</Container>
-		</StyleContext>
+		<Router>
+			<StyleContext>
+				<Container>
+					<Header />
+					<PageContainer>
+						<Layout>
+							<RouteOptions />
+						</Layout>
+					</PageContainer>
+				</Container>
+			</StyleContext>
+		</Router>
 	)
 })
 

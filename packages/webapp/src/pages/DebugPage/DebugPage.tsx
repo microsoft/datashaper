@@ -35,7 +35,7 @@ const DEFAULT_STATS = [
 	StatsColumnType.Invalid,
 ]
 
-export const MainPage: React.FC = memo(function MainMage() {
+export const DebugPage: React.FC = memo(function DebugPage() {
 	// this is special to the test example,
 	// a running app needs to maintain its own list of uploaded files
 	const [inputList, setInputs] = useInputTableList()
