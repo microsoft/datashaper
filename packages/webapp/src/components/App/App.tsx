@@ -3,15 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
-import styled from 'styled-components'
 import { BrowserRouter as Router } from 'react-router-dom'
+import styled from 'styled-components'
 import { Header } from './Header'
-import { StyleContext } from './StyleContext'
 import { Layout } from './Layout'
 import { RouteOptions } from './RouteOptions'
+import { StyleContext } from './StyleContext'
 
 export const App: React.FC = memo(function App() {
-	const search = window.location.search
 	return (
 		<Router>
 			<StyleContext>
