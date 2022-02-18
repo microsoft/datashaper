@@ -1,6 +1,8 @@
-**rename** renames columns in a table.
+# rename
 
-Example
+Renames columns in a table.
+
+## Example
 
 | id  | name  |
 | --- | ----- |

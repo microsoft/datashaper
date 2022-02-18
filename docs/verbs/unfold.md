@@ -1,6 +1,8 @@
-**unfold** reverses a [fold](./fold.md) operation. This is similar to a [pivot](./pivot.md), but pivot performs an aggregate when inverting the operation, rather than restoring the original rows.
+# unfold
 
-Example
+Reverses a [fold](./fold.md) operation. This is similar to a [pivot](./pivot.md), but pivot performs an aggregate when inverting the operation, rather than restoring the original rows.
+
+## Example
 
 | key  | value |
 | ---- | ----- |

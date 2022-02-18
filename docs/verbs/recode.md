@@ -1,6 +1,8 @@
-**recode** allows mapping of cell contents from one one value to another. This is useful for categorizing or otherwise performing direct value transforms.
+# recode
 
-Example
+Allows mapping of cell contents from one one value to another. This is useful for categorizing or otherwise performing direct value transforms.
+
+## Example
 
 | product       |
 | ------------- |

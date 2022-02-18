@@ -1,6 +1,8 @@
-**intersect** is a set operation between an input table and one or more secondary tables, retaining only those rows that occur in all tables.
+# intersect
 
-Example
+Set operation between an input table and one or more secondary tables, retaining only those rows that occur in all tables.
+
+## Example
 
 input 1
 

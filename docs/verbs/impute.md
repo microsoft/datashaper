@@ -1,6 +1,8 @@
-**impute** fills in any invalid values with a specified value. Invalid values include NaN, null, and undefined.
+# impute
 
-Example
+Fills in any invalid values with a specified value. Invalid values include NaN, null, and undefined. The opposite of [erase](./erase.md)
+
+## Example
 
 | id  | name  |
 | --- | ----- |

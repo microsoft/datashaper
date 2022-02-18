@@ -1,4 +1,6 @@
-**merge** collapses multiple columns into one. Invalid values (null, undefined, NaN) are ignored.
+# merge
+
+Collapses multiple columns into one. Invalid values (null, undefined, NaN) are ignored.
 
 Available collapse strategies are:
 
@@ -6,7 +8,7 @@ Available collapse strategies are:
 - last one winss: the last valid column value is used in the output
 - concat: all valid column values are concatenated together
 
-Examples
+## Examples
 
 | first | middle | last     |
 | ----- | ------ | -------- |

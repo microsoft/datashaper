@@ -1,4 +1,6 @@
-**bin** sorts continuous data into defined buckets. Values in the input table cell are replaced in the output with the lower bin boundary that they fall within.
+# bin
+
+Sorts continuous data into defined buckets. Values in the input table cell are replaced in the output with the lower bin boundary that they fall within.
 
 Multiple binning strategies are supported:
 
@@ -8,7 +10,7 @@ Multiple binning strategies are supported:
 
 You may supply a fixed min/max to set the outer bin boundaries. By default, if data values fall outside these boundaries they are set to +/- Infinity. If clamping is enabled, values outside the boundary are assigned to the first and last bins as appropriate (i.e., values over the max fall into the last bin). Establishing min/max bounds and clamping allows data values to be binned without revealing the true extent of the data, or whether any individual rows exceed those bounds.
 
-Examples
+## Examples
 
 | val |
 | --- |

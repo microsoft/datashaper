@@ -1,6 +1,8 @@
-**erase** clears cell values that match a specific value.
+# erase
 
-Example
+Clears cell values that match a specific value. The opposite of [impute](./impute.md)
+
+## Example
 
 | id  | name  |
 | --- | ----- |

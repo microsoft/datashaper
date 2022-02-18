@@ -1,6 +1,8 @@
-**rollup** performs aggregation operations on table columns. Normally the table should be [grouped](./groupby.md) first, otherwise the aggregation will be performed using all rows. Aggregation is commonly used to compute statistics over a list of values. To avoid interface complexity, this verb currently only supports aggregations that take a single column as the input.
+# rollup
 
-Operations
+Performs aggregation operations on table columns. Normally the table should be [grouped](./groupby.md) first, otherwise the aggregation will be performed using all rows. Aggregation is commonly used to compute statistics over a list of values. To avoid interface complexity, this verb currently only supports aggregations that take a single column as the input.
+
+## Operations
 
 - `any`: plucks a single value
 - `count`: counts the values
@@ -20,7 +22,7 @@ Operations
 - `array_agg`: collects all of the values in an array
 - `array_agg_distinct`: collects all of the unique values in an array
 
-Examples
+## Examples
 
 | id  | value |
 | --- | ----- |

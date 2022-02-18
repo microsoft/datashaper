@@ -1,6 +1,8 @@
-**join** combines two tables using relational inner join mechanics. A join key (column name) from the input and secondary table can be specified. Only rows with a match on each table are copied. All columns from the secondary table are joined with the input. If a secondary join key is not specified, the primary join key is used for both tables.
+# join
 
-Example
+Combines two tables using relational inner join mechanics. A join key (column name) from the input and secondary table can be specified. Only rows with a match on each table are copied. All columns from the secondary table are joined with the input. If a secondary join key is not specified, the primary join key is used for both tables.
+
+## Example
 
 input 1
 

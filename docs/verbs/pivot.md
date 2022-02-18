@@ -1,6 +1,8 @@
-**pivot** performs an inverse of the [fold](./fold.md) operation, aggregating output values. If you want a direct fold reversal that restores rows, use [unfold](./unfold.md). If an aggregation operation is not specified, `any` is used.
+# pivot
 
-Example
+Performs an inverse of the [fold](./fold.md) operation, aggregating output values. If you want a direct fold reversal that restores rows, use [unfold](./unfold.md). If an aggregation operation is not specified, `any` is used.
+
+## Example
 
 | key   | value |
 | ----- | ----- |
