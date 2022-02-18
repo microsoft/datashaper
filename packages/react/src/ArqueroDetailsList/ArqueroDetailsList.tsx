@@ -179,6 +179,9 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					selectionMode={selectionMode}
 					layoutMode={layoutMode}
 					groups={groups}
+					getKey={(_: any, index?: number) => {
+						return (index as number).toString()
+					}} //To be sure that every key is unique
 					groupProps={{
 						onRenderHeader: renderGroupHeader,
 					}}

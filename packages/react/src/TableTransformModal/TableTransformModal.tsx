@@ -8,7 +8,6 @@ import { memo } from 'react'
 import styled from 'styled-components'
 import { StepSelector, TransformModalProps } from '../index.js'
 import {
-	useHandleDismiss,
 	useHandleRunClick,
 	useHandleStepArgs,
 	useInternalStep,
@@ -46,17 +45,16 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			store,
 		)
 
-		const handleDismiss = useHandleDismiss(onDismiss, setInternal)
 		const StepArgs = useHandleStepArgs(internal, !!step)
 
-		const handleRunClick = useHandleRunClick(
-			handleDismiss,
-			internal,
-			onTransformRequested,
-		)
+		const handleRunClick = useHandleRunClick(internal, onTransformRequested)
 
 		return (
-			<Modal onDismiss={handleDismiss} {...rest}>
+			<Modal
+				onDismiss={onDismiss}
+				onDismissed={() => setInternal(undefined)}
+				{...rest}
+			>
 				<Header>
 					<Title>{step ? 'Edit step' : 'New step'}</Title>
 
@@ -64,7 +62,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 						<IconButton
 							iconProps={iconProps.cancel}
 							ariaLabel="Close popup modal"
-							onClick={handleDismiss}
+							onClick={() => onDismiss()}
 						/>
 					)}
 				</Header>
