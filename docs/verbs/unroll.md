@@ -1,6 +1,8 @@
-**unroll** unrolls array-valued cells into new rows. Similar to [spread](./spread.md), but generating new rows instead of columns. Akin to a denormalize operation - other column values in the row are copied to the new rows.
+# unroll
 
-Example
+Unrolls array-valued cells into new rows. Similar to [spread](./spread.md), but generating new rows instead of columns. Akin to a denormalize operation - other column values in the row are copied to the new rows.
+
+## Example
 
 | id  | values      |
 | --- | ----------- |

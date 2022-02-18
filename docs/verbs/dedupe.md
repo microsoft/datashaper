@@ -1,6 +1,8 @@
-**dedupe** deduplicates table rows. A list of column names can be supplied to create the key for duplicate checking, otherwise all columns are used In other words, the cell values for every supplied key must match to be considered a duplicate row.
+# dedupe
 
-Example
+Deduplicates table rows. A list of column names can be supplied to create the key for duplicate checking, otherwise all columns are used In other words, the cell values for every supplied key must match to be considered a duplicate row.
+
+## Example
 
 | name  | age |
 | ----- | --- |

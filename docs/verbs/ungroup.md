@@ -1,1 +1,3 @@
-**ungroup** removes any [grouping](./groupby.md) that has been applied to a table.
+# ungroup
+
+Removes any [grouping](./groupby.md) that has been applied to a table.

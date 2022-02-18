@@ -1,6 +1,8 @@
-**filter** creates a filtered table that only contains rows that match specified criteria. Filter can compare the values of an input column to a fixed value (e.g.) `row.value <= 10`), or it can compare to the value of another column in the same row (e.g., `row.value <= row.other_value`). Comparisons can be numeric (=, !=, <, >, etc.) or string-based (equals, contains, starts with, etc.).
+# filter
 
-Comparison operators
+Creates a filtered table that only contains rows that match specified criteria. Filter can compare the values of an input column to a fixed value (e.g.) `row.value <= 10`), or it can compare to the value of another column in the same row (e.g., `row.value <= row.other_value`). Comparisons can be numeric (=, !=, <, >, etc.) or string-based (equals, contains, starts with, etc.).
+
+## Comparison operators
 
 _numeric_
 
@@ -23,7 +25,7 @@ _string_
 - NotEmpty ('is not empty')
 - Empty ('is empty')
 
-Examples
+## Examples
 
 | fy20 | fy21 |
 | ---- | ---- |

@@ -1,6 +1,8 @@
-**fill** creates a new output column and fills it with a fixed value.
+# fill
 
-Example
+Creates a new output column and fills it with a fixed value.
+
+## Example
 
 | id  |
 | --- |
