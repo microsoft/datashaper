@@ -136,7 +136,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.12.3, @babel/core@npm:^7.14.3, @babel/core@npm:^7.14.8, @babel/core@npm:^7.17.2, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
+"@babel/core@npm:^7.1.0, @babel/core@npm:^7.12.3, @babel/core@npm:^7.14.3, @babel/core@npm:^7.14.8, @babel/core@npm:^7.17.5, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
   version: 7.17.5
   resolution: "@babel/core@npm:7.17.5"
   dependencies:
@@ -593,13 +593,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:packages/core"
   dependencies:
-    "@essex/scripts": ^20.3.0
+    "@essex/scripts": ^20.3.1
     "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.4.0
     "@types/lodash-es": ^4.17.6
     "@types/node": ^17.0.18
     arquero: ^4.8.8
-    core-js: ^3.21.1
     lodash: ^4.17.21
     lodash-es: ^4.17.21
     regenerator-runtime: ^0.13.9
@@ -618,10 +617,10 @@ __metadata:
   resolution: "@data-wrangling-components/project@workspace:."
   dependencies:
     "@essex/eslint-config": ^20.0.0
-    "@essex/eslint-plugin": ^20.0.0
-    "@essex/jest-config": ^20.1.1
+    "@essex/eslint-plugin": ^20.0.1
+    "@essex/jest-config": ^20.1.2
     "@essex/prettier-config": ^18.0.2
-    "@essex/scripts": ^20.3.0
+    "@essex/scripts": ^20.3.1
     "@types/jest": ^27.4.0
     "@types/node": ^17.0.18
     "@typescript-eslint/eslint-plugin": ^5.12.0
@@ -646,16 +645,16 @@ __metadata:
     "@data-wrangling-components/utilities": "workspace:packages/utilities"
     "@essex-js-toolkit/hooks": ^4.0.0
     "@essex-js-toolkit/themed-components": ^2.0.0
-    "@essex/scripts": ^20.3.0
+    "@essex/scripts": ^20.3.1
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.1.24
     "@fluentui/react": ^8.55.3
     "@fluentui/react-hooks": ^8.3.13
     "@fluentui/utilities": ^8.4.2
-    "@thematic/core": ^2.0.1
-    "@thematic/d3": ^2.0.1
-    "@thematic/fluent": ^3.0.1
-    "@thematic/react": ^2.0.1
+    "@thematic/core": ^2.0.3
+    "@thematic/d3": ^2.0.3
+    "@thematic/fluent": ^3.0.3
+    "@thematic/react": ^2.0.3
     "@types/d3-format": ^3.0.1
     "@types/d3-scale": ^4.0.2
     "@types/d3-selection": ^3.0.2
@@ -670,14 +669,12 @@ __metadata:
     "@types/styled-components": ^5.1.23
     "@uifabric/icons": ^7.6.2
     arquero: ^4.8.8
-    core-js: ^3.21.1
     d3-format: ^3.1.0
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
     d3-shape: ^3.1.0
     lodash: ^4.17.21
     lodash-es: ^4.17.21
-    office-ui-fabric-react: ^7.183.0
     react: ^17.0.2
     react-dom: ^17.0.2
     react-dropzone: ^12.0.4
@@ -698,7 +695,6 @@ __metadata:
     "@thematic/react": ^1.3.0
     "@uifabric/icons": ^7.5.23
     arquero: ^4.8.7
-    office-ui-fabric-react: ^7.173.1
     react: ^17.0.2
     react-dom: ^17.0.2
     styled-components: ^5.3.0
@@ -709,13 +705,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/utilities@workspace:packages/utilities"
   dependencies:
-    "@essex/scripts": ^20.3.0
+    "@essex/scripts": ^20.3.1
     "@essex/tsconfig-base": ^1.0.2
     "@essex/vite-config": ^19.0.3
     "@types/node": ^17.0.18
     "@zip.js/zip.js": ^2.4.4
     arquero: ^4.8.8
-    core-js: ^3.21.1
     regenerator-runtime: ^0.13.9
     typescript: ^4.5.5
   peerDependencies:
@@ -731,16 +726,16 @@ __metadata:
     "@data-wrangling-components/react": "workspace:packages/react"
     "@data-wrangling-components/utilities": "workspace:packages/utilities"
     "@essex-js-toolkit/themed-components": ^2.0.0
-    "@essex/scripts": ^20.3.0
-    "@essex/webpack-config": ^20.0.1
+    "@essex/scripts": ^20.3.1
+    "@essex/webpack-config": ^20.1.0
     "@fluentui/font-icons-mdl2": ^8.1.24
     "@fluentui/react": ^8.55.3
     "@fluentui/react-hooks": ^8.3.13
     "@fluentui/utilities": ^8.4.2
-    "@thematic/core": ^2.0.1
-    "@thematic/d3": ^2.0.1
-    "@thematic/fluent": ^3.0.1
-    "@thematic/react": ^2.0.1
+    "@thematic/core": ^2.0.3
+    "@thematic/d3": ^2.0.3
+    "@thematic/fluent": ^3.0.3
+    "@thematic/react": ^2.0.3
     "@types/lodash": ^4.14.178
     "@types/node": ^17.0.18
     "@types/react": ^17.0.39
@@ -752,9 +747,7 @@ __metadata:
     "@types/uuid": ^8.3.4
     "@uifabric/icons": ^7.6.2
     arquero: ^4.8.8
-    core-js: ^3.21.1
     file-loader: ^6.2.0
-    office-ui-fabric-react: ^7.183.0
     react: ^17.0.2
     react-animate-height: ^2.0.23
     react-dom: ^17.0.2
@@ -839,22 +832,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/hooks@npm:^1.1.5":
-  version: 1.1.5
-  resolution: "@essex-js-toolkit/hooks@npm:1.1.5"
-  dependencies:
-    "@essex-js-toolkit/toolbox": ^1.1.4
-    resize-observer-polyfill: ^1.5.1
-  peerDependencies:
-    "@types/node": "*"
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    core-js: "*"
-    react: ">=16.8.0"
-  checksum: 5f0c9b93862b2857b4263a9b42443b8b15e3749839b817edef9f3ce1832e2029ed4658f1c8b8ecd27e9e946b126f29b32d05ffa66933dd26e80f8307dbdaf049
-  languageName: node
-  linkType: hard
-
 "@essex-js-toolkit/themed-components@npm:^2.0.0":
   version: 2.0.0
   resolution: "@essex-js-toolkit/themed-components@npm:2.0.0"
@@ -901,15 +878,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/toolbox@npm:^1.1.4":
-  version: 1.1.5
-  resolution: "@essex-js-toolkit/toolbox@npm:1.1.5"
-  dependencies:
-    core-js: ^3.14.0
-  checksum: 861645c300e7f7a31032eeb01031f3c1734bf45b3c1b06c2bf979d7c45e89d898f86e1809fdd660c2c5454b5d6e2363eb960d13d08585e7354aa523d2096af7a
-  languageName: node
-  linkType: hard
-
 "@essex/eslint-config@npm:20.0.0, @essex/eslint-config@npm:^20.0.0":
   version: 20.0.0
   resolution: "@essex/eslint-config@npm:20.0.0"
@@ -922,24 +890,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/eslint-plugin@npm:20.0.0, @essex/eslint-plugin@npm:^20.0.0":
-  version: 20.0.0
-  resolution: "@essex/eslint-plugin@npm:20.0.0"
+"@essex/eslint-plugin@npm:20.0.1, @essex/eslint-plugin@npm:^20.0.1":
+  version: 20.0.1
+  resolution: "@essex/eslint-plugin@npm:20.0.1"
   dependencies:
-    "@babel/core": ^7.17.2
+    "@babel/core": ^7.17.5
     "@babel/types": ^7.17.0
     "@swc/cli": ^0.1.55
-    "@swc/core": ^1.2.138
-    "@typescript-eslint/eslint-plugin": ^5.11.0
-    "@typescript-eslint/parser": ^5.11.0
+    "@swc/core": ^1.2.142
+    "@typescript-eslint/eslint-plugin": ^5.12.0
+    "@typescript-eslint/parser": ^5.12.0
     babel-eslint: ^10.1.0
     confusing-browser-globals: ^1.0.11
-    eslint: ^8.8.0
+    eslint: ^8.9.0
     eslint-config-prettier: ^8.3.0
     eslint-import-resolver-node: ^0.3.6
     eslint-plugin-header: ^3.1.1
     eslint-plugin-import: ^2.25.4
-    eslint-plugin-jest: ^26.1.0
+    eslint-plugin-jest: ^26.1.1
     eslint-plugin-jsx-a11y: ^6.5.1
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
@@ -948,15 +916,15 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ">= 4.4.1"
     "@typescript-eslint/parser": ">= 4.4.1"
     eslint-import-resolver-node: ">= 0.3.4"
-  checksum: 8d40ad959e2a892aa26feaa8dfc1e1d2c289f77c9a989bda8500517af7a9ee55249f8eb492ffc88c2a9285bee52b971e4122536c716d4b28a0f2bfdf9c3ce182
+  checksum: b74ff6d572f9731bc356520145c80088d823411dd4296ad39b8b3f56e211d44d2c281df407573a8f11ab5ac575559b6e6bc8b4f7a31588917c15616d577c0bbc
   languageName: node
   linkType: hard
 
-"@essex/jest-config@npm:^20.1.1":
-  version: 20.1.1
-  resolution: "@essex/jest-config@npm:20.1.1"
+"@essex/jest-config@npm:^20.1.2":
+  version: 20.1.2
+  resolution: "@essex/jest-config@npm:20.1.2"
   dependencies:
-    "@swc/core": ^1.2.141
+    "@swc/core": ^1.2.142
     "@swc/jest": ^0.2.17
     "@types/jest": ^27.4.0
     identity-obj-proxy: ^3.0.0
@@ -965,7 +933,7 @@ __metadata:
   peerDependenciesMeta:
     jest:
       optional: true
-  checksum: efe9b94ff479faa794bc7cf3c1360672ed2244ba31d59d53f78c06f9823b4bb05ef8ec299bec4d6f2f702ba343f67a87bc1b7a3dfab3348842b08fc6f1f71cfb
+  checksum: 38157ffe0ddf2e25421daa59ada03a74a5063747b412cd318514032732fd82320fe44479a66cf7fe28f9147149feffa3792329f0eb365fc701a295902b2e7ad3
   languageName: node
   linkType: hard
 
@@ -976,15 +944,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/scripts@npm:^20.3.0":
-  version: 20.3.0
-  resolution: "@essex/scripts@npm:20.3.0"
+"@essex/scripts@npm:^20.3.1":
+  version: 20.3.1
+  resolution: "@essex/scripts@npm:20.3.1"
   dependencies:
     "@azure/storage-blob": ^12.8.0
     "@essex/eslint-config": 20.0.0
-    "@essex/eslint-plugin": 20.0.0
-    "@essex/shellrunner": 20.0.0
-    "@swc/core": ^1.2.141
+    "@essex/eslint-plugin": 20.0.1
+    "@essex/shellrunner": 20.0.1
+    "@swc/core": ^1.2.142
     "@typescript-eslint/eslint-plugin": ^5.12.0
     "@typescript-eslint/parser": ^5.12.0
     archiver: ^5.3.0
@@ -1007,7 +975,7 @@ __metadata:
     typescript: ^4.5.5
   peerDependencies:
     "@essex/eslint-config": ">=20.0.0"
-    "@essex/jest-config": ">=20.1.1"
+    "@essex/jest-config": ">=20.1.2"
     "@essex/prettier-config": ">=18.0.2"
     "@typescript-eslint/eslint-plugin": ">= 4.4.1"
     "@typescript-eslint/parser": ">= 4.4.1"
@@ -1040,17 +1008,17 @@ __metadata:
   bin:
     essex: ./lib/index.mjs
     essex-scripts: ./lib/index.mjs
-  checksum: a5ae4cab4037d1c92e06c72bd7bd1351eaa9873486b548e3f3aa38bfa8227ccb8a5d2cab50324094d64d157b28074bef0e814ac203f03583f0c320cf58fb9740
+  checksum: 4a21e61f49d91e54bd9a4b20166ccf3012209570aacd9f3b337041ad4b7d9a00eaa2e747b92e797cf6b1c7c167e60d709cc6e593ec45a4ab10ff8d682444277a
   languageName: node
   linkType: hard
 
-"@essex/shellrunner@npm:20.0.0":
-  version: 20.0.0
-  resolution: "@essex/shellrunner@npm:20.0.0"
+"@essex/shellrunner@npm:20.0.1":
+  version: 20.0.1
+  resolution: "@essex/shellrunner@npm:20.0.1"
   dependencies:
     cross-spawn: ^7.0.3
     debug: ^4.3.3
-  checksum: 812f52f6ed9a57fbea501d2766b7720e63f122193aac684806b79574bdba544872352ac399acf37d61c640083d562116b212c4d831f210c42f82ac494448d63e
+  checksum: 8da89d8141057eb91111f76220cedc2957ce86201ddb1248c15b6b0185cbd0551880da2091af3b7413460e06e0c82fc27de2214ee1a80f2bb0d119c6c07452d3
   languageName: node
   linkType: hard
 
@@ -1074,40 +1042,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/webpack-config@npm:^20.0.1":
-  version: 20.0.1
-  resolution: "@essex/webpack-config@npm:20.0.1"
+"@essex/webpack-config@npm:^20.1.0":
+  version: 20.1.0
+  resolution: "@essex/webpack-config@npm:20.1.0"
   dependencies:
     "@swc/cli": ^0.1.55
-    "@swc/core": ^1.2.141
+    "@swc/core": ^1.2.142
     "@types/webpack": ^5.28.0
     "@types/webpack-dev-server": ^4.7.2
     css-loader: ^6.6.0
     debug: ^4.3.3
     fork-ts-checker-webpack-plugin: ^7.2.1
     html-webpack-plugin: ^5.5.0
+    lodash: ^4.17.21
     mini-css-extract-plugin: ^2.5.3
     resolve-typescript-plugin: ^1.1.5
     sass-loader: ^12.6.0
     style-loader: ^3.3.1
     swc-loader: ^0.1.15
     tsconfig-paths-webpack-plugin: ^3.5.2
-    webpack: ^5.69.0
+    tslib: ^2.3.1
+    webpack: ^5.69.1
     webpack-dev-server: ^4.7.4
   peerDependencies:
     typescript: ">= 4 <5"
     webpack: ">= 4"
-  checksum: 2071912fead4c1868ea1ae68a80b857c80dc2bb18fd81758dec00a621a045c5feff0c9cc860f6a61b8be05088040d26fa821952f6b08363383cd66c3e153e28c
-  languageName: node
-  linkType: hard
-
-"@fluentui/date-time-utilities@npm:^7.9.1":
-  version: 7.9.1
-  resolution: "@fluentui/date-time-utilities@npm:7.9.1"
-  dependencies:
-    "@uifabric/set-version": ^7.0.24
-    tslib: ^1.10.0
-  checksum: 580907b1a63cc9215ae93ea450125d7c56b671cf5f8f246652a591ac37067a9fb87aea87c50ac3d2a4db48c0abc79f35fa6fce0db4431f4a001068729a39a92c
+  checksum: 71369ca53e2330e09e3ae3eaf3567276a95dbfc780750df35cc3318ab5248eb27b530b054e66299e2e4573f2d61e94b5222e0eba30be1e7cdd9a9a843abadeeb
   languageName: node
   linkType: hard
 
@@ -1168,15 +1128,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/keyboard-key@npm:^0.2.12":
-  version: 0.2.17
-  resolution: "@fluentui/keyboard-key@npm:0.2.17"
-  dependencies:
-    tslib: ^1.10.0
-  checksum: 4f916d211bf208d687a1f464098c96e12b99d45c6095ec37463fd90bbe5f49903116f2b3c7099295e71b24ece1722b4234d2a9421e06df35d7b34bb61df606bf
-  languageName: node
-  linkType: hard
-
 "@fluentui/keyboard-key@npm:^0.3.5":
   version: 0.3.5
   resolution: "@fluentui/keyboard-key@npm:0.3.5"
@@ -1193,25 +1144,6 @@ __metadata:
     "@fluentui/set-version": ^8.1.5
     tslib: ^2.1.0
   checksum: 8d810e5f9cedad3d4c8f98f92a2b29fcf9045ca5a4c681ea5f66aedc8d61cbeaba431942238725f661ce3b8de8b3db9c6151c8765752c52d394bd96f335f1380
-  languageName: node
-  linkType: hard
-
-"@fluentui/react-focus@npm:^7.18.1":
-  version: 7.18.1
-  resolution: "@fluentui/react-focus@npm:7.18.1"
-  dependencies:
-    "@fluentui/keyboard-key": ^0.2.12
-    "@uifabric/merge-styles": ^7.19.2
-    "@uifabric/set-version": ^7.0.24
-    "@uifabric/styling": ^7.20.0
-    "@uifabric/utilities": ^7.33.5
-    tslib: ^1.10.0
-  peerDependencies:
-    "@types/react": ">=16.8.0 <17.0.0"
-    "@types/react-dom": ">=16.8.0 <17.0.0"
-    react: ">=16.8.0 <17.0.0"
-    react-dom: ">=16.8.0 <17.0.0"
-  checksum: 7b807bdb78df8f26cf2fc1253499f5fa8fc44c46a9dc37765adc3ffca864273a226fd7d1de05b02c2e34780aaf44ce9a07617622b2b4d45aebba58a94bfe8dd5
   languageName: node
   linkType: hard
 
@@ -1244,21 +1176,6 @@ __metadata:
     "@types/react": ">=16.8.0 <18.0.0"
     react: ">=16.8.0 <18.0.0"
   checksum: ce5fb92e7d2453c430cd1c2044755236e506ffaa13cb88dee3d7c0012f376b44b9bfd3f1b8e5953c5f5c22729beabe9f23f40fcbb9ef317639f8c04d0d884e95
-  languageName: node
-  linkType: hard
-
-"@fluentui/react-window-provider@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@fluentui/react-window-provider@npm:1.0.2"
-  dependencies:
-    "@uifabric/set-version": ^7.0.24
-    tslib: ^1.10.0
-  peerDependencies:
-    "@types/react": ">=16.8.0 <17.0.0"
-    "@types/react-dom": ">=16.8.0 <17.0.0"
-    react: ">=16.8.0 <17.0.0"
-    react-dom: ">=16.8.0 <17.0.0"
-  checksum: 4acfae566006d300fb4170dfda9c5a73a21d458d145daaae79a63a499685c94cf68d9a6c2087d23b30c99a3625cddfc90f1439942389c8d63a998cc8eae64a18
   languageName: node
   linkType: hard
 
@@ -1760,114 +1677,114 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-android-arm-eabi@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-android-arm-eabi@npm:1.2.141"
+"@swc/core-android-arm-eabi@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-android-arm-eabi@npm:1.2.142"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-android-arm64@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-android-arm64@npm:1.2.141"
+"@swc/core-android-arm64@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-android-arm64@npm:1.2.142"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-darwin-arm64@npm:1.2.141"
+"@swc/core-darwin-arm64@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-darwin-arm64@npm:1.2.142"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-darwin-x64@npm:1.2.141"
+"@swc/core-darwin-x64@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-darwin-x64@npm:1.2.142"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-freebsd-x64@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-freebsd-x64@npm:1.2.141"
+"@swc/core-freebsd-x64@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-freebsd-x64@npm:1.2.142"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.141"
+"@swc/core-linux-arm-gnueabihf@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.142"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.2.141"
+"@swc/core-linux-arm64-gnu@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.2.142"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-linux-arm64-musl@npm:1.2.141"
+"@swc/core-linux-arm64-musl@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-linux-arm64-musl@npm:1.2.142"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-linux-x64-gnu@npm:1.2.141"
+"@swc/core-linux-x64-gnu@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-linux-x64-gnu@npm:1.2.142"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-linux-x64-musl@npm:1.2.141"
+"@swc/core-linux-x64-musl@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-linux-x64-musl@npm:1.2.142"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.2.141"
+"@swc/core-win32-arm64-msvc@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.2.142"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.2.141"
+"@swc/core-win32-ia32-msvc@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.2.142"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core-win32-x64-msvc@npm:1.2.141"
+"@swc/core-win32-x64-msvc@npm:1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core-win32-x64-msvc@npm:1.2.142"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.2.138, @swc/core@npm:^1.2.141":
-  version: 1.2.141
-  resolution: "@swc/core@npm:1.2.141"
+"@swc/core@npm:^1.2.142":
+  version: 1.2.142
+  resolution: "@swc/core@npm:1.2.142"
   dependencies:
-    "@swc/core-android-arm-eabi": 1.2.141
-    "@swc/core-android-arm64": 1.2.141
-    "@swc/core-darwin-arm64": 1.2.141
-    "@swc/core-darwin-x64": 1.2.141
-    "@swc/core-freebsd-x64": 1.2.141
-    "@swc/core-linux-arm-gnueabihf": 1.2.141
-    "@swc/core-linux-arm64-gnu": 1.2.141
-    "@swc/core-linux-arm64-musl": 1.2.141
-    "@swc/core-linux-x64-gnu": 1.2.141
-    "@swc/core-linux-x64-musl": 1.2.141
-    "@swc/core-win32-arm64-msvc": 1.2.141
-    "@swc/core-win32-ia32-msvc": 1.2.141
-    "@swc/core-win32-x64-msvc": 1.2.141
+    "@swc/core-android-arm-eabi": 1.2.142
+    "@swc/core-android-arm64": 1.2.142
+    "@swc/core-darwin-arm64": 1.2.142
+    "@swc/core-darwin-x64": 1.2.142
+    "@swc/core-freebsd-x64": 1.2.142
+    "@swc/core-linux-arm-gnueabihf": 1.2.142
+    "@swc/core-linux-arm64-gnu": 1.2.142
+    "@swc/core-linux-arm64-musl": 1.2.142
+    "@swc/core-linux-x64-gnu": 1.2.142
+    "@swc/core-linux-x64-musl": 1.2.142
+    "@swc/core-win32-arm64-msvc": 1.2.142
+    "@swc/core-win32-ia32-msvc": 1.2.142
+    "@swc/core-win32-x64-msvc": 1.2.142
   dependenciesMeta:
     "@swc/core-android-arm-eabi":
       optional: true
@@ -1895,7 +1812,7 @@ __metadata:
       optional: true
     "@swc/core-win32-x64-msvc":
       optional: true
-  checksum: b4795e397bca0d896b8a6b7341ee425b84518c53d9ef560eba33fdea564c1144bb356421d2e5505fa4f27e99139e205c3e0038c62fa0a6879ce0f51d2162c36d
+  checksum: aaaf9fc63d804339a826b4a8884b00a36c761872d2b1cc587bc58d10e2960cf481184d93cef2a9b6e09d25e474f7d124dfea266097bcf2d221472cd52d506d51
   languageName: node
   linkType: hard
 
@@ -1910,9 +1827,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/color@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@thematic/color@npm:2.0.1"
+"@thematic/color@npm:2.0.3":
+  version: 2.0.3
+  resolution: "@thematic/color@npm:2.0.3"
   dependencies:
     chroma-js: ^2.4.2
     color-blind: ^0.1.1
@@ -1925,15 +1842,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 2747f15b2277f98d596e49b8f795c44ae4b34c9b7f7d4d77c404512ff05ea20158c846da84da76e66fdd382b5e5901f477687cf2ff75a15db74ae7a30486357c
+  checksum: 67dc12bf0429a0b70c5e23f7156b0dcdb4d5b7dbfc770418f3514f72936c94857abd8e157b05603f84427794476637209581e2389eb9f1e63d9ccd900a2c4b8f
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:2.0.1, @thematic/core@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@thematic/core@npm:2.0.1"
+"@thematic/core@npm:2.0.3, @thematic/core@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@thematic/core@npm:2.0.3"
   dependencies:
-    "@thematic/color": 2.0.1
+    "@thematic/color": 2.0.3
     d3-scale: ^3.3.0
     lodash-es: ^4.17.21
     murmurhash-js: ^1.0.0
@@ -1945,15 +1862,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 111b2ecf36159e13cb44675bd2a4da4567e9102174bec837697eb1ea4ce04536784f87c813194614185dbee4d11eedec044f863eaa15a3a55054a8e28fbdcea7
+  checksum: 6fdab6ead90c429a78b4efe646534d64547aa0863bf6ca19086c58dbe855fcbf17f02fda76c222f346113024f45214b141c85cede4fcde7026389102d16402a9
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@thematic/d3@npm:2.0.1"
+"@thematic/d3@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@thematic/d3@npm:2.0.3"
   dependencies:
-    "@thematic/core": 2.0.1
+    "@thematic/core": 2.0.3
     d3-axis: ^1.0.12
     d3-selection: ^1.4.2
   peerDependencies:
@@ -1967,18 +1884,18 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: b1c875b03507026d84b8014e54a601a76f6ec029f6cd7b96cf64ceb7735e328ced1a28acc8ee5d5d334569bbd993b7fb9c9bbec1c2d6a8a722727ff622883f7c
+  checksum: e9b01ef6aaba6a972a1be7953e4612a5fb9435e56c4a5bdef5c8ffb610644da46c455752ac51b8009399595b083561d5239c1661d06ceaae2a3b95cea8718ffa
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@thematic/fluent@npm:3.0.1"
+"@thematic/fluent@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@thematic/fluent@npm:3.0.3"
   dependencies:
-    "@essex-js-toolkit/hooks": ^1.1.5
-    "@thematic/color": 2.0.1
-    "@thematic/core": 2.0.1
-    "@thematic/react": 2.0.1
+    "@essex-js-toolkit/hooks": ^4.0.0
+    "@thematic/color": 2.0.3
+    "@thematic/core": 2.0.3
+    "@thematic/react": 2.0.3
     d3-scale: ^3.3.0
   peerDependencies:
     "@fluentui/font-icons-mdl2": ">= 8"
@@ -1997,16 +1914,16 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 04f98cbc2151a6a6c7c491712d64563a944376dfbfa8d2d59f0d601b08c89825aee0d5dacf815b4e98cd9a5b65bc6bce16ee5727e43984342e440ba5651d0d95
+  checksum: 9263d4d861ea6e20253f5b11f9a9567d402adb78aae38132c896c14d973b6aa75eba5351d04640045307d54959e98f6fd87f6821e864b9212059dac32dbec02d
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:2.0.1, @thematic/react@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@thematic/react@npm:2.0.1"
+"@thematic/react@npm:2.0.3, @thematic/react@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@thematic/react@npm:2.0.3"
   dependencies:
-    "@thematic/color": 2.0.1
-    "@thematic/core": 2.0.1
+    "@thematic/color": 2.0.3
+    "@thematic/core": 2.0.3
   peerDependencies:
     "@types/node": "*"
     "@types/react": ">= 17"
@@ -2018,7 +1935,7 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 7306bfd82df82e75f66ed718e387d2e266df57abad2ae62c40d3aa575ba76315869247adcbee228e92671339ee284fbf0a1912c289ef9440155154053f8d39bb
+  checksum: 3c39299e3bb6bc4c833fe5814cad4c09d1ea9c42e852c832f4f375b5bdea2ad4c97873ffac920178a4f378eb5d119cd648d089159fe1d23b71f5f5bd61d8afce
   languageName: node
   linkType: hard
 
@@ -2617,7 +2534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.11.0, @typescript-eslint/eslint-plugin@npm:^5.12.0":
+"@typescript-eslint/eslint-plugin@npm:^5.12.0":
   version: 5.12.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.12.0"
   dependencies:
@@ -2640,7 +2557,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.11.0, @typescript-eslint/parser@npm:^5.12.0":
+"@typescript-eslint/parser@npm:^5.12.0":
   version: 5.12.0
   resolution: "@typescript-eslint/parser@npm:5.12.0"
   dependencies:
@@ -2734,24 +2651,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uifabric/foundation@npm:^7.10.1":
-  version: 7.10.1
-  resolution: "@uifabric/foundation@npm:7.10.1"
-  dependencies:
-    "@uifabric/merge-styles": ^7.19.2
-    "@uifabric/set-version": ^7.0.24
-    "@uifabric/styling": ^7.20.0
-    "@uifabric/utilities": ^7.33.5
-    tslib: ^1.10.0
-  peerDependencies:
-    "@types/react": ">=16.8.0 <17.0.0"
-    "@types/react-dom": ">=16.8.0 <17.0.0"
-    react: ">=16.8.0 <17.0.0"
-    react-dom: ">=16.8.0 <17.0.0"
-  checksum: 7be26d614573d3e8c774cefac3d26dd6c175ba401da3e89f5086687a8bf35bd54d39f95788417eec1ade1adc94b0621f6ef840e84df0609ea7df5c211919ef20
-  languageName: node
-  linkType: hard
-
 "@uifabric/icons@npm:^7.6.2":
   version: 7.6.2
   resolution: "@uifabric/icons@npm:7.6.2"
@@ -2770,23 +2669,6 @@ __metadata:
     "@uifabric/set-version": ^7.0.24
     tslib: ^1.10.0
   checksum: 125bdf64c56220b288ced873b8a6a9e209aa7a025eba4a8aa29208a9c6a7f2bd571f398e47d0a96008a5510318074f87bb8d0a51283bd6f3f54241fbcbcc0d23
-  languageName: node
-  linkType: hard
-
-"@uifabric/react-hooks@npm:^7.14.0":
-  version: 7.14.0
-  resolution: "@uifabric/react-hooks@npm:7.14.0"
-  dependencies:
-    "@fluentui/react-window-provider": ^1.0.2
-    "@uifabric/set-version": ^7.0.24
-    "@uifabric/utilities": ^7.33.5
-    tslib: ^1.10.0
-  peerDependencies:
-    "@types/react": ">=16.8.0 <17.0.0"
-    "@types/react-dom": ">=16.8.0 <17.0.0"
-    react: ">=16.8.0 <17.0.0"
-    react-dom: ">=16.8.0 <17.0.0"
-  checksum: b4144957e30dbdc27dba6e3de2b89f24d5879f263a83c33305a745e363194c3451629f152375bdd3bef57d8fa9875f1cddc0bce572f5cb916fc8ec15d31d6f62
   languageName: node
   linkType: hard
 
@@ -4326,7 +4208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:*, core-js@npm:^3.14.0, core-js@npm:^3.21.1":
+"core-js@npm:^3.21.1":
   version: 3.21.1
   resolution: "core-js@npm:3.21.1"
   checksum: d68eddd831340ad5b24ac29c72fda022a43b17f194c4278b6b875a843283d316502cb4abd07f28631d6ebc4387f66aa06e2b1b3c8fd7e08096a751b5c63f6889
@@ -5322,7 +5204,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:^26.1.0":
+"eslint-plugin-jest@npm:^26.1.1":
   version: 26.1.1
   resolution: "eslint-plugin-jest@npm:26.1.1"
   dependencies:
@@ -5446,7 +5328,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.9.0, eslint@npm:^8.8.0, eslint@npm:^8.9.0":
+"eslint@npm:8.9.0, eslint@npm:^8.9.0":
   version: 8.9.0
   resolution: "eslint@npm:8.9.0"
   dependencies:
@@ -8614,32 +8496,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"office-ui-fabric-react@npm:^7.183.0":
-  version: 7.183.0
-  resolution: "office-ui-fabric-react@npm:7.183.0"
-  dependencies:
-    "@fluentui/date-time-utilities": ^7.9.1
-    "@fluentui/react-focus": ^7.18.1
-    "@fluentui/react-window-provider": ^1.0.2
-    "@microsoft/load-themed-styles": ^1.10.26
-    "@uifabric/foundation": ^7.10.1
-    "@uifabric/icons": ^7.6.2
-    "@uifabric/merge-styles": ^7.19.2
-    "@uifabric/react-hooks": ^7.14.0
-    "@uifabric/set-version": ^7.0.24
-    "@uifabric/styling": ^7.20.0
-    "@uifabric/utilities": ^7.33.5
-    prop-types: ^15.7.2
-    tslib: ^1.10.0
-  peerDependencies:
-    "@types/react": ">=16.8.0 <17.0.0"
-    "@types/react-dom": ">=16.8.0 <17.0.0"
-    react: ">=16.8.0 <17.0.0"
-    react-dom: ">=16.8.0 <17.0.0"
-  checksum: a6f54cf530493b8e3ce9d688b00ac91fdd3671a7cea52b43195e2f5b4e094a230a203125867163b99299de7e0974c96109ee9d89297c90e27ce204c0b4ce3c7a
-  languageName: node
-  linkType: hard
-
 "on-finished@npm:~2.3.0":
   version: 2.3.0
   resolution: "on-finished@npm:2.3.0"
@@ -9543,13 +9399,6 @@ __metadata:
   version: 1.0.0
   resolution: "requires-port@npm:1.0.0"
   checksum: eee0e303adffb69be55d1a214e415cf42b7441ae858c76dfc5353148644f6fd6e698926fc4643f510d5c126d12a705e7c8ed7e38061113bdf37547ab356797ff
-  languageName: node
-  linkType: hard
-
-"resize-observer-polyfill@npm:^1.5.1":
-  version: 1.5.1
-  resolution: "resize-observer-polyfill@npm:1.5.1"
-  checksum: 57e7f79489867b00ba43c9c051524a5c8f162a61d5547e99333549afc23e15c44fd43f2f318ea0261ea98c0eb3158cca261e6f48d66e1ed1cd1f340a43977094
   languageName: node
   linkType: hard
 
@@ -10753,7 +10602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.3.1, tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.2.0":
+"tslib@npm:2.3.1, tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.2.0, tslib@npm:^2.3.1":
   version: 2.3.1
   resolution: "tslib@npm:2.3.1"
   checksum: de17a98d4614481f7fcb5cd53ffc1aaf8654313be0291e1bfaee4b4bb31a20494b7d218ff2e15017883e8ea9626599b3b0e0229c18383ba9dce89da2adf15cb9
@@ -11239,7 +11088,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5, webpack@npm:^5.69.0, webpack@npm:^5.69.1":
+"webpack@npm:^5, webpack@npm:^5.69.1":
   version: 5.69.1
   resolution: "webpack@npm:5.69.1"
   dependencies:
