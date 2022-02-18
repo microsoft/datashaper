@@ -1,4 +1,6 @@
-**select** selects only the specified list of columns into a new table.
+# select
+
+Selects only the specified list of columns into a new table.
 
 Example
 

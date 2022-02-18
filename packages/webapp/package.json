@@ -4,12 +4,12 @@
 	"version": "1.8.1",
 	"main": "src/index.ts",
 	"scripts": {
-		"clean": "essex clean build",
-		"build": "tsc && webpack",
+		"clean": "essex clean build dist lib node_modules",
+		"build": "tsc && webpack && shx cp -r public/* build/",
 		"start": "webpack-dev-server",
 		"start:client": "yarn start",
 		"build:client": "yarn build && yarn archive",
-		"archive": "essex zip --baseDir dist deploy.zip '**/*'",
+		"archive": "essex zip --baseDir build deploy.zip '**/*'",
 		"archive:client": "yarn archive"
 	},
 	"dependencies": {
@@ -51,6 +51,7 @@
 		"@types/styled-components": "^5.1.22",
 		"@types/uuid": "^8.3.4",
 		"core-js": "^3.21.1",
+		"shx": "^0.3.4",
 		"typescript": "^4.5.5",
 		"webpack": "^5.69.0",
 		"webpack-cli": "^4.9.2",

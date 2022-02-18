@@ -33,8 +33,8 @@ export function useBusinessLogic(): {
 		const f = async () => {
 			await Promise.all([
 				fileCollection.add('data/companies.csv'),
-				fileCollection.add('data/products.csv'),
 				fileCollection.add('data/companies2.csv'),
+				fileCollection.add('data/products.csv'),
 				fileCollection.add('data/stocks.csv'),
 			])
 			updateFileCollection(fileCollection)

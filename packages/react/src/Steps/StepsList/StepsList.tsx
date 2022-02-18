@@ -4,8 +4,8 @@
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { DialogConfirm } from '@essex-js-toolkit/themed-components'
-import { IconButton, TooltipHost } from '@fluentui/react'
-import React, { memo } from 'react'
+import { DefaultButton } from '@fluentui/react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import { DetailText } from '../../PrepareData/DetailText/index.js'
 import { StepCard, TableTransformModal, useDeleteConfirm } from '../../index.js'
@@ -59,17 +59,27 @@ export const StepsList: React.FC<{
 				)
 			})}
 
+			{!steps?.length && (
+				<DetailText
+					style={{
+						width: 120,
+						textAlign: 'center',
+						marginLeft: 20,
+						marginRight: 20,
+					}}
+					text="Add your first preparation step:"
+				/>
+			)}
+
 			{onSave && (
 				<ButtonContainer>
-					{!steps?.length && (
-						<DetailText text="Add here the first preparation step" />
-					)}
-					<TooltipHost content="Add step" setAriaDescribedBy={false}>
-						<IconButton
-							iconProps={iconProps.add}
-							onClick={showTableModal}
-						></IconButton>
-					</TooltipHost>
+					<DefaultButton
+						styles={addButtonStyles}
+						iconProps={iconProps.add}
+						onClick={showTableModal}
+					>
+						Add step
+					</DefaultButton>
 				</ButtonContainer>
 			)}
 
@@ -85,7 +95,7 @@ export const StepsList: React.FC<{
 				<DialogConfirm
 					toggle={toggleDeleteModalOpen}
 					title="Are you sure you want to delete this step?"
-					subText="You will lose all the table transformations made after this step."
+					subText="You will also lose any table transformations made after this step."
 					show={isDeleteModalOpen}
 					onConfirm={onConfirmDelete}
 				/>
@@ -94,6 +104,8 @@ export const StepsList: React.FC<{
 	)
 })
 
+const addButtonStyles = { root: { padding: '0 4px 0 6px' } }
+
 const iconProps = {
 	add: { iconName: 'Add' },
 }
@@ -101,7 +113,7 @@ const iconProps = {
 const Container = styled.div`
 	display: flex;
 	overflow: auto;
-	column-gap: 8px;
+	column-gap: 12px;
 `
 
 const ButtonContainer = styled.div`

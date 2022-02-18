@@ -1,6 +1,8 @@
-**concat** appends additional tables to the input table, mimicking SQL UNION_ALL. Note that only columns from the input table are retained in the concatenated output.
+# concat
 
-Example
+Appends additional tables to the input table, mimicking SQL UNION_ALL. Note that only columns from the input table are retained in the concatenated output.
+
+## Example
 
 input 1
 

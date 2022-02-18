@@ -1,6 +1,8 @@
-**fold** takes a list of input columns and folds them into a new pair of `[key, value]` columns. The output name of the `key` and `value` columns can be customized.
+# fold
 
-Example
+Takes a list of input columns and folds them into a new pair of `[key, value]` columns. The output name of the `key` and `value` columns can be customized. Use [unfold](./unfold.md) to reverse a fold operation, or [pivot](./pivot.md) to invert it with aggregation.
+
+## Example
 
 | id  | name  |
 | --- | ----- |
