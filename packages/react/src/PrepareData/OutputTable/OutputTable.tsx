@@ -28,27 +28,25 @@ export const OutputTable: React.FC<{
 	return (
 		<>
 			{output && (
-				<>
-					<Container>
-						<ArqueroTableHeader
+				<Container>
+					<ArqueroTableHeader
+						table={output}
+						farCommands={onTransform && commands}
+					/>
+					<TableContainer>
+						<ArqueroDetailsList
+							features={{
+								...tableFeatures,
+								commandBar: headerCommandBar ? headerCommandBar : undefined,
+							}}
+							showColumnBorders
 							table={output}
-							farCommands={onTransform && commands}
+							compact
+							isHeadersFixed
+							isSortable
 						/>
-						<TableContainer>
-							<ArqueroDetailsList
-								features={{
-									...tableFeatures,
-									commandBar: headerCommandBar ? headerCommandBar : undefined,
-								}}
-								showColumnBorders
-								table={output}
-								compact
-								isHeadersFixed
-								isSortable
-							/>
-						</TableContainer>
-					</Container>
-				</>
+					</TableContainer>
+				</Container>
 			)}
 		</>
 	)
@@ -56,6 +54,7 @@ export const OutputTable: React.FC<{
 
 const Container = styled.div`
 	width: 100%;
+	min-width: 300px;
 `
 
 const TableContainer = styled.div`

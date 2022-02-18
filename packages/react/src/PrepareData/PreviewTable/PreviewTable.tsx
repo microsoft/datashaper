@@ -79,5 +79,5 @@ const Container = styled.div`
 	flex-direction: column;
 	height: 99%;
 	margin-left: 20px;
-	border: 1px solid ${({ theme }) => theme.application().faint().hex()}};
+	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `

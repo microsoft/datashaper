@@ -58,6 +58,7 @@ const CardContent = styled.div`
 `
 
 const Card = styled(DocumentCard)`
+	min-width: fit-content;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
