@@ -7,6 +7,7 @@ import {
 	TableStore,
 	introspect,
 	TableMetadata,
+	TableContainer,
 } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -36,8 +37,8 @@ export function useBusinessLogic(
 	selectedTableName?: string
 } {
 	const [selectedTableName, setSelectedTableName] = useState<string>()
-	const [storedTables, setStoredTables] = useState<Map<string, ColumnTable>>(
-		new Map<string, ColumnTable>(),
+	const [storedTables, setStoredTables] = useState<Map<string, TableContainer>>(
+		new Map<string, TableContainer>(),
 	)
 	const store = useStore()
 	const pipeline = usePipeline(store)
@@ -45,7 +46,7 @@ export function useBusinessLogic(
 	const addNewTables = useAddNewTables(store, setStoredTables)
 
 	const selectedTable = useMemo((): ColumnTable | undefined => {
-		return storedTables.get(selectedTableName ?? '')
+		return storedTables.get(selectedTableName ?? '')?.table
 	}, [selectedTableName, storedTables])
 
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
@@ -54,7 +55,7 @@ export function useBusinessLogic(
 
 	const output = useMemo((): ColumnTable | undefined => {
 		const name = pipeline?.last?.output
-		return storedTables.get(name)
+		return storedTables.get(name)?.table
 	}, [pipeline, storedTables])
 
 	const lastTableName = useMemo((): string => {

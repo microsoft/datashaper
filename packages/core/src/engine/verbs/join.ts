@@ -19,8 +19,8 @@ export async function join(
 	const { input, args } = step
 	const { other, on } = args as JoinArgs
 	const [inputTable, otherTable] = await Promise.all([
-		store.get(input),
-		store.get(other),
+		store.table(input),
+		store.table(other),
 	])
 	return inputTable.join(otherTable, on)
 }

@@ -18,7 +18,7 @@ export async function orderby(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input, args } = step
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const { orders } = args as OrderbyArgs
 	// format keys in arquero-compatible format

@@ -22,7 +22,7 @@ export async function erase(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { value, column } = args as EraseArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const matrix: RowObject[] = inputTable.objects()
 

@@ -19,6 +19,6 @@ export async function unroll(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { columns } = args as UnrollArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 	return inputTable.unroll(columns)
 }

@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import type {
@@ -32,7 +31,7 @@ export class DefaultTableStore implements TableStore {
 		this._tableListeners = {}
 	}
 
-	async get(id: string): Promise<ColumnTable> {
+	async get(id: string): Promise<TableContainer> {
 		const container = this._tables.get(id)
 		if (!container) {
 			throw new Error(`No table with id '${id}' found in store.`)
@@ -50,7 +49,12 @@ export class DefaultTableStore implements TableStore {
 				table,
 			})
 		}
-		return table
+		return container
+	}
+
+	async table(id: string): Promise<ColumnTable> {
+		const container = await this.get(id)
+		return container.table!
 	}
 
 	set(container: TableContainer): void {
@@ -75,20 +79,19 @@ export class DefaultTableStore implements TableStore {
 		return keys.filter(filter || (() => true))
 	}
 
-	async toMap(): Promise<Map<string, ColumnTable>> {
-		const map = new Map<string, ColumnTable>()
+	async toMap(): Promise<Map<string, TableContainer>> {
+		const map = new Map<string, TableContainer>()
 		for (const container of this._tables) {
 			const [id] = container
-			const table = await this.get(id)
-			map.set(id, table)
+			const resolved = await this.get(id)
+			map.set(id, resolved)
 		}
 		return map
 	}
 
 	async toArray(): Promise<TableContainer[]> {
-		// TODO: this should be async to resolve the tables first
-		// need to align return with toMap
-		return Array.from(this._tables.values())
+		const map = await this.toMap()
+		return Array.from(map.values())
 	}
 
 	listen(id: string, listener: ListenerFunction): void {
@@ -105,9 +108,9 @@ export class DefaultTableStore implements TableStore {
 	private onChange(id?: string): void {
 		const fn = async () => {
 			if (id) {
-				const table = await this.get(id)
+				const container = await this.get(id)
 				const listener = this._tableListeners[id]
-				listener && listener(table)
+				listener && listener(container)
 			}
 			this._changeListeners.forEach(l => l())
 		}
@@ -118,8 +121,8 @@ export class DefaultTableStore implements TableStore {
 		const ids = this.list()
 		for (let i = 0; i < ids.length; i++) {
 			console.log(ids[i])
-			const table = await this.get(ids[i] as string)
-			table.print()
+			const container = await this.get(ids[i] as string)
+			container.table?.print()
 		}
 	}
 

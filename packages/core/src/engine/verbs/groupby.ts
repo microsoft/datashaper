@@ -19,6 +19,6 @@ export async function groupby(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { columns } = args as GroupbyArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 	return inputTable.groupby(columns)
 }

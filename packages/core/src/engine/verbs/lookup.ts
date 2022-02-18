@@ -19,8 +19,8 @@ export async function lookup(
 	const { input, args } = step
 	const { other, on = [], columns } = args as LookupArgs
 	const [inputTable, otherTable] = await Promise.all([
-		store.get(input),
-		store.get(other),
+		store.table(input),
+		store.table(other),
 	])
 	// arquero typings are messed up for the lookup join keys
 	// eslint-disable-next-line

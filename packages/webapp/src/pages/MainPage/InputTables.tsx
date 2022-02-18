@@ -2,18 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableContainer } from '@data-wrangling-components/core'
 import {
 	ColumnConfigMap,
 	DetailsListFeatures,
 } from '@data-wrangling-components/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-
 import { memo } from 'react'
 import styled from 'styled-components'
 import { Table } from './Table'
 
 export interface InputTablesProps {
-	tables: Map<string, ColumnTable>
+	tables: Map<string, TableContainer>
 	config: ColumnConfigMap
 	features?: DetailsListFeatures
 	compact?: boolean
@@ -23,11 +22,11 @@ export const InputTables: React.FC<InputTablesProps> = memo(
 	function InputTables({ tables, config, features, compact }) {
 		return (
 			<TablesContainer>
-				{Array.from(tables).map(([key, table]) => (
+				{Array.from(tables).map(([key, container]) => (
 					<Table
 						key={`table-${key}`}
 						name={key}
-						table={table}
+						table={container.table!}
 						config={config}
 						features={features}
 						compact={compact}

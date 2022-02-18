@@ -3,7 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import { Step, Verb, Specification } from '@data-wrangling-components/core'
+import {
+	Step,
+	Verb,
+	Specification,
+	TableContainer,
+} from '@data-wrangling-components/core'
 import {
 	DetailsListFeatures,
 	StatsColumnType,
@@ -43,8 +48,8 @@ export const MainPage: React.FC = memo(function MainMage() {
 	const inputTables = useInputTables(inputList, store)
 	const pipeline = usePipeline(store)
 	const [result, setResult] = useState<ColumnTable | undefined>()
-	const [outputs, setOutputs] = useState<Map<string, ColumnTable>>(
-		new Map<string, ColumnTable>(),
+	const [outputs, setOutputs] = useState<Map<string, TableContainer>>(
+		new Map<string, TableContainer>(),
 	)
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
@@ -134,7 +139,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 					</Section>
 				</InputsSection>
 				{steps.map((step, index) => {
-					const output = outputs?.get(step.output)
+					const output = outputs?.get(step.output)?.table
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
 							<Section title={`Step ${index + 1}`} subtitle={step.verb}>

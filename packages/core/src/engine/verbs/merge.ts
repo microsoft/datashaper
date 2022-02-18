@@ -24,7 +24,7 @@ export async function merge(
 	const { input, args } = step
 	const { columns = [], strategy, to } = args as MergeArgs
 
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const isSameDataTypeFlag: boolean = isSameDataType(inputTable, columns)
 

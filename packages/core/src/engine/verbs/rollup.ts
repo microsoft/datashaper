@@ -20,7 +20,7 @@ export async function rollup(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { column, operation, to } = args as RollupArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const expr = singleRollup(column, operation)
 

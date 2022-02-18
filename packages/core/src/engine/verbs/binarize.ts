@@ -16,7 +16,7 @@ export async function binarize(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { column, value, operator, type, to } = args as BinarizeArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const expr = compare(column, value, operator, type)
 

@@ -3,14 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import type { TableStore } from '@data-wrangling-components/core'
+import type {
+	TableStore,
+	TableContainer,
+} from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 
 export function useAddNewTables(
 	store: TableStore,
-	setStoredTables: (tables: Map<string, ColumnTable>) => void,
+	setStoredTables: (tables: Map<string, TableContainer>) => void,
 ): (files: BaseFile[]) => void {
 	return useCallback(
 		async (files: BaseFile[]) => {

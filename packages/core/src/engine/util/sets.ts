@@ -22,8 +22,8 @@ export async function set(
 	const { input, args } = step
 	const { others } = args as SetOperationArgs
 	const [inputTable, ...otherTables] = await Promise.all([
-		store.get(input),
-		...others.map(other => store.get(other)),
+		store.table(input),
+		...others.map(other => store.table(other)),
 	])
 	// arquero uses 'except' for the difference set operation, we need to map it
 	const fn = op === SetOp.Difference ? 'except' : op

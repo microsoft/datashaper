@@ -19,7 +19,7 @@ export async function aggregate(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { groupby, column, operation, to } = args as AggregateArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const expr = singleRollup(column, operation)
 

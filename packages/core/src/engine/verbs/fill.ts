@@ -24,7 +24,7 @@ export async function fill(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { value, to } = args as FillArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const dArgs: ExprFunctionMap = {
 		[to]: (_d: any, $: any) => $.value,

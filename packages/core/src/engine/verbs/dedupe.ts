@@ -20,7 +20,7 @@ export async function dedupe(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { columns } = args as DedupeArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	if (columns !== undefined) {
 		return inputTable.dedupe(columns)

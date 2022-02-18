@@ -160,7 +160,7 @@ export type ResolverFunction = (id: string) => Promise<ColumnTable>
 /**
  * Function callback for table change listeners.
  */
-export type ListenerFunction = (table: ColumnTable) => void
+export type ListenerFunction = (containre: TableContainer) => void
 
 /**
  * Function callback for general activity listener.
@@ -198,7 +198,8 @@ export interface TableStore {
 	 * Uses async resolver function if necessary to lazy-load or retrieve remote tables.
 	 * @param id
 	 */
-	get(id: string): Promise<ColumnTable>
+	get(id: string): Promise<TableContainer>
+	table(id: string): Promise<ColumnTable>
 	/**
 	 * Set a loaded table in the store.
 	 * @param id
@@ -225,7 +226,7 @@ export interface TableStore {
 	/**
 	 * Resolves all tables and converts to a id:table Map
 	 */
-	toMap(): Promise<Map<string, ColumnTable>>
+	toMap(): Promise<Map<string, TableContainer>>
 	/**
 	 * Resolves all tables and convers to an array
 	 */

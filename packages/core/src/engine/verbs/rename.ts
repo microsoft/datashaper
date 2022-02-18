@@ -18,6 +18,6 @@ export async function rename(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { columns } = args as RenameArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 	return inputTable.rename(columns)
 }

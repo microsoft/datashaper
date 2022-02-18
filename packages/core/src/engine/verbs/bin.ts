@@ -17,7 +17,7 @@ export async function bin(step: Step, store: TableStore): Promise<ColumnTable> {
 	const { input, args } = step
 	const { to } = args as BinArgs
 
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const rArgs = {
 		[to]: binExpr(inputTable, args as BinArgs),

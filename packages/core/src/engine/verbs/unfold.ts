@@ -21,7 +21,7 @@ export async function unfold(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { key, value } = args as UnfoldArgs
-	let inputTable = await store.get(input)
+	let inputTable = await store.table(input)
 
 	inputTable = inputTable
 		.groupby(key)

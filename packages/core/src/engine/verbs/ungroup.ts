@@ -19,7 +19,7 @@ export async function ungroup(
 	store: TableStore,
 ): Promise<ColumnTable> {
 	const { input } = step
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	return inputTable.ungroup()
 }

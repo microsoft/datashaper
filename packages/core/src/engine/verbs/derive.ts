@@ -21,7 +21,7 @@ export async function derive(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { column1, column2, operator, to } = args as DeriveArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	// eslint-disable-next-line
 	const func = escape((d: any) => {

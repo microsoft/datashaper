@@ -21,7 +21,7 @@ export async function pivot(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { key, value, operation } = args as PivotArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const expr = singleRollup(value, operation)
 

@@ -20,7 +20,7 @@ export async function sample(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { size, proportion } = args as SampleArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 	const p = Math.round(inputTable.numRows() * (proportion || 1))
 	const s = size || p
 	return inputTable.sample(s)

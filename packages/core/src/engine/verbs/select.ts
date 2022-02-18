@@ -19,7 +19,7 @@ export async function select(
 ): Promise<ColumnTable> {
 	const { input, args } = step
 	const { columns = [] } = args as SelectArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 	const expr = [columns] as any
 
 	if (expr.length === 0) {

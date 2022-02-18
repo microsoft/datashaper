@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Specification, TableStore } from '@data-wrangling-components/core'
+import type {
+	Specification,
+	TableStore,
+	TableContainer,
+} from '@data-wrangling-components/core'
 import { createTableStore } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import { loadCSV } from 'arquero'
@@ -47,9 +51,9 @@ export function useTableStore(): TableStore {
 export function useInputTables(
 	list: string[],
 	store: TableStore,
-): Map<string, ColumnTable> {
-	const [tables, setTables] = useState<Map<string, ColumnTable>>(
-		new Map<string, ColumnTable>(),
+): Map<string, TableContainer> {
+	const [tables, setTables] = useState<Map<string, TableContainer>>(
+		new Map<string, TableContainer>(),
 	)
 	useEffect(() => {
 		const f = async () => {
