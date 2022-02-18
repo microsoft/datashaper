@@ -19,9 +19,9 @@ import type {
 import { useBoolean } from '@fluentui/react-hooks'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import set from 'lodash-es/set.js'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import isArray from 'lodash-es/isArray.js'
+import set from 'lodash-es/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { DetailsListFeatures } from '../index.js'
 import type {
