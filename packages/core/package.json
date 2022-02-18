@@ -11,14 +11,16 @@
 		"clean": "essex clean dist lib",
 		"build": "essex build"
 	},
+	"dependencies": {
+		"lodash-es": "^4.17.21"
+	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.0",
+		"@essex/scripts": "^20.3.2",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/jest": "^27.4.0",
 		"@types/lodash-es": "^4.17.6",
 		"@types/node": "^17.0.18",
 		"arquero": "^4.8.8",
-		"lodash": "^4.17.21",
 		"regenerator-runtime": "^0.13.9",
 		"typescript": "^4.5.5"
 	},
@@ -30,9 +32,5 @@
 		"@types/node": {
 			"optional": true
 		}
-	},
-	"dependencies": {
-		"core-js": "^3.21.1",
-		"lodash-es": "^4.17.21"
 	}
 }
