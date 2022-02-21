@@ -5,13 +5,15 @@
 
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { useBoolean } from '@fluentui/react-hooks'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useState, useCallback } from 'react'
 import type { StepsType } from '../../../index.js'
 import { useOnDuplicateStep, useOnEditStep } from './index.js'
 
 export function useManageSteps(
-	store: TableStore,
 	type: StepsType,
+	store?: TableStore,
+	table?: ColumnTable,
 	onSave?: (step: Step, index?: number) => void,
 ): {
 	step: Step | undefined
@@ -44,7 +46,7 @@ export function useManageSteps(
 		},
 		[onSave, onDismissTransformModal, stepIndex],
 	)
-	const onDuplicateClicked = useOnDuplicateStep(store, type, onSave)
+	const onDuplicateClicked = useOnDuplicateStep(type, store, table, onSave)
 
 	return {
 		step,

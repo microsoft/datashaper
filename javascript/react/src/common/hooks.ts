@@ -406,11 +406,11 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 //TODO: separate column and table functions into a new hooks file
 //OR move this functionality to the pipeline?
 export function useCreateTableName(
-	store: TableStore,
+	store?: TableStore,
 ): (name: string) => string {
 	const verifyTableName = useCallback(
 		(name: string): boolean => {
-			return store.list().includes(name)
+			return store ? store.list().includes(name) : false
 		},
 		[store],
 	)
