@@ -59,7 +59,7 @@ export interface TableTransformModalProps extends TransformModalProps {
 	/**
 	 * Table store to verify naming to be created
 	 */
-	store: TableStore
+	store?: TableStore
 }
 
 export interface ColumnTransformModalProps extends TransformModalProps {

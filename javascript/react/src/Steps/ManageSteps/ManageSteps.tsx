@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
+import type { Step, TableStore } from '@data-wrangling-components/core'
 import { DialogConfirm } from '@essex-js-toolkit/themed-components'
 import React, { memo } from 'react'
 import styled from 'styled-components'
@@ -20,8 +20,8 @@ import { useManageSteps } from './hooks/index.js'
 interface ManageStepsProps
 	extends TableTransformModalProps,
 		ColumnTransformModalProps {
-	onDelete: ((args: any) => void) | undefined
 	onSave: (step: Step<unknown>, index?: number | undefined) => void
+	onDelete?: ((args: any) => void) | undefined
 	type?: StepsType
 	onSelect?: (name: string) => void
 	steps?: Step[]
@@ -55,7 +55,7 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 			onDismissTransformModal,
 			showTransformModal,
 			isTansformModalOpen,
-		} = useManageSteps(store, type, onSave)
+		} = useManageSteps(store as TableStore, type, onSave)
 
 		return (
 			<Container>
@@ -68,44 +68,48 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 					showModal={showTransformModal}
 				/>
 
-				{type === StepsType.Table && (
-					<TableTransformModal
-						step={step}
-						onTransformRequested={onCreate}
-						isOpen={isTansformModalOpen}
-						store={store}
-						onDismiss={onDismissTransformModal}
-						{...rest}
-					/>
-				)}
+				<div>
+					{type === StepsType.Table && (
+						<TableTransformModal
+							step={step}
+							onTransformRequested={onCreate}
+							isOpen={isTansformModalOpen}
+							store={store}
+							onDismiss={onDismissTransformModal}
+							{...rest}
+						/>
+					)}
 
-				{type === StepsType.Column && table && (
-					<ColumnTransformModal
-						step={step}
-						table={table}
-						onTransformRequested={onCreate}
-						isOpen={isTansformModalOpen}
-						onDismiss={onDismissTransformModal}
-						{...rest}
-					/>
-				)}
+					{type === StepsType.Column && table && (
+						<ColumnTransformModal
+							step={step}
+							table={table}
+							onTransformRequested={onCreate}
+							isOpen={isTansformModalOpen}
+							onDismiss={onDismissTransformModal}
+							{...rest}
+						/>
+					)}
 
-				{onDelete && (
-					<DialogConfirm
-						toggle={toggleDeleteModalOpen}
-						title="Are you sure you want to delete this step?"
-						subText={
-							type === StepsType.Table
-								? 'You will also lose any table transformations made after this step.'
-								: ''
-						}
-						show={isDeleteModalOpen}
-						onConfirm={onConfirmDelete}
-					/>
-				)}
+					{onDelete && (
+						<DialogConfirm
+							toggle={toggleDeleteModalOpen}
+							title="Are you sure you want to delete this step?"
+							subText={
+								type === StepsType.Table
+									? 'You will also lose any table transformations made after this step.'
+									: ''
+							}
+							show={isDeleteModalOpen}
+							onConfirm={onConfirmDelete}
+						/>
+					)}
+				</div>
 			</Container>
 		)
 	},
 )
 
-const Container = styled.div``
+const Container = styled.div`
+	width: 100%;
+`
