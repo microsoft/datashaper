@@ -471,25 +471,23 @@ export function useFormatedColumnArg(): (
 	}, [])
 }
 
-export function useFormatedColumnArgWithCount(
-	store: TableStore,
-): (step: Step) => Promise<unknown> {
+export function useFormatedColumnArgWithCount(): (
+	step: Step,
+	columnNames: string[],
+) => unknown {
 	const createColumnName = useCreateColumnName()
 
 	return useCallback(
-		async (step: Step) => {
-			const inputTable = await store.get(step.output)
-			const columnNames = inputTable.columnNames()
-
+		(step: Step, columnNames) => {
 			let args = step.args as Record<string, unknown>
 			Object.keys(args).forEach(x => {
-				if (x === 'to') {
+				if (x === 'to' && !isArray(args[x])) {
 					const newColumnName = createColumnName(args[x] as string, columnNames)
 					args = { ...args, [x]: newColumnName }
 				}
 			})
 			return args
 		},
-		[store, createColumnName],
+		[createColumnName],
 	)
 }

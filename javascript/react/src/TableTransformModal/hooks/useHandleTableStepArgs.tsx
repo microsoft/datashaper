@@ -14,7 +14,7 @@ import {
 	withOutputTableTextfield,
 } from '../../index.js'
 
-export function useHandleStepArgs(
+export function useHandleTableStepArgs(
 	step: Step | undefined,
 	disabled?: boolean,
 ): React.FC<StepComponentProps> | undefined {

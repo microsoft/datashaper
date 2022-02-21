@@ -38,6 +38,41 @@ export interface TransformModalProps extends IModalProps {
 	 * Optional header text to display on the modal
 	 */
 	headerText?: string
+	/**
+	 * Last output table to use as input & output for column transform
+	 *  or as input for table transform
+	 */
+	nextInputTable?: string
+}
+
+export interface TableTransformModalProps extends TransformModalProps {
+	/**
+	 * Indicates that the input table should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.
+	 */
+	hideInputTable?: boolean
+	/**
+	 * Indicates that the output table should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.
+	 */
+	hideOutputTable?: boolean
+	/**
+	 * Table store to verify naming to be created
+	 */
+	store: TableStore
+}
+
+export interface ColumnTransformModalProps extends TransformModalProps {
+	/**
+	 * Indicates that the input column should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the modal is launched directly from a column, which would make display redundant.
+	 */
+	hideInputColumn?: boolean
+	/**
+	 * Indicates that the output column should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input column.
+	 */
+	hideOutputColumn?: boolean
 }
 
 export interface StepDependent {
@@ -66,4 +101,9 @@ export interface StepDescriptionProps extends StepDependent {
 	showInput?: boolean
 	showOutput?: boolean
 	actions?: JSX.Element
+}
+
+export enum StepsType {
+	Table = 'table',
+	Column = 'column',
 }

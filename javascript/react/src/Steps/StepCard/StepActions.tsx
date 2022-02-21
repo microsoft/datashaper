@@ -15,28 +15,36 @@ export function useStepActions(
 	onSelect?: (name: string) => void,
 ): IButtonProps[] {
 	return useMemo(() => {
-		return [
-			{
+		const actionsList = []
+		if (onSelect) {
+			actionsList.push({
 				iconProps: iconProps.preview,
-				onClick: () => onSelect && onSelect(step?.output),
+				onClick: () => onSelect(step?.output),
 				title: 'Preview table',
-			},
-			{
+			})
+		}
+		if (onEdit) {
+			actionsList.push({
 				iconProps: iconProps.edit,
-				onClick: () => onEdit && onEdit(step, index),
+				onClick: () => onEdit(step, index),
 				title: 'Edit step',
-			},
-			{
+			})
+		}
+		if (onDuplicate) {
+			actionsList.push({
 				iconProps: iconProps.duplicate,
-				onClick: () => onDuplicate && onDuplicate(step),
+				onClick: () => onDuplicate(step),
 				title: 'Duplicate step',
-			},
-			{
+			})
+		}
+		if (onDelete) {
+			actionsList.push({
 				iconProps: iconProps.delete,
 				onClick: () => onDelete && onDelete(index),
 				title: 'Delete step',
-			},
-		] as IButtonProps[]
+			})
+		}
+		return actionsList
 	}, [step, index, onEdit, onDelete, onDuplicate, onSelect])
 }
 

@@ -7,7 +7,7 @@ import type { BaseFile } from '@data-wrangling-components/utilities'
 import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
-import { StepsList } from '../../Steps/index.js'
+import { ManageSteps } from '../../Steps/index.js'
 import { TablesList, PreviewTable, OutputTable } from '../index.js'
 import { useBusinessLogic } from './hooks.js'
 
@@ -63,7 +63,7 @@ export const PrepareDataFull: React.FC<{
 			<StepsTrayContainer>
 				<StepsContainer>
 					<SectionTitle>Steps</SectionTitle>
-					<StepsList
+					<ManageSteps
 						nextInputTable={lastTableName}
 						onDelete={onDeleteStep}
 						onSave={onSaveStep}

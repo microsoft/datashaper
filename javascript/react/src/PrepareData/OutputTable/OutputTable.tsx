@@ -59,5 +59,5 @@ const Container = styled.div`
 
 const TableContainer = styled.div`
 	height: 99%;
-	border: 1px solid ${({ theme }) => theme.application().faint().hex()}};
+	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `

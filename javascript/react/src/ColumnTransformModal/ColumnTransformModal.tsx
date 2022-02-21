@@ -2,35 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	Verb,
-	Step,
-	factory,
-	columnTransformVerbs,
-} from '@data-wrangling-components/core'
+import { Verb, columnTransformVerbs } from '@data-wrangling-components/core'
 import { Dropdown, IconButton, Modal, PrimaryButton } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
-import { memo, useCallback, useMemo, useState } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+import type { ColumnTransformModalProps } from '../index.js'
 import {
-	selectStepComponent,
-	TransformModalProps,
-	withInputColumnDropdown,
-	withOutputColumnTextfield,
-} from '../index.js'
-
-export interface ColumnTransformModalProps extends TransformModalProps {
-	/**
-	 * Indicates that the input column should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the modal is launched directly from a column, which would make display redundant.
-	 */
-	hideInputColumn?: boolean
-	/**
-	 * Indicates that the output column should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input column.
-	 */
-	hideOutputColumn?: boolean
-}
+	useHandleRunClick,
+	useHandleStepArgs,
+	useInternalStep,
+} from './hooks/index.js'
 
 /**
  * This presents a model for creating new columns on a table.
@@ -46,51 +28,24 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 			hideOutputColumn,
 			verbs,
 			headerText,
+			nextInputTable,
 			onDismiss,
 			...rest
 		} = props
 
-		const [internal, setInternal] = useState<Step | undefined>(step)
+		const { internal, setInternal, handleVerbChange } = useInternalStep(
+			step,
+			nextInputTable,
+			table,
+		)
 
-		const handleVerbChange = useCallback(
-			(_ev: any, opt: any) => {
-				// TODO: the assumption here is that the consumer will use runPipeline
-				// should we be forcing the i/o table name?
-				const inputTable = step?.input ?? 'input'
-				const outputTable = step?.output ?? 'input'
-				const newStep = factory(opt.key, inputTable, outputTable)
-				// merge with the previous step in case input/output columns have been controlled
-				setInternal(newStep)
-			},
-			[setInternal, step],
+		const StepArgs = useHandleStepArgs(
+			internal,
+			hideInputColumn,
+			hideOutputColumn,
 		)
-		const Component = useMemo(
-			() => (internal ? selectStepComponent(internal) : null),
-			[internal],
-		)
-		const WithColumns = useMemo(() => {
-			if (Component) {
-				let comp = Component
-				if (!hideInputColumn) {
-					comp = withInputColumnDropdown()(comp)
-				}
-				if (!hideOutputColumn) {
-					comp = withOutputColumnTextfield()(comp)
-				}
-				return comp
-			}
-		}, [Component, hideInputColumn, hideOutputColumn])
-		const handleRunClick = useCallback(async () => {
-			if (table && internal) {
-				onDismiss && onDismiss()
-				onTransformRequested && onTransformRequested(internal)
-			}
-		}, [table, internal, onDismiss, onTransformRequested])
 
-		const handleDismissClick = useCallback(
-			() => onDismiss && onDismiss(),
-			[onDismiss],
-		)
+		const handleRunClick = useHandleRunClick(internal, onTransformRequested)
 
 		const stepOptions = useMemo(() => {
 			const list =
@@ -101,31 +56,33 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 				text: upperFirst(key),
 			}))
 		}, [verbs])
+
 		return (
-			<Modal onDismiss={onDismiss} {...rest}>
+			<Modal
+				onDismiss={onDismiss}
+				onDismissed={() => setInternal(undefined)}
+				{...rest}
+			>
 				<Header>
 					<Title>{headerText}</Title>
-					<IconButton
-						iconProps={{
-							iconName: 'Cancel',
-						}}
-						ariaLabel="Close popup modal"
-						onClick={handleDismissClick}
-					/>
+					{onDismiss && (
+						<IconButton
+							iconProps={iconProps.cancel}
+							ariaLabel="Close popup modal"
+							onClick={() => onDismiss()}
+						/>
+					)}
 				</Header>
 				<Container>
 					<Dropdown
 						placeholder={'Select transform'}
 						options={stepOptions}
+						defaultSelectedKey={internal?.verb || ''}
 						onChange={handleVerbChange}
 					/>
-					{WithColumns && internal ? (
+					{StepArgs && internal ? (
 						<>
-							<WithColumns
-								step={internal}
-								table={table}
-								onChange={setInternal}
-							/>
+							<StepArgs step={internal} table={table} onChange={setInternal} />
 							<PrimaryButton onClick={handleRunClick}>Run</PrimaryButton>
 						</>
 					) : null}
@@ -150,3 +107,7 @@ const Title = styled.h3`
 const Container = styled.div`
 	padding: 12px;
 `
+
+const iconProps = {
+	cancel: { iconName: 'Cancel' },
+}

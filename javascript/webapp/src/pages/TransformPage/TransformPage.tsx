@@ -38,9 +38,10 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 			if (table && step) {
 				const output = await runPipeline(table, [step])
 				setTable(output)
+				hideModal()
 			}
 		},
-		[table],
+		[table, hideModal],
 	)
 
 	if (!table) {

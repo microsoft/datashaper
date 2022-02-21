@@ -2,54 +2,35 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableStore } from '@data-wrangling-components/core'
-import { DialogConfirm } from '@essex-js-toolkit/themed-components'
+import type { Step } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 import { DetailText } from '../../PrepareData/DetailText/index.js'
-import { StepCard, TableTransformModal, useDeleteConfirm } from '../../index.js'
-import { useManageSteps } from './hooks'
+import { StepCard } from '../../index.js'
 
 export const StepsList: React.FC<{
 	steps?: Step[]
-	store: TableStore
-	onSave?: (step: Step, index?: number) => void
-	onDelete?: (index: number) => void
+	onDeleteClicked?: (index: number) => void
+	onEditClicked?: (step: Step, index: number) => void
+	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
-	nextInputTable: string
+	showModal?: () => void
 }> = memo(function StepsList({
 	steps,
-	store,
-	onSave,
-	onDelete,
+	onDeleteClicked,
+	onEditClicked,
+	onDuplicateClicked,
 	onSelect,
-	nextInputTable,
+	showModal,
 }) {
-	const {
-		step,
-		onDuplicateClicked,
-		onEditClicked,
-		onCreate,
-		onDismissClearTableModal,
-		showTableModal,
-		isTableModalOpen,
-	} = useManageSteps(store, onSave)
-
-	const {
-		onDeleteClicked,
-		toggleDeleteModalOpen,
-		isDeleteModalOpen,
-		onConfirmDelete,
-	} = useDeleteConfirm(onDelete)
-
 	return (
 		<Container>
 			{steps?.map((_step, index) => {
 				return (
 					<StepCard
-						onEdit={onEditClicked}
 						onDelete={onDeleteClicked}
+						onEdit={onEditClicked}
 						onDuplicate={onDuplicateClicked}
 						onSelect={onSelect}
 						key={index}
@@ -71,34 +52,16 @@ export const StepsList: React.FC<{
 				/>
 			)}
 
-			{onSave && (
+			{showModal && (
 				<ButtonContainer>
 					<DefaultButton
 						styles={addButtonStyles}
 						iconProps={iconProps.add}
-						onClick={showTableModal}
+						onClick={showModal}
 					>
 						Add step
 					</DefaultButton>
 				</ButtonContainer>
-			)}
-
-			<TableTransformModal
-				step={step}
-				nextInputTable={nextInputTable}
-				onTransformRequested={onCreate}
-				isOpen={isTableModalOpen}
-				store={store}
-				onDismiss={onDismissClearTableModal}
-			/>
-			{onDelete && (
-				<DialogConfirm
-					toggle={toggleDeleteModalOpen}
-					title="Are you sure you want to delete this step?"
-					subText="You will also lose any table transformations made after this step."
-					show={isDeleteModalOpen}
-					onConfirm={onConfirmDelete}
-				/>
 			)}
 		</Container>
 	)
