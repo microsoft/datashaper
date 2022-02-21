@@ -4,6 +4,7 @@
  */
 
 import type { Step, TableStore } from '@data-wrangling-components/core'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 import {
 	useCreateTableName,
@@ -12,8 +13,9 @@ import {
 import { StepsType } from '../../../index.js'
 
 export function useOnDuplicateStep(
-	store: TableStore,
 	type: StepsType,
+	store?: TableStore,
+	table?: ColumnTable,
 	onSave?: (step: Step, index?: number) => void,
 ): (_step: Step) => void {
 	const createTableName = useCreateTableName(store)
@@ -21,20 +23,22 @@ export function useOnDuplicateStep(
 
 	return useCallback(
 		async (_step: Step) => {
-			const tableName = createTableName(_step.output)
-			const table = await store.get(_step.output)
+			const tableName =
+				type === StepsType.Table ? createTableName(_step.output) : _step.output
+
+			const outputTable = store ? await store.get(_step.output) : table
 			const formattedArgs = await formattedColumnArgs(
 				_step,
-				table.columnNames(),
+				outputTable?.columnNames() ?? [],
 			)
-			const dupStep = {
+			const newStep = {
 				..._step,
 				args: formattedArgs,
 				input: _step.output,
-				output: type === StepsType.Table ? tableName : _step.output,
+				output: tableName,
 			}
-			onSave && onSave(dupStep)
+			onSave && onSave(newStep)
 		},
-		[onSave, createTableName, formattedColumnArgs, type, store],
+		[onSave, createTableName, formattedColumnArgs, type, store, table],
 	)
 }

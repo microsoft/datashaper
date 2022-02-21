@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableStore } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import { DialogConfirm } from '@essex-js-toolkit/themed-components'
 import React, { memo } from 'react'
 import styled from 'styled-components'
@@ -55,7 +55,7 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 			onDismissTransformModal,
 			showTransformModal,
 			isTansformModalOpen,
-		} = useManageSteps(store as TableStore, type, onSave)
+		} = useManageSteps(type, store, table, onSave)
 
 		return (
 			<Container>
