@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/core",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
