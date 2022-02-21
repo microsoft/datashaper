@@ -38,4 +38,5 @@ const Subtitle = styled.h2`
 	font-weight: normal;
 	color: ${({ theme }) => theme.application().lowContrast().hex()};
 	width: 20%;
+	text-align: right;
 `

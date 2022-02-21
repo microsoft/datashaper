@@ -38,7 +38,6 @@ const classNames = mergeStyleSets({
 })
 
 const NavBarContainer = styled.div`
-	width: 5%;
 	margin-right: 10px;
 `
 const HamburgerMenu = styled(FontIcon)`
