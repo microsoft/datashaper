@@ -12,7 +12,7 @@ import {
 import { useState, useEffect, useCallback } from 'react'
 import { useCreateTableName, useFormatedColumnArg } from '../../common/index.js'
 
-export function useInternalStep(
+export function useInternalTableStep(
 	step: Step | undefined,
 	lastOutput: string | undefined,
 	store: TableStore,

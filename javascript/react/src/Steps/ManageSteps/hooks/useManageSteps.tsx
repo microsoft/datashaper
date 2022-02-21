@@ -6,53 +6,53 @@
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { useBoolean } from '@fluentui/react-hooks'
 import { useState, useCallback } from 'react'
+import type { StepsType } from '../../../index.js'
 import { useOnDuplicateStep, useOnEditStep } from './index.js'
 
 export function useManageSteps(
 	store: TableStore,
+	type: StepsType,
 	onSave?: (step: Step, index?: number) => void,
 ): {
 	step: Step | undefined
-	onDismissClearTableModal: () => void
+	onDismissTransformModal: () => void
 	onDuplicateClicked: (step: Step) => void
 	onEditClicked: (step: Step, index: number) => void
-	stepIndex: number | undefined
 	onCreate: (step: Step, index?: number) => void
-	showTableModal: () => void
-	isTableModalOpen: boolean
+	showTransformModal: () => void
+	isTansformModalOpen: boolean
 } {
 	const [step, setStep] = useState<Step>()
 	const [stepIndex, setStepIndex] = useState<number>()
 	const [
-		isTableModalOpen,
-		{ setTrue: showTableModal, setFalse: hideTableModal },
+		isTansformModalOpen,
+		{ setTrue: showTransformModal, setFalse: hideTransformModal },
 	] = useBoolean(false)
 
-	const onDismissClearTableModal = useCallback(() => {
-		hideTableModal()
+	const onDismissTransformModal = useCallback(() => {
+		hideTransformModal()
 		setStep(undefined)
 		setStepIndex(undefined)
-	}, [setStep, setStepIndex, hideTableModal])
+	}, [setStep, setStepIndex, hideTransformModal])
 
-	const onEditClicked = useOnEditStep(setStep, setStepIndex, showTableModal)
+	const onEditClicked = useOnEditStep(setStep, setStepIndex, showTransformModal)
 
 	const onCreate = useCallback(
 		(_step: Step) => {
 			onSave && onSave(_step, stepIndex)
-			onDismissClearTableModal()
+			onDismissTransformModal()
 		},
-		[onSave, onDismissClearTableModal, stepIndex],
+		[onSave, onDismissTransformModal, stepIndex],
 	)
-	const onDuplicateClicked = useOnDuplicateStep(store, onSave)
+	const onDuplicateClicked = useOnDuplicateStep(store, type, onSave)
 
 	return {
 		step,
 		onDuplicateClicked,
-		onDismissClearTableModal,
+		onDismissTransformModal,
 		onEditClicked,
-		stepIndex,
 		onCreate,
-		isTableModalOpen,
-		showTableModal,
+		isTansformModalOpen,
+		showTransformModal,
 	}
 }

@@ -6,27 +6,12 @@ import type { TableStore } from '@data-wrangling-components/core'
 import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
-import { StepSelector, TransformModalProps } from '../index.js'
+import { StepSelector, TableTransformModalProps } from '../index.js'
 import {
-	useHandleRunClick,
-	useHandleStepArgs,
-	useInternalStep,
+	useHandleTableRunClick,
+	useHandleTableStepArgs,
+	useInternalTableStep,
 } from './hooks/index.js'
-
-export interface TableTransformModalProps extends TransformModalProps {
-	/**
-	 * Indicates that the input table should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.
-	 */
-	hideInputTable?: boolean
-	/**
-	 * Indicates that the output table should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.
-	 */
-	hideOutputTable?: boolean
-	store: TableStore
-	nextInputTable: string
-}
 
 export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 	function TableTransformModal(props) {
@@ -39,15 +24,18 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			...rest
 		} = props
 
-		const { internal, setInternal, handleVerbChange } = useInternalStep(
+		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
 			nextInputTable,
-			store,
+			store as TableStore,
 		)
 
-		const StepArgs = useHandleStepArgs(internal, !!step)
+		const StepArgs = useHandleTableStepArgs(internal, !!step)
 
-		const handleRunClick = useHandleRunClick(internal, onTransformRequested)
+		const handleRunClick = useHandleTableRunClick(
+			internal,
+			onTransformRequested,
+		)
 
 		return (
 			<Modal

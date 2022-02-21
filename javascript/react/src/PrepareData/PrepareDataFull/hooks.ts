@@ -58,12 +58,11 @@ export function useBusinessLogic(
 	}, [pipeline, storedTables])
 
 	const lastTableName = useMemo((): string => {
-		const _tables = store.list()
+		const _tables = Array.from(storedTables.keys())
 		const length = _tables.length
 		const input = length === 0 ? '' : _tables[length - 1] ?? ''
-
 		return last(steps)?.output ?? input
-	}, [steps, store])
+	}, [steps, storedTables])
 
 	useEffect(() => {
 		const f = async () => {
