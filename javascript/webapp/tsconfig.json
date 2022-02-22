@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"baseUrl": ".",
+		"paths": {
+			"~components": ["./src/components/index.ts"],
+			"~components/*": ["./src/components/*"],
+			"~pages": ["./src/pages/index.ts"],
+			"~pages/*": ["./src/pages/*"]
+		},
+		"lib": ["ESNext", "DOM", "DOM.Iterable", "ES2020.BigInt"],
+		"outDir": "lib",
+		"jsx": "react-jsx",
+		"resolveJsonModule": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"declaration": true,
+		"incremental": true,
+		"noImplicitAny": true,
+		"target": "ESNext",
+		"allowJs": false,
+		"skipLibCheck": true,
+		"esModuleInterop": false,
+		"isolatedModules": true,
+		"noEmit": true
+	},
+	"include": ["./src/"],
+	"exclude": ["**/__tests__/**"]
+}

@@ -101,4 +101,4 @@ stages:
               appType: 'webApp'
               ConnectedServiceName: '$(subscription)'
               WebAppName: '$(webapp)'
-              packageForLinux: '$(System.DefaultWorkingDirectory)/packages/webapp/deploy.zip'
+              packageForLinux: '$(System.DefaultWorkingDirectory)/javascript/webapp/deploy.zip'

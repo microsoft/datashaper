@@ -5,6 +5,7 @@ out/
 lib/
 coverage/
 .swc/
+stats.json
 
 # Classic node deps
 node_modules/
