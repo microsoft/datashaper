@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { load, Theme, ThemeVariant } from '@thematic/core'
 import { useDebounceFn } from 'ahooks'
 import {
 	atom,
@@ -11,9 +12,8 @@ import {
 	useRecoilValue,
 	useSetRecoilState,
 } from 'recoil'
-import { load, Theme, ThemeVariant } from '@thematic/core'
-import { Settings } from '~models/Settings'
 import { defaultSettings } from '~hooks/useSettings'
+import { Settings } from '~models/Settings'
 
 const currentSettings = atom<Settings>({
 	key: 'settings',
@@ -58,6 +58,6 @@ export const themeState = selector<Theme>({
 	},
 })
 
-export function useTheme() {
+export function useTheme(): Theme {
 	return useRecoilValue(themeState)
 }

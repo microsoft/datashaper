@@ -1,32 +1,36 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { default as localforage } from 'localforage'
 import { Settings } from '../models/Settings.js'
 
-export async function setDarkMode(isDarkMode: boolean) {
+export async function setDarkMode(isDarkMode: boolean): Promise<void> {
 	await localforage.setItem('isDarkMode', isDarkMode).catch(error => {
 		console.log('error saving into indexDB')
 	})
 }
 
 export async function isDarkMode(): Promise<boolean> {
-	let darkMode = await localforage.getItem('isDarkMode')
-	let darkModeCasted: boolean = false
+	const darkMode = await localforage.getItem('isDarkMode')
+	let darkModeCasted = false
 
 	if (darkMode !== undefined) darkModeCasted = darkMode as boolean
 
 	return darkModeCasted
 }
 
-async function setDefaultDarkModeValue() {
-	let darkMode = await localforage.getItem('isDarkMode')
+async function setDefaultDarkModeValue(): Promise<void> {
+	const darkMode = await localforage.getItem('isDarkMode')
 	if (darkMode === undefined) setDarkMode(false)
 }
 
-export async function setDefaultSettings() {
+export async function setDefaultSettings(): Promise<void> {
 	setDefaultDarkModeValue()
 }
 
 export async function getDefaultSettings(): Promise<Settings> {
-	let settingsResponse: Settings = {
+	const settingsResponse: Settings = {
 		isDarkMode: await isDarkMode(),
 	}
 

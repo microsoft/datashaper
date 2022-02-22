@@ -5,9 +5,9 @@
 
 import { Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback } from 'react'
-import { useSettings } from '~states/settings'
-import { setDarkMode } from '../../localStorageHandler/localStorageHandler.js'
 import styled from 'styled-components'
+import { setDarkMode } from '../../localStorageHandler/localStorageHandler.js'
+import { useSettings } from '~states/settings'
 
 export interface NavPanelProps {
 	isOpen: boolean
@@ -22,11 +22,11 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 
 	const setDarkModeStatus = useCallback(
 		async (ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
-			let checkedValue = checked ? true : false
+			const checkedValue = checked ? true : false
 			setSettings({ ...settings, isDarkMode: checkedValue })
 			await setDarkMode(checkedValue)
 		},
-		[setSettings],
+		[settings, setSettings],
 	)
 
 	return (

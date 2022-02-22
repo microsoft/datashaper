@@ -1,3 +1,7 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { ErrorBoundary as ErrorBoundaryLib } from 'react-error-boundary'
 import Redbox from 'redbox-react'
 
