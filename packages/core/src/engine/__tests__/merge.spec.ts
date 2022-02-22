@@ -23,13 +23,13 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(5)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('resultColumn', 0)).toBe('4554000')
-			expect(result.get('resultColumn', 1)).toBe('7800')
-			expect(result.get('resultColumn', 2)).toBe('100230000')
-			expect(result.get('resultColumn', 3)).toBe('8920470')
-			expect(result.get('resultColumn', 4)).toBe('505000')
+			expect(result.table.numCols()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('resultColumn', 0)).toBe('4554000')
+			expect(result.table.get('resultColumn', 1)).toBe('7800')
+			expect(result.table.get('resultColumn', 2)).toBe('100230000')
+			expect(result.table.get('resultColumn', 3)).toBe('8920470')
+			expect(result.table.get('resultColumn', 4)).toBe('505000')
 		})
 	})
 
@@ -48,13 +48,13 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('resultColumn', 0)).toBe('AXX')
-			expect(result.get('resultColumn', 1)).toBe('BXT')
-			expect(result.get('resultColumn', 2)).toBe('CQW')
-			expect(result.get('resultColumn', 3)).toBe('DRE')
-			expect(result.get('resultColumn', 4)).toBe('EFG')
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('resultColumn', 0)).toBe('AXX')
+			expect(result.table.get('resultColumn', 1)).toBe('BXT')
+			expect(result.table.get('resultColumn', 2)).toBe('CQW')
+			expect(result.table.get('resultColumn', 3)).toBe('DRE')
+			expect(result.table.get('resultColumn', 4)).toBe('EFG')
 		})
 	})
 
@@ -73,13 +73,13 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(5)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('resultColumn', 0)).toBe('bed45')
-			expect(result.get('resultColumn', 1)).toBe('pillow')
-			expect(result.get('resultColumn', 2)).toBe('100')
-			expect(result.get('resultColumn', 3)).toBe('chair89')
-			expect(result.get('resultColumn', 4)).toBe('stool50')
+			expect(result.table.numCols()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('resultColumn', 0)).toBe('bed45')
+			expect(result.table.get('resultColumn', 1)).toBe('pillow')
+			expect(result.table.get('resultColumn', 2)).toBe('100')
+			expect(result.table.get('resultColumn', 3)).toBe('chair89')
+			expect(result.table.get('resultColumn', 4)).toBe('stool50')
 		})
 	})
 
@@ -98,13 +98,13 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(5)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('resultColumn', 0)).toBe('bed')
-			expect(result.get('resultColumn', 1)).toBe('pillow')
-			expect(result.get('resultColumn', 2)).toBe('100')
-			expect(result.get('resultColumn', 3)).toBe('chair')
-			expect(result.get('resultColumn', 4)).toBe('stool')
+			expect(result.table.numCols()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('resultColumn', 0)).toBe('bed')
+			expect(result.table.get('resultColumn', 1)).toBe('pillow')
+			expect(result.table.get('resultColumn', 2)).toBe('100')
+			expect(result.table.get('resultColumn', 3)).toBe('chair')
+			expect(result.table.get('resultColumn', 4)).toBe('stool')
 		})
 	})
 
@@ -123,13 +123,13 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(5)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('resultColumn', 0)).toBe(45)
-			expect(result.get('resultColumn', 1)).toBe(7800)
-			expect(result.get('resultColumn', 2)).toBe(100)
-			expect(result.get('resultColumn', 3)).toBe(89)
-			expect(result.get('resultColumn', 4)).toBe(50)
+			expect(result.table.numCols()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('resultColumn', 0)).toBe(45)
+			expect(result.table.get('resultColumn', 1)).toBe(7800)
+			expect(result.table.get('resultColumn', 2)).toBe(100)
+			expect(result.table.get('resultColumn', 3)).toBe(89)
+			expect(result.table.get('resultColumn', 4)).toBe(50)
 		})
 	})
 
@@ -148,11 +148,11 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(3)
-			expect(result.get('resultColumn', 0)).toBe('1')
-			expect(result.get('resultColumn', 1)).toBe('false')
-			expect(result.get('resultColumn', 2)).toBe('1')
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(3)
+			expect(result.table.get('resultColumn', 0)).toBe('1')
+			expect(result.table.get('resultColumn', 1)).toBe('false')
+			expect(result.table.get('resultColumn', 2)).toBe('1')
 		})
 	})
 
@@ -171,11 +171,11 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(3)
-			expect(result.get('resultColumn', 0)).toBe(true)
-			expect(result.get('resultColumn', 1)).toBe(true)
-			expect(result.get('resultColumn', 2)).toBe(false)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(3)
+			expect(result.table.get('resultColumn', 0)).toBe(true)
+			expect(result.table.get('resultColumn', 1)).toBe(true)
+			expect(result.table.get('resultColumn', 2)).toBe(false)
 		})
 	})
 
@@ -194,13 +194,13 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(5)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('resultColumn', 0)).toBe('45')
-			expect(result.get('resultColumn', 1)).toBe('pillow')
-			expect(result.get('resultColumn', 2)).toBe('100')
-			expect(result.get('resultColumn', 3)).toBe('89')
-			expect(result.get('resultColumn', 4)).toBe('50')
+			expect(result.table.numCols()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('resultColumn', 0)).toBe('45')
+			expect(result.table.get('resultColumn', 1)).toBe('pillow')
+			expect(result.table.get('resultColumn', 2)).toBe('100')
+			expect(result.table.get('resultColumn', 3)).toBe('89')
+			expect(result.table.get('resultColumn', 4)).toBe('50')
 		})
 	})
 
@@ -219,13 +219,13 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(5)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('resultColumn', 0)).toBe(54000)
-			expect(result.get('resultColumn', 1)).toBe(7800)
-			expect(result.get('resultColumn', 2)).toBe(230000)
-			expect(result.get('resultColumn', 3)).toBe(20470)
-			expect(result.get('resultColumn', 4)).toBe(5000)
+			expect(result.table.numCols()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('resultColumn', 0)).toBe(54000)
+			expect(result.table.get('resultColumn', 1)).toBe(7800)
+			expect(result.table.get('resultColumn', 2)).toBe(230000)
+			expect(result.table.get('resultColumn', 3)).toBe(20470)
+			expect(result.table.get('resultColumn', 4)).toBe(5000)
 		})
 	})
 
@@ -244,11 +244,11 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(3)
-			expect(result.get('resultColumn', 0)).toBe('true')
-			expect(result.get('resultColumn', 1)).toBe('false')
-			expect(result.get('resultColumn', 2)).toBe('false')
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(3)
+			expect(result.table.get('resultColumn', 0)).toBe('true')
+			expect(result.table.get('resultColumn', 1)).toBe('false')
+			expect(result.table.get('resultColumn', 2)).toBe('false')
 		})
 	})
 
@@ -267,11 +267,11 @@ describe('test for merge verb', () => {
 		const store = new TestStore()
 
 		return merge(step, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(3)
-			expect(result.get('resultColumn', 0)).toBe(true)
-			expect(result.get('resultColumn', 1)).toBe(false)
-			expect(result.get('resultColumn', 2)).toBe(true)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(3)
+			expect(result.table.get('resultColumn', 0)).toBe(true)
+			expect(result.table.get('resultColumn', 1)).toBe(false)
+			expect(result.table.get('resultColumn', 2)).toBe(true)
 		})
 	})
 })

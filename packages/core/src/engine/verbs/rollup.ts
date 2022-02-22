@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { Step, RollupArgs } from '../../types.js'
+import type { Step, RollupArgs, TableContainer } from '../../types.js'
 import { singleRollup } from '../util/index.js'
 
 /**
@@ -17,8 +17,8 @@ import { singleRollup } from '../util/index.js'
 export async function rollup(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { column, operation, to } = args as RollupArgs
 	const inputTable = await store.table(input)
 
@@ -28,5 +28,5 @@ export async function rollup(
 		[to]: expr,
 	}
 
-	return inputTable.rollup(rArgs)
+	return container(output, inputTable.rollup(rArgs))
 }

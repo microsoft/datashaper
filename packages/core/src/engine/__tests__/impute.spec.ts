@@ -18,12 +18,12 @@ describe('test for impute verb', () => {
 		const store = new TestStore()
 
 		return impute(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(6)
-			expect(result.get('item', 0)).toBe('bed')
-			expect(result.get('item', 1)).toBe('emptyValue')
-			expect(result.get('item', 4)).toBe('chair')
-			expect(result.get('item', 5)).toBe('emptyValue')
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(6)
+			expect(result.table.get('item', 0)).toBe('bed')
+			expect(result.table.get('item', 1)).toBe('emptyValue')
+			expect(result.table.get('item', 4)).toBe('chair')
+			expect(result.table.get('item', 5)).toBe('emptyValue')
 		})
 	})
 
@@ -38,11 +38,11 @@ describe('test for impute verb', () => {
 		const store = new TestStore()
 
 		return impute(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(3)
-			expect(result.get('y', 0)).toBe(1)
-			expect(result.get('y', 1)).toBe(5000)
-			expect(result.get('y', 2)).toBe(1)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(3)
+			expect(result.table.get('y', 0)).toBe(1)
+			expect(result.table.get('y', 1)).toBe(5000)
+			expect(result.table.get('y', 2)).toBe(1)
 		})
 	})
 })

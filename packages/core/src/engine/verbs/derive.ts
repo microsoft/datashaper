@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { escape } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import { DeriveArgs, MathOperator, Step } from '../../types.js'
+import { DeriveArgs, MathOperator, Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero derive.
@@ -18,8 +18,8 @@ import { DeriveArgs, MathOperator, Step } from '../../types.js'
 export async function derive(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { column1, column2, operator, to } = args as DeriveArgs
 	const inputTable = await store.table(input)
 
@@ -44,5 +44,5 @@ export async function derive(
 	const dArgs: ExprObject = {
 		[to]: func,
 	}
-	return inputTable.derive(dArgs)
+	return container(output, inputTable.derive(dArgs))
 }

@@ -25,12 +25,12 @@ describe('test for rename verb', () => {
 		const store = new TestStore()
 
 		return rename(step, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('uuid', 0)).toBe(1)
-			expect(result.get('product', 0)).toBe('bed')
-			expect(result.get('amount', 0)).toBe(45)
-			expect(result.get('total', 0)).toBe(54000)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('uuid', 0)).toBe(1)
+			expect(result.table.get('product', 0)).toBe('bed')
+			expect(result.table.get('amount', 0)).toBe(45)
+			expect(result.table.get('total', 0)).toBe(54000)
 		})
 	})
 })

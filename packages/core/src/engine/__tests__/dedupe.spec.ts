@@ -20,8 +20,8 @@ describe('test for dedupe verb', () => {
 		const store = new TestStore()
 
 		return dedupe(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(3)
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(3)
 		})
 	})
 
@@ -36,14 +36,14 @@ describe('test for dedupe verb', () => {
 		const store = new TestStore()
 
 		return dedupe(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(2)
-			expect(result.get('x', 0)).toBe('A')
-			expect(result.get('x', 1)).toBe('B')
-			expect(result.get('y', 0)).toBe(1)
-			expect(result.get('y', 1)).toBe(2)
-			expect(result.get('z', 0)).toBe(4)
-			expect(result.get('z', 1)).toBe(5)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(2)
+			expect(result.table.get('x', 0)).toBe('A')
+			expect(result.table.get('x', 1)).toBe('B')
+			expect(result.table.get('y', 0)).toBe(1)
+			expect(result.table.get('y', 1)).toBe(2)
+			expect(result.table.get('z', 0)).toBe(4)
+			expect(result.table.get('z', 1)).toBe(5)
 		})
 	})
 })

@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { all } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { SelectArgs, Step } from '../../types.js'
+import type { SelectArgs, Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero select.
@@ -16,8 +16,8 @@ import type { SelectArgs, Step } from '../../types.js'
 export async function select(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { columns = [] } = args as SelectArgs
 	const inputTable = await store.table(input)
 	const expr = [columns] as any
@@ -25,5 +25,5 @@ export async function select(
 	if (expr.length === 0) {
 		expr.push(all())
 	}
-	return inputTable.select(...expr)
+	return container(output, inputTable.select(...expr))
 }

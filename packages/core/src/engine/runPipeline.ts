@@ -6,7 +6,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import isArray from 'lodash-es/isArray.js'
 import { createTableStore } from '../factories.js'
 import { createPipeline } from '../index.js'
-import type { Step } from '../types.js'
+import type { Step, TableContainer } from '../types.js'
 
 /**
  * This is a utility to execute a series of pipeline
@@ -18,7 +18,7 @@ import type { Step } from '../types.js'
 export async function runPipeline(
 	input: ColumnTable,
 	steps: Step | Step[],
-): Promise<ColumnTable> {
+): Promise<TableContainer> {
 	const store = createTableStore()
 	const pipeline = createPipeline(store)
 

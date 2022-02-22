@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { JoinArgs, Step } from '../../types.js'
+import type { JoinArgs, Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero join.
@@ -15,12 +15,12 @@ import type { JoinArgs, Step } from '../../types.js'
 export async function join(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { other, on } = args as JoinArgs
 	const [inputTable, otherTable] = await Promise.all([
 		store.table(input),
 		store.table(other),
 	])
-	return inputTable.join(otherTable, on)
+	return container(output, inputTable.join(otherTable, on))
 }

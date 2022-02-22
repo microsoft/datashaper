@@ -12,14 +12,14 @@ describe('test for unfold verb', () => {
 		const step: Step = {
 			verb: Verb.Fold,
 			input: 'table18',
-			output: 'output',
+			output: 'newTable',
 			args: { to: ['key', 'value'], columns: ['A', 'B', 'C'] },
 		}
 
 		const store = new TestStore()
 
 		await fold(step, store).then(result => {
-			store.set({ id: 'newTable', table: result })
+			store.set(result)
 		})
 
 		const step2: Step = {
@@ -30,17 +30,17 @@ describe('test for unfold verb', () => {
 		}
 
 		return unfold(step2, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(3)
-			expect(result.get('A', 0)).toBe(1)
-			expect(result.get('A', 1)).toBe(3)
-			expect(result.get('A', 2)).toBe(10)
-			expect(result.get('B', 0)).toBe(2)
-			expect(result.get('B', 1)).toBe(4)
-			expect(result.get('B', 2)).toBe(20)
-			expect(result.get('C', 0)).toBe(3)
-			expect(result.get('C', 1)).toBe(5)
-			expect(result.get('C', 2)).toBe(30)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(3)
+			expect(result.table.get('A', 0)).toBe(1)
+			expect(result.table.get('A', 1)).toBe(3)
+			expect(result.table.get('A', 2)).toBe(10)
+			expect(result.table.get('B', 0)).toBe(2)
+			expect(result.table.get('B', 1)).toBe(4)
+			expect(result.table.get('B', 2)).toBe(20)
+			expect(result.table.get('C', 0)).toBe(3)
+			expect(result.table.get('C', 1)).toBe(5)
+			expect(result.table.get('C', 2)).toBe(30)
 		})
 	})
 })

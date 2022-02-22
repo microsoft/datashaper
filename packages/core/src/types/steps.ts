@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { TableStore } from './TableStore.js'
 import type {
 	BinStrategy,
@@ -15,7 +14,7 @@ import type {
 	StringComparisonOperator,
 	Verb,
 } from './enums.js'
-import type { Value } from './tables.js'
+import type { TableContainer, Value } from './tables.js'
 
 export interface OrderbyInstruction {
 	column: string
@@ -40,7 +39,7 @@ export interface Step<T = unknown> {
 export type StepFunction = (
 	step: Step,
 	store: TableStore,
-) => Promise<ColumnTable>
+) => Promise<TableContainer>
 
 export type AggregateStep = Step<AggregateArgs>
 export type BinStep = Step<BinArgs>

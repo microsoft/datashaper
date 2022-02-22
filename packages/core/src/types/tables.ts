@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { DataType } from './enums.js'
 
 /**
@@ -50,4 +51,31 @@ export interface TableMetadata {
 	 * Metadata for each column
 	 */
 	columns: Record<string, ColumnMetadata>
+}
+
+/**
+ * Resolver function that looks up a table by id.
+ */
+export type ResolverFunction = (id: string) => Promise<ColumnTable>
+
+export interface TableContainer {
+	/**
+	 * This is the formal id for a table, and must be unique within the store.
+	 * A URI would normally be appropriate.
+	 */
+	id: string
+	/**
+	 * This is an optional alias or friendly name for the table.
+	 */
+	name?: string
+	/**
+	 * This is the actual Arquero table instance to store.
+	 * If it has not been resolved yet it will be undefined.
+	 */
+	table?: ColumnTable
+	/**
+	 * Optional resolver function to lazy-load a table when first requested.
+	 * If a table is not found, the resolver will be invoked or an error thrown.
+	 */
+	resolver?: ResolverFunction
 }

@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { DedupeArgs, TableStore } from '../../index.js'
-import type { Step } from '../../types.js'
+import type { Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero dedupe operation.
@@ -17,14 +17,14 @@ import type { Step } from '../../types.js'
 export async function dedupe(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { columns } = args as DedupeArgs
 	const inputTable = await store.table(input)
 
 	if (columns !== undefined) {
-		return inputTable.dedupe(columns)
+		return container(output, inputTable.dedupe(columns))
 	}
 
-	return inputTable.dedupe()
+	return container(output, inputTable.dedupe())
 }

@@ -4,10 +4,10 @@
  */
 
 import { from } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { EraseArgs, Step } from '../../types.js'
+import type { EraseArgs, Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero erase operation.
@@ -19,8 +19,8 @@ import type { EraseArgs, Step } from '../../types.js'
 export async function erase(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { value, column } = args as EraseArgs
 	const inputTable = await store.table(input)
 
@@ -32,5 +32,5 @@ export async function erase(
 		}
 	})
 
-	return from(matrix)
+	return container(output, from(matrix))
 }

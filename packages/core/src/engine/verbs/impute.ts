@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { FillArgs, Step } from '../../types.js'
+import type { FillArgs, Step, TableContainer } from '../../types.js'
 import type { ExprFunctionMap } from './types.js'
 
 /**
@@ -17,8 +17,8 @@ import type { ExprFunctionMap } from './types.js'
 export async function impute(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { value, to } = args as FillArgs
 	const inputTable = await store.table(input)
 
@@ -26,5 +26,5 @@ export async function impute(
 		[to]: (_d: any, $: any) => $.value,
 	}
 
-	return inputTable.params({ value }).impute(dArgs)
+	return container(output, inputTable.params({ value }).impute(dArgs))
 }

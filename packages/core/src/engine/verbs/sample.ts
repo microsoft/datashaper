@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { SampleArgs, Step } from '../../types.js'
+import type { SampleArgs, Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero sample to extract random rows.
@@ -17,11 +16,11 @@ import type { SampleArgs, Step } from '../../types.js'
 export async function sample(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { size, proportion } = args as SampleArgs
 	const inputTable = await store.table(input)
 	const p = Math.round(inputTable.numRows() * (proportion || 1))
 	const s = size || p
-	return inputTable.sample(s)
+	return container(output, inputTable.sample(s))
 }

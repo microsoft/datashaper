@@ -20,8 +20,8 @@ describe('test for sample verb', () => {
 		const store = new TestStore()
 
 		return sample(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(2)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(2)
 		})
 	})
 
@@ -38,8 +38,8 @@ describe('test for sample verb', () => {
 		const store = new TestStore()
 
 		return sample(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(4)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(4)
 		})
 	})
 })

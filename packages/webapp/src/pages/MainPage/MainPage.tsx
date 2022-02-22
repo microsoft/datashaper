@@ -79,7 +79,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 		const output = await store.toMap()
 		pipeline.print()
 		store.print()
-		setResult(res)
+		setResult(res.table)
 		setOutputs(output)
 	}, [pipeline, store, setResult, setOutputs])
 
@@ -94,7 +94,7 @@ export const MainPage: React.FC = memo(function MainMage() {
 			const res = await pipeline.run()
 			const output = await store.toMap()
 			store.print()
-			setResult(res)
+			setResult(res.table)
 			setOutputs(output)
 		},
 		[pipeline, store, setExampleSpec, setSteps, setOutputs, setResult],

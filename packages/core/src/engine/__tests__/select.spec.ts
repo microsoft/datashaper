@@ -20,9 +20,9 @@ describe('test for select verb', () => {
 		const store = new TestStore()
 
 		return select(step, store).then(result => {
-			expect(result.columnNames()).toEqual(['ID', 'item'])
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(5)
+			expect(result.table.columnNames()).toEqual(['ID', 'item'])
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(5)
 		})
 	})
 })

@@ -4,7 +4,9 @@
  */
 import { op, bin as aqbin } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import { TableStore, BinArgs, BinStrategy, Step } from '../../index.js'
+import type { TableContainer } from '../../types.js'
 import { fixedBinCount, fixedBinStep } from '../util/index.js'
 
 /**
@@ -13,8 +15,11 @@ import { fixedBinCount, fixedBinStep } from '../util/index.js'
  * @param store
  * @returns
  */
-export async function bin(step: Step, store: TableStore): Promise<ColumnTable> {
-	const { input, args } = step
+export async function bin(
+	step: Step,
+	store: TableStore,
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { to } = args as BinArgs
 
 	const inputTable = await store.table(input)
@@ -23,7 +28,7 @@ export async function bin(step: Step, store: TableStore): Promise<ColumnTable> {
 		[to]: binExpr(inputTable, args as BinArgs),
 	}
 
-	return inputTable.derive(rArgs)
+	return container(output, inputTable.derive(rArgs))
 }
 
 /**

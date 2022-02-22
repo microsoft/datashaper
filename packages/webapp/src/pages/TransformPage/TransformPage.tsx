@@ -37,7 +37,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 		async step => {
 			if (table && step) {
 				const output = await runPipeline(table, [step])
-				setTable(output)
+				setTable(output.table)
 			}
 		},
 		[table],

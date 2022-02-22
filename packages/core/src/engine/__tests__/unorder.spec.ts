@@ -12,7 +12,7 @@ describe('test for unorder verb', () => {
 		const step: Step = {
 			verb: Verb.Orderby,
 			input: 'table7',
-			output: 'output',
+			output: 'newTable',
 			args: {
 				orders: [{ column: 'item', direction: SortDirection.Ascending }],
 			},
@@ -21,15 +21,15 @@ describe('test for unorder verb', () => {
 		const store = new TestStore()
 
 		await orderby(step, store).then(result => {
-			store.set({ id: 'newTable', table: result })
+			store.set(result)
 
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('item', 0)).toBe('bed')
-			expect(result.get('item', 1)).toBe('chair')
-			expect(result.get('item', 2)).toBe('pillow')
-			expect(result.get('item', 3)).toBe('sofa')
-			expect(result.get('item', 4)).toBe('stool')
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('item', 0)).toBe('bed')
+			expect(result.table.get('item', 1)).toBe('chair')
+			expect(result.table.get('item', 2)).toBe('pillow')
+			expect(result.table.get('item', 3)).toBe('sofa')
+			expect(result.table.get('item', 4)).toBe('stool')
 		})
 
 		const step2: Step = {
@@ -42,13 +42,13 @@ describe('test for unorder verb', () => {
 		}
 
 		return unorder(step2, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('item', 0)).toBe('bed')
-			expect(result.get('item', 1)).toBe('pillow')
-			expect(result.get('item', 2)).toBe('sofa')
-			expect(result.get('item', 3)).toBe('chair')
-			expect(result.get('item', 4)).toBe('stool')
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('item', 0)).toBe('bed')
+			expect(result.table.get('item', 1)).toBe('pillow')
+			expect(result.table.get('item', 2)).toBe('sofa')
+			expect(result.table.get('item', 3)).toBe('chair')
+			expect(result.table.get('item', 4)).toBe('stool')
 		})
 	})
 
@@ -56,7 +56,7 @@ describe('test for unorder verb', () => {
 		const step: Step = {
 			verb: Verb.Orderby,
 			input: 'table7',
-			output: 'output',
+			output: 'newTable',
 			args: {
 				orders: [{ column: 'item', direction: SortDirection.Descending }],
 			},
@@ -65,15 +65,15 @@ describe('test for unorder verb', () => {
 		const store = new TestStore()
 
 		await orderby(step, store).then(result => {
-			store.set({ id: 'newTable', table: result })
+			store.set(result)
 
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('item', 0)).toBe('stool')
-			expect(result.get('item', 1)).toBe('sofa')
-			expect(result.get('item', 2)).toBe('pillow')
-			expect(result.get('item', 3)).toBe('chair')
-			expect(result.get('item', 4)).toBe('bed')
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('item', 0)).toBe('stool')
+			expect(result.table.get('item', 1)).toBe('sofa')
+			expect(result.table.get('item', 2)).toBe('pillow')
+			expect(result.table.get('item', 3)).toBe('chair')
+			expect(result.table.get('item', 4)).toBe('bed')
 		})
 
 		const step2: Step = {
@@ -86,13 +86,13 @@ describe('test for unorder verb', () => {
 		}
 
 		return unorder(step2, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('item', 0)).toBe('bed')
-			expect(result.get('item', 1)).toBe('pillow')
-			expect(result.get('item', 2)).toBe('sofa')
-			expect(result.get('item', 3)).toBe('chair')
-			expect(result.get('item', 4)).toBe('stool')
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('item', 0)).toBe('bed')
+			expect(result.table.get('item', 1)).toBe('pillow')
+			expect(result.table.get('item', 2)).toBe('sofa')
+			expect(result.table.get('item', 3)).toBe('chair')
+			expect(result.table.get('item', 4)).toBe('stool')
 		})
 	})
 
@@ -100,7 +100,7 @@ describe('test for unorder verb', () => {
 		const step: Step = {
 			verb: Verb.Orderby,
 			input: 'table7',
-			output: 'output',
+			output: 'newTable',
 			args: {
 				orders: [{ column: 'quantity', direction: SortDirection.Ascending }],
 			},
@@ -109,15 +109,15 @@ describe('test for unorder verb', () => {
 		const store = new TestStore()
 
 		await orderby(step, store).then(result => {
-			store.set({ id: 'newTable', table: result })
+			store.set(result)
 
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('quantity', 0)).toBe(45)
-			expect(result.get('quantity', 1)).toBe(50)
-			expect(result.get('quantity', 2)).toBe(78)
-			expect(result.get('quantity', 3)).toBe(89)
-			expect(result.get('quantity', 4)).toBe(100)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('quantity', 0)).toBe(45)
+			expect(result.table.get('quantity', 1)).toBe(50)
+			expect(result.table.get('quantity', 2)).toBe(78)
+			expect(result.table.get('quantity', 3)).toBe(89)
+			expect(result.table.get('quantity', 4)).toBe(100)
 		})
 
 		const step2: Step = {
@@ -130,13 +130,13 @@ describe('test for unorder verb', () => {
 		}
 
 		return unorder(step2, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('quantity', 0)).toBe(45)
-			expect(result.get('quantity', 1)).toBe(78)
-			expect(result.get('quantity', 2)).toBe(100)
-			expect(result.get('quantity', 3)).toBe(89)
-			expect(result.get('quantity', 4)).toBe(50)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('quantity', 0)).toBe(45)
+			expect(result.table.get('quantity', 1)).toBe(78)
+			expect(result.table.get('quantity', 2)).toBe(100)
+			expect(result.table.get('quantity', 3)).toBe(89)
+			expect(result.table.get('quantity', 4)).toBe(50)
 		})
 	})
 
@@ -144,7 +144,7 @@ describe('test for unorder verb', () => {
 		const step: Step = {
 			verb: Verb.Orderby,
 			input: 'table7',
-			output: 'output',
+			output: 'newTable',
 			args: {
 				orders: [{ column: 'quantity', direction: SortDirection.Descending }],
 			},
@@ -153,15 +153,15 @@ describe('test for unorder verb', () => {
 		const store = new TestStore()
 
 		await orderby(step, store).then(result => {
-			store.set({ id: 'newTable', table: result })
+			store.set(result)
 
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('quantity', 0)).toBe(100)
-			expect(result.get('quantity', 1)).toBe(89)
-			expect(result.get('quantity', 2)).toBe(78)
-			expect(result.get('quantity', 3)).toBe(50)
-			expect(result.get('quantity', 4)).toBe(45)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('quantity', 0)).toBe(100)
+			expect(result.table.get('quantity', 1)).toBe(89)
+			expect(result.table.get('quantity', 2)).toBe(78)
+			expect(result.table.get('quantity', 3)).toBe(50)
+			expect(result.table.get('quantity', 4)).toBe(45)
 		})
 
 		const step2: Step = {
@@ -174,13 +174,13 @@ describe('test for unorder verb', () => {
 		}
 
 		return unorder(step2, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
-			expect(result.get('quantity', 0)).toBe(45)
-			expect(result.get('quantity', 1)).toBe(78)
-			expect(result.get('quantity', 2)).toBe(100)
-			expect(result.get('quantity', 3)).toBe(89)
-			expect(result.get('quantity', 4)).toBe(50)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('quantity', 0)).toBe(45)
+			expect(result.table.get('quantity', 1)).toBe(78)
+			expect(result.table.get('quantity', 2)).toBe(100)
+			expect(result.table.get('quantity', 3)).toBe(89)
+			expect(result.table.get('quantity', 4)).toBe(50)
 		})
 	})
 })

@@ -3,10 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { StepFunction, TableStore } from '../../index.js'
-import type { ChainArgs, Step } from '../../types.js'
-
+import type { ChainArgs, Step, TableContainer } from '../../types.js'
 import { aggregate } from './aggregate.js'
 import { bin } from './bin.js'
 import { binarize } from './binarize.js'
@@ -74,13 +72,17 @@ const verbs: Record<string, StepFunction> = {
 	unroll,
 }
 
-async function exec(step: Step, store: TableStore): Promise<ColumnTable> {
+async function exec(step: Step, store: TableStore): Promise<TableContainer> {
 	const { args } = step
 	const { steps, nofork } = args as ChainArgs
 
 	const substore = nofork ? store : await store.clone()
 
-	let output: ColumnTable = table({})
+	let output: TableContainer = {
+		id: step.output,
+		table: table({}),
+	}
+
 	for (let index = 0; index < steps.length; index++) {
 		const step = steps[index] as Step<unknown>
 		const { verb } = step
@@ -89,16 +91,20 @@ async function exec(step: Step, store: TableStore): Promise<ColumnTable> {
 			const fn = verbs[verb] || exec
 			// child store gets intermediate outputs so chain steps can do lookups
 			output = await fn(step, substore)
-			substore.set({ id: step.output, table: output })
+			substore.set(output)
 		} catch (e) {
 			console.error(`Pipeline failed on step ${index}`, step)
 			throw e
 		}
 	}
 	// parent store only gets the final output of the chain
-	store.set({ id: step.output, table: output })
+	const final = {
+		...output,
+		id: step.output,
+	}
+	store.set(final)
 	// return the final table
-	return output
+	return final
 }
 
 /**
@@ -108,6 +114,6 @@ async function exec(step: Step, store: TableStore): Promise<ColumnTable> {
 export async function chain(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
+): Promise<TableContainer> {
 	return exec(step, store)
 }

@@ -2,10 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { run } from './engine/index.js'
 import { factory } from './engine/verbs/index.js'
-import type { TableStore, Step, Verb, Pipeline } from './types.js'
+import type {
+	TableStore,
+	Step,
+	Verb,
+	Pipeline,
+	TableContainer,
+} from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -77,7 +82,7 @@ export class DefaultPipeline implements Pipeline {
 		this._steps[index] = step
 		return this.steps
 	}
-	async run(): Promise<ColumnTable> {
+	async run(): Promise<TableContainer> {
 		return run(this._steps, this._store)
 	}
 	print(): void {

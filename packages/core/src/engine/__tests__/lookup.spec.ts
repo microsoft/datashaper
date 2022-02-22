@@ -18,8 +18,8 @@ describe('test for lookup verb', () => {
 		const store = new TestStore()
 
 		return lookup(step, store).then(result => {
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
 		})
 	})
 })

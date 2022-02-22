@@ -3,43 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
-/**
- * Resolver function that looks up a table by id.
- */
-export type ResolverFunction = (id: string) => Promise<ColumnTable>
+import type { ResolverFunction, TableContainer } from './tables.js'
 
 /**
  * Function callback for table change listeners.
  */
-export type ListenerFunction = (containre: TableContainer) => void
+export type ListenerFunction = (container: TableContainer) => void
 
 /**
  * Function callback for general activity listener.
  */
 export type ChangeListenerFunction = () => void
-
-export interface TableContainer {
-	/**
-	 * This is the formal id for a table, and must be unique within the store.
-	 * A URI would normally be appropriate.
-	 */
-	id: string
-	/**
-	 * This is an optional alias or friendly name for the table.
-	 */
-	name?: string
-	/**
-	 * This is the actual Arquero table instance to store.
-	 * If it has not been resolved yet it will be undefined.
-	 */
-	table?: ColumnTable
-	/**
-	 * Optional resolver function to lazy-load a table when first requested.
-	 * If a table is not found, the resolver will be invoked or an error thrown.
-	 */
-	resolver?: ResolverFunction
-}
 
 /**
  * Store for a collection of tables, used as an execution storage context for pipelines.

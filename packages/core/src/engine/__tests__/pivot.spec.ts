@@ -23,11 +23,11 @@ describe('test for pivot verb', () => {
 		const store = new TestStore()
 
 		return pivot(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('A', 0)).toBe(1)
-			expect(result.get('B', 0)).toBe(2)
-			expect(result.get('C', 0)).toBe(3)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('A', 0)).toBe(1)
+			expect(result.table.get('B', 0)).toBe(2)
+			expect(result.table.get('C', 0)).toBe(3)
 		})
 	})
 
@@ -46,10 +46,10 @@ describe('test for pivot verb', () => {
 		const store = new TestStore()
 
 		return pivot(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('A', 0)).toBe(7)
-			expect(result.get('B', 0)).toBe(8)
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('A', 0)).toBe(7)
+			expect(result.table.get('B', 0)).toBe(8)
 		})
 	})
 
@@ -68,10 +68,10 @@ describe('test for pivot verb', () => {
 		const store = new TestStore()
 
 		return pivot(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('A', 0)).toBe(4)
-			expect(result.get('B', 0)).toBe(5)
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('A', 0)).toBe(4)
+			expect(result.table.get('B', 0)).toBe(5)
 		})
 	})
 
@@ -90,10 +90,10 @@ describe('test for pivot verb', () => {
 		const store = new TestStore()
 
 		return pivot(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('A', 0)).toBe(1)
-			expect(result.get('B', 0)).toBe(3)
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('A', 0)).toBe(1)
+			expect(result.table.get('B', 0)).toBe(3)
 		})
 	})
 
@@ -112,10 +112,10 @@ describe('test for pivot verb', () => {
 		const store = new TestStore()
 
 		return pivot(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('A', 0)).toBe(2.3333333333333335)
-			expect(result.get('B', 0)).toBe(4)
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('A', 0)).toBe(2.3333333333333335)
+			expect(result.table.get('B', 0)).toBe(4)
 		})
 	})
 
@@ -134,10 +134,10 @@ describe('test for pivot verb', () => {
 		const store = new TestStore()
 
 		return pivot(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('A', 0)).toBe(2)
-			expect(result.get('B', 0)).toBe(4)
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('A', 0)).toBe(2)
+			expect(result.table.get('B', 0)).toBe(4)
 		})
 	})
 })

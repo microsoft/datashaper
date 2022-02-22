@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { BinarizeArgs, Step } from '../../types.js'
+import type { BinarizeArgs, Step, TableContainer } from '../../types.js'
 import { compare } from '../util/index.js'
 
 /**
@@ -13,8 +13,8 @@ import { compare } from '../util/index.js'
 export async function binarize(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { column, value, operator, type, to } = args as BinarizeArgs
 	const inputTable = await store.table(input)
 
@@ -24,5 +24,5 @@ export async function binarize(
 		[to]: expr,
 	}
 
-	return inputTable.derive(dArgs)
+	return container(output, inputTable.derive(dArgs))
 }
