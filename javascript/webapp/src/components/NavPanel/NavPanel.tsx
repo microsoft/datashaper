@@ -5,7 +5,7 @@
 
 import { Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback } from 'react'
-import { useSettings } from '~states/settings.js'
+import { useSettings } from '~states/settings'
 
 export interface NavPanelProps {
 	isOpen: boolean

@@ -1,10 +1,14 @@
-import { Settings } from '~models/Settings.js'
-import { isDarkMode } from '~localStorageHandler/localStorageHandler.js'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { isDarkMode } from '~localStorageHandler/localStorageHandler'
+import { Settings } from '~models/Settings'
 
 export const defaultSettings = async () => {
 	try {
-		let darkMode = await isDarkMode()
-		let settings: Settings = {
+		const darkMode = await isDarkMode()
+		const settings: Settings = {
 			isDarkMode: darkMode,
 		}
 
