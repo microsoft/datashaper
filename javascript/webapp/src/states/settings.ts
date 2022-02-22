@@ -5,11 +5,13 @@
 import { useDebounceFn } from 'ahooks'
 import {
 	atom,
+	selector,
 	SetterOrUpdater,
 	useRecoilState,
 	useRecoilValue,
 	useSetRecoilState,
 } from 'recoil'
+import { load, Theme, ThemeVariant } from '@thematic/core'
 import { Settings } from '~models/Settings'
 import { defaultSettings } from '~hooks/useSettings'
 
@@ -42,4 +44,20 @@ export const useSettingsDebounced = (): [
 		},
 	)
 	return [settings, debouncedSettings.run]
+}
+
+export const themeState = selector<Theme>({
+	key: 'theme',
+	dangerouslyAllowMutability: true,
+	get: ({ get }) => {
+		const settings = get(currentSettings)
+		const theme = load({
+			variant: settings.isDarkMode ? ThemeVariant.Dark : ThemeVariant.Light,
+		})
+		return theme
+	},
+})
+
+export function useTheme() {
+	return useRecoilValue(themeState)
 }

@@ -18,8 +18,8 @@ export const App: React.FC = memo(function App() {
 		<ErrorBoundary>
 			<RecoilRoot>
 				<Router>
-					<StyleContext>
-						<Suspense fallback={<Spinner />}>
+					<Suspense fallback={<Spinner />}>
+						<StyleContext>
 							<Container>
 								<Header />
 								<PageContainer>
@@ -28,8 +28,8 @@ export const App: React.FC = memo(function App() {
 									</Layout>
 								</PageContainer>
 							</Container>
-						</Suspense>
-					</StyleContext>
+						</StyleContext>
+					</Suspense>
 				</Router>
 			</RecoilRoot>
 		</ErrorBoundary>
