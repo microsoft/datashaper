@@ -8,11 +8,11 @@ import styled from 'styled-components'
 import { useBusinessLogic } from './hooks'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const { setSteps, steps, files } = useBusinessLogic()
+	const { setSteps, steps, tables } = useBusinessLogic()
 
 	return (
 		<Container>
-			<PrepareDataFull files={files} steps={steps} onUpdateSteps={setSteps} />
+			<PrepareDataFull tables={tables} steps={steps} onUpdateSteps={setSteps} />
 		</Container>
 	)
 })

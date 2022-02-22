@@ -3,27 +3,27 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import type { TableStore } from '@data-wrangling-components/core'
-import type { BaseFile } from '@data-wrangling-components/utilities'
+import type {
+	TableContainer,
+	TableStore,
+} from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 
 export function useAddNewTables(
 	store: TableStore,
 	setStoredTables: (tables: Map<string, ColumnTable>) => void,
-): (files: BaseFile[]) => void {
+): (tables: TableContainer[]) => void {
 	return useCallback(
-		async (files: BaseFile[]) => {
+		async (tables: TableContainer[]) => {
 			const existing = store.list()
-			const _tables = files.map(async file => {
-				const isStored = existing.includes(file.name)
+			tables.forEach(table => {
+				const isStored = existing.includes(table.name)
 				if (!isStored) {
-					const tab = await file?.toTable()
-					store.set(file.name, tab)
+					store.set(table.name, table?.table as ColumnTable)
 				}
 			})
 
-			await Promise.all(_tables)
 			const _storedTables = await store.toMap()
 			setStoredTables(_storedTables)
 		},

@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
-import type { BaseFile } from '@data-wrangling-components/utilities'
+import type { Step, TableContainer } from '@data-wrangling-components/core'
 import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -12,13 +11,13 @@ import { TablesList, PreviewTable, OutputTable } from '../index.js'
 import { useBusinessLogic } from './hooks.js'
 
 export const PrepareDataFull: React.FC<{
-	files: BaseFile[]
+	tables: TableContainer[]
 	onUpdateSteps: (steps: Step[]) => void
 	steps?: Step[]
 	inputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 }> = memo(function PrepareDataFull({
-	files,
+	tables,
 	onUpdateSteps,
 	steps,
 	inputHeaderCommandBar,
@@ -34,7 +33,7 @@ export const PrepareDataFull: React.FC<{
 		output,
 		selectedMetadata,
 		lastTableName,
-	} = useBusinessLogic(files, onUpdateSteps, steps)
+	} = useBusinessLogic(tables, onUpdateSteps, steps)
 
 	return (
 		<Container>
@@ -43,7 +42,7 @@ export const PrepareDataFull: React.FC<{
 					<SectionTitle>Inputs</SectionTitle>
 					<InputDisplay>
 						<TablesList
-							tables={files}
+							tables={tables}
 							selected={selectedTableName}
 							onSelect={setSelectedTableName}
 						/>
