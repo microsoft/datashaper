@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BaseFile } from '@data-wrangling-components/utilities'
 import {
 	DocumentCard,
 	DocumentCardTitle,
@@ -14,20 +13,20 @@ import styled from 'styled-components'
 
 export const TableCard: React.FC<{
 	index: number
-	table: BaseFile
+	tableName: string
 	isSelected: (name: string) => boolean
 	onSelect?: (name: string) => void
-}> = memo(function TableCard({ index, table, isSelected, onSelect }) {
+}> = memo(function TableCard({ index, tableName, isSelected, onSelect }) {
 	return (
 		<TooltipHost key={index} content={'Preview table'}>
 			<Card
-				isSelected={isSelected(table.name)}
-				onClick={() => onSelect && onSelect(table.name)}
+				isSelected={isSelected(tableName)}
+				onClick={() => onSelect && onSelect(tableName)}
 			>
 				<DocumentCardTitle
 					styles={styles.title}
 					showAsSecondaryTitle
-					title={table.name}
+					title={tableName}
 				/>
 				<PreviewIcon iconName={iconProps.preview.iconName} />
 			</Card>
@@ -52,7 +51,7 @@ const Card = styled(DocumentCard)<{ isSelected: boolean }>`
 	margin-top: unset !important;
 	display: flex;
 	justify-content: space-between;
-	padding 4px 8px 4px 4px;
+	padding: 4px 8px 4px 4px;
 	border: 1px solid
 		${({ theme, isSelected }) =>
 			isSelected ? theme.palette.neutralTertiary : theme.palette.neutralLight};
