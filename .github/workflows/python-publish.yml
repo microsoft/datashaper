@@ -1,0 +1,44 @@
+name: Python-Publish-CI
+on:
+  push:
+    paths:
+      - 'python/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+        poetry-version: [1.1.12]
+    steps:
+      if: github.ref == 'refs/heads/main'
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          python-version: [3.8]
+          poetry-version: [1.1.12]
+
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Set up Python ${{ matrix.python-version }}
+          uses: actions/setup-python@v2
+          with:
+            python-version: ${{ matrix.python-version }}
+
+        - name: Install poetry ${{ matrix.poetry-version }}
+          run: |
+            python -m ensurepip
+            python -m pip install --upgrade pip
+            python -m pip install poetry==${{ matrix.poetry-version }}
+
+        - name: Install dependencies
+          shell: bash
+          working-directory: ./python
+          run: python -m poetry install
+
+        - name: Publish to PyPi
+          continue-on-error: true
+          working-directory: ./python
+          run: |
+            python -m poetry publish --build --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_PASSWORD }}
