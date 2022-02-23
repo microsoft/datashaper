@@ -3,12 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { loadFluentTheme, ThematicFluentProvider } from '@thematic/fluent'
-import { ApplicationStyles, useThematic } from '@thematic/react'
+import { ApplicationStyles } from '@thematic/react'
 import { memo, useMemo } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { useTheme } from '../../states/settings.js'
 
 export const StyleContext: React.FC = memo(function StyleContext({ children }) {
-	const theme = useThematic()
+	const theme = useTheme()
 	const fluentTheme = useMemo(() => loadFluentTheme(theme), [theme])
 
 	return (

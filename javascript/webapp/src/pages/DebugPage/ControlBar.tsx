@@ -24,7 +24,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { ExamplesDropdown } from './ExamplesDropdown'
-import { useLoadSpecFile, useLoadTableFiles } from './hooks.js'
+import { useLoadSpecFile, useLoadTableFiles } from './hooks'
 import { FileDrop } from '~components/FileDrop'
 
 const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {

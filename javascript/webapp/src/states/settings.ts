@@ -1,0 +1,63 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { load, Theme, ThemeVariant } from '@thematic/core'
+import { useDebounceFn } from 'ahooks'
+import {
+	atom,
+	selector,
+	SetterOrUpdater,
+	useRecoilState,
+	useRecoilValue,
+	useSetRecoilState,
+} from 'recoil'
+import { defaultSettings } from '~hooks/useSettings'
+import { Settings } from '~models/Settings'
+
+const currentSettings = atom<Settings>({
+	key: 'settings',
+	default: defaultSettings(),
+})
+
+export function useSettings(): [Settings, SetterOrUpdater<Settings>] {
+	return useRecoilState(currentSettings)
+}
+
+export function useSettingsValue(): Settings {
+	return useRecoilValue(currentSettings)
+}
+
+export function useSettingsSetter(): SetterOrUpdater<Settings> {
+	return useSetRecoilState(currentSettings)
+}
+
+export const useSettingsDebounced = (): [
+	Settings,
+	SetterOrUpdater<Settings>,
+] => {
+	const [settings, setSettings] = useSettings()
+	const debouncedSettings = useDebounceFn(
+		(newSettings: any) => setSettings(newSettings),
+		{
+			wait: 250,
+		},
+	)
+	return [settings, debouncedSettings.run]
+}
+
+export const themeState = selector<Theme>({
+	key: 'theme',
+	dangerouslyAllowMutability: true,
+	get: ({ get }) => {
+		const settings = get(currentSettings)
+		const theme = load({
+			variant: settings.isDarkMode ? ThemeVariant.Dark : ThemeVariant.Light,
+		})
+		return theme
+	},
+})
+
+export function useTheme(): Theme {
+	return useRecoilValue(themeState)
+}
