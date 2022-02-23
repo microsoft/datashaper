@@ -24,7 +24,7 @@ export function useBusinessLogic(): {
 				.list(FileType.table)
 				.map(async table => {
 					return {
-						name: table.name,
+						id: table.name,
 						table: await table.toTable(),
 					}
 				})

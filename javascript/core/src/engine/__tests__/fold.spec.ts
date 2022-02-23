@@ -19,14 +19,14 @@ describe('test for fold verb', () => {
 
 		return fold(step, store).then(result => {
 			// removed ID column and two new columns were added (key and value)
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
 
 			// spot-check the fill value
-			expect(result.get('name', 0)).toBe('A')
-			expect(result.get('count', 0)).toBe(10)
-			expect(result.get('key', 0)).toBe('ID')
-			expect(result.get('value', 0)).toBe(1)
+			expect(result.table.get('name', 0)).toBe('A')
+			expect(result.table.get('count', 0)).toBe(10)
+			expect(result.table.get('key', 0)).toBe('ID')
+			expect(result.table.get('value', 0)).toBe(1)
 		})
 	})
 
@@ -42,16 +42,16 @@ describe('test for fold verb', () => {
 
 		return fold(step, store).then(result => {
 			// removed ID column and two new columns were added (key and value)
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(10)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(10)
 
-			expect(result.get('count', 0)).toBe(10)
-			expect(result.get('key', 0)).toBe('ID')
-			expect(result.get('value', 0)).toBe(1)
+			expect(result.table.get('count', 0)).toBe(10)
+			expect(result.table.get('key', 0)).toBe('ID')
+			expect(result.table.get('value', 0)).toBe(1)
 
-			expect(result.get('count', 1)).toBe(10)
-			expect(result.get('key', 1)).toBe('name')
-			expect(result.get('value', 1)).toBe('A')
+			expect(result.table.get('count', 1)).toBe(10)
+			expect(result.table.get('key', 1)).toBe('name')
+			expect(result.table.get('value', 1)).toBe('A')
 		})
 	})
 })

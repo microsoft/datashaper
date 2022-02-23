@@ -21,7 +21,7 @@ export const TablesList: React.FC<{
 			{tables.map((table, index) => {
 				return (
 					<TableCard
-						tableName={table.name}
+						tableName={table.name || table.id}
 						index={index}
 						key={index}
 						isSelected={isSelected}

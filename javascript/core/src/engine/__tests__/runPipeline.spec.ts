@@ -22,7 +22,7 @@ describe('runPipeline', () => {
 			},
 		}
 		return runPipeline(tbl, step).then(result => {
-			expect(result.numCols()).toBe(2)
+			expect(result.table.numCols()).toBe(2)
 		})
 	})
 
@@ -38,7 +38,7 @@ describe('runPipeline', () => {
 			},
 		}
 		return runPipeline(tbl, step).then(result => {
-			expect(result.numCols()).toBe(2)
+			expect(result.table.numCols()).toBe(2)
 		})
 	})
 
@@ -66,8 +66,8 @@ describe('runPipeline', () => {
 			},
 		]
 		return runPipeline(tbl, step).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.get('derived', 0)).toBe(2)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.get('derived', 0)).toBe(2)
 		})
 	})
 
@@ -106,8 +106,8 @@ describe('runPipeline', () => {
 			},
 		]
 		return runPipeline(tbl, step).then(result => {
-			expect(result.numCols()).toBe(1)
-			expect(result.get('derived', 0)).toBe(2)
+			expect(result.table.numCols()).toBe(1)
+			expect(result.table.get('derived', 0)).toBe(2)
 		})
 	})
 })

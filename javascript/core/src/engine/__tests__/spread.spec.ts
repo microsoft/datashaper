@@ -20,9 +20,9 @@ describe('test for spread verb', () => {
 		const store = new TestStore()
 
 		return spread(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(6)
-			expect(result.get('ID_1', 0)).toBe(1)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(6)
+			expect(result.table.get('ID_1', 0)).toBe(1)
 		})
 	})
 })

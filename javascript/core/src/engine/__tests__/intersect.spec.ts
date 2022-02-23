@@ -18,12 +18,12 @@ describe('test for intersect verb', () => {
 		const store = new TestStore()
 
 		return intersect(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(4)
-			expect(result.get('ID', 0)).toBe(1)
-			expect(result.get('ID', 1)).toBe(2)
-			expect(result.get('ID', 2)).toBe(4)
-			expect(result.get('ID', 3)).toBe(4)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(4)
+			expect(result.table.get('ID', 0)).toBe(1)
+			expect(result.table.get('ID', 1)).toBe(2)
+			expect(result.table.get('ID', 2)).toBe(4)
+			expect(result.table.get('ID', 3)).toBe(4)
 		})
 	})
 })

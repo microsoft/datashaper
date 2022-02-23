@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { BinArgs, BinStrategy } from '../../index.js'
-import { Step, Verb } from '../../types.js'
+import { Step, TableContainer, Verb } from '../../types.js'
 import { bin } from '../verbs/bin.js'
 import { TestStore } from './TestStore.js'
 
@@ -58,8 +57,8 @@ describe('test for bin verb', () => {
 			// 150 - 20 = 130 / 5 bins = 26 step
 			expect(b).toEqual([20, 46, 72, 98, 124])
 			// unclamped should be +- Infinity
-			expect(result.get('newColumn', 0)).toBe(-Infinity)
-			expect(result.get('newColumn', 19)).toBe(Infinity)
+			expect(result.table.get('newColumn', 0)).toBe(-Infinity)
+			expect(result.table.get('newColumn', 19)).toBe(Infinity)
 		})
 	})
 
@@ -83,9 +82,9 @@ describe('test for bin verb', () => {
 			// 150 - 20 = 130 / 5 bins = 26 step
 			expect(b).toEqual([20, 46, 72, 98, 124])
 			// clamped should get the min value
-			expect(result.get('newColumn', 0)).toBe(20)
+			expect(result.table.get('newColumn', 0)).toBe(20)
 			// clamped should get penultimate value
-			expect(result.get('newColumn', 19)).toBe(124)
+			expect(result.table.get('newColumn', 19)).toBe(124)
 		})
 	})
 
@@ -146,8 +145,8 @@ describe('test for bin verb', () => {
 			// 150 - 20 = 130 / 30 step = 4.33 so 5 bins
 			expect(b).toEqual([20, 50, 80, 110, 140])
 			// unclamped should be +- Infinity
-			expect(result.get('newColumn', 0)).toBe(-Infinity)
-			expect(result.get('newColumn', 19)).toBe(Infinity)
+			expect(result.table.get('newColumn', 0)).toBe(-Infinity)
+			expect(result.table.get('newColumn', 19)).toBe(Infinity)
 		})
 	})
 
@@ -170,14 +169,14 @@ describe('test for bin verb', () => {
 			const b = bins(result)
 			// 150 - 20 = 130 / 30 step = 4.33 so 5 bins
 			expect(b).toEqual([20, 50, 80, 110, 140])
-			expect(result.get('newColumn', 0)).toBe(20)
-			expect(result.get('newColumn', 19)).toBe(140)
+			expect(result.table.get('newColumn', 0)).toBe(20)
+			expect(result.table.get('newColumn', 19)).toBe(140)
 		})
 	})
 })
 
-function bins(table: ColumnTable) {
-	const objects = table.objects()
+function bins(container: TableContainer) {
+	const objects = container.table.objects()
 	const values = objects.reduce((acc, cur) => {
 		// ignore infinities for bin counting
 		if (cur.newColumn > -Infinity && cur.newColumn < Infinity) {

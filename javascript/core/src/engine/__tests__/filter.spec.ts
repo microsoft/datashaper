@@ -25,11 +25,11 @@ describe('test for filter verb', () => {
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(3)
-			expect(result.get('count', 0)).toBe(100)
-			expect(result.get('count', 1)).toBe(110)
-			expect(result.get('count', 2)).toBe(120)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(3)
+			expect(result.table.get('count', 0)).toBe(100)
+			expect(result.table.get('count', 1)).toBe(110)
+			expect(result.table.get('count', 2)).toBe(120)
 		})
 	})
 
@@ -50,10 +50,10 @@ describe('test for filter verb', () => {
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(2)
-			expect(result.get('count', 0)).toBe(110)
-			expect(result.get('count', 1)).toBe(120)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(2)
+			expect(result.table.get('count', 0)).toBe(110)
+			expect(result.table.get('count', 1)).toBe(120)
 		})
 	})
 
@@ -74,10 +74,10 @@ describe('test for filter verb', () => {
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(2)
-			expect(result.get('count', 0)).toBe(80)
-			expect(result.get('count', 1)).toBe(90)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(2)
+			expect(result.table.get('count', 0)).toBe(80)
+			expect(result.table.get('count', 1)).toBe(90)
 		})
 	})
 
@@ -98,9 +98,9 @@ describe('test for filter verb', () => {
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('name', 0)).toBe('D')
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('name', 0)).toBe('D')
 		})
 	})
 
@@ -120,10 +120,10 @@ describe('test for filter verb', () => {
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(2)
-			expect(result.get('quantity', 0)).toBe(78)
-			expect(result.get('quantity', 1)).toBe(45)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(2)
+			expect(result.table.get('quantity', 0)).toBe(78)
+			expect(result.table.get('quantity', 1)).toBe(45)
 		})
 	})
 
@@ -144,9 +144,9 @@ describe('test for filter verb', () => {
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('item', 0)).toBe('bed')
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('item', 0)).toBe('bed')
 		})
 	})
 })

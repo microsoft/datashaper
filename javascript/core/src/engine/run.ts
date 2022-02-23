@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { TableStore } from '../index.js'
-import { Step, Verb } from '../types.js'
+import { Step, TableContainer, Verb } from '../types.js'
 import { chain } from './verbs/chain.js'
 
 /**
@@ -21,7 +20,7 @@ import { chain } from './verbs/chain.js'
 export async function run(
 	steps: Step[],
 	store: TableStore,
-): Promise<ColumnTable> {
+): Promise<TableContainer> {
 	if (steps.length === 0) {
 		throw new Error('no steps in chain')
 	}
