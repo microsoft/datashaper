@@ -3,10 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export const Pages = {
-	Transform: {
-		name: 'Transform',
-		path: '/transform',
-	},
 	Performance: {
 		name: 'Performance',
 		path: '/performance',

@@ -3,10 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Panel, Toggle } from '@fluentui/react'
+import { Link, Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback } from 'react'
+import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 import { setDarkMode } from '../../localStorageHandler/localStorageHandler.js'
+import { useHelpFileContentValue } from '~states/helpFileContent'
 import { useSettings } from '~states/settings'
 
 export interface NavPanelProps {
@@ -19,6 +21,7 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 	onDismiss,
 }: NavPanelProps) {
 	const [settings, setSettings] = useSettings()
+	const helpFileContent = useHelpFileContentValue()
 
 	const setDarkModeStatus = useCallback(
 		async (ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
@@ -51,7 +54,17 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 
 			<HelpSection>
 				<H3>Help</H3>
+
+				<ReactMarkdown>{helpFileContent}</ReactMarkdown>
 			</HelpSection>
+
+			<LinkSection>
+				<H3>Links</H3>
+
+				<ListItem href={'/prepare'}>Prepare Data Page</ListItem>
+				<ListItem href={'/debug'}>Debug Page</ListItem>
+				<ListItem href={'/performance'}>Performance Test Page</ListItem>
+			</LinkSection>
 		</Panel>
 	)
 })
@@ -66,5 +79,14 @@ const H3 = styled.h3`
 
 const HelpSection = styled.div`
 	margin-left: 10px;
-	margin-top: 10px;
+	margin-top: 20px;
+`
+
+const LinkSection = styled.div`
+	margin-left: 10px;
+	margin-top: 20px;
+`
+
+const ListItem = styled(Link)`
+	display: block;
 `
