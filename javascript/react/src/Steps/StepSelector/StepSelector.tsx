@@ -55,10 +55,10 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 	},
 )
 
-enum Compound {
-	'Multi-Binarize' = 'multi-binarize',
-	'Filter-Aggregate-Lookup' = 'filter-aggregate-lookup',
-}
+// enum Compound {
+// 	'Multi-Binarize' = 'multi-binarize',
+// 	'Filter-Aggregate-Lookup' = 'filter-aggregate-lookup',
+// }
 
 function useVerbOptions() {
 	return useMemo(() => {
@@ -69,18 +69,18 @@ function useVerbOptions() {
 	}, [])
 }
 
-function useCompoundOptions() {
-	return useMemo(() => {
-		return Object.entries(Compound).map(([text, key]) => ({
-			key,
-			text,
-		}))
-	}, [])
-}
+// function useCompoundOptions() {
+// 	return useMemo(() => {
+// 		return Object.entries(Compound).map(([text, key]) => ({
+// 			key,
+// 			text,
+// 		}))
+// 	}, [])
+// }
 
 function useGroupedOptions() {
 	const verbOptions = useVerbOptions()
-	const compoundOptions = useCompoundOptions()
+	// const compoundOptions = useCompoundOptions()
 	return useMemo(
 		() => [
 			{ key: 'verbs', text: 'Verbs', itemType: DropdownMenuItemType.Header },
@@ -92,7 +92,7 @@ function useGroupedOptions() {
 			// },
 			// ...compoundOptions,
 		],
-		[verbOptions, compoundOptions],
+		[verbOptions],
 	)
 }
 
