@@ -4,10 +4,10 @@
  */
 
 import { escape, op } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { RecodeArgs, Step } from '../../types.js'
+import type { RecodeArgs, Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero derive to map a list of values to new values.
@@ -19,14 +19,14 @@ import type { RecodeArgs, Step } from '../../types.js'
 export async function recode(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { column, to, map } = args as RecodeArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const dArgs: ExprObject = {
 		[to]: escape((d: any) => op.recode(d[column], map)),
 	}
 
-	return inputTable.derive(dArgs)
+	return container(output, inputTable.derive(dArgs))
 }

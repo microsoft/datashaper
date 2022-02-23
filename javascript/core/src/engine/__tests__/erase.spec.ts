@@ -18,11 +18,11 @@ describe('test for erase verb', () => {
 		const store = new TestStore()
 
 		return erase(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(6)
-			expect(result.get('ID', 3)).toBeUndefined()
-			expect(result.get('ID', 4)).toBeUndefined()
-			expect(result.get('ID', 5)).toBeUndefined()
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(6)
+			expect(result.table.get('ID', 3)).toBeUndefined()
+			expect(result.table.get('ID', 4)).toBeUndefined()
+			expect(result.table.get('ID', 5)).toBeUndefined()
 		})
 	})
 
@@ -37,10 +37,10 @@ describe('test for erase verb', () => {
 		const store = new TestStore()
 
 		return erase(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(6)
-			expect(result.get('item', 2)).toBeUndefined()
-			expect(result.get('item', 3)).toBeUndefined()
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(6)
+			expect(result.table.get('item', 2)).toBeUndefined()
+			expect(result.table.get('item', 3)).toBeUndefined()
 		})
 	})
 })

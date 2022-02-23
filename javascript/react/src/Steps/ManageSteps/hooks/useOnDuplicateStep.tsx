@@ -26,7 +26,7 @@ export function useOnDuplicateStep(
 			const tableName =
 				type === StepsType.Table ? createTableName(_step.output) : _step.output
 
-			const outputTable = store ? await store.get(_step.output) : table
+			const outputTable = store ? await store.table(_step.output) : table
 			const formattedArgs = await formattedColumnArgs(
 				_step,
 				outputTable?.columnNames() ?? [],

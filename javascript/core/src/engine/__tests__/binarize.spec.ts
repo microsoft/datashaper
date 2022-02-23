@@ -26,15 +26,15 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
 			// test where criteria match
-			expect(result.get('newColumn', 0)).toBe(0)
-			expect(result.get('newColumn', 1)).toBe(0)
-			expect(result.get('newColumn', 2)).toBe(0)
-			expect(result.get('newColumn', 3)).toBe(1)
-			expect(result.get('newColumn', 4)).toBe(1)
+			expect(result.table.get('newColumn', 0)).toBe(0)
+			expect(result.table.get('newColumn', 1)).toBe(0)
+			expect(result.table.get('newColumn', 2)).toBe(0)
+			expect(result.table.get('newColumn', 3)).toBe(1)
+			expect(result.table.get('newColumn', 4)).toBe(1)
 		})
 	})
 
@@ -56,15 +56,15 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
 			// test where criteria match
-			expect(result.get('newColumn', 0)).toBe(0)
-			expect(result.get('newColumn', 1)).toBe(0)
-			expect(result.get('newColumn', 2)).toBe(0)
-			expect(result.get('newColumn', 3)).toBe(0)
-			expect(result.get('newColumn', 4)).toBe(1)
+			expect(result.table.get('newColumn', 0)).toBe(0)
+			expect(result.table.get('newColumn', 1)).toBe(0)
+			expect(result.table.get('newColumn', 2)).toBe(0)
+			expect(result.table.get('newColumn', 3)).toBe(0)
+			expect(result.table.get('newColumn', 4)).toBe(1)
 		})
 	})
 
@@ -86,15 +86,15 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
 			// test where criteria match
-			expect(result.get('newColumn', 0)).toBe(1)
-			expect(result.get('newColumn', 1)).toBe(1)
-			expect(result.get('newColumn', 2)).toBe(1)
-			expect(result.get('newColumn', 3)).toBe(0)
-			expect(result.get('newColumn', 4)).toBe(0)
+			expect(result.table.get('newColumn', 0)).toBe(1)
+			expect(result.table.get('newColumn', 1)).toBe(1)
+			expect(result.table.get('newColumn', 2)).toBe(1)
+			expect(result.table.get('newColumn', 3)).toBe(0)
+			expect(result.table.get('newColumn', 4)).toBe(0)
 		})
 	})
 
@@ -116,16 +116,16 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(6)
+			expect(result.table.numRows()).toBe(6)
 			// test where criteria match
-			expect(result.get('newColumn', 0)).toBe(0)
-			expect(result.get('newColumn', 1)).toBe(0)
-			expect(result.get('newColumn', 2)).toBe(1)
-			expect(result.get('newColumn', 3)).toBe(1)
-			expect(result.get('newColumn', 4)).toBe(0)
-			expect(result.get('newColumn', 5)).toBe(0)
+			expect(result.table.get('newColumn', 0)).toBe(0)
+			expect(result.table.get('newColumn', 1)).toBe(0)
+			expect(result.table.get('newColumn', 2)).toBe(1)
+			expect(result.table.get('newColumn', 3)).toBe(1)
+			expect(result.table.get('newColumn', 4)).toBe(0)
+			expect(result.table.get('newColumn', 5)).toBe(0)
 		})
 	})
 
@@ -146,16 +146,16 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(6)
+			expect(result.table.numRows()).toBe(6)
 			// test where criteria match
-			expect(result.get('newColumn', 0)).toBe(0)
-			expect(result.get('newColumn', 1)).toBe(1)
-			expect(result.get('newColumn', 2)).toBe(0)
-			expect(result.get('newColumn', 3)).toBe(0)
-			expect(result.get('newColumn', 4)).toBe(0)
-			expect(result.get('newColumn', 5)).toBe(1)
+			expect(result.table.get('newColumn', 0)).toBe(0)
+			expect(result.table.get('newColumn', 1)).toBe(1)
+			expect(result.table.get('newColumn', 2)).toBe(0)
+			expect(result.table.get('newColumn', 3)).toBe(0)
+			expect(result.table.get('newColumn', 4)).toBe(0)
+			expect(result.table.get('newColumn', 5)).toBe(1)
 		})
 	})
 
@@ -177,16 +177,16 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(6)
+			expect(result.table.numRows()).toBe(6)
 			// test where criteria match
-			expect(result.get('newColumn', 0)).toBe(0)
-			expect(result.get('newColumn', 1)).toBeUndefined()
-			expect(result.get('newColumn', 2)).toBe(1)
-			expect(result.get('newColumn', 3)).toBe(1)
-			expect(result.get('newColumn', 4)).toBe(0)
-			expect(result.get('newColumn', 5)).toBeUndefined()
+			expect(result.table.get('newColumn', 0)).toBe(0)
+			expect(result.table.get('newColumn', 1)).toBeUndefined()
+			expect(result.table.get('newColumn', 2)).toBe(1)
+			expect(result.table.get('newColumn', 3)).toBe(1)
+			expect(result.table.get('newColumn', 4)).toBe(0)
+			expect(result.table.get('newColumn', 5)).toBeUndefined()
 		})
 	})
 })

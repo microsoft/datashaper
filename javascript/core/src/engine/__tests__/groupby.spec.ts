@@ -20,8 +20,8 @@ describe('test for groupby verb', () => {
 		const store = new TestStore()
 
 		return groupby(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(5)
 		})
 	})
 })

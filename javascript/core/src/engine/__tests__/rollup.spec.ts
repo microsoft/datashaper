@@ -22,9 +22,9 @@ describe('test for rollup verb', () => {
 		const store = new TestStore()
 
 		return rollup(step, store).then(result => {
-			expect(result.numCols()).toBe(1)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('count', 0)).toBe(6)
+			expect(result.table.numCols()).toBe(1)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('count', 0)).toBe(6)
 		})
 	})
 
@@ -43,9 +43,9 @@ describe('test for rollup verb', () => {
 		const store = new TestStore()
 
 		return rollup(step, store).then(result => {
-			expect(result.numCols()).toBe(1)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('total', 0)).toBe(407)
+			expect(result.table.numCols()).toBe(1)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('total', 0)).toBe(407)
 		})
 	})
 
@@ -64,9 +64,9 @@ describe('test for rollup verb', () => {
 		const store = new TestStore()
 
 		return rollup(step, store).then(result => {
-			expect(result.numCols()).toBe(1)
-			expect(result.numRows()).toBe(1)
-			expect(result.get('min', 0)).toBe(45)
+			expect(result.table.numCols()).toBe(1)
+			expect(result.table.numRows()).toBe(1)
+			expect(result.table.get('min', 0)).toBe(45)
 		})
 	})
 })

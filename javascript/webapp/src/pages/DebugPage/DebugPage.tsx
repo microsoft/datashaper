@@ -3,7 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import { Step, Verb, Specification } from '@data-wrangling-components/core'
+import {
+	Step,
+	Verb,
+	Specification,
+	TableContainer,
+} from '@data-wrangling-components/core'
 import {
 	DetailsListFeatures,
 	StatsColumnType,
@@ -43,8 +48,8 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const inputTables = useInputTables(inputList, store)
 	const pipeline = usePipeline(store)
 	const [result, setResult] = useState<ColumnTable | undefined>()
-	const [outputs, setOutputs] = useState<Map<string, ColumnTable>>(
-		new Map<string, ColumnTable>(),
+	const [outputs, setOutputs] = useState<Map<string, TableContainer>>(
+		new Map<string, TableContainer>(),
 	)
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
@@ -74,7 +79,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 		const output = await store.toMap()
 		pipeline.print()
 		store.print()
-		setResult(res)
+		setResult(res.table)
 		setOutputs(output)
 	}, [pipeline, store, setResult, setOutputs])
 
@@ -89,7 +94,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 			const res = await pipeline.run()
 			const output = await store.toMap()
 			store.print()
-			setResult(res)
+			setResult(res.table)
 			setOutputs(output)
 		},
 		[pipeline, store, setExampleSpec, setSteps, setOutputs, setResult],
@@ -98,7 +103,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const handleDropFiles = useCallback(
 		async (loaded: Map<string, ColumnTable>) => {
 			loaded.forEach((table, name) => {
-				store.set(name, table)
+				store.set({ id: name, table })
 			})
 			store.print()
 			setInputs(prev => [...prev, ...Array.from(loaded.keys())])
@@ -134,7 +139,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					</Section>
 				</InputsSection>
 				{steps.map((step, index) => {
-					const output = outputs?.get(step.output)
+					const output = outputs?.get(step.output)?.table
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
 							<Section title={`Step ${index + 1}`} subtitle={step.verb}>

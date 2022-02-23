@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { FoldArgs, Step } from '../../types.js'
+import type { FoldArgs, Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
@@ -17,10 +17,10 @@ import type { FoldArgs, Step } from '../../types.js'
 export async function fold(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { columns, to } = args as FoldArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
-	return inputTable.fold(columns, { as: to })
+	return container(output, inputTable.fold(columns, { as: to }))
 }

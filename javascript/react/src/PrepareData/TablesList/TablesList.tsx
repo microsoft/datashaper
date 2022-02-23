@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BaseFile } from '@data-wrangling-components/utilities'
+import type { TableContainer } from '@data-wrangling-components/core'
 import { memo } from 'react'
 import styled from 'styled-components'
 import { DetailText } from '../DetailText/index.js'
@@ -10,7 +10,7 @@ import { TableCard } from './TableCard.js'
 import { useIsTableSelected } from './hooks'
 
 export const TablesList: React.FC<{
-	tables: BaseFile[]
+	tables: TableContainer[]
 	onSelect?: (name: string) => void
 	selected?: string
 }> = memo(function TablesList({ tables, onSelect, selected }) {
@@ -21,7 +21,7 @@ export const TablesList: React.FC<{
 			{tables.map((table, index) => {
 				return (
 					<TableCard
-						table={table}
+						tableName={table.name || table.id}
 						index={index}
 						key={index}
 						isSelected={isSelected}

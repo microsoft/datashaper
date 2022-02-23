@@ -4,9 +4,9 @@
  */
 
 import { op } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { TableStore, UnfoldArgs } from '../../index.js'
-import type { Step } from '../../types.js'
+import type { Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
@@ -18,10 +18,10 @@ import type { Step } from '../../types.js'
 export async function unfold(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { key, value } = args as UnfoldArgs
-	let inputTable = await store.get(input)
+	let inputTable = await store.table(input)
 
 	inputTable = inputTable
 		.groupby(key)
@@ -30,5 +30,5 @@ export async function unfold(
 		})
 		.pivot(key, value)
 
-	return inputTable.unroll(inputTable.columnNames())
+	return container(output, inputTable.unroll(inputTable.columnNames()))
 }

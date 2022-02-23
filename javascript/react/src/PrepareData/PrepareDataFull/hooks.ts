@@ -7,8 +7,8 @@ import {
 	TableStore,
 	introspect,
 	TableMetadata,
+	TableContainer,
 } from '@data-wrangling-components/core'
-import type { BaseFile } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import last from 'lodash-es/last.js'
 import { useState, useMemo, useEffect } from 'react'
@@ -21,7 +21,7 @@ import {
 } from '../hooks'
 
 export function useBusinessLogic(
-	files: BaseFile[],
+	tables: TableContainer[],
 	onUpdateSteps: (steps: Step[]) => void,
 	steps?: Step[],
 ): {
@@ -36,8 +36,8 @@ export function useBusinessLogic(
 	selectedTableName?: string
 } {
 	const [selectedTableName, setSelectedTableName] = useState<string>()
-	const [storedTables, setStoredTables] = useState<Map<string, ColumnTable>>(
-		new Map<string, ColumnTable>(),
+	const [storedTables, setStoredTables] = useState<Map<string, TableContainer>>(
+		new Map<string, TableContainer>(),
 	)
 	const store = useStore()
 	const pipeline = usePipeline(store)
@@ -45,7 +45,7 @@ export function useBusinessLogic(
 	const addNewTables = useAddNewTables(store, setStoredTables)
 
 	const selectedTable = useMemo((): ColumnTable | undefined => {
-		return storedTables.get(selectedTableName ?? '')
+		return storedTables.get(selectedTableName ?? '')?.table
 	}, [selectedTableName, storedTables])
 
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
@@ -54,7 +54,7 @@ export function useBusinessLogic(
 
 	const output = useMemo((): ColumnTable | undefined => {
 		const name = pipeline?.last?.output
-		return storedTables.get(name)
+		return storedTables.get(name)?.table
 	}, [pipeline, storedTables])
 
 	const lastTableName = useMemo((): string => {
@@ -81,10 +81,10 @@ export function useBusinessLogic(
 	}, [steps, pipeline, runPipeline, storedTables])
 
 	useEffect(() => {
-		if (files.length) {
-			addNewTables(files)
+		if (tables.length) {
+			addNewTables(tables)
 		}
-	}, [files, addNewTables])
+	}, [tables, addNewTables])
 
 	const onSaveStep = useOnSaveStep(onUpdateSteps, pipeline)
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)

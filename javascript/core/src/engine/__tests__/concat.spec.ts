@@ -19,15 +19,15 @@ describe('test for concat verb', () => {
 
 		return concat(step, store).then(result => {
 			// no change to column count
-			expect(result.numCols()).toBe(3)
+			expect(result.table.numCols()).toBe(3)
 			// combined rows of 5 + 1
-			expect(result.numRows()).toBe(6)
-			expect(result.get('count', 0)).toBe(10)
-			expect(result.get('count', 1)).toBe(20)
-			expect(result.get('count', 2)).toBe(30)
-			expect(result.get('count', 3)).toBe(40)
-			expect(result.get('count', 4)).toBe(50)
-			expect(result.get('count', 5)).toBe(60)
+			expect(result.table.numRows()).toBe(6)
+			expect(result.table.get('count', 0)).toBe(10)
+			expect(result.table.get('count', 1)).toBe(20)
+			expect(result.table.get('count', 2)).toBe(30)
+			expect(result.table.get('count', 3)).toBe(40)
+			expect(result.table.get('count', 4)).toBe(50)
+			expect(result.table.get('count', 5)).toBe(60)
 		})
 	})
 })

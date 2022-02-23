@@ -19,9 +19,9 @@ describe('test for set util', () => {
 
 		return set(step, store, SetOp.Concat).then(result => {
 			// no change to column count
-			expect(result.numCols()).toBe(3)
+			expect(result.table.numCols()).toBe(3)
 			// combined rows of 5 + 1
-			expect(result.numRows()).toBe(6)
+			expect(result.table.numRows()).toBe(6)
 		})
 	})
 
@@ -36,9 +36,9 @@ describe('test for set util', () => {
 		const store = new TestStore()
 
 		return set(step, store, SetOp.Union).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(6)
-			expect(result.get('ID', 0)).toBe(1)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(6)
+			expect(result.table.get('ID', 0)).toBe(1)
 		})
 	})
 
@@ -53,12 +53,12 @@ describe('test for set util', () => {
 		const store = new TestStore()
 
 		return set(step, store, SetOp.Intersect).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(4)
-			expect(result.get('ID', 0)).toBe(1)
-			expect(result.get('ID', 1)).toBe(2)
-			expect(result.get('ID', 2)).toBe(4)
-			expect(result.get('ID', 3)).toBe(4)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(4)
+			expect(result.table.get('ID', 0)).toBe(1)
+			expect(result.table.get('ID', 1)).toBe(2)
+			expect(result.table.get('ID', 2)).toBe(4)
+			expect(result.table.get('ID', 3)).toBe(4)
 		})
 	})
 
@@ -74,8 +74,8 @@ describe('test for set util', () => {
 
 		return set(step, store, SetOp.Difference).then(result => {
 			// no dups in table2, so output should match original
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(5)
 		})
 	})
 })

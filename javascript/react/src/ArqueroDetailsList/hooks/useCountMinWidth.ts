@@ -14,14 +14,20 @@ export function useCountMinWidth(
 	commandBar: IRenderFunction<IDetailsColumnProps>[] | undefined,
 ): number {
 	return useMemo(() => {
-		const commandBarTotalWidth =
+		const elementsWidth = Math.max(
+			...(commandBar?.map(command => +command()?.props?.style?.width) || [0]),
+		)
+
+		const buttonsWidth =
 			Math.max(
 				...(commandBar?.map(command => command()?.props.items.length) || [0]),
 			) * DEFAULT_COMMAND_BAR_WIDTH
 
+		const totalWidth = Math.max(buttonsWidth, elementsWidth)
+
 		const minCommandBar = Math.max(
 			DEFAULT_COLUMN_WIDTH,
-			commandBarTotalWidth + DEFAULT_COMMAND_BAR_THRESHOLD,
+			totalWidth + DEFAULT_COMMAND_BAR_THRESHOLD,
 		)
 		return minCommandBar
 	}, [commandBar])

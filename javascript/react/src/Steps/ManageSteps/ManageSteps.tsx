@@ -111,5 +111,5 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 )
 
 const Container = styled.div`
-	width: 100%;
+	width: 97%;
 `
