@@ -84,13 +84,13 @@ function useGroupedOptions() {
 	return useMemo(
 		() => [
 			{ key: 'verbs', text: 'Verbs', itemType: DropdownMenuItemType.Header },
-			...verbOptions,
-			{
-				key: 'compounds',
-				text: 'Compounds',
-				itemType: DropdownMenuItemType.Header,
-			},
-			...compoundOptions,
+			...verbOptions.filter(x => !['chain', 'fetch'].includes(x.key)),
+			// {
+			// 	key: 'compounds',
+			// 	text: 'Compounds',
+			// 	itemType: DropdownMenuItemType.Header,
+			// },
+			// ...compoundOptions,
 		],
 		[verbOptions, compoundOptions],
 	)
