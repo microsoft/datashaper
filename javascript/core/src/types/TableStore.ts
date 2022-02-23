@@ -31,18 +31,18 @@ export interface TableStore {
 	 * @param id
 	 * @param table
 	 */
-	set(container: TableContainer): void
+	set(container: TableContainer): TableStore
 	/**
 	 * Remove the named table
 	 * @param id
 	 */
-	delete(id: string): void
+	delete(id: string): TableStore
 	/**
 	 * Add a table name to the store with a resolver function to be loaded when needed.
 	 * @param id
 	 * @param resolver
 	 */
-	queue(id: string, resolver: ResolverFunction): void
+	queue(id: string, resolver: ResolverFunction): TableStore
 	/**
 	 * List all tables in the store by id, with an optional filter function.
 	 * @param filter
@@ -59,10 +59,11 @@ export interface TableStore {
 	toArray(): Promise<TableContainer[]>
 	/**
 	 * Add a listener for a particular table.
+	 * Returns an unlisten handler.
 	 * @param id
 	 * @param listener
 	 */
-	listen(id: string, listener: ListenerFunction): void
+	listen(id: string, listener: ListenerFunction): () => void
 	/**
 	 * Stop listening for a particular table.
 	 * @param id
@@ -70,9 +71,10 @@ export interface TableStore {
 	unlisten(id: string): void
 	/**
 	 * Get alerted for any changes in the store.
+	 * Returns an unlisten handler.
 	 * @param listener
 	 */
-	addChangeListener(listener: ChangeListenerFunction): void
+	addChangeListener(listener: ChangeListenerFunction): () => void
 	/**
 	 * Print the whole store to the console.
 	 */
@@ -86,5 +88,5 @@ export interface TableStore {
 	 * Deletes all tables from store
 	 * @returns
 	 */
-	clear(): void
+	clear(): TableStore
 }

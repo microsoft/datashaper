@@ -12,19 +12,28 @@ import type {
 	ListenerFunction,
 } from './types.js'
 
+interface LazyTableStorage {
+	container: TableContainer
+	resolver?: ResolverFunction
+	resolved: boolean
+}
+
 /**
  * Manages a set of tables.
  * Standard implementation of an async-resolving table store.
  */
 export class DefaultTableStore implements TableStore {
-	private _tables: Map<string, TableContainer>
+	private _storage: Map<string, LazyTableStorage>
 	private _changeListeners: ChangeListenerFunction[]
 	private _tableListeners: Record<string, ListenerFunction>
 	constructor(tables?: TableContainer[]) {
-		this._tables = new Map<string, TableContainer>()
+		this._storage = new Map<string, LazyTableStorage>()
 		if (tables) {
 			tables.forEach(table => {
-				this._tables.set(table.id, table)
+				this._storage.set(table.id, {
+					container: table,
+					resolved: true,
+				})
 			})
 		}
 		this._changeListeners = []
@@ -32,25 +41,26 @@ export class DefaultTableStore implements TableStore {
 	}
 
 	async get(id: string): Promise<TableContainer> {
-		const container = this._tables.get(id)
-		if (!container) {
+		const storage = this._storage.get(id)
+
+		if (!storage) {
 			throw new Error(`No table with id '${id}' found in store.`)
 		}
-		const result = {
-			...container,
-		}
-		let table = container.table
-		if (!table) {
-			const { resolver } = container
+
+		const { container } = storage
+
+		if (!storage.resolved) {
+			const { resolver } = storage
 			if (!resolver) {
 				throw new Error(`No resolver function for unloaded table '${id}'.`)
 			}
-			table = await resolver(id)
-			result.table = table
+			const table = await resolver(id)
+			container.table = table
+
 			// cache it for next time
-			this.set(result)
+			this.set(container)
 		}
-		return result
+		return container
 	}
 
 	async table(id: string): Promise<ColumnTable> {
@@ -58,32 +68,42 @@ export class DefaultTableStore implements TableStore {
 		return container.table!
 	}
 
-	set(container: TableContainer): void {
-		this._tables.set(container.id, container)
+	set(container: TableContainer): TableStore {
+		const storage = {
+			container,
+			resolved: true,
+		}
+		this._storage.set(container.id, storage)
 		this.onChange(container.id)
+		return this
 	}
 
-	delete(id: string): void {
-		this._tables.delete(id)
+	delete(id: string): TableStore {
+		this._storage.delete(id)
 		this.onChange()
+		return this
 	}
 
-	queue(id: string, resolver: ResolverFunction): void {
-		this._tables.set(id, {
-			id,
+	queue(id: string, resolver: ResolverFunction): TableStore {
+		const storage = {
+			container: {
+				id,
+			},
+			resolved: false,
 			resolver,
-		})
+		}
+		this._storage.set(id, storage)
+		return this
 	}
 
 	list(filter?: (id: string) => boolean): string[] {
-		const keys = Array.from(this._tables.keys())
+		const keys = Array.from(this._storage.keys())
 		return keys.filter(filter || (() => true))
 	}
 
 	async toMap(): Promise<Map<string, TableContainer>> {
 		const map = new Map<string, TableContainer>()
-		for (const container of this._tables) {
-			const [id] = container
+		for (const id of this._storage.keys()) {
 			const resolved = await this.get(id)
 			map.set(id, resolved)
 		}
@@ -95,16 +115,23 @@ export class DefaultTableStore implements TableStore {
 		return Array.from(map.values())
 	}
 
-	listen(id: string, listener: ListenerFunction): void {
+	listen(id: string, listener: ListenerFunction): () => void {
 		this._tableListeners[id] = listener
+		return () => delete this._tableListeners[id]
 	}
 
 	unlisten(id: string): void {
 		delete this._tableListeners[id]
 	}
 
-	addChangeListener(listener: ChangeListenerFunction): void {
+	addChangeListener(listener: ChangeListenerFunction): () => void {
 		this._changeListeners.push(listener)
+		return () => {
+			const idx = this._changeListeners.findIndex(l => l === listener)
+			if (idx >= 0) {
+				this._changeListeners = this._changeListeners.splice(idx, 1)
+			}
+		}
 	}
 	private onChange(id?: string): void {
 		const fn = async () => {
@@ -121,7 +148,7 @@ export class DefaultTableStore implements TableStore {
 	async print(): Promise<void> {
 		const ids = this.list()
 		for (let i = 0; i < ids.length; i++) {
-			console.log(ids[i])
+			console.log(`--- ${ids[i]} ---`)
 			const container = await this.get(ids[i] as string)
 			container.table?.print()
 		}
@@ -132,8 +159,9 @@ export class DefaultTableStore implements TableStore {
 		return new DefaultTableStore(cloneDeep(tables))
 	}
 
-	clear(): void {
-		const keys = Array.from(this._tables.keys())
+	clear(): TableStore {
+		const keys = Array.from(this._storage.keys())
 		keys.forEach(key => this.delete(key))
+		return this
 	}
 }

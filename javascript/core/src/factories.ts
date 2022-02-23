@@ -17,12 +17,12 @@ export function createPipeline(store: TableStore): Pipeline {
 
 export function container(
 	id: string,
-	table: ColumnTable,
-	name?: string,
+	table?: ColumnTable,
+	options: Omit<TableContainer, 'id' | 'table'> = {},
 ): TableContainer {
 	return {
 		id,
-		name: name || id,
 		table,
+		name: options.name || id,
 	}
 }

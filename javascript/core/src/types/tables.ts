@@ -73,9 +73,4 @@ export interface TableContainer {
 	 * If it has not been resolved yet it will be undefined.
 	 */
 	table?: ColumnTable
-	/**
-	 * Optional resolver function to lazy-load a table when first requested.
-	 * If a table is not found, the resolver will be invoked or an error thrown.
-	 */
-	resolver?: ResolverFunction
 }
