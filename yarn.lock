@@ -613,6 +613,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@data-wrangling-components/guidance@workspace:packages/guidance":
+  version: 0.0.0-use.local
+  resolution: "@data-wrangling-components/guidance@workspace:packages/guidance"
+  dependencies:
+    "@essex/scripts": ^20.3.0
+    "@essex/tsconfig-base": ^1.0.2
+    "@types/express": ^4.17.13
+    "@types/node": ^17.0.18
+    express: ^4.17.3
+    typescript: ^4.5.5
+  languageName: unknown
+  linkType: soft
+
 "@data-wrangling-components/project@workspace:.":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/project@workspace:."
@@ -643,6 +656,7 @@ __metadata:
   resolution: "@data-wrangling-components/react@workspace:packages/react"
   dependencies:
     "@data-wrangling-components/core": "workspace:packages/core"
+    "@data-wrangling-components/guidance": "workspace:packages/guidance"
     "@data-wrangling-components/utilities": "workspace:packages/utilities"
     "@essex-js-toolkit/hooks": ^4.0.0
     "@essex-js-toolkit/themed-components": ^2.0.0
@@ -677,6 +691,7 @@ __metadata:
     d3-shape: ^3.1.0
     lodash: ^4.17.21
     lodash-es: ^4.17.21
+    markdown-to-jsx: ^7.1.6
     office-ui-fabric-react: ^7.183.0
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -5639,7 +5654,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:^4.17.1":
+"express@npm:^4.17.1, express@npm:^4.17.3":
   version: 4.17.3
   resolution: "express@npm:4.17.3"
   dependencies:
@@ -8017,6 +8032,15 @@ __metadata:
   dependencies:
     tmpl: 1.0.5
   checksum: b38a025a12c8146d6eeea5a7f2bf27d51d8ad6064da8ca9405fcf7bf9b54acd43e3b30ddd7abb9b1bfa4ddb266019133313482570ddb207de568f71ecfcf6060
+  languageName: node
+  linkType: hard
+
+"markdown-to-jsx@npm:^7.1.6":
+  version: 7.1.6
+  resolution: "markdown-to-jsx@npm:7.1.6"
+  peerDependencies:
+    react: ">= 0.14.0"
+  checksum: f7d8375f9871f228f2d0a06055f1d01f82c57cbd93fde2b9cb24ccebde741b9ebc0f4b8c52239f7b192c72e7f587cca4d3e752b731539be1936b3290470d119c
   languageName: node
   linkType: hard
 

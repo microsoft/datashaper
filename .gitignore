@@ -6,6 +6,7 @@ lib/
 coverage/
 .swc/
 stats.json
+build.js
 
 # Classic node deps
 node_modules/

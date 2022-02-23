@@ -4,8 +4,9 @@
  */
 import type { TableStore } from '@data-wrangling-components/core'
 import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
-import { memo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
+import { Guidance, Tooltip } from '../Guidance/index.js'
 import { StepSelector, TransformModalProps } from '../index.js'
 import {
 	useHandleDismiss,
@@ -56,7 +57,11 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 		)
 
 		return (
-			<Modal onDismiss={handleDismiss} {...rest}>
+			<Modal
+				onDismiss={handleDismiss}
+				styles={{ main: { maxWidth: '50%' } }}
+				{...rest}
+			>
 				<Header>
 					<Title>{step ? 'Edit step' : 'New step'}</Title>
 
@@ -69,20 +74,28 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 					)}
 				</Header>
 
-				<ContainerBody>
-					<StepSelectorContainer>
-						<StepSelector
-							placeholder="Select a verb"
-							verb={internal?.verb || ''}
-							onCreate={handleVerbChange}
-						/>
-					</StepSelectorContainer>
-					{internal && StepArgs && (
-						<>
-							<StepArgs step={internal} store={store} onChange={setInternal} />
-							<PrimaryButton onClick={handleRunClick}>Save</PrimaryButton>
-						</>
-					)}
+				<ContainerBody showGuidance={!!internal?.verb}>
+					<div>
+						<StepSelectorContainer>
+							<StepSelector
+								placeholder="Select a verb"
+								verb={internal?.verb || ''}
+								onCreate={handleVerbChange}
+							/>
+							{internal?.verb ? <Tooltip name={internal.verb} /> : null}
+						</StepSelectorContainer>
+						{internal && StepArgs && (
+							<>
+								<StepArgs
+									step={internal}
+									store={store}
+									onChange={setInternal}
+								/>
+								<PrimaryButton onClick={handleRunClick}>Save</PrimaryButton>
+							</>
+						)}
+					</div>
+					{internal?.verb ? <Guidance name={internal?.verb} /> : null}
 				</ContainerBody>
 			</Modal>
 		)
@@ -93,8 +106,13 @@ const iconProps = {
 	cancel: { iconName: 'Cancel' },
 }
 
-const ContainerBody = styled.div`
+const ContainerBody = styled.div<{ showGuidance: boolean }>`
 	padding: 0px 12px 14px 24px;
+
+	display: grid;
+	grid-template-columns: ${({ showGuidance }) => (!showGuidance ? '' : '1fr')} 1fr;
+	justify-content: space-between;
+	gap: 2rem;
 `
 
 const Header = styled.div`
@@ -112,4 +130,7 @@ const Title = styled.h3`
 
 const StepSelectorContainer = styled.div`
 	margin-bottom: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 `
