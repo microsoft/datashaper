@@ -1,13 +1,16 @@
-name: Python-CI
-on: [push, pull_request]
+name: Python-Publish-CI
+on:
+  push:
+    paths:
+      - 'python/pyproject.toml'
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     strategy:
       matrix:
         python-version: [3.8]
         poetry-version: [1.1.12]
-
     steps:
       - uses: actions/checkout@v2
 
@@ -21,13 +24,12 @@ jobs:
           python -m ensurepip
           python -m pip install --upgrade pip
           python -m pip install poetry==${{ matrix.poetry-version }}
-
       - name: Install dependencies
         shell: bash
         working-directory: ./python
         run: python -m poetry install
 
-      - name: Test with pytest
+      - name: Publish to PyPi
         working-directory: ./python
         run: |
-          python -m poetry run python -m pytest -v tests
+          python -m poetry publish --build --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_PASSWORD }}
