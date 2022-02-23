@@ -4,28 +4,26 @@
  */
 /* eslint-disable @essex/adjacent-await */
 import type {
-	TableStore,
 	TableContainer,
+	TableStore,
 } from '@data-wrangling-components/core'
-import type { BaseFile } from '@data-wrangling-components/utilities'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 
 export function useAddNewTables(
 	store: TableStore,
 	setStoredTables: (tables: Map<string, TableContainer>) => void,
-): (files: BaseFile[]) => void {
+): (tables: TableContainer[]) => void {
 	return useCallback(
-		async (files: BaseFile[]) => {
+		async (tables: TableContainer[]) => {
 			const existing = store.list()
-			const _tables = files.map(async file => {
-				const isStored = existing.includes(file.name)
+			tables.forEach(table => {
+				const isStored = existing.includes(table.id)
 				if (!isStored) {
-					const tab = await file?.toTable()
-					store.set({ id: file.name, table: tab })
+					store.set({ id: table.id, table: table?.table as ColumnTable })
 				}
 			})
 
-			await Promise.all(_tables)
 			const _storedTables = await store.toMap()
 			setStoredTables(_storedTables)
 		},

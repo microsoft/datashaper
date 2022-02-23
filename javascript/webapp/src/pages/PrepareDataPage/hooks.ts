@@ -2,31 +2,36 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
-import {
-	BaseFile,
-	FileCollection,
-	FileType,
-} from '@data-wrangling-components/utilities'
+import type { Step, TableContainer } from '@data-wrangling-components/core'
+import { FileCollection, FileType } from '@data-wrangling-components/utilities'
 import { useCallback, useEffect, useState } from 'react'
 
 export function useBusinessLogic(): {
 	setSteps: (steps: Step[]) => void
 	steps: Step[]
-	files: BaseFile[]
+	tables: TableContainer[]
 } {
 	const [fileCollection, setFileCollection] = useState<FileCollection>(
 		new FileCollection(),
 	)
 	const [steps, setSteps] = useState<Step[]>([])
-	const [files, setFiles] = useState<BaseFile[]>([])
+	const [tables, setTables] = useState<TableContainer[]>([])
 
 	const updateFileCollection = useCallback(
-		(collection: FileCollection) => {
+		async (collection: FileCollection) => {
 			setFileCollection(collection)
-			setFiles(collection.list(FileType.table))
+			const tablesTransformed = collection
+				.list(FileType.table)
+				.map(async table => {
+					return {
+						id: table.name,
+						table: await table.toTable(),
+					}
+				})
+			const _tables = await Promise.all(tablesTransformed)
+			setTables(_tables)
 		},
-		[setFileCollection, setFiles],
+		[setFileCollection, setTables],
 	)
 
 	useEffect(() => {
@@ -37,6 +42,7 @@ export function useBusinessLogic(): {
 				fileCollection.add('data/products.csv'),
 				fileCollection.add('data/stocks.csv'),
 			])
+
 			updateFileCollection(fileCollection)
 		}
 		f()
@@ -45,6 +51,6 @@ export function useBusinessLogic(): {
 	return {
 		setSteps,
 		steps,
-		files,
+		tables,
 	}
 }

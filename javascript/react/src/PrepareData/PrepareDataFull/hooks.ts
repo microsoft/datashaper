@@ -9,7 +9,6 @@ import {
 	TableMetadata,
 	TableContainer,
 } from '@data-wrangling-components/core'
-import type { BaseFile } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import last from 'lodash-es/last.js'
 import { useState, useMemo, useEffect } from 'react'
@@ -22,7 +21,7 @@ import {
 } from '../hooks'
 
 export function useBusinessLogic(
-	files: BaseFile[],
+	tables: TableContainer[],
 	onUpdateSteps: (steps: Step[]) => void,
 	steps?: Step[],
 ): {
@@ -82,10 +81,10 @@ export function useBusinessLogic(
 	}, [steps, pipeline, runPipeline, storedTables])
 
 	useEffect(() => {
-		if (files.length) {
-			addNewTables(files)
+		if (tables.length) {
+			addNewTables(tables)
 		}
-	}, [files, addNewTables])
+	}, [tables, addNewTables])
 
 	const onSaveStep = useOnSaveStep(onUpdateSteps, pipeline)
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
