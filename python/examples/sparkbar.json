@@ -1,0 +1,53 @@
+{
+	"name": "Sparkbar",
+	"description": "Aggregates daily data to weekly averages to demonstrate automatic Sparkbars.",
+	"steps": [
+		{
+			"type": "verb",
+			"verb": "derive",
+			"input": "data/stocks.csv",
+			"output": "output-table-0",
+			"args": {
+				"to": "Week Key",
+				"column1": "Symbol",
+				"operator": "+",
+				"column2": "Week"
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "aggregate",
+			"input": "output-table-0",
+			"output": "output-table-1",
+			"args": {
+				"to": "Week Average",
+				"groupby": "Week Key",
+				"column": "Close",
+				"operation": "mean"
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "lookup",
+			"input": "output-table-1",
+			"output": "output-table-2",
+			"args": {
+				"columns": ["Symbol"],
+				"other": "output-table-0",
+				"on": ["Week Key"]
+			}
+		},
+		{
+			"type": "verb",
+			"verb": "aggregate",
+			"input": "output-table-2",
+			"output": "output-table-3",
+			"args": {
+				"to": "Monthly List",
+				"groupby": "Symbol",
+				"column": "Week Average",
+				"operation": "array_agg"
+			}
+		}
+	]
+}
