@@ -7,20 +7,19 @@ import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 import { ManageSteps } from '../../Steps/index.js'
-import { TablesList, PreviewTable, OutputTable } from '../index.js'
+import { TableListBar } from '../TableListBar/TableListBar.js'
+import { PreviewTable } from '../index.js'
 import { useBusinessLogic } from './hooks.js'
 
 export const PrepareDataFull: React.FC<{
 	tables: TableContainer[]
 	onUpdateSteps: (steps: Step[]) => void
 	steps?: Step[]
-	inputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 }> = memo(function PrepareDataFull({
 	tables,
 	onUpdateSteps,
 	steps,
-	inputHeaderCommandBar,
 	outputHeaderCommandBar,
 }) {
 	const {
@@ -30,38 +29,25 @@ export const PrepareDataFull: React.FC<{
 		onDeleteStep,
 		onSaveStep,
 		store,
-		output,
-		selectedMetadata,
 		lastTableName,
+		derived,
 	} = useBusinessLogic(tables, onUpdateSteps, steps)
 
 	return (
 		<Container>
 			<InputContainer>
-				<TablesListContainer>
-					<SectionTitle>Inputs</SectionTitle>
-					<InputDisplay>
-						<TablesList
-							tables={tables}
-							selected={selectedTableName}
-							onSelect={setSelectedTableName}
-						/>
-					</InputDisplay>
-				</TablesListContainer>
-
-				<PreviewContainer>
-					<PreviewTable
-						headerCommandBar={inputHeaderCommandBar}
-						selectedMetadata={selectedMetadata}
-						table={selectedTable}
-						name={selectedTableName}
-					/>
-				</PreviewContainer>
+				<SectionTitle>Tables</SectionTitle>
+				<TableListBar
+					inputs={tables}
+					derived={derived}
+					selected={selectedTableName}
+					onSelect={setSelectedTableName}
+				/>
 			</InputContainer>
 
 			<StepsTrayContainer>
+				<SectionTitle>Steps</SectionTitle>
 				<StepsContainer>
-					<SectionTitle>Steps</SectionTitle>
 					<ManageSteps
 						nextInputTable={lastTableName}
 						onDelete={onDeleteStep}
@@ -75,18 +61,22 @@ export const PrepareDataFull: React.FC<{
 
 			<OutputContainer>
 				<SectionTitle>Output</SectionTitle>
-				<OutputTable
+				<PreviewTable
 					headerCommandBar={outputHeaderCommandBar}
-					output={output}
-					onTransform={onSaveStep}
+					table={selectedTable}
+					name={selectedTableName}
 				/>
 			</OutputContainer>
 		</Container>
 	)
 })
 
+const GAP = 18
+const INPUT_HEIGHT = 72
+const STEPS_HEIGHT = 200
+
 const SectionTitle = styled.span`
-	padding-left: 10px;
+	margin: 0 ${GAP}px 0 ${GAP}px;
 	font-weight: bold;
 	writing-mode: vertical-rl;
 	transform: rotate(180deg);
@@ -98,49 +88,37 @@ const SectionTitle = styled.span`
 
 const Container = styled.div`
 	display: flex;
-	flex-direction: column;
+	flex-flow: column;
 	height: 100%;
 	width: 100%;
-`
-
-const PreviewContainer = styled.div`
-	width: 78%;
-	min-width: 300px;
+	padding: ${GAP}px 0 ${GAP}px 0;
+	gap: 18px;
 `
 
 const InputContainer = styled.div`
-	height: 30%;
 	display: flex;
-	overflow: hidden;
-	padding: 0px 20px 0px 10px;
-`
-
-const InputDisplay = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
+	min-height: ${INPUT_HEIGHT}px;
+	flex: 0 1 ${INPUT_HEIGHT}px;
+	padding-right: ${GAP}px;
 `
 
 const OutputContainer = styled.div`
-	padding: 0px 20px 10px 10px;
-	height: 35%;
+	flex: 1 1 auto;
 	display: flex;
+	padding-right: ${GAP}px;
+	max-height: calc(100% - ${INPUT_HEIGHT + STEPS_HEIGHT + GAP * 4}px);
 `
 
 const StepsTrayContainer = styled.div`
-	min-height: 20%;
-	max-height: 200px;
-	padding: 12px 20px 12px 10px;
-	margin: 20px 0px 20px 0px;
+	flex: 0 1 ${STEPS_HEIGHT}px;
+	display: flex;
+	min-height: ${STEPS_HEIGHT}px;
 	background-color: ${({ theme }) => theme.application().faint().hex()};
+	padding: 0;
 `
 const StepsContainer = styled.div`
 	display: flex;
 	height: 100%;
-`
-
-const TablesListContainer = styled.div`
-	display: flex;
-	width: 26%;
-	min-width: 250px;
+	width: 100%;
+	align-items: center;
 `

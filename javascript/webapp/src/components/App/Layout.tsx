@@ -8,9 +8,9 @@ import styled from 'styled-components'
 
 export const Layout: React.FC = memo(function Layout({ children }) {
 	return (
-		<Container>
+		<Container className={'layout-container'}>
 			<Suspense fallback={<StyledSpinner />}>
-				<Content>{children}</Content>
+				<Content className={'layout-content-container'}>{children}</Content>
 			</Suspense>
 		</Container>
 	)
@@ -19,17 +19,6 @@ export const Layout: React.FC = memo(function Layout({ children }) {
 const StyledSpinner = styled(Spinner)`
 	margin-top: 20px;
 `
-const Container = styled.div`
-	margin: 0;
-	height: 100vh;
-	display: flex;
-	flex-flow: column;
-`
+const Container = styled.div``
 
-const Content = styled.div`
-	margin: 0;
-	height: 100%;
-	flex: 1;
-	display: flex;
-	flex-flow: column;
-`
+const Content = styled.div``

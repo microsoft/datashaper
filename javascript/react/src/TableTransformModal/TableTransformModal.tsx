@@ -11,6 +11,7 @@ import {
 	useHandleTableRunClick,
 	useHandleTableStepArgs,
 	useInternalTableStep,
+	useModalStyles,
 } from './hooks/index.js'
 
 export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
@@ -21,6 +22,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			onTransformRequested,
 			step,
 			nextInputTable,
+			styles,
 			...rest
 		} = props
 
@@ -37,10 +39,12 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			onTransformRequested,
 		)
 
+		const adaptedStyles = useModalStyles(styles)
 		return (
 			<Modal
 				onDismiss={onDismiss}
 				onDismissed={() => setInternal(undefined)}
+				styles={adaptedStyles}
 				{...rest}
 			>
 				<Header>
@@ -66,7 +70,9 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 					{internal && StepArgs && (
 						<>
 							<StepArgs step={internal} store={store} onChange={setInternal} />
-							<PrimaryButton onClick={handleRunClick}>Save</PrimaryButton>
+							<ButtonContainer>
+								<PrimaryButton onClick={handleRunClick}>Save</PrimaryButton>
+							</ButtonContainer>
 						</>
 					)}
 				</ContainerBody>
@@ -98,4 +104,8 @@ const Title = styled.h3`
 
 const StepSelectorContainer = styled.div`
 	margin-bottom: 8px;
+`
+
+const ButtonContainer = styled.div`
+	margin-top: 8px;
 `

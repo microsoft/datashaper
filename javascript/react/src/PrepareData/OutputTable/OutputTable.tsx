@@ -16,9 +16,15 @@ import { useToggleTableFeatures } from '../hooks'
 
 export const OutputTable: React.FC<{
 	output?: ColumnTable
+	name?: string
 	onTransform?: (step: Step) => void
 	headerCommandBar?: IRenderFunction<IDetailsColumnProps>[]
-}> = memo(function OutputTable({ output, onTransform, headerCommandBar }) {
+}> = memo(function OutputTable({
+	output,
+	name,
+	onTransform,
+	headerCommandBar,
+}) {
 	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures()
 	const commands = useCommonCommands(
 		undefined,
@@ -30,6 +36,7 @@ export const OutputTable: React.FC<{
 			{output && (
 				<Container>
 					<ArqueroTableHeader
+						name={name}
 						table={output}
 						farCommands={onTransform && commands}
 					/>

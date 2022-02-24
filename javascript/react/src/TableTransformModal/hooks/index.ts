@@ -6,3 +6,4 @@
 export * from './useHandleTableStepArgs.js'
 export * from './useHandleTableRunClick.js'
 export * from './useInternalTableStep.js'
+export * from './useModalStyles.js'

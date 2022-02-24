@@ -37,9 +37,8 @@ const classNames = mergeStyleSets({
 	white: [{ color: 'white' }, iconClass],
 })
 
-const NavBarContainer = styled.div`
-	margin-right: 10px;
-`
+const NavBarContainer = styled.div``
+
 const HamburgerMenu = styled(FontIcon)`
 	float: right;
 `

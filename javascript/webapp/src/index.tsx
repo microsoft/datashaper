@@ -7,16 +7,9 @@ import { render } from 'react-dom'
 import { App } from '~components'
 import { setDefaultSettings } from '~localStorageHandler'
 
-function createRoot(): HTMLElement {
-	const root = document.createElement('div')
-	root.id = 'root'
-	document.body.appendChild(root)
-	return root
-}
-
 function mount(): void {
 	try {
-		const root = createRoot()
+		const root = document.getElementById('root')
 		initializeIcons(undefined, { disableWarnings: true })
 		setDefaultSettings()
 		render(<App />, root)

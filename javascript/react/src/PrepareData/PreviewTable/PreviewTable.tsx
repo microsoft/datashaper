@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableMetadata } from '@data-wrangling-components/core'
-import { IDetailsColumnProps, IRenderFunction, useTheme } from '@fluentui/react'
+import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -40,7 +40,6 @@ export const PreviewTable: React.FC<{
 		histogramColumnHeaders: true,
 	})
 	const commands = useCommonCommands(null, changeTableFeatures, tableFeatures)
-	const theme = useTheme()
 
 	return (
 		<>
@@ -50,7 +49,6 @@ export const PreviewTable: React.FC<{
 						name={name}
 						table={table}
 						farCommands={commands}
-						bgColor={theme.palette.neutralSecondary}
 					/>
 					<ArqueroDetailsList
 						isSortable
@@ -67,7 +65,9 @@ export const PreviewTable: React.FC<{
 					/>
 				</Container>
 			) : (
-				<DetailText text="Select a table to preview" />
+				<TextContainer>
+					<DetailText text="(No table selected)" />
+				</TextContainer>
 			)}
 		</>
 	)
@@ -77,7 +77,12 @@ const Container = styled.div`
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
-	height: 99%;
-	margin-left: 20px;
+	height: 100%;
 	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
+`
+
+const TextContainer = styled.div`
+	display: flex;
+	height: 100%;
+	align-items: center;
 `
