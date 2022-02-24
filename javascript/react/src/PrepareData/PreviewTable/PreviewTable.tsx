@@ -50,7 +50,6 @@ export const PreviewTable: React.FC<{
 						name={name}
 						table={table}
 						farCommands={commands}
-						bgColor={theme.palette.neutralSecondary}
 					/>
 					<ArqueroDetailsList
 						isSortable
