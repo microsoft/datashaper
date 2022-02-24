@@ -2,15 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import { memo } from 'react'
 import styled from 'styled-components'
+import { NavBar } from '~components/NavBar'
 
 export const Header = memo(function Header() {
 	return (
 		<Container>
 			<Title>Data Wrangling Components</Title>
 			<Subtitle>pipeline builder</Subtitle>
+			<NavBar />
 		</Container>
 	)
 })
@@ -29,10 +30,13 @@ const Title = styled.h1`
 	font-size: 28px;
 	margin: 0;
 	color: ${({ theme }) => theme.application().lowContrast().hex()};
+	width: 70%;
 `
 
 const Subtitle = styled.h2`
 	margin: 0;
 	font-weight: normal;
 	color: ${({ theme }) => theme.application().lowContrast().hex()};
+	width: 20%;
+	text-align: right;
 `

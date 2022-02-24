@@ -35,6 +35,9 @@ export function createDefaultCommandBar(
 		root: {
 			height: '36px',
 		},
+		primarySet: {
+			width: '100%',
+		},
 	}
 	return <CommandBar styles={styles} {...props} items={items} />
 }
