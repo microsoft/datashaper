@@ -7,7 +7,15 @@
 			"~components": ["./src/components/index.ts"],
 			"~components/*": ["./src/components/*"],
 			"~pages": ["./src/pages/index.ts"],
-			"~pages/*": ["./src/pages/*"]
+			"~pages/*": ["./src/pages/*"],
+			"~localStorageHandler": ["./src/localStorageHandler/index.ts"],
+			"~localStorageHandler/*": ["./src/localStorageHandler/*"],
+			"~hooks": ["./src/hooks/index.ts"],
+			"~hooks/*": ["./src/hooks/*"],
+			"~models": ["./src/models/index.ts"],
+			"~models/*": ["./src/models/*"],
+			"~states": ["./src/states/index.ts"],
+			"~states/*": ["./src/states/*"]
 		},
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "ES2020.BigInt"],
 		"outDir": "lib",

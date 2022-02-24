@@ -24,7 +24,7 @@ import { ControlBar } from './ControlBar'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { Table } from './Table'
-import { useInputTableList, useInputTables, useTableStore } from './hooks.js'
+import { useInputTableList, useInputTables, useTableStore } from './hooks'
 
 const columns = {
 	ID: {

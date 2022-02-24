@@ -3,8 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Panel } from '@fluentui/react'
-import { memo } from 'react'
+import { Panel, Toggle } from '@fluentui/react'
+import { memo, useCallback } from 'react'
+import styled from 'styled-components'
+import { setDarkMode } from '../../localStorageHandler/localStorageHandler.js'
+import { useSettings } from '~states/settings'
 
 export interface NavPanelProps {
 	isOpen: boolean
@@ -15,6 +18,17 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 	isOpen,
 	onDismiss,
 }: NavPanelProps) {
+	const [settings, setSettings] = useSettings()
+
+	const setDarkModeStatus = useCallback(
+		async (ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
+			const checkedValue = checked ? true : false
+			setSettings({ ...settings, isDarkMode: checkedValue })
+			await setDarkMode(checkedValue)
+		},
+		[settings, setSettings],
+	)
+
 	return (
 		<Panel
 			isLightDismiss
@@ -23,8 +37,34 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 			closeButtonAriaLabel="Close"
 			headerText="Menu"
 		>
-			<h3>Settings</h3>
-			<h3>Help</h3>
+			<SettingsSection>
+				<H3>Settings</H3>
+				<Toggle
+					label="Dark Mode"
+					defaultChecked
+					onText="On"
+					offText="Off"
+					onChange={setDarkModeStatus}
+					checked={settings.isDarkMode}
+				/>
+			</SettingsSection>
+
+			<HelpSection>
+				<H3>Help</H3>
+			</HelpSection>
 		</Panel>
 	)
 })
+
+const SettingsSection = styled.div`
+	margin-left: 10px;
+`
+
+const H3 = styled.h3`
+	margin-bottom: 10px;
+`
+
+const HelpSection = styled.div`
+	margin-left: 10px;
+	margin-top: 10px;
+`
