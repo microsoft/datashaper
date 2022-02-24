@@ -18,9 +18,5 @@ export const DetailText: React.FC<DetailTextProps> = memo(function DetailText({
 })
 
 const Text = styled.div`
-	display: flex;
-	height: 100%;
-	justify-content: center;
-	align-items: center;
 	color: ${({ theme }) => theme.application().midContrast().hex()};
 `

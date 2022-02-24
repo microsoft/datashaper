@@ -5,16 +5,9 @@
 import { render } from 'react-dom'
 import { App } from './components'
 
-function createRoot(): HTMLElement {
-	const root = document.createElement('div')
-	root.id = 'root'
-	document.body.appendChild(root)
-	return root
-}
-
 function mount(): void {
 	try {
-		const root = createRoot()
+		const root = document.getElementById('root')
 		render(<App />, root)
 	} catch (err) {
 		console.error('error rendering application', err)

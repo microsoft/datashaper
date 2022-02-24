@@ -11,14 +11,12 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const { setSteps, steps, tables } = useBusinessLogic()
 
 	return (
-		<Container>
+		<Container className={'prepare-data-page'}>
 			<PrepareDataFull tables={tables} steps={steps} onUpdateSteps={setSteps} />
 		</Container>
 	)
 })
 
 const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+	height: calc(100vh - 46px);
 `

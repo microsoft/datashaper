@@ -32,8 +32,8 @@ export function useBusinessLogic(
 	store: TableStore
 	selectedMetadata: TableMetadata | undefined
 	lastTableName: string
-	output?: ColumnTable
 	selectedTableName?: string
+	derived: TableContainer[]
 } {
 	const [selectedTableName, setSelectedTableName] = useState<string>()
 	const [storedTables, setStoredTables] = useState<Map<string, TableContainer>>(
@@ -41,7 +41,11 @@ export function useBusinessLogic(
 	)
 	const store = useStore()
 	const pipeline = usePipeline(store)
-	const runPipeline = useRunPipeline(pipeline, setStoredTables)
+	const runPipeline = useRunPipeline(
+		pipeline,
+		setStoredTables,
+		setSelectedTableName,
+	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
 
 	const selectedTable = useMemo((): ColumnTable | undefined => {
@@ -52,17 +56,21 @@ export function useBusinessLogic(
 		return selectedTable && introspect(selectedTable, true)
 	}, [selectedTable])
 
-	const output = useMemo((): ColumnTable | undefined => {
-		const name = pipeline?.last?.output
-		return storedTables.get(name)?.table
-	}, [pipeline, storedTables])
-
 	const lastTableName = useMemo((): string => {
 		const _tables = Array.from(storedTables.keys())
 		const length = _tables.length
 		const input = length === 0 ? '' : _tables[length - 1] ?? ''
 		return last(steps)?.output ?? input
 	}, [steps, storedTables])
+
+	// TODO: resolve these from the stored table state
+	const derived = useMemo(() => {
+		const unique = new Set<string>()
+		steps?.forEach(step => unique.add(step.output))
+		return Array.from(unique).map(name => ({
+			id: name,
+		}))
+	}, [steps])
 
 	useEffect(() => {
 		const f = async () => {
@@ -95,9 +103,9 @@ export function useBusinessLogic(
 		onDeleteStep,
 		onSaveStep,
 		store,
-		output,
 		selectedMetadata,
 		lastTableName,
 		selectedTableName,
+		derived,
 	}
 }

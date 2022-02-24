@@ -40,18 +40,6 @@ export const StepsList: React.FC<{
 				)
 			})}
 
-			{!steps?.length && (
-				<DetailText
-					style={{
-						width: 120,
-						textAlign: 'center',
-						marginLeft: 20,
-						marginRight: 20,
-					}}
-					text="Add your first preparation step:"
-				/>
-			)}
-
 			{showModal && (
 				<ButtonContainer>
 					<DefaultButton
@@ -61,6 +49,9 @@ export const StepsList: React.FC<{
 					>
 						Add step
 					</DefaultButton>
+					{!steps?.length && (
+						<DetailText text="Add your first preparation step" />
+					)}
 				</ButtonContainer>
 			)}
 		</Container>
@@ -81,8 +72,6 @@ const Container = styled.div`
 
 const ButtonContainer = styled.div`
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	white-space: pre;
 	align-items: center;
+	gap: 18px;
 `

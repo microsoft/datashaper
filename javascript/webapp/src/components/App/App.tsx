@@ -14,27 +14,15 @@ export const App: React.FC = memo(function App() {
 	return (
 		<Router>
 			<StyleContext>
-				<Container>
+				<Container className={'app-container'}>
 					<Header />
-					<PageContainer>
-						<Layout>
-							<RouteOptions />
-						</Layout>
-					</PageContainer>
+					<Layout>
+						<RouteOptions />
+					</Layout>
 				</Container>
 			</StyleContext>
 		</Router>
 	)
 })
 
-const Container = styled.div`
-	margin: 0px;
-	height: 100vh;
-	display: flex;
-	flex-flow: column;
-`
-
-const PageContainer = styled.div`
-	padding-top: 20px;
-	height: 90%;
-`
+const Container = styled.div``

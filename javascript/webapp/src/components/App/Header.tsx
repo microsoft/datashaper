@@ -10,7 +10,7 @@ export const Header = memo(function Header() {
 	return (
 		<Container>
 			<Title>Data Wrangling Components</Title>
-			<Subtitle>pipeline builder test app</Subtitle>
+			<Subtitle>pipeline builder</Subtitle>
 		</Container>
 	)
 })

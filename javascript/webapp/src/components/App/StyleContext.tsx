@@ -12,20 +12,24 @@ export const StyleContext: React.FC = memo(function StyleContext({ children }) {
 	const fluentTheme = useMemo(() => loadFluentTheme(theme), [theme])
 
 	return (
-		<>
+		<div className={'style-context'}>
 			<GlobalStyle />
 			<ThematicFluentProvider theme={theme}>
 				<ApplicationStyles />
 				<ThemeProvider theme={fluentTheme}>{children}</ThemeProvider>
 			</ThematicFluentProvider>
-		</>
+		</div>
 	)
 })
 
 const GlobalStyle = createGlobalStyle`
+	html {
+		height: 100%;
+	}
 	body {
-		height: 100vh;
+		height: 100%;
 		margin: 0;
+		padding: 0;
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
 			'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
 			sans-serif;

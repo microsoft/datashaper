@@ -67,7 +67,9 @@ export const PreviewTable: React.FC<{
 					/>
 				</Container>
 			) : (
-				<DetailText text="Select a table to preview" />
+				<TextContainer>
+					<DetailText text="(No table selected)" />
+				</TextContainer>
 			)}
 		</>
 	)
@@ -77,7 +79,12 @@ const Container = styled.div`
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
-	height: 99%;
-	margin-left: 20px;
+	height: 100%;
 	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
+`
+
+const TextContainer = styled.div`
+	display: flex;
+	height: 100%;
+	align-items: center;
 `
