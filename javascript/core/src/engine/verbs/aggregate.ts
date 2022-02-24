@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { AggregateArgs, Step } from '../../types.js'
+import type { AggregateArgs, Step, TableContainer } from '../../types.js'
 import { singleRollup } from '../util/index.js'
 
 /**
@@ -16,10 +16,10 @@ import { singleRollup } from '../util/index.js'
 export async function aggregate(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { groupby, column, operation, to } = args as AggregateArgs
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const expr = singleRollup(column, operation)
 
@@ -27,5 +27,5 @@ export async function aggregate(
 		[to]: expr,
 	}
 
-	return inputTable.groupby(groupby).rollup(rArgs)
+	return container(output, inputTable.groupby(groupby).rollup(rArgs))
 }

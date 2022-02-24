@@ -19,8 +19,8 @@ describe('test for difference verb', () => {
 
 		return difference(step, store).then(result => {
 			// no dups in table2, so output should match original
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(5)
 		})
 	})
 })

@@ -7,8 +7,9 @@ import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
+import { container } from '../../factories.js'
 import { columnType, MergeStrategy, TableStore } from '../../index.js'
-import type { DataType, MergeArgs, Step } from '../../types.js'
+import type { DataType, MergeArgs, Step, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero merge operation.
@@ -20,11 +21,11 @@ import type { DataType, MergeArgs, Step } from '../../types.js'
 export async function merge(
 	step: Step,
 	store: TableStore,
-): Promise<ColumnTable> {
-	const { input, args } = step
+): Promise<TableContainer> {
+	const { input, output, args } = step
 	const { columns = [], strategy, to } = args as MergeArgs
 
-	const inputTable = await store.get(input)
+	const inputTable = await store.table(input)
 
 	const isSameDataTypeFlag: boolean = isSameDataType(inputTable, columns)
 
@@ -45,7 +46,7 @@ export async function merge(
 		[to]: func,
 	}
 
-	return inputTable.derive(dArgs)
+	return container(output, inputTable.derive(dArgs))
 }
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {

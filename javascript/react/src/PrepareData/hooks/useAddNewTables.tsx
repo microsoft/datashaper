@@ -12,15 +12,15 @@ import { useCallback } from 'react'
 
 export function useAddNewTables(
 	store: TableStore,
-	setStoredTables: (tables: Map<string, ColumnTable>) => void,
+	setStoredTables: (tables: Map<string, TableContainer>) => void,
 ): (tables: TableContainer[]) => void {
 	return useCallback(
 		async (tables: TableContainer[]) => {
 			const existing = store.list()
 			tables.forEach(table => {
-				const isStored = existing.includes(table.name)
+				const isStored = existing.includes(table.id)
 				if (!isStored) {
-					store.set(table.name, table?.table as ColumnTable)
+					store.set({ id: table.id, table: table?.table as ColumnTable })
 				}
 			})
 

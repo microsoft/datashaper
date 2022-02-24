@@ -4,12 +4,15 @@
  */
 import {
 	TableStore,
+	TableContainer,
+	createTableStore,
 	Step,
 	InputColumnRecordArgs,
 	Value,
 	DataType,
 	columnType,
 	Pipeline,
+	createPipeline,
 } from '@data-wrangling-components/core'
 import type {
 	ICommandBarItemProps,
@@ -222,12 +225,16 @@ export function useLoadTable(
 	store?: TableStore,
 ): ColumnTable | undefined {
 	const [tbl, setTable] = useState<ColumnTable | undefined>()
+	const handleTableLoad = useCallback(
+		(container: TableContainer) => setTable(container.table),
+		[setTable],
+	)
 	useEffect(() => {
 		const fn = async (n: string, s: TableStore) => {
 			try {
-				s.listen(n, setTable)
-				const t = await s.get(n)
-				setTable(t)
+				s.listen(n, handleTableLoad)
+				const c = await s.get(n)
+				setTable(c.table)
 			} catch (e) {
 				// swallow the error - we may try to request async before the table is registered
 				// it'll get picked up later by the listener
@@ -246,7 +253,7 @@ export function useLoadTable(
 		return () => {
 			name && store && store.unlisten(name)
 		}
-	}, [name, table, store, setTable])
+	}, [name, table, store, handleTableLoad])
 	return tbl
 }
 
@@ -281,11 +288,11 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType {
 }
 
 export function useStore(): TableStore {
-	return useMemo(() => new TableStore(), [])
+	return useMemo(() => createTableStore(), [])
 }
 
 export function usePipeline(store: TableStore): Pipeline {
-	return useMemo(() => new Pipeline(store), [store])
+	return useMemo(() => createPipeline(store), [store])
 }
 
 export function useCommonCommands(

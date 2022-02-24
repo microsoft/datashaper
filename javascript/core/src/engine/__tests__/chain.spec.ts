@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
+import { DefaultTableStore } from '../../DefaultTableStore.js'
 import { Verb, Step, TableStore } from '../../index.js'
 import { chain } from '../verbs/chain.js'
 
@@ -14,8 +15,7 @@ describe('chain', () => {
 	let store: TableStore
 
 	beforeEach(() => {
-		store = new TableStore()
-		store.set('input', input)
+		store = new DefaultTableStore([{ id: 'input', table: input }])
 	})
 
 	test('runs a single step with normal input/output', () => {
@@ -39,8 +39,8 @@ describe('chain', () => {
 		}
 
 		return chain(step, store).then(result => {
-			expect(result.numCols()).toBe(2)
-			expect(result.numRows()).toBe(4)
+			expect(result.table.numCols()).toBe(2)
+			expect(result.table.numRows()).toBe(4)
 			expect(store.list()).toEqual(['input', 'output'])
 		})
 	})
@@ -75,9 +75,9 @@ describe('chain', () => {
 		}
 
 		return chain(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(4)
-			expect(result.columnNames()).toEqual(['ID', 'filled', 'filled2'])
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(4)
+			expect(result.table.columnNames()).toEqual(['ID', 'filled', 'filled2'])
 			expect(store.list()).toEqual(['input', 'output'])
 		})
 	})
@@ -113,9 +113,9 @@ describe('chain', () => {
 		}
 
 		return chain(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(4)
-			expect(result.columnNames()).toEqual(['ID', 'filled', 'filled2'])
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(4)
+			expect(result.table.columnNames()).toEqual(['ID', 'filled', 'filled2'])
 			// note the child chain outputs get inserted before the final output due to the depth-first recursion
 			expect(store.list()).toEqual(['input', 'output-1', 'output-2', 'output'])
 		})
@@ -160,9 +160,9 @@ describe('chain', () => {
 		}
 
 		return chain(step, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(4)
-			expect(result.columnNames()).toEqual(['ID', 'filled', 'filled2'])
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(4)
+			expect(result.table.columnNames()).toEqual(['ID', 'filled', 'filled2'])
 			// still no parent store pollution
 			expect(store.list()).toEqual(['input', 'output'])
 		})

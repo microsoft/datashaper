@@ -2,7 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Specification, TableStore } from '@data-wrangling-components/core'
+import type {
+	Specification,
+	TableStore,
+	TableContainer,
+} from '@data-wrangling-components/core'
+import { createTableStore } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -34,9 +39,9 @@ export function useInputTableList(): [
 // memoing this gives us a chance queue up our built-in test tables on first run
 export function useTableStore(): TableStore {
 	return useMemo(() => {
-		const store = new TableStore()
+		const store = createTableStore()
 		TABLES.forEach(name => {
-			store.queue(name, async name => loadCSV(name, { parse }))
+			store.queue(name, async (name: string) => loadCSV(name, { parse }))
 		})
 		return store
 	}, [])
@@ -46,9 +51,9 @@ export function useTableStore(): TableStore {
 export function useInputTables(
 	list: string[],
 	store: TableStore,
-): Map<string, ColumnTable> {
-	const [tables, setTables] = useState<Map<string, ColumnTable>>(
-		new Map<string, ColumnTable>(),
+): Map<string, TableContainer> {
+	const [tables, setTables] = useState<Map<string, TableContainer>>(
+		new Map<string, TableContainer>(),
 	)
 	useEffect(() => {
 		const f = async () => {

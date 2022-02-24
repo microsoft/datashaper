@@ -27,11 +27,11 @@ describe('test for recode verb', () => {
 
 		return recode(step, store).then(result => {
 			// added one new column
-			expect(result.numCols()).toBe(4)
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numCols()).toBe(4)
+			expect(result.table.numRows()).toBe(5)
 
 			// the first three should change, the last two remain the same
-			const getter = result.getter('newColumn')
+			const getter = result.table.getter('newColumn')
 			expect(getter(0)).toBe('Z')
 			expect(getter(1)).toBe('Y')
 			expect(getter(2)).toBe('X')

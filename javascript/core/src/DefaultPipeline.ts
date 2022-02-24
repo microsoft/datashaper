@@ -2,11 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { TableStore } from './TableStore.js'
 import { run } from './engine/index.js'
 import { factory } from './engine/verbs/index.js'
-import type { Step, Verb } from './types.js'
+import type {
+	TableStore,
+	Step,
+	Verb,
+	Pipeline,
+	TableContainer,
+} from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -22,7 +26,7 @@ import type { Step, Verb } from './types.js'
  * - building compound steps with recursive execution.
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
-export class Pipeline {
+export class DefaultPipeline implements Pipeline {
 	private _store: TableStore
 	private _steps: Step[]
 	constructor(store: TableStore) {
@@ -78,7 +82,7 @@ export class Pipeline {
 		this._steps[index] = step
 		return this.steps
 	}
-	async run(): Promise<ColumnTable> {
+	async run(): Promise<TableContainer> {
 		return run(this._steps, this._store)
 	}
 	print(): void {

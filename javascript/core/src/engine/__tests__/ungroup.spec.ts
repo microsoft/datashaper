@@ -12,7 +12,7 @@ describe('test for ungroup verb', () => {
 		const step: Step = {
 			verb: Verb.Groupby,
 			input: 'table10',
-			output: 'output',
+			output: 'newTable',
 			args: {
 				columns: ['x', 'y'],
 			},
@@ -21,14 +21,14 @@ describe('test for ungroup verb', () => {
 		const store = new TestStore()
 
 		await groupby(step, store).then(result => {
-			store.set('newTable', result)
+			store.set(result)
 
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(3)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(3)
 
-			expect(result.get('x', 0)).toBe('A')
-			expect(result.get('x', 1)).toBe('B')
-			expect(result.get('x', 2)).toBe('A')
+			expect(result.table.get('x', 0)).toBe('A')
+			expect(result.table.get('x', 1)).toBe('B')
+			expect(result.table.get('x', 2)).toBe('A')
 		})
 
 		const step2: Step = {
@@ -39,12 +39,12 @@ describe('test for ungroup verb', () => {
 		}
 
 		return ungroup(step2, store).then(result => {
-			expect(result.numCols()).toBe(3)
-			expect(result.numRows()).toBe(3)
+			expect(result.table.numCols()).toBe(3)
+			expect(result.table.numRows()).toBe(3)
 
-			expect(result.get('x', 0)).toBe('A')
-			expect(result.get('x', 1)).toBe('B')
-			expect(result.get('x', 2)).toBe('A')
+			expect(result.table.get('x', 0)).toBe('A')
+			expect(result.table.get('x', 1)).toBe('B')
+			expect(result.table.get('x', 2)).toBe('A')
 		})
 	})
 })

@@ -18,8 +18,8 @@ describe('test for join verb', () => {
 		const store = new TestStore()
 
 		return join(step, store).then(result => {
-			expect(result.numCols()).toBe(5)
-			expect(result.numRows()).toBe(6)
+			expect(result.table.numCols()).toBe(5)
+			expect(result.table.numRows()).toBe(6)
 		})
 	})
 })

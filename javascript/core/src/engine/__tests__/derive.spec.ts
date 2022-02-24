@@ -24,15 +24,15 @@ describe('test for derive verb', () => {
 
 		return derive(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(5)
+			expect(result.table.numRows()).toBe(5)
 			// spot check a couple of derives. we're mixing num/string here, so it'll just concat the values
-			expect(result.get('newColumn', 0)).toBe('A10')
-			expect(result.get('newColumn', 1)).toBe('B20')
-			expect(result.get('newColumn', 2)).toBe('C30')
-			expect(result.get('newColumn', 3)).toBe('D40')
-			expect(result.get('newColumn', 4)).toBe('E50')
+			expect(result.table.get('newColumn', 0)).toBe('A10')
+			expect(result.table.get('newColumn', 1)).toBe('B20')
+			expect(result.table.get('newColumn', 2)).toBe('C30')
+			expect(result.table.get('newColumn', 3)).toBe('D40')
+			expect(result.table.get('newColumn', 4)).toBe('E50')
 		})
 	})
 
@@ -53,14 +53,14 @@ describe('test for derive verb', () => {
 
 		return derive(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(5)
-			expect(result.get('newColumn', 0)).toBeNaN()
-			expect(result.get('newColumn', 1)).toBeNaN()
-			expect(result.get('newColumn', 2)).toBeNaN()
-			expect(result.get('newColumn', 3)).toBeNaN()
-			expect(result.get('newColumn', 4)).toBeNaN()
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('newColumn', 0)).toBeNaN()
+			expect(result.table.get('newColumn', 1)).toBeNaN()
+			expect(result.table.get('newColumn', 2)).toBeNaN()
+			expect(result.table.get('newColumn', 3)).toBeNaN()
+			expect(result.table.get('newColumn', 4)).toBeNaN()
 		})
 	})
 
@@ -81,14 +81,14 @@ describe('test for derive verb', () => {
 
 		return derive(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(5)
-			expect(result.get('newColumn', 0)).toBeNaN()
-			expect(result.get('newColumn', 1)).toBeNaN()
-			expect(result.get('newColumn', 2)).toBeNaN()
-			expect(result.get('newColumn', 3)).toBeNaN()
-			expect(result.get('newColumn', 4)).toBeNaN()
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('newColumn', 0)).toBeNaN()
+			expect(result.table.get('newColumn', 1)).toBeNaN()
+			expect(result.table.get('newColumn', 2)).toBeNaN()
+			expect(result.table.get('newColumn', 3)).toBeNaN()
+			expect(result.table.get('newColumn', 4)).toBeNaN()
 		})
 	})
 
@@ -109,14 +109,14 @@ describe('test for derive verb', () => {
 
 		return derive(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(5)
-			expect(result.get('newColumn', 0)).toBeNaN()
-			expect(result.get('newColumn', 1)).toBeNaN()
-			expect(result.get('newColumn', 2)).toBeNaN()
-			expect(result.get('newColumn', 3)).toBeNaN()
-			expect(result.get('newColumn', 4)).toBeNaN()
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('newColumn', 0)).toBeNaN()
+			expect(result.table.get('newColumn', 1)).toBeNaN()
+			expect(result.table.get('newColumn', 2)).toBeNaN()
+			expect(result.table.get('newColumn', 3)).toBeNaN()
+			expect(result.table.get('newColumn', 4)).toBeNaN()
 		})
 	})
 
@@ -137,15 +137,15 @@ describe('test for derive verb', () => {
 
 		return derive(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(6)
-			expect(result.get('newColumn', 0)).toBe(15000)
-			expect(result.get('newColumn', 1)).toBe(60000)
-			expect(result.get('newColumn', 2)).toBe(90000)
-			expect(result.get('newColumn', 3)).toBe(11000)
-			expect(result.get('newColumn', 4)).toBe(17900)
-			expect(result.get('newColumn', 5)).toBe(168000)
+			expect(result.table.numRows()).toBe(6)
+			expect(result.table.get('newColumn', 0)).toBe(15000)
+			expect(result.table.get('newColumn', 1)).toBe(60000)
+			expect(result.table.get('newColumn', 2)).toBe(90000)
+			expect(result.table.get('newColumn', 3)).toBe(11000)
+			expect(result.table.get('newColumn', 4)).toBe(17900)
+			expect(result.table.get('newColumn', 5)).toBe(168000)
 		})
 	})
 
@@ -166,15 +166,15 @@ describe('test for derive verb', () => {
 
 		return derive(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(6)
-			expect(result.get('newColumn', 0)).toBe(5000)
-			expect(result.get('newColumn', 1)).toBe(52000)
-			expect(result.get('newColumn', 2)).toBe(0)
-			expect(result.get('newColumn', 3)).toBe(-1000)
-			expect(result.get('newColumn', 4)).toBe(-100)
-			expect(result.get('newColumn', 5)).toBe(12000)
+			expect(result.table.numRows()).toBe(6)
+			expect(result.table.get('newColumn', 0)).toBe(5000)
+			expect(result.table.get('newColumn', 1)).toBe(52000)
+			expect(result.table.get('newColumn', 2)).toBe(0)
+			expect(result.table.get('newColumn', 3)).toBe(-1000)
+			expect(result.table.get('newColumn', 4)).toBe(-100)
+			expect(result.table.get('newColumn', 5)).toBe(12000)
 		})
 	})
 
@@ -195,14 +195,14 @@ describe('test for derive verb', () => {
 
 		return derive(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(4)
+			expect(result.table.numCols()).toBe(4)
 			// no new rows
-			expect(result.numRows()).toBe(5)
-			expect(result.get('newColumn', 0)).toBe(10)
-			expect(result.get('newColumn', 1)).toBe(40)
-			expect(result.get('newColumn', 2)).toBe(90)
-			expect(result.get('newColumn', 3)).toBe(160)
-			expect(result.get('newColumn', 4)).toBe(250)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('newColumn', 0)).toBe(10)
+			expect(result.table.get('newColumn', 1)).toBe(40)
+			expect(result.table.get('newColumn', 2)).toBe(90)
+			expect(result.table.get('newColumn', 3)).toBe(160)
+			expect(result.table.get('newColumn', 4)).toBe(250)
 		})
 	})
 
@@ -223,14 +223,14 @@ describe('test for derive verb', () => {
 
 		return derive(step, store).then(result => {
 			// one new column
-			expect(result.numCols()).toBe(5)
+			expect(result.table.numCols()).toBe(5)
 			// no new rows
-			expect(result.numRows()).toBe(5)
-			expect(result.get('unitPrice', 0)).toBe(1200)
-			expect(result.get('unitPrice', 1)).toBe(100)
-			expect(result.get('unitPrice', 2)).toBe(2300)
-			expect(result.get('unitPrice', 3)).toBe(230)
-			expect(result.get('unitPrice', 4)).toBe(100)
+			expect(result.table.numRows()).toBe(5)
+			expect(result.table.get('unitPrice', 0)).toBe(1200)
+			expect(result.table.get('unitPrice', 1)).toBe(100)
+			expect(result.table.get('unitPrice', 2)).toBe(2300)
+			expect(result.table.get('unitPrice', 3)).toBe(230)
+			expect(result.table.get('unitPrice', 4)).toBe(100)
 		})
 	})
 })

@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { TableStore } from '../../TableStore.js'
+import { DefaultTableStore } from '../../DefaultTableStore.js'
 
 /**
  * This is a store implementation pre-loaded with test tables to ease setup.
  */
-export class TestStore extends TableStore {
+export class TestStore extends DefaultTableStore {
 	constructor() {
 		super()
 		const table1 = table({
@@ -117,23 +117,23 @@ export class TestStore extends TableStore {
 			C: [3, 5, 30],
 		})
 
-		this.set('table1', table1)
-		this.set('table2', table2)
-		this.set('table3', table3)
-		this.set('table4', table4)
-		this.set('table5', table5)
-		this.set('table6', table6)
-		this.set('table7', table7)
-		this.set('table8', table8)
-		this.set('table9', table9)
-		this.set('table10', table10)
-		this.set('table11', table11)
-		this.set('table12', table12)
-		this.set('table13', table13)
-		this.set('table14', table14)
-		this.set('table15', table15)
-		this.set('table16', table16)
-		this.set('table17', table17)
-		this.set('table18', table18)
+		this.set({ id: 'table1', table: table1 })
+		this.set({ id: 'table2', table: table2 })
+		this.set({ id: 'table3', table: table3 })
+		this.set({ id: 'table4', table: table4 })
+		this.set({ id: 'table5', table: table5 })
+		this.set({ id: 'table6', table: table6 })
+		this.set({ id: 'table7', table: table7 })
+		this.set({ id: 'table8', table: table8 })
+		this.set({ id: 'table9', table: table9 })
+		this.set({ id: 'table10', table: table10 })
+		this.set({ id: 'table11', table: table11 })
+		this.set({ id: 'table12', table: table12 })
+		this.set({ id: 'table13', table: table13 })
+		this.set({ id: 'table14', table: table14 })
+		this.set({ id: 'table15', table: table15 })
+		this.set({ id: 'table16', table: table16 })
+		this.set({ id: 'table17', table: table17 })
+		this.set({ id: 'table18', table: table18 })
 	}
 }
