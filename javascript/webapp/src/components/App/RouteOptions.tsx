@@ -14,14 +14,6 @@ const PerfPage = lazy(() =>
 	),
 )
 
-const TransformPage = lazy(() =>
-	/* webpackChunkName: "TransformPage " */ import('~pages/TransformPage').then(
-		module => ({
-			default: module.TransformPage,
-		}),
-	),
-)
-
 const PrepareDataPage = lazy(() =>
 	/* webpackChunkName: "PrepareDataPage " */ import(
 		'~pages/PrepareDataPage'
@@ -43,7 +35,6 @@ export const RouteOptions: React.FC = memo(function RouteOptions() {
 		<Routes>
 			<Route path={Pages.Prepare.path} element={<PrepareDataPage />} />
 			<Route path={Pages.Performance.path} element={<PerfPage />} />
-			<Route path={Pages.Transform.path} element={<TransformPage />} />
 			<Route path={Pages.Debug.path} element={<DebugPage />} />
 			<Route path="/" element={<PrepareDataPage />} />
 		</Routes>

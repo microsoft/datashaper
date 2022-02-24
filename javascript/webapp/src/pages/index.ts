@@ -4,5 +4,4 @@
  */
 export * from './DebugPage'
 export * from './PerfPage'
-export * from './TransformPage'
 export * from './PrepareDataPage'

@@ -28,6 +28,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { Struct } from 'arquero/dist/types/table/transformable'
 import { memo, useState, useEffect, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
 /**
  * This is just a rudimentary page to load a large table for profiling the ArqueroDetailsList rendering.
  */
@@ -39,6 +40,8 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		TableMetadata | undefined
 	>()
 	const [metadata, setMetadata] = useState<TableMetadata | undefined>()
+	const setHelpFileContent = useHelpFileContentSetter()
+
 	useEffect(() => {
 		const f = async () => {
 			let root = await loadCSV('data/stocks.csv', {})
@@ -57,6 +60,15 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		}
 		f()
 	}, [])
+
+	useEffect(() => {
+		const content = `This page is intended to provide a simple way of assessing pipeline and rendering performance using a dev tools profiler.
+		\nBy default a largish table is renderered on the main tab. You can toggle between this and the other tabs to assess whether rendering remains fast even with component mount/unmount.
+		\nThe empty tab has nothing on it so you can easily compare how quickly an empty component renders compared to the fill table.
+		\nThe grouped tab has a large table grouped by multiple columns to evaluate grouping performance and how the table's virtual rendering is affected.`
+
+		setHelpFileContent(content)
+	})
 
 	const addNewColumn = useCallback(() => {
 		if (!table) return
