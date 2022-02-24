@@ -11,6 +11,7 @@ import {
 	useHandleTableRunClick,
 	useHandleTableStepArgs,
 	useInternalTableStep,
+	useModalStyles,
 } from './hooks/index.js'
 
 export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
@@ -21,6 +22,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			onTransformRequested,
 			step,
 			nextInputTable,
+			styles,
 			...rest
 		} = props
 
@@ -37,10 +39,12 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			onTransformRequested,
 		)
 
+		const adaptedStyles = useModalStyles(styles)
 		return (
 			<Modal
 				onDismiss={onDismiss}
 				onDismissed={() => setInternal(undefined)}
+				styles={adaptedStyles}
 				{...rest}
 			>
 				<Header>
