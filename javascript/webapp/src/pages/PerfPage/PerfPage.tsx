@@ -135,10 +135,6 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 
 	return (
 		<Container>
-			<p>
-				Use the tabs to flip between a large table and an empty tab to profile
-				re-mounting the table.
-			</p>
 			<Pivot>
 				<PivotItem style={{ width: '96vw' }} key={'table'} headerText={'table'}>
 					<AddButton onClick={addNewColumn}>Add new column</AddButton>
