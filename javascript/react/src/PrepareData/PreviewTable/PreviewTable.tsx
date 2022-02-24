@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableMetadata } from '@data-wrangling-components/core'
-import { IDetailsColumnProps, IRenderFunction, useTheme } from '@fluentui/react'
+import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -40,7 +40,6 @@ export const PreviewTable: React.FC<{
 		histogramColumnHeaders: true,
 	})
 	const commands = useCommonCommands(null, changeTableFeatures, tableFeatures)
-	const theme = useTheme()
 
 	return (
 		<>
