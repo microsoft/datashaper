@@ -68,6 +68,7 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Lookup:
 		case Verb.Groupby:
 		case Verb.Dedupe:
+		case Verb.Select:
 		case Verb.Unroll:
 			return {
 				...base,
@@ -95,7 +96,6 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Orderby:
 		case Verb.Rename:
 		case Verb.Sample:
-		case Verb.Select:
 		case Verb.Ungroup:
 		case Verb.Unorder:
 		case Verb.Erase:

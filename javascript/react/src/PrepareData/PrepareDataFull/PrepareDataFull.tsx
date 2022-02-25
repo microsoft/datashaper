@@ -60,7 +60,7 @@ export const PrepareDataFull: React.FC<{
 			</StepsTrayContainer>
 
 			<OutputContainer>
-				<SectionTitle>Output</SectionTitle>
+				<SectionTitle>Preview</SectionTitle>
 				<PreviewTable
 					headerCommandBar={outputHeaderCommandBar}
 					table={selectedTable}
@@ -73,7 +73,7 @@ export const PrepareDataFull: React.FC<{
 
 const GAP = 18
 const INPUT_HEIGHT = 72
-const STEPS_HEIGHT = 200
+const STEPS_HEIGHT = 260
 
 const SectionTitle = styled.span`
 	margin: 0 ${GAP}px 0 ${GAP}px;

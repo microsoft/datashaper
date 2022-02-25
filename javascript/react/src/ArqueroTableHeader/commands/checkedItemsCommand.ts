@@ -43,7 +43,7 @@ export function checkedItemsCommand(
 	return merge(
 		{
 			key: 'checked-items',
-			title: 'Select items',
+			title: 'Choose items',
 			iconProps: {
 				iconName: 'MultiSelect',
 			},

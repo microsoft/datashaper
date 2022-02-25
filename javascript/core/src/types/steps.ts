@@ -28,7 +28,7 @@ export interface Specification {
 }
 
 export interface Step<T = unknown> {
-	verb: Verb | string
+	verb: Verb
 	input: string
 	output: string
 	args: T
