@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { SelectStep } from '@data-wrangling-components/core'
-import { Dropdown, IDropdownOption } from '@fluentui/react'
+import { Dropdown, IDropdownOption, ISelectableOption } from '@fluentui/react'
+import type { IRenderFunction } from '@fluentui/utilities'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common/index.js'
@@ -22,17 +23,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 }) {
 	const tbl = useLoadTable(input || step.input, table, store)
 
-	// default to selecting all columns if none are (this is what we want, right?)
-	const internal = useMemo(() => {
-		const { columns = [] } = (step as SelectStep).args
-		const defaults = columns.length === 0 ? tbl?.columnNames() : columns
-		return {
-			...step,
-			args: {
-				columns: defaults,
-			},
-		} as SelectStep
-	}, [step, tbl])
+	const internal = useMemo(() => step as SelectStep, [step])
 
 	const handleColumnChange = useCallback(
 		(_event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
@@ -63,31 +54,82 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 			acc[cur] = true
 			return acc
 		}, {} as Record<string, boolean>)
-		return columns.map(column => {
-			const selected = internal.args?.columns && !!hash[column]
+		const main: IDropdownOption[] = columns.map(column => {
+			const selected = !!hash[column]
 			return {
 				key: column,
 				text: column,
 				selected,
 			}
 		})
+		return [
+			...main,
+			{
+				key: '--divider--',
+				text: '-',
+				itemType: 1,
+				selected: false,
+			},
+			{
+				key: '--actions--',
+				text: '',
+				itemType: 2,
+				data: true,
+				selected: false,
+			},
+		] as IDropdownOption[]
 	}, [tbl, internal])
 
 	const selectedKeys = useMemo(
-		() => options.filter(o => o.selected).map(o => o.key),
+		() => options.filter(o => o.selected).map(o => `${o.key}`) as string[],
 		[options],
 	)
+
+	const handleSelectAllOrNone = useCallback(
+		(all: boolean) => {
+			onChange &&
+				onChange({
+					...internal,
+					args: {
+						...internal.args,
+						columns: all ? tbl?.columnNames() : [],
+					},
+				})
+		},
+		[tbl, internal, onChange],
+	)
+
+	const handleRenderOption: IRenderFunction<ISelectableOption<any>> =
+		useCallback(
+			option => {
+				if (option?.data) {
+					return (
+						<Selector>
+							<Link onClick={() => handleSelectAllOrNone(true)}>All</Link>
+							<Sep>|</Sep>
+							<Link onClick={() => handleSelectAllOrNone(false)}>None</Link>
+						</Selector>
+					)
+				} else {
+					return <span>{option?.text}</span>
+				}
+			},
+			[handleSelectAllOrNone],
+		)
 
 	return (
 		<Container>
 			{tbl ? (
 				<Dropdown
+					required
 					label={'Columns'}
+					placeholder={'Select columns'}
 					styles={columnDropdownStyles}
 					multiSelect
 					options={options}
 					selectedKeys={selectedKeys}
 					onChange={handleColumnChange}
+					onRenderOption={handleRenderOption}
 				/>
 			) : null}
 		</Container>
@@ -99,4 +141,18 @@ const Container = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 12px;
+`
+
+const Selector = styled.div`
+	display: flex;
+	justify-content: space-around;
+`
+const Link = styled.a`
+	cursor: pointer;
+`
+
+const Sep = styled.div`
+	margin-left: 4px;
+	margin-right: 4px;
+	color: ${({ theme }) => theme.application().lowContrast().hex()};
 `
