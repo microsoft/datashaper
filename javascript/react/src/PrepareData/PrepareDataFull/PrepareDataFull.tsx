@@ -60,7 +60,7 @@ export const PrepareDataFull: React.FC<{
 			</StepsTrayContainer>
 
 			<OutputContainer>
-				<SectionTitle>Output</SectionTitle>
+				<SectionTitle>Preview</SectionTitle>
 				<PreviewTable
 					headerCommandBar={outputHeaderCommandBar}
 					table={selectedTable}
