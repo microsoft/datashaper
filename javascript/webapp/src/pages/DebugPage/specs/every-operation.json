@@ -212,11 +212,17 @@
 		},
 		{
 			"verb": "rename",
-			"input": "data/companies.csv",
+			"input": "data/stocks.csv",
 			"output": "rename-1",
 			"args": {
 				"columns": {
-					"Employees": "People"
+					"Symbol": "symbol",
+					"Date": "date",
+					"Close": "close",
+					"Volume": "volumne",
+					"Open": "open",
+					"High": "high",
+					"Low": "low"
 				}
 			}
 		},
@@ -240,10 +246,10 @@
 		},
 		{
 			"verb": "select",
-			"input": "data/companies.csv",
+			"input": "data/stocks.csv",
 			"output": "select-1",
 			"args": {
-				"columns": ["ID", "Name"]
+				"columns": ["Symbol", "Date", "Close", "Volume", "Open", "High", "Low"]
 			}
 		},
 		{

@@ -98,6 +98,7 @@ export interface StepComponentProps extends StepDependent {
 }
 
 export interface StepDescriptionProps extends StepDependent {
+	style?: React.CSSProperties
 	showInput?: boolean
 	showOutput?: boolean
 	actions?: JSX.Element
@@ -106,4 +107,31 @@ export interface StepDescriptionProps extends StepDependent {
 export enum StepsType {
 	Table = 'table',
 	Column = 'column',
+}
+
+export interface DescriptionRow {
+	/**
+	 * Text to display in normal font before the value
+	 */
+	before?: string
+	/**
+	 * The configuration value to display with emphasized font
+	 */
+	value?: any
+	/**
+	 * Text to display in normal font after the value
+	 */
+	after?: string
+	/**
+	 * Recursive row children to render indented
+	 */
+	sub?: DescriptionRow[]
+	/**
+	 * Optional title text to use on node for tooltips/overflow
+	 */
+	title?: string
+}
+
+export interface VerbDescriptionProps extends StepDescriptionProps {
+	rows: DescriptionRow[]
 }

@@ -2,42 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+import type { DescriptionRow, VerbDescriptionProps } from '../types.js'
 
-export interface DescriptionRow {
-	/**
-	 * Text to display in normal font before the value
-	 */
-	before?: string
-	/**
-	 * The configuration value to display with emphasized font
-	 */
-	value?: any
-	/**
-	 * Text to display in normal font after the value
-	 */
-	after?: string
-	/**
-	 * Recursive row children to render indented
-	 */
-	sub?: DescriptionRow[]
-}
-
-export interface VerbDescriptionProps {
-	step: Step
-	rows: DescriptionRow[]
-	showInput?: boolean
-	showOutput?: boolean
-}
 export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
-	function VerbDescription({ step, rows, showInput, showOutput }) {
+	function VerbDescription({ step, rows, showInput, showOutput, style }) {
 		const rws = useMemo(() => {
 			function loop(rows: DescriptionRow[]) {
 				return rows.map((row, index) => (
-					<Row key={`verb-description-row-${row.value}-${index}`}>
+					<Row
+						key={`verb-description-row-${row.value}-${index}`}
+						title={row.title}
+					>
 						<KeyValue>
 							{row.before ? <Key>{row.before}</Key> : null}
 							{isNil(row.value) ? <Unset /> : <Value>{row.value}</Value>}
@@ -50,7 +28,7 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 			return loop(rows)
 		}, [rows])
 		return (
-			<Container>
+			<Container style={style}>
 				<Verb>{step.verb}</Verb>
 				{showInput ? (
 					<Row>
