@@ -56,6 +56,7 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	min-height: 180px;
 `
 
 const Verb = styled.div`

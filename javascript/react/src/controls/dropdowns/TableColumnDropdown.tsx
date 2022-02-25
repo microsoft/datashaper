@@ -27,7 +27,7 @@ export const TableColumnDropdown: React.FC<TableColumnDropdownProps> = memo(
 		return (
 			<Dropdown
 				label={'Column'}
-				placeholder={'Select column'}
+				placeholder={'Choose column'}
 				options={options}
 				styles={columnDropdownStyles}
 				{...rest}

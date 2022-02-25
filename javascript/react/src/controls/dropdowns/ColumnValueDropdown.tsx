@@ -28,7 +28,7 @@ export const ColumnValueDropdown: React.FC<ColumnValueDropdownProps> = memo(
 		return (
 			<Dropdown
 				label={'Value'}
-				placeholder={'Select value'}
+				placeholder={'Choose value'}
 				options={options}
 				styles={columnDropdownStyles}
 				{...rest}
