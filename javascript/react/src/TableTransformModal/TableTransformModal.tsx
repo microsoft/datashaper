@@ -3,10 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableStore } from '@data-wrangling-components/core'
+import { index } from '@data-wrangling-components/guidance'
 import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
+import { useBoolean } from '@fluentui/react-hooks'
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { Guidance, Tooltip } from '../Guidance/index.js'
+import { Guidance } from '../Guidance/index.js'
 import { StepSelector, TableTransformModalProps } from '../index.js'
 import {
 	useHandleTableRunClick,
@@ -26,7 +28,8 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			styles,
 			...rest
 		} = props
-
+		const [isGuidanceVisible, { toggle: toggleIsGuidanceVisible }] =
+			useBoolean(false)
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
 			nextInputTable,
@@ -63,7 +66,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 					)}
 				</Header>
 
-				<ContainerBody showGuidance={!!internal?.verb}>
+				<ContainerBody showGuidance={isGuidanceVisible}>
 					<div>
 						<StepSelectorContainer>
 							<StepSelector
@@ -71,7 +74,13 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 								verb={internal?.verb || ''}
 								onCreate={handleVerbChange}
 							/>
-							{internal?.verb ? <Tooltip name={internal.verb} /> : null}
+							{internal?.verb ? (
+								<IconButton
+									onClick={toggleIsGuidanceVisible}
+									iconProps={{ iconName: 'Info' }}
+									checked={isGuidanceVisible}
+								/>
+							) : null}
 						</StepSelectorContainer>
 						{internal && StepArgs && (
 							<>
@@ -86,7 +95,12 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 							</>
 						)}
 					</div>
-					{internal?.verb ? <Guidance name={internal?.verb} /> : null}
+					{isGuidanceVisible && internal?.verb ? (
+						<Guidance
+							name={internal?.verb}
+							index={index as Record<string, string>}
+						/>
+					) : null}
 				</ContainerBody>
 			</Modal>
 		)

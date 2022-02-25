@@ -1,2 +1,7 @@
-// eslint-disable-next-line
-export default "# rename\n\nRenames columns in a table.\n\n## Example\n\n| id  | name  |\n| --- | ----- |\n| 1   | Bob   |\n| 2   | Joe   |\n| 3   | Jenny |\n\n`rename columns['id', 'name'] to=['row', 'first']`:\n\n| row | first |\n| --- | ----- |\n| 1   | Bob   |\n| 2   | Joe   |\n| 3   | Jenny |\n"
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+const content =
+	"# rename\n\nRenames columns in a table.\n\n## Example\n\n| id  | name  |\n| --- | ----- |\n| 1   | Bob   |\n| 2   | Joe   |\n| 3   | Jenny |\n\n`rename columns['id', 'name'] to=['row', 'first']`:\n\n| row | first |\n| --- | ----- |\n| 1   | Bob   |\n| 2   | Joe   |\n| 3   | Jenny |\n"
+export default content

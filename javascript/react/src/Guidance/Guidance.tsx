@@ -14,14 +14,14 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import { useGuidance } from './hooks.js'
+import { GuidanceProps } from './types.js'
 
-interface Props {
-	name: string
-}
-
-export const Guidance: React.FC<Props> = memo(function Guidance({ name = '' }) {
+export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
+	name = '',
+	index,
+}) {
 	const markdownContainer = useRef<HTMLDivElement>(null)
-	const guidance = useGuidance()
+	const guidance = useGuidance(index)
 	const [_name, setName] = useState<string[]>([name])
 
 	if (name !== _name[0]) {
@@ -50,7 +50,7 @@ export const Guidance: React.FC<Props> = memo(function Guidance({ name = '' }) {
 	}, [setName])
 
 	const md = useMemo(
-		(): string => guidance(_name[_name.length - 1]),
+		(): string => guidance(_name[_name.length - 1] || ''),
 		[_name, guidance],
 	)
 
@@ -68,31 +68,62 @@ export const Guidance: React.FC<Props> = memo(function Guidance({ name = '' }) {
 
 	return (
 		<Container ref={markdownContainer}>
-			{_name.length > 2 ? (
-				<Icon
-					onClick={goBack}
-					iconProps={{ iconName: 'Back' }}
-					aria-label="Emoji"
-				/>
-			) : null}
-			{_name.length > 1 ? (
-				<Icon
-					onClick={goHome}
-					iconProps={{ iconName: 'Home' }}
-					aria-label="Emoji"
-				/>
-			) : null}
+			<ButtonWrapper>
+				{_name.length > 2 ? (
+					<Icon
+						onClick={goBack}
+						iconProps={{ iconName: 'Back' }}
+						aria-label="Emoji"
+					/>
+				) : null}
+				{_name.length > 1 ? (
+					<Icon
+						onClick={goHome}
+						iconProps={{ iconName: 'Home' }}
+						aria-label="Emoji"
+					/>
+				) : null}
+			</ButtonWrapper>
 			<Markdown>{md}</Markdown>
 		</Container>
 	)
 })
 
 const Container = styled.div`
+	position: relative;
+
 	h1 {
 		margin-top: 0;
+		color: ${({ theme }) => theme.application().midContrast().hex()};
+	}
+
+	h2 {
+		color: ${({ theme }) => theme.application().midContrast().hex()};
+	}
+
+	table {
+		border-collapse: collapse;
+
+		th {
+			font-weight: bold;
+		}
+
+		td,
+		th {
+			border: 1px solid
+				${({ theme }) => theme.application().lowContrast().hex()};
+			padding: 5px;
+			text-align: center;
+		}
 	}
 `
 
 const Icon = styled(IconButton)`
 	font-size: 2.5rem;
+`
+
+const ButtonWrapper = styled.div`
+	position: absolute;
+	top: 0;
+	right: 0;
 `

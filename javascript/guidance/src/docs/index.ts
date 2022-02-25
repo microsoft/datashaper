@@ -36,7 +36,7 @@ import union from './union.js'
 import unorder from './unorder.js'
 import unroll from './unroll.js'
 
-export const docs = {
+export const index = {
 	aggregate: aggregate,
 	bin: bin,
 	binarize: binarize,

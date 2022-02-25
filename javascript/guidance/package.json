@@ -10,11 +10,11 @@
 	"scripts": {
 		"clean": "essex clean dist lib",
 		"build:compile": "tsc --project tsconfig.build.json",
-		"build:docs": "yarn build:compile && node ./src/scripts/build.js",
-		"build": "yarn build:docs && yarn essex build --skipExportCheck"
+		"start": "yarn build:compile && node ./src/scripts/build.js",
+		"build": "essex build-md-index --include ../../docs/verbs"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.3.0",
+		"@essex/scripts": "^20.4.1",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/express": "^4.17.13",
 		"@types/node": "^17.0.18",

@@ -13,9 +13,9 @@ interface FileProps {
 async function createDocFile(file: FileProps, outputDir: string) {
 	const { name, path } = file
 	const content = await readFile(path, 'utf-8')
-	const jsFile = `// eslint-disable-next-line \nexport default ${JSON.stringify(
+	const jsFile = `const content = ${JSON.stringify(
 		content,
-	)}`
+	)} \nexport default content`
 	return writeFile(`${outputDir}/${name}`, jsFile)
 }
 
@@ -80,7 +80,7 @@ async function createIndex(files: string[], outputDir: string) {
 	})
 
 	index += `
-export const docs = {\n${Object.keys(docs)
+export const index = {\n${Object.keys(docs)
 		.map(v => `\t"${v}": ${docs[v]}`)
 		.join(',\n')} \n}
 `

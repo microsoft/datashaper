@@ -7,12 +7,12 @@ import { useBoolean, useId } from '@fluentui/react-hooks'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Guidance } from './Guidance.js'
+import { GuidanceProps } from './types.js'
 
-interface Props {
-	name: string
-}
-
-export const Tooltip: React.FC<Props> = memo(function Tooltip({ name = '' }) {
+export const Tooltip: React.FC<GuidanceProps> = memo(function Tooltip({
+	name = '',
+	index,
+}) {
 	const [isCalloutVisible, { toggle: toggleIsCalloutVisible }] =
 		useBoolean(false)
 	const buttonId = useId('callout-button')
@@ -34,8 +34,9 @@ export const Tooltip: React.FC<Props> = memo(function Tooltip({ name = '' }) {
 					target={`#${buttonId}`}
 					onDismiss={toggleIsCalloutVisible}
 					setInitialFocus
+					calloutMaxHeight={450}
 				>
-					<Guidance name={name} />
+					<Guidance name={name} index={index} />
 				</Callout>
 			)}
 		</Container>
