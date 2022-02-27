@@ -34,7 +34,7 @@ export async function unfold(
 	const originalArray: RowObject[] = inputTable.objects()
 	const finalArray: RowObject[] = []
 
-	let upperValue: number =
+	const upperValue: number =
 		selectedArray.length !== 0
 			? selectedArray.length / distinctColumnValues.length
 			: distinctColumnValues.length
