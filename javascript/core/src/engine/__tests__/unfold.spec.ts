@@ -23,7 +23,7 @@ describe('test for unfold verb', () => {
 		})
 
 		const step2: Step = {
-			verb: Verb.Fold,
+			verb: Verb.Unfold,
 			input: 'newTable',
 			output: 'output',
 			args: { key: 'key', value: 'value' },

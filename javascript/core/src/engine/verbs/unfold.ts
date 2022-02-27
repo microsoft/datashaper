@@ -34,15 +34,24 @@ export async function unfold(
 	const originalArray: RowObject[] = inputTable.objects()
 	const finalArray: RowObject[] = []
 
-	for (let i = 0; i < selectedArray.length / distinctColumnValues.length; i++) {
-		const tempObj: RowObject = {
-			...selectedArray[i * distinctColumnValues.length],
+	let upperValue: number =
+		selectedArray.length !== 0
+			? selectedArray.length / distinctColumnValues.length
+			: distinctColumnValues.length
+
+	for (let i = 0; i < upperValue; i++) {
+		let tempObj: RowObject = {}
+
+		if (selectedArray.length !== 0) {
+			tempObj = {
+				...selectedArray[i * distinctColumnValues.length],
+			}
 		}
 
 		let j: number = i * distinctColumnValues.length
 
 		distinctColumnValues.forEach(e => {
-			const obj: RowObject | undefined = originalArray.at(j)
+			const obj: RowObject | undefined = originalArray[j]
 			tempObj[e] = obj !== undefined ? obj[value] : null
 			j++
 		})
