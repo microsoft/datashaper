@@ -62,8 +62,8 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 				<ContainerBody>
 					<StepSelectorContainer>
 						<StepSelector
-							placeholder="Select a verb"
-							verb={internal?.verb || ''}
+							placeholder="Choose a verb"
+							verb={internal?.verb}
 							onCreate={handleVerbChange}
 						/>
 					</StepSelectorContainer>

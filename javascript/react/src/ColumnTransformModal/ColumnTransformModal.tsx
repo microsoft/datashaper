@@ -75,7 +75,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 				</Header>
 				<Container>
 					<Dropdown
-						placeholder={'Select transform'}
+						placeholder={'Choose transform'}
 						options={stepOptions}
 						defaultSelectedKey={internal?.verb || ''}
 						onChange={handleVerbChange}

@@ -76,7 +76,7 @@ const Container = styled.div`
 
 const Table = styled.div`
 	margin-top: 12px;
-	width: 800ox;
+	width: 800px;
 	height: 600px;
 `
 

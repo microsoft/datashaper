@@ -22,7 +22,7 @@ export const TableDropdown: React.FC<TableDropdownProps> = memo(
 		return (
 			<Dropdown
 				label={'Table'}
-				placeholder={'Select table'}
+				placeholder={'Choose table'}
 				options={tableOptions}
 				styles={tableDropdownStyles}
 				{...rest}

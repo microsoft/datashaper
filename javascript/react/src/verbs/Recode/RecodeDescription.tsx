@@ -4,11 +4,8 @@
  */
 import type { RecodeStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { DescriptionRow, VerbDescription } from '../../index.js'
+import { createRowEntries, VerbDescription } from '../../index.js'
 import type { StepDescriptionProps } from '../../types.js'
-
-// prevent the displayed list from getting too long
-const MAX_LIST = 10
 
 export const RecodeDescription: React.FC<StepDescriptionProps> = memo(
 	function RecodeDescription(props) {
@@ -16,16 +13,14 @@ export const RecodeDescription: React.FC<StepDescriptionProps> = memo(
 			const internal = props.step as RecodeStep
 			const { args } = internal
 			const entries = Object.entries(args.map || {})
-			const maps: DescriptionRow[] = entries.slice(0, MAX_LIST).map(c => ({
-				value: `${c[0]} -> ${c[1]}`,
-			}))
-			const remaining = entries.length - maps.length
-			if (remaining > 0) {
-				maps.push({
-					before: `+${remaining} more...`,
-					value: '',
-				})
-			}
+			const sub = createRowEntries(
+				entries,
+				c => ({
+					value: `${c[0]} -> ${c[1]}`,
+				}),
+				2,
+				props,
+			)
 			return [
 				{
 					before: 'from column',
@@ -34,8 +29,8 @@ export const RecodeDescription: React.FC<StepDescriptionProps> = memo(
 				{
 					before: 'into column',
 					value: args.to,
+					sub,
 				},
-				...maps,
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />
