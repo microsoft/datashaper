@@ -11,6 +11,7 @@
 		"lint": "essex lint --fix",
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
+		"test": "yarn jest",
 		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest)",
 		"ci": "run-s build lint jest git_is_clean",
 		"publish": "yarn workspaces foreach --exclude '@data-wrangling-components/project' -pv npm publish --tolerate-republish --access public",

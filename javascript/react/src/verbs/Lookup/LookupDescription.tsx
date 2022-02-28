@@ -4,7 +4,7 @@
  */
 import type { LookupStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { VerbDescription } from '../../index.js'
+import { createRowEntries, VerbDescription } from '../../index.js'
 import type { StepDescriptionProps } from '../../types.js'
 
 export const LookupDescription: React.FC<StepDescriptionProps> = memo(
@@ -12,6 +12,14 @@ export const LookupDescription: React.FC<StepDescriptionProps> = memo(
 		const rows = useMemo(() => {
 			const internal = props.step as LookupStep
 			const { args } = internal
+			const sub = createRowEntries(
+				args.columns,
+				c => ({
+					value: c,
+				}),
+				3,
+				props,
+			)
 			return [
 				{
 					before: 'lookup from',
@@ -23,7 +31,8 @@ export const LookupDescription: React.FC<StepDescriptionProps> = memo(
 				},
 				{
 					before: 'copy columns',
-					value: args.columns.length > 0 ? args.columns.join(', ') : null,
+					value: args.columns.length === 0 ? undefined : '',
+					sub,
 				},
 			]
 		}, [props])

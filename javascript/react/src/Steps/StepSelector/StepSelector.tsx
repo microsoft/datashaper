@@ -2,102 +2,98 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Verb } from '@data-wrangling-components/core'
-import { Dropdown, DropdownMenuItemType, IconButton } from '@fluentui/react'
-import { memo, useCallback, useMemo, useState, useEffect } from 'react'
+import type { Verb } from '@data-wrangling-components/core'
+import { DefaultButton, IconButton } from '@fluentui/react'
+
+import { memo, useCallback } from 'react'
 import styled from 'styled-components'
+import { GroupedMenu } from './GroupedMenu.js'
+import { ItemSearchBox } from './ItemSearchBox.js'
+import {
+	sortIntoGroups,
+	useDropdownButtonText,
+	useSelectedOption,
+	useSearchableItems,
+	useMenuProps,
+} from './StepSelector.hooks.js'
+import { buttonStylexs } from './StepSelector.styles.js'
 
 export interface StepSelectorProps {
 	onCreate?: (verb: Verb) => void
 	showButton?: boolean
-	verb?: string
+	verb?: Verb
 	placeholder?: string
 }
 
+/**
+ * Creates a custom step selection dropdown.
+ * If "showButton" is true, a + icon will appear next to the dropdown,
+ * and onChange will only fire when it is clicked.
+ */
 export const StepSelector: React.FC<StepSelectorProps> = memo(
-	function StepSelector({ onCreate, showButton, verb, placeholder }) {
-		const options = useGroupedOptions()
-		const [currentOption, setCurrentOption] = useState<string>(
-			!placeholder ? 'aggregate' : '',
+	function StepSelector({
+		onCreate,
+		showButton,
+		verb,
+		placeholder = 'Choose a verb',
+	}) {
+		const { selected, onButtonClick, onItemClick } = useSelectedOption(
+			verb,
+			onCreate,
+			showButton,
 		)
-		const handleDropdownChange = useCallback(
-			(_e, opt) => {
-				setCurrentOption(opt.key)
-				!showButton && onCreate && onCreate(opt.key)
+
+		const { items, filtered, onSearch, onSearchReset } = useSearchableItems()
+
+		const renderMenuList = useCallback(
+			menuListProps => {
+				const groups = sortIntoGroups(filtered)
+				return (
+					<MenuContainer>
+						<SearchContainer>
+							<ItemSearchBox items={items} onSearch={onSearch} />
+						</SearchContainer>
+						<GroupedMenu groups={groups} menuListProps={menuListProps} />
+					</MenuContainer>
+				)
 			},
-			[showButton, onCreate],
+			[onSearch, items, filtered],
 		)
 
-		useEffect(() => {
-			verb && setCurrentOption(verb)
-		}, [verb])
+		const menuProps = useMenuProps({
+			items: filtered,
+			onRenderMenuList: renderMenuList,
+			onItemClick,
+			onDismiss: onSearchReset,
+		})
 
-		const handleStepClick = useCallback(() => {
-			onCreate && onCreate(currentOption as Verb)
-		}, [currentOption, onCreate])
+		const buttonText = useDropdownButtonText(selected, placeholder)
+
 		return (
 			<Container>
-				<Dropdown
-					options={options}
-					selectedKey={currentOption}
-					placeholder={placeholder}
-					styles={{ root: { flex: 2 } }}
-					onChange={handleDropdownChange}
+				<DefaultButton
+					styles={buttonStylexs}
+					text={buttonText}
+					menuProps={menuProps as any}
 				/>
 				{showButton && (
-					<IconButton
-						iconProps={{ iconName: 'Add' }}
-						onClick={handleStepClick}
-					/>
+					<IconButton iconProps={{ iconName: 'Add' }} onClick={onButtonClick} />
 				)}
 			</Container>
 		)
 	},
 )
 
-// enum Compound {
-// 	'Multi-Binarize' = 'multi-binarize',
-// 	'Filter-Aggregate-Lookup' = 'filter-aggregate-lookup',
-// }
-
-function useVerbOptions() {
-	return useMemo(() => {
-		return Object.entries(Verb).map(([text, key]) => ({
-			key,
-			text,
-		}))
-	}, [])
-}
-
-// function useCompoundOptions() {
-// 	return useMemo(() => {
-// 		return Object.entries(Compound).map(([text, key]) => ({
-// 			key,
-// 			text,
-// 		}))
-// 	}, [])
-// }
-
-function useGroupedOptions() {
-	const verbOptions = useVerbOptions()
-	// const compoundOptions = useCompoundOptions()
-	return useMemo(
-		() => [
-			{ key: 'verbs', text: 'Verbs', itemType: DropdownMenuItemType.Header },
-			...verbOptions.filter(x => !['chain', 'fetch'].includes(x.key)),
-			// {
-			// 	key: 'compounds',
-			// 	text: 'Compounds',
-			// 	itemType: DropdownMenuItemType.Header,
-			// },
-			// ...compoundOptions,
-		],
-		[verbOptions],
-	)
-}
-
 const Container = styled.div`
 	width: 200px;
 	display: flex;
-	height: 32px;
+	align-items: center;
+	gap: 8px;
+`
+
+const MenuContainer = styled.div``
+
+const SearchContainer = styled.div`
+	border-bottom: 1px solid
+		${({ theme }) => theme.application().lowContrast().hex()};
 `

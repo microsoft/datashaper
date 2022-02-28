@@ -4,7 +4,7 @@
  */
 import type { OrderbyStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { VerbDescription } from '../../index.js'
+import { createRowEntries, VerbDescription } from '../../index.js'
 import type { StepDescriptionProps } from '../../types.js'
 
 export const OrderbyDescription: React.FC<StepDescriptionProps> = memo(
@@ -12,11 +12,21 @@ export const OrderbyDescription: React.FC<StepDescriptionProps> = memo(
 		const rows = useMemo(() => {
 			const internal = props.step as OrderbyStep
 			const { args } = internal
-			return [
-				...(args.orders || []).map(o => ({
+			const sub = createRowEntries(
+				args.orders || [],
+				o => ({
 					value: o.column,
 					after: o.direction,
-				})),
+				}),
+				1,
+				props,
+			)
+			return [
+				{
+					before: 'order',
+					value: args.orders.length === 0 ? undefined : '',
+					sub,
+				},
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />

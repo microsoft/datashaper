@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { from } from 'arquero'
-import type { RowObject } from 'arquero/dist/types/table/table'
+import { escape } from 'arquero'
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import type { EraseArgs, Step, TableContainer } from '../../types.js'
@@ -24,13 +23,11 @@ export async function erase(
 	const { value, column } = args as EraseArgs
 	const inputTable = await store.table(input)
 
-	const matrix: RowObject[] = inputTable.objects()
+	const func = escape((d: any) => (d[column] === value ? undefined : d[column]))
 
-	matrix.forEach(row => {
-		if (row[column] === value) {
-			row[column] = undefined
-		}
-	})
+	const dArgs = {
+		[column]: func,
+	}
 
-	return container(output, from(matrix))
+	return container(output, inputTable.derive(dArgs))
 }
