@@ -12,6 +12,7 @@ import { Header } from './Header'
 import { Layout } from './Layout'
 import { RouteOptions } from './RouteOptions'
 import { StyleContext } from './StyleContext'
+import { Footer } from '~components/Footer'
 
 export const App: React.FC = memo(function App() {
 	return (
@@ -25,6 +26,7 @@ export const App: React.FC = memo(function App() {
 								<Layout>
 									<RouteOptions />
 								</Layout>
+								<Footer />
 							</Container>
 						</StyleContext>
 					</Suspense>
