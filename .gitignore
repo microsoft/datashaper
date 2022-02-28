@@ -7,6 +7,7 @@ coverage/
 .swc/
 stats.json
 build.js
+javascript/guidance/src/docs/
 
 # Classic node deps
 node_modules/

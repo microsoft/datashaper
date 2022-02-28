@@ -10,12 +10,18 @@ interface FileProps {
 	path: string
 }
 
+const copy = `/*!
+* Copyright (c) Microsoft. All rights reserved.
+* Licensed under the MIT license. See LICENSE file in the project.
+*/
+`
+
 async function createDocFile(file: FileProps, outputDir: string) {
 	const { name, path } = file
 	const content = await readFile(path, 'utf-8')
-	const jsFile = `const content = ${JSON.stringify(
+	const jsFile = `${copy}const content =\n\t${JSON.stringify(
 		content,
-	)} \nexport default content`
+	)} \nexport default content\n`
 	return writeFile(`${outputDir}/${name}`, jsFile)
 }
 
@@ -65,11 +71,7 @@ function nonReservedWord(name: string) {
 }
 
 async function createIndex(files: string[], outputDir: string) {
-	let index = `/*!
-* Copyright (c) Microsoft. All rights reserved.
-* Licensed under the MIT license. See LICENSE file in the project.
-*/\n
-`
+	let index = copy + '\n'
 
 	const docs: Record<string, string> = {}
 	files.forEach(file => {
