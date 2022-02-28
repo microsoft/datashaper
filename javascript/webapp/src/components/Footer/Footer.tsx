@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { manageConsent } from '../../consent'
 import { FC, memo } from 'react'
 import styled from 'styled-components'
+import { manageConsent } from '../../consent'
 
 export const Footer: FC = memo(function Footer() {
 	return (
