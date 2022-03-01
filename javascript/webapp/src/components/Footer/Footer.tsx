@@ -2,17 +2,27 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FC, memo } from 'react'
+import { FC, memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { manageConsent } from '../../consent'
+import { useMicrosoftConsentBanner } from '@essex-js-toolkit/hooks'
 
+const CONSENT_CONF = {
+	theme: 'light',
+	elementId: 'cookie-banner',
+	onChange: (c: any) => console.log('CHANGED', c),
+}
 export const Footer: FC = memo(function Footer() {
+	const [consent, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
+	const manage = useCallback(() => {
+		console.log('managing consent')
+		manageConsent()
+	}, [manageConsent])
 	return (
 		<FooterEl>
 			<Container>
 				<Link href={constants.privacyUrl}>Privacy</Link>
 				{' | '}
-				<Link id={'managecookies'} onClick={manageConsent}>
+				<Link id={'managecookies'} onClick={manage}>
 					Cookies
 				</Link>
 				{' | '}
