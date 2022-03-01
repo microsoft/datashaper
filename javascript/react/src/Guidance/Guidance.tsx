@@ -13,8 +13,8 @@ import React, {
 	useCallback,
 } from 'react'
 import styled from 'styled-components'
-import { useGuidance } from './hooks.js'
-import { GuidanceProps } from './types.js'
+import { useGoBack, useGoHome, useGuidance, useHandleClick } from './hooks.js'
+import type { GuidanceProps } from './types.js'
 
 export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 	name = '',
@@ -28,31 +28,20 @@ export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 		setName([name])
 	}
 
-	const handleClick = useCallback(
-		(url: string) => {
-			if (!url.includes(window.location.origin)) {
-				return window.open(url, '_blank')
-			}
-			const name = url.split('/').pop()?.replace(/.md/, '')
-			if (name) {
-				setName(prev => [...prev, name])
-			}
-		},
-		[setName],
-	)
+	const handleClick = useHandleClick(setName)
+	const goHome = useGoHome(name, setName)
+	const goBack = useGoBack(setName)
 
-	const goHome = useCallback(() => {
-		setName([name])
-	}, [setName, name])
+	const preProcess = useCallback((text: string): string => {
+		const r = /(?<=##.*?\n)([\s\S]*)/g
+		const content = text.replace(r, `<div className="details">$1</div>`)
+		return content
+	}, [])
 
-	const goBack = useCallback(() => {
-		setName(prev => prev.slice(0, -1))
-	}, [setName])
-
-	const md = useMemo(
-		(): string => guidance(_name[_name.length - 1] || ''),
-		[_name, guidance],
-	)
+	const md = useMemo((): string => {
+		const text = guidance(_name[_name.length - 1] || '')
+		return preProcess(text)
+	}, [_name, guidance, preProcess])
 
 	useEffect(() => {
 		if (markdownContainer?.current) {
@@ -65,6 +54,40 @@ export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 			})
 		}
 	}, [handleClick, _name, markdownContainer])
+
+	const handleHeaderClick = useCallback(event => {
+		const target: HTMLHeadingElement =
+			event.target.nodeName === 'H2' ? event.target : event.target.closest('h2')
+		if (target.classList.contains('active')) {
+			target.classList.remove('active')
+		} else {
+			target.classList.add('active')
+		}
+	}, [])
+
+	const H2Component = useCallback(
+		({ children, ...props }): JSX.Element => {
+			return (
+				<h2 {...props}>
+					{children}
+					<IconButton
+						onClick={handleHeaderClick}
+						aria-label="Emoji"
+						iconProps={{ iconName: 'AddTo' }}
+					/>
+				</h2>
+			)
+		},
+		[handleHeaderClick],
+	)
+
+	const options = {
+		overrides: {
+			h2: {
+				component: H2Component,
+			},
+		},
+	}
 
 	return (
 		<Container ref={markdownContainer}>
@@ -84,7 +107,7 @@ export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 					/>
 				) : null}
 			</ButtonWrapper>
-			<Markdown>{md}</Markdown>
+			<Markdown options={options}>{md}</Markdown>
 		</Container>
 	)
 })
@@ -99,6 +122,17 @@ const Container = styled.div`
 
 	h2 {
 		color: ${({ theme }) => theme.application().midContrast().hex()};
+
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+
+		&.active + .details {
+			opacity: 1;
+			height: auto;
+			transform: translateX(0);
+			overflow-x: auto;
+		}
 	}
 
 	table {
@@ -115,6 +149,14 @@ const Container = styled.div`
 			padding: 5px;
 			text-align: center;
 		}
+	}
+
+	.details {
+		opacity: 0;
+		height: 0;
+		transition: transform 1s ease-in-out;
+		transform: translateX(100%);
+		overflow-x: hidden;
 	}
 `
 

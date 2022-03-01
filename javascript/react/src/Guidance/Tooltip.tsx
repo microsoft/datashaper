@@ -7,7 +7,7 @@ import { useBoolean, useId } from '@fluentui/react-hooks'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Guidance } from './Guidance.js'
-import { GuidanceProps } from './types.js'
+import type { GuidanceProps } from './types.js'
 
 export const Tooltip: React.FC<GuidanceProps> = memo(function Tooltip({
 	name = '',

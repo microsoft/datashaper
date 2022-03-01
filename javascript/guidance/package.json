@@ -2,7 +2,7 @@
 	"name": "@data-wrangling-components/guidance",
 	"version": "0.0.1",
 	"type": "module",
-	"main": "src/index.ts",
+	"main": "dist/index.js",
 	"publishConfig": {
 		"main": "dist/index.js",
 		"types": "dist/index.d.ts"
@@ -10,7 +10,7 @@
 	"scripts": {
 		"clean": "essex clean dist lib",
 		"build:compile": "tsc --project tsconfig.build.json",
-		"start": "yarn build:compile && node ./src/scripts/build.js",
+		"start": "yarn build",
 		"build": "essex build-md-index --include ../../docs/verbs"
 	},
 	"devDependencies": {

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableStore } from '@data-wrangling-components/core'
-import { index } from '@data-wrangling-components/guidance'
+import index from '@data-wrangling-components/guidance'
 import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import React, { memo } from 'react'
