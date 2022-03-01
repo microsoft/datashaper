@@ -10,7 +10,6 @@ import {
 	TableContainer,
 } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import last from 'lodash-es/last.js'
 import { useState, useMemo, useEffect } from 'react'
 import { usePipeline, useStore } from '../../common/index.js'
 import {
@@ -48,21 +47,6 @@ export function useBusinessLogic(
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
 
-	const selectedTable = useMemo((): ColumnTable | undefined => {
-		return storedTables.get(selectedTableName ?? '')?.table
-	}, [selectedTableName, storedTables])
-
-	const selectedMetadata = useMemo((): TableMetadata | undefined => {
-		return selectedTable && introspect(selectedTable, true)
-	}, [selectedTable])
-
-	const lastTableName = useMemo((): string => {
-		const _tables = Array.from(storedTables.keys())
-		const length = _tables.length
-		const input = length === 0 ? '' : _tables[length - 1] ?? ''
-		return last(steps)?.output ?? input
-	}, [steps, storedTables])
-
 	// TODO: resolve these from the stored table state
 	const derived = useMemo(() => {
 		const unique = new Set<string>()
@@ -71,6 +55,31 @@ export function useBusinessLogic(
 			id: name,
 		}))
 	}, [steps])
+
+	const selectedTable = useMemo((): ColumnTable | undefined => {
+		return storedTables.get(selectedTableName ?? '')?.table
+	}, [selectedTableName, storedTables])
+
+	const selectedMetadata = useMemo((): TableMetadata | undefined => {
+		return selectedTable && introspect(selectedTable, true)
+	}, [selectedTable])
+
+	// kind of a complex selection process:
+	// 1) if a table is selected in the tables dropdown, use that
+	// 2) if there are derived tables, use the last one
+	// 3) if the store tables do not have any derived, use the first input
+	const lastTableName = useMemo((): string => {
+		if (selectedTableName) {
+			return selectedTableName
+		}
+		if (derived && derived.length > 0) {
+			const last = derived[derived.length - 1]
+			if (last) {
+				return last.id
+			}
+		}
+		return tables[0]?.id || ''
+	}, [tables, selectedTableName, derived])
 
 	useEffect(() => {
 		const f = async () => {

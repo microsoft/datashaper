@@ -70,7 +70,7 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 	useEffect(() => {
 		if (dirty) {
 			setDirty(false)
-			setList(store?.list() || [])
+			setList(store?.list().sort() || [])
 		}
 	}, [store, dirty, setDirty, setList])
 	return useSimpleOptions(list)

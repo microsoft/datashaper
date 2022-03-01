@@ -3,10 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@data-wrangling-components/core'
-import { DefaultButton, Dropdown, IDropdownOption } from '@fluentui/react'
-import { memo, useCallback, useMemo } from 'react'
+import { DefaultButton, Dropdown } from '@fluentui/react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import { DetailText } from '../DetailText/DetailText.js'
+import { useOutputPreview, useTableSelection } from './TableListBar.hooks.js'
 
 export const TableListBar: React.FC<{
 	inputs: TableContainer[]
@@ -14,25 +15,9 @@ export const TableListBar: React.FC<{
 	onSelect?: (name: string) => void
 	selected?: string
 }> = memo(function TableListBar({ inputs, derived, onSelect, selected }) {
-	const inputOptions = useOptions(inputs)
-	const derivedOptions = useOptions(derived)
+	const { options, onChange } = useTableSelection(inputs, derived, onSelect)
 
-	const handleDropdownChange = useCallback(
-		(_evt, opt) => {
-			onSelect && onSelect(opt.key)
-		},
-		[onSelect],
-	)
-
-	const lastId = useMemo(() => {
-		if (derived && derived.length > 0) {
-			return derived[derived.length - 1]!.id
-		}
-	}, [derived])
-
-	const handleViewClick = useCallback(() => {
-		lastId && onSelect && onSelect(lastId)
-	}, [lastId, onSelect])
+	const { onClick } = useOutputPreview(derived, onSelect)
 
 	return (
 		<ListContainer>
@@ -42,34 +27,19 @@ export const TableListBar: React.FC<{
 						width: 200,
 					},
 				}}
-				label={'Inputs'}
 				placeholder={'Choose table'}
 				selectedKey={selected}
-				options={inputOptions}
-				onChange={handleDropdownChange}
+				options={options}
+				onChange={onChange}
 			/>
 			{derived.length > 0 ? (
-				<>
-					<Dropdown
-						styles={{
-							root: {
-								width: 200,
-							},
-						}}
-						label={'Derived'}
-						placeholder={'Choose table'}
-						selectedKey={selected}
-						options={derivedOptions}
-						onChange={handleDropdownChange}
-					/>
-					<DefaultButton
-						styles={viewButtonStyles}
-						iconProps={iconProps.view}
-						onClick={handleViewClick}
-					>
-						View output
-					</DefaultButton>
-				</>
+				<DefaultButton
+					styles={viewButtonStyles}
+					iconProps={iconProps.view}
+					onClick={onClick}
+				>
+					View output
+				</DefaultButton>
 			) : null}
 
 			{!selected && (
@@ -85,19 +55,11 @@ const iconProps = {
 	view: { iconName: 'View' },
 }
 
-function useOptions(tables: TableContainer[]): IDropdownOption[] {
-	return useMemo(() => {
-		return tables.map(table => ({
-			key: table.id,
-			text: table.name || table.id,
-		}))
-	}, [tables])
-}
 const ListContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	align-items: flex-end;
+	align-items: center;
 	width: 100%;
 	gap: 18px;
 `
