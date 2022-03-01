@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useMicrosoftConsentBanner } from '@essex-js-toolkit/hooks'
 import { FC, memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { useMicrosoftConsentBanner } from '@essex-js-toolkit/hooks'
 
 const CONSENT_CONF = {
 	theme: 'light',
@@ -12,7 +12,7 @@ const CONSENT_CONF = {
 	onChange: (c: any) => console.log('CHANGED', c),
 }
 export const Footer: FC = memo(function Footer() {
-	const [consent, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
+	const [, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
 	const manage = useCallback(() => {
 		console.log('managing consent')
 		manageConsent()
