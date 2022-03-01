@@ -3,9 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMicrosoftConsentBanner } from '@essex-js-toolkit/hooks'
-import { loadFluentTheme } from '@thematic/fluent'
-import { FC, memo, useCallback, useMemo } from 'react'
-import styled, { ThemeProvider } from 'styled-components'
+import { FC, memo, useCallback } from 'react'
+import styled from 'styled-components'
 import { useTheme } from '../../states/settings.js'
 
 export const Footer: FC = memo(function Footer() {
