@@ -6,41 +6,70 @@ import type { TableContainer } from '@data-wrangling-components/core'
 import {
 	BaseButton,
 	Button,
-	IDropdownOption,
-	SelectableOptionMenuItemType,
+	ContextualMenuItemType,
+	IContextualMenuItem,
 } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
 /**
- * Provides options and a change handler for selecting an input or derived table.
+ * Returns props to render a grouped menu,
+ * including the text to display (based on selected table),
+ * the list of renderable items, and an onItemClick handler to update the selection
  * @param inputs
  * @param derived
+ * @param selected
  * @param onSelect
  * @returns
  */
 export function useTableSelection(
 	inputs: TableContainer[],
 	derived: TableContainer[],
+	selected?: string,
 	onSelect?: (name: string) => void,
 ): {
-	options: IDropdownOption[]
-	onChange: (
-		event: React.FormEvent<HTMLDivElement>,
-		option?: IDropdownOption,
-		index?: number,
-	) => void
+	text?: string
+	items: IContextualMenuItem[]
+	onItemClick: (
+		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+		item?: IContextualMenuItem,
+	) => boolean | void
 } {
-	const options = useTableOptions(inputs, derived)
+	const inputItems = useMenuItems(inputs)
+	const derivedItems = useMenuItems(derived)
 
-	const onChange = useCallback(
-		(_evt, opt) => {
-			onSelect && onSelect(opt.key)
-		},
+	const items = useMemo(
+		() => [
+			{
+				key: '__input-tables__',
+				itemType: ContextualMenuItemType.Section,
+				sectionProps: {
+					title: 'Inputs',
+					items: inputItems,
+				},
+			},
+			{
+				key: '__derived-tables__',
+				itemType: ContextualMenuItemType.Section,
+				sectionProps: {
+					title: 'Derived',
+					items: derivedItems,
+				},
+			},
+		],
+		[inputItems, derivedItems],
+	)
+
+	const onItemClick = useCallback(
+		(_e, opt) => onSelect && onSelect(opt.key),
 		[onSelect],
 	)
+
+	const text = useMemo(() => (selected ? selected : 'Choose table'), [selected])
+
 	return {
-		options,
-		onChange,
+		text,
+		items,
+		onItemClick,
 	}
 }
 
@@ -80,39 +109,7 @@ export function useOutputPreview(
 	}
 }
 
-function useTableOptions(
-	inputs: TableContainer[],
-	derived: TableContainer[],
-): IDropdownOption[] {
-	const sortedInput = useMemo(
-		() =>
-			[...inputs].sort((a, b) =>
-				(a.name || a.id).localeCompare(b.name || b.id),
-			),
-		[inputs],
-	)
-	const inputOptions = useOptions(sortedInput)
-	const derivedOptions = useOptions(derived)
-	return useMemo(
-		() => [
-			{
-				key: '__input-header__',
-				text: 'Inputs',
-				itemType: SelectableOptionMenuItemType.Header,
-			} as IDropdownOption,
-			...inputOptions,
-			{
-				key: '__derived-header__',
-				text: 'Derived',
-				itemType: SelectableOptionMenuItemType.Header,
-			} as IDropdownOption,
-			...derivedOptions,
-		],
-		[inputOptions, derivedOptions],
-	)
-}
-
-function useOptions(tables: TableContainer[]): IDropdownOption[] {
+function useMenuItems(tables: TableContainer[]): IContextualMenuItem[] {
 	return useMemo(() => {
 		return tables.map(table => ({
 			key: table.id,

@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@data-wrangling-components/core'
-import { DefaultButton, Dropdown } from '@fluentui/react'
+import { DefaultButton } from '@fluentui/react'
 import { memo } from 'react'
-import styled from 'styled-components'
+import { GroupedMenu } from '../../controls/GroupedMenu/GroupedMenu.js'
 import { DetailText } from '../DetailText/DetailText.js'
 import { useOutputPreview, useTableSelection } from './TableListBar.hooks.js'
+import { ListContainer, viewButtonStyles } from './TableListBar.styles.js'
 
 export const TableListBar: React.FC<{
 	inputs: TableContainer[]
@@ -15,27 +16,17 @@ export const TableListBar: React.FC<{
 	onSelect?: (name: string) => void
 	selected?: string
 }> = memo(function TableListBar({ inputs, derived, onSelect, selected }) {
-	const { options, onChange } = useTableSelection(inputs, derived, onSelect)
-
 	const { onClick } = useOutputPreview(derived, onSelect)
+
+	const menuProps = useTableSelection(inputs, derived, selected, onSelect)
 
 	return (
 		<ListContainer>
-			<Dropdown
-				styles={{
-					root: {
-						width: 200,
-					},
-				}}
-				placeholder={'Choose table'}
-				selectedKey={selected}
-				options={options}
-				onChange={onChange}
-			/>
+			<GroupedMenu {...menuProps} />
 			{derived.length > 0 ? (
 				<DefaultButton
 					styles={viewButtonStyles}
-					iconProps={iconProps.view}
+					iconProps={iconProps}
 					onClick={onClick}
 				>
 					View output
@@ -49,17 +40,4 @@ export const TableListBar: React.FC<{
 	)
 })
 
-const viewButtonStyles = { root: { padding: '0 4px 0 6px' } }
-
-const iconProps = {
-	view: { iconName: 'View' },
-}
-
-const ListContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
-	width: 100%;
-	gap: 18px;
-`
+const iconProps = { iconName: 'View' }

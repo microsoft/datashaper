@@ -3,10 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Verb } from '@data-wrangling-components/core'
-import type { IContextualMenuItem, IContextualMenuProps } from '@fluentui/react'
+import { ContextualMenuItemType, IContextualMenuItem } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import type { GroupedContextualMenuItems } from './StepSelector.types.js'
 
 // TODO: use core Tags for this
 const groups = [
@@ -58,49 +57,32 @@ const groups = [
 ]
 
 /**
- * Create a set of menu items with an assigned group for each
+ * Create a set of menu items using the groups to sort into sections
  * @returns
  */
-export function useMenuItems(): IContextualMenuItem[] {
-	return useMemo(() => {
-		const filtered = Object.entries(Verb).filter(([, key]) => findGroup(key))
-		return filtered.map(([text, key]) => ({
-			key,
-			text,
-			data: findGroup(key),
-			itemProps: {
-				styles: {
-					root: {
-						paddingLeft: 8,
-						height: 28,
-						lineHeight: 28,
-					},
-					item: {
-						listStyleType: 'none',
-					},
+function useMenuItems(): IContextualMenuItem[] {
+	return useMemo(
+		() =>
+			groups.map(group => ({
+				key: `__section-${group.label}__`,
+				itemType: ContextualMenuItemType.Section,
+				sectionProps: {
+					title: group.label,
+					items: group.verbs.map(verb => {
+						const found = Object.entries(Verb).find(v => v[1] === verb)!
+						return {
+							key: found[1],
+							text: found[0],
+						}
+					}),
 				},
-			},
-		}))
-	}, [])
-}
-
-function findGroup(verb: string) {
-	return groups.find(group => group.verbs.findIndex(v => v === verb) >= 0)
-		?.label
-}
-
-export function sortIntoGroups(
-	items: IContextualMenuItem[],
-): GroupedContextualMenuItems {
-	return groups.reduce((acc, cur) => {
-		const list = items.filter(item => item.data === cur.label)
-		acc[cur.label] = list
-		return acc
-	}, {} as GroupedContextualMenuItems)
+			})),
+		[],
+	)
 }
 
 /**
- * Business logic to manage a list of items, a filtered copy, and a search chandler
+ * Business logic to manage a list of items, a filtered copy, and a search handler
  */
 export function useSearchableItems(): {
 	items: IContextualMenuItem[]
@@ -121,33 +103,19 @@ export function useSearchableItems(): {
 }
 
 /**
- * Displays either the selected option or the placeholder
- * @param selected
- * @param placeholder
- * @returns
- */
-export function useDropdownButtonText(
-	selected?: string,
-	placeholder?: string,
-): string | undefined {
-	return useMemo(() => {
-		return selected ? upperFirst(selected) : placeholder
-	}, [selected, placeholder])
-}
-
-/**
  * Creates a controlled component by accepting a verb from outside, but also tracking internally with an effect
  * @param verb
  * @param onChange - handler for verb changes via dropdown or dropdown + click
- * @ requireClick - indicates that the button click handler must be invoked for onChange to fure
+ * @param requireClick - indicates that the button click handler must be invoked for onChange to fure
  * @returns
  */
 export function useSelectedOption(
 	verb: Verb | undefined,
 	onChange?: (verb: Verb) => void,
 	requireButtonClick?: boolean,
+	placeholder?: string,
 ): {
-	selected: Verb | undefined
+	text?: string
 	onButtonClick: () => void
 	onItemClick: (
 		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
@@ -172,21 +140,25 @@ export function useSelectedOption(
 		[requireButtonClick, onChange, setCurrentOption],
 	)
 
+	const text = useDropdownButtonText(verb, placeholder)
 	return {
-		selected,
+		text,
 		onButtonClick,
 		onItemClick,
 	}
 }
 
-export function useMenuProps(
-	props: IContextualMenuProps,
-): IContextualMenuProps {
-	return useMemo(
-		() => ({
-			shouldFocusOnMount: true,
-			...props,
-		}),
-		[props],
-	)
+/**
+ * Displays either the selected option or the placeholder
+ * @param selected
+ * @param placeholder
+ * @returns
+ */
+export function useDropdownButtonText(
+	selected?: string,
+	placeholder?: string,
+): string | undefined {
+	return useMemo(() => {
+		return selected ? upperFirst(selected) : placeholder
+	}, [selected, placeholder])
 }
