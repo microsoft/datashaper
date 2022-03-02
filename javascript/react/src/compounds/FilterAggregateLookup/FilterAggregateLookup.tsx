@@ -13,7 +13,7 @@ import {
 	TableColumnDropdown,
 	TableDropdown,
 } from '../../controls/index.js'
-import { columnDropdownStyles } from '../../controls/styles.js'
+import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 import {
 	getAggregate,
@@ -116,7 +116,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 					<ReadOnlyTextField
 						label={'Filter'}
 						value={filter.args.column}
-						styles={columnDropdownStyles}
+						styles={dropdownStyles}
 					/>
 
 					<FilterFunction
@@ -140,7 +140,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 						label={'New column name'}
 						placeholder={'Column name'}
 						value={aggregate.args.to}
-						styles={columnDropdownStyles}
+						styles={dropdownStyles}
 						onChange={handleToChange}
 					/>
 				</LeftAlignedRow>

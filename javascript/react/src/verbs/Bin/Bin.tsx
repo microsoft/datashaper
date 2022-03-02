@@ -14,7 +14,7 @@ import {
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
 import { BinStrategyDropdown } from '../../controls/index.js'
-import { columnDropdownStyles } from '../../controls/styles.js'
+import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -67,7 +67,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 				<BinStrategyDropdown
 					required
 					selectedKey={internal.args.strategy}
-					styles={columnDropdownStyles}
+					styles={dropdownStyles}
 					onChange={handleBinStrategyChange}
 				/>
 				<Switch>
@@ -84,7 +84,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 									? `${internal.args.fixedcount}`
 									: undefined
 							}
-							styles={columnDropdownStyles}
+							styles={dropdownStyles}
 							onChange={handleBinCountChange}
 						/>
 					</Case>
@@ -98,7 +98,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 									? `${internal.args.fixedwidth}`
 									: undefined
 							}
-							styles={columnDropdownStyles}
+							styles={dropdownStyles}
 							onChange={handleBinSizeChange}
 						/>
 					</Case>
@@ -111,14 +111,14 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 							label={'Min boundary'}
 							labelPosition={Position.top}
 							value={internal.args.min ? `${internal.args.min}` : undefined}
-							styles={columnDropdownStyles}
+							styles={dropdownStyles}
 							onChange={handleMinChange}
 						/>
 						<SpinButton
 							label={'Max boundary'}
 							labelPosition={Position.top}
 							value={internal.args.max ? `${internal.args.max}` : undefined}
-							styles={columnDropdownStyles}
+							styles={dropdownStyles}
 							onChange={handleMaxChange}
 						/>
 					</LeftAlignedRow>

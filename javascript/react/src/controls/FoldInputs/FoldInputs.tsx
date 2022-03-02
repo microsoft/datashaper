@@ -19,7 +19,7 @@ import {
 } from '../../common'
 import { ColumnInstruction } from '../../controls'
 import type { StepComponentProps } from '../../types'
-import { columnDropdownStyles } from '../styles'
+import { dropdownStyles } from '../styles'
 
 /**
  * Provides inputs for a step that needs lists of columns.
@@ -71,7 +71,7 @@ export const FoldInputs: React.FC<StepComponentProps> = memo(
 						label={'Key name to use'}
 						placeholder={'Key name to use'}
 						value={internal.args.to !== undefined ? internal.args.to[0] : ''}
-						styles={columnDropdownStyles}
+						styles={dropdownStyles}
 						onChange={handleToChange}
 					/>
 					<TextField
@@ -79,7 +79,7 @@ export const FoldInputs: React.FC<StepComponentProps> = memo(
 						label={'Value name to use'}
 						placeholder={'Value name to use'}
 						value={internal.args.to !== undefined ? internal.args.to[1] : ''}
-						styles={columnDropdownStyles}
+						styles={dropdownStyles}
 						onChange={handleToChange2}
 					/>
 				</LeftAlignedRow>

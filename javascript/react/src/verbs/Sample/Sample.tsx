@@ -11,7 +11,7 @@ import {
 	LeftAlignedRow,
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
-import { columnDropdownStyles } from '../../controls/styles.js'
+import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 const whole = format('d')
@@ -48,7 +48,7 @@ export const Sample: React.FC<StepComponentProps> = memo(function Sample({
 					step={1}
 					disabled={!!internal.args.proportion}
 					value={internal.args.size ? `${internal.args.size}` : ''}
-					styles={columnDropdownStyles}
+					styles={dropdownStyles}
 					onChange={handleSizeChange}
 				/>
 				<Or>or</Or>
@@ -64,7 +64,7 @@ export const Sample: React.FC<StepComponentProps> = memo(function Sample({
 							? `${whole(internal.args.proportion * 100)}`
 							: ''
 					}
-					styles={columnDropdownStyles}
+					styles={dropdownStyles}
 					onChange={handlePercentChange}
 				/>
 			</LeftAlignedRow>

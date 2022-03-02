@@ -6,7 +6,7 @@ import type { TableStore } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownProps } from '@fluentui/react'
 import { memo } from 'react'
 import { useTableOptions } from '../../common/index.js'
-import { tableDropdownStyles } from '../styles.js'
+import { dropdownStyles } from '../styles.js'
 
 export interface TableDropdownProps extends Partial<IDropdownProps> {
 	store?: TableStore
@@ -24,7 +24,7 @@ export const TableDropdown: React.FC<TableDropdownProps> = memo(
 				label={'Table'}
 				placeholder={'Choose table'}
 				options={tableOptions}
-				styles={tableDropdownStyles}
+				styles={dropdownStyles}
 				{...rest}
 			/>
 		)

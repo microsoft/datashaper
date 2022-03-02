@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
-	IButtonStyles,
 	DefaultButton,
 	IContextualMenuProps,
 	IContextualMenuListProps,
 	IRenderFunction,
 } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
+import { dropdownButtonStyles } from '../styles.js'
 
 import { ColumnarMenuList } from './ColumnarMenuList.js'
 
@@ -41,23 +41,10 @@ export const ColumnarMenu: React.FC<ColumnarMenuProps> = memo(
 		)
 		return (
 			<DefaultButton
-				styles={buttonStyles}
+				styles={dropdownButtonStyles}
 				text={props.text}
 				menuProps={menuProps}
 			/>
 		)
 	},
 )
-
-export const buttonStyles: IButtonStyles = {
-	root: {
-		width: 160,
-		// match the dropdowns for better visual alignment
-		paddingLeft: 4,
-		paddingRight: 4,
-		textAlign: 'left',
-	},
-	label: {
-		fontWeight: 'normal',
-	},
-}

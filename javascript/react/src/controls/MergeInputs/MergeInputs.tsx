@@ -7,7 +7,7 @@ import { Dropdown, IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common'
-import { columnDropdownStyles } from '../../controls/styles'
+import { dropdownStyles } from '../../controls/styles'
 import type { StepComponentProps } from '../../types'
 import { MergeStrategyComponent } from '../MergeStrategyComponent/MergeStrategyComponent'
 
@@ -69,7 +69,7 @@ export const MergeInputs: React.FC<StepComponentProps> = memo(
 				{tbl ? (
 					<Dropdown
 						label={'Columns'}
-						styles={columnDropdownStyles}
+						styles={dropdownStyles}
 						multiSelect
 						options={options}
 						selectedKeys={selectedKeys}
