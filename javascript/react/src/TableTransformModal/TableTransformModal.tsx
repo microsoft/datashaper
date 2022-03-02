@@ -12,7 +12,7 @@ import {
 	useHandleTableStepArgs,
 	useInternalTableStep,
 	useModalStyles,
-} from './hooks/index.js'
+} from './TableTransformModal.hooks.js'
 
 export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 	function TableTransformModal(props) {
