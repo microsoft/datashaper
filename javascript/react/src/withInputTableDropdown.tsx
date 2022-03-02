@@ -13,7 +13,7 @@ import type { HOCFunction, StepComponentProps } from './types.js'
  * @param label optional label to use for the dropdown instead of the default.
  * @returns
  */
-export const withTableDropdown = (
+export const withInputTableDropdown = (
 	label?: string,
 ): HOCFunction<StepComponentProps> => {
 	return Component => {
@@ -21,7 +21,7 @@ export const withTableDropdown = (
 			const { step, store, onChange } = props
 			const handleTableChange = useHandleDropdownChange(step, 'input', onChange)
 			return (
-				<Container className="with-table-dropdown">
+				<Container className="with-input-table-dropdown">
 					<LeftAlignedRow>
 						<TableDropdown
 							store={store}

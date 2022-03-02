@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import {
 	withInputColumnDropdown,
 	withOutputColumnTextfield,
-	withTableDropdown,
+	withInputTableDropdown,
 	selectStepComponent,
 	selectStepDescription,
 } from '../../index.js'
@@ -30,7 +30,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		const WithAllArgs = useMemo(
 			() =>
 				// TODO: compose cleanly
-				withTableDropdown()(
+				withInputTableDropdown()(
 					withOutputColumnTextfield()(withInputColumnDropdown()(Component)),
 				),
 			[Component],
