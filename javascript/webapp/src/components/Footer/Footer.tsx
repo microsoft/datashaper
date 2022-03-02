@@ -17,8 +17,8 @@ export const Footer: FC = memo(function Footer() {
 	const [, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
 	const manage = useCallback(() => {
 		console.log('managing consent')
-		manageConsent()
-	}, [manageConsent])
+		// manageConsent()
+	}, [])
 
 	return (
 		<FooterEl>
