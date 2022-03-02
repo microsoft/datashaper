@@ -3,22 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMicrosoftConsentBanner } from '@essex-js-toolkit/hooks'
-import { FC, memo, useCallback } from 'react'
+import { FC, memo } from 'react'
 import styled from 'styled-components'
 import { useTheme } from '../../states/settings.js'
 
 export const Footer: FC = memo(function Footer() {
 	const theme = useTheme()
 	const CONSENT_CONF = {
-		theme: theme.variant,
+		theme: theme.dark.toString(),
 		elementId: 'cookie-banner',
 		onChange: (c: any) => console.log('CHANGED', c),
 	}
 	const [, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
-	const manage = useCallback(() => {
-		console.log('managing consent')
-		// manageConsent()
-	}, [])
 
 	return (
 		<FooterEl>
@@ -27,7 +23,7 @@ export const Footer: FC = memo(function Footer() {
 				{' | '}
 				<Link
 					id={'managecookies'}
-					onClick={manage}
+					onClick={manageConsent}
 					style={{ color: '#3f75bf' }}
 				>
 					Cookies

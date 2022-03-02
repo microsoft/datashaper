@@ -44,7 +44,6 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 				<H3>Settings</H3>
 				<Toggle
 					label="Dark Mode"
-					defaultChecked
 					onText="On"
 					offText="Off"
 					onChange={setDarkModeStatus}
