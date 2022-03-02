@@ -4,21 +4,23 @@
  */
 import {
 	ContextualMenuItemType,
+	IContextualMenuItem,
 	IContextualMenuListProps,
 } from '@fluentui/react'
 import { merge } from 'lodash-es'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-export const GroupedMenuList: React.FC<IContextualMenuListProps> = memo(
-	function GroupedMenuList(props) {
+export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
+	function ColumnarMenuList(props) {
 		const { defaultMenuItemRenderer, items } = props
-		const formatted = useMemo(() => {
+		const formatted: IContextualMenuItem[] = useMemo(() => {
 			return items.map(item =>
 				merge({}, item, {
+					itemProps,
 					sectionProps: item.sectionProps
 						? {
-								items: item.sectionProps.items.map((subitem: any) =>
+								items: item.sectionProps.items.map(subitem =>
 									merge({}, subitem, {
 										itemProps,
 									}),
@@ -30,7 +32,7 @@ export const GroupedMenuList: React.FC<IContextualMenuListProps> = memo(
 		}, [items])
 		return (
 			<MenuLayout>
-				{formatted.map((item: any) => {
+				{formatted.map(item => {
 					const { key } = item
 					return (
 						<>
@@ -38,12 +40,12 @@ export const GroupedMenuList: React.FC<IContextualMenuListProps> = memo(
 								<ColumnHeader>{item.sectionProps?.title}</ColumnHeader>
 								{item.itemType === ContextualMenuItemType.Section ? (
 									<>
-										{item.sectionProps?.items.map((subitem: any) =>
+										{item.sectionProps?.items.map(subitem =>
 											defaultMenuItemRenderer(subitem as any),
 										)}
 									</>
 								) : (
-									defaultMenuItemRenderer(item)
+									defaultMenuItemRenderer(item as any)
 								)}
 							</Column>
 						</>

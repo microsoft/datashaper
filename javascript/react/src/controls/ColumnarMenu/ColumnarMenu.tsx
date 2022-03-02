@@ -6,24 +6,29 @@ import {
 	IButtonStyles,
 	DefaultButton,
 	IContextualMenuProps,
+	IContextualMenuListProps,
+	IRenderFunction,
 } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 
-import { GroupedMenuList } from './GroupedMenuList.js'
+import { ColumnarMenuList } from './ColumnarMenuList.js'
 
-export interface GroupedMenuProps extends IContextualMenuProps {
+export interface ColumnarMenuProps extends IContextualMenuProps {
 	text?: string
 }
 
-export const GroupedMenu: React.FC<GroupedMenuProps> = memo(
-	function GroupedMenu(props) {
+/**
+ * Dropdown button menu that supports grouped items (using sectionProps) in a columnar layout.
+ */
+export const ColumnarMenu: React.FC<ColumnarMenuProps> = memo(
+	function ColumnarMenu(props) {
 		const { onRenderMenuList } = props
-		const render = useCallback(
-			(menuProps: any) => {
+		const render: IRenderFunction<IContextualMenuListProps> = useCallback(
+			menuProps => {
 				if (onRenderMenuList) {
 					return onRenderMenuList(menuProps)
 				}
-				return <GroupedMenuList {...menuProps} />
+				return <ColumnarMenuList {...menuProps!} />
 			},
 			[onRenderMenuList],
 		)
@@ -38,7 +43,7 @@ export const GroupedMenu: React.FC<GroupedMenuProps> = memo(
 			<DefaultButton
 				styles={buttonStyles}
 				text={props.text}
-				menuProps={menuProps as any}
+				menuProps={menuProps}
 			/>
 		)
 	},

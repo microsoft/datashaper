@@ -6,9 +6,9 @@ import type { Verb } from '@data-wrangling-components/core'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
+import { ColumnarMenu } from '../../controls/ColumnarMenu/ColumnarMenu.js'
+import { ColumnarMenuList } from '../../controls/ColumnarMenu/ColumnarMenuList.js'
 import { ContextualMenuItemSearchBox } from '../../controls/ContextualMenuItemSearchBox/ContextualMenuItemSearchBox.js'
-import { GroupedMenu } from '../../controls/GroupedMenu/GroupedMenu.js'
-import { GroupedMenuList } from '../../controls/GroupedMenu/GroupedMenuList.js'
 import { useSelectedOption, useSearchableItems } from './StepSelector.hooks.js'
 
 export interface StepSelectorProps {
@@ -46,7 +46,7 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 						<SearchContainer>
 							<ContextualMenuItemSearchBox items={items} onSearch={onSearch} />
 						</SearchContainer>
-						<GroupedMenuList {...menuListProps} />
+						<ColumnarMenuList {...menuListProps} />
 					</>
 				)
 			},
@@ -62,7 +62,7 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 
 		return (
 			<Container>
-				<GroupedMenu text={text} {...menuProps} />
+				<ColumnarMenu text={text} {...menuProps} />
 				{showButton && (
 					<IconButton iconProps={{ iconName: 'Add' }} onClick={onButtonClick} />
 				)}

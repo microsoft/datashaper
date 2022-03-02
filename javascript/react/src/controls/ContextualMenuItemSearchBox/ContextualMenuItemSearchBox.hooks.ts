@@ -30,6 +30,7 @@ export function useSearch(
 }
 
 // performs as-you-type item filtering for a list of menu items, matching on the displayed text
+// note that this supports section-type items by filtering the subitems
 function useSearchChange(
 	items: IContextualMenuItem[],
 	onSearch: (results: IContextualMenuItem[]) => void,

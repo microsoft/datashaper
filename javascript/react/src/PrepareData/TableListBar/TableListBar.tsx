@@ -5,7 +5,7 @@
 import type { TableContainer } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { memo } from 'react'
-import { GroupedMenu } from '../../controls/GroupedMenu/GroupedMenu.js'
+import { ColumnarMenu } from '../../controls/ColumnarMenu/ColumnarMenu.js'
 import { DetailText } from '../DetailText/DetailText.js'
 import { useOutputPreview, useTableSelection } from './TableListBar.hooks.js'
 import { ListContainer, viewButtonStyles } from './TableListBar.styles.js'
@@ -22,7 +22,7 @@ export const TableListBar: React.FC<{
 
 	return (
 		<ListContainer>
-			<GroupedMenu {...menuProps} />
+			<ColumnarMenu {...menuProps} />
 			{derived.length > 0 ? (
 				<DefaultButton
 					styles={viewButtonStyles}
