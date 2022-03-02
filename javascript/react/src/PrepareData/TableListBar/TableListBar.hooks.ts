@@ -44,7 +44,7 @@ export function useTableSelection(
 				itemType: ContextualMenuItemType.Section,
 				sectionProps: {
 					title: 'Inputs',
-					items: inputItems,
+					items: inputItems.sort(),
 				},
 			},
 			{

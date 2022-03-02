@@ -35,20 +35,18 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps> = memo(
 				{formatted.map(item => {
 					const { key } = item
 					return (
-						<>
-							<Column key={`menu-group-${key}`}>
-								<ColumnHeader>{item.sectionProps?.title}</ColumnHeader>
-								{item.itemType === ContextualMenuItemType.Section ? (
-									<>
-										{item.sectionProps?.items.map(subitem =>
-											defaultMenuItemRenderer(subitem as any),
-										)}
-									</>
-								) : (
-									defaultMenuItemRenderer(item as any)
-								)}
-							</Column>
-						</>
+						<Column key={`menu-group-${key}`}>
+							<ColumnHeader>{item.sectionProps?.title}</ColumnHeader>
+							{item.itemType === ContextualMenuItemType.Section ? (
+								<>
+									{item.sectionProps?.items.map(subitem =>
+										defaultMenuItemRenderer(subitem as any),
+									)}
+								</>
+							) : (
+								defaultMenuItemRenderer(item as any)
+							)}
+						</Column>
 					)
 				})}
 			</MenuLayout>
@@ -74,7 +72,9 @@ const MenuLayout = styled.div`
 	gap: 12px;
 `
 
-const Column = styled.div``
+const Column = styled.div`
+	min-width: 120px;
+`
 
 const ColumnHeader = styled.div`
 	padding: 0 12px 0 12px;
