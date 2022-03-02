@@ -10,7 +10,7 @@ import { useTheme } from '../../states/settings.js'
 export const Footer: FC = memo(function Footer() {
 	const theme = useTheme()
 	const CONSENT_CONF = {
-		theme: theme.dark.toString(),
+		theme: theme.variant,
 		elementId: 'cookie-banner',
 		onChange: (c: any) => console.log('CHANGED', c),
 	}

@@ -735,7 +735,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:javascript/core"
     "@data-wrangling-components/react": "workspace:javascript/react"
     "@data-wrangling-components/utilities": "workspace:javascript/utilities"
-    "@essex-js-toolkit/hooks": ^4.0.2
+    "@essex-js-toolkit/hooks": ^4.0.3
     "@essex-js-toolkit/themed-components": ^2.0.1
     "@essex/scripts": ^20.3.2
     "@essex/webpack-config": ^20.1.1
@@ -863,9 +863,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex-js-toolkit/hooks@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "@essex-js-toolkit/hooks@npm:4.0.2"
+"@essex-js-toolkit/hooks@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "@essex-js-toolkit/hooks@npm:4.0.3"
   dependencies:
     "@essex-js-toolkit/toolbox": 3.0.1
     lodash-es: ^4.17.21
@@ -874,7 +874,7 @@ __metadata:
     "@types/react": "*"
     "@types/react-dom": "*"
     react: ">=16.8.0"
-  checksum: ba61ee6d90e776b81571e30d51f52bba1d3efa5b264cb97797c6010a3555529b3021f96d59476362204bb5e65ef83cd057e76c644a4fc376d148614cefb8bc2c
+  checksum: 112b417dea249809b77741d38d6f95a856c94871021604c05239fe6c7b685e98693248887ea6a6e9208391bf9c76358b531aa45d7ae09cf0f4ed40410d345148
   languageName: node
   linkType: hard
 
