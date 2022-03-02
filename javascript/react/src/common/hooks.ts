@@ -220,7 +220,7 @@ export function useColumnRecordDelete(
 }
 
 export function useLoadTable(
-	name: string | undefined,
+	id: string | undefined,
 	table?: ColumnTable,
 	store?: TableStore,
 ): ColumnTable | undefined {
@@ -247,13 +247,13 @@ export function useLoadTable(
 		// interface that is managing a pipeline
 		if (table) {
 			setTable(table)
-		} else if (name && store) {
-			fn(name, store)
+		} else if (id && store) {
+			fn(id, store)
 		}
 		return () => {
-			name && store && store.unlisten(name)
+			id && store && store.unlisten(id)
 		}
-	}, [name, table, store, handleTableLoad])
+	}, [id, table, store, handleTableLoad])
 	return tbl
 }
 

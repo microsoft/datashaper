@@ -5,8 +5,13 @@
 import {
 	InputColumnArgs,
 	isInputColumnStep,
+	isNumericInputStep,
+	types,
+	DataType,
+	Step,
 } from '@data-wrangling-components/core'
-import { memo } from 'react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import {
 	LeftAlignedRow,
@@ -31,7 +36,13 @@ export const withInputColumnDropdown = (
 				'args.column',
 				onChange,
 			)
+			// TODO: detailed types/stats should be an option on table load,
+			// which will then be passed around with the container and thereby cached
+			// useLoadTable should return a TableContainer
 			const tbl = useLoadTable(input || step.input, table, store)
+
+			const filter = useColumnFilter(step, tbl)
+
 			if (!isInputColumnStep(step)) {
 				return <Component {...props} />
 			}
@@ -41,6 +52,7 @@ export const withInputColumnDropdown = (
 						<TableColumnDropdown
 							required
 							table={tbl}
+							filter={filter}
 							label={label || `Column to ${step.verb}`}
 							selectedKey={(step.args as InputColumnArgs).column}
 							onChange={handleColumnChange}
@@ -52,6 +64,21 @@ export const withInputColumnDropdown = (
 		}
 		return memo(WithInputColumnDropdown)
 	}
+}
+
+function useColumnFilter(step: Step, table?: ColumnTable) {
+	const typeMap = useMemo(() => {
+		if (table) {
+			return types(table)
+		}
+		return {}
+	}, [table])
+	return useCallback(
+		(name: string) => {
+			return isNumericInputStep(step) ? typeMap[name] === DataType.Number : true
+		},
+		[typeMap, step],
+	)
 }
 
 const Container = styled.div`

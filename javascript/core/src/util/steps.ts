@@ -19,12 +19,16 @@ enum Tags {
 	 * This verb can modify the rows of a table
 	 */
 	RowModifying,
+	/**
+	 * This verb can only operate on numeric input columns
+	 */
+	NumericOnly,
 }
 
 // TODO: this could be cleaner with a bitwise operator
 const TaggedVerbs: Record<Verb, Tags[]> = {
 	aggregate: [Tags.InputColumn, Tags.OutputColumn, Tags.RowModifying],
-	bin: [Tags.InputColumn, Tags.OutputColumn],
+	bin: [Tags.InputColumn, Tags.OutputColumn, Tags.NumericOnly],
 	binarize: [Tags.InputColumn, Tags.OutputColumn],
 	chain: [],
 	concat: [Tags.RowModifying],
@@ -60,6 +64,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 const INPUT_COLUMN_VERBS = filterByTag(Tags.InputColumn)
 const OUTPUT_COLUMN_VERBS = filterByTag(Tags.OutputColumn)
 const ROW_MODIFYING_VERBS = filterByTag(Tags.RowModifying)
+const NUMERIC_VERBS = filterByTag(Tags.NumericOnly)
 
 function filterByTag(tag: Tags) {
 	return Object.keys(TaggedVerbs).filter(key => {
@@ -73,7 +78,7 @@ function filterByTag(tag: Tags) {
  * @returns
  */
 export function isInputColumnStep(step: Step): boolean {
-	return INPUT_COLUMN_VERBS.findIndex(v => v === step.verb) >= 0
+	return isTagged(step, INPUT_COLUMN_VERBS)
 }
 
 /**
@@ -82,7 +87,15 @@ export function isInputColumnStep(step: Step): boolean {
  * @returns
  */
 export function isOutputColumnStep(step: Step): boolean {
-	return OUTPUT_COLUMN_VERBS.findIndex(v => v === step.verb) >= 0
+	return isTagged(step, OUTPUT_COLUMN_VERBS)
+}
+
+export function isNumericInputStep(step: Step): boolean {
+	return isTagged(step, NUMERIC_VERBS)
+}
+
+function isTagged(step: Step, verbs: Verb[]): boolean {
+	return verbs.findIndex(v => v === step.verb) >= 0
 }
 
 /**
