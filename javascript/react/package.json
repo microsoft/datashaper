@@ -13,12 +13,15 @@
 		"build": "essex build --skipExportCheck"
 	},
 	"dependencies": {
+		"@data-wrangling-components/guidance": "workspace:javascript/guidance",
 		"@essex-js-toolkit/hooks": "^4.0.1",
+		"core-js": "^3.21.1",
 		"d3-format": "^3.1.0",
 		"d3-scale": "^4.0.2",
 		"d3-selection": "^3.0.0",
 		"d3-shape": "^3.1.0",
 		"lodash-es": "^4.17.21",
+		"markdown-to-jsx": "^7.1.6",
 		"react-dropzone": "^12.0.4",
 		"react-if": "^4.1.1"
 	},
