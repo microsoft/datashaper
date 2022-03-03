@@ -13,6 +13,7 @@ import type {
 	SortDirection,
 	StringComparisonOperator,
 	Verb,
+	WindowFunction,
 } from './enums.js'
 import type { TableContainer, Value } from './tables.js'
 
@@ -69,6 +70,7 @@ export type SpreadStep = Step<SpreadArgs>
 export type UnfoldStep = Step<UnfoldArgs>
 export type UnrollStep = Step<UnrollArgs>
 export type SetOperationStep = Step<SetOperationArgs>
+export type WindowStep = Step<WindowArgs>
 
 // reusable base interfaces to aid consistency
 
@@ -300,3 +302,7 @@ export interface SetOperationArgs {
 }
 
 export type UnrollArgs = InputColumnListArgs
+
+export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
+	operation: WindowFunction
+}

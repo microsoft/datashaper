@@ -74,6 +74,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	union: [Tags.InputTable, Tags.RowModifying],
 	unorder: [Tags.InputTable],
 	unroll: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
+	window: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 }
 
 const INPUT_TABLE_VERBS = filterByTag(Tags.InputTable)
