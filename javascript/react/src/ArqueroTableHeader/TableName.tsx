@@ -10,6 +10,7 @@ import { RenameCallout } from './RenameCallout.js'
 interface TableNameProps {
 	onRenameTable?: (name: string) => void
 	name?: string
+	color?: string
 }
 
 /**
@@ -19,6 +20,7 @@ interface TableNameProps {
 export const TableName: React.FC<TableNameProps> = memo(function TableName({
 	onRenameTable,
 	name,
+	color,
 }) {
 	const [isEditing, setIsEditing] = useState(false)
 	const [editedName, setEditedName] = useState(name || '')
@@ -51,6 +53,7 @@ export const TableName: React.FC<TableNameProps> = memo(function TableName({
 				<Then>
 					<Container>
 						<H3Editable
+							color={color}
 							id="editName"
 							title="Edit"
 							onClick={() => setIsEditing(true)}
@@ -72,7 +75,7 @@ export const TableName: React.FC<TableNameProps> = memo(function TableName({
 				<Else>
 					<If condition={name}>
 						<Then>
-							<H3>{name}</H3>
+							<H3 color={color}>{name}</H3>
 						</Then>
 					</If>
 				</Else>
@@ -81,11 +84,12 @@ export const TableName: React.FC<TableNameProps> = memo(function TableName({
 	)
 })
 
-const H3 = styled.h3`
+const H3 = styled.h3<{ color?: string }>`
 	font-weight: normal;
 	font-size: 0.8em;
 	margin-right: 8px;
-	color: ${({ theme }) => theme.application().background().hex()};
+	color: ${({ theme, color }) =>
+		color || theme.application().background().hex()};
 `
 
 const H3Editable = styled(H3)`

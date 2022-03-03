@@ -169,7 +169,8 @@ export function useColumns(
 				onRender,
 				onRenderHeader: createRenderColumnHeader(headerRenderers),
 				onColumnClick,
-				isSorted: column.fieldName === sortColumn ? true : false,
+				isSorted:
+					!!sortDirection && column.fieldName === sortColumn ? true : false,
 				isSortedDescending: sortDirection === SortDirection.Descending,
 				styles,
 				...defaults,

@@ -11,3 +11,4 @@ public/
 .cache/
 node_modules/
 venv/
+build.js
