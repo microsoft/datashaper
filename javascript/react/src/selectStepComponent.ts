@@ -31,6 +31,7 @@ import {
 	NoParameters,
 	Erase,
 	Unfold,
+	Window,
 } from './verbs/index.js'
 
 const verb: Record<string, React.FC<StepComponentProps>> = {
@@ -65,6 +66,7 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	union: SetOperation,
 	unorder: NoParameters,
 	unroll: ColumnListOperation,
+	window: Window,
 	'multi-binarize': CompoundBinarize,
 	'filter-aggregate-lookup': FilterAggregateLookup,
 }

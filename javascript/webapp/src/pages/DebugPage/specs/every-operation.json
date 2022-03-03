@@ -308,6 +308,16 @@
 			"args": {
 				"columns": ["Product List"]
 			}
+		},
+		{
+			"verb": "window",
+			"input": "groupby-1",
+			"output": "window-1",
+			"args": {
+				"to": "First Product",
+				"column": "Product",
+				"operation": "first_value"
+			}
 		}
 	]
 }

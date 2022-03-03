@@ -20,6 +20,7 @@ const groups = [
 			'ungroup',
 			'unorder',
 			'unroll',
+			'window',
 		],
 	},
 	{

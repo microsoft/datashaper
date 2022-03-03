@@ -30,6 +30,7 @@ import {
 	SetOperationDescription,
 	NoParametersDescription,
 	UnfoldDescription,
+	WindowDescription,
 } from './verbs/index.js'
 
 const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
@@ -64,6 +65,7 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 	union: SetOperationDescription,
 	unorder: NoParametersDescription,
 	unroll: ColumnListOperationDescription,
+	window: WindowDescription,
 }
 
 /**
