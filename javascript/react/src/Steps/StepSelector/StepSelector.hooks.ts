@@ -122,10 +122,10 @@ export function useSelectedOption(
 		item?: IContextualMenuItem,
 	) => boolean | void
 } {
-	const [selected, setCurrentOption] = useState<Verb | undefined>()
+	const [selected, setSelected] = useState<Verb | undefined>(verb)
 
 	useEffect(() => {
-		verb && setCurrentOption(verb)
+		verb && setSelected(verb)
 	}, [verb])
 
 	const onButtonClick = useCallback(() => {
@@ -134,13 +134,13 @@ export function useSelectedOption(
 
 	const onItemClick = useCallback(
 		(_e, opt) => {
-			setCurrentOption(opt.key)
+			setSelected(opt.key)
 			!requireButtonClick && onChange && onChange(opt.key)
 		},
-		[requireButtonClick, onChange, setCurrentOption],
+		[requireButtonClick, onChange, setSelected],
 	)
 
-	const text = useDropdownButtonText(verb, placeholder)
+	const text = useDropdownButtonText(selected, placeholder)
 	return {
 		text,
 		onButtonClick,
