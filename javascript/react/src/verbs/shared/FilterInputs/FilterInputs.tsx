@@ -4,8 +4,8 @@
  */
 import { memo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow } from '../../common/index.js'
-import type { StepComponentProps } from '../../types.js'
+import { LeftAlignedRow } from '../../../common/index.js'
+import type { StepComponentProps } from '../../../types.js'
 import { FilterFunction } from '../FilterFunction/index.js'
 
 /**

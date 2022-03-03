@@ -5,13 +5,10 @@
 import type { JoinStep, Step } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import {
-	useHandleDropdownChange,
-	useLoadTable,
-	LeftAlignedRow,
-} from '../../common/index.js'
-import type { StepComponentProps } from '../../types.js'
-import { TableColumnDropdown, TableDropdown } from '../index.js'
+import { useHandleDropdownChange } from '../../../controls/hooks.js'
+import { TableColumnDropdown, TableDropdown } from '../../../controls/index.js'
+import { LeftAlignedRow, useLoadTable } from '../../../index.js'
+import type { StepComponentProps } from '../../../types.js'
 
 /**
  * Core inputs for join operations. This includes join and lookup.

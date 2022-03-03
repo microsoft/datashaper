@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
-import { FilterInputs } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { FilterInputs } from '../shared/index.js'
 
 /**
  * Provides inputs for a Filter step.

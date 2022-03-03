@@ -7,8 +7,8 @@ import { Label } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedColumn } from '../../common/index.js'
-import { ColumnListInputs, JoinInputs } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { ColumnListInputs, JoinInputs } from '../shared/index.js'
 
 /**
  * Provides inputs for a Lookup step.
