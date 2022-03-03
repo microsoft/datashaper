@@ -40,7 +40,7 @@ const groups = [
 	},
 	{
 		label: 'Filter & Select',
-		verbs: ['filter', 'rename', 'sample', 'select'],
+		verbs: ['fetch', 'filter', 'rename', 'sample', 'select'],
 	},
 	{
 		label: 'Joins & Sets',

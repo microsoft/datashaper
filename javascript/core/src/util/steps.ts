@@ -8,6 +8,11 @@ import type { Step, Verb } from '../index.js'
 
 enum Tags {
 	/**
+	 * An input table is required.
+	 * CHAIN and FETCH for example do not require table inputs.
+	 */
+	InputTable,
+	/**
 	 * A single input column is input
 	 */
 	InputColumn,
@@ -27,40 +32,51 @@ enum Tags {
 
 // TODO: this could be cleaner with a bitwise operator
 const TaggedVerbs: Record<Verb, Tags[]> = {
-	aggregate: [Tags.InputColumn, Tags.OutputColumn, Tags.RowModifying],
-	bin: [Tags.InputColumn, Tags.OutputColumn, Tags.NumericOnly],
-	binarize: [Tags.InputColumn, Tags.OutputColumn],
+	aggregate: [
+		Tags.InputTable,
+		Tags.InputColumn,
+		Tags.OutputColumn,
+		Tags.RowModifying,
+	],
+	bin: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn, Tags.NumericOnly],
+	binarize: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	chain: [],
-	concat: [Tags.RowModifying],
-	dedupe: [Tags.RowModifying],
-	derive: [Tags.OutputColumn],
-	difference: [Tags.RowModifying],
-	erase: [Tags.InputColumn, Tags.RowModifying],
+	concat: [Tags.InputTable, Tags.RowModifying],
+	dedupe: [Tags.InputTable, Tags.RowModifying],
+	derive: [Tags.InputTable, Tags.OutputColumn],
+	difference: [Tags.InputTable, Tags.RowModifying],
+	erase: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
 	fetch: [],
-	fill: [Tags.OutputColumn],
-	filter: [Tags.InputColumn, Tags.RowModifying],
-	fold: [Tags.RowModifying],
-	groupby: [],
-	impute: [Tags.InputColumn],
-	intersect: [Tags.RowModifying],
-	join: [Tags.RowModifying],
-	lookup: [Tags.RowModifying],
-	merge: [Tags.OutputColumn],
-	pivot: [Tags.RowModifying],
-	orderby: [],
-	recode: [Tags.InputColumn, Tags.OutputColumn],
-	rename: [],
-	rollup: [Tags.InputColumn, Tags.OutputColumn, Tags.RowModifying],
-	sample: [Tags.RowModifying],
-	select: [],
-	spread: [],
-	unfold: [Tags.RowModifying],
-	ungroup: [],
-	union: [Tags.RowModifying],
-	unorder: [],
-	unroll: [Tags.InputColumn, Tags.RowModifying],
+	fill: [Tags.InputTable, Tags.OutputColumn],
+	filter: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
+	fold: [Tags.InputTable, Tags.RowModifying],
+	groupby: [Tags.InputTable],
+	impute: [Tags.InputTable, Tags.InputColumn],
+	intersect: [Tags.InputTable, Tags.RowModifying],
+	join: [Tags.InputTable, Tags.RowModifying],
+	lookup: [Tags.InputTable, Tags.RowModifying],
+	merge: [Tags.InputTable, Tags.OutputColumn],
+	pivot: [Tags.InputTable, Tags.RowModifying],
+	orderby: [Tags.InputTable],
+	recode: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
+	rename: [Tags.InputTable],
+	rollup: [
+		Tags.InputTable,
+		Tags.InputColumn,
+		Tags.OutputColumn,
+		Tags.RowModifying,
+	],
+	sample: [Tags.InputTable, Tags.RowModifying],
+	select: [Tags.InputTable],
+	spread: [Tags.InputTable],
+	unfold: [Tags.InputTable, Tags.RowModifying],
+	ungroup: [Tags.InputTable],
+	union: [Tags.InputTable, Tags.RowModifying],
+	unorder: [Tags.InputTable],
+	unroll: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
 }
 
+const INPUT_TABLE_VERBS = filterByTag(Tags.InputTable)
 const INPUT_COLUMN_VERBS = filterByTag(Tags.InputColumn)
 const OUTPUT_COLUMN_VERBS = filterByTag(Tags.OutputColumn)
 const ROW_MODIFYING_VERBS = filterByTag(Tags.RowModifying)
@@ -70,6 +86,15 @@ function filterByTag(tag: Tags) {
 	return Object.keys(TaggedVerbs).filter(key => {
 		return TaggedVerbs[key as Verb].findIndex(t => t === tag) >= 0
 	}) as Verb[]
+}
+
+/**
+ * Indicates whether this step requires an input table.
+ * @param step
+ * @returns
+ */
+export function isInputTableStep(step: Step): boolean {
+	return isTagged(step, INPUT_TABLE_VERBS)
 }
 
 /**
@@ -90,6 +115,11 @@ export function isOutputColumnStep(step: Step): boolean {
 	return isTagged(step, OUTPUT_COLUMN_VERBS)
 }
 
+/**
+ * Indicates whether this step can only operate on numeric values.
+ * @param step
+ * @returns
+ */
 export function isNumericInputStep(step: Step): boolean {
 	return isTagged(step, NUMERIC_VERBS)
 }

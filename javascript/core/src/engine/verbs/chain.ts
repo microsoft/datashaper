@@ -91,7 +91,6 @@ async function exec(step: Step, store: TableStore): Promise<TableContainer> {
 			const fn = verbs[verb] || exec
 			// child store gets intermediate outputs so chain steps can do lookups
 			output = await fn(step, substore)
-			output.table?.print()
 			substore.set(output)
 		} catch (e) {
 			console.error(`Pipeline failed on step ${index}`, step)

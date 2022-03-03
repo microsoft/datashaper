@@ -7,7 +7,7 @@ import { EraseInputs } from '../../controls'
 import type { StepComponentProps } from '../../types'
 
 /**
- * Provides inputs for an aggregation step.
+ * Provides inputs for an erase step.
  */
 export const Erase: React.FC<StepComponentProps> = memo(function Erase(props) {
 	return <EraseInputs {...props} />

@@ -4,6 +4,7 @@
  */
 export * from './Erase/index.js'
 export * from './Fold/index.js'
+export * from './Fetch/index.js'
 export * from './Join/index.js'
 export * from './Merge/index.js'
 export * from './Pivot/index.js'

@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { isInputTableStep } from '@data-wrangling-components/core'
 import { memo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleDropdownChange } from './common/index.js'
@@ -20,6 +21,9 @@ export const withInputTableDropdown = (
 		const WithTableDropdown: React.FC<StepComponentProps> = props => {
 			const { step, store, onChange } = props
 			const handleTableChange = useHandleDropdownChange(step, 'input', onChange)
+			if (!isInputTableStep(step)) {
+				return <Component {...props} />
+			}
 			return (
 				<Container className="with-input-table-dropdown">
 					<LeftAlignedRow>
