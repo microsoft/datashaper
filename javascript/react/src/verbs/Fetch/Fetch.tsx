@@ -6,6 +6,7 @@ import type { FetchStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+import { dropdownStyles } from '../../controls/styles.js'
 import { LeftAlignedRow, useHandleTextfieldChange } from '../../index.js'
 import type { StepComponentProps } from '../../types'
 
@@ -38,6 +39,7 @@ export const Fetch: React.FC<StepComponentProps> = memo(function Fetch({
 					label={'URL'}
 					value={internal.args.url && `${internal.args.url}`}
 					placeholder={'URL to public dataset'}
+					styles={dropdownStyles}
 					onChange={handleUrlChange}
 				/>
 			</LeftAlignedRow>
@@ -46,6 +48,7 @@ export const Fetch: React.FC<StepComponentProps> = memo(function Fetch({
 					label={'Delimiter'}
 					value={internal.args.delimiter && `${internal.args.delimiter}`}
 					placeholder={'Column delimiter'}
+					styles={dropdownStyles}
 					onChange={handleDelimiterChange}
 				/>
 			</LeftAlignedRow>

@@ -11,6 +11,7 @@ import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleTextfieldChange } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { dropdownStyles } from '../styles.js'
 
 interface ColumnArgs extends InputColumnArgs, ImputeArgs {}
 
@@ -45,6 +46,7 @@ export const ImputeInputs: React.FC<StepComponentProps> = memo(
 						label={'Fill value'}
 						value={args.value && `${args.value}`}
 						placeholder={'text, number, or boolean'}
+						styles={dropdownStyles}
 						onChange={handleValueChange}
 					/>
 				</LeftAlignedRow>

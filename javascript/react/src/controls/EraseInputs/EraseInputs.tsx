@@ -8,6 +8,7 @@ import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleTextfieldChange } from '../../common'
 import type { StepComponentProps } from '../../types'
+import { dropdownStyles } from '../styles.js'
 
 /**
  * Just the to/value inputs for an impute.
@@ -31,6 +32,7 @@ export const EraseInputs: React.FC<StepComponentProps> = memo(
 						label={'Value to be erased'}
 						value={internal.args.value && `${internal.args.value}`}
 						placeholder={'text, number, or boolean'}
+						styles={dropdownStyles}
 						onChange={handleValueChange}
 					/>
 				</LeftAlignedRow>
