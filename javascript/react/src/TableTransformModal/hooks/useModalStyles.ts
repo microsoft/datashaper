@@ -15,6 +15,7 @@ import { useMemo } from 'react'
  */
 export function useModalStyles(
 	styles?: IStyleFunctionOrObject<IModalStyleProps, IModalStyles>,
+	includeGuidance = false,
 ): IStyleFunctionOrObject<IModalStyleProps, IModalStyles> {
 	const theme = useThematic()
 	return useMemo(() => {
@@ -22,9 +23,11 @@ export function useModalStyles(
 			{
 				main: {
 					border: `1px solid ${theme.application().faint().hex()}`,
+					width: includeGuidance ? 800 : 308,
+					maxHeight: 800,
 				},
 			},
 			styles,
 		)
-	}, [theme, styles])
+	}, [theme, styles, includeGuidance])
 }

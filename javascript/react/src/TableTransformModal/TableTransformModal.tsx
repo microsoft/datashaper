@@ -43,10 +43,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			onTransformRequested,
 		)
 
-		const adaptedStyles = useModalStyles({
-			...styles,
-			main: { width: 600 },
-		})
+		const adaptedStyles = useModalStyles(styles, isGuidanceVisible)
 		return (
 			<Modal
 				onDismiss={onDismiss}
@@ -56,7 +53,6 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			>
 				<Header>
 					<Title>{step ? 'Edit step' : 'New step'}</Title>
-
 					{onDismiss && (
 						<IconButton
 							iconProps={iconProps.cancel}
@@ -113,11 +109,9 @@ const iconProps = {
 
 const ContainerBody = styled.div<{ showGuidance: boolean }>`
 	padding: 0px 12px 14px 24px;
-
-	display: grid;
-	grid-template-columns: ${({ showGuidance }) => (!showGuidance ? '' : '1fr')} 1fr;
-	justify-content: space-between;
-	gap: 2rem;
+	display: flex;
+	justify-content: flex-start;
+	gap: 12px;
 `
 
 const Header = styled.div`
@@ -136,7 +130,7 @@ const Title = styled.h3`
 const StepSelectorContainer = styled.div`
 	margin-bottom: 8px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 `
 

@@ -72,7 +72,7 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 )
 
 const Container = styled.div`
-	width: 200px;
+	width: 240px;
 	display: flex;
 	align-items: center;
 `

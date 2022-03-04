@@ -70,6 +70,8 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 					styles={dropdownStyles}
 					onChange={handleBinStrategyChange}
 				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
 				<Switch>
 					<Case condition={internal.args.strategy === BinStrategy.FixedCount}>
 						<SpinButton
@@ -114,6 +116,8 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 							styles={dropdownStyles}
 							onChange={handleMinChange}
 						/>
+					</LeftAlignedRow>
+					<LeftAlignedRow>
 						<SpinButton
 							label={'Max boundary'}
 							labelPosition={Position.top}

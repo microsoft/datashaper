@@ -11,7 +11,6 @@ import {
 	LeftAlignedRow,
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
-import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 const whole = format('d')
