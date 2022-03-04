@@ -4,8 +4,8 @@
  */
 import { memo } from 'react'
 import styled from 'styled-components'
-import { FilterInputs } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { FilterInputs } from '../shared/index.js'
 
 /**
  * Provides inputs for a Binarize step.

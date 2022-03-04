@@ -9,6 +9,7 @@ import {
 	FieldAggregateOperation,
 	StringComparisonOperator,
 	FilterCompareType,
+	WindowFunction,
 } from '../../types.js'
 import type { CompareWrapper } from './types.js'
 
@@ -119,18 +120,19 @@ function compareValues(left: number, right: number, operator: string): 1 | 0 {
 	}
 }
 
-const fieldOps = new Set(Object.values(FieldAggregateOperation))
+const fieldOps = new Set([
+	...Object.values(FieldAggregateOperation),
+	...Object.values(WindowFunction),
+])
 
 // this currently only supports operations that take a single field name
 // TODO: we can support a bunch of the window operations too
 // note that this uses the aggregate op functions to generate an expression
-export function singleRollup(
+export function singleExpression(
 	column: string,
-	operation: FieldAggregateOperation,
+	operation: FieldAggregateOperation | WindowFunction,
 ): number | Op {
-	if (operation === 'count') {
-		return op.count()
-	} else if (!fieldOps.has(operation)) {
+	if (!fieldOps.has(operation)) {
 		throw new Error(
 			`Unsupported operation [${operation}], too many parameters needed`,
 		)

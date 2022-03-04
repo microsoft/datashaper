@@ -41,6 +41,7 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Impute:
 		case Verb.Fill:
 		case Verb.Rollup:
+		case Verb.Window:
 			return {
 				...base,
 				args: {
