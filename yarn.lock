@@ -687,13 +687,13 @@ __metadata:
     "@essex/themed-components": ^2.0.2
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.2.0
-    "@fluentui/react": ^8.57.0
+    "@fluentui/react": ^8.57.1
     "@fluentui/react-hooks": ^8.5.0
     "@fluentui/utilities": ^8.6.0
-    "@thematic/core": ^2.0.4
-    "@thematic/d3": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
+    "@thematic/core": ^2.0.5
+    "@thematic/d3": ^2.0.5
+    "@thematic/fluent": ^3.0.5
+    "@thematic/react": ^2.0.5
     "@types/d3-format": ^3.0.1
     "@types/d3-scale": ^4.0.2
     "@types/d3-selection": ^3.0.2
@@ -767,15 +767,15 @@ __metadata:
     "@data-wrangling-components/utilities": "workspace:^"
     "@essex/scripts": ^20.4.4
     "@essex/themed-components": ^2.0.2
-    "@essex/webpack-config": ^20.1.3
+    "@essex/webpack-config": ^20.1.4
     "@fluentui/font-icons-mdl2": ^8.2.0
-    "@fluentui/react": ^8.57.0
+    "@fluentui/react": ^8.57.1
     "@fluentui/react-hooks": ^8.5.0
     "@fluentui/utilities": ^8.6.0
-    "@thematic/core": ^2.0.4
-    "@thematic/d3": ^2.0.4
-    "@thematic/fluent": ^3.0.4
-    "@thematic/react": ^2.0.4
+    "@thematic/core": ^2.0.5
+    "@thematic/d3": ^2.0.5
+    "@thematic/fluent": ^3.0.5
+    "@thematic/react": ^2.0.5
     "@types/lodash": ^4.14.179
     "@types/node": ^17.0.21
     "@types/react": ^17.0.39
@@ -801,7 +801,7 @@ __metadata:
     shx: ^0.3.4
     styled-components: ^5.3.3
     typescript: ^4.6.2
-    webpack: ^5.70.0
+    webpack: 5.70.0
     webpack-cli: ^4.9.2
     webpack-dev-server: ^4.7.4
   languageName: unknown
@@ -858,28 +858,6 @@ __metadata:
     minimatch: ^3.0.4
     strip-json-comments: ^3.1.1
   checksum: a5e51dcf02627363567094456d7880b46b6a14a285d7a057f083ca903bdd862483bb6314cbc9fb6fa2d2c4537d50e0d28bd5e39650840241ae4796faaec65d2e
-  languageName: node
-  linkType: hard
-
-"@essex-js-toolkit/hooks@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "@essex-js-toolkit/hooks@npm:4.0.1"
-  dependencies:
-    "@essex-js-toolkit/toolbox": 3.0.1
-    lodash-es: ^4.17.21
-  peerDependencies:
-    "@types/node": "*"
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    react: ">=16.8.0"
-  checksum: 3c120777bc3653b61b0e1ad4f96addf3248e330dcc7053009120443e91e878fe44daf232c62147070ff9a83f0dbeb0ece43a9ccb37c0f644cf5d622802f600ba
-  languageName: node
-  linkType: hard
-
-"@essex-js-toolkit/toolbox@npm:3.0.1":
-  version: 3.0.1
-  resolution: "@essex-js-toolkit/toolbox@npm:3.0.1"
-  checksum: 24b864ce1819374b00ab6f5b8633232c3ea212993dc52467a7de4f606843cfaa19ad3239bb257fcfd0c6bf189319602005be372070bc1f4f98570288a3dfdac6
   languageName: node
   linkType: hard
 
@@ -1114,9 +1092,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/webpack-config@npm:^20.1.3":
-  version: 20.1.3
-  resolution: "@essex/webpack-config@npm:20.1.3"
+"@essex/webpack-config@npm:^20.1.4":
+  version: 20.1.4
+  resolution: "@essex/webpack-config@npm:20.1.4"
   dependencies:
     "@essex/swc-opts": ^20.0.4
     "@swc/cli": ^0.1.55
@@ -1140,7 +1118,7 @@ __metadata:
   peerDependencies:
     typescript: ">= 4 <5"
     webpack: ">= 4"
-  checksum: 02114a0d1a65aec9aac0669f876912a73d3c24751d5d57cc43b0ed37ee8283ca01bfb3fd0a1b887410a23bfb9db15d3214451a91357ad25ab708d5a845266b10
+  checksum: c7dcd39a44e8184cbfd29a47033b06869b8458e55b2202091775ec11e5009f0e9c340fb3255cf4f8ed9c7e51bfb734917217a33ce91bee8bc592ae2550c9a36a
   languageName: node
   linkType: hard
 
@@ -1265,9 +1243,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react@npm:^8.57.0":
-  version: 8.57.0
-  resolution: "@fluentui/react@npm:8.57.0"
+"@fluentui/react@npm:^8.57.1":
+  version: 8.57.1
+  resolution: "@fluentui/react@npm:8.57.1"
   dependencies:
     "@fluentui/date-time-utilities": ^8.4.0
     "@fluentui/font-icons-mdl2": ^8.2.0
@@ -1287,7 +1265,7 @@ __metadata:
     "@types/react-dom": ">=16.8.0 <18.0.0"
     react: ">=16.8.0 <18.0.0"
     react-dom: ">=16.8.0 <18.0.0"
-  checksum: 60b3325fb38c7381de8b25033519e1036883a91e9d8f26217030396cce79f358483987aea3e2bd5cdfa7ba08f553502b27d48f88b16bd245633edd655245988e
+  checksum: e80894b49700a8054a0b1e1ccc1560601a5c671db62e3a61cc9203902a7888f9f8a3fa16596488468c7bae4152c8341aa5a85517d2819c8a8210df75c7e34def
   languageName: node
   linkType: hard
 
@@ -1902,9 +1880,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/color@npm:2.0.4":
-  version: 2.0.4
-  resolution: "@thematic/color@npm:2.0.4"
+"@thematic/color@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@thematic/color@npm:2.0.5"
   dependencies:
     chroma-js: ^2.4.2
     color-blind: ^0.1.1
@@ -1917,15 +1895,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: b16c89f5a8c0a6ac69fd46c9c21138cac5a86496ae22c0126382313efc39be1ec99c69a1278fc8d42b3c4ae11d4a82b5d018490901773c6d0bc434b78fb3b40c
+  checksum: b9deffdcafb94e181a41238ac7c7e34418983f643107334f12323f3d793ee071236fcd16c66afa7a2474868679af78b2c031bbd9a1f7f3650c1fb1e05408d459
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:2.0.4, @thematic/core@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@thematic/core@npm:2.0.4"
+"@thematic/core@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@thematic/core@npm:2.0.5"
   dependencies:
-    "@thematic/color": 2.0.4
+    "@thematic/color": ^2.0.5
     d3-scale: ^3.3.0
     lodash-es: ^4.17.21
     murmurhash-js: ^1.0.0
@@ -1937,15 +1915,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 8fc45b87fb9b0786559cda0f5f8ad754f70f3835085a22e565534a1dbe836502adcee4ed5918a554bedb1ca3f7d181130202707dfd61912fe13abd4962dc7ced
+  checksum: 7da6682a73033d811c908e68ec7ac04dec5fdeda3a1f83eea7a02da0a9e1abc8227b7b1e636ac68d093ecded8beac90b7cb9b51040ced15465b66485d7a7999a
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@thematic/d3@npm:2.0.4"
+"@thematic/d3@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@thematic/d3@npm:2.0.5"
   dependencies:
-    "@thematic/core": 2.0.4
+    "@thematic/core": ^2.0.5
     d3-axis: ^1.0.12
     d3-selection: ^1.4.2
   peerDependencies:
@@ -1959,18 +1937,18 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 4922a9549ea6e2f4cfbf7b62a01ad8f42028f4a6b06d11d495f21a4a778fb15e9aae1e26ef085158eef0e05bec388184999468e6e850b2fb9c48842fcc8aae5b
+  checksum: 7186518f0e6a2bd5fcc52b0290e43aca183f9f77bc6f70c01f4f670dcbf6224596dbbca3579929154e0661eacc6ed3bc5c3eaa772245ea39429f5b61eb889bcb
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "@thematic/fluent@npm:3.0.4"
+"@thematic/fluent@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@thematic/fluent@npm:3.0.5"
   dependencies:
-    "@essex-js-toolkit/hooks": ^4.0.0
-    "@thematic/color": 2.0.4
-    "@thematic/core": 2.0.4
-    "@thematic/react": 2.0.4
+    "@essex/hooks": ^4.0.4
+    "@thematic/color": ^2.0.5
+    "@thematic/core": ^2.0.5
+    "@thematic/react": ^2.0.5
     d3-scale: ^3.3.0
   peerDependencies:
     "@fluentui/font-icons-mdl2": ">= 8"
@@ -1989,16 +1967,16 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 985b841829d73bbc25118d5abede55964fa16cb5425a5bc180ee7bc7f1c7ed9e3bdb92b9204c4a530cd729805c45037eb57fcbd07550df4ca14c06929f470536
+  checksum: 9ff6e64ca96626f2050c3745df4b9971d10d9301fa5157f5a0226cb21fbde62851e291b85c7663e0de7bc1c92a5e6d12089f8c1817ecbd4b9171afffb0acdc84
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:2.0.4, @thematic/react@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@thematic/react@npm:2.0.4"
+"@thematic/react@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@thematic/react@npm:2.0.5"
   dependencies:
-    "@thematic/color": 2.0.4
-    "@thematic/core": 2.0.4
+    "@thematic/color": ^2.0.5
+    "@thematic/core": ^2.0.5
   peerDependencies:
     "@types/node": "*"
     "@types/react": ">= 17"
@@ -2010,7 +1988,7 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: fc77aeb6e8f80c89bc9691110d907d0cdae8c6136868acacebb90f58065a9f2cdcc259e47b643364148b1f3182d94beceac09abfa795307864ae1b0c1c015cb9
+  checksum: e614797b3314a374948dd4372a4e7df0583916aec9820b407ff2651cec75b7b3c1ff0d9e5b6d1c9c74fe88377fb488cb6561f3ccc464799992028b811b44b36a
   languageName: node
   linkType: hard
 
@@ -11996,6 +11974,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"webpack@npm:5.70.0, webpack@npm:^5.70.0":
+  version: 5.70.0
+  resolution: "webpack@npm:5.70.0"
+  dependencies:
+    "@types/eslint-scope": ^3.7.3
+    "@types/estree": ^0.0.51
+    "@webassemblyjs/ast": 1.11.1
+    "@webassemblyjs/wasm-edit": 1.11.1
+    "@webassemblyjs/wasm-parser": 1.11.1
+    acorn: ^8.4.1
+    acorn-import-assertions: ^1.7.6
+    browserslist: ^4.14.5
+    chrome-trace-event: ^1.0.2
+    enhanced-resolve: ^5.9.2
+    es-module-lexer: ^0.9.0
+    eslint-scope: 5.1.1
+    events: ^3.2.0
+    glob-to-regexp: ^0.4.1
+    graceful-fs: ^4.2.9
+    json-parse-better-errors: ^1.0.2
+    loader-runner: ^4.2.0
+    mime-types: ^2.1.27
+    neo-async: ^2.6.2
+    schema-utils: ^3.1.0
+    tapable: ^2.1.1
+    terser-webpack-plugin: ^5.1.3
+    watchpack: ^2.3.1
+    webpack-sources: ^3.2.3
+  peerDependenciesMeta:
+    webpack-cli:
+      optional: true
+  bin:
+    webpack: bin/webpack.js
+  checksum: 00439884a9cdd5305aed3ce93735635785a15c5464a6d2cfce87e17727a07585de02420913e82aa85ddd2ae7322175d2cfda6ac0878a17f061cb605e6a7db57a
+  languageName: node
+  linkType: hard
+
 "webpack@npm:^5":
   version: 5.69.1
   resolution: "webpack@npm:5.69.1"
@@ -12030,43 +12045,6 @@ __metadata:
   bin:
     webpack: bin/webpack.js
   checksum: 490a6e9e4cd9d0ed3b6c7ca08015da2628919fda8fcf9c36f0f6c0e3ad71eaaaf4b0d12753109f22a4faf79fe9a9063552d9708e0ee2352cf8568433b8e296a7
-  languageName: node
-  linkType: hard
-
-"webpack@npm:^5.70.0":
-  version: 5.70.0
-  resolution: "webpack@npm:5.70.0"
-  dependencies:
-    "@types/eslint-scope": ^3.7.3
-    "@types/estree": ^0.0.51
-    "@webassemblyjs/ast": 1.11.1
-    "@webassemblyjs/wasm-edit": 1.11.1
-    "@webassemblyjs/wasm-parser": 1.11.1
-    acorn: ^8.4.1
-    acorn-import-assertions: ^1.7.6
-    browserslist: ^4.14.5
-    chrome-trace-event: ^1.0.2
-    enhanced-resolve: ^5.9.2
-    es-module-lexer: ^0.9.0
-    eslint-scope: 5.1.1
-    events: ^3.2.0
-    glob-to-regexp: ^0.4.1
-    graceful-fs: ^4.2.9
-    json-parse-better-errors: ^1.0.2
-    loader-runner: ^4.2.0
-    mime-types: ^2.1.27
-    neo-async: ^2.6.2
-    schema-utils: ^3.1.0
-    tapable: ^2.1.1
-    terser-webpack-plugin: ^5.1.3
-    watchpack: ^2.3.1
-    webpack-sources: ^3.2.3
-  peerDependenciesMeta:
-    webpack-cli:
-      optional: true
-  bin:
-    webpack: bin/webpack.js
-  checksum: 00439884a9cdd5305aed3ce93735635785a15c5464a6d2cfce87e17727a07585de02420913e82aa85ddd2ae7322175d2cfda6ac0878a17f061cb605e6a7db57a
   languageName: node
   linkType: hard
 
