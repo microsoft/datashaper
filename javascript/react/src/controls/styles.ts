@@ -7,22 +7,19 @@ import type { IButtonStyles } from '@fluentui/react'
 
 export const dropdownStyles = {
 	root: {
-		// this matches the default fixed dropdown width for fluent menus
-		width: 180,
-		marginRight: 12,
+		width: 220,
 	},
 }
 
 export const opDropdownStyles = {
 	root: {
-		width: 120,
-		marginRight: 12,
+		width: 220,
 	},
 }
 
 export const dropdownButtonStyles: IButtonStyles = {
 	root: {
-		width: 180,
+		width: 220,
 		// match the dropdowns for better visual alignment
 		paddingLeft: 4,
 		paddingRight: 4,

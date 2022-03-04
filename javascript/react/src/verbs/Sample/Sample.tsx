@@ -48,12 +48,12 @@ export const Sample: React.FC<StepComponentProps> = memo(function Sample({
 					step={1}
 					disabled={!!internal.args.proportion}
 					value={internal.args.size ? `${internal.args.size}` : ''}
-					styles={dropdownStyles}
+					styles={spinStyles}
 					onChange={handleSizeChange}
 				/>
 				<Or>or</Or>
 				<SpinButton
-					label={'Percentage of rows'}
+					label={'Row percentage'}
 					labelPosition={Position.top}
 					min={0}
 					max={100}
@@ -64,7 +64,7 @@ export const Sample: React.FC<StepComponentProps> = memo(function Sample({
 							? `${whole(internal.args.proportion * 100)}`
 							: ''
 					}
-					styles={dropdownStyles}
+					styles={spinStyles}
 					onChange={handlePercentChange}
 				/>
 			</LeftAlignedRow>
@@ -79,6 +79,13 @@ const Container = styled.div`
 `
 
 const Or = styled.div`
+	margin-left: 8px;
 	margin-right: 8px;
 	height: 100%;
 `
+
+const spinStyles = {
+	root: {
+		width: 120,
+	},
+}

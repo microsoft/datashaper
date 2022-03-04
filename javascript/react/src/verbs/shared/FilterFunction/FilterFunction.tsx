@@ -10,12 +10,14 @@ import {
 } from '@data-wrangling-components/core'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
+import styled from 'styled-components'
 import { useLoadTable, useHandleDropdownChange } from '../../../common/index.js'
 import {
 	ColumnOrValueComboBox,
 	NumericComparisonOperatorDropdown,
 	StringComparisonOperatorDropdown,
 } from '../../../controls/index.js'
+import { LeftAlignedRow } from '../../../index.js'
 import type { StepComponentProps } from '../../../types.js'
 
 /**
@@ -82,18 +84,25 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 			)
 		}, [internal])
 		return (
-			<>
-				{operatorDropdown}
-				<ColumnOrValueComboBox
-					required
-					table={tbl}
-					disabled={isEmptyCheck}
-					label={'Comparison value'}
-					placeholder={'text, number, or column'}
-					text={internal.args.value ? `${internal.args.value}` : undefined}
-					onChange={handleComboBoxChange}
-				/>
-			</>
+			<Container>
+				<LeftAlignedRow>{operatorDropdown}</LeftAlignedRow>
+				<LeftAlignedRow>
+					<ColumnOrValueComboBox
+						required
+						table={tbl}
+						disabled={isEmptyCheck}
+						label={'Comparison value'}
+						placeholder={'text, number, or column'}
+						text={internal.args.value ? `${internal.args.value}` : undefined}
+						onChange={handleComboBoxChange}
+					/>
+				</LeftAlignedRow>
+			</Container>
 		)
 	},
 )
+
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+`

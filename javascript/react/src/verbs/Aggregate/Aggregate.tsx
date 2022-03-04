@@ -53,6 +53,8 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 					selectedKey={internal.args.groupby}
 					onChange={handleGroupColumnChange}
 				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
 				<FieldAggregateOperationDropdown
 					selectedKey={internal.args.operation}
 					onChange={handleOpChange}
@@ -64,6 +66,6 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 
 const Container = styled.div`
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: flex-start;
 `

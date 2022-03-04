@@ -68,6 +68,8 @@ export const Pivot: React.FC<StepComponentProps> = memo(function Pivot({
 					selectedKey={internal.args.value}
 					onChange={handleValueColumnChange}
 				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
 				<FieldAggregateOperationDropdown
 					selectedKey={internal.args.operation}
 					onChange={handleOpChange}

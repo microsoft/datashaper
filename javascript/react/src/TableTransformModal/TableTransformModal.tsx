@@ -45,7 +45,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 
 		const adaptedStyles = useModalStyles({
 			...styles,
-			main: { maxWidth: '50%' },
+			main: { width: 600 },
 		})
 		return (
 			<Modal

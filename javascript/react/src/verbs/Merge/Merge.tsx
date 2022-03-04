@@ -6,7 +6,7 @@ import type { MergeStep } from '@data-wrangling-components/core'
 import { Dropdown, IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable } from '../../common'
+import { LeftAlignedRow, useLoadTable } from '../../common'
 import { MergeStrategyComponent } from '../../controls/MergeStrategyComponent/MergeStrategyComponent.js'
 import { dropdownStyles } from '../../controls/styles'
 import type { StepComponentProps } from '../../types'
@@ -71,30 +71,33 @@ export const Merge: React.FC<StepComponentProps> = memo(function Merge({
 
 	return (
 		<Container>
-			{tbl ? (
-				<Dropdown
-					label={'Columns'}
-					styles={dropdownStyles}
-					multiSelect
-					options={options}
-					selectedKeys={selectedKeys}
-					onChange={handleColumnChange}
+			<LeftAlignedRow>
+				{tbl ? (
+					<Dropdown
+						label={'Columns'}
+						styles={dropdownStyles}
+						multiSelect
+						options={options}
+						selectedKeys={selectedKeys}
+						onChange={handleColumnChange}
+					/>
+				) : null}
+			</LeftAlignedRow>
+			<LeftAlignedRow>
+				<MergeStrategyComponent
+					input={input}
+					step={step}
+					store={store}
+					table={table}
+					onChange={onChange}
 				/>
-			) : null}
-
-			<MergeStrategyComponent
-				input={input}
-				step={step}
-				store={store}
-				table={table}
-				onChange={onChange}
-			/>
+			</LeftAlignedRow>
 		</Container>
 	)
 })
 
 const Container = styled.div`
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: flex-start;
 `

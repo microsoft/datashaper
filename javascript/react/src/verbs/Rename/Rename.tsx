@@ -8,6 +8,7 @@ import {
 	Icon,
 	IconButton,
 	IDropdownOption,
+	Label,
 	TextField,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -51,6 +52,7 @@ export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 
 	return (
 		<Container>
+			<Label>Column renames</Label>
 			{columnPairs}
 			<ActionButton
 				onClick={handleButtonClick}

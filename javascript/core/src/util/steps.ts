@@ -73,7 +73,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	ungroup: [Tags.InputTable],
 	union: [Tags.InputTable, Tags.RowModifying],
 	unorder: [Tags.InputTable],
-	unroll: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
+	unroll: [Tags.InputTable, Tags.RowModifying],
 	window: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 }
 

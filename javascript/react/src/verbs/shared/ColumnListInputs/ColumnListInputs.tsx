@@ -3,20 +3,20 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ColumnListStep, Step } from '@data-wrangling-components/core'
-import { ActionButton } from '@fluentui/react'
+import { ActionButton, Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { ColumnInstruction } from '../../../controls/ColumnInstruction.js'
-import { useLoadTable } from '../../../index.js'
-import type { StepComponentProps } from '../../../types.js'
+import { LeftAlignedRow, useLoadTable } from '../../../index.js'
+import type { StepSubcomponentProps } from '../../../types.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.
  */
-export const ColumnListInputs: React.FC<StepComponentProps> = memo(
-	function ColumnListInputs({ step, store, table, onChange, input }) {
+export const ColumnListInputs: React.FC<StepSubcomponentProps> = memo(
+	function ColumnListInputs({ step, store, table, onChange, input, label }) {
 		const internal = useMemo(() => step as ColumnListStep, [step])
 
 		const tbl = useLoadTable(input || step.input, table, store)
@@ -36,6 +36,7 @@ export const ColumnListInputs: React.FC<StepComponentProps> = memo(
 
 		return (
 			<Container>
+				<Label>{label || 'Columns'}</Label>
 				{columns}
 				<ActionButton
 					onClick={handleButtonClick}
@@ -73,13 +74,14 @@ function useColumns(
 			}
 
 			return (
-				<ColumnInstruction
-					key={`column-list-${column}-${index}`}
-					table={table}
-					column={column}
-					onChange={handleColumnChange}
-					onDelete={handleDeleteClick}
-				/>
+				<LeftAlignedRow key={`column-list-${column}-${index}`}>
+					<ColumnInstruction
+						table={table}
+						column={column}
+						onChange={handleColumnChange}
+						onDelete={handleDeleteClick}
+					/>
+				</LeftAlignedRow>
 			)
 		})
 	}, [step, table, onChange])
@@ -89,5 +91,4 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: 12px;
 `

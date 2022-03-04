@@ -40,15 +40,19 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 			[index, onChange],
 		)
 		return (
-			<>
+			<Container className="step-component">
 				<WithAllArgs step={step} store={store} onChange={handleStepChange} />
 				<DescriptionContainer>
 					<Description step={step} showInput showOutput />
 				</DescriptionContainer>
-			</>
+			</Container>
 		)
 	},
 )
+
+const Container = styled.div`
+	width: 292px;
+`
 
 const DescriptionContainer = styled.div`
 	margin-top: 8px;

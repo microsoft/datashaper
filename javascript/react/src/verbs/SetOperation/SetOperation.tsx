@@ -7,7 +7,7 @@ import type {
 	SetOperationStep,
 	Step,
 } from '@data-wrangling-components/core'
-import { ActionButton, IconButton } from '@fluentui/react'
+import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
@@ -40,6 +40,7 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 
 		return (
 			<Container>
+				<Label>With tables</Label>
 				{others}
 				<ActionButton
 					onClick={handleButtonClick}

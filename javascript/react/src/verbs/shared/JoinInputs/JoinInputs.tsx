@@ -59,6 +59,8 @@ export const JoinInputs: React.FC<StepComponentProps> = memo(
 						selectedKey={leftColumn}
 						onChange={handleLeftColumnChange}
 					/>
+				</LeftAlignedRow>
+				<LeftAlignedRow>
 					<TableColumnDropdown
 						table={rightTable}
 						label={'Join table key'}

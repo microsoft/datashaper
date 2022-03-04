@@ -7,7 +7,7 @@ import type {
 	FoldStep,
 	Step,
 } from '@data-wrangling-components/core'
-import { ActionButton, TextField } from '@fluentui/react'
+import { ActionButton, Label, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
@@ -61,6 +61,7 @@ export const Fold: React.FC<StepComponentProps> = memo(function Fold({
 
 	return (
 		<Container>
+			<Label>Columns</Label>
 			{columns}
 			<ActionButton
 				onClick={handleButtonClick}
@@ -79,6 +80,8 @@ export const Fold: React.FC<StepComponentProps> = memo(function Fold({
 					styles={dropdownStyles}
 					onChange={handleToChange}
 				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
 				<TextField
 					required
 					label={'Value name to use'}
@@ -116,13 +119,14 @@ function useColumns(
 			}
 
 			return (
-				<ColumnInstruction
-					key={`column-list-${column}-${index}`}
-					table={table}
-					column={column}
-					onChange={handleColumnChange}
-					onDelete={handleDeleteClick}
-				/>
+				<LeftAlignedRow key={`column-list-${column}-${index}`}>
+					<ColumnInstruction
+						table={table}
+						column={column}
+						onChange={handleColumnChange}
+						onDelete={handleDeleteClick}
+					/>
+				</LeftAlignedRow>
 			)
 		})
 	}, [step, table, onChange])
@@ -132,5 +136,4 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: 12px;
 `

@@ -75,7 +75,6 @@ const Container = styled.div`
 	width: 200px;
 	display: flex;
 	align-items: center;
-	gap: 8px;
 `
 
 const SearchContainer = styled.div`
