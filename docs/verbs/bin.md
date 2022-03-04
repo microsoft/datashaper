@@ -2,6 +2,8 @@
 
 Sorts continuous data into defined buckets. Values in the input table cell are replaced in the output with the lower bin boundary that they fall within.
 
+_The input column for a binning operation must be a numeric data type._
+
 Multiple binning strategies are supported:
 
 - Auto: uses automatic bin boundary guessing to create nice default bins (uses [Arquero's default bin strategy](https://uwdata.github.io/arquero/api/op#bins))

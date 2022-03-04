@@ -8,7 +8,7 @@ import { useMemo } from 'react'
 import {
 	StepComponentProps,
 	selectStepComponent,
-	withTableDropdown,
+	withInputTableDropdown,
 	withOutputColumnTextfield,
 	withInputColumnDropdown,
 	withOutputTableTextfield,
@@ -25,7 +25,7 @@ export function useHandleTableStepArgs(
 
 	const WithAllArgs = useMemo(() => {
 		if (Component) {
-			return withTableDropdown()(
+			return withInputTableDropdown()(
 				withOutputColumnTextfield()(
 					withInputColumnDropdown()(
 						withOutputTableTextfield(undefined, disabled)(Component),

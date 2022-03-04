@@ -117,7 +117,8 @@ const Container = styled.div`
 
 	h1 {
 		margin-top: 0;
-		color: ${({ theme }) => theme.application().midContrast().hex()};
+		text-transform: uppercase;
+		color: ${({ theme }) => theme.application().lowMidContrast().hex()};
 	}
 
 	h2 {
@@ -154,7 +155,7 @@ const Container = styled.div`
 	.details {
 		opacity: 0;
 		height: 0;
-		transition: transform 1s ease-in-out;
+		transition: transform 0.5s ease-in-out;
 		transform: translateX(100%);
 		overflow-x: hidden;
 	}

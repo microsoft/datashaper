@@ -4,6 +4,7 @@
  */
 export * from './Erase/index.js'
 export * from './Fold/index.js'
+export * from './Fetch/index.js'
 export * from './Join/index.js'
 export * from './Merge/index.js'
 export * from './Pivot/index.js'
@@ -27,3 +28,4 @@ export * from './Rollup/index.js'
 export * from './Sample/index.js'
 export * from './Select/index.js'
 export * from './NoParameters/index.js'
+export * from './Window/index.js'

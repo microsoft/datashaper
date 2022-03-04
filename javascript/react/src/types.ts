@@ -97,6 +97,14 @@ export interface StepComponentProps extends StepDependent {
 	onChange?: StepChangeFunction
 }
 
+/**
+ * For reusable subcomponents that are combined in one interface
+ * to manipulate a step.
+ */
+export interface StepSubcomponentProps extends StepComponentProps {
+	label?: string
+}
+
 export interface StepDescriptionProps extends StepDependent {
 	style?: React.CSSProperties
 	showInput?: boolean

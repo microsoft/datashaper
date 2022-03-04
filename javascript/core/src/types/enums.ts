@@ -35,6 +35,7 @@ export enum Verb {
 	Union = 'union',
 	Unorder = 'unorder',
 	Unroll = 'unroll',
+	Window = 'window',
 }
 
 export enum MergeStrategy {
@@ -124,6 +125,21 @@ export enum FieldAggregateOperation {
 	Variance = 'variance',
 	ArraryAgg = 'array_agg',
 	ArrayAggDistinct = 'array_agg_distinct',
+}
+
+/**
+ * These are operations that perform windowed compute.
+ * See https://uwdata.github.io/arquero/api/op#window-functions
+ */
+export enum WindowFunction {
+	RowNumber = 'row_number',
+	Rank = 'rank',
+	PercentRank = 'percent_rank',
+	CumulativeDistribution = 'cume_dist',
+	FirstValue = 'first_value',
+	LastValue = 'last_value',
+	FillDown = 'fill_down',
+	FillUp = 'fill_up',
 }
 
 export enum BinStrategy {

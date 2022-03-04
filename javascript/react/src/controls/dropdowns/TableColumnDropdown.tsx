@@ -7,7 +7,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { memo } from 'react'
 import { useTableColumnOptions } from '../../common/index.js'
-import { columnDropdownStyles } from '../styles.js'
+import { dropdownStyles } from '../styles.js'
 
 export interface TableColumnDropdownProps extends Partial<IDropdownProps> {
 	table?: ColumnTable
@@ -29,7 +29,7 @@ export const TableColumnDropdown: React.FC<TableColumnDropdownProps> = memo(
 				label={'Column'}
 				placeholder={'Choose column'}
 				options={options}
-				styles={columnDropdownStyles}
+				styles={dropdownStyles}
 				{...rest}
 			/>
 		)

@@ -204,7 +204,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					<Buttons>
 						<PrimaryButton
 							onClick={handleRunClick}
-							styles={{ root: { width: 160 } }}
+							styles={{ root: { width: 180 } }}
 						>
 							Run all
 						</PrimaryButton>

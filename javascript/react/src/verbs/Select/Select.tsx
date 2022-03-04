@@ -8,7 +8,7 @@ import type { IRenderFunction } from '@fluentui/utilities'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable } from '../../common/index.js'
-import { columnDropdownStyles } from '../../controls/styles.js'
+import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -124,7 +124,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 					required
 					label={'Columns'}
 					placeholder={'Select columns'}
-					styles={columnDropdownStyles}
+					styles={dropdownStyles}
 					multiSelect
 					options={options}
 					selectedKeys={selectedKeys}

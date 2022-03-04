@@ -53,7 +53,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 				height: stats.length * CELL_HEIGHT,
 				fontWeight: 'normal',
 				fontSize: 10,
-				color: theme.application().midContrast().hex(),
+				color: theme.application().midHighContrast().hex(),
 				cursor: onClick ? 'pointer' : 'inherit',
 			}
 		}, [onClick, theme, stats])

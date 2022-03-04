@@ -36,6 +36,7 @@ import { ungroup } from './ungroup.js'
 import { union } from './union.js'
 import { unorder } from './unorder.js'
 import { unroll } from './unroll.js'
+import { window } from './window.js'
 
 const verbs: Record<string, StepFunction> = {
 	aggregate,
@@ -70,6 +71,7 @@ const verbs: Record<string, StepFunction> = {
 	union,
 	unorder,
 	unroll,
+	window,
 }
 
 async function exec(step: Step, store: TableStore): Promise<TableContainer> {

@@ -5,8 +5,8 @@
 import type { StepDescriptionProps } from '../index.js'
 import type { DescriptionRow } from '../types.js'
 
-// this is the maximum rows a verb description can show
-// it's based on the max core requirement, currently held by BIN
+// this is the maximum rows a verb description can show.
+// it is based on the max core requirement, currently held by BIN
 // setting this max ensures that no verbs with arbitrary-legnth arguments
 // (usually column lists) can grow too large
 const MAX_ROWS = 9
@@ -40,9 +40,7 @@ export function createRowEntries<T>(
 			value: '',
 			title: all
 				.slice(max - 1)
-				.map(d => {
-					return [d.before, d.value, d.after].join(' ')
-				})
+				.map(d => [d.before, d.value, d.after].join(' '))
 				.join('\n'),
 		})
 	}
