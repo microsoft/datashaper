@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { useDimensions } from '@essex-js-toolkit/hooks'
+import { useDimensions } from '@essex/hooks'
 import { memo, useMemo, useRef } from 'react'
 import styled from 'styled-components'
 import { CommandBar } from './CommandBar'
