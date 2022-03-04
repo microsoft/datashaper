@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"module": "ES2020",
+		"allowSyntheticDefaultImports": true,
+		"target": "ESNext",
+		"skipLibCheck": true,
+		"esModuleInterop": true
+	},
+	"include": ["src/scripts/**/*.ts"]
+}

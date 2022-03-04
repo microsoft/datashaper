@@ -27,7 +27,7 @@ export function useSortHandling(
 			column?: IColumn,
 		) => {
 			if (allowSorting) {
-				if (column?.isSorted) {
+				if (column?.isSorted || !sortDirection) {
 					setSortDirection(
 						sortDirection === SortDirection.Ascending
 							? SortDirection.Descending

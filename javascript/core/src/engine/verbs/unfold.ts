@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { op } from 'arquero'
+import { from } from 'arquero'
+import type { RowObject } from 'arquero/dist/types/table/table'
 import { container } from '../../factories.js'
 import type { TableStore, UnfoldArgs } from '../../index.js'
 import type { Step, TableContainer } from '../../types.js'
@@ -21,14 +22,42 @@ export async function unfold(
 ): Promise<TableContainer> {
 	const { input, output, args } = step
 	const { key, value } = args as UnfoldArgs
-	let inputTable = await store.table(input)
+	const inputTable = await store.table(input)
 
-	inputTable = inputTable
-		.groupby(key)
-		.rollup({
-			[value]: op.array_agg(value),
+	const columnNames: string[] = inputTable.columnNames(name => {
+		return name !== key && name !== value
+	})
+	const selectedArray: RowObject[] = inputTable.select(columnNames).objects()
+
+	const distinctColumnValues: string[] = [...new Set(inputTable.array(key))]
+
+	const originalArray: RowObject[] = inputTable.objects()
+	const finalArray: RowObject[] = []
+
+	const upperValue: number =
+		selectedArray.length !== 0
+			? selectedArray.length / distinctColumnValues.length
+			: distinctColumnValues.length
+
+	for (let i = 0; i < upperValue; i++) {
+		let tempObj: RowObject = {}
+
+		if (selectedArray.length !== 0) {
+			tempObj = {
+				...selectedArray[i * distinctColumnValues.length],
+			}
+		}
+
+		let j: number = i * distinctColumnValues.length
+
+		distinctColumnValues.forEach(e => {
+			const obj: RowObject | undefined = originalArray[j]
+			tempObj[e] = obj !== undefined ? obj[value] : null
+			j++
 		})
-		.pivot(key, value)
 
-	return container(output, inputTable.unroll(inputTable.columnNames()))
+		finalArray.push(tempObj)
+	}
+
+	return container(output, from(finalArray))
 }
