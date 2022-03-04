@@ -12,7 +12,7 @@
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
 		"test": "yarn jest",
-		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest)",
+		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"ci": "run-s build lint jest git_is_clean",
 		"publish": "yarn workspaces foreach --exclude '@data-wrangling-components/project' -pv npm publish --tolerate-republish --access public",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
@@ -41,5 +41,5 @@
 	"workspaces": [
 		"javascript/*"
 	],
-	"packageManager": "yarn@3.1.1"
+	"packageManager": "yarn@3.2.0"
 }

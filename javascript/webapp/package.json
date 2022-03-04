@@ -14,10 +14,10 @@
 		"build_stats": "webpack --mode production --json > stats.json"
 	},
 	"dependencies": {
-		"@data-wrangling-components/core": "workspace:javascript/core",
-		"@data-wrangling-components/react": "workspace:javascript/react",
-		"@data-wrangling-components/utilities": "workspace:javascript/utilities",
-		"@essex-js-toolkit/themed-components": "^2.0.1",
+		"@data-wrangling-components/core": "workspace:^",
+		"@data-wrangling-components/react": "workspace:^",
+		"@data-wrangling-components/utilities": "workspace:^",
+		"@essex/themed-components": "^2.0.1",
 		"@essex/webpack-config": "^20.1.1",
 		"@fluentui/font-icons-mdl2": "^8.1.24",
 		"@fluentui/react": "^8.55.3",
@@ -51,7 +51,6 @@
 		"@types/react-dom": "^17.0.11",
 		"@types/react-is": "^17.0.3",
 		"@types/react-router-dom": "^5.3.3",
-		"@types/recoil": "^0.0.9",
 		"@types/styled-components": "^5.1.23",
 		"@types/uuid": "^8.3.4",
 		"shx": "^0.3.4",

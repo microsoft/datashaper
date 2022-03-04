@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
-import { DialogConfirm } from '@essex-js-toolkit/themed-components'
+import { DialogConfirm } from '@essex/themed-components'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import {
