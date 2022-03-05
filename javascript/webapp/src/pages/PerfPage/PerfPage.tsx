@@ -51,10 +51,12 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 			setGroupedMetadata(meta)
 			root.ungroup()
 			// make sure we have a large enough number of rows to impact rendering perf
-			for (let i = 0; i < 6; i++) {
+			for (let i = 0; i < 8; i++) {
 				root = root.concat(root)
 			}
+			console.time('root meta')
 			meta = introspect(root, true)
+			console.timeEnd('root meta')
 			setTable(root)
 			setMetadata(meta)
 		}
@@ -71,20 +73,31 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 	})
 
 	const addNewColumn = useCallback(() => {
-		if (!table) return
+		if (!table || !metadata) return
+		console.time('new column')
 		const newTable = table.derive(
-			{ [Math.random()]: (d: Struct) => d.Close },
+			{ [`New ${Math.round(Math.random() * 100)}`]: (d: Struct) => d.Close },
 			{ before: 'Date' },
 		)
-		const newMetadata = introspect(newTable, true)
-		setMetadata(newMetadata)
+		console.timeEnd('new column')
+		// since we're just appending, we can reuse the prior stats
+		console.time('new meta')
+		const newColumns = newTable.columnNames(name => !metadata.columns[name])
+		const newMetadata = introspect(newTable, true, newColumns)
+		console.timeEnd('new meta')
+		setMetadata({
+			...newMetadata,
+			columns: {
+				...metadata.columns,
+				...newMetadata.columns,
+			},
+		})
 		setTable(newTable)
-	}, [table, setMetadata, setTable])
+	}, [table, setMetadata, setTable, metadata])
 
 	const customGroupHeader = useCallback(
 		(meta?: ColumnMetadata, props?: IDetailsGroupDividerProps | undefined) => {
 			const custom = <h3>{meta?.name}</h3>
-
 			return createLazyLoadingGroupHeader(props, meta, custom)
 		},
 		[],
@@ -187,7 +200,7 @@ const Container = styled.div`
 
 const Table = styled.div`
 	margin-top: 12px;
-	height: 600px;
+	height: calc(100vh - 220px);
 `
 
 const AddButton = styled(DefaultButton)`

@@ -52,8 +52,8 @@ function detailedMeta(
 		const [name, stat] = cur
 		acc[name] = {
 			name,
-			type: stat[name as keyof ColumnStats]!.type,
-			stats: stat[name as keyof ColumnStats],
+			type: stat.type,
+			stats: stat,
 		}
 		return acc
 	}, {} as Record<string, ColumnMetadata>)
