@@ -27,35 +27,49 @@ const SAMPLE_MAX = 100
 export function introspect(
 	table: ColumnTable,
 	detailed = false,
+	/**
+	 * List of specific columns to compute, enabling incremental table updates
+	 */
+	columns?: string[],
 ): TableMetadata {
-	const columns = detailed ? detailedMeta(table) : basicMeta(table)
+	const meta = detailed
+		? detailedMeta(table, columns)
+		: basicMeta(table, columns)
 	return {
 		rows: table.numRows(),
 		cols: table.numCols(),
-		columns,
+		columns: meta,
 	}
 }
 
-function detailedMeta(table: ColumnTable): Record<string, ColumnMetadata> {
+function detailedMeta(
+	table: ColumnTable,
+	columns?: string[],
+): Record<string, ColumnMetadata> {
 	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
-	const s = stats(table.ungroup())
-	return table.columnNames().reduce((acc, cur) => {
-		acc[cur] = {
-			name: cur,
-			type: s[cur]!.type,
-			stats: s[cur],
+	const sts = stats(table.ungroup(), columns)
+	return Object.entries(sts).reduce((acc, cur) => {
+		const [name, stat] = cur
+		acc[name] = {
+			name,
+			type: stat[name as keyof ColumnStats]!.type,
+			stats: stat[name as keyof ColumnStats],
 		}
 		return acc
 	}, {} as Record<string, ColumnMetadata>)
 }
 
-function basicMeta(table: ColumnTable): Record<string, ColumnMetadata> {
+function basicMeta(
+	table: ColumnTable,
+	columns?: string[],
+): Record<string, ColumnMetadata> {
 	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
-	const t = types(table.ungroup())
-	return table.columnNames().reduce((acc, cur) => {
-		acc[cur] = {
-			name: cur,
-			type: t[cur]!,
+	const t = types(table.ungroup(), columns)
+	return Object.entries(t).reduce((acc, cur) => {
+		const [name, type] = cur
+		acc[name] = {
+			name,
+			type,
 		}
 		return acc
 	}, {} as Record<string, ColumnMetadata>)
@@ -66,12 +80,16 @@ function basicMeta(table: ColumnTable): Record<string, ColumnMetadata> {
  * @param table
  * @returns
  */
-export function stats(table: ColumnTable): Record<string, ColumnStats> {
-	const reqStats = requiredStats(table)
-	const optStats = optionalStats(table)
-	const bins = binning(table, reqStats, optStats)
-	const cats = categories(table, reqStats)
-	const results = table.columnNames().reduce((acc, cur) => {
+export function stats(
+	table: ColumnTable,
+	columns?: string[],
+): Record<string, ColumnStats> {
+	const selected = columns ? table.select(columns) : table
+	const reqStats = requiredStats(selected)
+	const optStats = optionalStats(selected)
+	const bins = binning(selected, reqStats, optStats)
+	const cats = categories(selected, reqStats)
+	const results = selected.columnNames().reduce((acc, cur) => {
 		// mode should only include valid values, so a reasonable value for checking type
 		const mode = reqStats[`${cur}.mode`]
 		const type = determineType(mode)
@@ -136,12 +154,14 @@ function binning(
 	table: ColumnTable,
 	reqStats: Record<string, any>,
 	optStats: Record<string, any>,
+	columns?: string[],
 ) {
-	const numeric = table.columnNames(name => {
+	const filter = filterColumns(columns, name => {
 		const mode = reqStats[`${name}.mode`]
 		const type = determineType(mode)
 		return type === DataType.Number
 	})
+	const numeric = table.columnNames(filter)
 	const binArgs = numeric.reduce((acc, cur) => {
 		const min = optStats[`${cur}.min`]
 		const max = optStats[`${cur}.max`]
@@ -214,7 +234,7 @@ function categories(
 	reqStats: Record<string, any>,
 	limit = 20,
 ) {
-	// note we're going to limit it this to columns with a small number of unique values.
+	// note we're going to limit this to columns with a small number of unique values.
 	// it just doesn't make sense to count everything that is distinct if we can't plot/display it
 	const text = table.columnNames(name => {
 		const mode = reqStats[`${name}.mode`]
@@ -236,18 +256,37 @@ function categories(
 	}, {} as Record<string, Category[]>)
 }
 
-// TODO: arquero does autotyping on load, is this meta stored internally?
-// https://uwdata.github.io/arquero/api/#fromCSV
-// TODO: this doesn't recognize dates if arquero didn't parse them
 /**
  * Generates column typings info for a table.
  * @param table
  * @returns
  */
-export function types(table: ColumnTable): Record<string, DataType> {
-	const sampled = table.sample(SAMPLE_MAX)
+export function types(
+	table: ColumnTable,
+	columns?: string[],
+): Record<string, DataType> {
+	const selected = columns ? table.select(columns) : table
+	const sampled = selected.sample(SAMPLE_MAX)
 	return sampled.columnNames().reduce((acc, cur) => {
 		acc[cur] = columnType(table, cur)
 		return acc
 	}, {} as Record<string, DataType>)
+}
+
+type FilterFunction = (name: string, index: number, array: string[]) => boolean
+
+// creates a curried filter function for column names
+// applies the column check first, and only invokes secondary filter function if that passes
+function filterColumns(
+	columns?: string[],
+	filter?: FilterFunction,
+): FilterFunction {
+	const set = new Set(columns)
+	const filt = filter || (() => true)
+	return (name, index, array) => {
+		if (columns) {
+			return set.has(name) && filt(name, index, array)
+		}
+		return filt(name, index, array)
+	}
 }
