@@ -2,16 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	TableStore,
 	TableContainer,
-	createTableStore,
 	Step,
 	InputColumnRecordArgs,
 	Value,
+	Pipeline,
+} from '@data-wrangling-components/core'
+import {
+	createTableStore,
 	DataType,
 	columnType,
-	Pipeline,
 	createPipeline,
 } from '@data-wrangling-components/core'
 import type {

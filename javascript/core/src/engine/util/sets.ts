@@ -3,8 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { container } from '../../factories.js'
-import type { TableContainer, TableStore } from '../../types.js'
-import { SetOp, SetOperationArgs, Step } from '../../types.js'
+import type {
+	TableContainer,
+	TableStore,
+	SetOperationArgs,
+	Step,
+} from '../../types.js'
+import { SetOp } from '../../types.js'
 
 /**
  * All of the arquero set verbs use the same args.

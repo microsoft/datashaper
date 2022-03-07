@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../index.js'
+import type { Step } from '../../index.js'
+import { Verb } from '../../index.js'
 import { fetch } from '../verbs/fetch.js'
 import { TestStore } from './TestStore.js'
 

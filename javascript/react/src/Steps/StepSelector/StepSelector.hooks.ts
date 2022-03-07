@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Verb } from '@data-wrangling-components/core'
-import { ContextualMenuItemType, IContextualMenuItem } from '@fluentui/react'
+import type { IContextualMenuItem } from '@fluentui/react'
+import { ContextualMenuItemType } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 

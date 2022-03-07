@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	ContextualMenuItemType,
+import type {
 	IContextualMenuItem,
 	IContextualMenuListProps,
 } from '@fluentui/react'
+import { ContextualMenuItemType } from '@fluentui/react'
 import { merge } from 'lodash-es'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'

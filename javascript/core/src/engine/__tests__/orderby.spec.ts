@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb, SortDirection } from '../../types.js'
+import type { Step } from '../../types.js'
+import { Verb, SortDirection } from '../../types.js'
 import { orderby } from '../verbs/orderby.js'
 import { TestStore } from './TestStore.js'
 

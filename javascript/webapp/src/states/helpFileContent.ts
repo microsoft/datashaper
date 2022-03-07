@@ -3,13 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useDebounceFn } from 'ahooks'
-import {
-	atom,
-	SetterOrUpdater,
-	useRecoilState,
-	useRecoilValue,
-	useSetRecoilState,
-} from 'recoil'
+import type { SetterOrUpdater } from 'recoil'
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 const currentHelpFileContent = atom<string>({
 	key: 'url',
 	default: '',

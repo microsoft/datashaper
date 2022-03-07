@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ContextualMenuItemType, IContextualMenuItem } from '@fluentui/react'
+import type { IContextualMenuItem } from '@fluentui/react'
+import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback } from 'react'
 
 export function useSearch(

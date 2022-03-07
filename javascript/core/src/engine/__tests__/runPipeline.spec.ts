@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { MathOperator, Step } from '../../index.js'
+import type { Step } from '../../index.js'
+import { MathOperator } from '../../index.js'
 import { runPipeline } from '../runPipeline.js'
 
 describe('runPipeline', () => {

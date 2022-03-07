@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { BinStrategy } from '../../index.js'
-import { FieldAggregateOperation, Step, Verb } from '../../types.js'
+import type { Step } from '../../types.js'
+import { FieldAggregateOperation, Verb } from '../../types.js'
 
 /**
  * Factory function to create new verb configs
