@@ -3,12 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { IColumn, IDetailsListStyles } from '@fluentui/react'
 import {
 	DetailsList,
 	DetailsListLayoutMode,
-	IColumn,
 	SelectionMode,
-	IDetailsListStyles,
 	ConstrainMode,
 } from '@fluentui/react'
 import type { RowObject } from 'arquero/dist/types/table/table'

@@ -2,18 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	ColumnConfigMap,
+	DetailsListFeatures,
+} from '@data-wrangling-components/react'
+import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
-	DetailsListFeatures,
 	downloadCommand,
 	visibleColumnsCommand,
 } from '@data-wrangling-components/react'
-import { IColumn, IDropdownOption } from '@fluentui/react'
+import type { IColumn, IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
-import { SetterOrUpdater } from 'recoil'
+import type { SetterOrUpdater } from 'recoil'
 import styled from 'styled-components'
 
 export interface TableProps {

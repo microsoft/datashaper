@@ -2,15 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	BinarizeStep,
 	ChainStep,
 	DeriveStep,
 	LookupStep,
-	MathOperator,
 	Step,
-	Verb,
 } from '@data-wrangling-components/core'
+import { MathOperator, Verb } from '@data-wrangling-components/core'
 import merge from 'lodash-es/merge.js'
 
 const COLLECTOR = 'compound-binarize-collector-table'

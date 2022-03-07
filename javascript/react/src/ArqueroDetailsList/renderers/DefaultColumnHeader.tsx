@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Icon, IDetailsColumnProps } from '@fluentui/react'
+import type { IDetailsColumnProps } from '@fluentui/react'
+import { Icon } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 import { useCellDimensions } from '../hooks'

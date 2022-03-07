@@ -5,7 +5,8 @@
 
 import { BaseFile, FileWithPath } from '../common/index.js'
 import { FileMimeType } from '../index.js'
-import { FileType, Json } from '../types.js'
+import type { Json } from '../types.js'
+import { FileType } from '../types.js'
 
 interface FileOptions {
 	name?: string

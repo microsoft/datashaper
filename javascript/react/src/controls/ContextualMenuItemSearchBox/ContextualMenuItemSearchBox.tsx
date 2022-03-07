@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IContextualMenuItem, SearchBox } from '@fluentui/react'
+import type { IContextualMenuItem } from '@fluentui/react'
+import { SearchBox } from '@fluentui/react'
 import { memo } from 'react'
 import { useSearch } from './ContextualMenuItemSearchBox.hooks.js'
 import { searchBoxStyles } from './ContextualMenuItemSearchBox.styles.js'

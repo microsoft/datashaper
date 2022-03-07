@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { MergeStrategy } from '../../index.js'
-import { Step, Verb } from '../../types.js'
+import type { Step } from '../../types.js'
+import { Verb } from '../../types.js'
 import { merge } from '../verbs/merge.js'
 import { TestStore } from './TestStore.js'
 

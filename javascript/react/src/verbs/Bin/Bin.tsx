@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinStep, BinStrategy } from '@data-wrangling-components/core'
+import type { BinStep } from '@data-wrangling-components/core'
+import { BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, Position, SpinButton } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import { Switch, Case, If, Then } from 'react-if'

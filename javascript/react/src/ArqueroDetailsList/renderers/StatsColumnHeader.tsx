@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnStats, formatIfNumber } from '@data-wrangling-components/core'
+import type { ColumnStats } from '@data-wrangling-components/core'
+import { formatIfNumber } from '@data-wrangling-components/core'
 import { useThematic } from '@thematic/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useMemo } from 'react'

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@data-wrangling-components/core'
-import {
+import type {
 	ColumnConfigMap,
 	DetailsListFeatures,
 } from '@data-wrangling-components/react'
