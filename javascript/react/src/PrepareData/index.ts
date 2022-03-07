@@ -4,6 +4,5 @@
  */
 
 export * from './PreviewTable/index.js'
-export * from './OutputTable/index.js'
 export * from './TablesList/index.js'
 export * from './PrepareDataFull/index.js'
