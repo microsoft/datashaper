@@ -325,6 +325,7 @@ export function useToggleStatsHeaderCommand(
 			key: 'toggle-stats',
 			iconOnly: true,
 			text: 'Toggle header features',
+			ariaLabel: 'Toggle header features',
 			iconProps: iconProps.settings,
 			subMenuProps: {
 				items: [
