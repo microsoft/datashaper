@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { MergeStep } from '@data-wrangling-components/core'
-import { Dropdown, IDropdownOption } from '@fluentui/react'
+import type { IDropdownOption } from '@fluentui/react'
+import { Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useLoadTable } from '../../common'

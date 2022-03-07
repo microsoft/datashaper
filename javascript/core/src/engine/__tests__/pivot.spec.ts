@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FieldAggregateOperation } from '../..'
-import { Step, Verb } from '../../types'
+import type { Step } from '../../types'
+import { Verb } from '../../types'
 import { pivot } from '../verbs/pivot'
 import { TestStore } from './TestStore'
 

@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
+import type { Step } from '../../types'
+import { Verb } from '../../types'
 import { fold } from '../verbs/fold'
 import { unfold } from '../verbs/unfold'
 import { TestStore } from './TestStore'

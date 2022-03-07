@@ -2,19 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	AggregateStep,
 	ChainStep,
 	FilterStep,
 	JoinStep,
 	LookupStep,
 	Step,
-	Verb,
 	FieldAggregateOperation,
 	JoinArgs,
 	FilterArgs,
 	AggregateArgs,
 } from '@data-wrangling-components/core'
+import { Verb } from '@data-wrangling-components/core'
 import merge from 'lodash-es/merge.js'
 
 const FINAL_OUTPUT = 'filter-aggregate-lookup-final-output-table'

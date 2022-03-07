@@ -8,7 +8,7 @@ import {
 	ArqueroTableHeader,
 	ColumnTransformModal,
 } from '@data-wrangling-components/react'
-import { IContextualMenuItem } from '@fluentui/react'
+import type { IContextualMenuItem } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

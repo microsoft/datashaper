@@ -3,12 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@data-wrangling-components/core'
-import {
-	BaseButton,
-	Button,
-	ContextualMenuItemType,
-	IContextualMenuItem,
-} from '@fluentui/react'
+import type { BaseButton, Button, IContextualMenuItem } from '@fluentui/react'
+import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
 /**

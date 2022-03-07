@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ColumnMetadata } from '@data-wrangling-components/core'
-import {
-	CommandBar,
+import type {
 	ICommandBarItemProps,
 	ICommandBarProps,
 	IDetailsGroupDividerProps,
 } from '@fluentui/react'
+import { CommandBar } from '@fluentui/react'
 import type { ReactElement } from 'react'
 import { GroupHeader } from '../controls/index.js'
 

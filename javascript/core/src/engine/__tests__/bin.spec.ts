@@ -2,8 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinArgs, BinStrategy } from '../../index.js'
-import { Step, TableContainer, Verb } from '../../types.js'
+import type { BinArgs } from '../../index.js'
+import { BinStrategy } from '../../index.js'
+import type { Step, TableContainer } from '../../types.js'
+import { Verb } from '../../types.js'
 import { bin } from '../verbs/bin.js'
 import { TestStore } from './TestStore.js'
 

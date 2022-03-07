@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	Step,
 	TableStore,
-	introspect,
 	TableMetadata,
 	TableContainer,
 } from '@data-wrangling-components/core'
+import { introspect } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useState, useMemo, useEffect } from 'react'
 import { usePipeline, useStore } from '../../common/index.js'

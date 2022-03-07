@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
-import { Dropdown, IDropdownProps } from '@fluentui/react'
+import type { IDropdownProps } from '@fluentui/react'
+import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 import { opDropdownStyles } from '../styles.js'
 

@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { Entry } from '@zip.js/zip.js'
 import {
 	BlobReader,
 	ZipReader,
 	BlobWriter,
-	Entry,
 	ZipWriter,
 	Data64URIWriter,
 } from '@zip.js/zip.js'

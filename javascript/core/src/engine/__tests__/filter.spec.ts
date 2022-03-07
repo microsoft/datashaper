@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { NumericComparisonOperator, FilterCompareType } from '../../index.js'
-import { Step, StringComparisonOperator, Verb } from '../../types.js'
+import type { Step } from '../../types.js'
+import { StringComparisonOperator, Verb } from '../../types.js'
 import { filter } from '../verbs/filter'
 import { TestStore } from './TestStore'
 
