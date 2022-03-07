@@ -2,11 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	DataType,
-	SortDirection,
-	TableMetadata,
-} from '@data-wrangling-components/core'
+import type { TableMetadata } from '@data-wrangling-components/core'
+import { DataType, SortDirection } from '@data-wrangling-components/core'
 import type { IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
@@ -169,7 +166,8 @@ export function useColumns(
 				onRender,
 				onRenderHeader: createRenderColumnHeader(headerRenderers),
 				onColumnClick,
-				isSorted: column.fieldName === sortColumn ? true : false,
+				isSorted:
+					!!sortDirection && column.fieldName === sortColumn ? true : false,
 				isSortedDescending: sortDirection === SortDirection.Descending,
 				styles,
 				...defaults,

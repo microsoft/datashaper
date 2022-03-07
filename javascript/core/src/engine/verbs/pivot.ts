@@ -6,7 +6,7 @@
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import type { PivotArgs, Step, TableContainer } from '../../types.js'
-import { singleRollup } from '../util/index.js'
+import { singleExpression } from '../util/index.js'
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
@@ -23,7 +23,7 @@ export async function pivot(
 	const { key, value, operation } = args as PivotArgs
 	const inputTable = await store.table(input)
 
-	const expr = singleRollup(value, operation)
+	const expr = singleExpression(value, operation)
 
 	return container(output, inputTable.pivot(key, { [value]: expr }))
 }

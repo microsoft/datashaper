@@ -3,20 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Verb } from '@data-wrangling-components/core'
-import { DefaultButton, IconButton } from '@fluentui/react'
-
+import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { GroupedMenu } from './GroupedMenu.js'
-import { ItemSearchBox } from './ItemSearchBox.js'
-import {
-	sortIntoGroups,
-	useDropdownButtonText,
-	useSelectedOption,
-	useSearchableItems,
-	useMenuProps,
-} from './StepSelector.hooks.js'
-import { buttonStylexs } from './StepSelector.styles.js'
+import { ColumnarMenu } from '../../controls/ColumnarMenu/ColumnarMenu.js'
+import { ColumnarMenuList } from '../../controls/ColumnarMenu/ColumnarMenuList.js'
+import { ContextualMenuItemSearchBox } from '../../controls/ContextualMenuItemSearchBox/ContextualMenuItemSearchBox.js'
+import { useSelectedOption, useSearchableItems } from './StepSelector.hooks.js'
 
 export interface StepSelectorProps {
 	onCreate?: (verb: Verb) => void
@@ -37,45 +30,39 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 		verb,
 		placeholder = 'Choose a verb',
 	}) {
-		const { selected, onButtonClick, onItemClick } = useSelectedOption(
+		const { text, onButtonClick, onItemClick } = useSelectedOption(
 			verb,
 			onCreate,
 			showButton,
+			placeholder,
 		)
 
 		const { items, filtered, onSearch, onSearchReset } = useSearchableItems()
 
 		const renderMenuList = useCallback(
 			menuListProps => {
-				const groups = sortIntoGroups(filtered)
 				return (
-					<MenuContainer>
+					<>
 						<SearchContainer>
-							<ItemSearchBox items={items} onSearch={onSearch} />
+							<ContextualMenuItemSearchBox items={items} onSearch={onSearch} />
 						</SearchContainer>
-						<GroupedMenu groups={groups} menuListProps={menuListProps} />
-					</MenuContainer>
+						<ColumnarMenuList {...menuListProps} />
+					</>
 				)
 			},
-			[onSearch, items, filtered],
+			[onSearch, items],
 		)
 
-		const menuProps = useMenuProps({
+		const menuProps = {
 			items: filtered,
 			onRenderMenuList: renderMenuList,
 			onItemClick,
 			onDismiss: onSearchReset,
-		})
-
-		const buttonText = useDropdownButtonText(selected, placeholder)
+		}
 
 		return (
 			<Container>
-				<DefaultButton
-					styles={buttonStylexs}
-					text={buttonText}
-					menuProps={menuProps as any}
-				/>
+				<ColumnarMenu text={text} {...menuProps} />
 				{showButton && (
 					<IconButton iconProps={{ iconName: 'Add' }} onClick={onButtonClick} />
 				)}
@@ -85,13 +72,10 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 )
 
 const Container = styled.div`
-	width: 200px;
+	width: 240px;
 	display: flex;
 	align-items: center;
-	gap: 8px;
 `
-
-const MenuContainer = styled.div``
 
 const SearchContainer = styled.div`
 	border-bottom: 1px solid

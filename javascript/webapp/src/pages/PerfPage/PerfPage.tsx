@@ -3,29 +3,27 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import {
+import type {
 	TableMetadata,
-	introspect,
 	ColumnMetadata,
 } from '@data-wrangling-components/core'
+import { introspect } from '@data-wrangling-components/core'
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	createDefaultCommandBar,
 	createLazyLoadingGroupHeader,
 } from '@data-wrangling-components/react'
-import {
-	DefaultButton,
+import type {
 	IColumn,
 	ICommandBarItemProps,
 	IDetailsColumnProps,
 	IDetailsGroupDividerProps,
-	Pivot,
-	PivotItem,
 } from '@fluentui/react'
+import { DefaultButton, Pivot, PivotItem } from '@fluentui/react'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { Struct } from 'arquero/dist/types/table/transformable'
+import type { Struct } from 'arquero/dist/types/table/transformable'
 import { memo, useState, useEffect, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useHelpFileContentSetter } from '../../states/helpFileContent.js'

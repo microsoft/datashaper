@@ -3,13 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	FileCollection,
 	FileMimeType,
-	FileWithPath,
 } from '@data-wrangling-components/utilities'
 import { useCallback } from 'react'
-import { useDropzone as UseDz, DropzoneState as DzState } from 'react-dropzone'
+import type { DropzoneState as DzState } from 'react-dropzone'
+import { useDropzone as UseDz } from 'react-dropzone'
 import type { DzProps, FileRejection } from '../types.js'
 
 export interface DropzoneState extends DzState {

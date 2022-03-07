@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RenameStep } from '@data-wrangling-components/core'
+import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
 	Icon,
 	IconButton,
-	IDropdownOption,
+	Label,
 	TextField,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -51,6 +52,7 @@ export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 
 	return (
 		<Container>
+			<Label>Column renames</Label>
 			{columnPairs}
 			<ActionButton
 				onClick={handleButtonClick}

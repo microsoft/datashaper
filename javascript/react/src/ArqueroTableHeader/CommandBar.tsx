@@ -2,12 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	CommandBar as CB,
-	ICommandBarItemProps,
-	IIconProps,
-} from '@fluentui/react'
-import type { Application } from '@thematic/core'
+import type { ICommandBarItemProps, IIconProps } from '@fluentui/react'
+import { CommandBar as CB } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -17,15 +13,18 @@ interface CommandBarProps {
 	commands: ICommandBarItemProps[]
 	width?: string
 	bgColor?: string
+	color?: string
 }
 
 export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	commands,
 	width,
+	bgColor,
+	color,
 }) {
-	const overflowButtonProps = useOverflowButtonProps()
+	const overflowButtonProps = useOverflowButtonProps(bgColor, color)
 	const handleOnDataReduce = useHandleOnDataReduce()
-	const handleOnDataGrown = useHandleOnDataGrown()
+	const handleOnDataGrown = useHandleOnDataGrown(color)
 
 	return (
 		<CommandBarWrapper width={width}>
@@ -51,30 +50,34 @@ const useHandleOnDataReduce = () => {
 	)
 }
 
-const useHandleOnDataGrown = () => {
+const useHandleOnDataGrown = (color?: string) => {
 	const iconProps = useIconProps()
+	const theme = useThematic()
 	return useCallback(
 		(item: ICommandBarItemProps) => {
-			item.iconProps = iconProps(item, 'background')
+			item.iconProps = iconProps(
+				item,
+				color || theme.application().background().hex(),
+			)
 		},
-		[iconProps],
+		[iconProps, theme, color],
 	)
 }
 
-const useOverflowButtonProps = () => {
+const useOverflowButtonProps = (bgColor?: string, color?: string) => {
 	const theme = useThematic()
 	return useMemo(
 		() => ({
 			styles: {
 				root: {
-					background: theme.application().accent().hex(),
+					background: bgColor || theme.application().accent().hex(),
 				},
 				menuIcon: {
-					color: theme.application().background().hex(),
+					color: color || theme.application().background().hex(),
 				},
 			},
 		}),
-		[theme],
+		[theme, bgColor, color],
 	)
 }
 
@@ -84,11 +87,11 @@ const useIconProps = (): ((
 ) => IIconProps) => {
 	const theme = useThematic()
 	return useCallback(
-		(item: ICommandBarItemProps, color = 'foreground') => ({
+		(item: ICommandBarItemProps, color?: string) => ({
 			...item.iconProps,
 			styles: {
 				root: {
-					color: theme.application()[color as keyof Application]().hex(),
+					color: color || theme.application().foreground().hex(),
 				},
 			},
 		}),

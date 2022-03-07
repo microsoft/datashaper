@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Specification } from '@data-wrangling-components/core'
+import type { Specification } from '@data-wrangling-components/core'
 import { Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 import aggregatedLookup from './specs/aggregated-lookup.json'

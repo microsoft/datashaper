@@ -2,10 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	OrderbyInstruction,
-	SortDirection,
-} from '@data-wrangling-components/core'
+import type { OrderbyInstruction } from '@data-wrangling-components/core'
+import { SortDirection } from '@data-wrangling-components/core'
 import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 

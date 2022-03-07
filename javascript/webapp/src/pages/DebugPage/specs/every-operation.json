@@ -90,6 +90,14 @@
 			}
 		},
 		{
+			"verb": "fetch",
+			"input": "data/companies.csv",
+			"output": "fetch-1",
+			"args": {
+				"url": "https://vega.github.io/vega/data/seattle-weather-hourly-normals.csv"
+			}
+		},
+		{
 			"verb": "fill",
 			"input": "data/companies.csv",
 			"output": "fill-1",
@@ -219,7 +227,7 @@
 					"Symbol": "symbol",
 					"Date": "date",
 					"Close": "close",
-					"Volume": "volumne",
+					"Volume": "volume",
 					"Open": "open",
 					"High": "high",
 					"Low": "low"
@@ -299,6 +307,16 @@
 			"output": "unroll-1",
 			"args": {
 				"columns": ["Product List"]
+			}
+		},
+		{
+			"verb": "window",
+			"input": "groupby-1",
+			"output": "window-1",
+			"args": {
+				"to": "First Product",
+				"column": "Product",
+				"operation": "first_value"
 			}
 		}
 	]

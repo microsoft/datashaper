@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Value } from '@data-wrangling-components/core'
-import { Dropdown, IDropdownProps } from '@fluentui/react'
+import type { IDropdownProps } from '@fluentui/react'
+import { Dropdown } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
 import { useColumnValueOptions } from '../../common/index.js'
-import { columnDropdownStyles } from '../styles.js'
+import { dropdownStyles } from '../styles.js'
 
 export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
 	column: string
@@ -30,7 +31,7 @@ export const ColumnValueDropdown: React.FC<ColumnValueDropdownProps> = memo(
 				label={'Value'}
 				placeholder={'Choose value'}
 				options={options}
-				styles={columnDropdownStyles}
+				styles={dropdownStyles}
 				{...rest}
 			/>
 		)

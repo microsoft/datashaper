@@ -11,6 +11,7 @@ import {
 	Binarize,
 	ColumnListOperation,
 	Derive,
+	Fetch,
 	Fill,
 	Filter,
 	Fold,
@@ -30,6 +31,7 @@ import {
 	NoParameters,
 	Erase,
 	Unfold,
+	Window,
 } from './verbs/index.js'
 
 const verb: Record<string, React.FC<StepComponentProps>> = {
@@ -41,6 +43,7 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	derive: Derive,
 	difference: SetOperation,
 	erase: Erase,
+	fetch: Fetch,
 	fill: Fill,
 	filter: Filter,
 	fold: Fold,
@@ -63,6 +66,7 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	union: SetOperation,
 	unorder: NoParameters,
 	unroll: ColumnListOperation,
+	window: Window,
 	'multi-binarize': CompoundBinarize,
 	'filter-aggregate-lookup': FilterAggregateLookup,
 }

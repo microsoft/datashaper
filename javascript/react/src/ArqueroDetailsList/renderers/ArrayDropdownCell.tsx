@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Dropdown, IDropdownOption } from '@fluentui/react'
+import type { IDropdownOption } from '@fluentui/react'
+import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 import { getDropdownValue } from '../util/index.js'
 import type { DropdownCellProps } from './types.js'

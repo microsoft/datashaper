@@ -6,7 +6,7 @@ import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleTextfieldChange } from './common/index.js'
-import { columnDropdownStyles } from './controls/styles.js'
+import { dropdownStyles } from './controls/styles.js'
 import type { HOCFunction, StepComponentProps } from './types.js'
 /**
  * Higher order component generator to wrap a Step in the output column text field.
@@ -36,7 +36,7 @@ export const withOutputTableTextfield = (
 							label={label || 'Output table'}
 							placeholder={'Table name'}
 							value={step.output}
-							styles={columnDropdownStyles}
+							styles={dropdownStyles}
 							onChange={handleOutputChange}
 						/>
 					</LeftAlignedRow>

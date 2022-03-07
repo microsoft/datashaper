@@ -6,8 +6,12 @@ lib/
 coverage/
 public/
 .yarn/
-.pnp.js
-.pnp.cjs
+.pnp.*
 .cache/
 node_modules/
 venv/
+build.js
+yarn.lock
+.git*
+.*ignore
+.*rc

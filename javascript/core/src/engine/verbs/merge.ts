@@ -8,7 +8,8 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
 import { container } from '../../factories.js'
-import { columnType, MergeStrategy, TableStore } from '../../index.js'
+import type { TableStore } from '../../index.js'
+import { columnType, MergeStrategy } from '../../index.js'
 import type { DataType, MergeArgs, Step, TableContainer } from '../../types.js'
 
 /**

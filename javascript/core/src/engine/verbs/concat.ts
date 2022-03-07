@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableStore } from '../../index.js'
-import { SetOp, Step, TableContainer } from '../../types.js'
+import type { Step, TableContainer } from '../../types.js'
+import { SetOp } from '../../types.js'
 import { set } from '../util/index.js'
 
 /**

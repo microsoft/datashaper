@@ -5,7 +5,8 @@
 import { chart, plotArea } from '@thematic/d3'
 import { useThematic } from '@thematic/react'
 import { scaleLinear } from 'd3-scale'
-import { select, Selection } from 'd3-selection'
+import type { Selection } from 'd3-selection'
+import { select } from 'd3-selection'
 import { useLayoutEffect, useMemo, useState } from 'react'
 
 export type ScaleFunction = (d: any, i: number) => number

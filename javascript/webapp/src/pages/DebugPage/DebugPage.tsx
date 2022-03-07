@@ -3,14 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import {
+import type {
 	Step,
 	Verb,
 	Specification,
 	TableContainer,
 } from '@data-wrangling-components/core'
+import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
-	DetailsListFeatures,
 	StatsColumnType,
 	StepSelector,
 	StepComponent,
@@ -204,7 +204,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					<Buttons>
 						<PrimaryButton
 							onClick={handleRunClick}
-							styles={{ root: { width: 160 } }}
+							styles={{ root: { width: 180 } }}
 						>
 							Run all
 						</PrimaryButton>

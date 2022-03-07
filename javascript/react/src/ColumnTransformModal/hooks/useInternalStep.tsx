@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Step, factory } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
+import { factory } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useState, useEffect, useCallback } from 'react'
 import { useFormatedColumnArgWithCount } from '../../index.js'

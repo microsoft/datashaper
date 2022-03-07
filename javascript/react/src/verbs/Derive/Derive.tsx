@@ -56,10 +56,14 @@ export const Derive: React.FC<StepComponentProps> = memo(function Derive({
 					selectedKey={internal.args.column1}
 					onChange={handleLeftColumnChange}
 				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
 				<MathOperatorDropdown
 					selectedKey={internal.args.operator}
 					onChange={handleOpChange}
 				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
 				<TableColumnDropdown
 					table={tbl}
 					required
