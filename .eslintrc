@@ -5,9 +5,6 @@
 {
 	"extends": "@essex/eslint-config",
 	"rules": {
-		"@typescript-eslint/consistent-type-imports": ["error", {
-			"prefer": "type-imports"
-		}],
 		"@typescript-eslint/no-explicit-any": "off",
 		"no-redeclare": "off",
 		"@typescript-eslint/no-redeclare": ["warn"],
