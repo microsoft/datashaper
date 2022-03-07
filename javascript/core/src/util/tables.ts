@@ -182,8 +182,8 @@ function binning(
 		const bins = binRollup
 			.groupby(cur)
 			.count()
+			.orderby(cur)
 			.objects()
-			.sort((a, b) => a[cur] - b[cur])
 			.map(d => ({
 				min: d[cur],
 				count: d['count'],
@@ -192,11 +192,11 @@ function binning(
 		if (bins[0]!.min === null) {
 			bins[0]!.min = '(empty)'
 		}
+
 		// make sure we actually have 10
 		acc[`${cur}.bins`] = fillBins(bins, min, max, 10, distinct)
 		return acc
 	}, {} as Record<string, Bin[]>)
-
 	return counted
 }
 
@@ -249,6 +249,7 @@ function categories(
 			.groupby(cur)
 			.count()
 			.objects()
+			// sorting manually here so strings are alpha ignoring case
 			.sort((a, b) => `${a[cur]}`.localeCompare(`${b[cur]}`))
 			.map(d => ({ name: d[cur], count: d['count'] }))
 		acc[cur] = counted
