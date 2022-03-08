@@ -4,7 +4,7 @@
  */
 import { BinStrategy } from '../../index.js'
 import type { Step } from '../../types.js'
-import { FieldAggregateOperation, Verb } from '../../types.js'
+import { JoinStrategy, FieldAggregateOperation, Verb } from '../../types.js'
 
 /**
  * Factory function to create new verb configs
@@ -93,9 +93,15 @@ export function factory(verb: Verb, input: string, output: string): Step {
 					operation: FieldAggregateOperation.Any,
 				},
 			}
+		case Verb.Join:
+			return {
+				...base,
+				args: {
+					strategy: JoinStrategy.Inner,
+				},
+			}
 		case Verb.Fetch:
 		case Verb.Filter:
-		case Verb.Join:
 		case Verb.Orderby:
 		case Verb.Rename:
 		case Verb.Sample:
