@@ -84,6 +84,32 @@ describe('test for merge verb', () => {
 				expect(result.table.get('resultColumn', 4)).toBe('stool50')
 			})
 		})
+
+		test('string values with delimiter', () => {
+			const step: Step = {
+				verb: Verb.Merge,
+				input: 'table13',
+				output: 'output',
+				args: {
+					columns: ['name', 'description'],
+					strategy: MergeStrategy.Concat,
+					to: 'resultColumn',
+					delimiter: ',',
+				},
+			}
+
+			const store = new TestStore()
+
+			return merge(step, store).then(result => {
+				expect(result.table.numCols()).toBe(4)
+				expect(result.table.numRows()).toBe(5)
+				expect(result.table.get('resultColumn', 0)).toBe('A,XX')
+				expect(result.table.get('resultColumn', 1)).toBe('B,XT')
+				expect(result.table.get('resultColumn', 2)).toBe('C,QW')
+				expect(result.table.get('resultColumn', 3)).toBe('D,RE')
+				expect(result.table.get('resultColumn', 4)).toBe('E,FG')
+			})
+		})
 	})
 
 	describe('MergeStrategy.FirstOneWins', () => {
