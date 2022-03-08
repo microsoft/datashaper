@@ -86,7 +86,7 @@ export function stats(
 ): Record<string, ColumnStats> {
 	const selected = columns ? table.select(columns) : table
 	const reqStats = requiredStats(selected)
-	const optStats = optionalStats(selected)
+	const optStats = optionalStats(selected, reqStats)
 	const bins = binning(selected, reqStats, optStats)
 	const cats = categories(selected, reqStats)
 	const results = selected.columnNames().reduce((acc, cur) => {
@@ -138,13 +138,20 @@ function requiredStats(table: ColumnTable): Record<string, any> {
 	return table.rollup(args).objects()[0]!
 }
 
-function optionalStats(table: ColumnTable): Record<string, any> {
+function optionalStats(
+	table: ColumnTable,
+	reqStats: Record<string, any>,
+): Record<string, any> {
 	const args = table.columnNames().reduce((acc, cur) => {
-		acc[`${cur}.min`] = op.min(cur)
-		acc[`${cur}.max`] = op.max(cur)
-		acc[`${cur}.mean`] = op.mean(cur)
-		acc[`${cur}.median`] = op.median(cur)
-		acc[`${cur}.stdev`] = op.stdev(cur)
+		const mode = reqStats[`${cur}.mode`]
+		const type = determineType(mode)
+		if (type === DataType.Number || type === DataType.Date) {
+			acc[`${cur}.min`] = op.min(cur)
+			acc[`${cur}.max`] = op.max(cur)
+			acc[`${cur}.mean`] = op.mean(cur)
+			acc[`${cur}.median`] = op.median(cur)
+			acc[`${cur}.stdev`] = op.stdev(cur)
+		}
 		return acc
 	}, {} as Record<string, any>)
 	return table.rollup(args).objects()[0]!
@@ -171,7 +178,6 @@ function binning(
 	}, {} as Record<string, any>)
 
 	const binRollup = table.select(numeric).derive(binArgs)
-
 	// for each binned column, derive a sorted & counted subtable.
 	// note that only bins with at least one entry will have a row,
 	// so we could have less than 10 bins - hence the fill
@@ -192,7 +198,6 @@ function binning(
 		if (bins[0]!.min === null) {
 			bins[0]!.min = '(empty)'
 		}
-
 		// make sure we actually have 10
 		acc[`${cur}.bins`] = fillBins(bins, min, max, 10, distinct)
 		return acc

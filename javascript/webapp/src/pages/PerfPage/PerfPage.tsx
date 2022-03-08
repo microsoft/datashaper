@@ -43,17 +43,17 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 	useEffect(() => {
 		const f = async () => {
 			let root = await loadCSV('data/stocks.csv', {})
-			root = root.groupby(['Symbol', 'Month'])
-			let meta = introspect(root, true)
-			setGroupedTable(root)
-			setGroupedMetadata(meta)
+			const grouped = root.groupby(['Symbol', 'Month'])
+			const groupedMeta = introspect(root, true)
+			setGroupedTable(grouped)
+			setGroupedMetadata(groupedMeta)
 			root.ungroup()
 			// make sure we have a large enough number of rows to impact rendering perf
-			for (let i = 0; i < 8; i++) {
+			for (let i = 0; i < 10; i++) {
 				root = root.concat(root)
 			}
 			console.time('root meta')
-			meta = introspect(root, true)
+			const meta = introspect(root, true)
 			console.timeEnd('root meta')
 			setTable(root)
 			setMetadata(meta)
