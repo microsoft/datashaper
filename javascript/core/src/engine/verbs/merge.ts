@@ -24,7 +24,7 @@ export async function merge(
 	store: TableStore,
 ): Promise<TableContainer> {
 	const { input, output, args } = step
-	const { columns = [], strategy, to } = args as MergeArgs
+	const { columns = [], strategy, to, delimiter = '' } = args as MergeArgs
 
 	const inputTable = await store.table(input)
 
@@ -36,7 +36,9 @@ export async function merge(
 			case MergeStrategy.LastOneWins:
 				return lastOneWinsStrategy(isSameDataTypeFlag, d, columns)
 			case MergeStrategy.Concat:
-				return concatStrategy(d, columns)
+				return concatStrategy(d, columns, delimiter)
+			case MergeStrategy.Array:
+				return arrayStrategy(d, columns)
 			case MergeStrategy.FirstOneWins:
 			default:
 				return firstOneWinsStrategy(isSameDataTypeFlag, d, columns)
@@ -106,17 +108,25 @@ function lastOneWinsStrategy(
 	return isSameDataTypeFlag ? lastValidValue : '' + lastValidValue
 }
 
-function concatStrategy(singleRow: RowObject, columns: string[]) {
-	let concatValue = ''
+function arrayStrategy(singleRow: RowObject, columns: string[]) {
+	const concat = []
 
 	for (let i = 0; i < columns.length; i++) {
 		if (
 			singleRow[columns[i]!] !== undefined &&
 			singleRow[columns[i]!] !== null
 		) {
-			concatValue = concatValue + singleRow[columns[i]!]
+			concat.push(singleRow[columns[i]!])
 		}
 	}
 
-	return concatValue
+	return concat
+}
+
+function concatStrategy(
+	singleRow: RowObject,
+	columns: string[],
+	delimiter: string,
+) {
+	return arrayStrategy(singleRow, columns).join(delimiter)
 }

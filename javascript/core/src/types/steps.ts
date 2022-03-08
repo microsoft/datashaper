@@ -285,6 +285,11 @@ export interface SpreadArgs {
 
 export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	strategy: MergeStrategy
+	/**
+	 * This is only necessary if mergeStrategy.Concat is used.
+	 * If it is not supplied, the values are just mashed together.
+	 */
+	delimiter?: string
 }
 
 export interface OrderbyArgs {

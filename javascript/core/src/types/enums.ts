@@ -42,6 +42,7 @@ export enum MergeStrategy {
 	FirstOneWins = 'first one wins',
 	LastOneWins = 'last one wins',
 	Concat = 'concat',
+	Array = 'array',
 }
 
 export enum DataType {

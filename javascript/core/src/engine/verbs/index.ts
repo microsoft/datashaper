@@ -41,6 +41,7 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Derive:
 		case Verb.Impute:
 		case Verb.Fill:
+		case Verb.Merge:
 		case Verb.Rollup:
 		case Verb.Window:
 			return {
@@ -101,7 +102,6 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Ungroup:
 		case Verb.Unorder:
 		case Verb.Erase:
-		case Verb.Merge:
 		case Verb.Unfold:
 	}
 	return {
