@@ -55,8 +55,10 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 			onEditClicked,
 			onCreate,
 			onDismissTransformModal,
-			showTransformModal,
-			isTansformModalOpen,
+			onStartNewStep,
+			isTransformModalOpen,
+			addStepButtonId,
+			editorTarget,
 		} = useManageSteps(type, store, table, onSave)
 
 		return (
@@ -67,15 +69,17 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 					onEditClicked={onEditClicked}
 					steps={steps}
 					onDuplicateClicked={onDuplicateClicked}
-					showModal={showTransformModal}
+					onStartNewStep={onStartNewStep}
+					buttonId={addStepButtonId}
 				/>
 
 				<div>
-					{type === StepsType.Table && (
+					{type === StepsType.Table && isTransformModalOpen && (
 						<TableTransformModal
+							target={editorTarget}
 							step={step}
 							onTransformRequested={onCreate}
-							isOpen={isTansformModalOpen}
+							isOpen={isTransformModalOpen}
 							store={store}
 							onDismiss={onDismissTransformModal}
 							{...rest}
@@ -87,7 +91,7 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 							step={step}
 							table={table}
 							onTransformRequested={onCreate}
-							isOpen={isTansformModalOpen}
+							isOpen={isTransformModalOpen}
 							onDismiss={onDismissTransformModal}
 							{...rest}
 						/>

@@ -39,7 +39,11 @@ export const StepCard: React.FC<{
 			<CardContent>
 				<Description step={step} showInput showOutput />
 			</CardContent>
-			<DocumentCardActions styles={styles.actions} actions={stepActions} />
+			<DocumentCardActions
+				className={`step-card-${index}`}
+				styles={styles.actions}
+				actions={stepActions}
+			/>
 		</Card>
 	)
 })

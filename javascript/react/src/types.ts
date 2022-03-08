@@ -43,6 +43,7 @@ export interface TransformModalProps extends IModalProps {
 	 *  or as input for table transform
 	 */
 	nextInputTable?: string
+	target?: string
 }
 
 export interface TableTransformModalProps extends TransformModalProps {
