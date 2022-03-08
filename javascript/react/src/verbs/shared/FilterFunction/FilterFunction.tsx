@@ -12,6 +12,7 @@ import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable, useHandleDropdownChange } from '../../../common/index.js'
+import { InputExplainer } from '../../../common/styles.js'
 import {
 	ColumnOrValueComboBox,
 	NumericComparisonOperatorDropdown,
@@ -51,6 +52,7 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 			[internal, onChange],
 		)
 
+		// TODO: use the types util
 		const operatorDropdown = useMemo(() => {
 			const column = internal.args.column
 			if (column) {
@@ -58,10 +60,15 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 				if (first) {
 					if (typeof first === 'string') {
 						return (
-							<StringComparisonOperatorDropdown
-								selectedKey={internal.args.operator}
-								onChange={handleOpChange}
-							/>
+							<DropdownContainer>
+								<StringComparisonOperatorDropdown
+									selectedKey={internal.args.operator}
+									onChange={handleOpChange}
+								/>
+								<InputExplainer>
+									String comparisons not case-sensitive
+								</InputExplainer>
+							</DropdownContainer>
 						)
 					}
 				}
@@ -103,6 +110,11 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 )
 
 const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+`
+
+const DropdownContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 `
