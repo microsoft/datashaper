@@ -6,7 +6,8 @@ Available collapse strategies are:
 
 - first one wins: the first valid column value is used in the output
 - last one winss: the last valid column value is used in the output
-- concat: all valid column values are concatenated together
+- concat: all valid column values are concatenated together, and a delimiter can be specified
+- array: all valid column values are pushed into a cell array
 
 ## Examples
 
