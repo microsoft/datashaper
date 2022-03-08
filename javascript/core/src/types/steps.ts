@@ -7,6 +7,7 @@ import type {
 	BinStrategy,
 	FieldAggregateOperation,
 	FilterCompareType,
+	JoinStrategy,
 	MathOperator,
 	MergeStrategy,
 	NumericComparisonOperator,
@@ -230,7 +231,7 @@ export interface ImputeArgs extends InputColumnArgs {
 	value: Value
 }
 
-export interface JoinArgs {
+export interface JoinArgsBase {
 	/**
 	 * Name of the other table to join to the main input
 	 */
@@ -243,7 +244,11 @@ export interface JoinArgs {
 	on?: string[]
 }
 
-export interface LookupArgs extends JoinArgs, InputColumnListArgs {}
+export interface JoinArgs extends JoinArgsBase {
+	strategy?: JoinStrategy
+}
+
+export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {}
 
 export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 	/**

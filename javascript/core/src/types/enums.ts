@@ -148,3 +148,10 @@ export enum BinStrategy {
 	FixedCount = 'fixed count',
 	FixedWidth = 'fixed width',
 }
+
+export enum JoinStrategy {
+	Inner = 'inner',
+	Left = 'join_left',
+	Right = 'join_right',
+	Full = 'join_full',
+}
