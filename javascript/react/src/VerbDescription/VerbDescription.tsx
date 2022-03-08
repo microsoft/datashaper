@@ -96,5 +96,6 @@ const Value = styled.div`
 	max-width: 240px;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	color: ${({ theme }) => theme.application().accent().hex()};
+	font-weight: bold;
+	color: ${({ theme }) => theme.application().midContrast().hex()};
 `
