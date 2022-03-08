@@ -70,7 +70,7 @@ function useNumberMagnitude(
 			return 0
 		}
 		const range = (meta.stats?.max || 1) - (meta.stats?.min || 0)
-		const mag = (value - (meta.stats?.min || 0)) / range
+		const mag = range === 0 ? 0 : (value - (meta.stats?.min || 0)) / range
 		return mag
 	}, [type, value, meta])
 }
