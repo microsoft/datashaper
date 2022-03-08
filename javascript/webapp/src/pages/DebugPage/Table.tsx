@@ -2,10 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	ColumnConfigMap,
-	DetailsListFeatures,
-} from '@data-wrangling-components/react'
+import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
@@ -17,6 +14,13 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import type { SetterOrUpdater } from 'recoil'
 import styled from 'styled-components'
+
+export interface ColumnConfig {
+	width?: number
+	iconName?: string
+}
+
+export type ColumnConfigMap = Record<string, ColumnConfig>
 
 export interface TableProps {
 	name?: string

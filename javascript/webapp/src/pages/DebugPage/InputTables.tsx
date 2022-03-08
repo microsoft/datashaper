@@ -3,12 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@data-wrangling-components/core'
-import type {
-	ColumnConfigMap,
-	DetailsListFeatures,
-} from '@data-wrangling-components/react'
+import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import { memo } from 'react'
 import styled from 'styled-components'
+import type { ColumnConfigMap } from './Table'
 import { Table } from './Table'
 
 export interface InputTablesProps {

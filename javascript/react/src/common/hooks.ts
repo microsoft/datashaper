@@ -105,8 +105,8 @@ export function useColumnValueOptions(
 				.rollup({
 					[column]: op.array_agg(column),
 				})
-				.objects()[0]
-			return (result && result[column]) ?? []
+				.get(column, 0)
+			return result ?? []
 		}
 		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list

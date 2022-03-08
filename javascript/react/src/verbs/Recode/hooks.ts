@@ -24,8 +24,8 @@ export function useColumnValues(
 		const args = {
 			[column]: op.array_agg_distinct(column),
 		}
-		const objects = table.orderby(column).rollup(args).objects()
-		return objects && objects[0] ? (objects[0][column] as Value[]) : []
+		const rollup = table.orderby(column).rollup(args)
+		return rollup.get(column, 0)
 	}, [table, internal])
 }
 

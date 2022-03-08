@@ -4,7 +4,6 @@
  */
 export * from './ArqueroDetailsList/index.js'
 export * from './ArqueroTableHeader/index.js'
-export * from './ArqueroTable/index.js'
 export * from './ColumnTransformModal/index.js'
 export * from './TableTransformModal/index.js'
 export * from './verbs/index.js'

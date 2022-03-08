@@ -69,6 +69,9 @@ function getStats(
 		max: op.max(column),
 		distinct: op.distinct(column),
 	})
-	const stats = rollup.objects()[0]!
-	return [min || stats['min'], max || stats['max'], stats['distinct']]
+	return [
+		min || rollup.get('min', 0),
+		max || rollup.get('max', 0),
+		rollup.get('distinct', 0),
+	]
 }
