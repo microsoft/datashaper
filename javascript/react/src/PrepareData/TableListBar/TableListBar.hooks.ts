@@ -21,7 +21,7 @@ export function useTableSelection(
 	inputs: TableContainer[],
 	derived: TableContainer[],
 	selected?: string,
-	onSelect?: (key: string) => void,
+	onSelect?: (id: string) => void,
 ): {
 	text?: string
 	items: IContextualMenuItem[]
@@ -77,7 +77,7 @@ export function useTableSelection(
  */
 export function useOutputPreview(
 	derived: TableContainer[],
-	onSelect?: (name: string) => void,
+	onSelect?: (id: string) => void,
 ): {
 	onClick:
 		| React.MouseEventHandler<

@@ -16,7 +16,7 @@ export const StepCard: React.FC<{
 	onEdit?: (step: Step, index: number) => void
 	onDelete?: (index: number) => void
 	onDuplicate?: (step: Step) => void
-	onSelect?: (name: string) => void
+	onSelect?: (id: string) => void
 	tables?: TableContainer[]
 }> = memo(function StepCard({
 	step,

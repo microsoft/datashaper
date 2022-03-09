@@ -25,7 +25,7 @@ export function useBusinessLogic(
 	steps?: Step[],
 ): {
 	selectedTable: ColumnTable | undefined
-	setSelectedTableKey: (key: string) => void
+	setSelectedTableId: (key: string) => void
 	onDeleteStep: (index: number) => void
 	onSaveStep: (step: Step, index?: number) => void
 	store: TableStore
@@ -34,7 +34,7 @@ export function useBusinessLogic(
 	selectedTableName?: string
 	derived: TableContainer[]
 } {
-	const [selectedTableKey, setSelectedTableKey] = useState<string>()
+	const [selectedTableId, setSelectedTableId] = useState<string>()
 	const [storedTables, setStoredTables] = useState<Map<string, TableContainer>>(
 		new Map<string, TableContainer>(),
 	)
@@ -43,7 +43,7 @@ export function useBusinessLogic(
 	const runPipeline = useRunPipeline(
 		pipeline,
 		setStoredTables,
-		setSelectedTableKey,
+		setSelectedTableId,
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
 
@@ -57,10 +57,8 @@ export function useBusinessLogic(
 	}, [steps])
 
 	const selectedTableContainer = useMemo((): TableContainer | undefined => {
-		return Array.from(storedTables.values()).find(
-			x => x.id === selectedTableKey,
-		)
-	}, [selectedTableKey, storedTables])
+		return Array.from(storedTables.values()).find(x => x.id === selectedTableId)
+	}, [selectedTableId, storedTables])
 
 	const selectedTableName = useMemo((): string => {
 		return selectedTableContainer?.name || ''
@@ -118,7 +116,7 @@ export function useBusinessLogic(
 
 	return {
 		selectedTable,
-		setSelectedTableKey,
+		setSelectedTableId,
 		onDeleteStep,
 		onSaveStep,
 		store,

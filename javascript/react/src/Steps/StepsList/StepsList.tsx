@@ -15,7 +15,7 @@ export const StepsList: React.FC<{
 	onDeleteClicked?: (index: number) => void
 	onEditClicked?: (step: Step, index: number) => void
 	onDuplicateClicked?: (step: Step) => void
-	onSelect?: (name: string) => void
+	onSelect?: (id: string) => void
 	onStartNewStep?: () => void
 	buttonId?: string
 }> = memo(function StepsList({

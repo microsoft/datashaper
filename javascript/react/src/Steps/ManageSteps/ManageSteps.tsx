@@ -25,7 +25,7 @@ interface ManageStepsProps
 	onSave: (step: Step<unknown>, index?: number | undefined) => void
 	onDelete?: ((args: any) => void) | undefined
 	type?: StepsType
-	onSelect?: (key: string) => void
+	onSelect?: (id: string) => void
 	steps?: Step[]
 }
 
