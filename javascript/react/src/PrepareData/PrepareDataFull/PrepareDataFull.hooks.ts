@@ -25,7 +25,7 @@ export function useBusinessLogic(
 	steps?: Step[],
 ): {
 	selectedTable: ColumnTable | undefined
-	setSelectedTableId: (key: string) => void
+	setSelectedTableId: (id: string) => void
 	onDeleteStep: (index: number) => void
 	onSaveStep: (step: Step, index?: number) => void
 	store: TableStore

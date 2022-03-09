@@ -90,10 +90,10 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 }
 
 /**
- * Creates a list of dropdown options from the tables in a store
+ * Creates a list of the tables in a store
  * TODO: for any given step, we should only show the tables created *prior* to this step,
  * potentially via an optional filter callback on store.list.
- * As it is, whenever the store is updated all the table dropdowns get the results.
+ * As it is, whenever the store is updated all the references get the results.
  * @param store
  * @returns
  */
