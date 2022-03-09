@@ -51,7 +51,9 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 )
 
 const Container = styled.div`
-	width: 292px;
+	width: 100%;
+	display: flex;
+	gap: 36px;
 `
 
 const DescriptionContainer = styled.div`
