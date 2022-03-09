@@ -62,27 +62,10 @@ export function useSimpleOptions(list: string[]): IDropdownOption[] {
  * @returns
  */
 export function useTableOptions(store?: TableStore): IDropdownOption[] {
-	// we won't actually get an updated store reference, so we'll track
-	// whether updates are needed using a change listener and flag
-	const [dirty, setDirty] = useState<boolean>(true)
-	const [list, setList] = useState<TableContainer<unknown>[] | undefined>([])
-	useEffect(() => {
-		store?.addChangeListener(() => setDirty(true))
-	}, [store, setDirty])
-
-	useEffect(() => {
-		const f = async () => {
-			const list = await store?.toArray()
-			setList(list)
-		}
-		if (dirty) {
-			setDirty(false)
-			f()
-		}
-	}, [store, dirty, setDirty, setList])
+	const tables = useTables(store)
 
 	return (
-		list?.map(tab => ({
+		tables?.map(tab => ({
 			key: tab?.id,
 			text: tab?.name || tab?.id,
 		})) || []
