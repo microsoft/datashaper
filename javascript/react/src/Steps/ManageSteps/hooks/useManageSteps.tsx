@@ -34,7 +34,7 @@ export function useManageSteps(
 } {
 	const [step, setStep] = useState<Step>()
 	const [stepIndex, setStepIndex] = useState<number>()
-	const tables = useTables()
+	const tables = useTables(store)
 
 	const [
 		isTransformModalOpen,
