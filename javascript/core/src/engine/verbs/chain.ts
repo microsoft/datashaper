@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
+import { uniqueId } from 'lodash-es'
 import type { StepFunction, TableStore } from '../../index.js'
 import type { ChainArgs, Step, TableContainer } from '../../types.js'
 import { aggregate } from './aggregate.js'
@@ -81,7 +82,8 @@ async function exec(step: Step, store: TableStore): Promise<TableContainer> {
 	const substore = nofork ? store : await store.clone()
 
 	let output: TableContainer = {
-		id: step.output,
+		id: uniqueId(),
+		name: step.output,
 		table: table({}),
 	}
 
@@ -102,7 +104,6 @@ async function exec(step: Step, store: TableStore): Promise<TableContainer> {
 	// parent store only gets the final output of the chain
 	const final = {
 		...output,
-		id: step.output,
 	}
 	store.set(final)
 	// return the final table

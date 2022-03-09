@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
+import type { Step, TableContainer } from '@data-wrangling-components/core'
 import { DocumentCard, DocumentCardActions } from '@fluentui/react'
+import { cloneDeep } from 'lodash-es'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { selectStepDescription } from '../../selectStepDescription.js'
@@ -16,6 +17,7 @@ export const StepCard: React.FC<{
 	onDelete?: (index: number) => void
 	onDuplicate?: (step: Step) => void
 	onSelect?: (name: string) => void
+	tables?: TableContainer[]
 }> = memo(function StepCard({
 	step,
 	index,
@@ -23,6 +25,7 @@ export const StepCard: React.FC<{
 	onDelete,
 	onDuplicate,
 	onSelect,
+	tables,
 }) {
 	const Description = useMemo(() => selectStepDescription(step), [step])
 	const stepActions = useStepActions(
@@ -34,10 +37,17 @@ export const StepCard: React.FC<{
 		onSelect,
 	)
 
+	const formattedStep = useMemo((): Step<unknown> => {
+		const _step = cloneDeep(step)
+		_step.input = tables?.find(x => x.id === step.input)?.name || ''
+		_step.output = tables?.find(x => x.id === step.output)?.name || ''
+		return _step
+	}, [step, tables])
+
 	return (
 		<Card styles={styles.card}>
 			<CardContent>
-				<Description step={step} showInput showOutput />
+				<Description step={formattedStep} showInput showOutput />
 			</CardContent>
 			<DocumentCardActions styles={styles.actions} actions={stepActions} />
 		</Card>

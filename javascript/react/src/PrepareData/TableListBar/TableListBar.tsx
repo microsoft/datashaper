@@ -13,7 +13,7 @@ import { ListContainer, viewButtonStyles } from './TableListBar.styles.js'
 export const TableListBar: React.FC<{
 	inputs: TableContainer[]
 	derived: TableContainer[]
-	onSelect?: (name: string) => void
+	onSelect?: (key: string) => void
 	selected?: string
 }> = memo(function TableListBar({ inputs, derived, onSelect, selected }) {
 	const { onClick } = useOutputPreview(derived, onSelect)

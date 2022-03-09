@@ -20,7 +20,11 @@ export function useAddNewTables(
 			tables.forEach(table => {
 				const isStored = existing.includes(table.id)
 				if (!isStored) {
-					store.set({ id: table.id, table: table?.table as ColumnTable })
+					store.set({
+						id: table.id,
+						name: table.name ?? table.id,
+						table: table?.table as ColumnTable,
+					})
 				}
 			})
 

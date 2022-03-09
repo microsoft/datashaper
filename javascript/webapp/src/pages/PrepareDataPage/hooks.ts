@@ -22,9 +22,10 @@ export function useBusinessLogic(): {
 			setFileCollection(collection)
 			const tablesTransformed = collection
 				.list(FileType.table)
-				.map(async table => {
+				.map(async (table, index) => {
 					return {
-						id: table.name,
+						id: (index + 1).toString(),
+						name: table.name,
 						table: await table.toTable(),
 					}
 				})

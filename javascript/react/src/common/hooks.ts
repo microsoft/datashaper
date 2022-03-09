@@ -65,17 +65,59 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 	// we won't actually get an updated store reference, so we'll track
 	// whether updates are needed using a change listener and flag
 	const [dirty, setDirty] = useState<boolean>(true)
-	const [list, setList] = useState<string[]>([])
+	const [list, setList] = useState<TableContainer<unknown>[] | undefined>([])
 	useEffect(() => {
 		store?.addChangeListener(() => setDirty(true))
 	}, [store, setDirty])
+
 	useEffect(() => {
+		const f = async () => {
+			const list = await store?.toArray()
+			setList(list)
+		}
 		if (dirty) {
 			setDirty(false)
-			setList(store?.list().sort() || [])
+			f()
 		}
 	}, [store, dirty, setDirty, setList])
-	return useSimpleOptions(list)
+
+	return (
+		list?.map(tab => ({
+			key: tab?.id,
+			text: tab?.name || tab?.id,
+		})) || []
+	)
+}
+
+/**
+ * Creates a list of dropdown options from the tables in a store
+ * TODO: for any given step, we should only show the tables created *prior* to this step,
+ * potentially via an optional filter callback on store.list.
+ * As it is, whenever the store is updated all the table dropdowns get the results.
+ * @param store
+ * @returns
+ */
+export function useTables(store?: TableStore): TableContainer[] {
+	// we won't actually get an updated store reference, so we'll track
+	// whether updates are needed using a change listener and flag
+	const [dirty, setDirty] = useState<boolean>(true)
+	const [list, setList] = useState<TableContainer<unknown>[] | undefined>([])
+	useEffect(() => {
+		store?.addChangeListener(() => setDirty(true))
+	}, [store, setDirty])
+
+	useEffect(() => {
+		const f = async () => {
+			const list = await store?.toArray()
+			setList(list)
+		}
+		if (dirty) {
+			setDirty(false)
+			f()
+		}
+	}, [store, dirty, setDirty, setList])
+
+	return list || []
 }
 
 /**

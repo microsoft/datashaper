@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
+import type { Step, TableContainer } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -11,12 +11,14 @@ import { StepCard } from '../../index.js'
 
 export const StepsList: React.FC<{
 	steps?: Step[]
+	tables?: TableContainer[]
 	onDeleteClicked?: (index: number) => void
 	onEditClicked?: (step: Step, index: number) => void
 	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
 	showModal?: () => void
 }> = memo(function StepsList({
+	tables,
 	steps,
 	onDeleteClicked,
 	onEditClicked,
@@ -36,6 +38,7 @@ export const StepsList: React.FC<{
 						key={index}
 						step={_step}
 						index={index}
+						tables={tables}
 					/>
 				)
 			})}

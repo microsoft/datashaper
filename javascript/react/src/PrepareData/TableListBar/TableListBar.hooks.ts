@@ -21,7 +21,7 @@ export function useTableSelection(
 	inputs: TableContainer[],
 	derived: TableContainer[],
 	selected?: string,
-	onSelect?: (name: string) => void,
+	onSelect?: (key: string) => void,
 ): {
 	text?: string
 	items: IContextualMenuItem[]

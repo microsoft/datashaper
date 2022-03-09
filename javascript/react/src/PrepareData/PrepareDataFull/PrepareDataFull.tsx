@@ -25,7 +25,7 @@ export const PrepareDataFull: React.FC<{
 	const {
 		selectedTable,
 		selectedTableName,
-		setSelectedTableName,
+		setSelectedTableKey,
 		onDeleteStep,
 		onSaveStep,
 		store,
@@ -41,7 +41,7 @@ export const PrepareDataFull: React.FC<{
 					inputs={tables}
 					derived={derived}
 					selected={selectedTableName}
-					onSelect={setSelectedTableName}
+					onSelect={setSelectedTableKey}
 				/>
 			</InputContainer>
 
@@ -52,7 +52,7 @@ export const PrepareDataFull: React.FC<{
 						nextInputTable={lastTableName}
 						onDelete={onDeleteStep}
 						onSave={onSaveStep}
-						onSelect={setSelectedTableName}
+						onSelect={setSelectedTableKey}
 						store={store}
 						steps={steps}
 					/>

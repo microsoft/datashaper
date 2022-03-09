@@ -25,7 +25,7 @@ interface ManageStepsProps
 	onSave: (step: Step<unknown>, index?: number | undefined) => void
 	onDelete?: ((args: any) => void) | undefined
 	type?: StepsType
-	onSelect?: (name: string) => void
+	onSelect?: (key: string) => void
 	steps?: Step[]
 }
 
@@ -57,6 +57,7 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 			onDismissTransformModal,
 			showTransformModal,
 			isTansformModalOpen,
+			tables,
 		} = useManageSteps(type, store, table, onSave)
 
 		return (
@@ -68,6 +69,7 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 					steps={steps}
 					onDuplicateClicked={onDuplicateClicked}
 					showModal={showTransformModal}
+					tables={tables}
 				/>
 
 				<div>

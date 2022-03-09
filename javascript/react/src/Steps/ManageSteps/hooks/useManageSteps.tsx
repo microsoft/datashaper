@@ -3,11 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step, TableStore } from '@data-wrangling-components/core'
+import type {
+	Step,
+	TableContainer,
+	TableStore,
+} from '@data-wrangling-components/core'
 import { useBoolean } from '@fluentui/react-hooks'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useState, useCallback } from 'react'
-import type { StepsType } from '../../../index.js'
+import { useState, useCallback, useMemo, useEffect } from 'react'
+import type { StepsType} from '../../../index.js';
+import { useTables } from '../../../index.js'
 import { useOnDuplicateStep, useOnEditStep } from './index.js'
 
 export function useManageSteps(
@@ -23,9 +28,12 @@ export function useManageSteps(
 	onCreate: (step: Step, index?: number) => void
 	showTransformModal: () => void
 	isTansformModalOpen: boolean
+	tables: TableContainer[]
 } {
 	const [step, setStep] = useState<Step>()
 	const [stepIndex, setStepIndex] = useState<number>()
+	const tables = useTables(store)
+
 	const [
 		isTansformModalOpen,
 		{ setTrue: showTransformModal, setFalse: hideTransformModal },
@@ -56,5 +64,6 @@ export function useManageSteps(
 		onCreate,
 		isTansformModalOpen,
 		showTransformModal,
+		tables,
 	}
 }
