@@ -2,12 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import { memo, useMemo, useCallback } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import {
-	FieldAggregateOperationDropdown,
 	ReadOnlyTextField,
 	TableColumnDropdown,
 	TableDropdown,
@@ -127,7 +128,9 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 					/>
 				</LeftAlignedRow>
 				<LeftAlignedRow>
-					<FieldAggregateOperationDropdown
+					<EnumDropdown
+						required
+						enumeration={FieldAggregateOperation}
 						label={'Aggregate function'}
 						selectedKey={aggregate.args.operation}
 						onChange={handleAggregateChange}

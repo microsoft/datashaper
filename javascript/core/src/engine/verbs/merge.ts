@@ -37,7 +37,7 @@ export async function merge(
 				return lastOneWinsStrategy(isSameDataTypeFlag, d, columns)
 			case MergeStrategy.Concat:
 				return concatStrategy(d, columns, delimiter)
-			case MergeStrategy.Array:
+			case MergeStrategy.CreateArray:
 				return arrayStrategy(d, columns)
 			case MergeStrategy.FirstOneWins:
 			default:

@@ -3,10 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RollupStep } from '@data-wrangling-components/core'
+import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
-import { FieldAggregateOperationDropdown } from '../../controls/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import type { StepComponentProps } from '../../types.js'
 /**
  * Just the column/op inputs for an rollup.
@@ -27,7 +28,10 @@ export const Rollup: React.FC<StepComponentProps> = memo(function Rollup({
 	return (
 		<Container>
 			<LeftAlignedRow>
-				<FieldAggregateOperationDropdown
+				<EnumDropdown
+					required
+					enumeration={FieldAggregateOperation}
+					label={'Function'}
 					selectedKey={internal.args.operation}
 					onChange={handleOpChange}
 				/>

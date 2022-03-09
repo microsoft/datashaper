@@ -13,11 +13,8 @@ import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { useLoadTable, useHandleDropdownChange } from '../../../common/index.js'
 import { InputExplainer } from '../../../common/styles.js'
-import {
-	ColumnOrValueComboBox,
-	NumericComparisonOperatorDropdown,
-	StringComparisonOperatorDropdown,
-} from '../../../controls/index.js'
+import { EnumDropdown } from '../../../controls/EnumDropdown.js'
+import { ColumnOrValueComboBox } from '../../../controls/index.js'
 import { LeftAlignedRow } from '../../../index.js'
 import type { StepComponentProps } from '../../../types.js'
 
@@ -61,7 +58,10 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 					if (typeof first === 'string') {
 						return (
 							<DropdownContainer>
-								<StringComparisonOperatorDropdown
+								<EnumDropdown
+									required
+									label={'Function'}
+									enumeration={StringComparisonOperator}
 									selectedKey={internal.args.operator}
 									onChange={handleOpChange}
 								/>
@@ -74,7 +74,10 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 				}
 			}
 			return (
-				<NumericComparisonOperatorDropdown
+				<EnumDropdown
+					required
+					enumeration={NumericComparisonOperator}
+					label={'Function'}
 					selectedKey={internal.args.operator}
 					onChange={handleOpChange}
 				/>
@@ -84,10 +87,10 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 		const isEmptyCheck = useMemo(() => {
 			const { operator } = internal.args
 			return (
-				operator === NumericComparisonOperator.Empty ||
-				operator === NumericComparisonOperator.NotEmpty ||
-				operator === StringComparisonOperator.Empty ||
-				operator === StringComparisonOperator.NotEmpty
+				operator === NumericComparisonOperator.IsEmpty ||
+				operator === NumericComparisonOperator.IsNotEmpty ||
+				operator === StringComparisonOperator.IsEmpty ||
+				operator === StringComparisonOperator.IsNotEmpty
 			)
 		}, [internal])
 		return (

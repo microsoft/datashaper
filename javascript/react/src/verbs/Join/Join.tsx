@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { JoinStep } from '@data-wrangling-components/core'
+import { JoinStrategy } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { useHandleDropdownChange } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
-import { JoinStrategyDropdown } from '../../controls/dropdowns/JoinStrategyDropdown.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 import { JoinInputs } from '../shared/index.js'
@@ -33,8 +34,10 @@ export const Join: React.FC<StepComponentProps> = memo(function Join({
 		<Container>
 			<JoinInputs step={step} store={store} table={table} onChange={onChange} />
 			<LeftAlignedColumn>
-				<JoinStrategyDropdown
+				<EnumDropdown
 					required
+					label={'Join strategy'}
+					enumeration={JoinStrategy}
 					selectedKey={internal.args.strategy}
 					styles={dropdownStyles}
 					onChange={handleJoinStrategyChange}

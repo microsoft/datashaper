@@ -26,8 +26,12 @@ export async function join(
 	])
 
 	const options: JoinOptions = {
-		left: strategy === JoinStrategy.Left || strategy === JoinStrategy.Full,
-		right: strategy === JoinStrategy.Right || strategy === JoinStrategy.Full,
+		left:
+			strategy === JoinStrategy.LeftOuter ||
+			strategy === JoinStrategy.FullOuter,
+		right:
+			strategy === JoinStrategy.RightOuter ||
+			strategy === JoinStrategy.FullOuter,
 	}
 
 	return container(output, inputTable.join(otherTable, on, undefined, options))

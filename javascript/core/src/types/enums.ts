@@ -42,7 +42,7 @@ export enum MergeStrategy {
 	FirstOneWins = 'first one wins',
 	LastOneWins = 'last one wins',
 	Concat = 'concat',
-	Array = 'array',
+	CreateArray = 'array',
 }
 
 export enum DataType {
@@ -65,14 +65,14 @@ export enum MathOperator {
 }
 
 export enum NumericComparisonOperator {
-	Eq = '=',
-	NotEq = '!=',
-	Lt = '<',
-	Lte = '<=',
-	Gt = '>',
-	Gte = '>=',
-	NotEmpty = 'is not empty',
-	Empty = 'is empty',
+	Equals = '=',
+	NotEqual = '!=',
+	LessThan = '<',
+	LessThanOrEqual = '<=',
+	GreaterThan = '>',
+	GreaterThanOrEqual = '>=',
+	IsEmpty = 'is empty',
+	IsNotEmpty = 'is not empty',
 }
 
 // TODO: allow regex 'match'?
@@ -82,8 +82,8 @@ export enum StringComparisonOperator {
 	Contains = 'contains',
 	StartsWith = 'starts with',
 	EndsWith = 'ends with',
-	NotEmpty = 'is not empty',
-	Empty = 'is empty',
+	IsEmpty = 'is empty',
+	IsNotEmpty = 'is not empty',
 }
 
 export enum SetOp {
@@ -121,11 +121,11 @@ export enum FieldAggregateOperation {
 	Mean = 'mean',
 	Mode = 'mode',
 	Median = 'median',
-	StDev = 'stdev',
-	StDevPopulation = 'stdevp',
+	StandardDeviation = 'stdev',
+	StandardDeviationPopulation = 'stdevp',
 	Variance = 'variance',
-	ArraryAgg = 'array_agg',
-	ArrayAggDistinct = 'array_agg_distinct',
+	CreateArray = 'array_agg',
+	CreateArrayDistinct = 'array_agg_distinct',
 }
 
 /**
@@ -151,7 +151,7 @@ export enum BinStrategy {
 
 export enum JoinStrategy {
 	Inner = 'inner',
-	Left = 'join_left',
-	Right = 'join_right',
-	Full = 'join_full',
+	LeftOuter = 'join_left',
+	RightOuter = 'join_right',
+	FullOuter = 'join_full',
 }

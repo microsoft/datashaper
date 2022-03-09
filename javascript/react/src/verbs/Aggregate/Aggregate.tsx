@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { AggregateStep } from '@data-wrangling-components/core'
+import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import {
@@ -10,10 +11,8 @@ import {
 	LeftAlignedRow,
 	useHandleDropdownChange,
 } from '../../common/index.js'
-import {
-	FieldAggregateOperationDropdown,
-	TableColumnDropdown,
-} from '../../controls/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
+import { TableColumnDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -55,7 +54,10 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 				/>
 			</LeftAlignedRow>
 			<LeftAlignedRow>
-				<FieldAggregateOperationDropdown
+				<EnumDropdown
+					required
+					enumeration={FieldAggregateOperation}
+					label={'Function'}
 					selectedKey={internal.args.operation}
 					onChange={handleOpChange}
 				/>

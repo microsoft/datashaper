@@ -9,7 +9,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { TableColumnDropdown } from './dropdowns/TableColumnDropdown.js'
+import { TableColumnDropdown } from './TableColumnDropdown.js'
 
 export interface SortInstructionProps {
 	table?: ColumnTable

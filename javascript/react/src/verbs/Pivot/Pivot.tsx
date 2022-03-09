@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { PivotStep } from '@data-wrangling-components/core'
+import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import {
@@ -10,10 +11,8 @@ import {
 	LeftAlignedRow,
 	useHandleDropdownChange,
 } from '../../common'
-import {
-	FieldAggregateOperationDropdown,
-	TableColumnDropdown,
-} from '../../controls/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
+import { TableColumnDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types'
 
 /**
@@ -70,7 +69,10 @@ export const Pivot: React.FC<StepComponentProps> = memo(function Pivot({
 				/>
 			</LeftAlignedRow>
 			<LeftAlignedRow>
-				<FieldAggregateOperationDropdown
+				<EnumDropdown
+					required
+					enumeration={FieldAggregateOperation}
+					label={'Function'}
 					selectedKey={internal.args.operation}
 					onChange={handleOpChange}
 				/>
