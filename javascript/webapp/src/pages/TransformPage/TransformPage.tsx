@@ -22,7 +22,9 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 	const [table, setTable] = useState<ColumnTable | undefined>()
 	useEffect(() => {
 		const f = async () => {
-			const root = await loadCSV('data/stocks.csv', {})
+			const root = await loadCSV('data/stocks.csv', {
+				autoMax: 1000000,
+			})
 			setTable(root)
 		}
 		f()
