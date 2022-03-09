@@ -126,7 +126,7 @@ export function getTo(step: ChainStep): string {
 }
 
 export function updateTo(step: ChainStep, to: string): ChainStep {
-	const update = merge({}, step) as ChainStep
+	const update = merge({}, step)
 	const finalBinarize = getFinalBinarizeStep(update)
 	const lookup = getLookupStep(update)
 	finalBinarize.args.to = to

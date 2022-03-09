@@ -6,11 +6,12 @@
 import type { Entry } from '@zip.js/zip.js'
 import {
 	BlobReader,
-	ZipReader,
 	BlobWriter,
-	ZipWriter,
 	Data64URIWriter,
+	ZipReader,
+	ZipWriter,
 } from '@zip.js/zip.js'
+
 import { FileWithPath } from '../common/index.js'
 
 export async function getFilesFromZip(zipFile: Blob): Promise<FileWithPath[]> {

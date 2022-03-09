@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { desc } from 'arquero'
+
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import type { OrderbyArgs, Step, TableContainer } from '../../types.js'

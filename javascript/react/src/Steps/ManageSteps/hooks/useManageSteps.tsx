@@ -6,7 +6,8 @@
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { useBoolean } from '@fluentui/react-hooks'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useState, useCallback, useMemo, useEffect } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+
 import type { StepsType } from '../../../index.js'
 import { useOnDuplicateStep, useOnEditStep } from './index.js'
 

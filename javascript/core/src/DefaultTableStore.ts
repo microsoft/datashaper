@@ -4,12 +4,13 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
+
 import type {
-	TableStore,
-	ResolverFunction,
-	TableContainer,
 	ChangeListenerFunction,
 	ListenerFunction,
+	ResolverFunction,
+	TableContainer,
+	TableStore,
 } from './types.js'
 
 interface LazyTableStorage {
@@ -149,7 +150,7 @@ export class DefaultTableStore implements TableStore {
 		const ids = this.list()
 		for (let i = 0; i < ids.length; i++) {
 			console.log(`--- ${ids[i]} ---`)
-			const container = await this.get(ids[i] as string)
+			const container = await this.get(ids[i])
 			container.table?.print()
 		}
 	}

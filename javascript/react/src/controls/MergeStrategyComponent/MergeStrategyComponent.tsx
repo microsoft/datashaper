@@ -4,9 +4,10 @@
  */
 import type { MergeStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { useHandleDropdownChange } from '../../common'
-import type { StepComponentProps } from '../../types'
-import { MergeStrategyDropdown } from '../dropdowns/MergeStrategyDropdown'
+
+import { useHandleDropdownChange } from '../../common/index.js'
+import type { StepComponentProps } from '../../types.js'
+import { MergeStrategyDropdown } from '../dropdowns/MergeStrategyDropdown.js'
 
 export const MergeStrategyComponent: React.FC<StepComponentProps> = memo(
 	function StrategyComponent({ step, onChange }) {

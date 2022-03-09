@@ -26,56 +26,56 @@ beforeEach(() => {
 })
 
 describe('BaseFile.name', () => {
-	it('should get the name of the file', async () => {
+	it('should get the name of the file', () => {
 		expect(jsonFile.name).toBe('file.json')
 		expect(csvFile.name).toBe('file.csv')
 	})
 })
 
 describe('BaseFile.isJson', () => {
-	it('should return true', async () => {
+	it('should return true', () => {
 		expect(jsonFile.isJson()).toBeTruthy()
 	})
-	it('should return false', async () => {
+	it('should return false', () => {
 		expect(csvFile.isJson()).toBeFalsy()
 	})
 })
 
 describe('BaseFile.isDsv', () => {
-	it('should return true', async () => {
+	it('should return true', () => {
 		expect(csvFile.isDsv()).toBeTruthy()
 	})
-	it('should return false', async () => {
+	it('should return false', () => {
 		expect(jsonFile.isDsv()).toBeFalsy()
 	})
 })
 
 describe('BaseFile.isTable', () => {
-	it('should return true', async () => {
+	it('should return true', () => {
 		expect(csvFile.isTable()).toBeTruthy()
 	})
-	it('should return false', async () => {
+	it('should return false', () => {
 		expect(jsonFile.isTable()).toBeFalsy()
 	})
 })
 
 describe('BaseFile.isSupported', () => {
-	it('should return true', async () => {
+	it('should return true', () => {
 		expect(csvFile.isSupported()).toBeTruthy()
 		expect(jsonFile.isSupported()).toBeTruthy()
 	})
-	it('should return false', async () => {
+	it('should return false', () => {
 		xlsxFile = new BaseFile(xlsx)
 		expect(xlsxFile.isSupported()).toBeFalsy()
 	})
 })
 
 describe('BaseFile.isReadable', () => {
-	it('should return true', async () => {
+	it('should return true', () => {
 		expect(csvFile.isReadable()).toBeTruthy()
 		expect(jsonFile.isReadable()).toBeTruthy()
 	})
-	it('should return false', async () => {
+	it('should return false', () => {
 		expect(xlsxFile.isReadable()).toBeFalsy()
 	})
 })
@@ -130,7 +130,7 @@ describe('BaseFile.toDataURL', () => {
 })
 
 describe('BaseFile.rename', () => {
-	it('should rename the file', async () => {
+	it('should rename the file', () => {
 		const name = 'newName.xlsx'
 		xlsxFile = new BaseFile(xlsx)
 		expect(xlsxFile.name).toBe('file.xlsx')

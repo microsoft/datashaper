@@ -6,10 +6,11 @@ import type { Verb } from '@data-wrangling-components/core'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
+
 import { ColumnarMenu } from '../../controls/ColumnarMenu/ColumnarMenu.js'
 import { ColumnarMenuList } from '../../controls/ColumnarMenu/ColumnarMenuList.js'
 import { ContextualMenuItemSearchBox } from '../../controls/ContextualMenuItemSearchBox/ContextualMenuItemSearchBox.js'
-import { useSelectedOption, useSearchableItems } from './StepSelector.hooks.js'
+import { useSearchableItems, useSelectedOption } from './StepSelector.hooks.js'
 
 export interface StepSelectorProps {
 	onCreate?: (verb: Verb) => void

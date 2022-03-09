@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '../../types'
-import { Verb } from '../../types'
-import { erase } from '../verbs/erase'
-import { TestStore } from './TestStore'
+import type { Step } from '../../types.js'
+import { Verb } from '../../types.js'
+import { erase } from '../verbs/erase.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for erase verb', () => {
 	test('erase numeric value', () => {

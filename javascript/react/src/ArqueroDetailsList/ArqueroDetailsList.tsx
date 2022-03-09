@@ -3,16 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { IColumn, IDetailsListStyles } from '@fluentui/react'
+import type { IDetailsListStyles } from '@fluentui/react'
 import {
+	ConstrainMode,
 	DetailsList,
 	DetailsListLayoutMode,
 	SelectionMode,
-	ConstrainMode,
 } from '@fluentui/react'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import { memo, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+
 import { groupBuilder } from '../common/index.js'
 import {
 	useColumns,
@@ -24,8 +25,8 @@ import {
 	useSortedTable,
 	useSortHandling,
 	useStripedRowsRenderer,
-	useTableMetadata,
 	useSubsetTable,
+	useTableMetadata,
 } from './hooks/index.js'
 import type { ArqueroDetailsListProps, DetailsListFeatures } from './types.js'
 
@@ -184,7 +185,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					groupProps={{
 						onRenderHeader: renderGroupHeader,
 					}}
-					columns={displayColumns as IColumn[]}
+					columns={displayColumns}
 					constrainMode={ConstrainMode.unconstrained}
 					onRenderRow={renderRow}
 					onRenderDetailsHeader={renderDetailsHeader}

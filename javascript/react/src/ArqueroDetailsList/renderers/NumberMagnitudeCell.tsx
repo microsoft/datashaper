@@ -5,7 +5,8 @@
 
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
-import { useCellDimensions, useFormattedNumber } from '../hooks'
+
+import { useCellDimensions, useFormattedNumber } from '../hooks/index.js'
 import { getValue } from '../util/index.js'
 import type { MagnitudeCellProps } from './types.js'
 /**

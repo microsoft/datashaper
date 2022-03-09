@@ -5,6 +5,7 @@
 import { isInputTableStep } from '@data-wrangling-components/core'
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useHandleDropdownChange } from './common/index.js'
 import { TableDropdown } from './controls/index.js'
 import type { HOCFunction, StepComponentProps } from './types.js'

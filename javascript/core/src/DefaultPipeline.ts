@@ -5,11 +5,11 @@
 import { run } from './engine/index.js'
 import { factory } from './engine/verbs/index.js'
 import type {
-	TableStore,
-	Step,
-	Verb,
 	Pipeline,
+	Step,
 	TableContainer,
+	TableStore,
+	Verb,
 } from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
@@ -40,7 +40,7 @@ export class DefaultPipeline implements Pipeline {
 		return [...this._steps]
 	}
 	get last(): Step {
-		return this._steps[this._steps.length - 1] as Step
+		return this._steps[this._steps.length - 1]
 	}
 	get count(): number {
 		return this._steps.length

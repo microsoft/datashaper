@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Verb, columnTransformVerbs } from '@data-wrangling-components/core'
+import { columnTransformVerbs, Verb } from '@data-wrangling-components/core'
 import { Dropdown, IconButton, Modal, PrimaryButton } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import type { ColumnTransformModalProps } from '../index.js'
 import {
 	useHandleRunClick,

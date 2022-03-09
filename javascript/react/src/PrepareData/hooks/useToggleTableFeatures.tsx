@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
+
 import type { DetailsListFeatures } from '../../index.js'
 
 export function useToggleTableFeatures(

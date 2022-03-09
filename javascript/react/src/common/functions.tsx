@@ -10,6 +10,7 @@ import type {
 } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
 import type { ReactElement } from 'react'
+
 import { GroupHeader } from '../controls/index.js'
 
 export function createLazyLoadingGroupHeader(

@@ -8,6 +8,7 @@ import { IconButton } from '@fluentui/react'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Else, If, Then } from 'react-if'
 import styled from 'styled-components'
+
 import { useIntersection } from '../../common/index.js'
 
 interface GroupHeaderProps {
@@ -37,7 +38,7 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 
 		useEffect(() => {
 			if (inViewport && group?.isCollapsed && onToggleCollapse) {
-				onToggleCollapse(group as IGroup)
+				onToggleCollapse(group)
 			}
 		}, [inViewport, group, onToggleCollapse])
 

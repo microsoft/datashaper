@@ -6,13 +6,14 @@ import { IconButton } from '@fluentui/react'
 import Markdown from 'markdown-to-jsx'
 import React, {
 	memo,
-	useMemo,
-	useState,
-	useRef,
-	useEffect,
 	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
 } from 'react'
 import styled from 'styled-components'
+
 import { useGoBack, useGoHome, useGuidance, useHandleClick } from './hooks.js'
 import type { GuidanceProps } from './types.js'
 

@@ -4,14 +4,15 @@
  */
 import type { InputColumnArgs, Step } from '@data-wrangling-components/core'
 import {
+	DataType,
 	isInputColumnStep,
 	isNumericInputStep,
 	types,
-	DataType,
 } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
 	LeftAlignedRow,
 	useHandleDropdownChange,

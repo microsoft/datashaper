@@ -5,6 +5,7 @@
 import { SortDirection } from '@data-wrangling-components/core'
 import type { IColumn } from '@fluentui/react'
 import { useCallback, useState } from 'react'
+
 import type { ColumnClickFunction } from '../index.js'
 
 export interface SortParameters {

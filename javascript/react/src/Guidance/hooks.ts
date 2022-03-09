@@ -13,7 +13,7 @@ export function useGuidance(
 ): (name: string) => string {
 	return useCallback(
 		(name: string) => {
-			return (index as Record<string, string>)[name] || ''
+			return index[name] || ''
 		},
 		[index],
 	)
