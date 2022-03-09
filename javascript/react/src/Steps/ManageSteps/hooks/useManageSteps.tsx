@@ -11,7 +11,7 @@ import type {
 import { useBoolean } from '@fluentui/react-hooks'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useState, useCallback, useMemo, useEffect } from 'react'
-import type { StepsType} from '../../../index.js';
+import type { StepsType } from '../../../index.js'
 import { useTables } from '../../../index.js'
 import { useOnDuplicateStep, useOnEditStep } from './index.js'
 
@@ -26,16 +26,18 @@ export function useManageSteps(
 	onDuplicateClicked: (step: Step) => void
 	onEditClicked: (step: Step, index: number) => void
 	onCreate: (step: Step, index?: number) => void
-	showTransformModal: () => void
-	isTansformModalOpen: boolean
+	onStartNewStep: () => void
+	isTransformModalOpen: boolean
+	addStepButtonId: string
+	editorTarget?: string
 	tables: TableContainer[]
 } {
 	const [step, setStep] = useState<Step>()
 	const [stepIndex, setStepIndex] = useState<number>()
-	const tables = useTables(store)
+	const tables = useTables()
 
 	const [
-		isTansformModalOpen,
+		isTransformModalOpen,
 		{ setTrue: showTransformModal, setFalse: hideTransformModal },
 	] = useBoolean(false)
 
@@ -56,14 +58,34 @@ export function useManageSteps(
 	)
 	const onDuplicateClicked = useOnDuplicateStep(type, store, table, onSave)
 
+	const addStepButtonId = useMemo(
+		() => `button-${Math.round(Math.random() * 3)}`,
+		[],
+	)
+
+	const [editorTarget, setEditorTarget] = useState<string>(addStepButtonId)
+	useEffect(() => {
+		if (stepIndex !== undefined) {
+			setEditorTarget(`.step-card-${stepIndex}`)
+		} else {
+			setEditorTarget(`#${addStepButtonId}`)
+		}
+	}, [addStepButtonId, stepIndex])
+
+	const onStartNewStep = useCallback(() => {
+		showTransformModal()
+	}, [showTransformModal])
+
 	return {
 		step,
 		onDuplicateClicked,
 		onDismissTransformModal,
 		onEditClicked,
 		onCreate,
-		isTansformModalOpen,
-		showTransformModal,
+		isTransformModalOpen,
+		onStartNewStep,
+		addStepButtonId,
+		editorTarget,
 		tables,
 	}
 }

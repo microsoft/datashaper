@@ -46,36 +46,49 @@ export function compare(
 		) {
 			const empty = isEmpty(left)
 			return empty === 1 ? 0 : 1
-			// just turn all the comparisons into numeric based on type so we can simplify the switches
+		}
+		// invalid values by default do not match the filter if they weren't explicitly expected
+		else if (isEmpty(left) || isEmpty(right)) {
+			return 0
 		} else if (typeof left === 'number') {
 			const num = +right
-			return compareValues(left, num, operator)
+			// just turn all the comparisons into numeric based on type so we can simplify the switches
+			return compareValues(left, num, operator as NumericComparisonOperator)
 		} else if (typeof left === 'string') {
-			return compareStrings(left, `${right}`, operator)
+			return compareStrings(
+				left,
+				`${right}`,
+				operator as StringComparisonOperator,
+			)
 			// TODO: boolean enum instead of reusing numeric ops
 		} else if (typeof left === 'boolean') {
 			const l = left === true ? 1 : 0
 			// any non-empty string is a bool, so force true/false
 			const bool = right === 'true' ? 1 : 0
-			return compareValues(l, bool, operator)
+			// TODO: add an actual boolean comparison operator
+			return compareValues(l, bool, operator as NumericComparisonOperator)
 		}
 	}) as CompareWrapper
 }
 
-function isEmpty(left: string | number | boolean) {
-	if (left === null || left === undefined) {
+function isEmpty(value: string | number | boolean) {
+	if (value === null || value === undefined) {
 		return 1
 	}
-	if (typeof left === 'number' && isNaN(left)) {
+	if (typeof value === 'number' && isNaN(value)) {
 		return 1
 	}
-	if (typeof left === 'string' && left.length === 0) {
+	if (typeof value === 'string' && value.length === 0) {
 		return 1
 	}
 	return 0
 }
 
-function compareStrings(left: string, right: string, operator: string): 1 | 0 {
+function compareStrings(
+	left: string,
+	right: string,
+	operator: StringComparisonOperator,
+): 1 | 0 {
 	switch (operator) {
 		case StringComparisonOperator.Contains:
 			return op.match(left, new RegExp(right, 'gi'), 0) ? 1 : 0
@@ -93,10 +106,11 @@ function compareStrings(left: string, right: string, operator: string): 1 | 0 {
 	}
 }
 
-// TODO: I'd kind of prefer if we actually used booleans for the core engine,
-// and then map to 1/0 for causal inference inputs using a separate derive operation
-// or maybe as an optional that dictates the true/false output value
-function compareValues(left: number, right: number, operator: string): 1 | 0 {
+function compareValues(
+	left: number,
+	right: number,
+	operator: NumericComparisonOperator,
+): 1 | 0 {
 	switch (operator) {
 		case NumericComparisonOperator.Eq:
 			return left === right ? 1 : 0
@@ -126,7 +140,6 @@ const fieldOps = new Set([
 ])
 
 // this currently only supports operations that take a single field name
-// TODO: we can support a bunch of the window operations too
 // note that this uses the aggregate op functions to generate an expression
 export function singleExpression(
 	column: string,
