@@ -4,10 +4,10 @@
  */
 import type { Step, TableContainer } from '@data-wrangling-components/core'
 import { DocumentCard, DocumentCardActions } from '@fluentui/react'
-import { cloneDeep } from 'lodash-es'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 import { selectStepDescription } from '../../selectStepDescription.js'
+import { useLookupTableName } from '../../useLookupTableName.js'
 import { useStepActions } from './StepActions.js'
 
 export const StepCard: React.FC<{
@@ -36,13 +36,7 @@ export const StepCard: React.FC<{
 		onDuplicate,
 		onSelect,
 	)
-
-	const formattedStep = useMemo((): Step<unknown> => {
-		const _step = cloneDeep(step)
-		_step.input = tables?.find(x => x.id === step.input)?.name || ''
-		_step.output = tables?.find(x => x.id === step.output)?.name || ''
-		return _step
-	}, [step, tables])
+	const formattedStep = useLookupTableName(step, tables)
 
 	return (
 		<Card styles={styles.card}>
