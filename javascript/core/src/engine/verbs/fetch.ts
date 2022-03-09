@@ -23,6 +23,7 @@ export async function fetch(
 
 	const tableFromCSV = await loadCSV(url, {
 		delimiter: delimiter,
+		autoMax: 1000000,
 	})
 	return container(output, tableFromCSV)
 }

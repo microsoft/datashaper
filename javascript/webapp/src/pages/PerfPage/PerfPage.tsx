@@ -42,7 +42,9 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 
 	useEffect(() => {
 		const f = async () => {
-			let root = await loadCSV('data/stocks.csv', {})
+			let root = await loadCSV('data/stocks.csv', {
+				autoMax: 1000000,
+			})
 			const grouped = root.groupby(['Symbol', 'Month'])
 			const groupedMeta = introspect(root, true)
 			setGroupedTable(grouped)
