@@ -5,12 +5,13 @@
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
-	withInputColumnDropdown,
-	withOutputColumnTextfield,
-	withInputTableDropdown,
 	selectStepComponent,
 	selectStepDescription,
+	withInputColumnDropdown,
+	withInputTableDropdown,
+	withOutputColumnTextfield,
 } from '../../index.js'
 
 interface StepComponentProps {

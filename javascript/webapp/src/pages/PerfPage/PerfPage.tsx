@@ -4,8 +4,8 @@
  */
 
 import type {
-	TableMetadata,
 	ColumnMetadata,
+	TableMetadata,
 } from '@data-wrangling-components/core'
 import { introspect } from '@data-wrangling-components/core'
 import {
@@ -24,8 +24,9 @@ import { DefaultButton, Pivot, PivotItem } from '@fluentui/react'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { Struct } from 'arquero/dist/types/table/transformable'
-import { memo, useState, useEffect, useCallback, useMemo } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+
 import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
 /**
  * This is just a rudimentary page to load a large table for profiling the ArqueroDetailsList rendering.

@@ -4,8 +4,9 @@
  */
 import type { BinarizeStep } from '@data-wrangling-components/core'
 import { ActionButton, TextField } from '@fluentui/react'
-import { memo, useMemo, useCallback, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
 import { TableColumnDropdown } from '../../controls/index.js'
 import { dropdownStyles } from '../../controls/styles.js'

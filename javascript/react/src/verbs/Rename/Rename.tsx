@@ -14,6 +14,7 @@ import {
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { useColumnRecordDelete, useLoadTable } from '../../common/index.js'
 import { TableColumnDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
@@ -21,7 +22,7 @@ import {
 	useDisabled,
 	useHandleAddButtonClick,
 	useHandleColumnChange,
-} from './hooks'
+} from './hooks.js'
 
 /**
  * Provides inputs for a RenameStep.

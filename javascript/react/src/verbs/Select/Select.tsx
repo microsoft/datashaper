@@ -8,6 +8,7 @@ import { Dropdown } from '@fluentui/react'
 import type { IRenderFunction } from '@fluentui/utilities'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { useLoadTable } from '../../common/index.js'
 import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
@@ -82,7 +83,7 @@ export const Select: React.FC<StepComponentProps> = memo(function Select({
 	}, [tbl, internal])
 
 	const selectedKeys = useMemo(
-		() => options.filter(o => o.selected).map(o => `${o.key}`) as string[],
+		() => options.filter(o => o.selected).map(o => `${o.key}`),
 		[options],
 	)
 

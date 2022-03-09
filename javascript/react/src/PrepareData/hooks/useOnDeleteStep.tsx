@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step, Pipeline } from '@data-wrangling-components/core'
+import type { Pipeline, Step } from '@data-wrangling-components/core'
 import { useCallback } from 'react'
 
 export function useOnDeleteStep(

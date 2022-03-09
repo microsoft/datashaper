@@ -5,6 +5,7 @@
 import { ThemeVariant } from '@thematic/core'
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import { NavBar } from '~components/NavBar'
 
 export const Header = memo(function Header() {

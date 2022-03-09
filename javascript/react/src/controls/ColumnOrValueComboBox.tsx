@@ -6,6 +6,7 @@ import type { IComboBoxProps } from '@fluentui/react'
 import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
+
 import { useTableColumnOptions } from '../common/index.js'
 import { dropdownStyles } from './styles.js'
 

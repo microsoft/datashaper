@@ -7,6 +7,7 @@ import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
+
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import { columnType, MergeStrategy } from '../../index.js'
@@ -54,11 +55,11 @@ export async function merge(
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {
 	let allTypesAreTheSame = true
-	const lastDataType: DataType = columnType(inputTable, columns[0] as string)
+	const lastDataType: DataType = columnType(inputTable, columns[0])
 	let i = 1
 
 	while (allTypesAreTheSame === true && i < columns.length) {
-		const dataType: DataType = columnType(inputTable, columns[i] as string)
+		const dataType: DataType = columnType(inputTable, columns[i])
 		allTypesAreTheSame = lastDataType === dataType
 		i++
 	}

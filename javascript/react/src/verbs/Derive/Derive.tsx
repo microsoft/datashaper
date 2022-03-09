@@ -5,10 +5,11 @@
 import type { DeriveStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
+	LeftAlignedRow,
 	useHandleDropdownChange,
 	useLoadTable,
-	LeftAlignedRow,
 } from '../../common/index.js'
 import {
 	MathOperatorDropdown,

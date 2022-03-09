@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TextField } from '@fluentui/react'
-import { memo, useMemo, useCallback } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
 import {
 	FieldAggregateOperationDropdown,
@@ -16,8 +17,8 @@ import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 import { FilterFunction } from '../../verbs/shared/index.js'
 import {
-	getAggregate,
 	defaults,
+	getAggregate,
 	getFilter,
 	getJoin,
 	updateAggregateOperation,

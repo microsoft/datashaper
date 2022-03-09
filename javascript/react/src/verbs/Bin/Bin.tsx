@@ -6,12 +6,13 @@ import type { BinStep } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, Position, SpinButton } from '@fluentui/react'
 import { memo, useMemo } from 'react'
-import { Switch, Case, If, Then } from 'react-if'
+import { Case, If, Switch, Then } from 'react-if'
 import styled from 'styled-components'
+
 import {
 	LeftAlignedRow,
-	useHandleDropdownChange,
 	useHandleCheckboxChange,
+	useHandleDropdownChange,
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
 import { BinStrategyDropdown } from '../../controls/index.js'

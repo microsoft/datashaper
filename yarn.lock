@@ -654,7 +654,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/project@workspace:."
   dependencies:
-    "@essex/eslint-config": ^20.1.0
+    "@essex/eslint-config": ^20.2.0
+    "@essex/eslint-plugin": ^20.2.0
     "@essex/jest-config": ^21.0.6
     "@essex/prettier-config": ^18.0.2
     "@essex/scripts": ^20.4.9
@@ -869,6 +870,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@essex/eslint-config@npm:^20.2.0":
+  version: 20.2.0
+  resolution: "@essex/eslint-config@npm:20.2.0"
+  peerDependencies:
+    "@essex/eslint-plugin": ">=20.2.0"
+    "@typescript-eslint/eslint-plugin": ">= 4.4.1"
+    "@typescript-eslint/parser": ">= 4.4.1"
+    eslint-import-resolver-node: ">= 0.3.4"
+  checksum: 0b7c23ddf6add0712a6e4ec902f6839e8e66dbda37da073f7efdd6564ae451761ec4b3340bab1db2670f20b4f66bdd6b32b2aee7100465647dd91f9e73077eb6
+  languageName: node
+  linkType: hard
+
 "@essex/eslint-plugin@npm:^20.1.0":
   version: 20.1.0
   resolution: "@essex/eslint-plugin@npm:20.1.0"
@@ -896,6 +909,37 @@ __metadata:
     "@typescript-eslint/parser": ">= 4.4.1"
     eslint-import-resolver-node: ">= 0.3.4"
   checksum: ef982813d898464ec314a8fff603295e1e6f104b03d677a1bc24dd7851f7aa1ac6921785046f0fdc5d4048418aa22bf12ab1f09ae0e1b60621fb3db30ffe6148
+  languageName: node
+  linkType: hard
+
+"@essex/eslint-plugin@npm:^20.2.0":
+  version: 20.2.0
+  resolution: "@essex/eslint-plugin@npm:20.2.0"
+  dependencies:
+    "@babel/core": ^7.17.5
+    "@babel/eslint-parser": ^7.17.0
+    "@babel/types": ^7.17.0
+    "@typescript-eslint/eslint-plugin": ^5.14.0
+    "@typescript-eslint/parser": ^5.14.0
+    babel-eslint: ^10.1.0
+    confusing-browser-globals: ^1.0.11
+    eslint: ^8.10.0
+    eslint-config-prettier: ^8.5.0
+    eslint-import-resolver-node: ^0.3.6
+    eslint-plugin-header: ^3.1.1
+    eslint-plugin-import: ^2.25.4
+    eslint-plugin-jest: ^26.1.1
+    eslint-plugin-jsx-a11y: ^6.5.1
+    eslint-plugin-react: ^7.29.3
+    eslint-plugin-react-hooks: ^4.3.0
+    eslint-plugin-simple-import-sort: ^7.0.0
+    lodash: ^4.17.21
+    prettier: ^2.5.1
+  peerDependencies:
+    "@typescript-eslint/eslint-plugin": ">= 4.4.1"
+    "@typescript-eslint/parser": ">= 4.4.1"
+    eslint-import-resolver-node: ">= 0.3.4"
+  checksum: ed701ac270a6d65460d7e3f9f0bec615ec6fa3f176d8c3e65b1ebc7658bb7b968a23c5190e8eafb95eeeba324b6789de853c9b9a807224a903abe3e9a7aba5c3
   languageName: node
   linkType: hard
 

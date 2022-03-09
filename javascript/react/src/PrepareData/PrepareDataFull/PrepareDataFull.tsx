@@ -3,12 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableContainer } from '@data-wrangling-components/core'
-import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
+import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import { ManageSteps } from '../../Steps/index.js'
-import { TableListBar } from '../TableListBar/TableListBar.js'
 import { PreviewTable } from '../index.js'
+import { TableListBar } from '../TableListBar/TableListBar.js'
 import { useBusinessLogic } from './PrepareDataFull.hooks.js'
 
 export const PrepareDataFull: React.FC<{

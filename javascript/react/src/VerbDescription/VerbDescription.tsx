@@ -5,6 +5,7 @@
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import type { DescriptionRow, VerbDescriptionProps } from '../types.js'
 
 export const VerbDescription: React.FC<VerbDescriptionProps> = memo(

@@ -7,18 +7,19 @@ import { DataType } from '@data-wrangling-components/core'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty, getValue } from '../util/index.js'
-import { CellContainer } from './CellContainer'
-import { EmptyCell } from './EmptyCell'
-import type { RichCellProps } from './types.js'
+
+import { getValue, isEmpty } from '../util/index.js'
+import { CellContainer } from './CellContainer.js'
+import { EmptyCell } from './EmptyCell.js'
 import {
 	BooleanSymbolCell,
 	DateCell,
+	NumberMagnitudeCell,
 	ObjectCell,
 	SmartArrayCell,
 	TextCell,
-	NumberMagnitudeCell,
 } from './index.js'
+import type { RichCellProps } from './types.js'
 
 /**
  * Chooses what to render based on data type.

@@ -4,8 +4,9 @@
  */
 import type { SpreadStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { VerbDescription } from '../../'
-import type { StepDescriptionProps } from '../../types'
+
+import { VerbDescription } from '../../index.js'
+import type { StepDescriptionProps } from '../../types.js'
 
 export const SpreadDescription: React.FC<StepDescriptionProps> = memo(
 	function SpreadDescription(props) {

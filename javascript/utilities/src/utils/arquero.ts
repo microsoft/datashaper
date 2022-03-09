@@ -7,6 +7,7 @@ import { fromCSV } from 'arquero'
 import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv'
 import type { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+
 import type { BaseFile } from '../common/index.js'
 import { getDsvFileContent, guessDelimiter } from './files.js'
 

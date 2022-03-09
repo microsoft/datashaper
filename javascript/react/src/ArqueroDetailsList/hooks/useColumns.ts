@@ -7,6 +7,7 @@ import { DataType, SortDirection } from '@data-wrangling-components/core'
 import type { IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
+
 import type {
 	ColumnClickFunction,
 	DetailsListFeatures,
@@ -21,7 +22,6 @@ import {
 	createRenderSmartCell,
 	createRenderStatsColumnHeader,
 } from '../renderers/index.js'
-import { useCountMinWidth } from './useCountMinWidth.js'
 import {
 	useCellClickhandler,
 	useCellDropdownSelectHandler,
@@ -29,6 +29,7 @@ import {
 	useColumnStyles,
 	useIncrementingColumnColorScale,
 } from './index.js'
+import { useCountMinWidth } from './useCountMinWidth.js'
 
 export interface ColumnOptions {
 	features?: DetailsListFeatures

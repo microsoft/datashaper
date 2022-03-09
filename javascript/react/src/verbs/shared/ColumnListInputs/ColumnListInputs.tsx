@@ -8,6 +8,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { ColumnInstruction } from '../../../controls/ColumnInstruction.js'
 import { LeftAlignedRow, useLoadTable } from '../../../index.js'
 import type { StepSubcomponentProps } from '../../../types.js'

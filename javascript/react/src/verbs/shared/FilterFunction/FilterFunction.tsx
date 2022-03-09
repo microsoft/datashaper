@@ -11,7 +11,8 @@ import {
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable, useHandleDropdownChange } from '../../../common/index.js'
+
+import { useHandleDropdownChange, useLoadTable } from '../../../common/index.js'
 import { InputExplainer } from '../../../common/styles.js'
 import {
 	ColumnOrValueComboBox,

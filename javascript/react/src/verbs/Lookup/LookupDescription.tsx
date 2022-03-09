@@ -4,6 +4,7 @@
  */
 import type { LookupStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
+
 import { createRowEntries, VerbDescription } from '../../index.js'
 import type { StepDescriptionProps } from '../../types.js'
 

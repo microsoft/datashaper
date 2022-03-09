@@ -4,6 +4,7 @@
  */
 
 import type { Entry } from '@zip.js/zip.js'
+
 import { FileWithPath } from '../../common/index.js'
 import { getBlobFromEntry, getFileFromEntry, toZip } from '../zip.js'
 

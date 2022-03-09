@@ -8,17 +8,18 @@ import type {
 	IDetailsColumnProps,
 	IRenderFunction,
 } from '@fluentui/react'
+
 import type { ColumnClickFunction, ColumnRenderFunction } from '../index.js'
 import type {
 	DetailsListFeatures,
 	DropdownOptionSelect,
 	MetadataClickFunction,
 	StatsColumnType,
-} from '../types'
-import { CommandBarContainer } from './CommandBarContainer'
-import { DefaultColumnHeader } from './DefaultColumnHeader'
-import { FeaturesCell } from './FeaturesCell'
-import { HistogramColumnHeader } from './HistogramColumnHeader'
+} from '../types.js'
+import { CommandBarContainer } from './CommandBarContainer.js'
+import { DefaultColumnHeader } from './DefaultColumnHeader.js'
+import { FeaturesCell } from './FeaturesCell.js'
+import { HistogramColumnHeader } from './HistogramColumnHeader.js'
 import { SmartCell, StatsColumnHeader } from './index.js'
 
 export const createRenderSmartCell = (

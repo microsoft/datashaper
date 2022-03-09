@@ -4,7 +4,8 @@
  */
 import { table } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { introspect, types, stats } from '../tables.js'
+
+import { introspect, stats, types } from '../tables.js'
 
 describe('table utilities', () => {
 	// note: all columns must be the same length or missing will be padded with empty cells

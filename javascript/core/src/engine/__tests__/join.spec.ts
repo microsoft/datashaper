@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '../../types.js'
-import { Verb, JoinStrategy } from '../../types.js'
+import { JoinStrategy, Verb } from '../../types.js'
 import { join } from '../verbs/join.js'
 import { TestStore } from './TestStore.js'
 

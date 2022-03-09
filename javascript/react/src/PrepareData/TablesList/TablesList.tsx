@@ -5,9 +5,10 @@
 import type { TableContainer } from '@data-wrangling-components/core'
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import { DetailText } from '../DetailText/index.js'
+import { useIsTableSelected } from './hooks.js'
 import { TableCard } from './TableCard.js'
-import { useIsTableSelected } from './hooks'
 
 export const TablesList: React.FC<{
 	tables: TableContainer[]

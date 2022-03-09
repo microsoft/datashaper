@@ -4,8 +4,8 @@
  */
 
 import type { FileCollection } from '@data-wrangling-components/utilities'
-import type { FileRejection, DropzoneOptions } from 'react-dropzone'
-export type { FileRejection, DropzoneOptions } from 'react-dropzone'
+import type { DropzoneOptions, FileRejection } from 'react-dropzone'
+export type { DropzoneOptions, FileRejection } from 'react-dropzone'
 
 export interface DzProps {
 	acceptedFileTypes: string[]

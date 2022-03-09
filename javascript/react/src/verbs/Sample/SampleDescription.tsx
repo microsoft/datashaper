@@ -5,6 +5,7 @@
 import type { SampleStep } from '@data-wrangling-components/core'
 import { format } from 'd3-format'
 import { memo, useMemo } from 'react'
+
 import { VerbDescription } from '../../index.js'
 import type { StepDescriptionProps } from '../../types.js'
 

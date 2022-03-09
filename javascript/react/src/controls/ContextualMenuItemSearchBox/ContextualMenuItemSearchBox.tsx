@@ -5,6 +5,7 @@
 import type { IContextualMenuItem } from '@fluentui/react'
 import { SearchBox } from '@fluentui/react'
 import { memo } from 'react'
+
 import { useSearch } from './ContextualMenuItemSearchBox.hooks.js'
 import { searchBoxStyles } from './ContextualMenuItemSearchBox.styles.js'
 

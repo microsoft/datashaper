@@ -7,6 +7,7 @@ import { FontIcon, mergeStyles, mergeStyleSets } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import { NavPanel } from '~components/NavPanel'
 
 export const NavBar = memo(function NavBar() {

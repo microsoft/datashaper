@@ -12,7 +12,7 @@ import type { IContextualMenuItem } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useState, useEffect, useMemo, useCallback } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 /**
@@ -25,7 +25,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 			const root = await loadCSV('data/stocks.csv', {})
 			setTable(root)
 		}
-		f()
+		void f()
 	}, [])
 
 	const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =

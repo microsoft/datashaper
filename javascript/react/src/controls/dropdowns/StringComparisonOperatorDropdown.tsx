@@ -6,6 +6,7 @@ import { StringComparisonOperator } from '@data-wrangling-components/core'
 import type { IDropdownProps } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
+
 import { opDropdownStyles } from '../styles.js'
 
 export type StringComparisonOperatorDropdownProps = Partial<IDropdownProps>

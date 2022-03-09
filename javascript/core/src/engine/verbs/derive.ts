@@ -4,6 +4,7 @@
  */
 import { escape } from 'arquero'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
+
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import type { DeriveArgs, Step, TableContainer } from '../../types.js'
