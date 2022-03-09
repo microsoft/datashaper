@@ -3,11 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { MergeStep } from '@data-wrangling-components/core'
+import { MergeStrategy } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
-import { Dropdown } from '@fluentui/react'
+import { TextField, Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useLoadTable } from '../../common'
+import {
+	LeftAlignedRow,
+	useHandleTextfieldChange,
+	useLoadTable,
+} from '../../common'
 import { MergeStrategyComponent } from '../../controls/MergeStrategyComponent/MergeStrategyComponent.js'
 import { dropdownStyles } from '../../controls/styles'
 import type { StepComponentProps } from '../../types'
@@ -47,6 +52,12 @@ export const Merge: React.FC<StepComponentProps> = memo(function Merge({
 				})
 		},
 		[internal, onChange],
+	)
+
+	const handleDelimiterChange = useHandleTextfieldChange(
+		internal,
+		'args.delimiter',
+		onChange,
 	)
 
 	const options = useMemo(() => {
@@ -93,6 +104,17 @@ export const Merge: React.FC<StepComponentProps> = memo(function Merge({
 					onChange={onChange}
 				/>
 			</LeftAlignedRow>
+			{internal.args.strategy === MergeStrategy.Concat ? (
+				<LeftAlignedRow>
+					<TextField
+						label={'Delimiter'}
+						placeholder={'Text delimiter'}
+						value={internal.args.delimiter && `${internal.args.delimiter}`}
+						styles={dropdownStyles}
+						onChange={handleDelimiterChange}
+					/>
+				</LeftAlignedRow>
+			) : null}
 		</Container>
 	)
 })

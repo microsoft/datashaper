@@ -15,14 +15,16 @@ export const StepsList: React.FC<{
 	onEditClicked?: (step: Step, index: number) => void
 	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
-	showModal?: () => void
+	onStartNewStep?: () => void
+	buttonId?: string
 }> = memo(function StepsList({
 	steps,
 	onDeleteClicked,
 	onEditClicked,
 	onDuplicateClicked,
 	onSelect,
-	showModal,
+	onStartNewStep,
+	buttonId,
 }) {
 	return (
 		<Container>
@@ -40,12 +42,13 @@ export const StepsList: React.FC<{
 				)
 			})}
 
-			{showModal && (
+			{onStartNewStep && (
 				<ButtonContainer>
 					<DefaultButton
 						styles={addButtonStyles}
 						iconProps={iconProps.add}
-						onClick={showModal}
+						onClick={onStartNewStep}
+						id={buttonId}
 					>
 						Add step
 					</DefaultButton>
