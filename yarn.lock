@@ -654,8 +654,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/project@workspace:."
   dependencies:
-    "@essex/eslint-config": ^20.2.0
-    "@essex/eslint-plugin": ^20.2.0
+    "@essex/eslint-config": ^20.3.0
+    "@essex/eslint-plugin": ^20.3.0
     "@essex/jest-config": ^21.0.6
     "@essex/prettier-config": ^18.0.2
     "@essex/scripts": ^20.4.9
@@ -870,15 +870,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/eslint-config@npm:^20.2.0":
-  version: 20.2.0
-  resolution: "@essex/eslint-config@npm:20.2.0"
+"@essex/eslint-config@npm:^20.3.0":
+  version: 20.3.0
+  resolution: "@essex/eslint-config@npm:20.3.0"
   peerDependencies:
-    "@essex/eslint-plugin": ">=20.2.0"
+    "@essex/eslint-plugin": ">=20.3.0"
     "@typescript-eslint/eslint-plugin": ">= 4.4.1"
     "@typescript-eslint/parser": ">= 4.4.1"
     eslint-import-resolver-node: ">= 0.3.4"
-  checksum: 0b7c23ddf6add0712a6e4ec902f6839e8e66dbda37da073f7efdd6564ae451761ec4b3340bab1db2670f20b4f66bdd6b32b2aee7100465647dd91f9e73077eb6
+  checksum: 6aa611956bc79f9e36fb07bbca2f3221c854b9b9d5499052aa3ba31f0b70c681436a743ffafca6a8bf923e0d792efc965da0793a09bffc755ee4b0b976ed89c3
   languageName: node
   linkType: hard
 
@@ -912,9 +912,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/eslint-plugin@npm:^20.2.0":
-  version: 20.2.0
-  resolution: "@essex/eslint-plugin@npm:20.2.0"
+"@essex/eslint-plugin@npm:^20.3.0":
+  version: 20.3.0
+  resolution: "@essex/eslint-plugin@npm:20.3.0"
   dependencies:
     "@babel/core": ^7.17.5
     "@babel/eslint-parser": ^7.17.0
@@ -922,6 +922,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.14.0
     "@typescript-eslint/parser": ^5.14.0
     babel-eslint: ^10.1.0
+    chalk: ^4.1.2
     confusing-browser-globals: ^1.0.11
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
@@ -939,7 +940,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ">= 4.4.1"
     "@typescript-eslint/parser": ">= 4.4.1"
     eslint-import-resolver-node: ">= 0.3.4"
-  checksum: ed701ac270a6d65460d7e3f9f0bec615ec6fa3f176d8c3e65b1ebc7658bb7b968a23c5190e8eafb95eeeba324b6789de853c9b9a807224a903abe3e9a7aba5c3
+  checksum: 4968a317051621cf3918479ce4b1ca51695c9eec7a3e8b92d3dc75a41503899a4b46eee29bb19962b663f5d0bd32d3467d8fd9bc5ad6015a42837ae5169472a1
   languageName: node
   linkType: hard
 
