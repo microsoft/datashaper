@@ -4,7 +4,7 @@
  */
 import { BinStrategy } from '../../index.js'
 import type { Step } from '../../types.js'
-import { JoinStrategy, FieldAggregateOperation, Verb } from '../../types.js'
+import { FieldAggregateOperation, JoinStrategy, Verb } from '../../types.js'
 
 /**
  * Factory function to create new verb configs

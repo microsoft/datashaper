@@ -6,8 +6,9 @@ import type { Step } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
-import { DetailText } from '../../PrepareData/DetailText/index.js'
+
 import { StepCard } from '../../index.js'
+import { DetailText } from '../../PrepareData/DetailText/index.js'
 
 export const StepsList: React.FC<{
 	steps?: Step[]

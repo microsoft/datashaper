@@ -5,6 +5,7 @@
 import type { WindowStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import { WindowFunctionDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'

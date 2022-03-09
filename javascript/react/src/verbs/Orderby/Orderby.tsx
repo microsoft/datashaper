@@ -10,10 +10,10 @@ import type {
 import { SortDirection } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { useLoadTable } from '../../common/index.js'
 import { SortInstruction } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'

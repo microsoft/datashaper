@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FieldAggregateOperation } from '../..'
-import type { Step } from '../../types'
-import { Verb } from '../../types'
-import { pivot } from '../verbs/pivot'
-import { TestStore } from './TestStore'
+import { FieldAggregateOperation } from '../../index.js'
+import type { Step } from '../../types.js'
+import { Verb } from '../../types.js'
+import { pivot } from '../verbs/pivot.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for pivot verb', () => {
 	test('pivot test with any operation', async () => {

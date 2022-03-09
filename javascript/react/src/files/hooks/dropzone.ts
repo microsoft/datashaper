@@ -11,6 +11,7 @@ import {
 import { useCallback } from 'react'
 import type { DropzoneState as DzState } from 'react-dropzone'
 import { useDropzone as UseDz } from 'react-dropzone'
+
 import type { DzProps, FileRejection } from '../types.js'
 
 export interface DropzoneState extends DzState {
@@ -36,9 +37,12 @@ export const useDropzone: (props: DzProps) => DropzoneState = ({
 		onDropRejected,
 	)
 	const state = UseDz({
-		onDrop: (files: File[]) => handleOnDrop(files as FileWithPath[]),
-		onDropAccepted: (files: File[]) =>
-			handleOnDropAccepted(files as FileWithPath[]),
+		onDrop(files: File[]) {
+			void handleOnDrop(files as FileWithPath[])
+		},
+		onDropAccepted(files: File[]) {
+			void handleOnDropAccepted(files as FileWithPath[])
+		},
 		onDropRejected: handleOnDropRejected,
 		accept: acceptedFileTypes.toString(),
 		...dropzoneOptions,

@@ -6,9 +6,10 @@ import type { EraseStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useHandleTextfieldChange } from '../../common'
+
+import { LeftAlignedRow, useHandleTextfieldChange } from '../../common/index.js'
 import { dropdownStyles } from '../../controls/styles.js'
-import type { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Just the to/value inputs for an impute.

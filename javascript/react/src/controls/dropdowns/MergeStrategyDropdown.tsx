@@ -6,7 +6,8 @@ import { MergeStrategy } from '@data-wrangling-components/core'
 import type { IDropdownProps } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
-import { opDropdownStyles } from '../styles'
+
+import { opDropdownStyles } from '../styles.js'
 
 export type MergeStrategyDropdownProps = Partial<IDropdownProps>
 

@@ -13,6 +13,7 @@ import {
 	useRecoilValue,
 	useSetRecoilState,
 } from 'recoil'
+
 import { defaultSettings } from '~hooks/useSettings'
 import type { Settings } from '~models/Settings'
 

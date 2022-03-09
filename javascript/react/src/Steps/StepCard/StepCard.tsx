@@ -6,6 +6,7 @@ import type { Step } from '@data-wrangling-components/core'
 import { DocumentCard, DocumentCardActions } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { selectStepDescription } from '../../selectStepDescription.js'
 import { useStepActions } from './StepActions.js'
 

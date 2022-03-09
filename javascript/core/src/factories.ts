@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+
 import { DefaultPipeline } from './DefaultPipeline.js'
 import { DefaultTableStore } from './DefaultTableStore.js'
 import type { Pipeline, TableContainer, TableStore } from './types.js'

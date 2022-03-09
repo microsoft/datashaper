@@ -4,8 +4,8 @@
  */
 import type {
 	Specification,
-	TableStore,
 	TableContainer,
+	TableStore,
 } from '@data-wrangling-components/core'
 import { createTableStore } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'

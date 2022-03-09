@@ -4,10 +4,10 @@
  */
 import { container } from '../../factories.js'
 import type {
-	TableContainer,
-	TableStore,
 	SetOperationArgs,
 	Step,
+	TableContainer,
+	TableStore,
 } from '../../types.js'
 import { SetOp } from '../../types.js'
 

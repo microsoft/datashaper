@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
+
 import { DefaultTableStore } from '../../DefaultTableStore.js'
 import type { Step, TableStore } from '../../index.js'
 import { Verb } from '../../index.js'

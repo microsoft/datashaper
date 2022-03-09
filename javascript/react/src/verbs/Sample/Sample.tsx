@@ -7,6 +7,7 @@ import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
 	LeftAlignedRow,
 	useHandleSpinButtonChange,

@@ -5,6 +5,7 @@
 import { DetailsRow } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
+
 import type { RichRowProps } from './types.js'
 
 /**

@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-import { DefaultTableStore } from '../DefaultTableStore'
+
+import { DefaultTableStore } from '../DefaultTableStore.js'
 
 describe('DefaultTableStore', () => {
 	test('empty constructor', () => {
@@ -30,7 +31,7 @@ describe('DefaultTableStore', () => {
 
 	test('get resolves table before returning', () => {
 		const store = new DefaultTableStore()
-		store.queue('a', async () => table({ id: [1] }))
+		store.queue('a', () => Promise.resolve(table({ id: [1] })))
 		return store.get('a').then(result => {
 			expect(result.table.numCols()).toBe(1)
 		})

@@ -4,20 +4,21 @@
  */
 import type {
 	Step,
-	TableStore,
-	TableMetadata,
 	TableContainer,
+	TableMetadata,
+	TableStore,
 } from '@data-wrangling-components/core'
 import { introspect } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useState, useMemo, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+
 import { usePipeline, useStore } from '../../common/index.js'
 import {
+	useAddNewTables,
 	useOnDeleteStep,
 	useOnSaveStep,
 	useRunPipeline,
-	useAddNewTables,
-} from '../hooks'
+} from '../hooks/index.js'
 
 export function useBusinessLogic(
 	tables: TableContainer[],
@@ -82,10 +83,7 @@ export function useBusinessLogic(
 	}, [tables, selectedTableName, derived])
 
 	useEffect(() => {
-		const f = async () => {
-			runPipeline()
-		}
-		f()
+		void runPipeline()
 	}, [steps, runPipeline])
 
 	useEffect(() => {

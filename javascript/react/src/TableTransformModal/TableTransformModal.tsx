@@ -13,6 +13,7 @@ import {
 import { useBoolean } from '@fluentui/react-hooks'
 import React, { memo } from 'react'
 import styled from 'styled-components'
+
 import { Guidance } from '../Guidance/index.js'
 import type { TableTransformModalProps } from '../index.js'
 import { StepSelector } from '../index.js'

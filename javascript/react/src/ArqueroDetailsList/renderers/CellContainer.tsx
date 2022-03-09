@@ -5,6 +5,7 @@
 import type { IColumn } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import type { ColumnClickFunction } from '../index.js'
 
 interface CellContainerProps {

@@ -6,6 +6,7 @@ import { loadFluentTheme, ThematicFluentProvider } from '@thematic/fluent'
 import { ApplicationStyles } from '@thematic/react'
 import { memo, useMemo } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+
 import { useTheme } from '../../states/settings.js'
 
 export const StyleContext: React.FC = memo(function StyleContext({ children }) {

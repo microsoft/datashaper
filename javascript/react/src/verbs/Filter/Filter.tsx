@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
+
 import type { StepComponentProps } from '../../types.js'
 import { FilterInputs } from '../shared/index.js'
 

@@ -12,14 +12,15 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
 	LeftAlignedRow,
 	useHandleTextfieldChange,
 	useLoadTable,
-} from '../../common'
-import { ColumnInstruction } from '../../controls'
+} from '../../common/index.js'
+import { ColumnInstruction } from '../../controls/index.js'
 import { dropdownStyles } from '../../controls/styles.js'
-import type { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.

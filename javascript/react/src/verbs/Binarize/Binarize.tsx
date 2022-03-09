@@ -4,6 +4,7 @@
  */
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import type { StepComponentProps } from '../../types.js'
 import { FilterInputs } from '../shared/index.js'
 

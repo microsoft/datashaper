@@ -6,6 +6,7 @@ import type { FetchStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { dropdownStyles } from '../../controls/styles.js'
 import { LeftAlignedRow, useHandleTextfieldChange } from '../../index.js'
 import type { StepComponentProps } from '../../types'

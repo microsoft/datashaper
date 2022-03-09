@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '../../types.js'
-import { Verb, SetOp } from '../../types.js'
+import { SetOp, Verb } from '../../types.js'
 import { set } from '../util/sets.js'
 import { TestStore } from './TestStore.js'
 

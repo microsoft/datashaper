@@ -5,6 +5,7 @@
 import type { JoinStep, Step } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { useHandleDropdownChange } from '../../../controls/hooks.js'
 import { TableColumnDropdown, TableDropdown } from '../../../controls/index.js'
 import { LeftAlignedRow, useLoadTable } from '../../../index.js'
