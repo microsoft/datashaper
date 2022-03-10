@@ -38,7 +38,7 @@ export const Join: React.FC<StepComponentProps> = memo(function Join({
 					required
 					label={'Join strategy'}
 					enumeration={JoinStrategy}
-					selectedKey={internal.args.strategy}
+					selectedKey={internal.args.strategy || JoinStrategy.Inner}
 					styles={dropdownStyles}
 					onChange={handleJoinStrategyChange}
 				/>
