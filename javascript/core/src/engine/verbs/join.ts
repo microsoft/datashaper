@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { JoinOptions } from 'arquero/dist/types/table/transformable'
+
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import type { JoinArgs, Step, TableContainer } from '../../types.js'

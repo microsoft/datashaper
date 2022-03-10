@@ -3,16 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
+	AggregateArgs,
 	AggregateStep,
 	ChainStep,
+	FieldAggregateOperation,
+	FilterArgs,
 	FilterStep,
+	JoinArgs,
 	JoinStep,
 	LookupStep,
 	Step,
-	FieldAggregateOperation,
-	JoinArgs,
-	FilterArgs,
-	AggregateArgs,
 } from '@data-wrangling-components/core'
 import { Verb } from '@data-wrangling-components/core'
 import merge from 'lodash-es/merge.js'

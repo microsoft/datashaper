@@ -6,6 +6,7 @@ import type { WindowStep } from '@data-wrangling-components/core'
 import { WindowFunction } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import type { StepComponentProps } from '../../types.js'

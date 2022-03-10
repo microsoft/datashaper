@@ -5,6 +5,7 @@
 
 import type { HTMLFormatOptions } from 'arquero/dist/types/format/to-html'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+
 import type { Json } from '../types.js'
 import { FileType } from '../types.js'
 import {

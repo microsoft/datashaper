@@ -6,9 +6,9 @@ import type { OrderbyInstruction } from '@data-wrangling-components/core'
 import { SortDirection } from '@data-wrangling-components/core'
 import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
+
 import { TableColumnDropdown } from './TableColumnDropdown.js'
 
 export interface SortInstructionProps {

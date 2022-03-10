@@ -5,6 +5,7 @@
 import type { BinStep } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
+
 import { VerbDescription } from '../../index.js'
 import type { StepDescriptionProps } from '../../types.js'
 

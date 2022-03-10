@@ -4,11 +4,12 @@
  */
 import { escape, op } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
+
 import {
-	NumericComparisonOperator,
 	FieldAggregateOperation,
-	StringComparisonOperator,
 	FilterCompareType,
+	NumericComparisonOperator,
+	StringComparisonOperator,
 	WindowFunction,
 } from '../../types.js'
 import type { CompareWrapper } from './types.js'
@@ -32,7 +33,8 @@ export function compare(
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
 		const left = d[column]!
-		const right = type === FilterCompareType.Column ? d[`${value}`]! : value
+		const right =
+			type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
 
 		// start with the empty operators, because typeof won't work...
 		if (

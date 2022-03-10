@@ -6,10 +6,11 @@ import type { AggregateStep } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
-	useLoadTable,
 	LeftAlignedRow,
 	useHandleDropdownChange,
+	useLoadTable,
 } from '../../common/index.js'
 import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import { TableColumnDropdown } from '../../controls/index.js'

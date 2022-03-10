@@ -5,15 +5,16 @@
 import type { FilterStep } from '@data-wrangling-components/core'
 import {
 	DataType,
-	types,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
+	types,
 } from '@data-wrangling-components/core'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable, useHandleDropdownChange } from '../../../common/index.js'
+
+import { useHandleDropdownChange, useLoadTable } from '../../../common/index.js'
 import { InputExplainer } from '../../../common/styles.js'
 import { EnumDropdown } from '../../../controls/EnumDropdown.js'
 import { ColumnOrValueComboBox } from '../../../controls/index.js'

@@ -6,7 +6,8 @@ import { IconButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { dropdownStyles } from './styles'
+
+import { dropdownStyles } from './styles.js'
 
 export interface ColumnSpreadProps {
 	table?: ColumnTable

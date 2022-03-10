@@ -4,8 +4,9 @@
  */
 import type { FoldStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { createRowEntries, VerbDescription } from '../../'
-import type { StepDescriptionProps } from '../../types'
+
+import { createRowEntries, VerbDescription } from '../../index.js'
+import type { StepDescriptionProps } from '../../types.js'
 
 export const FoldDescription: React.FC<StepDescriptionProps> = memo(
 	function FoldDescription(props) {

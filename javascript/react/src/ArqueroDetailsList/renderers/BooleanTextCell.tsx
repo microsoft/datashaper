@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
+
 import { getValue } from '../util/index.js'
 import type { FormattedCellProps } from './types.js'
 

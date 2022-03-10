@@ -6,14 +6,15 @@ import type { PivotStep } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
-	useLoadTable,
 	LeftAlignedRow,
 	useHandleDropdownChange,
-} from '../../common'
+	useLoadTable,
+} from '../../common/index.js'
 import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import { TableColumnDropdown } from '../../controls/index.js'
-import type { StepComponentProps } from '../../types'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

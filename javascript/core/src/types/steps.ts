@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableStore } from './TableStore.js'
 import type {
 	BinStrategy,
 	FieldAggregateOperation,
@@ -17,6 +16,7 @@ import type {
 	WindowFunction,
 } from './enums.js'
 import type { TableContainer, Value } from './tables.js'
+import type { TableStore } from './TableStore.js'
 
 export interface OrderbyInstruction {
 	column: string

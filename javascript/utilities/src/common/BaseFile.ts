@@ -4,8 +4,10 @@
  */
 
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+
 import type { Json } from '../types.js'
 import {
+	getDataURL,
 	getDsvFileContent,
 	getJsonFileContentFromFile,
 	getTextFromFile,
@@ -15,7 +17,6 @@ import {
 	isTableFile,
 	isZipFile,
 	loadTable,
-	getDataURL,
 } from '../utils/index.js'
 import { FileWithPath } from './FileWithPath.js'
 

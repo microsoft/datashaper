@@ -6,10 +6,11 @@ import type { DeriveStep } from '@data-wrangling-components/core'
 import { MathOperator } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
+	LeftAlignedRow,
 	useHandleDropdownChange,
 	useLoadTable,
-	LeftAlignedRow,
 } from '../../common/index.js'
 import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import { TableColumnDropdown } from '../../controls/index.js'

@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo, useMemo } from 'react'
+
 import { VerbDescription } from '../../index.js'
 import type { StepDescriptionProps } from '../../types.js'
 

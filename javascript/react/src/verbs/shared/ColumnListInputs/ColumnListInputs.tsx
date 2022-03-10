@@ -6,6 +6,7 @@ import type { ColumnListStep } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { MultiDropdown } from '../../../controls/MultiDropdown.js'
 import { useLoadTable } from '../../../index.js'
 import type { StepSubcomponentProps } from '../../../types.js'

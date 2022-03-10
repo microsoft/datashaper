@@ -5,6 +5,7 @@
 import type { IDropdownOption, IDropdownProps } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo, useMemo } from 'react'
+
 import { opDropdownStyles } from './styles.js'
 
 export interface EnumDropdownProps<E = unknown>

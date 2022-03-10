@@ -4,7 +4,7 @@
  */
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { Step, RollupArgs, TableContainer } from '../../types.js'
+import type { RollupArgs, Step, TableContainer } from '../../types.js'
 import { singleExpression } from '../util/index.js'
 
 /**

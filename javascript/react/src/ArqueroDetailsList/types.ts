@@ -8,11 +8,11 @@ import type {
 } from '@data-wrangling-components/core'
 import type {
 	IColumn,
+	IDetailsColumnProps,
+	IDetailsGroupDividerProps,
 	IDetailsListProps,
 	IDropdownOption,
-	IDetailsGroupDividerProps,
 	IRenderFunction,
-	IDetailsColumnProps,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 

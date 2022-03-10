@@ -6,7 +6,8 @@
 import type { Step } from '@data-wrangling-components/core'
 import { factory } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+
 import { useFormatedColumnArgWithCount } from '../../index.js'
 
 export function useInternalStep(

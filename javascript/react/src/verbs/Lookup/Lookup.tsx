@@ -5,6 +5,7 @@
 import type { LookupStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedColumn } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs, JoinInputs } from '../shared/index.js'

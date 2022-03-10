@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NumericComparisonOperator, FilterCompareType } from '../../index.js'
+import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
 import type { Step } from '../../types.js'
 import { StringComparisonOperator, Verb } from '../../types.js'
 import { binarize } from '../verbs/binarize.js'

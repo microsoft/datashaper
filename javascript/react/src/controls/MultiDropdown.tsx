@@ -11,6 +11,7 @@ import { Dropdown } from '@fluentui/react'
 import type { IRenderFunction } from '@fluentui/utilities'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { dropdownStyles } from './styles.js'
 
 export interface MultiDropdownProps extends IDropdownProps {

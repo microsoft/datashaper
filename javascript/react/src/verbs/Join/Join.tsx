@@ -6,6 +6,7 @@ import type { JoinStep } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { useHandleDropdownChange } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
 import { EnumDropdown } from '../../controls/EnumDropdown.js'

@@ -6,6 +6,7 @@ import type { Step } from '@data-wrangling-components/core'
 import { DialogConfirm } from '@essex/themed-components'
 import React, { memo } from 'react'
 import styled from 'styled-components'
+
 import type {
 	ColumnTransformModalProps,
 	TableTransformModalProps,
@@ -118,4 +119,5 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 
 const Container = styled.div`
 	width: 97%;
+	display: grid;
 `

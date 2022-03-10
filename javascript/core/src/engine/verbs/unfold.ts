@@ -5,6 +5,7 @@
 
 import { from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
+
 import { container } from '../../factories.js'
 import type { TableStore, UnfoldArgs } from '../../index.js'
 import type { Step, TableContainer } from '../../types.js'

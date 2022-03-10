@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NumericComparisonOperator, FilterCompareType } from '../../index.js'
+import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
 import type { Step } from '../../types.js'
 import { StringComparisonOperator, Verb } from '../../types.js'
-import { filter } from '../verbs/filter'
-import { TestStore } from './TestStore'
+import { filter } from '../verbs/filter.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for filter verb', () => {
 	test('filter test with NumericComparisonOperator Gte', () => {

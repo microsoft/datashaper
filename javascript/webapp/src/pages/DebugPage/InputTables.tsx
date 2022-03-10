@@ -6,6 +6,7 @@ import type { TableContainer } from '@data-wrangling-components/core'
 import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import type { ColumnConfigMap } from './Table'
 import { Table } from './Table'
 

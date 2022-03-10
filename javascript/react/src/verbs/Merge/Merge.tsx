@@ -5,9 +5,10 @@
 import type { MergeStep } from '@data-wrangling-components/core'
 import { MergeStrategy } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
-import { TextField, Dropdown } from '@fluentui/react'
+import { Dropdown, TextField } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
 	LeftAlignedRow,
 	useHandleTextfieldChange,
@@ -15,8 +16,8 @@ import {
 } from '../../common/index.js'
 import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import { useHandleDropdownChange } from '../../controls/hooks.js'
-import { dropdownStyles } from '../../controls/styles'
-import type { StepComponentProps } from '../../types'
+import { dropdownStyles } from '../../controls/styles.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Just the to/value inputs for an impute.

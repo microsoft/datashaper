@@ -5,6 +5,7 @@
 import type { TableContainer } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { memo } from 'react'
+
 import { ColumnarMenu } from '../../controls/ColumnarMenu/ColumnarMenu.js'
 import { DetailText } from '../DetailText/DetailText.js'
 import { useOutputPreview, useTableSelection } from './TableListBar.hooks.js'

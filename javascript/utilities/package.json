@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/utilities",
-	"version": "1.6.3",
+	"version": "1.6.4",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -13,12 +13,12 @@
 		"build": "essex build --skipExportCheck"
 	},
 	"dependencies": {
-		"@zip.js/zip.js": "^2.4.5"
+		"@zip.js/zip.js": "^2.4.6"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.4.6",
+		"@essex/scripts": "^20.4.9",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@essex/vite-config": "^19.0.4",
+		"@essex/vite-config": "^19.0.5",
 		"@types/node": "^17.0.21",
 		"arquero": "^4.8.8",
 		"regenerator-runtime": "^0.13.9",

@@ -7,6 +7,7 @@ import { CommandBar as CB } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { HEIGHT } from './constants.js'
 
 interface CommandBarProps {

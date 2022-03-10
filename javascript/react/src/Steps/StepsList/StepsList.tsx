@@ -4,10 +4,11 @@
  */
 import type { Step } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
-import { memo } from 'react'
+import { memo, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { DetailText } from '../../PrepareData/DetailText/index.js'
+
 import { StepCard } from '../../index.js'
+import { DetailText } from '../../PrepareData/DetailText/index.js'
 
 export const StepsList: React.FC<{
 	steps?: Step[]
@@ -26,6 +27,18 @@ export const StepsList: React.FC<{
 	onStartNewStep,
 	buttonId,
 }) {
+	const ref = useRef<HTMLDivElement>(null)
+
+	useEffect(() => {
+		const f = () => {
+			ref?.current?.scrollIntoView({
+				block: 'center',
+				behavior: 'smooth',
+			})
+		}
+		f()
+	}, [steps])
+
 	return (
 		<Container>
 			{steps?.map((_step, index) => {
@@ -43,7 +56,7 @@ export const StepsList: React.FC<{
 			})}
 
 			{onStartNewStep && (
-				<ButtonContainer>
+				<ButtonContainer ref={ref}>
 					<DefaultButton
 						styles={addButtonStyles}
 						iconProps={iconProps.add}

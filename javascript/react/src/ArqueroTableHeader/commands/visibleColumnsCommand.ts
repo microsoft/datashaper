@@ -5,6 +5,7 @@
 import type { ICommandBarItemProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import merge from 'lodash-es/merge.js'
+
 import { checkedItemsCommand } from './checkedItemsCommand.js'
 
 /**
