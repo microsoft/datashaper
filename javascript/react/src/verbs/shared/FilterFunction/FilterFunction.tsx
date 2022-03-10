@@ -4,6 +4,8 @@
  */
 import type { FilterStep } from '@data-wrangling-components/core'
 import {
+	DataType,
+	types,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
@@ -49,28 +51,29 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 			[internal, onChange],
 		)
 
-		// TODO: use the types util
+		const tps = useMemo(() => {
+			return tbl ? types(tbl) : {}
+		}, [tbl])
+
 		const operatorDropdown = useMemo(() => {
 			const column = internal.args.column
 			if (column) {
-				const first = tbl?.get(column, 0)
-				if (first) {
-					if (typeof first === 'string') {
-						return (
-							<DropdownContainer>
-								<EnumDropdown
-									required
-									label={'Function'}
-									enumeration={StringComparisonOperator}
-									selectedKey={internal.args.operator}
-									onChange={handleOpChange}
-								/>
-								<InputExplainer>
-									String comparisons not case-sensitive
-								</InputExplainer>
-							</DropdownContainer>
-						)
-					}
+				const type = tps[column]
+				if (type === DataType.String) {
+					return (
+						<DropdownContainer>
+							<EnumDropdown
+								required
+								label={'Function'}
+								enumeration={StringComparisonOperator}
+								selectedKey={internal.args.operator}
+								onChange={handleOpChange}
+							/>
+							<InputExplainer>
+								String comparisons are not case-sensitive
+							</InputExplainer>
+						</DropdownContainer>
+					)
 				}
 			}
 			return (
@@ -82,7 +85,7 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 					onChange={handleOpChange}
 				/>
 			)
-		}, [tbl, internal, handleOpChange])
+		}, [tps, internal, handleOpChange])
 
 		const isEmptyCheck = useMemo(() => {
 			const { operator } = internal.args
