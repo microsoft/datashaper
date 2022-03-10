@@ -13,19 +13,17 @@ import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 import { dropdownStyles } from './styles.js'
 
-export interface ColumnListMultiDropdownProps
-	extends Omit<IDropdownProps, 'options'> {
-	columns: string[]
-	onSelectAllOrNone?: (columns: string[]) => void
+export interface MultiDropdownProps extends IDropdownProps {
+	onSelectAllOrNone?: (options: IDropdownOption[]) => void
 }
 
 /**
- * Dropdown wrapper to automatically list the tables in a TableStore.
+ * Dropdown wrapper to manage multi-select with a select all/none helper.
  */
-export const ColumnListMultiDropdown: React.FC<ColumnListMultiDropdownProps> =
-	memo(function ColumnListMultiDropdown(props) {
-		const { columns, selectedKeys, onSelectAllOrNone, ...rest } = props
-		const options = useMemo(() => {
+export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
+	function MultiDropdown(props) {
+		const { options, selectedKeys, onSelectAllOrNone, ...rest } = props
+		const opts = useMemo(() => {
 			const hash = (selectedKeys || ([] as any)).reduce(
 				(acc: Record<string, boolean>, cur: any) => {
 					acc[cur] = true
@@ -33,11 +31,10 @@ export const ColumnListMultiDropdown: React.FC<ColumnListMultiDropdownProps> =
 				},
 				{},
 			)
-			const main: IDropdownOption[] = columns.map(column => {
-				const selected = !!hash[column]
+			const main: IDropdownOption[] = options.map(option => {
+				const selected = !!hash[option.key]
 				return {
-					key: column,
-					text: column,
+					...option,
 					selected,
 				}
 			})
@@ -57,13 +54,13 @@ export const ColumnListMultiDropdown: React.FC<ColumnListMultiDropdownProps> =
 					selected: false,
 				},
 			] as IDropdownOption[]
-		}, [columns, selectedKeys])
+		}, [options, selectedKeys])
 
 		const handleSelectAllOrNone = useCallback(
 			(all: boolean) => {
-				onSelectAllOrNone && onSelectAllOrNone(all ? columns : [])
+				onSelectAllOrNone && onSelectAllOrNone(all ? options : [])
 			},
-			[columns, onSelectAllOrNone],
+			[options, onSelectAllOrNone],
 		)
 
 		const handleRenderOption: IRenderFunction<ISelectableOption<any>> =
@@ -87,17 +84,16 @@ export const ColumnListMultiDropdown: React.FC<ColumnListMultiDropdownProps> =
 		return (
 			<Dropdown
 				required
-				label={'Columns'}
-				placeholder={'Select columns'}
-				styles={dropdownStyles}
 				multiSelect
-				options={options}
+				options={opts}
 				selectedKeys={selectedKeys}
+				styles={dropdownStyles}
 				onRenderOption={handleRenderOption}
 				{...rest}
 			/>
 		)
-	})
+	},
+)
 
 const Selector = styled.div`
 	display: flex;

@@ -6,7 +6,7 @@ import type { ColumnListStep } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { ColumnListMultiDropdown } from '../../../controls/ColumnListMultiDropdown.js'
+import { MultiDropdown } from '../../../controls/MultiDropdown.js'
 import { useLoadTable } from '../../../index.js'
 import type { StepSubcomponentProps } from '../../../types.js'
 
@@ -43,27 +43,35 @@ export const ColumnListInputs: React.FC<StepSubcomponentProps> = memo(
 		)
 
 		const handleSelectAllOrNone = useCallback(
-			columns => {
+			(options: IDropdownOption[]) => {
 				onChange &&
 					onChange({
 						...internal,
 						args: {
 							...internal.args,
-							columns,
+							columns: options.map(o => o.key),
 						},
 					})
 			},
 			[onChange, internal],
 		)
 
+		const options = useMemo(() => {
+			return (
+				tbl?.columnNames().map(name => ({
+					key: name,
+					text: name,
+				})) || []
+			)
+		}, [tbl])
 		return (
 			<Container>
 				{tbl ? (
-					<ColumnListMultiDropdown
+					<MultiDropdown
 						required
 						label={label || 'Columns'}
 						placeholder={'Select columns'}
-						columns={tbl.columnNames()}
+						options={options}
 						selectedKeys={internal.args.columns}
 						onChange={handleColumnChange}
 						onSelectAllOrNone={handleSelectAllOrNone}
