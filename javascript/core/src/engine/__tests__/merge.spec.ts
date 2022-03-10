@@ -316,7 +316,7 @@ describe('test for merge verb', () => {
 				output: 'output',
 				args: {
 					columns: ['quantity', 'totalSale'],
-					strategy: MergeStrategy.Array,
+					strategy: MergeStrategy.CreateArray,
 					to: 'resultColumn',
 				},
 			}

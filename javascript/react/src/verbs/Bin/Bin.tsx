@@ -15,7 +15,7 @@ import {
 	useHandleDropdownChange,
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
-import { BinStrategyDropdown } from '../../controls/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
@@ -66,10 +66,11 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	return (
 		<Container>
 			<LeftAlignedRow>
-				<BinStrategyDropdown
+				<EnumDropdown
 					required
+					enumeration={BinStrategy}
+					label={'Bin strategy'}
 					selectedKey={internal.args.strategy}
-					styles={dropdownStyles}
 					onChange={handleBinStrategyChange}
 				/>
 			</LeftAlignedRow>

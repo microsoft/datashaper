@@ -7,8 +7,8 @@ import type { IDropdownProps } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 
-import { useTableOptions } from '../../common/index.js'
-import { dropdownStyles } from '../styles.js'
+import { useTableOptions } from '../common/index.js'
+import { dropdownStyles } from './styles.js'
 
 export interface TableDropdownProps extends Partial<IDropdownProps> {
 	store?: TableStore

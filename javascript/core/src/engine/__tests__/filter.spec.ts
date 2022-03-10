@@ -17,7 +17,7 @@ describe('test for filter verb', () => {
 			args: {
 				to: '',
 				column: 'count',
-				operator: NumericComparisonOperator.Gte,
+				operator: NumericComparisonOperator.GreaterThanOrEqual,
 				type: FilterCompareType.Value,
 				value: 100,
 			},
@@ -42,7 +42,7 @@ describe('test for filter verb', () => {
 			args: {
 				to: '',
 				column: 'count',
-				operator: NumericComparisonOperator.Gt,
+				operator: NumericComparisonOperator.GreaterThan,
 				type: FilterCompareType.Value,
 				value: 100,
 			},
@@ -66,7 +66,7 @@ describe('test for filter verb', () => {
 			args: {
 				to: '',
 				column: 'count',
-				operator: NumericComparisonOperator.Lt,
+				operator: NumericComparisonOperator.LessThan,
 				type: FilterCompareType.Value,
 				value: 100,
 			},
@@ -113,7 +113,7 @@ describe('test for filter verb', () => {
 			args: {
 				to: '',
 				column: 'item',
-				operator: StringComparisonOperator.Empty,
+				operator: StringComparisonOperator.IsEmpty,
 				type: FilterCompareType.Value,
 			},
 		}

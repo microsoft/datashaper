@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { WindowStep } from '@data-wrangling-components/core'
+import { WindowFunction } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
-import { WindowFunctionDropdown } from '../../controls/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import type { StepComponentProps } from '../../types.js'
 /**
  * Just the column/op inputs for an rollup.
@@ -28,7 +29,10 @@ export const Window: React.FC<StepComponentProps> = memo(function Window({
 	return (
 		<Container>
 			<LeftAlignedRow>
-				<WindowFunctionDropdown
+				<EnumDropdown
+					required
+					label={'Function'}
+					enumeration={WindowFunction}
 					selectedKey={internal.args.operation}
 					onChange={handleOpChange}
 				/>

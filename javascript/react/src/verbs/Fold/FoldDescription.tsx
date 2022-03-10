@@ -23,17 +23,17 @@ export const FoldDescription: React.FC<StepDescriptionProps> = memo(
 			)
 			return [
 				{
-					before: 'into key',
-					value: args.to !== undefined ? args.to[0] : '',
-				},
-				{
-					before: 'into value',
-					value: args.to !== undefined ? args.to[1] : '',
-				},
-				{
 					before: `column${(args.columns || []).length !== 1 ? 's' : ''}`,
 					value: args.columns.length === 0 ? undefined : '',
 					sub,
+				},
+				{
+					before: 'into key column',
+					value: args.to !== undefined ? args.to[0] : '',
+				},
+				{
+					before: 'into value column',
+					value: args.to !== undefined ? args.to[1] : '',
 				},
 			]
 		}, [props])

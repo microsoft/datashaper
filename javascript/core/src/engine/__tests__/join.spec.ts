@@ -30,7 +30,7 @@ describe('test for join verb', () => {
 			verb: Verb.Join,
 			input: 'table1',
 			output: 'output',
-			args: { other: 'table5', on: ['ID'], strategy: JoinStrategy.Left },
+			args: { other: 'table5', on: ['ID'], strategy: JoinStrategy.LeftOuter },
 		}
 
 		const store = new TestStore()
@@ -47,7 +47,7 @@ describe('test for join verb', () => {
 			verb: Verb.Join,
 			input: 'table1',
 			output: 'output',
-			args: { other: 'table8', on: ['ID'], strategy: JoinStrategy.Right },
+			args: { other: 'table8', on: ['ID'], strategy: JoinStrategy.RightOuter },
 		}
 
 		const store = new TestStore()
@@ -64,7 +64,7 @@ describe('test for join verb', () => {
 			verb: Verb.Join,
 			input: 'table1',
 			output: 'output',
-			args: { other: 'table8', on: ['ID'], strategy: JoinStrategy.Full },
+			args: { other: 'table8', on: ['ID'], strategy: JoinStrategy.FullOuter },
 		}
 
 		const store = new TestStore()

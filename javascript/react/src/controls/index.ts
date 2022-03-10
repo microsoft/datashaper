@@ -4,7 +4,9 @@
  */
 export * from './ColumnInstruction.js'
 export * from './ColumnOrValueComboBox.js'
-export * from './dropdowns/index.js'
+export * from './ColumnValueDropdown.js'
 export * from './GroupHeader/index.js'
 export * from './ReadOnlyTextField.js'
 export * from './SortInstruction.js'
+export * from './TableColumnDropdown.js'
+export * from './TableDropdown.js'

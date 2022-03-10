@@ -18,7 +18,6 @@ export const FilterDescription: React.FC<StepDescriptionProps> = memo(
 				{
 					before: 'where',
 					value: args.column,
-					after: 'row value',
 					sub: [
 						{
 							value: `${args.operator || ''} ${args.value || ''}`,

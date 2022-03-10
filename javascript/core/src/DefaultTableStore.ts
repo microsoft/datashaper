@@ -150,7 +150,7 @@ export class DefaultTableStore implements TableStore {
 		const ids = this.list()
 		for (let i = 0; i < ids.length; i++) {
 			console.log(`--- ${ids[i]} ---`)
-			const container = await this.get(ids[i])
+			const container = await this.get(ids[i]!)
 			container.table?.print()
 		}
 	}

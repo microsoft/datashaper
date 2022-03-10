@@ -35,7 +35,7 @@ export async function runPipeline(
 				copy.input = 'input'
 			}
 		} else {
-			const prev = arr[idx - 1]
+			const prev = arr[idx - 1]!
 			if (!copy.input) {
 				copy.input = prev.output || `table-${idx - 1}`
 			}

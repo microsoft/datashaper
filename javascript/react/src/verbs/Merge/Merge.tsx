@@ -14,7 +14,8 @@ import {
 	useHandleTextfieldChange,
 	useLoadTable,
 } from '../../common/index.js'
-import { MergeStrategyComponent } from '../../controls/MergeStrategyComponent/MergeStrategyComponent.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
+import { useHandleDropdownChange } from '../../controls/hooks.js'
 import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
@@ -53,6 +54,12 @@ export const Merge: React.FC<StepComponentProps> = memo(function Merge({
 				})
 		},
 		[internal, onChange],
+	)
+
+	const handleOpChange = useHandleDropdownChange(
+		internal,
+		'args.strategy',
+		onChange,
 	)
 
 	const handleDelimiterChange = useHandleTextfieldChange(
@@ -97,12 +104,12 @@ export const Merge: React.FC<StepComponentProps> = memo(function Merge({
 				) : null}
 			</LeftAlignedRow>
 			<LeftAlignedRow>
-				<MergeStrategyComponent
-					input={input}
-					step={step}
-					store={store}
-					table={table}
-					onChange={onChange}
+				<EnumDropdown
+					required
+					label={'Merge strategy'}
+					enumeration={MergeStrategy}
+					selectedKey={internal.args.strategy}
+					onChange={handleOpChange}
 				/>
 			</LeftAlignedRow>
 			{internal.args.strategy === MergeStrategy.Concat ? (

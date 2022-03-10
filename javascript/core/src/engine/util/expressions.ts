@@ -38,13 +38,13 @@ export function compare(
 
 		// start with the empty operators, because typeof won't work...
 		if (
-			operator === NumericComparisonOperator.Empty ||
-			operator === StringComparisonOperator.Empty
+			operator === NumericComparisonOperator.IsEmpty ||
+			operator === StringComparisonOperator.IsEmpty
 		) {
 			return isEmpty(left)
 		} else if (
-			operator === NumericComparisonOperator.NotEmpty ||
-			operator === StringComparisonOperator.NotEmpty
+			operator === NumericComparisonOperator.IsNotEmpty ||
+			operator === StringComparisonOperator.IsNotEmpty
 		) {
 			const empty = isEmpty(left)
 			return empty === 1 ? 0 : 1
@@ -67,7 +67,6 @@ export function compare(
 			const l = left === true ? 1 : 0
 			// any non-empty string is a bool, so force true/false
 			const bool = right === 'true' ? 1 : 0
-			// TODO: add an actual boolean comparison operator
 			return compareValues(l, bool, operator as NumericComparisonOperator)
 		}
 	}) as CompareWrapper
@@ -102,7 +101,7 @@ function compareStrings(
 			return left.localeCompare(right) !== 0 ? 1 : 0
 		case StringComparisonOperator.StartsWith:
 			return op.startswith(left, right, 0) ? 1 : 0
-		case StringComparisonOperator.Empty:
+		case StringComparisonOperator.IsEmpty:
 		default:
 			throw new Error(`Unsupported operator: [${operator}]`)
 	}
@@ -114,19 +113,19 @@ function compareValues(
 	operator: NumericComparisonOperator,
 ): 1 | 0 {
 	switch (operator) {
-		case NumericComparisonOperator.Eq:
+		case NumericComparisonOperator.Equals:
 			return left === right ? 1 : 0
-		case NumericComparisonOperator.NotEq:
+		case NumericComparisonOperator.NotEqual:
 			return left !== right ? 1 : 0
-		case NumericComparisonOperator.Gte:
+		case NumericComparisonOperator.GreaterThanOrEqual:
 			return left >= right ? 1 : 0
-		case NumericComparisonOperator.Lte:
+		case NumericComparisonOperator.LessThanOrEqual:
 			return left <= right ? 1 : 0
-		case NumericComparisonOperator.Gt:
+		case NumericComparisonOperator.GreaterThan:
 			return left > right ? 1 : 0
-		case NumericComparisonOperator.Lt:
+		case NumericComparisonOperator.LessThan:
 			return left < right ? 1 : 0
-		case NumericComparisonOperator.Empty:
+		case NumericComparisonOperator.IsEmpty:
 			if (left === null || left === undefined || isNaN(left)) {
 				return 1
 			}

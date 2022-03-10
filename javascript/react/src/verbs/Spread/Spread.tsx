@@ -8,7 +8,6 @@ import type {
 	Step,
 } from '@data-wrangling-components/core'
 import { ActionButton, Label } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -39,10 +38,10 @@ export const Spread: React.FC<StepComponentProps> = memo(function Spread({
 				...internal,
 				args: {
 					...internal.args,
-					to: [...internal.args.to, first(tbl)],
+					to: [...internal.args.to, next(internal.args.to)],
 				},
 			})
-	}, [internal, tbl, onChange])
+	}, [internal, onChange])
 
 	const handleColumnChange = useHandleDropdownChange(
 		step,
@@ -74,8 +73,8 @@ export const Spread: React.FC<StepComponentProps> = memo(function Spread({
 	)
 })
 
-function first(table?: ColumnTable): string {
-	return table?.columnNames()[0] as string
+function next(columns: string[]): string {
+	return `New column (${columns.length})`
 }
 
 function useColumns(step: SpreadStep, onChange?: (step: Step) => void) {

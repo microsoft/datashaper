@@ -14,7 +14,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			1,
-			NumericComparisonOperator.Eq,
+			NumericComparisonOperator.Equals,
 			FilterCompareType.Value,
 		)
 
@@ -47,7 +47,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			1,
-			NumericComparisonOperator.Gt,
+			NumericComparisonOperator.GreaterThan,
 			FilterCompareType.Value,
 		)
 
@@ -80,7 +80,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			1,
-			NumericComparisonOperator.Gte,
+			NumericComparisonOperator.GreaterThanOrEqual,
 			FilterCompareType.Value,
 		)
 
@@ -113,7 +113,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			1,
-			NumericComparisonOperator.Lt,
+			NumericComparisonOperator.LessThan,
 			FilterCompareType.Value,
 		)
 
@@ -146,7 +146,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			1,
-			NumericComparisonOperator.Lte,
+			NumericComparisonOperator.LessThanOrEqual,
 			FilterCompareType.Value,
 		)
 
@@ -179,7 +179,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			1,
-			NumericComparisonOperator.NotEq,
+			NumericComparisonOperator.NotEqual,
 			FilterCompareType.Value,
 		)
 
@@ -212,7 +212,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			1,
-			NumericComparisonOperator.NotEmpty,
+			NumericComparisonOperator.IsNotEmpty,
 			FilterCompareType.Value,
 		)
 
@@ -245,7 +245,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			1,
-			NumericComparisonOperator.Empty,
+			NumericComparisonOperator.IsEmpty,
 			FilterCompareType.Value,
 		)
 
@@ -311,7 +311,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'item',
 			'',
-			StringComparisonOperator.Empty,
+			StringComparisonOperator.IsEmpty,
 			FilterCompareType.Value,
 		)
 
@@ -398,7 +398,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'item',
 			'',
-			StringComparisonOperator.NotEmpty,
+			StringComparisonOperator.IsNotEmpty,
 			FilterCompareType.Value,
 		)
 
@@ -485,7 +485,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			'count2',
-			NumericComparisonOperator.Gte,
+			NumericComparisonOperator.GreaterThanOrEqual,
 			FilterCompareType.Column,
 		)
 
@@ -522,7 +522,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			'count2',
-			NumericComparisonOperator.Gt,
+			NumericComparisonOperator.GreaterThan,
 			FilterCompareType.Column,
 		)
 
@@ -559,7 +559,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			'count2',
-			NumericComparisonOperator.Lt,
+			NumericComparisonOperator.LessThan,
 			FilterCompareType.Column,
 		)
 
@@ -596,7 +596,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			'count2',
-			NumericComparisonOperator.Lte,
+			NumericComparisonOperator.LessThanOrEqual,
 			FilterCompareType.Column,
 		)
 
@@ -633,7 +633,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			'count2',
-			NumericComparisonOperator.Eq,
+			NumericComparisonOperator.Equals,
 			FilterCompareType.Column,
 		)
 
@@ -670,7 +670,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			'count2',
-			NumericComparisonOperator.NotEq,
+			NumericComparisonOperator.NotEqual,
 			FilterCompareType.Column,
 		)
 
@@ -707,7 +707,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			'count2',
-			NumericComparisonOperator.Empty,
+			NumericComparisonOperator.IsEmpty,
 			FilterCompareType.Column,
 		)
 
@@ -730,7 +730,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'count',
 			'count2',
-			NumericComparisonOperator.NotEmpty,
+			NumericComparisonOperator.IsNotEmpty,
 			FilterCompareType.Column,
 		)
 
@@ -882,7 +882,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'flag',
 			'true',
-			NumericComparisonOperator.Eq,
+			NumericComparisonOperator.Equals,
 			FilterCompareType.Value,
 		)
 
@@ -903,7 +903,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'flag',
 			'true',
-			NumericComparisonOperator.NotEq,
+			NumericComparisonOperator.NotEqual,
 			FilterCompareType.Value,
 		)
 
