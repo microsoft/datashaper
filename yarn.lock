@@ -762,8 +762,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:javascript/core"
     "@data-wrangling-components/react": "workspace:javascript/react"
     "@data-wrangling-components/utilities": "workspace:javascript/utilities"
-    "@essex-js-toolkit/hooks": ^4.0.3
-    "@essex-js-toolkit/themed-components": ^2.0.1
+    "@essex/hooks": ^4.0.5
     "@essex/scripts": ^20.4.9
     "@essex/themed-components": ^2.0.4
     "@essex/webpack-config": ^20.1.8
@@ -857,78 +856,6 @@ __metadata:
     minimatch: ^3.0.4
     strip-json-comments: ^3.1.1
   checksum: a5e51dcf02627363567094456d7880b46b6a14a285d7a057f083ca903bdd862483bb6314cbc9fb6fa2d2c4537d50e0d28bd5e39650840241ae4796faaec65d2e
-  languageName: node
-  linkType: hard
-
-"@essex-js-toolkit/hooks@npm:4.0.1":
-  version: 4.0.1
-  resolution: "@essex-js-toolkit/hooks@npm:4.0.1"
-  dependencies:
-    "@essex-js-toolkit/toolbox": 3.0.1
-    lodash-es: ^4.17.21
-  peerDependencies:
-    "@types/node": "*"
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    react: ">=16.8.0"
-  checksum: 3c120777bc3653b61b0e1ad4f96addf3248e330dcc7053009120443e91e878fe44daf232c62147070ff9a83f0dbeb0ece43a9ccb37c0f644cf5d622802f600ba
-  languageName: node
-  linkType: hard
-
-"@essex-js-toolkit/hooks@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "@essex-js-toolkit/hooks@npm:4.0.3"
-  dependencies:
-    "@essex-js-toolkit/toolbox": 3.0.1
-    lodash-es: ^4.17.21
-  peerDependencies:
-    "@types/node": "*"
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    react: ">=16.8.0"
-  checksum: 112b417dea249809b77741d38d6f95a856c94871021604c05239fe6c7b685e98693248887ea6a6e9208391bf9c76358b531aa45d7ae09cf0f4ed40410d345148
-  languageName: node
-  linkType: hard
-
-"@essex-js-toolkit/themed-components@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@essex-js-toolkit/themed-components@npm:2.0.1"
-  dependencies:
-    "@essex-js-toolkit/hooks": 4.0.1
-    "@essex-js-toolkit/toolbox": 3.0.1
-    "@types/d3-array": ^3.0.2
-    "@types/d3-axis": ^3.0.1
-    "@types/d3-brush": ^3.0.1
-    "@types/d3-scale": ^4.0.2
-    "@types/d3-selection": ^3.0.2
-    d3-array: ^3.1.1
-    d3-axis: ^3.0.0
-    d3-brush: ^3.0.0
-    d3-scale: ^4.0.2
-    d3-selection: ^3.0.0
-    react-animate-height: ^2.0.23
-  peerDependencies:
-    "@fluentui/react": ">= 7.114.2"
-    "@thematic/color": ">= 0.8.0"
-    "@thematic/core": ">= 0.8.0"
-    "@thematic/d3": ">= 0.8.0"
-    "@thematic/fluent": ">= 0.8.0"
-    "@thematic/react": ">= 0.8.0"
-    "@types/d3": "*"
-    "@types/d3-axis": ^2.0.0
-    "@types/node": "*"
-    "@types/react": ">= 16.9"
-    "@uifabric/icons": ">= 7.3.38"
-    react: ">= 16.8.6"
-    react-dom: ">= 16.8.6"
-  checksum: 4f94993f26645676654b5ed8873d90dae14e337a34979f56948f632e4bd0a2d2e3a9978ed58ed1e840db65c42035e4dc563ffc1f2389dee97a0b48b15b40d97b
-  languageName: node
-  linkType: hard
-
-"@essex-js-toolkit/toolbox@npm:3.0.1":
-  version: 3.0.1
-  resolution: "@essex-js-toolkit/toolbox@npm:3.0.1"
-  checksum: 24b864ce1819374b00ab6f5b8633232c3ea212993dc52467a7de4f606843cfaa19ad3239bb257fcfd0c6bf189319602005be372070bc1f4f98570288a3dfdac6
   languageName: node
   linkType: hard
 

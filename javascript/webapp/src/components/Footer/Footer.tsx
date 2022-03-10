@@ -2,9 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useMicrosoftConsentBanner } from '@essex-js-toolkit/hooks'
-import { FC, memo } from 'react'
+import { useMicrosoftConsentBanner } from '@essex/hooks'
+import type { FC} from 'react';
+import { memo } from 'react'
 import styled from 'styled-components'
+
 import { useTheme } from '../../states/settings.js'
 
 export const Footer: FC = memo(function Footer() {
@@ -15,7 +17,7 @@ export const Footer: FC = memo(function Footer() {
 		onChange: (c: any) => console.log('CHANGED', c),
 	}
 	const [, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
-
+	console.log(manageConsent)
 	return (
 		<FooterEl>
 			<Container>
