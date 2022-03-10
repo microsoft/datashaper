@@ -15,7 +15,7 @@ export const ImputeDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'column',
-					value: args.to,
+					value: args.column,
 				},
 				{
 					before: 'with value',

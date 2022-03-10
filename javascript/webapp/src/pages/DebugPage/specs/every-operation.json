@@ -135,10 +135,10 @@
 		},
 		{
 			"verb": "impute",
-			"input": "data/companies.csv",
+			"input": "data/companies2.csv",
 			"output": "impute-1",
 			"args": {
-				"to": "Name",
+				"column": "Name",
 				"value": "emptyValue"
 			}
 		},
