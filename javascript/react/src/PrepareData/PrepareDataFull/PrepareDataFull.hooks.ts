@@ -9,6 +9,8 @@ import {
 	TableMetadata,
 	TableContainer,
 } from '@data-wrangling-components/core'
+import type { FileCollection } from '@data-wrangling-components/utilities'
+import type { ICommandBarItemProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useState, useMemo, useEffect } from 'react'
 import { usePipeline, useStore } from '../../common/index.js'
@@ -17,10 +19,14 @@ import {
 	useOnSaveStep,
 	useRunPipeline,
 	useAddNewTables,
+	useCommands,
+	useHandleFileUpload,
+	useMessageBar,
 } from '../hooks'
 
 export function useBusinessLogic(
 	tables: TableContainer[],
+	onUpdateTables: (tables: TableContainer[]) => void,
 	onUpdateSteps: (steps: Step[]) => void,
 	steps?: Step[],
 ): {
@@ -33,11 +39,17 @@ export function useBusinessLogic(
 	lastTableName: string
 	selectedTableName?: string
 	derived: TableContainer[]
+	commands: ICommandBarItemProps[]
+	handleFileUpload: (fileCollection: FileCollection) => void
+	Message: JSX.Element | null
+	setMessage: (message: string) => void
 } {
 	const [selectedTableName, setSelectedTableName] = useState<string>()
+	const [message, setMessage] = useState<string>()
 	const [storedTables, setStoredTables] = useState<Map<string, TableContainer>>(
 		new Map<string, TableContainer>(),
 	)
+
 	const store = useStore()
 	const pipeline = usePipeline(store)
 	const runPipeline = useRunPipeline(
@@ -46,6 +58,12 @@ export function useBusinessLogic(
 		setSelectedTableName,
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
+	const handleFileUpload = useHandleFileUpload(
+		pipeline,
+		runPipeline,
+		onUpdateSteps,
+		onUpdateTables,
+	)
 
 	// TODO: resolve these from the stored table state
 	const derived = useMemo(() => {
@@ -105,6 +123,14 @@ export function useBusinessLogic(
 
 	const onSaveStep = useOnSaveStep(onUpdateSteps, pipeline)
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
+	const commands = useCommands(
+		pipeline,
+		store,
+		runPipeline,
+		onUpdateSteps,
+		onUpdateTables,
+	)
+	const Message = useMessageBar(message, setMessage)
 
 	return {
 		selectedTable,
@@ -116,5 +142,9 @@ export function useBusinessLogic(
 		lastTableName,
 		selectedTableName,
 		derived,
+		commands,
+		handleFileUpload,
+		Message,
+		setMessage,
 	}
 }

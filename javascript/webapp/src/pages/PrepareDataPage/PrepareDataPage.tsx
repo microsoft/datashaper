@@ -9,7 +9,7 @@ import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
 import { useBusinessLogic } from './hooks'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const { setSteps, steps, tables } = useBusinessLogic()
+	const { setSteps, steps, tables, updateTables } = useBusinessLogic()
 	const setHelpFileContent = useHelpFileContentSetter()
 
 	useEffect(() => {
@@ -23,7 +23,12 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	return (
 		<Container className={'prepare-data-page'}>
-			<PrepareDataFull tables={tables} steps={steps} onUpdateSteps={setSteps} />
+			<PrepareDataFull
+				tables={tables}
+				steps={steps}
+				onUpdateSteps={setSteps}
+				onUpdateTables={updateTables}
+			/>
 		</Container>
 	)
 })

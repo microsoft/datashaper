@@ -5,16 +5,12 @@
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 import { useDropzone } from './hooks/index.js'
-import type { DzProps } from './types.js'
+import type { DropzoneStyles, DzProps } from './types.js'
 
 interface DropzoneProps extends DzProps {
 	placeholder?: string
-	styles?: {
-		container?: React.CSSProperties
-		dragReject?: React.CSSProperties
-		placeholder?: React.CSSProperties
-		dragZone?: React.CSSProperties
-	}
+	showPlaceholder?: boolean
+	styles?: DropzoneStyles
 	disabled?: boolean
 }
 export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
@@ -24,6 +20,7 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 	acceptedFileTypes = [],
 	dropzoneOptions = {},
 	placeholder,
+	showPlaceholder = true,
 	styles = {
 		container: {},
 		dragReject: {},
@@ -47,15 +44,17 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 		dropzoneOptions,
 	})
 	const placeholderText = useMemo((): string => {
-		return placeholder || `Drop ${acceptedFileTypesExt} files here`
-	}, [placeholder, acceptedFileTypesExt])
+		return showPlaceholder
+			? placeholder || `Drop ${acceptedFileTypesExt} files here`
+			: ''
+	}, [showPlaceholder, placeholder, acceptedFileTypesExt])
 	const container: React.CSSProperties = useMemo(
 		() => ({
-			border:
-				'1px dashed ' +
-				(isDragActive
-					? thematic.application().accent().hex()
-					: thematic.application().lowContrast().hex()),
+			borderWidth: '1px',
+			borderStyle: 'dashed',
+			borderColor: isDragActive
+				? thematic.application().accent().hex()
+				: thematic.application().lowContrast().hex(),
 			borderRadius: '5px',
 			width: '100%',
 			height: '100%',
@@ -63,6 +62,7 @@ export const Dropzone: React.FC<DropzoneProps> = memo(function Dropzone({
 			cursor: 'pointer',
 			opacity: isDragActive ? 0.5 : 1,
 			fontSize: '1.5rem',
+			backgroundColor: isDragActive ? 'white' : 'transparent',
 			...styles.container,
 		}),
 		[styles, thematic, isDragActive],
