@@ -184,7 +184,7 @@ export function renameDuplicatedFiles(files: BaseFile[]): BaseFile[] {
 	}
 	return files.map(file => {
 		let name = cleanName(file.name)
-		const count = fileNames[name]
+		const count = fileNames[name] || 0
 		--fileNames[name]
 		if (count > 1) {
 			const ext = extension(name)

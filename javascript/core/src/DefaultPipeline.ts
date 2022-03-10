@@ -40,7 +40,7 @@ export class DefaultPipeline implements Pipeline {
 		return [...this._steps]
 	}
 	get last(): Step {
-		return this._steps[this._steps.length - 1]
+		return this._steps[this._steps.length - 1]!
 	}
 	get count(): number {
 		return this._steps.length

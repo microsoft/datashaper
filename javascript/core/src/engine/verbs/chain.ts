@@ -87,7 +87,7 @@ async function exec(step: Step, store: TableStore): Promise<TableContainer> {
 	}
 
 	for (let index = 0; index < steps.length; index++) {
-		const step = steps[index]
+		const step = steps[index]!
 		const { verb } = step
 		try {
 			// fallback to chain if unspecified - this allows custom names to identify different chains

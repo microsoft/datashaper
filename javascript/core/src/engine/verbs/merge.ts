@@ -55,11 +55,11 @@ export async function merge(
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {
 	let allTypesAreTheSame = true
-	const lastDataType: DataType = columnType(inputTable, columns[0])
+	const lastDataType: DataType = columnType(inputTable, columns[0]!)
 	let i = 1
 
 	while (allTypesAreTheSame === true && i < columns.length) {
-		const dataType: DataType = columnType(inputTable, columns[i])
+		const dataType: DataType = columnType(inputTable, columns[i]!)
 		allTypesAreTheSame = lastDataType === dataType
 		i++
 	}
