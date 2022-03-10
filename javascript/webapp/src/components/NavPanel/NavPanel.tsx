@@ -7,9 +7,11 @@ import { Link, Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
-import { setDarkMode } from '../../localStorageHandler/localStorageHandler.js'
+
 import { useHelpFileContentValue } from '~states/helpFileContent'
 import { useSettings } from '~states/settings'
+
+import { setDarkMode } from '../../localStorageHandler/localStorageHandler.js'
 
 export interface NavPanelProps {
 	isOpen: boolean

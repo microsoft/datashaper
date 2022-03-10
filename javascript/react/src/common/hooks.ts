@@ -2,17 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	TableStore,
-	TableContainer,
-	createTableStore,
-	Step,
+import type {
 	InputColumnRecordArgs,
-	Value,
-	DataType,
-	columnType,
 	Pipeline,
+	Step,
+	TableContainer,
+	TableStore,
+	Value,
+} from '@data-wrangling-components/core'
+import {
+	columnType,
 	createPipeline,
+	createTableStore,
+	DataType,
 } from '@data-wrangling-components/core'
 import type {
 	ICommandBarItemProps,
@@ -26,6 +28,7 @@ import cloneDeep from 'lodash-es/cloneDeep.js'
 import isArray from 'lodash-es/isArray.js'
 import set from 'lodash-es/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+
 import type { DetailsListFeatures } from '../index.js'
 import type {
 	DropdownOptionChangeFunction,
@@ -70,7 +73,7 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 	useEffect(() => {
 		if (dirty) {
 			setDirty(false)
-			setList(store?.list() || [])
+			setList(store?.list().sort() || [])
 		}
 	}, [store, dirty, setDirty, setList])
 	return useSimpleOptions(list)
@@ -103,8 +106,8 @@ export function useColumnValueOptions(
 				.rollup({
 					[column]: op.array_agg(column),
 				})
-				.objects()[0]
-			return (result && result[column]) ?? []
+				.get(column, 0)
+			return result ?? []
 		}
 		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list
@@ -220,7 +223,7 @@ export function useColumnRecordDelete(
 }
 
 export function useLoadTable(
-	name: string | undefined,
+	id: string | undefined,
 	table?: ColumnTable,
 	store?: TableStore,
 ): ColumnTable | undefined {
@@ -247,13 +250,13 @@ export function useLoadTable(
 		// interface that is managing a pipeline
 		if (table) {
 			setTable(table)
-		} else if (name && store) {
-			fn(name, store)
+		} else if (id && store) {
+			fn(id, store)
 		}
 		return () => {
-			name && store && store.unlisten(name)
+			id && store && store.unlisten(id)
 		}
-	}, [name, table, store, handleTableLoad])
+	}, [id, table, store, handleTableLoad])
 	return tbl
 }
 
@@ -325,6 +328,7 @@ export function useToggleStatsHeaderCommand(
 			key: 'toggle-stats',
 			iconOnly: true,
 			text: 'Toggle header features',
+			ariaLabel: 'Toggle header features',
 			iconProps: iconProps.settings,
 			subMenuProps: {
 				items: [

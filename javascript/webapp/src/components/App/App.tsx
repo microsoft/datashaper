@@ -7,12 +7,14 @@ import { memo, Suspense } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import styled from 'styled-components'
+
+import { Footer } from '~components/Footer'
+
 import { ErrorBoundary } from './ErrorBoundary'
 import { Header } from './Header'
 import { Layout } from './Layout'
 import { RouteOptions } from './RouteOptions'
 import { StyleContext } from './StyleContext'
-import { Footer } from '~components/Footer'
 
 export const App: React.FC = memo(function App() {
 	return (

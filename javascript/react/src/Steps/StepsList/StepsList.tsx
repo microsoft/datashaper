@@ -4,10 +4,11 @@
  */
 import type { Step } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
-import { memo } from 'react'
+import { memo, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { DetailText } from '../../PrepareData/DetailText/index.js'
+
 import { StepCard } from '../../index.js'
+import { DetailText } from '../../PrepareData/DetailText/index.js'
 
 export const StepsList: React.FC<{
 	steps?: Step[]
@@ -15,15 +16,29 @@ export const StepsList: React.FC<{
 	onEditClicked?: (step: Step, index: number) => void
 	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
-	showModal?: () => void
+	onStartNewStep?: () => void
+	buttonId?: string
 }> = memo(function StepsList({
 	steps,
 	onDeleteClicked,
 	onEditClicked,
 	onDuplicateClicked,
 	onSelect,
-	showModal,
+	onStartNewStep,
+	buttonId,
 }) {
+	const ref = useRef<HTMLDivElement>(null)
+
+	useEffect(() => {
+		const f = () => {
+			ref?.current?.scrollIntoView({
+				block: 'center',
+				behavior: 'smooth',
+			})
+		}
+		f()
+	}, [steps])
+
 	return (
 		<Container>
 			{steps?.map((_step, index) => {
@@ -40,12 +55,13 @@ export const StepsList: React.FC<{
 				)
 			})}
 
-			{showModal && (
-				<ButtonContainer>
+			{onStartNewStep && (
+				<ButtonContainer ref={ref}>
 					<DefaultButton
 						styles={addButtonStyles}
 						iconProps={iconProps.add}
-						onClick={showModal}
+						onClick={onStartNewStep}
+						id={buttonId}
 					>
 						Add step
 					</DefaultButton>

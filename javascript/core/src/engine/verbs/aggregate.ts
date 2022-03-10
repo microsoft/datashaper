@@ -5,7 +5,7 @@
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import type { AggregateArgs, Step, TableContainer } from '../../types.js'
-import { singleRollup } from '../util/index.js'
+import { singleExpression } from '../util/index.js'
 
 /**
  * Executes an aggregate, which is an arquero groupby + rollup.
@@ -21,7 +21,7 @@ export async function aggregate(
 	const { groupby, column, operation, to } = args as AggregateArgs
 	const inputTable = await store.table(input)
 
-	const expr = singleRollup(column, operation)
+	const expr = singleExpression(column, operation)
 
 	const rArgs = {
 		[to]: expr,

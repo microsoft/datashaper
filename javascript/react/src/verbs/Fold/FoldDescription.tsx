@@ -4,8 +4,9 @@
  */
 import type { FoldStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { createRowEntries, VerbDescription } from '../../'
-import type { StepDescriptionProps } from '../../types'
+
+import { createRowEntries, VerbDescription } from '../../index.js'
+import type { StepDescriptionProps } from '../../types.js'
 
 export const FoldDescription: React.FC<StepDescriptionProps> = memo(
 	function FoldDescription(props) {
@@ -22,17 +23,17 @@ export const FoldDescription: React.FC<StepDescriptionProps> = memo(
 			)
 			return [
 				{
-					before: 'into key',
-					value: args.to !== undefined ? args.to[0] : '',
-				},
-				{
-					before: 'into value',
-					value: args.to !== undefined ? args.to[1] : '',
-				},
-				{
 					before: `column${(args.columns || []).length !== 1 ? 's' : ''}`,
 					value: args.columns.length === 0 ? undefined : '',
 					sub,
+				},
+				{
+					before: 'into key column',
+					value: args.to !== undefined ? args.to[0] : '',
+				},
+				{
+					before: 'into value column',
+					value: args.to !== undefined ? args.to[1] : '',
 				},
 			]
 		}, [props])

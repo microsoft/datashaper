@@ -5,6 +5,7 @@
 import { PrepareDataFull } from '@data-wrangling-components/react'
 import { memo, useEffect } from 'react'
 import styled from 'styled-components'
+
 import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
 import { useBusinessLogic } from './hooks'
 

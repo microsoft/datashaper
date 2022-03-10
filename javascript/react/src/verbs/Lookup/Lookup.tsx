@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { LookupStep } from '@data-wrangling-components/core'
-import { Label } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedColumn } from '../../common/index.js'
-import { ColumnListInputs, JoinInputs } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { ColumnListInputs, JoinInputs } from '../shared/index.js'
 
 /**
  * Provides inputs for a Lookup step.
@@ -25,8 +25,8 @@ export const Lookup: React.FC<StepComponentProps> = memo(function Lookup({
 		<Container>
 			<JoinInputs step={step} store={store} table={table} onChange={onChange} />
 			<LeftAlignedColumn>
-				<Label>Columns to copy</Label>
 				<ColumnListInputs
+					label={'Columns to copy'}
 					step={step}
 					store={store}
 					onChange={onChange}

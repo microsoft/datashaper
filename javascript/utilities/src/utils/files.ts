@@ -5,7 +5,8 @@
 
 import { BaseFile, FileWithPath } from '../common/index.js'
 import { FileMimeType } from '../index.js'
-import { FileType, Json } from '../types.js'
+import type { Json } from '../types.js'
+import { FileType } from '../types.js'
 
 interface FileOptions {
 	name?: string
@@ -183,7 +184,7 @@ export function renameDuplicatedFiles(files: BaseFile[]): BaseFile[] {
 	}
 	return files.map(file => {
 		let name = cleanName(file.name)
-		const count = fileNames[name] as number
+		const count = fileNames[name] || 0
 		--fileNames[name]
 		if (count > 1) {
 			const ext = extension(name)

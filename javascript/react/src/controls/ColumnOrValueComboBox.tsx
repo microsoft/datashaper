@@ -2,15 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	ComboBox,
-	IComboBoxProps,
-	SelectableOptionMenuItemType,
-} from '@fluentui/react'
+import type { IComboBoxProps } from '@fluentui/react'
+import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
+
 import { useTableColumnOptions } from '../common/index.js'
-import { columnDropdownStyles } from './styles.js'
+import { dropdownStyles } from './styles.js'
 
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
 	table?: ColumnTable
@@ -40,7 +38,7 @@ export const ColumnOrValueComboBox: React.FC<ColumnOrValueComboBoxProps> = memo(
 				label={'Column or value'}
 				placeholder={'text/number or select column'}
 				options={withHeader}
-				styles={columnDropdownStyles}
+				styles={dropdownStyles}
 				{...rest}
 			/>
 		)

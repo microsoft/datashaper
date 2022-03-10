@@ -4,18 +4,25 @@
  */
 import type { TableStore } from '@data-wrangling-components/core'
 import index from '@data-wrangling-components/guidance'
-import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
+import {
+	Callout,
+	DirectionalHint,
+	IconButton,
+	PrimaryButton,
+} from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import React, { memo } from 'react'
 import styled from 'styled-components'
+
 import { Guidance } from '../Guidance/index.js'
-import { StepSelector, TableTransformModalProps } from '../index.js'
+import type { TableTransformModalProps } from '../index.js'
+import { StepSelector } from '../index.js'
 import {
 	useHandleTableRunClick,
 	useHandleTableStepArgs,
 	useInternalTableStep,
 	useModalStyles,
-} from './hooks/index.js'
+} from './TableTransformModal.hooks.js'
 
 export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 	function TableTransformModal(props) {
@@ -43,20 +50,16 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			onTransformRequested,
 		)
 
-		const adaptedStyles = useModalStyles({
-			...styles,
-			main: { maxWidth: '50%' },
-		})
+		const adaptedStyles = useModalStyles(styles, isGuidanceVisible)
 		return (
-			<Modal
-				onDismiss={onDismiss}
+			<Callout
 				onDismissed={() => setInternal(undefined)}
 				styles={adaptedStyles}
+				directionalHint={DirectionalHint.rightTopEdge}
 				{...rest}
 			>
 				<Header>
 					<Title>{step ? 'Edit step' : 'New step'}</Title>
-
 					{onDismiss && (
 						<IconButton
 							iconProps={iconProps.cancel}
@@ -102,7 +105,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 						/>
 					) : null}
 				</ContainerBody>
-			</Modal>
+			</Callout>
 		)
 	},
 )
@@ -113,11 +116,9 @@ const iconProps = {
 
 const ContainerBody = styled.div<{ showGuidance: boolean }>`
 	padding: 0px 12px 14px 24px;
-
-	display: grid;
-	grid-template-columns: ${({ showGuidance }) => (!showGuidance ? '' : '1fr')} 1fr;
-	justify-content: space-between;
-	gap: 2rem;
+	display: flex;
+	justify-content: flex-start;
+	gap: 12px;
 `
 
 const Header = styled.div`
@@ -136,7 +137,7 @@ const Title = styled.h3`
 const StepSelectorContainer = styled.div`
 	margin-bottom: 8px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 `
 

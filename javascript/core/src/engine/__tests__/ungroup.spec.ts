@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types.js'
+import type { Step } from '../../types.js'
+import { Verb } from '../../types.js'
 import { groupby } from '../verbs/groupby.js'
 import { ungroup } from '../verbs/ungroup.js'
 import { TestStore } from './TestStore.js'

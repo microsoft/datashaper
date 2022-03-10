@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types.js'
+import type { Step } from '../../types.js'
+import { Verb } from '../../types.js'
 import { impute } from '../verbs/impute.js'
 import { TestStore } from './TestStore.js'
 
@@ -12,7 +13,7 @@ describe('test for impute verb', () => {
 			verb: Verb.Impute,
 			input: 'table5',
 			output: 'output',
-			args: { to: 'item', value: 'emptyValue' },
+			args: { column: 'item', value: 'emptyValue' },
 		}
 
 		const store = new TestStore()
@@ -32,7 +33,7 @@ describe('test for impute verb', () => {
 			verb: Verb.Impute,
 			input: 'table11',
 			output: 'output',
-			args: { to: 'y', value: 5000 },
+			args: { column: 'y', value: 5000 },
 		}
 
 		const store = new TestStore()

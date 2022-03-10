@@ -4,6 +4,7 @@
  */
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
+
 import { useDropzone } from './hooks/index.js'
 import type { DzProps } from './types.js'
 

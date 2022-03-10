@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Entry } from '@zip.js/zip.js'
+import type { Entry } from '@zip.js/zip.js'
+
 import { FileWithPath } from '../../common/index.js'
 import { getBlobFromEntry, getFileFromEntry, toZip } from '../zip.js'
 

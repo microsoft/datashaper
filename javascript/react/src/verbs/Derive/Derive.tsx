@@ -3,17 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DeriveStep } from '@data-wrangling-components/core'
+import { MathOperator } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
+	LeftAlignedRow,
 	useHandleDropdownChange,
 	useLoadTable,
-	LeftAlignedRow,
 } from '../../common/index.js'
-import {
-	MathOperatorDropdown,
-	TableColumnDropdown,
-} from '../../controls/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
+import { TableColumnDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -56,10 +56,17 @@ export const Derive: React.FC<StepComponentProps> = memo(function Derive({
 					selectedKey={internal.args.column1}
 					onChange={handleLeftColumnChange}
 				/>
-				<MathOperatorDropdown
+			</LeftAlignedRow>
+			<LeftAlignedRow>
+				<EnumDropdown
+					required
+					enumeration={MathOperator}
+					label={'Operation'}
 					selectedKey={internal.args.operator}
 					onChange={handleOpChange}
 				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
 				<TableColumnDropdown
 					table={tbl}
 					required

@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb, SetOp } from '../../types.js'
+import type { Step } from '../../types.js'
+import { SetOp, Verb } from '../../types.js'
 import { set } from '../util/sets.js'
 import { TestStore } from './TestStore.js'
 

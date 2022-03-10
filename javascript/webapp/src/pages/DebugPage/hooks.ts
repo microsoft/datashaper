@@ -4,8 +4,8 @@
  */
 import type {
 	Specification,
-	TableStore,
 	TableContainer,
+	TableStore,
 } from '@data-wrangling-components/core'
 import { createTableStore } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
@@ -41,7 +41,9 @@ export function useTableStore(): TableStore {
 	return useMemo(() => {
 		const store = createTableStore()
 		TABLES.forEach(name => {
-			store.queue(name, async (name: string) => loadCSV(name, { parse }))
+			store.queue(name, async (name: string) =>
+				loadCSV(name, { parse, autoMax: 1000000 }),
+			)
 		})
 		return store
 	}, [])

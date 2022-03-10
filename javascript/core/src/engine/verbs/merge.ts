@@ -7,8 +7,10 @@ import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
+
 import { container } from '../../factories.js'
-import { columnType, MergeStrategy, TableStore } from '../../index.js'
+import type { TableStore } from '../../index.js'
+import { columnType, MergeStrategy } from '../../index.js'
 import type { DataType, MergeArgs, Step, TableContainer } from '../../types.js'
 
 /**
@@ -23,7 +25,7 @@ export async function merge(
 	store: TableStore,
 ): Promise<TableContainer> {
 	const { input, output, args } = step
-	const { columns = [], strategy, to } = args as MergeArgs
+	const { columns = [], strategy, to, delimiter = '' } = args as MergeArgs
 
 	const inputTable = await store.table(input)
 
@@ -35,7 +37,9 @@ export async function merge(
 			case MergeStrategy.LastOneWins:
 				return lastOneWinsStrategy(isSameDataTypeFlag, d, columns)
 			case MergeStrategy.Concat:
-				return concatStrategy(d, columns)
+				return concatStrategy(d, columns, delimiter)
+			case MergeStrategy.CreateArray:
+				return arrayStrategy(d, columns)
 			case MergeStrategy.FirstOneWins:
 			default:
 				return firstOneWinsStrategy(isSameDataTypeFlag, d, columns)
@@ -51,11 +55,11 @@ export async function merge(
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {
 	let allTypesAreTheSame = true
-	const lastDataType: DataType = columnType(inputTable, columns[0] as string)
+	const lastDataType: DataType = columnType(inputTable, columns[0]!)
 	let i = 1
 
 	while (allTypesAreTheSame === true && i < columns.length) {
-		const dataType: DataType = columnType(inputTable, columns[i] as string)
+		const dataType: DataType = columnType(inputTable, columns[i]!)
 		allTypesAreTheSame = lastDataType === dataType
 		i++
 	}
@@ -105,17 +109,25 @@ function lastOneWinsStrategy(
 	return isSameDataTypeFlag ? lastValidValue : '' + lastValidValue
 }
 
-function concatStrategy(singleRow: RowObject, columns: string[]) {
-	let concatValue = ''
+function arrayStrategy(singleRow: RowObject, columns: string[]) {
+	const concat = []
 
 	for (let i = 0; i < columns.length; i++) {
 		if (
 			singleRow[columns[i]!] !== undefined &&
 			singleRow[columns[i]!] !== null
 		) {
-			concatValue = concatValue + singleRow[columns[i]!]
+			concat.push(singleRow[columns[i]!])
 		}
 	}
 
-	return concatValue
+	return concat
+}
+
+function concatStrategy(
+	singleRow: RowObject,
+	columns: string[],
+	delimiter: string,
+) {
+	return arrayStrategy(singleRow, columns).join(delimiter)
 }

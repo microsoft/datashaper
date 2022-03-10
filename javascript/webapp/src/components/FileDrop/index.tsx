@@ -3,10 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Dropzone } from '@data-wrangling-components/react'
-import {
-	FileCollection,
-	FileExtensions,
-} from '@data-wrangling-components/utilities'
+import type { FileCollection } from '@data-wrangling-components/utilities'
+import { FileExtensions } from '@data-wrangling-components/utilities'
 import { memo } from 'react'
 
 export interface FileDropProps {

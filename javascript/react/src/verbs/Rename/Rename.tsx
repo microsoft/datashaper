@@ -3,16 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RenameStep } from '@data-wrangling-components/core'
+import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
 	Icon,
 	IconButton,
-	IDropdownOption,
+	Label,
 	TextField,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { useColumnRecordDelete, useLoadTable } from '../../common/index.js'
 import { TableColumnDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
@@ -20,7 +22,7 @@ import {
 	useDisabled,
 	useHandleAddButtonClick,
 	useHandleColumnChange,
-} from './hooks'
+} from './hooks.js'
 
 /**
  * Provides inputs for a RenameStep.
@@ -51,6 +53,7 @@ export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 
 	return (
 		<Container>
+			<Label>Column renames</Label>
 			{columnPairs}
 			<ActionButton
 				onClick={handleButtonClick}

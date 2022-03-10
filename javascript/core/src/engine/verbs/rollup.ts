@@ -4,8 +4,8 @@
  */
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { Step, RollupArgs, TableContainer } from '../../types.js'
-import { singleRollup } from '../util/index.js'
+import type { RollupArgs, Step, TableContainer } from '../../types.js'
+import { singleExpression } from '../util/index.js'
 
 /**
  * Executes rollup.
@@ -22,7 +22,7 @@ export async function rollup(
 	const { column, operation, to } = args as RollupArgs
 	const inputTable = await store.table(input)
 
-	const expr = singleRollup(column, operation)
+	const expr = singleExpression(column, operation)
 
 	const rArgs = {
 		[to]: expr,

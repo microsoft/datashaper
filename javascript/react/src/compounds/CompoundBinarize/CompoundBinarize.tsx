@@ -4,12 +4,14 @@
  */
 import type { BinarizeStep } from '@data-wrangling-components/core'
 import { ActionButton, TextField } from '@fluentui/react'
-import { memo, useMemo, useCallback, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
-import { FilterInputs, TableColumnDropdown } from '../../controls/index.js'
-import { columnDropdownStyles } from '../../controls/styles.js'
+import { TableColumnDropdown } from '../../controls/index.js'
+import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
+import { FilterInputs } from '../../verbs/shared/index.js'
 import {
 	createBinarize,
 	defaults,
@@ -88,7 +90,7 @@ export const CompoundBinarize: React.FC<StepComponentProps> = memo(
 						label={'New column name'}
 						placeholder={'Column name'}
 						value={to}
-						styles={columnDropdownStyles}
+						styles={dropdownStyles}
 						onChange={handleToChange}
 					/>
 				</LeftAlignedRow>

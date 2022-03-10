@@ -2,14 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	CommandBar as CB,
-	ICommandBarItemProps,
-	IIconProps,
-} from '@fluentui/react'
+import type { ICommandBarItemProps, IIconProps } from '@fluentui/react'
+import { CommandBar as CB } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { HEIGHT } from './constants.js'
 
 interface CommandBarProps {

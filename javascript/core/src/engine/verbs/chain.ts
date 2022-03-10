@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
+
 import type { StepFunction, TableStore } from '../../index.js'
 import type { ChainArgs, Step, TableContainer } from '../../types.js'
 import { aggregate } from './aggregate.js'
@@ -36,6 +37,7 @@ import { ungroup } from './ungroup.js'
 import { union } from './union.js'
 import { unorder } from './unorder.js'
 import { unroll } from './unroll.js'
+import { window } from './window.js'
 
 const verbs: Record<string, StepFunction> = {
 	aggregate,
@@ -70,6 +72,7 @@ const verbs: Record<string, StepFunction> = {
 	union,
 	unorder,
 	unroll,
+	window,
 }
 
 async function exec(step: Step, store: TableStore): Promise<TableContainer> {
@@ -84,7 +87,7 @@ async function exec(step: Step, store: TableStore): Promise<TableContainer> {
 	}
 
 	for (let index = 0; index < steps.length; index++) {
-		const step = steps[index] as Step<unknown>
+		const step = steps[index]!
 		const { verb } = step
 		try {
 			// fallback to chain if unspecified - this allows custom names to identify different chains

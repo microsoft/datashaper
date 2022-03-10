@@ -4,6 +4,7 @@
  */
 import { initializeIcons } from '@fluentui/react/lib/Icons'
 import { render } from 'react-dom'
+
 import { App } from '~components'
 import { setDefaultSettings } from '~localStorageHandler'
 

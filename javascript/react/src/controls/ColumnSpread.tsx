@@ -6,7 +6,8 @@ import { IconButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { columnDropdownStyles } from './styles'
+
+import { dropdownStyles } from './styles.js'
 
 export interface ColumnSpreadProps {
 	table?: ColumnTable
@@ -37,7 +38,7 @@ export const ColumnSpread: React.FC<ColumnSpreadProps> = memo(
 				<TextField
 					value={column}
 					onChange={handleColumnChange}
-					styles={columnDropdownStyles}
+					styles={dropdownStyles}
 				/>
 				<IconButton
 					title={'Remove this column'}

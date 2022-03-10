@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableStore, Step } from '@data-wrangling-components/core'
+import type { Step, TableStore } from '@data-wrangling-components/core'
 import type { IDropdownOption, IModalProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -43,6 +43,7 @@ export interface TransformModalProps extends IModalProps {
 	 *  or as input for table transform
 	 */
 	nextInputTable?: string
+	target?: string
 }
 
 export interface TableTransformModalProps extends TransformModalProps {
@@ -95,6 +96,14 @@ export interface StepComponentProps extends StepDependent {
 	 */
 	input?: string
 	onChange?: StepChangeFunction
+}
+
+/**
+ * For reusable subcomponents that are combined in one interface
+ * to manipulate a step.
+ */
+export interface StepSubcomponentProps extends StepComponentProps {
+	label?: string
 }
 
 export interface StepDescriptionProps extends StepDependent {

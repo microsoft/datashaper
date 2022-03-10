@@ -2,19 +2,21 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinStep, BinStrategy } from '@data-wrangling-components/core'
+import type { BinStep } from '@data-wrangling-components/core'
+import { BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, Position, SpinButton } from '@fluentui/react'
 import { memo, useMemo } from 'react'
-import { Switch, Case, If, Then } from 'react-if'
+import { Case, If, Switch, Then } from 'react-if'
 import styled from 'styled-components'
+
 import {
 	LeftAlignedRow,
-	useHandleDropdownChange,
 	useHandleCheckboxChange,
+	useHandleDropdownChange,
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
-import { BinStrategyDropdown } from '../../controls/index.js'
-import { columnDropdownStyles } from '../../controls/styles.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
+import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -64,12 +66,15 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	return (
 		<Container>
 			<LeftAlignedRow>
-				<BinStrategyDropdown
+				<EnumDropdown
 					required
+					enumeration={BinStrategy}
+					label={'Bin strategy'}
 					selectedKey={internal.args.strategy}
-					styles={columnDropdownStyles}
 					onChange={handleBinStrategyChange}
 				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
 				<Switch>
 					<Case condition={internal.args.strategy === BinStrategy.FixedCount}>
 						<SpinButton
@@ -84,7 +89,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 									? `${internal.args.fixedcount}`
 									: undefined
 							}
-							styles={columnDropdownStyles}
+							styles={dropdownStyles}
 							onChange={handleBinCountChange}
 						/>
 					</Case>
@@ -98,7 +103,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 									? `${internal.args.fixedwidth}`
 									: undefined
 							}
-							styles={columnDropdownStyles}
+							styles={dropdownStyles}
 							onChange={handleBinSizeChange}
 						/>
 					</Case>
@@ -111,14 +116,16 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 							label={'Min boundary'}
 							labelPosition={Position.top}
 							value={internal.args.min ? `${internal.args.min}` : undefined}
-							styles={columnDropdownStyles}
+							styles={dropdownStyles}
 							onChange={handleMinChange}
 						/>
+					</LeftAlignedRow>
+					<LeftAlignedRow>
 						<SpinButton
 							label={'Max boundary'}
 							labelPosition={Position.top}
 							value={internal.args.max ? `${internal.args.max}` : undefined}
-							styles={columnDropdownStyles}
+							styles={dropdownStyles}
 							onChange={handleMaxChange}
 						/>
 					</LeftAlignedRow>

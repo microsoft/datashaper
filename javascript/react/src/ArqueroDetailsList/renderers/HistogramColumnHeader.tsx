@@ -2,15 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	ColumnStats,
-	Category,
-	formatIfNumber,
-} from '@data-wrangling-components/core'
+import type { Category, ColumnStats } from '@data-wrangling-components/core'
+import { formatIfNumber } from '@data-wrangling-components/core'
 import { TooltipHost } from '@fluentui/react'
-import { memo, useMemo, useCallback, useState } from 'react'
-import { Sparkbar } from '../../charts'
-import { useCellDimensions } from '../hooks'
+import { memo, useCallback, useMemo, useState } from 'react'
+
+import { Sparkbar } from '../../charts/index.js'
+import { useCellDimensions } from '../hooks/index.js'
 import type { RichHeaderProps } from './types.js'
 
 const PADDING_HEIGHT = 8

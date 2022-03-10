@@ -4,8 +4,9 @@
  */
 
 import { memo } from 'react'
-import { Sparkline } from '../../charts'
-import { useCellDimensions } from '../hooks'
+
+import { Sparkline } from '../../charts/index.js'
+import { useCellDimensions } from '../hooks/index.js'
 import { getValue } from '../util/index.js'
 import type { ColumnCellChartProps } from './types.js'
 

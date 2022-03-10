@@ -4,11 +4,13 @@
  */
 import { escape, op } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
+
 import {
-	NumericComparisonOperator,
 	FieldAggregateOperation,
-	StringComparisonOperator,
 	FilterCompareType,
+	NumericComparisonOperator,
+	StringComparisonOperator,
+	WindowFunction,
 } from '../../types.js'
 import type { CompareWrapper } from './types.js'
 
@@ -31,50 +33,63 @@ export function compare(
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
 		const left = d[column]!
-		const right = type === FilterCompareType.Column ? d[`${value}`]! : value
+		const right =
+			type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
 
 		// start with the empty operators, because typeof won't work...
 		if (
-			operator === NumericComparisonOperator.Empty ||
-			operator === StringComparisonOperator.Empty
+			operator === NumericComparisonOperator.IsEmpty ||
+			operator === StringComparisonOperator.IsEmpty
 		) {
 			return isEmpty(left)
 		} else if (
-			operator === NumericComparisonOperator.NotEmpty ||
-			operator === StringComparisonOperator.NotEmpty
+			operator === NumericComparisonOperator.IsNotEmpty ||
+			operator === StringComparisonOperator.IsNotEmpty
 		) {
 			const empty = isEmpty(left)
 			return empty === 1 ? 0 : 1
-			// just turn all the comparisons into numeric based on type so we can simplify the switches
+		}
+		// invalid values by default do not match the filter if they weren't explicitly expected
+		else if (isEmpty(left) || isEmpty(right)) {
+			return 0
 		} else if (typeof left === 'number') {
 			const num = +right
-			return compareValues(left, num, operator)
+			// just turn all the comparisons into numeric based on type so we can simplify the switches
+			return compareValues(left, num, operator as NumericComparisonOperator)
 		} else if (typeof left === 'string') {
-			return compareStrings(left, `${right}`, operator)
+			return compareStrings(
+				left,
+				`${right}`,
+				operator as StringComparisonOperator,
+			)
 			// TODO: boolean enum instead of reusing numeric ops
 		} else if (typeof left === 'boolean') {
 			const l = left === true ? 1 : 0
 			// any non-empty string is a bool, so force true/false
 			const bool = right === 'true' ? 1 : 0
-			return compareValues(l, bool, operator)
+			return compareValues(l, bool, operator as NumericComparisonOperator)
 		}
 	}) as CompareWrapper
 }
 
-function isEmpty(left: string | number | boolean) {
-	if (left === null || left === undefined) {
+function isEmpty(value: string | number | boolean) {
+	if (value === null || value === undefined) {
 		return 1
 	}
-	if (typeof left === 'number' && isNaN(left)) {
+	if (typeof value === 'number' && isNaN(value)) {
 		return 1
 	}
-	if (typeof left === 'string' && left.length === 0) {
+	if (typeof value === 'string' && value.length === 0) {
 		return 1
 	}
 	return 0
 }
 
-function compareStrings(left: string, right: string, operator: string): 1 | 0 {
+function compareStrings(
+	left: string,
+	right: string,
+	operator: StringComparisonOperator,
+): 1 | 0 {
 	switch (operator) {
 		case StringComparisonOperator.Contains:
 			return op.match(left, new RegExp(right, 'gi'), 0) ? 1 : 0
@@ -86,30 +101,31 @@ function compareStrings(left: string, right: string, operator: string): 1 | 0 {
 			return left.localeCompare(right) !== 0 ? 1 : 0
 		case StringComparisonOperator.StartsWith:
 			return op.startswith(left, right, 0) ? 1 : 0
-		case StringComparisonOperator.Empty:
+		case StringComparisonOperator.IsEmpty:
 		default:
 			throw new Error(`Unsupported operator: [${operator}]`)
 	}
 }
 
-// TODO: I'd kind of prefer if we actually used booleans for the core engine,
-// and then map to 1/0 for causal inference inputs using a separate derive operation
-// or maybe as an optional that dictates the true/false output value
-function compareValues(left: number, right: number, operator: string): 1 | 0 {
+function compareValues(
+	left: number,
+	right: number,
+	operator: NumericComparisonOperator,
+): 1 | 0 {
 	switch (operator) {
-		case NumericComparisonOperator.Eq:
+		case NumericComparisonOperator.Equals:
 			return left === right ? 1 : 0
-		case NumericComparisonOperator.NotEq:
+		case NumericComparisonOperator.NotEqual:
 			return left !== right ? 1 : 0
-		case NumericComparisonOperator.Gte:
+		case NumericComparisonOperator.GreaterThanOrEqual:
 			return left >= right ? 1 : 0
-		case NumericComparisonOperator.Lte:
+		case NumericComparisonOperator.LessThanOrEqual:
 			return left <= right ? 1 : 0
-		case NumericComparisonOperator.Gt:
+		case NumericComparisonOperator.GreaterThan:
 			return left > right ? 1 : 0
-		case NumericComparisonOperator.Lt:
+		case NumericComparisonOperator.LessThan:
 			return left < right ? 1 : 0
-		case NumericComparisonOperator.Empty:
+		case NumericComparisonOperator.IsEmpty:
 			if (left === null || left === undefined || isNaN(left)) {
 				return 1
 			}
@@ -119,18 +135,18 @@ function compareValues(left: number, right: number, operator: string): 1 | 0 {
 	}
 }
 
-const fieldOps = new Set(Object.values(FieldAggregateOperation))
+const fieldOps = new Set([
+	...Object.values(FieldAggregateOperation),
+	...Object.values(WindowFunction),
+])
 
 // this currently only supports operations that take a single field name
-// TODO: we can support a bunch of the window operations too
 // note that this uses the aggregate op functions to generate an expression
-export function singleRollup(
+export function singleExpression(
 	column: string,
-	operation: FieldAggregateOperation,
+	operation: FieldAggregateOperation | WindowFunction,
 ): number | Op {
-	if (operation === 'count') {
-		return op.count()
-	} else if (!fieldOps.has(operation)) {
+	if (!fieldOps.has(operation)) {
 		throw new Error(
 			`Unsupported operation [${operation}], too many parameters needed`,
 		)

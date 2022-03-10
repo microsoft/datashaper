@@ -2,30 +2,26 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Specification } from '@data-wrangling-components/core'
-import {
-	DetailsListFeatures,
-	StatsColumnType,
-} from '@data-wrangling-components/react'
+import type { Specification } from '@data-wrangling-components/core'
+import type { DetailsListFeatures } from '@data-wrangling-components/react'
+import { StatsColumnType } from '@data-wrangling-components/react'
+import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	FileCollection,
-	FileType,
 	FileExtensions,
 	FileMimeType,
-	FileWithPath,
+	FileType,
 } from '@data-wrangling-components/utilities'
-import {
-	Checkbox,
-	Dropdown,
-	IDropdownOption,
-	IDropdownStyles,
-} from '@fluentui/react'
+import type { IDropdownOption, IDropdownStyles } from '@fluentui/react'
+import { Checkbox, Dropdown } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
+
+import { FileDrop } from '~components/FileDrop'
+
 import { ExamplesDropdown } from './ExamplesDropdown'
 import { useLoadSpecFile, useLoadTableFiles } from './hooks'
-import { FileDrop } from '~components/FileDrop'
 
 const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
 	return { key: o, text: o } as IDropdownOption
@@ -90,7 +86,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 		[onSelectSpecification, loadSpec, updateFileCollection],
 	)
 	const handleDropZip = useCallback(
-		async (fileCollection: FileCollection) => {
+		(fileCollection: FileCollection) => {
 			setFileCollection(fileCollection)
 			handleDropCSV(fileCollection)
 			handleDropJSON(fileCollection)

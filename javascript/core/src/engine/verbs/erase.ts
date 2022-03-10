@@ -4,6 +4,7 @@
  */
 
 import { escape } from 'arquero'
+
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import type { EraseArgs, Step, TableContainer } from '../../types.js'

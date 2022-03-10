@@ -5,12 +5,13 @@
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
-	withInputColumnDropdown,
-	withOutputColumnTextfield,
-	withTableDropdown,
 	selectStepComponent,
 	selectStepDescription,
+	withInputColumnDropdown,
+	withInputTableDropdown,
+	withOutputColumnTextfield,
 } from '../../index.js'
 
 interface StepComponentProps {
@@ -30,7 +31,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		const WithAllArgs = useMemo(
 			() =>
 				// TODO: compose cleanly
-				withTableDropdown()(
+				withInputTableDropdown()(
 					withOutputColumnTextfield()(withInputColumnDropdown()(Component)),
 				),
 			[Component],
@@ -40,15 +41,21 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 			[index, onChange],
 		)
 		return (
-			<>
+			<Container className="step-component">
 				<WithAllArgs step={step} store={store} onChange={handleStepChange} />
 				<DescriptionContainer>
 					<Description step={step} showInput showOutput />
 				</DescriptionContainer>
-			</>
+			</Container>
 		)
 	},
 )
+
+const Container = styled.div`
+	width: 100%;
+	display: flex;
+	gap: 36px;
+`
 
 const DescriptionContainer = styled.div`
 	margin-top: 8px;

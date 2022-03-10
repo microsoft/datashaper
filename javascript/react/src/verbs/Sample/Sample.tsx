@@ -7,11 +7,11 @@ import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
 	LeftAlignedRow,
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
-import { columnDropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 const whole = format('d')
@@ -48,12 +48,12 @@ export const Sample: React.FC<StepComponentProps> = memo(function Sample({
 					step={1}
 					disabled={!!internal.args.proportion}
 					value={internal.args.size ? `${internal.args.size}` : ''}
-					styles={columnDropdownStyles}
+					styles={spinStyles}
 					onChange={handleSizeChange}
 				/>
 				<Or>or</Or>
 				<SpinButton
-					label={'Percentage of rows'}
+					label={'Row percentage'}
 					labelPosition={Position.top}
 					min={0}
 					max={100}
@@ -64,7 +64,7 @@ export const Sample: React.FC<StepComponentProps> = memo(function Sample({
 							? `${whole(internal.args.proportion * 100)}`
 							: ''
 					}
-					styles={columnDropdownStyles}
+					styles={spinStyles}
 					onChange={handlePercentChange}
 				/>
 			</LeftAlignedRow>
@@ -79,6 +79,13 @@ const Container = styled.div`
 `
 
 const Or = styled.div`
+	margin-left: 8px;
 	margin-right: 8px;
 	height: 100%;
 `
+
+const spinStyles = {
+	root: {
+		width: 120,
+	},
+}

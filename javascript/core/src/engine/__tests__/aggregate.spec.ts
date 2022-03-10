@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb, FieldAggregateOperation } from '../../types.js'
+import type { Step } from '../../types.js'
+import { FieldAggregateOperation, Verb } from '../../types.js'
 import { aggregate } from '../verbs/aggregate.js'
 import { TestStore } from './TestStore.js'
 

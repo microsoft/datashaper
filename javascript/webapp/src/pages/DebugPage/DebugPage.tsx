@@ -3,29 +3,30 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import {
-	Step,
-	Verb,
+import type {
 	Specification,
+	Step,
 	TableContainer,
+	Verb,
 } from '@data-wrangling-components/core'
+import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
-	DetailsListFeatures,
 	StatsColumnType,
-	StepSelector,
 	StepComponent,
+	StepSelector,
 	usePipeline,
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useState, useCallback, useMemo, useEffect } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+
 import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
 import { ControlBar } from './ControlBar'
+import { useInputTableList, useInputTables, useTableStore } from './hooks'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { Table } from './Table'
-import { useInputTableList, useInputTables, useTableStore } from './hooks'
 
 const columns = {
 	ID: {
@@ -113,7 +114,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	)
 
 	const handleDropFiles = useCallback(
-		async (loaded: Map<string, ColumnTable>) => {
+		(loaded: Map<string, ColumnTable>) => {
 			loaded.forEach((table, name) => {
 				store.set({ id: name, table })
 			})
@@ -204,7 +205,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					<Buttons>
 						<PrimaryButton
 							onClick={handleRunClick}
-							styles={{ root: { width: 160 } }}
+							styles={{ root: { width: 180 } }}
 						>
 							Run all
 						</PrimaryButton>

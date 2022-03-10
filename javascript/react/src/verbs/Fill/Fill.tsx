@@ -6,7 +6,9 @@ import type { FillStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { useHandleTextfieldChange, LeftAlignedRow } from '../../common/index.js'
+
+import { LeftAlignedRow, useHandleTextfieldChange } from '../../common/index.js'
+import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -32,6 +34,7 @@ export const Fill: React.FC<StepComponentProps> = memo(function Fill({
 					label={'Fill value'}
 					value={internal.args.value && `${internal.args.value}`}
 					placeholder={'text, number, or boolean'}
+					styles={dropdownStyles}
 					onChange={handleValueChange}
 				/>
 			</LeftAlignedRow>

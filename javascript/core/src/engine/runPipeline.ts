@@ -4,6 +4,7 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import isArray from 'lodash-es/isArray.js'
+
 import { createTableStore } from '../factories.js'
 import { createPipeline } from '../index.js'
 import type { Step, TableContainer } from '../types.js'
@@ -34,7 +35,7 @@ export async function runPipeline(
 				copy.input = 'input'
 			}
 		} else {
-			const prev = arr[idx - 1] as Step<unknown>
+			const prev = arr[idx - 1]!
 			if (!copy.input) {
 				copy.input = prev.output || `table-${idx - 1}`
 			}

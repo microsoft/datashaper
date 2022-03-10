@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
+
 import { CompoundBinarize, FilterAggregateLookup } from './compounds/index.js'
 import type { StepComponentProps } from './types.js'
 import {
@@ -11,6 +12,8 @@ import {
 	Binarize,
 	ColumnListOperation,
 	Derive,
+	Erase,
+	Fetch,
 	Fill,
 	Filter,
 	Fold,
@@ -18,18 +21,17 @@ import {
 	Join,
 	Lookup,
 	Merge,
+	NoParameters,
 	Orderby,
 	Pivot,
 	Recode,
 	Rename,
 	Rollup,
 	Sample,
-	Select,
 	SetOperation,
 	Spread,
-	NoParameters,
-	Erase,
 	Unfold,
+	Window,
 } from './verbs/index.js'
 
 const verb: Record<string, React.FC<StepComponentProps>> = {
@@ -41,6 +43,7 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	derive: Derive,
 	difference: SetOperation,
 	erase: Erase,
+	fetch: Fetch,
 	fill: Fill,
 	filter: Filter,
 	fold: Fold,
@@ -56,13 +59,14 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	rename: Rename,
 	rollup: Rollup,
 	sample: Sample,
-	select: Select,
+	select: ColumnListOperation,
 	spread: Spread,
 	unfold: Unfold,
 	ungroup: NoParameters,
 	union: SetOperation,
 	unorder: NoParameters,
 	unroll: ColumnListOperation,
+	window: Window,
 	'multi-binarize': CompoundBinarize,
 	'filter-aggregate-lookup': FilterAggregateLookup,
 }

@@ -5,6 +5,7 @@
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import type { DescriptionRow, VerbDescriptionProps } from '../types.js'
 
 export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
@@ -18,7 +19,11 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 					>
 						<KeyValue>
 							{row.before ? <Key>{row.before}</Key> : null}
-							{isNil(row.value) ? <Unset /> : <Value>{row.value}</Value>}
+							{isNil(row.value) ? (
+								<Unset />
+							) : (
+								<Value title={row.value}>{row.value}</Value>
+							)}
 							{row.after ? <Key>{row.after}</Key> : null}
 						</KeyValue>
 						{row.sub ? loop(row.sub) : null}
@@ -89,5 +94,9 @@ const Unset = styled.div`
 `
 
 const Value = styled.div`
-	color: ${({ theme }) => theme.application().accent().hex()};
+	max-width: 240px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-weight: bold;
+	color: ${({ theme }) => theme.application().midContrast().hex()};
 `

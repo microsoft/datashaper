@@ -2,19 +2,21 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableStore } from './TableStore.js'
 import type {
 	BinStrategy,
 	FieldAggregateOperation,
 	FilterCompareType,
+	JoinStrategy,
 	MathOperator,
 	MergeStrategy,
 	NumericComparisonOperator,
 	SortDirection,
 	StringComparisonOperator,
 	Verb,
+	WindowFunction,
 } from './enums.js'
 import type { TableContainer, Value } from './tables.js'
+import type { TableStore } from './TableStore.js'
 
 export interface OrderbyInstruction {
 	column: string
@@ -49,7 +51,7 @@ export type ColumnListStep = Step<InputColumnListArgs>
 export type DedupeStep = Step<DedupeArgs>
 export type DeriveStep = Step<DeriveArgs>
 export type EraseStep = Step<EraseArgs>
-export type ImputeStep = Step<FillArgs>
+export type ImputeStep = Step<ImputeArgs>
 export type FetchStep = Step<FetchArgs>
 export type FillStep = Step<FillArgs>
 export type FilterStep = Step<FilterArgs>
@@ -69,6 +71,7 @@ export type SpreadStep = Step<SpreadArgs>
 export type UnfoldStep = Step<UnfoldArgs>
 export type UnrollStep = Step<UnrollArgs>
 export type SetOperationStep = Step<SetOperationArgs>
+export type WindowStep = Step<WindowArgs>
 
 // reusable base interfaces to aid consistency
 
@@ -228,7 +231,7 @@ export interface ImputeArgs extends InputColumnArgs {
 	value: Value
 }
 
-export interface JoinArgs {
+export interface JoinArgsBase {
 	/**
 	 * Name of the other table to join to the main input
 	 */
@@ -241,7 +244,11 @@ export interface JoinArgs {
 	on?: string[]
 }
 
-export interface LookupArgs extends JoinArgs, InputColumnListArgs {}
+export interface JoinArgs extends JoinArgsBase {
+	strategy?: JoinStrategy
+}
+
+export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {}
 
 export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 	/**
@@ -283,6 +290,11 @@ export interface SpreadArgs {
 
 export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	strategy: MergeStrategy
+	/**
+	 * This is only necessary if mergeStrategy.Concat is used.
+	 * If it is not supplied, the values are just mashed together.
+	 */
+	delimiter?: string
 }
 
 export interface OrderbyArgs {
@@ -300,3 +312,7 @@ export interface SetOperationArgs {
 }
 
 export type UnrollArgs = InputColumnListArgs
+
+export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
+	operation: WindowFunction
+}

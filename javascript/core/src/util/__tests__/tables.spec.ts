@@ -4,7 +4,8 @@
  */
 import { table } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { introspect, types, stats } from '../tables.js'
+
+import { introspect, stats, types } from '../tables.js'
 
 describe('table utilities', () => {
 	// note: all columns must be the same length or missing will be padded with empty cells
@@ -30,6 +31,13 @@ describe('table utilities', () => {
 			expect(result.cols).toEqual(tbl.numCols())
 			expect(result.rows).toEqual(tbl.numRows())
 			expect(Object.keys(result.columns)).toHaveLength(tbl.numCols())
+		})
+
+		test('column subsets are honored', () => {
+			const result = introspect(tbl, false, ['num'])
+			expect(result.cols).toEqual(tbl.numCols())
+			expect(result.rows).toEqual(tbl.numRows())
+			expect(Object.keys(result.columns)).toHaveLength(1)
 		})
 	})
 
@@ -105,6 +113,11 @@ describe('table utilities', () => {
 			expect(arr.mode).toStrictEqual([1, 2, 3])
 			// should be no numeric stats
 			expect(arr.min).toBeUndefined()
+		})
+
+		test('column subsets are honored', () => {
+			const result = stats(tbl, ['num'])
+			expect(Object.keys(result)).toHaveLength(1)
 		})
 
 		describe('bins', () => {
@@ -252,12 +265,18 @@ describe('table utilities', () => {
 	describe('types', () => {
 		test('types are correct for all columns', () => {
 			const result = types(tbl)
+			expect(Object.keys(result)).toEqual(tbl.columnNames())
 			expect(result.num).toBe('number')
 			expect(result.str).toBe('string')
 			expect(result.inv).toBe('number')
 			expect(result.bool).toBe('boolean')
 			expect(result.date).toBe('date')
 			expect(result.arr).toBe('array')
+		})
+
+		test('column subsets are honored', () => {
+			const subset = types(tbl, ['num', 'str'])
+			expect(Object.keys(subset)).toEqual(['num', 'str'])
 		})
 	})
 })

@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { useCallback, Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
+import { useCallback } from 'react'
 
 type NameSetter = Dispatch<SetStateAction<string[]>>
 
@@ -12,7 +13,7 @@ export function useGuidance(
 ): (name: string) => string {
 	return useCallback(
 		(name: string) => {
-			return (index as Record<string, string>)[name] || ''
+			return index[name] || ''
 		},
 		[index],
 	)

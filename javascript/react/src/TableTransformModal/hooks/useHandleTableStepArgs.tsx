@@ -5,12 +5,13 @@
 
 import type { Step } from '@data-wrangling-components/core'
 import { useMemo } from 'react'
+
+import type { StepComponentProps } from '../../index.js'
 import {
-	StepComponentProps,
 	selectStepComponent,
-	withTableDropdown,
-	withOutputColumnTextfield,
 	withInputColumnDropdown,
+	withInputTableDropdown,
+	withOutputColumnTextfield,
 	withOutputTableTextfield,
 } from '../../index.js'
 
@@ -25,7 +26,7 @@ export function useHandleTableStepArgs(
 
 	const WithAllArgs = useMemo(() => {
 		if (Component) {
-			return withTableDropdown()(
+			return withInputTableDropdown()(
 				withOutputColumnTextfield()(
 					withInputColumnDropdown()(
 						withOutputTableTextfield(undefined, disabled)(Component),

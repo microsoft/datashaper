@@ -4,7 +4,9 @@
  */
 import isArray from 'lodash-es/isArray.js'
 import isDate from 'lodash-es/isDate.js'
-import { DataType, Value } from '../index.js'
+
+import type { Value } from '../index.js'
+import { DataType } from '../index.js'
 
 /**
  * Guess the type of a table value with more discernment than typeof

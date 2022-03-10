@@ -3,23 +3,29 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export const tableDropdownStyles = {
-	root: {
-		width: 240,
-		marginRight: 12,
-	},
-}
+import type { IButtonStyles } from '@fluentui/react'
 
-export const columnDropdownStyles = {
+export const dropdownStyles = {
 	root: {
-		width: 160,
-		marginRight: 12,
+		width: 220,
 	},
 }
 
 export const opDropdownStyles = {
 	root: {
-		width: 120,
-		marginRight: 12,
+		width: 220,
+	},
+}
+
+export const dropdownButtonStyles: IButtonStyles = {
+	root: {
+		width: 220,
+		// match the dropdowns for better visual alignment
+		paddingLeft: 4,
+		paddingRight: 4,
+		textAlign: 'left',
+	},
+	label: {
+		fontWeight: 'normal',
 	},
 }

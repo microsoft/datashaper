@@ -2,15 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	BinarizeStep,
 	ChainStep,
 	DeriveStep,
 	LookupStep,
-	MathOperator,
 	Step,
-	Verb,
 } from '@data-wrangling-components/core'
+import { MathOperator, Verb } from '@data-wrangling-components/core'
 import merge from 'lodash-es/merge.js'
 
 const COLLECTOR = 'compound-binarize-collector-table'
@@ -127,7 +126,7 @@ export function getTo(step: ChainStep): string {
 }
 
 export function updateTo(step: ChainStep, to: string): ChainStep {
-	const update = merge({}, step) as ChainStep
+	const update = merge({}, step)
 	const finalBinarize = getFinalBinarizeStep(update)
 	const lookup = getLookupStep(update)
 	finalBinarize.args.to = to

@@ -2,22 +2,24 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
-import { memo, useMemo, useCallback } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import {
-	FieldAggregateOperationDropdown,
-	FilterFunction,
 	ReadOnlyTextField,
 	TableColumnDropdown,
 	TableDropdown,
 } from '../../controls/index.js'
-import { columnDropdownStyles } from '../../controls/styles.js'
+import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
+import { FilterFunction } from '../../verbs/shared/index.js'
 import {
-	getAggregate,
 	defaults,
+	getAggregate,
 	getFilter,
 	getJoin,
 	updateAggregateOperation,
@@ -116,7 +118,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 					<ReadOnlyTextField
 						label={'Filter'}
 						value={filter.args.column}
-						styles={columnDropdownStyles}
+						styles={dropdownStyles}
 					/>
 
 					<FilterFunction
@@ -127,7 +129,9 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 					/>
 				</LeftAlignedRow>
 				<LeftAlignedRow>
-					<FieldAggregateOperationDropdown
+					<EnumDropdown
+						required
+						enumeration={FieldAggregateOperation}
 						label={'Aggregate function'}
 						selectedKey={aggregate.args.operation}
 						onChange={handleAggregateChange}
@@ -140,7 +144,7 @@ export const FilterAggregateLookup: React.FC<StepComponentProps> = memo(
 						label={'New column name'}
 						placeholder={'Column name'}
 						value={aggregate.args.to}
-						styles={columnDropdownStyles}
+						styles={dropdownStyles}
 						onChange={handleToChange}
 					/>
 				</LeftAlignedRow>

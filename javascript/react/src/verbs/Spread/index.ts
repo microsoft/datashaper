@@ -2,5 +2,5 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './Spread'
-export * from './SpreadDescription'
+export * from './Spread.js'
+export * from './SpreadDescription.js'

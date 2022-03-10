@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ITextFieldProps, TextField } from '@fluentui/react'
+import type { ITextFieldProps } from '@fluentui/react'
+import { TextField } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import merge from 'lodash-es/merge.js'
 import { memo, useMemo } from 'react'
