@@ -5,12 +5,13 @@
 
 import type {
 	Pipeline,
-	TableStore,
 	Step,
 	TableContainer,
+	TableStore,
 } from '@data-wrangling-components/core'
 import type { ICommandBarItemProps } from '@fluentui/react'
 import { useMemo } from 'react'
+
 import {
 	useDownloadCsv,
 	useDownloadPipeline,

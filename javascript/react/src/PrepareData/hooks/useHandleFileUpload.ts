@@ -4,13 +4,15 @@
  */
 
 import type {
-	TableContainer,
 	Pipeline,
 	Step,
+	TableContainer,
 } from '@data-wrangling-components/core'
-import { FileCollection, FileType } from '@data-wrangling-components/utilities'
+import type { FileCollection } from '@data-wrangling-components/utilities'
+import { FileType } from '@data-wrangling-components/utilities'
 import { useCallback } from 'react'
-import { useHandleOnUploadClick } from '../../files'
+
+import { useHandleOnUploadClick } from '../../files/index.js'
 
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	return useCallback(
@@ -88,11 +90,11 @@ export function useHandleFileUpload(
 	runPipeline: () => void,
 	onUpdateSteps: (steps: Step[]) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
-): (fc: FileCollection) => Promise<void> {
+): (fc: FileCollection) => void {
 	const jsonHandler = useJsonHandler(pipeline, runPipeline, onUpdateSteps)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	return useCallback(
-		async (fc: FileCollection) => {
+		(fc: FileCollection) => {
 			csvHandler(fc)
 			jsonHandler(fc)
 		},
@@ -109,7 +111,7 @@ export function useHandleZipUpload(
 	const jsonHandler = useJsonHandler(pipeline, runPipeline, onUpdateSteps)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	const handler = useCallback(
-		async (fc: FileCollection) => {
+		(fc: FileCollection) => {
 			pipeline.clear()
 			onUpdateTables([])
 			csvHandler(fc)

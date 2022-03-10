@@ -5,16 +5,16 @@
 
 import type {
 	Pipeline,
-	TableStore,
 	TableContainer,
+	TableStore,
 } from '@data-wrangling-components/core'
+import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
+	createFileWithPath,
 	download,
 	downloadTable,
 	FileCollection,
 	FileMimeType,
-	createFileWithPath,
-	FileWithPath,
 } from '@data-wrangling-components/utilities'
 import { useCallback, useState } from 'react'
 
