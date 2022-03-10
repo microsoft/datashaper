@@ -4,12 +4,19 @@
  */
 import type { TableStore } from '@data-wrangling-components/core'
 import index from '@data-wrangling-components/guidance'
-import { IconButton, Modal, PrimaryButton } from '@fluentui/react'
+import {
+	Callout,
+	DirectionalHint,
+	IconButton,
+	PrimaryButton,
+} from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import React, { memo } from 'react'
 import styled from 'styled-components'
+
 import { Guidance } from '../Guidance/index.js'
-import { StepSelector, TableTransformModalProps } from '../index.js'
+import type { TableTransformModalProps } from '../index.js'
+import { StepSelector } from '../index.js'
 import {
 	useHandleTableRunClick,
 	useHandleTableStepArgs,
@@ -45,10 +52,10 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 
 		const adaptedStyles = useModalStyles(styles, isGuidanceVisible)
 		return (
-			<Modal
-				onDismiss={onDismiss}
+			<Callout
 				onDismissed={() => setInternal(undefined)}
 				styles={adaptedStyles}
+				directionalHint={DirectionalHint.rightTopEdge}
 				{...rest}
 			>
 				<Header>
@@ -98,7 +105,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 						/>
 					) : null}
 				</ContainerBody>
-			</Modal>
+			</Callout>
 		)
 	},
 )

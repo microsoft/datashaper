@@ -8,11 +8,11 @@ import {
 	ArqueroTableHeader,
 	ColumnTransformModal,
 } from '@data-wrangling-components/react'
-import { IContextualMenuItem } from '@fluentui/react'
+import type { IContextualMenuItem } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useState, useEffect, useMemo, useCallback } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 /**
@@ -22,10 +22,12 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 	const [table, setTable] = useState<ColumnTable | undefined>()
 	useEffect(() => {
 		const f = async () => {
-			const root = await loadCSV('data/stocks.csv', {})
+			const root = await loadCSV('data/stocks.csv', {
+				autoMax: 1000000,
+			})
 			setTable(root)
 		}
-		f()
+		void f()
 	}, [])
 
 	const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =

@@ -4,6 +4,7 @@
  */
 import type { ImputeStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
+
 import { VerbDescription } from '../../index.js'
 import type { StepDescriptionProps } from '../../types.js'
 
@@ -15,7 +16,7 @@ export const ImputeDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'column',
-					value: args.to,
+					value: args.column,
 				},
 				{
 					before: 'with value',

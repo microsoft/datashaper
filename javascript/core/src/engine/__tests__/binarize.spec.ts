@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NumericComparisonOperator, FilterCompareType } from '../../index.js'
-import { Step, StringComparisonOperator, Verb } from '../../types.js'
+import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
+import type { Step } from '../../types.js'
+import { StringComparisonOperator, Verb } from '../../types.js'
 import { binarize } from '../verbs/binarize.js'
 import { TestStore } from './TestStore.js'
 
@@ -16,7 +17,7 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'count',
-				operator: NumericComparisonOperator.Gte,
+				operator: NumericComparisonOperator.GreaterThanOrEqual,
 				type: FilterCompareType.Value,
 				value: 40,
 			},
@@ -46,7 +47,7 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'count',
-				operator: NumericComparisonOperator.Gt,
+				operator: NumericComparisonOperator.GreaterThan,
 				type: FilterCompareType.Value,
 				value: 40,
 			},
@@ -76,7 +77,7 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'count',
-				operator: NumericComparisonOperator.Lt,
+				operator: NumericComparisonOperator.LessThan,
 				type: FilterCompareType.Value,
 				value: 40,
 			},
@@ -137,7 +138,7 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'item',
-				operator: StringComparisonOperator.Empty,
+				operator: StringComparisonOperator.IsEmpty,
 				type: FilterCompareType.Value,
 			},
 		}
@@ -182,11 +183,11 @@ describe('test for binarize verb', () => {
 			expect(result.table.numRows()).toBe(6)
 			// test where criteria match
 			expect(result.table.get('newColumn', 0)).toBe(0)
-			expect(result.table.get('newColumn', 1)).toBeUndefined()
+			expect(result.table.get('newColumn', 1)).toBe(0)
 			expect(result.table.get('newColumn', 2)).toBe(1)
 			expect(result.table.get('newColumn', 3)).toBe(1)
 			expect(result.table.get('newColumn', 4)).toBe(0)
-			expect(result.table.get('newColumn', 5)).toBeUndefined()
+			expect(result.table.get('newColumn', 5)).toBe(0)
 		})
 	})
 })

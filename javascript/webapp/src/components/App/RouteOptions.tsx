@@ -4,6 +4,7 @@
  */
 import React, { lazy, memo } from 'react'
 import { Route, Routes } from 'react-router-dom'
+
 import { Pages } from './Pages'
 
 const PerfPage = lazy(() =>

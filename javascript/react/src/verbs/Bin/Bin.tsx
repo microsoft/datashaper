@@ -2,18 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinStep, BinStrategy } from '@data-wrangling-components/core'
+import type { BinStep } from '@data-wrangling-components/core'
+import { BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, Position, SpinButton } from '@fluentui/react'
 import { memo, useMemo } from 'react'
-import { Switch, Case, If, Then } from 'react-if'
+import { Case, If, Switch, Then } from 'react-if'
 import styled from 'styled-components'
+
 import {
 	LeftAlignedRow,
-	useHandleDropdownChange,
 	useHandleCheckboxChange,
+	useHandleDropdownChange,
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
-import { BinStrategyDropdown } from '../../controls/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
@@ -64,10 +66,11 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 	return (
 		<Container>
 			<LeftAlignedRow>
-				<BinStrategyDropdown
+				<EnumDropdown
 					required
+					enumeration={BinStrategy}
+					label={'Bin strategy'}
 					selectedKey={internal.args.strategy}
-					styles={dropdownStyles}
 					onChange={handleBinStrategyChange}
 				/>
 			</LeftAlignedRow>

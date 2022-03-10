@@ -2,23 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
+	DataType,
 	RecodeStep,
 	Value,
-	DataType,
-	coerce,
 } from '@data-wrangling-components/core'
-import {
-	ActionButton,
-	Icon,
-	IconButton,
-	IDropdownOption,
-	TextField,
-} from '@fluentui/react'
+import { coerce } from '@data-wrangling-components/core'
+import type { IDropdownOption } from '@fluentui/react'
+import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable, useColumnType } from '../../common/index.js'
+
+import { useColumnType, useLoadTable } from '../../common/index.js'
 import { ColumnValueDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
 import {
@@ -27,7 +23,7 @@ import {
 	useHandleAddButtonClick,
 	useHandleRecodeChange,
 	useRecodeDelete,
-} from './hooks'
+} from './hooks.js'
 
 /**
  * Provides inputs for a RecodeStep.

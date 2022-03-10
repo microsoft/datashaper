@@ -3,14 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { Entry } from '@zip.js/zip.js'
 import {
 	BlobReader,
-	ZipReader,
 	BlobWriter,
-	Entry,
-	ZipWriter,
 	Data64URIWriter,
+	ZipReader,
+	ZipWriter,
 } from '@zip.js/zip.js'
+
 import { FileWithPath } from '../common/index.js'
 
 export async function getFilesFromZip(zipFile: Blob): Promise<FileWithPath[]> {

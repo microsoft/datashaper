@@ -5,6 +5,7 @@
 
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
+
 import type { FormattedCellProps } from './types.js'
 
 /**

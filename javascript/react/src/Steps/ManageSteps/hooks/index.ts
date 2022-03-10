@@ -4,5 +4,5 @@
  */
 
 export * from './useManageSteps.js'
-export * from './useOnEditStep.js'
 export * from './useOnDuplicateStep.js'
+export * from './useOnEditStep.js'

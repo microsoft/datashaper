@@ -7,6 +7,7 @@ import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,

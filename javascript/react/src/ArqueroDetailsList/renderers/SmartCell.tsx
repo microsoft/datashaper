@@ -2,22 +2,24 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
+import type { ColumnMetadata } from '@data-wrangling-components/core'
+import { DataType } from '@data-wrangling-components/core'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty, getValue } from '../util/index.js'
-import { CellContainer } from './CellContainer'
-import { EmptyCell } from './EmptyCell'
-import type { RichCellProps } from './types.js'
+
+import { getValue, isEmpty } from '../util/index.js'
+import { CellContainer } from './CellContainer.js'
+import { EmptyCell } from './EmptyCell.js'
 import {
 	BooleanSymbolCell,
 	DateCell,
+	NumberMagnitudeCell,
 	ObjectCell,
 	SmartArrayCell,
 	TextCell,
-	NumberMagnitudeCell,
 } from './index.js'
+import type { RichCellProps } from './types.js'
 
 /**
  * Chooses what to render based on data type.
@@ -69,7 +71,7 @@ function useNumberMagnitude(
 			return 0
 		}
 		const range = (meta.stats?.max || 1) - (meta.stats?.min || 0)
-		const mag = (value - (meta.stats?.min || 0)) / range
+		const mag = range === 0 ? 0 : (value - (meta.stats?.min || 0)) / range
 		return mag
 	}, [type, value, meta])
 }

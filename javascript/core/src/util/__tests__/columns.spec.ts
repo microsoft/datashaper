@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
+
 import { columnIndexesWithZeros, columnNamesWithZeros } from '../columns.js'
 
 describe('column utilities', () => {

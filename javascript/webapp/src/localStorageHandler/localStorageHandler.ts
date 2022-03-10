@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { default as localforage } from 'localforage'
-import { Settings } from '../models/Settings.js'
+
+import type { Settings } from '../models/Settings.js'
 
 export async function setDarkMode(isDarkMode: boolean): Promise<void> {
 	await localforage.setItem('isDarkMode', isDarkMode).catch(error => {
@@ -25,7 +26,7 @@ async function setDefaultDarkModeValue(): Promise<void> {
 	if (darkMode === undefined) setDarkMode(false)
 }
 
-export async function setDefaultSettings(): Promise<void> {
+export function setDefaultSettings(): void {
 	setDefaultDarkModeValue()
 }
 

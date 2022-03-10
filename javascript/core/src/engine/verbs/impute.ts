@@ -5,7 +5,7 @@
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { FillArgs, Step, TableContainer } from '../../types.js'
+import type { ImputeArgs, Step, TableContainer } from '../../types.js'
 import type { ExprFunctionMap } from './types.js'
 
 /**
@@ -19,11 +19,11 @@ export async function impute(
 	store: TableStore,
 ): Promise<TableContainer> {
 	const { input, output, args } = step
-	const { value, to } = args as FillArgs
+	const { value, column } = args as ImputeArgs
 	const inputTable = await store.table(input)
 
 	const dArgs: ExprFunctionMap = {
-		[to]: (_d: any, $: any) => $.value,
+		[column]: (_d: any, $: any) => $.value,
 	}
 
 	return container(output, inputTable.params({ value }).impute(dArgs))

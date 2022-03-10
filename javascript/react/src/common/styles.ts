@@ -34,3 +34,11 @@ export const LeftAlignedRow = styled.div`
 	align-items: flex-end;
 	margin-bottom: 8px;
 `
+
+/**
+ * For explanatory text below an input,
+ */
+export const InputExplainer = styled.div`
+	font-size: 0.85em;
+	color: ${({ theme }) => theme.application().midHighContrast().hex()};
+`

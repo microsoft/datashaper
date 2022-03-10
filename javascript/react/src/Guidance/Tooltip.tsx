@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IconButton, Callout as FluentCallout } from '@fluentui/react'
+import { Callout as FluentCallout, IconButton } from '@fluentui/react'
 import { useBoolean, useId } from '@fluentui/react-hooks'
 import React, { memo } from 'react'
 import styled from 'styled-components'
+
 import { Guidance } from './Guidance.js'
 import type { GuidanceProps } from './types.js'
 

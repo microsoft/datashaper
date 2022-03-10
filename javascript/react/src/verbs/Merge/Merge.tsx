@@ -3,13 +3,21 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { MergeStep } from '@data-wrangling-components/core'
-import { Dropdown, IDropdownOption } from '@fluentui/react'
+import { MergeStrategy } from '@data-wrangling-components/core'
+import type { IDropdownOption } from '@fluentui/react'
+import { Dropdown, TextField } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { LeftAlignedRow, useLoadTable } from '../../common'
-import { MergeStrategyComponent } from '../../controls/MergeStrategyComponent/MergeStrategyComponent.js'
-import { dropdownStyles } from '../../controls/styles'
-import type { StepComponentProps } from '../../types'
+
+import {
+	LeftAlignedRow,
+	useHandleTextfieldChange,
+	useLoadTable,
+} from '../../common/index.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
+import { useHandleDropdownChange } from '../../controls/hooks.js'
+import { dropdownStyles } from '../../controls/styles.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Just the to/value inputs for an impute.
@@ -48,6 +56,18 @@ export const Merge: React.FC<StepComponentProps> = memo(function Merge({
 		[internal, onChange],
 	)
 
+	const handleOpChange = useHandleDropdownChange(
+		internal,
+		'args.strategy',
+		onChange,
+	)
+
+	const handleDelimiterChange = useHandleTextfieldChange(
+		internal,
+		'args.delimiter',
+		onChange,
+	)
+
 	const options = useMemo(() => {
 		const columns = tbl?.columnNames() || []
 		const hash = (internal.args.columns || []).reduce((acc, cur) => {
@@ -84,14 +104,25 @@ export const Merge: React.FC<StepComponentProps> = memo(function Merge({
 				) : null}
 			</LeftAlignedRow>
 			<LeftAlignedRow>
-				<MergeStrategyComponent
-					input={input}
-					step={step}
-					store={store}
-					table={table}
-					onChange={onChange}
+				<EnumDropdown
+					required
+					label={'Merge strategy'}
+					enumeration={MergeStrategy}
+					selectedKey={internal.args.strategy}
+					onChange={handleOpChange}
 				/>
 			</LeftAlignedRow>
+			{internal.args.strategy === MergeStrategy.Concat ? (
+				<LeftAlignedRow>
+					<TextField
+						label={'Delimiter'}
+						placeholder={'Text delimiter'}
+						value={internal.args.delimiter && `${internal.args.delimiter}`}
+						styles={dropdownStyles}
+						onChange={handleDelimiterChange}
+					/>
+				</LeftAlignedRow>
+			) : null}
 		</Container>
 	)
 })

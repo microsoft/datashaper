@@ -2,17 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { InputColumnArgs, Step } from '@data-wrangling-components/core'
 import {
-	InputColumnArgs,
+	DataType,
 	isInputColumnStep,
 	isNumericInputStep,
 	types,
-	DataType,
-	Step,
 } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
 	LeftAlignedRow,
 	useHandleDropdownChange,

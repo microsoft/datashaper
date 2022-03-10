@@ -3,13 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	TableStore,
 	SetOperationStep,
 	Step,
+	TableStore,
 } from '@data-wrangling-components/core'
 import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
 import { TableDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'

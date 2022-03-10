@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
+
 import type { StepDescriptionProps } from './types.js'
 import {
 	AggregateDescription,
-	BinDescription,
 	BinarizeDescription,
+	BinDescription,
 	ColumnListOperationDescription,
 	DeriveDescription,
 	EraseDescription,
@@ -19,16 +20,15 @@ import {
 	JoinDescription,
 	LookupDescription,
 	MergeDescription,
+	NoParametersDescription,
 	OrderbyDescription,
 	PivotDescription,
 	RecodeDescription,
 	RenameDescription,
 	RollupDescription,
 	SampleDescription,
-	SelectDescription,
-	SpreadDescription,
 	SetOperationDescription,
-	NoParametersDescription,
+	SpreadDescription,
 	UnfoldDescription,
 	WindowDescription,
 } from './verbs/index.js'
@@ -58,7 +58,7 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 	rename: RenameDescription,
 	rollup: RollupDescription,
 	sample: SampleDescription,
-	select: SelectDescription,
+	select: ColumnListOperationDescription,
 	spread: SpreadDescription,
 	unfold: UnfoldDescription,
 	ungroup: NoParametersDescription,

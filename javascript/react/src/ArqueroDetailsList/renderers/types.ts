@@ -9,6 +9,7 @@ import type {
 	IDetailsColumnProps,
 	IDetailsRowProps,
 } from '@fluentui/react'
+
 import type {
 	ColumnClickFunction,
 	DetailsListFeatures,

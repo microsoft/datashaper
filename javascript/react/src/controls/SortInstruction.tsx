@@ -2,16 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	OrderbyInstruction,
-	SortDirection,
-} from '@data-wrangling-components/core'
+import type { OrderbyInstruction } from '@data-wrangling-components/core'
+import { SortDirection } from '@data-wrangling-components/core'
 import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { TableColumnDropdown } from './dropdowns/TableColumnDropdown.js'
+
+import { TableColumnDropdown } from './TableColumnDropdown.js'
 
 export interface SortInstructionProps {
 	table?: ColumnTable

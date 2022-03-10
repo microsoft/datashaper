@@ -5,6 +5,7 @@
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import type { DescriptionRow, VerbDescriptionProps } from '../types.js'
 
 export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
@@ -96,5 +97,6 @@ const Value = styled.div`
 	max-width: 240px;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	color: ${({ theme }) => theme.application().accent().hex()};
+	font-weight: bold;
+	color: ${({ theme }) => theme.application().midContrast().hex()};
 `

@@ -3,13 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import {
-	Step,
-	Verb,
-	factory,
-	TableStore,
-} from '@data-wrangling-components/core'
-import { useState, useEffect, useCallback } from 'react'
+import type { Step, TableStore, Verb } from '@data-wrangling-components/core'
+import { factory } from '@data-wrangling-components/core'
+import { useCallback, useEffect, useState } from 'react'
+
 import { useCreateTableName, useFormatedColumnArg } from '../../common/index.js'
 
 export function useInternalTableStep(

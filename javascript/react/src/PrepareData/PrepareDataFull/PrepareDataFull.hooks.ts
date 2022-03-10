@@ -2,27 +2,28 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	Step,
-	TableStore,
-	introspect,
-	TableMetadata,
 	TableContainer,
+	TableMetadata,
+	TableStore,
 } from '@data-wrangling-components/core'
+import { introspect } from '@data-wrangling-components/core'
 import type { FileCollection } from '@data-wrangling-components/utilities'
 import type { ICommandBarItemProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useState, useMemo, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+
 import { usePipeline, useStore } from '../../common/index.js'
 import {
-	useOnDeleteStep,
-	useOnSaveStep,
-	useRunPipeline,
 	useAddNewTables,
 	useCommands,
 	useHandleFileUpload,
 	useMessageBar,
-} from '../hooks'
+	useOnDeleteStep,
+	useOnSaveStep,
+	useRunPipeline,
+} from '../hooks/index.js'
 
 export function useBusinessLogic(
 	tables: TableContainer[],
@@ -100,10 +101,7 @@ export function useBusinessLogic(
 	}, [tables, selectedTableName, derived])
 
 	useEffect(() => {
-		const f = async () => {
-			runPipeline()
-		}
-		f()
+		void runPipeline()
 	}, [steps, runPipeline])
 
 	useEffect(() => {

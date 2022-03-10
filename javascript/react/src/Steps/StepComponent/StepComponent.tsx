@@ -5,12 +5,13 @@
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import {
-	withInputColumnDropdown,
-	withOutputColumnTextfield,
-	withInputTableDropdown,
 	selectStepComponent,
 	selectStepDescription,
+	withInputColumnDropdown,
+	withInputTableDropdown,
+	withOutputColumnTextfield,
 } from '../../index.js'
 
 interface StepComponentProps {
@@ -51,7 +52,9 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 )
 
 const Container = styled.div`
-	width: 292px;
+	width: 100%;
+	display: flex;
+	gap: 36px;
 `
 
 const DescriptionContainer = styled.div`

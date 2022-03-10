@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
-import { Sparkbar } from '../../charts'
-import { useCellDimensions } from '../hooks'
+
+import { Sparkbar } from '../../charts/index.js'
+import { useCellDimensions } from '../hooks/index.js'
 import { getValue } from '../util/index.js'
 import type { ColumnCellChartProps } from './types.js'
 

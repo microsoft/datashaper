@@ -2,21 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { FilterStep } from '@data-wrangling-components/core'
 import {
+	DataType,
 	FilterCompareType,
-	FilterStep,
 	NumericComparisonOperator,
 	StringComparisonOperator,
+	types,
 } from '@data-wrangling-components/core'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useLoadTable, useHandleDropdownChange } from '../../../common/index.js'
-import {
-	ColumnOrValueComboBox,
-	NumericComparisonOperatorDropdown,
-	StringComparisonOperatorDropdown,
-} from '../../../controls/index.js'
+
+import { useHandleDropdownChange, useLoadTable } from '../../../common/index.js'
+import { InputExplainer } from '../../../common/styles.js'
+import { EnumDropdown } from '../../../controls/EnumDropdown.js'
+import { ColumnOrValueComboBox } from '../../../controls/index.js'
 import { LeftAlignedRow } from '../../../index.js'
 import type { StepComponentProps } from '../../../types.js'
 
@@ -51,36 +52,49 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 			[internal, onChange],
 		)
 
+		const tps = useMemo(() => {
+			return tbl ? types(tbl) : {}
+		}, [tbl])
+
 		const operatorDropdown = useMemo(() => {
 			const column = internal.args.column
 			if (column) {
-				const first = tbl?.get(column, 0)
-				if (first) {
-					if (typeof first === 'string') {
-						return (
-							<StringComparisonOperatorDropdown
+				const type = tps[column]
+				if (type === DataType.String) {
+					return (
+						<DropdownContainer>
+							<EnumDropdown
+								required
+								label={'Function'}
+								enumeration={StringComparisonOperator}
 								selectedKey={internal.args.operator}
 								onChange={handleOpChange}
 							/>
-						)
-					}
+							<InputExplainer>
+								String comparisons are not case-sensitive
+							</InputExplainer>
+						</DropdownContainer>
+					)
 				}
 			}
 			return (
-				<NumericComparisonOperatorDropdown
+				<EnumDropdown
+					required
+					enumeration={NumericComparisonOperator}
+					label={'Function'}
 					selectedKey={internal.args.operator}
 					onChange={handleOpChange}
 				/>
 			)
-		}, [tbl, internal, handleOpChange])
+		}, [tps, internal, handleOpChange])
 
 		const isEmptyCheck = useMemo(() => {
 			const { operator } = internal.args
 			return (
-				operator === NumericComparisonOperator.Empty ||
-				operator === NumericComparisonOperator.NotEmpty ||
-				operator === StringComparisonOperator.Empty ||
-				operator === StringComparisonOperator.NotEmpty
+				operator === NumericComparisonOperator.IsEmpty ||
+				operator === NumericComparisonOperator.IsNotEmpty ||
+				operator === StringComparisonOperator.IsEmpty ||
+				operator === StringComparisonOperator.IsNotEmpty
 			)
 		}, [internal])
 		return (
@@ -103,6 +117,11 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 )
 
 const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+`
+
+const DropdownContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 `

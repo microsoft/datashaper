@@ -2,25 +2,27 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnMetadata, DataType } from '@data-wrangling-components/core'
+import type { ColumnMetadata } from '@data-wrangling-components/core'
+import { DataType } from '@data-wrangling-components/core'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
-import { isEmpty, getValue, categories } from '../util/index.js'
-import { ArrayDropdownCell } from './ArrayDropdownCell'
-import { CellContainer } from './CellContainer'
-import { EmptyCell } from './EmptyCell'
-import type { FeatureCellProps } from './types.js'
+
+import { categories, getValue, isEmpty } from '../util/index.js'
+import { ArrayDropdownCell } from './ArrayDropdownCell.js'
+import { CellContainer } from './CellContainer.js'
+import { EmptyCell } from './EmptyCell.js'
 import {
 	BooleanSymbolCell,
+	CategoricalBarCell,
 	DateCell,
-	TextCell,
+	DefaultCell,
 	NumberMagnitudeCell,
 	SparkbarCell,
 	SparklineCell,
-	DefaultCell,
-	CategoricalBarCell,
+	TextCell,
 } from './index.js'
+import type { FeatureCellProps } from './types.js'
 
 /**
  * Chooses what to render based on the features prop

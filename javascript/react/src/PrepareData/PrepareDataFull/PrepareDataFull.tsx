@@ -4,16 +4,18 @@
  */
 import type { Step, TableContainer } from '@data-wrangling-components/core'
 import { FileMimeType } from '@data-wrangling-components/utilities'
-import type { IRenderFunction, IDetailsColumnProps } from '@fluentui/react'
+import type { IDetailsColumnProps,IRenderFunction } from '@fluentui/react'
 import { ThemeVariant } from '@thematic/core'
 import { useThematic } from '@thematic/react'
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import { CommandBar } from '../../CommandBar/CommandBar.js'
+import type { DropzoneStyles } from '../../files/index.js';
+import { Dropzone } from '../../files/index.js'
 import { ManageSteps } from '../../Steps/index.js'
-import { Dropzone, DropzoneStyles } from '../../files/index.js'
-import { TableListBar } from '../TableListBar/TableListBar.js'
 import { PreviewTable } from '../index.js'
+import { TableListBar } from '../TableListBar/TableListBar.js'
 import { useBusinessLogic } from './PrepareDataFull.hooks.js'
 
 export const PrepareDataFull: React.FC<{

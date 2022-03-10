@@ -2,8 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BinStep, BinStrategy } from '@data-wrangling-components/core'
+import type { BinStep } from '@data-wrangling-components/core'
+import { BinStrategy } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
+
 import { VerbDescription } from '../../index.js'
 import type { StepDescriptionProps } from '../../types.js'
 

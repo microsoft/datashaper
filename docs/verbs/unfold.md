@@ -13,7 +13,7 @@ Reverses a [fold](./fold.md) operation. This is similar to a [pivot](./pivot.md)
 | id   | 3     |
 | name | Jenny |
 
-`fold key['id'] value['name']`:
+`unfold key['id'] value['name']`:
 
 | id  | name  |
 | --- | ----- |

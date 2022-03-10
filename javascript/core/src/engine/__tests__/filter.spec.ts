@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NumericComparisonOperator, FilterCompareType } from '../../index.js'
-import { Step, StringComparisonOperator, Verb } from '../../types.js'
-import { filter } from '../verbs/filter'
-import { TestStore } from './TestStore'
+import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
+import type { Step } from '../../types.js'
+import { StringComparisonOperator, Verb } from '../../types.js'
+import { filter } from '../verbs/filter.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for filter verb', () => {
 	test('filter test with NumericComparisonOperator Gte', () => {
@@ -16,7 +17,7 @@ describe('test for filter verb', () => {
 			args: {
 				to: '',
 				column: 'count',
-				operator: NumericComparisonOperator.Gte,
+				operator: NumericComparisonOperator.GreaterThanOrEqual,
 				type: FilterCompareType.Value,
 				value: 100,
 			},
@@ -41,7 +42,7 @@ describe('test for filter verb', () => {
 			args: {
 				to: '',
 				column: 'count',
-				operator: NumericComparisonOperator.Gt,
+				operator: NumericComparisonOperator.GreaterThan,
 				type: FilterCompareType.Value,
 				value: 100,
 			},
@@ -65,7 +66,7 @@ describe('test for filter verb', () => {
 			args: {
 				to: '',
 				column: 'count',
-				operator: NumericComparisonOperator.Lt,
+				operator: NumericComparisonOperator.LessThan,
 				type: FilterCompareType.Value,
 				value: 100,
 			},
@@ -112,7 +113,7 @@ describe('test for filter verb', () => {
 			args: {
 				to: '',
 				column: 'item',
-				operator: StringComparisonOperator.Empty,
+				operator: StringComparisonOperator.IsEmpty,
 				type: FilterCompareType.Value,
 			},
 		}

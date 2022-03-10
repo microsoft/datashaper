@@ -6,11 +6,12 @@
 import { useDimensions } from '@essex/hooks'
 import { memo, useMemo, useRef } from 'react'
 import styled from 'styled-components'
+
 import { CommandBar } from '../CommandBar/CommandBar.js'
-import { TableName } from './TableName'
-import { HEIGHT } from './constants'
+import { HEIGHT } from './constants.js'
 import { useColumnCounts, useRowCounts } from './hooks/index.js'
 import type { ArqueroTableHeaderProps } from './index.js'
+import { TableName } from './TableName.js'
 
 export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader({

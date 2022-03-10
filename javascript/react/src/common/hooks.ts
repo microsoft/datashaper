@@ -2,17 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	TableStore,
-	TableContainer,
-	createTableStore,
-	Step,
+import type {
 	InputColumnRecordArgs,
-	Value,
-	DataType,
-	columnType,
 	Pipeline,
+	Step,
+	TableContainer,
+	TableStore,
+	Value,
+} from '@data-wrangling-components/core'
+import {
+	columnType,
 	createPipeline,
+	createTableStore,
+	DataType,
 } from '@data-wrangling-components/core'
 import type {
 	ICommandBarItemProps,
@@ -26,6 +28,7 @@ import cloneDeep from 'lodash-es/cloneDeep.js'
 import isArray from 'lodash-es/isArray.js'
 import set from 'lodash-es/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+
 import type { DetailsListFeatures } from '../index.js'
 import type {
 	DropdownOptionChangeFunction,
@@ -103,8 +106,8 @@ export function useColumnValueOptions(
 				.rollup({
 					[column]: op.array_agg(column),
 				})
-				.objects()[0]
-			return (result && result[column]) ?? []
+				.get(column, 0)
+			return result ?? []
 		}
 		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list
@@ -325,6 +328,7 @@ export function useToggleStatsHeaderCommand(
 			key: 'toggle-stats',
 			iconOnly: true,
 			text: 'Toggle header features',
+			ariaLabel: 'Toggle header features',
 			iconProps: iconProps.settings,
 			subMenuProps: {
 				items: [

@@ -4,6 +4,7 @@
  */
 
 import { loadCSV } from 'arquero'
+
 import { container } from '../../factories.js'
 import type { FetchArgs, Step, TableStore } from '../../index.js'
 import type { TableContainer } from '../../types.js'
@@ -23,6 +24,7 @@ export async function fetch(
 
 	const tableFromCSV = await loadCSV(url, {
 		delimiter: delimiter,
+		autoMax: 1000000,
 	})
 	return container(output, tableFromCSV)
 }

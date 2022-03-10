@@ -9,6 +9,7 @@ import type {
 import { TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useHandleTextfieldChange } from '../../common/index.js'
 import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'

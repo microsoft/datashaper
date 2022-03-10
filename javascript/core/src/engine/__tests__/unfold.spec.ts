@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Step, Verb } from '../../types'
-import { fold } from '../verbs/fold'
-import { unfold } from '../verbs/unfold'
-import { TestStore } from './TestStore'
+import type { Step } from '../../types.js'
+import { Verb } from '../../types.js'
+import { fold } from '../verbs/fold.js'
+import { unfold } from '../verbs/unfold.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for unfold verb', () => {
 	test('unfold test with one column folded', async () => {

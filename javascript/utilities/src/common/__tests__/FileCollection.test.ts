@@ -20,14 +20,14 @@ beforeEach(() => {
 })
 
 describe('new FileCollection()', () => {
-	it('should create a FileCollection instance', async () => {
+	it('should create a FileCollection instance', () => {
 		const instance = new FileCollection()
 		expect(instance).toBeInstanceOf(FileCollection)
 	})
 })
 
 describe('FileCollection.name', () => {
-	it('should set the name of the FileCollection', async () => {
+	it('should set the name of the FileCollection', () => {
 		expect(fileCollection.name).toBe('')
 		fileCollection.name = 'test'
 		expect(fileCollection.name).toBe('test')
@@ -35,19 +35,19 @@ describe('FileCollection.name', () => {
 })
 
 describe('FileCollection.find', () => {
-	it('should throw an error', async () => {
+	it('should throw an error', () => {
 		expect(() => fileCollection.find(file.name)).toThrow(
 			`File ${file.name} not found`,
 		)
 	})
-	it('should find a file by its name', async () => {
+	it('should find a file by its name', () => {
 		fileCollection.add(file)
 		expect(fileCollection.find(file.name)).toEqual(file)
 	})
 })
 
 describe('FileCollection.setFiles | FileCollection.list()', () => {
-	it('should set and list the files', async () => {
+	it('should set and list the files', () => {
 		const files = [file]
 		expect(fileCollection.list()).toEqual([])
 		fileCollection.setFiles([...files])
