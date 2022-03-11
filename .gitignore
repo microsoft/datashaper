@@ -4,6 +4,8 @@ dist/
 out/
 lib/
 coverage/
+docsTemp/
+
 .swc/
 stats.json
 
