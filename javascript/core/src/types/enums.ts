@@ -75,7 +75,6 @@ export enum NumericComparisonOperator {
 	IsNotEmpty = 'is not empty',
 }
 
-// TODO: allow regex 'match'?
 export enum StringComparisonOperator {
 	Equal = 'equals',
 	NotEqual = 'is not equal',
@@ -84,6 +83,7 @@ export enum StringComparisonOperator {
 	EndsWith = 'ends with',
 	IsEmpty = 'is empty',
 	IsNotEmpty = 'is not empty',
+	RegularExpression = 'regex',
 }
 
 export enum SetOp {

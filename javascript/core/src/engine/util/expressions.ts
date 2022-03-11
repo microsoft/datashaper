@@ -92,6 +92,7 @@ function compareStrings(
 ): 1 | 0 {
 	switch (operator) {
 		case StringComparisonOperator.Contains:
+		case StringComparisonOperator.RegularExpression:
 			return op.match(left, new RegExp(right, 'gi'), 0) ? 1 : 0
 		case StringComparisonOperator.EndsWith:
 			return op.endswith(left, right, left.length) ? 1 : 0
