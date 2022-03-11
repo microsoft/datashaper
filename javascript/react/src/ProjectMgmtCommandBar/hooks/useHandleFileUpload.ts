@@ -3,22 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type {
-	Pipeline,
-	Step,
-	TableContainer,
-} from '@data-wrangling-components/core'
+import type { Step, TableContainer } from '@data-wrangling-components/core'
 import type { FileCollection } from '@data-wrangling-components/utilities'
 import { FileType } from '@data-wrangling-components/utilities'
 import { useCallback } from 'react'
 
 import { useHandleOnUploadClick } from '../../files/index.js'
 
-function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
+function useCsvHandler(onUpdateTables?: (tables: TableContainer[]) => void) {
 	return useCallback(
 		async (fc: FileCollection) => {
 			const tables = fc.list(FileType.table)
-			console.log('Tables', tables)
 			if (!tables.length) {
 				return
 			}
@@ -33,17 +28,13 @@ function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 				} as TableContainer
 				tableContainer.push(table)
 			}
-			onUpdateTables(tableContainer)
+			onUpdateTables && onUpdateTables(tableContainer)
 		},
 		[onUpdateTables],
 	)
 }
 
-function useJsonHandler(
-	pipeline: Pipeline,
-	runPipeline: () => void,
-	onUpdateSteps: (steps: Step[]) => void,
-) {
+function useJsonHandler(onUpdateSteps?: (steps: Step[]) => void) {
 	return useCallback(
 		async (fc: FileCollection) => {
 			const regex = /pipeline(.*)\.json$/i
@@ -58,40 +49,33 @@ function useJsonHandler(
 			}
 
 			const { steps = [] } = await json.toJson()
-			if (steps.length) {
-				pipeline.clear()
-				pipeline.addAll(steps)
-				runPipeline()
+			if (steps.length && onUpdateSteps) {
 				onUpdateSteps(steps)
 			}
 		},
-		[pipeline, runPipeline, onUpdateSteps],
+		[onUpdateSteps],
 	)
 }
 
 export function useHandleCsvUpload(
-	onUpdateTables: (tables: TableContainer[]) => void,
+	onUpdateTables?: (tables: TableContainer[]) => void,
 ): () => void {
 	const csvHandler = useCsvHandler(onUpdateTables)
 	return useHandleOnUploadClick(['.csv'], csvHandler)
 }
 
 export function useHandleJsonUpload(
-	pipeline: Pipeline,
-	runPipeline: () => void,
-	onUpdateSteps: (steps: Step[]) => void,
+	onUpdateSteps?: (steps: Step[]) => void,
 ): () => void {
-	const jsonHandler = useJsonHandler(pipeline, runPipeline, onUpdateSteps)
+	const jsonHandler = useJsonHandler(onUpdateSteps)
 	return useHandleOnUploadClick(['.json'], jsonHandler)
 }
 
 export function useHandleFileUpload(
-	pipeline: Pipeline,
-	runPipeline: () => void,
-	onUpdateSteps: (steps: Step[]) => void,
-	onUpdateTables: (tables: TableContainer[]) => void,
+	onUpdateSteps?: (steps: Step[]) => void,
+	onUpdateTables?: (tables: TableContainer[]) => void,
 ): (fc: FileCollection) => void {
-	const jsonHandler = useJsonHandler(pipeline, runPipeline, onUpdateSteps)
+	const jsonHandler = useJsonHandler(onUpdateSteps)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	return useCallback(
 		(fc: FileCollection) => {
@@ -103,21 +87,18 @@ export function useHandleFileUpload(
 }
 
 export function useHandleZipUpload(
-	pipeline: Pipeline,
-	runPipeline: () => void,
-	onUpdateSteps: (steps: Step[]) => void,
-	onUpdateTables: (tables: TableContainer[]) => void,
+	onUpdateSteps?: (steps: Step[]) => void,
+	onUpdateTables?: (tables: TableContainer[]) => void,
 ): () => void {
-	const jsonHandler = useJsonHandler(pipeline, runPipeline, onUpdateSteps)
+	const jsonHandler = useJsonHandler(onUpdateSteps)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	const handler = useCallback(
 		(fc: FileCollection) => {
-			pipeline.clear()
-			onUpdateTables([])
+			onUpdateTables && onUpdateTables([])
 			csvHandler(fc)
 			jsonHandler(fc)
 		},
-		[pipeline, csvHandler, jsonHandler, onUpdateTables],
+		[csvHandler, jsonHandler, onUpdateTables],
 	)
 	return useHandleOnUploadClick(['.zip'], handler)
 }

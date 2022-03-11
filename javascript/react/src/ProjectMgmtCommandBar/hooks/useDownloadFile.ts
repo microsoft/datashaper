@@ -3,11 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type {
-	Pipeline,
-	TableContainer,
-	TableStore,
-} from '@data-wrangling-components/core'
+import type { Step, TableContainer } from '@data-wrangling-components/core'
 import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	createFileWithPath,
@@ -18,32 +14,27 @@ import {
 } from '@data-wrangling-components/utilities'
 import { useCallback, useState } from 'react'
 
-export function useDownloadPipeline(pipeline: Pipeline): () => void {
+export function useDownloadPipeline(steps: Step[]): () => void {
 	return useCallback(() => {
-		const steps = pipeline.steps
 		if (steps.length) {
 			const blob = new Blob([JSON.stringify({ steps }, null, 4)])
 			download('pipeline.json', FileMimeType.json, blob)
 		}
-	}, [pipeline])
+	}, [steps])
 }
 
-export function useDownloadCsv(
-	pipeline: Pipeline,
-	store: TableStore,
-): () => void {
-	return useCallback(async () => {
-		const last = pipeline.last
-		if (last) {
-			const table = await store.table(pipeline.last.output)
-			downloadTable(table, 'output.csv')
+export function useDownloadCsv(outputTable: TableContainer): () => void {
+	return useCallback(() => {
+		if (outputTable?.table) {
+			downloadTable(outputTable.table, 'output.csv')
 		}
-	}, [pipeline, store])
+	}, [outputTable])
 }
 
 export function useDownloadZip(
-	pipeline: Pipeline,
-	store: TableStore,
+	steps: Step[],
+	tables: TableContainer[],
+	outputTable?: TableContainer,
 ): () => Promise<void> {
 	const [fileCollection] = useState<FileCollection>(new FileCollection())
 	return useCallback(async () => {
@@ -57,21 +48,15 @@ export function useDownloadZip(
 				: null
 		fileCollection.clear()
 
-		const last = pipeline.last
-		const tables = store.list()
-		if (last) {
-			const table = await store.get(pipeline.last.output)
-			const file = tableFile(table, 'output')
+		if (outputTable?.table) {
+			const file = tableFile(outputTable, 'output')
 			if (file) {
 				await fileCollection.add(file)
 			}
 		}
 
 		if (tables.length) {
-			const tableContainerList = await Promise.all(
-				tables.map(id => store.get(id)),
-			)
-			const files = tableContainerList
+			const files = tables
 				.map(table => tableFile(table))
 				.filter(f => f !== null)
 			if (files.length) {
@@ -79,10 +64,8 @@ export function useDownloadZip(
 			}
 		}
 
-		if (pipeline.steps.length) {
-			const blob = new Blob([
-				JSON.stringify({ steps: pipeline.steps }, null, 4),
-			])
+		if (steps.length) {
+			const blob = new Blob([JSON.stringify({ steps: steps }, null, 4)])
 			const file = createFileWithPath(blob, { name: 'pipeline.json' })
 			await fileCollection.add(file)
 		}
@@ -90,5 +73,5 @@ export function useDownloadZip(
 		if (fileCollection.list().length) {
 			await fileCollection.toZip('dwc-project')
 		}
-	}, [fileCollection, pipeline, store])
+	}, [fileCollection, steps, tables, outputTable])
 }

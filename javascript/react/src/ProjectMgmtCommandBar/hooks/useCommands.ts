@@ -3,12 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type {
-	Pipeline,
-	Step,
-	TableContainer,
-	TableStore,
-} from '@data-wrangling-components/core'
+import type { Step, TableContainer } from '@data-wrangling-components/core'
 import type { ICommandBarItemProps } from '@fluentui/react'
 import { useMemo } from 'react'
 
@@ -23,28 +18,19 @@ import {
 	useHandleZipUpload,
 } from './useHandleFileUpload.js'
 
-export function useCommands(
-	pipeline: Pipeline,
-	store: TableStore,
-	runPipeline: () => void,
-	onUpdateSteps: (steps: Step[]) => void,
-	onUpdateTables: (tables: TableContainer[]) => void,
+export function useProjectMgmtCommands(
+	steps: Step[],
+	tables: TableContainer[],
+	outputTable?: TableContainer,
+	onUpdateSteps?: (steps: Step[]) => void,
+	onUpdateTables?: (tables: TableContainer[]) => void,
 ): ICommandBarItemProps[] {
-	const downloadPipeline = useDownloadPipeline(pipeline)
-	const downloadCsv = useDownloadCsv(pipeline, store)
-	const downloadZip = useDownloadZip(pipeline, store)
-	const handleJsonUpload = useHandleJsonUpload(
-		pipeline,
-		runPipeline,
-		onUpdateSteps,
-	)
+	const downloadPipeline = useDownloadPipeline(steps)
+	const downloadCsv = useDownloadCsv(outputTable)
+	const downloadZip = useDownloadZip(steps, tables, outputTable)
+	const handleJsonUpload = useHandleJsonUpload(onUpdateSteps)
 	const handleCsvUpload = useHandleCsvUpload(onUpdateTables)
-	const handleZipUpload = useHandleZipUpload(
-		pipeline,
-		runPipeline,
-		onUpdateSteps,
-		onUpdateTables,
-	)
+	const handleZipUpload = useHandleZipUpload(onUpdateSteps, onUpdateTables)
 
 	const commands: ICommandBarItemProps[] = useMemo(() => {
 		return [
@@ -78,7 +64,7 @@ export function useCommands(
 			{
 				key: 'open',
 				text: 'Open',
-				iconProps: { iconName: 'Upload' },
+				iconProps: { iconName: 'OpenFile' },
 				subMenuProps: {
 					items: [
 						{

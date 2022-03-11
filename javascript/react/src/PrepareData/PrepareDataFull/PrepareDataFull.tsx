@@ -4,14 +4,11 @@
  */
 import type { Step, TableContainer } from '@data-wrangling-components/core'
 import { FileMimeType } from '@data-wrangling-components/utilities'
-import type { IDetailsColumnProps,IRenderFunction } from '@fluentui/react'
-import { ThemeVariant } from '@thematic/core'
-import { useThematic } from '@thematic/react'
+import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { CommandBar } from '../../CommandBar/CommandBar.js'
-import type { DropzoneStyles } from '../../files/index.js';
+import type { DropzoneStyles } from '../../files/index.js'
 import { Dropzone } from '../../files/index.js'
 import { ManageSteps } from '../../Steps/index.js'
 import { PreviewTable } from '../index.js'
@@ -22,6 +19,7 @@ export const PrepareDataFull: React.FC<{
 	tables: TableContainer[]
 	onUpdateTables: (tables: TableContainer[]) => void
 	onUpdateSteps: (steps: Step[]) => void
+	onOutputTable?: (table: TableContainer) => void
 	steps?: Step[]
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
 }> = memo(function PrepareDataFull({
@@ -30,6 +28,7 @@ export const PrepareDataFull: React.FC<{
 	onUpdateTables,
 	steps,
 	outputHeaderCommandBar,
+	onOutputTable,
 }) {
 	const {
 		selectedTable,
@@ -40,12 +39,16 @@ export const PrepareDataFull: React.FC<{
 		store,
 		lastTableName,
 		derived,
-		commands,
 		handleFileUpload,
 		Message,
 		setMessage,
-	} = useBusinessLogic(tables, onUpdateTables, onUpdateSteps, steps)
-	const theme = useThematic()
+	} = useBusinessLogic(
+		tables,
+		onUpdateTables,
+		onUpdateSteps,
+		steps,
+		onOutputTable,
+	)
 
 	return (
 		<Container>
@@ -62,22 +65,6 @@ export const PrepareDataFull: React.FC<{
 				styles={dropzoneStyles as DropzoneStyles}
 			/>
 			{Message}
-			<CommandBar
-				commands={commands}
-				bgColor={
-					theme.variant === ThemeVariant.Light
-						? theme.application().highContrast().hex()
-						: theme.application().lowContrast().hex()
-				}
-				color={
-					theme.variant === ThemeVariant.Light
-						? theme.application().lowContrast().hex()
-						: theme.application().midHighContrast().hex()
-				}
-				height="36px"
-				width="100%"
-				styles={{ root: { float: 'left', marginLeft: '2rem' } }}
-			/>
 			<InputContainer>
 				<SectionTitle>Tables</SectionTitle>
 				<TableListBar
@@ -151,7 +138,7 @@ const Container = styled.div`
 	flex-flow: column;
 	height: 100%;
 	width: 100%;
-	padding: 0 0 ${GAP}px 0;
+	padding: ${GAP}px 0 ${GAP}px 0;
 	gap: ${GAP}px;
 	position: relative;
 `

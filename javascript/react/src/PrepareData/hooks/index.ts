@@ -4,9 +4,6 @@
  */
 
 export * from './useAddNewTables.js'
-export * from './useCommands.js'
-export * from './useDownloadFile.js'
-export * from './useHandleFileUpload.js'
 export * from './useMessageBar.js'
 export * from './useOnDeleteStep.js'
 export * from './useOnSaveStep.js'

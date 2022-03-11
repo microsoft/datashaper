@@ -10,15 +10,13 @@ import type {
 } from '@data-wrangling-components/core'
 import { introspect } from '@data-wrangling-components/core'
 import type { FileCollection } from '@data-wrangling-components/utilities'
-import type { ICommandBarItemProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useEffect, useMemo, useState } from 'react'
 
 import { usePipeline, useStore } from '../../common/index.js'
+import { useHandleFileUpload } from '../../ProjectMgmtCommandBar/index.js'
 import {
 	useAddNewTables,
-	useCommands,
-	useHandleFileUpload,
 	useMessageBar,
 	useOnDeleteStep,
 	useOnSaveStep,
@@ -30,6 +28,7 @@ export function useBusinessLogic(
 	onUpdateTables: (tables: TableContainer[]) => void,
 	onUpdateSteps: (steps: Step[]) => void,
 	steps?: Step[],
+	onOutputTable?: (table: TableContainer) => void,
 ): {
 	selectedTable: ColumnTable | undefined
 	setSelectedTableName: (name: string) => void
@@ -40,7 +39,6 @@ export function useBusinessLogic(
 	lastTableName: string
 	selectedTableName?: string
 	derived: TableContainer[]
-	commands: ICommandBarItemProps[]
 	handleFileUpload: (fileCollection: FileCollection) => void
 	Message: JSX.Element | null
 	setMessage: (message: string) => void
@@ -59,12 +57,7 @@ export function useBusinessLogic(
 		setSelectedTableName,
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
-	const handleFileUpload = useHandleFileUpload(
-		pipeline,
-		runPipeline,
-		onUpdateSteps,
-		onUpdateTables,
-	)
+	const handleFileUpload = useHandleFileUpload(onUpdateSteps, onUpdateTables)
 
 	// TODO: resolve these from the stored table state
 	const derived = useMemo(() => {
@@ -119,15 +112,15 @@ export function useBusinessLogic(
 		}
 	}, [tables, addNewTables])
 
+	useEffect(() => {
+		if (lastTableName) {
+			const table = storedTables.get(lastTableName)
+			onOutputTable && onOutputTable(table)
+		}
+	}, [storedTables, lastTableName, onOutputTable])
+
 	const onSaveStep = useOnSaveStep(onUpdateSteps, pipeline)
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
-	const commands = useCommands(
-		pipeline,
-		store,
-		runPipeline,
-		onUpdateSteps,
-		onUpdateTables,
-	)
 	const Message = useMessageBar(message, setMessage)
 
 	return {
@@ -140,7 +133,6 @@ export function useBusinessLogic(
 		lastTableName,
 		selectedTableName,
 		derived,
-		commands,
 		handleFileUpload,
 		Message,
 		setMessage,

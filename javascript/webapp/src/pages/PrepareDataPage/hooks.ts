@@ -11,12 +11,15 @@ export function useBusinessLogic(): {
 	steps: Step[]
 	tables: TableContainer[]
 	updateTables: (tables: TableContainer[]) => void
+	outputTable: TableContainer
+	setOutputTable: (table: TableContainer) => void
 } {
 	const [fileCollection, setFileCollection] = useState<FileCollection>(
 		new FileCollection(),
 	)
 	const [steps, setSteps] = useState<Step[]>([])
 	const [tables, setTables] = useState<TableContainer[]>([])
+	const [outputTable, setOutputTable] = useState<TableContainer>()
 
 	const updateFileCollection = useCallback(
 		async (collection: FileCollection) => {
@@ -63,5 +66,7 @@ export function useBusinessLogic(): {
 		steps,
 		tables,
 		updateTables,
+		outputTable,
+		setOutputTable,
 	}
 }
