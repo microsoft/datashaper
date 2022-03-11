@@ -5,6 +5,7 @@ dist/
 lib/
 coverage/
 public/
+docs/
 .yarn/
 .pnp.*
 .cache/
