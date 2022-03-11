@@ -113,9 +113,11 @@ export function useBusinessLogic(
 	}, [tables, addNewTables])
 
 	useEffect(() => {
-		if (lastTableName) {
+		if (lastTableName && onOutputTable) {
 			const table = storedTables.get(lastTableName)
-			onOutputTable && onOutputTable(table)
+			if (table) {
+				onOutputTable(table)
+			}
 		}
 	}, [storedTables, lastTableName, onOutputTable])
 

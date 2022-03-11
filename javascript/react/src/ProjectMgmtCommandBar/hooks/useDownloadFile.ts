@@ -23,7 +23,7 @@ export function useDownloadPipeline(steps: Step[]): () => void {
 	}, [steps])
 }
 
-export function useDownloadCsv(outputTable: TableContainer): () => void {
+export function useDownloadCsv(outputTable?: TableContainer): () => void {
 	return useCallback(() => {
 		if (outputTable?.table) {
 			downloadTable(outputTable.table, 'output.csv')

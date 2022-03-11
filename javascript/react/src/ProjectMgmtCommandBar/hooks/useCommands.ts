@@ -35,44 +35,11 @@ export function useProjectMgmtCommands(
 	const commands: ICommandBarItemProps[] = useMemo(() => {
 		return [
 			{
-				key: 'save',
-				text: 'Save',
-				iconProps: { iconName: 'Save' },
-				subMenuProps: {
-					items: [
-						{
-							key: 'json',
-							text: 'Pipeline (.json)',
-							iconProps: { iconName: 'Code' },
-							onClick: downloadPipeline,
-						},
-						{
-							key: 'csv',
-							text: 'CSV table',
-							iconProps: { iconName: 'Table' },
-							onClick: downloadCsv,
-						},
-						{
-							key: 'zip',
-							text: 'Zip project',
-							iconProps: { iconName: 'ZipFolder' },
-							onClick: downloadZip,
-						},
-					],
-				},
-			},
-			{
 				key: 'open',
 				text: 'Open',
 				iconProps: { iconName: 'OpenFile' },
 				subMenuProps: {
 					items: [
-						{
-							key: 'json',
-							text: 'Pipeline (.json)',
-							iconProps: { iconName: 'Code' },
-							onClick: handleJsonUpload,
-						},
 						{
 							key: 'csv',
 							text: 'CSV table',
@@ -80,10 +47,43 @@ export function useProjectMgmtCommands(
 							onClick: handleCsvUpload,
 						},
 						{
+							key: 'json',
+							text: 'Pipeline (.json)',
+							iconProps: { iconName: 'Code' },
+							onClick: handleJsonUpload,
+						},
+						{
 							key: 'zip',
 							text: 'Zip project',
 							iconProps: { iconName: 'ZipFolder' },
 							onClick: handleZipUpload,
+						},
+					],
+				},
+			},
+			{
+				key: 'save',
+				text: 'Save',
+				iconProps: { iconName: 'Save' },
+				subMenuProps: {
+					items: [
+						{
+							key: 'csv',
+							text: 'CSV table',
+							iconProps: { iconName: 'Table' },
+							onClick: downloadCsv,
+						},
+						{
+							key: 'json',
+							text: 'Pipeline (.json)',
+							iconProps: { iconName: 'Code' },
+							onClick: downloadPipeline,
+						},
+						{
+							key: 'zip',
+							text: 'Zip project',
+							iconProps: { iconName: 'ZipFolder' },
+							onClick: downloadZip,
 						},
 					],
 				},
