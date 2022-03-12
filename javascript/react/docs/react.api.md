@@ -425,6 +425,11 @@ export const LeftAlignedColumn: StyledComponent<"div", any, {}, never>;
 // @public (undocumented)
 export const LeftAlignedRow: StyledComponent<"div", any, {}, never>;
 
+// Warning: (ae-missing-release-tag) "LeftAlignedRowWithGap" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LeftAlignedRowWithGap: StyledComponent<"div", any, {}, never>;
+
 // Warning: (ae-missing-release-tag) "Lookup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
