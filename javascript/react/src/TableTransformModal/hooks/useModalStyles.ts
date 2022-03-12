@@ -21,9 +21,9 @@ export function useModalStyles(
 	return useMemo(() => {
 		return merge(
 			{
-				main: {
+				root: {
 					border: `1px solid ${theme.application().faint().hex()}`,
-					width: includeGuidance ? 800 : 308,
+					width: includeGuidance ? 800 : 360,
 					maxHeight: 800,
 				},
 			},

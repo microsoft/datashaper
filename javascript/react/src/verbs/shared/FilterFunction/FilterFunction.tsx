@@ -19,6 +19,7 @@ import styled from 'styled-components'
 import { InputExplainer } from '../../../common/styles.js'
 import { EnumDropdown } from '../../../controls/EnumDropdown.js'
 import { ColumnOrValueComboBox } from '../../../controls/index.js'
+import { narrowDropdownStyles } from '../../../controls/styles.js'
 
 export interface FilterFunctionProps {
 	table: ColumnTable
@@ -121,7 +122,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 						placeholder={'text, number, or column'}
 						text={criterion.value ? `${criterion.value}` : undefined}
 						onChange={handleComboBoxChange}
-						styles={rightStyles}
+						styles={narrowDropdownStyles}
 					/>
 					<IconButton
 						title={'Remove this criterion'}
@@ -157,13 +158,7 @@ const SideBySide = styled.div`
 
 const leftStyles = {
 	root: {
-		width: 135,
+		...narrowDropdownStyles.root,
 		marginRight: 12,
-	},
-}
-
-const rightStyles = {
-	root: {
-		width: 135,
 	},
 }

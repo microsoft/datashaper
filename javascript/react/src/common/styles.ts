@@ -35,6 +35,16 @@ export const LeftAlignedRow = styled.div`
 	margin-bottom: 8px;
 `
 
+export const LeftAlignedRowWithGap = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-end;
+	margin-bottom: 8px;
+	gap: 12px;
+`
+
 /**
  * For explanatory text below an input,
  */
