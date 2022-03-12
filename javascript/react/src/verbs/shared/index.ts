@@ -4,5 +4,4 @@
  */
 export * from './ColumnListInputs/index.js'
 export * from './FilterFunction/index.js'
-export * from './FilterInputs/index.js'
 export * from './JoinInputs/index.js'

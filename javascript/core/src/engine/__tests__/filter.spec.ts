@@ -15,22 +15,25 @@ describe('test for filter verb', () => {
 			input: 'table8',
 			output: 'output',
 			args: {
-				to: '',
 				column: 'count',
-				operator: NumericComparisonOperator.GreaterThanOrEqual,
-				type: FilterCompareType.Value,
-				value: 100,
+				criteria: [
+					{
+						operator: NumericComparisonOperator.GreaterThanOrEqual,
+						type: FilterCompareType.Value,
+						value: 100,
+					},
+				],
 			},
 		}
 
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(3)
-			expect(result.table.get('count', 0)).toBe(100)
-			expect(result.table.get('count', 1)).toBe(110)
-			expect(result.table.get('count', 2)).toBe(120)
+			expect(result.table!.numCols()).toBe(3)
+			expect(result.table!.numRows()).toBe(3)
+			expect(result.table!.get('count', 0)).toBe(100)
+			expect(result.table!.get('count', 1)).toBe(110)
+			expect(result.table!.get('count', 2)).toBe(120)
 		})
 	})
 
@@ -40,21 +43,24 @@ describe('test for filter verb', () => {
 			input: 'table8',
 			output: 'output',
 			args: {
-				to: '',
 				column: 'count',
-				operator: NumericComparisonOperator.GreaterThan,
-				type: FilterCompareType.Value,
-				value: 100,
+				criteria: [
+					{
+						operator: NumericComparisonOperator.GreaterThan,
+						type: FilterCompareType.Value,
+						value: 100,
+					},
+				],
 			},
 		}
 
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(2)
-			expect(result.table.get('count', 0)).toBe(110)
-			expect(result.table.get('count', 1)).toBe(120)
+			expect(result.table!.numCols()).toBe(3)
+			expect(result.table!.numRows()).toBe(2)
+			expect(result.table!.get('count', 0)).toBe(110)
+			expect(result.table!.get('count', 1)).toBe(120)
 		})
 	})
 
@@ -64,21 +70,24 @@ describe('test for filter verb', () => {
 			input: 'table8',
 			output: 'output',
 			args: {
-				to: '',
 				column: 'count',
-				operator: NumericComparisonOperator.LessThan,
-				type: FilterCompareType.Value,
-				value: 100,
+				criteria: [
+					{
+						operator: NumericComparisonOperator.LessThan,
+						type: FilterCompareType.Value,
+						value: 100,
+					},
+				],
 			},
 		}
 
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(2)
-			expect(result.table.get('count', 0)).toBe(80)
-			expect(result.table.get('count', 1)).toBe(90)
+			expect(result.table!.numCols()).toBe(3)
+			expect(result.table!.numRows()).toBe(2)
+			expect(result.table!.get('count', 0)).toBe(80)
+			expect(result.table!.get('count', 1)).toBe(90)
 		})
 	})
 
@@ -88,20 +97,23 @@ describe('test for filter verb', () => {
 			input: 'table8',
 			output: 'output',
 			args: {
-				to: '',
 				column: 'name',
-				operator: StringComparisonOperator.Equal,
-				type: FilterCompareType.Value,
-				value: 'D',
+				criteria: [
+					{
+						operator: StringComparisonOperator.Equal,
+						type: FilterCompareType.Value,
+						value: 'D',
+					},
+				],
 			},
 		}
 
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(1)
-			expect(result.table.get('name', 0)).toBe('D')
+			expect(result.table!.numCols()).toBe(3)
+			expect(result.table!.numRows()).toBe(1)
+			expect(result.table!.get('name', 0)).toBe('D')
 		})
 	})
 
@@ -111,20 +123,23 @@ describe('test for filter verb', () => {
 			input: 'table5',
 			output: 'output',
 			args: {
-				to: '',
 				column: 'item',
-				operator: StringComparisonOperator.IsEmpty,
-				type: FilterCompareType.Value,
+				criteria: [
+					{
+						operator: StringComparisonOperator.IsEmpty,
+						type: FilterCompareType.Value,
+					},
+				],
 			},
 		}
 
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(2)
-			expect(result.table.get('quantity', 0)).toBe(78)
-			expect(result.table.get('quantity', 1)).toBe(45)
+			expect(result.table!.numCols()).toBe(3)
+			expect(result.table!.numRows()).toBe(2)
+			expect(result.table!.get('quantity', 0)).toBe(78)
+			expect(result.table!.get('quantity', 1)).toBe(45)
 		})
 	})
 
@@ -134,20 +149,55 @@ describe('test for filter verb', () => {
 			input: 'table3',
 			output: 'output',
 			args: {
-				to: '',
 				column: 'item',
-				operator: StringComparisonOperator.Contains,
-				type: FilterCompareType.Value,
-				value: 'be',
+				criteria: [
+					{
+						operator: StringComparisonOperator.Contains,
+						type: FilterCompareType.Value,
+						value: 'be',
+					},
+				],
 			},
 		}
 
 		const store = new TestStore()
 
 		return filter(step, store).then(result => {
-			expect(result.table.numCols()).toBe(2)
-			expect(result.table.numRows()).toBe(1)
-			expect(result.table.get('item', 0)).toBe('bed')
+			expect(result.table!.numCols()).toBe(2)
+			expect(result.table!.numRows()).toBe(1)
+			expect(result.table!.get('item', 0)).toBe('bed')
+		})
+	})
+
+	test('filter test with StringComparisonOperator Contains and two criteria', () => {
+		const step: Step = {
+			verb: Verb.Filter,
+			input: 'table5',
+			output: 'output',
+			args: {
+				column: 'item',
+				criteria: [
+					{
+						operator: StringComparisonOperator.Contains,
+						type: FilterCompareType.Value,
+						value: 'be',
+					},
+					{
+						operator: StringComparisonOperator.Contains,
+						type: FilterCompareType.Value,
+						value: 'air',
+					},
+				],
+			},
+		}
+
+		const store = new TestStore()
+
+		return filter(step, store).then(result => {
+			expect(result.table!.numCols()).toBe(3)
+			expect(result.table!.numRows()).toBe(2)
+			expect(result.table!.get('item', 0)).toBe('bed')
+			expect(result.table!.get('item', 1)).toBe('chair')
 		})
 	})
 })

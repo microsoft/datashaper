@@ -191,7 +191,7 @@ export interface EraseArgs {
 	value: Value
 }
 
-export interface FilterArgs extends InputColumnArgs {
+export interface Criterion {
 	/**
 	 * Comparison value for the column
 	 */
@@ -202,6 +202,10 @@ export interface FilterArgs extends InputColumnArgs {
 	 */
 	type: FilterCompareType
 	operator: NumericComparisonOperator | StringComparisonOperator
+}
+
+export interface FilterArgs extends InputColumnArgs {
+	criteria: Criterion[]
 }
 
 export interface FoldArgs extends InputColumnListArgs {

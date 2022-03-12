@@ -5,6 +5,7 @@
 import { escape, op } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
 
+import type { Criterion } from '../../types.js'
 import {
 	FieldAggregateOperation,
 	FilterCompareType,
@@ -13,6 +14,23 @@ import {
 	WindowFunction,
 } from '../../types.js'
 import type { CompareWrapper } from './types.js'
+
+export function compareAll(
+	column: string,
+	criteria: Criterion[],
+): CompareWrapper {
+	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
+		const left = d[column]!
+		// this is just a big OR, so any match is success
+		const some = criteria.some(filter => {
+			const { value, operator, type } = filter
+			const right =
+				type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
+			return compareFunction(left, right, operator)
+		})
+		return some ? 1 : 0
+	}) as CompareWrapper
+}
 
 /**
  * This creates an arquero expression suitable for comparison of direct values or columns.
@@ -36,40 +54,49 @@ export function compare(
 		const right =
 			type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
 
-		// start with the empty operators, because typeof won't work...
-		if (
-			operator === NumericComparisonOperator.IsEmpty ||
-			operator === StringComparisonOperator.IsEmpty
-		) {
-			return isEmpty(left)
-		} else if (
-			operator === NumericComparisonOperator.IsNotEmpty ||
-			operator === StringComparisonOperator.IsNotEmpty
-		) {
-			const empty = isEmpty(left)
-			return empty === 1 ? 0 : 1
-		}
-		// invalid values by default do not match the filter if they weren't explicitly expected
-		else if (isEmpty(left) || isEmpty(right)) {
-			return 0
-		} else if (typeof left === 'number') {
-			const num = +right
-			// just turn all the comparisons into numeric based on type so we can simplify the switches
-			return compareValues(left, num, operator as NumericComparisonOperator)
-		} else if (typeof left === 'string') {
-			return compareStrings(
-				left,
-				`${right}`,
-				operator as StringComparisonOperator,
-			)
-			// TODO: boolean enum instead of reusing numeric ops
-		} else if (typeof left === 'boolean') {
-			const l = left === true ? 1 : 0
-			// any non-empty string is a bool, so force true/false
-			const bool = right === 'true' ? 1 : 0
-			return compareValues(l, bool, operator as NumericComparisonOperator)
-		}
+		return compareFunction(left, right, operator)
 	}) as CompareWrapper
+}
+
+function compareFunction(
+	left: string | number | boolean,
+	right: string | number | boolean,
+	operator: NumericComparisonOperator | StringComparisonOperator,
+): 0 | 1 {
+	// start with the empty operators, because typeof won't work...
+	if (
+		operator === NumericComparisonOperator.IsEmpty ||
+		operator === StringComparisonOperator.IsEmpty
+	) {
+		return isEmpty(left)
+	} else if (
+		operator === NumericComparisonOperator.IsNotEmpty ||
+		operator === StringComparisonOperator.IsNotEmpty
+	) {
+		const empty = isEmpty(left)
+		return empty === 1 ? 0 : 1
+	}
+	// invalid values by default do not match the filter if they weren't explicitly expected
+	else if (isEmpty(left) || isEmpty(right)) {
+		return 0
+	} else if (typeof left === 'number') {
+		const num = +right
+		// just turn all the comparisons into numeric based on type so we can simplify the switches
+		return compareValues(left, num, operator as NumericComparisonOperator)
+	} else if (typeof left === 'string') {
+		return compareStrings(
+			left,
+			`${right}`,
+			operator as StringComparisonOperator,
+		)
+		// TODO: boolean enum instead of reusing numeric ops
+	} else if (typeof left === 'boolean') {
+		const l = left === true ? 1 : 0
+		// any non-empty string is a bool, so force true/false
+		const bool = right === 'true' ? 1 : 0
+		return compareValues(l, bool, operator as NumericComparisonOperator)
+	}
+	return 0
 }
 
 function isEmpty(value: string | number | boolean) {
@@ -90,18 +117,20 @@ function compareStrings(
 	right: string,
 	operator: StringComparisonOperator,
 ): 1 | 0 {
+	const ll = left.toLocaleLowerCase()
+	const rl = right.toLocaleLowerCase()
 	switch (operator) {
 		case StringComparisonOperator.Contains:
 		case StringComparisonOperator.RegularExpression:
-			return op.match(left, new RegExp(right, 'gi'), 0) ? 1 : 0
+			return op.match(ll, new RegExp(rl, 'gi'), 0) ? 1 : 0
 		case StringComparisonOperator.EndsWith:
-			return op.endswith(left, right, left.length) ? 1 : 0
+			return op.endswith(ll, rl, ll.length) ? 1 : 0
 		case StringComparisonOperator.Equal:
-			return left.localeCompare(right) === 0 ? 1 : 0
+			return ll.localeCompare(rl) === 0 ? 1 : 0
 		case StringComparisonOperator.NotEqual:
-			return left.localeCompare(right) !== 0 ? 1 : 0
+			return ll.localeCompare(rl) !== 0 ? 1 : 0
 		case StringComparisonOperator.StartsWith:
-			return op.startswith(left, right, 0) ? 1 : 0
+			return op.startswith(ll, rl, 0) ? 1 : 0
 		case StringComparisonOperator.IsEmpty:
 		default:
 			throw new Error(`Unsupported operator: [${operator}]`)
