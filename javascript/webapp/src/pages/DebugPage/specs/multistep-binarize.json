@@ -1,6 +1,6 @@
 {
-	"name": "Multistep binarize",
-	"description": "Use multiple steps chained together to create a boolean condition set for a single binarized output column.",
+	"name": "Multi-criteria binarize",
+	"description": "Use multiple criteria chained together to create a boolean condition OR for a single binarized output column.",
 	"steps": [
 		{
 			"verb": "binarize",
@@ -8,41 +8,19 @@
 			"output": "binarize-1",
 			"args": {
 				"column": "Employees",
-				"operator": "<",
-				"value": 150000,
-				"type": "value",
-				"to": "Smallest"
-			}
-		},
-		{
-			"verb": "binarize",
-			"input": "binarize-1",
-			"output": "binarize-2",
-			"args": {
-				"column": "Employees",
-				"operator": ">",
-				"value": 200000,
-				"type": "value",
-				"to": "Largest"
-			}
-		},
-		{
-			"verb": "derive",
-			"input": "binarize-2",
-			"output": "derive-1",
-			"args": {
-				"column1": "Smallest",
-				"column2": "Largest",
-				"operator": "+",
-				"to": "Smallest and Largest"
-			}
-		},
-		{
-			"verb": "select",
-			"input": "derive-1",
-			"output": "select-1",
-			"args": {
-				"columns": ["ID", "Name", "Employees", "US", "Smallest and Largest"]
+				"to": "Smallest and Largest",
+				"criteria": [
+					{
+						"operator": "<",
+						"value": 150000,
+						"type": "value"
+					},
+					{
+						"operator": ">",
+						"value": 200000,
+						"type": "value"
+					}
+				]
 			}
 		}
 	]

@@ -1,29 +1,30 @@
 # filter
 
-Creates a filtered table that only contains rows that match specified criteria. Filter can compare the values of an input column to a fixed value (e.g.) `row.value <= 10`), or it can compare to the value of another column in the same row (e.g., `row.value <= row.other_value`). Comparisons can be numeric (=, !=, <, >, etc.) or string-based (equals, contains, starts with, etc.). If an empty/not empty filter is _not_ specified but invalid values are found, the result for that comparison will be a negative match.
+Creates a filtered table that only contains rows that match specified criteria. Filter can compare the values of an input column to a fixed value (e.g.) `row.value <= 10`), or it can compare to the value of another column in the same row (e.g., `row.value <= row.other_value`). Comparisons can be numeric (=, !=, <, >, etc.) or string-based (equals, contains, starts with, etc.). If an empty/not empty filter is _not_ specified but invalid values are found, the result for that comparison will be a negative match. Multiple criteria can be applied against the input column, which will be treated as a series of boolean OR queries.
 
 ## Comparison operators
 
 _numeric_
 
-- Eq ('=')
-- NotEq ('!=')
-- Lt ('<')
-- Lte ('<=')
-- Gt ('>')
-- Gte ('>=')
-- NotEmpty ('is not empty')
-- Empty ('is empty')
+- Equals
+- Not equal
+- Less than
+- Less than or equal
+- Greater than
+- Greater than or equal
+- Is empty
+- Is not empty
 
 _string_
 
-- Equal ('equals')
-- NotEqual ('is not equal')
-- Contains ('contains')
-- StartsWith ('starts with')
-- EndsWith ('ends with')
-- NotEmpty ('is not empty')
-- Empty ('is empty')
+- Equals
+- Not equal
+- Contains
+- Starts with
+- Ends with
+- Is empty
+- Is not empty
+- Regular expression
 
 ## Examples
 
@@ -44,4 +45,11 @@ _string_
 
 | fy20 | fy21 |
 | ---- | ---- |
+| 354  | 300  |
+
+`filter where column['fy20'] < 100 OR > 300`:
+
+| fy20 | fy21 |
+| ---- | ---- |
+| 23   | 165  |
 | 354  | 300  |

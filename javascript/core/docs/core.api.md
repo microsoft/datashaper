@@ -184,6 +184,16 @@ export function createPipeline(store: TableStore): Pipeline;
 // @public (undocumented)
 export function createTableStore(tables?: TableContainer[]): TableStore;
 
+// Warning: (ae-missing-release-tag) "Criterion" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Criterion {
+    // (undocumented)
+    operator: NumericComparisonOperator | StringComparisonOperator;
+    type: FilterCompareType;
+    value: Value;
+}
+
 // Warning: (ae-missing-release-tag) "DataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -395,9 +405,7 @@ export type FillStep = Step<FillArgs>;
 // @public (undocumented)
 export interface FilterArgs extends InputColumnArgs {
     // (undocumented)
-    operator: NumericComparisonOperator | StringComparisonOperator;
-    type: FilterCompareType;
-    value: Value;
+    criteria: Criterion[];
 }
 
 // Warning: (ae-missing-release-tag) "FilterCompareType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -898,6 +906,8 @@ export enum StringComparisonOperator {
     IsNotEmpty = "is not empty",
     // (undocumented)
     NotEqual = "is not equal",
+    // (undocumented)
+    RegularExpression = "regex",
     // (undocumented)
     StartsWith = "starts with"
 }

@@ -4,7 +4,6 @@
  */
 import type { Step } from '@data-wrangling-components/core'
 
-import { CompoundBinarize, FilterAggregateLookup } from './compounds/index.js'
 import type { StepComponentProps } from './types.js'
 import {
 	Aggregate,
@@ -67,8 +66,6 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 	unorder: NoParameters,
 	unroll: ColumnListOperation,
 	window: Window,
-	'multi-binarize': CompoundBinarize,
-	'filter-aggregate-lookup': FilterAggregateLookup,
 }
 
 /**

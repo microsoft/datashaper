@@ -5,7 +5,7 @@
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import type { BinarizeArgs, Step, TableContainer } from '../../types.js'
-import { compare } from '../util/index.js'
+import { compareAll } from '../util/index.js'
 
 /**
  * Executes an arquero derive where the output is a 1 or 0.
@@ -15,10 +15,10 @@ export async function binarize(
 	store: TableStore,
 ): Promise<TableContainer> {
 	const { input, output, args } = step
-	const { column, value, operator, type, to } = args as BinarizeArgs
+	const { column, criteria, to } = args as BinarizeArgs
 	const inputTable = await store.table(input)
 
-	const expr = compare(column, value, operator, type)
+	const expr = compareAll(column, criteria)
 
 	const dArgs = {
 		[to]: expr,

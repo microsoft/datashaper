@@ -82,6 +82,9 @@ const Or = styled.div`
 	margin-left: 8px;
 	margin-right: 8px;
 	height: 100%;
+	display: flex;
+	align-items: center;
+	color: ${({ theme }) => theme.application().midContrast().hex()};
 `
 
 const spinStyles = {

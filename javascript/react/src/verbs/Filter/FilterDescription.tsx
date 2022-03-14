@@ -18,12 +18,11 @@ export const FilterDescription: React.FC<StepDescriptionProps> = memo(
 				{
 					before: 'where',
 					value: args.column,
-					sub: [
-						{
-							value: `${args.operator || ''} ${args.value || ''}`,
-							after: args.type === FilterCompareType.Column ? 'row value' : '',
-						},
-					],
+					sub: (internal.args.criteria || []).map(criterion => ({
+						value: `${criterion.operator || ''} ${criterion.value || ''}`,
+						after:
+							criterion.type === FilterCompareType.Column ? 'row value' : '',
+					})),
 				},
 			]
 		}, [props])

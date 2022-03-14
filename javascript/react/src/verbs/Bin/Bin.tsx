@@ -11,12 +11,13 @@ import styled from 'styled-components'
 
 import {
 	LeftAlignedRow,
+	LeftAlignedRowWithGap,
 	useHandleCheckboxChange,
 	useHandleDropdownChange,
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
 import { EnumDropdown } from '../../controls/EnumDropdown.js'
-import { dropdownStyles } from '../../controls/styles.js'
+import { narrowDropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -65,16 +66,15 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 
 	return (
 		<Container>
-			<LeftAlignedRow>
+			<LeftAlignedRowWithGap>
 				<EnumDropdown
 					required
 					enumeration={BinStrategy}
 					label={'Bin strategy'}
 					selectedKey={internal.args.strategy}
 					onChange={handleBinStrategyChange}
+					styles={narrowDropdownStyles}
 				/>
-			</LeftAlignedRow>
-			<LeftAlignedRow>
 				<Switch>
 					<Case condition={internal.args.strategy === BinStrategy.FixedCount}>
 						<SpinButton
@@ -89,7 +89,7 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 									? `${internal.args.fixedcount}`
 									: undefined
 							}
-							styles={dropdownStyles}
+							styles={narrowDropdownStyles}
 							onChange={handleBinCountChange}
 						/>
 					</Case>
@@ -103,32 +103,30 @@ export const Bin: React.FC<StepComponentProps> = memo(function Bin({
 									? `${internal.args.fixedwidth}`
 									: undefined
 							}
-							styles={dropdownStyles}
+							styles={narrowDropdownStyles}
 							onChange={handleBinSizeChange}
 						/>
 					</Case>
 				</Switch>
-			</LeftAlignedRow>
+			</LeftAlignedRowWithGap>
 			<If condition={internal.args.strategy !== BinStrategy.Auto}>
 				<Then>
-					<LeftAlignedRow>
+					<LeftAlignedRowWithGap>
 						<SpinButton
 							label={'Min boundary'}
 							labelPosition={Position.top}
 							value={internal.args.min ? `${internal.args.min}` : undefined}
-							styles={dropdownStyles}
+							styles={narrowDropdownStyles}
 							onChange={handleMinChange}
 						/>
-					</LeftAlignedRow>
-					<LeftAlignedRow>
 						<SpinButton
 							label={'Max boundary'}
 							labelPosition={Position.top}
 							value={internal.args.max ? `${internal.args.max}` : undefined}
-							styles={dropdownStyles}
+							styles={narrowDropdownStyles}
 							onChange={handleMaxChange}
 						/>
-					</LeftAlignedRow>
+					</LeftAlignedRowWithGap>
 					<LeftAlignedRow>
 						<Checkbox
 							label={'Clamp to min/max'}
