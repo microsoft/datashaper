@@ -118,6 +118,19 @@ export class TestStore extends DefaultTableStore {
 			C: [3, 5, 30],
 		})
 
+		const table19 = table({
+			int: ['1', '-12', '40098', 'F98'],
+			int_hex: ['0x000000', '0xffffff', '0x0000ff', '0xkl0922'],
+			date: [
+				'2021-04-13',
+				'2001-08-18T00:00:00Z',
+				'1998-01-12T04:38:00Z',
+				'date',
+			],
+			decimal: ['1.232', '39488.45', '0.9989', 'g19.2'],
+			boolean: ['true', 'false', 'hi', ''],
+		})
+
 		this.set({ id: 'table1', table: table1 })
 		this.set({ id: 'table2', table: table2 })
 		this.set({ id: 'table3', table: table3 })
@@ -136,5 +149,6 @@ export class TestStore extends DefaultTableStore {
 		this.set({ id: 'table16', table: table16 })
 		this.set({ id: 'table17', table: table17 })
 		this.set({ id: 'table18', table: table18 })
+		this.set({ id: 'table19', table: table19 })
 	}
 }
