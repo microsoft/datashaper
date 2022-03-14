@@ -1,6 +1,6 @@
 # convert
 
-Converts the data type of a column from one type to another. This is normally used for converting string data to a structured type such as a date or number.
+Converts the data of a column from one type to another. This is normally used for converting string data to a strict type such as a date or number. Cell values that do not properly parse to the specified type will be set to empty/NaN in the output.
 
 ## Data types
 
