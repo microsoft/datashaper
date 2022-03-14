@@ -62,7 +62,7 @@ export const Convert: React.FC<StepComponentProps> = memo(function Convert({
 			{internal.args.type === ParseType.Integer ? (
 				<LeftAlignedColumn>
 					<TextField
-						label={'Radix (base)'}
+						label={'Base (radix)'}
 						value={internal.args.radix ? `${internal.args.radix}` : ''}
 						styles={dropdownStyles}
 						onChange={handleRadixChange}

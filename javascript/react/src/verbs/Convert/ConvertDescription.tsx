@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ConvertStep } from '@data-wrangling-components/core'
+import { ParseType } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { createRowEntries, VerbDescription } from '../../index.js'
@@ -30,6 +31,15 @@ export const ConvertDescription: React.FC<StepDescriptionProps> = memo(
 				{
 					before: 'to type',
 					value: args.type,
+					sub:
+						args.type === ParseType.Integer
+							? [
+									{
+										before: 'with base',
+										value: args.radix,
+									},
+							  ]
+							: undefined,
 				},
 			]
 		}, [props])
