@@ -128,6 +128,29 @@ describe('test for convert verb', () => {
 				expect(result.table!.get('decimal', 3)).toBeNaN()
 			})
 		})
+
+		test('boolean', () => {
+			const step: Step = {
+				verb: Verb.Convert,
+				input: 'table19',
+				output: 'output',
+				args: {
+					columns: ['boolean'],
+					type: ParseType.Boolean,
+				},
+			}
+
+			const store = new TestStore()
+
+			return convert(step, store).then(result => {
+				expect(result.table!.numCols()).toBe(5)
+				expect(result.table!.numRows()).toBe(4)
+				expect(result.table!.get('boolean', 0)).toBe(true)
+				expect(result.table!.get('boolean', 1)).toBe(false)
+				expect(result.table!.get('boolean', 2)).toBe(true)
+				expect(result.table!.get('boolean', 3)).toBe(false)
+			})
+		})
 	})
 
 	describe('multi column', () => {
