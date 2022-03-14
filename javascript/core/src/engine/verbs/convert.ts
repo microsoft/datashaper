@@ -21,12 +21,12 @@ export async function convert(
 	store: TableStore,
 ): Promise<TableContainer> {
 	const { input, output, args } = step
-	const { columns, dataType, radix } = args as ConvertArgs
+	const { columns, type, radix } = args as ConvertArgs
 	const inputTable = await store.table(input)
 
 	// note that this applies the specified parse to every column equally
 	const dArgs = columns.reduce((acc, cur) => {
-		acc[cur] = parseType(cur, dataType, radix)
+		acc[cur] = parseType(cur, type, radix)
 		return acc
 	}, {} as any)
 

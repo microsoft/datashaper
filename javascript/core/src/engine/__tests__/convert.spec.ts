@@ -16,7 +16,7 @@ describe('test for convert verb', () => {
 				output: 'output',
 				args: {
 					columns: ['int'],
-					dataType: ParseType.Integer,
+					type: ParseType.Integer,
 				},
 			}
 
@@ -39,7 +39,7 @@ describe('test for convert verb', () => {
 				output: 'output',
 				args: {
 					columns: ['int'],
-					dataType: ParseType.Integer,
+					type: ParseType.Integer,
 					radix: 10,
 				},
 			}
@@ -63,7 +63,7 @@ describe('test for convert verb', () => {
 				output: 'output',
 				args: {
 					columns: ['int_hex'],
-					dataType: ParseType.Integer,
+					type: ParseType.Integer,
 				},
 			}
 
@@ -86,7 +86,7 @@ describe('test for convert verb', () => {
 				output: 'output',
 				args: {
 					columns: ['date'],
-					dataType: ParseType.Date,
+					type: ParseType.Date,
 				},
 			}
 
@@ -113,7 +113,7 @@ describe('test for convert verb', () => {
 				output: 'output',
 				args: {
 					columns: ['decimal'],
-					dataType: ParseType.Decimal,
+					type: ParseType.Decimal,
 				},
 			}
 
@@ -138,7 +138,7 @@ describe('test for convert verb', () => {
 				output: 'output',
 				args: {
 					columns: ['int', 'int_hex'],
-					dataType: ParseType.Integer,
+					type: ParseType.Integer,
 				},
 			}
 

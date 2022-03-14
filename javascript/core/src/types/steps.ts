@@ -156,7 +156,7 @@ export interface ChainArgs {
 }
 
 export interface ConvertArgs extends InputColumnListArgs {
-	dataType: ParseType
+	type: ParseType
 	/**
 	 * Optional radix to use for parsing strings into ints
 	 */

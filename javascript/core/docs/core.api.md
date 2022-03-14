@@ -178,9 +178,9 @@ export function container(id: string, table?: ColumnTable, options?: Omit<TableC
 //
 // @public (undocumented)
 export interface ConvertArgs extends InputColumnListArgs {
-    // (undocumented)
-    dataType: ParseType;
     radix?: number;
+    // (undocumented)
+    type: ParseType;
 }
 
 // Warning: (ae-missing-release-tag) "ConvertStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
