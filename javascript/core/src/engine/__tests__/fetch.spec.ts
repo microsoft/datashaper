@@ -51,4 +51,42 @@ describe('test for fetch', () => {
 			expect(result.table.get('US', 4)).toBe(false)
 		})
 	})
+
+	test('fetch simple json file', () => {
+		const step: Step = {
+			verb: Verb.Fetch,
+			input: '',
+			output: 'output',
+			args: {
+				url: 'https://vega.github.io/vega/data/cars.json',
+			},
+		}
+
+		const store = new TestStore()
+
+		return fetch(step, store).then(result => {
+			expect(result.table.numCols()).toBe(9)
+			expect(result.table.numRows()).toBe(406)
+
+			expect(result.table.get('Name', 0)).toBe('chevrolet chevelle malibu')
+			expect(result.table.get('Miles_per_Gallon', 0)).toBe(18)
+			expect(result.table.get('Cylinders', 0)).toBe(8)
+			expect(result.table.get('Displacement', 0)).toBe(307)
+			expect(result.table.get('Horsepower', 0)).toBe(130)
+			expect(result.table.get('Weight_in_lbs', 0)).toBe(3504)
+			expect(result.table.get('Acceleration', 0)).toBe(12)
+			expect(result.table.get('Year', 0)).toBe('1970-01-01')
+			expect(result.table.get('Origin', 0)).toBe('USA')
+
+			expect(result.table.get('Name', 405)).toBe('chevy s-10')
+			expect(result.table.get('Miles_per_Gallon', 405)).toBe(31)
+			expect(result.table.get('Cylinders', 405)).toBe(4)
+			expect(result.table.get('Displacement', 405)).toBe(119)
+			expect(result.table.get('Horsepower', 405)).toBe(82)
+			expect(result.table.get('Weight_in_lbs', 405)).toBe(2720)
+			expect(result.table.get('Acceleration', 405)).toBe(19.4)
+			expect(result.table.get('Year', 405)).toBe('1982-01-01')
+			expect(result.table.get('Origin', 405)).toBe('USA')
+		})
+	})
 })

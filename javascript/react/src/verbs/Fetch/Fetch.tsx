@@ -32,6 +32,12 @@ export const Fetch: React.FC<StepComponentProps> = memo(function Fetch({
 		onChange,
 	)
 
+	const handleAutoMaxValueChange = useHandleTextfieldChange(
+		internal,
+		'args.autoMaxValue',
+		onChange,
+	)
+
 	return (
 		<Container>
 			<LeftAlignedRow>
@@ -51,6 +57,15 @@ export const Fetch: React.FC<StepComponentProps> = memo(function Fetch({
 					placeholder={'Column delimiter'}
 					styles={dropdownStyles}
 					onChange={handleDelimiterChange}
+				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
+				<TextField
+					label={'Automax'}
+					value={internal.args.autoMaxValue && `${internal.args.autoMaxValue}`}
+					placeholder={'Automax'}
+					styles={dropdownStyles}
+					onChange={handleAutoMaxValueChange}
 				/>
 			</LeftAlignedRow>
 		</Container>
