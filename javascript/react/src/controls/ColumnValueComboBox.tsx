@@ -34,14 +34,15 @@ export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps> = memo(
 			]
 		}, [options])
 
-		console.log(columnName)
 		return (
 			<ComboBox
-				allowFreeform
 				label={'Value'}
 				placeholder={'Select value'}
+				autoComplete="on"
 				options={withHeader}
 				styles={dropdownStyles}
+				dropdownMaxWidth={200}
+				useComboBoxAsMenuWidth
 				{...rest}
 			/>
 		)

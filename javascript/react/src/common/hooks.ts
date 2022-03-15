@@ -102,12 +102,21 @@ export function useColumnValueOptions(
 			return []
 		}
 		const getFallback = () => {
-			const result = table
-				.rollup({
-					[column]: op.array_agg(column),
-				})
-				.get(column, 0)
-			return result ?? []
+			const columnNamesArray: string[] = table
+				.columnNames()
+				.filter(e => e === column)
+
+			if (columnNamesArray.length !== 0) {
+				const result = table
+					.rollup({
+						[column]: op.array_agg(column),
+					})
+					.get(column, 0)
+
+				return result ?? []
+			}
+
+			return []
 		}
 		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list
