@@ -63,9 +63,7 @@ export function useBusinessLogic(
 		setSelectedTableName,
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
-	const tablesOrchestrator = getLoadingOrchestrator(
-		LoadingOrchestratorType.Tables,
-	)
+	const { isLoading } = getLoadingOrchestrator(LoadingOrchestratorType.Tables)
 	const handleFileUpload = useHandleFileUpload(onUpdateSteps, onUpdateTables)
 
 	// TODO: resolve these from the stored table state
@@ -156,6 +154,6 @@ export function useBusinessLogic(
 		handleFileUpload,
 		Message,
 		setMessage,
-		tablesLoading: tablesOrchestrator.isLoading,
+		tablesLoading: isLoading,
 	}
 }

@@ -30,7 +30,7 @@ import type { FeatureCellProps } from './types.js'
 export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 	function FeaturesCell(props) {
 		const { features, metadata, item, column, index, onColumnClick } = props
-		const type = (metadata && metadata.type) ?? undefined
+		const type = metadata?.type
 		const value = getValue(item, column)
 		const magnitude = useNumberMagnitude(value, metadata, type)
 		const histo = categories(value)

@@ -112,9 +112,6 @@ export function useColumns(
 			const { iconName, ...defaults } = column
 
 			const meta = computedMetadata?.columns[name]
-			// if (!meta) {
-			// 	throw new Error(`could not find meta for column ${name}`)
-			// }
 			const color =
 				meta && meta.type === DataType.Number ? colorScale() : undefined
 			const onRender =
