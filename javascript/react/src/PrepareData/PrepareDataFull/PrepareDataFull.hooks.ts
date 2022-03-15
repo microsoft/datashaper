@@ -8,11 +8,14 @@ import type {
 	TableMetadata,
 	TableStore,
 } from '@data-wrangling-components/core'
-import { introspect } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { usePipeline, useStore } from '../../common/index.js'
+import {
+	getLoadingOrchestrator,
+	OrchestratorType,
+} from '../../Orchestrator/index.js'
 import {
 	useAddNewTables,
 	useOnDeleteStep,
@@ -34,6 +37,8 @@ export function useBusinessLogic(
 	lastTableName: string
 	selectedTableName?: string
 	derived: TableContainer[]
+	onUpdateMetadata: (meta: TableMetadata) => void
+	tablesLoading: boolean
 } {
 	const [selectedTableName, setSelectedTableName] = useState<string>()
 	const [storedTables, setStoredTables] = useState<Map<string, TableContainer>>(
@@ -47,6 +52,7 @@ export function useBusinessLogic(
 		setSelectedTableName,
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
+	const tablesLoading = getLoadingOrchestrator(OrchestratorType.Tables)
 
 	// TODO: resolve these from the stored table state
 	const derived = useMemo(() => {
@@ -62,7 +68,7 @@ export function useBusinessLogic(
 	}, [selectedTableName, storedTables])
 
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
-		return selectedTable && introspect(selectedTable, true)
+		return storedTables.get(selectedTableName ?? '')?.metadata
 	}, [selectedTable])
 
 	// kind of a complex selection process:
@@ -104,6 +110,20 @@ export function useBusinessLogic(
 	const onSaveStep = useOnSaveStep(onUpdateSteps, pipeline)
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
 
+	const onUpdateMetadata = useCallback(
+		async (meta: TableMetadata) => {
+			const _table = tables.find(
+				x => x.id === selectedTableName,
+			) as TableContainer
+			_table.metadata = meta
+			store.delete(_table.id)
+			store.set(_table)
+			const _storedTables = await store.toMap()
+			setStoredTables(_storedTables)
+		},
+		[store, selectedTableName, tables, setStoredTables],
+	)
+
 	return {
 		selectedTable,
 		setSelectedTableName,
@@ -114,5 +134,7 @@ export function useBusinessLogic(
 		lastTableName,
 		selectedTableName,
 		derived,
+		onUpdateMetadata,
+		tablesLoading: tablesLoading.isLoading,
 	}
 }

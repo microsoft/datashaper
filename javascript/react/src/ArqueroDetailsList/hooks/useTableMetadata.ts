@@ -6,6 +6,8 @@ import type { TableMetadata } from '@data-wrangling-components/core'
 import { introspect } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
+
+import type { SaveMetadataFunction } from '../types.js'
 /**
  * Optionally executes a series of table characterization functions.
  * @param table
@@ -15,9 +17,16 @@ export function useTableMetadata(
 	table: ColumnTable,
 	existing?: TableMetadata,
 	discover = false,
-): TableMetadata {
-	return useMemo(
-		() => existing || introspect(table, discover),
-		[table, existing, discover],
-	)
+	saveMetadata?: SaveMetadataFunction,
+): TableMetadata | undefined {
+	return useMemo(() => {
+		if (existing) {
+			return existing
+		}
+		if (discover) {
+			const meta = introspect(table, discover)
+			saveMetadata && saveMetadata(meta, table)
+			return meta
+		}
+	}, [table, existing, discover])
 }

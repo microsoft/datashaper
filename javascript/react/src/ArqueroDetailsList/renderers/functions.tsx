@@ -44,7 +44,7 @@ export const createRenderSmartCell = (
 
 export const createRenderFeaturesCell = (
 	features: DetailsListFeatures,
-	metadata: ColumnMetadata,
+	metadata?: ColumnMetadata,
 	color?: string,
 	onColumnClick?: ColumnClickFunction,
 	onCellDropdownSelect?: DropdownOptionSelect,

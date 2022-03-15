@@ -19,7 +19,7 @@ import type { GroupHeaderFunction } from '../index.js'
  */
 export function useGroupHeaderRenderer(
 	table: ColumnTable,
-	computedMetadata: TableMetadata,
+	computedMetadata?: TableMetadata,
 	groupHeaderFunction?: GroupHeaderFunction,
 	lazyLoadGroups = true,
 ): IRenderFunction<IDetailsGroupDividerProps> {
@@ -33,7 +33,7 @@ export function useGroupHeaderRenderer(
 			if (columnName == null) {
 				return null
 			}
-			const meta = computedMetadata.columns[columnName]
+			const meta = computedMetadata?.columns[columnName]
 			if (meta == null) {
 				return null
 			}

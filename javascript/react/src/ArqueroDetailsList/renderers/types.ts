@@ -59,7 +59,7 @@ export interface MagnitudeCellProps extends FormattedCellProps {
 }
 
 export interface RichCellProps extends FormattedCellProps {
-	metadata: ColumnMetadata
+	metadata?: ColumnMetadata
 	onColumnClick?: ColumnClickFunction
 	onCellDropdownSelect?: DropdownOptionSelect
 }

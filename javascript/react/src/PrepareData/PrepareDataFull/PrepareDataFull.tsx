@@ -2,9 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableContainer } from '@data-wrangling-components/core'
+import type {
+	Step,
+	TableContainer,
+	TableMetadata,
+} from '@data-wrangling-components/core'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
-import { memo } from 'react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
 import { ManageSteps } from '../../Steps/index.js'
@@ -32,13 +37,18 @@ export const PrepareDataFull: React.FC<{
 		store,
 		lastTableName,
 		derived,
+		selectedMetadata,
+		onUpdateMetadata,
+		tablesLoading,
 	} = useBusinessLogic(tables, onUpdateSteps, steps)
+	console.log('aaaa', tablesLoading)
 
 	return (
 		<Container>
 			<InputContainer>
 				<SectionTitle>Tables</SectionTitle>
 				<TableListBar
+					loading={tablesLoading}
 					inputs={tables}
 					derived={derived}
 					selected={selectedTableName}
@@ -63,8 +73,10 @@ export const PrepareDataFull: React.FC<{
 			<OutputContainer>
 				<SectionTitle>Preview</SectionTitle>
 				<PreviewTable
+					onChangeMetadata={onUpdateMetadata}
 					headerCommandBar={outputHeaderCommandBar}
 					table={selectedTable}
+					metadata={selectedMetadata}
 					name={selectedTableName}
 				/>
 			</OutputContainer>

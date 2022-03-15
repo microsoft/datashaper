@@ -3,6 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableContainer } from '@data-wrangling-components/core'
+import {
+	getLoadingOrchestrator,
+	OrchestratorType,
+} from '@data-wrangling-components/react/src/Orchestrator'
 import { FileCollection, FileType } from '@data-wrangling-components/utilities'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -14,8 +18,10 @@ export function useBusinessLogic(): {
 	const [fileCollection, setFileCollection] = useState<FileCollection>(
 		new FileCollection(),
 	)
+
 	const [steps, setSteps] = useState<Step[]>([])
 	const [tables, setTables] = useState<TableContainer[]>([])
+	const loading = getLoadingOrchestrator(OrchestratorType.Tables)
 
 	const updateFileCollection = useCallback(
 		async (collection: FileCollection) => {
@@ -26,7 +32,7 @@ export function useBusinessLogic(): {
 					return {
 						id: table.name,
 						table: await table.toTable(),
-					}
+					} as TableContainer
 				})
 			const _tables = await Promise.all(tablesTransformed)
 			setTables(_tables)
@@ -42,9 +48,10 @@ export function useBusinessLogic(): {
 				fileCollection.add('data/products.csv'),
 				fileCollection.add('data/stocks.csv'),
 			])
-
-			updateFileCollection(fileCollection)
+			await updateFileCollection(fileCollection)
+			loading.stop()
 		}
+		loading.start()
 		f()
 	}, [fileCollection, updateFileCollection])
 
