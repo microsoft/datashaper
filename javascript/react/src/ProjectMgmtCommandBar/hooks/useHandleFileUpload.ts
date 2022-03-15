@@ -13,9 +13,16 @@ import { useHandleOnUploadClick } from '../../files/index.js'
 function useCsvHandler(onUpdateTables?: (tables: TableContainer[]) => void) {
 	return useCallback(
 		async (fc: FileCollection) => {
-			const tables = fc.list(FileType.table)
+			let tables = fc.list(FileType.table)
 			if (!tables.length) {
 				return
+			}
+			const regex = /metadata\.json$/i
+			const jsonFile = fc.list(FileType.json).find(f => regex.test(f.name))
+			const metadata = jsonFile ? await jsonFile.toJson() : null
+			const { input = [] } = metadata || {}
+			if (input.length) {
+				tables = tables.filter(t => input.includes(t.name))
 			}
 			const tableContainer = []
 
@@ -78,9 +85,10 @@ export function useHandleFileUpload(
 	const jsonHandler = useJsonHandler(onUpdateSteps)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	return useCallback(
-		(fc: FileCollection) => {
-			csvHandler(fc)
-			jsonHandler(fc)
+		async (fc: FileCollection) => {
+			/* eslint-disable @essex/adjacent-await */
+			await csvHandler(fc)
+			await jsonHandler(fc)
 		},
 		[csvHandler, jsonHandler],
 	)
@@ -93,10 +101,11 @@ export function useHandleZipUpload(
 	const jsonHandler = useJsonHandler(onUpdateSteps)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	const handler = useCallback(
-		(fc: FileCollection) => {
+		async (fc: FileCollection) => {
 			onUpdateTables && onUpdateTables([])
-			csvHandler(fc)
-			jsonHandler(fc)
+			/* eslint-disable @essex/adjacent-await */
+			await csvHandler(fc)
+			await jsonHandler(fc)
 		},
 		[csvHandler, jsonHandler, onUpdateTables],
 	)

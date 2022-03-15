@@ -47,11 +47,14 @@ export function useDownloadZip(
 				  })
 				: null
 		fileCollection.clear()
+		const input: string[] = []
+		const output: string[] = []
 
 		if (outputTable?.table) {
 			const file = tableFile(outputTable, 'output')
 			if (file) {
 				await fileCollection.add(file)
+				output.push(file.name)
 			}
 		}
 
@@ -61,7 +64,16 @@ export function useDownloadZip(
 				.filter(f => f !== null)
 			if (files.length) {
 				await fileCollection.add(files as FileWithPath[])
+				tables.forEach(table => {
+					input.push(table.name || table.id)
+				})
 			}
+		}
+
+		if (input.length || output.length) {
+			const blob = new Blob([JSON.stringify({ input, output }, null, 4)])
+			const file = createFileWithPath(blob, { name: 'metadata.json' })
+			await fileCollection.add(file)
 		}
 
 		if (steps.length) {

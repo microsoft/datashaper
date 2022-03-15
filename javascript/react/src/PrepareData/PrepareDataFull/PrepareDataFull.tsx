@@ -57,6 +57,7 @@ export const PrepareDataFull: React.FC<{
 					FileMimeType.csv,
 					FileMimeType.zip,
 					FileMimeType.json,
+					FileMimeType.excel,
 				]}
 				onDropAccepted={handleFileUpload}
 				onDropRejected={setMessage}
