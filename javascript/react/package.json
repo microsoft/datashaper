@@ -15,6 +15,7 @@
 	"dependencies": {
 		"@data-wrangling-components/guidance": "workspace:^",
 		"@essex/hooks": "^4.0.6",
+		"@essex/themed-components": "^2.0.5",
 		"core-js": "^3.21.1",
 		"d3-format": "^3.1.0",
 		"d3-scale": "^4.0.2",
@@ -29,7 +30,6 @@
 		"@data-wrangling-components/core": "workspace:^",
 		"@data-wrangling-components/utilities": "workspace:^",
 		"@essex/scripts": "^20.5.1",
-		"@essex/themed-components": "^2.0.5",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@fluentui/font-icons-mdl2": "^8.2.3",
 		"@fluentui/react": "^8.60.2",
