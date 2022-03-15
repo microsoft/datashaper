@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableContainer } from '@data-wrangling-components/core'
-import { FileMimeType } from '@data-wrangling-components/utilities'
+import { FileExtensions } from '@data-wrangling-components/utilities'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -54,10 +54,9 @@ export const PrepareDataFull: React.FC<{
 		<Container>
 			<Dropzone
 				acceptedFileTypes={[
-					FileMimeType.csv,
-					FileMimeType.zip,
-					FileMimeType.json,
-					FileMimeType.excel,
+					FileExtensions.csv,
+					FileExtensions.zip,
+					FileExtensions.json,
 				]}
 				onDropAccepted={handleFileUpload}
 				onDropRejected={setMessage}
