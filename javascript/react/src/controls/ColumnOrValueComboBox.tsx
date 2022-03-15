@@ -35,6 +35,7 @@ export const ColumnOrValueComboBox: React.FC<ColumnOrValueComboBoxProps> = memo(
 		return (
 			<ComboBox
 				allowFreeform
+				autoComplete={'off'}
 				label={'Column or value'}
 				placeholder={'text/number or select column'}
 				options={withHeader}
