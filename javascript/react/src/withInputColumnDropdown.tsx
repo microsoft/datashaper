@@ -60,7 +60,6 @@ export const withInputColumnDropdown = (
 				return <Component {...props} />
 			}
 
-			console.log(step)
 			return (
 				<Container className="with-input-column-dropdown">
 					<LeftAlignedRow>
