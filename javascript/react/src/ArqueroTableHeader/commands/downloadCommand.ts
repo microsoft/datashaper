@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { download } from '@data-wrangling-components/utilities'
+import { downloadTable } from '@data-wrangling-components/utilities'
 import type { ICommandBarItemProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import merge from 'lodash-es/merge.js'
@@ -26,7 +26,7 @@ export function downloadCommand(
 			iconProps: {
 				iconName: 'Download',
 			},
-			onClick: () => download(table, downloadFilename),
+			onClick: () => downloadTable(table, downloadFilename),
 		},
 		props,
 	)

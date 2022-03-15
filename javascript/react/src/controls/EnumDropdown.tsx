@@ -19,7 +19,6 @@ export interface EnumDropdownProps<E = unknown>
 export const EnumDropdown: React.FC<EnumDropdownProps> = memo(
 	function EnumDropdown(props) {
 		const options = useOptions(props.enumeration)
-		console.log(props.enumeration)
 		return <Dropdown options={options} styles={opDropdownStyles} {...props} />
 	},
 )

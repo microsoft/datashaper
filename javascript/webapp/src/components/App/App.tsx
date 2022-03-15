@@ -8,6 +8,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import styled from 'styled-components'
 
+import { Footer } from '~components/Footer'
+
 import { ErrorBoundary } from './ErrorBoundary'
 import { Header } from './Header'
 import { Layout } from './Layout'
@@ -26,6 +28,7 @@ export const App: React.FC = memo(function App() {
 								<Layout>
 									<RouteOptions />
 								</Layout>
+								<Footer />
 							</Container>
 						</StyleContext>
 					</Suspense>

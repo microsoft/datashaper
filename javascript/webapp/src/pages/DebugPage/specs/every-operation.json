@@ -40,9 +40,13 @@
 			"output": "binarize-1",
 			"args": {
 				"column": "FY21 Sales",
-				"operator": "<",
-				"value": 10000,
-				"to": "FY21 Sales < 10k"
+				"to": "FY21 Sales < 10k",
+				"criteria": [
+					{
+						"operator": "<",
+						"value": 10000
+					}
+				]
 			}
 		},
 		{
@@ -51,6 +55,15 @@
 			"output": "concat-1",
 			"args": {
 				"others": ["data/companies2.csv"]
+			}
+		},
+		{
+			"verb": "convert",
+			"input": "data/companies.csv",
+			"output": "convert-1",
+			"args": {
+				"columns": ["ID"],
+				"type": "int"
 			}
 		},
 		{
@@ -112,8 +125,12 @@
 			"output": "filter-1",
 			"args": {
 				"column": "Employees",
-				"operator": "<=",
-				"value": 300000
+				"criteria": [
+					{
+						"operator": "<=",
+						"value": 300000
+					}
+				]
 			}
 		},
 		{

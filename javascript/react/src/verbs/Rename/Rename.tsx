@@ -106,7 +106,7 @@ function useColumnPairs(
 						onChange={handleColumnChange}
 						styles={{
 							root: {
-								width: 120,
+								width: 130,
 							},
 						}}
 					/>
@@ -118,7 +118,7 @@ function useColumnPairs(
 						placeholder={'New name'}
 						value={newname}
 						onChange={handleTextChange}
-						styles={{ root: { width: 120 } }}
+						styles={{ root: { width: 130 } }}
 					/>
 					<IconButton
 						title={'Remove this rename'}

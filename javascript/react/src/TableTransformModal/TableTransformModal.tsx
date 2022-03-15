@@ -70,7 +70,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 				</Header>
 
 				<ContainerBody showGuidance={isGuidanceVisible}>
-					<div>
+					<StepComponentContainer>
 						<StepSelectorContainer>
 							<StepSelector
 								placeholder="Select a verb"
@@ -97,12 +97,14 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 								</ButtonContainer>
 							</>
 						)}
-					</div>
+					</StepComponentContainer>
 					{isGuidanceVisible && internal?.verb ? (
-						<Guidance
-							name={internal?.verb}
-							index={index as Record<string, string>}
-						/>
+						<GuidanceContainer>
+							<Guidance
+								name={internal?.verb}
+								index={index as Record<string, string>}
+							/>
+						</GuidanceContainer>
 					) : null}
 				</ContainerBody>
 			</Callout>
@@ -134,13 +136,21 @@ const Title = styled.h3`
 	margin: 8px 0 8px 0;
 `
 
+const StepComponentContainer = styled.div`
+	width: 316px;
+`
+
 const StepSelectorContainer = styled.div`
 	margin-bottom: 8px;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-items: center;
 `
 
 const ButtonContainer = styled.div`
 	margin-top: 8px;
+`
+
+const GuidanceContainer = styled.div`
+	width: 400px;
 `

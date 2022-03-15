@@ -25,7 +25,7 @@ export const OrderbyDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'order',
-					value: args.orders.length === 0 ? undefined : '',
+					value: args.orders?.length === 0 ? undefined : '',
 					sub,
 				},
 			]

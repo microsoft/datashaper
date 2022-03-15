@@ -17,9 +17,13 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'count',
-				operator: NumericComparisonOperator.GreaterThanOrEqual,
-				type: FilterCompareType.Value,
-				value: 40,
+				criteria: [
+					{
+						operator: NumericComparisonOperator.GreaterThanOrEqual,
+						type: FilterCompareType.Value,
+						value: 40,
+					},
+				],
 			},
 		}
 
@@ -27,15 +31,15 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.table.numCols()).toBe(4)
+			expect(result.table!.numCols()).toBe(4)
 			// no new rows
-			expect(result.table.numRows()).toBe(5)
+			expect(result.table!.numRows()).toBe(5)
 			// test where criteria match
-			expect(result.table.get('newColumn', 0)).toBe(0)
-			expect(result.table.get('newColumn', 1)).toBe(0)
-			expect(result.table.get('newColumn', 2)).toBe(0)
-			expect(result.table.get('newColumn', 3)).toBe(1)
-			expect(result.table.get('newColumn', 4)).toBe(1)
+			expect(result.table!.get('newColumn', 0)).toBe(0)
+			expect(result.table!.get('newColumn', 1)).toBe(0)
+			expect(result.table!.get('newColumn', 2)).toBe(0)
+			expect(result.table!.get('newColumn', 3)).toBe(1)
+			expect(result.table!.get('newColumn', 4)).toBe(1)
 		})
 	})
 
@@ -47,9 +51,13 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'count',
-				operator: NumericComparisonOperator.GreaterThan,
-				type: FilterCompareType.Value,
-				value: 40,
+				criteria: [
+					{
+						operator: NumericComparisonOperator.GreaterThan,
+						type: FilterCompareType.Value,
+						value: 40,
+					},
+				],
 			},
 		}
 
@@ -57,15 +65,15 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.table.numCols()).toBe(4)
+			expect(result.table!.numCols()).toBe(4)
 			// no new rows
-			expect(result.table.numRows()).toBe(5)
+			expect(result.table!.numRows()).toBe(5)
 			// test where criteria match
-			expect(result.table.get('newColumn', 0)).toBe(0)
-			expect(result.table.get('newColumn', 1)).toBe(0)
-			expect(result.table.get('newColumn', 2)).toBe(0)
-			expect(result.table.get('newColumn', 3)).toBe(0)
-			expect(result.table.get('newColumn', 4)).toBe(1)
+			expect(result.table!.get('newColumn', 0)).toBe(0)
+			expect(result.table!.get('newColumn', 1)).toBe(0)
+			expect(result.table!.get('newColumn', 2)).toBe(0)
+			expect(result.table!.get('newColumn', 3)).toBe(0)
+			expect(result.table!.get('newColumn', 4)).toBe(1)
 		})
 	})
 
@@ -77,9 +85,13 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'count',
-				operator: NumericComparisonOperator.LessThan,
-				type: FilterCompareType.Value,
-				value: 40,
+				criteria: [
+					{
+						operator: NumericComparisonOperator.LessThan,
+						type: FilterCompareType.Value,
+						value: 40,
+					},
+				],
 			},
 		}
 
@@ -87,15 +99,15 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.table.numCols()).toBe(4)
+			expect(result.table!.numCols()).toBe(4)
 			// no new rows
-			expect(result.table.numRows()).toBe(5)
+			expect(result.table!.numRows()).toBe(5)
 			// test where criteria match
-			expect(result.table.get('newColumn', 0)).toBe(1)
-			expect(result.table.get('newColumn', 1)).toBe(1)
-			expect(result.table.get('newColumn', 2)).toBe(1)
-			expect(result.table.get('newColumn', 3)).toBe(0)
-			expect(result.table.get('newColumn', 4)).toBe(0)
+			expect(result.table!.get('newColumn', 0)).toBe(1)
+			expect(result.table!.get('newColumn', 1)).toBe(1)
+			expect(result.table!.get('newColumn', 2)).toBe(1)
+			expect(result.table!.get('newColumn', 3)).toBe(0)
+			expect(result.table!.get('newColumn', 4)).toBe(0)
 		})
 	})
 
@@ -107,9 +119,13 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'item',
-				operator: StringComparisonOperator.EndsWith,
-				type: FilterCompareType.Value,
-				value: 'a',
+				criteria: [
+					{
+						operator: StringComparisonOperator.EndsWith,
+						type: FilterCompareType.Value,
+						value: 'a',
+					},
+				],
 			},
 		}
 
@@ -117,16 +133,16 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.table.numCols()).toBe(4)
+			expect(result.table!.numCols()).toBe(4)
 			// no new rows
-			expect(result.table.numRows()).toBe(6)
+			expect(result.table!.numRows()).toBe(6)
 			// test where criteria match
-			expect(result.table.get('newColumn', 0)).toBe(0)
-			expect(result.table.get('newColumn', 1)).toBe(0)
-			expect(result.table.get('newColumn', 2)).toBe(1)
-			expect(result.table.get('newColumn', 3)).toBe(1)
-			expect(result.table.get('newColumn', 4)).toBe(0)
-			expect(result.table.get('newColumn', 5)).toBe(0)
+			expect(result.table!.get('newColumn', 0)).toBe(0)
+			expect(result.table!.get('newColumn', 1)).toBe(0)
+			expect(result.table!.get('newColumn', 2)).toBe(1)
+			expect(result.table!.get('newColumn', 3)).toBe(1)
+			expect(result.table!.get('newColumn', 4)).toBe(0)
+			expect(result.table!.get('newColumn', 5)).toBe(0)
 		})
 	})
 
@@ -138,8 +154,12 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'item',
-				operator: StringComparisonOperator.IsEmpty,
-				type: FilterCompareType.Value,
+				criteria: [
+					{
+						operator: StringComparisonOperator.IsEmpty,
+						type: FilterCompareType.Value,
+					},
+				],
 			},
 		}
 
@@ -147,16 +167,16 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.table.numCols()).toBe(4)
+			expect(result.table!.numCols()).toBe(4)
 			// no new rows
-			expect(result.table.numRows()).toBe(6)
+			expect(result.table!.numRows()).toBe(6)
 			// test where criteria match
-			expect(result.table.get('newColumn', 0)).toBe(0)
-			expect(result.table.get('newColumn', 1)).toBe(1)
-			expect(result.table.get('newColumn', 2)).toBe(0)
-			expect(result.table.get('newColumn', 3)).toBe(0)
-			expect(result.table.get('newColumn', 4)).toBe(0)
-			expect(result.table.get('newColumn', 5)).toBe(1)
+			expect(result.table!.get('newColumn', 0)).toBe(0)
+			expect(result.table!.get('newColumn', 1)).toBe(1)
+			expect(result.table!.get('newColumn', 2)).toBe(0)
+			expect(result.table!.get('newColumn', 3)).toBe(0)
+			expect(result.table!.get('newColumn', 4)).toBe(0)
+			expect(result.table!.get('newColumn', 5)).toBe(1)
 		})
 	})
 
@@ -168,9 +188,13 @@ describe('test for binarize verb', () => {
 			args: {
 				to: 'newColumn',
 				column: 'item',
-				operator: StringComparisonOperator.Contains,
-				type: FilterCompareType.Value,
-				value: 'so',
+				criteria: [
+					{
+						operator: StringComparisonOperator.Contains,
+						type: FilterCompareType.Value,
+						value: 'so',
+					},
+				],
 			},
 		}
 
@@ -178,16 +202,56 @@ describe('test for binarize verb', () => {
 
 		return binarize(step, store).then(result => {
 			// one new column
-			expect(result.table.numCols()).toBe(4)
+			expect(result.table!.numCols()).toBe(4)
 			// no new rows
-			expect(result.table.numRows()).toBe(6)
+			expect(result.table!.numRows()).toBe(6)
 			// test where criteria match
-			expect(result.table.get('newColumn', 0)).toBe(0)
-			expect(result.table.get('newColumn', 1)).toBe(0)
-			expect(result.table.get('newColumn', 2)).toBe(1)
-			expect(result.table.get('newColumn', 3)).toBe(1)
-			expect(result.table.get('newColumn', 4)).toBe(0)
-			expect(result.table.get('newColumn', 5)).toBe(0)
+			expect(result.table!.get('newColumn', 0)).toBe(0)
+			expect(result.table!.get('newColumn', 1)).toBe(0)
+			expect(result.table!.get('newColumn', 2)).toBe(1)
+			expect(result.table!.get('newColumn', 3)).toBe(1)
+			expect(result.table!.get('newColumn', 4)).toBe(0)
+			expect(result.table!.get('newColumn', 5)).toBe(0)
+		})
+	})
+
+	test('binarize test with StringComparisonOperator Contains and two criteria', () => {
+		const step: Step = {
+			verb: Verb.Binarize,
+			input: 'table5',
+			output: 'output',
+			args: {
+				to: 'newColumn',
+				column: 'item',
+				criteria: [
+					{
+						operator: StringComparisonOperator.Contains,
+						type: FilterCompareType.Value,
+						value: 'so',
+					},
+					{
+						operator: StringComparisonOperator.Contains,
+						type: FilterCompareType.Value,
+						value: 'ed',
+					},
+				],
+			},
+		}
+
+		const store = new TestStore()
+
+		return binarize(step, store).then(result => {
+			// one new column
+			expect(result.table!.numCols()).toBe(4)
+			// no new rows
+			expect(result.table!.numRows()).toBe(6)
+			// test where criteria match
+			expect(result.table!.get('newColumn', 0)).toBe(1)
+			expect(result.table!.get('newColumn', 1)).toBe(0)
+			expect(result.table!.get('newColumn', 2)).toBe(1)
+			expect(result.table!.get('newColumn', 3)).toBe(1)
+			expect(result.table!.get('newColumn', 4)).toBe(0)
+			expect(result.table!.get('newColumn', 5)).toBe(0)
 		})
 	})
 })

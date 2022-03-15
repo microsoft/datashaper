@@ -120,7 +120,7 @@ function useRecodePairs(
 						onChange={handleSourceChange}
 						styles={{
 							root: {
-								width: 120,
+								width: 130,
 							},
 						}}
 					/>
@@ -132,7 +132,7 @@ function useRecodePairs(
 						placeholder={'New value'}
 						value={newvalue}
 						onChange={handleTextChange}
-						styles={{ root: { width: 120 } }}
+						styles={{ root: { width: 130 } }}
 					/>
 					<IconButton
 						title={'Remove this Recode'}

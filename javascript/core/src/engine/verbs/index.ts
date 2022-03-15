@@ -37,7 +37,6 @@ export function factory(verb: Verb, input: string, output: string): Step {
 				},
 			}
 		case Verb.Aggregate:
-		case Verb.Binarize:
 		case Verb.Derive:
 		case Verb.Impute:
 		case Verb.Fill:
@@ -68,6 +67,7 @@ export function factory(verb: Verb, input: string, output: string): Step {
 					columns: [],
 				},
 			}
+		case Verb.Convert:
 		case Verb.Lookup:
 		case Verb.Groupby:
 		case Verb.Dedupe:
@@ -100,8 +100,22 @@ export function factory(verb: Verb, input: string, output: string): Step {
 					strategy: JoinStrategy.Inner,
 				},
 			}
-		case Verb.Fetch:
+		case Verb.Binarize:
+			return {
+				...base,
+				args: {
+					to: 'output',
+					criteria: [],
+				},
+			}
 		case Verb.Filter:
+			return {
+				...base,
+				args: {
+					criteria: [],
+				},
+			}
+		case Verb.Fetch:
 		case Verb.Orderby:
 		case Verb.Rename:
 		case Verb.Sample:
