@@ -10,6 +10,8 @@ import {
 	types,
 } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import cloneDeep from 'lodash-es/cloneDeep.js'
+import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -18,7 +20,8 @@ import {
 	useHandleDropdownChange,
 	useLoadTable,
 } from './common/index.js'
-import { TableColumnDropdown } from './controls/index.js'
+import { ColumnOrValueComboBox, TableColumnDropdown } from './controls/index.js'
+import { dropdownStyles } from './controls/styles.js'
 import type { HOCFunction, StepComponentProps } from './types.js'
 /**
  * Higher order component generator to wrap a Step in the input column dropdown.
@@ -36,6 +39,16 @@ export const withInputColumnDropdown = (
 				'args.column',
 				onChange,
 			)
+
+			const handleComboBoxChange = useCallback(
+				(_event, option, value) => {
+					const update = cloneDeep(step)
+					set(update, 'args.column', option ? option.key : value)
+					onChange && onChange(update)
+				},
+				[step, onChange],
+			)
+
 			// TODO: detailed types/stats should be an option on table load,
 			// which will then be passed around with the container and thereby cached
 			// useLoadTable should return a TableContainer
@@ -46,18 +59,34 @@ export const withInputColumnDropdown = (
 			if (!isInputColumnStep(step)) {
 				return <Component {...props} />
 			}
+
+			console.log(step)
 			return (
 				<Container className="with-input-column-dropdown">
 					<LeftAlignedRow>
-						<TableColumnDropdown
-							required
-							table={tbl}
-							filter={filter}
-							label={label || `Column to ${step.verb}`}
-							selectedKey={(step.args as InputColumnArgs).column}
-							onChange={handleColumnChange}
-						/>
+						{step.verb !== 'erase' ? (
+							<TableColumnDropdown
+								required
+								table={tbl}
+								filter={filter}
+								label={label || `Column to ${step.verb}`}
+								selectedKey={(step.args as InputColumnArgs).column}
+								onChange={handleColumnChange}
+							/>
+						) : (
+							<ColumnOrValueComboBox
+								required
+								table={tbl}
+								label={label || `Column to ${step.verb}`}
+								placeholder={'column'}
+								text={(step.args as InputColumnArgs).column}
+								selectedKey={(step.args as InputColumnArgs).column}
+								onChange={handleComboBoxChange}
+								styles={dropdownStyles}
+							/>
+						)}
 					</LeftAlignedRow>
+
 					<Component {...props} />
 				</Container>
 			)
