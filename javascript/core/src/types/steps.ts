@@ -10,6 +10,7 @@ import type {
 	MathOperator,
 	MergeStrategy,
 	NumericComparisonOperator,
+	ParseType,
 	SortDirection,
 	StringComparisonOperator,
 	Verb,
@@ -48,6 +49,7 @@ export type BinStep = Step<BinArgs>
 export type BinarizeStep = Step<BinarizeArgs>
 export type ChainStep = Step<ChainArgs>
 export type ColumnListStep = Step<InputColumnListArgs>
+export type ConvertStep = Step<ConvertArgs>
 export type DedupeStep = Step<DedupeArgs>
 export type DeriveStep = Step<DeriveArgs>
 export type EraseStep = Step<EraseArgs>
@@ -153,6 +155,14 @@ export interface ChainArgs {
 	nofork?: boolean
 }
 
+export interface ConvertArgs extends InputColumnListArgs {
+	type: ParseType
+	/**
+	 * Optional radix to use for parsing strings into ints
+	 */
+	radix?: number
+}
+
 export type DedupeArgs = Partial<InputColumnListArgs>
 
 export interface DeriveArgs extends OutputColumnArgs {
@@ -177,6 +187,10 @@ export interface FetchArgs {
 	 * Optional delimiter for csv
 	 */
 	delimiter?: string
+	/**
+	 * Optional autoMax for tables
+	 */
+	autoMax?: number
 }
 
 export interface FillArgs extends OutputColumnArgs {

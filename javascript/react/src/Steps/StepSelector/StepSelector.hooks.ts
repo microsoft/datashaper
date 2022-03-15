@@ -29,6 +29,7 @@ const groups = [
 		verbs: [
 			'bin',
 			'binarize',
+			'convert',
 			'derive',
 			'erase',
 			'fill',
