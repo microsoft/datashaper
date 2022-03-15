@@ -15,6 +15,7 @@ interface CommandBarProps {
 	width?: string
 	bgColor?: string
 	color?: string
+	far?: boolean
 }
 
 export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
@@ -22,13 +23,14 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	width,
 	bgColor,
 	color,
+	far = false,
 }) {
 	const overflowButtonProps = useOverflowButtonProps(bgColor, color)
 	const handleOnDataReduce = useHandleOnDataReduce()
 	const handleOnDataGrown = useHandleOnDataGrown(color)
 
 	return (
-		<CommandBarWrapper width={width}>
+		<CommandBarWrapper width={width} far={far} className={'commandbar-wrapper'}>
 			<CB
 				items={commands}
 				styles={commandStyles}
@@ -102,13 +104,16 @@ const useIconProps = (): ((
 
 const commandStyles = {
 	root: {
-		float: 'right',
+		display: 'flex',
+		justifyContent: 'flex-end',
 		height: HEIGHT,
 		background: 'none',
 		padding: 0,
 	},
 }
 
-const CommandBarWrapper = styled.div<{ width?: string }>`
+const CommandBarWrapper = styled.div<{ width?: string; far?: boolean }>`
 	width: ${({ width }) => width || '25%'};
+	display: flex;
+	justify-content: ${({ far }) => (far ? 'flex-end' : 'flex-start')};
 `

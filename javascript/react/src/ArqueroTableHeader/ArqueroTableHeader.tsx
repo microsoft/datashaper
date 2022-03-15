@@ -80,6 +80,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 						}
 						bgColor={bgColor}
 						color={textColor}
+						far
 					/>
 				) : null}
 			</Header>
