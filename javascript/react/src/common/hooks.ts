@@ -98,7 +98,7 @@ export function useColumnValueOptions(
 	filter?: (value: Value) => boolean,
 ): IDropdownOption[] {
 	const vals = useMemo(() => {
-		if (!table) {
+		if (!table || !column || column.trim().length === 0) {
 			return []
 		}
 		const getFallback = () => {
