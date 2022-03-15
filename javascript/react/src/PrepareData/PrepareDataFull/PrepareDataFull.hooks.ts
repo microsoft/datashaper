@@ -10,7 +10,7 @@ import type {
 } from '@data-wrangling-components/core'
 import type { FileCollection } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { usePipeline, useStore } from '../../common/index.js'
 import {
@@ -23,6 +23,7 @@ import {
 	useMessageBar,
 	useOnDeleteStep,
 	useOnSaveStep,
+	useOnUpdateMetadata,
 	useRunPipeline,
 } from '../hooks/index.js'
 
@@ -135,18 +136,10 @@ export function useBusinessLogic(
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
 	const Message = useMessageBar(message, setMessage)
 
-	const onUpdateMetadata = useCallback(
-		async (meta: TableMetadata) => {
-			const _table = tables.find(
-				x => x.id === selectedTableName,
-			) as TableContainer
-			_table.metadata = meta
-			store.delete(_table.id)
-			store.set(_table)
-			const _storedTables = await store.toMap()
-			setStoredTables(_storedTables)
-		},
-		[store, selectedTableName, tables, setStoredTables],
+	const onUpdateMetadata = useOnUpdateMetadata(
+		setStoredTables,
+		store,
+		selectedTableName,
 	)
 
 	return {
