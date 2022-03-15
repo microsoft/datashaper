@@ -53,7 +53,7 @@ export function useBusinessLogic(): {
 		}
 		loading.start()
 		f()
-	}, [fileCollection, updateFileCollection])
+	}, [fileCollection, updateFileCollection, loading])
 
 	return {
 		setSteps,

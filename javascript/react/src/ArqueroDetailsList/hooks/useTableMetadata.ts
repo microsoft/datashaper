@@ -28,5 +28,5 @@ export function useTableMetadata(
 			saveMetadata && saveMetadata(meta, table)
 			return meta
 		}
-	}, [table, existing, discover])
+	}, [table, existing, discover, saveMetadata])
 }

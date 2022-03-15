@@ -2,14 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	Step,
-	TableContainer,
-	TableMetadata,
-} from '@data-wrangling-components/core'
+import type { Step, TableContainer } from '@data-wrangling-components/core'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 
 import { ManageSteps } from '../../Steps/index.js'

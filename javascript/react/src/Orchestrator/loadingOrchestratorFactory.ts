@@ -8,7 +8,9 @@ import type { OrchestratorType } from './OrchestratorType.js'
 
 const orchestrators: Partial<Record<OrchestratorType, LoadingOrchestrator>> = {}
 
-export function getLoadingOrchestrator(type: OrchestratorType) {
+export function getLoadingOrchestrator(
+	type: OrchestratorType,
+): LoadingOrchestrator {
 	const existing = orchestrators[type]
 
 	if (!existing) {

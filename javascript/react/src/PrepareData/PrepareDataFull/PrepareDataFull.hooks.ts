@@ -69,7 +69,7 @@ export function useBusinessLogic(
 
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
 		return storedTables.get(selectedTableName ?? '')?.metadata
-	}, [selectedTable])
+	}, [storedTables, selectedTableName])
 
 	// kind of a complex selection process:
 	// 1) if a table is selected in the tables dropdown, use that
