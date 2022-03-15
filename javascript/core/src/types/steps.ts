@@ -187,6 +187,10 @@ export interface FetchArgs {
 	 * Optional delimiter for csv
 	 */
 	delimiter?: string
+	/**
+	 * Optional autoMax for tables
+	 */
+	autoMax?: number
 }
 
 export interface FillArgs extends OutputColumnArgs {

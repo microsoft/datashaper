@@ -353,6 +353,7 @@ export function factory(verb: Verb, input: string, output: string): Step;
 //
 // @public (undocumented)
 export interface FetchArgs {
+    autoMax?: number;
     delimiter?: string;
     url: string;
 }
