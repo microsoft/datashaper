@@ -4,12 +4,14 @@
  */
 
 import { LoadingOrchestrator } from './loadingOrchestrator.js'
-import type { OrchestratorType } from './OrchestratorType.js'
+import type { LoadingOrchestratorType } from './loadingOrchestratorType.js'
 
-const orchestrators: Partial<Record<OrchestratorType, LoadingOrchestrator>> = {}
+const orchestrators: Partial<
+	Record<LoadingOrchestratorType, LoadingOrchestrator>
+> = {}
 
 export function getLoadingOrchestrator(
-	type: OrchestratorType,
+	type: LoadingOrchestratorType,
 ): LoadingOrchestrator {
 	const existing = orchestrators[type]
 

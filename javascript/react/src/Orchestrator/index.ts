@@ -5,4 +5,4 @@
 
 export * from './loadingOrchestrator.js'
 export * from './loadingOrchestratorFactory.js'
-export * from './OrchestratorType.js'
+export * from './loadingOrchestratorType.js'

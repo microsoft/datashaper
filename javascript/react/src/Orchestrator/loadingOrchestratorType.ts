@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export enum OrchestratorType {
+export enum LoadingOrchestratorType {
 	Tables = 'tables',
 	Steps = 'steps',
 	Preview = 'preview',

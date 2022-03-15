@@ -14,7 +14,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { usePipeline, useStore } from '../../common/index.js'
 import {
 	getLoadingOrchestrator,
-	OrchestratorType,
+	LoadingOrchestratorType,
 } from '../../Orchestrator/index.js'
 import {
 	useAddNewTables,
@@ -52,7 +52,9 @@ export function useBusinessLogic(
 		setSelectedTableName,
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
-	const tablesLoading = getLoadingOrchestrator(OrchestratorType.Tables)
+	const tablesOrchestrator = getLoadingOrchestrator(
+		LoadingOrchestratorType.Tables,
+	)
 
 	// TODO: resolve these from the stored table state
 	const derived = useMemo(() => {
@@ -135,6 +137,6 @@ export function useBusinessLogic(
 		selectedTableName,
 		derived,
 		onUpdateMetadata,
-		tablesLoading: tablesLoading.isLoading,
+		tablesLoading: tablesOrchestrator.isLoading,
 	}
 }

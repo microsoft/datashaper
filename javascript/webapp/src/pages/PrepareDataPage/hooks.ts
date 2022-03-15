@@ -6,8 +6,8 @@
 import type { Step, TableContainer } from '@data-wrangling-components/core'
 import {
 	getLoadingOrchestrator,
-	OrchestratorType,
-} from '@data-wrangling-components/react/src/Orchestrator'
+	LoadingOrchestratorType,
+} from '@data-wrangling-components/react'
 import { FileCollection, FileType } from '@data-wrangling-components/utilities'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -22,7 +22,9 @@ export function useBusinessLogic(): {
 
 	const [steps, setSteps] = useState<Step[]>([])
 	const [tables, setTables] = useState<TableContainer[]>([])
-	const loadingOrchestrator = getLoadingOrchestrator(OrchestratorType.Tables)
+	const loadingOrchestrator = getLoadingOrchestrator(
+		LoadingOrchestratorType.Tables,
+	)
 
 	const updateFileCollection = useCallback(
 		async (collection: FileCollection) => {
