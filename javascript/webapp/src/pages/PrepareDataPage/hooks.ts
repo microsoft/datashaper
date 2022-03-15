@@ -22,7 +22,7 @@ export function useBusinessLogic(): {
 
 	const [steps, setSteps] = useState<Step[]>([])
 	const [tables, setTables] = useState<TableContainer[]>([])
-	const loading = getLoadingOrchestrator(OrchestratorType.Tables)
+	const loadingOrchestrator = getLoadingOrchestrator(OrchestratorType.Tables)
 
 	const updateFileCollection = useCallback(
 		async (collection: FileCollection) => {
@@ -50,11 +50,11 @@ export function useBusinessLogic(): {
 				fileCollection.add('data/stocks.csv'),
 			])
 			await updateFileCollection(fileCollection)
-			loading.stop()
+			loadingOrchestrator.stop()
 		}
-		loading.start()
+		loadingOrchestrator.start()
 		f()
-	}, [fileCollection, updateFileCollection, loading])
+	}, [fileCollection, updateFileCollection, loadingOrchestrator])
 
 	return {
 		setSteps,

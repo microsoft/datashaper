@@ -40,6 +40,7 @@ export const PreviewTable: React.FC<{
 	onChangeMetadata,
 }) {
 	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures()
+	/* eslint-disable-next-line */
 	const commands = useCommonCommands(null, changeTableFeatures, tableFeatures)
 
 	return (

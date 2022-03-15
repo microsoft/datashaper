@@ -36,7 +36,6 @@ export const PrepareDataFull: React.FC<{
 		onUpdateMetadata,
 		tablesLoading,
 	} = useBusinessLogic(tables, onUpdateSteps, steps)
-	console.log('aaaa', tablesLoading)
 
 	return (
 		<Container>

@@ -27,7 +27,6 @@ export const TableListBar: React.FC<{
 	const { onClick } = useOutputPreview(derived, onSelect)
 
 	const menuProps = useTableSelection(inputs, derived, selected, onSelect)
-	console.log('aqui', loading)
 
 	return (
 		<ListContainer>
