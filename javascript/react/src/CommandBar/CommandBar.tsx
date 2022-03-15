@@ -2,37 +2,55 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ICommandBarItemProps, IIconProps } from '@fluentui/react'
+
+import type {
+	ICommandBarItemProps,
+	ICommandBarStyles,
+	IIconProps,
+} from '@fluentui/react'
 import { CommandBar as CB } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
+import merge from 'lodash-es/merge.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { HEIGHT } from './constants.js'
+import { useCommands } from './useCommands.js'
 
 interface CommandBarProps {
 	commands: ICommandBarItemProps[]
 	width?: string
+	height?: string
 	bgColor?: string
 	color?: string
 	far?: boolean
+	styles?: ICommandBarStyles
 }
 
 export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	commands,
 	width,
+	height,
 	bgColor,
 	color,
 	far = false,
+	styles,
 }) {
 	const overflowButtonProps = useOverflowButtonProps(bgColor, color)
 	const handleOnDataReduce = useHandleOnDataReduce()
 	const handleOnDataGrown = useHandleOnDataGrown(color)
+	const commandStyles = useCommandStyles(height, styles)
+	const items = useCommands(commands, bgColor, color)
 
 	return (
-		<CommandBarWrapper width={width} far={far} className={'commandbar-wrapper'}>
+		<CommandBarWrapper
+			width={width}
+			height={height}
+			far={far}
+			bgColor={bgColor}
+			color={color}
+		>
 			<CB
-				items={commands}
+				items={items}
 				styles={commandStyles}
 				overflowButtonProps={overflowButtonProps}
 				onDataReduced={handleOnDataReduce}
@@ -102,18 +120,37 @@ const useIconProps = (): ((
 	)
 }
 
-const commandStyles = {
-	root: {
-		display: 'flex',
-		justifyContent: 'flex-end',
-		height: HEIGHT,
-		background: 'none',
-		padding: 0,
-	},
+const useCommandStyles = (height?: string, styles: ICommandBarStyles = {}) => {
+	return useMemo(
+		() =>
+			merge(
+				{},
+				{
+					root: {
+						float: 'right',
+						height,
+						background: 'none',
+						padding: 0,
+					},
+				},
+				styles,
+			),
+		[height, styles],
+	)
 }
 
-const CommandBarWrapper = styled.div<{ width?: string; far?: boolean }>`
+const CommandBarWrapper = styled.div<{
+	width?: string
+	height?: string
+	bgColor?: string
+	color?: string
+	far?: boolean
+}>`
 	width: ${({ width }) => width || '25%'};
+	background-color: ${({ bgColor, theme }) =>
+		bgColor || theme.application().accent().hex()};
+	color: ${({ color }) => color || 'inherit'};
+	height: ${({ height }) => height};
 	display: flex;
 	justify-content: ${({ far }) => (far ? 'flex-end' : 'flex-start')};
 `

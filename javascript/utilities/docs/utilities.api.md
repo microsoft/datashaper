@@ -64,7 +64,12 @@ export const createFileWithPath: (content: Blob, options?: FileOptions | undefin
 // Warning: (ae-missing-release-tag) "download" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function download(table: ColumnTable, filename?: string, options?: CSVFormatOptions): void;
+export function download(filename: string, type: string, data: Blob): void;
+
+// Warning: (ae-missing-release-tag) "downloadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function downloadTable(table: ColumnTable, filename?: string, options?: CSVFormatOptions): void;
 
 // Warning: (ae-missing-release-tag) "extension" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

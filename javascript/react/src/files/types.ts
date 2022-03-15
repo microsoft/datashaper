@@ -17,3 +17,10 @@ export interface DzProps {
 		'onDrop' | 'onDropRejected' | 'onDropAccepted'
 	>
 }
+
+export interface DropzoneStyles {
+	container?: React.CSSProperties
+	dragReject?: React.CSSProperties
+	placeholder?: React.CSSProperties
+	dragZone?: React.CSSProperties
+}
