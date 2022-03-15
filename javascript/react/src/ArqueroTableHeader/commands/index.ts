@@ -4,4 +4,5 @@
  */
 export * from './checkedItemsCommand.js'
 export * from './downloadCommand.js'
+export * from './tableMenuCommand.js'
 export * from './visibleColumnsCommand.js'

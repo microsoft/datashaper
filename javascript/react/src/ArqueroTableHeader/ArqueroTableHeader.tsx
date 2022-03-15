@@ -77,6 +77,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 						width={width >= 992 && farCommands.length > 2 ? '10%' : undefined}
 						bgColor={bgColor}
 						color={textColor}
+						far
 						height={`${HEIGHT}px`}
 					/>
 				) : null}
