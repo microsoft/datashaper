@@ -9,12 +9,15 @@ import type {
 	TableStore,
 } from '@data-wrangling-components/core'
 import { introspect } from '@data-wrangling-components/core'
+import type { FileCollection } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useEffect, useMemo, useState } from 'react'
 
 import { usePipeline, useStore } from '../../common/index.js'
+import { useHandleFileUpload } from '../../ProjectMgmtCommandBar/index.js'
 import {
 	useAddNewTables,
+	useMessageBar,
 	useOnDeleteStep,
 	useOnSaveStep,
 	useRunPipeline,
@@ -22,8 +25,10 @@ import {
 
 export function useBusinessLogic(
 	tables: TableContainer[],
+	onUpdateTables: (tables: TableContainer[]) => void,
 	onUpdateSteps: (steps: Step[]) => void,
 	steps?: Step[],
+	onOutputTable?: (table: TableContainer) => void,
 ): {
 	selectedTable: ColumnTable | undefined
 	setSelectedTableName: (name: string) => void
@@ -34,11 +39,16 @@ export function useBusinessLogic(
 	lastTableName: string
 	selectedTableName?: string
 	derived: TableContainer[]
+	handleFileUpload: (fileCollection: FileCollection) => void
+	Message: JSX.Element | null
+	setMessage: (message: string) => void
 } {
 	const [selectedTableName, setSelectedTableName] = useState<string>()
+	const [message, setMessage] = useState<string>()
 	const [storedTables, setStoredTables] = useState<Map<string, TableContainer>>(
 		new Map<string, TableContainer>(),
 	)
+
 	const store = useStore()
 	const pipeline = usePipeline(store)
 	const runPipeline = useRunPipeline(
@@ -47,6 +57,7 @@ export function useBusinessLogic(
 		setSelectedTableName,
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
+	const handleFileUpload = useHandleFileUpload(onUpdateSteps, onUpdateTables)
 
 	// TODO: resolve these from the stored table state
 	const derived = useMemo(() => {
@@ -98,11 +109,23 @@ export function useBusinessLogic(
 	useEffect(() => {
 		if (tables.length) {
 			addNewTables(tables)
+			const last = tables[tables.length - 1]
+			setSelectedTableName(last?.id)
 		}
-	}, [tables, addNewTables])
+	}, [tables, addNewTables, setSelectedTableName])
+
+	useEffect(() => {
+		if (lastTableName && onOutputTable) {
+			const table = storedTables.get(lastTableName)
+			if (table) {
+				onOutputTable(table)
+			}
+		}
+	}, [storedTables, lastTableName, onOutputTable])
 
 	const onSaveStep = useOnSaveStep(onUpdateSteps, pipeline)
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
+	const Message = useMessageBar(message, setMessage)
 
 	return {
 		selectedTable,
@@ -114,5 +137,8 @@ export function useBusinessLogic(
 		lastTableName,
 		selectedTableName,
 		derived,
+		handleFileUpload,
+		Message,
+		setMessage,
 	}
 }

@@ -2,7 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { PrepareDataFull } from '@data-wrangling-components/react'
+import {
+	PrepareDataFull,
+	ProjectMgmtCommandBar,
+} from '@data-wrangling-components/react'
 import { memo, useEffect } from 'react'
 import styled from 'styled-components'
 
@@ -10,7 +13,8 @@ import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
 import { useBusinessLogic } from './hooks'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const { setSteps, steps, tables } = useBusinessLogic()
+	const { setSteps, steps, tables, updateTables, outputTable, setOutputTable } =
+		useBusinessLogic()
 	const setHelpFileContent = useHelpFileContentSetter()
 
 	useEffect(() => {
@@ -24,7 +28,20 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	return (
 		<Container className={'prepare-data-page'}>
-			<PrepareDataFull tables={tables} steps={steps} onUpdateSteps={setSteps} />
+			<ProjectMgmtCommandBar
+				tables={tables}
+				steps={steps}
+				outputTable={outputTable}
+				onUpdateSteps={setSteps}
+				onUpdateTables={updateTables}
+			/>
+			<PrepareDataFull
+				tables={tables}
+				steps={steps}
+				onUpdateSteps={setSteps}
+				onUpdateTables={updateTables}
+				onOutputTable={setOutputTable}
+			/>
 		</Container>
 	)
 })

@@ -18,6 +18,7 @@ import type { GroupBySpec } from 'arquero/dist/types/table/table';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
+import type { ICommandBarStyles } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
 import type { IDetailsColumnStyles } from '@fluentui/react';
@@ -212,6 +213,12 @@ export interface ColumnTransformModalProps extends TransformModalProps {
     hideOutputColumn?: boolean;
 }
 
+// Warning: (ae-forgotten-export) The symbol "CommandBarProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "CommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const CommandBar: React.FC<CommandBarProps>;
+
 // Warning: (ae-missing-release-tag) "Convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -309,6 +316,20 @@ export { DropzoneOptions }
 export interface DropzoneState extends DropzoneState_2 {
     // (undocumented)
     acceptedFileTypesExt: string[];
+}
+
+// Warning: (ae-missing-release-tag) "DropzoneStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DropzoneStyles {
+    // (undocumented)
+    container?: React.CSSProperties;
+    // (undocumented)
+    dragReject?: React.CSSProperties;
+    // (undocumented)
+    dragZone?: React.CSSProperties;
+    // (undocumented)
+    placeholder?: React.CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "DzProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -506,7 +527,9 @@ export const PivotDescription: React.FC<StepDescriptionProps>;
 // @public (undocumented)
 export const PrepareDataFull: React.FC<{
     tables: TableContainer[];
+    onUpdateTables: (tables: TableContainer[]) => void;
     onUpdateSteps: (steps: Step[]) => void;
+    onOutputTable?: (table: TableContainer) => void;
     steps?: Step[];
     outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[];
 }>;
@@ -520,6 +543,12 @@ export const PreviewTable: React.FC<{
     selectedMetadata?: TableMetadata;
     headerCommandBar?: IRenderFunction<IDetailsColumnProps>[];
 }>;
+
+// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "ProjectMgmtCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const ProjectMgmtCommandBar: React_2.FC<Props>;
 
 // Warning: (ae-missing-release-tag) "Recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -833,6 +862,11 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType;
 // @public (undocumented)
 export function useColumnValueOptions(column: string, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
 
+// Warning: (ae-missing-release-tag) "useCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useCommands(commands?: ICommandBarItemProps[], bgColor?: string, color?: string): ICommandBarItemProps[];
+
 // Warning: (ae-missing-release-tag) "useCommonCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -872,6 +906,21 @@ export function useDetailsHeaderRenderer(): IRenderFunction_2<IDetailsHeaderProp
 //
 // @public
 export function useDetailsListStyles(isHeadersFixed: boolean, features?: DetailsListFeatures, styles?: IDetailsListStyles, hasColumnClick?: boolean, compact?: boolean): IDetailsListStyles;
+
+// Warning: (ae-missing-release-tag) "useDownloadCsv" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDownloadCsv(outputTable?: TableContainer): () => void;
+
+// Warning: (ae-missing-release-tag) "useDownloadPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDownloadPipeline(steps: Step[]): () => void;
+
+// Warning: (ae-missing-release-tag) "useDownloadZip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDownloadZip(steps: Step[], tables: TableContainer[], outputTable?: TableContainer): () => Promise<void>;
 
 // Warning: (ae-missing-release-tag) "useDropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -924,10 +973,25 @@ export function useHandleCheckboxChange(step: Step, path: string, onChange?: Ste
 // @public (undocumented)
 export function useHandleClick(setName: NameSetter): (url: string) => void;
 
+// Warning: (ae-missing-release-tag) "useHandleCsvUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleCsvUpload(onUpdateTables?: (tables: TableContainer[]) => void): () => void;
+
 // Warning: (ae-missing-release-tag) "useHandleDropdownChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function useHandleDropdownChange(step: Step, path: string, onChange?: StepChangeFunction): DropdownOptionChangeFunction;
+
+// Warning: (ae-missing-release-tag) "useHandleFileUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleFileUpload(onUpdateSteps?: (steps: Step[]) => void, onUpdateTables?: (tables: TableContainer[]) => void): (fc: FileCollection) => void;
+
+// Warning: (ae-missing-release-tag) "useHandleJsonUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleJsonUpload(onUpdateSteps?: (steps: Step[]) => void): () => void;
 
 // Warning: (ae-missing-release-tag) "useHandleOnUploadClick" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -943,6 +1007,11 @@ export function useHandleSpinButtonChange(step: Step, path: string, onChange?: S
 //
 // @public (undocumented)
 export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => string | undefined): (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
+
+// Warning: (ae-missing-release-tag) "useHandleZipUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleZipUpload(onUpdateSteps?: (steps: Step[]) => void, onUpdateTables?: (tables: TableContainer[]) => void): () => void;
 
 // Warning: (ae-missing-release-tag) "useIncrementingColumnColorScale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -963,6 +1032,11 @@ export function useLoadTable(id: string | undefined, table?: ColumnTable, store?
 //
 // @public (undocumented)
 export function usePipeline(store: TableStore): Pipeline;
+
+// Warning: (ae-missing-release-tag) "useProjectMgmtCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useProjectMgmtCommands(steps: Step[], tables: TableContainer[], outputTable?: TableContainer, onUpdateSteps?: (steps: Step[]) => void, onUpdateTables?: (tables: TableContainer[]) => void): ICommandBarItemProps[];
 
 // Warning: (ae-missing-release-tag) "useReifiedTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
