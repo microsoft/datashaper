@@ -174,6 +174,20 @@ export function columnType(table: ColumnTable, column: string): DataType;
 // @public (undocumented)
 export function container(id: string, table?: ColumnTable, options?: Omit<TableContainer, 'id' | 'table'>): TableContainer;
 
+// Warning: (ae-missing-release-tag) "ConvertArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ConvertArgs extends InputColumnListArgs {
+    radix?: number;
+    // (undocumented)
+    type: ParseType;
+}
+
+// Warning: (ae-missing-release-tag) "ConvertStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ConvertStep = Step<ConvertArgs>;
+
 // Warning: (ae-missing-release-tag) "createPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -667,6 +681,19 @@ export interface OutputColumnArgs {
     to: string;
 }
 
+// Warning: (ae-missing-release-tag) "ParseType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum ParseType {
+    // (undocumented)
+    Boolean = "boolean",
+    // (undocumented)
+    Date = "date",
+    Decimal = "float",
+    // (undocumented)
+    Integer = "int"
+}
+
 // Warning: (ae-missing-release-tag) "Pipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -1004,6 +1031,8 @@ export enum Verb {
     Chain = "chain",
     // (undocumented)
     Concat = "concat",
+    // (undocumented)
+    Convert = "convert",
     // (undocumented)
     Dedupe = "dedupe",
     // (undocumented)

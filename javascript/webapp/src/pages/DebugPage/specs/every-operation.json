@@ -58,6 +58,15 @@
 			}
 		},
 		{
+			"verb": "convert",
+			"input": "data/companies.csv",
+			"output": "convert-1",
+			"args": {
+				"columns": ["ID"],
+				"type": "int"
+			}
+		},
+		{
 			"verb": "dedupe",
 			"input": "data/products.csv",
 			"output": "dedupe-1",

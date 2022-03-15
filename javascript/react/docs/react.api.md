@@ -212,6 +212,16 @@ export interface ColumnTransformModalProps extends TransformModalProps {
     hideOutputColumn?: boolean;
 }
 
+// Warning: (ae-missing-release-tag) "Convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const Convert: React.FC<StepComponentProps>;
+
+// Warning: (ae-missing-release-tag) "ConvertDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const ConvertDescription: React.FC<StepDescriptionProps>;
+
 // Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
