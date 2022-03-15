@@ -110,7 +110,7 @@ export function useBusinessLogic(
 		if (tables.length) {
 			addNewTables(tables)
 			const last = tables[tables.length - 1]
-			setSelectedTableName(last.id)
+			setSelectedTableName(last?.id)
 		}
 	}, [tables, addNewTables, setSelectedTableName])
 
