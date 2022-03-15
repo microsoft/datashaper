@@ -47,7 +47,6 @@ export const PrepareDataFull: React.FC<{
 		setMessage,
 	} = useBusinessLogic(
 		tables,
-		onUpdateSteps,
 		onUpdateTables,
 		onUpdateSteps,
 		steps,
