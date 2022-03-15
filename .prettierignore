@@ -9,6 +9,7 @@ dist/
 lib/
 coverage/
 public/
+docs/
 bot_backups/*
 .cache
 .eslintrc

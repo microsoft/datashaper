@@ -481,6 +481,39 @@ describe('test-expressions', () => {
 		).toBe(0)
 	})
 
+	test('string value regex', () => {
+		const { expr } = compare(
+			'item',
+			'(be)|(bl)',
+			StringComparisonOperator.RegularExpression,
+			FilterCompareType.Value,
+		)
+
+		expect(
+			expr({
+				item: 'bed',
+			}),
+		).toBe(1)
+
+		expect(
+			expr({
+				item: 'label',
+			}),
+		).toBe(1)
+
+		expect(
+			expr({
+				item: 'table',
+			}),
+		).toBe(1)
+
+		expect(
+			expr({
+				item: 'desk',
+			}),
+		).toBe(0)
+	})
+
 	test('numeric column filter gte', () => {
 		const { expr } = compare(
 			'count',

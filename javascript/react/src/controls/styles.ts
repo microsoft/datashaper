@@ -5,6 +5,15 @@
 
 import type { IButtonStyles } from '@fluentui/react'
 
+/**
+ * For side-by-side dropdowns with a 12px gap
+ */
+export const narrowDropdownStyles = {
+	root: {
+		width: 135,
+	},
+}
+
 export const dropdownStyles = {
 	root: {
 		width: 220,

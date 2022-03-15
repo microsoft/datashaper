@@ -47,5 +47,5 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 })
 
 const Container = styled.div`
-	height: calc(100vh - 46px);
+	height: calc(100vh - 80px);
 `

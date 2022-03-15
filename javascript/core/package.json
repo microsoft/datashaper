@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/core",
-	"version": "4.1.0",
+	"version": "4.2.1",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -10,13 +10,13 @@
 	"sideEffects": false,
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build"
+		"build": "essex build --docs"
 	},
 	"dependencies": {
 		"lodash-es": "^4.17.21"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.4.9",
+		"@essex/scripts": "^20.5.1",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/jest": "^27.4.1",
 		"@types/lodash-es": "^4.17.6",

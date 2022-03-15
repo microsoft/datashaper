@@ -1,7 +1,7 @@
 {
 	"name": "@data-wrangling-components/webapp",
 	"private": true,
-	"version": "2.2.0",
+	"version": "2.2.2",
 	"main": "src/index.ts",
 	"scripts": {
 		"clean": "essex clean build dist lib node_modules",
@@ -14,13 +14,14 @@
 		"build_stats": "webpack --mode production --json > stats.json"
 	},
 	"dependencies": {
-		"@data-wrangling-components/core": "workspace:^",
-		"@data-wrangling-components/react": "workspace:^",
-		"@data-wrangling-components/utilities": "workspace:^",
-		"@essex/themed-components": "^2.0.4",
-		"@essex/webpack-config": "^20.1.8",
-		"@fluentui/font-icons-mdl2": "^8.2.2",
-		"@fluentui/react": "^8.60.1",
+		"@data-wrangling-components/core": "workspace:javascript/core",
+		"@data-wrangling-components/react": "workspace:javascript/react",
+		"@data-wrangling-components/utilities": "workspace:javascript/utilities",
+		"@essex/hooks": "^4.0.5",
+		"@essex/themed-components": "^2.0.5",
+		"@essex/webpack-config": "^20.1.9",
+		"@fluentui/font-icons-mdl2": "^8.2.3",
+		"@fluentui/react": "^8.60.2",
 		"@fluentui/react-hooks": "^8.5.1",
 		"@fluentui/utilities": "^8.7.0",
 		"@thematic/core": "^2.0.6",
@@ -45,9 +46,9 @@
 		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.4.9",
+		"@essex/scripts": "^20.5.1",
 		"@types/node": "^17.0.21",
-		"@types/react": "^17.0.39",
+		"@types/react": "^17.0.40",
 		"@types/react-dom": "^17.0.13",
 		"@types/react-is": "^17.0.3",
 		"@types/react-router-dom": "^5.3.3",

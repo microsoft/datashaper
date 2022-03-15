@@ -40,9 +40,13 @@
 			"output": "binarize-1",
 			"args": {
 				"column": "FY21 Sales",
-				"operator": "<",
-				"value": 10000,
-				"to": "FY21 Sales < 10k"
+				"to": "FY21 Sales < 10k",
+				"criteria": [
+					{
+						"operator": "<",
+						"value": 10000
+					}
+				]
 			}
 		},
 		{
@@ -112,8 +116,12 @@
 			"output": "filter-1",
 			"args": {
 				"column": "Employees",
-				"operator": "<=",
-				"value": 300000
+				"criteria": [
+					{
+						"operator": "<=",
+						"value": 300000
+					}
+				]
 			}
 		},
 		{

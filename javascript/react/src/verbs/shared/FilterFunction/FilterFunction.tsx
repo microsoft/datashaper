@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FilterStep } from '@data-wrangling-components/core'
+import type { Criterion } from '@data-wrangling-components/core'
 import {
 	DataType,
 	FilterCompareType,
@@ -10,56 +10,63 @@ import {
 	StringComparisonOperator,
 	types,
 } from '@data-wrangling-components/core'
-import set from 'lodash-es/set.js'
+import type { IDropdownOption } from '@fluentui/react'
+import { IconButton } from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange, useLoadTable } from '../../../common/index.js'
 import { InputExplainer } from '../../../common/styles.js'
 import { EnumDropdown } from '../../../controls/EnumDropdown.js'
 import { ColumnOrValueComboBox } from '../../../controls/index.js'
-import { LeftAlignedRow } from '../../../index.js'
-import type { StepComponentProps } from '../../../types.js'
+import { narrowDropdownStyles } from '../../../controls/styles.js'
 
+export interface FilterFunctionProps {
+	table: ColumnTable
+	column: string
+	criterion: Criterion
+	onChange?: (filter?: Criterion) => void
+}
 /**
  * Just the comparison logic/ops for a filter.
  * Input table and source column is expected to be edited elsewhere and configured as the step input.
  * This is split out from FilterInputs to allow just the comparison logic to be reused elsewhere.
  */
-export const FilterFunction: React.FC<StepComponentProps> = memo(
-	function FilterFunction({ step, store, table, onChange, input }) {
-		const internal = useMemo(() => step as FilterStep, [step])
-
-		const tbl = useLoadTable(input || internal.input, table, store)
-
-		const handleOpChange = useHandleDropdownChange(
-			internal,
-			'args.operator',
-			onChange,
+export const FilterFunction: React.FC<FilterFunctionProps> = memo(
+	function FilterFunction({ table, column, criterion, onChange }) {
+		const handleOpChange = useCallback(
+			(_e: React.FormEvent<HTMLDivElement>, opt?: IDropdownOption) => {
+				onChange &&
+					onChange({
+						...criterion,
+						operator: opt?.key as
+							| StringComparisonOperator
+							| NumericComparisonOperator,
+					})
+			},
+			[criterion, onChange],
 		)
 
 		const handleComboBoxChange = useCallback(
 			(_e, option, _index, value) => {
 				const update = {
-					...internal,
+					...criterion,
+					type: option ? FilterCompareType.Column : FilterCompareType.Value,
+					value: option ? option.key : value,
 				}
-				const type = option ? FilterCompareType.Column : FilterCompareType.Value
-				const val = option ? option.key : value
-				set(update, 'args.type', type)
-				set(update, 'args.value', val)
 				onChange && onChange(update)
 			},
-			[internal, onChange],
+			[criterion, onChange],
 		)
 
 		const tps = useMemo(() => {
-			return tbl ? types(tbl) : {}
-		}, [tbl])
+			return table ? types(table) : {}
+		}, [table])
+
+		const type = useMemo(() => tps[column], [tps, column])
 
 		const operatorDropdown = useMemo(() => {
-			const column = internal.args.column
 			if (column) {
-				const type = tps[column]
 				if (type === DataType.String) {
 					return (
 						<DropdownContainer>
@@ -67,12 +74,10 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 								required
 								label={'Function'}
 								enumeration={StringComparisonOperator}
-								selectedKey={internal.args.operator}
+								selectedKey={criterion.operator}
 								onChange={handleOpChange}
+								styles={leftStyles}
 							/>
-							<InputExplainer>
-								String comparisons are not case-sensitive
-							</InputExplainer>
 						</DropdownContainer>
 					)
 				}
@@ -82,35 +87,54 @@ export const FilterFunction: React.FC<StepComponentProps> = memo(
 					required
 					enumeration={NumericComparisonOperator}
 					label={'Function'}
-					selectedKey={internal.args.operator}
+					selectedKey={criterion.operator}
 					onChange={handleOpChange}
+					styles={leftStyles}
 				/>
 			)
-		}, [tps, internal, handleOpChange])
+		}, [type, column, criterion, handleOpChange])
 
 		const isEmptyCheck = useMemo(() => {
-			const { operator } = internal.args
+			const { operator } = criterion
 			return (
 				operator === NumericComparisonOperator.IsEmpty ||
 				operator === NumericComparisonOperator.IsNotEmpty ||
 				operator === StringComparisonOperator.IsEmpty ||
 				operator === StringComparisonOperator.IsNotEmpty
 			)
-		}, [internal])
+		}, [criterion])
+
+		const handleDeleteClick = useCallback(
+			() => onChange && onChange(),
+			[onChange],
+		)
+
 		return (
 			<Container>
-				<LeftAlignedRow>{operatorDropdown}</LeftAlignedRow>
-				<LeftAlignedRow>
+				<SideBySide>
+					{operatorDropdown}
+					{/* TODO: this should only list columns of matching type to input */}
 					<ColumnOrValueComboBox
 						required
-						table={tbl}
+						table={table}
 						disabled={isEmptyCheck}
 						label={'Comparison value'}
 						placeholder={'text, number, or column'}
-						text={internal.args.value ? `${internal.args.value}` : undefined}
+						text={criterion.value ? `${criterion.value}` : undefined}
 						onChange={handleComboBoxChange}
+						styles={narrowDropdownStyles}
 					/>
-				</LeftAlignedRow>
+					<IconButton
+						title={'Remove this criterion'}
+						iconProps={{ iconName: 'Delete' }}
+						onClick={handleDeleteClick}
+					/>
+				</SideBySide>
+				{type === DataType.String ? (
+					<InputExplainer>
+						String comparisons are not case-sensitive
+					</InputExplainer>
+				) : null}
 			</Container>
 		)
 	},
@@ -125,3 +149,16 @@ const DropdownContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 `
+
+const SideBySide = styled.div`
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+`
+
+const leftStyles = {
+	root: {
+		...narrowDropdownStyles.root,
+		marginRight: 12,
+	},
+}
