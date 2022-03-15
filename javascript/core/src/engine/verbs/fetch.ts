@@ -20,20 +20,19 @@ export async function fetch(
 	_store: TableStore,
 ): Promise<TableContainer> {
 	const { output, args } = step
-	const { url, delimiter, autoMaxValue } = args as FetchArgs
+	const { url, delimiter, autoMax } = args as FetchArgs
 
 	if (url.toLowerCase().endsWith('.json')) {
 		const tableFromJSON = await loadJSON(url, {
-			autoMax: autoMaxValue !== undefined ? autoMaxValue : 0,
-			autoType: autoMaxValue <= 0 || autoMaxValue === undefined ? false : true,
+			autoType: autoMax === undefined || autoMax <= 0 ? false : true,
 		})
 
 		return container(output, tableFromJSON)
 	} else {
 		const tableFromCSV = await loadCSV(url, {
 			delimiter: delimiter,
-			autoMax: autoMaxValue !== undefined ? autoMaxValue : 0,
-			autoType: autoMaxValue <= 0 || autoMaxValue === undefined ? false : true,
+			autoMax: autoMax !== undefined ? autoMax : 0,
+			autoType: autoMax === undefined || autoMax <= 0 ? false : true,
 		})
 
 		return container(output, tableFromCSV)

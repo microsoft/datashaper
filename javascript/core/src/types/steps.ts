@@ -180,7 +180,7 @@ export interface FetchArgs {
 	/**
 	 * Optional autoMax for tables
 	 */
-	autoMaxValue?: number
+	autoMax?: number
 }
 
 export interface FillArgs extends OutputColumnArgs {
