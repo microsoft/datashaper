@@ -821,7 +821,7 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType;
 // Warning: (ae-missing-release-tag) "useColumnValueOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useColumnValueOptions(column: string, table: ColumnTable | undefined, eraseVerb?: boolean, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
+export function useColumnValueOptions(column: string, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
 
 // Warning: (ae-missing-release-tag) "useCommonCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -962,7 +962,7 @@ export function useReifiedTable(table: ColumnTable): ColumnTable;
 // Warning: (ae-missing-release-tag) "useSimpleOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useSimpleOptions(list: string[], eraseVerb?: boolean): IDropdownOption[];
+export function useSimpleOptions(list: string[]): IDropdownOption[];
 
 // Warning: (ae-missing-release-tag) "useSlicedTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
