@@ -48,7 +48,7 @@ export function useSimpleOptions(list: string[]): IDropdownOption[] {
 		() =>
 			list.map(name => ({
 				key: name,
-				text: name,
+				text: name.toString(),
 			})),
 		[list],
 	)
@@ -98,16 +98,25 @@ export function useColumnValueOptions(
 	filter?: (value: Value) => boolean,
 ): IDropdownOption[] {
 	const vals = useMemo(() => {
-		if (!table) {
+		if (!table || !column || column.trim().length === 0) {
 			return []
 		}
 		const getFallback = () => {
-			const result = table
-				.rollup({
-					[column]: op.array_agg(column),
-				})
-				.get(column, 0)
-			return result ?? []
+			const columnNamesArray: string[] = table
+				.columnNames()
+				.filter(e => e === column)
+
+			if (columnNamesArray.length !== 0) {
+				const result: any[] = table
+					.rollup({
+						[column]: op.array_agg_distinct(column),
+					})
+					.get(column, 0)
+
+				return result ?? []
+			}
+
+			return []
 		}
 		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list

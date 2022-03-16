@@ -36,6 +36,7 @@ export const withInputColumnDropdown = (
 				'args.column',
 				onChange,
 			)
+
 			// TODO: detailed types/stats should be an option on table load,
 			// which will then be passed around with the container and thereby cached
 			// useLoadTable should return a TableContainer
@@ -46,6 +47,7 @@ export const withInputColumnDropdown = (
 			if (!isInputColumnStep(step)) {
 				return <Component {...props} />
 			}
+
 			return (
 				<Container className="with-input-column-dropdown">
 					<LeftAlignedRow>
@@ -58,6 +60,7 @@ export const withInputColumnDropdown = (
 							onChange={handleColumnChange}
 						/>
 					</LeftAlignedRow>
+
 					<Component {...props} />
 				</Container>
 			)
