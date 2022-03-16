@@ -53,7 +53,7 @@ export function useSimpleOptions(
 				key: name,
 				text: eraseVerb ? name.toString() : name,
 			})),
-		[list],
+		[list, eraseVerb],
 	)
 }
 
@@ -126,7 +126,7 @@ export function useColumnValueOptions(
 		}
 		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list
-	}, [column, table, values, filter])
+	}, [column, table, values, filter, eraseVerb])
 	return useSimpleOptions(vals, eraseVerb)
 }
 
