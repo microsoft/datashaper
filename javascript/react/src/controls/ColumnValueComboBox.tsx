@@ -22,7 +22,7 @@ export interface ColumnValueComboBoxProps extends Partial<IComboBoxProps> {
  */
 export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps> = memo(
 	function ColumnValueComboBox({ table, columnName, ...rest }) {
-		const options = useColumnValueOptions(columnName ?? '', table)
+		const options = useColumnValueOptions(columnName ?? '', table, true)
 		const withHeader = useMemo(() => {
 			return [
 				{
