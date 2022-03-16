@@ -51,6 +51,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			onColumnClick,
 			onCellDropdownSelect,
 			onRenderGroupHeader,
+			onChangeMetadata,
 			// extract props we want to set data-centric defaults for
 			selectionMode = SelectionMode.none,
 			layoutMode = DetailsListLayoutMode.fixedColumns,
@@ -98,6 +99,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			table,
 			metadata,
 			anyStatsFeatures(features),
+			onChangeMetadata,
 		)
 
 		const isDefaultHeaderClickable = useMemo((): any => {
@@ -164,7 +166,6 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				)
 			})
 		}, [sliced, sortedGroups, items, sortColumn, sortDirection, features])
-
 		// as in FluentUI documentation, when updating item we can update the list items with a spread operator.
 		// since when adding a new column we're changing the columns prop too, this approach doesn't work for that.
 		// a workaround found in the issues suggest to use this version property to use as comparisson to force re-render
@@ -226,5 +227,5 @@ const DetailsWrapper = styled.div`
 `
 
 function anyStatsFeatures(features?: DetailsListFeatures) {
-	return Object.values(features || {}).some(v => v)
+	return Object.values(features || {}).some(v => v === true)
 }

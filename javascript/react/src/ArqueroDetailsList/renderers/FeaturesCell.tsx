@@ -30,9 +30,9 @@ import type { FeatureCellProps } from './types.js'
 export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 	function FeaturesCell(props) {
 		const { features, metadata, item, column, index, onColumnClick } = props
-		const { type } = metadata
+		const type = metadata?.type
 		const value = getValue(item, column)
-		const magnitude = useNumberMagnitude(type, value, metadata)
+		const magnitude = useNumberMagnitude(value, metadata, type)
 		const histo = categories(value)
 
 		return (
@@ -92,16 +92,16 @@ export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 )
 
 function useNumberMagnitude(
-	type: DataType,
 	value: any,
-	meta: ColumnMetadata,
+	meta?: ColumnMetadata,
+	type?: DataType,
 ): number {
 	return useMemo(() => {
 		if (type !== DataType.Number || isNil(value)) {
 			return 0
 		}
-		const range = (meta.stats?.max || 1) - (meta.stats?.min || 0)
-		const mag = (value - (meta.stats?.min || 0)) / range
+		const range = (meta?.stats?.max || 1) - (meta?.stats?.min || 0)
+		const mag = (value - (meta?.stats?.min || 0)) / range
 		return mag
 	}, [type, value, meta])
 }

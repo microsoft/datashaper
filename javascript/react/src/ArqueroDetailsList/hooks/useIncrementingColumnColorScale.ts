@@ -13,7 +13,7 @@ import { useMemo } from 'react'
  * @returns
  */
 export function useIncrementingColumnColorScale(
-	meta: TableMetadata,
+	meta?: TableMetadata,
 ): () => string {
 	const theme = useThematic()
 	const count = useMemo(() => countNumeric(meta), [meta])
@@ -24,7 +24,8 @@ export function useIncrementingColumnColorScale(
 	}, [scale])
 }
 
-function countNumeric(meta: TableMetadata): number {
+function countNumeric(meta?: TableMetadata): number {
+	if (!meta) return 1
 	return Object.values(meta.columns).reduce((acc, cur) => {
 		return acc + (cur.type === DataType.Number ? 1 : 0)
 	}, 0)

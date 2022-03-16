@@ -28,8 +28,9 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	props,
 ) {
 	const { metadata, item, column, onColumnClick } = props
-	const { type } = metadata
 	const value = getValue(item, column)
+	const type = metadata?.type ?? typeof value
+
 	const handleColumnClick = useCallback(
 		ev => {
 			column &&
@@ -38,6 +39,7 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 		},
 		[column, onColumnClick],
 	)
+
 	const cellStyle = useMemo(() => {
 		const style: React.CSSProperties = {}
 		if (onColumnClick) {
@@ -48,6 +50,7 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 		}
 		return style
 	}, [onColumnClick, column])
+
 	return (
 		<div onClick={handleColumnClick} style={cellStyle}>
 			<Switch>

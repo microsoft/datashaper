@@ -8,18 +8,22 @@ import type {
 	TableMetadata,
 	TableStore,
 } from '@data-wrangling-components/core'
-import { introspect } from '@data-wrangling-components/core'
 import type { FileCollection } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useEffect, useMemo, useState } from 'react'
 
 import { usePipeline, useStore } from '../../common/index.js'
+import {
+	getLoadingOrchestrator,
+	LoadingOrchestratorType,
+} from '../../Orchestrator/index.js'
 import { useHandleFileUpload } from '../../ProjectMgmtCommandBar/index.js'
 import {
 	useAddNewTables,
 	useMessageBar,
 	useOnDeleteStep,
 	useOnSaveStep,
+	useOnUpdateMetadata,
 	useRunPipeline,
 } from '../hooks/index.js'
 
@@ -39,6 +43,8 @@ export function useBusinessLogic(
 	lastTableName: string
 	selectedTableName?: string
 	derived: TableContainer[]
+	onUpdateMetadata: (meta: TableMetadata) => void
+	tablesLoading: boolean
 	handleFileUpload: (fileCollection: FileCollection) => void
 	Message: JSX.Element | null
 	setMessage: (message: string) => void
@@ -57,6 +63,7 @@ export function useBusinessLogic(
 		setSelectedTableName,
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
+	const { isLoading } = getLoadingOrchestrator(LoadingOrchestratorType.Tables)
 	const handleFileUpload = useHandleFileUpload(onUpdateSteps, onUpdateTables)
 
 	// TODO: resolve these from the stored table state
@@ -73,8 +80,8 @@ export function useBusinessLogic(
 	}, [selectedTableName, storedTables])
 
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
-		return selectedTable && introspect(selectedTable, true)
-	}, [selectedTable])
+		return storedTables.get(selectedTableName ?? '')?.metadata
+	}, [storedTables, selectedTableName])
 
 	// kind of a complex selection process:
 	// 1) if a table is selected in the tables dropdown, use that
@@ -127,6 +134,12 @@ export function useBusinessLogic(
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
 	const Message = useMessageBar(message, setMessage)
 
+	const onUpdateMetadata = useOnUpdateMetadata(
+		setStoredTables,
+		store,
+		selectedTableName,
+	)
+
 	return {
 		selectedTable,
 		setSelectedTableName,
@@ -137,8 +150,10 @@ export function useBusinessLogic(
 		lastTableName,
 		selectedTableName,
 		derived,
+		onUpdateMetadata,
 		handleFileUpload,
 		Message,
 		setMessage,
+		tablesLoading: isLoading,
 	}
 }

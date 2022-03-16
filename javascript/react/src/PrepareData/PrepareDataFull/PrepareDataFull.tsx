@@ -39,6 +39,9 @@ export const PrepareDataFull: React.FC<{
 		store,
 		lastTableName,
 		derived,
+		selectedMetadata,
+		onUpdateMetadata,
+		tablesLoading,
 		handleFileUpload,
 		Message,
 		setMessage,
@@ -68,6 +71,7 @@ export const PrepareDataFull: React.FC<{
 			<InputContainer>
 				<SectionTitle>Tables</SectionTitle>
 				<TableListBar
+					loading={tablesLoading}
 					inputs={tables}
 					derived={derived}
 					selected={selectedTableName}
@@ -92,8 +96,10 @@ export const PrepareDataFull: React.FC<{
 			<OutputContainer>
 				<SectionTitle>Preview</SectionTitle>
 				<PreviewTable
+					onChangeMetadata={onUpdateMetadata}
 					headerCommandBar={outputHeaderCommandBar}
 					table={selectedTable}
+					metadata={selectedMetadata}
 					name={selectedTableName}
 				/>
 			</OutputContainer>

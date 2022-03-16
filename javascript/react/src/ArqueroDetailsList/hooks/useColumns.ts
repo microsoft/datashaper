@@ -55,7 +55,7 @@ export interface ColumnOptions {
  */
 export function useColumns(
 	table: ColumnTable,
-	computedMetadata: TableMetadata,
+	computedMetadata?: TableMetadata,
 	columns?: IColumn[],
 	visibleColumns?: string[],
 	handleColumnHeaderClick?: ColumnClickFunction,
@@ -111,25 +111,24 @@ export function useColumns(
 			// without completely recreating the details header render
 			const { iconName, ...defaults } = column
 
-			const meta = computedMetadata.columns[name]
-			if (!meta) {
-				throw new Error(`could not find meta for column ${name}`)
-			}
-			const color = meta.type === DataType.Number ? colorScale() : undefined
-			const onRender = features.smartCells
-				? createRenderSmartCell(
-						meta,
-						color,
-						handleCellClick,
-						handleCellDropdownSelect,
-				  )
-				: createRenderFeaturesCell(
-						features,
-						meta,
-						color,
-						handleCellClick,
-						handleCellDropdownSelect,
-				  )
+			const meta = computedMetadata?.columns[name]
+			const color =
+				meta && meta.type === DataType.Number ? colorScale() : undefined
+			const onRender =
+				features.smartCells && meta
+					? createRenderSmartCell(
+							meta,
+							color,
+							handleCellClick,
+							handleCellDropdownSelect,
+					  )
+					: createRenderFeaturesCell(
+							features,
+							meta,
+							color,
+							handleCellClick,
+							handleCellDropdownSelect,
+					  )
 
 			const headerRenderers = [
 				createRenderDefaultColumnHeader(
@@ -144,7 +143,7 @@ export function useColumns(
 					createRenderCommandBarColumnHeader(features.commandBar),
 				)
 			}
-			if (features.smartHeaders || features.statsColumnHeaders) {
+			if ((features.smartHeaders || features.statsColumnHeaders) && meta) {
 				headerRenderers.push(
 					createRenderStatsColumnHeader(
 						meta,
@@ -153,7 +152,7 @@ export function useColumns(
 					),
 				)
 			}
-			if (features.smartHeaders || features.histogramColumnHeaders) {
+			if ((features.smartHeaders || features.histogramColumnHeaders) && meta) {
 				headerRenderers.push(
 					createRenderHistogramColumnHeader(
 						meta,

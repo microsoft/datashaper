@@ -28,9 +28,9 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	props,
 ) {
 	const { metadata, item, column, onColumnClick } = props
-	const { type } = metadata
+	const type = metadata?.type
 	const value = getValue(item, column)
-	const magnitude = useNumberMagnitude(type, value, metadata)
+	const magnitude = useNumberMagnitude(value, metadata, type)
 
 	return (
 		<CellContainer onClick={onColumnClick} column={column}>
@@ -62,16 +62,16 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 })
 
 function useNumberMagnitude(
-	type: DataType,
 	value: any,
-	meta: ColumnMetadata,
+	meta?: ColumnMetadata,
+	type?: DataType,
 ): number {
 	return useMemo(() => {
 		if (type !== DataType.Number || isNil(value)) {
 			return 0
 		}
-		const range = (meta.stats?.max || 1) - (meta.stats?.min || 0)
-		const mag = range === 0 ? 0 : (value - (meta.stats?.min || 0)) / range
+		const range = (meta?.stats?.max || 1) - (meta?.stats?.min || 0)
+		const mag = range === 0 ? 0 : (value - (meta?.stats?.min || 0)) / range
 		return mag
 	}, [type, value, meta])
 }
