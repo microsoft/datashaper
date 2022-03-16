@@ -26,7 +26,7 @@ export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
  */
 export const ColumnValueDropdown: React.FC<ColumnValueDropdownProps> = memo(
 	function ColumnValueDropdown({ column, table, values, filter, ...rest }) {
-		const options = useColumnValueOptions(column, table, false, values, filter)
+		const options = useColumnValueOptions(column, table, values, filter)
 		return (
 			<Dropdown
 				label={'Value'}

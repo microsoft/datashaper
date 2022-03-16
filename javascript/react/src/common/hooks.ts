@@ -43,17 +43,14 @@ const num = (value?: string) => value && +value
  * @param list
  * @returns
  */
-export function useSimpleOptions(
-	list: string[],
-	eraseVerb?: boolean,
-): IDropdownOption[] {
+export function useSimpleOptions(list: string[]): IDropdownOption[] {
 	return useMemo(
 		() =>
 			list.map(name => ({
 				key: name,
-				text: eraseVerb ? name.toString() : name,
+				text: name.toString(),
 			})),
-		[list, eraseVerb],
+		[list],
 	)
 }
 
@@ -97,7 +94,6 @@ export function useTableColumnOptions(
 export function useColumnValueOptions(
 	column: string,
 	table: ColumnTable | undefined,
-	eraseVerb?: boolean,
 	values?: Value[],
 	filter?: (value: Value) => boolean,
 ): IDropdownOption[] {
@@ -113,21 +109,19 @@ export function useColumnValueOptions(
 			if (columnNamesArray.length !== 0) {
 				const result: any[] = table
 					.rollup({
-						[column]: op.array_agg(column),
+						[column]: op.array_agg_distinct(column),
 					})
 					.get(column, 0)
 
-				const uniqueElements: any[] = [...new Set(result)]
-
-				return eraseVerb ? uniqueElements : result ?? []
+				return result ?? []
 			}
 
 			return []
 		}
 		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list
-	}, [column, table, values, filter, eraseVerb])
-	return useSimpleOptions(vals, eraseVerb)
+	}, [column, table, values, filter])
+	return useSimpleOptions(vals)
 }
 
 /**
