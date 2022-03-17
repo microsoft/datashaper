@@ -8,6 +8,7 @@ export enum Verb {
 	Binarize = 'binarize',
 	Chain = 'chain',
 	Concat = 'concat',
+	Convert = 'convert',
 	Dedupe = 'dedupe',
 	Derive = 'derive',
 	Difference = 'difference',
@@ -43,6 +44,21 @@ export enum MergeStrategy {
 	LastOneWins = 'last one wins',
 	Concat = 'concat',
 	CreateArray = 'array',
+}
+
+/**
+ * This is a subset of data types available for parsing operations
+ */
+export enum ParseType {
+	Boolean = 'boolean',
+	Date = 'date',
+	Integer = 'int',
+	/**
+	 * Arquero has a parse_float and parse_int.
+	 * While both are a 'number' in JavaScript, the distinction
+	 * allows users to control how a string is interpreted.
+	 */
+	Decimal = 'float',
 }
 
 export enum DataType {

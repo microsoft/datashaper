@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@data-wrangling-components/core'
-import { DefaultButton } from '@fluentui/react'
+import { DefaultButton, Spinner, SpinnerSize } from '@fluentui/react'
 import { memo } from 'react'
 
 import { ColumnarMenu } from '../../controls/ColumnarMenu/ColumnarMenu.js'
@@ -16,7 +16,14 @@ export const TableListBar: React.FC<{
 	derived: TableContainer[]
 	onSelect?: (name: string) => void
 	selected?: string
-}> = memo(function TableListBar({ inputs, derived, onSelect, selected }) {
+	loading?: boolean
+}> = memo(function TableListBar({
+	inputs,
+	derived,
+	onSelect,
+	selected,
+	loading,
+}) {
 	const { onClick } = useOutputPreview(derived, onSelect)
 
 	const menuProps = useTableSelection(inputs, derived, selected, onSelect)
@@ -24,6 +31,7 @@ export const TableListBar: React.FC<{
 	return (
 		<ListContainer>
 			<ColumnarMenu {...menuProps} />
+			{loading && <Spinner size={SpinnerSize.xSmall} />}
 			{derived.length > 0 ? (
 				<DefaultButton
 					styles={viewButtonStyles}

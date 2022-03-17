@@ -67,6 +67,7 @@ export function factory(verb: Verb, input: string, output: string): Step {
 					columns: [],
 				},
 			}
+		case Verb.Convert:
 		case Verb.Lookup:
 		case Verb.Groupby:
 		case Verb.Dedupe:

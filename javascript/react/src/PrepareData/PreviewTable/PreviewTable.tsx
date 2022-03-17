@@ -8,6 +8,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
 import styled from 'styled-components'
 
+import type { SaveMetadataFunction } from '../../index.js'
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
@@ -28,18 +29,18 @@ const statsColumnTypes = [
 export const PreviewTable: React.FC<{
 	table?: ColumnTable
 	name?: string
-	selectedMetadata?: TableMetadata
+	metadata?: TableMetadata
 	headerCommandBar?: IRenderFunction<IDetailsColumnProps>[]
+	onChangeMetadata?: SaveMetadataFunction
 }> = memo(function PreviewTable({
 	table,
-	selectedMetadata,
 	headerCommandBar,
 	name,
+	metadata,
+	onChangeMetadata,
 }) {
-	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures({
-		statsColumnHeaders: true,
-		histogramColumnHeaders: true,
-	})
+	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures()
+	/* eslint-disable-next-line */
 	const commands = useCommonCommands(null, changeTableFeatures, tableFeatures)
 
 	return (
@@ -49,14 +50,15 @@ export const PreviewTable: React.FC<{
 					<ArqueroTableHeader
 						name={name}
 						table={table}
-						farCommands={commands}
+						// farCommands={commands}
 					/>
 					<ArqueroDetailsList
 						isSortable
 						compact
 						showColumnBorders
 						isHeadersFixed
-						metadata={selectedMetadata}
+						metadata={metadata}
+						onChangeMetadata={onChangeMetadata}
 						features={{
 							...tableFeatures,
 							statsColumnTypes: statsColumnTypes,

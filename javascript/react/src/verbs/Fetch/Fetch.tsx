@@ -3,12 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { FetchStep } from '@data-wrangling-components/core'
-import { TextField } from '@fluentui/react'
+import { Position, SpinButton, TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { dropdownStyles } from '../../controls/styles.js'
-import { LeftAlignedRow, useHandleTextfieldChange } from '../../index.js'
+import {
+	LeftAlignedRow,
+	useHandleSpinButtonChange,
+	useHandleTextfieldChange,
+} from '../../index.js'
 import type { StepComponentProps } from '../../types'
 
 /**
@@ -32,6 +36,12 @@ export const Fetch: React.FC<StepComponentProps> = memo(function Fetch({
 		onChange,
 	)
 
+	const handleAutoMaxChange = useHandleSpinButtonChange(
+		internal,
+		'args.autoMax',
+		onChange,
+	)
+
 	return (
 		<Container>
 			<LeftAlignedRow>
@@ -51,6 +61,19 @@ export const Fetch: React.FC<StepComponentProps> = memo(function Fetch({
 					placeholder={'Column delimiter'}
 					styles={dropdownStyles}
 					onChange={handleDelimiterChange}
+				/>
+			</LeftAlignedRow>
+			<LeftAlignedRow>
+				<SpinButton
+					key={`Automax`}
+					label={'Automax'}
+					labelPosition={Position.top}
+					min={0}
+					max={10000000}
+					step={1}
+					value={internal.args.autoMax ? `${internal.args.autoMax}` : undefined}
+					styles={dropdownStyles}
+					onChange={handleAutoMaxChange}
 				/>
 			</LeftAlignedRow>
 		</Container>

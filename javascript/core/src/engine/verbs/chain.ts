@@ -10,6 +10,7 @@ import { aggregate } from './aggregate.js'
 import { bin } from './bin.js'
 import { binarize } from './binarize.js'
 import { concat } from './concat.js'
+import { convert } from './convert.js'
 import { dedupe } from './dedupe.js'
 import { derive } from './derive.js'
 import { difference } from './difference.js'
@@ -45,6 +46,7 @@ const verbs: Record<string, StepFunction> = {
 	binarize,
 	chain: exec,
 	concat,
+	convert,
 	dedupe,
 	derive,
 	difference,

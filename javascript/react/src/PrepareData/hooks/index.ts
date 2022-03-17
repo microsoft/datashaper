@@ -4,7 +4,9 @@
  */
 
 export * from './useAddNewTables.js'
+export * from './useMessageBar.js'
 export * from './useOnDeleteStep.js'
 export * from './useOnSaveStep.js'
+export * from './useOnUpdateMetadata.js'
 export * from './useRunPipeline.js'
 export * from './useToggleTableFeatures.js'

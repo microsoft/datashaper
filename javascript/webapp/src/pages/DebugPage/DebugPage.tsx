@@ -56,8 +56,6 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
 	const [features, setFeatures] = useState<DetailsListFeatures>({
-		smartHeaders: true,
-		smartCells: true,
 		statsColumnTypes: DEFAULT_STATS,
 	})
 	const [compact, setCompact] = useState<boolean>(true)

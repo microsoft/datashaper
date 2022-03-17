@@ -13,7 +13,6 @@ import {
 	fetchFile,
 	getFilesFromZip,
 	isZipFile,
-	loadTable,
 	renameDuplicatedFiles,
 	tableToHTML,
 	toZip,
@@ -117,7 +116,7 @@ export class FileCollection {
 	}
 
 	async toTable(name: string): Promise<ColumnTable> {
-		return loadTable(this.find(name))
+		return this.find(name).toTable()
 	}
 
 	async add(files: FileWithPath[] | FileWithPath | string): Promise<void> {
@@ -179,7 +178,7 @@ export class FileCollection {
 		const dataURI = await toZip(this.filtered())
 		const link = document.createElement('a')
 		link.href = dataURI
-		link.download = `${this.name || zipName}.zip`
+		link.download = `${zipName || this.name}.zip`
 		link.click()
 	}
 

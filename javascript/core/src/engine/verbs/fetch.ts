@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { loadCSV } from 'arquero'
+import { loadCSV, loadJSON } from 'arquero'
 
 import { container } from '../../factories.js'
 import type { FetchArgs, Step, TableStore } from '../../index.js'
@@ -20,11 +20,21 @@ export async function fetch(
 	_store: TableStore,
 ): Promise<TableContainer> {
 	const { output, args } = step
-	const { url, delimiter } = args as FetchArgs
+	const { url, delimiter, autoMax } = args as FetchArgs
 
-	const tableFromCSV = await loadCSV(url, {
-		delimiter: delimiter,
-		autoMax: 1000000,
-	})
-	return container(output, tableFromCSV)
+	if (url.toLowerCase().endsWith('.json')) {
+		const tableFromJSON = await loadJSON(url, {
+			autoType: autoMax === undefined || autoMax <= 0 ? false : true,
+		})
+
+		return container(output, tableFromJSON)
+	} else {
+		const tableFromCSV = await loadCSV(url, {
+			delimiter: delimiter,
+			autoMax: autoMax !== undefined ? autoMax : 0,
+			autoType: autoMax === undefined || autoMax <= 0 ? false : true,
+		})
+
+		return container(output, tableFromCSV)
+	}
 }

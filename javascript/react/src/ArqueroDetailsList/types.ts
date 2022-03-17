@@ -35,6 +35,11 @@ export type GroupHeaderFunction = (
 	props?: IDetailsGroupDividerProps | undefined,
 ) => any
 
+export type SaveMetadataFunction = (
+	meta: TableMetadata,
+	table: ColumnTable,
+) => void
+
 export type ColumnClickFunction = (
 	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
 	column?: IColumn | undefined,
@@ -179,6 +184,10 @@ export interface ArqueroDetailsListProps
 	 * Passthrough to the group header rendering, when using the group by verb
 	 */
 	onRenderGroupHeader?: GroupHeaderFunction
+	/**
+	 * Passthrough to the useTableMetadata hook, to update and store the metadata computed
+	 */
+	onChangeMetadata?: SaveMetadataFunction
 	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */
