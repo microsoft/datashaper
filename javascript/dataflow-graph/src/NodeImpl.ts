@@ -70,11 +70,11 @@ export abstract class NodeImpl<Data, Config> implements Node<Data, Config> {
 		return this._socketNames
 	}
 
-	public get configuration(): Config | undefined {
+	public get config(): Config | undefined {
 		return this._config
 	}
 
-	public set configuration(value: Config | undefined) {
+	public set config(value: Config | undefined) {
 		this._config = value
 		this.recalculate()
 	}

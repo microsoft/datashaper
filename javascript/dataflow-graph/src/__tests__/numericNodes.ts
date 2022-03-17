@@ -17,8 +17,8 @@ export class ValueNode extends NodeImpl<number, number> {
 	}
 
 	protected performRecalculation(): void {
-		if (this.configuration != null) {
-			this.data = this.configuration
+		if (this.config != null) {
+			this.data = this.config
 		}
 	}
 }
