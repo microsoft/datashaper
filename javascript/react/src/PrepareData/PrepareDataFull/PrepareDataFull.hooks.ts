@@ -8,7 +8,6 @@ import type {
 	TableMetadata,
 	TableStore,
 } from '@data-wrangling-components/core'
-import type { FileCollection } from '@data-wrangling-components/utilities'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -17,10 +16,8 @@ import {
 	getLoadingOrchestrator,
 	LoadingOrchestratorType,
 } from '../../Orchestrator/index.js'
-import { useHandleFileUpload } from '../../ProjectMgmtCommandBar/index.js'
 import {
 	useAddNewTables,
-	useMessageBar,
 	useOnDeleteStep,
 	useOnSaveStep,
 	useOnUpdateMetadata,
@@ -29,7 +26,6 @@ import {
 
 export function useBusinessLogic(
 	tables: TableContainer[],
-	onUpdateTables: (tables: TableContainer[]) => void,
 	onUpdateSteps: (steps: Step[]) => void,
 	steps?: Step[],
 	onOutputTable?: (table: TableContainer) => void,
@@ -45,12 +41,8 @@ export function useBusinessLogic(
 	derived: TableContainer[]
 	onUpdateMetadata: (meta: TableMetadata) => void
 	tablesLoading: boolean
-	handleFileUpload: (fileCollection: FileCollection) => void
-	Message: JSX.Element | null
-	setMessage: (message: string) => void
 } {
 	const [selectedTableName, setSelectedTableName] = useState<string>()
-	const [message, setMessage] = useState<string>()
 	const [storedTables, setStoredTables] = useState<Map<string, TableContainer>>(
 		new Map<string, TableContainer>(),
 	)
@@ -64,7 +56,6 @@ export function useBusinessLogic(
 	)
 	const addNewTables = useAddNewTables(store, setStoredTables)
 	const { isLoading } = getLoadingOrchestrator(LoadingOrchestratorType.Tables)
-	const handleFileUpload = useHandleFileUpload(onUpdateSteps, onUpdateTables)
 
 	// TODO: resolve these from the stored table state
 	const derived = useMemo(() => {
@@ -132,7 +123,6 @@ export function useBusinessLogic(
 
 	const onSaveStep = useOnSaveStep(onUpdateSteps, pipeline)
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
-	const Message = useMessageBar(message, setMessage)
 
 	const onUpdateMetadata = useOnUpdateMetadata(
 		setStoredTables,
@@ -151,9 +141,6 @@ export function useBusinessLogic(
 		selectedTableName,
 		derived,
 		onUpdateMetadata,
-		handleFileUpload,
-		Message,
-		setMessage,
 		tablesLoading: isLoading,
 	}
 }
