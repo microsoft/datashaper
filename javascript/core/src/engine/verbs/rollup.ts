@@ -4,7 +4,7 @@
  */
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { RollupArgs, Step, TableContainer } from '../../types.js'
+import type { RollupStep, TableContainer } from '../../types.js'
 import { singleExpression } from '../util/index.js'
 
 /**
@@ -15,11 +15,9 @@ import { singleExpression } from '../util/index.js'
  */
 
 export async function rollup(
-	step: Step,
+	{ input, output, args: { column, operation, to } }: RollupStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { column, operation, to } = args as RollupArgs
 	const inputTable = await store.table(input)
 
 	const expr = singleExpression(column, operation)

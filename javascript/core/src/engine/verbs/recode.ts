@@ -8,7 +8,7 @@ import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { RecodeArgs, Step, TableContainer } from '../../types.js'
+import type { RecodeStep, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero derive to map a list of values to new values.
@@ -18,11 +18,9 @@ import type { RecodeArgs, Step, TableContainer } from '../../types.js'
  * @returns
  */
 export async function recode(
-	step: Step,
+	{ input, output, args: { column, to, map } }: RecodeStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { column, to, map } = args as RecodeArgs
 	const inputTable = await store.table(input)
 
 	const dArgs: ExprObject = {

@@ -5,7 +5,7 @@
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { SpreadArgs, Step, TableContainer } from '../../types.js'
+import type { SpreadStep, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero spread operation.
@@ -14,11 +14,9 @@ import type { SpreadArgs, Step, TableContainer } from '../../types.js'
  * @returns
  */
 export async function spread(
-	step: Step,
+	{ input, output, args: { to, column } }: SpreadStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { to, column } = args as SpreadArgs
 	const inputTable = await store.table(input)
 
 	return container(output, inputTable.spread(column, { as: to }))

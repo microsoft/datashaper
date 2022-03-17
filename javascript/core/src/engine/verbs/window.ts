@@ -4,7 +4,7 @@
  */
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { Step, TableContainer, WindowArgs } from '../../types.js'
+import type { TableContainer,WindowStep } from '../../types.js'
 import { singleExpression } from '../util/index.js'
 
 /**
@@ -15,11 +15,9 @@ import { singleExpression } from '../util/index.js'
  */
 
 export async function window(
-	step: Step,
+	{ input, output, args: { column, operation, to } }: WindowStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { column, operation, to } = args as WindowArgs
 	const inputTable = await store.table(input)
 
 	const expr = singleExpression(column, operation)

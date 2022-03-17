@@ -6,7 +6,7 @@ import type { JoinOptions } from 'arquero/dist/types/table/transformable'
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { JoinArgs, Step, TableContainer } from '../../types.js'
+import type { JoinStep, TableContainer } from '../../types.js'
 import { JoinStrategy } from '../../types.js'
 
 /**
@@ -16,11 +16,13 @@ import { JoinStrategy } from '../../types.js'
  * @returns
  */
 export async function join(
-	step: Step,
+	{
+		input,
+		output,
+		args: { other, on, strategy = JoinStrategy.Inner },
+	}: JoinStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { other, on, strategy = JoinStrategy.Inner } = args as JoinArgs
 	const [inputTable, otherTable] = await Promise.all([
 		store.table(input),
 		store.table(other),

@@ -5,7 +5,7 @@
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { FilterArgs, Step, TableContainer } from '../../types.js'
+import type { FilterStep, TableContainer } from '../../types.js'
 import { compareAll } from '../util/index.js'
 
 /**
@@ -15,11 +15,9 @@ import { compareAll } from '../util/index.js'
  * @returns
  */
 export async function filter(
-	step: Step,
+	{ input, output, args: { column, criteria } }: FilterStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { column, criteria } = args as FilterArgs
 	const inputTable = await store.table(input)
 
 	const expr = compareAll(column, criteria)

@@ -6,7 +6,7 @@ import { all } from 'arquero'
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { SelectArgs, Step, TableContainer } from '../../types.js'
+import type { SelectStep, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero select.
@@ -15,11 +15,9 @@ import type { SelectArgs, Step, TableContainer } from '../../types.js'
  * @returns
  */
 export async function select(
-	step: Step,
+	{ input, output, args: { columns = [] } }: SelectStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { columns = [] } = args as SelectArgs
 	const inputTable = await store.table(input)
 	const expr = [columns] as any
 

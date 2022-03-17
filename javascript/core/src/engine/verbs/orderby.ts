@@ -6,7 +6,7 @@ import { desc } from 'arquero'
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { OrderbyArgs, Step, TableContainer } from '../../types.js'
+import type { OrderbyStep, TableContainer } from '../../types.js'
 import { SortDirection } from '../../types.js'
 
 /**
@@ -16,13 +16,11 @@ import { SortDirection } from '../../types.js'
  * @returns
  */
 export async function orderby(
-	step: Step,
+	{ input, output, args: { orders } }: OrderbyStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
 	const inputTable = await store.table(input)
 
-	const { orders } = args as OrderbyArgs
 	// format keys in arquero-compatible format
 	// https://uwdata.github.io/arquero/api/verbs#orderby
 	const keys = orders.map(({ column, direction }) =>

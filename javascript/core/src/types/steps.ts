@@ -39,8 +39,8 @@ export interface Step<T = unknown> {
 	description?: string
 }
 
-export type StepFunction = (
-	step: Step,
+export type StepFunction<T> = (
+	step: Step<T>,
 	store: TableStore,
 ) => Promise<TableContainer>
 

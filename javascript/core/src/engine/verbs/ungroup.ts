@@ -15,10 +15,9 @@ import type { Step, TableContainer } from '../../types.js'
  */
 
 export async function ungroup(
-	step: Step,
+	{ input, output }: Step,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output } = step
 	const inputTable = await store.table(input)
 	return container(output, inputTable.ungroup())
 }

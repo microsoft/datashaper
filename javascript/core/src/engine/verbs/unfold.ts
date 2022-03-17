@@ -7,8 +7,8 @@ import { from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
 import { container } from '../../factories.js'
-import type { TableStore, UnfoldArgs } from '../../index.js'
-import type { Step, TableContainer } from '../../types.js'
+import type { TableStore } from '../../index.js'
+import type { TableContainer,UnfoldStep } from '../../types.js'
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
@@ -18,11 +18,9 @@ import type { Step, TableContainer } from '../../types.js'
  * @returns
  */
 export async function unfold(
-	step: Step,
+	{ input, output, args: { key, value } }: UnfoldStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { key, value } = args as UnfoldArgs
 	const inputTable = await store.table(input)
 
 	const columnNames: string[] = inputTable.columnNames(name => {
@@ -30,7 +28,9 @@ export async function unfold(
 	})
 	const selectedArray: RowObject[] = inputTable.select(columnNames).objects()
 
-	const distinctColumnValues: string[] = [...new Set(inputTable.array(key))]
+	const distinctColumnValues: string[] = [
+		...new Set<string>(inputTable.array(key) as string[]),
+	]
 
 	const originalArray: RowObject[] = inputTable.objects()
 	const finalArray: RowObject[] = []

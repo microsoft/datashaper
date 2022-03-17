@@ -7,7 +7,7 @@ import { escape, op } from 'arquero'
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { ConvertArgs, Step, TableContainer } from '../../types.js'
+import type { ConvertStep, TableContainer } from '../../types.js'
 import { ParseType } from '../../types.js'
 
 /**
@@ -17,11 +17,9 @@ import { ParseType } from '../../types.js'
  * @returns
  */
 export async function convert(
-	step: Step,
+	{ input, output, args: { columns, type, radix } }: ConvertStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { columns, type, radix } = args as ConvertArgs
 	const inputTable = await store.table(input)
 
 	// note that this applies the specified parse to every column equally

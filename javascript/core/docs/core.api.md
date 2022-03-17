@@ -916,7 +916,7 @@ export interface Step<T = unknown> {
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepFunction = (step: Step, store: TableStore) => Promise<TableContainer>;
+export type StepFunction<T> = (step: Step<T>, store: TableStore) => Promise<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -6,12 +6,7 @@
 import { escape } from 'arquero'
 
 import { container } from '../../factories.js'
-import type {
-	EraseArgs,
-	Step,
-	TableContainer,
-	TableStore,
-} from '../../types.js'
+import type { EraseStep, TableContainer, TableStore } from '../../types.js'
 
 /**
  * Executes an arquero erase operation.
@@ -21,11 +16,9 @@ import type {
  */
 
 export async function erase(
-	step: Step,
+	{ input, output, args: { value, column } }: EraseStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { value, column } = args as EraseArgs
 	const inputTable = await store.table(input)
 
 	const func = escape((d: any) => (d[column] === value ? undefined : d[column]))
