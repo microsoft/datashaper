@@ -1684,6 +1684,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@data-wrangling-components/dataflow-graph@workspace:javascript/dataflow-graph":
+  version: 0.0.0-use.local
+  resolution: "@data-wrangling-components/dataflow-graph@workspace:javascript/dataflow-graph"
+  dependencies:
+    "@essex/scripts": ^21.0.0
+    "@essex/tsconfig-base": ^1.0.2
+    "@types/jest": ^27.4.1
+  languageName: unknown
+  linkType: soft
+
 "@data-wrangling-components/guidance@workspace:^, @data-wrangling-components/guidance@workspace:javascript/guidance":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/guidance@workspace:javascript/guidance"
