@@ -4,8 +4,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
+		"main": "dist/lib/index.js",
+		"types": "dist/lib/index.d.ts"
 	},
 	"sideEffects": false,
 	"scripts": {
@@ -16,9 +16,9 @@
 		"@zip.js/zip.js": "^2.4.6"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.5.2",
+		"@essex/scripts": "^21.0.0",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@essex/vite-config": "^19.0.5",
+		"@essex/vite-config": "^19.0.6",
 		"@types/node": "^17.0.21",
 		"arquero": "^4.8.8",
 		"regenerator-runtime": "^0.13.9",

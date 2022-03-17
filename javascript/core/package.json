@@ -4,8 +4,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/index.js",
-		"types": "dist/index.d.ts"
+		"main": "dist/lib/index.js",
+		"types": "dist/lib/index.d.ts"
 	},
 	"sideEffects": false,
 	"scripts": {
@@ -16,7 +16,7 @@
 		"lodash-es": "^4.17.21"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^20.5.2",
+		"@essex/scripts": "^21.0.0",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/jest": "^27.4.1",
 		"@types/lodash-es": "^4.17.6",
