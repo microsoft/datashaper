@@ -5,7 +5,7 @@
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { PivotArgs, Step, TableContainer } from '../../types.js'
+import type { PivotStep, TableContainer } from '../../types.js'
 import { singleExpression } from '../util/index.js'
 
 /**
@@ -16,11 +16,9 @@ import { singleExpression } from '../util/index.js'
  * @returns
  */
 export async function pivot(
-	step: Step,
+	{ input, output, args: { key, value, operation } }: PivotStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { key, value, operation } = args as PivotArgs
 	const inputTable = await store.table(input)
 
 	const expr = singleExpression(value, operation)

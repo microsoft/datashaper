@@ -6,7 +6,7 @@
 import { loadCSV, loadJSON } from 'arquero'
 
 import { container } from '../../factories.js'
-import type { FetchArgs, Step, TableStore } from '../../index.js'
+import type { FetchStep, TableStore } from '../../index.js'
 import type { TableContainer } from '../../types.js'
 
 /**
@@ -16,12 +16,9 @@ import type { TableContainer } from '../../types.js'
  * @returns
  */
 export async function fetch(
-	step: Step,
+	{ output, args: { url, delimiter, autoMax } }: FetchStep,
 	_store: TableStore,
 ): Promise<TableContainer> {
-	const { output, args } = step
-	const { url, delimiter, autoMax } = args as FetchArgs
-
 	if (url.toLowerCase().endsWith('.json')) {
 		const tableFromJSON = await loadJSON(url, {
 			autoType: autoMax === undefined || autoMax <= 0 ? false : true,

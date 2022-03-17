@@ -7,7 +7,7 @@ import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { DeriveArgs, Step, TableContainer } from '../../types.js'
+import type { DeriveStep, TableContainer } from '../../types.js'
 import { MathOperator } from '../../types.js'
 
 /**
@@ -18,11 +18,9 @@ import { MathOperator } from '../../types.js'
  * @returns
  */
 export async function derive(
-	step: Step,
+	{ input, output, args: { column1, column2, operator, to } }: DeriveStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { column1, column2, operator, to } = args as DeriveArgs
 	const inputTable = await store.table(input)
 
 	// eslint-disable-next-line

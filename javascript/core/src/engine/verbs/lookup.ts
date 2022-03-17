@@ -4,7 +4,7 @@
  */
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { LookupArgs, Step, TableContainer } from '../../types.js'
+import type { LookupStep, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero lookup.
@@ -13,11 +13,9 @@ import type { LookupArgs, Step, TableContainer } from '../../types.js'
  * @returns
  */
 export async function lookup(
-	step: Step,
+	{ input, output, args: { other, on = [], columns } }: LookupStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { other, on = [], columns } = args as LookupArgs
 	const [inputTable, otherTable] = await Promise.all([
 		store.table(input),
 		store.table(other),

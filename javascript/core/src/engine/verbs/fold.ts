@@ -5,7 +5,7 @@
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { FoldArgs, Step, TableContainer } from '../../types.js'
+import type { FoldStep, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
@@ -15,11 +15,9 @@ import type { FoldArgs, Step, TableContainer } from '../../types.js'
  * @returns
  */
 export async function fold(
-	step: Step,
+	{ input, output, args: { columns, to } }: FoldStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { columns, to } = args as FoldArgs
 	const inputTable = await store.table(input)
 
 	return container(output, inputTable.fold(columns, { as: to }))

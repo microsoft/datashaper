@@ -11,7 +11,7 @@ import type { ExprObject } from 'arquero/dist/types/table/transformable'
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
 import { columnType, MergeStrategy } from '../../index.js'
-import type { DataType, MergeArgs, Step, TableContainer } from '../../types.js'
+import type { DataType, MergeStep, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero merge operation.
@@ -21,12 +21,13 @@ import type { DataType, MergeArgs, Step, TableContainer } from '../../types.js'
  */
 
 export async function merge(
-	step: Step,
+	{
+		input,
+		output,
+		args: { columns = [], strategy, to, delimiter = '' },
+	}: MergeStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { columns = [], strategy, to, delimiter = '' } = args as MergeArgs
-
 	const inputTable = await store.table(input)
 
 	const isSameDataTypeFlag: boolean = isSameDataType(inputTable, columns)
@@ -46,10 +47,7 @@ export async function merge(
 		}
 	})
 
-	const dArgs: ExprObject = {
-		[to]: func,
-	}
-
+	const dArgs: ExprObject = { [to]: func }
 	return container(output, inputTable.derive(dArgs))
 }
 

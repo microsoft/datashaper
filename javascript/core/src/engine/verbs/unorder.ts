@@ -13,10 +13,9 @@ import type { Step, TableContainer } from '../../types.js'
  * @returns
  */
 export async function unorder(
-	step: Step,
+	{ input, output }: Step,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output } = step
 	const inputTable = await store.table(input)
 
 	return container(output, inputTable.unorder())

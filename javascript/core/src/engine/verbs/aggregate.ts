@@ -4,7 +4,7 @@
  */
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { AggregateArgs, Step, TableContainer } from '../../types.js'
+import type { AggregateStep, TableContainer } from '../../types.js'
 import { singleExpression } from '../util/index.js'
 
 /**
@@ -14,18 +14,11 @@ import { singleExpression } from '../util/index.js'
  * @returns
  */
 export async function aggregate(
-	step: Step,
+	{ input, output, args: { groupby, column, operation, to } }: AggregateStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { groupby, column, operation, to } = args as AggregateArgs
 	const inputTable = await store.table(input)
-
 	const expr = singleExpression(column, operation)
-
-	const rArgs = {
-		[to]: expr,
-	}
-
+	const rArgs = { [to]: expr }
 	return container(output, inputTable.groupby(groupby).rollup(rArgs))
 }

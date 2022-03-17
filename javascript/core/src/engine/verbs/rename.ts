@@ -4,7 +4,7 @@
  */
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { RenameArgs, Step, TableContainer } from '../../types.js'
+import type { RenameStep, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero column rename.
@@ -13,11 +13,9 @@ import type { RenameArgs, Step, TableContainer } from '../../types.js'
  * @returns
  */
 export async function rename(
-	step: Step,
+	{ input, output, args: { columns } }: RenameStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { columns } = args as RenameArgs
 	const inputTable = await store.table(input)
 	return container(output, inputTable.rename(columns))
 }

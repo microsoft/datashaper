@@ -5,7 +5,7 @@
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { FillArgs, Step, TableContainer } from '../../types.js'
+import type { FillStep, TableContainer } from '../../types.js'
 import type { ExprFunctionMap } from './types.js'
 
 /**
@@ -19,11 +19,9 @@ import type { ExprFunctionMap } from './types.js'
  * @returns
  */
 export async function fill(
-	step: Step,
+	{ input, output, args: { value, to } }: FillStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { value, to } = args as FillArgs
 	const inputTable = await store.table(input)
 
 	const dArgs: ExprFunctionMap = {

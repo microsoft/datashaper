@@ -4,7 +4,7 @@
  */
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { SampleArgs, Step, TableContainer } from '../../types.js'
+import type { SampleStep, TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero sample to extract random rows.
@@ -14,11 +14,9 @@ import type { SampleArgs, Step, TableContainer } from '../../types.js'
  * @returns
  */
 export async function sample(
-	step: Step,
+	{ input, output, args: { size, proportion } }: SampleStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { size, proportion } = args as SampleArgs
 	const inputTable = await store.table(input)
 	const p = Math.round(inputTable.numRows() * (proportion || 1))
 	const s = size || p

@@ -5,7 +5,7 @@
 
 import { container } from '../../factories.js'
 import type { TableStore } from '../../index.js'
-import type { Step, TableContainer, UnrollArgs } from '../../types.js'
+import type { TableContainer,UnrollStep } from '../../types.js'
 
 /**
  * Executes an arquero unroll operation.
@@ -14,11 +14,9 @@ import type { Step, TableContainer, UnrollArgs } from '../../types.js'
  * @returns
  */
 export async function unroll(
-	step: Step,
+	{ input, output, args: { columns } }: UnrollStep,
 	store: TableStore,
 ): Promise<TableContainer> {
-	const { input, output, args } = step
-	const { columns } = args as UnrollArgs
 	const inputTable = await store.table(input)
 
 	return container(output, inputTable.unroll(columns))
