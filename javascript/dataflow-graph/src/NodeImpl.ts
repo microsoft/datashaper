@@ -5,12 +5,12 @@
 import type {
 	DataChangePayload,
 	ErrorState,
-	Handler,	Node,
+	Handler,
+	Node,
 	StateChangePayload,
-	Unsubscribe} from './types';
-import {
-	NodeState
+	Unsubscribe,
 } from './types'
+import { NodeState } from './types'
 
 export abstract class NodeImpl<Data, Config> implements Node<Data, Config> {
 	private _config: Config | undefined
@@ -70,16 +70,20 @@ export abstract class NodeImpl<Data, Config> implements Node<Data, Config> {
 		return this._socketNames
 	}
 
-	public get config(): Config | undefined {
+	public get configuration(): Config | undefined {
 		return this._config
 	}
 
-	public set config(value: Config | undefined) {
+	public set configuration(value: Config | undefined) {
 		this._config = value
 		this.recalculate()
 	}
 
-	public clearSocket(name: string): void {
+	protected get sockets() {
+		return this._sockets
+	}
+
+	public uninstall(name: string): void {
 		if (this._sockets.has(name)) {
 			// unsubscribe from updates
 			const unsubscribe = this._subscriptions.get(name)
@@ -95,7 +99,7 @@ export abstract class NodeImpl<Data, Config> implements Node<Data, Config> {
 		}
 	}
 
-	public installSocket(name: string, node: Node<Data>) {
+	public install(name: string, node: Node<Data>) {
 		if (this.socketNames.indexOf(name) === -1) {
 			throw new Error(`unknown socket name ${name}`)
 		}

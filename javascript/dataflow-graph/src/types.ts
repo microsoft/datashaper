@@ -63,13 +63,13 @@ export interface Node<Data = unknown, Config = unknown> {
 	 * @param node The upstream processing node to wire in
 	 * @throws if the socket name is unknown
 	 */
-	installSocket(name: string, node: Node<Data>): void
+	install(name: string, node: Node<Data>): void
 
 	/**
 	 * Clears a socket by name
 	 * @param name The socket name to clear
 	 */
-	clearSocket(name: string): void
+	uninstall(name: string): void
 
 	/**
 	 * Subscribe to events for when the state changes
