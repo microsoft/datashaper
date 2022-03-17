@@ -28,6 +28,7 @@ export const withOutputColumnTextfield = (
 			}
 			return (
 				<Container className="with-output-column-textfield">
+					<Component {...props} />
 					<LeftAlignedRow>
 						<TextField
 							required
@@ -38,7 +39,6 @@ export const withOutputColumnTextfield = (
 							onChange={handleToChange}
 						/>
 					</LeftAlignedRow>
-					<Component {...props} />
 				</Container>
 			)
 		}
