@@ -2,11 +2,21 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type {
+	DropzoneStyles} from '@data-wrangling-components/react';
 import {
+	Dropzone,
 	PrepareDataFull,
 	ProjectMgmtCommandBar,
+	useHandleFileUpload,
 } from '@data-wrangling-components/react'
-import { memo, useEffect } from 'react'
+import type {
+	FileCollection} from '@data-wrangling-components/utilities';
+import {
+	FileExtensions,
+} from '@data-wrangling-components/utilities'
+import { MessageBar, MessageBarType } from '@fluentui/react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
@@ -16,6 +26,16 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const { setSteps, steps, tables, updateTables, outputTable, setOutputTable } =
 		useBusinessLogic()
 	const setHelpFileContent = useHelpFileContentSetter()
+	const handleFileUpload = useHandleFileUpload(setSteps, updateTables)
+	const [message, setMessage] = useState<string>()
+
+	const handleDropAcceppted = useCallback(
+		(fc: FileCollection) => {
+			setMessage(undefined)
+			handleFileUpload(fc)
+		},
+		[setMessage, handleFileUpload],
+	)
 
 	useEffect(() => {
 		const content = `The pipeline builder web application allows you to perform lightweight data wrangling by constructing a series of transformation steps. At the top of the window is the list of your input tables. Choosing on any of these tables will display the content in the preview pane at the bottom.
@@ -28,6 +48,18 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	return (
 		<Container className={'prepare-data-page'}>
+			<Dropzone
+				acceptedFileTypes={[
+					FileExtensions.csv,
+					FileExtensions.zip,
+					FileExtensions.json,
+				]}
+				onDropAccepted={handleDropAcceppted}
+				onDropRejected={setMessage}
+				showPlaceholder={false}
+				dropzoneOptions={{ noClick: true }}
+				styles={dropzoneStyles as DropzoneStyles}
+			/>
 			<ProjectMgmtCommandBar
 				tables={tables}
 				steps={steps}
@@ -35,11 +67,22 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				onUpdateSteps={setSteps}
 				onUpdateTables={updateTables}
 			/>
+			{message && (
+				<MessageBar
+					messageBarType={MessageBarType.severeWarning}
+					truncated={true}
+					onDismiss={() => setMessage(undefined)}
+					dismissButtonAriaLabel="Close"
+					styles={{ root: { zIndex: 20 } }}
+				>
+					{' '}
+					{message}{' '}
+				</MessageBar>
+			)}
 			<PrepareDataFull
 				tables={tables}
 				steps={steps}
 				onUpdateSteps={setSteps}
-				onUpdateTables={updateTables}
 				onOutputTable={setOutputTable}
 			/>
 		</Container>
@@ -48,4 +91,22 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 const Container = styled.div`
 	height: calc(100vh - 80px);
+	position: relative;
 `
+
+const dropzoneStyles = {
+	container: {
+		position: 'absolute',
+		width: '100%',
+		height: '100vh',
+		borderColor: 'transparent',
+		margin: 0,
+		padding: 0,
+		borderRadius: 0,
+	},
+	dragReject: {
+		width: '100%',
+		height: '100vh',
+		zIndex: 100,
+	},
+}

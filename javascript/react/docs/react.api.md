@@ -79,6 +79,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     // (undocumented)
     offset?: number;
     onCellDropdownSelect?: DropdownOptionSelect;
+    onChangeMetadata?: SaveMetadataFunction;
     onColumnClick?: ColumnClickFunction;
     onRenderGroupHeader?: GroupHeaderFunction;
     selectedColumn?: string;
@@ -400,6 +401,11 @@ export const Fold: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const FoldDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "getLoadingOrchestrator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getLoadingOrchestrator(type: LoadingOrchestratorType): LoadingOrchestrator;
+
 // Warning: (ae-missing-release-tag) "groupBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -460,6 +466,31 @@ export const LeftAlignedRow: StyledComponent<"div", any, {}, never>;
 //
 // @public (undocumented)
 export const LeftAlignedRowWithGap: StyledComponent<"div", any, {}, never>;
+
+// Warning: (ae-missing-release-tag) "LoadingOrchestrator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class LoadingOrchestrator {
+    constructor();
+    // (undocumented)
+    get isLoading(): boolean;
+    // (undocumented)
+    start(): void;
+    // (undocumented)
+    stop(): void;
+}
+
+// Warning: (ae-missing-release-tag) "LoadingOrchestratorType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum LoadingOrchestratorType {
+    // (undocumented)
+    Preview = "preview",
+    // (undocumented)
+    Steps = "steps",
+    // (undocumented)
+    Tables = "tables"
+}
 
 // Warning: (ae-missing-release-tag) "Lookup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -527,7 +558,6 @@ export const PivotDescription: React.FC<StepDescriptionProps>;
 // @public (undocumented)
 export const PrepareDataFull: React.FC<{
     tables: TableContainer[];
-    onUpdateTables: (tables: TableContainer[]) => void;
     onUpdateSteps: (steps: Step[]) => void;
     onOutputTable?: (table: TableContainer) => void;
     steps?: Step[];
@@ -540,8 +570,9 @@ export const PrepareDataFull: React.FC<{
 export const PreviewTable: React.FC<{
     table?: ColumnTable;
     name?: string;
-    selectedMetadata?: TableMetadata;
+    metadata?: TableMetadata;
     headerCommandBar?: IRenderFunction<IDetailsColumnProps>[];
+    onChangeMetadata?: SaveMetadataFunction;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point index.d.ts
@@ -589,6 +620,11 @@ export const Sample: React.FC<StepComponentProps>;
 //
 // @public (undocumented)
 export const SampleDescription: React.FC<StepDescriptionProps>;
+
+// Warning: (ae-missing-release-tag) "SaveMetadataFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type SaveMetadataFunction = (meta: TableMetadata, table: ColumnTable) => void;
 
 // Warning: (ae-missing-release-tag) "selectStepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -850,7 +886,7 @@ export function useColumnRecordDelete(step: Step, onChange?: StepChangeFunction)
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, computedMetadata: TableMetadata, columns?: IColumn[], visibleColumns?: string[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions): IColumn[];
+export function useColumns(table: ColumnTable, computedMetadata?: TableMetadata, columns?: IColumn[], visibleColumns?: string[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -961,7 +997,7 @@ export function useGoHome(name: string, setName: NameSetter): () => void;
 // Warning: (ae-missing-release-tag) "useGroupHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata: TableMetadata, groupHeaderFunction?: GroupHeaderFunction, lazyLoadGroups?: boolean): IRenderFunction<IDetailsGroupDividerProps>;
+export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata?: TableMetadata, groupHeaderFunction?: GroupHeaderFunction, lazyLoadGroups?: boolean): IRenderFunction<IDetailsGroupDividerProps>;
 
 // Warning: (ae-missing-release-tag) "useGuidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1021,7 +1057,7 @@ export function useHandleZipUpload(onUpdateSteps?: (steps: Step[]) => void, onUp
 // Warning: (ae-missing-release-tag) "useIncrementingColumnColorScale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useIncrementingColumnColorScale(meta: TableMetadata): () => string;
+export function useIncrementingColumnColorScale(meta?: TableMetadata): () => string;
 
 // Warning: (ae-missing-release-tag) "useIntersection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1096,7 +1132,7 @@ export function useTableColumnOptions(table: ColumnTable | undefined, filter?: (
 // Warning: (ae-missing-release-tag) "useTableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useTableMetadata(table: ColumnTable, existing?: TableMetadata, discover?: boolean): TableMetadata;
+export function useTableMetadata(table: ColumnTable, existing?: TableMetadata, discover?: boolean, saveMetadata?: SaveMetadataFunction): TableMetadata | undefined;
 
 // Warning: (ae-missing-release-tag) "useTableOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

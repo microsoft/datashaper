@@ -13,7 +13,6 @@ import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	StatsColumnType,
-	useCommonCommands,
 } from '../../index.js'
 import { DetailText } from '../DetailText/index.js'
 import { useToggleTableFeatures } from '../hooks/index.js'
@@ -39,9 +38,7 @@ export const PreviewTable: React.FC<{
 	metadata,
 	onChangeMetadata,
 }) {
-	const { changeTableFeatures, tableFeatures } = useToggleTableFeatures()
-	/* eslint-disable-next-line */
-	const commands = useCommonCommands(null, changeTableFeatures, tableFeatures)
+	const { tableFeatures } = useToggleTableFeatures()
 
 	return (
 		<>

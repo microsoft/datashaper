@@ -3,13 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableContainer } from '@data-wrangling-components/core'
-import { FileExtensions } from '@data-wrangling-components/utilities'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import type { DropzoneStyles } from '../../files/index.js'
-import { Dropzone } from '../../files/index.js'
 import { ManageSteps } from '../../Steps/index.js'
 import { PreviewTable } from '../index.js'
 import { TableListBar } from '../TableListBar/TableListBar.js'
@@ -17,7 +14,6 @@ import { useBusinessLogic } from './PrepareDataFull.hooks.js'
 
 export const PrepareDataFull: React.FC<{
 	tables: TableContainer[]
-	onUpdateTables: (tables: TableContainer[]) => void
 	onUpdateSteps: (steps: Step[]) => void
 	onOutputTable?: (table: TableContainer) => void
 	steps?: Step[]
@@ -25,7 +21,6 @@ export const PrepareDataFull: React.FC<{
 }> = memo(function PrepareDataFull({
 	tables,
 	onUpdateSteps,
-	onUpdateTables,
 	steps,
 	outputHeaderCommandBar,
 	onOutputTable,
@@ -42,32 +37,10 @@ export const PrepareDataFull: React.FC<{
 		selectedMetadata,
 		onUpdateMetadata,
 		tablesLoading,
-		handleFileUpload,
-		Message,
-		setMessage,
-	} = useBusinessLogic(
-		tables,
-		onUpdateTables,
-		onUpdateSteps,
-		steps,
-		onOutputTable,
-	)
+	} = useBusinessLogic(tables, onUpdateSteps, steps, onOutputTable)
 
 	return (
 		<Container>
-			<Dropzone
-				acceptedFileTypes={[
-					FileExtensions.csv,
-					FileExtensions.zip,
-					FileExtensions.json,
-				]}
-				onDropAccepted={handleFileUpload}
-				onDropRejected={setMessage}
-				showPlaceholder={false}
-				dropzoneOptions={{ noClick: true }}
-				styles={dropzoneStyles as DropzoneStyles}
-			/>
-			{Message}
 			<InputContainer>
 				<SectionTitle>Tables</SectionTitle>
 				<TableListBar
@@ -106,23 +79,6 @@ export const PrepareDataFull: React.FC<{
 		</Container>
 	)
 })
-
-const dropzoneStyles = {
-	container: {
-		position: 'absolute',
-		width: '100%',
-		height: '100vh',
-		borderColor: 'transparent',
-		margin: 0,
-		padding: 0,
-		borderRadius: 0,
-	},
-	dragReject: {
-		width: '100%',
-		height: '100vh',
-		zIndex: 100,
-	},
-}
 
 const GAP = 18
 const INPUT_HEIGHT = 60
