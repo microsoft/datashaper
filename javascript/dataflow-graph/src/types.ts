@@ -12,42 +12,45 @@ export interface DataChangePayload<T> {
 	data: T
 }
 
-export type SocketStateChangePayload = StateChangePayload<SocketState>
-
 export interface ErrorState {
 	message: string
 	error?: Error
 }
 
 /**
- * The states a socketetable can be in.
+ * The states a processing node can be in.
  */
-export enum SocketState {
+export enum NodeState {
 	/**
-	 * The socket has been created, but has not been configured for processing.
+	 * The node has been created, but has not been configured for processing.
 	 */
 	Unconfigured = 'unconfigured',
 
 	/**
-	 * The socket has been configured and is ready for processing, but does not yet have data.
+	 * The node has been configured and is ready for processing, but does not yet have data.
 	 */
 	Ready = 'ready',
 
 	/**
-	 * The socket has data
+	 * The node has data
 	 */
 	Hydrated = 'hydrated',
 
 	/**
-	 * The socket is in an error state
+	 * The node is in an error state
 	 */
 	Error = 'error',
 }
 
-export interface Node<Data = unknown> {
+export interface Node<Data = unknown, Config = unknown> {
+	/**
+	 * The node's mutable configuration
+	 */
+	config: Config | undefined
+
 	readonly error: ErrorState | undefined
 	readonly data: Data | undefined
-	readonly state: SocketState
+	readonly state: NodeState
 
 	/**
 	 * Sockets represent named processing node inputs
@@ -72,13 +75,15 @@ export interface Node<Data = unknown> {
 	 * Subscribe to events for when the state changes
 	 * @param handler the event handler
 	 */
-	onStateChange(handler: Handler<SocketStateChangePayload>): Unsubscribe
+	onStateChange(handler: Handler<StateChangePayload<NodeState>>): Unsubscribe
 
 	/**
 	 * Subscribe to events for when the data changes
 	 * @param handler the event handler
 	 */
-	onDataChange(handler: Handler<DataChangePayload<Data>>): Unsubscribe
+	onDataChange(
+		handler: Handler<DataChangePayload<Data | undefined>>,
+	): Unsubscribe
 
 	/**
 	 * Subscribe to events for when the error-state changes
