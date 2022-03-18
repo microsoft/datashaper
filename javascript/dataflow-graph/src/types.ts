@@ -4,8 +4,16 @@
  */
 import type { Observable } from 'rxjs'
 
+/**
+ * A convenience type for including undefined
+ * @public
+ */
 export type Maybe<T> = T | undefined
 
+/**
+ * A graph processing node
+ * @public
+ */
 export interface Node<T, Config = unknown> {
 	/**
 	 * The node's mutable configuration
@@ -18,7 +26,7 @@ export interface Node<T, Config = unknown> {
 	readonly inputs: string[]
 
 	/**
-	 * Named output sockets
+	 * Named output sockets, in addition to the implicit default output socket
 	 */
 	readonly outputs: string[]
 
@@ -36,13 +44,13 @@ export interface Node<T, Config = unknown> {
 
 	/**
 	 * Gets an output socket
-	 * @param name The name of the output socket
+	 * @param name The name of the output socket. If undefined, this will use the implicit default output socket.
 	 */
-	output(name: string): Observable<Maybe<T>>
+	output(name?: string): Observable<Maybe<T>>
 
 	/**
 	 * Gets a current output value
-	 * @param name The output name
+	 * @param name The output name. If undefined, this will use the implicit default output socket.
 	 */
-	outputValue(name: string): Maybe<T>
+	outputValue(name?: string): Maybe<T>
 }

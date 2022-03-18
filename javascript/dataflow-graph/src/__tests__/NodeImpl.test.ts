@@ -3,7 +3,6 @@ import {
 	DivideNode,
 	Input,
 	MultiplyNode,
-	Output,
 	SubtractNode,
 	ValueNode,
 } from './numericNodes.js'
@@ -12,7 +11,7 @@ describe('The Node implementation', () => {
 	it('can define a value node', () => {
 		const two = new ValueNode(2)
 		let value = null
-		two.output(Output.Result).subscribe(v => {
+		two.output().subscribe(v => {
 			value = v
 		})
 		expect(value).toBe(2)
@@ -22,10 +21,10 @@ describe('The Node implementation', () => {
 		const three = new ValueNode(3)
 
 		const sum = new AddNode()
-		expect(sum.outputValue(Output.Result)).toBeUndefined()
-		sum.install(Input.LHS, two.output(Output.Result))
-		sum.install(Input.RHS, three.output(Output.Result))
-		expect(sum.outputValue(Output.Result)).toBe(5)
+		expect(sum.outputValue()).toBeUndefined()
+		sum.install(Input.LHS, two.output())
+		sum.install(Input.RHS, three.output())
+		expect(sum.outputValue()).toBe(5)
 	})
 
 	it('can define a nested mathematical expression', () => {
@@ -33,24 +32,24 @@ describe('The Node implementation', () => {
 		const two = new ValueNode(2)
 		const three = new ValueNode(3)
 		const sum = new AddNode()
-		sum.install(Input.LHS, two.output(Output.Result))
-		sum.install(Input.RHS, three.output(Output.Result))
+		sum.install(Input.LHS, two.output())
+		sum.install(Input.RHS, three.output())
 
 		const subtraction = new SubtractNode()
-		subtraction.install(Input.LHS, sum.output(Output.Result))
-		subtraction.install(Input.RHS, one.output(Output.Result))
+		subtraction.install(Input.LHS, sum.output())
+		subtraction.install(Input.RHS, one.output())
 
-		expect(subtraction.outputValue(Output.Result)).toBe(4)
+		expect(subtraction.outputValue()).toBe(4)
 
 		const mult = new MultiplyNode()
-		mult.install(Input.LHS, subtraction.output(Output.Result))
-		mult.install(Input.RHS, two.output(Output.Result))
-		expect(mult.outputValue(Output.Result)).toBe(8)
+		mult.install(Input.LHS, subtraction.output())
+		mult.install(Input.RHS, two.output())
+		expect(mult.outputValue()).toBe(8)
 
 		const div = new DivideNode()
-		div.install(Input.LHS, mult.output(Output.Result))
-		div.install(Input.RHS, two.output(Output.Result))
-		expect(div.outputValue(Output.Result)).toBe(4)
+		div.install(Input.LHS, mult.output())
+		div.install(Input.RHS, two.output())
+		expect(div.outputValue()).toBe(4)
 	})
 
 	it('can react to value changes', () => {
@@ -58,12 +57,12 @@ describe('The Node implementation', () => {
 		const three = new ValueNode(3)
 		const sum = new AddNode()
 
-		sum.install(Input.LHS, two.output(Output.Result))
-		sum.install(Input.RHS, three.output(Output.Result))
-		expect(sum.outputValue(Output.Result)).toBe(5)
+		sum.install(Input.LHS, two.output())
+		sum.install(Input.RHS, three.output())
+		expect(sum.outputValue()).toBe(5)
 
 		// trigger a config-based recompute
 		two.config = 3
-		expect(sum.outputValue(Output.Result)).toBe(6)
+		expect(sum.outputValue()).toBe(6)
 	})
 })

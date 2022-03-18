@@ -6,21 +6,17 @@
 
 import type { Observable } from 'rxjs';
 
-// Warning: (ae-missing-release-tag) "Maybe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @public
 export type Maybe<T> = T | undefined;
 
-// Warning: (ae-missing-release-tag) "Node" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @public
 interface Node_2<T, Config = unknown> {
     config: Maybe<Config>;
     readonly inputs: string[];
     install(name: string, socket: Observable<Maybe<T>>): void;
-    output(name: string): Observable<Maybe<T>>;
+    output(name?: string): Observable<Maybe<T>>;
     readonly outputs: string[];
-    outputValue(name: string): Maybe<T>;
+    outputValue(name?: string): Maybe<T>;
     uninstall(name: string): void;
 }
 export { Node_2 as Node }

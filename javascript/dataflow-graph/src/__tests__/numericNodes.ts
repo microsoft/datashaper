@@ -8,34 +8,32 @@ export enum Input {
 	LHS = 'lhs',
 	RHS = 'rhs',
 }
-export enum Output {
-	Result = 'val',
-}
+
 export class ValueNode extends NodeImpl<number, number> {
 	constructor(value: number) {
-		super([], [Output.Result])
-		this.emit(Output.Result, value)
+		super([])
+		this.emit(value)
 	}
 
 	protected doRecalculate(): void {
 		if (this.config != null) {
-			this.emit(Output.Result, this.config)
+			this.emit(this.config)
 		}
 	}
 }
 
 abstract class ComputeNode extends NodeImpl<number, void> {
 	constructor() {
-		super([Input.LHS, Input.RHS], [Output.Result])
+		super([Input.LHS, Input.RHS])
 	}
 
 	protected doRecalculate(): void {
 		const lhs = this.inputValue(Input.LHS)
 		const rhs = this.inputValue(Input.RHS)
 		if (lhs != null && rhs != null) {
-			this.emit(Output.Result, this.compute(lhs, rhs))
+			this.emit(this.compute(lhs, rhs))
 		} else {
-			this.emit(Output.Result, undefined)
+			this.emit(undefined)
 		}
 	}
 

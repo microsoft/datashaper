@@ -5,7 +5,9 @@
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 
-import type { Maybe,Node } from './types'
+import type { Maybe, Node } from './types'
+
+const DEFAULT_OUTPUT_NAME = 'DWC.DefaultOutput'
 
 export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	private _config: Maybe<Config>
@@ -17,10 +19,10 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 
 	public constructor(
 		public readonly inputs: string[],
-		public readonly outputs: string[],
+		public readonly outputs: string[] = [],
 	) {
 		// create new subjects for each output socket
-		outputs.forEach(o => {
+		;[...outputs, DEFAULT_OUTPUT_NAME].forEach(o => {
 			this._outputs.set(o, new BehaviorSubject<Maybe<T>>(undefined))
 		})
 	}
@@ -39,12 +41,12 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		return this._inputValues.get(name)
 	}
 
-	public output(name: string): Observable<Maybe<T>> {
+	public output(name = DEFAULT_OUTPUT_NAME): Observable<Maybe<T>> {
 		this.verifyOutputSocketName(name)
 		return this._outputs.get(name) as Observable<Maybe<T>>
 	}
 
-	public outputValue(name: string): Maybe<T> {
+	public outputValue(name = DEFAULT_OUTPUT_NAME): Maybe<T> {
 		this.verifyOutputSocketName(name)
 		return this._outputs.get(name)?.value
 	}
@@ -80,12 +82,12 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 
 	/**
 	 * Emits a new value into the named output socket
-	 * @param output The output socket name
 	 * @param value The output value
+	 * @param output The output socket name
 	 */
-	protected emit(output: string, value: Maybe<T>) {
+	protected emit(value: Maybe<T>, output = DEFAULT_OUTPUT_NAME) {
 		this.verifyOutputSocketName(output)
-		this._outputs.get(output)!.next(value)
+		this._outputs.get(output)?.next(value)
 	}
 
 	protected verifyInputSocketName(name: string): void {
@@ -95,7 +97,9 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	}
 
 	protected verifyOutputSocketName(name: string): void {
-		if (!this.outputs.some(s => s === name)) {
+		if (name === DEFAULT_OUTPUT_NAME) {
+			return
+		} else if (!this.outputs.some(s => s === name)) {
 			throw new Error(`unknown output socket name ${name}`)
 		}
 	}
