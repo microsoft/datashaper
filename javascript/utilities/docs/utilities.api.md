@@ -92,6 +92,7 @@ export class FileCollection {
     // Warning: (ae-forgotten-export) The symbol "Config" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
+    get config(): Config;
     set config(config: Config);
     // (undocumented)
     copy(): FileCollection;

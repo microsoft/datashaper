@@ -10,7 +10,7 @@ import { StripedRow } from '../renderers/index.js'
 
 /**
  *
- * @param striped
+ * @param striped -
  * @returns
  */
 export function useStripedRowsRenderer(

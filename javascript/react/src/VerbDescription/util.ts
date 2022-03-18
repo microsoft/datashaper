@@ -14,7 +14,7 @@ const MAX_ROWS = 9
  * Executes provided print function on a list to create a series of display entries.
  * Uses the max to limit how many rows are returned to print, but stringifies the entire list
  * to use as a tooltip/title.
- * @param print
+ * @param print -
  * @param others - number of other rows besides this generated list
  */
 export function createRowEntries<T>(

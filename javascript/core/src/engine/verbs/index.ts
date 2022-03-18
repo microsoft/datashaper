@@ -11,7 +11,7 @@ import { FieldAggregateOperation, JoinStrategy, Verb } from '../../types.js'
  * with as many reasonable defaults as possible.
  * TODO: if we accepted a table (or TableStore) we could do column lookups and such
  * to preselect.
- * @param verb
+ * @param verb -
  */
 export function factory(verb: Verb, input: string, output: string): Step {
 	const base = {

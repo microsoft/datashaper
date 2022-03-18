@@ -9,8 +9,8 @@ import merge from 'lodash-es/merge.js'
  * Constructs a command for listing out items with checks
  * @param list - full list of items to display
  * @param checked - subset of items to display with checkbox
- * @param onCheckChange
- * @params props - any override ICommandBarItemProps to overlay on the command
+ * @param onCheckChange -
+ * @param props - any override ICommandBarItemProps to overlay on the command
  * @returns
  */
 export function checkedItemsCommand(

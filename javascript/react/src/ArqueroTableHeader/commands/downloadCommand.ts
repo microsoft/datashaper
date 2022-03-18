@@ -9,8 +9,8 @@ import merge from 'lodash-es/merge.js'
 /**
  * Constructs a download command.
  * When clicked, will save the current table to a csv.
- * @param table
- * @param downloadFilename
+ * @param table -
+ * @param downloadFilename -
  * @returns
  */
 export function downloadCommand(

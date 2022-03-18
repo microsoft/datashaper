@@ -12,9 +12,9 @@ import { checkedItemsCommand } from './checkedItemsCommand.js'
  * Constructs a visible columns command.
  * This is a dropdown button that lists all of the
  * columns in a table, with checks next to the visible ones.
- * @param table
- * @param columns
- * @param onCheckChange
+ * @param table -
+ * @param columns -
+ * @param onCheckChange -
  * @returns
  */
 export function visibleColumnsCommand(

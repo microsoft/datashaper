@@ -1666,7 +1666,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:javascript/core"
   dependencies:
-    "@essex/scripts": ^21.0.0
+    "@essex/scripts": ^21.0.1
     "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.4.1
     "@types/lodash-es": ^4.17.6
@@ -1688,7 +1688,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/guidance@workspace:javascript/guidance"
   dependencies:
-    "@essex/scripts": ^21.0.0
+    "@essex/scripts": ^21.0.1
     "@essex/tsconfig-base": ^1.0.2
     "@types/express": ^4.17.13
     "@types/node": ^17.0.21
@@ -1705,7 +1705,7 @@ __metadata:
     "@essex/eslint-plugin": ^20.3.3
     "@essex/jest-config": ^21.0.8
     "@essex/prettier-config": ^18.0.2
-    "@essex/scripts": ^21.0.0
+    "@essex/scripts": ^21.0.1
     "@types/jest": ^27.4.1
     "@types/node": ^17.0.21
     eslint: ^8.11.0
@@ -1727,11 +1727,11 @@ __metadata:
     "@data-wrangling-components/guidance": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@essex/hooks": ^4.0.6
-    "@essex/scripts": ^21.0.0
+    "@essex/scripts": ^21.0.1
     "@essex/themed-components": ^2.1.3
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.2.5
-    "@fluentui/react": ^8.61.2
+    "@fluentui/react": ^8.62.0
     "@fluentui/react-hooks": ^8.5.3
     "@fluentui/utilities": ^8.8.1
     "@thematic/core": ^2.0.6
@@ -1789,7 +1789,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/utilities@workspace:javascript/utilities"
   dependencies:
-    "@essex/scripts": ^21.0.0
+    "@essex/scripts": ^21.0.1
     "@essex/tsconfig-base": ^1.0.2
     "@essex/vite-config": ^19.0.6
     "@types/node": ^17.0.21
@@ -1810,11 +1810,11 @@ __metadata:
     "@data-wrangling-components/react": "workspace:javascript/react"
     "@data-wrangling-components/utilities": "workspace:javascript/utilities"
     "@essex/hooks": ^4.0.6
-    "@essex/scripts": ^21.0.0
+    "@essex/scripts": ^21.0.1
     "@essex/themed-components": ^2.1.3
     "@essex/webpack-config": ^21.0.0
     "@fluentui/font-icons-mdl2": ^8.2.5
-    "@fluentui/react": ^8.61.2
+    "@fluentui/react": ^8.62.0
     "@fluentui/react-hooks": ^8.5.3
     "@fluentui/utilities": ^8.8.1
     "@thematic/core": ^2.0.6
@@ -2013,9 +2013,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/scripts@npm:^21.0.0":
-  version: 21.0.0
-  resolution: "@essex/scripts@npm:21.0.0"
+"@essex/scripts@npm:^21.0.1":
+  version: 21.0.1
+  resolution: "@essex/scripts@npm:21.0.1"
   dependencies:
     "@azure/storage-blob": ^12.9.0
     "@essex/api-extractor-config": ^2.0.0
@@ -2024,23 +2024,23 @@ __metadata:
     "@essex/shellrunner": ^20.0.9
     "@essex/swc-opts": ^20.0.10
     "@essex/webpack-config": ^21.0.0
-    "@ladle/react": ^0.8.3
-    "@microsoft/api-extractor": ^7.19.4
-    "@swc/core": 1.2.155
+    "@ladle/react": ^0.8.5
+    "@microsoft/api-extractor": ^7.19.5
+    "@swc/core": 1.2.158
     "@typescript-eslint/eslint-plugin": ^5.15.0
     "@typescript-eslint/parser": ^5.15.0
     archiver: ^5.3.0
     chalk: ^4.1.2
     chokidar: ^3.5.3
-    commander: ^9.0.0
-    debug: ^4.3.3
+    commander: ^9.1.0
+    debug: ^4.3.4
     eslint: 8.11.0
     eslint-import-resolver-node: ^0.3.6
     glob: ^7.2.0
     human-format: ^1.0.0
     lodash: ^4.17.21
     mime-types: ^2.1.35
-    prettier: ^2.5.1
+    prettier: ^2.6.0
     pretty-quick: ^3.1.3
     progress: ^2.0.3
     react: ^17.0.2
@@ -2083,7 +2083,7 @@ __metadata:
   bin:
     essex: ./lib/index.mjs
     essex-scripts: ./lib/index.mjs
-  checksum: 66425d9587b0d4555dc96be416bb87f8a99d98ef254135b0bdf23f40020d0782e42738f41caef5f5b49fead2f3eb17f9255f4129364b2e1895398e39de07d071
+  checksum: 731ffc44f92beebfb6171698d922cd9bd696963ba9a47f9b864f95840f1e78e7be89e20f034017c4f208722df4416a4b8a356bd97c91e46e89da6971b6fdd456
   languageName: node
   linkType: hard
 
@@ -2329,9 +2329,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react@npm:^8.61.2":
-  version: 8.61.2
-  resolution: "@fluentui/react@npm:8.61.2"
+"@fluentui/react@npm:^8.62.0":
+  version: 8.62.0
+  resolution: "@fluentui/react@npm:8.62.0"
   dependencies:
     "@fluentui/date-time-utilities": ^8.5.0
     "@fluentui/font-icons-mdl2": ^8.2.5
@@ -2351,7 +2351,7 @@ __metadata:
     "@types/react-dom": ">=16.8.0 <18.0.0"
     react: ">=16.8.0 <18.0.0"
     react-dom: ">=16.8.0 <18.0.0"
-  checksum: 01b9bb14246c625303f8f3674250ebcdfaf01816203ab0a92cba1ef325402e21cdc210b03e00a54951d253d38d2e6977711269fb92ebc293bc698afdab306aa9
+  checksum: 3079e62aac43d034e466bacf2bffa5e6758cda0ee5b216ff2dbfe771a28f1867d7d0a3c243e10830860caa81ec388c0c1c1aeee2b70dd8c06f2117381588615f
   languageName: node
   linkType: hard
 
@@ -2704,9 +2704,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ladle/react@npm:^0.8.3":
-  version: 0.8.4
-  resolution: "@ladle/react@npm:0.8.4"
+"@ladle/react@npm:^0.8.5":
+  version: 0.8.5
+  resolution: "@ladle/react@npm:0.8.5"
   dependencies:
     "@babel/code-frame": ^7.16.7
     "@babel/core": ^7.17.5
@@ -2743,31 +2743,31 @@ __metadata:
     react-dom: ">=16.14.0"
   bin:
     ladle: lib/cli/cli.js
-  checksum: 66eeddc38fa11565452150ac60745b65da3579c3d20b5a68bcc764f94c0907841550f8a0a2261d43ed12c2a7b01406b13b89d1cfff27562fa0e28b0f0cdb7d6b
+  checksum: ce49d6a8cce1d4d755815085cd9911d6cc64e621547426a3a36104e616f0d45e632b1f4f5b2c75c17f251bb1067821787b179ede11117018a151ceda8f9fef4f
   languageName: node
   linkType: hard
 
-"@microsoft/api-extractor-model@npm:7.15.3":
-  version: 7.15.3
-  resolution: "@microsoft/api-extractor-model@npm:7.15.3"
+"@microsoft/api-extractor-model@npm:7.15.4":
+  version: 7.15.4
+  resolution: "@microsoft/api-extractor-model@npm:7.15.4"
   dependencies:
     "@microsoft/tsdoc": 0.13.2
     "@microsoft/tsdoc-config": ~0.15.2
-    "@rushstack/node-core-library": 3.45.0
-  checksum: dfa706b1b2acac93c68afe0c7e119e45a95ab40e75b0d70fdb687ce263e22fd1a491a4f4ee1151d0ef059dfb35daef909b27f3608c67f542666623af6e953127
+    "@rushstack/node-core-library": 3.45.1
+  checksum: 9e4cce0d2575da97413c7df8a26da39ed1d73e654035f811cbc001d231650647dd0692881f46cdfd3a08b53c89589960464347050953a8dfe8f4172367104273
   languageName: node
   linkType: hard
 
-"@microsoft/api-extractor@npm:^7.19.4":
-  version: 7.19.4
-  resolution: "@microsoft/api-extractor@npm:7.19.4"
+"@microsoft/api-extractor@npm:^7.19.5":
+  version: 7.19.5
+  resolution: "@microsoft/api-extractor@npm:7.19.5"
   dependencies:
-    "@microsoft/api-extractor-model": 7.15.3
+    "@microsoft/api-extractor-model": 7.15.4
     "@microsoft/tsdoc": 0.13.2
     "@microsoft/tsdoc-config": ~0.15.2
-    "@rushstack/node-core-library": 3.45.0
-    "@rushstack/rig-package": 0.3.7
-    "@rushstack/ts-command-line": 4.10.6
+    "@rushstack/node-core-library": 3.45.1
+    "@rushstack/rig-package": 0.3.8
+    "@rushstack/ts-command-line": 4.10.7
     colors: ~1.2.1
     lodash: ~4.17.15
     resolve: ~1.17.0
@@ -2776,7 +2776,7 @@ __metadata:
     typescript: ~4.5.2
   bin:
     api-extractor: bin/api-extractor
-  checksum: 15d1749e02053a7d70b43b87067b31055995bbe80acc888016612b8d61b6788e9f2619774982f7271c9c5271b512d1340fea609e4b001ab9e2347411d3c63fa2
+  checksum: 96fa1cff560f3e8c86db89389eb7a966657164b29532d0d8973ad5313dd375d1271b1eacec66e6a449b761e79df874be96cf7dd508dc19a5a3bd30c31e5f68aa
   languageName: node
   linkType: hard
 
@@ -2914,9 +2914,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rushstack/node-core-library@npm:3.45.0":
-  version: 3.45.0
-  resolution: "@rushstack/node-core-library@npm:3.45.0"
+"@rushstack/node-core-library@npm:3.45.1":
+  version: 3.45.1
+  resolution: "@rushstack/node-core-library@npm:3.45.1"
   dependencies:
     "@types/node": 12.20.24
     colors: ~1.2.1
@@ -2927,29 +2927,29 @@ __metadata:
     semver: ~7.3.0
     timsort: ~0.3.0
     z-schema: ~5.0.2
-  checksum: 1dc9dd7a042b33d891d4174369f8a63e70c76a2a502ef0a2d49993639d9722ff34eb149da7f06cd16ad069aa0d6045df8df9be27ab38fdad0fbc0349787d08b3
+  checksum: 2001e1acda14e75dc3cc4aa988c2ec9609c2ed7a59ef27a5b97ce9a0380c534ad9eb96074821a52e52e34c06cc1f4a011c15f6e5d17bbf830430e739c6d185ce
   languageName: node
   linkType: hard
 
-"@rushstack/rig-package@npm:0.3.7":
-  version: 0.3.7
-  resolution: "@rushstack/rig-package@npm:0.3.7"
+"@rushstack/rig-package@npm:0.3.8":
+  version: 0.3.8
+  resolution: "@rushstack/rig-package@npm:0.3.8"
   dependencies:
     resolve: ~1.17.0
     strip-json-comments: ~3.1.1
-  checksum: 3dceb4dbed159a9c54f97d91a38a4f0ec3219d9e33c3f3cad903a56bc20385849749b460168687334611d3af7bf210da05d794af97c665dfbf5b95aba56dd3cc
+  checksum: 375788eae1c18fa4807bbe96541ebddc65bcc44113f186fae2cfbf0b355deb376e20fa8a014f40a6babdcde86d446234dcbaf5d3df4fdca5bf196ec5d4c41f0b
   languageName: node
   linkType: hard
 
-"@rushstack/ts-command-line@npm:4.10.6":
-  version: 4.10.6
-  resolution: "@rushstack/ts-command-line@npm:4.10.6"
+"@rushstack/ts-command-line@npm:4.10.7":
+  version: 4.10.7
+  resolution: "@rushstack/ts-command-line@npm:4.10.7"
   dependencies:
     "@types/argparse": 1.0.38
     argparse: ~1.0.9
     colors: ~1.2.1
     string-argv: ~0.3.1
-  checksum: a618104fa5076fa1d67163638d6741784dc298fc4768a126c9d0cc17801baca903ed712b42cd3f530ca25402d219bdfa1c880ed0e82d3b0a419c1cbd02589d9b
+  checksum: 0c57867e5ea14b9296db403c2979995fe4bdeae3787331fc2d8faa18ee612b5fbcf989afcf5e30bc7f01cfe62003d451b29fc65fdda0790b95f3aacd72d41918
   languageName: node
   linkType: hard
 
@@ -2999,9 +2999,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-android-arm-eabi@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-android-arm-eabi@npm:1.2.158"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
 "@swc/core-android-arm64@npm:1.2.155":
   version: 1.2.155
   resolution: "@swc/core-android-arm64@npm:1.2.155"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@swc/core-android-arm64@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-android-arm64@npm:1.2.158"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -3013,9 +3027,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-darwin-arm64@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-darwin-arm64@npm:1.2.158"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@swc/core-darwin-x64@npm:1.2.155":
   version: 1.2.155
   resolution: "@swc/core-darwin-x64@npm:1.2.155"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@swc/core-darwin-x64@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-darwin-x64@npm:1.2.158"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -3027,9 +3055,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-freebsd-x64@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-freebsd-x64@npm:1.2.158"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@swc/core-linux-arm-gnueabihf@npm:1.2.155":
   version: 1.2.155
   resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.155"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-arm-gnueabihf@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.158"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -3041,10 +3083,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-linux-arm64-gnu@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.2.158"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@swc/core-linux-arm64-musl@npm:1.2.155":
   version: 1.2.155
   resolution: "@swc/core-linux-arm64-musl@npm:1.2.155"
   conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-arm64-musl@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-linux-arm64-musl@npm:1.2.158"
+  conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
@@ -3055,6 +3111,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-linux-x64-gnu@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-linux-x64-gnu@npm:1.2.158"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@swc/core-linux-x64-musl@npm:1.2.155":
   version: 1.2.155
   resolution: "@swc/core-linux-x64-musl@npm:1.2.155"
@@ -3062,9 +3125,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-linux-x64-musl@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-linux-x64-musl@npm:1.2.158"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
 "@swc/core-win32-arm64-msvc@npm:1.2.155":
   version: 1.2.155
   resolution: "@swc/core-win32-arm64-msvc@npm:1.2.155"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@swc/core-win32-arm64-msvc@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.2.158"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -3076,9 +3153,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-win32-ia32-msvc@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.2.158"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "@swc/core-win32-x64-msvc@npm:1.2.155":
   version: 1.2.155
   resolution: "@swc/core-win32-x64-msvc@npm:1.2.155"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@swc/core-win32-x64-msvc@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core-win32-x64-msvc@npm:1.2.158"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -3130,6 +3221,56 @@ __metadata:
   bin:
     swcx: run_swcx.js
   checksum: 52ff426baba488edcb562a7eaaad0042ee06c94197b0d95ce388375c0c8b5367b0e5851017f544607322fd5f8b2454dd7622d8b97af2aa7adc44efa222c5f605
+  languageName: node
+  linkType: hard
+
+"@swc/core@npm:1.2.158":
+  version: 1.2.158
+  resolution: "@swc/core@npm:1.2.158"
+  dependencies:
+    "@swc/core-android-arm-eabi": 1.2.158
+    "@swc/core-android-arm64": 1.2.158
+    "@swc/core-darwin-arm64": 1.2.158
+    "@swc/core-darwin-x64": 1.2.158
+    "@swc/core-freebsd-x64": 1.2.158
+    "@swc/core-linux-arm-gnueabihf": 1.2.158
+    "@swc/core-linux-arm64-gnu": 1.2.158
+    "@swc/core-linux-arm64-musl": 1.2.158
+    "@swc/core-linux-x64-gnu": 1.2.158
+    "@swc/core-linux-x64-musl": 1.2.158
+    "@swc/core-win32-arm64-msvc": 1.2.158
+    "@swc/core-win32-ia32-msvc": 1.2.158
+    "@swc/core-win32-x64-msvc": 1.2.158
+  dependenciesMeta:
+    "@swc/core-android-arm-eabi":
+      optional: true
+    "@swc/core-android-arm64":
+      optional: true
+    "@swc/core-darwin-arm64":
+      optional: true
+    "@swc/core-darwin-x64":
+      optional: true
+    "@swc/core-freebsd-x64":
+      optional: true
+    "@swc/core-linux-arm-gnueabihf":
+      optional: true
+    "@swc/core-linux-arm64-gnu":
+      optional: true
+    "@swc/core-linux-arm64-musl":
+      optional: true
+    "@swc/core-linux-x64-gnu":
+      optional: true
+    "@swc/core-linux-x64-musl":
+      optional: true
+    "@swc/core-win32-arm64-msvc":
+      optional: true
+    "@swc/core-win32-ia32-msvc":
+      optional: true
+    "@swc/core-win32-x64-msvc":
+      optional: true
+  bin:
+    swcx: run_swcx.js
+  checksum: 36d87317c9fbd6a402862f198572320ee07a1f109a0baf53bd3b3a3146e531958c0c17561b2c4136180881ebe7c23563dbfad3ad2501468f49c22ff12b241c13
   languageName: node
   linkType: hard
 
@@ -5727,10 +5868,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "commander@npm:9.0.0"
-  checksum: 15066e433d528315ded8261d16bc600d1f3c5671c75021e685ae67e4d62f7551243ff28411b28dc0a6f8b23c2a0f033550ec6f3e66bdf9d11a4fdc2d33dd9802
+"commander@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "commander@npm:9.1.0"
+  checksum: 1428319b6b90600a813c28fe1e413996d1be99bf01afe9ebc4a9fc6f8077ff3e75f11809b2d2f85bd9b13d7cb592154278e9bbfdb16dc5843cef97bcba6a9cfd
   languageName: node
   linkType: hard
 
@@ -6310,6 +6451,18 @@ __metadata:
   dependencies:
     ms: ^2.1.1
   checksum: b3d8c5940799914d30314b7c3304a43305fd0715581a919dacb8b3176d024a782062368405b47491516d2091d6462d4d11f2f4974a405048094f8bfebfa3071c
+  languageName: node
+  linkType: hard
+
+"debug@npm:^4.3.4":
+  version: 4.3.4
+  resolution: "debug@npm:4.3.4"
+  dependencies:
+    ms: 2.1.2
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: 3dbad3f94ea64f34431a9cbf0bafb61853eda57bff2880036153438f50fb5a84f27683ba0d8e5426bf41a8c6ff03879488120cf5b3a761e77953169c0600a708
   languageName: node
   linkType: hard
 
