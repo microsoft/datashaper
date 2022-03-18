@@ -50,8 +50,8 @@ export class DefaultPipeline implements Pipeline {
 	}
 	/**
 	 * Creates a new Step with a starter template based on its type
-	 * @param type
-	 * @param subtype
+	 * @param type -
+	 * @param subtype -
 	 */
 	create(verb: Verb): Step[] {
 		const index = this.count

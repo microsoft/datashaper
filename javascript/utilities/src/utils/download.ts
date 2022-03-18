@@ -7,9 +7,9 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 /**
  * Downloads a copy of a file in the specified format
- * @param filename
- * @param type
- * @param data
+ * @param filename -
+ * @param type -
+ * @param data -
  */
 export function download(filename: string, type: string, data: Blob): void {
 	const dataURI = URL.createObjectURL(data)
@@ -22,8 +22,8 @@ export function download(filename: string, type: string, data: Blob): void {
 
 /**
  * Downloads a csv copy of a table
- * @param table
- * @param filename
+ * @param table -
+ * @param filename -
  */
 export function downloadTable(
 	table: ColumnTable,
