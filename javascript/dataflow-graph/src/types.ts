@@ -32,25 +32,25 @@ export interface Node<T, Config = unknown> {
 
 	/**
 	 * Wires an input socket to a stream
-	 * @param name the name of the input socket
+	 * @param name - the name of the input socket
 	 */
 	install(name: string, socket: Observable<Maybe<T>>): void
 
 	/**
 	 * Clear an input socket
-	 * @param name
+	 * @param name - The input socket name
 	 */
 	uninstall(name: string): void
 
 	/**
 	 * Gets an output socket
-	 * @param name The name of the output socket. If undefined, this will use the implicit default output socket.
+	 * @param name - The name of the output socket. If undefined, this will use the implicit default output socket.
 	 */
 	output(name?: string): Observable<Maybe<T>>
 
 	/**
 	 * Gets a current output value
-	 * @param name The output name. If undefined, this will use the implicit default output socket.
+	 * @param name - The output name. If undefined, this will use the implicit default output socket.
 	 */
 	outputValue(name?: string): Maybe<T>
 }
