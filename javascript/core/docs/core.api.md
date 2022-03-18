@@ -69,6 +69,24 @@ export enum BinStrategy {
     FixedWidth = "fixed width"
 }
 
+// Warning: (ae-missing-release-tag) "BooleanComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum BooleanComparisonOperator {
+    // (undocumented)
+    AND = "and",
+    // (undocumented)
+    NAND = "nand",
+    // (undocumented)
+    NOR = "nor",
+    // (undocumented)
+    NOT = "not",
+    // (undocumented)
+    OR = "or",
+    // (undocumented)
+    XOR = "xor"
+}
+
 // Warning: (ae-missing-release-tag) "Category" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

@@ -11,12 +11,12 @@ import { compareAll } from '../util/index.js'
  * Executes an arquero derive where the output is a 1 or 0.
  */
 export async function binarize(
-	{ input, output, args: { column, criteria, to } }: BinarizeStep,
+	{ input, output, args: { column, criteria, logical, to } }: BinarizeStep,
 	store: TableStore,
 ): Promise<TableContainer> {
 	const inputTable = await store.table(input)
 
-	const expr = compareAll(column, criteria)
+	const expr = compareAll(column, criteria, logical)
 
 	const dArgs = {
 		[to]: expr,

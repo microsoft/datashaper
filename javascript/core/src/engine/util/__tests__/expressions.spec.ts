@@ -3,11 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import {
+	BooleanComparisonOperator,
+	BooleanLogicalOperator,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../../types.js'
-import { compare } from '../util/expressions.js'
+} from '../../../types.js'
+import { compare, compareAll } from '../expressions.js'
 
 describe('test-expressions', () => {
 	test('numeric value equals', () => {
@@ -365,7 +367,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'item',
 			'table',
-			StringComparisonOperator.Equal,
+			StringComparisonOperator.Equals,
 			FilterCompareType.Value,
 		)
 
@@ -839,7 +841,7 @@ describe('test-expressions', () => {
 		const { expr } = compare(
 			'item',
 			'item2',
-			StringComparisonOperator.Equal,
+			StringComparisonOperator.Equals,
 			FilterCompareType.Column,
 		)
 
@@ -914,8 +916,8 @@ describe('test-expressions', () => {
 	test('boolean value with equals', () => {
 		const { expr } = compare(
 			'flag',
-			'true',
-			NumericComparisonOperator.Equals,
+			true,
+			BooleanComparisonOperator.Equals,
 			FilterCompareType.Value,
 		)
 
@@ -935,8 +937,8 @@ describe('test-expressions', () => {
 	test('boolean value with not equals', () => {
 		const { expr } = compare(
 			'flag',
-			'true',
-			NumericComparisonOperator.NotEqual,
+			true,
+			BooleanComparisonOperator.NotEqual,
 			FilterCompareType.Value,
 		)
 
@@ -951,5 +953,95 @@ describe('test-expressions', () => {
 				flag: false,
 			}),
 		).toBe(1)
+	})
+})
+
+describe('compareAll boolean combination logic', () => {
+	describe('boolean OR', () => {
+		test('one input', () => {
+			const { expr } = compareAll('flag', [
+				{
+					value: true,
+					type: FilterCompareType.Value,
+					operator: BooleanComparisonOperator.Equals,
+				},
+			])
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('two inputs', () => {
+			// second value doesn't match, but OR is fine
+			const { expr } = compareAll('flag', [
+				{
+					value: true,
+					type: FilterCompareType.Value,
+					operator: BooleanComparisonOperator.Equals,
+				},
+				{
+					value: false,
+					type: FilterCompareType.Value,
+					operator: BooleanComparisonOperator.Equals,
+				},
+			])
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+	})
+
+	describe('boolean AND', () => {
+		test('one input', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.AND,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('two inputs', () => {
+			// second value doesn't match, AND should fail
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.AND,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(0)
+		})
 	})
 })

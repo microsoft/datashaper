@@ -92,7 +92,7 @@ export enum NumericComparisonOperator {
 }
 
 export enum StringComparisonOperator {
-	Equal = 'equals',
+	Equals = 'equals',
 	NotEqual = 'is not equal',
 	Contains = 'contains',
 	StartsWith = 'starts with',
@@ -100,6 +100,24 @@ export enum StringComparisonOperator {
 	IsEmpty = 'is empty',
 	IsNotEmpty = 'is not empty',
 	RegularExpression = 'regex',
+}
+
+export enum BooleanComparisonOperator {
+	Equals = 'equals',
+	NotEqual = 'is not equal',
+	IsTrue = 'is true',
+	IsFalse = 'is false',
+	IsEmpty = 'is empty',
+	IsNotEmpty = 'is not empty',
+}
+
+export enum BooleanLogicalOperator {
+	OR = 'or',
+	AND = 'and',
+	NOT = 'not',
+	NOR = 'nor',
+	NAND = 'nand',
+	XOR = 'xor',
 }
 
 export enum SetOp {

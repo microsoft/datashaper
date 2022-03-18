@@ -4,6 +4,7 @@
  */
 import type { Criterion } from '@data-wrangling-components/core'
 import {
+	BooleanComparisonOperator,
 	DataType,
 	FilterCompareType,
 	NumericComparisonOperator,
@@ -41,7 +42,8 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 						...criterion,
 						operator: opt?.key as
 							| StringComparisonOperator
-							| NumericComparisonOperator,
+							| NumericComparisonOperator
+							| BooleanComparisonOperator,
 					})
 			},
 			[criterion, onChange],
@@ -66,31 +68,26 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		const type = useMemo(() => tps[column], [tps, column])
 
 		const operatorDropdown = useMemo(() => {
+			const shared = {
+				required: true,
+				label: 'Function',
+				selectedKey: criterion.operator,
+				onChange: handleOpChange,
+				styles: leftStyles,
+			}
 			if (column) {
 				if (type === DataType.String) {
 					return (
-						<DropdownContainer>
-							<EnumDropdown
-								required
-								label={'Function'}
-								enumeration={StringComparisonOperator}
-								selectedKey={criterion.operator}
-								onChange={handleOpChange}
-								styles={leftStyles}
-							/>
-						</DropdownContainer>
+						<EnumDropdown enumeration={StringComparisonOperator} {...shared} />
+					)
+				} else if (type === DataType.Boolean) {
+					return (
+						<EnumDropdown enumeration={BooleanComparisonOperator} {...shared} />
 					)
 				}
 			}
 			return (
-				<EnumDropdown
-					required
-					enumeration={NumericComparisonOperator}
-					label={'Function'}
-					selectedKey={criterion.operator}
-					onChange={handleOpChange}
-					styles={leftStyles}
-				/>
+				<EnumDropdown enumeration={NumericComparisonOperator} {...shared} />
 			)
 		}, [type, column, criterion, handleOpChange])
 
@@ -100,7 +97,11 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				operator === NumericComparisonOperator.IsEmpty ||
 				operator === NumericComparisonOperator.IsNotEmpty ||
 				operator === StringComparisonOperator.IsEmpty ||
-				operator === StringComparisonOperator.IsNotEmpty
+				operator === StringComparisonOperator.IsNotEmpty ||
+				operator === BooleanComparisonOperator.IsTrue ||
+				operator === BooleanComparisonOperator.IsFalse ||
+				operator === BooleanComparisonOperator.IsEmpty ||
+				operator === BooleanComparisonOperator.IsNotEmpty
 			)
 		}, [criterion])
 
@@ -115,6 +116,8 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					return 'text or column'
 				case DataType.Number:
 					return 'number or column'
+				case DataType.Boolean:
+					return 'boolean or column'
 			}
 		}, [type])
 
@@ -154,11 +157,6 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 )
 
 const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-`
-
-const DropdownContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 `

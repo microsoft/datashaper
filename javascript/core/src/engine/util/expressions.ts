@@ -7,29 +7,50 @@ import type { Op } from 'arquero/dist/types/op/op'
 
 import type { Criterion } from '../../types.js'
 import {
+	BooleanComparisonOperator,
+	BooleanLogicalOperator,
 	FieldAggregateOperation,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 	WindowFunction,
 } from '../../types.js'
+import { bool } from './data-types.js'
 import type { CompareWrapper } from './types.js'
 
 export function compareAll(
 	column: string,
 	criteria: Criterion[],
+	logical = BooleanLogicalOperator.OR,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
 		const left = d[column]!
-		// this is just a big OR, so any match is success
-		const some = criteria.some(filter => {
+		const comparisons = criteria.map(filter => {
 			const { value, operator, type } = filter
 			const right =
 				type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
 			return compareFunction(left, right, operator)
 		})
-		return some ? 1 : 0
+		return evaluateBoolean(comparisons, logical)
 	}) as CompareWrapper
+}
+
+function evaluateBoolean(
+	comparisons: (1 | 0)[],
+	logical: BooleanLogicalOperator,
+): 1 | 0 {
+	let match: 0 | 1 = 0
+	switch (logical) {
+		case BooleanLogicalOperator.OR:
+			match = comparisons.some(c => c === 1) ? 1 : 0
+			break
+		case BooleanLogicalOperator.AND:
+			match = comparisons.every(c => c === 1) ? 1 : 0
+			break
+		default:
+			throw new Error()
+	}
+	return match
 }
 
 /**
@@ -46,7 +67,10 @@ export function compareAll(
 export function compare(
 	column: string,
 	value: string | number | boolean,
-	operator: NumericComparisonOperator | StringComparisonOperator,
+	operator:
+		| NumericComparisonOperator
+		| StringComparisonOperator
+		| BooleanComparisonOperator,
 	type: FilterCompareType,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
@@ -61,27 +85,27 @@ export function compare(
 function compareFunction(
 	left: string | number | boolean,
 	right: string | number | boolean,
-	operator: NumericComparisonOperator | StringComparisonOperator,
+	operator:
+		| NumericComparisonOperator
+		| StringComparisonOperator
+		| BooleanComparisonOperator,
 ): 0 | 1 {
 	// start with the empty operators, because typeof won't work...
 	if (
 		operator === NumericComparisonOperator.IsEmpty ||
-		operator === StringComparisonOperator.IsEmpty
+		operator === StringComparisonOperator.IsEmpty ||
+		operator === BooleanComparisonOperator.IsEmpty
 	) {
 		return isEmpty(left)
 	} else if (
 		operator === NumericComparisonOperator.IsNotEmpty ||
-		operator === StringComparisonOperator.IsNotEmpty
+		operator === StringComparisonOperator.IsNotEmpty ||
+		operator === BooleanComparisonOperator.IsNotEmpty
 	) {
 		const empty = isEmpty(left)
 		return empty === 1 ? 0 : 1
-	}
-	// invalid values by default do not match the filter if they weren't explicitly expected
-	else if (isEmpty(left) || isEmpty(right)) {
-		return 0
 	} else if (typeof left === 'number') {
 		const num = +right
-		// just turn all the comparisons into numeric based on type so we can simplify the switches
 		return compareValues(left, num, operator as NumericComparisonOperator)
 	} else if (typeof left === 'string') {
 		return compareStrings(
@@ -89,12 +113,9 @@ function compareFunction(
 			`${right}`,
 			operator as StringComparisonOperator,
 		)
-		// TODO: boolean enum instead of reusing numeric ops
 	} else if (typeof left === 'boolean') {
-		const l = left === true ? 1 : 0
-		// any non-empty string is a bool, so force true/false
-		const bool = right === 'true' ? 1 : 0
-		return compareValues(l, bool, operator as NumericComparisonOperator)
+		const r = bool(right)
+		return compareBooleans(left, r, operator as BooleanComparisonOperator)
 	}
 	return 0
 }
@@ -125,15 +146,14 @@ function compareStrings(
 			return op.match(ll, new RegExp(rl, 'gi'), 0) ? 1 : 0
 		case StringComparisonOperator.EndsWith:
 			return op.endswith(ll, rl, ll.length) ? 1 : 0
-		case StringComparisonOperator.Equal:
+		case StringComparisonOperator.Equals:
 			return ll.localeCompare(rl) === 0 ? 1 : 0
 		case StringComparisonOperator.NotEqual:
 			return ll.localeCompare(rl) !== 0 ? 1 : 0
 		case StringComparisonOperator.StartsWith:
 			return op.startswith(ll, rl, 0) ? 1 : 0
-		case StringComparisonOperator.IsEmpty:
 		default:
-			throw new Error(`Unsupported operator: [${operator}]`)
+			throw new Error(`Unsupported string comparison operator: [${operator}]`)
 	}
 }
 
@@ -155,13 +175,27 @@ function compareValues(
 			return left > right ? 1 : 0
 		case NumericComparisonOperator.LessThan:
 			return left < right ? 1 : 0
-		case NumericComparisonOperator.IsEmpty:
-			if (left === null || left === undefined || isNaN(left)) {
-				return 1
-			}
-			return 0
 		default:
-			throw new Error(`Unsupported operator: [${operator}]`)
+			throw new Error(`Unsupported numeric comparison operator: [${operator}]`)
+	}
+}
+
+function compareBooleans(
+	left: boolean,
+	right: boolean,
+	operator: BooleanComparisonOperator,
+): 1 | 0 {
+	switch (operator) {
+		case BooleanComparisonOperator.Equals:
+			return left === right ? 1 : 0
+		case BooleanComparisonOperator.NotEqual:
+			return left !== right ? 1 : 0
+		case BooleanComparisonOperator.IsTrue:
+			return left === true ? 1 : 0
+		case BooleanComparisonOperator.IsFalse:
+			return left === false ? 1 : 0
+		default:
+			throw new Error(`Unsupported boolean comparison operator: [${operator}]`)
 	}
 }
 

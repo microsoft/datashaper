@@ -15,7 +15,7 @@ import { compareAll } from '../util/index.js'
  * @returns
  */
 export async function filter(
-	{ input, output, args: { column, criteria } }: FilterStep,
+	{ input, output, args: { column, criteria, logical } }: FilterStep,
 	store: TableStore,
 ): Promise<TableContainer> {
 	const inputTable = await store.table(input)
