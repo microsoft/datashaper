@@ -1688,7 +1688,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/dataflow-graph@workspace:javascript/dataflow-graph"
   dependencies:
-    "@essex/scripts": ^21.0.0
+    "@essex/scripts": ^21.0.1
     "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.4.1
     rxjs: ^7.5.5

@@ -12,7 +12,7 @@
 		"build": "essex build --docs"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.0",
+		"@essex/scripts": "^21.0.1",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/jest": "^27.4.1"
 	},
