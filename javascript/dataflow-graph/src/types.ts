@@ -16,6 +16,11 @@ export type Maybe<T> = T | undefined
  */
 export interface Node<T, Config = unknown> {
 	/**
+	 * A unique identifier for this node. The default is a new UUID
+	 */
+	id: string
+
+	/**
 	 * The node's mutable configuration
 	 */
 	config: Maybe<Config>
