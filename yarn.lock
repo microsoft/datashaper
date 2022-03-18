@@ -1691,6 +1691,7 @@ __metadata:
     "@essex/scripts": ^21.0.0
     "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.4.1
+    rxjs: ^7.5.5
   languageName: unknown
   linkType: soft
 

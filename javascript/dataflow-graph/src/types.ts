@@ -2,91 +2,46 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export type Unsubscribe = () => void
-export type Handler<T> = (arg: T) => void
+import type { Observable } from 'rxjs'
 
-export interface StateChangePayload<T> {
-	state: T
-}
-export interface DataChangePayload<T> {
-	data: T
-}
+export type Maybe<T> = T | undefined
 
-export interface ErrorState {
-	message: string
-	error?: Error
-}
-
-/**
- * The states a processing node can be in.
- */
-export enum NodeState {
-	/**
-	 * The node has been created, but has not been configured for processing.
-	 */
-	Unconfigured = 'unconfigured',
-
-	/**
-	 * The node has been configured and is ready for processing, but does not yet have data.
-	 */
-	Ready = 'ready',
-
-	/**
-	 * The node has data
-	 */
-	Hydrated = 'hydrated',
-
-	/**
-	 * The node is in an error state
-	 */
-	Error = 'error',
-}
-
-export interface Node<Data = unknown, Config = unknown> {
+export interface Node<T, Config = unknown> {
 	/**
 	 * The node's mutable configuration
 	 */
-	config: Config | undefined
-
-	readonly error: ErrorState | undefined
-	readonly data: Data | undefined
-	readonly state: NodeState
+	config: Maybe<Config>
 
 	/**
 	 * Sockets represent named processing node inputs
 	 */
-	readonly socketNames: string[]
-
+	readonly inputs: string[]
 	/**
-	 *
-	 * @param name The socket name to use
-	 * @param node The upstream processing node to wire in
-	 * @throws if the socket name is unknown
+	 * Named output sockets
 	 */
-	install(name: string, node: Node<Data>): void
+	readonly outputs: string[]
 
 	/**
-	 * Clears a socket by name
-	 * @param name The socket name to clear
+	 * Gets an input socket
+	 * @param name the name of the input socket
+	 */
+	install(name: string, socket: Observable<Maybe<T>>): void
+
+	/**
+	 * Clear an input socket
+	 * @param name
 	 */
 	uninstall(name: string): void
 
 	/**
-	 * Subscribe to events for when the state changes
-	 * @param handler the event handler
+	 * Gets an output socket
+	 * @param name The name of the output socket
 	 */
-	onStateChange(handler: Handler<StateChangePayload<NodeState>>): Unsubscribe
+	output(name: string): Observable<Maybe<T>>
 
 	/**
-	 * Subscribe to events for when the data changes
-	 * @param handler the event handler
+	 * Gets the current output value
+	 * @param name The output name
 	 */
-	onDataChange(
-		handler: Handler<DataChangePayload<Data | undefined>>,
-	): Unsubscribe
-
-	/**
-	 * Subscribe to events for when the error-state changes
-	 */
-	onErrorChange(handler: Handler<ErrorState | undefined>): Unsubscribe
+	outputValue(name: string): Maybe<T>
 }

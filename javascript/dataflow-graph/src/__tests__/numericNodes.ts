@@ -3,47 +3,39 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { NodeImpl } from '../NodeImpl.js'
-import { NodeState } from '../types.js'
 
-export enum Socket {
+export enum Input {
 	LHS = 'lhs',
 	RHS = 'rhs',
 }
+export enum Output {
+	Result = 'val',
+}
 export class ValueNode extends NodeImpl<number, number> {
 	constructor(value: number) {
-		super([])
-		this.data = value
-		this.state = NodeState.Hydrated
+		super([], [Output.Result])
+		this.emit(Output.Result, value)
 	}
 
-	protected performRecalculation(): void {
+	protected doRecalculate(): void {
 		if (this.config != null) {
-			this.data = this.config
+			this.emit(Output.Result, this.config)
 		}
 	}
 }
 
 abstract class ComputeNode extends NodeImpl<number, void> {
 	constructor() {
-		super([Socket.LHS, Socket.RHS])
+		super([Input.LHS, Input.RHS], [Output.Result])
 	}
 
-	protected performRecalculation(): void {
-		const lhs = this.sockets.get(Socket.LHS)
-		const rhs = this.sockets.get(Socket.RHS)
-		if (lhs == null || rhs == null) {
-			this.state = NodeState.Unconfigured
-			this.data = undefined
+	protected doRecalculate(): void {
+		const lhs = this.inputValue(Input.LHS)
+		const rhs = this.inputValue(Input.RHS)
+		if (lhs != null && rhs != null) {
+			this.emit(Output.Result, this.compute(lhs, rhs))
 		} else {
-			const lhsData = lhs.data
-			const rhsData = rhs.data
-			if (lhsData == null || rhsData == null) {
-				this.state = NodeState.Ready
-				this.data = undefined
-			} else {
-				this.state = NodeState.Hydrated
-				this.data = this.compute(lhsData, rhsData)
-			}
+			this.emit(Output.Result, undefined)
 		}
 	}
 
