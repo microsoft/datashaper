@@ -93,7 +93,7 @@ function filterByTag(tag: Tags) {
 
 /**
  * Indicates whether this step requires an input table.
- * @param step
+ * @param step -
  * @returns
  */
 export function isInputTableStep(step: Step): boolean {
@@ -102,7 +102,7 @@ export function isInputTableStep(step: Step): boolean {
 
 /**
  * Indicates whether the supplied step requires a single input column.
- * @param step
+ * @param step -
  * @returns
  */
 export function isInputColumnStep(step: Step): boolean {
@@ -111,7 +111,7 @@ export function isInputColumnStep(step: Step): boolean {
 
 /**
  * Indicates whether the supplied step requires a single output column.
- * @param step
+ * @param step -
  * @returns
  */
 export function isOutputColumnStep(step: Step): boolean {
@@ -120,7 +120,7 @@ export function isOutputColumnStep(step: Step): boolean {
 
 /**
  * Indicates whether this step can only operate on numeric values.
- * @param step
+ * @param step -
  * @returns
  */
 export function isNumericInputStep(step: Step): boolean {
@@ -135,7 +135,7 @@ function isTagged(step: Step, verbs: Verb[]): boolean {
  * These are steps that specifically operate on an input/output column only.
  * In other words, they do not cause a change in the number of rows in a table,
  * such as an aggregate or filter would, and only replace or add one column.
- * @param filter
+ * @param filter -
  * @returns
  */
 export function columnTransformVerbs(
@@ -147,7 +147,7 @@ export function columnTransformVerbs(
 
 /**
  * Returns all verbs, subject to optional filter.
- * @param filter
+ * @param filter -
  * @returns
  */
 export function verbs(filter: (verb: Verb) => boolean = () => true): Verb[] {

@@ -12,7 +12,7 @@ import type { HOCFunction, StepComponentProps } from './types.js'
 
 /**
  * Higher order component generator to wrap a Step in the input table dropdown.
- * @param label optional label to use for the dropdown instead of the default.
+ * @param label - optional label to use for the dropdown instead of the default.
  * @returns
  */
 export const withInputTableDropdown = (

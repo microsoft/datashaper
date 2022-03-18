@@ -9,7 +9,7 @@ import { useMemo } from 'react'
 
 /**
  * This hooks just centralizes default command item styling for the header
- * @param commands
+ * @param commands -
  * @returns
  */
 export function useCommands(
