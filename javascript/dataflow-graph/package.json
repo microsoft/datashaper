@@ -2,6 +2,7 @@
 	"name": "@data-wrangling-components/dataflow-graph",
 	"version": "0.0.1",
 	"type": "module",
+	"main": "src/index.ts",
 	"publishConfig": {
 		"main": "dist/lib/index.js",
 		"types": "dist/lib/index.d.ts"

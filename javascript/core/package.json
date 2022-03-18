@@ -10,7 +10,7 @@
 	"sideEffects": false,
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build --docs"
+		"build": "essex build --docs --skipExportCheck"
 	},
 	"dependencies": {
 		"@data-wrangling-components/dataflow-graph": "workspace:^",
