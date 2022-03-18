@@ -14,12 +14,6 @@ import type { DataType, MergeArgs } from '../../types.js'
 export const merge = makeStepFunction(doMerge)
 export const mergeNode = makeStepNode(doMerge)
 
-/**
- * Executes an arquero merge operation.
- * @param step
- * @param store
- * @returns
- */
 function doMerge(
 	input: ColumnTable,
 	{ columns = [], strategy, to, delimiter = '' }: MergeArgs,

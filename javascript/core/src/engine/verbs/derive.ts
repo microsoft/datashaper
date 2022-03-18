@@ -16,9 +16,6 @@ export const deriveNode = makeStepNode(doDerive)
 /**
  * Executes an arquero derive.
  * This basically just supports math operations between two columns.
- * @param step
- * @param store
- * @returns
  */
 function doDerive(
 	input: ColumnTable,

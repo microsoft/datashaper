@@ -11,13 +11,6 @@ import { singleExpression } from '../util/index.js'
 export const pivot = makeStepFunction(doPivot)
 export const pivotNode = makeStepNode(doPivot)
 
-/**
- * Executes an arquero fold operation. This creates two new columns:
- * one with the column name as key, the other with the row value.
- * @param step
- * @param store
- * @returns
- */
 function doPivot(input: ColumnTable, { key, value, operation }: PivotArgs) {
 	const expr = singleExpression(value, operation)
 	return input.pivot(key, { [value]: expr })

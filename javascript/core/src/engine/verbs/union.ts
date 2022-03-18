@@ -7,12 +7,6 @@ import type { Step, TableContainer } from '../../types.js'
 import { SetOp } from '../../types.js'
 import { set } from '../util/index.js'
 
-/**
- * Executes an arquero table union.
- * @param step
- * @param store
- * @returns
- */
 export async function union(
 	step: Step,
 	store: TableStore,

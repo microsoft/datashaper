@@ -11,12 +11,6 @@ import type { ExprFunctionMap } from './types.js'
 export const impute = makeStepFunction(doImpute)
 export const imputeNode = makeStepNode(doImpute)
 
-/**
- * Executes an arquero impute
- * @param step
- * @param store
- * @returns
- */
 function doImpute(input: ColumnTable, { value, column }: ImputeArgs) {
 	const dArgs: ExprFunctionMap = {
 		[column]: (_d: any, $: any) => $.value,

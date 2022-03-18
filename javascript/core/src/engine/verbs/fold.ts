@@ -14,9 +14,6 @@ export const foldNode = makeStepNode(doFold)
 /**
  * Executes an arquero fold operation. This creates two new columns:
  * one with the column name as key, the other with the row value.
- * @param step
- * @param store
- * @returns
  */
 function doFold(input: ColumnTable, { columns, to }: FoldArgs) {
 	return input.fold(columns, { as: to })

@@ -7,12 +7,6 @@ import type { Step, TableContainer } from '../../types.js'
 import { SetOp } from '../../types.js'
 import { set } from '../util/index.js'
 
-/**
- * Executes an arquero table intersect.
- * @param step
- * @param store
- * @returns
- */
 export async function intersect(
 	step: Step,
 	store: TableStore,

@@ -16,9 +16,6 @@ export const fillNode = makeStepNode(doFill)
  * This is intended to create an entirely new column.
  * TODO: fill with function outputs such as op.row_number or a column copy.
  * This could be merged with derive eventually.
- * @param step
- * @param store
- * @returns
  */
 function doFill(input: ColumnTable, { value, to }: FillArgs) {
 	const fn = (_d: any, $: any) => $.value

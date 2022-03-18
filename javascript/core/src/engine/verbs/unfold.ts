@@ -12,13 +12,6 @@ import type { UnfoldArgs } from '../../types.js'
 export const unfold = makeStepFunction(doUnfold)
 export const unfoldNode = makeStepNode(doUnfold)
 
-/**
- * Executes an arquero fold operation. This creates two new columns:
- * one with the column name as key, the other with the row value.
- * @param step
- * @param store
- * @returns
- */
 function doUnfold(input: ColumnTable, { key, value }: UnfoldArgs) {
 	const columnNames: string[] = input.columnNames(name => {
 		return name !== key && name !== value

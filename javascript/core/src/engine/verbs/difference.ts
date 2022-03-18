@@ -9,9 +9,6 @@ import { set } from '../util/index.js'
 
 /**
  * Executes an arquero table difference.
- * @param step
- * @param store
- * @returns
  */
 export async function difference(
 	step: Step,

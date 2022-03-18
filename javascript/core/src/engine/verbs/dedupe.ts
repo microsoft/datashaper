@@ -12,9 +12,6 @@ export const dedupeNode = makeStepNode(doDedupe)
 
 /**
  * Executes an arquero dedupe operation.
- * @param step
- * @param store
- * @returns
  */
 function doDedupe(input: ColumnTable, { columns }: DedupeArgs) {
 	return columns ? input.dedupe(columns) : input.dedupe()

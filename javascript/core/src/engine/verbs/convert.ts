@@ -14,9 +14,6 @@ export const convertNode = makeStepNode(doConvert)
 
 /**
  * Executes an arquero string parse operation.
- * @param step
- * @param store
- * @returns
  */
 function doConvert(table: ColumnTable, { columns, type, radix }: ConvertArgs) {
 	// note that this applies the specified parse to every column equally

@@ -15,9 +15,6 @@ export const recodeNode = makeStepNode(doRecode)
 /**
  * Executes an arquero derive to map a list of values to new values.
  * Commonly used for recategorization.
- * @param step
- * @param store
- * @returns
  */
 function doRecode(input: ColumnTable, { column, to, map }: RecodeArgs) {
 	const dArgs: ExprObject = {

@@ -10,12 +10,6 @@ import type { RenameArgs } from '../../types.js'
 export const rename = makeStepFunction(doRename)
 export const renameNode = makeStepNode(doRename)
 
-/**
- * Executes an arquero column rename.
- * @param step
- * @param store
- * @returns
- */
 function doRename(input: ColumnTable, { columns }: RenameArgs) {
 	return input.rename(columns)
 }

@@ -11,9 +11,6 @@ import type { TableContainer } from '../../types.js'
 
 /**
  * Executes an arquero loadCSV
- * @param step
- * @param store
- * @returns
  */
 export async function fetch(
 	{ output, args: { url, delimiter, autoMax } }: FetchStep,

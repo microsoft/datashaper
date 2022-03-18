@@ -12,12 +12,6 @@ import { SortDirection } from '../../types.js'
 export const orderby = makeStepFunction(doOrderby)
 export const orderbyNode = makeStepNode(doOrderby)
 
-/**
- * Executes an arquero orderby.
- * @param step
- * @param store
- * @returns
- */
 function doOrderby(input: ColumnTable, { orders }: OrderbyArgs) {
 	// format keys in arquero-compatible format
 	// https://uwdata.github.io/arquero/api/verbs#orderby

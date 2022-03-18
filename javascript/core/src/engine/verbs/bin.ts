@@ -15,9 +15,6 @@ export const binNode = makeStepNode(doBin)
 
 /**
  * Executes a bin aggregate, which effectively truncates values to a bin boundary for histograms.
- * @param step
- * @param store
- * @returns
  */
 function doBin(input: ColumnTable, args: BinArgs) {
 	const rArgs = {
@@ -30,9 +27,6 @@ function doBin(input: ColumnTable, args: BinArgs) {
  * Generate a bin expression that uses either auto or a fixed step
  * to force arquero to a predictable bin set.
  * https://uwdata.github.io/arquero/api/#bin
- * @param input
- * @param args
- * @returns
  */
 function binExpr(input: ColumnTable, args: BinArgs) {
 	const { strategy, column, fixedwidth, fixedcount, clamped } = args

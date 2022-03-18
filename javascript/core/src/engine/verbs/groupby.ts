@@ -10,12 +10,6 @@ import type { GroupbyArgs } from '../../types.js'
 export const groupby = makeStepFunction(doGroupby)
 export const groupbyNode = makeStepNode(doGroupby)
 
-/**
- * Executes an arquero groupby operation.
- * @param step
- * @param store
- * @returns
- */
 function doGroupby(input: ColumnTable, { columns }: GroupbyArgs) {
 	return input.groupby(columns)
 }

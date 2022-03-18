@@ -11,12 +11,6 @@ import { compareAll } from '../util/index.js'
 export const filter = makeStepFunction(doFilter)
 export const filterNode = makeStepNode(doFilter)
 
-/**
- * Executes an arquero filter.
- * @param step
- * @param store
- * @returns
- */
 function doFilter(input: ColumnTable, { column, criteria }: FilterArgs) {
 	const expr = compareAll(column, criteria)
 	return input.filter(expr)

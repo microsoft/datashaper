@@ -12,12 +12,6 @@ import type { EraseArgs } from '../../types.js'
 export const erase = makeStepFunction(doErase)
 export const eraseNode = makeStepNode(doErase)
 
-/**
- * Executes an arquero erase operation.
- * @param step
- * @param store
- * @returns
- */
 function doErase(input: ColumnTable, { value, column }: EraseArgs) {
 	const func = escape((d: any) => (d[column] === value ? undefined : d[column]))
 	const dArgs = { [column]: func }

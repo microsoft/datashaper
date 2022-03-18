@@ -7,12 +7,6 @@ import type { Step, TableContainer } from '../../types.js'
 import { SetOp } from '../../types.js'
 import { set } from '../util/index.js'
 
-/**
- * Executes an arquero table concat.
- * @param step
- * @param store
- * @returns
- */
 export async function concat(
 	step: Step,
 	store: TableStore,
