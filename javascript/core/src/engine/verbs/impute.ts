@@ -4,8 +4,8 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { ImputeArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 import type { ExprFunctionMap } from './types.js'
 
 export const impute = makeStepFunction(doImpute)

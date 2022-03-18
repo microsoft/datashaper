@@ -4,8 +4,8 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { WindowArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 import { singleExpression } from '../util/index.js'
 
 export const window = makeStepFunction(doWindow)

@@ -5,9 +5,9 @@
 import { bin as aqbin, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { BinArgs } from '../../index.js'
 import { BinStrategy } from '../../index.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 import { fixedBinCount, fixedBinStep } from '../util/index.js'
 
 export const bin = makeStepFunction(doBin)

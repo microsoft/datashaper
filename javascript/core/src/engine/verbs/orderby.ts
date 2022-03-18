@@ -5,9 +5,9 @@
 import { desc } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { OrderbyArgs } from '../../types.js'
 import { SortDirection } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 
 export const orderby = makeStepFunction(doOrderby)
 export const orderbyNode = makeStepNode(doOrderby)

@@ -4,7 +4,7 @@
  */
 import type { JoinOptions } from 'arquero/dist/types/table/transformable'
 
-import { container } from '../../factories.js'
+import { container } from '../../container.js'
 import type { TableStore } from '../../index.js'
 import type { JoinStep, TableContainer } from '../../types.js'
 import { JoinStrategy } from '../../types.js'

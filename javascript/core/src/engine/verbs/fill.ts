@@ -4,11 +4,8 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { FillArgs } from '../../types.js'
-
-export const fill = makeStepFunction(doFill)
-export const fillNode = makeStepNode(doFill)
+import { makeStepFunction, makeStepNode } from '../factories.js'
 
 /**
  * Executes an arquero derive to fill a new column with fixed values.
@@ -21,3 +18,6 @@ function doFill(input: ColumnTable, { value, to }: FillArgs) {
 	const fn = (_d: any, $: any) => $.value
 	return input.params({ value }).derive({ [to]: fn })
 }
+
+export const fill = makeStepFunction(doFill)
+export const fillNode = makeStepNode(doFill)

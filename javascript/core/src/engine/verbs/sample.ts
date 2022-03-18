@@ -4,8 +4,8 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { SampleArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 
 export const sample = makeStepFunction(doSample)
 export const sampleNode = makeStepNode(doSample)

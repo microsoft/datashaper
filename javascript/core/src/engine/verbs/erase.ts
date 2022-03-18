@@ -6,8 +6,8 @@
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { EraseArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 
 export const erase = makeStepFunction(doErase)
 export const eraseNode = makeStepNode(doErase)

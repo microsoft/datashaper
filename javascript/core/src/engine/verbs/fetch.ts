@@ -5,7 +5,7 @@
 
 import { loadCSV, loadJSON } from 'arquero'
 
-import { container } from '../../factories.js'
+import { container } from '../../container.js'
 import type { FetchStep, TableStore } from '../../index.js'
 import type { TableContainer } from '../../types.js'
 

@@ -4,8 +4,8 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { SpreadArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 
 export const spread = makeStepFunction(doSpread)
 export const spreadNode = makeStepNode(doSpread)

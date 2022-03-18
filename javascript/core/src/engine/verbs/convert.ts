@@ -5,9 +5,9 @@
 import { escape, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { ConvertArgs } from '../../types.js'
 import { ParseType } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 
 export const convert = makeStepFunction(doConvert)
 export const convertNode = makeStepNode(doConvert)

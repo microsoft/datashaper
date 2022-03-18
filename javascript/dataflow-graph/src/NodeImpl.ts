@@ -112,11 +112,12 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		try {
 			await this.doRecalculate()
 		} catch (error: unknown) {
-			this._outputs.forEach(v => {
-				v.error(error)
-			})
-			throw error
+			this.emitError(error)
 		}
+	}
+
+	protected emitError(error: unknown) {
+		this._outputs.forEach(o => o.error(error))
 	}
 
 	protected abstract doRecalculate(): Promise<void> | void

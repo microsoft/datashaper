@@ -6,8 +6,8 @@ import { escape, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
-import { makeStepFunction, makeStepNode } from '../../factories.js'
 import type { RecodeArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 
 export const recode = makeStepFunction(doRecode)
 export const recodeNode = makeStepNode(doRecode)

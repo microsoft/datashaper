@@ -4,8 +4,8 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { makeStepFunction,makeStepNode } from '../../factories.js'
 import type { BinarizeArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../factories.js'
 import { compareAll } from '../util/index.js'
 
 export const binarize = makeStepFunction(doBinarize)
