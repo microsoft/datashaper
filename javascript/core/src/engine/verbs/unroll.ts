@@ -2,22 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { TableContainer,UnrollStep } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { UnrollArgs } from '../../types.js'
 
-/**
- * Executes an arquero unroll operation.
- * @param step
- * @param store
- * @returns
- */
-export async function unroll(
-	{ input, output, args: { columns } }: UnrollStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
+export const unroll = makeStepFunction(doUnroll)
+export const unrollNode = makeStepNode(doUnroll)
 
-	return container(output, inputTable.unroll(columns))
+function doUnroll(input: ColumnTable, { columns }: UnrollArgs) {
+	return input.unroll(columns)
 }

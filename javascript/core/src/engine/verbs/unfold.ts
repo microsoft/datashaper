@@ -2,13 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import { from } from 'arquero'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { TableContainer,UnfoldStep } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { UnfoldArgs } from '../../types.js'
+
+export const unfold = makeStepFunction(doUnfold)
+export const unfoldNode = makeStepNode(doUnfold)
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
@@ -17,22 +19,17 @@ import type { TableContainer,UnfoldStep } from '../../types.js'
  * @param store
  * @returns
  */
-export async function unfold(
-	{ input, output, args: { key, value } }: UnfoldStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-
-	const columnNames: string[] = inputTable.columnNames(name => {
+function doUnfold(input: ColumnTable, { key, value }: UnfoldArgs) {
+	const columnNames: string[] = input.columnNames(name => {
 		return name !== key && name !== value
 	})
-	const selectedArray: RowObject[] = inputTable.select(columnNames).objects()
+	const selectedArray: RowObject[] = input.select(columnNames).objects()
 
 	const distinctColumnValues: string[] = [
-		...new Set<string>(inputTable.array(key) as string[]),
+		...new Set<string>(input.array(key) as string[]),
 	]
 
-	const originalArray: RowObject[] = inputTable.objects()
+	const originalArray: RowObject[] = input.objects()
 	const finalArray: RowObject[] = []
 
 	const upperValue: number =
@@ -59,6 +56,5 @@ export async function unfold(
 
 		finalArray.push(tempObj)
 	}
-
-	return container(output, from(finalArray))
+	return from(finalArray)
 }

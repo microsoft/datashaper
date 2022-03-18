@@ -2,22 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { SpreadStep, TableContainer } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { SpreadArgs } from '../../types.js'
 
-/**
- * Executes an arquero spread operation.
- * @param step
- * @param store
- * @returns
- */
-export async function spread(
-	{ input, output, args: { to, column } }: SpreadStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
+export const spread = makeStepFunction(doSpread)
+export const spreadNode = makeStepNode(doSpread)
 
-	return container(output, inputTable.spread(column, { as: to }))
+function doSpread(input: ColumnTable, { to, column }: SpreadArgs) {
+	return input.spread(column, { as: to })
 }

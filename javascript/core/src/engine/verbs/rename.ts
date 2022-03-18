@@ -2,9 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { RenameStep, TableContainer } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { RenameArgs } from '../../types.js'
+
+export const rename = makeStepFunction(doRename)
+export const renameNode = makeStepNode(doRename)
 
 /**
  * Executes an arquero column rename.
@@ -12,10 +16,6 @@ import type { RenameStep, TableContainer } from '../../types.js'
  * @param store
  * @returns
  */
-export async function rename(
-	{ input, output, args: { columns } }: RenameStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-	return container(output, inputTable.rename(columns))
+function doRename(input: ColumnTable, { columns }: RenameArgs) {
+	return input.rename(columns)
 }

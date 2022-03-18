@@ -3,26 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { all } from 'arquero'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { SelectStep, TableContainer } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { SelectArgs } from '../../types.js'
 
-/**
- * Executes an arquero select.
- * @param step
- * @param store
- * @returns
- */
-export async function select(
-	{ input, output, args: { columns = [] } }: SelectStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
+export const select = makeStepFunction(doSelect)
+export const selectNode = makeStepNode(doSelect)
+
+function doSelect(input: ColumnTable, { columns = [] }: SelectArgs) {
 	const expr = [columns] as any
-
 	if (expr.length === 0) {
 		expr.push(all())
 	}
-	return container(output, inputTable.select(...expr))
+	return input.select(...expr)
 }

@@ -2,11 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { PivotStep, TableContainer } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { PivotArgs } from '../../types.js'
 import { singleExpression } from '../util/index.js'
+
+export const pivot = makeStepFunction(doPivot)
+export const pivotNode = makeStepNode(doPivot)
 
 /**
  * Executes an arquero fold operation. This creates two new columns:
@@ -15,13 +18,7 @@ import { singleExpression } from '../util/index.js'
  * @param store
  * @returns
  */
-export async function pivot(
-	{ input, output, args: { key, value, operation } }: PivotStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-
+function doPivot(input: ColumnTable, { key, value, operation }: PivotArgs) {
 	const expr = singleExpression(value, operation)
-
-	return container(output, inputTable.pivot(key, { [value]: expr }))
+	return input.pivot(key, { [value]: expr })
 }

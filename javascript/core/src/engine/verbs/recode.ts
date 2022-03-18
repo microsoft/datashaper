@@ -2,13 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import { escape, op } from 'arquero'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { RecodeStep, TableContainer } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { RecodeArgs } from '../../types.js'
+
+export const recode = makeStepFunction(doRecode)
+export const recodeNode = makeStepNode(doRecode)
 
 /**
  * Executes an arquero derive to map a list of values to new values.
@@ -17,15 +19,10 @@ import type { RecodeStep, TableContainer } from '../../types.js'
  * @param store
  * @returns
  */
-export async function recode(
-	{ input, output, args: { column, to, map } }: RecodeStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-
+function doRecode(input: ColumnTable, { column, to, map }: RecodeArgs) {
 	const dArgs: ExprObject = {
 		[to]: escape((d: any) => op.recode(d[column], map)),
 	}
 
-	return container(output, inputTable.derive(dArgs))
+	return input.derive(dArgs)
 }

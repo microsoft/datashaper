@@ -2,16 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
+import { makeStepFunction, makeStepNode } from '../../factories.js'
 import { columnType, MergeStrategy } from '../../index.js'
-import type { DataType, MergeStep, TableContainer } from '../../types.js'
+import type { DataType, MergeArgs } from '../../types.js'
+
+export const merge = makeStepFunction(doMerge)
+export const mergeNode = makeStepNode(doMerge)
 
 /**
  * Executes an arquero merge operation.
@@ -19,18 +20,11 @@ import type { DataType, MergeStep, TableContainer } from '../../types.js'
  * @param store
  * @returns
  */
-
-export async function merge(
-	{
-		input,
-		output,
-		args: { columns = [], strategy, to, delimiter = '' },
-	}: MergeStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-
-	const isSameDataTypeFlag: boolean = isSameDataType(inputTable, columns)
+function doMerge(
+	input: ColumnTable,
+	{ columns = [], strategy, to, delimiter = '' }: MergeArgs,
+) {
+	const isSameDataTypeFlag: boolean = isSameDataType(input, columns)
 
 	// eslint-disable-next-line
 	const func: object = escape((d: any) => {
@@ -48,7 +42,7 @@ export async function merge(
 	})
 
 	const dArgs: ExprObject = { [to]: func }
-	return container(output, inputTable.derive(dArgs))
+	return input.derive(dArgs)
 }
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {

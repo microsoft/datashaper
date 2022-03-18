@@ -2,10 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { RollupStep, TableContainer } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { RollupArgs } from '../../types.js'
 import { singleExpression } from '../util/index.js'
+
+export const rollup = makeStepFunction(doRollup)
+export const rollupNode = makeStepNode(doRollup)
 
 /**
  * Executes rollup.
@@ -13,18 +17,11 @@ import { singleExpression } from '../util/index.js'
  * @param store
  * @returns
  */
-
-export async function rollup(
-	{ input, output, args: { column, operation, to } }: RollupStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-
+export function doRollup(
+	input: ColumnTable,
+	{ column, operation, to }: RollupArgs,
+) {
 	const expr = singleExpression(column, operation)
-
-	const rArgs = {
-		[to]: expr,
-	}
-
-	return container(output, inputTable.rollup(rArgs))
+	const rArgs = { [to]: expr }
+	return input.rollup(rArgs)
 }

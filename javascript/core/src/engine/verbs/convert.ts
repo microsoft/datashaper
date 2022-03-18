@@ -2,13 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import { escape, op } from 'arquero'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { ConvertStep, TableContainer } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { ConvertArgs } from '../../types.js'
 import { ParseType } from '../../types.js'
+
+export const convert = makeStepFunction(doConvert)
+export const convertNode = makeStepNode(doConvert)
 
 /**
  * Executes an arquero string parse operation.
@@ -16,19 +18,13 @@ import { ParseType } from '../../types.js'
  * @param store
  * @returns
  */
-export async function convert(
-	{ input, output, args: { columns, type, radix } }: ConvertStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-
+function doConvert(table: ColumnTable, { columns, type, radix }: ConvertArgs) {
 	// note that this applies the specified parse to every column equally
 	const dArgs = columns.reduce((acc, cur) => {
 		acc[cur] = parseType(cur, type, radix)
 		return acc
 	}, {} as any)
-
-	return container(output, inputTable.derive(dArgs))
+	return table.derive(dArgs)
 }
 
 function parseType(column: string, type: ParseType, radix?: number) {

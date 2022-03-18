@@ -2,11 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { ImputeStep, TableContainer } from '../../types.js'
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { ImputeArgs } from '../../types.js'
 import type { ExprFunctionMap } from './types.js'
+
+export const impute = makeStepFunction(doImpute)
+export const imputeNode = makeStepNode(doImpute)
 
 /**
  * Executes an arquero impute
@@ -14,15 +17,9 @@ import type { ExprFunctionMap } from './types.js'
  * @param store
  * @returns
  */
-export async function impute(
-	{ input, output, args: { value, column } }: ImputeStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-
+function doImpute(input: ColumnTable, { value, column }: ImputeArgs) {
 	const dArgs: ExprFunctionMap = {
 		[column]: (_d: any, $: any) => $.value,
 	}
-
-	return container(output, inputTable.params({ value }).impute(dArgs))
+	return input.params({ value }).impute(dArgs)
 }

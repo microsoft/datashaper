@@ -35,7 +35,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 
 	public set config(value: Maybe<Config>) {
 		this._config = value
-		this.recalculate()
+		void this.recalculate()
 	}
 
 	protected inputValue(name: string): Maybe<T> {
@@ -62,7 +62,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		// subscribe to the new input
 		const subscription = socket.subscribe(value => {
 			this._inputValues.set(name, value)
-			this.recalculate()
+			void this.recalculate()
 		})
 		this._inputSubscriptions.set(name, subscription)
 	}
@@ -76,7 +76,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 			// remove the node
 			this._inputSubscriptions.delete(name)
 
-			this.recalculate()
+			void this.recalculate()
 		} else {
 			throw new Error(`no socket installed at "${name}"`)
 		}
@@ -110,9 +110,9 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	 * Calculate the value of this processing node. This may be invoked even if this
 	 * processing node is not fully configured. recalulate() should account for this
 	 */
-	protected recalculate(): void {
+	protected async recalculate(): Promise<void> {
 		try {
-			this.doRecalculate()
+			await this.doRecalculate()
 		} catch (error: unknown) {
 			this._outputs.forEach(v => {
 				v.error(error)
@@ -121,5 +121,5 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		}
 	}
 
-	protected abstract doRecalculate(): void
+	protected abstract doRecalculate(): Promise<void> | void
 }

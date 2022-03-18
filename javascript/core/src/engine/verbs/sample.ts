@@ -2,23 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { SampleStep, TableContainer } from '../../types.js'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-/**
- * Executes an arquero sample to extract random rows.
- * percent options allows for dynamic size compute
- * @param step
- * @param store
- * @returns
- */
-export async function sample(
-	{ input, output, args: { size, proportion } }: SampleStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-	const p = Math.round(inputTable.numRows() * (proportion || 1))
+import { makeStepFunction, makeStepNode } from '../../factories.js'
+import type { SampleArgs } from '../../types.js'
+
+export const sample = makeStepFunction(doSample)
+export const sampleNode = makeStepNode(doSample)
+
+function doSample(input: ColumnTable, { size, proportion }: SampleArgs) {
+	const p = Math.round(input.numRows() * (proportion || 1))
 	const s = size || p
-	return container(output, inputTable.sample(s))
+	return input.sample(s)
 }

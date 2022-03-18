@@ -5,6 +5,8 @@
 ```ts
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { Maybe } from '@data-wrangling-components/dataflow-graph';
+import { NodeImpl } from '@data-wrangling-components/dataflow-graph';
 
 // Warning: (ae-missing-release-tag) "AggregateArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -589,6 +591,16 @@ export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {
 // @public (undocumented)
 export type LookupStep = Step<LookupArgs>;
 
+// Warning: (ae-missing-release-tag) "makeStepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function makeStepFunction<Args>(compute: StepComputeFn<Args>): ({ input, output, args }: Step<Args>, store: TableStore) => Promise<TableContainer<unknown>>;
+
+// Warning: (ae-missing-release-tag) "makeStepNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function makeStepNode<Args>(compute: StepComputeFn<Args>): () => StepNode<Args>;
+
 // Warning: (ae-missing-release-tag) "MathOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -913,10 +925,32 @@ export interface Step<T = unknown> {
     verb: Verb;
 }
 
+// Warning: (ae-missing-release-tag) "StepComputeFn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StepComputeFn<Args> = (table: ColumnTable, args: Args) => Promise<Maybe<ColumnTable>> | Maybe<ColumnTable>;
+
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type StepFunction<T> = (step: Step<T>, store: TableStore) => Promise<TableContainer>;
+
+// Warning: (ae-missing-release-tag) "StepNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class StepNode<Args> extends NodeImpl<ColumnTable, Args> {
+    constructor(_computeFn: StepComputeFn<Args>);
+    // (undocumented)
+    protected doRecalculate(): Promise<void>;
+}
+
+// Warning: (ae-missing-release-tag) "StepNodeInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum StepNodeInput {
+    // (undocumented)
+    Source = "source"
+}
 
 // Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
