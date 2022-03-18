@@ -15,11 +15,9 @@
 	"devDependencies": {
 		"@essex/scripts": "^21.0.1",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@types/jest": "^27.4.1",
-		"@types/uuid": "^8"
+		"@types/jest": "^27.4.1"
 	},
 	"dependencies": {
-		"rxjs": "^7.5.5",
-		"uuid": "^8.3.2"
+		"rxjs": "^7.5.5"
 	}
 }

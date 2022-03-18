@@ -4,14 +4,12 @@
  */
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
-import { v4 as uuid } from 'uuid'
 
 import type { Maybe, Node } from './types'
 
 const DEFAULT_OUTPUT_NAME = 'DWC.DefaultOutput'
 
 export abstract class NodeImpl<T, Config> implements Node<T, Config> {
-	public id = uuid()
 	private _config: Maybe<Config>
 
 	// upstream socket wiring
@@ -84,8 +82,8 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 
 	/**
 	 * Emits a new value into the named output socket
-	 * @param value The output value
-	 * @param output The output socket name
+	 * @param value - The output value
+	 * @param output - The output socket name
 	 */
 	protected emit(value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void {
 		this.verifyOutputSocketName(output)

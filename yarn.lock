@@ -1692,9 +1692,7 @@ __metadata:
     "@essex/scripts": ^21.0.1
     "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.4.1
-    "@types/uuid": ^8
     rxjs: ^7.5.5
-    uuid: ^8.3.2
   languageName: unknown
   linkType: soft
 
@@ -4039,7 +4037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:^8, @types/uuid@npm:^8.3.4":
+"@types/uuid@npm:^8.3.4":
   version: 8.3.4
   resolution: "@types/uuid@npm:8.3.4"
   checksum: 6f11f3ff70f30210edaa8071422d405e9c1d4e53abbe50fdce365150d3c698fe7bbff65c1e71ae080cbfb8fded860dbb5e174da96fdbbdfcaa3fb3daa474d20f

@@ -21,6 +21,38 @@ interface Node_2<T, Config = unknown> {
 }
 export { Node_2 as Node }
 
+// Warning: (ae-missing-release-tag) "NodeImpl" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export abstract class NodeImpl<T, Config> implements Node_2<T, Config> {
+    constructor(inputs: string[], outputs?: string[]);
+    // (undocumented)
+    get config(): Maybe<Config>;
+    set config(value: Maybe<Config>);
+    // (undocumented)
+    protected abstract doRecalculate(): Promise<void> | void;
+    protected emit(value: Maybe<T>, output?: string): void;
+    // (undocumented)
+    readonly inputs: string[];
+    // (undocumented)
+    protected inputValue(name: string): Maybe<T>;
+    // (undocumented)
+    install(name: string, socket: Observable<Maybe<T>>): void;
+    // (undocumented)
+    output(name?: string): Observable<Maybe<T>>;
+    // (undocumented)
+    readonly outputs: string[];
+    // (undocumented)
+    outputValue(name?: string): Maybe<T>;
+    protected recalculate(): Promise<void>;
+    // (undocumented)
+    uninstall(name: string): void;
+    // (undocumented)
+    protected verifyInputSocketName(name: string): void;
+    // (undocumented)
+    protected verifyOutputSocketName(name: string): void;
+}
+
 // (No @packageDocumentation comment for this package)
 
 ```
