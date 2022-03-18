@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnMetadata } from '@data-wrangling-components/core'
 import type { IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -12,13 +11,13 @@ import styled from 'styled-components'
 import { useIntersection } from '../../common/index.js'
 
 interface GroupHeaderProps {
-	columnMeta: ColumnMetadata
 	props: IDetailsGroupDividerProps
 	lazyLoadGroups: boolean
+	columnName?: string
 }
 
 export const GroupHeader: React.FC<GroupHeaderProps> = memo(
-	function GroupHeader({ columnMeta, props, children, lazyLoadGroups }) {
+	function GroupHeader({ columnName, props, children, lazyLoadGroups }) {
 		const { group, onToggleCollapse } = props
 		const ref = useRef<HTMLDivElement>()
 		// whether the element toggle is manual or by visibility on scroll
@@ -70,7 +69,7 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 					<Else>
 						<HeaderDetailsText>
 							<Bold>
-								{columnMeta?.name ? `${columnMeta?.name}  - ` : ''}
+								{columnName ? `${columnName}  - ` : ''}
 								{group?.name}
 							</Bold>
 						</HeaderDetailsText>

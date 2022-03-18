@@ -238,7 +238,7 @@ export function createDefaultCommandBar(items: ICommandBarItemProps[], props?: I
 // Warning: (ae-missing-release-tag) "createLazyLoadingGroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function createLazyLoadingGroupHeader(props: IDetailsGroupDividerProps | undefined, columnMetadata: ColumnMetadata | undefined, children: any): ReactElement<any, any> | null;
+export function createLazyLoadingGroupHeader(props: IDetailsGroupDividerProps | undefined, children: any, columnName?: string, columnMetadata?: ColumnMetadata | undefined): ReactElement<any, any> | null;
 
 // Warning: (ae-missing-release-tag) "createRowEntries" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -414,7 +414,7 @@ export function groupBuilder(row: RowObject, existingGroups: GroupBySpec, actual
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type GroupHeaderFunction = (meta?: ColumnMetadata, props?: IDetailsGroupDividerProps | undefined) => any;
+export type GroupHeaderFunction = (meta?: ColumnMetadata, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
 
 // Warning: (ae-forgotten-export) The symbol "GuidanceProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Guidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -15,14 +15,19 @@ import { GroupHeader } from '../controls/index.js'
 
 export function createLazyLoadingGroupHeader(
 	props: IDetailsGroupDividerProps | undefined,
-	columnMetadata: ColumnMetadata | undefined,
 	children: any,
+	columnName?: string,
+	columnMetadata?: ColumnMetadata | undefined,
 ): ReactElement<any, any> | null {
-	if (!props || !columnMetadata) {
+	if (!props || (!columnMetadata && !columnName)) {
 		return null
 	}
 	return (
-		<GroupHeader props={props} columnMeta={columnMetadata} lazyLoadGroups>
+		<GroupHeader
+			props={props}
+			columnName={columnMetadata?.name || columnName}
+			lazyLoadGroups
+		>
 			{children}
 		</GroupHeader>
 	)
