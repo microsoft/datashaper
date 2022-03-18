@@ -18,12 +18,14 @@ export const PrepareDataFull: React.FC<{
 	onOutputTable?: (table: TableContainer) => void
 	steps?: Step[]
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
+	stepsPosition?: 'bottom' | 'middle'
 }> = memo(function PrepareDataFull({
 	tables,
 	onUpdateSteps,
 	steps,
 	outputHeaderCommandBar,
 	onOutputTable,
+	stepsPosition = 'bottom',
 }) {
 	const {
 		selectedTable,
@@ -52,7 +54,7 @@ export const PrepareDataFull: React.FC<{
 				/>
 			</InputContainer>
 
-			<StepsTrayContainer>
+			<StepsTrayContainer stepsPosition={stepsPosition}>
 				<SectionTitle>Steps</SectionTitle>
 				<StepsContainer>
 					<ManageSteps
@@ -66,7 +68,7 @@ export const PrepareDataFull: React.FC<{
 				</StepsContainer>
 			</StepsTrayContainer>
 
-			<OutputContainer>
+			<OutputContainer stepsPosition={stepsPosition}>
 				<SectionTitle>Preview</SectionTitle>
 				<PreviewTable
 					onChangeMetadata={onUpdateMetadata}
@@ -110,21 +112,24 @@ const InputContainer = styled.div`
 	min-height: ${INPUT_HEIGHT}px;
 	flex: 0 1 ${INPUT_HEIGHT}px;
 	padding-right: ${GAP}px;
+	order: 1;
 `
 
-const OutputContainer = styled.div`
+const OutputContainer = styled.div<{ stepsPosition: string }>`
 	flex: 1 1 auto;
 	display: flex;
 	padding-right: ${GAP}px;
 	max-height: calc(100% - ${INPUT_HEIGHT + STEPS_HEIGHT + GAP * 4}px);
+	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 2 : 3)};
 `
 
-const StepsTrayContainer = styled.div`
+const StepsTrayContainer = styled.div<{ stepsPosition: string }>`
 	flex: 0 1 ${STEPS_HEIGHT}px;
 	display: flex;
 	min-height: ${STEPS_HEIGHT}px;
 	background-color: ${({ theme }) => theme.application().faint().hex()};
 	padding: 0;
+	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 3 : 2)};
 `
 const StepsContainer = styled.div`
 	display: flex;
