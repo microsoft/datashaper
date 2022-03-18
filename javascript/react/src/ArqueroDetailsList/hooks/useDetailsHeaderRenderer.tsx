@@ -21,6 +21,9 @@ export function useDetailsHeaderRenderer(): IRenderFunction<IDetailsHeaderProps>
 					// removes the excessive header padding and matches the bottom padding
 					paddingTop: 1,
 				},
+				cellSizer: {
+					height: '1.5rem',
+				},
 			},
 			...props,
 		}

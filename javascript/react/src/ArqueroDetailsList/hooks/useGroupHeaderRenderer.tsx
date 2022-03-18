@@ -46,6 +46,6 @@ export function useGroupHeaderRenderer(
 
 			return groupHeaderFunction(meta, columnName, props)
 		},
-		[groupHeaderFunction, table, lazyLoadGroups],
+		[groupHeaderFunction, table, lazyLoadGroups, computedMetadata?.columns],
 	)
 }

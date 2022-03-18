@@ -70,6 +70,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     includeAllColumns?: boolean;
     isColumnClickable?: boolean;
     isHeadersFixed?: boolean;
+    isResizable?: boolean;
     // (undocumented)
     isSortable?: boolean;
     isStriped?: boolean;
@@ -182,6 +183,8 @@ export interface ColumnOptions {
     isColumnClickable?: boolean;
     // (undocumented)
     isDefaultHeaderClickable?: boolean;
+    // (undocumented)
+    isResizable?: boolean;
     // (undocumented)
     onCellDropdownSelect?: DropdownOptionSelect;
     // (undocumented)
@@ -562,6 +565,7 @@ export const PrepareDataFull: React.FC<{
     onOutputTable?: (table: TableContainer) => void;
     steps?: Step[];
     outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[];
+    stepsPosition?: 'bottom' | 'middle';
 }>;
 
 // Warning: (ae-missing-release-tag) "PreviewTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
