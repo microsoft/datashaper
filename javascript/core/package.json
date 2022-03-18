@@ -13,6 +13,7 @@
 		"build": "essex build --docs"
 	},
 	"dependencies": {
+		"@data-wrangling-components/dataflow-graph": "workspace:^",
 		"lodash-es": "^4.17.21"
 	},
 	"devDependencies": {

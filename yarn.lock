@@ -1666,6 +1666,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:javascript/core"
   dependencies:
+    "@data-wrangling-components/dataflow-graph": "workspace:^"
     "@essex/scripts": ^21.0.1
     "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.4.1
@@ -1684,7 +1685,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/dataflow-graph@workspace:javascript/dataflow-graph":
+"@data-wrangling-components/dataflow-graph@workspace:^, @data-wrangling-components/dataflow-graph@workspace:javascript/dataflow-graph":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/dataflow-graph@workspace:javascript/dataflow-graph"
   dependencies:
