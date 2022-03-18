@@ -16,7 +16,7 @@
 		"lodash-es": "^4.17.21"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.0",
+		"@essex/scripts": "^21.0.1",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/jest": "^27.4.1",
 		"@types/lodash-es": "^4.17.6",

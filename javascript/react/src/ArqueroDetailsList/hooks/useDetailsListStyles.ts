@@ -12,7 +12,7 @@ import type { DetailsListFeatures } from '../index.js'
 /**
  * Create a DetailsHeader style with enough height to handle the options we've turned on.
  * Each one requires a small amount of vertical space that stacks up.
- * @param options
+ * @param options -
  * @returns
  */
 export function useDetailsListStyles(

@@ -13,8 +13,8 @@ import type { Step, TableContainer } from '../types.js'
  * This is a utility to execute a series of pipeline
  * steps as simply as possible, wrapping up all of the
  * store and pipeline creation internally.
- * @param input
- * @param steps
+ * @param input -
+ * @param steps -
  */
 export async function runPipeline(
 	input: ColumnTable,
