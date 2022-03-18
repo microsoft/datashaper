@@ -4,72 +4,26 @@
 
 ```ts
 
-// Warning: (ae-missing-release-tag) "DataChangePayload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DataChangePayload<T> {
-    // (undocumented)
-    data: T;
-}
+import type { Observable } from 'rxjs';
 
-// Warning: (ae-missing-release-tag) "ErrorState" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Maybe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ErrorState {
-    // (undocumented)
-    error?: Error;
-    // (undocumented)
-    message: string;
-}
-
-// Warning: (ae-missing-release-tag) "Handler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type Handler<T> = (arg: T) => void;
+export type Maybe<T> = T | undefined;
 
 // Warning: (ae-missing-release-tag) "Node" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-interface Node_2<Data = unknown, Config = unknown> {
-    clearSocket(name: string): void;
-    config: Config | undefined;
-    // (undocumented)
-    readonly data: Data | undefined;
-    // (undocumented)
-    readonly error: ErrorState | undefined;
-    // (undocumented)
-    installSocket(name: string, node: Node_2<Data>): void;
-    onDataChange(handler: Handler<DataChangePayload<Data | undefined>>): Unsubscribe;
-    onErrorChange(handler: Handler<ErrorState | undefined>): Unsubscribe;
-    onStateChange(handler: Handler<StateChangePayload<NodeState>>): Unsubscribe;
-    readonly socketNames: string[];
-    // (undocumented)
-    readonly state: NodeState;
+interface Node_2<T, Config = unknown> {
+    config: Maybe<Config>;
+    readonly inputs: string[];
+    install(name: string, socket: Observable<Maybe<T>>): void;
+    output(name: string): Observable<Maybe<T>>;
+    readonly outputs: string[];
+    outputValue(name: string): Maybe<T>;
+    uninstall(name: string): void;
 }
 export { Node_2 as Node }
-
-// Warning: (ae-missing-release-tag) "NodeState" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export enum NodeState {
-    Error = "error",
-    Hydrated = "hydrated",
-    Ready = "ready",
-    Unconfigured = "unconfigured"
-}
-
-// Warning: (ae-missing-release-tag) "StateChangePayload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StateChangePayload<T> {
-    // (undocumented)
-    state: T;
-}
-
-// Warning: (ae-missing-release-tag) "Unsubscribe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type Unsubscribe = () => void;
 
 // (No @packageDocumentation comment for this package)
 

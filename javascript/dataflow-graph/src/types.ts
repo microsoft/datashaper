@@ -13,16 +13,17 @@ export interface Node<T, Config = unknown> {
 	config: Maybe<Config>
 
 	/**
-	 * Sockets represent named processing node inputs
+	 * Named input sockets
 	 */
 	readonly inputs: string[]
+
 	/**
 	 * Named output sockets
 	 */
 	readonly outputs: string[]
 
 	/**
-	 * Gets an input socket
+	 * Wires an input socket to a stream
 	 * @param name the name of the input socket
 	 */
 	install(name: string, socket: Observable<Maybe<T>>): void
@@ -40,7 +41,7 @@ export interface Node<T, Config = unknown> {
 	output(name: string): Observable<Maybe<T>>
 
 	/**
-	 * Gets the current output value
+	 * Gets a current output value
 	 * @param name The output name
 	 */
 	outputValue(name: string): Maybe<T>
