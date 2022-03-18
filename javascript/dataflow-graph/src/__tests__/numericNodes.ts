@@ -11,7 +11,7 @@ export enum Input {
 
 export class ValueNode extends NodeImpl<number, number> {
 	constructor(value: number) {
-		super([])
+		super()
 		this.emit(value)
 	}
 

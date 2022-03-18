@@ -7,6 +7,9 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { FillArgs } from '../../types.js'
 import { makeStepFunction, makeStepNode } from '../factories.js'
 
+export const fill = makeStepFunction(doFill)
+export const fillNode = makeStepNode(doFill)
+
 /**
  * Executes an arquero derive to fill a new column with fixed values.
  * Note this is not the same as imputing, which fills missing values.
@@ -18,6 +21,3 @@ function doFill(input: ColumnTable, { value, to }: FillArgs) {
 	const fn = (_d: any, $: any) => $.value
 	return input.params({ value }).derive({ [to]: fn })
 }
-
-export const fill = makeStepFunction(doFill)
-export const fillNode = makeStepNode(doFill)

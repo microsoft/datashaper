@@ -18,7 +18,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	private _outputs: Map<string, BehaviorSubject<Maybe<T>>> = new Map()
 
 	public constructor(
-		public readonly inputs: string[],
+		public readonly inputs: string[] = [],
 		public readonly outputs: string[] = [],
 	) {
 		// create new subjects for each output socket

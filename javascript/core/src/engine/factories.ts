@@ -14,6 +14,10 @@ export type StepComputeFn<Args> = (
 	args: Args,
 ) => Promise<Maybe<ColumnTable>> | Maybe<ColumnTable>
 
+export type InputComputeFn<Args> = (
+	args: Args,
+) => Promise<Maybe<ColumnTable>> | Maybe<ColumnTable>
+
 export enum StepNodeInput {
 	Source = 'source',
 }
@@ -33,11 +37,33 @@ export class StepNode<Args> extends NodeImpl<ColumnTable, Args> {
 	}
 }
 
+export class InputNode<Args> extends NodeImpl<ColumnTable, Args> {
+	constructor(private _computeFn: InputComputeFn<Args>) {
+		super()
+	}
+	protected async doRecalculate(): Promise<void> {
+		if (this.config != null) {
+			const output = await this._computeFn(this.config)
+			this.emit(output)
+		} else {
+			this.emit(undefined)
+		}
+	}
+}
+
 export function makeStepNode<Args>(
 	compute: StepComputeFn<Args>,
 ): () => StepNode<Args> {
 	return function stepNodeFactory() {
 		return new StepNode(compute)
+	}
+}
+
+export function makeInputNode<Args>(
+	compute: InputComputeFn<Args>,
+): () => InputNode<Args> {
+	return function inputNodeFactory() {
+		return new InputNode(compute)
 	}
 }
 
@@ -48,6 +74,13 @@ export function makeStepFunction<Args>(compute: StepComputeFn<Args>) {
 	) {
 		const inputTable = await store.table(input)
 		const result = await compute(inputTable, args)
+		return container(output, result)
+	}
+}
+
+export function makeInputFunction<Args>(compute: InputComputeFn<Args>) {
+	return async function inputFn({ output, args }: Step<Args>) {
+		const result = await compute(args)
 		return container(output, result)
 	}
 }
