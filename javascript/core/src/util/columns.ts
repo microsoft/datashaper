@@ -21,7 +21,7 @@ export function getters(
 
 /**
  * Returns a list of column indices that contain at least one 0.
- * @param table
+ * @param table -
  */
 export function columnIndexesWithZeros(table: ColumnTable): number[] {
 	return table.columnNames().reduce((acc, name, idx) => {
@@ -35,7 +35,7 @@ export function columnIndexesWithZeros(table: ColumnTable): number[] {
 
 /**
  * Returns a list of column names that contain at least one 0.
- * @param table
+ * @param table -
  * @returns
  */
 export function columnNamesWithZeros(table: ColumnTable): string[] {

@@ -97,9 +97,13 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 	}, [table, setMetadata, setTable, metadata])
 
 	const customGroupHeader = useCallback(
-		(meta?: ColumnMetadata, props?: IDetailsGroupDividerProps | undefined) => {
+		(
+			meta?: ColumnMetadata,
+			columnName?: string,
+			props?: IDetailsGroupDividerProps | undefined,
+		) => {
 			const custom = <h3>{meta?.name}</h3>
-			return createLazyLoadingGroupHeader(props, meta, custom)
+			return createLazyLoadingGroupHeader(props, custom, columnName, meta)
 		},
 		[],
 	)

@@ -32,6 +32,7 @@ export type DropdownOptionSelect =
 
 export type GroupHeaderFunction = (
 	meta?: ColumnMetadata,
+	columnName?: string,
 	props?: IDetailsGroupDividerProps | undefined,
 ) => any
 

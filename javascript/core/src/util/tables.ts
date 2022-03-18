@@ -21,7 +21,7 @@ const SAMPLE_MAX = 100
 
 /**
  * Performs type inference and stats on a table/columns.
- * @param table
+ * @param table -
  * @param detailed - include detailed per-column stats, otherwise just basic types
  * @returns
  */
@@ -78,7 +78,7 @@ function basicMeta(
 
 /**
  * Generates detailed column stats for a table.
- * @param table
+ * @param table -
  * @returns
  */
 export function stats(
@@ -265,7 +265,7 @@ function categories(
 
 /**
  * Generates column typings info for a table.
- * @param table
+ * @param table -
  * @returns
  */
 export function types(

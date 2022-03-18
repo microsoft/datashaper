@@ -10,10 +10,10 @@ import { useMemo } from 'react'
 /**
  * Sort top level group headers if the table is grouped, there isn't any column sorted or
  * if the respective column is sorted
- * @param table
- * @param column
- * @param sort
- * @param entries
+ * @param table -
+ * @param column -
+ * @param sort -
+ * @param entries -
  * @returns RowObject[] | undefined
  */
 export function useSortedGroups(

@@ -13,7 +13,7 @@ import { dropdownStyles } from './controls/styles.js'
 import type { HOCFunction, StepComponentProps } from './types.js'
 /**
  * Higher order component generator to wrap a Step in the output column text field.
- * @param label optional label to use for the textfield instead of the default.
+ * @param label - optional label to use for the textfield instead of the default.
  * @returns
  */
 export const withOutputColumnTextfield = (
@@ -28,6 +28,7 @@ export const withOutputColumnTextfield = (
 			}
 			return (
 				<Container className="with-output-column-textfield">
+					<Component {...props} />
 					<LeftAlignedRow>
 						<TextField
 							required
@@ -38,7 +39,6 @@ export const withOutputColumnTextfield = (
 							onChange={handleToChange}
 						/>
 					</LeftAlignedRow>
-					<Component {...props} />
 				</Container>
 			)
 		}

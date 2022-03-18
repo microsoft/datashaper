@@ -30,25 +30,22 @@ export function useGroupHeaderRenderer(
 			}
 
 			const columnName = table.groups().names[props.groupLevel as number]
-			if (columnName == null) {
-				return null
-			}
-			const meta = computedMetadata?.columns[columnName]
-			if (meta == null) {
-				return null
-			}
+			const meta = columnName
+				? computedMetadata?.columns[columnName]
+				: undefined
+
 			if (!groupHeaderFunction) {
 				return (
 					<GroupHeader
 						props={props}
-						columnMeta={meta}
+						columnName={columnName}
 						lazyLoadGroups={lazyLoadGroups}
 					/>
 				)
 			}
 
-			return groupHeaderFunction(meta, props)
+			return groupHeaderFunction(meta, columnName, props)
 		},
-		[groupHeaderFunction, computedMetadata, table, lazyLoadGroups],
+		[groupHeaderFunction, table, lazyLoadGroups],
 	)
 }

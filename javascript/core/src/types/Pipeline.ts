@@ -28,8 +28,8 @@ export interface Pipeline {
 	get outputs(): string[]
 	/**
 	 * Creates a new Step with a starter template based on its type
-	 * @param type
-	 * @param subtype
+	 * @param type -
+	 * @param subtype -
 	 */
 	create(verb: Verb): Step[]
 	add(step: Step): Step[]

@@ -73,7 +73,7 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 /**
  * Given a Step definition, returns the correct React Description component function.
  * This is essentially a compact read-only description of the step parameters
- * @param step
+ * @param step -
  */
 export function selectStepDescription(
 	step: Step,
