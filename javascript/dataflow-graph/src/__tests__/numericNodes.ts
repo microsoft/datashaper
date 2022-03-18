@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { NodeImpl } from '../NodeImpl.js'
+import { VariadicNodeImpl } from '../VariadicNodeImpl.js'
 
 export enum Input {
 	LHS = 'lhs',
@@ -40,9 +41,29 @@ abstract class ComputeNode extends NodeImpl<number, void> {
 	protected abstract compute(lhs: number, rhs: number): number
 }
 
+abstract class VariadicComputeNode extends VariadicNodeImpl<number, void> {
+	constructor() {
+		super()
+		this.emit(0)
+	}
+	protected doRecalculate(): void {
+		const inputs = this.getVariadicInputValues().filter(
+			i => i != null,
+		) as number[]
+		this.emit(this.compute(inputs))
+	}
+
+	protected abstract compute(inputs: number[]): number
+}
+
 export class AddNode extends ComputeNode {
 	protected compute(lhs: number, rhs: number): number {
 		return lhs + rhs
+	}
+}
+export class VariadicAddNode extends VariadicComputeNode {
+	protected compute(args: number[]): number {
+		return args.reduce((a, b) => a + b, 0)
 	}
 }
 export class SubtractNode extends ComputeNode {

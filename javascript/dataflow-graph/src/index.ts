@@ -4,3 +4,4 @@
  */
 export * from './NodeImpl.js'
 export * from './types.js'
+export * from './VariadicNodeImpl.js'

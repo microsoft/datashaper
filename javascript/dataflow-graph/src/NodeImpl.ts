@@ -41,6 +41,10 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		return this._inputValues.get(name)
 	}
 
+	protected get inputValues(): Map<string, Maybe<T>> {
+		return this._inputValues
+	}
+
 	public output(name = DEFAULT_OUTPUT_NAME): Observable<Maybe<T>> {
 		this.verifyOutputSocketName(name)
 		return this._outputs.get(name) as Observable<Maybe<T>>
@@ -73,7 +77,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 
 			// remove the node
 			this._inputSubscriptions.delete(name)
-
+			this._inputValues.delete(name)
 			void this.recalculate()
 		} else {
 			throw new Error(`no socket installed at "${name}"`)
