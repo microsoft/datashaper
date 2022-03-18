@@ -109,17 +109,30 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			[onChange],
 		)
 
+		const placeholder = useMemo(() => {
+			switch (type) {
+				case DataType.String:
+					return 'text or column'
+				case DataType.Number:
+					return 'number or column'
+			}
+		}, [type])
+
+		const columnFilter = useMemo(() => {
+			return (name: string) => tps[name] === type
+		}, [tps, type])
+
 		return (
 			<Container>
 				<SideBySide>
 					{operatorDropdown}
-					{/* TODO: this should only list columns of matching type to input */}
 					<ColumnOrValueComboBox
 						required
 						table={table}
+						filter={columnFilter}
 						disabled={isEmptyCheck}
 						label={'Comparison value'}
-						placeholder={'text, number, or column'}
+						placeholder={placeholder}
 						text={criterion.value ? `${criterion.value}` : undefined}
 						onChange={handleComboBoxChange}
 						styles={narrowDropdownStyles}
