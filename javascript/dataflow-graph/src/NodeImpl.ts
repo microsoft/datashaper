@@ -76,7 +76,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 
 			this.recalculate()
 		} else {
-			throw new Error(`no socket installed at ${name}`)
+			throw new Error(`no socket installed at "${name}"`)
 		}
 	}
 
@@ -85,14 +85,14 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	 * @param value The output value
 	 * @param output The output socket name
 	 */
-	protected emit(value: Maybe<T>, output = DEFAULT_OUTPUT_NAME) {
+	protected emit(value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void {
 		this.verifyOutputSocketName(output)
 		this._outputs.get(output)?.next(value)
 	}
 
 	protected verifyInputSocketName(name: string): void {
 		if (!this.inputs.some(s => s === name)) {
-			throw new Error(`unknown input socket name ${name}`)
+			throw new Error(`unknown input socket name "${name}"`)
 		}
 	}
 
@@ -100,7 +100,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		if (name === DEFAULT_OUTPUT_NAME) {
 			return
 		} else if (!this.outputs.some(s => s === name)) {
-			throw new Error(`unknown output socket name ${name}`)
+			throw new Error(`unknown output socket name "${name}"`)
 		}
 	}
 
@@ -112,7 +112,9 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		try {
 			this.doRecalculate()
 		} catch (error: unknown) {
-			console.error('error performing recalculation', error)
+			this._outputs.forEach(v => {
+				v.error(error)
+			})
 			throw error
 		}
 	}

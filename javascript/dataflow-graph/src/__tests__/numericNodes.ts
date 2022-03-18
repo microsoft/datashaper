@@ -60,3 +60,8 @@ export class DivideNode extends ComputeNode {
 		return lhs / rhs
 	}
 }
+export class ThrowingNode extends ComputeNode {
+	protected compute(): number {
+		throw new Error("I'm a bad node")
+	}
+}
