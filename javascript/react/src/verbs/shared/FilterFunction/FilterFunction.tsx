@@ -93,8 +93,22 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					)
 				}
 			}
+			// map to nicer "math like" terse labels for numeric operations
+			// (the default will use the friendly enum keys)
+			const labels = {
+				'=': '=',
+				'!=': '!=',
+				'<': '<',
+				'<=': '<=',
+				'>': '>',
+				'>=': '>=',
+			}
 			return (
-				<EnumDropdown enumeration={NumericComparisonOperator} {...shared} />
+				<EnumDropdown
+					enumeration={NumericComparisonOperator}
+					{...shared}
+					labels={labels}
+				/>
 			)
 		}, [type, column, criterion, handleOpChange, suppressLabels])
 

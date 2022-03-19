@@ -91,17 +91,10 @@ export enum BooleanComparisonOperator {
 //
 // @public (undocumented)
 export enum BooleanLogicalOperator {
-    // (undocumented)
     AND = "and",
-    // (undocumented)
     NAND = "nand",
-    // (undocumented)
     NOR = "nor",
-    // (undocumented)
-    NOT = "not",
-    // (undocumented)
     OR = "or",
-    // (undocumented)
     XOR = "xor"
 }
 
