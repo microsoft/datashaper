@@ -112,11 +112,25 @@ export enum BooleanComparisonOperator {
 }
 
 export enum BooleanLogicalOperator {
+	/**
+	 * Any match sets the result to true
+	 */
 	OR = 'or',
+	/**
+	 * All conditions must match for the result to be true
+	 */
 	AND = 'and',
-	NOT = 'not',
+	/**
+	 * None of the conditions can match for the result to be true
+	 */
 	NOR = 'nor',
+	/**
+	 * Any number conditions can match but not all of them for the result to be true
+	 */
 	NAND = 'nand',
+	/**
+	 * Only exactly one condition can match for the result to be true
+	 */
 	XOR = 'xor',
 }
 

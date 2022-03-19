@@ -74,6 +74,24 @@ export enum BinStrategy {
 // @public (undocumented)
 export enum BooleanComparisonOperator {
     // (undocumented)
+    Equals = "equals",
+    // (undocumented)
+    IsEmpty = "is empty",
+    // (undocumented)
+    IsFalse = "is false",
+    // (undocumented)
+    IsNotEmpty = "is not empty",
+    // (undocumented)
+    IsTrue = "is true",
+    // (undocumented)
+    NotEqual = "is not equal"
+}
+
+// Warning: (ae-missing-release-tag) "BooleanLogicalOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum BooleanLogicalOperator {
+    // (undocumented)
     AND = "and",
     // (undocumented)
     NAND = "nand",
@@ -221,7 +239,7 @@ export function createTableStore(tables?: TableContainer[]): TableStore;
 // @public (undocumented)
 export interface Criterion {
     // (undocumented)
-    operator: NumericComparisonOperator | StringComparisonOperator;
+    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator;
     type: FilterCompareType;
     value: Value;
 }
@@ -439,6 +457,8 @@ export type FillStep = Step<FillArgs>;
 export interface FilterArgs extends InputColumnArgs {
     // (undocumented)
     criteria: Criterion[];
+    // (undocumented)
+    logical?: BooleanLogicalOperator;
 }
 
 // Warning: (ae-missing-release-tag) "FilterCompareType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -945,7 +965,7 @@ export enum StringComparisonOperator {
     // (undocumented)
     EndsWith = "ends with",
     // (undocumented)
-    Equal = "equals",
+    Equals = "equals",
     // (undocumented)
     IsEmpty = "is empty",
     // (undocumented)

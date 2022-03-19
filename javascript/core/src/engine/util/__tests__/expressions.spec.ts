@@ -957,8 +957,8 @@ describe('test-expressions', () => {
 })
 
 describe('compareAll boolean combination logic', () => {
-	describe('boolean OR', () => {
-		test('one input', () => {
+	describe('boolean OR - any match is a pass', () => {
+		test('one input, one match (pass)', () => {
 			const { expr } = compareAll('flag', [
 				{
 					value: true,
@@ -974,8 +974,7 @@ describe('compareAll boolean combination logic', () => {
 			).toBe(1)
 		})
 
-		test('two inputs', () => {
-			// second value doesn't match, but OR is fine
+		test('two inputs, one match (pass)', () => {
 			const { expr } = compareAll('flag', [
 				{
 					value: true,
@@ -997,8 +996,8 @@ describe('compareAll boolean combination logic', () => {
 		})
 	})
 
-	describe('boolean AND', () => {
-		test('one input', () => {
+	describe('boolean AND - all must match to pass', () => {
+		test('one input, one match (pass)', () => {
 			const { expr } = compareAll(
 				'flag',
 				[
@@ -1018,8 +1017,32 @@ describe('compareAll boolean combination logic', () => {
 			).toBe(1)
 		})
 
-		test('two inputs', () => {
-			// second value doesn't match, AND should fail
+		test('two inputs, all match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.AND,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('two inputs, one match (pass)', () => {
 			const { expr } = compareAll(
 				'flag',
 				[
@@ -1035,6 +1058,403 @@ describe('compareAll boolean combination logic', () => {
 					},
 				],
 				BooleanLogicalOperator.AND,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(0)
+		})
+	})
+
+	describe('boolean XOR - exactly one match to pass', () => {
+		const base = {
+			type: FilterCompareType.Value,
+			operator: BooleanComparisonOperator.Equals,
+		}
+
+		test('one input, one match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						...base,
+					},
+				],
+				BooleanLogicalOperator.XOR,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('two inputs, one match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						...base,
+					},
+					{
+						value: false,
+						...base,
+					},
+				],
+				BooleanLogicalOperator.XOR,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('three inputs, one match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						...base,
+					},
+					{
+						value: false,
+						...base,
+					},
+					{
+						value: false,
+						...base,
+					},
+				],
+				BooleanLogicalOperator.XOR,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('three inputs, two matches (fail)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						...base,
+					},
+					{
+						value: true,
+						...base,
+					},
+					{
+						value: false,
+						...base,
+					},
+				],
+				BooleanLogicalOperator.XOR,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(0)
+		})
+	})
+
+	describe('boolean NOR - no match to pass', () => {
+		test('one input, no match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NOR,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('two inputs, no match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NOR,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('two inputs, one match (fail)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NOR,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(0)
+		})
+
+		test('three inputs, no match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NOR,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('three inputs, one match (fail)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NOR,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(0)
+		})
+	})
+
+	describe('boolean NAND - any match count less than comparison length to pass', () => {
+		test('one input, no match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NAND,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('two inputs, no match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NAND,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('two inputs, one match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NAND,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('three inputs, no match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NAND,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('three inputs, one match (pass)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: false,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NAND,
+			)
+
+			expect(
+				expr({
+					flag: true,
+				}),
+			).toBe(1)
+		})
+
+		test('three inputs, all match (fail)', () => {
+			const { expr } = compareAll(
+				'flag',
+				[
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+					{
+						value: true,
+						type: FilterCompareType.Value,
+						operator: BooleanComparisonOperator.Equals,
+					},
+				],
+				BooleanLogicalOperator.NAND,
 			)
 
 			expect(

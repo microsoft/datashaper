@@ -9,7 +9,6 @@ import {
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-	types,
 } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
@@ -21,12 +20,18 @@ import { InputExplainer } from '../../../common/styles.js'
 import { EnumDropdown } from '../../../controls/EnumDropdown.js'
 import { ColumnOrValueComboBox } from '../../../controls/index.js'
 import { narrowDropdownStyles } from '../../../controls/styles.js'
+import {
+	useColumnTyping,
+	useIsEmpty,
+	usePlaceholderText,
+} from './FilterFunction.hooks.js'
 
 export interface FilterFunctionProps {
 	table: ColumnTable
 	column: string
 	criterion: Criterion
 	onChange?: (filter?: Criterion) => void
+	suppressLabels?: boolean
 }
 /**
  * Just the comparison logic/ops for a filter.
@@ -34,7 +39,13 @@ export interface FilterFunctionProps {
  * This is split out from FilterInputs to allow just the comparison logic to be reused elsewhere.
  */
 export const FilterFunction: React.FC<FilterFunctionProps> = memo(
-	function FilterFunction({ table, column, criterion, onChange }) {
+	function FilterFunction({
+		table,
+		column,
+		criterion,
+		onChange,
+		suppressLabels = false,
+	}) {
 		const handleOpChange = useCallback(
 			(_e: React.FormEvent<HTMLDivElement>, opt?: IDropdownOption) => {
 				onChange &&
@@ -61,16 +72,12 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			[criterion, onChange],
 		)
 
-		const tps = useMemo(() => {
-			return table ? types(table) : {}
-		}, [table])
-
-		const type = useMemo(() => tps[column], [tps, column])
+		const { type, columnFilter } = useColumnTyping(table, column)
 
 		const operatorDropdown = useMemo(() => {
 			const shared = {
-				required: true,
-				label: 'Function',
+				required: !suppressLabels,
+				label: suppressLabels ? undefined : 'Function',
 				selectedKey: criterion.operator,
 				onChange: handleOpChange,
 				styles: leftStyles,
@@ -89,52 +96,27 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			return (
 				<EnumDropdown enumeration={NumericComparisonOperator} {...shared} />
 			)
-		}, [type, column, criterion, handleOpChange])
+		}, [type, column, criterion, handleOpChange, suppressLabels])
 
-		const isEmptyCheck = useMemo(() => {
-			const { operator } = criterion
-			return (
-				operator === NumericComparisonOperator.IsEmpty ||
-				operator === NumericComparisonOperator.IsNotEmpty ||
-				operator === StringComparisonOperator.IsEmpty ||
-				operator === StringComparisonOperator.IsNotEmpty ||
-				operator === BooleanComparisonOperator.IsTrue ||
-				operator === BooleanComparisonOperator.IsFalse ||
-				operator === BooleanComparisonOperator.IsEmpty ||
-				operator === BooleanComparisonOperator.IsNotEmpty
-			)
-		}, [criterion])
+		const isEmpty = useIsEmpty(criterion)
 
 		const handleDeleteClick = useCallback(
 			() => onChange && onChange(),
 			[onChange],
 		)
 
-		const placeholder = useMemo(() => {
-			switch (type) {
-				case DataType.String:
-					return 'text or column'
-				case DataType.Number:
-					return 'number or column'
-				case DataType.Boolean:
-					return 'boolean or column'
-			}
-		}, [type])
-
-		const columnFilter = useMemo(() => {
-			return (name: string) => tps[name] === type
-		}, [tps, type])
+		const placeholder = usePlaceholderText(type)
 
 		return (
 			<Container>
 				<SideBySide>
 					{operatorDropdown}
 					<ColumnOrValueComboBox
-						required
+						required={!suppressLabels}
 						table={table}
 						filter={columnFilter}
-						disabled={isEmptyCheck}
-						label={'Comparison value'}
+						disabled={isEmpty}
+						label={suppressLabels ? undefined : 'Comparison value'}
 						placeholder={placeholder}
 						text={criterion.value ? `${criterion.value}` : undefined}
 						onChange={handleComboBoxChange}

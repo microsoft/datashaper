@@ -20,7 +20,7 @@ export async function filter(
 ): Promise<TableContainer> {
 	const inputTable = await store.table(input)
 
-	const expr = compareAll(column, criteria)
+	const expr = compareAll(column, criteria, logical)
 
 	return container(output, inputTable.filter(expr))
 }

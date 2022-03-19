@@ -217,6 +217,7 @@ export interface Criterion {
 	 * or against the value of another column
 	 */
 	type: FilterCompareType
+	// TODO: we should support Date comparisons
 	operator:
 		| NumericComparisonOperator
 		| StringComparisonOperator
