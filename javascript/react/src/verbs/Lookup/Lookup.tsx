@@ -23,7 +23,13 @@ export const Lookup: React.FC<StepComponentProps> = memo(function Lookup({
 
 	return (
 		<Container>
-			<JoinInputs step={step} store={store} table={table} onChange={onChange} />
+			<JoinInputs
+				label="lookup"
+				step={step}
+				store={store}
+				table={table}
+				onChange={onChange}
+			/>
 			<LeftAlignedColumn>
 				<ColumnListInputs
 					label={'Columns to copy'}
