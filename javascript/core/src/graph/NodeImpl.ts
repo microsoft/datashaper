@@ -120,7 +120,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		}
 	}
 
-	protected emitError(error: unknown) {
+	protected emitError(error: unknown): void {
 		this._outputs.forEach(o => o.error(error))
 	}
 

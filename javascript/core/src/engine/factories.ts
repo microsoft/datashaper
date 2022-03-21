@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NodeImpl } from '@data-wrangling-components/dataflow-graph'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { container } from '../container.js'
+import { NodeImpl } from '../graph/index.js'
 import type {
 	Step,
 	StepFunction,

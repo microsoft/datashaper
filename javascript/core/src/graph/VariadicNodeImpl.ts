@@ -20,7 +20,11 @@ export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 		super(inputs, outputs)
 	}
 
-	public nextInput() {
+	/**
+	 * Get the next input name
+	 * @returns The next variadic input name
+	 */
+	public nextInput(): string {
 		return `${VARIADIC_PREFIX}${this.variadicIndex++}`
 	}
 

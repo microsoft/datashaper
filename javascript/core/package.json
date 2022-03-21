@@ -13,8 +13,8 @@
 		"build": "essex build --docs --skipExportCheck"
 	},
 	"dependencies": {
-		"@data-wrangling-components/dataflow-graph": "workspace:^",
 		"lodash-es": "^4.17.21",
+		"rxjs": "^7.5.5",
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
