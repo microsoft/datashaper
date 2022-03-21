@@ -26,11 +26,9 @@ export enum StepNodeInput {
 }
 
 export class StepNode<Args> extends NodeImpl<TableContainer, Args> {
-	constructor(
-		public readonly id: string,
-		private _computeFn: StepComputeFn<Args>,
-	) {
+	constructor(id: string, private _computeFn: StepComputeFn<Args>) {
 		super([StepNodeInput.Source])
+		this.id = id
 	}
 	protected async doRecalculate(): Promise<void> {
 		const source = this.inputValue(StepNodeInput.Source)
@@ -44,11 +42,9 @@ export class StepNode<Args> extends NodeImpl<TableContainer, Args> {
 }
 
 export class InputNode<Args> extends NodeImpl<TableContainer, Args> {
-	constructor(
-		public readonly id: string,
-		private _computeFn: InputComputeFn<Args>,
-	) {
+	constructor(id: string, private _computeFn: InputComputeFn<Args>) {
 		super()
+		this.id = id
 	}
 	protected async doRecalculate(): Promise<void> {
 		if (this.config != null) {
