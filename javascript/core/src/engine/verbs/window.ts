@@ -7,11 +7,8 @@ import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 import { singleExpression } from '../util/index.js'
 
 const doWindow = wrapColumnStep<WindowArgs>(
-	(input, { column, operation, to }) => {
-		const expr = singleExpression(column, operation)
-		const dArgs = { [to]: expr }
-		return input.derive(dArgs)
-	},
+	(input, { column, operation, to }) =>
+		input.derive({ [to]: singleExpression(column, operation) }),
 )
 
 export const window = makeStepFunction(doWindow)
