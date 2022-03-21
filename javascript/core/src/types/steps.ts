@@ -49,6 +49,7 @@ export type StepFunction<T> = (
 export type AggregateStep = Step<AggregateArgs>
 export type BinStep = Step<BinArgs>
 export type BinarizeStep = Step<BinarizeArgs>
+export type BooleanStep = Step<BooleanArgs>
 export type ChainStep = Step<ChainArgs>
 export type ColumnListStep = Step<InputColumnListArgs>
 export type ConvertStep = Step<ConvertArgs>
@@ -144,6 +145,10 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 }
 
 export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {}
+
+export interface BooleanArgs extends InputColumnListArgs, OutputColumnArgs {
+	operator: BooleanLogicalOperator
+}
 
 export interface ChainArgs {
 	/**

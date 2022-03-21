@@ -17,7 +17,9 @@ import {
 	FilterCompareType,
 	WindowFunction,
 } from '../../types.js'
+import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
+import { bool } from './data-types.js'
 import type { CompareWrapper } from './types.js'
 
 export function compareAll(
@@ -40,67 +42,6 @@ export function compareAll(
 	}) as CompareWrapper
 }
 
-function evaluateBoolean(
-	comparisons: (1 | 0)[],
-	logical: BooleanLogicalOperator,
-): 1 | 0 {
-	switch (logical) {
-		case BooleanLogicalOperator.OR:
-			return or(comparisons)
-		case BooleanLogicalOperator.AND:
-			return and(comparisons)
-		case BooleanLogicalOperator.XOR:
-			return xor(comparisons)
-		case BooleanLogicalOperator.NOR:
-			return nor(comparisons)
-		case BooleanLogicalOperator.NAND:
-			return nand(comparisons)
-		default:
-			throw new Error(`Unsupported logical operator: [${logical}]`)
-	}
-}
-
-function or(comparisons: (1 | 0)[]): 1 | 0 {
-	return comparisons.some(c => c === 1) ? 1 : 0
-}
-
-function and(comparisons: (1 | 0)[]): 1 | 0 {
-	return comparisons.every(c => c === 1) ? 1 : 0
-}
-
-function xor(comparisons: (1 | 0)[]): 1 | 0 {
-	let xor = 0
-	for (let i = 0; i < comparisons.length; i++) {
-		xor += comparisons[i]!
-		if (xor > 1) {
-			return 0
-		}
-	}
-	if (xor === 1) {
-		return 1
-	} else {
-		return 0
-	}
-}
-
-function nor(comparisons: (1 | 0)[]): 1 | 0 {
-	return comparisons.some(c => c === 1) ? 0 : 1
-}
-
-function nand(comparisons: (1 | 0)[]): 1 | 0 {
-	let nand = 0
-	for (let i = 0; i < comparisons.length; i++) {
-		nand += comparisons[i]!
-		if (nand < 0) {
-			return 1
-		}
-	}
-	if (nand === comparisons.length) {
-		return 0
-	} else {
-		return 1
-	}
-}
 /**
  * This creates an arquero expression suitable for comparison of direct values or columns.
  * It automatically handles these comparisons by data type for the column (using the input column for type check).
@@ -127,6 +68,26 @@ export function compare(
 			type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
 
 		return compareValues(left, right, operator)
+	}) as CompareWrapper
+}
+
+/**
+ * Takes a list of columns and compares their values using boolean logical operators
+ * to return a boolean result.
+ * Input values will be coerced to booleans from any original type, and compared
+ * as binary 1s and 0s, with the resulting output being a 1 or 0
+ * @param columns
+ * @param operator
+ * @returns
+ */
+export function deriveBoolean(
+	columns: string[],
+	operator: BooleanLogicalOperator,
+): CompareWrapper {
+	return escape((d: Record<string, string | number>): 0 | 1 => {
+		// gather all of the column values, coerce to booleans
+		const values = columns.map(c => (bool(d[c]) ? 1 : 0))
+		return evaluateBoolean(values, operator)
 	}) as CompareWrapper
 }
 
