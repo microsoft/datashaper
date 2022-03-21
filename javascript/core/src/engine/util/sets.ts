@@ -26,11 +26,9 @@ export async function setWithStore(
 	store: TableStore,
 	op: SetOp,
 ): Promise<TableContainer> {
-	const [inputTable, ...otherTables] = await Promise.all([
-		store.table(input),
-		...others.map(other => store.table(other)),
-	])
-	const result = set(inputTable, op, otherTables)
+	const inputTable = store.table(input)
+	const otherTables = others.map(o => store.table(o))
+	const result = set(await inputTable, op, await Promise.all(otherTables))
 	return container(output, result)
 }
 
