@@ -762,6 +762,8 @@ export interface StepDescriptionProps extends StepDependent {
     // (undocumented)
     showOutput?: boolean;
     // (undocumented)
+    showOutputColumn?: boolean;
+    // (undocumented)
     style?: React.CSSProperties;
 }
 

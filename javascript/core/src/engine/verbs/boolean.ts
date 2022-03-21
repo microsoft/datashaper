@@ -4,7 +4,7 @@
  */
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
-import { container } from '../../factories.js'
+import { container } from '../../container.js'
 import type { TableStore } from '../../index.js'
 import type { BooleanStep, TableContainer } from '../../types.js'
 import { deriveBoolean } from '../util/expressions.js'
