@@ -114,6 +114,7 @@ export interface StepDescriptionProps extends StepDependent {
 	style?: React.CSSProperties
 	showInput?: boolean
 	showOutput?: boolean
+	showOutputColumn?: boolean
 	actions?: JSX.Element
 }
 

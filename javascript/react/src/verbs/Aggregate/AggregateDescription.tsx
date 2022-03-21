@@ -15,10 +15,6 @@ export const AggregateDescription: React.FC<StepDescriptionProps> = memo(
 			const { args } = internal
 			return [
 				{
-					before: 'into column',
-					value: args.to,
-				},
-				{
 					before: 'group by',
 					value: args.groupby,
 				},

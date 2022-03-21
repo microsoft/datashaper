@@ -24,16 +24,12 @@ export const BooleanLogicDescription: React.FC<StepDescriptionProps> = memo(
 			)
 			return [
 				{
-					before: 'into column',
-					value: args.to,
-				},
-				{
-					before: `column${args.columns?.length !== 1 ? 's' : ''}`,
+					before: `combine column${args.columns?.length !== 1 ? 's' : ''}`,
 					value: args.columns?.length === 0 ? undefined : '',
 					sub,
 				},
 				{
-					before: 'with operator',
+					before: 'using operator',
 					value: args.operator,
 				},
 			]

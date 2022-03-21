@@ -24,7 +24,7 @@ export const ConvertDescription: React.FC<StepDescriptionProps> = memo(
 			)
 			return [
 				{
-					before: 'convert columns',
+					before: `convert column${args.columns?.length !== 1 ? 's' : ''}`,
 					value: args.columns.length === 0 ? undefined : '',
 					sub,
 				},

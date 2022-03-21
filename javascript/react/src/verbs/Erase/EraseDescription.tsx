@@ -15,11 +15,11 @@ export const EraseDescription: React.FC<StepDescriptionProps> = memo(
 			const { args } = internal
 			return [
 				{
-					before: 'into column',
+					before: 'column',
 					value: args.column,
 				},
 				{
-					before: 'Value',
+					before: 'value',
 					value: args.value,
 				},
 			]

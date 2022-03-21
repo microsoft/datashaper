@@ -16,15 +16,11 @@ export const BinDescription: React.FC<StepDescriptionProps> = memo(
 			const { args } = internal
 			return [
 				{
-					before: 'into column',
-					value: args.to,
-				},
-				{
-					before: 'using column',
+					before: 'column',
 					value: args.column,
 					sub: [
 						{
-							before: 'with',
+							before: 'using',
 							value: args.strategy,
 							after: 'strategy',
 							sub:

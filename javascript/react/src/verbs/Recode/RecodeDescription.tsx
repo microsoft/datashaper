@@ -28,8 +28,8 @@ export const RecodeDescription: React.FC<StepDescriptionProps> = memo(
 					value: args.column,
 				},
 				{
-					before: 'into column',
-					value: args.to,
+					before: 'values',
+					value: entries.length === 0 ? undefined : '',
 					sub,
 				},
 			]

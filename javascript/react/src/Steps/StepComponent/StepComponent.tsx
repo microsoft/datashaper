@@ -44,7 +44,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 			<Container className="step-component">
 				<WithAllArgs step={step} store={store} onChange={handleStepChange} />
 				<DescriptionContainer>
-					<Description step={step} showInput showOutput />
+					<Description step={step} showInput showOutput showOutputColumn />
 				</DescriptionContainer>
 			</Container>
 		)
