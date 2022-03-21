@@ -197,4 +197,8 @@ export interface ArqueroDetailsListProps
 	 * Fixed headers on top when scrolling
 	 */
 	isHeadersFixed?: boolean
+	/**
+	 * Resizable columns
+	 */
+	isResizable?: boolean
 }

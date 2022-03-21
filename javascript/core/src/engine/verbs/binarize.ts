@@ -10,8 +10,8 @@ import { compareAll } from '../util/index.js'
  * Executes an arquero derive where the output is a 1 or 0.
  */
 const doBinarize = wrapColumnStep<BinarizeArgs>(
-	(input, { to, column, criteria }) =>
-		input.derive({ [to]: compareAll(column, criteria) }),
+	(input, { to, column, criteria, logical }) =>
+		input.derive({ [to]: compareAll(column, criteria, logical) }),
 )
 
 export const binarize = makeStepFunction(doBinarize)

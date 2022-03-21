@@ -7,6 +7,7 @@ import { escape, op } from 'arquero'
 import type { ConvertArgs } from '../../types.js'
 import { ParseType } from '../../types.js'
 import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { bool } from '../util/data-types.js'
 
 /**
  * Executes an arquero string parse operation.
@@ -31,15 +32,7 @@ function parseType(column: string, type: ParseType, radix?: number) {
 		switch (type) {
 			case ParseType.Boolean:
 				// arquero has no boolean operation
-				// note that any string, even 'false' becomes true with the boolean constructor
-				// that's not likely the right way to interpret data table content, however
-				if (value === 'false') {
-					return false
-					// for all other intents and purposes, a truthy value should be coerced
-				} else if (value) {
-					return true
-				}
-				return false
+				return bool(value)
 			case ParseType.Date:
 				return op.parse_date(value)
 			case ParseType.Integer:
