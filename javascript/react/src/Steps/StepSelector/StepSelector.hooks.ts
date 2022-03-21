@@ -25,21 +25,12 @@ const groups = [
 		],
 	},
 	{
-		label: 'Derive columns',
-		verbs: [
-			'bin',
-			'binarize',
-			'convert',
-			'derive',
-			'erase',
-			'fill',
-			'fold',
-			'impute',
-			'merge',
-			'recode',
-			'spread',
-			'unfold',
-		],
+		label: 'Transform column',
+		verbs: ['bin', 'binarize', 'convert', 'erase', 'fill', 'impute', 'recode'],
+	},
+	{
+		label: 'Combine columns',
+		verbs: ['boolean', 'derive', 'fold', 'merge', 'spread', 'unfold'],
 	},
 	{
 		label: 'Filter & Select',

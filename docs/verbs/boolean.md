@@ -16,9 +16,9 @@ For boolean _comparison_ operators, use the [binarize](./binarize.md) verb.
 
 - OR: any `true` value returns true
 - AND: all values must be `true`
-- XOR (exclusive OR): only one value may be `true`
 - NOR (not OR): no values can be `true`
 - NAND (not AND): any values can be `true` not not _all_ can
+- XOR (exclusive OR): only one value may be `true`
 
 Note that in formal boolean algebra some operators expect exactly two input values. For data wrangling convenience we allow any number of input values and have worded the definitions above accordingly.
 

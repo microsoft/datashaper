@@ -5,6 +5,7 @@
 export * from './Aggregate/index.js'
 export * from './Bin/index.js'
 export * from './Binarize/index.js'
+export * from './BooleanLogic/index.js'
 export * from './ColumnListOperation/index.js'
 export * from './Convert/index.js'
 export * from './Derive/index.js'
