@@ -726,6 +726,7 @@ export const StepComponent: React.FC<StepComponentProps_2>;
 // @public (undocumented)
 export interface StepComponentProps extends StepDependent {
     input?: string;
+    label?: string;
     // (undocumented)
     onChange?: StepChangeFunction;
     store?: TableStore;
