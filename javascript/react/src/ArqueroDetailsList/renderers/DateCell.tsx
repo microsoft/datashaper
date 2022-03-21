@@ -13,7 +13,7 @@ import type { FormattedCellProps } from './types.js'
 export const DateCell: React.FC<FormattedCellProps> = memo(function DateCell({
 	item,
 	column,
-	textAlign = 'left',
+	textAlign = 'right',
 }) {
 	const value = getValue(item, column)
 	return (
@@ -22,7 +22,7 @@ export const DateCell: React.FC<FormattedCellProps> = memo(function DateCell({
 				textAlign,
 			}}
 		>
-			{value && (value as Date).toLocaleDateString()}
+			{value && (value as Date).toLocaleString()}
 		</div>
 	)
 })
