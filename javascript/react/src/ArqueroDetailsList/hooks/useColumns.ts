@@ -43,6 +43,7 @@ export interface ColumnOptions {
 	isDefaultHeaderClickable?: boolean
 	showColumnBorders?: boolean
 	compact?: boolean
+	isResizable?: boolean
 }
 
 /**
@@ -73,6 +74,7 @@ export function useColumns(
 		isDefaultHeaderClickable = false,
 		showColumnBorders = false,
 		compact = false,
+		isResizable = true,
 	} = options
 
 	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
@@ -176,6 +178,7 @@ export function useColumns(
 					compact,
 					...column.data,
 				},
+				isResizable,
 			}
 		})
 	}, [
@@ -189,6 +192,7 @@ export function useColumns(
 		handleCellClick,
 		styles,
 		compact,
+		isResizable,
 		computedMetadata,
 		colorScale,
 		handleCellDropdownSelect,

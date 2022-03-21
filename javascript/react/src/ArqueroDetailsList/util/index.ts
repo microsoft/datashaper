@@ -66,3 +66,8 @@ export function isEmpty(value: any): boolean {
 	}
 	return false
 }
+
+export function debounceFn(fn: () => void, delay = 500): () => void {
+	const timer = setTimeout(() => fn(), delay)
+	return () => clearTimeout(timer)
+}

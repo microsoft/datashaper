@@ -96,6 +96,10 @@ export interface StepComponentProps extends StepDependent {
 	 */
 	input?: string
 	onChange?: StepChangeFunction
+	/**
+	 * Optional override for the label
+	 */
+	label?: string
 }
 
 /**

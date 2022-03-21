@@ -39,7 +39,7 @@ export class FileCollection {
 		return this._name
 	}
 
-	get config() {
+	get config(): Config {
 		return this._config
 	}
 
