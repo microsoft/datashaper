@@ -11,7 +11,7 @@ import {
 	SelectionMode,
 } from '@fluentui/react'
 import type { RowObject } from 'arquero/dist/types/table/table'
-import { memo, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 import { groupBuilder } from '../common/index.js'
@@ -29,6 +29,7 @@ import {
 	useTableMetadata,
 } from './hooks/index.js'
 import type { ArqueroDetailsListProps, DetailsListFeatures } from './types.js'
+import { debounceFn } from './util/index.js'
 
 /**
  * Renders an arquero table using a fluent DetailsList.
@@ -60,6 +61,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			styles,
 			isHeadersFixed = false,
 			compact = false,
+			isResizable = true,
 			// passthrough the remainder as props
 			...rest
 		} = props
@@ -106,6 +108,16 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			return isSortable || isColumnClickable || !!onColumnHeaderClick
 		}, [isSortable, isColumnClickable, onColumnHeaderClick])
 
+		const onColumnResize = useCallback(
+			(column, newWidth) => {
+				const set = () => setVersion(prev => prev + 1)
+				if (column.currentWidth !== newWidth) {
+					debounceFn(set)
+				}
+			},
+			[setVersion],
+		)
+
 		const displayColumns = useColumns(
 			table,
 			computedMetadata,
@@ -124,6 +136,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				isColumnClickable,
 				showColumnBorders,
 				compact,
+				isResizable,
 			},
 		)
 
@@ -168,7 +181,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		}, [sliced, sortedGroups, items, sortColumn, sortDirection, features])
 		// as in FluentUI documentation, when updating item we can update the list items with a spread operator.
 		// since when adding a new column we're changing the columns prop too, this approach doesn't work for that.
-		// a workaround found in the issues suggest to use this version property to use as comparisson to force re-render
+		// a workaround found in the issues suggest to use this version property to use as comparison to force re-render
 		useEffect(() => {
 			setVersion(prev => prev + 1)
 		}, [columns, table, compact])
@@ -190,6 +203,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					constrainMode={ConstrainMode.unconstrained}
 					onRenderRow={renderRow}
 					onRenderDetailsHeader={renderDetailsHeader}
+					onColumnResize={onColumnResize}
 					compact={compact}
 					{...rest}
 					listProps={{
