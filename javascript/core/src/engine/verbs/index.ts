@@ -4,14 +4,19 @@
  */
 import { BinStrategy } from '../../index.js'
 import type { Step } from '../../types.js'
-import { FieldAggregateOperation, JoinStrategy, Verb } from '../../types.js'
+import {
+	BooleanLogicalOperator,
+	FieldAggregateOperation,
+	JoinStrategy,
+	Verb,
+} from '../../types.js'
 
 /**
  * Factory function to create new verb configs
  * with as many reasonable defaults as possible.
  * TODO: if we accepted a table (or TableStore) we could do column lookups and such
  * to preselect.
- * @param verb
+ * @param verb -
  */
 export function factory(verb: Verb, input: string, output: string): Step {
 	const base = {
@@ -106,6 +111,7 @@ export function factory(verb: Verb, input: string, output: string): Step {
 				args: {
 					to: 'output',
 					criteria: [],
+					logical: BooleanLogicalOperator.OR,
 				},
 			}
 		case Verb.Filter:
@@ -113,6 +119,7 @@ export function factory(verb: Verb, input: string, output: string): Step {
 				...base,
 				args: {
 					criteria: [],
+					logical: BooleanLogicalOperator.OR,
 				},
 			}
 		case Verb.Fetch:

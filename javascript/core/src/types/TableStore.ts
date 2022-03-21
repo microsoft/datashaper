@@ -23,30 +23,30 @@ export interface TableStore {
 	/**
 	 * Returns a table container.
 	 * Uses async resolver function if necessary to lazy-load or retrieve remote tables.
-	 * @param id
+	 * @param id -
 	 */
 	get(id: string): Promise<TableContainer>
 	table(id: string): Promise<ColumnTable>
 	/**
 	 * Set a loaded table in the store.
-	 * @param id
-	 * @param table
+	 * @param id -
+	 * @param table -
 	 */
 	set(container: TableContainer): TableStore
 	/**
 	 * Remove the named table
-	 * @param id
+	 * @param id -
 	 */
 	delete(id: string): TableStore
 	/**
 	 * Add a table name to the store with a resolver function to be loaded when needed.
-	 * @param id
-	 * @param resolver
+	 * @param id -
+	 * @param resolver -
 	 */
 	queue(id: string, resolver: ResolverFunction): TableStore
 	/**
 	 * List all tables in the store by id, with an optional filter function.
-	 * @param filter
+	 * @param filter -
 	 * @returns
 	 */
 	list(filter?: (id: string) => boolean): string[]
@@ -61,19 +61,19 @@ export interface TableStore {
 	/**
 	 * Add a listener for a particular table.
 	 * Returns an unlisten handler.
-	 * @param id
-	 * @param listener
+	 * @param id -
+	 * @param listener -
 	 */
 	listen(id: string, listener: ListenerFunction): () => void
 	/**
 	 * Stop listening for a particular table.
-	 * @param id
+	 * @param id -
 	 */
 	unlisten(id: string): void
 	/**
 	 * Get alerted for any changes in the store.
 	 * Returns an unlisten handler.
-	 * @param listener
+	 * @param listener -
 	 */
 	addChangeListener(listener: ChangeListenerFunction): () => void
 	/**

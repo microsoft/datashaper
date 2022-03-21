@@ -11,6 +11,10 @@ import { opDropdownStyles } from './styles.js'
 export interface EnumDropdownProps<E = unknown>
 	extends Omit<IDropdownProps, 'options'> {
 	enumeration: E
+	/**
+	 * Optional labels to map enum keys to alternet text
+	 */
+	labels?: Record<string, string>
 }
 
 /**
@@ -18,22 +22,26 @@ export interface EnumDropdownProps<E = unknown>
  */
 export const EnumDropdown: React.FC<EnumDropdownProps> = memo(
 	function EnumDropdown(props) {
-		const options = useOptions(props.enumeration)
+		const options = useOptions(props.enumeration, props.labels)
 		return <Dropdown options={options} styles={opDropdownStyles} {...props} />
 	},
 )
 
-function useOptions<E = unknown>(enumeration: E): IDropdownOption[] {
+function useOptions<E = unknown>(
+	enumeration: E,
+	labels?: Record<string, string>,
+): IDropdownOption[] {
 	return useMemo(() => {
 		const options = Object.entries(enumeration).map(entry => {
 			const [name, key] = entry
+			const text = (labels && labels[key]) || format(name)
 			return {
 				key,
-				text: format(name),
+				text,
 			}
 		})
 		return options
-	}, [enumeration])
+	}, [enumeration, labels])
 }
 
 /**

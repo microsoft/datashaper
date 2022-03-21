@@ -9,7 +9,7 @@ import { useMemo } from 'react'
 
 /**
  * Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table.
- * @param meta
+ * @param meta -
  * @returns
  */
 export function useIncrementingColumnColorScale(

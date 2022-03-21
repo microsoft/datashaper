@@ -3,12 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Criterion, FilterStep } from '@data-wrangling-components/core'
+import { BooleanLogicalOperator } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useLoadTable } from '../../common/hooks.js'
+import { useHandleDropdownChange, useLoadTable } from '../../common/hooks.js'
+import { LeftAlignedRow } from '../../common/styles.js'
+import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import type { StepComponentProps } from '../../types.js'
 import { FilterFunction } from '../shared/index.js'
 
@@ -55,6 +58,12 @@ export const Filter: React.FC<StepComponentProps> = memo(function Filter({
 		},
 		[internal, onChange],
 	)
+
+	const handleLogicalChange = useHandleDropdownChange(
+		internal,
+		'args.logical',
+		onChange,
+	)
 	const filters = useFilters(
 		tbl,
 		internal.args.column,
@@ -71,6 +80,23 @@ export const Filter: React.FC<StepComponentProps> = memo(function Filter({
 			>
 				Add criteria
 			</ActionButton>
+			{internal.args.criteria.length > 1 ? (
+				<LeftAlignedRow>
+					<EnumDropdown
+						label={'Logical combination'}
+						enumeration={BooleanLogicalOperator}
+						labels={{
+							or: 'OR',
+							and: 'AND',
+							nor: 'NOR',
+							nand: 'NAND',
+							xor: 'XOR',
+						}}
+						selectedKey={internal.args.logical}
+						onChange={handleLogicalChange}
+					/>
+				</LeftAlignedRow>
+			) : null}
 		</Container>
 	)
 })
@@ -88,14 +114,14 @@ function useFilters(
 	return criteria.map((criterion, index) => {
 		const handleChange = (f?: Criterion) => onChange(f, index)
 		return (
-			<Vertical key={`filter-function-${index}`}>
+			<Vertical key={`filter-function-${index}`} index={index}>
 				<FilterFunction
 					table={table}
 					column={column}
 					criterion={criterion}
 					onChange={handleChange}
+					suppressLabels={index > 0}
 				/>
-				{index < criteria.length - 1 ? <Or>or</Or> : null}
 			</Vertical>
 		)
 	})
@@ -107,11 +133,8 @@ const Container = styled.div`
 	align-items: flex-start;
 `
 
-const Vertical = styled.div`
+const Vertical = styled.div<{ index: number }>`
 	display: flex;
 	flex-direction: column;
-`
-
-const Or = styled.div`
-	color: ${({ theme }) => theme.application().lowMidContrast().hex()};
+	margin-top: ${({ index }) => (index > 0 ? 6 : 0)}px;
 `

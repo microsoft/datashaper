@@ -49,9 +49,9 @@ export interface ColumnOptions {
 /**
  * Overlays a number of special features onto the IColumn objects for a table.
  * This includes overridden renderers to support our sorting, selection, and data visualization.
- * @param table
- * @param columns
- * @param options
+ * @param table -
+ * @param columns -
+ * @param options -
  * @returns
  */
 export function useColumns(
