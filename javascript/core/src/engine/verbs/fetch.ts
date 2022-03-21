@@ -5,33 +5,22 @@
 
 import { loadCSV, loadJSON } from 'arquero'
 
-import { container } from '../../factories.js'
-import type { FetchStep, TableStore } from '../../index.js'
-import type { TableContainer } from '../../types.js'
+import type { FetchArgs } from '../../index.js'
+import { makeInputFunction, makeInputNode } from '../factories.js'
 
-/**
- * Executes an arquero loadCSV
- * @param step
- * @param store
- * @returns
- */
-export async function fetch(
-	{ output, args: { url, delimiter, autoMax } }: FetchStep,
-	_store: TableStore,
-): Promise<TableContainer> {
+export const fetch = makeInputFunction(doFetch)
+export const fetchNode = makeInputNode(doFetch)
+
+async function doFetch({ url, delimiter, autoMax }: FetchArgs) {
 	if (url.toLowerCase().endsWith('.json')) {
-		const tableFromJSON = await loadJSON(url, {
+		return loadJSON(url, {
 			autoType: autoMax === undefined || autoMax <= 0 ? false : true,
 		})
-
-		return container(output, tableFromJSON)
 	} else {
-		const tableFromCSV = await loadCSV(url, {
-			delimiter: delimiter,
+		return loadCSV(url, {
+			delimiter,
 			autoMax: autoMax !== undefined ? autoMax : 0,
 			autoType: autoMax === undefined || autoMax <= 0 ? false : true,
 		})
-
-		return container(output, tableFromCSV)
 	}
 }

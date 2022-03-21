@@ -10,10 +10,12 @@
 	"sideEffects": false,
 	"scripts": {
 		"clean": "essex clean dist lib",
-		"build": "essex build --docs"
+		"build": "essex build --docs --skipExportCheck"
 	},
 	"dependencies": {
-		"lodash-es": "^4.17.21"
+		"lodash-es": "^4.17.21",
+		"rxjs": "^7.5.5",
+		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^21.0.1",
@@ -21,6 +23,7 @@
 		"@types/jest": "^27.4.1",
 		"@types/lodash-es": "^4.17.6",
 		"@types/node": "^17.0.21",
+		"@types/uuid": "^8",
 		"arquero": "^4.8.8",
 		"regenerator-runtime": "^0.13.9",
 		"typescript": "^4.6.2"

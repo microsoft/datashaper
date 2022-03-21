@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinOptions } from 'arquero/dist/types/table/transformable'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../../factories.js'
+import { container } from '../../container.js'
+import { NodeImpl } from '../../graph/NodeImpl.js'
 import type { TableStore } from '../../index.js'
-import type { JoinStep, TableContainer } from '../../types.js'
+import type { JoinArgs, JoinStep, TableContainer } from '../../types.js'
 import { JoinStrategy } from '../../types.js'
 
 /**
@@ -16,26 +17,54 @@ import { JoinStrategy } from '../../types.js'
  * @returns
  */
 export async function join(
-	{
-		input,
-		output,
-		args: { other, on, strategy = JoinStrategy.Inner },
-	}: JoinStep,
+	{ input, output, args }: JoinStep,
 	store: TableStore,
 ): Promise<TableContainer> {
 	const [inputTable, otherTable] = await Promise.all([
 		store.table(input),
-		store.table(other),
+		store.table(args.other),
 	])
+	return container(output, doJoin(inputTable, otherTable, args))
+}
 
-	const options: JoinOptions = {
+export enum JoinInput {
+	Left = 'left',
+	Right = 'right',
+}
+class JoinNode extends NodeImpl<TableContainer, JoinArgs> {
+	constructor(id: string) {
+		super([JoinInput.Left, JoinInput.Right])
+		this.id = id
+	}
+
+	protected doRecalculate(): void | Promise<void> {
+		const left = this.inputValue(JoinInput.Left)
+		const right = this.inputValue(JoinInput.Right)
+		if (left?.table != null && right?.table != null && this.config != null) {
+			this.emit(
+				container(this.id, doJoin(left.table, right.table, this.config)),
+			)
+		} else {
+			this.emit(undefined)
+		}
+	}
+}
+
+export function joinNode(id: string): JoinNode {
+	return new JoinNode(id)
+}
+
+function doJoin(
+	input: ColumnTable,
+	other: ColumnTable,
+	{ on, strategy = JoinStrategy.Inner }: JoinArgs,
+): ColumnTable {
+	return input.join(other, on, undefined, {
 		left:
 			strategy === JoinStrategy.LeftOuter ||
 			strategy === JoinStrategy.FullOuter,
 		right:
 			strategy === JoinStrategy.RightOuter ||
 			strategy === JoinStrategy.FullOuter,
-	}
-
-	return container(output, inputTable.join(otherTable, on, undefined, options))
+	})
 }
