@@ -41,7 +41,9 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	)
 
 	const cellStyle = useMemo(() => {
-		const style: React.CSSProperties = {}
+		const style: React.CSSProperties = {
+			width: '100%',
+		}
 		if (onColumnClick) {
 			style.cursor = 'pointer'
 		}
