@@ -2,16 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-
 import type { SampleArgs } from '../../types.js'
-import { makeStepFunction, makeStepNode } from '../factories.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 
-export const sample = makeStepFunction(doSample)
-export const sampleNode = makeStepNode(doSample)
-
-function doSample(input: ColumnTable, { size, proportion }: SampleArgs) {
+const doSample = wrapColumnStep<SampleArgs>((input, { size, proportion }) => {
 	const p = Math.round(input.numRows() * (proportion || 1))
 	const s = size || p
 	return input.sample(s)
-}
+})
+
+export const sample = makeStepFunction(doSample)
+export const sampleNode = makeStepNode(doSample)

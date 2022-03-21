@@ -3,28 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { escape } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
-import { container } from '../../container.js'
-import type { DeriveArgs, TableContainer } from '../../types.js'
+import type { DeriveArgs } from '../../types.js'
 import { MathOperator } from '../../types.js'
-import { makeStepFunction, makeStepNode } from '../factories.js'
-
-export const derive = makeStepFunction(doDerive)
-export const deriveNode = makeStepNode(doDerive)
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 
 /**
  * Executes an arquero derive.
  * This basically just supports math operations between two columns.
  */
-function doDerive(
-	id: string,
-	input: TableContainer,
-	{ column1, column2, operator, to }: DeriveArgs,
-) {
-	let result: ColumnTable | undefined
-	if (input.table != null) {
+const doDerive = wrapColumnStep<DeriveArgs>(
+	(input, { column1, column2, operator, to }) => {
 		// eslint-disable-next-line
 		const func = escape((d: any) => {
 			const l = d[column1]
@@ -43,10 +32,9 @@ function doDerive(
 			}
 		})
 
-		const dArgs: ExprObject = {
-			[to]: func,
-		}
-		result = input.table.derive(dArgs)
-	}
-	return container(id, result)
-}
+		return input.derive({ [to]: func })
+	},
+)
+
+export const derive = makeStepFunction(doDerive)
+export const deriveNode = makeStepNode(doDerive)

@@ -3,7 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { NodeImpl } from '@data-wrangling-components/dataflow-graph'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+import { container } from '../container.js'
 import type {
 	Step,
 	StepFunction,
@@ -17,10 +19,7 @@ export type StepComputeFn<Args> = (
 	args: Args,
 ) => Promise<TableContainer> | TableContainer
 
-export type InputComputeFn<Args> = (
-	id: string,
-	args: Args,
-) => Promise<TableContainer> | TableContainer
+export type InputComputeFn<Args> = (args: Args) => Promise<ColumnTable>
 
 export enum StepNodeInput {
 	Source = 'source',
@@ -53,8 +52,8 @@ export class InputNode<Args> extends NodeImpl<TableContainer, Args> {
 	}
 	protected async doRecalculate(): Promise<void> {
 		if (this.config != null) {
-			const output = await this._computeFn(this.id, this.config)
-			this.emit(output)
+			const output = await this._computeFn(this.config)
+			this.emit(container(this.id, output))
 		} else {
 			this.emit(undefined)
 		}
@@ -85,8 +84,23 @@ export function makeStepFunction<Args>(
 	}
 }
 
-export function makeInputFunction<Args>(compute: InputComputeFn<Args>) {
-	return function inputFn({ output, args }: Step<Args>) {
-		return compute(output, args)
+export function makeInputFunction<Args>(
+	compute: InputComputeFn<Args>,
+): StepFunction<Args> {
+	return async function inputFn({ output, args }: Step<Args>) {
+		const table = await compute(args)
+		return container(output, table)
+	}
+}
+
+export function wrapColumnStep<Args>(
+	inner: (input: ColumnTable, args: Args) => ColumnTable,
+): StepComputeFn<Args> {
+	return (id: string, source: TableContainer<unknown>, args: Args) => {
+		let result: ColumnTable | undefined
+		if (source.table) {
+			result = inner(source.table, args)
+		}
+		return container(id, result)
 	}
 }

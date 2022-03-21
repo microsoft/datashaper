@@ -3,16 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { from } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
 import type { UnfoldArgs } from '../../types.js'
-import { makeStepFunction, makeStepNode } from '../factories.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 
-export const unfold = makeStepFunction(doUnfold)
-export const unfoldNode = makeStepNode(doUnfold)
-
-function doUnfold(input: ColumnTable, { key, value }: UnfoldArgs) {
+const doUnfold = wrapColumnStep<UnfoldArgs>((input, { key, value }) => {
 	const columnNames: string[] = input.columnNames(name => {
 		return name !== key && name !== value
 	})
@@ -50,4 +46,7 @@ function doUnfold(input: ColumnTable, { key, value }: UnfoldArgs) {
 		finalArray.push(tempObj)
 	}
 	return from(finalArray)
-}
+})
+
+export const unfold = makeStepFunction(doUnfold)
+export const unfoldNode = makeStepNode(doUnfold)
