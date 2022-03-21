@@ -2,10 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Observable } from 'rxjs'
-
 import { NodeImpl } from './NodeImpl.js'
-import type { Maybe } from './types.js'
+import type { Maybe, NodeBinding } from './types.js'
 
 const VARIADIC_PREFIX = 'DWC.VariadicInput.'
 
@@ -28,9 +26,9 @@ export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 		return `${VARIADIC_PREFIX}${this.variadicIndex++}`
 	}
 
-	public installNext(socket: Observable<Maybe<T>>): string {
+	public installNext(binding: NodeBinding<T>): string {
 		const name = this.nextInput()
-		this.install(name, socket)
+		this.install(name, binding)
 		return name
 	}
 

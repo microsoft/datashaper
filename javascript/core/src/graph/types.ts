@@ -15,6 +15,7 @@ export type Maybe<T> = T | undefined
  * @public
  */
 export interface Node<T, Config = unknown> {
+	readonly id: string
 	/**
 	 * The node's mutable configuration
 	 */
@@ -34,8 +35,7 @@ export interface Node<T, Config = unknown> {
 	 * Wires an input socket to a stream
 	 * @param name - the name of the input socket
 	 */
-	install(name: string, socket: Observable<Maybe<T>>): void
-
+	install(name: string, binding: NodeBinding<T>): void
 	/**
 	 * Clear an input socket
 	 * @param name - The input socket name
@@ -53,4 +53,34 @@ export interface Node<T, Config = unknown> {
 	 * @param name - The output name. If undefined, this will use the implicit default output socket.
 	 */
 	outputValue(name?: string): Maybe<T>
+}
+
+/**
+ * A binding for a value being emitted from a node
+ */
+export interface NodeBinding<T> {
+	/**
+	 * The node to bind
+	 */
+	node: Node<T>
+
+	/**
+	 * The named output
+	 */
+	output?: string
+}
+
+export interface GraphOrchestrator<T> {
+	readonly nodeIds: string[]
+
+	/**
+	 * Retrieves a node by id.
+	 * @param id - the node identifier
+	 * @throws - if the id is not found
+	 */
+	getNodeWithId(id: string): Node<T>
+
+	// TODO: Detect Cycles?
+	// TODO: events for when nodes added, removed?
+	// TODO: Expose Topologically important nodes like inputs & outputs?
 }

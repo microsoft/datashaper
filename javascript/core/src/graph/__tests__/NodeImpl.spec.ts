@@ -12,7 +12,7 @@ describe('NodeImpl', () => {
 	it('will throw an error if installing unknown input socket', () => {
 		const two = new ValueNode(2)
 		const sum = new AddNode()
-		expect(() => sum.install('derp', two.output())).toThrow(
+		expect(() => sum.install('derp', { node: two })).toThrow(
 			/unknown input socket name "derp"/,
 		)
 	})
@@ -53,8 +53,8 @@ describe('NodeImpl', () => {
 
 		const sum = new AddNode()
 		expect(sum.outputValue()).toBeUndefined()
-		sum.install(Input.LHS, two.output())
-		sum.install(Input.RHS, three.output())
+		sum.install(Input.LHS, { node: two })
+		sum.install(Input.RHS, { node: three })
 		expect(sum.outputValue()).toBe(5)
 	})
 
@@ -63,11 +63,11 @@ describe('NodeImpl', () => {
 		const three = new ValueNode(3)
 		const sum = new AddNode()
 
-		sum.install(Input.LHS, two.output())
-		sum.install(Input.RHS, three.output())
+		sum.install(Input.LHS, { node: two })
+		sum.install(Input.RHS, { node: three })
 		expect(sum.outputValue()).toBe(5)
 
-		sum.install(Input.LHS, three.output())
+		sum.install(Input.LHS, { node: three })
 		expect(sum.outputValue()).toBe(6)
 	})
 
@@ -76,23 +76,23 @@ describe('NodeImpl', () => {
 		const two = new ValueNode(2)
 		const three = new ValueNode(3)
 		const sum = new AddNode()
-		sum.install(Input.LHS, two.output())
-		sum.install(Input.RHS, three.output())
+		sum.install(Input.LHS, { node: two })
+		sum.install(Input.RHS, { node: three })
 
 		const subtraction = new SubtractNode()
-		subtraction.install(Input.LHS, sum.output())
-		subtraction.install(Input.RHS, one.output())
+		subtraction.install(Input.LHS, { node: sum })
+		subtraction.install(Input.RHS, { node: one })
 
 		expect(subtraction.outputValue()).toBe(4)
 
 		const mult = new MultiplyNode()
-		mult.install(Input.LHS, subtraction.output())
-		mult.install(Input.RHS, two.output())
+		mult.install(Input.LHS, { node: subtraction })
+		mult.install(Input.RHS, { node: two })
 		expect(mult.outputValue()).toBe(8)
 
 		const div = new DivideNode()
-		div.install(Input.LHS, mult.output())
-		div.install(Input.RHS, two.output())
+		div.install(Input.LHS, { node: mult })
+		div.install(Input.RHS, { node: two })
 		expect(div.outputValue()).toBe(4)
 	})
 
@@ -101,8 +101,8 @@ describe('NodeImpl', () => {
 		const three = new ValueNode(3)
 		const sum = new AddNode()
 
-		sum.install(Input.LHS, two.output())
-		sum.install(Input.RHS, three.output())
+		sum.install(Input.LHS, { node: two })
+		sum.install(Input.RHS, { node: three })
 		expect(sum.outputValue()).toBe(5)
 
 		// trigger a config-based recompute
@@ -114,8 +114,8 @@ describe('NodeImpl', () => {
 		const zero = new ValueNode(0)
 		const two = new ValueNode(2)
 		const div = new ThrowingNode()
-		div.install(Input.LHS, two.output())
-		div.install(Input.RHS, zero.output())
+		div.install(Input.LHS, { node: two })
+		div.install(Input.RHS, { node: zero })
 
 		let caught: Error | undefined
 		div.output().subscribe({

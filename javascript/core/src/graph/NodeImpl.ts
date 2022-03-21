@@ -6,12 +6,12 @@ import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
-import type { Maybe, Node } from './types'
+import type { Maybe, Node, NodeBinding } from './types'
 
 const DEFAULT_OUTPUT_NAME = 'DWC.DefaultOutput'
 
 export abstract class NodeImpl<T, Config> implements Node<T, Config> {
-	public id = uuid()
+	protected _id = uuid()
 	private _config: Maybe<Config>
 
 	// upstream socket wiring
@@ -27,6 +27,14 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		;[...outputs, DEFAULT_OUTPUT_NAME].forEach(o => {
 			this._outputs.set(o, new BehaviorSubject<Maybe<T>>(undefined))
 		})
+	}
+
+	public get id(): string {
+		return this._id
+	}
+
+	public set id(value: string) {
+		this._id = value
 	}
 
 	public get config(): Maybe<Config> {
@@ -57,13 +65,14 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		return this._outputs.get(name)?.value
 	}
 
-	public install(name: string, socket: Observable<Maybe<T>>): void {
+	public install(name: string, { node, output }: NodeBinding<T>): void {
 		this.verifyInputSocketName(name)
 		// uninstall any existing upstream socket connection
 		if (this._inputSubscriptions.has(name)) {
 			this.uninstall(name)
 		}
 		// subscribe to the new input
+		const socket = node.output(output)
 		const subscription = socket.subscribe(value => {
 			this._inputValues.set(name, value)
 			void this.recalculate()

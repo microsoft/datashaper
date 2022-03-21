@@ -7,11 +7,11 @@ describe('NodeImpl', () => {
 
 		const sum = new VariadicAddNode()
 		expect(sum.outputValue()).toBe(0)
-		const n1 = sum.installNext(two.output())
+		const n1 = sum.installNext({ node: two })
 		expect(sum.outputValue()).toBe(2)
-		const n2 = sum.installNext(three.output())
+		const n2 = sum.installNext({ node: three })
 		expect(sum.outputValue()).toBe(5)
-		const n3 = sum.installNext(three.output())
+		const n3 = sum.installNext({ node: three })
 		expect(sum.outputValue()).toBe(8)
 
 		sum.uninstall(n3)
