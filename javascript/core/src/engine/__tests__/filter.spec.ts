@@ -100,7 +100,7 @@ describe('test for filter verb', () => {
 				column: 'name',
 				criteria: [
 					{
-						operator: StringComparisonOperator.Equal,
+						operator: StringComparisonOperator.Equals,
 						type: FilterCompareType.Value,
 						value: 'D',
 					},

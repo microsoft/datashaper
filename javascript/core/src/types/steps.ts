@@ -4,6 +4,8 @@
  */
 import type {
 	BinStrategy,
+	BooleanComparisonOperator,
+	BooleanLogicalOperator,
 	FieldAggregateOperation,
 	FilterCompareType,
 	JoinStrategy,
@@ -215,11 +217,16 @@ export interface Criterion {
 	 * or against the value of another column
 	 */
 	type: FilterCompareType
-	operator: NumericComparisonOperator | StringComparisonOperator
+	// TODO: we should support Date comparisons
+	operator:
+		| NumericComparisonOperator
+		| StringComparisonOperator
+		| BooleanComparisonOperator
 }
 
 export interface FilterArgs extends InputColumnArgs {
 	criteria: Criterion[]
+	logical?: BooleanLogicalOperator
 }
 
 export interface FoldArgs extends InputColumnListArgs {
