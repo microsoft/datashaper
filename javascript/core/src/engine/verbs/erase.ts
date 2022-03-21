@@ -14,8 +14,7 @@ const doErase = wrapColumnStep<EraseArgs>(
 		const func = escape((d: any) =>
 			d[column] === value ? undefined : d[column],
 		)
-		const dArgs = { [column]: func }
-		return input.derive(dArgs)
+		return input.derive({ [column]: func })
 	},
 )
 
