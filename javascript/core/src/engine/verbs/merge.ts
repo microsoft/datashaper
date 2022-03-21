@@ -2,54 +2,39 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
-import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
 import { columnType, MergeStrategy } from '../../index.js'
-import type { DataType, MergeStep, TableContainer } from '../../types.js'
+import type { DataType, MergeArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 
-/**
- * Executes an arquero merge operation.
- * @param step
- * @param store
- * @returns
- */
+const doMerge = wrapColumnStep<MergeArgs>(
+	(input, { columns = [], strategy, to, delimiter = '' }) => {
+		const isSameDataTypeFlag: boolean = isSameDataType(input, columns)
 
-export async function merge(
-	{
-		input,
-		output,
-		args: { columns = [], strategy, to, delimiter = '' },
-	}: MergeStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
+		// eslint-disable-next-line
+		const func: object = escape((d: any) => {
+			switch (strategy) {
+				case MergeStrategy.LastOneWins:
+					return lastOneWinsStrategy(isSameDataTypeFlag, d, columns)
+				case MergeStrategy.Concat:
+					return concatStrategy(d, columns, delimiter)
+				case MergeStrategy.CreateArray:
+					return arrayStrategy(d, columns)
+				case MergeStrategy.FirstOneWins:
+				default:
+					return firstOneWinsStrategy(isSameDataTypeFlag, d, columns)
+			}
+		})
 
-	const isSameDataTypeFlag: boolean = isSameDataType(inputTable, columns)
+		return input.derive({ [to]: func })
+	},
+)
 
-	// eslint-disable-next-line
-	const func: object = escape((d: any) => {
-		switch (strategy) {
-			case MergeStrategy.LastOneWins:
-				return lastOneWinsStrategy(isSameDataTypeFlag, d, columns)
-			case MergeStrategy.Concat:
-				return concatStrategy(d, columns, delimiter)
-			case MergeStrategy.CreateArray:
-				return arrayStrategy(d, columns)
-			case MergeStrategy.FirstOneWins:
-			default:
-				return firstOneWinsStrategy(isSameDataTypeFlag, d, columns)
-		}
-	})
-
-	const dArgs: ExprObject = { [to]: func }
-	return container(output, inputTable.derive(dArgs))
-}
+export const merge = makeStepFunction(doMerge)
+export const mergeNode = makeStepNode(doMerge)
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {
 	let allTypesAreTheSame = true

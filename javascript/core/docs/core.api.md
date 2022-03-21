@@ -211,11 +211,6 @@ export function columnTransformVerbs(filter?: (verb: Verb) => boolean): Verb[];
 // @public (undocumented)
 export function columnType(table: ColumnTable, column: string): DataType;
 
-// Warning: (ae-missing-release-tag) "container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function container(id: string, table?: ColumnTable, options?: Omit<TableContainer, 'id' | 'table'>): TableContainer;
-
 // Warning: (ae-missing-release-tag) "ConvertArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

@@ -2,29 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { RollupStep, TableContainer } from '../../types.js'
+import type { RollupArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 import { singleExpression } from '../util/index.js'
 
-/**
- * Executes rollup.
- * @param step
- * @param store
- * @returns
- */
+const doRollup = wrapColumnStep<RollupArgs>(
+	(input, { column, operation, to }) =>
+		input.rollup({ [to]: singleExpression(column, operation) }),
+)
 
-export async function rollup(
-	{ input, output, args: { column, operation, to } }: RollupStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-
-	const expr = singleExpression(column, operation)
-
-	const rArgs = {
-		[to]: expr,
-	}
-
-	return container(output, inputTable.rollup(rArgs))
-}
+export const rollup = makeStepFunction(doRollup)
+export const rollupNode = makeStepNode(doRollup)

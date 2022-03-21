@@ -3,19 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableStore } from '../../index.js'
-import type { Step, TableContainer } from '../../types.js'
+import type { SetOperationArgs, Step, TableContainer } from '../../types.js'
 import { SetOp } from '../../types.js'
-import { set } from '../util/index.js'
+import { SetOperationNode } from '../factories.js'
+import { setWithStore } from '../util/index.js'
 
-/**
- * Executes an arquero table concat.
- * @param step
- * @param store
- * @returns
- */
 export async function concat(
-	step: Step,
+	step: Step<SetOperationArgs>,
 	store: TableStore,
 ): Promise<TableContainer> {
-	return set(step, store, SetOp.Concat)
+	return setWithStore(step, store, SetOp.Concat)
+}
+
+export function concatNode(id: string): SetOperationNode {
+	return new SetOperationNode(id, SetOp.Concat)
 }

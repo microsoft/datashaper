@@ -2,21 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { Step, TableContainer } from '../../types.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 
-/**
- * Executes an arquero unorder.
- * @param step
- * @param store
- * @returns
- */
-export async function unorder(
-	{ input, output }: Step,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
+const doUnorder = wrapColumnStep(input => input.unorder())
 
-	return container(output, inputTable.unorder())
-}
+export const unorder = makeStepFunction(doUnorder)
+export const unorderNode = makeStepNode(doUnorder)
