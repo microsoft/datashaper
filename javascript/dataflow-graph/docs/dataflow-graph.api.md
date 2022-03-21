@@ -25,7 +25,7 @@ export { Node_2 as Node }
 //
 // @public (undocumented)
 export abstract class NodeImpl<T, Config> implements Node_2<T, Config> {
-    constructor(inputs: string[], outputs?: string[]);
+    constructor(inputs?: string[], outputs?: string[]);
     // (undocumented)
     get config(): Maybe<Config>;
     set config(value: Maybe<Config>);
@@ -33,9 +33,13 @@ export abstract class NodeImpl<T, Config> implements Node_2<T, Config> {
     protected abstract doRecalculate(): Promise<void> | void;
     protected emit(value: Maybe<T>, output?: string): void;
     // (undocumented)
+    protected emitError(error: unknown): void;
+    // (undocumented)
     readonly inputs: string[];
     // (undocumented)
     protected inputValue(name: string): Maybe<T>;
+    // (undocumented)
+    protected get inputValues(): Map<string, Maybe<T>>;
     // (undocumented)
     install(name: string, socket: Observable<Maybe<T>>): void;
     // (undocumented)
@@ -51,6 +55,21 @@ export abstract class NodeImpl<T, Config> implements Node_2<T, Config> {
     protected verifyInputSocketName(name: string): void;
     // (undocumented)
     protected verifyOutputSocketName(name: string): void;
+}
+
+// Warning: (ae-missing-release-tag) "VariadicNodeImpl" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
+    constructor(inputs?: string[], outputs?: string[]);
+    // (undocumented)
+    protected getVariadicInputValues(): Maybe<T>[];
+    // (undocumented)
+    installNext(socket: Observable<Maybe<T>>): string;
+    // (undocumented)
+    nextInput(): string;
+    // (undocumented)
+    protected verifyInputSocketName(name: string): void;
 }
 
 // (No @packageDocumentation comment for this package)
