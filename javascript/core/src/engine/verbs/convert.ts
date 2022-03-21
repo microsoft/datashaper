@@ -2,35 +2,29 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import { escape, op } from 'arquero'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { ConvertStep, TableContainer } from '../../types.js'
+import type { ConvertArgs } from '../../types.js'
 import { ParseType } from '../../types.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 import { bool } from '../util/data-types.js'
 
 /**
  * Executes an arquero string parse operation.
- * @param step
- * @param store
- * @returns
  */
-export async function convert(
-	{ input, output, args: { columns, type, radix } }: ConvertStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
+const doConvert = wrapColumnStep<ConvertArgs>(
+	(input, { columns, type, radix }) => {
+		// note that this applies the specified parse to every column equally
+		const dArgs = columns.reduce((acc, cur) => {
+			acc[cur] = parseType(cur, type, radix)
+			return acc
+		}, {} as any)
+		return input.derive(dArgs)
+	},
+)
 
-	// note that this applies the specified parse to every column equally
-	const dArgs = columns.reduce((acc, cur) => {
-		acc[cur] = parseType(cur, type, radix)
-		return acc
-	}, {} as any)
-
-	return container(output, inputTable.derive(dArgs))
-}
+export const convert = makeStepFunction(doConvert)
+export const convertNode = makeStepNode(doConvert)
 
 function parseType(column: string, type: ParseType, radix?: number) {
 	return escape((d: any) => {

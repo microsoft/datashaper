@@ -2,25 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { BinarizeStep, TableContainer } from '../../types.js'
+import type { BinarizeArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 import { compareAll } from '../util/index.js'
 
 /**
  * Executes an arquero derive where the output is a 1 or 0.
  */
-export async function binarize(
-	{ input, output, args: { column, criteria, logical, to } }: BinarizeStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
+const doBinarize = wrapColumnStep<BinarizeArgs>(
+	(input, { to, column, criteria, logical }) =>
+		input.derive({ [to]: compareAll(column, criteria, logical) }),
+)
 
-	const expr = compareAll(column, criteria, logical)
-
-	const dArgs = {
-		[to]: expr,
-	}
-
-	return container(output, inputTable.derive(dArgs))
-}
+export const binarize = makeStepFunction(doBinarize)
+export const binarizeNode = makeStepNode(doBinarize)

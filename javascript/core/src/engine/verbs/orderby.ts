@@ -4,27 +4,19 @@
  */
 import { desc } from 'arquero'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { OrderbyStep, TableContainer } from '../../types.js'
-import { SortDirection } from '../../types.js'
+import type { OrderbyArgs , OrderbyInstruction} from '../../types.js'
+import {SortDirection } from '../../types.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 
-/**
- * Executes an arquero orderby.
- * @param step
- * @param store
- * @returns
- */
-export async function orderby(
-	{ input, output, args: { orders } }: OrderbyStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-
+const doOrderby = wrapColumnStep<OrderbyArgs>((input, { orders }) =>
 	// format keys in arquero-compatible format
 	// https://uwdata.github.io/arquero/api/verbs#orderby
-	const keys = orders.map(({ column, direction }) =>
-		direction === SortDirection.Descending ? desc(column) : column,
-	)
-	return container(output, inputTable.orderby(...keys))
+	input.orderby(...orders.map(orderColumn)),
+)
+
+export const orderby = makeStepFunction(doOrderby)
+export const orderbyNode = makeStepNode(doOrderby)
+
+function orderColumn({ column, direction }: OrderbyInstruction) {
+	return direction === SortDirection.Descending ? desc(column) : column
 }
