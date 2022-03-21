@@ -13,7 +13,7 @@ import { dropdownStyles } from './controls/styles.js'
 import type { HOCFunction, StepComponentProps } from './types.js'
 /**
  * Higher order component generator to wrap a Step in the output column text field.
- * @param label optional label to use for the textfield instead of the default.
+ * @param label - optional label to use for the textfield instead of the default.
  * @returns
  */
 export const withOutputColumnTextfield = (
@@ -52,4 +52,5 @@ const Container = styled.div`
 	align-items: flex-start;
 	align-content: flex-start;
 	justify-content: flex-start;
+	margin-top: 8px;
 `

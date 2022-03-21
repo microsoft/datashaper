@@ -72,7 +72,7 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
 
 /**
  * Given a Step definition, returns the correct React component function.
- * @param step
+ * @param step -
  */
 export function selectStepComponent(step: Step): React.FC<StepComponentProps> {
 	const result = verb[step.verb]

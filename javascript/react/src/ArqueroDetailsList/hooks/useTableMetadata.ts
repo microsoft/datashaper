@@ -10,8 +10,8 @@ import { useMemo } from 'react'
 import type { SaveMetadataFunction } from '../types.js'
 /**
  * Optionally executes a series of table characterization functions.
- * @param table
- * @param discover
+ * @param table -
+ * @param discover -
  */
 export function useTableMetadata(
 	table: ColumnTable,

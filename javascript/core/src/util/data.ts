@@ -11,7 +11,7 @@ import { DataType } from '../index.js'
 /**
  * Guess the type of a table value with more discernment than typeof
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
- * @param value
+ * @param value -
  * @returns
  */
 export function determineType(value: Value): DataType {
@@ -29,8 +29,8 @@ export function determineType(value: Value): DataType {
 /**
  * Ensure an incoming value matches its datatype.
  * For example, if user input is from a textfield, parse it.
- * @param value
- * @param dataType
+ * @param value -
+ * @param dataType -
  */
 export function coerce(value: Value, dataType: DataType): Value {
 	switch (dataType) {
@@ -47,8 +47,8 @@ export function coerce(value: Value, dataType: DataType): Value {
 
 /**
  * Returns a nice formatted string for a number
- * @param value
- * @param options
+ * @param value -
+ * @param options -
  */
 export function format(
 	value: number,
@@ -83,7 +83,7 @@ export function format(
 
 /**
  * Returns a formatted string for a number, otherwise returns the original value
- * @param value
+ * @param value -
  */
 export function formatIfNumber(value: Value): string | Value {
 	if (typeof value === 'number') {

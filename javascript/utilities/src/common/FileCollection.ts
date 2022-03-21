@@ -39,6 +39,10 @@ export class FileCollection {
 		return this._name
 	}
 
+	get config() {
+		return this._config
+	}
+
 	set config(config: Config) {
 		this._config = { ...this._config, ...config }
 	}

@@ -12,7 +12,13 @@ import { dropdownStyles } from './styles.js'
 
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
 	table?: ColumnTable
+	/**
+	 * Optional filter to limit the list of columns shown in the dropdown
+	 */
+	filter?: (name: string) => boolean
 }
+
+const noop = () => true
 
 /**
  * ComboBox that allows the user to either input a freeform value or select a column.
@@ -20,8 +26,8 @@ export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
  * be dependent on per-row column values.
  */
 export const ColumnOrValueComboBox: React.FC<ColumnOrValueComboBoxProps> = memo(
-	function ColumnOrValueComboBox({ table, ...rest }) {
-		const options = useTableColumnOptions(table)
+	function ColumnOrValueComboBox({ table, filter = noop, ...rest }) {
+		const options = useTableColumnOptions(table, filter)
 		const withHeader = useMemo(() => {
 			return [
 				{

@@ -14,8 +14,8 @@ import { chain } from './verbs/chain.js'
  * Each step is async so service invocations could be inserted if necessary, such as for processing a very large step
  * or when client-side steps aren't implemented.
  * WARNING: the store is used as a chain context, and its contents are mutated.
- * @param spec
- * @param store
+ * @param spec -
+ * @param store -
  * @returns
  */
 export async function run(
