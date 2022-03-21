@@ -16,8 +16,7 @@ import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
- * Just the to/value inputs for an impute.
- * Input table is expected to be edited elsewhere and configured as the step input.
+ * Inputs to combine column using boolean logic.
  */
 export const BooleanLogic: React.FC<StepComponentProps> = memo(
 	function BooleanLogic({ step, store, table, onChange, input }) {
