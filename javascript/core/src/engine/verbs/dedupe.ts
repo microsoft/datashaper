@@ -4,7 +4,8 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { DedupeArgs } from '../../types.js'
+import { container } from '../../container.js'
+import type { DedupeArgs,TableContainer  } from '../../types.js'
 import { makeStepFunction, makeStepNode } from '../factories.js'
 
 export const dedupe = makeStepFunction(doDedupe)
@@ -13,6 +14,10 @@ export const dedupeNode = makeStepNode(doDedupe)
 /**
  * Executes an arquero dedupe operation.
  */
-function doDedupe(input: ColumnTable, { columns }: DedupeArgs) {
-	return columns ? input.dedupe(columns) : input.dedupe()
+function doDedupe(id: string, input: TableContainer, { columns }: DedupeArgs) {
+	let result: ColumnTable | undefined
+	if (input.table != null) {
+		result = columns ? input.table.dedupe(columns) : input.table.dedupe()
+	}
+	return container(id, result)
 }

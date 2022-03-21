@@ -4,7 +4,8 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { FillArgs } from '../../types.js'
+import { container } from '../../container.js'
+import type { FillArgs, TableContainer } from '../../types.js'
 import { makeStepFunction, makeStepNode } from '../factories.js'
 
 export const fill = makeStepFunction(doFill)
@@ -17,7 +18,13 @@ export const fillNode = makeStepNode(doFill)
  * TODO: fill with function outputs such as op.row_number or a column copy.
  * This could be merged with derive eventually.
  */
-function doFill(input: ColumnTable, { value, to }: FillArgs) {
-	const fn = (_d: any, $: any) => $.value
-	return input.params({ value }).derive({ [to]: fn })
+function doFill(id: string, input: TableContainer, { value, to }: FillArgs) {
+	let result: ColumnTable | undefined
+
+	if (input.table != null) {
+		const fn = (_d: any, $: any) => $.value
+		result = input.table.params({ value }).derive({ [to]: fn })
+	}
+
+	return container(id, result)
 }

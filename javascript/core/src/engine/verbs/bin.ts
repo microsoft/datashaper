@@ -5,8 +5,10 @@
 import { bin as aqbin, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+import { container } from '../../container.js'
 import type { BinArgs } from '../../index.js'
 import { BinStrategy } from '../../index.js'
+import type { TableContainer } from '../../types.js'
 import { makeStepFunction, makeStepNode } from '../factories.js'
 import { fixedBinCount, fixedBinStep } from '../util/index.js'
 
@@ -16,11 +18,15 @@ export const binNode = makeStepNode(doBin)
 /**
  * Executes a bin aggregate, which effectively truncates values to a bin boundary for histograms.
  */
-function doBin(input: ColumnTable, args: BinArgs) {
-	const rArgs = {
-		[args.to]: binExpr(input, args),
+function doBin(id: string, input: TableContainer, args: BinArgs) {
+	let result: ColumnTable | undefined
+	if (input.table != null) {
+		const rArgs = {
+			[args.to]: binExpr(input.table, args),
+		}
+		result = input.table.derive(rArgs)
 	}
-	return input.derive(rArgs)
+	return container(id, result)
 }
 
 /**

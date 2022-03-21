@@ -5,7 +5,8 @@
 import { escape, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { ConvertArgs } from '../../types.js'
+import { container } from '../../container.js'
+import type { ConvertArgs,TableContainer  } from '../../types.js'
 import { ParseType } from '../../types.js'
 import { makeStepFunction, makeStepNode } from '../factories.js'
 
@@ -15,13 +16,21 @@ export const convertNode = makeStepNode(doConvert)
 /**
  * Executes an arquero string parse operation.
  */
-function doConvert(table: ColumnTable, { columns, type, radix }: ConvertArgs) {
-	// note that this applies the specified parse to every column equally
-	const dArgs = columns.reduce((acc, cur) => {
-		acc[cur] = parseType(cur, type, radix)
-		return acc
-	}, {} as any)
-	return table.derive(dArgs)
+function doConvert(
+	id: string,
+	input: TableContainer,
+	{ columns, type, radix }: ConvertArgs,
+) {
+	let result: ColumnTable | undefined
+	if (input.table != null) {
+		// note that this applies the specified parse to every column equally
+		const dArgs = columns.reduce((acc, cur) => {
+			acc[cur] = parseType(cur, type, radix)
+			return acc
+		}, {} as any)
+		input.table.derive(dArgs)
+	}
+	return container(id, result)
 }
 
 function parseType(column: string, type: ParseType, radix?: number) {

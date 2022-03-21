@@ -4,16 +4,23 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { AggregateArgs } from '../../types.js'
+import { container } from '../../container.js'
+import type { AggregateArgs, TableContainer } from '../../types.js'
 import { makeStepFunction, makeStepNode } from '../factories.js'
 import { singleExpression } from '../util/index.js'
 
 export const aggregate = makeStepFunction(doAggregate)
 export const aggregateNode = makeStepNode(doAggregate)
 
-function doAggregate(input: ColumnTable, config: AggregateArgs) {
-	const { groupby, column, operation, to } = config
-	const expr = singleExpression(column, operation)
-	const rArgs = { [to]: expr }
-	return input.groupby(groupby).rollup(rArgs)
+function doAggregate(
+	id: string,
+	input: TableContainer,
+	{ groupby, column, operation, to }: AggregateArgs,
+) {
+	let result: ColumnTable | undefined
+	if (input.table) {
+		const expr = singleExpression(column, operation)
+		result = input.table.groupby(groupby).rollup({ [to]: expr })
+	}
+	return container(id, result)
 }
