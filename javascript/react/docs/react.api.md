@@ -120,8 +120,6 @@ export interface ArqueroTableHeaderProps {
     table: ColumnTable;
     // (undocumented)
     visibleColumns?: string[];
-    // (undocumented)
-    visibleRows?: number;
 }
 
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
