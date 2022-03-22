@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Subscription} from 'rxjs';
+import type { Subscription } from 'rxjs'
 import { Subject } from 'rxjs'
 
 import type { Maybe, NodeBinding } from './types'
 
-export interface InputRecord<T> {
+export interface BoundInput<T> {
 	readonly binding: NodeBinding<T>
 	readonly current: Maybe<T>
 	readonly error: unknown
@@ -16,10 +16,10 @@ export interface InputRecord<T> {
 	dispose(): void
 }
 
-export class InputRecordImpl<T> implements InputRecord<T> {
+export class BoundInputImpl<T> implements BoundInput<T> {
 	private _current: T | undefined
 	private _error: unknown
-	private _onValueChange: Subject<void> = new Subject<void>()
+	private _valueChanged: Subject<void> = new Subject<void>()
 	private _bindingSubscription: Subscription
 	private _valueChangeSubscription: Subscription | undefined
 
@@ -28,18 +28,18 @@ export class InputRecordImpl<T> implements InputRecord<T> {
 			next: v => {
 				this._error = undefined
 				this._current = v
-				this._onValueChange.next()
+				this._valueChanged.next()
 			},
 			error: e => {
 				this._error = e
 				this._current = undefined
-				this._onValueChange.next()
+				this._valueChanged.next()
 			},
 		})
 	}
 
 	public onValueChange(handler: () => void): void {
-		const subscription = this._onValueChange.subscribe(handler)
+		const subscription = this._valueChanged.subscribe(handler)
 		this._valueChangeSubscription = subscription
 	}
 

@@ -88,16 +88,27 @@ export interface NodeBinding<T> {
 	output?: string
 }
 
-export interface GraphOrchestrator<T> {
-	readonly nodeIds: string[]
+export interface Graph<T> {
+	readonly nodes: NodeId[]
+	readonly inputs: NodeId[]
+	readonly outputs: NodeId[]
 
 	/**
 	 * Retrieves a node by id.
 	 * @param id - the node identifier
 	 * @throws - if the id is not found
 	 */
-	getNodeWithId(id: string): Node<T>
+	node(id: NodeId): Node<T>
 
-	// TODO: Detect Cycles?
-	// TODO: Expose Topologically important nodes like inputs & outputs?
+	/**
+	 * Verify that the graph is a valid dag (no cycles)
+	 * @throws - if graph is cyclic
+	 */
+	validate(): void
+
+	/**
+	 *
+	 * @param node The node to register with the graph
+	 */
+	register(node: Node<T>): void
 }
