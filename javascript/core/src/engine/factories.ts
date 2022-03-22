@@ -5,8 +5,8 @@
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { container } from '../container.js'
-import type { NodeId} from '../graph/index.js';
-import {NodeImpl, VariadicNodeImpl } from '../graph/index.js'
+import type { NodeId } from '../graph/index.js'
+import { NodeImpl, VariadicNodeImpl } from '../graph/index.js'
 import type {
 	SetOp,
 	Step,
@@ -52,7 +52,7 @@ export class InputNode<Args> extends NodeImpl<TableContainer, Args> {
 	protected async doRecalculate(): Promise<void> {
 		if (this.config != null) {
 			const output = await this._computeFn(this.config)
-			this.emit(container(String(this.id), output))
+			this.emit(container(this.id, output))
 		} else {
 			this.emit(undefined)
 		}
@@ -75,7 +75,7 @@ export class SetOperationNode<Args = unknown> extends VariadicNodeImpl<
 				.filter(t => !!t)
 				.map(o => o?.table)
 				.filter(t => !!t) as ColumnTable[]
-			this.emit(container(String(this.id), set(source.table, this.op, others)))
+			this.emit(container(this.id, set(source.table, this.op, others)))
 		} else {
 			this.emit(undefined)
 		}

@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Observable} from 'rxjs';
-import { BehaviorSubject,Subject  } from 'rxjs'
+import type { Observable } from 'rxjs'
+import { BehaviorSubject, Subject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
-import type { InputRecord} from './InputRecord.js';
+import type { InputRecord } from './InputRecord.js'
 import { InputRecordImpl } from './InputRecord.js'
 import type { Maybe, Node, NodeBinding, NodeId, SocketName } from './types'
 
@@ -15,7 +15,7 @@ const DEFAULT_OUTPUT_NAME = 'DWC.DefaultOutput'
 export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	// #region fields
 
-	protected _id: NodeId = uuid()
+	protected _id = uuid()
 	private _config: Maybe<Config>
 
 	// inputs

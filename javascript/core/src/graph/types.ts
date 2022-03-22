@@ -4,7 +4,7 @@
  */
 import type { Observable } from 'rxjs'
 
-export type NodeId = string | symbol
+export type NodeId = string
 export type SocketName = string | symbol
 
 /**
@@ -99,6 +99,5 @@ export interface GraphOrchestrator<T> {
 	getNodeWithId(id: string): Node<T>
 
 	// TODO: Detect Cycles?
-	// TODO: events for when nodes added, removed?
 	// TODO: Expose Topologically important nodes like inputs & outputs?
 }
