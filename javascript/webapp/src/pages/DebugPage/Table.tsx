@@ -142,5 +142,5 @@ const Container = styled.div`
 `
 
 const TableContainer = styled.div`
-	height: 264px;
+	height: 364px;
 `

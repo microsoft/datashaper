@@ -255,7 +255,7 @@ const InputsSection = styled.div`
 `
 
 const TableSection = styled.div`
-	max-height: 300px;
+	max-height: 400px;
 `
 
 const StepsColumn = styled.div`

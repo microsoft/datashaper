@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 
 import { getValue } from '../util/index.js'
 import type { FormattedCellProps } from './types.js'
@@ -19,10 +19,11 @@ export const ArrayCell: React.FC<FormattedCellProps> = memo(function ArrayCell({
 	textAlign = 'left',
 }) {
 	const values = getValue(item, column) || []
-	const printed = values.slice(0, CELL_LENGTH).join(', ')
+	const printed = usePrinted(values)
+	const tooltip = useTooltip(values)
 	return (
 		<div
-			title={tooltip(values, TOOLTIP_LENGTH)}
+			title={tooltip}
 			style={{
 				textAlign,
 			}}
@@ -32,10 +33,19 @@ export const ArrayCell: React.FC<FormattedCellProps> = memo(function ArrayCell({
 	)
 })
 
-function tooltip(values: any[], length: number) {
-	let tooltip = values.slice(0, length).join('\n')
-	if (values.length > length) {
-		tooltip += `\n...\n(+${values.length - length} more)`
-	}
-	return tooltip
+function usePrinted(values: unknown[], length = CELL_LENGTH) {
+	return useMemo(() => {
+		const arr = `[${values.slice(0, length).join(', ')}]`
+		return values.length > length ? `${arr}...` : arr
+	}, [values, length])
+}
+
+function useTooltip(values: unknown[], length = TOOLTIP_LENGTH) {
+	return useMemo(() => {
+		let tooltip = values.slice(0, length).join('\n')
+		if (values.length > length) {
+			tooltip += `\n...\n(+${values.length - length} more)`
+		}
+		return tooltip
+	}, [values, length])
 }

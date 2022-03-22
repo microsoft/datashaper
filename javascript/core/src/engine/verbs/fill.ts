@@ -9,8 +9,9 @@ import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
  * Executes an arquero derive to fill a new column with fixed values.
  * Note this is not the same as imputing, which fills missing values.
  * This is intended to create an entirely new column.
- * TODO: fill with function outputs such as op.row_number or a column copy.
- * This could be merged with derive eventually.
+ * @param step
+ * @param store
+ * @returns
  */
 const doFill = wrapColumnStep<FillArgs>((input, { value, to }) => {
 	const fn = (_d: any, $: any) => $.value

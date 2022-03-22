@@ -22,7 +22,6 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		commands = [],
 		farCommands = [],
 		visibleColumns,
-		visibleRows,
 		onRenameTable,
 		style,
 	}) {
@@ -33,9 +32,8 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 			return table.isGrouped() ? table.groups().size : 0
 		}, [table])
 
-		// TODO: we can do the same thing for rows when a filter is applied
 		const columnCounts = useColumnCounts(table, visibleColumns)
-		const rowCounts = useRowCounts(table, visibleRows)
+		const rowCounts = useRowCounts(table)
 		return (
 			<Header bgColor={bgColor} ref={ref}>
 				{commands?.length > 0 ? (
@@ -56,13 +54,13 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					) : null}
 					{showRowCount === true ? (
 						<H3 color={textColor}>
-							{rowCounts.total} rows{' '}
-							{rowCounts.hidden > 0 ? `(${rowCounts.hidden} hidden)` : ''}
+							{rowCounts.visible} rows{' '}
+							{rowCounts.hidden > 0 ? `(${rowCounts.hidden} filtered)` : ''}
 						</H3>
 					) : null}
 					{showColumnCount === true ? (
 						<H3 color={textColor}>
-							{columnCounts.total} cols{' '}
+							{columnCounts.visible} cols{' '}
 							{columnCounts.hidden > 0 ? `(${columnCounts.hidden} hidden)` : ''}
 						</H3>
 					) : null}
