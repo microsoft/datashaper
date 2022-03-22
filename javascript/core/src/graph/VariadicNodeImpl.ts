@@ -40,7 +40,7 @@ export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 
 	protected getVariadicInputValues(): Maybe<T>[] {
 		const result: Maybe<T>[] = []
-		const inputs = this.inputValues
+		const inputs = this.getInputValues()
 		Object.keys(inputs).forEach(name => {
 			const value = inputs[name]
 			if (isVariadicInput(name)) {

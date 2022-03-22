@@ -77,7 +77,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	 * Gets a map of named inputs to the current value.
 	 * @protected
 	 */
-	protected get inputValues(): Record<SocketName, Maybe<T>> {
+	protected getInputValues(): Record<SocketName, Maybe<T>> {
 		const result: Record<SocketName, Maybe<T>> = {}
 		for (const key of this._bindings.keys()) {
 			result[key] = this._bindings.get(key)?.current
@@ -89,7 +89,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	 * Gets a map of named inputs to any errors emitted
 	 * @protected
 	 */
-	protected get inputErrors(): Record<SocketName, unknown> {
+	protected getInputErrors(): Record<SocketName, unknown> {
 		const result: Record<SocketName, unknown> = {}
 		for (const key in this._bindings.keys()) {
 			const error = this._bindings.get(key)?.error
