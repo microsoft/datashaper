@@ -317,13 +317,11 @@ export class DefaultPipeline implements Pipeline {
 export class DefaultTableStore implements TableStore {
     constructor(tables?: TableContainer[]);
     // (undocumented)
-    addChangeListener(listener: ChangeListenerFunction): () => void;
-    // (undocumented)
-    clear(): TableStore;
+    clear(): void;
     // (undocumented)
     clone(): Promise<TableStore>;
     // (undocumented)
-    delete(id: string): TableStore;
+    delete(id: string): void;
     // (undocumented)
     get(id: string): Promise<TableContainer>;
     // (undocumented)
@@ -331,19 +329,19 @@ export class DefaultTableStore implements TableStore {
     // (undocumented)
     listen(id: string, listener: ListenerFunction): () => void;
     // (undocumented)
+    onChange(listener: ChangeListenerFunction): () => void;
+    // (undocumented)
     print(): Promise<void>;
     // (undocumented)
-    queue(id: string, resolver: ResolverFunction): TableStore;
+    set(container: TableContainer): void;
     // (undocumented)
-    set(container: TableContainer): TableStore;
+    setResolver(id: string, resolver: ResolverFunction): void;
     // (undocumented)
     table(id: string): Promise<ColumnTable>;
     // (undocumented)
     toArray(): Promise<TableContainer[]>;
     // (undocumented)
     toMap(): Promise<Map<string, TableContainer>>;
-    // (undocumented)
-    unlisten(id: string): void;
 }
 
 // Warning: (ae-missing-release-tag) "DeriveArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1005,21 +1003,18 @@ export interface TableMetadata {
 //
 // @public
 export interface TableStore {
-    addChangeListener(listener: ChangeListenerFunction): () => void;
-    clear(): TableStore;
+    clear(): void;
     clone(): Promise<TableStore>;
-    delete(id: string): TableStore;
+    delete(id: string): void;
     get(id: string): Promise<TableContainer>;
     list(filter?: (id: string) => boolean): string[];
     listen(id: string, listener: ListenerFunction): () => void;
+    onChange(listener: ChangeListenerFunction): () => void;
     print(): Promise<void>;
-    queue(id: string, resolver: ResolverFunction): TableStore;
-    set(container: TableContainer): TableStore;
-    // (undocumented)
-    table(id: string): Promise<ColumnTable>;
+    set(container: TableContainer): void;
+    setResolver(id: string, resolver: ResolverFunction): void;
     toArray(): Promise<TableContainer[]>;
     toMap(): Promise<Map<string, TableContainer>>;
-    unlisten(id: string): void;
 }
 
 // Warning: (ae-missing-release-tag) "types" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

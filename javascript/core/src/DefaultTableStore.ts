@@ -69,23 +69,21 @@ export class DefaultTableStore implements TableStore {
 		return container.table!
 	}
 
-	set(container: TableContainer): TableStore {
+	set(container: TableContainer): void {
 		const storage = {
 			container,
 			resolved: true,
 		}
 		this._storage.set(container.id, storage)
-		this.onChange(container.id)
-		return this
+		this._onChange(container.id)
 	}
 
-	delete(id: string): TableStore {
+	delete(id: string): void {
 		this._storage.delete(id)
-		this.onChange()
-		return this
+		this._onChange()
 	}
 
-	queue(id: string, resolver: ResolverFunction): TableStore {
+	setResolver(id: string, resolver: ResolverFunction): void {
 		const storage = {
 			container: {
 				id,
@@ -94,7 +92,6 @@ export class DefaultTableStore implements TableStore {
 			resolver,
 		}
 		this._storage.set(id, storage)
-		return this
 	}
 
 	list(filter?: (id: string) => boolean): string[] {
@@ -116,16 +113,12 @@ export class DefaultTableStore implements TableStore {
 		return Array.from(map.values())
 	}
 
-	listen(id: string, listener: ListenerFunction): () => void {
+	public listen(id: string, listener: ListenerFunction): () => void {
 		this._tableListeners[id] = listener
 		return () => delete this._tableListeners[id]
 	}
 
-	unlisten(id: string): void {
-		delete this._tableListeners[id]
-	}
-
-	addChangeListener(listener: ChangeListenerFunction): () => void {
+	public onChange(listener: ChangeListenerFunction): () => void {
 		this._changeListeners.push(listener)
 		return () => {
 			const idx = this._changeListeners.findIndex(l => l === listener)
@@ -134,7 +127,7 @@ export class DefaultTableStore implements TableStore {
 			}
 		}
 	}
-	private onChange(id?: string): void {
+	private _onChange(id?: string): void {
 		const fn = async () => {
 			if (id) {
 				const container = await this.get(id)
@@ -160,9 +153,8 @@ export class DefaultTableStore implements TableStore {
 		return new DefaultTableStore(cloneDeep(tables))
 	}
 
-	clear(): TableStore {
+	clear(): void {
 		const keys = Array.from(this._storage.keys())
 		keys.forEach(key => this.delete(key))
-		return this
 	}
 }

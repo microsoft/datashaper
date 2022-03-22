@@ -21,10 +21,14 @@ export async function join(
 	store: TableStore,
 ): Promise<TableContainer> {
 	const [inputTable, otherTable] = await Promise.all([
-		store.table(input),
-		store.table(args.other),
+		store.get(input),
+		store.get(args.other),
 	])
-	return container(output, doJoin(inputTable, otherTable, args))
+	let result: ColumnTable | undefined
+	if (inputTable.table && otherTable.table) {
+		result = doJoin(inputTable.table, otherTable.table, args)
+	}
+	return container(output, result)
 }
 
 export enum JoinInput {

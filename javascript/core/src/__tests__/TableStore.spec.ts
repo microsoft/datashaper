@@ -31,7 +31,7 @@ describe('DefaultTableStore', () => {
 
 	test('get resolves table before returning', () => {
 		const store = new DefaultTableStore()
-		store.queue('a', () => Promise.resolve(table({ id: [1] })))
+		store.setResolver('a', () => Promise.resolve(table({ id: [1] })))
 		return store.get('a').then(result => {
 			expect(result.table.numCols()).toBe(1)
 		})

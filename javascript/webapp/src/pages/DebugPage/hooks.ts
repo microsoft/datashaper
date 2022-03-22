@@ -41,7 +41,7 @@ export function useTableStore(): TableStore {
 	return useMemo(() => {
 		const store = createTableStore()
 		TABLES.forEach(name => {
-			store.queue(name, async (name: string) =>
+			store.setResolver(name, async (name: string) =>
 				loadCSV(name, { parse, autoMax: 1000000 }),
 			)
 		})

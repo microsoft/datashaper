@@ -2,8 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-
 import type { ResolverFunction, TableContainer } from './tables.js'
 
 /**
@@ -23,71 +21,73 @@ export interface TableStore {
 	/**
 	 * Returns a table container.
 	 * Uses async resolver function if necessary to lazy-load or retrieve remote tables.
-	 * @param id -
+	 * @param id - the table id
 	 */
 	get(id: string): Promise<TableContainer>
-	table(id: string): Promise<ColumnTable>
+
 	/**
 	 * Set a loaded table in the store.
-	 * @param id -
-	 * @param table -
+	 * @param container - the table to set
 	 */
-	set(container: TableContainer): TableStore
+	set(container: TableContainer): void
+
 	/**
 	 * Remove the named table
-	 * @param id -
+	 * @param id - the table id
 	 */
-	delete(id: string): TableStore
+	delete(id: string): void
+
 	/**
 	 * Add a table name to the store with a resolver function to be loaded when needed.
-	 * @param id -
-	 * @param resolver -
+	 * @param id - the table id
+	 * @param resolver - the table resolver
 	 */
-	queue(id: string, resolver: ResolverFunction): TableStore
+	setResolver(id: string, resolver: ResolverFunction): void
+
 	/**
 	 * List all tables in the store by id, with an optional filter function.
-	 * @param filter -
-	 * @returns
+	 * @param filter - the table name filter
+	 * @returns a list of table names that match the filter (if defined), else all the table names
 	 */
 	list(filter?: (id: string) => boolean): string[]
+
 	/**
 	 * Resolves all tables and converts to a id:table Map
 	 */
 	toMap(): Promise<Map<string, TableContainer>>
+
 	/**
 	 * Resolves all tables and convers to an array
 	 */
 	toArray(): Promise<TableContainer[]>
+
 	/**
 	 * Add a listener for a particular table.
 	 * Returns an unlisten handler.
-	 * @param id -
-	 * @param listener -
+	 * @param id - the table id
+	 * @param listener - the listener function
 	 */
 	listen(id: string, listener: ListenerFunction): () => void
-	/**
-	 * Stop listening for a particular table.
-	 * @param id -
-	 */
-	unlisten(id: string): void
+
 	/**
 	 * Get alerted for any changes in the store.
 	 * Returns an unlisten handler.
-	 * @param listener -
+	 * @param listener - the onChange listener
 	 */
-	addChangeListener(listener: ChangeListenerFunction): () => void
+	onChange(listener: ChangeListenerFunction): () => void
+
 	/**
 	 * Print the whole store to the console.
 	 */
 	print(): Promise<void>
+
 	/**
 	 * Deeps clones the tables in this store for creating sub-contexts, etc.
-	 * @returns
 	 */
 	clone(): Promise<TableStore>
+
 	/**
 	 * Deletes all tables from store
-	 * @returns
 	 */
-	clear(): TableStore
+	clear(): void
 }
