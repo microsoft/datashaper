@@ -2,14 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
+import { BehaviorSubject, Subject } from 'rxjs'
 
 import type {
-	ChangeListenerFunction,
-	ListenerFunction,
+	Listener,
+	Maybe,
 	ResolverFunction,
 	TableContainer,
+	TableListener,
 	TableStore,
 } from './types.js'
 
@@ -24,24 +25,24 @@ interface LazyTableStorage {
  * Standard implementation of an async-resolving table store.
  */
 export class DefaultTableStore implements TableStore {
-	private _storage: Map<string, LazyTableStorage>
-	private _changeListeners: ChangeListenerFunction[]
-	private _tableListeners: Record<string, ListenerFunction>
+	private _storage: Map<string, LazyTableStorage> = new Map()
+	private _changeListeners = new Subject<void>()
+	private _tableListeners: Record<
+		string,
+		BehaviorSubject<Maybe<TableContainer>>
+	> = {}
+
 	constructor(tables?: TableContainer[]) {
-		this._storage = new Map<string, LazyTableStorage>()
-		if (tables) {
-			tables.forEach(table => {
-				this._storage.set(table.id, {
-					container: table,
-					resolved: true,
-				})
+		// preload any existing data tables
+		tables?.forEach(table => {
+			this._storage.set(table.id, {
+				container: table,
+				resolved: true,
 			})
-		}
-		this._changeListeners = []
-		this._tableListeners = {}
+		})
 	}
 
-	async get(id: string): Promise<TableContainer> {
+	public async get(id: string): Promise<TableContainer> {
 		const storage = this._storage.get(id)
 
 		if (!storage) {
@@ -64,42 +65,35 @@ export class DefaultTableStore implements TableStore {
 		return container
 	}
 
-	async table(id: string): Promise<ColumnTable> {
-		const container = await this.get(id)
-		return container.table!
-	}
-
-	set(container: TableContainer): void {
+	public set(container: TableContainer): void {
 		const storage = {
 			container,
 			resolved: true,
 		}
 		this._storage.set(container.id, storage)
-		this._onChange(container.id)
+		this.emit(container.id)
 	}
 
-	delete(id: string): void {
+	public delete(id: string): void {
 		this._storage.delete(id)
-		this._onChange()
+		this.emit()
 	}
 
-	setResolver(id: string, resolver: ResolverFunction): void {
+	public setResolver(id: string, resolver: ResolverFunction): void {
 		const storage = {
-			container: {
-				id,
-			},
+			container: { id },
 			resolved: false,
 			resolver,
 		}
 		this._storage.set(id, storage)
 	}
 
-	list(filter?: (id: string) => boolean): string[] {
+	public list(filter?: (id: string) => boolean): string[] {
 		const keys = Array.from(this._storage.keys())
 		return keys.filter(filter || (() => true))
 	}
 
-	async toMap(): Promise<Map<string, TableContainer>> {
+	public async toMap(): Promise<Map<string, TableContainer>> {
 		const map = new Map<string, TableContainer>()
 		for (const id of this._storage.keys()) {
 			const resolved = await this.get(id)
@@ -108,38 +102,38 @@ export class DefaultTableStore implements TableStore {
 		return map
 	}
 
-	async toArray(): Promise<TableContainer[]> {
+	public async toArray(): Promise<TableContainer[]> {
 		const map = await this.toMap()
 		return Array.from(map.values())
 	}
 
-	public listen(id: string, listener: ListenerFunction): () => void {
-		this._tableListeners[id] = listener
-		return () => delete this._tableListeners[id]
+	public listen(id: string, listener: TableListener): () => void {
+		if (!this._tableListeners[id]) {
+			this._tableListeners[id] = new BehaviorSubject<Maybe<TableContainer>>(
+				undefined,
+			)
+		}
+		const subscription = this._tableListeners[id]?.subscribe(listener)
+		return () => subscription?.unsubscribe()
 	}
 
-	public onChange(listener: ChangeListenerFunction): () => void {
-		this._changeListeners.push(listener)
-		return () => {
-			const idx = this._changeListeners.findIndex(l => l === listener)
-			if (idx >= 0) {
-				this._changeListeners = this._changeListeners.splice(idx, 1)
-			}
-		}
+	public onChange(listener: Listener): () => void {
+		const subscription = this._changeListeners.subscribe(listener)
+		return () => subscription.unsubscribe()
 	}
-	private _onChange(id?: string): void {
+
+	private emit(id?: string): void {
 		const fn = async () => {
 			if (id) {
 				const container = await this.get(id)
-				const listener = this._tableListeners[id]
-				listener && listener(container)
+				this._tableListeners[id]?.next(container)
 			}
-			this._changeListeners.forEach(l => l())
+			this._changeListeners.next()
 		}
-		fn()
+		void fn()
 	}
 
-	async print(): Promise<void> {
+	public async print(): Promise<void> {
 		const ids = this.list()
 		for (let i = 0; i < ids.length; i++) {
 			console.log(`--- ${ids[i]} ---`)
@@ -148,12 +142,12 @@ export class DefaultTableStore implements TableStore {
 		}
 	}
 
-	async clone(): Promise<TableStore> {
+	public async clone(): Promise<TableStore> {
 		const tables = await this.toArray()
 		return new DefaultTableStore(cloneDeep(tables))
 	}
 
-	clear(): void {
+	public clear(): void {
 		const keys = Array.from(this._storage.keys())
 		keys.forEach(key => this.delete(key))
 	}

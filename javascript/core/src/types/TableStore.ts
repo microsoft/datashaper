@@ -4,15 +4,16 @@
  */
 import type { ResolverFunction, TableContainer } from './tables.js'
 
+export type Maybe<T> = T | undefined
 /**
  * Function callback for table change listeners.
  */
-export type ListenerFunction = (container: TableContainer) => void
+export type TableListener = (container: Maybe<TableContainer>) => void
 
 /**
  * Function callback for general activity listener.
  */
-export type ChangeListenerFunction = () => void
+export type Listener = () => void
 
 /**
  * Store for a collection of tables, used as an execution storage context for pipelines.
@@ -67,14 +68,14 @@ export interface TableStore {
 	 * @param id - the table id
 	 * @param listener - the listener function
 	 */
-	listen(id: string, listener: ListenerFunction): () => void
+	listen(id: string, listener: TableListener): () => void
 
 	/**
 	 * Get alerted for any changes in the store.
 	 * Returns an unlisten handler.
 	 * @param listener - the onChange listener
 	 */
-	onChange(listener: ChangeListenerFunction): () => void
+	onChange(listener: Listener): () => void
 
 	/**
 	 * Print the whole store to the console.
