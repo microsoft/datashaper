@@ -51,6 +51,16 @@
 			}
 		},
 		{
+			"verb": "boolean",
+			"input": "data/companies2.csv",
+			"output": "boolean-1",
+			"args": {
+				"columns": ["Name", "US"],
+				"operator": "and",
+				"to": "Name & US"
+			}
+		},
+		{
 			"verb": "concat",
 			"input": "data/companies.csv",
 			"output": "concat-1",

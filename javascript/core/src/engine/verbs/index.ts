@@ -42,6 +42,7 @@ export function factory(verb: Verb, input: string, output: string): Step {
 				},
 			}
 		case Verb.Aggregate:
+		case Verb.Boolean:
 		case Verb.Derive:
 		case Verb.Impute:
 		case Verb.Fill:

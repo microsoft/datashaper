@@ -142,6 +142,16 @@ export const BinarizeDescription: React.FC<StepDescriptionProps>;
 // @public (undocumented)
 export const BinDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "BooleanLogic" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const BooleanLogic: React.FC<StepComponentProps>;
+
+// Warning: (ae-missing-release-tag) "BooleanLogicDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const BooleanLogicDescription: React.FC<StepDescriptionProps>;
+
 // Warning: (ae-missing-release-tag) "CenteredColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -749,6 +759,8 @@ export interface StepDescriptionProps extends StepDependent {
     showInput?: boolean;
     // (undocumented)
     showOutput?: boolean;
+    // (undocumented)
+    showOutputColumn?: boolean;
     // (undocumented)
     style?: React.CSSProperties;
 }

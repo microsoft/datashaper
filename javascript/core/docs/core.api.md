@@ -69,6 +69,14 @@ export enum BinStrategy {
     FixedWidth = "fixed width"
 }
 
+// Warning: (ae-missing-release-tag) "BooleanArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface BooleanArgs extends InputColumnListArgs, OutputColumnArgs {
+    // (undocumented)
+    operator: BooleanLogicalOperator;
+}
+
 // Warning: (ae-missing-release-tag) "BooleanComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -97,6 +105,11 @@ export enum BooleanLogicalOperator {
     OR = "or",
     XOR = "xor"
 }
+
+// Warning: (ae-missing-release-tag) "BooleanStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BooleanStep = Step<BooleanArgs>;
 
 // Warning: (ae-missing-release-tag) "Category" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1054,6 +1067,8 @@ export enum Verb {
     Bin = "bin",
     // (undocumented)
     Binarize = "binarize",
+    // (undocumented)
+    Boolean = "boolean",
     // (undocumented)
     Chain = "chain",
     // (undocumented)

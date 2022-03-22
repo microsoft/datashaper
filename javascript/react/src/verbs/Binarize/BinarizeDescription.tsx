@@ -16,10 +16,6 @@ export const BinarizeDescription: React.FC<StepDescriptionProps> = memo(
 			const { args } = internal
 			return [
 				{
-					before: 'into column',
-					value: args?.to,
-				},
-				{
 					before: 'where',
 					value: args?.column,
 					after: 'row value',

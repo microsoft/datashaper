@@ -15,10 +15,6 @@ export const WindowDescription: React.FC<StepDescriptionProps> = memo(
 			const { args } = internal
 			return [
 				{
-					before: 'into column',
-					value: args.to,
-				},
-				{
 					before: 'window column',
 					value: args.column,
 					sub: [

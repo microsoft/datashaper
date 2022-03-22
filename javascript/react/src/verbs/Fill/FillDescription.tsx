@@ -15,10 +15,6 @@ export const FillDescription: React.FC<StepDescriptionProps> = memo(
 			const { args } = internal
 			return [
 				{
-					before: 'into column',
-					value: args.to,
-				},
-				{
 					before: 'with value',
 					value: args.value,
 				},
