@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { NodeImpl } from './NodeImpl.js'
-import type { Maybe, NodeBinding } from './types.js'
+import type { Maybe, NodeBinding, SocketName } from './types.js'
 
 const VARIADIC_PREFIX = 'DWC.VariadicInput.'
 
@@ -14,7 +14,7 @@ function isVariadicInput(name: string): boolean {
 export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 	private variadicIndex = 0
 
-	public constructor(inputs: string[] = [], outputs: string[] = []) {
+	public constructor(inputs: SocketName[] = [], outputs: SocketName[] = []) {
 		super(inputs, outputs)
 	}
 
@@ -22,18 +22,18 @@ export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 	 * Get the next input name
 	 * @returns The next variadic input name
 	 */
-	protected nextInput(): string {
+	protected nextInput(): SocketName {
 		return `${VARIADIC_PREFIX}${this.variadicIndex++}`
 	}
 
-	public installNext(binding: NodeBinding<T>): string {
+	public installNext(binding: NodeBinding<T>): SocketName {
 		const name = this.nextInput()
 		this.bind(name, binding)
 		return name
 	}
 
-	protected override verifyInputSocketName(name: string): void {
-		if (!isVariadicInput(name)) {
+	protected override verifyInputSocketName(name: SocketName): void {
+		if (!isVariadicInput(String(name))) {
 			return super.verifyInputSocketName(name)
 		}
 	}

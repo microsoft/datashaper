@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Observable, Subscription } from 'rxjs'
+import type { Observable } from 'rxjs'
 
 export type NodeId = string | symbol
 export type SocketName = string | symbol

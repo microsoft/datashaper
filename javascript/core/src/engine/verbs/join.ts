@@ -42,7 +42,10 @@ class JoinNode extends NodeImpl<TableContainer, JoinArgs> {
 		const right = this.inputValue(JoinInput.Right)
 		if (left?.table != null && right?.table != null && this.config != null) {
 			this.emit(
-				container(this.id, doJoin(left.table, right.table, this.config)),
+				container(
+					String(this.id),
+					doJoin(left.table, right.table, this.config),
+				),
 			)
 		} else {
 			this.emit(undefined)
