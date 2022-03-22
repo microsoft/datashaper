@@ -5,7 +5,7 @@
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { container } from '../../container.js'
-import { NodeImpl } from '../../graph/NodeImpl.js'
+import { BaseNode } from '../../graph/BaseNode.js'
 import type { TableStore } from '../../index.js'
 import type { LookupArgs, LookupStep, TableContainer } from '../../types.js'
 
@@ -30,7 +30,7 @@ export enum LookupInput {
 	Input = 'Input',
 	Other = 'Other',
 }
-class LookupNode extends NodeImpl<TableContainer, LookupArgs> {
+class LookupNode extends BaseNode<TableContainer, LookupArgs> {
 	constructor(id: string) {
 		super([LookupInput.Input, LookupInput.Other])
 		this.id = id

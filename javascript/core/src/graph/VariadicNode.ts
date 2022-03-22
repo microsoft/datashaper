@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NodeImpl } from './NodeImpl.js'
+import { BaseNode } from './BaseNode.js'
 import type { Maybe, NodeBinding, SocketName } from './types.js'
 
 const VARIADIC_PREFIX = 'DWC.VariadicInput.'
@@ -11,7 +11,7 @@ function isVariadicInput(name: string): boolean {
 	return name.startsWith(VARIADIC_PREFIX)
 }
 
-export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
+export abstract class VariadicNodeImpl<T, Config> extends BaseNode<T, Config> {
 	private variadicIndex = 0
 
 	public constructor(inputs: SocketName[] = [], outputs: SocketName[] = []) {
@@ -26,10 +26,10 @@ export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 		return `${VARIADIC_PREFIX}${this.variadicIndex++}`
 	}
 
-	public installNext(binding: NodeBinding<T>): SocketName {
-		const name = this.nextInput()
-		this.bind(name, binding)
-		return name
+	public installNext(binding: Omit<NodeBinding<T>, 'input'>): SocketName {
+		const input = this.nextInput()
+		this.bind({ ...binding, input })
+		return input
 	}
 
 	protected override verifyInputSocketName(name: SocketName): void {
@@ -40,7 +40,7 @@ export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 
 	protected getVariadicInputValues(): Maybe<T>[] {
 		const result: Maybe<T>[] = []
-		const inputs = this.inputValues
+		const inputs = this.getInputValues()
 		Object.keys(inputs).forEach(name => {
 			const value = inputs[name]
 			if (isVariadicInput(name)) {

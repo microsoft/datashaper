@@ -15,6 +15,7 @@
 	"dependencies": {
 		"lodash-es": "^4.17.21",
 		"rxjs": "^7.5.5",
+		"toposort": "^2.0.2",
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
@@ -23,6 +24,7 @@
 		"@types/jest": "^27.4.1",
 		"@types/lodash-es": "^4.17.6",
 		"@types/node": "^17.0.21",
+		"@types/toposort": "^2",
 		"@types/uuid": "^8",
 		"arquero": "^4.8.8",
 		"regenerator-runtime": "^0.13.9",

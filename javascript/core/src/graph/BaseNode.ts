@@ -6,21 +6,21 @@ import type { Observable } from 'rxjs'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
-import type { InputRecord } from './InputRecord.js'
-import { InputRecordImpl } from './InputRecord.js'
+import type { BoundInput } from './BoundInput.js'
+import { BoundInputImpl } from './BoundInput.js'
 import type { Maybe, Node, NodeBinding, NodeId, SocketName } from './types'
 
 const DEFAULT_OUTPUT_NAME = 'DWC.DefaultOutput'
 
-export abstract class NodeImpl<T, Config> implements Node<T, Config> {
+export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region fields
 
 	protected _id = uuid()
 	private _config: Maybe<Config>
 
 	// inputs
-	private _bindings: Map<SocketName, InputRecord<T>> = new Map()
-	private _onBindingsChanged = new Subject<void>()
+	private _inputs: Map<SocketName, BoundInput<T>> = new Map()
+	private _bindingsChanged = new Subject<void>()
 
 	// outputs
 	private _outputs: Map<SocketName, BehaviorSubject<Maybe<T>>> = new Map()
@@ -57,30 +57,38 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	}
 
 	public get onBindingsChanged(): Observable<void> {
-		return this._onBindingsChanged
+		return this._bindingsChanged
 	}
 
 	// #endregion field accessors
 
 	// #region inputs
 
-	public input(name: SocketName): Maybe<NodeBinding<T>> {
-		return this._bindings.get(name)?.binding
+	public binding(name: SocketName): Maybe<NodeBinding<T>> {
+		return this._inputs.get(name)?.binding
+	}
+
+	public bindings(): NodeBinding<T>[] {
+		return [...this._inputs.values()].map(i => i.binding)
+	}
+
+	public get bindingsCount(): number {
+		return this._inputs.size
 	}
 
 	protected inputValue(name: string): Maybe<T> {
 		this.verifyInputSocketName(name)
-		return this._bindings.get(name)?.current
+		return this._inputs.get(name)?.current
 	}
 
 	/**
 	 * Gets a map of named inputs to the current value.
 	 * @protected
 	 */
-	protected get inputValues(): Record<SocketName, Maybe<T>> {
+	protected getInputValues(): Record<SocketName, Maybe<T>> {
 		const result: Record<SocketName, Maybe<T>> = {}
-		for (const key of this._bindings.keys()) {
-			result[key] = this._bindings.get(key)?.current
+		for (const key of this._inputs.keys()) {
+			result[key] = this._inputs.get(key)?.current
 		}
 		return result
 	}
@@ -89,10 +97,10 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	 * Gets a map of named inputs to any errors emitted
 	 * @protected
 	 */
-	protected get inputErrors(): Record<SocketName, unknown> {
+	protected getInputErrors(): Record<SocketName, unknown> {
 		const result: Record<SocketName, unknown> = {}
-		for (const key in this._bindings.keys()) {
-			const error = this._bindings.get(key)?.error
+		for (const key in this._inputs.keys()) {
+			const error = this._inputs.get(key)?.error
 			if (error) {
 				result[key] = error
 			}
@@ -118,26 +126,29 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 
 	// #region bind/unbind logic
 
-	public bind(name: SocketName, binding: NodeBinding<T>): void {
+	public bind(binding: NodeBinding<T>): void {
+		const name = binding.input
 		this.verifyInputSocketName(name)
 		// uninstall any existing upstream socket connection
-		if (this._bindings.has(name)) {
+		if (this._inputs.has(name)) {
 			this.unbind(name)
 		}
 		// subscribe to the new input
-		const inputRecord: InputRecord<T> = new InputRecordImpl(binding)
-		this._bindings.set(name, inputRecord as InputRecord<T>)
-		inputRecord.onValueChange(this.recalculate)
+		const input: BoundInput<T> = new BoundInputImpl(binding)
+		this._inputs.set(name, input as BoundInput<T>)
+		input.onValueChange(() => this.recalculate())
 		this.recalculate()
+		this._bindingsChanged.next()
 	}
 
 	public unbind(name: SocketName): void {
 		this.verifyInputSocketName(name)
-		if (this._bindings.has(name)) {
+		if (this._inputs.has(name)) {
 			// unsubscribe from updates
-			this._bindings.get(name)?.dispose()
-			this._bindings.delete(name)
+			this._inputs.get(name)?.dispose()
+			this._inputs.delete(name)
 			void this.recalculate()
+			this._bindingsChanged.next()
 		} else {
 			throw new Error(`no socket installed at "${String(name)}"`)
 		}
@@ -201,7 +212,9 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	 */
 	protected emit(value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void {
 		this.verifyOutputSocketName(output)
-		this._outputs.get(output)?.next(value)
+		if (value !== this._outputs.get(output)?.value) {
+			this._outputs.get(output)?.next(value)
+		}
 	}
 
 	/**
