@@ -22,13 +22,13 @@ export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 	 * Get the next input name
 	 * @returns The next variadic input name
 	 */
-	public nextInput(): string {
+	protected nextInput(): string {
 		return `${VARIADIC_PREFIX}${this.variadicIndex++}`
 	}
 
 	public installNext(binding: NodeBinding<T>): string {
 		const name = this.nextInput()
-		this.install(name, binding)
+		this.bind(name, binding)
 		return name
 	}
 
@@ -40,7 +40,9 @@ export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 
 	protected getVariadicInputValues(): Maybe<T>[] {
 		const result: Maybe<T>[] = []
-		this.inputValues.forEach((value, name) => {
+		const inputs = this.inputValues
+		Object.keys(inputs).forEach(name => {
+			const value = inputs[name]
 			if (isVariadicInput(name)) {
 				result.push(value)
 			}

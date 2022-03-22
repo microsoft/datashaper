@@ -2,7 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Observable } from 'rxjs'
+import type { Observable, Subscription } from 'rxjs'
+
+export type NodeId = string | symbol
+export type SocketName = string | symbol
 
 /**
  * A convenience type for including undefined
@@ -15,7 +18,10 @@ export type Maybe<T> = T | undefined
  * @public
  */
 export interface Node<T, Config = unknown> {
-	readonly id: string
+	/**
+	 * A unique identifier for this node
+	 */
+	readonly id: NodeId
 	/**
 	 * The node's mutable configuration
 	 */
@@ -24,35 +30,47 @@ export interface Node<T, Config = unknown> {
 	/**
 	 * Named input sockets
 	 */
-	readonly inputs: string[]
+	readonly inputs: SocketName[]
 
 	/**
 	 * Named output sockets, in addition to the implicit default output socket
 	 */
-	readonly outputs: string[]
+	readonly outputs: SocketName[]
 
 	/**
-	 * Wires an input socket to a stream
+	 * Binds an input socket to an upstream node
 	 * @param name - the name of the input socket
 	 */
-	install(name: string, binding: NodeBinding<T>): void
+	bind(name: SocketName, binding: NodeBinding<T>): void
+
 	/**
 	 * Clear an input socket
 	 * @param name - The input socket name
 	 */
-	uninstall(name: string): void
+	unbind(name: SocketName): void
+
+	/**
+	 * Retrieves an existing input binding by id
+	 */
+	input(input: SocketName): Maybe<NodeBinding<T>>
 
 	/**
 	 * Gets an output socket
 	 * @param name - The name of the output socket. If undefined, this will use the implicit default output socket.
 	 */
-	output(name?: string): Observable<Maybe<T>>
+	output(name?: SocketName): Observable<Maybe<T>>
 
 	/**
 	 * Gets a current output value
 	 * @param name - The output name. If undefined, this will use the implicit default output socket.
 	 */
-	outputValue(name?: string): Maybe<T>
+	outputValue(name?: SocketName): Maybe<T>
+
+	/**
+	 *
+	 * @param handler The event handler for when the binding changes
+	 */
+	readonly onBindingsChanged: Observable<void>
 }
 
 /**
