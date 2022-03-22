@@ -2,10 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Observable } from 'rxjs'
-
 import { NodeImpl } from './NodeImpl.js'
-import type { Maybe } from './types.js'
+import type { Maybe, NodeBinding, SocketName } from './types.js'
 
 const VARIADIC_PREFIX = 'DWC.VariadicInput.'
 
@@ -16,7 +14,7 @@ function isVariadicInput(name: string): boolean {
 export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 	private variadicIndex = 0
 
-	public constructor(inputs: string[] = [], outputs: string[] = []) {
+	public constructor(inputs: SocketName[] = [], outputs: SocketName[] = []) {
 		super(inputs, outputs)
 	}
 
@@ -24,25 +22,27 @@ export abstract class VariadicNodeImpl<T, Config> extends NodeImpl<T, Config> {
 	 * Get the next input name
 	 * @returns The next variadic input name
 	 */
-	public nextInput(): string {
+	protected nextInput(): SocketName {
 		return `${VARIADIC_PREFIX}${this.variadicIndex++}`
 	}
 
-	public installNext(socket: Observable<Maybe<T>>): string {
+	public installNext(binding: NodeBinding<T>): SocketName {
 		const name = this.nextInput()
-		this.install(name, socket)
+		this.bind(name, binding)
 		return name
 	}
 
-	protected override verifyInputSocketName(name: string): void {
-		if (!isVariadicInput(name)) {
+	protected override verifyInputSocketName(name: SocketName): void {
+		if (!isVariadicInput(String(name))) {
 			return super.verifyInputSocketName(name)
 		}
 	}
 
 	protected getVariadicInputValues(): Maybe<T>[] {
 		const result: Maybe<T>[] = []
-		this.inputValues.forEach((value, name) => {
+		const inputs = this.inputValues
+		Object.keys(inputs).forEach(name => {
+			const value = inputs[name]
 			if (isVariadicInput(name)) {
 				result.push(value)
 			}

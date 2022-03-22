@@ -41,7 +41,10 @@ class LookupNode extends NodeImpl<TableContainer, LookupArgs> {
 		const other = this.inputValue(LookupInput.Other)
 		if (input?.table != null && other?.table != null && this.config != null) {
 			this.emit(
-				container(this.id, doLookup(input.table, other.table, this.config)),
+				container(
+					String(this.id),
+					doLookup(input.table, other.table, this.config),
+				),
 			)
 		} else {
 			this.emit(undefined)
