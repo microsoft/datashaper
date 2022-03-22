@@ -5,7 +5,7 @@
 import type { Subscription } from 'rxjs'
 import toposort from 'toposort'
 
-import type { Graph, Maybe, Node,NodeId } from './types'
+import type { Graph, Maybe, Node, NodeId } from './types'
 
 export class GraphImpl<T> implements Graph<T> {
 	private _nodes: Map<NodeId, Node<T>> = new Map()
@@ -18,7 +18,7 @@ export class GraphImpl<T> implements Graph<T> {
 	public get inputs(): NodeId[] {
 		return this.nodes.filter(id => {
 			const node = this._nodes.get(id)
-			return node && node.bindingsCount > 0
+			return node && node.bindingsCount === 0
 		})
 	}
 
