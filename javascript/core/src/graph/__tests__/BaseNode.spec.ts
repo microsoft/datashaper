@@ -8,11 +8,11 @@ import {
 	ValueNode,
 } from './numericNodes.js'
 
-describe('NodeImpl', () => {
+describe('BaseNode', () => {
 	it('will throw an error if installing unknown input socket', () => {
 		const two = new ValueNode(2)
 		const sum = new AddNode()
-		expect(() => sum.bind('derp', { node: two })).toThrow(
+		expect(() => sum.bind({ input: 'derp', node: two })).toThrow(
 			/unknown input socket name "derp"/,
 		)
 	})
@@ -49,8 +49,8 @@ describe('NodeImpl', () => {
 
 		const sum = new AddNode()
 		expect(sum.outputValue()).toBeUndefined()
-		sum.bind(Input.LHS, { node: two })
-		sum.bind(Input.RHS, { node: three })
+		sum.bind({ input: Input.LHS, node: two })
+		sum.bind({ input: Input.RHS, node: three })
 		expect(sum.outputValue()).toBe(5)
 	})
 
@@ -59,11 +59,11 @@ describe('NodeImpl', () => {
 		const three = new ValueNode(3)
 		const sum = new AddNode()
 
-		sum.bind(Input.LHS, { node: two })
-		sum.bind(Input.RHS, { node: three })
+		sum.bind({ input: Input.LHS, node: two })
+		sum.bind({ input: Input.RHS, node: three })
 		expect(sum.outputValue()).toBe(5)
 
-		sum.bind(Input.LHS, { node: three })
+		sum.bind({ input: Input.LHS, node: three })
 		expect(sum.outputValue()).toBe(6)
 	})
 
@@ -72,23 +72,23 @@ describe('NodeImpl', () => {
 		const two = new ValueNode(2)
 		const three = new ValueNode(3)
 		const sum = new AddNode()
-		sum.bind(Input.LHS, { node: two })
-		sum.bind(Input.RHS, { node: three })
+		sum.bind({ input: Input.LHS, node: two })
+		sum.bind({ input: Input.RHS, node: three })
 
 		const subtraction = new SubtractNode()
-		subtraction.bind(Input.LHS, { node: sum })
-		subtraction.bind(Input.RHS, { node: one })
+		subtraction.bind({ input: Input.LHS, node: sum })
+		subtraction.bind({ input: Input.RHS, node: one })
 
 		expect(subtraction.outputValue()).toBe(4)
 
 		const mult = new MultiplyNode()
-		mult.bind(Input.LHS, { node: subtraction })
-		mult.bind(Input.RHS, { node: two })
+		mult.bind({ input: Input.LHS, node: subtraction })
+		mult.bind({ input: Input.RHS, node: two })
 		expect(mult.outputValue()).toBe(8)
 
 		const div = new DivideNode()
-		div.bind(Input.LHS, { node: mult })
-		div.bind(Input.RHS, { node: two })
+		div.bind({ input: Input.LHS, node: mult })
+		div.bind({ input: Input.RHS, node: two })
 		expect(div.outputValue()).toBe(4)
 	})
 
@@ -97,8 +97,8 @@ describe('NodeImpl', () => {
 		const three = new ValueNode(3)
 		const sum = new AddNode()
 
-		sum.bind(Input.LHS, { node: two })
-		sum.bind(Input.RHS, { node: three })
+		sum.bind({ input: Input.LHS, node: two })
+		sum.bind({ input: Input.RHS, node: three })
 		expect(sum.outputValue()).toBe(5)
 
 		// trigger a config-based recompute
@@ -110,8 +110,8 @@ describe('NodeImpl', () => {
 		const zero = new ValueNode(0)
 		const two = new ValueNode(2)
 		const div = new ThrowingNode()
-		div.bind(Input.LHS, { node: two })
-		div.bind(Input.RHS, { node: zero })
+		div.bind({ input: Input.LHS, node: two })
+		div.bind({ input: Input.RHS, node: zero })
 
 		let caught: Error | undefined
 		div.output().subscribe({

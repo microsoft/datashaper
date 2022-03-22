@@ -12,7 +12,7 @@ import type { Maybe, Node, NodeBinding, NodeId, SocketName } from './types'
 
 const DEFAULT_OUTPUT_NAME = 'DWC.DefaultOutput'
 
-export abstract class NodeImpl<T, Config> implements Node<T, Config> {
+export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region fields
 
 	protected _id = uuid()
@@ -64,8 +64,16 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 
 	// #region inputs
 
-	public input(name: SocketName): Maybe<NodeBinding<T>> {
+	public binding(name: SocketName): Maybe<NodeBinding<T>> {
 		return this._inputs.get(name)?.binding
+	}
+
+	public bindings(): NodeBinding<T>[] {
+		return [...this._inputs.values()].map(i => i.binding)
+	}
+
+	public get bindingsCount(): number {
+		return this._inputs.size
 	}
 
 	protected inputValue(name: string): Maybe<T> {
@@ -118,7 +126,8 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 
 	// #region bind/unbind logic
 
-	public bind(name: SocketName, binding: NodeBinding<T>): void {
+	public bind(binding: NodeBinding<T>): void {
+		const name = binding.input
 		this.verifyInputSocketName(name)
 		// uninstall any existing upstream socket connection
 		if (this._inputs.has(name)) {
@@ -127,8 +136,9 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 		// subscribe to the new input
 		const input: BoundInput<T> = new BoundInputImpl(binding)
 		this._inputs.set(name, input as BoundInput<T>)
-		input.onValueChange(this.recalculate)
+		input.onValueChange(() => this.recalculate())
 		this.recalculate()
+		this._bindingsChanged.next()
 	}
 
 	public unbind(name: SocketName): void {
@@ -138,6 +148,7 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 			this._inputs.get(name)?.dispose()
 			this._inputs.delete(name)
 			void this.recalculate()
+			this._bindingsChanged.next()
 		} else {
 			throw new Error(`no socket installed at "${String(name)}"`)
 		}
@@ -201,7 +212,9 @@ export abstract class NodeImpl<T, Config> implements Node<T, Config> {
 	 */
 	protected emit(value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void {
 		this.verifyOutputSocketName(output)
-		this._outputs.get(output)?.next(value)
+		if (value !== this._outputs.get(output)?.value) {
+			this._outputs.get(output)?.next(value)
+		}
 	}
 
 	/**

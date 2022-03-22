@@ -2,15 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NodeImpl } from '../NodeImpl.js'
-import { VariadicNodeImpl } from '../VariadicNodeImpl.js'
+import { BaseNode } from '../BaseNode.js'
+import { VariadicNodeImpl } from '../VariadicNode.js'
 
 export enum Input {
 	LHS = 'lhs',
 	RHS = 'rhs',
 }
 
-export class ValueNode extends NodeImpl<number, number> {
+export class ValueNode extends BaseNode<number, number> {
 	constructor(value: number) {
 		super()
 		this.emit(value)
@@ -23,7 +23,7 @@ export class ValueNode extends NodeImpl<number, number> {
 	}
 }
 
-abstract class ComputeNode extends NodeImpl<number, void> {
+abstract class ComputeNode extends BaseNode<number, void> {
 	constructor() {
 		super([Input.LHS, Input.RHS])
 	}

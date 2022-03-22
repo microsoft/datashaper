@@ -5,7 +5,7 @@
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { container } from '../../container.js'
-import { NodeImpl } from '../../graph/NodeImpl.js'
+import { BaseNode } from '../../graph/BaseNode.js'
 import type { TableStore } from '../../index.js'
 import type { JoinArgs, JoinStep, TableContainer } from '../../types.js'
 import { JoinStrategy } from '../../types.js'
@@ -31,7 +31,7 @@ export enum JoinInput {
 	Left = 'left',
 	Right = 'right',
 }
-class JoinNode extends NodeImpl<TableContainer, JoinArgs> {
+class JoinNode extends BaseNode<TableContainer, JoinArgs> {
 	constructor(id: string) {
 		super([JoinInput.Left, JoinInput.Right])
 		this.id = id

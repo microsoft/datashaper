@@ -22,6 +22,7 @@ export interface Node<T, Config = unknown> {
 	 * A unique identifier for this node
 	 */
 	readonly id: NodeId
+
 	/**
 	 * The node's mutable configuration
 	 */
@@ -41,18 +42,28 @@ export interface Node<T, Config = unknown> {
 	 * Binds an input socket to an upstream node
 	 * @param name - the name of the input socket
 	 */
-	bind(name: SocketName, binding: NodeBinding<T>): void
+	bind(binding: NodeBinding<T>): void
 
 	/**
 	 * Clear an input socket
 	 * @param name - The input socket name
 	 */
-	unbind(name: SocketName): void
+	unbind(name?: SocketName): void
 
 	/**
 	 * Retrieves an existing input binding by id
 	 */
-	input(input: SocketName): Maybe<NodeBinding<T>>
+	binding(input: SocketName): Maybe<NodeBinding<T>>
+
+	/**
+	 * Gets all input bindings
+	 */
+	bindings(): NodeBinding<T>[]
+
+	/**
+	 * The number of bound inputs
+	 */
+	readonly bindingsCount: number
 
 	/**
 	 * Gets an output socket
@@ -83,9 +94,14 @@ export interface NodeBinding<T> {
 	node: Node<T>
 
 	/**
-	 * The named output
+	 * The named input on the target node
 	 */
-	output?: string
+	input: SocketName
+
+	/**
+	 * The named output on the source node (otherwise default)
+	 */
+	output?: SocketName
 }
 
 export interface Graph<T> {
@@ -98,7 +114,7 @@ export interface Graph<T> {
 	 * @param id - the node identifier
 	 * @throws - if the id is not found
 	 */
-	node(id: NodeId): Node<T>
+	node(id: NodeId): Maybe<Node<T>>
 
 	/**
 	 * Verify that the graph is a valid dag (no cycles)
@@ -107,8 +123,13 @@ export interface Graph<T> {
 	validate(): void
 
 	/**
-	 *
+	 * Add a node to the graph
 	 * @param node The node to register with the graph
 	 */
-	register(node: Node<T>): void
+	add(node: Node<T>): void
+
+	/**
+	 * Remove a node from the grpah
+	 */
+	remove(id: NodeId): void
 }

@@ -1,6 +1,6 @@
 import { ValueNode, VariadicAddNode } from './numericNodes.js'
 
-describe('NodeImpl', () => {
+describe('VariadicNode', () => {
 	it('can perform a variadic operation', () => {
 		const two = new ValueNode(2)
 		const three = new ValueNode(3)
