@@ -44,6 +44,11 @@ export interface TableStore {
 	 */
 	setResolver(id: string, resolver: () => Promise<TableContainer>): TableStore
 
+	/**
+	 * Add a table name to the store using an observable stream to resolve it
+	 * @param id - The table id
+	 * @param observable - The table-producing observable
+	 */
 	setObservable(
 		id: string,
 		observable: Observable<TableContainer | undefined>,

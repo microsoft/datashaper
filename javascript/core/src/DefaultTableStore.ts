@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
-import type { Observable, Subscription } from 'rxjs';
+import type { Observable, Subscription } from 'rxjs'
 import { Subject } from 'rxjs'
 
 import type {
@@ -18,12 +19,12 @@ import type {
 interface StorageCell<T> {
 	readonly resolved: boolean
 	get(): Promise<T>
-	onChange(handler: ChangeListenerFunction): Unsubscribe
+	onChange(handler: ChangeListenerFunction): void
 	clone(): StorageCell<T>
 	dispose(): void
 }
 
-class StaticTableCell<T> implements StorageCell<T> {
+class StaticStorageCell<T> implements StorageCell<T> {
 	public readonly resolved = true
 	constructor(private _value: T) {}
 
@@ -31,22 +32,15 @@ class StaticTableCell<T> implements StorageCell<T> {
 		return Promise.resolve(this._value)
 	}
 
-	public onChange() {
-		return () => {
-			/* do nothing*/
-		}
-	}
-
-	public dispose() {
-		// do nothing
-	}
+	public onChange() {}
+	public dispose() {}
 
 	public clone() {
-		return new StaticTableCell(this._value)
+		return new StaticStorageCell(this._value)
 	}
 }
 
-class ResolvingTableCell<T> implements StorageCell<T> {
+class ResolvingStorageCell<T> implements StorageCell<T> {
 	public resolved = false
 	private _result: T | undefined
 
@@ -60,55 +54,50 @@ class ResolvingTableCell<T> implements StorageCell<T> {
 		return this._result
 	}
 
-	public onChange() {
-		return () => {
-			/* do nothing*/
-		}
-	}
-
-	public dispose() {
-		// do nothing
-	}
+	public onChange() {}
+	public dispose() {}
 
 	public clone() {
-		const clone = new ResolvingTableCell(this._resolver)
+		const clone = new ResolvingStorageCell(this._resolver)
 		clone._result = this._result
 		return clone
 	}
 }
 
-class ObservableTableCell<T> implements StorageCell<T> {
+class ObservableStorageCell<T> implements StorageCell<T> {
 	private _current: T | undefined
-	private _subscription: Subscription
+	private _subscriptions: Subscription[] = []
 	public resolved = false
 	private _resolve?: (c: T) => void
 	private _promise = new Promise<T>(resolve => (this._resolve = resolve))
 
 	constructor(private _observable: Observable<T | undefined>) {
-		this._subscription = this._observable.subscribe(value => {
-			this._current = value
-			if (value) {
-				this.resolved = true
-				this._resolve && this._resolve(value)
-			}
-		})
+		this._subscriptions.push(
+			this._observable.subscribe(value => {
+				this._current = value
+				if (value) {
+					this.resolved = true
+					this._resolve && this._resolve(value)
+				}
+			}),
+		)
 	}
 
 	public async get(): Promise<T> {
 		return this._promise
 	}
 
-	public onChange(handler: ChangeListenerFunction): Unsubscribe {
+	public onChange(handler: ChangeListenerFunction): void {
 		const sub = this._observable.subscribe(handler)
-		return () => sub.unsubscribe()
+		this._subscriptions.push(sub)
 	}
 
 	public dispose() {
-		this._subscription.unsubscribe()
+		this._subscriptions.forEach(s => s.unsubscribe())
 	}
 
 	public clone(): StorageCell<T> {
-		const clone = new ObservableTableCell<T>(this._observable)
+		const clone = new ObservableStorageCell<T>(this._observable)
 		clone._current = this._current
 		return clone
 	}
@@ -126,7 +115,7 @@ export class DefaultTableStore implements TableStore {
 	public constructor(tables?: TableContainer[]) {
 		if (tables) {
 			tables.forEach(table => {
-				this._storage.set(table.id, new StaticTableCell(table))
+				this._storage.set(table.id, new StaticStorageCell(table))
 			})
 		}
 	}
@@ -145,7 +134,7 @@ export class DefaultTableStore implements TableStore {
 	}
 
 	public set(container: TableContainer): TableStore {
-		this._storage.set(container.id, new StaticTableCell(container))
+		this._storage.set(container.id, new StaticStorageCell(container))
 		this.emit(container.id)
 		return this
 	}
@@ -154,7 +143,7 @@ export class DefaultTableStore implements TableStore {
 		id: string,
 		resolver: () => Promise<TableContainer>,
 	): TableStore {
-		this._storage.set(id, new ResolvingTableCell(resolver))
+		this._storage.set(id, new ResolvingStorageCell(resolver))
 		return this
 	}
 
@@ -162,7 +151,9 @@ export class DefaultTableStore implements TableStore {
 		id: string,
 		observable: Observable<TableContainer<unknown> | undefined>,
 	): TableStore {
-		this._storage.set(id, new ObservableTableCell(observable))
+		const cell = new ObservableStorageCell(observable)
+		cell.onChange(() => this.emit(id))
+		this._storage.set(id, cell)
 		return this
 	}
 
