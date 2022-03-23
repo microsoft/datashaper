@@ -274,7 +274,7 @@ export type ConvertStep = Step<ConvertArgs>;
 // Warning: (ae-missing-release-tag) "createTableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function createTableStore(): DefaultStore<TableContainer<unknown>>;
+export function createTableStore(): Store<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "Criterion" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -664,7 +664,9 @@ export enum MathOperator {
     Subtract = "-"
 }
 
-// @public
+// Warning: (ae-missing-release-tag) "Maybe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
 export type Maybe<T> = T | undefined;
 
 // Warning: (ae-missing-release-tag) "MergeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

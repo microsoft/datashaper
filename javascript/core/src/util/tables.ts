@@ -5,7 +5,7 @@
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { fixedBinCount } from '../engine/util/index.js'
+import { fixedBinCount } from '../verbs/util/index.js'
 import type {
 	Bin,
 	Category,
