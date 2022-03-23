@@ -5,7 +5,7 @@
 ```ts
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
-import { Observable } from 'rxjs';
+import type { Observable } from 'rxjs';
 
 // Warning: (ae-missing-release-tag) "AggregateArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -211,6 +211,11 @@ export function columnTransformVerbs(filter?: (verb: Verb) => boolean): Verb[];
 //
 // @public (undocumented)
 export function columnType(table: ColumnTable, column: string): DataType;
+
+// Warning: (ae-missing-release-tag) "container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function container(id: string, table: ColumnTable | undefined, options?: Partial<Omit<TableContainer, 'id' | 'table'>>): TableContainer;
 
 // Warning: (ae-missing-release-tag) "ConvertArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1015,7 +1020,6 @@ export interface TableStore {
     onTableChange(id: string, listener: ListenerFunction): Unsubscribe;
     print(): Promise<void>;
     set(container: TableContainer): TableStore;
-    // (undocumented)
     setObservable(id: string, observable: Observable<TableContainer | undefined>): TableStore;
     setResolver(id: string, resolver: () => Promise<TableContainer>): TableStore;
     // (undocumented)
