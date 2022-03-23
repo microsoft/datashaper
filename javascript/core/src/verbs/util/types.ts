@@ -7,3 +7,7 @@ export type CompareWrapper = {
 	escape: boolean
 	toString: any
 }
+
+export type ExprFunction = (d: any, $: any) => any
+
+export type ExprFunctionMap = Record<string, ExprFunction>

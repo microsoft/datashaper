@@ -5,9 +5,18 @@
 import { SetOp } from '../types.js'
 import { SetOperationNode } from './util/factories.js'
 
-/**
- * Executes an arquero table difference.
- */
+export function concat(id: string): SetOperationNode {
+	return new SetOperationNode(id, SetOp.Concat)
+}
+
 export function difference(id: string): SetOperationNode {
 	return new SetOperationNode(id, SetOp.Difference)
+}
+
+export function intersect(id: string): SetOperationNode {
+	return new SetOperationNode(id, SetOp.Intersect)
+}
+
+export function union(id: string): SetOperationNode {
+	return new SetOperationNode(id, SetOp.Union)
 }
