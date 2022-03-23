@@ -8,7 +8,7 @@ import { loadCSV, loadJSON } from 'arquero'
 import type { FetchArgs } from '../index.js'
 import { makeInputNode } from './util/factories.js'
 
-export const fetchNode = makeInputNode<FetchArgs>(
+export const fetch = makeInputNode<FetchArgs>(
 	({ url, delimiter, autoMax }: FetchArgs) => {
 		if (url.toLowerCase().endsWith('.json')) {
 			return loadJSON(url, {
