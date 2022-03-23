@@ -225,11 +225,6 @@ export interface ConvertArgs extends InputColumnListArgs {
 // @public (undocumented)
 export type ConvertStep = Step<ConvertArgs>;
 
-// Warning: (ae-missing-release-tag) "createPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function createPipeline(store: TableStore): Pipeline;
-
 // Warning: (ae-missing-release-tag) "createTableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -278,38 +273,6 @@ export type DedupeArgs = Partial<InputColumnListArgs>;
 //
 // @public (undocumented)
 export type DedupeStep = Step<DedupeArgs>;
-
-// Warning: (ae-missing-release-tag) "DefaultPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export class DefaultPipeline implements Pipeline {
-    constructor(store: TableStore);
-    // (undocumented)
-    add(step: Step): Step[];
-    // (undocumented)
-    addAll(steps: Step[]): Step[];
-    // (undocumented)
-    clear(): void;
-    // (undocumented)
-    get count(): number;
-    create(verb: Verb): Step[];
-    // (undocumented)
-    delete(index: number): Step[];
-    // (undocumented)
-    get last(): Step;
-    // (undocumented)
-    get outputs(): string[];
-    // (undocumented)
-    print(): void;
-    // (undocumented)
-    run(): Promise<TableContainer>;
-    // (undocumented)
-    get steps(): Step[];
-    // (undocumented)
-    get store(): TableStore;
-    // (undocumented)
-    update(step: Step, index: number): Step[];
-}
 
 // Warning: (ae-missing-release-tag) "DefaultTableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -384,7 +347,7 @@ export type EraseStep = Step<EraseArgs>;
 // Warning: (ae-missing-release-tag) "factory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function factory(verb: Verb, input: string, output: string): Step;
+export function factory(verb: Verb, inputs: Step['inputs']): Step;
 
 // Warning: (ae-missing-release-tag) "FetchArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -838,12 +801,7 @@ export interface RowsOptions {
 // Warning: (ae-missing-release-tag) "run" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function run(steps: Step[], store: TableStore): Promise<TableContainer>;
-
-// Warning: (ae-missing-release-tag) "runPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function runPipeline(input: ColumnTable, steps: Step | Step[]): Promise<TableContainer>;
+export function run(steps: Step[], _store: TableStore): Promise<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "SampleArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -940,22 +898,15 @@ export function stats(table: ColumnTable, columns?: string[]): Record<string, Co
 //
 // @public (undocumented)
 export interface Step<T = unknown> {
-    // (undocumented)
     args: T;
-    // (undocumented)
     description?: string;
-    // (undocumented)
-    input: string;
-    // (undocumented)
-    output: string;
-    // (undocumented)
+    id: string;
+    inputs: Record<string, {
+        node: string;
+        output?: string;
+    }>;
     verb: Verb;
 }
-
-// Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type StepFunction<T> = (step: Step<T>, store: TableStore) => Promise<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

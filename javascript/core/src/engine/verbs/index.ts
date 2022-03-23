@@ -2,6 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { v4 as uuid } from 'uuid'
+
 import { BinStrategy } from '../../index.js'
 import type { Step } from '../../types.js'
 import {
@@ -18,11 +20,11 @@ import {
  * to preselect.
  * @param verb -
  */
-export function factory(verb: Verb, input: string, output: string): Step {
+export function factory(verb: Verb, inputs: Step['inputs']): Step {
 	const base = {
+		id: uuid(),
 		verb,
-		inputs: {},
-		outputs: [],
+		inputs,
 	}
 	switch (verb) {
 		case Verb.Chain:

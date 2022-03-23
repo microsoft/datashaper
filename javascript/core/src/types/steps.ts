@@ -55,12 +55,7 @@ export interface Step<T = unknown> {
 	/**
 	 * The bound inputs
 	 */
-	input: Record<string, { node: string; output: string }>
-
-	/**
-	 * The named outputs
-	 */
-	output: string[]
+	inputs: Record<string, { node: string; output?: string }>
 }
 
 export type AggregateStep = Step<AggregateArgs>
