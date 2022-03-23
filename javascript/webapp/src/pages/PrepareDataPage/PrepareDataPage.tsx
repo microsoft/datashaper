@@ -2,29 +2,27 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	DropzoneStyles} from '@data-wrangling-components/react';
+import type { Step, TableContainer } from '@data-wrangling-components/core'
+import type { DropzoneStyles } from '@data-wrangling-components/react'
 import {
 	Dropzone,
 	PrepareDataFull,
 	ProjectMgmtCommandBar,
 	useHandleFileUpload,
 } from '@data-wrangling-components/react'
-import type {
-	FileCollection} from '@data-wrangling-components/utilities';
-import {
-	FileExtensions,
-} from '@data-wrangling-components/utilities'
+import type { FileCollection } from '@data-wrangling-components/utilities'
+import { FileExtensions } from '@data-wrangling-components/utilities'
 import { MessageBar, MessageBarType } from '@fluentui/react'
 import { memo, useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
-import { useBusinessLogic } from './hooks'
+import { useTablesState } from './hooks'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const { setSteps, steps, tables, updateTables, outputTable, setOutputTable } =
-		useBusinessLogic()
+	const [steps, setSteps] = useState<Step[]>([])
+	const [outputTable, setOutputTable] = useState<TableContainer>()
+	const [tables, updateTables] = useTablesState()
 	const setHelpFileContent = useHelpFileContentSetter()
 	const handleFileUpload = useHandleFileUpload(setSteps, updateTables)
 	const [message, setMessage] = useState<string>()
