@@ -29,7 +29,7 @@ export const PrepareDataFull: React.FC<{
 	onOutputTable,
 	stepsPosition = 'bottom',
 }) {
-	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
+	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(false)
 	const {
 		selectedTable,
 		selectedTableName,
@@ -138,7 +138,7 @@ const OutputContainer = styled.div<{
 	padding-right: ${GAP}px;
 	max-height: ${({ isCollapsed }) =>
 		`calc(100% - ${
-			INPUT_HEIGHT + (isCollapsed ? 0 : STEPS_HEIGHT) + GAP * 4
+			INPUT_HEIGHT + (isCollapsed ? 0 : STEPS_HEIGHT) + GAP * 2
 		}px)`};
 	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 2 : 3)};
 `
