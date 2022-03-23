@@ -4,7 +4,10 @@
  */
 import { table } from 'arquero'
 
+import { container } from '../container.js'
 import { DefaultTableStore } from '../DefaultTableStore.js'
+
+const tick = () => new Promise(r => setTimeout(r, 0))
 
 describe('DefaultTableStore', () => {
 	test('empty constructor', () => {
@@ -13,14 +16,7 @@ describe('DefaultTableStore', () => {
 	})
 
 	test('created with tables', () => {
-		const store = new DefaultTableStore([
-			{
-				id: 'a',
-				table: table({
-					id: [1],
-				}),
-			},
-		])
+		const store = new DefaultTableStore([container('a', table({ id: [1] }))])
 		expect(store.list()).toHaveLength(1)
 	})
 
@@ -29,132 +25,87 @@ describe('DefaultTableStore', () => {
 		return expect(() => store.get('a')).rejects.toBeDefined()
 	})
 
-	test('get resolves table before returning', () => {
+	test('get resolves table before returning', async () => {
 		const store = new DefaultTableStore()
-		store.queue('a', () => Promise.resolve(table({ id: [1] })))
-		return store.get('a').then(result => {
-			expect(result.table.numCols()).toBe(1)
-		})
+		store.setResolver('a', async () =>
+			Promise.resolve(container('a', table({ id: [1] }))),
+		)
+		const result = await store.get('a')
+		expect(result.table?.numCols()).toBe(1)
 	})
 
-	test('clone', () => {
+	test('clone', async () => {
 		const store = new DefaultTableStore([
-			{
-				id: 't1',
-				table: table({
-					id: [1],
-				}),
-			},
-			{
-				id: 't2',
-				table: table({
-					name: ['hi'],
-				}),
-			},
+			container('t1', table({ id: [1] })),
+			container('t2', table({ name: ['hi'] })),
 		])
 
-		return store.clone().then(clone => {
-			expect(store.list()).toEqual(clone.list())
+		const clone = await store.clone()
+		expect(store.list()).toEqual(clone.list())
 
-			clone.delete('t1')
+		clone.delete('t1')
 
-			expect(store.list()).toHaveLength(2)
-			expect(clone.list()).toHaveLength(1)
-		})
+		expect(store.list()).toHaveLength(2)
+		expect(clone.list()).toHaveLength(1)
 	})
 
 	describe('listeners', () => {
-		test('listener fires for matched table id only', () => {
+		test('listener fires for matched table id only', async () => {
 			const store = new DefaultTableStore()
-			const execs = {
-				a: 0,
-				b: 0,
-			}
+			const execs = { a: 0, b: 0 }
 
-			store.listen('a', () => execs.a++)
-			store.listen('b', () => {
-				execs.b++
-			})
+			store.onTableChange('a', () => execs.a++)
+			store.onTableChange('b', () => execs.b++)
+			store.set({ id: 'b' })
 
-			store.set({
-				id: 'b',
-			})
-
-			// listeners can fire async
-			return Promise.resolve().then(() => {
-				expect(execs.a).toBe(0)
-				expect(execs.b).toBe(1)
-			})
+			await tick()
+			expect(execs.a).toBe(0)
+			expect(execs.b).toBe(1)
 		})
 
-		test('listener unlisten callback unregisters handler', () => {
+		test('listener unlisten callback unregisters handler', async () => {
 			const store = new DefaultTableStore()
-			const execs = {
-				a: 0,
-				b: 0,
-			}
+			const execs = { a: 0, b: 0 }
 
-			store.listen('a', () => execs.a++)
-			const unlisten = store.listen('b', () => execs.b++)
+			store.onTableChange('a', () => execs.a++)
+			const unlisten = store.onTableChange('b', () => execs.b++)
 
-			store.set({
-				id: 'a',
-			})
-
+			store.set({ id: 'a' })
 			unlisten()
 
-			store.set({
-				id: 'b',
-			})
+			store.set({ id: 'b' })
 
 			// listeners can fire async
-			return Promise.resolve().then(() => {
-				expect(execs.a).toBe(1)
-				expect(execs.b).toBe(0)
-			})
+			await tick()
+			expect(execs.a).toBe(1)
+			expect(execs.b).toBe(0)
 		})
 
-		test('change listener fires for all tables', () => {
+		test('change listener fires for all tables', async () => {
 			const store = new DefaultTableStore()
 			let count = 0
 
-			store.addChangeListener(() => count++)
+			store.onChange(() => count++)
+			store.set({ id: 'a' })
+			store.set({ id: 'b' })
+			store.set({ id: 'c' })
 
-			store.set({
-				id: 'a',
-			})
-
-			store.set({
-				id: 'b',
-			})
-
-			store.set({
-				id: 'c',
-			})
-
-			return Promise.resolve().then(() => {
-				expect(count).toBe(3)
-			})
+			await tick()
+			expect(count).toBe(3)
 		})
 
-		test('multiple change listeners fire for all tables', () => {
+		test('multiple change listeners fire for all tables', async () => {
 			const store = new DefaultTableStore()
 			let count = 0
 
-			store.addChangeListener(() => count++)
-			store.addChangeListener(() => count++)
+			store.onChange(() => count++)
+			store.onChange(() => count++)
 
-			store.set({
-				id: 'a',
-			})
+			store.set({ id: 'a' })
+			store.set({ id: 'b' })
 
-			store.set({
-				id: 'b',
-			})
-
-			return Promise.resolve().then(() => {
-				expect(count).toBe(4)
-			})
+			await tick()
+			expect(count).toBe(4)
 		})
 	})
 })

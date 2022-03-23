@@ -5,6 +5,7 @@
 ```ts
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import { Observable } from 'rxjs';
 
 // Warning: (ae-missing-release-tag) "AggregateArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -317,8 +318,6 @@ export class DefaultPipeline implements Pipeline {
 export class DefaultTableStore implements TableStore {
     constructor(tables?: TableContainer[]);
     // (undocumented)
-    addChangeListener(listener: ChangeListenerFunction): () => void;
-    // (undocumented)
     clear(): TableStore;
     // (undocumented)
     clone(): Promise<TableStore>;
@@ -329,21 +328,23 @@ export class DefaultTableStore implements TableStore {
     // (undocumented)
     list(filter?: (id: string) => boolean): string[];
     // (undocumented)
-    listen(id: string, listener: ListenerFunction): () => void;
+    onChange(listener: ChangeListenerFunction): Unsubscribe;
+    // (undocumented)
+    onTableChange(id: string, listener: ListenerFunction): Unsubscribe;
     // (undocumented)
     print(): Promise<void>;
     // (undocumented)
-    queue(id: string, resolver: ResolverFunction): TableStore;
-    // (undocumented)
     set(container: TableContainer): TableStore;
+    // (undocumented)
+    setObservable(id: string, observable: Observable<TableContainer<unknown> | undefined>): TableStore;
+    // (undocumented)
+    setResolver(id: string, resolver: () => Promise<TableContainer>): TableStore;
     // (undocumented)
     table(id: string): Promise<ColumnTable>;
     // (undocumented)
     toArray(): Promise<TableContainer[]>;
     // (undocumented)
     toMap(): Promise<Map<string, TableContainer>>;
-    // (undocumented)
-    unlisten(id: string): void;
 }
 
 // Warning: (ae-missing-release-tag) "DeriveArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1005,21 +1006,22 @@ export interface TableMetadata {
 //
 // @public
 export interface TableStore {
-    addChangeListener(listener: ChangeListenerFunction): () => void;
     clear(): TableStore;
     clone(): Promise<TableStore>;
     delete(id: string): TableStore;
     get(id: string): Promise<TableContainer>;
     list(filter?: (id: string) => boolean): string[];
-    listen(id: string, listener: ListenerFunction): () => void;
+    onChange(listener: ChangeListenerFunction): Unsubscribe;
+    onTableChange(id: string, listener: ListenerFunction): Unsubscribe;
     print(): Promise<void>;
-    queue(id: string, resolver: ResolverFunction): TableStore;
     set(container: TableContainer): TableStore;
+    // (undocumented)
+    setObservable(id: string, observable: Observable<TableContainer | undefined>): TableStore;
+    setResolver(id: string, resolver: () => Promise<TableContainer>): TableStore;
     // (undocumented)
     table(id: string): Promise<ColumnTable>;
     toArray(): Promise<TableContainer[]>;
     toMap(): Promise<Map<string, TableContainer>>;
-    unlisten(id: string): void;
 }
 
 // Warning: (ae-missing-release-tag) "types" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1051,6 +1053,11 @@ export type UnrollArgs = InputColumnListArgs;
 //
 // @public (undocumented)
 export type UnrollStep = Step<UnrollArgs>;
+
+// Warning: (ae-missing-release-tag) "Unsubscribe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Unsubscribe = () => void;
 
 // Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

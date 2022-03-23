@@ -8,6 +8,7 @@ import type {
 	Step,
 	TableContainer,
 	TableStore,
+	Unsubscribe,
 	Value,
 } from '@data-wrangling-components/core'
 import {
@@ -68,7 +69,7 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 	const [dirty, setDirty] = useState<boolean>(true)
 	const [list, setList] = useState<string[]>([])
 	useEffect(() => {
-		store?.addChangeListener(() => setDirty(true))
+		return store?.onChange(() => setDirty(true))
 	}, [store, setDirty])
 	useEffect(() => {
 		if (dirty) {
@@ -242,9 +243,10 @@ export function useLoadTable(
 		[setTable],
 	)
 	useEffect(() => {
+		let unlisten: Unsubscribe
 		const fn = async (n: string, s: TableStore) => {
 			try {
-				s.listen(n, handleTableLoad)
+				unlisten = s.onTableChange(n, handleTableLoad)
 				const c = await s.get(n)
 				setTable(c.table)
 			} catch (e) {
@@ -262,9 +264,7 @@ export function useLoadTable(
 		} else if (id && store) {
 			fn(id, store)
 		}
-		return () => {
-			id && store && store.unlisten(id)
-		}
+		return () => unlisten && unlisten()
 	}, [id, table, store, handleTableLoad])
 	return tbl
 }

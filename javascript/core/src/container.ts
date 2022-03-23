@@ -8,8 +8,8 @@ import type { TableContainer } from './types.js'
 
 export function container(
 	id: string,
-	table?: ColumnTable,
-	options: Omit<TableContainer, 'id' | 'table'> = {},
+	table: ColumnTable | undefined,
+	options: Partial<Omit<TableContainer, 'id' | 'table'>> = {},
 ): TableContainer {
 	return {
 		id,
