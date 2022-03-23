@@ -4,14 +4,10 @@
  */
 import type { Observable } from 'rxjs'
 
+import type { Maybe } from '../primitives.js'
+
 export type NodeId = string
 export type SocketName = string | symbol
-
-/**
- * A convenience type for including undefined
- * @public
- */
-export type Maybe<T> = T | undefined
 
 /**
  * A graph processing node

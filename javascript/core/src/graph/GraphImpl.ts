@@ -5,7 +5,8 @@
 import type { Subscription } from 'rxjs'
 import toposort from 'toposort'
 
-import type { Graph, Maybe, Node, NodeId } from './types'
+import type { Maybe } from '../primitives.js'
+import type { Graph, Node, NodeId } from './types'
 
 export class GraphImpl<T> implements Graph<T> {
 	private _nodes: Map<NodeId, Node<T>> = new Map()

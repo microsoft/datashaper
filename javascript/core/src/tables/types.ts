@@ -4,7 +4,7 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { DataType } from './enums.js'
+import type { DataType } from '../types/enums.js'
 
 /**
  * A cell value in Arquero
@@ -53,11 +53,6 @@ export interface TableMetadata {
 	 */
 	columns: Record<string, ColumnMetadata>
 }
-
-/**
- * Resolver function that looks up a table by id.
- */
-export type ResolverFunction = (id: string) => Promise<ColumnTable>
 
 export interface TableContainer<T = unknown> {
 	/**

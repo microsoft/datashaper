@@ -4,7 +4,7 @@
  */
 import { table } from 'arquero'
 
-import { DefaultTableStore } from '../../DefaultTableStore.js'
+import { DefaultTableStore } from '../../store/DefaultStore.js'
 
 /**
  * This is a store implementation pre-loaded with test tables to ease setup.

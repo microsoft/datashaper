@@ -4,7 +4,7 @@
  */
 import { table } from 'arquero'
 
-import { DefaultTableStore } from '../DefaultTableStore.js'
+import { DefaultTableStore } from '../store/DefaultStore.js'
 
 describe('DefaultTableStore', () => {
 	test('empty constructor', () => {

@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Maybe } from '../primitives.js'
 import { BaseNode } from './BaseNode.js'
-import type { Maybe, NodeBinding, SocketName } from './types.js'
+import type { NodeBinding, SocketName } from './types.js'
 
 const VARIADIC_PREFIX = 'DWC.VariadicInput.'
 

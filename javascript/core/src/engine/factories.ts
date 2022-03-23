@@ -4,10 +4,11 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../container.js'
 import type { NodeId } from '../graph/index.js'
 import { BaseNode, VariadicNodeImpl } from '../graph/index.js'
-import type { SetOp, TableContainer } from '../types.js'
+import { container } from '../tables/container.js'
+import type { TableContainer } from '../tables/types.js'
+import type { SetOp } from '../types.js'
 import { set } from './util/sets.js'
 
 export type StepComputeFn<Args> = (

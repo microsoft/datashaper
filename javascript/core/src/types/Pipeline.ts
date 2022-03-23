@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Store } from '../store/types.js'
+import type { TableContainer } from '../tables/types.js'
 import type { Step, Verb } from '../types.js'
-import type { TableContainer } from './tables.js'
-import type { TableStore } from './TableStore.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -21,7 +21,7 @@ import type { TableStore } from './TableStore.js'
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
 export interface Pipeline {
-	get store(): TableStore
+	get store(): Store<TableContainer>
 	get steps(): Step[]
 	get last(): Step
 	get count(): number

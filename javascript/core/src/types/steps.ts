@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Value } from '../tables/types.js'
 import type {
 	BinStrategy,
 	BooleanComparisonOperator,
@@ -18,7 +19,6 @@ import type {
 	Verb,
 	WindowFunction,
 } from './enums.js'
-import type { Value } from './tables.js'
 
 export interface OrderbyInstruction {
 	column: string

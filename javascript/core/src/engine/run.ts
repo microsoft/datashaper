@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableStore } from '../index.js'
-import type { Step, TableContainer } from '../types.js'
+import type { Store } from '../store/index.js'
+import type { TableContainer } from '../tables/types.js'
+import type { Step } from '../types.js'
 
 /**
  * This is a fairly simplistic processing engine that executes a series of table manipulations with our verbs.
@@ -18,8 +19,9 @@ import type { Step, TableContainer } from '../types.js'
  */
 export async function run(
 	steps: Step[],
-	_store: TableStore,
+	_store: Store<TableContainer>,
 ): Promise<TableContainer> {
+	await Promise.resolve()
 	if (steps.length === 0) {
 		throw new Error('no steps in chain')
 	}

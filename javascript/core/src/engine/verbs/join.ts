@@ -4,9 +4,10 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../../container.js'
 import { BaseNode } from '../../graph/BaseNode.js'
-import type { JoinArgs, TableContainer } from '../../types.js'
+import { container } from '../../tables/container.js'
+import type { TableContainer } from '../../tables/types.js'
+import type { JoinArgs } from '../../types.js'
 import { JoinStrategy } from '../../types.js'
 
 export enum JoinInput {

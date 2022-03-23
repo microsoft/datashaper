@@ -5,7 +5,8 @@
 import type { Subscription } from 'rxjs'
 import { Subject } from 'rxjs'
 
-import type { Maybe, NodeBinding } from './types'
+import type { Maybe } from '../primitives.js'
+import type { NodeBinding } from './types'
 
 export interface BoundInput<T> {
 	readonly binding: NodeBinding<T>

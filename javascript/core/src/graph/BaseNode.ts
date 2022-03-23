@@ -6,9 +6,10 @@ import type { Observable } from 'rxjs'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
+import type { Maybe } from '../primitives.js'
 import type { BoundInput } from './BoundInput.js'
 import { BoundInputImpl } from './BoundInput.js'
-import type { Maybe, Node, NodeBinding, NodeId, SocketName } from './types'
+import type { Node, NodeBinding, NodeId, SocketName } from './types'
 
 const DEFAULT_OUTPUT_NAME = 'DWC.DefaultOutput'
 
