@@ -5,13 +5,13 @@
 import { v4 as uuid } from 'uuid'
 
 import { BinStrategy } from '../index.js'
-import type { Step } from '../types.js'
+import type { Step } from './types.js'
 import {
 	BooleanLogicalOperator,
 	FieldAggregateOperation,
 	JoinStrategy,
 	Verb,
-} from '../types.js'
+} from '../verbs/index.js'
 
 /**
  * Factory function to create new verb configs
@@ -20,7 +20,11 @@ import {
  * to preselect.
  * @param verb -
  */
-export function factory(verb: Verb, inputs: Step['inputs']): Step {
+export function factory(
+	verb: Verb,
+	args: Record<string, unknown> = {},
+	inputs: Step['inputs'] = {},
+): Step {
 	const base = {
 		id: uuid(),
 		verb,
@@ -32,6 +36,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 				...base,
 				args: {
 					steps: [],
+					...args,
 				},
 			}
 		case Verb.Bin:
@@ -41,6 +46,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 					to: 'output',
 					strategy: BinStrategy.Auto,
 					fixedcount: 10,
+					...args,
 				},
 			}
 		case Verb.Aggregate:
@@ -55,6 +61,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 				...base,
 				args: {
 					to: 'output',
+					...args,
 				},
 			}
 		case Verb.Concat:
@@ -65,6 +72,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 				...base,
 				args: {
 					others: [],
+					...args,
 				},
 			}
 		case Verb.Fold:
@@ -73,6 +81,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 				args: {
 					to: ['key', 'value'],
 					columns: [],
+					...args,
 				},
 			}
 		case Verb.Convert:
@@ -85,6 +94,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 				...base,
 				args: {
 					columns: [],
+					...args,
 				},
 			}
 		case Verb.Spread:
@@ -92,6 +102,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 				...base,
 				args: {
 					to: [],
+					...args,
 				},
 			}
 		case Verb.Pivot:
@@ -99,6 +110,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 				...base,
 				args: {
 					operation: FieldAggregateOperation.Any,
+					...args,
 				},
 			}
 		case Verb.Join:
@@ -106,6 +118,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 				...base,
 				args: {
 					strategy: JoinStrategy.Inner,
+					...args,
 				},
 			}
 		case Verb.Binarize:
@@ -115,6 +128,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 					to: 'output',
 					criteria: [],
 					logical: BooleanLogicalOperator.OR,
+					...args,
 				},
 			}
 		case Verb.Filter:
@@ -123,6 +137,7 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 				args: {
 					criteria: [],
 					logical: BooleanLogicalOperator.OR,
+					...args,
 				},
 			}
 		case Verb.Fetch:
@@ -136,6 +151,6 @@ export function factory(verb: Verb, inputs: Step['inputs']): Step {
 	}
 	return {
 		...base,
-		args: {},
+		args: { ...args },
 	}
 }

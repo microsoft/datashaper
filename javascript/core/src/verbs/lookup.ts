@@ -7,7 +7,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { BaseNode } from '../graph/BaseNode.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
-import type { LookupArgs } from '../types.js'
+import type { LookupArgs } from './types.js'
 
 export enum LookupInput {
 	Input = 'Input',

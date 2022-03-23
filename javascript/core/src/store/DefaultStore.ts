@@ -65,7 +65,7 @@ export class DefaultStore<T> implements Store<T> {
 		return () => sub.unsubscribe()
 	}
 
-	public onStoreChange(listener: Handler): Unsubscribe {
+	public onChange(listener: Handler): Unsubscribe {
 		const sub = this._changeEvent.subscribe(listener)
 		return () => sub.unsubscribe()
 	}

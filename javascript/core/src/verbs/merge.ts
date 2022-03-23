@@ -7,7 +7,8 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
 import { columnType, MergeStrategy } from '../index.js'
-import type { DataType, MergeArgs } from '../types.js'
+import type { MergeArgs } from './types.js'
+import type { DataType } from './enums.js'
 import { makeStepNode } from './util/factories.js'
 
 export const merge = makeStepNode<MergeArgs>(

@@ -4,7 +4,7 @@
  */
 import type { Store } from '../store/index.js'
 import type { TableContainer } from '../tables/types.js'
-import type { Step } from '../types.js'
+import type { Step } from '../steps/index.js'
 
 /**
  * This is a fairly simplistic processing engine that executes a series of table manipulations with our verbs.

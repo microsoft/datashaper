@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
-import type { DataType } from '../types/enums.js'
+import type { DataType } from '../verbs/enums.js'
 
 /**
  * A cell value in Arquero

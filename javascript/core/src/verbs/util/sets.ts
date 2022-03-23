@@ -4,7 +4,7 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { SetOp } from '../../types.js'
+import { SetOp } from '../enums.js'
 
 export function set(
 	input: ColumnTable,

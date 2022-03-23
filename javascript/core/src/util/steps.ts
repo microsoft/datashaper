@@ -5,7 +5,8 @@
 import difference from 'lodash-es/difference.js'
 import intersection from 'lodash-es/intersection.js'
 
-import type { Step, Verb } from '../index.js'
+import type { Verb } from '../verbs/enums.js'
+import type { Step } from '../steps/index.js'
 
 enum Tags {
 	/**

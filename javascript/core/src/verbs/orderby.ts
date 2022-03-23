@@ -4,8 +4,8 @@
  */
 import { desc } from 'arquero'
 
-import type { OrderbyArgs, OrderbyInstruction } from '../types.js'
-import { SortDirection } from '../types.js'
+import type { OrderbyArgs, OrderbyInstruction } from './types.js'
+import { SortDirection } from './enums.js'
 import { makeStepNode } from './util/factories.js'
 
 export const orderby = makeStepNode<OrderbyArgs>((input, { orders }) =>

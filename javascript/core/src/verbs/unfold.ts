@@ -5,7 +5,7 @@
 import { from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
-import type { UnfoldArgs } from '../types.js'
+import type { UnfoldArgs } from './types.js'
 import { makeStepNode } from './util/factories.js'
 
 export const unfold = makeStepNode<UnfoldArgs>((input, { key, value }) => {

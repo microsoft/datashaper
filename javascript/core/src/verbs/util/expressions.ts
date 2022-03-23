@@ -5,18 +5,16 @@
 import { escape, op } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
 
-import type {
+import type { Criterion } from '../types.js'
+import {
 	BooleanComparisonOperator,
-	Criterion,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../../types.js'
-import {
 	BooleanLogicalOperator,
 	FieldAggregateOperation,
 	FilterCompareType,
 	WindowFunction,
-} from '../../types.js'
+} from '../enums.js'
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
 import { bool } from './data-types.js'

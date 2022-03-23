@@ -59,7 +59,7 @@ export interface Store<T> {
 	 * @param listener - The listener callback
 	 * @returns an unsubuscribe hook
 	 */
-	onStoreChange(listener: Handler): Unsubscribe
+	onChange(listener: Handler): Unsubscribe
 
 	/**
 	 * Resolves all items and converts to a id:item Map

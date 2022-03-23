@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BooleanLogicalOperator } from '../../types.js'
+import { BooleanLogicalOperator } from '../enums.js'
 
 export function evaluateBoolean(
 	comparisons: (1 | 0)[],

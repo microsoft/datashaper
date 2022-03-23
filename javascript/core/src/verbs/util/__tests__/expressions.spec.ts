@@ -8,7 +8,7 @@ import {
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../../../types.js'
+} from '../../enums.js'
 import { compare, compareAll } from '../expressions.js'
 
 describe('expressions', () => {

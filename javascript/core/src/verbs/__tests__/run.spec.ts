@@ -4,40 +4,34 @@
  */
 import { table } from 'arquero'
 
-import type { Step, TableStore } from '../../index.js'
+import type { Step, Store } from '../../index.js'
 import { Verb } from '../../index.js'
-import { DefaultTableStore } from '../../store/DefaultStore.js'
 import { run } from '../../engine/run.js'
+import { createTableStore } from '../../store/index.js'
+import type { TableContainer } from '../../tables/index.js'
+import { factory } from '../../steps/factory.js'
 
 describe('run', () => {
-	const input = table({
-		ID: [1, 2, 3, 4],
-	})
-
-	let store: TableStore
+	let store: Store<TableContainer>
 
 	beforeEach(() => {
-		store = new DefaultTableStore([{ id: 'input', table: input }])
+		store = createTableStore([
+			{ id: 'input', table: table({ ID: [1, 2, 3, 4] }) },
+		])
 	})
 
-	test('runs a single step with normal input/output', () => {
+	test('runs a single step with normal input/output', async () => {
 		const steps: Step[] = [
-			{
-				verb: Verb.Fill,
-				input: 'input',
-				output: 'output',
-				args: {
-					to: 'filled',
-					value: 1,
-				},
-			},
+			factory(Verb.Fill, {
+				to: 'filled',
+				value: 1,
+			}),
 		]
 
-		return run(steps, store).then(result => {
-			expect(result.table.numCols()).toBe(2)
-			expect(result.table.numRows()).toBe(4)
-			expect(store.list()).toEqual(['input', 'output'])
-		})
+		const result = await run(steps, store)
+		expect(result.table?.numCols()).toBe(2)
+		expect(result.table?.numRows()).toBe(4)
+		expect(store.list()).toEqual(['input', 'output'])
 	})
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {

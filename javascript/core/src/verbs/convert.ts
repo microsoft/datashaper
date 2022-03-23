@@ -4,8 +4,8 @@
  */
 import { escape, op } from 'arquero'
 
-import type { ConvertArgs } from '../types.js'
-import { ParseType } from '../types.js'
+import type { ConvertArgs } from './types.js'
+import { ParseType } from './enums.js'
 import { makeStepNode } from './util/factories.js'
 import { bool } from './util/data-types.js'
 

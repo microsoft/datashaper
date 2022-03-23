@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { all,escape, op } from 'arquero'
+import { all, escape, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
 import type {
 	AggregateArgs,
 	BinarizeArgs,
@@ -25,11 +24,11 @@ import type {
 	SpreadArgs,
 	UnrollArgs,
 	WindowArgs,
-} from '../types.js'
-import type { ExprFunctionMap } from './types.js'
+} from './types.js'
+import type { ExprFunctionMap } from './util/types.js'
 import { deriveBoolean } from './util/expressions.js'
 import { makeStepNode } from './util/factories.js'
-import { compareAll,singleExpression } from './util/index.js'
+import { compareAll, singleExpression } from './util/index.js'
 
 export const aggregate = makeStepNode<AggregateArgs>(
 	(input, { groupby, column, operation, to }) => {

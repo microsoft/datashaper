@@ -4,8 +4,8 @@
  */
 import { escape } from 'arquero'
 
-import type { DeriveArgs } from '../types.js'
-import { MathOperator } from '../types.js'
+import type { DeriveArgs } from './types.js'
+import { MathOperator } from './enums.js'
 import { makeStepNode } from './util/factories.js'
 
 /**

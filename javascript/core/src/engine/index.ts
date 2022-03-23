@@ -3,4 +3,4 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './run.js'
-export * from './factory.js'
+export * from '../steps/factory.js'
