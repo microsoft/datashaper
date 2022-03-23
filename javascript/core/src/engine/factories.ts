@@ -36,7 +36,7 @@ export class StepNode<Args> extends BaseNode<TableContainer, Args> {
 	protected async doRecalculate(): Promise<void> {
 		const source = this.inputValue(NodeInput.Source)
 		if (source != null && this.config != null) {
-			const output = await this._computeFn(String(this.id), source, this.config)
+			const output = await this._computeFn(this.id, source, this.config)
 			this.emit(output)
 		} else {
 			this.emit(undefined)

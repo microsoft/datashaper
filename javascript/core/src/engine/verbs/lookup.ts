@@ -41,10 +41,7 @@ class LookupNode extends BaseNode<TableContainer, LookupArgs> {
 		const other = this.inputValue(LookupInput.Other)
 		if (input?.table != null && other?.table != null && this.config != null) {
 			this.emit(
-				container(
-					String(this.id),
-					doLookup(input.table, other.table, this.config),
-				),
+				container(this.id, doLookup(input.table, other.table, this.config)),
 			)
 		} else {
 			this.emit(undefined)
