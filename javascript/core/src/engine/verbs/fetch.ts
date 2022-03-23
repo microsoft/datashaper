@@ -6,9 +6,8 @@
 import { loadCSV, loadJSON } from 'arquero'
 
 import type { FetchArgs } from '../../index.js'
-import { makeInputFunction, makeInputNode } from '../factories.js'
+import { makeInputNode } from '../factories.js'
 
-export const fetch = makeInputFunction(doFetch)
 export const fetchNode = makeInputNode(doFetch)
 
 async function doFetch({ url, delimiter, autoMax }: FetchArgs) {

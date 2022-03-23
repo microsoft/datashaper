@@ -18,8 +18,7 @@ import type {
 	Verb,
 	WindowFunction,
 } from './enums.js'
-import type { TableContainer, Value } from './tables.js'
-import type { TableStore } from './TableStore.js'
+import type { Value } from './tables.js'
 
 export interface OrderbyInstruction {
 	column: string
@@ -33,18 +32,36 @@ export interface Specification {
 }
 
 export interface Step<T = unknown> {
-	verb: Verb
-	input: string
-	output: string
-	args: T
-	// helpful for documentation in JSON specs
-	description?: string
-}
+	/**
+	 * A unique identifier for this step
+	 */
+	id: string
 
-export type StepFunction<T> = (
-	step: Step<T>,
-	store: TableStore,
-) => Promise<TableContainer>
+	/**
+	 * helpful for documentation in JSON specs
+	 */
+	description?: string
+
+	/**
+	 * The verb being executed
+	 */
+	verb: Verb
+
+	/**
+	 * The verb arguments
+	 */
+	args: T
+
+	/**
+	 * The bound inputs
+	 */
+	input: Record<string, { node: string; output: string }>
+
+	/**
+	 * The named outputs
+	 */
+	output: string[]
+}
 
 export type AggregateStep = Step<AggregateArgs>
 export type BinStep = Step<BinArgs>

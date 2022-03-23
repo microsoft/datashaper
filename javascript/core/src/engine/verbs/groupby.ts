@@ -3,11 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GroupbyArgs } from '../../types.js'
-import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { makeStepNode } from '../factories.js'
 
-const doGroupby = wrapColumnStep<GroupbyArgs>((input, { columns }) =>
+export const groupby = makeStepNode<GroupbyArgs>((input, { columns }) =>
 	input.groupby(columns),
 )
-
-export const groupby = makeStepFunction(doGroupby)
-export const groupbyNode = makeStepNode(doGroupby)

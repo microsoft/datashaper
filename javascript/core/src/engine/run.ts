@@ -4,8 +4,6 @@
  */
 import type { TableStore } from '../index.js'
 import type { Step, TableContainer } from '../types.js'
-import { Verb } from '../types.js'
-import { chain } from './verbs/chain.js'
 
 /**
  * This is a fairly simplistic processing engine that executes a series of table manipulations with our verbs.
@@ -20,21 +18,23 @@ import { chain } from './verbs/chain.js'
  */
 export async function run(
 	steps: Step[],
-	store: TableStore,
+	_store: TableStore,
 ): Promise<TableContainer> {
 	if (steps.length === 0) {
 		throw new Error('no steps in chain')
 	}
-	return chain(
-		{
-			verb: Verb.Chain,
-			input: steps[0]!.input,
-			output: steps[steps.length - 1]!.output,
-			args: {
-				steps,
-				nofork: true,
-			},
-		},
-		store,
-	)
+	// TODO: serialize to a graph and emit the output table
+	// return chain(
+	// 	{
+	// 		verb: Verb.Chain,
+	// 		input: steps[0]!.input,
+	// 		output: steps[steps.length - 1]!.output,
+	// 		args: {
+	// 			steps,
+	// 			nofork: true,
+	// 		},
+	// 	},
+	// 	store,
+	// )
+	return null as any
 }

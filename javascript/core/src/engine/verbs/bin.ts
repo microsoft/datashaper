@@ -7,20 +7,17 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { BinArgs } from '../../index.js'
 import { BinStrategy } from '../../index.js'
-import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { makeStepNode } from '../factories.js'
 import { fixedBinCount, fixedBinStep } from '../util/index.js'
 
 /**
  * Executes a bin aggregate, which effectively truncates values to a bin boundary for histograms.
  */
-const doBin = wrapColumnStep<BinArgs>((input, args) =>
+export const bin = makeStepNode<BinArgs>((input, args) =>
 	input.derive({
 		[args.to]: binExpr(input, args),
 	}),
 )
-
-export const bin = makeStepFunction(doBin)
-export const binNode = makeStepNode(doBin)
 
 /**
  * Generate a bin expression that uses either auto or a fixed step

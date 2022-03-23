@@ -6,9 +6,9 @@ import { from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
 import type { UnfoldArgs } from '../../types.js'
-import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { makeStepNode } from '../factories.js'
 
-const doUnfold = wrapColumnStep<UnfoldArgs>((input, { key, value }) => {
+export const unfold = makeStepNode<UnfoldArgs>((input, { key, value }) => {
 	const columnNames: string[] = input.columnNames(name => {
 		return name !== key && name !== value
 	})
@@ -47,6 +47,3 @@ const doUnfold = wrapColumnStep<UnfoldArgs>((input, { key, value }) => {
 	}
 	return from(finalArray)
 })
-
-export const unfold = makeStepFunction(doUnfold)
-export const unfoldNode = makeStepNode(doUnfold)

@@ -6,26 +6,8 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { container } from '../../container.js'
 import { BaseNode } from '../../graph/BaseNode.js'
-import type { TableStore } from '../../index.js'
-import type { JoinArgs, JoinStep, TableContainer } from '../../types.js'
+import type { JoinArgs, TableContainer } from '../../types.js'
 import { JoinStrategy } from '../../types.js'
-
-/**
- * Executes an arquero join.
- * @param step
- * @param store
- * @returns
- */
-export async function join(
-	{ input, output, args }: JoinStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const [inputTable, otherTable] = await Promise.all([
-		store.table(input),
-		store.table(args.other),
-	])
-	return container(output, doJoin(inputTable, otherTable, args))
-}
 
 export enum JoinInput {
 	Left = 'left',

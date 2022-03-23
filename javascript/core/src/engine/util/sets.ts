@@ -4,33 +4,7 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../../container.js'
-import type {
-	SetOperationArgs,
-	Step,
-	TableContainer,
-	TableStore,
-} from '../../types.js'
 import { SetOp } from '../../types.js'
-
-/**
- * All of the arquero set verbs use the same args.
- * This util just simplifies executing them.
- * @param step
- * @param store
- * @param op
- * @returns
- */
-export async function setWithStore(
-	{ input, output, args: { others } }: Step<SetOperationArgs>,
-	store: TableStore,
-	op: SetOp,
-): Promise<TableContainer> {
-	const inputTable = store.table(input)
-	const otherTables = others.map(o => store.table(o))
-	const result = set(await inputTable, op, await Promise.all(otherTables))
-	return container(output, result)
-}
 
 export function set(
 	input: ColumnTable,

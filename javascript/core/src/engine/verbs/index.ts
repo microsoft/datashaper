@@ -21,8 +21,8 @@ import {
 export function factory(verb: Verb, input: string, output: string): Step {
 	const base = {
 		verb,
-		input,
-		output,
+		inputs: {},
+		outputs: [],
 	}
 	switch (verb) {
 		case Verb.Chain:

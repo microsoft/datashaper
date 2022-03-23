@@ -3,11 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RenameArgs } from '../../types.js'
-import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { makeStepNode } from '../factories.js'
 
-const doRename = wrapColumnStep<RenameArgs>((input, { columns }) =>
+export const rename = makeStepNode<RenameArgs>((input, { columns }) =>
 	input.rename(columns),
 )
-
-export const rename = makeStepFunction(doRename)
-export const renameNode = makeStepNode(doRename)

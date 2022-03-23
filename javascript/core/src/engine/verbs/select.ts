@@ -5,15 +5,12 @@
 import { all } from 'arquero'
 
 import type { SelectArgs } from '../../types.js'
-import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { makeStepNode } from '../factories.js'
 
-const doSelect = wrapColumnStep<SelectArgs>((input, { columns = [] }) => {
+export const select = makeStepNode<SelectArgs>((input, { columns = [] }) => {
 	const expr = [columns] as any
 	if (expr.length === 0) {
 		expr.push(all())
 	}
 	return input.select(...expr)
 })
-
-export const select = makeStepFunction(doSelect)
-export const selectNode = makeStepNode(doSelect)

@@ -6,13 +6,13 @@ import { escape } from 'arquero'
 
 import type { DeriveArgs } from '../../types.js'
 import { MathOperator } from '../../types.js'
-import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { makeStepNode } from '../factories.js'
 
 /**
  * Executes an arquero derive.
  * This basically just supports math operations between two columns.
  */
-const doDerive = wrapColumnStep<DeriveArgs>(
+export const derive = makeStepNode<DeriveArgs>(
 	(input, { column1, column2, operator, to }) => {
 		// eslint-disable-next-line
 		const func = escape((d: any) => {
@@ -35,6 +35,3 @@ const doDerive = wrapColumnStep<DeriveArgs>(
 		return input.derive({ [to]: func })
 	},
 )
-
-export const derive = makeStepFunction(doDerive)
-export const deriveNode = makeStepNode(doDerive)

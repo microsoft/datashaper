@@ -7,9 +7,9 @@ import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { EraseArgs } from '../../types.js'
-import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { makeStepNode } from '../factories.js'
 
-const doErase = wrapColumnStep<EraseArgs>(
+export const erase = makeStepNode<EraseArgs>(
 	(input: ColumnTable, { value, column }: EraseArgs) => {
 		const func = escape((d: any) =>
 			d[column] === value ? undefined : d[column],
@@ -17,6 +17,3 @@ const doErase = wrapColumnStep<EraseArgs>(
 		return input.derive({ [column]: func })
 	},
 )
-
-export const erase = makeStepFunction(doErase)
-export const eraseNode = makeStepNode(doErase)

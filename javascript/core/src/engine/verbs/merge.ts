@@ -8,9 +8,9 @@ import type { RowObject } from 'arquero/dist/types/table/table'
 
 import { columnType, MergeStrategy } from '../../index.js'
 import type { DataType, MergeArgs } from '../../types.js'
-import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { makeStepNode } from '../factories.js'
 
-const doMerge = wrapColumnStep<MergeArgs>(
+export const merge = makeStepNode<MergeArgs>(
 	(input, { columns = [], strategy, to, delimiter = '' }) => {
 		const isSameDataTypeFlag: boolean = isSameDataType(input, columns)
 
@@ -32,9 +32,6 @@ const doMerge = wrapColumnStep<MergeArgs>(
 		return input.derive({ [to]: func })
 	},
 )
-
-export const merge = makeStepFunction(doMerge)
-export const mergeNode = makeStepNode(doMerge)
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {
 	let allTypesAreTheSame = true

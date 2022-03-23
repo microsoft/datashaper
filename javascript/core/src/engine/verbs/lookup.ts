@@ -6,25 +6,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { container } from '../../container.js'
 import { BaseNode } from '../../graph/BaseNode.js'
-import type { TableStore } from '../../index.js'
-import type { LookupArgs, LookupStep, TableContainer } from '../../types.js'
-
-/**
- * Executes an arquero lookup.
- * @param step
- * @param store
- * @returns
- */
-export async function lookup(
-	{ input, output, args }: LookupStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const [inputTable, otherTable] = await Promise.all([
-		store.table(input),
-		store.table(args.other),
-	])
-	return container(output, doLookup(inputTable, otherTable, args))
-}
+import type { LookupArgs, TableContainer } from '../../types.js'
 
 export enum LookupInput {
 	Input = 'Input',

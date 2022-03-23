@@ -6,13 +6,13 @@ import { escape, op } from 'arquero'
 
 import type { ConvertArgs } from '../../types.js'
 import { ParseType } from '../../types.js'
-import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
+import { makeStepNode } from '../factories.js'
 import { bool } from '../util/data-types.js'
 
 /**
  * Executes an arquero string parse operation.
  */
-const doConvert = wrapColumnStep<ConvertArgs>(
+export const convert = makeStepNode<ConvertArgs>(
 	(input, { columns, type, radix }) => {
 		// note that this applies the specified parse to every column equally
 		const dArgs = columns.reduce((acc, cur) => {
@@ -22,9 +22,6 @@ const doConvert = wrapColumnStep<ConvertArgs>(
 		return input.derive(dArgs)
 	},
 )
-
-export const convert = makeStepFunction(doConvert)
-export const convertNode = makeStepNode(doConvert)
 
 function parseType(column: string, type: ParseType, radix?: number) {
 	return escape((d: any) => {

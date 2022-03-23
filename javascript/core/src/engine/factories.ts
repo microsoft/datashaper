@@ -7,13 +7,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { container } from '../container.js'
 import type { NodeId } from '../graph/index.js'
 import { BaseNode, VariadicNodeImpl } from '../graph/index.js'
-import type {
-	SetOp,
-	Step,
-	StepFunction,
-	TableContainer,
-	TableStore,
-} from '../types.js'
+import type { SetOp, TableContainer } from '../types.js'
 import { set } from './util/sets.js'
 
 export type StepComputeFn<Args> = (
@@ -23,6 +17,10 @@ export type StepComputeFn<Args> = (
 ) => Promise<TableContainer> | TableContainer
 
 export type InputComputeFn<Args> = (args: Args) => Promise<ColumnTable>
+export type ColumnTableTransformer<T> = (
+	input: ColumnTable,
+	args: T,
+) => ColumnTable
 
 export enum NodeInput {
 	Source = 'source',
@@ -83,46 +81,23 @@ export class SetOperationNode<Args = unknown> extends VariadicNodeImpl<
 }
 
 export function makeStepNode<Args>(
-	compute: StepComputeFn<Args>,
+	inner: (input: ColumnTable, args: Args) => ColumnTable,
 ): (id: string) => StepNode<Args> {
-	return (id: string) => new StepNode(id, compute)
+	return (id: string) =>
+		new StepNode(
+			id,
+			(id: string, source: TableContainer<unknown>, args: Args) => {
+				let result: ColumnTable | undefined
+				if (source.table) {
+					result = inner(source.table, args)
+				}
+				return container(id, result)
+			},
+		)
 }
 
 export function makeInputNode<Args>(
 	compute: InputComputeFn<Args>,
 ): (id: string) => InputNode<Args> {
 	return (id: string) => new InputNode(id, compute)
-}
-
-export function makeStepFunction<Args>(
-	compute: StepComputeFn<Args>,
-): StepFunction<Args> {
-	return async function stepFn(
-		{ input, output, args }: Step<Args>,
-		store: TableStore,
-	) {
-		const inputTable = await store.get(input)
-		return await compute(output, inputTable, args)
-	}
-}
-
-export function makeInputFunction<Args>(
-	compute: InputComputeFn<Args>,
-): StepFunction<Args> {
-	return async function inputFn({ output, args }: Step<Args>) {
-		const table = await compute(args)
-		return container(output, table)
-	}
-}
-
-export function wrapColumnStep<Args>(
-	inner: (input: ColumnTable, args: Args) => ColumnTable,
-): StepComputeFn<Args> {
-	return (id: string, source: TableContainer<unknown>, args: Args) => {
-		let result: ColumnTable | undefined
-		if (source.table) {
-			result = inner(source.table, args)
-		}
-		return container(id, result)
-	}
 }
