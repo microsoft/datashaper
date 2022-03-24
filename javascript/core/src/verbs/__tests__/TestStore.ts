@@ -2,16 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { from } from 'rxjs'
 import { table } from 'arquero'
-
-import { DefaultTableStore } from '../../store/DefaultStore.js'
+import type { TableContainer } from '../../tables/types.js'
+import { DefaultStore } from '../../store/DefaultStore.js'
 
 /**
  * This is a store implementation pre-loaded with test tables to ease setup.
  */
-export class TestStore extends DefaultTableStore {
-	constructor() {
-		super()
+export class TestStore extends DefaultStore<TableContainer> {
+	constructor(private _defaultTableName?: string) {
+		super(c => c.table?.print())
 		const table1 = table({
 			ID: [1, 2, 3, 4, 5],
 			name: ['A', 'B', 'C', 'D', 'E'],
@@ -139,25 +140,29 @@ export class TestStore extends DefaultTableStore {
 			D: [1, 0, 0, 0],
 		})
 
-		this.set({ id: 'table1', table: table1 })
-		this.set({ id: 'table2', table: table2 })
-		this.set({ id: 'table3', table: table3 })
-		this.set({ id: 'table4', table: table4 })
-		this.set({ id: 'table5', table: table5 })
-		this.set({ id: 'table6', table: table6 })
-		this.set({ id: 'table7', table: table7 })
-		this.set({ id: 'table8', table: table8 })
-		this.set({ id: 'table9', table: table9 })
-		this.set({ id: 'table10', table: table10 })
-		this.set({ id: 'table11', table: table11 })
-		this.set({ id: 'table12', table: table12 })
-		this.set({ id: 'table13', table: table13 })
-		this.set({ id: 'table14', table: table14 })
-		this.set({ id: 'table15', table: table15 })
-		this.set({ id: 'table16', table: table16 })
-		this.set({ id: 'table17', table: table17 })
-		this.set({ id: 'table18', table: table18 })
-		this.set({ id: 'table19', table: table19 })
-		this.set({ id: 'table20', table: table20 })
+		this.set('table1', from([{ id: 'table1', table: table1 }]))
+		this.set('table2', from([{ id: 'table2', table: table2 }]))
+		this.set('table3', from([{ id: 'table3', table: table3 }]))
+		this.set('table4', from([{ id: 'table4', table: table4 }]))
+		this.set('table5', from([{ id: 'table5', table: table5 }]))
+		this.set('table6', from([{ id: 'table6', table: table6 }]))
+		this.set('table7', from([{ id: 'table7', table: table7 }]))
+		this.set('table8', from([{ id: 'table8', table: table8 }]))
+		this.set('table9', from([{ id: 'table9', table: table9 }]))
+		this.set('table10', from([{ id: 'table10', table: table10 }]))
+		this.set('table11', from([{ id: 'table11', table: table11 }]))
+		this.set('table12', from([{ id: 'table12', table: table12 }]))
+		this.set('table13', from([{ id: 'table13', table: table13 }]))
+		this.set('table14', from([{ id: 'table14', table: table14 }]))
+		this.set('table15', from([{ id: 'table15', table: table15 }]))
+		this.set('table16', from([{ id: 'table16', table: table16 }]))
+		this.set('table17', from([{ id: 'table17', table: table17 }]))
+		this.set('table18', from([{ id: 'table18', table: table18 }]))
+		this.set('table19', from([{ id: 'table19', table: table19 }]))
+		this.set('table20', from([{ id: 'table20', table: table20 }]))
+	}
+
+	public table(name: string = this._defaultTableName || 'table1') {
+		return this.get(name)!.table!
 	}
 }

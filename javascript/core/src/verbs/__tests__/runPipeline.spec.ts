@@ -6,7 +6,7 @@ import { table } from 'arquero'
 
 import type { Step } from '../../index.js'
 import { MathOperator } from '../../index.js'
-import { runPipeline } from '../runPipeline.js.js'
+import { runPipeline } from '../runPipeline.js'
 
 describe('runPipeline', () => {
 	const tbl = table({

@@ -11,7 +11,7 @@ import {
 	FieldAggregateOperation,
 	JoinStrategy,
 	Verb,
-} from '../verbs/index.js'
+} from '../verbs/types/index.js'
 
 /**
  * Factory function to create new verb configs
