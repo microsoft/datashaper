@@ -77,12 +77,14 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					{message}{' '}
 				</MessageBar>
 			)}
-			<PrepareDataFull
-				tables={tables}
-				steps={steps}
-				onUpdateSteps={setSteps}
-				onOutputTable={setOutputTable}
-			/>
+			<Wrapper>
+				<PrepareDataFull
+					tables={tables}
+					steps={steps}
+					onUpdateSteps={setSteps}
+					onOutputTable={setOutputTable}
+				/>
+			</Wrapper>
 		</Container>
 	)
 })
@@ -92,19 +94,24 @@ const Container = styled.div`
 	position: relative;
 `
 
+const Wrapper = styled.div`
+	height: 90%;
+`
+
 const dropzoneStyles = {
 	container: {
 		position: 'absolute',
-		width: '100%',
-		height: '100vh',
+		width: '98%',
+		height: '2rem',
 		borderColor: 'transparent',
-		margin: 0,
+		margin: '0 1%',
 		padding: 0,
 		borderRadius: 0,
+		overflow: 'hidden',
 	},
 	dragReject: {
 		width: '100%',
-		height: '100vh',
+		height: '100%',
 		zIndex: 100,
 	},
 }
