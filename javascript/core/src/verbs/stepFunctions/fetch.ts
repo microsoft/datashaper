@@ -5,8 +5,8 @@
 
 import { loadCSV, loadJSON } from 'arquero'
 
+import type { InputStep } from '../nodeFactories/index.js'
 import type { FetchArgs } from '../types/index.js'
-import type { InputStep } from '../factories/index.js'
 
 export const fetchStep: InputStep<FetchArgs> = ({
 	url,

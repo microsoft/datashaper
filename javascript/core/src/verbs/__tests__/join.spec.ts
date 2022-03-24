@@ -4,8 +4,8 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { join, JoinInput } from '../join.js'
+import { observableNode } from '../nodeFactories/index.js'
 import { JoinStrategy } from '../types/index.js'
-import { observableNode } from '../factories/index.js'
 
 describe('test for join verb', () => {
 	let store: TestStore

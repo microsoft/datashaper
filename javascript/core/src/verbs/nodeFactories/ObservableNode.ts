@@ -3,10 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Observable } from 'rxjs'
+
 import type { NodeId } from '../../graph/index.js'
 import { BaseNode } from '../../graph/index.js'
-import type { TableContainer } from '../../tables/types.js'
 import type { Maybe } from '../../primitives.js'
+import type { TableContainer } from '../../tables/types.js'
 
 export class ObservableNode<T> extends BaseNode<T, void> {
 	constructor(id: NodeId, source: Observable<Maybe<T>>) {

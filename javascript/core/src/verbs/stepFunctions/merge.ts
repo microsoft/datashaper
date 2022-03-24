@@ -7,10 +7,10 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
 import { columnType } from '../../util/index.js'
+import type { TableStep } from '../nodeFactories/index.js'
 import type { DataType } from '../types/enums.js'
 import { MergeStrategy } from '../types/enums.js'
 import type { MergeArgs } from '../types/types.js'
-import type { TableStep } from '../factories/index.js'
 
 export const mergeStep: TableStep<MergeArgs> = (
 	input,

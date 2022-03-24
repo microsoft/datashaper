@@ -4,7 +4,7 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { lookup, LookupInput } from '../lookup.js'
-import { observableNode } from '../factories/index.js'
+import { observableNode } from '../nodeFactories/index.js'
 
 describe('test for lookup verb', () => {
 	let store: TestStore

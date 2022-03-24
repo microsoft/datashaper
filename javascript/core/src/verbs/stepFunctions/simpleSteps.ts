@@ -5,6 +5,7 @@
 import { all, escape, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+import type { TableStep } from '../nodeFactories/index.js'
 import type {
 	AggregateArgs,
 	BinarizeArgs,
@@ -27,7 +28,6 @@ import type {
 	WindowArgs,
 } from '../types/types.js'
 import { deriveBoolean } from '../util/expressions.js'
-import type { TableStep } from '../factories/index.js'
 import { compareAll, singleExpression } from '../util/index.js'
 import type { ExprFunctionMap } from '../util/types.js'
 

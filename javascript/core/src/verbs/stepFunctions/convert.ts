@@ -4,10 +4,10 @@
  */
 import { escape, op } from 'arquero'
 
+import type { TableStep } from '../nodeFactories/index.js'
 import { ParseType } from '../types/enums.js'
 import type { ConvertArgs } from '../types/types.js'
 import { bool } from '../util/data-types.js'
-import type { TableStep } from '../factories/index.js'
 
 /**
  * Executes an arquero string parse operation.

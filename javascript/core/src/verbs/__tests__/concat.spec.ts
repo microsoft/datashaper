@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
+import { observableNode } from '../nodeFactories/index.js'
+import { NodeInput } from '../nodeFactories/types.js'
 import { concat } from '../setVerbs.js'
-import { observableNode } from '../factories/index.js'
-import { NodeInput } from '../factories/types.js'
 
 describe('test for concat verb', () => {
 	test('concat test', () => {

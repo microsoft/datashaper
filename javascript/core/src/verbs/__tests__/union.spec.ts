@@ -4,9 +4,9 @@
  */
 
 import { TestStore } from '../../__tests__/TestStore.js'
+import { observableNode } from '../nodeFactories/index.js'
+import { NodeInput } from '../nodeFactories/types.js'
 import { union } from '../setVerbs.js'
-import { observableNode } from '../factories/index.js'
-import { NodeInput } from '../factories/types.js'
 
 describe('test for union verb', () => {
 	test('union test', () => {

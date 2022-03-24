@@ -4,9 +4,9 @@
  */
 import { desc } from 'arquero'
 
+import type { TableStep } from '../nodeFactories/index.js'
 import { SortDirection } from '../types/index.js'
 import type { OrderbyArgs, OrderbyInstruction } from '../types/types.js'
-import type { TableStep } from '../factories/index.js'
 
 export const orderbyStep: TableStep<OrderbyArgs> = (input, { orders }) =>
 	// format keys in arquero-compatible format
