@@ -2,154 +2,92 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '../../types.js'
-import { Verb } from '../../types.js'
-import { fold } from '../fold.js'
-import { unfold } from '../stepFunctions/unfold.js'
+import { foldStep } from '../stepFunctions/simpleSteps.js'
+import { unfoldStep } from '../stepFunctions/unfold.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for unfold verb', () => {
+	let store: TestStore
+	beforeEach(() => {
+		store = new TestStore()
+	})
 	test('unfold test with one column folded', async () => {
-		const step: Step = {
-			verb: Verb.Fold,
-			input: 'table10',
-			output: 'newTable',
-			args: { to: ['key', 'value'], columns: ['x'] },
-		}
-
-		const store = new TestStore()
-
-		await fold(step, store).then(result => {
-			store.set(result)
+		let result = foldStep(store.table('table10'), {
+			to: ['key', 'value'],
+			columns: ['x'],
 		})
+		result = unfoldStep(result, { key: 'key', value: 'value' })
 
-		const step2: Step = {
-			verb: Verb.Unfold,
-			input: 'newTable',
-			output: 'output',
-			args: { key: 'key', value: 'value' },
-		}
-
-		return unfold(step2, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(3)
-			expect(result.table.get('x', 0)).toBe('A')
-			expect(result.table.get('x', 1)).toBe('B')
-			expect(result.table.get('x', 2)).toBe('A')
-			expect(result.table.get('y', 0)).toBe(1)
-			expect(result.table.get('y', 1)).toBe(2)
-			expect(result.table.get('y', 2)).toBe(1)
-			expect(result.table.get('z', 0)).toBe(4)
-			expect(result.table.get('z', 1)).toBe(5)
-			expect(result.table.get('z', 2)).toBe(4)
-		})
+		expect(result.numCols()).toBe(3)
+		expect(result.numRows()).toBe(3)
+		expect(result.get('x', 0)).toBe('A')
+		expect(result.get('x', 1)).toBe('B')
+		expect(result.get('x', 2)).toBe('A')
+		expect(result.get('y', 0)).toBe(1)
+		expect(result.get('y', 1)).toBe(2)
+		expect(result.get('y', 2)).toBe(1)
+		expect(result.get('z', 0)).toBe(4)
+		expect(result.get('z', 1)).toBe(5)
+		expect(result.get('z', 2)).toBe(4)
 	})
 
 	test('unfold test with all columns folded', async () => {
-		const step: Step = {
-			verb: Verb.Fold,
-			input: 'table18',
-			output: 'newTable',
-			args: { to: ['key', 'value'], columns: ['A', 'B', 'C'] },
-		}
-
-		const store = new TestStore()
-
-		await fold(step, store).then(result => {
-			store.set(result)
+		let result = foldStep(store.table('table18'), {
+			to: ['key', 'value'],
+			columns: ['A', 'B', 'C'],
 		})
+		result = unfoldStep(result, { key: 'key', value: 'value' })
 
-		const step2: Step = {
-			verb: Verb.Unfold,
-			input: 'newTable',
-			output: 'output',
-			args: { key: 'key', value: 'value' },
-		}
-
-		return unfold(step2, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(3)
-			expect(result.table.get('A', 0)).toBe(1)
-			expect(result.table.get('A', 1)).toBe(3)
-			expect(result.table.get('A', 2)).toBe(10)
-			expect(result.table.get('B', 0)).toBe(2)
-			expect(result.table.get('B', 1)).toBe(4)
-			expect(result.table.get('B', 2)).toBe(20)
-			expect(result.table.get('C', 0)).toBe(3)
-			expect(result.table.get('C', 1)).toBe(5)
-			expect(result.table.get('C', 2)).toBe(30)
-		})
+		expect(result.numCols()).toBe(3)
+		expect(result.numRows()).toBe(3)
+		expect(result.get('A', 0)).toBe(1)
+		expect(result.get('A', 1)).toBe(3)
+		expect(result.get('A', 2)).toBe(10)
+		expect(result.get('B', 0)).toBe(2)
+		expect(result.get('B', 1)).toBe(4)
+		expect(result.get('B', 2)).toBe(20)
+		expect(result.get('C', 0)).toBe(3)
+		expect(result.get('C', 1)).toBe(5)
+		expect(result.get('C', 2)).toBe(30)
 	})
 
 	test('unfold test with value on value column undefined', async () => {
-		const step: Step = {
-			verb: Verb.Fold,
-			input: 'table14',
-			output: 'newTable',
-			args: { to: ['key', 'value'], columns: ['y', 'z'] },
-		}
-
-		const store = new TestStore()
-
-		await fold(step, store).then(result => {
-			store.set(result)
+		let result = foldStep(store.table('table14'), {
+			to: ['key', 'value'],
+			columns: ['y', 'z'],
 		})
+		result = unfoldStep(result, { key: 'key', value: 'value' })
 
-		const step2: Step = {
-			verb: Verb.Unfold,
-			input: 'newTable',
-			output: 'output',
-			args: { key: 'key', value: 'value' },
-		}
-
-		return unfold(step2, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(3)
-			expect(result.table.get('x', 0)).toBe('A')
-			expect(result.table.get('x', 1)).toBe('B')
-			expect(result.table.get('x', 2)).toBe('A')
-			expect(result.table.get('y', 0)).toBe(1)
-			expect(result.table.get('y', 1)).toBeUndefined()
-			expect(result.table.get('y', 2)).toBe(1)
-			expect(result.table.get('z', 0)).toBe(true)
-			expect(result.table.get('z', 1)).toBe(false)
-			expect(result.table.get('z', 2)).toBe(false)
-		})
+		expect(result.numCols()).toBe(3)
+		expect(result.numRows()).toBe(3)
+		expect(result.get('x', 0)).toBe('A')
+		expect(result.get('x', 1)).toBe('B')
+		expect(result.get('x', 2)).toBe('A')
+		expect(result.get('y', 0)).toBe(1)
+		expect(result.get('y', 1)).toBeUndefined()
+		expect(result.get('y', 2)).toBe(1)
+		expect(result.get('z', 0)).toBe(true)
+		expect(result.get('z', 1)).toBe(false)
+		expect(result.get('z', 2)).toBe(false)
 	})
 
 	test('unfold test with value on value column null', async () => {
-		const step: Step = {
-			verb: Verb.Fold,
-			input: 'table15',
-			output: 'newTable',
-			args: { to: ['key', 'value'], columns: ['y', 'z'] },
-		}
-
-		const store = new TestStore()
-
-		await fold(step, store).then(result => {
-			store.set(result)
+		let result = foldStep(store.table('table15'), {
+			to: ['key', 'value'],
+			columns: ['y', 'z'],
 		})
+		result = unfoldStep(result, { key: 'key', value: 'value' })
 
-		const step2: Step = {
-			verb: Verb.Unfold,
-			input: 'newTable',
-			output: 'output',
-			args: { key: 'key', value: 'value' },
-		}
-
-		return unfold(step2, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(3)
-			expect(result.table.get('x', 0)).toBe('A')
-			expect(result.table.get('x', 1)).toBe('B')
-			expect(result.table.get('x', 2)).toBe('A')
-			expect(result.table.get('y', 0)).toBeNull()
-			expect(result.table.get('y', 1)).toBe(true)
-			expect(result.table.get('y', 2)).toBe(false)
-			expect(result.table.get('z', 0)).toBe(true)
-			expect(result.table.get('z', 1)).toBe(false)
-			expect(result.table.get('z', 2)).toBe(true)
-		})
+		expect(result.numCols()).toBe(3)
+		expect(result.numRows()).toBe(3)
+		expect(result.get('x', 0)).toBe('A')
+		expect(result.get('x', 1)).toBe('B')
+		expect(result.get('x', 2)).toBe('A')
+		expect(result.get('y', 0)).toBeNull()
+		expect(result.get('y', 1)).toBe(true)
+		expect(result.get('y', 2)).toBe(false)
+		expect(result.get('z', 0)).toBe(true)
+		expect(result.get('z', 1)).toBe(false)
+		expect(result.get('z', 2)).toBe(true)
 	})
 })

@@ -2,50 +2,35 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '../../types.js'
-import { Verb } from '../../types.js'
-import { groupby } from '../groupby.js'
-import { ungroup } from '../ungroup.js'
+import { groupbyStep } from '../stepFunctions/simpleSteps.js'
+import { ungroupStep } from '../stepFunctions/simpleSteps.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for ungroup verb', () => {
+	let store: TestStore
+	beforeEach(() => {
+		store = new TestStore()
+	})
+
 	test('ungroup test', async () => {
-		const step: Step = {
-			verb: Verb.Groupby,
-			input: 'table10',
-			output: 'newTable',
-			args: {
-				columns: ['x', 'y'],
-			},
-		}
-
-		const store = new TestStore()
-
-		await groupby(step, store).then(result => {
-			store.set(result)
-
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(3)
-
-			expect(result.table.get('x', 0)).toBe('A')
-			expect(result.table.get('x', 1)).toBe('B')
-			expect(result.table.get('x', 2)).toBe('A')
+		let result = groupbyStep(store.table('table10'), {
+			columns: ['x', 'y'],
 		})
 
-		const step2: Step = {
-			verb: Verb.Ungroup,
-			input: 'newTable',
-			output: 'output',
-			args: {},
-		}
+		expect(result.numCols()).toBe(3)
+		expect(result.numRows()).toBe(3)
 
-		return ungroup(step2, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(3)
+		expect(result.get('x', 0)).toBe('A')
+		expect(result.get('x', 1)).toBe('B')
+		expect(result.get('x', 2)).toBe('A')
 
-			expect(result.table.get('x', 0)).toBe('A')
-			expect(result.table.get('x', 1)).toBe('B')
-			expect(result.table.get('x', 2)).toBe('A')
-		})
+		result = ungroupStep(result)
+
+		expect(result.numCols()).toBe(3)
+		expect(result.numRows()).toBe(3)
+
+		expect(result.get('x', 0)).toBe('A')
+		expect(result.get('x', 1)).toBe('B')
+		expect(result.get('x', 2)).toBe('A')
 	})
 })

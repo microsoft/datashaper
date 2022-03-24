@@ -2,8 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '../../types.js'
-import { Verb } from '../../types.js'
 import { intersect } from '../intersect.js'
 import { TestStore } from './TestStore.js'
 
