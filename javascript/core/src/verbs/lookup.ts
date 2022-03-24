@@ -8,17 +8,17 @@ import { BaseNode } from '../graph/BaseNode.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
 import type { LookupArgs } from './types/index.js'
-import { LookupInput } from './types/index.js'
+import { NodeInput } from './types/index.js'
 
 class LookupNode extends BaseNode<TableContainer, LookupArgs> {
 	constructor(id: string) {
-		super([LookupInput.Input, LookupInput.Other])
+		super([NodeInput.Input, NodeInput.Other])
 		this.id = id
 	}
 
 	protected doRecalculate(): void | Promise<void> {
-		const input = this.inputValue(LookupInput.Input)
-		const other = this.inputValue(LookupInput.Other)
+		const input = this.inputValue(NodeInput.Input)
+		const other = this.inputValue(NodeInput.Other)
 		if (input?.table != null && other?.table != null && this.config != null) {
 			this.emit(
 				container(this.id, doLookup(input.table, other.table, this.config)),

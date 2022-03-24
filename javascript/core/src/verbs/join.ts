@@ -8,17 +8,17 @@ import { BaseNode } from '../graph/BaseNode.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
 import type { JoinArgs } from './types/index.js'
-import { JoinInput,JoinStrategy  } from './types/index.js'
+import { JoinStrategy,NodeInput } from './types/index.js'
 
 class JoinNode extends BaseNode<TableContainer, JoinArgs> {
 	constructor(id: string) {
-		super([JoinInput.Left, JoinInput.Right])
+		super([NodeInput.Input, NodeInput.Other])
 		this.id = id
 	}
 
 	protected doRecalculate(): void | Promise<void> {
-		const left = this.inputValue(JoinInput.Left)
-		const right = this.inputValue(JoinInput.Right)
+		const left = this.inputValue(NodeInput.Input)
+		const right = this.inputValue(NodeInput.Other)
 		if (left?.table != null && right?.table != null && this.config != null) {
 			this.emit(
 				container(this.id, doJoin(left.table, right.table, this.config)),

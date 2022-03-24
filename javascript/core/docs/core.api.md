@@ -614,16 +614,6 @@ export interface JoinArgsBase {
     on?: string[];
 }
 
-// Warning: (ae-missing-release-tag) "JoinInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum JoinInput {
-    // (undocumented)
-    Left = "left",
-    // (undocumented)
-    Right = "right"
-}
-
 // Warning: (ae-missing-release-tag) "JoinStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -647,16 +637,6 @@ export enum JoinStrategy {
 //
 // @public (undocumented)
 export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {
-}
-
-// Warning: (ae-missing-release-tag) "LookupInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum LookupInput {
-    // (undocumented)
-    Input = "input",
-    // (undocumented)
-    Other = "other"
 }
 
 // Warning: (ae-missing-release-tag) "LookupStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -747,6 +727,16 @@ export type NodeFactory = (id: string) => Node_2<TableContainer>;
 //
 // @public (undocumented)
 export type NodeId = string;
+
+// Warning: (ae-missing-release-tag) "NodeInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum NodeInput {
+    // (undocumented)
+    Input = "input",
+    // (undocumented)
+    Other = "other"
+}
 
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -988,14 +978,6 @@ export function step({ verb, args, id, inputs, pinnedOutputs, }: StepInput): Ste
 //
 // @public (undocumented)
 export type StepInput = CopyWithPartial<Step<any>, 'args' | 'id' | 'inputs' | 'pinnedOutputs'>;
-
-// Warning: (ae-missing-release-tag) "StepNodeInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum StepNodeInput {
-    // (undocumented)
-    Source = "input"
-}
 
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

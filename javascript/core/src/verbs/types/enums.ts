@@ -204,16 +204,7 @@ export enum JoinStrategy {
 	FullOuter = 'join_full',
 }
 
-export enum JoinInput {
-	Left = 'left',
-	Right = 'right',
-}
-
-export enum LookupInput {
+export enum NodeInput {
 	Input = 'input',
 	Other = 'other',
-}
-
-export enum StepNodeInput {
-	Source = 'input',
 }
