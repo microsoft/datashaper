@@ -27,7 +27,7 @@ export abstract class VariadicNodeImpl<T, Config> extends BaseNode<T, Config> {
 		return `${VARIADIC_PREFIX}${this.variadicIndex++}`
 	}
 
-	public installNext(binding: Omit<NodeBinding<T>, 'input'>): SocketName {
+	public bindNext(binding: Omit<NodeBinding<T>, 'input'>): SocketName {
 		const input = this.nextInput()
 		this.bind({ ...binding, input })
 		return input

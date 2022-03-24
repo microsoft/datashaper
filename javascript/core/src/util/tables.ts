@@ -5,7 +5,6 @@
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { fixedBinCount } from '../verbs/util/index.js'
 import type {
 	Bin,
 	Category,
@@ -14,6 +13,7 @@ import type {
 	TableMetadata,
 } from '../index.js'
 import { DataType } from '../index.js'
+import { fixedBinCount } from '../verbs/util/index.js'
 import { columnType, determineType } from './index.js'
 
 // arquero uses 1000 as default, but we're sampling the table so assuming higher odds of valid values

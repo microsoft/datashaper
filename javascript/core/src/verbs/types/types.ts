@@ -176,10 +176,6 @@ export interface ImputeArgs extends InputColumnArgs {
 
 export interface JoinArgsBase {
 	/**
-	 * Name of the other table to join to the main input
-	 */
-	other: string
-	/**
 	 * Column names to join with.
 	 * If only one is specified, it will use for both tables.
 	 * If none are specified, all matching column names will be used.

@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
-import { StringComparisonOperator } from '../types/enums.js'
 import { filterStep } from '../stepFunctions/simpleSteps.js'
+import { StringComparisonOperator } from '../types/enums.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for filter verb', () => {

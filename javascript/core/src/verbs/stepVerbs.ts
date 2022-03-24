@@ -32,7 +32,7 @@ import {
 	unrollStep,
 	windowStep,
 } from './stepFunctions/index.js'
-import { makeInputNode,makeStepNode } from './util/factories.js'
+import { makeInputNode, makeStepNode } from './util/factories/index.js'
 
 export const bin = makeStepNode(binStep)
 export const aggregate = makeStepNode(aggregateStep)

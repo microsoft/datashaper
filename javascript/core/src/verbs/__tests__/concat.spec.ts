@@ -2,33 +2,36 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '../../types.js'
-import { Verb } from '../../types.js'
-import { concat } from '../concat.js'
+import { concat } from '../setVerbs.js'
+import { staticValueNode } from '../util/factories/index.js'
+import { NodeInput } from '../util/factories/types.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for concat verb', () => {
 	test('concat test', () => {
-		const step: Step = {
-			verb: Verb.Concat,
-			input: 'table1',
-			output: 'output',
-			args: { others: ['table2'] },
-		}
-
 		const store = new TestStore()
 
-		return concat(step, store).then(result => {
-			// no change to column count
-			expect(result.table.numCols()).toBe(3)
-			// combined rows of 5 + 1
-			expect(result.table.numRows()).toBe(6)
-			expect(result.table.get('count', 0)).toBe(10)
-			expect(result.table.get('count', 1)).toBe(20)
-			expect(result.table.get('count', 2)).toBe(30)
-			expect(result.table.get('count', 3)).toBe(40)
-			expect(result.table.get('count', 4)).toBe(50)
-			expect(result.table.get('count', 5)).toBe(60)
-		})
+		const table1 = staticValueNode('input', store.get('table1')!)
+		const table2 = staticValueNode('input', store.get('table2')!)
+
+		expect(table1.outputValue()).toBeDefined()
+		expect(table2.outputValue()).toBeDefined()
+
+		const node = concat('output')
+		node.bind({ input: NodeInput.Source, node: table1 })
+		node.bindNext({ node: table2 })
+
+		const result = node.outputValue()
+
+		// no change to column count
+		expect(result?.table?.numCols()).toBe(3)
+		// combined rows of 5 + 1
+		expect(result?.table?.numRows()).toBe(6)
+		expect(result?.table?.get('count', 0)).toBe(10)
+		expect(result?.table?.get('count', 1)).toBe(20)
+		expect(result?.table?.get('count', 2)).toBe(30)
+		expect(result?.table?.get('count', 3)).toBe(40)
+		expect(result?.table?.get('count', 4)).toBe(50)
+		expect(result?.table?.get('count', 5)).toBe(60)
 	})
 })

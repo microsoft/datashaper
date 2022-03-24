@@ -6,7 +6,7 @@ import { from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
 import type { UnfoldArgs } from '../types/types.js'
-import type { TableStep } from '../util/factories.js'
+import type { TableStep } from '../util/factories/index.js'
 
 export const unfoldStep: TableStep<UnfoldArgs> = (input, { key, value }) => {
 	const columnNames: string[] = input.columnNames(name => {

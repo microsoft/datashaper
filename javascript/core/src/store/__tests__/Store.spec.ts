@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { from } from 'rxjs'
 import { table } from 'arquero'
+import { from } from 'rxjs'
+
 import { container } from '../../tables/container.js'
 import { createTableStore } from '../createTableStore.js'
 
@@ -22,7 +23,7 @@ describe('DefaultTableStore', () => {
 
 	test('get unregistered table fails', () => {
 		const store = createTableStore()
-		return expect(() => store.get('a')).rejects.toBeDefined()
+		return expect(() => store.get('a')).toThrow('table "a" not defined')
 	})
 
 	test('get resolves table before returning', () => {

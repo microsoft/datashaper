@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TestStore } from './TestStore.js'
 import { imputeStep } from '../stepFunctions/index.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for impute verb', () => {
 	let store: TestStore

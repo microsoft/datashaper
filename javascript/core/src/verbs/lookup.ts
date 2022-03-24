@@ -32,7 +32,7 @@ class LookupNode extends BaseNode<TableContainer, LookupArgs> {
 	}
 }
 
-export function lookupNode(id: string): LookupNode {
+export function lookup(id: string): LookupNode {
 	return new LookupNode(id)
 }
 

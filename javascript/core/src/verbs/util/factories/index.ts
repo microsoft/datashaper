@@ -2,5 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './factory.js'
+
+export * from './InputNode.js'
+export * from './SetOperationNode.js'
+export * from './StaticValueNode.js'
+export * from './StepNode.js'
 export * from './types.js'

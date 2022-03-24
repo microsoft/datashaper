@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
+import { binarizeStep } from '../stepFunctions/index.js'
 import { StringComparisonOperator, Verb } from '../types/index.js'
 import { TestStore } from './TestStore.js'
-import { binarizeStep } from '../stepFunctions/index.js'
 
 describe('test for binarize verb', () => {
 	let store: TestStore
@@ -63,7 +63,7 @@ describe('test for binarize verb', () => {
 	})
 
 	test('binarize test with NumericComparisonOperator Lt', () => {
-		let result = binarizeStep(store.table(), {
+		const result = binarizeStep(store.table(), {
 			to: 'newColumn',
 			column: 'count',
 			criteria: [

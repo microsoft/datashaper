@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { MathOperator } from '../types/enums.js'
 import { deriveStep } from '../stepFunctions/derive.js'
+import { MathOperator } from '../types/enums.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for derive verb', () => {

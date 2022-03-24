@@ -2,25 +2,28 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '../../types.js'
-import { Verb } from '../../types.js'
-import { lookup } from '../lookup.js'
+import { lookup, LookupInput } from '../lookup.js'
+import { staticValueNode } from '../util/factories/index.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for lookup verb', () => {
+	let store: TestStore
+	beforeEach(() => {
+		store = new TestStore()
+	})
+
 	test('lookup test', () => {
-		const step: Step = {
-			verb: Verb.Lookup,
-			input: 'table1',
-			output: 'output',
-			args: { other: 'table5', on: ['ID'], columns: ['item'] },
-		}
+		const table1 = staticValueNode('input', store.get('table1')!)
+		const table2 = staticValueNode('input', store.get('table5')!)
 
-		const store = new TestStore()
+		const node = lookup('output')
+		node.bind({ input: LookupInput.Input, node: table1 })
+		node.bind({ input: LookupInput.Other, node: table2 })
+		node.config = { on: ['ID'], columns: ['item'] }
 
-		return lookup(step, store).then(result => {
-			expect(result.table.numCols()).toBe(4)
-			expect(result.table.numRows()).toBe(5)
-		})
+		const result = node.outputValue()
+
+		expect(result?.table?.numCols()).toBe(4)
+		expect(result?.table?.numRows()).toBe(5)
 	})
 })

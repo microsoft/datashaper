@@ -33,7 +33,7 @@ class JoinNode extends BaseNode<TableContainer, JoinArgs> {
 	}
 }
 
-export function joinNode(id: string): JoinNode {
+export function join(id: string): JoinNode {
 	return new JoinNode(id)
 }
 

@@ -26,6 +26,9 @@ export class DefaultStore<T> implements Store<T> {
 	public constructor(private _printItem: (item: T) => void) {}
 
 	public get(id: string): Maybe<T> {
+		if (!this._storage.has(id)) {
+			throw new Error(`table "${id}" not defined`)
+		}
 		return this._storage.get(id)?.cached
 	}
 
@@ -73,7 +76,7 @@ export class DefaultStore<T> implements Store<T> {
 	private emit(id?: string): void {
 		if (id) {
 			const listener = this.eventFor(id)
-			listener.next(this.get(id))
+			listener.next(this._storage.get(id)?.cached)
 		}
 		this._changeEvent.next()
 	}

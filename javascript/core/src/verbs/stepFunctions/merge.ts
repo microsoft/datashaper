@@ -10,7 +10,7 @@ import { columnType } from '../../util/index.js'
 import type { DataType } from '../types/enums.js'
 import { MergeStrategy } from '../types/enums.js'
 import type { MergeArgs } from '../types/types.js'
-import type { TableStep } from '../util/factories.js'
+import type { TableStep } from '../util/factories/index.js'
 
 export const mergeStep: TableStep<MergeArgs> = (
 	input,

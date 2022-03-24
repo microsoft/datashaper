@@ -7,7 +7,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { BinArgs } from '../types/index.js'
 import { BinStrategy } from '../types/index.js'
-import type { TableStep } from '../util/factories.js'
+import type { TableStep } from '../util/factories/index.js'
 import { fixedBinCount, fixedBinStep } from '../util/index.js'
 
 /**

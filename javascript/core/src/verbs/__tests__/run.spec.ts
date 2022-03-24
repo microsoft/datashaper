@@ -4,12 +4,12 @@
  */
 import { table } from 'arquero'
 
+import { run } from '../../engine/run.js'
 import type { Step, Store } from '../../index.js'
 import { Verb } from '../../index.js'
-import { run } from '../../engine/run.js'
+import { factory } from '../../steps/factory.js'
 import { createTableStore } from '../../store/index.js'
 import type { TableContainer } from '../../tables/index.js'
-import { factory } from '../../steps/factory.js'
 
 describe('run', () => {
 	let store: Store<TableContainer>

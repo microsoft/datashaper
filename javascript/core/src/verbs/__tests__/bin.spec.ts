@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+
 import type { BinArgs } from '../../index.js'
 import { BinStrategy } from '../../index.js'
 import { binStep } from '../stepFunctions/bin.js'

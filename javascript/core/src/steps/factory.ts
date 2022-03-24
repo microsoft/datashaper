@@ -5,13 +5,13 @@
 import { v4 as uuid } from 'uuid'
 
 import { BinStrategy } from '../index.js'
-import type { Step } from './types.js'
 import {
 	BooleanLogicalOperator,
 	FieldAggregateOperation,
 	JoinStrategy,
 	Verb,
 } from '../verbs/types/index.js'
+import type { Step } from './types.js'
 
 /**
  * Factory function to create new verb configs

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SortDirection } from '../types/index.js'
 import { orderbyStep } from '../stepFunctions/index.js'
+import { SortDirection } from '../types/index.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for orderby verb', () => {
