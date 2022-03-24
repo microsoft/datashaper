@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { PivotStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -27,7 +28,11 @@ export const Unfold: React.FC<StepComponentProps> = memo(function Unfold({
 }) {
 	const internal = useMemo(() => step as PivotStep, [step])
 
-	const tbl = useLoadTable(input || internal.input, table, store)
+	const tbl = useLoadTable(
+		input || internal.inputs[NodeInput.Input]?.node,
+		table,
+		store,
+	)
 
 	const handleKeyColumnChange = useHandleDropdownChange(
 		internal,

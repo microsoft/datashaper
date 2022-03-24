@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Criterion, FilterStep } from '@data-wrangling-components/core'
-import { BooleanLogicalOperator } from '@data-wrangling-components/core'
+import { BooleanLogicalOperator , NodeInput } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
@@ -26,7 +26,11 @@ export const Filter: React.FC<StepComponentProps> = memo(function Filter({
 	input,
 }) {
 	const internal = useMemo(() => step as FilterStep, [step])
-	const tbl = useLoadTable(input || internal.input, table, store)
+	const tbl = useLoadTable(
+		input || internal.inputs[NodeInput.Input]?.node,
+		table,
+		store,
+	)
 
 	const handleButtonClick = useCallback(() => {
 		onChange &&

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { AggregateStep } from '@data-wrangling-components/core'
-import { FieldAggregateOperation } from '@data-wrangling-components/core'
+import { FieldAggregateOperation , NodeInput } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -29,7 +29,11 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 }) {
 	const internal = useMemo(() => step as AggregateStep, [step])
 
-	const tbl = useLoadTable(input || internal.input, table, store)
+	const tbl = useLoadTable(
+		input || internal.inputs[NodeInput.Input]?.node,
+		table,
+		store,
+	)
 
 	const handleGroupColumnChange = useHandleDropdownChange(
 		internal,

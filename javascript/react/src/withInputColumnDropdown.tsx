@@ -7,8 +7,7 @@ import {
 	DataType,
 	isInputColumnStep,
 	isNumericInputStep,
-	types,
-} from '@data-wrangling-components/core'
+ NodeInput,	types } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -40,7 +39,11 @@ export const withInputColumnDropdown = (
 			// TODO: detailed types/stats should be an option on table load,
 			// which will then be passed around with the container and thereby cached
 			// useLoadTable should return a TableContainer
-			const tbl = useLoadTable(input || step.input, table, store)
+			const tbl = useLoadTable(
+				input || step.inputs[NodeInput.Input]?.node,
+				table,
+				store,
+			)
 
 			const filter = useColumnFilter(step, tbl)
 

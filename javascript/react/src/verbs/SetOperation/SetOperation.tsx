@@ -7,6 +7,7 @@ import type {
 	Step,
 	TableStore,
 } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -23,7 +24,11 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 	function SetOperation({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => step as SetOperationStep, [step])
 
-		const tbl = useLoadTable(input || internal.input, table, store)
+		const tbl = useLoadTable(
+			input || internal.inputs[NodeInput.Input]?.node,
+			table,
+			store,
+		)
 
 		const others = useOthers(internal, store, onChange)
 

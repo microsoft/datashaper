@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RenameStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
@@ -36,7 +37,11 @@ export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 }) {
 	const internal = useMemo(() => step as RenameStep, [step])
 
-	const tbl = useLoadTable(input || step.input, table, store)
+	const tbl = useLoadTable(
+		input || step.inputs[NodeInput.Input]?.node,
+		table,
+		store,
+	)
 
 	const handleColumnChange = useHandleColumnChange(internal, onChange)
 	const handleColumnDelete = useColumnRecordDelete(internal, onChange)

@@ -25,9 +25,9 @@ export function useOnDuplicateStep(
 	return useCallback(
 		async (_step: Step) => {
 			const tableName =
-				type === StepsType.Table ? createTableName(_step.output) : _step.output
+				type === StepsType.Table ? createTableName(_step.id) : _step.id
 
-			const outputTable = store ? await store.table(_step.output) : table
+			const outputTable = store ? store.get(_step.id)?.table : table
 			const formattedArgs = await formattedColumnArgs(
 				_step,
 				outputTable?.columnNames() ?? [],
@@ -35,7 +35,7 @@ export function useOnDuplicateStep(
 			const newStep = {
 				..._step,
 				args: formattedArgs,
-				input: _step.output,
+				input: _step.id,
 				output: tableName,
 			}
 			onSave && onSave(newStep)

@@ -7,6 +7,7 @@ import type {
 	SpreadStep,
 	Step,
 } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
@@ -29,7 +30,11 @@ export const Spread: React.FC<StepComponentProps> = memo(function Spread({
 }) {
 	const internal = useMemo(() => step as SpreadStep, [step])
 
-	const tbl = useLoadTable(input || step.input, table, store)
+	const tbl = useLoadTable(
+		input || step.inputs[NodeInput.Input]?.node,
+		table,
+		store,
+	)
 	const columns = useColumns(internal, onChange)
 
 	const handleButtonClick = useCallback(() => {

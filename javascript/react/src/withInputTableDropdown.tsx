@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { isInputTableStep } from '@data-wrangling-components/core'
+import { isInputTableStep, NodeInput } from '@data-wrangling-components/core'
 import { memo } from 'react'
 import styled from 'styled-components'
 
@@ -31,7 +31,7 @@ export const withInputTableDropdown = (
 						<TableDropdown
 							store={store}
 							label={label || 'Input table'}
-							selectedKey={step.input}
+							selectedKey={step.inputs[NodeInput.Input]?.node}
 							onChange={handleTableChange}
 						/>
 					</LeftAlignedRow>

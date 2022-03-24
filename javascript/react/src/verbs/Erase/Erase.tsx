@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { EraseStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
@@ -26,7 +27,11 @@ export const Erase: React.FC<StepComponentProps> = memo(function Erase({
 }) {
 	const internal = useMemo(() => step as EraseStep, [step])
 
-	const tbl = useLoadTable(input || step.input, table, store)
+	const tbl = useLoadTable(
+		input || step.inputs[NodeInput.Input]?.node,
+		table,
+		store,
+	)
 
 	const handleComboBoxChange = useCallback(
 		(_event, option, value) => {

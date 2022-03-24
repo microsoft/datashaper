@@ -4,7 +4,6 @@
  */
 import type {
 	InputColumnRecordArgs,
-	Pipeline,
 	Step,
 	TableContainer,
 	TableStore,
@@ -12,7 +11,6 @@ import type {
 } from '@data-wrangling-components/core'
 import {
 	columnType,
-	createPipeline,
 	createTableStore,
 	DataType,
 } from '@data-wrangling-components/core'
@@ -68,7 +66,7 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 	const [dirty, setDirty] = useState<boolean>(true)
 	const [list, setList] = useState<string[]>([])
 	useEffect(() => {
-		store?.addChangeListener(() => setDirty(true))
+		return store?.onChange(() => setDirty(true))
 	}, [store, setDirty])
 	useEffect(() => {
 		if (dirty) {
@@ -238,21 +236,10 @@ export function useLoadTable(
 ): ColumnTable | undefined {
 	const [tbl, setTable] = useState<ColumnTable | undefined>()
 	const handleTableLoad = useCallback(
-		(container: TableContainer) => setTable(container.table),
+		(container: TableContainer | undefined) => setTable(container?.table),
 		[setTable],
 	)
 	useEffect(() => {
-		const fn = async (n: string, s: TableStore) => {
-			try {
-				s.listen(n, handleTableLoad)
-				const c = await s.get(n)
-				setTable(c.table)
-			} catch (e) {
-				// swallow the error - we may try to request async before the table is registered
-				// it'll get picked up later by the listener
-				// TODO: should we only listen if it fails at first?
-			}
-		}
 		// if a table already exists, use it directly
 		// TODO: should we set it in the store also?
 		// the expectation here is that a table will be provided if the step component is used directly without a builder
@@ -260,10 +247,8 @@ export function useLoadTable(
 		if (table) {
 			setTable(table)
 		} else if (id && store) {
-			fn(id, store)
-		}
-		return () => {
-			id && store && store.unlisten(id)
+			const sub = store.observe(id).subscribe(t => setTable(t?.table))
+			return () => sub.unsubscribe()
 		}
 	}, [id, table, store, handleTableLoad])
 	return tbl
@@ -301,10 +286,6 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType {
 
 export function useStore(): TableStore {
 	return useMemo(() => createTableStore(), [])
-}
-
-export function usePipeline(store: TableStore): Pipeline {
-	return useMemo(() => createPipeline(store), [store])
 }
 
 export function useCommonCommands(

@@ -7,7 +7,7 @@ import type {
 	OrderbyStep,
 	Step,
 } from '@data-wrangling-components/core'
-import { SortDirection } from '@data-wrangling-components/core'
+import { NodeInput,SortDirection  } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
@@ -30,7 +30,11 @@ export const Orderby: React.FC<StepComponentProps> = memo(function Orderby({
 }) {
 	const internal = useMemo(() => step as OrderbyStep, [step])
 
-	const tbl = useLoadTable(input || step.input, table, store)
+	const tbl = useLoadTable(
+		input || step.inputs[NodeInput.Input]?.node,
+		table,
+		store,
+	)
 
 	const sorts = useSorts(internal, tbl, onChange)
 

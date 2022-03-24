@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { JoinStep, Step } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -21,9 +22,16 @@ export const JoinInputs: React.FC<StepComponentProps> = memo(
 	function JoinInputs({ step, store, table, onChange, input, label = 'join' }) {
 		const internal = useMemo(() => step as JoinStep, [step])
 
-		const leftTable = useLoadTable(input || internal.input, table, store)
-
-		const rightTable = useLoadTable(internal.args.other, table, store)
+		const leftTable = useLoadTable(
+			input || internal.inputs[NodeInput.Input]?.node,
+			table,
+			store,
+		)
+		const rightTable = useLoadTable(
+			internal.inputs[NodeInput.Other]?.node,
+			table,
+			store,
+		)
 
 		const leftColumn = useLeftColumn(internal)
 		const rightColumn = useRightColumn(internal)
@@ -49,7 +57,7 @@ export const JoinInputs: React.FC<StepComponentProps> = memo(
 					<TableDropdown
 						store={store}
 						label={`${upperFirst(label)} table`}
-						selectedKey={internal.args.other}
+						selectedKey={internal.inputs[NodeInput.Other]?.node}
 						onChange={handleRightTableChange}
 					/>
 				</LeftAlignedRow>

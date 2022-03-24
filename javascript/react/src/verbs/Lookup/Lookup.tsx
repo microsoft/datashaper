@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { LookupStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -36,7 +37,7 @@ export const Lookup: React.FC<StepComponentProps> = memo(function Lookup({
 					step={step}
 					store={store}
 					onChange={onChange}
-					input={internal.args.other}
+					input={internal.inputs[NodeInput.Other]?.node}
 				/>
 			</LeftAlignedColumn>
 		</Container>
