@@ -4,7 +4,7 @@
  */
 import type { Step } from '../../types.js'
 import { FieldAggregateOperation, Verb } from '../../types.js'
-import { aggregate } from '../../verbs/aggregate.js.js'
+import { aggregate } from '../../verbs/aggregate.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for aggregate verb', () => {

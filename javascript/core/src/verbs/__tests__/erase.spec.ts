@@ -2,46 +2,28 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '../../types.js'
-import { Verb } from '../../types.js'
-import { erase } from '../erase.js'
+import { eraseStep } from '../stepFunctions/simpleSteps.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for erase verb', () => {
+	let store: TestStore
+	beforeEach(() => {
+		store = new TestStore('table3')
+	})
 	test('erase numeric value', () => {
-		const step: Step = {
-			verb: Verb.Erase,
-			input: 'table3',
-			output: 'output',
-			args: { value: 4, column: 'ID' },
-		}
-
-		const store = new TestStore()
-
-		return erase(step, store).then(result => {
-			expect(result.table.numCols()).toBe(2)
-			expect(result.table.numRows()).toBe(6)
-			expect(result.table.get('ID', 3)).toBeUndefined()
-			expect(result.table.get('ID', 4)).toBeUndefined()
-			expect(result.table.get('ID', 5)).toBeUndefined()
-		})
+		const result = eraseStep(store.table(), { value: 4, column: 'ID' })
+		expect(result.numCols()).toBe(2)
+		expect(result.numRows()).toBe(6)
+		expect(result.get('ID', 3)).toBeUndefined()
+		expect(result.get('ID', 4)).toBeUndefined()
+		expect(result.get('ID', 5)).toBeUndefined()
 	})
 
 	test('erase string value', () => {
-		const step: Step = {
-			verb: Verb.Erase,
-			input: 'table3',
-			output: 'output',
-			args: { value: 'sofa', column: 'item' },
-		}
-
-		const store = new TestStore()
-
-		return erase(step, store).then(result => {
-			expect(result.table.numCols()).toBe(2)
-			expect(result.table.numRows()).toBe(6)
-			expect(result.table.get('item', 2)).toBeUndefined()
-			expect(result.table.get('item', 3)).toBeUndefined()
-		})
+		const result = eraseStep(store.table(), { value: 'sofa', column: 'item' })
+		expect(result.numCols()).toBe(2)
+		expect(result.numRows()).toBe(6)
+		expect(result.get('item', 2)).toBeUndefined()
+		expect(result.get('item', 3)).toBeUndefined()
 	})
 })
