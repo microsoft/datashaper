@@ -52,7 +52,7 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     readonly outputs: SocketName[];
     // (undocumented)
     outputValue(name?: SocketName): Maybe<T>;
-    protected recalculate: () => Promise<void>;
+    protected recalculate: () => void;
     // (undocumented)
     unbind(name: SocketName): void;
     protected verifyInputSocketName(name: SocketName): void;
@@ -227,6 +227,11 @@ export interface ConvertArgs extends InputColumnListArgs {
     // (undocumented)
     type: ParseType;
 }
+
+// Warning: (ae-missing-release-tag) "CopyWithPartial" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 
 // Warning: (ae-missing-release-tag) "createTableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -444,6 +449,12 @@ export interface Graph<T> {
     validate(): void;
 }
 
+// Warning: (ae-forgotten-export) The symbol "Step" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "graph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function graph(steps: Step[], store: Store<TableContainer>): Graph<TableContainer>;
+
 // Warning: (ae-missing-release-tag) "GroupbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -494,7 +505,6 @@ export interface InputColumnRecordArgs {
 export function introspect(table: ColumnTable, detailed?: boolean,
 columns?: string[]): TableMetadata;
 
-// Warning: (ae-forgotten-export) The symbol "Step" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "isInputColumnStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -618,6 +628,11 @@ export interface NodeBinding<T> {
     node: Node_2<T>;
     output?: SocketName;
 }
+
+// Warning: (ae-missing-release-tag) "NodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type NodeFactory = (id: string) => Node_2<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "NodeId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -759,11 +774,6 @@ export interface RowsOptions {
     stringify?: boolean;
 }
 
-// Warning: (ae-missing-release-tag) "run" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function run(steps: Step[], _store: Store<TableContainer>): Promise<TableContainer>;
-
 // Warning: (ae-missing-release-tag) "SampleArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -831,7 +841,12 @@ export function stats(table: ColumnTable, columns?: string[]): Record<string, Co
 // Warning: (ae-missing-release-tag) "step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function step(verb: Verb, args?: Record<string, unknown>, inputs?: Step['inputs']): Step;
+export function step({ verb, args, id, inputs, pinnedOutputs, }: StepInput): Step;
+
+// Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StepInput = CopyWithPartial<Step<any>, 'args' | 'id' | 'inputs' | 'pinnedOutputs'>;
 
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -950,8 +965,6 @@ export enum Verb {
     Binarize = "binarize",
     // (undocumented)
     Boolean = "boolean",
-    // (undocumented)
-    Chain = "chain",
     // (undocumented)
     Concat = "concat",
     // (undocumented)

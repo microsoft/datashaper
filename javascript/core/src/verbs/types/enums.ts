@@ -7,7 +7,6 @@ export enum Verb {
 	Bin = 'bin',
 	Binarize = 'binarize',
 	Boolean = 'boolean',
-	Chain = 'chain',
 	Concat = 'concat',
 	Convert = 'convert',
 	Dedupe = 'dedupe',
