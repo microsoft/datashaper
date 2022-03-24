@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { from } from 'rxjs'
 
 import { DefaultStore } from '../../store/DefaultStore.js'
@@ -163,7 +164,7 @@ export class TestStore extends DefaultStore<TableContainer> {
 		this.set('table20', from([{ id: 'table20', table: table20 }]))
 	}
 
-	public table(name: string = this._defaultTableName) {
+	public table(name: string = this._defaultTableName): ColumnTable {
 		return this.get(name)!.table!
 	}
 }

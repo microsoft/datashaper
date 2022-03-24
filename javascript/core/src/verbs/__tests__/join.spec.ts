@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { join, JoinInput } from '../join.js'
-import { TestStore } from './TestStore.js'
-import { staticValueNode } from '../util/factories/index.js'
 import { JoinStrategy } from '../types/index.js'
+import { staticValueNode } from '../util/factories/index.js'
+import { TestStore } from './TestStore.js'
 
 describe('test for join verb', () => {
 	let store: TestStore

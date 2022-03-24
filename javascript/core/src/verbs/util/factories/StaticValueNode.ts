@@ -11,7 +11,7 @@ export class StaticValueNode<T> extends BaseNode<T, { value: T }> {
 		super()
 		this.id = id
 	}
-	protected async doRecalculate(): Promise<void> {
+	protected doRecalculate(): void {
 		this.emit(this.config?.value)
 	}
 }

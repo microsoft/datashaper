@@ -16,7 +16,7 @@ export function useRunPipeline(
 			const output = await pipeline.run()
 			setSelectedTableName && setSelectedTableName(output.id)
 		}
-		const storedTables = await pipeline.store.toMap()
+		const storedTables = pipeline.store.toMap()
 		setStoredTables && setStoredTables(storedTables)
 	}, [pipeline, setStoredTables, setSelectedTableName])
 }

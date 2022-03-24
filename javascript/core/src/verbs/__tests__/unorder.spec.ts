@@ -12,7 +12,7 @@ describe('test for unorder verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('unorder test with SortDirection Ascending and string value', async () => {
+	test('unorder test with SortDirection Ascending and string value', () => {
 		let result = orderbyStep(store.table('table7'), {
 			orders: [{ column: 'item', direction: SortDirection.Ascending }],
 		})
@@ -36,7 +36,7 @@ describe('test for unorder verb', () => {
 		expect(result.get('item', 4)).toBe('stool')
 	})
 
-	test('unorder test with SortDirection Descending and string value', async () => {
+	test('unorder test with SortDirection Descending and string value', () => {
 		let result = orderbyStep(store.table('table7'), {
 			orders: [{ column: 'item', direction: SortDirection.Descending }],
 		})
@@ -59,7 +59,7 @@ describe('test for unorder verb', () => {
 		expect(result.get('item', 4)).toBe('stool')
 	})
 
-	test('unorder test with SortDirection Ascending and number value', async () => {
+	test('unorder test with SortDirection Ascending and number value', () => {
 		let result = orderbyStep(store.table('table7'), {
 			orders: [{ column: 'quantity', direction: SortDirection.Ascending }],
 		})
@@ -82,7 +82,7 @@ describe('test for unorder verb', () => {
 		expect(result.get('quantity', 4)).toBe(50)
 	})
 
-	test('unorder test with SortDirection Descending and number value', async () => {
+	test('unorder test with SortDirection Descending and number value', () => {
 		let result = orderbyStep(store.table('table7'), {
 			orders: [{ column: 'quantity', direction: SortDirection.Descending }],
 		})

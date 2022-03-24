@@ -4,7 +4,7 @@
  */
 import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
 import { binarizeStep } from '../stepFunctions/index.js'
-import { StringComparisonOperator, Verb } from '../types/index.js'
+import { StringComparisonOperator } from '../types/index.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for binarize verb', () => {

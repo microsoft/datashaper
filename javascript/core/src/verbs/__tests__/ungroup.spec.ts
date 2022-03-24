@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { groupbyStep } from '../stepFunctions/simpleSteps.js'
-import { ungroupStep } from '../stepFunctions/simpleSteps.js'
+import { groupbyStep, ungroupStep } from '../stepFunctions/simpleSteps.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for ungroup verb', () => {
@@ -12,7 +11,7 @@ describe('test for ungroup verb', () => {
 		store = new TestStore()
 	})
 
-	test('ungroup test', async () => {
+	test('ungroup test', () => {
 		let result = groupbyStep(store.table('table10'), {
 			columns: ['x', 'y'],
 		})

@@ -11,7 +11,7 @@ describe('test for unfold verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('unfold test with one column folded', async () => {
+	test('unfold test with one column folded', () => {
 		let result = foldStep(store.table('table10'), {
 			to: ['key', 'value'],
 			columns: ['x'],
@@ -31,7 +31,7 @@ describe('test for unfold verb', () => {
 		expect(result.get('z', 2)).toBe(4)
 	})
 
-	test('unfold test with all columns folded', async () => {
+	test('unfold test with all columns folded', () => {
 		let result = foldStep(store.table('table18'), {
 			to: ['key', 'value'],
 			columns: ['A', 'B', 'C'],
@@ -51,7 +51,7 @@ describe('test for unfold verb', () => {
 		expect(result.get('C', 2)).toBe(30)
 	})
 
-	test('unfold test with value on value column undefined', async () => {
+	test('unfold test with value on value column undefined', () => {
 		let result = foldStep(store.table('table14'), {
 			to: ['key', 'value'],
 			columns: ['y', 'z'],
@@ -71,7 +71,7 @@ describe('test for unfold verb', () => {
 		expect(result.get('z', 2)).toBe(false)
 	})
 
-	test('unfold test with value on value column null', async () => {
+	test('unfold test with value on value column null', () => {
 		let result = foldStep(store.table('table15'), {
 			to: ['key', 'value'],
 			columns: ['y', 'z'],
