@@ -6,8 +6,8 @@ import { table } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { from } from 'rxjs'
 
-import { DefaultStore } from '../../store/DefaultStore.js'
-import type { TableContainer } from '../../tables/types.js'
+import { DefaultStore } from '../store/DefaultStore.js'
+import type { TableContainer } from '../tables/types.js'
 
 /**
  * This is a store implementation pre-loaded with test tables to ease setup.

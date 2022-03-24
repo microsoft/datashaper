@@ -5,10 +5,9 @@
 import { table } from 'arquero'
 import { from } from 'rxjs'
 
+import { tick } from '../../__tests__/utils.js'
 import { container } from '../../tables/container.js'
 import { createTableStore } from '../createTableStore.js'
-
-const tick = () => new Promise(r => setTimeout(r, 0))
 
 describe('DefaultTableStore', () => {
 	test('empty constructor', () => {

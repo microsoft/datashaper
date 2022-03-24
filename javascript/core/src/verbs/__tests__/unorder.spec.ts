@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TestStore } from '../../__tests__/TestStore.js'
 import { orderbyStep } from '../stepFunctions/orderby.js'
 import { unorderStep } from '../stepFunctions/simpleSteps.js'
 import { SortDirection } from '../types/enums.js'
-import { TestStore } from './TestStore.js'
 
 describe('test for unorder verb', () => {
 	let store: TestStore

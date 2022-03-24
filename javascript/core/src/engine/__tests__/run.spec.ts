@@ -4,12 +4,13 @@
  */
 import { table } from 'arquero'
 
-import { run } from '../../engine/run.js'
-import type { Step, Store } from '../../index.js'
 import { Verb } from '../../index.js'
 import { factory } from '../../steps/factory.js'
+import type { Step } from '../../steps/index.js'
 import { createTableStore } from '../../store/index.js'
+import type { Store } from '../../store/types.js'
 import type { TableContainer } from '../../tables/index.js'
+import { run } from '../run.js'
 
 describe('run', () => {
 	let store: Store<TableContainer>
@@ -34,21 +35,25 @@ describe('run', () => {
 		expect(store.list()).toEqual(['input', 'output'])
 	})
 
-	test('runs multiple steps with normal input/output and all intermediates', () => {
+	test('runs multiple steps with normal input/output and all intermediates', async () => {
 		const steps: Step[] = [
 			{
+				id: 'output-1',
 				verb: Verb.Fill,
-				input: 'input',
-				output: 'output-1',
+				inputs: {
+					source: { node: 'table1' },
+				},
 				args: {
 					to: 'filled',
 					value: 1,
 				},
 			},
 			{
+				id: 'output-2',
 				verb: Verb.Fill,
-				input: 'output-1',
-				output: 'output-2',
+				inputs: {
+					source: { node: 'output-1' },
+				},
 				args: {
 					to: 'filled2',
 					value: 2,
@@ -56,11 +61,10 @@ describe('run', () => {
 			},
 		]
 
-		return run(steps, store).then(result => {
-			expect(result.table.numCols()).toBe(3)
-			expect(result.table.numRows()).toBe(4)
-			expect(result.table.columnNames()).toEqual(['ID', 'filled', 'filled2'])
-			expect(store.list()).toEqual(['input', 'output-1', 'output-2'])
-		})
+		const result = await run(steps, store)
+		expect(result.table?.numCols()).toBe(3)
+		expect(result.table?.numRows()).toBe(4)
+		expect(result.table?.columnNames()).toEqual(['ID', 'filled', 'filled2'])
+		expect(store.list()).toEqual(['input', 'output-1', 'output-2'])
 	})
 })

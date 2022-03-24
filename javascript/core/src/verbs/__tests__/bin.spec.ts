@@ -4,10 +4,10 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+import { TestStore } from '../../__tests__/TestStore.js'
 import type { BinArgs } from '../../index.js'
 import { BinStrategy } from '../../index.js'
 import { binStep } from '../stepFunctions/bin.js'
-import { TestStore } from './TestStore.js'
 
 describe('test for bin verb', () => {
 	let store: TestStore

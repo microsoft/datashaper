@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TestStore } from '../../__tests__/TestStore.js'
 import { rollupStep } from '../stepFunctions/simpleSteps.js'
 import { FieldAggregateOperation } from '../types/index.js'
-import { TestStore } from './TestStore.js'
 
 describe('test for rollup verb', () => {
 	let store: TestStore

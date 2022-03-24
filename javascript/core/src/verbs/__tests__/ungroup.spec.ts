@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TestStore } from '../../__tests__/TestStore.js'
 import { groupbyStep, ungroupStep } from '../stepFunctions/simpleSteps.js'
-import { TestStore } from './TestStore.js'
 
 describe('test for ungroup verb', () => {
 	let store: TestStore

@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { TestStore } from '../../__tests__/TestStore.js'
 import { union } from '../setVerbs.js'
 import { staticValueNode } from '../util/factories/index.js'
 import { NodeInput } from '../util/factories/types.js'
-import { TestStore } from './TestStore.js'
 
 describe('test for union verb', () => {
 	test('union test', () => {

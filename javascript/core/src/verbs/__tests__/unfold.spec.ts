@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TestStore } from '../../__tests__/TestStore.js'
 import { foldStep } from '../stepFunctions/simpleSteps.js'
 import { unfoldStep } from '../stepFunctions/unfold.js'
-import { TestStore } from './TestStore.js'
 
 describe('test for unfold verb', () => {
 	let store: TestStore

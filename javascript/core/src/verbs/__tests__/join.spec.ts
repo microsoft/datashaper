@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TestStore } from '../../__tests__/TestStore.js'
 import { join, JoinInput } from '../join.js'
 import { JoinStrategy } from '../types/index.js'
 import { staticValueNode } from '../util/factories/index.js'
-import { TestStore } from './TestStore.js'
 
 describe('test for join verb', () => {
 	let store: TestStore

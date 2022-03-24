@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TestStore } from '../../__tests__/TestStore.js'
 import { concat } from '../setVerbs.js'
 import { staticValueNode } from '../util/factories/index.js'
 import { NodeInput } from '../util/factories/types.js'
-import { TestStore } from './TestStore.js'
 
 describe('test for concat verb', () => {
 	test('concat test', () => {

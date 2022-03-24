@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TestStore } from '../../__tests__/TestStore.js'
 import { fillStep } from '../stepFunctions/simpleSteps.js'
-import { TestStore } from './TestStore.js'
 
 describe('test for fill verb', () => {
 	let store: TestStore
