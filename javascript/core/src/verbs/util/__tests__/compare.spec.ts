@@ -1,4 +1,4 @@
-import { NumericComparisonOperator } from '../../enums.js'
+import { NumericComparisonOperator } from '../../types/enums.js'
 import { compareValues } from '../compare.js'
 
 // NOTE: most of the comparison operators are tested indirectly
