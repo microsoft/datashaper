@@ -5,8 +5,8 @@
 import { escape } from 'arquero'
 
 import type { TableStep } from '../nodeFactories/index.js'
+import type { DeriveArgs } from '../types/domainTypes.js'
 import { MathOperator } from '../types/enums.js'
-import type { DeriveArgs } from '../types/types.js'
 
 /**
  * Executes an arquero derive.

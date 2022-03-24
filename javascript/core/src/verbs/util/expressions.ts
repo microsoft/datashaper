@@ -7,15 +7,16 @@ import type { Op } from 'arquero/dist/types/op/op'
 
 import type {
 	BooleanComparisonOperator,
+	Criterion,
 	NumericComparisonOperator,
-	StringComparisonOperator} from '../types/index.js';
+	StringComparisonOperator,
+} from '../types/index.js'
 import {
 	BooleanLogicalOperator,
 	FieldAggregateOperation,
 	FilterCompareType,
 	WindowFunction,
 } from '../types/index.js'
-import type { Criterion } from '../types/types.js'
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
 import { bool } from './data-types.js'

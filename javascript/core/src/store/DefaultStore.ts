@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Observable, Subscription } from 'rxjs'
-import { Subject, BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Subject } from 'rxjs'
 
 import type { Handler, HandlerOf, Maybe, Unsubscribe } from '../primitives.js'
 import type { Store } from './types.js'

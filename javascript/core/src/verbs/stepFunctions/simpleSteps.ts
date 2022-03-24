@@ -26,7 +26,7 @@ import type {
 	SpreadArgs,
 	UnrollArgs,
 	WindowArgs,
-} from '../types/types.js'
+} from '../types/domainTypes.js'
 import { deriveBoolean } from '../util/expressions.js'
 import { compareAll, singleExpression } from '../util/index.js'
 import type { ExprFunctionMap } from '../util/types.js'

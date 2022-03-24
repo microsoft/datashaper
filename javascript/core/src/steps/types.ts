@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Verb } from '../verbs/types/index.js'
 import type {
 	AggregateArgs,
 	BinArgs,
@@ -33,8 +32,9 @@ import type {
 	SpreadArgs,
 	UnfoldArgs,
 	UnrollArgs,
+	Verb,
 	WindowArgs,
-} from '../verbs/types/types.js'
+} from '../verbs/types/index.js'
 
 export interface Step<T = unknown> {
 	/**
@@ -61,6 +61,11 @@ export interface Step<T = unknown> {
 	 * The bound inputs
 	 */
 	inputs: Record<string, { node: string; output?: string }>
+
+	/**
+	 * The observed outputs to record.
+	 */
+	pinnedOutputs: Array<{ output?: string; name: string }>
 }
 
 export type AggregateStep = Step<AggregateArgs>

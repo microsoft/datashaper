@@ -19,12 +19,13 @@ import type { TableContainer } from '../tables/types.js'
  */
 export async function run(
 	steps: Step[],
-	_store: Store<TableContainer>,
+	store: Store<TableContainer>,
 ): Promise<TableContainer> {
 	await Promise.resolve()
 	if (steps.length === 0) {
 		throw new Error('no steps in chain')
 	}
+
 	// TODO: serialize to a graph and emit the output table
 	// return chain(
 	// 	{

@@ -4,6 +4,7 @@
  */
 import type { Subscription } from 'rxjs'
 import toposort from 'toposort'
+
 import type { Graph, Node, NodeId } from './types'
 
 export class GraphImpl<T> implements Graph<T> {

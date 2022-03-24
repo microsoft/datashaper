@@ -189,11 +189,14 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Calculate the value of this processing node. This may be invoked even if this
 	 * processing node is not fully configured. recalulate() should account for this
 	 */
-	protected recalculate = async (): Promise<void> => {
+	protected recalculate = (): void => {
 		try {
-			await this.doRecalculate()
-		} catch (error: unknown) {
-			this.emitError(error)
+			const result = this.doRecalculate()
+			if (result?.then) {
+				result.catch(err => this.emitError(err))
+			}
+		} catch (err) {
+			this.emitError(err)
 		}
 	}
 

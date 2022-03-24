@@ -5,6 +5,7 @@
 import { v4 as uuid } from 'uuid'
 
 import { BinStrategy } from '../index.js'
+import type { CopyWithPartial } from '../primitives.js'
 import {
 	BooleanLogicalOperator,
 	FieldAggregateOperation,
@@ -13,6 +14,10 @@ import {
 } from '../verbs/types/index.js'
 import type { Step } from './types.js'
 
+export type StepInput = CopyWithPartial<
+	Step<any>,
+	'args' | 'id' | 'inputs' | 'pinnedOutputs'
+>
 /**
  * Factory function to create new verb configs
  * with as many reasonable defaults as possible.
@@ -20,25 +25,21 @@ import type { Step } from './types.js'
  * to preselect.
  * @param verb -
  */
-export function step(
-	verb: Verb,
-	args: Record<string, unknown> = {},
-	inputs: Step['inputs'] = {},
-): Step {
+export function step({
+	verb,
+	args = {},
+	id = uuid(),
+	inputs = {},
+	pinnedOutputs = [],
+}: StepInput): Step {
 	const base = {
-		id: uuid(),
+		id,
+		args,
 		verb,
 		inputs,
+		pinnedOutputs,
 	}
 	switch (verb) {
-		case Verb.Chain:
-			return {
-				...base,
-				args: {
-					steps: [],
-					...args,
-				},
-			}
 		case Verb.Bin:
 			return {
 				...base,
@@ -149,8 +150,5 @@ export function step(
 		case Verb.Erase:
 		case Verb.Unfold:
 	}
-	return {
-		...base,
-		args: { ...args },
-	}
+	return base
 }

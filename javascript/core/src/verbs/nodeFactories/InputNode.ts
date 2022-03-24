@@ -6,6 +6,7 @@ import type { NodeId } from '../../graph/index.js'
 import { BaseNode } from '../../graph/index.js'
 import { container } from '../../tables/container.js'
 import type { TableContainer } from '../../tables/types.js'
+import { handleMaybeAsync } from '../util/handleMaybeAsync.js'
 import type { InputStep } from './types.js'
 
 export class InputNode<Args> extends BaseNode<TableContainer, Args> {
@@ -13,10 +14,10 @@ export class InputNode<Args> extends BaseNode<TableContainer, Args> {
 		super()
 		this.id = id
 	}
-	protected async doRecalculate(): Promise<void> {
+	protected doRecalculate(): void | Promise<void> {
 		if (this.config != null) {
-			const output = await this._computeFn(this.config)
-			this.emit(container(this.id, output))
+			const output = this._computeFn(this.config)
+			return handleMaybeAsync(output, t => this.emit(container(this.id, t)))
 		} else {
 			this.emit(undefined)
 		}

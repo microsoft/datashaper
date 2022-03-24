@@ -12,3 +12,5 @@ export type Handler = () => void
 export type HandlerOf<T> = (input: T) => void
 
 export type Unsubscribe = Handler
+
+export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>

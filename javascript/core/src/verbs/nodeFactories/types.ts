@@ -14,7 +14,7 @@ export type StepComputeFn<Args> = (
 	args: Args,
 ) => Promise<TableContainer> | TableContainer
 
-export type InputStep<Args> = (args: Args) => Promise<ColumnTable>
+export type InputStep<Args> = (args: Args) => Promise<ColumnTable> | ColumnTable
 export type ColumnTableTransformer<T> = (
 	input: ColumnTable,
 	args: T,
