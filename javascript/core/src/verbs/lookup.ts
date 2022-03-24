@@ -8,11 +8,8 @@ import { BaseNode } from '../graph/BaseNode.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
 import type { LookupArgs } from './types/index.js'
+import { LookupInput } from './types/index.js'
 
-export enum LookupInput {
-	Input = 'Input',
-	Other = 'Other',
-}
 class LookupNode extends BaseNode<TableContainer, LookupArgs> {
 	constructor(id: string) {
 		super([LookupInput.Input, LookupInput.Other])

@@ -19,7 +19,3 @@ export type ColumnTableTransformer<T> = (
 	input: ColumnTable,
 	args: T,
 ) => ColumnTable
-
-export enum NodeInput {
-	Source = 'source',
-}

@@ -8,17 +8,17 @@ import type { NodeId } from '../../graph/index.js'
 import { BaseNode } from '../../graph/index.js'
 import { container } from '../../tables/container.js'
 import type { TableContainer } from '../../tables/types.js'
+import { StepNodeInput } from '../types/index.js'
 import { handleMaybeAsync } from '../util/handleMaybeAsync.js'
 import type { StepComputeFn, TableStep } from './types.js'
-import { NodeInput } from './types.js'
 
 export class StepNode<Args> extends BaseNode<TableContainer, Args> {
 	constructor(id: NodeId, private _computeFn: StepComputeFn<Args>) {
-		super([NodeInput.Source])
+		super([StepNodeInput.Source])
 		this.id = id
 	}
 	protected doRecalculate(): Promise<void> | void {
-		const source = this.inputValue(NodeInput.Source)
+		const source = this.inputValue(StepNodeInput.Source)
 		if (source != null && this.config != null) {
 			const output = this._computeFn(this.id, source, this.config)
 			return handleMaybeAsync(output, v => this.emit(v))

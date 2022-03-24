@@ -8,12 +8,8 @@ import { BaseNode } from '../graph/BaseNode.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
 import type { JoinArgs } from './types/index.js'
-import { JoinStrategy } from './types/index.js'
+import { JoinInput,JoinStrategy  } from './types/index.js'
 
-export enum JoinInput {
-	Left = 'left',
-	Right = 'right',
-}
 class JoinNode extends BaseNode<TableContainer, JoinArgs> {
 	constructor(id: string) {
 		super([JoinInput.Left, JoinInput.Right])

@@ -8,21 +8,21 @@ import type { NodeId } from '../../graph/index.js'
 import { VariadicNodeImpl } from '../../graph/index.js'
 import { container } from '../../tables/container.js'
 import type { TableContainer } from '../../tables/types.js'
+import { StepNodeInput } from '../types/enums.js'
 import type { SetOp } from '../types/index.js'
 import { set } from '../util/sets.js'
-import { NodeInput } from './types.js'
 
 export class SetOperationNode<Args = unknown> extends VariadicNodeImpl<
 	TableContainer,
 	Args
 > {
 	constructor(id: NodeId, private op: SetOp) {
-		super([NodeInput.Source])
+		super([StepNodeInput.Source])
 		this.id = id
 	}
 
 	protected doRecalculate(): void {
-		const source = this.inputValue(NodeInput.Source)
+		const source = this.inputValue(StepNodeInput.Source)
 
 		if (source != null && source.table != null) {
 			const others = this.getVariadicInputValues()

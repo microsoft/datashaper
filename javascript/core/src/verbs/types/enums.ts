@@ -203,3 +203,17 @@ export enum JoinStrategy {
 	RightOuter = 'join_right',
 	FullOuter = 'join_full',
 }
+
+export enum JoinInput {
+	Left = 'left',
+	Right = 'right',
+}
+
+export enum LookupInput {
+	Input = 'input',
+	Other = 'other',
+}
+
+export enum StepNodeInput {
+	Source = 'input',
+}
