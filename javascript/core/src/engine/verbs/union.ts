@@ -3,19 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableStore } from '../../index.js'
-import type { Step, TableContainer } from '../../types.js'
+import type { SetOperationArgs,Step, TableContainer } from '../../types.js'
 import { SetOp } from '../../types.js'
-import { set } from '../util/index.js'
+import { SetOperationNode } from '../factories.js'
+import { setWithStore } from '../util/index.js'
 
-/**
- * Executes an arquero table union.
- * @param step
- * @param store
- * @returns
- */
 export async function union(
-	step: Step,
+	step: Step<SetOperationArgs>,
 	store: TableStore,
 ): Promise<TableContainer> {
-	return set(step, store, SetOp.Union)
+	return setWithStore(step, store, SetOp.Union)
+}
+
+export function unionNode(id: string): SetOperationNode {
+	return new SetOperationNode(id, SetOp.Union)
 }

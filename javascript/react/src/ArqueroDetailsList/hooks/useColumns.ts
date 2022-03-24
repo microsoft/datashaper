@@ -43,14 +43,15 @@ export interface ColumnOptions {
 	isDefaultHeaderClickable?: boolean
 	showColumnBorders?: boolean
 	compact?: boolean
+	isResizable?: boolean
 }
 
 /**
  * Overlays a number of special features onto the IColumn objects for a table.
  * This includes overridden renderers to support our sorting, selection, and data visualization.
- * @param table
- * @param columns
- * @param options
+ * @param table -
+ * @param columns -
+ * @param options -
  * @returns
  */
 export function useColumns(
@@ -73,6 +74,7 @@ export function useColumns(
 		isDefaultHeaderClickable = false,
 		showColumnBorders = false,
 		compact = false,
+		isResizable = true,
 	} = options
 
 	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
@@ -176,6 +178,7 @@ export function useColumns(
 					compact,
 					...column.data,
 				},
+				isResizable,
 			}
 		})
 	}, [
@@ -189,6 +192,7 @@ export function useColumns(
 		handleCellClick,
 		styles,
 		compact,
+		isResizable,
 		computedMetadata,
 		colorScale,
 		handleCellDropdownSelect,

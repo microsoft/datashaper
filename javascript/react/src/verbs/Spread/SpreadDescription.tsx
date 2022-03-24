@@ -15,11 +15,11 @@ export const SpreadDescription: React.FC<StepDescriptionProps> = memo(
 			const { args } = internal
 			return [
 				{
-					before: 'Into column',
+					before: 'column',
 					value: args.column,
 				},
 				{
-					before: `column${(args.to || []).length !== 1 ? 's' : ''}`,
+					before: `as column${(args.to || []).length !== 1 ? 's' : ''}`,
 					value: args.to ? args.to.join(', ') : null,
 				},
 			]

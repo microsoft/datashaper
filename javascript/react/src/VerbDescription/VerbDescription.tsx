@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { isOutputColumnStep } from '@data-wrangling-components/core'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
@@ -9,7 +10,14 @@ import styled from 'styled-components'
 import type { DescriptionRow, VerbDescriptionProps } from '../types.js'
 
 export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
-	function VerbDescription({ step, rows, showInput, showOutput, style }) {
+	function VerbDescription({
+		step,
+		rows,
+		showInput,
+		showOutput,
+		showOutputColumn,
+		style,
+	}) {
 		const rws = useMemo(() => {
 			function loop(rows: DescriptionRow[]) {
 				return rows.map((row, index) => (
@@ -32,6 +40,7 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 			}
 			return loop(rows)
 		}, [rows])
+		const shouldShowOutputColumn = showOutputColumn && isOutputColumnStep(step)
 		return (
 			<Container style={style}>
 				<Verb>{step.verb}</Verb>
@@ -49,6 +58,18 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 						<KeyValue>
 							<Key>into table</Key>
 							{!step.output ? <Unset /> : <Value>{step.output}</Value>}
+						</KeyValue>
+					</Row>
+				) : null}
+				{shouldShowOutputColumn ? (
+					<Row>
+						<KeyValue>
+							<Key>as column</Key>
+							{!(step.args as any).to ? (
+								<Unset />
+							) : (
+								<Value>{(step.args as any).to}</Value>
+							)}
 						</KeyValue>
 					</Row>
 				) : null}

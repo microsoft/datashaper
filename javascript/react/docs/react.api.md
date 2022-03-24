@@ -70,6 +70,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     includeAllColumns?: boolean;
     isColumnClickable?: boolean;
     isHeadersFixed?: boolean;
+    isResizable?: boolean;
     // (undocumented)
     isSortable?: boolean;
     isStriped?: boolean;
@@ -119,8 +120,6 @@ export interface ArqueroTableHeaderProps {
     table: ColumnTable;
     // (undocumented)
     visibleColumns?: string[];
-    // (undocumented)
-    visibleRows?: number;
 }
 
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -142,6 +141,16 @@ export const BinarizeDescription: React.FC<StepDescriptionProps>;
 //
 // @public (undocumented)
 export const BinDescription: React.FC<StepDescriptionProps>;
+
+// Warning: (ae-missing-release-tag) "BooleanLogic" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const BooleanLogic: React.FC<StepComponentProps>;
+
+// Warning: (ae-missing-release-tag) "BooleanLogicDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const BooleanLogicDescription: React.FC<StepDescriptionProps>;
 
 // Warning: (ae-missing-release-tag) "CenteredColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -182,6 +191,8 @@ export interface ColumnOptions {
     isColumnClickable?: boolean;
     // (undocumented)
     isDefaultHeaderClickable?: boolean;
+    // (undocumented)
+    isResizable?: boolean;
     // (undocumented)
     onCellDropdownSelect?: DropdownOptionSelect;
     // (undocumented)
@@ -562,6 +573,7 @@ export const PrepareDataFull: React.FC<{
     onOutputTable?: (table: TableContainer) => void;
     steps?: Step[];
     outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[];
+    stepsPosition?: 'bottom' | 'middle';
 }>;
 
 // Warning: (ae-missing-release-tag) "PreviewTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -722,6 +734,7 @@ export const StepComponent: React.FC<StepComponentProps_2>;
 // @public (undocumented)
 export interface StepComponentProps extends StepDependent {
     input?: string;
+    label?: string;
     // (undocumented)
     onChange?: StepChangeFunction;
     store?: TableStore;
@@ -746,6 +759,8 @@ export interface StepDescriptionProps extends StepDependent {
     showInput?: boolean;
     // (undocumented)
     showOutput?: boolean;
+    // (undocumented)
+    showOutputColumn?: boolean;
     // (undocumented)
     style?: React.CSSProperties;
 }

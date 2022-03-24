@@ -15,10 +15,6 @@ export const RollupDescription: React.FC<StepDescriptionProps> = memo(
 			const { args } = internal
 			return [
 				{
-					before: 'into column',
-					value: args.to,
-				},
-				{
 					before: 'rollup column',
 					value: args.column,
 					sub: [

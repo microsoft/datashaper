@@ -9,6 +9,7 @@ import type { ChainStep, TableContainer } from '../../types.js'
 import { aggregate } from './aggregate.js'
 import { bin } from './bin.js'
 import { binarize } from './binarize.js'
+import { boolean } from './boolean.js'
 import { concat } from './concat.js'
 import { convert } from './convert.js'
 import { dedupe } from './dedupe.js'
@@ -44,6 +45,7 @@ const verbs: Record<string, StepFunction<any>> = {
 	aggregate,
 	bin,
 	binarize,
+	boolean,
 	chain: exec,
 	concat,
 	convert,

@@ -46,7 +46,18 @@
 						"operator": "<",
 						"value": 10000
 					}
-				]
+				],
+				"logical": "or"
+			}
+		},
+		{
+			"verb": "boolean",
+			"input": "data/companies2.csv",
+			"output": "boolean-1",
+			"args": {
+				"columns": ["Name", "US"],
+				"operator": "and",
+				"to": "Name & US"
 			}
 		},
 		{
@@ -130,7 +141,8 @@
 						"operator": "<=",
 						"value": 300000
 					}
-				]
+				],
+				"logical": "or"
 			}
 		},
 		{

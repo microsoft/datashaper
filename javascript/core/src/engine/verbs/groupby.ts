@@ -2,21 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { GroupbyArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { GroupbyStep, TableContainer } from '../../types.js'
+const doGroupby = wrapColumnStep<GroupbyArgs>((input, { columns }) =>
+	input.groupby(columns),
+)
 
-/**
- * Executes an arquero groupby operation.
- * @param step
- * @param store
- * @returns
- */
-export async function groupby(
-	{ input, output, args: { columns } }: GroupbyStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
-	return container(output, inputTable.groupby(columns))
-}
+export const groupby = makeStepFunction(doGroupby)
+export const groupbyNode = makeStepNode(doGroupby)

@@ -26,8 +26,8 @@ export interface RowsOptions {
 
 /**
  * Returns a table's rows as a two-dimensional array.
- * @param table
- * @param options
+ * @param table -
+ * @param options -
  * @returns
  */
 export function rows(table: ColumnTable, options?: RowsOptions): any[][] {

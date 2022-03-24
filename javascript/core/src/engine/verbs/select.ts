@@ -4,25 +4,16 @@
  */
 import { all } from 'arquero'
 
-import { container } from '../../factories.js'
-import type { TableStore } from '../../index.js'
-import type { SelectStep, TableContainer } from '../../types.js'
+import type { SelectArgs } from '../../types.js'
+import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 
-/**
- * Executes an arquero select.
- * @param step
- * @param store
- * @returns
- */
-export async function select(
-	{ input, output, args: { columns = [] } }: SelectStep,
-	store: TableStore,
-): Promise<TableContainer> {
-	const inputTable = await store.table(input)
+const doSelect = wrapColumnStep<SelectArgs>((input, { columns = [] }) => {
 	const expr = [columns] as any
-
 	if (expr.length === 0) {
 		expr.push(all())
 	}
-	return container(output, inputTable.select(...expr))
-}
+	return input.select(...expr)
+})
+
+export const select = makeStepFunction(doSelect)
+export const selectNode = makeStepNode(doSelect)

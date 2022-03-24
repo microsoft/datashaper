@@ -131,6 +131,14 @@ export class TestStore extends DefaultTableStore {
 			boolean: ['true', 'false', 'hi', ''],
 		})
 
+		// matrix of binary combinations for testing boolean logic
+		const table20 = table({
+			A: [1, 1, 1, 0],
+			B: [1, 1, 0, 0],
+			C: [1, 0, 0, 0],
+			D: [1, 0, 0, 0],
+		})
+
 		this.set({ id: 'table1', table: table1 })
 		this.set({ id: 'table2', table: table2 })
 		this.set({ id: 'table3', table: table3 })
@@ -150,5 +158,6 @@ export class TestStore extends DefaultTableStore {
 		this.set({ id: 'table17', table: table17 })
 		this.set({ id: 'table18', table: table18 })
 		this.set({ id: 'table19', table: table19 })
+		this.set({ id: 'table20', table: table20 })
 	}
 }

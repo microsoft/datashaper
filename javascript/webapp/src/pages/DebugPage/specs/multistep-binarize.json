@@ -20,7 +20,8 @@
 						"value": 200000,
 						"type": "value"
 					}
-				]
+				],
+				"logical": "or"
 			}
 		}
 	]

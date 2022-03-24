@@ -4,7 +4,7 @@
  */
 import type { Step } from '../../types.js'
 import { SetOp, Verb } from '../../types.js'
-import { set } from '../util/sets.js'
+import { setWithStore } from '../util/sets.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for set util', () => {
@@ -18,7 +18,7 @@ describe('test for set util', () => {
 
 		const store = new TestStore()
 
-		return set(step, store, SetOp.Concat).then(result => {
+		return setWithStore(step, store, SetOp.Concat).then(result => {
 			// no change to column count
 			expect(result.table.numCols()).toBe(3)
 			// combined rows of 5 + 1
@@ -36,7 +36,7 @@ describe('test for set util', () => {
 
 		const store = new TestStore()
 
-		return set(step, store, SetOp.Union).then(result => {
+		return setWithStore(step, store, SetOp.Union).then(result => {
 			expect(result.table.numCols()).toBe(3)
 			expect(result.table.numRows()).toBe(6)
 			expect(result.table.get('ID', 0)).toBe(1)
@@ -53,7 +53,7 @@ describe('test for set util', () => {
 
 		const store = new TestStore()
 
-		return set(step, store, SetOp.Intersect).then(result => {
+		return setWithStore(step, store, SetOp.Intersect).then(result => {
 			expect(result.table.numCols()).toBe(3)
 			expect(result.table.numRows()).toBe(4)
 			expect(result.table.get('ID', 0)).toBe(1)
@@ -73,7 +73,7 @@ describe('test for set util', () => {
 
 		const store = new TestStore()
 
-		return set(step, store, SetOp.Difference).then(result => {
+		return setWithStore(step, store, SetOp.Difference).then(result => {
 			// no dups in table2, so output should match original
 			expect(result.table.numCols()).toBe(3)
 			expect(result.table.numRows()).toBe(5)

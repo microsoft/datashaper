@@ -40,7 +40,7 @@ const num = (value?: string) => value && +value
 
 /**
  * Make a basic set of string options from an array
- * @param list
+ * @param list -
  * @returns
  */
 export function useSimpleOptions(list: string[]): IDropdownOption[] {
@@ -59,7 +59,7 @@ export function useSimpleOptions(list: string[]): IDropdownOption[] {
  * TODO: for any given step, we should only show the tables created *prior* to this step,
  * potentially via an optional filter callback on store.list.
  * As it is, whenever the store is updated all the table dropdowns get the results.
- * @param store
+ * @param store -
  * @returns
  */
 export function useTableOptions(store?: TableStore): IDropdownOption[] {
@@ -81,7 +81,7 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 
 /**
  * Creates a list of dropdown options for the columns in a table
- * @param table
+ * @param table -
  * @returns
  */
 export function useTableColumnOptions(
@@ -166,10 +166,10 @@ export function useHandleTextfieldChange(
 
 /**
  * Enforces numeric values for a SpinButton onChange.
- * @param step
- * @param path
- * @param onChange
- * @param transformer
+ * @param step -
+ * @param path -
+ * @param onChange -
+ * @param transformer -
  * @returns
  */
 export function useHandleSpinButtonChange(

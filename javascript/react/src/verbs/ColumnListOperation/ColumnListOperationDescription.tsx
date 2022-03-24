@@ -23,8 +23,8 @@ export const ColumnListOperationDescription: React.FC<StepDescriptionProps> =
 			)
 			return [
 				{
-					before: `column${args.columns.length !== 1 ? 's' : ''}`,
-					value: args.columns.length === 0 ? undefined : '',
+					before: `with column${args.columns?.length !== 1 ? 's' : ''}`,
+					value: args.columns?.length === 0 ? undefined : '',
 					sub,
 				},
 			]

@@ -9,6 +9,7 @@ import {
 	AggregateDescription,
 	BinarizeDescription,
 	BinDescription,
+	BooleanLogicDescription,
 	ColumnListOperationDescription,
 	ConvertDescription,
 	DeriveDescription,
@@ -38,6 +39,7 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 	aggregate: AggregateDescription,
 	bin: BinDescription,
 	binarize: BinarizeDescription,
+	boolean: BooleanLogicDescription,
 	concat: SetOperationDescription,
 	convert: ConvertDescription,
 	dedupe: ColumnListOperationDescription,
@@ -73,7 +75,7 @@ const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
 /**
  * Given a Step definition, returns the correct React Description component function.
  * This is essentially a compact read-only description of the step parameters
- * @param step
+ * @param step -
  */
 export function selectStepDescription(
 	step: Step,

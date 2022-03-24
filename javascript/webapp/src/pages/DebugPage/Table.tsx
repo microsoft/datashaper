@@ -136,11 +136,11 @@ function useCommands(
 }
 
 const Container = styled.div`
-	width: 400px;
-	height: 300px;
+	width: 600px;
+	height: 400px;
 	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
 const TableContainer = styled.div`
-	height: 264px;
+	height: 364px;
 `

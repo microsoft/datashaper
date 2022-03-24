@@ -13,7 +13,6 @@ import type { ColumnCellProps, Dimensions } from './types.js'
 
 /**
  * Symbolic rendering of boolean values.
- * TODO: this should probably be a check versus x
  */
 export const BooleanSymbolCell: React.FC<ColumnCellProps> = memo(
 	function BooleanSymbolCell({ item, column }) {
@@ -34,7 +33,6 @@ function useBooleanCircleAttrs(
 ) {
 	const theme = useThematic()
 	return useMemo(() => {
-		// TODO: helpers for extracting steeltoe table value defaults with all these optionals
 		const value = !!getValue(item, column)
 		const { width, height } = dimensions
 		return {
