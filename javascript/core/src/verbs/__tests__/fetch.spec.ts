@@ -4,7 +4,7 @@
  */
 import type { Step } from '../../index.js'
 import { Verb } from '../../index.js'
-import { fetch } from '../fetch.js'
+import { fetch } from '../stepFunctions/fetch.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for fetch', () => {

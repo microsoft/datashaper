@@ -4,7 +4,7 @@
  */
 import type { Step } from '../../types.js'
 import { SortDirection, Verb } from '../../types.js'
-import { orderby } from '../orderby.js'
+import { orderby } from '../stepFunctions/orderby.js'
 import { unorder } from '../unorder.js'
 import { TestStore } from './TestStore.js'
 

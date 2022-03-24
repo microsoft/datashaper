@@ -6,33 +6,35 @@ import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
-import { columnType, MergeStrategy } from '../index.js'
-import type { MergeArgs } from './types.js'
-import type { DataType } from './enums.js'
-import { makeStepNode } from './util/factories.js'
+import { columnType } from '../../index.js'
+import type { DataType} from '../types/enums.js';
+import {MergeStrategy } from '../types/enums.js'
+import type { MergeArgs } from '../types/types.js'
+import type { TableStep } from '../util/factories.js'
 
-export const merge = makeStepNode<MergeArgs>(
-	(input, { columns = [], strategy, to, delimiter = '' }) => {
-		const isSameDataTypeFlag: boolean = isSameDataType(input, columns)
+export const mergeStep: TableStep<MergeArgs> = (
+	input,
+	{ columns = [], strategy, to, delimiter = '' },
+) => {
+	const isSameDataTypeFlag: boolean = isSameDataType(input, columns)
 
-		// eslint-disable-next-line
-		const func: object = escape((d: any) => {
-			switch (strategy) {
-				case MergeStrategy.LastOneWins:
-					return lastOneWinsStrategy(isSameDataTypeFlag, d, columns)
-				case MergeStrategy.Concat:
-					return concatStrategy(d, columns, delimiter)
-				case MergeStrategy.CreateArray:
-					return arrayStrategy(d, columns)
-				case MergeStrategy.FirstOneWins:
-				default:
-					return firstOneWinsStrategy(isSameDataTypeFlag, d, columns)
-			}
-		})
+	// eslint-disable-next-line
+	const func: object = escape((d: any) => {
+		switch (strategy) {
+			case MergeStrategy.LastOneWins:
+				return lastOneWinsStrategy(isSameDataTypeFlag, d, columns)
+			case MergeStrategy.Concat:
+				return concatStrategy(d, columns, delimiter)
+			case MergeStrategy.CreateArray:
+				return arrayStrategy(d, columns)
+			case MergeStrategy.FirstOneWins:
+			default:
+				return firstOneWinsStrategy(isSameDataTypeFlag, d, columns)
+		}
+	})
 
-		return input.derive({ [to]: func })
-	},
-)
+	return input.derive({ [to]: func })
+}
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {
 	let allTypesAreTheSame = true

@@ -8,8 +8,10 @@ import type { NodeId } from '../../graph/index.js'
 import { BaseNode, VariadicNodeImpl } from '../../graph/index.js'
 import { container } from '../../tables/container.js'
 import type { TableContainer } from '../../tables/types.js'
-import type { SetOp } from '../enums.js'
+import type { SetOp } from '../types/index.js'
 import { set } from './sets.js'
+
+export type TableStep<Args> = (input: ColumnTable, args: Args) => ColumnTable
 
 export type StepComputeFn<Args> = (
 	id: string,
@@ -17,7 +19,7 @@ export type StepComputeFn<Args> = (
 	args: Args,
 ) => Promise<TableContainer> | TableContainer
 
-export type InputComputeFn<Args> = (args: Args) => Promise<ColumnTable>
+export type InputStep<Args> = (args: Args) => Promise<ColumnTable>
 export type ColumnTableTransformer<T> = (
 	input: ColumnTable,
 	args: T,
@@ -44,7 +46,7 @@ export class StepNode<Args> extends BaseNode<TableContainer, Args> {
 }
 
 export class InputNode<Args> extends BaseNode<TableContainer, Args> {
-	constructor(id: NodeId, private _computeFn: InputComputeFn<Args>) {
+	constructor(id: NodeId, private _computeFn: InputStep<Args>) {
 		super()
 		this.id = id
 	}
@@ -82,7 +84,7 @@ export class SetOperationNode<Args = unknown> extends VariadicNodeImpl<
 }
 
 export function makeStepNode<Args>(
-	inner: (input: ColumnTable, args: Args) => ColumnTable,
+	inner: TableStep<Args>,
 ): (id: string) => StepNode<Args> {
 	return (id: string) =>
 		new StepNode(
@@ -98,7 +100,7 @@ export function makeStepNode<Args>(
 }
 
 export function makeInputNode<Args>(
-	compute: InputComputeFn<Args>,
+	compute: InputStep<Args>,
 ): (id: string) => InputNode<Args> {
 	return (id: string) => new InputNode(id, compute)
 }

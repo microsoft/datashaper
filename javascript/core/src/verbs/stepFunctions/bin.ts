@@ -6,18 +6,17 @@ import { bin as aqbin, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { BinArgs } from '../index.js'
-import { BinStrategy } from '../index.js'
-import { makeStepNode } from './util/factories.js'
-import { fixedBinCount, fixedBinStep } from './util/index.js'
+import { BinStrategy } from '../types/index.js'
+import type { TableStep } from '../util/factories.js'
+import { fixedBinCount, fixedBinStep } from '../util/index.js'
 
 /**
  * Executes a bin aggregate, which effectively truncates values to a bin boundary for histograms.
  */
-export const bin = makeStepNode<BinArgs>((input, args) =>
+export const binStep: TableStep<BinArgs> = (input, args) =>
 	input.derive({
 		[args.to]: binExpr(input, args),
-	}),
-)
+	})
 
 /**
  * Generate a bin expression that uses either auto or a fixed step

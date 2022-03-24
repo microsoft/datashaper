@@ -5,7 +5,7 @@
 import { MergeStrategy } from '../../index.js'
 import type { Step } from '../../types.js'
 import { Verb } from '../../types.js'
-import { merge } from '../merge.js'
+import { merge } from '../stepFunctions/merge.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for merge verb', () => {

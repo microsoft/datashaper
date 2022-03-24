@@ -5,10 +5,10 @@
 import { from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
-import type { UnfoldArgs } from './types.js'
-import { makeStepNode } from './util/factories.js'
+import type { UnfoldArgs } from '../types/types.js'
+import type { TableStep } from '../util/factories.js'
 
-export const unfold = makeStepNode<UnfoldArgs>((input, { key, value }) => {
+export const unfoldStep: TableStep<UnfoldArgs> = (input, { key, value }) => {
 	const columnNames: string[] = input.columnNames(name => {
 		return name !== key && name !== value
 	})
@@ -46,4 +46,4 @@ export const unfold = makeStepNode<UnfoldArgs>((input, { key, value }) => {
 		finalArray.push(tempObj)
 	}
 	return from(finalArray)
-})
+}

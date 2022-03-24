@@ -4,24 +4,25 @@
  */
 import { escape, op } from 'arquero'
 
-import type { ConvertArgs } from './types.js'
-import { ParseType } from './enums.js'
-import { makeStepNode } from './util/factories.js'
-import { bool } from './util/data-types.js'
+import { ParseType } from '../types/enums.js'
+import type { ConvertArgs } from '../types/types.js'
+import { bool } from '../util/data-types.js'
+import type { TableStep } from '../util/factories.js'
 
 /**
  * Executes an arquero string parse operation.
  */
-export const convert = makeStepNode<ConvertArgs>(
-	(input, { columns, type, radix }) => {
-		// note that this applies the specified parse to every column equally
-		const dArgs = columns.reduce((acc, cur) => {
-			acc[cur] = parseType(cur, type, radix)
-			return acc
-		}, {} as any)
-		return input.derive(dArgs)
-	},
-)
+export const convertStep: TableStep<ConvertArgs> = (
+	input,
+	{ columns, type, radix },
+) => {
+	// note that this applies the specified parse to every column equally
+	const dArgs = columns.reduce((acc, cur) => {
+		acc[cur] = parseType(cur, type, radix)
+		return acc
+	}, {} as any)
+	return input.derive(dArgs)
+}
 
 function parseType(column: string, type: ParseType, radix?: number) {
 	return escape((d: any) => {

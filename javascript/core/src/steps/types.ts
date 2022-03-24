@@ -2,39 +2,39 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Verb } from '../verbs/enums.js'
+import type { Verb } from '../verbs/types/index.js'
 import type {
 	AggregateArgs,
 	BinArgs,
 	BinarizeArgs,
 	BooleanArgs,
 	ConvertArgs,
-	InputColumnListArgs,
 	DedupeArgs,
 	DeriveArgs,
 	EraseArgs,
-	ImputeArgs,
 	FetchArgs,
 	FillArgs,
 	FilterArgs,
 	FoldArgs,
 	GroupbyArgs,
+	ImputeArgs,
+	InputColumnListArgs,
 	JoinArgs,
 	LookupArgs,
 	MergeArgs,
-	PivotArgs,
 	OrderbyArgs,
+	PivotArgs,
 	RecodeArgs,
 	RenameArgs,
 	RollupArgs,
 	SampleArgs,
 	SelectArgs,
+	SetOperationArgs,
 	SpreadArgs,
 	UnfoldArgs,
 	UnrollArgs,
-	SetOperationArgs,
 	WindowArgs,
-} from '../verbs/types.js'
+} from '../verbs/types/types.js'
 
 export interface Step<T = unknown> {
 	/**

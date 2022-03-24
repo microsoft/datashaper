@@ -4,7 +4,7 @@
  */
 import type { Step } from '../../types.js'
 import { ParseType, Verb } from '../../types.js'
-import { convert } from '../convert.js'
+import { convert } from '../stepFunctions/convert.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for convert verb', () => {

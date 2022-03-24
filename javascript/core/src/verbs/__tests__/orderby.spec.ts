@@ -4,7 +4,7 @@
  */
 import type { Step } from '../../types.js'
 import { SortDirection, Verb } from '../../types.js'
-import { orderby } from '../orderby.js'
+import { orderby } from '../stepFunctions/orderby.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for orderby verb', () => {

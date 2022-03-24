@@ -2,21 +2,21 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Value } from '../tables/types.js'
+import type { Value } from '../../tables/types.js'
 import type {
 	BinStrategy,
+	BooleanComparisonOperator,
 	BooleanLogicalOperator,
 	FieldAggregateOperation,
+	FilterCompareType,
 	JoinStrategy,
 	MathOperator,
 	MergeStrategy,
+	NumericComparisonOperator,
 	ParseType,
 	SortDirection,
-	WindowFunction,
-	FilterCompareType,
-	BooleanComparisonOperator,
-	NumericComparisonOperator,
 	StringComparisonOperator,
+	WindowFunction,
 } from './enums.js'
 
 // #region reusable base interfaces to aid consistency

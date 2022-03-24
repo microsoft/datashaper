@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '../../types.js'
-import { FieldAggregateOperation, Verb } from '../../types.js'
-import { aggregate } from '../aggregate.js'
+import { FieldAggregateOperation, Verb } from '../enums.js'
+import { aggregate } from '../stepVerbs.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for aggregate verb', () => {

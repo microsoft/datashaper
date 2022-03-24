@@ -5,7 +5,7 @@
 import type { Step } from '../../types.js'
 import { Verb } from '../../types.js'
 import { fold } from '../fold.js'
-import { unfold } from '../unfold.js'
+import { unfold } from '../stepFunctions/unfold.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for unfold verb', () => {

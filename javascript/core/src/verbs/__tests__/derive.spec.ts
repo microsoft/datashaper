@@ -4,7 +4,7 @@
  */
 import type { Step } from '../../types.js'
 import { MathOperator, Verb } from '../../types.js'
-import { derive } from '../derive.js'
+import { derive } from '../stepFunctions/derive.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for derive verb', () => {
