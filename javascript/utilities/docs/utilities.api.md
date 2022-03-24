@@ -61,6 +61,11 @@ export const createFile: (content: Blob, options?: Omit<FileOptions, "path"> | u
 // @public (undocumented)
 export const createFileWithPath: (content: Blob, options?: FileOptions | undefined) => FileWithPath;
 
+// Warning: (ae-missing-release-tag) "createReader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createReader(): FileReader;
+
 // Warning: (ae-missing-release-tag) "download" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
