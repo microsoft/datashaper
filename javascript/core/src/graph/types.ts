@@ -106,11 +106,17 @@ export interface Graph<T> {
 	readonly outputs: NodeId[]
 
 	/**
+	 * Determines if the graph contains a node by id
+	 * @param id - The node id
+	 */
+	hasNode(id: NodeId): boolean
+
+	/**
 	 * Retrieves a node by id.
 	 * @param id - the node identifier
 	 * @throws - if the id is not found
 	 */
-	node(id: NodeId): Maybe<Node<T>>
+	node(id: NodeId): Node<T>
 
 	/**
 	 * Verify that the graph is a valid dag (no cycles)

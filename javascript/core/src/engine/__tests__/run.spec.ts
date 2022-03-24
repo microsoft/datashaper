@@ -5,7 +5,7 @@
 import { table } from 'arquero'
 
 import { Verb } from '../../index.js'
-import { factory } from '../../steps/factory.js'
+import { step } from '../../steps/step.js'
 import type { Step } from '../../steps/index.js'
 import { createTableStore } from '../../store/index.js'
 import type { Store } from '../../store/types.js'
@@ -23,7 +23,7 @@ describe('run', () => {
 
 	test('runs a single step with normal input/output', async () => {
 		const steps: Step[] = [
-			factory(Verb.Fill, {
+			step(Verb.Fill, {
 				to: 'filled',
 				value: 1,
 			}),

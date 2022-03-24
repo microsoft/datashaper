@@ -4,7 +4,7 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { lookup, LookupInput } from '../lookup.js'
-import { staticValueNode } from '../util/factories/index.js'
+import { observableNode } from '../factories/index.js'
 
 describe('test for lookup verb', () => {
 	let store: TestStore
@@ -13,8 +13,8 @@ describe('test for lookup verb', () => {
 	})
 
 	test('lookup test', () => {
-		const table1 = staticValueNode('input', store.get('table1')!)
-		const table2 = staticValueNode('input', store.get('table5')!)
+		const table1 = observableNode('input', store.observe('table1')!)
+		const table2 = observableNode('input', store.observe('table5')!)
 
 		const node = lookup('output')
 		node.bind({ input: LookupInput.Input, node: table1 })

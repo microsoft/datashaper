@@ -20,7 +20,7 @@ import type { Step } from './types.js'
  * to preselect.
  * @param verb -
  */
-export function factory(
+export function step(
 	verb: Verb,
 	args: Record<string, unknown> = {},
 	inputs: Step['inputs'] = {},

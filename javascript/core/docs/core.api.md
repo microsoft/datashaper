@@ -286,6 +286,8 @@ export class DefaultStore<T> implements Store<T> {
     // (undocumented)
     list(filter?: (id: string) => boolean): string[];
     // (undocumented)
+    observe(id: string): Observable<Maybe<T>>;
+    // (undocumented)
     onChange(listener: Handler): Unsubscribe;
     // (undocumented)
     onItemChange(id: string, listener: HandlerOf<Maybe<T>>): Unsubscribe;
@@ -323,12 +325,6 @@ export interface EraseArgs {
     // (undocumented)
     value: Value;
 }
-
-// Warning: (ae-forgotten-export) The symbol "Step" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "factory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function factory(verb: Verb, args?: Record<string, unknown>, inputs?: Step['inputs']): Step;
 
 // Warning: (ae-missing-release-tag) "FetchArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -436,9 +432,10 @@ export function getters(table: ColumnTable): Record<string, (i: number) => any>;
 // @public (undocumented)
 export interface Graph<T> {
     add(node: Node_2<T>): void;
+    hasNode(id: NodeId): boolean;
     // (undocumented)
     readonly inputs: NodeId[];
-    node(id: NodeId): Maybe<Node_2<T>>;
+    node(id: NodeId): Node_2<T>;
     // (undocumented)
     readonly nodes: NodeId[];
     // (undocumented)
@@ -497,6 +494,7 @@ export interface InputColumnRecordArgs {
 export function introspect(table: ColumnTable, detailed?: boolean,
 columns?: string[]): TableMetadata;
 
+// Warning: (ae-forgotten-export) The symbol "Step" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "isInputColumnStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -530,7 +528,6 @@ export interface JoinArgs extends JoinArgsBase {
 // @public (undocumented)
 export interface JoinArgsBase {
     on?: string[];
-    other: string;
 }
 
 // Warning: (ae-missing-release-tag) "JoinStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -831,20 +828,26 @@ export interface SpreadArgs {
 // @public
 export function stats(table: ColumnTable, columns?: string[]): Record<string, ColumnStats>;
 
+// Warning: (ae-missing-release-tag) "step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function step(verb: Verb, args?: Record<string, unknown>, inputs?: Step['inputs']): Step;
+
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface Store<T> {
+export interface Store<T, K = string> {
     clear(): void;
-    delete(id: string): void;
-    get(id: string): Maybe<T>;
-    list(filter?: (id: string) => boolean): string[];
+    delete(id: K): void;
+    get(id: K): Maybe<T>;
+    list(filter?: (id: K) => boolean): K[];
+    observe(id: K): Observable<Maybe<T>>;
     onChange(listener: Handler): Unsubscribe;
-    onItemChange(id: string, listener: HandlerOf<Maybe<T>>): Unsubscribe;
+    onItemChange(id: K, listener: HandlerOf<Maybe<T>>): Unsubscribe;
     print(): void;
-    set(id: string, value: Observable<Maybe<T>>): void;
+    set(id: K, value: Observable<Maybe<T>>): void;
     toArray(): Maybe<T>[];
-    toMap(): Map<string, Maybe<T>>;
+    toMap(): Map<K, Maybe<T>>;
 }
 
 // Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -927,9 +930,9 @@ export type Value = any;
 export abstract class VariadicNodeImpl<T, Config> extends BaseNode<T, Config> {
     constructor(inputs?: SocketName[], outputs?: SocketName[]);
     // (undocumented)
-    protected getVariadicInputValues(): Maybe<T>[];
+    bindNext(binding: Omit<NodeBinding<T>, 'input'>): SocketName;
     // (undocumented)
-    installNext(binding: Omit<NodeBinding<T>, 'input'>): SocketName;
+    protected getVariadicInputValues(): Maybe<T>[];
     protected nextInput(): SocketName;
     // (undocumented)
     protected verifyInputSocketName(name: SocketName): void;

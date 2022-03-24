@@ -27,7 +27,7 @@ import type {
 	WindowArgs,
 } from '../types/types.js'
 import { deriveBoolean } from '../util/expressions.js'
-import type { TableStep } from '../util/factories/index.js'
+import type { TableStep } from '../factories/index.js'
 import { compareAll, singleExpression } from '../util/index.js'
 import type { ExprFunctionMap } from '../util/types.js'
 

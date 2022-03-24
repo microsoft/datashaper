@@ -5,7 +5,7 @@
 import { TestStore } from '../../__tests__/TestStore.js'
 import { join, JoinInput } from '../join.js'
 import { JoinStrategy } from '../types/index.js'
-import { staticValueNode } from '../util/factories/index.js'
+import { observableNode } from '../factories/index.js'
 
 describe('test for join verb', () => {
 	let store: TestStore
@@ -14,8 +14,8 @@ describe('test for join verb', () => {
 	})
 
 	test('inner (default)', () => {
-		const table1 = staticValueNode('input', store.get('table1')!)
-		const table2 = staticValueNode('input', store.get('table5')!)
+		const table1 = observableNode('input', store.observe('table1')!)
+		const table2 = observableNode('input', store.observe('table5')!)
 
 		const node = join('output')
 		node.bind({ input: JoinInput.Left, node: table1 })
@@ -30,8 +30,8 @@ describe('test for join verb', () => {
 	})
 
 	test('left (outer)', () => {
-		const table1 = staticValueNode('input', store.get('table1')!)
-		const table2 = staticValueNode('input', store.get('table5')!)
+		const table1 = observableNode('input', store.observe('table1')!)
+		const table2 = observableNode('input', store.observe('table5')!)
 
 		const node = join('output')
 		node.bind({ input: JoinInput.Left, node: table1 })
@@ -46,8 +46,8 @@ describe('test for join verb', () => {
 	})
 
 	test('right (outer)', () => {
-		const table1 = staticValueNode('input', store.get('table1')!)
-		const table2 = staticValueNode('input', store.get('table8')!)
+		const table1 = observableNode('input', store.observe('table1')!)
+		const table2 = observableNode('input', store.observe('table8')!)
 
 		const node = join('output')
 		node.bind({ input: JoinInput.Left, node: table1 })
@@ -61,8 +61,8 @@ describe('test for join verb', () => {
 	})
 
 	test('full (outer)', () => {
-		const table1 = staticValueNode('input', store.get('table1')!)
-		const table2 = staticValueNode('input', store.get('table8')!)
+		const table1 = observableNode('input', store.observe('table1')!)
+		const table2 = observableNode('input', store.observe('table8')!)
 
 		const node = join('output')
 		node.bind({ input: JoinInput.Left, node: table1 })

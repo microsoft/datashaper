@@ -4,11 +4,11 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { NodeId } from '../../../graph/index.js'
-import { BaseNode } from '../../../graph/index.js'
-import { container } from '../../../tables/container.js'
-import type { TableContainer } from '../../../tables/types.js'
-import type { StepComputeFn, TableStep } from './types.js';
+import type { NodeId } from '../../graph/index.js'
+import { BaseNode } from '../../graph/index.js'
+import { container } from '../../tables/container.js'
+import type { TableContainer } from '../../tables/types.js'
+import type { StepComputeFn, TableStep } from './types.js'
 import { NodeInput } from './types.js'
 
 export class StepNode<Args> extends BaseNode<TableContainer, Args> {

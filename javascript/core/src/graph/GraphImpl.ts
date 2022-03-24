@@ -4,8 +4,6 @@
  */
 import type { Subscription } from 'rxjs'
 import toposort from 'toposort'
-
-import type { Maybe } from '../primitives.js'
 import type { Graph, Node, NodeId } from './types'
 
 export class GraphImpl<T> implements Graph<T> {
@@ -36,8 +34,16 @@ export class GraphImpl<T> implements Graph<T> {
 		return [...nodeIds.values()]
 	}
 
-	public node(id: NodeId): Maybe<Node<T>> {
-		return this._nodes.get(id)
+	public hasNode(id: NodeId): boolean {
+		return this._nodes.has(id)
+	}
+
+	public node(id: NodeId): Node<T> {
+		const result = this._nodes.get(id)
+		if (!result) {
+			throw new Error(`could not find node with id "${id}"`)
+		}
+		return result
 	}
 
 	public add(node: Node<T>): void {

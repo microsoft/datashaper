@@ -42,8 +42,8 @@ describe('DefaultTableStore', () => {
 			store.set('b', from([{ id: 'b' }]))
 
 			await tick()
-			expect(execs.a).toBe(0)
-			expect(execs.b).toBe(1)
+			expect(execs.a).toBe(1)
+			expect(execs.b).toBe(2)
 		})
 
 		test('listener unlisten callback unregisters handler', async () => {
@@ -59,8 +59,8 @@ describe('DefaultTableStore', () => {
 
 			// listeners can fire async
 			await tick()
-			expect(execs.a).toBe(1)
-			expect(execs.b).toBe(0)
+			expect(execs.a).toBe(2)
+			expect(execs.b).toBe(1)
 		})
 
 		test('change listener fires for all tables', async () => {

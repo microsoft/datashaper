@@ -7,7 +7,7 @@ import { escape, op } from 'arquero'
 import { ParseType } from '../types/enums.js'
 import type { ConvertArgs } from '../types/types.js'
 import { bool } from '../util/data-types.js'
-import type { TableStep } from '../util/factories/index.js'
+import type { TableStep } from '../factories/index.js'
 
 /**
  * Executes an arquero string parse operation.

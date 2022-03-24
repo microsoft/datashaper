@@ -4,12 +4,12 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { NodeId } from '../../../graph/index.js'
-import { VariadicNodeImpl } from '../../../graph/index.js'
-import { container } from '../../../tables/container.js'
-import type { TableContainer } from '../../../tables/types.js'
-import type { SetOp } from '../../types/index.js'
-import { set } from '../sets.js'
+import type { NodeId } from '../../graph/index.js'
+import { VariadicNodeImpl } from '../../graph/index.js'
+import { container } from '../../tables/container.js'
+import type { TableContainer } from '../../tables/types.js'
+import type { SetOp } from '../types/index.js'
+import { set } from '../util/sets.js'
 import { NodeInput } from './types.js'
 
 export class SetOperationNode<Args = unknown> extends VariadicNodeImpl<

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SetOp } from './types/index.js'
-import { SetOperationNode } from './util/factories/index.js'
+import { SetOperationNode } from './factories/index.js'
 
 export function concat(id: string): SetOperationNode {
 	return new SetOperationNode(id, SetOp.Concat)

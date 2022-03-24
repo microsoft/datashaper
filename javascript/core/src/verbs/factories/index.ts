@@ -5,6 +5,6 @@
 
 export * from './InputNode.js'
 export * from './SetOperationNode.js'
-export * from './StaticValueNode.js'
+export * from './ObservableNode.js'
 export * from './StepNode.js'
 export * from './types.js'

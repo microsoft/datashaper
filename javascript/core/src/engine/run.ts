@@ -40,3 +40,7 @@ export async function run(
 	// )
 	return null as any
 }
+
+// steps + store to create graph
+// some inputs injected after graph creation(e.g. read JSON)
+// watch for named outputs

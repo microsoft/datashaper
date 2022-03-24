@@ -4,7 +4,7 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { TableContainer } from '../../../tables/types.js'
+import type { TableContainer } from '../../tables/types.js'
 
 export type TableStep<Args> = (input: ColumnTable, args: Args) => ColumnTable
 

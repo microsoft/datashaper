@@ -9,26 +9,32 @@ import type { Handler, HandlerOf, Maybe, Unsubscribe } from '../primitives.js'
 /**
  * Store for a collection of tables, used as an execution storage context for pipelines.
  */
-export interface Store<T> {
+export interface Store<T, K = string> {
 	/**
 	 * Get a cached value.
 	 * @param id - the item id
 	 * @returns the value if available, otherwise undefined
 	 */
-	get(id: string): Maybe<T>
+	get(id: K): Maybe<T>
+
+	/**
+	 * Observe changes to an item. If not defined, will emit when defined
+	 * @param id - the id of the item to observe changes in
+	 */
+	observe(id: K): Observable<Maybe<T>>
 
 	/**
 	 * Set a value into the store.
 	 * @param id - the item id
 	 * @param value - the item value
 	 */
-	set(id: string, value: Observable<Maybe<T>>): void
+	set(id: K, value: Observable<Maybe<T>>): void
 
 	/**
 	 * Remove the named item
 	 * @param id - The item id
 	 */
-	delete(id: string): void
+	delete(id: K): void
 
 	/**
 	 * Deletes all items from store
@@ -41,7 +47,7 @@ export interface Store<T> {
 	 * @param filter - the name filter predicate
 	 * @returns The list of values known by the store
 	 */
-	list(filter?: (id: string) => boolean): string[]
+	list(filter?: (id: K) => boolean): K[]
 
 	/**
 	 * Add a listener for a particular item.
@@ -50,7 +56,7 @@ export interface Store<T> {
 	 * @param listener - The listener callback
 	 * @returns an unsubscribe hook
 	 */
-	onItemChange(id: string, listener: HandlerOf<Maybe<T>>): Unsubscribe
+	onItemChange(id: K, listener: HandlerOf<Maybe<T>>): Unsubscribe
 
 	/**
 	 * Get alerted for any changes in the store.
@@ -64,7 +70,7 @@ export interface Store<T> {
 	/**
 	 * Resolves all items and converts to a id:item Map
 	 */
-	toMap(): Map<string, Maybe<T>>
+	toMap(): Map<K, Maybe<T>>
 
 	/**
 	 * Resolves all items and convers to an array

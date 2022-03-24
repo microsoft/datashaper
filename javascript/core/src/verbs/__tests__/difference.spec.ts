@@ -4,15 +4,15 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { difference } from '../setVerbs.js'
-import { staticValueNode } from '../util/factories/index.js'
-import { NodeInput } from '../util/factories/types.js'
+import { observableNode } from '../factories/index.js'
+import { NodeInput } from '../factories/types.js'
 
 describe('test for difference verb', () => {
 	test('difference test with no duplicates', () => {
 		const store = new TestStore()
 
-		const table1 = staticValueNode('input', store.get('table1')!)
-		const table2 = staticValueNode('input', store.get('table2')!)
+		const table1 = observableNode('input', store.observe('table1')!)
+		const table2 = observableNode('input', store.observe('table2')!)
 
 		expect(table1.outputValue()).toBeDefined()
 		expect(table2.outputValue()).toBeDefined()

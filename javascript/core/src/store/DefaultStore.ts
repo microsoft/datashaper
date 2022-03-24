@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Observable, Subscription } from 'rxjs'
-import { Subject } from 'rxjs'
+import { Subject, BehaviorSubject } from 'rxjs'
 
 import type { Handler, HandlerOf, Maybe, Unsubscribe } from '../primitives.js'
 import type { Store } from './types.js'
@@ -20,7 +20,7 @@ interface ItemStorage<T> {
  */
 export class DefaultStore<T> implements Store<T> {
 	private _storage: Map<string, ItemStorage<T>> = new Map()
-	private _itemEvents: Map<string, Subject<Maybe<T>>> = new Map()
+	private _itemEvents: Map<string, BehaviorSubject<Maybe<T>>> = new Map()
 	private _changeEvent = new Subject<void>()
 
 	public constructor(private _printItem: (item: T) => void) {}
@@ -32,6 +32,10 @@ export class DefaultStore<T> implements Store<T> {
 		return this._storage.get(id)?.cached
 	}
 
+	public observe(id: string): Observable<Maybe<T>> {
+		return this.eventFor(id)
+	}
+
 	public set(id: string, value: Observable<T>): void {
 		// clear any previous value
 		this.delete(id)
@@ -40,7 +44,7 @@ export class DefaultStore<T> implements Store<T> {
 		const storage: Partial<ItemStorage<T>> = { observable: value }
 		storage.subscription = value.subscribe(v => {
 			storage.cached = v
-			this.emit(id)
+			this.emit(id, v)
 		})
 		this._storage.set(id, storage as ItemStorage<T>)
 	}
@@ -73,17 +77,16 @@ export class DefaultStore<T> implements Store<T> {
 		return () => sub.unsubscribe()
 	}
 
-	private emit(id?: string): void {
+	private emit(id?: string, value?: T): void {
 		if (id) {
-			const listener = this.eventFor(id)
-			listener.next(this._storage.get(id)?.cached)
+			this.eventFor(id).next(value)
 		}
 		this._changeEvent.next()
 	}
 
 	private eventFor(id: string): Subject<Maybe<T>> {
 		if (!this._itemEvents.has(id)) {
-			this._itemEvents.set(id, new Subject())
+			this._itemEvents.set(id, new BehaviorSubject<Maybe<T>>(undefined))
 		}
 		return this._itemEvents.get(id) as Subject<Maybe<T>>
 	}
