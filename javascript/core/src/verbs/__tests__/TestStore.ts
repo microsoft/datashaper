@@ -11,7 +11,7 @@ import { DefaultStore } from '../../store/DefaultStore.js'
  * This is a store implementation pre-loaded with test tables to ease setup.
  */
 export class TestStore extends DefaultStore<TableContainer> {
-	constructor(private _defaultTableName?: string) {
+	constructor(private _defaultTableName: string = 'table1') {
 		super(c => c.table?.print())
 		const table1 = table({
 			ID: [1, 2, 3, 4, 5],
@@ -162,7 +162,7 @@ export class TestStore extends DefaultStore<TableContainer> {
 		this.set('table20', from([{ id: 'table20', table: table20 }]))
 	}
 
-	public table(name: string = this._defaultTableName || 'table1') {
+	public table(name: string = this._defaultTableName) {
 		return this.get(name)!.table!
 	}
 }
