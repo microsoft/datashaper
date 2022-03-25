@@ -7,20 +7,17 @@ import type { Op } from 'arquero/dist/types/op/op'
 
 import type {
 	BooleanComparisonOperator,
-	NumericComparisonOperator,
-	StringComparisonOperator,
-} from '../types.js'
+	Criterion,	NumericComparisonOperator,
+	StringComparisonOperator} from '../types.js'
 import {
 	BooleanOperator,
 	FieldAggregateOperation,
 	FilterCompareType,
-	Criterion,
-} from '../types.js'
+ WindowFunction } from '../types.js'
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
 import { bool } from './data-types.js'
 import type { CompareWrapper } from './types.js'
-import { WindowFunction } from '../window.js'
 
 export function compareAll(
 	column: string,

@@ -2,10 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Value } from '../tables/types.js'
-
 import type { Node } from '../graph/types.js'
-import type { TableContainer } from '../tables/types.js'
+import type { TableContainer,Value  } from '../tables/types.js'
 
 export type NodeFactory = (id: string) => Node<TableContainer>
 
@@ -228,4 +226,19 @@ export enum FieldAggregateOperation {
 export enum NodeInput {
 	Input = 'input',
 	Other = 'other',
+}
+
+/**
+ * These are operations that perform windowed compute.
+ * See https://uwdata.github.io/arquero/api/op#window-functions
+ */
+export enum WindowFunction {
+	RowNumber = 'row_number',
+	Rank = 'rank',
+	PercentRank = 'percent_rank',
+	CumulativeDistribution = 'cume_dist',
+	FirstValue = 'first_value',
+	LastValue = 'last_value',
+	FillDown = 'fill_down',
+	FillUp = 'fill_up',
 }
