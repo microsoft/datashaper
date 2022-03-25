@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableStep } from './nodeFactories/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import { singleExpression } from './util/index.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { stepNodeFactory } from './util/factories.js'
 import type { FieldAggregateOperation } from './types.js'
 
 export interface PivotArgs {
@@ -13,7 +13,7 @@ export interface PivotArgs {
 	operation: FieldAggregateOperation
 }
 
-export const pivotStep: TableStep<PivotArgs> = (
+export const pivotStep: ColumnTableStep<PivotArgs> = (
 	input,
 	{ key, value, operation },
 ) => input.pivot(key, { [value]: singleExpression(value, operation) })

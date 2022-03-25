@@ -5,8 +5,8 @@
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { TableStep } from './nodeFactories/index.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import type { ColumnTableStep } from './util/factories.js'
+import { stepNodeFactory } from './util/factories.js'
 import type { Value } from '../tables/types.js'
 
 export interface EraseArgs {
@@ -14,7 +14,7 @@ export interface EraseArgs {
 	value: Value
 }
 
-export const eraseStep: TableStep<EraseArgs> = (
+export const eraseStep: ColumnTableStep<EraseArgs> = (
 	input: ColumnTable,
 	{ value, column }: EraseArgs,
 ) => {

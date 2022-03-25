@@ -4,8 +4,8 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { orderbyStep } from '../orderby.js'
-import { unorderStep } from '../unorder.js'
 import { SortDirection } from '../types.js'
+import { unorderStep } from '../unorder.js'
 
 describe('test for unorder verb', () => {
 	let store: TestStore

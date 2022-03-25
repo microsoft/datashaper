@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableStep } from './nodeFactories/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { stepNodeFactory } from './util/factories.js'
 
 export type GroupbyArgs = InputColumnListArgs
 
-export const groupbyStep: TableStep<GroupbyArgs> = (input, { columns }) =>
+export const groupbyStep: ColumnTableStep<GroupbyArgs> = (input, { columns }) =>
 	input.groupby(columns)
 
 export const groupby = stepNodeFactory(groupbyStep)

@@ -30,7 +30,7 @@ describe('stepGraph', () => {
 					value: 1,
 				},
 				inputs: {
-					input: { node: 'input' },
+					default: { node: 'input' },
 				},
 				outputs: { default: 'output' },
 			}),
@@ -50,7 +50,7 @@ describe('stepGraph', () => {
 				id: 'output-1',
 				verb: Verb.Fill,
 				inputs: {
-					input: { node: 'input' },
+					default: { node: 'input' },
 				},
 				args: {
 					to: 'filled',
@@ -67,7 +67,7 @@ describe('stepGraph', () => {
 				},
 				// Note: this input is being auto-configured to the output of the previous node
 				// inputs: {
-				// 	input: { node: 'output-1' },
+				// 	default: { node: 'output-1' },
 				// },
 				outputs: { default: 'output-2' },
 			}),

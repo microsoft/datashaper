@@ -31,12 +31,12 @@ export enum JoinStrategy {
 
 class JoinNode extends BaseNode<TableContainer, JoinArgs> {
 	constructor(id: string) {
-		super([NodeInput.Input, NodeInput.Other])
+		super([NodeInput.Other])
 		this.id = id
 	}
 
 	protected doRecalculate(): void | Promise<void> {
-		const left = this.inputValue(NodeInput.Input)
+		const left = this.inputValue()
 		const right = this.inputValue(NodeInput.Other)
 		if (left?.table != null && right?.table != null && this.config != null) {
 			this.emit(

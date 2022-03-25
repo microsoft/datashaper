@@ -5,10 +5,10 @@
 import { bin as aqbin, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { TableStep } from './nodeFactories/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnArgs, OutputColumnArgs } from './types.js'
 import { fixedBinCount, fixedBinStep } from './util/index.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { stepNodeFactory } from './util/factories.js'
 
 export enum BinStrategy {
 	Auto = 'auto',
@@ -47,7 +47,7 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 /**
  * Executes a bin aggregate, which effectively truncates values to a bin boundary for histograms.
  */
-export const binStep: TableStep<BinArgs> = (input, args) =>
+export const binStep: ColumnTableStep<BinArgs> = (input, args) =>
 	input.derive({
 		[args.to]: binExpr(input, args),
 	})

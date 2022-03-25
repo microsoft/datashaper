@@ -3,16 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { GraphImpl } from '../graph/GraphImpl.js'
+import { observableNode } from '../graph/index.js'
 import type { Graph, Node } from '../graph/types.js'
 import type { Step } from '../steps/types.js'
 import type { Store } from '../store/types.js'
 import type { TableContainer } from '../tables/types.js'
 import type { NodeFactory } from '../verbs/index.js'
 import * as verbs from '../verbs/index.js'
-import { observableNode } from '../verbs/nodeFactories/index.js'
-import { NodeInput } from '../verbs/types.js'
 
 const DEFAULT_OUTPUT = 'default'
+const DEFAULT_INPUT = 'default'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -67,7 +67,11 @@ export function graph(
 				: // bind to a named table observable
 				  observableNode(sourceId, store.observe(sourceId))
 
-			current.bind({ input, node, output })
+			current.bind({
+				input: input === DEFAULT_INPUT ? undefined : input,
+				node,
+				output,
+			})
 			prevStepId = step.id
 		}
 	}
@@ -87,5 +91,5 @@ function createNode(step: Step): Node<TableContainer> {
 }
 
 function defaultStepInput(prevId: string | undefined): Step['inputs'] {
-	return prevId != null ? { [NodeInput.Input]: { node: prevId } } : {}
+	return prevId != null ? { default: { node: prevId } } : {}
 }

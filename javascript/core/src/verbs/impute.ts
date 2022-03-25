@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TableStep } from './nodeFactories/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnArgs } from './types.js'
 import type { ExprFunctionMap } from './util/types.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { stepNodeFactory } from './util/factories.js'
 import type { Value } from '../tables/types.js'
 
 export interface ImputeArgs extends InputColumnArgs {
@@ -16,7 +16,10 @@ export interface ImputeArgs extends InputColumnArgs {
 	value: Value
 }
 
-export const imputeStep: TableStep<ImputeArgs> = (input, { value, column }) => {
+export const imputeStep: ColumnTableStep<ImputeArgs> = (
+	input,
+	{ value, column },
+) => {
 	const dArgs: ExprFunctionMap = {
 		[column]: (_d: any, $: any) => $.value,
 	}

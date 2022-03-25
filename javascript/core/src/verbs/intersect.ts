@@ -3,6 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SetOp } from './types.js'
-import { setOperationNodeFactory } from './nodeFactories/index.js'
+import { setOperationNodeFactory } from './util/factories.js'
 
 export const intersect = setOperationNodeFactory(SetOp.Intersect)

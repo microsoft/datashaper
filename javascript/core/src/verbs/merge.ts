@@ -5,10 +5,10 @@
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { stepNodeFactory } from './util/factories.js'
 
 import { columnType } from '../util/index.js'
-import type { TableStep } from './nodeFactories/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import type {
 	InputColumnListArgs,
 	OutputColumnArgs,
@@ -31,7 +31,7 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	delimiter?: string
 }
 
-export const mergeStep: TableStep<MergeArgs> = (
+export const mergeStep: ColumnTableStep<MergeArgs> = (
 	input,
 	{ columns = [], strategy, to, delimiter = '' },
 ) => {

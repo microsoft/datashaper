@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
+import { observableNode } from '../../graph/index.js'
 import { lookup } from '../lookup.js'
-import { observableNode } from '../nodeFactories/index.js'
 import { NodeInput } from '../types.js'
 
 describe('test for lookup verb', () => {
@@ -18,7 +18,7 @@ describe('test for lookup verb', () => {
 		const table2 = observableNode('input', store.observe('table5')!)
 
 		const node = lookup('output')
-		node.bind({ input: NodeInput.Input, node: table1 })
+		node.bind({  node: table1 })
 		node.bind({ input: NodeInput.Other, node: table2 })
 		node.config = { on: ['ID'], columns: ['item'] }
 

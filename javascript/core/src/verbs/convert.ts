@@ -4,11 +4,11 @@
  */
 import { escape, op } from 'arquero'
 
-import type { TableStep } from './nodeFactories/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
 import { ParseType } from './types.js'
 import { bool } from './util/data-types.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { stepNodeFactory } from './util/factories.js'
 
 export interface ConvertArgs extends InputColumnListArgs {
 	type: ParseType
@@ -21,7 +21,7 @@ export interface ConvertArgs extends InputColumnListArgs {
 /**
  * Executes an arquero string parse operation.
  */
-export const convertStep: TableStep<ConvertArgs> = (
+export const convertStep: ColumnTableStep<ConvertArgs> = (
 	input,
 	{ columns, type, radix },
 ) => {

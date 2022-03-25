@@ -4,8 +4,8 @@
  */
 import { desc } from 'arquero'
 
-import type { TableStep } from './nodeFactories/index.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import type { ColumnTableStep } from './util/factories.js'
+import { stepNodeFactory } from './util/factories.js'
 import { SortDirection } from './types.js'
 
 export interface OrderbyArgs {
@@ -20,7 +20,7 @@ export interface OrderbyInstruction {
 	direction?: SortDirection
 }
 
-export const orderbyStep: TableStep<OrderbyArgs> = (input, { orders }) =>
+export const orderbyStep: ColumnTableStep<OrderbyArgs> = (input, { orders }) =>
 	// format keys in arquero-compatible format
 	// https://uwdata.github.io/arquero/api/verbs#orderby
 	input.orderby(...orders.map(orderColumn))

@@ -4,10 +4,10 @@
  */
 import { escape } from 'arquero'
 
-import type { TableStep } from './nodeFactories/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import type { OutputColumnArgs } from './types.js'
 import { MathOperator } from './types.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { stepNodeFactory } from './util/factories.js'
 
 export interface DeriveArgs extends OutputColumnArgs {
 	/**
@@ -26,7 +26,7 @@ export interface DeriveArgs extends OutputColumnArgs {
  * Executes an arquero derive.
  * This basically just supports math operations between two columns.
  */
-export const deriveStep: TableStep<DeriveArgs> = (
+export const deriveStep: ColumnTableStep<DeriveArgs> = (
 	input,
 	{ column1, column2, operator, to },
 ) => {

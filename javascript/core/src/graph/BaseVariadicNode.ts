@@ -12,7 +12,7 @@ function isVariadicInput(name: string): boolean {
 	return name.startsWith(VARIADIC_PREFIX)
 }
 
-export abstract class VariadicNodeImpl<T, Config> extends BaseNode<T, Config> {
+export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
 	private variadicIndex = 0
 
 	public constructor(inputs: SocketName[] = [], outputs: SocketName[] = []) {

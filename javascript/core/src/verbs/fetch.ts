@@ -5,8 +5,10 @@
 
 import { loadCSV, loadJSON } from 'arquero'
 
-import type { InputStep } from './nodeFactories/index.js'
-import { inputNodeFactory } from './nodeFactories/InputNode.js'
+import type { InputStep } from '../graph/index.js'
+import { inputNodeFactory } from '../graph/index.js'
+import type { TableContainer } from '../tables/types.js'
+import { container } from '../tables/container.js'
 
 export interface FetchArgs {
 	/**
@@ -23,22 +25,20 @@ export interface FetchArgs {
 	autoMax?: number
 }
 
-export const fetchStep: InputStep<FetchArgs> = ({
-	url,
-	delimiter,
-	autoMax,
-}) => {
-	if (url.toLowerCase().endsWith('.json')) {
-		return loadJSON(url, {
-			autoType: autoMax === undefined || autoMax <= 0 ? false : true,
-		})
-	} else {
-		return loadCSV(url, {
-			delimiter,
-			autoMax: autoMax !== undefined ? autoMax : 0,
-			autoType: autoMax === undefined || autoMax <= 0 ? false : true,
-		})
-	}
+export const fetchStep: InputStep<TableContainer, FetchArgs> = async (
+	{ url, delimiter, autoMax },
+	id,
+) => {
+	const table = url.toLowerCase().endsWith('.json')
+		? loadJSON(url, {
+				autoType: autoMax === undefined || autoMax <= 0 ? false : true,
+		  })
+		: loadCSV(url, {
+				delimiter,
+				autoMax: autoMax !== undefined ? autoMax : 0,
+				autoType: autoMax === undefined || autoMax <= 0 ? false : true,
+		  })
+	return container(id, await table)
 }
 
 export const fetch = inputNodeFactory(fetchStep)

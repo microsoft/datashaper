@@ -5,15 +5,18 @@
 import { from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
-import type { TableStep } from './nodeFactories/index.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import type { ColumnTableStep } from './util/factories.js'
+import { stepNodeFactory } from './util/factories.js'
 
 export interface UnfoldArgs {
 	key: string
 	value: string
 }
 
-export const unfoldStep: TableStep<UnfoldArgs> = (input, { key, value }) => {
+export const unfoldStep: ColumnTableStep<UnfoldArgs> = (
+	input,
+	{ key, value },
+) => {
 	const columnNames: string[] = input.columnNames(name => {
 		return name !== key && name !== value
 	})

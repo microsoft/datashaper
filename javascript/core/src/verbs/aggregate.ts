@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TableStep } from './nodeFactories/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import type { RollupArgs } from './rollup.js'
 import { singleExpression } from './util/index.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { stepNodeFactory } from './util/factories.js'
 
 export interface AggregateArgs extends RollupArgs {
 	/**
@@ -15,7 +15,7 @@ export interface AggregateArgs extends RollupArgs {
 	groupby: string
 }
 
-export const aggregateStep: TableStep<AggregateArgs> = (
+export const aggregateStep: ColumnTableStep<AggregateArgs> = (
 	input,
 	{ groupby, column, operation, to },
 ) => {

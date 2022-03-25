@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TableStep } from './nodeFactories/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
-import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { stepNodeFactory } from './util/factories.js'
 
 export interface FoldArgs extends InputColumnListArgs {
 	/**
@@ -14,7 +14,7 @@ export interface FoldArgs extends InputColumnListArgs {
 	to?: [string, string]
 }
 
-export const foldStep: TableStep<FoldArgs> = (input, { columns, to }) =>
+export const foldStep: ColumnTableStep<FoldArgs> = (input, { columns, to }) =>
 	input.fold(columns, { as: to })
 
 export const fold = stepNodeFactory(foldStep)

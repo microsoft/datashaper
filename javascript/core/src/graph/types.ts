@@ -49,7 +49,7 @@ export interface Node<T, Config = unknown> {
 	/**
 	 * Retrieves an existing input binding by id
 	 */
-	binding(input: SocketName): Maybe<NodeBinding<T>>
+	binding(input?: SocketName): Maybe<NodeBinding<T>>
 
 	/**
 	 * Gets all input bindings
@@ -90,9 +90,9 @@ export interface NodeBinding<T> {
 	node: Node<T>
 
 	/**
-	 * The named input on the target node
+	 * The named input on the target node (otherwise default)
 	 */
-	input: SocketName
+	input?: SocketName
 
 	/**
 	 * The named output on the source node (otherwise default)

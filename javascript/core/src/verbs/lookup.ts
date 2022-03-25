@@ -15,12 +15,12 @@ export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {}
 
 class LookupNode extends BaseNode<TableContainer, LookupArgs> {
 	constructor(id: string) {
-		super([NodeInput.Input, NodeInput.Other])
+		super([NodeInput.Other])
 		this.id = id
 	}
 
 	protected doRecalculate(): void | Promise<void> {
-		const input = this.inputValue(NodeInput.Input)
+		const input = this.inputValue()
 		const other = this.inputValue(NodeInput.Other)
 		if (input?.table != null && other?.table != null && this.config != null) {
 			this.emit(

@@ -4,8 +4,7 @@
  */
 
 import { TestStore } from '../../__tests__/TestStore.js'
-import { observableNode } from '../nodeFactories/index.js'
-import { NodeInput } from '../types.js'
+import { observableNode } from '../../graph/index.js'
 import { union } from '../union.js'
 
 describe('test for union verb', () => {
@@ -19,7 +18,7 @@ describe('test for union verb', () => {
 		expect(table2.outputValue()).toBeDefined()
 
 		const node = union('output')
-		node.bind({ input: NodeInput.Input, node: table1 })
+		node.bind({ node: table1 })
 		node.bindNext({ node: table2 })
 
 		const result = node.outputValue()
