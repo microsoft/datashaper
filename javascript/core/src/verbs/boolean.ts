@@ -7,7 +7,7 @@ import type { InputColumnListArgs, OutputColumnArgs } from './types.js'
 import type { BooleanOperator } from './types.js'
 
 import { deriveBoolean } from './util/expressions.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export interface BooleanArgs extends InputColumnListArgs, OutputColumnArgs {
 	operator: BooleanOperator
@@ -18,4 +18,4 @@ export const booleanStep: ColumnTableStep<BooleanArgs> = (
 	{ columns = [], operator, to },
 ) => input.derive({ [to]: deriveBoolean(columns, operator) })
 
-export const boolean = stepNodeFactory(booleanStep)
+export const boolean = stepVerbFactory(booleanStep)

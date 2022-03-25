@@ -8,7 +8,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnArgs, OutputColumnArgs } from './types.js'
 import { fixedBinCount, fixedBinStep } from './util/index.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export enum BinStrategy {
 	Auto = 'auto',
@@ -93,4 +93,4 @@ function getStats(
 	]
 }
 
-export const bin = stepNodeFactory(binStep)
+export const bin = stepVerbFactory(binStep)

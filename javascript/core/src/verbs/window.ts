@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ColumnTableStep } from './util/factories.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import type {
 	InputColumnArgs,
 	OutputColumnArgs,
@@ -20,4 +20,4 @@ export const windowStep: ColumnTableStep<WindowArgs> = (
 	{ column, operation, to },
 ) => input.derive({ [to]: singleExpression(column, operation) })
 
-export const window = stepNodeFactory(windowStep)
+export const window = stepVerbFactory(windowStep)

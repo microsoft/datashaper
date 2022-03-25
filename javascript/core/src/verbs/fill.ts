@@ -5,7 +5,7 @@
 
 import type { ColumnTableStep } from './util/factories.js'
 import type { OutputColumnArgs } from './types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import type { Value } from '../tables/types.js'
 
 export interface FillArgs extends OutputColumnArgs {
@@ -20,4 +20,4 @@ export const fillStep: ColumnTableStep<FillArgs> = (input, { value, to }) => {
 	return input.params({ value }).derive({ [to]: fn })
 }
 
-export const fill = stepNodeFactory(fillStep)
+export const fill = stepVerbFactory(fillStep)

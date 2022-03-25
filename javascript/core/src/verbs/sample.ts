@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ColumnTableStep } from './util/factories.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export interface SampleArgs {
 	/**
@@ -28,4 +28,4 @@ export const sampleStep: ColumnTableStep<SampleArgs> = (
 	return input.sample(s)
 }
 
-export const sample = stepNodeFactory(sampleStep)
+export const sample = stepVerbFactory(sampleStep)

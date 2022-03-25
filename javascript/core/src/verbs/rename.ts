@@ -4,11 +4,11 @@
  */
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnRecordArgs } from './types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export type RenameArgs = InputColumnRecordArgs
 
 export const renameStep: ColumnTableStep<RenameArgs> = (input, { columns }) =>
 	input.rename(columns)
 
-export const rename = stepNodeFactory(renameStep)
+export const rename = stepVerbFactory(renameStep)

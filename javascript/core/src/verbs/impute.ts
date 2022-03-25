@@ -6,7 +6,7 @@
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnArgs } from './types.js'
 import type { ExprFunctionMap } from './util/types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import type { Value } from '../tables/types.js'
 
 export interface ImputeArgs extends InputColumnArgs {
@@ -26,4 +26,4 @@ export const imputeStep: ColumnTableStep<ImputeArgs> = (
 	return input.params({ value }).impute(dArgs)
 }
 
-export const impute = stepNodeFactory(imputeStep)
+export const impute = stepVerbFactory(imputeStep)

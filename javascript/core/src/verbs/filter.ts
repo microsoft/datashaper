@@ -5,7 +5,7 @@
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnArgs, BooleanOperator } from './types.js'
 import { compareAll } from './util/index.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import type { Criterion } from './types.js'
 
 export interface FilterArgs extends InputColumnArgs {
@@ -18,4 +18,4 @@ export const filterStep: ColumnTableStep<FilterArgs> = (
 	{ column, criteria, logical },
 ) => input.filter(compareAll(column, criteria, logical))
 
-export const filter = stepNodeFactory(filterStep)
+export const filter = stepVerbFactory(filterStep)

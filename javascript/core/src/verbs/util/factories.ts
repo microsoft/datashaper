@@ -42,7 +42,7 @@ export class SetOperationNode<Args = unknown> extends BaseVariadicNode<
 	}
 }
 
-export function stepNodeFactory<Args>(
+export function stepVerbFactory<Args>(
 	columnTableStep: ColumnTableStep<Args>,
 ): (id: string) => StepNode<TableContainer, Args> {
 	return (id: string) => {

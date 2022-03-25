@@ -4,11 +4,11 @@
  */
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export type GroupbyArgs = InputColumnListArgs
 
 export const groupbyStep: ColumnTableStep<GroupbyArgs> = (input, { columns }) =>
 	input.groupby(columns)
 
-export const groupby = stepNodeFactory(groupbyStep)
+export const groupby = stepVerbFactory(groupbyStep)

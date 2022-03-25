@@ -5,7 +5,7 @@
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 import { columnType } from '../util/index.js'
 import type { ColumnTableStep } from './util/factories.js'
@@ -134,4 +134,4 @@ function concatStrategy(
 	return arrayStrategy(singleRow, columns).join(delimiter)
 }
 
-export const merge = stepNodeFactory(mergeStep)
+export const merge = stepVerbFactory(mergeStep)

@@ -5,7 +5,7 @@
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnArgs, OutputColumnArgs } from './types.js'
 import { singleExpression } from './util/index.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import type { FieldAggregateOperation } from './types.js'
 
 export interface RollupArgs extends InputColumnArgs, OutputColumnArgs {
@@ -20,4 +20,4 @@ export const rollupStep: ColumnTableStep<RollupArgs> = (
 	{ column, operation, to },
 ) => input.rollup({ [to]: singleExpression(column, operation) })
 
-export const rollup = stepNodeFactory(rollupStep)
+export const rollup = stepVerbFactory(rollupStep)

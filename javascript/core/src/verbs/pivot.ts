@@ -4,7 +4,7 @@
  */
 import type { ColumnTableStep } from './util/factories.js'
 import { singleExpression } from './util/index.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import type { FieldAggregateOperation } from './types.js'
 
 export interface PivotArgs {
@@ -18,4 +18,4 @@ export const pivotStep: ColumnTableStep<PivotArgs> = (
 	{ key, value, operation },
 ) => input.pivot(key, { [value]: singleExpression(value, operation) })
 
-export const pivot = stepNodeFactory(pivotStep)
+export const pivot = stepVerbFactory(pivotStep)

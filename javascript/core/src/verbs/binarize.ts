@@ -5,7 +5,7 @@
 
 import type { ColumnTableStep } from './util/factories.js'
 import { compareAll } from './util/index.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import type { OutputColumnArgs } from './types.js'
 import type { FilterArgs } from './filter.js'
 
@@ -16,4 +16,4 @@ export const binarizeStep: ColumnTableStep<BinarizeArgs> = (
 	{ to, column, criteria, logical },
 ) => input.derive({ [to]: compareAll(column, criteria, logical) })
 
-export const binarize = stepNodeFactory(binarizeStep)
+export const binarize = stepVerbFactory(binarizeStep)

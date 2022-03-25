@@ -5,7 +5,7 @@
 import { desc } from 'arquero'
 
 import type { ColumnTableStep } from './util/factories.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import { SortDirection } from './types.js'
 
 export interface OrderbyArgs {
@@ -29,4 +29,4 @@ function orderColumn({ column, direction }: OrderbyInstruction) {
 	return direction === SortDirection.Descending ? desc(column) : column
 }
 
-export const orderby = stepNodeFactory(orderbyStep)
+export const orderby = stepVerbFactory(orderbyStep)

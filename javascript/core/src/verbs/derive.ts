@@ -7,7 +7,7 @@ import { escape } from 'arquero'
 import type { ColumnTableStep } from './util/factories.js'
 import type { OutputColumnArgs } from './types.js'
 import { MathOperator } from './types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export interface DeriveArgs extends OutputColumnArgs {
 	/**
@@ -51,4 +51,4 @@ export const deriveStep: ColumnTableStep<DeriveArgs> = (
 	return input.derive({ [to]: func })
 }
 
-export const derive = stepNodeFactory(deriveStep)
+export const derive = stepVerbFactory(deriveStep)

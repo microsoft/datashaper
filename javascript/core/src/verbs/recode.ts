@@ -6,7 +6,7 @@ import { escape, op } from 'arquero'
 
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnArgs, OutputColumnArgs } from './types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import type { Value } from '../tables/types.js'
 
 export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
@@ -25,4 +25,4 @@ export const recodeStep: ColumnTableStep<RecodeArgs> = (
 		[to]: escape((d: any) => op.recode(d[column], map)),
 	})
 
-export const recode = stepNodeFactory(recodeStep)
+export const recode = stepVerbFactory(recodeStep)

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ColumnTableStep } from './util/factories.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export interface SpreadArgs {
 	column: string
@@ -15,4 +15,4 @@ export const spreadStep: ColumnTableStep<SpreadArgs> = (
 	{ to, column },
 ) => input.spread(column, { as: to })
 
-export const spread = stepNodeFactory(spreadStep)
+export const spread = stepVerbFactory(spreadStep)

@@ -8,7 +8,7 @@ import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
 import { ParseType } from './types.js'
 import { bool } from './util/data-types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export interface ConvertArgs extends InputColumnListArgs {
 	type: ParseType
@@ -50,4 +50,4 @@ function parseType(column: string, type: ParseType, radix?: number) {
 	})
 }
 
-export const convert = stepNodeFactory(convertStep)
+export const convert = stepVerbFactory(convertStep)

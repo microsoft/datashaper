@@ -6,7 +6,7 @@
 import type { ColumnTableStep } from './util/factories.js'
 import type { RollupArgs } from './rollup.js'
 import { singleExpression } from './util/index.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export interface AggregateArgs extends RollupArgs {
 	/**
@@ -22,4 +22,4 @@ export const aggregateStep: ColumnTableStep<AggregateArgs> = (
 	const expr = singleExpression(column, operation)
 	return input.groupby(groupby).rollup({ [to]: expr })
 }
-export const aggregate = stepNodeFactory(aggregateStep)
+export const aggregate = stepVerbFactory(aggregateStep)

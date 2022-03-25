@@ -4,11 +4,11 @@
  */
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export type UnrollArgs = InputColumnListArgs
 
 export const unrollStep: ColumnTableStep<UnrollArgs> = (input, { columns }) =>
 	input.unroll(columns)
 
-export const unroll = stepNodeFactory(unrollStep)
+export const unroll = stepVerbFactory(unrollStep)

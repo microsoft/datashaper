@@ -6,7 +6,7 @@ import { from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
 import type { ColumnTableStep } from './util/factories.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export interface UnfoldArgs {
 	key: string
@@ -56,4 +56,4 @@ export const unfoldStep: ColumnTableStep<UnfoldArgs> = (
 	return from(finalArray)
 }
 
-export const unfold = stepNodeFactory(unfoldStep)
+export const unfold = stepVerbFactory(unfoldStep)

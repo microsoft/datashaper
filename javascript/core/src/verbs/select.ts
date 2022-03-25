@@ -5,7 +5,7 @@
 import { all } from 'arquero'
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export type SelectArgs = InputColumnListArgs
 
@@ -20,4 +20,4 @@ export const selectStep: ColumnTableStep<SelectArgs> = (
 	return input.select(...expr)
 }
 
-export const select = stepNodeFactory(selectStep)
+export const select = stepVerbFactory(selectStep)

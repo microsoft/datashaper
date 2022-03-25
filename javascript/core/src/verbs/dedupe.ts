@@ -5,10 +5,10 @@
 
 import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
-import { stepNodeFactory } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export type DedupeArgs = Partial<InputColumnListArgs>
 
 export const dedupeStep: ColumnTableStep<DedupeArgs> = (input, { columns }) =>
 	columns ? input.dedupe(columns) : input.dedupe()
-export const dedupe = stepNodeFactory(dedupeStep)
+export const dedupe = stepVerbFactory(dedupeStep)
