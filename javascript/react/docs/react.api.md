@@ -18,7 +18,6 @@ import type { GroupBySpec } from 'arquero/dist/types/table/table';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
-import type { ICommandBarStyles } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
 import type { IDetailsColumnStyles } from '@fluentui/react';
@@ -100,6 +99,13 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps>;
 // @public (undocumented)
 export interface ArqueroTableHeaderProps {
     // (undocumented)
+    colors?: {
+        background?: string;
+        foreground?: string;
+    };
+    // (undocumented)
+    commandBar?: JSX.Element | null;
+    // (undocumented)
     commands?: ICommandBarItemProps[];
     // (undocumented)
     farCommands?: ICommandBarItemProps[];
@@ -111,11 +117,6 @@ export interface ArqueroTableHeaderProps {
     showColumnCount?: boolean;
     // (undocumented)
     showRowCount?: boolean;
-    // (undocumented)
-    style?: {
-        bgColor?: string;
-        textColor?: string;
-    };
     // (undocumented)
     table: ColumnTable;
     // (undocumented)
@@ -228,7 +229,7 @@ export interface ColumnTransformModalProps extends TransformModalProps {
 // Warning: (ae-forgotten-export) The symbol "CommandBarProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "CommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export const CommandBar: React.FC<CommandBarProps>;
 
 // Warning: (ae-missing-release-tag) "Convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -917,11 +918,6 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType;
 //
 // @public (undocumented)
 export function useColumnValueOptions(column: string, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
-
-// Warning: (ae-missing-release-tag) "useCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useCommands(commands?: ICommandBarItemProps[], bgColor?: string, color?: string): ICommandBarItemProps[];
 
 // Warning: (ae-missing-release-tag) "useCommonCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

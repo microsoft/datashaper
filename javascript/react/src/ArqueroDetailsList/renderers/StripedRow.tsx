@@ -11,11 +11,13 @@ import type { RichRowProps } from './types.js'
 /**
  * Render a striped DetailsRow
  */
-export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow(
-	props,
-) {
+export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow({
+	striped,
+	columnBorders,
+	styles,
+	...props
+}) {
 	const theme = useThematic()
-	const { striped, columnBorders, styles, ...rest } = props
 	const { itemIndex, compact } = props
 	const customStyles = useMemo(() => {
 		if (striped && itemIndex % 2 === 0) {
@@ -55,5 +57,5 @@ export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow(
 		}
 	}, [theme, striped, columnBorders, styles, itemIndex, compact])
 
-	return <DetailsRow {...rest} styles={customStyles} />
+	return <DetailsRow {...props} styles={customStyles} />
 })

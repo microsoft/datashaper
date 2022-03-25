@@ -3,4 +3,3 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './CommandBar.js'
-export * from './useCommands.js'

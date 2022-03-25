@@ -20,14 +20,15 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		showRowCount = true,
 		showColumnCount = true,
 		commands = [],
+		commandBar,
 		farCommands = [],
 		visibleColumns,
 		onRenameTable,
-		style,
+		colors,
 	}) {
 		const ref = useRef(null)
 		const { width } = useDimensions(ref) || { width: 0 }
-		const { bgColor, textColor } = style || {}
+		const { background, foreground } = colors || {}
 		const groupCount = useMemo((): any => {
 			return table.isGrouped() ? table.groups().size : 0
 		}, [table])
@@ -35,12 +36,13 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		const columnCounts = useColumnCounts(table, visibleColumns)
 		const rowCounts = useRowCounts(table)
 		return (
-			<Header bgColor={bgColor} ref={ref}>
+			<Header bgColor={background} ref={ref}>
+				{commandBar}
 				{commands?.length > 0 ? (
 					<CommandBar
-						commands={commands}
-						bgColor={bgColor}
-						color={textColor}
+						items={commands}
+						bgColor={background}
+						color={foreground}
 						height={`${HEIGHT}px`}
 					/>
 				) : null}
@@ -49,32 +51,32 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 						<TableName
 							onRenameTable={onRenameTable}
 							name={name}
-							color={textColor}
+							color={foreground}
 						/>
 					) : null}
 					{showRowCount === true ? (
-						<H3 color={textColor}>
+						<H3 color={foreground}>
 							{rowCounts.visible} rows{' '}
 							{rowCounts.hidden > 0 ? `(${rowCounts.hidden} filtered)` : ''}
 						</H3>
 					) : null}
 					{showColumnCount === true ? (
-						<H3 color={textColor}>
+						<H3 color={foreground}>
 							{columnCounts.visible} cols{' '}
 							{columnCounts.hidden > 0 ? `(${columnCounts.hidden} hidden)` : ''}
 						</H3>
 					) : null}
-					{groupCount ? <H3 color={textColor}>{groupCount} groups</H3> : null}
+					{groupCount ? <H3 color={foreground}>{groupCount} groups</H3> : null}
 				</Metadata>
 				{farCommands?.length > 0 ? (
 					// Best way to have a command bar in the far right
 					// that handles overflow in case there are too many commands
 					// If the bar is too wide, then only use 10% of it for the commands
 					<CommandBar
-						commands={farCommands}
+						items={farCommands}
 						width={width >= 992 && farCommands.length > 2 ? '10%' : undefined}
-						bgColor={bgColor}
-						color={textColor}
+						bgColor={background}
+						color={foreground}
 						far
 						height={`${HEIGHT}px`}
 					/>

@@ -38,7 +38,7 @@ export const ProjectMgmtCommandBar: React.FC<Props> = memo(
 		return (
 			<Container>
 				<CommandBar
-					commands={commands}
+					items={commands}
 					bgColor={
 						theme.variant === ThemeVariant.Light
 							? theme.application().highContrast().hex()
