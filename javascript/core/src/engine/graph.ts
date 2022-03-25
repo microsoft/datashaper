@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { GraphImpl } from '../graph/GraphImpl.js'
+import { DefaultGraph } from '../graph/index.js'
 import { observableNode } from '../graph/index.js'
 import type { Graph, Node } from '../graph/types.js'
 import type { Step } from '../steps/types.js'
@@ -29,7 +29,7 @@ export function graph(
 	steps: Step[],
 	store: Store<TableContainer>,
 ): Graph<TableContainer> {
-	const graph = new GraphImpl<TableContainer>()
+	const graph = new DefaultGraph<TableContainer>()
 
 	// create all of the nodes and register them into the graph
 	for (const step of steps) {

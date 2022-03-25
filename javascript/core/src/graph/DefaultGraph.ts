@@ -7,7 +7,7 @@ import toposort from 'toposort'
 
 import type { Graph, Node, NodeId } from './types'
 
-export class GraphImpl<T> implements Graph<T> {
+export class DefaultGraph<T> implements Graph<T> {
 	private _nodes: Map<NodeId, Node<T>> = new Map()
 	private _nodeSubscriptions: Map<NodeId, Subscription> = new Map()
 

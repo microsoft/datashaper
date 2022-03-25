@@ -362,6 +362,28 @@ export type DedupeArgs = Partial<InputColumnListArgs>;
 // @public (undocumented)
 export type DedupeStep = Step<DedupeArgs>;
 
+// Warning: (ae-missing-release-tag) "DefaultGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DefaultGraph<T> implements Graph<T> {
+    // (undocumented)
+    add(node: Node_2<T>): void;
+    // (undocumented)
+    hasNode(id: NodeId): boolean;
+    // (undocumented)
+    get inputs(): NodeId[];
+    // (undocumented)
+    node(id: NodeId): Node_2<T>;
+    // (undocumented)
+    get nodes(): NodeId[];
+    // (undocumented)
+    get outputs(): NodeId[];
+    // (undocumented)
+    remove(removeId: NodeId): void;
+    // (undocumented)
+    validate(): void;
+}
+
 // Warning: (ae-missing-release-tag) "DefaultStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

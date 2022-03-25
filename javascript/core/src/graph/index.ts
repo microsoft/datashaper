@@ -4,6 +4,7 @@
  */
 export * from './BaseNode.js'
 export * from './BaseVariadicNode.js'
+export * from './DefaultGraph.js'
 export * from './InputNode.js'
 export * from './ObservableNode.js'
 export * from './StepNode.js'
