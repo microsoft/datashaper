@@ -3,13 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { useDimensions } from '@essex/hooks'
-import { memo, useMemo, useRef } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { CommandBar } from '../CommandBar/CommandBar.js'
 import { HEIGHT } from './constants.js'
-import { useColumnCounts, useRowCounts } from './hooks/index.js'
+import {
+	useColorDefaults,
+	useColumnCounts,
+	useRowCounts,
+} from './hooks/index.js'
 import type { ArqueroTableHeaderProps } from './index.js'
 import { TableName } from './TableName.js'
 
@@ -20,15 +23,13 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		showRowCount = true,
 		showColumnCount = true,
 		commands = [],
-		commandBar,
 		farCommands = [],
 		visibleColumns,
 		onRenameTable,
-		colors,
+		bgColor,
+		color,
 	}) {
-		const ref = useRef(null)
-		const { width } = useDimensions(ref) || { width: 0 }
-		const { background, foreground } = colors || {}
+		const { background, foreground } = useColorDefaults(color, bgColor)
 		const groupCount = useMemo((): any => {
 			return table.isGrouped() ? table.groups().size : 0
 		}, [table])
@@ -36,17 +37,18 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		const columnCounts = useColumnCounts(table, visibleColumns)
 		const rowCounts = useRowCounts(table)
 		return (
-			<Header bgColor={background} ref={ref}>
-				{commandBar}
+			<Header bgColor={background} color={foreground}>
 				{commands?.length > 0 ? (
-					<CommandBar
-						items={commands}
-						bgColor={background}
-						color={foreground}
-						height={`${HEIGHT}px`}
-					/>
+					<Left>
+						<CommandBar
+							items={commands}
+							bgColor={background}
+							color={foreground}
+							height={`${HEIGHT}px`}
+						/>
+					</Left>
 				) : null}
-				<Metadata>
+				<Middle>
 					{name ? (
 						<TableName
 							onRenameTable={onRenameTable}
@@ -55,61 +57,74 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 						/>
 					) : null}
 					{showRowCount === true ? (
-						<H3 color={foreground}>
-							{rowCounts.visible} rows{' '}
-							{rowCounts.hidden > 0 ? `(${rowCounts.hidden} filtered)` : ''}
+						<H3>
+							{`${rowCounts.visible} row${rowCounts.visible !== 1 ? 's' : ''}${
+								rowCounts.hidden > 0 ? ` (${rowCounts.hidden} filtered)` : ''
+							}`}
 						</H3>
 					) : null}
 					{showColumnCount === true ? (
-						<H3 color={foreground}>
-							{columnCounts.visible} cols{' '}
-							{columnCounts.hidden > 0 ? `(${columnCounts.hidden} hidden)` : ''}
+						<H3>
+							{`${columnCounts.visible} col${
+								columnCounts.visible !== 1 ? 's' : ''
+							}${
+								columnCounts.hidden > 0
+									? ` (${columnCounts.hidden} hidden)`
+									: ''
+							}`}
 						</H3>
 					) : null}
-					{groupCount ? <H3 color={foreground}>{groupCount} groups</H3> : null}
-				</Metadata>
+					{groupCount ? <H3>{groupCount} groups</H3> : null}
+				</Middle>
 				{farCommands?.length > 0 ? (
-					// Best way to have a command bar in the far right
-					// that handles overflow in case there are too many commands
-					// If the bar is too wide, then only use 10% of it for the commands
-					<CommandBar
-						items={farCommands}
-						width={width >= 992 && farCommands.length > 2 ? '10%' : undefined}
-						bgColor={background}
-						color={foreground}
-						far
-						height={`${HEIGHT}px`}
-					/>
+					<Right>
+						<CommandBar
+							items={farCommands}
+							bgColor={background}
+							color={foreground}
+							far
+							height={`${HEIGHT}px`}
+						/>
+					</Right>
 				) : null}
 			</Header>
 		)
 	},
 )
 
-const Header = styled.div<{ bgColor?: string }>`
+const Header = styled.div<{ bgColor: string; color: string }>`
 	height: ${HEIGHT}px;
 	width: 100%;
-	background-color: ${({ bgColor, theme }) =>
-		bgColor || theme.application().accent().hex()};
+	background-color: ${({ bgColor }) => bgColor};
+	color: ${({ color }) => color};
 	position: relative;
-	padding: 0 5px;
+	padding: 0 2px;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 `
 
-const H3 = styled.h3<{ color?: string }>`
+const H3 = styled.h3`
 	font-weight: normal;
 	font-size: 0.8em;
-	margin: 0 8px 0 0;
-	color: ${({ color, theme }) =>
-		color || theme.application().background().hex()};
 `
 
-const Metadata = styled.div`
+const Left = styled.div`
+	flex: 1;
 	display: flex;
+	justify-content: flex-start;
+`
+
+const Middle = styled.div`
+	flex: 2;
+	display: flex;
+	justify-content: center;
 	align-items: center;
-	gap: 1rem;
-	padding: 0 1rem;
+	gap: 8px;
+`
+const Right = styled.div`
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
 `

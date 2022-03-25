@@ -99,12 +99,9 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps>;
 // @public (undocumented)
 export interface ArqueroTableHeaderProps {
     // (undocumented)
-    colors?: {
-        background?: string;
-        foreground?: string;
-    };
+    bgColor?: string;
     // (undocumented)
-    commandBar?: JSX.Element | null;
+    color?: string;
     // (undocumented)
     commands?: ICommandBarItemProps[];
     // (undocumented)
@@ -588,11 +585,26 @@ export const PreviewTable: React.FC<{
     onChangeMetadata?: SaveMetadataFunction;
 }>;
 
-// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ProjectMgmtCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const ProjectMgmtCommandBar: React_2.FC<Props>;
+export const ProjectMgmtCommandBar: React_2.FC<ProjectMgmtCommandBarProps>;
+
+// Warning: (ae-missing-release-tag) "ProjectMgmtCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'items'> {
+    // (undocumented)
+    onUpdateSteps?: (steps: Step[]) => void;
+    // (undocumented)
+    onUpdateTables?: (tables: TableContainer[]) => void;
+    // (undocumented)
+    outputTable?: TableContainer;
+    // (undocumented)
+    steps: Step[];
+    // (undocumented)
+    tables: TableContainer[];
+}
 
 // Warning: (ae-missing-release-tag) "Recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

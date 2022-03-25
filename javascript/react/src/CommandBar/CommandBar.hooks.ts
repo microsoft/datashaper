@@ -61,12 +61,13 @@ export function useColorDefaults(
 	const theme = useThematic()
 	return useMemo(
 		() => ({
-			background: bgColor || theme.application().accent().hex(),
-			foreground: color || theme.application().background().hex(),
+			background: bgColor || theme.application().background().hex(),
+			foreground: color || theme.application().foreground().hex(),
 		}),
 		[theme, bgColor, color],
 	)
 }
+
 export function useHandleOnDataReduce(
 	color: string,
 ): (item: ICommandBarItemProps) => void {
@@ -136,7 +137,6 @@ export function useCommandStyles(
 			merge(
 				{
 					root: {
-						float: 'right',
 						height,
 						background: 'none',
 						padding: 0,

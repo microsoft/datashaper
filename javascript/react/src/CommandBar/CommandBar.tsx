@@ -18,7 +18,6 @@ import {
 } from './CommandBar.hooks.js'
 
 interface CommandBarProps extends ICommandBarProps {
-	width?: string
 	height?: string
 	bgColor?: string
 	color?: string
@@ -30,7 +29,6 @@ interface CommandBarProps extends ICommandBarProps {
  */
 export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	items,
-	width,
 	height,
 	bgColor,
 	color,
@@ -47,7 +45,6 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 
 	return (
 		<CommandBarWrapper
-			width={width}
 			height={height}
 			far={far}
 			bgColor={background}
@@ -66,13 +63,12 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 })
 
 const CommandBarWrapper = styled.div<{
-	width?: string
 	height?: string
 	bgColor: string
 	color: string
 	far?: boolean
 }>`
-	width: ${({ width }) => width || '25%'};
+	width: 100%;
 	background-color: ${({ bgColor }) => bgColor};
 	color: ${({ color }) => color || 'inherit'};
 	height: ${({ height }) => height};

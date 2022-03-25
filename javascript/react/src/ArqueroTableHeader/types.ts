@@ -10,13 +10,10 @@ export interface ArqueroTableHeaderProps {
 	name?: string
 	showRowCount?: boolean
 	showColumnCount?: boolean
-	commandBar?: JSX.Element | null
 	commands?: ICommandBarItemProps[]
 	farCommands?: ICommandBarItemProps[]
 	visibleColumns?: string[]
 	onRenameTable?: (name: string) => void
-	colors?: {
-		background?: string
-		foreground?: string
-	}
+	color?: string
+	bgColor?: string
 }
