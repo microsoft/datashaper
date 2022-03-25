@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { renameStep } from '../stepFunctions/simpleSteps.js'
+import { renameStep } from '../rename.js'
 
 describe('test for rename verb', () => {
 	let store: TestStore

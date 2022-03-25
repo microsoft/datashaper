@@ -5,8 +5,23 @@
 
 import { loadCSV, loadJSON } from 'arquero'
 
-import type { InputStep } from '../nodeFactories/index.js'
-import type { FetchArgs } from '../types/index.js'
+import type { InputStep } from './nodeFactories/index.js'
+import { inputNodeFactory } from './nodeFactories/InputNode.js'
+
+export interface FetchArgs {
+	/**
+	 * URL where the csv file is located
+	 */
+	url: string
+	/**
+	 * Optional delimiter for csv
+	 */
+	delimiter?: string
+	/**
+	 * Optional autoMax for tables
+	 */
+	autoMax?: number
+}
 
 export const fetchStep: InputStep<FetchArgs> = ({
 	url,
@@ -25,3 +40,5 @@ export const fetchStep: InputStep<FetchArgs> = ({
 		})
 	}
 }
+
+export const fetch = inputNodeFactory(fetchStep)

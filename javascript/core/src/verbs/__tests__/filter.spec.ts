@@ -4,8 +4,8 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
-import { filterStep } from '../stepFunctions/simpleSteps.js'
-import { StringComparisonOperator } from '../types/enums.js'
+import { filterStep } from '../filter.js'
+import { StringComparisonOperator } from '../types.js'
 
 describe('test for filter verb', () => {
 	let store: TestStore

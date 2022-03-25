@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { aggregateStep } from '../stepFunctions/index.js'
-import { FieldAggregateOperation } from '../types/enums.js'
+import { aggregateStep } from '../aggregate.js'
+import { FieldAggregateOperation } from '../types.js'
 
 describe('test for aggregate verb', () => {
 	let store: TestStore

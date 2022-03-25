@@ -4,9 +4,21 @@
  */
 import { desc } from 'arquero'
 
-import type { TableStep } from '../nodeFactories/index.js'
-import type { OrderbyArgs, OrderbyInstruction } from '../types/domainTypes.js'
-import { SortDirection } from '../types/index.js'
+import type { TableStep } from './nodeFactories/index.js'
+import { stepNodeFactory } from './nodeFactories/StepNode.js'
+import { SortDirection } from './types.js'
+
+export interface OrderbyArgs {
+	/**
+	 * List of ordering instructions to apply
+	 */
+	orders: OrderbyInstruction[]
+}
+
+export interface OrderbyInstruction {
+	column: string
+	direction?: SortDirection
+}
 
 export const orderbyStep: TableStep<OrderbyArgs> = (input, { orders }) =>
 	// format keys in arquero-compatible format
@@ -16,3 +28,5 @@ export const orderbyStep: TableStep<OrderbyArgs> = (input, { orders }) =>
 function orderColumn({ column, direction }: OrderbyInstruction) {
 	return direction === SortDirection.Descending ? desc(column) : column
 }
+
+export const orderby = stepNodeFactory(orderbyStep)

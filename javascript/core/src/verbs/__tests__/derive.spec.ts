@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { deriveStep } from '../stepFunctions/derive.js'
-import { MathOperator } from '../types/enums.js'
+import { deriveStep } from '../derive.js'
+import { MathOperator } from '../types.js'
 
 describe('test for derive verb', () => {
 	let store: TestStore

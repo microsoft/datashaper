@@ -28,13 +28,12 @@ import type {
 	RollupArgs,
 	SampleArgs,
 	SelectArgs,
-	SetOperationArgs,
 	SpreadArgs,
 	UnfoldArgs,
 	UnrollArgs,
 	Verb,
 	WindowArgs,
-} from '../verbs/types/index.js'
+} from '../verbs/index.js'
 
 export interface Step<T = unknown> {
 	/**
@@ -96,5 +95,4 @@ export type SelectStep = Step<SelectArgs>
 export type SpreadStep = Step<SpreadArgs>
 export type UnfoldStep = Step<UnfoldArgs>
 export type UnrollStep = Step<UnrollArgs>
-export type SetOperationStep = Step<SetOperationArgs>
 export type WindowStep = Step<WindowArgs>

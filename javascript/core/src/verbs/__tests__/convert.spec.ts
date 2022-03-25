@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { convertStep } from '../stepFunctions/convert.js'
-import { ParseType } from '../types/enums.js'
+import { convertStep } from '../convert.js'
+import { ParseType } from '../types.js'
 
 describe('test for convert verb', () => {
 	let store: TestStore

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { spreadStep } from '../stepFunctions/simpleSteps.js'
+import { spreadStep } from '../spread.js'
 
 describe('test for spread verb', () => {
 	let store: TestStore

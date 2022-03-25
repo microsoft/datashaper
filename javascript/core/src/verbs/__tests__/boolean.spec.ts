@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { booleanStep } from '../stepFunctions/index.js'
-import { BooleanLogicalOperator } from '../types/enums.js'
+import { booleanStep } from '../boolean.js'
+import { BooleanOperator } from '../types.js'
 
 describe('test for boolean verb', () => {
 	const args = {
@@ -19,7 +19,7 @@ describe('test for boolean verb', () => {
 	test('OR', () => {
 		const result = booleanStep(store.table(), {
 			...args,
-			operator: BooleanLogicalOperator.OR,
+			operator: BooleanOperator.OR,
 		})
 
 		expect(result.numCols()).toBe(5)
@@ -33,7 +33,7 @@ describe('test for boolean verb', () => {
 	test('AND', () => {
 		const result = booleanStep(store.table(), {
 			...args,
-			operator: BooleanLogicalOperator.AND,
+			operator: BooleanOperator.AND,
 		})
 
 		expect(result.numCols()).toBe(5)
@@ -47,7 +47,7 @@ describe('test for boolean verb', () => {
 	test('XOR', () => {
 		const result = booleanStep(store.table(), {
 			...args,
-			operator: BooleanLogicalOperator.XOR,
+			operator: BooleanOperator.XOR,
 		})
 
 		expect(result.numCols()).toBe(5)
@@ -61,7 +61,7 @@ describe('test for boolean verb', () => {
 	test('NOR', () => {
 		const result = booleanStep(store.table(), {
 			...args,
-			operator: BooleanLogicalOperator.NOR,
+			operator: BooleanOperator.NOR,
 		})
 
 		expect(result.numCols()).toBe(5)
@@ -75,7 +75,7 @@ describe('test for boolean verb', () => {
 	test('NAND', () => {
 		const result = booleanStep(store.table(), {
 			...args,
-			operator: BooleanLogicalOperator.NAND,
+			operator: BooleanOperator.NAND,
 		})
 
 		expect(result.numCols()).toBe(5)

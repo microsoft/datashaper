@@ -4,8 +4,8 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { observableNode } from '../nodeFactories/index.js'
-import { NodeInput } from '../nodeFactories/types.js'
-import { intersect } from '../setVerbs.js'
+import { NodeInput } from '../types.js'
+import { intersect } from '../intersect.js'
 
 describe('test for intersect verb', () => {
 	test('intersect test with no duplicates', () => {
@@ -18,7 +18,7 @@ describe('test for intersect verb', () => {
 		expect(table2.outputValue()).toBeDefined()
 
 		const node = intersect('output')
-		node.bind({ input: NodeInput.Source, node: table1 })
+		node.bind({ input: NodeInput.Input, node: table1 })
 		node.bindNext({ node: table2 })
 
 		const result = node.outputValue()

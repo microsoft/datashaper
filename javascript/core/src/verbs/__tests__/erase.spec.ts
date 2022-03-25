@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { eraseStep } from '../stepFunctions/simpleSteps.js'
+import { eraseStep } from '../erase.js'
 
 describe('test for erase verb', () => {
 	let store: TestStore

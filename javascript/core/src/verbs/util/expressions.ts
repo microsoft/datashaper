@@ -7,25 +7,25 @@ import type { Op } from 'arquero/dist/types/op/op'
 
 import type {
 	BooleanComparisonOperator,
-	Criterion,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../types/index.js'
+} from '../types.js'
 import {
-	BooleanLogicalOperator,
+	BooleanOperator,
 	FieldAggregateOperation,
 	FilterCompareType,
-	WindowFunction,
-} from '../types/index.js'
+	Criterion,
+} from '../types.js'
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
 import { bool } from './data-types.js'
 import type { CompareWrapper } from './types.js'
+import { WindowFunction } from '../window.js'
 
 export function compareAll(
 	column: string,
 	criteria: Criterion[],
-	logical = BooleanLogicalOperator.OR,
+	logical = BooleanOperator.OR,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
 		const left = d[column]!
@@ -82,7 +82,7 @@ export function compare(
  */
 export function deriveBoolean(
 	columns: string[],
-	operator: BooleanLogicalOperator,
+	operator: BooleanOperator,
 ): CompareWrapper {
 	return escape((d: Record<string, string | number>): 0 | 1 => {
 		// gather all of the column values, coerce to booleans

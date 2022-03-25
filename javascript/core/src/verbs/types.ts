@@ -2,6 +2,67 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Value } from '../tables/types.js'
+
+import type { Node } from '../graph/types.js'
+import type { TableContainer } from '../tables/types.js'
+
+export type NodeFactory = (id: string) => Node<TableContainer>
+
+//
+// region reusable base interfaces to aid consistency
+//
+
+export interface InputColumnArgs {
+	/**
+	 * Name of the input column for columnnar operations.
+	 */
+	column: string
+}
+
+/**
+ * Base interface for a number of operations that work on a column list.
+ */
+export interface InputColumnListArgs {
+	columns: string[]
+}
+
+export interface InputColumnRecordArgs {
+	/**
+	 * Map of old column to new column names
+	 */
+	columns: Record<string, string>
+}
+
+export interface OutputColumnArgs {
+	/**
+	 * Name of the output column to receive the operation's result.
+	 */
+	to: string
+}
+
+export interface Criterion {
+	/**
+	 * Comparison value for the column
+	 */
+	value: Value
+	/**
+	 * Indicates whether the filter should be directly against a value,
+	 * or against the value of another column
+	 */
+	type: FilterCompareType
+	// TODO: we should support Date comparisons
+	operator:
+		| NumericComparisonOperator
+		| StringComparisonOperator
+		| BooleanComparisonOperator
+}
+
+export enum SortDirection {
+	Ascending = 'asc',
+	Descending = 'desc',
+}
+
 export enum Verb {
 	Aggregate = 'aggregate',
 	Bin = 'bin',
@@ -37,13 +98,6 @@ export enum Verb {
 	Unorder = 'unorder',
 	Unroll = 'unroll',
 	Window = 'window',
-}
-
-export enum MergeStrategy {
-	FirstOneWins = 'first one wins',
-	LastOneWins = 'last one wins',
-	Concat = 'concat',
-	CreateArray = 'array',
 }
 
 /**
@@ -111,7 +165,7 @@ export enum BooleanComparisonOperator {
 	IsNotEmpty = 'is not empty',
 }
 
-export enum BooleanLogicalOperator {
+export enum BooleanOperator {
 	/**
 	 * Any match sets the result to true
 	 */
@@ -139,11 +193,6 @@ export enum SetOp {
 	Union = 'union',
 	Intersect = 'intersect',
 	Difference = 'difference',
-}
-
-export enum SortDirection {
-	Ascending = 'asc',
-	Descending = 'desc',
 }
 
 export enum FilterCompareType {
@@ -174,34 +223,6 @@ export enum FieldAggregateOperation {
 	Variance = 'variance',
 	CreateArray = 'array_agg',
 	CreateArrayDistinct = 'array_agg_distinct',
-}
-
-/**
- * These are operations that perform windowed compute.
- * See https://uwdata.github.io/arquero/api/op#window-functions
- */
-export enum WindowFunction {
-	RowNumber = 'row_number',
-	Rank = 'rank',
-	PercentRank = 'percent_rank',
-	CumulativeDistribution = 'cume_dist',
-	FirstValue = 'first_value',
-	LastValue = 'last_value',
-	FillDown = 'fill_down',
-	FillUp = 'fill_up',
-}
-
-export enum BinStrategy {
-	Auto = 'auto',
-	FixedCount = 'fixed count',
-	FixedWidth = 'fixed width',
-}
-
-export enum JoinStrategy {
-	Inner = 'inner',
-	LeftOuter = 'join_left',
-	RightOuter = 'join_right',
-	FullOuter = 'join_full',
 }
 
 export enum NodeInput {

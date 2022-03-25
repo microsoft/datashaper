@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { orderbyStep } from '../stepFunctions/index.js'
-import { SortDirection } from '../types/index.js'
+import { orderbyStep } from '../orderby.js'
+import { SortDirection } from '../types.js'
 
 describe('test for orderby verb', () => {
 	let store: TestStore

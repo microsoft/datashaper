@@ -24,7 +24,7 @@ export class InputNode<Args> extends BaseNode<TableContainer, Args> {
 	}
 }
 
-export function makeInputNode<Args>(
+export function inputNodeFactory<Args>(
 	compute: InputStep<Args>,
 ): (id: string) => InputNode<Args> {
 	return (id: string) => new InputNode(id, compute)

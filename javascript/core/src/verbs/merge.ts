@@ -5,12 +5,31 @@
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
+import { stepNodeFactory } from './nodeFactories/StepNode.js'
 
-import { columnType } from '../../util/index.js'
-import type { TableStep } from '../nodeFactories/index.js'
-import type { MergeArgs } from '../types/domainTypes.js'
-import type { DataType } from '../types/enums.js'
-import { MergeStrategy } from '../types/enums.js'
+import { columnType } from '../util/index.js'
+import type { TableStep } from './nodeFactories/index.js'
+import type {
+	InputColumnListArgs,
+	OutputColumnArgs,
+	DataType,
+} from './types.js'
+
+export enum MergeStrategy {
+	FirstOneWins = 'first one wins',
+	LastOneWins = 'last one wins',
+	Concat = 'concat',
+	CreateArray = 'array',
+}
+
+export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
+	strategy: MergeStrategy
+	/**
+	 * This is only necessary if mergeStrategy.Concat is used.
+	 * If it is not supplied, the values are just mashed together.
+	 */
+	delimiter?: string
+}
 
 export const mergeStep: TableStep<MergeArgs> = (
 	input,
@@ -114,3 +133,5 @@ function concatStrategy(
 ) {
 	return arrayStrategy(singleRow, columns).join(delimiter)
 }
+
+export const merge = stepNodeFactory(mergeStep)

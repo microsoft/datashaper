@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { unrollStep } from '../stepFunctions/simpleSteps.js'
+import { unrollStep } from '../unroll.js'
 
 describe('test for unroll verb', () => {
 	let store: TestStore

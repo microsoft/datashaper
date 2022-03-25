@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { MergeStrategy } from '../../index.js'
-import { mergeStep } from '../stepFunctions/merge.js'
+import { mergeStep, MergeStrategy } from '../merge.js'
 
 describe('test for merge verb', () => {
 	let store: TestStore

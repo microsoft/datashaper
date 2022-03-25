@@ -4,10 +4,19 @@
  */
 import { escape, op } from 'arquero'
 
-import type { TableStep } from '../nodeFactories/index.js'
-import type { ConvertArgs } from '../types/domainTypes.js'
-import { ParseType } from '../types/enums.js'
-import { bool } from '../util/data-types.js'
+import type { TableStep } from './nodeFactories/index.js'
+import type { InputColumnListArgs } from './types.js'
+import { ParseType } from './types.js'
+import { bool } from './util/data-types.js'
+import { stepNodeFactory } from './nodeFactories/StepNode.js'
+
+export interface ConvertArgs extends InputColumnListArgs {
+	type: ParseType
+	/**
+	 * Optional radix to use for parsing strings into ints
+	 */
+	radix?: number
+}
 
 /**
  * Executes an arquero string parse operation.
@@ -40,3 +49,5 @@ function parseType(column: string, type: ParseType, radix?: number) {
 		}
 	})
 }
+
+export const convert = stepNodeFactory(convertStep)

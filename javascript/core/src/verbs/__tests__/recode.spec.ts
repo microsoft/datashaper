@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { recodeStep } from '../stepFunctions/simpleSteps.js'
+import { recodeStep } from '../recode.js'
 
 describe('test for recode verb', () => {
 	let store: TestStore

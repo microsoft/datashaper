@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { fetchStep } from '../stepFunctions/index.js'
+import { fetchStep } from '../fetch.js'
 
 describe('test for fetch', () => {
 	test('fetch simple csv file and automax value set', async () => {

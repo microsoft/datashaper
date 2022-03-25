@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { selectStep } from '../stepFunctions/simpleSteps.js'
+import { selectStep } from '../select.js'
 
 describe('test for select verb', () => {
 	let store: TestStore

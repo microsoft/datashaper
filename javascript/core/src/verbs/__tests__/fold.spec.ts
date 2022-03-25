@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { foldStep } from '../stepFunctions/simpleSteps.js'
+import { foldStep } from '../fold.js'
 
 describe('test for fold verb', () => {
 	let store: TestStore

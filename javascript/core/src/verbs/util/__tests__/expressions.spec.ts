@@ -4,11 +4,11 @@
  */
 import {
 	BooleanComparisonOperator,
-	BooleanLogicalOperator,
+	BooleanOperator,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../../types/enums.js'
+} from '../../types.js'
 import { compare, compareAll } from '../expressions.js'
 
 describe('expressions', () => {
@@ -1009,7 +1009,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.AND,
+				BooleanOperator.AND,
 			)
 
 			expect(
@@ -1034,7 +1034,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.AND,
+				BooleanOperator.AND,
 			)
 
 			expect(
@@ -1059,7 +1059,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.AND,
+				BooleanOperator.AND,
 			)
 
 			expect(
@@ -1085,7 +1085,7 @@ describe('compareAll', () => {
 						...base,
 					},
 				],
-				BooleanLogicalOperator.XOR,
+				BooleanOperator.XOR,
 			)
 
 			expect(
@@ -1108,7 +1108,7 @@ describe('compareAll', () => {
 						...base,
 					},
 				],
-				BooleanLogicalOperator.XOR,
+				BooleanOperator.XOR,
 			)
 
 			expect(
@@ -1135,7 +1135,7 @@ describe('compareAll', () => {
 						...base,
 					},
 				],
-				BooleanLogicalOperator.XOR,
+				BooleanOperator.XOR,
 			)
 
 			expect(
@@ -1162,7 +1162,7 @@ describe('compareAll', () => {
 						...base,
 					},
 				],
-				BooleanLogicalOperator.XOR,
+				BooleanOperator.XOR,
 			)
 
 			expect(
@@ -1184,7 +1184,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NOR,
+				BooleanOperator.NOR,
 			)
 
 			expect(
@@ -1209,7 +1209,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NOR,
+				BooleanOperator.NOR,
 			)
 
 			expect(
@@ -1234,7 +1234,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NOR,
+				BooleanOperator.NOR,
 			)
 
 			expect(
@@ -1264,7 +1264,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NOR,
+				BooleanOperator.NOR,
 			)
 
 			expect(
@@ -1294,7 +1294,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NOR,
+				BooleanOperator.NOR,
 			)
 
 			expect(
@@ -1316,7 +1316,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NAND,
+				BooleanOperator.NAND,
 			)
 
 			expect(
@@ -1341,7 +1341,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NAND,
+				BooleanOperator.NAND,
 			)
 
 			expect(
@@ -1366,7 +1366,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NAND,
+				BooleanOperator.NAND,
 			)
 
 			expect(
@@ -1396,7 +1396,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NAND,
+				BooleanOperator.NAND,
 			)
 
 			expect(
@@ -1426,7 +1426,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NAND,
+				BooleanOperator.NAND,
 			)
 
 			expect(
@@ -1456,7 +1456,7 @@ describe('compareAll', () => {
 						operator: BooleanComparisonOperator.Equals,
 					},
 				],
-				BooleanLogicalOperator.NAND,
+				BooleanOperator.NAND,
 			)
 
 			expect(

@@ -4,9 +4,23 @@
  */
 import { escape } from 'arquero'
 
-import type { TableStep } from '../nodeFactories/index.js'
-import type { DeriveArgs } from '../types/domainTypes.js'
-import { MathOperator } from '../types/enums.js'
+import type { TableStep } from './nodeFactories/index.js'
+import type { OutputColumnArgs } from './types.js'
+import { MathOperator } from './types.js'
+import { stepNodeFactory } from './nodeFactories/StepNode.js'
+
+export interface DeriveArgs extends OutputColumnArgs {
+	/**
+	 * Column on the left side of the operation
+	 */
+	column1: string
+	/**
+	 * Column on the right side of the operation
+	 */
+	column2: string
+
+	operator: MathOperator
+}
 
 /**
  * Executes an arquero derive.
@@ -36,3 +50,5 @@ export const deriveStep: TableStep<DeriveArgs> = (
 
 	return input.derive({ [to]: func })
 }
+
+export const derive = stepNodeFactory(deriveStep)

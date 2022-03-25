@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { dedupeStep } from '../stepFunctions/index.js'
+import { dedupeStep } from '../dedupe.js'
 
 describe('test for dedupe verb', () => {
 	let store: TestStore

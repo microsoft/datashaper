@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { fillStep } from '../stepFunctions/simpleSteps.js'
+import { fillStep } from '../fill.js'
 
 describe('test for fill verb', () => {
 	let store: TestStore

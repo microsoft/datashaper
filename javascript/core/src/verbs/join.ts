@@ -7,8 +7,27 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { BaseNode } from '../graph/BaseNode.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
-import type { JoinArgs } from './types/index.js'
-import { JoinStrategy,NodeInput } from './types/index.js'
+import { NodeInput } from './types.js'
+
+export interface JoinArgsBase {
+	/**
+	 * Column names to join with.
+	 * If only one is specified, it will use for both tables.
+	 * If none are specified, all matching column names will be used.
+	 */
+	on?: string[]
+}
+
+export interface JoinArgs extends JoinArgsBase {
+	strategy?: JoinStrategy
+}
+
+export enum JoinStrategy {
+	Inner = 'inner',
+	LeftOuter = 'join_left',
+	RightOuter = 'join_right',
+	FullOuter = 'join_full',
+}
 
 class JoinNode extends BaseNode<TableContainer, JoinArgs> {
 	constructor(id: string) {

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { groupbyStep } from '../stepFunctions/simpleSteps.js'
+import { groupbyStep } from '../groupby.js'
 
 describe('test for groupby verb', () => {
 	let store: TestStore

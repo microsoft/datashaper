@@ -4,8 +4,8 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { observableNode } from '../nodeFactories/index.js'
-import { NodeInput } from '../nodeFactories/types.js'
-import { concat } from '../setVerbs.js'
+import { NodeInput } from '../types.js'
+import { concat } from '../concat.js'
 
 describe('test for concat verb', () => {
 	test('concat test', () => {
@@ -18,7 +18,7 @@ describe('test for concat verb', () => {
 		expect(table2.outputValue()).toBeDefined()
 
 		const node = concat('output')
-		node.bind({ input: NodeInput.Source, node: table1 })
+		node.bind({ input: NodeInput.Input, node: table1 })
 		node.bindNext({ node: table2 })
 
 		const result = node.outputValue()

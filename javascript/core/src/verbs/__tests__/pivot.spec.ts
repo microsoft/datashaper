@@ -4,7 +4,7 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { FieldAggregateOperation } from '../../index.js'
-import { pivotStep } from '../stepFunctions/simpleSteps.js'
+import { pivotStep } from '../pivot.js'
 
 describe('test for pivot verb', () => {
 	let store: TestStore

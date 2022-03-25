@@ -8,8 +8,8 @@ import type { NodeId } from '../../graph/index.js'
 import { VariadicNodeImpl } from '../../graph/index.js'
 import { container } from '../../tables/container.js'
 import type { TableContainer } from '../../tables/types.js'
-import { NodeInput } from '../types/enums.js'
-import type { SetOp } from '../types/index.js'
+import { NodeInput } from '../types.js'
+import type { SetOp } from '../types.js'
 import { set } from '../util/sets.js'
 
 export class SetOperationNode<Args = unknown> extends VariadicNodeImpl<
@@ -34,4 +34,8 @@ export class SetOperationNode<Args = unknown> extends VariadicNodeImpl<
 			this.emit(undefined)
 		}
 	}
+}
+
+export function setOperationNodeFactory(op: SetOp) {
+	return (id: string) => new SetOperationNode(id, op)
 }

@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { groupbyStep, ungroupStep } from '../stepFunctions/simpleSteps.js'
+import { groupbyStep } from '../groupby.js'
+import { ungroupStep } from '../ungroup.js'
 
 describe('test for ungroup verb', () => {
 	let store: TestStore

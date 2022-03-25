@@ -8,7 +8,7 @@ import {
 	BooleanComparisonOperator,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../types/index.js'
+} from '../types.js'
 import { bool } from './data-types.js'
 
 export function compareValues(

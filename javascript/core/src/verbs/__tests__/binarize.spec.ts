@@ -4,8 +4,8 @@
  */
 import { TestStore } from '../../__tests__/TestStore.js'
 import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
-import { binarizeStep } from '../stepFunctions/index.js'
-import { StringComparisonOperator } from '../types/index.js'
+import { binarizeStep } from '../binarize.js'
+import { StringComparisonOperator } from '../types.js'
 
 describe('test for binarize verb', () => {
 	let store: TestStore

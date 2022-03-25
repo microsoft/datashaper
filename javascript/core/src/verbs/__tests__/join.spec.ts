@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { join, JoinInput } from '../join.js'
+import { join, JoinStrategy } from '../join.js'
 import { observableNode } from '../nodeFactories/index.js'
-import { JoinStrategy } from '../types/index.js'
+import { NodeInput } from '../types.js'
 
 describe('test for join verb', () => {
 	let store: TestStore
@@ -18,8 +18,8 @@ describe('test for join verb', () => {
 		const table2 = observableNode('input', store.observe('table5')!)
 
 		const node = join('output')
-		node.bind({ input: JoinInput.Left, node: table1 })
-		node.bind({ input: JoinInput.Right, node: table2 })
+		node.bind({ input: NodeInput.Input, node: table1 })
+		node.bind({ input: NodeInput.Other, node: table2 })
 		node.config = { on: ['ID'] }
 
 		const result = node.outputValue()
@@ -34,8 +34,8 @@ describe('test for join verb', () => {
 		const table2 = observableNode('input', store.observe('table5')!)
 
 		const node = join('output')
-		node.bind({ input: JoinInput.Left, node: table1 })
-		node.bind({ input: JoinInput.Right, node: table2 })
+		node.bind({ input: NodeInput.Input, node: table1 })
+		node.bind({ input: NodeInput.Other, node: table2 })
 		node.config = { on: ['ID'], strategy: JoinStrategy.LeftOuter }
 
 		const result = node.outputValue()
@@ -50,8 +50,8 @@ describe('test for join verb', () => {
 		const table2 = observableNode('input', store.observe('table8')!)
 
 		const node = join('output')
-		node.bind({ input: JoinInput.Left, node: table1 })
-		node.bind({ input: JoinInput.Right, node: table2 })
+		node.bind({ input: NodeInput.Input, node: table1 })
+		node.bind({ input: NodeInput.Other, node: table2 })
 		node.config = { on: ['ID'], strategy: JoinStrategy.RightOuter }
 		const result = node.outputValue()
 
@@ -65,8 +65,8 @@ describe('test for join verb', () => {
 		const table2 = observableNode('input', store.observe('table8')!)
 
 		const node = join('output')
-		node.bind({ input: JoinInput.Left, node: table1 })
-		node.bind({ input: JoinInput.Right, node: table2 })
+		node.bind({ input: NodeInput.Input, node: table1 })
+		node.bind({ input: NodeInput.Other, node: table2 })
 		node.config = { on: ['ID'], strategy: JoinStrategy.FullOuter }
 		const result = node.outputValue()
 

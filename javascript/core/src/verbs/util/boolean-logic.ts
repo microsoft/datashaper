@@ -2,22 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BooleanLogicalOperator } from '../types/index.js'
+import { BooleanOperator } from '../types.js'
 
 export function evaluateBoolean(
 	comparisons: (1 | 0)[],
-	logical: BooleanLogicalOperator,
+	logical: BooleanOperator,
 ): 1 | 0 {
 	switch (logical) {
-		case BooleanLogicalOperator.OR:
+		case BooleanOperator.OR:
 			return or(comparisons)
-		case BooleanLogicalOperator.AND:
+		case BooleanOperator.AND:
 			return and(comparisons)
-		case BooleanLogicalOperator.XOR:
+		case BooleanOperator.XOR:
 			return xor(comparisons)
-		case BooleanLogicalOperator.NOR:
+		case BooleanOperator.NOR:
 			return nor(comparisons)
-		case BooleanLogicalOperator.NAND:
+		case BooleanOperator.NAND:
 			return nand(comparisons)
 		default:
 			throw new Error(`Unsupported logical operator: [${logical}]`)

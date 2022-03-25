@@ -4,7 +4,7 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { DataType } from '../verbs/types/index.js'
+import type { DataType } from '../verbs/index.js'
 
 /**
  * A cell value in Arquero

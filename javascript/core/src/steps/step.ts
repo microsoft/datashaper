@@ -4,14 +4,14 @@
  */
 import { v4 as uuid } from 'uuid'
 
-import { BinStrategy } from '../index.js'
 import type { CopyWithPartial } from '../primitives.js'
 import {
-	BooleanLogicalOperator,
+	BooleanOperator,
+	BinStrategy,
 	FieldAggregateOperation,
 	JoinStrategy,
 	Verb,
-} from '../verbs/types/index.js'
+} from '../verbs/index.js'
 import type { Step } from './types.js'
 
 export type StepInput = CopyWithPartial<
@@ -128,7 +128,7 @@ export function step({
 				args: {
 					to: 'output',
 					criteria: [],
-					logical: BooleanLogicalOperator.OR,
+					logical: BooleanOperator.OR,
 					...args,
 				},
 			}
@@ -137,7 +137,7 @@ export function step({
 				...base,
 				args: {
 					criteria: [],
-					logical: BooleanLogicalOperator.OR,
+					logical: BooleanOperator.OR,
 					...args,
 				},
 			}

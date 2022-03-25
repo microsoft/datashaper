@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../../__tests__/TestStore.js'
-import { SetOp } from '../../types/index.js'
+import { SetOp } from '../../types.js'
 import { set } from '../sets.js'
 
 describe('test for set util', () => {

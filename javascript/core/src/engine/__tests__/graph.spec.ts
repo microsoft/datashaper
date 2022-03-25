@@ -30,7 +30,7 @@ describe('stepGraph', () => {
 					value: 1,
 				},
 				inputs: {
-					source: { node: 'input' },
+					input: { node: 'input' },
 				},
 				pinnedOutputs: [{ name: 'output' }],
 			}),
@@ -50,7 +50,7 @@ describe('stepGraph', () => {
 				id: 'output-1',
 				verb: Verb.Fill,
 				inputs: {
-					source: { node: 'input' },
+					input: { node: 'input' },
 				},
 				args: {
 					to: 'filled',
@@ -66,7 +66,7 @@ describe('stepGraph', () => {
 					value: 2,
 				},
 				inputs: {
-					source: { node: 'output-1' },
+					input: { node: 'output-1' },
 				},
 				pinnedOutputs: [{ name: 'output-2' }],
 			}),

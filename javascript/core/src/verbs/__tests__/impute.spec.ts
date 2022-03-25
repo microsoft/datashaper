@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { imputeStep } from '../stepFunctions/index.js'
+import { imputeStep } from '../impute.js'
 
 describe('test for impute verb', () => {
 	let store: TestStore

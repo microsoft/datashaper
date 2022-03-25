@@ -8,7 +8,7 @@ import type { NodeId } from '../../graph/index.js'
 import { BaseNode } from '../../graph/index.js'
 import { container } from '../../tables/container.js'
 import type { TableContainer } from '../../tables/types.js'
-import { NodeInput } from '../types/index.js'
+import { NodeInput } from '../types.js'
 import { handleMaybeAsync } from '../util/handleMaybeAsync.js'
 import type { StepComputeFn, TableStep } from './types.js'
 
@@ -28,7 +28,7 @@ export class StepNode<Args> extends BaseNode<TableContainer, Args> {
 	}
 }
 
-export function makeStepNode<Args>(
+export function stepNodeFactory<Args>(
 	inner: TableStep<Args>,
 ): (id: string) => StepNode<Args> {
 	return (id: string) =>

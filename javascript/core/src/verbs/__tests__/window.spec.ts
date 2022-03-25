@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import { windowStep } from '../stepFunctions/simpleSteps.js'
-import { WindowFunction } from '../types/enums.js'
+import { windowStep, WindowFunction } from '../window.js'
 
 describe('test for window verb', () => {
 	let store: TestStore

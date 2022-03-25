@@ -19,7 +19,7 @@ export function useStepActions(
 		if (onSelect) {
 			actionsList.push({
 				iconProps: iconProps.preview,
-				onClick: () => onSelect(step?.output),
+				onClick: () => onSelect(step?.id),
 				title: 'Preview table',
 			})
 		}
