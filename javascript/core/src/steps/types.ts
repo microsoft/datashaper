@@ -58,13 +58,17 @@ export interface Step<T = unknown> {
 
 	/**
 	 * The bound inputs
+	 * Key = Input Socket Name
+	 * Value = Socket Binding to other node
 	 */
 	inputs: Record<string, { node: string; output?: string }>
 
 	/**
 	 * The observed outputs to record.
+	 * Key = output socket name
+	 * Value = store table name
 	 */
-	pinnedOutputs: Array<{ output?: string; name: string }>
+	outputs: Record<string, string>
 }
 
 export type AggregateStep = Step<AggregateArgs>

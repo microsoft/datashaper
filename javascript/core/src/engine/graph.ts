@@ -10,6 +10,9 @@ import type { TableContainer } from '../tables/types.js'
 import type { NodeFactory } from '../verbs/index.js'
 import * as verbs from '../verbs/index.js'
 import { observableNode } from '../verbs/nodeFactories/index.js'
+import { NodeInput } from '../verbs/types.js'
+
+const DEFAULT_OUTPUT = 'default'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -32,16 +35,32 @@ export function graph(
 	for (const step of steps) {
 		const node = createNode(step)
 		graph.add(node)
+
+		// wire pinned outputs into the store
+		for (const [output, name] of Object.entries(step.outputs)) {
+			store.set(
+				name,
+				node.output(output === DEFAULT_OUTPUT ? undefined : output),
+			)
+		}
 	}
 
 	// wire together named inputs between nodes
+	let prevStepId = undefined
 	for (const step of steps) {
 		const current = graph.node(step.id)
 
+		// If inputs are defined, use those. Otherwise, default to
+		// pipelining the graph nodes into each other (e.g. prev node's
+		// default output is the default input here)
+		const inputRecords =
+			Object.keys(step.inputs).length > 0
+				? step.inputs
+				: defaultStepInput(prevStepId)
+
 		// if any inputs nodes are in the graph, bind them
-		for (const [input, { node: sourceId, output }] of Object.entries(
-			step.inputs,
-		)) {
+		for (const [input, binding] of Object.entries(inputRecords)) {
+			const { node: sourceId, output } = binding
 			const node = graph.hasNode(sourceId)
 				? // bind to an input defined in the graph
 				  graph.node(sourceId)
@@ -49,14 +68,7 @@ export function graph(
 				  observableNode(sourceId, store.observe(sourceId))
 
 			current.bind({ input, node, output })
-		}
-	}
-
-	// Wire any named outputs into the store
-	for (const step of steps) {
-		for (const { output, name: storeName } of step.pinnedOutputs) {
-			const node = graph.node(step.id)
-			store.set(storeName, node.output(output))
+			prevStepId = step.id
 		}
 	}
 
@@ -72,4 +84,8 @@ function createNode(step: Step): Node<TableContainer> {
 	const node = factory(step.id)
 	node.config = step.args
 	return node
+}
+
+function defaultStepInput(prevId: string | undefined): Step['inputs'] {
+	return prevId != null ? { [NodeInput.Input]: { node: prevId } } : {}
 }

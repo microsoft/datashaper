@@ -6,8 +6,8 @@ import { v4 as uuid } from 'uuid'
 
 import type { CopyWithPartial } from '../primitives.js'
 import {
-	BooleanOperator,
 	BinStrategy,
+	BooleanOperator,
 	FieldAggregateOperation,
 	JoinStrategy,
 	Verb,
@@ -16,7 +16,7 @@ import type { Step } from './types.js'
 
 export type StepInput = CopyWithPartial<
 	Step<any>,
-	'args' | 'id' | 'inputs' | 'pinnedOutputs'
+	'args' | 'id' | 'inputs' | 'outputs'
 >
 /**
  * Factory function to create new verb configs
@@ -30,14 +30,14 @@ export function step({
 	args = {},
 	id = uuid(),
 	inputs = {},
-	pinnedOutputs = [],
+	outputs = {},
 }: StepInput): Step {
 	const base = {
 		id,
 		args,
 		verb,
 		inputs,
-		pinnedOutputs,
+		outputs,
 	}
 	switch (verb) {
 		case Verb.Bin:

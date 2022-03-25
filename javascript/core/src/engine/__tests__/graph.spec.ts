@@ -32,7 +32,7 @@ describe('stepGraph', () => {
 				inputs: {
 					input: { node: 'input' },
 				},
-				pinnedOutputs: [{ name: 'output' }],
+				outputs: { default: 'output' },
 			}),
 		]
 
@@ -56,7 +56,7 @@ describe('stepGraph', () => {
 					to: 'filled',
 					value: 1,
 				},
-				pinnedOutputs: [{ name: 'output-1' }],
+				outputs: { default: 'output-1' },
 			}),
 			step({
 				id: 'output-2',
@@ -65,10 +65,11 @@ describe('stepGraph', () => {
 					to: 'filled2',
 					value: 2,
 				},
-				inputs: {
-					input: { node: 'output-1' },
-				},
-				pinnedOutputs: [{ name: 'output-2' }],
+				// Note: this input is being auto-configured to the output of the previous node
+				// inputs: {
+				// 	input: { node: 'output-1' },
+				// },
+				outputs: { default: 'output-2' },
 			}),
 		]
 
