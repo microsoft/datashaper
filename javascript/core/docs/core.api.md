@@ -384,6 +384,39 @@ export class DefaultGraph<T> implements Graph<T> {
     validate(): void;
 }
 
+// Warning: (ae-missing-release-tag) "DefaultPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export class DefaultPipeline implements Pipeline {
+    constructor(store: Store<TableContainer>);
+    // (undocumented)
+    add(step: Step): Step[];
+    // (undocumented)
+    addAll(steps: Step[]): Step[];
+    // (undocumented)
+    clear(): void;
+    // (undocumented)
+    get count(): number;
+    // (undocumented)
+    create(verb: Verb): Step[];
+    // (undocumented)
+    delete(index: number): Step[];
+    // (undocumented)
+    get graph(): Graph<TableContainer>;
+    // (undocumented)
+    get last(): Step;
+    // (undocumented)
+    get outputs(): string[];
+    // (undocumented)
+    print(): void;
+    // (undocumented)
+    get steps(): Step[];
+    // (undocumented)
+    readonly store: Store<TableContainer>;
+    // (undocumented)
+    update(step: Step, index: number): Step[];
+}
+
 // Warning: (ae-missing-release-tag) "DefaultStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -984,6 +1017,37 @@ export enum ParseType {
     // (undocumented)
     Integer = "int"
 }
+
+// Warning: (ae-missing-release-tag) "Pipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface Pipeline {
+    add(step: Step): Step[];
+    addAll(steps: Step[]): Step[];
+    clear(): void;
+    // (undocumented)
+    readonly count: number;
+    create(verb: Verb): Step[];
+    delete(index: number): Step[];
+    // (undocumented)
+    readonly graph: Graph<TableContainer>;
+    // (undocumented)
+    readonly last: Step;
+    // (undocumented)
+    readonly outputs: string[];
+    print(): void;
+    // (undocumented)
+    readonly steps: Step[];
+    // (undocumented)
+    readonly store: Store<TableContainer>;
+    // (undocumented)
+    update(step: Step, index: number): Step[];
+}
+
+// Warning: (ae-missing-release-tag) "pipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function pipeline(store: Store<TableContainer>): Pipeline;
 
 // Warning: (ae-missing-release-tag) "pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
