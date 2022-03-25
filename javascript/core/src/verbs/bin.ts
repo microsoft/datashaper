@@ -5,10 +5,10 @@
 import { bin as aqbin, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnArgs, OutputColumnArgs } from './types.js'
-import { fixedBinCount, fixedBinStep } from './util/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
+import { fixedBinCount, fixedBinStep } from './util/index.js'
 
 export enum BinStrategy {
 	Auto = 'auto',

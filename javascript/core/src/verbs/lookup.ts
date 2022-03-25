@@ -7,8 +7,8 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { BaseNode } from '../graph/BaseNode.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
-import type { InputColumnListArgs } from './types.js'
 import type { JoinArgsBase } from './join.js'
+import type { InputColumnListArgs } from './types.js'
 import { NodeInput } from './types.js'
 
 export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {}

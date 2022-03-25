@@ -4,10 +4,10 @@
  */
 import { escape, op } from 'arquero'
 
-import type { ColumnTableStep } from './util/factories.js'
-import type { InputColumnArgs, OutputColumnArgs } from './types.js'
-import { stepVerbFactory } from './util/factories.js'
 import type { Value } from '../tables/types.js'
+import type { InputColumnArgs, OutputColumnArgs } from './types.js'
+import type { ColumnTableStep } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 	/**

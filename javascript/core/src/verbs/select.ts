@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { all } from 'arquero'
-import type { ColumnTableStep } from './util/factories.js'
+
 import type { InputColumnListArgs } from './types.js'
+import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
 export type SelectArgs = InputColumnListArgs

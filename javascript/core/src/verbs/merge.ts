@@ -5,15 +5,15 @@
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
-import { stepVerbFactory } from './util/factories.js'
 
 import { columnType } from '../util/index.js'
-import type { ColumnTableStep } from './util/factories.js'
 import type {
+	DataType,
 	InputColumnListArgs,
 	OutputColumnArgs,
-	DataType,
 } from './types.js'
+import type { ColumnTableStep } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 
 export enum MergeStrategy {
 	FirstOneWins = 'first one wins',

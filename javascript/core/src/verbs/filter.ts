@@ -2,11 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { BooleanOperator, Criterion,InputColumnArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
-import type { InputColumnArgs, BooleanOperator } from './types.js'
-import { compareAll } from './util/index.js'
 import { stepVerbFactory } from './util/factories.js'
-import type { Criterion } from './types.js'
+import { compareAll } from './util/index.js'
 
 export interface FilterArgs extends InputColumnArgs {
 	criteria: Criterion[]

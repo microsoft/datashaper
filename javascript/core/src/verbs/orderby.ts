@@ -4,9 +4,9 @@
  */
 import { desc } from 'arquero'
 
+import { SortDirection } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { SortDirection } from './types.js'
 
 export interface OrderbyArgs {
 	/**

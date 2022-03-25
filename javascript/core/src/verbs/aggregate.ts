@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { ColumnTableStep } from './util/factories.js'
 import type { RollupArgs } from './rollup.js'
-import { singleExpression } from './util/index.js'
+import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
+import { singleExpression } from './util/index.js'
 
 export interface AggregateArgs extends RollupArgs {
 	/**

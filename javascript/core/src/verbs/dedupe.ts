@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
+import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
 export type DedupeArgs = Partial<InputColumnListArgs>

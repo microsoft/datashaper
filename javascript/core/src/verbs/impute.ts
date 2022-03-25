@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { ColumnTableStep } from './util/factories.js'
-import type { InputColumnArgs } from './types.js'
-import type { ExprFunctionMap } from './util/types.js'
-import { stepVerbFactory } from './util/factories.js'
 import type { Value } from '../tables/types.js'
+import type { InputColumnArgs } from './types.js'
+import type { ColumnTableStep } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
+import type { ExprFunctionMap } from './util/types.js'
 
 export interface ImputeArgs extends InputColumnArgs {
 	/**

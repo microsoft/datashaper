@@ -4,9 +4,9 @@
  */
 import { escape } from 'arquero'
 
-import type { ColumnTableStep } from './util/factories.js'
 import type { OutputColumnArgs } from './types.js'
 import { MathOperator } from './types.js'
+import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
 export interface DeriveArgs extends OutputColumnArgs {

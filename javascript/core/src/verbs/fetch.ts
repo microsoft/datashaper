@@ -7,8 +7,8 @@ import { loadCSV, loadJSON } from 'arquero'
 
 import type { InputStep } from '../graph/index.js'
 import { inputNodeFactory } from '../graph/index.js'
-import type { TableContainer } from '../tables/types.js'
 import { container } from '../tables/container.js'
+import type { TableContainer } from '../tables/types.js'
 
 export interface FetchArgs {
 	/**

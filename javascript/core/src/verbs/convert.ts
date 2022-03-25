@@ -4,10 +4,10 @@
  */
 import { escape, op } from 'arquero'
 
-import type { ColumnTableStep } from './util/factories.js'
 import type { InputColumnListArgs } from './types.js'
 import { ParseType } from './types.js'
 import { bool } from './util/data-types.js'
+import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
 export interface ConvertArgs extends InputColumnListArgs {

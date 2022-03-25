@@ -2,13 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+
+import type { StepFunction } from '../../graph/index.js'
+import { BaseVariadicNode } from '../../graph/index.js'
 import { StepNode } from '../../graph/StepNode.js'
 import type { Maybe } from '../../primitives.js'
 import { container } from '../../tables/container.js'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { StepFunction } from '../../graph/index.js'
 import type { TableContainer } from '../../tables/types.js'
-import { BaseVariadicNode } from '../../graph/index.js'
 import type { SetOp } from '../types.js'
 import { set } from './sets.js'
 
@@ -51,7 +52,7 @@ export function stepVerbFactory<Args>(
 			args: Args,
 		) => {
 			if (source.table) {
-				let result = columnTableStep(source.table, args, id)
+				const result = columnTableStep(source.table, args, id)
 
 				// handle promise-based result
 				if ((result as any).then) {
@@ -72,8 +73,10 @@ export function stepVerbFactory<Args>(
 		return result
 	}
 }
-export function setOperationNodeFactory(op: SetOp) {
-	return (id: string) => {
+export function setOperationNodeFactory(
+	op: SetOp,
+): (id: string) => SetOperationNode {
+	return (id: string): SetOperationNode => {
 		const result = new SetOperationNode(op)
 		result.id = id
 		return result

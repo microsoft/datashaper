@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { ColumnTableStep } from './util/factories.js'
-import { compareAll } from './util/index.js'
-import { stepVerbFactory } from './util/factories.js'
-import type { OutputColumnArgs } from './types.js'
 import type { FilterArgs } from './filter.js'
+import type { OutputColumnArgs } from './types.js'
+import type { ColumnTableStep } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
+import { compareAll } from './util/index.js'
 
 export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {}
 
