@@ -37,7 +37,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		const rowCounts = useRowCounts(table)
 		return (
 			<Header bgColor={background} color={foreground}>
-				{commandBar ? <Left>{commandBar}</Left> : null}
+				<Left>{commandBar}</Left>
 				<Middle>
 					{name ? (
 						<TableName
@@ -66,7 +66,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					) : null}
 					{groupCount ? <H3>{groupCount} groups</H3> : null}
 				</Middle>
-				{farCommandBar ? <Right>{farCommandBar}</Right> : null}
+				<Right>{farCommandBar}</Right>
 			</Header>
 		)
 	},
