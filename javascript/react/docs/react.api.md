@@ -42,6 +42,7 @@ import { StyledComponent } from 'styled-components';
 import type { TableContainer } from '@data-wrangling-components/core';
 import type { TableMetadata } from '@data-wrangling-components/core';
 import type { TableStore } from '@data-wrangling-components/core';
+import type { Theme } from '@thematic/core';
 import type { Value } from '@data-wrangling-components/core';
 import type { Verb } from '@data-wrangling-components/core';
 
@@ -103,9 +104,9 @@ export interface ArqueroTableHeaderProps {
     // (undocumented)
     color?: string;
     // (undocumented)
-    commands?: ICommandBarItemProps[];
+    commandBar?: ReactElement<any, any>;
     // (undocumented)
-    farCommands?: ICommandBarItemProps[];
+    farCommandBar?: ReactElement<any, any>;
     // (undocumented)
     name?: string;
     // (undocumented)
@@ -241,8 +242,13 @@ export const ConvertDescription: React.FC<StepDescriptionProps>;
 
 // Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function createDefaultCommandBar(items: ICommandBarItemProps[], props?: ICommandBarProps | undefined): ReactElement<any, any>;
+// @public
+export function createDefaultCommandBar({ styles, ...props }: ICommandBarProps): ReactElement<ICommandBarProps, any>;
+
+// Warning: (ae-missing-release-tag) "createDefaultHeaderCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: Theme, far?: boolean): ReactElement<ICommandBarProps, any>;
 
 // Warning: (ae-missing-release-tag) "createLazyLoadingGroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

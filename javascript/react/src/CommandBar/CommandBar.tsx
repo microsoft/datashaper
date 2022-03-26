@@ -21,7 +21,6 @@ interface CommandBarProps extends ICommandBarProps {
 	height?: string
 	bgColor?: string
 	color?: string
-	far?: boolean
 }
 
 /**
@@ -32,7 +31,6 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	height,
 	bgColor,
 	color,
-	far = false,
 	styles,
 	...props
 }) {
@@ -40,16 +38,10 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	const overflowButtonProps = useOverflowButtonProps(background, foreground)
 	const handleOnDataReduce = useHandleOnDataReduce(foreground)
 	const handleOnDataGrown = useHandleOnDataGrown(foreground)
-	const commandStyles = useCommandStyles(height, styles)
+	const commandStyles = useCommandStyles(styles)
 	const fixedItems = useCommands(items, background, foreground)
-
 	return (
-		<CommandBarWrapper
-			height={height}
-			far={far}
-			bgColor={background}
-			color={foreground}
-		>
+		<CommandBarWrapper bgColor={background} color={foreground}>
 			<CB
 				items={fixedItems}
 				styles={commandStyles}
@@ -66,12 +58,7 @@ const CommandBarWrapper = styled.div<{
 	height?: string
 	bgColor: string
 	color: string
-	far?: boolean
 }>`
-	width: 100%;
 	background-color: ${({ bgColor }) => bgColor};
 	color: ${({ color }) => color || 'inherit'};
-	height: ${({ height }) => height};
-	display: flex;
-	justify-content: ${({ far }) => (far ? 'flex-end' : 'flex-start')};
 `

@@ -6,7 +6,6 @@
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { CommandBar } from '../CommandBar/CommandBar.js'
 import { HEIGHT } from './constants.js'
 import {
 	useColorDefaults,
@@ -22,8 +21,8 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		name,
 		showRowCount = true,
 		showColumnCount = true,
-		commands = [],
-		farCommands = [],
+		commandBar,
+		farCommandBar,
 		visibleColumns,
 		onRenameTable,
 		bgColor,
@@ -38,16 +37,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		const rowCounts = useRowCounts(table)
 		return (
 			<Header bgColor={background} color={foreground}>
-				{commands?.length > 0 ? (
-					<Left>
-						<CommandBar
-							items={commands}
-							bgColor={background}
-							color={foreground}
-							height={`${HEIGHT}px`}
-						/>
-					</Left>
-				) : null}
+				{commandBar ? <Left>{commandBar}</Left> : null}
 				<Middle>
 					{name ? (
 						<TableName
@@ -76,17 +66,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					) : null}
 					{groupCount ? <H3>{groupCount} groups</H3> : null}
 				</Middle>
-				{farCommands?.length > 0 ? (
-					<Right>
-						<CommandBar
-							items={farCommands}
-							bgColor={background}
-							color={foreground}
-							far
-							height={`${HEIGHT}px`}
-						/>
-					</Right>
-				) : null}
+				{farCommandBar ? <Right>{farCommandBar}</Right> : null}
 			</Header>
 		)
 	},
@@ -98,7 +78,6 @@ const Header = styled.div<{ bgColor: string; color: string }>`
 	background-color: ${({ bgColor }) => bgColor};
 	color: ${({ color }) => color};
 	position: relative;
-	padding: 0 2px;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;

@@ -6,10 +6,12 @@ import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
+	createDefaultHeaderCommandBar,
 	downloadCommand,
 	visibleColumnsCommand,
 } from '@data-wrangling-components/react'
 import type { IColumn, IDropdownOption } from '@fluentui/react'
+import { useThematic } from '@thematic/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import type { SetterOrUpdater } from 'recoil'
@@ -75,7 +77,8 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		[],
 	)
 
-	const commands = useCommands(table, visibleColumns, setVisibleColumns)
+	const commandBar = useCommandBar(table, visibleColumns, setVisibleColumns)
+	const farCommandBar = useFarCommandBar(table)
 
 	return (
 		<Container className="table-container">
@@ -84,7 +87,8 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				name={name}
 				showRowCount={true}
 				showColumnCount={true}
-				farCommands={commands}
+				commandBar={commandBar}
+				farCommandBar={farCommandBar}
 				visibleColumns={visibleColumns}
 				onRenameTable={onRenameTable}
 			/>
@@ -108,11 +112,13 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	)
 })
 
-function useCommands(
+function useCommandBar(
 	table: ColumnTable,
 	visibleColumns: string[],
 	updateColumns: SetterOrUpdater<string[]>,
 ) {
+	const theme = useThematic()
+
 	const handleColumnCheckChange = useCallback(
 		(column: string, checked: boolean) => {
 			updateColumns(previous => {
@@ -127,12 +133,26 @@ function useCommands(
 		[updateColumns],
 	)
 
-	const vccmd = useMemo(
-		() => visibleColumnsCommand(table, visibleColumns, handleColumnCheckChange),
+	const items = useMemo(
+		() => [
+			visibleColumnsCommand(table, visibleColumns, handleColumnCheckChange),
+		],
 		[table, visibleColumns, handleColumnCheckChange],
 	)
-	const dlcmd = useMemo(() => downloadCommand(table), [table])
-	return useMemo(() => [vccmd, dlcmd], [dlcmd, vccmd])
+
+	return useMemo(
+		() => createDefaultHeaderCommandBar({ items }, theme),
+		[items, theme],
+	)
+}
+
+function useFarCommandBar(table: ColumnTable) {
+	const theme = useThematic()
+	const items = useMemo(() => [downloadCommand(table)], [table])
+	return useMemo(
+		() => createDefaultHeaderCommandBar({ items }, theme, true),
+		[items, theme],
+	)
 }
 
 const Container = styled.div`

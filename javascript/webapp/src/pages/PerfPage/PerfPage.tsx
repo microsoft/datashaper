@@ -12,6 +12,7 @@ import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	createDefaultCommandBar,
+	createDefaultHeaderCommandBar,
 	createLazyLoadingGroupHeader,
 } from '@data-wrangling-components/react'
 import type {
@@ -20,10 +21,12 @@ import type {
 	IDetailsColumnProps,
 	IDetailsGroupDividerProps,
 } from '@fluentui/react'
-import { DefaultButton, Pivot, PivotItem } from '@fluentui/react'
+import { Pivot, PivotItem } from '@fluentui/react'
+import { useThematic } from '@thematic/react'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { Struct } from 'arquero/dist/types/table/transformable'
+import type { SetStateAction } from 'react'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
@@ -73,28 +76,8 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		setHelpFileContent(content)
 	})
 
-	const addNewColumn = useCallback(() => {
-		if (!table || !metadata) return
-		console.time('new column')
-		const newTable = table.derive(
-			{ [`New ${Math.round(Math.random() * 100)}`]: (d: Struct) => d.Close },
-			{ before: 'Date' },
-		)
-		console.timeEnd('new column')
-		// since we're just appending, we can reuse the prior stats
-		console.time('new meta')
-		const newColumns = newTable.columnNames(name => !metadata.columns[name])
-		const newMetadata = introspect(newTable, true, newColumns)
-		console.timeEnd('new meta')
-		setMetadata({
-			...newMetadata,
-			columns: {
-				...metadata.columns,
-				...newMetadata.columns,
-			},
-		})
-		setTable(newTable)
-	}, [table, setMetadata, setTable, metadata])
+	const commandBar = useCommandBar(table, metadata, setTable, setMetadata)
+	const columnCommands = useColumnCommands()
 
 	const customGroupHeader = useCallback(
 		(
@@ -107,33 +90,6 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		},
 		[],
 	)
-
-	const myCommand = useCallback((props?: IDetailsColumnProps) => {
-		const items = [
-			{
-				key: 'edit',
-				text: 'Edit',
-				iconOnly: true,
-				iconProps: { iconName: 'Edit' },
-				onClick: () => console.log('edit', props),
-			},
-			{
-				key: 'delete',
-				text: 'Delete',
-				iconOnly: true,
-				iconProps: { iconName: 'Delete' },
-				onClick: () => console.log('delete', props),
-			},
-			{
-				key: 'add',
-				text: 'Add',
-				iconOnly: true,
-				iconProps: { iconName: 'Add' },
-				onClick: () => console.log('add', props),
-			},
-		] as ICommandBarItemProps[]
-		return createDefaultCommandBar(items)
-	}, [])
 
 	const columns = useMemo((): IColumn[] | undefined => {
 		if (!table) return undefined
@@ -155,11 +111,11 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		<Container>
 			<Pivot>
 				<PivotItem style={{ width: '96vw' }} key={'table'} headerText={'table'}>
-					<AddButton onClick={addNewColumn}>Add new column</AddButton>
 					<Table>
 						<ArqueroTableHeader
 							table={table}
 							name={tableName}
+							commandBar={commandBar}
 							onRenameTable={name => setTableName(name)}
 						/>
 						<ArqueroDetailsList
@@ -168,7 +124,7 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 							features={{
 								smartCells: true,
 								smartHeaders: true,
-								commandBar: [myCommand],
+								commandBar: [columnCommands],
 							}}
 							columns={columns}
 							isSortable
@@ -208,6 +164,87 @@ const Table = styled.div`
 	height: calc(100vh - 220px);
 `
 
-const AddButton = styled(DefaultButton)`
-	margin-top: 8px;
-`
+function useColumnCommands() {
+	return useCallback((props?: IDetailsColumnProps) => {
+		const items = [
+			{
+				key: 'add',
+				text: 'Add',
+				iconOnly: true,
+				iconProps: { iconName: 'Add' },
+				onClick: () => console.log('add', props),
+			},
+			{
+				key: 'edit',
+				text: 'Edit',
+				iconOnly: true,
+				iconProps: { iconName: 'Edit' },
+				onClick: () => console.log('edit', props),
+			},
+			{
+				key: 'delete',
+				text: 'Delete',
+				iconOnly: true,
+				iconProps: { iconName: 'Delete' },
+				onClick: () => console.log('delete', props),
+			},
+		] as ICommandBarItemProps[]
+		return createDefaultCommandBar({
+			items,
+			styles: {
+				root: {
+					display: 'flex',
+					justifyContent: 'center',
+				},
+			},
+		})
+	}, [])
+}
+
+function useCommandBar(
+	table: ColumnTable | undefined,
+	metadata: TableMetadata | undefined,
+	setTable: React.Dispatch<SetStateAction<ColumnTable | undefined>>,
+	setMetadata: React.Dispatch<SetStateAction<TableMetadata | undefined>>,
+) {
+	const theme = useThematic()
+	const addNewColumn = useCallback(() => {
+		if (!table || !metadata) return
+		console.time('new column')
+		const newTable = table.derive(
+			{ [`New ${Math.round(Math.random() * 100)}`]: (d: Struct) => d.Close },
+			{ before: 'Date' },
+		)
+		console.timeEnd('new column')
+		// since we're just appending, we can reuse the prior stats
+		console.time('new meta')
+		const newColumns = newTable.columnNames(name => !metadata.columns[name])
+		const newMetadata = introspect(newTable, true, newColumns)
+		console.timeEnd('new meta')
+		setMetadata({
+			...newMetadata,
+			columns: {
+				...metadata.columns,
+				...newMetadata.columns,
+			},
+		})
+		setTable(newTable)
+	}, [table, setMetadata, setTable, metadata])
+	return useMemo(() => {
+		return createDefaultHeaderCommandBar(
+			{
+				items: [
+					{
+						key: 'add-column',
+						text: 'Add column',
+						iconProps: {
+							iconName: 'Add',
+						},
+						onClick: addNewColumn,
+					},
+				],
+			},
+			theme,
+		)
+	}, [theme, addNewColumn])
+}

@@ -129,7 +129,6 @@ function useIconProps(
 }
 
 export function useCommandStyles(
-	height?: string,
 	styles?: IStyleFunctionOrObject<ICommandBarStyleProps, ICommandBarStyles>,
 ): ICommandBarStyles {
 	return useMemo(
@@ -137,13 +136,13 @@ export function useCommandStyles(
 			merge(
 				{
 					root: {
-						height,
+						width: '100%',
 						background: 'none',
 						padding: 0,
 					},
 				},
 				styles,
 			),
-		[height, styles],
+		[styles],
 	)
 }
