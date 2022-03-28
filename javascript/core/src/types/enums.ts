@@ -60,6 +60,7 @@ export enum ParseType {
 	 * allows users to control how a string is interpreted.
 	 */
 	Decimal = 'float',
+	String = 'string',
 }
 
 export enum DataType {
