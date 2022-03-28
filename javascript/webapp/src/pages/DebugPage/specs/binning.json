@@ -3,9 +3,9 @@
 	"description": "Shows how different binning strategies and clamping work.",
 	"steps": [
 		{
+			"id": "bin-1",
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-1",
+			"inputs": { "default": "data/products.csv" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "auto",
@@ -13,9 +13,9 @@
 			}
 		},
 		{
+			"id": "bin-2",
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-2",
+			"inputs": { "default": "data/products.csv" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
@@ -24,9 +24,9 @@
 			}
 		},
 		{
+			"id": "bin-3",
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-3",
+			"inputs": { "default": "data/products.csv" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed count",
@@ -35,9 +35,9 @@
 			}
 		},
 		{
+			"id": "bin-4",
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-4",
+			"inputs": { "default": "data/products.csv" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
@@ -48,9 +48,9 @@
 			}
 		},
 		{
+			"id": "bin-5",
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-5",
+			"inputs": { "default": "data/products.csv" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",

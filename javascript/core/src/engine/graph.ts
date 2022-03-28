@@ -13,6 +13,7 @@ import * as verbs from '../verbs/index.js'
 
 const DEFAULT_OUTPUT = 'default'
 const DEFAULT_INPUT = 'default'
+const EMPTY: Record<string, unknown> = Object.freeze({})
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -37,7 +38,7 @@ export function createGraph(
 		graph.add(node)
 
 		// wire pinned outputs into the store
-		for (const [output, name] of Object.entries(step.outputs)) {
+		for (const [output, name] of Object.entries(step.outputs || EMPTY)) {
 			store.set(
 				name,
 				node.output(output === DEFAULT_OUTPUT ? undefined : output),
@@ -91,5 +92,5 @@ function createNode(step: Step): Node<TableContainer> {
 }
 
 function defaultStepInput(prevId: string | undefined): Step['inputs'] {
-	return prevId != null ? { default: { node: prevId } } : {}
+	return prevId != null ? { default: { node: prevId } } : (EMPTY as any)
 }
