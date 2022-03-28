@@ -26,9 +26,9 @@ import type { HOCFunction, StepComponentProps } from './types.js'
  * @param label - optional label to use for the dropdown instead of the default.
  * @returns
  */
-export const withInputColumnDropdown = (
+export function withInputColumnDropdown(
 	label?: string,
-): HOCFunction<StepComponentProps> => {
+): HOCFunction<StepComponentProps> {
 	return Component => {
 		const WithInputColumnDropdown: React.FC<StepComponentProps> = props => {
 			const { step, store, onChange, input, table } = props
@@ -65,7 +65,6 @@ export const withInputColumnDropdown = (
 							onChange={handleColumnChange}
 						/>
 					</LeftAlignedRow>
-
 					<Component {...props} />
 				</Container>
 			)

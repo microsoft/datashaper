@@ -5,43 +5,47 @@
 		{
 			"id": "bin-1",
 			"verb": "bin",
-			"inputs": { "default": "data/products.csv" },
+			"inputs": { "default": { "node": "data/products.csv" } },
+			"outputs": { "default": "bin-1" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "auto",
-				"to": "Binned"
+				"to": "Binned1"
 			}
 		},
 		{
 			"id": "bin-2",
 			"verb": "bin",
-			"inputs": { "default": "data/products.csv" },
+			"inputs": { "default": { "node": "data/products.csv" } },
+			"outputs": { "default": "bin-2" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
-				"to": "Binned",
+				"to": "Binned2",
 				"fixedwidth": 100000
 			}
 		},
 		{
 			"id": "bin-3",
 			"verb": "bin",
-			"inputs": { "default": "data/products.csv" },
+			"inputs": { "default": { "node": "data/products.csv" } },
+			"outputs": { "default": "bin-3" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed count",
-				"to": "Binned",
+				"to": "Binned3",
 				"fixedcount": 100
 			}
 		},
 		{
 			"id": "bin-4",
 			"verb": "bin",
-			"inputs": { "default": "data/products.csv" },
+			"inputs": { "default": { "node": "data/products.csv" } },
+			"outputs": { "default": "bin-4" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
-				"to": "Binned",
+				"to": "Binned4",
 				"fixedwidth": 100000,
 				"min": 20000,
 				"max": 1000000
@@ -50,11 +54,12 @@
 		{
 			"id": "bin-5",
 			"verb": "bin",
-			"inputs": { "default": "data/products.csv" },
+			"inputs": { "default": { "node": "data/products.csv" } },
+			"outputs": { "default": "bin-5" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
-				"to": "Binned",
+				"to": "Binned5",
 				"fixedwidth": 100000,
 				"min": 20000,
 				"max": 1000000,

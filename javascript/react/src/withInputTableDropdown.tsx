@@ -15,9 +15,9 @@ import type { HOCFunction, StepComponentProps } from './types.js'
  * @param label - optional label to use for the dropdown instead of the default.
  * @returns
  */
-export const withInputTableDropdown = (
+export function withInputTableDropdown(
 	label?: string,
-): HOCFunction<StepComponentProps> => {
+): HOCFunction<StepComponentProps> {
 	return Component => {
 		const WithTableDropdown: React.FC<StepComponentProps> = props => {
 			const { step, store, onChange } = props

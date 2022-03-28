@@ -121,7 +121,7 @@ export class DefaultPipeline implements Pipeline {
 		return new Promise<TableContainer>(resolve => {
 			const unsub = this.store.onItemChange(lastStepId, res => {
 				resolve(res as TableContainer)
-				unsub()
+				setTimeout(() => unsub(), 0)
 			})
 		})
 	}
