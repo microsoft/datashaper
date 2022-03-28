@@ -20,8 +20,10 @@ export function useOnUpdateMetadata(
 			const _table = store.get(selectedTableName as string)
 			if (_table) {
 				_table.metadata = meta
+
 				store.delete(_table.id)
-				store.set(_table)
+				store.emitItemChange(_table.id)
+
 				const _storedTables = await store.toMap()
 				setStoredTables(_storedTables)
 			}

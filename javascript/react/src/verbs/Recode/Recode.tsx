@@ -7,7 +7,7 @@ import type {
 	RecodeStep,
 	Value,
 } from '@data-wrangling-components/core'
-import { coerce , NodeInput } from '@data-wrangling-components/core'
+import { coerce, NodeInput } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -38,7 +38,7 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 	const internal = useMemo(() => step as RecodeStep, [step])
 
 	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Input]?.node,
+		input || step.inputs[NodeInput.Default]?.node,
 		table,
 		store,
 	)

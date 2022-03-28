@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Criterion, FilterStep } from '@data-wrangling-components/core'
-import { BooleanLogicalOperator , NodeInput } from '@data-wrangling-components/core'
+import { BooleanOperator, NodeInput } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
@@ -27,7 +27,7 @@ export const Filter: React.FC<StepComponentProps> = memo(function Filter({
 }) {
 	const internal = useMemo(() => step as FilterStep, [step])
 	const tbl = useLoadTable(
-		input || internal.inputs[NodeInput.Input]?.node,
+		input || internal.inputs[NodeInput.Default]?.node,
 		table,
 		store,
 	)
@@ -88,7 +88,7 @@ export const Filter: React.FC<StepComponentProps> = memo(function Filter({
 				<LeftAlignedRow>
 					<EnumDropdown
 						label={'Logical combination'}
-						enumeration={BooleanLogicalOperator}
+						enumeration={BooleanOperator}
 						labels={{
 							or: 'OR',
 							and: 'AND',

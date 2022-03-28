@@ -41,7 +41,7 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 			return loop(rows)
 		}, [rows])
 		const shouldShowOutputColumn = showOutputColumn && isOutputColumnStep(step)
-		const input = step.inputs[NodeInput.Input]?.node
+		const input = step.inputs[NodeInput.Default]?.node
 		return (
 			<Container style={style}>
 				<Verb>{step.verb}</Verb>

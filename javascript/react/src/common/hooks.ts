@@ -8,11 +8,13 @@ import type {
 	TableContainer,
 	TableStore,
 	Value,
+	Pipeline,
 } from '@data-wrangling-components/core'
 import {
 	columnType,
 	createTableStore,
 	DataType,
+	createPipeline,
 } from '@data-wrangling-components/core'
 import type {
 	ICommandBarItemProps,
@@ -491,4 +493,8 @@ export function useFormatedColumnArgWithCount(): (
 		},
 		[createColumnName],
 	)
+}
+
+export function usePipeline(store: TableStore): Pipeline {
+	return useMemo(() => createPipeline(store), [store])
 }

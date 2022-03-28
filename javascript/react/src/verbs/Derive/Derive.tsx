@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DeriveStep } from '@data-wrangling-components/core'
-import { MathOperator , NodeInput } from '@data-wrangling-components/core'
+import { MathOperator, NodeInput } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -29,7 +29,7 @@ export const Derive: React.FC<StepComponentProps> = memo(function Derive({
 	const internal = useMemo(() => step as DeriveStep, [step])
 
 	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Input]?.node,
+		input || step.inputs[NodeInput.Default]?.node,
 		table,
 		store,
 	)

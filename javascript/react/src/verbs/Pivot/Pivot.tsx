@@ -3,7 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { PivotStep } from '@data-wrangling-components/core'
-import { FieldAggregateOperation , NodeInput } from '@data-wrangling-components/core'
+import {
+	FieldAggregateOperation,
+	NodeInput,
+} from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -30,7 +33,7 @@ export const Pivot: React.FC<StepComponentProps> = memo(function Pivot({
 	const internal = useMemo(() => step as PivotStep, [step])
 
 	const tbl = useLoadTable(
-		input || internal.inputs[NodeInput.Input]?.node,
+		input || internal.inputs[NodeInput.Default]?.node,
 		table,
 		store,
 	)

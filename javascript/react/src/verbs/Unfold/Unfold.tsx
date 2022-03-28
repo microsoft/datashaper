@@ -29,7 +29,7 @@ export const Unfold: React.FC<StepComponentProps> = memo(function Unfold({
 	const internal = useMemo(() => step as PivotStep, [step])
 
 	const tbl = useLoadTable(
-		input || internal.inputs[NodeInput.Input]?.node,
+		input || internal.inputs[NodeInput.Default]?.node,
 		table,
 		store,
 	)

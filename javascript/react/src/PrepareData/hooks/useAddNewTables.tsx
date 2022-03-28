@@ -7,8 +7,8 @@ import type {
 	TableContainer,
 	TableStore,
 } from '@data-wrangling-components/core'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
+import { from } from 'rxjs'
 
 export function useAddNewTables(
 	store: TableStore,
@@ -20,7 +20,7 @@ export function useAddNewTables(
 			tables.forEach(table => {
 				const isStored = existing.includes(table.id)
 				if (!isStored) {
-					store.set({ id: table.id, table: table?.table as ColumnTable })
+					store.set(table.id, from([table]))
 				}
 			})
 

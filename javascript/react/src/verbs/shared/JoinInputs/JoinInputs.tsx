@@ -23,7 +23,7 @@ export const JoinInputs: React.FC<StepComponentProps> = memo(
 		const internal = useMemo(() => step as JoinStep, [step])
 
 		const leftTable = useLoadTable(
-			input || internal.inputs[NodeInput.Input]?.node,
+			input || internal.inputs[NodeInput.Default]?.node,
 			table,
 			store,
 		)

@@ -42,6 +42,7 @@
 		"react-router-dom": "^6.2.2",
 		"recoil": "^0.6.1",
 		"redbox-react": "^1.6.0",
+		"rxjs": "^7.5.5",
 		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {

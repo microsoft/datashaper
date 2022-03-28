@@ -8,8 +8,8 @@ import { step as factory } from '../steps/index.js'
 import type { Store } from '../store/index.js'
 import type { TableContainer } from '../tables/index.js'
 import type { Verb } from '../verbs/index.js'
-import { graph } from './graph.js'
-import type { Pipeline } from './types.js'
+import { createGraph } from './graph.js'
+import type { Pipeline, TableStore } from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -29,8 +29,8 @@ export class DefaultPipeline implements Pipeline {
 	private _steps: Step[] = []
 	private _graph: Graph<TableContainer>
 
-	public constructor(public readonly store: Store<TableContainer>) {
-		this._graph = graph(this._steps, store)
+	public constructor(public readonly store: TableStore) {
+		this._graph = createGraph(this._steps, store)
 	}
 
 	public get graph(): Graph<TableContainer> {
@@ -56,11 +56,8 @@ export class DefaultPipeline implements Pipeline {
 	}
 
 	public create(verb: Verb): Step[] {
-		const index = this.count
-		const base: Step = factory({
-			verb,
-			outputs: { default: `output-table-${index}` },
-		})
+		const base: Step = factory({ verb })
+		base.outputs = { default: base.id }
 		return this.add(base)
 	}
 
@@ -113,10 +110,23 @@ export class DefaultPipeline implements Pipeline {
 	}
 
 	private _rebuildGraph() {
-		this._graph = graph(this._steps, this.store)
+		this._graph = createGraph(this._steps, this.store)
+	}
+
+	public run(): Promise<TableContainer> {
+		if (this.steps.length === 0) {
+			throw new Error('cannot run empty pipeline')
+		}
+		const lastStepId = this._steps[this._steps.length - 1]!.id
+		return new Promise<TableContainer>(resolve => {
+			const unsub = this.store.onItemChange(lastStepId, res => {
+				resolve(res as TableContainer)
+				unsub()
+			})
+		})
 	}
 }
 
-export function pipeline(store: Store<TableContainer>): Pipeline {
+export function createPipeline(store: Store<TableContainer>): Pipeline {
 	return new DefaultPipeline(store)
 }

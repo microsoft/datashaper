@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { MergeStep } from '@data-wrangling-components/core'
-import { MergeStrategy , NodeInput } from '@data-wrangling-components/core'
+import { MergeStrategy, NodeInput } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown, TextField } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
@@ -32,7 +32,7 @@ export const Merge: React.FC<StepComponentProps> = memo(function Merge({
 }) {
 	const internal = useMemo(() => step as MergeStep, [step])
 	const tbl = useLoadTable(
-		input || internal.inputs[NodeInput.Input]?.node,
+		input || internal.inputs[NodeInput.Default]?.node,
 		table,
 		store,
 	)

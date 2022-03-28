@@ -18,7 +18,7 @@ import type { StepSubcomponentProps } from '../../../types.js'
 export const ColumnListInputs: React.FC<StepSubcomponentProps> = memo(
 	function ColumnListInputs({ step, store, table, onChange, input, label }) {
 		const tbl = useLoadTable(
-			input || step.inputs[NodeInput.Input]?.node,
+			input || step.inputs[NodeInput.Default]?.node,
 			table,
 			store,
 		)

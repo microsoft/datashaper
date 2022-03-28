@@ -77,6 +77,10 @@ export class DefaultStore<T> implements Store<T> {
 		return () => sub.unsubscribe()
 	}
 
+	public emitItemChange(id: string): void {
+		this.emit(id, this.get(id))
+	}
+
 	private emit(id?: string, value?: T): void {
 		if (id) {
 			this.eventFor(id).next(value)
@@ -91,10 +95,13 @@ export class DefaultStore<T> implements Store<T> {
 		return this._itemEvents.get(id) as Subject<Maybe<T>>
 	}
 
-	public toMap(): Map<string, Maybe<T>> {
-		const map = new Map<string, Maybe<T>>()
+	public toMap(): Map<string, T> {
+		const map = new Map<string, T>()
 		for (const id of this._storage.keys()) {
-			map.set(id, this.get(id))
+			const value = this.get(id)
+			if (value != null) {
+				map.set(id, value)
+			}
 		}
 		return map
 	}

@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
+import {
 	SpreadArgs,
 	SpreadStep,
 	Step,
+	NodeInput,
 } from '@data-wrangling-components/core'
-import { NodeInput } from '@data-wrangling-components/core'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
@@ -31,7 +31,7 @@ export const Spread: React.FC<StepComponentProps> = memo(function Spread({
 	const internal = useMemo(() => step as SpreadStep, [step])
 
 	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Input]?.node,
+		input || step.inputs[NodeInput.Default]?.node,
 		table,
 		store,
 	)

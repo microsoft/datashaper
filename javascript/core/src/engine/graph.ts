@@ -25,7 +25,7 @@ const DEFAULT_INPUT = 'default'
  * @param store - The table container
  * @returns The built reactive processing graph
  */
-export function graph(
+export function createGraph(
 	steps: Step[],
 	store: Store<TableContainer>,
 ): Graph<TableContainer> {

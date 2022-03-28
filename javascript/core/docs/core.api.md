@@ -308,6 +308,16 @@ export type ConvertStep = Step<ConvertArgs>;
 // @public (undocumented)
 export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 
+// Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function createGraph(steps: Step[], store: Store<TableContainer>): Graph<TableContainer>;
+
+// Warning: (ae-missing-release-tag) "createPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createPipeline(store: Store<TableContainer>): Pipeline;
+
 // Warning: (ae-missing-release-tag) "createTableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -388,7 +398,7 @@ export class DefaultGraph<T> implements Graph<T> {
 //
 // @public
 export class DefaultPipeline implements Pipeline {
-    constructor(store: Store<TableContainer>);
+    constructor(store: TableStore);
     // (undocumented)
     add(step: Step): Step[];
     // (undocumented)
@@ -410,9 +420,11 @@ export class DefaultPipeline implements Pipeline {
     // (undocumented)
     print(): void;
     // (undocumented)
+    run(): Promise<TableContainer>;
+    // (undocumented)
     get steps(): Step[];
     // (undocumented)
-    readonly store: Store<TableContainer>;
+    readonly store: TableStore;
     // (undocumented)
     update(step: Step, index: number): Step[];
 }
@@ -426,6 +438,8 @@ export class DefaultStore<T> implements Store<T> {
     clear(): void;
     // (undocumented)
     delete(id: string): void;
+    // (undocumented)
+    emitItemChange(id: string): void;
     // (undocumented)
     get(id: string): Maybe<T>;
     // (undocumented)
@@ -443,7 +457,7 @@ export class DefaultStore<T> implements Store<T> {
     // (undocumented)
     toArray(): Maybe<T>[];
     // (undocumented)
-    toMap(): Map<string, Maybe<T>>;
+    toMap(): Map<string, T>;
 }
 
 // Warning: (ae-missing-release-tag) "derive" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -654,11 +668,6 @@ export interface Graph<T> {
     remove(id: NodeId): void;
     validate(): void;
 }
-
-// Warning: (ae-missing-release-tag) "graph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function graph(steps: Step[], store: Store<TableContainer>): Graph<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -930,8 +939,6 @@ export type NodeId = string;
 // @public (undocumented)
 export enum NodeInput {
     // (undocumented)
-    Input = "input",
-    // (undocumented)
     Other = "other"
 }
 
@@ -1037,17 +1044,14 @@ export interface Pipeline {
     readonly outputs: string[];
     print(): void;
     // (undocumented)
+    run(): Promise<TableContainer>;
+    // (undocumented)
     readonly steps: Step[];
     // (undocumented)
-    readonly store: Store<TableContainer>;
+    readonly store: TableStore;
     // (undocumented)
     update(step: Step, index: number): Step[];
 }
-
-// Warning: (ae-missing-release-tag) "pipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function pipeline(store: Store<TableContainer>): Pipeline;
 
 // Warning: (ae-missing-release-tag) "pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1271,6 +1275,7 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 export interface Store<T, K = string> {
     clear(): void;
     delete(id: K): void;
+    emitItemChange(id: string): void;
     get(id: K): Maybe<T>;
     list(filter?: (id: K) => boolean): K[];
     observe(id: K): Observable<Maybe<T>>;
@@ -1279,7 +1284,7 @@ export interface Store<T, K = string> {
     print(): void;
     set(id: K, value: Observable<Maybe<T>>): void;
     toArray(): Maybe<T>[];
-    toMap(): Map<K, Maybe<T>>;
+    toMap(): Map<K, T>;
 }
 
 // Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

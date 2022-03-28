@@ -29,7 +29,7 @@ export const PrepareDataFull: React.FC<{
 	onOutputTable,
 	stepsPosition = 'bottom',
 }) {
-	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(false)
+	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 	const {
 		selectedTable,
 		selectedTableName,
@@ -94,7 +94,6 @@ export const PrepareDataFull: React.FC<{
 const GAP = 18
 const INPUT_HEIGHT = 60
 const STEPS_HEIGHT = 260
-const COLLAPSED_STEPS_HEIGHT = 50
 
 const SectionTitle = styled.span<{ isCollapsed?: boolean }>`
 	margin: 0 ${GAP}px 0 ${GAP}px;
@@ -139,9 +138,7 @@ const OutputContainer = styled.div<{
 	padding-right: ${GAP}px;
 	max-height: ${({ isCollapsed }) =>
 		`calc(100% - ${
-			INPUT_HEIGHT +
-			(isCollapsed ? COLLAPSED_STEPS_HEIGHT : STEPS_HEIGHT) +
-			GAP * 2
+			INPUT_HEIGHT + (isCollapsed ? 0 : STEPS_HEIGHT) + GAP * 4
 		}px)`};
 	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 2 : 3)};
 `
@@ -156,8 +153,7 @@ const StepsTrayContainer = styled.div<{
 	background-color: ${({ theme }) => theme.application().faint().hex()};
 	padding: 0;
 	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 3 : 2)};
-	height: ${({ isCollapsed }) =>
-		isCollapsed ? COLLAPSED_STEPS_HEIGHT + 'px' : 'auto'};
+	height: ${({ isCollapsed }) => (isCollapsed ? '3rem' : 'auto')};
 	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'auto')};
 	> div {
 		display: ${({ isCollapsed }) => (isCollapsed ? 'none' : 'grid')};

@@ -7,11 +7,12 @@ import type {
 	TableContainer,
 	TableStore,
 } from '@data-wrangling-components/core'
-import { createTableStore } from '@data-wrangling-components/core'
+import { createTableStore, container } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { from } from 'rxjs'
 
 const TABLES = [
 	`data/companies.csv`,
@@ -41,9 +42,10 @@ export function useTableStore(): TableStore {
 	return useMemo(() => {
 		const store = createTableStore()
 		TABLES.forEach(name => {
-			store.queue(name, async (name: string) =>
-				loadCSV(name, { parse, autoMax: 1000000 }),
+			const tablePromise = loadCSV(name, { parse, autoMax: 1000000 }).then(
+				res => container(name, res),
 			)
+			store.set(name, from(tablePromise))
 		})
 		return store
 	}, [])

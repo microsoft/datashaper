@@ -10,7 +10,7 @@ import { step } from '../../steps/step.js'
 import { createTableStore } from '../../store/index.js'
 import type { Store } from '../../store/types.js'
 import type { TableContainer } from '../../tables/index.js'
-import { graph } from '../graph.js'
+import { createGraph } from '../graph.js'
 
 describe('stepGraph', () => {
 	let store: Store<TableContainer>
@@ -36,7 +36,7 @@ describe('stepGraph', () => {
 			}),
 		]
 
-		const g = graph(steps, store)
+		const g = createGraph(steps, store)
 		expect(g).toBeDefined()
 		const result = store.get('output')
 		expect(result?.table?.numCols()).toBe(2)
@@ -73,7 +73,7 @@ describe('stepGraph', () => {
 			}),
 		]
 
-		const g = graph(steps, store)
+		const g = createGraph(steps, store)
 		expect(g).toBeDefined()
 		const result = store.get('output-2')
 		expect(result).toBeDefined()

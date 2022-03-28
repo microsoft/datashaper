@@ -59,6 +59,12 @@ export interface Store<T, K = string> {
 	onItemChange(id: K, listener: HandlerOf<Maybe<T>>): Unsubscribe
 
 	/**
+	 * Emits an item-change notification. Useful for when clients mutate store items.
+	 * @param id The item id
+	 */
+	emitItemChange(id: string): void
+
+	/**
 	 * Get alerted for any changes in the store.
 	 * (e.g. values are added, removed, or changed)
 	 *
@@ -70,7 +76,7 @@ export interface Store<T, K = string> {
 	/**
 	 * Resolves all items and converts to a id:item Map
 	 */
-	toMap(): Map<K, Maybe<T>>
+	toMap(): Map<K, T>
 
 	/**
 	 * Resolves all items and convers to an array

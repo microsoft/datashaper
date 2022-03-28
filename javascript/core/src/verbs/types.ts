@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Node } from '../graph/types.js'
-import type { TableContainer,Value  } from '../tables/types.js'
+import type { TableContainer, Value } from '../tables/types.js'
 
 export type NodeFactory = (id: string) => Node<TableContainer>
 
@@ -224,7 +224,7 @@ export enum FieldAggregateOperation {
 }
 
 export enum NodeInput {
-	Input = 'input',
+	Default = 'default',
 	Other = 'other',
 }
 

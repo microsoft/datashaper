@@ -11,6 +11,7 @@ import type { Verb } from '../verbs/index.js'
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
 
+export type TableStore = Store<TableContainer>
 /**
  * Manages a series of pipeline steps,
  * including creating default names, executing in order, etc.
@@ -23,7 +24,7 @@ import type { Verb } from '../verbs/index.js'
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
 export interface Pipeline {
-	readonly store: Store<TableContainer>
+	readonly store: TableStore
 	readonly steps: Step[]
 	readonly last: Step
 	readonly count: number
@@ -65,6 +66,8 @@ export interface Pipeline {
 	 * @param index The step index to update
 	 */
 	update(step: Step, index: number): Step[]
+
+	run(): Promise<TableContainer>
 
 	/**
 	 * Log out the steps

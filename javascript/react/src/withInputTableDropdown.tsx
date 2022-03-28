@@ -31,7 +31,7 @@ export const withInputTableDropdown = (
 						<TableDropdown
 							store={store}
 							label={label || 'Input table'}
-							selectedKey={step.inputs[NodeInput.Input]?.node}
+							selectedKey={step.inputs[NodeInput.Default]?.node}
 							onChange={handleTableChange}
 						/>
 					</LeftAlignedRow>

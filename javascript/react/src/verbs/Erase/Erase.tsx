@@ -28,7 +28,7 @@ export const Erase: React.FC<StepComponentProps> = memo(function Erase({
 	const internal = useMemo(() => step as EraseStep, [step])
 
 	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Input]?.node,
+		input || step.inputs[NodeInput.Default]?.node,
 		table,
 		store,
 	)
