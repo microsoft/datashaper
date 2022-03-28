@@ -18,7 +18,6 @@ import type { GroupBySpec } from 'arquero/dist/types/table/table';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
-import type { ICommandBarStyles } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
 import type { IDetailsColumnStyles } from '@fluentui/react';
@@ -43,6 +42,7 @@ import { StyledComponent } from 'styled-components';
 import type { TableContainer } from '@data-wrangling-components/core';
 import type { TableMetadata } from '@data-wrangling-components/core';
 import type { TableStore } from '@data-wrangling-components/core';
+import type { Theme } from '@thematic/core';
 import type { Value } from '@data-wrangling-components/core';
 import type { Verb } from '@data-wrangling-components/core';
 
@@ -100,9 +100,13 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps>;
 // @public (undocumented)
 export interface ArqueroTableHeaderProps {
     // (undocumented)
-    commands?: ICommandBarItemProps[];
+    bgColor?: string;
     // (undocumented)
-    farCommands?: ICommandBarItemProps[];
+    color?: string;
+    // (undocumented)
+    commandBar?: ReactElement<any, any>;
+    // (undocumented)
+    farCommandBar?: ReactElement<any, any>;
     // (undocumented)
     name?: string;
     // (undocumented)
@@ -111,11 +115,6 @@ export interface ArqueroTableHeaderProps {
     showColumnCount?: boolean;
     // (undocumented)
     showRowCount?: boolean;
-    // (undocumented)
-    style?: {
-        bgColor?: string;
-        textColor?: string;
-    };
     // (undocumented)
     table: ColumnTable;
     // (undocumented)
@@ -228,7 +227,7 @@ export interface ColumnTransformModalProps extends TransformModalProps {
 // Warning: (ae-forgotten-export) The symbol "CommandBarProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "CommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export const CommandBar: React.FC<CommandBarProps>;
 
 // Warning: (ae-missing-release-tag) "Convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -243,8 +242,13 @@ export const ConvertDescription: React.FC<StepDescriptionProps>;
 
 // Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function createDefaultCommandBar(items: ICommandBarItemProps[], props?: ICommandBarProps | undefined): ReactElement<any, any>;
+// @public
+export function createDefaultCommandBar({ styles, ...props }: ICommandBarProps): ReactElement<ICommandBarProps, any>;
+
+// Warning: (ae-missing-release-tag) "createDefaultHeaderCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: Theme, far?: boolean): ReactElement<ICommandBarProps, any>;
 
 // Warning: (ae-missing-release-tag) "createLazyLoadingGroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -587,11 +591,26 @@ export const PreviewTable: React.FC<{
     onChangeMetadata?: SaveMetadataFunction;
 }>;
 
-// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ProjectMgmtCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const ProjectMgmtCommandBar: React_2.FC<Props>;
+export const ProjectMgmtCommandBar: React_2.FC<ProjectMgmtCommandBarProps>;
+
+// Warning: (ae-missing-release-tag) "ProjectMgmtCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'items'> {
+    // (undocumented)
+    onUpdateSteps?: (steps: Step[]) => void;
+    // (undocumented)
+    onUpdateTables?: (tables: TableContainer[]) => void;
+    // (undocumented)
+    outputTable?: TableContainer;
+    // (undocumented)
+    steps: Step[];
+    // (undocumented)
+    tables: TableContainer[];
+}
 
 // Warning: (ae-missing-release-tag) "Recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -917,11 +936,6 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType;
 //
 // @public (undocumented)
 export function useColumnValueOptions(column: string, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
-
-// Warning: (ae-missing-release-tag) "useCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useCommands(commands?: ICommandBarItemProps[], bgColor?: string, color?: string): ICommandBarItemProps[];
 
 // Warning: (ae-missing-release-tag) "useCommonCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

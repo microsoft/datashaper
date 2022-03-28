@@ -19,7 +19,6 @@ export function downloadCommand(
 	props?: Partial<ICommandBarItemProps>,
 ): ICommandBarItemProps {
 	return merge(
-		{},
 		{
 			key: 'download',
 			title: 'Download table',

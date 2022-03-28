@@ -44,11 +44,7 @@ export const PreviewTable: React.FC<{
 		<>
 			{table ? (
 				<Container>
-					<ArqueroTableHeader
-						name={name}
-						table={table}
-						// farCommands={commands}
-					/>
+					<ArqueroTableHeader name={name} table={table} />
 					<ArqueroDetailsList
 						isSortable
 						compact

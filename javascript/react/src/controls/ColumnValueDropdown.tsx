@@ -25,7 +25,7 @@ export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
  * Dropdown wrapper to automatically list the row cell values for a column.
  */
 export const ColumnValueDropdown: React.FC<ColumnValueDropdownProps> = memo(
-	function ColumnValueDropdown({ column, table, values, filter, ...rest }) {
+	function ColumnValueDropdown({ column, table, values, filter, ...props }) {
 		const options = useColumnValueOptions(column, table, values, filter)
 		return (
 			<Dropdown
@@ -33,7 +33,7 @@ export const ColumnValueDropdown: React.FC<ColumnValueDropdownProps> = memo(
 				placeholder={'Choose value'}
 				options={options}
 				styles={dropdownStyles}
-				{...rest}
+				{...props}
 			/>
 		)
 	},

@@ -58,7 +58,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 				onTransformRequested={handleTransformRequested}
 			/>
 			<Table>
-				<ArqueroTableHeader table={table} farCommands={commands} />
+				<ArqueroTableHeader table={table} />
 				<ArqueroDetailsList
 					table={table}
 					isHeadersFixed

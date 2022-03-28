@@ -22,8 +22,12 @@ export interface MultiDropdownProps extends IDropdownProps {
  * Dropdown wrapper to manage multi-select with a select all/none helper.
  */
 export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
-	function MultiDropdown(props) {
-		const { options, selectedKeys, onSelectAllOrNone, ...rest } = props
+	function MultiDropdown({
+		options,
+		selectedKeys,
+		onSelectAllOrNone,
+		...props
+	}) {
 		const opts = useMemo(() => {
 			const hash = (selectedKeys || ([] as any)).reduce(
 				(acc: Record<string, boolean>, cur: any) => {
@@ -90,7 +94,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
 				selectedKeys={selectedKeys}
 				styles={dropdownStyles}
 				onRenderOption={handleRenderOption}
-				{...rest}
+				{...props}
 			/>
 		)
 	},
