@@ -13,7 +13,7 @@ describe('test for erase verb', () => {
 			verb: Verb.Erase,
 			input: 'table3',
 			output: 'output',
-			args: { value: 4, column: 'ID' },
+			args: { value: 4, columns: ['ID'] },
 		}
 
 		const store = new TestStore()
@@ -32,7 +32,7 @@ describe('test for erase verb', () => {
 			verb: Verb.Erase,
 			input: 'table3',
 			output: 'output',
-			args: { value: 'sofa', column: 'item' },
+			args: { value: 'sofa', columns: ['item'] },
 		}
 
 		const store = new TestStore()
