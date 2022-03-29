@@ -352,7 +352,7 @@
 				"max": { "type": "number" },
 				"clamped": { "type": "boolean" }
 			},
-			"required": ["column", "to", "strategy;"]
+			"required": ["column", "to", "strategy"]
 		},
 		"BinarizeArgs": { "type": "object" },
 		"BooleanArgs": { "type": "object" },

@@ -4,9 +4,10 @@
 	"description": "Use multiple criteria chained together to create a boolean condition OR for a single binarized output column.",
 	"steps": [
 		{
+			"id": "binarize",
 			"verb": "binarize",
-			"input": "data/companies.csv",
-			"output": "binarize-1",
+			"inputs": { "default": { "node": "data/companies.csv" } },
+			"outputs": { "default": "binarize-1" },
 			"args": {
 				"column": "Employees",
 				"to": "Smallest and Largest",

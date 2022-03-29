@@ -4,9 +4,10 @@
 	"description": "Aggregates a daily prices into an array to demonstrate Sparkline cells",
 	"steps": [
 		{
+			"id": "n1",
 			"verb": "aggregate",
-			"input": "data/stocks.csv",
-			"output": "sparkline",
+			"inputs": { "default": { "node": "data/stocks.csv" } },
+			"outputs": { "default": "sparkline" },
 			"args": {
 				"groupby": "Symbol",
 				"column": "Close",
