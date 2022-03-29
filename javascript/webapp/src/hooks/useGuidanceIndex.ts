@@ -3,9 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import debugPage from 'raw-loader!../pages/debugPage/README.md'
-import perfPage from 'raw-loader!../pages/perfPage/README.md'
-import prepareDataPage from 'raw-loader!../pages/prepareDataPage/README.md'
+import { debugPage, perfPage, prepareDataPage } from '../pages/index.js'
 
 export function useGuidanceIndex(): {
 	debugPage: string
@@ -13,8 +11,8 @@ export function useGuidanceIndex(): {
 	prepareDataPage: string
 } {
 	return {
-		debugPage,
-		perfPage,
-		prepareDataPage,
+		debugPage: debugPage.default,
+		perfPage: perfPage.default,
+		prepareDataPage: prepareDataPage.default,
 	}
 }
