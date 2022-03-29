@@ -12,7 +12,7 @@ import { useFormatedColumnArgWithCount } from '../../index.js'
 
 export function useInternalStep(
 	step: Step | undefined,
-	nextInputTable = 'input',
+	_nextInputTable = 'input',
 	table?: ColumnTable,
 ): {
 	internal: Step | undefined
@@ -41,7 +41,7 @@ export function useInternalStep(
 			_step.args = await formattedColumnArg(_step, table?.columnNames() || [])
 			setInternal(_step)
 		},
-		[setInternal, step, formattedColumnArg, nextInputTable, table],
+		[setInternal, step, formattedColumnArg, table],
 	)
 	return { internal, handleVerbChange, setInternal }
 }

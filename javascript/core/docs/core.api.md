@@ -1202,6 +1202,18 @@ export enum SortDirection {
     Descending = "desc"
 }
 
+// Warning: (ae-missing-release-tag) "Specification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Specification {
+    // (undocumented)
+    description?: string;
+    // (undocumented)
+    name?: string;
+    // (undocumented)
+    steps?: Step[];
+}
+
 // Warning: (ae-missing-release-tag) "spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

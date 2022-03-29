@@ -4,17 +4,17 @@
  */
 import type {
 	InputColumnRecordArgs,
+	Pipeline,
 	Step,
 	TableContainer,
 	TableStore,
 	Value,
-	Pipeline,
 } from '@data-wrangling-components/core'
 import {
 	columnType,
+	createPipeline,
 	createTableStore,
 	DataType,
-	createPipeline,
 } from '@data-wrangling-components/core'
 import type {
 	ICommandBarItemProps,

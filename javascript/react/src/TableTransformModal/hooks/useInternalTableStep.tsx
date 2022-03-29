@@ -11,7 +11,7 @@ import { useCreateTableName, useFormatedColumnArg } from '../../common/index.js'
 
 export function useInternalTableStep(
 	step: Step | undefined,
-	lastOutput: string | undefined,
+	_lastOutput: string | undefined,
 	store: TableStore,
 ): {
 	internal: Step | undefined
@@ -28,6 +28,7 @@ export function useInternalTableStep(
 	}, [step, setInternal])
 
 	const newTableName = useCreateTableName(store)
+	console.log('todo remove', newTableName)
 
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {
@@ -35,7 +36,7 @@ export function useInternalTableStep(
 			_step.args = formattedColumnArg(_step.args)
 			setInternal(_step)
 		},
-		[lastOutput, setInternal, newTableName, formattedColumnArg],
+		[setInternal, formattedColumnArg],
 	)
 
 	return { internal, handleVerbChange, setInternal }

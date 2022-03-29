@@ -2,12 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	TableContainer} from '@data-wrangling-components/core';
+import type { TableContainer } from '@data-wrangling-components/core'
 import {
 	container,
 	createPipeline,
-	createTableStore
+	createTableStore,
 } from '@data-wrangling-components/core'
 import {
 	ArqueroDetailsList,
@@ -55,7 +54,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 				hideModal()
 			}
 		},
-		[outputTable, hideModal, pipeline, isLoaded],
+		[hideModal, pipeline, isLoaded],
 	)
 
 	if (!outputTable?.table) {

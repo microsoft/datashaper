@@ -15,7 +15,7 @@ export function useAddNewTables(
 	setStoredTables: (tables: Map<string, TableContainer>) => void,
 ): (tables: TableContainer[]) => void {
 	return useCallback(
-		async (tables: TableContainer[]) => {
+		(tables: TableContainer[]) => {
 			const existing = store.list()
 			tables.forEach(table => {
 				const isStored = existing.includes(table.id)
@@ -24,7 +24,7 @@ export function useAddNewTables(
 				}
 			})
 
-			const _storedTables = await store.toMap()
+			const _storedTables = store.toMap()
 			setStoredTables(_storedTables)
 		},
 		[store, setStoredTables],

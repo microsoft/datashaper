@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
+import type {
 	SpreadArgs,
 	SpreadStep,
 	Step,
-	NodeInput,
 } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'

@@ -7,7 +7,7 @@ import type {
 	TableContainer,
 	TableStore,
 } from '@data-wrangling-components/core'
-import { createTableStore, container } from '@data-wrangling-components/core'
+import { container, createTableStore } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -60,11 +60,8 @@ export function useInputTables(
 		new Map<string, TableContainer>(),
 	)
 	useEffect(() => {
-		const f = async () => {
-			const results = await store.toMap()
-			setTables(results)
-		}
-		f()
+		const results = store.toMap()
+		setTables(results)
 	}, [list, store, setTables])
 	return tables
 }
