@@ -28,11 +28,11 @@ export function useInternalTableStep(
 	}, [step, setInternal])
 
 	const newTableName = useCreateTableName(store)
-	console.log('todo remove', newTableName)
 
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {
-			const _step = factory({ verb })
+			const id = newTableName(verb)
+			const _step = factory({ verb, id, outputs: { default: id } })
 			_step.args = formattedColumnArg(_step.args)
 			setInternal(_step)
 		},
