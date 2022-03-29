@@ -31,18 +31,16 @@ interface ManageStepsProps
 }
 
 export const ManageSteps: React.FC<ManageStepsProps> = memo(
-	function ManageSteps(props) {
-		const {
-			onDelete,
-			onSave,
-			onSelect,
-			store,
-			steps,
-			type = StepsType.Table,
-			table,
-			...rest
-		} = props
-
+	function ManageSteps({
+		onDelete,
+		onSave,
+		onSelect,
+		store,
+		steps,
+		type = StepsType.Table,
+		table,
+		...props
+	}) {
 		const {
 			onDeleteClicked,
 			toggleDeleteModalOpen,
@@ -83,7 +81,7 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 							isOpen={isTransformModalOpen}
 							store={store}
 							onDismiss={onDismissTransformModal}
-							{...rest}
+							{...props}
 						/>
 					)}
 
@@ -94,7 +92,7 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 							onTransformRequested={onCreate}
 							isOpen={isTransformModalOpen}
 							onDismiss={onDismissTransformModal}
-							{...rest}
+							{...props}
 						/>
 					)}
 

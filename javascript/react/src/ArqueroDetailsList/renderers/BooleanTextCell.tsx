@@ -11,7 +11,7 @@ import type { FormattedCellProps } from './types.js'
  * Basic rendering of boolean values as true/false text.
  */
 export const BooleanTextCell: React.FC<FormattedCellProps> = memo(
-	function TextCell({ item, column, textAlign = 'left' }) {
+	function TextCell({ item, column, textAlign = 'right' }) {
 		const value = !!getValue(item, column)
 		return (
 			<div

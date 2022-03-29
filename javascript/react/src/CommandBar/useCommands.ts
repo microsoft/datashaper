@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ICommandBarItemProps } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
@@ -14,10 +13,9 @@ import { useMemo } from 'react'
  */
 export function useCommands(
 	commands: ICommandBarItemProps[] = [],
-	bgColor?: string,
-	color?: string,
+	background: string,
+	color: string,
 ): ICommandBarItemProps[] {
-	const theme = useThematic()
 	return useMemo(() => {
 		return commands.map(command =>
 			merge(
@@ -26,22 +24,22 @@ export function useCommands(
 					iconProps: {
 						styles: {
 							root: {
-								color: color || theme.application().background().hex(),
+								color,
 							},
 						},
 					},
 					buttonStyles: {
 						root: {
-							background: bgColor || theme.application().accent().hex(),
-							color: color || theme.application().background().hex(),
+							background,
+							color,
 						},
 						menuIcon: {
-							color: color || theme.application().background().hex(),
+							color,
 						},
 					},
 				},
 				command,
 			),
 		)
-	}, [theme, commands, bgColor, color])
+	}, [commands, background, color])
 }

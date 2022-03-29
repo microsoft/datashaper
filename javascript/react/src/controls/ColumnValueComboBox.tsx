@@ -21,7 +21,7 @@ export interface ColumnValueComboBoxProps extends Partial<IComboBoxProps> {
  * be dependent on per-row column values.
  */
 export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps> = memo(
-	function ColumnValueComboBox({ table, columnName, ...rest }) {
+	function ColumnValueComboBox({ table, columnName, ...props }) {
 		const options = useColumnValueOptions(columnName ?? '', table)
 		const withHeader = useMemo(() => {
 			return [
@@ -43,7 +43,7 @@ export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps> = memo(
 				styles={dropdownStyles}
 				dropdownMaxWidth={200}
 				useComboBoxAsMenuWidth
-				{...rest}
+				{...props}
 			/>
 		)
 	},

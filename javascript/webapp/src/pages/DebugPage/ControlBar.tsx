@@ -37,7 +37,9 @@ export interface ControlBarProps {
 	features: DetailsListFeatures
 	onFeaturesChange?: (features: DetailsListFeatures) => void
 	compact: boolean
-	onCompactChange?: (auto: boolean) => void
+	onCompactChange: (auto: boolean) => void
+	autoType: boolean
+	onAutoTypeChange: (autoType: boolean) => void
 }
 
 export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
@@ -48,6 +50,8 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	onFeaturesChange,
 	compact,
 	onCompactChange,
+	autoType,
+	onAutoTypeChange,
 }) {
 	const loadFiles = useLoadTableFiles()
 	const loadSpec = useLoadSpecFile()
@@ -137,10 +141,14 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	)
 
 	const handleCompactChange = useCallback(
-		(e, checked) => onCompactChange && onCompactChange(checked),
+		(e, checked) => onCompactChange(checked),
 		[onCompactChange],
 	)
 
+	const handleAutoTypeChange = useCallback(
+		(e, checked) => onAutoTypeChange(checked),
+		[onAutoTypeChange],
+	)
 	return (
 		<Container>
 			<ExamplesContainer>
@@ -156,6 +164,13 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 				</Description>
 			</ExamplesContainer>
 			<ControlBlock>
+				<Control>
+					<Checkbox
+						label={'Auto-type columns'}
+						checked={autoType}
+						onChange={handleAutoTypeChange}
+					/>
+				</Control>
 				<Control>
 					<Checkbox
 						label={'Smart headers'}
@@ -189,13 +204,6 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						onChange={(e, checked) =>
 							handleFeaturesChange('histogramColumnHeaders', checked)
 						}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Compact'}
-						checked={compact}
-						onChange={handleCompactChange}
 					/>
 				</Control>
 			</ControlBlock>
@@ -279,6 +287,13 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						onChange={(e, checked) =>
 							handleArrayFeaturesChange('showDropdown', checked)
 						}
+					/>
+				</Control>
+				<Control>
+					<Checkbox
+						label={'Compact rows'}
+						checked={compact}
+						onChange={handleCompactChange}
 					/>
 				</Control>
 			</ControlBlock>

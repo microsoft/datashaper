@@ -36,6 +36,7 @@ const columns = {
 }
 
 const DEFAULT_STATS = [
+	StatsColumnType.Type,
 	StatsColumnType.Min,
 	StatsColumnType.Max,
 	StatsColumnType.Distinct,
@@ -43,10 +44,11 @@ const DEFAULT_STATS = [
 ]
 
 export const DebugPage: React.FC = memo(function DebugPage() {
+	const [autoType, setAutoType] = useState<boolean>(true)
 	// this is special to the test example,
 	// a running app needs to maintain its own list of uploaded files
 	const [inputList, setInputs] = useInputTableList()
-	const store = useTableStore()
+	const store = useTableStore(autoType)
 	const inputTables = useInputTables(inputList, store)
 	const pipeline = usePipeline(store)
 	const [result, setResult] = useState<ColumnTable | undefined>()
@@ -56,6 +58,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
 	const [features, setFeatures] = useState<DetailsListFeatures>({
+		statsColumnHeaders: true,
 		statsColumnTypes: DEFAULT_STATS,
 	})
 	const [compact, setCompact] = useState<boolean>(true)
@@ -138,6 +141,8 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					onFeaturesChange={setFeatures}
 					compact={compact}
 					onCompactChange={setCompact}
+					autoType={autoType}
+					onAutoTypeChange={setAutoType}
 				/>
 				<InputsSection>
 					<Section title="Inputs">
