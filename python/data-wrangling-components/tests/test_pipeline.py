@@ -5,14 +5,14 @@
 
 import pandas as pd
 
-from data_wrangling_components.pipeline import Pipeline
+from data_wrangling_components.pipeline import DefaultPipeline
 from data_wrangling_components.types import MathOperator, Step, Verb
 
 
 def test_run_pipeline_single_step():
     table = pd.DataFrame({"ID": [1, 2, 3, 4]})
 
-    pipeline = Pipeline()
+    pipeline = DefaultPipeline()
     pipeline.add_dataset("input", table)
 
     pipeline.add(
@@ -33,7 +33,7 @@ def test_run_pipeline_single_step():
 def test_run_multiple_steps():
     table = pd.DataFrame({"ID": [1, 2, 3, 4]})
 
-    pipeline = Pipeline()
+    pipeline = DefaultPipeline()
     pipeline.add_dataset("input", table)
 
     pipeline.add_all(

@@ -6,15 +6,15 @@ import pandas as pd
 
 from data_wrangling_components.engine.verbs.chain import chain
 from data_wrangling_components.table_store import (
+    DefaultTableStore,
     LazyTableStorage,
     TableContainer,
-    TableStore,
 )
 from data_wrangling_components.types import Step, Verb
 
 
 def get_store():
-    return TableStore(
+    return DefaultTableStore(
         {
             "input": LazyTableStorage(
                 TableContainer(id="input", table=pd.DataFrame({"ID": [1, 2, 3, 4]})),

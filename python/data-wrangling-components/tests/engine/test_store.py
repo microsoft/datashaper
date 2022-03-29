@@ -6,7 +6,7 @@
 import numpy as np
 import pandas as pd
 
-from data_wrangling_components.table_store import TableContainer, TableStore
+from data_wrangling_components.table_store import DefaultTableStore, TableContainer
 
 
 def get_test_store():
@@ -140,7 +140,7 @@ def get_test_store():
         ),
     ]
 
-    store = TableStore()
+    store = DefaultTableStore()
 
     for table in tables:
         store.set(table.id, table)
