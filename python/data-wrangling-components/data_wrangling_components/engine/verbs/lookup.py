@@ -10,7 +10,7 @@ from data_wrangling_components.types import InputColumnListArgs, JoinArgs, Step
 
 
 @dataclass
-class LookupArgs(JoinArgs, InputColumnListArgs):
+class LookupArgs(InputColumnListArgs, JoinArgs):
     pass
 
 
@@ -37,7 +37,7 @@ def lookup(step: Step, store: TableStore):
 
     if len(args.on) > 1:
         left_column = args.on[0]
-        right_column = args.on[1] if len(args.on) > 0 else None
+        right_column = args.on[1]
         other = other[[right_column] + args.columns]
 
         output = input_table.merge(

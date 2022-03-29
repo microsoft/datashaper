@@ -73,18 +73,18 @@ class Step:
     verb: Verb
     input: str
     output: str
-    args: Optional[Dict[str, Any]] = field(default_factory=dict)
+    args: Dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
 class JoinArgs:
-    other: Optional[str] = None
-    on: Optional[List[str]] = None
+    other: str
+    on: List[str] = field(default_factory=list)
 
 
 @dataclass
 class InputColumnListArgs:
-    columns: Optional[List[str]] = None
+    columns: List[str] = field(default_factory=list)
 
 
 @dataclass

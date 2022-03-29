@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import List, Optional, Tuple, Union
+from typing import Optional, Tuple, Union
 
 import numpy as np
 
@@ -21,12 +21,12 @@ class BinArgs(OutputColumnArgs):
     fixedwidth: Optional[int] = None
     min: Optional[int] = None
     max: Optional[int] = None
-    clamped: Optional[bool] = None
+    clamped: bool = False
 
 
 def __get_boundary(
     index: int,
-    bin_edges: List[Union[int, float]],
+    bin_edges: np.ndarray,
     clamped: bool,
     min_max: Tuple[float, float],
 ) -> Union[int, float]:
@@ -74,7 +74,7 @@ def bin(step: Step, store: TableStore):
         bin_edges = np.histogram_bin_edges(
             input_table[args.column], bins="auto", range=min_max
         )
-    elif args.strategy == BinStrategy.FixedCount:
+    elif args.strategy == BinStrategy.FixedCount and args.fixedcount is not None:
         bin_edges = np.histogram_bin_edges(
             input_table[args.column], bins=args.fixedcount, range=min_max
         )
@@ -86,11 +86,11 @@ def bin(step: Step, store: TableStore):
         )
 
     if not args.clamped:
-        bin_edges = [-np.inf] + list(bin_edges) + [np.inf]
+        bin_edges = np.array([-np.inf] + [float(edge) for edge in bin_edges] + [np.inf])
 
     value_edges = [
         __get_boundary(bin_index, bin_edges, args.clamped, min_max)
-        for index, bin_index in enumerate(
+        for _, bin_index in enumerate(
             np.searchsorted(bin_edges, input_table[args.column], side="right")
         )
     ]

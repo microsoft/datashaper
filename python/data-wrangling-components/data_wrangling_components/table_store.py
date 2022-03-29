@@ -76,7 +76,7 @@ class TableContainer(Generic[T]):
 @dataclass
 class LazyTableStorage:
     container: TableContainer
-    resolver: ResolverFunction = None
+    resolver: Optional[ResolverFunction] = None
     resolved: bool = False
 
 
@@ -121,23 +121,25 @@ class DefaultTableStore:
         :rtype: Union[pd.DataFrame, DataFrameGroupBy]
         """
         try:
-            container = self._tables[name]
+            table_container = self._tables[name]
         except KeyError:
             raise TableNotFoundError(f"No table named '{name}' found in store.")
 
-        if not container.resolved:
-            resolver_func = container.resolver
+        if not table_container.resolved:
+            resolver_func = table_container.resolver
             if resolver_func is None:
                 raise ResolverNotFoundError(
                     f"No resolver function for unloaded table '{name}'."
                 )
-            table = container.resolver(name)
-            self._tables[name] = table
+            else:
+                table = resolver_func(name)
+                table_container.container.table = table
+                table_container.resolved = True
 
-        return self._tables[name]
+        return table_container.container
 
     def table(self, name: str) -> Table:
-        container = self.get(name).container
+        container = self.get(name)
         return container.table
 
     def set(self, name: str, table: TableContainer) -> None:
@@ -171,7 +173,9 @@ class DefaultTableStore:
             The function to be used to load the table
         :type resolver: Callable[[str], pd.DataFrame]
         """
-        self._tables[name] = LazyTableStorage(id=name, name=name, resolver=resolver)
+        self._tables[name] = LazyTableStorage(
+            TableContainer(id=name, name=name), resolver=resolver, resolved=False
+        )
 
     def list(self, filter: Optional[str] = None) -> List[str]:
         """Lists all tables stored in the store
@@ -195,6 +199,7 @@ class DefaultTableStore:
         :rtype: Dict[str, pd.DataFrame]
         """
         return {
-            table.container.name: self.table(table.container.name)
+            table.container.name: table.container.table
             for table in self._tables.values()
+            if table.container.name is not None and table.container.table is not None
         }

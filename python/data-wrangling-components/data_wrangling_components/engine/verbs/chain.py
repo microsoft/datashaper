@@ -66,6 +66,8 @@ def chain(step: Step, store: TableStore):
             raise e
 
     output = steps_store.table(steps_store.list()[-1])
-    output_container = TableContainer(id=step.output, name=step.output, table=output)
+    output_container: TableContainer = TableContainer(
+        id=step.output, name=step.output, table=output
+    )
     store.set(step.output, output_container)
     return output_container

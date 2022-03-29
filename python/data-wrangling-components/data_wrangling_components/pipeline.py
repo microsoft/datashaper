@@ -61,14 +61,14 @@ class Pipeline(Protocol):
     def list_store(self, filter: Optional[str] = None) -> List[str]:
         ...
 
-    def to_json(self) -> str:
+    def to_json(self) -> Optional[str]:
         ...
 
 
 @dataclass
 class DefaultPipeline:
-    _store: Optional[TableStore] = field(default_factory=DefaultTableStore)
-    _steps: Optional[List[Step]] = field(default_factory=list)
+    _store: TableStore = field(default_factory=DefaultTableStore)
+    _steps: List[Step] = field(default_factory=list[Step])
 
     def add(self, step: Step):
         """Adds a new step into the pipeline
@@ -213,7 +213,7 @@ class DefaultPipeline:
     def __len__(self):
         return len(self._steps)
 
-    def to_json(self, file_path: str = None, indent: int = None) -> str:
+    def to_json(self, file_path: str = None, indent: int = None) -> Optional[str]:
         """Creates a json representation of the steps in the pipeline
 
         :param file_path:
@@ -237,6 +237,7 @@ class DefaultPipeline:
                     indent=indent,
                     cls=StepJsonEncoder,
                 )
+            return None
 
     @staticmethod
     def from_json(steps: List[Dict], store: TableStore = None) -> "Pipeline":

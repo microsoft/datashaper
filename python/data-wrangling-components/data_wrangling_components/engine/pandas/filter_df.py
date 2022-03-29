@@ -3,6 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import Optional, Union
+
 import pandas as pd
 
 from data_wrangling_components.types import (
@@ -28,6 +30,7 @@ _operator_map = {
 
 
 def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame:
+    value: Optional[Union[str, float]] = None
     if args.type == FilterCompareType.Column:
         value = f"`{args.value}`"
     else:
