@@ -20,20 +20,18 @@ import {
  * It is intended to be invoked from a table or column header.
  */
 export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
-	function ColumnTransformModal(props) {
-		const {
-			table,
-			step,
-			onTransformRequested,
-			hideInputColumn,
-			hideOutputColumn,
-			verbs,
-			headerText,
-			nextInputTable,
-			onDismiss,
-			...rest
-		} = props
-
+	function ColumnTransformModal({
+		table,
+		step,
+		onTransformRequested,
+		hideInputColumn,
+		hideOutputColumn,
+		verbs,
+		headerText,
+		nextInputTable,
+		onDismiss,
+		...props
+	}) {
 		const { internal, setInternal, handleVerbChange } = useInternalStep(
 			step,
 			nextInputTable,
@@ -62,7 +60,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 			<Modal
 				onDismiss={onDismiss}
 				onDismissed={() => setInternal(undefined)}
-				{...rest}
+				{...props}
 			>
 				<Header>
 					<Title>{headerText}</Title>

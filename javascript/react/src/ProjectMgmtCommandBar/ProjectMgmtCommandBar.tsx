@@ -3,15 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableContainer } from '@data-wrangling-components/core'
+import type { ICommandBarProps } from '@fluentui/react'
 import { ThemeVariant } from '@thematic/core'
 import { useThematic } from '@thematic/react'
 import React, { memo } from 'react'
-import styled from 'styled-components'
 
 import { CommandBar } from '../CommandBar/index.js'
 import { useProjectMgmtCommands } from './hooks/index.js'
 
-interface Props {
+export interface ProjectMgmtCommandBarProps
+	extends Omit<ICommandBarProps, 'items'> {
 	steps: Step[]
 	tables: TableContainer[]
 	outputTable?: TableContainer
@@ -19,13 +20,14 @@ interface Props {
 	onUpdateTables?: (tables: TableContainer[]) => void
 }
 
-export const ProjectMgmtCommandBar: React.FC<Props> = memo(
+export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps> = memo(
 	function ProjectMgmtCommandBar({
 		steps,
 		tables,
 		outputTable,
 		onUpdateSteps,
 		onUpdateTables,
+		...props
 	}) {
 		const theme = useThematic()
 		const commands = useProjectMgmtCommands(
@@ -36,26 +38,20 @@ export const ProjectMgmtCommandBar: React.FC<Props> = memo(
 			onUpdateTables,
 		)
 		return (
-			<Container>
-				<CommandBar
-					commands={commands}
-					bgColor={
-						theme.variant === ThemeVariant.Light
-							? theme.application().highContrast().hex()
-							: theme.application().lowContrast().hex()
-					}
-					color={
-						theme.variant === ThemeVariant.Light
-							? theme.application().lowContrast().hex()
-							: theme.application().midHighContrast().hex()
-					}
-					height="36px"
-					width="100%"
-					styles={{ root: { float: 'left', marginLeft: '2rem' } }}
-				/>
-			</Container>
+			<CommandBar
+				items={commands}
+				bgColor={
+					theme.variant === ThemeVariant.Light
+						? theme.application().highContrast().hex()
+						: theme.application().lowContrast().hex()
+				}
+				color={
+					theme.variant === ThemeVariant.Light
+						? theme.application().lowContrast().hex()
+						: theme.application().midHighContrast().hex()
+				}
+				{...props}
+			/>
 		)
 	},
 )
-
-const Container = styled.section``

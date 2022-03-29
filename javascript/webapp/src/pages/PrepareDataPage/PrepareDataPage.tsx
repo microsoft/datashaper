@@ -64,6 +64,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				outputTable={outputTable}
 				onUpdateSteps={setSteps}
 				onUpdateTables={updateTables}
+				styles={mgmtStyles}
 			/>
 			{message && (
 				<MessageBar
@@ -97,6 +98,13 @@ const Container = styled.div`
 const Wrapper = styled.div`
 	height: 90%;
 `
+
+const mgmtStyles = {
+	root: {
+		height: 36,
+		paddingLeft: 9,
+	},
+}
 
 const dropzoneStyles = {
 	container: {

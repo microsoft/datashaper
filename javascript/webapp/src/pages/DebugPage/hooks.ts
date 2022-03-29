@@ -38,17 +38,19 @@ export function useInputTableList(): [
 
 // create the store and initialize it with our test tables
 // memoing this gives us a chance queue up our built-in test tables on first run
-export function useTableStore(): TableStore {
+export function useTableStore(autoType = false): TableStore {
 	return useMemo(() => {
 		const store = createTableStore()
 		TABLES.forEach(name => {
-			const tablePromise = loadCSV(name, { parse, autoMax: 1000000 }).then(
-				res => container(name, res),
-			)
+			const tablePromise = loadCSV(name, {
+				parse,
+				autoMax: 100000,
+				autoType,
+			}).then(res => container(name, res))
 			store.set(name, from(tablePromise))
 		})
 		return store
-	}, [])
+	}, [autoType])
 }
 
 // write out the loaded test tables to a map for rendering

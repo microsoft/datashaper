@@ -35,37 +35,35 @@ import { debounceFn } from './util/index.js'
  * Renders an arquero table using a fluent DetailsList.
  */
 export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
-	function ArqueroDetailsList(props) {
-		const {
-			table,
-			features = {},
-			metadata,
-			offset = 0,
-			limit = Infinity,
-			includeAllColumns = true,
-			visibleColumns,
-			isSortable = false,
-			isStriped = false,
-			isColumnClickable = false,
-			showColumnBorders = false,
-			selectedColumn,
-			onColumnClick,
-			onCellDropdownSelect,
-			onRenderGroupHeader,
-			onChangeMetadata,
-			// extract props we want to set data-centric defaults for
-			selectionMode = SelectionMode.none,
-			layoutMode = DetailsListLayoutMode.fixedColumns,
-			columns,
-			onColumnHeaderClick,
-			styles,
-			isHeadersFixed = false,
-			compact = false,
-			isResizable = true,
-			// passthrough the remainder as props
-			...rest
-		} = props
-
+	function ArqueroDetailsList({
+		table,
+		features = {},
+		metadata,
+		offset = 0,
+		limit = Infinity,
+		includeAllColumns = true,
+		visibleColumns,
+		isSortable = false,
+		isStriped = false,
+		isColumnClickable = false,
+		showColumnBorders = false,
+		selectedColumn,
+		onColumnClick,
+		onCellDropdownSelect,
+		onRenderGroupHeader,
+		onChangeMetadata,
+		// extract props we want to set data-centric defaults for
+		selectionMode = SelectionMode.none,
+		layoutMode = DetailsListLayoutMode.fixedColumns,
+		columns,
+		onColumnHeaderClick,
+		styles,
+		isHeadersFixed = false,
+		compact = false,
+		isResizable = true,
+		// passthrough the remainder as props
+		...props
+	}) {
 		const [version, setVersion] = useState(0)
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(isSortable, onColumnHeaderClick)
@@ -205,7 +203,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					onRenderDetailsHeader={renderDetailsHeader}
 					onColumnResize={onColumnResize}
 					compact={compact}
-					{...rest}
+					{...props}
 					listProps={{
 						version,
 					}}

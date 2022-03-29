@@ -14,8 +14,7 @@ import { memo, useMemo } from 'react'
  * indicates the field can't be edited without looking fully disabled.
  */
 export const ReadOnlyTextField: React.FC<ITextFieldProps> = memo(
-	function ReadOnlyTextField(props) {
-		const { styles, ...rest } = props
+	function ReadOnlyTextField({ styles, ...props }) {
 		const theme = useThematic()
 		const baseStyles = useMemo(() => {
 			return merge(
@@ -30,6 +29,6 @@ export const ReadOnlyTextField: React.FC<ITextFieldProps> = memo(
 				styles,
 			)
 		}, [theme, styles])
-		return <TextField readOnly styles={baseStyles} {...rest} />
+		return <TextField readOnly styles={baseStyles} {...props} />
 	},
 )

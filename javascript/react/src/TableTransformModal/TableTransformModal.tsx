@@ -25,16 +25,15 @@ import {
 } from './TableTransformModal.hooks.js'
 
 export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
-	function TableTransformModal(props) {
-		const {
-			onDismiss,
-			store,
-			onTransformRequested,
-			step,
-			nextInputTable,
-			styles,
-			...rest
-		} = props
+	function TableTransformModal({
+		onDismiss,
+		store,
+		onTransformRequested,
+		step,
+		nextInputTable,
+		styles,
+		...props
+	}) {
 		const [isGuidanceVisible, { toggle: toggleIsGuidanceVisible }] =
 			useBoolean(false)
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
@@ -56,7 +55,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 				onDismissed={() => setInternal(undefined)}
 				styles={adaptedStyles}
 				directionalHint={DirectionalHint.rightTopEdge}
-				{...rest}
+				{...props}
 			>
 				<Header>
 					<Title>{step ? 'Edit step' : 'New step'}</Title>

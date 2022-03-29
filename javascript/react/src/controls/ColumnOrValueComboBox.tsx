@@ -26,7 +26,7 @@ const noop = () => true
  * be dependent on per-row column values.
  */
 export const ColumnOrValueComboBox: React.FC<ColumnOrValueComboBoxProps> = memo(
-	function ColumnOrValueComboBox({ table, filter = noop, ...rest }) {
+	function ColumnOrValueComboBox({ table, filter = noop, ...props }) {
 		const options = useTableColumnOptions(table, filter)
 		const withHeader = useMemo(() => {
 			return [
@@ -46,7 +46,7 @@ export const ColumnOrValueComboBox: React.FC<ColumnOrValueComboBoxProps> = memo(
 				placeholder={'text/number or select column'}
 				options={withHeader}
 				styles={dropdownStyles}
-				{...rest}
+				{...props}
 			/>
 		)
 	},

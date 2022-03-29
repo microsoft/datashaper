@@ -18,8 +18,7 @@ export interface TableDropdownProps extends Partial<IDropdownProps> {
  * Dropdown wrapper to automatically list the tables in a TableStore.
  */
 export const TableDropdown: React.FC<TableDropdownProps> = memo(
-	function TableDropdown(props) {
-		const { store, ...rest } = props
+	function TableDropdown({ store, ...props }) {
 		const tableOptions = useTableOptions(store)
 		return (
 			<Dropdown
@@ -27,7 +26,7 @@ export const TableDropdown: React.FC<TableDropdownProps> = memo(
 				placeholder={'Choose table'}
 				options={tableOptions}
 				styles={dropdownStyles}
-				{...rest}
+				{...props}
 			/>
 		)
 	},
