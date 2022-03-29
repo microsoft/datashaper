@@ -45,6 +45,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 		useBoolean(false)
 
 	const commands = useCommands(showModal)
+	console.log('use commands?', commands)
 
 	const handleTransformRequested = useCallback(
 		step => {
