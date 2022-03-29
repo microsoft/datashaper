@@ -36,7 +36,7 @@ export function useInternalTableStep(
 			_step.args = formattedColumnArg(_step.args)
 			setInternal(_step)
 		},
-		[setInternal, formattedColumnArg],
+		[setInternal, formattedColumnArg, newTableName],
 	)
 
 	return { internal, handleVerbChange, setInternal }
