@@ -7,7 +7,7 @@ import json
 import zipfile
 
 from io import StringIO
-from typing import Callable, Dict, List, Optional
+from typing import Callable, Dict, List, Optional, Protocol
 
 import pandas as pd
 
@@ -15,13 +15,59 @@ from dataclasses import dataclass, field
 
 from data_wrangling_components.engine.verbs.chain import chain
 from data_wrangling_components.step_json_encoder import StepJsonEncoder
-from data_wrangling_components.table_store import TableContainer, TableStore
+from data_wrangling_components.table_store import (
+    DefaultTableStore,
+    Table,
+    TableContainer,
+    TableStore,
+)
 from data_wrangling_components.types import Step, Verb
 
 
+class Pipeline(Protocol):
+    def add(self, step: Step):
+        ...
+
+    def add_all(self, steps: List[Step]):
+        ...
+
+    def add_dataset(
+        self,
+        name: str,
+        dataframe: pd.DataFrame = None,
+        path: str = None,
+        resolver: Callable[[str], pd.DataFrame] = None,
+    ):
+        ...
+
+    def get_dataset(self, name: str) -> Table:
+        ...
+
+    def save_store(self, zip_path: str) -> None:
+        ...
+
+    def load_store(self, zip_path: str) -> None:
+        ...
+
+    def clear(self) -> None:
+        ...
+
+    def update(self, step: Step, index: int) -> None:
+        ...
+
+    def run(self) -> TableContainer:
+        ...
+
+    def list_store(self, filter: Optional[str] = None) -> List[str]:
+        ...
+
+    def to_json(self) -> str:
+        ...
+
+
 @dataclass
-class Pipeline:
-    _store: Optional[TableStore] = field(default_factory=TableStore)
+class DefaultPipeline:
+    _store: Optional[TableStore] = field(default_factory=DefaultTableStore)
     _steps: Optional[List[Step]] = field(default_factory=list)
 
     def add(self, step: Step):
@@ -88,7 +134,7 @@ class Pipeline:
         :return: The pandas DataFrame represented by the name in the store
         :rtype: pd.DataFrame
         """
-        return self._store.get(name)
+        return self._store.table(name)
 
     def save_store(self, zip_path: str):
         """Saves the store into a zip file in the provided path
@@ -112,7 +158,11 @@ class Pipeline:
                 file_name = zip_info.filename.split(".")[0]
                 self._store.set(
                     file_name,
-                    pd.DataFrame(StringIO(file_bytes.decode("utf-8"))),
+                    TableContainer(
+                        id=file_name,
+                        name=file_name,
+                        table=pd.DataFrame(StringIO(file_bytes.decode("utf-8"))),
+                    ),
                 )
 
     def clear(self):
@@ -202,8 +252,8 @@ class Pipeline:
         :rtype: Pipeline
         """
         if store is None:
-            store = TableStore()
-        new_pipeline = Pipeline(store)
+            store = DefaultTableStore()
+        new_pipeline = DefaultPipeline(store)
         for step in steps:
             new_pipeline.add(
                 Step(

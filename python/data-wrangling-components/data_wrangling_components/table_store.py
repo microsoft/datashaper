@@ -3,7 +3,17 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar, Union
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Generic,
+    List,
+    Optional,
+    Protocol,
+    TypeVar,
+    Union,
+)
 
 import pandas as pd
 
@@ -50,25 +60,51 @@ class TableMetadata:
 T = TypeVar("T")
 
 
+Table = Union[pd.DataFrame, DataFrameGroupBy]
+ResolverFunction = Callable[[str], Table]
+
+
 @dataclass
 class TableContainer(Generic[T]):
     id: str
     name: Optional[str] = None
-    table: Optional[Union[pd.DataFrame, DataFrameGroupBy]] = None
+    table: Optional[Table] = None
     metadata: Optional[TableMetadata] = None
     context: Optional[T] = None
-    resolver: Optional[Callable[[str], pd.DataFrame]] = None
 
 
 @dataclass
 class LazyTableStorage:
     container: TableContainer
-    resolver: Optional[Callable[[str], pd.DataFrame]] = None
+    resolver: ResolverFunction = None
     resolved: bool = False
 
 
+class TableStore(Protocol):
+    def get(self, name: str) -> TableContainer:
+        ...
+
+    def table(self, name: str) -> Table:
+        ...
+
+    def set(self, name: str, table: TableContainer) -> None:
+        ...
+
+    def delete(self, name: str) -> None:
+        ...
+
+    def queue(self, name: str, resolver: ResolverFunction) -> None:
+        ...
+
+    def list(self, filter: Optional[str] = None) -> List[str]:
+        ...
+
+    def to_map(self) -> Dict[str, Table]:
+        ...
+
+
 @dataclass
-class TableStore:
+class DefaultTableStore:
     _tables: Dict[str, LazyTableStorage] = field(default_factory=dict)
 
     def get(self, name: str) -> TableContainer:
@@ -100,7 +136,7 @@ class TableStore:
 
         return self._tables[name]
 
-    def table(self, name: str) -> Union[pd.DataFrame, DataFrameGroupBy]:
+    def table(self, name: str) -> Table:
         container = self.get(name).container
         return container.table
 
@@ -125,7 +161,7 @@ class TableStore:
         """
         self._tables.pop(name)
 
-    def queue(self, name: str, resolver: Callable[[str], pd.DataFrame]) -> None:
+    def queue(self, name: str, resolver: ResolverFunction) -> None:
         """Queues a table to be lazy loaded with a resolver function
 
         :param name:
@@ -151,11 +187,14 @@ class TableStore:
             key for key in list(self._tables.keys()) if filter is None or filter in key
         ]
 
-    def to_map(self) -> Dict[str, pd.DataFrame]:
+    def to_map(self) -> Dict[str, Table]:
         """Creates a map of name: DataFrame from the store
 
         :return:
             A Dictionary with name as key and DataFrame as value
         :rtype: Dict[str, pd.DataFrame]
         """
-        return {table.name: self.get(table.name) for table in self._tables.values()}
+        return {
+            table.container.name: self.table(table.container.name)
+            for table in self._tables.values()
+        }
