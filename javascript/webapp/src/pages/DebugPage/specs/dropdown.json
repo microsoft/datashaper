@@ -4,7 +4,7 @@
 	"steps": [
 		{
 			"verb": "derive",
-			"input": "data/stocks.csv",
+			"inputs": { "default": { "node": "data/stocks.csv" } },
 			"output": "output-table-0",
 			"args": {
 				"to": "Month Key",

@@ -1,4 +1,5 @@
 {
+	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Binning",
 	"description": "Shows how different binning strategies and clamping work.",
 	"steps": [

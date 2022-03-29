@@ -1,11 +1,12 @@
 {
+	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Categorical sparkbar",
 	"description": "Aggregates months into an array to demonstrate categorical Sparkbar cells",
 	"steps": [
 		{
 			"verb": "aggregate",
-			"input": "data/stocks.csv",
-			"output": "categorical",
+			"inputs": { "default": { "node": "data/stocks.csv" } },
+			"outputs": { "default": "categorical" },
 			"args": {
 				"groupby": "Symbol",
 				"column": "Month",

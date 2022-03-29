@@ -1,4 +1,5 @@
 {
+	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Every operation",
 	"description": "Chains every available operation together for an easy look at all UX and output examples",
 	"steps": [

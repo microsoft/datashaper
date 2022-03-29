@@ -1,4 +1,5 @@
 {
+	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Sparkline",
 	"description": "Aggregates a daily prices into an array to demonstrate Sparkline cells",
 	"steps": [

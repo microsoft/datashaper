@@ -1,4 +1,5 @@
 {
+	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Multi-criteria binarize",
 	"description": "Use multiple criteria chained together to create a boolean condition OR for a single binarized output column.",
 	"steps": [
