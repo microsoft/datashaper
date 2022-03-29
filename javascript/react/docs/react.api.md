@@ -1201,17 +1201,17 @@ export const WindowDescription: React.FC<StepDescriptionProps>;
 // Warning: (ae-missing-release-tag) "withInputColumnDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const withInputColumnDropdown: (label?: string | undefined) => HOCFunction<StepComponentProps>;
+export function withInputColumnDropdown(label?: string): HOCFunction<StepComponentProps>;
 
 // Warning: (ae-missing-release-tag) "withInputTableDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const withInputTableDropdown: (label?: string | undefined) => HOCFunction<StepComponentProps>;
+export function withInputTableDropdown(label?: string): HOCFunction<StepComponentProps>;
 
 // Warning: (ae-missing-release-tag) "withOutputColumnTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const withOutputColumnTextfield: (label?: string | undefined) => HOCFunction<StepComponentProps>;
+export function withOutputColumnTextfield(label?: string): HOCFunction<StepComponentProps>;
 
 // Warning: (ae-missing-release-tag) "withOutputTableTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

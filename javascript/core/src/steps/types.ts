@@ -71,6 +71,12 @@ export interface Step<T = unknown> {
 	outputs: Record<string, string>
 }
 
+export interface Specification {
+	name?: string
+	description?: string
+	steps?: Step[]
+}
+
 export type AggregateStep = Step<AggregateArgs>
 export type BinStep = Step<BinArgs>
 export type BinarizeStep = Step<BinarizeArgs>

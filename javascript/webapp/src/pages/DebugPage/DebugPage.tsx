@@ -19,6 +19,7 @@ import {
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { from } from 'rxjs'
 import styled from 'styled-components'
 
 import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
@@ -87,7 +88,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 
 	const handleRunClick = useCallback(async () => {
 		const res = await pipeline.run()
-		const output = await store.toMap()
+		const output = store.toMap()
 		pipeline.print()
 		store.print()
 		setResult(res.table)
@@ -103,7 +104,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 			pipeline.clear()
 			pipeline.addAll(spec.steps)
 			const res = await pipeline.run()
-			const output = await store.toMap()
+			const output = store.toMap()
 			store.print()
 			setResult(res.table)
 			setOutputs(output)
@@ -114,7 +115,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const handleDropFiles = useCallback(
 		(loaded: Map<string, ColumnTable>) => {
 			loaded.forEach((table, name) => {
-				store.set({ id: name, table })
+				store.set(name, from([{ id: name, table }]))
 			})
 			store.print()
 			setInputs(prev => [...prev, ...Array.from(loaded.keys())])
@@ -150,7 +151,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					</Section>
 				</InputsSection>
 				{steps.map((step, index) => {
-					const output = outputs?.get(step.output)?.table
+					const output = outputs?.get(step.outputs?.default)?.table
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
 							<Section title={`Step ${index + 1}`} subtitle={step.verb}>
@@ -170,7 +171,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 											className="table-section"
 										>
 											<Table
-												name={step.output}
+												name={step.id}
 												table={output}
 												config={columns}
 												features={features}

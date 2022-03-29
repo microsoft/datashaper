@@ -939,6 +939,8 @@ export type NodeId = string;
 // @public (undocumented)
 export enum NodeInput {
     // (undocumented)
+    Default = "default",
+    // (undocumented)
     Other = "other"
 }
 
