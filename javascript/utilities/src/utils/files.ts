@@ -109,7 +109,7 @@ export const createBaseFile = (
 	return new BaseFile(file)
 }
 
-export function createReader() {
+export function createReader(): FileReader {
 	const reader = new FileReader()
 	reader.onabort = () => console.log('file reading was aborted')
 	reader.onerror = () => console.log('file reading has failed')

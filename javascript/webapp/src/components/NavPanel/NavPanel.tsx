@@ -3,14 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { Guidance } from '@data-wrangling-components/react'
 import { Link, Panel, Toggle } from '@fluentui/react'
-import { memo, useCallback } from 'react'
-import ReactMarkdown from 'react-markdown'
+import { memo, useCallback, useMemo } from 'react'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { useHelpFileContentValue } from '~states/helpFileContent'
 import { useSettings } from '~states/settings'
 
+import { useGuidanceIndex } from '../../hooks/index.js'
 import { setDarkMode } from '../../localStorageHandler/localStorageHandler.js'
 
 export interface NavPanelProps {
@@ -23,7 +24,8 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 	onDismiss,
 }: NavPanelProps) {
 	const [settings, setSettings] = useSettings()
-	const helpFileContent = useHelpFileContentValue()
+	const index = useGuidanceIndex()
+	const location = useLocation()
 
 	const setDarkModeStatus = useCallback(
 		async (ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
@@ -33,6 +35,18 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 		},
 		[settings, setSettings],
 	)
+
+	const name = useMemo((): string => {
+		switch (location.pathname) {
+			case '/debug':
+				return 'debugPage'
+			case '/performance':
+				return 'perfPage'
+			case '/prepare':
+			default:
+				return 'prepareDataPage'
+		}
+	}, [location])
 
 	return (
 		<Panel
@@ -55,8 +69,7 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 
 			<HelpSection>
 				<H3>Help</H3>
-
-				<ReactMarkdown>{helpFileContent}</ReactMarkdown>
+				<Guidance name={name} index={index} />
 			</HelpSection>
 
 			<LinkSection>
