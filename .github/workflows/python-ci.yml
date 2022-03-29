@@ -24,10 +24,10 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        working-directory: ./python
+        working-directory: ./python/data_wrangling_components
         run: python -m poetry install
 
       - name: Test with pytest
-        working-directory: ./python
+        working-directory: ./python/data_wrangling_components
         run: |
           python -m poetry run python -m pytest -v tests
