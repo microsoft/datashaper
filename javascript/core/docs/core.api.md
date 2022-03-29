@@ -369,9 +369,7 @@ export function determineType(value: Value): DataType;
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface EraseArgs {
-    // (undocumented)
-    column: string;
+export interface EraseArgs extends InputColumnListArgs {
     // (undocumented)
     value: Value;
 }
@@ -520,7 +518,7 @@ export type GroupbyStep = Step<GroupbyArgs>;
 // Warning: (ae-missing-release-tag) "ImputeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ImputeArgs extends InputColumnArgs {
+export interface ImputeArgs extends InputColumnListArgs {
     value: Value;
 }
 

@@ -167,7 +167,7 @@
 			"input": "data/companies2.csv",
 			"output": "impute-1",
 			"args": {
-				"column": "Name",
+				"columns": ["Name"],
 				"value": "emptyValue"
 			}
 		},

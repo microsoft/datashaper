@@ -29,7 +29,7 @@ export const EraseDescription: React.FC<StepDescriptionProps> = memo(
 					sub,
 				},
 				{
-					before: 'value',
+					before: 'with value',
 					value: args.value,
 				},
 			]

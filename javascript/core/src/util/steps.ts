@@ -54,7 +54,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	filter: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
 	fold: [Tags.InputTable, Tags.RowModifying],
 	groupby: [Tags.InputTable],
-	impute: [Tags.InputTable, Tags.InputColumn],
+	impute: [Tags.InputTable],
 	intersect: [Tags.InputTable, Tags.RowModifying],
 	join: [Tags.InputTable, Tags.RowModifying],
 	lookup: [Tags.InputTable, Tags.RowModifying],

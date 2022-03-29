@@ -22,7 +22,7 @@ export const TextCell: React.FC<FormattedCellProps> = memo(function TextCell({
 				textAlign,
 			}}
 		>
-			{value}
+			{value.toString()}
 		</div>
 	)
 })
