@@ -35,7 +35,10 @@ import type {
 	StepChangeFunction,
 } from '../types.js'
 
-const noop = (value?: string) => value
+const noop = () => {
+	/* do nothing */
+}
+const identity = (value?: string) => value
 const num = (value?: string) => value && +value
 
 /**
@@ -81,8 +84,8 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 
 /**
  * Creates a list of dropdown options for the columns in a table
- * @param table -
- * @returns
+ * @param table - the input table
+ * @returns a list of dropdown options
  */
 export function useTableColumnOptions(
 	table: ColumnTable | undefined,
@@ -132,13 +135,13 @@ export function useColumnValueOptions(
 export function useHandleDropdownChange(
 	step: Step,
 	path: string,
-	onChange?: StepChangeFunction,
+	onChange: StepChangeFunction = noop,
 ): DropdownOptionChangeFunction {
 	return useCallback(
 		(_event, option) => {
 			const update = cloneDeep(step)
 			set(update, path, option?.key)
-			onChange && onChange(update)
+			onChange(update)
 		},
 		[step, path, onChange],
 	)
@@ -148,7 +151,7 @@ export function useHandleTextfieldChange(
 	step: Step,
 	path: string,
 	onChange?: StepChangeFunction,
-	transformer = noop,
+	transformer = identity,
 ): (
 	event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 	newValue?: string,

@@ -21,23 +21,28 @@ export function withInputTableDropdown(
 	return Component => {
 		const WithTableDropdown: React.FC<StepComponentProps> = props => {
 			const { step, store, onChange } = props
-			const handleTableChange = useHandleDropdownChange(step, 'input', onChange)
+			const handleTableChange = useHandleDropdownChange(
+				step,
+				'inputs.default.node',
+				onChange,
+			)
 			if (!isInputTableStep(step)) {
 				return <Component {...props} />
+			} else {
+				return (
+					<Container className="with-input-table-dropdown">
+						<LeftAlignedRow>
+							<TableDropdown
+								store={store}
+								label={label || 'Input table'}
+								selectedKey={step.inputs[NodeInput.Default]?.node}
+								onChange={handleTableChange}
+							/>
+						</LeftAlignedRow>
+						<Component {...props} />
+					</Container>
+				)
 			}
-			return (
-				<Container className="with-input-table-dropdown">
-					<LeftAlignedRow>
-						<TableDropdown
-							store={store}
-							label={label || 'Input table'}
-							selectedKey={step.inputs[NodeInput.Default]?.node}
-							onChange={handleTableChange}
-						/>
-					</LeftAlignedRow>
-					<Component {...props} />
-				</Container>
-			)
 		}
 		return memo(WithTableDropdown)
 	}
