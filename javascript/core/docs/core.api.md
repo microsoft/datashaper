@@ -215,6 +215,8 @@ export function columnType(table: ColumnTable, column: string): DataType;
 //
 // @public (undocumented)
 export interface ConvertArgs extends InputColumnListArgs {
+    // (undocumented)
+    formatPattern?: string;
     radix?: number;
     // (undocumented)
     type: ParseType;
@@ -731,7 +733,9 @@ export enum ParseType {
     Date = "date",
     Decimal = "float",
     // (undocumented)
-    Integer = "int"
+    Integer = "int",
+    // (undocumented)
+    String = "string"
 }
 
 // Warning: (ae-missing-release-tag) "Pipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
