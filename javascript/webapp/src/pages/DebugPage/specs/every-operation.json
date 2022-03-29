@@ -110,7 +110,7 @@
 			"output": "erase-1",
 			"args": {
 				"value": 150000,
-				"column": "Employees"
+				"columns": ["Employees"]
 			}
 		},
 		{

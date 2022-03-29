@@ -19,7 +19,7 @@ input 2
 | 3   |
 | 4   |
 
-`union table['input 1'] with table['input 2']`:
+`union tables['input 1', 'input 2']`:
 
 | id  |
 | --- |

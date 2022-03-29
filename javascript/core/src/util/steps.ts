@@ -48,7 +48,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	dedupe: [Tags.InputTable, Tags.RowModifying],
 	derive: [Tags.InputTable, Tags.OutputColumn],
 	difference: [Tags.InputTable, Tags.RowModifying],
-	erase: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
+	erase: [Tags.InputTable, Tags.RowModifying],
 	fetch: [],
 	fill: [Tags.InputTable, Tags.OutputColumn],
 	filter: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],

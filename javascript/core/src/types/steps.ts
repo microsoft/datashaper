@@ -207,8 +207,7 @@ export interface FillArgs extends OutputColumnArgs {
 	value: Value
 }
 
-export interface EraseArgs {
-	column: string
+export interface EraseArgs extends InputColumnListArgs {
 	value: Value
 }
 
