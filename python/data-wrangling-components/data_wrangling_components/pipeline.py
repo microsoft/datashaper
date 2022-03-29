@@ -68,7 +68,7 @@ class Pipeline(Protocol):
 @dataclass
 class DefaultPipeline:
     _store: TableStore = field(default_factory=DefaultTableStore)
-    _steps: List[Step] = field(default_factory=list[Step])
+    _steps: List[Step] = field(default_factory=list)
 
     def add(self, step: Step):
         """Adds a new step into the pipeline
