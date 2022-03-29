@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { escape, op } from 'arquero'
-import { format } from 'date-fns'
+import { timeFormat, timeParse } from 'd3-time-format'
 
 import type { ConvertArgs } from '../../types.js'
 import { ParseType } from '../../types.js'
@@ -39,14 +39,24 @@ function parseType(
 			case ParseType.Boolean:
 				// arquero has no boolean operation
 				return bool(value)
-			case ParseType.Date:
-				return op.parse_date(value)
+			case ParseType.Date: {
+				if (value !== null && !isNaN(value)) return new Date(value)
+
+				const parseTime = timeParse(formatPattern ?? '%Y-%m-%d')
+				return parseTime(value)
+			}
 			case ParseType.Integer:
 				return op.parse_int(value, radix)
 			case ParseType.Decimal:
 				return op.parse_float(value)
-			case ParseType.String:
-				return format(value, formatPattern ?? 'MM.dd.yyyy')
+			case ParseType.String: {
+				if (value instanceof Date) {
+					const formatTime = timeFormat(formatPattern ?? '%m-%d-%Y')
+					return formatTime(value)
+				}
+
+				return value !== undefined && value !== null ? value.toString() : value
+			}
 		}
 	})
 }
