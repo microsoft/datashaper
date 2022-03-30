@@ -43,7 +43,7 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 				{others}
 				<ActionButton
 					onClick={handleButtonClick}
-					iconProps={{ iconName: 'Add' }}
+					iconProps={addIconProps}
 					disabled={!tbl}
 				>
 					Add table
@@ -90,7 +90,7 @@ function useOthers(
 						/>
 						<IconButton
 							title={'Remove this table'}
-							iconProps={{ iconName: 'Delete' }}
+							iconProps={deleteIconProps}
 							onClick={handleDeleteClick}
 						/>
 					</LeftAlignedRow>
@@ -98,6 +98,9 @@ function useOthers(
 			})
 	}, [step, store, onChange])
 }
+
+const addIconProps = { iconName: 'Add' }
+const deleteIconProps = { iconName: 'Delete' }
 
 const Container = styled.div`
 	display: flex;
