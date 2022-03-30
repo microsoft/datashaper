@@ -34,12 +34,7 @@ import type {
 	DropdownOptionChangeFunction,
 	StepChangeFunction,
 } from '../types.js'
-
-const noop = () => {
-	/* do nothing */
-}
-const identity = (value?: string) => value
-const num = (value?: string) => value && +value
+import { identity, noop, num } from './functions.js'
 
 /**
  * Make a basic set of string options from an array

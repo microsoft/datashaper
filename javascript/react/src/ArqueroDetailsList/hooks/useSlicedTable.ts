@@ -5,15 +5,12 @@
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
+import { sliceTable } from '../../common/functions.js'
+
 export function useSlicedTable(
 	table: ColumnTable,
 	offset: number,
 	limit: number,
 ): ColumnTable {
-	return useMemo(() => {
-		if (offset === 0 && limit === Infinity) {
-			return table
-		}
-		return table.slice(offset, offset + limit)
-	}, [table, limit, offset])
+	return useMemo(() => sliceTable(table, offset, limit), [table, offset, limit])
 }

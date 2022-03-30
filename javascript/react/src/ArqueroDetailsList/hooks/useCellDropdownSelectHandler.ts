@@ -4,17 +4,15 @@
  */
 import { useMemo } from 'react'
 
+import { noop } from '../../common/functions.js'
 import type { DropdownOptionSelect } from '../index.js'
 
 export function useCellDropdownSelectHandler(
 	clickable: boolean,
-	onOptionSelect?: DropdownOptionSelect,
+	onOptionSelect: DropdownOptionSelect = noop,
 ): DropdownOptionSelect | undefined {
 	return useMemo(
-		() =>
-			clickable
-				? (evt?, column?) => onOptionSelect && onOptionSelect(evt, column)
-				: undefined,
+		() => (clickable ? onOptionSelect : undefined),
 		[clickable, onOptionSelect],
 	)
 }

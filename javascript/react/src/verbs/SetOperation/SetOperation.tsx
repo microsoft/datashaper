@@ -4,17 +4,15 @@
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { NodeInput } from '@data-wrangling-components/core'
-import { ActionButton, IconButton,Label } from '@fluentui/react'
+import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
+import { noop } from '../../common/functions.js'
 import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
 import { TableDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
 
-const noop = () => {
-	/*do nothing*/
-}
 /**
  * Provides inputs to create a list of tables.
  * E.g., for set operations
