@@ -12,8 +12,7 @@ export const SetOperationDescription: React.FC<StepDescriptionProps> = memo(
 	function SetOperationDescription(props) {
 		const rows = useMemo(() => {
 			const internal = props.step as Step
-			const others = Object.values(internal.inputs).map(i => i.node)
-
+			const others = otherInputNames(internal)
 			const sub = createRowEntries(others, o => ({ value: o }), 1, props)
 			return [
 				{
@@ -26,3 +25,6 @@ export const SetOperationDescription: React.FC<StepDescriptionProps> = memo(
 		return <VerbDescription {...props} rows={rows} />
 	},
 )
+export function otherInputNames(step: Step): string[] {
+	return Object.values(step.inputs).map(i => i.node)
+}
