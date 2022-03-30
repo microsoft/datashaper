@@ -24,7 +24,6 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 			table,
 			store,
 		)
-
 		const others = useOthers(step, onChange, store)
 
 		const handleButtonClick = useCallback(() => {
@@ -33,7 +32,7 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 				inputs: {
 					...step.inputs,
 					// TODO: this just establishes an empty table, can we get the store list and pick the next available?
-					[others.length]: { node: '' },
+					[`DWC.VariadicInput.${others.length}`]: { node: '' },
 				},
 			})
 		}, [step, onChange, others.length])
@@ -60,41 +59,43 @@ function useOthers(
 	store?: TableStore,
 ) {
 	return useMemo(() => {
-		return Object.keys(step.inputs).map((inputName, index) => {
-			const input = step.inputs[inputName]!
-			const other = input.node
+		return Object.keys(step.inputs)
+			.filter(k => k !== 'default')
+			.map((inputName, index) => {
+				const input = step.inputs[inputName]!
+				const other = input.node
 
-			// on delete, remove the input
-			const handleDeleteClick = () => {
-				const update = { ...step, inputs: { ...step.inputs } }
-				delete update.inputs[inputName]
-				onChange(update)
-			}
-			if (!store) {
-				return null
-			}
-			return (
-				<LeftAlignedRow key={`set-op-${other}-${index}`}>
-					<TableDropdown
-						label={''}
-						store={store}
-						selectedKey={other}
-						onChange={(_evt, option) => {
-							const update = { ...step }
-							if (option) {
-								input.node = `${option.key}`
-							}
-							onChange(update)
-						}}
-					/>
-					<IconButton
-						title={'Remove this table'}
-						iconProps={{ iconName: 'Delete' }}
-						onClick={handleDeleteClick}
-					/>
-				</LeftAlignedRow>
-			)
-		})
+				// on delete, remove the input
+				const handleDeleteClick = () => {
+					const update = { ...step, inputs: { ...step.inputs } }
+					delete update.inputs[inputName]
+					onChange(update)
+				}
+				if (!store) {
+					return null
+				}
+				return (
+					<LeftAlignedRow key={`set-op-${other}-${index}`}>
+						<TableDropdown
+							label={''}
+							store={store}
+							selectedKey={other}
+							onChange={(_evt, option) => {
+								const update = { ...step }
+								if (option) {
+									input.node = `${option.key}`
+								}
+								onChange(update)
+							}}
+						/>
+						<IconButton
+							title={'Remove this table'}
+							iconProps={{ iconName: 'Delete' }}
+							onClick={handleDeleteClick}
+						/>
+					</LeftAlignedRow>
+				)
+			})
 	}, [step, store, onChange])
 }
 
