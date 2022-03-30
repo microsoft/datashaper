@@ -558,6 +558,11 @@ export const Orderby: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const OrderbyDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "otherInputNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function otherInputNames(step: Step): string[];
+
 // Warning: (ae-missing-release-tag) "Pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -1071,12 +1076,12 @@ export const useHandleOnUploadClick: (acceptedFileTypes: string[], handleCollect
 // Warning: (ae-missing-release-tag) "useHandleSpinButtonChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleSpinButtonChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => number | "" | undefined): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
+export function useHandleSpinButtonChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => number | undefined): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
 
 // Warning: (ae-missing-release-tag) "useHandleTextfieldChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => string | undefined): (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
+export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: <T>(value?: T | undefined) => T | undefined): (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
 
 // Warning: (ae-missing-release-tag) "useHandleZipUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
