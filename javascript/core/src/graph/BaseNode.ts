@@ -8,7 +8,7 @@ import { v4 as uuid } from 'uuid'
 
 import type { Maybe } from '../primitives.js'
 import type { BoundInput } from './BoundInput.js'
-import { BoundInputImpl } from './BoundInput.js'
+import { DefaultBoundInput } from './BoundInput.js'
 import type { Node, NodeBinding, NodeId, SocketName } from './types'
 
 const DEFAULT_INPUT_NAME = 'default'
@@ -136,11 +136,15 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 			this.unbind(name)
 		}
 		// subscribe to the new input
-		const input: BoundInput<T> = new BoundInputImpl(binding)
+		const input: BoundInput<T> = new DefaultBoundInput(binding)
 		this._inputs.set(name, input as BoundInput<T>)
 		input.onValueChange(() => this.recalculate())
 		this.recalculate()
 		this._bindingsChanged.next()
+	}
+
+	public bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void {
+		throw new Error('not supported')
 	}
 
 	public unbind(name: SocketName): void {

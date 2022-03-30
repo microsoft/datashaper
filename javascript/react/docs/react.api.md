@@ -1005,12 +1005,12 @@ export const useDropzone: (props: DzProps) => DropzoneState;
 // Warning: (ae-missing-release-tag) "useFormatedColumnArg" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useFormatedColumnArg(): (stepArgs: unknown, newName?: string) => unknown;
+export function useFormatedColumnArg(): (stepArgs: unknown, newName?: string) => object;
 
 // Warning: (ae-missing-release-tag) "useFormatedColumnArgWithCount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useFormatedColumnArgWithCount(): (step: Step, columnNames: string[]) => unknown;
+export function useFormatedColumnArgWithCount(): (step: Step, columnNames: string[]) => object;
 
 // Warning: (ae-missing-release-tag) "useFormattedNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

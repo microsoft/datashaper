@@ -35,16 +35,53 @@ import type {
 	WindowArgs,
 } from '../verbs/index.js'
 
-export interface Step<T = unknown> {
+export type InputBinding = { node: string; output?: string }
+
+export interface StepSpecification<T extends object = any> {
 	/**
 	 * A unique identifier for this step
 	 */
-	id: string
+	id?: string
 
 	/**
 	 * helpful for documentation in JSON specs
 	 */
 	description?: string
+
+	/**
+	 * The verb being executed
+	 */
+	verb: Verb
+
+	/**
+	 * The verb arguments
+	 */
+	args?: T
+
+	/**
+	 * The bound inputs
+	 * Key = Input Socket Name
+	 * Value = Socket Binding to other node
+	 */
+	inputs?:
+		| string
+		| ({
+				others?: (string | InputBinding)[]
+		  } & Record<string, string | InputBinding>)
+
+	/**
+	 * The observed outputs to record.
+	 * Key = output socket name
+	 * Value = store table name
+	 */
+	outputs?: string | Record<string, string>
+}
+
+export interface Step<T extends object = any> {
+	/**
+	 * A unique identifier for this step
+	 */
+	id: string
 
 	/**
 	 * The verb being executed
@@ -61,7 +98,9 @@ export interface Step<T = unknown> {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	inputs: Record<string, { node: string; output?: string }>
+	inputs: {
+		others?: InputBinding[]
+	} & Record<string, InputBinding>
 
 	/**
 	 * The observed outputs to record.
@@ -74,7 +113,7 @@ export interface Step<T = unknown> {
 export interface Specification {
 	name?: string
 	description?: string
-	steps?: Step[]
+	steps?: StepSpecification[]
 }
 
 export type AggregateStep = Step<AggregateArgs>

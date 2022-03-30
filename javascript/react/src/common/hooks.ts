@@ -462,7 +462,7 @@ export function useCreateColumnName(): (
 export function useFormatedColumnArg(): (
 	stepArgs: unknown,
 	newName?: string,
-) => unknown {
+) => object {
 	return useCallback((stepArgs: unknown, newName = 'New column') => {
 		const args = stepArgs as Record<string, unknown>
 		Object.keys(args).forEach(x => {
@@ -475,7 +475,7 @@ export function useFormatedColumnArg(): (
 export function useFormatedColumnArgWithCount(): (
 	step: Step,
 	columnNames: string[],
-) => unknown {
+) => object {
 	const createColumnName = useCreateColumnName()
 
 	return useCallback(

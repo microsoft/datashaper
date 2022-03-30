@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Graph } from '../graph/index.js'
-import type { Step } from '../steps/index.js'
+import type { Step, StepSpecification } from '../steps/index.js'
 import { step as factory } from '../steps/index.js'
 import type { Store } from '../store/index.js'
 import type { TableContainer } from '../tables/index.js'
@@ -61,14 +61,14 @@ export class DefaultPipeline implements Pipeline {
 		return this.add(base)
 	}
 
-	public add(step: Step): Step[] {
-		this._steps.push(step)
+	public add(step: StepSpecification): Step[] {
+		this._steps.push(factory(step))
 		this._rebuildGraph()
 		return this.steps
 	}
 
-	public addAll(steps: Step[]): Step[] {
-		steps.forEach(step => this._steps.push(step))
+	public addAll(steps: StepSpecification[]): Step[] {
+		steps.forEach(step => this._steps.push(factory(step)))
 		this._rebuildGraph()
 		return this.steps
 	}

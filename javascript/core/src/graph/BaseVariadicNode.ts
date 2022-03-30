@@ -4,50 +4,34 @@
  */
 import type { Maybe } from '../primitives.js'
 import { BaseNode } from './BaseNode.js'
+import { DefaultBoundInput } from './BoundInput.js'
 import type { NodeBinding, SocketName } from './types.js'
 
-const VARIADIC_PREFIX = 'DWC.VariadicInput.'
-
-function isVariadicInput(name: string): boolean {
-	return name.startsWith(VARIADIC_PREFIX)
-}
-
 export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
-	private variadicIndex = 0
+	private _disposeVariadicInputs: Maybe<() => void>
+	private _getVariadicInputs: Maybe<() => Maybe<T>[]>
 
 	public constructor(inputs: SocketName[] = [], outputs: SocketName[] = []) {
 		super(inputs, outputs)
 	}
 
-	/**
-	 * Get the next input name
-	 * @returns The next variadic input name
-	 */
-	protected nextInput(): SocketName {
-		return `${VARIADIC_PREFIX}${this.variadicIndex++}`
-	}
-
-	public bindNext(binding: Omit<NodeBinding<T>, 'input'>): SocketName {
-		const input = this.nextInput()
-		this.bind({ ...binding, input })
-		return input
-	}
-
-	protected override verifyInputSocketName(name: SocketName): void {
-		if (!isVariadicInput(String(name))) {
-			return super.verifyInputSocketName(name)
+	public override bindVariadic(inputs: Omit<NodeBinding<T>, 'input'>[]): void {
+		// unsubcribe to old variadic inputs
+		if (this._disposeVariadicInputs) {
+			this._disposeVariadicInputs()
 		}
+
+		const boundInputs = inputs.map(i => {
+			const bi = new DefaultBoundInput(i)
+			bi.onValueChange(() => this.recalculate())
+			return bi
+		})
+		this._disposeVariadicInputs = () => boundInputs.forEach(bi => bi.dispose())
+		this._getVariadicInputs = () => boundInputs.map(bi => bi.current)
+		this.recalculate()
 	}
 
 	protected getVariadicInputValues(): Maybe<T>[] {
-		const result: Maybe<T>[] = []
-		const inputs = this.getInputValues()
-		Object.keys(inputs).forEach(name => {
-			const value = inputs[name]
-			if (isVariadicInput(name)) {
-				result.push(value)
-			}
-		})
-		return result
+		return this._getVariadicInputs ? this._getVariadicInputs() : []
 	}
 }

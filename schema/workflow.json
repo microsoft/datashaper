@@ -336,8 +336,12 @@
 				}
 			}
 		},
-		"StepInputs": { "type": "object" },
-		"StepOutputs": { "type": "object" },
+		"StepInputs": {
+			"oneOf": [{ "type": "string" }, { "type": "object" }]
+		},
+		"StepOutputs": {
+			"oneOf": [{ "type": "string" }, { "type": "object" }]
+		},
 		"BinArgs": {
 			"type": "object",
 			"properties": {

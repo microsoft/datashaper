@@ -29,7 +29,7 @@ export function useInternalStep(
 	}, [step, setInternal])
 
 	const handleVerbChange = useCallback(
-		async (_ev: any, opt: any) => {
+		(_ev: any, opt: any) => {
 			// TODO: the assumption here is that the consumer will use runPipeline
 			// should we be forcing the i/o table name?
 			const _step = factory({
@@ -38,7 +38,7 @@ export function useInternalStep(
 				outputs: step?.outputs,
 			})
 			// merge with the previous step in case input/output columns have been controlled
-			_step.args = await formattedColumnArg(_step, table?.columnNames() || [])
+			_step.args = formattedColumnArg(_step, table?.columnNames() || [])
 			setInternal(_step)
 		},
 		[setInternal, step, formattedColumnArg, table],

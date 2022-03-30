@@ -31,11 +31,10 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 				...step,
 				inputs: {
 					...step.inputs,
-					// TODO: this just establishes an empty table, can we get the store list and pick the next available?
-					[`DWC.VariadicInput.${others.length}`]: { node: '' },
+					others: [...(step.inputs.others || []), { node: '' }] as any,
 				},
 			})
-		}, [step, onChange, others.length])
+		}, [step, onChange])
 
 		return (
 			<Container>

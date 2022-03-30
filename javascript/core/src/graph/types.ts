@@ -41,6 +41,12 @@ export interface Node<T, Config = unknown> {
 	bind(binding: NodeBinding<T>): void
 
 	/**
+	 * Binds variadic innput
+	 * @param bindings
+	 */
+	bindVariadic(bindings: Omit<NodeBinding<T>, 'input'>[]): void
+
+	/**
 	 * Clear an input socket
 	 * @param name - The input socket name
 	 */

@@ -4,22 +4,20 @@
 	"description": "Uses a multi-step aggregate and filter to do a custom lookup.",
 	"steps": [
 		{
-			"id": "join-1",
 			"verb": "join",
 			"inputs": {
-				"default": { "node": "data/companies.csv" },
-				"other": { "node": "data/products.csv" }
+				"default": "data/companies.csv",
+				"other": "data/products.csv"
 			},
-			"outputs": { "default": "join-1" },
+			"outputs": "join-1",
 			"args": {
 				"on": ["ID"]
 			}
 		},
 		{
-			"id": "filter-1",
 			"verb": "filter",
-			"inputs": { "default": { "node": "join-1" } },
-			"outputs": { "default": "filter-1" },
+			"inputs": "join-1",
+			"outputs": "filter-1",
 			"args": {
 				"column": "FY21 Sales",
 				"criteria": [
@@ -32,10 +30,9 @@
 			}
 		},
 		{
-			"id": "aggregate-1",
 			"verb": "aggregate",
-			"inputs": { "default": { "node": "filter-1" } },
-			"outputs": { "default": "aggregate-1" },
+			"inputs": "filter-1",
+			"outputs": "aggregate-1",
 			"args": {
 				"groupby": "ID",
 				"column": "FY21 Sales",
@@ -44,13 +41,12 @@
 			}
 		},
 		{
-			"id": "lookup-1",
 			"verb": "lookup",
 			"inputs": {
-				"default": { "node": "data/companies.csv" },
-				"other": { "node": "aggregate-1" }
+				"default": "data/companies.csv",
+				"other": "aggregate-1"
 			},
-			"outputs": { "default": "lookup-1" },
+			"outputs": "lookup-1",
 			"args": {
 				"on": ["ID"],
 				"columns": ["Total sales >= 10k"]

@@ -45,7 +45,7 @@ const defStyles = {
 
 /**
  * Creates a command bar styled to fit nicely in places like column headers.
- * @param param0
+ * @param props - the component props
  * @returns
  */
 export function createDefaultCommandBar({
@@ -58,8 +58,9 @@ export function createDefaultCommandBar({
 
 /**
  * Creates a header command bar using the inverted style for our default table header
- * @param items
- * @param props
+ * @param props - the component props
+ * @param theme - the theme
+ * @param far - use far mode
  * @returns
  */
 export function createDefaultHeaderCommandBar(

@@ -12,7 +12,7 @@ import {
 	JoinStrategy,
 	Verb,
 } from '../verbs/index.js'
-import type { Step } from './types.js'
+import type { InputBinding, Step, StepSpecification } from './types.js'
 
 export type StepInput = CopyWithPartial<
 	Step<any>,
@@ -25,19 +25,19 @@ export type StepInput = CopyWithPartial<
  * to preselect.
  * @param verb -
  */
-export function step({
+export function step<T extends object>({
 	verb,
-	args = {},
+	args = {} as any,
 	id = uuid(),
 	inputs = {},
 	outputs = {},
-}: StepInput): Step {
+}: StepSpecification<T>): Step<T> {
 	const base = {
 		id,
 		args,
 		verb,
-		inputs,
-		outputs,
+		inputs: fixInputs(inputs),
+		outputs: fixOutputs(outputs),
 	}
 	switch (verb) {
 		case Verb.Bin:
@@ -151,4 +151,34 @@ export function step({
 		case Verb.Unfold:
 	}
 	return base
+}
+
+function fixInputs(inputs: StepSpecification['inputs']): Step['inputs'] {
+	if (typeof inputs === 'string') {
+		return { default: { node: inputs } }
+	} else {
+		const result: Step['inputs'] = { ...inputs } as any
+		// rewrite any shorthand inputs into full inputs
+		Object.keys(result).forEach((k: string) => {
+			const binding = result[k]
+			if (typeof binding === 'string') {
+				result[k] = { node: binding } as InputBinding
+			}
+		})
+
+		if (result.others != null) {
+			result.others = result.others.map(o =>
+				typeof o === 'string' ? { node: o } : (o as InputBinding),
+			)
+		}
+		return result
+	}
+}
+
+function fixOutputs(outputs: StepSpecification['outputs']): Step['outputs'] {
+	if (typeof outputs === 'string') {
+		return { default: outputs }
+	} else {
+		return outputs as Record<string, string>
+	}
 }

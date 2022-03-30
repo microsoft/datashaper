@@ -38,6 +38,8 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     get bindingsCount(): number;
     // (undocumented)
+    bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
+    // (undocumented)
     get config(): Maybe<Config>;
     set config(value: Maybe<Config>);
     protected abstract doRecalculate(): Promise<void> | void;
@@ -75,12 +77,9 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
 export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
     constructor(inputs?: SocketName[], outputs?: SocketName[]);
     // (undocumented)
-    bindNext(binding: Omit<NodeBinding<T>, 'input'>): SocketName;
+    bindVariadic(inputs: Omit<NodeBinding<T>, 'input'>[]): void;
     // (undocumented)
     protected getVariadicInputValues(): Maybe<T>[];
-    protected nextInput(): SocketName;
-    // (undocumented)
-    protected verifyInputSocketName(name: SocketName): void;
 }
 
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -400,9 +399,9 @@ export class DefaultGraph<T> implements Graph<T> {
 export class DefaultPipeline implements Pipeline {
     constructor(store: TableStore);
     // (undocumented)
-    add(step: Step): Step[];
+    add(step: StepSpecification): Step[];
     // (undocumented)
-    addAll(steps: Step[]): Step[];
+    addAll(steps: StepSpecification[]): Step[];
     // (undocumented)
     clear(): void;
     // (undocumented)
@@ -716,6 +715,14 @@ export interface ImputeArgs extends InputColumnArgs {
 // @public (undocumented)
 export type ImputeStep = Step<ImputeArgs>;
 
+// Warning: (ae-missing-release-tag) "InputBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type InputBinding = {
+    node: string;
+    output?: string;
+};
+
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -903,6 +910,7 @@ interface Node_2<T, Config = unknown> {
     binding(input?: SocketName): Maybe<NodeBinding<T>>;
     bindings(): NodeBinding<T>[];
     readonly bindingsCount: number;
+    bindVariadic(bindings: Omit<NodeBinding<T>, 'input'>[]): void;
     config: Maybe<Config>;
     readonly id: NodeId;
     readonly inputs: SocketName[];
@@ -1211,7 +1219,7 @@ export interface Specification {
     // (undocumented)
     name?: string;
     // (undocumented)
-    steps?: Step[];
+    steps?: StepSpecification[];
 }
 
 // Warning: (ae-missing-release-tag) "spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1242,14 +1250,12 @@ export function stats(table: ColumnTable, columns?: string[]): Record<string, Co
 // Warning: (ae-missing-release-tag) "Step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface Step<T = unknown> {
+export interface Step<T extends object = any> {
     args: T;
-    description?: string;
     id: string;
-    inputs: Record<string, {
-        node: string;
-        output?: string;
-    }>;
+    inputs: {
+        others?: InputBinding[];
+    } & Record<string, InputBinding>;
     outputs: Record<string, string>;
     verb: Verb;
 }
@@ -1257,7 +1263,7 @@ export interface Step<T = unknown> {
 // Warning: (ae-missing-release-tag) "step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function step({ verb, args, id, inputs, outputs, }: StepInput): Step;
+export function step<T extends object>({ verb, args, id, inputs, outputs, }: StepSpecification<T>): Step<T>;
 
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1282,6 +1288,20 @@ export class StepNode<T, Args> extends BaseNode<T, Args> {
 //
 // @public (undocumented)
 export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (id: string) => StepNode<T, Args>;
+
+// Warning: (ae-missing-release-tag) "StepSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepSpecification<T extends object = any> {
+    args?: T;
+    description?: string;
+    id?: string;
+    inputs?: string | ({
+        others?: (string | InputBinding)[];
+    } & Record<string, string | InputBinding>);
+    outputs?: string | Record<string, string>;
+    verb: Verb;
+}
 
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

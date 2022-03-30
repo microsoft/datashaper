@@ -23,12 +23,12 @@ export function useOnDuplicateStep(
 	const formattedColumnArgs = useFormatedColumnArgWithCount()
 
 	return useCallback(
-		async (_step: Step) => {
+		(_step: Step) => {
 			const tableName =
 				type === StepsType.Table ? createTableName(_step.id) : _step.id
 
 			const outputTable = store ? store.get(_step.id)?.table : table
-			const formattedArgs = await formattedColumnArgs(
+			const formattedArgs = formattedColumnArgs(
 				_step,
 				outputTable?.columnNames() ?? [],
 			)

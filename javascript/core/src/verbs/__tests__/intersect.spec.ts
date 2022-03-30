@@ -18,7 +18,7 @@ describe('test for intersect verb', () => {
 
 		const node = intersect('output')
 		node.bind({ node: table1 })
-		node.bindNext({ node: table2 })
+		node.bindVariadic([{ node: table2 }])
 
 		const result = node.outputValue()
 		expect(result?.table?.numCols()).toBe(3)
