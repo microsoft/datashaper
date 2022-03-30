@@ -952,6 +952,11 @@ export function useCreateColumnName(): (name: string, columnNames: string[]) => 
 // @public (undocumented)
 export function useCreateTableName(store?: TableStore): (name: string) => string;
 
+// Warning: (ae-missing-release-tag) "useDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDateFormatPatternOptions(): IDropdownOption[];
+
 // Warning: (ae-missing-release-tag) "useDeleteConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
