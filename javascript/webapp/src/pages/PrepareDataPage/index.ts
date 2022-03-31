@@ -4,3 +4,4 @@
  */
 
 export * from './PrepareDataPage'
+export * as prepareDataPage from 'raw-loader!./README.md'
