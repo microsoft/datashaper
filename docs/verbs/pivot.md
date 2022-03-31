@@ -1,6 +1,6 @@
 # pivot
 
-Performs an inverse of the [fold](./fold.md) operation, aggregating output values. If you want a direct fold reversal that restores rows, use [unfold](./unfold.md). If an aggregation operation is not specified, `any` is used.
+Performs an inverse of the [fold](./fold.md) operation, aggregating output values. If you want a direct fold reversal that restores rows, use [unfold](./unfold.md). If an aggregation operation is not specified, `any` is used. This verb collects all values from the `value` column that share the same key in the `key` column, and then performs the specified aggregation. The number of new output columns will equal the number of unique keys. The number of output rows will be equal to the number of [groups](./groupby.md) applied to the table before pivoting.
 
 ## Example
 
@@ -17,10 +17,8 @@ Performs an inverse of the [fold](./fold.md) operation, aggregating output value
 | sales | 12    |
 | sales | 31    |
 
-`pivot key['id'], value['sales'], operation='sum'`:
+`pivot key['key'], value['value'], operation='sum'`:
 
 | id  | sales |
 | --- | ----- |
-| 1   | 300   |
-| 2   | 450   |
-| 3   | 43    |
+| 7   | 793   |
