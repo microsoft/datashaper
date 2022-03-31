@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ConvertStep} from '@data-wrangling-components/core';
-import { DataType , ParseType } from '@data-wrangling-components/core'
+import type { ConvertStep } from '@data-wrangling-components/core'
+import { DataType, ParseType } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
@@ -100,8 +100,8 @@ export const Convert: React.FC<StepComponentProps> = memo(function Convert({
 			{inputColumnDate || internal.args.type === ParseType.Date ? (
 				<LeftAlignedColumn>
 					<DateFormatPatternCombobox
-						required
-						label={'Date Format Pattern'}
+						required={internal.args.type === ParseType.Date}
+						label={'Date format pattern'}
 						placeholder={'pattern'}
 						text={
 							internal.args.formatPattern

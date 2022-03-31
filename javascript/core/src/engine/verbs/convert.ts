@@ -40,6 +40,8 @@ function parseType(
 				// arquero has no boolean operation
 				return bool(value)
 			case ParseType.Date: {
+				console.log(formatPattern)
+
 				if (value !== null && !isNaN(value)) return new Date(value)
 
 				const parseTime = timeParse(formatPattern ?? '%Y-%m-%d')
@@ -51,7 +53,7 @@ function parseType(
 				return op.parse_float(value)
 			case ParseType.String: {
 				if (value instanceof Date) {
-					const formatTime = timeFormat(formatPattern ?? '%m-%d-%Y')
+					const formatTime = timeFormat(formatPattern ?? '%Y-%m-%d')
 					return formatTime(value)
 				}
 

@@ -95,10 +95,9 @@ describe('test for convert verb', () => {
 			return convert(step, store).then(result => {
 				expect(result.table!.numCols()).toBe(2)
 				expect(result.table!.numRows()).toBe(5)
-				// always compare dates with strict ISO and UTC time
-				const d1 = isoDate(2021, 3, 13)
-				const d2 = isoDate(2021, 11, 5)
-				const d4 = isoDate(1996, 0, 1)
+				const d1 = new Date(2021, 3, 13)
+				const d2 = new Date(2021, 11, 5)
+				const d4 = new Date(1996, 0, 1)
 				compareDate(result.table!.get('date', 0), d1)
 				compareDate(result.table!.get('date', 1), d2)
 				expect(result.table!.get('date', 2)).toBeNull()
@@ -123,9 +122,9 @@ describe('test for convert verb', () => {
 			return convert(step, store).then(result => {
 				expect(result.table!.numCols()).toBe(2)
 				expect(result.table!.numRows()).toBe(3)
-				const d1 = isoDate(1994, 2, 24)
-				const d2 = isoDate(2020, 5, 23)
-				const d3 = isoDate(2022, 2, 28)
+				const d1 = new Date(1994, 2, 24)
+				const d2 = new Date(2020, 5, 23)
+				const d3 = new Date(2022, 2, 28)
 				compareDate(result.table!.get('date', 0), d1)
 				compareDate(result.table!.get('date', 1), d2)
 				compareDate(result.table!.get('date', 2), d3)
@@ -148,9 +147,9 @@ describe('test for convert verb', () => {
 			return convert(step, store).then(result => {
 				expect(result.table!.numCols()).toBe(1)
 				expect(result.table!.numRows()).toBe(3)
-				expect(result.table!.get('date', 0)).toBe('03-24-1994')
-				expect(result.table!.get('date', 1)).toBe('06-23-2020')
-				expect(result.table!.get('date', 2)).toBe('03-28-2022')
+				expect(result.table!.get('date', 0)).toBe('1994-03-24')
+				expect(result.table!.get('date', 1)).toBe('2020-06-23')
+				expect(result.table!.get('date', 2)).toBe('2022-03-28')
 			})
 		})
 

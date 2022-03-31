@@ -126,10 +126,12 @@ export function useColumnValueOptions(
 
 export function useDateFormatPatternOptions(): IDropdownOption[] {
 	const formatPatternArray: IDropdownOption[] = [
-		{ key: '%Y-%m-%d', text: 'Y-m-d' },
-		{ key: '%Y/%m/%d', text: 'Y/m/d' },
-		{ key: '%Y-%m-%dT%H:%M:%S.%LZ', text: 'Y-m-dTH:M:S.LZ' },
-		{ key: '%B %d, %Y', text: 'B d, Y' },
+		{ key: '%Y-%m-%d', text: '%Y-%m-%d' },
+		{ key: '%Y/%m/%d', text: '%Y/%m/%d' },
+		{ key: '%B %d, %Y', text: '%B %d, %Y' },
+		{ key: '%m-%d-%Y', text: '%m-%d-%Y' },
+		{ key: '%d-%m-%Y', text: '%d-%m-%Y' },
+		{ key: '%Y-%m-%dT%H:%M:%S.%LZ', text: '%Y-%m-%dT%H:%M:%S.%LZ' },
 	]
 	return formatPatternArray
 }
