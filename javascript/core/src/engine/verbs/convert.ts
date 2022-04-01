@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { escape, op } from 'arquero'
-import { timeFormat, timeParse } from 'd3-time-format'
+import { isoParse, timeFormat, timeParse } from 'd3-time-format'
 
 import type { ConvertArgs } from '../../types.js'
 import { ParseType } from '../../types.js'
@@ -33,6 +33,9 @@ function parseType(
 	radix?: number,
 	formatPattern?: string,
 ) {
+	const parseTime = timeParse(formatPattern ?? '%Y-%m-%d')
+	const formatTime = timeFormat(formatPattern ?? '%Y-%m-%d')
+
 	return escape((d: any) => {
 		const value = d[column]
 		switch (type) {
@@ -40,22 +43,18 @@ function parseType(
 				// arquero has no boolean operation
 				return bool(value)
 			case ParseType.Date: {
-				console.log(formatPattern)
-
 				if (value !== null && !isNaN(value)) return new Date(value)
 
-				const parseTime = timeParse(formatPattern ?? '%Y-%m-%d')
-				return parseTime(value)
+				return formatPattern === 'ISO FORMAT'
+					? isoParse(value)
+					: parseTime(value)
 			}
 			case ParseType.Integer:
 				return op.parse_int(value, radix)
 			case ParseType.Decimal:
 				return op.parse_float(value)
 			case ParseType.String: {
-				if (value instanceof Date) {
-					const formatTime = timeFormat(formatPattern ?? '%Y-%m-%d')
-					return formatTime(value)
-				}
+				if (value instanceof Date) return formatTime(value)
 
 				return value !== undefined && value !== null ? value.toString() : value
 			}
