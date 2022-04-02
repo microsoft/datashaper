@@ -106,11 +106,11 @@
 		},
 		{
 			"verb": "erase",
-			"input": "data/companies.csv",
+			"input": "data/products.csv",
 			"output": "erase-1",
 			"args": {
-				"value": 150000,
-				"column": "Employees"
+				"value": 9000,
+				"columns": ["FY20 Sales", "FY21 Sales"]
 			}
 		},
 		{
@@ -167,7 +167,7 @@
 			"input": "data/companies2.csv",
 			"output": "impute-1",
 			"args": {
-				"column": "Name",
+				"columns": ["Name"],
 				"value": "emptyValue"
 			}
 		},

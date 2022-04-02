@@ -49,7 +49,8 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const [inputList, setInputs] = useInputTableList()
 	const store = useTableStore(autoType)
 	const inputTables = useInputTables(inputList, store)
-	const pipeline = usePipeline(store)
+	const [steps, setSteps] = useState<Step[]>([])
+	const pipeline = usePipeline(store, steps)
 	const [result, setResult] = useState<ColumnTable | undefined>()
 	const [outputs, setOutputs] = useState<Map<string, TableContainer>>(
 		new Map<string, TableContainer>(),
@@ -61,8 +62,6 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 		statsColumnTypes: DEFAULT_STATS,
 	})
 	const [compact, setCompact] = useState<boolean>(true)
-
-	const [steps, setSteps] = useState<Step[]>([])
 
 	const handleCreateStep = useCallback(
 		(verb: Verb) => {

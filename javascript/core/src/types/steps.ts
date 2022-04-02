@@ -207,8 +207,7 @@ export interface FillArgs extends OutputColumnArgs {
 	value: Value
 }
 
-export interface EraseArgs {
-	column: string
+export interface EraseArgs extends InputColumnListArgs {
 	value: Value
 }
 
@@ -254,7 +253,7 @@ export interface UnfoldArgs {
 
 export type GroupbyArgs = InputColumnListArgs
 
-export interface ImputeArgs extends InputColumnArgs {
+export interface ImputeArgs extends InputColumnListArgs {
 	/**
 	 * Value to fill in empty cells
 	 */
