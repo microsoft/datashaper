@@ -1101,7 +1101,7 @@ export function useLoadTable(id: string | undefined, table?: ColumnTable, store?
 // Warning: (ae-missing-release-tag) "usePipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function usePipeline(store: TableStore): Pipeline;
+export function usePipeline(store: TableStore, steps?: Step[]): Pipeline;
 
 // Warning: (ae-missing-release-tag) "useProjectMgmtCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

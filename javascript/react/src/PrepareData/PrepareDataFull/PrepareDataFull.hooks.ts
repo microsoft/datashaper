@@ -48,7 +48,7 @@ export function useBusinessLogic(
 	)
 
 	const store = useStore()
-	const pipeline = usePipeline(store)
+	const pipeline = usePipeline(store, steps)
 	const runPipeline = useRunPipeline(
 		pipeline,
 		setStoredTables,
