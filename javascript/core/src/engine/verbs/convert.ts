@@ -57,9 +57,8 @@ function parseType(
 				if (
 					typeof value === 'string' &&
 					value.trim().toLowerCase() === 'undefined'
-				) {
+				)
 					return undefined
-				}
 
 				if (typeof value === 'string' && value.trim().toLowerCase() === 'null')
 					return null
