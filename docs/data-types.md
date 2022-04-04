@@ -20,5 +20,5 @@ The following rules will be observed across implementations to ensure consistent
 - Coercing unparseable strings to numbers will result in `NaN` (pandas.to_numeric with errors='coerce').
 - When reading text files, the pandas default strings for [missing values](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#na-values) and [booleans](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#boolean-values) will be used.
 - [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) will be used for standard date formatting. Other date formats will not be auto-guessed.
-  - When providing a custom parse or format pattern, we follow python and use the [1989 C standard tokens](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior). [d3-time-format](https://github.com/d3/d3-time-format) supports this format for JavaScript.
+  - When providing a custom parse or format pattern, we follow python and use the [1989 C standard tokens](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior). [d3-time-format](https://github.com/d3/d3-time-format) supports this standard for JavaScript.
 - We provide users with the option to turn auto-typing off to ensure we do not lose data inappropriately.
