@@ -131,6 +131,33 @@ describe('test for convert verb', () => {
 			})
 		})
 
+		test('string null and string undefined to date', () => {
+			const step: Step = {
+				verb: Verb.Convert,
+				input: 'table25',
+				output: 'output',
+				args: {
+					columns: ['date'],
+					type: ParseType.Date,
+				},
+			}
+
+			const store = new TestStore()
+
+			return convert(step, store).then(result => {
+				expect(result.table!.numCols()).toBe(2)
+				expect(result.table!.numRows()).toBe(5)
+				const d1 = new Date(2021, 3, 13)
+				const d2 = new Date(2021, 11, 5)
+				const d4 = new Date(1996, 0, 1)
+				compareDate(result.table!.get('date', 0), d1)
+				compareDate(result.table!.get('date', 1), d2)
+				expect(result.table!.get('date', 2)).toBeNull()
+				expect(result.table!.get('date', 3)).toBeNull()
+				expect(result.table!.get('date', 4)).toBeNull()
+			})
+		})
+
 		test('date to string without format pattern', () => {
 			const step: Step = {
 				verb: Verb.Convert,
@@ -173,6 +200,30 @@ describe('test for convert verb', () => {
 				expect(result.table!.get('date', 0)).toBe('March, 1994')
 				expect(result.table!.get('date', 1)).toBe('June, 2020')
 				expect(result.table!.get('date', 2)).toBe('March, 2022')
+			})
+		})
+
+		test('string to string with undefined and null values', () => {
+			const step: Step = {
+				verb: Verb.Convert,
+				input: 'table26',
+				output: 'output',
+				args: {
+					columns: ['values'],
+					type: ParseType.String,
+				},
+			}
+
+			const store = new TestStore()
+
+			return convert(step, store).then(result => {
+				expect(result.table!.numCols()).toBe(2)
+				expect(result.table!.numRows()).toBe(5)
+				expect(result.table!.get('values', 0)).toBeUndefined()
+				expect(result.table!.get('values', 1)).toBe('test1')
+				expect(result.table!.get('values', 2)).toBeNull()
+				expect(result.table!.get('values', 3)).toBe('test2')
+				expect(result.table!.get('values', 4)).toBe('final test')
 			})
 		})
 

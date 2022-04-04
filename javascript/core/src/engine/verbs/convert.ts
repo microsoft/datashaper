@@ -54,6 +54,16 @@ function parseType(
 			case ParseType.Decimal:
 				return op.parse_float(value)
 			case ParseType.String: {
+				if (
+					typeof value === 'string' &&
+					value.trim().toLowerCase() === 'undefined'
+				) {
+					return undefined
+				}
+
+				if (typeof value === 'string' && value.trim().toLowerCase() === 'null')
+					return null
+
 				if (value instanceof Date) return formatTime(value)
 
 				return value !== undefined && value !== null ? value.toString() : value

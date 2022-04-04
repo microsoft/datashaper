@@ -172,6 +172,22 @@ export class TestStore extends DefaultTableStore {
 			],
 		})
 
+		const table25 = table({
+			ID: [1, 2, 3, 4, 5],
+			date: [
+				'2021-04-13',
+				'2021-12-05',
+				'1998-01-12T04:38:00Z',
+				'null',
+				'undefined',
+			],
+		})
+
+		const table26 = table({
+			ID: [1, 2, 3, 4, 5],
+			values: ['undefined', 'test1', 'null', 'test2', 'final test'],
+		})
+
 		this.set({ id: 'table1', table: table1 })
 		this.set({ id: 'table2', table: table2 })
 		this.set({ id: 'table3', table: table3 })
@@ -196,5 +212,7 @@ export class TestStore extends DefaultTableStore {
 		this.set({ id: 'table22', table: table22 })
 		this.set({ id: 'table23', table: table23 })
 		this.set({ id: 'table24', table: table24 })
+		this.set({ id: 'table25', table: table25 })
+		this.set({ id: 'table26', table: table26 })
 	}
 }
