@@ -25,6 +25,7 @@ export enum Verb {
 	Lookup = 'lookup',
 	Merge = 'merge',
 	Pivot = 'pivot',
+	OneHot = 'onehot',
 	Orderby = 'orderby',
 	Recode = 'recode',
 	Rename = 'rename',

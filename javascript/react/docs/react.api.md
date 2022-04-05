@@ -548,6 +548,16 @@ export const NoParameters: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const NoParametersDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "OneHot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const OneHot: React.FC<StepComponentProps>;
+
+// Warning: (ae-missing-release-tag) "OneHotDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const OneHotDescription: React.FC<StepDescriptionProps>;
+
 // Warning: (ae-missing-release-tag) "Orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

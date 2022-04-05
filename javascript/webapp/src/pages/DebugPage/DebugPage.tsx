@@ -22,7 +22,11 @@ import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 import { ControlBar } from './ControlBar'
-import { useInputTableList, useInputTables, useTableStore } from './hooks'
+import {
+	useInputTableList,
+	useInputTables,
+	useTableStore,
+} from './DebugPage.hooks'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { Table } from './Table'

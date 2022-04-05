@@ -690,6 +690,18 @@ export enum NumericComparisonOperator {
     NotEqual = "!="
 }
 
+// Warning: (ae-missing-release-tag) "OneHotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface OneHotArgs extends InputColumnArgs {
+    prefix?: string;
+}
+
+// Warning: (ae-missing-release-tag) "OneHotStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type OneHotStep = Step<OneHotArgs>;
+
 // Warning: (ae-missing-release-tag) "OrderbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1101,6 +1113,8 @@ export enum Verb {
     Lookup = "lookup",
     // (undocumented)
     Merge = "merge",
+    // (undocumented)
+    OneHot = "onehot",
     // (undocumented)
     Orderby = "orderby",
     // (undocumented)

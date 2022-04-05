@@ -219,6 +219,15 @@
 			}
 		},
 		{
+			"verb": "onehot",
+			"input": "data/stocks.csv",
+			"output": "onehot-1",
+			"args": {
+				"column": "Symbol",
+				"prefix": "ticker-"
+			}
+		},
+		{
 			"verb": "orderby",
 			"input": "data/companies.csv",
 			"output": "orderby-1",

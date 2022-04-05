@@ -26,6 +26,7 @@ import { intersect } from './intersect.js'
 import { join } from './join.js'
 import { lookup } from './lookup.js'
 import { merge } from './merge.js'
+import { onehot } from './onehot.js'
 import { orderby } from './orderby.js'
 import { pivot } from './pivot.js'
 import { recode } from './recode.js'
@@ -63,6 +64,7 @@ const verbs: Record<string, StepFunction<any>> = {
 	join,
 	lookup,
 	merge,
+	onehot,
 	orderby,
 	pivot,
 	recode,

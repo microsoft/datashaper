@@ -125,6 +125,7 @@ export function factory(verb: Verb, input: string, output: string): Step {
 				},
 			}
 		case Verb.Fetch:
+		case Verb.OneHot:
 		case Verb.Orderby:
 		case Verb.Rename:
 		case Verb.Sample:
