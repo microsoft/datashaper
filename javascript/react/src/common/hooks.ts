@@ -133,7 +133,7 @@ export function useDateFormatPatternOptions(): IDropdownOption[] {
 		{ key: '%m/%d/%Y', text: '%m/%d/%Y' },
 		{ key: '%d-%m-%Y', text: '%d-%m-%Y' },
 		{ key: '%d/%m/%Y', text: '%d/%m/%Y' },
-		{ key: '%Y-%m-%dT%H:%M:%S.%LZ', text: '%Y-%m-%dT%H:%M:%S.%LZ' },
+		{ key: '%Y-%m-%dT%H:%M:%S.%LZ', text: 'ISO 8601 (%Y-%m-%dT%H:%M:%S.%LZ)' },
 	]
 	return formatPatternArray
 }
