@@ -4,7 +4,7 @@
  */
 import { Spinner } from '@fluentui/react'
 import { memo, Suspense } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import styled from 'styled-components'
 
