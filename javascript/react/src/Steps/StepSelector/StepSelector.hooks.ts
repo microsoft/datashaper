@@ -15,11 +15,11 @@ const groups = [
 		verbs: [
 			'aggregate',
 			'groupby',
+			'ungroup',
 			'pivot',
 			'orderby',
-			'rollup',
-			'ungroup',
 			'unorder',
+			'rollup',
 			'unroll',
 			'window',
 		],
@@ -30,7 +30,7 @@ const groups = [
 	},
 	{
 		label: 'Combine columns',
-		verbs: ['boolean', 'derive', 'fold', 'merge', 'spread', 'unfold'],
+		verbs: ['boolean', 'derive', 'fold', 'unfold', 'merge', 'spread'],
 	},
 	{
 		label: 'Filter & Select',
