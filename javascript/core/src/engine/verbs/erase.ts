@@ -15,7 +15,7 @@ const doErase = wrapColumnStep<EraseArgs>(
 			// TODO: this is a cheap string conversion for comparison.
 			// we may want to do real type checking per cell or using table metadata for types
 			acc[column] = escape((d: any) =>
-				`${d[column]}` === `${value}` ? undefined : d[column],
+				`${d[column]}` === `${value}` ? null : d[column],
 			)
 			return acc
 		}, {} as Record<string, object>)
