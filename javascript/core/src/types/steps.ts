@@ -66,6 +66,7 @@ export type JoinStep = Step<JoinArgs>
 export type LookupStep = Step<LookupArgs>
 export type MergeStep = Step<MergeArgs>
 export type PivotStep = Step<PivotArgs>
+export type OneHotStep = Step<OneHotArgs>
 export type OrderbyStep = Step<OrderbyArgs>
 export type RecodeStep = Step<RecodeArgs>
 export type RenameStep = Step<RenameArgs>
@@ -278,6 +279,13 @@ export interface JoinArgs extends JoinArgsBase {
 }
 
 export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {}
+
+export interface OneHotArgs extends InputColumnArgs {
+	/**
+	 * Optional prefix for the output column names
+	 */
+	prefix?: string
+}
 
 export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 	/**

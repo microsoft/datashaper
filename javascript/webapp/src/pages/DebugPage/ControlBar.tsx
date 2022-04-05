@@ -20,8 +20,8 @@ import styled from 'styled-components'
 
 import { FileDrop } from '~components/FileDrop'
 
+import { useLoadSpecFile, useLoadTableFiles } from './DebugPage.hooks'
 import { ExamplesDropdown } from './ExamplesDropdown'
-import { useLoadSpecFile, useLoadTableFiles } from './hooks'
 
 const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
 	return { key: o, text: o } as IDropdownOption

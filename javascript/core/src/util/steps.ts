@@ -18,7 +18,7 @@ enum Tags {
 	 */
 	InputColumn,
 	/**
-	 * A single output  column is input
+	 * A single output column is input
 	 */
 	OutputColumn,
 	/**
@@ -60,6 +60,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	lookup: [Tags.InputTable, Tags.RowModifying],
 	merge: [Tags.InputTable, Tags.OutputColumn],
 	pivot: [Tags.InputTable, Tags.RowModifying],
+	onehot: [Tags.InputTable, Tags.InputColumn],
 	orderby: [Tags.InputTable],
 	recode: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	rename: [Tags.InputTable],

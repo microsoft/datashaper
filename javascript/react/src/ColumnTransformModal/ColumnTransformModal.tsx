@@ -4,11 +4,11 @@
  */
 import { columnTransformVerbs, Verb } from '@data-wrangling-components/core'
 import { Dropdown, IconButton, Modal, PrimaryButton } from '@fluentui/react'
-import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import type { ColumnTransformModalProps } from '../index.js'
+import { enumName } from '../util.js'
 import {
 	useHandleRunClick,
 	useHandleStepArgs,
@@ -52,7 +52,7 @@ export const ColumnTransformModal: React.FC<ColumnTransformModalProps> = memo(
 				columnTransformVerbs(s => s !== Verb.Aggregate && s !== Verb.Rollup)
 			return list.map(key => ({
 				key,
-				text: upperFirst(key),
+				text: enumName(Verb, key)!,
 			}))
 		}, [verbs])
 

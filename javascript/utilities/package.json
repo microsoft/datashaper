@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/utilities",
-	"version": "1.8.1",
+	"version": "1.8.2",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
