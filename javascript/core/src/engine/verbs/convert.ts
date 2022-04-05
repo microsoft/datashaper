@@ -45,7 +45,7 @@ function parseType(
 			case ParseType.Date: {
 				if (value !== null && !isNaN(value)) return new Date(value)
 
-				return formatPattern === 'ISO FORMAT'
+				return formatPattern === '%Y-%m-%dT%H:%M:%S.%LZ'
 					? isoParse(value)
 					: parseTime(value)
 			}
