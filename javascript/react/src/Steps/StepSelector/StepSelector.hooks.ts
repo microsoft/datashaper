@@ -5,8 +5,9 @@
 import { Verb } from '@data-wrangling-components/core'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
-import upperFirst from 'lodash-es/upperFirst'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+
+import { enumName } from '../../util.js'
 
 // TODO: use core Tags for this
 const groups = [
@@ -30,7 +31,7 @@ const groups = [
 	},
 	{
 		label: 'Combine columns',
-		verbs: ['boolean', 'derive', 'fold', 'unfold', 'merge', 'spread'],
+		verbs: ['boolean', 'derive', 'fold', 'unfold', 'onehot', 'merge', 'spread'],
 	},
 	{
 		label: 'Filter & Select',
@@ -153,6 +154,6 @@ export function useDropdownButtonText(
 	placeholder?: string,
 ): string | undefined {
 	return useMemo(() => {
-		return selected ? upperFirst(selected) : placeholder
+		return enumName(Verb, selected) || placeholder
 	}, [selected, placeholder])
 }
