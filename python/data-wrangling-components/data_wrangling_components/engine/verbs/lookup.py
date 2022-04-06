@@ -10,7 +10,7 @@ from data_wrangling_components.types import InputColumnListArgs, JoinArgs, Step
 
 
 @dataclass
-class LookupArgs(InputColumnListArgs, JoinArgs):
+class LookupArgs(JoinArgs, InputColumnListArgs):
     pass
 
 

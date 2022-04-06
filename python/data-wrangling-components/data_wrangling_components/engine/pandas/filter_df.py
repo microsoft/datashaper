@@ -30,7 +30,7 @@ _operator_map = {
 
 
 def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame:
-    value: Optional[Union[str, float]] = None
+    value: Optional[Union[str, float]]
     if args.type == FilterCompareType.Column:
         value = f"`{args.value}`"
     else:

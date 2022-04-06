@@ -13,11 +13,14 @@ class Verb(Enum):
     Aggregate = "aggregate"
     Bin = "bin"
     Binarize = "binarize"
+    Boolean = "boolean"
     Chain = "chain"
     Concat = "concat"
+    Convert = "convert"
     Dedupe = "dedupe"
     Derive = "derive"
     Difference = "difference"
+    Erase = "erase"
     Fetch = "fetch"
     Fill = "fill"
     Filter = "filter"
@@ -28,14 +31,17 @@ class Verb(Enum):
     Intersect = "intersect"
     Join = "join"
     Lookup = "lookup"
+    Merge = "merge"
     MultiBinarize = "multi-binarize"
     Orderby = "orderby"
+    Pivot = "pivot"
     Recode = "recode"
     Rename = "rename"
     Rollup = "rollup"
     Sample = "sample"
     Select = "select"
     Spread = "spread"
+    Unfold = "unfold"
     Ungroup = "ungroup"
     Union = "union"
     Unorder = "unorder"
@@ -84,7 +90,7 @@ class JoinArgs:
 
 @dataclass
 class InputColumnListArgs:
-    columns: List[str] = field(default_factory=list)
+    columns: List[str]
 
 
 @dataclass
@@ -185,6 +191,39 @@ class MathOperator(Enum):
 class SortDirection(Enum):
     Ascending = "asc"
     Descending = "desc"
+
+
+class BooleanLogicalOperator(Enum):
+    OR = "or"
+    AND = "and"
+    NOR = "nor"
+    NAND = "nand"
+    XOR = "xor"
+
+
+class ParseType(Enum):
+    Boolean = "boolean"
+    Date = "date"
+    Integer = "int"
+    Decimal = "float"
+
+
+class MergeStrategy(Enum):
+    FirstOneWins = "first one wins"
+    LastOneWins = "last one wins"
+    Concat = "concat"
+    CreateArray = "array"
+
+
+class WindowFunction(Enum):
+    RowNumber = "row_number"
+    Rank = "rank"
+    PercentRank = "percent_rank"
+    CumulativeDistribution = "cume_dist"
+    FirstValue = "first_value"
+    LastValue = "last_value"
+    FillDown = "fill_down"
+    FillUp = "fill_up"
 
 
 @dataclass
