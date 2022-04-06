@@ -6,7 +6,7 @@
 import { Guidance } from '@data-wrangling-components/react'
 import { Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
-import { Link , useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useSettings } from '~states/settings'
