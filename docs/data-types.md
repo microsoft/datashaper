@@ -18,7 +18,7 @@ The following rules will be observed across implementations to ensure consistent
 - We use nullable values to account for missing data. E.g., `null` is a valid cell value in an integer or boolean column to represent missing data (as opposed to casting to `NaN` or `false`).
 - Pandas' [missing data logic](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html#missing-data) will be used for computations and boolean evaluations.
   - In general, this means null values are carried forward and may result in null outputs.
-  - For boolean comparisons, null propagation is situation-dependent. For example, if any operand in an OR comparison is `true`, the evaluation can return `true` even with nulls present.
+  - For boolean comparisons, null propagation is situation-dependent (see [three-valued logic](https://en.wikipedia.org/wiki/Three-valued_logic#Kleene_and_Priest_logics)). For example, if any operand in an OR comparison is `true`, the evaluation can return `true` even with nulls present.
 - Coercing unparseable strings to dates will result in an `Invalid Date` (JavaScript) or `NaT` (pandas.to_datetime with errors='coerce').
 - Coercing unparseable strings to numbers will result in `NaN` (pandas.to_numeric with errors='coerce').
 - When reading text files, the pandas default strings for [missing values](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#na-values) and [booleans](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#boolean-values) will be used.
