@@ -313,7 +313,7 @@ describe('test for convert verb', () => {
 				expect(result.table!.numCols()).toBe(4)
 				expect(result.table!.numRows()).toBe(5)
 				expect(result.table!.get('quantity', 0)).toBe('45')
-				expect(result.table!.get('quantity', 1)).toBeUndefined()
+				expect(result.table!.get('quantity', 1)).toBeNull()
 				expect(result.table!.get('quantity', 2)).toBe('100')
 				expect(result.table!.get('quantity', 3)).toBe('89')
 				expect(result.table!.get('quantity', 4)).toBe('50')
