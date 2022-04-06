@@ -5,8 +5,9 @@
 import { escape, op } from 'arquero'
 import { isoParse, timeFormat, timeParse } from 'd3-time-format'
 
-import type { ConvertArgs } from '../../types.js'
-import { ParseType } from '../../types.js'
+import type { ConvertArgs} from '../../types.js';
+import { DataType , ParseType } from '../../types.js'
+import { determineType } from '../../util/data.js'
 import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 import { bool } from '../util/data-types.js'
 
@@ -55,12 +56,15 @@ function parseType(
 				return op.parse_float(value)
 			case ParseType.String: {
 				if (
-					typeof value === 'string' &&
+					determineType(value) === DataType.String &&
 					value.trim().toLowerCase() === 'undefined'
 				)
 					return undefined
 
-				if (typeof value === 'string' && value.trim().toLowerCase() === 'null')
+				if (
+					determineType(value) === DataType.String &&
+					value.trim().toLowerCase() === 'null'
+				)
 					return null
 
 				if (value instanceof Date) return formatTime(value)
