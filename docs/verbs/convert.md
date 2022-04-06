@@ -18,7 +18,7 @@ Converts the data of a column from one type to another. This is normally used fo
 | '22'     |
 | 'thirty' |
 
-`convert column['age'], type=int`:
+`convert columns['age'], type=int`:
 
 | age |
 | --- |

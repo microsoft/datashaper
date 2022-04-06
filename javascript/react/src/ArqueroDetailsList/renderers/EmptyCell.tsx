@@ -17,6 +17,7 @@ export const EmptyCell: React.FC<FormattedCellProps> = memo(function EmptyCell({
 	const theme = useThematic()
 	const style = useMemo(
 		() => ({
+			width: '100%',
 			textAlign,
 			color: theme.application().lowContrast().hex(),
 		}),

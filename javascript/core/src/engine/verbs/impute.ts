@@ -6,10 +6,11 @@ import type { ImputeArgs } from '../../types.js'
 import { makeStepFunction, makeStepNode, wrapColumnStep } from '../factories.js'
 import type { ExprFunctionMap } from './types.js'
 
-const doImpute = wrapColumnStep<ImputeArgs>((input, { value, column }) => {
-	const dArgs: ExprFunctionMap = {
-		[column]: (_d: any, $: any) => $.value,
-	}
+const doImpute = wrapColumnStep<ImputeArgs>((input, { value, columns }) => {
+	const dArgs: ExprFunctionMap = columns.reduce((acc, column) => {
+		acc[column] = (_d: any, $: any) => $.value
+		return acc
+	}, {} as ExprFunctionMap)
 	return input.params({ value }).impute(dArgs)
 })
 

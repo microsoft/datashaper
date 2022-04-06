@@ -18,7 +18,7 @@ input 2
 | 3   | Bob  |
 | 4   | Joe  |
 
-`concat table['input 1'] with table['input 2']`:
+`concat tables['input 1', 'input 2']`:
 
 | id  |
 | --- |

@@ -4,9 +4,9 @@
  */
 
 import { Guidance } from '@data-wrangling-components/react'
-import { Link, Panel, Toggle } from '@fluentui/react'
+import { Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useSettings } from '~states/settings'
@@ -75,9 +75,9 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 			<LinkSection>
 				<H3>Links</H3>
 
-				<ListItem href={'/prepare'}>Prepare Data Page</ListItem>
-				<ListItem href={'/debug'}>Debug Page</ListItem>
-				<ListItem href={'/performance'}>Performance Test Page</ListItem>
+				<ListItem to={'/prepare'}>Prepare Data Page</ListItem>
+				<ListItem to={'/debug'}>Debug Page</ListItem>
+				<ListItem to={'/performance'}>Performance Test Page</ListItem>
 			</LinkSection>
 		</Panel>
 	)

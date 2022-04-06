@@ -34,10 +34,10 @@ const DebugPage = lazy(() =>
 export const RouteOptions: React.FC = memo(function RouteOptions() {
 	return (
 		<Routes>
+			<Route path="/" element={<PrepareDataPage />} />
 			<Route path={Pages.Prepare.path} element={<PrepareDataPage />} />
 			<Route path={Pages.Performance.path} element={<PerfPage />} />
 			<Route path={Pages.Debug.path} element={<DebugPage />} />
-			<Route path="/" element={<PrepareDataPage />} />
 		</Routes>
 	)
 })
