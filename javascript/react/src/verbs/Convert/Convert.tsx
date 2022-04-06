@@ -65,7 +65,7 @@ export const Convert: React.FC<StepComponentProps> = memo(function Convert({
 
 			if (type === DataType.Date) setInputColumnDate(true)
 		})
-	}, [internal.args.columns])
+	}, [internal.args.columns, tbl])
 
 	return (
 		<Container>

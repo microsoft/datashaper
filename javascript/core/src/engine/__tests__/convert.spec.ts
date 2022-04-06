@@ -149,7 +149,6 @@ describe('test for convert verb', () => {
 				expect(result.table!.numRows()).toBe(5)
 				const d1 = new Date(2021, 3, 13)
 				const d2 = new Date(2021, 11, 5)
-				const d4 = new Date(1996, 0, 1)
 				compareDate(result.table!.get('date', 0), d1)
 				compareDate(result.table!.get('date', 1), d2)
 				expect(result.table!.get('date', 2)).toBeNull()
@@ -419,27 +418,6 @@ describe('test for convert verb', () => {
 		})
 	})
 })
-
-// force a new date to be UTC instead of default locale
-function isoDate(
-	year = 0,
-	month = 0,
-	day = 0,
-	hour = 0,
-	minute = 0,
-	second = 0,
-	ms = 0,
-): Date {
-	const date = new Date()
-	date.setUTCFullYear(year)
-	date.setUTCMonth(month)
-	date.setUTCDate(day)
-	date.setUTCHours(hour)
-	date.setUTCMinutes(minute)
-	date.setUTCSeconds(second)
-	date.setUTCMilliseconds(ms)
-	return date
-}
 
 // compare two dates forcing ISO strings
 function compareDate(left: Date, right: Date) {
