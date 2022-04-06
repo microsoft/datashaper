@@ -19,7 +19,7 @@ input 2
 | 3   |
 | 4   |
 
-`difference table['input 1'] with table['input 2']`:
+`difference tables['input 1', 'input 2']`:
 
 | id  |
 | --- |

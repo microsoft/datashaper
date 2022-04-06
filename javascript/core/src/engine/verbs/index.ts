@@ -44,7 +44,6 @@ export function factory(verb: Verb, input: string, output: string): Step {
 		case Verb.Aggregate:
 		case Verb.Boolean:
 		case Verb.Derive:
-		case Verb.Impute:
 		case Verb.Fill:
 		case Verb.Merge:
 		case Verb.Rollup:
@@ -74,6 +73,8 @@ export function factory(verb: Verb, input: string, output: string): Step {
 				},
 			}
 		case Verb.Convert:
+		case Verb.Erase:
+		case Verb.Impute:
 		case Verb.Lookup:
 		case Verb.Groupby:
 		case Verb.Dedupe:
@@ -124,12 +125,12 @@ export function factory(verb: Verb, input: string, output: string): Step {
 				},
 			}
 		case Verb.Fetch:
+		case Verb.OneHot:
 		case Verb.Orderby:
 		case Verb.Rename:
 		case Verb.Sample:
 		case Verb.Ungroup:
 		case Verb.Unorder:
-		case Verb.Erase:
 		case Verb.Unfold:
 	}
 	return {

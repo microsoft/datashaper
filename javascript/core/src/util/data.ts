@@ -4,6 +4,8 @@
  */
 import isArray from 'lodash-es/isArray.js'
 import isDate from 'lodash-es/isDate.js'
+import isNaN from 'lodash-es/isNaN.js'
+import isNil from 'lodash-es/isNil.js'
 
 import type { Value } from '../index.js'
 import { DataType } from '../index.js'
@@ -15,6 +17,12 @@ import { DataType } from '../index.js'
  * @returns
  */
 export function determineType(value: Value): DataType {
+	if (isNil(value)) {
+		return DataType.Unknown
+	}
+	if (isNaN(value)) {
+		return DataType.Number
+	}
 	const type = typeof value as string
 	if (type === 'object') {
 		if (isDate(value)) {

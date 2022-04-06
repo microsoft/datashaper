@@ -25,7 +25,7 @@ Available collapse strategies are:
 | Bill   |
 | Colin  |
 
-`merge column['first'] with column['last'], strategy='last one wins', to_column='output'`:
+`merge columns['first', 'last'], strategy='last one wins', to_column='output'`:
 
 | output   |
 | -------- |
@@ -33,7 +33,7 @@ Available collapse strategies are:
 | Williams |
 | Jeeves   |
 
-`merge column['first'] with column['last'], strategy='concat', to_column='output'`:
+`merge columns['first', 'last'], strategy='concat', to_column='output'`:
 
 | output        |
 | ------------- |

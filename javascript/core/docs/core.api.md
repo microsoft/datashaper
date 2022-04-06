@@ -371,9 +371,7 @@ export function determineType(value: Value): DataType;
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface EraseArgs {
-    // (undocumented)
-    column: string;
+export interface EraseArgs extends InputColumnListArgs {
     // (undocumented)
     value: Value;
 }
@@ -522,7 +520,7 @@ export type GroupbyStep = Step<GroupbyArgs>;
 // Warning: (ae-missing-release-tag) "ImputeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ImputeArgs extends InputColumnArgs {
+export interface ImputeArgs extends InputColumnListArgs {
     value: Value;
 }
 
@@ -693,6 +691,18 @@ export enum NumericComparisonOperator {
     // (undocumented)
     NotEqual = "!="
 }
+
+// Warning: (ae-missing-release-tag) "OneHotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface OneHotArgs extends InputColumnArgs {
+    prefix?: string;
+}
+
+// Warning: (ae-missing-release-tag) "OneHotStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type OneHotStep = Step<OneHotArgs>;
 
 // Warning: (ae-missing-release-tag) "OrderbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1107,6 +1117,8 @@ export enum Verb {
     Lookup = "lookup",
     // (undocumented)
     Merge = "merge",
+    // (undocumented)
+    OneHot = "onehot",
     // (undocumented)
     Orderby = "orderby",
     // (undocumented)

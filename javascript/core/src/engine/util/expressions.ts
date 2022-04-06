@@ -27,7 +27,7 @@ export function compareAll(
 	criteria: Criterion[],
 	logical = BooleanLogicalOperator.OR,
 ): CompareWrapper {
-	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
+	return escape((d: Record<string, string | number>): 0 | 1 => {
 		const left = d[column]!
 		// TODO: the logical evaluate below has shortcuts that could optimize
 		// this check by shortcutting evaluation once it is clear the logical operator

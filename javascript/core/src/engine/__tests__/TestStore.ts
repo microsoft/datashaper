@@ -72,14 +72,14 @@ export class TestStore extends DefaultTableStore {
 
 		const table11 = table({
 			x: ['A', 'B', 'A'],
-			y: [1, undefined, 1],
+			y: [1, null, 1],
 			z: [4, 5, 4],
 		})
 
 		const table12 = table({
 			ID: [1, 2, 3, 4, 5],
 			item: ['bed', 'pillow', null, 'chair', 'stool'],
-			quantity: [45, undefined, 100, 89, 50],
+			quantity: [45, null, 100, 89, 50],
 			totalSale: [54000, 7800, 230000, 20470, 5000],
 		})
 
@@ -91,7 +91,7 @@ export class TestStore extends DefaultTableStore {
 
 		const table14 = table({
 			x: ['A', 'B', 'A'],
-			y: [1, undefined, 1],
+			y: [1, null, 1],
 			z: [true, false, false],
 		})
 

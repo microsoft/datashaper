@@ -109,7 +109,7 @@ describe('test for unfold verb', () => {
 			expect(result.table.get('x', 1)).toBe('B')
 			expect(result.table.get('x', 2)).toBe('A')
 			expect(result.table.get('y', 0)).toBe(1)
-			expect(result.table.get('y', 1)).toBeUndefined()
+			expect(result.table.get('y', 1)).toBeNull()
 			expect(result.table.get('y', 2)).toBe(1)
 			expect(result.table.get('z', 0)).toBe(true)
 			expect(result.table.get('z', 1)).toBe(false)
