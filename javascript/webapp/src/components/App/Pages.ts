@@ -5,14 +5,14 @@
 export const Pages = {
 	Performance: {
 		name: 'Performance',
-		path: 'performance',
+		path: '/performance',
 	},
 	Prepare: {
 		name: 'Prepare Data',
-		path: 'prepare',
+		path: '/prepare',
 	},
 	Debug: {
 		name: 'Debug Page',
-		path: 'debug',
+		path: '/debug',
 	},
 }
