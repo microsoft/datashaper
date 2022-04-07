@@ -139,6 +139,55 @@ export class TestStore extends DefaultTableStore {
 			D: [1, 0, 0, 0],
 		})
 
+		const table21 = table({
+			date: [
+				new Date(1994, 2, 24),
+				new Date(2020, 5, 23),
+				new Date(2022, 2, 28),
+			],
+		})
+
+		const table22 = table({
+			ID: [1, 2, 3, 4, 5],
+			value: [12.35, 86.55, 45.55, 66.35, 78.25],
+		})
+
+		const table23 = table({
+			ID: [1, 2, 3, 4, 5],
+			date: [
+				'2021-04-13',
+				'2021-12-05',
+				'1998-01-12T04:38:00Z',
+				'1996-01-01',
+				null,
+			],
+		})
+
+		const table24 = table({
+			ID: [1, 2, 3],
+			date: [
+				new Date(1994, 2, 24).getTime(),
+				new Date(2020, 5, 23).getTime(),
+				new Date(2022, 2, 28).getTime(),
+			],
+		})
+
+		const table25 = table({
+			ID: [1, 2, 3, 4, 5],
+			date: [
+				'2021-04-13',
+				'2021-12-05',
+				'1998-01-12T04:38:00Z',
+				'null',
+				'undefined',
+			],
+		})
+
+		const table26 = table({
+			ID: [1, 2, 3, 4, 5],
+			values: ['undefined', 'test1', 'null', 'test2', 'final test'],
+		})
+
 		this.set({ id: 'table1', table: table1 })
 		this.set({ id: 'table2', table: table2 })
 		this.set({ id: 'table3', table: table3 })
@@ -159,5 +208,11 @@ export class TestStore extends DefaultTableStore {
 		this.set({ id: 'table18', table: table18 })
 		this.set({ id: 'table19', table: table19 })
 		this.set({ id: 'table20', table: table20 })
+		this.set({ id: 'table21', table: table21 })
+		this.set({ id: 'table22', table: table22 })
+		this.set({ id: 'table23', table: table23 })
+		this.set({ id: 'table24', table: table24 })
+		this.set({ id: 'table25', table: table25 })
+		this.set({ id: 'table26', table: table26 })
 	}
 }

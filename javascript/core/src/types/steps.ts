@@ -169,6 +169,7 @@ export interface ConvertArgs extends InputColumnListArgs {
 	 * Optional radix to use for parsing strings into ints
 	 */
 	radix?: number
+	formatPattern?: string
 }
 
 export type DedupeArgs = Partial<InputColumnListArgs>

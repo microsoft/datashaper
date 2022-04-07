@@ -1668,12 +1668,14 @@ __metadata:
   dependencies:
     "@essex/scripts": ^21.0.1
     "@essex/tsconfig-base": ^1.0.2
+    "@types/d3-time-format": ^4
     "@types/jest": ^27.4.1
     "@types/lodash-es": ^4.17.6
     "@types/node": ^17.0.21
     "@types/toposort": ^2
     "@types/uuid": ^8
     arquero: ^4.8.8
+    d3-time-format: ^4.1.0
     lodash-es: ^4.17.21
     regenerator-runtime: ^0.13.9
     rxjs: ^7.5.5
@@ -3563,6 +3565,13 @@ __metadata:
   dependencies:
     "@types/d3-path": "*"
   checksum: 61dfec6dc35d88b12765449bdc4a6e3ff02947c63dbdf8a1d90ccce5fe4e0a90a8e8fe87bf29138722be36e220c919858f6fd48bf56061e565078f018fa3ec5d
+  languageName: node
+  linkType: hard
+
+"@types/d3-time-format@npm:^4":
+  version: 4.0.0
+  resolution: "@types/d3-time-format@npm:4.0.0"
+  checksum: ac3a841b0cd6e7f4d4c6c2cd09a2662facea6993c16b10f40fdf84f55adf7be59a6d08fd6ac1c42c27c7340f3b5eeafef968b45b052a5476a580c78a991668db
   languageName: node
   linkType: hard
 
@@ -6286,7 +6295,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-time-format@npm:2 - 4":
+"d3-time-format@npm:2 - 4, d3-time-format@npm:^4.1.0":
   version: 4.1.0
   resolution: "d3-time-format@npm:4.1.0"
   dependencies:
