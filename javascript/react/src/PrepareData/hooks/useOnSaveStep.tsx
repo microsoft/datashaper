@@ -3,21 +3,24 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Pipeline, Step } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import { useCallback } from 'react'
 
 export function useOnSaveStep(
 	onUpdateSteps: (steps: Step[]) => void,
-	pipeline: Pipeline,
+	steps?: Step[],
 ): (step: Step, index?: number) => void {
 	return useCallback(
 		(step: Step, index?: number) => {
 			if (index !== undefined) {
-				onUpdateSteps(pipeline.update(step, index))
+				const _steps = [...(steps || [])]
+				_steps[index] = step
+				onUpdateSteps(_steps)
 			} else {
-				onUpdateSteps(pipeline.add(step))
+				const _steps = [...(steps || []), step]
+				onUpdateSteps(_steps)
 			}
 		},
-		[pipeline, onUpdateSteps],
+		[steps, onUpdateSteps],
 	)
 }
