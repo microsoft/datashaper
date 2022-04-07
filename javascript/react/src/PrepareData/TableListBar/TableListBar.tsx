@@ -38,7 +38,7 @@ export const TableListBar: React.FC<{
 					iconProps={iconProps}
 					onClick={onClick}
 				>
-					View output
+					View output table
 				</DefaultButton>
 			) : null}
 
