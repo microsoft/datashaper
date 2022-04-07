@@ -3,18 +3,19 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Pipeline, Step } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import { useCallback } from 'react'
 
 export function useOnDeleteStep(
 	onUpdateSteps: (steps: Step[]) => void,
-	pipeline: Pipeline,
+	steps?: Step[],
 ): (index: number) => void {
 	return useCallback(
 		(index: number) => {
-			const _steps = pipeline.delete(index)
+			let _steps = [...(steps || [])]
+			_steps = _steps.slice(0, index)
 			onUpdateSteps(_steps)
 		},
-		[pipeline, onUpdateSteps],
+		[steps, onUpdateSteps],
 	)
 }
