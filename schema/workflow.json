@@ -337,10 +337,38 @@
 			}
 		},
 		"StepInputs": {
-			"oneOf": [{ "type": "string" }, { "type": "object" }]
+			"oneOf": [
+				{ "type": "string" },
+				{
+					"type": "object",
+					"patternProperties": {
+						"^.*$": { "$ref": "#/definitions/StepInputBinding" }
+					}
+				}
+			]
+		},
+		"StepInputBinding": {
+			"type": "object",
+			"properties": {
+				"node": { "type": "string", "description": "the source node id" },
+				"output": {
+					"type": "string",
+					"description": "the output of the source node to bind to (default='target')"
+				}
+			},
+			"required": ["node"]
 		},
 		"StepOutputs": {
-			"oneOf": [{ "type": "string" }, { "type": "object" }]
+			"oneOf": [
+				{ "type": "string" },
+				{
+					"type": "object",
+					"description": "a map of output names to published table names",
+					"patternProperties": {
+						"^.*$": { "type": "string" }
+					}
+				}
+			]
 		},
 		"BinArgs": {
 			"type": "object",
