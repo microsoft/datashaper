@@ -81,6 +81,8 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 							isOpen={isTransformModalOpen}
 							store={store}
 							onDismiss={onDismissTransformModal}
+							// HACK
+							styles={{ calloutMain: { overflow: 'hidden' } } as any}
 							{...props}
 						/>
 					)}
