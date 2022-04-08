@@ -242,7 +242,7 @@ export interface Criterion {
     // (undocumented)
     operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator;
     type: FilterCompareType;
-    value: Value;
+    value?: Value;
 }
 
 // Warning: (ae-missing-release-tag) "DataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
