@@ -708,9 +708,7 @@ export const impute: (id: string) => StepNode<TableContainer<unknown>, ImputeArg
 // Warning: (ae-missing-release-tag) "ImputeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ImputeArgs extends InputColumnArgs {
-    // (undocumented)
-    columns: string[];
+export interface ImputeArgs extends InputColumnListArgs {
     value: Value;
 }
 
