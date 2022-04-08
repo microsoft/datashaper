@@ -230,6 +230,10 @@ export enum NodeInput {
 	Other = 'other',
 }
 
+export enum NodeOutput {
+	Target = 'target',
+}
+
 /**
  * These are operations that perform windowed compute.
  * See https://uwdata.github.io/arquero/api/op#window-functions

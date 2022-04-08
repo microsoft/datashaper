@@ -7,12 +7,13 @@ import { BehaviorSubject, Subject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
 import type { Maybe } from '../primitives.js'
+import { NodeInput, NodeOutput } from '../verbs/types.js'
 import type { BoundInput } from './BoundInput.js'
 import { DefaultBoundInput } from './BoundInput.js'
 import type { Node, NodeBinding, NodeId, SocketName } from './types'
 
-const DEFAULT_INPUT_NAME = 'source'
-const DEFAULT_OUTPUT_NAME = 'target'
+const DEFAULT_INPUT_NAME = NodeInput.Source
+const DEFAULT_OUTPUT_NAME = NodeOutput.Target
 
 export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region fields
