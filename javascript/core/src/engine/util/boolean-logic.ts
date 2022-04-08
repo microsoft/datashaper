@@ -134,7 +134,7 @@ export function nor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 
 /**
  * Logical NAND (not AND).
- * If any false is false, this returns true.
+ * If any value is false, this returns true.
  * If all values are true, this returns false.
  * If there are no falses but there are nulls, this is unknown and will return null.
  * @param comparisons
