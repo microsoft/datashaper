@@ -31,7 +31,7 @@ export const StepsList: React.FC<{
 
 	useEffect(() => {
 		const f = () => {
-			ref?.current?.scrollIntoView()
+			ref?.current?.scrollIntoView(false)
 		}
 		f()
 	}, [steps])
