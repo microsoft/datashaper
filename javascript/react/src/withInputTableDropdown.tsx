@@ -35,7 +35,7 @@ export function withInputTableDropdown(
 							<TableDropdown
 								store={store}
 								label={label || 'Input table'}
-								selectedKey={step.inputs[NodeInput.Default]?.node}
+								selectedKey={step.input[NodeInput.Source]?.node}
 								onChange={handleTableChange}
 							/>
 						</LeftAlignedRow>

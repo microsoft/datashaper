@@ -27,7 +27,6 @@ export function createGraph(
 	steps: Step[],
 	store: Store<TableContainer>,
 ): Graph<TableContainer> {
-	console.log('GRAPH OF ', steps)
 	const graph = new DefaultGraph<TableContainer>()
 	function getNode(id: string): Node<TableContainer> {
 		return graph.hasNode(id)
@@ -43,7 +42,7 @@ export function createGraph(
 		graph.add(node)
 
 		// wire pinned outputs into the store
-		for (const [output, name] of Object.entries(step.outputs || EMPTY)) {
+		for (const [output, name] of Object.entries(step.output || EMPTY)) {
 			store.set(name, node.output(output))
 		}
 	}
@@ -53,7 +52,7 @@ export function createGraph(
 		const current = graph.node(step.id)
 
 		// if any inputs nodes are in the graph, bind them
-		for (const [input, binding] of Object.entries(step.inputs)) {
+		for (const [input, binding] of Object.entries(step.input)) {
 			if (input !== 'others') {
 				const b = binding as InputBinding
 				current.bind({ input, node: getNode(b.node), output: b.output })

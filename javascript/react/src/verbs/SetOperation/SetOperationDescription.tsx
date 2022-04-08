@@ -26,5 +26,5 @@ export const SetOperationDescription: React.FC<StepDescriptionProps> = memo(
 	},
 )
 export function otherInputNames(step: Step): string[] {
-	return (step.inputs.others || []).map(i => i.node)
+	return (step.input.others || []).map(i => i.node)
 }

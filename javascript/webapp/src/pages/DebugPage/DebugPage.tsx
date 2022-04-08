@@ -147,7 +147,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					</Section>
 				</InputsSection>
 				{steps.map((step, index) => {
-					const output = outputs?.get(step.outputs?.default)?.table
+					const output = outputs?.get(step.output?.target)?.table
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
 							<Section title={`Step ${index + 1}`} subtitle={step.verb}>

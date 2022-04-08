@@ -22,7 +22,7 @@ export const BooleanLogic: React.FC<StepComponentProps> = memo(
 	function BooleanLogic({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => step as BooleanStep, [step])
 		const tbl = useLoadTable(
-			input || internal.inputs[NodeInput.Default]?.node,
+			input || internal.input[NodeInput.Source]?.node,
 			table,
 			store,
 		)

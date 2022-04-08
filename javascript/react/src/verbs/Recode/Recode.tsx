@@ -38,7 +38,7 @@ export const Recode: React.FC<StepComponentProps> = memo(function Recode({
 	const internal = useMemo(() => step as RecodeStep, [step])
 
 	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Default]?.node,
+		input || step.input[NodeInput.Source]?.node,
 		table,
 		store,
 	)

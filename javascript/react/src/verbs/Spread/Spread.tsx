@@ -31,7 +31,7 @@ export const Spread: React.FC<StepComponentProps> = memo(function Spread({
 	const internal = useMemo(() => step as SpreadStep, [step])
 
 	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Default]?.node,
+		input || step.input[NodeInput.Source]?.node,
 		table,
 		store,
 	)

@@ -43,7 +43,7 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     get config(): Maybe<Config>;
     set config(value: Maybe<Config>);
     protected abstract doRecalculate(): Promise<void> | void;
-    protected emit: (value: Maybe<T>, output?: string) => void;
+    protected emit: (value: Maybe<T>, output?: NodeOutput) => void;
     protected emitError: (error: unknown) => void;
     protected getInputErrors(): Record<SocketName, unknown>;
     protected getInputValues(): Record<SocketName, Maybe<T>>;
@@ -725,6 +725,11 @@ export type InputBinding = {
     output?: string;
 };
 
+// Warning: (ae-missing-release-tag) "InputBindingSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type InputBindingSpecification = string | InputBinding;
+
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -952,6 +957,14 @@ export enum NodeInput {
     Other = "other",
     // (undocumented)
     Source = "source"
+}
+
+// Warning: (ae-missing-release-tag) "NodeOutput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum NodeOutput {
+    // (undocumented)
+    Target = "target"
 }
 
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1274,17 +1287,17 @@ export function stats(table: ColumnTable, columns?: string[]): Record<string, Co
 export interface Step<T extends object = any> {
     args: T;
     id: string;
-    inputs: {
+    input: {
         others?: InputBinding[];
     } & Record<string, InputBinding>;
-    outputs: Record<string, string>;
+    output: Record<string, string>;
     verb: Verb;
 }
 
 // Warning: (ae-missing-release-tag) "step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function step<T extends object>({ verb, args, id, inputs, outputs, }: StepSpecification<T>): Step<T>;
+export function step<T extends object>({ verb, args, id, input, output, }: StepSpecification<T>): Step<T>;
 
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1294,7 +1307,7 @@ export type StepFunction<T, Args> = (source: T, args: Args) => Promise<T> | T;
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepInput = CopyWithPartial<Step<any>, 'args' | 'id' | 'inputs' | 'outputs'>;
+export type StepInput = CopyWithPartial<Step<any>, 'args' | 'id' | 'input' | 'output'>;
 
 // Warning: (ae-missing-release-tag) "StepNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1317,10 +1330,10 @@ export interface StepSpecification<T extends object = any> {
     args?: T;
     description?: string;
     id?: string;
-    inputs?: string | ({
-        others?: (string | InputBinding)[];
-    } & Record<string, string | InputBinding>);
-    outputs?: string | Record<string, string>;
+    input?: string | ({
+        others?: InputBindingSpecification[];
+    } & Record<string, InputBindingSpecification>);
+    output?: string | Record<string, string>;
     verb: Verb;
 }
 

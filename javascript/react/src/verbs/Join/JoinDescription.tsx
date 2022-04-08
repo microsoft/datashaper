@@ -17,7 +17,7 @@ export const JoinDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'with',
-					value: internal.inputs[NodeInput.Other]?.node,
+					value: internal.input[NodeInput.Other]?.node,
 				},
 				{
 					before: 'on',

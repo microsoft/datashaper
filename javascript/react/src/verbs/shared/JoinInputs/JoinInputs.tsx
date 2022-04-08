@@ -23,12 +23,12 @@ export const JoinInputs: React.FC<StepComponentProps> = memo(
 		const internal = useMemo(() => step as JoinStep, [step])
 
 		const leftTable = useLoadTable(
-			input || internal.inputs[NodeInput.Default]?.node,
+			input || internal.input[NodeInput.Source]?.node,
 			table,
 			store,
 		)
 		const rightTable = useLoadTable(
-			internal.inputs[NodeInput.Other]?.node,
+			internal.input[NodeInput.Other]?.node,
 			table,
 			store,
 		)
@@ -57,7 +57,7 @@ export const JoinInputs: React.FC<StepComponentProps> = memo(
 					<TableDropdown
 						store={store}
 						label={`${upperFirst(label)} table`}
-						selectedKey={internal.inputs[NodeInput.Other]?.node}
+						selectedKey={internal.input[NodeInput.Other]?.node}
 						onChange={handleRightTableChange}
 					/>
 				</LeftAlignedRow>

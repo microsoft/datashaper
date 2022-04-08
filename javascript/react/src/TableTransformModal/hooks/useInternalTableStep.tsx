@@ -32,7 +32,7 @@ export function useInternalTableStep(
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {
 			const id = newTableName(verb)
-			const _step = factory({ verb, id, outputs: { default: id } })
+			const _step = factory({ verb, id, output: { default: id } })
 			_step.args = formattedColumnArg(_step.args)
 			setInternal(_step)
 		},

@@ -16,7 +16,7 @@ import type { InputBinding, Step, StepSpecification } from './types.js'
 
 export type StepInput = CopyWithPartial<
 	Step<any>,
-	'args' | 'id' | 'inputs' | 'outputs'
+	'args' | 'id' | 'input' | 'output'
 >
 /**
  * Factory function to create new verb configs
@@ -29,15 +29,15 @@ export function step<T extends object>({
 	verb,
 	args = {} as any,
 	id = uuid(),
-	inputs = {},
-	outputs = {},
+	input = {},
+	output = {},
 }: StepSpecification<T>): Step<T> {
 	const base = {
 		id,
 		args,
 		verb,
-		inputs: fixInputs(inputs),
-		outputs: fixOutputs(outputs),
+		input: fixInputs(input),
+		output: fixOutputs(output),
 	}
 	switch (verb) {
 		case Verb.Bin:
@@ -154,11 +154,11 @@ export function step<T extends object>({
 	return base
 }
 
-function fixInputs(inputs: StepSpecification['inputs']): Step['inputs'] {
+function fixInputs(inputs: StepSpecification['input']): Step['input'] {
 	if (typeof inputs === 'string') {
 		return { source: { node: inputs } }
 	} else {
-		const result: Step['inputs'] = { ...inputs } as any
+		const result: Step['input'] = { ...inputs } as any
 		// rewrite any shorthand inputs into full inputs
 		Object.keys(result).forEach((k: string) => {
 			const binding = result[k]
@@ -176,7 +176,7 @@ function fixInputs(inputs: StepSpecification['inputs']): Step['inputs'] {
 	}
 }
 
-function fixOutputs(outputs: StepSpecification['outputs']): Step['outputs'] {
+function fixOutputs(outputs: StepSpecification['output']): Step['output'] {
 	if (typeof outputs === 'string') {
 		return { target: outputs }
 	} else {

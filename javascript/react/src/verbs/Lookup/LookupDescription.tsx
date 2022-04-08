@@ -25,7 +25,7 @@ export const LookupDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'lookup from',
-					value: internal.inputs[NodeInput.Other]?.node,
+					value: internal.input[NodeInput.Other]?.node,
 				},
 				{
 					before: 'on',

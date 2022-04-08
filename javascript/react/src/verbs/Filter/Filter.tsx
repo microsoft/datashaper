@@ -27,7 +27,7 @@ export const Filter: React.FC<StepComponentProps> = memo(function Filter({
 }) {
 	const internal = useMemo(() => step as FilterStep, [step])
 	const tbl = useLoadTable(
-		input || internal.inputs[NodeInput.Default]?.node,
+		input || internal.input[NodeInput.Source]?.node,
 		table,
 		store,
 	)

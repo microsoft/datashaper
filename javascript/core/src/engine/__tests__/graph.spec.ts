@@ -29,10 +29,8 @@ describe('stepGraph', () => {
 					to: 'filled',
 					value: 1,
 				},
-				inputs: {
-					source: 'input',
-				},
-				outputs: { target: 'output' },
+				input: 'input',
+				output: 'output',
 			}),
 		]
 
@@ -49,17 +47,14 @@ describe('stepGraph', () => {
 			step({
 				id: 'output-1',
 				verb: Verb.Fill,
-				inputs: {
-					source: { node: 'input' },
-				},
+				input: 'input',
 				args: {
 					to: 'filled',
 					value: 1,
 				},
-				outputs: { target: 'output-1' },
+				output: 'output-1',
 			}),
 			step({
-				id: 'output-2',
 				verb: Verb.Fill,
 				args: {
 					to: 'filled2',
@@ -67,10 +62,8 @@ describe('stepGraph', () => {
 				},
 				// Note: this input is being auto-configured to the output of the previous node
 				// todo: restore auto-wiring?
-				inputs: {
-					source: { node: 'output-1' },
-				},
-				outputs: { target: 'output-2' },
+				input: 'output-1',
+				output: 'output-2',
 			}),
 		]
 

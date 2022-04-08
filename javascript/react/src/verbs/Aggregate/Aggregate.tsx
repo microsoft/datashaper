@@ -33,7 +33,7 @@ export const Aggregate: React.FC<StepComponentProps> = memo(function Aggregate({
 	const internal = useMemo(() => step as AggregateStep, [step])
 
 	const tbl = useLoadTable(
-		input || internal.inputs[NodeInput.Default]?.node,
+		input || internal.input[NodeInput.Source]?.node,
 		table,
 		store,
 	)

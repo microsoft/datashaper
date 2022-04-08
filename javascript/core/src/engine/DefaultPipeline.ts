@@ -48,7 +48,7 @@ export class DefaultPipeline implements Pipeline {
 	public get outputs(): string[] {
 		const result: string[] = []
 		this._steps.forEach(s => {
-			for (const value of Object.values(s.outputs)) {
+			for (const value of Object.values(s.output)) {
 				result.push(value)
 			}
 		})
@@ -57,7 +57,7 @@ export class DefaultPipeline implements Pipeline {
 
 	public create(verb: Verb): Step[] {
 		const base: Step = factory({ verb })
-		base.outputs = { target: base.id }
+		base.output = { target: base.id }
 		return this.add(base)
 	}
 
@@ -104,7 +104,7 @@ export class DefaultPipeline implements Pipeline {
 	}
 
 	private _unregisterStep(step: Step) {
-		for (const value of Object.values(step.outputs)) {
+		for (const value of Object.values(step.output)) {
 			this.store.delete(value)
 		}
 	}

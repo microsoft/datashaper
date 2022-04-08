@@ -38,6 +38,8 @@ import type {
 
 export type InputBinding = { node: string; output?: string }
 
+export type InputBindingSpecification = string | InputBinding
+
 export interface StepSpecification<T extends object = any> {
 	/**
 	 * A unique identifier for this step
@@ -64,18 +66,18 @@ export interface StepSpecification<T extends object = any> {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	inputs?:
+	input?:
 		| string
 		| ({
-				others?: (string | InputBinding)[]
-		  } & Record<string, string | InputBinding>)
+				others?: InputBindingSpecification[]
+		  } & Record<string, InputBindingSpecification>)
 
 	/**
 	 * The observed outputs to record.
 	 * Key = output socket name
 	 * Value = store table name
 	 */
-	outputs?: string | Record<string, string>
+	output?: string | Record<string, string>
 }
 
 export interface Step<T extends object = any> {
@@ -99,7 +101,7 @@ export interface Step<T extends object = any> {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	inputs: {
+	input: {
 		others?: InputBinding[]
 	} & Record<string, InputBinding>
 
@@ -108,7 +110,7 @@ export interface Step<T extends object = any> {
 	 * Key = output socket name
 	 * Value = store table name
 	 */
-	outputs: Record<string, string>
+	output: Record<string, string>
 }
 
 export interface Specification {

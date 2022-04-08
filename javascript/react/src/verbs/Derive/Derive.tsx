@@ -29,7 +29,7 @@ export const Derive: React.FC<StepComponentProps> = memo(function Derive({
 	const internal = useMemo(() => step as DeriveStep, [step])
 
 	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Default]?.node,
+		input || step.input[NodeInput.Source]?.node,
 		table,
 		store,
 	)

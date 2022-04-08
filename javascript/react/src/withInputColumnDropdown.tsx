@@ -42,7 +42,7 @@ export function withInputColumnDropdown(
 			// which will then be passed around with the container and thereby cached
 			// useLoadTable should return a TableContainer
 			const tbl = useLoadTable(
-				input || step.inputs[NodeInput.Default]?.node,
+				input || step.input[NodeInput.Source]?.node,
 				table,
 				store,
 			)

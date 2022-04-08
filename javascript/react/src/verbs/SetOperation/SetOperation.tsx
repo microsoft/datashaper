@@ -20,7 +20,7 @@ import type { StepComponentProps } from '../../types.js'
 export const SetOperation: React.FC<StepComponentProps> = memo(
 	function SetOperation({ step, store, table, onChange = noop, input }) {
 		const tbl = useLoadTable(
-			input || step.inputs[NodeInput.Source]?.node,
+			input || step.input[NodeInput.Source]?.node,
 			table,
 			store,
 		)
@@ -29,9 +29,9 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 		const handleButtonClick = useCallback(() => {
 			onChange({
 				...step,
-				inputs: {
-					...step.inputs,
-					others: [...(step.inputs.others || []), { node: '' }] as any,
+				input: {
+					...step.input,
+					others: [...(step.input.others || []), { node: '' }] as any,
 				},
 			})
 		}, [step, onChange])
@@ -58,15 +58,15 @@ function useOthers(
 	store?: TableStore,
 ) {
 	return useMemo(() => {
-		return Object.keys(step.inputs)
+		return Object.keys(step.input)
 			.filter(k => k !== NodeInput.Source)
 			.map((inputName, index) => {
-				const input = step.inputs[inputName]!
+				const input = step.input[inputName]!
 				const other = input.node
 
 				// on delete, remove the input
 				const handleDeleteClick = () => {
-					const update = { ...step, inputs: { ...step.inputs } }
+					const update = { ...step, inputs: { ...step.input } }
 					delete update.inputs[inputName]
 					onChange(update)
 				}

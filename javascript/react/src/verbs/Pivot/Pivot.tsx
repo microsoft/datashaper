@@ -33,7 +33,7 @@ export const Pivot: React.FC<StepComponentProps> = memo(function Pivot({
 	const internal = useMemo(() => step as PivotStep, [step])
 
 	const tbl = useLoadTable(
-		input || internal.inputs[NodeInput.Default]?.node,
+		input || internal.input[NodeInput.Source]?.node,
 		table,
 		store,
 	)

@@ -37,7 +37,7 @@ export const Lookup: React.FC<StepComponentProps> = memo(function Lookup({
 					step={step}
 					store={store}
 					onChange={onChange}
-					input={internal.inputs[NodeInput.Other]?.node}
+					input={internal.input[NodeInput.Other]?.node}
 				/>
 			</LeftAlignedColumn>
 		</Container>

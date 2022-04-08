@@ -32,7 +32,7 @@ export const Merge: React.FC<StepComponentProps> = memo(function Merge({
 }) {
 	const internal = useMemo(() => step as MergeStep, [step])
 	const tbl = useLoadTable(
-		input || internal.inputs[NodeInput.Default]?.node,
+		input || internal.input[NodeInput.Source]?.node,
 		table,
 		store,
 	)

@@ -31,7 +31,7 @@ export const Orderby: React.FC<StepComponentProps> = memo(function Orderby({
 	const internal = useMemo(() => step as OrderbyStep, [step])
 
 	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Default]?.node,
+		input || step.input[NodeInput.Source]?.node,
 		table,
 		store,
 	)

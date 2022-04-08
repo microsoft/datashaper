@@ -34,8 +34,8 @@ export function useInternalStep(
 			// should we be forcing the i/o table name?
 			const _step = factory({
 				verb: opt.key,
-				inputs: step?.inputs,
-				outputs: step?.outputs,
+				input: step?.input,
+				output: step?.output,
 			})
 			// merge with the previous step in case input/output columns have been controlled
 			_step.args = formattedColumnArg(_step, table?.columnNames() || [])

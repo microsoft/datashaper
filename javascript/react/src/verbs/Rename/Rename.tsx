@@ -38,7 +38,7 @@ export const Rename: React.FC<StepComponentProps> = memo(function Rename({
 	const internal = useMemo(() => step as RenameStep, [step])
 
 	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Default]?.node,
+		input || step.input[NodeInput.Source]?.node,
 		table,
 		store,
 	)
