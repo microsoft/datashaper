@@ -19,7 +19,7 @@ export const BooleanLogicDescription: React.FC<StepDescriptionProps> = memo(
 				c => ({
 					value: c,
 				}),
-				1,
+				3,
 				props,
 			)
 			return [

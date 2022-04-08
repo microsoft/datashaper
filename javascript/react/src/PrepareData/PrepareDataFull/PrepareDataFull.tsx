@@ -158,7 +158,7 @@ const StepsTrayContainer = styled.div<{
 	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 3 : 2)};
 	height: ${({ isCollapsed }) =>
 		isCollapsed ? COLLAPSED_STEPS_HEIGHT + 'px' : 'auto'};
-	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'auto')};
+	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'auto hidden')};
 	> div {
 		display: ${({ isCollapsed }) => (isCollapsed ? 'none' : 'grid')};
 	}
