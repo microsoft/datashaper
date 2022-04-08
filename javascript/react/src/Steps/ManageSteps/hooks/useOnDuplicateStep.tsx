@@ -35,8 +35,8 @@ export function useOnDuplicateStep(
 			const newStep = {
 				..._step,
 				args: formattedArgs,
-				inputs: { default: { node: _step.id } },
-				outputs: { default: tableName },
+				inputs: { source: { node: _step.id } },
+				outputs: { target: tableName },
 			}
 			onSave && onSave(newStep)
 		},

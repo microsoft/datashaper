@@ -5,8 +5,8 @@
 	"steps": [
 		{
 			"verb": "aggregate",
-			"inputs": { "default": { "node": "data/stocks.csv" } },
-			"outputs": { "default": "categorical" },
+			"inputs": { "source": { "node": "data/stocks.csv" } },
+			"outputs": { "target": "categorical" },
 			"args": {
 				"groupby": "Symbol",
 				"column": "Month",

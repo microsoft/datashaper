@@ -20,7 +20,7 @@ import type { StepComponentProps } from '../../types.js'
 export const SetOperation: React.FC<StepComponentProps> = memo(
 	function SetOperation({ step, store, table, onChange = noop, input }) {
 		const tbl = useLoadTable(
-			input || step.inputs[NodeInput.Default]?.node,
+			input || step.inputs[NodeInput.Source]?.node,
 			table,
 			store,
 		)
@@ -59,7 +59,7 @@ function useOthers(
 ) {
 	return useMemo(() => {
 		return Object.keys(step.inputs)
-			.filter(k => k !== 'default')
+			.filter(k => k !== NodeInput.Source)
 			.map((inputName, index) => {
 				const input = step.inputs[inputName]!
 				const other = input.node

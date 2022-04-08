@@ -949,9 +949,9 @@ export type NodeId = string;
 // @public (undocumented)
 export enum NodeInput {
     // (undocumented)
-    Default = "default",
+    Other = "other",
     // (undocumented)
-    Other = "other"
+    Source = "source"
 }
 
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

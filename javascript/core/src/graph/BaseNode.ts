@@ -11,8 +11,8 @@ import type { BoundInput } from './BoundInput.js'
 import { DefaultBoundInput } from './BoundInput.js'
 import type { Node, NodeBinding, NodeId, SocketName } from './types'
 
-const DEFAULT_INPUT_NAME = 'default'
-const DEFAULT_OUTPUT_NAME = 'default'
+const DEFAULT_INPUT_NAME = 'source'
+const DEFAULT_OUTPUT_NAME = 'target'
 
 export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region fields

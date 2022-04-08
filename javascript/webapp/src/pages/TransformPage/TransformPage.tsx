@@ -51,7 +51,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 	const handleTransformRequested = useCallback(
 		step => {
 			pipeline.clear()
-			pipeline.addAll([{ ...step, outputs: { default: 'output' } }])
+			pipeline.addAll([{ ...step, outputs: { target: 'output' } }])
 			if (isLoaded) {
 				hideModal()
 			}

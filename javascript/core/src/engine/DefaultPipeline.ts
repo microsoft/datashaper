@@ -57,7 +57,7 @@ export class DefaultPipeline implements Pipeline {
 
 	public create(verb: Verb): Step[] {
 		const base: Step = factory({ verb })
-		base.outputs = { default: base.id }
+		base.outputs = { target: base.id }
 		return this.add(base)
 	}
 

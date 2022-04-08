@@ -6,8 +6,8 @@
 		{
 			"id": "n1",
 			"verb": "groupby",
-			"inputs": { "default": { "node": "data/stocks.csv" } },
-			"outputs": { "default": "groupby-2" },
+			"inputs": { "source": { "node": "data/stocks.csv" } },
+			"outputs": { "target": "groupby-2" },
 			"args": {
 				"columns": ["Symbol", "Month"]
 			}

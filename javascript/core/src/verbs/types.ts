@@ -226,7 +226,7 @@ export enum FieldAggregateOperation {
 }
 
 export enum NodeInput {
-	Default = 'default',
+	Source = 'source',
 	Other = 'other',
 }
 

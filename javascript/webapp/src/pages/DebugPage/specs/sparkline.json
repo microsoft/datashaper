@@ -6,8 +6,8 @@
 		{
 			"id": "n1",
 			"verb": "aggregate",
-			"inputs": { "default": { "node": "data/stocks.csv" } },
-			"outputs": { "default": "sparkline" },
+			"inputs": { "source": { "node": "data/stocks.csv" } },
+			"outputs": { "target": "sparkline" },
 			"args": {
 				"groupby": "Symbol",
 				"column": "Close",

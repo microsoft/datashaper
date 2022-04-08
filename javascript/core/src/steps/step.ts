@@ -156,7 +156,7 @@ export function step<T extends object>({
 
 function fixInputs(inputs: StepSpecification['inputs']): Step['inputs'] {
 	if (typeof inputs === 'string') {
-		return { default: { node: inputs } }
+		return { source: { node: inputs } }
 	} else {
 		const result: Step['inputs'] = { ...inputs } as any
 		// rewrite any shorthand inputs into full inputs
@@ -178,7 +178,7 @@ function fixInputs(inputs: StepSpecification['inputs']): Step['inputs'] {
 
 function fixOutputs(outputs: StepSpecification['outputs']): Step['outputs'] {
 	if (typeof outputs === 'string') {
-		return { default: outputs }
+		return { target: outputs }
 	} else {
 		return outputs as Record<string, string>
 	}

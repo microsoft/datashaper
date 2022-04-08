@@ -6,8 +6,8 @@
 		{
 			"id": "binarize",
 			"verb": "binarize",
-			"inputs": { "default": { "node": "data/companies.csv" } },
-			"outputs": { "default": "binarize-1" },
+			"inputs": { "source": { "node": "data/companies.csv" } },
+			"outputs": { "target": "binarize-1" },
 			"args": {
 				"column": "Employees",
 				"to": "Smallest and Largest",

@@ -6,7 +6,7 @@
 		{
 			"verb": "join",
 			"inputs": {
-				"default": "data/companies.csv",
+				"source": "data/companies.csv",
 				"other": "data/products.csv"
 			},
 			"outputs": "join-1",
@@ -43,7 +43,7 @@
 		{
 			"verb": "lookup",
 			"inputs": {
-				"default": "data/companies.csv",
+				"source": "data/companies.csv",
 				"other": "aggregate-1"
 			},
 			"outputs": "lookup-1",
