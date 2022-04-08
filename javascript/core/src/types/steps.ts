@@ -215,9 +215,10 @@ export interface EraseArgs extends InputColumnListArgs {
 
 export interface Criterion {
 	/**
-	 * Comparison value for the column
+	 * Comparison value for the column.
+	 * Not required if the operator is self-defining (e.g., 'is empty')
 	 */
-	value: Value
+	value?: Value
 	/**
 	 * Indicates whether the filter should be directly against a value,
 	 * or against the value of another column

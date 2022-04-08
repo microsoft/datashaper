@@ -3,14 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { FilterCompareType, NumericComparisonOperator } from '../../index.js'
-import type { Step } from '../../types.js'
+import type { BinarizeStep } from '../../types.js'
 import { StringComparisonOperator, Verb } from '../../types.js'
 import { binarize } from '../verbs/binarize.js'
 import { TestStore } from './TestStore.js'
 
 describe('test for binarize verb', () => {
 	test('binarize test with NumericComparisonOperator Gte', () => {
-		const step: Step = {
+		const step: BinarizeStep = {
 			verb: Verb.Binarize,
 			input: 'table1',
 			output: 'output',
@@ -44,7 +44,7 @@ describe('test for binarize verb', () => {
 	})
 
 	test('binarize test with NumericComparisonOperator Gt', () => {
-		const step: Step = {
+		const step: BinarizeStep = {
 			verb: Verb.Binarize,
 			input: 'table1',
 			output: 'output',
@@ -78,7 +78,7 @@ describe('test for binarize verb', () => {
 	})
 
 	test('binarize test with NumericComparisonOperator Lt', () => {
-		const step: Step = {
+		const step: BinarizeStep = {
 			verb: Verb.Binarize,
 			input: 'table1',
 			output: 'output',
@@ -112,7 +112,7 @@ describe('test for binarize verb', () => {
 	})
 
 	test('binarize test with StringComparisonOperator EndsWith', () => {
-		const step: Step = {
+		const step: BinarizeStep = {
 			verb: Verb.Binarize,
 			input: 'table4',
 			output: 'output',
@@ -147,7 +147,7 @@ describe('test for binarize verb', () => {
 	})
 
 	test('binarize test with StringComparisonOperator Empty', () => {
-		const step: Step = {
+		const step: BinarizeStep = {
 			verb: Verb.Binarize,
 			input: 'table5',
 			output: 'output',
@@ -181,7 +181,7 @@ describe('test for binarize verb', () => {
 	})
 
 	test('binarize test with StringComparisonOperator Contains', () => {
-		const step: Step = {
+		const step: BinarizeStep = {
 			verb: Verb.Binarize,
 			input: 'table5',
 			output: 'output',
@@ -207,16 +207,16 @@ describe('test for binarize verb', () => {
 			expect(result.table!.numRows()).toBe(6)
 			// test where criteria match
 			expect(result.table!.get('newColumn', 0)).toBe(0)
-			expect(result.table!.get('newColumn', 1)).toBe(0)
+			expect(result.table!.get('newColumn', 1)).toBeNull()
 			expect(result.table!.get('newColumn', 2)).toBe(1)
 			expect(result.table!.get('newColumn', 3)).toBe(1)
 			expect(result.table!.get('newColumn', 4)).toBe(0)
-			expect(result.table!.get('newColumn', 5)).toBe(0)
+			expect(result.table!.get('newColumn', 5)).toBeNull()
 		})
 	})
 
 	test('binarize test with StringComparisonOperator Contains and two criteria', () => {
-		const step: Step = {
+		const step: BinarizeStep = {
 			verb: Verb.Binarize,
 			input: 'table5',
 			output: 'output',
@@ -247,11 +247,11 @@ describe('test for binarize verb', () => {
 			expect(result.table!.numRows()).toBe(6)
 			// test where criteria match
 			expect(result.table!.get('newColumn', 0)).toBe(1)
-			expect(result.table!.get('newColumn', 1)).toBe(0)
+			expect(result.table!.get('newColumn', 1)).toBeNull()
 			expect(result.table!.get('newColumn', 2)).toBe(1)
 			expect(result.table!.get('newColumn', 3)).toBe(1)
 			expect(result.table!.get('newColumn', 4)).toBe(0)
-			expect(result.table!.get('newColumn', 5)).toBe(0)
+			expect(result.table!.get('newColumn', 5)).toBeNull()
 		})
 	})
 })
