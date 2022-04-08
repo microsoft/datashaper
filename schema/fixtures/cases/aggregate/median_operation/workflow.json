@@ -8,7 +8,7 @@
 				"to": "newColumn",
 				"groupby": "ID",
 				"column": "quantity",
-				"operation": "min"
+				"operation": "median"
 			},
 			"output": "result"
 		}
