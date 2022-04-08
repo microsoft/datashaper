@@ -302,6 +302,16 @@ export function useStore(): TableStore {
 	return useMemo(() => createTableStore(), [])
 }
 
+export function usePipeline(store: TableStore, steps?: Step[]): Pipeline {
+	return useMemo(() => {
+		const pipeline = createPipeline(store)
+		if (steps) {
+			pipeline.addAll(steps)
+		}
+		return pipeline
+	}, [store, steps])
+}
+
 export function useCommonCommands(
 	showModal?: any | undefined,
 	changeTableFeatures?: (name: string) => void,
@@ -505,8 +515,4 @@ export function useFormatedColumnArgWithCount(): (
 		},
 		[createColumnName],
 	)
-}
-
-export function usePipeline(store: TableStore): Pipeline {
-	return useMemo(() => createPipeline(store), [store])
 }
