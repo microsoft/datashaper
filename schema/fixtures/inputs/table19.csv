@@ -1,0 +1,5 @@
+int,int_hex,date,decimal,boolean
+1,0x000000,2021-04-13,1.232,true
+-12,0xffffff,2001-08-18T00:00:00Z,39488.45,false
+40098,0x0000ff,1998-01-12T04:38:00Z,0.9989,hi
+F98,0xkl0922,date,g19.2,
