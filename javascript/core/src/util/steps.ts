@@ -19,7 +19,7 @@ enum Tags {
 	 */
 	InputColumn,
 	/**
-	 * A single output  column is input
+	 * A single output column is input
 	 */
 	OutputColumn,
 	/**
@@ -48,18 +48,19 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	dedupe: [Tags.InputTable, Tags.RowModifying],
 	derive: [Tags.InputTable, Tags.OutputColumn],
 	difference: [Tags.InputTable, Tags.RowModifying],
-	erase: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
+	erase: [Tags.InputTable, Tags.RowModifying],
 	fetch: [],
 	fill: [Tags.InputTable, Tags.OutputColumn],
 	filter: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
 	fold: [Tags.InputTable, Tags.RowModifying],
 	groupby: [Tags.InputTable],
-	impute: [Tags.InputTable, Tags.InputColumn],
+	impute: [Tags.InputTable],
 	intersect: [Tags.InputTable, Tags.RowModifying],
 	join: [Tags.InputTable, Tags.RowModifying],
 	lookup: [Tags.InputTable, Tags.RowModifying],
 	merge: [Tags.InputTable, Tags.OutputColumn],
 	pivot: [Tags.InputTable, Tags.RowModifying],
+	onehot: [Tags.InputTable, Tags.InputColumn],
 	orderby: [Tags.InputTable],
 	recode: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	rename: [Tags.InputTable],

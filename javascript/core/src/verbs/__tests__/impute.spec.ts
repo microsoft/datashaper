@@ -12,7 +12,7 @@ describe('test for impute verb', () => {
 	})
 	test('impute test with string value', () => {
 		const result = imputeStep(store.table('table5'), {
-			column: 'item',
+			columns: ['item'],
 			value: 'emptyValue',
 		})
 
@@ -26,7 +26,7 @@ describe('test for impute verb', () => {
 
 	test('impute test with number value', () => {
 		const result = imputeStep(store.table('table11'), {
-			column: 'y',
+			columns: ['y'],
 			value: 5000,
 		})
 

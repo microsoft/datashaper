@@ -11,7 +11,7 @@ describe('test for erase verb', () => {
 		store = new TestStore('table3')
 	})
 	test('erase numeric value', () => {
-		const result = eraseStep(store.table(), { value: 4, column: 'ID' })
+		const result = eraseStep(store.table(), { value: 4, columns: ['ID'] })
 		expect(result.numCols()).toBe(2)
 		expect(result.numRows()).toBe(6)
 		expect(result.get('ID', 3)).toBeUndefined()
@@ -20,7 +20,10 @@ describe('test for erase verb', () => {
 	})
 
 	test('erase string value', () => {
-		const result = eraseStep(store.table(), { value: 'sofa', column: 'item' })
+		const result = eraseStep(store.table(), {
+			value: 'sofa',
+			columns: ['item'],
+		})
 		expect(result.numCols()).toBe(2)
 		expect(result.numRows()).toBe(6)
 		expect(result.get('item', 2)).toBeUndefined()

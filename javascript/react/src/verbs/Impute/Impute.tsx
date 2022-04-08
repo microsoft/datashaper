@@ -2,19 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	ImputeArgs,
-	InputColumnArgs,
-} from '@data-wrangling-components/core'
+import type { ImputeStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleTextfieldChange } from '../../common/index.js'
+import {
+	LeftAlignedColumn,
+	useHandleTextfieldChange,
+} from '../../common/index.js'
 import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
-
-interface ColumnArgs extends InputColumnArgs, ImputeArgs {}
+import { ColumnListInputs } from '../shared/index.js'
 
 /**
  * Just the to/value inputs for an impute.
@@ -22,43 +21,45 @@ interface ColumnArgs extends InputColumnArgs, ImputeArgs {}
  */
 export const Impute: React.FC<StepComponentProps> = memo(function Impute({
 	step,
+	store,
 	onChange,
 }) {
-	// always match the input column and output - impute is an inline replacement verb
-	const args = useMemo(() => {
-		const a = {
-			...(step.args as ColumnArgs),
-		}
-		return {
-			...a,
-			to: a.column,
-		} as ColumnArgs
-	}, [step])
+	const internal = useMemo(() => step as ImputeStep, [step])
 
 	const handleValueChange = useHandleTextfieldChange(
-		step,
+		internal,
 		'args.value',
 		onChange,
 	)
 
 	return (
 		<Container>
-			<LeftAlignedRow>
+			<LeftAlignedColumn>
+				<ColumnListInputs
+					label={'Columns to impute'}
+					step={step}
+					store={store}
+					onChange={onChange}
+				/>
+			</LeftAlignedColumn>
+			<LeftAlignedColumn>
 				<TextField
 					required
 					label={'Fill value'}
-					value={args.value && `${args.value}`}
+					value={internal.args.value && `${internal.args.value}`}
 					placeholder={'text, number, or boolean'}
 					styles={dropdownStyles}
 					onChange={handleValueChange}
 				/>
-			</LeftAlignedRow>
+			</LeftAlignedColumn>
 		</Container>
 	)
 })
 
 const Container = styled.div`
 	display: flex;
-	flex-direction: row;
 	justify-content: flex-start;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	flex-direction: column;
 `

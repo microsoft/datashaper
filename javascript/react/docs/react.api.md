@@ -548,6 +548,16 @@ export const NoParameters: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const NoParametersDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "OneHot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const OneHot: React.FC<StepComponentProps>;
+
+// Warning: (ae-missing-release-tag) "OneHotDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const OneHotDescription: React.FC<StepDescriptionProps>;
+
 // Warning: (ae-missing-release-tag) "Orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -957,6 +967,11 @@ export function useCreateColumnName(): (name: string, columnNames: string[]) => 
 // @public (undocumented)
 export function useCreateTableName(store?: TableStore): (name: string) => string;
 
+// Warning: (ae-missing-release-tag) "useDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDateFormatPatternOptions(): IDropdownOption[];
+
 // Warning: (ae-missing-release-tag) "useDeleteConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1106,7 +1121,7 @@ export function useLoadTable(id: string | undefined, table?: ColumnTable, store?
 // Warning: (ae-missing-release-tag) "usePipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function usePipeline(store: TableStore): Pipeline;
+export function usePipeline(store: TableStore, steps?: Step[]): Pipeline;
 
 // Warning: (ae-missing-release-tag) "useProjectMgmtCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

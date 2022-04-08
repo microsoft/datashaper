@@ -75,14 +75,14 @@ export class TestStore extends DefaultStore<TableContainer> {
 
 		const table11 = table({
 			x: ['A', 'B', 'A'],
-			y: [1, undefined, 1],
+			y: [1, null, 1],
 			z: [4, 5, 4],
 		})
 
 		const table12 = table({
 			ID: [1, 2, 3, 4, 5],
 			item: ['bed', 'pillow', null, 'chair', 'stool'],
-			quantity: [45, undefined, 100, 89, 50],
+			quantity: [45, null, 100, 89, 50],
 			totalSale: [54000, 7800, 230000, 20470, 5000],
 		})
 
@@ -94,7 +94,7 @@ export class TestStore extends DefaultStore<TableContainer> {
 
 		const table14 = table({
 			x: ['A', 'B', 'A'],
-			y: [1, undefined, 1],
+			y: [1, null, 1],
 			z: [true, false, false],
 		})
 
@@ -142,6 +142,55 @@ export class TestStore extends DefaultStore<TableContainer> {
 			D: [1, 0, 0, 0],
 		})
 
+		const table21 = table({
+			date: [
+				new Date(1994, 2, 24),
+				new Date(2020, 5, 23),
+				new Date(2022, 2, 28),
+			],
+		})
+
+		const table22 = table({
+			ID: [1, 2, 3, 4, 5],
+			value: [12.35, 86.55, 45.55, 66.35, 78.25],
+		})
+
+		const table23 = table({
+			ID: [1, 2, 3, 4, 5],
+			date: [
+				'2021-04-13',
+				'2021-12-05',
+				'1998-01-12T04:38:00Z',
+				'1996-01-01',
+				null,
+			],
+		})
+
+		const table24 = table({
+			ID: [1, 2, 3],
+			date: [
+				new Date(1994, 2, 24).getTime(),
+				new Date(2020, 5, 23).getTime(),
+				new Date(2022, 2, 28).getTime(),
+			],
+		})
+
+		const table25 = table({
+			ID: [1, 2, 3, 4, 5],
+			date: [
+				'2021-04-13',
+				'2021-12-05',
+				'1998-01-12T04:38:00Z',
+				'null',
+				'undefined',
+			],
+		})
+
+		const table26 = table({
+			ID: [1, 2, 3, 4, 5],
+			values: ['undefined', 'test1', 'null', 'test2', 'final test'],
+		})
+
 		this.set('table1', from([{ id: 'table1', table: table1 }]))
 		this.set('table2', from([{ id: 'table2', table: table2 }]))
 		this.set('table3', from([{ id: 'table3', table: table3 }]))
@@ -162,6 +211,12 @@ export class TestStore extends DefaultStore<TableContainer> {
 		this.set('table18', from([{ id: 'table18', table: table18 }]))
 		this.set('table19', from([{ id: 'table19', table: table19 }]))
 		this.set('table20', from([{ id: 'table20', table: table20 }]))
+		this.set('table21', from([{ id: 'table21', table: table21 }]))
+		this.set('table22', from([{ id: 'table22', table: table22 }]))
+		this.set('table23', from([{ id: 'table23', table: table23 }]))
+		this.set('table24', from([{ id: 'table24', table: table24 }]))
+		this.set('table25', from([{ id: 'table25', table: table25 }]))
+		this.set('table26', from([{ id: 'table26', table: table26 }]))
 	}
 
 	public table(name: string = this._defaultTableName): ColumnTable {

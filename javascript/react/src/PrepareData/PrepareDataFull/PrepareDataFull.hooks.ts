@@ -92,19 +92,6 @@ export function useBusinessLogic(
 	}, [tables, selectedTableName, derived])
 
 	useEffect(() => {
-		void runPipeline()
-	}, [steps, runPipeline])
-
-	useEffect(() => {
-		if (steps?.length && storedTables.size > 0) {
-			if (steps && !pipeline.steps.filter(s => steps?.includes(s)).length) {
-				pipeline.addAll(steps)
-				runPipeline()
-			}
-		}
-	}, [steps, pipeline, runPipeline, storedTables])
-
-	useEffect(() => {
 		if (tables.length) {
 			addNewTables(tables)
 			const last = tables[tables.length - 1]
@@ -121,8 +108,21 @@ export function useBusinessLogic(
 		}
 	}, [storedTables, lastTableName, onOutputTable])
 
-	const onSaveStep = useOnSaveStep(onUpdateSteps, pipeline)
-	const onDeleteStep = useOnDeleteStep(onUpdateSteps, pipeline)
+	useEffect(() => {
+		if (storedTables.size > 0) {
+			if (
+				steps?.filter(s => !pipeline.steps?.includes(s)).length ||
+				steps?.length !== pipeline.steps.length
+			) {
+				pipeline.clear()
+				steps && pipeline.addAll(steps)
+				runPipeline()
+			}
+		}
+	}, [steps, pipeline, runPipeline, storedTables])
+
+	const onSaveStep = useOnSaveStep(onUpdateSteps, steps)
+	const onDeleteStep = useOnDeleteStep(onUpdateSteps, steps)
 
 	const onUpdateMetadata = useOnUpdateMetadata(
 		setStoredTables,

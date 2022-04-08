@@ -10,16 +10,23 @@ import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
 export interface EraseArgs {
-	column: string
+	columns: string[]
 	value: Value
 }
 
 export const eraseStep: ColumnTableStep<EraseArgs> = (
 	input: ColumnTable,
-	{ value, column }: EraseArgs,
+	{ value, columns }: EraseArgs,
 ) => {
-	const func = escape((d: any) => (d[column] === value ? undefined : d[column]))
-	return input.derive({ [column]: func })
+	const funcs = columns.reduce((acc, column) => {
+		// TODO: this is a cheap string conversion for comparison.
+		// we may want to do real type checking per cell or using table metadata for types
+		acc[column] = escape((d: any) =>
+			`${d[column]}` === `${value}` ? null : d[column],
+		)
+		return acc
+	}, {} as Record<string, object>)
+	return input.derive(funcs)
 }
 
 export const erase = stepVerbFactory(eraseStep)

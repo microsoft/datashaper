@@ -31,10 +31,7 @@ export const StepsList: React.FC<{
 
 	useEffect(() => {
 		const f = () => {
-			ref?.current?.scrollIntoView({
-				block: 'center',
-				behavior: 'smooth',
-			})
+			ref?.current?.scrollIntoView(false)
 		}
 		f()
 	}, [steps])
@@ -74,7 +71,9 @@ export const StepsList: React.FC<{
 	)
 })
 
-const addButtonStyles = { root: { padding: '0 4px 0 6px' } }
+const addButtonStyles = {
+	root: { padding: '0 4px 0 6px', whiteSpace: 'nowrap' },
+}
 
 const iconProps = {
 	add: { iconName: 'Add' },

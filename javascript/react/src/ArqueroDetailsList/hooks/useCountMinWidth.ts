@@ -15,7 +15,9 @@ export function useCountMinWidth(
 ): number {
 	return useMemo(() => {
 		const elementsWidth = Math.max(
-			...(commandBar?.map(command => +command()?.props?.style?.width) || [0]),
+			...(commandBar?.map(command => +command()?.props.styles.root.width) || [
+				0,
+			]),
 		)
 
 		const buttonsWidth =

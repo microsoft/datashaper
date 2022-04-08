@@ -83,6 +83,7 @@ export enum Verb {
 	Lookup = 'lookup',
 	Merge = 'merge',
 	Pivot = 'pivot',
+	OneHot = 'onehot',
 	Orderby = 'orderby',
 	Recode = 'recode',
 	Rename = 'rename',
@@ -111,6 +112,7 @@ export enum ParseType {
 	 * allows users to control how a string is interpreted.
 	 */
 	Decimal = 'float',
+	String = 'string',
 }
 
 export enum DataType {

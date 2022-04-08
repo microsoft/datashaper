@@ -14,15 +14,18 @@ export interface ImputeArgs extends InputColumnArgs {
 	 * Value to fill in empty cells
 	 */
 	value: Value
+
+	columns: string[]
 }
 
 export const imputeStep: ColumnTableStep<ImputeArgs> = (
 	input,
-	{ value, column },
+	{ value, columns },
 ) => {
-	const dArgs: ExprFunctionMap = {
-		[column]: (_d: any, $: any) => $.value,
-	}
+	const dArgs: ExprFunctionMap = columns.reduce((acc, column) => {
+		acc[column] = (_d: any, $: any) => $.value
+		return acc
+	}, {} as ExprFunctionMap)
 	return input.params({ value }).impute(dArgs)
 }
 

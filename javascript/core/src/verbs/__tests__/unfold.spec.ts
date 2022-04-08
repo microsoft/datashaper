@@ -64,7 +64,7 @@ describe('test for unfold verb', () => {
 		expect(result.get('x', 1)).toBe('B')
 		expect(result.get('x', 2)).toBe('A')
 		expect(result.get('y', 0)).toBe(1)
-		expect(result.get('y', 1)).toBeUndefined()
+		expect(result.get('y', 1)).toBeNull()
 		expect(result.get('y', 2)).toBe(1)
 		expect(result.get('z', 0)).toBe(true)
 		expect(result.get('z', 1)).toBe(false)

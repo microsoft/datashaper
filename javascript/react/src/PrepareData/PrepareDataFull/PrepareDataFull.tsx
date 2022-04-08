@@ -93,7 +93,7 @@ export const PrepareDataFull: React.FC<{
 
 const GAP = 18
 const INPUT_HEIGHT = 60
-const STEPS_HEIGHT = 260
+const STEPS_HEIGHT = 280
 
 const SectionTitle = styled.span<{ isCollapsed?: boolean }>`
 	margin: 0 ${GAP}px 0 ${GAP}px;

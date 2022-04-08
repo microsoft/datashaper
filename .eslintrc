@@ -26,12 +26,13 @@
 		"@typescript-eslint/no-floating-promises": "off",
 		"@typescript-eslint/no-misused-promises": "off",
 		"@typescript-eslint/restrict-template-expressions": "off",
-		"@typescript-eslint/restrict-plus-operands": "off"
+		"@typescript-eslint/restrict-plus-operands": "off",
+		"import/no-webpack-loader-syntax": "off"
 	},
 	"overrides": [{
 		"files": ["javascript/webapp/src/**/*"],
 		"rules": {
-			"import/extensions": ["error", "never"]
+			"import/extensions": ["error", "never", {"md": "always"}]
 		}
 	}]
 }

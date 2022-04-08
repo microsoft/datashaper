@@ -7,13 +7,16 @@ import type { Op } from 'arquero/dist/types/op/op'
 
 import type {
 	BooleanComparisonOperator,
-	Criterion,	NumericComparisonOperator,
-	StringComparisonOperator} from '../types.js'
+	Criterion,
+	NumericComparisonOperator,
+	StringComparisonOperator,
+} from '../types.js'
 import {
 	BooleanOperator,
 	FieldAggregateOperation,
 	FilterCompareType,
- WindowFunction } from '../types.js'
+	WindowFunction,
+} from '../types.js'
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
 import { bool } from './data-types.js'
@@ -24,7 +27,7 @@ export function compareAll(
 	criteria: Criterion[],
 	logical = BooleanOperator.OR,
 ): CompareWrapper {
-	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
+	return escape((d: Record<string, string | number>): 0 | 1 => {
 		const left = d[column]!
 		// TODO: the logical evaluate below has shortcuts that could optimize
 		// this check by shortcutting evaluation once it is clear the logical operator

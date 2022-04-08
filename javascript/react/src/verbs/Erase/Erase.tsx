@@ -3,16 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { EraseStep } from '@data-wrangling-components/core'
-import { NodeInput } from '@data-wrangling-components/core'
-import cloneDeep from 'lodash-es/cloneDeep.js'
-import set from 'lodash-es/set.js'
-import { memo, useCallback, useMemo } from 'react'
+import { TextField } from '@fluentui/react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
-import { ColumnValueComboBox } from '../../controls/ColumnValueComboBox.js'
+import {
+	LeftAlignedColumn,
+	useHandleTextfieldChange,
+} from '../../common/index.js'
 import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
+import { ColumnListInputs } from '../shared/index.js'
 
 /**
  * Just the to/value inputs for an impute.
@@ -21,48 +22,44 @@ import type { StepComponentProps } from '../../types.js'
 export const Erase: React.FC<StepComponentProps> = memo(function Erase({
 	step,
 	store,
-	table,
 	onChange,
-	input,
 }) {
 	const internal = useMemo(() => step as EraseStep, [step])
 
-	const tbl = useLoadTable(
-		input || step.inputs[NodeInput.Default]?.node,
-		table,
-		store,
-	)
-
-	const handleComboBoxChange = useCallback(
-		(_event, option, value) => {
-			const update = cloneDeep(step)
-			set(update, 'args.value', option ? option.key : value)
-			onChange && onChange(update)
-		},
-		[step, onChange],
+	const handleValueChange = useHandleTextfieldChange(
+		internal,
+		'args.value',
+		onChange,
 	)
 
 	return (
 		<Container>
-			<LeftAlignedRow>
-				<ColumnValueComboBox
-					required
-					table={tbl}
-					label={'Value to be erased'}
-					placeholder={'value'}
-					columnName={internal.args.column}
-					text={internal.args.value && `${internal.args.value}`}
-					selectedKey={internal.args.value}
-					onChange={handleComboBoxChange}
-					styles={dropdownStyles}
+			<LeftAlignedColumn>
+				<ColumnListInputs
+					label={'Columns to erase'}
+					step={step}
+					store={store}
+					onChange={onChange}
 				/>
-			</LeftAlignedRow>
+			</LeftAlignedColumn>
+			<LeftAlignedColumn>
+				<TextField
+					required
+					label={'Value to be erased'}
+					value={internal.args.value && `${internal.args.value}`}
+					placeholder={'text, number, or boolean'}
+					styles={dropdownStyles}
+					onChange={handleValueChange}
+				/>
+			</LeftAlignedColumn>
 		</Container>
 	)
 })
 
 const Container = styled.div`
 	display: flex;
-	flex-direction: row;
 	justify-content: flex-start;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	flex-direction: column;
 `

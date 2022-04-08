@@ -12,9 +12,11 @@ import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	ColumnTransformModal,
+	createDefaultHeaderCommandBar,
 } from '@data-wrangling-components/react'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
+import { useThematic } from '@thematic/react'
 import { loadCSV } from 'arquero'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { from } from 'rxjs'
@@ -44,8 +46,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 	const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =
 		useBoolean(false)
 
-	const commands = useCommands(showModal)
-	console.log('use commands?', commands)
+	const commandBar = useCommandBar(showModal)
 
 	const handleTransformRequested = useCallback(
 		step => {
@@ -70,7 +71,7 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 				onTransformRequested={handleTransformRequested}
 			/>
 			<Table>
-				<ArqueroTableHeader table={outputTable.table} />
+				<ArqueroTableHeader table={outputTable.table} commandBar={commandBar} />
 				<ArqueroDetailsList
 					table={outputTable.table}
 					isHeadersFixed
@@ -94,9 +95,19 @@ const Table = styled.div`
 	height: 600px;
 `
 
-function useCommands(showModal: any) {
+function useCommandBar(showModal: any) {
+	const theme = useThematic()
 	const dccmd = useDeriveColumnCommand(showModal)
-	return useMemo(() => [dccmd], [dccmd])
+	return useMemo(
+		() =>
+			createDefaultHeaderCommandBar(
+				{
+					items: [dccmd],
+				},
+				theme,
+			),
+		[theme, dccmd],
+	)
 }
 
 function useDeriveColumnCommand(

@@ -292,6 +292,8 @@ export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertA
 //
 // @public (undocumented)
 export interface ConvertArgs extends InputColumnListArgs {
+    // (undocumented)
+    formatPattern?: string;
     radix?: number;
     // (undocumented)
     type: ParseType;
@@ -499,7 +501,7 @@ export const erase: (id: string) => StepNode<TableContainer<unknown>, EraseArgs>
 // @public (undocumented)
 export interface EraseArgs {
     // (undocumented)
-    column: string;
+    columns: string[];
     // (undocumented)
     value: Value;
 }
@@ -707,6 +709,8 @@ export const impute: (id: string) => StepNode<TableContainer<unknown>, ImputeArg
 //
 // @public (undocumented)
 export interface ImputeArgs extends InputColumnArgs {
+    // (undocumented)
+    columns: string[];
     value: Value;
 }
 
@@ -988,6 +992,23 @@ export class ObservableNode<T> extends BaseNode<T, void> {
 // @public (undocumented)
 export function observableNode<T>(id: string, source: Observable<Maybe<T>>): ObservableNode<T>;
 
+// Warning: (ae-missing-release-tag) "onehot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const onehot: (id: string) => StepNode<TableContainer<unknown>, OneHotArgs>;
+
+// Warning: (ae-missing-release-tag) "OneHotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface OneHotArgs extends InputColumnArgs {
+    prefix?: string;
+}
+
+// Warning: (ae-missing-release-tag) "OneHotStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type OneHotStep = Step<OneHotArgs>;
+
 // Warning: (ae-missing-release-tag) "orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1032,7 +1053,9 @@ export enum ParseType {
     Date = "date",
     Decimal = "float",
     // (undocumented)
-    Integer = "int"
+    Integer = "int",
+    // (undocumented)
+    String = "string"
 }
 
 // Warning: (ae-missing-release-tag) "Pipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1479,6 +1502,8 @@ export enum Verb {
     Lookup = "lookup",
     // (undocumented)
     Merge = "merge",
+    // (undocumented)
+    OneHot = "onehot",
     // (undocumented)
     Orderby = "orderby",
     // (undocumented)

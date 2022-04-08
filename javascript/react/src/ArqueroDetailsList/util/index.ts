@@ -5,6 +5,7 @@
 import type { IColumn, IDropdownOption } from '@fluentui/react'
 import isArray from 'lodash-es/isArray.js'
 import isEqual from 'lodash-es/isEqual.js'
+import isNaN from 'lodash-es/isNaN.js'
 import isNil from 'lodash-es/isNil.js'
 import isString from 'lodash-es/isString.js'
 import orderBy from 'lodash-es/orderBy.js'
@@ -58,7 +59,7 @@ export function isDistinctCategories(cats: Record<string, number>): boolean {
 }
 
 export function isEmpty(value: any): boolean {
-	if (isNil(value)) {
+	if (isNil(value) || isNaN(value)) {
 		return true
 	}
 	if ((isString(value) || isArray(value)) && value.length === 0) {

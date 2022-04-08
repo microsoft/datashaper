@@ -18,13 +18,16 @@ import {
 } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 import { from } from 'rxjs'
 import styled from 'styled-components'
 
-import { useHelpFileContentSetter } from '../../states/helpFileContent.js'
 import { ControlBar } from './ControlBar'
-import { useInputTableList, useInputTables, useTableStore } from './hooks'
+import {
+	useInputTableList,
+	useInputTables,
+	useTableStore,
+} from './DebugPage.hooks'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { Table } from './Table'
@@ -51,7 +54,8 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const [inputList, setInputs] = useInputTableList()
 	const store = useTableStore(autoType)
 	const inputTables = useInputTables(inputList, store)
-	const pipeline = usePipeline(store)
+	const [steps, setSteps] = useState<Step[]>([])
+	const pipeline = usePipeline(store, steps)
 	const [result, setResult] = useState<ColumnTable | undefined>()
 	const [outputs, setOutputs] = useState<Map<string, TableContainer>>(
 		new Map<string, TableContainer>(),
@@ -63,19 +67,6 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 		statsColumnTypes: DEFAULT_STATS,
 	})
 	const [compact, setCompact] = useState<boolean>(true)
-
-	const [steps, setSteps] = useState<Step[]>([])
-
-	const setHelpFileContent = useHelpFileContentSetter()
-
-	useEffect(() => {
-		const content = `This is a debugging page for the data wrangling components. The default tables shown are fake test data that exhibits several qualities we want to be able to test (for example, missing cells, duplicate rows, etc.).
-		\nTo use this app, either (a) select an example pipeline from the dropdown at top left, or (b) add individual steps and run them.
-		\nTo add steps, select the step type from the dropdown at bottom left and click the + button. The step configuration interface will appear - fill in the parameters and click "Run".
-		\nEach step you add will appear below the previous steps. Whenever you run the pipeline, the output of each step will be shown to it's right. The final pipeline output will be displayed at the very bottom of the page.`
-
-		setHelpFileContent(content)
-	})
 
 	const handleCreateStep = useCallback(
 		(verb: Verb) => {

@@ -21,6 +21,7 @@ import type {
 	JoinArgs,
 	LookupArgs,
 	MergeArgs,
+	OneHotArgs,
 	OrderbyArgs,
 	PivotArgs,
 	RecodeArgs,
@@ -134,6 +135,7 @@ export type GroupbyStep = Step<GroupbyArgs>
 export type JoinStep = Step<JoinArgs>
 export type LookupStep = Step<LookupArgs>
 export type MergeStep = Step<MergeArgs>
+export type OneHotStep = Step<OneHotArgs>
 export type PivotStep = Step<PivotArgs>
 export type OrderbyStep = Step<OrderbyArgs>
 export type RecodeStep = Step<RecodeArgs>

@@ -107,11 +107,11 @@
 		},
 		{
 			"verb": "erase",
-			"inputs": { "default": { "node": "data/companies.csv" } },
+			"inputs": { "default": { "node": "data/products.csv" } },
 			"outputs": { "default": "erase-1" },
 			"args": {
-				"value": 150000,
-				"column": "Employees"
+				"value": 9000,
+				"columns": ["FY20 Sales", "FY21 Sales"]
 			}
 		},
 		{
@@ -168,7 +168,7 @@
 			"inputs": "data/companies2.csv",
 			"outputs": { "default": "impute-1" },
 			"args": {
-				"column": "Name",
+				"columns": ["Name"],
 				"value": "emptyValue"
 			}
 		},
@@ -217,6 +217,15 @@
 				"key": "ID",
 				"value": "Name",
 				"operation": "any"
+			}
+		},
+		{
+			"verb": "onehot",
+			"input": "data/stocks.csv",
+			"output": "onehot-1",
+			"args": {
+				"column": "Symbol",
+				"prefix": "ticker-"
 			}
 		},
 		{
