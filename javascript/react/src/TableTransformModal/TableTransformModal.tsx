@@ -49,12 +49,16 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			onTransformRequested,
 		)
 
-		const adaptedStyles = useModalStyles(styles, isGuidanceVisible)
+		const adaptedStyles = useModalStyles(
+			styles,
+			isGuidanceVisible,
+			!!internal?.verb,
+		)
 		return (
 			<Callout
 				onDismissed={() => setInternal(undefined)}
 				styles={adaptedStyles}
-				directionalHint={DirectionalHint.rightTopEdge}
+				directionalHint={DirectionalHint.rightBottomEdge}
 				{...props}
 			>
 				<Header>
@@ -137,6 +141,8 @@ const Title = styled.h3`
 
 const StepComponentContainer = styled.div`
 	width: 316px;
+	max-height: 32rem;
+	overflow: hidden auto;
 `
 
 const StepSelectorContainer = styled.div`
@@ -152,4 +158,6 @@ const ButtonContainer = styled.div`
 
 const GuidanceContainer = styled.div`
 	width: 400px;
+	max-height: 32rem;
+	overflow: hidden auto;
 `
