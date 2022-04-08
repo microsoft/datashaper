@@ -11,8 +11,8 @@ describe('test for orderby verb', () => {
 	beforeEach(() => {
 		store = new TestStore('table7')
 	})
-	test('orderby test with SortDirection Ascending and string value', () => {
-		const result = orderbyStep(store.table(), {
+	test('orderby test with SortDirection Ascending and string value', async () => {
+		const result = await orderbyStep(store.table(), {
 			orders: [{ column: 'item', direction: SortDirection.Ascending }],
 		})
 
@@ -25,8 +25,8 @@ describe('test for orderby verb', () => {
 		expect(result.get('item', 4)).toBe('stool')
 	})
 
-	test('orderby test with SortDirection Descending and string value', () => {
-		const result = orderbyStep(store.table(), {
+	test('orderby test with SortDirection Descending and string value', async () => {
+		const result = await orderbyStep(store.table(), {
 			orders: [{ column: 'item', direction: SortDirection.Descending }],
 		})
 		expect(result.numCols()).toBe(4)
@@ -38,8 +38,8 @@ describe('test for orderby verb', () => {
 		expect(result.get('item', 4)).toBe('bed')
 	})
 
-	test('orderby test with SortDirection Ascending and number value', () => {
-		const result = orderbyStep(store.table(), {
+	test('orderby test with SortDirection Ascending and number value', async () => {
+		const result = await orderbyStep(store.table(), {
 			orders: [{ column: 'quantity', direction: SortDirection.Ascending }],
 		})
 		expect(result.numCols()).toBe(4)
@@ -51,8 +51,8 @@ describe('test for orderby verb', () => {
 		expect(result.get('quantity', 4)).toBe(100)
 	})
 
-	test('orderby test with SortDirection Descending and number value', () => {
-		const result = orderbyStep(store.table(), {
+	test('orderby test with SortDirection Descending and number value', async () => {
+		const result = await orderbyStep(store.table(), {
 			orders: [{ column: 'quantity', direction: SortDirection.Descending }],
 		})
 		expect(result.numCols()).toBe(4)

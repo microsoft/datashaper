@@ -10,8 +10,8 @@ describe('test for groupby verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('groupby test', () => {
-		const result = groupbyStep(store.table('table1'), {
+	test('groupby test', async () => {
+		const result = await groupbyStep(store.table('table1'), {
 			columns: ['ID'],
 		})
 

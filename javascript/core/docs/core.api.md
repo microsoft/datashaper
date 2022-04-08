@@ -1291,7 +1291,7 @@ export function step<T extends object>({ verb, args, id, inputs, outputs, }: Ste
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepFunction<T, Args> = (source: T, args: Args, id: string) => Promise<T> | T;
+export type StepFunction<T, Args> = (source: T, args: Args) => Promise<T> | T;
 
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

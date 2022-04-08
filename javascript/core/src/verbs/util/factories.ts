@@ -52,7 +52,7 @@ export function stepVerbFactory<Args>(
 			args: Args,
 		) => {
 			if (source.table) {
-				const result = columnTableStep(source.table, args, id)
+				const result = columnTableStep(source.table, args)
 
 				// handle promise-based result
 				if ((result as any).then) {

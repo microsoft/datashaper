@@ -20,7 +20,7 @@ export interface OneHotArgs extends InputColumnArgs {
  * Executes a  one-hot encoding. This creates a new column for each unique value in the specified column.
  * An optional prefix can be specified for the output columns, to help differentiate source columns on large tables.
  */
-export const oneHotStep: ColumnTableStep<OneHotArgs> = (
+export const onehotStep: ColumnTableStep<OneHotArgs> = (
 	input,
 	{ column, prefix },
 ) => {
@@ -42,4 +42,4 @@ export const oneHotStep: ColumnTableStep<OneHotArgs> = (
 	return input.derive(args)
 }
 
-export const onehot = stepVerbFactory(oneHotStep)
+export const onehot = stepVerbFactory(onehotStep)

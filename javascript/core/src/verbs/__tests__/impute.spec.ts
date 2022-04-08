@@ -10,8 +10,8 @@ describe('test for impute verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('impute test with string value', () => {
-		const result = imputeStep(store.table('table5'), {
+	test('impute test with string value', async () => {
+		const result = await imputeStep(store.table('table5'), {
 			columns: ['item'],
 			value: 'emptyValue',
 		})
@@ -24,8 +24,8 @@ describe('test for impute verb', () => {
 		expect(result.get('item', 5)).toBe('emptyValue')
 	})
 
-	test('impute test with number value', () => {
-		const result = imputeStep(store.table('table11'), {
+	test('impute test with number value', async () => {
+		const result = await imputeStep(store.table('table11'), {
 			columns: ['y'],
 			value: 5000,
 		})

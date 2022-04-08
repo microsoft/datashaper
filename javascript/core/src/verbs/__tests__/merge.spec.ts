@@ -11,8 +11,8 @@ describe('test for merge verb', () => {
 		store = new TestStore()
 	})
 	describe('MergeStrategy.concat', () => {
-		test('numeric values', () => {
-			const result = mergeStep(store.table('table12'), {
+		test('numeric values', async () => {
+			const result = await mergeStep(store.table('table12'), {
 				columns: ['quantity', 'totalSale'],
 				strategy: MergeStrategy.Concat,
 				to: 'resultColumn',
@@ -27,8 +27,8 @@ describe('test for merge verb', () => {
 			expect(result.get('resultColumn', 4)).toBe('505000')
 		})
 
-		test('string values', () => {
-			const result = mergeStep(store.table('table13'), {
+		test('string values', async () => {
+			const result = await mergeStep(store.table('table13'), {
 				columns: ['name', 'description'],
 				strategy: MergeStrategy.Concat,
 				to: 'resultColumn',
@@ -43,8 +43,8 @@ describe('test for merge verb', () => {
 			expect(result.get('resultColumn', 4)).toBe('EFG')
 		})
 
-		test('numeric and string mixed values', () => {
-			const result = mergeStep(store.table('table12'), {
+		test('numeric and string mixed values', async () => {
+			const result = await mergeStep(store.table('table12'), {
 				columns: ['item', 'quantity'],
 				strategy: MergeStrategy.Concat,
 				to: 'resultColumn',
@@ -59,8 +59,8 @@ describe('test for merge verb', () => {
 			expect(result.get('resultColumn', 4)).toBe('stool50')
 		})
 
-		test('string values with delimiter', () => {
-			const result = mergeStep(store.table('table13'), {
+		test('string values with delimiter', async () => {
+			const result = await mergeStep(store.table('table13'), {
 				columns: ['name', 'description'],
 				strategy: MergeStrategy.Concat,
 				to: 'resultColumn',
@@ -78,8 +78,8 @@ describe('test for merge verb', () => {
 	})
 
 	describe('MergeStrategy.FirstOneWins', () => {
-		test('string and numeric mixed values', () => {
-			const result = mergeStep(store.table('table12'), {
+		test('string and numeric mixed values', async () => {
+			const result = await mergeStep(store.table('table12'), {
 				columns: ['item', 'quantity'],
 				strategy: MergeStrategy.FirstOneWins,
 				to: 'resultColumn',
@@ -94,8 +94,8 @@ describe('test for merge verb', () => {
 			expect(result.get('resultColumn', 4)).toBe('stool')
 		})
 
-		test('numeric values', () => {
-			const result = mergeStep(store.table('table12'), {
+		test('numeric values', async () => {
+			const result = await mergeStep(store.table('table12'), {
 				columns: ['quantity', 'totalSale'],
 				strategy: MergeStrategy.FirstOneWins,
 				to: 'resultColumn',
@@ -110,8 +110,8 @@ describe('test for merge verb', () => {
 			expect(result.get('resultColumn', 4)).toBe(50)
 		})
 
-		test('boolean and string mixed values', () => {
-			const result = mergeStep(store.table('table14'), {
+		test('boolean and string mixed values', async () => {
+			const result = await mergeStep(store.table('table14'), {
 				columns: ['y', 'z'],
 				strategy: MergeStrategy.FirstOneWins,
 				to: 'resultColumn',
@@ -124,8 +124,8 @@ describe('test for merge verb', () => {
 			expect(result.get('resultColumn', 2)).toBe('1')
 		})
 
-		test('boolean values', () => {
-			const result = mergeStep(store.table('table15'), {
+		test('boolean values', async () => {
+			const result = await mergeStep(store.table('table15'), {
 				columns: ['y', 'z'],
 				strategy: MergeStrategy.FirstOneWins,
 				to: 'resultColumn',
@@ -140,8 +140,8 @@ describe('test for merge verb', () => {
 	})
 
 	describe('MergeStrategy.LastOneWins', () => {
-		test('string and numeric mixed values', () => {
-			const result = mergeStep(store.table('table12'), {
+		test('string and numeric mixed values', async () => {
+			const result = await mergeStep(store.table('table12'), {
 				columns: ['item', 'quantity'],
 				strategy: MergeStrategy.LastOneWins,
 				to: 'resultColumn',
@@ -156,8 +156,8 @@ describe('test for merge verb', () => {
 			expect(result.get('resultColumn', 4)).toBe('50')
 		})
 
-		test('numeric values', () => {
-			const result = mergeStep(store.table('table12'), {
+		test('numeric values', async () => {
+			const result = await mergeStep(store.table('table12'), {
 				columns: ['quantity', 'totalSale'],
 				strategy: MergeStrategy.LastOneWins,
 				to: 'resultColumn',
@@ -172,8 +172,8 @@ describe('test for merge verb', () => {
 			expect(result.get('resultColumn', 4)).toBe(5000)
 		})
 
-		test('boolean and string mixed values', () => {
-			const result = mergeStep(store.table('table14'), {
+		test('boolean and string mixed values', async () => {
+			const result = await mergeStep(store.table('table14'), {
 				columns: ['y', 'z'],
 				strategy: MergeStrategy.LastOneWins,
 				to: 'resultColumn',
@@ -186,8 +186,8 @@ describe('test for merge verb', () => {
 			expect(result.get('resultColumn', 2)).toBe('false')
 		})
 
-		test('boolean values', () => {
-			const result = mergeStep(store.table('table15'), {
+		test('boolean values', async () => {
+			const result = await mergeStep(store.table('table15'), {
 				columns: ['y', 'z'],
 				strategy: MergeStrategy.LastOneWins,
 				to: 'resultColumn',
@@ -202,8 +202,8 @@ describe('test for merge verb', () => {
 	})
 
 	describe('MergeStrategy.array', () => {
-		test('numeric values', () => {
-			const result = mergeStep(store.table('table12'), {
+		test('numeric values', async () => {
+			const result = await mergeStep(store.table('table12'), {
 				columns: ['quantity', 'totalSale'],
 				strategy: MergeStrategy.CreateArray,
 				to: 'resultColumn',

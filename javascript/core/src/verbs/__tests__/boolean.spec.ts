@@ -16,8 +16,8 @@ describe('test for boolean verb', () => {
 		store = new TestStore('table20')
 	})
 
-	test('OR', () => {
-		const result = booleanStep(store.table(), {
+	test('OR', async () => {
+		const result = await booleanStep(store.table(), {
 			...args,
 			operator: BooleanOperator.OR,
 		})
@@ -30,8 +30,8 @@ describe('test for boolean verb', () => {
 		expect(result.get('newColumn', 3)).toBe(0)
 	})
 
-	test('AND', () => {
-		const result = booleanStep(store.table(), {
+	test('AND', async () => {
+		const result = await booleanStep(store.table(), {
 			...args,
 			operator: BooleanOperator.AND,
 		})
@@ -44,8 +44,8 @@ describe('test for boolean verb', () => {
 		expect(result.get('newColumn', 3)).toBe(0)
 	})
 
-	test('XOR', () => {
-		const result = booleanStep(store.table(), {
+	test('XOR', async () => {
+		const result = await booleanStep(store.table(), {
 			...args,
 			operator: BooleanOperator.XOR,
 		})
@@ -58,8 +58,8 @@ describe('test for boolean verb', () => {
 		expect(result.get('newColumn', 3)).toBe(0)
 	})
 
-	test('NOR', () => {
-		const result = booleanStep(store.table(), {
+	test('NOR', async () => {
+		const result = await booleanStep(store.table(), {
 			...args,
 			operator: BooleanOperator.NOR,
 		})
@@ -72,8 +72,8 @@ describe('test for boolean verb', () => {
 		expect(result.get('newColumn', 3)).toBe(1)
 	})
 
-	test('NAND', () => {
-		const result = booleanStep(store.table(), {
+	test('NAND', async () => {
+		const result = await booleanStep(store.table(), {
 			...args,
 			operator: BooleanOperator.NAND,
 		})

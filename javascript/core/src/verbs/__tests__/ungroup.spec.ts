@@ -12,8 +12,8 @@ describe('test for ungroup verb', () => {
 		store = new TestStore()
 	})
 
-	test('ungroup test', () => {
-		let result = groupbyStep(store.table('table10'), {
+	test('ungroup test', async () => {
+		let result = await groupbyStep(store.table('table10'), {
 			columns: ['x', 'y'],
 		})
 
@@ -24,7 +24,7 @@ describe('test for ungroup verb', () => {
 		expect(result.get('x', 1)).toBe('B')
 		expect(result.get('x', 2)).toBe('A')
 
-		result = ungroupStep(result)
+		result = await ungroupStep(result)
 
 		expect(result.numCols()).toBe(3)
 		expect(result.numRows()).toBe(3)

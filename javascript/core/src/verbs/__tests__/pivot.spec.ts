@@ -11,8 +11,8 @@ describe('test for pivot verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('pivot test with any operation', () => {
-		const result = pivotStep(store.table('table16'), {
+	test('pivot test with any operation', async () => {
+		const result = await pivotStep(store.table('table16'), {
 			key: 'key',
 			value: 'value',
 			operation: FieldAggregateOperation.Any,
@@ -25,8 +25,8 @@ describe('test for pivot verb', () => {
 		expect(result.get('C', 0)).toBe(3)
 	})
 
-	test('pivot test with sum operation', () => {
-		const result = pivotStep(store.table('table17'), {
+	test('pivot test with sum operation', async () => {
+		const result = await pivotStep(store.table('table17'), {
 			key: 'name',
 			value: 'count',
 			operation: FieldAggregateOperation.Sum,
@@ -37,8 +37,8 @@ describe('test for pivot verb', () => {
 		expect(result.get('B', 0)).toBe(8)
 	})
 
-	test('pivot test with max operation', () => {
-		const result = pivotStep(store.table('table17'), {
+	test('pivot test with max operation', async () => {
+		const result = await pivotStep(store.table('table17'), {
 			key: 'name',
 			value: 'count',
 			operation: FieldAggregateOperation.Max,
@@ -50,8 +50,8 @@ describe('test for pivot verb', () => {
 		expect(result.get('B', 0)).toBe(5)
 	})
 
-	test('pivot test with min operation', () => {
-		const result = pivotStep(store.table('table17'), {
+	test('pivot test with min operation', async () => {
+		const result = await pivotStep(store.table('table17'), {
 			key: 'name',
 			value: 'count',
 			operation: FieldAggregateOperation.Min,
@@ -63,8 +63,8 @@ describe('test for pivot verb', () => {
 		expect(result.get('B', 0)).toBe(3)
 	})
 
-	test('pivot test with mean operation', () => {
-		const result = pivotStep(store.table('table17'), {
+	test('pivot test with mean operation', async () => {
+		const result = await pivotStep(store.table('table17'), {
 			key: 'name',
 			value: 'count',
 			operation: FieldAggregateOperation.Mean,
@@ -76,8 +76,8 @@ describe('test for pivot verb', () => {
 		expect(result.get('B', 0)).toBe(4)
 	})
 
-	test('pivot test with median operation', () => {
-		const result = pivotStep(store.table('table17'), {
+	test('pivot test with median operation', async () => {
+		const result = await pivotStep(store.table('table17'), {
 			key: 'name',
 			value: 'count',
 			operation: FieldAggregateOperation.Median,

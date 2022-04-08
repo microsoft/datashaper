@@ -12,8 +12,8 @@ describe('test for aggregate verb', () => {
 		store = new TestStore('table4')
 	})
 
-	test('aggregate test with count operation', () => {
-		const result = aggregateStep(store.table('table3'), {
+	test('aggregate test with count operation', async () => {
+		const result = await aggregateStep(store.table('table3'), {
 			to: 'newColumn',
 			groupby: 'ID',
 			column: 'item',
@@ -32,8 +32,8 @@ describe('test for aggregate verb', () => {
 		expect(result.get('newColumn', 2)).toBe(3)
 	})
 
-	test('aggregate test with sum operation', () => {
-		const result = aggregateStep(store.table(), {
+	test('aggregate test with sum operation', async () => {
+		const result = await aggregateStep(store.table(), {
 			to: 'newColumn',
 			groupby: 'ID',
 			column: 'quantity',
@@ -53,8 +53,8 @@ describe('test for aggregate verb', () => {
 		expect(result.get('newColumn', 2)).toBe(184)
 	})
 
-	test('aggregate test with min operation', () => {
-		const result = aggregateStep(store.table(), {
+	test('aggregate test with min operation', async () => {
+		const result = await aggregateStep(store.table(), {
 			to: 'newColumn',
 			groupby: 'ID',
 			column: 'quantity',
@@ -74,8 +74,8 @@ describe('test for aggregate verb', () => {
 		expect(result.get('newColumn', 2)).toBe(45)
 	})
 
-	test('aggregate test with median operation', () => {
-		const result = aggregateStep(store.table(), {
+	test('aggregate test with median operation', async () => {
+		const result = await aggregateStep(store.table(), {
 			to: 'newColumn',
 			groupby: 'ID',
 			column: 'quantity',

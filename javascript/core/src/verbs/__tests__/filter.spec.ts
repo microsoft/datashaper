@@ -12,8 +12,8 @@ describe('test for filter verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('filter test with NumericComparisonOperator Gte', () => {
-		const result = filterStep(store.table('table8'), {
+	test('filter test with NumericComparisonOperator Gte', async () => {
+		const result = await filterStep(store.table('table8'), {
 			column: 'count',
 			criteria: [
 				{
@@ -31,8 +31,8 @@ describe('test for filter verb', () => {
 		expect(result.get('count', 2)).toBe(120)
 	})
 
-	test('filter test with NumericComparisonOperator Gt', () => {
-		const result = filterStep(store.table('table8'), {
+	test('filter test with NumericComparisonOperator Gt', async () => {
+		const result = await filterStep(store.table('table8'), {
 			column: 'count',
 			criteria: [
 				{
@@ -49,8 +49,8 @@ describe('test for filter verb', () => {
 		expect(result.get('count', 1)).toBe(120)
 	})
 
-	test('filter test with NumericComparisonOperator Lt', () => {
-		const result = filterStep(store.table('table8'), {
+	test('filter test with NumericComparisonOperator Lt', async () => {
+		const result = await filterStep(store.table('table8'), {
 			column: 'count',
 			criteria: [
 				{
@@ -67,8 +67,8 @@ describe('test for filter verb', () => {
 		expect(result.get('count', 1)).toBe(90)
 	})
 
-	test('filter test with StringComparisonOperator Equals', () => {
-		const result = filterStep(store.table('table8'), {
+	test('filter test with StringComparisonOperator Equals', async () => {
+		const result = await filterStep(store.table('table8'), {
 			column: 'name',
 			criteria: [
 				{
@@ -84,8 +84,8 @@ describe('test for filter verb', () => {
 		expect(result.get('name', 0)).toBe('D')
 	})
 
-	test('filter test with StringComparisonOperator Empty', () => {
-		const result = filterStep(store.table('table5'), {
+	test('filter test with StringComparisonOperator Empty', async () => {
+		const result = await filterStep(store.table('table5'), {
 			column: 'item',
 			criteria: [
 				{
@@ -102,8 +102,8 @@ describe('test for filter verb', () => {
 		expect(result.get('quantity', 1)).toBe(45)
 	})
 
-	test('filter test with StringComparisonOperator Contains', () => {
-		const result = filterStep(store.table('table3'), {
+	test('filter test with StringComparisonOperator Contains', async () => {
+		const result = await filterStep(store.table('table3'), {
 			column: 'item',
 			criteria: [
 				{
@@ -119,8 +119,8 @@ describe('test for filter verb', () => {
 		expect(result.get('item', 0)).toBe('bed')
 	})
 
-	test('filter test with StringComparisonOperator Contains and two criteria', () => {
-		const result = filterStep(store.table('table5'), {
+	test('filter test with StringComparisonOperator Contains and two criteria', async () => {
+		const result = await filterStep(store.table('table5'), {
 			column: 'item',
 			criteria: [
 				{

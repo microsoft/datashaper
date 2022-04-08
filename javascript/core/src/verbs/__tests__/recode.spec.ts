@@ -10,8 +10,9 @@ describe('test for recode verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('recode test with string value', () => {
-		const result = recodeStep(store.table(), {
+
+	test('recode test with string value', async () => {
+		const result = await recodeStep(store.table(), {
 			column: 'name',
 			to: 'newColumn',
 			map: {

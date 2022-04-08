@@ -10,8 +10,8 @@ describe('test for select verb', () => {
 	beforeEach(() => {
 		store = new TestStore('table1')
 	})
-	test('select test', () => {
-		const result = selectStep(store.table('table7'), {
+	test('select test', async () => {
+		const result = await selectStep(store.table('table7'), {
 			columns: ['ID', 'item'],
 		})
 

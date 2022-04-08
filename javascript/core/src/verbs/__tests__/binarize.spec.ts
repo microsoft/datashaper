@@ -13,8 +13,8 @@ describe('test for binarize verb', () => {
 		store = new TestStore('table1')
 	})
 
-	test('binarize test with NumericComparisonOperator Gte', () => {
-		const result = binarizeStep(store.table(), {
+	test('binarize test with NumericComparisonOperator Gte', async () => {
+		const result = await binarizeStep(store.table(), {
 			to: 'newColumn',
 			column: 'count',
 			criteria: [
@@ -37,8 +37,8 @@ describe('test for binarize verb', () => {
 		expect(result.get('newColumn', 4)).toBe(1)
 	})
 
-	test('binarize test with NumericComparisonOperator Gt', () => {
-		const result = binarizeStep(store.table(), {
+	test('binarize test with NumericComparisonOperator Gt', async () => {
+		const result = await binarizeStep(store.table(), {
 			to: 'newColumn',
 			column: 'count',
 			criteria: [
@@ -62,8 +62,8 @@ describe('test for binarize verb', () => {
 		expect(result.get('newColumn', 4)).toBe(1)
 	})
 
-	test('binarize test with NumericComparisonOperator Lt', () => {
-		const result = binarizeStep(store.table(), {
+	test('binarize test with NumericComparisonOperator Lt', async () => {
+		const result = await binarizeStep(store.table(), {
 			to: 'newColumn',
 			column: 'count',
 			criteria: [
@@ -87,8 +87,8 @@ describe('test for binarize verb', () => {
 		expect(result.get('newColumn', 4)).toBe(0)
 	})
 
-	test('binarize test with StringComparisonOperator EndsWith', () => {
-		const result = binarizeStep(store.table('table4'), {
+	test('binarize test with StringComparisonOperator EndsWith', async () => {
+		const result = await binarizeStep(store.table('table4'), {
 			to: 'newColumn',
 			column: 'item',
 			criteria: [
@@ -112,8 +112,8 @@ describe('test for binarize verb', () => {
 		expect(result.get('newColumn', 5)).toBe(0)
 	})
 
-	test('binarize test with StringComparisonOperator Empty', () => {
-		const result = binarizeStep(store.table('table5'), {
+	test('binarize test with StringComparisonOperator Empty', async () => {
+		const result = await binarizeStep(store.table('table5'), {
 			to: 'newColumn',
 			column: 'item',
 			criteria: [
@@ -138,8 +138,8 @@ describe('test for binarize verb', () => {
 		expect(result.get('newColumn', 5)).toBe(1)
 	})
 
-	test('binarize test with StringComparisonOperator Contains', () => {
-		const result = binarizeStep(store.table('table5'), {
+	test('binarize test with StringComparisonOperator Contains', async () => {
+		const result = await binarizeStep(store.table('table5'), {
 			to: 'newColumn',
 			column: 'item',
 			criteria: [
@@ -164,8 +164,8 @@ describe('test for binarize verb', () => {
 		expect(result.get('newColumn', 5)).toBe(0)
 	})
 
-	test('binarize test with StringComparisonOperator Contains and two criteria', () => {
-		const result = binarizeStep(store.table('table5'), {
+	test('binarize test with StringComparisonOperator Contains and two criteria', async () => {
+		const result = await binarizeStep(store.table('table5'), {
 			to: 'newColumn',
 			column: 'item',
 			criteria: [

@@ -11,8 +11,8 @@ describe('test for rollup verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('rollup test with count operation', () => {
-		const result = rollupStep(store.table('table3'), {
+	test('rollup test with count operation', async () => {
+		const result = await rollupStep(store.table('table3'), {
 			to: 'count',
 			column: 'item',
 			operation: FieldAggregateOperation.Count,
@@ -23,8 +23,8 @@ describe('test for rollup verb', () => {
 		expect(result.get('count', 0)).toBe(6)
 	})
 
-	test('rollup test with sum operation', () => {
-		const result = rollupStep(store.table('table4'), {
+	test('rollup test with sum operation', async () => {
+		const result = await rollupStep(store.table('table4'), {
 			to: 'total',
 			column: 'quantity',
 			operation: FieldAggregateOperation.Sum,
@@ -35,8 +35,8 @@ describe('test for rollup verb', () => {
 		expect(result.get('total', 0)).toBe(407)
 	})
 
-	test('rollup test with min operation', () => {
-		const result = rollupStep(store.table('table4'), {
+	test('rollup test with min operation', async () => {
+		const result = await rollupStep(store.table('table4'), {
 			to: 'min',
 			column: 'quantity',
 			operation: FieldAggregateOperation.Min,

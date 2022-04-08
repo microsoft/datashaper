@@ -10,8 +10,8 @@ describe('test for sample verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('sample test with percentage', () => {
-		const result = sampleStep(store.table('table6'), {
+	test('sample test with percentage', async () => {
+		const result = await sampleStep(store.table('table6'), {
 			proportion: 0.4,
 		})
 
@@ -19,8 +19,8 @@ describe('test for sample verb', () => {
 		expect(result.numRows()).toBe(2)
 	})
 
-	test('sample test with size', () => {
-		const result = sampleStep(store.table('table6'), {
+	test('sample test with size', async () => {
+		const result = await sampleStep(store.table('table6'), {
 			size: 4,
 		})
 

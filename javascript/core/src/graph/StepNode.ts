@@ -5,11 +5,7 @@
 import { handleMaybeAsync } from '../primitives.js'
 import { BaseNode } from './BaseNode.js'
 
-export type StepFunction<T, Args> = (
-	source: T,
-	args: Args,
-	id: string,
-) => Promise<T> | T
+export type StepFunction<T, Args> = (source: T, args: Args) => Promise<T> | T
 
 export class StepNode<T, Args> extends BaseNode<T, Args> {
 	constructor(private _step: StepFunction<T, Args>) {
@@ -18,7 +14,7 @@ export class StepNode<T, Args> extends BaseNode<T, Args> {
 	protected doRecalculate(): Promise<void> | void {
 		const source = this.inputValue()
 		if (source != null && this.config != null) {
-			const output = this._step(source, this.config, this.id)
+			const output = this._step(source, this.config)
 			return handleMaybeAsync(output, v => this.emit(v))
 		} else {
 			this.emit(undefined)

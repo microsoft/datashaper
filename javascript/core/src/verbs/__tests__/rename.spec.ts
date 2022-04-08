@@ -11,8 +11,8 @@ describe('test for rename verb', () => {
 		store = new TestStore()
 	})
 
-	test('rename test', () => {
-		const result = renameStep(store.table('table7'), {
+	test('rename test', async () => {
+		const result = await renameStep(store.table('table7'), {
 			columns: {
 				ID: 'uuid',
 				item: 'product',

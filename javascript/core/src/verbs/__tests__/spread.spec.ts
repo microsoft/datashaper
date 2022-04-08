@@ -10,8 +10,8 @@ describe('test for spread verb', () => {
 	beforeEach(() => {
 		store = new TestStore('table1')
 	})
-	test('spread test without to argument', () => {
-		const result = spreadStep(store.table('table6'), {
+	test('spread test without to argument', async () => {
+		const result = await spreadStep(store.table('table6'), {
 			column: 'ID',
 			to: ['ID_1'],
 		})

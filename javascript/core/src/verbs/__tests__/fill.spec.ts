@@ -10,8 +10,11 @@ describe('test for fill verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('fill test with string value', () => {
-		const result = fillStep(store.table(), { to: 'newColumn', value: 'false' })
+	test('fill test with string value', async () => {
+		const result = await fillStep(store.table(), {
+			to: 'newColumn',
+			value: 'false',
+		})
 
 		// added one new column
 		expect(result.numCols()).toBe(4)
@@ -25,8 +28,8 @@ describe('test for fill verb', () => {
 		expect(result.get('newColumn', 4)).toBe('false')
 	})
 
-	test('fill test with number value', () => {
-		const result = fillStep(store.table(), { to: 'newColumn', value: 20 })
+	test('fill test with number value', async () => {
+		const result = await fillStep(store.table(), { to: 'newColumn', value: 20 })
 
 		// added one new column
 		expect(result.numCols()).toBe(4)

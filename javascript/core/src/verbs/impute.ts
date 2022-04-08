@@ -4,18 +4,16 @@
  */
 
 import type { Value } from '../tables/types.js'
-import type { InputColumnArgs } from './types.js'
+import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 import type { ExprFunctionMap } from './util/types.js'
 
-export interface ImputeArgs extends InputColumnArgs {
+export interface ImputeArgs extends InputColumnListArgs {
 	/**
 	 * Value to fill in empty cells
 	 */
 	value: Value
-
-	columns: string[]
 }
 
 export const imputeStep: ColumnTableStep<ImputeArgs> = (

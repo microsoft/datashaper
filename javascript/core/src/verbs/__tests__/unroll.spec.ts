@@ -10,8 +10,9 @@ describe('test for unroll verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('unroll test', () => {
-		const result = unrollStep(store.table('table1'), {
+
+	test('unroll test', async () => {
+		const result = await unrollStep(store.table('table1'), {
 			columns: ['ID'],
 		})
 

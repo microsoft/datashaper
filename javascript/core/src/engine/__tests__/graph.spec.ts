@@ -66,9 +66,10 @@ describe('stepGraph', () => {
 					value: 2,
 				},
 				// Note: this input is being auto-configured to the output of the previous node
-				// inputs: {
-				// 	default: { node: 'output-1' },
-				// },
+				// todo: restore auto-wiring?
+				inputs: {
+					default: { node: 'output-1' },
+				},
 				outputs: { default: 'output-2' },
 			}),
 		]

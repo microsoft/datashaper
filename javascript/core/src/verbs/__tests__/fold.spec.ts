@@ -11,8 +11,8 @@ describe('test for fold verb', () => {
 		store = new TestStore()
 	})
 
-	test('fold test with one column', () => {
-		const result = foldStep(store.table('table1'), {
+	test('fold test with one column', async () => {
+		const result = await foldStep(store.table('table1'), {
 			to: ['key', 'value'],
 			columns: ['ID'],
 		})
@@ -28,8 +28,8 @@ describe('test for fold verb', () => {
 		expect(result.get('value', 0)).toBe(1)
 	})
 
-	test('fold test with two columns', () => {
-		const result = foldStep(store.table('table1'), {
+	test('fold test with two columns', async () => {
+		const result = await foldStep(store.table('table1'), {
 			to: ['key', 'value'],
 			columns: ['ID', 'name'],
 		})

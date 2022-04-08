@@ -12,8 +12,8 @@ describe('test for derive verb', () => {
 		store = new TestStore()
 	})
 
-	test('derive test with MathOperator Add and string + number', () => {
-		const result = deriveStep(store.table('table1'), {
+	test('derive test with MathOperator Add and string + number', async () => {
+		const result = await deriveStep(store.table('table1'), {
 			to: 'newColumn',
 			column1: 'name',
 			operator: MathOperator.Add,
@@ -32,8 +32,8 @@ describe('test for derive verb', () => {
 		expect(result.get('newColumn', 4)).toBe('E50')
 	})
 
-	test('derive test with MathOperator Substract and string - number', () => {
-		const result = deriveStep(store.table('table1'), {
+	test('derive test with MathOperator Substract and string - number', async () => {
+		const result = await deriveStep(store.table('table1'), {
 			to: 'newColumn',
 			column1: 'name',
 			operator: MathOperator.Subtract,
@@ -51,8 +51,8 @@ describe('test for derive verb', () => {
 		expect(result.get('newColumn', 4)).toBeNaN()
 	})
 
-	test('derive test with MathOperator Multiply and string - number', () => {
-		const result = deriveStep(store.table('table1'), {
+	test('derive test with MathOperator Multiply and string - number', async () => {
+		const result = await deriveStep(store.table('table1'), {
 			to: 'newColumn',
 			column1: 'name',
 			operator: MathOperator.Multiply,
@@ -70,8 +70,8 @@ describe('test for derive verb', () => {
 		expect(result.get('newColumn', 4)).toBeNaN()
 	})
 
-	test('derive test with MathOperator Divide and string - number', () => {
-		const result = deriveStep(store.table('table1'), {
+	test('derive test with MathOperator Divide and string - number', async () => {
+		const result = await deriveStep(store.table('table1'), {
 			to: 'newColumn',
 			column1: 'name',
 			operator: MathOperator.Divide,
@@ -89,8 +89,8 @@ describe('test for derive verb', () => {
 		expect(result.get('newColumn', 4)).toBeNaN()
 	})
 
-	test('derive test with MathOperator Add and number + number', () => {
-		const result = deriveStep(store.table('table6'), {
+	test('derive test with MathOperator Add and number + number', async () => {
+		const result = await deriveStep(store.table('table6'), {
 			to: 'newColumn',
 			column1: 'FY20',
 			operator: MathOperator.Add,
@@ -109,8 +109,8 @@ describe('test for derive verb', () => {
 		expect(result.get('newColumn', 5)).toBe(168000)
 	})
 
-	test('derive test with MathOperator Subtract and number - number', () => {
-		const result = deriveStep(store.table('table6'), {
+	test('derive test with MathOperator Subtract and number - number', async () => {
+		const result = await deriveStep(store.table('table6'), {
 			to: 'newColumn',
 			column1: 'FY20',
 			operator: MathOperator.Subtract,
@@ -129,8 +129,8 @@ describe('test for derive verb', () => {
 		expect(result.get('newColumn', 5)).toBe(12000)
 	})
 
-	test('derive test with MathOperator Multiply and number * number', () => {
-		const result = deriveStep(store.table('table1'), {
+	test('derive test with MathOperator Multiply and number * number', async () => {
+		const result = await deriveStep(store.table('table1'), {
 			to: 'newColumn',
 			column1: 'ID',
 			operator: MathOperator.Multiply,
@@ -148,8 +148,8 @@ describe('test for derive verb', () => {
 		expect(result.get('newColumn', 4)).toBe(250)
 	})
 
-	test('derive test with MathOperator Divide and number / number', () => {
-		const result = deriveStep(store.table('table7'), {
+	test('derive test with MathOperator Divide and number / number', async () => {
+		const result = await deriveStep(store.table('table7'), {
 			to: 'unitPrice',
 			column1: 'totalSale',
 			operator: MathOperator.Divide,

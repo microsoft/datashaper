@@ -3,107 +3,83 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TestStore } from '../../__tests__/TestStore.js'
-import type { OneHotStep } from '../../types.js'
-import { onehot } from '../onehot.js'
-import { Verb } from '../types.js'
+import { onehotStep } from '../onehot.js'
 
 describe('test for onehot verb', () => {
-	test('no prefix', () => {
-		const step: OneHotStep = {
-			verb: Verb.OneHot,
-			input: 'table5',
-			output: 'output',
-			args: { column: 'item' },
-		}
-
-		const store = new TestStore()
-
-		return onehot(step, store).then(result => {
-			// added three new columns for the unique values, ignoring null
-			expect(result.table!.numCols()).toBe(6)
-			expect(result.table!.numRows()).toBe(6)
-
-			expect(result.table!.columnNames()).toEqual([
-				'ID',
-				'item',
-				'quantity',
-				'bed',
-				'sofa',
-				'chair',
-			])
-
-			// spot-check the binary one-hot values
-			expect(result.table!.get('bed', 0)).toBe(1)
-			expect(result.table!.get('bed', 1)).toBeNull()
-			expect(result.table!.get('bed', 2)).toBe(0)
-			expect(result.table!.get('sofa', 0)).toBe(0)
-			expect(result.table!.get('sofa', 1)).toBeNull()
-			expect(result.table!.get('sofa', 2)).toBe(1)
-			expect(result.table!.get('chair', 0)).toBe(0)
-			expect(result.table!.get('chair', 1)).toBeNull()
-			expect(result.table!.get('chair', 2)).toBe(0)
-		})
+	let store: TestStore
+	beforeEach(() => {
+		store = new TestStore()
 	})
 
-	test('with prefix', () => {
-		const step: OneHotStep = {
-			verb: Verb.OneHot,
-			input: 'table5',
-			output: 'output',
-			args: { column: 'item', prefix: 'furniture_' },
-		}
+	test('no prefix', async () => {
+		const result = await onehotStep(store.table('table5'), { column: 'item' })
+		// added three new columns for the unique values, ignoring null
+		expect(result.numCols()).toBe(6)
+		expect(result.numRows()).toBe(6)
 
-		const store = new TestStore()
+		expect(result.columnNames()).toEqual([
+			'ID',
+			'item',
+			'quantity',
+			'bed',
+			'sofa',
+			'chair',
+		])
 
-		return onehot(step, store).then(result => {
-			// added three new columns for the unique values, ignoring null
-			expect(result.table!.numCols()).toBe(6)
-			expect(result.table!.numRows()).toBe(6)
-
-			expect(result.table!.columnNames()).toEqual([
-				'ID',
-				'item',
-				'quantity',
-				'furniture_bed',
-				'furniture_sofa',
-				'furniture_chair',
-			])
-
-			// spot-check the binary one-hot values
-			expect(result.table!.get('furniture_bed', 0)).toBe(1)
-			expect(result.table!.get('furniture_sofa', 0)).toBe(0)
-			expect(result.table!.get('furniture_chair', 0)).toBe(0)
-		})
+		// spot-check the binary one-hot values
+		expect(result.get('bed', 0)).toBe(1)
+		expect(result.get('bed', 1)).toBeNull()
+		expect(result.get('bed', 2)).toBe(0)
+		expect(result.get('sofa', 0)).toBe(0)
+		expect(result.get('sofa', 1)).toBeNull()
+		expect(result.get('sofa', 2)).toBe(1)
+		expect(result.get('chair', 0)).toBe(0)
+		expect(result.get('chair', 1)).toBeNull()
+		expect(result.get('chair', 2)).toBe(0)
 	})
 
-	test('numeric', () => {
-		const step: OneHotStep = {
-			verb: Verb.OneHot,
-			input: 'table5',
-			output: 'output',
-			args: { column: 'ID' },
-		}
-
-		const store = new TestStore()
-
-		return onehot(step, store).then(result => {
-			// added three new columns for the unique values, ignoring null
-			expect(result.table!.numCols()).toBe(6)
-			expect(result.table!.numRows()).toBe(6)
-
-			expect(result.table!.columnNames()).toEqual([
-				'ID',
-				'item',
-				'quantity',
-				'1',
-				'2',
-				'4',
-			])
-
-			// spot-check the binary one-hot values
-			expect(result.table!.get('1', 0)).toBe(1)
-			expect(result.table!.get('2', 0)).toBe(0)
-			expect(result.table!.get('4', 0)).toBe(0)
+	test('with prefix', async () => {
+		const result = await onehotStep(store.table('table5'), {
+			column: 'item',
+			prefix: 'furniture_',
 		})
+		// added three new columns for the unique values, ignoring null
+		expect(result.numCols()).toBe(6)
+		expect(result.numRows()).toBe(6)
+
+		expect(result.columnNames()).toEqual([
+			'ID',
+			'item',
+			'quantity',
+			'furniture_bed',
+			'furniture_sofa',
+			'furniture_chair',
+		])
+
+		// spot-check the binary one-hot values
+		expect(result.get('furniture_bed', 0)).toBe(1)
+		expect(result.get('furniture_sofa', 0)).toBe(0)
+		expect(result.get('furniture_chair', 0)).toBe(0)
+	})
+
+	test('numeric', async () => {
+		const result = await onehotStep(store.table('table5'), { column: 'ID' })
+		// added three new columns for the unique values, ignoring null
+		expect(result.numCols()).toBe(6)
+		expect(result.numRows()).toBe(6)
+
+		expect(result.columnNames()).toEqual([
+			'ID',
+			'item',
+			'quantity',
+			'1',
+			'2',
+			'4',
+		])
+
+		// spot-check the binary one-hot values
+		expect(result.get('1', 0)).toBe(1)
+		expect(result.get('2', 0)).toBe(0)
+		expect(result.get('4', 0)).toBe(0)
 	})
 })

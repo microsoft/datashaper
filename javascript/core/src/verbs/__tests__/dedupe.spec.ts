@@ -11,16 +11,16 @@ describe('test for dedupe verb', () => {
 		store = new TestStore()
 	})
 
-	test('dedupe test with column', () => {
-		const result = dedupeStep(store.table('table3'), {
+	test('dedupe test with column', async () => {
+		const result = await dedupeStep(store.table('table3'), {
 			columns: ['ID'],
 		})
 		expect(result.numCols()).toBe(2)
 		expect(result.numRows()).toBe(3)
 	})
 
-	test('dedupe test without columns', () => {
-		const result = dedupeStep(store.table('table10'), {})
+	test('dedupe test without columns', async () => {
+		const result = await dedupeStep(store.table('table10'), {})
 		expect(result.numCols()).toBe(3)
 		expect(result.numRows()).toBe(2)
 		expect(result.get('x', 0)).toBe('A')

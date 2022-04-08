@@ -11,12 +11,12 @@ describe('test for unfold verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('unfold test with one column folded', () => {
-		let result = foldStep(store.table('table10'), {
+	test('unfold test with one column folded', async () => {
+		let result = await foldStep(store.table('table10'), {
 			to: ['key', 'value'],
 			columns: ['x'],
 		})
-		result = unfoldStep(result, { key: 'key', value: 'value' })
+		result = await unfoldStep(result, { key: 'key', value: 'value' })
 
 		expect(result.numCols()).toBe(3)
 		expect(result.numRows()).toBe(3)
@@ -31,12 +31,12 @@ describe('test for unfold verb', () => {
 		expect(result.get('z', 2)).toBe(4)
 	})
 
-	test('unfold test with all columns folded', () => {
-		let result = foldStep(store.table('table18'), {
+	test('unfold test with all columns folded', async () => {
+		let result = await foldStep(store.table('table18'), {
 			to: ['key', 'value'],
 			columns: ['A', 'B', 'C'],
 		})
-		result = unfoldStep(result, { key: 'key', value: 'value' })
+		result = await unfoldStep(result, { key: 'key', value: 'value' })
 
 		expect(result.numCols()).toBe(3)
 		expect(result.numRows()).toBe(3)
@@ -51,12 +51,12 @@ describe('test for unfold verb', () => {
 		expect(result.get('C', 2)).toBe(30)
 	})
 
-	test('unfold test with value on value column undefined', () => {
-		let result = foldStep(store.table('table14'), {
+	test('unfold test with value on value column undefined', async () => {
+		let result = await foldStep(store.table('table14'), {
 			to: ['key', 'value'],
 			columns: ['y', 'z'],
 		})
-		result = unfoldStep(result, { key: 'key', value: 'value' })
+		result = await unfoldStep(result, { key: 'key', value: 'value' })
 
 		expect(result.numCols()).toBe(3)
 		expect(result.numRows()).toBe(3)
@@ -71,12 +71,12 @@ describe('test for unfold verb', () => {
 		expect(result.get('z', 2)).toBe(false)
 	})
 
-	test('unfold test with value on value column null', () => {
-		let result = foldStep(store.table('table15'), {
+	test('unfold test with value on value column null', async () => {
+		let result = await foldStep(store.table('table15'), {
 			to: ['key', 'value'],
 			columns: ['y', 'z'],
 		})
-		result = unfoldStep(result, { key: 'key', value: 'value' })
+		result = await unfoldStep(result, { key: 'key', value: 'value' })
 
 		expect(result.numCols()).toBe(3)
 		expect(result.numRows()).toBe(3)

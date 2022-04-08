@@ -11,8 +11,8 @@ describe('test for window verb', () => {
 	beforeEach(() => {
 		store = new TestStore()
 	})
-	test('rollup test with row_number operation', () => {
-		const result = windowStep(store.table('table3'), {
+	test('rollup test with row_number operation', async () => {
+		const result = await windowStep(store.table('table3'), {
 			to: 'row',
 			column: 'ID',
 			operation: WindowFunction.RowNumber,

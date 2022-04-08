@@ -5,7 +5,7 @@
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { TestStore } from '../../__tests__/TestStore.js'
-import type { BinArgs} from '../bin.js';
+import type { BinArgs } from '../bin.js'
 import { binStep, BinStrategy } from '../bin.js'
 
 describe('test for bin verb', () => {
@@ -20,8 +20,8 @@ describe('test for bin verb', () => {
 		strategy: BinStrategy.Auto,
 	}
 
-	test('BinStrategy.FixedCount', () => {
-		const result = binStep(store.table(), {
+	test('BinStrategy.FixedCount', async () => {
+		const result = await binStep(store.table(), {
 			...baseArgs,
 			strategy: BinStrategy.FixedCount,
 			fixedcount: 5,
@@ -32,8 +32,8 @@ describe('test for bin verb', () => {
 		expect(b).toEqual([10, 48, 86, 124, 162])
 	})
 
-	test('BinStrategy.FixedCount exceeds bounds to Infinity', () => {
-		const result = binStep(store.table(), {
+	test('BinStrategy.FixedCount exceeds bounds to Infinity', async () => {
+		const result = await binStep(store.table(), {
 			...baseArgs,
 			strategy: BinStrategy.FixedCount,
 			fixedcount: 5,
@@ -48,8 +48,8 @@ describe('test for bin verb', () => {
 		expect(result.get('newColumn', 19)).toBe(Infinity)
 	})
 
-	test('BinStrategy.FixedCount exceeds bounds clamped', () => {
-		const result = binStep(store.table(), {
+	test('BinStrategy.FixedCount exceeds bounds clamped', async () => {
+		const result = await binStep(store.table(), {
 			...baseArgs,
 			strategy: BinStrategy.FixedCount,
 			fixedcount: 5,
@@ -66,8 +66,8 @@ describe('test for bin verb', () => {
 		expect(result.get('newColumn', 19)).toBe(124)
 	})
 
-	test('BinStrategy.FixedWidth, uneven division results in bin rounding', () => {
-		const result = binStep(store.table(), {
+	test('BinStrategy.FixedWidth, uneven division results in bin rounding', async () => {
+		const result = await binStep(store.table(), {
 			...baseArgs,
 			strategy: BinStrategy.FixedWidth,
 			fixedwidth: 30,
@@ -77,8 +77,8 @@ describe('test for bin verb', () => {
 		expect(b).toEqual([10, 40, 70, 100, 130, 160, 190])
 	})
 
-	test('BinStrategy.FixedWidth, even division results in exact bin count with last = max', () => {
-		const result = binStep(store.table(), {
+	test('BinStrategy.FixedWidth, even division results in exact bin count with last = max', async () => {
+		const result = await binStep(store.table(), {
 			...baseArgs,
 			strategy: BinStrategy.FixedWidth,
 			fixedwidth: 38,
@@ -88,8 +88,8 @@ describe('test for bin verb', () => {
 		expect(b).toEqual([10, 48, 86, 124, 162])
 	})
 
-	test('BinStrategy.FixedWidth exceeds bounds to Infinity', () => {
-		const result = binStep(store.table(), {
+	test('BinStrategy.FixedWidth exceeds bounds to Infinity', async () => {
+		const result = await binStep(store.table(), {
 			...baseArgs,
 			strategy: BinStrategy.FixedWidth,
 			fixedwidth: 30,
@@ -104,8 +104,8 @@ describe('test for bin verb', () => {
 		expect(result.get('newColumn', 19)).toBe(Infinity)
 	})
 
-	test('BinStrategy.FixedWidth exceeds bounds clamped', () => {
-		const result = binStep(store.table(), {
+	test('BinStrategy.FixedWidth exceeds bounds clamped', async () => {
+		const result = await binStep(store.table(), {
 			...baseArgs,
 			strategy: BinStrategy.FixedWidth,
 			fixedwidth: 30,
