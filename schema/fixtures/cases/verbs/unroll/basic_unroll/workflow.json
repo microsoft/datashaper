@@ -2,10 +2,10 @@
 	"$schema": "../../../../../workflow.json",
 	"steps": [
 		{
-			"verb": "concat",
-			"input": {
-				"source": "table1",
-				"others": ["table2"]
+			"verb": "unroll",
+			"input": "table1",
+			"args": {
+				"columns": ["ID"]
 			},
 			"output": "expected"
 		}
