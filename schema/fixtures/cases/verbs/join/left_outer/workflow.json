@@ -9,7 +9,7 @@
 			},
 			"args": {
 				"on": ["ID"],
-				"strategy": "join_left"
+				"strategy": "left outer"
 			},
 			"output": "expected"
 		}

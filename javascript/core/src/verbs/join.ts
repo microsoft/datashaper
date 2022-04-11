@@ -24,9 +24,9 @@ export interface JoinArgs extends JoinArgsBase {
 
 export enum JoinStrategy {
 	Inner = 'inner',
-	LeftOuter = 'join_left',
-	RightOuter = 'join_right',
-	FullOuter = 'join_full',
+	LeftOuter = 'left outer',
+	RightOuter = 'right outer',
+	FullOuter = 'full outer',
 }
 
 class JoinNode extends BaseNode<TableContainer, JoinArgs> {
