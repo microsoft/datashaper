@@ -47,10 +47,11 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 /**
  * Executes a bin aggregate, which effectively truncates values to a bin boundary for histograms.
  */
-export const binStep: ColumnTableStep<BinArgs> = (input, args) =>
-	input.derive({
+export const binStep: ColumnTableStep<BinArgs> = (input, args) => {
+	return input.derive({
 		[args.to]: binExpr(input, args),
 	})
+}
 
 /**
  * Generate a bin expression that uses either auto or a fixed step

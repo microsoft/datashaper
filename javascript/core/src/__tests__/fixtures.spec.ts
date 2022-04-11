@@ -17,12 +17,6 @@ import type { TableContainer } from '../tables/types.js'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const FIXTURES_PATH = path.join(__dirname, '../../../../schema/fixtures')
 const CATEGORIES_PATH = path.join(FIXTURES_PATH, 'cases')
-const INPUT_TABLES_PATH = path.join(FIXTURES_PATH, 'inputs')
-
-/**
- * Test data contexts
- */
-const inputTables = readInputTables()
 
 /**
  * Create top-level describes for each test category (top-level folders)
@@ -49,7 +43,7 @@ function defineTestCase(category: string, test: string) {
 
 	it(testName, async () => {
 		// execute the dataflow
-		const tableStore = createTableStore(inputTables)
+		const tableStore = createTableStore(await readInputTables())
 		const workflowJson = await readJson(path.join(casePath, 'workflow.json'))
 		createGraph(workflowJson.steps.map(step), tableStore)
 
@@ -62,12 +56,16 @@ function defineTestCase(category: string, test: string) {
 	})
 }
 
-function readInputTables(): TableContainer[] {
-	return fs.readdirSync(INPUT_TABLES_PATH).map(st => {
-		const text = fs.readFileSync(path.join(INPUT_TABLES_PATH, st), 'utf8')
-		const table = arquero.fromCSV(text)
-		return container(st.replace('.csv', ''), table)
-	})
+async function readInputTables(): Promise<TableContainer[]> {
+	const inputsPaths = path.join(FIXTURES_PATH, 'inputs')
+	const entries = fs.readdirSync(inputsPaths)
+	return Promise.all(
+		entries.map(async entry => {
+			const tableName = entry.replace('.csv', '')
+			const dataPath = path.join(inputsPaths, entry)
+			return container(tableName, await readCsv(dataPath))
+		}),
+	)
 }
 
 function readJson(dataPath: string): Promise<any> {
@@ -96,7 +94,14 @@ function compareTables(
 
 	for (let i = 0; i < actual.numRows(); ++i) {
 		for (const column of expected.columnNames()) {
-			expect(actual.get(column, i)).toEqual(expected.get(column, i))
+			try {
+				expect(actual.get(column, i)).toEqual(expected.get(column, i))
+			} catch (e) {
+				console.log(
+					`data mismatch; \n-----EXPECTED-----\n${expected.toCSV()}\n\n-----ACTUAL-----\n${actual.toCSV()}`,
+				)
+				throw e
+			}
 		}
 	}
 }
