@@ -54,11 +54,19 @@ function defineTestCase(parentPath: string, test: string) {
 		createGraph(workflowJson.steps.map(step), tableStore)
 
 		// check the output tables
-		for (const o of expectedOutputTables) {
-			const actual = tableStore.get(o)
-			const expected = await readCsv(path.join(casePath, `${o}.csv`))
-			compareTables(expected, actual?.table, o)
-		}
+		await Promise.all(
+			expectedOutputTables.map(async o => {
+				const expected = await readCsv(path.join(casePath, `${o}.csv`))
+				await new Promise<void>(resolve =>
+					tableStore.onItemChange(o, actual => {
+						if (actual?.table) {
+							compareTables(expected, actual?.table, o)
+							resolve()
+						}
+					}),
+				)
+			}),
+		)
 	})
 }
 
@@ -102,7 +110,9 @@ function compareTables(
 
 		for (let i = 0; i < actual.numRows(); ++i) {
 			for (const column of expected.columnNames()) {
-				expect(actual.get(column, i)).toEqual(expected.get(column, i))
+				const actualValue = actual.get(column, i)
+				const expectedValue = expected.get(column, i)
+				compareValue(expectedValue, actualValue)
 			}
 		}
 	} catch (e) {
@@ -111,4 +121,26 @@ function compareTables(
 		)
 		throw e
 	}
+}
+
+function compareValue(expected: any, actual: any): void {
+	if (
+		(typeof expected === 'string' && castable[actual]) ||
+		(typeof actual === 'string' && castable[expected])
+	) {
+		// string-cast values to account for mixed-type column data (e.g. fold)
+		expect('' + actual).toEqual('' + expected)
+	} else if (expected == null && actual == undefined) {
+		// don't sweat null vs undefined
+	} else if (expected.getTime != null) {
+		const actualDate = new Date(actual)
+		expect(expected.getTime()).toEqual(actualDate.getTime())
+	} else {
+		expect(actual).toEqual(expected)
+	}
+}
+
+const castable: Record<string, boolean> = {
+	boolean: true,
+	number: true,
 }

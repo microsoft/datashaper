@@ -1,0 +1,14 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "spread",
+			"input": "table6",
+			"args": {
+				"column": "ID",
+				"to": ["ID_1"]
+			},
+			"output": "expected"
+		}
+	]
+}
