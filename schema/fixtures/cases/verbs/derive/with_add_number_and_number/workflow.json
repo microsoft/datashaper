@@ -1,0 +1,16 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "derive",
+			"input": "table6",
+			"args": {
+				"to": "newColumn",
+				"column1": "FY20",
+				"column2": "FY21",
+				"operator": "+"
+			},
+			"output": "expected"
+		}
+	]
+}
