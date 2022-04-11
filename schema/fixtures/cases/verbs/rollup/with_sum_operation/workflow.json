@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "rollup",
+			"input": "table4",
+			"args": {
+				"to": "total",
+				"column": "quantity",
+				"operation": "sum"
+			},
+			"output": "expected"
+		}
+	]
+}

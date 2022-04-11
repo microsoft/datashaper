@@ -1,0 +1,23 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "fold",
+			"input": "table10",
+			"args": {
+				"to": ["key", "value"],
+				"columns": ["x"]
+			},
+			"output": "folded"
+		},
+		{
+			"verb": "unfold",
+			"input": "folded",
+			"args": {
+				"key": "key",
+				"value": "value"
+			},
+			"output": "expected"
+		}
+	]
+}
