@@ -18,7 +18,7 @@ export function compareValues(
 		| NumericComparisonOperator
 		| StringComparisonOperator
 		| BooleanComparisonOperator,
-): 0 | 1 {
+): 0 | 1 | null {
 	// start with the empty operators, because typeof won't work...
 	if (
 		operator === NumericComparisonOperator.IsEmpty ||
@@ -33,6 +33,11 @@ export function compareValues(
 	) {
 		const empty = isEmpty(left)
 		return empty === 1 ? 0 : 1
+	} else if (isEmpty(left) || isEmpty(right)) {
+		// TODO: we need to differentiate NaN/invalid date
+		// but basically if the compare is not explicitly requesting a compare check,
+		// null values should be ignored
+		return null
 	} else if (typeof left === 'number') {
 		const num = +right
 		return compareNumbers(left, num, operator as NumericComparisonOperator)
@@ -43,7 +48,7 @@ export function compareValues(
 			operator as StringComparisonOperator,
 		)
 	} else if (typeof left === 'boolean') {
-		const r = bool(right)
+		const r = !!bool(right)
 		return compareBooleans(left, r, operator as BooleanComparisonOperator)
 	}
 	return 0

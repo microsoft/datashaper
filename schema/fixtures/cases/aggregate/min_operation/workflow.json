@@ -10,7 +10,7 @@
 				"column": "quantity",
 				"operation": "min"
 			},
-			"output": "result"
+			"output": "expected"
 		}
 	]
 }

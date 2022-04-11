@@ -11,56 +11,92 @@ import { createGraph } from '../engine/graph.js'
 import { step } from '../steps/step.js'
 import { createTableStore } from '../store/createTableStore.js'
 import { container } from '../tables/container.js'
+import type { TableContainer } from '../tables/types.js'
 
-const RESULT_TABLE = 'result'
-
+// Static data paths
 const __dirname = dirname(fileURLToPath(import.meta.url))
+const FIXTURES_PATH = path.join(__dirname, '../../../../schema/fixtures')
+const CATEGORIES_PATH = path.join(FIXTURES_PATH, 'cases')
+const INPUT_TABLES_PATH = path.join(FIXTURES_PATH, 'inputs')
 
-const categoriesPath = path.join(__dirname, '../../../../schema/fixtures/cases')
-const inputTablesPath = path.join(
-	__dirname,
-	'../../../../schema/fixtures/inputs',
-)
-const categories = fs.readdirSync(categoriesPath)
-const sourceTables = fs.readdirSync(inputTablesPath)
-const tables = sourceTables.map(st => {
-	const text = fs.readFileSync(path.join(inputTablesPath, st), 'utf8')
-	const table = arquero.fromCSV(text)
-	return container(st.replace('.csv', ''), table)
-})
+/**
+ * Test data contexts
+ */
+const inputTables = readInputTables()
 
-categories.forEach(category =>
+/**
+ * Create top-level describes for each test category (top-level folders)
+ */
+fs.readdirSync(CATEGORIES_PATH).forEach(category =>
 	describe(category, () => {
-		const cases = fs.readdirSync(path.join(categoriesPath, category))
-		cases.forEach(caseName => {
-			const casePath = path.join(categoriesPath, category, caseName)
-			it(caseName.split('_').join(' '), async () => {
-				const workflow = (await import(path.join(casePath, 'workflow.json')))
-					.default
-				const expectedCsv = await fsp.readFile(
-					path.join(casePath, 'expected.csv'),
-					'utf8',
-				)
-				const tableStore = createTableStore(tables)
-				const expected = arquero.fromCSV(expectedCsv)
-
-				createGraph(workflow.steps.map(step), tableStore)
-				const result = tableStore.get(RESULT_TABLE)
-
-				compareTables(expected, result!.table!)
-			})
-		})
+		const categoryPath = path.join(CATEGORIES_PATH, category)
+		/**
+		 * Create a test case for each nested folder
+		 */
+		fs.readdirSync(categoryPath).forEach(caseName =>
+			defineTestCase(category, caseName),
+		)
 	}),
 )
 
-function compareTables(expected: ColumnTable, result: ColumnTable) {
-	expect(result.numRows()).toEqual(expected.numRows())
-	expect(result.numCols()).toEqual(expected.numCols())
-	expect(result.columnNames()).toEqual(expected.columnNames())
+function defineTestCase(category: string, test: string) {
+	const casePath = path.join(CATEGORIES_PATH, category, test)
+	const testName = test.split('_').join(' ')
+	const expectedOutputTables = fs
+		.readdirSync(casePath)
+		.filter(f => f.endsWith('.csv'))
+		.map(f => f.replace('.csv', ''))
 
-	for (let i = 0; i < result.numRows(); ++i) {
+	it(testName, async () => {
+		// execute the dataflow
+		const tableStore = createTableStore(inputTables)
+		const workflowJson = await readJson(path.join(casePath, 'workflow.json'))
+		createGraph(workflowJson.steps.map(step), tableStore)
+
+		// check the output tables
+		for (const o of expectedOutputTables) {
+			const actual = tableStore.get(o)
+			const expected = await readCsv(path.join(casePath, `${o}.csv`))
+			compareTables(expected, actual?.table, o)
+		}
+	})
+}
+
+function readInputTables(): TableContainer[] {
+	return fs.readdirSync(INPUT_TABLES_PATH).map(st => {
+		const text = fs.readFileSync(path.join(INPUT_TABLES_PATH, st), 'utf8')
+		const table = arquero.fromCSV(text)
+		return container(st.replace('.csv', ''), table)
+	})
+}
+
+function readJson(dataPath: string): Promise<any> {
+	return import(dataPath).then(res => res.default)
+}
+
+function readText(dataPath: string): Promise<string> {
+	return fsp.readFile(dataPath, 'utf8')
+}
+
+function readCsv(dataPath: string): Promise<ColumnTable> {
+	return readText(dataPath).then(txt => arquero.fromCSV(txt))
+}
+
+function compareTables(
+	expected: ColumnTable,
+	actual: ColumnTable | undefined,
+	name: string,
+) {
+	if (!actual) {
+		throw new Error(`expected output table "${name}" to exist`)
+	}
+	expect(actual.numRows()).toEqual(expected.numRows())
+	expect(actual.numCols()).toEqual(expected.numCols())
+	expect(actual.columnNames()).toEqual(expected.columnNames())
+
+	for (let i = 0; i < actual.numRows(); ++i) {
 		for (const column of expected.columnNames()) {
-			expect(result.get(column, i)).toEqual(expected.get(column, i))
+			expect(actual.get(column, i)).toEqual(expected.get(column, i))
 		}
 	}
 }

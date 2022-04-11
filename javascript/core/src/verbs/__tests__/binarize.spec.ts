@@ -157,11 +157,11 @@ describe('test for binarize verb', () => {
 		expect(result.numRows()).toBe(6)
 		// test where criteria match
 		expect(result.get('newColumn', 0)).toBe(0)
-		expect(result.get('newColumn', 1)).toBe(0)
+		expect(result.get('newColumn', 1)).toBeNull()
 		expect(result.get('newColumn', 2)).toBe(1)
 		expect(result.get('newColumn', 3)).toBe(1)
 		expect(result.get('newColumn', 4)).toBe(0)
-		expect(result.get('newColumn', 5)).toBe(0)
+		expect(result.get('newColumn', 5)).toBeNull()
 	})
 
 	test('binarize test with StringComparisonOperator Contains and two criteria', async () => {
@@ -188,10 +188,10 @@ describe('test for binarize verb', () => {
 		expect(result.numRows()).toBe(6)
 		// test where criteria match
 		expect(result.get('newColumn', 0)).toBe(1)
-		expect(result.get('newColumn', 1)).toBe(0)
+		expect(result.get('newColumn', 1)).toBeNull()
 		expect(result.get('newColumn', 2)).toBe(1)
 		expect(result.get('newColumn', 3)).toBe(1)
 		expect(result.get('newColumn', 4)).toBe(0)
-		expect(result.get('newColumn', 5)).toBe(0)
+		expect(result.get('newColumn', 5)).toBeNull()
 	})
 })

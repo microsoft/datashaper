@@ -27,7 +27,7 @@ export function compareAll(
 	criteria: Criterion[],
 	logical = BooleanOperator.OR,
 ): CompareWrapper {
-	return escape((d: Record<string, string | number>): 0 | 1 => {
+	return escape((d: Record<string, string | number>): 0 | 1 | null => {
 		const left = d[column]!
 		// TODO: the logical evaluate below has shortcuts that could optimize
 		// this check by shortcutting evaluation once it is clear the logical operator
@@ -38,6 +38,7 @@ export function compareAll(
 				type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
 			return compareValues(left, right, operator)
 		})
+
 		return evaluateBoolean(comparisons, logical)
 	}) as CompareWrapper
 }
@@ -62,7 +63,7 @@ export function compare(
 		| BooleanComparisonOperator,
 	type: FilterCompareType,
 ): CompareWrapper {
-	return escape((d: Record<string, string | number>): 0 | 1 | undefined => {
+	return escape((d: Record<string, string | number>): 0 | 1 | null => {
 		const left = d[column]!
 		const right =
 			type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
@@ -84,9 +85,12 @@ export function deriveBoolean(
 	columns: string[],
 	operator: BooleanOperator,
 ): CompareWrapper {
-	return escape((d: Record<string, string | number>): 0 | 1 => {
-		// gather all of the column values, coerce to booleans
-		const values = columns.map(c => (bool(d[c]) ? 1 : 0))
+	return escape((d: Record<string, string | number>): 0 | 1 | null => {
+		// gather all of the column values, coerce to booleans (or null)
+		const values = columns.map(c => {
+			const val = bool(d[c])
+			return val === null ? null : val ? 1 : 0
+		})
 		return evaluateBoolean(values, operator)
 	}) as CompareWrapper
 }

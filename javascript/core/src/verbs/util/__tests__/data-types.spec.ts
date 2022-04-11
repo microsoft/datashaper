@@ -13,9 +13,12 @@ describe('data-types utils', () => {
 			expect(bool(false)).toBe(false)
 			expect(bool('false')).toBe(false)
 			expect(bool(0)).toBe(false)
-			expect(bool()).toBe(false)
-			expect(bool(undefined)).toBe(false)
-			expect(bool(null)).toBe(false)
+		})
+
+		test('null values', () => {
+			expect(bool()).toBeNull()
+			expect(bool(undefined)).toBeNull()
+			expect(bool(null)).toBeNull()
 		})
 	})
 })

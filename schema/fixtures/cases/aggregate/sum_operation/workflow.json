@@ -10,7 +10,7 @@
 				"column": "quantity",
 				"operation": "sum"
 			},
-			"output": "result"
+			"output": "expected"
 		}
 	]
 }

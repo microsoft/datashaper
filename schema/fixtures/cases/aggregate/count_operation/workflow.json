@@ -10,7 +10,7 @@
 				"column": "item",
 				"operation": "count"
 			},
-			"output": "result"
+			"output": "expected"
 		}
 	]
 }

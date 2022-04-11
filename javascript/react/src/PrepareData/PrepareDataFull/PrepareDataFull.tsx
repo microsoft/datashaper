@@ -94,6 +94,7 @@ export const PrepareDataFull: React.FC<{
 const GAP = 18
 const INPUT_HEIGHT = 60
 const STEPS_HEIGHT = 280
+const COLLAPSED_STEPS_HEIGHT = 50
 
 const SectionTitle = styled.span<{ isCollapsed?: boolean }>`
 	margin: 0 ${GAP}px 0 ${GAP}px;
@@ -153,8 +154,9 @@ const StepsTrayContainer = styled.div<{
 	background-color: ${({ theme }) => theme.application().faint().hex()};
 	padding: 0;
 	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 3 : 2)};
-	height: ${({ isCollapsed }) => (isCollapsed ? '3rem' : 'auto')};
-	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'auto')};
+	height: ${({ isCollapsed }) =>
+		isCollapsed ? COLLAPSED_STEPS_HEIGHT + 'px' : 'auto'};
+	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'auto hidden')};
 	> div {
 		display: ${({ isCollapsed }) => (isCollapsed ? 'none' : 'grid')};
 	}

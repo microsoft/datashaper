@@ -10,7 +10,7 @@
 				"column": "quantity",
 				"operation": "median"
 			},
-			"output": "result"
+			"output": "expected"
 		}
 	]
 }
