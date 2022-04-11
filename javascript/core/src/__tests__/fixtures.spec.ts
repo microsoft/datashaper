@@ -20,6 +20,7 @@ const CATEGORIES_PATH = path.join(FIXTURES_PATH, 'cases')
 /**
  * Create top-level describes for each test category (top-level folders)
  */
+const inputTables = await readInputTables()
 doDescribe(CATEGORIES_PATH)
 
 function doDescribe(targetPath: string) {
@@ -48,7 +49,7 @@ function defineTestCase(parentPath: string, test: string) {
 
 	it(testName, async () => {
 		// execute the dataflow
-		const tableStore = createTableStore(await readInputTables())
+		const tableStore = createTableStore(inputTables)
 		const workflowJson = await readJson(path.join(casePath, 'workflow.json'))
 		createGraph(workflowJson.steps.map(step), tableStore)
 
@@ -93,20 +94,21 @@ function compareTables(
 	if (!actual) {
 		throw new Error(`expected output table "${name}" to exist`)
 	}
-	expect(actual.numRows()).toEqual(expected.numRows())
-	expect(actual.numCols()).toEqual(expected.numCols())
-	expect(actual.columnNames()).toEqual(expected.columnNames())
 
-	for (let i = 0; i < actual.numRows(); ++i) {
-		for (const column of expected.columnNames()) {
-			try {
+	try {
+		expect(actual.numRows()).toEqual(expected.numRows())
+		expect(actual.numCols()).toEqual(expected.numCols())
+		expect(actual.columnNames()).toEqual(expected.columnNames())
+
+		for (let i = 0; i < actual.numRows(); ++i) {
+			for (const column of expected.columnNames()) {
 				expect(actual.get(column, i)).toEqual(expected.get(column, i))
-			} catch (e) {
-				console.log(
-					`data mismatch; \n-----EXPECTED-----\n${expected.toCSV()}\n\n-----ACTUAL-----\n${actual.toCSV()}`,
-				)
-				throw e
 			}
 		}
+	} catch (e) {
+		console.log(
+			`data mismatch; \n-----EXPECTED-----\n${expected.toCSV()}\n\n-----ACTUAL-----\n${actual.toCSV()}`,
+		)
+		throw e
 	}
 }

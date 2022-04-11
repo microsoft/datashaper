@@ -1,0 +1,14 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "erase",
+			"input": "table3",
+			"args": {
+				"columns": ["ID"],
+				"value": 4
+			},
+			"output": "expected"
+		}
+	]
+}
