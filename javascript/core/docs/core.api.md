@@ -1073,8 +1073,8 @@ export enum ParseType {
 //
 // @public
 export interface Pipeline {
-    add(step: Step): Step[];
-    addAll(steps: Step[]): Step[];
+    add(step: StepSpecification): Step[];
+    addAll(steps: StepSpecification[]): Step[];
     clear(): void;
     // (undocumented)
     readonly count: number;
@@ -1297,7 +1297,17 @@ export interface Step<T extends object = any> {
 // Warning: (ae-missing-release-tag) "step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function step<T extends object>({ verb, args, id, input, output, }: StepSpecification<T>): Step<T>;
+export function step<T extends object>(spec: StepSpecification): Step<T>;
+
+// Warning: (ae-missing-release-tag) "StepCommon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepCommon {
+    description?: string;
+    id?: string;
+    input?: StepInputs;
+    output?: StepOutputs;
+}
 
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1308,6 +1318,13 @@ export type StepFunction<T, Args> = (source: T, args: Args) => Promise<T> | T;
 //
 // @public (undocumented)
 export type StepInput = CopyWithPartial<Step<any>, 'args' | 'id' | 'input' | 'output'>;
+
+// Warning: (ae-missing-release-tag) "StepInputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StepInputs = string | ({
+    others?: InputBindingSpecification[];
+} & Record<string, InputBindingSpecification>);
 
 // Warning: (ae-missing-release-tag) "StepNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1323,19 +1340,114 @@ export class StepNode<T, Args> extends BaseNode<T, Args> {
 // @public (undocumented)
 export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (id: string) => StepNode<T, Args>;
 
+// Warning: (ae-missing-release-tag) "StepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StepOutputs = string | Record<string, string>;
+
 // Warning: (ae-missing-release-tag) "StepSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepSpecification<T extends object = any> {
-    args?: T;
-    description?: string;
-    id?: string;
-    input?: string | ({
-        others?: InputBindingSpecification[];
-    } & Record<string, InputBindingSpecification>);
-    output?: string | Record<string, string>;
-    verb: Verb;
-}
+export type StepSpecification = StepCommon & ({
+    verb: Verb.Aggregate;
+    args?: AggregateArgs;
+} | {
+    verb: Verb.Bin;
+    args?: BinArgs;
+} | {
+    verb: Verb.Binarize;
+    args?: BinarizeArgs;
+} | {
+    verb: Verb.Boolean;
+    args?: BooleanArgs;
+} | {
+    verb: Verb.Concat;
+} | {
+    verb: Verb.Convert;
+    args?: ConvertArgs;
+} | {
+    verb: Verb.Dedupe;
+    args?: DedupeArgs;
+} | {
+    verb: Verb.Difference;
+} | {
+    verb: Verb.Derive;
+    args?: DeriveArgs;
+} | {
+    verb: Verb.Erase;
+    args?: EraseArgs;
+} | {
+    verb: Verb.Fetch;
+    args?: FetchArgs;
+} | {
+    verb: Verb.Fill;
+    args?: FillArgs;
+} | {
+    verb: Verb.Filter;
+    args?: FilterArgs;
+} | {
+    verb: Verb.Fold;
+    args?: FoldArgs;
+} | {
+    verb: Verb.Groupby;
+    args?: GroupbyArgs;
+} | {
+    verb: Verb.Impute;
+    args?: ImputeArgs;
+} | {
+    verb: Verb.Intersect;
+} | {
+    verb: Verb.Join;
+    args?: JoinArgs;
+} | {
+    verb: Verb.Lookup;
+    args?: LookupArgs;
+} | {
+    verb: Verb.Merge;
+    args?: MergeArgs;
+} | {
+    verb: Verb.OneHot;
+    args?: OneHotArgs;
+} | {
+    verb: Verb.Orderby;
+    args?: OrderbyArgs;
+} | {
+    verb: Verb.Pivot;
+    args?: PivotArgs;
+} | {
+    verb: Verb.Recode;
+    args?: RecodeArgs;
+} | {
+    verb: Verb.Rename;
+    args?: RenameArgs;
+} | {
+    verb: Verb.Rollup;
+    args?: RollupArgs;
+} | {
+    verb: Verb.Sample;
+    args?: SampleArgs;
+} | {
+    verb: Verb.Select;
+    args?: SelectArgs;
+} | {
+    verb: Verb.Spread;
+    args?: SpreadArgs;
+} | {
+    verb: Verb.Unfold;
+    args?: UnfoldArgs;
+} | {
+    verb: Verb.Union;
+} | {
+    verb: Verb.Unorder;
+} | {
+    verb: Verb.Ungroup;
+} | {
+    verb: Verb.Unroll;
+    args?: UnrollArgs;
+} | {
+    verb: Verb.Window;
+    args?: WindowArgs;
+});
 
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
