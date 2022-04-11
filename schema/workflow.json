@@ -1,422 +1,1304 @@
 {
-	"$schema": "https://json-schema.org/draft-07/schema",
-	"$id": "https://www.github.com/microsoft/data-wrangling-components",
-	"title": "Worflow",
-	"description": "The data-wrangling workflow specification;",
+	"$schema": "http://json-schema.org/draft-07/schema#",
 	"definitions": {
-		"workflow": {
-			"type": "object",
+		"AggregateArgs": {
 			"properties": {
-				"name": {
-					"description": "The workflow name",
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
 					"type": "string"
 				},
-				"description": {
-					"description": "The workflow description",
+				"groupby": {
+					"description": "Column to group by",
 					"type": "string"
 				},
-				"steps": { "$ref": "#/definitions/Step" }
-			}
-		},
-		"Step": {
-			"description": "The processing nodes of the workflow",
-			"type": "array",
-			"items": {
-				"type": "object",
-				"properties": {
-					"id": {
-						"type": "string",
-						"description": "the node id"
-					},
-					"input": { "$ref": "#/definitions/StepInputs" },
-					"output": { "$ref": "#/definitions/StepOutputs" }
+				"operation": {
+					"$ref": "#/definitions/FieldAggregateOperation",
+					"description": "Aggregate/rollup operation"
 				},
-				"oneOf": [
-					{
-						"$comment": "aggregate",
-						"properties": {
-							"verb": { "enum": ["aggregate"] },
-							"args": { "$ref": "#/definitions/AggregateArgs" }
-						},
-						"required": ["verb, args"]
-					},
-					{
-						"$comment": "bin",
-						"properties": {
-							"verb": { "enum": ["bin"] },
-							"args": { "$ref": "#/definitions/BinArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "binarize",
-						"properties": {
-							"verb": { "enum": ["binarize"] },
-							"args": { "$ref": "#/definitions/BinarizeArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "boolean",
-						"properties": {
-							"verb": { "enum": ["boolean"] },
-							"args": { "$ref": "#/definitions/BooleanArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "concat",
-						"properties": {
-							"verb": { "enum": ["concat"] },
-							"args": { "$ref": "#/definitions/ConcatArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "convert",
-						"properties": {
-							"verb": { "enum": ["convert"] },
-							"args": { "$ref": "#/definitions/ConvertArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "dedupe",
-						"properties": {
-							"verb": { "enum": ["dedupe"] },
-							"args": { "$ref": "#/definitions/DedupeArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "derive",
-						"properties": {
-							"verb": { "enum": ["derive"] },
-							"args": { "$ref": "#/definitions/DeriveArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "difference",
-						"properties": {
-							"verb": { "enum": ["difference"] },
-							"args": { "$ref": "#/definitions/DifferenceArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "erase",
-						"properties": {
-							"verb": { "enum": ["erase"] },
-							"args": { "$ref": "#/definitions/EraseArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "fetch",
-						"properties": {
-							"verb": { "enum": ["fetch"] },
-							"args": { "$ref": "#/definitions/FetchArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "fill",
-						"properties": {
-							"verb": { "enum": ["fill"] },
-							"args": { "$ref": "#/definitions/FillArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "filter",
-						"properties": {
-							"verb": { "enum": ["filter"] },
-							"args": { "$ref": "#/definitions/FilterArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "fold",
-						"properties": {
-							"verb": { "enum": ["fold"] },
-							"args": { "$ref": "#/definitions/FoldArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "groupby",
-						"properties": {
-							"verb": { "enum": ["groupby"] },
-							"args": { "$ref": "#/definitions/GroupbyArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "impute",
-						"properties": {
-							"verb": { "enum": ["impute"] },
-							"args": { "$ref": "#/definitions/ImputeArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "intersect",
-						"properties": {
-							"verb": { "enum": ["intersect"] },
-							"args": { "$ref": "#/definitions/IntersectArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "join",
-						"properties": {
-							"verb": { "enum": ["join"] },
-							"args": { "$ref": "#/definitions/JoinArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "lookup",
-						"properties": {
-							"verb": { "enum": ["lookup"] },
-							"args": { "$ref": "#/definitions/LookupArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "merge",
-						"properties": {
-							"verb": { "enum": ["merge"] },
-							"args": { "$ref": "#/definitions/MergeArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "pivot",
-						"properties": {
-							"verb": { "enum": ["pivot"] },
-							"args": { "$ref": "#/definitions/PivotArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "orderby",
-						"properties": {
-							"verb": { "enum": ["orderby"] },
-							"args": { "$ref": "#/definitions/OrderbyArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "recode",
-						"properties": {
-							"verb": { "enum": ["recode"] },
-							"args": { "$ref": "#/definitions/RecodeArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "rename",
-						"properties": {
-							"verb": { "enum": ["rename"] },
-							"args": { "$ref": "#/definitions/RenameArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "rollup",
-						"properties": {
-							"verb": { "enum": ["rollup"] },
-							"args": { "$ref": "#/definitions/RollupArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "sample",
-						"properties": {
-							"verb": { "enum": ["sample"] },
-							"args": { "$ref": "#/definitions/SampleArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "select",
-						"properties": {
-							"verb": { "enum": ["select"] },
-							"args": { "$ref": "#/definitions/SelectArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "spread",
-						"properties": {
-							"verb": { "enum": ["spread"] },
-							"args": { "$ref": "#/definitions/SpreadArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "unfold",
-						"properties": {
-							"verb": { "enum": ["unfold"] },
-							"args": { "$ref": "#/definitions/UnfoldArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "ungroup",
-						"properties": {
-							"verb": { "enum": ["ungroup"] },
-							"args": { "$ref": "#/definitions/UngroupArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "union",
-						"properties": {
-							"verb": { "enum": ["union"] },
-							"args": { "$ref": "#/definitions/UnionArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "unorder",
-						"properties": {
-							"verb": { "enum": ["unorder"] },
-							"args": { "$ref": "#/definitions/UnorderArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "unroll",
-						"properties": {
-							"verb": { "enum": ["unroll"] },
-							"args": { "$ref": "#/definitions/UnrollArgs" }
-						},
-						"required": ["verb", "args"]
-					},
-					{
-						"$comment": "window",
-						"properties": {
-							"verb": { "enum": ["window"] },
-							"args": { "$ref": "#/definitions/WindowArgs" }
-						},
-						"required": ["verb", "args"]
-					}
-				]
-			}
-		},
-		"StepInputs": {
-			"oneOf": [
-				{ "type": "string" },
-				{
-					"type": "object",
-					"patternProperties": {
-						"^.*$": { "$ref": "#/definitions/StepInputBinding" }
-					}
-				}
-			]
-		},
-		"StepInputBinding": {
-			"type": "object",
-			"properties": {
-				"node": { "type": "string", "description": "the source node id" },
-				"output": {
-					"type": "string",
-					"description": "the output of the source node to bind to (default='target')"
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
 				}
 			},
-			"required": ["node"]
-		},
-		"StepOutputs": {
-			"oneOf": [
-				{ "type": "string" },
-				{
-					"type": "object",
-					"description": "a map of output names to published table names",
-					"patternProperties": {
-						"^.*$": { "type": "string" }
-					}
-				}
-			]
-		},
-		"AggregateArgs": {
-			"type": "object",
-			"properties": {
-				"column": { "type": "string" },
-				"to": { "type": "string" },
-				"groupby": { "type": "string" },
-				"operation": {
-					"enum": [
-						"any",
-						"count",
-						"distinct",
-						"valid",
-						"invalid",
-						"max",
-						"min",
-						"sum",
-						"product",
-						"mean",
-						"mode",
-						"median",
-						"stdev",
-						"stdevp",
-						"variance",
-						"array_agg",
-						"array_agg_distinct"
-					]
-				}
-			}
+			"type": "object"
 		},
 		"BinArgs": {
-			"type": "object",
 			"properties": {
-				"column": { "type": "string", "description": "the column to bin into" },
-				"to": { "type": "string" },
-				"strategy": {
-					"enum": ["auto", "fixed count", "fixed width"]
+				"clamped": {
+					"description": "If true, values outside of the min/max boundaries will be clamped to those\nboundaries rather than +/-Infinity.",
+					"type": "boolean"
 				},
-				"fixedcount": { "type": "number" },
-				"fixedwidth": { "type": "number" },
-				"min": { "type": "number" },
-				"max": { "type": "number" },
-				"clamped": { "type": "boolean" }
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"fixedcount": {
+					"description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
+					"type": "number"
+				},
+				"fixedwidth": {
+					"description": "Exact step size between bins",
+					"type": "number"
+				},
+				"max": {
+					"description": "Max boundary to categorize values into.\nIf cell values are above this, they will default to +Infinity unless clamped.",
+					"type": "number"
+				},
+				"min": {
+					"description": "Min boundary to categorize values into.\nIf cell values are below this, they will default to -Infinity unless clamped.",
+					"type": "number"
+				},
+				"strategy": {
+					"$ref": "#/definitions/BinStrategy"
+				},
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
+				}
 			},
-			"required": ["column", "to", "strategy"]
+			"type": "object"
 		},
-		"BinarizeArgs": { "type": "object" },
-		"BooleanArgs": { "type": "object" },
-		"ConcatArgs": { "type": "object" },
-		"ConvertArgs": { "type": "object" },
-		"DedupeArgs": { "type": "object" },
-		"DeriveArgs": { "type": "object" },
-		"DifferenceArgs": { "type": "object" },
-		"EraseArgs": { "type": "object" },
-		"FetchArgs": { "type": "object" },
-		"FillArgs": { "type": "object" },
-		"FilterArgs": { "type": "object" },
-		"FoldArgs": { "type": "object" },
-		"GroupbyArgs": { "type": "object" },
-		"ImputeArgs": { "type": "object" },
-		"IntersectArgs": { "type": "object" },
-		"JoinArgs": { "type": "object" },
-		"LookupArgs": { "type": "object" },
-		"MergeArgs": { "type": "object" },
-		"PivotArgs": { "type": "object" },
-		"OrderbyArgs": { "type": "object" },
-		"RecodeArgs": { "type": "object" },
-		"RenameArgs": { "type": "object" },
-		"RollupArgs": { "type": "object" },
-		"SampleArgs": { "type": "object" },
-		"SelectArgs": { "type": "object" },
-		"SpreadArgs": { "type": "object" },
-		"UnfoldArgs": { "type": "object" },
-		"UngroupArgs": { "type": "object" },
-		"UnionArgs": { "type": "object" },
-		"UnorderArgs": { "type": "object" },
-		"UnrollArgs": { "type": "object" },
-		"WindowArgs": { "type": "object" }
-	}
+		"BinStrategy": {
+			"enum": ["auto", "fixed count", "fixed width"],
+			"type": "string"
+		},
+		"BinarizeArgs": {
+			"properties": {
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"criteria": {
+					"items": {
+						"$ref": "#/definitions/Criterion"
+					},
+					"type": "array"
+				},
+				"logical": {
+					"enum": ["and", "nand", "nor", "or", "xor"],
+					"type": "string"
+				},
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"BooleanArgs": {
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"operator": {
+					"$ref": "#/definitions/BooleanOperator"
+				},
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"BooleanOperator": {
+			"enum": ["and", "nand", "nor", "or", "xor"],
+			"type": "string"
+		},
+		"ConvertArgs": {
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"formatPattern": {
+					"type": "string"
+				},
+				"radix": {
+					"description": "Optional radix to use for parsing strings into ints",
+					"type": "number"
+				},
+				"type": {
+					"$ref": "#/definitions/ParseType"
+				}
+			},
+			"type": "object"
+		},
+		"Criterion": {
+			"properties": {
+				"operator": {
+					"enum": [
+						"!=",
+						"<",
+						"<=",
+						"=",
+						">",
+						">=",
+						"contains",
+						"ends with",
+						"equals",
+						"is empty",
+						"is false",
+						"is not empty",
+						"is not equal",
+						"is true",
+						"regex",
+						"starts with"
+					],
+					"type": "string"
+				},
+				"type": {
+					"$ref": "#/definitions/FilterCompareType",
+					"description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
+				},
+				"value": {
+					"description": "Comparison value for the column.\nNot required if the operator is self-defining (e.g., 'is empty')"
+				}
+			},
+			"type": "object"
+		},
+		"DeriveArgs": {
+			"properties": {
+				"column1": {
+					"description": "Column on the left side of the operation",
+					"type": "string"
+				},
+				"column2": {
+					"description": "Column on the right side of the operation",
+					"type": "string"
+				},
+				"operator": {
+					"$ref": "#/definitions/MathOperator"
+				},
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"EraseArgs": {
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"value": {
+					"description": "A cell value in Arquero"
+				}
+			},
+			"type": "object"
+		},
+		"FetchArgs": {
+			"properties": {
+				"autoMax": {
+					"description": "Optional autoMax for tables",
+					"type": "number"
+				},
+				"delimiter": {
+					"description": "Optional delimiter for csv",
+					"type": "string"
+				},
+				"url": {
+					"description": "URL where the csv file is located",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"FieldAggregateOperation": {
+			"description": "This is the subset of aggregate functions that can operate\non a single field so we don't accommodate additional args.\nSee https://uwdata.github.io/arquero/api/op#aggregate-functions",
+			"enum": [
+				"any",
+				"array_agg",
+				"array_agg_distinct",
+				"count",
+				"distinct",
+				"invalid",
+				"max",
+				"mean",
+				"median",
+				"min",
+				"mode",
+				"product",
+				"stdev",
+				"stdevp",
+				"sum",
+				"valid",
+				"variance"
+			],
+			"type": "string"
+		},
+		"FillArgs": {
+			"properties": {
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
+				},
+				"value": {
+					"description": "Value to fill in the new column"
+				}
+			},
+			"type": "object"
+		},
+		"FilterArgs": {
+			"properties": {
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"criteria": {
+					"items": {
+						"$ref": "#/definitions/Criterion"
+					},
+					"type": "array"
+				},
+				"logical": {
+					"enum": ["and", "nand", "nor", "or", "xor"],
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"FilterCompareType": {
+			"enum": ["column", "value"],
+			"type": "string"
+		},
+		"FoldArgs": {
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"to": {
+					"description": "Two-element array of names for the output [key, value]",
+					"items": [
+						{
+							"type": "string"
+						},
+						{
+							"type": "string"
+						}
+					],
+					"maxItems": 2,
+					"minItems": 2,
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"ImputeArgs": {
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"value": {
+					"description": "Value to fill in empty cells"
+				}
+			},
+			"type": "object"
+		},
+		"InputColumnListArgs": {
+			"description": "Base interface for a number of operations that work on a column list.",
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"InputColumnRecordArgs": {
+			"properties": {
+				"columns": {
+					"$ref": "#/definitions/Record<string,string>",
+					"description": "Map of old column to new column names"
+				}
+			},
+			"type": "object"
+		},
+		"JoinArgs": {
+			"properties": {
+				"on": {
+					"description": "Column names to join with.\nIf only one is specified, it will use for both tables.\nIf none are specified, all matching column names will be used.",
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"strategy": {
+					"enum": ["full outer", "inner", "left outer", "right outer"],
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"LookupArgs": {
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"on": {
+					"description": "Column names to join with.\nIf only one is specified, it will use for both tables.\nIf none are specified, all matching column names will be used.",
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"MathOperator": {
+			"enum": ["*", "+", "-", "/"],
+			"type": "string"
+		},
+		"MergeArgs": {
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"delimiter": {
+					"description": "This is only necessary if mergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
+					"type": "string"
+				},
+				"strategy": {
+					"$ref": "#/definitions/MergeStrategy"
+				},
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"MergeStrategy": {
+			"enum": ["array", "concat", "first one wins", "last one wins"],
+			"type": "string"
+		},
+		"OneHotArgs": {
+			"properties": {
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"prefix": {
+					"description": "Optional prefix for the output column names",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"OrderbyArgs": {
+			"properties": {
+				"orders": {
+					"description": "List of ordering instructions to apply",
+					"items": {
+						"$ref": "#/definitions/OrderbyInstruction"
+					},
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"OrderbyInstruction": {
+			"properties": {
+				"column": {
+					"type": "string"
+				},
+				"direction": {
+					"enum": ["asc", "desc"],
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"ParseType": {
+			"description": "This is a subset of data types available for parsing operations",
+			"enum": ["boolean", "date", "float", "int", "string"],
+			"type": "string"
+		},
+		"Partial<InputColumnListArgs>": {
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"PivotArgs": {
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"operation": {
+					"$ref": "#/definitions/FieldAggregateOperation"
+				},
+				"value": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"RecodeArgs": {
+			"properties": {
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"map": {
+					"$ref": "#/definitions/Record<any,any>",
+					"description": "Mapping of old value to new for the recoding.\nNote that the key must be coercable to a string for map lookup."
+				},
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"Record<any,any>": {
+			"type": "object"
+		},
+		"Record<string,InputBindingSpecification>": {
+			"type": "object"
+		},
+		"Record<string,string>": {
+			"type": "object"
+		},
+		"RollupArgs": {
+			"properties": {
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"operation": {
+					"$ref": "#/definitions/FieldAggregateOperation",
+					"description": "Aggregate/rollup operation"
+				},
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"SampleArgs": {
+			"properties": {
+				"proportion": {
+					"description": "If table size is unknown ahead of time, specify a proportion of rows to sample.\nIf size is specified, it will be used instead, otherwise computed from this\nproportion using the table.numRows()",
+					"type": "number"
+				},
+				"size": {
+					"description": "Number of rows to sample from the table.\nThis takes precedence over proportion.",
+					"type": "number"
+				}
+			},
+			"type": "object"
+		},
+		"SpreadArgs": {
+			"properties": {
+				"column": {
+					"type": "string"
+				},
+				"to": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				}
+			},
+			"type": "object"
+		},
+		"StepCommon": {
+			"properties": {
+				"description": {
+					"description": "helpful for documentation in JSON specs",
+					"type": "string"
+				},
+				"id": {
+					"description": "A unique identifier for this step",
+					"type": "string"
+				},
+				"input": {
+					"anyOf": [
+						{
+							"allOf": [
+								{
+									"properties": {
+										"others": {
+											"items": {
+												"anyOf": [
+													{
+														"properties": {
+															"node": {
+																"type": "string"
+															},
+															"output": {
+																"type": "string"
+															}
+														},
+														"type": "object"
+													},
+													{
+														"type": "string"
+													}
+												]
+											},
+											"type": "array"
+										}
+									},
+									"type": "object"
+								},
+								{
+									"$ref": "#/definitions/Record<string,InputBindingSpecification>"
+								}
+							]
+						},
+						{
+							"type": "string"
+						}
+					],
+					"description": "The bound inputs\nKey = Input Socket Name\nValue = Socket Binding to other node"
+				},
+				"output": {
+					"anyOf": [
+						{
+							"$ref": "#/definitions/Record<string,string>"
+						},
+						{
+							"type": "string"
+						}
+					],
+					"description": "The observed outputs to record.\nKey = output socket name\nValue = store table name"
+				}
+			},
+			"type": "object"
+		},
+		"UnfoldArgs": {
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"value": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"WindowArgs": {
+			"properties": {
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"operation": {
+					"$ref": "#/definitions/WindowFunction"
+				},
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"WindowFunction": {
+			"description": "These are operations that perform windowed compute.\nSee https://uwdata.github.io/arquero/api/op#window-functions",
+			"enum": [
+				"cume_dist",
+				"fill_down",
+				"fill_up",
+				"first_value",
+				"last_value",
+				"percent_rank",
+				"rank",
+				"row_number"
+			],
+			"type": "string"
+		}
+	},
+	"properties": {
+		"description": {
+			"type": "string"
+		},
+		"name": {
+			"type": "string"
+		},
+		"steps": {
+			"items": {
+				"anyOf": [
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/AggregateArgs"
+									},
+									"verb": {
+										"enum": ["aggregate"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/BinArgs"
+									},
+									"verb": {
+										"enum": ["bin"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/BinarizeArgs"
+									},
+									"verb": {
+										"enum": ["binarize"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/BooleanArgs"
+									},
+									"verb": {
+										"enum": ["boolean"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"verb": {
+										"enum": ["concat"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/ConvertArgs"
+									},
+									"verb": {
+										"enum": ["convert"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/Partial<InputColumnListArgs>"
+									},
+									"verb": {
+										"enum": ["dedupe"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"verb": {
+										"enum": ["difference"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/DeriveArgs"
+									},
+									"verb": {
+										"enum": ["derive"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/EraseArgs"
+									},
+									"verb": {
+										"enum": ["erase"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/FetchArgs"
+									},
+									"verb": {
+										"enum": ["fetch"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/FillArgs"
+									},
+									"verb": {
+										"enum": ["fill"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/FilterArgs"
+									},
+									"verb": {
+										"enum": ["filter"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/FoldArgs"
+									},
+									"verb": {
+										"enum": ["fold"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/InputColumnListArgs"
+									},
+									"verb": {
+										"enum": ["groupby"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/ImputeArgs"
+									},
+									"verb": {
+										"enum": ["impute"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"verb": {
+										"enum": ["intersect"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/JoinArgs"
+									},
+									"verb": {
+										"enum": ["join"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/LookupArgs"
+									},
+									"verb": {
+										"enum": ["lookup"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/MergeArgs"
+									},
+									"verb": {
+										"enum": ["merge"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/OneHotArgs"
+									},
+									"verb": {
+										"enum": ["onehot"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/OrderbyArgs"
+									},
+									"verb": {
+										"enum": ["orderby"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/PivotArgs"
+									},
+									"verb": {
+										"enum": ["pivot"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/RecodeArgs"
+									},
+									"verb": {
+										"enum": ["recode"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/InputColumnRecordArgs"
+									},
+									"verb": {
+										"enum": ["rename"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/RollupArgs"
+									},
+									"verb": {
+										"enum": ["rollup"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/SampleArgs"
+									},
+									"verb": {
+										"enum": ["sample"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/InputColumnListArgs"
+									},
+									"verb": {
+										"enum": ["select"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/SpreadArgs"
+									},
+									"verb": {
+										"enum": ["spread"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/UnfoldArgs"
+									},
+									"verb": {
+										"enum": ["unfold"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"verb": {
+										"enum": ["union"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"verb": {
+										"enum": ["unorder"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"verb": {
+										"enum": ["ungroup"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/InputColumnListArgs"
+									},
+									"verb": {
+										"enum": ["unroll"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/WindowArgs"
+									},
+									"verb": {
+										"enum": ["window"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						]
+					}
+				]
+			},
+			"type": "array"
+		}
+	},
+	"type": "object"
 }

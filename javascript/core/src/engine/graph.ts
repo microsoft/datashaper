@@ -4,7 +4,7 @@
  */
 import { DefaultGraph, observableNode } from '../graph/index.js'
 import type { Graph, Node } from '../graph/types.js'
-import type { InputBinding, Step } from '../steps/types.js'
+import type { InputBinding, Step } from '../steps/index.js'
 import type { Store } from '../store/types.js'
 import type { TableContainer } from '../tables/types.js'
 import type { NodeFactory } from '../verbs/index.js'

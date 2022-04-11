@@ -12,7 +12,7 @@ import {
 	JoinStrategy,
 	Verb,
 } from '../verbs/index.js'
-import type { InputBinding, Step, StepSpecification } from './types.js'
+import type { InputBinding, Step, StepSpecification } from './specification.js'
 
 export type StepInput = CopyWithPartial<
 	Step<any>,
@@ -25,13 +25,14 @@ export type StepInput = CopyWithPartial<
  * to preselect.
  * @param verb -
  */
-export function step<T extends object>({
-	verb,
-	args = {} as any,
-	id = uuid(),
-	input = {},
-	output = {},
-}: StepSpecification<T>): Step<T> {
+export function step<T extends object>(spec: StepSpecification): Step<T> {
+	const {
+		verb,
+		args = {} as any,
+		id = uuid(),
+		input = {},
+		output = {},
+	} = spec as any
 	const base = {
 		id,
 		args,

@@ -56,9 +56,9 @@ export class DefaultPipeline implements Pipeline {
 	}
 
 	public create(verb: Verb): Step[] {
-		const base: Step = factory({ verb })
+		const base: Step = factory({ verb } as any)
 		base.output = { target: base.id }
-		return this.add(base)
+		return this.add(base as StepSpecification)
 	}
 
 	public add(step: StepSpecification): Step[] {
@@ -86,7 +86,7 @@ export class DefaultPipeline implements Pipeline {
 		const removed = this.steps.slice(index)
 		const steps = this.steps.slice(0, index)
 		this.clear()
-		this.addAll(steps)
+		this.addAll(steps as any)
 
 		removed.forEach(r => this._unregisterStep(r))
 		this._rebuildGraph()
