@@ -1,5 +1,5 @@
 {
-	"$schema": "../../../../workflow.json",
+	"$schema": "../../../../../workflow.json",
 	"steps": [
 		{
 			"verb": "bin",
