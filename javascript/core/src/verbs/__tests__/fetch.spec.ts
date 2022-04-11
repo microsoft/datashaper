@@ -90,7 +90,6 @@ describe('test for fetch', () => {
 			'data',
 		)
 
-		console.log(result?.table?.toCSV())
 		expect(result.table?.numCols()).toBe(9)
 		expect(result.table?.numRows()).toBe(406)
 

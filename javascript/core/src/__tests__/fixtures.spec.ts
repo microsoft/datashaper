@@ -12,7 +12,7 @@ import { createTableStore } from '../store/createTableStore.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
 
-// Static data paths
+// Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const FIXTURES_PATH = path.join(__dirname, '../../../../schema/fixtures')
 const CATEGORIES_PATH = path.join(FIXTURES_PATH, 'cases')
@@ -125,8 +125,8 @@ function compareTables(
 
 function compareValue(expected: any, actual: any): void {
 	if (
-		(typeof expected === 'string' && castable[actual]) ||
-		(typeof actual === 'string' && castable[expected])
+		(typeof expected === 'string' && castable[typeof actual]) ||
+		(typeof actual === 'string' && castable[typeof expected])
 	) {
 		// string-cast values to account for mixed-type column data (e.g. fold)
 		expect('' + actual).toEqual('' + expected)
