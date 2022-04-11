@@ -833,13 +833,13 @@ export type JoinStep = Step<JoinArgs>;
 // @public (undocumented)
 export enum JoinStrategy {
     // (undocumented)
-    FullOuter = "join_full",
+    FullOuter = "full outer",
     // (undocumented)
     Inner = "inner",
     // (undocumented)
-    LeftOuter = "join_left",
+    LeftOuter = "left outer",
     // (undocumented)
-    RightOuter = "join_right"
+    RightOuter = "right outer"
 }
 
 // Warning: (ae-forgotten-export) The symbol "LookupNode" needs to be exported by the entry point index.d.ts
