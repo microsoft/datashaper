@@ -57,14 +57,19 @@ function defineTestCase(parentPath: string, test: string) {
 		await Promise.all(
 			expectedOutputTables.map(async o => {
 				const expected = await readCsv(path.join(casePath, `${o}.csv`))
-				await new Promise<void>(resolve =>
-					tableStore.onItemChange(o, actual => {
-						if (actual?.table) {
-							compareTables(expected, actual?.table, o)
-							resolve()
-						}
-					}),
-				)
+				await new Promise<void>(resolve => {
+					const result = tableStore.get(o)
+					if (result?.table) {
+						resolve()
+					} else {
+						tableStore.onItemChange(o, actual => {
+							if (actual?.table) {
+								compareTables(expected, actual?.table, o)
+								resolve()
+							}
+						})
+					}
+				})
 			}),
 		)
 	})
@@ -137,7 +142,7 @@ function compareValue(expected: any, actual: any): void {
 		for (let i = 0; i < parsedArray.length; ++i) {
 			compareValue(parsedArray[i], actual[i])
 		}
-	} else if (expected === null && actual === undefined) {
+	} else if (expected == null && actual == undefined) {
 		// don't sweat null vs undefined
 	} else if (expected === false && actual == null) {
 		// don't sweat nullish values for false
