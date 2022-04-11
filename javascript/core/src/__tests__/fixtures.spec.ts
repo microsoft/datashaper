@@ -60,6 +60,7 @@ function defineTestCase(parentPath: string, test: string) {
 				await new Promise<void>(resolve => {
 					const result = tableStore.get(o)
 					if (result?.table) {
+						compareTables(expected, result.table, o)
 						resolve()
 					} else {
 						tableStore.onItemChange(o, actual => {

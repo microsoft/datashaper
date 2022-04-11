@@ -1,0 +1,7 @@
+ID,name,count,item,quantity
+1,A,10,bed,45
+1,A,10,,78
+2,B,20,sofa,100
+4,D,40,sofa,89
+4,D,40,chair,50
+4,D,40,,45
