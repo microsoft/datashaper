@@ -4,6 +4,9 @@
  */
 import { fetchStep } from '../fetch.js'
 
+/**
+ * Keep unit test for data conversion checks
+ */
 describe('test for fetch', () => {
 	test('fetch simple csv file and automax value set', async () => {
 		const result = await fetchStep(

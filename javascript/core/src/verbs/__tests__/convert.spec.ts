@@ -6,6 +6,9 @@ import { TestStore } from '../../__tests__/TestStore.js'
 import { convertStep } from '../convert.js'
 import { ParseType } from '../types.js'
 
+/**
+ * Keep this unit test around for deep value conversion inspection
+ */
 describe('test for convert verb', () => {
 	let store: TestStore
 	beforeEach(() => {

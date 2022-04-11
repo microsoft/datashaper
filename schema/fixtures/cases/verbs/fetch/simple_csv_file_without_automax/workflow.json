@@ -1,0 +1,14 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "fetch",
+			"input": "table1",
+			"args": {
+				"url": "javascript/webapp/public/data/companies.csv",
+				"delimiter": ","
+			},
+			"output": "expected"
+		}
+	]
+}
