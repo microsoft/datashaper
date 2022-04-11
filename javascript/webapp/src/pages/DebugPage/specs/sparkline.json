@@ -1,11 +1,13 @@
 {
+	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Sparkline",
 	"description": "Aggregates a daily prices into an array to demonstrate Sparkline cells",
 	"steps": [
 		{
+			"id": "n1",
 			"verb": "aggregate",
-			"input": "data/stocks.csv",
-			"output": "sparkline",
+			"inputs": { "source": { "node": "data/stocks.csv" } },
+			"outputs": { "target": "sparkline" },
 			"args": {
 				"groupby": "Symbol",
 				"column": "Close",

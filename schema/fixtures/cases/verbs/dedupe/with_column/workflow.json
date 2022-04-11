@@ -1,0 +1,13 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "dedupe",
+			"input": "table3",
+			"args": {
+				"columns": ["ID"]
+			},
+			"output": "expected"
+		}
+	]
+}

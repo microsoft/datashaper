@@ -1,0 +1,16 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "bin",
+			"input": "table9",
+			"args": {
+				"to": "newColumn",
+				"column": "count",
+				"strategy": "fixed count",
+				"fixedcount": 5
+			},
+			"output": "expected"
+		}
+	]
+}

@@ -4,14 +4,10 @@
  */
 import type { Observable } from 'rxjs'
 
+import type { Maybe } from '../primitives.js'
+
 export type NodeId = string
 export type SocketName = string | symbol
-
-/**
- * A convenience type for including undefined
- * @public
- */
-export type Maybe<T> = T | undefined
 
 /**
  * A graph processing node
@@ -45,6 +41,12 @@ export interface Node<T, Config = unknown> {
 	bind(binding: NodeBinding<T>): void
 
 	/**
+	 * Binds variadic innput
+	 * @param bindings
+	 */
+	bindVariadic(bindings: Omit<NodeBinding<T>, 'input'>[]): void
+
+	/**
 	 * Clear an input socket
 	 * @param name - The input socket name
 	 */
@@ -53,7 +55,7 @@ export interface Node<T, Config = unknown> {
 	/**
 	 * Retrieves an existing input binding by id
 	 */
-	binding(input: SocketName): Maybe<NodeBinding<T>>
+	binding(input?: SocketName): Maybe<NodeBinding<T>>
 
 	/**
 	 * Gets all input bindings
@@ -94,9 +96,9 @@ export interface NodeBinding<T> {
 	node: Node<T>
 
 	/**
-	 * The named input on the target node
+	 * The named input on the target node (otherwise default)
 	 */
-	input: SocketName
+	input?: SocketName
 
 	/**
 	 * The named output on the source node (otherwise default)
@@ -110,11 +112,17 @@ export interface Graph<T> {
 	readonly outputs: NodeId[]
 
 	/**
+	 * Determines if the graph contains a node by id
+	 * @param id - The node id
+	 */
+	hasNode(id: NodeId): boolean
+
+	/**
 	 * Retrieves a node by id.
 	 * @param id - the node identifier
 	 * @throws - if the id is not found
 	 */
-	node(id: NodeId): Maybe<Node<T>>
+	node(id: NodeId): Node<T>
 
 	/**
 	 * Verify that the graph is a valid dag (no cycles)

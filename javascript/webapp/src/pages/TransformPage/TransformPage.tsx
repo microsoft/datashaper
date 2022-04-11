@@ -2,7 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { runPipeline } from '@data-wrangling-components/core'
+import type { TableContainer } from '@data-wrangling-components/core'
+import {
+	container,
+	createPipeline,
+	createTableStore,
+} from '@data-wrangling-components/core'
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
@@ -13,24 +18,30 @@ import type { IContextualMenuItem } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { useThematic } from '@thematic/react'
 import { loadCSV } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { from } from 'rxjs'
 import styled from 'styled-components'
 
 /**
  * This is a page for testing out built-in table transform mechanisms
  */
 export const TransformPage: React.FC = memo(function PerfMage() {
-	const [table, setTable] = useState<ColumnTable | undefined>()
+	const store = useMemo(() => createTableStore(), [])
+	const pipeline = useMemo(() => createPipeline(store), [store])
+	const [outputTable, setOutputTable] = useState<TableContainer | undefined>()
+	const [isLoaded, setIsLoaded] = useState(false)
+
 	useEffect(() => {
 		const f = async () => {
 			const root = await loadCSV('data/stocks.csv', {
 				autoMax: 1000000,
 			})
-			setTable(root)
+			store.set('input', from([container('input', root)]))
+			setIsLoaded(true)
+			return store.onItemChange('output', t => setOutputTable(t))
 		}
 		void f()
-	}, [])
+	}, [store, setIsLoaded])
 
 	const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =
 		useBoolean(false)
@@ -38,31 +49,31 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 	const commandBar = useCommandBar(showModal)
 
 	const handleTransformRequested = useCallback(
-		async step => {
-			if (table && step) {
-				const output = await runPipeline(table, [step])
-				setTable(output.table)
+		step => {
+			pipeline.clear()
+			pipeline.addAll([{ ...step, outputs: { target: 'output' } }])
+			if (isLoaded) {
 				hideModal()
 			}
 		},
-		[table, hideModal],
+		[hideModal, pipeline, isLoaded],
 	)
 
-	if (!table) {
+	if (!outputTable?.table) {
 		return null
 	}
 	return (
 		<Container>
 			<ColumnTransformModal
-				table={table}
+				table={outputTable.table}
 				isOpen={isModalOpen}
 				onDismiss={hideModal}
 				onTransformRequested={handleTransformRequested}
 			/>
 			<Table>
-				<ArqueroTableHeader table={table} commandBar={commandBar} />
+				<ArqueroTableHeader table={outputTable.table} commandBar={commandBar} />
 				<ArqueroDetailsList
-					table={table}
+					table={outputTable.table}
 					isHeadersFixed
 					features={{
 						smartCells: true,

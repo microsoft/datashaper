@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ConvertStep } from '@data-wrangling-components/core'
-import { DataType, ParseType } from '@data-wrangling-components/core'
+import { DataType, NodeInput, ParseType } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
@@ -34,7 +34,11 @@ export const Convert: React.FC<StepComponentProps> = memo(function Convert({
 	input,
 }) {
 	const internal = useMemo(() => step as ConvertStep, [step])
-	const tbl = useLoadTable(input || internal.input, table, store)
+	const tbl = useLoadTable(
+		input || internal.input[NodeInput.Source]?.node,
+		table,
+		store,
+	)
 	const [inputColumnDate, setInputColumnDate] = useState<boolean>()
 
 	const handleTypeChange = useHandleDropdownChange(

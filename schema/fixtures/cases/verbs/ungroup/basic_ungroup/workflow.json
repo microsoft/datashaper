@@ -1,0 +1,18 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"id": "grouped",
+			"verb": "groupby",
+			"input": "table10",
+			"args": {
+				"columns": ["x", "y"]
+			}
+		},
+		{
+			"verb": "ungroup",
+			"input": "grouped",
+			"output": "expected"
+		}
+	]
+}

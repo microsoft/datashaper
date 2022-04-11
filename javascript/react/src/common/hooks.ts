@@ -34,9 +34,7 @@ import type {
 	DropdownOptionChangeFunction,
 	StepChangeFunction,
 } from '../types.js'
-
-const noop = (value?: string) => value
-const num = (value?: string) => value && +value
+import { identity, noop, num } from './functions.js'
 
 /**
  * Make a basic set of string options from an array
@@ -68,7 +66,7 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 	const [dirty, setDirty] = useState<boolean>(true)
 	const [list, setList] = useState<string[]>([])
 	useEffect(() => {
-		store?.addChangeListener(() => setDirty(true))
+		return store?.onChange(() => setDirty(true))
 	}, [store, setDirty])
 	useEffect(() => {
 		if (dirty) {
@@ -81,8 +79,8 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 
 /**
  * Creates a list of dropdown options for the columns in a table
- * @param table -
- * @returns
+ * @param table - the input table
+ * @returns a list of dropdown options
  */
 export function useTableColumnOptions(
 	table: ColumnTable | undefined,
@@ -146,13 +144,13 @@ export function useDateFormatPatternOptions(): IDropdownOption[] {
 export function useHandleDropdownChange(
 	step: Step,
 	path: string,
-	onChange?: StepChangeFunction,
+	onChange: StepChangeFunction = noop,
 ): DropdownOptionChangeFunction {
 	return useCallback(
 		(_event, option) => {
 			const update = cloneDeep(step)
 			set(update, path, option?.key)
-			onChange && onChange(update)
+			onChange(update)
 		},
 		[step, path, onChange],
 	)
@@ -162,7 +160,7 @@ export function useHandleTextfieldChange(
 	step: Step,
 	path: string,
 	onChange?: StepChangeFunction,
-	transformer = noop,
+	transformer = identity,
 ): (
 	event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 	newValue?: string,
@@ -252,21 +250,10 @@ export function useLoadTable(
 ): ColumnTable | undefined {
 	const [tbl, setTable] = useState<ColumnTable | undefined>()
 	const handleTableLoad = useCallback(
-		(container: TableContainer) => setTable(container.table),
+		(container: TableContainer | undefined) => setTable(container?.table),
 		[setTable],
 	)
 	useEffect(() => {
-		const fn = async (n: string, s: TableStore) => {
-			try {
-				s.listen(n, handleTableLoad)
-				const c = await s.get(n)
-				setTable(c.table)
-			} catch (e) {
-				// swallow the error - we may try to request async before the table is registered
-				// it'll get picked up later by the listener
-				// TODO: should we only listen if it fails at first?
-			}
-		}
 		// if a table already exists, use it directly
 		// TODO: should we set it in the store also?
 		// the expectation here is that a table will be provided if the step component is used directly without a builder
@@ -274,10 +261,8 @@ export function useLoadTable(
 		if (table) {
 			setTable(table)
 		} else if (id && store) {
-			fn(id, store)
-		}
-		return () => {
-			id && store && store.unlisten(id)
+			const sub = store.observe(id).subscribe(t => setTable(t?.table))
+			return () => sub.unsubscribe()
 		}
 	}, [id, table, store, handleTableLoad])
 	return tbl
@@ -501,7 +486,7 @@ export function useCreateColumnName(): (
 export function useFormatedColumnArg(): (
 	stepArgs: unknown,
 	newName?: string,
-) => unknown {
+) => object {
 	return useCallback((stepArgs: unknown, newName = 'New column') => {
 		const args = stepArgs as Record<string, unknown>
 		Object.keys(args).forEach(x => {
@@ -514,7 +499,7 @@ export function useFormatedColumnArg(): (
 export function useFormatedColumnArgWithCount(): (
 	step: Step,
 	columnNames: string[],
-) => unknown {
+) => object {
 	const createColumnName = useCreateColumnName()
 
 	return useCallback(

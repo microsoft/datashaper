@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "merge",
+			"input": "table12",
+			"args": {
+				"columns": ["quantity", "totalSale"],
+				"strategy": "concat",
+				"to": "resultColumn"
+			},
+			"output": "expected"
+		}
+	]
+}

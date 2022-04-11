@@ -1,0 +1,4 @@
+x,y,z
+A,,true
+B,true,false
+A,false,true

@@ -1,0 +1,14 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "impute",
+			"input": "table5",
+			"args": {
+				"columns": ["item"],
+				"value": "emptyValue"
+			},
+			"output": "expected"
+		}
+	]
+}

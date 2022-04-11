@@ -60,7 +60,7 @@ export function useBusinessLogic(
 	// TODO: resolve these from the stored table state
 	const derived = useMemo(() => {
 		const unique = new Set<string>()
-		steps?.forEach(step => unique.add(step.output))
+		steps?.forEach(step => unique.add(step.id))
 		return Array.from(unique).map(name => ({
 			id: name,
 		}))

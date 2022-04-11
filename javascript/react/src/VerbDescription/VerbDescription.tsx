@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { isOutputColumnStep } from '@data-wrangling-components/core'
+import { isOutputColumnStep, NodeInput } from '@data-wrangling-components/core'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
@@ -41,6 +41,7 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 			return loop(rows)
 		}, [rows])
 		const shouldShowOutputColumn = showOutputColumn && isOutputColumnStep(step)
+		const input = step.input[NodeInput.Source]?.node
 		return (
 			<Container style={style}>
 				<Verb>{step.verb}</Verb>
@@ -48,7 +49,7 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 					<Row>
 						<KeyValue>
 							<Key>table</Key>
-							{!step.input ? <Unset /> : <Value>{step.input}</Value>}
+							{!input ? <Unset /> : <Value>{input}</Value>}
 						</KeyValue>
 					</Row>
 				) : null}
@@ -57,7 +58,7 @@ export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
 					<Row>
 						<KeyValue>
 							<Key>into table</Key>
-							{!step.output ? <Unset /> : <Value>{step.output}</Value>}
+							{!step.id ? <Unset /> : <Value>{step.id}</Value>}
 						</KeyValue>
 					</Row>
 				) : null}

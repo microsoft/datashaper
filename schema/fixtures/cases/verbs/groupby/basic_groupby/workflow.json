@@ -1,0 +1,13 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "groupby",
+			"input": "table1",
+			"args": {
+				"columns": ["ID"]
+			},
+			"output": "expected"
+		}
+	]
+}

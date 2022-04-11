@@ -7,6 +7,7 @@ import {
 	DataType,
 	isInputColumnStep,
 	isNumericInputStep,
+	NodeInput,
 	types,
 } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -25,9 +26,9 @@ import type { HOCFunction, StepComponentProps } from './types.js'
  * @param label - optional label to use for the dropdown instead of the default.
  * @returns
  */
-export const withInputColumnDropdown = (
+export function withInputColumnDropdown(
 	label?: string,
-): HOCFunction<StepComponentProps> => {
+): HOCFunction<StepComponentProps> {
 	return Component => {
 		const WithInputColumnDropdown: React.FC<StepComponentProps> = props => {
 			const { step, store, onChange, input, table } = props
@@ -40,7 +41,11 @@ export const withInputColumnDropdown = (
 			// TODO: detailed types/stats should be an option on table load,
 			// which will then be passed around with the container and thereby cached
 			// useLoadTable should return a TableContainer
-			const tbl = useLoadTable(input || step.input, table, store)
+			const tbl = useLoadTable(
+				input || step.input[NodeInput.Source]?.node,
+				table,
+				store,
+			)
 
 			const filter = useColumnFilter(step, tbl)
 
@@ -60,7 +65,6 @@ export const withInputColumnDropdown = (
 							onChange={handleColumnChange}
 						/>
 					</LeftAlignedRow>
-
 					<Component {...props} />
 				</Container>
 			)

@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { JoinStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../index.js'
@@ -16,7 +17,7 @@ export const JoinDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'with',
-					value: args.other,
+					value: internal.input[NodeInput.Other]?.node,
 				},
 				{
 					before: 'on',

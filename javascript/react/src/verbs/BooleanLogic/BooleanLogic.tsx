@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { BooleanStep } from '@data-wrangling-components/core'
-import { BooleanLogicalOperator } from '@data-wrangling-components/core'
+import { BooleanOperator, NodeInput } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
@@ -21,7 +21,11 @@ import type { StepComponentProps } from '../../types.js'
 export const BooleanLogic: React.FC<StepComponentProps> = memo(
 	function BooleanLogic({ step, store, table, onChange, input }) {
 		const internal = useMemo(() => step as BooleanStep, [step])
-		const tbl = useLoadTable(input || internal.input, table, store)
+		const tbl = useLoadTable(
+			input || internal.input[NodeInput.Source]?.node,
+			table,
+			store,
+		)
 
 		const handleColumnChange = useCallback(
 			(_event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
@@ -98,7 +102,7 @@ export const BooleanLogic: React.FC<StepComponentProps> = memo(
 							nand: 'NAND',
 							xor: 'XOR',
 						}}
-						enumeration={BooleanLogicalOperator}
+						enumeration={BooleanOperator}
 						selectedKey={internal.args.operator}
 						onChange={handleOpChange}
 					/>

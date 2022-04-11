@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ColumnListStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -16,7 +17,11 @@ import type { StepSubcomponentProps } from '../../../types.js'
  */
 export const ColumnListInputs: React.FC<StepSubcomponentProps> = memo(
 	function ColumnListInputs({ step, store, table, onChange, input, label }) {
-		const tbl = useLoadTable(input || step.input, table, store)
+		const tbl = useLoadTable(
+			input || step.input[NodeInput.Source]?.node,
+			table,
+			store,
+		)
 
 		const internal = useMemo(() => step as ColumnListStep, [step])
 

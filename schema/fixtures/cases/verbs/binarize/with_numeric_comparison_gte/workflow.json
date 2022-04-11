@@ -1,0 +1,21 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "binarize",
+			"input": "table1",
+			"args": {
+				"to": "newColumn",
+				"column": "count",
+				"criteria": [
+					{
+						"type": "value",
+						"operator": ">=",
+						"value": 40
+					}
+				]
+			},
+			"output": "expected"
+		}
+	]
+}

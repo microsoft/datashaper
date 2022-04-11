@@ -1,0 +1,16 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "aggregate",
+			"input": "table3",
+			"args": {
+				"to": "newColumn",
+				"groupby": "ID",
+				"column": "item",
+				"operation": "count"
+			},
+			"output": "expected"
+		}
+	]
+}

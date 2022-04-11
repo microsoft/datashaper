@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { BaseNode } from '../BaseNode.js'
-import { VariadicNodeImpl } from '../VariadicNode.js'
+import { BaseVariadicNode } from '../BaseVariadicNode.js'
 
 export enum Input {
 	LHS = 'lhs',
@@ -41,7 +41,7 @@ abstract class ComputeNode extends BaseNode<number, void> {
 	protected abstract compute(lhs: number, rhs: number): number
 }
 
-abstract class VariadicComputeNode extends VariadicNodeImpl<number, void> {
+abstract class VariadicComputeNode extends BaseVariadicNode<number, void> {
 	constructor() {
 		super()
 		this.emit(0)

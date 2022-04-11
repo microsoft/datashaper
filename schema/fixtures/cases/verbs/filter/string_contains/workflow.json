@@ -1,0 +1,20 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "filter",
+			"input": "table3",
+			"args": {
+				"column": "item",
+				"criteria": [
+					{
+						"operator": "contains",
+						"type": "value",
+						"value": "be"
+					}
+				]
+			},
+			"output": "expected"
+		}
+	]
+}

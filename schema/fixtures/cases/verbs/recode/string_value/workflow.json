@@ -1,0 +1,19 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "recode",
+			"input": "table1",
+			"args": {
+				"column": "name",
+				"to": "newColumn",
+				"map": {
+					"A": "Z",
+					"B": "Y",
+					"C": "X"
+				}
+			},
+			"output": "expected"
+		}
+	]
+}

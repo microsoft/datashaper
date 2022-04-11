@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
+import flow from 'lodash-es/flow.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -30,10 +31,11 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		const Description = useMemo(() => selectStepDescription(step), [step])
 		const WithAllArgs = useMemo(
 			() =>
-				// TODO: compose cleanly
-				withInputTableDropdown()(
-					withOutputColumnTextfield()(withInputColumnDropdown()(Component)),
-				),
+				flow(
+					withInputColumnDropdown(),
+					withOutputColumnTextfield(),
+					withInputTableDropdown(),
+				)(Component),
 			[Component],
 		)
 		const handleStepChange = useCallback(

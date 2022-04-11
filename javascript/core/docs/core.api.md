@@ -5,6 +5,12 @@
 ```ts
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { Observable } from 'rxjs';
+
+// Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const aggregate: (id: string) => StepNode<TableContainer<unknown>, AggregateArgs>;
 
 // Warning: (ae-missing-release-tag) "AggregateArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -18,6 +24,64 @@ export interface AggregateArgs extends RollupArgs {
 // @public (undocumented)
 export type AggregateStep = Step<AggregateArgs>;
 
+// Warning: (ae-missing-release-tag) "BaseNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
+    constructor(inputs?: SocketName[], outputs?: SocketName[]);
+    // (undocumented)
+    bind(binding: NodeBinding<T>): void;
+    // (undocumented)
+    binding(name?: SocketName): Maybe<NodeBinding<T>>;
+    // (undocumented)
+    bindings(): NodeBinding<T>[];
+    // (undocumented)
+    get bindingsCount(): number;
+    // (undocumented)
+    bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
+    // (undocumented)
+    get config(): Maybe<Config>;
+    set config(value: Maybe<Config>);
+    protected abstract doRecalculate(): Promise<void> | void;
+    protected emit: (value: Maybe<T>, output?: NodeOutput) => void;
+    protected emitError: (error: unknown) => void;
+    protected getInputErrors(): Record<SocketName, unknown>;
+    protected getInputValues(): Record<SocketName, Maybe<T>>;
+    // (undocumented)
+    get id(): NodeId;
+    set id(value: NodeId);
+    // (undocumented)
+    protected _id: string;
+    // (undocumented)
+    readonly inputs: SocketName[];
+    // (undocumented)
+    protected inputValue(name?: SocketName): Maybe<T>;
+    // (undocumented)
+    get onBindingsChanged(): Observable<void>;
+    // (undocumented)
+    output(name?: SocketName): Observable<Maybe<T>>;
+    // (undocumented)
+    readonly outputs: SocketName[];
+    // (undocumented)
+    outputValue(name?: SocketName): Maybe<T>;
+    protected recalculate: () => void;
+    // (undocumented)
+    unbind(name: SocketName): void;
+    protected verifyInputSocketName(name: SocketName): void;
+    protected verifyOutputSocketName(name: SocketName): void;
+}
+
+// Warning: (ae-missing-release-tag) "BaseVariadicNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
+    constructor(inputs?: SocketName[], outputs?: SocketName[]);
+    // (undocumented)
+    bindVariadic(inputs: Omit<NodeBinding<T>, 'input'>[]): void;
+    // (undocumented)
+    protected getVariadicInputValues(): Maybe<T>[];
+}
+
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -27,6 +91,11 @@ export interface Bin {
     // (undocumented)
     min: number | string;
 }
+
+// Warning: (ae-missing-release-tag) "bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const bin: (id: string) => StepNode<TableContainer<unknown>, BinArgs>;
 
 // Warning: (ae-missing-release-tag) "BinArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -40,6 +109,11 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
     // (undocumented)
     strategy: BinStrategy;
 }
+
+// Warning: (ae-missing-release-tag) "binarize" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const binarize: (id: string) => StepNode<TableContainer<unknown>, BinarizeArgs>;
 
 // Warning: (ae-missing-release-tag) "BinarizeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -69,12 +143,17 @@ export enum BinStrategy {
     FixedWidth = "fixed width"
 }
 
+// Warning: (ae-missing-release-tag) "boolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const boolean: (id: string) => StepNode<TableContainer<unknown>, BooleanArgs>;
+
 // Warning: (ae-missing-release-tag) "BooleanArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface BooleanArgs extends InputColumnListArgs, OutputColumnArgs {
     // (undocumented)
-    operator: BooleanLogicalOperator;
+    operator: BooleanOperator;
 }
 
 // Warning: (ae-missing-release-tag) "BooleanComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -95,10 +174,10 @@ export enum BooleanComparisonOperator {
     NotEqual = "is not equal"
 }
 
-// Warning: (ae-missing-release-tag) "BooleanLogicalOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "BooleanOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export enum BooleanLogicalOperator {
+export enum BooleanOperator {
     AND = "and",
     NAND = "nand",
     NOR = "nor",
@@ -120,24 +199,6 @@ export interface Category {
     // (undocumented)
     name: string;
 }
-
-// Warning: (ae-missing-release-tag) "ChainArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ChainArgs {
-    nofork?: boolean;
-    steps: Step[];
-}
-
-// Warning: (ae-missing-release-tag) "ChainStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type ChainStep = Step<ChainArgs>;
-
-// Warning: (ae-missing-release-tag) "ChangeListenerFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export type ChangeListenerFunction = () => void;
 
 // Warning: (ae-missing-release-tag) "coerce" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -211,6 +272,22 @@ export function columnTransformVerbs(filter?: (verb: Verb) => boolean): Verb[];
 // @public (undocumented)
 export function columnType(table: ColumnTable, column: string): DataType;
 
+// Warning: (ae-forgotten-export) The symbol "SetOperationNode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "concat" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const concat: (id: string) => SetOperationNode<unknown>;
+
+// Warning: (ae-missing-release-tag) "container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function container(id: string, table?: ColumnTable, options?: Omit<TableContainer, 'id' | 'table'>): TableContainer;
+
+// Warning: (ae-missing-release-tag) "convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertArgs>;
+
 // Warning: (ae-missing-release-tag) "ConvertArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -227,15 +304,25 @@ export interface ConvertArgs extends InputColumnListArgs {
 // @public (undocumented)
 export type ConvertStep = Step<ConvertArgs>;
 
+// Warning: (ae-missing-release-tag) "CopyWithPartial" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
+
+// Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function createGraph(steps: Step[], store: Store<TableContainer>): Graph<TableContainer>;
+
 // Warning: (ae-missing-release-tag) "createPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function createPipeline(store: TableStore): Pipeline;
+export function createPipeline(store: Store<TableContainer>): Pipeline;
 
 // Warning: (ae-missing-release-tag) "createTableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function createTableStore(tables?: TableContainer[]): TableStore;
+export function createTableStore(tables?: TableContainer[]): Store<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "Criterion" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -271,6 +358,11 @@ export enum DataType {
     Unknown = "unknown"
 }
 
+// Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<InputColumnListArgs>>;
+
 // Warning: (ae-missing-release-tag) "DedupeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -281,22 +373,47 @@ export type DedupeArgs = Partial<InputColumnListArgs>;
 // @public (undocumented)
 export type DedupeStep = Step<DedupeArgs>;
 
+// Warning: (ae-missing-release-tag) "DefaultGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DefaultGraph<T> implements Graph<T> {
+    // (undocumented)
+    add(node: Node_2<T>): void;
+    // (undocumented)
+    hasNode(id: NodeId): boolean;
+    // (undocumented)
+    get inputs(): NodeId[];
+    // (undocumented)
+    node(id: NodeId): Node_2<T>;
+    // (undocumented)
+    get nodes(): NodeId[];
+    // (undocumented)
+    get outputs(): NodeId[];
+    // (undocumented)
+    remove(removeId: NodeId): void;
+    // (undocumented)
+    validate(): void;
+}
+
 // Warning: (ae-missing-release-tag) "DefaultPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export class DefaultPipeline implements Pipeline {
     constructor(store: TableStore);
     // (undocumented)
-    add(step: Step): Step[];
+    add(step: StepSpecification): Step[];
     // (undocumented)
-    addAll(steps: Step[]): Step[];
+    addAll(steps: StepSpecification[]): Step[];
     // (undocumented)
     clear(): void;
     // (undocumented)
     get count(): number;
+    // (undocumented)
     create(verb: Verb): Step[];
     // (undocumented)
     delete(index: number): Step[];
+    // (undocumented)
+    get graph(): Graph<TableContainer>;
     // (undocumented)
     get last(): Step;
     // (undocumented)
@@ -308,45 +425,46 @@ export class DefaultPipeline implements Pipeline {
     // (undocumented)
     get steps(): Step[];
     // (undocumented)
-    get store(): TableStore;
+    readonly store: TableStore;
     // (undocumented)
     update(step: Step, index: number): Step[];
 }
 
-// Warning: (ae-missing-release-tag) "DefaultTableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DefaultStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export class DefaultTableStore implements TableStore {
-    constructor(tables?: TableContainer[]);
+export class DefaultStore<T> implements Store<T> {
+    constructor(_printItem: (item: T) => void);
     // (undocumented)
-    addChangeListener(listener: ChangeListenerFunction): () => void;
+    clear(): void;
     // (undocumented)
-    clear(): TableStore;
+    delete(id: string): void;
     // (undocumented)
-    clone(): Promise<TableStore>;
+    emitItemChange(id: string): void;
     // (undocumented)
-    delete(id: string): TableStore;
-    // (undocumented)
-    get(id: string): Promise<TableContainer>;
+    get(id: string): Maybe<T>;
     // (undocumented)
     list(filter?: (id: string) => boolean): string[];
     // (undocumented)
-    listen(id: string, listener: ListenerFunction): () => void;
+    observe(id: string): Observable<Maybe<T>>;
     // (undocumented)
-    print(): Promise<void>;
+    onChange(listener: Handler): Unsubscribe;
     // (undocumented)
-    queue(id: string, resolver: ResolverFunction): TableStore;
+    onItemChange(id: string, listener: HandlerOf<Maybe<T>>): Unsubscribe;
     // (undocumented)
-    set(container: TableContainer): TableStore;
+    print(): void;
     // (undocumented)
-    table(id: string): Promise<ColumnTable>;
+    set(id: string, value: Observable<T>): void;
     // (undocumented)
-    toArray(): Promise<TableContainer[]>;
+    toArray(): Maybe<T>[];
     // (undocumented)
-    toMap(): Promise<Map<string, TableContainer>>;
-    // (undocumented)
-    unlisten(id: string): void;
+    toMap(): Map<string, T>;
 }
+
+// Warning: (ae-missing-release-tag) "derive" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const derive: (id: string) => StepNode<TableContainer<unknown>, DeriveArgs>;
 
 // Warning: (ae-missing-release-tag) "DeriveArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -368,10 +486,22 @@ export type DeriveStep = Step<DeriveArgs>;
 // @public
 export function determineType(value: Value): DataType;
 
+// Warning: (ae-missing-release-tag) "difference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const difference: (id: string) => SetOperationNode<unknown>;
+
+// Warning: (ae-missing-release-tag) "erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const erase: (id: string) => StepNode<TableContainer<unknown>, EraseArgs>;
+
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface EraseArgs extends InputColumnListArgs {
+export interface EraseArgs {
+    // (undocumented)
+    columns: string[];
     // (undocumented)
     value: Value;
 }
@@ -381,10 +511,11 @@ export interface EraseArgs extends InputColumnListArgs {
 // @public (undocumented)
 export type EraseStep = Step<EraseArgs>;
 
-// Warning: (ae-missing-release-tag) "factory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "fetch" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export function factory(verb: Verb, input: string, output: string): Step;
+// @public (undocumented)
+const fetch_2: (id: string) => InputNode<TableContainer<unknown>, FetchArgs>;
+export { fetch_2 as fetch }
 
 // Warning: (ae-missing-release-tag) "FetchArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -440,6 +571,11 @@ export enum FieldAggregateOperation {
     Variance = "variance"
 }
 
+// Warning: (ae-missing-release-tag) "fill" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const fill: (id: string) => StepNode<TableContainer<unknown>, FillArgs>;
+
 // Warning: (ae-missing-release-tag) "FillArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -452,6 +588,11 @@ export interface FillArgs extends OutputColumnArgs {
 // @public (undocumented)
 export type FillStep = Step<FillArgs>;
 
+// Warning: (ae-missing-release-tag) "filter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const filter: (id: string) => StepNode<TableContainer<unknown>, FilterArgs>;
+
 // Warning: (ae-missing-release-tag) "FilterArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -459,7 +600,7 @@ export interface FilterArgs extends InputColumnArgs {
     // (undocumented)
     criteria: Criterion[];
     // (undocumented)
-    logical?: BooleanLogicalOperator;
+    logical?: BooleanOperator;
 }
 
 // Warning: (ae-missing-release-tag) "FilterCompareType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -476,6 +617,11 @@ export enum FilterCompareType {
 //
 // @public (undocumented)
 export type FilterStep = Step<FilterArgs>;
+
+// Warning: (ae-missing-release-tag) "fold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const fold: (id: string) => StepNode<TableContainer<unknown>, FoldArgs>;
 
 // Warning: (ae-missing-release-tag) "FoldArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -507,6 +653,28 @@ export function formatIfNumber(value: Value): string | Value;
 // @public
 export function getters(table: ColumnTable): Record<string, (i: number) => any>;
 
+// Warning: (ae-missing-release-tag) "Graph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Graph<T> {
+    add(node: Node_2<T>): void;
+    hasNode(id: NodeId): boolean;
+    // (undocumented)
+    readonly inputs: NodeId[];
+    node(id: NodeId): Node_2<T>;
+    // (undocumented)
+    readonly nodes: NodeId[];
+    // (undocumented)
+    readonly outputs: NodeId[];
+    remove(id: NodeId): void;
+    validate(): void;
+}
+
+// Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const groupby: (id: string) => StepNode<TableContainer<unknown>, InputColumnListArgs>;
+
 // Warning: (ae-missing-release-tag) "GroupbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -516,6 +684,26 @@ export type GroupbyArgs = InputColumnListArgs;
 //
 // @public (undocumented)
 export type GroupbyStep = Step<GroupbyArgs>;
+
+// Warning: (ae-missing-release-tag) "handleMaybeAsync" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function handleMaybeAsync<T>(value: T | Promise<T>, handler: (value: T) => void): Promise<void> | void;
+
+// Warning: (ae-missing-release-tag) "Handler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type Handler = () => void;
+
+// Warning: (ae-missing-release-tag) "HandlerOf" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type HandlerOf<T> = (input: T) => void;
+
+// Warning: (ae-missing-release-tag) "impute" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const impute: (id: string) => StepNode<TableContainer<unknown>, ImputeArgs>;
 
 // Warning: (ae-missing-release-tag) "ImputeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -528,6 +716,19 @@ export interface ImputeArgs extends InputColumnListArgs {
 //
 // @public (undocumented)
 export type ImputeStep = Step<ImputeArgs>;
+
+// Warning: (ae-missing-release-tag) "InputBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type InputBinding = {
+    node: string;
+    output?: string;
+};
+
+// Warning: (ae-missing-release-tag) "InputBindingSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type InputBindingSpecification = string | InputBinding;
 
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -550,6 +751,30 @@ export interface InputColumnListArgs {
 export interface InputColumnRecordArgs {
     columns: Record<string, string>;
 }
+
+// Warning: (ae-missing-release-tag) "InputNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class InputNode<T, Config> extends BaseNode<T, Config> {
+    constructor(_computeFn: InputStep<T, Config>);
+    // (undocumented)
+    protected doRecalculate(): void | Promise<void>;
+}
+
+// Warning: (ae-missing-release-tag) "inputNodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function inputNodeFactory<T, Args>(compute: InputStep<T, Args>): (id: string) => InputNode<T, Args>;
+
+// Warning: (ae-missing-release-tag) "InputStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type InputStep<T, Config> = (args: Config, id: string) => Promise<T> | T;
+
+// Warning: (ae-missing-release-tag) "intersect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const intersect: (id: string) => SetOperationNode<unknown>;
 
 // Warning: (ae-missing-release-tag) "introspect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -577,6 +802,12 @@ export function isNumericInputStep(step: Step): boolean;
 // @public
 export function isOutputColumnStep(step: Step): boolean;
 
+// Warning: (ae-forgotten-export) The symbol "JoinNode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "join" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function join(id: string): JoinNode;
+
 // Warning: (ae-missing-release-tag) "JoinArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -590,7 +821,6 @@ export interface JoinArgs extends JoinArgsBase {
 // @public (undocumented)
 export interface JoinArgsBase {
     on?: string[];
-    other: string;
 }
 
 // Warning: (ae-missing-release-tag) "JoinStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -603,19 +833,20 @@ export type JoinStep = Step<JoinArgs>;
 // @public (undocumented)
 export enum JoinStrategy {
     // (undocumented)
-    FullOuter = "join_full",
+    FullOuter = "full outer",
     // (undocumented)
     Inner = "inner",
     // (undocumented)
-    LeftOuter = "join_left",
+    LeftOuter = "left outer",
     // (undocumented)
-    RightOuter = "join_right"
+    RightOuter = "right outer"
 }
 
-// Warning: (ae-missing-release-tag) "ListenerFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-forgotten-export) The symbol "LookupNode" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "lookup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export type ListenerFunction = (container: TableContainer) => void;
+// @public (undocumented)
+export function lookup(id: string): LookupNode;
 
 // Warning: (ae-missing-release-tag) "LookupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -641,6 +872,16 @@ export enum MathOperator {
     // (undocumented)
     Subtract = "-"
 }
+
+// Warning: (ae-missing-release-tag) "Maybe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Maybe<T> = T | undefined;
+
+// Warning: (ae-missing-release-tag) "merge" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>;
 
 // Warning: (ae-missing-release-tag) "MergeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -670,6 +911,62 @@ export enum MergeStrategy {
     LastOneWins = "last one wins"
 }
 
+// @public
+interface Node_2<T, Config = unknown> {
+    bind(binding: NodeBinding<T>): void;
+    binding(input?: SocketName): Maybe<NodeBinding<T>>;
+    bindings(): NodeBinding<T>[];
+    readonly bindingsCount: number;
+    bindVariadic(bindings: Omit<NodeBinding<T>, 'input'>[]): void;
+    config: Maybe<Config>;
+    readonly id: NodeId;
+    readonly inputs: SocketName[];
+    // (undocumented)
+    readonly onBindingsChanged: Observable<void>;
+    output(name?: SocketName): Observable<Maybe<T>>;
+    readonly outputs: SocketName[];
+    outputValue(name?: SocketName): Maybe<T>;
+    unbind(name?: SocketName): void;
+}
+export { Node_2 as Node }
+
+// Warning: (ae-missing-release-tag) "NodeBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface NodeBinding<T> {
+    input?: SocketName;
+    node: Node_2<T>;
+    output?: SocketName;
+}
+
+// Warning: (ae-missing-release-tag) "NodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type NodeFactory = (id: string) => Node_2<TableContainer>;
+
+// Warning: (ae-missing-release-tag) "NodeId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type NodeId = string;
+
+// Warning: (ae-missing-release-tag) "NodeInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum NodeInput {
+    // (undocumented)
+    Other = "other",
+    // (undocumented)
+    Source = "source"
+}
+
+// Warning: (ae-missing-release-tag) "NodeOutput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum NodeOutput {
+    // (undocumented)
+    Target = "target"
+}
+
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -692,6 +989,25 @@ export enum NumericComparisonOperator {
     NotEqual = "!="
 }
 
+// Warning: (ae-missing-release-tag) "ObservableNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class ObservableNode<T> extends BaseNode<T, void> {
+    constructor(source: Observable<Maybe<T>>);
+    // (undocumented)
+    protected doRecalculate(): void;
+}
+
+// Warning: (ae-missing-release-tag) "observableNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function observableNode<T>(id: string, source: Observable<Maybe<T>>): ObservableNode<T>;
+
+// Warning: (ae-missing-release-tag) "onehot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const onehot: (id: string) => StepNode<TableContainer<unknown>, OneHotArgs>;
+
 // Warning: (ae-missing-release-tag) "OneHotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -703,6 +1019,11 @@ export interface OneHotArgs extends InputColumnArgs {
 //
 // @public (undocumented)
 export type OneHotStep = Step<OneHotArgs>;
+
+// Warning: (ae-missing-release-tag) "orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const orderby: (id: string) => StepNode<TableContainer<unknown>, OrderbyArgs>;
 
 // Warning: (ae-missing-release-tag) "OrderbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -752,32 +1073,34 @@ export enum ParseType {
 //
 // @public
 export interface Pipeline {
-    // (undocumented)
     add(step: Step): Step[];
-    // (undocumented)
     addAll(steps: Step[]): Step[];
-    // (undocumented)
     clear(): void;
     // (undocumented)
-    get count(): number;
+    readonly count: number;
     create(verb: Verb): Step[];
-    // (undocumented)
     delete(index: number): Step[];
     // (undocumented)
-    get last(): Step;
+    readonly graph: Graph<TableContainer>;
     // (undocumented)
-    get outputs(): string[];
+    readonly last: Step;
     // (undocumented)
+    readonly outputs: string[];
     print(): void;
     // (undocumented)
     run(): Promise<TableContainer>;
     // (undocumented)
-    get steps(): Step[];
+    readonly steps: Step[];
     // (undocumented)
-    get store(): TableStore;
+    readonly store: TableStore;
     // (undocumented)
     update(step: Step, index: number): Step[];
 }
+
+// Warning: (ae-missing-release-tag) "pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const pivot: (id: string) => StepNode<TableContainer<unknown>, PivotArgs>;
 
 // Warning: (ae-missing-release-tag) "PivotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -796,6 +1119,11 @@ export interface PivotArgs {
 // @public (undocumented)
 export type PivotStep = Step<PivotArgs>;
 
+// Warning: (ae-missing-release-tag) "recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const recode: (id: string) => StepNode<TableContainer<unknown>, RecodeArgs>;
+
 // Warning: (ae-missing-release-tag) "RecodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -808,6 +1136,11 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 // @public (undocumented)
 export type RecodeStep = Step<RecodeArgs>;
 
+// Warning: (ae-missing-release-tag) "rename" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColumnRecordArgs>;
+
 // Warning: (ae-missing-release-tag) "RenameArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -818,10 +1151,10 @@ export type RenameArgs = InputColumnRecordArgs;
 // @public (undocumented)
 export type RenameStep = Step<RenameArgs>;
 
-// Warning: (ae-missing-release-tag) "ResolverFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export type ResolverFunction = (id: string) => Promise<ColumnTable>;
+// @public (undocumented)
+export const rollup: (id: string) => StepNode<TableContainer<unknown>, RollupArgs>;
 
 // Warning: (ae-missing-release-tag) "RollupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -849,15 +1182,10 @@ export interface RowsOptions {
     stringify?: boolean;
 }
 
-// Warning: (ae-missing-release-tag) "run" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "sample" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export function run(steps: Step[], store: TableStore): Promise<TableContainer>;
-
-// Warning: (ae-missing-release-tag) "runPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function runPipeline(input: ColumnTable, steps: Step | Step[]): Promise<TableContainer>;
+// @public (undocumented)
+export const sample: (id: string) => StepNode<TableContainer<unknown>, SampleArgs>;
 
 // Warning: (ae-missing-release-tag) "SampleArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -871,6 +1199,11 @@ export interface SampleArgs {
 //
 // @public (undocumented)
 export type SampleStep = Step<SampleArgs>;
+
+// Warning: (ae-missing-release-tag) "select" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const select: (id: string) => StepNode<TableContainer<unknown>, InputColumnListArgs>;
 
 // Warning: (ae-missing-release-tag) "SelectArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -896,17 +1229,10 @@ export enum SetOp {
     Union = "union"
 }
 
-// Warning: (ae-missing-release-tag) "SetOperationArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "SocketName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface SetOperationArgs {
-    others: string[];
-}
-
-// Warning: (ae-missing-release-tag) "SetOperationStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type SetOperationStep = Step<SetOperationArgs>;
+export type SocketName = string | symbol;
 
 // Warning: (ae-missing-release-tag) "SortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -927,8 +1253,13 @@ export interface Specification {
     // (undocumented)
     name?: string;
     // (undocumented)
-    steps?: Step[];
+    steps?: StepSpecification[];
 }
+
+// Warning: (ae-missing-release-tag) "spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const spread: (id: string) => StepNode<TableContainer<unknown>, SpreadArgs>;
 
 // Warning: (ae-missing-release-tag) "SpreadArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -953,23 +1284,76 @@ export function stats(table: ColumnTable, columns?: string[]): Record<string, Co
 // Warning: (ae-missing-release-tag) "Step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface Step<T = unknown> {
-    // (undocumented)
+export interface Step<T extends object = any> {
     args: T;
-    // (undocumented)
-    description?: string;
-    // (undocumented)
-    input: string;
-    // (undocumented)
-    output: string;
-    // (undocumented)
+    id: string;
+    input: {
+        others?: InputBinding[];
+    } & Record<string, InputBinding>;
+    output: Record<string, string>;
     verb: Verb;
 }
+
+// Warning: (ae-missing-release-tag) "step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function step<T extends object>({ verb, args, id, input, output, }: StepSpecification<T>): Step<T>;
 
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepFunction<T> = (step: Step<T>, store: TableStore) => Promise<TableContainer>;
+export type StepFunction<T, Args> = (source: T, args: Args) => Promise<T> | T;
+
+// Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StepInput = CopyWithPartial<Step<any>, 'args' | 'id' | 'input' | 'output'>;
+
+// Warning: (ae-missing-release-tag) "StepNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class StepNode<T, Args> extends BaseNode<T, Args> {
+    constructor(_step: StepFunction<T, Args>);
+    // (undocumented)
+    protected doRecalculate(): Promise<void> | void;
+}
+
+// Warning: (ae-missing-release-tag) "stepNodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (id: string) => StepNode<T, Args>;
+
+// Warning: (ae-missing-release-tag) "StepSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepSpecification<T extends object = any> {
+    args?: T;
+    description?: string;
+    id?: string;
+    input?: string | ({
+        others?: InputBindingSpecification[];
+    } & Record<string, InputBindingSpecification>);
+    output?: string | Record<string, string>;
+    verb: Verb;
+}
+
+// Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface Store<T, K = string> {
+    clear(): void;
+    delete(id: K): void;
+    emitItemChange(id: string): void;
+    get(id: K): Maybe<T>;
+    list(filter?: (id: K) => boolean): K[];
+    observe(id: K): Observable<Maybe<T>>;
+    onChange(listener: Handler): Unsubscribe;
+    onItemChange(id: K, listener: HandlerOf<Maybe<T>>): Unsubscribe;
+    print(): void;
+    set(id: K, value: Observable<Maybe<T>>): void;
+    toArray(): Maybe<T>[];
+    toMap(): Map<K, T>;
+}
 
 // Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1017,29 +1401,18 @@ export interface TableMetadata {
 
 // Warning: (ae-missing-release-tag) "TableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export interface TableStore {
-    addChangeListener(listener: ChangeListenerFunction): () => void;
-    clear(): TableStore;
-    clone(): Promise<TableStore>;
-    delete(id: string): TableStore;
-    get(id: string): Promise<TableContainer>;
-    list(filter?: (id: string) => boolean): string[];
-    listen(id: string, listener: ListenerFunction): () => void;
-    print(): Promise<void>;
-    queue(id: string, resolver: ResolverFunction): TableStore;
-    set(container: TableContainer): TableStore;
-    // (undocumented)
-    table(id: string): Promise<ColumnTable>;
-    toArray(): Promise<TableContainer[]>;
-    toMap(): Promise<Map<string, TableContainer>>;
-    unlisten(id: string): void;
-}
+// @public (undocumented)
+export type TableStore = Store<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "types" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function types(table: ColumnTable, columns?: string[]): Record<string, DataType>;
+
+// Warning: (ae-missing-release-tag) "unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const unfold: (id: string) => StepNode<TableContainer<unknown>, UnfoldArgs>;
 
 // Warning: (ae-missing-release-tag) "UnfoldArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1056,6 +1429,26 @@ export interface UnfoldArgs {
 // @public (undocumented)
 export type UnfoldStep = Step<UnfoldArgs>;
 
+// Warning: (ae-missing-release-tag) "ungroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const ungroup: (id: string) => StepNode<TableContainer<unknown>, void>;
+
+// Warning: (ae-missing-release-tag) "union" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const union: (id: string) => SetOperationNode<unknown>;
+
+// Warning: (ae-missing-release-tag) "unorder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const unorder: (id: string) => StepNode<TableContainer<unknown>, void>;
+
+// Warning: (ae-missing-release-tag) "unroll" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const unroll: (id: string) => StepNode<TableContainer<unknown>, InputColumnListArgs>;
+
 // Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1065,6 +1458,11 @@ export type UnrollArgs = InputColumnListArgs;
 //
 // @public (undocumented)
 export type UnrollStep = Step<UnrollArgs>;
+
+// Warning: (ae-missing-release-tag) "Unsubscribe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Unsubscribe = Handler;
 
 // Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1083,8 +1481,6 @@ export enum Verb {
     Binarize = "binarize",
     // (undocumented)
     Boolean = "boolean",
-    // (undocumented)
-    Chain = "chain",
     // (undocumented)
     Concat = "concat",
     // (undocumented)
@@ -1153,6 +1549,12 @@ export enum Verb {
 //
 // @public
 export function verbs(filter?: (verb: Verb) => boolean): Verb[];
+
+// Warning: (ae-missing-release-tag) "window" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+const window_2: (id: string) => StepNode<TableContainer<unknown>, WindowArgs>;
+export { window_2 as window }
 
 // Warning: (ae-missing-release-tag) "WindowArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -1,11 +1,13 @@
 {
+	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Dropdown",
 	"description": "Aggregates daily data to monthly averages to demonstrate automatic Dropdowns.",
 	"steps": [
 		{
+			"id": "n1",
 			"verb": "derive",
-			"input": "data/stocks.csv",
-			"output": "output-table-0",
+			"inputs": { "source": { "node": "data/stocks.csv" } },
+			"outputs": { "target": "output-table-0" },
 			"args": {
 				"to": "Month Key",
 				"column1": "Symbol",
@@ -14,9 +16,10 @@
 			}
 		},
 		{
+			"id": "n2",
 			"verb": "aggregate",
-			"input": "output-table-0",
-			"output": "output-table-1",
+			"inputs": { "source": { "node": "output-table-0" } },
+			"outputs": { "target": "output-table-1" },
 			"args": {
 				"to": "Monthly Average",
 				"groupby": "Month Key",
@@ -25,9 +28,10 @@
 			}
 		},
 		{
+			"id": "n3",
 			"verb": "lookup",
-			"input": "output-table-1",
-			"output": "output-table-2",
+			"inputs": { "source": { "node": "output-table-1" } },
+			"outputs": { "target": "output-table-2" },
 			"args": {
 				"columns": ["Symbol"],
 				"other": "output-table-0",
@@ -35,9 +39,10 @@
 			}
 		},
 		{
+			"id": "n4",
 			"verb": "aggregate",
-			"input": "output-table-2",
-			"output": "output-table-3",
+			"inputs": { "source": { "node": "output-table-2" } },
+			"outputs": { "target": "output-table-3" },
 			"args": {
 				"to": "Monthly List",
 				"groupby": "Symbol",

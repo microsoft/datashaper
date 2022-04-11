@@ -14,8 +14,12 @@ export function useCellDimensions(
 	return useMemo(
 		() => ({
 			width: column?.currentWidth || 0,
-			height: column?.data?.compact && considerCompactMode ? 15 : 20,
+			height:
+				column?.data?.compact && considerCompactMode ? COMPACT_HEIGHT : HEIGHT,
 		}),
 		[column, considerCompactMode],
 	)
 }
+
+const COMPACT_HEIGHT = 15
+const HEIGHT = 20
