@@ -21,20 +21,26 @@ const CATEGORIES_PATH = path.join(FIXTURES_PATH, 'cases')
 /**
  * Create top-level describes for each test category (top-level folders)
  */
-fs.readdirSync(CATEGORIES_PATH).forEach(category =>
-	describe(category, () => {
-		const categoryPath = path.join(CATEGORIES_PATH, category)
-		/**
-		 * Create a test case for each nested folder
-		 */
-		fs.readdirSync(categoryPath).forEach(caseName =>
-			defineTestCase(category, caseName),
-		)
-	}),
-)
+doDescribe(CATEGORIES_PATH)
 
-function defineTestCase(category: string, test: string) {
-	const casePath = path.join(CATEGORIES_PATH, category, test)
+function doDescribe(targetPath: string) {
+	const entries = fs.readdirSync(targetPath)
+	for (const entry of entries) {
+		describe(entry, () => {
+			const entryPath = path.join(targetPath, entry)
+			if (fs.existsSync(path.join(entryPath, 'workflow.json'))) {
+				// If a workflow file exists, define a test case for it
+				defineTestCase(targetPath, entry)
+			} else {
+				// Otherwise; keep describing down until we find test cases
+				doDescribe(entryPath)
+			}
+		})
+	}
+}
+
+function defineTestCase(parentPath: string, test: string) {
+	const casePath = path.join(parentPath, test)
 	const testName = test.split('_').join(' ')
 	const expectedOutputTables = fs
 		.readdirSync(casePath)
