@@ -1,0 +1,13 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "orderby",
+			"input": "table7",
+			"args": {
+				"orders": [{ "column": "quantity", "direction": "asc" }]
+			},
+			"output": "expected"
+		}
+	]
+}
