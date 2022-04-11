@@ -132,6 +132,8 @@ function compareValue(expected: any, actual: any): void {
 		expect('' + actual).toEqual('' + expected)
 	} else if (expected == null && actual == undefined) {
 		// don't sweat null vs undefined
+	} else if (expected === false && actual == null) {
+		// don't sweat nullish values for false
 	} else if (expected.getTime != null) {
 		const actualDate = new Date(actual)
 		expect(expected.getTime()).toEqual(actualDate.getTime())

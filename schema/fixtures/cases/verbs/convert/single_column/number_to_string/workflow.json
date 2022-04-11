@@ -1,0 +1,14 @@
+{
+	"$schema": "../../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "convert",
+			"input": "table12",
+			"output": "expected",
+			"args": {
+				"columns": ["totalSale"],
+				"type": "string"
+			}
+		}
+	]
+}
