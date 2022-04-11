@@ -1,5 +1,4 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
-
 import arquero from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import fs from 'fs'
