@@ -130,7 +130,14 @@ function compareValue(expected: any, actual: any): void {
 	) {
 		// string-cast values to account for mixed-type column data (e.g. fold)
 		expect('' + actual).toEqual('' + expected)
-	} else if (expected == null && actual == undefined) {
+	} else if (typeof expected === 'string' && Array.isArray(actual)) {
+		// Handle array output in actual table
+		const parsedArray = expected.split(',')
+		expect(parsedArray).toHaveLength(actual.length)
+		for (let i = 0; i < parsedArray.length; ++i) {
+			compareValue(parsedArray[i], actual[i])
+		}
+	} else if (expected === null && actual === undefined) {
 		// don't sweat null vs undefined
 	} else if (expected === false && actual == null) {
 		// don't sweat nullish values for false
