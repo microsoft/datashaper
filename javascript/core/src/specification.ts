@@ -36,11 +36,22 @@ import type {
 } from './verbs/index.js'
 
 /**
- * The root type used for JSON schema specification
+ * The root data-wrangling specification. (Used for generating JSON Schema)
  */
 export interface Specification {
+	/**
+	 * The name of the specification
+	 */
 	name?: string
+
+	/**
+	 * A user-friendly description of the specification
+	 */
 	description?: string
+
+	/**
+	 * The workflow steps
+	 */
 	steps?: StepSpecification[]
 }
 
@@ -80,8 +91,8 @@ export type StepSpecification = StepCommon &
 		| ({ verb: Verb.Spread; args?: SpreadArgs } & BasicIO)
 		| ({ verb: Verb.Unfold; args?: UnfoldArgs } & BasicIO)
 		| ({ verb: Verb.Union } & VariadicIO)
-		| { verb: Verb.Unorder; input: BasicInput; output: BasicOutput }
-		| { verb: Verb.Ungroup; input: BasicInput; output: BasicOutput }
+		| ({ verb: Verb.Unorder } & BasicIO)
+		| ({ verb: Verb.Ungroup } & BasicIO)
 		| ({ verb: Verb.Unroll; args?: UnrollArgs } & BasicIO)
 		| ({ verb: Verb.Window; args?: WindowArgs } & BasicIO)
 	)
@@ -102,22 +113,84 @@ export interface StepCommon {
 }
 
 /**
- * Node Input Binding
+ * Step input specifications. If this is a string, we'll bind to the default output
+ * of the given node ID. If no node has that ID, we'll bind against the table-store's
+ * named table given the string.
+ *
+ * If this is an input binding, it's an explicit binding to another step in the pipeline.
  */
-export type InputBinding = string | InputNodeBinding
-export type InputNodeBinding = { node: string; output?: string }
+export type InputSpecification = string | InputBinding
 
 /**
- * Standard I/O Patterns
+ * An explicit step input binding
  */
-export type BasicInput = string | { source: InputBinding }
-export type BasicOutput = string | { target: string }
-export type BasicIO = { input: BasicInput; output: BasicOutput }
+export interface InputBinding {
+	/**
+	 * The id of the node to bind to
+	 */
+	node: string
 
-export type DualInput = { source: InputBinding; other: InputBinding }
-export type DualInputIO = { input: DualInput; output: BasicOutput }
+	/**
+	 * The named output of the node to bind with. If not defined, this will
+	 * be the default output "target"
+	 */
+	output?: string
+}
 
-export type VariadicInput =
-	| string
-	| { source: InputBinding; others?: InputBinding[] }
-export type VariadicIO = { input: VariadicInput; output: BasicOutput }
+/**
+ * Single-input, single-output step I/O
+ */
+export interface BasicIO {
+	/**
+	 * Standard step input; single source with default name "source"
+	 */
+	input: string | { source: InputSpecification }
+
+	/**
+	 * Standard step output; single output with default name "target"
+	 */
+	output: string | { target: string }
+}
+
+/**
+ * Dual-input, single-output step I/O
+ */
+export interface DualInputIO extends BasicIO {
+	/**
+	 * The inputs that must be bound; "source" & "other".
+	 */
+	input: {
+		/**
+		 * The primary input
+		 */
+		source: InputSpecification
+
+		/**
+		 * The secondary input
+		 */
+		other: InputSpecification
+	}
+}
+
+/**
+ * Multi-input, single output step I/O
+ */
+export interface VariadicIO extends BasicIO {
+	/**
+	 * The step inputs; a required "source" and optional, variadic "others". If this is a
+	 * string, it is used to bind the primary input.
+	 */
+	input:
+		| string
+		| {
+				/**
+				 * The primary input
+				 */
+				source: InputSpecification
+
+				/**
+				 * The variadic secondary inputs
+				 */
+				others?: InputSpecification[]
+		  }
+}

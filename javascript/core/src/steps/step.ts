@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid'
 
 import type {
 	InputBinding,
-	InputNodeBinding,
+	InputSpecification,
 	StepCommon,
 } from '../specification.js'
 import {
@@ -36,8 +36,8 @@ export interface StepInput<T extends object = any> extends StepCommon {
 	input?:
 		| string
 		| ({
-				others?: InputBinding[]
-		  } & Record<string, InputBinding>)
+				others?: InputSpecification[]
+		  } & Record<string, InputSpecification>)
 
 	/**
 	 * The observed outputs to record.
@@ -69,8 +69,8 @@ export interface Step<T extends object = any> {
 	 * Value = Socket Binding to other node
 	 */
 	input: {
-		others?: InputNodeBinding[]
-	} & Record<string, InputNodeBinding>
+		others?: InputBinding[]
+	} & Record<string, InputBinding>
 
 	/**
 	 * The observed outputs to record.
@@ -225,13 +225,13 @@ function fixInputs(inputs: StepInput['input']): Step['input'] {
 		Object.keys(result).forEach((k: string) => {
 			const binding = result[k]
 			if (typeof binding === 'string') {
-				result[k] = { node: binding as string } as InputNodeBinding
+				result[k] = { node: binding as string } as InputBinding
 			}
 		})
 
 		if (result.others != null) {
 			result.others = result.others.map(o =>
-				typeof o === 'string' ? { node: o } : (o as any as InputNodeBinding),
+				typeof o === 'string' ? { node: o } : (o as any as InputBinding),
 			)
 		}
 		return result
