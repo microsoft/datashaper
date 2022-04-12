@@ -31,9 +31,9 @@ import type {
 	SpreadArgs,
 	UnfoldArgs,
 	UnrollArgs,
+	Verb,
 	WindowArgs,
-} from '../verbs/index.js'
-import type { Verb } from '../verbs/index.js'
+} from './verbs/index.js'
 
 /**
  * The root type used for JSON schema specification

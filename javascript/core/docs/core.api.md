@@ -1353,9 +1353,8 @@ export type StepFunction<T, Args> = (source: T, args: Args) => Promise<T> | T;
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepInput<T extends object = any> {
+export interface StepInput<T extends object = any> extends StepCommon {
     args?: T;
-    id?: string;
     input?: string | ({
         others?: InputBinding[];
     } & Record<string, InputBinding>);

@@ -5,6 +5,7 @@
 export * from './engine/index.js'
 export * from './graph/index.js'
 export * from './primitives.js'
+export * from './specification.js'
 export * from './steps/index.js'
 export * from './store/index.js'
 export * from './tables/index.js'
