@@ -82,10 +82,18 @@ class Step:
     args: Dict[str, Any] = field(default_factory=dict)
 
 
+class JoinStrategy(Enum):
+    Inner = "inner"
+    LeftOuter = "join_left"
+    RightOuter = "join_right"
+    FullOuter = "join_full"
+
+
 @dataclass
 class JoinArgs:
     other: str
     on: List[str] = field(default_factory=list)
+    strategy: JoinStrategy = JoinStrategy.Inner
 
 
 @dataclass
@@ -140,32 +148,57 @@ class FilterCompareType(Enum):
 
 
 class NumericComparisonOperator(Enum):
-    Eq = "="
-    NotEq = "!="
-    Lt = "<"
-    Lte = "<="
-    Gt = ">"
-    Gte = ">="
-    NotEmpty = "is not empty"
-    Empty = "is empty"
+    Equals = "="
+    NotEqual = "!="
+    LessThan = "<"
+    LessThanOrEqual = "<="
+    GreaterThan = ">"
+    GreaterThanOrEqual = ">="
+    IsEmpty = "is empty"
+    IsNotEmpty = "is not empty"
 
 
 class StringComparisonOperator(Enum):
-    Equal = "equals"
-    NotEqual = "is not equals"
+    Equals = "equals"
+    NotEqual = "is not equal"
     Contains = "contains"
     StartsWith = "starts with"
     EndsWith = "ends with"
-    NotEmpty = "is not empty"
-    Empty = "is empty"
+    IsEmpty = "is empty"
+    IsNotEmpty = "is not empty"
+    RegularExpression = "regex"
+
+
+class BooleanComparisonOperator(Enum):
+    Equals = "equals"
+    NotEqual = "is not equal"
+    IsTrue = "is true"
+    IsFalse = "is false"
+    IsEmpty = "is empty"
+    IsNotEmpty = "is not empty"
 
 
 @dataclass
-class FilterArgs(OutputColumnArgs):
-    column: str
+class Criterion:
+    value: Any
     type: FilterCompareType
-    operator: Union[NumericComparisonOperator, StringComparisonOperator]
-    value: Optional[Union[str, int, float, bool]] = None
+    operator: Union[
+        NumericComparisonOperator, StringComparisonOperator, BooleanComparisonOperator
+    ]
+
+
+class BooleanLogicalOperator(Enum):
+    OR = "or"
+    AND = "and"
+    NOR = "nor"
+    NAND = "nand"
+    XOR = "xor"
+
+
+@dataclass
+class FilterArgs(InputColumnArgs):
+    criteria: List[Criterion]
+    logical: Optional[BooleanLogicalOperator] = BooleanLogicalOperator.OR
 
 
 class SetOp(Enum):
@@ -191,14 +224,6 @@ class MathOperator(Enum):
 class SortDirection(Enum):
     Ascending = "asc"
     Descending = "desc"
-
-
-class BooleanLogicalOperator(Enum):
-    OR = "or"
-    AND = "and"
-    NOR = "nor"
-    NAND = "nand"
-    XOR = "xor"
 
 
 class ParseType(Enum):

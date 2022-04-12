@@ -4,6 +4,7 @@
 #
 
 from typing import Optional
+from urllib.parse import urlparse
 
 import pandas as pd
 
@@ -17,6 +18,12 @@ from data_wrangling_components.types import Step
 class FetchArgs:
     url: str
     delimiter: Optional[str] = ","
+
+
+__reader_mapping = {
+    "csv": lambda args: pd.read_csv(args.url, sep=args.delimiter),
+    "json": lambda args: pd.read_json(args.url),
+}
 
 
 def fetch(step: Step, store: TableStore):
@@ -33,5 +40,6 @@ def fetch(step: Step, store: TableStore):
     :return: new table with the result of the operation
     """
     args = FetchArgs(url=step.args["url"], delimiter=step.args.get("delimiter", ","))
-    output = pd.read_csv(args.url, sep=args.delimiter)
+    file_type = urlparse(args.url).path.split(".")[-1]
+    output = __reader_mapping[file_type](args)
     return TableContainer(id=step.output, name=step.output, table=output)

@@ -3,15 +3,43 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+import logging
+
+from msilib.schema import Error
+from typing import Union
+
 from data_wrangling_components.engine.pandas.filter_df import filter_df
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import (
+    BooleanComparisonOperator,
+    BooleanLogicalOperator,
+    Criterion,
     FilterArgs,
     FilterCompareType,
     NumericComparisonOperator,
     Step,
     StringComparisonOperator,
 )
+
+
+def __get_operator(
+    operator: str,
+) -> Union[
+    StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
+]:
+    try:
+        return StringComparisonOperator(operator)
+    except Exception:
+        logging.info(f"[{operator}] is not a string comparison operator")
+    try:
+        return NumericComparisonOperator(operator)
+    except Exception:
+        logging.info(f"[{operator}] is not a numeric comparison operator")
+    try:
+        return BooleanComparisonOperator(operator)
+    except Exception:
+        logging.info(f"[{operator}] is not a boolean comparison operator")
+    raise Exception(f"[{operator}] is not a recognized comparison operator")
 
 
 def filter(step: Step, store: TableStore):
@@ -27,26 +55,18 @@ def filter(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    try:
-        args = FilterArgs(
-            to=step.args.get("to", ""),
-            column=step.args["column"],
-            type=FilterCompareType(step.args["type"]),
-            operator=NumericComparisonOperator(
-                step.args["operator"],
-            ),
-            value=step.args.get("value", None),
-        )
-    except Exception:
-        args = FilterArgs(
-            to=step.args.get("to", ""),
-            column=step.args["column"],
-            type=FilterCompareType(step.args["type"]),
-            operator=StringComparisonOperator(
-                step.args["operator"],
-            ),
-            value=step.args.get("value", None),
-        )
+    args = FilterArgs(
+        column=step.args["column"],
+        criteria=[
+            Criterion(
+                value=step.args.get("value", None),
+                type=FilterCompareType(arg["type"]),
+                operator=__get_operator(arg["operator"]),
+            )
+            for arg in step.args["criteria"]
+        ],
+        logical=BooleanLogicalOperator(step.args.get("logical", "or")),
+    )
     input_table = store.table(step.input)
 
     output = filter_df(input_table, args).reset_index(drop=True)
