@@ -1,0 +1,39 @@
+{
+	"$schema": "../../../../workflow.json",
+	"steps": [
+		{
+			"id": "t1-filled",
+			"verb": "fill",
+			"input": "table1",
+			"args": {
+				"to": "newColumn",
+				"value": "derp"
+			}
+		},
+		{
+			"id": "t2-filled",
+			"verb": "fill",
+			"input": "table2",
+			"args": {
+				"to": "newColumn",
+				"value": "herp"
+			}
+		},
+		{
+			"verb": "union",
+			"input": {
+				"source": "t1-filled",
+				"others": ["t2-filled"]
+			},
+			"output": "t1t2-filled"
+		},
+		{
+			"verb": "select",
+			"input": "t1-filled",
+			"args": {
+				"columns": ["ID"]
+			},
+			"output": "t1-ids"
+		}
+	]
+}

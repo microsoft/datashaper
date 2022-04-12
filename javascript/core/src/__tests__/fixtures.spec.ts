@@ -8,7 +8,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { createGraph } from '../engine/graph.js'
-import { readSteps } from '../steps/readSteps.js'
+import { readSpec } from '../steps/index.js'
 import { createTableStore } from '../store/createTableStore.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
@@ -73,7 +73,7 @@ function defineTestCase(parentPath: string, test: string) {
 		if (!fs.existsSync(schemaLinkPath)) {
 			throw new Error(`invalid $schema link: ${workflowPath}`)
 		}
-		createGraph(readSteps(workflowJson.steps), tableStore)
+		createGraph(readSpec(workflowJson), tableStore)
 
 		// check the output tables
 		await Promise.all(
