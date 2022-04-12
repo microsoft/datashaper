@@ -5,6 +5,7 @@
 
 from dataclasses import dataclass
 
+from data_wrangling_components.engine.pandas.filter_df import _boolean_function_map
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import (
     BooleanLogicalOperator,
@@ -12,17 +13,6 @@ from data_wrangling_components.types import (
     OutputColumnArgs,
     Step,
 )
-
-
-_boolean_function_map = {
-    BooleanLogicalOperator.OR: lambda df: df.any(axis="columns"),
-    BooleanLogicalOperator.AND: lambda df: df.all(axis="columns"),
-    BooleanLogicalOperator.NOR: lambda df: ~df.any(axis="columns"),
-    BooleanLogicalOperator.NAND: lambda df: ~df.all(axis="columns"),
-    BooleanLogicalOperator.XOR: lambda df: df.sum(axis="columns").apply(
-        lambda x: x == 1
-    ),
-}
 
 
 @dataclass
