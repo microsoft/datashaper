@@ -33,6 +33,7 @@ class Verb(Enum):
     Lookup = "lookup"
     Merge = "merge"
     MultiBinarize = "multi-binarize"
+    OneHot = "onehot"
     Orderby = "orderby"
     Pivot = "pivot"
     Recode = "recode"
@@ -46,6 +47,7 @@ class Verb(Enum):
     Union = "union"
     Unorder = "unorder"
     Unroll = "unroll"
+    Window = "window"
 
 
 compound_verbs = {Verb.Chain, Verb.FilterAggregateLookup, Verb.MultiBinarize}

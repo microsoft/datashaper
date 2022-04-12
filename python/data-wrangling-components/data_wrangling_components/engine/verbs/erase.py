@@ -16,7 +16,7 @@ class EraseArgs(InputColumnArgs):
     value: Union[str, int, float]
 
 
-def convert(step: Step, store: TableStore):
+def erase(step: Step, store: TableStore):
     args = EraseArgs(
         column=step.args["column"],
         value=step.args["value"],
