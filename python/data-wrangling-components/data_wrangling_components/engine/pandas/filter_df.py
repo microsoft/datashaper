@@ -81,6 +81,42 @@ def __regex(
     return df[column].str.contains(str(target), regex=True)
 
 
+def __gt(
+    df: pd.DataFrame,
+    column: str,
+    target: Union[pd.Series, str, int, float, bool],
+    **kwargs,
+) -> pd.Series:
+    return df[column] > target
+
+
+def __gte(
+    df: pd.DataFrame,
+    column: str,
+    target: Union[pd.Series, str, int, float, bool],
+    **kwargs,
+) -> pd.Series:
+    return df[column] >= target
+
+
+def __lt(
+    df: pd.DataFrame,
+    column: str,
+    target: Union[pd.Series, str, int, float, bool],
+    **kwargs,
+) -> pd.Series:
+    return df[column] < target
+
+
+def __lte(
+    df: pd.DataFrame,
+    column: str,
+    target: Union[pd.Series, str, int, float, bool],
+    **kwargs,
+) -> pd.Series:
+    return df[column] <= target
+
+
 _operator_map: Dict[
     Union[
         StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
@@ -98,6 +134,10 @@ _operator_map: Dict[
     NumericComparisonOperator.Equals: __equals,
     NumericComparisonOperator.IsEmpty: __is_null,
     NumericComparisonOperator.IsNotEmpty: __is_not_null,
+    NumericComparisonOperator.GreaterThan: __gt,
+    NumericComparisonOperator.GreaterThanOrEqual: __gte,
+    NumericComparisonOperator.LessThan: __lt,
+    NumericComparisonOperator.LessThanOrEqual: __lte,
     BooleanComparisonOperator.Equals: __equals,
     BooleanComparisonOperator.NotEqual: __not_equals,
     BooleanComparisonOperator.IsEmpty: __is_null,
@@ -127,4 +167,4 @@ def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame:
         filtered_df[filters]
     )
 
-    return df[(filtered_df["dwc_filter_result"] == True).index]
+    return df[df.index.isin(filtered_df[filtered_df["dwc_filter_result"]].index)]

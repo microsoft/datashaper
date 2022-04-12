@@ -4,13 +4,7 @@
 #
 
 from data_wrangling_components.engine.verbs.filter import filter
-from data_wrangling_components.types import (
-    FilterCompareType,
-    NumericComparisonOperator,
-    Step,
-    StringComparisonOperator,
-    Verb,
-)
+from data_wrangling_components.types import Step, Verb
 from tests.engine.test_store import get_test_store
 
 
@@ -21,9 +15,7 @@ def test_filter_numeric_gte():
         "output",
         args={
             "column": "count",
-            "operator": NumericComparisonOperator.Gte,
-            "type": FilterCompareType.Value,
-            "value": 100,
+            "criteria": [{"value": 100, "operator": ">=", "type": "value"}],
         },
     )
 
@@ -46,9 +38,7 @@ def test_filter_numeric_gt():
         "output",
         args={
             "column": "count",
-            "operator": NumericComparisonOperator.Gt,
-            "type": FilterCompareType.Value,
-            "value": 100,
+            "criteria": [{"value": 100, "operator": ">", "type": "value"}],
         },
     )
 
@@ -69,11 +59,8 @@ def test_filter_numeric_lt():
         "table8",
         "output",
         args={
-            "to": "",
             "column": "count",
-            "operator": NumericComparisonOperator.Lt,
-            "type": FilterCompareType.Value,
-            "value": 100,
+            "criteria": [{"value": 100, "operator": "<", "type": "value"}],
         },
     )
 
@@ -94,11 +81,8 @@ def test_filter_string_equal():
         "table8",
         "output",
         args={
-            "to": "",
             "column": "name",
-            "operator": StringComparisonOperator.Equal,
-            "type": FilterCompareType.Value,
-            "value": "D",
+            "criteria": [{"value": "D", "operator": "equals", "type": "value"}],
         },
     )
 
@@ -118,10 +102,8 @@ def test_filter_string_empty():
         "table5",
         "output",
         args={
-            "to": "",
             "column": "item",
-            "operator": StringComparisonOperator.Empty,
-            "type": FilterCompareType.Value,
+            "criteria": [{"operator": "is empty", "type": "value"}],
         },
     )
 
@@ -142,11 +124,8 @@ def test_filter_string_contains():
         "table3",
         "output",
         args={
-            "to": "",
             "column": "item",
-            "operator": StringComparisonOperator.Contains,
-            "type": FilterCompareType.Value,
-            "value": "be",
+            "criteria": [{"value": "be", "operator": "contains", "type": "value"}],
         },
     )
 

@@ -58,7 +58,7 @@ def filter(step: Step, store: TableStore):
         column=step.args["column"],
         criteria=[
             Criterion(
-                value=step.args.get("value", None),
+                value=arg.get("value", None),
                 type=FilterCompareType(arg["type"]),
                 operator=_get_operator(arg["operator"]),
             )
