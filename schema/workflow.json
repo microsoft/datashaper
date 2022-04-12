@@ -197,6 +197,31 @@
             },
             "type": "object"
         },
+        "DualInput": {
+            "properties": {
+                "other": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/InputNodeBinding"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "source": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/InputNodeBinding"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
         "EraseArgs": {
             "properties": {
                 "columns": {
@@ -351,6 +376,17 @@
                 "columns": {
                     "$ref": "#/definitions/Record<string,string>",
                     "description": "Map of old column to new column names"
+                }
+            },
+            "type": "object"
+        },
+        "InputNodeBinding": {
+            "properties": {
+                "node": {
+                    "type": "string"
+                },
+                "output": {
+                    "type": "string"
                 }
             },
             "type": "object"
@@ -530,9 +566,6 @@
         "Record<any,any>": {
             "type": "object"
         },
-        "Record<string,InputBindingSpecification>": {
-            "type": "object"
-        },
         "Record<string,string>": {
             "type": "object"
         },
@@ -589,47 +622,6 @@
                 "id": {
                     "description": "A unique identifier for this step",
                     "type": "string"
-                },
-                "input": {
-                    "anyOf": [
-                        {
-                            "allOf": [
-                                {
-                                    "properties": {
-                                        "others": {
-                                            "items": {
-                                                "anyOf": [
-                                                    {
-                                                        "properties": {
-                                                            "node": {
-                                                                "type": "string"
-                                                            },
-                                                            "output": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    {
-                                                        "type": "string"
-                                                    }
-                                                ]
-                                            },
-                                            "type": "array"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                {
-                                    "$ref": "#/definitions/Record<string,InputBindingSpecification>"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The bound inputs\nKey = Input Socket Name\nValue = Socket Binding to other node"
                 },
                 "output": {
                     "anyOf": [
@@ -707,6 +699,28 @@
                                     "args": {
                                         "$ref": "#/definitions/AggregateArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "aggregate"
@@ -727,6 +741,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/BinArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -749,6 +785,28 @@
                                     "args": {
                                         "$ref": "#/definitions/BinarizeArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "binarize"
@@ -770,6 +828,28 @@
                                     "args": {
                                         "$ref": "#/definitions/BooleanArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "boolean"
@@ -788,6 +868,41 @@
                             },
                             {
                                 "properties": {
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "others": {
+                                                        "items": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "$ref": "#/definitions/InputNodeBinding"
+                                                                },
+                                                                {
+                                                                    "type": "string"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "concat"
@@ -808,6 +923,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/ConvertArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -830,6 +967,28 @@
                                     "args": {
                                         "$ref": "#/definitions/Partial<InputColumnListArgs>"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "dedupe"
@@ -848,6 +1007,41 @@
                             },
                             {
                                 "properties": {
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "others": {
+                                                        "items": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "$ref": "#/definitions/InputNodeBinding"
+                                                                },
+                                                                {
+                                                                    "type": "string"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "difference"
@@ -868,6 +1062,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/DeriveArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -890,6 +1106,28 @@
                                     "args": {
                                         "$ref": "#/definitions/EraseArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "erase"
@@ -910,6 +1148,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/FetchArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -932,6 +1192,28 @@
                                     "args": {
                                         "$ref": "#/definitions/FillArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "fill"
@@ -952,6 +1234,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/FilterArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -974,6 +1278,28 @@
                                     "args": {
                                         "$ref": "#/definitions/FoldArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "fold"
@@ -994,6 +1320,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/InputColumnListArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -1016,6 +1364,28 @@
                                     "args": {
                                         "$ref": "#/definitions/ImputeArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "impute"
@@ -1034,6 +1404,41 @@
                             },
                             {
                                 "properties": {
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "others": {
+                                                        "items": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "$ref": "#/definitions/InputNodeBinding"
+                                                                },
+                                                                {
+                                                                    "type": "string"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "intersect"
@@ -1054,6 +1459,9 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/JoinArgs"
+                                    },
+                                    "input": {
+                                        "$ref": "#/definitions/DualInput"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1076,6 +1484,9 @@
                                     "args": {
                                         "$ref": "#/definitions/LookupArgs"
                                     },
+                                    "input": {
+                                        "$ref": "#/definitions/DualInput"
+                                    },
                                     "verb": {
                                         "enum": [
                                             "lookup"
@@ -1096,6 +1507,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/MergeArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -1118,6 +1551,28 @@
                                     "args": {
                                         "$ref": "#/definitions/OneHotArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "onehot"
@@ -1138,6 +1593,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/OrderbyArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -1160,6 +1637,28 @@
                                     "args": {
                                         "$ref": "#/definitions/PivotArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "pivot"
@@ -1180,6 +1679,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/RecodeArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -1202,6 +1723,28 @@
                                     "args": {
                                         "$ref": "#/definitions/InputColumnRecordArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "rename"
@@ -1222,6 +1765,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/RollupArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -1244,6 +1809,28 @@
                                     "args": {
                                         "$ref": "#/definitions/SampleArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "sample"
@@ -1264,6 +1851,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/InputColumnListArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [
@@ -1286,6 +1895,28 @@
                                     "args": {
                                         "$ref": "#/definitions/SpreadArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "spread"
@@ -1307,6 +1938,28 @@
                                     "args": {
                                         "$ref": "#/definitions/UnfoldArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "unfold"
@@ -1325,6 +1978,41 @@
                             },
                             {
                                 "properties": {
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "others": {
+                                                        "items": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "$ref": "#/definitions/InputNodeBinding"
+                                                                },
+                                                                {
+                                                                    "type": "string"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "union"
@@ -1343,6 +2031,28 @@
                             },
                             {
                                 "properties": {
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "unorder"
@@ -1361,6 +2071,28 @@
                             },
                             {
                                 "properties": {
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "ungroup"
@@ -1382,6 +2114,28 @@
                                     "args": {
                                         "$ref": "#/definitions/InputColumnListArgs"
                                     },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    },
                                     "verb": {
                                         "enum": [
                                             "unroll"
@@ -1402,6 +2156,28 @@
                                 "properties": {
                                     "args": {
                                         "$ref": "#/definitions/WindowArgs"
+                                    },
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     },
                                     "verb": {
                                         "enum": [

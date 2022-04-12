@@ -35,17 +35,19 @@ import type {
 } from '../verbs/index.js'
 import type { Verb } from '../verbs/index.js'
 
-export type InputBinding = { node: string; output?: string }
-
-export type InputBindingSpecification = string | InputBinding
-
-export type StepInputs =
+export interface InputNodeBinding {
+	node: string
+	output?: string
+}
+export type InputBinding = string | InputNodeBinding
+export type BasicInput = string | { source: InputBinding }
+export interface DualInput {
+	source: InputBinding
+	other: InputBinding
+}
+export type VariadicInput =
 	| string
-	| ({
-			others?: InputBindingSpecification[]
-	  } & Record<string, InputBindingSpecification>)
-
-export type StepOutputs = string | Record<string, string>
+	| { source: InputBinding; others?: InputBinding[] }
 
 export interface StepCommon {
 	/**
@@ -63,52 +65,53 @@ export interface StepCommon {
 	 * Key = Input Socket Name
 	 * Value = Socket Binding to other node
 	 */
-	input?: StepInputs
+	// input?: StepInputs
 
 	/**
 	 * The observed outputs to record.
 	 * Key = output socket name
 	 * Value = store table name
 	 */
-	output?: StepOutputs
+	output?: string | Record<string, string>
 }
+
 export type StepSpecification = StepCommon &
 	(
-		| { verb: Verb.Aggregate; args?: AggregateArgs }
-		| { verb: Verb.Bin; args?: BinArgs }
-		| { verb: Verb.Binarize; args?: BinarizeArgs }
-		| { verb: Verb.Boolean; args?: BooleanArgs }
-		| { verb: Verb.Concat }
-		| { verb: Verb.Convert; args?: ConvertArgs }
-		| { verb: Verb.Dedupe; args?: DedupeArgs }
-		| { verb: Verb.Difference }
-		| { verb: Verb.Derive; args?: DeriveArgs }
-		| { verb: Verb.Erase; args?: EraseArgs }
-		| { verb: Verb.Fetch; args?: FetchArgs }
-		| { verb: Verb.Fill; args?: FillArgs }
-		| { verb: Verb.Filter; args?: FilterArgs }
-		| { verb: Verb.Fold; args?: FoldArgs }
-		| { verb: Verb.Groupby; args?: GroupbyArgs }
-		| { verb: Verb.Impute; args?: ImputeArgs }
-		| { verb: Verb.Intersect }
-		| { verb: Verb.Join; args?: JoinArgs }
-		| { verb: Verb.Lookup; args?: LookupArgs }
-		| { verb: Verb.Merge; args?: MergeArgs }
-		| { verb: Verb.OneHot; args?: OneHotArgs }
-		| { verb: Verb.Orderby; args?: OrderbyArgs }
-		| { verb: Verb.Pivot; args?: PivotArgs }
-		| { verb: Verb.Recode; args?: RecodeArgs }
-		| { verb: Verb.Rename; args?: RenameArgs }
-		| { verb: Verb.Rollup; args?: RollupArgs }
-		| { verb: Verb.Sample; args?: SampleArgs }
-		| { verb: Verb.Select; args?: SelectArgs }
-		| { verb: Verb.Spread; args?: SpreadArgs }
-		| { verb: Verb.Unfold; args?: UnfoldArgs }
-		| { verb: Verb.Union }
-		| { verb: Verb.Unorder }
-		| { verb: Verb.Ungroup }
-		| { verb: Verb.Unroll; args?: UnrollArgs }
-		| { verb: Verb.Window; args?: WindowArgs }
+		| { verb: Verb.Aggregate; args?: AggregateArgs; input: BasicInput }
+		| { verb: Verb.Bin; args?: BinArgs; input: BasicInput }
+		| { verb: Verb.Binarize; args?: BinarizeArgs; input: BasicInput }
+		| { verb: Verb.Boolean; args?: BooleanArgs; input: BasicInput }
+		| { verb: Verb.Concat; input: VariadicInput }
+		| { verb: Verb.Convert; args?: ConvertArgs; input: BasicInput }
+		| { verb: Verb.Dedupe; args?: DedupeArgs; input: BasicInput }
+		| { verb: Verb.Difference; input: VariadicInput }
+		| { verb: Verb.Derive; args?: DeriveArgs; input: BasicInput }
+		| { verb: Verb.Erase; args?: EraseArgs; input: BasicInput }
+		| { verb: Verb.Fetch; args?: FetchArgs; input: BasicInput }
+		| { verb: Verb.Fill; args?: FillArgs; input: BasicInput }
+		| { verb: Verb.Filter; args?: FilterArgs; input: BasicInput }
+		| { verb: Verb.Fold; args?: FoldArgs; input: BasicInput }
+		| { verb: Verb.Groupby; args?: GroupbyArgs; input: BasicInput }
+		| { verb: Verb.Impute; args?: ImputeArgs; input: BasicInput }
+		| { verb: Verb.Intersect; input: VariadicInput }
+		| { verb: Verb.Join; args?: JoinArgs; input: DualInput }
+		| { verb: Verb.Lookup; args?: LookupArgs; input: DualInput }
+		| { verb: Verb.Merge; args?: MergeArgs; input: BasicInput }
+		| { verb: Verb.OneHot; args?: OneHotArgs; input: BasicInput }
+		| { verb: Verb.Orderby; args?: OrderbyArgs; input: BasicInput }
+		| { verb: Verb.Pivot; args?: PivotArgs; input: BasicInput }
+		| { verb: Verb.Recode; args?: RecodeArgs; input: BasicInput }
+		| { verb: Verb.Rename; args?: RenameArgs; input: BasicInput }
+		| { verb: Verb.Rollup; args?: RollupArgs; input: BasicInput }
+		| { verb: Verb.Sample; args?: SampleArgs; input: BasicInput }
+		| { verb: Verb.Select; args?: SelectArgs; input: BasicInput }
+		| { verb: Verb.Spread; args?: SpreadArgs; input: BasicInput }
+		| { verb: Verb.Unfold; args?: UnfoldArgs; input: BasicInput }
+		| { verb: Verb.Union; input: VariadicInput }
+		| { verb: Verb.Unorder; input: BasicInput }
+		| { verb: Verb.Ungroup; input: BasicInput }
+		| { verb: Verb.Unroll; args?: UnrollArgs; input: BasicInput }
+		| { verb: Verb.Window; args?: WindowArgs; input: BasicInput }
 	)
 
 export interface Step<T extends object = any> {
@@ -134,7 +137,7 @@ export interface Step<T extends object = any> {
 	 */
 	input: {
 		others?: InputBinding[]
-	} & Record<string, InputBinding>
+	} & Record<string, InputNodeBinding>
 
 	/**
 	 * The observed outputs to record.

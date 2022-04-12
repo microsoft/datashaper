@@ -12,7 +12,11 @@ import {
 	JoinStrategy,
 	Verb,
 } from '../verbs/index.js'
-import type { InputBinding, Step, StepSpecification } from './specification.js'
+import type {
+	InputNodeBinding,
+	Step,
+	StepSpecification,
+} from './specification.js'
 
 export type StepInput = CopyWithPartial<
 	Step<any>,
@@ -164,13 +168,13 @@ function fixInputs(inputs: StepSpecification['input']): Step['input'] {
 		Object.keys(result).forEach((k: string) => {
 			const binding = result[k]
 			if (typeof binding === 'string') {
-				result[k] = { node: binding } as InputBinding
+				result[k] = { node: binding as string } as InputNodeBinding
 			}
 		})
 
 		if (result.others != null) {
 			result.others = result.others.map(o =>
-				typeof o === 'string' ? { node: o } : (o as InputBinding),
+				typeof o === 'string' ? { node: o } : (o as any as InputNodeBinding),
 			)
 		}
 		return result
