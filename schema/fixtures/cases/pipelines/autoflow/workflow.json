@@ -1,0 +1,28 @@
+{
+	"$schema": "../../../../workflow.json",
+	"input": "table1",
+	"output": "expected",
+	"steps": [
+		{
+			"id": "t1-filled",
+			"verb": "fill",
+			"args": {
+				"to": "newColumn",
+				"value": "derp"
+			}
+		},
+		{
+			"verb": "fill",
+			"args": {
+				"to": "newColumn2",
+				"value": "herp"
+			}
+		},
+		{
+			"verb": "select",
+			"args": {
+				"columns": ["ID", "newColumn", "newColumn2"]
+			}
+		}
+	]
+}
