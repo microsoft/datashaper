@@ -12,7 +12,7 @@ from data_wrangling_components.pipeline import DefaultPipeline
 from data_wrangling_components.table_store import DefaultTableStore, TableContainer
 
 
-FIXTURES_PATH = "../../schema/fixtures/cases/verbs"
+FIXTURES_PATH = "../../schema/fixtures/cases"
 TABLE_STORE_PATH = "../../schema/fixtures/inputs"
 
 
@@ -35,7 +35,7 @@ def read_table_store(root: str) -> DefaultTableStore:
 def get_verb_test_specs(root: str) -> List[str]:
     subfolders: List[str] = []
     for root, _, files in os.walk(root):
-        if "workflow.json" in files and "expected.csv" in files:
+        if "workflow.json" in files:
             subfolders.append(root)
     return subfolders
 
@@ -48,7 +48,10 @@ def test_verbs_schema_input(fixture_path: str):
             steps=json.load(workflow)["steps"], store=read_table_store(TABLE_STORE_PATH)
         )
 
-    result = pipeline.run()
-    expected = pd.read_csv(os.path.join(fixture_path, "expected.csv"))
-
-    assert_frame_equal(expected, result.table)
+    pipeline.run()
+    for expected in os.listdir(fixture_path):
+        if expected.endswith(".csv"):
+            assert_frame_equal(
+                pd.read_csv(os.path.join(fixture_path, expected)),
+                pipeline.get_dataset(expected.split(".")[0]),
+            )
