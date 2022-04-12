@@ -82,6 +82,28 @@ export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
     protected getVariadicInputValues(): Maybe<T>[];
 }
 
+// Warning: (ae-missing-release-tag) "BasicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type BasicInput = string | {
+    source: InputBinding;
+};
+
+// Warning: (ae-missing-release-tag) "BasicIO" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BasicIO = {
+    input: BasicInput;
+    output: BasicOutput;
+};
+
+// Warning: (ae-missing-release-tag) "BasicOutput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BasicOutput = string | {
+    target: string;
+};
+
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -401,9 +423,9 @@ export class DefaultGraph<T> implements Graph<T> {
 export class DefaultPipeline implements Pipeline {
     constructor(store: TableStore);
     // (undocumented)
-    add(step: StepSpecification): Step[];
+    add(step: StepInput): Step[];
     // (undocumented)
-    addAll(steps: StepSpecification[]): Step[];
+    addAll(steps: StepInput[]): Step[];
     // (undocumented)
     clear(): void;
     // (undocumented)
@@ -490,6 +512,22 @@ export function determineType(value: Value): DataType;
 //
 // @public (undocumented)
 export const difference: (id: string) => SetOperationNode<unknown>;
+
+// Warning: (ae-missing-release-tag) "DualInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type DualInput = {
+    source: InputBinding;
+    other: InputBinding;
+};
+
+// Warning: (ae-missing-release-tag) "DualInputIO" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type DualInputIO = {
+    input: DualInput;
+    output: BasicOutput;
+};
 
 // Warning: (ae-missing-release-tag) "erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -719,16 +757,8 @@ export type ImputeStep = Step<ImputeArgs>;
 
 // Warning: (ae-missing-release-tag) "InputBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export type InputBinding = {
-    node: string;
-    output?: string;
-};
-
-// Warning: (ae-missing-release-tag) "InputBindingSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type InputBindingSpecification = string | InputBinding;
+// @public
+export type InputBinding = string | InputNodeBinding;
 
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -760,6 +790,14 @@ export class InputNode<T, Config> extends BaseNode<T, Config> {
     // (undocumented)
     protected doRecalculate(): void | Promise<void>;
 }
+
+// Warning: (ae-missing-release-tag) "InputNodeBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type InputNodeBinding = {
+    node: string;
+    output?: string;
+};
 
 // Warning: (ae-missing-release-tag) "inputNodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1073,8 +1111,8 @@ export enum ParseType {
 //
 // @public
 export interface Pipeline {
-    add(step: StepSpecification): Step[];
-    addAll(steps: StepSpecification[]): Step[];
+    add(step: StepInput): Step[];
+    addAll(steps: StepInput[]): Step[];
     clear(): void;
     // (undocumented)
     readonly count: number;
@@ -1246,7 +1284,7 @@ export enum SortDirection {
 
 // Warning: (ae-missing-release-tag) "Specification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface Specification {
     // (undocumented)
     description?: string;
@@ -1288,8 +1326,8 @@ export interface Step<T extends object = any> {
     args: T;
     id: string;
     input: {
-        others?: InputBinding[];
-    } & Record<string, InputBinding>;
+        others?: InputNodeBinding[];
+    } & Record<string, InputNodeBinding>;
     output: Record<string, string>;
     verb: Verb;
 }
@@ -1297,16 +1335,14 @@ export interface Step<T extends object = any> {
 // Warning: (ae-missing-release-tag) "step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function step<T extends object>(spec: StepSpecification): Step<T>;
+export function step<T extends object>({ verb, args, id, input, output, }: StepInput<T>): Step<T>;
 
 // Warning: (ae-missing-release-tag) "StepCommon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface StepCommon {
     description?: string;
     id?: string;
-    input?: StepInputs;
-    output?: StepOutputs;
 }
 
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1317,14 +1353,15 @@ export type StepFunction<T, Args> = (source: T, args: Args) => Promise<T> | T;
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepInput = CopyWithPartial<Step<any>, 'args' | 'id' | 'input' | 'output'>;
-
-// Warning: (ae-missing-release-tag) "StepInputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type StepInputs = string | ({
-    others?: InputBindingSpecification[];
-} & Record<string, InputBindingSpecification>);
+export interface StepInput<T extends object = any> {
+    args?: T;
+    id?: string;
+    input?: string | ({
+        others?: InputBinding[];
+    } & Record<string, InputBinding>);
+    output: string | Record<string, string>;
+    verb: Verb;
+}
 
 // Warning: (ae-missing-release-tag) "StepNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1340,114 +1377,113 @@ export class StepNode<T, Args> extends BaseNode<T, Args> {
 // @public (undocumented)
 export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (id: string) => StepNode<T, Args>;
 
-// Warning: (ae-missing-release-tag) "StepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type StepOutputs = string | Record<string, string>;
-
 // Warning: (ae-missing-release-tag) "StepSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export type StepSpecification = StepCommon & ({
+// @public
+export type StepSpecification = StepCommon & (({
     verb: Verb.Aggregate;
     args?: AggregateArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Bin;
     args?: BinArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Binarize;
     args?: BinarizeArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Boolean;
     args?: BooleanArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Concat;
-} | {
+} & VariadicIO) | ({
     verb: Verb.Convert;
     args?: ConvertArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Dedupe;
     args?: DedupeArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Difference;
-} | {
+} & VariadicIO) | ({
     verb: Verb.Derive;
     args?: DeriveArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Erase;
     args?: EraseArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Fetch;
     args?: FetchArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Fill;
     args?: FillArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Filter;
     args?: FilterArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Fold;
     args?: FoldArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Groupby;
     args?: GroupbyArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Impute;
     args?: ImputeArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Intersect;
-} | {
+} & VariadicIO) | ({
     verb: Verb.Join;
     args?: JoinArgs;
-} | {
+} & DualInputIO) | ({
     verb: Verb.Lookup;
     args?: LookupArgs;
-} | {
+} & DualInputIO) | ({
     verb: Verb.Merge;
     args?: MergeArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.OneHot;
     args?: OneHotArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Orderby;
     args?: OrderbyArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Pivot;
     args?: PivotArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Recode;
     args?: RecodeArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Rename;
     args?: RenameArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Rollup;
     args?: RollupArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Sample;
     args?: SampleArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Select;
     args?: SelectArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Spread;
     args?: SpreadArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Unfold;
     args?: UnfoldArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Union;
-} | {
+} & VariadicIO) | {
     verb: Verb.Unorder;
+    input: BasicInput;
+    output: BasicOutput;
 } | {
     verb: Verb.Ungroup;
-} | {
+    input: BasicInput;
+    output: BasicOutput;
+} | ({
     verb: Verb.Unroll;
     args?: UnrollArgs;
-} | {
+} & BasicIO) | ({
     verb: Verb.Window;
     args?: WindowArgs;
-});
+} & BasicIO));
 
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1580,6 +1616,22 @@ export type Unsubscribe = Handler;
 //
 // @public
 export type Value = any;
+
+// Warning: (ae-missing-release-tag) "VariadicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type VariadicInput = string | {
+    source: InputBinding;
+    others?: InputBinding[];
+};
+
+// Warning: (ae-missing-release-tag) "VariadicIO" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type VariadicIO = {
+    input: VariadicInput;
+    output: BasicOutput;
+};
 
 // Warning: (ae-missing-release-tag) "Verb" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

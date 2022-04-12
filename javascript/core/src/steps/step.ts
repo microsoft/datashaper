@@ -4,7 +4,6 @@
  */
 import { v4 as uuid } from 'uuid'
 
-import type { CopyWithPartial } from '../primitives.js'
 import {
 	BinStrategy,
 	BooleanOperator,
@@ -12,16 +11,76 @@ import {
 	JoinStrategy,
 	Verb,
 } from '../verbs/index.js'
-import type {
-	InputNodeBinding,
-	Step,
-	StepSpecification,
-} from './specification.js'
+import type { InputBinding,InputNodeBinding } from './specification.js'
 
-export type StepInput = CopyWithPartial<
-	Step<any>,
-	'args' | 'id' | 'input' | 'output'
->
+export interface StepInput<T extends object = any> {
+	/**
+	 * A unique identifier for this step
+	 */
+	id?: string
+
+	/**
+	 * The verb being executed
+	 */
+	verb: Verb
+
+	/**
+	 * The verb arguments
+	 */
+	args?: T
+
+	/**
+	 * The bound inputs
+	 * Key = Input Socket Name
+	 * Value = Socket Binding to other node
+	 */
+	input?:
+		| string
+		| ({
+				others?: InputBinding[]
+		  } & Record<string, InputBinding>)
+
+	/**
+	 * The observed outputs to record.
+	 * Key = output socket name
+	 * Value = store table name
+	 */
+	output: string | Record<string, string>
+}
+
+export interface Step<T extends object = any> {
+	/**
+	 * A unique identifier for this step
+	 */
+	id: string
+
+	/**
+	 * The verb being executed
+	 */
+	verb: Verb
+
+	/**
+	 * The verb arguments
+	 */
+	args: T
+
+	/**
+	 * The bound inputs
+	 * Key = Input Socket Name
+	 * Value = Socket Binding to other node
+	 */
+	input: {
+		others?: InputNodeBinding[]
+	} & Record<string, InputNodeBinding>
+
+	/**
+	 * The observed outputs to record.
+	 * Key = output socket name
+	 * Value = store table name
+	 */
+	output: Record<string, string>
+}
+
 /**
  * Factory function to create new verb configs
  * with as many reasonable defaults as possible.
@@ -29,14 +88,13 @@ export type StepInput = CopyWithPartial<
  * to preselect.
  * @param verb -
  */
-export function step<T extends object>(spec: StepSpecification): Step<T> {
-	const {
-		verb,
-		args = {} as any,
-		id = uuid(),
-		input = {},
-		output = {},
-	} = spec as any
+export function step<T extends object>({
+	verb,
+	args = {} as any,
+	id = uuid(),
+	input = {},
+	output = {},
+}: StepInput<T>): Step<T> {
 	const base = {
 		id,
 		args,
@@ -159,7 +217,7 @@ export function step<T extends object>(spec: StepSpecification): Step<T> {
 	return base
 }
 
-function fixInputs(inputs: StepSpecification['input']): Step['input'] {
+function fixInputs(inputs: StepInput['input']): Step['input'] {
 	if (typeof inputs === 'string') {
 		return { source: { node: inputs } }
 	} else {
@@ -181,7 +239,7 @@ function fixInputs(inputs: StepSpecification['input']): Step['input'] {
 	}
 }
 
-function fixOutputs(outputs: StepSpecification['output']): Step['output'] {
+function fixOutputs(outputs: StepInput['output']): Step['output'] {
 	if (typeof outputs === 'string') {
 		return { target: outputs }
 	} else {

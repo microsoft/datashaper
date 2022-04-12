@@ -197,31 +197,6 @@
             },
             "type": "object"
         },
-        "DualInput": {
-            "properties": {
-                "other": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/InputNodeBinding"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ]
-                },
-                "source": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/InputNodeBinding"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ]
-                }
-            },
-            "type": "object"
-        },
         "EraseArgs": {
             "properties": {
                 "columns": {
@@ -376,17 +351,6 @@
                 "columns": {
                     "$ref": "#/definitions/Record<string,string>",
                     "description": "Map of old column to new column names"
-                }
-            },
-            "type": "object"
-        },
-        "InputNodeBinding": {
-            "properties": {
-                "node": {
-                    "type": "string"
-                },
-                "output": {
-                    "type": "string"
                 }
             },
             "type": "object"
@@ -614,6 +578,7 @@
             "type": "object"
         },
         "StepCommon": {
+            "description": "Common step properties",
             "properties": {
                 "description": {
                     "description": "helpful for documentation in JSON specs",
@@ -622,17 +587,6 @@
                 "id": {
                     "description": "A unique identifier for this step",
                     "type": "string"
-                },
-                "output": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/Record<string,string>"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The observed outputs to record.\nKey = output socket name\nValue = store table name"
                 }
             },
             "type": "object"
@@ -679,6 +633,7 @@
             "type": "string"
         }
     },
+    "description": "The root type used for JSON schema specification",
     "properties": {
         "description": {
             "type": "string"
@@ -699,6 +654,17 @@
                                     "args": {
                                         "$ref": "#/definitions/AggregateArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "aggregate"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -706,12 +672,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -720,12 +711,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "aggregate"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -742,6 +727,17 @@
                                     "args": {
                                         "$ref": "#/definitions/BinArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "bin"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -749,12 +745,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -763,12 +784,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "bin"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -785,6 +800,17 @@
                                     "args": {
                                         "$ref": "#/definitions/BinarizeArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "binarize"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -792,12 +818,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -806,12 +857,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "binarize"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -828,6 +873,17 @@
                                     "args": {
                                         "$ref": "#/definitions/BooleanArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "boolean"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -835,12 +891,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -849,12 +930,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "boolean"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -868,6 +943,17 @@
                             },
                             {
                                 "properties": {
+                                    "verb": {
+                                        "enum": [
+                                            "concat"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -876,24 +962,42 @@
                                                         "items": {
                                                             "anyOf": [
                                                                 {
-                                                                    "$ref": "#/definitions/InputNodeBinding"
+                                                                    "properties": {
+                                                                        "node": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "output": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
                                                                 },
                                                                 {
                                                                     "type": "string"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "description": "Node Input Binding"
                                                         },
                                                         "type": "array"
                                                     },
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
                                                     }
                                                 },
                                                 "type": "object"
@@ -903,11 +1007,20 @@
                                             }
                                         ]
                                     },
-                                    "verb": {
-                                        "enum": [
-                                            "concat"
-                                        ],
-                                        "type": "string"
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -924,6 +1037,17 @@
                                     "args": {
                                         "$ref": "#/definitions/ConvertArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "convert"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -931,12 +1055,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -945,12 +1094,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "convert"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -967,6 +1110,17 @@
                                     "args": {
                                         "$ref": "#/definitions/Partial<InputColumnListArgs>"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "dedupe"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -974,12 +1128,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -988,12 +1167,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "dedupe"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1007,6 +1180,17 @@
                             },
                             {
                                 "properties": {
+                                    "verb": {
+                                        "enum": [
+                                            "difference"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1015,24 +1199,42 @@
                                                         "items": {
                                                             "anyOf": [
                                                                 {
-                                                                    "$ref": "#/definitions/InputNodeBinding"
+                                                                    "properties": {
+                                                                        "node": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "output": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
                                                                 },
                                                                 {
                                                                     "type": "string"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "description": "Node Input Binding"
                                                         },
                                                         "type": "array"
                                                     },
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1042,11 +1244,20 @@
                                             }
                                         ]
                                     },
-                                    "verb": {
-                                        "enum": [
-                                            "difference"
-                                        ],
-                                        "type": "string"
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -1063,6 +1274,17 @@
                                     "args": {
                                         "$ref": "#/definitions/DeriveArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "derive"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1070,12 +1292,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1084,12 +1331,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "derive"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1106,6 +1347,17 @@
                                     "args": {
                                         "$ref": "#/definitions/EraseArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "erase"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1113,12 +1365,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1127,12 +1404,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "erase"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1149,6 +1420,17 @@
                                     "args": {
                                         "$ref": "#/definitions/FetchArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "fetch"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1156,12 +1438,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1170,12 +1477,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "fetch"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1192,6 +1493,17 @@
                                     "args": {
                                         "$ref": "#/definitions/FillArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "fill"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1199,12 +1511,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1213,12 +1550,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "fill"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1235,6 +1566,17 @@
                                     "args": {
                                         "$ref": "#/definitions/FilterArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "filter"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1242,12 +1584,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1256,12 +1623,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "filter"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1278,6 +1639,17 @@
                                     "args": {
                                         "$ref": "#/definitions/FoldArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "fold"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1285,12 +1657,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1299,12 +1696,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "fold"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1321,6 +1712,17 @@
                                     "args": {
                                         "$ref": "#/definitions/InputColumnListArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "groupby"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1328,12 +1730,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1342,12 +1769,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "groupby"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1364,6 +1785,17 @@
                                     "args": {
                                         "$ref": "#/definitions/ImputeArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "impute"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1371,12 +1803,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1385,12 +1842,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "impute"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1404,6 +1855,17 @@
                             },
                             {
                                 "properties": {
+                                    "verb": {
+                                        "enum": [
+                                            "intersect"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1412,24 +1874,42 @@
                                                         "items": {
                                                             "anyOf": [
                                                                 {
-                                                                    "$ref": "#/definitions/InputNodeBinding"
+                                                                    "properties": {
+                                                                        "node": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "output": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
                                                                 },
                                                                 {
                                                                     "type": "string"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "description": "Node Input Binding"
                                                         },
                                                         "type": "array"
                                                     },
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1439,11 +1919,20 @@
                                             }
                                         ]
                                     },
-                                    "verb": {
-                                        "enum": [
-                                            "intersect"
-                                        ],
-                                        "type": "string"
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -1460,14 +1949,74 @@
                                     "args": {
                                         "$ref": "#/definitions/JoinArgs"
                                     },
-                                    "input": {
-                                        "$ref": "#/definitions/DualInput"
-                                    },
                                     "verb": {
                                         "enum": [
                                             "join"
                                         ],
                                         "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
+                                    "input": {
+                                        "properties": {
+                                            "other": {
+                                                "anyOf": [
+                                                    {
+                                                        "properties": {
+                                                            "node": {
+                                                                "type": "string"
+                                                            },
+                                                            "output": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "description": "Node Input Binding"
+                                            },
+                                            "source": {
+                                                "anyOf": [
+                                                    {
+                                                        "properties": {
+                                                            "node": {
+                                                                "type": "string"
+                                                            },
+                                                            "output": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "description": "Node Input Binding"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -1484,14 +2033,74 @@
                                     "args": {
                                         "$ref": "#/definitions/LookupArgs"
                                     },
-                                    "input": {
-                                        "$ref": "#/definitions/DualInput"
-                                    },
                                     "verb": {
                                         "enum": [
                                             "lookup"
                                         ],
                                         "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
+                                    "input": {
+                                        "properties": {
+                                            "other": {
+                                                "anyOf": [
+                                                    {
+                                                        "properties": {
+                                                            "node": {
+                                                                "type": "string"
+                                                            },
+                                                            "output": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "description": "Node Input Binding"
+                                            },
+                                            "source": {
+                                                "anyOf": [
+                                                    {
+                                                        "properties": {
+                                                            "node": {
+                                                                "type": "string"
+                                                            },
+                                                            "output": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "type": "string"
+                                                    }
+                                                ],
+                                                "description": "Node Input Binding"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -1508,6 +2117,17 @@
                                     "args": {
                                         "$ref": "#/definitions/MergeArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "merge"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1515,12 +2135,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1529,12 +2174,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "merge"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1551,6 +2190,17 @@
                                     "args": {
                                         "$ref": "#/definitions/OneHotArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "onehot"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1558,12 +2208,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1572,12 +2247,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "onehot"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1594,6 +2263,17 @@
                                     "args": {
                                         "$ref": "#/definitions/OrderbyArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "orderby"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1601,12 +2281,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1615,12 +2320,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "orderby"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1637,6 +2336,17 @@
                                     "args": {
                                         "$ref": "#/definitions/PivotArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "pivot"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1644,12 +2354,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1658,12 +2393,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "pivot"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1680,6 +2409,17 @@
                                     "args": {
                                         "$ref": "#/definitions/RecodeArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "recode"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1687,12 +2427,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1701,12 +2466,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "recode"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1723,6 +2482,17 @@
                                     "args": {
                                         "$ref": "#/definitions/InputColumnRecordArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "rename"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1730,12 +2500,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1744,12 +2539,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "rename"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1766,6 +2555,17 @@
                                     "args": {
                                         "$ref": "#/definitions/RollupArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "rollup"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1773,12 +2573,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1787,12 +2612,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "rollup"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1809,6 +2628,17 @@
                                     "args": {
                                         "$ref": "#/definitions/SampleArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "sample"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1816,12 +2646,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1830,12 +2685,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "sample"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1852,6 +2701,17 @@
                                     "args": {
                                         "$ref": "#/definitions/InputColumnListArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "select"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1859,12 +2719,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1873,12 +2758,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "select"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1895,6 +2774,17 @@
                                     "args": {
                                         "$ref": "#/definitions/SpreadArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "spread"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1902,12 +2792,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1916,12 +2831,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "spread"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1938,6 +2847,17 @@
                                     "args": {
                                         "$ref": "#/definitions/UnfoldArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "unfold"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -1945,12 +2865,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1959,12 +2904,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "unfold"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1975,6 +2914,17 @@
                         "allOf": [
                             {
                                 "$ref": "#/definitions/StepCommon"
+                            },
+                            {
+                                "properties": {
+                                    "verb": {
+                                        "enum": [
+                                            "union"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
                             },
                             {
                                 "properties": {
@@ -1986,24 +2936,42 @@
                                                         "items": {
                                                             "anyOf": [
                                                                 {
-                                                                    "$ref": "#/definitions/InputNodeBinding"
+                                                                    "properties": {
+                                                                        "node": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "output": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
                                                                 },
                                                                 {
                                                                     "type": "string"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "description": "Node Input Binding"
                                                         },
                                                         "type": "array"
                                                     },
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
                                                     }
                                                 },
                                                 "type": "object"
@@ -2013,11 +2981,20 @@
                                             }
                                         ]
                                     },
-                                    "verb": {
-                                        "enum": [
-                                            "union"
-                                        ],
-                                        "type": "string"
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -2038,12 +3015,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -2078,12 +3080,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -2114,6 +3141,17 @@
                                     "args": {
                                         "$ref": "#/definitions/InputColumnListArgs"
                                     },
+                                    "verb": {
+                                        "enum": [
+                                            "unroll"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
                                     "input": {
                                         "anyOf": [
                                             {
@@ -2121,12 +3159,37 @@
                                                     "source": {
                                                         "anyOf": [
                                                             {
-                                                                "$ref": "#/definitions/InputNodeBinding"
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
                                                             },
                                                             {
                                                                 "type": "string"
                                                             }
-                                                        ]
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "type": "object"
@@ -2135,12 +3198,6 @@
                                                 "type": "string"
                                             }
                                         ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "unroll"
-                                        ],
-                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -2157,28 +3214,6 @@
                                     "args": {
                                         "$ref": "#/definitions/WindowArgs"
                                     },
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "$ref": "#/definitions/InputNodeBinding"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ]
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    },
                                     "verb": {
                                         "enum": [
                                             "window"
@@ -2187,10 +3222,63 @@
                                     }
                                 },
                                 "type": "object"
+                            },
+                            {
+                                "properties": {
+                                    "input": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "source": {
+                                                        "anyOf": [
+                                                            {
+                                                                "properties": {
+                                                                    "node": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "output": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            {
+                                                                "type": "string"
+                                                            }
+                                                        ],
+                                                        "description": "Node Input Binding"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Standard I/O Patterns"
+                                    },
+                                    "output": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "target": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "type": "object"
                             }
                         ]
                     }
-                ]
+                ],
+                "description": "Specification for step items"
             },
             "type": "array"
         }

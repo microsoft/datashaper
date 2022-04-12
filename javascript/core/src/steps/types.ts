@@ -34,7 +34,7 @@ import type {
 	UnrollArgs,
 	WindowArgs,
 } from '../verbs/index.js'
-import type { Step } from './specification.js'
+import type { Step } from './step.js'
 
 export type AggregateStep = Step<AggregateArgs>
 export type BinStep = Step<BinArgs>
