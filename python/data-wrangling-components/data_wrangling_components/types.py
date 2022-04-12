@@ -198,7 +198,7 @@ class BooleanLogicalOperator(Enum):
 @dataclass
 class FilterArgs(InputColumnArgs):
     criteria: List[Criterion]
-    logical: Optional[BooleanLogicalOperator] = BooleanLogicalOperator.OR
+    logical: BooleanLogicalOperator = BooleanLogicalOperator.OR
 
 
 class SetOp(Enum):

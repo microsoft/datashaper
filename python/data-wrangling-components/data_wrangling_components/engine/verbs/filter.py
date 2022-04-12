@@ -22,7 +22,7 @@ from data_wrangling_components.types import (
 )
 
 
-def __get_operator(
+def _get_operator(
     operator: str,
 ) -> Union[
     StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
@@ -61,7 +61,7 @@ def filter(step: Step, store: TableStore):
             Criterion(
                 value=step.args.get("value", None),
                 type=FilterCompareType(arg["type"]),
-                operator=__get_operator(arg["operator"]),
+                operator=_get_operator(arg["operator"]),
             )
             for arg in step.args["criteria"]
         ],

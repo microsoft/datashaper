@@ -4,7 +4,7 @@
 #
 
 from functools import partial
-from typing import List, Union
+from typing import Callable, Dict, List, Union
 from uuid import uuid4
 
 import pandas as pd
@@ -81,7 +81,12 @@ def __regex(
     return df[column].str.contains(str(target), regex=True)
 
 
-_operator_map = {
+_operator_map: Dict[
+    Union[
+        StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
+    ],
+    Callable,
+] = {
     StringComparisonOperator.Contains: __contains,
     StringComparisonOperator.StartsWith: __startswith,
     StringComparisonOperator.EndsWith: __endswith,
@@ -122,4 +127,4 @@ def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame:
         filtered_df[filters]
     )
 
-    return df[(filtered_df["dwc_filter_result"] is True).index]
+    return df[(filtered_df["dwc_filter_result"] == True).index]
