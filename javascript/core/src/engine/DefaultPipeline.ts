@@ -119,9 +119,8 @@ export class DefaultPipeline implements Pipeline {
 		}
 
 		const lastStep = this._steps[this._steps.length - 1]!
-		const lastStepOutput = lastStep.output['target']!
+		const lastStepOutput = lastStep.output['target'] || lastStep.id
 
-		console.log('last step output', lastStepOutput)
 		return new Promise<TableContainer>(resolve => {
 			const unsub = this.store.onItemChange(lastStepOutput, res => {
 				resolve(res as TableContainer)
