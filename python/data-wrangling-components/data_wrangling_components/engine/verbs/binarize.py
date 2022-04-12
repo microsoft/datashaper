@@ -9,6 +9,7 @@ from data_wrangling_components.engine.pandas.filter_df import filter_df
 from data_wrangling_components.engine.verbs.filter import _get_operator
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import (
+    BooleanLogicalOperator,
     Criterion,
     FilterArgs,
     FilterCompareType,
@@ -46,6 +47,7 @@ def binarize(step: Step, store: TableStore):
             )
             for arg in step.args["criteria"]
         ],
+        logical=BooleanLogicalOperator(step.args.get("logical", "or")),
     )
 
     input_table = store.table(step.input)

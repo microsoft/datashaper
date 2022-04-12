@@ -5,7 +5,6 @@
 
 import logging
 
-from msilib.schema import Error
 from typing import Union
 
 from data_wrangling_components.engine.pandas.filter_df import filter_df
