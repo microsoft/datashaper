@@ -216,11 +216,11 @@ export function step<T extends object>({
 	return base
 }
 
-function fixInputs(inputs: StepInput['input']): Step['input'] {
-	if (typeof inputs === 'string') {
-		return { source: { node: inputs } }
+function fixInputs(input: StepInput['input']): Step['input'] {
+	if (typeof input === 'string') {
+		return { source: { node: input } }
 	} else {
-		const result: Step['input'] = { ...inputs } as any
+		const result: Step['input'] = { ...input } as any
 		// rewrite any shorthand inputs into full inputs
 		Object.keys(result).forEach((k: string) => {
 			const binding = result[k]

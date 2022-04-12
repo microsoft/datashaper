@@ -84,7 +84,7 @@ export function extension(filename?: string): string;
 // Warning: (ae-missing-release-tag) "fetchFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const fetchFile: (url: string) => Promise<Blob>;
+export function fetchFile(url: string): Promise<Blob>;
 
 // Warning: (ae-missing-release-tag) "FileCollection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -94,11 +94,12 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 			// TODO: we need an autorun option on the pipeline to populate data for the next step as they are added
 			// otherwise we can't fill in dropdowns with column names, for example
 			setExampleSpec(spec)
-			setSteps(spec.steps)
 			pipeline.clear()
 			pipeline.addAll(spec.steps)
+			// the pipeline will transform the steps into a consistent format - string shorthands are
+			// unpacked into object forms.
+			setSteps(pipeline.steps)
 			const res = await pipeline.run()
-			console.log('RES', res)
 			const output = store.toMap()
 			store.print()
 			setResult(res.table)
