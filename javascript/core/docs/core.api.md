@@ -86,10 +86,10 @@ export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
 //
 // @public
 export interface BasicIO {
-    input: string | {
+    input?: string | {
         source: InputSpecification;
     };
-    output: string | {
+    output?: string | {
         target: string;
     };
 }
@@ -1141,6 +1141,21 @@ export interface PivotArgs {
 // @public (undocumented)
 export type PivotStep = Step<PivotArgs>;
 
+// Warning: (ae-missing-release-tag) "readSpec" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function readSpec(spec: SpecificationInput): Step[];
+
+// Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function readStep<T extends object>({ verb, args, id, input, output }: StepInput<T>, previous?: Step | undefined): Step<T>;
+
+// Warning: (ae-missing-release-tag) "readSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function readSteps(steps: StepInput[], previous?: Step | undefined): Step[];
+
 // Warning: (ae-missing-release-tag) "recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1271,8 +1286,22 @@ export enum SortDirection {
 // @public
 export interface Specification {
     description?: string;
+    input?: string;
     name?: string;
+    output?: string;
     steps?: StepSpecification[];
+}
+
+// Warning: (ae-missing-release-tag) "SpecificationInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface SpecificationInput {
+    // (undocumented)
+    input?: string;
+    // (undocumented)
+    output?: string;
+    // (undocumented)
+    steps: StepInput[];
 }
 
 // Warning: (ae-missing-release-tag) "spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1312,11 +1341,6 @@ export interface Step<T extends object = any> {
     output: Record<string, string>;
     verb: Verb;
 }
-
-// Warning: (ae-missing-release-tag) "step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function step<T extends object>({ verb, args, id, input, output, }: StepInput<T>): Step<T>;
 
 // Warning: (ae-missing-release-tag) "StepCommon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1597,7 +1621,7 @@ export type Value = any;
 //
 // @public
 export interface VariadicIO extends BasicIO {
-    input: string | {
+    input: {
         source: InputSpecification;
         others?: InputSpecification[];
     };

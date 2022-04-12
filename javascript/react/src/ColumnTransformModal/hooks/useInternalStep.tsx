@@ -4,7 +4,7 @@
  */
 
 import type { Step } from '@data-wrangling-components/core'
-import { step as factory } from '@data-wrangling-components/core'
+import { readStep } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -32,7 +32,7 @@ export function useInternalStep(
 		(_ev: any, opt: any) => {
 			// TODO: the assumption here is that the consumer will use runPipeline
 			// should we be forcing the i/o table name?
-			const _step = factory({
+			const _step = readStep({
 				verb: opt.key,
 				input: step?.input as any,
 				output: step?.output as any,

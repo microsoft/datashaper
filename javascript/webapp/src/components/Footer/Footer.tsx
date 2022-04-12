@@ -14,7 +14,7 @@ export const Footer: FC = memo(function Footer() {
 	const CONSENT_CONF = {
 		theme: theme.variant,
 		elementId: 'cookie-banner',
-		onChange: (c: any) => console.log('CHANGED', c),
+		onChange: (c: any) => console.log('consent changed', c),
 	}
 	const [, manageConsent] = useMicrosoftConsentBanner(CONSENT_CONF)
 

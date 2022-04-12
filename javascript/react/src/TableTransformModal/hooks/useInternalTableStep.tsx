@@ -4,7 +4,7 @@
  */
 
 import type { Step, TableStore, Verb } from '@data-wrangling-components/core'
-import { step as factory } from '@data-wrangling-components/core'
+import { readStep } from '@data-wrangling-components/core'
 import { useCallback, useEffect, useState } from 'react'
 
 import { useCreateTableName, useFormatedColumnArg } from '../../common/index.js'
@@ -32,7 +32,7 @@ export function useInternalTableStep(
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {
 			const id = newTableName(verb)
-			const _step = factory({ verb, id, output: { target: id } })
+			const _step = readStep({ verb, id, output: { target: id } })
 			_step.args = formattedColumnArg(_step.args)
 			setInternal(_step)
 		},

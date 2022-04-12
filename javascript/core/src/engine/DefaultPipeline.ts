@@ -4,7 +4,7 @@
  */
 import type { Graph } from '../graph/index.js'
 import type { Step, StepInput } from '../steps/index.js'
-import { step as factory } from '../steps/index.js'
+import { readStep,readSteps } from '../steps/index.js'
 import type { Store } from '../store/index.js'
 import type { TableContainer } from '../tables/index.js'
 import type { Verb } from '../verbs/index.js'
@@ -56,19 +56,17 @@ export class DefaultPipeline implements Pipeline {
 	}
 
 	public create(verb: Verb): Step[] {
-		const base: Step = factory({ verb } as any)
+		const base: Step = readStep({ verb } as any)
 		base.output = { target: base.id }
 		return this.add(base as StepInput)
 	}
 
 	public add(step: StepInput): Step[] {
-		this._steps.push(factory(step as StepInput))
-		this._rebuildGraph()
-		return this.steps
+		return this.addAll([step])
 	}
 
 	public addAll(steps: StepInput[]): Step[] {
-		steps.forEach(step => this._steps.push(factory(step as StepInput)))
+		this._steps.push(...readSteps(steps, this.last))
 		this._rebuildGraph()
 		return this.steps
 	}
@@ -118,9 +116,8 @@ export class DefaultPipeline implements Pipeline {
 			throw new Error('cannot run empty pipeline')
 		}
 
-		const lastStep = this._steps[this._steps.length - 1]!
+		const lastStep = this.last
 		const lastStepOutput = lastStep.output['target'] || lastStep.id
-
 		return new Promise<TableContainer>(resolve => {
 			const unsub = this.store.onItemChange(lastStepOutput, res => {
 				resolve(res as TableContainer)
