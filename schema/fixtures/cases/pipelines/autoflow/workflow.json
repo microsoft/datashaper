@@ -4,7 +4,6 @@
 	"output": "expected",
 	"steps": [
 		{
-			"id": "t1-filled",
 			"verb": "fill",
 			"args": {
 				"to": "newColumn",
