@@ -1,0 +1,14 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "fill",
+			"input": "table1",
+			"args": {
+				"to": "newColumn",
+				"value": 20
+			},
+			"output": "expected"
+		}
+	]
+}

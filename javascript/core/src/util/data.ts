@@ -7,8 +7,8 @@ import isDate from 'lodash-es/isDate.js'
 import isNaN from 'lodash-es/isNaN.js'
 import isNil from 'lodash-es/isNil.js'
 
-import type { Value } from '../index.js'
-import { DataType } from '../index.js'
+import type { Value } from '../tables/types.js'
+import { DataType } from '../verbs/types.js'
 
 /**
  * Guess the type of a table value with more discernment than typeof

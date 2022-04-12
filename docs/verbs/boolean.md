@@ -6,7 +6,7 @@ Combines columns using [boolean algebra](https://en.wikipedia.org/wiki/Boolean_a
 - Any non-empty string will be treated as `true` except the string 'false'
 - Any numeric value other than 0 will be `true`
 - Any valid Date will be `true`
-- All invalid or empty values (null, undefined, NaN) will be treated as `false`
+- All invalid or empty values (null, undefined, NaN) will be ignored (remain empty)
 
 The column output will be a 1 (true) or 0 (false).
 
@@ -20,7 +20,7 @@ For boolean _comparison_ operators, use the [binarize](./binarize.md) verb.
 - NAND (not AND): any values can be `true` but not _all_ can
 - XOR (exclusive OR): only one value may be `true`
 
-Note that in formal boolean algebra some operators expect exactly two input values. For data wrangling convenience we allow any number of input values and have worded the definitions above accordingly.
+Note that in formal boolean algebra some operators expect exactly two input values. For data wrangling convenience we allow any number of input values and have worded the definitions above accordingly. Because real-world data also often has missing data that represent unknown values, our boolean logic mimics the [pandas approach](https://pandas.pydata.org/pandas-docs/stable/user_guide/boolean.html) and uses [three-valued logic](https://en.wikipedia.org/wiki/Three-valued_logic).
 
 ## Examples
 

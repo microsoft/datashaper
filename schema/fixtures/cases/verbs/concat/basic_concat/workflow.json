@@ -1,0 +1,13 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "concat",
+			"input": {
+				"source": "table1",
+				"others": ["table2"]
+			},
+			"output": "expected"
+		}
+	]
+}

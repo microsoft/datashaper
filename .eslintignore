@@ -16,3 +16,4 @@ yarn.lock
 .git*
 .*ignore
 .*rc
+schema/workflow.json

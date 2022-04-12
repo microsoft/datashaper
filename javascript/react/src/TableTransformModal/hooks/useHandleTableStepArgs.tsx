@@ -4,6 +4,7 @@
  */
 
 import type { Step } from '@data-wrangling-components/core'
+import flow from 'lodash-es/flow.js'
 import { useMemo } from 'react'
 
 import type { StepComponentProps } from '../../index.js'
@@ -26,13 +27,12 @@ export function useHandleTableStepArgs(
 
 	const WithAllArgs = useMemo(() => {
 		if (Component) {
-			return withInputTableDropdown()(
-				withOutputColumnTextfield()(
-					withInputColumnDropdown()(
-						withOutputTableTextfield(undefined, disabled)(Component),
-					),
-				),
-			)
+			return flow(
+				withOutputTableTextfield(undefined, disabled),
+				withOutputColumnTextfield(),
+				withInputColumnDropdown(),
+				withInputTableDropdown(),
+			)(Component)
 		}
 	}, [Component, disabled])
 

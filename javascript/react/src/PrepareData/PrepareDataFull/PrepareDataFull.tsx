@@ -29,7 +29,7 @@ export const PrepareDataFull: React.FC<{
 	onOutputTable,
 	stepsPosition = 'bottom',
 }) {
-	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(false)
+	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 	const {
 		selectedTable,
 		selectedTableName,
@@ -139,9 +139,7 @@ const OutputContainer = styled.div<{
 	padding-right: ${GAP}px;
 	max-height: ${({ isCollapsed }) =>
 		`calc(100% - ${
-			INPUT_HEIGHT +
-			(isCollapsed ? COLLAPSED_STEPS_HEIGHT : STEPS_HEIGHT) +
-			GAP * 2
+			INPUT_HEIGHT + (isCollapsed ? 0 : STEPS_HEIGHT) + GAP * 4
 		}px)`};
 	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 2 : 3)};
 `
@@ -158,7 +156,7 @@ const StepsTrayContainer = styled.div<{
 	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 3 : 2)};
 	height: ${({ isCollapsed }) =>
 		isCollapsed ? COLLAPSED_STEPS_HEIGHT + 'px' : 'auto'};
-	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'auto')};
+	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'auto hidden')};
 	> div {
 		display: ${({ isCollapsed }) => (isCollapsed ? 'none' : 'grid')};
 	}

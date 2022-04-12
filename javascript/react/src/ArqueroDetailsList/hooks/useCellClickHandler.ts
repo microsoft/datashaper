@@ -4,17 +4,15 @@
  */
 import { useMemo } from 'react'
 
+import { noop } from '../../common/functions.js'
 import type { ColumnClickFunction } from '../index.js'
 
 export function useCellClickhandler(
 	clickable: boolean,
-	onColumnClick?: ColumnClickFunction,
+	onColumnClick: ColumnClickFunction = noop,
 ): ColumnClickFunction | undefined {
 	return useMemo(
-		() =>
-			clickable
-				? (evt?, column?) => onColumnClick && onColumnClick(evt, column)
-				: undefined,
+		() => (clickable ? onColumnClick : undefined),
 		[clickable, onColumnClick],
 	)
 }

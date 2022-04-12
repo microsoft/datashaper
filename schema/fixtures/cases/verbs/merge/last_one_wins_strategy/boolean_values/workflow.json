@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "merge",
+			"input": "table15",
+			"args": {
+				"columns": ["y", "z"],
+				"strategy": "last one wins",
+				"to": "resultColumn"
+			},
+			"output": "expected"
+		}
+	]
+}

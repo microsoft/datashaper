@@ -1,0 +1,4 @@
+x,y,z,resultColumn
+A,,true,true
+B,true,false,false
+A,false,true,true

@@ -16,13 +16,17 @@ export function useOnUpdateMetadata(
 	selectedTableName?: string,
 ): (meta: TableMetadata) => void {
 	return useCallback(
-		async (meta: TableMetadata) => {
-			const _table = await store.get(selectedTableName as string)
-			_table.metadata = meta
-			store.delete(_table.id)
-			store.set(_table)
-			const _storedTables = await store.toMap()
-			setStoredTables(_storedTables)
+		(meta: TableMetadata) => {
+			const _table = store.get(selectedTableName as string)
+			if (_table) {
+				_table.metadata = meta
+
+				store.delete(_table.id)
+				store.emitItemChange(_table.id)
+
+				const _storedTables = store.toMap()
+				setStoredTables(_storedTables)
+			}
 		},
 		[store, selectedTableName, setStoredTables],
 	)

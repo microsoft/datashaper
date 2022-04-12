@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { isInputTableStep } from '@data-wrangling-components/core'
+import { isInputTableStep, NodeInput } from '@data-wrangling-components/core'
 import { memo } from 'react'
 import styled from 'styled-components'
 
@@ -15,29 +15,34 @@ import type { HOCFunction, StepComponentProps } from './types.js'
  * @param label - optional label to use for the dropdown instead of the default.
  * @returns
  */
-export const withInputTableDropdown = (
+export function withInputTableDropdown(
 	label?: string,
-): HOCFunction<StepComponentProps> => {
+): HOCFunction<StepComponentProps> {
 	return Component => {
 		const WithTableDropdown: React.FC<StepComponentProps> = props => {
 			const { step, store, onChange } = props
-			const handleTableChange = useHandleDropdownChange(step, 'input', onChange)
+			const handleTableChange = useHandleDropdownChange(
+				step,
+				'inputs.default.node',
+				onChange,
+			)
 			if (!isInputTableStep(step)) {
 				return <Component {...props} />
+			} else {
+				return (
+					<Container className="with-input-table-dropdown">
+						<LeftAlignedRow>
+							<TableDropdown
+								store={store}
+								label={label || 'Input table'}
+								selectedKey={step.input[NodeInput.Source]?.node}
+								onChange={handleTableChange}
+							/>
+						</LeftAlignedRow>
+						<Component {...props} />
+					</Container>
+				)
 			}
-			return (
-				<Container className="with-input-table-dropdown">
-					<LeftAlignedRow>
-						<TableDropdown
-							store={store}
-							label={label || 'Input table'}
-							selectedKey={step.input}
-							onChange={handleTableChange}
-						/>
-					</LeftAlignedRow>
-					<Component {...props} />
-				</Container>
-			)
 		}
 		return memo(WithTableDropdown)
 	}

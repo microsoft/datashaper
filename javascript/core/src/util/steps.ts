@@ -5,7 +5,8 @@
 import difference from 'lodash-es/difference.js'
 import intersection from 'lodash-es/intersection.js'
 
-import type { Step, Verb } from '../index.js'
+import type { Step } from '../steps/index.js'
+import type { Verb } from '../verbs/index.js'
 
 enum Tags {
 	/**
@@ -42,7 +43,6 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	bin: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn, Tags.NumericOnly],
 	binarize: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	boolean: [Tags.InputTable, Tags.OutputColumn],
-	chain: [],
 	concat: [Tags.InputTable, Tags.RowModifying],
 	convert: [Tags.InputTable],
 	dedupe: [Tags.InputTable, Tags.RowModifying],

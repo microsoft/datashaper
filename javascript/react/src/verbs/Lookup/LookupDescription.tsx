@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { LookupStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { createRowEntries, VerbDescription } from '../../index.js'
@@ -24,7 +25,7 @@ export const LookupDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'lookup from',
-					value: args.other,
+					value: internal.input[NodeInput.Other]?.node,
 				},
 				{
 					before: 'on',

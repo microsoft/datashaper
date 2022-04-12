@@ -1,0 +1,16 @@
+{
+	"$schema": "../../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "merge",
+			"input": "table13",
+			"args": {
+				"columns": ["name", "description"],
+				"strategy": "concat",
+				"to": "resultColumn",
+				"delimiter": ","
+			},
+			"output": "expected"
+		}
+	]
+}

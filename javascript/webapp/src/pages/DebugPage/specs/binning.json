@@ -1,47 +1,48 @@
 {
+	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Binning",
 	"description": "Shows how different binning strategies and clamping work.",
 	"steps": [
 		{
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-1",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-1" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "auto",
-				"to": "Binned"
+				"to": "Binned1"
 			}
 		},
 		{
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-2",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-2" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
-				"to": "Binned",
+				"to": "Binned2",
 				"fixedwidth": 100000
 			}
 		},
 		{
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-3",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-3" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed count",
-				"to": "Binned",
+				"to": "Binned3",
 				"fixedcount": 100
 			}
 		},
 		{
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-4",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-4" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
-				"to": "Binned",
+				"to": "Binned4",
 				"fixedwidth": 100000,
 				"min": 20000,
 				"max": 1000000
@@ -49,12 +50,12 @@
 		},
 		{
 			"verb": "bin",
-			"input": "data/products.csv",
-			"output": "bin-5",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-5" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
-				"to": "Binned",
+				"to": "Binned5",
 				"fixedwidth": 100000,
 				"min": 20000,
 				"max": 1000000,

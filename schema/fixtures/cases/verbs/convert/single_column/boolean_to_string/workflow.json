@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "convert",
+			"input": "table14",
+			"output": "expected",
+			"args": {
+				"columns": ["z"],
+				"type": "string",
+				"formatPattern": "%B, %Y"
+			}
+		}
+	]
+}

@@ -1,0 +1,21 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "binarize",
+			"input": "table5",
+			"args": {
+				"to": "newColumn",
+				"column": "item",
+				"criteria": [
+					{
+						"type": "value",
+						"operator": "contains",
+						"value": "so"
+					}
+				]
+			},
+			"output": "expected"
+		}
+	]
+}

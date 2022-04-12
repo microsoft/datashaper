@@ -6,6 +6,7 @@ import { SortDirection } from '@data-wrangling-components/core'
 import type { IColumn } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
+import { noop } from '../../common/functions.js'
 import type { ColumnClickFunction } from '../index.js'
 
 export interface SortParameters {
@@ -16,7 +17,7 @@ export interface SortParameters {
 
 export function useSortHandling(
 	allowSorting: boolean,
-	onColumnHeaderClick?: ColumnClickFunction,
+	onColumnHeaderClick: ColumnClickFunction = noop,
 ): SortParameters {
 	const [sortColumn, setSortColumn] = useState<string | undefined>()
 	const [sortDirection, setSortDirection] = useState<
@@ -39,7 +40,7 @@ export function useSortHandling(
 				}
 				setSortColumn(column?.fieldName)
 			}
-			onColumnHeaderClick && onColumnHeaderClick(evt, column)
+			onColumnHeaderClick(evt, column)
 		},
 		[
 			allowSorting,

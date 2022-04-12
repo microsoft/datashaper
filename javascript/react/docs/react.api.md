@@ -568,6 +568,11 @@ export const Orderby: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const OrderbyDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "otherInputNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function otherInputNames(step: Step): string[];
+
 // Warning: (ae-missing-release-tag) "Pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -962,6 +967,11 @@ export function useCreateColumnName(): (name: string, columnNames: string[]) => 
 // @public (undocumented)
 export function useCreateTableName(store?: TableStore): (name: string) => string;
 
+// Warning: (ae-missing-release-tag) "useDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDateFormatPatternOptions(): IDropdownOption[];
+
 // Warning: (ae-missing-release-tag) "useDeleteConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1010,12 +1020,12 @@ export const useDropzone: (props: DzProps) => DropzoneState;
 // Warning: (ae-missing-release-tag) "useFormatedColumnArg" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useFormatedColumnArg(): (stepArgs: unknown, newName?: string) => unknown;
+export function useFormatedColumnArg(): (stepArgs: unknown, newName?: string) => object;
 
 // Warning: (ae-missing-release-tag) "useFormatedColumnArgWithCount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useFormatedColumnArgWithCount(): (step: Step, columnNames: string[]) => unknown;
+export function useFormatedColumnArgWithCount(): (step: Step, columnNames: string[]) => object;
 
 // Warning: (ae-missing-release-tag) "useFormattedNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1081,12 +1091,12 @@ export const useHandleOnUploadClick: (acceptedFileTypes: string[], handleCollect
 // Warning: (ae-missing-release-tag) "useHandleSpinButtonChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleSpinButtonChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => number | "" | undefined): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
+export function useHandleSpinButtonChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => number | undefined): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
 
 // Warning: (ae-missing-release-tag) "useHandleTextfieldChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => string | undefined): (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
+export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: <T>(value?: T | undefined) => T | undefined): (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
 
 // Warning: (ae-missing-release-tag) "useHandleZipUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1225,17 +1235,17 @@ export const WindowDescription: React.FC<StepDescriptionProps>;
 // Warning: (ae-missing-release-tag) "withInputColumnDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const withInputColumnDropdown: (label?: string | undefined) => HOCFunction<StepComponentProps>;
+export function withInputColumnDropdown(label?: string): HOCFunction<StepComponentProps>;
 
 // Warning: (ae-missing-release-tag) "withInputTableDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const withInputTableDropdown: (label?: string | undefined) => HOCFunction<StepComponentProps>;
+export function withInputTableDropdown(label?: string): HOCFunction<StepComponentProps>;
 
 // Warning: (ae-missing-release-tag) "withOutputColumnTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const withOutputColumnTextfield: (label?: string | undefined) => HOCFunction<StepComponentProps>;
+export function withOutputColumnTextfield(label?: string): HOCFunction<StepComponentProps>;
 
 // Warning: (ae-missing-release-tag) "withOutputTableTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

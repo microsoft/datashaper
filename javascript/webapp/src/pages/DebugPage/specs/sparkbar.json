@@ -1,11 +1,13 @@
 {
+	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Sparkbar",
 	"description": "Aggregates daily data to weekly averages to demonstrate automatic Sparkbars.",
 	"steps": [
 		{
+			"id": "n1",
 			"verb": "derive",
-			"input": "data/stocks.csv",
-			"output": "output-table-0",
+			"input": { "source": "data/stocks.csv" },
+			"output": { "target": "output-table-0" },
 			"args": {
 				"to": "Week Key",
 				"column1": "Symbol",
@@ -14,9 +16,10 @@
 			}
 		},
 		{
+			"id": "n2",
 			"verb": "aggregate",
-			"input": "output-table-0",
-			"output": "output-table-1",
+			"input": { "source": "output-table-0" },
+			"output": { "target": "output-table-1" },
 			"args": {
 				"to": "Week Average",
 				"groupby": "Week Key",
@@ -25,9 +28,10 @@
 			}
 		},
 		{
+			"id": "n3",
 			"verb": "lookup",
-			"input": "output-table-1",
-			"output": "output-table-2",
+			"input": { "source": "output-table-1" },
+			"output": { "target": "output-table-2" },
 			"args": {
 				"columns": ["Symbol"],
 				"other": "output-table-0",
@@ -35,9 +39,10 @@
 			}
 		},
 		{
+			"id": "n4",
 			"verb": "aggregate",
-			"input": "output-table-2",
-			"output": "output-table-3",
+			"input": { "source": "output-table-2" },
+			"output": { "target": "output-table-3" },
 			"args": {
 				"to": "Monthly List",
 				"groupby": "Symbol",

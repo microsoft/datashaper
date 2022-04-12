@@ -23,7 +23,7 @@ import { useManageSteps } from './hooks/index.js'
 interface ManageStepsProps
 	extends TableTransformModalProps,
 		ColumnTransformModalProps {
-	onSave: (step: Step<unknown>, index?: number | undefined) => void
+	onSave: (step: Step, index?: number | undefined) => void
 	onDelete?: ((args: any) => void) | undefined
 	type?: StepsType
 	onSelect?: (name: string) => void
@@ -81,6 +81,8 @@ export const ManageSteps: React.FC<ManageStepsProps> = memo(
 							isOpen={isTransformModalOpen}
 							store={store}
 							onDismiss={onDismissTransformModal}
+							// HACK
+							styles={{ calloutMain: { overflow: 'hidden' } } as any}
 							{...props}
 						/>
 					)}

@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "window",
+			"input": "table3",
+			"args": {
+				"to": "row",
+				"column": "ID",
+				"operation": "row_number"
+			},
+			"output": "expected"
+		}
+	]
+}

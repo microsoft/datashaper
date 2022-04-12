@@ -4,7 +4,7 @@
  */
 
 import type { Step } from '@data-wrangling-components/core'
-import { factory } from '@data-wrangling-components/core'
+import { step as factory } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -12,7 +12,7 @@ import { useFormatedColumnArgWithCount } from '../../index.js'
 
 export function useInternalStep(
 	step: Step | undefined,
-	nextInputTable = 'input',
+	_nextInputTable = 'input',
 	table?: ColumnTable,
 ): {
 	internal: Step | undefined
@@ -29,17 +29,19 @@ export function useInternalStep(
 	}, [step, setInternal])
 
 	const handleVerbChange = useCallback(
-		async (_ev: any, opt: any) => {
+		(_ev: any, opt: any) => {
 			// TODO: the assumption here is that the consumer will use runPipeline
 			// should we be forcing the i/o table name?
-			const inputTable = step?.input ?? nextInputTable
-			const outputTable = step?.output ?? nextInputTable
-			const _step = factory(opt.key, inputTable, outputTable)
+			const _step = factory({
+				verb: opt.key,
+				input: step?.input as any,
+				output: step?.output as any,
+			})
 			// merge with the previous step in case input/output columns have been controlled
-			_step.args = await formattedColumnArg(_step, table?.columnNames() || [])
+			_step.args = formattedColumnArg(_step, table?.columnNames() || [])
 			setInternal(_step)
 		},
-		[setInternal, step, formattedColumnArg, nextInputTable, table],
+		[setInternal, step, formattedColumnArg, table],
 	)
 	return { internal, handleVerbChange, setInternal }
 }

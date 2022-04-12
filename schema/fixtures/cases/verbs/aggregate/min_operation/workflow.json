@@ -1,0 +1,16 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "aggregate",
+			"input": "table4",
+			"args": {
+				"to": "newColumn",
+				"groupby": "ID",
+				"column": "quantity",
+				"operation": "min"
+			},
+			"output": "expected"
+		}
+	]
+}

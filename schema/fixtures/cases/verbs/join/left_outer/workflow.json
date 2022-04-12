@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "join",
+			"input": {
+				"source": "table1",
+				"other": "table5"
+			},
+			"args": {
+				"on": ["ID"],
+				"strategy": "left outer"
+			},
+			"output": "expected"
+		}
+	]
+}

@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "pivot",
+			"input": "table17",
+			"args": {
+				"key": "name",
+				"value": "count",
+				"operation": "median"
+			},
+			"output": "expected"
+		}
+	]
+}

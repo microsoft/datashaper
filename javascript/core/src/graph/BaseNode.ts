@@ -6,11 +6,14 @@ import type { Observable } from 'rxjs'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
+import type { Maybe } from '../primitives.js'
+import { NodeInput, NodeOutput } from '../verbs/types.js'
 import type { BoundInput } from './BoundInput.js'
-import { BoundInputImpl } from './BoundInput.js'
-import type { Maybe, Node, NodeBinding, NodeId, SocketName } from './types'
+import { DefaultBoundInput } from './BoundInput.js'
+import type { Node, NodeBinding, NodeId, SocketName } from './types'
 
-const DEFAULT_OUTPUT_NAME = 'DWC.DefaultOutput'
+const DEFAULT_INPUT_NAME = NodeInput.Source
+const DEFAULT_OUTPUT_NAME = NodeOutput.Target
 
 export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region fields
@@ -64,7 +67,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	// #region inputs
 
-	public binding(name: SocketName): Maybe<NodeBinding<T>> {
+	public binding(name: SocketName = DEFAULT_INPUT_NAME): Maybe<NodeBinding<T>> {
 		return this._inputs.get(name)?.binding
 	}
 
@@ -76,7 +79,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		return this._inputs.size
 	}
 
-	protected inputValue(name: string): Maybe<T> {
+	protected inputValue(name: SocketName = DEFAULT_INPUT_NAME): Maybe<T> {
 		this.verifyInputSocketName(name)
 		return this._inputs.get(name)?.current
 	}
@@ -127,18 +130,22 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region bind/unbind logic
 
 	public bind(binding: NodeBinding<T>): void {
-		const name = binding.input
+		const name = binding.input ?? DEFAULT_INPUT_NAME
 		this.verifyInputSocketName(name)
 		// uninstall any existing upstream socket connection
 		if (this._inputs.has(name)) {
 			this.unbind(name)
 		}
 		// subscribe to the new input
-		const input: BoundInput<T> = new BoundInputImpl(binding)
+		const input: BoundInput<T> = new DefaultBoundInput(binding)
 		this._inputs.set(name, input as BoundInput<T>)
 		input.onValueChange(() => this.recalculate())
 		this.recalculate()
 		this._bindingsChanged.next()
+	}
+
+	public bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void {
+		throw new Error('not supported')
 	}
 
 	public unbind(name: SocketName): void {
@@ -163,6 +170,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param name - The input socket name
 	 */
 	protected verifyInputSocketName(name: SocketName): void {
+		if (name === DEFAULT_INPUT_NAME) {
+			return
+		}
 		if (!this.inputs.some(s => s === name)) {
 			throw new Error(`unknown input socket name "${String(name)}"`)
 		}
@@ -188,11 +198,14 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Calculate the value of this processing node. This may be invoked even if this
 	 * processing node is not fully configured. recalulate() should account for this
 	 */
-	protected recalculate = async (): Promise<void> => {
+	protected recalculate = (): void => {
 		try {
-			await this.doRecalculate()
-		} catch (error: unknown) {
-			this.emitError(error)
+			const result = this.doRecalculate()
+			if (result?.then) {
+				result.catch(err => this.emitError(err))
+			}
+		} catch (err) {
+			this.emitError(err)
 		}
 	}
 
@@ -210,7 +223,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param value - The output value
 	 * @param output - The output socket name
 	 */
-	protected emit(value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void {
+	protected emit = (value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void => {
 		this.verifyOutputSocketName(output)
 		if (value !== this._outputs.get(output)?.value) {
 			this._outputs.get(output)?.next(value)
@@ -221,7 +234,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Emits a downstream error
 	 * @param name - The input socket name
 	 */
-	protected emitError(error: unknown): void {
+	protected emitError = (error: unknown): void => {
 		this._outputs.forEach(o => o.error(error))
 	}
 

@@ -1,0 +1,20 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "filter",
+			"input": "table8",
+			"args": {
+				"column": "count",
+				"criteria": [
+					{
+						"operator": "<",
+						"type": "value",
+						"value": 100
+					}
+				]
+			},
+			"output": "expected"
+		}
+	]
+}

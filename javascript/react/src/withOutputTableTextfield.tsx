@@ -36,7 +36,7 @@ export const withOutputTableTextfield = (
 							disabled={disabled}
 							label={label || 'Output table'}
 							placeholder={'Table name'}
-							value={step.output}
+							value={step.id}
 							styles={dropdownStyles}
 							onChange={handleOutputChange}
 						/>

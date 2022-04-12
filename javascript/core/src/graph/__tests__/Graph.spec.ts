@@ -1,9 +1,9 @@
-import { GraphImpl } from '../GraphImpl.js'
+import { DefaultGraph } from '../DefaultGraph.js'
 import { AddNode, Input, ValueNode } from './numericNodes.js'
 
-describe('GraphImpl', () => {
+describe('DefaultGraph', () => {
 	it('can register simple nodes', () => {
-		const graph = new GraphImpl<number>()
+		const graph = new DefaultGraph<number>()
 		const two = new ValueNode(2)
 		graph.add(two)
 		expect(graph.nodes).toContain(two.id)
@@ -11,7 +11,7 @@ describe('GraphImpl', () => {
 	})
 
 	it('can register nodes that are bound to nodes already added to the graph', () => {
-		const graph = new GraphImpl<number>()
+		const graph = new DefaultGraph<number>()
 		const two = new ValueNode(2)
 		const three = new ValueNode(3)
 
@@ -35,7 +35,7 @@ describe('GraphImpl', () => {
 	})
 
 	it('can register nodes already bound to nodes being registered', () => {
-		const graph = new GraphImpl<number>()
+		const graph = new DefaultGraph<number>()
 		const two = new ValueNode(2)
 		const three = new ValueNode(3)
 
@@ -52,7 +52,7 @@ describe('GraphImpl', () => {
 	})
 
 	it('can detect cicles', () => {
-		const graph = new GraphImpl<number>()
+		const graph = new DefaultGraph<number>()
 
 		// add before bind
 		const add = new AddNode()
@@ -66,7 +66,7 @@ describe('GraphImpl', () => {
 	})
 
 	it('can remove nodes', () => {
-		const graph = new GraphImpl<number>()
+		const graph = new DefaultGraph<number>()
 
 		// add before bind
 		const add = new AddNode()
