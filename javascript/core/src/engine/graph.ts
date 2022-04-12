@@ -4,7 +4,7 @@
  */
 import { DefaultGraph, observableNode } from '../graph/index.js'
 import type { Graph, Node } from '../graph/types.js'
-import type { InputNodeBinding } from '../specification.js'
+import type { InputBinding } from '../specification.js'
 import type { Step } from '../steps/index.js'
 import type { Store } from '../store/types.js'
 import type { TableContainer } from '../tables/types.js'
@@ -55,11 +55,11 @@ export function createGraph(
 		// if any inputs nodes are in the graph, bind them
 		for (const [input, binding] of Object.entries(step.input)) {
 			if (input !== 'others') {
-				const b = binding as InputNodeBinding
+				const b = binding as InputBinding
 				current.bind({ input, node: getNode(b.node), output: b.output })
 			} else {
 				current.bindVariadic(
-					(binding as InputNodeBinding[]).map(b => ({
+					(binding as InputBinding[]).map(b => ({
 						node: getNode(b.node),
 						output: b.output,
 					})),

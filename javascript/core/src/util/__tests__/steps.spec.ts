@@ -8,8 +8,10 @@ import { verbs } from '../steps.js'
 describe('step utilities', () => {
 	test('all verbs tagged', () => {
 		// ensure that every verb in the canonical enum has a tagged entry
-		const canonical = Object.values(Verb)
-		const tagged = verbs()
-		expect(tagged).toEqual(canonical)
+		const canonical = new Set<Verb>(Object.values(Verb))
+		const tagged = new Set<Verb>(verbs())
+
+		canonical.forEach(c => expect(tagged.has(c)).toBeTruthy())
+		tagged.forEach(c => expect(canonical.has(c)).toBeTruthy())
 	})
 })

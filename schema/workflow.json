@@ -22,6 +22,52 @@
             },
             "type": "object"
         },
+        "BasicIO": {
+            "description": "Single-input, single-output step I/O",
+            "properties": {
+                "input": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "source": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InputBinding"
+                                        },
+                                        {
+                                            "type": "string"
+                                        }
+                                    ],
+                                    "description": "Step input specifications. If this is a string, we'll bind to the default output\nof the given node ID. If no node has that ID, we'll bind against the table-store's\nnamed table given the string.\n\nIf this is an input binding, it's an explicit binding to another step in the pipeline."
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "Standard step input; single source with default name \"source\""
+                },
+                "output": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "target": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "Standard step output; single output with default name \"target\""
+                }
+            },
+            "type": "object"
+        },
         "BinArgs": {
             "properties": {
                 "clamped": {
@@ -197,6 +243,56 @@
             },
             "type": "object"
         },
+        "DualInputIO": {
+            "description": "Dual-input, single-output step I/O",
+            "properties": {
+                "input": {
+                    "description": "The inputs that must be bound; \"source\" & \"other\".",
+                    "properties": {
+                        "other": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/InputBinding"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "description": "The secondary input"
+                        },
+                        "source": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/InputBinding"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "description": "The primary input"
+                        }
+                    },
+                    "type": "object"
+                },
+                "output": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "target": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "Standard step output; single output with default name \"target\""
+                }
+            },
+            "type": "object"
+        },
         "EraseArgs": {
             "properties": {
                 "columns": {
@@ -334,6 +430,20 @@
             },
             "type": "object"
         },
+        "InputBinding": {
+            "description": "An explicit step input binding",
+            "properties": {
+                "node": {
+                    "description": "The id of the node to bind to",
+                    "type": "string"
+                },
+                "output": {
+                    "description": "The named output of the node to bind with. If not defined, this will\nbe the default output \"target\"",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "InputColumnListArgs": {
             "description": "Base interface for a number of operations that work on a column list.",
             "properties": {
@@ -434,7 +544,7 @@
             ],
             "type": "string"
         },
-        "OneHotArgs": {
+        "OnehotArgs": {
             "properties": {
                 "column": {
                     "description": "Name of the input column for columnnar operations.",
@@ -602,6 +712,67 @@
             },
             "type": "object"
         },
+        "VariadicIO": {
+            "description": "Multi-input, single output step I/O",
+            "properties": {
+                "input": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "others": {
+                                    "description": "The variadic secondary inputs",
+                                    "items": {
+                                        "anyOf": [
+                                            {
+                                                "$ref": "#/definitions/InputBinding"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "description": "Step input specifications. If this is a string, we'll bind to the default output\nof the given node ID. If no node has that ID, we'll bind against the table-store's\nnamed table given the string.\n\nIf this is an input binding, it's an explicit binding to another step in the pipeline."
+                                    },
+                                    "type": "array"
+                                },
+                                "source": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/definitions/InputBinding"
+                                        },
+                                        {
+                                            "type": "string"
+                                        }
+                                    ],
+                                    "description": "The primary input"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The step inputs; a required \"source\" and optional, variadic \"others\". If this is a\nstring, it is used to bind the primary input."
+                },
+                "output": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "target": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "Standard step output; single output with default name \"target\""
+                }
+            },
+            "type": "object"
+        },
         "WindowArgs": {
             "properties": {
                 "column": {
@@ -633,15 +804,18 @@
             "type": "string"
         }
     },
-    "description": "The root type used for JSON schema specification",
+    "description": "The root data-wrangling specification. (Used for generating JSON Schema)",
     "properties": {
         "description": {
+            "description": "A user-friendly description of the specification",
             "type": "string"
         },
         "name": {
+            "description": "The name of the specification",
             "type": "string"
         },
         "steps": {
+            "description": "The workflow steps",
             "items": {
                 "anyOf": [
                     {
@@ -664,56 +838,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -737,56 +862,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -810,56 +886,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -883,56 +910,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -953,77 +931,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "others": {
-                                                        "items": {
-                                                            "anyOf": [
-                                                                {
-                                                                    "properties": {
-                                                                        "node": {
-                                                                            "type": "string"
-                                                                        },
-                                                                        "output": {
-                                                                            "type": "string"
-                                                                        }
-                                                                    },
-                                                                    "type": "object"
-                                                                },
-                                                                {
-                                                                    "type": "string"
-                                                                }
-                                                            ],
-                                                            "description": "Node Input Binding"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/VariadicIO"
                             }
                         ]
                     },
@@ -1047,56 +955,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -1120,147 +979,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepCommon"
-                            },
-                            {
-                                "properties": {
-                                    "verb": {
-                                        "enum": [
-                                            "difference"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "others": {
-                                                        "items": {
-                                                            "anyOf": [
-                                                                {
-                                                                    "properties": {
-                                                                        "node": {
-                                                                            "type": "string"
-                                                                        },
-                                                                        "output": {
-                                                                            "type": "string"
-                                                                        }
-                                                                    },
-                                                                    "type": "object"
-                                                                },
-                                                                {
-                                                                    "type": "string"
-                                                                }
-                                                            ],
-                                                            "description": "Node Input Binding"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -1284,56 +1003,28 @@
                                 "type": "object"
                             },
                             {
+                                "$ref": "#/definitions/BasicIO"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepCommon"
+                            },
+                            {
                                 "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
+                                    "verb": {
+                                        "enum": [
+                                            "difference"
                                         ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/VariadicIO"
                             }
                         ]
                     },
@@ -1357,56 +1048,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -1430,56 +1072,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -1503,56 +1096,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -1576,56 +1120,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -1649,56 +1144,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -1722,56 +1168,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -1795,56 +1192,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -1865,77 +1213,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "others": {
-                                                        "items": {
-                                                            "anyOf": [
-                                                                {
-                                                                    "properties": {
-                                                                        "node": {
-                                                                            "type": "string"
-                                                                        },
-                                                                        "output": {
-                                                                            "type": "string"
-                                                                        }
-                                                                    },
-                                                                    "type": "object"
-                                                                },
-                                                                {
-                                                                    "type": "string"
-                                                                }
-                                                            ],
-                                                            "description": "Node Input Binding"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/VariadicIO"
                             }
                         ]
                     },
@@ -1959,67 +1237,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "properties": {
-                                            "other": {
-                                                "anyOf": [
-                                                    {
-                                                        "properties": {
-                                                            "node": {
-                                                                "type": "string"
-                                                            },
-                                                            "output": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    {
-                                                        "type": "string"
-                                                    }
-                                                ],
-                                                "description": "Node Input Binding"
-                                            },
-                                            "source": {
-                                                "anyOf": [
-                                                    {
-                                                        "properties": {
-                                                            "node": {
-                                                                "type": "string"
-                                                            },
-                                                            "output": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    {
-                                                        "type": "string"
-                                                    }
-                                                ],
-                                                "description": "Node Input Binding"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/DualInputIO"
                             }
                         ]
                     },
@@ -2043,67 +1261,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "properties": {
-                                            "other": {
-                                                "anyOf": [
-                                                    {
-                                                        "properties": {
-                                                            "node": {
-                                                                "type": "string"
-                                                            },
-                                                            "output": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    {
-                                                        "type": "string"
-                                                    }
-                                                ],
-                                                "description": "Node Input Binding"
-                                            },
-                                            "source": {
-                                                "anyOf": [
-                                                    {
-                                                        "properties": {
-                                                            "node": {
-                                                                "type": "string"
-                                                            },
-                                                            "output": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    {
-                                                        "type": "string"
-                                                    }
-                                                ],
-                                                "description": "Node Input Binding"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/DualInputIO"
                             }
                         ]
                     },
@@ -2127,56 +1285,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2188,7 +1297,7 @@
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/OneHotArgs"
+                                        "$ref": "#/definitions/OnehotArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -2200,56 +1309,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2273,56 +1333,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2346,56 +1357,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2419,56 +1381,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2492,56 +1405,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2565,56 +1429,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2638,56 +1453,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2711,56 +1477,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2784,56 +1501,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2857,56 +1525,28 @@
                                 "type": "object"
                             },
                             {
+                                "$ref": "#/definitions/BasicIO"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepCommon"
+                            },
+                            {
                                 "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
+                                    "verb": {
+                                        "enum": [
+                                            "ungroup"
                                         ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -2927,77 +1567,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "others": {
-                                                        "items": {
-                                                            "anyOf": [
-                                                                {
-                                                                    "properties": {
-                                                                        "node": {
-                                                                            "type": "string"
-                                                                        },
-                                                                        "output": {
-                                                                            "type": "string"
-                                                                        }
-                                                                    },
-                                                                    "type": "object"
-                                                                },
-                                                                {
-                                                                    "type": "string"
-                                                                }
-                                                            ],
-                                                            "description": "Node Input Binding"
-                                                        },
-                                                        "type": "array"
-                                                    },
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/VariadicIO"
                             }
                         ]
                     },
@@ -3008,53 +1578,6 @@
                             },
                             {
                                 "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    },
                                     "verb": {
                                         "enum": [
                                             "unorder"
@@ -3063,71 +1586,9 @@
                                     }
                                 },
                                 "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepCommon"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "ungroup"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -3151,56 +1612,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     },
@@ -3224,56 +1636,7 @@
                                 "type": "object"
                             },
                             {
-                                "properties": {
-                                    "input": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "source": {
-                                                        "anyOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "node": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "output": {
-                                                                        "type": "string"
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            },
-                                                            {
-                                                                "type": "string"
-                                                            }
-                                                        ],
-                                                        "description": "Node Input Binding"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Standard I/O Patterns"
-                                    },
-                                    "output": {
-                                        "anyOf": [
-                                            {
-                                                "properties": {
-                                                    "target": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/BasicIO"
                             }
                         ]
                     }
