@@ -117,9 +117,13 @@ export class DefaultPipeline implements Pipeline {
 		if (this.steps.length === 0) {
 			throw new Error('cannot run empty pipeline')
 		}
-		const lastStepId = this._steps[this._steps.length - 1]!.id
+
+		const lastStep = this._steps[this._steps.length - 1]!
+		const lastStepOutput = lastStep.output['target']!
+
+		console.log('last step output', lastStepOutput)
 		return new Promise<TableContainer>(resolve => {
-			const unsub = this.store.onItemChange(lastStepId, res => {
+			const unsub = this.store.onItemChange(lastStepOutput, res => {
 				resolve(res as TableContainer)
 				setTimeout(() => unsub(), 0)
 			})

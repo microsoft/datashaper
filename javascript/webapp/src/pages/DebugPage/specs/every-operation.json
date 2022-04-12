@@ -5,8 +5,8 @@
 	"steps": [
 		{
 			"verb": "aggregate",
-			"inputs": { "source": { "node": "data/products.csv" } },
-			"outputs": { "target": "aggregate-1" },
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "aggregate-1" },
 			"args": {
 				"groupby": "ID",
 				"column": "FY21 Sales",
@@ -16,8 +16,8 @@
 		},
 		{
 			"verb": "aggregate",
-			"inputs": { "source": { "node": "data/products.csv" } },
-			"outputs": { "target": "aggregate-2" },
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "aggregate-2" },
 			"args": {
 				"groupby": "ID",
 				"column": "Product",
@@ -27,8 +27,8 @@
 		},
 		{
 			"verb": "bin",
-			"inputs": { "source": { "node": "data/products.csv" } },
-			"outputs": { "target": "bin-1" },
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-1" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "auto",
@@ -37,8 +37,8 @@
 		},
 		{
 			"verb": "binarize",
-			"inputs": { "source": { "node": "data/products.csv" } },
-			"outputs": { "target": "binarize-1" },
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "binarize-1" },
 			"args": {
 				"column": "FY21 Sales",
 				"to": "FY21 Sales < 10k",
@@ -53,8 +53,8 @@
 		},
 		{
 			"verb": "boolean",
-			"inputs": { "source": { "node": "data/companies2.csv" } },
-			"outputs": { "target": "boolean-1" },
+			"input": { "source": "data/companies2.csv" },
+			"output": { "target": "boolean-1" },
 			"args": {
 				"columns": ["Name", "US"],
 				"operator": "and",
@@ -63,16 +63,16 @@
 		},
 		{
 			"verb": "concat",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "concat-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "concat-1" },
 			"args": {
 				"others": ["data/companies2.csv"]
 			}
 		},
 		{
 			"verb": "convert",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "convert-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "convert-1" },
 			"args": {
 				"columns": ["ID"],
 				"type": "int"
@@ -80,16 +80,16 @@
 		},
 		{
 			"verb": "dedupe",
-			"inputs": { "source": { "node": "data/products.csv" } },
-			"outputs": { "target": "dedupe-1" },
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "dedupe-1" },
 			"args": {
 				"columns": ["ID"]
 			}
 		},
 		{
 			"verb": "derive",
-			"inputs": { "source": { "node": "data/products.csv" } },
-			"outputs": { "target": "derive-1" },
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "derive-1" },
 			"args": {
 				"column1": "FY20 Sales",
 				"operator": "+",
@@ -99,16 +99,16 @@
 		},
 		{
 			"verb": "difference",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "difference-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "difference-1" },
 			"args": {
 				"others": ["data/companies2.csv"]
 			}
 		},
 		{
 			"verb": "erase",
-			"inputs": { "source": { "node": "data/products.csv" } },
-			"outputs": { "target": "erase-1" },
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "erase-1" },
 			"args": {
 				"value": 9000,
 				"columns": ["FY20 Sales", "FY21 Sales"]
@@ -116,16 +116,16 @@
 		},
 		{
 			"verb": "fetch",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "fetch-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "fetch-1" },
 			"args": {
 				"url": "https://vega.github.io/vega/data/seattle-weather-hourly-normals.csv"
 			}
 		},
 		{
 			"verb": "fill",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "fill-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "fill-1" },
 			"args": {
 				"value": 1,
 				"to": "New Column"
@@ -133,8 +133,8 @@
 		},
 		{
 			"verb": "filter",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "filter-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "filter-1" },
 			"args": {
 				"column": "Employees",
 				"criteria": [
@@ -148,8 +148,8 @@
 		},
 		{
 			"verb": "fold",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "fold-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "fold-1" },
 			"args": {
 				"columns": ["Name", "Employees"],
 				"to": ["key", "value"]
@@ -157,16 +157,16 @@
 		},
 		{
 			"verb": "groupby",
-			"inputs": { "source": { "node": "data/products.csv" } },
-			"outputs": { "target": "groupby-1" },
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "groupby-1" },
 			"args": {
 				"columns": ["ID"]
 			}
 		},
 		{
 			"verb": "impute",
-			"inputs": "data/companies2.csv",
-			"outputs": { "target": "impute-1" },
+			"input": "data/companies2.csv",
+			"output": { "target": "impute-1" },
 			"args": {
 				"columns": ["Name"],
 				"value": "emptyValue"
@@ -174,16 +174,16 @@
 		},
 		{
 			"verb": "intersect",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "intersect-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "intersect-1" },
 			"args": {
 				"others": ["data/companies2.csv"]
 			}
 		},
 		{
 			"verb": "join",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "join-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "join-1" },
 			"args": {
 				"other": "data/products.csv",
 				"on": ["ID", "ID"]
@@ -191,8 +191,8 @@
 		},
 		{
 			"verb": "lookup",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "lookup-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "lookup-1" },
 			"args": {
 				"other": "data/products.csv",
 				"on": ["ID", "ID"],
@@ -201,8 +201,8 @@
 		},
 		{
 			"verb": "merge",
-			"inputs": { "source": { "node": "data/products.csv" } },
-			"outputs": { "target": "merge-1" },
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "merge-1" },
 			"args": {
 				"strategy": "concat",
 				"to": "result",
@@ -211,8 +211,8 @@
 		},
 		{
 			"verb": "pivot",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "pivot-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "pivot-1" },
 			"args": {
 				"key": "ID",
 				"value": "Name",
@@ -230,8 +230,8 @@
 		},
 		{
 			"verb": "orderby",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "orderby-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "orderby-1" },
 			"args": {
 				"orders": [
 					{
@@ -243,8 +243,8 @@
 		},
 		{
 			"verb": "recode",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "recode-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "recode-1" },
 			"args": {
 				"column": "ID",
 				"to": "Greetings",
@@ -259,8 +259,8 @@
 		},
 		{
 			"verb": "rename",
-			"inputs": "data/stocks.csv",
-			"outputs": { "target": "rename-1" },
+			"input": "data/stocks.csv",
+			"output": { "target": "rename-1" },
 			"args": {
 				"columns": {
 					"Symbol": "symbol",
@@ -275,8 +275,8 @@
 		},
 		{
 			"verb": "rollup",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "rollup-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "rollup-1" },
 			"args": {
 				"to": "count",
 				"column": "Product",
@@ -285,32 +285,32 @@
 		},
 		{
 			"verb": "sample",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "sample-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "sample-1" },
 			"args": {
 				"size": 2
 			}
 		},
 		{
 			"verb": "select",
-			"inputs": "data/stocks.csv",
-			"outputs": { "target": "select-1" },
+			"input": "data/stocks.csv",
+			"output": { "target": "select-1" },
 			"args": {
 				"columns": ["Symbol", "Date", "Close", "Volume", "Open", "High", "Low"]
 			}
 		},
 		{
 			"verb": "spread",
-			"inputs": "aggregate-2",
-			"outputs": { "target": "spread-1" },
+			"input": "aggregate-2",
+			"output": { "target": "spread-1" },
 			"args": {
 				"column": "Product List"
 			}
 		},
 		{
 			"verb": "unfold",
-			"inputs": "fold-1",
-			"outputs": { "target": "unfold-1" },
+			"input": "fold-1",
+			"output": { "target": "unfold-1" },
 			"args": {
 				"key": "key",
 				"value": "value"
@@ -318,40 +318,40 @@
 		},
 		{
 			"verb": "ungroup",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "ungroup-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "ungroup-1" },
 			"args": {
 				"columns": ["Name", "Employees"]
 			}
 		},
 		{
 			"verb": "union",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "union-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "union-1" },
 			"args": {
 				"others": ["data/companies2.csv"]
 			}
 		},
 		{
 			"verb": "unorder",
-			"inputs": { "source": { "node": "data/companies.csv" } },
-			"outputs": { "target": "unorder-1" },
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "unorder-1" },
 			"args": {
 				"orders": [{ "column": "Name", "direction": "asc" }]
 			}
 		},
 		{
 			"verb": "unroll",
-			"inputs": "aggregate-2",
-			"outputs": { "target": "unroll-1" },
+			"input": "aggregate-2",
+			"output": { "target": "unroll-1" },
 			"args": {
 				"columns": ["Product List"]
 			}
 		},
 		{
 			"verb": "window",
-			"inputs": "groupby-1",
-			"outputs": { "target": "window-1" },
+			"input": "groupby-1",
+			"output": { "target": "window-1" },
 			"args": {
 				"to": "First Product",
 				"column": "Product",

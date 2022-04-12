@@ -6,8 +6,8 @@
 		{
 			"id": "n1",
 			"verb": "derive",
-			"inputs": { "source": { "node": "data/stocks.csv" } },
-			"outputs": { "target": "output-table-0" },
+			"input": { "source": "data/stocks.csv" },
+			"output": { "target": "output-table-0" },
 			"args": {
 				"to": "Month Key",
 				"column1": "Symbol",
@@ -18,8 +18,8 @@
 		{
 			"id": "n2",
 			"verb": "aggregate",
-			"inputs": { "source": { "node": "output-table-0" } },
-			"outputs": { "target": "output-table-1" },
+			"input": { "source": "output-table-0" },
+			"output": { "target": "output-table-1" },
 			"args": {
 				"to": "Monthly Average",
 				"groupby": "Month Key",
@@ -30,8 +30,8 @@
 		{
 			"id": "n3",
 			"verb": "lookup",
-			"inputs": { "source": { "node": "output-table-1" } },
-			"outputs": { "target": "output-table-2" },
+			"input": { "source": "output-table-1" },
+			"output": { "target": "output-table-2" },
 			"args": {
 				"columns": ["Symbol"],
 				"other": "output-table-0",
@@ -41,8 +41,8 @@
 		{
 			"id": "n4",
 			"verb": "aggregate",
-			"inputs": { "source": { "node": "output-table-2" } },
-			"outputs": { "target": "output-table-3" },
+			"input": { "source": "output-table-2" },
+			"output": { "target": "output-table-3" },
 			"args": {
 				"to": "Monthly List",
 				"groupby": "Symbol",

@@ -98,6 +98,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 			pipeline.clear()
 			pipeline.addAll(spec.steps)
 			const res = await pipeline.run()
+			console.log('RES', res)
 			const output = store.toMap()
 			store.print()
 			setResult(res.table)

@@ -5,8 +5,8 @@
 	"steps": [
 		{
 			"verb": "bin",
-			"inputs": "data/products.csv",
-			"outputs": "bin-1",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-1" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "auto",
@@ -15,8 +15,8 @@
 		},
 		{
 			"verb": "bin",
-			"inputs": "data/products.csv",
-			"outputs": "bin-2",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-2" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
@@ -26,8 +26,8 @@
 		},
 		{
 			"verb": "bin",
-			"inputs": "data/products.csv",
-			"outputs": "bin-3",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-3" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed count",
@@ -37,8 +37,8 @@
 		},
 		{
 			"verb": "bin",
-			"inputs": "data/products.csv",
-			"outputs": "bin-4",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-4" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
@@ -50,8 +50,8 @@
 		},
 		{
 			"verb": "bin",
-			"inputs": "data/products.csv",
-			"outputs": "bin-5",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-5" },
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",

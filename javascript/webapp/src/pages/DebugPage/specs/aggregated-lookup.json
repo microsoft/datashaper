@@ -5,19 +5,19 @@
 	"steps": [
 		{
 			"verb": "join",
-			"inputs": {
+			"input": {
 				"source": "data/companies.csv",
 				"other": "data/products.csv"
 			},
-			"outputs": "join-1",
+			"outputs": { "target": "join-1" },
 			"args": {
 				"on": ["ID"]
 			}
 		},
 		{
 			"verb": "filter",
-			"inputs": "join-1",
-			"outputs": "filter-1",
+			"input": { "source": "join-1" },
+			"outputs": { "target": "filter-1" },
 			"args": {
 				"column": "FY21 Sales",
 				"criteria": [
@@ -31,8 +31,8 @@
 		},
 		{
 			"verb": "aggregate",
-			"inputs": "filter-1",
-			"outputs": "aggregate-1",
+			"input": { "source": "filter-1" },
+			"outputs": { "target": "aggregate-1" },
 			"args": {
 				"groupby": "ID",
 				"column": "FY21 Sales",
@@ -42,11 +42,11 @@
 		},
 		{
 			"verb": "lookup",
-			"inputs": {
+			"input": {
 				"source": "data/companies.csv",
 				"other": "aggregate-1"
 			},
-			"outputs": "lookup-1",
+			"outputs": { "target": "lookup-1" },
 			"args": {
 				"on": ["ID"],
 				"columns": ["Total sales >= 10k"]
