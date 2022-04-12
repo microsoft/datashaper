@@ -8,5 +8,5 @@
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true
 	},
-	"include": ["src/steps/specification.ts"]
+	"include": ["src/specification.ts"]
 }

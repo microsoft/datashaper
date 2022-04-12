@@ -4,6 +4,11 @@
  */
 import { v4 as uuid } from 'uuid'
 
+import type {
+	InputBinding,
+	InputNodeBinding,
+	StepCommon,
+} from '../specification.js'
 import {
 	BinStrategy,
 	BooleanOperator,
@@ -11,14 +16,8 @@ import {
 	JoinStrategy,
 	Verb,
 } from '../verbs/index.js'
-import type { InputBinding,InputNodeBinding } from './specification.js'
 
-export interface StepInput<T extends object = any> {
-	/**
-	 * A unique identifier for this step
-	 */
-	id?: string
-
+export interface StepInput<T extends object = any> extends StepCommon {
 	/**
 	 * The verb being executed
 	 */
