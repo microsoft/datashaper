@@ -9,6 +9,7 @@ import type {
 	TableContainer,
 	Verb,
 } from '@data-wrangling-components/core'
+import { readSpec } from '@data-wrangling-components/core'
 import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
 	StatsColumnType,
@@ -95,7 +96,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 			// otherwise we can't fill in dropdowns with column names, for example
 			setExampleSpec(spec)
 			pipeline.clear()
-			pipeline.addAll(spec.steps)
+			pipeline.addAll(readSpec(spec))
 			// the pipeline will transform the steps into a consistent format - string shorthands are
 			// unpacked into object forms.
 			setSteps(pipeline.steps)

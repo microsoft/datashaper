@@ -6,7 +6,7 @@ import { table } from 'arquero'
 
 import { Verb } from '../../index.js'
 import type { Step } from '../../steps/index.js'
-import { step } from '../../steps/step.js'
+import { readSteps } from '../../steps/readSteps.js'
 import { createTableStore } from '../../store/index.js'
 import type { Store } from '../../store/types.js'
 import type { TableContainer } from '../../tables/index.js'
@@ -22,8 +22,8 @@ describe('stepGraph', () => {
 	})
 
 	test('runs a single step with normal input/output', () => {
-		const steps: Step[] = [
-			step({
+		const steps: Step[] = readSteps([
+			{
 				verb: Verb.Fill,
 				args: {
 					to: 'filled',
@@ -31,8 +31,8 @@ describe('stepGraph', () => {
 				},
 				input: 'input',
 				output: 'output',
-			}),
-		]
+			},
+		])
 
 		const g = createGraph(steps, store)
 		expect(g).toBeDefined()
@@ -43,8 +43,8 @@ describe('stepGraph', () => {
 	})
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {
-		const steps: Step[] = [
-			step({
+		const steps: Step[] = readSteps([
+			{
 				id: 'output-1',
 				verb: Verb.Fill,
 				input: 'input',
@@ -53,8 +53,8 @@ describe('stepGraph', () => {
 					value: 1,
 				},
 				output: 'output-1',
-			}),
-			step({
+			},
+			{
 				verb: Verb.Fill,
 				args: {
 					to: 'filled2',
@@ -64,8 +64,8 @@ describe('stepGraph', () => {
 				// todo: restore auto-wiring?
 				input: 'output-1',
 				output: 'output-2',
-			}),
-		]
+			},
+		])
 
 		const g = createGraph(steps, store)
 		expect(g).toBeDefined()

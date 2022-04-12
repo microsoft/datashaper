@@ -4,11 +4,7 @@
  */
 import { v4 as uuid } from 'uuid'
 
-import type {
-	InputBinding,
-	InputSpecification,
-	StepCommon,
-} from '../specification.js'
+import type { InputBinding } from '../specification.js'
 import {
 	BinStrategy,
 	BooleanOperator,
@@ -16,69 +12,7 @@ import {
 	JoinStrategy,
 	Verb,
 } from '../verbs/index.js'
-
-export interface StepInput<T extends object = any> extends StepCommon {
-	/**
-	 * The verb being executed
-	 */
-	verb: Verb
-
-	/**
-	 * The verb arguments
-	 */
-	args?: T
-
-	/**
-	 * The bound inputs
-	 * Key = Input Socket Name
-	 * Value = Socket Binding to other node
-	 */
-	input?:
-		| string
-		| ({
-				others?: InputSpecification[]
-		  } & Record<string, InputSpecification>)
-
-	/**
-	 * The observed outputs to record.
-	 * Key = output socket name
-	 * Value = store table name
-	 */
-	output: string | Record<string, string>
-}
-
-export interface Step<T extends object = any> {
-	/**
-	 * A unique identifier for this step
-	 */
-	id: string
-
-	/**
-	 * The verb being executed
-	 */
-	verb: Verb
-
-	/**
-	 * The verb arguments
-	 */
-	args: T
-
-	/**
-	 * The bound inputs
-	 * Key = Input Socket Name
-	 * Value = Socket Binding to other node
-	 */
-	input: {
-		others?: InputBinding[]
-	} & Record<string, InputBinding>
-
-	/**
-	 * The observed outputs to record.
-	 * Key = output socket name
-	 * Value = store table name
-	 */
-	output: Record<string, string>
-}
+import type { Step,StepInput } from './types.js'
 
 /**
  * Factory function to create new verb configs
@@ -87,18 +21,15 @@ export interface Step<T extends object = any> {
  * to preselect.
  * @param verb -
  */
-export function step<T extends object>({
-	verb,
-	args = {} as any,
-	id = uuid(),
-	input = {},
-	output = {},
-}: StepInput<T>): Step<T> {
+export function readStep<T extends object>(
+	{ verb, args = {} as any, id = uuid(), input, output }: StepInput<T>,
+	previous?: Step | undefined,
+): Step<T> {
 	const base = {
 		id,
 		args,
 		verb,
-		input: fixInputs(input),
+		input: fixInputs(input, previous),
 		output: fixOutputs(output),
 	}
 	switch (verb) {
@@ -216,12 +147,31 @@ export function step<T extends object>({
 	return base
 }
 
-function fixInputs(input: StepInput['input']): Step['input'] {
-	if (typeof input === 'string') {
+function fixInputs(
+	input: StepInput['input'],
+	previous: Step | undefined,
+): Step['input'] {
+	/**
+	 * Case: No input is defined, no previous step available.
+	 */
+	if (input == null && previous == null) {
+		return {}
+	} else if (input == null && previous != null) {
+		/**
+		 * Case: No input is defined, previous step is available, use it's default output
+		 */
+		return { source: { node: previous.id } }
+	} else if (typeof input === 'string') {
+		/**
+		 * Case: String shorthand is used, convert to object specification
+		 */
 		return { source: { node: input } }
 	} else {
+		/**
+		 * Case: Object is used, preserve object specs and convert
+		 * string-shorthand specs to full input objects
+		 */
 		const result: Step['input'] = { ...input } as any
-		// rewrite any shorthand inputs into full inputs
 		Object.keys(result).forEach((k: string) => {
 			const binding = result[k]
 			if (typeof binding === 'string') {
@@ -229,6 +179,7 @@ function fixInputs(input: StepInput['input']): Step['input'] {
 			}
 		})
 
+		// Handle the variadic case (e.g. "others" array is defined)
 		if (result.others != null) {
 			result.others = result.others.map(o =>
 				typeof o === 'string' ? { node: o } : (o as any as InputBinding),

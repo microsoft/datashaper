@@ -2,6 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { StepCommon } from '../specification.js'
+import type { InputBinding,InputSpecification } from '../specification.js'
 import type {
 	AggregateArgs,
 	BinArgs,
@@ -32,9 +34,78 @@ import type {
 	SpreadArgs,
 	UnfoldArgs,
 	UnrollArgs,
+	Verb,
 	WindowArgs,
 } from '../verbs/index.js'
-import type { Step } from './step.js'
+
+export interface SpecificationInput {
+	input?: string
+	output?: string
+	steps: StepInput[]
+}
+
+export interface StepInput<T extends object = any> extends StepCommon {
+	/**
+	 * The verb being executed
+	 */
+	verb: Verb
+
+	/**
+	 * The verb arguments
+	 */
+	args?: T
+
+	/**
+	 * The bound inputs
+	 * Key = Input Socket Name
+	 * Value = Socket Binding to other node
+	 */
+	input?:
+		| string
+		| ({
+				others?: InputSpecification[]
+		  } & Record<string, InputSpecification>)
+
+	/**
+	 * The observed outputs to record.
+	 * Key = output socket name
+	 * Value = store table name
+	 */
+	output: string | Record<string, string>
+}
+
+export interface Step<T extends object = any> {
+	/**
+	 * A unique identifier for this step
+	 */
+	id: string
+
+	/**
+	 * The verb being executed
+	 */
+	verb: Verb
+
+	/**
+	 * The verb arguments
+	 */
+	args: T
+
+	/**
+	 * The bound inputs
+	 * Key = Input Socket Name
+	 * Value = Socket Binding to other node
+	 */
+	input: {
+		others?: InputBinding[]
+	} & Record<string, InputBinding>
+
+	/**
+	 * The observed outputs to record.
+	 * Key = output socket name
+	 * Value = store table name
+	 */
+	output: Record<string, string>
+}
 
 export type AggregateStep = Step<AggregateArgs>
 export type BinStep = Step<BinArgs>

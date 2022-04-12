@@ -50,6 +50,18 @@ export interface Specification {
 	description?: string
 
 	/**
+	 * If specified, the default input to use. This will specify the default input of the first step.
+	 * If the first step already has a defined default input, this will throw.
+	 */
+	input?: string
+
+	/**
+	 * If specified, the default output to use. This is equivalent to defining the 'output' property
+	 * of the last step in the steps array
+	 */
+	output?: string
+
+	/**
 	 * The workflow steps
 	 */
 	steps?: StepSpecification[]
@@ -142,14 +154,17 @@ export interface InputBinding {
  */
 export interface BasicIO {
 	/**
-	 * Standard step input; single source with default name "source"
+	 * Standard step input; single source with default name "source".
+	 *
+	 * If undefined, the default output of the previous step will be used (if available).
+	 * If no previous step is available, this will remain undefined
 	 */
-	input: string | { source: InputSpecification }
+	input?: string | { source: InputSpecification }
 
 	/**
 	 * Standard step output; single output with default name "target"
 	 */
-	output: string | { target: string }
+	output?: string | { target: string }
 }
 
 /**
@@ -161,12 +176,12 @@ export interface DualInputIO extends BasicIO {
 	 */
 	input: {
 		/**
-		 * The primary input
+		 * The primary input, which must be specified
 		 */
 		source: InputSpecification
 
 		/**
-		 * The secondary input
+		 * The secondary input, which must be specified
 		 */
 		other: InputSpecification
 	}
@@ -180,17 +195,15 @@ export interface VariadicIO extends BasicIO {
 	 * The step inputs; a required "source" and optional, variadic "others". If this is a
 	 * string, it is used to bind the primary input.
 	 */
-	input:
-		| string
-		| {
-				/**
-				 * The primary input
-				 */
-				source: InputSpecification
+	input: {
+		/**
+		 * The primary input
+		 */
+		source: InputSpecification
 
-				/**
-				 * The variadic secondary inputs
-				 */
-				others?: InputSpecification[]
-		  }
+		/**
+		 * The variadic secondary inputs
+		 */
+		others?: InputSpecification[]
+	}
 }

@@ -47,7 +47,7 @@
                             "type": "string"
                         }
                     ],
-                    "description": "Standard step input; single source with default name \"source\""
+                    "description": "Standard step input; single source with default name \"source\".\n\nIf undefined, the default output of the previous step will be used (if available).\nIf no previous step is available, this will remain undefined"
                 },
                 "output": {
                     "anyOf": [
@@ -258,7 +258,7 @@
                                     "type": "string"
                                 }
                             ],
-                            "description": "The secondary input"
+                            "description": "The secondary input, which must be specified"
                         },
                         "source": {
                             "anyOf": [
@@ -269,7 +269,7 @@
                                     "type": "string"
                                 }
                             ],
-                            "description": "The primary input"
+                            "description": "The primary input, which must be specified"
                         }
                     },
                     "type": "object"
@@ -716,43 +716,36 @@
             "description": "Multi-input, single output step I/O",
             "properties": {
                 "input": {
-                    "anyOf": [
-                        {
-                            "properties": {
-                                "others": {
-                                    "description": "The variadic secondary inputs",
-                                    "items": {
-                                        "anyOf": [
-                                            {
-                                                "$ref": "#/definitions/InputBinding"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ],
-                                        "description": "Step input specifications. If this is a string, we'll bind to the default output\nof the given node ID. If no node has that ID, we'll bind against the table-store's\nnamed table given the string.\n\nIf this is an input binding, it's an explicit binding to another step in the pipeline."
+                    "description": "The step inputs; a required \"source\" and optional, variadic \"others\". If this is a\nstring, it is used to bind the primary input.",
+                    "properties": {
+                        "others": {
+                            "description": "The variadic secondary inputs",
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/definitions/InputBinding"
                                     },
-                                    "type": "array"
-                                },
-                                "source": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/definitions/InputBinding"
-                                        },
-                                        {
-                                            "type": "string"
-                                        }
-                                    ],
-                                    "description": "The primary input"
-                                }
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "description": "Step input specifications. If this is a string, we'll bind to the default output\nof the given node ID. If no node has that ID, we'll bind against the table-store's\nnamed table given the string.\n\nIf this is an input binding, it's an explicit binding to another step in the pipeline."
                             },
-                            "type": "object"
+                            "type": "array"
                         },
-                        {
-                            "type": "string"
+                        "source": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/InputBinding"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "description": "The primary input"
                         }
-                    ],
-                    "description": "The step inputs; a required \"source\" and optional, variadic \"others\". If this is a\nstring, it is used to bind the primary input."
+                    },
+                    "type": "object"
                 },
                 "output": {
                     "anyOf": [
@@ -810,8 +803,16 @@
             "description": "A user-friendly description of the specification",
             "type": "string"
         },
+        "input": {
+            "description": "If specified, the default input to use. This will specify the default input of the first step.\nIf the first step already has a defined default input, this will throw.",
+            "type": "string"
+        },
         "name": {
             "description": "The name of the specification",
+            "type": "string"
+        },
+        "output": {
+            "description": "If specified, the default output to use. This is equivalent to defining the 'output' property\nof the last step in the steps array",
             "type": "string"
         },
         "steps": {
