@@ -58,45 +58,48 @@ function useOthers(
 	store?: TableStore,
 ) {
 	return useMemo(() => {
-		return Object.keys(step.input)
-			.filter(k => k !== NodeInput.Source)
-			.map((inputName, index) => {
-				const input = step.input[inputName]!
-				const other = input.node
+		return (step.input.others || EMPTY).map((input, index) => {
+			const other = input.node
 
-				// on delete, remove the input
-				const handleDeleteClick = () => {
-					const update = { ...step, input: { ...step.input } }
-					delete update.input[inputName]
-					onChange(update)
-				}
-				if (!store) {
-					return null
-				}
-				return (
-					<LeftAlignedRow key={`set-op-${other}-${index}`}>
-						<TableDropdown
-							label={''}
-							store={store}
-							selectedKey={other}
-							onChange={(_evt, option) => {
-								const update = { ...step }
-								if (option) {
-									input.node = `${option.key}`
-								}
-								onChange(update)
-							}}
-						/>
-						<IconButton
-							title={'Remove this table'}
-							iconProps={deleteIconProps}
-							onClick={handleDeleteClick}
-						/>
-					</LeftAlignedRow>
-				)
-			})
+			// on delete, remove the input
+			const handleDeleteClick = () => {
+				onChange({
+					...step,
+					input: {
+						...step.input,
+						others: (step.input.others || EMPTY).filter(o => o !== input),
+					} as Step['input'],
+				})
+			}
+			if (!store) {
+				return null
+			}
+			return (
+				<LeftAlignedRow key={`set-op-${other}-${index}`}>
+					<TableDropdown
+						label={''}
+						store={store}
+						selectedKey={other}
+						onChange={(_evt, option) => {
+							const update = { ...step }
+							if (option) {
+								input.node = `${option.key}`
+							}
+							onChange(update)
+						}}
+					/>
+					<IconButton
+						title={'Remove this table'}
+						iconProps={deleteIconProps}
+						onClick={handleDeleteClick}
+					/>
+				</LeftAlignedRow>
+			)
+		})
 	}, [step, store, onChange])
 }
+
+const EMPTY: any[] = []
 
 const addIconProps = { iconName: 'Add' }
 const deleteIconProps = { iconName: 'Delete' }
