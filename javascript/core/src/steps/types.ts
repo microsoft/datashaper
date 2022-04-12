@@ -32,92 +32,9 @@ import type {
 	SpreadArgs,
 	UnfoldArgs,
 	UnrollArgs,
-	Verb,
 	WindowArgs,
 } from '../verbs/index.js'
-
-export type InputBinding = { node: string; output?: string }
-
-export type InputBindingSpecification = string | InputBinding
-
-export interface StepSpecification<T extends object = any> {
-	/**
-	 * A unique identifier for this step
-	 */
-	id?: string
-
-	/**
-	 * helpful for documentation in JSON specs
-	 */
-	description?: string
-
-	/**
-	 * The verb being executed
-	 */
-	verb: Verb
-
-	/**
-	 * The verb arguments
-	 */
-	args?: T
-
-	/**
-	 * The bound inputs
-	 * Key = Input Socket Name
-	 * Value = Socket Binding to other node
-	 */
-	input?:
-		| string
-		| ({
-				others?: InputBindingSpecification[]
-		  } & Record<string, InputBindingSpecification>)
-
-	/**
-	 * The observed outputs to record.
-	 * Key = output socket name
-	 * Value = store table name
-	 */
-	output?: string | Record<string, string>
-}
-
-export interface Step<T extends object = any> {
-	/**
-	 * A unique identifier for this step
-	 */
-	id: string
-
-	/**
-	 * The verb being executed
-	 */
-	verb: Verb
-
-	/**
-	 * The verb arguments
-	 */
-	args: T
-
-	/**
-	 * The bound inputs
-	 * Key = Input Socket Name
-	 * Value = Socket Binding to other node
-	 */
-	input: {
-		others?: InputBinding[]
-	} & Record<string, InputBinding>
-
-	/**
-	 * The observed outputs to record.
-	 * Key = output socket name
-	 * Value = store table name
-	 */
-	output: Record<string, string>
-}
-
-export interface Specification {
-	name?: string
-	description?: string
-	steps?: StepSpecification[]
-}
+import type { Step } from './step.js'
 
 export type AggregateStep = Step<AggregateArgs>
 export type BinStep = Step<BinArgs>

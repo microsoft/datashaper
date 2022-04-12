@@ -4,7 +4,6 @@
  */
 import { v4 as uuid } from 'uuid'
 
-import type { CopyWithPartial } from '../primitives.js'
 import {
 	BinStrategy,
 	BooleanOperator,
@@ -12,12 +11,76 @@ import {
 	JoinStrategy,
 	Verb,
 } from '../verbs/index.js'
-import type { InputBinding, Step, StepSpecification } from './types.js'
+import type { InputBinding,InputNodeBinding } from './specification.js'
 
-export type StepInput = CopyWithPartial<
-	Step<any>,
-	'args' | 'id' | 'input' | 'output'
->
+export interface StepInput<T extends object = any> {
+	/**
+	 * A unique identifier for this step
+	 */
+	id?: string
+
+	/**
+	 * The verb being executed
+	 */
+	verb: Verb
+
+	/**
+	 * The verb arguments
+	 */
+	args?: T
+
+	/**
+	 * The bound inputs
+	 * Key = Input Socket Name
+	 * Value = Socket Binding to other node
+	 */
+	input?:
+		| string
+		| ({
+				others?: InputBinding[]
+		  } & Record<string, InputBinding>)
+
+	/**
+	 * The observed outputs to record.
+	 * Key = output socket name
+	 * Value = store table name
+	 */
+	output: string | Record<string, string>
+}
+
+export interface Step<T extends object = any> {
+	/**
+	 * A unique identifier for this step
+	 */
+	id: string
+
+	/**
+	 * The verb being executed
+	 */
+	verb: Verb
+
+	/**
+	 * The verb arguments
+	 */
+	args: T
+
+	/**
+	 * The bound inputs
+	 * Key = Input Socket Name
+	 * Value = Socket Binding to other node
+	 */
+	input: {
+		others?: InputNodeBinding[]
+	} & Record<string, InputNodeBinding>
+
+	/**
+	 * The observed outputs to record.
+	 * Key = output socket name
+	 * Value = store table name
+	 */
+	output: Record<string, string>
+}
+
 /**
  * Factory function to create new verb configs
  * with as many reasonable defaults as possible.
@@ -31,7 +94,7 @@ export function step<T extends object>({
 	id = uuid(),
 	input = {},
 	output = {},
-}: StepSpecification<T>): Step<T> {
+}: StepInput<T>): Step<T> {
 	const base = {
 		id,
 		args,
@@ -154,7 +217,7 @@ export function step<T extends object>({
 	return base
 }
 
-function fixInputs(inputs: StepSpecification['input']): Step['input'] {
+function fixInputs(inputs: StepInput['input']): Step['input'] {
 	if (typeof inputs === 'string') {
 		return { source: { node: inputs } }
 	} else {
@@ -163,20 +226,20 @@ function fixInputs(inputs: StepSpecification['input']): Step['input'] {
 		Object.keys(result).forEach((k: string) => {
 			const binding = result[k]
 			if (typeof binding === 'string') {
-				result[k] = { node: binding } as InputBinding
+				result[k] = { node: binding as string } as InputNodeBinding
 			}
 		})
 
 		if (result.others != null) {
 			result.others = result.others.map(o =>
-				typeof o === 'string' ? { node: o } : (o as InputBinding),
+				typeof o === 'string' ? { node: o } : (o as any as InputNodeBinding),
 			)
 		}
 		return result
 	}
 }
 
-function fixOutputs(outputs: StepSpecification['output']): Step['output'] {
+function fixOutputs(outputs: StepInput['output']): Step['output'] {
 	if (typeof outputs === 'string') {
 		return { target: outputs }
 	} else {

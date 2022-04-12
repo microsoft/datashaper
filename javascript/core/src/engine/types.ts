@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Graph } from '../graph/index.js'
-import type { Step } from '../steps/index.js'
+import type { Step, StepInput } from '../steps/index.js'
 import type { Store } from '../store/index.js'
 import type { TableContainer } from '../tables/index.js'
 import type { Verb } from '../verbs/index.js'
@@ -41,13 +41,13 @@ export interface Pipeline {
 	 * Adds a step to the pipeline
 	 * @param step - the step to add
 	 */
-	add(step: Step): Step[]
+	add(step: StepInput): Step[]
 
 	/**
 	 * Adds steps to the pipeline
 	 * @param steps - The steps to add
 	 */
-	addAll(steps: Step[]): Step[]
+	addAll(steps: StepInput[]): Step[]
 
 	/**
 	 * Remove all steps from the pipeline

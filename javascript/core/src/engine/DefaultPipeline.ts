@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Graph } from '../graph/index.js'
-import type { Step, StepSpecification } from '../steps/index.js'
+import type { Step, StepInput } from '../steps/index.js'
 import { step as factory } from '../steps/index.js'
 import type { Store } from '../store/index.js'
 import type { TableContainer } from '../tables/index.js'
@@ -56,19 +56,19 @@ export class DefaultPipeline implements Pipeline {
 	}
 
 	public create(verb: Verb): Step[] {
-		const base: Step = factory({ verb })
+		const base: Step = factory({ verb } as any)
 		base.output = { target: base.id }
-		return this.add(base)
+		return this.add(base as StepInput)
 	}
 
-	public add(step: StepSpecification): Step[] {
-		this._steps.push(factory(step))
+	public add(step: StepInput): Step[] {
+		this._steps.push(factory(step as StepInput))
 		this._rebuildGraph()
 		return this.steps
 	}
 
-	public addAll(steps: StepSpecification[]): Step[] {
-		steps.forEach(step => this._steps.push(factory(step)))
+	public addAll(steps: StepInput[]): Step[] {
+		steps.forEach(step => this._steps.push(factory(step as StepInput)))
 		this._rebuildGraph()
 		return this.steps
 	}
@@ -86,7 +86,7 @@ export class DefaultPipeline implements Pipeline {
 		const removed = this.steps.slice(index)
 		const steps = this.steps.slice(0, index)
 		this.clear()
-		this.addAll(steps)
+		this.addAll(steps as any)
 
 		removed.forEach(r => this._unregisterStep(r))
 		this._rebuildGraph()

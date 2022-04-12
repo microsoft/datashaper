@@ -1,4 +1,5 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
+import Ajv from 'ajv'
 import arquero from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import fs from 'fs'
@@ -14,8 +15,20 @@ import type { TableContainer } from '../tables/types.js'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const FIXTURES_PATH = path.join(__dirname, '../../../../schema/fixtures')
+const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
+const FIXTURES_PATH = path.join(SCHEMA_PATH, 'fixtures')
 const CATEGORIES_PATH = path.join(FIXTURES_PATH, 'cases')
+
+// Json-schema validator
+const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))
+const ajv = new Ajv({
+	strict: true,
+	strictSchema: true,
+	strictTypes: true,
+	strictRequired: true,
+	validateSchema: true,
+})
+const validateJson = ajv.compile(schema)
 
 /**
  * Create top-level describes for each test category (top-level folders)
@@ -49,8 +62,17 @@ function defineTestCase(parentPath: string, test: string) {
 
 	it(testName, async () => {
 		// execute the dataflow
+		const workflowPath = path.join(casePath, 'workflow.json')
 		const tableStore = createTableStore(inputTables)
-		const workflowJson = await readJson(path.join(casePath, 'workflow.json'))
+		const workflowJson = await readJson(workflowPath)
+		const isWorkflowJsonValid = validateJson(workflowJson) as any
+		if (!isWorkflowJsonValid) {
+			throw new Error(`invalid workflow definition: ${workflowPath}`)
+		}
+		const schemaLinkPath = path.join(casePath, workflowJson.$schema)
+		if (!fs.existsSync(schemaLinkPath)) {
+			throw new Error(`invalid $schema link: ${workflowPath}`)
+		}
 		createGraph(workflowJson.steps.map(step), tableStore)
 
 		// check the output tables
