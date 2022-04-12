@@ -205,7 +205,7 @@ export function step<T extends object>({
 				},
 			}
 		case Verb.Fetch:
-		case Verb.OneHot:
+		case Verb.Onehot:
 		case Verb.Orderby:
 		case Verb.Rename:
 		case Verb.Sample:

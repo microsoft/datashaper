@@ -9,7 +9,7 @@ import type { InputColumnArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export interface OneHotArgs extends InputColumnArgs {
+export interface OnehotArgs extends InputColumnArgs {
 	/**
 	 * Optional prefix for the output column names
 	 */
@@ -20,7 +20,7 @@ export interface OneHotArgs extends InputColumnArgs {
  * Executes a  one-hot encoding. This creates a new column for each unique value in the specified column.
  * An optional prefix can be specified for the output columns, to help differentiate source columns on large tables.
  */
-export const onehotStep: ColumnTableStep<OneHotArgs> = (
+export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
 	{ column, prefix },
 ) => {

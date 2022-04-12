@@ -544,7 +544,7 @@
             ],
             "type": "string"
         },
-        "OneHotArgs": {
+        "OnehotArgs": {
             "properties": {
                 "column": {
                     "description": "Name of the input column for columnnar operations.",
@@ -990,27 +990,6 @@
                             },
                             {
                                 "properties": {
-                                    "verb": {
-                                        "enum": [
-                                            "difference"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/VariadicIO"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepCommon"
-                            },
-                            {
-                                "properties": {
                                     "args": {
                                         "$ref": "#/definitions/DeriveArgs"
                                     },
@@ -1025,6 +1004,27 @@
                             },
                             {
                                 "$ref": "#/definitions/BasicIO"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepCommon"
+                            },
+                            {
+                                "properties": {
+                                    "verb": {
+                                        "enum": [
+                                            "difference"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/VariadicIO"
                             }
                         ]
                     },
@@ -1297,7 +1297,7 @@
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/OneHotArgs"
+                                        "$ref": "#/definitions/OnehotArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1538,6 +1538,27 @@
                                 "properties": {
                                     "verb": {
                                         "enum": [
+                                            "ungroup"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/BasicIO"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepCommon"
+                            },
+                            {
+                                "properties": {
+                                    "verb": {
+                                        "enum": [
                                             "union"
                                         ],
                                         "type": "string"
@@ -1560,27 +1581,6 @@
                                     "verb": {
                                         "enum": [
                                             "unorder"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicIO"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepCommon"
-                            },
-                            {
-                                "properties": {
-                                    "verb": {
-                                        "enum": [
-                                            "ungroup"
                                         ],
                                         "type": "string"
                                     }

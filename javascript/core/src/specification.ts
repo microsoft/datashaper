@@ -20,7 +20,7 @@ import type {
 	JoinArgs,
 	LookupArgs,
 	MergeArgs,
-	OneHotArgs,
+	OnehotArgs,
 	OrderbyArgs,
 	PivotArgs,
 	RecodeArgs,
@@ -67,8 +67,8 @@ export type StepSpecification = StepCommon &
 		| ({ verb: Verb.Concat } & VariadicIO)
 		| ({ verb: Verb.Convert; args?: ConvertArgs } & BasicIO)
 		| ({ verb: Verb.Dedupe; args?: DedupeArgs } & BasicIO)
-		| ({ verb: Verb.Difference } & VariadicIO)
 		| ({ verb: Verb.Derive; args?: DeriveArgs } & BasicIO)
+		| ({ verb: Verb.Difference } & VariadicIO)
 		| ({ verb: Verb.Erase; args?: EraseArgs } & BasicIO)
 		| ({ verb: Verb.Fetch; args?: FetchArgs } & BasicIO)
 		| ({ verb: Verb.Fill; args?: FillArgs } & BasicIO)
@@ -80,7 +80,7 @@ export type StepSpecification = StepCommon &
 		| ({ verb: Verb.Join; args?: JoinArgs } & DualInputIO)
 		| ({ verb: Verb.Lookup; args?: LookupArgs } & DualInputIO)
 		| ({ verb: Verb.Merge; args?: MergeArgs } & BasicIO)
-		| ({ verb: Verb.OneHot; args?: OneHotArgs } & BasicIO)
+		| ({ verb: Verb.Onehot; args?: OnehotArgs } & BasicIO)
 		| ({ verb: Verb.Orderby; args?: OrderbyArgs } & BasicIO)
 		| ({ verb: Verb.Pivot; args?: PivotArgs } & BasicIO)
 		| ({ verb: Verb.Recode; args?: RecodeArgs } & BasicIO)
@@ -90,9 +90,9 @@ export type StepSpecification = StepCommon &
 		| ({ verb: Verb.Select; args?: SelectArgs } & BasicIO)
 		| ({ verb: Verb.Spread; args?: SpreadArgs } & BasicIO)
 		| ({ verb: Verb.Unfold; args?: UnfoldArgs } & BasicIO)
+		| ({ verb: Verb.Ungroup } & BasicIO)
 		| ({ verb: Verb.Union } & VariadicIO)
 		| ({ verb: Verb.Unorder } & BasicIO)
-		| ({ verb: Verb.Ungroup } & BasicIO)
 		| ({ verb: Verb.Unroll; args?: UnrollArgs } & BasicIO)
 		| ({ verb: Verb.Window; args?: WindowArgs } & BasicIO)
 	)

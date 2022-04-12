@@ -1028,19 +1028,19 @@ export function observableNode<T>(id: string, source: Observable<Maybe<T>>): Obs
 // Warning: (ae-missing-release-tag) "onehot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const onehot: (id: string) => StepNode<TableContainer<unknown>, OneHotArgs>;
+export const onehot: (id: string) => StepNode<TableContainer<unknown>, OnehotArgs>;
 
-// Warning: (ae-missing-release-tag) "OneHotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "OnehotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface OneHotArgs extends InputColumnArgs {
+export interface OnehotArgs extends InputColumnArgs {
     prefix?: string;
 }
 
 // Warning: (ae-missing-release-tag) "OneHotStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type OneHotStep = Step<OneHotArgs>;
+export type OneHotStep = Step<OnehotArgs>;
 
 // Warning: (ae-missing-release-tag) "orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1381,11 +1381,11 @@ export type StepSpecification = StepCommon & (({
     verb: Verb.Dedupe;
     args?: DedupeArgs;
 } & BasicIO) | ({
-    verb: Verb.Difference;
-} & VariadicIO) | ({
     verb: Verb.Derive;
     args?: DeriveArgs;
 } & BasicIO) | ({
+    verb: Verb.Difference;
+} & VariadicIO) | ({
     verb: Verb.Erase;
     args?: EraseArgs;
 } & BasicIO) | ({
@@ -1418,8 +1418,8 @@ export type StepSpecification = StepCommon & (({
     verb: Verb.Merge;
     args?: MergeArgs;
 } & BasicIO) | ({
-    verb: Verb.OneHot;
-    args?: OneHotArgs;
+    verb: Verb.Onehot;
+    args?: OnehotArgs;
 } & BasicIO) | ({
     verb: Verb.Orderby;
     args?: OrderbyArgs;
@@ -1448,11 +1448,11 @@ export type StepSpecification = StepCommon & (({
     verb: Verb.Unfold;
     args?: UnfoldArgs;
 } & BasicIO) | ({
+    verb: Verb.Ungroup;
+} & BasicIO) | ({
     verb: Verb.Union;
 } & VariadicIO) | ({
     verb: Verb.Unorder;
-} & BasicIO) | ({
-    verb: Verb.Ungroup;
 } & BasicIO) | ({
     verb: Verb.Unroll;
     args?: UnrollArgs;
@@ -1648,7 +1648,7 @@ export enum Verb {
     // (undocumented)
     Merge = "merge",
     // (undocumented)
-    OneHot = "onehot",
+    Onehot = "onehot",
     // (undocumented)
     Orderby = "orderby",
     // (undocumented)
