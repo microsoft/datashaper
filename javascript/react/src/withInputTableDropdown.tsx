@@ -23,19 +23,20 @@ export function withInputTableDropdown(
 			const { step, store, onChange } = props
 			const handleTableChange = useHandleDropdownChange(
 				step,
-				'inputs.default.node',
+				'input.source.node',
 				onChange,
 			)
 			if (!isInputTableStep(step)) {
 				return <Component {...props} />
 			} else {
+				const selected = step.input[NodeInput.Source]?.node
 				return (
 					<Container className="with-input-table-dropdown">
 						<LeftAlignedRow>
 							<TableDropdown
 								store={store}
 								label={label || 'Input table'}
-								selectedKey={step.input[NodeInput.Source]?.node}
+								selectedKey={selected}
 								onChange={handleTableChange}
 							/>
 						</LeftAlignedRow>

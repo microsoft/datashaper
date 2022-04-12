@@ -66,8 +66,8 @@ function useOthers(
 
 				// on delete, remove the input
 				const handleDeleteClick = () => {
-					const update = { ...step, inputs: { ...step.input } }
-					delete update.inputs[inputName]
+					const update = { ...step, input: { ...step.input } }
+					delete update.input[inputName]
 					onChange(update)
 				}
 				if (!store) {

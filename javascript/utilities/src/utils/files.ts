@@ -66,7 +66,7 @@ export function isSupportedFile(fileName = ''): boolean {
 	return supportedExtensions.includes(ext)
 }
 
-export const fetchFile = async (url: string): Promise<Blob> => {
+export async function fetchFile(url: string): Promise<Blob> {
 	return fetch(url).then(response => response.blob())
 }
 
