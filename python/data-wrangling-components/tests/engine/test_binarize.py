@@ -4,13 +4,7 @@
 #
 
 from data_wrangling_components.engine.verbs.binarize import binarize
-from data_wrangling_components.types import (
-    FilterCompareType,
-    NumericComparisonOperator,
-    Step,
-    StringComparisonOperator,
-    Verb,
-)
+from data_wrangling_components.types import Step, Verb
 from tests.engine.test_store import get_test_store
 
 
@@ -20,11 +14,9 @@ def test_binarize_numeric_gte():
         "table1",
         "output",
         args={
-            "to": "newColumn",
             "column": "count",
-            "operator": NumericComparisonOperator.Gte,
-            "type": FilterCompareType.Value,
-            "value": 40,
+            "criteria": [{"value": 40, "operator": ">=", "type": "value"}],
+            "to": "newColumn",
         },
     )
 
@@ -47,11 +39,9 @@ def test_binarize_numeric_gt():
         "table1",
         "output",
         args={
-            "to": "newColumn",
             "column": "count",
-            "operator": NumericComparisonOperator.Gt,
-            "type": FilterCompareType.Value,
-            "value": 40,
+            "criteria": [{"value": 40, "operator": ">", "type": "value"}],
+            "to": "newColumn",
         },
     )
 
@@ -74,11 +64,9 @@ def test_binarize_numeric_lt():
         "table1",
         "output",
         args={
-            "to": "newColumn",
             "column": "count",
-            "operator": NumericComparisonOperator.Lt,
-            "type": FilterCompareType.Value,
-            "value": 40,
+            "criteria": [{"value": 40, "operator": "<", "type": "value"}],
+            "to": "newColumn",
         },
     )
 
@@ -101,11 +89,9 @@ def test_binarize_string_endswith():
         "table4",
         "output",
         args={
-            "to": "newColumn",
             "column": "item",
-            "operator": StringComparisonOperator.EndsWith,
-            "type": FilterCompareType.Value,
-            "value": "a",
+            "criteria": [{"value": "a", "operator": "ends with", "type": "value"}],
+            "to": "newColumn",
         },
     )
 
@@ -129,10 +115,9 @@ def test_binarize_string_empty():
         "table5",
         "output",
         args={
-            "to": "newColumn",
             "column": "item",
-            "operator": StringComparisonOperator.Empty,
-            "type": FilterCompareType.Value,
+            "criteria": [{"operator": "is empty", "type": "value"}],
+            "to": "newColumn",
         },
     )
 
@@ -156,11 +141,9 @@ def test_binarize_string_contains():
         "table5",
         "output",
         args={
-            "to": "newColumn",
             "column": "item",
-            "operator": StringComparisonOperator.Contains,
-            "type": FilterCompareType.Value,
-            "value": "so",
+            "criteria": [{"value": "so", "operator": "contains", "type": "value"}],
+            "to": "newColumn",
         },
     )
 

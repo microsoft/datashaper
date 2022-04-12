@@ -4,7 +4,7 @@
 #
 
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Union
 
 from dataclasses import dataclass, field
 
@@ -13,11 +13,14 @@ class Verb(Enum):
     Aggregate = "aggregate"
     Bin = "bin"
     Binarize = "binarize"
+    Boolean = "boolean"
     Chain = "chain"
     Concat = "concat"
+    Convert = "convert"
     Dedupe = "dedupe"
     Derive = "derive"
     Difference = "difference"
+    Erase = "erase"
     Fetch = "fetch"
     Fill = "fill"
     Filter = "filter"
@@ -28,18 +31,23 @@ class Verb(Enum):
     Intersect = "intersect"
     Join = "join"
     Lookup = "lookup"
+    Merge = "merge"
     MultiBinarize = "multi-binarize"
+    OneHot = "onehot"
     Orderby = "orderby"
+    Pivot = "pivot"
     Recode = "recode"
     Rename = "rename"
     Rollup = "rollup"
     Sample = "sample"
     Select = "select"
     Spread = "spread"
+    Unfold = "unfold"
     Ungroup = "ungroup"
     Union = "union"
     Unorder = "unorder"
     Unroll = "unroll"
+    Window = "window"
 
 
 compound_verbs = {Verb.Chain, Verb.FilterAggregateLookup, Verb.MultiBinarize}
@@ -76,15 +84,23 @@ class Step:
     args: Dict[str, Any] = field(default_factory=dict)
 
 
+class JoinStrategy(Enum):
+    Inner = "inner"
+    LeftOuter = "join_left"
+    RightOuter = "join_right"
+    FullOuter = "join_full"
+
+
 @dataclass
 class JoinArgs:
     other: str
     on: List[str] = field(default_factory=list)
+    strategy: JoinStrategy = JoinStrategy.Inner
 
 
 @dataclass
 class InputColumnListArgs:
-    columns: List[str] = field(default_factory=list)
+    columns: List[str]
 
 
 @dataclass
@@ -134,32 +150,57 @@ class FilterCompareType(Enum):
 
 
 class NumericComparisonOperator(Enum):
-    Eq = "="
-    NotEq = "!="
-    Lt = "<"
-    Lte = "<="
-    Gt = ">"
-    Gte = ">="
-    NotEmpty = "is not empty"
-    Empty = "is empty"
+    Equals = "="
+    NotEqual = "!="
+    LessThan = "<"
+    LessThanOrEqual = "<="
+    GreaterThan = ">"
+    GreaterThanOrEqual = ">="
+    IsEmpty = "is empty"
+    IsNotEmpty = "is not empty"
 
 
 class StringComparisonOperator(Enum):
-    Equal = "equals"
-    NotEqual = "is not equals"
+    Equals = "equals"
+    NotEqual = "is not equal"
     Contains = "contains"
     StartsWith = "starts with"
     EndsWith = "ends with"
-    NotEmpty = "is not empty"
-    Empty = "is empty"
+    IsEmpty = "is empty"
+    IsNotEmpty = "is not empty"
+    RegularExpression = "regex"
+
+
+class BooleanComparisonOperator(Enum):
+    Equals = "equals"
+    NotEqual = "is not equal"
+    IsTrue = "is true"
+    IsFalse = "is false"
+    IsEmpty = "is empty"
+    IsNotEmpty = "is not empty"
 
 
 @dataclass
-class FilterArgs(OutputColumnArgs):
-    column: str
+class Criterion:
+    value: Any
     type: FilterCompareType
-    operator: Union[NumericComparisonOperator, StringComparisonOperator]
-    value: Optional[Union[str, int, float, bool]] = None
+    operator: Union[
+        NumericComparisonOperator, StringComparisonOperator, BooleanComparisonOperator
+    ]
+
+
+class BooleanLogicalOperator(Enum):
+    OR = "or"
+    AND = "and"
+    NOR = "nor"
+    NAND = "nand"
+    XOR = "xor"
+
+
+@dataclass
+class FilterArgs(InputColumnArgs):
+    criteria: List[Criterion]
+    logical: BooleanLogicalOperator = BooleanLogicalOperator.OR
 
 
 class SetOp(Enum):
@@ -185,6 +226,31 @@ class MathOperator(Enum):
 class SortDirection(Enum):
     Ascending = "asc"
     Descending = "desc"
+
+
+class ParseType(Enum):
+    Boolean = "boolean"
+    Date = "date"
+    Integer = "int"
+    Decimal = "float"
+
+
+class MergeStrategy(Enum):
+    FirstOneWins = "first one wins"
+    LastOneWins = "last one wins"
+    Concat = "concat"
+    CreateArray = "array"
+
+
+class WindowFunction(Enum):
+    RowNumber = "row_number"
+    Rank = "rank"
+    PercentRank = "percent_rank"
+    CumulativeDistribution = "cume_dist"
+    FirstValue = "first_value"
+    LastValue = "last_value"
+    FillDown = "fill_down"
+    FillUp = "fill_up"
 
 
 @dataclass

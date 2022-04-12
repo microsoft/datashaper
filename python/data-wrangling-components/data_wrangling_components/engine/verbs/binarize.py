@@ -6,18 +6,20 @@
 from dataclasses import dataclass
 
 from data_wrangling_components.engine.pandas.filter_df import filter_df
+from data_wrangling_components.engine.verbs.filter import _get_operator
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import (
+    BooleanLogicalOperator,
+    Criterion,
     FilterArgs,
     FilterCompareType,
-    NumericComparisonOperator,
+    OutputColumnArgs,
     Step,
-    StringComparisonOperator,
 )
 
 
 @dataclass
-class BinarizeArgs(FilterArgs):
+class BinarizeArgs(FilterArgs, OutputColumnArgs):
     pass
 
 
@@ -34,26 +36,19 @@ def binarize(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    try:
-        args = BinarizeArgs(
-            to=step.args["to"],
-            column=step.args["column"],
-            type=FilterCompareType(step.args["type"]),
-            operator=NumericComparisonOperator(
-                step.args["operator"],
-            ),
-            value=step.args.get("value", None),
-        )
-    except Exception:
-        args = BinarizeArgs(
-            to=step.args["to"],
-            column=step.args["column"],
-            type=FilterCompareType(step.args["type"]),
-            operator=StringComparisonOperator(
-                step.args["operator"],
-            ),
-            value=step.args.get("value", None),
-        )
+    args = BinarizeArgs(
+        to=step.args["to"],
+        column=step.args["column"],
+        criteria=[
+            Criterion(
+                value=arg.get("value", None),
+                type=FilterCompareType(arg["type"]),
+                operator=_get_operator(arg["operator"]),
+            )
+            for arg in step.args["criteria"]
+        ],
+        logical=BooleanLogicalOperator(step.args.get("logical", "or")),
+    )
 
     input_table = store.table(step.input)
 
