@@ -7,8 +7,8 @@ import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
-import { staticCallback } from '../common/functions.js'
-import { useTableColumnOptions } from '../common/index.js'
+import { staticCallback } from '../functions.js'
+import { useTableColumnOptions } from '../hooks.js'
 import { dropdownStyles } from './styles.js'
 
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {

@@ -6,7 +6,7 @@ import type { TableStore } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { useEffect, useState } from 'react'
 
-import { useSimpleDropdownOptions } from '../../common/hooks.js'
+import { useSimpleDropdownOptions } from '../../hooks.js'
 
 /**
  * Creates a list of dropdown options from the tables in a store
