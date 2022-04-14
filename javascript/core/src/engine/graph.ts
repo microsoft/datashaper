@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DefaultGraph, observableNode } from '../graph/index.js'
-import type { Graph, Node } from '../graph/types.js'
+import type { Graph, Node } from '@essex/dataflow'
+import { DefaultGraph, observableNode } from '@essex/dataflow'
+
 import type { InputBinding } from '../specification.js'
 import type { Step } from '../steps/index.js'
 import type { Store } from '../store/types.js'

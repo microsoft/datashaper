@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { BooleanStep } from '@data-wrangling-components/core'
-import { BooleanOperator, NodeInput } from '@data-wrangling-components/core'
+import { BooleanOperator } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'

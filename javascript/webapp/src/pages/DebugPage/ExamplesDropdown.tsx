@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Specification } from '@data-wrangling-components/core'
+import type { IDropdownOption } from '@fluentui/react';
 import { Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 
@@ -44,12 +45,14 @@ export const ExamplesDropdown: React.FC<ExamplesDropdownProps> = memo(
 		)
 		const [currentOption, setCurrentOption] = useState<string | undefined>()
 		const handleDropdownChange = useCallback(
-			(e, opt) => {
-				setCurrentOption(opt.key)
-				if (onChange) {
-					const found = specs.find(s => s.name === opt.key)
-					if (found) {
-						onChange(found)
+			(_e: any, opt: IDropdownOption<any> | undefined) => {
+				if (opt) {
+					setCurrentOption(opt.key as string)
+					if (onChange) {
+						const found = specs.find(s => s.name === opt.key)
+						if (found) {
+							onChange(found)
+						}
 					}
 				}
 			},

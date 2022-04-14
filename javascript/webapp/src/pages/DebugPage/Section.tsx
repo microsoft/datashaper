@@ -11,22 +11,20 @@ export interface SectionProps {
 	subtitle?: string
 }
 
-export const Section: React.FC<SectionProps> = memo(function Section({
-	title,
-	subtitle,
-	children,
-}) {
-	return (
-		<Container className="section">
-			<Titles>
-				<H1>{title}</H1>
-				<H2>{subtitle}</H2>
-			</Titles>
-			<StyledSeparator vertical />
-			<ChildrenContainer>{children}</ChildrenContainer>
-		</Container>
-	)
-})
+export const Section: React.FC<React.PropsWithChildren<SectionProps>> = memo(
+	function Section({ title, subtitle, children }) {
+		return (
+			<Container className="section">
+				<Titles>
+					<H1>{title}</H1>
+					<H2>{subtitle}</H2>
+				</Titles>
+				<StyledSeparator vertical />
+				<ChildrenContainer>{children}</ChildrenContainer>
+			</Container>
+		)
+	},
+)
 
 const Container = styled.section`
 	width: 100%;

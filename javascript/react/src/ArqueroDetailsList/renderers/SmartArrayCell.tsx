@@ -3,13 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
-import { Case, Default, Switch } from 'react-if'
+import { Case, Default as RawDefault, Switch as RawSwitch } from 'react-if'
 
 import { categories, getValue, isDistinctCategories } from '../util/index.js'
 import { ArrayCell } from './ArrayCell.js'
 import { ArrayDropdownCell } from './ArrayDropdownCell.js'
 import { CategoricalBarCell, SparkbarCell, SparklineCell } from './index.js'
 import type { RichCellProps } from './types.js'
+
+/* eslint-disable @typescript-eslint/ban-types */
+const Switch = RawSwitch as React.FC<React.PropsWithChildren<{}>>
+const Default = RawDefault as React.FC<React.PropsWithChildren<{}>>
+/* eslint-enable @typescript-eslint/ban-types */
 
 const HISTO_MAX = 20
 const DROPDOWN_MAX = 15

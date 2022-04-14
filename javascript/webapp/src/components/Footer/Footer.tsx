@@ -41,13 +41,15 @@ export const Footer: FC = memo(function Footer() {
 	)
 })
 
-const Link: FC<{
-	href?: string
-	id?: string
-	className?: string
-	style?: React.CSSProperties
-	onClick?: () => void
-}> = memo(function Link({ id, className, children, href, style, onClick }) {
+const Link: FC<
+	React.PropsWithChildren<{
+		href?: string
+		id?: string
+		className?: string
+		style?: React.CSSProperties
+		onClick?: () => void
+	}>
+> = memo(function Link({ id, className, children, href, style, onClick }) {
 	return href == null ? (
 		<LinkDiv style={style} className={className} id={id} onClick={onClick}>
 			{children}

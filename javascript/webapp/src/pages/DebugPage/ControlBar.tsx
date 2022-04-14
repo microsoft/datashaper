@@ -85,7 +85,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			if (!first) return
 			updateFileCollection([first])
 			const spec = await loadSpec(first)
-			onSelectSpecification && onSelectSpecification(spec)
+			onSelectSpecification && onSelectSpecification(spec as any)
 		},
 		[onSelectSpecification, loadSpec, updateFileCollection],
 	)
@@ -99,7 +99,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	)
 
 	const handleSmartHeadersChange = useCallback(
-		(e, checked?: boolean) =>
+		(e: any, checked?: boolean) =>
 			onFeaturesChange &&
 			onFeaturesChange({ ...features, smartHeaders: checked }),
 		[features, onFeaturesChange],
@@ -141,12 +141,14 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	)
 
 	const handleCompactChange = useCallback(
-		(e, checked) => onCompactChange(checked),
+		(_e: any, checked: boolean | undefined) =>
+			onCompactChange(checked ?? false),
 		[onCompactChange],
 	)
 
 	const handleAutoTypeChange = useCallback(
-		(e, checked) => onAutoTypeChange(checked),
+		(_e: any, checked: boolean | undefined) =>
+			onAutoTypeChange(checked ?? false),
 		[onAutoTypeChange],
 	)
 	return (
@@ -183,7 +185,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Column header stats'}
 						checked={features.statsColumnHeaders}
 						disabled={features.smartHeaders}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleFeaturesChange('statsColumnHeaders', checked)
 						}
 					/>
@@ -201,7 +203,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Column header histograms'}
 						checked={features.histogramColumnHeaders}
 						disabled={features.smartHeaders}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleFeaturesChange('histogramColumnHeaders', checked)
 						}
 					/>
@@ -212,7 +214,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 					<Checkbox
 						label={'Smart cells'}
 						checked={features.smartCells}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleFeaturesChange('smartCells', checked)
 						}
 					/>
@@ -222,7 +224,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Number magnitude'}
 						checked={features.showNumberMagnitude}
 						disabled={features.smartCells}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleFeaturesChange('showNumberMagnitude', checked)
 						}
 					/>
@@ -232,7 +234,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Boolean symbol'}
 						checked={features.showBooleanSymbol}
 						disabled={features.smartCells}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleFeaturesChange('showBooleanSymbol', checked)
 						}
 					/>
@@ -242,7 +244,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Format date'}
 						checked={features.showDateFormatted}
 						disabled={features.smartCells}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleFeaturesChange('showDateFormatted', checked)
 						}
 					/>
@@ -254,7 +256,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Sparkbar'}
 						checked={!!features.showSparkbar}
 						disabled={features.smartCells}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleArrayFeaturesChange('showSparkbar', checked)
 						}
 					/>
@@ -264,7 +266,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Sparkline'}
 						checked={!!features.showSparkline}
 						disabled={features.smartCells}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleArrayFeaturesChange('showSparkline', checked)
 						}
 					/>
@@ -274,7 +276,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Categorical bar'}
 						checked={!!features.showCategoricalBar}
 						disabled={features.smartCells}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleArrayFeaturesChange('showCategoricalBar', checked)
 						}
 					/>
@@ -284,7 +286,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 						label={'Multivalues on dropdown'}
 						checked={!!features.showDropdown}
 						disabled={features.smartCells}
-						onChange={(e, checked) =>
+						onChange={(e: any, checked) =>
 							handleArrayFeaturesChange('showDropdown', checked)
 						}
 					/>

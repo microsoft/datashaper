@@ -87,7 +87,10 @@ export function useSearchableItems(): {
 } {
 	const items = useMenuItems()
 	const [filtered, setFiltered] = useState(items)
-	const onSearch = useCallback(filtered => setFiltered(filtered), [setFiltered])
+	const onSearch = useCallback(
+		(filtered: IContextualMenuItem[]) => setFiltered(filtered),
+		[setFiltered],
+	)
 	const onSearchReset = useCallback(() => setFiltered(items), [items])
 	return {
 		items,
@@ -128,9 +131,11 @@ export function useSelectedOption(
 	}, [selected, onChange])
 
 	const onItemClick = useCallback(
-		(_e, opt) => {
-			setSelected(opt.key)
-			!requireButtonClick && onChange && onChange(opt.key)
+		(_e: any, opt: IContextualMenuItem | undefined) => {
+			if (opt) {
+				setSelected(opt.key as Verb)
+				!requireButtonClick && onChange && onChange(opt.key as Verb)
+			}
 		},
 		[requireButtonClick, onChange, setSelected],
 	)

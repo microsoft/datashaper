@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
@@ -22,8 +23,8 @@ export interface ColumnInstructionProps {
 export const ColumnInstruction: React.FC<ColumnInstructionProps> = memo(
 	function ColumnInstruction({ table, column, onChange, onDelete }) {
 		const handleColumnChange = useCallback(
-			(_e, opt) => {
-				onChange && onChange(opt.key)
+			(_e: any, opt: IDropdownOption<any> | undefined) => {
+				onChange && onChange(opt?.key as string)
 			},
 			[onChange],
 		)

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { IDetailsListStyles } from '@fluentui/react'
+import type { IColumn,IDetailsListStyles } from '@fluentui/react'
 import {
 	ConstrainMode,
 	DetailsList,
@@ -107,9 +107,9 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		}, [isSortable, isColumnClickable, onColumnHeaderClick])
 
 		const onColumnResize = useCallback(
-			(column, newWidth) => {
+			(column: IColumn | undefined, newWidth: number | undefined) => {
 				const set = () => setVersion(prev => prev + 1)
-				if (column.currentWidth !== newWidth) {
+				if (column?.currentWidth !== newWidth) {
 					debounceFn(set)
 				}
 			},

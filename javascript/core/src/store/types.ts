@@ -60,7 +60,7 @@ export interface Store<T, K = string> {
 
 	/**
 	 * Emits an item-change notification. Useful for when clients mutate store items.
-	 * @param id The item id
+	 * @param id - the item id
 	 */
 	emitItemChange(id: string): void
 

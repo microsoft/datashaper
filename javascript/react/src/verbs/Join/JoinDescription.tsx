@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { JoinStep } from '@data-wrangling-components/core'
-import { NodeInput } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../index.js'

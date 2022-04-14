@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@data-wrangling-components/core'
+import type { StepInput,TableContainer } from '@data-wrangling-components/core'
 import {
 	container,
 	createPipeline,
@@ -49,9 +49,9 @@ export const TransformPage: React.FC = memo(function PerfMage() {
 	const commandBar = useCommandBar(showModal)
 
 	const handleTransformRequested = useCallback(
-		step => {
+		(step: StepInput) => {
 			pipeline.clear()
-			pipeline.addAll([{ ...step, outputs: { target: 'output' } }])
+			pipeline.addAll([{ ...step, output: { target: 'output' } }])
 			if (isLoaded) {
 				hideModal()
 			}

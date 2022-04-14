@@ -7,7 +7,8 @@ import type {
 	RecodeStep,
 	Value,
 } from '@data-wrangling-components/core'
-import { coerce, NodeInput } from '@data-wrangling-components/core'
+import { coerce } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

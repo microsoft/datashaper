@@ -56,18 +56,23 @@ export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 		}
 	}, [handleClick, _name, markdownContainer])
 
-	const handleHeaderClick = useCallback(event => {
-		const target: HTMLHeadingElement =
-			event.target.nodeName === 'H2' ? event.target : event.target.closest('h2')
-		if (target.classList.contains('active')) {
-			target.classList.remove('active')
-		} else {
-			target.classList.add('active')
-		}
-	}, [])
+	const handleHeaderClick = useCallback(
+		(event: React.MouseEvent<HTMLElement>) => {
+			const target: HTMLHeadingElement =
+				(event.target as Element).nodeName === 'H2'
+					? event.target
+					: ((event.target as Element).closest('h2') as any)
+			if (target.classList.contains('active')) {
+				target.classList.remove('active')
+			} else {
+				target.classList.add('active')
+			}
+		},
+		[],
+	)
 
 	const H2Component = useCallback(
-		({ children, ...props }): JSX.Element => {
+		({ children, ...props }: any): JSX.Element => {
 			return (
 				<h2 {...props}>
 					{children}
@@ -162,7 +167,7 @@ const Container = styled.div`
 	}
 `
 
-const Icon = styled(IconButton)`
+const Icon = styled(IconButton as any)`
 	font-size: 2.5rem;
 `
 

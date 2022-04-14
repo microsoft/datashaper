@@ -13,37 +13,37 @@ interface CellContainerProps {
 	column?: IColumn
 }
 
-export const CellContainer: React.FC<CellContainerProps> = memo(
-	function CellContainer({ onClick, column, children }) {
-		const handleColumnClick = useCallback(
-			ev => {
-				column &&
-					onClick &&
-					onClick(ev, column?.data?.selected ? undefined : column)
-			},
-			[column, onClick],
-		)
+export const CellContainer: React.FC<
+	React.PropsWithChildren<CellContainerProps>
+> = memo(function CellContainer({ onClick, column, children }) {
+	const handleColumnClick = useCallback(
+		(ev: React.MouseEvent<HTMLElement, MouseEvent>) => {
+			column &&
+				onClick &&
+				onClick(ev, column?.data?.selected ? undefined : column)
+		},
+		[column, onClick],
+	)
 
-		const cellStyle = useMemo(() => {
-			const style: React.CSSProperties = {}
+	const cellStyle = useMemo(() => {
+		const style: React.CSSProperties = {}
 
-			if (onClick) {
-				style.cursor = 'pointer'
-			}
+		if (onClick) {
+			style.cursor = 'pointer'
+		}
 
-			if (column?.data?.selected) {
-				style.fontWeight = 'bold'
-			}
-			return style
-		}, [onClick, column])
+		if (column?.data?.selected) {
+			style.fontWeight = 'bold'
+		}
+		return style
+	}, [onClick, column])
 
-		return (
-			<Container onClick={handleColumnClick} style={cellStyle}>
-				{children}
-			</Container>
-		)
-	},
-)
+	return (
+		<Container onClick={handleColumnClick} style={cellStyle}>
+			{children}
+		</Container>
+	)
+})
 
 const Container = styled.div`
 	display: flex;

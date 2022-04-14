@@ -6,7 +6,7 @@ import type { BinStep } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, Position, SpinButton } from '@fluentui/react'
 import { memo, useMemo } from 'react'
-import { Case, If, Switch, Then } from 'react-if'
+import { Case, If, Switch as RawSwitch, Then as RawThen } from 'react-if'
 import styled from 'styled-components'
 
 import {
@@ -19,6 +19,10 @@ import {
 import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import { narrowDropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
+
+// children was removed from FC; react-if has not been updated yet
+const Switch = RawSwitch as React.FC<React.PropsWithChildren<unknown>>
+const Then = RawThen as React.FC<React.PropsWithChildren<unknown>>
 
 /**
  * Provides inputs for a binning step.

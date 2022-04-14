@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { JoinStep, Step } from '@data-wrangling-components/core'
-import { NodeInput } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
+import type { IDropdownOption } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -104,9 +105,9 @@ function useHandleLeftColumnChange(
 	onChange?: (step: Step) => void,
 ) {
 	return useCallback(
-		(_e, opt) => {
+		(_e: any, opt: IDropdownOption<any> | undefined) => {
 			const on = step.args.on || []
-			on[0] = opt.key
+			on[0] = opt?.key as string
 			onChange &&
 				onChange({
 					...step,
@@ -125,10 +126,10 @@ function useHandleRightColumnChange(
 	onChange?: (step: Step) => void,
 ) {
 	return useCallback(
-		(_e, opt) => {
+		(_e: any, opt: IDropdownOption<any> | undefined) => {
 			const on = step.args.on
 			if (on) {
-				on[1] = opt.key
+				on[1] = opt?.key as string
 			}
 			onChange &&
 				onChange({

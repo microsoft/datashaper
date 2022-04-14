@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RenameStep } from '@data-wrangling-components/core'
-import { NodeInput } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
