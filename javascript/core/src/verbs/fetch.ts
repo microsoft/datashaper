@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { InputStep } from '@essex/dataflow'
+import { inputNodeFactory } from '@essex/dataflow'
 import { loadCSV, loadJSON } from 'arquero'
 
-import type { InputStep } from '../graph/index.js'
-import { inputNodeFactory } from '../graph/index.js'
 import { container } from '../tables/container.js'
 import type { TableContainer } from '../tables/types.js'
 

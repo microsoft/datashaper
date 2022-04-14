@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Graph } from '../graph/index.js'
+import type { Graph } from '@essex/dataflow'
+
 import type { Step, StepInput } from '../steps/index.js'
 import type { Store } from '../store/index.js'
 import type { TableContainer } from '../tables/index.js'
@@ -62,8 +63,8 @@ export interface Pipeline {
 
 	/**
 	 *
-	 * @param step The updated step
-	 * @param index The step index to update
+	 * @param step - the updated step
+	 * @param index - the step index to update
 	 */
 	update(step: Step, index: number): Step[]
 

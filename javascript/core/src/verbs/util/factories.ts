@@ -2,11 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { StepFunction } from '@essex/dataflow'
+import { BaseVariadicNode, StepNode } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { StepFunction } from '../../graph/index.js'
-import { BaseVariadicNode } from '../../graph/index.js'
-import { StepNode } from '../../graph/StepNode.js'
 import type { Maybe } from '../../primitives.js'
 import { container } from '../../tables/container.js'
 import type { TableContainer } from '../../tables/types.js'

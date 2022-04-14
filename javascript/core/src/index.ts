@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './engine/index.js'
-export * from './graph/index.js'
 export * from './primitives.js'
 export * from './specification.js'
 export * from './steps/index.js'
