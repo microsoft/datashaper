@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { DetailsListFeatures } from '@data-wrangling-components/arquero'
 import type {
 	DropdownOptionChangeFunction,
 	StepChangeFunction,
@@ -27,8 +28,6 @@ import cloneDeep from 'lodash-es/cloneDeep.js'
 import isArray from 'lodash-es/isArray.js'
 import set from 'lodash-es/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-
-import type { DetailsListFeatures } from '../index.js'
 
 /**
  * Creates a callback handler for changing the step based on a dropdown value.

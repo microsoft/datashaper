@@ -1,5 +1,5 @@
 {
-	"name": "@data-wrangling-components/arquero-components",
+	"name": "@data-wrangling-components/arquero",
 	"version": "0.1.0",
 	"type": "module",
 	"main": "src/index.ts",
