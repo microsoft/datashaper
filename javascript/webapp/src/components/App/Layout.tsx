@@ -6,7 +6,11 @@ import { Spinner } from '@fluentui/react'
 import React, { memo, Suspense } from 'react'
 import styled from 'styled-components'
 
-export const Layout: React.FC = memo(function Layout({ children }) {
+export const Layout: React.FC<
+	React.PropsWithChildren<{
+		/*nothing*/
+	}>
+> = memo(function Layout({ children }) {
 	return (
 		<Container className={'layout-container'}>
 			<Suspense fallback={<StyledSpinner />}>

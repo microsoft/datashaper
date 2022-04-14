@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	Specification,
+	SpecificationInput,
 	TableContainer,
 	TableStore,
 } from '@data-wrangling-components/core'
@@ -83,9 +83,11 @@ export function useLoadTableFiles(): (
 	)
 }
 
-export function useLoadSpecFile(): (file: BaseFile) => Promise<Specification> {
-	return useCallback(async (file: BaseFile): Promise<Specification> => {
-		return file.toJson()
+export function useLoadSpecFile(): (
+	file: BaseFile,
+) => Promise<SpecificationInput> {
+	return useCallback((file: BaseFile): Promise<SpecificationInput> => {
+		return file.toJson() as any
 	}, [])
 }
 

@@ -91,12 +91,14 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	}, [pipeline, store, setResult, setOutputs])
 
 	const handleExampleSpecChange = useCallback(
-		async spec => {
+		async (spec: Specification | undefined) => {
 			// TODO: we need an autorun option on the pipeline to populate data for the next step as they are added
 			// otherwise we can't fill in dropdowns with column names, for example
 			setExampleSpec(spec)
 			pipeline.clear()
-			pipeline.addAll(readSpec(spec))
+			if (spec) {
+				pipeline.addAll(readSpec(spec as any))
+			}
 			// the pipeline will transform the steps into a consistent format - string shorthands are
 			// unpacked into object forms.
 			setSteps(pipeline.steps)

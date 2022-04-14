@@ -5,7 +5,11 @@
 import { ErrorBoundary as ErrorBoundaryLib } from 'react-error-boundary'
 import Redbox from 'redbox-react'
 
-export const ErrorBoundary: React.FC = ({ children }) => (
+export const ErrorBoundary: React.FC<
+	React.PropsWithChildren<{
+		/* nothing */
+	}>
+> = ({ children }) => (
 	<ErrorBoundaryLib
 		FallbackComponent={ErrorFallback}
 		onReset={() => {
