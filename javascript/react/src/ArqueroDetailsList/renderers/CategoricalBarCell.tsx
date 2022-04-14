@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { Sparkbar } from '@data-wrangling-components/charts'
 import { memo, useMemo } from 'react'
 
-import { Sparkbar } from '../../charts/index.js'
 import { useCellDimensions } from '../hooks/index.js'
 import type { ColumnCellChartProps } from './types.js'
 

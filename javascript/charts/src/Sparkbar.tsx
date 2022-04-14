@@ -13,7 +13,7 @@ import {
 	useIndexedScale,
 	useNumericLinearScale,
 	usePlotGroup,
-} from '../hooks.js'
+} from './hooks.js'
 
 export interface SparkbarProps {
 	data: number[]
