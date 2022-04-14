@@ -7,20 +7,6 @@ import { SortDirection } from '@data-wrangling-components/core'
 import type { IGroup } from '@fluentui/react'
 import type { GroupBySpec, RowObject } from 'arquero/dist/types/table/table'
 
-function sortValueGroupsItems(
-	entries: RowObject[],
-	existingGroups: any,
-	nextLevel: number,
-	sortDirection?: SortDirection,
-	sortColumn?: string | undefined,
-): RowObject[] {
-	const columnName = existingGroups.names[nextLevel]
-	if (sortColumn && sortColumn !== columnName) return entries
-	return sortDirection === SortDirection.Ascending
-		? entries.sort((a, b) => a[0] - b[0])
-		: entries.sort((a, b) => b[0] - a[0])
-}
-
 export function groupBuilder(
 	row: RowObject,
 	existingGroups: GroupBySpec,
@@ -78,4 +64,18 @@ export function groupBuilder(
 		group.children = children
 	}
 	return group
+}
+
+function sortValueGroupsItems(
+	entries: RowObject[],
+	existingGroups: any,
+	nextLevel: number,
+	sortDirection?: SortDirection,
+	sortColumn?: string | undefined,
+): RowObject[] {
+	const columnName = existingGroups.names[nextLevel]
+	if (sortColumn && sortColumn !== columnName) return entries
+	return sortDirection === SortDirection.Ascending
+		? entries.sort((a, b) => a[0] - b[0])
+		: entries.sort((a, b) => b[0] - a[0])
 }
