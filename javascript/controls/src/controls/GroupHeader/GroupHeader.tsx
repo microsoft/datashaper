@@ -8,7 +8,7 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Else as RawElse, If as RawIf, Then as RawThen } from 'react-if'
 import styled from 'styled-components'
 
-import { useIntersection } from '../../common/index.js'
+import { useIntersection } from './GroupHeader.hooks.js'
 
 const Else = RawElse as React.FC<React.PropsWithChildren<unknown>>
 const If = RawIf as React.FC<React.PropsWithChildren<{ condition: boolean }>>

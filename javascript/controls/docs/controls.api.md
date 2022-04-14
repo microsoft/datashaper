@@ -188,25 +188,15 @@ export interface TableDropdownProps extends Partial<IDropdownProps> {
 // @public (undocumented)
 export function useColumnValueOptions(column: string, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
 
-// Warning: (ae-missing-release-tag) "useDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useSimpleDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function useDateFormatPatternOptions(): IDropdownOption[];
-
-// Warning: (ae-missing-release-tag) "useIntersection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useIntersection(element: HTMLDivElement | undefined, rootMargin: string): boolean;
+// @public
+export function useSimpleDropdownOptions(list: string[]): IDropdownOption[];
 
 // Warning: (ae-missing-release-tag) "useTableColumnOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function useTableColumnOptions(table: ColumnTable | undefined, filter?: (name: string) => boolean): IDropdownOption[];
-
-// Warning: (ae-missing-release-tag) "useTableOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useTableOptions(store?: TableStore): IDropdownOption[];
 
 // (No @packageDocumentation comment for this package)
 
