@@ -9,10 +9,10 @@ import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import {
-	LeftAlignedRow,
 	useHandleSpinButtonChange,
 	useHandleTextfieldChange,
-} from '../../index.js'
+} from '../../common/hooks.js'
+import { LeftAlignedRow } from '../../common/styles.js'
 import type { StepComponentProps } from '../../types'
 
 /**

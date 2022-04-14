@@ -13,8 +13,8 @@ import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange } from '../../../common/hooks.js'
-import { LeftAlignedRow, useLoadTable } from '../../../index.js'
+import { useHandleDropdownChange , useLoadTable } from '../../../common/hooks.js'
+import { LeftAlignedRow } from '../../../common/styles.js'
 import type { StepComponentProps } from '../../../types.js'
 
 /**

@@ -9,7 +9,7 @@ import type { IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useLoadTable } from '../../../index.js'
+import { useLoadTable } from '../../../common/hooks.js'
 import type { StepSubcomponentProps } from '../../../types.js'
 
 /**

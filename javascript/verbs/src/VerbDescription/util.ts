@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { StepDescriptionProps } from '../index.js'
+import type { StepDescriptionProps } from '../types.js'
 import type { DescriptionRow } from '../types.js'
 
 // this is the maximum rows a verb description can show.
