@@ -1714,6 +1714,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@data-wrangling-components/charts@workspace:^, @data-wrangling-components/charts@workspace:javascript/charts":
+  version: 0.0.0-use.local
+  resolution: "@data-wrangling-components/charts@workspace:javascript/charts"
+  dependencies:
+    "@essex/scripts": ^21.0.2
+    "@essex/tsconfig-base": ^1.0.2
+    "@thematic/core": ^2.0.7
+    "@thematic/d3": ^2.0.7
+    "@thematic/react": ^2.0.7
+    "@types/d3-format": ^3.0.1
+    "@types/d3-scale": ^4.0.2
+    "@types/d3-selection": ^3.0.2
+    "@types/d3-shape": ^3.0.2
+    "@types/lodash": ^4.14.181
+    "@types/lodash-es": ^4.17.6
+    "@types/node": ^17.0.24
+    "@types/react": ^18.0.5
+    d3-format: ^3.1.0
+    d3-scale: ^4.0.2
+    d3-selection: ^3.0.0
+    d3-shape: ^3.1.0
+    lodash-es: ^4.17.21
+    react: ^18.0.0
+    typescript: ^4.6.3
+  peerDependencies:
+    "@thematic/core": ^1.3.0
+    "@thematic/d3": ^1.3.0
+    "@thematic/react": ^1.3.0
+    react: ^17.0.2
+  languageName: unknown
+  linkType: soft
+
 "@data-wrangling-components/core@workspace:^, @data-wrangling-components/core@workspace:javascript/core":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:javascript/core"
@@ -1786,6 +1818,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/react@workspace:javascript/react"
   dependencies:
+    "@data-wrangling-components/charts": "workspace:^"
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/guidance": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
