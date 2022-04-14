@@ -3,10 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo, useCallback, useEffect, useState } from 'react'
-import { Else, If, Then } from 'react-if'
+import { Else as ElseRaw, If, Then as ThenRaw } from 'react-if'
 import styled from 'styled-components'
 
 import { RenameCallout } from './RenameCallout.js'
+
+const Then = ThenRaw as React.FC<React.PropsWithChildren<unknown>>
+const Else = ElseRaw as React.FC<React.PropsWithChildren<unknown>>
 
 interface TableNameProps {
 	onRenameTable?: (name: string) => void

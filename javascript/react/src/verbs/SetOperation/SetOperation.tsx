@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
-import { NodeInput } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'

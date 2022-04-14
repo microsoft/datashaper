@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { isInputTableStep, NodeInput } from '@data-wrangling-components/core'
+import { isInputTableStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 

@@ -6,7 +6,7 @@ import type { ColumnMetadata } from '@data-wrangling-components/core'
 import { DataType } from '@data-wrangling-components/core'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
-import { Case, Default, Switch } from 'react-if'
+import { Case, Default as RawDefault, Switch as RawSwitch } from 'react-if'
 
 import { getValue, isEmpty } from '../util/index.js'
 import { CellContainer } from './CellContainer.js'
@@ -20,6 +20,9 @@ import {
 	TextCell,
 } from './index.js'
 import type { RichCellProps } from './types.js'
+
+const Switch = RawSwitch as React.FC<React.PropsWithChildren<unknown>>
+const Default = RawDefault as React.FC<React.PropsWithChildren<unknown>>
 
 /**
  * Chooses what to render based on data type.

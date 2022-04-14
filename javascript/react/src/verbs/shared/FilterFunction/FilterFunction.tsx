@@ -10,7 +10,7 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
-import type { IDropdownOption } from '@fluentui/react'
+import type { IComboBoxOption,IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
@@ -61,7 +61,12 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		)
 
 		const handleComboBoxChange = useCallback(
-			(_e, option, _index, value) => {
+			(
+				_e: any,
+				option: IComboBoxOption | undefined,
+				_index: number | undefined,
+				value: string | undefined,
+			) => {
 				const update = {
 					...criterion,
 					type: option ? FilterCompareType.Column : FilterCompareType.Value,

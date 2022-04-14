@@ -39,7 +39,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 			[Component],
 		)
 		const handleStepChange = useCallback(
-			step => onChange(step, index),
+			(step: Step) => onChange(step, index),
 			[index, onChange],
 		)
 		return (

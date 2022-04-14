@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Criterion, FilterStep } from '@data-wrangling-components/core'
-import { BooleanOperator, NodeInput } from '@data-wrangling-components/core'
+import { BooleanOperator } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'

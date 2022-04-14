@@ -3,7 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ConvertStep } from '@data-wrangling-components/core'
-import { DataType, NodeInput, ParseType } from '@data-wrangling-components/core'
+import { DataType, ParseType } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
+import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
@@ -54,7 +56,12 @@ export const Convert: React.FC<StepComponentProps> = memo(function Convert({
 	)
 
 	const handleComboBoxChange = useCallback(
-		(_e, option, _index, value) => {
+		(
+			_e: any,
+			option: IComboBoxOption | undefined,
+			_index: number | undefined,
+			value: string | undefined,
+		) => {
 			const update = cloneDeep(step)
 			set(update, 'args.formatPattern', option ? option.key : value)
 			onChange && onChange(update)

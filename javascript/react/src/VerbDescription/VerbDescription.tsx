@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { isOutputColumnStep, NodeInput } from '@data-wrangling-components/core'
+import { isOutputColumnStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'

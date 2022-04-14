@@ -7,7 +7,7 @@ import type {
 	SpreadStep,
 	Step,
 } from '@data-wrangling-components/core'
-import { NodeInput } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'

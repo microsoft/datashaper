@@ -6,7 +6,7 @@ import type { ColumnMetadata } from '@data-wrangling-components/core'
 import { DataType } from '@data-wrangling-components/core'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
-import { Case, Default, Switch } from 'react-if'
+import { Case, Default as RawDefault, Switch as RawSwitch } from 'react-if'
 
 import { categories, getValue, isEmpty } from '../util/index.js'
 import { ArrayDropdownCell } from './ArrayDropdownCell.js'
@@ -23,6 +23,11 @@ import {
 	TextCell,
 } from './index.js'
 import type { FeatureCellProps } from './types.js'
+
+/* eslint-disable @typescript-eslint/ban-types */
+const Switch = RawSwitch as React.FC<React.PropsWithChildren<{}>>
+const Default = RawDefault as React.FC<React.PropsWithChildren<{}>>
+/* eslint-enable @typescript-eslint/ban-types */
 
 /**
  * Chooses what to render based on the features prop

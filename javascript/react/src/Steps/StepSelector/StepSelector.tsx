@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Verb } from '@data-wrangling-components/core'
+import type { IContextualMenuListProps } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
@@ -41,13 +42,13 @@ export const StepSelector: React.FC<StepSelectorProps> = memo(
 		const { items, filtered, onSearch, onSearchReset } = useSearchableItems()
 
 		const renderMenuList = useCallback(
-			menuListProps => {
+			(menuListProps: IContextualMenuListProps | undefined) => {
 				return (
 					<>
 						<SearchContainer>
 							<ContextualMenuItemSearchBox items={items} onSearch={onSearch} />
 						</SearchContainer>
-						<ColumnarMenuList {...menuListProps} />
+						{menuListProps ? <ColumnarMenuList {...menuListProps} /> : null}
 					</>
 				)
 			},

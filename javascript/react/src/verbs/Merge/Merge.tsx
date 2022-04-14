@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { MergeStep } from '@data-wrangling-components/core'
-import { MergeStrategy, NodeInput } from '@data-wrangling-components/core'
+import { MergeStrategy } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown, TextField } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'

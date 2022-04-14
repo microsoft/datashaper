@@ -322,7 +322,7 @@ export type DropdownOptionSelect = ((event: React.FormEvent<HTMLDivElement>, opt
 // Warning: (ae-missing-release-tag) "Dropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const Dropzone: React.FC<DropzoneProps>;
+export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>>;
 
 export { DropzoneOptions }
 

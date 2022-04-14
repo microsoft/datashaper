@@ -33,10 +33,10 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const [hover, setHover] = useState<string>()
 		const [id, setId] = useState<string>()
 		const handleBarHover = useCallback(
-			e => {
+			(e: MouseEvent) => {
 				const { target, type } = e
-				const index = target.dataset.index
-				const id = target.id
+				const index = (target as any).dataset.index
+				const id = (target as any).id
 				if (type === 'mouseover' && index >= 0) {
 					setHover(legend[index] || '')
 					setId(id)

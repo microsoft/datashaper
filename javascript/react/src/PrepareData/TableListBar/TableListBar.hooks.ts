@@ -56,7 +56,8 @@ export function useTableSelection(
 	)
 
 	const onItemClick = useCallback(
-		(_e, opt) => onSelect && onSelect(opt.key),
+		(_e: any, opt: IContextualMenuItem | undefined) =>
+			onSelect && opt && onSelect(opt.key),
 		[onSelect],
 	)
 

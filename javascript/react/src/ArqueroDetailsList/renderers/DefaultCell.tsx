@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import { DataType, determineType } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
-import { Case, Default, Switch } from 'react-if'
+import { Case, Default as RawDefault, Switch as RawSwitch } from 'react-if'
 
 import { getValue, isEmpty } from '../util/index.js'
 import { ArrayCell } from './ArrayCell.js'
@@ -18,6 +17,10 @@ import {
 	TextCell,
 } from './index.js'
 import type { RichCellProps } from './types.js'
+
+// children was removed from FC; react-if has not been updated yet
+const Switch = RawSwitch as React.FC<React.PropsWithChildren<unknown>>
+const Default = RawDefault as React.FC<React.PropsWithChildren<unknown>>
 
 /**
  * Default rendering of cell contents.
@@ -32,7 +35,7 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	const type = metadata?.type ?? determineType(value)
 
 	const handleColumnClick = useCallback(
-		ev => {
+		(ev: React.MouseEvent<HTMLElement>) => {
 			column &&
 				onColumnClick &&
 				onColumnClick(ev, column?.data?.selected ? undefined : column)

@@ -5,10 +5,14 @@
 import type { IDetailsGroupDividerProps, IGroup } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Else, If, Then } from 'react-if'
+import { Else as RawElse, If as RawIf, Then as RawThen } from 'react-if'
 import styled from 'styled-components'
 
 import { useIntersection } from '../../common/index.js'
+
+const Else = RawElse as React.FC<React.PropsWithChildren<unknown>>
+const If = RawIf as React.FC<React.PropsWithChildren<{ condition: boolean }>>
+const Then = RawThen as React.FC<React.PropsWithChildren<unknown>>
 
 interface GroupHeaderProps {
 	props: IDetailsGroupDividerProps
@@ -16,8 +20,8 @@ interface GroupHeaderProps {
 	columnName?: string
 }
 
-export const GroupHeader: React.FC<GroupHeaderProps> = memo(
-	function GroupHeader({ columnName, props, children, lazyLoadGroups }) {
+export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
+	memo(function GroupHeader({ columnName, props, children, lazyLoadGroups }) {
 		const { group, onToggleCollapse } = props
 		const ref = useRef<HTMLDivElement>()
 		// whether the element toggle is manual or by visibility on scroll
@@ -83,8 +87,7 @@ export const GroupHeader: React.FC<GroupHeaderProps> = memo(
 				</If>
 			</HeaderContainer>
 		)
-	},
-)
+	})
 
 const HeaderContainer = styled.div<{ groupLevel: number }>`
 	padding-left: ${({ groupLevel }) => `${groupLevel * 12}px`};
@@ -92,7 +95,7 @@ const HeaderContainer = styled.div<{ groupLevel: number }>`
 	gap: 8px;
 `
 
-const LevelButton = styled(IconButton)`
+const LevelButton = styled(IconButton as any)`
 	width: 5%;
 `
 

@@ -7,9 +7,9 @@ import {
 	DataType,
 	isInputColumnStep,
 	isNumericInputStep,
-	NodeInput,
 	types,
 } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
