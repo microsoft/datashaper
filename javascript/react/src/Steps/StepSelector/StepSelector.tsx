@@ -2,15 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ColumnarMenu } from '@data-wrangling-components/controls'
+import { ColumnarMenuList } from '@data-wrangling-components/controls'
+import { ContextualMenuItemSearchBox } from '@data-wrangling-components/controls'
 import type { Verb } from '@data-wrangling-components/core'
 import type { IContextualMenuListProps } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
-import { ColumnarMenu } from '../../controls/ColumnarMenu/ColumnarMenu.js'
-import { ColumnarMenuList } from '../../controls/ColumnarMenu/ColumnarMenuList.js'
-import { ContextualMenuItemSearchBox } from '../../controls/ContextualMenuItemSearchBox/ContextualMenuItemSearchBox.js'
 import { useSearchableItems, useSelectedOption } from './StepSelector.hooks.js'
 
 export interface StepSelectorProps {

@@ -2,6 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { DateFormatPatternCombobox } from '@data-wrangling-components/controls'
+import { EnumDropdown } from '@data-wrangling-components/controls'
+import { dropdownStyles } from '@data-wrangling-components/controls'
 import type { ConvertStep } from '@data-wrangling-components/core'
 import { DataType, ParseType } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
@@ -18,9 +21,6 @@ import {
 	useLoadTable,
 } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
-import { DateFormatPatternCombobox } from '../../controls/DateFormatPatternCombobox.js'
-import { EnumDropdown } from '../../controls/EnumDropdown.js'
-import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
 import { getColumnType } from '../shared/TypingFunction/TypingFunction.js'

@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { GroupHeader } from '@data-wrangling-components/controls'
 import type { ColumnMetadata } from '@data-wrangling-components/core'
 import type {
 	ICommandBarProps,
@@ -12,7 +13,6 @@ import merge from 'lodash-es/merge.js'
 import type { ReactElement } from 'react'
 
 import { CommandBar } from '../CommandBar/CommandBar.js'
-import { GroupHeader } from '../controls/index.js'
 
 export function createLazyLoadingGroupHeader(
 	props: IDetailsGroupDividerProps | undefined,

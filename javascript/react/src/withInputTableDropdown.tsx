@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TableDropdown } from '@data-wrangling-components/controls'
 import { isInputTableStep } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 
 import { LeftAlignedRow, useHandleDropdownChange } from './common/index.js'
-import { TableDropdown } from './controls/index.js'
 import type { HOCFunction, StepComponentProps } from './types.js'
 
 /**

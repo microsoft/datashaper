@@ -2,6 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { EnumDropdown } from '@data-wrangling-components/controls'
+import { ColumnOrValueComboBox } from '@data-wrangling-components/controls'
+import { narrowDropdownStyles } from '@data-wrangling-components/controls'
 import type { Criterion } from '@data-wrangling-components/core'
 import {
 	BooleanComparisonOperator,
@@ -10,16 +13,13 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
-import type { IComboBoxOption,IDropdownOption } from '@fluentui/react'
+import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { InputExplainer } from '../../../common/styles.js'
-import { EnumDropdown } from '../../../controls/EnumDropdown.js'
-import { ColumnOrValueComboBox } from '../../../controls/index.js'
-import { narrowDropdownStyles } from '../../../controls/styles.js'
 import {
 	useColumnTyping,
 	useIsEmpty,

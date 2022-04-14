@@ -10,6 +10,7 @@ import type { ColumnMetadata } from '@data-wrangling-components/core';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import { DataType } from '@data-wrangling-components/core';
 import type { Dispatch } from 'react';
+import type { DropdownOptionChangeFunction } from '@data-wrangling-components/controls';
 import { DropzoneOptions } from 'react-dropzone';
 import type { DropzoneState as DropzoneState_2 } from 'react-dropzone';
 import { FileCollection } from '@data-wrangling-components/utilities';
@@ -38,12 +39,12 @@ import type { RowObject } from 'arquero/dist/types/table/table';
 import type { SetStateAction } from 'react';
 import { SortDirection } from '@data-wrangling-components/core';
 import type { Step } from '@data-wrangling-components/core';
+import type { StepChangeFunction } from '@data-wrangling-components/controls';
 import { StyledComponent } from 'styled-components';
 import type { TableContainer } from '@data-wrangling-components/core';
 import type { TableMetadata } from '@data-wrangling-components/core';
 import type { TableStore } from '@data-wrangling-components/core';
 import type { Theme } from '@thematic/core';
-import type { Value } from '@data-wrangling-components/core';
 import type { Verb } from '@data-wrangling-components/core';
 
 // Warning: (ae-missing-release-tag) "Aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -307,11 +308,6 @@ export interface DetailsListFeatures {
 //
 // @public
 export function downloadCommand(table: ColumnTable, downloadFilename?: string, props?: Partial<ICommandBarItemProps>): ICommandBarItemProps;
-
-// Warning: (ae-missing-release-tag) "DropdownOptionChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type DropdownOptionChangeFunction = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => void;
 
 // Warning: (ae-missing-release-tag) "DropdownOptionSelect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -752,11 +748,6 @@ export const StepCard: React.FC<{
     onSelect?: (name: string) => void;
 }>;
 
-// Warning: (ae-missing-release-tag) "StepChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type StepChangeFunction = (step: Step) => void;
-
 // Warning: (ae-forgotten-export) The symbol "StepComponentProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "StepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -947,11 +938,6 @@ export function useColumnStyles(clickable: boolean, separator: boolean): Partial
 // @public (undocumented)
 export function useColumnType(table?: ColumnTable, column?: string): DataType;
 
-// Warning: (ae-missing-release-tag) "useColumnValueOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useColumnValueOptions(column: string, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
-
 // Warning: (ae-missing-release-tag) "useCommonCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -966,11 +952,6 @@ export function useCreateColumnName(): (name: string, columnNames: string[]) => 
 //
 // @public (undocumented)
 export function useCreateTableName(store?: TableStore): (name: string) => string;
-
-// Warning: (ae-missing-release-tag) "useDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDateFormatPatternOptions(): IDropdownOption[];
 
 // Warning: (ae-missing-release-tag) "useDeleteConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1108,11 +1089,6 @@ export function useHandleZipUpload(onUpdateSteps?: (steps: Step[]) => void, onUp
 // @public
 export function useIncrementingColumnColorScale(meta?: TableMetadata): () => string;
 
-// Warning: (ae-missing-release-tag) "useIntersection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useIntersection(element: HTMLDivElement | undefined, rootMargin: string): boolean;
-
 // Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1132,11 +1108,6 @@ export function useProjectMgmtCommands(steps: Step[], tables: TableContainer[], 
 //
 // @public (undocumented)
 export function useReifiedTable(table: ColumnTable): ColumnTable;
-
-// Warning: (ae-missing-release-tag) "useSimpleOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useSimpleOptions(list: string[]): IDropdownOption[];
 
 // Warning: (ae-missing-release-tag) "useSlicedTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1173,20 +1144,10 @@ export function useStripedRowsRenderer(striped?: boolean, columnBorders?: boolea
 // @public (undocumented)
 export function useSubsetTable(table: ColumnTable, columns?: string[]): ColumnTable;
 
-// Warning: (ae-missing-release-tag) "useTableColumnOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useTableColumnOptions(table: ColumnTable | undefined, filter?: (name: string) => boolean): IDropdownOption[];
-
 // Warning: (ae-missing-release-tag) "useTableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function useTableMetadata(table: ColumnTable, existing?: TableMetadata, discover?: boolean, saveMetadata?: SaveMetadataFunction): TableMetadata | undefined;
-
-// Warning: (ae-missing-release-tag) "useTableOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useTableOptions(store?: TableStore): IDropdownOption[];
 
 // Warning: (ae-missing-release-tag) "useToggleStatsHeaderCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { EnumDropdown } from '@data-wrangling-components/controls'
 import type { Criterion, FilterStep } from '@data-wrangling-components/core'
 import { BooleanOperator } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
@@ -12,7 +13,6 @@ import styled from 'styled-components'
 
 import { useHandleDropdownChange, useLoadTable } from '../../common/hooks.js'
 import { LeftAlignedRow } from '../../common/styles.js'
-import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import type { StepComponentProps } from '../../types.js'
 import { FilterFunction } from '../shared/index.js'
 

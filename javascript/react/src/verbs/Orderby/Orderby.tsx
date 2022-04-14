@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { SortInstruction } from '@data-wrangling-components/controls'
 import type {
 	OrderbyInstruction,
 	OrderbyStep,
@@ -16,7 +17,6 @@ import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useLoadTable } from '../../common/index.js'
-import { SortInstruction } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**

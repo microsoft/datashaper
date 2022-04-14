@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { noop } from '@data-wrangling-components/controls'
 import { useMemo } from 'react'
 
-import { noop } from '../../common/functions.js'
 import type { DropdownOptionSelect } from '../index.js'
 
 export function useCellDropdownSelectHandler(

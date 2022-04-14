@@ -2,6 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { EnumDropdown } from '@data-wrangling-components/controls'
+import { dropdownStyles } from '@data-wrangling-components/controls'
 import type { BooleanStep } from '@data-wrangling-components/core'
 import { BooleanOperator } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
@@ -10,10 +12,8 @@ import { Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
+import { useHandleDropdownChange } from '../../common/hooks.js'
 import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
-import { EnumDropdown } from '../../controls/EnumDropdown.js'
-import { useHandleDropdownChange } from '../../controls/hooks.js'
-import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**

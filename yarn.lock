@@ -1746,7 +1746,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/controls@workspace:javascript/controls":
+"@data-wrangling-components/controls@workspace:^, @data-wrangling-components/controls@workspace:javascript/controls":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/controls@workspace:javascript/controls"
   dependencies:
@@ -1852,6 +1852,7 @@ __metadata:
   resolution: "@data-wrangling-components/react@workspace:javascript/react"
   dependencies:
     "@data-wrangling-components/charts": "workspace:^"
+    "@data-wrangling-components/controls": "workspace:^"
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/guidance": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"

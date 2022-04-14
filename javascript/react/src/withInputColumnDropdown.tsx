@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TableColumnDropdown } from '@data-wrangling-components/controls'
 import type { InputColumnArgs, Step } from '@data-wrangling-components/core'
 import {
 	DataType,
@@ -19,7 +20,6 @@ import {
 	useHandleDropdownChange,
 	useLoadTable,
 } from './common/index.js'
-import { TableColumnDropdown } from './controls/index.js'
 import type { HOCFunction, StepComponentProps } from './types.js'
 /**
  * Higher order component generator to wrap a Step in the input column dropdown.

@@ -2,6 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import {
+	TableColumnDropdown,
+	TableDropdown,
+} from '@data-wrangling-components/controls'
 import type { JoinStep, Step } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
@@ -9,8 +13,7 @@ import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange } from '../../../controls/hooks.js'
-import { TableColumnDropdown, TableDropdown } from '../../../controls/index.js'
+import { useHandleDropdownChange } from '../../../common/hooks.js'
 import { LeftAlignedRow, useLoadTable } from '../../../index.js'
 import type { StepComponentProps } from '../../../types.js'
 

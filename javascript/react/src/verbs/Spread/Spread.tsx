@@ -2,6 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ColumnSpread } from '@data-wrangling-components/controls'
+import { TableColumnDropdown } from '@data-wrangling-components/controls'
 import type {
 	SpreadArgs,
 	SpreadStep,
@@ -14,8 +16,6 @@ import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useHandleDropdownChange, useLoadTable } from '../../common/index.js'
-import { ColumnSpread } from '../../controls/ColumnSpread.js'
-import { TableColumnDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**

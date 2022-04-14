@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ColumnValueDropdown } from '@data-wrangling-components/controls'
 import type {
 	DataType,
 	RecodeStep,
@@ -16,7 +17,6 @@ import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useColumnType, useLoadTable } from '../../common/index.js'
-import { ColumnValueDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
 import {
 	useColumnValues,

@@ -14,6 +14,7 @@
 	},
 	"dependencies": {
 		"@data-wrangling-components/charts": "workspace:^",
+		"@data-wrangling-components/controls": "workspace:^",
 		"@data-wrangling-components/guidance": "workspace:^",
 		"@essex/dataflow": "^0.1.0",
 		"@essex/hooks": "^4.0.7",

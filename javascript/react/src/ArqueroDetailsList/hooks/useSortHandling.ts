@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { noop } from '@data-wrangling-components/controls'
 import { SortDirection } from '@data-wrangling-components/core'
 import type { IColumn } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
-import { noop } from '../../common/functions.js'
 import type { ColumnClickFunction } from '../index.js'
 
 export interface SortParameters {

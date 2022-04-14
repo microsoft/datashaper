@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { dropdownStyles } from '@data-wrangling-components/controls'
 import type { FetchStep } from '@data-wrangling-components/core'
 import { Position, SpinButton, TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { dropdownStyles } from '../../controls/styles.js'
 import {
 	LeftAlignedRow,
 	useHandleSpinButtonChange,

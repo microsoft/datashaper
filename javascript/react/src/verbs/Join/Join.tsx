@@ -2,6 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { EnumDropdown } from '@data-wrangling-components/controls'
+import { dropdownStyles } from '@data-wrangling-components/controls'
 import type { JoinStep } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
@@ -9,8 +11,6 @@ import styled from 'styled-components'
 
 import { useHandleDropdownChange } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
-import { EnumDropdown } from '../../controls/EnumDropdown.js'
-import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 import { JoinInputs } from '../shared/index.js'
 

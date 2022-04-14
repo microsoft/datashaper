@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TableColumnDropdown } from '@data-wrangling-components/controls'
 import type { RenameStep } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
@@ -17,7 +18,6 @@ import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useColumnRecordDelete, useLoadTable } from '../../common/index.js'
-import { TableColumnDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types.js'
 import {
 	useDisabled,

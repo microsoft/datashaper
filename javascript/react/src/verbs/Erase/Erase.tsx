@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { dropdownStyles } from '@data-wrangling-components/controls'
 import type { EraseStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import { memo, useMemo } from 'react'
@@ -11,7 +12,6 @@ import {
 	LeftAlignedColumn,
 	useHandleTextfieldChange,
 } from '../../common/index.js'
-import { dropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
 

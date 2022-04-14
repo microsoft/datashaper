@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { EnumDropdown } from '@data-wrangling-components/controls'
 import type { WindowStep } from '@data-wrangling-components/core'
 import { WindowFunction } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
-import { EnumDropdown } from '../../controls/EnumDropdown.js'
 import type { StepComponentProps } from '../../types.js'
 /**
  * Just the column/op inputs for an rollup.

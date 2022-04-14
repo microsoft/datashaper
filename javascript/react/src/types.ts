@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { StepChangeFunction } from '@data-wrangling-components/controls'
 import type { Step, TableStore } from '@data-wrangling-components/core'
-import type { IDropdownOption, IModalProps } from '@fluentui/react'
+import type { IModalProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type HOCFunction<T> = (Component: React.FC<T>) => React.FC<T>

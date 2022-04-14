@@ -2,6 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { EnumDropdown } from '@data-wrangling-components/controls'
+import { narrowDropdownStyles } from '@data-wrangling-components/controls'
 import type { BinStep } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
 import { Checkbox, Position, SpinButton } from '@fluentui/react'
@@ -16,8 +18,6 @@ import {
 	useHandleDropdownChange,
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
-import { EnumDropdown } from '../../controls/EnumDropdown.js'
-import { narrowDropdownStyles } from '../../controls/styles.js'
 import type { StepComponentProps } from '../../types.js'
 
 // children was removed from FC; react-if has not been updated yet

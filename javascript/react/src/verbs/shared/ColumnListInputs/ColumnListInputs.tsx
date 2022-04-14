@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { MultiDropdown } from '@data-wrangling-components/controls'
 import type { ColumnListStep } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { MultiDropdown } from '../../../controls/MultiDropdown.js'
 import { useLoadTable } from '../../../index.js'
 import type { StepSubcomponentProps } from '../../../types.js'
 

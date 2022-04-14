@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { TableColumnDropdown } from '@data-wrangling-components/controls'
 import type { PivotStep } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
@@ -12,7 +13,6 @@ import {
 	useHandleDropdownChange,
 	useLoadTable,
 } from '../../common/index.js'
-import { TableColumnDropdown } from '../../controls/index.js'
 import type { StepComponentProps } from '../../types'
 
 /**

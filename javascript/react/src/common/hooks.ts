@@ -3,12 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
+	DropdownOptionChangeFunction,
+	StepChangeFunction,
+} from '@data-wrangling-components/controls'
+import { identity, noop, num } from '@data-wrangling-components/controls'
+import type {
 	InputColumnRecordArgs,
 	Pipeline,
 	Step,
 	TableContainer,
 	TableStore,
-	Value,
 } from '@data-wrangling-components/core'
 import {
 	columnType,
@@ -16,25 +20,15 @@ import {
 	createTableStore,
 	DataType,
 } from '@data-wrangling-components/core'
-import type {
-	ICommandBarItemProps,
-	IContextualMenuItem,
-	IDropdownOption,
-} from '@fluentui/react'
+import type { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import isArray from 'lodash-es/isArray.js'
 import set from 'lodash-es/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { identity, noop, num } from '../functions.js'
 import type { DetailsListFeatures } from '../index.js'
-import type {
-	DropdownOptionChangeFunction,
-	StepChangeFunction,
-} from '../types.js'
 
 /**
  * Creates a callback handler for changing the step based on a dropdown value.

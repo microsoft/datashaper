@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { GroupHeader } from '@data-wrangling-components/controls'
 import type { TableMetadata } from '@data-wrangling-components/core'
 import type {
 	IDetailsGroupDividerProps,
@@ -10,7 +11,6 @@ import type {
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 
-import { GroupHeader } from '../../controls/index.js'
 import type { GroupHeaderFunction } from '../index.js'
 
 /**
