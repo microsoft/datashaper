@@ -29,12 +29,12 @@ import isArray from 'lodash-es/isArray.js'
 import set from 'lodash-es/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { identity, noop, num } from '../functions.js'
 import type { DetailsListFeatures } from '../index.js'
 import type {
 	DropdownOptionChangeFunction,
 	StepChangeFunction,
 } from '../types.js'
-import { identity, noop, num } from './functions.js'
 
 /**
  * Make a basic set of string options from an array

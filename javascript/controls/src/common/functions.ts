@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-// import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 /**
  * A no-op utility functionw
@@ -18,7 +17,7 @@ export const identity = <T>(value?: T): T | undefined => value
 
 /**
  * Converts a string value to a numeric
- * @param value The string value
+ * @param value - the string value
  * @returns The string cast as a number (if defined)
  */
 export const num = (value?: string): number | undefined => {
@@ -29,7 +28,7 @@ export const num = (value?: string): number | undefined => {
 
 /**
  * Creates a callback that returns a static value
- * @param value The value to prime the function with
+ * @param value - the value to prime the function with
  * @returns A callback that returns the given value
  */
 export const staticCallback =
