@@ -8,7 +8,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
 import { useColumnValueOptions } from '../hooks.js'
-import { dropdownStyles } from './styles.js'
+import { dropdownStyles } from '../styles.js'
 
 export interface ColumnValueComboBoxProps extends Partial<IComboBoxProps> {
 	table?: ColumnTable

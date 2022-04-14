@@ -7,7 +7,7 @@ import type { IDropdownProps } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 
-import { dropdownStyles } from '../styles.js'
+import { dropdownStyles } from '../../styles.js'
 import { useTableOptions } from './TableDropdown.hooks.js'
 
 export interface TableDropdownProps extends Partial<IDropdownProps> {

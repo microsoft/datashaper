@@ -9,7 +9,7 @@ import { memo, useMemo } from 'react'
 
 import { staticCallback } from '../functions.js'
 import { useTableColumnOptions } from '../hooks.js'
-import { dropdownStyles } from './styles.js'
+import { dropdownStyles } from '../styles.js'
 
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
 	table?: ColumnTable

@@ -6,7 +6,7 @@ import type { IComboBoxProps } from '@fluentui/react'
 import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
-import { dropdownStyles } from '../styles.js'
+import { dropdownStyles } from '../../styles.js'
 import { useDateFormatPatternOptions } from './DateFormatPatternCombobox.hooks.js'
 
 export interface DateFormatPatternComboboxProps
