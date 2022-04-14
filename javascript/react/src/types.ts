@@ -6,14 +6,7 @@ import type { Step, TableStore } from '@data-wrangling-components/core'
 import type { IDropdownOption, IModalProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-export type StepChangeFunction = (step: Step) => void
 export type HOCFunction<T> = (Component: React.FC<T>) => React.FC<T>
-
-export type DropdownOptionChangeFunction = (
-	event: React.FormEvent<HTMLDivElement>,
-	option?: IDropdownOption,
-	index?: number,
-) => void
 
 export interface TransformModalProps extends IModalProps {
 	/**
