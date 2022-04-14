@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+// import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 /**
  * A no-op utility functionw
@@ -36,14 +36,3 @@ export const staticCallback =
 	<T>(value: T) =>
 	(): T =>
 		value
-
-export function sliceTable(
-	table: ColumnTable,
-	offset: number,
-	limit: number,
-): ColumnTable {
-	if (offset === 0 && limit === Infinity) {
-		return table
-	}
-	return table.slice(offset, offset + limit)
-}
