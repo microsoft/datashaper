@@ -7,16 +7,12 @@
 /// <reference types="react" />
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
-import type { GroupBySpec } from 'arquero/dist/types/table/table';
 import type { IComboBoxProps } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
-import type { IGroup } from '@fluentui/react';
 import type { ITextFieldProps } from '@fluentui/react';
 import type { OrderbyInstruction } from '@data-wrangling-components/core';
-import type { RowObject } from 'arquero/dist/types/table/table';
-import { SortDirection } from '@data-wrangling-components/core';
 import type { Step } from '@data-wrangling-components/core';
 import type { TableStore } from '@data-wrangling-components/core';
 import type { Value } from '@data-wrangling-components/core';
@@ -104,11 +100,6 @@ export interface DateFormatPatternComboboxProps extends Partial<IComboBoxProps> 
 //
 // @public (undocumented)
 export type DropdownOptionChangeFunction = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => void;
-
-// Warning: (ae-missing-release-tag) "groupBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function groupBuilder(row: RowObject, existingGroups: GroupBySpec, actualLevel: number, totalLevelCount: number, items: RowObject[], sortDirection?: SortDirection, lazyLoadGroups?: boolean, sortColumn?: string, fatherIndex?: number): IGroup;
 
 // Warning: (ae-forgotten-export) The symbol "GroupHeaderProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "GroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
