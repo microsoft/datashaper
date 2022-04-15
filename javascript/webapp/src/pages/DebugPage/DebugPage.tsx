@@ -12,11 +12,9 @@ import type {
 import { readSpec } from '@data-wrangling-components/core'
 import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
-	StatsColumnType,
-	StepComponent,
+ StatsColumnType,	StepComponent,
 	StepSelector,
-	usePipeline,
-} from '@data-wrangling-components/react'
+	usePipeline } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo, useState } from 'react'

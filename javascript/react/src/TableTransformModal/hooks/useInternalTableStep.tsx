@@ -7,7 +7,10 @@ import type { Step, TableStore, Verb } from '@data-wrangling-components/core'
 import { readStep } from '@data-wrangling-components/core'
 import { useCallback, useEffect, useState } from 'react'
 
-import { useCreateTableName, useFormatedColumnArg } from '../../common/index.js'
+import {
+	useCreateTableName,
+	useFormattedColumnArg,
+} from '../../common/index.js'
 
 export function useInternalTableStep(
 	step: Step | undefined,
@@ -19,7 +22,7 @@ export function useInternalTableStep(
 	setInternal: (step?: Step) => void
 } {
 	const [internal, setInternal] = useState<Step | undefined>()
-	const formattedColumnArg = useFormatedColumnArg()
+	const formattedColumnArg = useFormattedColumnArg()
 
 	useEffect(() => {
 		if (step) {

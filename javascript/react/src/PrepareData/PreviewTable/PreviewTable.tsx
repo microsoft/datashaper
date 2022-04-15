@@ -3,17 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableMetadata } from '@data-wrangling-components/core'
+import type { SaveMetadataFunction } from '@data-wrangling-components/react-arquero'
+import {
+	ArqueroDetailsList,
+	ArqueroTableHeader,
+	StatsColumnType,
+} from '@data-wrangling-components/react-arquero'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import type { SaveMetadataFunction } from '../../index.js'
-import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
-	StatsColumnType,
-} from '../../index.js'
 import { DetailText } from '../DetailText/index.js'
 import { useToggleTableFeatures } from '../hooks/index.js'
 

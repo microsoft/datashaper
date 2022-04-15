@@ -3,10 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DetailsListFeatures } from '@data-wrangling-components/react'
-import {
-	ArqueroDetailsList,
+import { 	ArqueroDetailsList,
 	ArqueroTableHeader,
-	createDefaultHeaderCommandBar,
+createDefaultHeaderCommandBar ,
 	downloadCommand,
 	visibleColumnsCommand,
 } from '@data-wrangling-components/react'

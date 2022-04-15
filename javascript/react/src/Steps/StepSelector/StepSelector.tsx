@@ -3,14 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Verb } from '@data-wrangling-components/core'
+import { ColumnarMenu , ColumnarMenuList , ContextualMenuItemSearchBox } from '@data-wrangling-components/react-controls'
 import type { IContextualMenuListProps } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
-import { ColumnarMenu } from '../../controls/ColumnarMenu/ColumnarMenu.js'
-import { ColumnarMenuList } from '../../controls/ColumnarMenu/ColumnarMenuList.js'
-import { ContextualMenuItemSearchBox } from '../../controls/ContextualMenuItemSearchBox/ContextualMenuItemSearchBox.js'
 import { useSearchableItems, useSelectedOption } from './StepSelector.hooks.js'
 
 export interface StepSelectorProps {

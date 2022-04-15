@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@data-wrangling-components/core'
+import { ColumnarMenu } from '@data-wrangling-components/react-controls'
 import { DefaultButton, Spinner, SpinnerSize } from '@fluentui/react'
 import { memo } from 'react'
 
-import { ColumnarMenu } from '../../controls/ColumnarMenu/ColumnarMenu.js'
 import { DetailText } from '../DetailText/DetailText.js'
 import { useOutputPreview, useTableSelection } from './TableListBar.hooks.js'
 import { ListContainer, viewButtonStyles } from './TableListBar.styles.js'

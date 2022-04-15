@@ -9,7 +9,7 @@
 	},
 	"sideEffects": false,
 	"scripts": {
-		"clean": "essex clean dist lib",
+		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck"
 	},
 	"dependencies": {
