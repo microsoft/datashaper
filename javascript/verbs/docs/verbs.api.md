@@ -79,11 +79,6 @@ export const Convert: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const ConvertDescription: React.FC<StepDescriptionProps>;
 
-// Warning: (ae-missing-release-tag) "createRowEntries" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createRowEntries<T>(list: T[], print: (obj: T) => DescriptionRow, others: number, props: StepDescriptionProps): DescriptionRow[];
-
 // Warning: (ae-missing-release-tag) "Derive" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -413,11 +408,6 @@ export function useLoadTable(id: string | undefined, table?: ColumnTable, store?
 //
 // @public (undocumented)
 export const VerbContainer: StyledComponent<"div", any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "VerbDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const VerbDescription: React.FC<VerbDescriptionProps>;
 
 // Warning: (ae-missing-release-tag) "VerbDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

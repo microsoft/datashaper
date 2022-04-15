@@ -4,7 +4,7 @@
  */
 import { memo, useMemo } from 'react'
 
-import { VerbDescription } from '../../index.js'
+import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
 export const NoParametersDescription: React.FC<StepDescriptionProps> = memo(

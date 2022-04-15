@@ -6,7 +6,8 @@ import type { ConvertStep } from '@data-wrangling-components/core'
 import { ParseType } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
-import { createRowEntries, VerbDescription } from '../../index.js'
+import { createRowEntries } from '../../common/createRowEntries.js'
+import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
 export const ConvertDescription: React.FC<StepDescriptionProps> = memo(

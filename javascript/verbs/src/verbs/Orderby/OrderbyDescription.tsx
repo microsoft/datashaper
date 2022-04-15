@@ -5,7 +5,8 @@
 import type { OrderbyStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
-import { createRowEntries, VerbDescription } from '../../index.js'
+import { createRowEntries } from '../../common/createRowEntries.js'
+import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
 export const OrderbyDescription: React.FC<StepDescriptionProps> = memo(

@@ -5,9 +5,9 @@
 import type { ImputeStep } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
-import { VerbDescription } from '../../index.js'
+import { createRowEntries } from '../../common/createRowEntries.js'
+import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
-import { createRowEntries } from '../../VerbDescription/util.js'
 
 export const ImputeDescription: React.FC<StepDescriptionProps> = memo(
 	function ImputeDescription(props) {
