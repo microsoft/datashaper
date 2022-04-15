@@ -4,7 +4,10 @@
  */
 import type { BinStep } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
-import { EnumDropdown , narrowDropdownStyles } from '@data-wrangling-components/react-controls'
+import {
+	EnumDropdown,
+	narrowDropdownStyles,
+} from '@data-wrangling-components/react-controls'
 import { Checkbox, Position, SpinButton } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import { Case, If, Switch as RawSwitch, Then as RawThen } from 'react-if'
@@ -12,7 +15,6 @@ import styled from 'styled-components'
 
 import {
 	LeftAlignedRow,
-	LeftAlignedRowWithGap,
 	useHandleCheckboxChange,
 	useHandleDropdownChange,
 	useHandleSpinButtonChange,
@@ -147,4 +149,14 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+`
+
+const LeftAlignedRowWithGap = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-end;
+	margin-bottom: 8px;
+	gap: 12px;
 `

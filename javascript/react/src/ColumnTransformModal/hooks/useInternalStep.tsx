@@ -8,7 +8,7 @@ import { readStep } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
 
-import { useFormatedColumnArgWithCount } from '../../index.js'
+import { useFormattedColumnArgWithCount } from '../../index.js'
 
 export function useInternalStep(
 	step: Step | undefined,
@@ -20,7 +20,7 @@ export function useInternalStep(
 	setInternal: (step?: Step) => void
 } {
 	const [internal, setInternal] = useState<Step | undefined>()
-	const formattedColumnArg = useFormatedColumnArgWithCount()
+	const formattedColumnArg = useFormattedColumnArgWithCount()
 
 	useEffect(() => {
 		if (step) {

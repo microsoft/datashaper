@@ -88,7 +88,7 @@ export function useCreateTableName(
 	)
 }
 
-export function useFormatedColumnArg(): (
+export function useFormattedColumnArg(): (
 	stepArgs: unknown,
 	newName?: string,
 ) => object {
@@ -101,7 +101,7 @@ export function useFormatedColumnArg(): (
 	}, [])
 }
 
-export function useFormatedColumnArgWithCount(): (
+export function useFormattedColumnArgWithCount(): (
 	step: Step,
 	columnNames: string[],
 ) => object {

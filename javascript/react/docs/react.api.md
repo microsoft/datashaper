@@ -353,15 +353,15 @@ export function useDownloadZip(steps: Step[], tables: TableContainer[], outputTa
 // @public (undocumented)
 export const useDropzone: (props: DzProps) => DropzoneState;
 
-// Warning: (ae-missing-release-tag) "useFormatedColumnArg" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useFormattedColumnArg" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useFormatedColumnArg(): (stepArgs: unknown, newName?: string) => object;
+export function useFormattedColumnArg(): (stepArgs: unknown, newName?: string) => object;
 
-// Warning: (ae-missing-release-tag) "useFormatedColumnArgWithCount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useFormattedColumnArgWithCount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useFormatedColumnArgWithCount(): (step: Step, columnNames: string[]) => object;
+export function useFormattedColumnArgWithCount(): (step: Step, columnNames: string[]) => object;
 
 // Warning: (ae-forgotten-export) The symbol "NameSetter" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useGoBack" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

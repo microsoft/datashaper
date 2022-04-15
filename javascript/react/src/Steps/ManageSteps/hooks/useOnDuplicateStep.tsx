@@ -9,7 +9,7 @@ import { useCallback } from 'react'
 
 import {
 	useCreateTableName,
-	useFormatedColumnArgWithCount,
+	useFormattedColumnArgWithCount,
 } from '../../../common/index.js'
 import { StepsType } from '../../../index.js'
 
@@ -20,7 +20,7 @@ export function useOnDuplicateStep(
 	onSave?: (step: Step, index?: number) => void,
 ): (_step: Step) => void {
 	const createTableName = useCreateTableName(store)
-	const formattedColumnArgs = useFormatedColumnArgWithCount()
+	const formattedColumnArgs = useFormattedColumnArgWithCount()
 
 	return useCallback(
 		(_step: Step) => {

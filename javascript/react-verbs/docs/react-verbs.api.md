@@ -53,11 +53,6 @@ export const BooleanLogic: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const BooleanLogicDescription: React.FC<StepDescriptionProps>;
 
-// Warning: (ae-missing-release-tag) "CenteredColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const CenteredColumn: StyledComponent<"div", any, {}, never>;
-
 // Warning: (ae-missing-release-tag) "ColumnListOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -188,11 +183,6 @@ export const LeftAlignedColumn: StyledComponent<"div", any, {}, never>;
 //
 // @public (undocumented)
 export const LeftAlignedRow: StyledComponent<"div", any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "LeftAlignedRowWithGap" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const LeftAlignedRowWithGap: StyledComponent<"div", any, {}, never>;
 
 // Warning: (ae-missing-release-tag) "Lookup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -413,11 +403,6 @@ export function useHandleTextfieldChange(step: Step, path: string, onChange?: St
 // @public (undocumented)
 export function useLoadTable(id: string | undefined, table?: ColumnTable, store?: TableStore): ColumnTable | undefined;
 
-// Warning: (ae-missing-release-tag) "VerbContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const VerbContainer: StyledComponent<"div", any, {}, never>;
-
 // Warning: (ae-missing-release-tag) "VerbDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -425,11 +410,6 @@ export interface VerbDescriptionProps extends StepDescriptionProps {
     // (undocumented)
     rows: DescriptionRow[];
 }
-
-// Warning: (ae-missing-release-tag) "VerticalSpacer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const VerticalSpacer: StyledComponent<"div", any, {}, never>;
 
 // Warning: (ae-missing-release-tag) "Window" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
