@@ -7,7 +7,11 @@
 /// <reference types="react" />
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { IButtonStyles } from '@fluentui/react';
 import type { IComboBoxProps } from '@fluentui/react';
+import type { IContextualMenuItem } from '@fluentui/react';
+import type { IContextualMenuListProps } from '@fluentui/react';
+import type { IContextualMenuProps } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
@@ -16,6 +20,24 @@ import type { OrderbyInstruction } from '@data-wrangling-components/core';
 import type { Step } from '@data-wrangling-components/core';
 import type { TableStore } from '@data-wrangling-components/core';
 import type { Value } from '@data-wrangling-components/core';
+
+// Warning: (ae-missing-release-tag) "ColumnarMenu" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const ColumnarMenu: React.FC<ColumnarMenuProps>;
+
+// Warning: (ae-missing-release-tag) "ColumnarMenuList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const ColumnarMenuList: React.FC<IContextualMenuListProps>;
+
+// Warning: (ae-missing-release-tag) "ColumnarMenuProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ColumnarMenuProps extends IContextualMenuProps {
+    // (undocumented)
+    text?: string;
+}
 
 // Warning: (ae-missing-release-tag) "ColumnInstruction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -46,6 +68,25 @@ export const ColumnOrValueComboBox: React.FC<ColumnOrValueComboBoxProps>;
 // @public (undocumented)
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
     filter?: (name: string) => boolean;
+    // (undocumented)
+    table?: ColumnTable;
+}
+
+// Warning: (ae-missing-release-tag) "ColumnSpread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const ColumnSpread: React.FC<ColumnSpreadProps>;
+
+// Warning: (ae-missing-release-tag) "ColumnSpreadProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ColumnSpreadProps {
+    // (undocumented)
+    column: string;
+    // (undocumented)
+    onChange?: (column: string) => void;
+    // (undocumented)
+    onDelete?: () => void;
     // (undocumented)
     table?: ColumnTable;
 }
@@ -83,6 +124,21 @@ export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
     values?: Value[];
 }
 
+// Warning: (ae-missing-release-tag) "ContextualMenuItemSearchBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const ContextualMenuItemSearchBox: React.FC<ContextualMenuItemSearchBoxProps>;
+
+// Warning: (ae-missing-release-tag) "ContextualMenuItemSearchBoxProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ContextualMenuItemSearchBoxProps {
+    // (undocumented)
+    items: IContextualMenuItem[];
+    // (undocumented)
+    onSearch: (results: IContextualMenuItem[]) => void;
+}
+
 // Warning: (ae-missing-release-tag) "DateFormatPatternCombobox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -96,10 +152,38 @@ export interface DateFormatPatternComboboxProps extends Partial<IComboBoxProps> 
     columnName?: string;
 }
 
+// Warning: (ae-missing-release-tag) "dropdownButtonStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const dropdownButtonStyles: IButtonStyles;
+
 // Warning: (ae-missing-release-tag) "DropdownOptionChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type DropdownOptionChangeFunction = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => void;
+
+// Warning: (ae-missing-release-tag) "dropdownStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const dropdownStyles: {
+    root: {
+        width: number;
+    };
+};
+
+// Warning: (ae-missing-release-tag) "EnumDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const EnumDropdown: React.FC<EnumDropdownProps>;
+
+// Warning: (ae-missing-release-tag) "EnumDropdownProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface EnumDropdownProps<E = unknown> extends Omit<IDropdownProps, 'options'> {
+    // (undocumented)
+    enumeration: E;
+    labels?: Record<string, string>;
+}
 
 // Warning: (ae-forgotten-export) The symbol "GroupHeaderProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "GroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -112,6 +196,28 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>>;
 // @public
 export const identity: <T>(value?: T | undefined) => T | undefined;
 
+// Warning: (ae-missing-release-tag) "MultiDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const MultiDropdown: React.FC<MultiDropdownProps>;
+
+// Warning: (ae-missing-release-tag) "MultiDropdownProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface MultiDropdownProps extends IDropdownProps {
+    // (undocumented)
+    onSelectAllOrNone?: (options: IDropdownOption[]) => void;
+}
+
+// Warning: (ae-missing-release-tag) "narrowDropdownStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const narrowDropdownStyles: {
+    root: {
+        width: number;
+    };
+};
+
 // Warning: (ae-missing-release-tag) "noop" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -121,6 +227,15 @@ export const noop: () => void;
 //
 // @public
 export const num: (value?: string | undefined) => number | undefined;
+
+// Warning: (ae-missing-release-tag) "opDropdownStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const opDropdownStyles: {
+    root: {
+        width: number;
+    };
+};
 
 // Warning: (ae-missing-release-tag) "ReadOnlyTextField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

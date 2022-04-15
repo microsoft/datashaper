@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { DetailsListFeatures } from '@data-wrangling-components/arquero'
+import { StatsColumnType } from '@data-wrangling-components/arquero'
 import type { Specification } from '@data-wrangling-components/core'
-import type { DetailsListFeatures } from '@data-wrangling-components/react'
-import { StatsColumnType } from '@data-wrangling-components/react'
 import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	FileCollection,

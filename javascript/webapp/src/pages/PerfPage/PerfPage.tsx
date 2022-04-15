@@ -3,14 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import {
+	ArqueroDetailsList,
+	ArqueroTableHeader,
+} from '@data-wrangling-components/arquero'
 import type {
 	ColumnMetadata,
 	TableMetadata,
 } from '@data-wrangling-components/core'
 import { introspect } from '@data-wrangling-components/core'
 import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
 	createDefaultCommandBar,
 	createDefaultHeaderCommandBar,
 	createLazyLoadingGroupHeader,

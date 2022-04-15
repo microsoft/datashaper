@@ -7,17 +7,18 @@
 /// <reference types="react" />
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import { DataType } from '@data-wrangling-components/core';
+import type { DropdownOptionChangeFunction } from '@data-wrangling-components/controls';
 import type { Step } from '@data-wrangling-components/core';
 import type { StepChangeFunction } from '@data-wrangling-components/controls';
+import { StyledComponent } from 'styled-components';
 import type { TableStore } from '@data-wrangling-components/core';
 
-// Warning: (ae-forgotten-export) The symbol "StepComponentProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const Aggregate: React.FC<StepComponentProps>;
 
-// Warning: (ae-forgotten-export) The symbol "StepDescriptionProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "AggregateDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -53,6 +54,11 @@ export const BooleanLogic: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const BooleanLogicDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "CenteredColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const CenteredColumn: StyledComponent<"div", any, {}, never>;
+
 // Warning: (ae-missing-release-tag) "ColumnListOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -73,7 +79,6 @@ export const Convert: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const ConvertDescription: React.FC<StepDescriptionProps>;
 
-// Warning: (ae-forgotten-export) The symbol "DescriptionRow" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "createRowEntries" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -88,6 +93,17 @@ export const Derive: React.FC<StepComponentProps>;
 //
 // @public (undocumented)
 export const DeriveDescription: React.FC<StepDescriptionProps>;
+
+// Warning: (ae-missing-release-tag) "DescriptionRow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DescriptionRow {
+    after?: string;
+    before?: string;
+    sub?: DescriptionRow[];
+    title?: string;
+    value?: any;
+}
 
 // Warning: (ae-missing-release-tag) "Erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -149,6 +165,11 @@ export const Impute: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const ImputeDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "InputExplainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const InputExplainer: StyledComponent<"div", any, {}, never>;
+
 // Warning: (ae-missing-release-tag) "Join" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -158,6 +179,21 @@ export const Join: React.FC<StepComponentProps>;
 //
 // @public (undocumented)
 export const JoinDescription: React.FC<StepDescriptionProps>;
+
+// Warning: (ae-missing-release-tag) "LeftAlignedColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LeftAlignedColumn: StyledComponent<"div", any, {}, never>;
+
+// Warning: (ae-missing-release-tag) "LeftAlignedRow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LeftAlignedRow: StyledComponent<"div", any, {}, never>;
+
+// Warning: (ae-missing-release-tag) "LeftAlignedRowWithGap" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LeftAlignedRowWithGap: StyledComponent<"div", any, {}, never>;
 
 // Warning: (ae-missing-release-tag) "Lookup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -284,6 +320,50 @@ export const Spread: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const SpreadDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepComponentProps extends StepDependent {
+    input?: string;
+    label?: string;
+    // (undocumented)
+    onChange?: StepChangeFunction;
+    store?: TableStore;
+    table?: ColumnTable;
+}
+
+// Warning: (ae-missing-release-tag) "StepDependent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepDependent {
+    // (undocumented)
+    step: Step;
+}
+
+// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepDescriptionProps extends StepDependent {
+    // (undocumented)
+    actions?: JSX.Element;
+    // (undocumented)
+    showInput?: boolean;
+    // (undocumented)
+    showOutput?: boolean;
+    // (undocumented)
+    showOutputColumn?: boolean;
+    // (undocumented)
+    style?: React.CSSProperties;
+}
+
+// Warning: (ae-missing-release-tag) "StepSubcomponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface StepSubcomponentProps extends StepComponentProps {
+    // (undocumented)
+    label?: string;
+}
+
 // Warning: (ae-missing-release-tag) "Unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -294,11 +374,63 @@ export const Unfold: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const UnfoldDescription: React.FC<StepDescriptionProps>;
 
-// Warning: (ae-forgotten-export) The symbol "VerbDescriptionProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "useColumnRecordDelete" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useColumnRecordDelete(step: Step, onChange?: StepChangeFunction): (column: string) => void;
+
+// Warning: (ae-missing-release-tag) "useColumnType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useColumnType(table?: ColumnTable, column?: string): DataType;
+
+// Warning: (ae-missing-release-tag) "useHandleCheckboxChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleCheckboxChange(step: Step, path: string, onChange?: StepChangeFunction): (event?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean) => void;
+
+// Warning: (ae-missing-release-tag) "useHandleDropdownChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useHandleDropdownChange(step: Step, path: string, onChange?: StepChangeFunction): DropdownOptionChangeFunction;
+
+// Warning: (ae-missing-release-tag) "useHandleSpinButtonChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useHandleSpinButtonChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => number | undefined): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
+
+// Warning: (ae-missing-release-tag) "useHandleTextfieldChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: <T>(value?: T | undefined) => T | undefined): (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
+
+// Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useLoadTable(id: string | undefined, table?: ColumnTable, store?: TableStore): ColumnTable | undefined;
+
+// Warning: (ae-missing-release-tag) "VerbContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const VerbContainer: StyledComponent<"div", any, {}, never>;
+
 // Warning: (ae-missing-release-tag) "VerbDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const VerbDescription: React.FC<VerbDescriptionProps>;
+
+// Warning: (ae-missing-release-tag) "VerbDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface VerbDescriptionProps extends StepDescriptionProps {
+    // (undocumented)
+    rows: DescriptionRow[];
+}
+
+// Warning: (ae-missing-release-tag) "VerticalSpacer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const VerticalSpacer: StyledComponent<"div", any, {}, never>;
 
 // Warning: (ae-missing-release-tag) "Window" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

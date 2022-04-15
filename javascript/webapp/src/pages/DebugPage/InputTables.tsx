@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { DetailsListFeatures } from '@data-wrangling-components/arquero'
 import type { TableContainer } from '@data-wrangling-components/core'
-import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 

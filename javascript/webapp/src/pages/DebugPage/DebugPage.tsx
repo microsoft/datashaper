@@ -3,6 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
+import type { DetailsListFeatures } from '@data-wrangling-components/arquero'
+import { StatsColumnType } from '@data-wrangling-components/arquero'
 import type {
 	Specification,
 	Step,
@@ -10,9 +12,7 @@ import type {
 	Verb,
 } from '@data-wrangling-components/core'
 import { readSpec } from '@data-wrangling-components/core'
-import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
-	StatsColumnType,
 	StepComponent,
 	StepSelector,
 	usePipeline,

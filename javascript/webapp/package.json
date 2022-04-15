@@ -13,9 +13,10 @@
 		"archive:client": "yarn archive"
 	},
 	"dependencies": {
-		"@data-wrangling-components/core": "workspace:javascript/core",
-		"@data-wrangling-components/react": "workspace:javascript/react",
-		"@data-wrangling-components/utilities": "workspace:javascript/utilities",
+		"@data-wrangling-components/arquero": "workspace:^",
+		"@data-wrangling-components/core": "workspace:^",
+		"@data-wrangling-components/react": "workspace:^",
+		"@data-wrangling-components/utilities": "workspace:^",
 		"@essex/hooks": "^4.0.7",
 		"@essex/themed-components": "^2.2.1",
 		"@essex/webpack-config": "^21.0.1",
