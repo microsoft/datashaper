@@ -9,13 +9,11 @@ import {
 	createTableStore,
 } from '@data-wrangling-components/core'
 import {
+	ArqueroDetailsList,
+	ArqueroTableHeader,
 	ColumnTransformModal,
 	createDefaultHeaderCommandBar,
 } from '@data-wrangling-components/react'
-import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
-} from '@data-wrangling-components/react-arquero'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { useThematic } from '@thematic/react'

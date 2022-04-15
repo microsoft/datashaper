@@ -3,17 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
+import {
+	withInputColumnDropdown,
+	withInputTableDropdown,
+	withOutputColumnTextfield,
+} from '@data-wrangling-components/react-hocs'
 import flow from 'lodash-es/flow.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import {
-	selectStepComponent,
-	selectStepDescription,
-	withInputColumnDropdown,
-	withInputTableDropdown,
-	withOutputColumnTextfield,
-} from '../../index.js'
+import { selectStepComponent, selectStepDescription } from '../../index.js'
 
 interface StepComponentProps {
 	step: Step

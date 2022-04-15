@@ -6,8 +6,6 @@ import type { Step, TableStore } from '@data-wrangling-components/core'
 import type { IModalProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-export type HOCFunction<T> = (Component: React.FC<T>) => React.FC<T>
-
 export interface TransformModalProps extends IModalProps {
 	/**
 	 * Table to build the transform from.

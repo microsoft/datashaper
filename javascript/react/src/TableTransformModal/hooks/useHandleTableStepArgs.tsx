@@ -4,17 +4,17 @@
  */
 
 import type { Step } from '@data-wrangling-components/core'
-import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
-import flow from 'lodash-es/flow.js'
-import { useMemo } from 'react'
-
 import {
-	selectStepComponent,
 	withInputColumnDropdown,
 	withInputTableDropdown,
 	withOutputColumnTextfield,
 	withOutputTableTextfield,
-} from '../../index.js'
+} from '@data-wrangling-components/react-hocs'
+import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
+import flow from 'lodash-es/flow.js'
+import { useMemo } from 'react'
+
+import { selectStepComponent } from '../../index.js'
 
 export function useHandleTableStepArgs(
 	step: Step | undefined,

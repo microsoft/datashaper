@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@data-wrangling-components/core'
-import type { DetailsListFeatures } from '@data-wrangling-components/react-arquero'
+import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 

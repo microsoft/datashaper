@@ -9,14 +9,12 @@ import type {
 } from '@data-wrangling-components/core'
 import { introspect } from '@data-wrangling-components/core'
 import {
+	ArqueroDetailsList,
+	ArqueroTableHeader,
 	createDefaultCommandBar,
 	createDefaultHeaderCommandBar,
 	createLazyLoadingGroupHeader,
 } from '@data-wrangling-components/react'
-import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
-} from '@data-wrangling-components/react-arquero'
 import type {
 	IColumn,
 	ICommandBarItemProps,

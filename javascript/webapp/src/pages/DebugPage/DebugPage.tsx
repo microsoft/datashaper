@@ -10,13 +10,11 @@ import type {
 	Verb,
 } from '@data-wrangling-components/core'
 import { readSpec } from '@data-wrangling-components/core'
+import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
-	StepComponent,
+ StatsColumnType,	StepComponent,
 	StepSelector,
-	usePipeline,
-} from '@data-wrangling-components/react'
-import type { DetailsListFeatures } from '@data-wrangling-components/react-arquero'
-import { StatsColumnType } from '@data-wrangling-components/react-arquero'
+	usePipeline } from '@data-wrangling-components/react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo, useState } from 'react'

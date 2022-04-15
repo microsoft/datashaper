@@ -4,14 +4,14 @@
  */
 
 import type { Step } from '@data-wrangling-components/core'
+import {
+	withInputColumnDropdown,
+	withOutputColumnTextfield,
+} from '@data-wrangling-components/react-hocs'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import { useMemo } from 'react'
 
-import {
-	selectStepComponent,
-	withInputColumnDropdown,
-	withOutputColumnTextfield,
-} from '../../index.js'
+import { selectStepComponent } from '../../index.js'
 
 export function useHandleStepArgs(
 	step: Step | undefined,

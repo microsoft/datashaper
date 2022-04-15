@@ -126,11 +126,6 @@ export function getLoadingOrchestrator(type: LoadingOrchestratorType): LoadingOr
 // @public (undocumented)
 export const Guidance: React_2.FC<GuidanceProps>;
 
-// Warning: (ae-missing-release-tag) "HOCFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type HOCFunction<T> = (Component: React.FC<T>) => React.FC<T>;
-
 // Warning: (ae-missing-release-tag) "LoadingOrchestrator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -424,25 +419,12 @@ export function useProjectMgmtCommands(steps: Step[], tables: TableContainer[], 
 // @public (undocumented)
 export function useStore(): TableStore;
 
-// Warning: (ae-missing-release-tag) "withInputColumnDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function withInputColumnDropdown(label?: string): HOCFunction<StepComponentProps>;
 
-// Warning: (ae-missing-release-tag) "withInputTableDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function withInputTableDropdown(label?: string): HOCFunction<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "withOutputColumnTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function withOutputColumnTextfield(label?: string): HOCFunction<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "withOutputTableTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const withOutputTableTextfield: (label?: string | undefined, disabled?: boolean | undefined) => HOCFunction<StepComponentProps>;
+export * from "@data-wrangling-components/react-arquero";
+export * from "@data-wrangling-components/react-charts";
+export * from "@data-wrangling-components/react-controls";
+export * from "@data-wrangling-components/react-hocs";
+export * from "@data-wrangling-components/react-verbs";
 
 // (No @packageDocumentation comment for this package)
 

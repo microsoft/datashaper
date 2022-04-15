@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Specification } from '@data-wrangling-components/core'
-import type { DetailsListFeatures } from '@data-wrangling-components/react-arquero'
-import { StatsColumnType } from '@data-wrangling-components/react-arquero'
+import type { DetailsListFeatures } from '@data-wrangling-components/react'
+import { StatsColumnType } from '@data-wrangling-components/react'
 import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	FileCollection,
