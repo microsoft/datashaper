@@ -4,12 +4,16 @@
  */
 import { TableDropdown } from '@data-wrangling-components/controls'
 import { isInputTableStep } from '@data-wrangling-components/core'
+import type { StepComponentProps } from '@data-wrangling-components/verbs'
+import {
+	LeftAlignedRow,
+	useHandleDropdownChange,
+} from '@data-wrangling-components/verbs'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleDropdownChange } from './common/index.js'
-import type { HOCFunction, StepComponentProps } from './types.js'
+import type { HOCFunction } from './types.js'
 
 /**
  * Higher order component generator to wrap a Step in the input table dropdown.

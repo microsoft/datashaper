@@ -8,17 +8,13 @@
 
 import type { ColumnMetadata } from '@data-wrangling-components/core';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
-import { DataType } from '@data-wrangling-components/core';
-import type { DetailsListFeatures } from '@data-wrangling-components/arquero';
 import type { Dispatch } from 'react';
-import type { DropdownOptionChangeFunction } from '@data-wrangling-components/controls';
 import { DropzoneOptions } from 'react-dropzone';
 import type { DropzoneState as DropzoneState_2 } from 'react-dropzone';
 import { FileCollection } from '@data-wrangling-components/utilities';
 import { FileRejection } from 'react-dropzone';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
-import type { IContextualMenuItem } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
@@ -29,68 +25,13 @@ import type { ReactElement } from 'react';
 import type { SaveMetadataFunction } from '@data-wrangling-components/arquero';
 import type { SetStateAction } from 'react';
 import type { Step } from '@data-wrangling-components/core';
-import type { StepChangeFunction } from '@data-wrangling-components/controls';
-import { StyledComponent } from 'styled-components';
+import type { StepComponentProps } from '@data-wrangling-components/verbs';
+import type { StepDescriptionProps } from '@data-wrangling-components/verbs';
 import type { TableContainer } from '@data-wrangling-components/core';
 import type { TableMetadata } from '@data-wrangling-components/core';
 import type { TableStore } from '@data-wrangling-components/core';
 import type { Theme } from '@thematic/core';
 import type { Verb } from '@data-wrangling-components/core';
-
-// Warning: (ae-missing-release-tag) "Aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Aggregate: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "AggregateDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const AggregateDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Bin: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "Binarize" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Binarize: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "BinarizeDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const BinarizeDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "BinDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const BinDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "BooleanLogic" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const BooleanLogic: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "BooleanLogicDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const BooleanLogicDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "CenteredColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const CenteredColumn: StyledComponent<"div", any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "ColumnListOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const ColumnListOperation: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "ColumnListOperationDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const ColumnListOperationDescription: React.FC<StepDescriptionProps>;
 
 // Warning: (ae-missing-release-tag) "ColumnTransformModal" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -111,16 +52,6 @@ export interface ColumnTransformModalProps extends TransformModalProps {
 // @public
 export const CommandBar: React.FC<CommandBarProps>;
 
-// Warning: (ae-missing-release-tag) "Convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Convert: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "ConvertDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const ConvertDescription: React.FC<StepDescriptionProps>;
-
 // Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -135,32 +66,6 @@ export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarP
 //
 // @public (undocumented)
 export function createLazyLoadingGroupHeader(props: IDetailsGroupDividerProps | undefined, children: any, columnName?: string, columnMetadata?: ColumnMetadata | undefined): ReactElement<any, any> | null;
-
-// Warning: (ae-missing-release-tag) "createRowEntries" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createRowEntries<T>(list: T[], print: (obj: T) => DescriptionRow, others: number, props: StepDescriptionProps): DescriptionRow[];
-
-// Warning: (ae-missing-release-tag) "Derive" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Derive: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "DeriveDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const DeriveDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "DescriptionRow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DescriptionRow {
-    after?: string;
-    before?: string;
-    sub?: DescriptionRow[];
-    title?: string;
-    value?: any;
-}
 
 // Warning: (ae-forgotten-export) The symbol "DropzoneProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Dropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -208,57 +113,7 @@ export interface DzProps {
     onDropRejected?: (message: string, files?: FileRejection[]) => void;
 }
 
-// Warning: (ae-missing-release-tag) "Erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Erase: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "EraseDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const EraseDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "Fetch" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Fetch: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "FetchDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const FetchDescription: React.FC<StepDescriptionProps>;
-
 export { FileRejection }
-
-// Warning: (ae-missing-release-tag) "Fill" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Fill: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "FillDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const FillDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "Filter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Filter: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "FilterDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const FilterDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "Fold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Fold: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "FoldDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const FoldDescription: React.FC<StepDescriptionProps>;
 
 // Warning: (ae-missing-release-tag) "getLoadingOrchestrator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -275,46 +130,6 @@ export const Guidance: React_2.FC<GuidanceProps>;
 //
 // @public (undocumented)
 export type HOCFunction<T> = (Component: React.FC<T>) => React.FC<T>;
-
-// Warning: (ae-missing-release-tag) "Impute" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Impute: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "ImputeDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const ImputeDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "InputExplainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const InputExplainer: StyledComponent<"div", any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "Join" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Join: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "JoinDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const JoinDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "LeftAlignedColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const LeftAlignedColumn: StyledComponent<"div", any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "LeftAlignedRow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const LeftAlignedRow: StyledComponent<"div", any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "LeftAlignedRowWithGap" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const LeftAlignedRowWithGap: StyledComponent<"div", any, {}, never>;
 
 // Warning: (ae-missing-release-tag) "LoadingOrchestrator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -341,76 +156,11 @@ export enum LoadingOrchestratorType {
     Tables = "tables"
 }
 
-// Warning: (ae-missing-release-tag) "Lookup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Lookup: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "LookupDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const LookupDescription: React.FC<StepDescriptionProps>;
-
 // Warning: (ae-forgotten-export) The symbol "ManageStepsProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ManageSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const ManageSteps: React_2.FC<ManageStepsProps>;
-
-// Warning: (ae-missing-release-tag) "Merge" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Merge: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "MergeDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const MergeDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "NoParameters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const NoParameters: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "NoParametersDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const NoParametersDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "OneHot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const OneHot: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "OneHotDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const OneHotDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "Orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Orderby: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "OrderbyDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const OrderbyDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "otherInputNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function otherInputNames(step: Step): string[];
-
-// Warning: (ae-missing-release-tag) "Pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Pivot: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "PivotDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const PivotDescription: React.FC<StepDescriptionProps>;
 
 // Warning: (ae-missing-release-tag) "PrepareDataFull" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -456,46 +206,6 @@ export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'item
     tables: TableContainer[];
 }
 
-// Warning: (ae-missing-release-tag) "Recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Recode: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "RecodeDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const RecodeDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "Rename" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Rename: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "RenameDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const RenameDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "Rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Rollup: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "RollupDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const RollupDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "Sample" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Sample: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "SampleDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const SampleDescription: React.FC<StepDescriptionProps>;
-
 // Warning: (ae-missing-release-tag) "selectStepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -505,26 +215,6 @@ export function selectStepComponent(step: Step): React.FC<StepComponentProps>;
 //
 // @public
 export function selectStepDescription(step: Step): React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "SetOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const SetOperation: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "SetOperationDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const SetOperationDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "Spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Spread: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "SpreadDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const SpreadDescription: React.FC<StepDescriptionProps>;
 
 // Warning: (ae-missing-release-tag) "StepCard" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -543,42 +233,6 @@ export const StepCard: React.FC<{
 //
 // @public
 export const StepComponent: React.FC<StepComponentProps_2>;
-
-// Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepComponentProps extends StepDependent {
-    input?: string;
-    label?: string;
-    // (undocumented)
-    onChange?: StepChangeFunction;
-    store?: TableStore;
-    table?: ColumnTable;
-}
-
-// Warning: (ae-missing-release-tag) "StepDependent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepDependent {
-    // (undocumented)
-    step: Step;
-}
-
-// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepDescriptionProps extends StepDependent {
-    // (undocumented)
-    actions?: JSX.Element;
-    // (undocumented)
-    showInput?: boolean;
-    // (undocumented)
-    showOutput?: boolean;
-    // (undocumented)
-    showOutputColumn?: boolean;
-    // (undocumented)
-    style?: React.CSSProperties;
-}
 
 // Warning: (ae-missing-release-tag) "StepSelector" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -620,14 +274,6 @@ export enum StepsType {
     Column = "column",
     // (undocumented)
     Table = "table"
-}
-
-// Warning: (ae-missing-release-tag) "StepSubcomponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface StepSubcomponentProps extends StepComponentProps {
-    // (undocumented)
-    label?: string;
 }
 
 // Warning: (ae-missing-release-tag) "TablesList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -672,36 +318,6 @@ export interface TransformModalProps extends IModalProps {
     verbs?: string[];
 }
 
-// Warning: (ae-missing-release-tag) "Unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const Unfold: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "UnfoldDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const UnfoldDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "useColumnRecordDelete" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useColumnRecordDelete(step: Step, onChange?: StepChangeFunction): (column: string) => void;
-
-// Warning: (ae-missing-release-tag) "useColumnType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useColumnType(table?: ColumnTable, column?: string): DataType;
-
-// Warning: (ae-missing-release-tag) "useCommonCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useCommonCommands(showModal?: any | undefined, changeTableFeatures?: (name: string) => void, features?: Partial<DetailsListFeatures>): ICommandBarItemProps[];
-
-// Warning: (ae-missing-release-tag) "useCreateColumnName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useCreateColumnName(): (name: string, columnNames: string[]) => string;
-
 // Warning: (ae-missing-release-tag) "useCreateTableName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -716,11 +332,6 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
     onDeleteClicked: (args: any) => void;
     isDeleteModalOpen: boolean;
 };
-
-// Warning: (ae-missing-release-tag) "useDeriveColumnCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDeriveColumnCommand(onClick: (ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>, item?: IContextualMenuItem) => boolean | void | undefined): ICommandBarItemProps | null;
 
 // Warning: (ae-missing-release-tag) "useDownloadCsv" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -768,11 +379,6 @@ export function useGoHome(name: string, setName: NameSetter): () => void;
 // @public (undocumented)
 export function useGuidance(index: Record<string, string>): (name: string) => string;
 
-// Warning: (ae-missing-release-tag) "useHandleCheckboxChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useHandleCheckboxChange(step: Step, path: string, onChange?: StepChangeFunction): (event?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean) => void;
-
 // Warning: (ae-missing-release-tag) "useHandleClick" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -782,11 +388,6 @@ export function useHandleClick(setName: NameSetter): (url: string) => void;
 //
 // @public (undocumented)
 export function useHandleCsvUpload(onUpdateTables?: (tables: TableContainer[]) => void): () => void;
-
-// Warning: (ae-missing-release-tag) "useHandleDropdownChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useHandleDropdownChange(step: Step, path: string, onChange?: StepChangeFunction): DropdownOptionChangeFunction;
 
 // Warning: (ae-missing-release-tag) "useHandleFileUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -803,25 +404,10 @@ export function useHandleJsonUpload(onUpdateSteps?: (steps: Step[]) => void): ()
 // @public (undocumented)
 export const useHandleOnUploadClick: (acceptedFileTypes: string[], handleCollection?: ((fileCollection: FileCollection) => void) | undefined) => (() => void);
 
-// Warning: (ae-missing-release-tag) "useHandleSpinButtonChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useHandleSpinButtonChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => number | undefined): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
-
-// Warning: (ae-missing-release-tag) "useHandleTextfieldChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: <T>(value?: T | undefined) => T | undefined): (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
-
 // Warning: (ae-missing-release-tag) "useHandleZipUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useHandleZipUpload(onUpdateSteps?: (steps: Step[]) => void, onUpdateTables?: (tables: TableContainer[]) => void): () => void;
-
-// Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useLoadTable(id: string | undefined, table?: ColumnTable, store?: TableStore): ColumnTable | undefined;
 
 // Warning: (ae-missing-release-tag) "usePipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -837,45 +423,6 @@ export function useProjectMgmtCommands(steps: Step[], tables: TableContainer[], 
 //
 // @public (undocumented)
 export function useStore(): TableStore;
-
-// Warning: (ae-missing-release-tag) "useToggleStatsHeaderCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useToggleStatsHeaderCommand(toggle?: (name: string) => void, features?: Partial<DetailsListFeatures>): ICommandBarItemProps | null;
-
-// Warning: (ae-missing-release-tag) "VerbContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const VerbContainer: StyledComponent<"div", any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "VerbDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const VerbDescription: React.FC<VerbDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "VerbDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface VerbDescriptionProps extends StepDescriptionProps {
-    // (undocumented)
-    rows: DescriptionRow[];
-}
-
-// Warning: (ae-missing-release-tag) "VerticalSpacer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const VerticalSpacer: StyledComponent<"div", any, {}, never>;
-
-// Warning: (ae-missing-release-tag) "Window" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-const Window_2: React.FC<StepComponentProps>;
-export { Window_2 as Window }
-
-// Warning: (ae-missing-release-tag) "WindowDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const WindowDescription: React.FC<StepDescriptionProps>;
 
 // Warning: (ae-missing-release-tag) "withInputColumnDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

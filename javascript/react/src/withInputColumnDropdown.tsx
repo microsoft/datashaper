@@ -10,14 +10,16 @@ import {
 	isNumericInputStep,
 	types,
 } from '@data-wrangling-components/core'
+import type { StepComponentProps } from '@data-wrangling-components/verbs'
+import {
+ LeftAlignedRow,	useHandleDropdownChange,
+	useLoadTable } from '@data-wrangling-components/verbs'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange, useLoadTable } from './common/index.js'
-import { LeftAlignedRow } from './common/styles.js'
-import type { HOCFunction, StepComponentProps } from './types.js'
+import type { HOCFunction } from './types.js'
 /**
  * Higher order component generator to wrap a Step in the input column dropdown.
  * @param label - optional label to use for the dropdown instead of the default.

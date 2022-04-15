@@ -4,9 +4,9 @@
  */
 
 import type { Step } from '@data-wrangling-components/core'
+import type { StepComponentProps } from '@data-wrangling-components/verbs'
 import { useMemo } from 'react'
 
-import type { StepComponentProps } from '../../index.js'
 import {
 	selectStepComponent,
 	withInputColumnDropdown,

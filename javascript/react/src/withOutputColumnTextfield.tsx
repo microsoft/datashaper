@@ -5,12 +5,16 @@
 import { dropdownStyles } from '@data-wrangling-components/controls'
 import type { OutputColumnArgs } from '@data-wrangling-components/core'
 import { isOutputColumnStep } from '@data-wrangling-components/core'
+import type { StepComponentProps } from '@data-wrangling-components/verbs'
+import {
+	LeftAlignedRow,
+	useHandleTextfieldChange,
+} from '@data-wrangling-components/verbs'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleTextfieldChange } from './common/index.js'
-import type { HOCFunction, StepComponentProps } from './types.js'
+import type { HOCFunction } from './types.js'
 /**
  * Higher order component generator to wrap a Step in the output column text field.
  * @param label - optional label to use for the textfield instead of the default.

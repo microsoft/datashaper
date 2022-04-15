@@ -4,4 +4,3 @@
  */
 export * from './component-factories.js'
 export * from './hooks.js'
-export * from './styles.js'

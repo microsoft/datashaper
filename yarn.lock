@@ -1896,6 +1896,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/guidance": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
+    "@data-wrangling-components/verbs": "workspace:^"
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/themed-components": ^2.2.1
@@ -1953,7 +1954,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/verbs@workspace:javascript/verbs":
+"@data-wrangling-components/verbs@workspace:^, @data-wrangling-components/verbs@workspace:javascript/verbs":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/verbs@workspace:javascript/verbs"
   dependencies:
