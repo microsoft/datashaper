@@ -8,12 +8,9 @@ import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import {
-	LeftAlignedRow,
-	useHandleDropdownChange,
-	useLoadTable,
-} from '../../common/index.js'
-import type { StepComponentProps } from '../../types'
+import { useLoadTable } from '../../common/hooks.js'
+import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

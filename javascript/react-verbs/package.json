@@ -9,11 +9,12 @@
 	},
 	"sideEffects": false,
 	"scripts": {
-		"clean": "essex clean dist lib",
+		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck"
 	},
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",
+		"@data-wrangling-components/primitives": "workspace:^",
 		"@data-wrangling-components/react-arquero": "workspace:^",
 		"@data-wrangling-components/react-charts": "workspace:^",
 		"@data-wrangling-components/react-controls": "workspace:^",

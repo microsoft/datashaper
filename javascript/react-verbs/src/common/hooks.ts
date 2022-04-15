@@ -9,15 +9,16 @@ import type {
 	TableStore,
 } from '@data-wrangling-components/core'
 import { columnType, DataType } from '@data-wrangling-components/core'
-import type {
-	DropdownOptionChangeFunction,
-	StepChangeFunction,
-} from '@data-wrangling-components/react-controls'
-import { identity, noop, num } from '@data-wrangling-components/react-controls'
+import { identity, noop, num } from '@data-wrangling-components/primitives'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+
+import type {
+	DropdownOptionChangeFunction,
+	StepChangeFunction,
+} from '../types.js'
 
 /**
  * Creates a callback handler for changing the step based on a dropdown value.

@@ -3,13 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
-import { noop , TableDropdown } from '@data-wrangling-components/react-controls'
+import { noop } from '@data-wrangling-components/primitives'
+import { TableDropdown } from '@data-wrangling-components/react-controls'
 import { NodeInput } from '@essex/dataflow'
 import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
+import { useLoadTable } from '../../common/hooks.js'
+import { LeftAlignedRow } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**

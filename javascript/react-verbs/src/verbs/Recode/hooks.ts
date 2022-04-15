@@ -7,10 +7,11 @@ import type {
 	RecodeStep,
 	Value,
 } from '@data-wrangling-components/core'
-import type { StepChangeFunction } from '@data-wrangling-components/react-controls'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
+
+import type { StepChangeFunction } from '../../types.js'
 
 export function useColumnValues(
 	internal: RecodeStep,

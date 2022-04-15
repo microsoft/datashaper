@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { SortDirection } from '@data-wrangling-components/core'
-import { noop } from '@data-wrangling-components/react-controls'
+import { noop } from '@data-wrangling-components/primitives'
 import type { IColumn } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 

@@ -8,7 +8,7 @@
 		"types": "dist/index.d.ts"
 	},
 	"scripts": {
-		"clean": "essex clean dist lib",
+		"clean": "essex clean dist docs",
 		"build:compile": "tsc --project tsconfig.build.json",
 		"start": "yarn build",
 		"build": "essex build-md-index --include ../../docs/verbs"

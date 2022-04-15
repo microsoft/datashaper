@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { staticCallback } from '@data-wrangling-components/primitives'
 import type { IComboBoxProps } from '@fluentui/react'
 import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
-import { staticCallback } from '../functions.js'
 import { useTableColumnOptions } from '../hooks.js'
 import { dropdownStyles } from '../styles.js'
 

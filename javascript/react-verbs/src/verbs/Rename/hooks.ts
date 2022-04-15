@@ -3,9 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RenameStep } from '@data-wrangling-components/core'
-import type { StepChangeFunction } from '@data-wrangling-components/react-controls'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
+
+import type { StepChangeFunction } from '../../types.js'
 
 export function useHandleColumnChange(
 	internal: RenameStep,

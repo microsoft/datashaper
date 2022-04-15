@@ -35,7 +35,7 @@ export const Sample: React.FC<StepComponentProps> = memo(function Sample({
 		internal,
 		'args.proportion',
 		onChange,
-		val => {
+		(val: string | undefined) => {
 			if (val != null) {
 				return +val / 100
 			}

@@ -17,7 +17,6 @@ import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
 import type { ITextFieldProps } from '@fluentui/react';
 import type { OrderbyInstruction } from '@data-wrangling-components/core';
-import type { Step } from '@data-wrangling-components/core';
 import type { TableStore } from '@data-wrangling-components/core';
 import type { Value } from '@data-wrangling-components/core';
 
@@ -157,11 +156,6 @@ export interface DateFormatPatternComboboxProps extends Partial<IComboBoxProps> 
 // @public (undocumented)
 export const dropdownButtonStyles: IButtonStyles;
 
-// Warning: (ae-missing-release-tag) "DropdownOptionChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type DropdownOptionChangeFunction = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => void;
-
 // Warning: (ae-missing-release-tag) "dropdownStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -191,11 +185,6 @@ export interface EnumDropdownProps<E = unknown> extends Omit<IDropdownProps, 'op
 // @public (undocumented)
 export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>>;
 
-// Warning: (ae-missing-release-tag) "identity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const identity: <T>(value?: T | undefined) => T | undefined;
-
 // Warning: (ae-missing-release-tag) "MultiDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -217,16 +206,6 @@ export const narrowDropdownStyles: {
         width: number;
     };
 };
-
-// Warning: (ae-missing-release-tag) "noop" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const noop: () => void;
-
-// Warning: (ae-missing-release-tag) "num" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const num: (value?: string | undefined) => number | undefined;
 
 // Warning: (ae-missing-release-tag) "opDropdownStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -260,16 +239,6 @@ export interface SortInstructionProps {
     // (undocumented)
     table?: ColumnTable;
 }
-
-// Warning: (ae-missing-release-tag) "staticCallback" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const staticCallback: <T>(value: T) => () => T;
-
-// Warning: (ae-missing-release-tag) "StepChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type StepChangeFunction = (step: Step) => void;
 
 // Warning: (ae-missing-release-tag) "TableColumnDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

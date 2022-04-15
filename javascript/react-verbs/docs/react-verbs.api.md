@@ -8,9 +8,8 @@
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import { DataType } from '@data-wrangling-components/core';
-import type { DropdownOptionChangeFunction } from '@data-wrangling-components/react-controls';
+import type { IDropdownOption } from '@fluentui/react';
 import type { Step } from '@data-wrangling-components/core';
-import type { StepChangeFunction } from '@data-wrangling-components/react-controls';
 import { StyledComponent } from 'styled-components';
 import type { TableStore } from '@data-wrangling-components/core';
 
@@ -99,6 +98,11 @@ export interface DescriptionRow {
     title?: string;
     value?: any;
 }
+
+// Warning: (ae-missing-release-tag) "DropdownOptionChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type DropdownOptionChangeFunction = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => void;
 
 // Warning: (ae-missing-release-tag) "Erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -314,6 +318,11 @@ export const Spread: React.FC<StepComponentProps>;
 //
 // @public (undocumented)
 export const SpreadDescription: React.FC<StepDescriptionProps>;
+
+// Warning: (ae-missing-release-tag) "StepChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StepChangeFunction = (step: Step) => void;
 
 // Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

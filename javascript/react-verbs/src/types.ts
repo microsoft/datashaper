@@ -3,32 +3,19 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
-import type { StepChangeFunction } from '@data-wrangling-components/react-controls'
+import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+
+export type StepChangeFunction = (step: Step) => void
+
+export type DropdownOptionChangeFunction = (
+	event: React.FormEvent<HTMLDivElement>,
+	option?: IDropdownOption,
+	index?: number,
+) => void
+
 export interface StepDependent {
 	step: Step
-}
-
-export interface StepComponentProps extends StepDependent {
-	/**
-	 * TableStore to use for table lookups of step parameters.
-	 */
-	store?: TableStore
-	/**
-	 * ColumnTable to execute the step against if no store is provided.
-	 */
-	table?: ColumnTable
-	/**
-	 * Optional override of step input - there are many scenarios
-	 * (particularly chains) where the driving input table for UI visbility should be shared,
-	 * but the input to the actual step is an intermediate table.
-	 */
-	input?: string
-	onChange?: StepChangeFunction
-	/**
-	 * Optional override for the label
-	 */
-	label?: string
 }
 
 export interface DescriptionRow {
@@ -70,5 +57,27 @@ export interface StepDescriptionProps extends StepDependent {
  * to manipulate a step.
  */
 export interface StepSubcomponentProps extends StepComponentProps {
+	label?: string
+}
+
+export interface StepComponentProps extends StepDependent {
+	/**
+	 * TableStore to use for table lookups of step parameters.
+	 */
+	store?: TableStore
+	/**
+	 * ColumnTable to execute the step against if no store is provided.
+	 */
+	table?: ColumnTable
+	/**
+	 * Optional override of step input - there are many scenarios
+	 * (particularly chains) where the driving input table for UI visbility should be shared,
+	 * but the input to the actual step is an intermediate table.
+	 */
+	input?: string
+	onChange?: StepChangeFunction
+	/**
+	 * Optional override for the label
+	 */
 	label?: string
 }

@@ -9,11 +9,12 @@
 	},
 	"sideEffects": false,
 	"scripts": {
-		"clean": "essex clean dist lib",
+		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck"
 	},
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",
+		"@data-wrangling-components/primitives": "workspace:^",
 		"@essex/dataflow": "^0.1.0",
 		"core-js": "^3.21.1",
 		"lodash-es": "^4.17.21",
