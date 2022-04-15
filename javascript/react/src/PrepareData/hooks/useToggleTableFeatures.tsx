@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { DetailsListFeatures } from '@data-wrangling-components/arquero'
+import type { DetailsListFeatures } from '@data-wrangling-components/react-arquero'
 import { useCallback, useState } from 'react'
 
 export function useToggleTableFeatures(

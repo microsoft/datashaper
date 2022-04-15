@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { dropdownStyles } from '@data-wrangling-components/controls'
-import type { StepComponentProps } from '@data-wrangling-components/verbs'
+import { dropdownStyles } from '@data-wrangling-components/react-controls'
+import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
 	LeftAlignedRow,
 	useHandleTextfieldChange,
-} from '@data-wrangling-components/verbs'
+} from '@data-wrangling-components/react-verbs'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'

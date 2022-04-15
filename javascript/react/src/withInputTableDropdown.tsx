@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableDropdown } from '@data-wrangling-components/controls'
 import { isInputTableStep } from '@data-wrangling-components/core'
-import type { StepComponentProps } from '@data-wrangling-components/verbs'
+import { TableDropdown } from '@data-wrangling-components/react-controls'
+import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
 	LeftAlignedRow,
 	useHandleDropdownChange,
-} from '@data-wrangling-components/verbs'
+} from '@data-wrangling-components/react-verbs'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'

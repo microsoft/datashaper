@@ -2,14 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DetailsListFeatures } from '@data-wrangling-components/arquero'
+import { createDefaultHeaderCommandBar } from '@data-wrangling-components/react'
+import type { DetailsListFeatures } from '@data-wrangling-components/react-arquero'
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	downloadCommand,
 	visibleColumnsCommand,
-} from '@data-wrangling-components/arquero'
-import { createDefaultHeaderCommandBar } from '@data-wrangling-components/react'
+} from '@data-wrangling-components/react-arquero'
 import type { IColumn, IDropdownOption } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { GroupHeader } from '@data-wrangling-components/controls'
 import type { ColumnMetadata } from '@data-wrangling-components/core'
+import { GroupHeader } from '@data-wrangling-components/react-controls'
 import type {
 	ICommandBarProps,
 	IDetailsGroupDividerProps,

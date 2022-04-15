@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TableColumnDropdown } from '@data-wrangling-components/controls'
 import type { InputColumnArgs, Step } from '@data-wrangling-components/core'
 import {
 	DataType,
@@ -10,10 +9,13 @@ import {
 	isNumericInputStep,
 	types,
 } from '@data-wrangling-components/core'
-import type { StepComponentProps } from '@data-wrangling-components/verbs'
+import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
+import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
- LeftAlignedRow,	useHandleDropdownChange,
-	useLoadTable } from '@data-wrangling-components/verbs'
+	LeftAlignedRow,
+	useHandleDropdownChange,
+	useLoadTable,
+} from '@data-wrangling-components/react-verbs'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'

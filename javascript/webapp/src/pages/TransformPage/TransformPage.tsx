@@ -2,10 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
-} from '@data-wrangling-components/arquero'
 import type { StepInput, TableContainer } from '@data-wrangling-components/core'
 import {
 	container,
@@ -16,6 +12,10 @@ import {
 	ColumnTransformModal,
 	createDefaultHeaderCommandBar,
 } from '@data-wrangling-components/react'
+import {
+	ArqueroDetailsList,
+	ArqueroTableHeader,
+} from '@data-wrangling-components/react-arquero'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { useThematic } from '@thematic/react'

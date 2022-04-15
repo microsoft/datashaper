@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
-import type { StepComponentProps } from '@data-wrangling-components/verbs'
+import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
 	Aggregate,
 	Bin,
@@ -33,7 +33,7 @@ import {
 	Spread,
 	Unfold,
 	Window,
-} from '@data-wrangling-components/verbs'
+} from '@data-wrangling-components/react-verbs'
 
 const verb: Record<string, React.FC<StepComponentProps>> = {
 	aggregate: Aggregate,

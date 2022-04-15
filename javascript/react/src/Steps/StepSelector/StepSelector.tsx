@@ -2,10 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnarMenu } from '@data-wrangling-components/controls'
-import { ColumnarMenuList } from '@data-wrangling-components/controls'
-import { ContextualMenuItemSearchBox } from '@data-wrangling-components/controls'
 import type { Verb } from '@data-wrangling-components/core'
+import { ColumnarMenu , ColumnarMenuList , ContextualMenuItemSearchBox } from '@data-wrangling-components/react-controls'
 import type { IContextualMenuListProps } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'

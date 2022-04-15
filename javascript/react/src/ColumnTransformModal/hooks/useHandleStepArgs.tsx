@@ -4,7 +4,7 @@
  */
 
 import type { Step } from '@data-wrangling-components/core'
-import type { StepComponentProps } from '@data-wrangling-components/verbs'
+import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import { useMemo } from 'react'
 
 import {

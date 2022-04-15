@@ -3,10 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
-} from '@data-wrangling-components/arquero'
 import type {
 	ColumnMetadata,
 	TableMetadata,
@@ -17,6 +13,10 @@ import {
 	createDefaultHeaderCommandBar,
 	createLazyLoadingGroupHeader,
 } from '@data-wrangling-components/react'
+import {
+	ArqueroDetailsList,
+	ArqueroTableHeader,
+} from '@data-wrangling-components/react-arquero'
 import type {
 	IColumn,
 	ICommandBarItemProps,
