@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { DataType,determineType } from '@essex/arquero'
 import { escape, op } from 'arquero'
 import { isoParse, timeFormat, timeParse } from 'd3-time-format'
 
-import { determineType } from '../util/data.js'
 import type { InputColumnListArgs } from './types.js'
-import { DataType,ParseType  } from './types.js'
+import { ParseType } from './types.js'
 import { bool } from './util/data-types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'

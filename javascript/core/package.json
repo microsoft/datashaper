@@ -31,6 +31,7 @@
 		"build": "essex build --docs --skipExportCheck"
 	},
 	"dependencies": {
+		"@essex/arquero": "^1.0.0",
 		"@essex/dataflow": "^0.1.0",
 		"d3-time-format": "^4.1.0",
 		"lodash-es": "^4.17.21",
