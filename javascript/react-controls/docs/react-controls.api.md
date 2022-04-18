@@ -18,7 +18,7 @@ import type { IDropdownProps } from '@fluentui/react';
 import type { ITextFieldProps } from '@fluentui/react';
 import type { OrderbyInstruction } from '@data-wrangling-components/core';
 import type { TableStore } from '@data-wrangling-components/core';
-import type { Value } from '@data-wrangling-components/core';
+import type { Value } from '@essex/arquero';
 
 // Warning: (ae-missing-release-tag) "ColumnarMenu" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
