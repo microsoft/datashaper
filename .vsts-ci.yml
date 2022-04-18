@@ -2,9 +2,6 @@ name: Data Wrangling Components CI
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  Codeql.Enabled: true
-
 trigger:
   batch: true
   branches:
