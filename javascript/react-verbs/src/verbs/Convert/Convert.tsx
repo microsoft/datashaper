@@ -4,7 +4,11 @@
  */
 import type { ConvertStep } from '@data-wrangling-components/core'
 import { DataType, ParseType } from '@data-wrangling-components/core'
-import { DateFormatPatternCombobox , dropdownStyles,EnumDropdown  } from '@data-wrangling-components/react-controls'
+import {
+	DateFormatPatternCombobox,
+	dropdownStyles,
+	EnumDropdown,
+} from '@data-wrangling-components/react-controls'
 import { NodeInput } from '@essex/dataflow'
 import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
@@ -67,6 +71,12 @@ export const Convert: React.FC<StepComponentProps> = memo(function Convert({
 		[step, onChange],
 	)
 
+	const handleComboBoxInputChange = (text: string) => {
+		const update = cloneDeep(step)
+		set(update, 'args.formatPattern', text ? text : '%Y-%m-%d')
+		onChange && onChange(update)
+	}
+
 	useEffect(() => {
 		setInputColumnDate(false)
 		internal.args.columns.forEach(column => {
@@ -109,7 +119,6 @@ export const Convert: React.FC<StepComponentProps> = memo(function Convert({
 			{inputColumnDate || internal.args.type === ParseType.Date ? (
 				<LeftAlignedColumn>
 					<DateFormatPatternCombobox
-						required={internal.args.type === ParseType.Date}
 						label={'Date format pattern'}
 						placeholder={'pattern'}
 						text={
@@ -119,6 +128,7 @@ export const Convert: React.FC<StepComponentProps> = memo(function Convert({
 						}
 						onChange={handleComboBoxChange}
 						styles={dropdownStyles}
+						onInputValueChange={handleComboBoxInputChange}
 					/>
 				</LeftAlignedColumn>
 			) : null}

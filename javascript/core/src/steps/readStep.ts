@@ -12,7 +12,7 @@ import {
 	JoinStrategy,
 	Verb,
 } from '../verbs/index.js'
-import type { Step,StepInput } from './types.js'
+import type { Step, StepInput } from './types.js'
 
 /**
  * Factory function to create new verb configs
@@ -78,6 +78,14 @@ export function readStep<T extends object>(
 				},
 			}
 		case Verb.Convert:
+			return {
+				...base,
+				args: {
+					columns: [],
+					formatPattern: '%Y-%m-%d',
+					...args,
+				},
+			}
 		case Verb.Erase:
 		case Verb.Impute:
 		case Verb.Lookup:
