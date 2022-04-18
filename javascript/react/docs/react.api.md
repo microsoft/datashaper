@@ -6,7 +6,7 @@
 
 /// <reference types="react" />
 
-import type { ColumnMetadata } from '@data-wrangling-components/core';
+import type { ColumnMetadata } from '@essex/arquero';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { Dispatch } from 'react';
 import { DropzoneOptions } from 'react-dropzone';
@@ -22,13 +22,13 @@ import type { IRenderFunction } from '@fluentui/react';
 import type { Pipeline } from '@data-wrangling-components/core';
 import { default as React_2 } from 'react';
 import type { ReactElement } from 'react';
-import type { SaveMetadataFunction } from '@data-wrangling-components/react-arquero';
+import type { SaveMetadataFunction } from '@essex/arquero-react';
 import type { SetStateAction } from 'react';
 import type { Step } from '@data-wrangling-components/core';
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs';
 import type { StepDescriptionProps } from '@data-wrangling-components/react-verbs';
-import type { TableContainer } from '@data-wrangling-components/core';
-import type { TableMetadata } from '@data-wrangling-components/core';
+import type { TableContainer } from '@essex/arquero';
+import type { TableMetadata } from '@essex/arquero';
 import type { TableStore } from '@data-wrangling-components/core';
 import type { Theme } from '@thematic/core';
 import type { Verb } from '@data-wrangling-components/core';
@@ -420,8 +420,6 @@ export function useProjectMgmtCommands(steps: Step[], tables: TableContainer[], 
 export function useStore(): TableStore;
 
 
-export * from "@data-wrangling-components/react-arquero";
-export * from "@data-wrangling-components/react-charts";
 export * from "@data-wrangling-components/react-controls";
 export * from "@data-wrangling-components/react-hocs";
 export * from "@data-wrangling-components/react-verbs";

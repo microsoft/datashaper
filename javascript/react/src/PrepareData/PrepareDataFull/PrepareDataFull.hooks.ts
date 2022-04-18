@@ -2,12 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	Step,
-	TableContainer,
-	TableMetadata,
-	TableStore,
-} from '@data-wrangling-components/core'
+import type { Step, TableStore } from '@data-wrangling-components/core'
+import type { TableContainer, TableMetadata } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useEffect, useMemo, useState } from 'react'
 
