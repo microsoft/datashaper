@@ -8,6 +8,24 @@
 		"types": "dist/lib/index.d.ts"
 	},
 	"sideEffects": false,
+	"author": "Nathan Evans <naevans@microsoft.com>",
+	"license": "MIT",
+	"contributors": [
+		"Nathan Evans <naevans@microsoft.com>",
+		"Dayenne Souza <ddesouza@microsoft.com>",
+		"Andres Morales <andresmor@microsoft.com>",
+		"Monica Carvajal <mcarvajal@microsoft.com>",
+		"Chris Trevino <chris.trevino@microsoft.com>",
+		"Derek Worthen <deworthe@microsoft.com>",
+		"Gaudy Blanco <gaudyb@microsoft.com>"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/microsoft/data-wrangling-components"
+	},
+	"bugs": {
+		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+	},
 	"scripts": {
 		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck"
