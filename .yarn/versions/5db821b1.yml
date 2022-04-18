@@ -1,0 +1,3 @@
+releases:
+  "@data-wrangling-components/core": minor
+  "@data-wrangling-components/react-verbs": major
