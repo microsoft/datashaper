@@ -4,11 +4,12 @@
  */
 import type {
 	SpecificationInput,
-	TableContainer,
 	TableStore,
 } from '@data-wrangling-components/core'
-import { container, createTableStore } from '@data-wrangling-components/core'
+import { createTableStore } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
+import type { TableContainer } from '@essex/arquero'
+import { container } from '@essex/arquero'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useMemo, useState } from 'react'

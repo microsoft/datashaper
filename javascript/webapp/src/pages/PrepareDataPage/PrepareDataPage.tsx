@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableContainer } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import type { DropzoneStyles } from '@data-wrangling-components/react'
 import {
 	Dropzone,
@@ -12,6 +12,7 @@ import {
 } from '@data-wrangling-components/react'
 import type { FileCollection } from '@data-wrangling-components/utilities'
 import { FileExtensions } from '@data-wrangling-components/utilities'
+import type { TableContainer } from '@essex/arquero'
 import { MessageBar, MessageBarType } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'

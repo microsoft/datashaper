@@ -38,7 +38,7 @@
 		"@data-wrangling-components/utilities": "workspace:^",
 		"@data-wrangling-components/verb-guidance": "workspace:^",
 		"@essex/arquero": "^1.0.0",
-		"@essex/arquero-react": "^1.0.0",
+		"@essex/arquero-react": "^1.0.1",
 		"@essex/charts-react": "^1.0.0",
 		"@essex/dataflow": "^0.1.0",
 		"@essex/themed-components": "^2.2.1",
