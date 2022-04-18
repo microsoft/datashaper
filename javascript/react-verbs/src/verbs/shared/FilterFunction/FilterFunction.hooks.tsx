@@ -5,11 +5,10 @@
 import type { Criterion } from '@data-wrangling-components/core'
 import {
 	BooleanComparisonOperator,
-	DataType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-	types,
 } from '@data-wrangling-components/core'
+import { columnTypes, DataType } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
@@ -52,7 +51,7 @@ export function useColumnTyping(
 	columnFilter: (name: string) => boolean
 } {
 	const tps = useMemo(() => {
-		return table ? types(table) : {}
+		return table ? columnTypes(table) : {}
 	}, [table])
 
 	const type = useMemo(() => tps[column], [tps, column])

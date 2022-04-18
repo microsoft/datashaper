@@ -5,11 +5,11 @@
 import type {
 	InputColumnRecordArgs,
 	Step,
-	TableContainer,
 	TableStore,
 } from '@data-wrangling-components/core'
-import { columnType, DataType } from '@data-wrangling-components/core'
 import { identity, noop, num } from '@data-wrangling-components/primitives'
+import type { TableContainer } from '@essex/arquero'
+import { columnType, DataType } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'

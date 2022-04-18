@@ -7,7 +7,7 @@
 /// <reference types="react" />
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
-import { DataType } from '@data-wrangling-components/core';
+import { DataType } from '@essex/arquero';
 import type { IDropdownOption } from '@fluentui/react';
 import type { Step } from '@data-wrangling-components/core';
 import { StyledComponent } from 'styled-components';

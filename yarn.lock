@@ -1795,6 +1795,7 @@ __metadata:
   dependencies:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/primitives": "workspace:^"
+    "@essex/arquero": ^1.0.0
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2

@@ -7,8 +7,8 @@ import type {
 	OrderbyStep,
 	Step,
 } from '@data-wrangling-components/core'
-import { SortDirection } from '@data-wrangling-components/core'
 import { SortInstruction } from '@data-wrangling-components/react-controls'
+import { SortDirection } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

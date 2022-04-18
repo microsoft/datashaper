@@ -2,13 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	DataType,
-	RecodeStep,
-	Value,
-} from '@data-wrangling-components/core'
-import { coerce } from '@data-wrangling-components/core'
+import type { RecodeStep } from '@data-wrangling-components/core'
 import { ColumnValueDropdown } from '@data-wrangling-components/react-controls'
+import type { DataType, Value } from '@essex/arquero'
+import { coerce } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
