@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { rows } from '@essex/arquero'
 import { table } from 'arquero'
-
-import { rows } from '../rows.js'
 
 describe('row utilities', () => {
 	describe('rows', () => {

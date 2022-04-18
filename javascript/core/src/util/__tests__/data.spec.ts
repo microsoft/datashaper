@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { format } from '../data.js'
-import { formatIfNumber } from '../index.js'
+import { format, formatIfNumber } from '@essex/arquero'
 
 describe('data utilities', () => {
 	describe('format', () => {

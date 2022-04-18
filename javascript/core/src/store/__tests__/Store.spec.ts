@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { container } from '@essex/arquero'
 import { table } from 'arquero'
 import { from } from 'rxjs'
 
 import { tick } from '../../__tests__/utils.js'
-import { container } from '../../tables/container.js'
 import { createTableStore } from '../createTableStore.js'
 
 describe('DefaultTableStore', () => {

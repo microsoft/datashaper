@@ -1,4 +1,6 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
+import type { TableContainer } from '@essex/arquero'
+import { container } from '@essex/arquero'
 import Ajv from 'ajv'
 import arquero from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -10,8 +12,6 @@ import { fileURLToPath } from 'url'
 import { createGraph } from '../engine/graph.js'
 import { readSpec } from '../steps/index.js'
 import { createTableStore } from '../store/createTableStore.js'
-import { container } from '../tables/container.js'
-import type { TableContainer } from '../tables/types.js'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
