@@ -4,10 +4,8 @@
  */
 import type { InputColumnArgs, Step } from '@data-wrangling-components/core'
 import {
-	DataType,
 	isInputColumnStep,
 	isNumericInputStep,
-	types,
 } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
@@ -16,6 +14,7 @@ import {
 	useHandleDropdownChange,
 	useLoadTable,
 } from '@data-wrangling-components/react-verbs'
+import { columnTypes, DataType } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
@@ -77,7 +76,7 @@ export function withInputColumnDropdown(
 function useColumnFilter(step: Step, table?: ColumnTable) {
 	const typeMap = useMemo(() => {
 		if (table) {
-			return types(table)
+			return columnTypes(table)
 		}
 		return {}
 	}, [table])

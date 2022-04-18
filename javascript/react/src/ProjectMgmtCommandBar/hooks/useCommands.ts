@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step, TableContainer } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
+import type { TableContainer } from '@essex/arquero'
 import type { ICommandBarItemProps } from '@fluentui/react'
 import { useMemo } from 'react'
 

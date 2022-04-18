@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step, TableContainer } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	createFileWithPath,
@@ -12,6 +12,7 @@ import {
 	FileCollection,
 	FileMimeType,
 } from '@data-wrangling-components/utilities'
+import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
 
 export function useDownloadPipeline(steps: Step[]): () => void {

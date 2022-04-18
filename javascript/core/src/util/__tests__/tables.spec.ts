@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { columnTypes,introspect, stats } from '@essex/arquero'
 import { table } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
-import { introspect, stats, types } from '../tables.js'
 
 describe('table utilities', () => {
 	// note: all columns must be the same length or missing will be padded with empty cells
@@ -264,7 +263,7 @@ describe('table utilities', () => {
 
 	describe('types', () => {
 		test('types are correct for all columns', () => {
-			const result = types(tbl)
+			const result = columnTypes(tbl)
 			expect(Object.keys(result)).toEqual(tbl.columnNames())
 			expect(result.num).toBe('number')
 			expect(result.str).toBe('string')
@@ -275,7 +274,7 @@ describe('table utilities', () => {
 		})
 
 		test('column subsets are honored', () => {
-			const subset = types(tbl, ['num', 'str'])
+			const subset = columnTypes(tbl, ['num', 'str'])
 			expect(Object.keys(subset)).toEqual(['num', 'str'])
 		})
 	})

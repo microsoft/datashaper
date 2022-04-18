@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableContainer } from '@essex/arquero'
 import type { Graph } from '@essex/dataflow'
 
 import type { Step, StepInput } from '../steps/index.js'
 import type { Store } from '../store/index.js'
-import type { TableContainer } from '../tables/index.js'
 import type { Verb } from '../verbs/index.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order

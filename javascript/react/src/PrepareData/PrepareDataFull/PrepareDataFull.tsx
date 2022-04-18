@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableContainer } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
+import type { TableContainer } from '@essex/arquero'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { Icon } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'

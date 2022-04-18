@@ -3,8 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ConvertStep } from '@data-wrangling-components/core'
-import { DataType, ParseType } from '@data-wrangling-components/core'
-import { DateFormatPatternCombobox , dropdownStyles,EnumDropdown  } from '@data-wrangling-components/react-controls'
+import { ParseType } from '@data-wrangling-components/core'
+import {
+	DateFormatPatternCombobox,
+	dropdownStyles,
+	EnumDropdown,
+} from '@data-wrangling-components/react-controls'
+import { DataType } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'

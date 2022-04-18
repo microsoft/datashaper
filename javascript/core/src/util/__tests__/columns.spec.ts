@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { columnIndexesWithZeros, columnNamesWithZeros } from '@essex/arquero'
 import { table } from 'arquero'
-
-import { columnIndexesWithZeros, columnNamesWithZeros } from '../columns.js'
 
 describe('column utilities', () => {
 	const tbl = table({

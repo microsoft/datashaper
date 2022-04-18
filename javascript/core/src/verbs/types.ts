@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableContainer, Value } from '@essex/arquero'
 import type { Node } from '@essex/dataflow'
-
-import type { TableContainer, Value } from '../tables/types.js'
 
 export type NodeFactory = (id: string) => Node<TableContainer>
 
@@ -56,11 +55,6 @@ export interface Criterion {
 		| NumericComparisonOperator
 		| StringComparisonOperator
 		| BooleanComparisonOperator
-}
-
-export enum SortDirection {
-	Ascending = 'asc',
-	Descending = 'desc',
 }
 
 export enum Verb {
@@ -115,18 +109,6 @@ export enum ParseType {
 	 */
 	Decimal = 'float',
 	String = 'string',
-}
-
-export enum DataType {
-	Array = 'array',
-	Boolean = 'boolean',
-	Date = 'date',
-	Number = 'number',
-	String = 'string',
-	Text = 'text',
-	Object = 'object',
-	Undefined = 'undefined',
-	Unknown = 'unknown',
 }
 
 export enum MathOperator {

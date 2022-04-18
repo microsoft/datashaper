@@ -1718,6 +1718,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:javascript/core"
   dependencies:
+    "@essex/arquero": ^1.0.0
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
@@ -1788,84 +1789,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/react-arquero@workspace:^, @data-wrangling-components/react-arquero@workspace:javascript/react-arquero":
-  version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/react-arquero@workspace:javascript/react-arquero"
-  dependencies:
-    "@data-wrangling-components/core": "workspace:^"
-    "@data-wrangling-components/primitives": "workspace:^"
-    "@data-wrangling-components/react-charts": "workspace:^"
-    "@data-wrangling-components/react-controls": "workspace:^"
-    "@data-wrangling-components/utilities": "workspace:^"
-    "@essex/scripts": ^21.0.2
-    "@essex/tsconfig-base": ^1.0.2
-    "@fluentui/react": ^8.64.4
-    "@fluentui/utilities": ^8.8.1
-    "@thematic/react": ^2.0.7
-    "@types/d3-format": ^3.0.1
-    "@types/lodash": ^4.14.181
-    "@types/lodash-es": ^4.17.6
-    "@types/node": ^17.0.24
-    "@types/react": ^18.0.5
-    "@types/react-dom": ^18.0.0
-    "@types/react-is": ^17.0.3
-    "@types/react-router-dom": ^5.3.3
-    "@types/styled-components": ^5.1.25
-    arquero: ^4.8.8
-    d3-format: ^3.1.0
-    lodash-es: ^4.17.21
-    react: ^18.0.0
-    react-if: ^4.1.1
-    styled-components: ^5.3.5
-    typescript: ^4.6.3
-  peerDependencies:
-    "@fluentui/react": ^8.24.0
-    "@fluentui/utilities": ^8.2.1
-    "@thematic/react": ^1.3.0
-    arquero: ^4.8.7
-    react: ^17.0.2
-    styled-components: ^5.3.0
-  languageName: unknown
-  linkType: soft
-
-"@data-wrangling-components/react-charts@workspace:^, @data-wrangling-components/react-charts@workspace:javascript/react-charts":
-  version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/react-charts@workspace:javascript/react-charts"
-  dependencies:
-    "@essex/scripts": ^21.0.2
-    "@essex/tsconfig-base": ^1.0.2
-    "@thematic/core": ^2.0.7
-    "@thematic/d3": ^2.0.7
-    "@thematic/react": ^2.0.7
-    "@types/d3-format": ^3.0.1
-    "@types/d3-scale": ^4.0.2
-    "@types/d3-selection": ^3.0.2
-    "@types/d3-shape": ^3.0.2
-    "@types/lodash": ^4.14.181
-    "@types/lodash-es": ^4.17.6
-    "@types/node": ^17.0.24
-    "@types/react": ^18.0.5
-    d3-format: ^3.1.0
-    d3-scale: ^4.0.2
-    d3-selection: ^3.0.0
-    d3-shape: ^3.1.0
-    lodash-es: ^4.17.21
-    react: ^18.0.0
-    typescript: ^4.6.3
-  peerDependencies:
-    "@thematic/core": ^1.3.0
-    "@thematic/d3": ^1.3.0
-    "@thematic/react": ^1.3.0
-    react: ^17.0.2
-  languageName: unknown
-  linkType: soft
-
 "@data-wrangling-components/react-controls@workspace:^, @data-wrangling-components/react-controls@workspace:javascript/react-controls":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/react-controls@workspace:javascript/react-controls"
   dependencies:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/primitives": "workspace:^"
+    "@essex/arquero": ^1.0.0
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
@@ -1901,6 +1831,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/react-controls": "workspace:^"
     "@data-wrangling-components/react-verbs": "workspace:^"
+    "@essex/arquero": ^1.0.0
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
@@ -1928,11 +1859,12 @@ __metadata:
   dependencies:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/primitives": "workspace:^"
-    "@data-wrangling-components/react-arquero": "workspace:^"
-    "@data-wrangling-components/react-charts": "workspace:^"
     "@data-wrangling-components/react-controls": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
+    "@essex/arquero": ^1.0.0
+    "@essex/arquero-react": ^1.0.1
+    "@essex/charts-react": ^1.0.0
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/themed-components": ^2.2.1
@@ -1978,13 +1910,14 @@ __metadata:
   resolution: "@data-wrangling-components/react@workspace:javascript/react"
   dependencies:
     "@data-wrangling-components/core": "workspace:^"
-    "@data-wrangling-components/react-arquero": "workspace:^"
-    "@data-wrangling-components/react-charts": "workspace:^"
     "@data-wrangling-components/react-controls": "workspace:^"
     "@data-wrangling-components/react-hocs": "workspace:^"
     "@data-wrangling-components/react-verbs": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
+    "@essex/arquero": ^1.0.0
+    "@essex/arquero-react": ^1.0.1
+    "@essex/charts-react": ^1.0.0
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/themed-components": ^2.2.1
@@ -2066,6 +1999,8 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/react": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
+    "@essex/arquero": ^1.0.0
+    "@essex/arquero-react": ^1.0.1
     "@essex/hooks": ^4.0.7
     "@essex/scripts": ^21.0.2
     "@essex/themed-components": ^2.2.1
@@ -2160,6 +2095,57 @@ __metadata:
   version: 2.0.0
   resolution: "@essex/api-extractor-config@npm:2.0.0"
   checksum: 3bb7f6878c92fa95b72d1fab53b07cb4bbcece40bc8818c9b7fa6e5a23f7b41d402fc06808515b40b8b487d0efd26257338d30b8029fbcc669b828acc90d81c6
+  languageName: node
+  linkType: hard
+
+"@essex/arquero-react@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@essex/arquero-react@npm:1.0.1"
+  dependencies:
+    "@essex/arquero": ^1.0.0
+    "@essex/charts-react": ^1.0.0
+    d3-format: ^3.1.0
+    lodash-es: ^4.17.21
+    react-if: ^4.1.1
+  peerDependencies:
+    "@fluentui/react": ^8.24.0
+    "@fluentui/utilities": ^8.2.1
+    "@thematic/core": ^1.3.0
+    "@thematic/d3": ^1.3.0
+    "@thematic/react": ^1.3.0
+    arquero: ^4.8.7
+    react: ^17.0.2
+    styled-components: ^5.3.0
+  checksum: efb06309466c456d1f256172cf45f065e708313b215a21efecd7725ed31e7bc05925f94f09a1224d64ac87655d7675e017709517c0676f27e46bb4ac0a316e88
+  languageName: node
+  linkType: hard
+
+"@essex/arquero@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@essex/arquero@npm:1.0.0"
+  dependencies:
+    lodash-es: ^4.17.21
+  peerDependencies:
+    arquero: ^4.8.7
+  checksum: e2263029745294beb95b89b6e1e055bdeac7a086278eded4195b042510e146f9cf6ce5949d45d3d8306480fb3950c85f3d481b3e6c8bec5c8a86fa6754be89d5
+  languageName: node
+  linkType: hard
+
+"@essex/charts-react@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@essex/charts-react@npm:1.0.0"
+  dependencies:
+    d3-format: ^3.1.0
+    d3-scale: ^4.0.2
+    d3-selection: ^3.0.0
+    d3-shape: ^3.1.0
+    lodash-es: ^4.17.21
+  peerDependencies:
+    "@thematic/core": ^1.3.0
+    "@thematic/d3": ^1.3.0
+    "@thematic/react": ^1.3.0
+    react: ^17.0.2
+  checksum: 8d60324e895282c8fbf74020c202ab43ab6a2851922c46657d3ecf2339afefced02ce700ce8043571e653669e9f60bcba4a8599df2d634c9bf4f128ac1e2e101
   languageName: node
   linkType: hard
 
@@ -3812,13 +3798,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/d3-path@npm:*":
-  version: 3.0.0
-  resolution: "@types/d3-path@npm:3.0.0"
-  checksum: af7f45ea912cddd794c03384baba856f11e1f9b57a49d05a66a61968dafaeb86e0e42394883118b9b8ccadce21a5f25b1f9a88ad05235e1dc6d24c3e34a379ff
-  languageName: node
-  linkType: hard
-
 "@types/d3-scale@npm:^4.0.2":
   version: 4.0.2
   resolution: "@types/d3-scale@npm:4.0.2"
@@ -3832,15 +3811,6 @@ __metadata:
   version: 3.0.2
   resolution: "@types/d3-selection@npm:3.0.2"
   checksum: 0b9e258d3a3f31639b4191051ad29f4e18441a069b99ca88d8a7b3d390fe6c87716a526e933d4cec95eb4c42a7b7688e6548cbf054359a436f4ff3dae5e29e10
-  languageName: node
-  linkType: hard
-
-"@types/d3-shape@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@types/d3-shape@npm:3.0.2"
-  dependencies:
-    "@types/d3-path": "*"
-  checksum: 61dfec6dc35d88b12765449bdc4a6e3ff02947c63dbdf8a1d90ccce5fe4e0a90a8e8fe87bf29138722be36e220c919858f6fd48bf56061e565078f018fa3ec5d
   languageName: node
   linkType: hard
 

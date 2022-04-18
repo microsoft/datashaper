@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { OrderbyInstruction } from '@data-wrangling-components/core'
-import { SortDirection } from '@data-wrangling-components/core'
+import { SortDirection } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

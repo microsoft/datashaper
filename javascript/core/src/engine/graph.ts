@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableContainer } from '@essex/arquero'
 import type { Graph, Node } from '@essex/dataflow'
 import { DefaultGraph, observableNode } from '@essex/dataflow'
 
 import type { InputBinding } from '../specification.js'
 import type { Step } from '../steps/index.js'
 import type { Store } from '../store/types.js'
-import type { TableContainer } from '../tables/types.js'
 import type { NodeFactory } from '../verbs/index.js'
 import * as verbs from '../verbs/index.js'
 

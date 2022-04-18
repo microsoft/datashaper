@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableContainer } from '@essex/arquero'
 import { table } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { from } from 'rxjs'
 
 import { DefaultStore } from '../store/DefaultStore.js'
-import type { TableContainer } from '../tables/types.js'
 
 /**
  * This is a store implementation pre-loaded with test tables to ease setup.
