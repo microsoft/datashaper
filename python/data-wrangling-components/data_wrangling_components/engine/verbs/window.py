@@ -84,4 +84,4 @@ def window(step: Step, store: TableStore):
         output = input_table.copy()
         output[args.to] = window
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

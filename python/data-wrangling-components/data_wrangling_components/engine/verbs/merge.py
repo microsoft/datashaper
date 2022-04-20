@@ -4,6 +4,7 @@
 #
 
 from functools import partial
+from typing import Callable, Dict
 
 from dataclasses import dataclass
 
@@ -16,13 +17,19 @@ from data_wrangling_components.types import (
 )
 
 
-__strategy_mapping = {
-    MergeStrategy.FirstOneWins: lambda column_values, _: column_values.dropna()[0],
-    MergeStrategy.LastOneWins: lambda column_values, _: column_values.dropna()[-1],
-    MergeStrategy.Concat: lambda column_values, delim: delim.join(
+__strategy_mapping: Dict[MergeStrategy, Callable] = {
+    MergeStrategy.FirstOneWins: lambda column_values, **kwargs: column_values.dropna()[
+        0
+    ],
+    MergeStrategy.LastOneWins: lambda column_values, **kwargs: column_values.dropna()[
+        -1
+    ],
+    MergeStrategy.Concat: lambda column_values, delim, **kwargs: delim.join(
         column_values.dropna().astype(str)
     ),
-    MergeStrategy.CreateArray: lambda column_values, _: list(column_values),
+    MergeStrategy.CreateArray: lambda column_values, **kwargs: ",".join(
+        column_values.dropna().astype(str)
+    ),
 }
 
 
@@ -47,4 +54,4 @@ def merge(step: Step, store: TableStore):
         partial(__strategy_mapping[args.strategy], delim=args.delimiter), axis=1
     )
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

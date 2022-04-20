@@ -6,7 +6,7 @@
 import pandas as pd
 
 from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import SetOperationArgs, Step
+from data_wrangling_components.types import Step
 
 
 def union(step: Step, store: TableStore):
@@ -22,9 +22,11 @@ def union(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = SetOperationArgs(others=step.args["others"])
-    input_table = store.table(step.input)
-    others = [store.table(other) for other in args.others]
+    if not isinstance(step.input, dict):
+        raise Exception("Input must be dict")
+
+    input_table = store.table(step.input["source"])
+    others = [store.table(other) for other in step.input["others"]]
     output = pd.concat([input_table] + others, ignore_index=True).drop_duplicates()
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

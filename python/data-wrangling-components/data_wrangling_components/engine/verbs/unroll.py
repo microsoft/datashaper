@@ -30,4 +30,4 @@ def unroll(step: Step, store: TableStore):
     args = UnrollArgs(columns=step.args["columns"])
     input_table = store.table(step.input)
     output = input_table.explode(args.columns)
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

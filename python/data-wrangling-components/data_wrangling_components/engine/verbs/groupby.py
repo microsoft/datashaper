@@ -27,4 +27,4 @@ def groupby(step: Step, store: TableStore):
     args = GroupByArgs(columns=step.args["columns"])
     input_table = store.table(step.input)
     output = input_table.groupby(by=args.columns)
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

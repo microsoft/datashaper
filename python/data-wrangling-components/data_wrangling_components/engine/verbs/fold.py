@@ -46,4 +46,4 @@ def fold(step: Step, store: TableStore):
         .sort_values(by=list(set(input_table.columns) - set(args.columns)))
         .reset_index(drop=True)
     )
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

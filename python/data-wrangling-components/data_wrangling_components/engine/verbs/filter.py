@@ -70,4 +70,4 @@ def filter(step: Step, store: TableStore):
 
     output = filter_df(input_table, args).reset_index(drop=True)
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

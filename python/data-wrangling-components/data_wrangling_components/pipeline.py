@@ -120,7 +120,12 @@ class DefaultPipeline:
                 TableContainer(
                     id=name,
                     name=name,
-                    table=pd.read_csv(path, engine="python", on_bad_lines=lambda x: x),
+                    table=pd.read_csv(
+                        path,
+                        engine="python",
+                        on_bad_lines=lambda x: x,
+                        na_values=["undefined"],
+                    ),
                 ),
             )
         elif resolver is not None:
@@ -261,7 +266,7 @@ class DefaultPipeline:
                     verb=Verb(step["verb"]),
                     input=step["input"],
                     output=step["output"],
-                    args=step["args"],
+                    args=step.get("args", None),
                 )
             )
         return new_pipeline

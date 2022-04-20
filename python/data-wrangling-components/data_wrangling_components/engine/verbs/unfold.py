@@ -38,4 +38,4 @@ def unfold(step: Step, store: TableStore):
 
     output = output.pivot(columns=args.key, values=args.value)
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

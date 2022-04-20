@@ -4,7 +4,7 @@
 #
 
 from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import FillArgs, Step
+from data_wrangling_components.types import ImputeArgs, Step
 
 
 def impute(step: Step, store: TableStore):
@@ -20,8 +20,9 @@ def impute(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = FillArgs(to=step.args["to"], value=step.args["value"])
+    args = ImputeArgs(columns=step.args["columns"], value=step.args["value"])
     input_table = store.table(step.input)
     output = input_table.copy()
-    output[args.to] = output[args.to].fillna(args.value)
-    return TableContainer(id=step.output, name=step.output, table=output)
+    for column in args.columns:
+        output[column] = output[column].fillna(args.value)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

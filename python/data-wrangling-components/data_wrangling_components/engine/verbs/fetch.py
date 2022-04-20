@@ -21,7 +21,9 @@ class FetchArgs:
 
 
 __reader_mapping = {
-    "csv": lambda args: pd.read_csv(args.url, sep=args.delimiter),
+    "csv": lambda args: pd.read_csv(
+        args.url, sep=args.delimiter, na_values=["undefined"]
+    ),
     "json": lambda args: pd.read_json(args.url),
 }
 
@@ -42,4 +44,4 @@ def fetch(step: Step, store: TableStore):
     args = FetchArgs(url=step.args["url"], delimiter=step.args.get("delimiter", ","))
     file_type = urlparse(args.url).path.split(".")[-1]
     output = __reader_mapping[file_type](args)
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

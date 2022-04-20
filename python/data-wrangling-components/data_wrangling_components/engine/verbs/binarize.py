@@ -57,4 +57,4 @@ def binarize(step: Step, store: TableStore):
     output[args.to] = input_table.index.isin(filter_result.index)
     output[args.to] = output[args.to].astype(int)
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

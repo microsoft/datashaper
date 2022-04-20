@@ -8,17 +8,17 @@ from typing import Union
 from dataclasses import dataclass
 
 from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnArgs, Step
+from data_wrangling_components.types import InputColumnListArgs, Step
 
 
 @dataclass
-class EraseArgs(InputColumnArgs):
+class EraseArgs(InputColumnListArgs):
     value: Union[str, int, float]
 
 
 def erase(step: Step, store: TableStore):
     args = EraseArgs(
-        column=step.args["column"],
+        columns=step.args["columns"],
         value=step.args["value"],
     )
 
@@ -26,8 +26,9 @@ def erase(step: Step, store: TableStore):
 
     output = input_table.copy()
 
-    output[args.column] = output[args.column].apply(
-        lambda df_value: None if df_value == args.value else df_value
-    )
+    for column in args.columns:
+        output[column] = output[column].apply(
+            lambda df_value: None if df_value == args.value else df_value
+        )
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

@@ -33,4 +33,4 @@ def boolean(step: Step, store: TableStore):
 
     output[args.to] = _boolean_function_map[args.operator](output)
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

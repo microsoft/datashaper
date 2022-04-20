@@ -30,7 +30,12 @@ def orderby(step: Step, store: TableStore):
     :return: new table with the result of the operation.
     """
     args = OrderByArgs(
-        orders=[OrderByInstruction(**order) for order in step.args["orders"]]
+        orders=[
+            OrderByInstruction(
+                column=order["column"], direction=SortDirection(order["direction"])
+            )
+            for order in step.args["orders"]
+        ]
     )
     input_table = store.table(step.input)
 
@@ -38,4 +43,4 @@ def orderby(step: Step, store: TableStore):
     ascending = [order.direction == SortDirection.Ascending for order in args.orders]
 
     output = input_table.sort_values(by=columns, ascending=ascending)
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

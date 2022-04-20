@@ -22,4 +22,4 @@ def unorder(step: Step, store: TableStore):
     input_table = store.table(step.input)
 
     output = input_table.sort_index()
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

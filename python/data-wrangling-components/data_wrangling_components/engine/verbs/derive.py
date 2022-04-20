@@ -65,4 +65,4 @@ def derive(step: Step, store: TableStore):
         )
     except Exception:
         output[args.to] = np.nan
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

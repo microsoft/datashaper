@@ -28,13 +28,15 @@ def join(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
+    if not isinstance(step.input, dict):
+        raise Exception("Input must be dict")
+
     args = JoinArgs(
-        other=step.args["other"],
         on=step.args.get("on", None),
         strategy=JoinStrategy(step.args.get("strategy", "inner")),
     )
-    input_table = store.table(step.input)
-    other = store.table(args.other)
+    input_table = store.table(step.input["source"])
+    other = store.table(step.input["other"])
 
     if len(args.on) > 1:
         left_column = args.on[0]
@@ -45,10 +47,14 @@ def join(step: Step, store: TableStore):
             left_on=left_column,
             right_on=right_column,
             how=__strategy_mapping[args.strategy],
+            suffixes=["_1", "_2"],
         )
     else:
         output = input_table.merge(
-            other, on=args.on, how=__strategy_mapping[args.strategy]
+            other,
+            on=args.on,
+            how=__strategy_mapping[args.strategy],
+            suffixes=["_1", "_2"],
         )
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

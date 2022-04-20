@@ -79,21 +79,20 @@ class DataType(Enum):
 @dataclass
 class Step:
     verb: Verb
-    input: str
-    output: str
+    input: Union[str, Dict[str, str]]
+    output: Union[str, Dict[str, str]]
     args: Dict[str, Any] = field(default_factory=dict)
 
 
 class JoinStrategy(Enum):
     Inner = "inner"
-    LeftOuter = "join_left"
-    RightOuter = "join_right"
-    FullOuter = "join_full"
+    LeftOuter = "left outer"
+    RightOuter = "right outer"
+    FullOuter = "full outer"
 
 
 @dataclass
 class JoinArgs:
-    other: str
     on: List[str] = field(default_factory=list)
     strategy: JoinStrategy = JoinStrategy.Inner
 
@@ -210,11 +209,6 @@ class SetOp(Enum):
     Except = "except"
 
 
-@dataclass
-class SetOperationArgs:
-    others: List[str]
-
-
 class MathOperator(Enum):
     Add = "+"
     Subtract = "-"
@@ -233,6 +227,7 @@ class ParseType(Enum):
     Date = "date"
     Integer = "int"
     Decimal = "float"
+    String = "string"
 
 
 class MergeStrategy(Enum):
@@ -261,4 +256,9 @@ class OrderByInstruction:
 
 @dataclass
 class FillArgs(OutputColumnArgs):
+    value: Union[str, int, float, bool]
+
+
+@dataclass
+class ImputeArgs(InputColumnListArgs):
     value: Union[str, int, float, bool]

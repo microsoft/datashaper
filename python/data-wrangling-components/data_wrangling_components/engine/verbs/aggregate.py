@@ -49,4 +49,6 @@ def aggregate(step: Step, store: TableStore) -> TableContainer:
         .agg(args.operation.value)
     )
     output.columns = [args.to]
-    return TableContainer(id=step.output, name=step.output, table=output.reset_index())
+    return TableContainer(
+        id=str(step.output), name=str(step.output), table=output.reset_index()
+    )

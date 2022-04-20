@@ -96,4 +96,4 @@ def bin(step: Step, store: TableStore):
     ]
     output = input_table.copy()
     output[args.to] = value_edges
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

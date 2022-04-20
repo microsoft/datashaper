@@ -81,16 +81,16 @@ class LazyTableStorage:
 
 
 class TableStore(Protocol):
-    def get(self, name: str) -> TableContainer:
+    def get(self, name: Union[str, Dict[str, str]]) -> TableContainer:
         ...
 
-    def table(self, name: str) -> Table:
+    def table(self, name: Union[str, Dict[str, str]]) -> Table:
         ...
 
-    def set(self, name: str, table: TableContainer) -> None:
+    def set(self, name: Union[str, Dict[str, str]], table: TableContainer) -> None:
         ...
 
-    def delete(self, name: str) -> None:
+    def delete(self, name: Union[str, Dict[str, str]]) -> None:
         ...
 
     def queue(self, name: str, resolver: ResolverFunction) -> None:
@@ -107,7 +107,7 @@ class TableStore(Protocol):
 class DefaultTableStore:
     _tables: Dict[str, LazyTableStorage] = field(default_factory=dict)
 
-    def get(self, name: str) -> TableContainer:
+    def get(self, name: Union[str, Dict[str, str]]) -> TableContainer:
         """Retrieves a dataframe from the table store
 
         :param name:
@@ -120,6 +120,7 @@ class DefaultTableStore:
         :return: the dataframe with the data
         :rtype: Union[pd.DataFrame, DataFrameGroupBy]
         """
+        name = name if isinstance(name, str) else name["source"]
         try:
             table_container = self._tables[name]
         except KeyError:
@@ -138,11 +139,12 @@ class DefaultTableStore:
 
         return table_container.container
 
-    def table(self, name: str) -> Table:
+    def table(self, name: Union[str, Dict[str, str]]) -> Table:
+        name = name if isinstance(name, str) else name["source"]
         container = self.get(name)
         return container.table
 
-    def set(self, name: str, table: TableContainer) -> None:
+    def set(self, name: Union[str, Dict[str, str]], table: TableContainer) -> None:
         """Sets the table for a name in the store
 
         :param name:
@@ -153,14 +155,16 @@ class DefaultTableStore:
             The DataFrame with the data
         :type table: pd.DataFrame
         """
+        name = name if isinstance(name, str) else name["source"]
         self._tables[name] = LazyTableStorage(table, resolved=True)
 
-    def delete(self, name: str) -> None:
+    def delete(self, name: Union[str, Dict[str, str]]) -> None:
         """Deletes a table from the store
 
         :param name: Name of the table to delete
         :type name: str
         """
+        name = name if isinstance(name, str) else name["source"]
         self._tables.pop(name)
 
     def queue(self, name: str, resolver: ResolverFunction) -> None:

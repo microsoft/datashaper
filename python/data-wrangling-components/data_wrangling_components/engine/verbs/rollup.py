@@ -52,4 +52,4 @@ def rollup(step: Step, store: TableStore):
 
     output = pd.DataFrame({args.to: agg_result})
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

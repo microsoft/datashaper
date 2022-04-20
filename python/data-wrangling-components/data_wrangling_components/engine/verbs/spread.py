@@ -44,4 +44,4 @@ def spread(step: Step, store: TableStore):
     output = pd.concat([output, new_columns], axis=1)
     output = output.drop(args.column, axis=1)
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

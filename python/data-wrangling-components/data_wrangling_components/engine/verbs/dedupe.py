@@ -27,7 +27,10 @@ def dedupe(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = DedupeArgs(columns=step.args.get("columns", None))
+    if step.args is None:
+        args = DedupeArgs(columns=None)
+    else:
+        args = DedupeArgs(columns=step.args.get("columns", None))
     input_table = store.table(step.input)
     output = input_table.drop_duplicates(args.columns)
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

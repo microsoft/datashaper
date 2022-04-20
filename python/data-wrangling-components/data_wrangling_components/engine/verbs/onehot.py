@@ -32,4 +32,4 @@ def onehot(step: Step, store: TableStore):
 
     output = pd.concat([input_table, dummies], axis=1)
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

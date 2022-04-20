@@ -50,7 +50,7 @@ def chain(step: Step, store: TableStore):
                 verb=Verb(chain_step["verb"]),
                 input=chain_step["input"],
                 output=chain_step["output"],
-                args=chain_step["args"],
+                args=chain_step.get("args", {}),
             )
             if isinstance(chain_step, dict)
             else chain_step
@@ -67,7 +67,7 @@ def chain(step: Step, store: TableStore):
 
     output = steps_store.table(steps_store.list()[-1])
     output_container: TableContainer = TableContainer(
-        id=step.output, name=step.output, table=output
+        id=str(step.output), name=str(step.output), table=output
     )
     store.set(step.output, output_container)
     return output_container

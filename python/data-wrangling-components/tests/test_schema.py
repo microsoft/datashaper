@@ -20,14 +20,11 @@ def read_table_store(root: str) -> DefaultTableStore:
     table_store = DefaultTableStore()
 
     for table in os.listdir(root):
+        df = pd.read_csv(os.path.join(root, table), na_values=["undefined"])
         table_name = table.split(".")[0]
         table_store.set(
             table_name,
-            TableContainer(
-                id=table_name,
-                name=table_name,
-                table=pd.read_csv(os.path.join(root, table)),
-            ),
+            TableContainer(id=table_name, name=table_name, table=df),
         )
     return table_store
 
@@ -40,7 +37,16 @@ def get_verb_test_specs(root: str) -> List[str]:
     return subfolders
 
 
-@pytest.mark.xfail
+def read_csv(path: str) -> pd.DataFrame:
+    df = pd.read_csv(path, na_values=["undefined"])
+
+    if "date" in df.columns:
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+
+    return df
+
+
+# @pytest.mark.xfail
 @pytest.mark.parametrize("fixture_path", get_verb_test_specs(FIXTURES_PATH))
 def test_verbs_schema_input(fixture_path: str):
     with open(os.path.join(fixture_path, "workflow.json")) as workflow:
@@ -51,7 +57,20 @@ def test_verbs_schema_input(fixture_path: str):
     pipeline.run()
     for expected in os.listdir(fixture_path):
         if expected.endswith(".csv"):
+            result = pipeline.get_dataset(expected.split(".")[0])
+            if isinstance(result, pd.DataFrame):
+                result.to_csv(
+                    os.path.join(fixture_path, f"result_{expected}"), index=False
+                )
+            else:
+                result.obj.to_csv(
+                    os.path.join(fixture_path, f"result_{expected}"), index=False
+                )
             assert_frame_equal(
-                pd.read_csv(os.path.join(fixture_path, expected)),
-                pipeline.get_dataset(expected.split(".")[0]),
+                read_csv(os.path.join(fixture_path, expected)),
+                read_csv(os.path.join(fixture_path, f"result_{expected}")),
+                check_like=True,
+                check_dtype=False,
+                check_column_type=False,
             )
+            os.remove(os.path.join(fixture_path, f"result_{expected}"))

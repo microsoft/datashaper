@@ -26,7 +26,7 @@ def pivot(step: Step, store: TableStore):
     input_table = store.table(step.input)
 
     output = input_table.pivot_table(
-        values=args.value, columns=args.key, aggfunc=args.operation
+        values=args.value, columns=args.key, aggfunc=args.operation.value
     )
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)

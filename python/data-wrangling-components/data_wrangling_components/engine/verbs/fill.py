@@ -24,4 +24,4 @@ def fill(step: Step, store: TableStore):
     input_table = store.table(step.input)
     output = input_table.copy()
     output[args.to] = args.value
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(id=str(step.output), name=str(step.output), table=output)
