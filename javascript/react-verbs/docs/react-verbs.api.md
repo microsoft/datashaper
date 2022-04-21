@@ -6,6 +6,7 @@
 
 /// <reference types="react" />
 
+import type { BinArgs } from '@data-wrangling-components/core';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import { DataType } from '@essex/arquero';
 import type { IDropdownOption } from '@fluentui/react';
@@ -26,7 +27,7 @@ export const AggregateDescription: React.FC<StepDescriptionProps>;
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const Bin: React.FC<StepComponentProps>;
+export const Bin: React.FC<StepComponentProps<BinArgs>>;
 
 // Warning: (ae-missing-release-tag) "Binarize" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -52,6 +53,11 @@ export const BooleanLogic: React.FC<StepComponentProps>;
 //
 // @public (undocumented)
 export const BooleanLogicDescription: React.FC<StepDescriptionProps>;
+
+// Warning: (ae-missing-release-tag) "CheckboxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CheckboxChangeHandler = (event?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean) => void;
 
 // Warning: (ae-missing-release-tag) "ColumnListOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -94,10 +100,10 @@ export interface DescriptionRow {
     value?: any;
 }
 
-// Warning: (ae-missing-release-tag) "DropdownOptionChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DropdownChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type DropdownOptionChangeFunction = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => void;
+export type DropdownChangeHandler = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => void;
 
 // Warning: (ae-missing-release-tag) "Erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -299,6 +305,11 @@ export const SetOperation: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const SetOperationDescription: React.FC<StepDescriptionProps>;
 
+// Warning: (ae-missing-release-tag) "SpinButtonChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type SpinButtonChangeHandler = (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
+
 // Warning: (ae-missing-release-tag) "Spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -317,7 +328,7 @@ export type StepChangeFunction = (step: Step) => void;
 // Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepComponentProps extends StepDependent {
+export interface StepComponentProps<T extends object = any> extends StepDependent<T> {
     input?: string;
     label?: string;
     // (undocumented)
@@ -329,9 +340,9 @@ export interface StepComponentProps extends StepDependent {
 // Warning: (ae-missing-release-tag) "StepDependent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepDependent {
+export interface StepDependent<T extends object = any> {
     // (undocumented)
-    step: Step;
+    step: Step<T>;
 }
 
 // Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -353,10 +364,15 @@ export interface StepDescriptionProps extends StepDependent {
 // Warning: (ae-missing-release-tag) "StepSubcomponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface StepSubcomponentProps extends StepComponentProps {
+export interface StepSubcomponentProps<T extends object = any> extends StepComponentProps<T> {
     // (undocumented)
     label?: string;
 }
+
+// Warning: (ae-missing-release-tag) "TextfieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TextfieldChangeHandler = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
 
 // Warning: (ae-missing-release-tag) "Unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -381,22 +397,22 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType;
 // Warning: (ae-missing-release-tag) "useHandleCheckboxChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleCheckboxChange(step: Step, path: string, onChange?: StepChangeFunction): (event?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean) => void;
+export function useHandleCheckboxChange(step: Step, path: string, onChange?: StepChangeFunction): CheckboxChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useHandleDropdownChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleDropdownChange(step: Step, path: string, onChange?: StepChangeFunction): DropdownOptionChangeFunction;
+export function useHandleDropdownChange(step: Step, path: string, onChange?: StepChangeFunction): DropdownChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useHandleSpinButtonChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleSpinButtonChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => number | undefined): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
+export function useHandleSpinButtonChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => number | undefined): SpinButtonChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useHandleTextfieldChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: <T>(value?: T | undefined) => T | undefined): (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
+export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: <T>(value?: T | undefined) => T | undefined): TextfieldChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

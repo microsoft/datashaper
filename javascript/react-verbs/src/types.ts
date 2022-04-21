@@ -3,19 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
-import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type StepChangeFunction = (step: Step) => void
 
-export type DropdownOptionChangeFunction = (
-	event: React.FormEvent<HTMLDivElement>,
-	option?: IDropdownOption,
-	index?: number,
-) => void
-
-export interface StepDependent {
-	step: Step
+export interface StepDependent<T extends object = any> {
+	step: Step<T>
 }
 
 export interface DescriptionRow {
@@ -56,11 +49,13 @@ export interface StepDescriptionProps extends StepDependent {
  * For reusable subcomponents that are combined in one interface
  * to manipulate a step.
  */
-export interface StepSubcomponentProps extends StepComponentProps {
+export interface StepSubcomponentProps<T extends object = any>
+	extends StepComponentProps<T> {
 	label?: string
 }
 
-export interface StepComponentProps extends StepDependent {
+export interface StepComponentProps<T extends object = any>
+	extends StepDependent<T> {
 	/**
 	 * TableStore to use for table lookups of step parameters.
 	 */
