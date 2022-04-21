@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 import {
 	useHandleSpinButtonChange,
-	useHandleTextfieldChange,
+	useHandleTextFieldChange,
 } from '../../common/hooks.js'
 import { LeftAlignedRow } from '../../common/styles.js'
 import type { StepComponentProps } from '../../types'
@@ -20,9 +20,9 @@ import type { StepComponentProps } from '../../types'
  */
 export const Fetch: React.FC<StepComponentProps<FetchArgs>> = memo(
 	function Fetch({ step, onChange }) {
-		const handleUrlChange = useHandleTextfieldChange(step, 'args.url', onChange)
+		const handleUrlChange = useHandleTextFieldChange(step, 'args.url', onChange)
 
-		const handleDelimiterChange = useHandleTextfieldChange(
+		const handleDelimiterChange = useHandleTextFieldChange(
 			step,
 			'args.delimiter',
 			onChange,

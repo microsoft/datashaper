@@ -55,7 +55,7 @@ export type TextFieldChangeHandler = (
 	newValue?: string,
 ) => void
 
-export function useHandleTextfieldChange<T extends object | void | unknown>(
+export function useHandleTextFieldChange<T extends object | void | unknown>(
 	step: Step<T>,
 	path: string,
 	onChange?: StepChangeFunction<T>,

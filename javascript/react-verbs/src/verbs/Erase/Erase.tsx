@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 import {
 	LeftAlignedColumn,
-	useHandleTextfieldChange,
+	useHandleTextFieldChange,
 } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
@@ -21,7 +21,7 @@ import { ColumnListInputs } from '../shared/index.js'
  */
 export const Erase: React.FC<StepComponentProps<EraseArgs>> = memo(
 	function Erase({ step, store, onChange }) {
-		const handleValueChange = useHandleTextfieldChange(
+		const handleValueChange = useHandleTextFieldChange(
 			step,
 			'args.value',
 			onChange,

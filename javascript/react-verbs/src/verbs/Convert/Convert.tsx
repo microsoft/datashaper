@@ -20,7 +20,7 @@ import styled from 'styled-components'
 
 import {
 	useHandleDropdownChange,
-	useHandleTextfieldChange,
+	useHandleTextFieldChange,
 	useLoadTable,
 } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
@@ -46,7 +46,7 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 			onChange,
 		)
 
-		const handleRadixChange = useHandleTextfieldChange(
+		const handleRadixChange = useHandleTextFieldChange(
 			step,
 			'args.radix',
 			onChange,

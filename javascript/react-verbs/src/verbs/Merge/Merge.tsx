@@ -17,7 +17,7 @@ import styled from 'styled-components'
 import { useHandleDropdownChange } from '../../common/hooks.js'
 import {
 	LeftAlignedRow,
-	useHandleTextfieldChange,
+	useHandleTextFieldChange,
 	useLoadTable,
 } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
@@ -62,7 +62,7 @@ export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
 			onChange,
 		)
 
-		const handleDelimiterChange = useHandleTextfieldChange(
+		const handleDelimiterChange = useHandleTextFieldChange(
 			step,
 			'args.delimiter',
 			onChange,
