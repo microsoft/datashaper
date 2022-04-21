@@ -2,10 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinStep } from '@data-wrangling-components/core'
+import type { JoinArgs } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
-import { dropdownStyles,EnumDropdown  } from '@data-wrangling-components/react-controls'
-import { memo, useMemo } from 'react'
+import {
+	dropdownStyles,
+	EnumDropdown,
+} from '@data-wrangling-components/react-controls'
+import { memo } from 'react'
 import styled from 'styled-components'
 
 import { useHandleDropdownChange } from '../../common/hooks.js'
@@ -16,16 +19,14 @@ import { JoinInputs } from '../shared/index.js'
 /**
  * Provides inputs for a Join step.
  */
-export const Join: React.FC<StepComponentProps> = memo(function Join({
+export const Join: React.FC<StepComponentProps<JoinArgs>> = memo(function Join({
 	step,
 	store,
 	table,
 	onChange,
 }) {
-	const internal = useMemo(() => step as JoinStep, [step])
-
 	const handleJoinStrategyChange = useHandleDropdownChange(
-		internal,
+		step,
 		'args.strategy',
 		onChange,
 	)
@@ -38,7 +39,7 @@ export const Join: React.FC<StepComponentProps> = memo(function Join({
 					required
 					label={'Join strategy'}
 					enumeration={JoinStrategy}
-					selectedKey={internal.args.strategy || JoinStrategy.Inner}
+					selectedKey={step.args.strategy || JoinStrategy.Inner}
 					styles={dropdownStyles}
 					onChange={handleJoinStrategyChange}
 				/>

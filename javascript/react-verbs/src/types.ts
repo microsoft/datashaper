@@ -34,11 +34,13 @@ export interface DescriptionRow {
 	title?: string
 }
 
-export interface VerbDescriptionProps extends StepDescriptionProps {
+export interface VerbDescriptionProps<T extends object = any>
+	extends StepDescriptionProps<T> {
 	rows: DescriptionRow[]
 }
 
-export interface StepDescriptionProps extends StepDependent {
+export interface StepDescriptionProps<T extends object = any>
+	extends StepDependent<T> {
 	style?: React.CSSProperties
 	showInput?: boolean
 	showOutput?: boolean

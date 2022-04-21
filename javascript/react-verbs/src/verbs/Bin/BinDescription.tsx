@@ -2,18 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BinStep } from '@data-wrangling-components/core'
+import type { BinArgs } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const BinDescription: React.FC<StepDescriptionProps> = memo(
+export const BinDescription: React.FC<StepDescriptionProps<BinArgs>> = memo(
 	function BinDescription(props) {
 		const rows = useMemo(() => {
-			const internal = props.step as BinStep
-			const { args } = internal
+			const {
+				step: { args },
+			} = props
 			return [
 				{
 					before: 'column',

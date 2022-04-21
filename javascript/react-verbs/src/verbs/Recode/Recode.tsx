@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RecodeStep } from '@data-wrangling-components/core'
+import type { Step, RecodeArgs } from '@data-wrangling-components/core'
 import { ColumnValueDropdown } from '@data-wrangling-components/react-controls'
 import type { DataType, Value } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
@@ -26,63 +26,57 @@ import {
 /**
  * Provides inputs for a RecodeStep.
  */
-export const Recode: React.FC<StepComponentProps> = memo(function Recode({
-	step,
-	store,
-	table,
-	onChange,
-	input,
-}) {
-	const internal = useMemo(() => step as RecodeStep, [step])
+export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
+	function Recode({ step, store, table, onChange, input }) {
+		const tbl = useLoadTable(
+			input || step.input[NodeInput.Source]?.node,
+			table,
+			store,
+		)
 
-	const tbl = useLoadTable(
-		input || step.input[NodeInput.Source]?.node,
-		table,
-		store,
-	)
+		const values = useColumnValues(step, tbl)
+		const dataType = useColumnType(tbl, step.args.column)
 
-	const values = useColumnValues(internal, tbl)
-	const dataType = useColumnType(tbl, internal.args.column)
+		const handleRecodeChange = useHandleRecodeChange(step, onChange)
+		const handleRecodeDelete = useRecodeDelete(step, onChange)
+		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
 
-	const handleRecodeChange = useHandleRecodeChange(internal, onChange)
-	const handleRecodeDelete = useRecodeDelete(internal, onChange)
-	const handleButtonClick = useHandleAddButtonClick(internal, values, onChange)
+		const columnPairs = useRecodePairs(
+			tbl,
+			step,
+			values,
+			dataType,
+			handleRecodeChange,
+			handleRecodeDelete,
+		)
 
-	const columnPairs = useRecodePairs(
-		tbl,
-		internal,
-		values,
-		dataType,
-		handleRecodeChange,
-		handleRecodeDelete,
-	)
+		const disabled = useDisabled(step, values)
 
-	const disabled = useDisabled(internal, values)
-
-	return (
-		<Container>
-			{columnPairs}
-			<ActionButton
-				onClick={handleButtonClick}
-				iconProps={{ iconName: 'Add' }}
-				disabled={disabled}
-			>
-				Add mapping
-			</ActionButton>
-		</Container>
-	)
-})
+		return (
+			<Container>
+				{columnPairs}
+				<ActionButton
+					onClick={handleButtonClick}
+					iconProps={{ iconName: 'Add' }}
+					disabled={disabled}
+				>
+					Add mapping
+				</ActionButton>
+			</Container>
+		)
+	},
+)
 
 function useRecodePairs(
 	table: ColumnTable | undefined,
-	internal: RecodeStep,
+	step: Step<RecodeArgs>,
 	values: Value[],
 	dataType: DataType,
 	onChange: (previous: Value, oldvalue: Value, newvalue: Value) => void,
 	onDelete: (value: Value) => void,
 ) {
 	return useMemo(() => {
-		const { map } = internal.args
+		const { map } = step.args
 		return Object.entries(map || {}).map((valuePair, index) => {
 			// the old value will always come off the map as a string key
 			// coerce it to the column type for proper comparison
@@ -92,7 +86,7 @@ function useRecodePairs(
 				if (value === oldvalue) {
 					return true
 				}
-				if (internal.args.map && internal.args.map[value]) {
+				if (step.args.map && step.args.map[value]) {
 					return false
 				}
 				return true
@@ -113,7 +107,7 @@ function useRecodePairs(
 			return (
 				<ColumnPair key={`column-Recode-${oldvalue}-${index}`}>
 					<ColumnValueDropdown
-						column={internal.args.column}
+						column={step.args.column}
 						table={table}
 						values={values}
 						filter={valueFilter}
@@ -144,7 +138,7 @@ function useRecodePairs(
 				</ColumnPair>
 			)
 		})
-	}, [table, internal, values, dataType, onChange, onDelete])
+	}, [table, step, values, dataType, onChange, onDelete])
 }
 
 const Container = styled.div`

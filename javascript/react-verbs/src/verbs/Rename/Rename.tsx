@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RenameStep } from '@data-wrangling-components/core'
+import type { Step, RenameArgs } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
@@ -28,64 +28,58 @@ import {
 /**
  * Provides inputs for a RenameStep.
  */
-export const Rename: React.FC<StepComponentProps> = memo(function Rename({
-	step,
-	store,
-	table,
-	onChange,
-	input,
-}) {
-	const internal = useMemo(() => step as RenameStep, [step])
+export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
+	function Rename({ step, store, table, onChange, input }) {
+		const tbl = useLoadTable(
+			input || step.input[NodeInput.Source]?.node,
+			table,
+			store,
+		)
 
-	const tbl = useLoadTable(
-		input || step.input[NodeInput.Source]?.node,
-		table,
-		store,
-	)
+		const handleColumnChange = useHandleColumnChange(step, onChange)
+		const handleColumnDelete = useColumnRecordDelete(step, onChange)
+		const handleButtonClick = useHandleAddButtonClick(step, tbl, onChange)
 
-	const handleColumnChange = useHandleColumnChange(internal, onChange)
-	const handleColumnDelete = useColumnRecordDelete(internal, onChange)
-	const handleButtonClick = useHandleAddButtonClick(internal, tbl, onChange)
+		const columnPairs = useColumnPairs(
+			tbl,
+			step,
+			handleColumnChange,
+			handleColumnDelete,
+		)
 
-	const columnPairs = useColumnPairs(
-		tbl,
-		internal,
-		handleColumnChange,
-		handleColumnDelete,
-	)
+		const disabled = useDisabled(step, tbl)
 
-	const disabled = useDisabled(internal, tbl)
-
-	return (
-		<Container>
-			<Label>Column renames</Label>
-			{columnPairs}
-			<ActionButton
-				onClick={handleButtonClick}
-				iconProps={{ iconName: 'Add' }}
-				disabled={disabled}
-			>
-				Add rename
-			</ActionButton>
-		</Container>
-	)
-})
+		return (
+			<Container>
+				<Label>Column renames</Label>
+				{columnPairs}
+				<ActionButton
+					onClick={handleButtonClick}
+					iconProps={{ iconName: 'Add' }}
+					disabled={disabled}
+				>
+					Add rename
+				</ActionButton>
+			</Container>
+		)
+	},
+)
 
 function useColumnPairs(
 	table: ColumnTable | undefined,
-	internal: RenameStep,
+	step: Step<RenameArgs>,
 	onChange: (previous: string, oldName: string, newName: string) => void,
 	onDelete: (name: string) => void,
 ) {
 	return useMemo(() => {
-		const { columns } = internal.args
+		const { columns } = step.args
 		return Object.entries(columns || {}).map((column, index) => {
 			const [oldname, newname] = column
 			const columnFilter = (name: string) => {
 				if (name === oldname) {
 					return true
 				}
-				if (internal.args.columns && internal.args.columns[name]) {
+				if (step.args.columns && step.args.columns[name]) {
 					return false
 				}
 				return true
@@ -133,7 +127,7 @@ function useColumnPairs(
 				</ColumnPair>
 			)
 		})
-	}, [table, internal, onChange, onDelete])
+	}, [table, step, onChange, onDelete])
 }
 
 const Container = styled.div`

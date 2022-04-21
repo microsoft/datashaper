@@ -63,7 +63,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
 
 		const handleSelectAllOrNone = useCallback(
 			(all: boolean) => {
-				onSelectAllOrNone && onSelectAllOrNone(all ? options : [])
+				onSelectAllOrNone?.(all ? options : [])
 			},
 			[options, onSelectAllOrNone],
 		)

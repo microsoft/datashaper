@@ -2,17 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FetchStep } from '@data-wrangling-components/core'
+import type { FetchArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const FetchDescription: React.FC<StepDescriptionProps> = memo(
+export const FetchDescription: React.FC<StepDescriptionProps<FetchArgs>> = memo(
 	function FetchDescription(props) {
 		const rows = useMemo(() => {
-			const internal = props.step as FetchStep
-			const { args } = internal
+			const {
+				step: { args },
+			} = props
 			return [
 				{
 					before: 'url',

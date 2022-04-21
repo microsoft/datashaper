@@ -2,18 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { MergeStep } from '@data-wrangling-components/core'
+import type { MergeArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { createRowEntries } from '../../common/createRowEntries.js'
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const MergeDescription: React.FC<StepDescriptionProps> = memo(
+export const MergeDescription: React.FC<StepDescriptionProps<MergeArgs>> = memo(
 	function MergeDescription(props) {
 		const rows = useMemo(() => {
-			const internal = props.step as MergeStep
-			const { args } = internal
+			const {
+				step: { args },
+			} = props
 			const sub = createRowEntries(
 				args.columns || [],
 				c => ({

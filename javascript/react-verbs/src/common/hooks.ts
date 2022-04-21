@@ -50,7 +50,7 @@ export function useHandleDropdownChange(
 
 // #region Textfield Change Handler
 
-export type TextfieldChangeHandler = (
+export type TextFieldChangeHandler = (
 	event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 	newValue?: string,
 ) => void
@@ -60,13 +60,13 @@ export function useHandleTextfieldChange(
 	path: string,
 	onChange?: StepChangeFunction,
 	transformer = identity,
-): TextfieldChangeHandler {
+): TextFieldChangeHandler {
 	return useCallback(
 		(_event, newValue) => {
 			const update = cloneDeep(step)
 			const value = transformer(newValue)
 			set(update, path, value)
-			onChange && onChange(update)
+			onChange?.(update)
 		},
 		[step, path, onChange, transformer],
 	)
@@ -101,7 +101,7 @@ export function useHandleSpinButtonChange(
 			const value = transformer(newValue)
 			if (typeof value === 'number') {
 				set(update, path, value)
-				onChange && onChange(update)
+				onChange?.(update)
 			}
 		},
 		[step, path, onChange, transformer],
@@ -126,7 +126,7 @@ export function useHandleCheckboxChange(
 		(_event, checked) => {
 			const update = cloneDeep(step)
 			set(update, path, checked)
-			onChange && onChange(update)
+			onChange?.(update)
 		},
 		[step, path, onChange],
 	)
@@ -135,22 +135,21 @@ export function useHandleCheckboxChange(
 // #endregion
 
 export function useColumnRecordDelete(
-	step: Step,
+	step: Step<InputColumnRecordArgs>,
 	onChange?: StepChangeFunction,
 ): (column: string) => void {
 	return useCallback(
 		column => {
-			const internal = step as Step<InputColumnRecordArgs>
-			const args = { ...internal.args }
+			const args = { ...step.args }
 			delete args.columns[column]
-			onChange &&
-				onChange({
-					...step,
-					args: {
-						...internal.args,
-						...args,
-					},
-				})
+
+			onChange?.({
+				...step,
+				args: {
+					...step.args,
+					...args,
+				},
+			})
 		},
 		[step, onChange],
 	)

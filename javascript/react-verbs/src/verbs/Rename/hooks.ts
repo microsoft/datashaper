@@ -2,80 +2,77 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RenameStep } from '@data-wrangling-components/core'
+import type { Step, RenameArgs } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 
 import type { StepChangeFunction } from '../../types.js'
 
 export function useHandleColumnChange(
-	internal: RenameStep,
+	step: Step<RenameArgs>,
 	onChange?: StepChangeFunction,
 ): (previous: string, oldName: string, newName: string) => void {
 	return useCallback(
 		(previous, oldName, newName) => {
 			const columns = {
-				...internal.args.columns,
+				...step.args.columns,
 			}
 			// this is the previous column mapping - remove it in case we
 			// selected a different one to rename
 			delete columns[previous]
 			columns[oldName] = newName
-			onChange &&
-				onChange({
-					...internal,
-					args: {
-						...internal.args,
-						columns,
-					},
-				})
+			onChange?.({
+				...step,
+				args: {
+					...step.args,
+					columns,
+				},
+			})
 		},
-		[internal, onChange],
+		[step, onChange],
 	)
 }
 
 // find the next column from the table to suggest
-function next(internal: RenameStep, table?: ColumnTable): string | undefined {
+function next(step: Step<RenameArgs>, table?: ColumnTable): string | undefined {
 	return table?.columnNames().find(name => {
-		if (!internal.args.columns) {
+		if (!step.args.columns) {
 			return true
 		}
-		return !internal.args.columns[name]
+		return !step.args.columns[name]
 	})
 }
 
 export function useHandleAddButtonClick(
-	internal: RenameStep,
+	step: Step<RenameArgs>,
 	table?: ColumnTable,
 	onChange?: StepChangeFunction,
 ): () => void {
 	return useCallback(() => {
-		const nextName = next(internal, table)
+		const nextName = next(step, table)
 		if (nextName) {
-			onChange &&
-				onChange({
-					...internal,
-					args: {
-						...internal.args,
-						columns: {
-							...internal.args.columns,
-							[nextName]: nextName,
-						},
+			onChange?.({
+				...step,
+				args: {
+					...step.args,
+					columns: {
+						...step.args.columns,
+						[nextName]: nextName,
 					},
-				})
+				},
+			})
 		}
-	}, [internal, table, onChange])
+	}, [step, table, onChange])
 }
 
 export function useDisabled(
-	internal: RenameStep,
+	step: Step<RenameArgs>,
 	table?: ColumnTable,
 ): boolean {
 	if (!table) {
 		return true
 	}
 	return (
-		table.columnNames().length ===
-		Object.keys(internal.args.columns || {}).length
+		table.columnNames().length === Object.keys(step.args.columns || {}).length
 	)
 }

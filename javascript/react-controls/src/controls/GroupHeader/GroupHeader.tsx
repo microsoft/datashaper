@@ -40,14 +40,14 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 		}, [])
 
 		useEffect(() => {
-			if (inViewport && group?.isCollapsed && onToggleCollapse) {
-				onToggleCollapse(group)
+			if (inViewport && group?.isCollapsed) {
+				onToggleCollapse?.(group)
 			}
 		}, [inViewport, group, onToggleCollapse])
 
 		const onManualLevelToggle = useCallback(() => {
 			setManualToggle(true)
-			onToggleCollapse && onToggleCollapse(group as IGroup)
+			onToggleCollapse?.(group as IGroup)
 		}, [group, onToggleCollapse, setManualToggle])
 
 		const shouldLazyLoad = useMemo((): boolean => {

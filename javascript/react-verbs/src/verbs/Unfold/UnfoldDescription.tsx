@@ -2,17 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { UnfoldStep } from '@data-wrangling-components/core'
+import type { UnfoldArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const UnfoldDescription: React.FC<StepDescriptionProps> = memo(
-	function UnfoldDescription(props) {
+export const UnfoldDescription: React.FC<StepDescriptionProps<UnfoldArgs>> =
+	memo(function UnfoldDescription(props) {
 		const rows = useMemo(() => {
-			const internal = props.step as UnfoldStep
-			const { args } = internal
+			const {
+				step: { args },
+			} = props
 			return [
 				{
 					before: 'column to use as key',
@@ -25,5 +26,4 @@ export const UnfoldDescription: React.FC<StepDescriptionProps> = memo(
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />
-	},
-)
+	})

@@ -70,6 +70,6 @@ function useSearchChange(
 
 function match(item: IContextualMenuItem, find?: string): boolean {
 	const text = item.text ? item.text.toLowerCase() : ''
-	const lower = (find && find.toLowerCase()) || ''
+	const lower = find?.toLowerCase() || ''
 	return text.indexOf(lower) !== -1
 }

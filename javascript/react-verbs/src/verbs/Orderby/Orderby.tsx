@@ -4,7 +4,7 @@
  */
 import type {
 	OrderbyInstruction,
-	OrderbyStep,
+	OrderbyArgs,
 	Step,
 } from '@data-wrangling-components/core'
 import { SortInstruction } from '@data-wrangling-components/react-controls'
@@ -22,47 +22,40 @@ import type { StepComponentProps } from '../../types.js'
 /**
  * Provides inputs for an OrderBy step.
  */
-export const Orderby: React.FC<StepComponentProps> = memo(function Orderby({
-	step,
-	store,
-	table,
-	onChange,
-	input,
-}) {
-	const internal = useMemo(() => step as OrderbyStep, [step])
+export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
+	function Orderby({ step, store, table, onChange, input }) {
+		const tbl = useLoadTable(
+			input || step.input[NodeInput.Source]?.node,
+			table,
+			store,
+		)
 
-	const tbl = useLoadTable(
-		input || step.input[NodeInput.Source]?.node,
-		table,
-		store,
-	)
+		const sorts = useSorts(step, tbl, onChange)
 
-	const sorts = useSorts(internal, tbl, onChange)
-
-	const handleButtonClick = useCallback(() => {
-		onChange &&
-			onChange({
-				...internal,
+		const handleButtonClick = useCallback(() => {
+			onChange?.({
+				...step,
 				args: {
-					...internal.args,
-					orders: [...(internal.args.orders || []), newSort(tbl)],
+					...step.args,
+					orders: [...(step.args.orders || []), newSort(tbl)],
 				},
 			})
-	}, [internal, tbl, onChange])
+		}, [step, tbl, onChange])
 
-	return (
-		<Container>
-			{sorts}
-			<ActionButton
-				onClick={handleButtonClick}
-				iconProps={{ iconName: 'Add' }}
-				disabled={!tbl}
-			>
-				Add sort
-			</ActionButton>
-		</Container>
-	)
-})
+		return (
+			<Container>
+				{sorts}
+				<ActionButton
+					onClick={handleButtonClick}
+					iconProps={{ iconName: 'Add' }}
+					disabled={!tbl}
+				>
+					Add sort
+				</ActionButton>
+			</Container>
+		)
+	},
+)
 
 function newSort(table?: ColumnTable): OrderbyInstruction {
 	const column = table?.columnNames()[0] as string
@@ -74,7 +67,7 @@ function newSort(table?: ColumnTable): OrderbyInstruction {
 }
 
 function useSorts(
-	step: OrderbyStep,
+	step: Step<OrderbyArgs>,
 	table?: ColumnTable,
 	onChange?: (step: Step) => void,
 ) {
@@ -83,13 +76,13 @@ function useSorts(
 			const handleSortChange = (order: OrderbyInstruction) => {
 				const update = { ...step }
 				set(update, `args.orders[${index}]`, order)
-				onChange && onChange(update)
+				onChange?.(update)
 			}
 
 			const handleDeleteClick = () => {
 				const update = { ...step }
 				update.args.orders.splice(index, 1)
-				onChange && onChange(update)
+				onChange?.(update)
 			}
 
 			return (
