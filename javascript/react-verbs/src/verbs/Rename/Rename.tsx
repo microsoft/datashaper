@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, RenameArgs } from '@data-wrangling-components/core'
+import type { RenameArgs,Step } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'

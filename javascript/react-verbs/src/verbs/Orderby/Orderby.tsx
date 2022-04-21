@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	OrderbyInstruction,
 	OrderbyArgs,
+	OrderbyInstruction,
 	Step,
 } from '@data-wrangling-components/core'
 import { SortInstruction } from '@data-wrangling-components/react-controls'

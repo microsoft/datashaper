@@ -5,8 +5,8 @@
 import type { Value } from '@essex/arquero'
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { InputColumnListArgs } from './types.js'
 
+import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
