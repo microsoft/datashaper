@@ -73,7 +73,10 @@ function next(columns: string[]): string {
 	return `New column (${columns.length})`
 }
 
-function useColumns(step: Step<SpreadArgs>, onChange?: (step: Step) => void) {
+function useColumns(
+	step: Step<SpreadArgs>,
+	onChange?: (step: Step<SpreadArgs>) => void,
+) {
 	return useMemo(() => {
 		return (step.args.to || []).map((column: string, index: number) => {
 			const handleColumnChange = (col: string) => {

@@ -100,7 +100,7 @@ function useRightColumn(step: Step<JoinArgs>) {
 
 function useHandleLeftColumnChange(
 	step: Step<JoinArgs>,
-	onChange?: (step: Step) => void,
+	onChange?: (step: Step<JoinArgs>) => void,
 ) {
 	return useCallback(
 		(_e: any, opt: IDropdownOption<any> | undefined) => {
@@ -120,7 +120,7 @@ function useHandleLeftColumnChange(
 
 function useHandleRightColumnChange(
 	step: Step<JoinArgs>,
-	onChange?: (step: Step) => void,
+	onChange?: (step: Step<JoinArgs>) => void,
 ) {
 	return useCallback(
 		(_e: any, opt: IDropdownOption<any> | undefined) => {

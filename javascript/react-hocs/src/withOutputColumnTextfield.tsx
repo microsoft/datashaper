@@ -20,11 +20,13 @@ import type { HOCFunction } from './types.js'
  * @param label - optional label to use for the textfield instead of the default.
  * @returns
  */
-export function withOutputColumnTextfield(
+export function withOutputColumnTextfield<T extends OutputColumnArgs>(
 	label?: string,
-): HOCFunction<StepComponentProps> {
+): HOCFunction<StepComponentProps<T>> {
 	return Component => {
-		const WithOutputColumnTextfield: React.FC<StepComponentProps> = props => {
+		const WithOutputColumnTextfield: React.FC<
+			StepComponentProps<T>
+		> = props => {
 			const { step, onChange } = props
 			const handleToChange = useHandleTextfieldChange(step, 'args.to', onChange)
 			if (!isOutputColumnStep(step)) {

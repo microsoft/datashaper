@@ -10,7 +10,7 @@ import type { StepChangeFunction } from '../../types.js'
 
 export function useHandleColumnChange(
 	step: Step<RenameArgs>,
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<RenameArgs>,
 ): (previous: string, oldName: string, newName: string) => void {
 	return useCallback(
 		(previous, oldName, newName) => {
@@ -46,7 +46,7 @@ function next(step: Step<RenameArgs>, table?: ColumnTable): string | undefined {
 export function useHandleAddButtonClick(
 	step: Step<RenameArgs>,
 	table?: ColumnTable,
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<RenameArgs>,
 ): () => void {
 	return useCallback(() => {
 		const nextName = next(step, table)

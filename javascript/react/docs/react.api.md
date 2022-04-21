@@ -204,7 +204,7 @@ export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'item
 // Warning: (ae-missing-release-tag) "selectStepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function selectStepComponent(step: Step): React.FC<StepComponentProps>;
+export function selectStepComponent(step: Step<unknown>): React.FC<StepComponentProps<unknown>>;
 
 // Warning: (ae-missing-release-tag) "selectStepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

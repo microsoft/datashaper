@@ -69,7 +69,7 @@ function newSort(table?: ColumnTable): OrderbyInstruction {
 function useSorts(
 	step: Step<OrderbyArgs>,
 	table?: ColumnTable,
-	onChange?: (step: Step) => void,
+	onChange?: (step: Step<OrderbyArgs>) => void,
 ) {
 	return useMemo(() => {
 		return (step.args.orders || []).map((order, index) => {

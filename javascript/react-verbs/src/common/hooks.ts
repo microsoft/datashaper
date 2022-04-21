@@ -31,10 +31,10 @@ export type DropdownChangeHandler = (
  * This only handles basic cases where the dropdown option key can be set on the
  * step using an object path.
  */
-export function useHandleDropdownChange(
-	step: Step,
+export function useHandleDropdownChange<T extends object | void | unknown>(
+	step: Step<T>,
 	path: string,
-	onChange: StepChangeFunction = noop,
+	onChange: StepChangeFunction<T> = noop,
 ): DropdownChangeHandler {
 	return useCallback(
 		(_event, option) => {
@@ -55,10 +55,10 @@ export type TextFieldChangeHandler = (
 	newValue?: string,
 ) => void
 
-export function useHandleTextfieldChange(
-	step: Step,
+export function useHandleTextfieldChange<T extends object | void | unknown>(
+	step: Step<T>,
 	path: string,
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<T>,
 	transformer = identity,
 ): TextFieldChangeHandler {
 	return useCallback(
@@ -89,10 +89,10 @@ export type SpinButtonChangeHandler = (
  * @param transformer -
  * @returns
  */
-export function useHandleSpinButtonChange(
-	step: Step,
+export function useHandleSpinButtonChange<T extends object | void | unknown>(
+	step: Step<T>,
 	path: string,
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<T>,
 	transformer = num,
 ): SpinButtonChangeHandler {
 	return useCallback(
@@ -117,10 +117,10 @@ export type CheckboxChangeHandler = (
 	checked?: boolean,
 ) => void
 
-export function useHandleCheckboxChange(
-	step: Step,
+export function useHandleCheckboxChange<T extends object | void | unknown>(
+	step: Step<T>,
 	path: string,
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<T>,
 ): CheckboxChangeHandler {
 	return useCallback(
 		(_event, checked) => {
@@ -136,7 +136,7 @@ export function useHandleCheckboxChange(
 
 export function useColumnRecordDelete(
 	step: Step<InputColumnRecordArgs>,
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<InputColumnRecordArgs>,
 ): (column: string) => void {
 	return useCallback(
 		column => {

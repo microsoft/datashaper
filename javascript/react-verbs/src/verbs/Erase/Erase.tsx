@@ -34,7 +34,7 @@ export const Erase: React.FC<StepComponentProps<EraseArgs>> = memo(
 						label={'Columns to erase'}
 						step={step}
 						store={store}
-						onChange={onChange}
+						onChange={onChange as any}
 					/>
 				</LeftAlignedColumn>
 				<LeftAlignedColumn>

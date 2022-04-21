@@ -293,9 +293,7 @@ export const erase: (id: string) => StepNode<TableContainer<unknown>, EraseArgs>
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface EraseArgs {
-    // (undocumented)
-    columns: string[];
+export interface EraseArgs extends InputColumnListArgs {
     // (undocumented)
     value: Value;
 }
@@ -731,7 +729,7 @@ export function readSpec(spec: SpecificationInput): Step[];
 // Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function readStep<T extends object>({ verb, args, id, input, output }: StepInput<T>, previous?: Step | undefined): Step<T>;
+export function readStep<T extends object | void | unknown = any>({ verb, args, id, input, output }: StepInput<T>, previous?: Step | undefined): Step<T>;
 
 // Warning: (ae-missing-release-tag) "readSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -850,7 +848,7 @@ export interface SpreadArgs {
 // Warning: (ae-missing-release-tag) "Step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface Step<T extends object = any> {
+export interface Step<T extends object | void | unknown = unknown> {
     args: T;
     id: string;
     input: {
@@ -871,7 +869,7 @@ export interface StepCommon {
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepInput<T extends object = any> extends StepCommon {
+export interface StepInput<T extends object | void | unknown = unknown> extends StepCommon {
     args?: T;
     input?: string | ({
         others?: InputSpecification[];

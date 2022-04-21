@@ -15,16 +15,9 @@ import type { StepSubcomponentProps } from '../../../types.js'
 /**
  * Provides inputs for a step that needs lists of columns.
  */
-export const ColumnListInputs: React.FC<
-	StepSubcomponentProps<InputColumnListArgs>
-> = memo(function ColumnListInputs({
-	step,
-	store,
-	table,
-	onChange,
-	input,
-	label,
-}) {
+export const ColumnListInputs = memo(function ColumnListInputs<
+	T extends InputColumnListArgs,
+>({ step, store, table, onChange, input, label }: StepSubcomponentProps<T>) {
 	const tbl = useLoadTable(
 		input || step.input[NodeInput.Source]?.node,
 		table,
@@ -59,7 +52,7 @@ export const ColumnListInputs: React.FC<
 				...step,
 				args: {
 					...step.args,
-					columns: options.map(o => o.key),
+					columns: options.map(o => o.key as string),
 				},
 			})
 		},

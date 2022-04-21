@@ -13,5 +13,5 @@ import { Filter } from '../Filter/Filter.js'
 export const Binarize: React.FC<StepComponentProps> = memo(function Binarize(
 	props,
 ) {
-	return <Filter {...props} />
+	return <Filter {...(props as any)} />
 })

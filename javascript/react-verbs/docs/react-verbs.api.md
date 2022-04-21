@@ -88,7 +88,7 @@ export type CheckboxChangeHandler = (event?: React.FormEvent<HTMLElement | HTMLI
 // Warning: (ae-missing-release-tag) "ColumnListOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const ColumnListOperation: React.FC<StepComponentProps>;
+export const ColumnListOperation: React.FC<StepComponentProps<InputColumnListArgs>>;
 
 // Warning: (ae-missing-release-tag) "ColumnListOperationDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -239,12 +239,12 @@ export const MergeDescription: React.FC<StepDescriptionProps<MergeArgs>>;
 // Warning: (ae-missing-release-tag) "NoParameters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const NoParameters: React.FC<StepComponentProps>;
+export const NoParameters: React.FC<StepComponentProps<void>>;
 
 // Warning: (ae-missing-release-tag) "NoParametersDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const NoParametersDescription: React.FC<StepDescriptionProps>;
+export const NoParametersDescription: React.FC<StepDescriptionProps<void>>;
 
 // Warning: (ae-missing-release-tag) "OneHot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -329,7 +329,7 @@ export const SetOperation: React.FC<StepComponentProps>;
 // Warning: (ae-missing-release-tag) "SetOperationDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const SetOperationDescription: React.FC<StepDescriptionProps>;
+export const SetOperationDescription: React.FC<StepDescriptionProps<void>>;
 
 // Warning: (ae-missing-release-tag) "SpinButtonChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -349,16 +349,16 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>>;
 // Warning: (ae-missing-release-tag) "StepChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepChangeFunction = (step: Step) => void;
+export type StepChangeFunction<T extends object | void | unknown = unknown> = (step: Step<T>) => void;
 
 // Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepComponentProps<T extends object = any> extends StepDependent<T> {
+export interface StepComponentProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
     input?: string;
     label?: string;
     // (undocumented)
-    onChange?: StepChangeFunction;
+    onChange?: StepChangeFunction<T>;
     store?: TableStore;
     table?: ColumnTable;
 }
@@ -366,7 +366,7 @@ export interface StepComponentProps<T extends object = any> extends StepDependen
 // Warning: (ae-missing-release-tag) "StepDependent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepDependent<T extends object = any> {
+export interface StepDependent<T extends object | void | unknown = unknown> {
     // (undocumented)
     step: Step<T>;
 }
@@ -374,7 +374,7 @@ export interface StepDependent<T extends object = any> {
 // Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepDescriptionProps<T extends object = any> extends StepDependent<T> {
+export interface StepDescriptionProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
     // (undocumented)
     actions?: JSX.Element;
     // (undocumented)
@@ -390,7 +390,7 @@ export interface StepDescriptionProps<T extends object = any> extends StepDepend
 // Warning: (ae-missing-release-tag) "StepSubcomponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface StepSubcomponentProps<T extends object = any> extends StepComponentProps<T> {
+export interface StepSubcomponentProps<T extends object | void | unknown = unknown> extends StepComponentProps<T> {
     // (undocumented)
     label?: string;
 }
@@ -413,7 +413,7 @@ export const UnfoldDescription: React.FC<StepDescriptionProps<UnfoldArgs>>;
 // Warning: (ae-missing-release-tag) "useColumnRecordDelete" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useColumnRecordDelete(step: Step<InputColumnRecordArgs>, onChange?: StepChangeFunction): (column: string) => void;
+export function useColumnRecordDelete(step: Step<InputColumnRecordArgs>, onChange?: StepChangeFunction<InputColumnRecordArgs>): (column: string) => void;
 
 // Warning: (ae-missing-release-tag) "useColumnType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -423,22 +423,22 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType;
 // Warning: (ae-missing-release-tag) "useHandleCheckboxChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleCheckboxChange(step: Step, path: string, onChange?: StepChangeFunction): CheckboxChangeHandler;
+export function useHandleCheckboxChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>): CheckboxChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useHandleDropdownChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleDropdownChange(step: Step, path: string, onChange?: StepChangeFunction): DropdownChangeHandler;
+export function useHandleDropdownChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>): DropdownChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useHandleSpinButtonChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleSpinButtonChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: (value?: string | undefined) => number | undefined): SpinButtonChangeHandler;
+export function useHandleSpinButtonChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>, transformer?: (value?: string | undefined) => number | undefined): SpinButtonChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useHandleTextfieldChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleTextfieldChange(step: Step, path: string, onChange?: StepChangeFunction, transformer?: <T>(value?: T | undefined) => T | undefined): TextFieldChangeHandler;
+export function useHandleTextfieldChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>, transformer?: <T_1>(value?: T_1 | undefined) => T_1 | undefined): TextFieldChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -448,7 +448,7 @@ export function useLoadTable(id: string | undefined, table?: ColumnTable, store?
 // Warning: (ae-missing-release-tag) "VerbDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface VerbDescriptionProps<T extends object = any> extends StepDescriptionProps<T> {
+export interface VerbDescriptionProps<T extends object | void | unknown = unknown> extends StepDescriptionProps<T> {
     // (undocumented)
     rows: DescriptionRow[];
 }

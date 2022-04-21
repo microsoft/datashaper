@@ -29,7 +29,7 @@ export function useColumnValues(
 
 export function useHandleRecodeChange(
 	step: Step<RecodeArgs>,
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<RecodeArgs>,
 ): (previous: Value, oldValue: Value, newValue: Value) => void {
 	return useCallback(
 		(previous, oldValue, newValue) => {
@@ -52,7 +52,7 @@ export function useHandleRecodeChange(
 
 export function useRecodeDelete(
 	step: Step<RecodeArgs>,
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<RecodeArgs>,
 ): (value: Value) => void {
 	return useCallback(
 		value => {
@@ -83,7 +83,7 @@ function next(step: Step<RecodeArgs>, values: Value[]): Value | undefined {
 export function useHandleAddButtonClick(
 	step: Step<RecodeArgs>,
 	values: Value[],
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<RecodeArgs>,
 ): () => void {
 	return useCallback(() => {
 		const nextValue = next(step, values)

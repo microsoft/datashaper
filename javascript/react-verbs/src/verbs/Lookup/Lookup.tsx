@@ -23,7 +23,7 @@ export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
 					step={step}
 					store={store}
 					table={table}
-					onChange={onChange}
+					onChange={onChange as any}
 				/>
 				<LeftAlignedColumn>
 					<ColumnListInputs

@@ -34,7 +34,7 @@ export const Impute: React.FC<StepComponentProps<ImputeArgs>> = memo(
 						label={'Columns to impute'}
 						step={step}
 						store={store}
-						onChange={onChange}
+						onChange={onChange as any}
 					/>
 				</LeftAlignedColumn>
 				<LeftAlignedColumn>

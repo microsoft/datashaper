@@ -32,7 +32,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 				...step,
 				args: {
 					...step.args,
-					criteria: [...(step.args.criteria || []), {}],
+					criteria: [...(step.args.criteria || []), {} as Criterion],
 				},
 			})
 		}, [step, onChange])

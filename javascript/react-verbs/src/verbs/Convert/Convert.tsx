@@ -82,7 +82,7 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 						label={'Columns to convert'}
 						step={step}
 						store={store}
-						onChange={onChange}
+						onChange={onChange as any}
 					/>
 				</LeftAlignedColumn>
 				<LeftAlignedColumn>

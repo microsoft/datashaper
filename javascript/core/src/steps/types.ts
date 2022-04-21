@@ -15,7 +15,8 @@ export interface SpecificationInput {
 	steps: StepInput[]
 }
 
-export interface StepInput<T extends object = any> extends StepCommon {
+export interface StepInput<T extends object | void | unknown = unknown>
+	extends StepCommon {
 	/**
 	 * The verb being executed
 	 */
@@ -45,7 +46,7 @@ export interface StepInput<T extends object = any> extends StepCommon {
 	output: string | Record<string, string>
 }
 
-export interface Step<T extends object = any> {
+export interface Step<T extends object | void | unknown = unknown> {
 	/**
 	 * A unique identifier for this step
 	 */

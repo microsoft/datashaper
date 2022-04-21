@@ -10,75 +10,75 @@ import styled from 'styled-components'
 
 import type { DescriptionRow, VerbDescriptionProps } from '../types.js'
 
-export const VerbDescription: React.FC<VerbDescriptionProps> = memo(
-	function VerbDescription({
-		step,
-		rows,
-		showInput,
-		showOutput,
-		showOutputColumn,
-		style,
-	}) {
-		const rws = useMemo(() => {
-			function loop(rows: DescriptionRow[]) {
-				return rows.map((row, index) => (
-					<Row
-						key={`verb-description-row-${row.value}-${index}`}
-						title={row.title}
-					>
-						<KeyValue>
-							{row.before ? <Key>{row.before}</Key> : null}
-							{isNil(row.value) ? (
-								<Unset />
-							) : (
-								<Value title={row.value}>{row.value}</Value>
-							)}
-							{row.after ? <Key>{row.after}</Key> : null}
-						</KeyValue>
-						{row.sub ? loop(row.sub) : null}
-					</Row>
-				))
-			}
-			return loop(rows)
-		}, [rows])
-		const shouldShowOutputColumn = showOutputColumn && isOutputColumnStep(step)
-		const input = step.input[NodeInput.Source]?.node
-		return (
-			<Container style={style}>
-				<Verb>{step.verb}</Verb>
-				{showInput ? (
-					<Row>
-						<KeyValue>
-							<Key>table</Key>
-							{!input ? <Unset /> : <Value>{input}</Value>}
-						</KeyValue>
-					</Row>
-				) : null}
-				{rws}
-				{showOutput ? (
-					<Row>
-						<KeyValue>
-							<Key>into table</Key>
-							{!step.id ? <Unset /> : <Value>{step.id}</Value>}
-						</KeyValue>
-					</Row>
-				) : null}
-				{shouldShowOutputColumn ? (
-					<Row>
-						<KeyValue>
-							<Key>as column</Key>
-							{!(step.args as any).to ? (
-								<Unset />
-							) : (
-								<Value>{(step.args as any).to}</Value>
-							)}
-						</KeyValue>
-					</Row>
-				) : null}
-			</Container>
-		)
-	},
-)
+function VerbDescriptionFn<T extends object | void>({
+	step,
+	rows,
+	showInput,
+	showOutput,
+	showOutputColumn,
+	style,
+}: VerbDescriptionProps<T>) {
+	const rws = useMemo(() => {
+		function loop(rows: DescriptionRow[]) {
+			return rows.map((row, index) => (
+				<Row
+					key={`verb-description-row-${row.value}-${index}`}
+					title={row.title}
+				>
+					<KeyValue>
+						{row.before ? <Key>{row.before}</Key> : null}
+						{isNil(row.value) ? (
+							<Unset />
+						) : (
+							<Value title={row.value}>{row.value}</Value>
+						)}
+						{row.after ? <Key>{row.after}</Key> : null}
+					</KeyValue>
+					{row.sub ? loop(row.sub) : null}
+				</Row>
+			))
+		}
+		return loop(rows)
+	}, [rows])
+	const shouldShowOutputColumn = showOutputColumn && isOutputColumnStep(step)
+	const input = step.input[NodeInput.Source]?.node
+	return (
+		<Container style={style}>
+			<Verb>{step.verb}</Verb>
+			{showInput ? (
+				<Row>
+					<KeyValue>
+						<Key>table</Key>
+						{!input ? <Unset /> : <Value>{input}</Value>}
+					</KeyValue>
+				</Row>
+			) : null}
+			{rws}
+			{showOutput ? (
+				<Row>
+					<KeyValue>
+						<Key>into table</Key>
+						{!step.id ? <Unset /> : <Value>{step.id}</Value>}
+					</KeyValue>
+				</Row>
+			) : null}
+			{shouldShowOutputColumn ? (
+				<Row>
+					<KeyValue>
+						<Key>as column</Key>
+						{!(step.args as any).to ? (
+							<Unset />
+						) : (
+							<Value>{(step.args as any).to}</Value>
+						)}
+					</KeyValue>
+				</Row>
+			) : null}
+		</Container>
+	)
+}
+
+export const VerbDescription = memo(VerbDescriptionFn)
 
 const Container = styled.div`
 	display: flex;
