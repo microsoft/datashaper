@@ -165,7 +165,7 @@ function compareValue(expected: any, actual: any): void {
 		for (let i = 0; i < parsedArray.length; ++i) {
 			compareValue(parsedArray[i], actual[i])
 		}
-	} else if (expected == null && actual == undefined) {
+	} else if (expected == null && actual == null) {
 		// don't sweat null vs undefined
 	} else if (expected === false && actual == null) {
 		// don't sweat nullish values for false

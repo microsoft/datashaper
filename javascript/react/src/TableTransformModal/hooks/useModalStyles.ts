@@ -16,7 +16,7 @@ import { useMemo } from 'react'
 export function useModalStyles(
 	styles?: IStyleFunctionOrObject<IModalStyleProps, IModalStyles>,
 	includeGuidance = false,
-	hasSelectedStep = false,
+	_hasSelectedStep = false,
 ): IStyleFunctionOrObject<IModalStyleProps, IModalStyles> {
 	const theme = useThematic()
 	return useMemo(() => {
@@ -32,5 +32,5 @@ export function useModalStyles(
 			},
 			styles,
 		)
-	}, [theme, styles, includeGuidance, hasSelectedStep])
+	}, [theme, styles, includeGuidance])
 }

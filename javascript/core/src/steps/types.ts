@@ -2,8 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { StepCommon } from '../specification.js'
-import type { InputBinding,InputSpecification } from '../specification.js'
+import type {
+	InputBinding,
+	InputSpecification,
+	StepCommon,
+} from '../specification.js'
 import type {
 	AggregateArgs,
 	BinArgs,
