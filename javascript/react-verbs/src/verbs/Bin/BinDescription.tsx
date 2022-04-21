@@ -24,9 +24,7 @@ export const BinDescription: React.FC<StepDescriptionProps> = memo(
 							value: args.strategy,
 							after: 'strategy',
 							sub:
-								args.strategy &&
-								args.strategy !== BinStrategy.Auto &&
-								args.strategy
+								args.strategy && args.strategy !== BinStrategy.Auto
 									? [
 											{
 												value:
