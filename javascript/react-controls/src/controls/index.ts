@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+export * from './CalendarPicker.js'
 export * from './ColumnarMenu/index.js'
 export * from './ColumnInstruction.js'
 export * from './ColumnOrValueComboBox.js'

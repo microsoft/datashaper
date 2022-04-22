@@ -2,14 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Criterion } from '@data-wrangling-components/core'
+import type {
+	Criterion} from '@data-wrangling-components/core';
 import {
 	BooleanComparisonOperator,
+	DateComparisonOperator,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
 import {
+	CalendarPicker,
 	ColumnOrValueComboBox,
 	EnumDropdown,
 	narrowDropdownStyles,
@@ -56,8 +59,21 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 						operator: opt?.key as
 							| StringComparisonOperator
 							| NumericComparisonOperator
-							| BooleanComparisonOperator,
+							| BooleanComparisonOperator
+							| DateComparisonOperator,
 					})
+			},
+			[criterion, onChange],
+		)
+
+		const onSelectDate = useCallback(
+			(date: Date): void => {
+				const update = {
+					...criterion,
+					type: FilterCompareType.Value,
+					value: date,
+				}
+				onChange && onChange(update)
 			},
 			[criterion, onChange],
 		)
@@ -98,6 +114,10 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					return (
 						<EnumDropdown enumeration={BooleanComparisonOperator} {...shared} />
 					)
+				} else if (type === DataType.Date) {
+					return (
+						<EnumDropdown enumeration={DateComparisonOperator} {...shared} />
+					)
 				}
 			}
 			// map to nicer "math like" terse labels for numeric operations
@@ -132,17 +152,22 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			<Container>
 				<SideBySide>
 					{operatorDropdown}
-					<ColumnOrValueComboBox
-						required={!suppressLabels}
-						table={table}
-						filter={columnFilter}
-						disabled={isEmpty}
-						label={suppressLabels ? undefined : 'Comparison value'}
-						placeholder={placeholder}
-						text={criterion.value ? `${criterion.value}` : undefined}
-						onChange={handleComboBoxChange}
-						styles={narrowDropdownStyles}
-					/>
+					{type === DataType.Date ? (
+						<CalendarPicker onSelectDate={onSelectDate}></CalendarPicker>
+					) : (
+						<ColumnOrValueComboBox
+							required={!suppressLabels}
+							table={table}
+							filter={columnFilter}
+							disabled={isEmpty}
+							label={suppressLabels ? undefined : 'Comparison value'}
+							placeholder={placeholder}
+							text={criterion.value ? `${criterion.value}` : undefined}
+							onChange={handleComboBoxChange}
+							styles={narrowDropdownStyles}
+						/>
+					)}
+
 					<IconButton
 						title={'Remove this criterion'}
 						iconProps={{ iconName: 'Delete' }}
