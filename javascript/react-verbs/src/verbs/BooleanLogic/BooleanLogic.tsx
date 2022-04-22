@@ -15,8 +15,8 @@ import styled from 'styled-components'
 
 import { useHandleDropdownChange } from '../../common/hooks.js'
 import { LeftAlignedRow } from '../../common/index.js'
-import type { StepComponentProps } from '../../types.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
+import type { StepComponentProps } from '../../types.js'
 /**
  * Inputs to combine column using boolean logic.
  */

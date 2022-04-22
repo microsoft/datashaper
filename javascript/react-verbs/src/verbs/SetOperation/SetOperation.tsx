@@ -9,8 +9,8 @@ import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { LeftAlignedRow } from '../../common/index.js'
-import type { StepComponentProps } from '../../types.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs to create a list of tables.

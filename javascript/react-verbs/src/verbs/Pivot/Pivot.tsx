@@ -12,8 +12,8 @@ import { memo } from 'react'
 import styled from 'styled-components'
 
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
-import type { StepComponentProps } from '../../types.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
+import type { StepComponentProps } from '../../types.js'
 /**
  * Just the group/column/op inputs for an aggregation.
  * Input table is expected to be edited elsewhere and configured as the step input.

@@ -7,6 +7,7 @@ import { MultiDropdown } from '@data-wrangling-components/react-controls'
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+
 import { withLoadedTable } from '../../../common/withLoadedTable.js'
 
 /**

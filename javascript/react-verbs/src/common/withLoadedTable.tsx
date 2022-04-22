@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { NodeInput } from '@essex/dataflow'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+
 import type { StepComponentProps } from '../types.js'
 import { useLoadTable } from './hooks.js'
-import { NodeInput } from '@essex/dataflow'
-import type React from 'react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export function withLoadedTable<T>(
 	StepComponent: React.ComponentType<
@@ -16,7 +16,7 @@ export function withLoadedTable<T>(
 		}
 	>,
 ) {
-	return function LoadedTable(props: StepComponentProps<T>) {
+	return function LoadedTable(props: StepComponentProps<T>): JSX.Element {
 		const { step, table, store, input } = props
 		const dataTable = useLoadTable(
 			input || step.input[NodeInput.Source]?.node,

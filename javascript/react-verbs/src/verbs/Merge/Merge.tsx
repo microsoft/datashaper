@@ -15,8 +15,8 @@ import styled from 'styled-components'
 
 import { useHandleDropdownChange } from '../../common/hooks.js'
 import { LeftAlignedRow, useHandleTextFieldChange } from '../../common/index.js'
-import type { StepComponentProps } from '../../types.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Just the to/value inputs for an impute.

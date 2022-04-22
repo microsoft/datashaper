@@ -22,10 +22,10 @@ import {
 	useHandleTextFieldChange,
 } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
 import { getColumnType } from '../shared/TypingFunction/TypingFunction.js'
-import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a Convert step.

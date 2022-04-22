@@ -13,6 +13,7 @@ import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useColumnType } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import {
 	useColumnValues,
@@ -21,7 +22,6 @@ import {
 	useHandleRecodeChange,
 	useRecodeDelete,
 } from './hooks.js'
-import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a RecodeStep.

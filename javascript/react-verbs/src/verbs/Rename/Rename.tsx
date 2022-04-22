@@ -17,13 +17,13 @@ import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useColumnRecordDelete } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import {
 	useDisabled,
 	useHandleAddButtonClick,
 	useHandleColumnChange,
 } from './hooks.js'
-import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a RenameStep.

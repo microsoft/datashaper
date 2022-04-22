@@ -12,9 +12,9 @@ import styled from 'styled-components'
 
 import { useHandleDropdownChange } from '../../common/hooks.js'
 import { LeftAlignedRow } from '../../common/styles.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import { FilterFunction } from '../shared/index.js'
-import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a Filter step.

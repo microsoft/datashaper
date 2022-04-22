@@ -10,6 +10,7 @@ import {
 } from '@data-wrangling-components/react-controls'
 import { memo } from 'react'
 import styled from 'styled-components'
+
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 
