@@ -11,8 +11,6 @@ export function useHandleRunClick(
 	onTransformRequested?: (step: Step) => void,
 ): () => void {
 	return useCallback(() => {
-		if (step) {
-			onTransformRequested?.(step)
-		}
+		step && onTransformRequested?.(step)
 	}, [onTransformRequested, step])
 }
