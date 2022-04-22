@@ -85,7 +85,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			if (!first) return
 			updateFileCollection([first])
 			const spec = await loadSpec(first)
-			onSelectSpecification?.(spec as any)
+			onSelectSpecification?.(spec as Specification)
 		},
 		[onSelectSpecification, loadSpec, updateFileCollection],
 	)
