@@ -8,6 +8,7 @@ import { format } from 'd3-format'
 import { memo } from 'react'
 import styled from 'styled-components'
 
+import { num } from '@data-wrangling-components/primitives'
 import {
 	LeftAlignedRow,
 	useHandleSpinButtonChange,
@@ -23,19 +24,16 @@ export const Sample: React.FC<StepComponentProps<SampleArgs>> = memo(
 	function Sample({ step, onChange }) {
 		const handleSizeChange = useHandleSpinButtonChange(
 			step,
-			'args.size',
+			(s, val) => (s.args.size = num(val)),
 			onChange,
 		)
 
 		const handlePercentChange = useHandleSpinButtonChange(
 			step,
-			'args.proportion',
-			onChange,
-			(val: string | undefined) => {
-				if (val != null) {
-					return +val / 100
-				}
+			(s, val) => {
+				s.args.proportion = val != null ? +val / 100 : undefined
 			},
+			onChange,
 		)
 
 		return (

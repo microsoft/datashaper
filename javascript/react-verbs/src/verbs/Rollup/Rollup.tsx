@@ -18,7 +18,7 @@ export const Rollup: React.FC<StepComponentProps<RollupArgs>> = memo(
 	function Rollup({ step, onChange }) {
 		const handleOpChange = useHandleDropdownChange(
 			step,
-			'args.operation',
+			(s, val) => (s.args.operation = val as FieldAggregateOperation),
 			onChange,
 		)
 

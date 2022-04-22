@@ -15,22 +15,28 @@ import {
 import { LeftAlignedRow } from '../../common/styles.js'
 import type { StepComponentProps } from '../../types'
 
+import { num } from '@data-wrangling-components/primitives'
+
 /**
  * Provides inputs for a Fetch step.
  */
 export const Fetch: React.FC<StepComponentProps<FetchArgs>> = memo(
 	function Fetch({ step, onChange }) {
-		const handleUrlChange = useHandleTextFieldChange(step, 'args.url', onChange)
+		const handleUrlChange = useHandleTextFieldChange(
+			step,
+			(s, val) => (s.args.url = val as string),
+			onChange,
+		)
 
 		const handleDelimiterChange = useHandleTextFieldChange(
 			step,
-			'args.delimiter',
+			(s, val) => (s.args.delimiter = val),
 			onChange,
 		)
 
 		const handleAutoMaxChange = useHandleSpinButtonChange(
 			step,
-			'args.autoMax',
+			(s, val) => (s.args.autoMax = num(val)),
 			onChange,
 		)
 

@@ -23,7 +23,7 @@ export const Impute: React.FC<StepComponentProps<ImputeArgs>> = memo(
 	function Impute({ step, store, onChange }) {
 		const handleValueChange = useHandleTextFieldChange(
 			step,
-			'args.value',
+			(s, val) => (s.args.value = val),
 			onChange,
 		)
 

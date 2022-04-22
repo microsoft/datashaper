@@ -16,7 +16,7 @@ import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
-
+import { num } from '@data-wrangling-components/primitives'
 import {
 	useHandleDropdownChange,
 	useHandleTextFieldChange,
@@ -26,6 +26,7 @@ import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
 import { getColumnType } from '../shared/TypingFunction/TypingFunction.js'
+import { produce } from 'immer'
 
 /**
  * Provides inputs for a Convert step.
@@ -36,13 +37,13 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 
 		const handleTypeChange = useHandleDropdownChange(
 			step,
-			'args.type',
+			(s, opt) => (s.args.type = opt as ParseType),
 			onChange,
 		)
 
 		const handleRadixChange = useHandleTextFieldChange(
 			step,
-			'args.radix',
+			(s, opt) => (s.args.radix = num(opt)),
 			onChange,
 		)
 
@@ -55,7 +56,11 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 			) => {
 				const update = cloneDeep(step)
 				set(update, 'args.formatPattern', option ? option.key : value)
-				onChange?.(update)
+				onChange?.(
+					produce(step, draft => {
+						draft.args.formatPattern = option ? (option.key as string) : value
+					}),
+				)
 			},
 			[step, onChange],
 		)

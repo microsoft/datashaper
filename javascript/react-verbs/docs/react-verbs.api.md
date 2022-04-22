@@ -424,22 +424,22 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType;
 // Warning: (ae-missing-release-tag) "useHandleCheckboxChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleCheckboxChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>): CheckboxChangeHandler;
+export function useHandleCheckboxChange<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: boolean | undefined) => void, onChange?: StepChangeFunction<T>): CheckboxChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useHandleDropdownChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleDropdownChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>): DropdownChangeHandler;
+export function useHandleDropdownChange<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, optionKey: string | number | undefined) => void, onChange?: StepChangeFunction<T>): DropdownChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useHandleSpinButtonChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleSpinButtonChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>, transformer?: (value?: string | undefined) => number | undefined): SpinButtonChangeHandler;
+export function useHandleSpinButtonChange<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: string | undefined) => void, onChange?: StepChangeFunction<T>): SpinButtonChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useHandleTextFieldChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleTextFieldChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>, transformer?: <T_1>(value?: T_1 | undefined) => T_1 | undefined): TextFieldChangeHandler;
+export function useHandleTextFieldChange<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, updated: string | undefined) => void, onChange?: StepChangeFunction<T>): TextFieldChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

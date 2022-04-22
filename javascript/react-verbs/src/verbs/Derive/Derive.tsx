@@ -22,17 +22,17 @@ export const Derive: React.FC<StepComponentProps<DeriveArgs>> = memo(
 	withLoadedTable(function Derive({ step, onChange, dataTable }) {
 		const handleLeftColumnChange = useHandleDropdownChange(
 			step,
-			'args.column1',
+			(s, val) => (s.args.column1 = val as string),
 			onChange,
 		)
 		const handleRightColumnChange = useHandleDropdownChange(
 			step,
-			'args.column2',
+			(s, val) => (s.args.column2 = val as string),
 			onChange,
 		)
 		const handleOpChange = useHandleDropdownChange(
 			step,
-			'args.operator',
+			(s, val) => (s.args.operator = val as MathOperator),
 			onChange,
 		)
 

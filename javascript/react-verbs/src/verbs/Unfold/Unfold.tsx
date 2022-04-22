@@ -19,13 +19,13 @@ export const Unfold: React.FC<StepComponentProps<PivotArgs>> = memo(
 	withLoadedTable(function Unfold({ step, onChange, dataTable }) {
 		const handleKeyColumnChange = useHandleDropdownChange(
 			step,
-			'args.key',
+			(s, val) => (s.args.key = val as string),
 			onChange,
 		)
 
 		const handleValueColumnChange = useHandleDropdownChange(
 			step,
-			'args.value',
+			(s, val) => (s.args.value = val as string),
 			onChange,
 		)
 

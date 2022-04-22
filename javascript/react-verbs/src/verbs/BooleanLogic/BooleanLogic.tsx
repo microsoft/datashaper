@@ -50,7 +50,7 @@ export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
 
 		const handleOpChange = useHandleDropdownChange(
 			step,
-			'args.operator',
+			(s, opt) => (s.args.operator = opt as BooleanOperator),
 			onChange,
 		)
 

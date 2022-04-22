@@ -22,8 +22,16 @@ export const Fold: React.FC<StepComponentProps<FoldArgs>> = memo(function Fold({
 	onChange,
 	input,
 }) {
-	const handleToChange = useHandleTextFieldChange(step, 'args.to[0]', onChange)
-	const handleToChange2 = useHandleTextFieldChange(step, 'args.to[1]', onChange)
+	const handleToChange = useHandleTextFieldChange(
+		step,
+		(s, val) => (s.args.to![0] = val as string),
+		onChange,
+	)
+	const handleToChange2 = useHandleTextFieldChange(
+		step,
+		(s, val) => (s.args.to![1] = val as string),
+		onChange,
+	)
 
 	return (
 		<Container>

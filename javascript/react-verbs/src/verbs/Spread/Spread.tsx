@@ -35,7 +35,7 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 
 		const handleColumnChange = useHandleDropdownChange(
 			step,
-			'args.column',
+			(s, val) => (s.args.column = val as string),
 			onChange,
 		)
 

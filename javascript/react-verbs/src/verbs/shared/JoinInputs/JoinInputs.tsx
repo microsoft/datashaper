@@ -40,7 +40,7 @@ export const JoinInputs: React.FC<StepComponentProps<JoinArgs>> = memo(
 
 		const handleRightTableChange = useHandleDropdownChange(
 			step,
-			'args.other',
+			(s, val) => (s.input[NodeInput.Other]!.node = val as string),
 			onChange,
 		)
 
