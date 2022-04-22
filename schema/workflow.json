@@ -200,6 +200,8 @@
                         "=",
                         ">",
                         ">=",
+                        "after",
+                        "before",
                         "contains",
                         "ends with",
                         "equals",
