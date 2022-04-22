@@ -4,6 +4,7 @@
  */
 import type { ConvertArgs } from '@data-wrangling-components/core'
 import { ParseType } from '@data-wrangling-components/core'
+import { num } from '@data-wrangling-components/primitives'
 import {
 	DateFormatPatternCombobox,
 	dropdownStyles,
@@ -12,11 +13,12 @@ import {
 import { DataType } from '@essex/arquero'
 import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
+import { produce } from 'immer'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { num } from '@data-wrangling-components/primitives'
+
 import {
 	useHandleDropdownChange,
 	useHandleTextFieldChange,
@@ -26,7 +28,6 @@ import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
 import { getColumnType } from '../shared/TypingFunction/TypingFunction.js'
-import { produce } from 'immer'
 
 /**
  * Provides inputs for a Convert step.

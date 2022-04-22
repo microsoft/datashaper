@@ -11,8 +11,8 @@ import type { TableContainer } from '@essex/arquero'
 import { columnType, DataType } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useCallback, useEffect, useMemo, useState } from 'react'
 import { produce } from 'immer'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import type { StepChangeFunction } from '../types.js'
 
@@ -91,7 +91,7 @@ export function useHandleSpinButtonChange<T extends object | void | unknown>(
 		(_event, newValue) => {
 			onChange?.(produce(step, draft => updateFn(draft as Step<T>, newValue)))
 		},
-		[step, onChange],
+		[step, onChange, updateFn],
 	)
 }
 

@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { FetchArgs } from '@data-wrangling-components/core'
+import { num } from '@data-wrangling-components/primitives'
 import { dropdownStyles } from '@data-wrangling-components/react-controls'
 import { Position, SpinButton, TextField } from '@fluentui/react'
 import { memo } from 'react'
@@ -14,8 +15,6 @@ import {
 } from '../../common/hooks.js'
 import { LeftAlignedRow } from '../../common/styles.js'
 import type { StepComponentProps } from '../../types'
-
-import { num } from '@data-wrangling-components/primitives'
 
 /**
  * Provides inputs for a Fetch step.

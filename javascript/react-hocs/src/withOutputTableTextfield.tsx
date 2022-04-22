@@ -8,10 +8,11 @@ import {
 	LeftAlignedRow,
 	useHandleTextFieldChange,
 } from '@data-wrangling-components/react-verbs'
+import { NodeOutput } from '@essex/dataflow'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
-import { NodeOutput } from '@essex/dataflow'
+
 import type { HOCFunction } from './types.js'
 
 /**

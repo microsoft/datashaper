@@ -4,6 +4,7 @@
  */
 import type { BinArgs } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
+import { num } from '@data-wrangling-components/primitives'
 import {
 	EnumDropdown,
 	narrowDropdownStyles,
@@ -24,7 +25,6 @@ import {
 	useHandleSpinButtonChange,
 } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
-import { num } from '@data-wrangling-components/primitives'
 
 /**
  * Provides inputs for a binning step.
