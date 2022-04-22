@@ -7,7 +7,7 @@ import type {
 	Step,
 	TableStore,
 } from '@data-wrangling-components/core'
-import { identity, noop, num } from '@data-wrangling-components/primitives'
+import { identity, num } from '@data-wrangling-components/primitives'
 import type { TableContainer } from '@essex/arquero'
 import { columnType, DataType } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
@@ -33,13 +33,13 @@ export type DropdownChangeHandler = (
 export function useHandleDropdownChange<T extends object | void | unknown>(
 	step: Step<T>,
 	path: string,
-	onChange: StepChangeFunction<T> = noop,
+	onChange?: StepChangeFunction<T>,
 ): DropdownChangeHandler {
 	return useCallback(
 		(_event, option) => {
 			const update = cloneDeep(step)
 			set(update, path, option?.key)
-			onChange(update)
+			onChange?.(update)
 		},
 		[step, path, onChange],
 	)
