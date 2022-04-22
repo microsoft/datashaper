@@ -1,5 +1,6 @@
 releases:
   "@data-wrangling-components/core": patch
+  "@data-wrangling-components/primitives": major
   "@data-wrangling-components/react": patch
   "@data-wrangling-components/react-controls": patch
   "@data-wrangling-components/react-hocs": patch
