@@ -8,6 +8,7 @@ import {
 	LeftAlignedRow,
 	useHandleTextFieldChange,
 } from '@data-wrangling-components/react-verbs'
+import { NodeOutput } from '@essex/dataflow'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -28,7 +29,7 @@ export const withOutputTableTextfield = (
 			const { step, onChange } = props
 			const handleOutputChange = useHandleTextFieldChange(
 				step,
-				'output',
+				(s, val) => (s.output = { [NodeOutput.Target]: val as string }),
 				onChange,
 			)
 

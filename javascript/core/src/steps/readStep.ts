@@ -193,6 +193,6 @@ function fixOutputs(outputs: StepInput['output']): Step['output'] {
 	if (typeof outputs === 'string') {
 		return { target: outputs }
 	} else {
-		return outputs as Record<string, string>
+		return (outputs || {}) as Record<string, string>
 	}
 }

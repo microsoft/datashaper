@@ -4,6 +4,7 @@
  */
 import type { ConvertArgs } from '@data-wrangling-components/core'
 import { ParseType } from '@data-wrangling-components/core'
+import { num } from '@data-wrangling-components/primitives'
 import {
 	DateFormatPatternCombobox,
 	dropdownStyles,
@@ -12,6 +13,7 @@ import {
 import { DataType } from '@essex/arquero'
 import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
+import { produce } from 'immer'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useEffect, useState } from 'react'
@@ -36,13 +38,13 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 
 		const handleTypeChange = useHandleDropdownChange(
 			step,
-			'args.type',
+			(s, opt) => (s.args.type = opt as ParseType),
 			onChange,
 		)
 
 		const handleRadixChange = useHandleTextFieldChange(
 			step,
-			'args.radix',
+			(s, opt) => (s.args.radix = num(opt)),
 			onChange,
 		)
 
@@ -55,7 +57,11 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 			) => {
 				const update = cloneDeep(step)
 				set(update, 'args.formatPattern', option ? option.key : value)
-				onChange?.(update)
+				onChange?.(
+					produce(step, draft => {
+						draft.args.formatPattern = option ? (option.key as string) : value
+					}),
+				)
 			},
 			[step, onChange],
 		)

@@ -48,13 +48,13 @@ export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
 
 		const handleOpChange = useHandleDropdownChange(
 			step,
-			'args.strategy',
+			(s, val) => (s.args.strategy = val as MergeStrategy),
 			onChange,
 		)
 
 		const handleDelimiterChange = useHandleTextFieldChange(
 			step,
-			'args.delimiter',
+			(s, val) => (s.args.delimiter = val),
 			onChange,
 		)
 

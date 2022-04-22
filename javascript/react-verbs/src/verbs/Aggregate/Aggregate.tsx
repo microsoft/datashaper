@@ -26,13 +26,13 @@ export const Aggregate = memo(
 	}) {
 		const handleGroupColumnChange = useHandleDropdownChange(
 			step,
-			'args.groupby',
+			(s, key) => (s.args.groupby = key as string),
 			onChange,
 		)
 
 		const handleOpChange = useHandleDropdownChange(
 			step,
-			'args.operation',
+			(s, key) => (s.args.operation = key as FieldAggregateOperation),
 			onChange,
 		)
 

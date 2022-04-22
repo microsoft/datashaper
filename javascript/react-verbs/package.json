@@ -42,6 +42,7 @@
 		"@essex/dataflow": "^0.1.0",
 		"@essex/themed-components": "^2.2.3",
 		"d3-format": "^3.1.0",
+		"immer": "^9.0.12",
 		"lodash-es": "^4.17.21",
 		"markdown-to-jsx": "^7.1.7",
 		"react-dropzone": "^12.0.5",

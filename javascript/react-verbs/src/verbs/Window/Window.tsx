@@ -18,7 +18,7 @@ export const Window: React.FC<StepComponentProps<WindowArgs>> = memo(
 	function Window({ step, onChange }) {
 		const handleOpChange = useHandleDropdownChange(
 			step,
-			'args.operation',
+			(s, val) => (s.args.operation = val as WindowFunction),
 			onChange,
 		)
 

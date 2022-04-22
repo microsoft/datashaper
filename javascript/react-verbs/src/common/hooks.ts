@@ -7,13 +7,11 @@ import type {
 	Step,
 	TableStore,
 } from '@data-wrangling-components/core'
-import { identity, num } from '@data-wrangling-components/primitives'
 import type { TableContainer } from '@essex/arquero'
 import { columnType, DataType } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import cloneDeep from 'lodash-es/cloneDeep.js'
-import set from 'lodash-es/set.js'
+import { produce } from 'immer'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import type { StepChangeFunction } from '../types.js'
@@ -33,16 +31,16 @@ export type DropdownChangeHandler = (
  */
 export function useHandleDropdownChange<T extends object | void | unknown>(
 	step: Step<T>,
-	path: string,
+	updateFn: (step: Step<T>, optionKey: string | number | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): DropdownChangeHandler {
 	return useCallback(
 		(_event, option) => {
-			const update = cloneDeep(step)
-			set(update, path, option?.key)
-			onChange?.(update)
+			onChange?.(
+				produce(step, draft => updateFn(draft as Step<T>, option?.key)),
+			)
 		},
-		[step, path, onChange],
+		[step, onChange, updateFn],
 	)
 }
 
@@ -57,18 +55,14 @@ export type TextFieldChangeHandler = (
 
 export function useHandleTextFieldChange<T extends object | void | unknown>(
 	step: Step<T>,
-	path: string,
+	updateFn: (step: Step<T>, updated: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
-	transformer = identity,
 ): TextFieldChangeHandler {
 	return useCallback(
 		(_event, newValue) => {
-			const update = cloneDeep(step)
-			const value = transformer(newValue)
-			set(update, path, value)
-			onChange?.(update)
+			onChange?.(produce(step, draft => updateFn(draft as Step<T>, newValue)))
 		},
-		[step, path, onChange, transformer],
+		[step, updateFn, onChange],
 	)
 }
 
@@ -83,28 +77,21 @@ export type SpinButtonChangeHandler = (
 
 /**
  * Enforces numeric values for a SpinButton onChange.
- * @param step -
- * @param path -
- * @param onChange -
- * @param transformer -
+ * @param step - the step object
+ * @param updateFn - the update function
+ * @param onChange -the onchange handler
  * @returns
  */
 export function useHandleSpinButtonChange<T extends object | void | unknown>(
 	step: Step<T>,
-	path: string,
+	updateFn: (step: Step<T>, newValue: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
-	transformer = num,
 ): SpinButtonChangeHandler {
 	return useCallback(
 		(_event, newValue) => {
-			const update = cloneDeep(step)
-			const value = transformer(newValue)
-			if (typeof value === 'number') {
-				set(update, path, value)
-				onChange?.(update)
-			}
+			onChange?.(produce(step, draft => updateFn(draft as Step<T>, newValue)))
 		},
-		[step, path, onChange, transformer],
+		[step, onChange, updateFn],
 	)
 }
 
@@ -119,16 +106,14 @@ export type CheckboxChangeHandler = (
 
 export function useHandleCheckboxChange<T extends object | void | unknown>(
 	step: Step<T>,
-	path: string,
+	updateFn: (step: Step<T>, newValue: boolean | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): CheckboxChangeHandler {
 	return useCallback(
 		(_event, checked) => {
-			const update = cloneDeep(step)
-			set(update, path, checked)
-			onChange?.(update)
+			onChange?.(produce(step, draft => updateFn(draft as Step<T>, checked)))
 		},
-		[step, path, onChange],
+		[step, updateFn, onChange],
 	)
 }
 

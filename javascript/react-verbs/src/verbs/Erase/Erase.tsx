@@ -23,7 +23,7 @@ export const Erase: React.FC<StepComponentProps<EraseArgs>> = memo(
 	function Erase({ step, store, onChange }) {
 		const handleValueChange = useHandleTextFieldChange(
 			step,
-			'args.value',
+			(s, val) => (s.args.value = val),
 			onChange,
 		)
 

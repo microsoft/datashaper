@@ -18,7 +18,7 @@ export const OneHot: React.FC<StepComponentProps<OnehotArgs>> = memo(
 	function OneHot({ step, onChange }) {
 		const handlePrefixChange = useHandleTextFieldChange(
 			step,
-			'args.prefix',
+			(s, val) => (s.args.prefix = val),
 			onChange,
 		)
 

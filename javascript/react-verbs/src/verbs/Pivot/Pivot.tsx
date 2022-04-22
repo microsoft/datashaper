@@ -14,6 +14,7 @@ import styled from 'styled-components'
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
+
 /**
  * Just the group/column/op inputs for an aggregation.
  * Input table is expected to be edited elsewhere and configured as the step input.
@@ -22,19 +23,19 @@ export const Pivot: React.FC<StepComponentProps<PivotArgs>> = memo(
 	withLoadedTable(function Pivot({ step, onChange, dataTable }) {
 		const handleKeyColumnChange = useHandleDropdownChange(
 			step,
-			'args.key',
+			(s, val) => (s.args.key = val as string),
 			onChange,
 		)
 
 		const handleValueColumnChange = useHandleDropdownChange(
 			step,
-			'args.value',
+			(s, val) => (s.args.value = val as string),
 			onChange,
 		)
 
 		const handleOpChange = useHandleDropdownChange(
 			step,
-			'args.operation',
+			(s, val) => (s.args.operation = val as FieldAggregateOperation),
 			onChange,
 		)
 

@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { SampleArgs } from '@data-wrangling-components/core'
+import { num } from '@data-wrangling-components/primitives'
 import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
 import { memo } from 'react'
@@ -23,19 +24,16 @@ export const Sample: React.FC<StepComponentProps<SampleArgs>> = memo(
 	function Sample({ step, onChange }) {
 		const handleSizeChange = useHandleSpinButtonChange(
 			step,
-			'args.size',
+			(s, val) => (s.args.size = num(val)),
 			onChange,
 		)
 
 		const handlePercentChange = useHandleSpinButtonChange(
 			step,
-			'args.proportion',
-			onChange,
-			(val: string | undefined) => {
-				if (val != null) {
-					return +val / 100
-				}
+			(s, val) => {
+				s.args.proportion = val != null ? +val / 100 : undefined
 			},
+			onChange,
 		)
 
 		return (

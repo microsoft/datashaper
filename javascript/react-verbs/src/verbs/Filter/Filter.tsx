@@ -52,7 +52,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 
 		const handleLogicalChange = useHandleDropdownChange(
 			step,
-			'args.logical',
+			(s, val) => (s.args.logical = val as BooleanOperator),
 			onChange,
 		)
 		const filters = useFilters(

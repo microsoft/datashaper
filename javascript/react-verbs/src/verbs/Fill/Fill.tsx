@@ -20,7 +20,7 @@ export const Fill: React.FC<StepComponentProps<FillArgs>> = memo(function Fill({
 }) {
 	const handleValueChange = useHandleTextFieldChange(
 		step,
-		'args.value',
+		(s, val) => (s.args.value = val),
 		onChange,
 	)
 

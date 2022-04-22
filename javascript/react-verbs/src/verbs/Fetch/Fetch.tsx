@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { FetchArgs } from '@data-wrangling-components/core'
+import { num } from '@data-wrangling-components/primitives'
 import { dropdownStyles } from '@data-wrangling-components/react-controls'
 import { Position, SpinButton, TextField } from '@fluentui/react'
 import { memo } from 'react'
@@ -20,17 +21,21 @@ import type { StepComponentProps } from '../../types'
  */
 export const Fetch: React.FC<StepComponentProps<FetchArgs>> = memo(
 	function Fetch({ step, onChange }) {
-		const handleUrlChange = useHandleTextFieldChange(step, 'args.url', onChange)
+		const handleUrlChange = useHandleTextFieldChange(
+			step,
+			(s, val) => (s.args.url = val as string),
+			onChange,
+		)
 
 		const handleDelimiterChange = useHandleTextFieldChange(
 			step,
-			'args.delimiter',
+			(s, val) => (s.args.delimiter = val),
 			onChange,
 		)
 
 		const handleAutoMaxChange = useHandleSpinButtonChange(
 			step,
-			'args.autoMax',
+			(s, val) => (s.args.autoMax = num(val)),
 			onChange,
 		)
 

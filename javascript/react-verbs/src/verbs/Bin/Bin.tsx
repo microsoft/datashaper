@@ -4,6 +4,7 @@
  */
 import type { BinArgs } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
+import { num } from '@data-wrangling-components/primitives'
 import {
 	EnumDropdown,
 	narrowDropdownStyles,
@@ -34,24 +35,32 @@ export const Bin: React.FC<StepComponentProps<BinArgs>> = memo(function Bin({
 }) {
 	const handleBinStrategyChange = useHandleDropdownChange(
 		step,
-		'args.strategy',
+		(s, opt) => (s.args.strategy = opt as BinStrategy),
 		onChange,
 	)
 	const handleBinCountChange = useHandleSpinButtonChange(
 		step,
-		'args.fixedcount',
+		(s, opt) => (s.args.fixedcount = num(opt)),
 		onChange,
 	)
 	const handleBinSizeChange = useHandleSpinButtonChange(
 		step,
-		'args.fixedwidth',
+		(s, opt) => (s.args.fixedwidth = num(opt)),
 		onChange,
 	)
-	const handleMinChange = useHandleSpinButtonChange(step, 'args.min', onChange)
-	const handleMaxChange = useHandleSpinButtonChange(step, 'args.max', onChange)
+	const handleMinChange = useHandleSpinButtonChange(
+		step,
+		(s, opt) => (s.args.min = num(opt)),
+		onChange,
+	)
+	const handleMaxChange = useHandleSpinButtonChange(
+		step,
+		(s, opt) => (s.args.max = num(opt)),
+		onChange,
+	)
 	const handleClampChange = useHandleCheckboxChange(
 		step,
-		'args.clamped',
+		(s, opt) => (s.args.clamped = opt),
 		onChange,
 	)
 

@@ -27,7 +27,7 @@ export const Join: React.FC<StepComponentProps<JoinArgs>> = memo(function Join({
 }) {
 	const handleJoinStrategyChange = useHandleDropdownChange(
 		step,
-		'args.strategy',
+		(s, val) => (s.args.strategy = val as JoinStrategy),
 		onChange,
 	)
 
