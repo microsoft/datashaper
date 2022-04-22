@@ -28,8 +28,6 @@ export const ColumnSpread: React.FC<ColumnSpreadProps> = memo(
 			[onChange],
 		)
 
-		const handleDeleteClick = useCallback(() => onDelete?.(), [onDelete])
-
 		return (
 			<Container>
 				<TextField
@@ -40,7 +38,7 @@ export const ColumnSpread: React.FC<ColumnSpreadProps> = memo(
 				<IconButton
 					title={'Remove this column'}
 					iconProps={{ iconName: 'Delete' }}
-					onClick={handleDeleteClick}
+					onClick={onDelete}
 				/>
 			</Container>
 		)
