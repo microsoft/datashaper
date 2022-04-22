@@ -10,7 +10,6 @@ import {
 	EnumDropdown,
 } from '@data-wrangling-components/react-controls'
 import { DataType } from '@essex/arquero'
-import { NodeInput } from '@essex/dataflow'
 import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
 import cloneDeep from 'lodash-es/cloneDeep.js'
@@ -21,23 +20,18 @@ import styled from 'styled-components'
 import {
 	useHandleDropdownChange,
 	useHandleTextFieldChange,
-	useLoadTable,
 } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
 import { getColumnType } from '../shared/TypingFunction/TypingFunction.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a Convert step.
  */
 export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
-	function Convert({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
+	withLoadedTable(function Convert({ step, store, onChange, dataTable }) {
 		const [inputColumnDate, setInputColumnDate] = useState<boolean>()
 
 		const handleTypeChange = useHandleDropdownChange(
@@ -69,11 +63,11 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 		useEffect(() => {
 			setInputColumnDate(false)
 			step.args.columns.forEach(column => {
-				const type = getColumnType(tbl, column)
+				const type = getColumnType(dataTable, column)
 
 				if (type === DataType.Date) setInputColumnDate(true)
 			})
-		}, [step.args.columns, tbl])
+		}, [step.args.columns, dataTable])
 
 		return (
 			<Container>
@@ -123,7 +117,7 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 				) : null}
 			</Container>
 		)
-	},
+	}),
 )
 
 const Container = styled.div`

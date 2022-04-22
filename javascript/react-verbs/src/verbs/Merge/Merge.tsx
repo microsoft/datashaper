@@ -8,32 +8,22 @@ import {
 	dropdownStyles,
 	EnumDropdown,
 } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown, TextField } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useHandleDropdownChange } from '../../common/hooks.js'
-import {
-	LeftAlignedRow,
-	useHandleTextFieldChange,
-	useLoadTable,
-} from '../../common/index.js'
+import { LeftAlignedRow, useHandleTextFieldChange } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Just the to/value inputs for an impute.
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
-	function Merge({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
+	withLoadedTable(function Merge({ step, onChange, dataTable }) {
 		const handleColumnChange = useCallback(
 			(_event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
 				const { columns = [] } = step.args
@@ -69,7 +59,7 @@ export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
 		)
 
 		const options = useMemo(() => {
-			const columns = tbl?.columnNames() || []
+			const columns = dataTable?.columnNames() || []
 			const hash = (step.args.columns || []).reduce((acc, cur) => {
 				acc[cur] = true
 				return acc
@@ -82,7 +72,7 @@ export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
 					selected,
 				}
 			})
-		}, [tbl, step])
+		}, [dataTable, step])
 
 		const selectedKeys = useMemo(
 			() => options.filter(o => o.selected).map(o => o.key),
@@ -92,7 +82,7 @@ export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
 		return (
 			<Container>
 				<LeftAlignedRow>
-					{tbl ? (
+					{dataTable ? (
 						<Dropdown
 							label={'Columns'}
 							styles={dropdownStyles}
@@ -125,9 +115,8 @@ export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
 				) : null}
 			</Container>
 		)
-	},
+	}),
 )
-
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;

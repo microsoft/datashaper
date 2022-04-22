@@ -7,25 +7,20 @@ import {
 	ColumnSpread,
 	TableColumnDropdown,
 } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange, useLoadTable } from '../../common/index.js'
+import { useHandleDropdownChange } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.
  */
 export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
-	function Spread({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
+	withLoadedTable(function Spread({ step, onChange, dataTable }) {
 		const columns = useColumns(step, onChange)
 
 		const handleButtonClick = useCallback(() => {
@@ -48,7 +43,7 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 			<Container>
 				<TableColumnDropdown
 					required
-					table={tbl}
+					table={dataTable}
 					label={'Column to spread'}
 					selectedKey={(step.args as SpreadArgs).column}
 					onChange={handleColumnChange}
@@ -60,13 +55,13 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={{ iconName: 'Add' }}
-					disabled={!tbl}
+					disabled={!dataTable}
 				>
 					Add column
 				</ActionButton>
 			</Container>
 		)
-	},
+	}),
 )
 
 function next(columns: string[]): string {

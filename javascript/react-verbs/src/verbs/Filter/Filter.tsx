@@ -5,28 +5,22 @@
 import type { Criterion, FilterArgs } from '@data-wrangling-components/core'
 import { BooleanOperator } from '@data-wrangling-components/core'
 import { EnumDropdown } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange, useLoadTable } from '../../common/hooks.js'
+import { useHandleDropdownChange } from '../../common/hooks.js'
 import { LeftAlignedRow } from '../../common/styles.js'
 import type { StepComponentProps } from '../../types.js'
 import { FilterFunction } from '../shared/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a Filter step.
  */
 export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
-	function Filter({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
+	withLoadedTable(function Filter({ step, onChange, dataTable }) {
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
 				...step,
@@ -62,7 +56,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 			onChange,
 		)
 		const filters = useFilters(
-			tbl,
+			dataTable,
 			step.args.column,
 			step.args.criteria,
 			handleFilterChange,
@@ -73,7 +67,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={{ iconName: 'Add' }}
-					disabled={!tbl}
+					disabled={!dataTable}
 				>
 					Add criteria
 				</ActionButton>
@@ -96,7 +90,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 				) : null}
 			</Container>
 		)
-	},
+	}),
 )
 
 function useFilters(

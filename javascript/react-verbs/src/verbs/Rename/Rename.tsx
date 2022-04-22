@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RenameArgs,Step } from '@data-wrangling-components/core'
+import type { RenameArgs, Step } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
@@ -17,37 +16,30 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useColumnRecordDelete, useLoadTable } from '../../common/index.js'
+import { useColumnRecordDelete } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import {
 	useDisabled,
 	useHandleAddButtonClick,
 	useHandleColumnChange,
 } from './hooks.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a RenameStep.
  */
 export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
-	function Rename({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
+	withLoadedTable(function Rename({ step, onChange, dataTable }) {
 		const handleColumnChange = useHandleColumnChange(step, onChange)
 		const handleColumnDelete = useColumnRecordDelete(step, onChange)
-		const handleButtonClick = useHandleAddButtonClick(step, tbl, onChange)
-
+		const handleButtonClick = useHandleAddButtonClick(step, dataTable, onChange)
 		const columnPairs = useColumnPairs(
-			tbl,
+			dataTable,
 			step,
 			handleColumnChange,
 			handleColumnDelete,
 		)
-
-		const disabled = useDisabled(step, tbl)
+		const disabled = useDisabled(step, dataTable)
 
 		return (
 			<Container>
@@ -62,7 +54,7 @@ export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
 				</ActionButton>
 			</Container>
 		)
-	},
+	}),
 )
 
 function useColumnPairs(

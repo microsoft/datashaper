@@ -9,38 +9,31 @@ import type {
 } from '@data-wrangling-components/core'
 import { SortInstruction } from '@data-wrangling-components/react-controls'
 import { SortDirection } from '@essex/arquero'
-import { NodeInput } from '@essex/dataflow'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useLoadTable } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for an OrderBy step.
  */
 export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
-	function Orderby({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
-		const sorts = useSorts(step, tbl, onChange)
+	withLoadedTable(function Orderby({ step, onChange, dataTable }) {
+		const sorts = useSorts(step, dataTable, onChange)
 
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
 				...step,
 				args: {
 					...step.args,
-					orders: [...(step.args.orders || []), newSort(tbl)],
+					orders: [...(step.args.orders || []), newSort(dataTable)],
 				},
 			})
-		}, [step, tbl, onChange])
+		}, [step, dataTable, onChange])
 
 		return (
 			<Container>
@@ -48,13 +41,13 @@ export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={{ iconName: 'Add' }}
-					disabled={!tbl}
+					disabled={!dataTable}
 				>
 					Add sort
 				</ActionButton>
 			</Container>
 		)
-	},
+	}),
 )
 
 function newSort(table?: ColumnTable): OrderbyInstruction {

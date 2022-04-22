@@ -15,7 +15,6 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-
 import type { StepChangeFunction } from '../types.js'
 
 // #region Dropdown Change Handler

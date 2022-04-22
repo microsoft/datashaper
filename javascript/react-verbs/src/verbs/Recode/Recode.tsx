@@ -2,18 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RecodeArgs,Step } from '@data-wrangling-components/core'
+import type { RecodeArgs, Step } from '@data-wrangling-components/core'
 import { ColumnValueDropdown } from '@data-wrangling-components/react-controls'
 import type { DataType, Value } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
-import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useColumnType, useLoadTable } from '../../common/index.js'
+import { useColumnType } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import {
 	useColumnValues,
@@ -22,27 +21,21 @@ import {
 	useHandleRecodeChange,
 	useRecodeDelete,
 } from './hooks.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a RecodeStep.
  */
 export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
-	function Recode({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
-		const values = useColumnValues(step, tbl)
-		const dataType = useColumnType(tbl, step.args.column)
-
+	withLoadedTable(function Recode({ step, onChange, dataTable }) {
+		const values = useColumnValues(step, dataTable)
+		const dataType = useColumnType(dataTable, step.args.column)
 		const handleRecodeChange = useHandleRecodeChange(step, onChange)
 		const handleRecodeDelete = useRecodeDelete(step, onChange)
 		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
 
 		const columnPairs = useRecodePairs(
-			tbl,
+			dataTable,
 			step,
 			values,
 			dataType,
@@ -64,7 +57,7 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 				</ActionButton>
 			</Container>
 		)
-	},
+	}),
 )
 
 function useRecodePairs(

@@ -8,29 +8,21 @@ import {
 	EnumDropdown,
 	TableColumnDropdown,
 } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
-
-import {
-	LeftAlignedRow,
-	useHandleDropdownChange,
-	useLoadTable,
-} from '../../common/index.js'
-import type { StepComponentProps } from '../../types.js'
+import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
-export const Aggregate: React.FC<StepComponentProps<AggregateArgs>> = memo(
-	function Aggregate({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
+export const Aggregate = memo(
+	withLoadedTable<AggregateArgs>(function Aggregate({
+		step,
+		onChange,
+		dataTable,
+	}) {
 		const handleGroupColumnChange = useHandleDropdownChange(
 			step,
 			'args.groupby',
@@ -48,7 +40,7 @@ export const Aggregate: React.FC<StepComponentProps<AggregateArgs>> = memo(
 				<LeftAlignedRow>
 					<TableColumnDropdown
 						required
-						table={tbl}
+						table={dataTable}
 						label={'Column to group by'}
 						selectedKey={step.args.groupby}
 						onChange={handleGroupColumnChange}
@@ -65,7 +57,7 @@ export const Aggregate: React.FC<StepComponentProps<AggregateArgs>> = memo(
 				</LeftAlignedRow>
 			</Container>
 		)
-	},
+	}),
 )
 
 const Container = styled.div`

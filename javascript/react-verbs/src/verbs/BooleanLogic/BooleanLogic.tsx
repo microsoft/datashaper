@@ -8,27 +8,24 @@ import {
 	dropdownStyles,
 	EnumDropdown,
 } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useHandleDropdownChange } from '../../common/hooks.js'
-import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
+import { LeftAlignedRow } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
-
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 /**
  * Inputs to combine column using boolean logic.
  */
 export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
-	function BooleanLogic({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
+	withLoadedTable<BooleanArgs>(function BooleanLogic({
+		step,
+		onChange,
+		dataTable,
+	}) {
 		const handleColumnChange = useCallback(
 			(_event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
 				const { columns = [] } = step.args
@@ -58,7 +55,7 @@ export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
 		)
 
 		const options = useMemo(() => {
-			const columns = tbl?.columnNames() || []
+			const columns = dataTable?.columnNames() || []
 			const hash = (step.args.columns || []).reduce((acc, cur) => {
 				acc[cur] = true
 				return acc
@@ -71,7 +68,7 @@ export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
 					selected,
 				}
 			})
-		}, [tbl, step])
+		}, [dataTable, step])
 
 		const selectedKeys = useMemo(
 			() => options.filter(o => o.selected).map(o => o.key),
@@ -81,7 +78,7 @@ export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
 		return (
 			<Container>
 				<LeftAlignedRow>
-					{tbl ? (
+					{dataTable ? (
 						<Dropdown
 							label={'Columns'}
 							styles={dropdownStyles}
@@ -110,7 +107,7 @@ export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
 				</LeftAlignedRow>
 			</Container>
 		)
-	},
+	}),
 )
 
 const Container = styled.div`

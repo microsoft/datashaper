@@ -8,29 +8,18 @@ import {
 	EnumDropdown,
 	TableColumnDropdown,
 } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import {
-	LeftAlignedRow,
-	useHandleDropdownChange,
-	useLoadTable,
-} from '../../common/index.js'
+import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
-
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 /**
  * Just the group/column/op inputs for an aggregation.
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Pivot: React.FC<StepComponentProps<PivotArgs>> = memo(
-	function Pivot({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
+	withLoadedTable(function Pivot({ step, onChange, dataTable }) {
 		const handleKeyColumnChange = useHandleDropdownChange(
 			step,
 			'args.key',
@@ -54,7 +43,7 @@ export const Pivot: React.FC<StepComponentProps<PivotArgs>> = memo(
 				<LeftAlignedRow>
 					<TableColumnDropdown
 						required
-						table={tbl}
+						table={dataTable}
 						label={'Column used as key'}
 						selectedKey={step.args.key}
 						onChange={handleKeyColumnChange}
@@ -63,7 +52,7 @@ export const Pivot: React.FC<StepComponentProps<PivotArgs>> = memo(
 				<LeftAlignedRow>
 					<TableColumnDropdown
 						required
-						table={tbl}
+						table={dataTable}
 						label={'Column used as value'}
 						selectedKey={step.args.value}
 						onChange={handleValueColumnChange}
@@ -80,7 +69,7 @@ export const Pivot: React.FC<StepComponentProps<PivotArgs>> = memo(
 				</LeftAlignedRow>
 			</Container>
 		)
-	},
+	}),
 )
 
 const Container = styled.div`

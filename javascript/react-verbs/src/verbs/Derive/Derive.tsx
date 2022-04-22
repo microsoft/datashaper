@@ -8,28 +8,18 @@ import {
 	EnumDropdown,
 	TableColumnDropdown,
 } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import {
-	LeftAlignedRow,
-	useHandleDropdownChange,
-	useLoadTable,
-} from '../../common/index.js'
+import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Provides inputs for a Binarize step.
  */
 export const Derive: React.FC<StepComponentProps<DeriveArgs>> = memo(
-	function Derive({ step, store, table, onChange, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
+	withLoadedTable(function Derive({ step, onChange, dataTable }) {
 		const handleLeftColumnChange = useHandleDropdownChange(
 			step,
 			'args.column1',
@@ -50,7 +40,7 @@ export const Derive: React.FC<StepComponentProps<DeriveArgs>> = memo(
 			<Container>
 				<LeftAlignedRow>
 					<TableColumnDropdown
-						table={tbl}
+						table={dataTable}
 						required
 						label={'Column one'}
 						selectedKey={step.args.column1}
@@ -68,7 +58,7 @@ export const Derive: React.FC<StepComponentProps<DeriveArgs>> = memo(
 				</LeftAlignedRow>
 				<LeftAlignedRow>
 					<TableColumnDropdown
-						table={tbl}
+						table={dataTable}
 						required
 						label={'Column two'}
 						selectedKey={step.args.column2}
@@ -77,7 +67,7 @@ export const Derive: React.FC<StepComponentProps<DeriveArgs>> = memo(
 				</LeftAlignedRow>
 			</Container>
 		)
-	},
+	}),
 )
 
 const Container = styled.div`

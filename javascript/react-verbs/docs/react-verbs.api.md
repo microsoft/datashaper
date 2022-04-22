@@ -25,6 +25,7 @@ import type { InputColumnListArgs } from '@data-wrangling-components/core';
 import type { InputColumnRecordArgs } from '@data-wrangling-components/core';
 import type { JoinArgs } from '@data-wrangling-components/core';
 import type { LookupArgs } from '@data-wrangling-components/core';
+import { MemoExoticComponent } from 'react';
 import type { MergeArgs } from '@data-wrangling-components/core';
 import type { OnehotArgs } from '@data-wrangling-components/core';
 import type { OrderbyArgs } from '@data-wrangling-components/core';
@@ -43,7 +44,7 @@ import type { WindowArgs } from '@data-wrangling-components/core';
 // Warning: (ae-missing-release-tag) "Aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const Aggregate: React.FC<StepComponentProps<AggregateArgs>>;
+export const Aggregate: MemoExoticComponent<(props: StepComponentProps<AggregateArgs>) => JSX.Element>;
 
 // Warning: (ae-missing-release-tag) "AggregateDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -435,10 +436,10 @@ export function useHandleDropdownChange<T extends object | void | unknown>(step:
 // @public
 export function useHandleSpinButtonChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>, transformer?: (value?: string | undefined) => number | undefined): SpinButtonChangeHandler;
 
-// Warning: (ae-missing-release-tag) "useHandleTextfieldChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useHandleTextFieldChange" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleTextfieldChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>, transformer?: <T_1>(value?: T_1 | undefined) => T_1 | undefined): TextFieldChangeHandler;
+export function useHandleTextFieldChange<T extends object | void | unknown>(step: Step<T>, path: string, onChange?: StepChangeFunction<T>, transformer?: <T_1>(value?: T_1 | undefined) => T_1 | undefined): TextFieldChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
