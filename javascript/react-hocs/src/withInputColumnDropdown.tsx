@@ -34,7 +34,7 @@ export function withInputColumnDropdown<T extends InputColumnArgs>(
 			const { step, store, onChange, input, table } = props
 			const handleColumnChange = useHandleDropdownChange(
 				step,
-				'args.column',
+				(s, val) => (s.args.column = val as string),
 				onChange,
 			)
 

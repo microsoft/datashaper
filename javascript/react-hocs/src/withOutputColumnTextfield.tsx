@@ -28,7 +28,11 @@ export function withOutputColumnTextfield<T extends OutputColumnArgs>(
 			StepComponentProps<T>
 		> = props => {
 			const { step, onChange } = props
-			const handleToChange = useHandleTextFieldChange(step, 'args.to', onChange)
+			const handleToChange = useHandleTextFieldChange(
+				step,
+				(s, val) => (s.args.to = val as string),
+				onChange,
+			)
 			if (!isOutputColumnStep(step)) {
 				return <Component {...props} />
 			}
