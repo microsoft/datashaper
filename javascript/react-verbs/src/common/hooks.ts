@@ -37,7 +37,9 @@ export function useHandleDropdownChange<T extends object | void | unknown>(
 	return useCallback(
 		(_event, option) => {
 			onChange?.(
-				produce(step, draft => updateFn(draft as Step<T>, option?.key)),
+				produce(step, draft => {
+					updateFn(draft as Step<T>, option?.key)
+				}),
 			)
 		},
 		[step, onChange, updateFn],
@@ -60,7 +62,11 @@ export function useHandleTextFieldChange<T extends object | void | unknown>(
 ): TextFieldChangeHandler {
 	return useCallback(
 		(_event, newValue) => {
-			onChange?.(produce(step, draft => updateFn(draft as Step<T>, newValue)))
+			onChange?.(
+				produce(step, draft => {
+					updateFn(draft as Step<T>, newValue)
+				}),
+			)
 		},
 		[step, updateFn, onChange],
 	)
@@ -89,7 +95,11 @@ export function useHandleSpinButtonChange<T extends object | void | unknown>(
 ): SpinButtonChangeHandler {
 	return useCallback(
 		(_event, newValue) => {
-			onChange?.(produce(step, draft => updateFn(draft as Step<T>, newValue)))
+			onChange?.(
+				produce(step, draft => {
+					updateFn(draft as Step<T>, newValue)
+				}),
+			)
 		},
 		[step, onChange, updateFn],
 	)
@@ -111,7 +121,11 @@ export function useHandleCheckboxChange<T extends object | void | unknown>(
 ): CheckboxChangeHandler {
 	return useCallback(
 		(_event, checked) => {
-			onChange?.(produce(step, draft => updateFn(draft as Step<T>, checked)))
+			onChange?.(
+				produce(step, draft => {
+					updateFn(draft as Step<T>, checked)
+				}),
+			)
 		},
 		[step, updateFn, onChange],
 	)

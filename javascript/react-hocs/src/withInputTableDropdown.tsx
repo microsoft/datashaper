@@ -28,7 +28,7 @@ export function withInputTableDropdown(
 			const { step, store, onChange } = props
 			const handleTableChange = useHandleDropdownChange(
 				step,
-				(s, val) => (s.input[NodeInput.Source]!.node = val as string),
+				(s, val) => (s.input[NodeInput.Source] = { node: val as string }),
 				onChange,
 			)
 			if (!isInputTableStep(step)) {
