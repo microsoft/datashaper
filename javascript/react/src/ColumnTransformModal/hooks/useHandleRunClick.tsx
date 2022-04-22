@@ -7,12 +7,10 @@ import type { Step } from '@data-wrangling-components/core'
 import { useCallback } from 'react'
 
 export function useHandleRunClick(
-	internal: Step | undefined,
-	onTransformRequested?: (internal: Step) => void,
+	step: Step | undefined,
+	onTransformRequested?: (step: Step) => void,
 ): () => void {
 	return useCallback(() => {
-		if (internal) {
-			onTransformRequested && onTransformRequested(internal)
-		}
-	}, [onTransformRequested, internal])
+		step && onTransformRequested?.(step)
+	}, [onTransformRequested, step])
 }

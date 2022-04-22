@@ -2,98 +2,88 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	SpreadArgs,
-	SpreadStep,
-	Step,
-} from '@data-wrangling-components/core'
-import { ColumnSpread , TableColumnDropdown } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
+import type { SpreadArgs, Step } from '@data-wrangling-components/core'
+import {
+	ColumnSpread,
+	TableColumnDropdown,
+} from '@data-wrangling-components/react-controls'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange, useLoadTable } from '../../common/index.js'
+import { useHandleDropdownChange } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.
  */
-export const Spread: React.FC<StepComponentProps> = memo(function Spread({
-	step,
-	store,
-	table,
-	onChange,
-	input,
-}) {
-	const internal = useMemo(() => step as SpreadStep, [step])
+export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
+	withLoadedTable(function Spread({ step, onChange, dataTable }) {
+		const columns = useColumns(step, onChange)
 
-	const tbl = useLoadTable(
-		input || step.input[NodeInput.Source]?.node,
-		table,
-		store,
-	)
-	const columns = useColumns(internal, onChange)
-
-	const handleButtonClick = useCallback(() => {
-		onChange &&
-			onChange({
-				...internal,
+		const handleButtonClick = useCallback(() => {
+			onChange?.({
+				...step,
 				args: {
-					...internal.args,
-					to: [...internal.args.to, next(internal.args.to)],
+					...step.args,
+					to: [...step.args.to, next(step.args.to)],
 				},
 			})
-	}, [internal, onChange])
+		}, [step, onChange])
 
-	const handleColumnChange = useHandleDropdownChange(
-		step,
-		'args.column',
-		onChange,
-	)
+		const handleColumnChange = useHandleDropdownChange(
+			step,
+			'args.column',
+			onChange,
+		)
 
-	return (
-		<Container>
-			<TableColumnDropdown
-				required
-				table={tbl}
-				label={'Column to spread'}
-				selectedKey={(step.args as SpreadArgs).column}
-				onChange={handleColumnChange}
-			/>
+		return (
+			<Container>
+				<TableColumnDropdown
+					required
+					table={dataTable}
+					label={'Column to spread'}
+					selectedKey={(step.args as SpreadArgs).column}
+					onChange={handleColumnChange}
+				/>
 
-			<Label>New column names</Label>
+				<Label>New column names</Label>
 
-			{columns}
-			<ActionButton
-				onClick={handleButtonClick}
-				iconProps={{ iconName: 'Add' }}
-				disabled={!tbl}
-			>
-				Add column
-			</ActionButton>
-		</Container>
-	)
-})
+				{columns}
+				<ActionButton
+					onClick={handleButtonClick}
+					iconProps={{ iconName: 'Add' }}
+					disabled={!dataTable}
+				>
+					Add column
+				</ActionButton>
+			</Container>
+		)
+	}),
+)
 
 function next(columns: string[]): string {
 	return `New column (${columns.length})`
 }
 
-function useColumns(step: SpreadStep, onChange?: (step: Step) => void) {
+function useColumns(
+	step: Step<SpreadArgs>,
+	onChange?: (step: Step<SpreadArgs>) => void,
+) {
 	return useMemo(() => {
 		return (step.args.to || []).map((column: string, index: number) => {
 			const handleColumnChange = (col: string) => {
 				const update = { ...step }
 				set(update, `args.to[${index}]`, col)
-				onChange && onChange(update)
+				onChange?.(update)
 			}
 
 			const handleDeleteClick = () => {
 				const update = { ...step }
 				update.args.to.splice(index, 1)
-				onChange && onChange(update)
+				onChange?.(update)
 			}
 
 			return (

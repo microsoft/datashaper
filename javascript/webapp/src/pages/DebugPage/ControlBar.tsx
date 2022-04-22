@@ -73,7 +73,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			if (!files.length) return
 			updateFileCollection(files)
 			const loaded = await loadFiles(files)
-			onLoadFiles && onLoadFiles(loaded)
+			onLoadFiles?.(loaded)
 		},
 		[onLoadFiles, loadFiles, updateFileCollection],
 	)
@@ -85,7 +85,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			if (!first) return
 			updateFileCollection([first])
 			const spec = await loadSpec(first)
-			onSelectSpecification && onSelectSpecification(spec as any)
+			onSelectSpecification?.(spec as Specification)
 		},
 		[onSelectSpecification, loadSpec, updateFileCollection],
 	)
@@ -100,15 +100,13 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 
 	const handleSmartHeadersChange = useCallback(
 		(e: any, checked?: boolean) =>
-			onFeaturesChange &&
-			onFeaturesChange({ ...features, smartHeaders: checked }),
+			onFeaturesChange?.({ ...features, smartHeaders: checked }),
 		[features, onFeaturesChange],
 	)
 
 	const handleFeaturesChange = useCallback(
 		(propName: string, checked?: boolean) =>
-			onFeaturesChange &&
-			onFeaturesChange({ ...features, [propName]: checked }),
+			onFeaturesChange?.({ ...features, [propName]: checked }),
 		[features, onFeaturesChange],
 	)
 
@@ -119,9 +117,8 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 				? [...selectedKeys, option.key as StatsColumnType]
 				: selectedKeys.filter(key => key !== option?.key)
 
-			onFeaturesChange &&
-				option &&
-				onFeaturesChange({
+			option &&
+				onFeaturesChange?.({
 					...features,
 					statsColumnTypes: selectedTypes,
 				})
@@ -130,11 +127,10 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	)
 	const handleArrayFeaturesChange = useCallback(
 		(propName: string, checked?: boolean) => {
-			onFeaturesChange &&
-				onFeaturesChange({
-					...features,
-					[propName]: checked,
-				})
+			onFeaturesChange?.({
+				...features,
+				[propName]: checked,
+			})
 		},
 
 		[features, onFeaturesChange],

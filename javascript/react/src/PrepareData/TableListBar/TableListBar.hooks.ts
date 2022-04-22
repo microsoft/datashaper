@@ -57,7 +57,7 @@ export function useTableSelection(
 
 	const onItemClick = useCallback(
 		(_e: any, opt: IContextualMenuItem | undefined) =>
-			onSelect && opt && onSelect(opt.key),
+			opt && onSelect?.(opt.key),
 		[onSelect],
 	)
 
@@ -98,7 +98,7 @@ export function useOutputPreview(
 	}, [derived])
 
 	const onClick = useCallback(() => {
-		lastId && onSelect && onSelect(lastId)
+		lastId && onSelect?.(lastId)
 	}, [lastId, onSelect])
 
 	return {

@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { SampleStep } from '@data-wrangling-components/core'
+import type { SampleArgs } from '@data-wrangling-components/core'
 import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 
 import {
@@ -19,62 +19,57 @@ const whole = format('d')
 /**
  * Provides inputs for a Sample step.
  */
-export const Sample: React.FC<StepComponentProps> = memo(function Sample({
-	step,
-	onChange,
-}) {
-	const internal = useMemo(() => step as SampleStep, [step])
+export const Sample: React.FC<StepComponentProps<SampleArgs>> = memo(
+	function Sample({ step, onChange }) {
+		const handleSizeChange = useHandleSpinButtonChange(
+			step,
+			'args.size',
+			onChange,
+		)
 
-	const handleSizeChange = useHandleSpinButtonChange(
-		internal,
-		'args.size',
-		onChange,
-	)
+		const handlePercentChange = useHandleSpinButtonChange(
+			step,
+			'args.proportion',
+			onChange,
+			(val: string | undefined) => {
+				if (val != null) {
+					return +val / 100
+				}
+			},
+		)
 
-	const handlePercentChange = useHandleSpinButtonChange(
-		internal,
-		'args.proportion',
-		onChange,
-		(val: string | undefined) => {
-			if (val != null) {
-				return +val / 100
-			}
-		},
-	)
-
-	return (
-		<Container>
-			<LeftAlignedRow>
-				<SpinButton
-					label={'Number of rows'}
-					labelPosition={Position.top}
-					min={0}
-					step={1}
-					disabled={!!internal.args.proportion}
-					value={internal.args.size ? `${internal.args.size}` : ''}
-					styles={spinStyles}
-					onChange={handleSizeChange}
-				/>
-				<Or>or</Or>
-				<SpinButton
-					label={'Row percentage'}
-					labelPosition={Position.top}
-					min={0}
-					max={100}
-					step={1}
-					disabled={!!internal.args.size}
-					value={
-						internal.args.proportion
-							? `${whole(internal.args.proportion * 100)}`
-							: ''
-					}
-					styles={spinStyles}
-					onChange={handlePercentChange}
-				/>
-			</LeftAlignedRow>
-		</Container>
-	)
-})
+		return (
+			<Container>
+				<LeftAlignedRow>
+					<SpinButton
+						label={'Number of rows'}
+						labelPosition={Position.top}
+						min={0}
+						step={1}
+						disabled={!!step.args.proportion}
+						value={step.args.size ? `${step.args.size}` : ''}
+						styles={spinStyles}
+						onChange={handleSizeChange}
+					/>
+					<Or>or</Or>
+					<SpinButton
+						label={'Row percentage'}
+						labelPosition={Position.top}
+						min={0}
+						max={100}
+						step={1}
+						disabled={!!step.args.size}
+						value={
+							step.args.proportion ? `${whole(step.args.proportion * 100)}` : ''
+						}
+						styles={spinStyles}
+						onChange={handlePercentChange}
+					/>
+				</LeftAlignedRow>
+			</Container>
+		)
+	},
+)
 
 const Container = styled.div`
 	display: flex;

@@ -49,11 +49,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			onTransformRequested,
 		)
 
-		const adaptedStyles = useModalStyles(
-			styles,
-			isGuidanceVisible,
-			!!internal?.verb,
-		)
+		const adaptedStyles = useModalStyles(styles, isGuidanceVisible)
 		return (
 			<Callout
 				onDismissed={() => setInternal(undefined)}

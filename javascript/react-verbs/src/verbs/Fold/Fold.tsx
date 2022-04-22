@@ -2,38 +2,28 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FoldStep } from '@data-wrangling-components/core'
+import type { FoldArgs } from '@data-wrangling-components/core'
 import { dropdownStyles } from '@data-wrangling-components/react-controls'
 import { TextField } from '@fluentui/react'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleTextfieldChange } from '../../common/index.js'
+import { LeftAlignedRow, useHandleTextFieldChange } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.
  */
-export const Fold: React.FC<StepComponentProps> = memo(function Fold({
+export const Fold: React.FC<StepComponentProps<FoldArgs>> = memo(function Fold({
 	step,
 	store,
 	table,
 	onChange,
 	input,
 }) {
-	const internal = useMemo(() => step as FoldStep, [step])
-
-	const handleToChange = useHandleTextfieldChange(
-		internal,
-		'args.to[0]',
-		onChange,
-	)
-	const handleToChange2 = useHandleTextfieldChange(
-		internal,
-		'args.to[1]',
-		onChange,
-	)
+	const handleToChange = useHandleTextFieldChange(step, 'args.to[0]', onChange)
+	const handleToChange2 = useHandleTextFieldChange(step, 'args.to[1]', onChange)
 
 	return (
 		<Container>
@@ -51,7 +41,7 @@ export const Fold: React.FC<StepComponentProps> = memo(function Fold({
 					required
 					label={'Key name to use'}
 					placeholder={'Key name to use'}
-					value={internal.args.to !== undefined ? internal.args.to[0] : ''}
+					value={step.args.to !== undefined ? step.args.to[0] : ''}
 					styles={dropdownStyles}
 					onChange={handleToChange}
 				/>
@@ -61,7 +51,7 @@ export const Fold: React.FC<StepComponentProps> = memo(function Fold({
 					required
 					label={'Value name to use'}
 					placeholder={'Value name to use'}
-					value={internal.args.to !== undefined ? internal.args.to[1] : ''}
+					value={step.args.to !== undefined ? step.args.to[1] : ''}
 					styles={dropdownStyles}
 					onChange={handleToChange2}
 				/>

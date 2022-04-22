@@ -62,7 +62,7 @@ const useHandleOnDropAccepted = (
 			const fileCollection = new FileCollection()
 			try {
 				await fileCollection.add(files)
-				onDropAccepted && onDropAccepted(fileCollection)
+				onDropAccepted?.(fileCollection)
 			} catch (e) {
 				console.error(e)
 			}
@@ -78,7 +78,7 @@ const useHandleOnDropRejected = (
 	return useCallback(
 		(files: FileRejection[]) => {
 			const message = `File type must be: ${acceptedFileTypes.join(', ')}`
-			onDropRejected && onDropRejected(message, files)
+			onDropRejected?.(message, files)
 		},
 		[onDropRejected, acceptedFileTypes],
 	)
@@ -90,7 +90,7 @@ const useHandleOnDrop = (onDrop?: (collection: FileCollection) => void) => {
 			const fileCollection = new FileCollection()
 			try {
 				await fileCollection.add(files)
-				onDrop && onDrop(fileCollection)
+				onDrop?.(fileCollection)
 			} catch (e) {
 				console.error(e)
 			}
@@ -114,7 +114,7 @@ export const useHandleOnUploadClick = (
 				const fileCollection = new FileCollection()
 				try {
 					await fileCollection.add(files[0])
-					handleCollection && handleCollection(fileCollection)
+					handleCollection?.(fileCollection)
 				} catch (e) {
 					console.error(e)
 				}

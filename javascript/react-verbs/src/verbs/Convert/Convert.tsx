@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ConvertStep } from '@data-wrangling-components/core'
+import type { ConvertArgs } from '@data-wrangling-components/core'
 import { ParseType } from '@data-wrangling-components/core'
 import {
 	DateFormatPatternCombobox,
@@ -10,20 +10,19 @@ import {
 	EnumDropdown,
 } from '@data-wrangling-components/react-controls'
 import { DataType } from '@essex/arquero'
-import { NodeInput } from '@essex/dataflow'
 import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import {
 	useHandleDropdownChange,
-	useHandleTextfieldChange,
-	useLoadTable,
+	useHandleTextFieldChange,
 } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
 import { getColumnType } from '../shared/TypingFunction/TypingFunction.js'
@@ -31,105 +30,95 @@ import { getColumnType } from '../shared/TypingFunction/TypingFunction.js'
 /**
  * Provides inputs for a Convert step.
  */
-export const Convert: React.FC<StepComponentProps> = memo(function Convert({
-	step,
-	store,
-	table,
-	onChange,
-	input,
-}) {
-	const internal = useMemo(() => step as ConvertStep, [step])
-	const tbl = useLoadTable(
-		input || internal.input[NodeInput.Source]?.node,
-		table,
-		store,
-	)
-	const [inputColumnDate, setInputColumnDate] = useState<boolean>()
+export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
+	withLoadedTable(function Convert({ step, store, onChange, dataTable }) {
+		const [inputColumnDate, setInputColumnDate] = useState<boolean>()
 
-	const handleTypeChange = useHandleDropdownChange(
-		internal,
-		'args.type',
-		onChange,
-	)
+		const handleTypeChange = useHandleDropdownChange(
+			step,
+			'args.type',
+			onChange,
+		)
 
-	const handleRadixChange = useHandleTextfieldChange(
-		internal,
-		'args.radix',
-		onChange,
-	)
+		const handleRadixChange = useHandleTextFieldChange(
+			step,
+			'args.radix',
+			onChange,
+		)
 
-	const handleComboBoxChange = useCallback(
-		(
-			_e: any,
-			option: IComboBoxOption | undefined,
-			_index: number | undefined,
-			value: string | undefined,
-		) => {
-			const update = cloneDeep(step)
-			set(update, 'args.formatPattern', option ? option.key : value)
-			onChange && onChange(update)
-		},
-		[step, onChange],
-	)
+		const handleComboBoxChange = useCallback(
+			(
+				_e: any,
+				option: IComboBoxOption | undefined,
+				_index: number | undefined,
+				value: string | undefined,
+			) => {
+				const update = cloneDeep(step)
+				set(update, 'args.formatPattern', option ? option.key : value)
+				onChange?.(update)
+			},
+			[step, onChange],
+		)
 
-	useEffect(() => {
-		setInputColumnDate(false)
-		internal.args.columns.forEach(column => {
-			const type = getColumnType(tbl, column)
+		useEffect(() => {
+			setInputColumnDate(false)
+			step.args.columns.forEach(column => {
+				const type = getColumnType(dataTable, column)
 
-			if (type === DataType.Date) setInputColumnDate(true)
-		})
-	}, [internal.args.columns, tbl])
+				if (type === DataType.Date) setInputColumnDate(true)
+			})
+		}, [step.args.columns, dataTable])
 
-	return (
-		<Container>
-			<LeftAlignedColumn>
-				<ColumnListInputs
-					label={'Columns to convert'}
-					step={step}
-					store={store}
-					onChange={onChange}
-				/>
-			</LeftAlignedColumn>
-			<LeftAlignedColumn>
-				<EnumDropdown
-					required
-					label={'Data type'}
-					enumeration={ParseType}
-					selectedKey={internal.args.type}
-					onChange={handleTypeChange}
-				/>
-			</LeftAlignedColumn>
-			{internal.args.type === ParseType.Integer ? (
+		return (
+			<Container>
 				<LeftAlignedColumn>
-					<TextField
-						label={'Base (radix)'}
-						value={internal.args.radix ? `${internal.args.radix}` : ''}
-						styles={dropdownStyles}
-						onChange={handleRadixChange}
+					<ColumnListInputs
+						label={'Columns to convert'}
+						step={step}
+						store={store}
+						onChange={onChange as any}
 					/>
 				</LeftAlignedColumn>
-			) : null}
-
-			{inputColumnDate || internal.args.type === ParseType.Date ? (
 				<LeftAlignedColumn>
-					<DateFormatPatternCombobox
-						required={internal.args.type === ParseType.Date}
-						label={'Date format pattern'}
-						placeholder={'pattern'}
-						text={
-							internal.args.formatPattern
-								? `${internal.args.formatPattern}`
-								: undefined
-						}
-						onChange={handleComboBoxChange}
-						styles={dropdownStyles}
+					<EnumDropdown
+						required
+						label={'Data type'}
+						enumeration={ParseType}
+						selectedKey={step.args.type}
+						onChange={handleTypeChange}
 					/>
 				</LeftAlignedColumn>
-			) : null}
-		</Container>
-	)
-})
+				{step.args.type === ParseType.Integer ? (
+					<LeftAlignedColumn>
+						<TextField
+							label={'Base (radix)'}
+							value={step.args.radix ? `${step.args.radix}` : ''}
+							styles={dropdownStyles}
+							onChange={handleRadixChange}
+						/>
+					</LeftAlignedColumn>
+				) : null}
+
+				{inputColumnDate || step.args.type === ParseType.Date ? (
+					<LeftAlignedColumn>
+						<DateFormatPatternCombobox
+							required={step.args.type === ParseType.Date}
+							label={'Date format pattern'}
+							placeholder={'pattern'}
+							text={
+								step.args.formatPattern
+									? `${step.args.formatPattern}`
+									: undefined
+							}
+							onChange={handleComboBoxChange}
+							styles={dropdownStyles}
+						/>
+					</LeftAlignedColumn>
+				) : null}
+			</Container>
+		)
+	}),
+)
 
 const Container = styled.div`
 	display: flex;

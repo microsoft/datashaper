@@ -2,22 +2,23 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinStep } from '@data-wrangling-components/core'
+import type { JoinArgs } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const JoinDescription: React.FC<StepDescriptionProps> = memo(
+export const JoinDescription: React.FC<StepDescriptionProps<JoinArgs>> = memo(
 	function JoinDescription(props) {
 		const rows = useMemo(() => {
-			const internal = props.step as JoinStep
-			const { args } = internal
+			const {
+				step: { args },
+			} = props
 			return [
 				{
 					before: 'with',
-					value: internal.input[NodeInput.Other]?.node,
+					value: props.step.input[NodeInput.Other]?.node,
 				},
 				{
 					before: 'on',

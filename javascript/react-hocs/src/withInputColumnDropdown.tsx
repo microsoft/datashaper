@@ -26,11 +26,11 @@ import type { HOCFunction } from './types.js'
  * @param label - optional label to use for the dropdown instead of the default.
  * @returns
  */
-export function withInputColumnDropdown(
+export function withInputColumnDropdown<T extends InputColumnArgs>(
 	label?: string,
-): HOCFunction<StepComponentProps> {
+): HOCFunction<StepComponentProps<T>> {
 	return Component => {
-		const WithInputColumnDropdown: React.FC<StepComponentProps> = props => {
+		const WithInputColumnDropdown: React.FC<StepComponentProps<T>> = props => {
 			const { step, store, onChange, input, table } = props
 			const handleColumnChange = useHandleDropdownChange(
 				step,
@@ -73,7 +73,7 @@ export function withInputColumnDropdown(
 	}
 }
 
-function useColumnFilter(step: Step, table?: ColumnTable) {
+function useColumnFilter(step: Step<unknown>, table?: ColumnTable) {
 	const typeMap = useMemo(() => {
 		if (table) {
 			return columnTypes(table)
