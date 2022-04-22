@@ -37,15 +37,11 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	return (
 		<Container className={'prepare-data-page'}>
 			<Dropzone
-				acceptedFileTypes={[
-					FileExtensions.csv,
-					FileExtensions.zip,
-					FileExtensions.json,
-				]}
+				acceptedFileTypes={FILE_TYPES}
 				onDropAccepted={handleDropAcceppted}
 				onDropRejected={setMessage}
 				showPlaceholder={false}
-				dropzoneOptions={{ noClick: true }}
+				dropzoneOptions={DROPZONE_OPTIONS}
 				styles={dropzoneStyles as DropzoneStyles}
 			/>
 			<ProjectMgmtCommandBar
@@ -62,7 +58,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					truncated={true}
 					onDismiss={() => setMessage(undefined)}
 					dismissButtonAriaLabel="Close"
-					styles={{ root: { zIndex: 20 } }}
+					styles={MESSAGE_BAR_STYLES}
 				>
 					{' '}
 					{message}{' '}
@@ -79,6 +75,10 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		</Container>
 	)
 })
+
+const FILE_TYPES = [FileExtensions.csv, FileExtensions.zip, FileExtensions.json]
+const DROPZONE_OPTIONS = { noClick: true }
+const MESSAGE_BAR_STYLES = { root: { zIndex: 20 } }
 
 const Container = styled.div`
 	height: calc(100vh - 80px);
