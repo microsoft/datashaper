@@ -31,6 +31,8 @@ export const CalendarPicker: React_2.FC<CalendarPickerProps>;
 // @public (undocumented)
 export interface CalendarPickerProps {
     // (undocumented)
+    disabled: boolean;
+    // (undocumented)
     onSelectDate: (date: Date) => void;
 }
 
