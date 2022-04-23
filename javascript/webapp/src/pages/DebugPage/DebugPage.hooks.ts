@@ -40,18 +40,25 @@ export function useInputTableList(): [
 // create the store and initialize it with our test tables
 // memoing this gives us a chance queue up our built-in test tables on first run
 export function useTableStore(autoType = false): TableStore {
-	return useMemo(() => {
-		const store = createTableStore()
-		TABLES.forEach(name => {
-			const tablePromise = loadCSV(name, {
-				parse,
-				autoMax: 100000,
-				autoType,
-			}).then(res => container(name, res))
-			store.set(name, from(tablePromise))
-		})
-		return store
+	const [store, setStore] = useState<TableStore>(createTableStore())
+	useEffect(() => {
+		const fn = async () => {
+			const store = createTableStore()
+			const promises = TABLES.map(async name => {
+				const data = await loadCSV(name, {
+					parse,
+					autoMax: 100000,
+					autoType,
+				})
+				const ctr = container(name, data)
+				store.set(name, from([ctr]))
+			})
+			await Promise.all(promises)
+			setStore(store)
+		}
+		void fn()
 	}, [autoType])
+	return store
 }
 
 // write out the loaded test tables to a map for rendering

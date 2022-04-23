@@ -24,12 +24,12 @@ export function useHandleStepArgs(
 	)
 	const WithColumns = useMemo(() => {
 		if (Component) {
-			let comp = Component
+			let comp = Component as any
 			if (!hideInputColumn) {
-				comp = withInputColumnDropdown()(comp)
+				comp = withInputColumnDropdown()(comp as any)
 			}
 			if (!hideOutputColumn) {
-				comp = withOutputColumnTextfield()(comp)
+				comp = withOutputColumnTextfield()(comp as any)
 			}
 			return comp
 		}

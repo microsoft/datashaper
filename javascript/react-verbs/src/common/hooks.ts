@@ -7,121 +7,148 @@ import type {
 	Step,
 	TableStore,
 } from '@data-wrangling-components/core'
-import { identity, noop, num } from '@data-wrangling-components/primitives'
 import type { TableContainer } from '@essex/arquero'
 import { columnType, DataType } from '@essex/arquero'
+import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import cloneDeep from 'lodash-es/cloneDeep.js'
-import set from 'lodash-es/set.js'
+import { produce } from 'immer'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import type {
-	DropdownOptionChangeFunction,
-	StepChangeFunction,
-} from '../types.js'
+import type { StepChangeFunction } from '../types.js'
+
+// #region Dropdown Change Handler
+
+export type DropdownChangeHandler = (
+	event: React.FormEvent<HTMLDivElement>,
+	option?: IDropdownOption,
+	index?: number,
+) => void
 
 /**
  * Creates a callback handler for changing the step based on a dropdown value.
  * This only handles basic cases where the dropdown option key can be set on the
  * step using an object path.
  */
-export function useHandleDropdownChange(
-	step: Step,
-	path: string,
-	onChange: StepChangeFunction = noop,
-): DropdownOptionChangeFunction {
+export function useHandleDropdownChange<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, optionKey: string | number | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): DropdownChangeHandler {
 	return useCallback(
 		(_event, option) => {
-			const update = cloneDeep(step)
-			set(update, path, option?.key)
-			onChange(update)
+			onChange?.(
+				produce(step, draft => {
+					updateFn(draft as Step<T>, option?.key)
+				}),
+			)
 		},
-		[step, path, onChange],
+		[step, onChange, updateFn],
 	)
 }
 
-export function useHandleTextfieldChange(
-	step: Step,
-	path: string,
-	onChange?: StepChangeFunction,
-	transformer = identity,
-): (
+// #endregion
+
+// #region Textfield Change Handler
+
+export type TextFieldChangeHandler = (
 	event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
 	newValue?: string,
-) => void {
+) => void
+
+export function useHandleTextFieldChange<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, updated: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): TextFieldChangeHandler {
 	return useCallback(
 		(_event, newValue) => {
-			const update = cloneDeep(step)
-			const value = transformer(newValue)
-			set(update, path, value)
-			onChange && onChange(update)
+			onChange?.(
+				produce(step, draft => {
+					updateFn(draft as Step<T>, newValue)
+				}),
+			)
 		},
-		[step, path, onChange, transformer],
+		[step, updateFn, onChange],
 	)
 }
+
+// #endregion
+
+// #region Spinbutton Change Handler
+
+export type SpinButtonChangeHandler = (
+	event: React.SyntheticEvent<HTMLElement>,
+	newValue?: string,
+) => void
 
 /**
  * Enforces numeric values for a SpinButton onChange.
- * @param step -
- * @param path -
- * @param onChange -
- * @param transformer -
+ * @param step - the step object
+ * @param updateFn - the update function
+ * @param onChange -the onchange handler
  * @returns
  */
-export function useHandleSpinButtonChange(
-	step: Step,
-	path: string,
-	onChange?: StepChangeFunction,
-	transformer = num,
-): (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void {
+export function useHandleSpinButtonChange<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, newValue: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): SpinButtonChangeHandler {
 	return useCallback(
 		(_event, newValue) => {
-			const update = cloneDeep(step)
-			const value = transformer(newValue)
-			if (typeof value === 'number') {
-				set(update, path, value)
-				onChange && onChange(update)
-			}
+			onChange?.(
+				produce(step, draft => {
+					updateFn(draft as Step<T>, newValue)
+				}),
+			)
 		},
-		[step, path, onChange, transformer],
+		[step, onChange, updateFn],
 	)
 }
 
-export function useHandleCheckboxChange(
-	step: Step,
-	path: string,
-	onChange?: StepChangeFunction,
-): (
+// #endregion
+
+// #region Checkbox Change Handler
+
+export type CheckboxChangeHandler = (
 	event?: React.FormEvent<HTMLElement | HTMLInputElement>,
 	checked?: boolean,
-) => void {
+) => void
+
+export function useHandleCheckboxChange<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, newValue: boolean | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): CheckboxChangeHandler {
 	return useCallback(
 		(_event, checked) => {
-			const update = cloneDeep(step)
-			set(update, path, checked)
-			onChange && onChange(update)
+			onChange?.(
+				produce(step, draft => {
+					updateFn(draft as Step<T>, checked)
+				}),
+			)
 		},
-		[step, path, onChange],
+		[step, updateFn, onChange],
 	)
 }
 
+// #endregion
+
 export function useColumnRecordDelete(
-	step: Step,
-	onChange?: StepChangeFunction,
+	step: Step<InputColumnRecordArgs>,
+	onChange?: StepChangeFunction<InputColumnRecordArgs>,
 ): (column: string) => void {
 	return useCallback(
 		column => {
-			const internal = step as Step<InputColumnRecordArgs>
-			const args = { ...internal.args }
+			const args = { ...step.args }
 			delete args.columns[column]
-			onChange &&
-				onChange({
-					...step,
-					args: {
-						...internal.args,
-						...args,
-					},
-				})
+
+			onChange?.({
+				...step,
+				args: {
+					...step.args,
+					...args,
+				},
+			})
 		},
 		[step, onChange],
 	)

@@ -17,19 +17,19 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 
 export interface CalendarPickerProps {
-	onSelectDate: (date: Date) => void
+	onSelectDate: (date: Date) => void,
+	disabled: boolean
 }
 
 const iconClass = mergeStyles({
 	fontSize: 20,
 	height: 25,
 	width: 25,
-	margin: '0 25px',
-	cursor: 'pointer',
+	margin: '0 25px'
 })
 
 export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
-	function CalendarPicker({ onSelectDate }) {
+	function CalendarPicker({ onSelectDate, disabled }) {
 		const [selectedDate, setSelectedDate] = React.useState<Date>()
 		const [
 			showCalendar,
@@ -52,7 +52,8 @@ export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 						aria-label="Compass"
 						iconName="Calendar"
 						className={iconClass}
-						onClick={toggleShowCalendar}
+						onClick={disabled === false ? toggleShowCalendar: undefined}
+						style={disabled === true ? {cursor: 'default', color: 'rgb(118, 118, 118)'} : {cursor: 'pointer', color: 'rgb(241, 241, 241)'}}
 					/>
 					{selectedDate !== undefined ? (
 						<CalendarLabel>

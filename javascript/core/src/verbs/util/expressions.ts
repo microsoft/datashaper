@@ -5,9 +5,10 @@
 import { escape, op } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
 
-import type {
+import {
 	BooleanComparisonOperator,
 	Criterion,
+	DateComparisonOperator,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '../types.js'
@@ -34,8 +35,10 @@ export function compareAll(
 		// cannot be satisfied
 		const comparisons = criteria.map(filter => {
 			const { value, operator, type } = filter
-			const right =
+			let right =
 				type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
+			if(operator as DateComparisonOperator === DateComparisonOperator.AfterToday || operator as DateComparisonOperator === DateComparisonOperator.BeforeToday)
+				right = new Date()
 			return compareValues(left, right, operator)
 		})
 

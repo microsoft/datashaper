@@ -90,7 +90,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					type: option ? FilterCompareType.Column : FilterCompareType.Value,
 					value: option ? option.key : value,
 				}
-				onChange && onChange(update)
+				onChange?.(update)
 			},
 			[criterion, onChange],
 		)
@@ -140,12 +140,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		}, [type, column, criterion, handleOpChange, suppressLabels])
 
 		const isEmpty = useIsEmpty(criterion)
-
-		const handleDeleteClick = useCallback(
-			() => onChange && onChange(),
-			[onChange],
-		)
-
+		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])
 		const placeholder = usePlaceholderText(type)
 
 		return (
@@ -153,7 +148,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				<SideBySide>
 					{operatorDropdown}
 					{type === DataType.Date ? (
-						<CalendarPicker onSelectDate={onSelectDate}></CalendarPicker>
+						<CalendarPicker onSelectDate={onSelectDate} disabled={isEmpty}></CalendarPicker>
 					) : (
 						<ColumnOrValueComboBox
 							required={!suppressLabels}

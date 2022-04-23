@@ -2,18 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RecodeStep } from '@data-wrangling-components/core'
+import type { RecodeArgs, Step } from '@data-wrangling-components/core'
 import { ColumnValueDropdown } from '@data-wrangling-components/react-controls'
 import type { DataType, Value } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
-import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useColumnType, useLoadTable } from '../../common/index.js'
+import { useColumnType } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import {
 	useColumnValues,
@@ -26,63 +26,50 @@ import {
 /**
  * Provides inputs for a RecodeStep.
  */
-export const Recode: React.FC<StepComponentProps> = memo(function Recode({
-	step,
-	store,
-	table,
-	onChange,
-	input,
-}) {
-	const internal = useMemo(() => step as RecodeStep, [step])
+export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
+	withLoadedTable(function Recode({ step, onChange, dataTable }) {
+		const values = useColumnValues(step, dataTable)
+		const dataType = useColumnType(dataTable, step.args.column)
+		const handleRecodeChange = useHandleRecodeChange(step, onChange)
+		const handleRecodeDelete = useRecodeDelete(step, onChange)
+		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
 
-	const tbl = useLoadTable(
-		input || step.input[NodeInput.Source]?.node,
-		table,
-		store,
-	)
+		const columnPairs = useRecodePairs(
+			dataTable,
+			step,
+			values,
+			dataType,
+			handleRecodeChange,
+			handleRecodeDelete,
+		)
 
-	const values = useColumnValues(internal, tbl)
-	const dataType = useColumnType(tbl, internal.args.column)
+		const disabled = useDisabled(step, values)
 
-	const handleRecodeChange = useHandleRecodeChange(internal, onChange)
-	const handleRecodeDelete = useRecodeDelete(internal, onChange)
-	const handleButtonClick = useHandleAddButtonClick(internal, values, onChange)
-
-	const columnPairs = useRecodePairs(
-		tbl,
-		internal,
-		values,
-		dataType,
-		handleRecodeChange,
-		handleRecodeDelete,
-	)
-
-	const disabled = useDisabled(internal, values)
-
-	return (
-		<Container>
-			{columnPairs}
-			<ActionButton
-				onClick={handleButtonClick}
-				iconProps={{ iconName: 'Add' }}
-				disabled={disabled}
-			>
-				Add mapping
-			</ActionButton>
-		</Container>
-	)
-})
+		return (
+			<Container>
+				{columnPairs}
+				<ActionButton
+					onClick={handleButtonClick}
+					iconProps={{ iconName: 'Add' }}
+					disabled={disabled}
+				>
+					Add mapping
+				</ActionButton>
+			</Container>
+		)
+	}),
+)
 
 function useRecodePairs(
 	table: ColumnTable | undefined,
-	internal: RecodeStep,
+	step: Step<RecodeArgs>,
 	values: Value[],
 	dataType: DataType,
 	onChange: (previous: Value, oldvalue: Value, newvalue: Value) => void,
 	onDelete: (value: Value) => void,
 ) {
 	return useMemo(() => {
-		const { map } = internal.args
+		const { map } = step.args
 		return Object.entries(map || {}).map((valuePair, index) => {
 			// the old value will always come off the map as a string key
 			// coerce it to the column type for proper comparison
@@ -92,7 +79,7 @@ function useRecodePairs(
 				if (value === oldvalue) {
 					return true
 				}
-				if (internal.args.map && internal.args.map[value]) {
+				if (step.args.map && step.args.map[value]) {
 					return false
 				}
 				return true
@@ -113,7 +100,7 @@ function useRecodePairs(
 			return (
 				<ColumnPair key={`column-Recode-${oldvalue}-${index}`}>
 					<ColumnValueDropdown
-						column={internal.args.column}
+						column={step.args.column}
 						table={table}
 						values={values}
 						filter={valueFilter}
@@ -144,7 +131,7 @@ function useRecodePairs(
 				</ColumnPair>
 			)
 		})
-	}, [table, internal, values, dataType, onChange, onDelete])
+	}, [table, step, values, dataType, onChange, onDelete])
 }
 
 const Container = styled.div`

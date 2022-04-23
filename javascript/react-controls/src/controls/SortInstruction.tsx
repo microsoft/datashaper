@@ -34,7 +34,7 @@ export const SortInstruction: React.FC<SortInstructionProps> = memo(
 					...order,
 					column: opt?.key as string,
 				}
-				onChange && onChange(update)
+				onChange?.(update)
 			},
 			[order, onChange],
 		)
@@ -47,13 +47,8 @@ export const SortInstruction: React.FC<SortInstructionProps> = memo(
 						? SortDirection.Ascending
 						: SortDirection.Descending,
 			}
-			onChange && onChange(update)
+			onChange?.(update)
 		}, [order, onChange])
-
-		const handleDeleteClick = useCallback(
-			() => onDelete && onDelete(),
-			[onDelete],
-		)
 
 		return (
 			<Container>
@@ -73,7 +68,7 @@ export const SortInstruction: React.FC<SortInstructionProps> = memo(
 				<IconButton
 					title={'Remove this sort'}
 					iconProps={{ iconName: 'Delete' }}
-					onClick={handleDeleteClick}
+					onClick={onDelete}
 				/>
 			</Container>
 		)

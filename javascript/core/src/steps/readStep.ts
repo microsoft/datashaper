@@ -12,7 +12,7 @@ import {
 	JoinStrategy,
 	Verb,
 } from '../verbs/index.js'
-import type { Step,StepInput } from './types.js'
+import type { Step, StepInput } from './types.js'
 
 /**
  * Factory function to create new verb configs
@@ -21,7 +21,7 @@ import type { Step,StepInput } from './types.js'
  * to preselect.
  * @param verb -
  */
-export function readStep<T extends object>(
+export function readStep<T extends object | void | unknown = any>(
 	{ verb, args = {} as any, id = uuid(), input, output }: StepInput<T>,
 	previous?: Step | undefined,
 ): Step<T> {
@@ -40,8 +40,8 @@ export function readStep<T extends object>(
 					to: 'output',
 					strategy: BinStrategy.Auto,
 					fixedcount: 10,
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Aggregate:
 		case Verb.Boolean:
@@ -54,8 +54,8 @@ export function readStep<T extends object>(
 				...base,
 				args: {
 					to: 'output',
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Concat:
 		case Verb.Difference:
@@ -65,8 +65,8 @@ export function readStep<T extends object>(
 				...base,
 				args: {
 					others: [],
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Fold:
 			return {
@@ -74,8 +74,8 @@ export function readStep<T extends object>(
 				args: {
 					to: ['key', 'value'],
 					columns: [],
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Convert:
 		case Verb.Erase:
@@ -89,32 +89,32 @@ export function readStep<T extends object>(
 				...base,
 				args: {
 					columns: [],
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Spread:
 			return {
 				...base,
 				args: {
 					to: [],
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Pivot:
 			return {
 				...base,
 				args: {
 					operation: FieldAggregateOperation.Any,
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Join:
 			return {
 				...base,
 				args: {
 					strategy: JoinStrategy.Inner,
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Binarize:
 			return {
@@ -123,8 +123,8 @@ export function readStep<T extends object>(
 					to: 'output',
 					criteria: [],
 					logical: BooleanOperator.OR,
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Filter:
 			return {
@@ -132,8 +132,8 @@ export function readStep<T extends object>(
 				args: {
 					criteria: [],
 					logical: BooleanOperator.OR,
-					...args,
-				},
+					...(args as object),
+				} as T,
 			}
 		case Verb.Fetch:
 		case Verb.Onehot:
@@ -193,6 +193,6 @@ function fixOutputs(outputs: StepInput['output']): Step['output'] {
 	if (typeof outputs === 'string') {
 		return { target: outputs }
 	} else {
-		return outputs as Record<string, string>
+		return (outputs || {}) as Record<string, string>
 	}
 }

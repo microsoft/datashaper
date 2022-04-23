@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { readStep } from './readStep.js'
-import type { Step,StepInput } from './types.js'
+import type { Step, StepInput } from './types.js'
 
 export function readSteps(
 	steps: StepInput[],

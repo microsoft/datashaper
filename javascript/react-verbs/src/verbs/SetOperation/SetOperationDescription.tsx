@@ -9,8 +9,8 @@ import { createRowEntries } from '../../common/createRowEntries.js'
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const SetOperationDescription: React.FC<StepDescriptionProps> = memo(
-	function SetOperationDescription(props) {
+export const SetOperationDescription: React.FC<StepDescriptionProps<void>> =
+	memo(function SetOperationDescription(props) {
 		const rows = useMemo(() => {
 			const internal = props.step as Step
 			const others = otherInputNames(internal)
@@ -24,8 +24,7 @@ export const SetOperationDescription: React.FC<StepDescriptionProps> = memo(
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />
-	},
-)
+	})
 export function otherInputNames(step: Step): string[] {
 	return (step.input.others || []).map(i => i.node)
 }

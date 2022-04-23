@@ -7,6 +7,7 @@ import {
 	BooleanComparisonOperator,
 	NumericComparisonOperator,
 	StringComparisonOperator,
+	DateComparisonOperator
 } from '@data-wrangling-components/core'
 import { columnTypes, DataType } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -23,7 +24,11 @@ export function useIsEmpty(criterion: Criterion): boolean {
 			operator === BooleanComparisonOperator.IsTrue ||
 			operator === BooleanComparisonOperator.IsFalse ||
 			operator === BooleanComparisonOperator.IsEmpty ||
-			operator === BooleanComparisonOperator.IsNotEmpty
+			operator === BooleanComparisonOperator.IsNotEmpty ||
+			operator === DateComparisonOperator.IsEmpty ||
+			operator === DateComparisonOperator.IsNotEmpty ||
+			operator === DateComparisonOperator.AfterToday ||
+			operator === DateComparisonOperator.BeforeToday
 		)
 	}, [criterion])
 }

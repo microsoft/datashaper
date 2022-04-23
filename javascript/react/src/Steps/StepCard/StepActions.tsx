@@ -40,7 +40,7 @@ export function useStepActions(
 		if (onDelete) {
 			actionsList.push({
 				iconProps: iconProps.delete,
-				onClick: () => onDelete && onDelete(index),
+				onClick: () => onDelete?.(index),
 				title: 'Delete step',
 			})
 		}

@@ -36,7 +36,7 @@ function useCsvHandler(onUpdateTables?: (tables: TableContainer[]) => void) {
 				} as TableContainer
 				tableContainer.push(table)
 			}
-			onUpdateTables && onUpdateTables(tableContainer)
+			onUpdateTables?.(tableContainer)
 		},
 		[onUpdateTables],
 	)
@@ -103,7 +103,7 @@ export function useHandleZipUpload(
 	const csvHandler = useCsvHandler(onUpdateTables)
 	const handler = useCallback(
 		async (fc: FileCollection) => {
-			onUpdateTables && onUpdateTables([])
+			onUpdateTables?.([])
 			/* eslint-disable @essex/adjacent-await */
 			await csvHandler(fc)
 			await jsonHandler(fc)

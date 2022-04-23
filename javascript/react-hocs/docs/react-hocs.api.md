@@ -6,6 +6,8 @@
 
 /// <reference types="react" />
 
+import type { InputColumnArgs } from '@data-wrangling-components/core';
+import type { OutputColumnArgs } from '@data-wrangling-components/core';
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs';
 
 // Warning: (ae-missing-release-tag) "HOCFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -16,7 +18,7 @@ export type HOCFunction<T> = (Component: React.FC<T>) => React.FC<T>;
 // Warning: (ae-missing-release-tag) "withInputColumnDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function withInputColumnDropdown(label?: string): HOCFunction<StepComponentProps>;
+export function withInputColumnDropdown<T extends InputColumnArgs>(label?: string): HOCFunction<StepComponentProps<T>>;
 
 // Warning: (ae-missing-release-tag) "withInputTableDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -26,7 +28,7 @@ export function withInputTableDropdown(label?: string): HOCFunction<StepComponen
 // Warning: (ae-missing-release-tag) "withOutputColumnTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function withOutputColumnTextfield(label?: string): HOCFunction<StepComponentProps>;
+export function withOutputColumnTextfield<T extends OutputColumnArgs>(label?: string): HOCFunction<StepComponentProps<T>>;
 
 // Warning: (ae-missing-release-tag) "withOutputTableTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

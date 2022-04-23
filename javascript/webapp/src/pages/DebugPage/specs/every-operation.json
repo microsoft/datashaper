@@ -63,11 +63,11 @@
 		},
 		{
 			"verb": "concat",
-			"input": { "source": "data/companies.csv" },
-			"output": { "target": "concat-1" },
-			"args": {
+			"input": {
+				"source": "data/companies.csv",
 				"others": ["data/companies2.csv"]
-			}
+			},
+			"output": { "target": "concat-1" }
 		},
 		{
 			"verb": "convert",
@@ -99,11 +99,11 @@
 		},
 		{
 			"verb": "difference",
-			"input": { "source": "data/companies.csv" },
-			"output": { "target": "difference-1" },
-			"args": {
+			"input": {
+				"source": "data/companies.csv",
 				"others": ["data/companies2.csv"]
-			}
+			},
+			"output": { "target": "difference-1" }
 		},
 		{
 			"verb": "erase",
@@ -174,27 +174,25 @@
 		},
 		{
 			"verb": "intersect",
-			"input": { "source": "data/companies.csv" },
-			"output": { "target": "intersect-1" },
-			"args": {
+			"input": {
+				"source": "data/companies.csv",
 				"others": ["data/companies2.csv"]
-			}
+			},
+			"output": { "target": "intersect-1" }
 		},
 		{
 			"verb": "join",
-			"input": { "source": "data/companies.csv" },
+			"input": { "source": "data/companies.csv", "other": "data/products.csv" },
 			"output": { "target": "join-1" },
 			"args": {
-				"other": "data/products.csv",
 				"on": ["ID", "ID"]
 			}
 		},
 		{
 			"verb": "lookup",
-			"input": { "source": "data/companies.csv" },
+			"input": { "source": "data/companies.csv", "other": "data/products.csv" },
 			"output": { "target": "lookup-1" },
 			"args": {
-				"other": "data/products.csv",
 				"on": ["ID", "ID"],
 				"columns": ["Product"]
 			}
@@ -326,11 +324,11 @@
 		},
 		{
 			"verb": "union",
-			"input": { "source": "data/companies.csv" },
-			"output": { "target": "union-1" },
-			"args": {
+			"input": {
+				"source": "data/companies.csv",
 				"others": ["data/companies2.csv"]
-			}
+			},
+			"output": { "target": "union-1" }
 		},
 		{
 			"verb": "unorder",

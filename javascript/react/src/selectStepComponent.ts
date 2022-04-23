@@ -35,7 +35,7 @@ import {
 	Window,
 } from '@data-wrangling-components/react-verbs'
 
-const verb: Record<string, React.FC<StepComponentProps>> = {
+const verb: Record<string, React.FC<StepComponentProps<any>>> = {
 	aggregate: Aggregate,
 	bin: Bin,
 	binarize: Binarize,
@@ -77,7 +77,9 @@ const verb: Record<string, React.FC<StepComponentProps>> = {
  * Given a Step definition, returns the correct React component function.
  * @param step -
  */
-export function selectStepComponent(step: Step): React.FC<StepComponentProps> {
+export function selectStepComponent(
+	step: Step<unknown>,
+): React.FC<StepComponentProps<unknown>> {
 	const result = verb[step.verb]
 	if (!result) {
 		throw new Error(`verb ${step.verb} not found`)

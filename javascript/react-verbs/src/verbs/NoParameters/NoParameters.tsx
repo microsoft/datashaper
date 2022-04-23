@@ -9,7 +9,7 @@ import type { StepComponentProps } from '../../types.js'
 /**
  * Provides inputs for an ungroup step.
  */
-export const NoParameters: React.FC<StepComponentProps> = memo(
+export const NoParameters: React.FC<StepComponentProps<void>> = memo(
 	function NoParameters() {
 		return null
 	},

@@ -147,12 +147,14 @@ function compareDates(
 ): 1 | 0 {
 	switch (operator) {
 		case DateComparisonOperator.Equals:
-			return left === right ? 1 : 0
+			return left.toLocaleDateString() === right.toLocaleDateString() ? 1 : 0
 		case DateComparisonOperator.NotEqual:
-			return left !== right ? 1 : 0
+			return left.toLocaleDateString() !== right.toLocaleDateString() ? 1 : 0
 		case DateComparisonOperator.After:
+		case DateComparisonOperator.AfterToday:
 			return left > right ? 1 : 0
 		case DateComparisonOperator.Before:
+		case DateComparisonOperator.BeforeToday:
 			return left < right ? 1 : 0
 		default:
 			throw new Error(`Unsupported date comparison operator: [${operator}]`)

@@ -3,66 +3,52 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
+	OrderbyArgs,
 	OrderbyInstruction,
-	OrderbyStep,
 	Step,
 } from '@data-wrangling-components/core'
 import { SortInstruction } from '@data-wrangling-components/react-controls'
 import { SortDirection } from '@essex/arquero'
-import { NodeInput } from '@essex/dataflow'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useLoadTable } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
  * Provides inputs for an OrderBy step.
  */
-export const Orderby: React.FC<StepComponentProps> = memo(function Orderby({
-	step,
-	store,
-	table,
-	onChange,
-	input,
-}) {
-	const internal = useMemo(() => step as OrderbyStep, [step])
+export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
+	withLoadedTable(function Orderby({ step, onChange, dataTable }) {
+		const sorts = useSorts(step, dataTable, onChange)
 
-	const tbl = useLoadTable(
-		input || step.input[NodeInput.Source]?.node,
-		table,
-		store,
-	)
-
-	const sorts = useSorts(internal, tbl, onChange)
-
-	const handleButtonClick = useCallback(() => {
-		onChange &&
-			onChange({
-				...internal,
+		const handleButtonClick = useCallback(() => {
+			onChange?.({
+				...step,
 				args: {
-					...internal.args,
-					orders: [...(internal.args.orders || []), newSort(tbl)],
+					...step.args,
+					orders: [...(step.args.orders || []), newSort(dataTable)],
 				},
 			})
-	}, [internal, tbl, onChange])
+		}, [step, dataTable, onChange])
 
-	return (
-		<Container>
-			{sorts}
-			<ActionButton
-				onClick={handleButtonClick}
-				iconProps={{ iconName: 'Add' }}
-				disabled={!tbl}
-			>
-				Add sort
-			</ActionButton>
-		</Container>
-	)
-})
+		return (
+			<Container>
+				{sorts}
+				<ActionButton
+					onClick={handleButtonClick}
+					iconProps={{ iconName: 'Add' }}
+					disabled={!dataTable}
+				>
+					Add sort
+				</ActionButton>
+			</Container>
+		)
+	}),
+)
 
 function newSort(table?: ColumnTable): OrderbyInstruction {
 	const column = table?.columnNames()[0] as string
@@ -74,22 +60,22 @@ function newSort(table?: ColumnTable): OrderbyInstruction {
 }
 
 function useSorts(
-	step: OrderbyStep,
+	step: Step<OrderbyArgs>,
 	table?: ColumnTable,
-	onChange?: (step: Step) => void,
+	onChange?: (step: Step<OrderbyArgs>) => void,
 ) {
 	return useMemo(() => {
 		return (step.args.orders || []).map((order, index) => {
 			const handleSortChange = (order: OrderbyInstruction) => {
 				const update = { ...step }
 				set(update, `args.orders[${index}]`, order)
-				onChange && onChange(update)
+				onChange?.(update)
 			}
 
 			const handleDeleteClick = () => {
 				const update = { ...step }
 				update.args.orders.splice(index, 1)
-				onChange && onChange(update)
+				onChange?.(update)
 			}
 
 			return (
