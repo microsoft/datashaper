@@ -12,7 +12,7 @@ import type { TableContainer } from '@essex/arquero'
 import { container } from '@essex/arquero'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { from } from 'rxjs'
 
 const TABLES = [

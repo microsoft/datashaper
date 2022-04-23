@@ -10,13 +10,13 @@ import {
 	Criterion,
 	DateComparisonOperator,
 	NumericComparisonOperator,
-	StringComparisonOperator,
+	StringComparisonOperator
 } from '../types.js'
 import {
 	BooleanOperator,
 	FieldAggregateOperation,
 	FilterCompareType,
-	WindowFunction,
+	WindowFunction
 } from '../types.js'
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
