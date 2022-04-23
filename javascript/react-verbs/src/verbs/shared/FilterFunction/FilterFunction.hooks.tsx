@@ -5,10 +5,9 @@
 import type { Criterion } from '@data-wrangling-components/core'
 import {
 	BooleanComparisonOperator,
+	DateComparisonOperator,
 	NumericComparisonOperator,
-	StringComparisonOperator,
-	DateComparisonOperator
-} from '@data-wrangling-components/core'
+	StringComparisonOperator} from '@data-wrangling-components/core'
 import { columnTypes, DataType } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'

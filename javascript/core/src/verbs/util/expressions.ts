@@ -5,15 +5,16 @@
 import { escape, op } from 'arquero'
 import type { Op } from 'arquero/dist/types/op/op'
 
-import {
+import type {
 	BooleanComparisonOperator,
 	Criterion,
-	DateComparisonOperator,
 	NumericComparisonOperator,
 	StringComparisonOperator
-} from '../types.js'
+} from '../types.js';
 import {
 	BooleanOperator,
+	DateComparisonOperator
+,
 	FieldAggregateOperation,
 	FilterCompareType,
 	WindowFunction
