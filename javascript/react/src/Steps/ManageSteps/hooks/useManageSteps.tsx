@@ -45,7 +45,7 @@ export function useManageSteps(
 
 	const onCreate = useCallback(
 		(_step: Step) => {
-			onSave && onSave(_step, stepIndex)
+			onSave?.(_step, stepIndex)
 			onDismissTransformModal()
 		},
 		[onSave, onDismissTransformModal, stepIndex],

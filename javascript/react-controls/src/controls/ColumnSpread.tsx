@@ -23,14 +23,9 @@ export const ColumnSpread: React.FC<ColumnSpreadProps> = memo(
 	function ColumnSpread({ column, onChange, onDelete }) {
 		const handleColumnChange = useCallback(
 			(_e: any, opt: string | undefined) => {
-				onChange && opt && onChange(opt)
+				opt && onChange?.(opt)
 			},
 			[onChange],
-		)
-
-		const handleDeleteClick = useCallback(
-			() => onDelete && onDelete(),
-			[onDelete],
 		)
 
 		return (
@@ -43,7 +38,7 @@ export const ColumnSpread: React.FC<ColumnSpreadProps> = memo(
 				<IconButton
 					title={'Remove this column'}
 					iconProps={{ iconName: 'Delete' }}
-					onClick={handleDeleteClick}
+					onClick={onDelete}
 				/>
 			</Container>
 		)

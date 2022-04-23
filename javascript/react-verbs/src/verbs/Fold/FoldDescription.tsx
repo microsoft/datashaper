@@ -2,18 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FoldStep } from '@data-wrangling-components/core'
+import type { FoldArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { createRowEntries } from '../../common/createRowEntries.js'
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const FoldDescription: React.FC<StepDescriptionProps> = memo(
+export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>> = memo(
 	function FoldDescription(props) {
 		const rows = useMemo(() => {
-			const internal = props.step as FoldStep
-			const { args } = internal
+			const {
+				step: { args },
+			} = props
 			const sub = createRowEntries(
 				args.columns || [],
 				c => ({

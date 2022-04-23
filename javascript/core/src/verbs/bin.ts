@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { fixedBinCount, fixedBinStep } from '@essex/arquero'
 import { bin as aqbin, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { InputColumnArgs, OutputColumnArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { fixedBinCount, fixedBinStep } from './util/index.js'
 
 export enum BinStrategy {
 	Auto = 'auto',

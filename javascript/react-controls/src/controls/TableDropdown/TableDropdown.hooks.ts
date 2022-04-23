@@ -22,7 +22,7 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 	const [dirty, setDirty] = useState<boolean>(true)
 	const [list, setList] = useState<string[]>([])
 	useEffect(() => {
-		return store?.onChange(() => setDirty(true))
+		return store?.onChange(() => setTimeout(() => setDirty(true), 0))
 	}, [store, setDirty])
 	useEffect(() => {
 		if (dirty) {

@@ -8,7 +8,7 @@ import { dropdownStyles } from '@data-wrangling-components/react-controls'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
 	LeftAlignedRow,
-	useHandleTextfieldChange,
+	useHandleTextFieldChange,
 } from '@data-wrangling-components/react-verbs'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
@@ -20,13 +20,19 @@ import type { HOCFunction } from './types.js'
  * @param label - optional label to use for the textfield instead of the default.
  * @returns
  */
-export function withOutputColumnTextfield(
+export function withOutputColumnTextfield<T extends OutputColumnArgs>(
 	label?: string,
-): HOCFunction<StepComponentProps> {
+): HOCFunction<StepComponentProps<T>> {
 	return Component => {
-		const WithOutputColumnTextfield: React.FC<StepComponentProps> = props => {
+		const WithOutputColumnTextfield: React.FC<
+			StepComponentProps<T>
+		> = props => {
 			const { step, onChange } = props
-			const handleToChange = useHandleTextfieldChange(step, 'args.to', onChange)
+			const handleToChange = useHandleTextFieldChange(
+				step,
+				(s, val) => (s.args.to = val as string),
+				onChange,
+			)
 			if (!isOutputColumnStep(step)) {
 				return <Component {...props} />
 			}

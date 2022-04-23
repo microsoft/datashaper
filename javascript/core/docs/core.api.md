@@ -6,12 +6,14 @@
 
 import { BaseNode } from '@essex/dataflow';
 import { BaseVariadicNode } from '@essex/dataflow';
-import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { Graph } from '@essex/dataflow';
 import { InputNode } from '@essex/dataflow';
 import type { Node as Node_2 } from '@essex/dataflow';
 import type { Observable } from 'rxjs';
+import { SortDirection } from '@essex/arquero';
 import { StepNode } from '@essex/dataflow';
+import { TableContainer } from '@essex/arquero';
+import type { Value } from '@essex/arquero';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -25,11 +27,6 @@ export interface AggregateArgs extends RollupArgs {
     groupby: string;
 }
 
-// Warning: (ae-missing-release-tag) "AggregateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type AggregateStep = Step<AggregateArgs>;
-
 // Warning: (ae-missing-release-tag) "BasicIO" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -40,16 +37,6 @@ export interface BasicIO {
     output?: string | {
         target: string;
     };
-}
-
-// Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface Bin {
-    // (undocumented)
-    count: number;
-    // (undocumented)
-    min: number | string;
 }
 
 // Warning: (ae-missing-release-tag) "bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -80,16 +67,6 @@ export const binarize: (id: string) => StepNode<TableContainer<unknown>, Binariz
 // @public (undocumented)
 export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {
 }
-
-// Warning: (ae-missing-release-tag) "BinarizeStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type BinarizeStep = Step<BinarizeArgs>;
-
-// Warning: (ae-missing-release-tag) "BinStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type BinStep = Step<BinArgs>;
 
 // Warning: (ae-missing-release-tag) "BinStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -145,103 +122,16 @@ export enum BooleanOperator {
     XOR = "xor"
 }
 
-// Warning: (ae-missing-release-tag) "BooleanStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type BooleanStep = Step<BooleanArgs>;
-
-// Warning: (ae-missing-release-tag) "Category" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface Category {
-    // (undocumented)
-    count: number;
-    // (undocumented)
-    name: string;
-}
-
-// Warning: (ae-missing-release-tag) "coerce" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function coerce(value: Value, dataType: DataType): Value;
-
-// Warning: (ae-missing-release-tag) "columnIndexesWithZeros" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function columnIndexesWithZeros(table: ColumnTable): number[];
-
-// Warning: (ae-missing-release-tag) "ColumnListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type ColumnListStep = Step<InputColumnListArgs>;
-
-// Warning: (ae-missing-release-tag) "ColumnMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ColumnMetadata {
-    // (undocumented)
-    name: string;
-    // (undocumented)
-    stats?: ColumnStats;
-    // (undocumented)
-    type: DataType;
-}
-
-// Warning: (ae-missing-release-tag) "columnNamesWithZeros" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function columnNamesWithZeros(table: ColumnTable): string[];
-
-// Warning: (ae-missing-release-tag) "ColumnStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnStats {
-    // (undocumented)
-    bins?: Bin[];
-    // (undocumented)
-    categories?: Category[];
-    // (undocumented)
-    count: number;
-    // (undocumented)
-    distinct: number;
-    // (undocumented)
-    invalid: number;
-    // (undocumented)
-    max?: number;
-    // (undocumented)
-    mean?: number;
-    // (undocumented)
-    median?: number;
-    // (undocumented)
-    min?: number;
-    // (undocumented)
-    mode: any;
-    // (undocumented)
-    stdev?: number;
-    // (undocumented)
-    type: DataType;
-}
-
 // Warning: (ae-missing-release-tag) "columnTransformVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function columnTransformVerbs(filter?: (verb: Verb) => boolean): Verb[];
-
-// Warning: (ae-missing-release-tag) "columnType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function columnType(table: ColumnTable, column: string): DataType;
 
 // Warning: (ae-forgotten-export) The symbol "SetOperationNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "concat" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const concat: (id: string) => SetOperationNode<unknown>;
-
-// Warning: (ae-missing-release-tag) "container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function container(id: string, table?: ColumnTable, options?: Omit<TableContainer, 'id' | 'table'>): TableContainer;
 
 // Warning: (ae-missing-release-tag) "convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -258,11 +148,6 @@ export interface ConvertArgs extends InputColumnListArgs {
     // (undocumented)
     type: ParseType;
 }
-
-// Warning: (ae-missing-release-tag) "ConvertStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type ConvertStep = Step<ConvertArgs>;
 
 // Warning: (ae-missing-release-tag) "CopyWithPartial" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -294,30 +179,6 @@ export interface Criterion {
     value?: Value;
 }
 
-// Warning: (ae-missing-release-tag) "DataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum DataType {
-    // (undocumented)
-    Array = "array",
-    // (undocumented)
-    Boolean = "boolean",
-    // (undocumented)
-    Date = "date",
-    // (undocumented)
-    Number = "number",
-    // (undocumented)
-    Object = "object",
-    // (undocumented)
-    String = "string",
-    // (undocumented)
-    Text = "text",
-    // (undocumented)
-    Undefined = "undefined",
-    // (undocumented)
-    Unknown = "unknown"
-}
-
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -327,11 +188,6 @@ export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<I
 //
 // @public (undocumented)
 export type DedupeArgs = Partial<InputColumnListArgs>;
-
-// Warning: (ae-missing-release-tag) "DedupeStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type DedupeStep = Step<DedupeArgs>;
 
 // Warning: (ae-missing-release-tag) "DefaultPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -414,16 +270,6 @@ export interface DeriveArgs extends OutputColumnArgs {
     operator: MathOperator;
 }
 
-// Warning: (ae-missing-release-tag) "DeriveStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type DeriveStep = Step<DeriveArgs>;
-
-// Warning: (ae-missing-release-tag) "determineType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function determineType(value: Value): DataType;
-
 // Warning: (ae-missing-release-tag) "difference" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -447,17 +293,10 @@ export const erase: (id: string) => StepNode<TableContainer<unknown>, EraseArgs>
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface EraseArgs {
-    // (undocumented)
-    columns: string[];
+export interface EraseArgs extends InputColumnListArgs {
     // (undocumented)
     value: Value;
 }
-
-// Warning: (ae-missing-release-tag) "EraseStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type EraseStep = Step<EraseArgs>;
 
 // Warning: (ae-missing-release-tag) "fetch" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -473,11 +312,6 @@ export interface FetchArgs {
     delimiter?: string;
     url: string;
 }
-
-// Warning: (ae-missing-release-tag) "FetchStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type FetchStep = Step<FetchArgs>;
 
 // Warning: (ae-missing-release-tag) "FieldAggregateOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -531,11 +365,6 @@ export interface FillArgs extends OutputColumnArgs {
     value: Value;
 }
 
-// Warning: (ae-missing-release-tag) "FillStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type FillStep = Step<FillArgs>;
-
 // Warning: (ae-missing-release-tag) "filter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -561,11 +390,6 @@ export enum FilterCompareType {
     Value = "value"
 }
 
-// Warning: (ae-missing-release-tag) "FilterStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type FilterStep = Step<FilterArgs>;
-
 // Warning: (ae-missing-release-tag) "fold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -578,29 +402,6 @@ export interface FoldArgs extends InputColumnListArgs {
     to?: [string, string];
 }
 
-// Warning: (ae-missing-release-tag) "FoldStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type FoldStep = Step<FoldArgs>;
-
-// Warning: (ae-missing-release-tag) "format" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function format(value: number, options?: {
-    minExp?: number;
-    precision?: number;
-}): string;
-
-// Warning: (ae-missing-release-tag) "formatIfNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function formatIfNumber(value: Value): string | Value;
-
-// Warning: (ae-missing-release-tag) "getters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function getters(table: ColumnTable): Record<string, (i: number) => any>;
-
 // Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -610,11 +411,6 @@ export const groupby: (id: string) => StepNode<TableContainer<unknown>, InputCol
 //
 // @public (undocumented)
 export type GroupbyArgs = InputColumnListArgs;
-
-// Warning: (ae-missing-release-tag) "GroupbyStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type GroupbyStep = Step<GroupbyArgs>;
 
 // Warning: (ae-missing-release-tag) "handleMaybeAsync" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -642,11 +438,6 @@ export const impute: (id: string) => StepNode<TableContainer<unknown>, ImputeArg
 export interface ImputeArgs extends InputColumnListArgs {
     value: Value;
 }
-
-// Warning: (ae-missing-release-tag) "ImputeStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type ImputeStep = Step<ImputeArgs>;
 
 // Warning: (ae-missing-release-tag) "InputBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -687,12 +478,6 @@ export type InputSpecification = string | InputBinding;
 //
 // @public (undocumented)
 export const intersect: (id: string) => SetOperationNode<unknown>;
-
-// Warning: (ae-missing-release-tag) "introspect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function introspect(table: ColumnTable, detailed?: boolean,
-columns?: string[]): TableMetadata;
 
 // Warning: (ae-missing-release-tag) "isInputColumnStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -735,11 +520,6 @@ export interface JoinArgsBase {
     on?: string[];
 }
 
-// Warning: (ae-missing-release-tag) "JoinStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type JoinStep = Step<JoinArgs>;
-
 // Warning: (ae-missing-release-tag) "JoinStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -765,11 +545,6 @@ export function lookup(id: string): LookupNode;
 // @public (undocumented)
 export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {
 }
-
-// Warning: (ae-missing-release-tag) "LookupStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type LookupStep = Step<LookupArgs>;
 
 // Warning: (ae-missing-release-tag) "MathOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -803,11 +578,6 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
     // (undocumented)
     strategy: MergeStrategy;
 }
-
-// Warning: (ae-missing-release-tag) "MergeStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type MergeStep = Step<MergeArgs>;
 
 // Warning: (ae-missing-release-tag) "MergeStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -862,11 +632,6 @@ export interface OnehotArgs extends InputColumnArgs {
     prefix?: string;
 }
 
-// Warning: (ae-missing-release-tag) "OneHotStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type OneHotStep = Step<OnehotArgs>;
-
 // Warning: (ae-missing-release-tag) "orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -888,11 +653,6 @@ export interface OrderbyInstruction {
     // (undocumented)
     direction?: SortDirection;
 }
-
-// Warning: (ae-missing-release-tag) "OrderbyStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type OrderbyStep = Step<OrderbyArgs>;
 
 // Warning: (ae-missing-release-tag) "OutputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -961,11 +721,6 @@ export interface PivotArgs {
     value: string;
 }
 
-// Warning: (ae-missing-release-tag) "PivotStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type PivotStep = Step<PivotArgs>;
-
 // Warning: (ae-missing-release-tag) "readSpec" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -974,7 +729,7 @@ export function readSpec(spec: SpecificationInput): Step[];
 // Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function readStep<T extends object>({ verb, args, id, input, output }: StepInput<T>, previous?: Step | undefined): Step<T>;
+export function readStep<T extends object | void | unknown = any>({ verb, args, id, input, output }: StepInput<T>, previous?: Step | undefined): Step<T>;
 
 // Warning: (ae-missing-release-tag) "readSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -993,11 +748,6 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
     map: Record<Value, Value>;
 }
 
-// Warning: (ae-missing-release-tag) "RecodeStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type RecodeStep = Step<RecodeArgs>;
-
 // Warning: (ae-missing-release-tag) "rename" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1007,11 +757,6 @@ export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColu
 //
 // @public (undocumented)
 export type RenameArgs = InputColumnRecordArgs;
-
-// Warning: (ae-missing-release-tag) "RenameStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type RenameStep = Step<RenameArgs>;
 
 // Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1023,25 +768,6 @@ export const rollup: (id: string) => StepNode<TableContainer<unknown>, RollupArg
 // @public (undocumented)
 export interface RollupArgs extends InputColumnArgs, OutputColumnArgs {
     operation: FieldAggregateOperation;
-}
-
-// Warning: (ae-missing-release-tag) "RollupStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type RollupStep = Step<RollupArgs>;
-
-// Warning: (ae-missing-release-tag) "rows" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function rows(table: ColumnTable, options?: RowsOptions): any[][];
-
-// Warning: (ae-missing-release-tag) "RowsOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface RowsOptions {
-    format?: Record<string, (d: any) => any>;
-    skipHeader?: boolean;
-    stringify?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "sample" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1057,11 +783,6 @@ export interface SampleArgs {
     size?: number;
 }
 
-// Warning: (ae-missing-release-tag) "SampleStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type SampleStep = Step<SampleArgs>;
-
 // Warning: (ae-missing-release-tag) "select" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1071,11 +792,6 @@ export const select: (id: string) => StepNode<TableContainer<unknown>, InputColu
 //
 // @public (undocumented)
 export type SelectArgs = InputColumnListArgs;
-
-// Warning: (ae-missing-release-tag) "SelectStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type SelectStep = Step<SelectArgs>;
 
 // Warning: (ae-missing-release-tag) "SetOp" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1089,16 +805,6 @@ export enum SetOp {
     Intersect = "intersect",
     // (undocumented)
     Union = "union"
-}
-
-// Warning: (ae-missing-release-tag) "SortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum SortDirection {
-    // (undocumented)
-    Ascending = "asc",
-    // (undocumented)
-    Descending = "desc"
 }
 
 // Warning: (ae-missing-release-tag) "Specification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1139,20 +845,10 @@ export interface SpreadArgs {
     to: string[];
 }
 
-// Warning: (ae-missing-release-tag) "SpreadStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type SpreadStep = Step<SpreadArgs>;
-
-// Warning: (ae-missing-release-tag) "stats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function stats(table: ColumnTable, columns?: string[]): Record<string, ColumnStats>;
-
 // Warning: (ae-missing-release-tag) "Step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface Step<T extends object = any> {
+export interface Step<T extends object | void | unknown = unknown> {
     args: T;
     id: string;
     input: {
@@ -1173,7 +869,7 @@ export interface StepCommon {
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepInput<T extends object = any> extends StepCommon {
+export interface StepInput<T extends object | void | unknown = unknown> extends StepCommon {
     args?: T;
     input?: string | ({
         others?: InputSpecification[];
@@ -1326,37 +1022,10 @@ export enum StringComparisonOperator {
     StartsWith = "starts with"
 }
 
-// Warning: (ae-missing-release-tag) "TableContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TableContainer<T = unknown> {
-    context?: T;
-    id: string;
-    metadata?: TableMetadata;
-    name?: string;
-    table?: ColumnTable;
-}
-
-// Warning: (ae-missing-release-tag) "TableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TableMetadata {
-    // (undocumented)
-    cols: number;
-    columns: Record<string, ColumnMetadata>;
-    // (undocumented)
-    rows: number;
-}
-
 // Warning: (ae-missing-release-tag) "TableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type TableStore = Store<TableContainer>;
-
-// Warning: (ae-missing-release-tag) "types" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function types(table: ColumnTable, columns?: string[]): Record<string, DataType>;
 
 // Warning: (ae-missing-release-tag) "unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1372,11 +1041,6 @@ export interface UnfoldArgs {
     // (undocumented)
     value: string;
 }
-
-// Warning: (ae-missing-release-tag) "UnfoldStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type UnfoldStep = Step<UnfoldArgs>;
 
 // Warning: (ae-missing-release-tag) "ungroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1403,20 +1067,10 @@ export const unroll: (id: string) => StepNode<TableContainer<unknown>, InputColu
 // @public (undocumented)
 export type UnrollArgs = InputColumnListArgs;
 
-// Warning: (ae-missing-release-tag) "UnrollStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type UnrollStep = Step<UnrollArgs>;
-
 // Warning: (ae-missing-release-tag) "Unsubscribe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Unsubscribe = Handler;
-
-// Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export type Value = any;
 
 // Warning: (ae-missing-release-tag) "VariadicIO" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1544,11 +1198,6 @@ export enum WindowFunction {
     // (undocumented)
     RowNumber = "row_number"
 }
-
-// Warning: (ae-missing-release-tag) "WindowStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type WindowStep = Step<WindowArgs>;
 
 // (No @packageDocumentation comment for this package)
 

@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableContainer } from '@essex/arquero'
 import type { Graph } from '@essex/dataflow'
 
 import type { Step, StepInput } from '../steps/index.js'
 import { readStep, readSteps } from '../steps/index.js'
 import type { Store } from '../store/index.js'
-import type { TableContainer } from '../tables/index.js'
 import type { Verb } from '../verbs/index.js'
 import { createGraph } from './graph.js'
 import type { Pipeline, TableStore } from './types.js'

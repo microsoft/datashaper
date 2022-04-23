@@ -3,8 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Specification } from '@data-wrangling-components/core'
-import type { DetailsListFeatures } from '@data-wrangling-components/react'
-import { StatsColumnType } from '@data-wrangling-components/react'
 import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	FileCollection,
@@ -12,6 +10,8 @@ import {
 	FileMimeType,
 	FileType,
 } from '@data-wrangling-components/utilities'
+import type { DetailsListFeatures } from '@essex/arquero-react'
+import { StatsColumnType } from '@essex/arquero-react'
 import type { IDropdownOption, IDropdownStyles } from '@fluentui/react'
 import { Checkbox, Dropdown } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -73,7 +73,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			if (!files.length) return
 			updateFileCollection(files)
 			const loaded = await loadFiles(files)
-			onLoadFiles && onLoadFiles(loaded)
+			onLoadFiles?.(loaded)
 		},
 		[onLoadFiles, loadFiles, updateFileCollection],
 	)
@@ -85,7 +85,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			if (!first) return
 			updateFileCollection([first])
 			const spec = await loadSpec(first)
-			onSelectSpecification && onSelectSpecification(spec as any)
+			onSelectSpecification?.(spec as Specification)
 		},
 		[onSelectSpecification, loadSpec, updateFileCollection],
 	)
@@ -100,15 +100,13 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 
 	const handleSmartHeadersChange = useCallback(
 		(e: any, checked?: boolean) =>
-			onFeaturesChange &&
-			onFeaturesChange({ ...features, smartHeaders: checked }),
+			onFeaturesChange?.({ ...features, smartHeaders: checked }),
 		[features, onFeaturesChange],
 	)
 
 	const handleFeaturesChange = useCallback(
 		(propName: string, checked?: boolean) =>
-			onFeaturesChange &&
-			onFeaturesChange({ ...features, [propName]: checked }),
+			onFeaturesChange?.({ ...features, [propName]: checked }),
 		[features, onFeaturesChange],
 	)
 
@@ -119,9 +117,8 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 				? [...selectedKeys, option.key as StatsColumnType]
 				: selectedKeys.filter(key => key !== option?.key)
 
-			onFeaturesChange &&
-				option &&
-				onFeaturesChange({
+			option &&
+				onFeaturesChange?.({
 					...features,
 					statsColumnTypes: selectedTypes,
 				})
@@ -130,11 +127,10 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	)
 	const handleArrayFeaturesChange = useCallback(
 		(propName: string, checked?: boolean) => {
-			onFeaturesChange &&
-				onFeaturesChange({
-					...features,
-					[propName]: checked,
-				})
+			onFeaturesChange?.({
+				...features,
+				[propName]: checked,
+			})
 		},
 
 		[features, onFeaturesChange],

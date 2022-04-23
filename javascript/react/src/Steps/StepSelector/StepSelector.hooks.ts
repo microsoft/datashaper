@@ -127,14 +127,14 @@ export function useSelectedOption(
 	}, [verb])
 
 	const onButtonClick = useCallback(() => {
-		selected && onChange && onChange(selected)
+		selected && onChange?.(selected)
 	}, [selected, onChange])
 
 	const onItemClick = useCallback(
 		(_e: any, opt: IContextualMenuItem | undefined) => {
 			if (opt) {
 				setSelected(opt.key as Verb)
-				!requireButtonClick && onChange && onChange(opt.key as Verb)
+				!requireButtonClick && onChange?.(opt.key as Verb)
 			}
 		},
 		[requireButtonClick, onChange, setSelected],

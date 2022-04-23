@@ -24,14 +24,9 @@ export const ColumnInstruction: React.FC<ColumnInstructionProps> = memo(
 	function ColumnInstruction({ table, column, onChange, onDelete }) {
 		const handleColumnChange = useCallback(
 			(_e: any, opt: IDropdownOption<any> | undefined) => {
-				onChange && onChange(opt?.key as string)
+				onChange?.(opt?.key as string)
 			},
 			[onChange],
-		)
-
-		const handleDeleteClick = useCallback(
-			() => onDelete && onDelete(),
-			[onDelete],
 		)
 
 		return (
@@ -45,7 +40,7 @@ export const ColumnInstruction: React.FC<ColumnInstructionProps> = memo(
 				<IconButton
 					title={'Remove this column'}
 					iconProps={{ iconName: 'Delete' }}
-					onClick={handleDeleteClick}
+					onClick={onDelete}
 				/>
 			</Container>
 		)

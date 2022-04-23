@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@data-wrangling-components/core'
+import type { TableContainer } from '@essex/arquero'
 import type { BaseButton, Button, IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
@@ -57,7 +57,7 @@ export function useTableSelection(
 
 	const onItemClick = useCallback(
 		(_e: any, opt: IContextualMenuItem | undefined) =>
-			onSelect && opt && onSelect(opt.key),
+			opt && onSelect?.(opt.key),
 		[onSelect],
 	)
 
@@ -98,7 +98,7 @@ export function useOutputPreview(
 	}, [derived])
 
 	const onClick = useCallback(() => {
-		lastId && onSelect && onSelect(lastId)
+		lastId && onSelect?.(lastId)
 	}, [lastId, onSelect])
 
 	return {

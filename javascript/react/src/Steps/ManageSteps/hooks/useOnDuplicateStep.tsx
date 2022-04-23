@@ -38,7 +38,7 @@ export function useOnDuplicateStep(
 				inputs: { source: { node: _step.id } },
 				outputs: { target: tableName },
 			}
-			onSave && onSave(newStep)
+			onSave?.(newStep)
 		},
 		[onSave, createTableName, formattedColumnArgs, type, store, table],
 	)

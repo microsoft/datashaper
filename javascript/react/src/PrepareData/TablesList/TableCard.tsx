@@ -21,7 +21,7 @@ export const TableCard: React.FC<{
 		<TooltipHost key={index} content={'Preview table'}>
 			<Card
 				isSelected={isSelected(tableName)}
-				onClick={() => onSelect && onSelect(tableName)}
+				onClick={() => onSelect?.(tableName)}
 			>
 				<DocumentCardTitle
 					styles={styles.title}

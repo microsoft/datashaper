@@ -35,7 +35,7 @@ import {
 	WindowDescription,
 } from '@data-wrangling-components/react-verbs'
 
-const descriptions: Record<string, React.FC<StepDescriptionProps>> = {
+const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
 	aggregate: AggregateDescription,
 	bin: BinDescription,
 	binarize: BinarizeDescription,

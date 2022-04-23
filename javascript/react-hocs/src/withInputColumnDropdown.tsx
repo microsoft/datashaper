@@ -4,10 +4,8 @@
  */
 import type { InputColumnArgs, Step } from '@data-wrangling-components/core'
 import {
-	DataType,
 	isInputColumnStep,
 	isNumericInputStep,
-	types,
 } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
@@ -16,6 +14,7 @@ import {
 	useHandleDropdownChange,
 	useLoadTable,
 } from '@data-wrangling-components/react-verbs'
+import { columnTypes, DataType } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
@@ -27,15 +26,15 @@ import type { HOCFunction } from './types.js'
  * @param label - optional label to use for the dropdown instead of the default.
  * @returns
  */
-export function withInputColumnDropdown(
+export function withInputColumnDropdown<T extends InputColumnArgs>(
 	label?: string,
-): HOCFunction<StepComponentProps> {
+): HOCFunction<StepComponentProps<T>> {
 	return Component => {
-		const WithInputColumnDropdown: React.FC<StepComponentProps> = props => {
+		const WithInputColumnDropdown: React.FC<StepComponentProps<T>> = props => {
 			const { step, store, onChange, input, table } = props
 			const handleColumnChange = useHandleDropdownChange(
 				step,
-				'args.column',
+				(s, val) => (s.args.column = val as string),
 				onChange,
 			)
 
@@ -74,10 +73,10 @@ export function withInputColumnDropdown(
 	}
 }
 
-function useColumnFilter(step: Step, table?: ColumnTable) {
+function useColumnFilter(step: Step<unknown>, table?: ColumnTable) {
 	const typeMap = useMemo(() => {
 		if (table) {
-			return types(table)
+			return columnTypes(table)
 		}
 		return {}
 	}, [table])

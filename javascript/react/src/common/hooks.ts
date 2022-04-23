@@ -48,7 +48,7 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 	)
 
 	const onConfirmDelete = useCallback(() => {
-		onDelete && onDelete(deleteArg)
+		onDelete?.(deleteArg)
 		toggleDeleteModalOpen()
 	}, [toggleDeleteModalOpen, deleteArg, onDelete])
 
