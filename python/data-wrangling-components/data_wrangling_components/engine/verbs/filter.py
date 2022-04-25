@@ -7,8 +7,6 @@ import logging
 
 from typing import Union
 
-import pandas as pd
-
 from data_wrangling_components.engine.pandas.filter_df import filter_df
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import (
