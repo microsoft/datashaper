@@ -2,7 +2,6 @@ releases:
   "@data-wrangling-components/core": patch
   "@data-wrangling-components/primitives": patch
   "@data-wrangling-components/react": patch
-  "@data-wrangling-components/react-arquero": patch
   "@data-wrangling-components/react-charts": patch
   "@data-wrangling-components/react-controls": patch
   "@data-wrangling-components/react-hocs": patch

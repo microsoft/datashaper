@@ -6,7 +6,6 @@ releases:
 
 declined:
   - "@data-wrangling-components/primitives"
-  - "@data-wrangling-components/react-arquero"
   - "@data-wrangling-components/react-charts"
   - "@data-wrangling-components/react-controls"
   - "@data-wrangling-components/react-hocs"

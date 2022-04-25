@@ -2,7 +2,6 @@ releases:
   "@data-wrangling-components/core": minor
   "@data-wrangling-components/primitives": minor
   "@data-wrangling-components/react": minor
-  "@data-wrangling-components/react-arquero": minor
   "@data-wrangling-components/react-controls": minor
   "@data-wrangling-components/react-hocs": minor
   "@data-wrangling-components/react-verbs": major
