@@ -5,12 +5,16 @@
 import type { Criterion } from '@data-wrangling-components/core'
 import {
 	BooleanComparisonOperator,
-	DataType,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
-import { ColumnOrValueComboBox , EnumDropdown , narrowDropdownStyles } from '@data-wrangling-components/react-controls'
+import {
+	ColumnOrValueComboBox,
+	EnumDropdown,
+	narrowDropdownStyles,
+} from '@data-wrangling-components/react-controls'
+import { DataType } from '@essex/arquero'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -46,14 +50,13 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 	}) {
 		const handleOpChange = useCallback(
 			(_e: React.FormEvent<HTMLDivElement>, opt?: IDropdownOption) => {
-				onChange &&
-					onChange({
-						...criterion,
-						operator: opt?.key as
-							| StringComparisonOperator
-							| NumericComparisonOperator
-							| BooleanComparisonOperator,
-					})
+				onChange?.({
+					...criterion,
+					operator: opt?.key as
+						| StringComparisonOperator
+						| NumericComparisonOperator
+						| BooleanComparisonOperator,
+				})
 			},
 			[criterion, onChange],
 		)
@@ -70,7 +73,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					type: option ? FilterCompareType.Column : FilterCompareType.Value,
 					value: option ? option.key : value,
 				}
-				onChange && onChange(update)
+				onChange?.(update)
 			},
 			[criterion, onChange],
 		)
@@ -116,12 +119,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		}, [type, column, criterion, handleOpChange, suppressLabels])
 
 		const isEmpty = useIsEmpty(criterion)
-
-		const handleDeleteClick = useCallback(
-			() => onChange && onChange(),
-			[onChange],
-		)
-
+		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])
 		const placeholder = usePlaceholderText(type)
 
 		return (

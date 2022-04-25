@@ -22,6 +22,8 @@ export class DefaultStore<T> implements Store<T> {
 	private _storage: Map<string, ItemStorage<T>> = new Map()
 	private _itemEvents: Map<string, BehaviorSubject<Maybe<T>>> = new Map()
 	private _changeEvent = new Subject<void>()
+	// not canonical - storage is source of truth
+	private _itemCache: Map<string, T> = new Map()
 
 	public constructor(private _printItem: (item: T) => void) {}
 
@@ -44,6 +46,7 @@ export class DefaultStore<T> implements Store<T> {
 		const storage: Partial<ItemStorage<T>> = { observable: value }
 		storage.subscription = value.subscribe(v => {
 			storage.cached = v
+			this._itemCache.set(id, v)
 			this.emit(id, v)
 		})
 		this._storage.set(id, storage as ItemStorage<T>)
@@ -54,6 +57,7 @@ export class DefaultStore<T> implements Store<T> {
 		if (existing) {
 			existing.subscription.unsubscribe()
 			this._storage.delete(id)
+			this._itemCache.delete(id)
 		}
 	}
 
@@ -96,14 +100,7 @@ export class DefaultStore<T> implements Store<T> {
 	}
 
 	public toMap(): Map<string, T> {
-		const map = new Map<string, T>()
-		for (const id of this._storage.keys()) {
-			const value = this.get(id)
-			if (value != null) {
-				map.set(id, value)
-			}
-		}
-		return map
+		return this._itemCache
 	}
 
 	public toArray(): Maybe<T>[] {

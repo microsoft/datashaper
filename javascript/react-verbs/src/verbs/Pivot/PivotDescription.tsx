@@ -2,17 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { PivotStep } from '@data-wrangling-components/core'
+import type { PivotArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const PivotDescription: React.FC<StepDescriptionProps> = memo(
+export const PivotDescription: React.FC<StepDescriptionProps<PivotArgs>> = memo(
 	function PivotDescription(props) {
 		const rows = useMemo(() => {
-			const internal = props.step as PivotStep
-			const { args } = internal
+			const {
+				step: { args },
+			} = props
 			return [
 				{
 					before: 'column to use as key',

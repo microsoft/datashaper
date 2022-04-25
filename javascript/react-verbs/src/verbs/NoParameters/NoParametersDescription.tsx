@@ -7,11 +7,10 @@ import { memo, useMemo } from 'react'
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const NoParametersDescription: React.FC<StepDescriptionProps> = memo(
-	function NoParametersDescription(props) {
+export const NoParametersDescription: React.FC<StepDescriptionProps<void>> =
+	memo(function NoParametersDescription(props) {
 		const rows = useMemo(() => {
 			return []
 		}, [])
 		return <VerbDescription {...props} rows={rows} />
-	},
-)
+	})

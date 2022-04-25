@@ -2,12 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BaseNode } from '@essex/dataflow'
-import { NodeInput } from '@essex/dataflow'
+import type { TableContainer } from '@essex/arquero'
+import { container } from '@essex/arquero'
+import { BaseNode , NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { container } from '../tables/container.js'
-import type { TableContainer } from '../tables/types.js'
 import type { JoinArgsBase } from './join.js'
 import type { InputColumnListArgs } from './types.js'
 

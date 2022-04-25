@@ -9,11 +9,6 @@
 // @public
 export const identity: <T>(value?: T | undefined) => T | undefined;
 
-// Warning: (ae-missing-release-tag) "noop" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const noop: () => void;
-
 // Warning: (ae-missing-release-tag) "num" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

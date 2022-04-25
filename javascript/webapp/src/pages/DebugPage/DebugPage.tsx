@@ -3,18 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
-import type {
-	Specification,
-	Step,
-	TableContainer,
-	Verb,
-} from '@data-wrangling-components/core'
+import type { Specification, Step, Verb } from '@data-wrangling-components/core'
 import { readSpec } from '@data-wrangling-components/core'
-import type { DetailsListFeatures } from '@data-wrangling-components/react'
 import {
- StatsColumnType,	StepComponent,
+	StepComponent,
 	StepSelector,
-	usePipeline } from '@data-wrangling-components/react'
+	usePipeline,
+} from '@data-wrangling-components/react'
+import type { TableContainer } from '@essex/arquero'
+import type { DetailsListFeatures } from '@essex/arquero-react'
+import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo, useState } from 'react'

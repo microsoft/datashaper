@@ -2,16 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { DataType } from '@essex/arquero'
+import { columnType } from '@essex/arquero'
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
-import { columnType } from '../util/index.js'
-import type {
-	DataType,
-	InputColumnListArgs,
-	OutputColumnArgs,
-} from './types.js'
+import type { InputColumnListArgs, OutputColumnArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 

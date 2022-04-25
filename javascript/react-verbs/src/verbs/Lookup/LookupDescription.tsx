@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { LookupStep } from '@data-wrangling-components/core'
+import type { LookupArgs } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
@@ -10,11 +10,12 @@ import { createRowEntries } from '../../common/createRowEntries.js'
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const LookupDescription: React.FC<StepDescriptionProps> = memo(
-	function LookupDescription(props) {
+export const LookupDescription: React.FC<StepDescriptionProps<LookupArgs>> =
+	memo(function LookupDescription(props) {
 		const rows = useMemo(() => {
-			const internal = props.step as LookupStep
-			const { args } = internal
+			const {
+				step: { args },
+			} = props
 			const sub = createRowEntries(
 				args.columns,
 				c => ({
@@ -26,7 +27,7 @@ export const LookupDescription: React.FC<StepDescriptionProps> = memo(
 			return [
 				{
 					before: 'lookup from',
-					value: internal.input[NodeInput.Other]?.node,
+					value: props.step.input[NodeInput.Other]?.node,
 				},
 				{
 					before: 'on',
@@ -40,5 +41,4 @@ export const LookupDescription: React.FC<StepDescriptionProps> = memo(
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />
-	},
-)
+	})

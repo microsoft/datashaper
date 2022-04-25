@@ -30,11 +30,10 @@
 		{
 			"id": "n3",
 			"verb": "lookup",
-			"input": { "source": "output-table-1" },
+			"input": { "source": "output-table-1", "other": "output-table-0" },
 			"output": { "target": "output-table-2" },
 			"args": {
 				"columns": ["Symbol"],
-				"other": "output-table-0",
 				"on": ["Week Key"]
 			}
 		},

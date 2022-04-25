@@ -4,13 +4,6 @@
  */
 
 /**
- * A no-op utility functionw
- */
-export const noop = (): void => {
-	/* do nothing */
-}
-
-/**
  * A utility identity function
  */
 export const identity = <T>(value?: T): T | undefined => value

@@ -3,17 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { initializeIcons } from '@fluentui/react/lib/Icons'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 
 import { App } from '~components'
 import { setDefaultSettings } from '~localStorageHandler'
 
 function mount(): void {
 	try {
-		const root = document.getElementById('root')
+		const rootElement = document.getElementById('root')
 		initializeIcons(undefined, { disableWarnings: true })
 		setDefaultSettings()
-		render(<App />, root)
+		const root = createRoot(rootElement!)
+		root.render(<App />)
 	} catch (err) {
 		console.error('error rendering application', err)
 	}

@@ -2,17 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { SpreadStep } from '@data-wrangling-components/core'
+import type { SpreadArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
 import type { StepDescriptionProps } from '../../types.js'
 
-export const SpreadDescription: React.FC<StepDescriptionProps> = memo(
-	function SpreadDescription(props) {
+export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
+	memo(function SpreadDescription(props) {
 		const rows = useMemo(() => {
-			const internal = props.step as SpreadStep
-			const { args } = internal
+			const {
+				step: { args },
+			} = props
 			return [
 				{
 					before: 'column',
@@ -25,5 +26,4 @@ export const SpreadDescription: React.FC<StepDescriptionProps> = memo(
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />
-	},
-)
+	})

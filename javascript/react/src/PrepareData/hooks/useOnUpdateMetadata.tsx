@@ -3,11 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type {
-	TableContainer,
-	TableMetadata,
-	TableStore,
-} from '@data-wrangling-components/core'
+import type { TableStore } from '@data-wrangling-components/core'
+import type { TableContainer, TableMetadata } from '@essex/arquero'
 import { useCallback } from 'react'
 
 export function useOnUpdateMetadata(

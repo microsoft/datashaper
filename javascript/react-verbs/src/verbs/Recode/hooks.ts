@@ -2,11 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	RecodeArgs,
-	RecodeStep,
-	Value,
-} from '@data-wrangling-components/core'
+import type { RecodeArgs,Step } from '@data-wrangling-components/core'
+import type { Value } from '@essex/arquero'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
@@ -14,11 +11,11 @@ import { useCallback, useMemo } from 'react'
 import type { StepChangeFunction } from '../../types.js'
 
 export function useColumnValues(
-	internal: RecodeStep,
+	step: Step<RecodeArgs>,
 	table?: ColumnTable,
 ): Value[] {
 	return useMemo(() => {
-		const { column } = internal.args
+		const { column } = step.args
 		if (!table || !column) {
 			return []
 		}
@@ -27,91 +24,88 @@ export function useColumnValues(
 		}
 		const rollup = table.orderby(column).rollup(args)
 		return rollup.get(column, 0)
-	}, [table, internal])
+	}, [table, step])
 }
 
 export function useHandleRecodeChange(
-	internal: RecodeStep,
-	onChange?: StepChangeFunction,
+	step: Step<RecodeArgs>,
+	onChange?: StepChangeFunction<RecodeArgs>,
 ): (previous: Value, oldValue: Value, newValue: Value) => void {
 	return useCallback(
 		(previous, oldValue, newValue) => {
 			const map = {
-				...internal.args.map,
+				...step.args.map,
 			}
 			delete map[previous]
 			map[oldValue] = newValue
-			onChange &&
-				onChange({
-					...internal,
-					args: {
-						...internal.args,
-						map,
-					},
-				})
+			onChange?.({
+				...step,
+				args: {
+					...step.args,
+					map,
+				},
+			})
 		},
-		[internal, onChange],
+		[step, onChange],
 	)
 }
 
 export function useRecodeDelete(
-	step: RecodeStep,
-	onChange?: StepChangeFunction,
+	step: Step<RecodeArgs>,
+	onChange?: StepChangeFunction<RecodeArgs>,
 ): (value: Value) => void {
 	return useCallback(
 		value => {
 			const args = { ...step.args } as RecodeArgs
 			delete args.map[value]
-			onChange &&
-				onChange({
-					...step,
-					args: {
-						...step.args,
-						...args,
-					},
-				})
+			onChange?.({
+				...step,
+				args: {
+					...step.args,
+					...args,
+				},
+			})
 		},
 		[step, onChange],
 	)
 }
 
 // find the next value from the table to suggest
-function next(internal: RecodeStep, values: Value[]): Value | undefined {
+function next(step: Step<RecodeArgs>, values: Value[]): Value | undefined {
 	return values.find(value => {
-		if (!internal.args.map) {
+		if (!step.args.map) {
 			return true
 		}
-		return internal.args.map[value] === undefined
+		return step.args.map[value] === undefined
 	})
 }
 
 export function useHandleAddButtonClick(
-	internal: RecodeStep,
+	step: Step<RecodeArgs>,
 	values: Value[],
-	onChange?: StepChangeFunction,
+	onChange?: StepChangeFunction<RecodeArgs>,
 ): () => void {
 	return useCallback(() => {
-		const nextValue = next(internal, values)
+		const nextValue = next(step, values)
 		if (nextValue !== undefined) {
 			// could be a 0 or false...
-			onChange &&
-				onChange({
-					...internal,
-					args: {
-						...internal.args,
-						map: {
-							...internal.args.map,
-							[nextValue]: nextValue,
-						},
+			onChange?.({
+				...step,
+				args: {
+					...step.args,
+					map: {
+						...step.args.map,
+						[nextValue]: nextValue,
 					},
-				})
+				},
+			})
 		}
-	}, [internal, values, onChange])
+	}, [step, values, onChange])
 }
 
-export function useDisabled(internal: RecodeStep, values: Value[]): boolean {
-	if (values.length === 0 || !internal.args.column) {
+export function useDisabled(step: Step<RecodeArgs>, values: Value[]): boolean {
+	if (values.length === 0 || !step.args.column) {
 		return true
 	}
-	return values.length === Object.keys(internal.args.map || {}).length
+	return values.length === Object.keys(step.args.map || {}).length
 }

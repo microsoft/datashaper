@@ -3,15 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
-import { noop } from '@data-wrangling-components/primitives'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
 import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useLoadTable } from '../../common/hooks.js'
 import { LeftAlignedRow } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -19,16 +17,11 @@ import type { StepComponentProps } from '../../types.js'
  * E.g., for set operations
  */
 export const SetOperation: React.FC<StepComponentProps> = memo(
-	function SetOperation({ step, store, table, onChange = noop, input }) {
-		const tbl = useLoadTable(
-			input || step.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
+	withLoadedTable(function SetOperation({ step, store, onChange, dataTable }) {
 		const others = useOthers(step, onChange, store)
 
 		const handleButtonClick = useCallback(() => {
-			onChange({
+			onChange?.({
 				...step,
 				input: {
 					...step.input,
@@ -44,18 +37,18 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={addIconProps}
-					disabled={!tbl}
+					disabled={!dataTable}
 				>
 					Add table
 				</ActionButton>
 			</Container>
 		)
-	},
+	}),
 )
 
 function useOthers(
 	step: Step,
-	onChange: (step: Step) => void,
+	onChange?: (step: Step) => void,
 	store?: TableStore,
 ) {
 	return useMemo(() => {
@@ -64,7 +57,7 @@ function useOthers(
 
 			// on delete, remove the input
 			const handleDeleteClick = () => {
-				onChange({
+				onChange?.({
 					...step,
 					input: {
 						...step.input,
@@ -86,7 +79,7 @@ function useOthers(
 							if (option) {
 								input.node = `${option.key}`
 							}
-							onChange(update)
+							onChange?.(update)
 						}}
 					/>
 					<IconButton

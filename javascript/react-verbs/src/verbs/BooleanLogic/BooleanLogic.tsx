@@ -2,34 +2,33 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BooleanStep } from '@data-wrangling-components/core'
+import type { BooleanArgs } from '@data-wrangling-components/core'
 import { BooleanOperator } from '@data-wrangling-components/core'
-import { dropdownStyles,EnumDropdown  } from '@data-wrangling-components/react-controls'
-import { NodeInput } from '@essex/dataflow'
+import {
+	dropdownStyles,
+	EnumDropdown,
+} from '@data-wrangling-components/react-controls'
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { useHandleDropdownChange } from '../../common/hooks.js'
-import { LeftAlignedRow, useLoadTable } from '../../common/index.js'
+import { LeftAlignedRow } from '../../common/index.js'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
-
 /**
  * Inputs to combine column using boolean logic.
  */
-export const BooleanLogic: React.FC<StepComponentProps> = memo(
-	function BooleanLogic({ step, store, table, onChange, input }) {
-		const internal = useMemo(() => step as BooleanStep, [step])
-		const tbl = useLoadTable(
-			input || internal.input[NodeInput.Source]?.node,
-			table,
-			store,
-		)
-
+export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
+	withLoadedTable<BooleanArgs>(function BooleanLogic({
+		step,
+		onChange,
+		dataTable,
+	}) {
 		const handleColumnChange = useCallback(
 			(_event?: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
-				const { columns = [] } = internal.args
+				const { columns = [] } = step.args
 				let update = [...columns]
 				if (option) {
 					if (option.selected) {
@@ -38,39 +37,38 @@ export const BooleanLogic: React.FC<StepComponentProps> = memo(
 						update = update.filter(c => c !== option.key)
 					}
 				}
-				onChange &&
-					onChange({
-						...internal,
-						args: {
-							...internal.args,
-							columns: update,
-						},
-					})
+				onChange?.({
+					...step,
+					args: {
+						...step.args,
+						columns: update,
+					},
+				})
 			},
-			[internal, onChange],
+			[step, onChange],
 		)
 
 		const handleOpChange = useHandleDropdownChange(
-			internal,
-			'args.operator',
+			step,
+			(s, opt) => (s.args.operator = opt as BooleanOperator),
 			onChange,
 		)
 
 		const options = useMemo(() => {
-			const columns = tbl?.columnNames() || []
-			const hash = (internal.args.columns || []).reduce((acc, cur) => {
+			const columns = dataTable?.columnNames() || []
+			const hash = (step.args.columns || []).reduce((acc, cur) => {
 				acc[cur] = true
 				return acc
 			}, {} as Record<string, boolean>)
 			return columns.map(column => {
-				const selected = internal.args?.columns && !!hash[column]
+				const selected = step.args?.columns && !!hash[column]
 				return {
 					key: column,
 					text: column,
 					selected,
 				}
 			})
-		}, [tbl, internal])
+		}, [dataTable, step])
 
 		const selectedKeys = useMemo(
 			() => options.filter(o => o.selected).map(o => o.key),
@@ -80,7 +78,7 @@ export const BooleanLogic: React.FC<StepComponentProps> = memo(
 		return (
 			<Container>
 				<LeftAlignedRow>
-					{tbl ? (
+					{dataTable ? (
 						<Dropdown
 							label={'Columns'}
 							styles={dropdownStyles}
@@ -103,13 +101,13 @@ export const BooleanLogic: React.FC<StepComponentProps> = memo(
 							xor: 'XOR',
 						}}
 						enumeration={BooleanOperator}
-						selectedKey={internal.args.operator}
+						selectedKey={step.args.operator}
 						onChange={handleOpChange}
 					/>
 				</LeftAlignedRow>
 			</Container>
 		)
-	},
+	}),
 )
 
 const Container = styled.div`

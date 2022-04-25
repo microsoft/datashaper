@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Value } from '../tables/types.js'
+import type { Value } from '@essex/arquero'
+
 import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'

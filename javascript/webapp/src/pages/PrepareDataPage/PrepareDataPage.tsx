@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableContainer } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import type { DropzoneStyles } from '@data-wrangling-components/react'
 import {
 	Dropzone,
@@ -12,6 +12,7 @@ import {
 } from '@data-wrangling-components/react'
 import type { FileCollection } from '@data-wrangling-components/utilities'
 import { FileExtensions } from '@data-wrangling-components/utilities'
+import type { TableContainer } from '@essex/arquero'
 import { MessageBar, MessageBarType } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
@@ -36,15 +37,11 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	return (
 		<Container className={'prepare-data-page'}>
 			<Dropzone
-				acceptedFileTypes={[
-					FileExtensions.csv,
-					FileExtensions.zip,
-					FileExtensions.json,
-				]}
+				acceptedFileTypes={FILE_TYPES}
 				onDropAccepted={handleDropAcceppted}
 				onDropRejected={setMessage}
 				showPlaceholder={false}
-				dropzoneOptions={{ noClick: true }}
+				dropzoneOptions={DROPZONE_OPTIONS}
 				styles={dropzoneStyles as DropzoneStyles}
 			/>
 			<ProjectMgmtCommandBar
@@ -61,7 +58,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					truncated={true}
 					onDismiss={() => setMessage(undefined)}
 					dismissButtonAriaLabel="Close"
-					styles={{ root: { zIndex: 20 } }}
+					styles={MESSAGE_BAR_STYLES}
 				>
 					{' '}
 					{message}{' '}
@@ -78,6 +75,10 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		</Container>
 	)
 })
+
+const FILE_TYPES = [FileExtensions.csv, FileExtensions.zip, FileExtensions.json]
+const DROPZONE_OPTIONS = { noClick: true }
+const MESSAGE_BAR_STYLES = { root: { zIndex: 20 } }
 
 const Container = styled.div`
 	height: calc(100vh - 80px);
