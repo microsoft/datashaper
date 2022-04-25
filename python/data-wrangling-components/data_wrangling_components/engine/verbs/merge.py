@@ -4,9 +4,12 @@
 #
 
 from functools import partial
-from typing import Callable, Dict
+from typing import Any, Callable, Dict
+
+import pandas as pd
 
 from dataclasses import dataclass
+from pandas.api.types import is_bool
 
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import (
@@ -17,19 +20,29 @@ from data_wrangling_components.types import (
 )
 
 
+def correct_type(value: Any):
+    if is_bool(value):
+        return str(value).lower()
+    try:
+        return int(value) if value.is_integer() else value
+    except AttributeError:
+        return value
+
+
+def create_array(column: pd.Series, delim: str) -> str:
+    column = column.dropna().apply(lambda x: correct_type(x))
+    return delim.join(column.astype(str))
+
+
 __strategy_mapping: Dict[MergeStrategy, Callable] = {
-    MergeStrategy.FirstOneWins: lambda column_values, **kwargs: column_values.dropna()[
-        0
-    ],
-    MergeStrategy.LastOneWins: lambda column_values, **kwargs: column_values.dropna()[
-        -1
-    ],
-    MergeStrategy.Concat: lambda column_values, delim, **kwargs: delim.join(
-        column_values.dropna().astype(str)
-    ),
-    MergeStrategy.CreateArray: lambda column_values, **kwargs: ",".join(
-        column_values.dropna().astype(str)
-    ),
+    MergeStrategy.FirstOneWins: lambda values, **kwargs: values.dropna().apply(
+        lambda x: correct_type(x)
+    )[0],
+    MergeStrategy.LastOneWins: lambda values, **kwargs: values.dropna().apply(
+        lambda x: correct_type(x)
+    )[-1],
+    MergeStrategy.Concat: lambda values, delim, **kwargs: create_array(values, delim),
+    MergeStrategy.CreateArray: lambda values, **kwargs: create_array(values, ","),
 }
 
 

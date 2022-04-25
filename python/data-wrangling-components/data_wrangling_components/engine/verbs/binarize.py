@@ -54,7 +54,6 @@ def binarize(step: Step, store: TableStore):
 
     filter_result = filter_df(input_table, args)
     output = input_table.copy()
-    output[args.to] = input_table.index.isin(filter_result.index)
-    output[args.to] = output[args.to].astype(int)
+    output[args.to] = filter_result.map({True: 1, False: 0}, na_action="ignore")
 
     return TableContainer(id=str(step.output), name=str(step.output), table=output)

@@ -12,8 +12,19 @@ from data_wrangling_components.pipeline import DefaultPipeline
 from data_wrangling_components.table_store import DefaultTableStore, TableContainer
 
 
-FIXTURES_PATH = "../../schema/fixtures/cases"
-TABLE_STORE_PATH = "../../schema/fixtures/inputs"
+FIXTURES_PATH = "schema/fixtures/cases"
+TABLE_STORE_PATH = "schema/fixtures/inputs"
+
+os.chdir("../..")
+
+
+def read_csv(path: str) -> pd.DataFrame:
+    df = pd.read_csv(path, na_values=["undefined"])
+
+    if "date" in df.columns:
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+
+    return df
 
 
 def read_table_store(root: str) -> DefaultTableStore:
@@ -37,17 +48,11 @@ def get_verb_test_specs(root: str) -> List[str]:
     return subfolders
 
 
-def read_csv(path: str) -> pd.DataFrame:
-    df = pd.read_csv(path, na_values=["undefined"])
-
-    if "date" in df.columns:
-        df["date"] = pd.to_datetime(df["date"], errors="coerce")
-
-    return df
-
-
 # @pytest.mark.xfail
-@pytest.mark.parametrize("fixture_path", get_verb_test_specs(FIXTURES_PATH))
+@pytest.mark.parametrize(
+    "fixture_path",
+    get_verb_test_specs(FIXTURES_PATH),
+)
 def test_verbs_schema_input(fixture_path: str):
     with open(os.path.join(fixture_path, "workflow.json")) as workflow:
         pipeline = DefaultPipeline.from_json(

@@ -7,6 +7,8 @@ import logging
 
 from typing import Union
 
+import pandas as pd
+
 from data_wrangling_components.engine.pandas.filter_df import filter_df
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import (
@@ -68,6 +70,10 @@ def filter(step: Step, store: TableStore):
     )
     input_table = store.table(step.input)
 
-    output = filter_df(input_table, args).reset_index(drop=True)
+    filter_index = filter_df(input_table, args)
+
+    output = input_table[
+        input_table.index.isin(filter_index[filter_index == True].index)
+    ].reset_index(drop=True)
 
     return TableContainer(id=str(step.output), name=str(step.output), table=output)

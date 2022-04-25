@@ -22,12 +22,18 @@ def __multiply(col1: pd.Series, col2: pd.Series):
     raise OperationNotSupportedError()
 
 
+def __concatenate(col1: pd.Series, col2: pd.Series):
+    return col1.astype(str) + col2.astype(str)
+
+
 __op_mapping: Dict[MathOperator, Callable] = {
-    MathOperator.Add: np.add,
+    MathOperator.Add: lambda col1, col2: np.add(col1, col2)
+    if is_numeric_dtype(col1) and is_numeric_dtype(col2)
+    else __concatenate(col1, col2),
     MathOperator.Subtract: np.subtract,
     MathOperator.Multiply: lambda col1, col2: __multiply(col1, col2),
     MathOperator.Divide: np.divide,
-    MathOperator.Concatenate: lambda col1, col2: col1.astype(str) + col2.astype(str),
+    MathOperator.Concatenate: __concatenate,
 }
 
 

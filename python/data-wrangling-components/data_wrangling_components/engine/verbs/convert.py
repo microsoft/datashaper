@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 
 from dataclasses import dataclass
+from pandas.api.types import is_bool_dtype, is_numeric_dtype
 
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import InputColumnListArgs, ParseType, Step
@@ -70,8 +71,19 @@ def to_str(column: pd.Series, formatPattern: str) -> pd.Series:
         column_datetime = pd.to_datetime(column, errors="ignore")
     if column_datetime is not None and is_datetime(column_datetime):
         return column_datetime.apply(lambda x: convert_date_str(x, formatPattern))
-    else:
-        return column.apply(lambda x: "" if pd.isna(x) else str(x))
+
+    column_numeric: pd.Series = None
+    if column.dtype == object:
+        column_numeric = pd.to_numeric(column, errors="ignore")
+    if column_numeric is not None and is_numeric_dtype(column_numeric):
+        try:
+            column_numeric = column_numeric.astype(pd.Int64Dtype)
+            return column.apply(lambda x: "" if x is None else str(x))
+        except Exception:
+            pass
+    if is_bool_dtype(column):
+        return column.apply(lambda x: "" if pd.isna(x) else str(x).lower())
+    return column.apply(lambda x: "" if pd.isna(x) else str(x))
 
 
 def to_datetime(column: pd.Series) -> pd.Series:

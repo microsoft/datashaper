@@ -3,6 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import Union
+
 import numpy as np
 import pandas as pd
 
@@ -20,11 +22,11 @@ from data_wrangling_components.types import (
 
 def _get_window_indexer(
     column: pd.Series, fixed_size=False
-) -> pd.api.indexers.BaseIndexer:
+) -> Union[int, pd.api.indexers.BaseIndexer]:
     if fixed_size:
         return pd.api.indexers.FixedForwardWindowIndexer(window_size=len(column))
     else:
-        return pd.api.indexers.BaseIndexer(window_size=len(column))
+        return len(column)
 
 
 __window_function_map = {
