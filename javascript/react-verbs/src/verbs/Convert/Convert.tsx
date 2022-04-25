@@ -10,7 +10,7 @@ import {
 	dropdownStyles,
 	EnumDropdown,
 } from '@data-wrangling-components/react-controls'
-import { DataType } from '@essex/arquero'
+import { DataType } from '@essex/arquero';
 import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
 import { produce } from 'immer'
@@ -66,14 +66,19 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 			[step, onChange],
 		)
 
-		useEffect(() => {
-			setInputColumnDate(false)
-			step.args.columns.forEach(column => {
-				const type = getColumnType(dataTable, column)
+	const handleComboBoxInputChange = (text: string) => {
+		const update = cloneDeep(step)
+		set(update, 'args.formatPattern', text ? text : '%Y-%m-%d')
+		onChange && onChange(update)
+	}
 
-				if (type === DataType.Date) setInputColumnDate(true)
-			})
-		}, [step.args.columns, dataTable])
+	useEffect(() => {
+		setInputColumnDate(false)
+		step.args.columns.forEach((column: string | undefined) => {
+			const type = getColumnType(dataTable, column)
+			if (type === DataType.Date) setInputColumnDate(true)
+		})
+	}, [step.args.columns, dataTable])
 
 		return (
 			<Container>
@@ -118,6 +123,7 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 							}
 							onChange={handleComboBoxChange}
 							styles={dropdownStyles}
+							onInputValueChange={handleComboBoxInputChange}
 						/>
 					</LeftAlignedColumn>
 				) : null}
