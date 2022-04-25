@@ -2,14 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ParseType } from '@data-wrangling-components/core'
 import type { ConvertArgs } from '@data-wrangling-components/core'
+import { ParseType } from '@data-wrangling-components/core'
 import { num } from '@data-wrangling-components/primitives'
 import {
 	DateFormatPatternCombobox,
 	dropdownStyles,
 	EnumDropdown,
 } from '@data-wrangling-components/react-controls'
+import { DataType } from '@essex/arquero';
 import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
 import { produce } from 'immer'
@@ -17,7 +18,6 @@ import cloneDeep from 'lodash-es/cloneDeep.js'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { DataType } from '@essex/arquero';
 
 import {
 	useHandleDropdownChange,
