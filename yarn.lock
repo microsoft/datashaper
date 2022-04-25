@@ -1551,14 +1551,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:javascript/core"
   dependencies:
-    "@essex/arquero": ^1.0.0
+    "@essex/arquero": ^2.0.0
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
     "@types/d3-time-format": ^4.0.0
     "@types/jest": ^27.4.1
     "@types/lodash-es": ^4.17.6
-    "@types/node": ^17.0.25
+    "@types/node": ^17.0.27
     "@types/toposort": ^2.0.3
     "@types/uuid": ^8.3.4
     ajv: ^8.11.0
@@ -1586,7 +1586,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
-    "@fluentui/react": ^8.66.2
+    "@fluentui/react": ^8.67.0
     arquero: ^4.8.8
     react: ^18.0.0
     typescript: ^4.6.3
@@ -1608,9 +1608,9 @@ __metadata:
     "@essex/prettier-config": ^18.0.2
     "@essex/scripts": ^21.0.2
     "@types/jest": ^27.4.1
-    "@types/node": ^17.0.25
+    "@types/node": ^17.0.27
     arquero: ^4.8.8
-    eslint: ^8.13.0
+    eslint: ^8.14.0
     husky: ^7.0.4
     jest: ^27.5.1
     lint-staged: ^12.4.0
@@ -1628,23 +1628,23 @@ __metadata:
   dependencies:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/primitives": "workspace:^"
-    "@essex/arquero": ^1.0.0
+    "@essex/arquero": ^2.0.0
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
-    "@fluentui/react": ^8.66.2
+    "@fluentui/react": ^8.67.0
     "@fluentui/utilities": ^8.8.2
     "@thematic/react": ^2.0.7
     "@types/lodash": ^4.14.182
     "@types/lodash-es": ^4.17.6
-    "@types/react": ^18.0.6
+    "@types/react": ^18.0.7
     "@types/react-is": ^17.0.3
     "@types/styled-components": ^5.1.25
     arquero: ^4.8.8
     core-js: ^3.22.2
     lodash-es: ^4.17.21
     react: ^18.0.0
-    react-if: ^4.1.3
+    react-if: ^4.1.4
     styled-components: ^5.3.5
     typescript: ^4.6.3
   peerDependencies:
@@ -1664,15 +1664,15 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/react-controls": "workspace:^"
     "@data-wrangling-components/react-verbs": "workspace:^"
-    "@essex/arquero": ^1.0.0
+    "@essex/arquero": ^2.0.0
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
-    "@fluentui/react": ^8.66.2
+    "@fluentui/react": ^8.67.0
     "@types/lodash": ^4.14.182
     "@types/lodash-es": ^4.17.6
-    "@types/node": ^17.0.25
-    "@types/react": ^18.0.6
+    "@types/node": ^17.0.27
+    "@types/react": ^18.0.7
     "@types/styled-components": ^5.1.25
     arquero: ^4.8.8
     react: ^18.0.0
@@ -1695,14 +1695,14 @@ __metadata:
     "@data-wrangling-components/react-controls": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
-    "@essex/arquero": ^1.0.0
-    "@essex/arquero-react": ^1.0.2
-    "@essex/charts-react": ^1.0.1
+    "@essex/arquero": ^2.0.0
+    "@essex/arquero-react": ^1.0.3
+    "@essex/charts-react": ^1.0.2
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
-    "@essex/themed-components": ^2.2.3
+    "@essex/themed-components": ^2.2.4
     "@essex/tsconfig-base": ^1.0.2
-    "@fluentui/react": ^8.66.2
+    "@fluentui/react": ^8.67.0
     "@fluentui/react-hooks": ^8.5.4
     "@fluentui/utilities": ^8.8.2
     "@thematic/core": ^2.0.7
@@ -1710,8 +1710,8 @@ __metadata:
     "@types/d3-format": ^3.0.1
     "@types/lodash": ^4.14.182
     "@types/lodash-es": ^4.17.6
-    "@types/node": ^17.0.25
-    "@types/react": ^18.0.6
+    "@types/node": ^17.0.27
+    "@types/react": ^18.0.7
     "@types/react-dom": ^18.0.2
     "@types/react-is": ^17.0.3
     "@types/react-router-dom": ^5.3.3
@@ -1723,7 +1723,7 @@ __metadata:
     markdown-to-jsx: ^7.1.7
     react: ^18.0.0
     react-dropzone: ^12.0.5
-    react-if: ^4.1.3
+    react-if: ^4.1.4
     rxjs: ^7.5.5
     styled-components: ^5.3.5
     typescript: ^4.6.3
@@ -1749,14 +1749,14 @@ __metadata:
     "@data-wrangling-components/react-verbs": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
-    "@essex/arquero": ^1.0.0
-    "@essex/arquero-react": ^1.0.2
-    "@essex/charts-react": ^1.0.1
+    "@essex/arquero": ^2.0.0
+    "@essex/arquero-react": ^1.0.3
+    "@essex/charts-react": ^1.0.2
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
-    "@essex/themed-components": ^2.2.3
+    "@essex/themed-components": ^2.2.4
     "@essex/tsconfig-base": ^1.0.2
-    "@fluentui/react": ^8.66.2
+    "@fluentui/react": ^8.67.0
     "@fluentui/react-hooks": ^8.5.4
     "@fluentui/utilities": ^8.8.2
     "@thematic/core": ^2.0.7
@@ -1766,8 +1766,8 @@ __metadata:
     "@types/d3-format": ^3.0.1
     "@types/lodash": ^4.14.182
     "@types/lodash-es": ^4.17.6
-    "@types/node": ^17.0.25
-    "@types/react": ^18.0.6
+    "@types/node": ^17.0.27
+    "@types/react": ^18.0.7
     "@types/react-dom": ^18.0.2
     "@types/react-is": ^17.0.3
     "@types/react-router-dom": ^5.3.3
@@ -1778,7 +1778,7 @@ __metadata:
     markdown-to-jsx: ^7.1.7
     react: ^18.0.0
     react-dropzone: ^12.0.5
-    react-if: ^4.1.3
+    react-if: ^4.1.4
     rxjs: ^7.5.5
     styled-components: ^5.3.5
     typescript: ^4.6.3
@@ -1803,7 +1803,7 @@ __metadata:
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
     "@essex/vite-config": ^19.0.7
-    "@types/node": ^17.0.25
+    "@types/node": ^17.0.27
     "@zip.js/zip.js": ^2.4.10
     arquero: ^4.8.8
     regenerator-runtime: ^0.13.9
@@ -1820,8 +1820,8 @@ __metadata:
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
     "@types/express": ^4.17.13
-    "@types/node": ^17.0.25
-    express: ^4.17.3
+    "@types/node": ^17.0.27
+    express: ^4.18.0
     typescript: ^4.6.3
   languageName: unknown
   linkType: soft
@@ -1833,14 +1833,14 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/react": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
-    "@essex/arquero": ^1.0.0
-    "@essex/arquero-react": ^1.0.2
-    "@essex/hooks": ^4.0.9
+    "@essex/arquero": ^2.0.0
+    "@essex/arquero-react": ^1.0.3
+    "@essex/hooks": ^4.0.10
     "@essex/scripts": ^21.0.2
-    "@essex/themed-components": ^2.2.3
+    "@essex/themed-components": ^2.2.4
     "@essex/webpack-config": ^21.0.1
     "@fluentui/font-icons-mdl2": ^8.3.2
-    "@fluentui/react": ^8.66.2
+    "@fluentui/react": ^8.67.0
     "@fluentui/react-hooks": ^8.5.4
     "@fluentui/utilities": ^8.8.2
     "@thematic/core": ^2.0.7
@@ -1849,8 +1849,8 @@ __metadata:
     "@thematic/react": ^2.0.7
     "@types/lodash": ^4.14.182
     "@types/lodash-es": ^4.17.6
-    "@types/node": ^17.0.25
-    "@types/react": ^18.0.6
+    "@types/node": ^17.0.27
+    "@types/react": ^18.0.7
     "@types/react-dom": ^18.0.2
     "@types/react-is": ^17.0.3
     "@types/react-router-dom": ^5.3.3
@@ -1932,15 +1932,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/arquero-react@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@essex/arquero-react@npm:1.0.2"
+"@essex/arquero-react@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@essex/arquero-react@npm:1.0.3"
   dependencies:
-    "@essex/arquero": ^1.0.0
-    "@essex/charts-react": ^1.0.1
+    "@essex/arquero": ^2.0.0
+    "@essex/charts-react": ^1.0.2
     d3-format: ^3.1.0
     lodash-es: ^4.17.21
-    react-if: ^4.1.1
+    react-if: ^4.1.3
   peerDependencies:
     "@fluentui/react": ^8.24.0
     "@fluentui/utilities": ^8.2.1
@@ -1950,24 +1950,24 @@ __metadata:
     arquero: ^4.8.7
     react: ">= 18"
     styled-components: ^5.3.0
-  checksum: fb1427ba7e588589308eabfa3a34c62d29cf04b71d3e9cdf521b32620bcdf52de839d18a50d88818a9c3284af6e2b54120448575bd1fba41a72943ef99781655
+  checksum: 67610e6b8182950317e64947d8e1e645b40b9c53fa5418a87cafc89376e5bf48cebdc2323f5b871964e4694f263bef97127e8f8c57f63647f2cb16d1931120ac
   languageName: node
   linkType: hard
 
-"@essex/arquero@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@essex/arquero@npm:1.0.0"
+"@essex/arquero@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@essex/arquero@npm:2.0.0"
   dependencies:
     lodash-es: ^4.17.21
   peerDependencies:
     arquero: ^4.8.7
-  checksum: e2263029745294beb95b89b6e1e055bdeac7a086278eded4195b042510e146f9cf6ce5949d45d3d8306480fb3950c85f3d481b3e6c8bec5c8a86fa6754be89d5
+  checksum: 6fa16ca77948dd3164ca73f88ad4629428ba37746f4e77f875e6e6b65fc39a12549ea992ea04dd49844d5fcbed0f19c8a1ab801ab99a3f0ecf07a48fc4902aa1
   languageName: node
   linkType: hard
 
-"@essex/charts-react@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@essex/charts-react@npm:1.0.1"
+"@essex/charts-react@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@essex/charts-react@npm:1.0.2"
   dependencies:
     d3-format: ^3.1.0
     d3-scale: ^4.0.2
@@ -1979,7 +1979,7 @@ __metadata:
     "@thematic/d3": ^1.3.0
     "@thematic/react": ^1.3.0
     react: ">= 18"
-  checksum: 9eeeb5a8f5573dc000ba3d2bf09d035b8d6d2648bc53e72c1e84eefb140824777b28d4a5d8151cb42046c6fd1352ee57be790d24613d5d824f4cbee4330499a0
+  checksum: 8636a0add5fcc8363744e4f2076caf1f5647ebd1f6c9c94e5f79620dc8a5241a7f4e860fdec233bfcb3dd66f558ed55e13a9cee90ee71b9f989e94ccf30d19ad
   languageName: node
   linkType: hard
 
@@ -2038,9 +2038,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/hooks@npm:^4.0.9":
-  version: 4.0.9
-  resolution: "@essex/hooks@npm:4.0.9"
+"@essex/hooks@npm:^4.0.10":
+  version: 4.0.10
+  resolution: "@essex/hooks@npm:4.0.10"
   dependencies:
     "@essex/toolbox": ^3.0.6
     lodash-es: ^4.17.21
@@ -2049,7 +2049,7 @@ __metadata:
     "@types/react": "*"
     "@types/react-dom": "*"
     react: ">= 18"
-  checksum: b2c0846f1bd6cdde52824f0f81bdd2986f81ae3e58314b85e9ca6dd661f95a4cecbb6fb83b901bdd6b41c6468b78d25b89c1c856c92bb1d82e9eb6043ec25c5b
+  checksum: 1f7c1553999772542c7991ba45d90b5900ba6c396b0f644cfbfb705f616baa9c2e087ab1e852e370506041584b2a9c94e1f924112adcd0c8231e43b0bef99fa2
   languageName: node
   linkType: hard
 
@@ -2076,6 +2076,27 @@ __metadata:
   version: 18.0.2
   resolution: "@essex/prettier-config@npm:18.0.2"
   checksum: 1b1a1a1f29c144b3c28a905daf9ca3700fbec1c71c38873862b05e868e0c6a888dbad87503d1e9f3c041edd7a1a0ce8062e3d9ed4d01d15ab3f2e1909753a015
+  languageName: node
+  linkType: hard
+
+"@essex/react-animate-height@npm:^2.1.4":
+  version: 2.1.4
+  resolution: "@essex/react-animate-height@npm:2.1.4"
+  dependencies:
+    classnames: ^2.3.1
+    prop-types: ^15.8.1
+  peerDependencies:
+    "@types/prop-types": ">15"
+    "@types/react": ">16"
+    react: ">=15.6.2"
+  peerDependenciesMeta:
+    "@types/prop-types":
+      optional: true
+    "@types/react":
+      optional: true
+    react:
+      optional: false
+  checksum: 6730118efd57185f3c48fd1da45a4bd73b88d784ccd7cac12625f7dd2f4374613d9976e3bd6e2293f1a609861d69fc9fd870bb788bd817580e5dd5014d1f887c
   languageName: node
   linkType: hard
 
@@ -2173,11 +2194,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/themed-components@npm:^2.2.3":
-  version: 2.2.3
-  resolution: "@essex/themed-components@npm:2.2.3"
+"@essex/themed-components@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "@essex/themed-components@npm:2.2.4"
   dependencies:
-    "@essex/hooks": ^4.0.9
+    "@essex/hooks": ^4.0.10
+    "@essex/react-animate-height": ^2.1.4
     "@essex/toolbox": ^3.0.6
     "@types/d3-array": ^3.0.2
     "@types/d3-axis": ^3.0.1
@@ -2190,7 +2212,6 @@ __metadata:
     d3-scale: ^4.0.2
     d3-selection: ^3.0.0
     lodash-es: ^4.17.21
-    react-animate-height: ^2.1.2
   peerDependencies:
     "@fluentui/react": ">= 7.114.2"
     "@thematic/color": ">= 0.8.0"
@@ -2205,7 +2226,7 @@ __metadata:
     "@uifabric/icons": ">= 7.3.38"
     react: ">= 18"
     react-dom: ">= 18"
-  checksum: 846ee80a04f61cac102f65a33ca4d0a1cc5e7e69f8481eff59b9aa09dfc8262f226c36c5a0294a9d467d278a554226f03d6cd63cfef93e23af2ec019c5f068ed
+  checksum: a244f7284700359b272f8d4684dd098a576a5b387026590e94b20eb4cb2fadd97ab416471cb74aa1183c24d1ec3a3b32607a821841ab3faa098d7484f5f3e58b
   languageName: node
   linkType: hard
 
@@ -2388,7 +2409,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react@npm:^8.66.2":
+"@fluentui/react@npm:^8.67.0":
   version: 8.67.0
   resolution: "@fluentui/react@npm:8.67.0"
   dependencies:
@@ -3707,7 +3728,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^17.0.25":
+"@types/node@npm:*, @types/node@npm:^17.0.27":
   version: 17.0.27
   resolution: "@types/node@npm:17.0.27"
   checksum: 6645ca813c24dcb9893729ed6f87a9e415d6df03cb3e1ececa3a03ca845d3324c3808b4dc79c08a4b3c7d1ccd515e6d7e004db9c9123c9333e963675238e39fc
@@ -3809,7 +3830,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.6":
+"@types/react@npm:*":
   version: 18.0.6
   resolution: "@types/react@npm:18.0.6"
   dependencies:
@@ -3817,6 +3838,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 368b40176f0dab30a611c3263bf1d9878cebede9ce8015bc5661a396787dbe41f0b667b8d6d448dea7bc8c0557bf3cb329ab2b16ad2dacb18eaa764358bd16d4
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^18.0.7":
+  version: 18.0.7
+  resolution: "@types/react@npm:18.0.7"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 0cbbfc118227a8bd25cbec253f6ace46c1af0c9b1a4abfe5a51ed1977b93c3e82af2a70d38ba77fc36075e886d303dd57f3302447b70152702028f20a4675e32
   languageName: node
   linkType: hard
 
@@ -5117,6 +5149,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"body-parser@npm:1.20.0":
+  version: 1.20.0
+  resolution: "body-parser@npm:1.20.0"
+  dependencies:
+    bytes: 3.1.2
+    content-type: ~1.0.4
+    debug: 2.6.9
+    depd: 2.0.0
+    destroy: 1.2.0
+    http-errors: 2.0.0
+    iconv-lite: 0.4.24
+    on-finished: 2.4.1
+    qs: 6.10.3
+    raw-body: 2.5.1
+    type-is: ~1.6.18
+    unpipe: 1.0.0
+  checksum: 12fffdeac82fe20dddcab7074215d5156e7d02a69ae90cbe9fee1ca3efa2f28ef52097cbea76685ee0a1509c71d85abd0056a08e612c09077cad6277a644cf88
+  languageName: node
+  linkType: hard
+
 "bonjour-service@npm:^1.0.11":
   version: 1.0.12
   resolution: "bonjour-service@npm:1.0.12"
@@ -5735,6 +5787,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cookie@npm:0.5.0":
+  version: 0.5.0
+  resolution: "cookie@npm:0.5.0"
+  checksum: 1f4bd2ca5765f8c9689a7e8954183f5332139eb72b6ff783d8947032ec1fdf43109852c178e21a953a30c0dd42257828185be01b49d1eb1a67fd054ca588a180
+  languageName: node
+  linkType: hard
+
 "core-js-compat@npm:^3.20.2, core-js-compat@npm:^3.21.0":
   version: 3.22.2
   resolution: "core-js-compat@npm:3.22.2"
@@ -6297,10 +6356,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"depd@npm:2.0.0":
+  version: 2.0.0
+  resolution: "depd@npm:2.0.0"
+  checksum: abbe19c768c97ee2eed6282d8ce3031126662252c58d711f646921c9623f9052e3e1906443066beec1095832f534e57c523b7333f8e7e0d93051ab6baef5ab3a
+  languageName: node
+  linkType: hard
+
 "depd@npm:^1.1.2, depd@npm:~1.1.2":
   version: 1.1.2
   resolution: "depd@npm:1.1.2"
   checksum: 6b406620d269619852885ce15965272b829df6f409724415e0002c8632ab6a8c0a08ec1f0bd2add05dc7bd7507606f7e2cc034fa24224ab829580040b835ecd9
+  languageName: node
+  linkType: hard
+
+"destroy@npm:1.2.0":
+  version: 1.2.0
+  resolution: "destroy@npm:1.2.0"
+  checksum: 0acb300b7478a08b92d810ab229d5afe0d2f4399272045ab22affa0d99dbaf12637659411530a6fcd597a9bdac718fc94373a61a95b4651bbc7b83684a565e38
   languageName: node
   linkType: hard
 
@@ -7139,7 +7212,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.13.0":
+"eslint@npm:^8.13.0, eslint@npm:^8.14.0":
   version: 8.14.0
   resolution: "eslint@npm:8.14.0"
   dependencies:
@@ -7370,6 +7443,45 @@ __metadata:
   languageName: node
   linkType: hard
 
+"express@npm:^4.18.0":
+  version: 4.18.0
+  resolution: "express@npm:4.18.0"
+  dependencies:
+    accepts: ~1.3.8
+    array-flatten: 1.1.1
+    body-parser: 1.20.0
+    content-disposition: 0.5.4
+    content-type: ~1.0.4
+    cookie: 0.5.0
+    cookie-signature: 1.0.6
+    debug: 2.6.9
+    depd: 2.0.0
+    encodeurl: ~1.0.2
+    escape-html: ~1.0.3
+    etag: ~1.8.1
+    finalhandler: 1.2.0
+    fresh: 0.5.2
+    http-errors: 2.0.0
+    merge-descriptors: 1.0.1
+    methods: ~1.1.2
+    on-finished: 2.4.1
+    parseurl: ~1.3.3
+    path-to-regexp: 0.1.7
+    proxy-addr: ~2.0.7
+    qs: 6.10.3
+    range-parser: ~1.2.1
+    safe-buffer: 5.2.1
+    send: 0.18.0
+    serve-static: 1.15.0
+    setprototypeof: 1.2.0
+    statuses: 2.0.1
+    type-is: ~1.6.18
+    utils-merge: 1.0.1
+    vary: ~1.1.2
+  checksum: 2d83ccb02aedfc68ae99ff13b97f65896f4e0866a92f34e041fa3de858ce862bcb5ecd0cf43f266514eda777b8e0d55627a2430894a6ce17e30febf78da40c60
+  languageName: node
+  linkType: hard
+
 "fast-deep-equal@npm:^3.1.1, fast-deep-equal@npm:^3.1.3":
   version: 3.1.3
   resolution: "fast-deep-equal@npm:3.1.3"
@@ -7484,6 +7596,21 @@ __metadata:
   version: 1.1.0
   resolution: "filter-obj@npm:1.1.0"
   checksum: cf2104a7c45ff48e7f505b78a3991c8f7f30f28bd8106ef582721f321f1c6277f7751aacd5d83026cb079d9d5091082f588d14a72e7c5d720ece79118fa61e10
+  languageName: node
+  linkType: hard
+
+"finalhandler@npm:1.2.0":
+  version: 1.2.0
+  resolution: "finalhandler@npm:1.2.0"
+  dependencies:
+    debug: 2.6.9
+    encodeurl: ~1.0.2
+    escape-html: ~1.0.3
+    on-finished: 2.4.1
+    parseurl: ~1.3.3
+    statuses: 2.0.1
+    unpipe: ~1.0.0
+  checksum: 92effbfd32e22a7dff2994acedbd9bcc3aa646a3e919ea6a53238090e87097f8ef07cced90aa2cc421abdf993aefbdd5b00104d55c7c5479a8d00ed105b45716
   languageName: node
   linkType: hard
 
@@ -8177,6 +8304,19 @@ __metadata:
     statuses: ">= 1.5.0 < 2"
     toidentifier: 1.0.1
   checksum: d3c7e7e776fd51c0a812baff570bdf06fe49a5dc448b700ab6171b1250e4cf7db8b8f4c0b133e4bfe2451022a5790c1ca6c2cae4094dedd6ac8304a1267f91d2
+  languageName: node
+  linkType: hard
+
+"http-errors@npm:2.0.0":
+  version: 2.0.0
+  resolution: "http-errors@npm:2.0.0"
+  dependencies:
+    depd: 2.0.0
+    inherits: 2.0.4
+    setprototypeof: 1.2.0
+    statuses: 2.0.1
+    toidentifier: 1.0.1
+  checksum: 9b0a3782665c52ce9dc658a0d1560bcb0214ba5699e4ea15aefb2a496e2ca83db03ebc42e1cce4ac1f413e4e0d2d736a3fd755772c556a9a06853ba2a0b7d920
   languageName: node
   linkType: hard
 
@@ -10459,6 +10599,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"on-finished@npm:2.4.1":
+  version: 2.4.1
+  resolution: "on-finished@npm:2.4.1"
+  dependencies:
+    ee-first: 1.1.1
+  checksum: d20929a25e7f0bb62f937a425b5edeb4e4cde0540d77ba146ec9357f00b0d497cdb3b9b05b9c8e46222407d1548d08166bff69cc56dfa55ba0e4469228920ff0
+  languageName: node
+  linkType: hard
+
 "on-finished@npm:~2.3.0":
   version: 2.3.0
   resolution: "on-finished@npm:2.3.0"
@@ -11049,6 +11198,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:6.10.3":
+  version: 6.10.3
+  resolution: "qs@npm:6.10.3"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 0fac5e6c7191d0295a96d0e83c851aeb015df7e990e4d3b093897d3ac6c94e555dbd0a599739c84d7fa46d7fee282d94ba76943983935cf33bba6769539b8019
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.9.7":
   version: 6.9.7
   resolution: "qs@npm:6.9.7"
@@ -11100,6 +11258,18 @@ __metadata:
     iconv-lite: 0.4.24
     unpipe: 1.0.0
   checksum: d2961fa3c71c9c22dc2c3fd60ff377bf36dfed7d7a748f2b25d585934a3e9df565bb9aa5bc2e3a716ea941f4bc2a6ddc795c8b0cf7219fb071029b59b1985394
+  languageName: node
+  linkType: hard
+
+"raw-body@npm:2.5.1":
+  version: 2.5.1
+  resolution: "raw-body@npm:2.5.1"
+  dependencies:
+    bytes: 3.1.2
+    http-errors: 2.0.0
+    iconv-lite: 0.4.24
+    unpipe: 1.0.0
+  checksum: 5362adff1575d691bb3f75998803a0ffed8c64eabeaa06e54b4ada25a0cd1b2ae7f4f5ec46565d1bec337e08b5ac90c76eaa0758de6f72a633f025d754dec29e
   languageName: node
   linkType: hard
 
@@ -11191,7 +11361,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-if@npm:^4.1.1, react-if@npm:^4.1.3":
+"react-if@npm:^4.1.3, react-if@npm:^4.1.4":
   version: 4.1.4
   resolution: "react-if@npm:4.1.4"
   peerDependencies:
@@ -11969,6 +12139,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"send@npm:0.18.0":
+  version: 0.18.0
+  resolution: "send@npm:0.18.0"
+  dependencies:
+    debug: 2.6.9
+    depd: 2.0.0
+    destroy: 1.2.0
+    encodeurl: ~1.0.2
+    escape-html: ~1.0.3
+    etag: ~1.8.1
+    fresh: 0.5.2
+    http-errors: 2.0.0
+    mime: 1.6.0
+    ms: 2.1.3
+    on-finished: 2.4.1
+    range-parser: ~1.2.1
+    statuses: 2.0.1
+  checksum: 74fc07ebb58566b87b078ec63e5a3e41ecd987e4272ba67b7467e86c6ad51bc6b0b0154133b6d8b08a2ddda360464f71382f7ef864700f34844a76c8027817a8
+  languageName: node
+  linkType: hard
+
 "serialize-javascript@npm:^6.0.0":
   version: 6.0.0
   resolution: "serialize-javascript@npm:6.0.0"
@@ -12002,6 +12193,18 @@ __metadata:
     parseurl: ~1.3.3
     send: 0.17.2
   checksum: d97f3183b1dfcd8ce9c0e37e18e87fd31147ed6c8ee0b2c3a089d795e44ee851ca5061db01574f806d54f4e4b70bc694d9ca64578653514e04a28cbc97a1de05
+  languageName: node
+  linkType: hard
+
+"serve-static@npm:1.15.0":
+  version: 1.15.0
+  resolution: "serve-static@npm:1.15.0"
+  dependencies:
+    encodeurl: ~1.0.2
+    escape-html: ~1.0.3
+    parseurl: ~1.3.3
+    send: 0.18.0
+  checksum: af57fc13be40d90a12562e98c0b7855cf6e8bd4c107fe9a45c212bf023058d54a1871b1c89511c3958f70626fff47faeb795f5d83f8cf88514dbaeb2b724464d
   languageName: node
   linkType: hard
 
@@ -12351,6 +12554,13 @@ __metadata:
   version: 0.3.1
   resolution: "stackframe@npm:0.3.1"
   checksum: 510123ec2d9a02dba8153091f0b0c760141ae4ec4be9512e74b83333e39a762380f13d9afcb469fd9ce978bc07fb5181d6f28970a18ae4070bf21d1e4caa4698
+  languageName: node
+  linkType: hard
+
+"statuses@npm:2.0.1":
+  version: 2.0.1
+  resolution: "statuses@npm:2.0.1"
+  checksum: 18c7623fdb8f646fb213ca4051be4df7efb3484d4ab662937ca6fbef7ced9b9e12842709872eb3020cc3504b93bde88935c9f6417489627a7786f24f8031cbcb
   languageName: node
   linkType: hard
 

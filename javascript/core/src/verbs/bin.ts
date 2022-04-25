@@ -61,15 +61,15 @@ export const binStep: ColumnTableStep<BinArgs> = (input, args) => {
 function binExpr(input: ColumnTable, args: BinArgs) {
 	const { strategy, column, fixedwidth, fixedcount, clamped } = args
 	const stats = getStats(input, column, args.min, args.max)
-	const [min, max, distinct] = stats
+	const [min, max] = stats
 	switch (strategy) {
 		case BinStrategy.Auto:
 			// just let arquero do its thing
 			return aqbin(column)
 		case BinStrategy.FixedWidth:
-			return fixedBinStep(column, min, max, fixedwidth || 1, clamped, distinct)
+			return fixedBinStep(column, min, max, fixedwidth || 1, clamped)
 		case BinStrategy.FixedCount:
-			return fixedBinCount(column, min, max, fixedcount || 1, clamped, distinct)
+			return fixedBinCount(column, min, max, fixedcount || 1, clamped)
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
 	}
