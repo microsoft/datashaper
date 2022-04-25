@@ -1,7 +1,7 @@
-ID,item,quantity,furniture_bed,furniture_sofa,furniture_chair
+ID,item,quantity,furniture_bed,furniture_chair,furniture_sofa
 1,bed,45,1,0,0
 1,,78,,,
-2,sofa,100,0,1,0
-4,sofa,89,0,1,0
-4,chair,50,0,0,1
+2,sofa,100,0,0,1
+4,sofa,89,0,0,1
+4,chair,50,0,1,0
 4,,45,,,
