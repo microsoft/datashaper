@@ -63,6 +63,11 @@ export const Bin: React.FC<StepComponentProps<BinArgs>> = memo(function Bin({
 		(s, opt) => (s.args.clamped = opt),
 		onChange,
 	)
+	const handlePrintChange = useHandleCheckboxChange(
+		step,
+		(s, opt) => (s.args.printRange = opt),
+		onChange,
+	)
 
 	return (
 		<Container>
@@ -102,6 +107,13 @@ export const Bin: React.FC<StepComponentProps<BinArgs>> = memo(function Bin({
 					/>
 				</Then>
 			</If>
+			<LeftAlignedRow>
+				<Checkbox
+					label={'Print range as output'}
+					checked={step.args.printRange}
+					onChange={handlePrintChange}
+				/>
+			</LeftAlignedRow>
 		</Container>
 	)
 })
