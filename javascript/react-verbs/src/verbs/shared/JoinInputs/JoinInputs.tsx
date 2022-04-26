@@ -5,7 +5,6 @@
 import { JoinArgs, JoinStrategy, Step } from '@data-wrangling-components/core'
 import {
 	TableColumnDropdown,
-	TableDropdown,
 } from '@data-wrangling-components/react-controls'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
@@ -13,7 +12,7 @@ import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange, useLoadTable } from '../../../common/hooks.js'
+import { useLoadTable } from '../../../common/hooks.js'
 import { LeftAlignedRow } from '../../../common/styles.js'
 import type { StepComponentProps } from '../../../types.js'
 

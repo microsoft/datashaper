@@ -525,13 +525,19 @@ export interface JoinArgsBase {
 // @public (undocumented)
 export enum JoinStrategy {
     // (undocumented)
+    AntiJoin = "anti join",
+    // (undocumented)
+    Cross = "cross",
+    // (undocumented)
     FullOuter = "full outer",
     // (undocumented)
     Inner = "inner",
     // (undocumented)
     LeftOuter = "left outer",
     // (undocumented)
-    RightOuter = "right outer"
+    RightOuter = "right outer",
+    // (undocumented)
+    SemiJoin = "semi join"
 }
 
 // Warning: (ae-forgotten-export) The symbol "LookupNode" needs to be exported by the entry point index.d.ts
