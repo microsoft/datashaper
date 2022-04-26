@@ -4,8 +4,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/lib/index.js",
-		"types": "dist/lib/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"sideEffects": false,
 	"author": "Nathan Evans <naevans@microsoft.com>",
@@ -34,7 +34,7 @@
 		"@data-wrangling-components/core": "workspace:^"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.2",
+		"@essex/scripts": "^22.0.0",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@fluentui/react": "^8.67.0",
 		"arquero": "^4.8.8",

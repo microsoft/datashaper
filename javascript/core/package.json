@@ -4,8 +4,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/lib/index.js",
-		"types": "dist/lib/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"sideEffects": false,
 	"author": "Nathan Evans <naevans@microsoft.com>",
@@ -40,7 +40,7 @@
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.2",
+		"@essex/scripts": "^22.0.0",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/d3-time-format": "^4.0.0",
 		"@types/jest": "^27.4.1",

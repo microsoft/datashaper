@@ -4,8 +4,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/lib/index.js",
-		"types": "dist/lib/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"sideEffects": false,
 	"author": "Nathan Evans <naevans@microsoft.com>",
@@ -38,7 +38,7 @@
 		"@essex/dataflow": "^0.1.0"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.2",
+		"@essex/scripts": "^22.0.0",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@fluentui/react": "^8.67.0",
 		"@types/lodash": "^4.14.182",
