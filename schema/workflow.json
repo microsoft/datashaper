@@ -476,13 +476,13 @@
                 },
                 "strategy": {
                     "enum": [
+                        "anti join",
+                        "cross",
                         "full outer",
                         "inner",
                         "left outer",
                         "right outer",
-                        "cross",
-                        "semi join",
-                        "anti join"
+                        "semi join"
                     ],
                     "type": "string"
                 }

@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { JoinArgs, JoinStrategy, Step } from '@data-wrangling-components/core'
+import type { JoinArgs, Step } from '@data-wrangling-components/core';
+import { JoinStrategy } from '@data-wrangling-components/core'
 import {
 	TableColumnDropdown,
 } from '@data-wrangling-components/react-controls'
