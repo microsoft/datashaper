@@ -51,6 +51,10 @@ export const BinDescription: React.FC<StepDescriptionProps<BinArgs>> = memo(
 									  ]
 									: undefined,
 						},
+						{
+							before: 'output type',
+							value: args.printRange ? 'printed range' : 'numeric',
+						},
 					],
 				},
 			]
