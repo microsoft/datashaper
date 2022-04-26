@@ -51,6 +51,20 @@
 		{
 			"verb": "bin",
 			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-4-print" },
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "fixed width",
+				"to": "Binned4 Print",
+				"fixedwidth": 100000,
+				"min": 20000,
+				"max": 1000000,
+				"printRange": true
+			}
+		},
+		{
+			"verb": "bin",
+			"input": { "source": "data/products.csv" },
 			"output": { "target": "bin-5" },
 			"args": {
 				"column": "FY21 Sales",
@@ -60,6 +74,21 @@
 				"min": 20000,
 				"max": 1000000,
 				"clamped": true
+			}
+		},
+		{
+			"verb": "bin",
+			"input": { "source": "data/products.csv" },
+			"output": { "target": "bin-5-print" },
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "fixed width",
+				"to": "Binned5 Print",
+				"fixedwidth": 100000,
+				"min": 20000,
+				"max": 1000000,
+				"clamped": true,
+				"printRange": true
 			}
 		}
 	]

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { fixedBinCount, fixedBinStep } from '@essex/arquero'
-import { bin as aqbin, op } from 'arquero'
+import { fixedBinStep } from '@essex/arquero'
+import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { InputColumnArgs, OutputColumnArgs } from './types.js'
@@ -43,6 +43,11 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 	 * boundaries rather than +/-Infinity.
 	 */
 	clamped?: boolean
+	/**
+	 * If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.
+	 * This is useful for treating the 
+	 */
+	printRange?: boolean
 }
 /**
  * Executes a bin aggregate, which effectively truncates values to a bin boundary for histograms.
@@ -59,17 +64,28 @@ export const binStep: ColumnTableStep<BinArgs> = (input, args) => {
  * https://uwdata.github.io/arquero/api/#bin
  */
 function binExpr(input: ColumnTable, args: BinArgs) {
-	const { strategy, column, fixedwidth, fixedcount, clamped } = args
+	const { column, clamped, printRange = false } = args
+	const [min, max, step] = computeBins(input, args)
+	return fixedBinStep(column, min, max, step, clamped, printRange)
+}
+
+function computeBins(input: ColumnTable, args: BinArgs) {
+	const { strategy, column, fixedwidth, fixedcount } = args
 	const stats = getStats(input, column, args.min, args.max)
-	const [min, max, distinct] = stats
+	const [min, max] = stats
 	switch (strategy) {
 		case BinStrategy.Auto:
-			// just let arquero do its thing
-			return aqbin(column)
+			return input.derive({ bins: op.bins(column) }).get('bins', 0)
 		case BinStrategy.FixedWidth:
-			return fixedBinStep(column, min, max, fixedwidth || 1, clamped, distinct)
+			if (!fixedwidth) {
+				throw new Error('Must supply a bin width')
+			}
+			return [min, max, fixedwidth]
 		case BinStrategy.FixedCount:
-			return fixedBinCount(column, min, max, fixedcount || 1, clamped, distinct)
+			if (!fixedcount) {
+				throw new Error('Must supply a bin count')
+			}
+			return [min, max, (max - min) / fixedcount]
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
 	}
@@ -81,16 +97,14 @@ function getStats(
 	column: string,
 	min?: number,
 	max?: number,
-): [number, number, number] {
+): [number, number] {
 	const rollup = table.rollup({
 		min: op.min(column),
 		max: op.max(column),
-		distinct: op.distinct(column),
 	})
 	return [
 		min || rollup.get('min', 0),
 		max || rollup.get('max', 0),
-		rollup.get('distinct', 0),
 	]
 }
 
