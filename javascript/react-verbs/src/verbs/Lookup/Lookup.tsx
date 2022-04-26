@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { LookupArgs } from '@data-wrangling-components/core'
+import { TableDropdown } from '@data-wrangling-components/react-controls'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedColumn } from '../../common/index.js'
+import { LeftAlignedColumn, useHandleDropdownChange } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs, JoinInputs } from '../shared/index.js'
 
@@ -16,8 +17,22 @@ import { ColumnListInputs, JoinInputs } from '../shared/index.js'
  */
 export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
 	function Lookup({ step, store, table, onChange }) {
+		const handleRightTableChange = useHandleDropdownChange(
+			step,
+			(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
+			onChange,
+		)
+
 		return (
 			<Container>
+				<LeftAlignedColumn>
+					<TableDropdown
+						store={store}
+						label="Join table"
+						selectedKey={step.input[NodeInput.Other]?.node}
+						onChange={handleRightTableChange}
+					/>
+				</LeftAlignedColumn>
 				<JoinInputs
 					label="lookup"
 					step={step}

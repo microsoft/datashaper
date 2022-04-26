@@ -479,7 +479,10 @@
                         "full outer",
                         "inner",
                         "left outer",
-                        "right outer"
+                        "right outer",
+                        "cross",
+                        "semi join",
+                        "anti join"
                     ],
                     "type": "string"
                 }

@@ -7,7 +7,9 @@ import { JoinStrategy } from '@data-wrangling-components/core'
 import {
 	dropdownStyles,
 	EnumDropdown,
+	TableDropdown,
 } from '@data-wrangling-components/react-controls'
+import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 
@@ -31,9 +33,22 @@ export const Join: React.FC<StepComponentProps<JoinArgs>> = memo(function Join({
 		onChange,
 	)
 
+	const handleRightTableChange = useHandleDropdownChange(
+		step,
+		(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
+		onChange,
+	)
+	
 	return (
 		<Container>
-			<JoinInputs step={step} store={store} table={table} onChange={onChange} />
+			<LeftAlignedColumn>
+					<TableDropdown
+						store={store}
+						label="Join table"
+						selectedKey={step.input[NodeInput.Other]?.node}
+						onChange={handleRightTableChange}
+					/>
+			</LeftAlignedColumn>
 			<LeftAlignedColumn>
 				<EnumDropdown
 					required
@@ -44,6 +59,7 @@ export const Join: React.FC<StepComponentProps<JoinArgs>> = memo(function Join({
 					onChange={handleJoinStrategyChange}
 				/>
 			</LeftAlignedColumn>
+			<JoinInputs step={step} store={store} table={table} onChange={onChange} />
 		</Container>
 	)
 })

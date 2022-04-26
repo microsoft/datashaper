@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs, Step } from '@data-wrangling-components/core'
+import { JoinArgs, JoinStrategy, Step } from '@data-wrangling-components/core'
 import {
 	TableColumnDropdown,
 	TableDropdown,
@@ -38,12 +38,6 @@ export const JoinInputs: React.FC<StepComponentProps<JoinArgs>> = memo(
 		const leftColumn = useLeftColumn(step)
 		const rightColumn = useRightColumn(step)
 
-		const handleRightTableChange = useHandleDropdownChange(
-			step,
-			(s, val) => (s.input[NodeInput.Other]!.node = val as string),
-			onChange,
-		)
-
 		// TODO: if only one column is chosen, arquero will use it for both tables
 		// however, if that column doesn't exist in both, it will throw an error
 		// provide some validation here for the user?
@@ -52,31 +46,31 @@ export const JoinInputs: React.FC<StepComponentProps<JoinArgs>> = memo(
 
 		return (
 			<Container>
-				<LeftAlignedRow>
-					<TableDropdown
-						store={store}
-						label={`${upperFirst(label)} table`}
-						selectedKey={step.input[NodeInput.Other]?.node}
-						onChange={handleRightTableChange}
-					/>
-				</LeftAlignedRow>
-				<LeftAlignedRow>
-					<TableColumnDropdown
-						table={leftTable}
-						required
-						label={`Input ${label} key`}
-						selectedKey={leftColumn}
-						onChange={handleLeftColumnChange}
-					/>
-				</LeftAlignedRow>
-				<LeftAlignedRow>
-					<TableColumnDropdown
-						table={rightTable}
-						label={`${upperFirst(label)} table key`}
-						selectedKey={rightColumn}
-						onChange={handleRightColumnChange}
-					/>
-				</LeftAlignedRow>
+				{
+					step.args.strategy !== JoinStrategy.Cross ?
+						<InputKeysContainer>
+							<LeftAlignedRow>
+								<TableColumnDropdown
+									table={leftTable}
+									required
+									label={`Input ${label} key`}
+									selectedKey={leftColumn}
+									onChange={handleLeftColumnChange}
+								/>
+							</LeftAlignedRow>
+							<LeftAlignedRow>
+								<TableColumnDropdown
+									table={rightTable}
+									label={`${upperFirst(label)} table key`}
+									selectedKey={rightColumn}
+									onChange={handleRightColumnChange}
+								/>
+							</LeftAlignedRow>
+						</InputKeysContainer>
+					:
+					null
+				}
+				
 			</Container>
 		)
 	},
@@ -144,4 +138,6 @@ const Container = styled.div`
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	align-content: flex-start;
+`
+const InputKeysContainer = styled.div`
 `

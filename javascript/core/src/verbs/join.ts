@@ -25,6 +25,9 @@ export enum JoinStrategy {
 	LeftOuter = 'left outer',
 	RightOuter = 'right outer',
 	FullOuter = 'full outer',
+	Cross = 'cross',
+	SemiJoin = 'semi join',
+	AntiJoin = 'anti join' 
 }
 
 class JoinNode extends BaseNode<TableContainer, JoinArgs> {
@@ -55,12 +58,21 @@ function doJoin(
 	other: ColumnTable,
 	{ on, strategy = JoinStrategy.Inner }: JoinArgs,
 ): ColumnTable {
-	return input.join(other, on, undefined, {
-		left:
-			strategy === JoinStrategy.LeftOuter ||
-			strategy === JoinStrategy.FullOuter,
-		right:
-			strategy === JoinStrategy.RightOuter ||
-			strategy === JoinStrategy.FullOuter,
-	})
+	switch(strategy){
+		case JoinStrategy.SemiJoin:
+			return input.semijoin(other, on)
+		case JoinStrategy.AntiJoin:
+			return input.antijoin(other, on)
+		case JoinStrategy.Cross:
+			return input.cross(other)
+		default:
+			return input.join(other, on, undefined, {
+				left:
+					strategy === JoinStrategy.LeftOuter ||
+					strategy === JoinStrategy.FullOuter,
+				right:
+					strategy === JoinStrategy.RightOuter ||
+					strategy === JoinStrategy.FullOuter,
+			})
+	}
 }
