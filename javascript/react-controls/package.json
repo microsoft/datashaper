@@ -33,7 +33,7 @@
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",
 		"@data-wrangling-components/primitives": "workspace:^",
-		"@essex/arquero": "^2.0.0",
+		"@essex/arquero": "^2.0.1",
 		"@essex/dataflow": "^0.1.0",
 		"core-js": "^3.22.2",
 		"lodash-es": "^4.17.21",

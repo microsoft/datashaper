@@ -1551,7 +1551,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:javascript/core"
   dependencies:
-    "@essex/arquero": ^2.0.0
+    "@essex/arquero": ^2.0.1
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
@@ -1628,7 +1628,7 @@ __metadata:
   dependencies:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/primitives": "workspace:^"
-    "@essex/arquero": ^2.0.0
+    "@essex/arquero": ^2.0.1
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
@@ -1664,7 +1664,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/react-controls": "workspace:^"
     "@data-wrangling-components/react-verbs": "workspace:^"
-    "@essex/arquero": ^2.0.0
+    "@essex/arquero": ^2.0.1
     "@essex/dataflow": ^0.1.0
     "@essex/scripts": ^21.0.2
     "@essex/tsconfig-base": ^1.0.2
@@ -1695,7 +1695,7 @@ __metadata:
     "@data-wrangling-components/react-controls": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
-    "@essex/arquero": ^2.0.0
+    "@essex/arquero": ^2.0.1
     "@essex/arquero-react": ^1.0.3
     "@essex/charts-react": ^1.0.2
     "@essex/dataflow": ^0.1.0
@@ -1749,7 +1749,7 @@ __metadata:
     "@data-wrangling-components/react-verbs": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
-    "@essex/arquero": ^2.0.0
+    "@essex/arquero": ^2.0.1
     "@essex/arquero-react": ^1.0.3
     "@essex/charts-react": ^1.0.2
     "@essex/dataflow": ^0.1.0
@@ -1833,7 +1833,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/react": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
-    "@essex/arquero": ^2.0.0
+    "@essex/arquero": ^2.0.1
     "@essex/arquero-react": ^1.0.3
     "@essex/hooks": ^4.0.10
     "@essex/scripts": ^21.0.2
@@ -1962,6 +1962,17 @@ __metadata:
   peerDependencies:
     arquero: ^4.8.7
   checksum: 6fa16ca77948dd3164ca73f88ad4629428ba37746f4e77f875e6e6b65fc39a12549ea992ea04dd49844d5fcbed0f19c8a1ab801ab99a3f0ecf07a48fc4902aa1
+  languageName: node
+  linkType: hard
+
+"@essex/arquero@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@essex/arquero@npm:2.0.1"
+  dependencies:
+    lodash-es: ^4.17.21
+  peerDependencies:
+    arquero: ^4.8.7
+  checksum: d3869276a7fd8439677d57001a51038565400a4a258a0e51e4addb6a9db6d5a451e32476f76ca15cd3d9bc5b4156c01c84cfe6787ba39e41c91315b08228a12b
   languageName: node
   linkType: hard
 

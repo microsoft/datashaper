@@ -34,7 +34,7 @@
 		"@data-wrangling-components/core": "workspace:^",
 		"@data-wrangling-components/react-controls": "workspace:^",
 		"@data-wrangling-components/react-verbs": "workspace:^",
-		"@essex/arquero": "^2.0.0",
+		"@essex/arquero": "^2.0.1",
 		"@essex/dataflow": "^0.1.0"
 	},
 	"devDependencies": {

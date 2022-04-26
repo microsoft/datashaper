@@ -34,7 +34,7 @@
 		"@data-wrangling-components/core": "workspace:^",
 		"@data-wrangling-components/react": "workspace:^",
 		"@data-wrangling-components/utilities": "workspace:^",
-		"@essex/arquero": "^2.0.0",
+		"@essex/arquero": "^2.0.1",
 		"@essex/arquero-react": "^1.0.3",
 		"@essex/hooks": "^4.0.10",
 		"@essex/themed-components": "^2.2.4",
