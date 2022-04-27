@@ -480,10 +480,13 @@
                 },
                 "strategy": {
                     "enum": [
+                        "anti join",
+                        "cross",
                         "full outer",
                         "inner",
                         "left outer",
-                        "right outer"
+                        "right outer",
+                        "semi join"
                     ],
                     "type": "string"
                 }
