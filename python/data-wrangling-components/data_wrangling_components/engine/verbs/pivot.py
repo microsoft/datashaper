@@ -5,6 +5,9 @@
 
 from dataclasses import dataclass
 
+from data_wrangling_components.engine.pandas.aggregate_mapping import (
+    aggregate_operation_mapping,
+)
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import FieldAggregateOperation, Step
 
@@ -26,7 +29,9 @@ def pivot(step: Step, store: TableStore):
     input_table = store.table(step.input)
 
     output = input_table.pivot_table(
-        values=args.value, columns=args.key, aggfunc=args.operation.value
+        values=args.value,
+        columns=args.key,
+        aggfunc=aggregate_operation_mapping[args.operation],
     )
 
     return TableContainer(id=str(step.output), name=str(step.output), table=output)

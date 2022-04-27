@@ -3,6 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+import pandas as pd
+
 from dataclasses import dataclass
 
 from data_wrangling_components.table_store import TableContainer, TableStore
@@ -37,5 +39,19 @@ def unfold(step: Step, store: TableStore):
     output.index = new_index
 
     output = output.pivot(columns=args.key, values=args.value)
+
+    output = pd.concat(
+        [
+            input_table[
+                [
+                    col
+                    for col in input_table.columns
+                    if col != args.key and col != args.value
+                ]
+            ],
+            output,
+        ],
+        axis=1,
+    )
 
     return TableContainer(id=str(step.output), name=str(step.output), table=output)

@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Optional, Tuple, Union
+from typing import Optional
 
 import numpy as np
 
@@ -24,18 +24,14 @@ class BinArgs(OutputColumnArgs):
     clamped: bool = False
 
 
-def __get_boundary(
-    index: int,
-    bin_edges: np.ndarray,
-    clamped: bool,
-    min_max: Tuple[float, float],
-) -> Union[int, float]:
-    if index > 0 and index < len(bin_edges):
-        return bin_edges[index - 1]
-    elif index >= len(bin_edges):
-        return min_max[1] if clamped else np.inf
-    else:
-        return min_max[0] if clamped else -np.inf
+def __get_bucket_value(bin_edges, inds, n, clamped, min_max, value):
+    if value < min_max[0]:
+        return -np.inf if not clamped else bin_edges[0]
+    elif value > min_max[1]:
+        return np.inf if not clamped else bin_edges[-2]
+    elif value == bin_edges[-1]:
+        return bin_edges[-2]
+    return bin_edges[min(inds[n] - 1, len(bin_edges) - 1)]
 
 
 def bin(step: Step, store: TableStore):
@@ -81,19 +77,20 @@ def bin(step: Step, store: TableStore):
     elif args.strategy == BinStrategy.FixedWidth:
         bin_edges = np.histogram_bin_edges(
             input_table[args.column],
-            bins=np.arange(min_max[0], min_max[1], args.fixedwidth, dtype=int),
+            bins=np.arange(
+                min_max[0], min_max[1] + args.fixedwidth, args.fixedwidth, dtype=int
+            ),
             range=min_max,
         )
 
-    if not args.clamped:
-        bin_edges = np.array([-np.inf] + [float(edge) for edge in bin_edges] + [np.inf])
-
+    inds = np.digitize(input_table[args.column], bin_edges)
     value_edges = [
-        __get_boundary(bin_index, bin_edges, args.clamped, min_max)
-        for _, bin_index in enumerate(
-            np.searchsorted(bin_edges, input_table[args.column], side="right")
+        __get_bucket_value(
+            bin_edges, inds, n, args.clamped, min_max, input_table[args.column].iloc[n]
         )
+        for n in range(len(input_table[args.column]))
     ]
+
     output = input_table.copy()
     output[args.to] = value_edges
     return TableContainer(id=str(step.output), name=str(step.output), table=output)

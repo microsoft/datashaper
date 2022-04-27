@@ -35,15 +35,16 @@ def fold(step: Step, store: TableStore):
     """
     args = FoldArgs(to=step.args["to"], columns=step.args["columns"])
     input_table = store.table(step.input)
-    output = (
-        input_table.melt(
-            id_vars=set(input_table.columns) - set(args.columns),
-            value_vars=args.columns,
-            var_name=args.to[0],
-            value_name=args.to[1],
-        )
-        .reset_index(drop=True)
-        .sort_values(by=list(set(input_table.columns) - set(args.columns)))
-        .reset_index(drop=True)
-    )
+    output = input_table.melt(
+        id_vars=set(input_table.columns) - set(args.columns),
+        value_vars=args.columns,
+        var_name=args.to[0],
+        value_name=args.to[1],
+    ).reset_index(drop=True)
+
+    if len(args.columns) > 1:
+        output = output.sort_values(
+            by=[col for col in input_table.columns if col not in args.columns]
+        ).reset_index(drop=True)
+
     return TableContainer(id=str(step.output), name=str(step.output), table=output)

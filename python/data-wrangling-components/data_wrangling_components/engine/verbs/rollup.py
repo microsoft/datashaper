@@ -9,6 +9,9 @@ import pandas as pd
 
 from dataclasses import dataclass
 
+from data_wrangling_components.engine.pandas.aggregate_mapping import (
+    aggregate_operation_mapping,
+)
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import (
     FieldAggregateOperation,
@@ -43,7 +46,9 @@ def rollup(step: Step, store: TableStore):
     )
     input_table = store.table(step.input)
 
-    agg_result = input_table.agg(args.operation.value)[args.column]
+    agg_result = input_table.agg(aggregate_operation_mapping[args.operation])[
+        args.column
+    ]
 
     if not isinstance(agg_result, Iterable):
         agg_result = [agg_result]

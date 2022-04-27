@@ -5,6 +5,9 @@
 
 from dataclasses import dataclass
 
+from data_wrangling_components.engine.pandas.aggregate_mapping import (
+    aggregate_operation_mapping,
+)
 from data_wrangling_components.table_store import TableContainer, TableStore
 from data_wrangling_components.types import (
     FieldAggregateOperation,
@@ -46,7 +49,7 @@ def aggregate(step: Step, store: TableStore) -> TableContainer:
     output = (
         input_table[[args.groupby, args.column]]
         .groupby(args.groupby)
-        .agg(args.operation.value)
+        .agg(aggregate_operation_mapping[args.operation])
     )
     output.columns = [args.to]
     return TableContainer(

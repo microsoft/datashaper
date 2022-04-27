@@ -30,6 +30,8 @@ def onehot(step: Step, store: TableStore):
         input_table[args.column], prefix=args.prefix, prefix_sep=""
     )
 
+    dummies.loc[input_table[args.column].isnull(), dummies.columns] = None
+
     output = pd.concat([input_table, dummies], axis=1)
 
     return TableContainer(id=str(step.output), name=str(step.output), table=output)
