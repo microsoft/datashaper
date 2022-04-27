@@ -9,7 +9,7 @@ import type { Step } from '../../steps/index.js'
 import { readSteps } from '../../steps/readSteps.js'
 import { createTableStore } from '../../store/index.js'
 import type { Store } from '../../store/types.js'
-import type { TableContainer } from '../../tables/index.js'
+import type { TableContainer } from '@essex/arquero'
 import { createGraph } from '../graph.js'
 
 describe('stepGraph', () => {

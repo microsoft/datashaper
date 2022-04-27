@@ -6,7 +6,9 @@
 		"moduleResolution": "Node",
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "ES2020.BigInt"],
 		"skipLibCheck": true,
-		"skipDefaultLibCheck": true
+		"skipDefaultLibCheck": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true
 	},
 	"include": ["src"]
 }
