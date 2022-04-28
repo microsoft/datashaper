@@ -13,7 +13,7 @@ export const identity = <T>(value?: T): T | undefined => value
  * @param value - the string value
  * @returns The string cast as a number (if defined)
  */
-export const num = (value?: string): number | undefined => {
+export const num = (value?: string | number): number | undefined => {
 	if (value) {
 		return +value
 	}

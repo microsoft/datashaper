@@ -41,7 +41,7 @@ export const AggregateBase: React.FC<
 				required: true,
 			},
 		],
-		[],
+		[step, columnOptions],
 	)
 
 	return <VerbInput step={step} inputs={verbInputs} onChange={onChange} />
