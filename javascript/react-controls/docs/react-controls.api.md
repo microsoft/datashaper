@@ -249,9 +249,8 @@ export const TableColumnDropdown: React.FC<TableColumnDropdownProps>;
 //
 // @public (undocumented)
 export interface TableColumnDropdownProps extends Partial<IDropdownProps> {
-    filter?: (name: string) => boolean;
     // (undocumented)
-    table?: ColumnTable;
+    options: IDropdownOption[];
 }
 
 // Warning: (ae-missing-release-tag) "TableDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -266,6 +265,21 @@ export interface TableDropdownProps extends Partial<IDropdownProps> {
     // (undocumented)
     store?: TableStore;
 }
+
+// Warning: (ae-missing-release-tag) "useColumnValueOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useColumnValueOptions(column: string, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "useSimpleDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useSimpleDropdownOptions(list: string[]): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "useTableColumnOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useTableColumnOptions(table: ColumnTable | undefined, filter?: (name: string) => boolean): IDropdownOption[];
 
 // (No @packageDocumentation comment for this package)
 

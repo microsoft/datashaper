@@ -11,6 +11,7 @@ import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
 import { TableColumnDropdown } from './TableColumnDropdown.js'
+import { useTableColumnOptions } from '../hooks.js'
 
 export interface SortInstructionProps {
 	table?: ColumnTable
@@ -50,10 +51,12 @@ export const SortInstruction: React.FC<SortInstructionProps> = memo(
 			onChange?.(update)
 		}, [order, onChange])
 
+		const options = useTableColumnOptions(table)
+
 		return (
 			<Container>
 				<TableColumnDropdown
-					table={table}
+					options={options}
 					label={undefined}
 					selectedKey={column}
 					onChange={handleColumnChange}

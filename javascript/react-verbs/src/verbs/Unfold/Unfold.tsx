@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
+import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
 
 /**
  * Just the group/column/op inputs for an aggregation.
@@ -29,12 +30,14 @@ export const Unfold: React.FC<StepComponentProps<PivotArgs>> = memo(
 			onChange,
 		)
 
+		const options = useTableColumnOptions(dataTable)
+
 		return (
 			<Container>
 				<LeftAlignedRow>
 					<TableColumnDropdown
 						required
-						table={dataTable}
+						options={options}
 						label={'Column used as key'}
 						selectedKey={step.args.key}
 						onChange={handleKeyColumnChange}
@@ -43,7 +46,7 @@ export const Unfold: React.FC<StepComponentProps<PivotArgs>> = memo(
 				<LeftAlignedRow>
 					<TableColumnDropdown
 						required
-						table={dataTable}
+						options={options}
 						label={'Column used as value'}
 						selectedKey={step.args.value}
 						onChange={handleValueColumnChange}

@@ -15,6 +15,7 @@ import styled from 'styled-components'
 import { useHandleDropdownChange } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
+import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
 
 /**
  * Provides inputs for a step that needs lists of columns.
@@ -39,11 +40,13 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 			onChange,
 		)
 
+		const options = useTableColumnOptions(dataTable)
+
 		return (
 			<Container>
 				<TableColumnDropdown
 					required
-					table={dataTable}
+					options={options}
 					label={'Column to spread'}
 					selectedKey={(step.args as SpreadArgs).column}
 					onChange={handleColumnChange}

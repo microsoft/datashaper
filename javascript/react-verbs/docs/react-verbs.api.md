@@ -6,7 +6,7 @@
 
 /// <reference types="react" />
 
-import type { AggregateArgs } from '@data-wrangling-components/core';
+import { AggregateArgs } from '@data-wrangling-components/core';
 import type { BinArgs } from '@data-wrangling-components/core';
 import type { BinarizeArgs } from '@data-wrangling-components/core';
 import type { BooleanArgs } from '@data-wrangling-components/core';
@@ -43,13 +43,28 @@ import type { WindowArgs } from '@data-wrangling-components/core';
 
 // Warning: (ae-missing-release-tag) "Aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
+// @public (undocumented)
 export const Aggregate: MemoExoticComponent<(props: StepComponentProps<AggregateArgs>) => JSX.Element>;
+
+// Warning: (ae-missing-release-tag) "AggregateBasic" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const AggregateBasic: React.FC<BasicStepComponentProps<AggregateArgs> & {
+    columnOptions: IDropdownOption[];
+}>;
 
 // Warning: (ae-missing-release-tag) "AggregateDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const AggregateDescription: React.FC<StepDescriptionProps<AggregateArgs>>;
+
+// Warning: (ae-missing-release-tag) "BasicStepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface BasicStepComponentProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
+    // (undocumented)
+    onChange?: StepChangeFunction<T>;
+}
 
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -355,11 +370,9 @@ export type StepChangeFunction<T extends object | void | unknown = unknown> = (s
 // Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepComponentProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
+export interface StepComponentProps<T extends object | void | unknown = unknown> extends BasicStepComponentProps<T> {
     input?: string;
     label?: string;
-    // (undocumented)
-    onChange?: StepChangeFunction<T>;
     store?: TableStore;
     table?: ColumnTable;
 }

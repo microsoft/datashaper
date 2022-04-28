@@ -21,6 +21,7 @@ import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import type { HOCFunction } from './types.js'
+import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
 /**
  * Higher order component generator to wrap a Step in the input column dropdown.
  * @param label - optional label to use for the dropdown instead of the default.
@@ -48,18 +49,17 @@ export function withInputColumnDropdown<T extends InputColumnArgs>(
 			)
 
 			const filter = useColumnFilter(step, tbl)
+			const options = useTableColumnOptions(tbl, filter)
 
 			if (!isInputColumnStep(step)) {
 				return <Component {...props} />
 			}
-
 			return (
 				<Container className="with-input-column-dropdown">
 					<LeftAlignedRow>
 						<TableColumnDropdown
 							required
-							table={tbl}
-							filter={filter}
+							options={options}
 							label={label || `Column to ${step.verb}`}
 							selectedKey={(step.args as InputColumnArgs).column}
 							onChange={handleColumnChange}

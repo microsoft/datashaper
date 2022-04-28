@@ -9,6 +9,7 @@ import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
 import { TableColumnDropdown } from './TableColumnDropdown.js'
+import { useTableColumnOptions } from '../hooks.js'
 
 export interface ColumnInstructionProps {
 	table?: ColumnTable
@@ -29,10 +30,12 @@ export const ColumnInstruction: React.FC<ColumnInstructionProps> = memo(
 			[onChange],
 		)
 
+		const options = useTableColumnOptions(table)
+
 		return (
 			<Container>
 				<TableColumnDropdown
-					table={table}
+					options={options}
 					label={undefined}
 					selectedKey={column}
 					onChange={handleColumnChange}

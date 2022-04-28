@@ -14,6 +14,7 @@ import styled from 'styled-components'
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
+import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
 
 /**
  * Provides inputs for a Binarize step.
@@ -35,12 +36,13 @@ export const Derive: React.FC<StepComponentProps<DeriveArgs>> = memo(
 			(s, val) => (s.args.operator = val as MathOperator),
 			onChange,
 		)
+		const options = useTableColumnOptions(dataTable)
 
 		return (
 			<Container>
 				<LeftAlignedRow>
 					<TableColumnDropdown
-						table={dataTable}
+						options={options}
 						required
 						label={'Column one'}
 						selectedKey={step.args.column1}
@@ -58,7 +60,7 @@ export const Derive: React.FC<StepComponentProps<DeriveArgs>> = memo(
 				</LeftAlignedRow>
 				<LeftAlignedRow>
 					<TableColumnDropdown
-						table={dataTable}
+						options={options}
 						required
 						label={'Column two'}
 						selectedKey={step.args.column2}

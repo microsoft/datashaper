@@ -4,6 +4,4 @@
  */
 export * from './controls/index.js'
 export * from './styles.js'
-
-// Don't export, these are internal
-// export * from './hooks.js'
+export * from './hooks.js'

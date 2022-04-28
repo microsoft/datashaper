@@ -2,16 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs, Step } from '@data-wrangling-components/core';
+import type { JoinArgs, Step } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
-import {
-	TableColumnDropdown,
-} from '@data-wrangling-components/react-controls'
+import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
 
 import { useLoadTable } from '../../../common/hooks.js'
 import { LeftAlignedRow } from '../../../common/styles.js'
@@ -44,33 +43,32 @@ export const JoinInputs: React.FC<StepComponentProps<JoinArgs>> = memo(
 		const handleLeftColumnChange = useHandleLeftColumnChange(step, onChange)
 		const handleRightColumnChange = useHandleRightColumnChange(step, onChange)
 
+		const leftOptions = useTableColumnOptions(leftTable)
+		const rightOptions = useTableColumnOptions(rightTable)
+
 		return (
 			<Container>
-				{
-					step.args.strategy !== JoinStrategy.Cross ?
-						<InputKeysContainer>
-							<LeftAlignedRow>
-								<TableColumnDropdown
-									table={leftTable}
-									required
-									label={`Input ${label} key`}
-									selectedKey={leftColumn}
-									onChange={handleLeftColumnChange}
-								/>
-							</LeftAlignedRow>
-							<LeftAlignedRow>
-								<TableColumnDropdown
-									table={rightTable}
-									label={`${upperFirst(label)} table key`}
-									selectedKey={rightColumn}
-									onChange={handleRightColumnChange}
-								/>
-							</LeftAlignedRow>
-						</InputKeysContainer>
-					:
-					null
-				}
-				
+				{step.args.strategy !== JoinStrategy.Cross ? (
+					<InputKeysContainer>
+						<LeftAlignedRow>
+							<TableColumnDropdown
+								options={leftOptions}
+								required
+								label={`Input ${label} key`}
+								selectedKey={leftColumn}
+								onChange={handleLeftColumnChange}
+							/>
+						</LeftAlignedRow>
+						<LeftAlignedRow>
+							<TableColumnDropdown
+								options={rightOptions}
+								label={`${upperFirst(label)} table key`}
+								selectedKey={rightColumn}
+								onChange={handleRightColumnChange}
+							/>
+						</LeftAlignedRow>
+					</InputKeysContainer>
+				) : null}
 			</Container>
 		)
 	},
@@ -139,5 +137,4 @@ const Container = styled.div`
 	flex-wrap: wrap;
 	align-content: flex-start;
 `
-const InputKeysContainer = styled.div`
-`
+const InputKeysContainer = styled.div``

@@ -61,8 +61,17 @@ export interface StepSubcomponentProps<
 	label?: string
 }
 
+/**
+ * Basic props for a dump-component (not store/arquero attached)
+ */
+export interface BasicStepComponentProps<
+	T extends object | void | unknown = unknown,
+> extends StepDependent<T> {
+	onChange?: StepChangeFunction<T>
+}
+
 export interface StepComponentProps<T extends object | void | unknown = unknown>
-	extends StepDependent<T> {
+	extends BasicStepComponentProps<T> {
 	/**
 	 * TableStore to use for table lookups of step parameters.
 	 */
@@ -77,7 +86,6 @@ export interface StepComponentProps<T extends object | void | unknown = unknown>
 	 * but the input to the actual step is an intermediate table.
 	 */
 	input?: string
-	onChange?: StepChangeFunction<T>
 	/**
 	 * Optional override for the label
 	 */
