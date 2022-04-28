@@ -1,0 +1,9 @@
+releases:
+  "@data-wrangling-components/react": major
+  "@data-wrangling-components/react-controls": major
+  "@data-wrangling-components/react-hocs": patch
+  "@data-wrangling-components/react-verbs": patch
+
+declined:
+  - "@data-wrangling-components/react-hooks"
+  - "@data-wrangling-components/webapp"
