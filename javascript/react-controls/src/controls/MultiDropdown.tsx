@@ -61,11 +61,13 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
 			] as IDropdownOption[]
 		}, [options, selectedKeys])
 
-		const handleSelectAllOrNone = useCallback(
-			(all: boolean) => {
-				onSelectAllOrNone?.(all ? options : [])
-			},
-			[options, onSelectAllOrNone],
+		const handleSelectAll = useCallback(
+			() => onSelectAllOrNone?.(options),
+			[onSelectAllOrNone, options],
+		)
+		const handleSelectNone = useCallback(
+			() => onSelectAllOrNone?.([]),
+			[onSelectAllOrNone],
 		)
 
 		const handleRenderOption: IRenderFunction<ISelectableOption<any>> =
@@ -74,16 +76,16 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
 					if (option?.data) {
 						return (
 							<Selector>
-								<Link onClick={() => handleSelectAllOrNone(true)}>All</Link>
+								<Link onClick={handleSelectAll}>All</Link>
 								<Sep>|</Sep>
-								<Link onClick={() => handleSelectAllOrNone(false)}>None</Link>
+								<Link onClick={handleSelectNone}>None</Link>
 							</Selector>
 						)
 					} else {
 						return <span>{option?.text}</span>
 					}
 				},
-				[handleSelectAllOrNone],
+				[handleSelectAll, handleSelectNone],
 			)
 
 		return (

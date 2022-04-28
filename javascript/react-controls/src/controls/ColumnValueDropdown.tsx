@@ -3,18 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Value } from '@essex/arquero'
-import type { IDropdownProps } from '@fluentui/react'
+import type { IDropdownProps, IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
 
-import { useColumnValueOptions } from '../hooks.js'
 import { dropdownStyles } from '../styles.js'
 
 export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
 	column: string
-	table?: ColumnTable
 	values?: Value[]
+	options: IDropdownOption[]
 	/**
 	 * Optional filter function to apply to the values list.
 	 */
@@ -25,8 +23,7 @@ export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
  * Dropdown wrapper to automatically list the row cell values for a column.
  */
 export const ColumnValueDropdown: React.FC<ColumnValueDropdownProps> = memo(
-	function ColumnValueDropdown({ column, table, values, filter, ...props }) {
-		const options = useColumnValueOptions(column, table, values, filter)
+	function ColumnValueDropdown({ column, options, values, filter, ...props }) {
 		return (
 			<Dropdown
 				label={'Value'}

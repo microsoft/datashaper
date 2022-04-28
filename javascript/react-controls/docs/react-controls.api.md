@@ -118,7 +118,7 @@ export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
     column: string;
     filter?: (value: Value) => boolean;
     // (undocumented)
-    table?: ColumnTable;
+    options: IDropdownOption[];
     // (undocumented)
     values?: Value[];
 }
@@ -231,13 +231,13 @@ export const SortInstruction: React.FC<SortInstructionProps>;
 // @public (undocumented)
 export interface SortInstructionProps {
     // (undocumented)
+    columnOptions: IDropdownOption[];
+    // (undocumented)
     onChange?: (order: OrderbyInstruction) => void;
     // (undocumented)
     onDelete?: () => void;
     // (undocumented)
     order: OrderbyInstruction;
-    // (undocumented)
-    table?: ColumnTable;
 }
 
 // Warning: (ae-missing-release-tag) "TableColumnDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -17,13 +17,16 @@ import styled from 'styled-components'
 
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
+import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
+import type { IDropdownOption } from '@fluentui/react'
 
 /**
  * Provides inputs for an OrderBy step.
  */
 export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
 	withLoadedTable(function Orderby({ step, onChange, dataTable }) {
-		const sorts = useSorts(step, dataTable, onChange)
+		const columnOptions = useTableColumnOptions(dataTable)
+		const sorts = useSorts(step, columnOptions, onChange)
 
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
@@ -61,7 +64,7 @@ function newSort(table?: ColumnTable): OrderbyInstruction {
 
 function useSorts(
 	step: Step<OrderbyArgs>,
-	table?: ColumnTable,
+	columnOptions: IDropdownOption[],
 	onChange?: (step: Step<OrderbyArgs>) => void,
 ) {
 	return useMemo(() => {
@@ -81,14 +84,14 @@ function useSorts(
 			return (
 				<SortInstruction
 					key={`orderby-${order.column}-${index}`}
-					table={table}
+					columnOptions={columnOptions}
 					order={order}
 					onChange={handleSortChange}
 					onDelete={handleDeleteClick}
 				/>
 			)
 		})
-	}, [step, table, onChange])
+	}, [step, columnOptions, onChange])
 }
 
 const Container = styled.div`

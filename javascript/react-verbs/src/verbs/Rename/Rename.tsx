@@ -66,16 +66,19 @@ function useColumnPairs(
 ) {
 	return useMemo(() => {
 		const { columns } = step.args
-		return Object.entries(columns || {}).map((column, index) => (
-			<ColumnPair
-				table={table}
-				column={column}
-				step={step}
-				onChange={onChange}
-				onDelete={onDelete}
-				index={index}
-			/>
-		))
+		return Object.entries(columns || {}).map((column, index) => {
+			const [oldname] = column
+			return (
+				<ColumnPair
+					key={`column-rename-${oldname}-${index}`}
+					table={table}
+					column={column}
+					step={step}
+					onChange={onChange}
+					onDelete={onDelete}
+				/>
+			)
+		})
 	}, [table, step, onChange, onDelete])
 }
 
@@ -83,17 +86,9 @@ const ColumnPair: React.FC<{
 	table: ColumnTable | undefined
 	column: [string, string]
 	step: Step<RenameArgs>
-	index: number
 	onChange: (previous: string, oldName: string, newName: string) => void
 	onDelete: (name: string) => void
-}> = memo(function ColumnPair({
-	table,
-	column,
-	step,
-	index,
-	onChange,
-	onDelete,
-}) {
+}> = memo(function ColumnPair({ table, column, step, onChange, onDelete }) {
 	const [oldname, newname] = column
 	const columnFilter = (name: string) => {
 		if (name === oldname) {
@@ -118,7 +113,7 @@ const ColumnPair: React.FC<{
 	const options = useTableColumnOptions(table, columnFilter)
 
 	return (
-		<ColumnPairContainer key={`column-rename-${oldname}-${index}`}>
+		<ColumnPairContainer>
 			<TableColumnDropdown
 				options={options}
 				label={undefined}
