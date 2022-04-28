@@ -15,7 +15,7 @@ import styled from 'styled-components'
 import { useHandleDropdownChange } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
-import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs for a step that needs lists of columns.

@@ -6,8 +6,8 @@
 
 /// <reference types="react" />
 
-import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { IButtonStyles } from '@fluentui/react';
+import type { IComboBoxOption } from '@fluentui/react';
 import type { IComboBoxProps } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
@@ -17,8 +17,6 @@ import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
 import type { ITextFieldProps } from '@fluentui/react';
 import type { OrderbyInstruction } from '@data-wrangling-components/core';
-import type { TableStore } from '@data-wrangling-components/core';
-import type { Value } from '@essex/arquero';
 
 // Warning: (ae-missing-release-tag) "ColumnarMenu" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -38,25 +36,6 @@ export interface ColumnarMenuProps extends IContextualMenuProps {
     text?: string;
 }
 
-// Warning: (ae-missing-release-tag) "ColumnInstruction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const ColumnInstruction: React.FC<ColumnInstructionProps>;
-
-// Warning: (ae-missing-release-tag) "ColumnInstructionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnInstructionProps {
-    // (undocumented)
-    column: string;
-    // (undocumented)
-    onChange?: (column: string) => void;
-    // (undocumented)
-    onDelete?: () => void;
-    // (undocumented)
-    table?: ColumnTable;
-}
-
 // Warning: (ae-missing-release-tag) "ColumnOrValueComboBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -66,9 +45,8 @@ export const ColumnOrValueComboBox: React.FC<ColumnOrValueComboBoxProps>;
 //
 // @public (undocumented)
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
-    filter?: (name: string) => boolean;
     // (undocumented)
-    table?: ColumnTable;
+    options: IComboBoxOption[];
 }
 
 // Warning: (ae-missing-release-tag) "ColumnSpread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -241,23 +219,13 @@ export const TableDropdown: React.FC<TableDropdownProps>;
 // @public (undocumented)
 export interface TableDropdownProps extends Partial<IDropdownProps> {
     // (undocumented)
-    store?: TableStore;
+    options: IDropdownOption[];
 }
-
-// Warning: (ae-missing-release-tag) "useColumnValueOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useColumnValueOptions(column: string | undefined, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
 
 // Warning: (ae-missing-release-tag) "useSimpleDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function useSimpleDropdownOptions(list: string[]): IDropdownOption[];
-
-// Warning: (ae-missing-release-tag) "useTableColumnOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useTableColumnOptions(table: ColumnTable | undefined, filter?: (name: string) => boolean): IDropdownOption[];
 
 // (No @packageDocumentation comment for this package)
 

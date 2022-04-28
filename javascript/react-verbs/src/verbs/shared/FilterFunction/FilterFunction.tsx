@@ -20,6 +20,7 @@ import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 
 import { InputExplainer } from '../../../common/styles.js'
 import {
@@ -121,6 +122,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		const isEmpty = useIsEmpty(criterion)
 		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])
 		const placeholder = usePlaceholderText(type)
+		const columnOptions = useTableColumnOptions(table, columnFilter)
 
 		return (
 			<Container>
@@ -128,8 +130,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					{operatorDropdown}
 					<ColumnOrValueComboBox
 						required={!suppressLabels}
-						table={table}
-						filter={columnFilter}
+						options={columnOptions}
 						disabled={isEmpty}
 						label={suppressLabels ? undefined : 'Comparison value'}
 						placeholder={placeholder}

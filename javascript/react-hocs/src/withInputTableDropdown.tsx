@@ -12,6 +12,7 @@ import {
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
+import { useTableOptions } from '@data-wrangling-components/react-hooks'
 
 import type { HOCFunction } from './types.js'
 
@@ -26,6 +27,7 @@ export function withInputTableDropdown(
 	return Component => {
 		const WithTableDropdown: React.FC<StepComponentProps> = props => {
 			const { step, store, onChange } = props
+			const tableOptions = useTableOptions(store)
 			const handleTableChange = useHandleDropdownChange(
 				step,
 				(s, val) => (s.input[NodeInput.Source] = { node: val as string }),
@@ -39,7 +41,7 @@ export function withInputTableDropdown(
 					<Container className="with-input-table-dropdown">
 						<LeftAlignedRow>
 							<TableDropdown
-								store={store}
+								options={tableOptions}
 								label={label || 'Input table'}
 								selectedKey={selected}
 								onChange={handleTableChange}

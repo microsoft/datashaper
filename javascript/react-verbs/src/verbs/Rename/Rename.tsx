@@ -24,7 +24,7 @@ import {
 	useHandleAddButtonClick,
 	useHandleColumnChange,
 } from './hooks.js'
-import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs for a RenameStep.

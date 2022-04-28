@@ -17,7 +17,7 @@ import styled from 'styled-components'
 
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
-import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 import type { IDropdownOption } from '@fluentui/react'
 
 /**

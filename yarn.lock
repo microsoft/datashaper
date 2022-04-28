@@ -1664,7 +1664,36 @@ __metadata:
   dependencies:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/react-controls": "workspace:^"
+    "@data-wrangling-components/react-hooks": "workspace:^"
     "@data-wrangling-components/react-verbs": "workspace:^"
+    "@essex/arquero": ^2.0.2
+    "@essex/dataflow": ^0.1.1
+    "@essex/scripts": ^22.0.0
+    "@essex/tsconfig-base": ^1.0.2
+    "@fluentui/react": ^8.67.2
+    "@types/lodash": ^4.14.182
+    "@types/lodash-es": ^4.17.6
+    "@types/node": ^17.0.29
+    "@types/react": ^18.0.8
+    "@types/styled-components": ^5.1.25
+    arquero: ^4.8.8
+    react: ^18.1.0
+    styled-components: ^5.3.5
+    typescript: ^4.6.3
+  peerDependencies:
+    "@fluentui/react": ^8.65.0
+    arquero: ^4.8.7
+    react: ^17.0.2
+    styled-components: ^5.3.0
+  languageName: unknown
+  linkType: soft
+
+"@data-wrangling-components/react-hooks@workspace:^, @data-wrangling-components/react-hooks@workspace:javascript/react-hooks":
+  version: 0.0.0-use.local
+  resolution: "@data-wrangling-components/react-hooks@workspace:javascript/react-hooks"
+  dependencies:
+    "@data-wrangling-components/core": "workspace:^"
+    "@data-wrangling-components/react-controls": "workspace:^"
     "@essex/arquero": ^2.0.2
     "@essex/dataflow": ^0.1.1
     "@essex/scripts": ^22.0.0
@@ -1694,6 +1723,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/primitives": "workspace:^"
     "@data-wrangling-components/react-controls": "workspace:^"
+    "@data-wrangling-components/react-hooks": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
     "@essex/arquero": ^2.0.2

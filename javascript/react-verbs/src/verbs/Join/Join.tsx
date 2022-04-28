@@ -17,6 +17,7 @@ import { useHandleDropdownChange } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { JoinInputs } from '../shared/index.js'
+import { useTableOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs for a Join step.
@@ -32,22 +33,22 @@ export const Join: React.FC<StepComponentProps<JoinArgs>> = memo(function Join({
 		(s, val) => (s.args.strategy = val as JoinStrategy),
 		onChange,
 	)
-
 	const handleRightTableChange = useHandleDropdownChange(
 		step,
 		(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
 		onChange,
 	)
-	
+	const tableOptions = useTableOptions(store)
+
 	return (
 		<Container>
 			<LeftAlignedColumn>
-					<TableDropdown
-						store={store}
-						label="Join table"
-						selectedKey={step.input[NodeInput.Other]?.node}
-						onChange={handleRightTableChange}
-					/>
+				<TableDropdown
+					options={tableOptions}
+					label="Join table"
+					selectedKey={step.input[NodeInput.Other]?.node}
+					onChange={handleRightTableChange}
+				/>
 			</LeftAlignedColumn>
 			<LeftAlignedColumn>
 				<EnumDropdown

@@ -34,6 +34,7 @@
 		"@data-wrangling-components/core": "workspace:^",
 		"@data-wrangling-components/primitives": "workspace:^",
 		"@data-wrangling-components/react-controls": "workspace:^",
+		"@data-wrangling-components/react-hooks": "workspace:^",
 		"@data-wrangling-components/utilities": "workspace:^",
 		"@data-wrangling-components/verb-guidance": "workspace:^",
 		"@essex/arquero": "^2.0.2",

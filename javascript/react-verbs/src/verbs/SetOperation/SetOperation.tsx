@@ -11,6 +11,7 @@ import styled from 'styled-components'
 import { LeftAlignedRow } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
+import { useTableOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs to create a list of tables.
@@ -51,6 +52,7 @@ function useOthers(
 	onChange?: (step: Step) => void,
 	store?: TableStore,
 ) {
+	const tableOptions = useTableOptions(store)
 	return useMemo(() => {
 		return (step.input.others || EMPTY).map((input, index) => {
 			const other = input.node
@@ -72,7 +74,7 @@ function useOthers(
 				<LeftAlignedRow key={`set-op-${other}-${index}`}>
 					<TableDropdown
 						label={''}
-						store={store}
+						options={tableOptions}
 						selectedKey={other}
 						onChange={(_evt, option) => {
 							const update = { ...step }

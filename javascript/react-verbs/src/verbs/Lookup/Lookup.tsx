@@ -8,9 +8,13 @@ import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedColumn, useHandleDropdownChange } from '../../common/index.js'
+import {
+	LeftAlignedColumn,
+	useHandleDropdownChange,
+} from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs, JoinInputs } from '../shared/index.js'
+import { useTableOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs for a Lookup step.
@@ -22,12 +26,13 @@ export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
 			(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
 			onChange,
 		)
+		const tableOptions = useTableOptions(store)
 
 		return (
 			<Container>
 				<LeftAlignedColumn>
 					<TableDropdown
-						store={store}
+						options={tableOptions}
 						label="Join table"
 						selectedKey={step.input[NodeInput.Other]?.node}
 						onChange={handleRightTableChange}

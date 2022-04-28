@@ -10,7 +10,7 @@ import type { IDropdownOption } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useTableColumnOptions } from '@data-wrangling-components/react-controls'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 
 import { useLoadTable } from '../../../common/hooks.js'
 import { LeftAlignedRow } from '../../../common/styles.js'

@@ -22,7 +22,7 @@ import {
 	useHandleRecodeChange,
 	useRecodeDelete,
 } from './hooks.js'
-import { useColumnValueOptions } from '@data-wrangling-components/react-controls'
+import { useColumnValueOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs for a RecodeStep.
