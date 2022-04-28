@@ -12,7 +12,7 @@ import {
 } from '@data-wrangling-components/react-controls'
 import type { IDropdownOption } from '@fluentui/react'
 import styled from 'styled-components'
-import type { BasicStepComponentProps } from '../../types.js'
+import type { StepComponentBaseProps } from '../../types.js'
 import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 
 /**
@@ -20,10 +20,10 @@ import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const AggregateBase: React.FC<
-	BasicStepComponentProps<AggregateArgs> & {
+	StepComponentBaseProps<AggregateArgs> & {
 		columnOptions: IDropdownOption[]
 	}
-> = function AggregateBasic({ step, onChange, columnOptions }) {
+> = function AggregateBase({ step, onChange, columnOptions }) {
 	const handleGroupColumnChange = useHandleDropdownChange(
 		step,
 		(s, key) => (s.args.groupby = key as string),

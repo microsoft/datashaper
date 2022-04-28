@@ -49,7 +49,7 @@ export const Aggregate: MemoExoticComponent<(props: StepComponentProps<Aggregate
 // Warning: (ae-missing-release-tag) "AggregateBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const AggregateBase: React.FC<BasicStepComponentProps<AggregateArgs> & {
+export const AggregateBase: React.FC<StepComponentBaseProps<AggregateArgs> & {
     columnOptions: IDropdownOption[];
 }>;
 
@@ -57,14 +57,6 @@ export const AggregateBase: React.FC<BasicStepComponentProps<AggregateArgs> & {
 //
 // @public (undocumented)
 export const AggregateDescription: React.FC<StepDescriptionProps<AggregateArgs>>;
-
-// Warning: (ae-missing-release-tag) "BasicStepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface BasicStepComponentProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
-    // (undocumented)
-    onChange?: StepChangeFunction<T>;
-}
 
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -367,10 +359,17 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>>;
 // @public (undocumented)
 export type StepChangeFunction<T extends object | void | unknown = unknown> = (step: Step<T>) => void;
 
+// Warning: (ae-missing-release-tag) "StepComponentBaseProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface StepComponentBaseProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
+    onChange?: StepChangeFunction<T>;
+}
+
 // Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepComponentProps<T extends object | void | unknown = unknown> extends BasicStepComponentProps<T> {
+export interface StepComponentProps<T extends object | void | unknown = unknown> extends StepComponentBaseProps<T> {
     input?: string;
     label?: string;
     store?: TableStore;

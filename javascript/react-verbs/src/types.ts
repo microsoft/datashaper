@@ -64,14 +64,17 @@ export interface StepSubcomponentProps<
 /**
  * Basic props for a dump-component (not store/arquero attached)
  */
-export interface BasicStepComponentProps<
+export interface StepComponentBaseProps<
 	T extends object | void | unknown = unknown,
 > extends StepDependent<T> {
+	/**
+	 * Event handler for when the step is changed in the component
+	 */
 	onChange?: StepChangeFunction<T>
 }
 
 export interface StepComponentProps<T extends object | void | unknown = unknown>
-	extends BasicStepComponentProps<T> {
+	extends StepComponentBaseProps<T> {
 	/**
 	 * TableStore to use for table lookups of step parameters.
 	 */
