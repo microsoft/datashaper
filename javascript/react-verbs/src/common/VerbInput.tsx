@@ -45,7 +45,7 @@ export interface EnumFormInput<T> extends FormInputBase {
 	 */
 	current: number | string
 
-	updater: (step: Step<T>, optionKey: string | number | undefined) => void
+	onChange: (step: Step<T>, optionKey: string | number | undefined) => void
 }
 
 export type FormInput<T> = EnumFormInput<T>
@@ -111,7 +111,7 @@ const EnumInput: React.FC<{
 		required,
 		options,
 		wrapper: Wrapper = Fragment,
-		updater,
+		onChange: updater,
 	},
 	onChange,
 }) {

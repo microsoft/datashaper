@@ -7,10 +7,8 @@ import {
 	AggregateArgs,
 } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
-import styled from 'styled-components'
 import { useMemo } from 'react'
 import type { StepComponentBaseProps } from '../../types.js'
-import { LeftAlignedRow } from '../../common/index.js'
 import { FormInput, FormInputType, VerbInput } from '../../common/VerbInput.js'
 import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
 
@@ -30,33 +28,21 @@ export const AggregateBase: React.FC<
 				type: FormInputType.Enum,
 				options: columnOptions,
 				current: step.args.groupby,
-				updater: (s, key) => (s.args.groupby = key as string),
+				onChange: (s, key) => (s.args.groupby = key as string),
 				required: true,
-				wrapper: LeftAlignedRow,
 			},
 			{
 				label: 'Function',
 				type: FormInputType.Enum,
 				options: getEnumDropdownOptions(FieldAggregateOperation),
 				current: step.args.operation,
-				updater: (s, key) =>
+				onChange: (s, key) =>
 					(s.args.operation = key as FieldAggregateOperation),
 				required: true,
-				wrapper: LeftAlignedRow,
 			},
 		],
 		[],
 	)
 
-	return (
-		<Container>
-			<VerbInput step={step} inputs={verbInputs} onChange={onChange} />
-		</Container>
-	)
+	return <VerbInput step={step} inputs={verbInputs} onChange={onChange} />
 }
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-`
