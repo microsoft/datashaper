@@ -11,7 +11,7 @@ import {
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
+import { LeftAlignedRow, useDropdownChangeHandler } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
@@ -21,17 +21,17 @@ import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
  */
 export const Derive: React.FC<StepComponentProps<DeriveArgs>> = memo(
 	withLoadedTable(function Derive({ step, onChange, dataTable }) {
-		const handleLeftColumnChange = useHandleDropdownChange(
+		const handleLeftColumnChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.args.column1 = val as string),
 			onChange,
 		)
-		const handleRightColumnChange = useHandleDropdownChange(
+		const handleRightColumnChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.args.column2 = val as string),
 			onChange,
 		)
-		const handleOpChange = useHandleDropdownChange(
+		const handleOpChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.args.operator = val as MathOperator),
 			onChange,

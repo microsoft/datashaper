@@ -8,7 +8,10 @@ import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleTextFieldChange } from '../../common/index.js'
+import {
+	LeftAlignedRow,
+	useTextFieldChangeHandler,
+} from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -16,7 +19,7 @@ import type { StepComponentProps } from '../../types.js'
  */
 export const OneHot: React.FC<StepComponentProps<OnehotArgs>> = memo(
 	function OneHot({ step, onChange }) {
-		const handlePrefixChange = useHandleTextFieldChange(
+		const handlePrefixChange = useTextFieldChangeHandler(
 			step,
 			(s, val) => (s.args.prefix = val),
 			onChange,

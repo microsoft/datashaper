@@ -10,7 +10,7 @@ import {
 	dropdownStyles,
 	EnumDropdown,
 } from '@data-wrangling-components/react-controls'
-import { DataType } from '@essex/arquero';
+import { DataType } from '@essex/arquero'
 import type { IComboBoxOption } from '@fluentui/react'
 import { TextField } from '@fluentui/react'
 import { produce } from 'immer'
@@ -20,8 +20,8 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import {
-	useHandleDropdownChange,
-	useHandleTextFieldChange,
+	useDropdownChangeHandler,
+	useTextFieldChangeHandler,
 } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
@@ -36,13 +36,13 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 	withLoadedTable(function Convert({ step, store, onChange, dataTable }) {
 		const [inputColumnDate, setInputColumnDate] = useState<boolean>()
 
-		const handleTypeChange = useHandleDropdownChange(
+		const handleTypeChange = useDropdownChangeHandler(
 			step,
 			(s, opt) => (s.args.type = opt as ParseType),
 			onChange,
 		)
 
-		const handleRadixChange = useHandleTextFieldChange(
+		const handleRadixChange = useTextFieldChangeHandler(
 			step,
 			(s, opt) => (s.args.radix = num(opt)),
 			onChange,
@@ -66,19 +66,19 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 			[step, onChange],
 		)
 
-	const handleComboBoxInputChange = (text: string) => {
-		const update = cloneDeep(step)
-		set(update, 'args.formatPattern', text ? text : '%Y-%m-%d')
-		onChange && onChange(update)
-	}
+		const handleComboBoxInputChange = (text: string) => {
+			const update = cloneDeep(step)
+			set(update, 'args.formatPattern', text ? text : '%Y-%m-%d')
+			onChange && onChange(update)
+		}
 
-	useEffect(() => {
-		setInputColumnDate(false)
-		step.args.columns.forEach((column: string | undefined) => {
-			const type = getColumnType(dataTable, column)
-			if (type === DataType.Date) setInputColumnDate(true)
-		})
-	}, [step.args.columns, dataTable])
+		useEffect(() => {
+			setInputColumnDate(false)
+			step.args.columns.forEach((column: string | undefined) => {
+				const type = getColumnType(dataTable, column)
+				if (type === DataType.Date) setInputColumnDate(true)
+			})
+		}, [step.args.columns, dataTable])
 
 		return (
 			<Container>

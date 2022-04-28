@@ -8,7 +8,7 @@ import { EnumDropdown } from '@data-wrangling-components/react-controls'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
+import { LeftAlignedRow, useDropdownChangeHandler } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 /**
  * Just the column/op inputs for an rollup.
@@ -16,7 +16,7 @@ import type { StepComponentProps } from '../../types.js'
  */
 export const Rollup: React.FC<StepComponentProps<RollupArgs>> = memo(
 	function Rollup({ step, onChange }) {
-		const handleOpChange = useHandleDropdownChange(
+		const handleOpChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.args.operation = val as FieldAggregateOperation),
 			onChange,

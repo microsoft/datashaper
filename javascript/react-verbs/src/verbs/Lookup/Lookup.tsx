@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 import {
 	LeftAlignedColumn,
-	useHandleDropdownChange,
+	useDropdownChangeHandler,
 } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs, JoinInputs } from '../shared/index.js'
@@ -21,7 +21,7 @@ import { useTableOptions } from '@data-wrangling-components/react-hooks'
  */
 export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
 	function Lookup({ step, store, table, onChange }) {
-		const handleRightTableChange = useHandleDropdownChange(
+		const handleRightTableChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
 			onChange,

@@ -8,7 +8,10 @@ import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleTextFieldChange } from '../../common/index.js'
+import {
+	LeftAlignedRow,
+	useTextFieldChangeHandler,
+} from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
 
@@ -22,12 +25,12 @@ export const Fold: React.FC<StepComponentProps<FoldArgs>> = memo(function Fold({
 	onChange,
 	input,
 }) {
-	const handleToChange = useHandleTextFieldChange(
+	const handleToChange = useTextFieldChangeHandler(
 		step,
 		(s, val) => (s.args.to![0] = val as string),
 		onChange,
 	)
-	const handleToChange2 = useHandleTextFieldChange(
+	const handleToChange2 = useTextFieldChangeHandler(
 		step,
 		(s, val) => (s.args.to![1] = val as string),
 		onChange,

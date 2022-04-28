@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 import {
 	LeftAlignedColumn,
-	useHandleTextFieldChange,
+	useTextFieldChangeHandler,
 } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs } from '../shared/index.js'
@@ -21,7 +21,7 @@ import { ColumnListInputs } from '../shared/index.js'
  */
 export const Impute: React.FC<StepComponentProps<ImputeArgs>> = memo(
 	function Impute({ step, store, onChange }) {
-		const handleValueChange = useHandleTextFieldChange(
+		const handleValueChange = useTextFieldChangeHandler(
 			step,
 			(s, val) => (s.args.value = val),
 			onChange,

@@ -29,21 +29,30 @@ export type DropdownChangeHandler = (
  * This only handles basic cases where the dropdown option key can be set on the
  * step using an object path.
  */
-export function useHandleDropdownChange<T extends object | void | unknown>(
+export function useDropdownChangeHandler<T extends object | void | unknown>(
 	step: Step<T>,
 	updateFn: (step: Step<T>, optionKey: string | number | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): DropdownChangeHandler {
-	return useCallback(
-		(_event, option) => {
-			onChange?.(
-				produce(step, draft => {
-					updateFn(draft as Step<T>, option?.key)
-				}),
-			)
-		},
-		[step, onChange, updateFn],
-	)
+	return useCallback(getDropdownChangeHandler(step, updateFn, onChange), [
+		step,
+		onChange,
+		updateFn,
+	])
+}
+
+export function getDropdownChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, optionKey: string | number | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): DropdownChangeHandler {
+	return (_event, option) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, option?.key)
+			}),
+		)
+	}
 }
 
 // #endregion
@@ -55,21 +64,29 @@ export type TextFieldChangeHandler = (
 	newValue?: string,
 ) => void
 
-export function useHandleTextFieldChange<T extends object | void | unknown>(
+export function useTextFieldChangeHandler<T extends object | void | unknown>(
 	step: Step<T>,
 	updateFn: (step: Step<T>, updated: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): TextFieldChangeHandler {
-	return useCallback(
-		(_event, newValue) => {
-			onChange?.(
-				produce(step, draft => {
-					updateFn(draft as Step<T>, newValue)
-				}),
-			)
-		},
-		[step, updateFn, onChange],
-	)
+	return useCallback(getTextFieldChangeHandler(step, updateFn, onChange), [
+		step,
+		updateFn,
+		onChange,
+	])
+}
+export function getTextFieldChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, updated: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): TextFieldChangeHandler {
+	return (_event, newValue) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, newValue)
+			}),
+		)
+	}
 }
 
 // #endregion
@@ -88,21 +105,29 @@ export type SpinButtonChangeHandler = (
  * @param onChange -the onchange handler
  * @returns
  */
-export function useHandleSpinButtonChange<T extends object | void | unknown>(
+export function useSpinButtonChangeHandler<T extends object | void | unknown>(
 	step: Step<T>,
 	updateFn: (step: Step<T>, newValue: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): SpinButtonChangeHandler {
-	return useCallback(
-		(_event, newValue) => {
-			onChange?.(
-				produce(step, draft => {
-					updateFn(draft as Step<T>, newValue)
-				}),
-			)
-		},
-		[step, onChange, updateFn],
-	)
+	return useCallback(getSpinButtonChangeHandler(step, updateFn, onChange), [
+		step,
+		onChange,
+		updateFn,
+	])
+}
+export function getSpinButtonChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, newValue: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): SpinButtonChangeHandler {
+	return (_event, newValue) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, newValue)
+			}),
+		)
+	}
 }
 
 // #endregion
@@ -114,21 +139,29 @@ export type CheckboxChangeHandler = (
 	checked?: boolean,
 ) => void
 
-export function useHandleCheckboxChange<T extends object | void | unknown>(
+export function useCheckboxChangeHandler<T extends object | void | unknown>(
 	step: Step<T>,
 	updateFn: (step: Step<T>, newValue: boolean | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): CheckboxChangeHandler {
-	return useCallback(
-		(_event, checked) => {
-			onChange?.(
-				produce(step, draft => {
-					updateFn(draft as Step<T>, checked)
-				}),
-			)
-		},
-		[step, updateFn, onChange],
-	)
+	return useCallback(getCheckboxChangeHandler(step, updateFn, onChange), [
+		step,
+		updateFn,
+		onChange,
+	])
+}
+export function getCheckboxChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, newValue: boolean | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): CheckboxChangeHandler {
+	return (_event, checked) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, checked)
+			}),
+		)
+	}
 }
 
 // #endregion

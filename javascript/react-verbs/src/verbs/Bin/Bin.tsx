@@ -20,9 +20,9 @@ import type {
 } from '../../common/hooks.js'
 import {
 	LeftAlignedRow,
-	useHandleCheckboxChange,
-	useHandleDropdownChange,
-	useHandleSpinButtonChange,
+	useCheckboxChangeHandler,
+	useDropdownChangeHandler,
+	useSpinButtonChangeHandler,
 } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 
@@ -33,37 +33,37 @@ export const Bin: React.FC<StepComponentProps<BinArgs>> = memo(function Bin({
 	step,
 	onChange,
 }) {
-	const handleBinStrategyChange = useHandleDropdownChange(
+	const handleBinStrategyChange = useDropdownChangeHandler(
 		step,
 		(s, opt) => (s.args.strategy = opt as BinStrategy),
 		onChange,
 	)
-	const handleBinCountChange = useHandleSpinButtonChange(
+	const handleBinCountChange = useSpinButtonChangeHandler(
 		step,
 		(s, opt) => (s.args.fixedcount = num(opt)),
 		onChange,
 	)
-	const handleBinSizeChange = useHandleSpinButtonChange(
+	const handleBinSizeChange = useSpinButtonChangeHandler(
 		step,
 		(s, opt) => (s.args.fixedwidth = num(opt)),
 		onChange,
 	)
-	const handleMinChange = useHandleSpinButtonChange(
+	const handleMinChange = useSpinButtonChangeHandler(
 		step,
 		(s, opt) => (s.args.min = num(opt)),
 		onChange,
 	)
-	const handleMaxChange = useHandleSpinButtonChange(
+	const handleMaxChange = useSpinButtonChangeHandler(
 		step,
 		(s, opt) => (s.args.max = num(opt)),
 		onChange,
 	)
-	const handleClampChange = useHandleCheckboxChange(
+	const handleClampChange = useCheckboxChangeHandler(
 		step,
 		(s, opt) => (s.args.clamped = opt),
 		onChange,
 	)
-	const handlePrintChange = useHandleCheckboxChange(
+	const handlePrintChange = useCheckboxChangeHandler(
 		step,
 		(s, opt) => (s.args.printRange = opt),
 		onChange,

@@ -13,8 +13,11 @@ import { Dropdown, TextField } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange } from '../../common/hooks.js'
-import { LeftAlignedRow, useHandleTextFieldChange } from '../../common/index.js'
+import { useDropdownChangeHandler } from '../../common/hooks.js'
+import {
+	LeftAlignedRow,
+	useTextFieldChangeHandler,
+} from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 
@@ -46,13 +49,13 @@ export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
 			[step, onChange],
 		)
 
-		const handleOpChange = useHandleDropdownChange(
+		const handleOpChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.args.strategy = val as MergeStrategy),
 			onChange,
 		)
 
-		const handleDelimiterChange = useHandleTextFieldChange(
+		const handleDelimiterChange = useTextFieldChangeHandler(
 			step,
 			(s, val) => (s.args.delimiter = val),
 			onChange,

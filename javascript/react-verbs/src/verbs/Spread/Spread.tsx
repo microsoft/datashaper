@@ -12,7 +12,7 @@ import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange } from '../../common/index.js'
+import { useDropdownChangeHandler } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
@@ -34,7 +34,7 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 			})
 		}, [step, onChange])
 
-		const handleColumnChange = useHandleDropdownChange(
+		const handleColumnChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.args.column = val as string),
 			onChange,

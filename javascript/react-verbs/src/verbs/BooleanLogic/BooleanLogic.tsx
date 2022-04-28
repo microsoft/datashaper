@@ -13,7 +13,7 @@ import { Dropdown } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange } from '../../common/hooks.js'
+import { useDropdownChangeHandler } from '../../common/hooks.js'
 import { LeftAlignedRow } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
@@ -48,7 +48,7 @@ export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
 			[step, onChange],
 		)
 
-		const handleOpChange = useHandleDropdownChange(
+		const handleOpChange = useDropdownChangeHandler(
 			step,
 			(s, opt) => (s.args.operator = opt as BooleanOperator),
 			onChange,

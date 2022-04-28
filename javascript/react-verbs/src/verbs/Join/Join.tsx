@@ -13,7 +13,7 @@ import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange } from '../../common/hooks.js'
+import { useDropdownChangeHandler } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { JoinInputs } from '../shared/index.js'
@@ -28,12 +28,12 @@ export const Join: React.FC<StepComponentProps<JoinArgs>> = memo(function Join({
 	table,
 	onChange,
 }) {
-	const handleJoinStrategyChange = useHandleDropdownChange(
+	const handleJoinStrategyChange = useDropdownChangeHandler(
 		step,
 		(s, val) => (s.args.strategy = val as JoinStrategy),
 		onChange,
 	)
-	const handleRightTableChange = useHandleDropdownChange(
+	const handleRightTableChange = useDropdownChangeHandler(
 		step,
 		(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
 		onChange,

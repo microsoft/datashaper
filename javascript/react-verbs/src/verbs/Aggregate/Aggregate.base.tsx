@@ -6,14 +6,13 @@ import {
 	FieldAggregateOperation,
 	AggregateArgs,
 } from '@data-wrangling-components/core'
-import {
-	EnumDropdown,
-	TableColumnDropdown,
-} from '@data-wrangling-components/react-controls'
 import type { IDropdownOption } from '@fluentui/react'
 import styled from 'styled-components'
+import { useMemo } from 'react'
 import type { StepComponentBaseProps } from '../../types.js'
-import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
+import { LeftAlignedRow } from '../../common/index.js'
+import { FormInput, FormInputType, VerbInput } from '../../common/VerbInput.js'
+import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
 
 /**
  * Just the group/column/op inputs for an aggregation.
@@ -24,38 +23,34 @@ export const AggregateBase: React.FC<
 		columnOptions: IDropdownOption[]
 	}
 > = function AggregateBase({ step, onChange, columnOptions }) {
-	const handleGroupColumnChange = useHandleDropdownChange(
-		step,
-		(s, key) => (s.args.groupby = key as string),
-		onChange,
-	)
-
-	const handleOpChange = useHandleDropdownChange(
-		step,
-		(s, key) => (s.args.operation = key as FieldAggregateOperation),
-		onChange,
+	const verbInputs = useMemo<FormInput<AggregateArgs>[]>(
+		() => [
+			{
+				label: 'Column to group by',
+				type: FormInputType.Enum,
+				options: columnOptions,
+				current: step.args.groupby,
+				updater: (s, key) => (s.args.groupby = key as string),
+				required: true,
+				wrapper: LeftAlignedRow,
+			},
+			{
+				label: 'Function',
+				type: FormInputType.Enum,
+				options: getEnumDropdownOptions(FieldAggregateOperation),
+				current: step.args.operation,
+				updater: (s, key) =>
+					(s.args.operation = key as FieldAggregateOperation),
+				required: true,
+				wrapper: LeftAlignedRow,
+			},
+		],
+		[],
 	)
 
 	return (
 		<Container>
-			<LeftAlignedRow>
-				<TableColumnDropdown
-					required
-					options={columnOptions}
-					label={'Column to group by'}
-					selectedKey={step.args.groupby}
-					onChange={handleGroupColumnChange}
-				/>
-			</LeftAlignedRow>
-			<LeftAlignedRow>
-				<EnumDropdown
-					required
-					enumeration={FieldAggregateOperation}
-					label={'Function'}
-					selectedKey={step.args.operation}
-					onChange={handleOpChange}
-				/>
-			</LeftAlignedRow>
+			<VerbInput step={step} inputs={verbInputs} onChange={onChange} />
 		</Container>
 	)
 }

@@ -8,7 +8,10 @@ import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleTextFieldChange } from '../../common/index.js'
+import {
+	LeftAlignedRow,
+	useTextFieldChangeHandler,
+} from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -18,7 +21,7 @@ export const Fill: React.FC<StepComponentProps<FillArgs>> = memo(function Fill({
 	step,
 	onChange,
 }) {
-	const handleValueChange = useHandleTextFieldChange(
+	const handleValueChange = useTextFieldChangeHandler(
 		step,
 		(s, val) => (s.args.value = val),
 		onChange,
