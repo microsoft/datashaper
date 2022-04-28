@@ -19,7 +19,7 @@ import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
  * Just the group/column/op inputs for an aggregation.
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
-export const AggregateBasic: React.FC<
+export const AggregateBase: React.FC<
 	BasicStepComponentProps<AggregateArgs> & {
 		columnOptions: IDropdownOption[]
 	}

@@ -7,7 +7,7 @@ import { memo } from 'react'
 
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
-import { AggregateBasic } from './AggregateBasic.js'
+import { AggregateBase } from './Aggregate.base.js'
 
 /*
  * Just the group/column/op inputs for an aggregation.
@@ -21,7 +21,7 @@ export const Aggregate = memo(
 	}) {
 		const options = useTableColumnOptions(dataTable)
 		return (
-			<AggregateBasic columnOptions={options} step={step} onChange={onChange} />
+			<AggregateBase columnOptions={options} step={step} onChange={onChange} />
 		)
 	}),
 )

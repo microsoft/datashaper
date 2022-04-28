@@ -46,10 +46,10 @@ import type { WindowArgs } from '@data-wrangling-components/core';
 // @public (undocumented)
 export const Aggregate: MemoExoticComponent<(props: StepComponentProps<AggregateArgs>) => JSX.Element>;
 
-// Warning: (ae-missing-release-tag) "AggregateBasic" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AggregateBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const AggregateBasic: React.FC<BasicStepComponentProps<AggregateArgs> & {
+export const AggregateBase: React.FC<BasicStepComponentProps<AggregateArgs> & {
     columnOptions: IDropdownOption[];
 }>;
 
