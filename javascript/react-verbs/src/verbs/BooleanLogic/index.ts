@@ -3,4 +3,5 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './BooleanLogic.js'
+export * from './BooleanLogic.base.js'
 export * from './BooleanLogicDescription.js'

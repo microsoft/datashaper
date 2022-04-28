@@ -78,6 +78,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	)
 
 	const handleRunClick = useCallback(async () => {
+		pipeline.addAll(steps)
 		const res = await pipeline.run()
 		const output = store.toMap()
 		pipeline.print()

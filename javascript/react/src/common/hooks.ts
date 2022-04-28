@@ -19,14 +19,8 @@ export function useStore(): TableStore {
 	return useMemo(() => createTableStore(), [])
 }
 
-export function usePipeline(store: TableStore, steps?: Step[]): Pipeline {
-	return useMemo(() => {
-		const pipeline = createPipeline(store)
-		if (steps) {
-			pipeline.addAll(steps)
-		}
-		return pipeline
-	}, [store, steps])
+export function usePipeline(store: TableStore): Pipeline {
+	return useMemo(() => createPipeline(store), [store])
 }
 
 export function useDeleteConfirm(onDelete?: (args: any) => void): {

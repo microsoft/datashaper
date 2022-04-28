@@ -28,3 +28,21 @@ export const staticCallback =
 	<T>(value: T) =>
 	(): T =>
 		value
+
+export function toggleListItem<T>(list: T[], item: T): T[] {
+	if (list.indexOf(item) === -1) {
+		return [...list, item]
+	} else {
+		return list.filter(c => c !== item)
+	}
+}
+
+export function hash(input: string[] | undefined): Record<string, boolean> {
+	const result: Record<string, boolean> = {}
+	if (input) {
+		for (let i of input) {
+			result[i] = true
+		}
+	}
+	return result
+}

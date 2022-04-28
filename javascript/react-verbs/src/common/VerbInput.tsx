@@ -60,6 +60,22 @@ export interface SingleChoiceFormInput<T> extends FormInputBase {
 	onChange: (step: Step<T>, optionKey: string | number | undefined) => void
 }
 
+export interface MultiChoiceFormInput<T> extends FormInputBase {
+	type: FormInputType.MultiChoice
+
+	/**
+	 * The form input options (required if type is enum)
+	 */
+	options?: IDropdownOption[]
+
+	/**
+	 * The form input value or selected key (if enum)
+	 */
+	current?: string[] | undefined
+
+	onChange: (step: Step<T>, optionKey: string | number | undefined) => void
+}
+
 export interface CheckboxFormInput<T> extends FormInputBase {
 	type: FormInputType.Checkbox
 
@@ -85,11 +101,13 @@ export interface NumberSpinnerFormInput<T> extends FormInputBase {
 
 export type FormInput<T> =
 	| SingleChoiceFormInput<T>
+	| MultiChoiceFormInput<T>
 	| NumberSpinnerFormInput<T>
 	| CheckboxFormInput<T>
 
 export enum FormInputType {
-	SingleChoice = 'enum',
+	SingleChoice = 'single_choice',
+	MultiChoice = 'multi_choice',
 	NumberSpinner = 'number_spinner',
 	Checkbox = 'checkbox',
 }
@@ -127,6 +145,13 @@ const Input: React.FC<{
 			<Case condition={inputType == FormInputType.SingleChoice}>
 				<SingleChoiceInput
 					input={input as SingleChoiceFormInput<unknown>}
+					step={step}
+					onChange={onChange}
+				/>
+			</Case>
+			<Case condition={inputType == FormInputType.MultiChoice}>
+				<MultiChoiceInput
+					input={input as MultiChoiceFormInput<unknown>}
 					step={step}
 					onChange={onChange}
 				/>
@@ -186,6 +211,44 @@ const SingleChoiceInput: React.FC<{
 	)
 })
 
+const MultiChoiceInput: React.FC<{
+	input: MultiChoiceFormInput<unknown>
+	step: Step<unknown>
+	onChange?: StepChangeFunction<unknown>
+}> = memo(function MultiChoiceInput({
+	step,
+	input: {
+		label,
+		placeholder,
+		current,
+		required,
+		options,
+		wrapper: Wrapper = Fragment,
+		onChange: updater,
+	},
+	onChange,
+}) {
+	const dropdownChangeHandler = useDropdownChangeHandler(
+		step,
+		updater,
+		onChange,
+	)
+	return (
+		<Wrapper>
+			<Dropdown
+				required={required}
+				label={label}
+				placeholder={placeholder}
+				styles={dropdownStyles}
+				selectedKeys={current}
+				options={options!}
+				onChange={dropdownChangeHandler}
+				multiSelect
+			/>
+		</Wrapper>
+	)
+})
+
 const NumberSpinnerInput: React.FC<{
 	input: NumberSpinnerFormInput<unknown>
 	step: Step<unknown>
@@ -239,7 +302,6 @@ const CheckboxInput: React.FC<{
 	onChange,
 }) {
 	const changeHandler = useCheckboxChangeHandler(step, updater, onChange)
-	console.log('checkbox label', label)
 	return (
 		<Wrapper>
 			<Checkbox
