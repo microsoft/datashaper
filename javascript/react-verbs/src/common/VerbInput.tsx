@@ -32,8 +32,8 @@ export interface FormInputBase {
 	wrapper?: React.ComponentType
 }
 
-export interface EnumFormInput<T> extends FormInputBase {
-	type: FormInputType.Enum
+export interface SingleChoiceFormInput<T> extends FormInputBase {
+	type: FormInputType.SingleChoice
 
 	/**
 	 * The form input options (required if type is enum)
@@ -48,10 +48,10 @@ export interface EnumFormInput<T> extends FormInputBase {
 	onChange: (step: Step<T>, optionKey: string | number | undefined) => void
 }
 
-export type FormInput<T> = EnumFormInput<T>
+export type FormInput<T> = SingleChoiceFormInput<T>
 
 export enum FormInputType {
-	Enum = 'enum',
+	SingleChoice = 'enum',
 	String = 'string',
 	Number = 'number',
 	Boolean = 'boolean',
@@ -83,13 +83,13 @@ const Input: React.FC<{
 	onChange?: StepChangeFunction<unknown>
 }> = memo(function Input({ input, step, onChange }) {
 	const condition = input.condition ?? true
-	const inputType = input.type
+	const inputType: FormInputType = input.type
 
 	return condition == false ? null : (
 		<Switch>
-			<Case condition={inputType == FormInputType.Enum}>
-				<EnumInput
-					input={input as EnumFormInput<unknown>}
+			<Case condition={inputType == FormInputType.SingleChoice}>
+				<SingleChoiceInput
+					input={input as SingleChoiceFormInput<unknown>}
 					step={step}
 					onChange={onChange}
 				/>
@@ -98,11 +98,11 @@ const Input: React.FC<{
 	)
 })
 
-const EnumInput: React.FC<{
-	input: EnumFormInput<unknown>
+const SingleChoiceInput: React.FC<{
+	input: SingleChoiceFormInput<unknown>
 	step: Step<unknown>
 	onChange?: StepChangeFunction<unknown>
-}> = memo(function EnumInput({
+}> = memo(function SingleChoiceInput({
 	step,
 	input: {
 		label,

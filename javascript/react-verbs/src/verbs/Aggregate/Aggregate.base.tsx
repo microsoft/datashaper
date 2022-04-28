@@ -25,7 +25,7 @@ export const AggregateBase: React.FC<
 		() => [
 			{
 				label: 'Column to group by',
-				type: FormInputType.Enum,
+				type: FormInputType.SingleChoice,
 				options: columnOptions,
 				current: step.args.groupby,
 				onChange: (s, key) => (s.args.groupby = key as string),
@@ -33,7 +33,7 @@ export const AggregateBase: React.FC<
 			},
 			{
 				label: 'Function',
-				type: FormInputType.Enum,
+				type: FormInputType.SingleChoice,
 				options: getEnumDropdownOptions(FieldAggregateOperation),
 				current: step.args.operation,
 				onChange: (s, key) =>
