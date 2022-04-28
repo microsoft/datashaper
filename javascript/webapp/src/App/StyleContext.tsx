@@ -10,7 +10,7 @@ import {
 	ThemeProvider as ThemeProviderRaw,
 } from 'styled-components'
 
-import { useTheme } from '../../states/settings.js'
+import { useTheme } from '../states/settings.js'
 
 const ThemeProvider = ThemeProviderRaw as any
 

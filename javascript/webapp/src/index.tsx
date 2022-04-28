@@ -5,7 +5,7 @@
 import { initializeIcons } from '@fluentui/react/lib/Icons'
 import { createRoot } from 'react-dom/client'
 
-import { App } from '~components'
+import { App } from './App'
 import { setDefaultSettings } from '~localStorageHandler'
 
 function mount(): void {
