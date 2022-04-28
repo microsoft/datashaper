@@ -86,23 +86,6 @@ export interface ColumnSpreadProps {
     onChange?: (column: string) => void;
     // (undocumented)
     onDelete?: () => void;
-    // (undocumented)
-    table?: ColumnTable;
-}
-
-// Warning: (ae-missing-release-tag) "ColumnValueComboBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps>;
-
-// Warning: (ae-missing-release-tag) "ColumnValueComboBoxProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnValueComboBoxProps extends Partial<IComboBoxProps> {
-    // (undocumented)
-    columnName?: string;
-    // (undocumented)
-    table?: ColumnTable;
 }
 
 // Warning: (ae-missing-release-tag) "ColumnValueDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -115,12 +98,7 @@ export const ColumnValueDropdown: React.FC<ColumnValueDropdownProps>;
 // @public (undocumented)
 export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
     // (undocumented)
-    column: string;
-    filter?: (value: Value) => boolean;
-    // (undocumented)
     options: IDropdownOption[];
-    // (undocumented)
-    values?: Value[];
 }
 
 // Warning: (ae-missing-release-tag) "ContextualMenuItemSearchBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -269,7 +247,7 @@ export interface TableDropdownProps extends Partial<IDropdownProps> {
 // Warning: (ae-missing-release-tag) "useColumnValueOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useColumnValueOptions(column: string, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
+export function useColumnValueOptions(column: string | undefined, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
 
 // Warning: (ae-missing-release-tag) "useSimpleDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

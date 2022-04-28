@@ -20,7 +20,7 @@ export interface DateFormatPatternComboboxProps
  * be dependent on per-row column values.
  */
 export const DateFormatPatternCombobox: React.FC<DateFormatPatternComboboxProps> =
-	memo(function ColumnValueComboBox({ columnName, ...props }) {
+	memo(function DateFormatPatternCombobox({ columnName, ...props }) {
 		const options = useDateFormatPatternOptions()
 		const withHeader = useMemo(() => {
 			return [

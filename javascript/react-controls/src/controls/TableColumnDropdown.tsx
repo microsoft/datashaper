@@ -15,12 +15,11 @@ export interface TableColumnDropdownProps extends Partial<IDropdownProps> {
  * Dropdown wrapper to automatically list the columns of an Arquero table.
  */
 export const TableColumnDropdown: React.FC<TableColumnDropdownProps> = memo(
-	function TableColumnDropdown({ options, ...props }) {
+	function TableColumnDropdown({ ...props }) {
 		return (
 			<Dropdown
 				label={'Column'}
 				placeholder={'Choose column'}
-				options={options}
 				styles={dropdownStyles}
 				{...props}
 			/>

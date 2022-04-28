@@ -3,14 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton, TextField } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
 import { dropdownStyles } from '../styles.js'
 
 export interface ColumnSpreadProps {
-	table?: ColumnTable
 	column: string
 	onChange?: (column: string) => void
 	onDelete?: () => void

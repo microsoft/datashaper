@@ -37,13 +37,13 @@ export function useTableColumnOptions(
 }
 
 export function useColumnValueOptions(
-	column: string,
+	column: string | undefined,
 	table: ColumnTable | undefined,
 	values?: Value[],
 	filter?: (value: Value) => boolean,
 ): IDropdownOption[] {
 	const vals = useMemo(() => {
-		if (!table || !column || column.trim().length === 0) {
+		if (!column || !table || !column || column.trim().length === 0) {
 			return []
 		}
 		const getFallback = () => {

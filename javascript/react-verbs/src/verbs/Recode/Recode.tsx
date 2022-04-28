@@ -130,13 +130,16 @@ const ColumnPair: React.FC<{
 		onChange(oldvalue, oldvalue, val)
 	}
 	const handleDeleteClick = () => onDelete(oldvalue)
-	const options = useColumnValueOptions(step.args.column, table)
+	const options = useColumnValueOptions(
+		step.args.column,
+		table,
+		undefined,
+		valueFilter,
+	)
 	return (
 		<ColumnPairContainer>
 			<ColumnValueDropdown
-				column={step.args.column}
 				options={options}
-				filter={valueFilter}
 				label={undefined}
 				selectedKey={oldvalue}
 				onChange={handleSourceChange}
