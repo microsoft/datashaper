@@ -2,12 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useDateFormatPatternOptions } from '@data-wrangling-components/react-hooks'
 import type { IComboBoxProps } from '@fluentui/react'
 import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
-import { dropdownStyles } from '../../styles.js'
-import { useDateFormatPatternOptions } from './DateFormatPatternCombobox.hooks.js'
+import { dropdownStyles } from './styles.js'
 
 export interface DateFormatPatternComboboxProps
 	extends Partial<IComboBoxProps> {
@@ -20,7 +20,7 @@ export interface DateFormatPatternComboboxProps
  * be dependent on per-row column values.
  */
 export const DateFormatPatternCombobox: React.FC<DateFormatPatternComboboxProps> =
-	memo(function ColumnValueComboBox({ columnName, ...props }) {
+	memo(function DateFormatPatternCombobox({ columnName, ...props }) {
 		const options = useDateFormatPatternOptions()
 		const withHeader = useMemo(() => {
 			return [

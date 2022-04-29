@@ -10,7 +10,7 @@ import type {
 import { DefaultButton } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 
-import { dropdownButtonStyles } from '../../styles.js'
+import { dropdownButtonStyles } from '../styles.js'
 import { ColumnarMenuList } from './ColumnarMenuList.js'
 
 export interface ColumnarMenuProps extends IContextualMenuProps {

@@ -8,7 +8,12 @@ import type {
 	Step,
 } from '@data-wrangling-components/core'
 import { SortInstruction } from '@data-wrangling-components/react-controls'
+import {
+	useSimpleDropdownOptions,
+	useTableColumnNames,
+} from '@data-wrangling-components/react-hooks'
 import { SortDirection } from '@essex/arquero'
+import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
@@ -23,7 +28,9 @@ import type { StepComponentProps } from '../../types.js'
  */
 export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
 	withLoadedTable(function Orderby({ step, onChange, dataTable }) {
-		const sorts = useSorts(step, dataTable, onChange)
+		const columns = useTableColumnNames(dataTable)
+		const columnOptions = useSimpleDropdownOptions(columns)
+		const sorts = useSorts(step, columnOptions, onChange)
 
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
@@ -61,7 +68,7 @@ function newSort(table?: ColumnTable): OrderbyInstruction {
 
 function useSorts(
 	step: Step<OrderbyArgs>,
-	table?: ColumnTable,
+	columnOptions: IDropdownOption[],
 	onChange?: (step: Step<OrderbyArgs>) => void,
 ) {
 	return useMemo(() => {
@@ -81,14 +88,14 @@ function useSorts(
 			return (
 				<SortInstruction
 					key={`orderby-${order.column}-${index}`}
-					table={table}
+					columnOptions={columnOptions}
 					order={order}
 					onChange={handleSortChange}
 					onDelete={handleDeleteClick}
 				/>
 			)
 		})
-	}, [step, table, onChange])
+	}, [step, columnOptions, onChange])
 }
 
 const Container = styled.div`

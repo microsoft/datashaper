@@ -4,11 +4,18 @@
  */
 import type { LookupArgs } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
+import {
+	useSimpleDropdownOptions,
+	useTableNames,
+} from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { LeftAlignedColumn, useHandleDropdownChange } from '../../common/index.js'
+import {
+	LeftAlignedColumn,
+	useDropdownChangeHandler,
+} from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { ColumnListInputs, JoinInputs } from '../shared/index.js'
 
@@ -17,17 +24,19 @@ import { ColumnListInputs, JoinInputs } from '../shared/index.js'
  */
 export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
 	function Lookup({ step, store, table, onChange }) {
-		const handleRightTableChange = useHandleDropdownChange(
+		const handleRightTableChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
 			onChange,
 		)
+		const tables = useTableNames(store)
+		const tableOptions = useSimpleDropdownOptions(tables)
 
 		return (
 			<Container>
 				<LeftAlignedColumn>
 					<TableDropdown
-						store={store}
+						options={tableOptions}
 						label="Join table"
 						selectedKey={step.input[NodeInput.Other]?.node}
 						onChange={handleRightTableChange}

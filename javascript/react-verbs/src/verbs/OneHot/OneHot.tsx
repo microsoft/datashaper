@@ -3,12 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { OnehotArgs } from '@data-wrangling-components/core'
-import { dropdownStyles } from '@data-wrangling-components/react-controls'
-import { TextField } from '@fluentui/react'
-import { memo } from 'react'
-import styled from 'styled-components'
+import { memo, useMemo } from 'react'
 
-import { LeftAlignedRow, useHandleTextFieldChange } from '../../common/index.js'
+import type { FormInput } from '../../common/VerbForm.js'
+import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -16,29 +14,17 @@ import type { StepComponentProps } from '../../types.js'
  */
 export const OneHot: React.FC<StepComponentProps<OnehotArgs>> = memo(
 	function OneHot({ step, onChange }) {
-		const handlePrefixChange = useHandleTextFieldChange(
-			step,
-			(s, val) => (s.args.prefix = val),
-			onChange,
+		const inputs = useMemo<FormInput<OnehotArgs>[]>(
+			() => [
+				{
+					label: 'Prefix',
+					type: FormInputType.Text,
+					current: step.args.prefix,
+					onChange: (s, val) => (s.args.prefix = val as string),
+				},
+			],
+			[step],
 		)
-
-		return (
-			<Container>
-				<LeftAlignedRow>
-					<TextField
-						label={'Prefix'}
-						value={step.args.prefix && `${step.args.prefix}`}
-						styles={dropdownStyles}
-						onChange={handlePrefixChange}
-					/>
-				</LeftAlignedRow>
-			</Container>
-		)
+		return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 	},
 )
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`

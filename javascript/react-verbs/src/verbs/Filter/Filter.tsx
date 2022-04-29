@@ -10,7 +10,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange } from '../../common/hooks.js'
+import { useDropdownChangeHandler } from '../../common/hooks.js'
 import { LeftAlignedRow } from '../../common/styles.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
@@ -50,7 +50,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 			[step, onChange],
 		)
 
-		const handleLogicalChange = useHandleDropdownChange(
+		const handleLogicalChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.args.logical = val as BooleanOperator),
 			onChange,

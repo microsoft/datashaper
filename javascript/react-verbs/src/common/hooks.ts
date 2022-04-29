@@ -9,7 +9,11 @@ import type {
 } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import { columnType, DataType } from '@essex/arquero'
-import type { IDropdownOption } from '@fluentui/react'
+import type {
+	IComboBox,
+	IComboBoxOption,
+	IDropdownOption,
+} from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { produce } from 'immer'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -29,21 +33,125 @@ export type DropdownChangeHandler = (
  * This only handles basic cases where the dropdown option key can be set on the
  * step using an object path.
  */
-export function useHandleDropdownChange<T extends object | void | unknown>(
+export function useDropdownChangeHandler<T extends object | void | unknown>(
 	step: Step<T>,
 	updateFn: (step: Step<T>, optionKey: string | number | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): DropdownChangeHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
+	return useCallback(getDropdownChangeHandler(step, updateFn, onChange), [
+		step,
+		onChange,
+		updateFn,
+	])
+}
+
+export function getDropdownChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, optionKey: string | number | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): DropdownChangeHandler {
+	return (_event, option) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, option?.key)
+			}),
+		)
+	}
+}
+
+// #endregion
+
+// #region ComboBox Change Handler
+
+export type ComboBoxChangeHandler = (
+	event: React.FormEvent<IComboBox>,
+	option: IComboBoxOption | undefined,
+	index: number | undefined,
+	value?: string | undefined,
+) => void
+
+/**
+ * Creates a callback handler for changing the step based on a combobox value.
+ * This only handles basic cases where the combobox option key can be set on the
+ * step using an object path.
+ */
+export function useComboBoxChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (
+		step: Step<T>,
+		optionKey: string | number | undefined,
+		value: string | undefined,
+	) => void,
+	onChange?: StepChangeFunction<T>,
+): ComboBoxChangeHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
+	return useCallback(getComboBoxChangeHandler(step, updateFn, onChange), [
+		step,
+		onChange,
+		updateFn,
+	])
+}
+
+export function getComboBoxChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (
+		step: Step<T>,
+		optionKey: string | number | undefined,
+		value: string | undefined,
+	) => void,
+	onChange?: StepChangeFunction<T>,
+): ComboBoxChangeHandler {
+	return (_event, option, _index, value) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, option?.key, value)
+			}),
+		)
+	}
+}
+
+// #endregion
+
+// #region ComboBox Change Handler
+
+export type ComboBoxInputValueChangeHandler = (
+	value?: string | undefined,
+) => void
+
+/**
+ * Creates a callback handler for changing the step based on a combobox value.
+ * This only handles basic cases where the combobox option key can be set on the
+ * step using an object path.
+ */
+export function useComboBoxInputValueChangeHandler<
+	T extends object | void | unknown,
+>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, value: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): ComboBoxInputValueChangeHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
 	return useCallback(
-		(_event, option) => {
-			onChange?.(
-				produce(step, draft => {
-					updateFn(draft as Step<T>, option?.key)
-				}),
-			)
-		},
+		getComboBoxInputValueChangeHandler(step, updateFn, onChange),
 		[step, onChange, updateFn],
 	)
+}
+
+export function getComboBoxInputValueChangeHandler<
+	T extends object | void | unknown,
+>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, value: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): ComboBoxInputValueChangeHandler {
+	return value => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, value)
+			}),
+		)
+	}
 }
 
 // #endregion
@@ -55,21 +163,30 @@ export type TextFieldChangeHandler = (
 	newValue?: string,
 ) => void
 
-export function useHandleTextFieldChange<T extends object | void | unknown>(
+export function useTextFieldChangeHandler<T extends object | void | unknown>(
 	step: Step<T>,
 	updateFn: (step: Step<T>, updated: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): TextFieldChangeHandler {
-	return useCallback(
-		(_event, newValue) => {
-			onChange?.(
-				produce(step, draft => {
-					updateFn(draft as Step<T>, newValue)
-				}),
-			)
-		},
-		[step, updateFn, onChange],
-	)
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
+	return useCallback(getTextFieldChangeHandler(step, updateFn, onChange), [
+		step,
+		updateFn,
+		onChange,
+	])
+}
+export function getTextFieldChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, updated: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): TextFieldChangeHandler {
+	return (_event, newValue) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, newValue)
+			}),
+		)
+	}
 }
 
 // #endregion
@@ -88,21 +205,30 @@ export type SpinButtonChangeHandler = (
  * @param onChange -the onchange handler
  * @returns
  */
-export function useHandleSpinButtonChange<T extends object | void | unknown>(
+export function useSpinButtonChangeHandler<T extends object | void | unknown>(
 	step: Step<T>,
 	updateFn: (step: Step<T>, newValue: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): SpinButtonChangeHandler {
-	return useCallback(
-		(_event, newValue) => {
-			onChange?.(
-				produce(step, draft => {
-					updateFn(draft as Step<T>, newValue)
-				}),
-			)
-		},
-		[step, onChange, updateFn],
-	)
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
+	return useCallback(getSpinButtonChangeHandler(step, updateFn, onChange), [
+		step,
+		onChange,
+		updateFn,
+	])
+}
+export function getSpinButtonChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, newValue: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): SpinButtonChangeHandler {
+	return (_event, newValue) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, newValue)
+			}),
+		)
+	}
 }
 
 // #endregion
@@ -114,21 +240,30 @@ export type CheckboxChangeHandler = (
 	checked?: boolean,
 ) => void
 
-export function useHandleCheckboxChange<T extends object | void | unknown>(
+export function useCheckboxChangeHandler<T extends object | void | unknown>(
 	step: Step<T>,
 	updateFn: (step: Step<T>, newValue: boolean | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): CheckboxChangeHandler {
-	return useCallback(
-		(_event, checked) => {
-			onChange?.(
-				produce(step, draft => {
-					updateFn(draft as Step<T>, checked)
-				}),
-			)
-		},
-		[step, updateFn, onChange],
-	)
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
+	return useCallback(getCheckboxChangeHandler(step, updateFn, onChange), [
+		step,
+		updateFn,
+		onChange,
+	])
+}
+export function getCheckboxChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, newValue: boolean | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): CheckboxChangeHandler {
+	return (_event, checked) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, checked)
+			}),
+		)
+	}
 }
 
 // #endregion

@@ -7,12 +7,16 @@ import {
 	ColumnSpread,
 	TableColumnDropdown,
 } from '@data-wrangling-components/react-controls'
+import {
+	useSimpleDropdownOptions,
+	useTableColumnNames,
+} from '@data-wrangling-components/react-hooks'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useHandleDropdownChange } from '../../common/index.js'
+import { useDropdownChangeHandler } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 
@@ -33,17 +37,20 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 			})
 		}, [step, onChange])
 
-		const handleColumnChange = useHandleDropdownChange(
+		const handleColumnChange = useDropdownChangeHandler(
 			step,
 			(s, val) => (s.args.column = val as string),
 			onChange,
 		)
 
+		const colNames = useTableColumnNames(dataTable)
+		const options = useSimpleDropdownOptions(colNames)
+
 		return (
 			<Container>
 				<TableColumnDropdown
 					required
-					table={dataTable}
+					options={options}
 					label={'Column to spread'}
 					selectedKey={(step.args as SpreadArgs).column}
 					onChange={handleColumnChange}

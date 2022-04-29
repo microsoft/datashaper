@@ -3,17 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { PivotArgs } from '@data-wrangling-components/core'
-import { FieldAggregateOperation } from '@data-wrangling-components/core'
-import {
-	EnumDropdown,
-	TableColumnDropdown,
-} from '@data-wrangling-components/react-controls'
+import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
-import styled from 'styled-components'
 
-import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
+import { PivotBase } from './Pivot.base.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.
@@ -21,62 +16,8 @@ import type { StepComponentProps } from '../../types.js'
  */
 export const Pivot: React.FC<StepComponentProps<PivotArgs>> = memo(
 	withLoadedTable(function Pivot({ step, onChange, dataTable }) {
-		const handleKeyColumnChange = useHandleDropdownChange(
-			step,
-			(s, val) => (s.args.key = val as string),
-			onChange,
-		)
+		const columns = useTableColumnNames(dataTable)
 
-		const handleValueColumnChange = useHandleDropdownChange(
-			step,
-			(s, val) => (s.args.value = val as string),
-			onChange,
-		)
-
-		const handleOpChange = useHandleDropdownChange(
-			step,
-			(s, val) => (s.args.operation = val as FieldAggregateOperation),
-			onChange,
-		)
-
-		return (
-			<Container>
-				<LeftAlignedRow>
-					<TableColumnDropdown
-						required
-						table={dataTable}
-						label={'Column used as key'}
-						selectedKey={step.args.key}
-						onChange={handleKeyColumnChange}
-					/>
-				</LeftAlignedRow>
-				<LeftAlignedRow>
-					<TableColumnDropdown
-						required
-						table={dataTable}
-						label={'Column used as value'}
-						selectedKey={step.args.value}
-						onChange={handleValueColumnChange}
-					/>
-				</LeftAlignedRow>
-				<LeftAlignedRow>
-					<EnumDropdown
-						required
-						enumeration={FieldAggregateOperation}
-						label={'Function'}
-						selectedKey={step.args.operation}
-						onChange={handleOpChange}
-					/>
-				</LeftAlignedRow>
-			</Container>
-		)
+		return <PivotBase step={step} onChange={onChange} columns={columns} />
 	}),
 )
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	align-content: flex-start;
-	justify-content: flex-start;
-`

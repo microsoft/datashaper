@@ -4,42 +4,33 @@
  */
 import type { RollupArgs } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
-import { EnumDropdown } from '@data-wrangling-components/react-controls'
-import { memo } from 'react'
-import styled from 'styled-components'
+import { getEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
+import { memo, useMemo } from 'react'
 
-import { LeftAlignedRow, useHandleDropdownChange } from '../../common/index.js'
+import type { FormInput } from '../../common/VerbForm.js'
+import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentProps } from '../../types.js'
+
 /**
  * Just the column/op inputs for an rollup.
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Rollup: React.FC<StepComponentProps<RollupArgs>> = memo(
 	function Rollup({ step, onChange }) {
-		const handleOpChange = useHandleDropdownChange(
-			step,
-			(s, val) => (s.args.operation = val as FieldAggregateOperation),
-			onChange,
+		const inputs = useMemo<FormInput<RollupArgs>[]>(
+			() => [
+				{
+					type: FormInputType.SingleChoice,
+					label: 'Function',
+					current: step.args.operation,
+					options: getEnumDropdownOptions(FieldAggregateOperation),
+					onChange: (s, val) =>
+						(s.args.operation = val as FieldAggregateOperation),
+				},
+			],
+			[step],
 		)
 
-		return (
-			<Container>
-				<LeftAlignedRow>
-					<EnumDropdown
-						required
-						enumeration={FieldAggregateOperation}
-						label={'Function'}
-						selectedKey={step.args.operation}
-						onChange={handleOpChange}
-					/>
-				</LeftAlignedRow>
-			</Container>
-		)
+		return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 	},
 )
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-`

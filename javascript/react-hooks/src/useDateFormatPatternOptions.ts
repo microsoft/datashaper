@@ -3,8 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IDropdownOption } from '@fluentui/react'
+import { useMemo } from 'react'
 
 export function useDateFormatPatternOptions(): IDropdownOption[] {
+	return useMemo(() => getDateFormatPatternOptions(), [])
+}
+
+export function getDateFormatPatternOptions(): IDropdownOption[] {
 	const formatPatternArray: IDropdownOption[] = [
 		{ key: '%Y-%m-%d', text: '%Y-%m-%d' },
 		{ key: '%Y/%m/%d', text: '%Y/%m/%d' },

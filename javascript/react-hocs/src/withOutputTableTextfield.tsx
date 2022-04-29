@@ -6,7 +6,7 @@ import { dropdownStyles } from '@data-wrangling-components/react-controls'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
 	LeftAlignedRow,
-	useHandleTextFieldChange,
+	useTextFieldChangeHandler,
 } from '@data-wrangling-components/react-verbs'
 import { NodeOutput } from '@essex/dataflow'
 import { TextField } from '@fluentui/react'
@@ -27,7 +27,7 @@ export const withOutputTableTextfield = (
 	return Component => {
 		const WithOutputTableTextfield: React.FC<StepComponentProps> = props => {
 			const { step, onChange } = props
-			const handleOutputChange = useHandleTextFieldChange(
+			const handleOutputChange = useTextFieldChangeHandler(
 				step,
 				(s, val) => (s.output = { [NodeOutput.Target]: val as string }),
 				onChange,
