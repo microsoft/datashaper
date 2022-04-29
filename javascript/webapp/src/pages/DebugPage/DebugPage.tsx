@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-/* eslint-disable @essex/adjacent-await */
 import type { Specification } from '@data-wrangling-components/core'
 import { StepComponent, StepSelector } from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
