@@ -197,7 +197,7 @@ const Input: React.FC<{
 	const condition = input.condition ?? true
 	const inputType: FormInputType = input.type
 
-	return condition === false ? null : (
+	return !condition ? null : (
 		<Switch>
 			<Case condition={inputType === FormInputType.SingleChoice}>
 				<SingleChoiceInput
