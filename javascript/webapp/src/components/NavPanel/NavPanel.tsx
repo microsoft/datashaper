@@ -42,7 +42,7 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 				return 'debugPage'
 			case '/performance':
 				return 'perfPage'
-			case '/prepare':
+			case '/':
 			default:
 				return 'prepareDataPage'
 		}

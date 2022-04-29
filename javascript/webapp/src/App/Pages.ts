@@ -9,7 +9,7 @@ export const Pages = {
 	},
 	Prepare: {
 		name: 'Prepare Data',
-		path: '/prepare',
+		path: '/',
 	},
 	Debug: {
 		name: 'Debug Page',
