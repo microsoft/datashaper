@@ -4,7 +4,10 @@
  */
 import type { RenameArgs, Step } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableColumnNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
@@ -110,7 +113,8 @@ const ColumnPair: React.FC<{
 		onChange(oldname, oldname, newValue ?? '')
 	}
 	const handleDeleteClick = () => onDelete(oldname)
-	const options = useTableColumnOptions(table, columnFilter)
+	const columns = useTableColumnNames(table, columnFilter)
+	const options = useSimpleDropdownOptions(columns)
 
 	return (
 		<ColumnPairContainer>

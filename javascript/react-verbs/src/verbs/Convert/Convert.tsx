@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ConvertArgs } from '@data-wrangling-components/core'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
 
 import { withLoadedTable } from '../../common/withLoadedTable.js'
@@ -15,7 +15,7 @@ import { ConvertBase } from './Convert.base.jsx'
  */
 export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 	withLoadedTable(function Convert({ step, onChange, dataTable }) {
-		const columns = useTableColumnOptions(dataTable)
+		const columns = useTableColumnNames(dataTable)
 		return <ConvertBase columns={columns} step={step} onChange={onChange} />
 	}),
 )

@@ -4,8 +4,10 @@
  */
 import type { DeriveArgs } from '@data-wrangling-components/core'
 import { MathOperator } from '@data-wrangling-components/core'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
-import type { IDropdownOption } from '@fluentui/react'
+import {
+	getEnumDropdownOptions,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.jsx'
@@ -16,8 +18,9 @@ import type { StepComponentBaseProps } from '../../types.js'
  * Provides inputs for a Binarize step.
  */
 export const DeriveBase: React.FC<
-	StepComponentBaseProps<DeriveArgs> & { options: IDropdownOption[] }
-> = memo(function DeriveBase({ step, onChange, options }) {
+	StepComponentBaseProps<DeriveArgs> & { columns: string[] }
+> = memo(function DeriveBase({ step, onChange, columns }) {
+	const options = useSimpleDropdownOptions(columns)
 	const inputs = useMemo<FormInput<DeriveArgs>[]>(
 		() => [
 			{

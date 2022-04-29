@@ -5,7 +5,10 @@
 import type { JoinArgs, Step } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableColumnNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
@@ -43,8 +46,11 @@ export const JoinInputs: React.FC<StepComponentProps<JoinArgs>> = memo(
 		const handleLeftColumnChange = useHandleLeftColumnChange(step, onChange)
 		const handleRightColumnChange = useHandleRightColumnChange(step, onChange)
 
-		const leftOptions = useTableColumnOptions(leftTable)
-		const rightOptions = useTableColumnOptions(rightTable)
+		const leftCols = useTableColumnNames(leftTable)
+		const leftOptions = useSimpleDropdownOptions(leftCols)
+
+		const rightCols = useTableColumnNames(rightTable)
+		const rightOptions = useSimpleDropdownOptions(rightCols)
 
 		return (
 			<Container>

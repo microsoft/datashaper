@@ -14,7 +14,10 @@ import {
 	EnumDropdown,
 	narrowDropdownStyles,
 } from '@data-wrangling-components/react-controls'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableColumnNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { DataType } from '@essex/arquero'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
@@ -122,7 +125,8 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		const isEmpty = useIsEmpty(criterion)
 		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])
 		const placeholder = usePlaceholderText(type)
-		const columnOptions = useTableColumnOptions(table, columnFilter)
+		const columns = useTableColumnNames(table, columnFilter)
+		const columnOptions = useSimpleDropdownOptions(columns)
 
 		return (
 			<Container>

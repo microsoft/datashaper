@@ -5,7 +5,7 @@
 import type { BinArgs } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
 import { num } from '@data-wrangling-components/primitives'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
+import { getEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'

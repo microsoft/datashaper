@@ -15,14 +15,14 @@ import { useEffect, useMemo, useState } from 'react'
  * @returns
  */
 export function useSimpleDropdownOptions(list: string[]): IDropdownOption[] {
-	return useMemo(
-		() =>
-			list.map(name => ({
-				key: name,
-				text: name.toString(),
-			})),
-		[list],
-	)
+	return useMemo(() => getSimpleDropdownOptions(list), [list])
+}
+
+export function getSimpleDropdownOptions(list: string[]): IDropdownOption[] {
+	return list.map(name => ({
+		key: name,
+		text: name.toString(),
+	}))
 }
 
 export function useEnumDropdownOptions<E = unknown>(

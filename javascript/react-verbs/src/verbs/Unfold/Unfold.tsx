@@ -4,7 +4,10 @@
  */
 import type { PivotArgs } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableColumnNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
 import styled from 'styled-components'
 
@@ -30,7 +33,8 @@ export const Unfold: React.FC<StepComponentProps<PivotArgs>> = memo(
 			onChange,
 		)
 
-		const options = useTableColumnOptions(dataTable)
+		const columns = useTableColumnNames(dataTable)
+		const options = useSimpleDropdownOptions(columns)
 
 		return (
 			<Container>

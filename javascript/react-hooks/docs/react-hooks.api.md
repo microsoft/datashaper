@@ -9,15 +9,45 @@ import type { IDropdownOption } from '@fluentui/react';
 import type { TableStore } from '@data-wrangling-components/core';
 import type { Value } from '@essex/arquero';
 
+// Warning: (ae-missing-release-tag) "getDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getDateFormatPatternOptions(): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "getEnumDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getEnumDropdownOptions<E = unknown>(enumeration: E, labels?: Record<string, string>): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "getSimpleDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getSimpleDropdownOptions(list: string[]): IDropdownOption[];
+
 // Warning: (ae-missing-release-tag) "useColumnValueOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useColumnValueOptions(column: string | undefined, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
 
-// Warning: (ae-missing-release-tag) "useTableColumnOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDateFormatPatternOptions(): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "useEnumDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useEnumDropdownOptions<E = unknown>(enumeration: E, labels?: Record<string, string>): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "useSimpleDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useTableColumnOptions(table: ColumnTable | undefined, filter?: (name: string) => boolean): IDropdownOption[];
+export function useSimpleDropdownOptions(list: string[]): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "useTableColumnNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useTableColumnNames(table: ColumnTable | undefined, filter?: (name: string) => boolean): string[];
 
 // Warning: (ae-missing-release-tag) "useTableOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

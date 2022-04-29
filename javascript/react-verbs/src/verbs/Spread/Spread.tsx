@@ -7,7 +7,10 @@ import {
 	ColumnSpread,
 	TableColumnDropdown,
 } from '@data-wrangling-components/react-controls'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableColumnNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
@@ -40,7 +43,8 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 			onChange,
 		)
 
-		const options = useTableColumnOptions(dataTable)
+		const colNames = useTableColumnNames(dataTable)
+		const options = useSimpleDropdownOptions(colNames)
 
 		return (
 			<Container>

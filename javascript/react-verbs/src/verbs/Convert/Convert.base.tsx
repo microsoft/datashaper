@@ -4,13 +4,13 @@
  */
 import type { ConvertArgs } from '@data-wrangling-components/core'
 import { ParseType } from '@data-wrangling-components/core'
-import { num , toggleListItem } from '@data-wrangling-components/primitives'
+import { num, toggleListItem } from '@data-wrangling-components/primitives'
 import {
 	getDateFormatPatternOptions,
 	getEnumDropdownOptions,
-} from '@data-wrangling-components/react-controls'
-import type { IDropdownOption } from '@fluentui/react'
-import { memo,useMemo } from 'react'
+	getSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
+import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
@@ -21,7 +21,7 @@ import type { StepComponentBaseProps } from '../../types.js'
  */
 export const ConvertBase: React.FC<
 	StepComponentBaseProps<ConvertArgs> & {
-		columns: IDropdownOption[]
+		columns: string[]
 	}
 > = memo(function ConvertBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<ConvertArgs>[]>(
@@ -29,7 +29,7 @@ export const ConvertBase: React.FC<
 			{
 				label: 'Columns to convert',
 				type: FormInputType.MultiChoice,
-				options: columns,
+				options: getSimpleDropdownOptions(columns),
 				current: step.args.columns,
 				condition: columns.length > 0,
 				onChange: (s, opt) =>

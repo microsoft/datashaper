@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { BooleanArgs } from '@data-wrangling-components/core'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
 
 import { withLoadedTable } from '../../common/withLoadedTable.js'
@@ -19,9 +19,9 @@ export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
 		onChange,
 		dataTable,
 	}) {
-		const options = useTableColumnOptions(dataTable)
+		const columns = useTableColumnNames(dataTable)
 		return (
-			<BooleanLogicBase step={step} onChange={onChange} options={options} />
+			<BooleanLogicBase step={step} onChange={onChange} columns={columns} />
 		)
 	}),
 )

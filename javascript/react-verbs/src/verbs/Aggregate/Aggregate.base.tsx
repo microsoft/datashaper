@@ -2,16 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	AggregateArgs} from '@data-wrangling-components/core';
+import type { AggregateArgs } from '@data-wrangling-components/core'
+import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import {
-	FieldAggregateOperation
-} from '@data-wrangling-components/core'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
-import type { IDropdownOption } from '@fluentui/react'
+	getEnumDropdownOptions,
+	getSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { useMemo } from 'react'
 
-import type { FormInput} from '../../common/VerbForm.js';
+import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
@@ -21,15 +20,15 @@ import type { StepComponentBaseProps } from '../../types.js'
  */
 export const AggregateBase: React.FC<
 	StepComponentBaseProps<AggregateArgs> & {
-		columnOptions: IDropdownOption[]
+		columns: string[]
 	}
-> = function AggregateBase({ step, onChange, columnOptions }) {
+> = function AggregateBase({ step, onChange, columns }) {
 	const verbInputs = useMemo<FormInput<AggregateArgs>[]>(
 		() => [
 			{
 				label: 'Column to group by',
 				type: FormInputType.SingleChoice,
-				options: columnOptions,
+				options: getSimpleDropdownOptions(columns),
 				current: step.args.groupby,
 				onChange: (s, key) => (s.args.groupby = key as string),
 				required: true,
@@ -44,7 +43,7 @@ export const AggregateBase: React.FC<
 				required: true,
 			},
 		],
-		[step, columnOptions],
+		[step, columns],
 	)
 
 	return <VerbForm step={step} inputs={verbInputs} onChange={onChange} />

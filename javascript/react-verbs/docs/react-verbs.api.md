@@ -6,7 +6,7 @@
 
 /// <reference types="react" />
 
-import { AggregateArgs } from '@data-wrangling-components/core';
+import type { AggregateArgs } from '@data-wrangling-components/core';
 import type { BinArgs } from '@data-wrangling-components/core';
 import type { BinarizeArgs } from '@data-wrangling-components/core';
 import type { BooleanArgs } from '@data-wrangling-components/core';
@@ -52,7 +52,7 @@ export const Aggregate: MemoExoticComponent<(props: StepComponentProps<Aggregate
 //
 // @public
 export const AggregateBase: React.FC<StepComponentBaseProps<AggregateArgs> & {
-    columnOptions: IDropdownOption[];
+    columns: string[];
 }>;
 
 // Warning: (ae-missing-release-tag) "AggregateDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -94,7 +94,7 @@ export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>>;
 //
 // @public
 export const BooleanLogicBase: React.FC<StepComponentBaseProps<BooleanArgs> & {
-    options: IDropdownOption[];
+    columns: string[];
 }>;
 
 // Warning: (ae-missing-release-tag) "BooleanLogicDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -136,7 +136,7 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>>;
 //
 // @public
 export const ConvertBase: React.FC<StepComponentBaseProps<ConvertArgs> & {
-    columns: IDropdownOption[];
+    columns: string[];
 }>;
 
 // Warning: (ae-missing-release-tag) "ConvertDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -153,7 +153,7 @@ export const Derive: React.FC<StepComponentProps<DeriveArgs>>;
 //
 // @public
 export const DeriveBase: React.FC<StepComponentBaseProps<DeriveArgs> & {
-    options: IDropdownOption[];
+    columns: string[];
 }>;
 
 // Warning: (ae-missing-release-tag) "DeriveDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -181,6 +181,13 @@ export type DropdownChangeHandler = (event: React.FormEvent<HTMLDivElement>, opt
 //
 // @public
 export const Erase: React.FC<StepComponentProps<EraseArgs>>;
+
+// Warning: (ae-missing-release-tag) "EraseBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const EraseBase: React.FC<StepComponentBaseProps<EraseArgs> & {
+    columns: string[];
+}>;
 
 // Warning: (ae-missing-release-tag) "EraseDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

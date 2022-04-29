@@ -135,16 +135,6 @@ export interface EnumDropdownProps<E = unknown> extends Omit<IDropdownProps, 'op
     labels?: Record<string, string>;
 }
 
-// Warning: (ae-missing-release-tag) "getDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getDateFormatPatternOptions(): IDropdownOption[];
-
-// Warning: (ae-missing-release-tag) "getEnumDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getEnumDropdownOptions<E = unknown>(enumeration: E, labels?: Record<string, string>): IDropdownOption[];
-
 // Warning: (ae-forgotten-export) The symbol "GroupHeaderProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "GroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -231,21 +221,6 @@ export interface TableDropdownProps extends Partial<IDropdownProps> {
     // (undocumented)
     options: IDropdownOption[];
 }
-
-// Warning: (ae-missing-release-tag) "useDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDateFormatPatternOptions(): IDropdownOption[];
-
-// Warning: (ae-missing-release-tag) "useEnumDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useEnumDropdownOptions<E = unknown>(enumeration: E, labels?: Record<string, string>): IDropdownOption[];
-
-// Warning: (ae-missing-release-tag) "useSimpleDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useSimpleDropdownOptions(list: string[]): IDropdownOption[];
 
 // (No @packageDocumentation comment for this package)
 

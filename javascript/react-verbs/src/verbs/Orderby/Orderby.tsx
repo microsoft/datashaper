@@ -8,7 +8,10 @@ import type {
 	Step,
 } from '@data-wrangling-components/core'
 import { SortInstruction } from '@data-wrangling-components/react-controls'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableColumnNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { SortDirection } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton } from '@fluentui/react'
@@ -25,7 +28,8 @@ import type { StepComponentProps } from '../../types.js'
  */
 export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
 	withLoadedTable(function Orderby({ step, onChange, dataTable }) {
-		const columnOptions = useTableColumnOptions(dataTable)
+		const columns = useTableColumnNames(dataTable)
+		const columnOptions = useSimpleDropdownOptions(columns)
 		const sorts = useSorts(step, columnOptions, onChange)
 
 		const handleButtonClick = useCallback(() => {

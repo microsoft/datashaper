@@ -38,7 +38,6 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 		const columnPairs = useRecodePairs(
 			dataTable,
 			step,
-			values,
 			dataType,
 			handleRecodeChange,
 			handleRecodeDelete,
@@ -64,7 +63,6 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 function useRecodePairs(
 	table: ColumnTable | undefined,
 	step: Step<RecodeArgs>,
-	values: Value[],
 	dataType: DataType,
 	onChange: (previous: Value, oldvalue: Value, newvalue: Value) => void,
 	onDelete: (value: Value) => void,

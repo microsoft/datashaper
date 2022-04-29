@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { AggregateArgs } from '@data-wrangling-components/core'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
 
 import { withLoadedTable } from '../../common/withLoadedTable.js'
@@ -19,9 +19,7 @@ export const Aggregate = memo(
 		onChange,
 		dataTable,
 	}) {
-		const options = useTableColumnOptions(dataTable)
-		return (
-			<AggregateBase columnOptions={options} step={step} onChange={onChange} />
-		)
+		const columns = useTableColumnNames(dataTable)
+		return <AggregateBase columns={columns} step={step} onChange={onChange} />
 	}),
 )

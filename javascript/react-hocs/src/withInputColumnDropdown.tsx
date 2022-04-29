@@ -8,7 +8,10 @@ import {
 	isNumericInputStep,
 } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableColumnNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
 	LeftAlignedRow,
@@ -49,7 +52,8 @@ export function withInputColumnDropdown<T extends InputColumnArgs>(
 			)
 
 			const filter = useColumnFilter(step, tbl)
-			const options = useTableColumnOptions(tbl, filter)
+			const columns = useTableColumnNames(tbl, filter)
+			const options = useSimpleDropdownOptions(columns)
 
 			if (!isInputColumnStep(step)) {
 				return <Component {...props} />
