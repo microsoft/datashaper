@@ -23,7 +23,7 @@ import type {
 } from './VerbForm.js'
 import { FormInputType } from './VerbForm.js'
 
-export function columnList(
+export function inputColumnList(
 	step: Step<InputColumnListArgs>,
 	columns: string[],
 	label = 'Columns',
