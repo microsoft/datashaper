@@ -12,6 +12,7 @@ import {
 	SpinButton,
 	TextField,
 } from '@fluentui/react'
+import styled from 'styled-components'
 import noop from 'lodash-es/noop'
 import { Fragment, memo, useMemo } from 'react'
 import { Case, Switch } from 'react-if'
@@ -185,7 +186,7 @@ export const VerbForm: React.FC<{
 			)),
 		[inputs, onChange, step],
 	)
-	return <>{rows}</>
+	return <Container>{rows}</Container>
 })
 
 const Input: React.FC<{
@@ -469,3 +470,8 @@ const dropdownStyles = {
 		width: 220,
 	},
 }
+
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+`
