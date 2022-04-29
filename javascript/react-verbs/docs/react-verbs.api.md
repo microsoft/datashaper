@@ -366,6 +366,13 @@ export function otherInputNames(step: Step): string[];
 // @public
 export const Pivot: React.FC<StepComponentProps<PivotArgs>>;
 
+// Warning: (ae-missing-release-tag) "PivotBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const PivotBase: React.FC<StepComponentBaseProps<PivotArgs> & {
+    columns: string[];
+}>;
+
 // Warning: (ae-missing-release-tag) "PivotDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -498,7 +505,7 @@ export type TextFieldChangeHandler = (event: React.FormEvent<HTMLInputElement | 
 // Warning: (ae-missing-release-tag) "Unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const Unfold: React.FC<StepComponentProps<PivotArgs>>;
+export const Unfold: React.FC<StepComponentProps<UnfoldArgs>>;
 
 // Warning: (ae-missing-release-tag) "UnfoldDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

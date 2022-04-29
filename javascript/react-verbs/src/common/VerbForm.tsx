@@ -51,6 +51,11 @@ export interface FormInputBase<
 	condition?: boolean
 
 	/**
+	 * Whether this input is disabled
+	 */
+	disabled?: boolean
+
+	/**
 	 * An optional React component to wrap the input with
 	 */
 	wrapper?: React.ComponentType
@@ -251,6 +256,7 @@ const SingleChoiceInput: React.FC<{
 		current,
 		required,
 		options,
+		disabled,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
 	},
@@ -266,6 +272,7 @@ const SingleChoiceInput: React.FC<{
 			<Dropdown
 				required={required}
 				label={label}
+				disabled={disabled}
 				placeholder={placeholder}
 				styles={dropdownStyles}
 				selectedKey={current as number | string}
@@ -288,6 +295,7 @@ const MultiChoiceInput: React.FC<{
 		current,
 		required,
 		options,
+		disabled,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
 	},
@@ -307,6 +315,7 @@ const MultiChoiceInput: React.FC<{
 				styles={dropdownStyles}
 				selectedKeys={current}
 				options={options!}
+				disabled={disabled}
 				onChange={dropdownChangeHandler}
 				multiSelect
 			/>
@@ -326,6 +335,7 @@ const ComboBoxInput: React.FC<{
 		current,
 		required,
 		options,
+		disabled,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
 		onInputValueChange,
@@ -347,6 +357,7 @@ const ComboBoxInput: React.FC<{
 				styles={dropdownStyles}
 				selectedKey={current as number | string}
 				options={options!}
+				disabled={disabled}
 				onChange={changeHandler}
 				onInputValueChange={valueChangeHandler}
 			/>
@@ -367,6 +378,7 @@ const NumberSpinnerInput: React.FC<{
 		min,
 		max,
 		step: spinStep,
+		disabled,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
 		styles,
@@ -385,6 +397,7 @@ const NumberSpinnerInput: React.FC<{
 				step={spinStep}
 				value={current ? `${current}` : undefined}
 				onChange={changeHandler}
+				disabled={disabled}
 				styles={styles}
 			/>
 		</Wrapper>
@@ -402,6 +415,7 @@ const CheckboxInput: React.FC<{
 		current,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
+		disabled,
 		styles,
 	},
 	onChange,
@@ -413,6 +427,7 @@ const CheckboxInput: React.FC<{
 				label={label}
 				checked={current}
 				onChange={changeHandler}
+				disabled={disabled}
 				styles={styles}
 			/>
 		</Wrapper>
@@ -430,6 +445,7 @@ const TextInput: React.FC<{
 		current,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
+		disabled,
 		styles,
 	},
 	onChange,
@@ -441,6 +457,7 @@ const TextInput: React.FC<{
 				label={label}
 				value={current}
 				onChange={changeHandler}
+				disabled={disabled}
 				styles={styles}
 			/>
 		</Wrapper>
