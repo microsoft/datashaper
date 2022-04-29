@@ -50,7 +50,7 @@ export const JoinBase: React.FC<
 			),
 			...joinInputs(step, leftColumns, rightColumns),
 		],
-		[step, tableOptions, leftColumns, rightColumns],
+		[step, tableOptions, leftColumns, rightColumns, tables],
 	)
 
 	return <VerbForm step={step} onChange={onChange} inputs={inputs} />

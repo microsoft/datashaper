@@ -6,7 +6,7 @@ import type { LookupArgs } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
-import type { FormInput} from '../../common/VerbForm.js';
+import type { FormInput } from '../../common/VerbForm.js'
 import { VerbForm } from '../../common/VerbForm.js'
 import {
 	dropdown,
@@ -42,7 +42,7 @@ export const LookupBase: React.FC<
 			...joinInputs(step, leftColumns, rightColumns, 'lookup'),
 			inputColumnList(step, rightColumns, 'Columns to copy'),
 		],
-		[step],
+		[step, leftColumns, rightColumns, tables],
 	)
 
 	return <VerbForm inputs={inputs} onChange={onChange} step={step} />
