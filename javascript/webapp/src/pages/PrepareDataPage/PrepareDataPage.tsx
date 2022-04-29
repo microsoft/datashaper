@@ -2,59 +2,50 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
 import {
 	PrepareDataFull,
 	ProjectMgmtCommandBar,
 } from '@data-wrangling-components/react'
-import type { TableContainer } from '@essex/arquero'
-import { MessageBar, MessageBarType } from '@fluentui/react'
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 
-import { useTablesState } from './PrepareDataPage.hooks'
+import { useSteps, useTables } from './PrepareDataPage.hooks'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const [steps, setSteps] = useState<Step[]>([])
-	const [outputTable, setOutputTable] = useState<TableContainer>()
-	const [tables, updateTables] = useTablesState()
-	const [message, setMessage] = useState<string>()
+	
+	const {
+		steps,
+		onUpdateSteps
+	} = useSteps()
+	
+	const {
+		tables,
+		onAddTables,
+		output,
+		onUpdateOutput
+	} = useTables()
 
 	return (
 		<Container className={'prepare-data-page'}>
 			<ProjectMgmtCommandBar
 				tables={tables}
 				steps={steps}
-				outputTable={outputTable}
-				onUpdateSteps={setSteps}
-				onUpdateTables={updateTables}
+				outputTable={output}
+				onUpdateSteps={onUpdateSteps}
+				onUpdateTables={onAddTables}
 				styles={mgmtStyles}
 			/>
-			{message && (
-				<MessageBar
-					messageBarType={MessageBarType.severeWarning}
-					truncated={true}
-					onDismiss={() => setMessage(undefined)}
-					dismissButtonAriaLabel="Close"
-					styles={MESSAGE_BAR_STYLES}
-				>
-					{' '}
-					{message}{' '}
-				</MessageBar>
-			)}
 			<Wrapper>
 				<PrepareDataFull
 					tables={tables}
 					steps={steps}
-					onUpdateSteps={setSteps}
-					onOutputTable={setOutputTable}
+					onUpdateSteps={onUpdateSteps}
+					onOutputTable={onUpdateOutput}
 				/>
 			</Wrapper>
 		</Container>
 	)
 })
-
-const MESSAGE_BAR_STYLES = { root: { zIndex: 20 } }
 
 const Container = styled.div`
 	height: calc(100vh - 80px);

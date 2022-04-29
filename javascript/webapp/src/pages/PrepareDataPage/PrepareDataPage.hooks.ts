@@ -3,23 +3,32 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @essex/adjacent-await */
+import type { Step} from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
 
-export function useTablesState(): [
-	TableContainer[],
-	(tables: TableContainer[]) => void,
-] {
-	const [tables, setTablesState] = useState<TableContainer[]>([])
+export function useTables() {
+	const [tables, setTables] = useState<TableContainer[]>([])
 
-	const setTables = useCallback(
-		(update: TableContainer[]) => {
-			setTablesState((prev: TableContainer[]) =>
-				!update.length ? [] : [...prev, ...update],
-			)
-		},
-		[setTablesState],
-	)
+	const onAddTables = useCallback((update: TableContainer[]) => {
+		setTables(prev => [...prev, ...update])
+	}, [setTables])
 
-	return [tables, setTables]
+	const [output, onUpdateOutput] = useState<TableContainer | undefined>()
+	return {
+		tables,
+		onAddTables,
+		output,
+		onUpdateOutput
+	}
+}
+
+export function useSteps() {
+	const [steps, setSteps] = useState<Step[]>([])
+
+	const onUpdateSteps = useCallback((update: Step[]) => setSteps(prev => [...prev, ...update]), [setSteps])
+	return {
+		steps,
+		onUpdateSteps
+	}
 }
