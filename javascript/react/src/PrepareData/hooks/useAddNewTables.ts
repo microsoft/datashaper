@@ -9,7 +9,6 @@ import { from } from 'rxjs'
 
 export function useAddNewTables(
 	store: TableStore,
-	setStoredTables: (tables: Map<string, TableContainer>) => void,
 ): (tables: TableContainer[]) => void {
 	return useCallback(
 		(tables: TableContainer[]) => {
@@ -20,10 +19,7 @@ export function useAddNewTables(
 					store.set(table.id, from([table]))
 				}
 			})
-
-			const _storedTables = store.toMap()
-			setStoredTables(_storedTables)
 		},
-		[store, setStoredTables],
+		[store],
 	)
 }
