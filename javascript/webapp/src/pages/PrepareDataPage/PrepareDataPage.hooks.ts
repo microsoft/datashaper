@@ -12,6 +12,7 @@ export function useTables(): {
 	output: TableContainer | undefined
 	onUpdateOutput: (table: TableContainer) => void
 } {
+	
 	const [tables, setTables] = useState<TableContainer[]>([])
 
 	const onAddTables = useCallback(
@@ -22,6 +23,7 @@ export function useTables(): {
 	)
 
 	const [output, onUpdateOutput] = useState<TableContainer | undefined>()
+	
 	return {
 		tables,
 		onAddTables,
@@ -37,7 +39,7 @@ export function useSteps(): {
 	const [steps, setSteps] = useState<Step[]>([])
 
 	const onUpdateSteps = useCallback(
-		(update: Step[]) => setSteps(prev => [...prev, ...update]),
+		(update: Step[]) => setSteps(update),
 		[setSteps],
 	)
 	return {
