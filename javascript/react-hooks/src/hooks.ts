@@ -2,15 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableStore } from '@data-wrangling-components/core'
+import { useSimpleDropdownOptions } from '@data-wrangling-components/react-controls'
 import type { Value } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useMemo } from 'react'
-
-import type { TableStore } from '@data-wrangling-components/core'
-import { useSimpleDropdownOptions } from '@data-wrangling-components/react-controls'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo , useState } from 'react'
 
 /**
  * Creates a list of dropdown options for the columns in a table

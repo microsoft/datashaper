@@ -1,4 +1,5 @@
 releases:
+  "@data-wrangling-components/primitives": minor
   "@data-wrangling-components/react": major
   "@data-wrangling-components/react-controls": major
   "@data-wrangling-components/react-hocs": patch

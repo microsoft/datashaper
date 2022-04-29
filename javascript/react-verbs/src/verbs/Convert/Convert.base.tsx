@@ -4,17 +4,17 @@
  */
 import type { ConvertArgs } from '@data-wrangling-components/core'
 import { ParseType } from '@data-wrangling-components/core'
-import { num } from '@data-wrangling-components/primitives'
-import { useMemo, memo } from 'react'
+import { num , toggleListItem } from '@data-wrangling-components/primitives'
+import {
+	getDateFormatPatternOptions,
+	getEnumDropdownOptions,
+} from '@data-wrangling-components/react-controls'
 import type { IDropdownOption } from '@fluentui/react'
+import { memo,useMemo } from 'react'
+
+import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentBaseProps } from '../../types.js'
-import type { FormInput } from '../../common/VerbForm.js'
-import { toggleListItem } from '@data-wrangling-components/primitives'
-import {
-	getEnumDropdownOptions,
-	getDateFormatPatternOptions,
-} from '@data-wrangling-components/react-controls'
 
 /**
  * Provides inputs for a Convert step.

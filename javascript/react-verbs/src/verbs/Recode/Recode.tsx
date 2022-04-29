@@ -4,6 +4,7 @@
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
 import { ColumnValueDropdown } from '@data-wrangling-components/react-controls'
+import { useColumnValueOptions } from '@data-wrangling-components/react-hooks'
 import type { DataType, Value } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
@@ -22,7 +23,6 @@ import {
 	useHandleRecodeChange,
 	useRecodeDelete,
 } from './hooks.js'
-import { useColumnValueOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs for a RecodeStep.

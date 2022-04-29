@@ -14,13 +14,13 @@ import {
 	EnumDropdown,
 	narrowDropdownStyles,
 } from '@data-wrangling-components/react-controls'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 import { DataType } from '@essex/arquero'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 
 import { InputExplainer } from '../../../common/styles.js'
 import {

@@ -4,11 +4,13 @@
  */
 import type { DeriveArgs } from '@data-wrangling-components/core'
 import { MathOperator } from '@data-wrangling-components/core'
-import { memo, useMemo } from 'react'
-import type { IDropdownOption } from '@fluentui/react'
-import type { StepComponentBaseProps } from '../../types.js'
-import { VerbForm, FormInput, FormInputType } from '../../common/VerbForm.jsx'
 import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
+import type { IDropdownOption } from '@fluentui/react'
+import { memo, useMemo } from 'react'
+
+import type { FormInput} from '../../common/VerbForm.jsx';
+import { FormInputType,VerbForm } from '../../common/VerbForm.jsx'
+import type { StepComponentBaseProps } from '../../types.js'
 
 /**
  * Provides inputs for a Binarize step.

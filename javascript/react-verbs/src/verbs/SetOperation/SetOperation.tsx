@@ -4,6 +4,7 @@
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
+import { useTableOptions } from '@data-wrangling-components/react-hooks'
 import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -11,7 +12,6 @@ import styled from 'styled-components'
 import { LeftAlignedRow } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
-import { useTableOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs to create a list of tables.

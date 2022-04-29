@@ -3,12 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { EraseArgs } from '@data-wrangling-components/core'
-import { memo, useMemo } from 'react'
 import { toggleListItem } from '@data-wrangling-components/primitives'
-import type { StepComponentProps } from '../../types.js'
-import { VerbForm, FormInput, FormInputType } from '../../common/VerbForm.jsx'
 import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import { memo, useMemo } from 'react'
+
+import type { FormInput} from '../../common/VerbForm.jsx';
+import { FormInputType,VerbForm } from '../../common/VerbForm.jsx'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Just the to/value inputs for an impute.

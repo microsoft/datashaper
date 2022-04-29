@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IDropdownProps, IDropdownOption } from '@fluentui/react'
+import type { IDropdownOption,IDropdownProps } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 

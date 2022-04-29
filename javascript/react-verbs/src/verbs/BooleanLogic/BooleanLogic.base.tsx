@@ -9,10 +9,12 @@ import {
 	dropdownStyles,
 	getEnumDropdownOptions,
 } from '@data-wrangling-components/react-controls'
-import { memo, useMemo } from 'react'
-import type { StepComponentBaseProps } from '../../types.js'
-import { FormInput, FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { IDropdownOption } from '@fluentui/react'
+import { memo, useMemo } from 'react'
+
+import type { FormInput} from '../../common/VerbForm.js';
+import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import type { StepComponentBaseProps } from '../../types.js'
 
 /**
  * Inputs to combine column using boolean logic.

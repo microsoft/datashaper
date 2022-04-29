@@ -5,11 +5,12 @@
 import type { BinArgs } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
 import { num } from '@data-wrangling-components/primitives'
+import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
 import { memo, useMemo } from 'react'
 
+import type { FormInput} from '../../common/VerbForm.js';
+import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentBaseProps } from '../../types.js'
-import { FormInput, FormInputType, VerbForm } from '../../common/VerbForm.js'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
 
 /**
  * Provides inputs for a binning step.

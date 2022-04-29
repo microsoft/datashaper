@@ -1,25 +1,31 @@
-import { memo, useMemo, Fragment } from 'react'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type { Step } from '@data-wrangling-components/core'
+import type {
+	IComboBoxOption,
+	IDropdownOption} from '@fluentui/react';
 import {
 	Checkbox,
 	ComboBox,
 	Dropdown,
-	IComboBoxOption,
-	IDropdownOption,
 	Position,
 	SpinButton,
 	TextField,
 } from '@fluentui/react'
-import { Switch, Case } from 'react-if'
+import { Fragment,memo, useMemo } from 'react'
+import { Case,Switch } from 'react-if'
+
+import type { StepChangeFunction } from '../types.js'
 import {
 	useCheckboxChangeHandler,
 	useComboBoxChangeHandler,
+	useComboBoxInputValueChangeHandler,
 	useDropdownChangeHandler,
 	useSpinButtonChangeHandler,
 	useTextFieldChangeHandler,
-	useComboBoxInputValueChangeHandler,
 } from './hooks.js'
-import type { StepChangeFunction } from '../types.js'
-import type { Step } from '@data-wrangling-components/core'
 
 export interface FormInputBase<
 	T,

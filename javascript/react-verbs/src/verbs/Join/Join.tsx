@@ -9,6 +9,7 @@ import {
 	EnumDropdown,
 	TableDropdown,
 } from '@data-wrangling-components/react-controls'
+import { useTableOptions } from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -17,7 +18,6 @@ import { useDropdownChangeHandler } from '../../common/hooks.js'
 import { LeftAlignedColumn } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { JoinInputs } from '../shared/index.js'
-import { useTableOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs for a Join step.

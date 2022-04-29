@@ -4,6 +4,7 @@
  */
 import { isInputTableStep } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
+import { useTableOptions } from '@data-wrangling-components/react-hooks'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
 	LeftAlignedRow,
@@ -12,7 +13,6 @@ import {
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
-import { useTableOptions } from '@data-wrangling-components/react-hooks'
 
 import type { HOCFunction } from './types.js'
 

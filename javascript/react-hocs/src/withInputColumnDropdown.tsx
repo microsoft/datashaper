@@ -8,6 +8,7 @@ import {
 	isNumericInputStep,
 } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
 	LeftAlignedRow,
@@ -21,7 +22,6 @@ import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import type { HOCFunction } from './types.js'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 /**
  * Higher order component generator to wrap a Step in the input column dropdown.
  * @param label - optional label to use for the dropdown instead of the default.

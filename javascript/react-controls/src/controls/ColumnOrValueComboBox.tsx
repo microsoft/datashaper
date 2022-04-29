@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IComboBoxProps, IComboBoxOption } from '@fluentui/react'
+import type { IComboBoxOption,IComboBoxProps } from '@fluentui/react'
 import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
 import { memo, useMemo } from 'react'
+
 import { dropdownStyles } from '../styles.js'
 
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {

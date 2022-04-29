@@ -4,13 +4,13 @@
  */
 import type { PivotArgs } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
 import styled from 'styled-components'
 
 import { LeftAlignedRow, useDropdownChangeHandler } from '../../common/index.js'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Just the group/column/op inputs for an aggregation.

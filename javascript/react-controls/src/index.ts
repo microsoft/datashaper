@@ -3,5 +3,5 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './controls/index.js'
-export * from './styles.js'
 export * from './hooks.js'
+export * from './styles.js'

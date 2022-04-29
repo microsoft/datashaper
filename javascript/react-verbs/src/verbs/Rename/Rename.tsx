@@ -4,6 +4,7 @@
  */
 import type { RenameArgs, Step } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
@@ -24,7 +25,6 @@ import {
 	useHandleAddButtonClick,
 	useHandleColumnChange,
 } from './hooks.js'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Provides inputs for a RenameStep.

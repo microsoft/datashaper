@@ -2,15 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type {
+	AggregateArgs} from '@data-wrangling-components/core';
 import {
-	FieldAggregateOperation,
-	AggregateArgs,
+	FieldAggregateOperation
 } from '@data-wrangling-components/core'
+import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
 import type { IDropdownOption } from '@fluentui/react'
 import { useMemo } from 'react'
+
+import type { FormInput} from '../../common/VerbForm.js';
+import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentBaseProps } from '../../types.js'
-import { FormInput, FormInputType, VerbForm } from '../../common/VerbForm.js'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
 
 /**
  * Just the group/column/op inputs for an aggregation.

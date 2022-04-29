@@ -8,7 +8,9 @@ import type {
 	Step,
 } from '@data-wrangling-components/core'
 import { SortInstruction } from '@data-wrangling-components/react-controls'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 import { SortDirection } from '@essex/arquero'
+import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
@@ -17,8 +19,6 @@ import styled from 'styled-components'
 
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
-import type { IDropdownOption } from '@fluentui/react'
 
 /**
  * Provides inputs for an OrderBy step.

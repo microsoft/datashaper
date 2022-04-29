@@ -1,5 +1,10 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { FieldAggregateOperation,Verb } from '@data-wrangling-components/core'
+
 import { AggregateBasic } from '../AggregateBasic.js'
-import { Verb, FieldAggregateOperation } from '@data-wrangling-components/core'
 
 export default {
 	title: 'Aggregate',

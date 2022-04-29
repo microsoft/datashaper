@@ -3,10 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ConvertArgs } from '@data-wrangling-components/core'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
+
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
-import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 import { ConvertBase } from './Convert.base.jsx'
 
 /**

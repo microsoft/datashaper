@@ -40,7 +40,7 @@ export function toggleListItem<T>(list: T[], item: T): T[] {
 export function hash(input: string[] | undefined): Record<string, boolean> {
 	const result: Record<string, boolean> = {}
 	if (input) {
-		for (let i of input) {
+		for (const i of input) {
 			result[i] = true
 		}
 	}
