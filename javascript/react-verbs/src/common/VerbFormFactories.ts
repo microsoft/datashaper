@@ -93,11 +93,12 @@ export function enumDropdown<E, Args>(
 	current: SingleChoiceFormInput<Args>['current'],
 	onChange: SingleChoiceFormInput<Args>['onChange'],
 	opts: Partial<SingleChoiceFormInput<Args>> = {},
+	nameMapping?: Record<string, string>,
 ): FormInput<Args> {
 	return {
 		label,
 		type: FormInputType.SingleChoice,
-		options: getEnumDropdownOptions(enumeration),
+		options: getEnumDropdownOptions(enumeration, nameMapping),
 		current,
 		onChange,
 		...opts,
