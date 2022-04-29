@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { EraseArgs } from '@data-wrangling-components/core'
-import { useSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.jsx'
@@ -18,7 +17,6 @@ import type { StepComponentBaseProps } from '../../types.js'
 export const EraseBase: React.FC<
 	StepComponentBaseProps<EraseArgs> & { columns: string[] }
 > = memo(function EraseBase({ step, onChange, columns }) {
-	const options = useSimpleDropdownOptions(columns)
 	const inputs = useMemo<FormInput<EraseArgs>[]>(
 		() => [
 			selectColumnListInput(step, columns, 'Columns to erase'),
@@ -30,7 +28,7 @@ export const EraseBase: React.FC<
 				onChange: (s, val) => (s.args.value = val),
 			},
 		],
-		[step, options, columns],
+		[step, columns],
 	)
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
