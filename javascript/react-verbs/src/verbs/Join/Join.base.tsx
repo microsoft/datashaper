@@ -9,10 +9,11 @@ import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
-import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import { VerbForm } from '../../common/VerbForm.js'
 import {
+	dropdown,
 	enumDropdown,
-	selectJoinInputsInputs,
+	joinInputs,
 } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
@@ -35,21 +36,19 @@ export const JoinBase: React.FC<
 	const tableOptions = useSimpleDropdownOptions(tables)
 	const inputs = useMemo<FormInput<JoinArgs>[]>(
 		() => [
-			{
-				label: 'Join table',
-				type: FormInputType.SingleChoice,
-				options: tableOptions,
-				current: step.input[NodeInput.Other]?.node as string,
-				onChange: (s, val) =>
-					(s.input[NodeInput.Other] = { node: val as string }),
-			},
+			dropdown(
+				'Join table',
+				tables,
+				step.input[NodeInput.Other]?.node,
+				(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
+			),
 			enumDropdown(
 				'Join strategy',
 				JoinStrategy,
 				step.args.strategy,
 				(s, val) => (s.args.strategy = val as JoinStrategy),
 			),
-			...selectJoinInputsInputs(step, leftColumns, rightColumns),
+			...joinInputs(step, leftColumns, rightColumns),
 		],
 		[step, tableOptions, leftColumns, rightColumns],
 	)

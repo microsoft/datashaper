@@ -4,11 +4,12 @@
  */
 import type { PivotArgs } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
-import { getEnumDropdownOptions,useSimpleDropdownOptions  } from '@data-wrangling-components/react-hooks'
+import { useSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import { enumDropdown } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -36,14 +37,12 @@ export const PivotBase: React.FC<
 				options,
 				onChange: (s, val) => (s.args.value = val as string),
 			},
-			{
-				label: 'Function',
-				type: FormInputType.SingleChoice,
-				options: getEnumDropdownOptions(FieldAggregateOperation),
-				current: step.args.operation,
-				onChange: (s, val) =>
-					(s.args.operation = val as FieldAggregateOperation),
-			},
+			enumDropdown(
+				'Function',
+				FieldAggregateOperation,
+				step.args.operation,
+				(s, val) => (s.args.operation = val as FieldAggregateOperation),
+			),
 		],
 		[step, options],
 	)

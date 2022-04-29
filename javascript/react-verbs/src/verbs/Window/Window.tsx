@@ -4,11 +4,11 @@
  */
 import type { WindowArgs } from '@data-wrangling-components/core'
 import { WindowFunction } from '@data-wrangling-components/core'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
-import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import { VerbForm } from '../../common/VerbForm.js'
+import { enumDropdown } from '../../common/VerbFormFactories.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -19,13 +19,12 @@ export const Window: React.FC<StepComponentProps<WindowArgs>> = memo(
 	function Window({ step, onChange }) {
 		const inputs = useMemo<FormInput<WindowArgs>[]>(
 			() => [
-				{
-					type: FormInputType.SingleChoice,
-					options: getEnumDropdownOptions(WindowFunction),
-					label: 'Function',
-					current: step.args.operation,
-					onChange: (s, val) => (s.args.operation = val as WindowFunction),
-				},
+				enumDropdown(
+					'Function',
+					WindowFunction,
+					step.args.operation,
+					(s, val) => (s.args.operation = val as WindowFunction),
+				),
 			],
 			[step],
 		)

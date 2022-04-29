@@ -9,17 +9,21 @@ import type {
 } from '@data-wrangling-components/core'
 import { toggleListItem } from '@data-wrangling-components/primitives'
 import {
+	getEnumDropdownOptions,
 	getLeftColumn,
 	getRightColumn,
 	getSimpleDropdownOptions,
-	getEnumDropdownOptions,
 } from '@data-wrangling-components/react-hooks'
 import upperFirst from 'lodash-es/upperFirst.js'
 
-import type { FormInput, SingleChoiceFormInput } from './VerbForm.js'
+import type {
+	CheckboxFormInput,
+	FormInput,
+	SingleChoiceFormInput,
+} from './VerbForm.js'
 import { FormInputType } from './VerbForm.js'
 
-export function selectColumnListInput(
+export function columnList(
 	step: Step<InputColumnListArgs>,
 	columns: string[],
 	label = 'Columns',
@@ -34,38 +38,53 @@ export function selectColumnListInput(
 	}
 }
 
-export function selectJoinInputsInputs(
+export function joinInputs(
 	step: Step<JoinArgs>,
 	leftColumns: string[],
 	rightColumns: string[],
 	label = 'join',
 ): FormInput<JoinArgs>[] {
 	return [
-		{
-			label: `Input ${label} key`,
-			type: FormInputType.SingleChoice,
-			required: true,
-			options: getSimpleDropdownOptions(leftColumns),
-			current: getLeftColumn(step),
-			onChange: (s, opt) => {
+		dropdown(
+			`Input ${label} key`,
+			leftColumns,
+			getLeftColumn(step),
+			(s, opt) => {
 				if (!s.args.on) {
 					s.args.on = []
 				}
 				s.args.on[0] = opt as string
 			},
-		},
-		{
-			label: `${upperFirst(label)} table key`,
-			type: FormInputType.SingleChoice,
-			options: getSimpleDropdownOptions(rightColumns),
-			current: getRightColumn(step),
-			onChange: (s, opt) => {
+			{ required: true },
+		),
+		dropdown(
+			`${upperFirst(label)} table key`,
+			rightColumns,
+			getRightColumn(step),
+			(s, opt) => {
 				if (s.args.on) {
 					s.args.on[1] = opt as string
 				}
 			},
-		},
+		),
 	]
+}
+
+export function dropdown<Args>(
+	label: string,
+	values: string[],
+	current: SingleChoiceFormInput<Args>['current'],
+	onChange: SingleChoiceFormInput<Args>['onChange'],
+	opts: Partial<SingleChoiceFormInput<Args>> = {},
+): FormInput<Args> {
+	return {
+		label,
+		type: FormInputType.SingleChoice,
+		options: getSimpleDropdownOptions(values),
+		current,
+		onChange,
+		...opts,
+	}
 }
 
 export function enumDropdown<E, Args>(
@@ -73,6 +92,7 @@ export function enumDropdown<E, Args>(
 	enumeration: E,
 	current: SingleChoiceFormInput<Args>['current'],
 	onChange: SingleChoiceFormInput<Args>['onChange'],
+	opts: Partial<SingleChoiceFormInput<Args>> = {},
 ): FormInput<Args> {
 	return {
 		label,
@@ -80,5 +100,21 @@ export function enumDropdown<E, Args>(
 		options: getEnumDropdownOptions(enumeration),
 		current,
 		onChange,
+		...opts,
+	}
+}
+
+export function checkbox<Args>(
+	label: string,
+	current: CheckboxFormInput<Args>['current'],
+	onChange: CheckboxFormInput<Args>['onChange'],
+	opts: Partial<CheckboxFormInput<Args>> = {},
+): FormInput<Args> {
+	return {
+		label,
+		type: FormInputType.Checkbox,
+		current,
+		onChange,
+		...opts,
 	}
 }

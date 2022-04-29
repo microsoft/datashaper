@@ -4,14 +4,12 @@
  */
 import type { DeriveArgs } from '@data-wrangling-components/core'
 import { MathOperator } from '@data-wrangling-components/core'
-import {
-	getEnumDropdownOptions,
-	useSimpleDropdownOptions,
-} from '@data-wrangling-components/react-hooks'
+import { useSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.jsx'
 import { FormInputType, VerbForm } from '../../common/VerbForm.jsx'
+import { enumDropdown } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -31,14 +29,13 @@ export const DeriveBase: React.FC<
 				options,
 				onChange: (s, arg) => (s.args.column1 = arg as string),
 			},
-			{
-				label: 'Operation',
-				type: FormInputType.SingleChoice,
-				current: step.args.operator,
-				required: true,
-				options: getEnumDropdownOptions(MathOperator),
-				onChange: (s, arg) => (s.args.operator = arg as MathOperator),
-			},
+			enumDropdown(
+				'Operation',
+				MathOperator,
+				step.args.operator,
+				(s, arg) => (s.args.operator = arg as MathOperator),
+				{ required: true },
+			),
 			{
 				label: 'Column two',
 				type: FormInputType.SingleChoice,
