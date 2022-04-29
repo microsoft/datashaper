@@ -7,9 +7,10 @@ import { JoinStrategy } from '@data-wrangling-components/core'
 import { useSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
-import type { StepComponentBaseProps } from '../../types.js'
+
 import type { FormInput } from '../../common/VerbForm.js'
-import { VerbForm, FormInputType } from '../../common/VerbForm.js'
+import { FormInputType,VerbForm } from '../../common/VerbForm.js'
+import type { StepComponentBaseProps } from '../../types.js'
 
 /**
  * Provides inputs for a Join step.

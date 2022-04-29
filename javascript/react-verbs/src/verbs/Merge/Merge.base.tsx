@@ -4,12 +4,13 @@
  */
 import type { MergeArgs } from '@data-wrangling-components/core'
 import { MergeStrategy } from '@data-wrangling-components/core'
+import { getEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
+
 import type { FormInput } from '../../common/VerbForm.js'
-import { VerbForm, FormInputType } from '../../common/VerbForm.js'
+import { FormInputType,VerbForm } from '../../common/VerbForm.js'
 import { selectColumnListInput } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
 
 /**
  * Just the to/value inputs for an impute.

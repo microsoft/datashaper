@@ -5,8 +5,8 @@
 import type { RenameArgs, Step } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
 import {
-	useTableColumnNames,
 	useSimpleDropdownOptions,
+	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
 import type { IDropdownOption } from '@fluentui/react'
 import {

@@ -4,12 +4,12 @@
  */
 import type { RollupArgs } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
-import { memo, useMemo } from 'react'
 import { getEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
+import { memo, useMemo } from 'react'
 
-import type { StepComponentProps } from '../../types.js'
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import type { StepComponentProps } from '../../types.js'
 
 /**
  * Just the column/op inputs for an rollup.

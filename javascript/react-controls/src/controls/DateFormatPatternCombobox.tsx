@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useDateFormatPatternOptions } from '@data-wrangling-components/react-hooks'
 import type { IComboBoxProps } from '@fluentui/react'
 import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
-import { useDateFormatPatternOptions } from '@data-wrangling-components/react-hooks'
 import { dropdownStyles } from '../styles.js'
 
 export interface DateFormatPatternComboboxProps

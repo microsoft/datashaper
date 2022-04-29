@@ -4,9 +4,10 @@
  */
 import type { FillArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
+
+import type { FormInput} from '../../common/VerbForm.js';
+import { FormInputType , VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentProps } from '../../types.js'
-import { FormInput, FormInputType } from '../../common/VerbForm.js'
-import { VerbForm } from '../../common/VerbForm.js'
 
 /**
  * Provides inputs for a Fill step.

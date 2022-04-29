@@ -5,6 +5,7 @@
 import type { JoinArgs } from '@data-wrangling-components/core'
 import { useTableNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
+
 import type { StepComponentProps } from '../../types.js'
 import { JoinBase } from './Join.base.js'
 

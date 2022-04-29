@@ -87,8 +87,8 @@ export function getDateFormatPatternOptions(): IDropdownOption[] {
 export function useTableColumnNames(
 	table: ColumnTable | undefined,
 	filter?: (name: string) => boolean,
-) {
-	return useMemo(() => table?.columnNames(filter) || [], [table])
+): string[] {
+	return useMemo(() => table?.columnNames(filter) || [], [table, filter])
 }
 
 export function useColumnValueOptions(

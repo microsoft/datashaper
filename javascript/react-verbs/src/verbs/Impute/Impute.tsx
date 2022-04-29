@@ -5,8 +5,9 @@
 import type { ImputeArgs } from '@data-wrangling-components/core'
 import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
-import type { StepComponentProps } from '../../types.js'
+
 import { withLoadedTable } from '../../common/withLoadedTable.js'
+import type { StepComponentProps } from '../../types.js'
 import { ImputeBase } from './Impute.base.js'
 
 /**

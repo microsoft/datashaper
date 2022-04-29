@@ -15,8 +15,8 @@ import {
 	narrowDropdownStyles,
 } from '@data-wrangling-components/react-controls'
 import {
-	useTableColumnNames,
 	useSimpleDropdownOptions,
+	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
 import { DataType } from '@essex/arquero'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'

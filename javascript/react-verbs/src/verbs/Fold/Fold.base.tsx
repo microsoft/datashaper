@@ -4,10 +4,11 @@
  */
 import type { FoldArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import type { StepComponentBaseProps } from '../../types.js'
-import { selectColumnListInput } from '../../common/VerbFormFactories.js'
+
 import type { FormInput } from '../../common/VerbForm.jsx'
-import { VerbForm, FormInputType } from '../../common/VerbForm.jsx'
+import { FormInputType, VerbForm } from '../../common/VerbForm.jsx'
+import { selectColumnListInput } from '../../common/VerbFormFactories.js'
+import type { StepComponentBaseProps } from '../../types.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.
@@ -37,7 +38,7 @@ export const FoldBase: React.FC<
 				onChange: (s, val) => (s.args.to![1] = val as string),
 			},
 		],
-		[step],
+		[step, columns],
 	)
 
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />

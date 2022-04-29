@@ -1,9 +1,13 @@
-import type { Step } from '@data-wrangling-components/core'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type { InputColumnListArgs,Step  } from '@data-wrangling-components/core'
+import { toggleListItem } from '@data-wrangling-components/primitives'
+import { getSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
+
 import type { FormInput } from './VerbForm.js'
 import { FormInputType } from './VerbForm.js'
-import type { InputColumnListArgs } from '@data-wrangling-components/core'
-import { getSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
-import { toggleListItem } from '@data-wrangling-components/primitives'
 
 export function selectColumnListInput(
 	step: Step<InputColumnListArgs>,

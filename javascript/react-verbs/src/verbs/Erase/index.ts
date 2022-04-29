@@ -2,6 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './Erase.js'
 export * from './Erase.base.js'
+export * from './Erase.js'
 export * from './EraseDescription.js'

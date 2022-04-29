@@ -6,8 +6,8 @@ import type { JoinArgs, Step } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
 import {
-	useTableColumnNames,
 	useSimpleDropdownOptions,
+	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import type { IDropdownOption } from '@fluentui/react'

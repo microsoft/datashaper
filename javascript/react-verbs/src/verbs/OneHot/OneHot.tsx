@@ -4,9 +4,10 @@
  */
 import type { OnehotArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
+
+import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentProps } from '../../types.js'
-import type { FormInput } from '../../common/VerbForm.js'
 
 /**
  * Provides inputs for a OneHot step.

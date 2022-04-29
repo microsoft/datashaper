@@ -9,8 +9,8 @@ import type {
 } from '@data-wrangling-components/core'
 import { SortInstruction } from '@data-wrangling-components/react-controls'
 import {
-	useTableColumnNames,
 	useSimpleDropdownOptions,
+	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
 import { SortDirection } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'

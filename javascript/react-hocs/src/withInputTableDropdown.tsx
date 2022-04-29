@@ -5,8 +5,8 @@
 import { isInputTableStep } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
 import {
-	useTableNames,
 	useSimpleDropdownOptions,
+	useTableNames,
 } from '@data-wrangling-components/react-hooks'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {

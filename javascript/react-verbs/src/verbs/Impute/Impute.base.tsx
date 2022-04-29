@@ -5,10 +5,10 @@
 import type { ImputeArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
-import type { StepComponentBaseProps } from '../../types.js'
 import type { FormInput } from '../../common/VerbForm.js'
-import { VerbForm, FormInputType } from '../../common/VerbForm.js'
+import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import { selectColumnListInput } from '../../common/VerbFormFactories.js'
+import type { StepComponentBaseProps } from '../../types.js'
 
 /**
  * Just the to/value inputs for an impute.
@@ -27,7 +27,7 @@ export const ImputeBase: React.FC<
 				onChange: (s, val) => (s.args.value = val as string),
 			},
 		],
-		[step],
+		[step, columns],
 	)
 
 	return <VerbForm step={step} onChange={onChange} inputs={inputs} />

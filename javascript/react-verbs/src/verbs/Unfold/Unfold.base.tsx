@@ -5,9 +5,10 @@
 import type { UnfoldArgs } from '@data-wrangling-components/core'
 import { useSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
-import type { StepComponentBaseProps } from '../../types.js'
+
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import type { StepComponentBaseProps } from '../../types.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

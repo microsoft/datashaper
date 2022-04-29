@@ -3,11 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { MergeArgs } from '@data-wrangling-components/core'
+import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
+
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import { MergeBase } from './Merge.base.js'
-import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 
 /**
  * Just the to/value inputs for an impute.

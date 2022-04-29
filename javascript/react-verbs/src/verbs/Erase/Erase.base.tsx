@@ -30,7 +30,7 @@ export const EraseBase: React.FC<
 				onChange: (s, val) => (s.args.value = val),
 			},
 		],
-		[step, options],
+		[step, options, columns],
 	)
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })

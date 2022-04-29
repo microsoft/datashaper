@@ -5,6 +5,7 @@
 import type { EraseArgs } from '@data-wrangling-components/core'
 import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
+
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 import { EraseBase } from './Erase.base.js'

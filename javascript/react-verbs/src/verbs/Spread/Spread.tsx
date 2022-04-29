@@ -8,8 +8,8 @@ import {
 	TableColumnDropdown,
 } from '@data-wrangling-components/react-controls'
 import {
-	useTableColumnNames,
 	useSimpleDropdownOptions,
+	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'

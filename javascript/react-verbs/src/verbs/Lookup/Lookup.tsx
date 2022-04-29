@@ -5,8 +5,8 @@
 import type { LookupArgs } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
 import {
-	useTableNames,
 	useSimpleDropdownOptions,
+	useTableNames,
 } from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
