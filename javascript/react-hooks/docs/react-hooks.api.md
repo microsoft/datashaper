@@ -49,10 +49,10 @@ export function useSimpleDropdownOptions(list: string[]): IDropdownOption[];
 // @public (undocumented)
 export function useTableColumnNames(table: ColumnTable | undefined, filter?: (name: string) => boolean): string[];
 
-// Warning: (ae-missing-release-tag) "useTableOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useTableNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useTableOptions(store?: TableStore): IDropdownOption[];
+export function useTableNames(store?: TableStore): string[];
 
 // (No @packageDocumentation comment for this package)
 

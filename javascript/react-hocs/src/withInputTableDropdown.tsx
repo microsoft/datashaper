@@ -4,7 +4,10 @@
  */
 import { isInputTableStep } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
-import { useTableOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
 import {
 	LeftAlignedRow,
@@ -27,7 +30,8 @@ export function withInputTableDropdown(
 	return Component => {
 		const WithTableDropdown: React.FC<StepComponentProps> = props => {
 			const { step, store, onChange } = props
-			const tableOptions = useTableOptions(store)
+			const tables = useTableNames(store)
+			const tableOptions = useSimpleDropdownOptions(tables)
 			const handleTableChange = useHandleDropdownChange(
 				step,
 				(s, val) => (s.input[NodeInput.Source] = { node: val as string }),

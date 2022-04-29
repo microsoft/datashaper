@@ -4,7 +4,10 @@
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
-import { useTableOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -52,7 +55,8 @@ function useOthers(
 	onChange?: (step: Step) => void,
 	store?: TableStore,
 ) {
-	const tableOptions = useTableOptions(store)
+	const tableNames = useTableNames(store)
+	const tableOptions = useSimpleDropdownOptions(tableNames)
 	return useMemo(() => {
 		return (step.input.others || EMPTY).map((input, index) => {
 			const other = input.node

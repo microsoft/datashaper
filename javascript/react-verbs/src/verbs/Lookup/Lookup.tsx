@@ -4,7 +4,10 @@
  */
 import type { LookupArgs } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
-import { useTableOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useTableNames,
+	useSimpleDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -26,7 +29,8 @@ export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
 			(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
 			onChange,
 		)
-		const tableOptions = useTableOptions(store)
+		const tables = useTableNames(store)
+		const tableOptions = useSimpleDropdownOptions(tables)
 
 		return (
 			<Container>

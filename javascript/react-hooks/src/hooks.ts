@@ -125,14 +125,14 @@ export function useColumnValueOptions(
 }
 
 /**
- * Creates a list of dropdown options from the tables in a store
+ * Creates a list of table-names from the tables in a store
  * TODO: for any given step, we should only show the tables created *prior* to this step,
  * potentially via an optional filter callback on store.list.
  * As it is, whenever the store is updated all the table dropdowns get the results.
  * @param store -
  * @returns
  */
-export function useTableOptions(store?: TableStore): IDropdownOption[] {
+export function useTableNames(store?: TableStore): string[] {
 	// we won't actually get an updated store reference, so we'll track
 	// whether updates are needed using a change listener and flag
 	const [dirty, setDirty] = useState<boolean>(true)
@@ -146,5 +146,5 @@ export function useTableOptions(store?: TableStore): IDropdownOption[] {
 			setList(store?.list().sort() || [])
 		}
 	}, [store, dirty, setDirty, setList])
-	return useSimpleDropdownOptions(list)
+	return list
 }
