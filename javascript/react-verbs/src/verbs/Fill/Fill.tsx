@@ -3,16 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { FillArgs } from '@data-wrangling-components/core'
-import { dropdownStyles } from '@data-wrangling-components/react-controls'
-import { TextField } from '@fluentui/react'
-import { memo } from 'react'
-import styled from 'styled-components'
-
-import {
-	LeftAlignedRow,
-	useTextFieldChangeHandler,
-} from '../../common/index.js'
+import { memo, useMemo } from 'react'
 import type { StepComponentProps } from '../../types.js'
+import { FormInput, FormInputType } from '../../common/VerbForm.js'
+import { VerbForm } from '../../common/VerbForm.js'
 
 /**
  * Provides inputs for a Fill step.
@@ -21,30 +15,18 @@ export const Fill: React.FC<StepComponentProps<FillArgs>> = memo(function Fill({
 	step,
 	onChange,
 }) {
-	const handleValueChange = useTextFieldChangeHandler(
-		step,
-		(s, val) => (s.args.value = val),
-		onChange,
+	const inputs = useMemo<FormInput<FillArgs>[]>(
+		() => [
+			{
+				label: 'Fill value',
+				placeholder: 'text, number, or boolean',
+				type: FormInputType.Text,
+				current: step.args.value,
+				onChange: (s, val) => (s.args.value = val as string),
+			},
+		],
+		[step],
 	)
 
-	return (
-		<Container>
-			<LeftAlignedRow>
-				<TextField
-					required
-					label={'Fill value'}
-					value={step.args.value && `${step.args.value}`}
-					placeholder={'text, number, or boolean'}
-					styles={dropdownStyles}
-					onChange={handleValueChange}
-				/>
-			</LeftAlignedRow>
-		</Container>
-	)
+	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`

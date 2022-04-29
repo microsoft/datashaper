@@ -229,6 +229,13 @@ export const FilterDescription: React.FC<StepDescriptionProps<FilterArgs>>;
 // @public
 export const Fold: React.FC<StepComponentProps<FoldArgs>>;
 
+// Warning: (ae-missing-release-tag) "FoldBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const FoldBase: React.FC<StepComponentBaseProps<FoldArgs> & {
+    columns: string[];
+}>;
+
 // Warning: (ae-missing-release-tag) "FoldDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
