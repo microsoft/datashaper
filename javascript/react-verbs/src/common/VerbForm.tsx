@@ -12,10 +12,10 @@ import {
 	SpinButton,
 	TextField,
 } from '@fluentui/react'
-import styled from 'styled-components'
 import noop from 'lodash-es/noop'
 import { Fragment, memo, useMemo } from 'react'
 import { Case, Switch } from 'react-if'
+import styled from 'styled-components'
 
 import type { StepChangeFunction } from '../types.js'
 import {
