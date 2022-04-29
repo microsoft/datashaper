@@ -1,5 +1,9 @@
 releases:
+  "@data-wrangling-components/core": minor
+  "@data-wrangling-components/primitives": patch
   "@data-wrangling-components/react": patch
+  "@data-wrangling-components/react-controls": patch
   "@data-wrangling-components/react-hocs": patch
+  "@data-wrangling-components/react-hooks": patch
   "@data-wrangling-components/react-verbs": patch
   "@data-wrangling-components/webapp": patch
