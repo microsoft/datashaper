@@ -1,21 +1,30 @@
 import { memo, useMemo, Fragment } from 'react'
 import {
 	Checkbox,
+	ComboBox,
 	Dropdown,
+	IComboBoxOption,
 	IDropdownOption,
 	Position,
 	SpinButton,
+	TextField,
 } from '@fluentui/react'
 import { Switch, Case } from 'react-if'
 import {
 	useCheckboxChangeHandler,
+	useComboBoxChangeHandler,
 	useDropdownChangeHandler,
 	useSpinButtonChangeHandler,
+	useTextFieldChangeHandler,
+	useComboBoxInputValueChangeHandler,
 } from './hooks.js'
 import type { StepChangeFunction } from '../types.js'
 import type { Step } from '@data-wrangling-components/core'
 
-export interface FormInputBase {
+export interface FormInputBase<
+	T,
+	OnChangeHandler = (step: Step<T>, optionKey: unknown | undefined) => void,
+> {
 	/**
 	 * The user-friendly form label
 	 */
@@ -42,9 +51,11 @@ export interface FormInputBase {
 	wrapper?: React.ComponentType
 
 	styles?: any
+
+	onChange: OnChangeHandler
 }
 
-export interface SingleChoiceFormInput<T> extends FormInputBase {
+export interface SingleChoiceFormInput<T> extends FormInputBase<T> {
 	type: FormInputType.SingleChoice
 
 	/**
@@ -56,11 +67,47 @@ export interface SingleChoiceFormInput<T> extends FormInputBase {
 	 * The form input value or selected key (if enum)
 	 */
 	current: number | string
-
-	onChange: (step: Step<T>, optionKey: string | number | undefined) => void
 }
 
-export interface MultiChoiceFormInput<T> extends FormInputBase {
+export interface ComboBoxFormInput<T>
+	extends FormInputBase<
+		T,
+		(
+			step: Step<T>,
+			option: string | number | undefined,
+			value: string | undefined,
+		) => void
+	> {
+	type: FormInputType.ComboBox
+
+	/**
+	 * The form input options (required if type is enum)
+	 */
+	options?: IComboBoxOption[]
+
+	/**
+	 * The form input value or selected key (if enum)
+	 */
+	current: string | undefined
+
+	onInputValueChange?: (step: Step<T>, value: string | undefined) => void
+}
+
+export interface TextFormInput<T> extends FormInputBase<T> {
+	type: FormInputType.Text
+
+	/**
+	 * The form input options (required if type is enum)
+	 */
+	options?: IDropdownOption[]
+
+	/**
+	 * The form input value or selected key (if enum)
+	 */
+	current: string | undefined
+}
+
+export interface MultiChoiceFormInput<T> extends FormInputBase<T> {
 	type: FormInputType.MultiChoice
 
 	/**
@@ -72,22 +119,18 @@ export interface MultiChoiceFormInput<T> extends FormInputBase {
 	 * The form input value or selected key (if enum)
 	 */
 	current?: string[] | undefined
-
-	onChange: (step: Step<T>, optionKey: string | number | undefined) => void
 }
 
-export interface CheckboxFormInput<T> extends FormInputBase {
+export interface CheckboxFormInput<T> extends FormInputBase<T> {
 	type: FormInputType.Checkbox
 
 	/**
 	 * The form input value or selected key (if enum)
 	 */
 	current: boolean | undefined
-
-	onChange: (step: Step<T>, optionKey: boolean | undefined) => void
 }
 
-export interface NumberSpinnerFormInput<T> extends FormInputBase {
+export interface NumberSpinnerFormInput<T> extends FormInputBase<T> {
 	type: FormInputType.NumberSpinner
 	min?: number
 	max?: number
@@ -96,7 +139,6 @@ export interface NumberSpinnerFormInput<T> extends FormInputBase {
 	 * The form input value or selected key (if enum)
 	 */
 	current: number | undefined
-	onChange: (step: Step<T>, value: string | undefined) => void
 }
 
 export type FormInput<T> =
@@ -104,12 +146,16 @@ export type FormInput<T> =
 	| MultiChoiceFormInput<T>
 	| NumberSpinnerFormInput<T>
 	| CheckboxFormInput<T>
+	| TextFormInput<T>
+	| ComboBoxFormInput<T>
 
 export enum FormInputType {
 	SingleChoice = 'single_choice',
 	MultiChoice = 'multi_choice',
+	ComboBox = 'combobox',
 	NumberSpinner = 'number_spinner',
 	Checkbox = 'checkbox',
+	Text = 'text',
 }
 
 export const VerbInput: React.FC<{
@@ -166,6 +212,13 @@ const Input: React.FC<{
 			<Case condition={inputType == FormInputType.Checkbox}>
 				<CheckboxInput
 					input={input as CheckboxFormInput<unknown>}
+					step={step}
+					onChange={onChange}
+				/>
+			</Case>
+			<Case condition={inputType == FormInputType.Text}>
+				<TextInput
+					input={input as TextFormInput<unknown>}
 					step={step}
 					onChange={onChange}
 				/>
@@ -249,6 +302,44 @@ const MultiChoiceInput: React.FC<{
 	)
 })
 
+const ComboBoxInput: React.FC<{
+	input: ComboBoxFormInput<unknown>
+	step: Step<unknown>
+	onChange?: StepChangeFunction<unknown>
+}> = memo(function ComboBoxInput({
+	step,
+	input: {
+		label,
+		placeholder,
+		current,
+		required,
+		options,
+		wrapper: Wrapper = Fragment,
+		onChange: updater,
+		onInputValueChange,
+	},
+	onChange,
+}) {
+	const changeHandler = useComboBoxChangeHandler(step, updater, onChange)
+	const valueChangeHandler =
+		onInputValueChange &&
+		useComboBoxInputValueChangeHandler(step, onInputValueChange, onChange)
+	return (
+		<Wrapper>
+			<ComboBox
+				required={required}
+				label={label}
+				placeholder={placeholder}
+				styles={dropdownStyles}
+				selectedKey={current as number | string}
+				options={options!}
+				onChange={changeHandler}
+				onInputValueChange={valueChangeHandler}
+			/>
+		</Wrapper>
+	)
+})
+
 const NumberSpinnerInput: React.FC<{
 	input: NumberSpinnerFormInput<unknown>
 	step: Step<unknown>
@@ -307,6 +398,34 @@ const CheckboxInput: React.FC<{
 			<Checkbox
 				label={label}
 				checked={current}
+				onChange={changeHandler}
+				styles={styles}
+			/>
+		</Wrapper>
+	)
+})
+
+const TextInput: React.FC<{
+	input: TextFormInput<unknown>
+	step: Step<unknown>
+	onChange?: StepChangeFunction<unknown>
+}> = memo(function TextInput({
+	step,
+	input: {
+		label,
+		current,
+		wrapper: Wrapper = Fragment,
+		onChange: updater,
+		styles,
+	},
+	onChange,
+}) {
+	const changeHandler = useTextFieldChangeHandler(step, updater, onChange)
+	return (
+		<Wrapper>
+			<TextField
+				label={label}
+				value={current}
 				onChange={changeHandler}
 				styles={styles}
 			/>

@@ -9,7 +9,11 @@ import type {
 } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import { columnType, DataType } from '@essex/arquero'
-import type { IDropdownOption } from '@fluentui/react'
+import type {
+	IComboBox,
+	IComboBoxOption,
+	IDropdownOption,
+} from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { produce } from 'immer'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -50,6 +54,98 @@ export function getDropdownChangeHandler<T extends object | void | unknown>(
 		onChange?.(
 			produce(step, draft => {
 				updateFn(draft as Step<T>, option?.key)
+			}),
+		)
+	}
+}
+
+// #endregion
+
+// #region ComboBox Change Handler
+
+export type ComboBoxChangeHandler = (
+	event: React.FormEvent<IComboBox>,
+	option: IComboBoxOption | undefined,
+	index: number | undefined,
+	value?: string | undefined,
+) => void
+
+/**
+ * Creates a callback handler for changing the step based on a combobox value.
+ * This only handles basic cases where the combobox option key can be set on the
+ * step using an object path.
+ */
+export function useComboBoxChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (
+		step: Step<T>,
+		optionKey: string | number | undefined,
+		value: string | undefined,
+	) => void,
+	onChange?: StepChangeFunction<T>,
+): ComboBoxChangeHandler {
+	return useCallback(getComboBoxChangeHandler(step, updateFn, onChange), [
+		step,
+		onChange,
+		updateFn,
+	])
+}
+
+export function getComboBoxChangeHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (
+		step: Step<T>,
+		optionKey: string | number | undefined,
+		value: string | undefined,
+	) => void,
+	onChange?: StepChangeFunction<T>,
+): ComboBoxChangeHandler {
+	return (_event, option, _index, value) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, option?.key, value)
+			}),
+		)
+	}
+}
+
+// #endregion
+
+// #region ComboBox Change Handler
+
+export type ComboBoxInputValueChangeHandler = (
+	value?: string | undefined,
+) => void
+
+/**
+ * Creates a callback handler for changing the step based on a combobox value.
+ * This only handles basic cases where the combobox option key can be set on the
+ * step using an object path.
+ */
+export function useComboBoxInputValueChangeHandler<
+	T extends object | void | unknown,
+>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, value: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): ComboBoxInputValueChangeHandler {
+	return useCallback(
+		getComboBoxInputValueChangeHandler(step, updateFn, onChange),
+		[step, onChange, updateFn],
+	)
+}
+
+export function getComboBoxInputValueChangeHandler<
+	T extends object | void | unknown,
+>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, value: string | undefined) => void,
+	onChange?: StepChangeFunction<T>,
+): ComboBoxInputValueChangeHandler {
+	return value => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(draft as Step<T>, value)
 			}),
 		)
 	}
