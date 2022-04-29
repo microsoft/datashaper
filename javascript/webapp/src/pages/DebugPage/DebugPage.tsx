@@ -15,7 +15,7 @@ import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useCallback, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { from } from 'rxjs'
 import styled from 'styled-components'
 
@@ -58,6 +58,15 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 		new Map<string, TableContainer>(),
 	)
 	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
+
+	const worker = useMemo(() => new Worker('worker.js'), [])
+	worker.addEventListener('message', (ev: any) => {
+		console.log('WORKER MESSAGE', ev)
+	})
+	useEffect(() => {
+		console.log('SEND STEPS')
+		worker.postMessage({ action: 'STEPS_CHANGED', payload: steps })
+	}, [steps])
 
 	const [features, setFeatures] = useState<DetailsListFeatures>({
 		statsColumnHeaders: true,
