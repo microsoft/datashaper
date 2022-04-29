@@ -74,8 +74,7 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 
 			<LinkSection>
 				<H3>Links</H3>
-
-				<ListItem to={'/prepare'}>Prepare Data Page</ListItem>
+				<ListItem to={'/'}>Prepare Data Page</ListItem>
 				<ListItem to={'/debug'}>Debug Page</ListItem>
 				<ListItem to={'/performance'}>Performance Test Page</ListItem>
 			</LinkSection>
