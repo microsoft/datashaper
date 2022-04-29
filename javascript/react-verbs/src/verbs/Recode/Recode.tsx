@@ -86,7 +86,7 @@ function useRecodePairs(
 				/>
 			)
 		})
-	}, [table, step, values, dataType, onChange, onDelete])
+	}, [table, step, dataType, onChange, onDelete])
 }
 
 const ColumnPair: React.FC<{

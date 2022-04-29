@@ -3,9 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
-import type {
-	IComboBoxOption,
-	IDropdownOption} from '@fluentui/react';
+import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import {
 	Checkbox,
 	ComboBox,
@@ -14,8 +12,9 @@ import {
 	SpinButton,
 	TextField,
 } from '@fluentui/react'
-import { Fragment,memo, useMemo } from 'react'
-import { Case,Switch } from 'react-if'
+import noop from 'lodash-es/noop'
+import { Fragment, memo, useMemo } from 'react'
+import { Case, Switch } from 'react-if'
 
 import type { StepChangeFunction } from '../types.js'
 import {
@@ -179,7 +178,7 @@ export const VerbForm: React.FC<{
 					key={`verb-${input.label}-${index}`}
 				/>
 			)),
-		[inputs],
+		[inputs, onChange, step],
 	)
 	return <>{rows}</>
 })
@@ -192,16 +191,16 @@ const Input: React.FC<{
 	const condition = input.condition ?? true
 	const inputType: FormInputType = input.type
 
-	return condition == false ? null : (
+	return condition === false ? null : (
 		<Switch>
-			<Case condition={inputType == FormInputType.SingleChoice}>
+			<Case condition={inputType === FormInputType.SingleChoice}>
 				<SingleChoiceInput
 					input={input as SingleChoiceFormInput<unknown>}
 					step={step}
 					onChange={onChange}
 				/>
 			</Case>
-			<Case condition={inputType == FormInputType.MultiChoice}>
+			<Case condition={inputType === FormInputType.MultiChoice}>
 				<MultiChoiceInput
 					input={input as MultiChoiceFormInput<unknown>}
 					step={step}
@@ -215,21 +214,21 @@ const Input: React.FC<{
 					onChange={onChange}
 				/>
 			</Case>
-			<Case condition={inputType == FormInputType.Checkbox}>
+			<Case condition={inputType === FormInputType.Checkbox}>
 				<CheckboxInput
 					input={input as CheckboxFormInput<unknown>}
 					step={step}
 					onChange={onChange}
 				/>
 			</Case>
-			<Case condition={inputType == FormInputType.Text}>
+			<Case condition={inputType === FormInputType.Text}>
 				<TextInput
 					input={input as TextFormInput<unknown>}
 					step={step}
 					onChange={onChange}
 				/>
 			</Case>
-			<Case condition={inputType == FormInputType.ComboBox}>
+			<Case condition={inputType === FormInputType.ComboBox}>
 				<ComboBoxInput
 					input={input as ComboBoxFormInput<unknown>}
 					step={step}
@@ -334,9 +333,11 @@ const ComboBoxInput: React.FC<{
 	onChange,
 }) {
 	const changeHandler = useComboBoxChangeHandler(step, updater, onChange)
-	const valueChangeHandler =
-		onInputValueChange &&
-		useComboBoxInputValueChangeHandler(step, onInputValueChange, onChange)
+	const valueChangeHandler = useComboBoxInputValueChangeHandler(
+		step,
+		onInputValueChange || noop,
+		onChange,
+	)
 	return (
 		<Wrapper>
 			<ComboBox

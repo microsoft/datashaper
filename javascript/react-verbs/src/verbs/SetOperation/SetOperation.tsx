@@ -92,7 +92,7 @@ function useOthers(
 				</LeftAlignedRow>
 			)
 		})
-	}, [step, store, onChange])
+	}, [step, store, tableOptions, onChange])
 }
 
 const EMPTY: any[] = []

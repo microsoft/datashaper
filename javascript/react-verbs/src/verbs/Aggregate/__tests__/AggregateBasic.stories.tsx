@@ -2,18 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FieldAggregateOperation,Verb } from '@data-wrangling-components/core'
+import { FieldAggregateOperation, Verb } from '@data-wrangling-components/core'
 
 import { AggregateBasic } from '../AggregateBasic.js'
 
-export default {
+const meta = {
 	title: 'Aggregate',
 	meta: {
 		browsers: ['chrome'],
 	},
 }
+export default meta
 
-export const Basic = () => (
+export const Basic: React.FC = () => (
 	<AggregateBasic
 		step={{
 			id: 'agg1',
@@ -28,6 +29,6 @@ export const Basic = () => (
 			output: {},
 		}}
 		columnOptions={[]}
-		onChange={(...e) => console.log('onchange', ...e)}
+		onChange={(...e: any) => console.log('onchange', ...e)}
 	/>
 )

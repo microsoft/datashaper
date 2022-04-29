@@ -7,8 +7,8 @@ import { toggleListItem } from '@data-wrangling-components/primitives'
 import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
-import type { FormInput} from '../../common/VerbForm.jsx';
-import { FormInputType,VerbForm } from '../../common/VerbForm.jsx'
+import type { FormInput } from '../../common/VerbForm.jsx'
+import { FormInputType, VerbForm } from '../../common/VerbForm.jsx'
 import { withLoadedTable } from '../../common/withLoadedTable.js'
 import type { StepComponentProps } from '../../types.js'
 
@@ -37,7 +37,7 @@ export const Erase: React.FC<StepComponentProps<EraseArgs>> = memo(
 					onChange: (s, val) => (s.args.value = val),
 				},
 			],
-			[step],
+			[step, options],
 		)
 		return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 	}),

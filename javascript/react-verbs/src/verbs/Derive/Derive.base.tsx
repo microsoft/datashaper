@@ -8,8 +8,8 @@ import { getEnumDropdownOptions } from '@data-wrangling-components/react-control
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
-import type { FormInput} from '../../common/VerbForm.jsx';
-import { FormInputType,VerbForm } from '../../common/VerbForm.jsx'
+import type { FormInput } from '../../common/VerbForm.jsx'
+import { FormInputType, VerbForm } from '../../common/VerbForm.jsx'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -44,7 +44,7 @@ export const DeriveBase: React.FC<
 				onChange: (s, arg) => (s.args.column2 = arg as string),
 			},
 		],
-		[step],
+		[step, options],
 	)
 
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />

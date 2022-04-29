@@ -12,7 +12,7 @@ import {
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
-import type { FormInput} from '../../common/VerbForm.js';
+import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
@@ -44,7 +44,7 @@ export const BooleanLogicBase: React.FC<
 				onChange: (s, opt) => (s.args.operator = opt as BooleanOperator),
 			},
 		],
-		[stop, options],
+		[step, options],
 	)
 
 	return <VerbForm step={step} onChange={onChange} inputs={inputs} />

@@ -38,6 +38,7 @@ export function useDropdownChangeHandler<T extends object | void | unknown>(
 	updateFn: (step: Step<T>, optionKey: string | number | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): DropdownChangeHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
 	return useCallback(getDropdownChangeHandler(step, updateFn, onChange), [
 		step,
 		onChange,
@@ -84,6 +85,7 @@ export function useComboBoxChangeHandler<T extends object | void | unknown>(
 	) => void,
 	onChange?: StepChangeFunction<T>,
 ): ComboBoxChangeHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
 	return useCallback(getComboBoxChangeHandler(step, updateFn, onChange), [
 		step,
 		onChange,
@@ -129,6 +131,7 @@ export function useComboBoxInputValueChangeHandler<
 	updateFn: (step: Step<T>, value: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): ComboBoxInputValueChangeHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
 	return useCallback(
 		getComboBoxInputValueChangeHandler(step, updateFn, onChange),
 		[step, onChange, updateFn],
@@ -165,6 +168,7 @@ export function useTextFieldChangeHandler<T extends object | void | unknown>(
 	updateFn: (step: Step<T>, updated: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): TextFieldChangeHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
 	return useCallback(getTextFieldChangeHandler(step, updateFn, onChange), [
 		step,
 		updateFn,
@@ -206,6 +210,7 @@ export function useSpinButtonChangeHandler<T extends object | void | unknown>(
 	updateFn: (step: Step<T>, newValue: string | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): SpinButtonChangeHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
 	return useCallback(getSpinButtonChangeHandler(step, updateFn, onChange), [
 		step,
 		onChange,
@@ -240,6 +245,7 @@ export function useCheckboxChangeHandler<T extends object | void | unknown>(
 	updateFn: (step: Step<T>, newValue: boolean | undefined) => void,
 	onChange?: StepChangeFunction<T>,
 ): CheckboxChangeHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
 	return useCallback(getCheckboxChangeHandler(step, updateFn, onChange), [
 		step,
 		updateFn,

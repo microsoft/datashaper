@@ -8,7 +8,7 @@ import { num } from '@data-wrangling-components/primitives'
 import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
 import { memo, useMemo } from 'react'
 
-import type { FormInput} from '../../common/VerbForm.js';
+import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
@@ -74,7 +74,7 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 					current: step.args.printRange,
 				},
 			],
-			[step, onChange],
+			[step],
 		)
 		return <VerbForm onChange={onChange} step={step} inputs={verbInputs} />
 	},
