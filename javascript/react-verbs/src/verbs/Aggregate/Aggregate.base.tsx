@@ -4,14 +4,11 @@
  */
 import type { AggregateArgs } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
-import {
-	getEnumDropdownOptions,
-	getSimpleDropdownOptions,
-} from '@data-wrangling-components/react-hooks'
 import { useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
-import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import { VerbForm } from '../../common/VerbForm.js'
+import { dropdown,enumDropdown } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -25,23 +22,20 @@ export const AggregateBase: React.FC<
 > = function AggregateBase({ step, onChange, columns }) {
 	const verbInputs = useMemo<FormInput<AggregateArgs>[]>(
 		() => [
-			{
-				label: 'Column to group by',
-				type: FormInputType.SingleChoice,
-				options: getSimpleDropdownOptions(columns),
-				current: step.args.groupby,
-				onChange: (s, key) => (s.args.groupby = key as string),
-				required: true,
-			},
-			{
-				label: 'Function',
-				type: FormInputType.SingleChoice,
-				options: getEnumDropdownOptions(FieldAggregateOperation),
-				current: step.args.operation,
-				onChange: (s, key) =>
-					(s.args.operation = key as FieldAggregateOperation),
-				required: true,
-			},
+			dropdown(
+				'Column to group by',
+				columns,
+				step.args.groupby,
+				(s, key) => (s.args.groupby = key as string),
+				{ required: true },
+			),
+			enumDropdown(
+				'Function',
+				FieldAggregateOperation,
+				step.args.operation,
+				(s, key) => (s.args.operation = key as FieldAggregateOperation),
+				{ required: true },
+			),
 		],
 		[step, columns],
 	)

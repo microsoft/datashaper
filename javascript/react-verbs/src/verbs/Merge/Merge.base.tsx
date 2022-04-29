@@ -4,12 +4,11 @@
  */
 import type { MergeArgs } from '@data-wrangling-components/core'
 import { MergeStrategy } from '@data-wrangling-components/core'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
-import { FormInputType,VerbForm } from '../../common/VerbForm.js'
-import { selectColumnListInput } from '../../common/VerbFormFactories.js'
+import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import { columnList,enumDropdown } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -21,14 +20,13 @@ export const MergeBase: React.FC<
 > = memo(function MergeBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<MergeArgs>[]>(
 		() => [
-			selectColumnListInput(step, columns),
-			{
-				label: 'Merge strategy',
-				type: FormInputType.SingleChoice,
-				current: step.args.strategy,
-				onChange: (s, val) => (s.args.strategy = val as MergeStrategy),
-				options: getEnumDropdownOptions(MergeStrategy),
-			},
+			columnList(step, columns),
+			enumDropdown(
+				'Merge strategy',
+				MergeStrategy,
+				step.args.strategy,
+				(s, val) => (s.args.strategy = val as MergeStrategy),
+			),
 			{
 				label: 'Delimiter',
 				type: FormInputType.Text,

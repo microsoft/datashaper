@@ -5,11 +5,11 @@
 import type { BinArgs } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
 import { num } from '@data-wrangling-components/primitives'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import { checkbox, enumDropdown } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -19,15 +19,13 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 	function BinBase({ step, onChange }) {
 		const verbInputs = useMemo<FormInput<BinArgs>[]>(
 			() => [
-				{
-					label: 'Bin strategy',
-					type: FormInputType.SingleChoice,
-					options: getEnumDropdownOptions(BinStrategy),
-					required: true,
-					current: step.args.strategy,
-					onChange: (s, opt) => (s.args.strategy = opt as BinStrategy),
-					// narrow dropdown style?
-				},
+				enumDropdown(
+					'Bin strategy',
+					BinStrategy,
+					step.args.strategy,
+					(s, opt) => (s.args.strategy = opt as BinStrategy),
+					{ required: true },
+				),
 				{
 					label: 'Bin count',
 					type: FormInputType.NumberSpinner,
@@ -60,19 +58,17 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 					onChange: (s, opt) => (s.args.max = num(opt as string)),
 					current: step.args.max,
 				},
-				{
-					label: 'Clamp to min/max',
-					type: FormInputType.Checkbox,
-					condition: step.args.strategy === BinStrategy.Auto,
-					onChange: (s, opt) => (s.args.clamped = opt as boolean),
-					current: step.args.clamped,
-				},
-				{
-					label: 'Print range as output',
-					type: FormInputType.Checkbox,
-					onChange: (s, opt) => (s.args.printRange = opt as boolean),
-					current: step.args.printRange,
-				},
+				checkbox(
+					'Clamp to min/max',
+					step.args.clamped,
+					(s, val) => (s.args.clamped = val as boolean),
+					{ condition: step.args.strategy === BinStrategy.Auto },
+				),
+				checkbox(
+					'Print range as output',
+					step.args.printRange,
+					(s, opt) => (s.args.printRange = opt as boolean),
+				),
 			],
 			[step],
 		)

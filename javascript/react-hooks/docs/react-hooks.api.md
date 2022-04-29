@@ -6,6 +6,8 @@
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { IDropdownOption } from '@fluentui/react';
+import type { JoinArgs } from '@data-wrangling-components/core';
+import type { Step } from '@data-wrangling-components/core';
 import type { TableStore } from '@data-wrangling-components/core';
 import type { Value } from '@essex/arquero';
 
@@ -18,6 +20,16 @@ export function getDateFormatPatternOptions(): IDropdownOption[];
 //
 // @public (undocumented)
 export function getEnumDropdownOptions<E = unknown>(enumeration: E, labels?: Record<string, string>): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "getLeftColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getLeftColumn(step: Step<JoinArgs>): string | undefined;
+
+// Warning: (ae-missing-release-tag) "getRightColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getRightColumn(step: Step<JoinArgs>): string | undefined;
 
 // Warning: (ae-missing-release-tag) "getSimpleDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -38,6 +50,16 @@ export function useDateFormatPatternOptions(): IDropdownOption[];
 //
 // @public (undocumented)
 export function useEnumDropdownOptions<E = unknown>(enumeration: E, labels?: Record<string, string>): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "useLeftColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useLeftColumn(step: Step<JoinArgs>): string | undefined;
+
+// Warning: (ae-missing-release-tag) "useRightColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useRightColumn(step: Step<JoinArgs>): string | undefined;
 
 // Warning: (ae-missing-release-tag) "useSimpleDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

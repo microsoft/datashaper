@@ -4,11 +4,11 @@
  */
 import type { RollupArgs } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
-import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import { VerbForm } from '../../common/VerbForm.js'
+import { enumDropdown } from '../../common/VerbFormFactories.js'
 import type { StepComponentProps } from '../../types.js'
 
 /**
@@ -19,14 +19,12 @@ export const Rollup: React.FC<StepComponentProps<RollupArgs>> = memo(
 	function Rollup({ step, onChange }) {
 		const inputs = useMemo<FormInput<RollupArgs>[]>(
 			() => [
-				{
-					type: FormInputType.SingleChoice,
-					label: 'Function',
-					current: step.args.operation,
-					options: getEnumDropdownOptions(FieldAggregateOperation),
-					onChange: (s, val) =>
-						(s.args.operation = val as FieldAggregateOperation),
-				},
+				enumDropdown(
+					'Function',
+					FieldAggregateOperation,
+					step.args.operation,
+					(s, val) => (s.args.operation = val as FieldAggregateOperation),
+				),
 			],
 			[step],
 		)

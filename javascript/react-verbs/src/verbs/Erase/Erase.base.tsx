@@ -7,7 +7,7 @@ import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.jsx'
 import { FormInputType, VerbForm } from '../../common/VerbForm.jsx'
-import { selectColumnListInput } from '../../common/VerbFormFactories.js'
+import { columnList } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -19,7 +19,7 @@ export const EraseBase: React.FC<
 > = memo(function EraseBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<EraseArgs>[]>(
 		() => [
-			selectColumnListInput(step, columns, 'Columns to erase'),
+			columnList(step, columns, 'Columns to erase'),
 			{
 				label: 'Value to be erased',
 				type: FormInputType.Text,
