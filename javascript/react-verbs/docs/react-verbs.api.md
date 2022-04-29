@@ -311,6 +311,15 @@ export const LeftAlignedRow: StyledComponent<"div", any, {}, never>;
 // @public
 export const Lookup: React.FC<StepComponentProps<LookupArgs>>;
 
+// Warning: (ae-missing-release-tag) "LookupBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const LookupBase: React.FC<StepComponentBaseProps<LookupArgs> & {
+    tables: string[];
+    leftColumns: string[];
+    rightColumns: string[];
+}>;
+
 // Warning: (ae-missing-release-tag) "LookupDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

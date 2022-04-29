@@ -28,7 +28,7 @@ export interface Store<T, K = string> {
 	 * @param id - the item id
 	 * @param value - the item value
 	 */
-	set(id: K, value: Observable<Maybe<T>>): void
+	set(id: K, value: Observable<Maybe<T>> | T | Promise<Maybe<T>>): void
 
 	/**
 	 * Remove the named item
