@@ -7,6 +7,7 @@ import type { IDropdownOption } from '@fluentui/react'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
+
 import { useSimpleDropdownOptions } from './useSimpleDropdownOptions.js'
 
 export function useColumnValueOptions(

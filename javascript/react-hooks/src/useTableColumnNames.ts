@@ -4,7 +4,7 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
-i
+
 export function useTableColumnNames(
 	table: ColumnTable | undefined,
 	filter?: (name: string) => boolean,
