@@ -2,16 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IDropdownOption } from '@fluentui/react'
-import { IconButton } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { IconButton, TextField } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
-import { TableColumnDropdown } from './TableColumnDropdown.js'
+import { dropdownStyles } from './styles.js'
 
-export interface ColumnInstructionProps {
-	table?: ColumnTable
+export interface ColumnSpreadProps {
 	column: string
 	onChange?: (column: string) => void
 	onDelete?: () => void
@@ -20,22 +17,21 @@ export interface ColumnInstructionProps {
 /**
  * Provides a column dropdown and delete button for editing a list of columns.
  */
-export const ColumnInstruction: React.FC<ColumnInstructionProps> = memo(
-	function ColumnInstruction({ table, column, onChange, onDelete }) {
+export const ColumnSpread: React.FC<ColumnSpreadProps> = memo(
+	function ColumnSpread({ column, onChange, onDelete }) {
 		const handleColumnChange = useCallback(
-			(_e: any, opt: IDropdownOption<any> | undefined) => {
-				onChange?.(opt?.key as string)
+			(_e: any, opt: string | undefined) => {
+				opt && onChange?.(opt)
 			},
 			[onChange],
 		)
 
 		return (
 			<Container>
-				<TableColumnDropdown
-					table={table}
-					label={undefined}
-					selectedKey={column}
+				<TextField
+					value={column}
 					onChange={handleColumnChange}
+					styles={dropdownStyles}
 				/>
 				<IconButton
 					title={'Remove this column'}

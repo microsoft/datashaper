@@ -2,16 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { useDateFormatPatternOptions } from '@data-wrangling-components/react-hooks'
 import type { IComboBoxProps } from '@fluentui/react'
 import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
-import { useColumnValueOptions } from '../hooks.js'
-import { dropdownStyles } from '../styles.js'
+import { dropdownStyles } from './styles.js'
 
-export interface ColumnValueComboBoxProps extends Partial<IComboBoxProps> {
-	table?: ColumnTable
+export interface DateFormatPatternComboboxProps
+	extends Partial<IComboBoxProps> {
 	columnName?: string
 }
 
@@ -20,9 +19,9 @@ export interface ColumnValueComboBoxProps extends Partial<IComboBoxProps> {
  * We frequently have operations where a comparison may be to a fixed value, or should
  * be dependent on per-row column values.
  */
-export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps> = memo(
-	function ColumnValueComboBox({ table, columnName, ...props }) {
-		const options = useColumnValueOptions(columnName ?? '', table)
+export const DateFormatPatternCombobox: React.FC<DateFormatPatternComboboxProps> =
+	memo(function DateFormatPatternCombobox({ columnName, ...props }) {
+		const options = useDateFormatPatternOptions()
 		const withHeader = useMemo(() => {
 			return [
 				{
@@ -36,9 +35,10 @@ export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps> = memo(
 
 		return (
 			<ComboBox
-				label={'Value'}
-				placeholder={'Select value'}
-				autoComplete="on"
+				allowFreeform={true}
+				label={'Date format pattern'}
+				placeholder={'Select date format'}
+				autoComplete="off"
 				options={withHeader}
 				styles={dropdownStyles}
 				dropdownMaxWidth={200}
@@ -46,5 +46,4 @@ export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps> = memo(
 				{...props}
 			/>
 		)
-	},
-)
+	})

@@ -6,14 +6,13 @@ import type { OrderbyInstruction } from '@data-wrangling-components/core'
 import { SortDirection } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
 import { TableColumnDropdown } from './TableColumnDropdown.js'
 
 export interface SortInstructionProps {
-	table?: ColumnTable
+	columnOptions: IDropdownOption[]
 	order: OrderbyInstruction
 	onChange?: (order: OrderbyInstruction) => void
 	onDelete?: () => void
@@ -23,7 +22,7 @@ export interface SortInstructionProps {
  * Provides a column dropdown, asc/desc toggle, and delete button for editing a table sort.
  */
 export const SortInstruction: React.FC<SortInstructionProps> = memo(
-	function SortInstruction({ table, order, onChange, onDelete }) {
+	function SortInstruction({ columnOptions, order, onChange, onDelete }) {
 		const { column, direction } = order
 		const checked = direction === SortDirection.Ascending
 		const directionName = checked ? 'Ascending' : 'Descending'
@@ -53,7 +52,7 @@ export const SortInstruction: React.FC<SortInstructionProps> = memo(
 		return (
 			<Container>
 				<TableColumnDropdown
-					table={table}
+					options={columnOptions}
 					label={undefined}
 					selectedKey={column}
 					onChange={handleColumnChange}

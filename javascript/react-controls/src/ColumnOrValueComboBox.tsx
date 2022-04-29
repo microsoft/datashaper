@@ -2,21 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { staticCallback } from '@data-wrangling-components/primitives'
-import type { IComboBoxProps } from '@fluentui/react'
+import type { IComboBoxOption, IComboBoxProps } from '@fluentui/react'
 import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
-import { useTableColumnOptions } from '../hooks.js'
-import { dropdownStyles } from '../styles.js'
+import { dropdownStyles } from './styles.js'
 
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
-	table?: ColumnTable
-	/**
-	 * Optional filter to limit the list of columns shown in the dropdown
-	 */
-	filter?: (name: string) => boolean
+	options: IComboBoxOption[]
 }
 
 /**
@@ -25,12 +18,7 @@ export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
  * be dependent on per-row column values.
  */
 export const ColumnOrValueComboBox: React.FC<ColumnOrValueComboBoxProps> = memo(
-	function ColumnOrValueComboBox({
-		table,
-		filter = staticCallback(true),
-		...props
-	}) {
-		const options = useTableColumnOptions(table, filter)
+	function ColumnOrValueComboBox({ options, ...props }) {
 		const withHeader = useMemo(() => {
 			return [
 				{

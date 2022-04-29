@@ -33,6 +33,7 @@
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",
 		"@data-wrangling-components/react-controls": "workspace:^",
+		"@data-wrangling-components/react-hooks": "workspace:^",
 		"@data-wrangling-components/react-verbs": "workspace:^",
 		"@essex/arquero": "^2.0.2",
 		"@essex/dataflow": "^0.1.1"

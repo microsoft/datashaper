@@ -4,6 +4,10 @@
  */
 import type { Step, TableStore } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
+import {
+	useSimpleDropdownOptions,
+	useTableNames,
+} from '@data-wrangling-components/react-hooks'
 import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
@@ -51,6 +55,8 @@ function useOthers(
 	onChange?: (step: Step) => void,
 	store?: TableStore,
 ) {
+	const tableNames = useTableNames(store)
+	const tableOptions = useSimpleDropdownOptions(tableNames)
 	return useMemo(() => {
 		return (step.input.others || EMPTY).map((input, index) => {
 			const other = input.node
@@ -72,7 +78,7 @@ function useOthers(
 				<LeftAlignedRow key={`set-op-${other}-${index}`}>
 					<TableDropdown
 						label={''}
-						store={store}
+						options={tableOptions}
 						selectedKey={other}
 						onChange={(_evt, option) => {
 							const update = { ...step }
@@ -90,7 +96,7 @@ function useOthers(
 				</LeftAlignedRow>
 			)
 		})
-	}, [step, store, onChange])
+	}, [step, store, tableOptions, onChange])
 }
 
 const EMPTY: any[] = []

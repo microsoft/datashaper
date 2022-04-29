@@ -8,42 +8,16 @@ import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
-/**
- * Make a basic set of string options from an array
- * @param list -
- * @returns
- */
-export function useSimpleDropdownOptions(list: string[]): IDropdownOption[] {
-	return useMemo(
-		() =>
-			list.map(name => ({
-				key: name,
-				text: name.toString(),
-			})),
-		[list],
-	)
-}
-
-/**
- * Creates a list of dropdown options for the columns in a table
- * @param table - the input table
- * @returns a list of dropdown options
- */
-export function useTableColumnOptions(
-	table: ColumnTable | undefined,
-	filter?: (name: string) => boolean,
-): IDropdownOption[] {
-	return useSimpleDropdownOptions(table?.columnNames(filter) || [])
-}
+import { useSimpleDropdownOptions } from './useSimpleDropdownOptions.js'
 
 export function useColumnValueOptions(
-	column: string,
+	column: string | undefined,
 	table: ColumnTable | undefined,
 	values?: Value[],
 	filter?: (value: Value) => boolean,
 ): IDropdownOption[] {
 	const vals = useMemo(() => {
-		if (!table || !column || column.trim().length === 0) {
+		if (!column || !table || !column || column.trim().length === 0) {
 			return []
 		}
 		const getFallback = () => {

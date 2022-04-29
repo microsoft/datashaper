@@ -12,7 +12,7 @@ import type { IRenderFunction } from '@fluentui/utilities'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { dropdownStyles } from '../styles.js'
+import { dropdownStyles } from './styles.js'
 
 export interface MultiDropdownProps extends IDropdownProps {
 	onSelectAllOrNone?: (options: IDropdownOption[]) => void
@@ -61,11 +61,13 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
 			] as IDropdownOption[]
 		}, [options, selectedKeys])
 
-		const handleSelectAllOrNone = useCallback(
-			(all: boolean) => {
-				onSelectAllOrNone?.(all ? options : [])
-			},
-			[options, onSelectAllOrNone],
+		const handleSelectAll = useCallback(
+			() => onSelectAllOrNone?.(options),
+			[onSelectAllOrNone, options],
+		)
+		const handleSelectNone = useCallback(
+			() => onSelectAllOrNone?.([]),
+			[onSelectAllOrNone],
 		)
 
 		const handleRenderOption: IRenderFunction<ISelectableOption<any>> =
@@ -74,16 +76,16 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = memo(
 					if (option?.data) {
 						return (
 							<Selector>
-								<Link onClick={() => handleSelectAllOrNone(true)}>All</Link>
+								<Link onClick={handleSelectAll}>All</Link>
 								<Sep>|</Sep>
-								<Link onClick={() => handleSelectAllOrNone(false)}>None</Link>
+								<Link onClick={handleSelectNone}>None</Link>
 							</Selector>
 						)
 					} else {
 						return <span>{option?.text}</span>
 					}
 				},
-				[handleSelectAllOrNone],
+				[handleSelectAll, handleSelectNone],
 			)
 
 		return (
