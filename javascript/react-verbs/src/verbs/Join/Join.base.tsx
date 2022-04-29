@@ -4,16 +4,16 @@
  */
 import type { JoinArgs } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
-import {
-	useSimpleDropdownOptions,
-	getEnumDropdownOptions,
-} from '@data-wrangling-components/react-hooks'
+import { useSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
-import { selectJoinInputsInputs } from '../../common/VerbFormFactories.js'
+import {
+	enumDropdown,
+	selectJoinInputsInputs,
+} from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -43,16 +43,15 @@ export const JoinBase: React.FC<
 				onChange: (s, val) =>
 					(s.input[NodeInput.Other] = { node: val as string }),
 			},
-			{
-				label: 'Join strategy',
-				type: FormInputType.SingleChoice,
-				options: getEnumDropdownOptions(JoinStrategy),
-				current: step.args.strategy ?? JoinStrategy.Inner,
-				onChange: (s, val) => (s.args.strategy = val as JoinStrategy),
-			},
+			enumDropdown(
+				'Join strategy',
+				JoinStrategy,
+				step.args.strategy,
+				(s, val) => (s.args.strategy = val as JoinStrategy),
+			),
 			...selectJoinInputsInputs(step, leftColumns, rightColumns),
 		],
-		[step, tableOptions],
+		[step, tableOptions, leftColumns, rightColumns],
 	)
 
 	return <VerbForm step={step} onChange={onChange} inputs={inputs} />

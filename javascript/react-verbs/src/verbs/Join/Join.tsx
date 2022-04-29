@@ -3,14 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { JoinArgs } from '@data-wrangling-components/core'
+import { useTableColumnNames , useTableNames } from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
-import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
-import { useTableNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
 
+import { useLoadTable } from '../../common/hooks.js'
 import type { StepComponentProps } from '../../types.js'
 import { JoinBase } from './Join.base.js'
-import { useLoadTable } from '../../common/hooks.js'
 
 /**
  * Provides inputs for a Join step.

@@ -3,20 +3,20 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	JoinArgs,
 	InputColumnListArgs,
+	JoinArgs,
 	Step,
 } from '@data-wrangling-components/core'
 import { toggleListItem } from '@data-wrangling-components/primitives'
 import {
-	getSimpleDropdownOptions,
 	getLeftColumn,
 	getRightColumn,
+	getSimpleDropdownOptions,
+	getEnumDropdownOptions,
 } from '@data-wrangling-components/react-hooks'
-
 import upperFirst from 'lodash-es/upperFirst.js'
 
-import type { FormInput } from './VerbForm.js'
+import type { FormInput, SingleChoiceFormInput } from './VerbForm.js'
 import { FormInputType } from './VerbForm.js'
 
 export function selectColumnListInput(
@@ -66,4 +66,19 @@ export function selectJoinInputsInputs(
 			},
 		},
 	]
+}
+
+export function enumDropdown<E, Args>(
+	label: string,
+	enumeration: E,
+	current: SingleChoiceFormInput<Args>['current'],
+	onChange: SingleChoiceFormInput<Args>['onChange'],
+): FormInput<Args> {
+	return {
+		label,
+		type: FormInputType.SingleChoice,
+		options: getEnumDropdownOptions(enumeration),
+		current,
+		onChange,
+	}
 }
