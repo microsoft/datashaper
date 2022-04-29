@@ -19,8 +19,21 @@ export function useStore(): TableStore {
 	return useMemo(() => createTableStore(), [])
 }
 
-export function usePipeline(store: TableStore): Pipeline {
-	return useMemo(() => createPipeline(store), [store])
+export function usePipeline(store: TableStore, steps?: Step[]): Pipeline {
+	/* eslint-disable react-hooks/exhaustive-deps */
+	return useMemo(() => {
+		const pipeline = createPipeline(store)
+		if (steps) {
+			pipeline.addAll(steps)
+		}
+		return pipeline
+	}, [
+		store,
+		// do not re-fire this memo when the steps change; this will redrive the pipeline
+		// on every step update
+		// steps,
+	])
+	/* eslint-enable react-hooks/exhaustive-deps */
 }
 
 export function useDeleteConfirm(onDelete?: (args: any) => void): {
