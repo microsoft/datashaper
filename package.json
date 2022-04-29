@@ -8,7 +8,7 @@
 		"build": "yarn workspaces foreach -piv --topological-dev run build",
 		"start": "yarn workspaces foreach -piv run start",
 		"deploy": "yarn workspaces foreach -piv run deploy",
-		"lint": "essex lint --fix",
+		"lint": "SKIP_TYPEAWARE_LINTING=1 essex lint --fix",
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
 		"test": "yarn jest",
