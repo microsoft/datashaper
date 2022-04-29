@@ -4,20 +4,34 @@
  */
 import type { JoinArgs } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
-import { useSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
+import {
+	useSimpleDropdownOptions,
+	getEnumDropdownOptions,
+} from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
-import { FormInputType,VerbForm } from '../../common/VerbForm.js'
+import { FormInputType, VerbForm } from '../../common/VerbForm.js'
+import { selectJoinInputsInputs } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
  * Provides inputs for a Join step.
  */
 export const JoinBase: React.FC<
-	StepComponentBaseProps<JoinArgs> & { tables: string[] }
-> = memo(function JoinBase({ step, onChange, tables }) {
+	StepComponentBaseProps<JoinArgs> & {
+		tables: string[]
+		leftColumns: string[]
+		rightColumns: string[]
+	}
+> = memo(function JoinBase({
+	step,
+	onChange,
+	tables,
+	leftColumns,
+	rightColumns,
+}) {
 	const tableOptions = useSimpleDropdownOptions(tables)
 	const inputs = useMemo<FormInput<JoinArgs>[]>(
 		() => [
@@ -32,9 +46,11 @@ export const JoinBase: React.FC<
 			{
 				label: 'Join strategy',
 				type: FormInputType.SingleChoice,
-				current: step.args.strategy || JoinStrategy.Inner,
+				options: getEnumDropdownOptions(JoinStrategy),
+				current: step.args.strategy ?? JoinStrategy.Inner,
 				onChange: (s, val) => (s.args.strategy = val as JoinStrategy),
 			},
+			...selectJoinInputsInputs(step, leftColumns, rightColumns),
 		],
 		[step, tableOptions],
 	)

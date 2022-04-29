@@ -77,7 +77,7 @@ export interface SingleChoiceFormInput<T> extends FormInputBase<T> {
 	/**
 	 * The form input value or selected key (if enum)
 	 */
-	current: number | string
+	current: number | string | undefined
 }
 
 export interface ComboBoxFormInput<T>
