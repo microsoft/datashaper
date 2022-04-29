@@ -4,7 +4,6 @@
  */
 import type { JoinArgs } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
-import { useSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
@@ -33,7 +32,6 @@ export const JoinBase: React.FC<
 	leftColumns,
 	rightColumns,
 }) {
-	const tableOptions = useSimpleDropdownOptions(tables)
 	const inputs = useMemo<FormInput<JoinArgs>[]>(
 		() => [
 			dropdown(
@@ -50,7 +48,7 @@ export const JoinBase: React.FC<
 			),
 			...joinInputs(step, leftColumns, rightColumns),
 		],
-		[step, tableOptions, leftColumns, rightColumns, tables],
+		[step, leftColumns, rightColumns, tables],
 	)
 
 	return <VerbForm step={step} onChange={onChange} inputs={inputs} />
