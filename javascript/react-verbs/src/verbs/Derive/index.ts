@@ -3,4 +3,5 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './Derive.js'
+export * from './Derive.base.js'
 export * from './DeriveDescription.js'

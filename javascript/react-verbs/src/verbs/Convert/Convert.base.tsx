@@ -7,9 +7,9 @@ import { ParseType } from '@data-wrangling-components/core'
 import { num } from '@data-wrangling-components/primitives'
 import { useMemo, memo } from 'react'
 import type { IDropdownOption } from '@fluentui/react'
-import { FormInputType, VerbInput } from '../../common/VerbInput.js'
+import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { StepComponentBaseProps } from '../../types.js'
-import type { FormInput } from '../../common/VerbInput.js'
+import type { FormInput } from '../../common/VerbForm.js'
 import { toggleListItem } from '@data-wrangling-components/primitives'
 import {
 	getEnumDropdownOptions,
@@ -67,5 +67,5 @@ export const ConvertBase: React.FC<
 		[step, columns],
 	)
 
-	return <VerbInput inputs={inputs} step={step} onChange={onChange} />
+	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })

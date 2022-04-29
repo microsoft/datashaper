@@ -3,59 +3,40 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { EraseArgs } from '@data-wrangling-components/core'
-import { dropdownStyles } from '@data-wrangling-components/react-controls'
-import { TextField } from '@fluentui/react'
-import { memo } from 'react'
-import styled from 'styled-components'
-
-import {
-	LeftAlignedColumn,
-	useTextFieldChangeHandler,
-} from '../../common/index.js'
+import { memo, useMemo } from 'react'
+import { toggleListItem } from '@data-wrangling-components/primitives'
 import type { StepComponentProps } from '../../types.js'
-import { ColumnListInputs } from '../shared/index.js'
+import { VerbForm, FormInput, FormInputType } from '../../common/VerbForm.jsx'
+import { useTableColumnOptions } from '@data-wrangling-components/react-hooks'
+import { withLoadedTable } from '../../common/withLoadedTable.js'
 
 /**
  * Just the to/value inputs for an impute.
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Erase: React.FC<StepComponentProps<EraseArgs>> = memo(
-	function Erase({ step, store, onChange }) {
-		const handleValueChange = useTextFieldChangeHandler(
-			step,
-			(s, val) => (s.args.value = val),
-			onChange,
+	withLoadedTable(function Erase({ step, onChange, dataTable }) {
+		const options = useTableColumnOptions(dataTable)
+		const inputs = useMemo<FormInput<EraseArgs>[]>(
+			() => [
+				{
+					label: 'Columns to erase',
+					type: FormInputType.MultiChoice,
+					options,
+					current: step.args.columns,
+					onChange: (s, arg) =>
+						(s.args.columns = toggleListItem(s.args.columns, arg as string)),
+				},
+				{
+					label: 'Value to be erased',
+					type: FormInputType.Text,
+					value: step.args.value && `${step.args.value}`,
+					placeholder: 'text, number, or boolean',
+					onChange: (s, val) => (s.args.value = val),
+				},
+			],
+			[step],
 		)
-
-		return (
-			<Container>
-				<LeftAlignedColumn>
-					<ColumnListInputs
-						label={'Columns to erase'}
-						step={step}
-						store={store}
-						onChange={onChange as any}
-					/>
-				</LeftAlignedColumn>
-				<LeftAlignedColumn>
-					<TextField
-						required
-						label={'Value to be erased'}
-						value={step.args.value && `${step.args.value}`}
-						placeholder={'text, number, or boolean'}
-						styles={dropdownStyles}
-						onChange={handleValueChange}
-					/>
-				</LeftAlignedColumn>
-			</Container>
-		)
-	},
+		return <VerbForm inputs={inputs} step={step} onChange={onChange} />
+	}),
 )
-
-const Container = styled.div`
-	display: flex;
-	justify-content: flex-start;
-	flex-wrap: wrap;
-	align-content: flex-start;
-	flex-direction: column;
-`

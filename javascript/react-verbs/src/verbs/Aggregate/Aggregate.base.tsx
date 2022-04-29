@@ -9,7 +9,7 @@ import {
 import type { IDropdownOption } from '@fluentui/react'
 import { useMemo } from 'react'
 import type { StepComponentBaseProps } from '../../types.js'
-import { FormInput, FormInputType, VerbInput } from '../../common/VerbInput.js'
+import { FormInput, FormInputType, VerbForm } from '../../common/VerbForm.js'
 import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
 
 /**
@@ -44,5 +44,5 @@ export const AggregateBase: React.FC<
 		[step, columnOptions],
 	)
 
-	return <VerbInput step={step} inputs={verbInputs} onChange={onChange} />
+	return <VerbForm step={step} inputs={verbInputs} onChange={onChange} />
 }

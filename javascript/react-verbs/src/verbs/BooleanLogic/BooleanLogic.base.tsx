@@ -11,7 +11,7 @@ import {
 } from '@data-wrangling-components/react-controls'
 import { memo, useMemo } from 'react'
 import type { StepComponentBaseProps } from '../../types.js'
-import { FormInput, FormInputType, VerbInput } from '../../common/VerbInput.js'
+import { FormInput, FormInputType, VerbForm } from '../../common/VerbForm.js'
 import type { IDropdownOption } from '@fluentui/react'
 
 /**
@@ -45,5 +45,5 @@ export const BooleanLogicBase: React.FC<
 		[stop, options],
 	)
 
-	return <VerbInput step={step} onChange={onChange} inputs={inputs} />
+	return <VerbForm step={step} onChange={onChange} inputs={inputs} />
 })

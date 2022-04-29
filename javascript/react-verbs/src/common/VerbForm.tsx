@@ -158,7 +158,7 @@ export enum FormInputType {
 	Text = 'text',
 }
 
-export const VerbInput: React.FC<{
+export const VerbForm: React.FC<{
 	inputs: FormInput<any>[]
 	step: Step<any>
 	onChange?: StepChangeFunction<any>
