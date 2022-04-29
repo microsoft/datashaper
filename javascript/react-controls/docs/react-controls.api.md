@@ -38,25 +38,6 @@ export interface ColumnarMenuProps extends IContextualMenuProps {
     text?: string;
 }
 
-// Warning: (ae-missing-release-tag) "ColumnInstruction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const ColumnInstruction: React.FC<ColumnInstructionProps>;
-
-// Warning: (ae-missing-release-tag) "ColumnInstructionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnInstructionProps {
-    // (undocumented)
-    column: string;
-    // (undocumented)
-    onChange?: (column: string) => void;
-    // (undocumented)
-    onDelete?: () => void;
-    // (undocumented)
-    table?: ColumnTable;
-}
-
 // Warning: (ae-missing-release-tag) "ColumnOrValueComboBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -86,21 +67,6 @@ export interface ColumnSpreadProps {
     onChange?: (column: string) => void;
     // (undocumented)
     onDelete?: () => void;
-    // (undocumented)
-    table?: ColumnTable;
-}
-
-// Warning: (ae-missing-release-tag) "ColumnValueComboBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps>;
-
-// Warning: (ae-missing-release-tag) "ColumnValueComboBoxProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnValueComboBoxProps extends Partial<IComboBoxProps> {
-    // (undocumented)
-    columnName?: string;
     // (undocumented)
     table?: ColumnTable;
 }
