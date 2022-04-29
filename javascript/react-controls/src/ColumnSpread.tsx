@@ -6,7 +6,7 @@ import { IconButton, TextField } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
-import { dropdownStyles } from '../styles.js'
+import { dropdownStyles } from './styles.js'
 
 export interface ColumnSpreadProps {
 	column: string
