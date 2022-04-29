@@ -105,27 +105,23 @@ export function useTables(autoType = false): {
 } {
 	const store = useTableStore(autoType)
 
-	// TODO: the inputs array is only needed as a trigger to update the tables, because the store is not mutated in state
-	const [inputs, setInputs] = useState<string[]>(TABLES)
-	const handleAddTables = useCallback(
-		(names: string[]) => setInputs(prev => [...prev, ...names]),
-		[setInputs],
-	)
-
 	const [tables, setTables] = useState<TableContainer[]>([])
-	useEffect(() => {
+	
+	// initialize the input tables when the store is created
+	useEffect(() => {		
 		const results = store.toArray()
 		setTables(results as TableContainer[])
-	}, [inputs, store, setTables])
+	}, [store, setTables])
 
+	// add any dropped files to the inputs
 	const onAddFiles = useCallback(
 		(loaded: Map<string, ColumnTable>) => {
 			loaded.forEach((table, name) => {
 				store.set(name, from([{ id: name, table }]))
 			})
-			handleAddTables(Array.from(loaded.keys()))
+			setTables(store.toArray() as TableContainer[])
 		},
-		[store, handleAddTables],
+		[store]
 	)
 
 	return {
