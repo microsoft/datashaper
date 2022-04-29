@@ -6,7 +6,7 @@ import type { IDropdownProps } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 
-import { useEnumDropdownOptions } from '../hooks.js'
+import { useEnumDropdownOptions } from '@data-wrangling-components/react-hooks'
 import { opDropdownStyles } from '../styles.js'
 
 export interface EnumDropdownProps<E = unknown>
