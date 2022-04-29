@@ -11,7 +11,10 @@ import { FormInputType, VerbInput } from '../../common/VerbInput.js'
 import type { StepComponentBaseProps } from '../../types.js'
 import type { FormInput } from '../../common/VerbInput.js'
 import { toggleListItem } from '@data-wrangling-components/primitives'
-import { getEnumDropdownOptions } from '@data-wrangling-components/react-controls'
+import {
+	getEnumDropdownOptions,
+	getDateFormatPatternOptions,
+} from '@data-wrangling-components/react-controls'
 
 /**
  * Provides inputs for a Convert step.
@@ -28,7 +31,9 @@ export const ConvertBase: React.FC<
 				type: FormInputType.MultiChoice,
 				options: columns,
 				current: step.args.columns,
-				onChange: (s, opt) => toggleListItem(s.args.columns, opt),
+				condition: columns.length > 0,
+				onChange: (s, opt) =>
+					(s.args.columns = toggleListItem(s.args.columns, opt as string)),
 			},
 			{
 				label: 'Data type',
@@ -48,6 +53,7 @@ export const ConvertBase: React.FC<
 				label: 'Date format pattern',
 				condition: step.args.type === ParseType.Date,
 				type: FormInputType.ComboBox,
+				options: getDateFormatPatternOptions(),
 				placeholder: 'pattern',
 				current: step.args.formatPattern
 					? `${step.args.formatPattern}`

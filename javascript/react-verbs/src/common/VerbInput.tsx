@@ -223,6 +223,13 @@ const Input: React.FC<{
 					onChange={onChange}
 				/>
 			</Case>
+			<Case condition={inputType == FormInputType.ComboBox}>
+				<ComboBoxInput
+					input={input as ComboBoxFormInput<unknown>}
+					step={step}
+					onChange={onChange}
+				/>
+			</Case>
 		</Switch>
 	)
 })
