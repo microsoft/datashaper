@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs } from '@data-wrangling-components/core'
-import { JoinStrategy } from '@data-wrangling-components/core'
+import type { LookupArgs } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
@@ -11,28 +10,28 @@ import type { FormInput } from '../../common/VerbForm.js'
 import { VerbForm } from '../../common/VerbForm.js'
 import {
 	dropdown,
-	enumDropdown,
+	inputColumnList,
 	joinInputs,
 } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
- * Provides inputs for a Join step.
+ * Provides inputs for a Lookup step.
  */
-export const JoinBase: React.FC<
-	StepComponentBaseProps<JoinArgs> & {
+export const LookupBase: React.FC<
+	StepComponentBaseProps<LookupArgs> & {
 		tables: string[]
 		leftColumns: string[]
 		rightColumns: string[]
 	}
-> = memo(function JoinBase({
+> = memo(function LookupBase({
 	step,
 	onChange,
 	tables,
 	leftColumns,
 	rightColumns,
 }) {
-	const inputs = useMemo<FormInput<JoinArgs>[]>(
+	const inputs = useMemo<FormInput<LookupArgs>[]>(
 		() => [
 			dropdown(
 				'Join table',
@@ -40,16 +39,11 @@ export const JoinBase: React.FC<
 				step.input[NodeInput.Other]?.node,
 				(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
 			),
-			enumDropdown(
-				'Join strategy',
-				JoinStrategy,
-				step.args.strategy,
-				(s, val) => (s.args.strategy = val as JoinStrategy),
-			),
-			...joinInputs(step, leftColumns, rightColumns),
+			...joinInputs(step, leftColumns, rightColumns, 'lookup'),
+			inputColumnList(step, rightColumns, 'Columns to copy'),
 		],
 		[step, leftColumns, rightColumns, tables],
 	)
 
-	return <VerbForm step={step} onChange={onChange} inputs={inputs} />
+	return <VerbForm inputs={inputs} onChange={onChange} step={step} />
 })

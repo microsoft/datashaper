@@ -7,7 +7,7 @@ import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
-import { columnList } from '../../common/VerbFormFactories.js'
+import { inputColumnList } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -19,7 +19,7 @@ export const ImputeBase: React.FC<
 > = memo(function ImputeBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<ImputeArgs>[]>(
 		() => [
-			columnList(step, columns, 'Columns to Impute'),
+			inputColumnList(step, columns, 'Columns to Impute'),
 			{
 				label: 'Fill value',
 				type: FormInputType.Text,

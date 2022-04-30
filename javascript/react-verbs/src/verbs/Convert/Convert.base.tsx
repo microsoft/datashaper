@@ -13,7 +13,7 @@ import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
-import { columnList } from '../../common/VerbFormFactories.js'
+import { inputColumnList } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -26,7 +26,7 @@ export const ConvertBase: React.FC<
 > = memo(function ConvertBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<ConvertArgs>[]>(
 		() => [
-			columnList(step, columns, 'Columns to Convert'),
+			inputColumnList(step, columns, 'Columns to Convert'),
 			{
 				label: 'Data type',
 				type: FormInputType.SingleChoice,

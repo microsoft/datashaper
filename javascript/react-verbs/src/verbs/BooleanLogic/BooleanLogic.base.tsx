@@ -8,7 +8,10 @@ import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { VerbForm } from '../../common/VerbForm.js'
-import { columnList,enumDropdown } from '../../common/VerbFormFactories.js'
+import {
+	enumDropdown,
+	inputColumnList,
+} from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
@@ -21,13 +24,20 @@ export const BooleanLogicBase: React.FC<
 > = memo(function BooleanLogicBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<BooleanArgs>[]>(
 		() => [
-			columnList(step, columns),
+			inputColumnList(step, columns),
 			enumDropdown(
 				'Logical operator',
 				BooleanOperator,
 				step.args.operator,
 				(s, opt) => (s.args.operator = opt as BooleanOperator),
 				{ required: true },
+				{
+					or: 'OR',
+					and: 'AND',
+					nor: 'NOR',
+					nand: 'NAND',
+					xor: 'XOR',
+				},
 			),
 		],
 		[step, columns],

@@ -249,7 +249,7 @@ export class DefaultStore<T> implements Store<T> {
     // (undocumented)
     print(): void;
     // (undocumented)
-    set(id: string, value: Observable<T>): void;
+    set(id: string, valueAny: Observable<T> | T | Promise<T>): void;
     // (undocumented)
     toArray(): Maybe<T>[];
     // (undocumented)
@@ -1002,7 +1002,7 @@ export interface Store<T, K = string> {
     onChange(listener: Handler): Unsubscribe;
     onItemChange(id: K, listener: HandlerOf<Maybe<T>>): Unsubscribe;
     print(): void;
-    set(id: K, value: Observable<Maybe<T>>): void;
+    set(id: K, value: Observable<Maybe<T>> | T | Promise<Maybe<T>>): void;
     toArray(): Maybe<T>[];
     toMap(): Map<K, T>;
 }
