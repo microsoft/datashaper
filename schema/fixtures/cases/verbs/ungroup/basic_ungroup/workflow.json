@@ -12,7 +12,9 @@
 		{
 			"verb": "ungroup",
 			"input": "grouped",
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"input": ["table10"],
+	"output": ["expected"]
 }

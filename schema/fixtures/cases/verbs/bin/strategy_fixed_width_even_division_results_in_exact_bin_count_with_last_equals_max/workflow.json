@@ -10,7 +10,9 @@
 				"strategy": "fixed width",
 				"fixedwidth": 38
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table9"]
 }

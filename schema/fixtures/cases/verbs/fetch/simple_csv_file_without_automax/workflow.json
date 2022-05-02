@@ -8,7 +8,9 @@
 				"url": "javascript/webapp/public/data/companies.csv",
 				"delimiter": ","
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table1"]
 }

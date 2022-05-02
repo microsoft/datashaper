@@ -7,7 +7,9 @@
 				"source": "table4",
 				"others": ["table5"]
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table4", "table5"]
 }

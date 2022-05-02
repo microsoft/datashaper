@@ -4,10 +4,13 @@
  */
 import type { TableContainer } from '@essex/arquero'
 import type { Graph } from '@essex/dataflow'
+import type { NamedPortBinding } from '../specification.js'
 
 import type { Step, StepInput } from '../steps/index.js'
 import type { Store } from '../store/index.js'
-import type { Verb } from '../verbs/index.js'
+import type { ParsedSpecification } from '../steps/types.js'
+import type { Observable } from 'rxjs'
+import type { Maybe } from '../primitives.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -24,51 +27,64 @@ export type TableStore = Store<TableContainer>
  * - building compound steps with recursive execution.
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
-export interface Pipeline {
-	readonly store: TableStore
-	readonly steps: Step[]
-	readonly last: Step
-	readonly count: number
-	readonly outputs: string[]
-	readonly graph: Graph<TableContainer>
+export interface GraphBuilder<T> {
+	readonly store: Store<T>
+	readonly graph: Graph<T>
+	readonly spec: ParsedSpecification
 
 	/**
-	 * Creates a new Step with a starter template based on its type
-	 * @param verb - the type of verb step to create
+	 * Remove all steps, inputs, and outputs from the pipeline
 	 */
-	create(verb: Verb): Step[]
+	clear(): void
+
+	/**
+	 * Add a named input
+	 */
+	addInput(input: string): void
+
+	/**
+	 * Removes a named input
+	 * @param input - The input name to remove
+	 */
+	removeInput(input: string): void
+
+	/**
+	 * Add an output binding
+	 * @param name - The output name to register
+	 * @param binding - The output binding
+	 */
+	addOutput(name: string, binding: NamedPortBinding): void
+
+	/**
+	 * Remove an output binding
+	 * @param name
+	 */
+	removeOutput(name: string): void
 
 	/**
 	 * Adds a step to the pipeline
 	 * @param step - the step to add
 	 */
-	add(step: StepInput): Step[]
-
-	/**
-	 * Adds steps to the pipeline
-	 * @param steps - The steps to add
-	 */
-	addAll(steps: StepInput[]): Step[]
-
-	/**
-	 * Remove all steps from the pipeline
-	 */
-	clear(): void
+	addStep(step: StepInput): Step
 
 	/**
 	 * Deletes steps from the given index (inclusive) to the end of the array
 	 * @param index - The index to delete after
 	 */
-	delete(index: number): Step[]
+	removeStep(index: number): void
 
 	/**
-	 *
-	 * @param step - the updated step
-	 * @param index - the step index to update
+	 * Reconfigure a step at an index
+	 * @param index - The step index
+	 * @param step - The step specification
 	 */
-	update(step: Step, index: number): Step[]
+	reconfigureStep(index: number, step: StepInput): void
 
-	run(): Promise<TableContainer>
+	/**
+	 * Observe a table name
+	 * @param name - The table name to observe
+	 */
+	table(name: string): Observable<Maybe<T>>
 
 	/**
 	 * Log out the steps

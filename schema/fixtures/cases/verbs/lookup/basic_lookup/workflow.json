@@ -11,7 +11,9 @@
 				"on": ["ID"],
 				"columns": ["item"]
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table1", "table5"]
 }

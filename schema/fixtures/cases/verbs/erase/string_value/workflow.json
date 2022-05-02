@@ -8,7 +8,9 @@
 				"columns": ["item"],
 				"value": "sofa"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table3"]
 }

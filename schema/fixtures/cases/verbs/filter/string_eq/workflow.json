@@ -14,7 +14,9 @@
 					}
 				]
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table8"]
 }

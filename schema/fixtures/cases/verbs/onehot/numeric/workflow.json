@@ -7,7 +7,9 @@
 			"args": {
 				"column": "ID"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table5"]
 }

@@ -4,12 +4,14 @@
 		{
 			"verb": "convert",
 			"input": "table19",
-			"output": "expected",
+			"id": "expected",
 			"args": {
 				"columns": ["int"],
 				"type": "int",
 				"radix": 10
 			}
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table19"]
 }

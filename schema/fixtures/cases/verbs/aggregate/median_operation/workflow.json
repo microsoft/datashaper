@@ -10,7 +10,9 @@
 				"column": "quantity",
 				"operation": "median"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table4"]
 }

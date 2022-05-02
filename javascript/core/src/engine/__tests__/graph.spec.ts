@@ -3,13 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { table } from 'arquero'
-
 import { Verb } from '../../index.js'
-import type { Step } from '../../steps/index.js'
-import { readSteps } from '../../steps/readSteps.js'
+import { readSpec } from '../../steps/readSpec.js'
 import { createTableStore } from '../../store/index.js'
 import type { Store } from '../../store/types.js'
-import type { TableContainer } from '../../tables/index.js'
+import type { TableContainer } from '@essex/arquero'
 import { createGraph } from '../graph.js'
 
 describe('stepGraph', () => {
@@ -22,19 +20,24 @@ describe('stepGraph', () => {
 	})
 
 	test('runs a single step with normal input/output', () => {
-		const steps: Step[] = readSteps([
-			{
-				verb: Verb.Fill,
-				args: {
-					to: 'filled',
-					value: 1,
-				},
-				input: 'input',
-				output: 'output',
-			},
-		])
-
-		const g = createGraph(steps, store)
+		const g = createGraph(
+			readSpec({
+				input: ['input'],
+				steps: [
+					{
+						id: 'fill1',
+						verb: Verb.Fill,
+						args: {
+							to: 'filled',
+							value: 1,
+						},
+						input: 'input',
+					},
+				],
+				output: [{ name: 'output', node: 'fill1' }],
+			}),
+			store,
+		)
 		expect(g).toBeDefined()
 		const result = store.get('output')
 		expect(result?.table?.numCols()).toBe(2)
@@ -43,31 +46,32 @@ describe('stepGraph', () => {
 	})
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {
-		const steps: Step[] = readSteps([
-			{
-				id: 'output-1',
-				verb: Verb.Fill,
-				input: 'input',
-				args: {
-					to: 'filled',
-					value: 1,
-				},
-				output: 'output-1',
-			},
-			{
-				verb: Verb.Fill,
-				args: {
-					to: 'filled2',
-					value: 2,
-				},
-				// Note: this input is being auto-configured to the output of the previous node
-				// todo: restore auto-wiring?
-				input: 'output-1',
-				output: 'output-2',
-			},
-		])
-
-		const g = createGraph(steps, store)
+		const g = createGraph(
+			readSpec({
+				input: ['input'],
+				steps: [
+					{
+						id: 'output-1',
+						verb: Verb.Fill,
+						input: 'input',
+						args: {
+							to: 'filled',
+							value: 1,
+						},
+					},
+					{
+						id: 'output-2',
+						verb: Verb.Fill,
+						args: {
+							to: 'filled2',
+							value: 2,
+						},
+					},
+				],
+				output: ['output-1', 'output-2'],
+			}),
+			store,
+		)
 		expect(g).toBeDefined()
 		const result = store.get('output-2')
 		expect(result).toBeDefined()

@@ -11,7 +11,9 @@
 				"fixedcount": 5,
 				"printRange": true
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table9"]
 }

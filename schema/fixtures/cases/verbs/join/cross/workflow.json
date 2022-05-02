@@ -8,9 +8,11 @@
 				"other": "table28"
 			},
 			"args": {
-                "strategy": "cross"
+				"strategy": "cross"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table27", "table28"]
 }

@@ -3,15 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	InputBinding,
-	InputSpecification,
+	NamedPortBinding,
+	PortBinding,
 	StepCommon,
+	Specification,
+	NamedOutputPortBinding,
 } from '../specification.js'
 import type { Verb } from '../verbs/index.js'
 
 export interface SpecificationInput {
-	input?: string
-	output?: string
+	input?: Specification['input']
+	output: Specification['output']
 	steps: StepInput[]
 }
 
@@ -35,15 +37,8 @@ export interface StepInput<T extends object | void | unknown = unknown>
 	input?:
 		| string
 		| ({
-				others?: InputSpecification[]
-		  } & Record<string, InputSpecification>)
-
-	/**
-	 * The observed outputs to record.
-	 * Key = output socket name
-	 * Value = store table name
-	 */
-	output: string | Record<string, string>
+				others?: PortBinding[]
+		  } & Record<string, PortBinding>)
 }
 
 export interface Step<T extends object | void | unknown = unknown> {
@@ -68,13 +63,12 @@ export interface Step<T extends object | void | unknown = unknown> {
 	 * Value = Socket Binding to other node
 	 */
 	input: {
-		others?: InputBinding[]
-	} & Record<string, InputBinding>
+		others?: NamedPortBinding[]
+	} & Record<string, NamedPortBinding>
+}
 
-	/**
-	 * The observed outputs to record.
-	 * Key = output socket name
-	 * Value = store table name
-	 */
-	output: Record<string, string>
+export interface ParsedSpecification {
+	steps: Step[]
+	input: Set<string>
+	output: Map<string, NamedOutputPortBinding>
 }

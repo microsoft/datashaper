@@ -9,7 +9,9 @@
 				"strategy": "first one wins",
 				"to": "resultColumn"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table15"]
 }

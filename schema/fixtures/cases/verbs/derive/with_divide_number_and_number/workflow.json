@@ -10,7 +10,9 @@
 				"column2": "quantity",
 				"operator": "/"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table7"]
 }

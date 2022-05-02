@@ -10,7 +10,9 @@
 			"args": {
 				"on": ["ID"]
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table1", "table5"]
 }

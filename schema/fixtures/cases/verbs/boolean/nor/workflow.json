@@ -9,7 +9,9 @@
 				"columns": ["A", "B", "C"],
 				"operator": "nor"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table20"]
 }

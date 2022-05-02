@@ -22,7 +22,7 @@
             },
             "type": "object"
         },
-        "BasicIO": {
+        "BasicInput": {
             "description": "Single-input, single-output step I/O",
             "properties": {
                 "input": {
@@ -32,7 +32,7 @@
                                 "source": {
                                     "anyOf": [
                                         {
-                                            "$ref": "#/definitions/InputBinding"
+                                            "$ref": "#/definitions/NamedPortBinding"
                                         },
                                         {
                                             "type": "string"
@@ -48,22 +48,6 @@
                         }
                     ],
                     "description": "Standard step input; single source with default name \"source\".\n\nIf undefined, the default output of the previous step will be used (if available).\nIf no previous step is available, this will remain undefined"
-                },
-                "output": {
-                    "anyOf": [
-                        {
-                            "properties": {
-                                "target": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "Standard step output; single output with default name \"target\""
                 }
             },
             "type": "object"
@@ -247,7 +231,7 @@
             },
             "type": "object"
         },
-        "DualInputIO": {
+        "DualInput": {
             "description": "Dual-input, single-output step I/O",
             "properties": {
                 "input": {
@@ -256,7 +240,7 @@
                         "other": {
                             "anyOf": [
                                 {
-                                    "$ref": "#/definitions/InputBinding"
+                                    "$ref": "#/definitions/NamedPortBinding"
                                 },
                                 {
                                     "type": "string"
@@ -267,7 +251,7 @@
                         "source": {
                             "anyOf": [
                                 {
-                                    "$ref": "#/definitions/InputBinding"
+                                    "$ref": "#/definitions/NamedPortBinding"
                                 },
                                 {
                                     "type": "string"
@@ -277,22 +261,6 @@
                         }
                     },
                     "type": "object"
-                },
-                "output": {
-                    "anyOf": [
-                        {
-                            "properties": {
-                                "target": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "Standard step output; single output with default name \"target\""
                 }
             },
             "type": "object"
@@ -434,20 +402,6 @@
             },
             "type": "object"
         },
-        "InputBinding": {
-            "description": "An explicit step input binding",
-            "properties": {
-                "node": {
-                    "description": "The id of the node to bind to",
-                    "type": "string"
-                },
-                "output": {
-                    "description": "The named output of the node to bind with. If not defined, this will\nbe the default output \"target\"",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "InputColumnListArgs": {
             "description": "Base interface for a number of operations that work on a column list.",
             "properties": {
@@ -550,6 +504,36 @@
                 "last one wins"
             ],
             "type": "string"
+        },
+        "NamedOutputPortBinding": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "node": {
+                    "description": "The id of the node to bind to",
+                    "type": "string"
+                },
+                "output": {
+                    "description": "The named output of the node to bind with. If not defined, this will\nbe the default output \"target\"",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NamedPortBinding": {
+            "description": "An explicit step input binding",
+            "properties": {
+                "node": {
+                    "description": "The id of the node to bind to",
+                    "type": "string"
+                },
+                "output": {
+                    "description": "The named output of the node to bind with. If not defined, this will\nbe the default output \"target\"",
+                    "type": "string"
+                }
+            },
+            "type": "object"
         },
         "OnehotArgs": {
             "properties": {
@@ -719,7 +703,7 @@
             },
             "type": "object"
         },
-        "VariadicIO": {
+        "VariadicInput": {
             "description": "Multi-input, single output step I/O",
             "properties": {
                 "input": {
@@ -730,7 +714,7 @@
                             "items": {
                                 "anyOf": [
                                     {
-                                        "$ref": "#/definitions/InputBinding"
+                                        "$ref": "#/definitions/NamedPortBinding"
                                     },
                                     {
                                         "type": "string"
@@ -743,7 +727,7 @@
                         "source": {
                             "anyOf": [
                                 {
-                                    "$ref": "#/definitions/InputBinding"
+                                    "$ref": "#/definitions/NamedPortBinding"
                                 },
                                 {
                                     "type": "string"
@@ -753,22 +737,6 @@
                         }
                     },
                     "type": "object"
-                },
-                "output": {
-                    "anyOf": [
-                        {
-                            "properties": {
-                                "target": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "Standard step output; single output with default name \"target\""
                 }
             },
             "type": "object"
@@ -811,16 +779,28 @@
             "type": "string"
         },
         "input": {
-            "description": "If specified, the default input to use. This will specify the default input of the first step.\nIf the first step already has a defined default input, this will throw.",
-            "type": "string"
+            "description": "A list of input names that are expected to be provided in addition to the workflow steps",
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
         },
         "name": {
             "description": "The name of the specification",
             "type": "string"
         },
         "output": {
-            "description": "If specified, the default output to use. This is equivalent to defining the 'output' property\nof the last step in the steps array",
-            "type": "string"
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/NamedOutputPortBinding"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
+            },
+            "type": "array"
         },
         "steps": {
             "description": "The workflow steps",
@@ -846,7 +826,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -870,7 +850,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -894,7 +874,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -918,7 +898,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -939,7 +919,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/VariadicIO"
+                                "$ref": "#/definitions/VariadicInput"
                             }
                         ]
                     },
@@ -963,7 +943,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -987,7 +967,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1011,7 +991,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1032,7 +1012,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/VariadicIO"
+                                "$ref": "#/definitions/VariadicInput"
                             }
                         ]
                     },
@@ -1056,7 +1036,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1080,7 +1060,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1104,7 +1084,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1128,7 +1108,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1152,7 +1132,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1176,7 +1156,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1200,7 +1180,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1221,7 +1201,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/VariadicIO"
+                                "$ref": "#/definitions/VariadicInput"
                             }
                         ]
                     },
@@ -1245,7 +1225,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/DualInputIO"
+                                "$ref": "#/definitions/DualInput"
                             }
                         ]
                     },
@@ -1269,7 +1249,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/DualInputIO"
+                                "$ref": "#/definitions/DualInput"
                             }
                         ]
                     },
@@ -1293,7 +1273,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1317,7 +1297,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1341,7 +1321,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1365,7 +1345,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1389,7 +1369,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1413,7 +1393,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1437,7 +1417,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1461,7 +1441,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1485,7 +1465,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1509,7 +1489,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1533,7 +1513,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1554,7 +1534,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1575,7 +1555,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/VariadicIO"
+                                "$ref": "#/definitions/VariadicInput"
                             }
                         ]
                     },
@@ -1596,7 +1576,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1620,7 +1600,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
@@ -1644,7 +1624,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicIO"
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     }

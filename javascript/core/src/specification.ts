@@ -50,21 +50,19 @@ export interface Specification {
 	description?: string
 
 	/**
-	 * If specified, the default input to use. This will specify the default input of the first step.
-	 * If the first step already has a defined default input, this will throw.
-	 */
-	input?: string
-
-	/**
-	 * If specified, the default output to use. This is equivalent to defining the 'output' property
-	 * of the last step in the steps array
-	 */
-	output?: string
-
-	/**
 	 * The workflow steps
 	 */
 	steps?: StepSpecification[]
+
+	/**
+	 * A list of input names that are expected to be provided in addition to the workflow steps
+	 */
+	input?: string[]
+
+	/**
+	 * The output bindings
+	 */
+	output: Array<OutputPortBinding>
 }
 
 /**
@@ -72,41 +70,41 @@ export interface Specification {
  */
 export type StepSpecification = StepCommon &
 	(
-		| ({ verb: Verb.Aggregate; args?: AggregateArgs } & BasicIO)
-		| ({ verb: Verb.Bin; args?: BinArgs } & BasicIO)
-		| ({ verb: Verb.Binarize; args?: BinarizeArgs } & BasicIO)
-		| ({ verb: Verb.Boolean; args?: BooleanArgs } & BasicIO)
-		| ({ verb: Verb.Concat } & VariadicIO)
-		| ({ verb: Verb.Convert; args?: ConvertArgs } & BasicIO)
-		| ({ verb: Verb.Dedupe; args?: DedupeArgs } & BasicIO)
-		| ({ verb: Verb.Derive; args?: DeriveArgs } & BasicIO)
-		| ({ verb: Verb.Difference } & VariadicIO)
-		| ({ verb: Verb.Erase; args?: EraseArgs } & BasicIO)
-		| ({ verb: Verb.Fetch; args?: FetchArgs } & BasicIO)
-		| ({ verb: Verb.Fill; args?: FillArgs } & BasicIO)
-		| ({ verb: Verb.Filter; args?: FilterArgs } & BasicIO)
-		| ({ verb: Verb.Fold; args?: FoldArgs } & BasicIO)
-		| ({ verb: Verb.Groupby; args?: GroupbyArgs } & BasicIO)
-		| ({ verb: Verb.Impute; args?: ImputeArgs } & BasicIO)
-		| ({ verb: Verb.Intersect } & VariadicIO)
-		| ({ verb: Verb.Join; args?: JoinArgs } & DualInputIO)
-		| ({ verb: Verb.Lookup; args?: LookupArgs } & DualInputIO)
-		| ({ verb: Verb.Merge; args?: MergeArgs } & BasicIO)
-		| ({ verb: Verb.Onehot; args?: OnehotArgs } & BasicIO)
-		| ({ verb: Verb.Orderby; args?: OrderbyArgs } & BasicIO)
-		| ({ verb: Verb.Pivot; args?: PivotArgs } & BasicIO)
-		| ({ verb: Verb.Recode; args?: RecodeArgs } & BasicIO)
-		| ({ verb: Verb.Rename; args?: RenameArgs } & BasicIO)
-		| ({ verb: Verb.Rollup; args?: RollupArgs } & BasicIO)
-		| ({ verb: Verb.Sample; args?: SampleArgs } & BasicIO)
-		| ({ verb: Verb.Select; args?: SelectArgs } & BasicIO)
-		| ({ verb: Verb.Spread; args?: SpreadArgs } & BasicIO)
-		| ({ verb: Verb.Unfold; args?: UnfoldArgs } & BasicIO)
-		| ({ verb: Verb.Ungroup } & BasicIO)
-		| ({ verb: Verb.Union } & VariadicIO)
-		| ({ verb: Verb.Unorder } & BasicIO)
-		| ({ verb: Verb.Unroll; args?: UnrollArgs } & BasicIO)
-		| ({ verb: Verb.Window; args?: WindowArgs } & BasicIO)
+		| ({ verb: Verb.Aggregate; args?: AggregateArgs } & BasicInput)
+		| ({ verb: Verb.Bin; args?: BinArgs } & BasicInput)
+		| ({ verb: Verb.Binarize; args?: BinarizeArgs } & BasicInput)
+		| ({ verb: Verb.Boolean; args?: BooleanArgs } & BasicInput)
+		| ({ verb: Verb.Concat } & VariadicInput)
+		| ({ verb: Verb.Convert; args?: ConvertArgs } & BasicInput)
+		| ({ verb: Verb.Dedupe; args?: DedupeArgs } & BasicInput)
+		| ({ verb: Verb.Derive; args?: DeriveArgs } & BasicInput)
+		| ({ verb: Verb.Difference } & VariadicInput)
+		| ({ verb: Verb.Erase; args?: EraseArgs } & BasicInput)
+		| ({ verb: Verb.Fetch; args?: FetchArgs } & BasicInput)
+		| ({ verb: Verb.Fill; args?: FillArgs } & BasicInput)
+		| ({ verb: Verb.Filter; args?: FilterArgs } & BasicInput)
+		| ({ verb: Verb.Fold; args?: FoldArgs } & BasicInput)
+		| ({ verb: Verb.Groupby; args?: GroupbyArgs } & BasicInput)
+		| ({ verb: Verb.Impute; args?: ImputeArgs } & BasicInput)
+		| ({ verb: Verb.Intersect } & VariadicInput)
+		| ({ verb: Verb.Join; args?: JoinArgs } & DualInput)
+		| ({ verb: Verb.Lookup; args?: LookupArgs } & DualInput)
+		| ({ verb: Verb.Merge; args?: MergeArgs } & BasicInput)
+		| ({ verb: Verb.Onehot; args?: OnehotArgs } & BasicInput)
+		| ({ verb: Verb.Orderby; args?: OrderbyArgs } & BasicInput)
+		| ({ verb: Verb.Pivot; args?: PivotArgs } & BasicInput)
+		| ({ verb: Verb.Recode; args?: RecodeArgs } & BasicInput)
+		| ({ verb: Verb.Rename; args?: RenameArgs } & BasicInput)
+		| ({ verb: Verb.Rollup; args?: RollupArgs } & BasicInput)
+		| ({ verb: Verb.Sample; args?: SampleArgs } & BasicInput)
+		| ({ verb: Verb.Select; args?: SelectArgs } & BasicInput)
+		| ({ verb: Verb.Spread; args?: SpreadArgs } & BasicInput)
+		| ({ verb: Verb.Unfold; args?: UnfoldArgs } & BasicInput)
+		| ({ verb: Verb.Ungroup } & BasicInput)
+		| ({ verb: Verb.Union } & VariadicInput)
+		| ({ verb: Verb.Unorder } & BasicInput)
+		| ({ verb: Verb.Unroll; args?: UnrollArgs } & BasicInput)
+		| ({ verb: Verb.Window; args?: WindowArgs } & BasicInput)
 	)
 
 /**
@@ -131,12 +129,13 @@ export interface StepCommon {
  *
  * If this is an input binding, it's an explicit binding to another step in the pipeline.
  */
-export type InputSpecification = string | InputBinding
+export type PortBinding = string | NamedPortBinding
+export type OutputPortBinding = string | NamedOutputPortBinding
 
 /**
  * An explicit step input binding
  */
-export interface InputBinding {
+export interface NamedPortBinding {
 	/**
 	 * The id of the node to bind to
 	 */
@@ -150,27 +149,32 @@ export interface InputBinding {
 }
 
 /**
+ * An explicit workflow output
+ */
+export interface NamedOutputPortBinding extends NamedPortBinding {
+	/**
+	 * The output table name
+	 */
+	name: string
+}
+
+/**
  * Single-input, single-output step I/O
  */
-export interface BasicIO {
+export interface BasicInput {
 	/**
 	 * Standard step input; single source with default name "source".
 	 *
 	 * If undefined, the default output of the previous step will be used (if available).
 	 * If no previous step is available, this will remain undefined
 	 */
-	input?: string | { source: InputSpecification }
-
-	/**
-	 * Standard step output; single output with default name "target"
-	 */
-	output?: string | { target: string }
+	input?: string | { source: PortBinding }
 }
 
 /**
  * Dual-input, single-output step I/O
  */
-export interface DualInputIO extends BasicIO {
+export interface DualInput extends BasicInput {
 	/**
 	 * The inputs that must be bound; "source" & "other".
 	 */
@@ -178,19 +182,19 @@ export interface DualInputIO extends BasicIO {
 		/**
 		 * The primary input, which must be specified
 		 */
-		source: InputSpecification
+		source: PortBinding
 
 		/**
 		 * The secondary input, which must be specified
 		 */
-		other: InputSpecification
+		other: PortBinding
 	}
 }
 
 /**
  * Multi-input, single output step I/O
  */
-export interface VariadicIO extends BasicIO {
+export interface VariadicInput extends BasicInput {
 	/**
 	 * The step inputs; a required "source" and optional, variadic "others". If this is a
 	 * string, it is used to bind the primary input.
@@ -199,11 +203,11 @@ export interface VariadicIO extends BasicIO {
 		/**
 		 * The primary input
 		 */
-		source: InputSpecification
+		source: PortBinding
 
 		/**
 		 * The variadic secondary inputs
 		 */
-		others?: InputSpecification[]
+		others?: PortBinding[]
 	}
 }

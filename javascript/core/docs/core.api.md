@@ -6,7 +6,7 @@
 
 import { BaseNode } from '@essex/dataflow';
 import { BaseVariadicNode } from '@essex/dataflow';
-import type { Graph } from '@essex/dataflow';
+import { Graph } from '@essex/dataflow';
 import { InputNode } from '@essex/dataflow';
 import type { Node as Node_2 } from '@essex/dataflow';
 import type { Observable } from 'rxjs';
@@ -27,15 +27,12 @@ export interface AggregateArgs extends RollupArgs {
     groupby: string;
 }
 
-// Warning: (ae-missing-release-tag) "BasicIO" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "BasicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface BasicIO {
+export interface BasicInput {
     input?: string | {
-        source: InputSpecification;
-    };
-    output?: string | {
-        target: string;
+        source: PortBinding;
     };
 }
 
@@ -158,7 +155,7 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createGraph(steps: Step[], store: Store<TableContainer>): Graph<TableContainer>;
+export function createGraph({ steps, input, output }: ParsedSpecification, store: Store<TableContainer>): Graph<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "createPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -196,33 +193,29 @@ export type DedupeArgs = Partial<InputColumnListArgs>;
 export class DefaultPipeline implements Pipeline {
     constructor(store: TableStore);
     // (undocumented)
-    add(step: StepInput): Step[];
+    addInput(input: string): void;
+    addOutput(name: string, binding: NamedPortBinding): void;
     // (undocumented)
-    addAll(steps: StepInput[]): Step[];
+    addStep(stepInput: StepInput): Step;
     // (undocumented)
     clear(): void;
     // (undocumented)
-    get count(): number;
-    // (undocumented)
-    create(verb: Verb): Step[];
-    // (undocumented)
-    delete(index: number): Step[];
-    // (undocumented)
     get graph(): Graph<TableContainer>;
-    // (undocumented)
-    get last(): Step;
-    // (undocumented)
-    get outputs(): string[];
     // (undocumented)
     print(): void;
     // (undocumented)
-    run(): Promise<TableContainer>;
+    reconfigureStep(index: number, stepInput: StepInput<unknown>): void;
     // (undocumented)
-    get steps(): Step[];
+    removeInput(input: string): void;
+    removeOutput(name: string): void;
+    // (undocumented)
+    removeStep(index: number): void;
+    // (undocumented)
+    get spec(): ParsedSpecification;
     // (undocumented)
     readonly store: TableStore;
     // (undocumented)
-    update(step: Step, index: number): Step[];
+    table(name: string): Observable<Maybe<TableContainer>>;
 }
 
 // Warning: (ae-missing-release-tag) "DefaultStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -276,13 +269,13 @@ export interface DeriveArgs extends OutputColumnArgs {
 // @public (undocumented)
 export const difference: (id: string) => SetOperationNode<unknown>;
 
-// Warning: (ae-missing-release-tag) "DualInputIO" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DualInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface DualInputIO extends BasicIO {
+export interface DualInput extends BasicInput {
     input: {
-        source: InputSpecification;
-        other: InputSpecification;
+        source: PortBinding;
+        other: PortBinding;
     };
 }
 
@@ -440,14 +433,6 @@ export interface ImputeArgs extends InputColumnListArgs {
     value: Value;
 }
 
-// Warning: (ae-missing-release-tag) "InputBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface InputBinding {
-    node: string;
-    output?: string;
-}
-
 // Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -469,11 +454,6 @@ export interface InputColumnListArgs {
 export interface InputColumnRecordArgs {
     columns: Record<string, string>;
 }
-
-// Warning: (ae-missing-release-tag) "InputSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export type InputSpecification = string | InputBinding;
 
 // Warning: (ae-missing-release-tag) "intersect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -600,6 +580,14 @@ export enum MergeStrategy {
     LastOneWins = "last one wins"
 }
 
+// Warning: (ae-missing-release-tag) "NamedPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface NamedPortBinding {
+    node: string;
+    output?: string;
+}
+
 // Warning: (ae-missing-release-tag) "NodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -668,6 +656,18 @@ export interface OutputColumnArgs {
     to: string;
 }
 
+// Warning: (ae-missing-release-tag) "ParsedSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ParsedSpecification {
+    // (undocumented)
+    input: Set<string>;
+    // (undocumented)
+    output: Record<string, NamedPortBinding>;
+    // (undocumented)
+    steps: Step[];
+}
+
 // Warning: (ae-missing-release-tag) "ParseType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -687,28 +687,22 @@ export enum ParseType {
 //
 // @public
 export interface Pipeline {
-    add(step: StepInput): Step[];
-    addAll(steps: StepInput[]): Step[];
+    addInput(input: string): void;
+    addOutput(name: string, binding: NamedPortBinding): void;
+    addStep(step: StepInput): Step;
     clear(): void;
     // (undocumented)
-    readonly count: number;
-    create(verb: Verb): Step[];
-    delete(index: number): Step[];
-    // (undocumented)
     readonly graph: Graph<TableContainer>;
-    // (undocumented)
-    readonly last: Step;
-    // (undocumented)
-    readonly outputs: string[];
     print(): void;
+    reconfigureStep(index: number, step: StepInput): void;
+    removeInput(input: string): void;
+    removeOutput(name: string): void;
+    removeStep(index: number): void;
     // (undocumented)
-    run(): Promise<TableContainer>;
-    // (undocumented)
-    readonly steps: Step[];
+    readonly spec: ParsedSpecification;
     // (undocumented)
     readonly store: TableStore;
-    // (undocumented)
-    update(step: Step, index: number): Step[];
+    table(name: string): Observable<Maybe<TableContainer>>;
 }
 
 // Warning: (ae-missing-release-tag) "pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -728,15 +722,20 @@ export interface PivotArgs {
     value: string;
 }
 
+// Warning: (ae-missing-release-tag) "PortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type PortBinding = string | NamedPortBinding;
+
 // Warning: (ae-missing-release-tag) "readSpec" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function readSpec(spec: SpecificationInput): Step[];
+export function readSpec(spec: SpecificationInput): ParsedSpecification;
 
 // Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function readStep<T extends object | void | unknown = any>({ verb, args, id, input, output }: StepInput<T>, previous?: Step | undefined): Step<T>;
+export function readStep<T extends object | void | unknown = any>({ verb, args, id, input }: StepInput<T>, previous?: Step | undefined): Step<T>;
 
 // Warning: (ae-missing-release-tag) "readSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -819,9 +818,10 @@ export enum SetOp {
 // @public
 export interface Specification {
     description?: string;
-    input?: string;
+    input?: string[];
     name?: string;
-    output?: string;
+    // (undocumented)
+    output: Record<string, PortBinding>;
     steps?: StepSpecification[];
 }
 
@@ -830,9 +830,9 @@ export interface Specification {
 // @public (undocumented)
 export interface SpecificationInput {
     // (undocumented)
-    input?: string;
+    input?: Specification['input'];
     // (undocumented)
-    output?: string;
+    output: Specification['output'];
     // (undocumented)
     steps: StepInput[];
 }
@@ -859,9 +859,8 @@ export interface Step<T extends object | void | unknown = unknown> {
     args: T;
     id: string;
     input: {
-        others?: InputBinding[];
-    } & Record<string, InputBinding>;
-    output: Record<string, string>;
+        others?: NamedPortBinding[];
+    } & Record<string, NamedPortBinding>;
     verb: Verb;
 }
 
@@ -879,9 +878,8 @@ export interface StepCommon {
 export interface StepInput<T extends object | void | unknown = unknown> extends StepCommon {
     args?: T;
     input?: string | ({
-        others?: InputSpecification[];
-    } & Record<string, InputSpecification>);
-    output: string | Record<string, string>;
+        others?: PortBinding[];
+    } & Record<string, PortBinding>);
     verb: Verb;
 }
 
@@ -891,103 +889,103 @@ export interface StepInput<T extends object | void | unknown = unknown> extends 
 export type StepSpecification = StepCommon & (({
     verb: Verb.Aggregate;
     args?: AggregateArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Bin;
     args?: BinArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Binarize;
     args?: BinarizeArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Boolean;
     args?: BooleanArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Concat;
-} & VariadicIO) | ({
+} & VariadicInput) | ({
     verb: Verb.Convert;
     args?: ConvertArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Dedupe;
     args?: DedupeArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Derive;
     args?: DeriveArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Difference;
-} & VariadicIO) | ({
+} & VariadicInput) | ({
     verb: Verb.Erase;
     args?: EraseArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Fetch;
     args?: FetchArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Fill;
     args?: FillArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Filter;
     args?: FilterArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Fold;
     args?: FoldArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Groupby;
     args?: GroupbyArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Impute;
     args?: ImputeArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Intersect;
-} & VariadicIO) | ({
+} & VariadicInput) | ({
     verb: Verb.Join;
     args?: JoinArgs;
-} & DualInputIO) | ({
+} & DualInput) | ({
     verb: Verb.Lookup;
     args?: LookupArgs;
-} & DualInputIO) | ({
+} & DualInput) | ({
     verb: Verb.Merge;
     args?: MergeArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Onehot;
     args?: OnehotArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Orderby;
     args?: OrderbyArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Pivot;
     args?: PivotArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Recode;
     args?: RecodeArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Rename;
     args?: RenameArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Rollup;
     args?: RollupArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Sample;
     args?: SampleArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Select;
     args?: SelectArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Spread;
     args?: SpreadArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Unfold;
     args?: UnfoldArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Ungroup;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Union;
-} & VariadicIO) | ({
+} & VariadicInput) | ({
     verb: Verb.Unorder;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Unroll;
     args?: UnrollArgs;
-} & BasicIO) | ({
+} & BasicInput) | ({
     verb: Verb.Window;
     args?: WindowArgs;
-} & BasicIO));
+} & BasicInput));
 
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1079,13 +1077,13 @@ export type UnrollArgs = InputColumnListArgs;
 // @public (undocumented)
 export type Unsubscribe = Handler;
 
-// Warning: (ae-missing-release-tag) "VariadicIO" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "VariadicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface VariadicIO extends BasicIO {
+export interface VariadicInput extends BasicInput {
     input: {
-        source: InputSpecification;
-        others?: InputSpecification[];
+        source: PortBinding;
+        others?: PortBinding[];
     };
 }
 
