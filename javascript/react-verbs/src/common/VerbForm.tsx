@@ -12,6 +12,7 @@ import {
 	SpinButton,
 	TextField,
 } from '@fluentui/react'
+import merge from 'lodash-es/merge.js'
 import noop from 'lodash-es/noop'
 import { Fragment, memo, useMemo } from 'react'
 import { Case, Switch } from 'react-if'
@@ -198,50 +199,52 @@ const Input: React.FC<{
 	const inputType: FormInputType = input.type
 
 	return !condition ? null : (
-		<Switch>
-			<Case condition={inputType === FormInputType.SingleChoice}>
-				<SingleChoiceInput
-					input={input as SingleChoiceFormInput<unknown>}
-					step={step}
-					onChange={onChange}
-				/>
-			</Case>
-			<Case condition={inputType === FormInputType.MultiChoice}>
-				<MultiChoiceInput
-					input={input as MultiChoiceFormInput<unknown>}
-					step={step}
-					onChange={onChange}
-				/>
-			</Case>
-			<Case condition={inputType === FormInputType.NumberSpinner}>
-				<NumberSpinnerInput
-					input={input as NumberSpinnerFormInput<unknown>}
-					step={step}
-					onChange={onChange}
-				/>
-			</Case>
-			<Case condition={inputType === FormInputType.Checkbox}>
-				<CheckboxInput
-					input={input as CheckboxFormInput<unknown>}
-					step={step}
-					onChange={onChange}
-				/>
-			</Case>
-			<Case condition={inputType === FormInputType.Text}>
-				<TextInput
-					input={input as TextFormInput<unknown>}
-					step={step}
-					onChange={onChange}
-				/>
-			</Case>
-			<Case condition={inputType === FormInputType.ComboBox}>
-				<ComboBoxInput
-					input={input as ComboBoxFormInput<unknown>}
-					step={step}
-					onChange={onChange}
-				/>
-			</Case>
-		</Switch>
+		<Row>
+			<Switch>
+				<Case condition={inputType === FormInputType.SingleChoice}>
+					<SingleChoiceInput
+						input={input as SingleChoiceFormInput<unknown>}
+						step={step}
+						onChange={onChange}
+					/>
+				</Case>
+				<Case condition={inputType === FormInputType.MultiChoice}>
+					<MultiChoiceInput
+						input={input as MultiChoiceFormInput<unknown>}
+						step={step}
+						onChange={onChange}
+					/>
+				</Case>
+				<Case condition={inputType === FormInputType.NumberSpinner}>
+					<NumberSpinnerInput
+						input={input as NumberSpinnerFormInput<unknown>}
+						step={step}
+						onChange={onChange}
+					/>
+				</Case>
+				<Case condition={inputType === FormInputType.Checkbox}>
+					<CheckboxInput
+						input={input as CheckboxFormInput<unknown>}
+						step={step}
+						onChange={onChange}
+					/>
+				</Case>
+				<Case condition={inputType === FormInputType.Text}>
+					<TextInput
+						input={input as TextFormInput<unknown>}
+						step={step}
+						onChange={onChange}
+					/>
+				</Case>
+				<Case condition={inputType === FormInputType.ComboBox}>
+					<ComboBoxInput
+						input={input as ComboBoxFormInput<unknown>}
+						step={step}
+						onChange={onChange}
+					/>
+				</Case>
+			</Switch>
+		</Row>
 	)
 })
 
@@ -399,7 +402,7 @@ const NumberSpinnerInput: React.FC<{
 				value={current ? `${current}` : undefined}
 				onChange={changeHandler}
 				disabled={disabled}
-				styles={styles}
+				styles={merge({}, dropdownStyles, styles)}
 			/>
 		</Wrapper>
 	)
@@ -429,7 +432,7 @@ const CheckboxInput: React.FC<{
 				checked={current}
 				onChange={changeHandler}
 				disabled={disabled}
-				styles={styles}
+				styles={merge({}, dropdownStyles, styles)}
 			/>
 		</Wrapper>
 	)
@@ -459,7 +462,7 @@ const TextInput: React.FC<{
 				value={current}
 				onChange={changeHandler}
 				disabled={disabled}
-				styles={styles}
+				styles={merge({}, dropdownStyles, styles)}
 			/>
 		</Wrapper>
 	)
@@ -474,4 +477,8 @@ const dropdownStyles = {
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
+`
+
+const Row = styled.div`
+	margin-bottom: 8px;
 `

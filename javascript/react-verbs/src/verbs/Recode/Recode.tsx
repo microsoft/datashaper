@@ -170,7 +170,7 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: 12px;
+	gap: 8px;
 `
 
 const ColumnPairContainer = styled.div`
