@@ -3,10 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
+	Specification,
 	SpecificationInput,
+	Step,
 	TableStore,
+	Verb,
 } from '@data-wrangling-components/core'
-import { createTableStore } from '@data-wrangling-components/core'
+import { createTableStore, readSpec } from '@data-wrangling-components/core'
+import { usePipeline } from '@data-wrangling-components/react'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { container } from '@essex/arquero'
@@ -30,16 +34,106 @@ const parse = {
 	Group: identity,
 }
 
-export function useInputTableList(): [
-	string[],
-	React.Dispatch<React.SetStateAction<string[]>>,
-] {
-	return useState<string[]>(TABLES)
+export function useSteps(store: TableStore): {
+	steps: Step[]
+	result: TableContainer | undefined
+	outputs: Map<string, TableContainer>
+	onStepCreate: (verb: Verb) => void
+	onStepChange: (step: Step, index: number) => void
+	onLoadPipeline: (spec?: Specification) => void
+	doRunPipeline: () => void
+} {
+	const [steps, setSteps] = useState<Step[]>([])
+	const pipeline = usePipeline(store, steps)
+	const [result, setResult] = useState<TableContainer | undefined>()
+	const [outputs, setOutputs] = useState<Map<string, TableContainer>>(
+		new Map<string, TableContainer>(),
+	)
+	const onStepCreate = useCallback(
+		(verb: Verb) => {
+			setSteps(pipeline.create(verb))
+		},
+		[pipeline, setSteps],
+	)
+
+	const onStepChange = useCallback(
+		(step: Step, index: number) => setSteps(pipeline.update(step, index)),
+		[setSteps, pipeline],
+	)
+
+	const doRunPipeline = useCallback(async () => {
+		const res = await pipeline.run()
+		const output = store.toMap()
+		pipeline.print()
+		store.print()
+		setResult(res)
+		setOutputs(output)
+	}, [pipeline, store, setResult, setOutputs])
+
+	const onLoadPipeline = useCallback(
+		async (spec: Specification | undefined) => {
+			pipeline.clear()
+			if (spec) {
+				pipeline.addAll(readSpec(spec as any))
+			}
+			// the pipeline will transform the steps into a consistent format - string shorthands are
+			// unpacked into object forms.
+			setSteps(pipeline.steps)
+			const res = await pipeline.run()
+			const output = store.toMap()
+			store.print()
+			setResult(res)
+			setOutputs(output)
+		},
+		[pipeline, store, setSteps, setOutputs, setResult],
+	)
+
+	return {
+		steps,
+		result,
+		outputs,
+		onStepCreate,
+		onStepChange,
+		onLoadPipeline,
+		doRunPipeline,
+	}
+}
+export function useTables(autoType = false): {
+	store: TableStore
+	tables: TableContainer[]
+	onAddFiles: (loaded: Map<string, ColumnTable>) => void
+} {
+	const store = useTableStore(autoType)
+
+	const [tables, setTables] = useState<TableContainer[]>([])
+	
+	// initialize the input tables when the store is created
+	useEffect(() => {		
+		const results = store.toArray()
+		setTables(results as TableContainer[])
+	}, [store, setTables])
+
+	// add any dropped files to the inputs
+	const onAddFiles = useCallback(
+		(loaded: Map<string, ColumnTable>) => {
+			loaded.forEach((table, name) => {
+				store.set(name, from([{ id: name, table }]))
+			})
+			setTables(store.toArray() as TableContainer[])
+		},
+		[store]
+	)
+
+	return {
+		store,
+		tables,
+		onAddFiles,
+	}
 }
 
 // create the store and initialize it with our test tables
 // memoing this gives us a chance queue up our built-in test tables on first run
-export function useTableStore(autoType = false): TableStore {
+function useTableStore(autoType = false): TableStore {
 	const [store, setStore] = useState<TableStore>(createTableStore())
 	useEffect(() => {
 		const fn = async () => {
@@ -59,21 +153,6 @@ export function useTableStore(autoType = false): TableStore {
 		void fn()
 	}, [autoType])
 	return store
-}
-
-// write out the loaded test tables to a map for rendering
-export function useInputTables(
-	list: string[],
-	store: TableStore,
-): Map<string, TableContainer> {
-	const [tables, setTables] = useState<Map<string, TableContainer>>(
-		new Map<string, TableContainer>(),
-	)
-	useEffect(() => {
-		const results = store.toMap()
-		setTables(results)
-	}, [list, store, setTables])
-	return tables
 }
 
 export function useLoadTableFiles(): (

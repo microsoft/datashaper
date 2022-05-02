@@ -4,11 +4,10 @@
  */
 
 import type { TableStore } from '@data-wrangling-components/core'
-import type { TableContainer, TableMetadata } from '@essex/arquero'
+import type { TableMetadata } from '@essex/arquero'
 import { useCallback } from 'react'
 
 export function useOnUpdateMetadata(
-	setStoredTables: (tables: Map<string, TableContainer<unknown>>) => void,
 	store: TableStore,
 	selectedTableName?: string,
 ): (meta: TableMetadata) => void {
@@ -17,14 +16,10 @@ export function useOnUpdateMetadata(
 			const _table = store.get(selectedTableName as string)
 			if (_table) {
 				_table.metadata = meta
-
 				store.delete(_table.id)
 				store.emitItemChange(_table.id)
-
-				const _storedTables = store.toMap()
-				setStoredTables(_storedTables)
 			}
 		},
-		[store, selectedTableName, setStoredTables],
+		[store, selectedTableName],
 	)
 }

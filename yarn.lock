@@ -1560,7 +1560,6 @@ __metadata:
     "@types/lodash-es": ^4.17.6
     "@types/node": ^17.0.29
     "@types/toposort": ^2.0.3
-    "@types/uuid": ^8.3.4
     ajv: ^8.11.0
     arquero: ^4.8.8
     d3-time-format: ^4.1.0
@@ -1569,7 +1568,6 @@ __metadata:
     rxjs: ^7.5.5
     toposort: ^2.0.2
     typescript: ^4.6.3
-    uuid: ^8.3.2
   peerDependencies:
     "@types/node": "*"
     arquero: ^4.8.7
@@ -1886,7 +1884,6 @@ __metadata:
     "@types/react-is": ^17.0.3
     "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.25
-    "@types/uuid": ^8.3.4
     "@uifabric/icons": ^7.7.0
     ahooks: ^3.3.10
     arquero: ^4.8.8
@@ -4056,13 +4053,6 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 53e23a1f9fb14a491c00425b2a4fc443817564d77be5e1b95fcbeb6d009551b62ea82ffc3e5ca0c6b9f6b186824ca6ec46e7450c1bcd6674a46d1325f0116e24
-  languageName: node
-  linkType: hard
-
-"@types/uuid@npm:^8.3.4":
-  version: 8.3.4
-  resolution: "@types/uuid@npm:8.3.4"
-  checksum: 6f11f3ff70f30210edaa8071422d405e9c1d4e53abbe50fdce365150d3c698fe7bbff65c1e71ae080cbfb8fded860dbb5e174da96fdbbdfcaa3fb3daa474d20f
   languageName: node
   linkType: hard
 

@@ -44,13 +44,23 @@ export function useBusinessLogic(
 	)
 
 	const store = useStore()
+
+	useEffect(() => {
+		store.onChange(() => {
+			// we need to create a new map to trigger memo update
+			const _storedTables = store.toMap()
+			setStoredTables(new Map(_storedTables))
+		})
+	}, [store, setStoredTables])
+
 	const pipeline = usePipeline(store)
+
 	const runPipeline = useRunPipeline(
 		pipeline,
-		setStoredTables,
 		setSelectedTableName,
+		onOutputTable,
 	)
-	const addNewTables = useAddNewTables(store, setStoredTables)
+	const addNewTables = useAddNewTables(store)
 	const { isLoading } = getLoadingOrchestrator(LoadingOrchestratorType.Tables)
 
 	// TODO: resolve these from the stored table state
@@ -64,11 +74,13 @@ export function useBusinessLogic(
 
 	const selectedTable = useMemo((): ColumnTable | undefined => {
 		return storedTables.get(selectedTableName ?? '')?.table
-	}, [selectedTableName, storedTables])
+	}, [storedTables, selectedTableName])
 
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
-		return storedTables.get(selectedTableName ?? '')?.metadata
-	}, [storedTables, selectedTableName])
+		if (selectedTableName) {
+			return store.get(selectedTableName ?? '')?.metadata
+		}
+	}, [store, selectedTableName])
 
 	// kind of a complex selection process:
 	// 1) if a table is selected in the tables dropdown, use that
@@ -105,7 +117,7 @@ export function useBusinessLogic(
 	}, [storedTables, lastTableName, onOutputTable])
 
 	useEffect(() => {
-		if (storedTables.size > 0) {
+		if (steps && steps.length > 0) {
 			if (
 				steps?.filter(s => !pipeline.steps?.includes(s)).length ||
 				steps?.length !== pipeline.steps.length
@@ -115,16 +127,12 @@ export function useBusinessLogic(
 				runPipeline()
 			}
 		}
-	}, [steps, pipeline, runPipeline, storedTables])
+	}, [steps, pipeline, runPipeline])
 
 	const onSaveStep = useOnSaveStep(onUpdateSteps, steps)
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, steps)
 
-	const onUpdateMetadata = useOnUpdateMetadata(
-		setStoredTables,
-		store,
-		selectedTableName,
-	)
+	const onUpdateMetadata = useOnUpdateMetadata(store, selectedTableName)
 
 	return {
 		selectedTable,
