@@ -10,12 +10,10 @@ import type { Maybe } from '../primitives.js'
 import type { NamedPortBinding } from '../specification.js'
 import type { Step, StepInput } from '../steps/index.js'
 import type { ParsedSpecification } from '../steps/types.js'
-import type { Store } from '../store/index.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
 
-export type TableStore = Store<TableContainer>
 /**
  * Manages a series of pipeline steps,
  * including creating default names, executing in order, etc.
@@ -28,9 +26,9 @@ export type TableStore = Store<TableContainer>
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
 export interface GraphBuilder {
-	readonly store: Store<TableContainer>
 	readonly graph: Graph<TableContainer>
 	readonly spec: ParsedSpecification
+	readonly outputs: string[]
 
 	/**
 	 * Remove all steps, inputs, and outputs from the pipeline
@@ -80,11 +78,8 @@ export interface GraphBuilder {
 	 */
 	reconfigureStep(index: number, step: StepInput): void
 
-	/**
-	 * Observe a table name
-	 * @param name - The table name to observe
-	 */
-	table(name: string): Observable<Maybe<TableContainer>>
+	output(name: string): Observable<Maybe<TableContainer>>
+	latest(name: string): Maybe<TableContainer>
 
 	/**
 	 * Log out the steps

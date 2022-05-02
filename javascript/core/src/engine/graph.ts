@@ -3,11 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@essex/arquero'
-import type { Graph } from '@essex/dataflow'
 
 import type { ParsedSpecification } from '../steps/types.js'
-import type { Store } from '../store/types.js'
 import { createGraphBuilder } from './GraphBuilder.js'
+import type { GraphBuilder } from './types.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -17,14 +16,14 @@ import { createGraphBuilder } from './GraphBuilder.js'
  * graph will be wired to the TableContainer using the observable pattern.
  *
  * @param steps - The processing steps
- * @param store - The table container
+ * @param tables - The fixed table map
  * @returns The built reactive processing graph
  */
 export function createGraph(
 	{ steps, input, output }: ParsedSpecification,
-	store: Store<TableContainer>,
-): Graph<TableContainer> {
-	const builder = createGraphBuilder(store)
+	tables: Map<string, TableContainer>,
+): GraphBuilder {
+	const builder = createGraphBuilder(tables)
 	for (const i of input.values()) {
 		builder.addInput(i)
 	}
@@ -35,5 +34,5 @@ export function createGraph(
 		builder.addOutput(key, value)
 	}
 
-	return builder.graph
+	return builder
 }

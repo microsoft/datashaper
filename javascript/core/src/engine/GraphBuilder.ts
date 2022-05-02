@@ -5,7 +5,8 @@
 import type { TableContainer } from '@essex/arquero'
 import type { Graph, Node } from '@essex/dataflow'
 import { DefaultGraph, observableNode } from '@essex/dataflow'
-import type { Observable } from 'rxjs'
+import type { Observable, Subscription } from 'rxjs'
+import { from } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import type {
@@ -15,13 +16,13 @@ import type {
 import type { Step, StepInput } from '../steps/index.js'
 import { readStep } from '../steps/index.js'
 import type { ParsedSpecification } from '../steps/types.js'
-import type { Store } from '../store/index.js'
 import { createNode } from './createNode.js'
-import type { GraphBuilder, TableStore } from './types.js'
+import type { GraphBuilder } from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
 
+export type TableObservable = Observable<Maybe<TableContainer>>
 /**
  * Manages a series of pipeline steps,
  * including creating default names, executing in order, etc.
@@ -33,15 +34,18 @@ import type { GraphBuilder, TableStore } from './types.js'
  * - building compound steps with recursive execution.
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
-export class DefaultGraphBuilder implements GraphBuilder<TableContainer> {
+export class DefaultGraphBuilder implements GraphBuilder {
 	private _graph: Graph<TableContainer>
 	private _spec: ParsedSpecification = {
 		steps: [],
 		input: new Set(),
 		output: new Map(),
 	}
+	private readonly outputObservables: Map<string, TableObservable> = new Map()
+	private readonly outputCache: Map<string, Maybe<TableContainer>> = new Map()
+	private readonly outputSubscriptions: Map<string, Subscription> = new Map()
 
-	public constructor(public readonly store: Store<TableContainer>) {
+	public constructor(public readonly inputs: Map<string, TableContainer>) {
 		this._graph = new DefaultGraph<TableContainer>()
 	}
 	public get graph(): Graph<TableContainer> {
@@ -133,7 +137,12 @@ export class DefaultGraphBuilder implements GraphBuilder<TableContainer> {
 
 		// Register the output in the table store
 		const node = this.getNode(binding.node)
-		this.store.set(name, node.output(binding.output))
+		const boundOutput = node.output(binding.output)
+		this.outputObservables.set(name, boundOutput)
+		const subscription = boundOutput.subscribe(latest => {
+			this.outputCache.set(name, latest)
+		})
+		this.outputSubscriptions.set(name, subscription)
 	}
 
 	/**
@@ -142,11 +151,26 @@ export class DefaultGraphBuilder implements GraphBuilder<TableContainer> {
 	 */
 	public removeOutput(name: string): void {
 		this._spec.output.delete(name)
-		this.store.delete(name)
+		this.outputObservables.delete(name)
+		this.outputSubscriptions.get(name)?.unsubscribe()
+		this.outputSubscriptions.delete(name)
+		this.outputCache.delete(name)
 	}
 
 	public print(): void {
 		console.log(this._spec.steps)
+	}
+
+	public get outputs(): string[] {
+		return [...this.outputObservables.keys()]
+	}
+
+	public output(name: string): TableObservable {
+		return this.outputObservables.get(name)!
+	}
+
+	public latest(name: string): Maybe<TableContainer> {
+		return this.outputCache.get(name)
 	}
 
 	private _configureStep(step: Step, node: Node<TableContainer>) {
@@ -179,18 +203,16 @@ export class DefaultGraphBuilder implements GraphBuilder<TableContainer> {
 			return graph.node(id)
 		} else if (this._spec.input.has(id)) {
 			// bind to a declared input
-			return observableNode(id, this.store.observe(id)) as any
+			return observableNode(id, from([this.inputs.get(id)]))
 		} else {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}
 	}
-
-	public table(name: string): Observable<Maybe<TableContainer>> {
-		return this.store.observe(name)
-	}
 }
 
-export function createGraphBuilder(store: TableStore): GraphBuilder {
+export function createGraphBuilder(
+	store: Map<string, TableContainer>,
+): GraphBuilder {
 	return new DefaultGraphBuilder(store)
 }
 

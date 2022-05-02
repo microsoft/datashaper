@@ -7,12 +7,11 @@ import { table } from 'arquero'
 
 import { Verb } from '../../index.js'
 import { readSpec } from '../../steps/readSpec.js'
-import { createTableStore } from '../../store/index.js'
-import type { Store } from '../../store/types.js'
+import { createTableStore } from '../../__tests__/createTableStore.js'
 import { createGraph } from '../graph.js'
 
 describe('stepGraph', () => {
-	let store: Store<TableContainer>
+	let store: Map<string, TableContainer>
 
 	beforeEach(() => {
 		store = createTableStore([
@@ -40,10 +39,10 @@ describe('stepGraph', () => {
 			store,
 		)
 		expect(g).toBeDefined()
-		const result = store.get('output')
+		const result = g.latest('output')
 		expect(result?.table?.numCols()).toBe(2)
 		expect(result?.table?.numRows()).toBe(4)
-		expect(store.list()).toEqual(['input', 'output'])
+		expect(g.outputs).toEqual(['output'])
 	})
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {
@@ -74,11 +73,11 @@ describe('stepGraph', () => {
 			store,
 		)
 		expect(g).toBeDefined()
-		const result = store.get('output-2')
+		const result = g.latest('output-2')
 		expect(result).toBeDefined()
 		expect(result?.table?.numCols()).toBe(3)
 		expect(result?.table?.numRows()).toBe(4)
 		expect(result?.table?.columnNames()).toEqual(['ID', 'filled', 'filled2'])
-		expect(store.list()).toEqual(['input', 'output-1', 'output-2'])
+		expect(g.outputs).toEqual(['output-1', 'output-2'])
 	})
 })
