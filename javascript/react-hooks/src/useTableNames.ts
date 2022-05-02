@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableStore } from '@data-wrangling-components/core'
+import type { GraphBuilder } from '@data-wrangling-components/core'
 import { useEffect, useState } from 'react'
 
 /**
@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
  * @param store -
  * @returns
  */
-export function useTableNames(store?: TableStore): string[] {
+export function useTableNames(store?: GraphBuilder): string[] {
 	// we won't actually get an updated store reference, so we'll track
 	// whether updates are needed using a change listener and flag
 	const [dirty, setDirty] = useState<boolean>(true)
@@ -24,7 +24,7 @@ export function useTableNames(store?: TableStore): string[] {
 	useEffect(() => {
 		if (dirty) {
 			setDirty(false)
-			setList(store?.list().sort() || [])
+			setList(store?.outputs.sort() || [])
 		}
 	}, [store, dirty, setDirty, setList])
 	return list

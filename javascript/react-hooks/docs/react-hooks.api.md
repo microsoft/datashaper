@@ -5,10 +5,10 @@
 ```ts
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { GraphBuilder } from '@data-wrangling-components/core';
 import type { IDropdownOption } from '@fluentui/react';
 import type { JoinArgs } from '@data-wrangling-components/core';
 import type { Step } from '@data-wrangling-components/core';
-import type { TableStore } from '@data-wrangling-components/core';
 import type { Value } from '@essex/arquero';
 
 // Warning: (ae-missing-release-tag) "getDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -74,7 +74,7 @@ export function useTableColumnNames(table: ColumnTable | undefined, filter?: (na
 // Warning: (ae-missing-release-tag) "useTableNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useTableNames(store?: TableStore): string[];
+export function useTableNames(store?: GraphBuilder): string[];
 
 // (No @packageDocumentation comment for this package)
 

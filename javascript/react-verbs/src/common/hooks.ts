@@ -5,7 +5,7 @@
 import type {
 	InputColumnRecordArgs,
 	Step,
-	TableStore,
+	GraphBuilder,
 } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import { columnType, DataType } from '@essex/arquero'
@@ -292,7 +292,7 @@ export function useColumnRecordDelete(
 export function useLoadTable(
 	id: string | undefined,
 	table?: ColumnTable,
-	store?: TableStore,
+	builder?: GraphBuilder,
 ): ColumnTable | undefined {
 	const [tbl, setTable] = useState<ColumnTable | undefined>()
 	const handleTableLoad = useCallback(
@@ -306,11 +306,11 @@ export function useLoadTable(
 		// interface that is managing a pipeline
 		if (table) {
 			setTable(table)
-		} else if (id && store) {
-			const sub = store.observe(id).subscribe(t => setTable(t?.table))
+		} else if (id && builder) {
+			const sub = builder.output(id).subscribe(t => setTable(t?.table))
 			return () => sub.unsubscribe()
 		}
-	}, [id, table, store, handleTableLoad])
+	}, [id, table, builder, handleTableLoad])
 	return tbl
 }
 

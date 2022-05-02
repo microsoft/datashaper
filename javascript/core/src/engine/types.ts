@@ -55,7 +55,7 @@ export interface GraphBuilder {
 
 	/**
 	 * Remove an output binding
-	 * @param name
+	 * @param name - the output name to remove
 	 */
 	removeOutput(name: string): void
 
@@ -78,8 +78,23 @@ export interface GraphBuilder {
 	 */
 	reconfigureStep(index: number, step: StepInput): void
 
+	/**
+	 * Observe an output name
+	 * @param name - The output to observe
+	 */
 	output(name: string): Observable<Maybe<TableContainer>>
+
+	/**
+	 * Get the latest output value
+	 * @param name - The output to retrieve
+	 */
 	latest(name: string): Maybe<TableContainer>
+
+	/**
+	 *
+	 * @param handler - The onChange handler
+	 */
+	onChange(handler: () => void): () => void
 
 	/**
 	 * Log out the steps

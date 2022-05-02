@@ -6,7 +6,7 @@
 
 import { BaseNode } from '@essex/dataflow';
 import { BaseVariadicNode } from '@essex/dataflow';
-import { Graph } from '@essex/dataflow';
+import type { Graph } from '@essex/dataflow';
 import { InputNode } from '@essex/dataflow';
 import type { Node as Node_2 } from '@essex/dataflow';
 import type { Observable } from 'rxjs';
@@ -155,17 +155,12 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createGraph({ steps, input, output }: ParsedSpecification, store: Store<TableContainer>): Graph<TableContainer>;
+export function createGraph({ steps, input, output }: ParsedSpecification, tables: Map<string, TableContainer>): GraphBuilder;
 
-// Warning: (ae-missing-release-tag) "createPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "createGraphBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function createPipeline(store: Store<TableContainer>): Pipeline;
-
-// Warning: (ae-missing-release-tag) "createTableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function createTableStore(tables?: TableContainer[]): Store<TableContainer>;
+export function createGraphBuilder(store: Map<string, TableContainer>): GraphBuilder;
 
 // Warning: (ae-missing-release-tag) "Criterion" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -187,14 +182,14 @@ export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<I
 // @public (undocumented)
 export type DedupeArgs = Partial<InputColumnListArgs>;
 
-// Warning: (ae-missing-release-tag) "DefaultPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DefaultGraphBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export class DefaultPipeline implements Pipeline {
-    constructor(store: TableStore);
+export class DefaultGraphBuilder implements GraphBuilder {
+    constructor(inputs: Map<string, TableContainer>);
     // (undocumented)
     addInput(input: string): void;
-    addOutput(name: string, binding: NamedPortBinding): void;
+    addOutput(name: string, binding: NamedOutputPortBinding): void;
     // (undocumented)
     addStep(stepInput: StepInput): Step;
     // (undocumented)
@@ -202,51 +197,27 @@ export class DefaultPipeline implements Pipeline {
     // (undocumented)
     get graph(): Graph<TableContainer>;
     // (undocumented)
+    readonly inputs: Map<string, TableContainer>;
+    // (undocumented)
+    latest(name: string): Maybe<TableContainer>;
+    // (undocumented)
+    onChange(handler: () => void): () => void;
+    // (undocumented)
+    output(name: string): TableObservable;
+    // (undocumented)
+    get outputs(): string[];
+    // (undocumented)
     print(): void;
     // (undocumented)
     reconfigureStep(index: number, stepInput: StepInput<unknown>): void;
     // (undocumented)
     removeInput(input: string): void;
+    // (undocumented)
     removeOutput(name: string): void;
     // (undocumented)
     removeStep(index: number): void;
     // (undocumented)
     get spec(): ParsedSpecification;
-    // (undocumented)
-    readonly store: TableStore;
-    // (undocumented)
-    table(name: string): Observable<Maybe<TableContainer>>;
-}
-
-// Warning: (ae-missing-release-tag) "DefaultStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export class DefaultStore<T> implements Store<T> {
-    constructor(_printItem: (item: T) => void);
-    // (undocumented)
-    clear(): void;
-    // (undocumented)
-    delete(id: string): void;
-    // (undocumented)
-    emitItemChange(id: string): void;
-    // (undocumented)
-    get(id: string): Maybe<T>;
-    // (undocumented)
-    list(filter?: (id: string) => boolean): string[];
-    // (undocumented)
-    observe(id: string): Observable<Maybe<T>>;
-    // (undocumented)
-    onChange(listener: Handler): Unsubscribe;
-    // (undocumented)
-    onItemChange(id: string, listener: HandlerOf<Maybe<T>>): Unsubscribe;
-    // (undocumented)
-    print(): void;
-    // (undocumented)
-    set(id: string, valueAny: Observable<T> | T | Promise<T>): void;
-    // (undocumented)
-    toArray(): Maybe<T>[];
-    // (undocumented)
-    toMap(): Map<string, T>;
 }
 
 // Warning: (ae-missing-release-tag) "derive" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -394,6 +365,31 @@ export const fold: (id: string) => StepNode<TableContainer<unknown>, FoldArgs>;
 // @public (undocumented)
 export interface FoldArgs extends InputColumnListArgs {
     to?: [string, string];
+}
+
+// Warning: (ae-missing-release-tag) "GraphBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface GraphBuilder {
+    addInput(input: string): void;
+    addOutput(name: string, binding: NamedPortBinding): void;
+    addStep(step: StepInput): Step;
+    clear(): void;
+    // (undocumented)
+    readonly graph: Graph<TableContainer>;
+    latest(name: string): Maybe<TableContainer>;
+    // (undocumented)
+    onChange(handler: () => void): () => void;
+    output(name: string): Observable<Maybe<TableContainer>>;
+    // (undocumented)
+    readonly outputs: string[];
+    print(): void;
+    reconfigureStep(index: number, step: StepInput): void;
+    removeInput(input: string): void;
+    removeOutput(name: string): void;
+    removeStep(index: number): void;
+    // (undocumented)
+    readonly spec: ParsedSpecification;
 }
 
 // Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -580,6 +576,13 @@ export enum MergeStrategy {
     LastOneWins = "last one wins"
 }
 
+// Warning: (ae-missing-release-tag) "NamedOutputPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface NamedOutputPortBinding extends NamedPortBinding {
+    name: string;
+}
+
 // Warning: (ae-missing-release-tag) "NamedPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -656,6 +659,11 @@ export interface OutputColumnArgs {
     to: string;
 }
 
+// Warning: (ae-missing-release-tag) "OutputPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type OutputPortBinding = string | NamedOutputPortBinding;
+
 // Warning: (ae-missing-release-tag) "ParsedSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -663,7 +671,7 @@ export interface ParsedSpecification {
     // (undocumented)
     input: Set<string>;
     // (undocumented)
-    output: Record<string, NamedPortBinding>;
+    output: Map<string, NamedOutputPortBinding>;
     // (undocumented)
     steps: Step[];
 }
@@ -681,28 +689,6 @@ export enum ParseType {
     Integer = "int",
     // (undocumented)
     String = "string"
-}
-
-// Warning: (ae-missing-release-tag) "Pipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface Pipeline {
-    addInput(input: string): void;
-    addOutput(name: string, binding: NamedPortBinding): void;
-    addStep(step: StepInput): Step;
-    clear(): void;
-    // (undocumented)
-    readonly graph: Graph<TableContainer>;
-    print(): void;
-    reconfigureStep(index: number, step: StepInput): void;
-    removeInput(input: string): void;
-    removeOutput(name: string): void;
-    removeStep(index: number): void;
-    // (undocumented)
-    readonly spec: ParsedSpecification;
-    // (undocumented)
-    readonly store: TableStore;
-    table(name: string): Observable<Maybe<TableContainer>>;
 }
 
 // Warning: (ae-missing-release-tag) "pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -820,8 +806,7 @@ export interface Specification {
     description?: string;
     input?: string[];
     name?: string;
-    // (undocumented)
-    output: Record<string, PortBinding>;
+    output: Array<OutputPortBinding>;
     steps?: StepSpecification[];
 }
 
@@ -987,24 +972,6 @@ export type StepSpecification = StepCommon & (({
     args?: WindowArgs;
 } & BasicInput));
 
-// Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface Store<T, K = string> {
-    clear(): void;
-    delete(id: K): void;
-    emitItemChange(id: string): void;
-    get(id: K): Maybe<T>;
-    list(filter?: (id: K) => boolean): K[];
-    observe(id: K): Observable<Maybe<T>>;
-    onChange(listener: Handler): Unsubscribe;
-    onItemChange(id: K, listener: HandlerOf<Maybe<T>>): Unsubscribe;
-    print(): void;
-    set(id: K, value: Observable<Maybe<T>> | T | Promise<Maybe<T>>): void;
-    toArray(): Maybe<T>[];
-    toMap(): Map<K, T>;
-}
-
 // Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1027,10 +994,10 @@ export enum StringComparisonOperator {
     StartsWith = "starts with"
 }
 
-// Warning: (ae-missing-release-tag) "TableStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "TableObservable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type TableStore = Store<TableContainer>;
+export type TableObservable = Observable<Maybe<TableContainer>>;
 
 // Warning: (ae-missing-release-tag) "unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

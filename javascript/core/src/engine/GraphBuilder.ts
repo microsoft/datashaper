@@ -6,7 +6,7 @@ import type { TableContainer } from '@essex/arquero'
 import type { Graph, Node } from '@essex/dataflow'
 import { DefaultGraph, observableNode } from '@essex/dataflow'
 import type { Observable, Subscription } from 'rxjs'
-import { from } from 'rxjs'
+import { from, Subject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
 import type {
@@ -35,8 +35,11 @@ export type TableObservable = Observable<Maybe<TableContainer>>
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
 export class DefaultGraphBuilder implements GraphBuilder {
-	private _graph: Graph<TableContainer>
-	private _spec: ParsedSpecification = {
+	public readonly inputs: Map<string, TableContainer> = new Map()
+	private readonly _graph: Graph<TableContainer> =
+		new DefaultGraph<TableContainer>()
+	private readonly _onChange = new Subject<void>()
+	private readonly _spec: ParsedSpecification = {
 		steps: [],
 		input: new Set(),
 		output: new Map(),
@@ -44,10 +47,6 @@ export class DefaultGraphBuilder implements GraphBuilder {
 	private readonly outputObservables: Map<string, TableObservable> = new Map()
 	private readonly outputCache: Map<string, Maybe<TableContainer>> = new Map()
 	private readonly outputSubscriptions: Map<string, Subscription> = new Map()
-
-	public constructor(public readonly inputs: Map<string, TableContainer>) {
-		this._graph = new DefaultGraph<TableContainer>()
-	}
 	public get graph(): Graph<TableContainer> {
 		return this._graph
 	}
@@ -65,10 +64,12 @@ export class DefaultGraphBuilder implements GraphBuilder {
 
 	public addInput(input: string): void {
 		this._spec.input.add(input)
+		this._onChange.next()
 	}
 
 	public removeInput(input: string): void {
 		this._spec.input.delete(input)
+		this._onChange.next()
 	}
 
 	public addStep(stepInput: StepInput): Step {
@@ -78,6 +79,8 @@ export class DefaultGraphBuilder implements GraphBuilder {
 		this._graph.add(node)
 
 		this._configureStep(step, node)
+
+		this._onChange.next()
 
 		return step
 	}
@@ -106,6 +109,7 @@ export class DefaultGraphBuilder implements GraphBuilder {
 
 		// Remove the step from the graph
 		this._graph.remove(step.id)
+		this._onChange.next()
 	}
 
 	public reconfigureStep(index: number, stepInput: StepInput<unknown>): void {
@@ -125,6 +129,8 @@ export class DefaultGraphBuilder implements GraphBuilder {
 		}
 
 		this._configureStep(step, node)
+
+		this._onChange.next()
 	}
 
 	/**
@@ -141,20 +147,21 @@ export class DefaultGraphBuilder implements GraphBuilder {
 		this.outputObservables.set(name, boundOutput)
 		const subscription = boundOutput.subscribe(latest => {
 			this.outputCache.set(name, latest)
+			this._onChange.next()
 		})
 		this.outputSubscriptions.set(name, subscription)
+
+		this._onChange.next()
 	}
 
-	/**
-	 * Remove an output binding
-	 * @param name
-	 */
 	public removeOutput(name: string): void {
 		this._spec.output.delete(name)
 		this.outputObservables.delete(name)
 		this.outputSubscriptions.get(name)?.unsubscribe()
 		this.outputSubscriptions.delete(name)
 		this.outputCache.delete(name)
+
+		this._onChange.next()
 	}
 
 	public print(): void {
@@ -171,6 +178,11 @@ export class DefaultGraphBuilder implements GraphBuilder {
 
 	public latest(name: string): Maybe<TableContainer> {
 		return this.outputCache.get(name)
+	}
+
+	public onChange(handler: () => void): () => void {
+		const sub = this._onChange.subscribe(handler)
+		return () => sub.unsubscribe()
 	}
 
 	private _configureStep(step: Step, node: Node<TableContainer>) {
@@ -210,10 +222,8 @@ export class DefaultGraphBuilder implements GraphBuilder {
 	}
 }
 
-export function createGraphBuilder(
-	store: Map<string, TableContainer>,
-): GraphBuilder {
-	return new DefaultGraphBuilder(store)
+export function createGraphBuilder(): GraphBuilder {
+	return new DefaultGraphBuilder()
 }
 
 function hasDefinedInputs(step: Step): boolean {
