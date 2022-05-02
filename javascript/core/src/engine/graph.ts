@@ -6,7 +6,7 @@ import type { TableContainer } from '@essex/arquero'
 import type { Graph } from '@essex/dataflow'
 import type { Store } from '../store/types.js'
 import type { ParsedSpecification } from '../steps/types.js'
-import { DefaultGraphBuilder } from './GraphBuilder.js'
+import { createGraphBuilder } from './GraphBuilder.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -23,7 +23,7 @@ export function createGraph(
 	{ steps, input, output }: ParsedSpecification,
 	store: Store<TableContainer>,
 ): Graph<TableContainer> {
-	const builder = new DefaultGraphBuilder(store)
+	const builder = createGraphBuilder(store)
 	for (const i of input.values()) {
 		builder.addInput(i)
 	}

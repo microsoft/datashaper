@@ -8,7 +8,7 @@ import { DefaultGraph, Graph, Node, observableNode } from '@essex/dataflow'
 import type { Step, StepInput } from '../steps/index.js'
 import { readStep } from '../steps/index.js'
 import type { Store } from '../store/index.js'
-import type { GraphBuilder } from './types.js'
+import type { GraphBuilder, TableStore } from './types.js'
 import type { ParsedSpecification } from '../steps/types.js'
 import { createNode } from './createNode.js'
 import type {
@@ -186,6 +186,10 @@ export class DefaultGraphBuilder implements GraphBuilder<TableContainer> {
 	public table(name: string): Observable<Maybe<TableContainer>> {
 		return this.store.observe(name)
 	}
+}
+
+export function createGraphBuilder(store: TableStore) {
+	return new DefaultGraphBuilder(store)
 }
 
 function hasDefinedInputs(step: Step): boolean {
