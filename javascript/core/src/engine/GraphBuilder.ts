@@ -188,12 +188,6 @@ export class DefaultGraphBuilder implements GraphBuilder<TableContainer> {
 	}
 }
 
-export function createPipeline(
-	store: Store<TableContainer>,
-): GraphBuilder<TableContainer> {
-	return new DefaultGraphBuilder(store)
-}
-
 function hasDefinedInputs(step: Step): boolean {
 	return Object.keys(step.input).length > 0
 }
