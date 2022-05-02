@@ -4,7 +4,9 @@
  */
 import type { InputColumnListArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
-import { FormInput, VerbForm } from '../../common/VerbForm.jsx'
+
+import type { FormInput} from '../../common/VerbForm.jsx';
+import { VerbForm } from '../../common/VerbForm.jsx'
 import { inputColumnList } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
@@ -18,7 +20,7 @@ export const ColumnListOperationBase: React.FC<
 > = memo(function ColumnListOperationBase({ columns, step, onChange }) {
 	const inputs = useMemo<FormInput<InputColumnListArgs>[]>(
 		() => [inputColumnList(step, columns)],
-		[],
+		[step, columns],
 	)
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
