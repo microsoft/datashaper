@@ -2,12 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableContainer } from '@essex/arquero'
 import { table } from 'arquero'
+
 import { Verb } from '../../index.js'
 import { readSpec } from '../../steps/readSpec.js'
 import { createTableStore } from '../../store/index.js'
 import type { Store } from '../../store/types.js'
-import type { TableContainer } from '@essex/arquero'
 import { createGraph } from '../graph.js'
 
 describe('stepGraph', () => {

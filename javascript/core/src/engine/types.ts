@@ -4,13 +4,13 @@
  */
 import type { TableContainer } from '@essex/arquero'
 import type { Graph } from '@essex/dataflow'
-import type { NamedPortBinding } from '../specification.js'
-
-import type { Step, StepInput } from '../steps/index.js'
-import type { Store } from '../store/index.js'
-import type { ParsedSpecification } from '../steps/types.js'
 import type { Observable } from 'rxjs'
+
 import type { Maybe } from '../primitives.js'
+import type { NamedPortBinding } from '../specification.js'
+import type { Step, StepInput } from '../steps/index.js'
+import type { ParsedSpecification } from '../steps/types.js'
+import type { Store } from '../store/index.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -27,9 +27,9 @@ export type TableStore = Store<TableContainer>
  * - building compound steps with recursive execution.
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
-export interface GraphBuilder<T> {
-	readonly store: Store<T>
-	readonly graph: Graph<T>
+export interface GraphBuilder {
+	readonly store: Store<TableContainer>
+	readonly graph: Graph<TableContainer>
 	readonly spec: ParsedSpecification
 
 	/**
@@ -84,7 +84,7 @@ export interface GraphBuilder<T> {
 	 * Observe a table name
 	 * @param name - The table name to observe
 	 */
-	table(name: string): Observable<Maybe<T>>
+	table(name: string): Observable<Maybe<TableContainer>>
 
 	/**
 	 * Log out the steps

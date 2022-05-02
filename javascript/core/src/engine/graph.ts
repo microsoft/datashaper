@@ -4,8 +4,9 @@
  */
 import type { TableContainer } from '@essex/arquero'
 import type { Graph } from '@essex/dataflow'
-import type { Store } from '../store/types.js'
+
 import type { ParsedSpecification } from '../steps/types.js'
+import type { Store } from '../store/types.js'
 import { createGraphBuilder } from './GraphBuilder.js'
 
 /**

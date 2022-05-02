@@ -3,19 +3,21 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@essex/arquero'
+import type { Graph, Node } from '@essex/dataflow'
+import { DefaultGraph, observableNode } from '@essex/dataflow'
+import type { Observable } from 'rxjs'
+
 import type { Maybe } from '../primitives.js'
-import { DefaultGraph, Graph, Node, observableNode } from '@essex/dataflow'
-import type { Step, StepInput } from '../steps/index.js'
-import { readStep } from '../steps/index.js'
-import type { Store } from '../store/index.js'
-import type { GraphBuilder, TableStore } from './types.js'
-import type { ParsedSpecification } from '../steps/types.js'
-import { createNode } from './createNode.js'
 import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 } from '../specification.js'
-import type { Observable } from 'rxjs'
+import type { Step, StepInput } from '../steps/index.js'
+import { readStep } from '../steps/index.js'
+import type { ParsedSpecification } from '../steps/types.js'
+import type { Store } from '../store/index.js'
+import { createNode } from './createNode.js'
+import type { GraphBuilder, TableStore } from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -114,7 +116,7 @@ export class DefaultGraphBuilder implements GraphBuilder<TableContainer> {
 		}
 
 		// todo: add node.clearBindings() to dataflow node
-		for (let binding of node.bindings()) {
+		for (const binding of node.bindings()) {
 			node.unbind(binding.input)
 		}
 
@@ -188,7 +190,7 @@ export class DefaultGraphBuilder implements GraphBuilder<TableContainer> {
 	}
 }
 
-export function createGraphBuilder(store: TableStore) {
+export function createGraphBuilder(store: TableStore): GraphBuilder {
 	return new DefaultGraphBuilder(store)
 }
 

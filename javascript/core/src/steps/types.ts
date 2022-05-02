@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
+	NamedOutputPortBinding,
 	NamedPortBinding,
 	PortBinding,
-	StepCommon,
 	Specification,
-	NamedOutputPortBinding,
+	StepCommon,
 } from '../specification.js'
 import type { Verb } from '../verbs/index.js'
 
