@@ -49,7 +49,7 @@ export interface FormInputBase<
 	/**
 	 * Whether this input is presented
 	 */
-	condition?: boolean
+	if?: boolean
 
 	/**
 	 * Whether this input is disabled
@@ -194,7 +194,7 @@ const Input: React.FC<{
 	step: Step<unknown>
 	onChange?: StepChangeFunction<unknown>
 }> = memo(function Input({ input, step, onChange }) {
-	const condition = input.condition ?? true
+	const condition = input.if ?? true
 	const inputType: FormInputType = input.type
 
 	return !condition ? null : (

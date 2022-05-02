@@ -36,14 +36,14 @@ export const ConvertBase: React.FC<
 			},
 			{
 				label: 'Base (radix)',
-				condition: step.args.type === ParseType.Integer,
+				if: step.args.type === ParseType.Integer,
 				type: FormInputType.Text,
 				current: step.args.radix ? `${step.args.radix}` : '',
 				onChange: (s, opt) => (s.args.radix = num(opt as string)),
 			},
 			{
 				label: 'Date format pattern',
-				condition: step.args.type === ParseType.Date,
+				if: step.args.type === ParseType.Date,
 				type: FormInputType.ComboBox,
 				options: getDateFormatPatternOptions(),
 				placeholder: 'pattern',

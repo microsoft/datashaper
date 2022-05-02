@@ -112,6 +112,13 @@ export type CheckboxChangeHandler = (event?: React.FormEvent<HTMLElement | HTMLI
 // @public
 export const ColumnListOperation: React.FC<StepComponentProps<InputColumnListArgs>>;
 
+// Warning: (ae-missing-release-tag) "ColumnListOperationBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const ColumnListOperationBase: React.FC<StepComponentBaseProps<InputColumnListArgs> & {
+    columns: string[];
+}>;
+
 // Warning: (ae-missing-release-tag) "ColumnListOperationDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

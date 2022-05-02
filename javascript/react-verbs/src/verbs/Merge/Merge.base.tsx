@@ -33,7 +33,7 @@ export const MergeBase: React.FC<
 			{
 				label: 'Delimiter',
 				type: FormInputType.Text,
-				condition: step.args.strategy === MergeStrategy.Concat,
+				if: step.args.strategy === MergeStrategy.Concat,
 				current: step.args.delimiter,
 				onChange: (s, val) => (s.args.delimiter = val as string),
 			},
