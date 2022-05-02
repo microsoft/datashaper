@@ -273,7 +273,7 @@
 		},
 		{
 			"verb": "rollup",
-			"input": { "source": "data/companies.csv" },
+			"input": { "source": "data/products.csv" },
 			"output": { "target": "rollup-1" },
 			"args": {
 				"to": "count",
