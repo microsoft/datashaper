@@ -1,0 +1,5 @@
+releases:
+  "@data-wrangling-components/react": patch
+  "@data-wrangling-components/react-hocs": patch
+  "@data-wrangling-components/react-verbs": patch
+  "@data-wrangling-components/webapp": patch
