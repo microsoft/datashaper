@@ -11,7 +11,7 @@ import { inputColumnList } from '../../common/VerbFormFactories.js'
 import type { StepComponentBaseProps } from '../../types.js'
 
 /**
- * Just the to/value inputs for an impute.
+ * Just the to/value inputs for an erase.
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const EraseBase: React.FC<

@@ -9,15 +9,14 @@ import { useCallback } from 'react'
 
 export function useRunPipeline(
 	pipeline: Pipeline,
-	setStoredTables?: (storedTables: Map<string, TableContainer>) => void,
 	setSelectedTableName?: (name: string) => void,
+	setSelectedTable?: (table: TableContainer) => void,
 ): () => Promise<void> {
 	return useCallback(async () => {
 		if (pipeline.steps.length) {
 			const output = await pipeline.run()
 			setSelectedTableName?.(output.id)
+			setSelectedTable?.(output)
 		}
-		const storedTables = pipeline.store.toMap()
-		setStoredTables?.(storedTables)
-	}, [pipeline, setStoredTables, setSelectedTableName])
+	}, [pipeline, setSelectedTableName, setSelectedTable])
 }

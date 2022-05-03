@@ -62,5 +62,4 @@ const Container = styled.div`
 	align-items: flex-start;
 	align-content: flex-start;
 	justify-content: flex-start;
-	margin-top: 8px;
 `

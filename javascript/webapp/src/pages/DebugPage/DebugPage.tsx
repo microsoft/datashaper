@@ -2,29 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-/* eslint-disable @essex/adjacent-await */
-import type { Specification, Step, Verb } from '@data-wrangling-components/core'
-import { readSpec } from '@data-wrangling-components/core'
-import {
-	StepComponent,
-	StepSelector,
-	usePipeline,
-} from '@data-wrangling-components/react'
-import type { TableContainer } from '@essex/arquero'
+import type { Specification } from '@data-wrangling-components/core'
+import { StepComponent, StepSelector } from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo, useState } from 'react'
-import { from } from 'rxjs'
 import styled from 'styled-components'
 
 import { ControlBar } from './ControlBar'
-import {
-	useInputTableList,
-	useInputTables,
-	useTableStore,
-} from './DebugPage.hooks'
+import { useSteps, useTables } from './DebugPage.hooks'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { Table } from './Table'
@@ -46,78 +33,34 @@ const DEFAULT_STATS = [
 
 export const DebugPage: React.FC = memo(function DebugPage() {
 	const [autoType, setAutoType] = useState<boolean>(true)
-	// this is special to the test example,
-	// a running app needs to maintain its own list of uploaded files
-	const [inputList, setInputs] = useInputTableList()
-	const store = useTableStore(autoType)
-	const inputTables = useInputTables(inputList, store)
-	const [steps, setSteps] = useState<Step[]>([])
-	const pipeline = usePipeline(store, steps)
-	const [result, setResult] = useState<ColumnTable | undefined>()
-	const [outputs, setOutputs] = useState<Map<string, TableContainer>>(
-		new Map<string, TableContainer>(),
-	)
-	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
+
+	const { tables, store, onAddFiles } = useTables(autoType)
+
+	const {
+		steps,
+		result,
+		outputs,
+		onStepCreate,
+		onStepChange,
+		onLoadPipeline,
+		doRunPipeline,
+	} = useSteps(store)
 
 	const [features, setFeatures] = useState<DetailsListFeatures>({
 		statsColumnHeaders: true,
 		statsColumnTypes: DEFAULT_STATS,
 	})
+
 	const [compact, setCompact] = useState<boolean>(true)
 
-	const handleCreateStep = useCallback(
-		(verb: Verb) => {
-			setSteps(pipeline.create(verb))
-		},
-		[pipeline, setSteps],
-	)
-
-	const handleStepChange = useCallback(
-		(step: Step, index: number) => setSteps(pipeline.update(step, index)),
-		[setSteps, pipeline],
-	)
-
-	const handleRunClick = useCallback(async () => {
-		pipeline.clear()
-		pipeline.addAll(steps)
-		const res = await pipeline.run()
-		const output = store.toMap()
-		pipeline.print()
-		store.print()
-		setResult(res.table)
-		setOutputs(output)
-	}, [pipeline, store, setResult, setOutputs, steps])
+	const [exampleSpec, setExampleSpec] = useState<Specification | undefined>()
 
 	const handleExampleSpecChange = useCallback(
-		async (spec: Specification | undefined) => {
-			// TODO: we need an autorun option on the pipeline to populate data for the next step as they are added
-			// otherwise we can't fill in dropdowns with column names, for example
+		(spec: Specification | undefined) => {
 			setExampleSpec(spec)
-			pipeline.clear()
-			if (spec) {
-				pipeline.addAll(readSpec(spec as any))
-			}
-			// the pipeline will transform the steps into a consistent format - string shorthands are
-			// unpacked into object forms.
-			setSteps(pipeline.steps)
-			const res = await pipeline.run()
-			const output = store.toMap()
-			store.print()
-			setResult(res.table)
-			setOutputs(output)
+			onLoadPipeline(spec)
 		},
-		[pipeline, store, setExampleSpec, setSteps, setOutputs, setResult],
-	)
-
-	const handleDropFiles = useCallback(
-		(loaded: Map<string, ColumnTable>) => {
-			loaded.forEach((table, name) => {
-				store.set(name, from([{ id: name, table }]))
-			})
-			store.print()
-			setInputs(prev => [...prev, ...Array.from(loaded.keys())])
-		},
-		[store, setInputs],
+		[setExampleSpec, onLoadPipeline],
 	)
 
 	const downloadUrl = useMemo(() => {
@@ -131,7 +74,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 				<ControlBar
 					selected={exampleSpec}
 					onSelectSpecification={handleExampleSpecChange}
-					onLoadFiles={handleDropFiles}
+					onLoadFiles={onAddFiles}
 					features={features}
 					onFeaturesChange={setFeatures}
 					compact={compact}
@@ -142,7 +85,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 				<InputsSection>
 					<Section title="Inputs">
 						<InputTables
-							tables={inputTables}
+							tables={tables}
 							config={columns}
 							features={features}
 							compact={compact}
@@ -160,7 +103,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 										step={step}
 										store={store}
 										index={index}
-										onChange={handleStepChange}
+										onChange={onStepChange}
 									/>
 								</StepsColumn>
 								<OutputsColumn className="outputs-column">
@@ -190,7 +133,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					{result ? (
 						<TableSection className="table-section">
 							<Table
-								table={result}
+								table={result!.table!}
 								config={columns}
 								features={features}
 								compact={compact}
@@ -199,10 +142,10 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					) : null}
 				</Section>
 				<Commands>
-					<StepSelector onCreate={handleCreateStep} showButton />
+					<StepSelector onCreate={onStepCreate} showButton />
 					<Buttons>
 						<PrimaryButton
-							onClick={handleRunClick}
+							onClick={doRunPipeline}
 							styles={{ root: { width: 180 } }}
 						>
 							Run all

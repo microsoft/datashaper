@@ -13,7 +13,6 @@ import { DropzoneOptions } from 'react-dropzone';
 import type { DropzoneState as DropzoneState_2 } from 'react-dropzone';
 import { FileCollection } from '@data-wrangling-components/utilities';
 import { FileRejection } from 'react-dropzone';
-import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
@@ -328,21 +327,6 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
     isDeleteModalOpen: boolean;
 };
 
-// Warning: (ae-missing-release-tag) "useDownloadCsv" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDownloadCsv(outputTable?: TableContainer): () => void;
-
-// Warning: (ae-missing-release-tag) "useDownloadPipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDownloadPipeline(steps: Step[]): () => void;
-
-// Warning: (ae-missing-release-tag) "useDownloadZip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDownloadZip(steps: Step[], tables: TableContainer[], outputTable?: TableContainer): () => Promise<void>;
-
 // Warning: (ae-missing-release-tag) "useDropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -379,40 +363,15 @@ export function useGuidance(index: Record<string, string>): (name: string) => st
 // @public (undocumented)
 export function useHandleClick(setName: NameSetter): (url: string) => void;
 
-// Warning: (ae-missing-release-tag) "useHandleCsvUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useHandleCsvUpload(onUpdateTables?: (tables: TableContainer[]) => void): () => void;
-
-// Warning: (ae-missing-release-tag) "useHandleFileUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useHandleFileUpload(onUpdateSteps?: (steps: Step[]) => void, onUpdateTables?: (tables: TableContainer[]) => void): (fc: FileCollection) => void;
-
-// Warning: (ae-missing-release-tag) "useHandleJsonUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useHandleJsonUpload(onUpdateSteps?: (steps: Step[]) => void): () => void;
-
 // Warning: (ae-missing-release-tag) "useHandleOnUploadClick" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const useHandleOnUploadClick: (acceptedFileTypes: string[], handleCollection?: ((fileCollection: FileCollection) => void) | undefined) => (() => void);
 
-// Warning: (ae-missing-release-tag) "useHandleZipUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useHandleZipUpload(onUpdateSteps?: (steps: Step[]) => void, onUpdateTables?: (tables: TableContainer[]) => void): () => void;
-
 // Warning: (ae-missing-release-tag) "usePipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function usePipeline(store: TableStore, steps?: Step[]): Pipeline;
-
-// Warning: (ae-missing-release-tag) "useProjectMgmtCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useProjectMgmtCommands(steps: Step[], tables: TableContainer[], outputTable?: TableContainer, onUpdateSteps?: (steps: Step[]) => void, onUpdateTables?: (tables: TableContainer[]) => void): ICommandBarItemProps[];
 
 // Warning: (ae-missing-release-tag) "useStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

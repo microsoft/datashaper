@@ -11,7 +11,7 @@ import type { ColumnConfigMap } from './Table'
 import { Table } from './Table'
 
 export interface InputTablesProps {
-	tables: Map<string, TableContainer>
+	tables: TableContainer[]
 	config: ColumnConfigMap
 	features?: DetailsListFeatures
 	compact?: boolean
@@ -21,10 +21,10 @@ export const InputTables: React.FC<InputTablesProps> = memo(
 	function InputTables({ tables, config, features, compact }) {
 		return (
 			<TablesContainer>
-				{Array.from(tables).map(([key, container]) => (
+				{tables.map(container => (
 					<Table
-						key={`table-${key}`}
-						name={key}
+						key={`table-${container.id}`}
+						name={container.id}
 						table={container.table!}
 						config={config}
 						features={features}

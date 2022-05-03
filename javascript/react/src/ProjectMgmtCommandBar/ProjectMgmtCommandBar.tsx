@@ -10,7 +10,7 @@ import { useThematic } from '@thematic/react'
 import React, { memo } from 'react'
 
 import { CommandBar } from '../CommandBar/index.js'
-import { useProjectMgmtCommands } from './hooks/index.js'
+import { useProjectMgmtCommands } from './ProjectMgmtCommandBar.hooks.js'
 
 export interface ProjectMgmtCommandBarProps
 	extends Omit<ICommandBarProps, 'items'> {
