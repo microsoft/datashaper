@@ -11,7 +11,7 @@ import styled from 'styled-components'
 
 import {
 	LeftAlignedRow,
-	useHandleSpinButtonChange,
+	useSpinButtonChangeHandler,
 } from '../../common/index.js'
 import type { StepComponentProps } from '../../types.js'
 
@@ -22,13 +22,13 @@ const whole = format('d')
  */
 export const Sample: React.FC<StepComponentProps<SampleArgs>> = memo(
 	function Sample({ step, onChange }) {
-		const handleSizeChange = useHandleSpinButtonChange(
+		const handleSizeChange = useSpinButtonChangeHandler(
 			step,
 			(s, val) => (s.args.size = num(val)),
 			onChange,
 		)
 
-		const handlePercentChange = useHandleSpinButtonChange(
+		const handlePercentChange = useSpinButtonChangeHandler(
 			step,
 			(s, val) => {
 				s.args.proportion = val != null ? +val / 100 : undefined

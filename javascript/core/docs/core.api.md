@@ -53,6 +53,7 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
     fixedwidth?: number;
     max?: number;
     min?: number;
+    printRange?: boolean;
     // (undocumented)
     strategy: BinStrategy;
 }
@@ -270,7 +271,7 @@ export class DefaultStore<T> implements Store<T> {
     // (undocumented)
     print(): void;
     // (undocumented)
-    set(id: string, value: Observable<T>): void;
+    set(id: string, valueAny: Observable<T> | T | Promise<T>): void;
     // (undocumented)
     toArray(): Maybe<T>[];
     // (undocumented)
@@ -547,13 +548,19 @@ export interface JoinArgsBase {
 // @public (undocumented)
 export enum JoinStrategy {
     // (undocumented)
+    AntiJoin = "anti join",
+    // (undocumented)
+    Cross = "cross",
+    // (undocumented)
     FullOuter = "full outer",
     // (undocumented)
     Inner = "inner",
     // (undocumented)
     LeftOuter = "left outer",
     // (undocumented)
-    RightOuter = "right outer"
+    RightOuter = "right outer",
+    // (undocumented)
+    SemiJoin = "semi join"
 }
 
 // Warning: (ae-forgotten-export) The symbol "LookupNode" needs to be exported by the entry point index.d.ts
@@ -1017,7 +1024,7 @@ export interface Store<T, K = string> {
     onChange(listener: Handler): Unsubscribe;
     onItemChange(id: K, listener: HandlerOf<Maybe<T>>): Unsubscribe;
     print(): void;
-    set(id: K, value: Observable<Maybe<T>>): void;
+    set(id: K, value: Observable<Maybe<T>> | T | Promise<Maybe<T>>): void;
     toArray(): Maybe<T>[];
     toMap(): Map<K, T>;
 }

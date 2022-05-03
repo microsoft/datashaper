@@ -94,6 +94,10 @@
                     "description": "Min boundary to categorize values into.\nIf cell values are below this, they will default to -Infinity unless clamped.",
                     "type": "number"
                 },
+                "printRange": {
+                    "description": "If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.\nThis is useful for treating the",
+                    "type": "boolean"
+                },
                 "strategy": {
                     "$ref": "#/definitions/BinStrategy"
                 },
@@ -480,10 +484,13 @@
                 },
                 "strategy": {
                     "enum": [
+                        "anti join",
+                        "cross",
                         "full outer",
                         "inner",
                         "left outer",
-                        "right outer"
+                        "right outer",
+                        "semi join"
                     ],
                     "type": "string"
                 }

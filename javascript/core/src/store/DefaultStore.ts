@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Observable, Subscription } from 'rxjs'
-import { BehaviorSubject, Subject } from 'rxjs'
+import { BehaviorSubject, from, isObservable, Subject } from 'rxjs'
 
 import type { Handler, HandlerOf, Maybe, Unsubscribe } from '../primitives.js'
 import type { Store } from './types.js'
@@ -14,6 +14,19 @@ interface ItemStorage<T> {
 	subscription: Subscription
 }
 
+function coerceObservable<T>(
+	value: Observable<T> | T | Promise<T>,
+): Observable<T> {
+	if (!isObservable(value)) {
+		if ((value as any)['then']) {
+			return from(value as Promise<T>)
+		} else {
+			return from([value as T])
+		}
+	} else {
+		return value as Observable<T>
+	}
+}
 /**
  * Manages a set of items.
  * Standard implementation of an async-resolving item store.
@@ -38,7 +51,9 @@ export class DefaultStore<T> implements Store<T> {
 		return this.eventFor(id)
 	}
 
-	public set(id: string, value: Observable<T>): void {
+	public set(id: string, valueAny: Observable<T> | T | Promise<T>): void {
+		const value = coerceObservable(valueAny)
+
 		// clear any previous value
 		this.delete(id)
 

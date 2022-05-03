@@ -78,13 +78,15 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	)
 
 	const handleRunClick = useCallback(async () => {
+		pipeline.clear()
+		pipeline.addAll(steps)
 		const res = await pipeline.run()
 		const output = store.toMap()
 		pipeline.print()
 		store.print()
 		setResult(res.table)
 		setOutputs(output)
-	}, [pipeline, store, setResult, setOutputs])
+	}, [pipeline, store, setResult, setOutputs, steps])
 
 	const handleExampleSpecChange = useCallback(
 		async (spec: Specification | undefined) => {

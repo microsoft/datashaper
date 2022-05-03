@@ -13,7 +13,7 @@ export const identity = <T>(value?: T): T | undefined => value
  * @param value - the string value
  * @returns The string cast as a number (if defined)
  */
-export const num = (value?: string): number | undefined => {
+export const num = (value?: string | number): number | undefined => {
 	if (value) {
 		return +value
 	}
@@ -28,3 +28,21 @@ export const staticCallback =
 	<T>(value: T) =>
 	(): T =>
 		value
+
+export function toggleListItem<T>(list: T[], item: T): T[] {
+	if (list.indexOf(item) === -1) {
+		return [...list, item]
+	} else {
+		return list.filter(c => c !== item)
+	}
+}
+
+export function hash(input: string[] | undefined): Record<string, boolean> {
+	const result: Record<string, boolean> = {}
+	if (input) {
+		for (const i of input) {
+			result[i] = true
+		}
+	}
+	return result
+}

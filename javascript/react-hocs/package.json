@@ -4,8 +4,8 @@
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
-		"main": "dist/lib/index.js",
-		"types": "dist/lib/index.d.ts"
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
 	},
 	"sideEffects": false,
 	"author": "Nathan Evans <naevans@microsoft.com>",
@@ -33,21 +33,22 @@
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",
 		"@data-wrangling-components/react-controls": "workspace:^",
+		"@data-wrangling-components/react-hooks": "workspace:^",
 		"@data-wrangling-components/react-verbs": "workspace:^",
-		"@essex/arquero": "^1.0.0",
-		"@essex/dataflow": "^0.1.0"
+		"@essex/arquero": "^2.0.2",
+		"@essex/dataflow": "^0.1.1"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^21.0.2",
+		"@essex/scripts": "^22.0.0",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@fluentui/react": "^8.66.2",
+		"@fluentui/react": "^8.67.2",
 		"@types/lodash": "^4.14.182",
 		"@types/lodash-es": "^4.17.6",
-		"@types/node": "^17.0.25",
-		"@types/react": "^18.0.6",
+		"@types/node": "^17.0.29",
+		"@types/react": "^18.0.8",
 		"@types/styled-components": "^5.1.25",
 		"arquero": "^4.8.8",
-		"react": "^18.0.0",
+		"react": "^18.1.0",
 		"styled-components": "^5.3.5",
 		"typescript": "^4.6.3"
 	},

@@ -78,6 +78,14 @@ export function readStep<T extends object | void | unknown = any>(
 				} as T,
 			}
 		case Verb.Convert:
+			return {
+				...base,
+				args: {
+					columns: [],
+					formatPattern: '%Y-%m-%d',
+					...(args as object),
+				} as T,
+			}
 		case Verb.Erase:
 		case Verb.Impute:
 		case Verb.Lookup:

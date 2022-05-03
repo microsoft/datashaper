@@ -32,7 +32,7 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 		})
 		.get('distinct', 0) as any[]
 
-	const args = distinct.reduce((acc, cur) => {
+	const args = distinct.sort().reduce((acc, cur) => {
 		acc[prefix ? `${prefix}${cur}` : cur] = escape((d: any) =>
 			d[column] === null ? null : d[column] === cur ? 1 : 0,
 		)

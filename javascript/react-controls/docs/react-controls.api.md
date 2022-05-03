@@ -6,8 +6,8 @@
 
 /// <reference types="react" />
 
-import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { IButtonStyles } from '@fluentui/react';
+import type { IComboBoxOption } from '@fluentui/react';
 import type { IComboBoxProps } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
@@ -20,6 +20,7 @@ import type { OrderbyInstruction } from '@data-wrangling-components/core';
 import { default as React_2 } from 'react';
 import type { TableStore } from '@data-wrangling-components/core';
 import type { Value } from '@essex/arquero';
+
 
 // Warning: (ae-missing-release-tag) "CalendarPicker" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -54,25 +55,6 @@ export interface ColumnarMenuProps extends IContextualMenuProps {
     text?: string;
 }
 
-// Warning: (ae-missing-release-tag) "ColumnInstruction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const ColumnInstruction: React.FC<ColumnInstructionProps>;
-
-// Warning: (ae-missing-release-tag) "ColumnInstructionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnInstructionProps {
-    // (undocumented)
-    column: string;
-    // (undocumented)
-    onChange?: (column: string) => void;
-    // (undocumented)
-    onDelete?: () => void;
-    // (undocumented)
-    table?: ColumnTable;
-}
-
 // Warning: (ae-missing-release-tag) "ColumnOrValueComboBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -82,9 +64,8 @@ export const ColumnOrValueComboBox: React.FC<ColumnOrValueComboBoxProps>;
 //
 // @public (undocumented)
 export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
-    filter?: (name: string) => boolean;
     // (undocumented)
-    table?: ColumnTable;
+    options: IComboBoxOption[];
 }
 
 // Warning: (ae-missing-release-tag) "ColumnSpread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -102,23 +83,6 @@ export interface ColumnSpreadProps {
     onChange?: (column: string) => void;
     // (undocumented)
     onDelete?: () => void;
-    // (undocumented)
-    table?: ColumnTable;
-}
-
-// Warning: (ae-missing-release-tag) "ColumnValueComboBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const ColumnValueComboBox: React.FC<ColumnValueComboBoxProps>;
-
-// Warning: (ae-missing-release-tag) "ColumnValueComboBoxProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnValueComboBoxProps extends Partial<IComboBoxProps> {
-    // (undocumented)
-    columnName?: string;
-    // (undocumented)
-    table?: ColumnTable;
 }
 
 // Warning: (ae-missing-release-tag) "ColumnValueDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -131,12 +95,7 @@ export const ColumnValueDropdown: React.FC<ColumnValueDropdownProps>;
 // @public (undocumented)
 export interface ColumnValueDropdownProps extends Partial<IDropdownProps> {
     // (undocumented)
-    column: string;
-    filter?: (value: Value) => boolean;
-    // (undocumented)
-    table?: ColumnTable;
-    // (undocumented)
-    values?: Value[];
+    options: IDropdownOption[];
 }
 
 // Warning: (ae-missing-release-tag) "ContextualMenuItemSearchBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -247,13 +206,13 @@ export const SortInstruction: React.FC<SortInstructionProps>;
 // @public (undocumented)
 export interface SortInstructionProps {
     // (undocumented)
+    columnOptions: IDropdownOption[];
+    // (undocumented)
     onChange?: (order: OrderbyInstruction) => void;
     // (undocumented)
     onDelete?: () => void;
     // (undocumented)
     order: OrderbyInstruction;
-    // (undocumented)
-    table?: ColumnTable;
 }
 
 // Warning: (ae-missing-release-tag) "TableColumnDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -265,9 +224,8 @@ export const TableColumnDropdown: React.FC<TableColumnDropdownProps>;
 //
 // @public (undocumented)
 export interface TableColumnDropdownProps extends Partial<IDropdownProps> {
-    filter?: (name: string) => boolean;
     // (undocumented)
-    table?: ColumnTable;
+    options: IDropdownOption[];
 }
 
 // Warning: (ae-missing-release-tag) "TableDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -280,7 +238,7 @@ export const TableDropdown: React.FC<TableDropdownProps>;
 // @public (undocumented)
 export interface TableDropdownProps extends Partial<IDropdownProps> {
     // (undocumented)
-    store?: TableStore;
+    options: IDropdownOption[];
 }
 
 // (No @packageDocumentation comment for this package)

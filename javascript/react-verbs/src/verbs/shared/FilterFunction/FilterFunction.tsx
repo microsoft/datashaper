@@ -143,6 +143,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])
 		const placeholder = usePlaceholderText(type)
 
+
 		return (
 			<Container>
 				<SideBySide>
@@ -162,6 +163,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 							styles={narrowDropdownStyles}
 						/>
 					)}
+
 
 					<IconButton
 						title={'Remove this criterion'}
