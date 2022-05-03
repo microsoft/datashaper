@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	Criterion} from '@data-wrangling-components/core';
+import type { Criterion } from '@data-wrangling-components/core'
 import {
 	BooleanComparisonOperator,
 	DateComparisonOperator,
@@ -17,6 +16,10 @@ import {
 	EnumDropdown,
 	narrowDropdownStyles,
 } from '@data-wrangling-components/react-controls'
+import {
+	useSimpleDropdownOptions,
+	useTableColumnNames,
+} from '@data-wrangling-components/react-hooks'
 import { DataType } from '@essex/arquero'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
@@ -142,19 +145,22 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		const isEmpty = useIsEmpty(criterion)
 		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])
 		const placeholder = usePlaceholderText(type)
-
+		const columns = useTableColumnNames(table, columnFilter)
+		const columnOptions = useSimpleDropdownOptions(columns)
 
 		return (
 			<Container>
 				<SideBySide>
 					{operatorDropdown}
 					{type === DataType.Date ? (
-						<CalendarPicker onSelectDate={onSelectDate} disabled={isEmpty}></CalendarPicker>
+						<CalendarPicker
+							onSelectDate={onSelectDate}
+							disabled={isEmpty}
+						></CalendarPicker>
 					) : (
 						<ColumnOrValueComboBox
 							required={!suppressLabels}
-							table={table}
-							filter={columnFilter}
+							options={columnOptions}
 							disabled={isEmpty}
 							label={suppressLabels ? undefined : 'Comparison value'}
 							placeholder={placeholder}
@@ -163,7 +169,6 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 							styles={narrowDropdownStyles}
 						/>
 					)}
-
 
 					<IconButton
 						title={'Remove this criterion'}
