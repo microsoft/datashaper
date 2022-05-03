@@ -56,7 +56,7 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 					onChange={handleColumnChange}
 				/>
 
-				<Label>New column names</Label>
+				<Label styles={labelStyles}>New column names</Label>
 
 				{columns}
 				<ActionButton
@@ -109,5 +109,11 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: 12px;
+	gap: 8px;
 `
+
+const labelStyles = {
+	root: {
+		paddingBottom: 0,
+	},
+}

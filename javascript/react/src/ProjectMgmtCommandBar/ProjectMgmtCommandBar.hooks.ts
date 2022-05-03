@@ -3,6 +3,4 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export * from './useCommands.js'
-export * from './useDownloadFile.js'
-export * from './useHandleFileUpload.js'
+export * from './hooks/useProjectMgmtCommands.js'

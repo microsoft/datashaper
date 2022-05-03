@@ -29,7 +29,7 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 				{
 					label: 'Bin count',
 					type: FormInputType.NumberSpinner,
-					condition: step.args.strategy === BinStrategy.FixedCount,
+					if: step.args.strategy === BinStrategy.FixedCount,
 					min: 1,
 					max: 100,
 					step: 1,
@@ -39,7 +39,7 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 				{
 					label: 'Bin size',
 					type: FormInputType.NumberSpinner,
-					condition: step.args.strategy === BinStrategy.FixedWidth,
+					if: step.args.strategy === BinStrategy.FixedWidth,
 					min: 1,
 					onChange: (s, opt) => (s.args.fixedwidth = num(opt as string)),
 					current: step.args.fixedwidth,
@@ -47,14 +47,14 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 				{
 					label: 'Min Boundary',
 					type: FormInputType.NumberSpinner,
-					condition: step.args.strategy !== BinStrategy.Auto,
+					if: step.args.strategy !== BinStrategy.Auto,
 					onChange: (s, opt) => (s.args.min = num(opt as string)),
 					current: step.args.min,
 				},
 				{
 					label: 'Max Boundary',
 					type: FormInputType.NumberSpinner,
-					condition: step.args.strategy !== BinStrategy.Auto,
+					if: step.args.strategy !== BinStrategy.Auto,
 					onChange: (s, opt) => (s.args.max = num(opt as string)),
 					current: step.args.max,
 				},
@@ -62,7 +62,7 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 					'Clamp to min/max',
 					step.args.clamped,
 					(s, val) => (s.args.clamped = val as boolean),
-					{ condition: step.args.strategy !== BinStrategy.Auto },
+					{ if: step.args.strategy !== BinStrategy.Auto },
 				),
 				checkbox(
 					'Print range as output',

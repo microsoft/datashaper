@@ -208,16 +208,6 @@
 			}
 		},
 		{
-			"verb": "pivot",
-			"input": { "source": "data/companies.csv" },
-			"output": { "target": "pivot-1" },
-			"args": {
-				"key": "ID",
-				"value": "Name",
-				"operation": "any"
-			}
-		},
-		{
 			"verb": "onehot",
 			"input": "data/stocks.csv",
 			"output": "onehot-1",
@@ -237,6 +227,16 @@
 						"direction": "asc"
 					}
 				]
+			}
+		},
+		{
+			"verb": "pivot",
+			"input": { "source": "data/companies.csv" },
+			"output": { "target": "pivot-1" },
+			"args": {
+				"key": "ID",
+				"value": "Name",
+				"operation": "any"
 			}
 		},
 		{
@@ -273,7 +273,7 @@
 		},
 		{
 			"verb": "rollup",
-			"input": { "source": "data/companies.csv" },
+			"input": { "source": "data/products.csv" },
 			"output": { "target": "rollup-1" },
 			"args": {
 				"to": "count",

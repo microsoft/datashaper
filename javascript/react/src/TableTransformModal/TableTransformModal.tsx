@@ -115,6 +115,8 @@ const iconProps = {
 	cancel: { iconName: 'Cancel' },
 }
 
+const MAX_HEIGHT = 700
+
 const ContainerBody = styled.div<{ showGuidance: boolean }>`
 	padding: 0px 12px 14px 24px;
 	display: flex;
@@ -137,7 +139,7 @@ const Title = styled.h3`
 
 const StepComponentContainer = styled.div`
 	width: 316px;
-	max-height: 32rem;
+	max-height: ${MAX_HEIGHT}px;
 	overflow: hidden auto;
 `
 
@@ -154,6 +156,6 @@ const ButtonContainer = styled.div`
 
 const GuidanceContainer = styled.div`
 	width: 400px;
-	max-height: 32rem;
+	max-height: ${MAX_HEIGHT - 20}px;
 	overflow: hidden auto;
 `

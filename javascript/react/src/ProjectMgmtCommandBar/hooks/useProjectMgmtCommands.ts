@@ -12,12 +12,12 @@ import {
 	useDownloadCsv,
 	useDownloadPipeline,
 	useDownloadZip,
-} from './useDownloadFile.js'
+} from './downloads.js'
 import {
 	useHandleCsvUpload,
 	useHandleJsonUpload,
 	useHandleZipUpload,
-} from './useHandleFileUpload.js'
+} from './uploads.js'
 
 export function useProjectMgmtCommands(
 	steps: Step[],
