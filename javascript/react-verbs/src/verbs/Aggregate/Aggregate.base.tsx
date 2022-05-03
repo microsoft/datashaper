@@ -8,8 +8,8 @@ import { useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { VerbForm } from '../../common/VerbForm.js'
-import { dropdown,enumDropdown } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '../../types.js'
+import { dropdown, enumDropdown } from '../../common/VerbFormFactories.js'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Just the group/column/op inputs for an aggregation.

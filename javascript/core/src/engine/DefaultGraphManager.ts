@@ -17,7 +17,7 @@ import type { Step, StepInput } from '../steps/index.js'
 import { readStep } from '../steps/index.js'
 import type { ParsedSpecification } from '../steps/types.js'
 import { createNode } from './createNode.js'
-import type { GraphBuilder } from './types.js'
+import type { GraphManager } from './types.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
 // (c) add/delete and correct reset of params, and so on
@@ -34,8 +34,7 @@ export type TableObservable = Observable<Maybe<TableContainer>>
  * - building compound steps with recursive execution.
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
-export class DefaultGraphBuilder implements GraphBuilder {
-	public readonly inputs: Map<string, TableContainer> = new Map()
+export class DefaultGraphManager implements GraphManager {
 	private readonly _graph: Graph<TableContainer> =
 		new DefaultGraph<TableContainer>()
 	private readonly _onChange = new Subject<void>()
@@ -47,6 +46,11 @@ export class DefaultGraphBuilder implements GraphBuilder {
 	private readonly outputObservables: Map<string, TableObservable> = new Map()
 	private readonly outputCache: Map<string, Maybe<TableContainer>> = new Map()
 	private readonly outputSubscriptions: Map<string, Subscription> = new Map()
+
+	public constructor(
+		public readonly inputs: Map<string, TableContainer> = new Map(),
+	) {}
+
 	public get graph(): Graph<TableContainer> {
 		return this._graph
 	}
@@ -180,6 +184,10 @@ export class DefaultGraphBuilder implements GraphBuilder {
 		return this.outputCache.get(name)
 	}
 
+	public toMap(): Map<string, Maybe<TableContainer>> {
+		return this.outputCache
+	}
+
 	public onChange(handler: () => void): () => void {
 		const sub = this._onChange.subscribe(handler)
 		return () => sub.unsubscribe()
@@ -222,8 +230,10 @@ export class DefaultGraphBuilder implements GraphBuilder {
 	}
 }
 
-export function createGraphBuilder(): GraphBuilder {
-	return new DefaultGraphBuilder()
+export function createGraphManager(
+	inputs?: Map<string, TableContainer>,
+): GraphManager {
+	return new DefaultGraphManager(inputs)
 }
 
 function hasDefinedInputs(step: Step): boolean {

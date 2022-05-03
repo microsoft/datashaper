@@ -7,7 +7,7 @@ import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
-import type { StepDescriptionProps } from '../../types.js'
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 
 export const JoinDescription: React.FC<StepDescriptionProps<JoinArgs>> = memo(
 	function JoinDescription(props) {

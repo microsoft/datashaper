@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphBuilder } from '@data-wrangling-components/core'
+import type { GraphManager } from '@data-wrangling-components/core'
 import { useEffect, useState } from 'react'
 
 /**
@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
  * @param store -
  * @returns
  */
-export function useTableNames(store?: GraphBuilder): string[] {
+export function useTableNames(store?: GraphManager): string[] {
 	// we won't actually get an updated store reference, so we'll track
 	// whether updates are needed using a change listener and flag
 	const [dirty, setDirty] = useState<boolean>(true)

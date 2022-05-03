@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step } from '@data-wrangling-components/core'
+import type { Specification } from '@data-wrangling-components/core'
 import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	createFileWithPath,
@@ -15,47 +15,43 @@ import {
 import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
 
-export function useDownloadPipeline(steps: Step[]): () => void {
+export function useDownloadWorkflow(workflow: Specification): () => void {
 	return useCallback(() => {
-		if (steps.length) {
-			const blob = new Blob([JSON.stringify({ steps }, null, 4)])
-			download('pipeline.json', FileMimeType.json, blob)
+		if (workflow != null) {
+			const blob = new Blob([JSON.stringify(workflow, null, 4)])
+			download('worfklow.json', FileMimeType.json, blob)
 		}
-	}, [steps])
+	}, [workflow])
 }
 
-export function useDownloadCsv(outputTable?: TableContainer): () => void {
+export function useDownloadCsv(tables: TableContainer[]): () => void {
 	return useCallback(() => {
-		if (outputTable?.table) {
-			downloadTable(outputTable.table, 'output.csv')
+		for (const table of tables) {
+			if (table?.table) {
+				downloadTable(table.table, tableName(table.name || table.id))
+			}
 		}
-	}, [outputTable])
+	}, [tables])
 }
 
 export function useDownloadZip(
-	steps: Step[],
+	workflow: Specification,
 	tables: TableContainer[],
-	outputTable?: TableContainer,
+	outputTables: TableContainer[],
 ): () => Promise<void> {
 	const [fileCollection] = useState<FileCollection>(new FileCollection())
 	return useCallback(async () => {
-		const tableName = (name: string) =>
-			name.endsWith('.csv') ? name : `${name}.csv`
-		const tableFile = (t: TableContainer, name?: string) =>
-			t.table
-				? createFileWithPath(new Blob([t.table.toCSV()]), {
-						name: tableName(name || t.name || t.id),
-				  })
-				: null
 		fileCollection.clear()
 		const input: string[] = []
 		const output: string[] = []
 
-		if (outputTable?.table) {
-			const file = tableFile(outputTable, 'output')
-			if (file) {
-				await fileCollection.add(file)
-				output.push(file.name)
+		for (const outputTable of outputTables) {
+			if (outputTable?.table) {
+				const file = tableFile(outputTable, outputTable.name || outputTable.id)
+				if (file) {
+					await fileCollection.add(file)
+					output.push(file.name)
+				}
 			}
 		}
 
@@ -77,14 +73,26 @@ export function useDownloadZip(
 			await fileCollection.add(file)
 		}
 
-		if (steps.length) {
-			const blob = new Blob([JSON.stringify({ steps: steps }, null, 4)])
-			const file = createFileWithPath(blob, { name: 'pipeline.json' })
+		if (workflow) {
+			const blob = new Blob([JSON.stringify(workflow, null, 4)])
+			const file = createFileWithPath(blob, { name: 'workflow.json' })
 			await fileCollection.add(file)
 		}
 
 		if (fileCollection.list().length) {
 			await fileCollection.toZip('dwc-project')
 		}
-	}, [fileCollection, steps, tables, outputTable])
+	}, [fileCollection, workflow, tables, outputTables])
+}
+
+function tableName(name: string) {
+	return name.endsWith('.csv') ? name : `${name}.csv`
+}
+
+function tableFile(t: TableContainer, name?: string) {
+	return t.table
+		? createFileWithPath(new Blob([t.table.toCSV()]), {
+				name: tableName(name || t.name || t.id),
+		  })
+		: null
 }

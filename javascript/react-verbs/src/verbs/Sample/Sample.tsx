@@ -9,11 +9,9 @@ import { format } from 'd3-format'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import {
-	LeftAlignedRow,
-	useSpinButtonChangeHandler,
-} from '../../common/index.js'
-import type { StepComponentProps } from '../../types.js'
+import { LeftAlignedRow } from '../../common/index.js'
+import { useSpinButtonChangeHandler } from '@data-wrangling-components/react-hooks'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 
 const whole = format('d')
 

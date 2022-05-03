@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
+import type { Specification } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import type { ICommandBarProps } from '@fluentui/react'
-import { ThemeVariant } from '@thematic/core'
+import { ThemeVariant, Theme } from '@thematic/core'
 import { useThematic } from '@thematic/react'
 import React, { memo } from 'react'
 
@@ -14,45 +14,66 @@ import { useProjectMgmtCommands } from './ProjectMgmtCommandBar.hooks.js'
 
 export interface ProjectMgmtCommandBarProps
 	extends Omit<ICommandBarProps, 'items'> {
-	steps: Step[]
+	/**
+	 * The data transformation workflow
+	 */
+	workflow: Specification
+
+	/**
+	 * The input data tables
+	 */
 	tables: TableContainer[]
-	outputTable?: TableContainer
-	onUpdateSteps?: (steps: Step[]) => void
-	onUpdateTables?: (tables: TableContainer[]) => void
+
+	/**
+	 * The output data table
+	 */
+	outputTables: TableContainer[]
+
+	/**
+	 * Handler for when the workflow changes
+	 */
+	onUpdateWorkflow: (steps: Specification) => void
+
+	/**
+	 * Handler for when input tableset changes
+	 */
+	onUpdateTables: (tables: TableContainer[]) => void
 }
 
 export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps> = memo(
 	function ProjectMgmtCommandBar({
-		steps,
+		workflow,
 		tables,
-		outputTable,
-		onUpdateSteps,
+		outputTables,
+		onUpdateWorkflow,
 		onUpdateTables,
 		...props
 	}) {
 		const theme = useThematic()
 		const commands = useProjectMgmtCommands(
-			steps,
+			workflow,
 			tables,
-			outputTable,
-			onUpdateSteps,
+			outputTables,
+			onUpdateWorkflow,
 			onUpdateTables,
 		)
 		return (
 			<CommandBar
 				items={commands}
-				bgColor={
-					theme.variant === ThemeVariant.Light
-						? theme.application().highContrast().hex()
-						: theme.application().lowContrast().hex()
-				}
-				color={
-					theme.variant === ThemeVariant.Light
-						? theme.application().lowContrast().hex()
-						: theme.application().midHighContrast().hex()
-				}
+				bgColor={bgColor(theme)}
+				color={color(theme)}
 				{...props}
 			/>
 		)
 	},
 )
+
+const bgColor = (theme: Theme) =>
+	theme.variant === ThemeVariant.Light
+		? theme.application().highContrast().hex()
+		: theme.application().lowContrast().hex()
+
+const color = (theme: Theme) =>
+	theme.variant === ThemeVariant.Light
+		? theme.application().lowContrast().hex()
+		: theme.application().midHighContrast().hex()

@@ -12,12 +12,12 @@ import {
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
-import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import {
-	LeftAlignedRow,
-	useHandleDropdownChange,
+	useDropdownChangeHandler,
 	useLoadTable,
-} from '@data-wrangling-components/react-verbs'
+} from '@data-wrangling-components/react-hooks'
+import { LeftAlignedRow } from '@data-wrangling-components/react-styled-components'
 import { columnTypes, DataType } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -35,8 +35,8 @@ export function withInputColumnDropdown<T extends InputColumnArgs>(
 ): HOCFunction<StepComponentProps<T>> {
 	return Component => {
 		const WithInputColumnDropdown: React.FC<StepComponentProps<T>> = props => {
-			const { step, store, onChange, input, table } = props
-			const handleColumnChange = useHandleDropdownChange(
+			const { step, graph, onChange, input, table } = props
+			const handleColumnChange = useDropdownChangeHandler(
 				step,
 				(s, val) => (s.args.column = val as string),
 				onChange,
@@ -48,7 +48,7 @@ export function withInputColumnDropdown<T extends InputColumnArgs>(
 			const tbl = useLoadTable(
 				input || step.input[NodeInput.Source]?.node,
 				table,
-				store,
+				graph,
 			)
 
 			const filter = useColumnFilter(step, tbl)

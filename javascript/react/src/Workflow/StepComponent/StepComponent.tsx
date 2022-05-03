@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableStore } from '@data-wrangling-components/core'
+import type { Step, GraphManager } from '@data-wrangling-components/core'
 import {
 	withInputColumnDropdown,
 	withInputTableDropdown,
@@ -16,7 +16,7 @@ import { selectStepComponent, selectStepDescription } from '../../index.js'
 
 interface StepComponentProps {
 	step: Step
-	store: TableStore
+	store: GraphManager
 	index: number
 	onChange: (step: Step, index: number) => void
 }

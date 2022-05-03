@@ -10,10 +10,10 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
 
-import { useDropdownChangeHandler } from '../../common/hooks.js'
+import { useDropdownChangeHandler } from '@data-wrangling-components/react-hooks'
 import { LeftAlignedRow } from '../../common/styles.js'
-import { withLoadedTable } from '../../common/withLoadedTable.js'
-import type { StepComponentProps } from '../../types.js'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { FilterFunction } from '../shared/index.js'
 
 /**

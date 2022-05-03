@@ -151,10 +151,10 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 							Run all
 						</PrimaryButton>
 						<IconButton
-							title={'Save pipeline as JSON'}
+							title={'Save workflow as JSON'}
 							iconProps={{ iconName: 'Download' }}
 							href={downloadUrl}
-							download={'pipeline.json'}
+							download={'workflow.json'}
 							type={'application/json'}
 						/>
 					</Buttons>

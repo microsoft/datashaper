@@ -8,7 +8,7 @@ import {
 	withInputColumnDropdown,
 	withOutputColumnTextfield,
 } from '@data-wrangling-components/react-hocs'
-import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { useMemo } from 'react'
 
 import { selectStepComponent } from '../../index.js'

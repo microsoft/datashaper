@@ -4,17 +4,64 @@
 
 ```ts
 
+/// <reference types="react" />
+
 import type ColumnTable from 'arquero/dist/types/table/column-table';
-import type { GraphBuilder } from '@data-wrangling-components/core';
+import { DataType } from '@essex/arquero';
+import type { GraphManager } from '@data-wrangling-components/core';
+import type { IComboBox } from '@fluentui/react';
+import type { IComboBoxOption } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
+import type { InputColumnRecordArgs } from '@data-wrangling-components/core';
 import type { JoinArgs } from '@data-wrangling-components/core';
 import type { Step } from '@data-wrangling-components/core';
+import type { StepChangeFunction } from '@data-wrangling-components/react-types';
 import type { Value } from '@essex/arquero';
+
+// Warning: (ae-missing-release-tag) "CheckboxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CheckboxChangeHandler = (event?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean) => void;
+
+// Warning: (ae-missing-release-tag) "ComboBoxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ComboBoxChangeHandler = (event: React.FormEvent<IComboBox>, option: IComboBoxOption | undefined, index: number | undefined, value?: string | undefined) => void;
+
+// Warning: (ae-missing-release-tag) "ComboBoxInputValueChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ComboBoxInputValueChangeHandler = (value?: string | undefined) => void;
+
+// Warning: (ae-missing-release-tag) "DropdownChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type DropdownChangeHandler = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => void;
+
+// Warning: (ae-missing-release-tag) "getCheckboxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getCheckboxChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: boolean | undefined) => void, onChange?: StepChangeFunction<T>): CheckboxChangeHandler;
+
+// Warning: (ae-missing-release-tag) "getComboBoxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getComboBoxChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, optionKey: string | number | undefined, value: string | undefined) => void, onChange?: StepChangeFunction<T>): ComboBoxChangeHandler;
+
+// Warning: (ae-missing-release-tag) "getComboBoxInputValueChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getComboBoxInputValueChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, value: string | undefined) => void, onChange?: StepChangeFunction<T>): ComboBoxInputValueChangeHandler;
 
 // Warning: (ae-missing-release-tag) "getDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function getDateFormatPatternOptions(): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "getDropdownChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getDropdownChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, optionKey: string | number | undefined) => void, onChange?: StepChangeFunction<T>): DropdownChangeHandler;
 
 // Warning: (ae-missing-release-tag) "getEnumDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -36,15 +83,65 @@ export function getRightColumn(step: Step<JoinArgs>): string | undefined;
 // @public (undocumented)
 export function getSimpleDropdownOptions(list: string[]): IDropdownOption[];
 
+// Warning: (ae-missing-release-tag) "getSpinButtonChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getSpinButtonChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: string | undefined) => void, onChange?: StepChangeFunction<T>): SpinButtonChangeHandler;
+
+// Warning: (ae-missing-release-tag) "getTextFieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getTextFieldChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, updated: string | undefined) => void, onChange?: StepChangeFunction<T>): TextFieldChangeHandler;
+
+// Warning: (ae-missing-release-tag) "SpinButtonChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type SpinButtonChangeHandler = (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
+
+// Warning: (ae-missing-release-tag) "TextFieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TextFieldChangeHandler = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
+
+// Warning: (ae-missing-release-tag) "useCheckboxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useCheckboxChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: boolean | undefined) => void, onChange?: StepChangeFunction<T>): CheckboxChangeHandler;
+
+// Warning: (ae-missing-release-tag) "useColumnRecordDelete" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useColumnRecordDelete(step: Step<InputColumnRecordArgs>, onChange?: StepChangeFunction<InputColumnRecordArgs>): (column: string) => void;
+
+// Warning: (ae-missing-release-tag) "useColumnType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useColumnType(table?: ColumnTable, column?: string): DataType;
+
 // Warning: (ae-missing-release-tag) "useColumnValueOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useColumnValueOptions(column: string | undefined, table: ColumnTable | undefined, values?: Value[], filter?: (value: Value) => boolean): IDropdownOption[];
 
+// Warning: (ae-missing-release-tag) "useComboBoxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useComboBoxChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, optionKey: string | number | undefined, value: string | undefined) => void, onChange?: StepChangeFunction<T>): ComboBoxChangeHandler;
+
+// Warning: (ae-missing-release-tag) "useComboBoxInputValueChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useComboBoxInputValueChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, value: string | undefined) => void, onChange?: StepChangeFunction<T>): ComboBoxInputValueChangeHandler;
+
 // Warning: (ae-missing-release-tag) "useDateFormatPatternOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useDateFormatPatternOptions(): IDropdownOption[];
+
+// Warning: (ae-missing-release-tag) "useDropdownChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useDropdownChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, optionKey: string | number | undefined) => void, onChange?: StepChangeFunction<T>): DropdownChangeHandler;
 
 // Warning: (ae-missing-release-tag) "useEnumDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -56,6 +153,11 @@ export function useEnumDropdownOptions<E = unknown>(enumeration: E, labels?: Rec
 // @public (undocumented)
 export function useLeftColumn(step: Step<JoinArgs>): string | undefined;
 
+// Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useLoadTable(id: string | undefined, table?: ColumnTable, builder?: GraphManager): ColumnTable | undefined;
+
 // Warning: (ae-missing-release-tag) "useRightColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -66,6 +168,11 @@ export function useRightColumn(step: Step<JoinArgs>): string | undefined;
 // @public
 export function useSimpleDropdownOptions(list: string[]): IDropdownOption[];
 
+// Warning: (ae-missing-release-tag) "useSpinButtonChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useSpinButtonChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: string | undefined) => void, onChange?: StepChangeFunction<T>): SpinButtonChangeHandler;
+
 // Warning: (ae-missing-release-tag) "useTableColumnNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -74,7 +181,12 @@ export function useTableColumnNames(table: ColumnTable | undefined, filter?: (na
 // Warning: (ae-missing-release-tag) "useTableNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useTableNames(store?: GraphBuilder): string[];
+export function useTableNames(store?: GraphManager): string[];
+
+// Warning: (ae-missing-release-tag) "useTextFieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useTextFieldChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, updated: string | undefined) => void, onChange?: StepChangeFunction<T>): TextFieldChangeHandler;
 
 // (No @packageDocumentation comment for this package)
 

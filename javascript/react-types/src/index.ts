@@ -2,13 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableStore } from '@data-wrangling-components/core'
+import type { Step, GraphManager } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type StepChangeFunction<T extends object | void | unknown = unknown> = (
 	step: Step<T>,
 ) => void
-
 export interface StepDependent<T extends object | void | unknown = unknown> {
 	step: Step<T>
 }
@@ -78,7 +77,7 @@ export interface StepComponentProps<T extends object | void | unknown = unknown>
 	/**
 	 * TableStore to use for table lookups of step parameters.
 	 */
-	store?: TableStore
+	graph?: GraphManager
 	/**
 	 * ColumnTable to execute the step against if no store is provided.
 	 */

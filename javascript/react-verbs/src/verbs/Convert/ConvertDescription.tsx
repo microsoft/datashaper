@@ -8,7 +8,7 @@ import { memo, useMemo } from 'react'
 
 import { createRowEntries } from '../../common/createRowEntries.js'
 import { VerbDescription } from '../../common/VerbDescription.js'
-import type { StepDescriptionProps } from '../../types.js'
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 
 export const ConvertDescription: React.FC<StepDescriptionProps<ConvertArgs>> =
 	memo(function ConvertDescription(props) {

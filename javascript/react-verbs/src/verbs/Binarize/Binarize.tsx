@@ -4,7 +4,7 @@
  */
 import { memo } from 'react'
 
-import type { StepComponentProps } from '../../types.js'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { Filter } from '../Filter/Filter.js'
 
 /**

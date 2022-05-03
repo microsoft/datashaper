@@ -16,9 +16,9 @@ import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useDropdownChangeHandler } from '../../common/index.js'
-import { withLoadedTable } from '../../common/withLoadedTable.js'
-import type { StepComponentProps } from '../../types.js'
+import { useDropdownChangeHandler } from '@data-wrangling-components/react-hooks'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for a step that needs lists of columns.

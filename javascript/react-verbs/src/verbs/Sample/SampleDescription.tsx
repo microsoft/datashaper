@@ -7,7 +7,7 @@ import { format } from 'd3-format'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
-import type { StepDescriptionProps } from '../../types.js'
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 
 const perc = format('.0%')
 

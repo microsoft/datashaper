@@ -13,9 +13,9 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useColumnType } from '../../common/index.js'
-import { withLoadedTable } from '../../common/withLoadedTable.js'
-import type { StepComponentProps } from '../../types.js'
+import { useColumnType } from '@data-wrangling-components/react-hooks'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import {
 	useColumnValues,
 	useDisabled,

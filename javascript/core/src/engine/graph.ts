@@ -5,8 +5,8 @@
 import type { TableContainer } from '@essex/arquero'
 
 import type { ParsedSpecification } from '../steps/types.js'
-import { createGraphBuilder } from './GraphBuilder.js'
-import type { GraphBuilder } from './types.js'
+import { createGraphManager } from './DefaultGraphManager.js'
+import type { GraphManager } from './types.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -22,8 +22,8 @@ import type { GraphBuilder } from './types.js'
 export function createGraph(
 	{ steps, input, output }: ParsedSpecification,
 	tables: Map<string, TableContainer>,
-): GraphBuilder {
-	const builder = createGraphBuilder(tables)
+): GraphManager {
+	const builder = createGraphManager(tables)
 	for (const i of input.values()) {
 		builder.addInput(i)
 	}

@@ -35,7 +35,7 @@ export function useInternalStep(
 			const _step = readStep({
 				verb: opt.key,
 				input: step?.input as any,
-				output: step?.output as any,
+				//output: step?.output as any,
 			})
 			// merge with the previous step in case input/output columns have been controlled
 			_step.args = formattedColumnArg(_step, table?.columnNames() || [])

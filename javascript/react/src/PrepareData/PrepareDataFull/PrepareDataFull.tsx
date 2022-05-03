@@ -2,62 +2,107 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
-import type { TableContainer } from '@essex/arquero'
+import type { Maybe, Specification } from '@data-wrangling-components/core'
+import type { TableContainer, TableMetadata } from '@essex/arquero'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { Icon } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo } from 'react'
+import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
+import { useGraphManager } from '../../common/hooks.js'
 
-import { ManageSteps } from '../../Steps/index.js'
+import { ManageWorkflow } from '../../Workflow/index.js'
 import { PreviewTable } from '../index.js'
 import { TableListBar } from '../TableListBar/TableListBar.js'
 import { useBusinessLogic } from './PrepareDataFull.hooks.js'
 
 export const PrepareDataFull: React.FC<{
-	tables: TableContainer[]
-	onUpdateSteps: (steps: Step[]) => void
-	onOutputTable?: (table: TableContainer) => void
-	steps?: Step[]
+	/**
+	 * The static input tables
+	 */
+	inputs: TableContainer[]
+
+	/**
+	 * Derived output tables
+	 */
+	derived: TableContainer[]
+
+	/**
+	 * The data transformation workflow
+	 */
+	workflow: Specification
+
+	/**
+	 * Handler for when the workflow changes
+	 */
+	onUpdateWorkflow: (workflow: Specification) => void
+
+	/**
+	 * Handler for when the output table map changeus
+	 */
+	onUpdateOutput?: (tables: Map<string, Maybe<TableContainer>>) => void
+
+	/**
+	 * An optional command bar
+	 */
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
+
+	/**
+	 * Step positioning option
+	 */
 	stepsPosition?: 'bottom' | 'middle'
 }> = memo(function PrepareDataFull({
-	tables,
-	onUpdateSteps,
-	steps,
+	inputs,
+	derived,
+	workflow,
+	onUpdateWorkflow,
 	outputHeaderCommandBar,
-	onOutputTable,
+	onUpdateOutput,
 	stepsPosition = 'bottom',
 }) {
 	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
-	const {
-		selectedTable,
-		selectedTableName,
-		setSelectedTableName,
-		onDeleteStep,
-		onSaveStep,
-		store,
-		lastTableName,
-		derived,
-		selectedMetadata,
-		onUpdateMetadata,
-		tablesLoading,
-	} = useBusinessLogic(tables, onUpdateSteps, steps, onOutputTable)
+	const [selectedTableId, setSelectedTableName] = useState<string | undefined>()
+	const selectedTable =
+		derived.find(t => t.id === selectedTableId) ||
+		inputs.find(t => t.id === selectedTableId)
+
+	const onUpdateMetadata = useCallback(
+		(meta: TableMetadata) => {
+			if (selectedTable) {
+				selectedTable.metadata = meta
+			}
+		},
+		[selectedTable],
+	)
+	const graph = useGraphManager()
+
+	console.log('PDF', inputs, derived, selectedTableId)
+	// const {
+	// 	selectedTable,
+	// 	selectedTableName,
+	// 	setSelectedTableName,
+	// 	onDeleteStep,
+	// 	onSaveStep,
+	// 	store,
+	// 	lastTableName,
+	// 	derived,
+	// 	selectedMetadata,
+	// 	onUpdateMetadata,
+	// 	tablesLoading,
+	// } = useBusinessLogic(tables, onUpdateSteps, steps, onOutputTable)
 
 	return (
 		<Container>
 			<InputContainer>
 				<SectionTitle>Tables</SectionTitle>
 				<TableListBar
-					loading={tablesLoading}
-					inputs={tables}
+					loading={false}
+					inputs={inputs}
 					derived={derived}
-					selected={selectedTableName}
+					selected={selectedTableId}
 					onSelect={setSelectedTableName}
 				/>
 			</InputContainer>
-
 			<StepsTrayContainer
 				stepsPosition={stepsPosition}
 				isCollapsed={isCollapsed}
@@ -66,26 +111,25 @@ export const PrepareDataFull: React.FC<{
 				<SectionTitle isCollapsed={isCollapsed} onClick={toggleCollapsed}>
 					Steps <Icon iconName="ChevronDown" />
 				</SectionTitle>
-				<StepsContainer>
-					<ManageSteps
-						nextInputTable={lastTableName}
-						onDelete={onDeleteStep}
-						onSave={onSaveStep}
+				<WorkflowContainer>
+					<ManageWorkflow
+						// nextInputTable={lastTableName}
+						graph={graph}
+						workflow={workflow}
 						onSelect={setSelectedTableName}
-						store={store}
-						steps={steps}
+						// onDelete={onDeleteStep}
+						// onSave={onSaveStep}
 					/>
-				</StepsContainer>
+				</WorkflowContainer>
 			</StepsTrayContainer>
-
 			<OutputContainer stepsPosition={stepsPosition} isCollapsed={isCollapsed}>
 				<SectionTitle>Preview</SectionTitle>
 				<PreviewTable
 					onChangeMetadata={onUpdateMetadata}
 					headerCommandBar={outputHeaderCommandBar}
-					table={selectedTable}
-					metadata={selectedMetadata}
-					name={selectedTableName}
+					table={selectedTable?.table}
+					metadata={selectedTable?.metadata}
+					name={selectedTableId}
 				/>
 			</OutputContainer>
 		</Container>
@@ -162,7 +206,7 @@ const StepsTrayContainer = styled.div<{
 		display: ${({ isCollapsed }) => (isCollapsed ? 'none' : 'grid')};
 	}
 `
-const StepsContainer = styled.div`
+const WorkflowContainer = styled.div`
 	display: flex;
 	height: 100%;
 	width: 100%;

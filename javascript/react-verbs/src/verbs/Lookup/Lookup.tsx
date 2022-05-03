@@ -10,21 +10,21 @@ import {
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 
-import { useLoadTable } from '../../common/hooks.js'
-import type { StepComponentProps } from '../../types.js'
+import { useLoadTable } from '@data-wrangling-components/react-hooks'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { LookupBase } from './Lookup.base.js'
 
 /**
  * Provides inputs for a Lookup step.
  */
 export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
-	function Lookup({ step, store, table, onChange }) {
+	function Lookup({ step, graph, table, onChange }) {
 		const rightTable = useLoadTable(
 			step.input[NodeInput.Other]?.node,
 			undefined,
-			store,
+			graph,
 		)
-		const tables = useTableNames(store)
+		const tables = useTableNames(graph)
 		const leftColumns = useTableColumnNames(table)
 		const rightColumns = useTableColumnNames(rightTable)
 		return (

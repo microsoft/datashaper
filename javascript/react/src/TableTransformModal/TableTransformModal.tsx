@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableStore } from '@data-wrangling-components/core'
+import type { GraphManager } from '@data-wrangling-components/core'
 import index from '@data-wrangling-components/verb-guidance'
 import {
 	Callout,
@@ -27,7 +27,7 @@ import {
 export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 	function TableTransformModal({
 		onDismiss,
-		store,
+		graph,
 		onTransformRequested,
 		step,
 		nextInputTable,
@@ -39,7 +39,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
 			nextInputTable,
-			store as TableStore,
+			graph as GraphManager,
 		)
 
 		const StepArgs = useHandleTableStepArgs(internal, !!step)
@@ -88,7 +88,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 							<>
 								<StepArgs
 									step={internal}
-									store={store}
+									graph={graph}
 									onChange={setInternal}
 								/>
 								<ButtonContainer>

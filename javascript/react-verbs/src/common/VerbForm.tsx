@@ -18,7 +18,7 @@ import { Fragment, memo, useMemo } from 'react'
 import { Case, Switch } from 'react-if'
 import styled from 'styled-components'
 
-import type { StepChangeFunction } from '../types.js'
+import type { StepChangeFunction } from '@data-wrangling-components/react-types'
 import {
 	useCheckboxChangeHandler,
 	useComboBoxChangeHandler,
@@ -26,7 +26,7 @@ import {
 	useDropdownChangeHandler,
 	useSpinButtonChangeHandler,
 	useTextFieldChangeHandler,
-} from './hooks.js'
+} from '@data-wrangling-components/react-hooks'
 
 export interface FormInputBase<
 	T,

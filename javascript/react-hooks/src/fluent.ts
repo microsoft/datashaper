@@ -2,23 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	InputColumnRecordArgs,
-	Step,
-	GraphBuilder,
-} from '@data-wrangling-components/core'
-import type { TableContainer } from '@essex/arquero'
-import { columnType, DataType } from '@essex/arquero'
+import type { Step } from '@data-wrangling-components/core'
 import type {
 	IComboBox,
 	IComboBoxOption,
 	IDropdownOption,
 } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { produce } from 'immer'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-
-import type { StepChangeFunction } from '../types.js'
+import { useCallback } from 'react'
+import type { StepChangeFunction } from '@data-wrangling-components/react-types'
 
 // #region Dropdown Change Handler
 
@@ -267,58 +259,3 @@ export function getCheckboxChangeHandler<T extends object | void | unknown>(
 }
 
 // #endregion
-
-export function useColumnRecordDelete(
-	step: Step<InputColumnRecordArgs>,
-	onChange?: StepChangeFunction<InputColumnRecordArgs>,
-): (column: string) => void {
-	return useCallback(
-		column => {
-			const args = { ...step.args }
-			delete args.columns[column]
-
-			onChange?.({
-				...step,
-				args: {
-					...step.args,
-					...args,
-				},
-			})
-		},
-		[step, onChange],
-	)
-}
-
-export function useLoadTable(
-	id: string | undefined,
-	table?: ColumnTable,
-	builder?: GraphBuilder,
-): ColumnTable | undefined {
-	const [tbl, setTable] = useState<ColumnTable | undefined>()
-	const handleTableLoad = useCallback(
-		(container: TableContainer | undefined) => setTable(container?.table),
-		[setTable],
-	)
-	useEffect(() => {
-		// if a table already exists, use it directly
-		// TODO: should we set it in the store also?
-		// the expectation here is that a table will be provided if the step component is used directly without a builder
-		// interface that is managing a pipeline
-		if (table) {
-			setTable(table)
-		} else if (id && builder) {
-			const sub = builder.output(id).subscribe(t => setTable(t?.table))
-			return () => sub.unsubscribe()
-		}
-	}, [id, table, builder, handleTableLoad])
-	return tbl
-}
-
-export function useColumnType(table?: ColumnTable, column?: string): DataType {
-	return useMemo(() => {
-		if (!table || !column) {
-			return DataType.Unknown
-		}
-		return columnType(table, column)
-	}, [table, column])
-}

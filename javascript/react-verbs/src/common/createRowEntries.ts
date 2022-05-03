@@ -2,7 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DescriptionRow, StepDescriptionProps } from '../types.js'
+import type {
+	DescriptionRow,
+	StepDescriptionProps,
+} from '@data-wrangling-components/react-types'
 
 // this is the maximum rows a verb description can show.
 // it is based on the max core requirement, currently held by BIN

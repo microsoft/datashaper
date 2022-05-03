@@ -13,22 +13,22 @@ import { DropzoneOptions } from 'react-dropzone';
 import type { DropzoneState as DropzoneState_2 } from 'react-dropzone';
 import { FileCollection } from '@data-wrangling-components/utilities';
 import { FileRejection } from 'react-dropzone';
+import type { GraphManager } from '@data-wrangling-components/core';
 import type { ICommandBarProps } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
-import type { Pipeline } from '@data-wrangling-components/core';
+import type { Maybe } from '@data-wrangling-components/core';
 import { default as React_2 } from 'react';
 import type { ReactElement } from 'react';
 import type { SaveMetadataFunction } from '@essex/arquero-react';
 import type { SetStateAction } from 'react';
 import type { Step } from '@data-wrangling-components/core';
-import type { StepComponentProps } from '@data-wrangling-components/react-verbs';
-import type { StepDescriptionProps } from '@data-wrangling-components/react-verbs';
+import type { StepComponentProps } from '@data-wrangling-components/react-types';
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types';
 import type { TableContainer } from '@essex/arquero';
 import type { TableMetadata } from '@essex/arquero';
-import type { TableStore } from '@data-wrangling-components/core';
 import type { Theme } from '@thematic/core';
 import type { Verb } from '@data-wrangling-components/core';
 
@@ -162,7 +162,7 @@ export const ManageSteps: React_2.FC<ManageStepsProps>;
 export const PrepareDataFull: React.FC<{
     tables: TableContainer[];
     onUpdateSteps: (steps: Step[]) => void;
-    onOutputTable?: (table: TableContainer) => void;
+    onOutputTable?: (table: Maybe<TableContainer>) => void;
     steps?: Step[];
     outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[];
     stepsPosition?: 'bottom' | 'middle';
@@ -288,9 +288,9 @@ export const TableTransformModal: React_2.FC<TableTransformModalProps>;
 //
 // @public (undocumented)
 export interface TableTransformModalProps extends TransformModalProps {
+    graph?: GraphManager;
     hideInputTable?: boolean;
     hideOutputTable?: boolean;
-    store?: TableStore;
 }
 
 // Warning: (ae-missing-release-tag) "Tooltip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -315,7 +315,7 @@ export interface TransformModalProps extends IModalProps {
 // Warning: (ae-missing-release-tag) "useCreateTableName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useCreateTableName(store?: TableStore): (name: string) => string;
+export function useCreateTableName(store?: GraphManager): (name: string) => string;
 
 // Warning: (ae-missing-release-tag) "useDeleteConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -353,6 +353,11 @@ export function useGoBack(setName: NameSetter): () => void;
 // @public (undocumented)
 export function useGoHome(name: string, setName: NameSetter): () => void;
 
+// Warning: (ae-missing-release-tag) "useGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useGraphManager(): GraphManager;
+
 // Warning: (ae-missing-release-tag) "useGuidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -371,16 +376,12 @@ export const useHandleOnUploadClick: (acceptedFileTypes: string[], handleCollect
 // Warning: (ae-missing-release-tag) "usePipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function usePipeline(store: TableStore, steps?: Step[]): Pipeline;
-
-// Warning: (ae-missing-release-tag) "useStore" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useStore(): TableStore;
+export function usePipeline(store: GraphManager, steps?: Step[]): void;
 
 
 export * from "@data-wrangling-components/react-controls";
 export * from "@data-wrangling-components/react-hocs";
+export * from "@data-wrangling-components/react-types";
 export * from "@data-wrangling-components/react-verbs";
 
 // (No @packageDocumentation comment for this package)

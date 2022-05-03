@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step, TableStore, Verb } from '@data-wrangling-components/core'
+import type { Step, GraphManager, Verb } from '@data-wrangling-components/core'
 import { readStep } from '@data-wrangling-components/core'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -15,7 +15,7 @@ import {
 export function useInternalTableStep(
 	step: Step | undefined,
 	_lastOutput: string | undefined,
-	store: TableStore,
+	graph: GraphManager,
 ): {
 	internal: Step | undefined
 	handleVerbChange: (verb: Verb) => void
@@ -30,12 +30,12 @@ export function useInternalTableStep(
 		}
 	}, [step, setInternal])
 
-	const newTableName = useCreateTableName(store)
+	const newTableName = useCreateTableName(graph)
 
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {
 			const id = newTableName(verb)
-			const _step = readStep({ verb, id, output: { target: id } })
+			const _step = readStep({ verb, id })
 			_step.args = formattedColumnArg(_step.args)
 			setInternal(_step)
 		},

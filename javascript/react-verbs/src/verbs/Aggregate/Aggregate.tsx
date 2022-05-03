@@ -6,7 +6,7 @@ import type { AggregateArgs } from '@data-wrangling-components/core'
 import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
 
-import { withLoadedTable } from '../../common/withLoadedTable.js'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
 import { AggregateBase } from './Aggregate.base.js'
 
 /*

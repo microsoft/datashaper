@@ -155,12 +155,12 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createGraph({ steps, input, output }: ParsedSpecification, tables: Map<string, TableContainer>): GraphBuilder;
+export function createGraph({ steps, input, output }: ParsedSpecification, tables: Map<string, TableContainer>): GraphManager;
 
-// Warning: (ae-missing-release-tag) "createGraphBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "createGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function createGraphBuilder(store: Map<string, TableContainer>): GraphBuilder;
+export function createGraphManager(inputs?: Map<string, TableContainer>): GraphManager;
 
 // Warning: (ae-missing-release-tag) "Criterion" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -182,11 +182,11 @@ export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<I
 // @public (undocumented)
 export type DedupeArgs = Partial<InputColumnListArgs>;
 
-// Warning: (ae-missing-release-tag) "DefaultGraphBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DefaultGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export class DefaultGraphBuilder implements GraphBuilder {
-    constructor(inputs: Map<string, TableContainer>);
+export class DefaultGraphManager implements GraphManager {
+    constructor(inputs?: Map<string, TableContainer>);
     // (undocumented)
     addInput(input: string): void;
     addOutput(name: string, binding: NamedOutputPortBinding): void;
@@ -367,10 +367,10 @@ export interface FoldArgs extends InputColumnListArgs {
     to?: [string, string];
 }
 
-// Warning: (ae-missing-release-tag) "GraphBuilder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface GraphBuilder {
+export interface GraphManager {
     addInput(input: string): void;
     addOutput(name: string, binding: NamedPortBinding): void;
     addStep(step: StepInput): Step;

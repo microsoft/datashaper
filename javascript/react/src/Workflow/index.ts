@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export * from './ManageSteps/index.js'
+export * from './ManageWorkflow/index.js'
 export * from './StepCard/index.js'
 export * from './StepComponent/index.js'
 export * from './StepSelector/index.js'

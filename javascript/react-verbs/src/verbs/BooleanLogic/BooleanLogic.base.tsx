@@ -12,7 +12,7 @@ import {
 	enumDropdown,
 	inputColumnList,
 } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '../../types.js'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Inputs to combine column using boolean logic.

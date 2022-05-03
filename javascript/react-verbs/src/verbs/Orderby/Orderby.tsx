@@ -20,8 +20,8 @@ import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { withLoadedTable } from '../../common/withLoadedTable.js'
-import type { StepComponentProps } from '../../types.js'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for an OrderBy step.

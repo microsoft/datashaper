@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
+import type { Step, StepSpecification } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { memo, useEffect, useRef } from 'react'
 import styled from 'styled-components'
@@ -11,7 +11,7 @@ import { StepCard } from '../../index.js'
 import { DetailText } from '../../PrepareData/DetailText/index.js'
 
 export const StepsList: React.FC<{
-	steps?: Step[]
+	steps?: StepSpecification[]
 	onDeleteClicked?: (index: number) => void
 	onEditClicked?: (step: Step, index: number) => void
 	onDuplicateClicked?: (step: Step) => void

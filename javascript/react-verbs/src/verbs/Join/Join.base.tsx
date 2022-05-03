@@ -14,7 +14,7 @@ import {
 	enumDropdown,
 	joinInputs,
 } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '../../types.js'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for a Join step.

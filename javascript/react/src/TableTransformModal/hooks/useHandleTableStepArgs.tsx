@@ -10,7 +10,7 @@ import {
 	withOutputColumnTextfield,
 	withOutputTableTextfield,
 } from '@data-wrangling-components/react-hocs'
-import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import flow from 'lodash-es/flow.js'
 import { useMemo } from 'react'
 
@@ -28,7 +28,13 @@ export function useHandleTableStepArgs(
 	const WithAllArgs = useMemo(() => {
 		if (Component) {
 			return flow(
-				withOutputTableTextfield(undefined, disabled),
+				withOutputTableTextfield(
+					output => {
+						console.log('ADD OUTPUT', output)
+					},
+					undefined,
+					disabled,
+				),
 				withOutputColumnTextfield(),
 				withInputColumnDropdown(),
 				withInputTableDropdown(),

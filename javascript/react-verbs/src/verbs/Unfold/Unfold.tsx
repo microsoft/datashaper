@@ -6,8 +6,8 @@ import type { UnfoldArgs } from '@data-wrangling-components/core'
 import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
 
-import { withLoadedTable } from '../../common/withLoadedTable.js'
-import type { StepComponentProps } from '../../types.js'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { UnfoldBase } from './Unfold.base.js'
 
 /**

@@ -8,7 +8,7 @@ import { memo, useMemo } from 'react'
 import type { FormInput } from '../../common/VerbForm.jsx'
 import { FormInputType, VerbForm } from '../../common/VerbForm.jsx'
 import { inputColumnList } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '../../types.js'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Just the to/value inputs for an erase.

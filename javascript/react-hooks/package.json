@@ -32,8 +32,10 @@
 	},
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",
+		"@data-wrangling-components/react-types": "workspace:^",
 		"@essex/arquero": "^2.0.2",
-		"@essex/dataflow": "^0.1.1"
+		"@essex/dataflow": "^0.1.1",
+		"immer": "^9.0.12"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.0",

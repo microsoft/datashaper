@@ -6,8 +6,8 @@
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { StepComponentProps } from '../types.js'
-import { useLoadTable } from './hooks.js'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
+import { useLoadTable } from '@data-wrangling-components/react-hooks'
 
 export function withLoadedTable<T>(
 	StepComponent: React.ComponentType<
@@ -17,11 +17,11 @@ export function withLoadedTable<T>(
 	>,
 ) {
 	return function LoadedTable(props: StepComponentProps<T>): JSX.Element {
-		const { step, table, store, input } = props
+		const { step, table, graph, input } = props
 		const dataTable = useLoadTable(
 			input || step.input[NodeInput.Source]?.node,
 			table,
-			store,
+			graph,
 		)
 		return <StepComponent {...props} dataTable={dataTable} />
 	}

@@ -12,10 +12,29 @@ import { useOutputPreview, useTableSelection } from './TableListBar.hooks.js'
 import { ListContainer, viewButtonStyles } from './TableListBar.styles.js'
 
 export const TableListBar: React.FC<{
+	/**
+	 * The input tables
+	 */
 	inputs: TableContainer[]
+
+	/**
+	 * The output tables
+	 */
 	derived: TableContainer[]
+
+	/**
+	 * The table selection handler
+	 */
 	onSelect?: (name: string) => void
+
+	/**
+	 * The selected table id
+	 */
 	selected?: string
+
+	/**
+	 * The load-state
+	 */
 	loading?: boolean
 }> = memo(function TableListBar({
 	inputs,
@@ -24,8 +43,7 @@ export const TableListBar: React.FC<{
 	selected,
 	loading,
 }) {
-	const { onClick } = useOutputPreview(derived, onSelect)
-
+	const { onClick } = useOutputPreview(Object.values(derived), onSelect)
 	const menuProps = useTableSelection(inputs, derived, selected, onSelect)
 
 	return (
@@ -35,7 +53,7 @@ export const TableListBar: React.FC<{
 			{derived.length > 0 ? (
 				<DefaultButton
 					styles={viewButtonStyles}
-					iconProps={iconProps}
+					iconProps={viewIcon}
 					onClick={onClick}
 				>
 					View output table
@@ -49,4 +67,4 @@ export const TableListBar: React.FC<{
 	)
 })
 
-const iconProps = { iconName: 'View' }
+const viewIcon = { iconName: 'View' }

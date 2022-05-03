@@ -10,21 +10,15 @@ import type { AggregateArgs } from '@data-wrangling-components/core';
 import type { BinArgs } from '@data-wrangling-components/core';
 import type { BinarizeArgs } from '@data-wrangling-components/core';
 import type { BooleanArgs } from '@data-wrangling-components/core';
-import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { ConvertArgs } from '@data-wrangling-components/core';
-import { DataType } from '@essex/arquero';
 import type { DeriveArgs } from '@data-wrangling-components/core';
 import type { EraseArgs } from '@data-wrangling-components/core';
 import type { FetchArgs } from '@data-wrangling-components/core';
 import type { FillArgs } from '@data-wrangling-components/core';
 import type { FilterArgs } from '@data-wrangling-components/core';
 import type { FoldArgs } from '@data-wrangling-components/core';
-import type { IComboBox } from '@fluentui/react';
-import type { IComboBoxOption } from '@fluentui/react';
-import type { IDropdownOption } from '@fluentui/react';
 import type { ImputeArgs } from '@data-wrangling-components/core';
 import type { InputColumnListArgs } from '@data-wrangling-components/core';
-import type { InputColumnRecordArgs } from '@data-wrangling-components/core';
 import type { JoinArgs } from '@data-wrangling-components/core';
 import type { LookupArgs } from '@data-wrangling-components/core';
 import { MemoExoticComponent } from 'react';
@@ -38,8 +32,10 @@ import type { RollupArgs } from '@data-wrangling-components/core';
 import type { SampleArgs } from '@data-wrangling-components/core';
 import type { SpreadArgs } from '@data-wrangling-components/core';
 import type { Step } from '@data-wrangling-components/core';
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types';
+import { StepComponentProps } from '@data-wrangling-components/react-types';
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types';
 import { StyledComponent } from 'styled-components';
-import type { TableStore } from '@data-wrangling-components/core';
 import type { UnfoldArgs } from '@data-wrangling-components/core';
 import type { WindowArgs } from '@data-wrangling-components/core';
 
@@ -102,11 +98,6 @@ export const BooleanLogicBase: React.FC<StepComponentBaseProps<BooleanArgs> & {
 // @public (undocumented)
 export const BooleanLogicDescription: React.FC<StepDescriptionProps<BooleanArgs>>;
 
-// Warning: (ae-missing-release-tag) "CheckboxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type CheckboxChangeHandler = (event?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean) => void;
-
 // Warning: (ae-missing-release-tag) "ColumnListOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -123,16 +114,6 @@ export const ColumnListOperationBase: React.FC<StepComponentBaseProps<InputColum
 //
 // @public (undocumented)
 export const ColumnListOperationDescription: React.FC<StepDescriptionProps<InputColumnListArgs>>;
-
-// Warning: (ae-missing-release-tag) "ComboBoxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type ComboBoxChangeHandler = (event: React.FormEvent<IComboBox>, option: IComboBoxOption | undefined, index: number | undefined, value?: string | undefined) => void;
-
-// Warning: (ae-missing-release-tag) "ComboBoxInputValueChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type ComboBoxInputValueChangeHandler = (value?: string | undefined) => void;
 
 // Warning: (ae-missing-release-tag) "Convert" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -167,22 +148,6 @@ export const DeriveBase: React.FC<StepComponentBaseProps<DeriveArgs> & {
 //
 // @public (undocumented)
 export const DeriveDescription: React.FC<StepDescriptionProps<DeriveArgs>>;
-
-// Warning: (ae-missing-release-tag) "DescriptionRow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DescriptionRow {
-    after?: string;
-    before?: string;
-    sub?: DescriptionRow[];
-    title?: string;
-    value?: any;
-}
-
-// Warning: (ae-missing-release-tag) "DropdownChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type DropdownChangeHandler = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => void;
 
 // Warning: (ae-missing-release-tag) "Erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -248,36 +213,6 @@ export const FoldBase: React.FC<StepComponentBaseProps<FoldArgs> & {
 // @public (undocumented)
 export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>>;
 
-// Warning: (ae-missing-release-tag) "getCheckboxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getCheckboxChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: boolean | undefined) => void, onChange?: StepChangeFunction<T>): CheckboxChangeHandler;
-
-// Warning: (ae-missing-release-tag) "getComboBoxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getComboBoxChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, optionKey: string | number | undefined, value: string | undefined) => void, onChange?: StepChangeFunction<T>): ComboBoxChangeHandler;
-
-// Warning: (ae-missing-release-tag) "getComboBoxInputValueChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getComboBoxInputValueChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, value: string | undefined) => void, onChange?: StepChangeFunction<T>): ComboBoxInputValueChangeHandler;
-
-// Warning: (ae-missing-release-tag) "getDropdownChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getDropdownChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, optionKey: string | number | undefined) => void, onChange?: StepChangeFunction<T>): DropdownChangeHandler;
-
-// Warning: (ae-missing-release-tag) "getSpinButtonChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getSpinButtonChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: string | undefined) => void, onChange?: StepChangeFunction<T>): SpinButtonChangeHandler;
-
-// Warning: (ae-missing-release-tag) "getTextFieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getTextFieldChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, updated: string | undefined) => void, onChange?: StepChangeFunction<T>): TextFieldChangeHandler;
-
 // Warning: (ae-missing-release-tag) "Impute" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -302,11 +237,6 @@ export const Join: React.FC<StepComponentProps<JoinArgs>>;
 //
 // @public (undocumented)
 export const JoinDescription: React.FC<StepDescriptionProps<JoinArgs>>;
-
-// Warning: (ae-missing-release-tag) "LeftAlignedColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const LeftAlignedColumn: StyledComponent<"div", any, {}, never>;
 
 // Warning: (ae-missing-release-tag) "LeftAlignedRow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -444,11 +374,6 @@ export const SetOperation: React.FC<StepComponentProps>;
 // @public (undocumented)
 export const SetOperationDescription: React.FC<StepDescriptionProps<void>>;
 
-// Warning: (ae-missing-release-tag) "SpinButtonChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type SpinButtonChangeHandler = (event: React.SyntheticEvent<HTMLElement>, newValue?: string) => void;
-
 // Warning: (ae-missing-release-tag) "Spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -459,65 +384,6 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>>;
 // @public (undocumented)
 export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>>;
 
-// Warning: (ae-missing-release-tag) "StepChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type StepChangeFunction<T extends object | void | unknown = unknown> = (step: Step<T>) => void;
-
-// Warning: (ae-missing-release-tag) "StepComponentBaseProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface StepComponentBaseProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
-    onChange?: StepChangeFunction<T>;
-}
-
-// Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepComponentProps<T extends object | void | unknown = unknown> extends StepComponentBaseProps<T> {
-    input?: string;
-    label?: string;
-    store?: TableStore;
-    table?: ColumnTable;
-}
-
-// Warning: (ae-missing-release-tag) "StepDependent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepDependent<T extends object | void | unknown = unknown> {
-    // (undocumented)
-    step: Step<T>;
-}
-
-// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepDescriptionProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
-    // (undocumented)
-    actions?: JSX.Element;
-    // (undocumented)
-    showInput?: boolean;
-    // (undocumented)
-    showOutput?: boolean;
-    // (undocumented)
-    showOutputColumn?: boolean;
-    // (undocumented)
-    style?: React.CSSProperties;
-}
-
-// Warning: (ae-missing-release-tag) "StepSubcomponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface StepSubcomponentProps<T extends object | void | unknown = unknown> extends StepComponentProps<T> {
-    // (undocumented)
-    label?: string;
-}
-
-// Warning: (ae-missing-release-tag) "TextFieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type TextFieldChangeHandler = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => void;
-
 // Warning: (ae-missing-release-tag) "Unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -527,61 +393,6 @@ export const Unfold: React.FC<StepComponentProps<UnfoldArgs>>;
 //
 // @public (undocumented)
 export const UnfoldDescription: React.FC<StepDescriptionProps<UnfoldArgs>>;
-
-// Warning: (ae-missing-release-tag) "useCheckboxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useCheckboxChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: boolean | undefined) => void, onChange?: StepChangeFunction<T>): CheckboxChangeHandler;
-
-// Warning: (ae-missing-release-tag) "useColumnRecordDelete" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useColumnRecordDelete(step: Step<InputColumnRecordArgs>, onChange?: StepChangeFunction<InputColumnRecordArgs>): (column: string) => void;
-
-// Warning: (ae-missing-release-tag) "useColumnType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useColumnType(table?: ColumnTable, column?: string): DataType;
-
-// Warning: (ae-missing-release-tag) "useComboBoxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useComboBoxChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, optionKey: string | number | undefined, value: string | undefined) => void, onChange?: StepChangeFunction<T>): ComboBoxChangeHandler;
-
-// Warning: (ae-missing-release-tag) "useComboBoxInputValueChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useComboBoxInputValueChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, value: string | undefined) => void, onChange?: StepChangeFunction<T>): ComboBoxInputValueChangeHandler;
-
-// Warning: (ae-missing-release-tag) "useDropdownChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-function useDropdownChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, optionKey: string | number | undefined) => void, onChange?: StepChangeFunction<T>): DropdownChangeHandler;
-export { useDropdownChangeHandler }
-export { useDropdownChangeHandler as useHandleDropdownChange }
-
-// Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useLoadTable(id: string | undefined, table?: ColumnTable, store?: TableStore): ColumnTable | undefined;
-
-// Warning: (ae-missing-release-tag) "useSpinButtonChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useSpinButtonChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: string | undefined) => void, onChange?: StepChangeFunction<T>): SpinButtonChangeHandler;
-
-// Warning: (ae-missing-release-tag) "useTextFieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useTextFieldChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, updated: string | undefined) => void, onChange?: StepChangeFunction<T>): TextFieldChangeHandler;
-
-// Warning: (ae-missing-release-tag) "VerbDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface VerbDescriptionProps<T extends object | void | unknown = unknown> extends StepDescriptionProps<T> {
-    // (undocumented)
-    rows: DescriptionRow[];
-}
 
 // Warning: (ae-missing-release-tag) "Window" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

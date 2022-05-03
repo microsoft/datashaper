@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step } from '@data-wrangling-components/core'
+import type { Specification } from '@data-wrangling-components/core'
 import type { FileCollection } from '@data-wrangling-components/utilities'
 import { FileType } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
@@ -11,7 +11,7 @@ import { useCallback } from 'react'
 
 import { useHandleOnUploadClick } from '../../files/index.js'
 
-function useCsvHandler(onUpdateTables?: (tables: TableContainer[]) => void) {
+function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	return useCallback(
 		async (fc: FileCollection) => {
 			let tables = fc.list(FileType.table)
@@ -36,16 +36,16 @@ function useCsvHandler(onUpdateTables?: (tables: TableContainer[]) => void) {
 				} as TableContainer
 				tableContainer.push(table)
 			}
-			onUpdateTables?.(tableContainer)
+			onUpdateTables(tableContainer)
 		},
 		[onUpdateTables],
 	)
 }
 
-function useJsonHandler(onUpdateSteps?: (steps: Step[]) => void) {
+function useJsonHandler(onUpdateWorkflow?: (steps: Specification) => void) {
 	return useCallback(
 		async (fc: FileCollection) => {
-			const regex = /pipeline(.*)\.json$/i
+			const regex = /workflow(.*)\.json$/i
 			const files = fc.list(FileType.json)
 			if (!files.length) {
 				return
@@ -55,35 +55,34 @@ function useJsonHandler(onUpdateSteps?: (steps: Step[]) => void) {
 			if (!json) {
 				return
 			}
-
-			const { steps = [] } = await json.toJson()
-			if (steps.length && onUpdateSteps) {
-				onUpdateSteps(steps)
+			const workflow = (await json.toJson()) as Specification
+			if (workflow && onUpdateWorkflow) {
+				onUpdateWorkflow(workflow)
 			}
 		},
-		[onUpdateSteps],
+		[onUpdateWorkflow],
 	)
 }
 
 export function useHandleCsvUpload(
-	onUpdateTables?: (tables: TableContainer[]) => void,
+	onUpdateTables: (tables: TableContainer[]) => void,
 ): () => void {
 	const csvHandler = useCsvHandler(onUpdateTables)
 	return useHandleOnUploadClick(['.csv'], csvHandler)
 }
 
 export function useHandleJsonUpload(
-	onUpdateSteps?: (steps: Step[]) => void,
+	onUpdateWorkflow: (steps: Specification) => void,
 ): () => void {
-	const jsonHandler = useJsonHandler(onUpdateSteps)
+	const jsonHandler = useJsonHandler(onUpdateWorkflow)
 	return useHandleOnUploadClick(['.json'], jsonHandler)
 }
 
 export function useHandleFileUpload(
-	onUpdateSteps?: (steps: Step[]) => void,
-	onUpdateTables?: (tables: TableContainer[]) => void,
+	onUpdateWorkflow: (steps: Specification) => void,
+	onUpdateTables: (tables: TableContainer[]) => void,
 ): (fc: FileCollection) => void {
-	const jsonHandler = useJsonHandler(onUpdateSteps)
+	const jsonHandler = useJsonHandler(onUpdateWorkflow)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	return useCallback(
 		async (fc: FileCollection) => {
@@ -96,14 +95,14 @@ export function useHandleFileUpload(
 }
 
 export function useHandleZipUpload(
-	onUpdateSteps?: (steps: Step[]) => void,
-	onUpdateTables?: (tables: TableContainer[]) => void,
+	onUpdateWorkflow: (steps: Specification) => void,
+	onUpdateTables: (tables: TableContainer[]) => void,
 ): () => void {
-	const jsonHandler = useJsonHandler(onUpdateSteps)
+	const jsonHandler = useJsonHandler(onUpdateWorkflow)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	const handler = useCallback(
 		async (fc: FileCollection) => {
-			onUpdateTables?.([])
+			onUpdateTables([])
 			/* eslint-disable @essex/adjacent-await */
 			await csvHandler(fc)
 			await jsonHandler(fc)

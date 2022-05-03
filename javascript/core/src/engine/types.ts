@@ -25,10 +25,11 @@ import type { ParsedSpecification } from '../steps/types.js'
  * - building compound steps with recursive execution.
  * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
  */
-export interface GraphBuilder {
+export interface GraphManager {
 	readonly graph: Graph<TableContainer>
 	readonly spec: ParsedSpecification
 	readonly outputs: string[]
+	readonly inputs: Map<string, TableContainer>
 
 	/**
 	 * Remove all steps, inputs, and outputs from the pipeline
@@ -100,4 +101,9 @@ export interface GraphBuilder {
 	 * Log out the steps
 	 */
 	print(): void
+
+	/**
+	 *
+	 */
+	toMap(): Map<string, Maybe<TableContainer>>
 }

@@ -2,31 +2,23 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	Pipeline,
-	Step,
-	TableStore,
-} from '@data-wrangling-components/core'
-import {
-	createPipeline,
-	createTableStore,
-} from '@data-wrangling-components/core'
+import type { Step, GraphManager } from '@data-wrangling-components/core'
+import { createGraphManager } from '@data-wrangling-components/core'
 import { useBoolean } from '@fluentui/react-hooks'
 import isArray from 'lodash-es/isArray.js'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
-export function useStore(): TableStore {
-	return useMemo(() => createTableStore(), [])
+export function useGraphManager(): GraphManager {
+	// TODO: inject known tables
+	return useMemo(() => createGraphManager(), [])
 }
 
-export function usePipeline(store: TableStore, steps?: Step[]): Pipeline {
+export function usePipeline(store: GraphManager, steps?: Step[]): void {
 	/* eslint-disable react-hooks/exhaustive-deps */
-	return useMemo(() => {
-		const pipeline = createPipeline(store)
+	return useEffect(() => {
 		if (steps) {
-			pipeline.addAll(steps)
+			steps.forEach(s => store.addStep(s))
 		}
-		return pipeline
 	}, [
 		store,
 		// do not re-fire this memo when the steps change; this will redrive the pipeline
@@ -70,11 +62,11 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 //TODO: separate column and table functions into a new hooks file
 //OR move this functionality to the pipeline?
 export function useCreateTableName(
-	store?: TableStore,
+	store?: GraphManager,
 ): (name: string) => string {
 	const verifyTableName = useCallback(
 		(name: string): boolean => {
-			return store ? store.list().includes(name) : false
+			return store ? store.outputs.includes(name) : false
 		},
 		[store],
 	)

@@ -6,7 +6,7 @@ import type { PivotArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
-import type { StepDescriptionProps } from '../../types.js'
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 
 export const PivotDescription: React.FC<StepDescriptionProps<PivotArgs>> = memo(
 	function PivotDescription(props) {

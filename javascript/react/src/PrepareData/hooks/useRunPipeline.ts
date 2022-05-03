@@ -3,20 +3,27 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Pipeline } from '@data-wrangling-components/core'
+import type { GraphManager } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 
 export function useRunPipeline(
-	pipeline: Pipeline,
+	pipeline: GraphManager,
 	setSelectedTableName?: (name: string) => void,
-	setSelectedTable?: (table: TableContainer) => void,
+	setSelectedTable?: (table: TableContainer | undefined) => void,
 ): () => Promise<void> {
-	return useCallback(async () => {
-		if (pipeline.steps.length) {
-			const output = await pipeline.run()
-			setSelectedTableName?.(output.id)
-			setSelectedTable?.(output)
+	useEffect(() => {
+		if (pipeline.spec.steps.length) {
+			const lastStepId = pipeline.spec.steps[pipeline.spec.steps.length - 1]?.id
+			if (lastStepId) {
+				pipeline.output(lastStepId).subscribe(table => {
+					setSelectedTableName?.(lastStepId)
+					setSelectedTable?.(table)
+				})
+			}
 		}
-	}, [pipeline, setSelectedTableName, setSelectedTable])
+	}, [pipeline.spec.steps])
+	return useCallback(async () => {
+		// todo: delete me
+	}, [])
 }

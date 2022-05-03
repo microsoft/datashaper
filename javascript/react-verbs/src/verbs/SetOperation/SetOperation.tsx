@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableStore } from '@data-wrangling-components/core'
+import type { Step, GraphManager } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
 import {
 	useSimpleDropdownOptions,
@@ -13,16 +13,16 @@ import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { LeftAlignedRow } from '../../common/index.js'
-import { withLoadedTable } from '../../common/withLoadedTable.js'
-import type { StepComponentProps } from '../../types.js'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs to create a list of tables.
  * E.g., for set operations
  */
 export const SetOperation: React.FC<StepComponentProps> = memo(
-	withLoadedTable(function SetOperation({ step, store, onChange, dataTable }) {
-		const others = useOthers(step, onChange, store)
+	withLoadedTable(function SetOperation({ step, graph, onChange, dataTable }) {
+		const others = useOthers(step, onChange, graph)
 
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
@@ -53,7 +53,7 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 function useOthers(
 	step: Step,
 	onChange?: (step: Step) => void,
-	store?: TableStore,
+	store?: GraphManager,
 ) {
 	const tableNames = useTableNames(store)
 	const tableOptions = useSimpleDropdownOptions(tableNames)

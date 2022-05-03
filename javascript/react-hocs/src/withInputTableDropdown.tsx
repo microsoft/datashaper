@@ -8,11 +8,9 @@ import {
 	useSimpleDropdownOptions,
 	useTableNames,
 } from '@data-wrangling-components/react-hooks'
-import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
-import {
-	LeftAlignedRow,
-	useHandleDropdownChange,
-} from '@data-wrangling-components/react-verbs'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
+import { useDropdownChangeHandler } from '@data-wrangling-components/react-hooks'
+import { LeftAlignedRow } from '@data-wrangling-components/react-styled-components'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -29,10 +27,10 @@ export function withInputTableDropdown(
 ): HOCFunction<StepComponentProps> {
 	return Component => {
 		const WithTableDropdown: React.FC<StepComponentProps> = props => {
-			const { step, store, onChange } = props
-			const tables = useTableNames(store)
+			const { step, graph, onChange } = props
+			const tables = useTableNames(graph)
 			const tableOptions = useSimpleDropdownOptions(tables)
-			const handleTableChange = useHandleDropdownChange(
+			const handleTableChange = useDropdownChangeHandler(
 				step,
 				(s, val) => (s.input[NodeInput.Source] = { node: val as string }),
 				onChange,

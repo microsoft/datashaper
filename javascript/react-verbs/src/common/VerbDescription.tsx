@@ -8,7 +8,10 @@ import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import type { DescriptionRow, VerbDescriptionProps } from '../types.js'
+import type {
+	DescriptionRow,
+	VerbDescriptionProps,
+} from '@data-wrangling-components/react-types'
 
 function VerbDescriptionFn<T extends object | void>({
 	step,

@@ -6,7 +6,7 @@ import type { OnehotArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
-import type { StepDescriptionProps } from '../../types.js'
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 
 export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 	memo(function OneHotDescription(props) {

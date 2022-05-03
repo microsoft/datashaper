@@ -6,10 +6,10 @@ import type {
 	Specification,
 	SpecificationInput,
 	Step,
-	TableStore,
+	GraphManager,
 	Verb,
 } from '@data-wrangling-components/core'
-import { createTableStore, readSpec } from '@data-wrangling-components/core'
+import { createGraphManager, readSpec } from '@data-wrangling-components/core'
 import { usePipeline } from '@data-wrangling-components/react'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
@@ -34,7 +34,7 @@ const parse = {
 	Group: identity,
 }
 
-export function useSteps(store: TableStore): {
+export function useSteps(store: GraphManager): {
 	steps: Step[]
 	result: TableContainer | undefined
 	outputs: Map<string, TableContainer>
@@ -99,16 +99,16 @@ export function useSteps(store: TableStore): {
 	}
 }
 export function useTables(autoType = false): {
-	store: TableStore
+	store: GraphManager
 	tables: TableContainer[]
 	onAddFiles: (loaded: Map<string, ColumnTable>) => void
 } {
 	const store = useTableStore(autoType)
 
 	const [tables, setTables] = useState<TableContainer[]>([])
-	
+
 	// initialize the input tables when the store is created
-	useEffect(() => {		
+	useEffect(() => {
 		const results = store.toArray()
 		setTables(results as TableContainer[])
 	}, [store, setTables])
@@ -121,7 +121,7 @@ export function useTables(autoType = false): {
 			})
 			setTables(store.toArray() as TableContainer[])
 		},
-		[store]
+		[store],
 	)
 
 	return {
@@ -133,11 +133,11 @@ export function useTables(autoType = false): {
 
 // create the store and initialize it with our test tables
 // memoing this gives us a chance queue up our built-in test tables on first run
-function useTableStore(autoType = false): TableStore {
-	const [store, setStore] = useState<TableStore>(createTableStore())
+function useTableStore(autoType = false): GraphManager {
+	const [store, setStore] = useState<GraphManager>(createGraphManager())
 	useEffect(() => {
 		const fn = async () => {
-			const store = createTableStore()
+			const store = createGraphManager()
 			const promises = TABLES.map(async name => {
 				const data = await loadCSV(name, {
 					parse,
@@ -145,7 +145,7 @@ function useTableStore(autoType = false): TableStore {
 					autoType,
 				})
 				const ctr = container(name, data)
-				store.set(name, from([ctr]))
+				store.inputs.set(name, ctr)
 			})
 			await Promise.all(promises)
 			setStore(store)

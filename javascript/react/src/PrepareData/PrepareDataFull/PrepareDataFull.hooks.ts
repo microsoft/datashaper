@@ -2,12 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableStore } from '@data-wrangling-components/core'
+import type {
+	Step,
+	GraphManager,
+	Maybe,
+	Specification,
+} from '@data-wrangling-components/core'
 import type { TableContainer, TableMetadata } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useEffect, useMemo, useState } from 'react'
 
-import { usePipeline, useStore } from '../../common/index.js'
+import { usePipeline, useGraphManager } from '../../common/index.js'
 import {
 	getLoadingOrchestrator,
 	LoadingOrchestratorType,
@@ -22,15 +27,15 @@ import {
 
 export function useBusinessLogic(
 	tables: TableContainer[],
-	onUpdateSteps: (steps: Step[]) => void,
-	steps?: Step[],
-	onOutputTable?: (table: TableContainer) => void,
+	onUpdateWorkflow: (workflow: Specification) => void,
+	workflow: Specification,
+	onOutputTable?: (table: Maybe<TableContainer>) => void,
 ): {
 	selectedTable: ColumnTable | undefined
 	setSelectedTableName: (name: string) => void
 	onDeleteStep: (index: number) => void
 	onSaveStep: (step: Step, index?: number) => void
-	store: TableStore
+	store: GraphManager
 	selectedMetadata: TableMetadata | undefined
 	lastTableName: string
 	selectedTableName?: string
@@ -39,28 +44,24 @@ export function useBusinessLogic(
 	tablesLoading: boolean
 } {
 	const [selectedTableName, setSelectedTableName] = useState<string>()
-	const [storedTables, setStoredTables] = useState<Map<string, TableContainer>>(
-		new Map<string, TableContainer>(),
-	)
+	const [storedTables, setStoredTables] = useState<
+		Map<string, Maybe<TableContainer>>
+	>(new Map<string, TableContainer>())
 
-	const store = useStore()
+	const graph = useGraphManager()
 
 	useEffect(() => {
-		store.onChange(() => {
+		graph.onChange(() => {
 			// we need to create a new map to trigger memo update
-			const _storedTables = store.toMap()
+			const _storedTables = graph.toMap()
 			setStoredTables(new Map(_storedTables))
 		})
-	}, [store, setStoredTables])
+	}, [graph, setStoredTables])
 
-	const pipeline = usePipeline(store)
+	usePipeline(graph)
 
-	const runPipeline = useRunPipeline(
-		pipeline,
-		setSelectedTableName,
-		onOutputTable,
-	)
-	const addNewTables = useAddNewTables(store)
+	const runPipeline = useRunPipeline(graph, setSelectedTableName, onOutputTable)
+	const addNewTables = useAddNewTables(graph)
 	const { isLoading } = getLoadingOrchestrator(LoadingOrchestratorType.Tables)
 
 	// TODO: resolve these from the stored table state
@@ -78,9 +79,9 @@ export function useBusinessLogic(
 
 	const selectedMetadata = useMemo((): TableMetadata | undefined => {
 		if (selectedTableName) {
-			return store.get(selectedTableName ?? '')?.metadata
+			return graph.latest(selectedTableName ?? '')?.metadata
 		}
-	}, [store, selectedTableName])
+	}, [graph, selectedTableName])
 
 	// kind of a complex selection process:
 	// 1) if a table is selected in the tables dropdown, use that
@@ -119,27 +120,26 @@ export function useBusinessLogic(
 	useEffect(() => {
 		if (steps && steps.length > 0) {
 			if (
-				steps?.filter(s => !pipeline.steps?.includes(s)).length ||
-				steps?.length !== pipeline.steps.length
+				steps?.filter(s => !graph.spec.steps?.includes(s)).length ||
+				steps?.length !== graph.spec.steps.length
 			) {
-				pipeline.clear()
-				steps && pipeline.addAll(steps)
+				graph.clear()
+				steps && steps.forEach(s => graph.addStep(s))
 				runPipeline()
 			}
 		}
-	}, [steps, pipeline, runPipeline])
+	}, [steps, graph, runPipeline])
 
 	const onSaveStep = useOnSaveStep(onUpdateSteps, steps)
 	const onDeleteStep = useOnDeleteStep(onUpdateSteps, steps)
-
-	const onUpdateMetadata = useOnUpdateMetadata(store, selectedTableName)
+	const onUpdateMetadata = useOnUpdateMetadata(graph, selectedTableName)
 
 	return {
 		selectedTable,
 		setSelectedTableName,
 		onDeleteStep,
 		onSaveStep,
-		store,
+		store: graph,
 		selectedMetadata,
 		lastTableName,
 		selectedTableName,

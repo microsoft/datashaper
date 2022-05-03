@@ -2,13 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { NamedOutputPortBinding } from '@data-wrangling-components/core'
 import { dropdownStyles } from '@data-wrangling-components/react-controls'
-import type { StepComponentProps } from '@data-wrangling-components/react-verbs'
-import {
-	LeftAlignedRow,
-	useTextFieldChangeHandler,
-} from '@data-wrangling-components/react-verbs'
-import { NodeOutput } from '@essex/dataflow'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
+import { useTextFieldChangeHandler } from '@data-wrangling-components/react-hooks'
+import { LeftAlignedRow } from '@data-wrangling-components/react-styled-components'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
@@ -21,6 +19,7 @@ import type { HOCFunction } from './types.js'
  * @returns
  */
 export const withOutputTableTextfield = (
+	onOutputChanged: (output: NamedOutputPortBinding) => void,
 	label?: string,
 	disabled?: boolean,
 ): HOCFunction<StepComponentProps> => {
@@ -29,7 +28,7 @@ export const withOutputTableTextfield = (
 			const { step, onChange } = props
 			const handleOutputChange = useTextFieldChangeHandler(
 				step,
-				(s, val) => (s.output = { [NodeOutput.Target]: val as string }),
+				(_s, val) => onOutputChanged({ name: val as string, node: step.id }),
 				onChange,
 			)
 

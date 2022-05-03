@@ -10,7 +10,7 @@ import { memo, useMemo } from 'react'
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import { checkbox, enumDropdown } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '../../types.js'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for a binning step.
