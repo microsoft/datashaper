@@ -6,3 +6,7 @@ releases:
   "@data-wrangling-components/react-hocs": minor
   "@data-wrangling-components/react-verbs": minor
   "@data-wrangling-components/webapp": minor
+
+undecided:
+  - "@data-wrangling-components/react-hooks"
+  - "@data-wrangling-components/utilities"
