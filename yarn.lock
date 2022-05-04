@@ -1875,9 +1875,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/specification@workspace:javascript/specification":
+"@data-wrangling-components/schema@workspace:javascript/schema":
   version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/specification@workspace:javascript/specification"
+  resolution: "@data-wrangling-components/schema@workspace:javascript/schema"
   dependencies:
     "@data-wrangling-components/core": "workspace:^"
     "@essex/scripts": ^22.0.0
