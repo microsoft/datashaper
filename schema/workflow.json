@@ -506,8 +506,10 @@
             "type": "string"
         },
         "NamedOutputPortBinding": {
+            "description": "An explicit workflow output",
             "properties": {
                 "name": {
+                    "description": "The output table name",
                     "type": "string"
                 },
                 "node": {
@@ -678,13 +680,9 @@
             },
             "type": "object"
         },
-        "StepCommon": {
+        "StepJsonCommon": {
             "description": "Common step properties",
             "properties": {
-                "description": {
-                    "description": "helpful for documentation in JSON specs",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for this step",
                     "type": "string"
@@ -790,6 +788,7 @@
             "type": "string"
         },
         "output": {
+            "description": "The output bindings",
             "items": {
                 "anyOf": [
                     {
@@ -809,7 +808,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -833,7 +832,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -857,7 +856,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -881,7 +880,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -905,7 +904,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -926,7 +925,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -950,7 +949,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -974,7 +973,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -998,7 +997,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1019,7 +1018,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1043,7 +1042,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1067,7 +1066,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1091,7 +1090,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1115,7 +1114,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1139,7 +1138,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1163,7 +1162,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1187,7 +1186,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1208,7 +1207,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1232,7 +1231,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1256,7 +1255,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1280,7 +1279,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1304,7 +1303,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1328,7 +1327,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1352,7 +1351,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1376,7 +1375,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1400,7 +1399,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1424,7 +1423,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1448,7 +1447,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1472,7 +1471,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1496,7 +1495,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1520,7 +1519,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1541,7 +1540,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1562,7 +1561,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1583,7 +1582,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1607,7 +1606,7 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepCommon"
+                                "$ref": "#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {

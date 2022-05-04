@@ -5,20 +5,23 @@
 import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
+	OutputPortBinding,
 	PortBinding,
-	Specification,
-	StepCommon,
-} from '../specification.js'
+} from '../types.js'
 import type { Verb } from '../verbs/index.js'
 
 export interface SpecificationInput {
-	input?: Specification['input']
-	output: Specification['output']
+	input?: string[]
+	output: OutputPortBinding[]
 	steps: StepInput[]
 }
 
-export interface StepInput<T extends object | void | unknown = unknown>
-	extends StepCommon {
+export interface StepInput<T extends object | void | unknown = unknown> {
+	/**
+	 * A unique identifier for this step
+	 */
+	id?: string
+
 	/**
 	 * The verb being executed
 	 */

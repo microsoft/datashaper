@@ -23,14 +23,18 @@ import {
 	useTransformModalState,
 	useEditorTarget,
 } from './ManageWorkflow.hooks.js'
+import type { TableContainer } from '@essex/arquero'
+import { useGraphManager } from '../../common/hooks.js'
 
 interface ManageWorkflowProps
-	extends TableTransformModalProps,
+	extends Omit<TableTransformModalProps, 'graph'>,
 		ColumnTransformModalProps {
 	/**
 	 * The workflow specification
 	 */
 	workflow?: Specification
+
+	inputs: TableContainer[]
 
 	/**
 	 *  Step save handler
@@ -44,7 +48,16 @@ interface ManageWorkflowProps
 }
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
-	function ManageWorkflow({ onSelect, graph, workflow, table, ...props }) {
+	function ManageWorkflow({
+		workflow,
+		inputs,
+		table,
+		onSelect,
+		onUpdate,
+		...props
+	}) {
+		const graph = useGraphManager(inputs)
+
 		//
 		// Selected Step/Index State for the component
 		//
@@ -60,7 +73,9 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			show: showTransformModal,
 		} = useTransformModalState(setSelectedStep, setSelectedStepIndex)
 
+		//
 		// Interaction Handlers
+		//
 		const onSave = useOnSaveStep(graph)
 		const onDelete = useOnDeleteStep(graph)
 		const {
@@ -83,20 +98,17 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		)
 		const onDuplicateClicked = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(selectedStepIndex)
-		const stepList = graph.steps
-
 		return (
 			<Container>
 				<StepsList
 					onDeleteClicked={onDeleteClicked}
 					onSelect={onSelect}
 					onEditClicked={onEditClicked}
-					steps={stepList}
+					steps={graph.steps}
 					onDuplicateClicked={onDuplicateClicked}
 					onStartNewStep={showTransformModal}
 					buttonId={addStepButtonId}
 				/>
-
 				<div>
 					{isTransformModalOpen && (
 						<TableTransformModal

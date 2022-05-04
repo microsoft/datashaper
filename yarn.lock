@@ -1875,6 +1875,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@data-wrangling-components/specification@workspace:javascript/specification":
+  version: 0.0.0-use.local
+  resolution: "@data-wrangling-components/specification@workspace:javascript/specification"
+  dependencies:
+    "@data-wrangling-components/core": "workspace:^"
+    "@essex/scripts": ^22.0.0
+    "@essex/tsconfig-base": ^1.0.2
+    typescript: ^4.6.3
+  languageName: unknown
+  linkType: soft
+
 "@data-wrangling-components/utilities@workspace:^, @data-wrangling-components/utilities@workspace:javascript/utilities":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/utilities@workspace:javascript/utilities"

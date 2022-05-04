@@ -9,7 +9,6 @@ import { Icon } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { useGraphManager } from '../../common/hooks.js'
 
 import { ManageWorkflow } from '../../Workflow/index.js'
 import { PreviewTable } from '../index.js'
@@ -73,7 +72,6 @@ export const PrepareDataFull: React.FC<{
 		},
 		[selectedTable],
 	)
-	const graph = useGraphManager(inputs)
 
 	console.log('PDF', inputs, derived, selectedTableId)
 	// const {
@@ -112,8 +110,7 @@ export const PrepareDataFull: React.FC<{
 				</SectionTitle>
 				<WorkflowContainer>
 					<ManageWorkflow
-						// nextInputTable={lastTableName}
-						graph={graph}
+						inputs={inputs}
 						workflow={workflow}
 						onSelect={setSelectedTableName}
 						// onDelete={onDeleteStep}

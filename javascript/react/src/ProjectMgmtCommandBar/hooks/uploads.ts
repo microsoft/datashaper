@@ -14,6 +14,7 @@ import { useHandleOnUploadClick } from '../../files/index.js'
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	return useCallback(
 		async (fc: FileCollection) => {
+			console.log('FILEN', fc.list())
 			let tables = fc.list(FileType.table)
 			if (!tables.length) {
 				return

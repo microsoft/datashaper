@@ -9,10 +9,7 @@ import type { Observable, Subscription } from 'rxjs'
 import { from, Subject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
-import type {
-	NamedOutputPortBinding,
-	NamedPortBinding,
-} from '../specification.js'
+import type { NamedOutputPortBinding, NamedPortBinding } from '../types.js'
 import type { Step, StepInput } from '../steps/index.js'
 import { readStep } from '../steps/index.js'
 import type { ParsedSpecification } from '../steps/types.js'

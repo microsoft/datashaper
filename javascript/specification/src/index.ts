@@ -33,12 +33,14 @@ import type {
 	UnrollArgs,
 	Verb,
 	WindowArgs,
-} from './verbs/index.js'
+	PortBinding,
+	OutputPortBinding,
+} from '@data-wrangling-components/core'
 
 /**
  * The root data-wrangling specification. (Used for generating JSON Schema)
  */
-export interface Specification {
+export interface WorfklowJson {
 	/**
 	 * The name of the specification
 	 */
@@ -52,7 +54,7 @@ export interface Specification {
 	/**
 	 * The workflow steps
 	 */
-	steps?: StepSpecification[]
+	steps?: StepJson[]
 
 	/**
 	 * A list of input names that are expected to be provided in addition to the workflow steps
@@ -68,7 +70,7 @@ export interface Specification {
 /**
  * Specification for step items
  */
-export type StepSpecification = StepCommon &
+export type StepJson = StepJsonCommon &
 	(
 		| ({ verb: Verb.Aggregate; args?: AggregateArgs } & BasicInput)
 		| ({ verb: Verb.Bin; args?: BinArgs } & BasicInput)
@@ -110,52 +112,11 @@ export type StepSpecification = StepCommon &
 /**
  * Common step properties
  */
-export interface StepCommon {
+export interface StepJsonCommon {
 	/**
 	 * A unique identifier for this step
 	 */
 	id?: string
-
-	/**
-	 * helpful for documentation in JSON specs
-	 */
-	description?: string
-}
-
-/**
- * Step input specifications. If this is a string, we'll bind to the default output
- * of the given node ID. If no node has that ID, we'll bind against the table-store's
- * named table given the string.
- *
- * If this is an input binding, it's an explicit binding to another step in the pipeline.
- */
-export type PortBinding = string | NamedPortBinding
-export type OutputPortBinding = string | NamedOutputPortBinding
-
-/**
- * An explicit step input binding
- */
-export interface NamedPortBinding {
-	/**
-	 * The id of the node to bind to
-	 */
-	node: string
-
-	/**
-	 * The named output of the node to bind with. If not defined, this will
-	 * be the default output "target"
-	 */
-	output?: string
-}
-
-/**
- * An explicit workflow output
- */
-export interface NamedOutputPortBinding extends NamedPortBinding {
-	/**
-	 * The output table name
-	 */
-	name: string
 }
 
 /**

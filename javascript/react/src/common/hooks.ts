@@ -14,7 +14,6 @@ export function useGraphManager(inputs: TableContainer[]): GraphManager {
 	useEffect(
 		function injectInputTables() {
 			inputs.forEach(i => manager.addInput(i))
-			console.log('INJECTING', inputs.length, ' inputs', manager)
 		},
 		[inputs],
 	)

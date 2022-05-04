@@ -113,7 +113,9 @@ export const useHandleOnUploadClick = (
 				const { files } = e.target
 				const fileCollection = new FileCollection()
 				try {
-					await fileCollection.add(files[0])
+					for (const file of files) {
+						await fileCollection.add(file)
+					}
 					handleCollection?.(fileCollection)
 				} catch (e) {
 					console.error(e)

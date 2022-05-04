@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { NamedPortBinding } from '../specification.js'
+import type { NamedPortBinding } from '../types.js'
 import {
 	BinStrategy,
 	BooleanOperator,

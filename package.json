@@ -12,7 +12,7 @@
 		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
 		"test": "yarn jest",
-		"generate_schema": "typescript-json-schema javascript/core/tsconfig.specification.json Specification > schema/workflow.json",
+		"generate_schema": "typescript-json-schema javascript/specification/tsconfig.json WorfklowJson > schema/workflow.json",
 		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"ci": "run-s build generate_schema lint jest git_is_clean",
 		"publish": "yarn workspaces foreach --exclude '@data-wrangling-components/project' -pv npm publish --tolerate-republish --access public",

@@ -27,15 +27,6 @@ export interface AggregateArgs extends RollupArgs {
     groupby: string;
 }
 
-// Warning: (ae-missing-release-tag) "BasicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface BasicInput {
-    input?: string | {
-        source: PortBinding;
-    };
-}
-
 // Warning: (ae-missing-release-tag) "bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -245,16 +236,6 @@ export interface DeriveArgs extends OutputColumnArgs {
 //
 // @public (undocumented)
 export const difference: (id: string) => SetOperationNode<unknown>;
-
-// Warning: (ae-missing-release-tag) "DualInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface DualInput extends BasicInput {
-    input: {
-        source: PortBinding;
-        other: PortBinding;
-    };
-}
 
 // Warning: (ae-missing-release-tag) "erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -811,25 +792,14 @@ export enum SetOp {
     Union = "union"
 }
 
-// Warning: (ae-missing-release-tag) "Specification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface Specification {
-    description?: string;
-    input?: string[];
-    name?: string;
-    output: Array<OutputPortBinding>;
-    steps?: StepSpecification[];
-}
-
 // Warning: (ae-missing-release-tag) "SpecificationInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface SpecificationInput {
     // (undocumented)
-    input?: Specification['input'];
+    input?: string[];
     // (undocumented)
-    output: Specification['output'];
+    output: OutputPortBinding[];
     // (undocumented)
     steps: StepInput[];
 }
@@ -861,128 +831,17 @@ export interface Step<T extends object | void | unknown = unknown> {
     verb: Verb;
 }
 
-// Warning: (ae-missing-release-tag) "StepCommon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface StepCommon {
-    description?: string;
-    id?: string;
-}
-
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepInput<T extends object | void | unknown = unknown> extends StepCommon {
+export interface StepInput<T extends object | void | unknown = unknown> {
     args?: T;
+    id?: string;
     input?: string | ({
         others?: PortBinding[];
     } & Record<string, PortBinding>);
     verb: Verb;
 }
-
-// Warning: (ae-missing-release-tag) "StepSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export type StepSpecification = StepCommon & (({
-    verb: Verb.Aggregate;
-    args?: AggregateArgs;
-} & BasicInput) | ({
-    verb: Verb.Bin;
-    args?: BinArgs;
-} & BasicInput) | ({
-    verb: Verb.Binarize;
-    args?: BinarizeArgs;
-} & BasicInput) | ({
-    verb: Verb.Boolean;
-    args?: BooleanArgs;
-} & BasicInput) | ({
-    verb: Verb.Concat;
-} & VariadicInput) | ({
-    verb: Verb.Convert;
-    args?: ConvertArgs;
-} & BasicInput) | ({
-    verb: Verb.Dedupe;
-    args?: DedupeArgs;
-} & BasicInput) | ({
-    verb: Verb.Derive;
-    args?: DeriveArgs;
-} & BasicInput) | ({
-    verb: Verb.Difference;
-} & VariadicInput) | ({
-    verb: Verb.Erase;
-    args?: EraseArgs;
-} & BasicInput) | ({
-    verb: Verb.Fetch;
-    args?: FetchArgs;
-} & BasicInput) | ({
-    verb: Verb.Fill;
-    args?: FillArgs;
-} & BasicInput) | ({
-    verb: Verb.Filter;
-    args?: FilterArgs;
-} & BasicInput) | ({
-    verb: Verb.Fold;
-    args?: FoldArgs;
-} & BasicInput) | ({
-    verb: Verb.Groupby;
-    args?: GroupbyArgs;
-} & BasicInput) | ({
-    verb: Verb.Impute;
-    args?: ImputeArgs;
-} & BasicInput) | ({
-    verb: Verb.Intersect;
-} & VariadicInput) | ({
-    verb: Verb.Join;
-    args?: JoinArgs;
-} & DualInput) | ({
-    verb: Verb.Lookup;
-    args?: LookupArgs;
-} & DualInput) | ({
-    verb: Verb.Merge;
-    args?: MergeArgs;
-} & BasicInput) | ({
-    verb: Verb.Onehot;
-    args?: OnehotArgs;
-} & BasicInput) | ({
-    verb: Verb.Orderby;
-    args?: OrderbyArgs;
-} & BasicInput) | ({
-    verb: Verb.Pivot;
-    args?: PivotArgs;
-} & BasicInput) | ({
-    verb: Verb.Recode;
-    args?: RecodeArgs;
-} & BasicInput) | ({
-    verb: Verb.Rename;
-    args?: RenameArgs;
-} & BasicInput) | ({
-    verb: Verb.Rollup;
-    args?: RollupArgs;
-} & BasicInput) | ({
-    verb: Verb.Sample;
-    args?: SampleArgs;
-} & BasicInput) | ({
-    verb: Verb.Select;
-    args?: SelectArgs;
-} & BasicInput) | ({
-    verb: Verb.Spread;
-    args?: SpreadArgs;
-} & BasicInput) | ({
-    verb: Verb.Unfold;
-    args?: UnfoldArgs;
-} & BasicInput) | ({
-    verb: Verb.Ungroup;
-} & BasicInput) | ({
-    verb: Verb.Union;
-} & VariadicInput) | ({
-    verb: Verb.Unorder;
-} & BasicInput) | ({
-    verb: Verb.Unroll;
-    args?: UnrollArgs;
-} & BasicInput) | ({
-    verb: Verb.Window;
-    args?: WindowArgs;
-} & BasicInput));
 
 // Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1055,16 +914,6 @@ export type UnrollArgs = InputColumnListArgs;
 //
 // @public (undocumented)
 export type Unsubscribe = Handler;
-
-// Warning: (ae-missing-release-tag) "VariadicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface VariadicInput extends BasicInput {
-    input: {
-        source: PortBinding;
-        others?: PortBinding[];
-    };
-}
 
 // Warning: (ae-missing-release-tag) "Verb" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

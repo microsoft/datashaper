@@ -1,0 +1,41 @@
+{
+	"name": "@data-wrangling-components/specification",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
+	},
+	"sideEffects": false,
+	"author": "Nathan Evans <naevans@microsoft.com>",
+	"license": "MIT",
+	"contributors": [
+		"Nathan Evans <naevans@microsoft.com>",
+		"Dayenne Souza <ddesouza@microsoft.com>",
+		"Andres Morales <andresmor@microsoft.com>",
+		"Monica Carvajal <mcarvajal@microsoft.com>",
+		"Chris Trevino <chris.trevino@microsoft.com>",
+		"Derek Worthen <deworthe@microsoft.com>",
+		"Gaudy Blanco <gaudyb@microsoft.com>"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/microsoft/data-wrangling-components"
+	},
+	"bugs": {
+		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+	},
+	"scripts": {
+		"clean": "essex clean dist docs",
+		"build": "essex build --docs --skipExportCheck"
+	},
+	"dependencies": {
+		"@data-wrangling-components/core": "workspace:^"
+	},
+	"devDependencies": {
+		"@essex/scripts": "^22.0.0",
+		"@essex/tsconfig-base": "^1.0.2",
+		"typescript": "^4.6.3"
+	}
+}

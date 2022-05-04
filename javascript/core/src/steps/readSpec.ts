@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { NamedOutputPortBinding } from '../specification.js'
+import type { NamedOutputPortBinding } from '../types.js'
 import { readSteps } from './readSteps.js'
 import type { ParsedSpecification, SpecificationInput } from './types.js'
 

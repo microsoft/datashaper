@@ -27,7 +27,6 @@ export const StepsList: React.FC<{
 	onStartNewStep,
 	buttonId,
 }) {
-	console.log('render stepslist', steps)
 	const ref = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {

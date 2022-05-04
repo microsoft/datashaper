@@ -4,7 +4,7 @@
  */
 export * from './engine/index.js'
 export * from './primitives.js'
-export * from './specification.js'
+export * from './types.js'
 export * from './steps/index.js'
 export * from './util/index.js'
 export * from './verbs/index.js'

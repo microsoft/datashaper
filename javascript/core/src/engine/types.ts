@@ -7,7 +7,7 @@ import type { Graph } from '@essex/dataflow'
 import type { Observable } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
-import type { NamedPortBinding } from '../specification.js'
+import type { NamedPortBinding } from '../types.js'
 import type { Step, StepInput } from '../steps/index.js'
 import type { ParsedSpecification } from '../steps/types.js'
 
