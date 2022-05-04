@@ -18,7 +18,8 @@ import styled from 'styled-components'
 
 export interface CalendarPickerProps {
 	onSelectDate: (date: Date) => void,
-	disabled: boolean
+	disabled: boolean,
+	cleanLabel: boolean
 }
 
 const iconClass = mergeStyles({
@@ -29,7 +30,7 @@ const iconClass = mergeStyles({
 })
 
 export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
-	function CalendarPicker({ onSelectDate, disabled }) {
+	function CalendarPicker({ onSelectDate, disabled, cleanLabel }) {
 		const [selectedDate, setSelectedDate] = React.useState<Date>()
 		const [
 			showCalendar,
@@ -46,18 +47,18 @@ export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 		)
 
 		return (
-			<div>
+			<Container>
 				<CalendarContainer ref={buttonContainerRef}>
 					<CalendarButton
 						aria-label="Compass"
 						iconName="Calendar"
 						className={iconClass}
-						onClick={disabled === false ? toggleShowCalendar: undefined}
-						style={disabled === true ? {cursor: 'default', color: 'rgb(118, 118, 118)'} : {cursor: 'pointer', color: 'rgb(241, 241, 241)'}}
+						onClick={!disabled ? toggleShowCalendar: undefined}
+						style={disabled ? {cursor: 'default', color: 'rgb(118, 118, 118)'} : {cursor: 'pointer', color: 'rgb(241, 241, 241)'}}
 					/>
-					{selectedDate !== undefined ? (
+					{selectedDate !== undefined && !cleanLabel ? (
 						<CalendarLabel>
-							{selectedDate?.toLocaleDateString() || ''}
+							{!cleanLabel ? selectedDate?.toLocaleDateString() : ''}
 						</CalendarLabel>
 					) : null}
 				</CalendarContainer>
@@ -88,18 +89,24 @@ export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 						</FocusTrapZone>
 					</Callout>
 				)}
-			</div>
+			</Container>
 		)
 	},
 )
 
-const CalendarContainer = styled.div`
+const Container = styled.div`
 	display: inline;
+`
+
+const CalendarContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
 `
 
 const CalendarButton = styled(FontIcon)`
 	display: inline;
 	float: left;
+	margin-top: 5px;
 	margin-left: 10px;
 	margin-right: 0px;
 `
@@ -108,5 +115,4 @@ const CalendarLabel = styled(Label)`
 	display: inline;
 	float: left;
 	margin-left: 10px;
-	margin-right: 10px;
 `

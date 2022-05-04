@@ -13,8 +13,8 @@ import type { IContextualMenuItem } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
-import type { IDropdownOption } from '@fluentui/react';
-import type { IDropdownProps } from '@fluentui/react';
+import { IDropdownOption } from '@fluentui/react';
+import { IDropdownProps } from '@fluentui/react';
 import type { ITextFieldProps } from '@fluentui/react';
 import type { OrderbyInstruction } from '@data-wrangling-components/core';
 import { default as React_2 } from 'react';
@@ -50,6 +50,19 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps>;
 export interface ColumnarMenuProps extends IContextualMenuProps {
     // (undocumented)
     text?: string;
+}
+
+// Warning: (ae-missing-release-tag) "ColumnCriteriaDropdown" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const ColumnCriteriaDropdown: React.FC<ColumnCriteriaDropdownProps>;
+
+// Warning: (ae-missing-release-tag) "ColumnCriteriaDropdownProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ColumnCriteriaDropdownProps extends Partial<IDropdownProps> {
+    // (undocumented)
+    options: IDropdownOption[];
 }
 
 // Warning: (ae-missing-release-tag) "ColumnOrValueComboBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

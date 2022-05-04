@@ -4,6 +4,7 @@
  */
 export * from './CalendarPicker.js'
 export * from './ColumnarMenu/index.js'
+export * from './ColumnCriteriaCombobox.js'
 export * from './ColumnOrValueComboBox.js'
 export * from './ColumnSpread.js'
 export * from './ColumnValueDropdown.js'

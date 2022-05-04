@@ -55,8 +55,7 @@ export function compareValues(
 		const r = !!bool(right)
 		return compareBooleans(left, r, operator as BooleanComparisonOperator)
 	} else if (typeof left === 'object' && left instanceof Date) {
-		if (right instanceof Date)
-			return compareDates(left, right, operator as DateComparisonOperator)
+		return compareDates(left, right as Date, operator as DateComparisonOperator)
 	}
 	return 0
 }
@@ -147,14 +146,12 @@ function compareDates(
 ): 1 | 0 {
 	switch (operator) {
 		case DateComparisonOperator.Equals:
-			return left.toLocaleDateString() === right.toLocaleDateString() ? 1 : 0
+			return left.getTime() === right.getTime() ? 1 : 0
 		case DateComparisonOperator.NotEqual:
-			return left.toLocaleDateString() !== right.toLocaleDateString() ? 1 : 0
+			return left.getTime() !== right.getTime() ? 1 : 0
 		case DateComparisonOperator.After:
-		case DateComparisonOperator.AfterToday:
 			return left > right ? 1 : 0
 		case DateComparisonOperator.Before:
-		case DateComparisonOperator.BeforeToday:
 			return left < right ? 1 : 0
 		default:
 			throw new Error(`Unsupported date comparison operator: [${operator}]`)

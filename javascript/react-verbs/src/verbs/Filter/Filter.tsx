@@ -61,6 +61,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 			step.args.criteria,
 			handleFilterChange,
 		)
+		
 		return (
 			<Container>
 				{filters}

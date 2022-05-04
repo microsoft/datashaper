@@ -13,8 +13,6 @@ import type {
 } from '../types.js';
 import {
 	BooleanOperator,
-	DateComparisonOperator
-,
 	FieldAggregateOperation,
 	FilterCompareType,
 	WindowFunction
@@ -36,10 +34,8 @@ export function compareAll(
 		// cannot be satisfied
 		const comparisons = criteria.map(filter => {
 			const { value, operator, type } = filter
-			let right =
+			const right =
 				type === FilterCompareType.Column ? d[`${value.toString()}`]! : value
-			if(operator as DateComparisonOperator === DateComparisonOperator.AfterToday || operator as DateComparisonOperator === DateComparisonOperator.BeforeToday)
-				right = new Date()
 			return compareValues(left, right, operator)
 		})
 
