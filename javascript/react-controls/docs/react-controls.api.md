@@ -7,8 +7,8 @@
 /// <reference types="react" />
 
 import type { IButtonStyles } from '@fluentui/react';
-import { IComboBoxOption } from '@fluentui/react';
-import { IComboBoxProps } from '@fluentui/react';
+import type { IComboBoxOption } from '@fluentui/react';
+import type { IComboBoxProps } from '@fluentui/react';
 import type { IContextualMenuItem } from '@fluentui/react';
 import type { IContextualMenuListProps } from '@fluentui/react';
 import type { IContextualMenuProps } from '@fluentui/react';
