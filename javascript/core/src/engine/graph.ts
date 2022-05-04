@@ -3,10 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@essex/arquero'
-
-import type { ParsedSpecification } from '../steps/types.js'
-import { createGraphManager } from './DefaultGraphManager.js'
-import type { GraphManager } from './types.js'
+import { GraphManager, createGraphManager } from './GraphManager.js'
+import type { Workflow } from './Workflow.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -20,19 +18,8 @@ import type { GraphManager } from './types.js'
  * @returns The built reactive processing graph
  */
 export function createGraph(
-	{ steps, input, output }: ParsedSpecification,
+	workflow: Workflow,
 	tables: Map<string, TableContainer>,
 ): GraphManager {
-	const builder = createGraphManager(tables)
-	for (const i of input.values()) {
-		builder.addInput(tables.get(i)!)
-	}
-	for (const step of steps) {
-		builder.addStep(step)
-	}
-	for (const [key, value] of output.entries()) {
-		builder.addOutput(key, value)
-	}
-
-	return builder
+	return createGraphManager(tables, workflow)
 }
