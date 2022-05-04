@@ -32,20 +32,31 @@ export interface GraphManager {
 	readonly inputs: Map<string, TableContainer>
 
 	/**
+	 * The steps in the worfklow
+	 */
+	readonly steps: Step[]
+
+	/**
+	 * The number of steps in the workflow
+	 */
+	readonly numSteps: number
+
+	/**
 	 * Remove all steps, inputs, and outputs from the pipeline
 	 */
 	clear(): void
 
 	/**
 	 * Add a named input
+	 * @param input - the input table to add
 	 */
-	addInput(input: string): void
+	addInput(input: TableContainer): void
 
 	/**
 	 * Removes a named input
-	 * @param input - The input name to remove
+	 * @param inputId - The input id to remove
 	 */
-	removeInput(input: string): void
+	removeInput(inputId: string): void
 
 	/**
 	 * Add an output binding

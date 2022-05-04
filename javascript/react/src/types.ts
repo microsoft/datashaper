@@ -58,7 +58,7 @@ export interface TableTransformModalProps extends TransformModalProps {
 	/**
 	 * Table store to verify naming to be created
 	 */
-	graph?: GraphManager
+	graph: GraphManager
 }
 
 export interface ColumnTransformModalProps extends TransformModalProps {

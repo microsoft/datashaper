@@ -25,7 +25,7 @@ export function createGraph(
 ): GraphManager {
 	const builder = createGraphManager(tables)
 	for (const i of input.values()) {
-		builder.addInput(i)
+		builder.addInput(tables.get(i)!)
 	}
 	for (const step of steps) {
 		builder.addStep(step)

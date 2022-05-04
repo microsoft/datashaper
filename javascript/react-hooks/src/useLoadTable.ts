@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from 'react'
 export function useLoadTable(
 	id: string | undefined,
 	table?: ColumnTable,
-	builder?: GraphManager,
+	graph?: GraphManager,
 ): ColumnTable | undefined {
 	const [tbl, setTable] = useState<ColumnTable | undefined>()
 	const handleTableLoad = useCallback(
@@ -24,10 +24,16 @@ export function useLoadTable(
 		// interface that is managing a pipeline
 		if (table) {
 			setTable(table)
-		} else if (id && builder) {
-			const sub = builder.output(id).subscribe(t => setTable(t?.table))
-			return () => sub.unsubscribe()
+		} else if (id && graph) {
+			// Case 1: static input table
+			if (graph.inputs.has(id)) {
+				setTable(graph.inputs.get(id)?.table)
+			} else {
+				// Case 2: derived table
+				const sub = graph.output(id).subscribe(t => setTable(t?.table))
+				return () => sub.unsubscribe()
+			}
 		}
-	}, [id, table, builder, handleTableLoad])
+	}, [id, table, graph, handleTableLoad])
 	return tbl
 }

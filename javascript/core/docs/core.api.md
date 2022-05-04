@@ -188,7 +188,7 @@ export type DedupeArgs = Partial<InputColumnListArgs>;
 export class DefaultGraphManager implements GraphManager {
     constructor(inputs?: Map<string, TableContainer>);
     // (undocumented)
-    addInput(input: string): void;
+    addInput(item: TableContainer): void;
     addOutput(name: string, binding: NamedOutputPortBinding): void;
     // (undocumented)
     addStep(stepInput: StepInput): Step;
@@ -201,6 +201,8 @@ export class DefaultGraphManager implements GraphManager {
     // (undocumented)
     latest(name: string): Maybe<TableContainer>;
     // (undocumented)
+    get numSteps(): number;
+    // (undocumented)
     onChange(handler: () => void): () => void;
     // (undocumented)
     output(name: string): TableObservable;
@@ -211,13 +213,17 @@ export class DefaultGraphManager implements GraphManager {
     // (undocumented)
     reconfigureStep(index: number, stepInput: StepInput<unknown>): void;
     // (undocumented)
-    removeInput(input: string): void;
+    removeInput(inputName: string): void;
     // (undocumented)
     removeOutput(name: string): void;
     // (undocumented)
     removeStep(index: number): void;
     // (undocumented)
     get spec(): ParsedSpecification;
+    // (undocumented)
+    get steps(): Step[];
+    // (undocumented)
+    toMap(): Map<string, Maybe<TableContainer>>;
 }
 
 // Warning: (ae-missing-release-tag) "derive" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -371,13 +377,16 @@ export interface FoldArgs extends InputColumnListArgs {
 //
 // @public
 export interface GraphManager {
-    addInput(input: string): void;
+    addInput(input: TableContainer): void;
     addOutput(name: string, binding: NamedPortBinding): void;
     addStep(step: StepInput): Step;
     clear(): void;
     // (undocumented)
     readonly graph: Graph<TableContainer>;
+    // (undocumented)
+    readonly inputs: Map<string, TableContainer>;
     latest(name: string): Maybe<TableContainer>;
+    readonly numSteps: number;
     // (undocumented)
     onChange(handler: () => void): () => void;
     output(name: string): Observable<Maybe<TableContainer>>;
@@ -385,11 +394,14 @@ export interface GraphManager {
     readonly outputs: string[];
     print(): void;
     reconfigureStep(index: number, step: StepInput): void;
-    removeInput(input: string): void;
+    removeInput(inputId: string): void;
     removeOutput(name: string): void;
     removeStep(index: number): void;
     // (undocumented)
     readonly spec: ParsedSpecification;
+    readonly steps: Step[];
+    // (undocumented)
+    toMap(): Map<string, Maybe<TableContainer>>;
 }
 
 // Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -726,7 +738,7 @@ export function readStep<T extends object | void | unknown = any>({ verb, args, 
 // Warning: (ae-missing-release-tag) "readSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function readSteps(steps: StepInput[], previous?: Step | undefined): Step[];
+export function readSteps(steps: StepInput[]): Step[];
 
 // Warning: (ae-missing-release-tag) "recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

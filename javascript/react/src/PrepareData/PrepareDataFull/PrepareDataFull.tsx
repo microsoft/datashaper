@@ -73,7 +73,7 @@ export const PrepareDataFull: React.FC<{
 		},
 		[selectedTable],
 	)
-	const graph = useGraphManager()
+	const graph = useGraphManager(inputs)
 
 	console.log('PDF', inputs, derived, selectedTableId)
 	// const {

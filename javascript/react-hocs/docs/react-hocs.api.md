@@ -6,6 +6,7 @@
 
 /// <reference types="react" />
 
+import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { InputColumnArgs } from '@data-wrangling-components/core';
 import type { NamedOutputPortBinding } from '@data-wrangling-components/core';
 import type { OutputColumnArgs } from '@data-wrangling-components/core';
@@ -25,6 +26,13 @@ export function withInputColumnDropdown<T extends InputColumnArgs>(label?: strin
 //
 // @public
 export function withInputTableDropdown(label?: string): HOCFunction<StepComponentProps>;
+
+// Warning: (ae-missing-release-tag) "withLoadedTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function withLoadedTable<T>(StepComponent: React.ComponentType<StepComponentProps<T> & {
+    dataTable: ColumnTable | undefined;
+}>): (props: StepComponentProps<T>) => JSX.Element;
 
 // Warning: (ae-missing-release-tag) "withOutputColumnTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

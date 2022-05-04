@@ -4,12 +4,84 @@
 
 ```ts
 
+/// <reference types="react" />
+
+import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { GraphManager } from '@data-wrangling-components/core';
 import type { Step } from '@data-wrangling-components/core';
+
+// Warning: (ae-missing-release-tag) "DescriptionRow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DescriptionRow {
+    after?: string;
+    before?: string;
+    sub?: DescriptionRow[];
+    title?: string;
+    value?: any;
+}
 
 // Warning: (ae-missing-release-tag) "StepChangeFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type StepChangeFunction<T extends object | void | unknown = unknown> = (step: Step<T>) => void;
+
+// Warning: (ae-missing-release-tag) "StepComponentBaseProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface StepComponentBaseProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
+    onChange?: StepChangeFunction<T>;
+}
+
+// Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepComponentProps<T extends object | void | unknown = unknown> extends StepComponentBaseProps<T> {
+    graph?: GraphManager;
+    input?: string;
+    label?: string;
+    table?: ColumnTable;
+}
+
+// Warning: (ae-missing-release-tag) "StepDependent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepDependent<T extends object | void | unknown = unknown> {
+    // (undocumented)
+    step: Step<T>;
+}
+
+// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepDescriptionProps<T extends object | void | unknown = unknown> extends StepDependent<T> {
+    // (undocumented)
+    actions?: JSX.Element;
+    // (undocumented)
+    showInput?: boolean;
+    // (undocumented)
+    showOutput?: boolean;
+    // (undocumented)
+    showOutputColumn?: boolean;
+    // (undocumented)
+    style?: React.CSSProperties;
+}
+
+// Warning: (ae-missing-release-tag) "StepSubcomponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface StepSubcomponentProps<T extends object | void | unknown = unknown> extends StepComponentProps<T> {
+    // (undocumented)
+    label?: string;
+}
+
+// Warning: (ae-missing-release-tag) "VerbDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface VerbDescriptionProps<T extends object | void | unknown = unknown> extends StepDescriptionProps<T> {
+    // (undocumented)
+    rows: DescriptionRow[];
+}
 
 // (No @packageDocumentation comment for this package)
 

@@ -93,6 +93,16 @@ export function getSpinButtonChangeHandler<T extends object | void | unknown>(st
 // @public (undocumented)
 export function getTextFieldChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, updated: string | undefined) => void, onChange?: StepChangeFunction<T>): TextFieldChangeHandler;
 
+// Warning: (ae-missing-release-tag) "ModalState" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ModalState {
+    hide(): void;
+    isOpen: boolean;
+    show(): void;
+    toggle(): void;
+}
+
 // Warning: (ae-missing-release-tag) "SpinButtonChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -156,7 +166,12 @@ export function useLeftColumn(step: Step<JoinArgs>): string | undefined;
 // Warning: (ae-missing-release-tag) "useLoadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useLoadTable(id: string | undefined, table?: ColumnTable, builder?: GraphManager): ColumnTable | undefined;
+export function useLoadTable(id: string | undefined, table?: ColumnTable, graph?: GraphManager): ColumnTable | undefined;
+
+// Warning: (ae-missing-release-tag) "useModalState" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useModalState(onShow?: (() => void) | undefined, onHide?: (() => void) | undefined): ModalState;
 
 // Warning: (ae-missing-release-tag) "useRightColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -173,6 +188,11 @@ export function useSimpleDropdownOptions(list: string[]): IDropdownOption[];
 // @public
 export function useSpinButtonChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, newValue: string | undefined) => void, onChange?: StepChangeFunction<T>): SpinButtonChangeHandler;
 
+// Warning: (ae-missing-release-tag) "useStaticValue" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useStaticValue<T>(value: T): T;
+
 // Warning: (ae-missing-release-tag) "useTableColumnNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -181,7 +201,7 @@ export function useTableColumnNames(table: ColumnTable | undefined, filter?: (na
 // Warning: (ae-missing-release-tag) "useTableNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useTableNames(store?: GraphManager): string[];
+export function useTableNames(graph?: GraphManager): string[];
 
 // Warning: (ae-missing-release-tag) "useTextFieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

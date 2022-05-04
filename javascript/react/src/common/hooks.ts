@@ -4,13 +4,21 @@
  */
 import type { Step, GraphManager } from '@data-wrangling-components/core'
 import { createGraphManager } from '@data-wrangling-components/core'
-import { useBoolean } from '@fluentui/react-hooks'
+import type { TableContainer } from '@essex/arquero'
+import { useModalState } from '@data-wrangling-components/react-hooks'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-export function useGraphManager(): GraphManager {
-	// TODO: inject known tables
-	return useMemo(() => createGraphManager(), [])
+export function useGraphManager(inputs: TableContainer[]): GraphManager {
+	const manager = useMemo(() => createGraphManager(), [])
+	useEffect(
+		function injectInputTables() {
+			inputs.forEach(i => manager.addInput(i))
+			console.log('INJECTING', inputs.length, ' inputs', manager)
+		},
+		[inputs],
+	)
+	return manager
 }
 
 export function usePipeline(store: GraphManager, steps?: Step[]): void {
@@ -34,27 +42,26 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 	onDeleteClicked: (args: any) => void
 	isDeleteModalOpen: boolean
 } {
+	const { isOpen, show, hide, toggle } = useModalState(undefined, undefined)
 	const [deleteArg, setDeleteArg] = useState<any>()
-	const [isDeleteModalOpen, { toggle: toggleDeleteModalOpen }] =
-		useBoolean(false)
 
 	const onDeleteClicked = useCallback(
 		(args: any) => {
 			setDeleteArg(args)
-			toggleDeleteModalOpen()
+			show()
 		},
-		[toggleDeleteModalOpen, setDeleteArg],
+		[show, setDeleteArg],
 	)
 
 	const onConfirmDelete = useCallback(() => {
 		onDelete?.(deleteArg)
-		toggleDeleteModalOpen()
-	}, [toggleDeleteModalOpen, deleteArg, onDelete])
+		hide()
+	}, [hide, deleteArg, onDelete])
 
 	return {
-		isDeleteModalOpen,
+		isDeleteModalOpen: isOpen,
+		toggleDeleteModalOpen: toggle,
 		onConfirmDelete,
-		toggleDeleteModalOpen,
 		onDeleteClicked,
 	}
 }

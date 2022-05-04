@@ -11,13 +11,13 @@ import { StepCard } from '../../index.js'
 import { DetailText } from '../../PrepareData/DetailText/index.js'
 
 export const StepsList: React.FC<{
-	steps?: Step[]
+	steps: Step[]
+	buttonId?: string | undefined
 	onDeleteClicked?: (index: number) => void
 	onEditClicked?: (step: Step, index: number) => void
 	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
 	onStartNewStep?: () => void
-	buttonId?: string
 }> = memo(function StepsList({
 	steps,
 	onDeleteClicked,
@@ -27,6 +27,7 @@ export const StepsList: React.FC<{
 	onStartNewStep,
 	buttonId,
 }) {
+	console.log('render stepslist', steps)
 	const ref = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
@@ -38,7 +39,7 @@ export const StepsList: React.FC<{
 
 	return (
 		<Container>
-			{steps?.map((_step, index) => {
+			{steps.map((_step, index) => {
 				return (
 					<StepCard
 						onDelete={onDeleteClicked}

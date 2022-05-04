@@ -10,22 +10,23 @@ import { useEffect, useState } from 'react'
  * TODO: for any given step, we should only show the tables created *prior* to this step,
  * potentially via an optional filter callback on store.list.
  * As it is, whenever the store is updated all the table dropdowns get the results.
- * @param store -
+ * @param graph -
  * @returns
  */
-export function useTableNames(store?: GraphManager): string[] {
+export function useTableNames(graph?: GraphManager): string[] {
 	// we won't actually get an updated store reference, so we'll track
 	// whether updates are needed using a change listener and flag
 	const [dirty, setDirty] = useState<boolean>(true)
 	const [list, setList] = useState<string[]>([])
 	useEffect(() => {
-		return store?.onChange(() => setTimeout(() => setDirty(true), 0))
-	}, [store, setDirty])
+		return graph?.onChange(() => setTimeout(() => setDirty(true), 0))
+	}, [graph, setDirty])
 	useEffect(() => {
 		if (dirty) {
 			setDirty(false)
-			setList(store?.outputs.sort() || [])
+			const inputs = [...(graph?.inputs.keys() ?? [])]
+			setList(inputs)
 		}
-	}, [store, dirty, setDirty, setList])
+	}, [graph, dirty, setDirty, setList])
 	return list
 }

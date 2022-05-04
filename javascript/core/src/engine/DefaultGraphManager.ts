@@ -58,28 +58,39 @@ export class DefaultGraphManager implements GraphManager {
 		return this._spec
 	}
 
+	public get numSteps(): number {
+		return this._spec.steps.length
+	}
+
+	public get steps(): Step[] {
+		return this._spec.steps
+	}
+
 	public clear(): void {
-		for (let i = this._spec.steps.length - 1; i >= 0; --i) {
+		for (let i = this.numSteps - 1; i >= 0; --i) {
 			this.removeStep(i)
 		}
 		this._spec.input.clear()
 		this._spec.output.clear()
 	}
 
-	public addInput(input: string): void {
-		this._spec.input.add(input)
+	public addInput(item: TableContainer): void {
+		this._spec.input.add(item.id)
+		this.inputs.set(item.id, item)
 		this._onChange.next()
 	}
 
-	public removeInput(input: string): void {
-		this._spec.input.delete(input)
+	public removeInput(inputName: string): void {
+		this._spec.input.delete(inputName)
+		this.inputs.delete(inputName)
 		this._onChange.next()
 	}
 
 	public addStep(stepInput: StepInput): Step {
 		const step = readStep(stepInput)
 		const node = createNode(step)
-		this._spec.steps.push(step)
+		// mutate the steps so that equality checks will detect that the steps changed (e.g. memo, hook deps)
+		this._spec.steps = [...this._spec.steps, step]
 		this._graph.add(node)
 
 		this._configureStep(step, node)
@@ -93,9 +104,7 @@ export class DefaultGraphManager implements GraphManager {
 		const step = this._spec.steps[index]!
 		const prevStep = index > 0 ? this._spec.steps[index - 1] : undefined
 		const nextStep =
-			index + 1 < this._spec.steps.length
-				? this._spec.steps[index + 1]
-				: undefined
+			index + 1 < this.numSteps ? this._spec.steps[index + 1] : undefined
 		const node = this.getNode(step.id)
 
 		// If step was auto-bound
@@ -118,7 +127,8 @@ export class DefaultGraphManager implements GraphManager {
 
 	public reconfigureStep(index: number, stepInput: StepInput<unknown>): void {
 		const prevVersion = this._spec.steps[index]!
-		this._spec.steps[index] = readStep(stepInput)
+		const newStep = readStep(stepInput)
+
 		const step = this._spec.steps[index]!
 		const node = this.getNode(step.id)
 
@@ -133,6 +143,13 @@ export class DefaultGraphManager implements GraphManager {
 		}
 
 		this._configureStep(step, node)
+
+		// Mutate the stepslist for shalloweual comparisons
+		this._spec.steps = [
+			...this.spec.steps.slice(0, index),
+			newStep,
+			...this.spec.steps.slice(index + 1),
+		]
 
 		this._onChange.next()
 	}
