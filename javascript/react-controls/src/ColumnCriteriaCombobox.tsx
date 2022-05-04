@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ComboBox, IComboBoxOption, IComboBoxProps } from '@fluentui/react';
-import { SelectableOptionMenuItemType } from '@fluentui/react'
+import type { IComboBoxOption, IComboBoxProps } from '@fluentui/react';
+import { ComboBox , SelectableOptionMenuItemType } from '@fluentui/react';
 import { memo, useMemo } from 'react'
 
 import { narrowDropdownStyles } from './styles.js'

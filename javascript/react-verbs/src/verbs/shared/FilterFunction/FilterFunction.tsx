@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Criterion } from '@data-wrangling-components/core'
-import { SpinButton, Toggle } from '@fluentui/react'
 import {
 	BooleanComparisonOperator,
 	DateComparisonOperator,
@@ -22,8 +21,8 @@ import {
 	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
 import { DataType } from '@essex/arquero'
-import { IComboBoxOption, IDropdownOption, Label, TextField } from '@fluentui/react'
-import { IconButton } from '@fluentui/react'
+import type { IComboBoxOption,IDropdownOption} from '@fluentui/react';
+import { IconButton, Label, SpinButton, TextField , Toggle  } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
