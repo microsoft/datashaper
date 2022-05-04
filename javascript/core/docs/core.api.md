@@ -146,12 +146,12 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createGraph({ steps, input, output }: ParsedSpecification, tables: Map<string, TableContainer>): GraphManager;
+export function createGraph(workflow: Workflow, tables: Map<string, TableContainer>): GraphManager;
 
 // Warning: (ae-missing-release-tag) "createGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function createGraphManager(inputs?: Map<string, TableContainer>): GraphManager;
+export function createGraphManager(inputs?: Map<string, TableContainer> | undefined, workflow?: Workflow | undefined): GraphManager;
 
 // Warning: (ae-missing-release-tag) "Criterion" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -172,50 +172,6 @@ export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<I
 //
 // @public (undocumented)
 export type DedupeArgs = Partial<InputColumnListArgs>;
-
-// Warning: (ae-missing-release-tag) "DefaultGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export class DefaultGraphManager implements GraphManager {
-    constructor(inputs?: Map<string, TableContainer>);
-    // (undocumented)
-    addInput(item: TableContainer): void;
-    addOutput(name: string, binding: NamedOutputPortBinding): void;
-    // (undocumented)
-    addStep(stepInput: StepInput): Step;
-    // (undocumented)
-    clear(): void;
-    // (undocumented)
-    get graph(): Graph<TableContainer>;
-    // (undocumented)
-    readonly inputs: Map<string, TableContainer>;
-    // (undocumented)
-    latest(name: string): Maybe<TableContainer>;
-    // (undocumented)
-    get numSteps(): number;
-    // (undocumented)
-    onChange(handler: () => void): () => void;
-    // (undocumented)
-    output(name: string): TableObservable;
-    // (undocumented)
-    get outputs(): string[];
-    // (undocumented)
-    print(): void;
-    // (undocumented)
-    reconfigureStep(index: number, stepInput: StepInput<unknown>): void;
-    // (undocumented)
-    removeInput(inputName: string): void;
-    // (undocumented)
-    removeOutput(name: string): void;
-    // (undocumented)
-    removeStep(index: number): void;
-    // (undocumented)
-    get spec(): ParsedSpecification;
-    // (undocumented)
-    get steps(): Step[];
-    // (undocumented)
-    toMap(): Map<string, Maybe<TableContainer>>;
-}
 
 // Warning: (ae-missing-release-tag) "derive" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -357,32 +313,30 @@ export interface FoldArgs extends InputColumnListArgs {
 // Warning: (ae-missing-release-tag) "GraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface GraphManager {
-    addInput(input: TableContainer): void;
-    addOutput(name: string, binding: NamedPortBinding): void;
-    addStep(step: StepInput): Step;
+export class GraphManager {
+    constructor(_inputs: Map<string, TableContainer>, _workflow: Workflow);
+    addInput(item: TableContainer): void;
+    addOutput(binding: NamedOutputPortBinding): void;
+    addStep(stepInput: StepInput): Step;
     clear(): void;
     // (undocumented)
-    readonly graph: Graph<TableContainer>;
+    get graph(): Graph<TableContainer>;
     // (undocumented)
-    readonly inputs: Map<string, TableContainer>;
+    get inputs(): Map<string, TableContainer>;
     latest(name: string): Maybe<TableContainer>;
-    readonly numSteps: number;
-    // (undocumented)
+    get numSteps(): number;
     onChange(handler: () => void): () => void;
-    output(name: string): Observable<Maybe<TableContainer>>;
-    // (undocumented)
-    readonly outputs: string[];
+    output(name: string): TableObservable;
+    get outputs(): string[];
     print(): void;
-    reconfigureStep(index: number, step: StepInput): void;
-    removeInput(inputId: string): void;
+    reconfigureStep(index: number, stepInput: StepInput<unknown>): void;
+    removeInput(inputName: string): void;
     removeOutput(name: string): void;
     removeStep(index: number): void;
-    // (undocumented)
-    readonly spec: ParsedSpecification;
-    readonly steps: Step[];
-    // (undocumented)
+    get steps(): Step[];
     toMap(): Map<string, Maybe<TableContainer>>;
+    // (undocumented)
+    get workflow(): Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -657,18 +611,6 @@ export interface OutputColumnArgs {
 // @public (undocumented)
 export type OutputPortBinding = string | NamedOutputPortBinding;
 
-// Warning: (ae-missing-release-tag) "ParsedSpecification" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ParsedSpecification {
-    // (undocumented)
-    input: Set<string>;
-    // (undocumented)
-    output: Map<string, NamedOutputPortBinding>;
-    // (undocumented)
-    steps: Step[];
-}
-
 // Warning: (ae-missing-release-tag) "ParseType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -706,20 +648,10 @@ export interface PivotArgs {
 // @public
 export type PortBinding = string | NamedPortBinding;
 
-// Warning: (ae-missing-release-tag) "readSpec" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function readSpec(spec: SpecificationInput): ParsedSpecification;
-
 // Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function readStep<T extends object | void | unknown = any>({ verb, args, id, input }: StepInput<T>, previous?: Step | undefined): Step<T>;
-
-// Warning: (ae-missing-release-tag) "readSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function readSteps(steps: StepInput[]): Step[];
 
 // Warning: (ae-missing-release-tag) "recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -790,18 +722,6 @@ export enum SetOp {
     Intersect = "intersect",
     // (undocumented)
     Union = "union"
-}
-
-// Warning: (ae-missing-release-tag) "SpecificationInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface SpecificationInput {
-    // (undocumented)
-    input?: string[];
-    // (undocumented)
-    output: OutputPortBinding[];
-    // (undocumented)
-    steps: StepInput[];
 }
 
 // Warning: (ae-missing-release-tag) "spread" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1030,6 +950,57 @@ export enum WindowFunction {
     Rank = "rank",
     // (undocumented)
     RowNumber = "row_number"
+}
+
+// Warning: (ae-missing-release-tag) "Workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export class Workflow {
+    constructor(workflowJson?: WorkflowObject);
+    // (undocumented)
+    addInput(input: string): void;
+    // (undocumented)
+    addOutput(output: NamedOutputPortBinding): void;
+    // (undocumented)
+    addStep(stepInput: StepInput): Step;
+    // (undocumented)
+    clear(): void;
+    // (undocumented)
+    hasInput(input: string): boolean;
+    // (undocumented)
+    hasOutput(name: string): boolean;
+    // (undocumented)
+    get input(): Set<string>;
+    // (undocumented)
+    get length(): number;
+    // (undocumented)
+    onChange(handler: () => void): () => void;
+    // (undocumented)
+    get output(): Map<string, NamedOutputPortBinding>;
+    // (undocumented)
+    removeInput(input: string): void;
+    // (undocumented)
+    removeOutput(name: string): void;
+    // (undocumented)
+    stepAt(index: number): Step | undefined;
+    // (undocumented)
+    get steps(): Step[];
+    // (undocumented)
+    toJsonObject(): WorkflowObject;
+    // (undocumented)
+    updateStep(stepInput: StepInput, index: number): Step;
+}
+
+// Warning: (ae-missing-release-tag) "WorkflowObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface WorkflowObject {
+    // (undocumented)
+    input?: string[];
+    // (undocumented)
+    output: OutputPortBinding[];
+    // (undocumented)
+    steps: StepInput[];
 }
 
 // (No @packageDocumentation comment for this package)

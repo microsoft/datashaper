@@ -19,21 +19,13 @@ import { Workflow } from './Workflow.js'
 
 export type TableObservable = Observable<Maybe<TableContainer>>
 /**
- * Manages a series of pipeline steps,
- * including creating default names, executing in order, etc.
- * This and the accompanying TableStore are very similar to Arquero's
- * notion of queries. Both are basically a chain pattern with context.
- * We deviate here in order to support some specific needs, such as:
- * - not wanting to be completely wedded to Arquero
- * - wanting async so we can lazy-load tables or invoke services
- * - building compound steps with recursive execution.
- * TODO: this could hide the TableStore for easier api use, and just provide proxy methods.
+ * Manages a series of pipeline steps for interactive clients. This class specifically keeps a
+ * workflow specification synchronized with a live processing graph and provides utility methods
+ * for mutating the workflow.
  */
 export class GraphManager {
 	// The dataflow graph
-	private readonly _inputs: Map<string, TableContainer>
-	private readonly _workflow: Workflow
-	private readonly _graph: Graph<TableContainer>
+	private readonly _graph: Graph<TableContainer> = new DefaultGraph()
 
 	// The global onChange handler
 	private readonly _onChange = new Subject<void>()
@@ -46,21 +38,24 @@ export class GraphManager {
 	private readonly outputSubscriptions: Map<string, Subscription> = new Map()
 
 	public constructor(
-		inputs: Map<string, TableContainer> = new Map(),
-		workflow: Workflow,
+		private readonly _inputs: Map<string, TableContainer> = new Map(),
+		private readonly _workflow: Workflow,
 	) {
-		this._inputs = inputs
-		this._workflow = workflow
-		this._graph = new DefaultGraph<TableContainer>()
+		this._syncWorkflowStateIntoGraph()
+	}
 
-		for (const i of input.values()) {
-			builder.addInput(tables.get(i)!)
+	/**
+	 * Synchronizez the workflow state into the graph. Used during initialization.
+	 */
+	private _syncWorkflowStateIntoGraph() {
+		for (const i of this._inputs.keys()) {
+			this._workflow.addInput(i)
 		}
-		for (const step of steps) {
-			builder.addStep(step)
+		for (const step of this._workflow.steps) {
+			this._addWorkflowStepToGraph(step)
 		}
-		for (const [key, value] of output.entries()) {
-			builder.addOutput(key, value)
+		for (const value of this._workflow.output.values()) {
+			this._bindGraphOutput(value)
 		}
 	}
 
@@ -123,11 +118,18 @@ export class GraphManager {
 	 */
 	public addStep(stepInput: StepInput): Step {
 		const step = this._workflow.addStep(stepInput)
-		const node = createNode(step)
-		this._graph.add(node)
-		this._configureStep(step, node)
+		this._addWorkflowStepToGraph(step)
 		this._onChange.next()
 		return step
+	}
+
+	private _addWorkflowStepToGraph(step: Step): void {
+		// create the graph node
+		const node = createNode(step)
+		this._graph.add(node)
+
+		// wire up the graph node
+		this._configureStep(step, node)
 	}
 
 	/**
@@ -141,7 +143,7 @@ export class GraphManager {
 			index + 1 < this.numSteps ? this._workflow.steps[index + 1] : undefined
 		const node = this.getNode(step.id)
 
-		// If step was auto-bound
+		// If step was auto-bound, try to wire together the prev and next steps
 		if (
 			!hasDefinedInputs(step) &&
 			hasPossibleInputs(node) &&
@@ -185,12 +187,16 @@ export class GraphManager {
 
 	/**
 	 * Add an output binding
-	 * @param name - The output name to register
 	 * @param binding - The output binding
 	 */
-	public addOutput(name: string, binding: NamedOutputPortBinding): void {
+	public addOutput(binding: NamedOutputPortBinding): void {
 		this._workflow.addOutput(binding)
+		this._bindGraphOutput(binding)
+		this._onChange.next()
+	}
 
+	private _bindGraphOutput(binding: NamedOutputPortBinding) {
+		const name = binding.name
 		// Register the output in the table store
 		const node = this.getNode(binding.node)
 		const boundOutput = node.output(binding.output)
@@ -200,8 +206,6 @@ export class GraphManager {
 			this._onChange.next()
 		})
 		this.outputSubscriptions.set(name, subscription)
-
-		this._onChange.next()
 	}
 
 	/**

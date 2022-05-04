@@ -19,7 +19,6 @@ import type { IDetailsColumnProps } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
-import type { Maybe } from '@data-wrangling-components/core';
 import { default as React_2 } from 'react';
 import type { ReactElement } from 'react';
 import type { SaveMetadataFunction } from '@essex/arquero-react';
@@ -31,11 +30,7 @@ import type { TableContainer } from '@essex/arquero';
 import type { TableMetadata } from '@essex/arquero';
 import type { Theme } from '@thematic/core';
 import type { Verb } from '@data-wrangling-components/core';
-
-// Warning: (ae-missing-release-tag) "ColumnTransformModal" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const ColumnTransformModal: React.FC<ColumnTransformModalProps>;
+import type { Workflow } from '@data-wrangling-components/core';
 
 // Warning: (ae-missing-release-tag) "ColumnTransformModalProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -150,20 +145,20 @@ export enum LoadingOrchestratorType {
     Tables = "tables"
 }
 
-// Warning: (ae-forgotten-export) The symbol "ManageStepsProps" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "ManageSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-forgotten-export) The symbol "ManageWorkflowProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "ManageWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const ManageSteps: React_2.FC<ManageStepsProps>;
+export const ManageWorkflow: React.FC<ManageWorkflowProps>;
 
 // Warning: (ae-missing-release-tag) "PrepareDataFull" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const PrepareDataFull: React.FC<{
-    tables: TableContainer[];
-    onUpdateSteps: (steps: Step[]) => void;
-    onOutputTable?: (table: Maybe<TableContainer>) => void;
-    steps?: Step[];
+    inputs: TableContainer[];
+    derived: TableContainer[];
+    workflow: Workflow;
+    onUpdateOutput?: (tables: TableContainer[]) => void;
     outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[];
     stepsPosition?: 'bottom' | 'middle';
 }>;
@@ -188,16 +183,11 @@ export const ProjectMgmtCommandBar: React_2.FC<ProjectMgmtCommandBarProps>;
 //
 // @public (undocumented)
 export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'items'> {
-    // (undocumented)
-    onUpdateSteps?: (steps: Step[]) => void;
-    // (undocumented)
-    onUpdateTables?: (tables: TableContainer[]) => void;
-    // (undocumented)
-    outputTable?: TableContainer;
-    // (undocumented)
-    steps: Step[];
-    // (undocumented)
+    onUpdateTables: (tables: TableContainer[]) => void;
+    onUpdateWorkflow: (steps: Workflow) => void;
+    outputTables: TableContainer[];
     tables: TableContainer[];
+    workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "selectStepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -251,24 +241,14 @@ export interface StepSelectorProps {
 //
 // @public (undocumented)
 export const StepsList: React.FC<{
-    steps?: Step[];
+    steps: Step[];
+    buttonId?: string | undefined;
     onDeleteClicked?: (index: number) => void;
     onEditClicked?: (step: Step, index: number) => void;
     onDuplicateClicked?: (step: Step) => void;
     onSelect?: (name: string) => void;
     onStartNewStep?: () => void;
-    buttonId?: string;
 }>;
-
-// Warning: (ae-missing-release-tag) "StepsType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum StepsType {
-    // (undocumented)
-    Column = "column",
-    // (undocumented)
-    Table = "table"
-}
 
 // Warning: (ae-missing-release-tag) "TablesList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -282,13 +262,13 @@ export const TablesList: React.FC<{
 // Warning: (ae-missing-release-tag) "TableTransformModal" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const TableTransformModal: React_2.FC<TableTransformModalProps>;
+export const TableTransformModal: React.FC<TableTransformModalProps>;
 
 // Warning: (ae-missing-release-tag) "TableTransformModalProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface TableTransformModalProps extends TransformModalProps {
-    graph?: GraphManager;
+    graph: GraphManager;
     hideInputTable?: boolean;
     hideOutputTable?: boolean;
 }
@@ -356,7 +336,7 @@ export function useGoHome(name: string, setName: NameSetter): () => void;
 // Warning: (ae-missing-release-tag) "useGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useGraphManager(): GraphManager;
+export function useGraphManager(inputs: TableContainer[]): GraphManager;
 
 // Warning: (ae-missing-release-tag) "useGuidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

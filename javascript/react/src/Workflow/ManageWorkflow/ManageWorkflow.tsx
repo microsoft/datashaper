@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, Specification } from '@data-wrangling-components/core'
+import type { Step, Workflow } from '@data-wrangling-components/core'
 import { useCallback, useState } from 'react'
 
 import { DialogConfirm } from '@essex/themed-components'
@@ -32,14 +32,9 @@ interface ManageWorkflowProps
 	/**
 	 * The workflow specification
 	 */
-	workflow?: Specification
+	workflow?: Workflow
 
 	inputs: TableContainer[]
-
-	/**
-	 *  Step save handler
-	 */
-	onUpdate?: (workflow: Specification) => void
 
 	/**
 	 * Table selection handler
@@ -48,14 +43,7 @@ interface ManageWorkflowProps
 }
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
-	function ManageWorkflow({
-		workflow,
-		inputs,
-		table,
-		onSelect,
-		onUpdate,
-		...props
-	}) {
+	function ManageWorkflow({ workflow, inputs, table, onSelect, ...props }) {
 		const graph = useGraphManager(inputs)
 
 		//

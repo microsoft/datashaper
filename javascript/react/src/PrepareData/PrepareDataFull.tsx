@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Maybe, Specification } from '@data-wrangling-components/core'
+import type { Workflow } from '@data-wrangling-components/core'
 import type { TableContainer, TableMetadata } from '@essex/arquero'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { Icon } from '@fluentui/react'
@@ -10,9 +10,9 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 
-import { ManageWorkflow } from '../../Workflow/index.js'
-import { PreviewTable } from '../index.js'
-import { TableListBar } from '../TableListBar/TableListBar.js'
+import { ManageWorkflow } from '../Workflow/index.js'
+import { PreviewTable } from './index.js'
+import { TableListBar } from './TableListBar/TableListBar.js'
 
 export const PrepareDataFull: React.FC<{
 	/**
@@ -28,17 +28,12 @@ export const PrepareDataFull: React.FC<{
 	/**
 	 * The data transformation workflow
 	 */
-	workflow: Specification
-
-	/**
-	 * Handler for when the workflow changes
-	 */
-	onUpdateWorkflow: (workflow: Specification) => void
+	workflow: Workflow
 
 	/**
 	 * Handler for when the output table map changeus
 	 */
-	onUpdateOutput?: (tables: Map<string, Maybe<TableContainer>>) => void
+	onUpdateOutput?: (tables: TableContainer[]) => void
 
 	/**
 	 * An optional command bar
@@ -53,15 +48,13 @@ export const PrepareDataFull: React.FC<{
 	inputs,
 	derived,
 	workflow,
-	onUpdateWorkflow,
 	outputHeaderCommandBar,
-	onUpdateOutput,
 	stepsPosition = 'bottom',
 }) {
 	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 	const [selectedTableId, setSelectedTableName] = useState<string | undefined>()
 	const selectedTable =
-		derived.find(t => t.id === selectedTableId) ||
+		derived.find(t => t.id === selectedTableId) ??
 		inputs.find(t => t.id === selectedTableId)
 
 	const onUpdateMetadata = useCallback(
@@ -72,21 +65,6 @@ export const PrepareDataFull: React.FC<{
 		},
 		[selectedTable],
 	)
-
-	console.log('PDF', inputs, derived, selectedTableId)
-	// const {
-	// 	selectedTable,
-	// 	selectedTableName,
-	// 	setSelectedTableName,
-	// 	onDeleteStep,
-	// 	onSaveStep,
-	// 	store,
-	// 	lastTableName,
-	// 	derived,
-	// 	selectedMetadata,
-	// 	onUpdateMetadata,
-	// 	tablesLoading,
-	// } = useBusinessLogic(tables, onUpdateSteps, steps, onOutputTable)
 
 	return (
 		<Container>
@@ -113,8 +91,6 @@ export const PrepareDataFull: React.FC<{
 						inputs={inputs}
 						workflow={workflow}
 						onSelect={setSelectedTableName}
-						// onDelete={onDeleteStep}
-						// onSave={onSaveStep}
 					/>
 				</WorkflowContainer>
 			</StepsTrayContainer>

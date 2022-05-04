@@ -15,7 +15,7 @@ import { memo } from 'react'
 import styled from 'styled-components'
 
 import { DetailText } from '../DetailText/index.js'
-import { useToggleTableFeatures } from '../hooks/index.js'
+import { useToggleTableFeatures } from './PreviewTable.hooks.js'
 
 const statsColumnTypes = [
 	StatsColumnType.Type,

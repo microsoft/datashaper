@@ -2,20 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Specification, Maybe } from '@data-wrangling-components/core'
+import { Workflow } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import { ProjectMgmtCommandBar } from '@data-wrangling-components/react'
-import { memo, useState, useMemo } from 'react'
+import { memo, useState } from 'react'
 import styled from 'styled-components'
 import { PrepareDataFull } from '@data-wrangling-components/react'
 
 import { useTables } from './PrepareDataPage.hooks'
-import { InputTables } from '../DebugPage/InputTables.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	// state for the input tables
 	const { tables, onAddTables } = useTables()
-	const [workflow, setWorkflow] = useState<Specification>({ output: [] })
+	const [workflow, setWorkflow] = useState<Workflow>(new Workflow())
+
 	// workflow steps/output
 	const [output, setOutput] = useState<TableContainer[]>([])
 
@@ -34,7 +34,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					inputs={tables}
 					derived={output}
 					workflow={workflow}
-					onUpdateWorkflow={setWorkflow}
 					onUpdateOutput={setOutput}
 				/>
 			</Wrapper>

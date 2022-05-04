@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Specification } from '@data-wrangling-components/core'
+import type { Workflow } from '@data-wrangling-components/core'
 import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	createFileWithPath,
@@ -15,10 +15,10 @@ import {
 import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
 
-export function useDownloadWorkflow(workflow: Specification): () => void {
+export function useDownloadWorkflow(workflow: Workflow): () => void {
 	return useCallback(() => {
 		if (workflow != null) {
-			const blob = new Blob([JSON.stringify(workflow, null, 4)])
+			const blob = toBlobJson(workflow.toJsonObject())
 			download('worfklow.json', FileMimeType.json, blob)
 		}
 	}, [workflow])
@@ -35,7 +35,7 @@ export function useDownloadCsv(tables: TableContainer[]): () => void {
 }
 
 export function useDownloadZip(
-	workflow: Specification,
+	workflow: Workflow,
 	tables: TableContainer[],
 	outputTables: TableContainer[],
 ): () => Promise<void> {
@@ -68,13 +68,13 @@ export function useDownloadZip(
 		}
 
 		if (input.length || output.length) {
-			const blob = new Blob([JSON.stringify({ input, output }, null, 4)])
+			const blob = toBlobJson({ input, output })
 			const file = createFileWithPath(blob, { name: 'metadata.json' })
 			await fileCollection.add(file)
 		}
 
 		if (workflow) {
-			const blob = new Blob([JSON.stringify(workflow, null, 4)])
+			const blob = toBlobJson(workflow.toJsonObject())
 			const file = createFileWithPath(blob, { name: 'workflow.json' })
 			await fileCollection.add(file)
 		}
@@ -83,6 +83,10 @@ export function useDownloadZip(
 			await fileCollection.toZip('dwc-project')
 		}
 	}, [fileCollection, workflow, tables, outputTables])
+}
+
+function toBlobJson(serializable: object): Blob {
+	return new Blob([JSON.stringify(serializable, null, 4)])
 }
 
 function tableName(name: string) {

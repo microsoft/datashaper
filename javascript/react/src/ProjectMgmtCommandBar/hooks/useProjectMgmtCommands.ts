@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Specification } from '@data-wrangling-components/core'
+import { Workflow, WorkflowObject } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import type { ICommandBarItemProps } from '@fluentui/react'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import {
 	useDownloadCsv,
@@ -20,18 +20,25 @@ import {
 } from './uploads.js'
 
 export function useProjectMgmtCommands(
-	workflow: Specification,
+	workflow: Workflow,
 	tables: TableContainer[],
 	outputTables: TableContainer[],
-	onUpdateWorkflow: (workflow: Specification) => void,
+	onUpdateWorkflow: (workflow: Workflow) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
 ): ICommandBarItemProps[] {
+	const onUpdateWorkflowJson = useCallback(
+		(wf: WorkflowObject) => onUpdateWorkflow(new Workflow(wf)),
+		[onUpdateWorkflow],
+	)
 	const downloadPipeline = useDownloadWorkflow(workflow)
 	const downloadCsv = useDownloadCsv(outputTables)
 	const downloadZip = useDownloadZip(workflow, tables, outputTables)
-	const handleJsonUpload = useHandleJsonUpload(onUpdateWorkflow)
+	const handleJsonUpload = useHandleJsonUpload(onUpdateWorkflowJson)
 	const handleCsvUpload = useHandleCsvUpload(onUpdateTables)
-	const handleZipUpload = useHandleZipUpload(onUpdateWorkflow, onUpdateTables)
+	const handleZipUpload = useHandleZipUpload(
+		onUpdateWorkflowJson,
+		onUpdateTables,
+	)
 
 	const commands: ICommandBarItemProps[] = useMemo(() => {
 		return [

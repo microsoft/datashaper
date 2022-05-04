@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Specification } from '@data-wrangling-components/core'
+import type { WorkflowObject } from '@data-wrangling-components/core'
 import type { FileCollection } from '@data-wrangling-components/utilities'
 import { FileType } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
@@ -14,7 +14,6 @@ import { useHandleOnUploadClick } from '../../files/index.js'
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	return useCallback(
 		async (fc: FileCollection) => {
-			console.log('FILEN', fc.list())
 			let tables = fc.list(FileType.table)
 			if (!tables.length) {
 				return
@@ -43,7 +42,7 @@ function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	)
 }
 
-function useJsonHandler(onUpdateWorkflow?: (steps: Specification) => void) {
+function useJsonHandler(onUpdateWorkflow?: (workflow: WorkflowObject) => void) {
 	return useCallback(
 		async (fc: FileCollection) => {
 			const regex = /workflow(.*)\.json$/i
@@ -56,7 +55,7 @@ function useJsonHandler(onUpdateWorkflow?: (steps: Specification) => void) {
 			if (!json) {
 				return
 			}
-			const workflow = (await json.toJson()) as Specification
+			const workflow = (await json.toJson()) as WorkflowObject
 			if (workflow && onUpdateWorkflow) {
 				onUpdateWorkflow(workflow)
 			}
@@ -73,14 +72,14 @@ export function useHandleCsvUpload(
 }
 
 export function useHandleJsonUpload(
-	onUpdateWorkflow: (steps: Specification) => void,
+	onUpdateWorkflow: (workflow: WorkflowObject) => void,
 ): () => void {
 	const jsonHandler = useJsonHandler(onUpdateWorkflow)
 	return useHandleOnUploadClick(['.json'], jsonHandler)
 }
 
 export function useHandleFileUpload(
-	onUpdateWorkflow: (steps: Specification) => void,
+	onUpdateWorkflow: (workflow: WorkflowObject) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
 ): (fc: FileCollection) => void {
 	const jsonHandler = useJsonHandler(onUpdateWorkflow)
@@ -96,7 +95,7 @@ export function useHandleFileUpload(
 }
 
 export function useHandleZipUpload(
-	onUpdateWorkflow: (steps: Specification) => void,
+	onUpdateWorkflow: (workflow: WorkflowObject) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
 ): () => void {
 	const jsonHandler = useJsonHandler(onUpdateWorkflow)

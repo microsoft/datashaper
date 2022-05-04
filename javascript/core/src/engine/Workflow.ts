@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs'
 import { readStep } from '../steps/readStep.js'
 import type { WorkflowObject, Step, StepInput } from '../steps/types.js'
 import type { NamedOutputPortBinding, OutputPortBinding } from '../types.js'
@@ -9,6 +10,9 @@ export class Workflow {
 	private _steps: Step[] = []
 	private _input: Set<string> = new Set()
 	private _output: Map<string, NamedOutputPortBinding> = new Map()
+
+	// The global onChange handler
+	private readonly _onChange = new Subject<void>()
 
 	public constructor(workflowJson?: WorkflowObject) {
 		let prev: Step | undefined
@@ -42,10 +46,12 @@ export class Workflow {
 
 	public addInput(input: string): void {
 		this._input.add(input)
+		this._onChange.next()
 	}
 
 	public removeInput(input: string): void {
 		this._input.delete(input)
+		this._onChange.next()
 	}
 
 	public hasInput(input: string): boolean {
@@ -54,10 +60,12 @@ export class Workflow {
 
 	public addOutput(output: NamedOutputPortBinding) {
 		this._output.set(output.name, output)
+		this._onChange.next()
 	}
 
 	public removeOutput(name: string) {
 		this._output.delete(name)
+		this._onChange.next()
 	}
 
 	public hasOutput(name: string) {
@@ -69,15 +77,20 @@ export class Workflow {
 	}
 
 	public addStep(stepInput: StepInput): Step {
-		const step = readStep(stepInput)
+		const step = readStep(
+			stepInput,
+			this._steps.length > 0 ? this.steps[this.steps.length - 1] : undefined,
+		)
 		// mutate the steps so that equality checks will detect that the steps changed (e.g. memo, hook deps)
 		this._steps = [...this.steps, step]
+		this._onChange.next()
 		return step
 	}
 
 	public updateStep(stepInput: StepInput, index: number): Step {
 		const step = readStep(stepInput, this._steps[index - 1])
 		this._steps[index] = step
+		this._onChange.next()
 		return step
 	}
 
@@ -85,6 +98,12 @@ export class Workflow {
 		this._steps = []
 		this._input.clear()
 		this._output.clear()
+		this._onChange.next()
+	}
+
+	public onChange(handler: () => void): () => void {
+		const sub = this._onChange.subscribe(handler)
+		return () => sub.unsubscribe()
 	}
 
 	public toJsonObject(): WorkflowObject {

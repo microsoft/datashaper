@@ -10,7 +10,7 @@ import {
 	useModalState,
 	ModalState,
 } from '@data-wrangling-components/react-hooks'
-import { useCallback, useMemo, useState, useEffect } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 
 import {
 	useCreateTableName,
@@ -27,7 +27,7 @@ export function useOnDuplicateStep(
 
 	return useCallback(
 		(_step: Step) => {
-			const tableName = createTableName(_step.id)
+			// const _tableName = createTableName(_step.id)
 
 			const outputTable = graph ? graph.latest(_step.id)?.table : table
 			const formattedArgs = formattedColumnArgs(

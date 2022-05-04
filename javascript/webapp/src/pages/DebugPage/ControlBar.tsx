@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Specification } from '@data-wrangling-components/core'
+import type { Workflow } from '@data-wrangling-components/core'
 import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	FileCollection,
@@ -31,8 +31,8 @@ const dropdownStyles: Partial<IDropdownStyles> = {
 	dropdown: { marginTop: '4px' },
 }
 export interface ControlBarProps {
-	selected?: Specification
-	onSelectSpecification?: (spec: Specification | undefined) => void
+	selected?: Workflow
+	onSelectSpecification?: (spec: Workflow | undefined) => void
 	onLoadFiles?: (files: Map<string, ColumnTable>) => void
 	features: DetailsListFeatures
 	onFeaturesChange?: (features: DetailsListFeatures) => void
@@ -85,7 +85,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			if (!first) return
 			updateFileCollection([first])
 			const spec = await loadSpec(first)
-			onSelectSpecification?.(spec as Specification)
+			onSelectSpecification?.(spec as Workflow)
 		},
 		[onSelectSpecification, loadSpec, updateFileCollection],
 	)
@@ -156,7 +156,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 				<Description>
 					<p>
 						{selected
-							? selected.description
+							? (selected as any)?.description ?? ''
 							: 'Description for the selected example will show here'}
 					</p>
 				</Description>

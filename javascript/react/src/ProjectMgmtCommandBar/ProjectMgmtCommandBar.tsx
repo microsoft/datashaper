@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Specification } from '@data-wrangling-components/core'
+import type { Workflow } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import type { ICommandBarProps } from '@fluentui/react'
 import { ThemeVariant, Theme } from '@thematic/core'
@@ -17,7 +17,7 @@ export interface ProjectMgmtCommandBarProps
 	/**
 	 * The data transformation workflow
 	 */
-	workflow: Specification
+	workflow: Workflow
 
 	/**
 	 * The input data tables
@@ -32,7 +32,7 @@ export interface ProjectMgmtCommandBarProps
 	/**
 	 * Handler for when the workflow changes
 	 */
-	onUpdateWorkflow: (steps: Specification) => void
+	onUpdateWorkflow: (steps: Workflow) => void
 
 	/**
 	 * Handler for when input tableset changes
