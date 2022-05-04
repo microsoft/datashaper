@@ -81,7 +81,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			[criterion, onChange],
 		)
 
-		const handleComboBoxChange = useCallback(
+		const handleDateComboBoxChange = useCallback(
 			(
 				_e: any,
 				option: IComboBoxOption | undefined,
@@ -95,8 +95,24 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				}
 				onChange?.(update)
 
-				if(type === DataType.Date)
-					setCleanLabel(true)
+				setCleanLabel(true)
+			},
+			[criterion, onChange],
+		)
+
+		const handleComboBoxChange = useCallback(
+			(
+				_e: any,
+				option: IComboBoxOption | undefined,
+				_index: number | undefined,
+				value: string | undefined,
+			) => {
+				const update = {
+					...criterion,
+					type: FilterCompareType.Column,
+					value: option ? option.key : value,
+				}
+				onChange?.(update)
 			},
 			[criterion, onChange],
 		)
@@ -211,11 +227,17 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 						<OrLabel>or</OrLabel>
 
-						<ColumnCriteriaCombobox
-						options={columnOptions}
-						onChange={handleComboBoxChange}
-						disabled={isEmpty}/>
-
+						{type === DataType.Date ? 
+							<ColumnCriteriaCombobox
+							options={columnOptions}
+							onChange={handleDateComboBoxChange}
+							disabled={isEmpty}/> 
+						: 
+							<ColumnCriteriaCombobox
+							options={columnOptions}
+							onChange={handleComboBoxChange}
+							disabled={isEmpty}/>
+						}
 					</FilterContainer>
 
 					<IconButton
