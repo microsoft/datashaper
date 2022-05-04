@@ -16,7 +16,7 @@ import { selectStepComponent, selectStepDescription } from '../../index.js'
 
 interface StepComponentProps {
 	step: Step
-	store: GraphManager
+	graph: GraphManager
 	index: number
 	onChange: (step: Step, index: number) => void
 }
@@ -25,7 +25,7 @@ interface StepComponentProps {
  * Let's us render the Steps in a loop while memoing all the functions
  */
 export const StepComponent: React.FC<StepComponentProps> = memo(
-	function StepComponent({ step, store, index, onChange }) {
+	function StepComponent({ step, graph, index, onChange }) {
 		const Component = useMemo(() => selectStepComponent(step), [step])
 		const Description = useMemo(() => selectStepDescription(step), [step])
 		const WithAllArgs = useMemo(
@@ -43,7 +43,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		)
 		return (
 			<Container className="step-component">
-				<WithAllArgs step={step} store={store} onChange={handleStepChange} />
+				<WithAllArgs step={step} graph={graph} onChange={handleStepChange} />
 				<DescriptionContainer>
 					<Description step={step} showInput showOutput showOutputColumn />
 				</DescriptionContainer>

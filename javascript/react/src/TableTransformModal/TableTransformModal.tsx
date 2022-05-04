@@ -11,7 +11,7 @@ import {
 	PrimaryButton,
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 
 import { Guidance } from '../Guidance/index.js'
@@ -48,6 +48,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 			internal,
 			onTransformRequested,
 		)
+		console.log('STEP', internal, step)
 
 		const adaptedStyles = useModalStyles(styles, isGuidanceVisible)
 		return (
@@ -61,7 +62,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 					<Title>{step ? 'Edit step' : 'New step'}</Title>
 					{onDismiss && (
 						<IconButton
-							iconProps={iconProps.cancel}
+							iconProps={icons.cancel}
 							ariaLabel="Close popup modal"
 							onClick={() => onDismiss()}
 						/>
@@ -79,7 +80,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 							{internal?.verb ? (
 								<IconButton
 									onClick={toggleIsGuidanceVisible}
-									iconProps={{ iconName: 'Info' }}
+									iconProps={icons.info}
 									checked={isGuidanceVisible}
 								/>
 							) : null}
@@ -99,10 +100,7 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 					</StepComponentContainer>
 					{isGuidanceVisible && internal?.verb ? (
 						<GuidanceContainer>
-							<Guidance
-								name={internal?.verb}
-								index={index as Record<string, string>}
-							/>
+							<Guidance name={internal?.verb} index={index} />
 						</GuidanceContainer>
 					) : null}
 				</ContainerBody>
@@ -111,8 +109,9 @@ export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
 	},
 )
 
-const iconProps = {
+const icons = {
 	cancel: { iconName: 'Cancel' },
+	info: { iconName: 'Info' },
 }
 
 const MAX_HEIGHT = 700

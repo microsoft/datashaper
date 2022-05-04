@@ -11,10 +11,8 @@ import {
 	useCreateTableName,
 	useFormattedColumnArgWithCount,
 } from '../../../common/index.js'
-import { StepsType } from '../../../index.js'
 
 export function useOnDuplicateStep(
-	type: StepsType,
 	graph?: GraphManager,
 	table?: ColumnTable,
 	onSave?: (step: Step, index?: number) => void,
@@ -24,8 +22,7 @@ export function useOnDuplicateStep(
 
 	return useCallback(
 		(_step: Step) => {
-			const tableName =
-				type === StepsType.Table ? createTableName(_step.id) : _step.id
+			const tableName = createTableName(_step.id)
 
 			const outputTable = graph ? graph.latest(_step.id)?.table : table
 			const formattedArgs = formattedColumnArgs(
@@ -39,6 +36,6 @@ export function useOnDuplicateStep(
 			}
 			onSave?.(newStep)
 		},
-		[onSave, createTableName, formattedColumnArgs, type, graph, table],
+		[onSave, createTableName, formattedColumnArgs, graph, table],
 	)
 }

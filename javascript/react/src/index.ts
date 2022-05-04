@@ -6,7 +6,6 @@
 /*
  * Re-export react libraries
  */
-export * from './ColumnTransformModal/index.js'
 export * from './CommandBar/index.js'
 export * from './common/index.js'
 export * from './files/index.js'

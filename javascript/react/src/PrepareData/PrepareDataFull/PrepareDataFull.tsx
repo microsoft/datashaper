@@ -14,7 +14,6 @@ import { useGraphManager } from '../../common/hooks.js'
 import { ManageWorkflow } from '../../Workflow/index.js'
 import { PreviewTable } from '../index.js'
 import { TableListBar } from '../TableListBar/TableListBar.js'
-import { useBusinessLogic } from './PrepareDataFull.hooks.js'
 
 export const PrepareDataFull: React.FC<{
 	/**

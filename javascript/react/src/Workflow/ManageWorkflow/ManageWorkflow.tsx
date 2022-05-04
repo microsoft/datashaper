@@ -2,7 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, Specification } from '@data-wrangling-components/core'
+import type {
+	Step,
+	Specification,
+	StepInput,
+} from '@data-wrangling-components/core'
+import { readSteps } from '@data-wrangling-components/core'
 import { useBoolean } from '@fluentui/react-hooks'
 import { useStaticValue } from '@data-wrangling-components/react-hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -15,12 +20,7 @@ import type {
 	ColumnTransformModalProps,
 	TableTransformModalProps,
 } from '../../index.js'
-import {
-	ColumnTransformModal,
-	TableTransformModal,
-	useDeleteConfirm,
-} from '../../index.js'
-import { StepsType } from '../../types.js'
+import { TableTransformModal, useDeleteConfirm } from '../../index.js'
 import { StepsList } from '../index.js'
 import { useOnEditStep } from './hooks/useOnEditStep.js'
 import { useOnDuplicateStep } from './hooks/useOnDuplicateStep.js'
@@ -29,42 +29,29 @@ interface ManageWorkflowProps
 	extends TableTransformModalProps,
 		ColumnTransformModalProps {
 	/**
+	 * The workflow specification
+	 */
+	workflow?: Specification
+
+	/**
 	 *  Step save handler
 	 */
-	onSave?: (step: Step, index?: number | undefined) => void
-
-	/**
-	 * Step delete handler
-	 */
-	onDelete?: ((args: any) => void) | undefined
-
-	/**
-	 * The steps type
-	 */
-	type?: StepsType
+	onUpdate?: (workflow: Specification) => void
 
 	/**
 	 * Table selection handler
 	 */
 	onSelect?: (name: string) => void
-
-	/**
-	 * The workflow specification
-	 */
-	workflow?: Specification
 }
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
-	function ManageWorkflow({
-		onDelete,
-		onSave,
-		onSelect,
-		graph,
-		workflow,
-		type = StepsType.Table,
-		table,
-		...props
-	}) {
+	function ManageWorkflow({ onSelect, graph, workflow, table, ...props }) {
+		const onSave = (...args: any[]) => {
+			console.log('TODO: Save step')
+		}
+		const onDelete = (...args: any[]) => {
+			console.log('TODO: delete step')
+		}
 		const {
 			onDeleteClicked,
 			toggleDeleteModalOpen,
@@ -94,8 +81,12 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			},
 			[onSave, onDismissTransformModal, selectedStepIndex],
 		)
-		const onDuplicateClicked = useOnDuplicateStep(type, graph, table, onSave)
+		const onDuplicateClicked = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(selectedStepIndex)
+		const stepList = useMemo(
+			() => readSteps((workflow?.steps as StepInput[]) ?? []),
+			[workflow?.steps],
+		)
 
 		return (
 			<Container>
@@ -103,19 +94,18 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 					onDeleteClicked={onDeleteClicked}
 					onSelect={onSelect}
 					onEditClicked={onEditClicked}
-					steps={workflow?.steps ?? []}
+					steps={stepList}
 					onDuplicateClicked={onDuplicateClicked}
 					onStartNewStep={showTransformModal}
 					buttonId={addStepButtonId}
 				/>
 
 				<div>
-					{type === StepsType.Table && isTransformModalOpen && (
+					{isTransformModalOpen && (
 						<TableTransformModal
 							target={editorTarget}
 							step={selectedStep}
 							onTransformRequested={onCreate}
-							isOpen={isTransformModalOpen}
 							graph={graph}
 							onDismiss={onDismissTransformModal}
 							// HACK
@@ -124,30 +114,15 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 						/>
 					)}
 
-					{type === StepsType.Column && table && (
-						<ColumnTransformModal
-							step={selectedStep}
-							table={table}
-							onTransformRequested={onCreate}
-							isOpen={isTransformModalOpen}
-							onDismiss={onDismissTransformModal}
-							{...props}
-						/>
-					)}
-
-					{onDelete && (
-						<DialogConfirm
-							toggle={toggleDeleteModalOpen}
-							title="Are you sure you want to delete this step?"
-							subText={
-								type === StepsType.Table
-									? 'You will also lose any table transformations made after this step.'
-									: ''
-							}
-							show={isDeleteModalOpen}
-							onConfirm={onConfirmDelete}
-						/>
-					)}
+					<DialogConfirm
+						toggle={toggleDeleteModalOpen}
+						title="Are you sure you want to delete this step?"
+						subText={
+							'You will also lose any table transformations made after this step.'
+						}
+						show={isDeleteModalOpen}
+						onConfirm={onConfirmDelete}
+					/>
 				</div>
 			</Container>
 		)

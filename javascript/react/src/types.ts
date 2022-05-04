@@ -74,8 +74,3 @@ export interface ColumnTransformModalProps extends TransformModalProps {
 	 */
 	hideOutputColumn?: boolean
 }
-
-export enum StepsType {
-	Table = 'table',
-	Column = 'column',
-}
