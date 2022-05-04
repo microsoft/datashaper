@@ -23,7 +23,7 @@ export function useModalStyles(
 			{
 				root: {
 					border: `1px solid ${theme.application().faint().hex()}`,
-					width: includeGuidance ? 800 : 360,
+					width: includeGuidance ? 900 : 520,
 					maxHeight: 580,
 				},
 			},
