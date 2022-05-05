@@ -5,15 +5,16 @@
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 
-import { useDropzone } from './hooks/index.js'
-import type { DropzoneStyles, DzProps } from './types.js'
+import { useDropzone } from './Dropzone.hooks.js'
+import type { DropzoneStyles, DropzoneProps } from './types.js'
 
-interface DropzoneProps extends DzProps {
-	placeholder?: string
-	showPlaceholder?: boolean
-	styles?: DropzoneStyles
-	disabled?: boolean
-}
+const DEFAULT_STYLES: DropzoneStyles = Object.freeze({
+	container: {},
+	dragReject: {},
+	placeholder: {},
+	dragZone: {},
+})
+
 export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 	function Dropzone({
 		onDrop,
@@ -23,12 +24,7 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 		dropzoneOptions = {},
 		placeholder,
 		showPlaceholder = true,
-		styles = {
-			container: {},
-			dragReject: {},
-			placeholder: {},
-			dragZone: {},
-		},
+		styles = DEFAULT_STYLES,
 		children,
 	}) {
 		const thematic = useThematic()
@@ -52,47 +48,28 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 		}, [showPlaceholder, placeholder, acceptedFileTypesExt])
 		const container: React.CSSProperties = useMemo(
 			() => ({
-				borderWidth: '1px',
-				borderStyle: 'dashed',
+				...staticStyles.container,
+				opacity: isDragActive ? 0.5 : 1,
+				backgroundColor: isDragActive ? 'white' : 'transparent',
 				borderColor: isDragActive
 					? thematic.application().accent().hex()
 					: thematic.application().lowContrast().hex(),
-				borderRadius: '5px',
-				width: '100%',
-				height: '100%',
-				margin: '1rem auto',
-				cursor: 'pointer',
-				opacity: isDragActive ? 0.5 : 1,
-				fontSize: '1.5rem',
-				backgroundColor: isDragActive ? 'white' : 'transparent',
 				...styles.container,
 			}),
 			[styles, thematic, isDragActive],
 		)
 		const dragZone: React.CSSProperties = useMemo(
 			() => ({
-				position: 'relative',
-				width: '100%',
-				height: '100%',
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'center',
+				...staticStyles.dragZone,
 				...styles.dragZone,
 			}),
 			[styles],
 		)
 		const dragReject: React.CSSProperties = useMemo(
 			() => ({
-				position: 'absolute',
-				width: '90%',
-				height: '90%',
+				...staticStyles.dragReject,
 				backgroundColor: thematic.application().foreground().hex(),
 				color: thematic.application().background().hex(),
-				opacity: 0.5,
-				padding: '5px',
-				borderRadius: '5px',
-				textAlign: 'center',
-				fontSize: '12px',
 				...styles.dragReject,
 			}),
 			[thematic, styles],
@@ -125,3 +102,34 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 		)
 	},
 )
+
+const staticStyles = {
+	container: {
+		borderWidth: '1px',
+		borderStyle: 'dashed',
+		borderRadius: '5px',
+		width: '100%',
+		height: '100%',
+		margin: '1rem auto',
+		cursor: 'pointer',
+		fontSize: '1.5rem',
+	} as React.CSSProperties,
+	dragZone: {
+		position: 'relative',
+		width: '100%',
+		height: '100%',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	} as React.CSSProperties,
+	dragReject: {
+		position: 'absolute',
+		width: '90%',
+		height: '90%',
+		opacity: 0.5,
+		padding: '5px',
+		borderRadius: '5px',
+		textAlign: 'center',
+		fontSize: '12px',
+	} as React.CSSProperties,
+}

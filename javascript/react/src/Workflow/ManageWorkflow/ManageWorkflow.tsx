@@ -13,7 +13,8 @@ import type {
 	ColumnTransformModalProps,
 	TableTransformModalProps,
 } from '../../index.js'
-import { TableTransformModal, useDeleteConfirm } from '../../index.js'
+import { useDeleteConfirm } from '../../common/index.js'
+import { TableTransformModal } from '../../TableTransformModal/TableTransformModal.js'
 import { StepsList } from '../index.js'
 import {
 	useOnEditStep,

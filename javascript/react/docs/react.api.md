@@ -6,21 +6,17 @@
 
 /// <reference types="react" />
 
-import type { ColumnMetadata } from '@essex/arquero';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { Dispatch } from 'react';
 import { DropzoneOptions } from 'react-dropzone';
-import type { DropzoneState as DropzoneState_2 } from 'react-dropzone';
-import { FileCollection } from '@data-wrangling-components/utilities';
+import type { FileCollection } from '@data-wrangling-components/utilities';
 import { FileRejection } from 'react-dropzone';
 import type { GraphManager } from '@data-wrangling-components/core';
 import type { ICommandBarProps } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
-import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import { default as React_2 } from 'react';
-import type { ReactElement } from 'react';
 import type { SaveMetadataFunction } from '@essex/arquero-react';
 import type { SetStateAction } from 'react';
 import type { Step } from '@data-wrangling-components/core';
@@ -28,7 +24,6 @@ import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import type { StepDescriptionProps } from '@data-wrangling-components/react-types';
 import type { TableContainer } from '@essex/arquero';
 import type { TableMetadata } from '@essex/arquero';
-import type { Theme } from '@thematic/core';
 import type { Verb } from '@data-wrangling-components/core';
 import type { Workflow } from '@data-wrangling-components/core';
 
@@ -46,22 +41,6 @@ export interface ColumnTransformModalProps extends TransformModalProps {
 // @public
 export const CommandBar: React.FC<CommandBarProps>;
 
-// Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createDefaultCommandBar({ styles, ...props }: ICommandBarProps): ReactElement<ICommandBarProps, any>;
-
-// Warning: (ae-missing-release-tag) "createDefaultHeaderCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: Theme, far?: boolean): ReactElement<ICommandBarProps, any>;
-
-// Warning: (ae-missing-release-tag) "createLazyLoadingGroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function createLazyLoadingGroupHeader(props: IDetailsGroupDividerProps | undefined, children: any, columnName?: string, columnMetadata?: ColumnMetadata | undefined): ReactElement<any, any> | null;
-
-// Warning: (ae-forgotten-export) The symbol "DropzoneProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Dropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -69,12 +48,28 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>>;
 
 export { DropzoneOptions }
 
-// Warning: (ae-missing-release-tag) "DropzoneState" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DropzoneProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface DropzoneState extends DropzoneState_2 {
+export interface DropzoneProps {
     // (undocumented)
-    acceptedFileTypesExt: string[];
+    acceptedFileTypes: string[];
+    // (undocumented)
+    disabled?: boolean;
+    // (undocumented)
+    dropzoneOptions?: Omit<DropzoneOptions, 'onDrop' | 'onDropRejected' | 'onDropAccepted'>;
+    // (undocumented)
+    onDrop?: (collection: FileCollection) => void;
+    // (undocumented)
+    onDropAccepted?: (collection: FileCollection) => void;
+    // (undocumented)
+    onDropRejected?: (message: string, files?: FileRejection[]) => void;
+    // (undocumented)
+    placeholder?: string;
+    // (undocumented)
+    showPlaceholder?: boolean;
+    // (undocumented)
+    styles?: DropzoneStyles;
 }
 
 // Warning: (ae-missing-release-tag) "DropzoneStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -91,59 +86,13 @@ export interface DropzoneStyles {
     placeholder?: React.CSSProperties;
 }
 
-// Warning: (ae-missing-release-tag) "DzProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DzProps {
-    // (undocumented)
-    acceptedFileTypes: string[];
-    // (undocumented)
-    dropzoneOptions?: Omit<DropzoneOptions, 'onDrop' | 'onDropRejected' | 'onDropAccepted'>;
-    // (undocumented)
-    onDrop?: (collection: FileCollection) => void;
-    // (undocumented)
-    onDropAccepted?: (collection: FileCollection) => void;
-    // (undocumented)
-    onDropRejected?: (message: string, files?: FileRejection[]) => void;
-}
-
 export { FileRejection }
-
-// Warning: (ae-missing-release-tag) "getLoadingOrchestrator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getLoadingOrchestrator(type: LoadingOrchestratorType): LoadingOrchestrator;
 
 // Warning: (ae-forgotten-export) The symbol "GuidanceProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Guidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const Guidance: React_2.FC<GuidanceProps>;
-
-// Warning: (ae-missing-release-tag) "LoadingOrchestrator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export class LoadingOrchestrator {
-    constructor();
-    // (undocumented)
-    get isLoading(): boolean;
-    // (undocumented)
-    start(): void;
-    // (undocumented)
-    stop(): void;
-}
-
-// Warning: (ae-missing-release-tag) "LoadingOrchestratorType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum LoadingOrchestratorType {
-    // (undocumented)
-    Preview = "preview",
-    // (undocumented)
-    Steps = "steps",
-    // (undocumented)
-    Tables = "tables"
-}
 
 // Warning: (ae-forgotten-export) The symbol "ManageWorkflowProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ManageWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -292,36 +241,6 @@ export interface TransformModalProps extends IModalProps {
     verbs?: string[];
 }
 
-// Warning: (ae-missing-release-tag) "useCreateTableName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useCreateTableName(store?: GraphManager): (name: string) => string;
-
-// Warning: (ae-missing-release-tag) "useDeleteConfirm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDeleteConfirm(onDelete?: (args: any) => void): {
-    toggleDeleteModalOpen: () => void;
-    onConfirmDelete: () => void;
-    onDeleteClicked: (args: any) => void;
-    isDeleteModalOpen: boolean;
-};
-
-// Warning: (ae-missing-release-tag) "useDropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const useDropzone: (props: DzProps) => DropzoneState;
-
-// Warning: (ae-missing-release-tag) "useFormattedColumnArg" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useFormattedColumnArg(): (stepArgs: unknown, newName?: string) => object;
-
-// Warning: (ae-missing-release-tag) "useFormattedColumnArgWithCount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useFormattedColumnArgWithCount(): (step: Step, columnNames: string[]) => object;
-
 // Warning: (ae-forgotten-export) The symbol "NameSetter" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useGoBack" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -333,11 +252,6 @@ export function useGoBack(setName: NameSetter): () => void;
 // @public (undocumented)
 export function useGoHome(name: string, setName: NameSetter): () => void;
 
-// Warning: (ae-missing-release-tag) "useGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useGraphManager(inputs: TableContainer[]): GraphManager;
-
 // Warning: (ae-missing-release-tag) "useGuidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -347,11 +261,6 @@ export function useGuidance(index: Record<string, string>): (name: string) => st
 //
 // @public (undocumented)
 export function useHandleClick(setName: NameSetter): (url: string) => void;
-
-// Warning: (ae-missing-release-tag) "useHandleOnUploadClick" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const useHandleOnUploadClick: (acceptedFileTypes: string[], handleCollection?: ((fileCollection: FileCollection) => void) | undefined) => (() => void);
 
 
 export * from "@data-wrangling-components/react-controls";

@@ -7,10 +7,8 @@
  * Re-export react libraries
  */
 export * from './CommandBar/index.js'
-export * from './common/index.js'
-export * from './files/index.js'
+export * from './Dropzone/index.js'
 export * from './Guidance/index.js'
-export * from './Orchestrator/index.js'
 export * from './PrepareData/index.js'
 export * from './ProjectMgmtCommandBar/index.js'
 export * from './selectStepComponent.js'

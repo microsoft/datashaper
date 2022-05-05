@@ -12,19 +12,19 @@ import { useCallback } from 'react'
 import type { DropzoneState as DzState } from 'react-dropzone'
 import { useDropzone as UseDz } from 'react-dropzone'
 
-import type { DzProps, FileRejection } from '../types.js'
+import type { DropzoneProps, FileRejection } from './types.js'
 
 export interface DropzoneState extends DzState {
 	acceptedFileTypesExt: string[]
 }
 
-export const useDropzone: (props: DzProps) => DropzoneState = ({
+export function useDropzone({
 	acceptedFileTypes,
 	onDrop,
 	onDropRejected,
 	onDropAccepted,
 	dropzoneOptions,
-}: DzProps) => {
+}: DropzoneProps): DropzoneState {
 	const handleOnDrop = useHandleOnDrop(onDrop)
 	const handleOnDropAccepted = useHandleOnDropAccepted(onDropAccepted)
 	const acceptedFileTypesExt = acceptedFileTypes.map(x =>
@@ -54,9 +54,9 @@ export const useDropzone: (props: DzProps) => DropzoneState = ({
 	}
 }
 
-const useHandleOnDropAccepted = (
+function useHandleOnDropAccepted(
 	onDropAccepted?: (collection: FileCollection) => void,
-) => {
+) {
 	return useCallback(
 		async (files: FileWithPath[]) => {
 			const fileCollection = new FileCollection()
@@ -71,10 +71,10 @@ const useHandleOnDropAccepted = (
 	)
 }
 
-const useHandleOnDropRejected = (
+function useHandleOnDropRejected(
 	acceptedFileTypes: string[],
 	onDropRejected?: (message: string, files?: FileRejection[]) => void,
-) => {
+) {
 	return useCallback(
 		(files: FileRejection[]) => {
 			const message = `File type must be: ${acceptedFileTypes.join(', ')}`
@@ -84,7 +84,7 @@ const useHandleOnDropRejected = (
 	)
 }
 
-const useHandleOnDrop = (onDrop?: (collection: FileCollection) => void) => {
+function useHandleOnDrop(onDrop?: (collection: FileCollection) => void) {
 	return useCallback(
 		async (files: FileWithPath[]) => {
 			const fileCollection = new FileCollection()
@@ -97,32 +97,4 @@ const useHandleOnDrop = (onDrop?: (collection: FileCollection) => void) => {
 		},
 		[onDrop],
 	)
-}
-
-export const useHandleOnUploadClick = (
-	acceptedFileTypes: string[],
-	handleCollection?: (fileCollection: FileCollection) => void,
-): (() => void) => {
-	return useCallback(() => {
-		let input: HTMLInputElement | null = document.createElement('input')
-		input.type = 'file'
-		input.multiple = true
-		input.accept = acceptedFileTypes.toString()
-		input.onchange = async (e: any) => {
-			if (e?.target?.files?.length) {
-				const { files } = e.target
-				const fileCollection = new FileCollection()
-				try {
-					for (const file of files) {
-						await fileCollection.add(file)
-					}
-					handleCollection?.(fileCollection)
-				} catch (e) {
-					console.error(e)
-				}
-			}
-		}
-		input.click()
-		input = null
-	}, [acceptedFileTypes, handleCollection])
 }

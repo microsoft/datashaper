@@ -8,8 +8,7 @@ import type { FileCollection } from '@data-wrangling-components/utilities'
 import { FileType } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback } from 'react'
-
-import { useHandleOnUploadClick } from '../../files/index.js'
+import { useHandleOnUploadClick } from '../../common/index.js'
 
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	return useCallback(
