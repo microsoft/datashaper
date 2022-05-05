@@ -4,6 +4,7 @@
  */
 import type { JoinArgs } from '@data-wrangling-components/core'
 import { JoinStrategy } from '@data-wrangling-components/core'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
@@ -14,7 +15,6 @@ import {
 	enumDropdown,
 	joinInputs,
 } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for a Join step.

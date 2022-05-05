@@ -3,11 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Workflow } from '@data-wrangling-components/core'
+import {
+	PrepareDataFull,
+	ProjectMgmtCommandBar,
+} from '@data-wrangling-components/react'
 import type { TableContainer } from '@essex/arquero'
-import { ProjectMgmtCommandBar } from '@data-wrangling-components/react'
 import { memo, useState } from 'react'
 import styled from 'styled-components'
-import { PrepareDataFull } from '@data-wrangling-components/react'
 
 import { useTables } from './PrepareDataPage.hooks'
 
@@ -55,11 +57,4 @@ const mgmtStyles = {
 		height: 36,
 		paddingLeft: 9,
 	},
-}
-
-function createTableMap(tables: TableContainer[]): Map<string, TableContainer> {
-	return tables.reduce((prev, curr) => {
-		prev.set(curr.id, curr)
-		return prev
-	}, new Map<string, TableContainer>())
 }

@@ -76,6 +76,11 @@ export function download(filename: string, type: string, data: Blob): void;
 // @public
 export function downloadTable(table: ColumnTable, filename?: string, options?: CSVFormatOptions): void;
 
+// Warning: (ae-missing-release-tag) "enumName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function enumName(en: object, key?: string | number): string | undefined;
+
 // Warning: (ae-missing-release-tag) "extension" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

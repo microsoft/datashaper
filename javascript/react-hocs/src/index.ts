@@ -5,6 +5,6 @@
 export * from './types.js'
 export * from './withInputColumnDropdown.js'
 export * from './withInputTableDropdown.js'
+export * from './withLoadedTable.js'
 export * from './withOutputColumnTextfield.js'
 export * from './withOutputTableTextfield.js'
-export * from './withLoadedTable.js'

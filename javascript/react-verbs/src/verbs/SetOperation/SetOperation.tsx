@@ -2,19 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, GraphManager } from '@data-wrangling-components/core'
+import type { GraphManager, Step } from '@data-wrangling-components/core'
 import { TableDropdown } from '@data-wrangling-components/react-controls'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
 import {
 	useSimpleDropdownOptions,
 	useTableNames,
 } from '@data-wrangling-components/react-hooks'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { ActionButton, IconButton, Label } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { LeftAlignedRow } from '../../common/index.js'
-import { withLoadedTable } from '@data-wrangling-components/react-hocs'
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs to create a list of tables.

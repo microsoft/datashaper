@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { AggregateArgs } from '@data-wrangling-components/core'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
 import { useTableColumnNames } from '@data-wrangling-components/react-hooks'
 import { memo } from 'react'
 
-import { withLoadedTable } from '@data-wrangling-components/react-hocs'
 import { AggregateBase } from './Aggregate.base.js'
 
 /*

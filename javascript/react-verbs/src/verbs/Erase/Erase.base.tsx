@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { EraseArgs } from '@data-wrangling-components/core'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.jsx'
 import { FormInputType, VerbForm } from '../../common/VerbForm.jsx'
 import { inputColumnList } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Just the to/value inputs for an erase.

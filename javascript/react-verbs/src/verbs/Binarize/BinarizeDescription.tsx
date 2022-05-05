@@ -4,10 +4,10 @@
  */
 import type { BinarizeArgs } from '@data-wrangling-components/core'
 import { FilterCompareType } from '@data-wrangling-components/core'
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 import { memo, useMemo } from 'react'
 
 import { VerbDescription } from '../../common/VerbDescription.js'
-import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 
 export const BinarizeDescription: React.FC<StepDescriptionProps<BinarizeArgs>> =
 	memo(function BinarizeDescription(props) {

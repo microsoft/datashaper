@@ -7,18 +7,17 @@ import {
 	ColumnSpread,
 	TableColumnDropdown,
 } from '@data-wrangling-components/react-controls'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
 import {
+	useDropdownChangeHandler,
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { ActionButton, Label } from '@fluentui/react'
 import set from 'lodash-es/set.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
-
-import { useDropdownChangeHandler } from '@data-wrangling-components/react-hooks'
-import { withLoadedTable } from '@data-wrangling-components/react-hocs'
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for a step that needs lists of columns.

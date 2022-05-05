@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { OrderbyArgs } from '@data-wrangling-components/core'
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 import { memo, useMemo } from 'react'
 
 import { createRowEntries } from '../../common/createRowEntries.js'
 import { VerbDescription } from '../../common/VerbDescription.js'
-import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 
 export const OrderbyDescription: React.FC<StepDescriptionProps<OrderbyArgs>> =
 	memo(function OrderbyDescription(props) {

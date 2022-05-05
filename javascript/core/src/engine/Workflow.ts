@@ -1,6 +1,11 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { Subject } from 'rxjs'
+
 import { readStep } from '../steps/readStep.js'
-import type { WorkflowObject, Step, StepInput } from '../steps/types.js'
+import type { Step, StepInput, WorkflowObject } from '../steps/types.js'
 import type { NamedOutputPortBinding, OutputPortBinding } from '../types.js'
 
 /**
@@ -28,11 +33,11 @@ export class Workflow {
 		})
 	}
 
-	public get input() {
+	public get input(): Set<string> {
 		return this._input
 	}
 
-	public get output() {
+	public get output(): Map<string, NamedOutputPortBinding> {
 		return this._output
 	}
 
@@ -58,17 +63,17 @@ export class Workflow {
 		return this._input.has(input)
 	}
 
-	public addOutput(output: NamedOutputPortBinding) {
+	public addOutput(output: NamedOutputPortBinding): void {
 		this._output.set(output.name, output)
 		this._onChange.next()
 	}
 
-	public removeOutput(name: string) {
+	public removeOutput(name: string): void {
 		this._output.delete(name)
 		this._onChange.next()
 	}
 
-	public hasOutput(name: string) {
+	public hasOutput(name: string): boolean {
 		return this._output.has(name)
 	}
 
@@ -94,7 +99,7 @@ export class Workflow {
 		return step
 	}
 
-	public clear() {
+	public clear(): void {
 		this._steps = []
 		this._input.clear()
 		this._output.clear()

@@ -9,12 +9,12 @@ import {
 	getDateFormatPatternOptions,
 	getEnumDropdownOptions,
 } from '@data-wrangling-components/react-hooks'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import { inputColumnList } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for a Convert step.

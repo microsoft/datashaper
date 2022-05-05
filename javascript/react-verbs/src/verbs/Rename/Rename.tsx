@@ -4,10 +4,13 @@
  */
 import type { RenameArgs, Step } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
 import {
+	useColumnRecordDelete,
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
@@ -20,9 +23,6 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useColumnRecordDelete } from '@data-wrangling-components/react-hooks'
-import { withLoadedTable } from '@data-wrangling-components/react-hocs'
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import {
 	useDisabled,
 	useHandleAddButtonClick,

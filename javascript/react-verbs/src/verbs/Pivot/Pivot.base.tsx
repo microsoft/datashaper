@@ -5,12 +5,12 @@
 import type { PivotArgs } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { useSimpleDropdownOptions } from '@data-wrangling-components/react-hooks'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
 import { enumDropdown } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Just the group/column/op inputs for an aggregation.

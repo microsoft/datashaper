@@ -4,6 +4,7 @@
  */
 import type { Step } from '@data-wrangling-components/core'
 import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
+
 import {
 	AggregateDescription,
 	BinarizeDescription,

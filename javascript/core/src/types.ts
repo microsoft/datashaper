@@ -1,9 +1,6 @@
-/**
- * Step input specifications. If this is a string, we'll bind to the default output
- * of the given node ID. If no node has that ID, we'll bind against the table-store's
- * named table given the string.
- *
- * If this is an input binding, it's an explicit binding to another step in the pipeline.
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
  */
 export type PortBinding = string | NamedPortBinding
 export type OutputPortBinding = string | NamedOutputPortBinding

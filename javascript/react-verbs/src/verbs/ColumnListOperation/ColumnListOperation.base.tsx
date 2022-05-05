@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { InputColumnListArgs } from '@data-wrangling-components/core'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.jsx'
 import { VerbForm } from '../../common/VerbForm.jsx'
 import { inputColumnList } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for a ColumnListOperation step.

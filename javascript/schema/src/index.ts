@@ -22,7 +22,9 @@ import type {
 	MergeArgs,
 	OnehotArgs,
 	OrderbyArgs,
+	OutputPortBinding,
 	PivotArgs,
+	PortBinding,
 	RecodeArgs,
 	RenameArgs,
 	RollupArgs,
@@ -33,8 +35,6 @@ import type {
 	UnrollArgs,
 	Verb,
 	WindowArgs,
-	PortBinding,
-	OutputPortBinding,
 } from '@data-wrangling-components/core'
 
 /**

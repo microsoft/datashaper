@@ -3,7 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@essex/arquero'
-import { GraphManager, createGraphManager } from './GraphManager.js'
+
+import type { GraphManager } from './GraphManager.js'
+import { createGraphManager } from './GraphManager.js'
 import type { Workflow } from './Workflow.js'
 
 /**

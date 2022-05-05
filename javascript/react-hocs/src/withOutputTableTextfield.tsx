@@ -4,9 +4,9 @@
  */
 import type { NamedOutputPortBinding } from '@data-wrangling-components/core'
 import { dropdownStyles } from '@data-wrangling-components/react-controls'
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { useTextFieldChangeHandler } from '@data-wrangling-components/react-hooks'
 import { LeftAlignedRow } from '@data-wrangling-components/react-styled-components'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'

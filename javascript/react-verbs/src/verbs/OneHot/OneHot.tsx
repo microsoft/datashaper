@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { OnehotArgs } from '@data-wrangling-components/core'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
 import { FormInputType, VerbForm } from '../../common/VerbForm.js'
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for a OneHot step.

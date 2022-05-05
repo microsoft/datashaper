@@ -334,6 +334,7 @@ export class GraphManager {
     removeStep(index: number): void;
     reset(workflow?: Workflow): void;
     get steps(): Step[];
+    suggestOutputName(name: string): string;
     // (undocumented)
     toList(): Maybe<TableContainer>[];
     toMap(): Map<string, Maybe<TableContainer>>;
@@ -647,7 +648,7 @@ export interface PivotArgs {
 
 // Warning: (ae-missing-release-tag) "PortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
+// @public (undocumented)
 export type PortBinding = string | NamedPortBinding;
 
 // Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -216,7 +216,8 @@ export class TestStore {
 	}
 
 	private _tables: Map<string, TableContainer> = new Map()
-	public set(key: string, value: TableContainer) {
+
+	public set(key: string, value: TableContainer): void {
 		this._tables.set(key, value)
 	}
 

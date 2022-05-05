@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RenameArgs, Step } from '@data-wrangling-components/core'
+import type { StepChangeFunction } from '@data-wrangling-components/react-types'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
-import type { StepChangeFunction } from '@data-wrangling-components/react-types'
 
 export function useHandleColumnChange(
 	step: Step<RenameArgs>,

@@ -5,9 +5,9 @@
 import type { TableContainer } from '@essex/arquero'
 import { table } from 'arquero'
 
+import { createTableStore } from '../../__tests__/createTableStore.js'
 import { Verb } from '../../index.js'
 import { readSpec } from '../../steps/readSpec.js'
-import { createTableStore } from '../../__tests__/createTableStore.js'
 import { createGraph } from '../graph.js'
 
 describe('stepGraph', () => {

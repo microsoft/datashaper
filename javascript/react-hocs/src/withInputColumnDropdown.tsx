@@ -9,15 +9,13 @@ import {
 } from '@data-wrangling-components/core'
 import { TableColumnDropdown } from '@data-wrangling-components/react-controls'
 import {
+	useDropdownChangeHandler,
+	useLoadTable,
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '@data-wrangling-components/react-hooks'
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
-import {
-	useDropdownChangeHandler,
-	useLoadTable,
-} from '@data-wrangling-components/react-hooks'
 import { LeftAlignedRow } from '@data-wrangling-components/react-styled-components'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { columnTypes, DataType } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

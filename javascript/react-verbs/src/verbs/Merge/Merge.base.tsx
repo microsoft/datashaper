@@ -4,6 +4,7 @@
  */
 import type { MergeArgs } from '@data-wrangling-components/core'
 import { MergeStrategy } from '@data-wrangling-components/core'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 import { memo, useMemo } from 'react'
 
 import type { FormInput } from '../../common/VerbForm.js'
@@ -12,7 +13,6 @@ import {
 	enumDropdown,
 	inputColumnList,
 } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Just the to/value inputs for an impute.

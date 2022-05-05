@@ -9,8 +9,8 @@ import type { Observable, Subscription } from 'rxjs'
 import { from, Subject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
-import type { NamedOutputPortBinding, NamedPortBinding } from '../types.js'
 import type { Step, StepInput } from '../steps/index.js'
+import type { NamedOutputPortBinding, NamedPortBinding } from '../types.js'
 import { createNode } from './createNode.js'
 import { Workflow } from './Workflow.js'
 

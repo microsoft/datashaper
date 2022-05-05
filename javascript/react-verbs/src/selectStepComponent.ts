@@ -4,6 +4,7 @@
  */
 import type { Step } from '@data-wrangling-components/core'
 import type { StepComponentProps } from '@data-wrangling-components/react-types'
+
 import {
 	Aggregate,
 	Bin,

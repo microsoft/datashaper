@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { LookupArgs } from '@data-wrangling-components/core'
+import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
 import { createRowEntries } from '../../common/createRowEntries.js'
 import { VerbDescription } from '../../common/VerbDescription.js'
-import type { StepDescriptionProps } from '@data-wrangling-components/react-types'
 
 export const LookupDescription: React.FC<StepDescriptionProps<LookupArgs>> =
 	memo(function LookupDescription(props) {

@@ -1,4 +1,8 @@
-import { useCallback, useState, useMemo } from 'react'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { useCallback, useMemo, useState } from 'react'
 
 export interface ModalState {
 	/**
@@ -36,17 +40,28 @@ export function useModalState(
 	const open = useCallback(() => setIsOpen(true), [setIsOpen])
 	const close = useCallback(() => setIsOpen(false), [setIsOpen])
 
+	/**
+	 * Shw logic
+	 */
 	const show = useCallback(() => {
 		onShow?.()
 		open()
 	}, [onShow, open])
+
+	/**
+	 * Hide logic
+	 */
 	const hide = useCallback(() => {
 		close()
 		onHide?.()
 	}, [close, onHide])
+
+	/**
+	 * Toggle logic
+	 */
 	const toggle = useCallback(
 		() => (isOpen ? hide() : show()),
-		[isOpen, setIsOpen],
+		[isOpen, hide, show],
 	)
 
 	return useMemo(
@@ -56,6 +71,6 @@ export function useModalState(
 			hide,
 			toggle,
 		}),
-		[isOpen, show, hide],
+		[isOpen, show, hide, toggle],
 	)
 }

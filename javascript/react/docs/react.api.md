@@ -155,10 +155,10 @@ export const StepsList: React.FC<{
     onStartNewStep?: () => void;
 }>;
 
-// Warning: (ae-missing-release-tag) "TablesList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "TableList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const TablesList: React.FC<{
+export const TableList: React.FC<{
     tables: TableContainer[];
     onSelect?: (name: string) => void;
     selected?: string;

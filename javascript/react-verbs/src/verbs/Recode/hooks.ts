@@ -3,12 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
+import type { StepChangeFunction } from '@data-wrangling-components/react-types'
 import type { Value } from '@essex/arquero'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
-
-import type { StepChangeFunction } from '@data-wrangling-components/react-types'
 
 export function useColumnValues(
 	step: Step<RecodeArgs>,

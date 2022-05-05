@@ -364,6 +364,16 @@ export const Sample: React.FC<StepComponentProps<SampleArgs>>;
 // @public (undocumented)
 export const SampleDescription: React.FC<StepDescriptionProps<SampleArgs>>;
 
+// Warning: (ae-missing-release-tag) "selectStepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function selectStepComponent(step: Step<unknown>): React.FC<StepComponentProps<unknown>>;
+
+// Warning: (ae-missing-release-tag) "selectStepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function selectStepDescription(step: Step): React.FC<StepDescriptionProps>;
+
 // Warning: (ae-missing-release-tag) "SetOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

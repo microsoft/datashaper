@@ -3,15 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { isOutputColumnStep } from '@data-wrangling-components/core'
-import { NodeInput } from '@essex/dataflow'
-import isNil from 'lodash-es/isNil.js'
-import { memo, useMemo } from 'react'
-import styled from 'styled-components'
-
 import type {
 	DescriptionRow,
 	VerbDescriptionProps,
 } from '@data-wrangling-components/react-types'
+import { NodeInput } from '@essex/dataflow'
+import isNil from 'lodash-es/isNil.js'
+import { memo, useMemo } from 'react'
+import styled from 'styled-components'
 
 function VerbDescriptionFn<T extends object | void>({
 	step,

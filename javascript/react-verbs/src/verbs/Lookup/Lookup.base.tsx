@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { LookupArgs } from '@data-wrangling-components/core'
+import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
@@ -13,7 +14,6 @@ import {
 	inputColumnList,
 	joinInputs,
 } from '../../common/VerbFormFactories.js'
-import type { StepComponentBaseProps } from '@data-wrangling-components/react-types'
 
 /**
  * Provides inputs for a Lookup step.

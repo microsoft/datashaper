@@ -4,7 +4,12 @@
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
 import { ColumnValueDropdown } from '@data-wrangling-components/react-controls'
-import { useColumnValueOptions } from '@data-wrangling-components/react-hooks'
+import { withLoadedTable } from '@data-wrangling-components/react-hocs'
+import {
+	useColumnType,
+	useColumnValueOptions,
+} from '@data-wrangling-components/react-hooks'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import type { DataType, Value } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
@@ -13,9 +18,6 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { useColumnType } from '@data-wrangling-components/react-hooks'
-import { withLoadedTable } from '@data-wrangling-components/react-hocs'
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import {
 	useColumnValues,
 	useDisabled,

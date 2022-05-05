@@ -7,34 +7,31 @@ export {
 	createDefaultHeaderCommandBar,
 	createLazyLoadingGroupHeader,
 } from './component-factories.js'
-export { useGraphManager } from './hooks.js'
+export { useGraphManager } from './hooks/index.js'
 
 // Exported Components
-export { CommandBar } from './CommandBar/index.js'
-export { Dropzone } from './Dropzone/index.js'
-export { Guidance, Tooltip } from './Guidance/index.js'
-export {
-	PreviewTable,
-	PrepareDataFull,
-	TablesList,
-} from './PrepareData/index.js'
-export { ProjectMgmtCommandBar } from './ProjectMgmtCommandBar/index.js'
-export type { ProjectMgmtCommandBarProps } from './ProjectMgmtCommandBar/index.js'
-export {
-	ManageWorkflow,
-	StepCard,
-	StepComponent,
-	StepSelector,
-	StepsList,
-} from './Workflow/index.js'
-export type { StepSelectorProps } from './Workflow/index.js'
-export { TableTransformModal } from './TableTransformModal/index.js'
-export type { TransformModalProps } from './types.js'
+export { CommandBar } from './components/CommandBar.js'
+export { Dropzone } from './components/Dropzone.js'
+export { Guidance } from './components/Guidance.js'
+export { ManageWorkflow } from './components/ManageWorkflow.js'
+export { PrepareDataFull } from './components/PrepareDataFull.js'
+export { PreviewTable } from './components/PreviewTable.js'
+export type { ProjectMgmtCommandBarProps } from './components/ProjectMgmtCommandBar.js'
+export { ProjectMgmtCommandBar } from './components/ProjectMgmtCommandBar.js'
+export { StepCard } from './components/StepCard.js'
+export { StepComponent } from './components/StepComponent.js'
+export type { StepSelectorProps } from './components/StepSelector.js'
+export { StepSelector } from './components/StepSelector.js'
+export { StepsList } from './components/StepsList.js'
+export { TableList } from './components/TableList.js'
+export { TableTransformModal } from './components/TableTransformModal.js'
+export type { TransformModalProps } from './components/TableTransformModal.types.js'
+export { Tooltip } from './components/Tooltip.js'
 
 /*
  * Re-export react libraries
  */
 export * from '@data-wrangling-components/react-controls'
 export * from '@data-wrangling-components/react-hocs'
-export * from '@data-wrangling-components/react-verbs'
 export * from '@data-wrangling-components/react-types'
+export * from '@data-wrangling-components/react-verbs'

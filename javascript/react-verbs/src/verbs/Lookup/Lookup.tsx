@@ -4,14 +4,14 @@
  */
 import type { LookupArgs } from '@data-wrangling-components/core'
 import {
+	useLoadTable,
 	useTableColumnNames,
 	useTableNames,
 } from '@data-wrangling-components/react-hooks'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 
-import { useLoadTable } from '@data-wrangling-components/react-hooks'
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { LookupBase } from './Lookup.base.js'
 
 /**

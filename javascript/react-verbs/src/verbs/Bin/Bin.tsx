@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { BinArgs } from '@data-wrangling-components/core'
+import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { memo } from 'react'
 
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import { BinBase } from './Bin.base.js'
 
 /**

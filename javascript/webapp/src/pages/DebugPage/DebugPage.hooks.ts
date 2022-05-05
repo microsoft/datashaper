@@ -2,15 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	Workflow,
-	WorkflowObject,
-	Step,
+import type {
 	GraphManager,
 	Maybe,
+	Step,
 	Verb,
+	WorkflowObject,
 } from '@data-wrangling-components/core'
-import { createGraphManager, readStep } from '@data-wrangling-components/core'
+import {
+	createGraphManager,
+	readStep,
+	Workflow,
+} from '@data-wrangling-components/core'
 import { useGraphManager } from '@data-wrangling-components/react'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
@@ -18,7 +21,6 @@ import { container } from '@essex/arquero'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
-import { from } from 'rxjs'
 
 const TABLES = [
 	`data/companies.csv`,
@@ -69,7 +71,7 @@ export function useSteps(store: GraphManager): {
 		[setSteps, graph],
 	)
 
-	const doRunPipeline = useCallback(async () => {
+	const doRunPipeline = useCallback(() => {
 		graph.print()
 		store.print()
 		// todo: what should the "result" be?
@@ -78,7 +80,7 @@ export function useSteps(store: GraphManager): {
 	}, [graph, store, setResult, setOutputs])
 
 	const onLoadPipeline = useCallback(
-		async (spec: WorkflowObject | undefined) => {
+		(spec: WorkflowObject | undefined) => {
 			const workflow = spec ? new Workflow(spec) : undefined
 			graph.reset(workflow)
 
