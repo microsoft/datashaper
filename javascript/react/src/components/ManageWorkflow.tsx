@@ -3,14 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/unbound-method */
-import type { Step, Workflow } from '@data-wrangling-components/core'
+import type { Step } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import { DialogConfirm } from '@essex/themed-components'
 import { memo, useCallback, useState, useMemo, useEffect } from 'react'
-import styled from 'styled-components'
 
 import { useGraphManager } from '../hooks/common.js'
-import type { TransformModalProps } from '../index.js'
 import {
 	useDeleteConfirm,
 	useEditorTarget,
@@ -20,27 +18,10 @@ import {
 	useOnSaveStep,
 	useTransformModalState,
 } from './ManageWorkflow.hooks.js'
-import { StepsList } from './StepsList.js'
+import { StepList } from './StepList.js'
 import { TableTransformModal } from './TableTransformModal.jsx'
-
-interface ManageWorkflowProps extends Omit<TransformModalProps, 'graph'> {
-	/**
-	 * The workflow specification
-	 */
-	workflow?: Workflow
-
-	inputs: TableContainer[]
-
-	/**
-	 * Table selection handler
-	 */
-	onSelect?: (name: string) => void
-
-	/**
-	 * Event handler for when the output tableset changes
-	 */
-	onUpdateOutput: (output: TableContainer[]) => void
-}
+import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
+import { Container } from './ManageWorkflow.styles.js'
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 	function ManageWorkflow({
@@ -108,13 +89,13 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 
 		useEffect(() => {
 			return graph.onChange(() => {
-				onUpdateOutput(graph.toList().filter(t => !!t) as TableContainer[])
+				onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
 			})
 		}, [graph, onUpdateOutput])
 
 		return (
 			<Container>
-				<StepsList
+				<StepList
 					onDeleteClicked={onDeleteClicked}
 					onSelect={onSelect}
 					onEditClicked={onEditClicked}
@@ -152,8 +133,3 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		)
 	},
 )
-
-const Container = styled.div`
-	width: 97%;
-	display: grid;
-`

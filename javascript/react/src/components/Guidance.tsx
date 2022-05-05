@@ -4,15 +4,8 @@
  */
 import { IconButton } from '@fluentui/react'
 import Markdown from 'markdown-to-jsx'
-import React, {
-	memo,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from 'react'
-import styled from 'styled-components'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Container, Icon, ButtonWrapper, icons } from './Guidance.styles.js'
 
 import {
 	useGoBack,
@@ -20,11 +13,7 @@ import {
 	useGuidance,
 	useHandleClick,
 } from './Guidance.hooks.js'
-
-export interface GuidanceProps {
-	name: string
-	index: Record<string, string>
-}
+import type { GuidanceProps } from './Guidance.types.js'
 
 export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 	name = '',
@@ -108,80 +97,13 @@ export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 		<Container ref={markdownContainer}>
 			<ButtonWrapper>
 				{_name.length > 2 ? (
-					<Icon
-						onClick={goBack}
-						iconProps={{ iconName: 'Back' }}
-						aria-label="Emoji"
-					/>
+					<Icon onClick={goBack} iconProps={icons.back} aria-label="Back" />
 				) : null}
 				{_name.length > 1 ? (
-					<Icon
-						onClick={goHome}
-						iconProps={{ iconName: 'Home' }}
-						aria-label="Emoji"
-					/>
+					<Icon onClick={goHome} iconProps={icons.home} aria-label="Home" />
 				) : null}
 			</ButtonWrapper>
 			<Markdown options={options}>{md}</Markdown>
 		</Container>
 	)
 })
-
-const Container = styled.div`
-	position: relative;
-
-	h1 {
-		margin-top: 0;
-		text-transform: uppercase;
-		color: ${({ theme }) => theme.application().lowMidContrast().hex()};
-	}
-
-	h2 {
-		color: ${({ theme }) => theme.application().midContrast().hex()};
-
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-
-		&.active + .details {
-			opacity: 1;
-			height: auto;
-			transform: translateX(0);
-			overflow-x: auto;
-		}
-	}
-
-	table {
-		border-collapse: collapse;
-
-		th {
-			font-weight: bold;
-		}
-
-		td,
-		th {
-			border: 1px solid
-				${({ theme }) => theme.application().lowContrast().hex()};
-			padding: 5px;
-			text-align: center;
-		}
-	}
-
-	.details {
-		opacity: 0;
-		height: 0;
-		transition: transform 0.5s ease-in-out;
-		transform: translateX(100%);
-		overflow-x: hidden;
-	}
-`
-
-const Icon = styled(IconButton as any)`
-	font-size: 2.5rem;
-`
-
-const ButtonWrapper = styled.div`
-	position: absolute;
-	top: 0;
-	right: 0;
-`

@@ -14,3 +14,7 @@ export const ListContainer = styled.div`
 `
 
 export const viewButtonStyles = { root: { padding: '0 4px 0 6px' } }
+
+export const icons = {
+	view: { iconName: 'View' },
+}

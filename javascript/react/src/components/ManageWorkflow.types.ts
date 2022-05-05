@@ -1,0 +1,23 @@
+import type { Workflow } from '@data-wrangling-components/core'
+import type { TableContainer } from '@essex/arquero'
+import type { TransformModalProps } from '../index.js'
+
+export interface ManageWorkflowProps
+	extends Omit<TransformModalProps, 'graph'> {
+	/**
+	 * The workflow specification
+	 */
+	workflow?: Workflow
+
+	inputs: TableContainer[]
+
+	/**
+	 * Table selection handler
+	 */
+	onSelect?: (name: string) => void
+
+	/**
+	 * Event handler for when the output tableset changes
+	 */
+	onUpdateOutput?: (output: TableContainer[]) => void
+}

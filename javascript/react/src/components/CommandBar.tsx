@@ -2,11 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import type { ICommandBarProps } from '@fluentui/react'
 import { CommandBar as CB } from '@fluentui/react'
 import { memo } from 'react'
-import styled from 'styled-components'
 
 import {
 	useColorDefaults,
@@ -16,12 +13,8 @@ import {
 	useHandleOnDataReduce,
 	useOverflowButtonProps,
 } from './CommandBar.hooks.js'
-
-interface CommandBarProps extends ICommandBarProps {
-	height?: string
-	bgColor?: string
-	color?: string
-}
+import type { CommandBarProps } from './CommandBar.types.js'
+import { CommandBarWrapper } from './CommandBar.styles.js'
 
 /**
  * Extends the fluent command bar to override styles and collapsing for our inverted header
@@ -53,12 +46,3 @@ export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 		</CommandBarWrapper>
 	)
 })
-
-const CommandBarWrapper = styled.div<{
-	height?: string
-	bgColor: string
-	color: string
-}>`
-	background-color: ${({ bgColor }) => bgColor};
-	color: ${({ color }) => color || 'inherit'};
-`

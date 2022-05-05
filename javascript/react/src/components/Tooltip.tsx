@@ -2,15 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Callout as FluentCallout, IconButton } from '@fluentui/react'
+import { IconButton } from '@fluentui/react'
 import { useBoolean, useId } from '@fluentui/react-hooks'
-import React, { memo } from 'react'
-import styled from 'styled-components'
+import { memo } from 'react'
 
-import type { GuidanceProps } from './Guidance.jsx'
 import { Guidance } from './Guidance.jsx'
+import type { TooltipProps } from './Tooltip.types.js'
+import { icons, Container, Callout } from './Tooltip.styles.js'
 
-export const Tooltip: React.FC<GuidanceProps> = memo(function Tooltip({
+export const Tooltip: React.FC<TooltipProps> = memo(function Tooltip({
 	name = '',
 	index,
 }) {
@@ -23,7 +23,7 @@ export const Tooltip: React.FC<GuidanceProps> = memo(function Tooltip({
 		<Container>
 			<IconButton
 				id={buttonId}
-				iconProps={{ iconName: 'Info' }}
+				iconProps={icons.info}
 				aria-label="Info Emoji"
 				onClick={toggleIsCalloutVisible}
 			/>
@@ -43,12 +43,3 @@ export const Tooltip: React.FC<GuidanceProps> = memo(function Tooltip({
 		</Container>
 	)
 })
-
-const Container = styled.div``
-
-const Callout = styled(FluentCallout)`
-	.ms-Callout-main {
-		width: 350px;
-		padding: 1.5rem 2rem;
-	}
-`

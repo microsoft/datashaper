@@ -17,7 +17,6 @@ import type { IDetailsColumnProps } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
-import { default as React_2 } from 'react';
 import type { ReactElement } from 'react';
 import type { SaveMetadataFunction } from '@essex/arquero-react';
 import type { Step } from '@data-wrangling-components/core';
@@ -27,11 +26,22 @@ import type { Theme } from '@thematic/core';
 import type { Verb } from '@data-wrangling-components/core';
 import type { Workflow } from '@data-wrangling-components/core';
 
-// Warning: (ae-forgotten-export) The symbol "CommandBarProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "CommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export const CommandBar: React.FC<CommandBarProps>;
+
+// Warning: (ae-missing-release-tag) "CommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CommandBarProps extends ICommandBarProps {
+    // (undocumented)
+    bgColor?: string;
+    // (undocumented)
+    color?: string;
+    // (undocumented)
+    height?: string;
+}
 
 // Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -48,51 +58,110 @@ export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarP
 // @public (undocumented)
 export function createLazyLoadingGroupHeader(props: IDetailsGroupDividerProps | undefined, children: any, columnName?: string, columnMetadata?: ColumnMetadata | undefined): ReactElement<any, any> | null;
 
-// Warning: (ae-forgotten-export) The symbol "DropzoneProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Dropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>>;
 
-// Warning: (ae-forgotten-export) The symbol "GuidanceProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "DropzoneProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DropzoneProps {
+    // (undocumented)
+    acceptedFileTypes: string[];
+    // (undocumented)
+    disabled?: boolean;
+    // (undocumented)
+    dropzoneOptions?: Omit<DropzoneOptions, 'onDrop' | 'onDropRejected' | 'onDropAccepted'>;
+    // (undocumented)
+    onDrop?: (collection: FileCollection) => void;
+    // (undocumented)
+    onDropAccepted?: (collection: FileCollection) => void;
+    // (undocumented)
+    onDropRejected?: (message: string, files?: FileRejection[]) => void;
+    // (undocumented)
+    placeholder?: string;
+    // (undocumented)
+    showPlaceholder?: boolean;
+    // Warning: (ae-forgotten-export) The symbol "DropzoneStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    styles?: DropzoneStyles;
+}
+
 // Warning: (ae-missing-release-tag) "Guidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const Guidance: React_2.FC<GuidanceProps>;
+export const Guidance: React.FC<GuidanceProps>;
 
-// Warning: (ae-forgotten-export) The symbol "ManageWorkflowProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "GuidanceProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GuidanceProps {
+    // (undocumented)
+    index: Record<string, string>;
+    // (undocumented)
+    name: string;
+}
+
 // Warning: (ae-missing-release-tag) "ManageWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const ManageWorkflow: React.FC<ManageWorkflowProps>;
 
+// Warning: (ae-missing-release-tag) "ManageWorkflowProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ManageWorkflowProps extends Omit<TransformModalProps, 'graph'> {
+    // (undocumented)
+    inputs: TableContainer[];
+    onSelect?: (name: string) => void;
+    onUpdateOutput?: (output: TableContainer[]) => void;
+    workflow?: Workflow;
+}
+
 // Warning: (ae-missing-release-tag) "PrepareDataFull" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const PrepareDataFull: React.FC<{
-    inputs: TableContainer[];
+export const PrepareDataFull: React.FC<PrepareDataFullProps>;
+
+// Warning: (ae-missing-release-tag) "PrepareDataFullProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface PrepareDataFullProps {
     derived: TableContainer[];
-    workflow: Workflow;
+    inputs: TableContainer[];
     onUpdateOutput?: (tables: TableContainer[]) => void;
     outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[];
     stepsPosition?: 'bottom' | 'middle';
-}>;
+    workflow: Workflow;
+}
 
 // Warning: (ae-missing-release-tag) "PreviewTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const PreviewTable: React.FC<{
-    table?: ColumnTable;
-    name?: string;
-    metadata?: TableMetadata;
+export const PreviewTable: React.FC<PreviewTableProps>;
+
+// Warning: (ae-missing-release-tag) "PreviewTableProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface PreviewTableProps {
+    // (undocumented)
     headerCommandBar?: IRenderFunction<IDetailsColumnProps>[];
+    // (undocumented)
+    metadata?: TableMetadata;
+    // (undocumented)
+    name?: string;
+    // (undocumented)
     onChangeMetadata?: SaveMetadataFunction;
-}>;
+    // (undocumented)
+    table?: ColumnTable;
+}
 
 // Warning: (ae-missing-release-tag) "ProjectMgmtCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const ProjectMgmtCommandBar: React_2.FC<ProjectMgmtCommandBarProps>;
+export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps>;
 
 // Warning: (ae-missing-release-tag) "ProjectMgmtCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -108,20 +177,54 @@ export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'item
 // Warning: (ae-missing-release-tag) "StepCard" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const StepCard: React.FC<{
-    step: Step;
-    index: number;
-    onEdit?: (step: Step, index: number) => void;
-    onDelete?: (index: number) => void;
-    onDuplicate?: (step: Step) => void;
-    onSelect?: (name: string) => void;
-}>;
+export const StepCard: React.FC<StepCardProps>;
 
-// Warning: (ae-forgotten-export) The symbol "StepComponentProps" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "StepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StepCardProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export const StepComponent: React.FC<StepComponentProps>;
+// @public (undocumented)
+export interface StepCardProps {
+    // (undocumented)
+    index: number;
+    // (undocumented)
+    onDelete?: (index: number) => void;
+    // (undocumented)
+    onDuplicate?: (step: Step) => void;
+    // (undocumented)
+    onEdit?: (step: Step, index: number) => void;
+    // (undocumented)
+    onSelect?: (name: string) => void;
+    // (undocumented)
+    output: string | undefined;
+    // (undocumented)
+    step: Step;
+}
+
+// Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const StepList: React.FC<StepListProps>;
+
+// Warning: (ae-missing-release-tag) "StepListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepListProps {
+    // (undocumented)
+    buttonId?: string | undefined;
+    // (undocumented)
+    onDeleteClicked?: (index: number) => void;
+    // (undocumented)
+    onDuplicateClicked?: (step: Step) => void;
+    // (undocumented)
+    onEditClicked?: (step: Step, index: number) => void;
+    // (undocumented)
+    onSelect?: (name: string) => void;
+    // (undocumented)
+    onStartNewStep?: () => void;
+    // (undocumented)
+    outputs: Array<string | undefined>;
+    // (undocumented)
+    steps: Step[];
+}
 
 // Warning: (ae-missing-release-tag) "StepSelector" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -142,27 +245,22 @@ export interface StepSelectorProps {
     verb?: Verb;
 }
 
-// Warning: (ae-missing-release-tag) "StepsList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const StepsList: React.FC<{
-    steps: Step[];
-    buttonId?: string | undefined;
-    onDeleteClicked?: (index: number) => void;
-    onEditClicked?: (step: Step, index: number) => void;
-    onDuplicateClicked?: (step: Step) => void;
-    onSelect?: (name: string) => void;
-    onStartNewStep?: () => void;
-}>;
-
 // Warning: (ae-missing-release-tag) "TableList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const TableList: React.FC<{
-    tables: TableContainer[];
+export const TableList: React.FC<TableListProps>;
+
+// Warning: (ae-missing-release-tag) "TableListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TableListProps {
+    // (undocumented)
     onSelect?: (name: string) => void;
+    // (undocumented)
     selected?: string;
-}>;
+    // (undocumented)
+    tables: TableContainer[];
+}
 
 // Warning: (ae-missing-release-tag) "TableTransformModal" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -172,7 +270,12 @@ export const TableTransformModal: React.FC<TransformModalProps>;
 // Warning: (ae-missing-release-tag) "Tooltip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const Tooltip: React_2.FC<GuidanceProps>;
+export const Tooltip: React.FC<TooltipProps>;
+
+// Warning: (ae-missing-release-tag) "TooltipProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TooltipProps = GuidanceProps;
 
 // Warning: (ae-missing-release-tag) "TransformModalProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -183,7 +286,7 @@ export interface TransformModalProps extends IModalProps {
     hideInput?: boolean;
     hideOutput?: boolean;
     nextInputTable?: string;
-    onTransformRequested?: (step: Step, index?: number) => void;
+    onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
     step?: Step;
     table?: ColumnTable;
     // (undocumented)

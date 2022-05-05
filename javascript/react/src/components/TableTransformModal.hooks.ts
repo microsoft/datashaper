@@ -21,11 +21,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useCreateTableName, useFormattedColumnArg } from '../hooks/index.js'
 
-/*!
- * Copyright (c) Microsoft. All rights reserved.
- * Licensed under the MIT license. See LICENSE file in the project.
- */
-
 export function useHandleSaveClick(
 	step: Step | undefined,
 	output: string | undefined,

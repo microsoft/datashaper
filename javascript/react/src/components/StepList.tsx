@@ -2,24 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
 import { DefaultButton } from '@fluentui/react'
 import { memo, useEffect, useRef } from 'react'
-import styled from 'styled-components'
 
-import { DetailText } from '../components/DetailText.js'
+import { DetailText } from './DetailText.jsx'
 import { StepCard } from '../index.js'
+import type { StepListProps } from './StepList.types.js'
+import {
+	addButtonStyles,
+	icons,
+	Container,
+	ButtonContainer,
+} from './StepList.styles.js'
 
-export const StepsList: React.FC<{
-	steps: Step[]
-	outputs: Array<string | undefined>
-	buttonId?: string | undefined
-	onDeleteClicked?: (index: number) => void
-	onEditClicked?: (step: Step, index: number) => void
-	onDuplicateClicked?: (step: Step) => void
-	onSelect?: (name: string) => void
-	onStartNewStep?: () => void
-}> = memo(function StepsList({
+export const StepList: React.FC<StepListProps> = memo(function StepsList({
 	steps,
 	outputs,
 	onDeleteClicked,
@@ -30,7 +26,6 @@ export const StepsList: React.FC<{
 	buttonId,
 }) {
 	const ref = useRef<HTMLDivElement>(null)
-
 	useEffect(() => {
 		const f = () => {
 			ref?.current?.scrollIntoView(false)
@@ -59,7 +54,7 @@ export const StepsList: React.FC<{
 				<ButtonContainer ref={ref}>
 					<DefaultButton
 						styles={addButtonStyles}
-						iconProps={iconProps.add}
+						iconProps={icons.add}
 						onClick={onStartNewStep}
 						id={buttonId}
 					>
@@ -73,23 +68,3 @@ export const StepsList: React.FC<{
 		</Container>
 	)
 })
-
-const addButtonStyles = {
-	root: { padding: '0 4px 0 6px', whiteSpace: 'nowrap' },
-}
-
-const iconProps = {
-	add: { iconName: 'Add' },
-}
-
-const Container = styled.div`
-	display: flex;
-	overflow: auto;
-	column-gap: 12px;
-`
-
-const ButtonContainer = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 18px;
-`

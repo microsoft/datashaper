@@ -2,23 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
 import { selectStepDescription } from '@data-wrangling-components/react-verbs'
-import { DocumentCard, DocumentCardActions } from '@fluentui/react'
+import { DocumentCardActions } from '@fluentui/react'
 import { memo, useMemo } from 'react'
-import styled from 'styled-components'
 
 import { useStepActions } from './StepCard.hooks.js'
+import type { StepCardProps } from './StepCard.types.js'
+import { styles, CardContent, Card } from './StepCard.styles.js'
 
-export const StepCard: React.FC<{
-	step: Step
-	index: number
-	output: string | undefined
-	onEdit?: (step: Step, index: number) => void
-	onDelete?: (index: number) => void
-	onDuplicate?: (step: Step) => void
-	onSelect?: (name: string) => void
-}> = memo(function StepCard({
+export const StepCard: React.FC<StepCardProps> = memo(function StepCard({
 	step,
 	index,
 	output,
@@ -56,23 +48,3 @@ export const StepCard: React.FC<{
 		</Card>
 	)
 })
-
-const styles = {
-	card: {
-		root: {
-			minWidth: 'unset',
-		},
-	},
-	actions: { root: { padding: 'unset' } },
-}
-
-const CardContent = styled.div`
-	padding: 8px;
-`
-
-const Card = styled(DocumentCard)`
-	min-width: fit-content;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-`

@@ -6,22 +6,19 @@ import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 
 import { useDropzone } from './Dropzone.hooks.js'
-import type { DropzoneProps, DropzoneStyles } from './Dropzone.types.js'
+import type { DropzoneProps } from './Dropzone.types.js'
+import { DEFAULT_STYLES, staticStyles } from './Dropzone.styles.js'
 
-const DEFAULT_STYLES: DropzoneStyles = Object.freeze({
-	container: {},
-	dragReject: {},
-	placeholder: {},
-	dragZone: {},
-})
+const DEFAULT_ACCEPTED_FILE_TYPES: string[] = []
+const DEFAULT_DROPZONE_OPTIONS: DropzoneProps['dropzoneOptions'] = {}
 
 export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 	function Dropzone({
 		onDrop,
 		onDropRejected,
 		onDropAccepted,
-		acceptedFileTypes = [],
-		dropzoneOptions = {},
+		acceptedFileTypes = DEFAULT_ACCEPTED_FILE_TYPES,
+		dropzoneOptions = DEFAULT_DROPZONE_OPTIONS,
 		placeholder,
 		showPlaceholder = true,
 		styles = DEFAULT_STYLES,
@@ -76,7 +73,7 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 		)
 		const placeholderStyles: React.CSSProperties = useMemo(
 			() => ({
-				fontSize: '14px',
+				...staticStyles.placeholder,
 				...styles.placeholder,
 			}),
 			[styles],
@@ -102,34 +99,3 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 		)
 	},
 )
-
-const staticStyles = {
-	container: {
-		borderWidth: '1px',
-		borderStyle: 'dashed',
-		borderRadius: '5px',
-		width: '100%',
-		height: '100%',
-		margin: '1rem auto',
-		cursor: 'pointer',
-		fontSize: '1.5rem',
-	} as React.CSSProperties,
-	dragZone: {
-		position: 'relative',
-		width: '100%',
-		height: '100%',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	} as React.CSSProperties,
-	dragReject: {
-		position: 'absolute',
-		width: '90%',
-		height: '90%',
-		opacity: 0.5,
-		padding: '5px',
-		borderRadius: '5px',
-		textAlign: 'center',
-		fontSize: '12px',
-	} as React.CSSProperties,
-}

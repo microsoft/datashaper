@@ -2,19 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@essex/arquero'
 import { memo } from 'react'
-import styled from 'styled-components'
 
 import { DetailText } from './DetailText.jsx'
 import { TableCard } from './TableCard.jsx'
 import { useIsTableSelected } from './TableList.hooks.js'
+import type { TableListProps } from './TableList.types.js'
+import { ListContainer } from './TableListBar.styles.js'
 
-export const TableList: React.FC<{
-	tables: TableContainer[]
-	onSelect?: (name: string) => void
-	selected?: string
-}> = memo(function TablesList({ tables, onSelect, selected }) {
+export const TableList: React.FC<TableListProps> = memo(function TablesList({
+	tables,
+	onSelect,
+	selected,
+}) {
 	const isSelected = useIsTableSelected(selected)
 
 	return (
@@ -34,12 +34,3 @@ export const TableList: React.FC<{
 		</ListContainer>
 	)
 })
-
-const ListContainer = styled.div`
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	overflow-y: auto;
-	width: 100%;
-	row-gap: 6px;
-`

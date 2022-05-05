@@ -12,7 +12,6 @@ import {
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo } from 'react'
-import styled from 'styled-components'
 
 import { Guidance } from './Guidance.js'
 import { StepSelector } from './StepSelector.js'
@@ -24,6 +23,16 @@ import {
 	useStepOutputHandling,
 } from './TableTransformModal.hooks.js'
 import type { TransformModalProps } from './TableTransformModal.types.js'
+import {
+	icons,
+	ContainerBody,
+	ButtonContainer,
+	GuidanceContainer,
+	Header,
+	StepComponentContainer,
+	StepSelectorContainer,
+	Title,
+} from './TableTransformModal.styles.js'
 
 export const TableTransformModal: React.FC<TransformModalProps> = memo(
 	function TableTransformModal({
@@ -111,53 +120,3 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		)
 	},
 )
-
-const icons = {
-	cancel: { iconName: 'Cancel' },
-	info: { iconName: 'Info' },
-}
-
-const MAX_HEIGHT = 700
-
-const ContainerBody = styled.div<{ showGuidance: boolean }>`
-	padding: 0px 12px 14px 24px;
-	display: flex;
-	justify-content: flex-start;
-	gap: 12px;
-`
-
-const Header = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	background: ${({ theme }) => theme.application().faint().hex()};
-	margin-bottom: 12px;
-`
-
-const Title = styled.h3`
-	padding-left: 12px;
-	margin: 8px 0 8px 0;
-`
-
-const StepComponentContainer = styled.div`
-	width: 316px;
-	max-height: ${MAX_HEIGHT}px;
-	overflow: hidden auto;
-`
-
-const StepSelectorContainer = styled.div`
-	margin-bottom: 8px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`
-
-const ButtonContainer = styled.div`
-	margin-top: 8px;
-`
-
-const GuidanceContainer = styled.div`
-	width: 400px;
-	max-height: ${MAX_HEIGHT - 20}px;
-	overflow: hidden auto;
-`
