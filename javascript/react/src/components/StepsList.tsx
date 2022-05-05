@@ -12,6 +12,7 @@ import { StepCard } from '../index.js'
 
 export const StepsList: React.FC<{
 	steps: Step[]
+	outputs: Array<string | undefined>
 	buttonId?: string | undefined
 	onDeleteClicked?: (index: number) => void
 	onEditClicked?: (step: Step, index: number) => void
@@ -20,6 +21,7 @@ export const StepsList: React.FC<{
 	onStartNewStep?: () => void
 }> = memo(function StepsList({
 	steps,
+	outputs,
 	onDeleteClicked,
 	onEditClicked,
 	onDuplicateClicked,
@@ -38,15 +40,16 @@ export const StepsList: React.FC<{
 
 	return (
 		<Container>
-			{steps.map((_step, index) => {
+			{steps.map((step, index) => {
 				return (
 					<StepCard
+						output={outputs[index]}
 						onDelete={onDeleteClicked}
 						onEdit={onEditClicked}
 						onDuplicate={onDuplicateClicked}
 						onSelect={onSelect}
 						key={index}
-						step={_step}
+						step={step}
 						index={index}
 					/>
 				)

@@ -6,7 +6,7 @@
 import type { Step, Workflow } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import { DialogConfirm } from '@essex/themed-components'
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useState, useMemo, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { useGraphManager } from '../hooks/common.js'
@@ -35,10 +35,22 @@ interface ManageWorkflowProps extends Omit<TransformModalProps, 'graph'> {
 	 * Table selection handler
 	 */
 	onSelect?: (name: string) => void
+
+	/**
+	 * Event handler for when the output tableset changes
+	 */
+	onUpdateOutput: (output: TableContainer[]) => void
 }
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
-	function ManageWorkflow({ workflow, inputs, table, onSelect, ...props }) {
+	function ManageWorkflow({
+		workflow,
+		inputs,
+		table,
+		onSelect,
+		onUpdateOutput,
+		...props
+	}) {
 		const graph = useGraphManager(inputs)
 
 		//
@@ -73,14 +85,33 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			showTransformModal,
 		)
 		const onCreate = useCallback(
-			(step: Step) => {
-				onSave(step, selectedStepIndex)
+			(step: Step, output: string | undefined) => {
+				onSave(step, output, selectedStepIndex)
 				onDismissTransformModal()
 			},
 			[onSave, onDismissTransformModal, selectedStepIndex],
 		)
 		const onDuplicateClicked = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(selectedStepIndex)
+
+		// create a parallel array of output names for the steps
+		const outputs = useMemo(
+			() =>
+				graph.steps
+					.map(s => s.id)
+					.map(id => {
+						const output = graph.outputDefinitions.find(def => def.node === id)
+						return output?.name
+					}),
+			[graph.steps],
+		)
+
+		useEffect(() => {
+			return graph.onChange(() => {
+				onUpdateOutput(graph.toList().filter(t => !!t) as TableContainer[])
+			})
+		}, [graph, onUpdateOutput])
+
 		return (
 			<Container>
 				<StepsList
@@ -88,6 +119,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 					onSelect={onSelect}
 					onEditClicked={onEditClicked}
 					steps={graph.steps}
+					outputs={outputs}
 					onDuplicateClicked={onDuplicateClicked}
 					onStartNewStep={showTransformModal}
 					buttonId={addStepButtonId}

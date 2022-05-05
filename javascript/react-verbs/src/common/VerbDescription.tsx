@@ -15,6 +15,7 @@ import styled from 'styled-components'
 function VerbDescriptionFn<T extends object | void>({
 	step,
 	rows,
+	output,
 	showInput,
 	showOutput,
 	showOutputColumn,
@@ -60,7 +61,7 @@ function VerbDescriptionFn<T extends object | void>({
 				<Row>
 					<KeyValue>
 						<Key>into table</Key>
-						{!step.id ? <Unset /> : <Value>{step.id}</Value>}
+						{!output ? <Unset /> : <Value>{output}</Value>}
 					</KeyValue>
 				</Row>
 			) : null}

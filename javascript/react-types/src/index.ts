@@ -8,6 +8,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 export type StepChangeFunction<T extends object | void | unknown = unknown> = (
 	step: Step<T>,
 ) => void
+
 export interface StepDependent<T extends object | void | unknown = unknown> {
 	step: Step<T>
 }
@@ -49,6 +50,9 @@ export interface StepDescriptionProps<
 	showOutput?: boolean
 	showOutputColumn?: boolean
 	actions?: JSX.Element
+
+	/** The output table name */
+	output: string | undefined
 }
 /**
  * For reusable subcomponents that are combined in one interface
@@ -88,8 +92,20 @@ export interface StepComponentProps<T extends object | void | unknown = unknown>
 	 * but the input to the actual step is an intermediate table.
 	 */
 	input?: string
+
+	/**
+	 * The optional output table name; this information isn't stored on the step, so it has to
+	 * be injected separately
+	 */
+	output: string | undefined
+
 	/**
 	 * Optional override for the label
 	 */
 	label?: string
+
+	/**
+	 * Event handler for when the output table name changes
+	 */
+	onChangeOutput: (value: string | undefined) => void
 }

@@ -17,10 +17,11 @@ import styled from 'styled-components'
 import { Guidance } from './Guidance.js'
 import { StepSelector } from './StepSelector.js'
 import {
-	useHandleTableRunClick,
-	useHandleTableStepArgs,
+	useHandleSaveClick,
+	useStepArgsComponent,
 	useInternalTableStep,
 	useModalStyles,
+	useStepOutputHandling,
 } from './TableTransformModal.hooks.js'
 import type { TransformModalProps } from './TableTransformModal.types.js'
 
@@ -42,15 +43,15 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 			graph as GraphManager,
 		)
 
-		const StepArgs = useHandleTableStepArgs(internal, !!step)
-
-		const handleRunClick = useHandleTableRunClick(
+		const StepArgs = useStepArgsComponent(internal, !!step)
+		const adaptedStyles = useModalStyles(styles, isGuidanceVisible)
+		const { output, onOutputChanged } = useStepOutputHandling(graph, step)
+		const handleSaveClick = useHandleSaveClick(
 			internal,
+			output,
 			onTransformRequested,
 		)
-		console.log('STEP', internal, step)
 
-		const adaptedStyles = useModalStyles(styles, isGuidanceVisible)
 		return (
 			<Callout
 				onDismissed={() => setInternal(undefined)}
@@ -90,10 +91,12 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 								<StepArgs
 									step={internal}
 									graph={graph}
+									output={output}
+									onChangeOutput={onOutputChanged}
 									onChange={setInternal}
 								/>
 								<ButtonContainer>
-									<PrimaryButton onClick={handleRunClick}>Save</PrimaryButton>
+									<PrimaryButton onClick={handleSaveClick}>Save</PrimaryButton>
 								</ButtonContainer>
 							</>
 						)}

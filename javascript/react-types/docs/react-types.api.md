@@ -40,6 +40,8 @@ export interface StepComponentProps<T extends object | void | unknown = unknown>
     graph?: GraphManager;
     input?: string;
     label?: string;
+    onChangeOutput: (value: string | undefined) => void;
+    output: string | undefined;
     table?: ColumnTable;
 }
 

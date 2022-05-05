@@ -26,18 +26,19 @@ import { useCreateTableName, useFormattedColumnArg } from '../hooks/index.js'
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export function useHandleTableRunClick(
+export function useHandleSaveClick(
 	step: Step | undefined,
-	onTransformRequested?: (step: Step) => void,
+	output: string | undefined,
+	onTransformRequested?: (step: Step, outputName: string | undefined) => void,
 ): () => void {
 	return useCallback(() => {
 		if (step) {
-			onTransformRequested?.(step)
+			onTransformRequested?.(step, output)
 		}
-	}, [onTransformRequested, step])
+	}, [onTransformRequested, step, output])
 }
 
-export function useHandleTableStepArgs(
+export function useStepArgsComponent(
 	step: Step | undefined,
 	disabled?: boolean,
 ): React.FC<StepComponentProps> | undefined {
@@ -45,17 +46,10 @@ export function useHandleTableStepArgs(
 		() => (step ? selectStepComponent(step) : null),
 		[step],
 	)
-
 	const WithAllArgs = useMemo(() => {
 		if (Component) {
 			return flow(
-				withOutputTableTextfield(
-					output => {
-						console.log('ADD OUTPUT', output)
-					},
-					undefined,
-					disabled,
-				),
+				withOutputTableTextfield(undefined, disabled),
 				withOutputColumnTextfield(),
 				withInputColumnDropdown(),
 				withInputTableDropdown(),
@@ -120,4 +114,32 @@ export function useModalStyles(
 			styles,
 		)
 	}, [theme, styles, includeGuidance])
+}
+
+export function useStepOutputHandling(
+	graph: GraphManager,
+	step: Step | undefined,
+): {
+	output: string | undefined
+	onOutputChanged: (name: string | undefined) => void
+} {
+	const [output, setOutput] = useState<string>()
+
+	const stepOutput = graph.outputDefinitions.find(t => t.node === step?.id)
+	useEffect(
+		function useExistingOutputName() {
+			if (stepOutput?.name) {
+				setOutput(stepOutput.name)
+			}
+		},
+		[stepOutput],
+	)
+
+	return useMemo(
+		() => ({
+			output,
+			onOutputChanged: setOutput,
+		}),
+		[output, setOutput],
+	)
 }

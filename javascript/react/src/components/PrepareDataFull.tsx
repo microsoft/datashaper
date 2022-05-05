@@ -31,11 +31,6 @@ export const PrepareDataFull: React.FC<{
 	workflow: Workflow
 
 	/**
-	 * Handler for when the output table map changeus
-	 */
-	onUpdateOutput?: (tables: TableContainer[]) => void
-
-	/**
 	 * An optional command bar
 	 */
 	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
@@ -44,12 +39,18 @@ export const PrepareDataFull: React.FC<{
 	 * Step positioning option
 	 */
 	stepsPosition?: 'bottom' | 'middle'
+
+	/**
+	 * Handler for when the output table map changes
+	 */
+	onUpdateOutput?: (tables: TableContainer[]) => void
 }> = memo(function PrepareDataFull({
 	inputs,
 	derived,
 	workflow,
 	outputHeaderCommandBar,
 	stepsPosition = 'bottom',
+	onUpdateOutput,
 }) {
 	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 	const [selectedTableId, setSelectedTableName] = useState<string | undefined>()
@@ -91,6 +92,7 @@ export const PrepareDataFull: React.FC<{
 						inputs={inputs}
 						workflow={workflow}
 						onSelect={setSelectedTableName}
+						onUpdateOutput={onUpdateOutput}
 					/>
 				</WorkflowContainer>
 			</StepsTrayContainer>

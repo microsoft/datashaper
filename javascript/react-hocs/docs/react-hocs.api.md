@@ -8,7 +8,6 @@
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { InputColumnArgs } from '@data-wrangling-components/core';
-import type { NamedOutputPortBinding } from '@data-wrangling-components/core';
 import type { OutputColumnArgs } from '@data-wrangling-components/core';
 import type { StepComponentProps } from '@data-wrangling-components/react-types';
 
@@ -42,7 +41,7 @@ export function withOutputColumnTextfield<T extends OutputColumnArgs>(label?: st
 // Warning: (ae-missing-release-tag) "withOutputTableTextfield" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const withOutputTableTextfield: (onOutputChanged: (output: NamedOutputPortBinding) => void, label?: string | undefined, disabled?: boolean | undefined) => HOCFunction<StepComponentProps>;
+export function withOutputTableTextfield(label?: string, disabled?: boolean): HOCFunction<StepComponentProps>;
 
 // (No @packageDocumentation comment for this package)
 

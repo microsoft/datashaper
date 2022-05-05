@@ -13,6 +13,7 @@ import { useStepActions } from './StepCard.hooks.js'
 export const StepCard: React.FC<{
 	step: Step
 	index: number
+	output: string | undefined
 	onEdit?: (step: Step, index: number) => void
 	onDelete?: (index: number) => void
 	onDuplicate?: (step: Step) => void
@@ -20,6 +21,7 @@ export const StepCard: React.FC<{
 }> = memo(function StepCard({
 	step,
 	index,
+	output,
 	onEdit,
 	onDelete,
 	onDuplicate,
@@ -38,7 +40,13 @@ export const StepCard: React.FC<{
 	return (
 		<Card styles={styles.card}>
 			<CardContent>
-				<Description step={step} showInput showOutput showOutputColumn />
+				<Description
+					step={step}
+					output={output}
+					showInput
+					showOutput
+					showOutputColumn
+				/>
 			</CardContent>
 			<DocumentCardActions
 				className={`step-card-${index}`}

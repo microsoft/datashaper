@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { NamedOutputPortBinding } from '@data-wrangling-components/core'
 import { dropdownStyles } from '@data-wrangling-components/react-controls'
 import { useTextFieldChangeHandler } from '@data-wrangling-components/react-hooks'
 import { LeftAlignedRow } from '@data-wrangling-components/react-styled-components'
@@ -18,17 +17,16 @@ import type { HOCFunction } from './types.js'
  * @param label - optional label to use for the textfield instead of the default.
  * @returns
  */
-export const withOutputTableTextfield = (
-	onOutputChanged: (output: NamedOutputPortBinding) => void,
+export function withOutputTableTextfield(
 	label?: string,
 	disabled?: boolean,
-): HOCFunction<StepComponentProps> => {
+): HOCFunction<StepComponentProps> {
 	return Component => {
 		const WithOutputTableTextfield: React.FC<StepComponentProps> = props => {
-			const { step, onChange } = props
+			const { step, onChange, onChangeOutput, output } = props
 			const handleOutputChange = useTextFieldChangeHandler(
 				step,
-				(_s, val) => onOutputChanged({ name: val as string, node: step.id }),
+				(_s, val) => onChangeOutput(val as string),
 				onChange,
 			)
 
@@ -41,7 +39,7 @@ export const withOutputTableTextfield = (
 							disabled={disabled}
 							label={label || 'Output table'}
 							placeholder={'Table name'}
-							value={step.id}
+							value={output ?? step.id}
 							styles={dropdownStyles}
 							onChange={handleOutputChange}
 						/>

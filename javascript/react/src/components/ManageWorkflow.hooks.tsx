@@ -18,26 +18,26 @@ import { useCallback, useEffect, useState } from 'react'
 export function useOnDuplicateStep(
 	graph: GraphManager,
 	table?: ColumnTable,
-	onSave?: (step: Step, index?: number) => void,
+	onSave?: (step: Step, ioutput: string | undefined, ndex?: number) => void,
 ): (_step: Step) => void {
 	//const createTableName = useCreateTableName(graph)
 	const formattedColumnArgs = useFormattedColumnArgWithCount()
 
 	return useCallback(
-		(_step: Step) => {
+		(step: Step) => {
 			// const _tableName = createTableName(_step.id)
 
-			const outputTable = graph ? graph.latest(_step.id)?.table : table
+			const outputTable = graph ? graph.latest(step.id)?.table : table
 			const formattedArgs = formattedColumnArgs(
-				_step,
+				step,
 				outputTable?.columnNames() ?? [],
 			)
 			const newStep = {
-				..._step,
+				...step,
 				args: formattedArgs,
-				inputs: { source: { node: _step.id } },
+				inputs: { source: { node: step.id } },
 			}
-			onSave?.(newStep)
+			onSave?.(newStep, undefined)
 		},
 		[onSave, formattedColumnArgs, graph, table],
 	)
@@ -73,13 +73,31 @@ export function useOnEditStep(
  */
 export function useOnSaveStep(
 	graph: GraphManager,
-): (step: Step, index: number | undefined) => void {
+): (step: Step, output: string | undefined, index: number | undefined) => void {
 	return useCallback(
-		(step: Step, index: number | undefined) => {
-			if (index != null && graph.numSteps > 0 && index < graph.numSteps) {
-				graph.reconfigureStep(index, step)
-			} else {
-				graph.addStep(step)
+		(step: Step, output: string | undefined, index: number | undefined) => {
+			//
+			// If the step index is already present, update the existing step
+			//
+			let isExistingStep =
+				index != null && graph.numSteps > 0 && index < graph.numSteps
+			let stepResult = isExistingStep
+				? graph.reconfigureStep(index as number, step)
+				: graph.addStep(step)
+
+			//
+			// Set or unset the output
+			//
+			const existingOutput = graph.outputDefinitions.find(
+				d => d.node === stepResult.id,
+			)
+			if (output) {
+				graph.addOutput({
+					name: output,
+					node: stepResult.id,
+				})
+			} else if (existingOutput) {
+				graph.removeOutput(existingOutput.name)
 			}
 		},
 		[graph],

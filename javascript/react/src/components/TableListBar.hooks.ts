@@ -32,7 +32,6 @@ export function useTableSelection(
 } {
 	const inputItems = useMenuItems(inputs)
 	const derivedItems = useMenuItems(derived)
-	console.log('ID', inputs, inputItems)
 
 	const items = useMemo(
 		() => [

@@ -326,6 +326,8 @@ export class GraphManager {
     get numSteps(): number;
     onChange(handler: () => void): () => void;
     output(name: string): TableObservable;
+    // (undocumented)
+    get outputDefinitions(): NamedOutputPortBinding[];
     get outputs(): string[];
     print(): void;
     reconfigureStep(index: number, stepInput: StepInput<unknown>): void;

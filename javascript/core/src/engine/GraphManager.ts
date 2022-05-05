@@ -175,7 +175,7 @@ export class GraphManager {
 	 * @param index - The step index
 	 * @param step - The step specification
 	 */
-	public reconfigureStep(index: number, stepInput: StepInput<unknown>): void {
+	public reconfigureStep(index: number, stepInput: StepInput<unknown>): Step {
 		const prevVersion = this._workflow.stepAt(index)!
 		const step = this._workflow.updateStep(stepInput, index)
 		const node = this.getNode(step.id)
@@ -192,6 +192,7 @@ export class GraphManager {
 
 		this._configureStep(step, node)
 		this._onChange.next()
+		return step
 	}
 
 	/**
@@ -242,6 +243,10 @@ export class GraphManager {
 	 */
 	public get outputs(): string[] {
 		return [...this.outputObservables.keys()]
+	}
+
+	public get outputDefinitions(): NamedOutputPortBinding[] {
+		return [...this._workflow.output.values()]
 	}
 
 	/**
