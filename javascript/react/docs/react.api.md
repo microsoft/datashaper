@@ -21,8 +21,6 @@ import { default as React_2 } from 'react';
 import type { ReactElement } from 'react';
 import type { SaveMetadataFunction } from '@essex/arquero-react';
 import type { Step } from '@data-wrangling-components/core';
-import type { StepComponentProps } from '@data-wrangling-components/react-types';
-import type { StepDescriptionProps } from '@data-wrangling-components/react-types';
 import type { TableContainer } from '@essex/arquero';
 import type { TableMetadata } from '@essex/arquero';
 import type { Theme } from '@thematic/core';
@@ -107,16 +105,6 @@ export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'item
     workflow: Workflow;
 }
 
-// Warning: (ae-missing-release-tag) "selectStepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function selectStepComponent(step: Step<unknown>): React.FC<StepComponentProps<unknown>>;
-
-// Warning: (ae-missing-release-tag) "selectStepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function selectStepDescription(step: Step): React.FC<StepDescriptionProps>;
-
 // Warning: (ae-missing-release-tag) "StepCard" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -133,7 +121,7 @@ export const StepCard: React.FC<{
 // Warning: (ae-missing-release-tag) "StepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const StepComponent: React.FC<StepComponentProps_2>;
+export const StepComponent: React.FC<StepComponentProps>;
 
 // Warning: (ae-missing-release-tag) "StepSelector" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

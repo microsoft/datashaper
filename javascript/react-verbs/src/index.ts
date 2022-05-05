@@ -4,3 +4,5 @@
  */
 export * from './common/styles.js'
 export * from './verbs/index.js'
+export * from './selectStepComponent.js'
+export * from './selectStepDescription.js'

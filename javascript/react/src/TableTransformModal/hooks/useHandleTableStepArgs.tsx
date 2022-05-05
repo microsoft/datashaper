@@ -14,7 +14,7 @@ import type { StepComponentProps } from '@data-wrangling-components/react-types'
 import flow from 'lodash-es/flow.js'
 import { useMemo } from 'react'
 
-import { selectStepComponent } from '../../index.js'
+import { selectStepComponent } from '@data-wrangling-components/react-verbs'
 
 export function useHandleTableStepArgs(
 	step: Step | undefined,

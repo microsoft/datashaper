@@ -12,7 +12,10 @@ import flow from 'lodash-es/flow.js'
 import { memo, useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { selectStepComponent, selectStepDescription } from '../../index.js'
+import {
+	selectStepComponent,
+	selectStepDescription,
+} from '@data-wrangling-components/react-verbs'
 
 interface StepComponentProps {
 	step: Step

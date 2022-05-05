@@ -33,7 +33,7 @@ import {
 	Spread,
 	Unfold,
 	Window,
-} from '@data-wrangling-components/react-verbs'
+} from './verbs/index.js'
 
 const verb: Record<string, React.FC<StepComponentProps<any>>> = {
 	aggregate: Aggregate,

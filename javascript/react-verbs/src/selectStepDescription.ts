@@ -33,7 +33,7 @@ import {
 	SpreadDescription,
 	UnfoldDescription,
 	WindowDescription,
-} from '@data-wrangling-components/react-verbs'
+} from './verbs/index.js'
 
 const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
 	aggregate: AggregateDescription,

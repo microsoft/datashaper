@@ -20,8 +20,6 @@ export {
 } from './PrepareData/index.js'
 export { ProjectMgmtCommandBar } from './ProjectMgmtCommandBar/index.js'
 export type { ProjectMgmtCommandBarProps } from './ProjectMgmtCommandBar/index.js'
-export { selectStepComponent } from './selectStepComponent.js'
-export { selectStepDescription } from './selectStepDescription.js'
 export {
 	ManageWorkflow,
 	StepCard,

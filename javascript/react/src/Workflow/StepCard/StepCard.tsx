@@ -7,7 +7,7 @@ import { DocumentCard, DocumentCardActions } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { selectStepDescription } from '../../selectStepDescription.js'
+import { selectStepDescription } from '@data-wrangling-components/react-verbs'
 import { useStepActions } from './StepActions.js'
 
 export const StepCard: React.FC<{
