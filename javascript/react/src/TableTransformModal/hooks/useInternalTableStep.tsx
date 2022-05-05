@@ -6,11 +6,7 @@
 import type { Step, GraphManager, Verb } from '@data-wrangling-components/core'
 import { readStep } from '@data-wrangling-components/core'
 import { useCallback, useEffect, useState } from 'react'
-
-import {
-	useCreateTableName,
-	useFormattedColumnArg,
-} from '../../common/index.js'
+import { useCreateTableName, useFormattedColumnArg } from '../../hooks.js'
 
 export function useInternalTableStep(
 	step: Step | undefined,
@@ -30,16 +26,16 @@ export function useInternalTableStep(
 		}
 	}, [step, setInternal])
 
-	const newTableName = useCreateTableName(graph)
+	const createNewTableName = useCreateTableName(graph)
 
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {
-			const id = newTableName(verb)
+			const id = createNewTableName(verb)
 			const _step = readStep({ verb, id })
 			_step.args = formattedColumnArg(_step.args)
 			setInternal(_step)
 		},
-		[setInternal, formattedColumnArg, newTableName],
+		[setInternal, formattedColumnArg, createNewTableName],
 	)
 
 	return { internal, handleVerbChange, setInternal }

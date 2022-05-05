@@ -40,37 +40,21 @@ export interface TransformModalProps extends IModalProps {
 	nextInputTable?: string
 
 	target?: string
-}
 
-export interface TableTransformModalProps extends TransformModalProps {
 	/**
 	 * Indicates that the input table should be hidden or else shown and editable by the user.
 	 * It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.
 	 */
-	hideInputTable?: boolean
+	hideInput?: boolean
 
 	/**
 	 * Indicates that the output table should be hidden or else shown and editable by the user.
 	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.
 	 */
-	hideOutputTable?: boolean
+	hideOutput?: boolean
 
 	/**
 	 * Table store to verify naming to be created
 	 */
 	graph: GraphManager
-}
-
-export interface ColumnTransformModalProps extends TransformModalProps {
-	/**
-	 * Indicates that the input column should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the modal is launched directly from a column, which would make display redundant.
-	 */
-	hideInputColumn?: boolean
-
-	/**
-	 * Indicates that the output column should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input column.
-	 */
-	hideOutputColumn?: boolean
 }

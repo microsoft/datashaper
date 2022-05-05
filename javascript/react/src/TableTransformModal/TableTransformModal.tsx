@@ -15,7 +15,7 @@ import { memo } from 'react'
 import styled from 'styled-components'
 
 import { Guidance } from '../Guidance/index.js'
-import type { TableTransformModalProps } from '../index.js'
+import type { TransformModalProps } from '../index.js'
 import { StepSelector } from '../index.js'
 import {
 	useHandleTableRunClick,
@@ -24,7 +24,7 @@ import {
 	useModalStyles,
 } from './TableTransformModal.hooks.js'
 
-export const TableTransformModal: React.FC<TableTransformModalProps> = memo(
+export const TableTransformModal: React.FC<TransformModalProps> = memo(
 	function TableTransformModal({
 		onDismiss,
 		graph,

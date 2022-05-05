@@ -6,34 +6,28 @@
 
 /// <reference types="react" />
 
+import type { ColumnMetadata } from '@essex/arquero';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
-import type { Dispatch } from 'react';
-import { DropzoneOptions } from 'react-dropzone';
+import type { DropzoneOptions } from 'react-dropzone';
 import type { FileCollection } from '@data-wrangling-components/utilities';
-import { FileRejection } from 'react-dropzone';
+import type { FileRejection } from 'react-dropzone';
 import type { GraphManager } from '@data-wrangling-components/core';
 import type { ICommandBarProps } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
+import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import { default as React_2 } from 'react';
+import type { ReactElement } from 'react';
 import type { SaveMetadataFunction } from '@essex/arquero-react';
-import type { SetStateAction } from 'react';
 import type { Step } from '@data-wrangling-components/core';
 import type { StepComponentProps } from '@data-wrangling-components/react-types';
 import type { StepDescriptionProps } from '@data-wrangling-components/react-types';
 import type { TableContainer } from '@essex/arquero';
 import type { TableMetadata } from '@essex/arquero';
+import type { Theme } from '@thematic/core';
 import type { Verb } from '@data-wrangling-components/core';
 import type { Workflow } from '@data-wrangling-components/core';
-
-// Warning: (ae-missing-release-tag) "ColumnTransformModalProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnTransformModalProps extends TransformModalProps {
-    hideInputColumn?: boolean;
-    hideOutputColumn?: boolean;
-}
 
 // Warning: (ae-forgotten-export) The symbol "CommandBarProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "CommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -41,52 +35,26 @@ export interface ColumnTransformModalProps extends TransformModalProps {
 // @public
 export const CommandBar: React.FC<CommandBarProps>;
 
+// Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function createDefaultCommandBar({ styles, ...props }: ICommandBarProps): ReactElement<ICommandBarProps, any>;
+
+// Warning: (ae-missing-release-tag) "createDefaultHeaderCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: Theme, far?: boolean): ReactElement<ICommandBarProps, any>;
+
+// Warning: (ae-missing-release-tag) "createLazyLoadingGroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createLazyLoadingGroupHeader(props: IDetailsGroupDividerProps | undefined, children: any, columnName?: string, columnMetadata?: ColumnMetadata | undefined): ReactElement<any, any> | null;
+
+// Warning: (ae-forgotten-export) The symbol "DropzoneProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Dropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>>;
-
-export { DropzoneOptions }
-
-// Warning: (ae-missing-release-tag) "DropzoneProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DropzoneProps {
-    // (undocumented)
-    acceptedFileTypes: string[];
-    // (undocumented)
-    disabled?: boolean;
-    // (undocumented)
-    dropzoneOptions?: Omit<DropzoneOptions, 'onDrop' | 'onDropRejected' | 'onDropAccepted'>;
-    // (undocumented)
-    onDrop?: (collection: FileCollection) => void;
-    // (undocumented)
-    onDropAccepted?: (collection: FileCollection) => void;
-    // (undocumented)
-    onDropRejected?: (message: string, files?: FileRejection[]) => void;
-    // (undocumented)
-    placeholder?: string;
-    // (undocumented)
-    showPlaceholder?: boolean;
-    // (undocumented)
-    styles?: DropzoneStyles;
-}
-
-// Warning: (ae-missing-release-tag) "DropzoneStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DropzoneStyles {
-    // (undocumented)
-    container?: React.CSSProperties;
-    // (undocumented)
-    dragReject?: React.CSSProperties;
-    // (undocumented)
-    dragZone?: React.CSSProperties;
-    // (undocumented)
-    placeholder?: React.CSSProperties;
-}
-
-export { FileRejection }
 
 // Warning: (ae-forgotten-export) The symbol "GuidanceProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Guidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -211,16 +179,7 @@ export const TablesList: React.FC<{
 // Warning: (ae-missing-release-tag) "TableTransformModal" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const TableTransformModal: React.FC<TableTransformModalProps>;
-
-// Warning: (ae-missing-release-tag) "TableTransformModalProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TableTransformModalProps extends TransformModalProps {
-    graph: GraphManager;
-    hideInputTable?: boolean;
-    hideOutputTable?: boolean;
-}
+export const TableTransformModal: React.FC<TransformModalProps>;
 
 // Warning: (ae-missing-release-tag) "Tooltip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -231,7 +190,10 @@ export const Tooltip: React_2.FC<GuidanceProps>;
 //
 // @public (undocumented)
 export interface TransformModalProps extends IModalProps {
+    graph: GraphManager;
     headerText?: string;
+    hideInput?: boolean;
+    hideOutput?: boolean;
     nextInputTable?: string;
     onTransformRequested?: (step: Step, index?: number) => void;
     step?: Step;
@@ -241,26 +203,10 @@ export interface TransformModalProps extends IModalProps {
     verbs?: string[];
 }
 
-// Warning: (ae-forgotten-export) The symbol "NameSetter" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "useGoBack" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useGoBack(setName: NameSetter): () => void;
-
-// Warning: (ae-missing-release-tag) "useGoHome" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useGoHome(name: string, setName: NameSetter): () => void;
-
-// Warning: (ae-missing-release-tag) "useGuidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useGuidance(index: Record<string, string>): (name: string) => string;
-
-// Warning: (ae-missing-release-tag) "useHandleClick" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useHandleClick(setName: NameSetter): (url: string) => void;
+export function useGraphManager(inputs: TableContainer[]): GraphManager;
 
 
 export * from "@data-wrangling-components/react-controls";

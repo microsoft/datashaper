@@ -9,11 +9,7 @@ import { DialogConfirm } from '@essex/themed-components'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import type {
-	ColumnTransformModalProps,
-	TableTransformModalProps,
-} from '../../index.js'
-import { useDeleteConfirm } from '../../common/index.js'
+import type { TransformModalProps } from '../../index.js'
 import { TableTransformModal } from '../../TableTransformModal/TableTransformModal.js'
 import { StepsList } from '../index.js'
 import {
@@ -23,13 +19,12 @@ import {
 	useOnDeleteStep,
 	useTransformModalState,
 	useEditorTarget,
+	useDeleteConfirm,
 } from './ManageWorkflow.hooks.js'
 import type { TableContainer } from '@essex/arquero'
-import { useGraphManager } from '../../common/hooks.js'
+import { useGraphManager } from '../../hooks.js'
 
-interface ManageWorkflowProps
-	extends Omit<TableTransformModalProps, 'graph'>,
-		ColumnTransformModalProps {
+interface ManageWorkflowProps extends Omit<TransformModalProps, 'graph'> {
 	/**
 	 * The workflow specification
 	 */
@@ -68,10 +63,10 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		const onSave = useOnSaveStep(graph)
 		const onDelete = useOnDeleteStep(graph)
 		const {
-			onDeleteClicked,
-			toggleDeleteModalOpen,
-			isDeleteModalOpen,
-			onConfirmDelete,
+			onClick: onDeleteClicked,
+			toggle: toggleDeleteModalOpen,
+			isOpen: isDeleteModalOpen,
+			onConfirm: onConfirmDelete,
 		} = useDeleteConfirm(onDelete)
 		const onEditClicked = useOnEditStep(
 			setSelectedStep,

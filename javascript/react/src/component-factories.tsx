@@ -12,7 +12,7 @@ import type { Theme } from '@thematic/core'
 import merge from 'lodash-es/merge.js'
 import type { ReactElement } from 'react'
 
-import { CommandBar } from '../CommandBar/CommandBar.js'
+import { CommandBar } from './CommandBar/CommandBar.js'
 
 export function createLazyLoadingGroupHeader(
 	props: IDetailsGroupDividerProps | undefined,

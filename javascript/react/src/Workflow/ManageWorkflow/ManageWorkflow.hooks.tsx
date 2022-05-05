@@ -11,14 +11,11 @@ import {
 	ModalState,
 } from '@data-wrangling-components/react-hooks'
 import { useCallback, useState, useEffect } from 'react'
-
-import {
-	useCreateTableName,
-	useFormattedColumnArgWithCount,
-} from '../../common/index.js'
+import { useCreateTableName } from '../../hooks.js'
+import isArray from 'lodash-es/isArray'
 
 export function useOnDuplicateStep(
-	graph?: GraphManager,
+	graph: GraphManager,
 	table?: ColumnTable,
 	onSave?: (step: Step, index?: number) => void,
 ): (_step: Step) => void {
@@ -135,4 +132,82 @@ export function useOnDeleteStep(graph: GraphManager) {
 		},
 		[graph],
 	)
+}
+
+function useFormattedColumnArgWithCount(): (
+	step: Step,
+	columnNames: string[],
+) => object {
+	const createColumnName = useCreateColumnName()
+
+	return useCallback(
+		(step: Step, columnNames) => {
+			let args = step.args as Record<string, unknown>
+			Object.keys(args).forEach(x => {
+				if (x === 'to' && !isArray(args[x])) {
+					const newColumnName = createColumnName(args[x] as string, columnNames)
+					args = { ...args, [x]: newColumnName }
+				}
+			})
+			return args
+		},
+		[createColumnName],
+	)
+}
+
+function useCreateColumnName(): (
+	name: string,
+	columnNames: string[],
+) => string {
+	const verifyColumnName = useCallback(
+		(name: string, columnNames: string[]): boolean => {
+			return columnNames.includes(name)
+		},
+		[],
+	)
+
+	return useCallback(
+		(name: string, columnNames: string[]) => {
+			const originalName = name.replace(/( \(\d+\))/, '')
+			let derivedName = originalName
+
+			let count = 1
+			while (verifyColumnName(derivedName, columnNames)) {
+				derivedName = `${originalName} (${count})`
+				count++
+			}
+			return derivedName
+		},
+		[verifyColumnName],
+	)
+}
+
+export function useDeleteConfirm(onDelete?: (args: any) => void): {
+	isOpen: boolean
+	toggle: () => void
+	onClick: (args: any) => void
+	onConfirm: () => void
+} {
+	const { isOpen, show, hide, toggle } = useModalState(undefined, undefined)
+	const [deleteArg, setDeleteArg] = useState<any>()
+
+	const onDeleteClicked = useCallback(
+		(args: any) => {
+			setDeleteArg(args)
+			show()
+		},
+		[show, setDeleteArg],
+	)
+
+	const onConfirmDelete = useCallback(() => {
+		onDelete?.(deleteArg)
+		hide()
+	}, [hide, deleteArg, onDelete])
+
+	return {
+		isOpen,
+		toggle,
+		onConfirm: onConfirmDelete,
+		onClick: onDeleteClicked,
+	}
 }
