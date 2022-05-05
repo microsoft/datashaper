@@ -101,7 +101,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 									<StepComponent
 										key={`step-${index}`}
 										step={step}
-										store={store}
+										graph={store}
 										index={index}
 										onChange={onStepChange}
 									/>

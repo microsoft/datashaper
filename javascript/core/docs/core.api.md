@@ -318,7 +318,6 @@ export class GraphManager {
     addInput(item: TableContainer): void;
     addOutput(binding: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
-    clear(): void;
     // (undocumented)
     get graph(): Graph<TableContainer>;
     // (undocumented)
@@ -333,7 +332,10 @@ export class GraphManager {
     removeInput(inputName: string): void;
     removeOutput(name: string): void;
     removeStep(index: number): void;
+    reset(workflow?: Workflow): void;
     get steps(): Step[];
+    // (undocumented)
+    toList(): Maybe<TableContainer>[];
     toMap(): Map<string, Maybe<TableContainer>>;
     // (undocumented)
     get workflow(): Workflow;

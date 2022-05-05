@@ -2,15 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	Specification,
-	SpecificationInput,
+import {
+	Workflow,
+	WorkflowObject,
 	Step,
 	GraphManager,
+	Maybe,
 	Verb,
 } from '@data-wrangling-components/core'
-import { createGraphManager, readSpec } from '@data-wrangling-components/core'
-import { usePipeline } from '@data-wrangling-components/react'
+import { createGraphManager, readStep } from '@data-wrangling-components/core'
+import { useGraphManager } from '@data-wrangling-components/react'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { container } from '@essex/arquero'
@@ -37,55 +38,58 @@ const parse = {
 export function useSteps(store: GraphManager): {
 	steps: Step[]
 	result: TableContainer | undefined
-	outputs: Map<string, TableContainer>
+	outputs: Map<string, Maybe<TableContainer>>
 	onStepCreate: (verb: Verb) => void
 	onStepChange: (step: Step, index: number) => void
-	onLoadPipeline: (spec?: Specification) => void
+	onLoadPipeline: (spec?: WorkflowObject | undefined) => void
 	doRunPipeline: () => void
 } {
 	const [steps, setSteps] = useState<Step[]>([])
-	const pipeline = usePipeline(store, steps)
-	const [result, setResult] = useState<TableContainer | undefined>()
-	const [outputs, setOutputs] = useState<Map<string, TableContainer>>(
+	const graph = useGraphManager([])
+	// TODO: use observable to subscribe into the result table
+	const [result, setResult] = useState<Maybe<TableContainer>>()
+	const [outputs, setOutputs] = useState<Map<string, Maybe<TableContainer>>>(
 		new Map<string, TableContainer>(),
 	)
+
 	const onStepCreate = useCallback(
 		(verb: Verb) => {
-			setSteps(pipeline.create(verb))
+			const newStep = readStep({ verb })
+			graph.addStep(newStep)
+			setSteps(graph.steps)
 		},
-		[pipeline, setSteps],
+		[graph, setSteps],
 	)
 
 	const onStepChange = useCallback(
-		(step: Step, index: number) => setSteps(pipeline.update(step, index)),
-		[setSteps, pipeline],
+		(step: Step, index: number) => {
+			graph.reconfigureStep(index, step)
+			setSteps(graph.steps)
+		},
+		[setSteps, graph],
 	)
 
 	const doRunPipeline = useCallback(async () => {
-		const res = await pipeline.run()
-		const output = store.toMap()
-		pipeline.print()
+		graph.print()
 		store.print()
-		setResult(res)
-		setOutputs(output)
-	}, [pipeline, store, setResult, setOutputs])
+		// todo: what should the "result" be?
+		setResult(graph.latest(graph.outputs[0]))
+		setOutputs(graph.toMap())
+	}, [graph, store, setResult, setOutputs])
 
 	const onLoadPipeline = useCallback(
-		async (spec: Specification | undefined) => {
-			pipeline.clear()
-			if (spec) {
-				pipeline.addAll(readSpec(spec as any))
-			}
-			// the pipeline will transform the steps into a consistent format - string shorthands are
-			// unpacked into object forms.
-			setSteps(pipeline.steps)
-			const res = await pipeline.run()
-			const output = store.toMap()
+		async (spec: WorkflowObject | undefined) => {
+			const workflow = spec ? new Workflow(spec) : undefined
+			graph.reset(workflow)
+
+			setSteps(graph.steps)
+			// const res = await graph.run()
+			// const output = store.toMap()
 			store.print()
-			setResult(res)
-			setOutputs(output)
+			setResult(graph.latest(graph.outputs[0]))
+			setOutputs(store.toMap())
 		},
-		[pipeline, store, setSteps, setOutputs, setResult],
+		[graph, store, setSteps, setOutputs, setResult],
 	)
 
 	return {
@@ -109,17 +113,16 @@ export function useTables(autoType = false): {
 
 	// initialize the input tables when the store is created
 	useEffect(() => {
-		const results = store.toArray()
+		const results = store.toList()
 		setTables(results as TableContainer[])
 	}, [store, setTables])
 
 	// add any dropped files to the inputs
 	const onAddFiles = useCallback(
 		(loaded: Map<string, ColumnTable>) => {
-			loaded.forEach((table, name) => {
-				store.set(name, from([{ id: name, table }]))
-			})
-			setTables(store.toArray() as TableContainer[])
+			for (const [id, table] of loaded.entries()) {
+				store.addInput({ id, table })
+			}
 		},
 		[store],
 	)
@@ -170,11 +173,9 @@ export function useLoadTableFiles(): (
 	)
 }
 
-export function useLoadSpecFile(): (
-	file: BaseFile,
-) => Promise<SpecificationInput> {
-	return useCallback((file: BaseFile): Promise<SpecificationInput> => {
-		return file.toJson() as any
+export function useLoadSpecFile(): (file: BaseFile) => Promise<WorkflowObject> {
+	return useCallback((file: BaseFile): Promise<WorkflowObject> => {
+		return file.toJson() as Promise<WorkflowObject>
 	}, [])
 }
 

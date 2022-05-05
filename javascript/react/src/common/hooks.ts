@@ -20,21 +20,6 @@ export function useGraphManager(inputs: TableContainer[]): GraphManager {
 	return manager
 }
 
-export function usePipeline(store: GraphManager, steps?: Step[]): void {
-	/* eslint-disable react-hooks/exhaustive-deps */
-	return useEffect(() => {
-		if (steps) {
-			steps.forEach(s => store.addStep(s))
-		}
-	}, [
-		store,
-		// do not re-fire this memo when the steps change; this will redrive the pipeline
-		// on every step update
-		// steps,
-	])
-	/* eslint-enable react-hooks/exhaustive-deps */
-}
-
 export function useDeleteConfirm(onDelete?: (args: any) => void): {
 	toggleDeleteModalOpen: () => void
 	onConfirmDelete: () => void

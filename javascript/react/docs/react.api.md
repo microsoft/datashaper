@@ -353,11 +353,6 @@ export function useHandleClick(setName: NameSetter): (url: string) => void;
 // @public (undocumented)
 export const useHandleOnUploadClick: (acceptedFileTypes: string[], handleCollection?: ((fileCollection: FileCollection) => void) | undefined) => (() => void);
 
-// Warning: (ae-missing-release-tag) "usePipeline" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function usePipeline(store: GraphManager, steps?: Step[]): void;
-
 
 export * from "@data-wrangling-components/react-controls";
 export * from "@data-wrangling-components/react-hocs";

@@ -39,13 +39,13 @@ export class GraphManager {
 
 	public constructor(
 		private readonly _inputs: Map<string, TableContainer> = new Map(),
-		private readonly _workflow: Workflow,
+		private _workflow: Workflow,
 	) {
 		this._syncWorkflowStateIntoGraph()
 	}
 
 	/**
-	 * Synchronizez the workflow state into the graph. Used during initialization.
+	 * Synchronize the workflow state into the graph. Used during initialization.
 	 */
 	private _syncWorkflowStateIntoGraph() {
 		for (const i of this._inputs.keys()) {
@@ -88,8 +88,17 @@ export class GraphManager {
 	/**
 	 * Remove all steps, inputs, and outputs from the pipeline
 	 */
-	public clear(): void {
+	public reset(workflow?: Workflow): void {
 		this._workflow.clear()
+		this.graph.nodes.forEach(id => this._graph.remove(id))
+
+		// if a new workflow is injected, sync it into the graph
+		if (workflow != null) {
+			this._workflow = workflow
+			this._syncWorkflowStateIntoGraph()
+		}
+		//todo: add graph.clear
+		//this._graph.clear()
 	}
 
 	/**
@@ -257,6 +266,10 @@ export class GraphManager {
 	 */
 	public toMap(): Map<string, Maybe<TableContainer>> {
 		return this.outputCache
+	}
+
+	public toList(): Maybe<TableContainer>[] {
+		return this.outputs.map(o => this.latest(o))
 	}
 
 	/**
