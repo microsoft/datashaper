@@ -139,31 +139,3 @@ function useCreateColumnName(): (
 		[verifyColumnName],
 	)
 }
-
-export function useHandleOnUploadClick(
-	acceptedFileTypes: string[],
-	handleCollection?: (fileCollection: FileCollection) => void,
-): () => void {
-	return useCallback(() => {
-		let input: HTMLInputElement | null = document.createElement('input')
-		input.type = 'file'
-		input.multiple = true
-		input.accept = acceptedFileTypes.toString()
-		input.onchange = async (e: any) => {
-			if (e?.target?.files?.length) {
-				const { files } = e.target
-				const fileCollection = new FileCollection()
-				try {
-					for (const file of files) {
-						await fileCollection.add(file)
-					}
-					handleCollection?.(fileCollection)
-				} catch (e) {
-					console.error(e)
-				}
-			}
-		}
-		input.click()
-		input = null
-	}, [acceptedFileTypes, handleCollection])
-}

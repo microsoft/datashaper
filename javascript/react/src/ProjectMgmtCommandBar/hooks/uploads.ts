@@ -4,11 +4,10 @@
  */
 
 import type { WorkflowObject } from '@data-wrangling-components/core'
-import type { FileCollection } from '@data-wrangling-components/utilities'
+import { FileCollection } from '@data-wrangling-components/utilities'
 import { FileType } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback } from 'react'
-import { useHandleOnUploadClick } from '../../common/index.js'
 
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	return useCallback(
@@ -109,4 +108,32 @@ export function useHandleZipUpload(
 		[csvHandler, jsonHandler, onUpdateTables],
 	)
 	return useHandleOnUploadClick(['.zip'], handler)
+}
+
+function useHandleOnUploadClick(
+	acceptedFileTypes: string[],
+	handleCollection?: (fileCollection: FileCollection) => void,
+): () => void {
+	return useCallback(() => {
+		let input: HTMLInputElement | null = document.createElement('input')
+		input.type = 'file'
+		input.multiple = true
+		input.accept = acceptedFileTypes.toString()
+		input.onchange = async (e: any) => {
+			if (e?.target?.files?.length) {
+				const { files } = e.target
+				const fileCollection = new FileCollection()
+				try {
+					for (const file of files) {
+						await fileCollection.add(file)
+					}
+					handleCollection?.(fileCollection)
+				} catch (e) {
+					console.error(e)
+				}
+			}
+		}
+		input.click()
+		input = null
+	}, [acceptedFileTypes, handleCollection])
 }
