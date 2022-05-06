@@ -37,8 +37,7 @@
                                         {
                                             "type": "string"
                                         }
-                                    ],
-                                    "description": "Step input specifications. If this is a string, we'll bind to the default output\nof the given node ID. If no node has that ID, we'll bind against the table-store's\nnamed table given the string.\n\nIf this is an input binding, it's an explicit binding to another step in the pipeline."
+                                    ]
                                 }
                             },
                             "type": "object"
@@ -719,8 +718,7 @@
                                     {
                                         "type": "string"
                                     }
-                                ],
-                                "description": "Step input specifications. If this is a string, we'll bind to the default output\nof the given node ID. If no node has that ID, we'll bind against the table-store's\nnamed table given the string.\n\nIf this is an input binding, it's an explicit binding to another step in the pipeline."
+                                ]
                             },
                             "type": "array"
                         },
