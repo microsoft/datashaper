@@ -3,14 +3,27 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Workflow, Step } from '@data-wrangling-components/core'
-import { StepComponent, StepSelector } from '@data-wrangling-components/react'
+import {
+	StepComponent,
+	StepSelector,
+	useGraphManager,
+} from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import { memo, useCallback, useState, useMemo } from 'react'
 
 import { ControlBar } from './ControlBar'
-import { useSteps, useInputTables, useGraphWithTables } from './DebugPage.hooks'
+import {
+	useSteps,
+	useInputTables,
+	useAddFilesHandler,
+	useCreateStepHandler,
+	useChangeStepHandler,
+	useWorkflowState,
+	useWorkflowDownloadUrl,
+	useHandleStepOutputChanged,
+} from './DebugPage.hooks'
 import {
 	Buttons,
 	Commands,
@@ -21,7 +34,6 @@ import {
 	StepsColumn,
 	TableSection,
 	Workspace,
-	runPipelineRootStyles,
 	icons,
 } from './DebugPage.styles.js'
 import { InputTables } from './InputTables'
@@ -45,7 +57,6 @@ const DEFAULT_STATS = [
 
 export const DebugPage: React.FC = memo(function DebugPage() {
 	const [compact, setCompact] = useState<boolean>(true)
-	const [exampleSpec, setExampleSpec] = useState<Workflow | undefined>()
 	const [autoType, setAutoType] = useState<boolean>(true)
 	const [features, setFeatures] = useState<DetailsListFeatures>({
 		statsColumnHeaders: true,
@@ -53,19 +64,10 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	})
 
 	const inputTables = useInputTables(autoType)
-	const { graph, onAddFiles } = useGraphWithTables(inputTables)
-
+	const graph = useGraphManager(undefined, inputTables)
+	const [workflow, setWorkflow] = useWorkflowState(graph)
+	const onAddFiles = useAddFilesHandler(graph)
 	const steps = useSteps(graph)
-
-	// const {
-	// 	steps,
-	// 	result,
-	// 	outputs,
-	// 	onStepCreate,
-	// 	onStepChange,
-	// 	onLoadPipeline,
-	// 	doRunPipeline,
-	// } = useSteps(store)
 
 	// create a parallel array of output names for the steps
 	const outputs = useMemo(
@@ -79,37 +81,17 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 		[graph.steps, graph.outputDefinitions],
 	)
 
-	const handleExampleSpecChange = useCallback(
-		(spec: Workflow | undefined) => {
-			setExampleSpec(spec)
-			graph.reset(spec)
-		},
-		[setExampleSpec, graph],
-	)
+	const onStepCreate = useCreateStepHandler(graph)
+	const onStepChange = useChangeStepHandler(graph)
+	const downloadUrl = useWorkflowDownloadUrl(workflow)
+	const onStepOutputChange = useHandleStepOutputChanged(graph)
 
-	const onStepChange = useCallback(
-		(step: Step, index: number) => {
-			graph.reconfigureStep(index, step)
-		},
-		[graph],
-	)
-
-	const downloadUrl = useMemo(() => {
-		const blob = new Blob([
-			JSON.stringify(graph.workflow.toJsonObject(), null, 4),
-		])
-		return URL.createObjectURL(blob)
-	}, [steps])
-
-	const onStepOutputChange = (output: string | undefined) => null
-
-	console.log('render debugpage', graph, outputs)
 	return (
 		<Container>
 			<Workspace className="arquero-workspace">
 				<ControlBar
-					selected={exampleSpec}
-					onSelectSpecification={handleExampleSpecChange}
+					selected={workflow}
+					onSelectSpecification={setWorkflow}
 					onLoadFiles={onAddFiles}
 					features={features}
 					onFeaturesChange={setFeatures}
@@ -130,6 +112,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 				</InputsSection>
 				{steps.map((step, index) => {
 					const output = outputs[index]
+					const table = output ? graph.latest(output)?.table : undefined
 					return (
 						<StepBlock key={`step-${index}`} className="step-block">
 							<Section title={`Step ${index + 1}`} subtitle={step.verb}>
@@ -141,18 +124,18 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 										index={index}
 										output={output}
 										onChange={onStepChange}
-										onChangeOutput={onStepOutputChange}
+										onChangeOutput={output => onStepOutputChange(step, output)}
 									/>
 								</StepsColumn>
 								<OutputsColumn className="outputs-column">
-									{output ? (
+									{table ? (
 										<TableSection
 											key={`output-${index}`}
 											className="table-section"
 										>
 											<Table
 												name={step.id}
-												table={graph.latest(output)?.table!}
+												table={table}
 												config={columns}
 												features={features}
 												compact={compact}
@@ -164,30 +147,9 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 						</StepBlock>
 					)
 				})}
-				{/* <Section
-					title={`${steps.length} step${steps.length !== 1 ? 's' : ''}`}
-					subtitle={'FINAL RESULT'}
-				>
-					{result ? (
-						<TableSection className="table-section">
-							<Table
-								table={result!.table!}
-								config={columns}
-								features={features}
-								compact={compact}
-							/>
-						</TableSection>
-					) : null}
-				</Section> */}
-				{/* <Commands>
+				<Commands>
 					<StepSelector onCreate={onStepCreate} showButton />
 					<Buttons>
-						<PrimaryButton
-							onClick={doRunPipeline}
-							styles={runPipelineRootStyles}
-						>
-							Run all
-						</PrimaryButton>
 						<IconButton
 							title={'Save workflow as JSON'}
 							iconProps={icons.download}
@@ -196,7 +158,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 							type={'application/json'}
 						/>
 					</Buttons>
-				</Commands> */}
+				</Commands>
 			</Workspace>
 		</Container>
 	)

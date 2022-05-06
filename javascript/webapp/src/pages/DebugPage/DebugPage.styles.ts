@@ -52,9 +52,6 @@ export const OutputsColumn = styled.div`
 	flex-direction: column;
 `
 
-export const runPipelineRootStyles: IButtonProps['styles'] = {
-	root: { width: 180 },
-}
 export const icons = {
 	download: { iconName: 'Download' },
 }
