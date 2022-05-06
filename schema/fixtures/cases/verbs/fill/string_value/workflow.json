@@ -8,7 +8,9 @@
 				"to": "newColumn",
 				"value": "xyz"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table1"]
 }

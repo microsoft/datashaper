@@ -10,8 +10,8 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { createGraph } from '../engine/graph.js'
-import { readSpec } from '../steps/index.js'
-import { createTableStore } from '../store/createTableStore.js'
+import { Workflow } from '../engine/Workflow.js'
+import { createTableStore } from './createTableStore.js'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -73,19 +73,19 @@ function defineTestCase(parentPath: string, test: string) {
 		if (!fs.existsSync(schemaLinkPath)) {
 			throw new Error(`invalid $schema link: ${workflowPath}`)
 		}
-		createGraph(readSpec(workflowJson), tableStore)
+		const graphBuilder = createGraph(new Workflow(workflowJson), tableStore)
 
 		// check the output tables
 		await Promise.all(
 			expectedOutputTables.map(async o => {
 				const expected = await readCsv(path.join(casePath, `${o}.csv`))
 				await new Promise<void>(resolve => {
-					const result = tableStore.get(o)
+					const result = graphBuilder.latest(o)
 					if (result?.table) {
 						compareTables(expected, result.table, o)
 						resolve()
 					} else {
-						tableStore.onItemChange(o, actual => {
+						graphBuilder.output(o)!.subscribe(actual => {
 							if (actual?.table) {
 								compareTables(expected, actual?.table, o)
 								resolve()

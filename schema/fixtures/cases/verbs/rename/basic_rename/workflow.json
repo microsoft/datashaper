@@ -12,7 +12,9 @@
 					"totalSale": "total"
 				}
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table7"]
 }

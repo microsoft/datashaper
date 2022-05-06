@@ -9,7 +9,9 @@
 				"strategy": "concat",
 				"to": "resultColumn"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table13"]
 }

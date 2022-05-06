@@ -8,7 +8,9 @@
 				"columns": ["y"],
 				"value": 5000
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table11"]
 }

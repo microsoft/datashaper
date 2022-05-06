@@ -3,20 +3,24 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	InputBinding,
-	InputSpecification,
-	StepCommon,
-} from '../specification.js'
+	NamedPortBinding,
+	OutputPortBinding,
+	PortBinding,
+} from '../types.js'
 import type { Verb } from '../verbs/index.js'
 
-export interface SpecificationInput {
-	input?: string
-	output?: string
+export interface WorkflowObject {
+	input?: string[]
+	output: OutputPortBinding[]
 	steps: StepInput[]
 }
 
-export interface StepInput<T extends object | void | unknown = unknown>
-	extends StepCommon {
+export interface StepInput<T extends object | void | unknown = unknown> {
+	/**
+	 * A unique identifier for this step
+	 */
+	id?: string
+
 	/**
 	 * The verb being executed
 	 */
@@ -35,15 +39,8 @@ export interface StepInput<T extends object | void | unknown = unknown>
 	input?:
 		| string
 		| ({
-				others?: InputSpecification[]
-		  } & Record<string, InputSpecification>)
-
-	/**
-	 * The observed outputs to record.
-	 * Key = output socket name
-	 * Value = store table name
-	 */
-	output: string | Record<string, string>
+				others?: PortBinding[]
+		  } & Record<string, PortBinding>)
 }
 
 export interface Step<T extends object | void | unknown = unknown> {
@@ -68,13 +65,6 @@ export interface Step<T extends object | void | unknown = unknown> {
 	 * Value = Socket Binding to other node
 	 */
 	input: {
-		others?: InputBinding[]
-	} & Record<string, InputBinding>
-
-	/**
-	 * The observed outputs to record.
-	 * Key = output socket name
-	 * Value = store table name
-	 */
-	output: Record<string, string>
+		others?: NamedPortBinding[]
+	} & Record<string, NamedPortBinding>
 }

@@ -10,7 +10,9 @@
 				"column": "quantity",
 				"operation": "sum"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table4"]
 }

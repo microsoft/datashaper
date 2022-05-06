@@ -4,11 +4,13 @@
 		{
 			"verb": "convert",
 			"input": "table21",
-			"output": "expected",
+			"id": "expected",
 			"args": {
 				"columns": ["date"],
 				"type": "string"
 			}
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table21"]
 }

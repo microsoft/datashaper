@@ -5,16 +5,12 @@
 import type { TableContainer } from '@essex/arquero'
 import { table } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { from } from 'rxjs'
-
-import { DefaultStore } from '../store/DefaultStore.js'
 
 /**
  * This is a store implementation pre-loaded with test tables to ease setup.
  */
-export class TestStore extends DefaultStore<TableContainer> {
+export class TestStore {
 	constructor(private _defaultTableName: string = 'table1') {
-		super(c => c.table?.print())
 		const table1 = table({
 			ID: [1, 2, 3, 4, 5],
 			name: ['A', 'B', 'C', 'D', 'E'],
@@ -191,35 +187,41 @@ export class TestStore extends DefaultStore<TableContainer> {
 			values: ['undefined', 'test1', 'null', 'test2', 'final test'],
 		})
 
-		this.set('table1', from([{ id: 'table1', table: table1 }]))
-		this.set('table2', from([{ id: 'table2', table: table2 }]))
-		this.set('table3', from([{ id: 'table3', table: table3 }]))
-		this.set('table4', from([{ id: 'table4', table: table4 }]))
-		this.set('table5', from([{ id: 'table5', table: table5 }]))
-		this.set('table6', from([{ id: 'table6', table: table6 }]))
-		this.set('table7', from([{ id: 'table7', table: table7 }]))
-		this.set('table8', from([{ id: 'table8', table: table8 }]))
-		this.set('table9', from([{ id: 'table9', table: table9 }]))
-		this.set('table10', from([{ id: 'table10', table: table10 }]))
-		this.set('table11', from([{ id: 'table11', table: table11 }]))
-		this.set('table12', from([{ id: 'table12', table: table12 }]))
-		this.set('table13', from([{ id: 'table13', table: table13 }]))
-		this.set('table14', from([{ id: 'table14', table: table14 }]))
-		this.set('table15', from([{ id: 'table15', table: table15 }]))
-		this.set('table16', from([{ id: 'table16', table: table16 }]))
-		this.set('table17', from([{ id: 'table17', table: table17 }]))
-		this.set('table18', from([{ id: 'table18', table: table18 }]))
-		this.set('table19', from([{ id: 'table19', table: table19 }]))
-		this.set('table20', from([{ id: 'table20', table: table20 }]))
-		this.set('table21', from([{ id: 'table21', table: table21 }]))
-		this.set('table22', from([{ id: 'table22', table: table22 }]))
-		this.set('table23', from([{ id: 'table23', table: table23 }]))
-		this.set('table24', from([{ id: 'table24', table: table24 }]))
-		this.set('table25', from([{ id: 'table25', table: table25 }]))
-		this.set('table26', from([{ id: 'table26', table: table26 }]))
+		this.set('table1', { id: 'table1', table: table1 })
+		this.set('table2', { id: 'table2', table: table2 })
+		this.set('table3', { id: 'table3', table: table3 })
+		this.set('table4', { id: 'table4', table: table4 })
+		this.set('table5', { id: 'table5', table: table5 })
+		this.set('table6', { id: 'table6', table: table6 })
+		this.set('table7', { id: 'table7', table: table7 })
+		this.set('table8', { id: 'table8', table: table8 })
+		this.set('table9', { id: 'table9', table: table9 })
+		this.set('table10', { id: 'table10', table: table10 })
+		this.set('table11', { id: 'table11', table: table11 })
+		this.set('table12', { id: 'table12', table: table12 })
+		this.set('table13', { id: 'table13', table: table13 })
+		this.set('table14', { id: 'table14', table: table14 })
+		this.set('table15', { id: 'table15', table: table15 })
+		this.set('table16', { id: 'table16', table: table16 })
+		this.set('table17', { id: 'table17', table: table17 })
+		this.set('table18', { id: 'table18', table: table18 })
+		this.set('table19', { id: 'table19', table: table19 })
+		this.set('table20', { id: 'table20', table: table20 })
+		this.set('table21', { id: 'table21', table: table21 })
+		this.set('table22', { id: 'table22', table: table22 })
+		this.set('table23', { id: 'table23', table: table23 })
+		this.set('table24', { id: 'table24', table: table24 })
+		this.set('table25', { id: 'table25', table: table25 })
+		this.set('table26', { id: 'table26', table: table26 })
+	}
+
+	private _tables: Map<string, TableContainer> = new Map()
+
+	public set(key: string, value: TableContainer): void {
+		this._tables.set(key, value)
 	}
 
 	public table(name: string = this._defaultTableName): ColumnTable {
-		return this.get(name)!.table!
+		return this._tables.get(name)!.table!
 	}
 }

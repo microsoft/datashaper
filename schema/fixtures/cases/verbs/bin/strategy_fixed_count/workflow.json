@@ -10,7 +10,9 @@
 				"strategy": "fixed count",
 				"fixedcount": 5
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table9"]
 }

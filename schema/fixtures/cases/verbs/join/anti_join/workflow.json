@@ -9,9 +9,11 @@
 			},
 			"args": {
 				"on": ["x", "u"],
-                "strategy": "anti join"
+				"strategy": "anti join"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table27", "table28"]
 }

@@ -12,7 +12,9 @@
 				"min": 20,
 				"max": 150
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table9"]
 }

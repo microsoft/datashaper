@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Spinner } from '@fluentui/react'
-import React, { memo, Suspense } from 'react'
+import { memo, Suspense } from 'react'
 import styled from 'styled-components'
 
 export const Layout: React.FC<

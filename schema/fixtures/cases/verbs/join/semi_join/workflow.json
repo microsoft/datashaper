@@ -9,9 +9,11 @@
 			},
 			"args": {
 				"on": ["x", "u"],
-                "strategy": "semi join"
+				"strategy": "semi join"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table27", "table28"]
 }

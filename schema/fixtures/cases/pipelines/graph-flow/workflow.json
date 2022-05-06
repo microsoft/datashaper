@@ -20,20 +20,22 @@
 			}
 		},
 		{
+			"id": "t1t2-filled",
 			"verb": "union",
 			"input": {
 				"source": "t1-filled",
 				"others": ["t2-filled"]
-			},
-			"output": "t1t2-filled"
+			}
 		},
 		{
+			"id": "t1-ids",
 			"verb": "select",
 			"input": "t1-filled",
 			"args": {
 				"columns": ["ID"]
-			},
-			"output": "t1-ids"
+			}
 		}
-	]
+	],
+	"input": ["table1", "table2"],
+	"output": ["t1t2-filled", "t1-ids"]
 }

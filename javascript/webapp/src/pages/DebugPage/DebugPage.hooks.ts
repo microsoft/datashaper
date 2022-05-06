@@ -2,183 +2,186 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	Specification,
-	SpecificationInput,
-	Step,
-	TableStore,
-	Verb,
-} from '@data-wrangling-components/core'
-import { createTableStore, readSpec } from '@data-wrangling-components/core'
-import { usePipeline } from '@data-wrangling-components/react'
-import type { BaseFile } from '@data-wrangling-components/utilities'
-import type { TableContainer } from '@essex/arquero'
-import { container } from '@essex/arquero'
-import { loadCSV } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useCallback, useEffect, useState } from 'react'
-import { from } from 'rxjs'
+// import type {
+// 	GraphManager,
+// 	Maybe,
+// 	Step,
+// 	Verb,
+// 	WorkflowObject,
+// } from '@data-wrangling-components/core'
+// import {
+// 	createGraphManager,
+// 	readStep,
+// 	Workflow,
+// } from '@data-wrangling-components/core'
+// import { useGraphManager } from '@data-wrangling-components/react'
+// import type { BaseFile } from '@data-wrangling-components/utilities'
+// import type { TableContainer } from '@essex/arquero'
+// import { container } from '@essex/arquero'
+// import { loadCSV } from 'arquero'
+// import type ColumnTable from 'arquero/dist/types/table/column-table'
+// import { useCallback, useEffect, useState } from 'react'
 
-const TABLES = [
-	`data/companies.csv`,
-	`data/companies2.csv`,
-	`data/products.csv`,
-	'data/stocks.csv',
-]
+// const TABLES = [
+// 	`data/companies.csv`,
+// 	`data/companies2.csv`,
+// 	`data/products.csv`,
+// 	'data/stocks.csv',
+// ]
 
-const identity = (d: any) => d
+// const identity = (d: any) => d
 
-// default parsers to keep these columns as strings
-const parse = {
-	ID: identity,
-	Group: identity,
-}
+// // default parsers to keep these columns as strings
+// const parse = {
+// 	ID: identity,
+// 	Group: identity,
+// }
 
-export function useSteps(store: TableStore): {
-	steps: Step[]
-	result: TableContainer | undefined
-	outputs: Map<string, TableContainer>
-	onStepCreate: (verb: Verb) => void
-	onStepChange: (step: Step, index: number) => void
-	onLoadPipeline: (spec?: Specification) => void
-	doRunPipeline: () => void
-} {
-	const [steps, setSteps] = useState<Step[]>([])
-	const pipeline = usePipeline(store, steps)
-	const [result, setResult] = useState<TableContainer | undefined>()
-	const [outputs, setOutputs] = useState<Map<string, TableContainer>>(
-		new Map<string, TableContainer>(),
-	)
-	const onStepCreate = useCallback(
-		(verb: Verb) => {
-			setSteps(pipeline.create(verb))
-		},
-		[pipeline, setSteps],
-	)
+// export function useSteps(store: GraphManager): {
+// 	steps: Step[]
+// 	result: TableContainer | undefined
+// 	outputs: Map<string, Maybe<TableContainer>>
+// 	onStepCreate: (verb: Verb) => void
+// 	onStepChange: (step: Step, index: number) => void
+// 	onLoadPipeline: (spec?: WorkflowObject | undefined) => void
+// 	doRunPipeline: () => void
+// } {
+// 	const [steps, setSteps] = useState<Step[]>([])
+// 	const graph = useGraphManager([])
+// 	// TODO: use observable to subscribe into the result table
+// 	const [result, setResult] = useState<Maybe<TableContainer>>()
+// 	const [outputs, setOutputs] = useState<Map<string, Maybe<TableContainer>>>(
+// 		new Map<string, TableContainer>(),
+// 	)
 
-	const onStepChange = useCallback(
-		(step: Step, index: number) => setSteps(pipeline.update(step, index)),
-		[setSteps, pipeline],
-	)
+// 	const onStepCreate = useCallback(
+// 		(verb: Verb) => {
+// 			const newStep = readStep({ verb })
+// 			graph.addStep(newStep)
+// 			setSteps(graph.steps)
+// 		},
+// 		[graph, setSteps],
+// 	)
 
-	const doRunPipeline = useCallback(async () => {
-		const res = await pipeline.run()
-		const output = store.toMap()
-		pipeline.print()
-		store.print()
-		setResult(res)
-		setOutputs(output)
-	}, [pipeline, store, setResult, setOutputs])
+// 	const onStepChange = useCallback(
+// 		(step: Step, index: number) => {
+// 			graph.reconfigureStep(index, step)
+// 			setSteps(graph.steps)
+// 		},
+// 		[setSteps, graph],
+// 	)
 
-	const onLoadPipeline = useCallback(
-		async (spec: Specification | undefined) => {
-			pipeline.clear()
-			if (spec) {
-				pipeline.addAll(readSpec(spec as any))
-			}
-			// the pipeline will transform the steps into a consistent format - string shorthands are
-			// unpacked into object forms.
-			setSteps(pipeline.steps)
-			const res = await pipeline.run()
-			const output = store.toMap()
-			store.print()
-			setResult(res)
-			setOutputs(output)
-		},
-		[pipeline, store, setSteps, setOutputs, setResult],
-	)
+// 	const doRunPipeline = useCallback(() => {
+// 		graph.print()
+// 		store.print()
+// 		// todo: what should the "result" be?
+// 		setResult(graph.latest(graph.outputs[0]))
+// 		setOutputs(graph.toMap())
+// 	}, [graph, store, setResult, setOutputs])
 
-	return {
-		steps,
-		result,
-		outputs,
-		onStepCreate,
-		onStepChange,
-		onLoadPipeline,
-		doRunPipeline,
-	}
-}
-export function useTables(autoType = false): {
-	store: TableStore
-	tables: TableContainer[]
-	onAddFiles: (loaded: Map<string, ColumnTable>) => void
-} {
-	const store = useTableStore(autoType)
+// 	const onLoadPipeline = useCallback(
+// 		(spec: WorkflowObject | undefined) => {
+// 			const workflow = spec ? new Workflow(spec) : undefined
+// 			graph.reset(workflow)
 
-	const [tables, setTables] = useState<TableContainer[]>([])
-	
-	// initialize the input tables when the store is created
-	useEffect(() => {		
-		const results = store.toArray()
-		setTables(results as TableContainer[])
-	}, [store, setTables])
+// 			setSteps(graph.steps)
+// 			// const res = await graph.run()
+// 			// const output = store.toMap()
+// 			store.print()
+// 			setResult(graph.latest(graph.outputs[0]))
+// 			setOutputs(store.toMap())
+// 		},
+// 		[graph, store, setSteps, setOutputs, setResult],
+// 	)
 
-	// add any dropped files to the inputs
-	const onAddFiles = useCallback(
-		(loaded: Map<string, ColumnTable>) => {
-			loaded.forEach((table, name) => {
-				store.set(name, from([{ id: name, table }]))
-			})
-			setTables(store.toArray() as TableContainer[])
-		},
-		[store]
-	)
+// 	return {
+// 		steps,
+// 		result,
+// 		outputs,
+// 		onStepCreate,
+// 		onStepChange,
+// 		onLoadPipeline,
+// 		doRunPipeline,
+// 	}
+// }
+// export function useTables(autoType = false): {
+// 	store: GraphManager
+// 	tables: TableContainer[]
+// 	onAddFiles: (loaded: Map<string, ColumnTable>) => void
+// } {
+// 	const store = useTableStore(autoType)
 
-	return {
-		store,
-		tables,
-		onAddFiles,
-	}
-}
+// 	const [tables, setTables] = useState<TableContainer[]>([])
 
-// create the store and initialize it with our test tables
-// memoing this gives us a chance queue up our built-in test tables on first run
-function useTableStore(autoType = false): TableStore {
-	const [store, setStore] = useState<TableStore>(createTableStore())
-	useEffect(() => {
-		const fn = async () => {
-			const store = createTableStore()
-			const promises = TABLES.map(async name => {
-				const data = await loadCSV(name, {
-					parse,
-					autoMax: 100000,
-					autoType,
-				})
-				const ctr = container(name, data)
-				store.set(name, from([ctr]))
-			})
-			await Promise.all(promises)
-			setStore(store)
-		}
-		void fn()
-	}, [autoType])
-	return store
-}
+// 	// initialize the input tables when the store is created
+// 	useEffect(() => {
+// 		const results = store.toList()
+// 		setTables(results as TableContainer[])
+// 	}, [store, setTables])
 
-export function useLoadTableFiles(): (
-	files: BaseFile[],
-) => Promise<Map<string, ColumnTable>> {
-	return useCallback(
-		async (files: BaseFile[]): Promise<Map<string, ColumnTable>> => {
-			const list = await Promise.all(files.map(readTable))
-			return list.reduce((acc, cur) => {
-				acc.set(cur[0], cur[1])
-				return acc
-			}, new Map<string, ColumnTable>())
-		},
-		[],
-	)
-}
+// 	// add any dropped files to the inputs
+// 	const onAddFiles = useCallback(
+// 		(loaded: Map<string, ColumnTable>) => {
+// 			for (const [id, table] of loaded.entries()) {
+// 				store.addInput({ id, table })
+// 			}
+// 		},
+// 		[store],
+// 	)
 
-export function useLoadSpecFile(): (
-	file: BaseFile,
-) => Promise<SpecificationInput> {
-	return useCallback((file: BaseFile): Promise<SpecificationInput> => {
-		return file.toJson() as any
-	}, [])
-}
+// 	return {
+// 		store,
+// 		tables,
+// 		onAddFiles,
+// 	}
+// }
 
-async function readTable(file: BaseFile): Promise<[string, ColumnTable]> {
-	const table = await file.toTable()
-	return [file.name, table]
-}
+// // create the store and initialize it with our test tables
+// // memoing this gives us a chance queue up our built-in test tables on first run
+// function useTableStore(autoType = false): GraphManager {
+// 	const [store, setStore] = useState<GraphManager>(createGraphManager())
+// 	useEffect(() => {
+// 		const fn = async () => {
+// 			const store = createGraphManager()
+// 			const promises = TABLES.map(async name => {
+// 				const data = await loadCSV(name, {
+// 					parse,
+// 					autoMax: 100000,
+// 					autoType,
+// 				})
+// 				const ctr = container(name, data)
+// 				store.inputs.set(name, ctr)
+// 			})
+// 			await Promise.all(promises)
+// 			setStore(store)
+// 		}
+// 		void fn()
+// 	}, [autoType])
+// 	return store
+// }
+
+// export function useLoadTableFiles(): (
+// 	files: BaseFile[],
+// ) => Promise<Map<string, ColumnTable>> {
+// 	return useCallback(
+// 		async (files: BaseFile[]): Promise<Map<string, ColumnTable>> => {
+// 			const list = await Promise.all(files.map(readTable))
+// 			return list.reduce((acc, cur) => {
+// 				acc.set(cur[0], cur[1])
+// 				return acc
+// 			}, new Map<string, ColumnTable>())
+// 		},
+// 		[],
+// 	)
+// }
+
+// export function useLoadSpecFile(): (file: BaseFile) => Promise<WorkflowObject> {
+// 	return useCallback((file: BaseFile): Promise<WorkflowObject> => {
+// 		return file.toJson() as Promise<WorkflowObject>
+// 	}, [])
+// }
+
+// async function readTable(file: BaseFile): Promise<[string, ColumnTable]> {
+// 	const table = await file.toTable()
+// 	return [file.name, table]
+// }

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { InputBinding } from '../specification.js'
+import type { NamedPortBinding } from '../types.js'
 import {
 	BinStrategy,
 	BooleanOperator,
@@ -32,7 +32,7 @@ const uid = (() => {
  * @param verb -
  */
 export function readStep<T extends object | void | unknown = any>(
-	{ verb, args = {} as any, id, input, output }: StepInput<T>,
+	{ verb, args = {} as any, id, input }: StepInput<T>,
 	previous?: Step | undefined,
 ): Step<T> {
 	const base = {
@@ -40,7 +40,6 @@ export function readStep<T extends object | void | unknown = any>(
 		args,
 		verb,
 		input: fixInputs(input, previous),
-		output: fixOutputs(output),
 	}
 	switch (verb) {
 		case Verb.Bin:
@@ -193,24 +192,16 @@ function fixInputs(
 		Object.keys(result).forEach((k: string) => {
 			const binding = result[k]
 			if (typeof binding === 'string') {
-				result[k] = { node: binding as string } as InputBinding
+				result[k] = { node: binding as string } as NamedPortBinding
 			}
 		})
 
 		// Handle the variadic case (e.g. "others" array is defined)
 		if (result.others != null) {
 			result.others = result.others.map(o =>
-				typeof o === 'string' ? { node: o } : (o as any as InputBinding),
+				typeof o === 'string' ? { node: o } : (o as any as NamedPortBinding),
 			)
 		}
 		return result
-	}
-}
-
-function fixOutputs(outputs: StepInput['output']): Step['output'] {
-	if (typeof outputs === 'string') {
-		return { target: outputs }
-	} else {
-		return (outputs || {}) as Record<string, string>
 	}
 }

@@ -17,7 +17,9 @@
 				"key": "key",
 				"value": "value"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"input": ["table18"],
+	"output": ["expected"]
 }
