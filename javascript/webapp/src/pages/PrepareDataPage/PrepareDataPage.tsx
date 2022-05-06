@@ -9,8 +9,9 @@ import {
 } from '@data-wrangling-components/react'
 import type { TableContainer } from '@essex/arquero'
 import { memo, useState } from 'react'
+
 import { useTables } from './PrepareDataPage.hooks'
-import { Container, Wrapper, mgmtStyles } from './PrepareDataPage.styles.js'
+import { Container, mgmtStyles, Wrapper } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	// state for the input tables

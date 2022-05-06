@@ -16,8 +16,10 @@ import type { Struct } from 'arquero/dist/types/table/transformable'
 import type { SetStateAction } from 'react'
 import { useCallback, useMemo } from 'react'
 
-export function useColumnCommands() {
-	return useCallback((props?: IDetailsColumnProps) => {
+export function useColumnCommands(): (
+	props?: IDetailsColumnProps,
+) => JSX.Element {
+	return useCallback((props?: IDetailsColumnProps): JSX.Element => {
 		const items = [
 			{
 				key: 'add',
@@ -58,7 +60,7 @@ export function useCommandBar(
 	metadata: TableMetadata | undefined,
 	setTable: React.Dispatch<SetStateAction<ColumnTable | undefined>>,
 	setMetadata: React.Dispatch<SetStateAction<TableMetadata | undefined>>,
-) {
+): JSX.Element {
 	const theme = useThematic()
 	const addNewColumn = useCallback(() => {
 		if (!table || !metadata) return

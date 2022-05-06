@@ -12,6 +12,7 @@ import { Pivot, PivotItem } from '@fluentui/react'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+
 import { useColumnCommands, useCommandBar } from './PerfPage.hooks.js'
 import { Container, Table } from './PerfPage.styles.js'
 

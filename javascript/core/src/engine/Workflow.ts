@@ -92,7 +92,7 @@ export class Workflow {
 		return step
 	}
 
-	public removeStep(index: number) {
+	public removeStep(index: number): void {
 		this._steps = [
 			...this.steps.slice(0, index),
 			...this.steps.slice(index + 1),

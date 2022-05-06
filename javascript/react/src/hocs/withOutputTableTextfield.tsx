@@ -33,6 +33,7 @@ export function withOutputTableTextfield(
 				function useDefaultOutputNameInitially() {
 					onChangeOutput(output ?? step.id)
 				},
+				// eslint-disable-next-line react-hooks/exhaustive-deps
 				[
 					/* only on initial render */
 				],

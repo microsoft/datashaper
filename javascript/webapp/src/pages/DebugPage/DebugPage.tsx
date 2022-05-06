@@ -11,20 +11,20 @@ import { memo, useCallback, useMemo, useState } from 'react'
 
 import { ControlBar } from './ControlBar'
 import { useSteps, useTables } from './DebugPage.hooks'
+import {
+	Buttons,
+	Commands,
+	Container,
+	InputsSection,
+	OutputsColumn,
+	StepBlock,
+	StepsColumn,
+	TableSection,
+	Workspace,
+} from './DebugPage.styles.js'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { Table } from './Table'
-import {
-	Container,
-	Workspace,
-	Commands,
-	Buttons,
-	StepBlock,
-	InputsSection,
-	TableSection,
-	OutputsColumn,
-	StepsColumn,
-} from './DebugPage.styles.js'
 
 const columns = {
 	ID: {

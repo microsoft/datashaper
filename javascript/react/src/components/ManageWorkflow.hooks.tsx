@@ -5,16 +5,15 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { GraphManager, Step } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
+import cloneDeep from 'lodash-es/cloneDeep'
 import { useCallback, useEffect, useState } from 'react'
 
+import type { ModalState } from '../hooks/index.js'
 import {
+	useCreateTableName,
 	useModalState,
 	useStaticValue,
-	ModalState,
-	useCreateTableName,
 } from '../hooks/index.js'
-import cloneDeep from 'lodash-es/cloneDeep'
 
 export function useOnDuplicateStep(
 	graph: GraphManager,
@@ -30,14 +29,14 @@ export function useOnDuplicateStep(
 			onSave?.(
 				{
 					...step,
-					id: undefined,
+					id: undefined as any,
 					args: argsDuplicator(step, outputTable?.columnNames()),
 					input: cloneDeep(step.input),
 				},
 				createTableName(graph.outputNameForNode(step.id) ?? step.id),
 			)
 		},
-		[onSave, argsDuplicator, graph, table],
+		[onSave, argsDuplicator, graph, table, createTableName],
 	)
 }
 
@@ -158,7 +157,7 @@ function useArgsDuplicator(): (
 	const createColumnName = useCreateColumnName()
 	return useCallback(
 		(step: Step, columnNames: string[] | undefined) => {
-			let args = cloneDeep(step.args) as Record<string, unknown>
+			const args = cloneDeep(step.args) as Record<string, unknown>
 
 			// if there's a single-column to-field, find a unique name for it
 			if (args['to'] && typeof args['to'] === 'string') {
