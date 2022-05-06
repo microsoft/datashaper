@@ -135,9 +135,7 @@ export enum DateComparisonOperator {
 	Before = 'before',
 	After = 'after',
 	IsEmpty = 'is empty',
-	IsNotEmpty = 'is not empty',
-	BeforeToday = 'before today',
-	AfterToday = 'after today'
+	IsNotEmpty = 'is not empty'
 }
 
 export enum StringComparisonOperator {
