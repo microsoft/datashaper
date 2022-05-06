@@ -25,9 +25,7 @@ export function useIsEmpty(criterion: Criterion): boolean {
 			operator === BooleanComparisonOperator.IsEmpty ||
 			operator === BooleanComparisonOperator.IsNotEmpty ||
 			operator === DateComparisonOperator.IsEmpty ||
-			operator === DateComparisonOperator.IsNotEmpty ||
-			operator === DateComparisonOperator.AfterToday ||
-			operator === DateComparisonOperator.BeforeToday
+			operator === DateComparisonOperator.IsNotEmpty 
 		)
 	}, [criterion])
 }
