@@ -4,7 +4,6 @@
  */
 import type {
 	GraphManager,
-	Maybe,
 	Step,
 	Verb,
 	Workflow,
@@ -31,7 +30,7 @@ const parse = {
  * @param graph - the graph manager
  * @returns
  */
-export function useSteps(graph: GraphManager) {
+export function useSteps(graph: GraphManager): Step[] {
 	const [steps, setSteps] = useState<Step[]>([])
 	// listen for graph changes and update the steps
 	useEffect(

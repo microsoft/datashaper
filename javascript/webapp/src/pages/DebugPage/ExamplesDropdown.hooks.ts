@@ -1,9 +1,13 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import type { WorkflowObject } from '@data-wrangling-components/core'
 import { Workflow } from '@data-wrangling-components/core'
-import { IDropdownOption } from '@fluentui/react'
+import type { IDropdownOption } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
-import { ExamplesDropdownProps } from './ExamplesDropdown.types.js'
 
+import type { ExamplesDropdownProps } from './ExamplesDropdown.types.js'
 import aggregatedLookup from './specs/aggregated-lookup.json'
 import binning from './specs/binning.json'
 import categorical from './specs/categorical.json'

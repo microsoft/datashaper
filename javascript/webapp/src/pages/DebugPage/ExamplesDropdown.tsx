@@ -4,13 +4,14 @@
  */
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
-import { memo, useCallback, useMemo, useState } from 'react'
-import type { ExamplesDropdownProps } from './ExamplesDropdown.types.js'
+import { memo, useCallback, useState } from 'react'
+
 import {
-	useOnSelectOption,
 	useExampleOptions,
+	useOnSelectOption,
 } from './ExamplesDropdown.hooks.js'
 import { dropdownStyles } from './ExamplesDropdown.styles.js'
+import type { ExamplesDropdownProps } from './ExamplesDropdown.types.js'
 
 export const ExamplesDropdown: React.FC<ExamplesDropdownProps> = memo(
 	function ExamplesDropdown({ onChange }) {

@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Workflow, Step } from '@data-wrangling-components/core'
 import {
 	StepComponent,
 	StepSelector,
@@ -10,31 +9,31 @@ import {
 } from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
-import { IconButton, PrimaryButton } from '@fluentui/react'
-import { memo, useCallback, useState, useMemo } from 'react'
+import { IconButton } from '@fluentui/react'
+import { memo, useMemo, useState } from 'react'
 
 import { ControlBar } from './ControlBar'
 import {
-	useSteps,
-	useInputTables,
 	useAddFilesHandler,
-	useCreateStepHandler,
 	useChangeStepHandler,
-	useWorkflowState,
-	useWorkflowDownloadUrl,
+	useCreateStepHandler,
 	useHandleStepOutputChanged,
+	useInputTables,
+	useSteps,
+	useWorkflowDownloadUrl,
+	useWorkflowState,
 } from './DebugPage.hooks'
 import {
 	Buttons,
 	Commands,
 	Container,
+	icons,
 	InputsSection,
 	OutputsColumn,
 	StepBlock,
 	StepsColumn,
 	TableSection,
 	Workspace,
-	icons,
 } from './DebugPage.styles.js'
 import { InputTables } from './InputTables'
 import { Section } from './Section'

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Workflow } from '@data-wrangling-components/core'
-import { TableContainer } from '@essex/arquero'
+import type { Workflow } from '@data-wrangling-components/core'
+import type { TableContainer } from '@essex/arquero'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 
 export interface ControlBarProps {
