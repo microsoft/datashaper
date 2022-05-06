@@ -339,13 +339,23 @@ export class GraphManager {
     // (undocumented)
     get graph(): Graph<TableContainer>;
     // (undocumented)
+    hasInput(name: string): boolean;
+    // (undocumented)
+    hasOutput(name: string): boolean;
+    // (undocumented)
     get inputs(): Map<string, TableContainer>;
     latest(name: string): Maybe<TableContainer>;
+    // (undocumented)
+    latestForNodeId(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
     get numSteps(): number;
     onChange(handler: () => void): () => void;
-    output(name: string): TableObservable;
+    output(name: string): Maybe<TableObservable>;
     // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
+    // (undocumented)
+    outputForNodeId(nodeId: string, nodeOutput?: string): Maybe<TableObservable>;
+    // (undocumented)
+    outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
     get outputs(): string[];
     print(): void;
     reconfigureStep(index: number, stepInput: StepInput<unknown>): Step;
@@ -1004,6 +1014,8 @@ export class Workflow {
     removeInput(input: string): void;
     // (undocumented)
     removeOutput(name: string): void;
+    // (undocumented)
+    removeStep(index: number): void;
     // (undocumented)
     stepAt(index: number): Step | undefined;
     // (undocumented)
