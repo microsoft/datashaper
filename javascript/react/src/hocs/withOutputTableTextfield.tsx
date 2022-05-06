@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { TextField } from '@fluentui/react'
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { useTextFieldChangeHandler } from '../hooks/index.js'
-import { dropdownStyles , LeftAlignedRow } from '../styles.js'
+import { dropdownStyles, LeftAlignedRow } from '../styles.js'
 import type { StepComponentProps } from '../types.js'
 import type { HOCFunction } from './types.js'
 
@@ -27,6 +27,15 @@ export function withOutputTableTextfield(
 				step,
 				(_s, val) => onChangeOutput(val as string),
 				onChange,
+			)
+
+			useEffect(
+				function useDefaultOutputNameInitially() {
+					onChangeOutput(output ?? step.id)
+				},
+				[
+					/* only on initial render */
+				],
 			)
 
 			return (
