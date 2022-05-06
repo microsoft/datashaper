@@ -4,9 +4,9 @@
 	"description": "Aggregates months into an array to demonstrate categorical Sparkbar cells",
 	"steps": [
 		{
+			"id": "categorical",
 			"verb": "aggregate",
 			"input": { "source": "data/stocks.csv" },
-			"output": { "target": "categorical" },
 			"args": {
 				"groupby": "Symbol",
 				"column": "Month",
@@ -14,5 +14,7 @@
 				"to": "Categories"
 			}
 		}
-	]
+	],
+	"input": ["data/stocks.csv"],
+	"output": ["categorical"]
 }

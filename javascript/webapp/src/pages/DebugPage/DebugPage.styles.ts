@@ -50,3 +50,7 @@ export const OutputsColumn = styled.div`
 	display: flex;
 	flex-direction: column;
 `
+
+export const icons = {
+	download: { iconName: 'Download' },
+}

@@ -2,36 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { createDefaultHeaderCommandBar } from '@data-wrangling-components/react'
-import type { DetailsListFeatures } from '@essex/arquero-react'
-import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
-	downloadCommand,
-	visibleColumnsCommand,
-} from '@essex/arquero-react'
+import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
 import type { IColumn, IDropdownOption } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
-import type { SetterOrUpdater } from 'recoil'
-import styled from 'styled-components'
+import { memo, useCallback, useEffect, useState } from 'react'
 
-export interface ColumnConfig {
-	width?: number
-	iconName?: string
-}
-
-export type ColumnConfigMap = Record<string, ColumnConfig>
-
-export interface TableProps {
-	name?: string
-	table: ColumnTable
-	config: ColumnConfigMap
-	features?: DetailsListFeatures
-	compact?: boolean
-	onRenameTable?: (name: string) => void
-}
+import { useColumns, useCommandBar, useFarCommandBar } from './Table.hooks.js'
+import { Container, TableContainer } from './Table.styles.js'
+import type { TableProps } from './Table.types.js'
 
 export const Table: React.FC<TableProps> = memo(function Table({
 	name,
@@ -45,20 +22,13 @@ export const Table: React.FC<TableProps> = memo(function Table({
 	const [visibleColumns, setVisibleColumns] = useState<string[]>(
 		table.columnNames(),
 	)
-
 	useEffect(() => {
 		setVisibleColumns(table.columnNames())
 	}, [table, setVisibleColumns])
 
-	const columns = useMemo(() => {
-		return Object.entries(config).map(([key, conf]) => ({
-			key,
-			name: key,
-			fieldName: key,
-			minWidth: conf.width,
-			iconName: conf.iconName,
-		})) as IColumn[]
-	}, [config])
+	const columns = useColumns(config)
+	const commandBar = useCommandBar(table, visibleColumns, setVisibleColumns)
+	const farCommandBar = useFarCommandBar(table)
 
 	const handleColumnClick = useCallback(
 		(evt?: React.MouseEvent<HTMLElement>, column?: IColumn) =>
@@ -76,9 +46,6 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		},
 		[],
 	)
-
-	const commandBar = useCommandBar(table, visibleColumns, setVisibleColumns)
-	const farCommandBar = useFarCommandBar(table)
 
 	return (
 		<Container className="table-container">
@@ -111,56 +78,3 @@ export const Table: React.FC<TableProps> = memo(function Table({
 		</Container>
 	)
 })
-
-function useCommandBar(
-	table: ColumnTable,
-	visibleColumns: string[],
-	updateColumns: SetterOrUpdater<string[]>,
-) {
-	const theme = useThematic()
-
-	const handleColumnCheckChange = useCallback(
-		(column: string, checked: boolean) => {
-			updateColumns(previous => {
-				if (checked) {
-					// order doesn't matter here
-					return [...(previous || []), column]
-				} else {
-					return [...(previous || [])].filter(col => col !== column)
-				}
-			})
-		},
-		[updateColumns],
-	)
-
-	const items = useMemo(
-		() => [
-			visibleColumnsCommand(table, visibleColumns, handleColumnCheckChange),
-		],
-		[table, visibleColumns, handleColumnCheckChange],
-	)
-
-	return useMemo(
-		() => createDefaultHeaderCommandBar({ items }, theme),
-		[items, theme],
-	)
-}
-
-function useFarCommandBar(table: ColumnTable) {
-	const theme = useThematic()
-	const items = useMemo(() => [downloadCommand(table)], [table])
-	return useMemo(
-		() => createDefaultHeaderCommandBar({ items }, theme, true),
-		[items, theme],
-	)
-}
-
-const Container = styled.div`
-	width: 600px;
-	height: 400px;
-	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
-`
-
-const TableContainer = styled.div`
-	height: 364px;
-`

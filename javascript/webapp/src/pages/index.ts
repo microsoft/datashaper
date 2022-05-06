@@ -4,4 +4,4 @@
  */
 export * from './DebugPage'
 export * from './PerfPage'
-export * from './PrepareDataPage'
+export * from './PrepareDataPage.js'

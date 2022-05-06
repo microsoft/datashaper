@@ -9,8 +9,8 @@ import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useMemo } from 'react'
 
 export function useGraphManager(
-	workflow: Workflow | undefined,
-	inputs: TableContainer[],
+	workflow?: Workflow | undefined,
+	inputs?: TableContainer[],
 ): GraphManager {
 	const manager = useMemo(
 		() => createGraphManager(undefined, workflow),
@@ -30,7 +30,7 @@ export function useGraphManager(
 
 	useEffect(
 		function syncInputs() {
-			inputs.forEach(i => manager.addInput(i))
+			inputs?.forEach(i => manager.addInput(i))
 		},
 		[manager, inputs],
 	)

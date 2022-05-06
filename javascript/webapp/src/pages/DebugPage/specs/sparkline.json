@@ -7,7 +7,6 @@
 			"id": "n1",
 			"verb": "aggregate",
 			"input": { "source": "data/stocks.csv" },
-			"output": { "target": "sparkline" },
 			"args": {
 				"groupby": "Symbol",
 				"column": "Close",
@@ -15,5 +14,7 @@
 				"to": "Daily"
 			}
 		}
-	]
+	],
+	"input": ["data/stocks.csv"],
+	"output": ["n1"]
 }

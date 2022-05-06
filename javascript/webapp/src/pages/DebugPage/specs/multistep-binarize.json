@@ -7,7 +7,6 @@
 			"id": "binarize",
 			"verb": "binarize",
 			"input": { "source": "data/companies.csv" },
-			"output": { "target": "binarize-1" },
 			"args": {
 				"column": "Employees",
 				"to": "Smallest and Largest",
@@ -26,5 +25,7 @@
 				"logical": "or"
 			}
 		}
-	]
+	],
+	"input": ["data/companies.csv"],
+	"output": ["binarize"]
 }
