@@ -33,6 +33,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		...props
 	}) {
 		const graph = useGraphManager(inputs)
+		const [graphSteps, setGraphSteps] = useState<Step[]>(graph.steps)
 
 		//
 		// Selected Step/Index State for the component
@@ -90,6 +91,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		useEffect(
 			function emitCurrentTableList() {
 				return graph.onChange(() => {
+					setGraphSteps(graph.steps)
 					onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
 				})
 			},
@@ -104,7 +106,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 					onDeleteClicked={onDeleteClicked}
 					onSelect={onSelect}
 					onEditClicked={onEditClicked}
-					steps={graph.steps}
+					steps={graphSteps}
 					outputs={outputs}
 					onDuplicateClicked={onDuplicateClicked}
 					onStartNewStep={showTransformModal}

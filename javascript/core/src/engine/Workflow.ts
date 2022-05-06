@@ -92,6 +92,13 @@ export class Workflow {
 		return step
 	}
 
+	public removeStep(index: number) {
+		this._steps = [
+			...this.steps.slice(0, index),
+			...this.steps.slice(index + 1),
+		]
+	}
+
 	public updateStep(stepInput: StepInput, index: number): Step {
 		const step = readStep(stepInput, this._steps[index - 1])
 		this._steps[index] = step

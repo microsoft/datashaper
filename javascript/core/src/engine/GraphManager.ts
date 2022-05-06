@@ -102,17 +102,6 @@ export class GraphManager {
 		return this.outputObservables.has(name)
 	}
 
-	public outputForNodeId(
-		nodeId: string,
-		nodeOutput?: string,
-	): Maybe<TableObservable> {
-		const definition = this.outputDefinitions.find(
-			def => def.node === nodeId && def.output === nodeOutput,
-		)
-		if (definition == null) return
-		return this.output(definition.name)
-	}
-
 	/**
 	 * Remove all steps, inputs, and outputs from the pipeline
 	 */
@@ -193,8 +182,13 @@ export class GraphManager {
 			nextNode.bind({ node: prevNode })
 		}
 
+		// Remove step outputs from the configuration
+		const stepOutputs = this._outputDefinitions.filter(o => o.node === node.id)
+		stepOutputs.forEach(o => this.removeOutput(o.name))
+
 		// Remove the step from the graph
 		this._graph.remove(step.id)
+		this.workflow.removeStep(index)
 		this._onChange.next()
 	}
 
@@ -287,12 +281,41 @@ export class GraphManager {
 		return this.outputObservables.get(name)
 	}
 
+	public outputForNodeId(
+		nodeId: string,
+		nodeOutput?: string,
+	): Maybe<TableObservable> {
+		const output = this.outputNameForNode(nodeId, nodeOutput)
+		if (output) {
+			return this.output(output)
+		}
+	}
+
 	/**
 	 * Get the latest output value
 	 * @param name - The output to retrieve
 	 */
 	public latest(name: string): Maybe<TableContainer> {
 		return this.outputCache.get(name)
+	}
+
+	public latestForNodeId(
+		nodeId: string,
+		nodeOutput?: string,
+	): Maybe<TableContainer> {
+		const output = this.outputNameForNode(nodeId, nodeOutput)
+		if (output) {
+			return this.latest(output)
+		}
+	}
+
+	public outputNameForNode(
+		nodeId: string,
+		nodeOutput?: string,
+	): string | undefined {
+		return this.outputDefinitions.find(
+			def => def.node === nodeId && def.output === nodeOutput,
+		)?.name
 	}
 
 	/**

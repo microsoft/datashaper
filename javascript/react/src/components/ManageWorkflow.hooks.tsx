@@ -5,39 +5,39 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { GraphManager, Step } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import isArray from 'lodash-es/isArray'
+
 import { useCallback, useEffect, useState } from 'react'
 
-import type { ModalState } from '../hooks'
-import { useModalState, useStaticValue } from '../hooks/index.js'
-
-//import { useCreateTableName } from '../hooks/common.js'
+import {
+	useModalState,
+	useStaticValue,
+	ModalState,
+	useCreateTableName,
+} from '../hooks/index.js'
+import cloneDeep from 'lodash-es/cloneDeep'
 
 export function useOnDuplicateStep(
 	graph: GraphManager,
 	table?: ColumnTable,
-	onSave?: (step: Step, ioutput: string | undefined, ndex?: number) => void,
+	onSave?: (step: Step, output: string | undefined, ndex?: number) => void,
 ): (_step: Step) => void {
-	//const createTableName = useCreateTableName(graph)
-	const formattedColumnArgs = useFormattedColumnArgWithCount()
+	const createTableName = useCreateTableName(graph)
+	const argsDuplicator = useArgsDuplicator()
 
 	return useCallback(
 		(step: Step) => {
-			// const _tableName = createTableName(_step.id)
-
-			const outputTable = graph ? graph.latest(step.id)?.table : table
-			const formattedArgs = formattedColumnArgs(
-				step,
-				outputTable?.columnNames() ?? [],
+			const outputTable = table ?? graph?.latestForNodeId(step.id)?.table
+			onSave?.(
+				{
+					...step,
+					id: undefined,
+					args: argsDuplicator(step, outputTable?.columnNames()),
+					input: cloneDeep(step.input),
+				},
+				createTableName(graph.outputNameForNode(step.id) ?? step.id),
 			)
-			const newStep = {
-				...step,
-				args: formattedArgs,
-				inputs: { source: { node: step.id } },
-			}
-			onSave?.(newStep, undefined)
 		},
-		[onSave, formattedColumnArgs, graph, table],
+		[onSave, argsDuplicator, graph, table],
 	)
 }
 
@@ -142,30 +142,28 @@ export function useEditorTarget(selectedStepIndex: number | undefined): {
 	}
 }
 
-export function useOnDeleteStep(graph: GraphManager): () => void {
+export function useOnDeleteStep(graph: GraphManager): (index: number) => void {
 	return useCallback(
-		(...args: any[]) => {
-			console.log('TODO: delete', ...args, graph)
+		(index: number) => {
+			graph.removeStep(index)
 		},
 		[graph],
 	)
 }
 
-function useFormattedColumnArgWithCount(): (
+function useArgsDuplicator(): (
 	step: Step,
-	columnNames: string[],
+	columnNames: string[] | undefined,
 ) => object {
 	const createColumnName = useCreateColumnName()
-
 	return useCallback(
-		(step: Step, columnNames) => {
-			let args = step.args as Record<string, unknown>
-			Object.keys(args).forEach(x => {
-				if (x === 'to' && !isArray(args[x])) {
-					const newColumnName = createColumnName(args[x] as string, columnNames)
-					args = { ...args, [x]: newColumnName }
-				}
-			})
+		(step: Step, columnNames: string[] | undefined) => {
+			let args = cloneDeep(step.args) as Record<string, unknown>
+
+			// if there's a single-column to-field, find a unique name for it
+			if (args['to'] && typeof args['to'] === 'string') {
+				args['to'] = createColumnName(args['to'] as string, columnNames)
+			}
 			return args
 		},
 		[createColumnName],
@@ -174,17 +172,17 @@ function useFormattedColumnArgWithCount(): (
 
 function useCreateColumnName(): (
 	name: string,
-	columnNames: string[],
+	columnNames: string[] | undefined,
 ) => string {
 	const verifyColumnName = useCallback(
-		(name: string, columnNames: string[]): boolean => {
-			return columnNames.includes(name)
+		(name: string, columnNames: string[] | undefined): boolean => {
+			return columnNames?.includes(name) ?? false
 		},
 		[],
 	)
 
 	return useCallback(
-		(name: string, columnNames: string[]) => {
+		(name: string, columnNames: string[] | undefined) => {
 			const originalName = name.replace(/( \(\d+\))/, '')
 			let derivedName = originalName
 
