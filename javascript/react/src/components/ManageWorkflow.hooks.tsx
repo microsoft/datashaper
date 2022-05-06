@@ -4,11 +4,8 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { GraphManager, Step } from '@data-wrangling-components/core'
-import type { ModalState } from '@data-wrangling-components/react-hooks'
-import {
-	useModalState,
-	useStaticValue,
-} from '@data-wrangling-components/react-hooks'
+import type { ModalState } from '../hooks'
+import { useModalState, useStaticValue } from '../hooks'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import isArray from 'lodash-es/isArray'
 import { useCallback, useEffect, useState } from 'react'

@@ -1,7 +1,0 @@
-/*!
- * Copyright (c) Microsoft. All rights reserved.
- * Licensed under the MIT license. See LICENSE file in the project.
- */
-export * from './Lookup.base.js'
-export * from './Lookup.js'
-export * from './LookupDescription.js'

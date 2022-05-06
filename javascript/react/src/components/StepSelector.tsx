@@ -6,7 +6,7 @@ import {
 	ColumnarMenu,
 	ColumnarMenuList,
 	ContextualMenuItemSearchBox,
-} from '@data-wrangling-components/react-controls'
+} from '../controls/index.js'
 import type { IContextualMenuListProps } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'

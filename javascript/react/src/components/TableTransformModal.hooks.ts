@@ -9,9 +9,9 @@ import {
 	withInputTableDropdown,
 	withOutputColumnTextfield,
 	withOutputTableTextfield,
-} from '@data-wrangling-components/react-hocs'
-import type { StepComponentProps } from '@data-wrangling-components/react-types'
-import { selectStepComponent } from '@data-wrangling-components/react-verbs'
+} from '../hocs/index.js'
+import type { StepComponentProps } from '../types.js'
+import { selectStepComponent } from '../selectStepComponent.js'
 import type { IModalStyleProps, IModalStyles } from '@fluentui/react'
 import type { IStyleFunctionOrObject } from '@fluentui/utilities'
 import { useThematic } from '@thematic/react'

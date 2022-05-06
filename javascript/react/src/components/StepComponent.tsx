@@ -7,11 +7,9 @@ import {
 	withInputColumnDropdown,
 	withInputTableDropdown,
 	withOutputColumnTextfield,
-} from '@data-wrangling-components/react-hocs'
-import {
-	selectStepComponent,
-	selectStepDescription,
-} from '@data-wrangling-components/react-verbs'
+} from '../hocs'
+import { selectStepComponent } from '../selectStepComponent.js'
+import { selectStepDescription } from '../selectStepDescription.js'
 import flow from 'lodash-es/flow.js'
 import { memo, useCallback, useMemo } from 'react'
 import type { StepComponentProps } from './StepComponent.types.js'

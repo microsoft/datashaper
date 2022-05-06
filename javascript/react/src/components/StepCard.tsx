@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { selectStepDescription } from '@data-wrangling-components/react-verbs'
+import { selectStepDescription } from '../selectStepDescription.js'
 import { DocumentCardActions } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 

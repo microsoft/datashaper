@@ -10,7 +10,7 @@ export {
 	createDefaultCommandBar,
 	createDefaultHeaderCommandBar,
 	createLazyLoadingGroupHeader,
-} from './component-factories.js'
+} from './hocs/component-factories.js'
 export { useGraphManager } from './hooks/index.js'
 
 /*
@@ -44,11 +44,3 @@ export { TableTransformModal } from './components/TableTransformModal.js'
 export type { TransformModalProps } from './components/TableTransformModal.types.js'
 export { Tooltip } from './components/Tooltip.js'
 export type { TooltipProps } from './components/Tooltip.types.js'
-
-/*
- * Re-export react libraries
- */
-export * from '@data-wrangling-components/react-controls'
-export * from '@data-wrangling-components/react-hocs'
-export * from '@data-wrangling-components/react-types'
-export * from '@data-wrangling-components/react-verbs'
