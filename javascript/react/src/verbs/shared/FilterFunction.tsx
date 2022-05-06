@@ -2,39 +2,36 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Criterion } from '@data-wrangling-components/core'
 import {
 	BooleanComparisonOperator,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
-import { ColumnOrValueComboBox, EnumDropdown } from '../../../controls/index.js'
+import { ColumnOrValueComboBox, EnumDropdown } from '../../controls/index.js'
 import {
 	useSimpleDropdownOptions,
 	useTableColumnNames,
-} from '../../../hooks/index.js'
+} from '../../hooks/index.js'
 import { DataType } from '@essex/arquero'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useMemo } from 'react'
-import styled from 'styled-components'
+import {
+	Container,
+	SideBySide,
+	narrowDropdownStyles,
+	leftStyles,
+} from './FilterFunction.styles.js'
 
-import { InputExplainer } from '../../../styles.js'
+import { InputExplainer } from '../../styles.js'
 import {
 	useColumnTyping,
 	useIsEmpty,
 	usePlaceholderText,
 } from './FilterFunction.hooks.js'
+import type { FilterFunctionProps } from './FilterFunction.types.js'
 
-export interface FilterFunctionProps {
-	table: ColumnTable
-	column: string
-	criterion: Criterion
-	onChange?: (filter?: Criterion) => void
-	suppressLabels?: boolean
-}
 /**
  * Just the comparison logic/ops for a filter.
  * Input table and source column is expected to be edited elsewhere and configured as the step input.
@@ -153,30 +150,3 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		)
 	},
 )
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-`
-
-const SideBySide = styled.div`
-	display: flex;
-	justify-content: flex-start;
-	align-items: flex-end;
-`
-
-/**
- * For side-by-side dropdowns with a 12px gap
- */
-const narrowDropdownStyles = {
-	root: {
-		width: 135,
-	},
-}
-
-const leftStyles = {
-	root: {
-		...narrowDropdownStyles.root,
-		marginRight: 12,
-	},
-}
