@@ -32,7 +32,7 @@ export const Title = styled.h3`
 `
 
 export const StepComponentContainer = styled.div`
-	width: 316px;
+	width: 470px;
 	max-height: ${MAX_HEIGHT}px;
 	overflow: hidden auto;
 `

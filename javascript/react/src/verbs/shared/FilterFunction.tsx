@@ -4,31 +4,35 @@
  */
 import {
 	BooleanComparisonOperator,
+	DateComparisonOperator,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
 import { DataType } from '@essex/arquero'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
-import { IconButton } from '@fluentui/react'
-import { memo, useCallback, useMemo } from 'react'
-
-import { ColumnOrValueComboBox, EnumDropdown } from '../../controls/index.js'
+import { IconButton, SpinButton } from '@fluentui/react'
+import { memo, useCallback, useMemo, useState } from 'react'
+import {
+	CalendarPicker,
+	ColumnCriteriaCombobox,
+	EnumDropdown,
+} from '../../controls/index.js'
 import {
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '../../hooks/index.js'
 import { InputExplainer } from '../../styles.js'
-import {
-	useColumnTyping,
-	useIsEmpty,
-	usePlaceholderText,
-} from './FilterFunction.hooks.js'
+import { useColumnTyping, useIsEmpty } from './FilterFunction.hooks.js'
 import {
 	Container,
 	leftStyles,
-	narrowDropdownStyles,
 	SideBySide,
+	BooleanToggle,
+	FilterContainer,
+	OrLabel,
+	TextValue,
+	spinStyles,
 } from './FilterFunction.styles.js'
 import type { FilterFunctionProps } from './FilterFunction.types.js'
 
@@ -47,13 +51,47 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 	}) {
 		const handleOpChange = useCallback(
 			(_e: React.FormEvent<HTMLDivElement>, opt?: IDropdownOption) => {
-				onChange?.({
+				onChange &&
+					onChange({
+						...criterion,
+						operator: opt?.key as
+							| StringComparisonOperator
+							| NumericComparisonOperator
+							| BooleanComparisonOperator
+							| DateComparisonOperator,
+					})
+			},
+			[criterion, onChange],
+		)
+
+		const onSelectDate = useCallback(
+			(date: Date): void => {
+				const update = {
 					...criterion,
-					operator: opt?.key as
-						| StringComparisonOperator
-						| NumericComparisonOperator
-						| BooleanComparisonOperator,
-				})
+					type: FilterCompareType.Value,
+					value: date,
+				}
+				onChange && onChange(update)
+				setCleanLabel(false)
+			},
+			[criterion, onChange],
+		)
+
+		const handleDateComboBoxChange = useCallback(
+			(
+				_e: any,
+				option: IComboBoxOption | undefined,
+				_index: number | undefined,
+				value: string | undefined,
+			) => {
+				const update = {
+					...criterion,
+					type: FilterCompareType.Column,
+					value: option ? option.key : value,
+				}
+				onChange?.(update)
+
+				setCleanLabel(true)
 			},
 			[criterion, onChange],
 		)
@@ -67,7 +105,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			) => {
 				const update = {
 					...criterion,
-					type: option ? FilterCompareType.Column : FilterCompareType.Value,
+					type: FilterCompareType.Column,
 					value: option ? option.key : value,
 				}
 				onChange?.(update)
@@ -75,7 +113,49 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			[criterion, onChange],
 		)
 
+		const onChangeTextFieldValue = useCallback(
+			(
+				_event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+				newValue?: string,
+			) => {
+				const update = {
+					...criterion,
+					type: FilterCompareType.Value,
+					value: newValue,
+				}
+				onChange?.(update)
+			},
+			[criterion, onChange],
+		)
+
+		const spinButtonOnChange = useCallback(
+			(_event: React.SyntheticEvent<HTMLElement>, newValue?: string) => {
+				if (newValue !== undefined) {
+					const update = {
+						...criterion,
+						type: FilterCompareType.Value,
+						value: newValue,
+					}
+					onChange?.(update)
+				}
+			},
+			[criterion, onChange],
+		)
+
+		const onToggleChange = (
+			_ev: React.MouseEvent<HTMLElement>,
+			checked?: boolean,
+		) => {
+			const update = {
+				...criterion,
+				type: FilterCompareType.Value,
+				value: checked,
+			}
+			onChange?.(update)
+		}
+
 		const { type, columnFilter } = useColumnTyping(table, column)
+		const [cleanLabel, setCleanLabel] = useState<boolean>(false)
 
 		const operatorDropdown = useMemo(() => {
 			const shared = {
@@ -93,6 +173,10 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 				} else if (type === DataType.Boolean) {
 					return (
 						<EnumDropdown enumeration={BooleanComparisonOperator} {...shared} />
+					)
+				} else if (type === DataType.Date) {
+					return (
+						<EnumDropdown enumeration={DateComparisonOperator} {...shared} />
 					)
 				}
 			}
@@ -117,7 +201,6 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 		const isEmpty = useIsEmpty(criterion)
 		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])
-		const placeholder = usePlaceholderText(type)
 		const columns = useTableColumnNames(table, columnFilter)
 		const columnOptions = useSimpleDropdownOptions(columns)
 
@@ -125,16 +208,60 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			<Container>
 				<SideBySide>
 					{operatorDropdown}
-					<ColumnOrValueComboBox
-						required={!suppressLabels}
-						options={columnOptions}
-						disabled={isEmpty}
-						label={suppressLabels ? undefined : 'Comparison value'}
-						placeholder={placeholder}
-						text={criterion.value ? `${criterion.value}` : undefined}
-						onChange={handleComboBoxChange}
-						styles={narrowDropdownStyles}
-					/>
+					<FilterContainer>
+						{type === DataType.Date ? (
+							<CalendarPicker
+								onSelectDate={onSelectDate}
+								disabled={isEmpty}
+								cleanLabel={cleanLabel}
+							/>
+						) : null}
+
+						{type === DataType.String ? (
+							<TextValue
+								onChange={onChangeTextFieldValue}
+								disabled={isEmpty}
+							></TextValue>
+						) : null}
+
+						{type === DataType.Number ? (
+							<SpinButton
+								min={0}
+								step={1}
+								value={criterion.value}
+								styles={spinStyles}
+								disabled={isEmpty}
+								onChange={spinButtonOnChange}
+							/>
+						) : null}
+
+						{type === DataType.Boolean ? (
+							<BooleanToggle
+								defaultChecked
+								onText="True"
+								offText="False"
+								onChange={onToggleChange}
+								disabled={isEmpty}
+							/>
+						) : null}
+
+						<OrLabel>or</OrLabel>
+
+						{type === DataType.Date ? (
+							<ColumnCriteriaCombobox
+								options={columnOptions}
+								onChange={handleDateComboBoxChange}
+								disabled={isEmpty}
+							/>
+						) : (
+							<ColumnCriteriaCombobox
+								options={columnOptions}
+								onChange={handleComboBoxChange}
+								disabled={isEmpty}
+							/>
+						)}
+					</FilterContainer>
+
 					<IconButton
 						title={'Remove this criterion'}
 						iconProps={{ iconName: 'Delete' }}

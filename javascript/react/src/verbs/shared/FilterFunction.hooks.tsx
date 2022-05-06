@@ -5,9 +5,9 @@
 import type { Criterion } from '@data-wrangling-components/core'
 import {
 	BooleanComparisonOperator,
+	DateComparisonOperator,
 	NumericComparisonOperator,
-	StringComparisonOperator,
-} from '@data-wrangling-components/core'
+	StringComparisonOperator} from '@data-wrangling-components/core'
 import { columnTypes, DataType } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
@@ -23,7 +23,9 @@ export function useIsEmpty(criterion: Criterion): boolean {
 			operator === BooleanComparisonOperator.IsTrue ||
 			operator === BooleanComparisonOperator.IsFalse ||
 			operator === BooleanComparisonOperator.IsEmpty ||
-			operator === BooleanComparisonOperator.IsNotEmpty
+			operator === BooleanComparisonOperator.IsNotEmpty ||
+			operator === DateComparisonOperator.IsEmpty ||
+			operator === DateComparisonOperator.IsNotEmpty 
 		)
 	}, [criterion])
 }

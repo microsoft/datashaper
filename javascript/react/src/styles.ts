@@ -26,3 +26,12 @@ export const dropdownStyles = {
 		width: 220,
 	},
 }
+
+/**
+ * For side-by-side dropdowns with a 12px gap
+ */
+export const narrowDropdownStyles = {
+	root: {
+		width: 135,
+	},
+}

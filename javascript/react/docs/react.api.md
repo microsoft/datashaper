@@ -314,7 +314,7 @@ export interface TransformModalProps extends IModalProps {
 // Warning: (ae-missing-release-tag) "useGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useGraphManager(inputs: TableContainer[]): GraphManager;
+export function useGraphManager(workflow: Workflow | undefined, inputs: TableContainer[]): GraphManager;
 
 // (No @packageDocumentation comment for this package)
 
