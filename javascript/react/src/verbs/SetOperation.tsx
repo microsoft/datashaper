@@ -2,16 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@data-wrangling-components/core'
-import { TableDropdown } from '../controls/index.js'
 import { withLoadedTable } from '../hocs/index.js'
-import { useSimpleDropdownOptions, useTableNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
-import { ActionButton, IconButton, Label } from '@fluentui/react'
-import { memo, useCallback, useMemo } from 'react'
-import styled from 'styled-components'
-
-import { LeftAlignedRow } from '../styles.js'
+import { ActionButton, Label } from '@fluentui/react'
+import { memo, useCallback } from 'react'
+import { Container, icons } from './SetOperation.styles.js'
+import { useOthers } from './SetOperation.hooks.js'
 
 /**
  * Provides inputs to create a list of tables.
@@ -37,7 +33,7 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 				{others}
 				<ActionButton
 					onClick={handleButtonClick}
-					iconProps={addIconProps}
+					iconProps={icons.add}
 					disabled={!dataTable}
 				>
 					Add table
@@ -46,63 +42,3 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 		)
 	}),
 )
-
-function useOthers(
-	step: Step,
-	onChange?: (step: Step) => void,
-	store?: GraphManager,
-) {
-	const tableNames = useTableNames(store)
-	const tableOptions = useSimpleDropdownOptions(tableNames)
-	return useMemo(() => {
-		return (step.input.others || EMPTY).map((input, index) => {
-			const other = input.node
-
-			// on delete, remove the input
-			const handleDeleteClick = () => {
-				onChange?.({
-					...step,
-					input: {
-						...step.input,
-						others: (step.input.others || EMPTY).filter(o => o !== input),
-					} as Step['input'],
-				})
-			}
-			if (!store) {
-				return null
-			}
-			return (
-				<LeftAlignedRow key={`set-op-${other}-${index}`}>
-					<TableDropdown
-						label={''}
-						options={tableOptions}
-						selectedKey={other}
-						onChange={(_evt, option) => {
-							const update = { ...step }
-							if (option) {
-								input.node = `${option.key}`
-							}
-							onChange?.(update)
-						}}
-					/>
-					<IconButton
-						title={'Remove this table'}
-						iconProps={deleteIconProps}
-						onClick={handleDeleteClick}
-					/>
-				</LeftAlignedRow>
-			)
-		})
-	}, [step, store, tableOptions, onChange])
-}
-
-const EMPTY: any[] = []
-
-const addIconProps = { iconName: 'Add' }
-const deleteIconProps = { iconName: 'Delete' }
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-`

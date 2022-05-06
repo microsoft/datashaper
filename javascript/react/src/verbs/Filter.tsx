@@ -11,7 +11,7 @@ import type { StepComponentProps } from '../types.js'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
-import styled from 'styled-components'
+import { Container, Vertical } from './Filter.styles.js'
 
 import { LeftAlignedRow } from '../styles.js'
 import { FilterFunction } from './shared/index.js'
@@ -118,15 +118,3 @@ function useFilters(
 		)
 	})
 }
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-`
-
-const Vertical = styled.div<{ index: number }>`
-	display: flex;
-	flex-direction: column;
-	margin-top: ${({ index }) => (index > 0 ? 6 : 0)}px;
-`

@@ -9,9 +9,8 @@ import type { StepComponentProps } from '../types.js'
 import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
 import { memo } from 'react'
-import styled from 'styled-components'
-
 import { LeftAlignedRow } from '../styles.js'
+import { Container, Or, spinStyles } from './Sample.styles.js'
 
 const whole = format('d')
 
@@ -66,24 +65,3 @@ export const Sample: React.FC<StepComponentProps<SampleArgs>> = memo(
 		)
 	},
 )
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`
-
-const Or = styled.div`
-	margin-left: 8px;
-	margin-right: 8px;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	color: ${({ theme }) => theme.application().midContrast().hex()};
-`
-
-const spinStyles = {
-	root: {
-		width: 120,
-	},
-}
