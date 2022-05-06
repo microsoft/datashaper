@@ -50,11 +50,11 @@ export interface Criterion {
 	 * or against the value of another column
 	 */
 	type: FilterCompareType
-	// TODO: we should support Date comparisons
 	operator:
 		| NumericComparisonOperator
 		| StringComparisonOperator
 		| BooleanComparisonOperator
+		| DateComparisonOperator
 }
 
 export enum Verb {
@@ -127,6 +127,15 @@ export enum NumericComparisonOperator {
 	GreaterThanOrEqual = '>=',
 	IsEmpty = 'is empty',
 	IsNotEmpty = 'is not empty',
+}
+
+export enum DateComparisonOperator {
+	Equals = 'equals',
+	NotEqual = 'is not equal',
+	Before = 'before',
+	After = 'after',
+	IsEmpty = 'is empty',
+	IsNotEmpty = 'is not empty'
 }
 
 export enum StringComparisonOperator {

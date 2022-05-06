@@ -17,6 +17,24 @@ import type { IDropdownOption } from '@fluentui/react';
 import type { IDropdownProps } from '@fluentui/react';
 import type { ITextFieldProps } from '@fluentui/react';
 import type { OrderbyInstruction } from '@data-wrangling-components/core';
+import { default as React_2 } from 'react';
+
+// Warning: (ae-missing-release-tag) "CalendarPicker" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const CalendarPicker: React_2.FC<CalendarPickerProps>;
+
+// Warning: (ae-missing-release-tag) "CalendarPickerProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CalendarPickerProps {
+    // (undocumented)
+    cleanLabel: boolean;
+    // (undocumented)
+    disabled: boolean;
+    // (undocumented)
+    onSelectDate: (date: Date) => void;
+}
 
 // Warning: (ae-missing-release-tag) "ColumnarMenu" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -34,6 +52,19 @@ export const ColumnarMenuList: React.FC<IContextualMenuListProps>;
 export interface ColumnarMenuProps extends IContextualMenuProps {
     // (undocumented)
     text?: string;
+}
+
+// Warning: (ae-missing-release-tag) "ColumnCriteriaCombobox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const ColumnCriteriaCombobox: React.FC<ColumnCriteriaComboboxProps>;
+
+// Warning: (ae-missing-release-tag) "ColumnCriteriaComboboxProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ColumnCriteriaComboboxProps extends Partial<IComboBoxProps> {
+    // (undocumented)
+    options: IComboBoxOption[];
 }
 
 // Warning: (ae-missing-release-tag) "ColumnOrValueComboBox" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

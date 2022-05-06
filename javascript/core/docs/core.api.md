@@ -175,9 +175,27 @@ export function createTableStore(tables?: TableContainer[]): Store<TableContaine
 // @public (undocumented)
 export interface Criterion {
     // (undocumented)
-    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator;
+    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator | DateComparisonOperator;
     type: FilterCompareType;
     value?: Value;
+}
+
+// Warning: (ae-missing-release-tag) "DateComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum DateComparisonOperator {
+    // (undocumented)
+    After = "after",
+    // (undocumented)
+    Before = "before",
+    // (undocumented)
+    Equals = "equals",
+    // (undocumented)
+    IsEmpty = "is empty",
+    // (undocumented)
+    IsNotEmpty = "is not empty",
+    // (undocumented)
+    NotEqual = "is not equal"
 }
 
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
