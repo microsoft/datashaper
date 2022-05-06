@@ -9,9 +9,8 @@ import {
 } from '@data-wrangling-components/react'
 import type { TableContainer } from '@essex/arquero'
 import { memo, useState } from 'react'
-import styled from 'styled-components'
-
 import { useTables } from './PrepareDataPage.hooks'
+import { Container, Wrapper, mgmtStyles } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	// state for the input tables
@@ -42,19 +41,3 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		</Container>
 	)
 })
-
-const Container = styled.div`
-	height: calc(100vh - 80px);
-	position: relative;
-`
-
-const Wrapper = styled.div`
-	height: 90%;
-`
-
-const mgmtStyles = {
-	root: {
-		height: 36,
-		paddingLeft: 9,
-	},
-}

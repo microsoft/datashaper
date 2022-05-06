@@ -8,13 +8,23 @@ import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton, PrimaryButton } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
-import styled from 'styled-components'
 
 import { ControlBar } from './ControlBar'
 import { useSteps, useTables } from './DebugPage.hooks'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
 import { Table } from './Table'
+import {
+	Container,
+	Workspace,
+	Commands,
+	Buttons,
+	StepBlock,
+	InputsSection,
+	TableSection,
+	OutputsColumn,
+	StepsColumn,
+} from './DebugPage.styles.js'
 
 const columns = {
 	ID: {
@@ -163,50 +173,3 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 		</Container>
 	)
 })
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	padding: 0px 20px 0px 20px;
-`
-
-const Workspace = styled.div`
-	width: 100%;
-`
-
-const Commands = styled.div`
-	width: 200px;
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	justify-content: space-between;
-`
-
-const Buttons = styled.div`
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-`
-
-const StepBlock = styled.div`
-	display: flex;
-`
-
-const InputsSection = styled.div`
-	margin-bottom: 80px;
-`
-
-const TableSection = styled.div`
-	max-height: 400px;
-`
-
-const StepsColumn = styled.div`
-	width: 600px;
-`
-
-const OutputsColumn = styled.div`
-	margin-left: 40px;
-	display: flex;
-	flex-direction: column;
-`
