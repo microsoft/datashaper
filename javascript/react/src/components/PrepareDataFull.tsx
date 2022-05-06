@@ -3,22 +3,22 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableMetadata } from '@essex/arquero'
-import type { PrepareDataFullProps } from './PrepareDataFull.types.js'
 import { Icon } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback, useState } from 'react'
 
 import { ManageWorkflow } from './ManageWorkflow.js'
-import { PreviewTable } from './PreviewTable.jsx'
-import { TableListBar } from './TableListBar.jsx'
 import {
 	Container,
-	SectionTitle,
 	InputContainer,
 	OutputContainer,
+	SectionTitle,
 	StepsTrayContainer,
 	WorkflowContainer,
 } from './PrepareDataFull.styles.js'
+import type { PrepareDataFullProps } from './PrepareDataFull.types.js'
+import { PreviewTable } from './PreviewTable.jsx'
+import { TableListBar } from './TableListBar.jsx'
 
 export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 	function PrepareDataFull({

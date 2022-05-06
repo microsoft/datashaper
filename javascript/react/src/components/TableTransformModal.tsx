@@ -17,22 +17,22 @@ import { Guidance } from './Guidance.js'
 import { StepSelector } from './StepSelector.js'
 import {
 	useHandleSaveClick,
-	useStepArgsComponent,
 	useInternalTableStep,
 	useModalStyles,
+	useStepArgsComponent,
 	useStepOutputHandling,
 } from './TableTransformModal.hooks.js'
-import type { TransformModalProps } from './TableTransformModal.types.js'
 import {
-	icons,
-	ContainerBody,
 	ButtonContainer,
+	ContainerBody,
 	GuidanceContainer,
 	Header,
+	icons,
 	StepComponentContainer,
 	StepSelectorContainer,
 	Title,
 } from './TableTransformModal.styles.js'
+import type { TransformModalProps } from './TableTransformModal.types.js'
 
 export const TableTransformModal: React.FC<TransformModalProps> = memo(
 	function TableTransformModal({

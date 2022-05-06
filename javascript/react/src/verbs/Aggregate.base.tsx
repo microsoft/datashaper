@@ -4,9 +4,9 @@
  */
 import type { AggregateArgs } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
-import type { StepComponentBaseProps } from '../types.js'
 import { useMemo } from 'react'
 
+import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { VerbForm } from '../verbForm/VerbForm.js'
 import { dropdown, enumDropdown } from '../verbForm/VerbFormFactories.js'

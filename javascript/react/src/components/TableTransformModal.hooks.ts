@@ -4,14 +4,6 @@
  */
 import type { GraphManager, Step, Verb } from '@data-wrangling-components/core'
 import { readStep } from '@data-wrangling-components/core'
-import {
-	withInputColumnDropdown,
-	withInputTableDropdown,
-	withOutputColumnTextfield,
-	withOutputTableTextfield,
-} from '../hocs/index.js'
-import type { StepComponentProps } from '../types.js'
-import { selectStepComponent } from '../selectStepComponent.js'
 import type { IModalStyleProps, IModalStyles } from '@fluentui/react'
 import type { IStyleFunctionOrObject } from '@fluentui/utilities'
 import { useThematic } from '@thematic/react'
@@ -19,7 +11,15 @@ import flow from 'lodash-es/flow.js'
 import merge from 'lodash-es/merge.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import {
+	withInputColumnDropdown,
+	withInputTableDropdown,
+	withOutputColumnTextfield,
+	withOutputTableTextfield,
+} from '../hocs/index.js'
 import { useCreateTableName, useFormattedColumnArg } from '../hooks/index.js'
+import { selectStepComponent } from '../selectStepComponent.js'
+import type { StepComponentProps } from '../types.js'
 
 export function useHandleSaveClick(
 	step: Step | undefined,

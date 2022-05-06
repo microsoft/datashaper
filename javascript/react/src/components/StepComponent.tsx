@@ -3,17 +3,18 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
+import flow from 'lodash-es/flow.js'
+import { memo, useCallback, useMemo } from 'react'
+
 import {
 	withInputColumnDropdown,
 	withInputTableDropdown,
 	withOutputColumnTextfield,
-} from '../hocs'
+} from '../hocs/index.js'
 import { selectStepComponent } from '../selectStepComponent.js'
 import { selectStepDescription } from '../selectStepDescription.js'
-import flow from 'lodash-es/flow.js'
-import { memo, useCallback, useMemo } from 'react'
-import type { StepComponentProps } from './StepComponent.types.js'
 import { Container, DescriptionContainer } from './StepComponent.styles.js'
+import type { StepComponentProps } from './StepComponent.types.js'
 
 /**
  * Let's us render the Steps in a loop while memoing all the functions

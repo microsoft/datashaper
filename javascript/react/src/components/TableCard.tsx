@@ -4,8 +4,9 @@
  */
 import { DocumentCardTitle, TooltipHost } from '@fluentui/react'
 import { memo } from 'react'
+
+import { Card,icons, PreviewIcon, styles } from './TableCard.styles.js'
 import type { TableCardProps } from './TableCard.types.js'
-import { styles, icons, PreviewIcon, Card } from './TableCard.styles.js'
 
 export const TableCard: React.FC<TableCardProps> = memo(function TableCard({
 	index,

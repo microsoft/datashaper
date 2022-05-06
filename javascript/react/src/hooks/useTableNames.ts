@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GraphManager } from '@data-wrangling-components/core'
-import { useEffect, useState, useCallback } from 'react'
+import { useCallback,useEffect, useState } from 'react'
 
 /**
  * Creates a list of table-names from the tables in a store

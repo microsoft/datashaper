@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { StepComponentProps } from '../types'
 import { memo } from 'react'
 
+import type { StepComponentProps } from '../types'
 import { Filter } from './Filter.js'
 
 /**

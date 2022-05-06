@@ -3,14 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RenameArgs, Step } from '@data-wrangling-components/core'
-import { TableColumnDropdown } from '../controls/index.js'
-import { withLoadedTable } from '../hocs/index.js'
-import {
-	useColumnRecordDelete,
-	useSimpleDropdownOptions,
-	useTableColumnNames,
-} from '../hooks/index.js'
-import type { StepComponentProps } from '../types.js'
 import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
@@ -23,6 +15,14 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
+import { TableColumnDropdown } from '../controls/index.js'
+import { withLoadedTable } from '../hocs/index.js'
+import {
+	useColumnRecordDelete,
+	useSimpleDropdownOptions,
+	useTableColumnNames,
+} from '../hooks/index.js'
+import type { StepComponentProps } from '../types.js'
 import {
 	useDisabled,
 	useHandleAddButtonClick,

@@ -4,14 +4,13 @@
  */
 import type { OutputColumnArgs } from '@data-wrangling-components/core'
 import { isOutputColumnStep } from '@data-wrangling-components/core'
-import { dropdownStyles } from '../styles.js'
-import { useTextFieldChangeHandler } from '../hooks/index.js'
-import { LeftAlignedRow } from '../styles.js'
-import type { StepComponentProps } from '../types.js'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
+import { useTextFieldChangeHandler } from '../hooks/index.js'
+import { dropdownStyles , LeftAlignedRow } from '../styles.js'
+import type { StepComponentProps } from '../types.js'
 import type { HOCFunction } from './types.js'
 /**
  * Higher order component generator to wrap a Step in the output column text field.

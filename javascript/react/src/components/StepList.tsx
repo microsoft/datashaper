@@ -5,15 +5,15 @@
 import { DefaultButton } from '@fluentui/react'
 import { memo, useEffect, useRef } from 'react'
 
-import { DetailText } from './DetailText.jsx'
 import { StepCard } from '../index.js'
-import type { StepListProps } from './StepList.types.js'
+import { DetailText } from './DetailText.jsx'
 import {
 	addButtonStyles,
-	icons,
-	Container,
 	ButtonContainer,
+	Container,
+	icons,
 } from './StepList.styles.js'
+import type { StepListProps } from './StepList.types.js'
 
 export const StepList: React.FC<StepListProps> = memo(function StepsList({
 	steps,

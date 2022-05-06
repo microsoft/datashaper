@@ -8,14 +8,14 @@ import type {
 	Step,
 } from '@data-wrangling-components/core'
 import { toggleListItem } from '@data-wrangling-components/utilities'
+import upperFirst from 'lodash-es/upperFirst.js'
+
+import { getEnumDropdownOptions } from '../enums.js'
 import {
 	getLeftColumn,
 	getRightColumn,
 	getSimpleDropdownOptions,
 } from '../hooks/index.js'
-import { getEnumDropdownOptions } from '../enums.js'
-import upperFirst from 'lodash-es/upperFirst.js'
-
 import type {
 	CheckboxFormInput,
 	FormInput,

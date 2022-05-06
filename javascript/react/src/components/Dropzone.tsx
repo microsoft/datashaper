@@ -6,8 +6,8 @@ import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 
 import { useDropzone } from './Dropzone.hooks.js'
-import type { DropzoneProps } from './Dropzone.types.js'
 import { DEFAULT_STYLES, staticStyles } from './Dropzone.styles.js'
+import type { DropzoneProps } from './Dropzone.types.js'
 
 const DEFAULT_ACCEPTED_FILE_TYPES: string[] = []
 const DEFAULT_DROPZONE_OPTIONS: DropzoneProps['dropzoneOptions'] = {}

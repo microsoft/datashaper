@@ -7,8 +7,8 @@ import { memo } from 'react'
 
 import { CommandBar } from './CommandBar.js'
 import { useProjectMgmtCommands } from './ProjectMgmtCommandBar.hooks.js'
+import { bgColor,color } from './ProjectMgmtCommandBar.styles.js'
 import type { ProjectMgmtCommandBarProps } from './ProjectMgmtCommandBar.types.js'
-import { color, bgColor } from './ProjectMgmtCommandBar.styles.js'
 
 export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps> = memo(
 	function ProjectMgmtCommandBar({

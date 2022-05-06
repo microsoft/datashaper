@@ -4,9 +4,9 @@
  */
 import type { BooleanArgs } from '@data-wrangling-components/core'
 import { BooleanOperator } from '@data-wrangling-components/core'
-import type { StepComponentBaseProps } from '../types.js'
 import { memo, useMemo } from 'react'
 
+import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { VerbForm } from '../verbForm/VerbForm.js'
 import { enumDropdown, inputColumnList } from '../verbForm/VerbFormFactories.js'

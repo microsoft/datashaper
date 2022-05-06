@@ -8,28 +8,28 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@data-wrangling-components/core'
+import { DataType } from '@essex/arquero'
+import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
+import { IconButton } from '@fluentui/react'
+import { memo, useCallback, useMemo } from 'react'
+
 import { ColumnOrValueComboBox, EnumDropdown } from '../../controls/index.js'
 import {
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '../../hooks/index.js'
-import { DataType } from '@essex/arquero'
-import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
-import { IconButton } from '@fluentui/react'
-import { memo, useCallback, useMemo } from 'react'
-import {
-	Container,
-	SideBySide,
-	narrowDropdownStyles,
-	leftStyles,
-} from './FilterFunction.styles.js'
-
 import { InputExplainer } from '../../styles.js'
 import {
 	useColumnTyping,
 	useIsEmpty,
 	usePlaceholderText,
 } from './FilterFunction.hooks.js'
+import {
+	Container,
+	leftStyles,
+	narrowDropdownStyles,
+	SideBySide,
+} from './FilterFunction.styles.js'
 import type { FilterFunctionProps } from './FilterFunction.types.js'
 
 /**

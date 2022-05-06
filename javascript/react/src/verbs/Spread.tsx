@@ -3,6 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { SpreadArgs } from '@data-wrangling-components/core'
+import { ActionButton, Label } from '@fluentui/react'
+import { memo, useCallback } from 'react'
+
 import { TableColumnDropdown } from '../controls/index.js'
 import { withLoadedTable } from '../hocs/index.js'
 import {
@@ -11,10 +14,8 @@ import {
 	useTableColumnNames,
 } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
-import { ActionButton, Label } from '@fluentui/react'
-import { memo, useCallback } from 'react'
-import { Container, labelStyles } from './Spread.styles.js'
 import { useColumns } from './Spread.hooks.js'
+import { Container, labelStyles } from './Spread.styles.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.

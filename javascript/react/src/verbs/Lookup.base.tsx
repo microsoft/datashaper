@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { LookupArgs } from '@data-wrangling-components/core'
-import type { StepComponentBaseProps } from '../types.js'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
+import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { VerbForm } from '../verbForm/VerbForm.js'
 import {

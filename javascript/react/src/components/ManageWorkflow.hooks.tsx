@@ -4,11 +4,12 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { GraphManager, Step } from '@data-wrangling-components/core'
-import type { ModalState } from '../hooks'
-import { useModalState, useStaticValue } from '../hooks'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import isArray from 'lodash-es/isArray'
 import { useCallback, useEffect, useState } from 'react'
+
+import type { ModalState } from '../hooks'
+import { useModalState, useStaticValue } from '../hooks/index.js'
 
 //import { useCreateTableName } from '../hooks/common.js'
 
@@ -76,9 +77,9 @@ export function useOnSaveStep(
 			//
 			// If the step index is already present, update the existing step
 			//
-			let isExistingStep =
+			const isExistingStep =
 				index != null && graph.numSteps > 0 && index < graph.numSteps
-			let stepResult = isExistingStep
+			const stepResult = isExistingStep
 				? graph.reconfigureStep(index as number, step)
 				: graph.addStep(step)
 

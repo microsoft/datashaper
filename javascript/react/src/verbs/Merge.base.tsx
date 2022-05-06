@@ -4,9 +4,9 @@
  */
 import type { MergeArgs } from '@data-wrangling-components/core'
 import { MergeStrategy } from '@data-wrangling-components/core'
-import type { StepComponentBaseProps } from '../types.js'
 import { memo, useMemo } from 'react'
 
+import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
 import { enumDropdown, inputColumnList } from '../verbForm/VerbFormFactories.js'

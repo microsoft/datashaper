@@ -2,18 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { IContextualMenuListProps } from '@fluentui/react'
+import { IconButton } from '@fluentui/react'
+import { memo, useCallback } from 'react'
+
 import {
 	ColumnarMenu,
 	ColumnarMenuList,
 	ContextualMenuItemSearchBox,
 } from '../controls/index.js'
-import type { IContextualMenuListProps } from '@fluentui/react'
-import { IconButton } from '@fluentui/react'
-import { memo, useCallback } from 'react'
-
 import { useSearchableItems, useSelectedOption } from './StepSelector.hooks.js'
+import { Container, icons, SearchContainer } from './StepSelector.styles.js'
 import type { StepSelectorProps } from './StepSelector.types.js'
-import { icons, Container, SearchContainer } from './StepSelector.styles.js'
 
 /**
  * Creates a custom step selection dropdown.

@@ -1,8 +1,13 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import type { IDropdownOption, ISelectableOption } from '@fluentui/react'
 import type { IRenderFunction } from '@fluentui/utilities'
 import { useCallback, useMemo } from 'react'
+
+import { Link, Selector, Sep } from './MultiDropdown.styles.js'
 import type { MultiDropdownProps } from './MultiDropdown.types.js'
-import { Selector, Link, Sep } from './MultiDropdown.styles.js'
 
 export function useDropdownOptions(
 	options: MultiDropdownProps['options'],

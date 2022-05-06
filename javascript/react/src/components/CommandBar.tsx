@@ -13,8 +13,8 @@ import {
 	useHandleOnDataReduce,
 	useOverflowButtonProps,
 } from './CommandBar.hooks.js'
-import type { CommandBarProps } from './CommandBar.types.js'
 import { CommandBarWrapper } from './CommandBar.styles.js'
+import type { CommandBarProps } from './CommandBar.types.js'
 
 /**
  * Extends the fluent command bar to override styles and collapsing for our inverted header

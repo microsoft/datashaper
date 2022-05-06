@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { SampleArgs } from '@data-wrangling-components/core'
-import type { StepDescriptionProps } from '../types.js'
 import { format } from 'd3-format'
 import { memo, useMemo } from 'react'
 
+import type { StepDescriptionProps } from '../types.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
 
 const perc = format('.0%')

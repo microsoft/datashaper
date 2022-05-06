@@ -3,6 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { isInputTableStep } from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
+import { memo } from 'react'
+import styled from 'styled-components'
+
 import { TableDropdown } from '../controls/index.js'
 import {
 	useDropdownChangeHandler,
@@ -11,10 +15,6 @@ import {
 } from '../hooks/index.js'
 import { LeftAlignedRow } from '../styles.js'
 import type { StepComponentProps } from '../types.js'
-import { NodeInput } from '@essex/dataflow'
-import { memo } from 'react'
-import styled from 'styled-components'
-
 import type { HOCFunction } from './types.js'
 
 /**

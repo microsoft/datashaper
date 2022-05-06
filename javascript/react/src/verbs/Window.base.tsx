@@ -4,9 +4,9 @@
  */
 import type { WindowArgs } from '@data-wrangling-components/core'
 import { WindowFunction } from '@data-wrangling-components/core'
-import type { StepComponentProps } from '../types.js'
 import { memo, useMemo } from 'react'
 
+import type { StepComponentProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.jsx'
 import { VerbForm } from '../verbForm/VerbForm.jsx'
 import { enumDropdown } from '../verbForm/VerbFormFactories.js'

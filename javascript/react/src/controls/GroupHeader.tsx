@@ -7,13 +7,13 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Else, If, Then } from 'react-if'
 
 import { useCountChildren, useIntersection } from './GroupHeader.hooks.js'
-import type { GroupHeaderProps } from './GroupHeader.types.js'
 import {
 	Bold,
 	HeaderContainer,
 	HeaderDetailsText,
 	LevelButton,
 } from './GroupHeader.styles.js'
+import type { GroupHeaderProps } from './GroupHeader.types.js'
 
 export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 	memo(function GroupHeader({ columnName, props, children, lazyLoadGroups }) {

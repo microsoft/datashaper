@@ -6,13 +6,13 @@ import { SortDirection } from '@essex/arquero'
 import { IconButton } from '@fluentui/react'
 import { memo } from 'react'
 
-import { TableColumnDropdown } from './TableColumnDropdown.js'
-import type { SortInstructionProps } from './SortInstruction.types.js'
-import { Container, icons } from './SortInstruction.styles.js'
 import {
 	useHandleColumnChange,
 	useHandleDirectionClick,
 } from './SortInstruction.hooks.js'
+import { Container, icons } from './SortInstruction.styles.js'
+import type { SortInstructionProps } from './SortInstruction.types.js'
+import { TableColumnDropdown } from './TableColumnDropdown.js'
 
 /**
  * Provides a column dropdown, asc/desc toggle, and delete button for editing a table sort.

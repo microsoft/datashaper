@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './AggregateDescription.js'
-export * from './BinDescription.js'
 export * from './BinarizeDescription.js'
+export * from './BinDescription.js'
 export * from './BooleanLogicDescription.js'
 export * from './ColumnListOperationDescription.js'
 export * from './ConvertDescription.js'

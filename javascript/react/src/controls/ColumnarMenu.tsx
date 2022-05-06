@@ -7,9 +7,8 @@ import { DefaultButton } from '@fluentui/react'
 import { memo, useCallback, useMemo } from 'react'
 
 import { dropdownButtonStyles } from './ColumnarMenu.styles.js'
-import { ColumnarMenuList } from './ColumnarMenuList.js'
-
 import type { ColumnarMenuProps } from './ColumnarMenu.types.js'
+import { ColumnarMenuList } from './ColumnarMenuList.js'
 
 /**
  * Dropdown button menu that supports grouped items (using sectionProps) in a columnar layout.

@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { PivotArgs } from '@data-wrangling-components/core'
+import { memo } from 'react'
+
 import { withLoadedTable } from '../hocs/index.js'
 import { useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
-import { memo } from 'react'
-
 import { PivotBase } from './Pivot.base.js'
 
 /**

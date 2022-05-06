@@ -4,8 +4,8 @@
  */
 export * from './common.js'
 export * from './downloads.js'
-export * from './uploads.js'
 export * from './fluent.js'
+export * from './uploads.js'
 export * from './useColumnRecordDelete.js'
 export * from './useColumnType.js'
 export * from './useColumnValueOptions.js'

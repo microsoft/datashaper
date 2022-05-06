@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { UnfoldArgs } from '@data-wrangling-components/core'
-import { useSimpleDropdownOptions } from '../hooks/index.js'
-import type { StepComponentBaseProps } from '../types.js'
 import { memo, useMemo } from 'react'
 
+import { useSimpleDropdownOptions } from '../hooks/index.js'
+import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
 

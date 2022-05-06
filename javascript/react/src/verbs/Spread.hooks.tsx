@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { SpreadArgs, Step } from '@data-wrangling-components/core'
-import { ColumnSpread } from '../controls/index.js'
-
 import set from 'lodash-es/set.js'
 import { useMemo } from 'react'
+
+import { ColumnSpread } from '../controls/index.js'
 
 export function useColumns(
 	step: Step<SpreadArgs>,

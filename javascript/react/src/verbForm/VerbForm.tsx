@@ -3,15 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
-import {
-	useCheckboxChangeHandler,
-	useComboBoxChangeHandler,
-	useComboBoxInputValueChangeHandler,
-	useDropdownChangeHandler,
-	useSpinButtonChangeHandler,
-	useTextFieldChangeHandler,
-} from '../hooks/index.js'
-import type { StepChangeFunction } from '../types.js'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import {
 	Checkbox,
@@ -26,6 +17,16 @@ import noop from 'lodash-es/noop'
 import { Fragment, memo, useMemo } from 'react'
 import { Case, Switch } from 'react-if'
 import styled from 'styled-components'
+
+import {
+	useCheckboxChangeHandler,
+	useComboBoxChangeHandler,
+	useComboBoxInputValueChangeHandler,
+	useDropdownChangeHandler,
+	useSpinButtonChangeHandler,
+	useTextFieldChangeHandler,
+} from '../hooks/index.js'
+import type { StepChangeFunction } from '../types.js'
 
 export interface FormInputBase<
 	T,

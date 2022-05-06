@@ -4,16 +4,16 @@
  */
 import type { Criterion, FilterArgs } from '@data-wrangling-components/core'
 import { BooleanOperator } from '@data-wrangling-components/core'
-import { EnumDropdown } from '../controls/index.js'
-import { withLoadedTable } from '../hocs/index.js'
-import { useDropdownChangeHandler } from '../hooks/index.js'
-import type { StepComponentProps } from '../types.js'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
-import { Container, Vertical } from './Filter.styles.js'
 
+import { EnumDropdown } from '../controls/index.js'
+import { withLoadedTable } from '../hocs/index.js'
+import { useDropdownChangeHandler } from '../hooks/index.js'
 import { LeftAlignedRow } from '../styles.js'
+import type { StepComponentProps } from '../types.js'
+import { Container, Vertical } from './Filter.styles.js'
 import { FilterFunction } from './shared/index.js'
 
 /**

@@ -4,9 +4,9 @@
  */
 import type { FetchArgs } from '@data-wrangling-components/core'
 import { num } from '@data-wrangling-components/utilities'
-import type { StepComponentProps } from '../types.js'
 import { memo, useMemo } from 'react'
 
+import type { StepComponentProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
 

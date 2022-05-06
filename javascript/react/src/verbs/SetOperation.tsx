@@ -2,12 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { withLoadedTable } from '../hocs/index.js'
-import type { StepComponentProps } from '../types.js'
 import { ActionButton, Label } from '@fluentui/react'
 import { memo, useCallback } from 'react'
-import { Container, icons } from './SetOperation.styles.js'
+
+import { withLoadedTable } from '../hocs/index.js'
+import type { StepComponentProps } from '../types.js'
 import { useOthers } from './SetOperation.hooks.js'
+import { Container, icons } from './SetOperation.styles.js'
 
 /**
  * Provides inputs to create a list of tables.

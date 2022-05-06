@@ -4,12 +4,13 @@
  */
 import type { SampleArgs } from '@data-wrangling-components/core'
 import { num } from '@data-wrangling-components/utilities'
-import { useSpinButtonChangeHandler } from '../hooks/index.js'
-import type { StepComponentProps } from '../types.js'
 import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
 import { memo } from 'react'
+
+import { useSpinButtonChangeHandler } from '../hooks/index.js'
 import { LeftAlignedRow } from '../styles.js'
+import type { StepComponentProps } from '../types.js'
 import { Container, Or, spinStyles } from './Sample.styles.js'
 
 const whole = format('d')

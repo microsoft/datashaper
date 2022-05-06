@@ -7,8 +7,8 @@ import { useBoolean, useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
 
 import { Guidance } from './Guidance.jsx'
+import { Callout,Container, icons } from './Tooltip.styles.js'
 import type { TooltipProps } from './Tooltip.types.js'
-import { icons, Container, Callout } from './Tooltip.styles.js'
 
 export const Tooltip: React.FC<TooltipProps> = memo(function Tooltip({
 	name = '',

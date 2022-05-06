@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnarMenu } from '../controls/index.js'
 import { DefaultButton, Spinner, SpinnerSize } from '@fluentui/react'
 import { memo } from 'react'
 
+import { ColumnarMenu } from '../controls/index.js'
 import { DetailText } from './DetailText.js'
 import { useOutputPreview, useTableSelection } from './TableListBar.hooks.js'
 import {

@@ -6,8 +6,8 @@ import { ComboBox } from '@fluentui/react'
 import { memo } from 'react'
 
 import { dropdownStyles } from '../styles.js'
-import type { ColumnOrValueComboBoxProps } from './ColumnOrValueComboBox.types.js'
 import { useOptions } from './ColumnOrValueComboBox.hooks.js'
+import type { ColumnOrValueComboBoxProps } from './ColumnOrValueComboBox.types.js'
 
 /**
  * ComboBox that allows the user to either input a freeform value or select a column.

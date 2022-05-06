@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
-import type { StepDescriptionProps } from './types.js'
 
+import type { StepDescriptionProps } from './types.js'
 import {
 	AggregateDescription,
 	BinarizeDescription,

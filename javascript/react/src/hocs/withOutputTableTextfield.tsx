@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { dropdownStyles } from '../styles.js'
-import { useTextFieldChangeHandler } from '../hooks/index.js'
-import { LeftAlignedRow } from '../styles.js'
-import type { StepComponentProps } from '../types.js'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
+import { useTextFieldChangeHandler } from '../hooks/index.js'
+import { dropdownStyles , LeftAlignedRow } from '../styles.js'
+import type { StepComponentProps } from '../types.js'
 import type { HOCFunction } from './types.js'
 
 /**

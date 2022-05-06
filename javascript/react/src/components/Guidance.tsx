@@ -5,7 +5,6 @@
 import { IconButton } from '@fluentui/react'
 import Markdown from 'markdown-to-jsx'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Container, Icon, ButtonWrapper, icons } from './Guidance.styles.js'
 
 import {
 	useGoBack,
@@ -13,6 +12,7 @@ import {
 	useGuidance,
 	useHandleClick,
 } from './Guidance.hooks.js'
+import { ButtonWrapper, Container, Icon, icons } from './Guidance.styles.js'
 import type { GuidanceProps } from './Guidance.types.js'
 
 export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({

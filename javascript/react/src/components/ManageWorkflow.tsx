@@ -6,7 +6,7 @@
 import type { Step } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import { DialogConfirm } from '@essex/themed-components'
-import { memo, useCallback, useState, useMemo, useEffect } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useGraphManager } from '../hooks/common.js'
 import {
@@ -18,10 +18,10 @@ import {
 	useOnSaveStep,
 	useTransformModalState,
 } from './ManageWorkflow.hooks.js'
+import { Container, modalStyles } from './ManageWorkflow.styles.js'
+import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
 import { StepList } from './StepList.js'
 import { TableTransformModal } from './TableTransformModal.jsx'
-import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
-import { Container, modalStyles } from './ManageWorkflow.styles.js'
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 	function ManageWorkflow({

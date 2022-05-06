@@ -4,9 +4,9 @@
  */
 import type { BinArgs } from '@data-wrangling-components/core'
 import { BinStrategy } from '@data-wrangling-components/core'
-import type { StepDescriptionProps } from '../types'
 import { memo, useMemo } from 'react'
 
+import type { StepDescriptionProps } from '../types'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
 
 export const BinDescription: React.FC<StepDescriptionProps<BinArgs>> = memo(

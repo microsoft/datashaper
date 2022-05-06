@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GraphManager, Step } from '@data-wrangling-components/core'
-import { TableDropdown } from '../controls/index.js'
-import { useSimpleDropdownOptions, useTableNames } from '../hooks/index.js'
 import { IconButton } from '@fluentui/react'
 import { useMemo } from 'react'
-import { icons } from './SetOperation.styles.js'
 
+import { TableDropdown } from '../controls/index.js'
+import { useSimpleDropdownOptions, useTableNames } from '../hooks/index.js'
 import { LeftAlignedRow } from '../styles.js'
+import { icons } from './SetOperation.styles.js'
 
 export function useOthers(
 	step: Step,

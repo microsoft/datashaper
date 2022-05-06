@@ -11,8 +11,8 @@ import { memo } from 'react'
 
 import { DetailText } from './DetailText.js'
 import { useToggleTableFeatures } from './PreviewTable.hooks.js'
-import type { PreviewTableProps } from './PreviewTable.types.js'
 import { Container, TextContainer } from './PreviewTable.styles.js'
+import type { PreviewTableProps } from './PreviewTable.types.js'
 
 const statsColumnTypes = [
 	StatsColumnType.Type,

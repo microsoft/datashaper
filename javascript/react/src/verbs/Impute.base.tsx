@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ImputeArgs } from '@data-wrangling-components/core'
-import type { StepComponentBaseProps } from '../types.js'
 import { memo, useMemo } from 'react'
 
+import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
 import { inputColumnList } from '../verbForm/VerbFormFactories.js'

@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { AggregateArgs } from '@data-wrangling-components/core'
-import type { StepDescriptionProps } from '../types'
 import { memo, useMemo } from 'react'
 
+import type { StepDescriptionProps } from '../types'
 import { VerbDescription } from '../verbForm/VerbDescription.jsx'
 
 export const AggregateDescription: React.FC<

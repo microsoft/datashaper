@@ -6,8 +6,8 @@ import { ComboBox } from '@fluentui/react'
 import { memo } from 'react'
 
 import { dropdownStyles } from '../styles.js'
-import type { DateFormatPatternComboboxProps } from './DateFormatPatternCombobox.types.js'
 import { useOptions } from './DateFormatPatternCombobox.hooks.js'
+import type { DateFormatPatternComboboxProps } from './DateFormatPatternCombobox.types.js'
 /**
  * ComboBox that allows the user to either input a freeform value or select a column.
  * We frequently have operations where a comparison may be to a fixed value, or should

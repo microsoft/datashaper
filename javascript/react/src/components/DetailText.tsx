@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo } from 'react'
-import type { DetailTextProps } from './DetailText.types.js'
+
 import { Text } from './DetailText.styles.js'
+import type { DetailTextProps } from './DetailText.types.js'
 
 export const DetailText: React.FC<DetailTextProps> = memo(function DetailText({
 	text,

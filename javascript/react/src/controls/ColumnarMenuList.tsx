@@ -6,13 +6,14 @@ import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
 import { merge } from 'lodash-es'
 import { memo, useMemo } from 'react'
-import type { ColumnarMenuListProps } from './ColumnarMenuList.types.js'
+
 import {
-	itemProps,
-	MenuLayout,
 	Column,
 	ColumnHeader,
+	itemProps,
+	MenuLayout,
 } from './ColumnarMenuList.styles.js'
+import type { ColumnarMenuListProps } from './ColumnarMenuList.types.js'
 
 export const ColumnarMenuList: React.FC<ColumnarMenuListProps> = memo(
 	function ColumnarMenuList(props) {

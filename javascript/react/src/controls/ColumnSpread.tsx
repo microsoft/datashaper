@@ -6,9 +6,9 @@ import { IconButton, TextField } from '@fluentui/react'
 import { memo } from 'react'
 
 import { dropdownStyles } from '../styles.js'
-import type { ColumnSpreadProps } from './ColumnSpread.types.js'
-import { icons, Container } from './ColumnSpread.styles.js'
 import { useHandleColumnChange } from './ColumnSpread.hooks.js'
+import { Container,icons } from './ColumnSpread.styles.js'
+import type { ColumnSpreadProps } from './ColumnSpread.types.js'
 
 /**
  * Provides a column dropdown and delete button for editing a list of columns.

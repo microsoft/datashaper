@@ -4,6 +4,7 @@
  */
 import type { IDropdownOption } from '@fluentui/react'
 import { useMemo } from 'react'
+
 import { getEnumDropdownOptions } from '../enums.js'
 
 export function useEnumDropdownOptions<E = unknown>(

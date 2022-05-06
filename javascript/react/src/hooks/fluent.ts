@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
-import type { StepChangeFunction } from '../types.js'
 import type {
 	IComboBox,
 	IComboBoxOption,
@@ -11,6 +10,8 @@ import type {
 } from '@fluentui/react'
 import { produce } from 'immer'
 import { useCallback } from 'react'
+
+import type { StepChangeFunction } from '../types.js'
 
 // #region Dropdown Change Handler
 

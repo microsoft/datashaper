@@ -1,5 +1,9 @@
-import styled from 'styled-components'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { DocumentCard, Icon } from '@fluentui/react'
+import styled from 'styled-components'
 
 export const styles = {
 	title: { root: { padding: '1px 5px', height: 'min-content' } },

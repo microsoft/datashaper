@@ -6,8 +6,8 @@ import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 
 import { dropdownStyles } from '../styles.js'
-import type { MultiDropdownProps } from './MultiDropdown.types.js'
 import { useDropdownOptions, useOptionRenderer } from './MultiDropdown.hooks.js'
+import type { MultiDropdownProps } from './MultiDropdown.types.js'
 
 /**
  * Dropdown wrapper to manage multi-select with a select all/none helper.

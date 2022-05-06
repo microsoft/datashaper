@@ -6,8 +6,9 @@ import type {
 	InputColumnRecordArgs,
 	Step,
 } from '@data-wrangling-components/core'
-import type { StepChangeFunction } from '../types.js'
 import { useCallback } from 'react'
+
+import type { StepChangeFunction } from '../types.js'
 
 export function useColumnRecordDelete(
 	step: Step<InputColumnRecordArgs>,

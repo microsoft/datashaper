@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { JoinArgs } from '@data-wrangling-components/core'
-import type { StepDescriptionProps } from '../types.js'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 
+import type { StepDescriptionProps } from '../types.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
 
 export const JoinDescription: React.FC<StepDescriptionProps<JoinArgs>> = memo(

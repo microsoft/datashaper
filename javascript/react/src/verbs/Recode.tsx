@@ -3,10 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import { ColumnValueDropdown } from '../controls/index.js'
-import { withLoadedTable } from '../hocs/index.js'
-import { useColumnType, useColumnValueOptions } from '../hooks/index.js'
-import type { StepComponentProps } from '../types.js'
 import type { DataType, Value } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
 import type { IDropdownOption } from '@fluentui/react'
@@ -15,6 +11,10 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
+import { ColumnValueDropdown } from '../controls/index.js'
+import { withLoadedTable } from '../hocs/index.js'
+import { useColumnType, useColumnValueOptions } from '../hooks/index.js'
+import type { StepComponentProps } from '../types.js'
 import {
 	useColumnValues,
 	useDisabled,
