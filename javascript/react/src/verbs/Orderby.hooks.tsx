@@ -19,7 +19,7 @@ export function useSorts(
 	step: Step<OrderbyArgs>,
 	columnOptions: IDropdownOption[],
 	onChange?: (step: Step<OrderbyArgs>) => void,
-) {
+): JSX.Element[] {
 	return useMemo(() => {
 		return (step.args.orders || []).map((order, index) => {
 			const handleSortChange = (order: OrderbyInstruction) => {
@@ -51,7 +51,7 @@ export function useAddButtonClickedHandler(
 	dataTable: ColumnTable | undefined,
 	step: Step<OrderbyArgs>,
 	onChange: ((step: Step<OrderbyArgs>) => void) | undefined,
-) {
+): () => void {
 	return useCallback(() => {
 		onChange?.({
 			...step,

@@ -8,7 +8,9 @@ import { useMemo } from 'react'
 
 import type { ReadOnlyTextFieldProps } from './ReadOnlyTextField.types.js'
 
-export function useBaseStyles(styles: ReadOnlyTextFieldProps['styles']) {
+export function useBaseStyles(
+	styles: ReadOnlyTextFieldProps['styles'],
+): ReadOnlyTextFieldProps['styles'] {
 	const theme = useThematic()
 	return useMemo(() => {
 		return merge(

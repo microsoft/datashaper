@@ -26,7 +26,7 @@ export function useIntersection(
 	return isVisible
 }
 
-export function useCountChildren() {
+export function useCountChildren(): (children: IGroup[]) => number {
 	const countChildren = useCallback((children: IGroup[]) => {
 		let total = 0
 		children.forEach(child => {

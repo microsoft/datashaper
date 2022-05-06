@@ -26,7 +26,7 @@ export function useHandleColumnChange(
 export function useHandleDirectionClick(
 	order: OrderbyInstruction,
 	onChange: ((order: OrderbyInstruction) => void) | undefined,
-) {
+): () => void {
 	return useCallback(() => {
 		const update = {
 			...order,

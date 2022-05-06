@@ -15,10 +15,10 @@ export function useOthers(
 	step: Step,
 	onChange?: (step: Step) => void,
 	store?: GraphManager,
-) {
+): (JSX.Element | null)[] {
 	const tableNames = useTableNames(store)
 	const tableOptions = useSimpleDropdownOptions(tableNames)
-	return useMemo(() => {
+	return useMemo<(JSX.Element | null)[]>(() => {
 		return (step.input.others || EMPTY).map((input, index) => {
 			const other = input.node
 

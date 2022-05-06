@@ -36,6 +36,8 @@ export class GraphManager {
 	private readonly outputObservables: Map<string, TableObservable> = new Map()
 	private readonly outputCache: Map<string, Maybe<TableContainer>> = new Map()
 	private readonly outputSubscriptions: Map<string, Subscription> = new Map()
+	private _outputNames: string[] = []
+	private _outputDefinitions: NamedOutputPortBinding[] = []
 
 	public constructor(
 		private readonly _inputs: Map<string, TableContainer> = new Map(),
@@ -57,6 +59,13 @@ export class GraphManager {
 		for (const value of this._workflow.output.values()) {
 			this._bindGraphOutput(value)
 		}
+
+		this._syncOutputArrays()
+	}
+
+	private _syncOutputArrays() {
+		this._outputNames = [...this.outputObservables.keys()]
+		this._outputDefinitions = [...this._workflow.output.values()]
 	}
 
 	public get inputs(): Map<string, TableContainer> {
@@ -202,6 +211,21 @@ export class GraphManager {
 	public addOutput(binding: NamedOutputPortBinding): void {
 		this._workflow.addOutput(binding)
 		this._bindGraphOutput(binding)
+		this._syncOutputArrays()
+		this._onChange.next()
+	}
+
+	/**
+	 * Remove an output binding
+	 * @param name - the output name to remove
+	 */
+	public removeOutput(name: string): void {
+		this._workflow.removeOutput(name)
+		this.outputObservables.delete(name)
+		this.outputSubscriptions.get(name)?.unsubscribe()
+		this.outputSubscriptions.delete(name)
+		this.outputCache.delete(name)
+		this._syncOutputArrays()
 		this._onChange.next()
 	}
 
@@ -219,19 +243,6 @@ export class GraphManager {
 	}
 
 	/**
-	 * Remove an output binding
-	 * @param name - the output name to remove
-	 */
-	public removeOutput(name: string): void {
-		this._workflow.removeOutput(name)
-		this.outputObservables.delete(name)
-		this.outputSubscriptions.get(name)?.unsubscribe()
-		this.outputSubscriptions.delete(name)
-		this.outputCache.delete(name)
-		this._onChange.next()
-	}
-
-	/**
 	 * Log out the steps
 	 */
 	public print(): void {
@@ -242,11 +253,11 @@ export class GraphManager {
 	 * Gets the output table names
 	 */
 	public get outputs(): string[] {
-		return [...this.outputObservables.keys()]
+		return this._outputNames
 	}
 
 	public get outputDefinitions(): NamedOutputPortBinding[] {
-		return [...this._workflow.output.values()]
+		return this._outputDefinitions
 	}
 
 	/**

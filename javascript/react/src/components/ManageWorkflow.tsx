@@ -84,7 +84,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 						const output = graph.outputDefinitions.find(def => def.node === id)
 						return output?.name
 					}),
-			[graph.steps],
+			[graph.steps, graph.outputDefinitions],
 		)
 
 		useEffect(

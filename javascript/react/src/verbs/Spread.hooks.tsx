@@ -11,7 +11,7 @@ import { ColumnSpread } from '../controls/index.js'
 export function useColumns(
 	step: Step<SpreadArgs>,
 	onChange?: (step: Step<SpreadArgs>) => void,
-) {
+): JSX.Element[] {
 	return useMemo(() => {
 		return (step.args.to || []).map((column: string, index: number) => {
 			const handleColumnChange = (col: string) => {
