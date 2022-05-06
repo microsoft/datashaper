@@ -10,7 +10,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { createGraph } from '../engine/graph.js'
-import { readSpec } from '../steps/index.js'
+import { Workflow } from '../engine/Workflow.js'
 import { createTableStore } from './createTableStore.js'
 
 // Static data paths.
@@ -73,7 +73,7 @@ function defineTestCase(parentPath: string, test: string) {
 		if (!fs.existsSync(schemaLinkPath)) {
 			throw new Error(`invalid $schema link: ${workflowPath}`)
 		}
-		const graphBuilder = createGraph(readSpec(workflowJson), tableStore)
+		const graphBuilder = createGraph(new Workflow(workflowJson), tableStore)
 
 		// check the output tables
 		await Promise.all(
@@ -85,7 +85,7 @@ function defineTestCase(parentPath: string, test: string) {
 						compareTables(expected, result.table, o)
 						resolve()
 					} else {
-						graphBuilder.output(o).subscribe(actual => {
+						graphBuilder.output(o)!.subscribe(actual => {
 							if (actual?.table) {
 								compareTables(expected, actual?.table, o)
 								resolve()

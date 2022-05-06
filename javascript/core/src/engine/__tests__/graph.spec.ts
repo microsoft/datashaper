@@ -6,8 +6,8 @@ import type { TableContainer } from '@essex/arquero'
 import { table } from 'arquero'
 
 import { createTableStore } from '../../__tests__/createTableStore.js'
+import { Workflow } from '../../engine/Workflow.js'
 import { Verb } from '../../index.js'
-import { readSpec } from '../../steps/readSpec.js'
 import { createGraph } from '../graph.js'
 
 describe('stepGraph', () => {
@@ -21,7 +21,7 @@ describe('stepGraph', () => {
 
 	test('runs a single step with normal input/output', () => {
 		const g = createGraph(
-			readSpec({
+			new Workflow({
 				input: ['input'],
 				steps: [
 					{
@@ -47,7 +47,7 @@ describe('stepGraph', () => {
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {
 		const g = createGraph(
-			readSpec({
+			new Workflow({
 				input: ['input'],
 				steps: [
 					{
