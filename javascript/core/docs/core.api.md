@@ -1031,7 +1031,11 @@ export class Workflow {
 // @public (undocumented)
 export interface WorkflowObject {
     // (undocumented)
+    description?: string;
+    // (undocumented)
     input?: string[];
+    // (undocumented)
+    name?: string;
     // (undocumented)
     output: OutputPortBinding[];
     // (undocumented)
