@@ -90,21 +90,35 @@ export function useStepsxx(graph: GraphManager): {
 	}
 }
 
-export function useInitialData(autoType = false): {
-	graph: GraphManager
-	tables: TableContainer[]
-	onAddFiles: (loaded: TableContainer[]) => void
-} {
-	const graph = useLoadedGraphManager(autoType)
+const TABLES = [
+	`data/companies.csv`,
+	`data/companies2.csv`,
+	`data/products.csv`,
+	'data/stocks.csv',
+]
+export function useInputTables(autoType = false): TableContainer[] {
 	const [tables, setTables] = useState<TableContainer[]>([])
 
-	// initialize the input tables when the store is created
 	useEffect(() => {
-		setTables(graph.toList().filter(t => !!t) as TableContainer[])
-		return graph.onChange(() => {
-			setTables(graph.toList().filter(t => !!t) as TableContainer[])
-		})
-	}, [graph, setTables])
+		const fn = async () => {
+			const promises = TABLES.map(async name => {
+				const data = await readCsvFile(name, autoType)
+				return container(name, data)
+			})
+			const loadedTables = await Promise.all(promises)
+			setTables(loadedTables)
+		}
+		void fn()
+	}, [autoType])
+
+	return tables
+}
+
+export function useGraphWithTables(inputTables: TableContainer[]): {
+	graph: GraphManager
+	onAddFiles: (loaded: TableContainer[]) => void
+} {
+	const graph = useGraphManager(undefined, inputTables)
 
 	// add any dropped files to the inputs
 	const onAddFiles = useCallback(
@@ -116,35 +130,9 @@ export function useInitialData(autoType = false): {
 
 	return {
 		graph,
-		tables,
 		onAddFiles,
 	}
 }
-
-// create the store and initialize it with our test tables
-// memoing this gives us a chance queue up our built-in test tables on first run
-function useLoadedGraphManager(autoType = false): GraphManager {
-	const graph = useGraphManager()
-	useEffect(() => {
-		const fn = async () => {
-			const promises = TABLES.map(async name => {
-				const data = await readCsvFile(name, autoType)
-				const ctr = container(name, data)
-				graph.addInput(ctr)
-			})
-			await Promise.all(promises)
-		}
-		void fn()
-	}, [autoType])
-	return graph
-}
-
-const TABLES = [
-	`data/companies.csv`,
-	`data/companies2.csv`,
-	`data/products.csv`,
-	'data/stocks.csv',
-]
 
 export function useLoadTableFiles(): (
 	files: BaseFile[],

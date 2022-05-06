@@ -10,7 +10,7 @@ import { IconButton, PrimaryButton } from '@fluentui/react'
 import { memo, useCallback, useState, useMemo } from 'react'
 
 import { ControlBar } from './ControlBar'
-import { useSteps, useInitialData } from './DebugPage.hooks'
+import { useSteps, useInputTables, useGraphWithTables } from './DebugPage.hooks'
 import {
 	Buttons,
 	Commands,
@@ -52,7 +52,9 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 		statsColumnTypes: DEFAULT_STATS,
 	})
 
-	const { tables, graph, onAddFiles } = useInitialData(autoType)
+	const inputTables = useInputTables(autoType)
+	const { graph, onAddFiles } = useGraphWithTables(inputTables)
+
 	const steps = useSteps(graph)
 
 	// const {
@@ -101,6 +103,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 
 	const onStepOutputChange = (output: string | undefined) => null
 
+	console.log('render debugpage', graph, outputs)
 	return (
 		<Container>
 			<Workspace className="arquero-workspace">
@@ -118,7 +121,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 				<InputsSection>
 					<Section title="Inputs">
 						<InputTables
-							tables={tables}
+							tables={inputTables}
 							config={columns}
 							features={features}
 							compact={compact}
@@ -136,6 +139,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 										step={step}
 										graph={graph}
 										index={index}
+										output={output}
 										onChange={onStepChange}
 										onChangeOutput={onStepOutputChange}
 									/>
