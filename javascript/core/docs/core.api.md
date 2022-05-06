@@ -187,11 +187,7 @@ export enum DateComparisonOperator {
     // (undocumented)
     After = "after",
     // (undocumented)
-    AfterToday = "after today",
-    // (undocumented)
     Before = "before",
-    // (undocumented)
-    BeforeToday = "before today",
     // (undocumented)
     Equals = "equals",
     // (undocumented)
