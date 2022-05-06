@@ -2,19 +2,37 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager } from '@data-wrangling-components/core'
+import type { GraphManager, Workflow } from '@data-wrangling-components/core'
 import { createGraphManager } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useMemo } from 'react'
 
-export function useGraphManager(inputs: TableContainer[]): GraphManager {
-	const manager = useMemo(() => createGraphManager(), [])
+export function useGraphManager(
+	workflow: Workflow | undefined,
+	inputs: TableContainer[],
+): GraphManager {
+	const manager = useMemo(
+		() => createGraphManager(undefined, workflow),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[
+			/* only create on first pass */
+		],
+	)
+
+	// this effect should fire when a new workflow json is uploaded
 	useEffect(
-		function injectInputTables() {
+		function resetWorkflowWhenWorkflowChanges() {
+			manager.reset(workflow)
+		},
+		[manager, workflow],
+	)
+
+	useEffect(
+		function syncInputs() {
 			inputs.forEach(i => manager.addInput(i))
 		},
-		[inputs, manager],
+		[manager, inputs],
 	)
 	return manager
 }

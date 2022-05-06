@@ -32,7 +32,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		onUpdateOutput,
 		...props
 	}) {
-		const graph = useGraphManager(inputs)
+		const graph = useGraphManager(workflow, inputs)
 		const [graphSteps, setGraphSteps] = useState<Step[]>(graph.steps)
 
 		//
@@ -97,8 +97,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			},
 			[graph, onUpdateOutput],
 		)
-
-		console.log('Manage Workflow Render', graph)
 
 		return (
 			<Container>

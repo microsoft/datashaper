@@ -107,6 +107,7 @@ export class GraphManager {
 	 */
 	public reset(workflow?: Workflow): void {
 		this._workflow.clear()
+		// todo: add graph clear
 		this.graph.nodes.forEach(id => this._graph.remove(id))
 
 		// if a new workflow is injected, sync it into the graph
@@ -114,8 +115,7 @@ export class GraphManager {
 			this._workflow = workflow
 			this._syncWorkflowStateIntoGraph()
 		}
-		//todo: add graph.clear
-		//this._graph.clear()
+		this._onChange.next()
 	}
 
 	/**
