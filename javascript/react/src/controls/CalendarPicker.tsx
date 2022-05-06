@@ -10,13 +10,14 @@ import {
 	FocusTrapZone,
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo, useState, useRef, useCallback } from 'react'
+import { memo, useCallback,useRef, useState } from 'react'
+
 import {
-	iconClass,
-	Container,
-	CalendarContainer,
 	CalendarButton,
+	CalendarContainer,
 	CalendarLabel,
+	Container,
+	iconClass,
 } from './CalendarPicker.styles.js'
 import type { CalendarPickerProps } from './CalendarPicker.types.js'
 

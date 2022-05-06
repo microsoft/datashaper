@@ -1,5 +1,8 @@
-import { mergeStyles, FontIcon, Label } from '@fluentui/react'
-
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { FontIcon, Label,mergeStyles } from '@fluentui/react'
 import styled from 'styled-components'
 
 export const iconClass = mergeStyles({

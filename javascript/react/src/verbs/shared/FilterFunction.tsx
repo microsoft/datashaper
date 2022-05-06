@@ -13,6 +13,7 @@ import { DataType } from '@essex/arquero'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton, SpinButton } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
+
 import {
 	CalendarPicker,
 	ColumnCriteriaCombobox,
@@ -25,14 +26,14 @@ import {
 import { InputExplainer } from '../../styles.js'
 import { useColumnTyping, useIsEmpty } from './FilterFunction.hooks.js'
 import {
-	Container,
-	leftStyles,
-	SideBySide,
 	BooleanToggle,
+	Container,
 	FilterContainer,
+	leftStyles,
 	OrLabel,
-	TextValue,
+	SideBySide,
 	spinStyles,
+	TextValue,
 } from './FilterFunction.styles.js'
 import type { FilterFunctionProps } from './FilterFunction.types.js'
 

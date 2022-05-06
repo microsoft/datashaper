@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { TextField, Label, Toggle } from '@fluentui/react'
+import { Label, TextField, Toggle } from '@fluentui/react'
 import styled from 'styled-components'
+
 import { narrowDropdownStyles } from '../../styles.js'
 
 export const Container = styled.div`
