@@ -94,6 +94,25 @@ export class GraphManager {
 		return this._workflow.steps
 	}
 
+	public hasInput(name: string): boolean {
+		return this.inputs.has(name)
+	}
+
+	public hasOutput(name: string): boolean {
+		return this.outputObservables.has(name)
+	}
+
+	public outputForNodeId(
+		nodeId: string,
+		nodeOutput?: string,
+	): Maybe<TableObservable> {
+		const definition = this.outputDefinitions.find(
+			def => def.node === nodeId && def.output === nodeOutput,
+		)
+		if (definition == null) return
+		return this.output(definition.name)
+	}
+
 	/**
 	 * Remove all steps, inputs, and outputs from the pipeline
 	 */
@@ -264,8 +283,8 @@ export class GraphManager {
 	 * Observe an output name
 	 * @param name - The output to observe
 	 */
-	public output(name: string): TableObservable {
-		return this.outputObservables.get(name)!
+	public output(name: string): Maybe<TableObservable> {
+		return this.outputObservables.get(name)
 	}
 
 	/**

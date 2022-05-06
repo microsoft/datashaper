@@ -26,12 +26,15 @@ export function useLoadTable(
 			setTable(table)
 		} else if (id && graph) {
 			// Case 1: static input table
-			if (graph.inputs.has(id)) {
+			if (graph.hasInput(id)) {
 				setTable(graph.inputs.get(id)?.table)
 			} else {
 				// Case 2: derived table
-				const sub = graph.output(id).subscribe(t => setTable(t?.table))
-				return () => sub.unsubscribe()
+				const observable = graph.output(id) ?? graph.outputForNodeId(id)
+				if (observable) {
+					const sub = observable.subscribe(t => setTable(t?.table))
+					return () => sub.unsubscribe()
+				}
 			}
 		}
 	}, [id, table, graph, handleTableLoad])

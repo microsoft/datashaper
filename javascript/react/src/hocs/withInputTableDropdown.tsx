@@ -32,7 +32,22 @@ export function withInputTableDropdown(
 			const tableOptions = useSimpleDropdownOptions(tables)
 			const handleTableChange = useDropdownChangeHandler(
 				step,
-				(s, val) => (s.input[NodeInput.Source] = { node: val as string }),
+				(s, val) => {
+					if (val != null) {
+						// determine the graph node id to subscribe from
+						const tableName = val as string
+						const outputNode = graph?.outputDefinitions.find(
+							o => o.name === (tableName as string),
+						)?.node
+
+						// wire up the Step's input field
+						const node = outputNode ?? tableName
+						s.input[NodeInput.Source] = { node }
+					} else {
+						// no value: delete the input
+						delete s.input[NodeInput.Source]
+					}
+				},
 				onChange,
 			)
 			if (!isInputTableStep(step)) {
