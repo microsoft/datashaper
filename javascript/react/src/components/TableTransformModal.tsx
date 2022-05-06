@@ -44,8 +44,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		styles,
 		...props
 	}) {
-		const [isGuidanceVisible, { toggle: toggleIsGuidanceVisible }] =
-			useBoolean(false)
+		const [showGuidance, { toggle: toggleGuidance }] = useBoolean(false)
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
 			nextInputTable,
@@ -53,7 +52,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		)
 
 		const StepArgs = useStepArgsComponent(internal, !!step)
-		const adaptedStyles = useModalStyles(styles, isGuidanceVisible)
+		const adaptedStyles = useModalStyles(styles, showGuidance)
 		const { output, onOutputChanged } = useStepOutputHandling(graph, step)
 		const handleSaveClick = useHandleSaveClick(
 			internal,
@@ -79,7 +78,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 					)}
 				</Header>
 
-				<ContainerBody showGuidance={isGuidanceVisible}>
+				<ContainerBody showGuidance={showGuidance}>
 					<StepComponentContainer>
 						<StepSelectorContainer>
 							<StepSelector
@@ -89,9 +88,9 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 							/>
 							{internal?.verb ? (
 								<IconButton
-									onClick={toggleIsGuidanceVisible}
+									onClick={toggleGuidance}
 									iconProps={icons.info}
-									checked={isGuidanceVisible}
+									checked={showGuidance}
 								/>
 							) : null}
 						</StepSelectorContainer>
@@ -110,7 +109,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 							</>
 						)}
 					</StepComponentContainer>
-					{isGuidanceVisible && internal?.verb ? (
+					{showGuidance && internal?.verb ? (
 						<GuidanceContainer>
 							<Guidance name={internal?.verb} index={index} />
 						</GuidanceContainer>

@@ -21,7 +21,7 @@ import {
 import { StepList } from './StepList.js'
 import { TableTransformModal } from './TableTransformModal.jsx'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
-import { Container } from './ManageWorkflow.styles.js'
+import { Container, modalStyles } from './ManageWorkflow.styles.js'
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 	function ManageWorkflow({
@@ -87,11 +87,16 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			[graph.steps],
 		)
 
-		useEffect(() => {
-			return graph.onChange(() => {
-				onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
-			})
-		}, [graph, onUpdateOutput])
+		useEffect(
+			function emitCurrentTableList() {
+				return graph.onChange(() => {
+					onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
+				})
+			},
+			[graph, onUpdateOutput],
+		)
+
+		console.log('Manage Workflow Render', graph)
 
 		return (
 			<Container>
@@ -113,8 +118,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 							onTransformRequested={onCreate}
 							graph={graph}
 							onDismiss={onDismissTransformModal}
-							// HACK
-							styles={{ calloutMain: { overflow: 'hidden' } } as any}
+							styles={modalStyles}
 							{...props}
 						/>
 					)}

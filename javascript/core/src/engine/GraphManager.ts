@@ -206,13 +206,13 @@ export class GraphManager {
 	}
 
 	private _bindGraphOutput(binding: NamedOutputPortBinding) {
-		const name = binding.name
+		const { name, output, node } = binding
+
 		// Register the output in the table store
-		const node = this.getNode(binding.node)
-		const boundOutput = node.output(binding.output)
-		this.outputObservables.set(name, boundOutput)
-		const subscription = boundOutput.subscribe(latest => {
-			this.outputCache.set(name, latest)
+		const port = this.getNode(node).output(output)
+		this.outputObservables.set(name, port)
+		const subscription = port.subscribe(latest => {
+			this.outputCache.set(name, { ...latest, id: name, name })
 			this._onChange.next()
 		})
 		this.outputSubscriptions.set(name, subscription)

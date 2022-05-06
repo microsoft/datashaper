@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GraphManager } from '@data-wrangling-components/core'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 /**
  * Creates a list of table-names from the tables in a store
@@ -14,19 +14,23 @@ import { useEffect, useState } from 'react'
  * @returns
  */
 export function useTableNames(graph?: GraphManager): string[] {
-	// we won't actually get an updated store reference, so we'll track
-	// whether updates are needed using a change listener and flag
-	const [dirty, setDirty] = useState<boolean>(true)
-	const [list, setList] = useState<string[]>([])
-	useEffect(() => {
-		return graph?.onChange(() => setTimeout(() => setDirty(true), 0))
-	}, [graph, setDirty])
-	useEffect(() => {
-		if (dirty) {
-			setDirty(false)
-			const inputs = [...(graph?.inputs.keys() ?? [])]
-			setList(inputs)
-		}
-	}, [graph, dirty, setDirty, setList])
-	return list
+	const [tables, setTables] = useState<string[]>([])
+
+	const refreshInputTables = useCallback(() => {
+		const newTables = [
+			...(graph?.inputs.keys() ?? []),
+			...(graph?.outputs ?? []),
+		]
+		setTables(newTables)
+	}, [graph, setTables])
+
+	// Listen to input table changes
+	useEffect(
+		() => graph?.onChange(refreshInputTables),
+		[graph, refreshInputTables],
+	)
+
+	// Initialize input tables on initial render
+	useEffect(() => refreshInputTables(), [refreshInputTables])
+	return tables
 }
