@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { IButtonProps } from '@fluentui/react'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -50,3 +51,10 @@ export const OutputsColumn = styled.div`
 	display: flex;
 	flex-direction: column;
 `
+
+export const runPipelineRootStyles: IButtonProps['styles'] = {
+	root: { width: 180 },
+}
+export const icons = {
+	download: { iconName: 'Download' },
+}

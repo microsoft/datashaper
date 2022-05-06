@@ -10,6 +10,8 @@ import type {
 import type { Verb } from '../verbs/index.js'
 
 export interface WorkflowObject {
+	name?: string
+	description?: string
 	input?: string[]
 	output: OutputPortBinding[]
 	steps: StepInput[]
