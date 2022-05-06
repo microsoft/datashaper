@@ -273,6 +273,16 @@ export function guessDelimiter(filename?: string): string;
 // @public (undocumented)
 export function guessFileType(name: string): string;
 
+// Warning: (ae-missing-release-tag) "hash" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function hash(input: string[] | undefined): Record<string, boolean>;
+
+// Warning: (ae-missing-release-tag) "identity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const identity: <T>(value?: T | undefined) => T | undefined;
+
 // Warning: (ae-missing-release-tag) "isDsvFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -308,15 +318,30 @@ export type Json = Record<string, any>;
 // @public (undocumented)
 export function loadTable(file: BaseFile, options?: CSVParseOptions): Promise<ColumnTable>;
 
+// Warning: (ae-missing-release-tag) "num" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const num: (value?: string | number | undefined) => number | undefined;
+
 // Warning: (ae-missing-release-tag) "renameDuplicatedFiles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function renameDuplicatedFiles(files: BaseFile[]): BaseFile[];
 
+// Warning: (ae-missing-release-tag) "staticCallback" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const staticCallback: <T>(value: T) => () => T;
+
 // Warning: (ae-missing-release-tag) "tableToHTML" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function tableToHTML(file: BaseFile, htmlOptions?: HTMLFormatOptions, tableOptions?: CSVParseOptions): Promise<string>;
+
+// Warning: (ae-missing-release-tag) "toggleListItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function toggleListItem<T>(list: T[], item: T): T[];
 
 // Warning: (ae-missing-release-tag) "toZip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

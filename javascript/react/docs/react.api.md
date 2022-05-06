@@ -199,6 +199,23 @@ export interface StepCardProps {
     step: Step;
 }
 
+// Warning: (ae-missing-release-tag) "StepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const StepComponent: React.FC<StepComponentProps>;
+
+// Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepComponentProps {
+    graph: GraphManager;
+    index: number;
+    onChange: (step: Step, index: number) => void;
+    onChangeOutput: (value: string | undefined) => void;
+    output?: string;
+    step: Step;
+}
+
 // Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -298,12 +315,6 @@ export interface TransformModalProps extends IModalProps {
 //
 // @public (undocumented)
 export function useGraphManager(inputs: TableContainer[]): GraphManager;
-
-
-export * from "@data-wrangling-components/react-controls";
-export * from "@data-wrangling-components/react-hocs";
-export * from "@data-wrangling-components/react-types";
-export * from "@data-wrangling-components/react-verbs";
 
 // (No @packageDocumentation comment for this package)
 

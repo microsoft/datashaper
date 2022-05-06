@@ -12,7 +12,7 @@ import { useCallback } from 'react'
 import type { DropzoneState as DzState } from 'react-dropzone'
 import { useDropzone as UseDz } from 'react-dropzone'
 
-import type { DropzoneProps, FileRejection } from './Dropzone.types.js'
+import type { DropzoneProps, FileRejection } from './Dropzone.types'
 
 export interface DropzoneState extends DzState {
 	acceptedFileTypesExt: string[]

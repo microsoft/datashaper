@@ -330,7 +330,7 @@ export class GraphManager {
     get outputDefinitions(): NamedOutputPortBinding[];
     get outputs(): string[];
     print(): void;
-    reconfigureStep(index: number, stepInput: StepInput<unknown>): void;
+    reconfigureStep(index: number, stepInput: StepInput<unknown>): Step;
     removeInput(inputName: string): void;
     removeOutput(name: string): void;
     removeStep(index: number): void;
