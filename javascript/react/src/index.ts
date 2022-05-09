@@ -11,7 +11,7 @@ export {
 	createDefaultHeaderCommandBar,
 	createLazyLoadingGroupHeader,
 } from './hocs/component-factories.js'
-export { useGraphManager } from './hooks/index.js'
+export { useGraphManager, useDataTable } from './hooks/index.js'
 
 /*
  * Exported Components

@@ -7,7 +7,7 @@ import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 
 import {
-	useLoadTable,
+	useDataTable,
 	useTableColumnNames,
 	useTableNames,
 } from '../hooks/index.js'
@@ -18,14 +18,15 @@ import { LookupBase } from './Lookup.base.js'
  * Provides inputs for a Lookup step.
  */
 export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
-	function Lookup({ step, graph, table, onChange }) {
-		const rightTable = useLoadTable(
+	function Lookup({ step, graph, onChange }) {
+		const leftTable = useDataTable(step.input[NodeInput.Source]?.node, graph)
+		const rightTable = useDataTable(
 			step.input[NodeInput.Other]?.node,
-			undefined,
+
 			graph,
 		)
 		const tables = useTableNames(graph)
-		const leftColumns = useTableColumnNames(table)
+		const leftColumns = useTableColumnNames(leftTable)
 		const rightColumns = useTableColumnNames(rightTable)
 		return (
 			<LookupBase

@@ -7,10 +7,10 @@ import type { TableContainer } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
 
-export function useLoadTable(
+export function useDataTable(
 	id: string | undefined,
-	table?: ColumnTable,
 	graph?: GraphManager,
+	existingTable?: ColumnTable,
 ): ColumnTable | undefined {
 	const [tbl, setTable] = useState<ColumnTable | undefined>()
 	const handleTableLoad = useCallback(
@@ -22,21 +22,20 @@ export function useLoadTable(
 		// TODO: should we set it in the store also?
 		// the expectation here is that a table will be provided if the step component is used directly without a builder
 		// interface that is managing a pipeline
-		if (table) {
-			setTable(table)
+		if (existingTable) {
+			setTable(existingTable)
 		} else if (id && graph) {
-			// Case 1: static input table
+			// If a static input table is passed in, set the state to it
 			if (graph.hasInput(id)) {
 				setTable(graph.inputs.get(id)?.table)
-			} else {
-				// Case 2: derived table
-				const observable = graph.output(id) ?? graph.outputForNodeId(id)
-				if (observable) {
-					const sub = observable.subscribe(t => setTable(t?.table))
-					return () => sub.unsubscribe()
-				}
+			}
+			// Observe the named graph output
+			const observable = graph.output(id) ?? graph.outputForNodeId(id)
+			if (observable) {
+				const sub = observable.subscribe(t => setTable(t?.table))
+				return () => sub.unsubscribe()
 			}
 		}
-	}, [id, table, graph, handleTableLoad])
+	}, [id, existingTable, graph, handleTableLoad])
 	return tbl
 }

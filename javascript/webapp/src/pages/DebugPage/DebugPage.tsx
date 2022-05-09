@@ -2,11 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	StepComponent,
-	StepSelector,
-	useGraphManager,
-} from '@data-wrangling-components/react'
+import { StepSelector, useGraphManager } from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton } from '@fluentui/react'
@@ -29,22 +25,12 @@ import {
 	Container,
 	icons,
 	InputsSection,
-	OutputsColumn,
-	StepBlock,
-	StepsColumn,
-	TableSection,
 	Workspace,
+	columnsStyle,
 } from './DebugPage.styles.js'
 import { InputTables } from './InputTables'
 import { Section } from './Section'
-import { Table } from './Table'
-
-const columns = {
-	ID: {
-		width: 50,
-		iconName: 'FavoriteStarFill',
-	},
-}
+import { StepOutput } from './StepOutput.js'
 
 const DEFAULT_STATS = [
 	StatsColumnType.Type,
@@ -103,49 +89,25 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					<Section title="Inputs">
 						<InputTables
 							tables={inputTables}
-							config={columns}
+							config={columnsStyle}
 							features={features}
 							compact={compact}
 						/>
 					</Section>
 				</InputsSection>
-				{steps.map((step, index) => {
-					const output = outputs[index]
-					const table = output ? graph.latest(output)?.table : undefined
-					return (
-						<StepBlock key={`step-${index}`} className="step-block">
-							<Section title={`Step ${index + 1}`} subtitle={step.verb}>
-								<StepsColumn className="steps-column">
-									<StepComponent
-										key={`step-${index}`}
-										step={step}
-										graph={graph}
-										index={index}
-										output={output}
-										onChange={onStepChange}
-										onChangeOutput={output => onStepOutputChange(step, output)}
-									/>
-								</StepsColumn>
-								<OutputsColumn className="outputs-column">
-									{table ? (
-										<TableSection
-											key={`output-${index}`}
-											className="table-section"
-										>
-											<Table
-												name={step.id}
-												table={table}
-												config={columns}
-												features={features}
-												compact={compact}
-											/>
-										</TableSection>
-									) : null}
-								</OutputsColumn>
-							</Section>
-						</StepBlock>
-					)
-				})}
+				{steps.map((step, index) => (
+					<StepOutput
+						step={step}
+						index={index}
+						key={step.id}
+						graph={graph}
+						output={outputs[index]!}
+						features={features}
+						compact={compact}
+						onStepChange={onStepChange}
+						onStepOutputChange={onStepOutputChange}
+					/>
+				))}
 				<Commands>
 					<StepSelector onCreate={onStepCreate} showButton />
 					<Buttons>

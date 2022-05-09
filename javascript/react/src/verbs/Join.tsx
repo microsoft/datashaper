@@ -7,7 +7,7 @@ import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
 
 import {
-	useLoadTable,
+	useDataTable,
 	useTableColumnNames,
 	useTableNames,
 } from '../hooks/index.js'
@@ -24,16 +24,11 @@ export const Join: React.FC<StepComponentProps<JoinArgs>> = memo(function Join({
 	onChange,
 }) {
 	const tableNames = useTableNames(graph)
-	const leftTable = useLoadTable(
+	const leftTable = useDataTable(
 		input || step.input[NodeInput.Source]?.node,
-		undefined,
 		graph,
 	)
-	const rightTable = useLoadTable(
-		step.input[NodeInput.Other]?.node,
-		undefined,
-		graph,
-	)
+	const rightTable = useDataTable(step.input[NodeInput.Other]?.node, graph)
 	const leftColumns = useTableColumnNames(leftTable)
 	const rightColumns = useTableColumnNames(rightTable)
 
