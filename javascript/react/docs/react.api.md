@@ -311,6 +311,11 @@ export interface TransformModalProps extends IModalProps {
     verbs?: string[];
 }
 
+// Warning: (ae-missing-release-tag) "useDataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDataTable(id: string | undefined, graph?: GraphManager, existingTable?: ColumnTable): ColumnTable | undefined;
+
 // Warning: (ae-missing-release-tag) "useGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
