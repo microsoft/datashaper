@@ -6,7 +6,7 @@
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { useLoadTable } from '../hooks/index.js'
+import { useDataTable } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 
 export function withLoadedTable<T>(
@@ -18,10 +18,10 @@ export function withLoadedTable<T>(
 ) {
 	return function LoadedTable(props: StepComponentProps<T>): JSX.Element {
 		const { step, table, graph, input } = props
-		const dataTable = useLoadTable(
+		const dataTable = useDataTable(
 			input || step.input[NodeInput.Source]?.node,
-			table,
 			graph,
+			table,
 		)
 		return <StepComponent {...props} dataTable={dataTable} />
 	}

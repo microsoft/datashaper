@@ -117,7 +117,6 @@
 		{
 			"id": "fetch-1",
 			"verb": "fetch",
-			"input": { "source": "data/companies.csv" },
 			"args": {
 				"url": "https://vega.github.io/vega/data/seattle-weather-hourly-normals.csv"
 			}
@@ -376,6 +375,7 @@
 		"difference-1",
 		"erase-1",
 		"fetch-1",
+		"fill-1",
 		"filter-1",
 		"fold-1",
 		"groupby-1",

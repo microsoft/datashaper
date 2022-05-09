@@ -28,29 +28,17 @@ export const Buttons = styled.div`
 	display: flex;
 	justify-content: space-between;
 `
-
-export const StepBlock = styled.div`
-	display: flex;
-`
-
 export const InputsSection = styled.div`
 	margin-bottom: 80px;
 `
 
-export const TableSection = styled.div`
-	max-height: 400px;
-`
-
-export const StepsColumn = styled.div`
-	width: 600px;
-`
-
-export const OutputsColumn = styled.div`
-	margin-left: 40px;
-	display: flex;
-	flex-direction: column;
-`
-
 export const icons = {
 	download: { iconName: 'Download' },
+}
+
+export const columnsStyle = {
+	ID: {
+		width: 50,
+		iconName: 'FavoriteStarFill',
+	},
 }

@@ -15,8 +15,8 @@ import styled from 'styled-components'
 
 import { TableColumnDropdown } from '../controls/index.js'
 import {
+	useDataTable,
 	useDropdownChangeHandler,
-	useLoadTable,
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '../hooks/index.js'
@@ -42,11 +42,11 @@ export function withInputColumnDropdown<T extends InputColumnArgs>(
 
 			// TODO: detailed types/stats should be an option on table load,
 			// which will then be passed around with the container and thereby cached
-			// useLoadTable should return a TableContainer
-			const tbl = useLoadTable(
+			// useDatatable should return a TableContainer
+			const tbl = useDataTable(
 				input || step.input[NodeInput.Source]?.node,
-				table,
 				graph,
+				table,
 			)
 
 			const filter = useColumnFilter(step, tbl)
