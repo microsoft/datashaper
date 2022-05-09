@@ -2,12 +2,14 @@
 	"$schema": "../../../../../workflow.json",
 	"steps": [
 		{
+			"id": "expected",
 			"verb": "unroll",
 			"input": "table1",
 			"args": {
 				"columns": ["ID"]
-			},
-			"output": "expected"
+			}
 		}
-	]
+	],
+	"input": ["table1"],
+	"output": ["expected"]
 }

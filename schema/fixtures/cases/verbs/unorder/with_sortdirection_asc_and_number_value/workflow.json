@@ -7,12 +7,14 @@
 			"args": {
 				"orders": [{ "column": "quantity", "direction": "asc" }]
 			},
-			"output": "ordered"
+			"id": "ordered"
 		},
 		{
 			"verb": "unorder",
 			"input": "ordered",
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["ordered", "expected"],
+	"input": ["table7"]
 }

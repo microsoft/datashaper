@@ -8,7 +8,9 @@
 				"columns": ["ID"],
 				"value": 4
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table3"]
 }

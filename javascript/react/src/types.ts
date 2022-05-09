@@ -2,72 +2,110 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, TableStore } from '@data-wrangling-components/core'
-import type { IModalProps } from '@fluentui/react'
+import type { GraphManager, Step } from '@data-wrangling-components/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-export interface TransformModalProps extends IModalProps {
+export type StepChangeFunction<T extends object | void | unknown = unknown> = (
+	step: Step<T>,
+) => void
+
+export interface StepDependent<T extends object | void | unknown = unknown> {
+	step: Step<T>
+}
+
+export interface DescriptionRow {
 	/**
-	 * Table to build the transform from.
+	 * Text to display in normal font before the value
+	 */
+	before?: string
+	/**
+	 * The configuration value to display with emphasized font
+	 */
+	value?: any
+	/**
+	 * Text to display in normal font after the value
+	 */
+	after?: string
+	/**
+	 * Recursive row children to render indented
+	 */
+	sub?: DescriptionRow[]
+	/**
+	 * Optional title text to use on node for tooltips/overflow
+	 */
+	title?: string
+}
+
+export interface VerbDescriptionProps<
+	T extends object | void | unknown = unknown,
+> extends StepDescriptionProps<T> {
+	rows: DescriptionRow[]
+}
+
+export interface StepDescriptionProps<
+	T extends object | void | unknown = unknown,
+> extends StepDependent<T> {
+	style?: React.CSSProperties
+	showInput?: boolean
+	showOutput?: boolean
+	showOutputColumn?: boolean
+	actions?: JSX.Element
+
+	/** The output table name */
+	output: string | undefined
+}
+/**
+ * For reusable subcomponents that are combined in one interface
+ * to manipulate a step.
+ */
+export interface StepSubcomponentProps<
+	T extends object | void | unknown = unknown,
+> extends StepComponentProps<T> {
+	label?: string
+}
+
+/**
+ * Basic props for a dump-component (not store/arquero attached)
+ */
+export interface StepComponentBaseProps<
+	T extends object | void | unknown = unknown,
+> extends StepDependent<T> {
+	/**
+	 * Event handler for when the step is changed in the component
+	 */
+	onChange?: StepChangeFunction<T>
+}
+
+export interface StepComponentProps<T extends object | void | unknown = unknown>
+	extends StepComponentBaseProps<T> {
+	/**
+	 * TableStore to use for table lookups of step parameters.
+	 */
+	graph?: GraphManager
+	/**
+	 * ColumnTable to execute the step against if no store is provided.
 	 */
 	table?: ColumnTable
 	/**
-	 * Optional step for controlled component if pre-built config is planned.
+	 * Optional override of step input - there are many scenarios
+	 * (particularly chains) where the driving input table for UI visbility should be shared,
+	 * but the input to the actual step is an intermediate table.
 	 */
-	step?: Step
-	/**
-	 * Callback fired when the step is configured and "run" is clicked, indicating
-	 * the application should execute the contructed/edited step.
-	 */
-	onTransformRequested?: (step: Step, index?: number) => void
-	/**
-	 * Optional list of transform verbs to present to the user.
-	 * If not supplied, all verbs for the desired operation (table or column) will be presented.
-	 */
-	verbs?: string[]
-	/**
-	 * Optional header text to display on the modal
-	 */
-	headerText?: string
-	/**
-	 * Last output table to use as input & output for column transform
-	 *  or as input for table transform
-	 */
-	nextInputTable?: string
-	target?: string
-}
+	input?: string
 
-export interface TableTransformModalProps extends TransformModalProps {
 	/**
-	 * Indicates that the input table should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.
+	 * The optional output table name; this information isn't stored on the step, so it has to
+	 * be injected separately
 	 */
-	hideInputTable?: boolean
-	/**
-	 * Indicates that the output table should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.
-	 */
-	hideOutputTable?: boolean
-	/**
-	 * Table store to verify naming to be created
-	 */
-	store?: TableStore
-}
+	output: string | undefined
 
-export interface ColumnTransformModalProps extends TransformModalProps {
 	/**
-	 * Indicates that the input column should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the modal is launched directly from a column, which would make display redundant.
+	 * Optional override for the label
 	 */
-	hideInputColumn?: boolean
-	/**
-	 * Indicates that the output column should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input column.
-	 */
-	hideOutputColumn?: boolean
-}
+	label?: string
 
-export enum StepsType {
-	Table = 'table',
-	Column = 'column',
+	/**
+	 * Event handler for when the output table name changes
+	 */
+	onChangeOutput: (value: string | undefined) => void
 }

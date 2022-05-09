@@ -10,7 +10,9 @@
 				"column": "quantity",
 				"operation": "min"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table4"]
 }

@@ -1,0 +1,4 @@
+
+		// 150 - 20 = 130 / 30 step = 4.33 so 5 bins
+		
+		// unclamped should be +- Infinity

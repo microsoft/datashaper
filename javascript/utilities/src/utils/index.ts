@@ -5,5 +5,6 @@
 
 export * from './arquero.js'
 export * from './download.js'
+export * from './enums.js'
 export * from './files.js'
 export * from './zip.js'

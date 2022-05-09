@@ -10,7 +10,9 @@
 				"to": "resultColumn",
 				"delimiter": ","
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table13"]
 }

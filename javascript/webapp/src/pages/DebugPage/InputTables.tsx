@@ -2,29 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@essex/arquero'
-import type { DetailsListFeatures } from '@essex/arquero-react'
 import { memo } from 'react'
-import styled from 'styled-components'
 
-import type { ColumnConfigMap } from './Table'
+import { TablesContainer } from './InputTables.styles.js'
+import type { InputTablesProps } from './InputTables.types.js'
 import { Table } from './Table'
-
-export interface InputTablesProps {
-	tables: Map<string, TableContainer>
-	config: ColumnConfigMap
-	features?: DetailsListFeatures
-	compact?: boolean
-}
 
 export const InputTables: React.FC<InputTablesProps> = memo(
 	function InputTables({ tables, config, features, compact }) {
 		return (
 			<TablesContainer>
-				{Array.from(tables).map(([key, container]) => (
+				{tables.map(container => (
 					<Table
-						key={`table-${key}`}
-						name={key}
+						key={`table-${container.id}`}
+						name={container.id}
 						table={container.table!}
 						config={config}
 						features={features}
@@ -35,11 +26,3 @@ export const InputTables: React.FC<InputTablesProps> = memo(
 		)
 	},
 )
-
-const TablesContainer = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	gap: 12px;
-	width: 100%;
-	justify-content: space-between;
-`

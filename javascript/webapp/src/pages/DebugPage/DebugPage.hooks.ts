@@ -3,24 +3,19 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type {
-	SpecificationInput,
-	TableStore,
+	GraphManager,
+	Step,
+	Verb,
+	Workflow,
+	WorkflowObject,
 } from '@data-wrangling-components/core'
-import { createTableStore } from '@data-wrangling-components/core'
+import { readStep } from '@data-wrangling-components/core'
 import type { BaseFile } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { container } from '@essex/arquero'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useCallback, useEffect, useState } from 'react'
-import { from } from 'rxjs'
-
-const TABLES = [
-	`data/companies.csv`,
-	`data/companies2.csv`,
-	`data/products.csv`,
-	'data/stocks.csv',
-]
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 const identity = (d: any) => d
 
@@ -30,76 +25,171 @@ const parse = {
 	Group: identity,
 }
 
-export function useInputTableList(): [
-	string[],
-	React.Dispatch<React.SetStateAction<string[]>>,
-] {
-	return useState<string[]>(TABLES)
+/**
+ * Gets the graph processing steps
+ * @param graph - the graph manager
+ * @returns
+ */
+export function useSteps(graph: GraphManager): Step[] {
+	const [steps, setSteps] = useState<Step[]>([])
+	// listen for graph changes and update the steps
+	useEffect(
+		() => graph.onChange(() => setSteps(graph.steps)),
+		[graph, setSteps],
+	)
+	return steps
 }
 
-// create the store and initialize it with our test tables
-// memoing this gives us a chance queue up our built-in test tables on first run
-export function useTableStore(autoType = false): TableStore {
-	const [store, setStore] = useState<TableStore>(createTableStore())
+export function useWorkflowState(
+	graph: GraphManager,
+): [Workflow | undefined, (workflow: Workflow | undefined) => void] {
+	const [exampleSpec, setExampleSpec] = useState<Workflow | undefined>()
+	return [
+		exampleSpec,
+		useCallback(
+			(spec: Workflow | undefined) => {
+				setExampleSpec(spec)
+				graph.reset(spec)
+			},
+			[setExampleSpec, graph],
+		),
+	]
+}
+
+export function useWorkflowDownloadUrl(workflow: Workflow | undefined): string {
+	const [serialized, setSerialized] = useState<Blob>()
+	useEffect(() => {
+		if (workflow != null) {
+			const serialize = (): Blob =>
+				new Blob([JSON.stringify(workflow.toJsonObject(), null, 4)])
+
+			setSerialized(serialize())
+			return workflow.onChange(() => setSerialized(serialize()))
+		}
+	}, [workflow])
+
+	return useMemo(
+		() => (serialized ? URL.createObjectURL(serialized) : ''),
+		[serialized],
+	)
+}
+
+/**
+ *
+ * @param graph - the graph manager
+ * @returns
+ */
+export function useCreateStepHandler(
+	graph: GraphManager,
+): (verb: Verb) => void {
+	return useCallback(
+		(verb: Verb) => {
+			const newStep = readStep({ verb })
+			graph.addStep(newStep)
+		},
+		[graph],
+	)
+}
+
+export function useChangeStepHandler(
+	graph: GraphManager,
+): (step: Step, index: number) => void {
+	return useCallback(
+		(step: Step, index: number) => {
+			graph.reconfigureStep(index, step)
+		},
+		[graph],
+	)
+}
+
+export function useHandleStepOutputChanged(
+	graph: GraphManager,
+): (step: Step, output: string | undefined) => void {
+	return useCallback(
+		(step: Step, output: string | undefined) => {
+			if (output) {
+				graph.addOutput({ node: step.id, name: output })
+			} else {
+				const spec = graph.outputDefinitions.find(def => def.node === step.id)
+				if (spec) {
+					graph.removeOutput(spec.name)
+				}
+			}
+		},
+		[graph],
+	)
+}
+
+/**
+ * Load the initial input tables
+ * @param autoType - Whether to auto-type the columns when reading the file
+ * @returns A set of table containers representing the initial dataset
+ */
+export function useInputTables(autoType = false): TableContainer[] {
+	const [tables, setTables] = useState<TableContainer[]>([])
+
 	useEffect(() => {
 		const fn = async () => {
-			const store = createTableStore()
-			const promises = TABLES.map(async name => {
-				const data = await loadCSV(name, {
-					parse,
-					autoMax: 100000,
-					autoType,
-				})
-				const ctr = container(name, data)
-				store.set(name, from([ctr]))
+			const promises = [
+				`data/companies.csv`,
+				`data/companies2.csv`,
+				`data/products.csv`,
+				'data/stocks.csv',
+			].map(async name => {
+				const data = await readCsvFile(name, autoType)
+				return container(name, data)
 			})
-			await Promise.all(promises)
-			setStore(store)
+			const loadedTables = await Promise.all(promises)
+			setTables(loadedTables)
 		}
 		void fn()
 	}, [autoType])
-	return store
+
+	return tables
 }
 
-// write out the loaded test tables to a map for rendering
-export function useInputTables(
-	list: string[],
-	store: TableStore,
-): Map<string, TableContainer> {
-	const [tables, setTables] = useState<Map<string, TableContainer>>(
-		new Map<string, TableContainer>(),
+/**
+ * Gets a callback for handling adding files to the graph
+ * @param graph - the input graph
+ * @returns The graph and a callback to update the input tables
+ */
+export function useAddFilesHandler(
+	graph: GraphManager,
+): (loaded: TableContainer[]) => void {
+	// add any dropped files to the inputs
+	return useCallback(
+		(loaded: TableContainer[]) => {
+			loaded.forEach(table => graph.addInput(table))
+		},
+		[graph],
 	)
-	useEffect(() => {
-		const results = store.toMap()
-		setTables(results)
-	}, [list, store, setTables])
-	return tables
 }
 
 export function useLoadTableFiles(): (
 	files: BaseFile[],
-) => Promise<Map<string, ColumnTable>> {
+) => Promise<TableContainer[]> {
 	return useCallback(
-		async (files: BaseFile[]): Promise<Map<string, ColumnTable>> => {
-			const list = await Promise.all(files.map(readTable))
-			return list.reduce((acc, cur) => {
-				acc.set(cur[0], cur[1])
-				return acc
-			}, new Map<string, ColumnTable>())
-		},
+		(files: BaseFile[]): Promise<TableContainer[]> =>
+			Promise.all(files.map(readTable)),
 		[],
 	)
 }
 
-export function useLoadSpecFile(): (
-	file: BaseFile,
-) => Promise<SpecificationInput> {
-	return useCallback((file: BaseFile): Promise<SpecificationInput> => {
-		return file.toJson() as any
+export function useLoadSpecFile(): (file: BaseFile) => Promise<WorkflowObject> {
+	return useCallback((file: BaseFile): Promise<WorkflowObject> => {
+		return file.toJson() as Promise<WorkflowObject>
 	}, [])
 }
 
-async function readTable(file: BaseFile): Promise<[string, ColumnTable]> {
+async function readTable(file: BaseFile): Promise<TableContainer> {
 	const table = await file.toTable()
-	return [file.name, table]
+	return { name: file.name, id: file.name, table }
+}
+
+function readCsvFile(name: string, autoType: boolean): Promise<ColumnTable> {
+	return loadCSV(name, {
+		parse,
+		autoMax: 100000,
+		autoType,
+	})
 }

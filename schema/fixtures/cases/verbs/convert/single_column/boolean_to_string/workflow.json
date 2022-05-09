@@ -4,12 +4,14 @@
 		{
 			"verb": "convert",
 			"input": "table14",
-			"output": "expected",
+			"id": "expected",
 			"args": {
 				"columns": ["z"],
 				"type": "string",
 				"formatPattern": "%B, %Y"
 			}
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table14"]
 }

@@ -9,7 +9,9 @@
 				"delimiter": ",",
 				"autoMax": 10000
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table1"]
 }

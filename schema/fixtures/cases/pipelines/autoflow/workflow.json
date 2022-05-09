@@ -1,10 +1,10 @@
 {
 	"$schema": "../../../../workflow.json",
-	"input": "table1",
-	"output": "expected",
+	"input": ["table1"],
 	"steps": [
 		{
 			"verb": "fill",
+			"input": "table1",
 			"args": {
 				"to": "newColumn",
 				"value": "derp"
@@ -18,10 +18,12 @@
 			}
 		},
 		{
+			"id": "expected",
 			"verb": "select",
 			"args": {
 				"columns": ["ID", "newColumn", "newColumn2"]
 			}
 		}
-	]
+	],
+	"output": ["expected"]
 }

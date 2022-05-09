@@ -6,30 +6,34 @@ import { op } from 'arquero'
 
 import {
 	BooleanComparisonOperator,
+	DateComparisonOperator,
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '../types.js'
 import { bool } from './data-types.js'
 
 export function compareValues(
-	left: string | number | boolean,
-	right: string | number | boolean,
+	left: string | number | boolean | Date,
+	right: string | number | boolean | Date,
 	operator:
 		| NumericComparisonOperator
 		| StringComparisonOperator
-		| BooleanComparisonOperator,
+		| BooleanComparisonOperator
+		| DateComparisonOperator,
 ): 0 | 1 | null {
 	// start with the empty operators, because typeof won't work...
 	if (
 		operator === NumericComparisonOperator.IsEmpty ||
 		operator === StringComparisonOperator.IsEmpty ||
-		operator === BooleanComparisonOperator.IsEmpty
+		operator === BooleanComparisonOperator.IsEmpty ||
+		operator === DateComparisonOperator.IsEmpty
 	) {
 		return isEmpty(left)
 	} else if (
 		operator === NumericComparisonOperator.IsNotEmpty ||
 		operator === StringComparisonOperator.IsNotEmpty ||
-		operator === BooleanComparisonOperator.IsNotEmpty
+		operator === BooleanComparisonOperator.IsNotEmpty ||
+		operator === DateComparisonOperator.IsNotEmpty
 	) {
 		const empty = isEmpty(left)
 		return empty === 1 ? 0 : 1
@@ -50,11 +54,13 @@ export function compareValues(
 	} else if (typeof left === 'boolean') {
 		const r = !!bool(right)
 		return compareBooleans(left, r, operator as BooleanComparisonOperator)
+	} else if (typeof left === 'object' && left instanceof Date) {
+		return compareDates(left, right as Date, operator as DateComparisonOperator)
 	}
 	return 0
 }
 
-function isEmpty(value: string | number | boolean) {
+function isEmpty(value: string | number | boolean | Date) {
 	if (value === null || value === undefined) {
 		return 1
 	}
@@ -130,5 +136,24 @@ function compareBooleans(
 			return left === false ? 1 : 0
 		default:
 			throw new Error(`Unsupported boolean comparison operator: [${operator}]`)
+	}
+}
+
+function compareDates(
+	left: Date,
+	right: Date,
+	operator: DateComparisonOperator,
+): 1 | 0 {
+	switch (operator) {
+		case DateComparisonOperator.Equals:
+			return left.getTime() === right.getTime() ? 1 : 0
+		case DateComparisonOperator.NotEqual:
+			return left.getTime() !== right.getTime() ? 1 : 0
+		case DateComparisonOperator.After:
+			return left > right ? 1 : 0
+		case DateComparisonOperator.Before:
+			return left < right ? 1 : 0
+		default:
+			throw new Error(`Unsupported date comparison operator: [${operator}]`)
 	}
 }

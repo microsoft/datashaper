@@ -4,7 +4,9 @@
 		{
 			"verb": "dedupe",
 			"input": "table10",
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table10"]
 }

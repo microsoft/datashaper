@@ -2,17 +2,18 @@
 	"$schema": "../../../../../workflow.json",
 	"steps": [
 		{
+			"id": "ordered",
 			"verb": "orderby",
 			"input": "table7",
 			"args": {
 				"orders": [{ "column": "item", "direction": "desc" }]
-			},
-			"output": "ordered"
+			}
 		},
 		{
-			"verb": "unorder",
-			"input": "ordered",
-			"output": "expected"
+			"id": "expected",
+			"verb": "unorder"
 		}
-	]
+	],
+	"input": ["table7"],
+	"output": ["expected", "ordered"]
 }

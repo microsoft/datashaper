@@ -4,13 +4,14 @@
 	"description": "",
 	"steps": [
 		{
-			"id": "n1",
+			"id": "groupby",
 			"verb": "groupby",
 			"input": { "source": "data/stocks.csv" },
-			"output": { "target": "groupby-2" },
 			"args": {
 				"columns": ["Symbol", "Month"]
 			}
 		}
-	]
+	],
+	"input": ["data/stocks.csv"],
+	"output": ["groupby"]
 }

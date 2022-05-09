@@ -2,9 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { v4 as uuid } from 'uuid'
-
-import type { InputBinding } from '../specification.js'
+import type { NamedPortBinding } from '../types.js'
 import {
 	BinStrategy,
 	BooleanOperator,
@@ -14,6 +12,18 @@ import {
 } from '../verbs/index.js'
 import type { Step, StepInput } from './types.js'
 
+// TEMP: this creates a more readable id by doing a simple increment for each verb type
+// since this is global it will not align across pipelines or tables.
+// however, it will soon be replaced with graph interrogation methods that let us
+// construct much smarter and more user friendly ids
+const uid = (() => {
+	const map = new Map<string, number>()
+	return (verb: Verb) => {
+		const next = (map.get(verb) || 0) + 1
+		map.set(verb, next)
+		return `${verb} (${next})`
+	}
+})()
 /**
  * Factory function to create new verb configs
  * with as many reasonable defaults as possible.
@@ -22,15 +32,14 @@ import type { Step, StepInput } from './types.js'
  * @param verb -
  */
 export function readStep<T extends object | void | unknown = any>(
-	{ verb, args = {} as any, id = uuid(), input, output }: StepInput<T>,
+	{ verb, args = {} as any, id, input }: StepInput<T>,
 	previous?: Step | undefined,
 ): Step<T> {
 	const base = {
-		id,
+		id: id || uid(verb),
 		args,
 		verb,
 		input: fixInputs(input, previous),
-		output: fixOutputs(output),
 	}
 	switch (verb) {
 		case Verb.Bin:
@@ -183,24 +192,16 @@ function fixInputs(
 		Object.keys(result).forEach((k: string) => {
 			const binding = result[k]
 			if (typeof binding === 'string') {
-				result[k] = { node: binding as string } as InputBinding
+				result[k] = { node: binding as string } as NamedPortBinding
 			}
 		})
 
 		// Handle the variadic case (e.g. "others" array is defined)
 		if (result.others != null) {
 			result.others = result.others.map(o =>
-				typeof o === 'string' ? { node: o } : (o as any as InputBinding),
+				typeof o === 'string' ? { node: o } : (o as any as NamedPortBinding),
 			)
 		}
 		return result
-	}
-}
-
-function fixOutputs(outputs: StepInput['output']): Step['output'] {
-	if (typeof outputs === 'string') {
-		return { target: outputs }
-	} else {
-		return (outputs || {}) as Record<string, string>
 	}
 }

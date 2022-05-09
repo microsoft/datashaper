@@ -4,11 +4,13 @@
 		{
 			"verb": "convert",
 			"input": "table19",
-			"output": "expected",
+			"id": "expected",
 			"args": {
 				"columns": ["int_hex"],
 				"type": "int"
 			}
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table19"]
 }

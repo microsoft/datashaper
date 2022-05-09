@@ -7,7 +7,9 @@
 			"args": {
 				"orders": [{ "column": "quantity", "direction": "desc" }]
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table7"]
 }

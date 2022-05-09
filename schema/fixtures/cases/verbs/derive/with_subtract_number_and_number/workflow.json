@@ -10,7 +10,9 @@
 				"column2": "FY21",
 				"operator": "-"
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table6"]
 }

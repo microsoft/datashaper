@@ -1,0 +1,19 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "join",
+			"input": {
+				"source": "table27",
+				"other": "table28"
+			},
+			"args": {
+				"on": ["x", "u"],
+				"strategy": "semi join"
+			},
+			"id": "expected"
+		}
+	],
+	"output": ["expected"],
+	"input": ["table27", "table28"]
+}

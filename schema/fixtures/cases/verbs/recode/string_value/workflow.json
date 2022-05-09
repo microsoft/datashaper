@@ -13,7 +13,9 @@
 					"C": "X"
 				}
 			},
-			"output": "expected"
+			"id": "expected"
 		}
-	]
+	],
+	"output": ["expected"],
+	"input": ["table1"]
 }

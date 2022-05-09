@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Specification } from '@data-wrangling-components/core'
+import { Workflow } from '@data-wrangling-components/core'
 import type { FileWithPath } from '@data-wrangling-components/utilities'
 import {
 	FileCollection,
@@ -10,16 +10,25 @@ import {
 	FileMimeType,
 	FileType,
 } from '@data-wrangling-components/utilities'
-import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
-import type { IDropdownOption, IDropdownStyles } from '@fluentui/react'
+import type { IDropdownOption } from '@fluentui/react'
 import { Checkbox, Dropdown } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useState } from 'react'
-import styled from 'styled-components'
 
 import { FileDrop } from '~components/FileDrop'
 
+import {
+	Container,
+	Control,
+	ControlBlock,
+	Description,
+	Drop,
+	DropBlock,
+	dropdownStyles,
+	Examples,
+	ExamplesContainer,
+} from './ControlBar.styles.js'
+import type { ControlBarProps } from './ControlBar.types.js'
 import { useLoadSpecFile, useLoadTableFiles } from './DebugPage.hooks'
 import { ExamplesDropdown } from './ExamplesDropdown'
 
@@ -27,30 +36,15 @@ const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
 	return { key: o, text: o } as IDropdownOption
 })
 
-const dropdownStyles: Partial<IDropdownStyles> = {
-	dropdown: { marginTop: '4px' },
-}
-export interface ControlBarProps {
-	selected?: Specification
-	onSelectSpecification?: (spec: Specification | undefined) => void
-	onLoadFiles?: (files: Map<string, ColumnTable>) => void
-	features: DetailsListFeatures
-	onFeaturesChange?: (features: DetailsListFeatures) => void
-	compact: boolean
-	onCompactChange: (auto: boolean) => void
-	autoType: boolean
-	onAutoTypeChange: (autoType: boolean) => void
-}
-
 export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	selected,
+	features,
+	compact,
+	autoType,
 	onSelectSpecification,
 	onLoadFiles,
-	features,
 	onFeaturesChange,
-	compact,
 	onCompactChange,
-	autoType,
 	onAutoTypeChange,
 }) {
 	const loadFiles = useLoadTableFiles()
@@ -85,7 +79,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			if (!first) return
 			updateFileCollection([first])
 			const spec = await loadSpec(first)
-			onSelectSpecification?.(spec as Specification)
+			onSelectSpecification?.(new Workflow(spec))
 		},
 		[onSelectSpecification, loadSpec, updateFileCollection],
 	)
@@ -156,7 +150,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 				<Description>
 					<p>
 						{selected
-							? selected.description
+							? (selected as any)?.description ?? ''
 							: 'Description for the selected example will show here'}
 					</p>
 				</Description>
@@ -312,44 +306,3 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 		</Container>
 	)
 })
-
-const Container = styled.div`
-	display: flex;
-	padding: 0 12px 12px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 170px;
-	margin-bottom: 2rem;
-`
-
-const Examples = styled.div``
-const ExamplesContainer = styled.div``
-
-const Description = styled.div`
-	width: 400px;
-	flex-direction: column;
-	justify-content: center;
-`
-
-const ControlBlock = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-`
-
-const Control = styled.div`
-	width: 200px;
-`
-
-const DropBlock = styled.div`
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	gap: 10px;
-`
-
-const Drop = styled.div`
-	width: 160px;
-	height: 50px;
-`
