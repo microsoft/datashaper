@@ -21,12 +21,12 @@ import {
 } from './DebugPage.hooks'
 import {
 	Buttons,
+	columnsStyle,
 	Commands,
 	Container,
 	icons,
 	InputsSection,
 	Workspace,
-	columnsStyle,
 } from './DebugPage.styles.js'
 import { InputTables } from './InputTables'
 import { Section } from './Section'

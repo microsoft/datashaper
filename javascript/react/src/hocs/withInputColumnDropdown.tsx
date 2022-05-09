@@ -15,8 +15,8 @@ import styled from 'styled-components'
 
 import { TableColumnDropdown } from '../controls/index.js'
 import {
-	useDropdownChangeHandler,
 	useDataTable,
+	useDropdownChangeHandler,
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '../hooks/index.js'

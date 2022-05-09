@@ -1,15 +1,20 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { StepComponent, useDataTable } from '@data-wrangling-components/react'
 import { memo } from 'react'
-import type { StepOutputProps } from './StepOutput.types.js'
+
+import { Section } from './Section'
 import {
+	columnsStyle,
 	OutputsColumn,
 	StepBlock,
 	StepsColumn,
 	TableSection,
-	columnsStyle,
 } from './StepOutpput.styles.js'
-import { Section } from './Section'
+import type { StepOutputProps } from './StepOutput.types.js'
 import { Table } from './Table'
-import { StepComponent, useDataTable } from '@data-wrangling-components/react'
 
 export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	step,
