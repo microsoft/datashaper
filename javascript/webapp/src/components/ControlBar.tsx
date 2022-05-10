@@ -17,6 +17,7 @@ import { memo, useCallback, useState } from 'react'
 
 import { FileDrop } from '~components/FileDrop'
 
+import { useLoadSpecFile, useLoadTableFiles } from './ControlBar.hooks.js'
 import {
 	Container,
 	Control,
@@ -29,8 +30,7 @@ import {
 	ExamplesContainer,
 } from './ControlBar.styles.js'
 import type { ControlBarProps } from './ControlBar.types.js'
-import { useLoadSpecFile, useLoadTableFiles } from './DebugPage.hooks'
-import { ExamplesDropdown } from './ExamplesDropdown'
+import { ExamplesDropdown } from './ExamplesDropdown.js'
 
 const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
 	return { key: o, text: o } as IDropdownOption

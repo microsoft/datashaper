@@ -12,7 +12,7 @@ import {
 	StepBlock,
 	StepsColumn,
 	TableSection,
-} from './StepOutpput.styles.js'
+} from './StepOutput.styles.js'
 import type { StepOutputProps } from './StepOutput.types.js'
 import { Table } from './Table'
 

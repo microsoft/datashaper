@@ -7,7 +7,7 @@ import type { FC } from 'react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { useTheme } from '../../states/settings.js'
+import { useTheme } from '../states/settings.js'
 
 export const Footer: FC = memo(function Footer() {
 	const theme = useTheme()
