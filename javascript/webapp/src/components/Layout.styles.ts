@@ -15,7 +15,7 @@ export const SlidingContainer = styled.div<{ isOffset: boolean }>`
 	transition-timing-function: ease;
 	transition: 0.25s;
 	position: absolute;
-	width: 100%;
+	width: ${({ isOffset }) => (isOffset ? 'calc(100% - 200px)' : '100%')};
 	border-left: ${({ isOffset, theme }) =>
 		isOffset ? `1px solid ${theme.application().border()}` : '0'};
 	left: ${({ isOffset }) => (isOffset ? '200px' : '0')};
