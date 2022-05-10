@@ -3,23 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ThemeVariant } from '@thematic/core'
-import { memo } from 'react'
 import styled from 'styled-components'
 
-import { NavBar } from '~components/NavBar'
-
-export const Header = memo(function Header() {
-	return (
-		<Container>
-			<Title>Data Wrangling Components</Title>
-			<Subtitle>pipeline builder</Subtitle>
-			<NavBar />
-		</Container>
-	)
-})
-
 // always ensure the header is dark, regardless of mode
-const Container = styled.div`
+export const Container = styled.div`
 	padding: 4px 16px 4px 16px;
 	background: ${({ theme }) =>
 		theme.variant === ThemeVariant.Light
@@ -35,7 +22,7 @@ const Container = styled.div`
 	align-items: center;
 `
 
-const Title = styled.h1`
+export const Title = styled.h1`
 	text-transform: uppercase;
 	font-size: 28px;
 	margin: 0;
@@ -46,7 +33,7 @@ const Title = styled.h1`
 	width: 70%;
 `
 
-const Subtitle = styled.h2`
+export const Subtitle = styled.h2`
 	margin: 0;
 	font-weight: normal;
 	color: ${({ theme }) =>

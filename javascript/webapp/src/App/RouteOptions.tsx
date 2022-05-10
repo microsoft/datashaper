@@ -8,7 +8,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Pages } from './Pages'
 
 const PerfPage = lazy(() =>
-	/* webpackChunkName: "PerfPage " */ import('~pages/PerfPage').then(
+	/* webpackChunkName: "PerfPage " */ import('../pages/PerfPage').then(
 		module => ({
 			default: module.PerfPage,
 		}),
@@ -17,14 +17,14 @@ const PerfPage = lazy(() =>
 
 const PrepareDataPage = lazy(() =>
 	/* webpackChunkName: "PrepareDataPage " */ import(
-		'~pages/PrepareDataPage'
+		'../pages/PrepareDataPage'
 	).then(module => ({
 		default: module.PrepareDataPage,
 	})),
 )
 
 const DebugPage = lazy(() =>
-	/* webpackChunkName: "DebugPage " */ import('~pages/DebugPage').then(
+	/* webpackChunkName: "DebugPage " */ import('../pages/DebugPage').then(
 		module => ({
 			default: module.DebugPage,
 		}),

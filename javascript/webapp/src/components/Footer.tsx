@@ -5,9 +5,15 @@
 import { useMicrosoftConsentBanner } from '@essex/hooks'
 import type { FC } from 'react'
 import { memo } from 'react'
-import styled from 'styled-components'
 
 import { useTheme } from '../states/settings.js'
+import {
+	constants,
+	Container,
+	FooterEl,
+	LinkA,
+	LinkDiv,
+} from './Footer.styles.js'
 
 export const Footer: FC = memo(function Footer() {
 	const theme = useTheme()
@@ -67,35 +73,3 @@ const Link: FC<
 		</LinkA>
 	)
 })
-
-const FooterEl = styled.footer`
-	width: 100%;
-`
-
-const Container = styled.div`
-	width: 500px;
-	height: 20px;
-	font-size: 12px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	align-content: center;
-	justify-content: space-between;
-	margin: auto;
-`
-
-const constants = {
-	privacyUrl: 'https://go.microsoft.com/fwlink/?LinkId=521839',
-	termsOfUseUrl: 'https://go.microsoft.com/fwlink/?LinkID=206977',
-	trademarksUrl: 'https://www.microsoft.com/trademarks',
-	microsoft: 'https://www.microsoft.com',
-	copyright: `©️ ${new Date().getFullYear()} Microsoft`,
-}
-
-const LinkDiv = styled.div`
-	cursor: pointer;
-`
-const LinkA = styled.a`
-	cursor: pointer;
-	text-decoration: none !important;
-`
