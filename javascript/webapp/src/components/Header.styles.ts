@@ -19,14 +19,18 @@ export const Container = styled.div`
 				? theme.application().midHighContrast()
 				: theme.application().lowMidContrast()};
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	align-content: center;
 `
 
 export const Title = styled.h1`
 	text-transform: uppercase;
-	font-size: 28px;
+	font-size: 25px;
+	align-self: center;
 	margin: 0;
+	padding: 0;
 	color: ${({ theme }) =>
 		theme.variant === ThemeVariant.Light
 			? theme.application().lowContrast()
@@ -38,6 +42,8 @@ export const iconClass = mergeStyles({
 	fontSize: 25,
 	height: 25,
 	width: 25,
+	// goofy manual centering adjustment; icon appears to not center with flexbox mechanisms
+	marginTop: 3,
 	cursor: 'pointer',
 })
 
