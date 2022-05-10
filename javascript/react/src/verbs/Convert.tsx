@@ -8,7 +8,7 @@ import { memo } from 'react'
 import { withLoadedTable } from '../hocs/index.js'
 import { useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
-import { ConvertBase } from './Convert.base.jsx'
+import { ConvertBase } from './Convert.base.js'
 
 /**
  * Provides inputs for a Convert step.

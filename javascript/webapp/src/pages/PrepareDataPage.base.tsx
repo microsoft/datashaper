@@ -10,7 +10,7 @@ import {
 import type { TableContainer } from '@essex/arquero'
 import { memo, useState } from 'react'
 
-import { useTables } from './PrepareDataPage.hooks'
+import { useTables } from './PrepareDataPage.hooks.js'
 import { Container, mgmtStyles, Wrapper } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {

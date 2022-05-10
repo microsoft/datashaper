@@ -6,8 +6,8 @@ import type { InputColumnListArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'
-import type { FormInput } from '../verbForm/VerbForm.jsx'
-import { VerbForm } from '../verbForm/VerbForm.jsx'
+import type { FormInput } from '../verbForm/VerbForm.js'
+import { VerbForm } from '../verbForm/VerbForm.js'
 import { inputColumnList } from '../verbForm/VerbFormFactories.js'
 
 /**

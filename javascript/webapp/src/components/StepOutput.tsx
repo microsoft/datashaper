@@ -5,7 +5,7 @@
 import { StepComponent, useDataTable } from '@data-wrangling-components/react'
 import { memo } from 'react'
 
-import { Section } from './Section'
+import { Section } from './Section.js'
 import {
 	columnsStyle,
 	OutputsColumn,
@@ -14,7 +14,7 @@ import {
 	TableSection,
 } from './StepOutput.styles.js'
 import type { StepOutputProps } from './StepOutput.types.js'
-import { Table } from './Table'
+import { Table } from './Table.js'
 
 export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	step,

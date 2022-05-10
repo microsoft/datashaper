@@ -21,7 +21,7 @@ import {
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
 import { StepList } from './StepList.js'
-import { TableTransformModal } from './TableTransformModal.jsx'
+import { TableTransformModal } from './TableTransformModal.js'
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 	function ManageWorkflow({

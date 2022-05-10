@@ -14,8 +14,8 @@ import {
 	useSetRecoilState,
 } from 'recoil'
 
-import { defaultSettings } from '../hooks/useSettings'
-import type { Settings } from '../models/Settings'
+import { defaultSettings } from '../hooks/useSettings.js'
+import type { Settings } from '../models/Settings.js'
 
 const currentSettings = atom<Settings>({
 	key: 'settings',

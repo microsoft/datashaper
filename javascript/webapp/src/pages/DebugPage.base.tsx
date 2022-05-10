@@ -8,10 +8,10 @@ import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton } from '@fluentui/react'
 import { memo, useMemo, useState } from 'react'
 
-import { ControlBar } from '../components/ControlBar'
-import { InputTables } from '../components/InputTables.jsx'
-import { Section } from '../components/Section.jsx'
-import { StepOutput } from '../components/StepOutput.jsx'
+import { ControlBar } from '../components/ControlBar.js'
+import { InputTables } from '../components/InputTables.js'
+import { Section } from '../components/Section.js'
+import { StepOutput } from '../components/StepOutput.js'
 import {
 	useAddFilesHandler,
 	useChangeStepHandler,
@@ -21,7 +21,7 @@ import {
 	useSteps,
 	useWorkflowDownloadUrl,
 	useWorkflowState,
-} from './DebugPage.hooks'
+} from './DebugPage.hooks.js'
 import {
 	Buttons,
 	columnsStyle,

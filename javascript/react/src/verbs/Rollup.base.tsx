@@ -7,8 +7,8 @@ import { FieldAggregateOperation } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentProps } from '../types.js'
-import type { FormInput } from '../verbForm/VerbForm.jsx'
-import { VerbForm } from '../verbForm/VerbForm.jsx'
+import type { FormInput } from '../verbForm/VerbForm.js'
+import { VerbForm } from '../verbForm/VerbForm.js'
 import { enumDropdown } from '../verbForm/VerbFormFactories.js'
 
 /**
