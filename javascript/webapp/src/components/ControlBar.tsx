@@ -29,8 +29,8 @@ import {
 	ExamplesContainer,
 } from './ControlBar.styles.js'
 import type { ControlBarProps } from './ControlBar.types.js'
-import { useLoadSpecFile, useLoadTableFiles } from './DebugPage.hooks'
-import { ExamplesDropdown } from './ExamplesDropdown'
+import { useLoadSpecFile, useLoadTableFiles } from './ControlBar.hooks.js'
+import { ExamplesDropdown } from './ExamplesDropdown.js'
 
 const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
 	return { key: o, text: o } as IDropdownOption

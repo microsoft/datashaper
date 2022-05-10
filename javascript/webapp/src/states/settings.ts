@@ -34,10 +34,7 @@ export function useSettingsSetter(): SetterOrUpdater<Settings> {
 	return useSetRecoilState(currentSettings)
 }
 
-export const useSettingsDebounced = (): [
-	Settings,
-	SetterOrUpdater<Settings>,
-] => {
+export function useSettingsDebounced(): [Settings, SetterOrUpdater<Settings>] {
 	const [settings, setSettings] = useSettings()
 	const debouncedSettings = useDebounceFn(
 		(newSettings: any) => setSettings(newSettings),

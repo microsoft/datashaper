@@ -7,10 +7,8 @@ import type {
 	Step,
 	Verb,
 	Workflow,
-	WorkflowObject,
 } from '@data-wrangling-components/core'
 import { readStep } from '@data-wrangling-components/core'
-import type { BaseFile } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { container } from '@essex/arquero'
 import { loadCSV } from 'arquero'
@@ -163,27 +161,6 @@ export function useAddFilesHandler(
 		},
 		[graph],
 	)
-}
-
-export function useLoadTableFiles(): (
-	files: BaseFile[],
-) => Promise<TableContainer[]> {
-	return useCallback(
-		(files: BaseFile[]): Promise<TableContainer[]> =>
-			Promise.all(files.map(readTable)),
-		[],
-	)
-}
-
-export function useLoadSpecFile(): (file: BaseFile) => Promise<WorkflowObject> {
-	return useCallback((file: BaseFile): Promise<WorkflowObject> => {
-		return file.toJson() as Promise<WorkflowObject>
-	}, [])
-}
-
-async function readTable(file: BaseFile): Promise<TableContainer> {
-	const table = await file.toTable()
-	return { name: file.name, id: file.name, table }
 }
 
 function readCsvFile(name: string, autoType: boolean): Promise<ColumnTable> {
