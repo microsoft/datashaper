@@ -15,8 +15,6 @@ import type { IDropdownOption } from '@fluentui/react'
 import { Checkbox, Dropdown } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 
-import { FileDrop } from '~components/FileDrop'
-
 import { useLoadSpecFile, useLoadTableFiles } from './ControlBar.hooks.js'
 import {
 	Container,
@@ -31,6 +29,7 @@ import {
 } from './ControlBar.styles.js'
 import type { ControlBarProps } from './ControlBar.types.js'
 import { ExamplesDropdown } from './ExamplesDropdown.js'
+import { FileDrop } from './FileDrop'
 
 const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
 	return { key: o, text: o } as IDropdownOption

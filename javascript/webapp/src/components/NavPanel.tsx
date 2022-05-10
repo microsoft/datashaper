@@ -7,9 +7,8 @@ import { Guidance } from '@data-wrangling-components/react'
 import { Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
-import { useSettings } from '~states/settings'
-
 import { useGuidanceIndex } from '../hooks/index.js'
+import { useSettings } from '../states/settings'
 import { useName, useSetDarkMode } from './NavPanel.hooks.js'
 import {
 	H3,
