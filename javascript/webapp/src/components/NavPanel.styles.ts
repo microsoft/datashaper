@@ -1,5 +1,9 @@
-import styled from 'styled-components'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 export const SettingsSection = styled.div`
 	margin-left: 10px;

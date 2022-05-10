@@ -5,6 +5,7 @@
 import { Dropzone } from '@data-wrangling-components/react'
 import { FileExtensions } from '@data-wrangling-components/utilities'
 import { memo } from 'react'
+
 import type { FileDropProps } from './FileDrop.types.js'
 
 export const FileDrop: React.FC<FileDropProps> = memo(function FileDrop({

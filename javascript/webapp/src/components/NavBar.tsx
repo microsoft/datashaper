@@ -6,7 +6,8 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { memo } from 'react'
 
 import { NavPanel } from '~components/NavPanel'
-import { NavBarContainer, HamburgerMenu, classNames } from './NavBar.styles.js'
+
+import { classNames,HamburgerMenu, NavBarContainer } from './NavBar.styles.js'
 
 export const NavBar = memo(function NavBar() {
 	const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] =

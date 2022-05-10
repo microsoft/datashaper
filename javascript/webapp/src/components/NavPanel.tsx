@@ -10,15 +10,15 @@ import { memo, useCallback } from 'react'
 import { useSettings } from '~states/settings'
 
 import { useGuidanceIndex } from '../hooks/index.js'
-import type { NavPanelProps } from './NavPanel.types.js'
+import { useName, useSetDarkMode } from './NavPanel.hooks.js'
 import {
-	SettingsSection,
 	H3,
 	HelpSection,
 	LinkSection,
 	ListItem,
+	SettingsSection,
 } from './NavPanel.styles.js'
-import { useName, useSetDarkMode } from './NavPanel.hooks.js'
+import type { NavPanelProps } from './NavPanel.types.js'
 
 export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 	isOpen,
@@ -29,7 +29,7 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 	const [settings, setSettings] = useSettings()
 	const setDarkMode = useSetDarkMode(settings, setSettings)
 	const handleDarkModeChange = useCallback(
-		async (_ev: unknown, checked?: boolean) => setDarkMode(checked),
+		(_ev: unknown, checked?: boolean) => void setDarkMode(checked),
 		[setDarkMode],
 	)
 

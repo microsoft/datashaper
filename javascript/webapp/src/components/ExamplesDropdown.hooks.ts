@@ -7,7 +7,6 @@ import { Workflow } from '@data-wrangling-components/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
-import type { ExamplesDropdownProps } from './ExamplesDropdown.types.js'
 import aggregatedLookup from '../../public/specs/aggregated-lookup.json'
 import binning from '../../public/specs/binning.json'
 import categorical from '../../public/specs/categorical.json'
@@ -17,6 +16,7 @@ import groupby from '../../public/specs/groupby.json'
 import multistepBinarize from '../../public/specs/multistep-binarize.json'
 import sparkbar from '../../public/specs/sparkbar.json'
 import sparkline from '../../public/specs/sparkline.json'
+import type { ExamplesDropdownProps } from './ExamplesDropdown.types.js'
 
 const specs: Array<WorkflowObject> = [
 	aggregatedLookup as unknown as WorkflowObject,

@@ -9,6 +9,9 @@ import { IconButton } from '@fluentui/react'
 import { memo, useMemo, useState } from 'react'
 
 import { ControlBar } from '../components/ControlBar'
+import { InputTables } from '../components/InputTables.jsx'
+import { Section } from '../components/Section.jsx'
+import { StepOutput } from '../components/StepOutput.jsx'
 import {
 	useAddFilesHandler,
 	useChangeStepHandler,
@@ -28,9 +31,6 @@ import {
 	InputsSection,
 	Workspace,
 } from './DebugPage.styles.js'
-import { InputTables } from '../components/InputTables.jsx'
-import { Section } from '../components/Section.jsx'
-import { StepOutput } from '../components/StepOutput.jsx'
 
 const DEFAULT_STATS = [
 	StatsColumnType.Type,

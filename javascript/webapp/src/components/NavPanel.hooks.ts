@@ -1,7 +1,12 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import { useCallback, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Settings } from '../models/Settings.js'
+
 import { setDarkMode } from '../localStorageHandler/localStorageHandler.js'
+import type { Settings } from '../models/Settings.js'
 
 export function useName(): string {
 	const location = useLocation()
@@ -27,6 +32,6 @@ export function useSetDarkMode(
 			setSettings({ ...settings, isDarkMode: !!isDarkMode })
 			await setDarkMode(!!isDarkMode)
 		},
-		[setSettings],
+		[setSettings, settings],
 	)
 }
