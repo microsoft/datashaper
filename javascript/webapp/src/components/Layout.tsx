@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import React, { memo, Suspense, useCallback } from 'react'
+import { memo, Suspense } from 'react'
 
 import { useFlyoutPanelState } from '../hooks/useFlyoutPanelState.js'
 import { useNonPropagatingClickHandler } from '../hooks/useNonPropagatingClickHandler.js'

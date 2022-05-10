@@ -4,5 +4,5 @@
  */
 export * from './useFlyoutPanelState.js'
 export * from './useGuidanceIndex.js'
-export * from './useSettings.js'
 export * from './useNonPropagatingClickHandler.js'
+export * from './useSettings.js'
