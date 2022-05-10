@@ -14,13 +14,19 @@ export const StyledSpinner = styled(Spinner)`
 export const SlidingContainer = styled.div<{ isOffset: boolean }>`
 	transition-timing-function: ease;
 	transition: 0.25s;
-	${({ isOffset }) => (isOffset ? 'transform: translate(200px)' : '')}
+	position: absolute;
+	width: 100%;
+	border-left: 1px solid ${({ theme }) => theme.application().border()};
+	left: ${({ isOffset }) => (isOffset ? '200px' : '0')};
 `
 
 export const FixedContainer = styled.div<{ isOpen: boolean }>`
 	position: absolute;
 	top: 0;
 	left: 0;
+	display: flex;
+	flex: 1;
+	height: 100%;
 	z-index: ${({ isOpen }) => (isOpen ? '1' : '-1')};
 	transition-timing-function: ease;
 	transition: 0.25s;

@@ -34,17 +34,6 @@ export const Title = styled.h1`
 	width: 70%;
 `
 
-export const Subtitle = styled.h2`
-	margin: 0;
-	font-weight: normal;
-	color: ${({ theme }) =>
-		theme.variant === ThemeVariant.Light
-			? theme.application().lowMidContrast()
-			: theme.application().midHighContrast()};
-	width: 20%;
-	text-align: right;
-`
-
 export const iconClass = mergeStyles({
 	fontSize: 25,
 	height: 25,

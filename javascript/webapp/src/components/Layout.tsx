@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo, Suspense } from 'react'
+import React, { memo, Suspense, useCallback } from 'react'
 
 import { useFlyoutPanelState } from '../hooks/useFlyoutPanelState.js'
+import { useNonPropagatingClickHandler } from '../hooks/useNonPropagatingClickHandler.js'
 import { Footer } from './Footer.js'
 import { Header } from './Header.js'
 import {
@@ -24,18 +25,23 @@ export const Layout: React.FC<
 > = memo(function Layout({ children }) {
 	const [isMenuOpen, , dismissMenu, toggleMenu] = useFlyoutPanelState()
 	const [isSettingsOpen, openSettings, dismissSettings] = useFlyoutPanelState()
+	const handleMenuClick = useNonPropagatingClickHandler(toggleMenu)
+
 	return (
 		<>
-			<Container>
+			<Container onClick={dismissMenu}>
 				<SlidingContainer className={'layout-container'} isOffset={isMenuOpen}>
-					<Header onMenuClick={toggleMenu} onSettingsClick={openSettings} />
+					<Header
+						onMenuClick={handleMenuClick}
+						onSettingsClick={openSettings}
+					/>
 					<Suspense fallback={<StyledSpinner />}>
 						<Content className={'layout-content-container'}>{children}</Content>
 					</Suspense>
 				</SlidingContainer>
 				<Footer />
 			</Container>
-			<FixedContainer isOpen={isMenuOpen}>
+			<FixedContainer isOpen={isMenuOpen} onClick={dismissMenu}>
 				<NavPanel onDismiss={dismissMenu} />
 			</FixedContainer>
 
