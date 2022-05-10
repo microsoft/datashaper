@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../../../schema/workflow.json",
+	"name": "Group by",
+	"description": "",
+	"steps": [
+		{
+			"id": "groupby",
+			"verb": "groupby",
+			"input": { "source": "data/stocks.csv" },
+			"args": {
+				"columns": ["Symbol", "Month"]
+			}
+		}
+	],
+	"input": ["data/stocks.csv"],
+	"output": ["groupby"]
+}
