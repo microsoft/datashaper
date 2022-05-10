@@ -17,8 +17,8 @@ import {
 	WorkflowContainer,
 } from './PrepareDataFull.styles.js'
 import type { PrepareDataFullProps } from './PrepareDataFull.types.js'
-import { PreviewTable } from './PreviewTable.jsx'
-import { TableListBar } from './TableListBar.jsx'
+import { PreviewTable } from './PreviewTable.js'
+import { TableListBar } from './TableListBar.js'
 
 export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 	function PrepareDataFull({

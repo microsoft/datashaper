@@ -6,7 +6,7 @@ import type { AggregateArgs } from '@data-wrangling-components/core'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types'
-import { VerbDescription } from '../verbForm/VerbDescription.jsx'
+import { VerbDescription } from '../verbForm/VerbDescription.js'
 
 export const AggregateDescription: React.FC<
 	StepDescriptionProps<AggregateArgs>

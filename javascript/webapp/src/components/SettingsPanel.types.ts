@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export interface NavPanelProps {
-	onDismiss?: () => void
+export interface SettingsPanelProps {
+	isOpen: boolean
+	onDismiss: () => void
 }

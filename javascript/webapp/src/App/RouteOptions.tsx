@@ -5,10 +5,10 @@
 import { lazy, memo } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { Pages } from './Pages'
+import { Pages } from './Pages.js'
 
 const PerfPage = lazy(() =>
-	/* webpackChunkName: "PerfPage " */ import('../pages/PerfPage').then(
+	/* webpackChunkName: "PerfPage " */ import('../pages/PerfPage.js').then(
 		module => ({
 			default: module.PerfPage,
 		}),
@@ -17,14 +17,14 @@ const PerfPage = lazy(() =>
 
 const PrepareDataPage = lazy(() =>
 	/* webpackChunkName: "PrepareDataPage " */ import(
-		'../pages/PrepareDataPage'
+		'../pages/PrepareDataPage.js'
 	).then(module => ({
 		default: module.PrepareDataPage,
 	})),
 )
 
 const DebugPage = lazy(() =>
-	/* webpackChunkName: "DebugPage " */ import('../pages/DebugPage').then(
+	/* webpackChunkName: "DebugPage " */ import('../pages/DebugPage.js').then(
 		module => ({
 			default: module.DebugPage,
 		}),

@@ -7,10 +7,10 @@ import { memo, Suspense } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
-import { ErrorBoundary } from './ErrorBoundary'
-import { Layout } from './Layout'
-import { RouteOptions } from './RouteOptions'
-import { StyleContext } from './StyleContext'
+import { Layout } from '../components/Layout.js'
+import { ErrorBoundary } from './ErrorBoundary.js'
+import { RouteOptions } from './RouteOptions.js'
+import { StyleContext } from './StyleContext.js'
 
 export const App: React.FC = memo(function App() {
 	return (

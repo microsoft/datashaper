@@ -8,8 +8,8 @@ import { memo, useMemo } from 'react'
 
 import { useSimpleDropdownOptions } from '../hooks/index.js'
 import type { StepComponentBaseProps } from '../types.js'
-import type { FormInput } from '../verbForm/VerbForm.jsx'
-import { FormInputType, VerbForm } from '../verbForm/VerbForm.jsx'
+import type { FormInput } from '../verbForm/VerbForm.js'
+import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
 import { enumDropdown } from '../verbForm/VerbFormFactories.js'
 
 /**

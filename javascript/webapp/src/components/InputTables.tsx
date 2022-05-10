@@ -6,7 +6,7 @@ import { memo } from 'react'
 
 import { TablesContainer } from './InputTables.styles.js'
 import type { InputTablesProps } from './InputTables.types.js'
-import { Table } from './Table'
+import { Table } from './Table.js'
 
 export const InputTables: React.FC<InputTablesProps> = memo(
 	function InputTables({ tables, config, features, compact }) {
