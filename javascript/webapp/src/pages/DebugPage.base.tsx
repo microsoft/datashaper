@@ -18,6 +18,7 @@ import {
 	useCreateStepHandler,
 	useHandleStepOutputChanged,
 	useInputTables,
+	useStepOutputs,
 	useSteps,
 	useWorkflowDownloadUrl,
 	useWorkflowState,
@@ -54,18 +55,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const onAddFiles = useAddFilesHandler(graph)
 	const steps = useSteps(graph)
 
-	// create a parallel array of output names for the steps
-	const outputs = useMemo(
-		() =>
-			graph.steps
-				.map(s => s.id)
-				.map((id, index) => {
-					const output = graph.outputDefinitions.find(def => def.node === id)
-					return output?.name ?? `step-${index + 1}`
-				}),
-		[graph.steps, graph.outputDefinitions],
-	)
-
+	const outputs = useStepOutputs(graph)
 	const onStepCreate = useCreateStepHandler(graph)
 	const onStepChange = useChangeStepHandler(graph)
 	const downloadUrl = useWorkflowDownloadUrl(workflow)
