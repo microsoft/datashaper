@@ -6,7 +6,7 @@ import { StepSelector, useGraphManager } from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton } from '@fluentui/react'
-import { memo, useMemo, useState } from 'react'
+import { memo, useState } from 'react'
 
 import { ControlBar } from '../components/ControlBar.js'
 import { InputTables } from '../components/InputTables.js'

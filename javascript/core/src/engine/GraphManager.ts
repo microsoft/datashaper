@@ -360,6 +360,8 @@ export class GraphManager {
 	}
 
 	private _configureStep(step: Step, node: Node<TableContainer>) {
+		node.config = step.args
+
 		// if any inputs nodes are in the graph, bind them
 		if (hasDefinedInputs(step)) {
 			for (const [input, binding] of Object.entries(step.input)) {
