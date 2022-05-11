@@ -8,7 +8,7 @@ import type { TableContainer } from '@essex/arquero'
 import type { TransformModalProps } from '../index.js'
 
 export interface ManageWorkflowProps
-	extends Omit<TransformModalProps, 'graph'> {
+	extends Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
 	/**
 	 * The workflow specification
 	 */

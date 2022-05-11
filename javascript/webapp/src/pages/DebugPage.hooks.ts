@@ -105,13 +105,15 @@ export function useHandleStepOutputChanged(
 ): (step: Step, output: string | undefined) => void {
 	return useCallback(
 		(step: Step, output: string | undefined) => {
+			// remove any existing output
+			const spec = graph.outputDefinitions.find(def => def.node === step.id)
+			if (spec) {
+				graph.removeOutput(spec.name)
+			}
+
+			// if the output is defined, add it
 			if (output) {
 				graph.addOutput({ node: step.id, name: output })
-			} else {
-				const spec = graph.outputDefinitions.find(def => def.node === step.id)
-				if (spec) {
-					graph.removeOutput(spec.name)
-				}
 			}
 		},
 		[graph],
@@ -169,4 +171,23 @@ function readCsvFile(name: string, autoType: boolean): Promise<ColumnTable> {
 		autoMax: 100000,
 		autoType,
 	})
+}
+
+/**
+ * create a parallel array of output names for the steps
+ *
+ * @param graph The graph manager
+ * @returns
+ */
+export function useStepOutputs(graph: GraphManager): string[] {
+	return useMemo<string[]>(
+		() =>
+			graph.steps
+				.map(s => s.id)
+				.map((id, index) => {
+					const output = graph.outputDefinitions.find(def => def.node === id)
+					return output?.name ?? `step-${index + 1}`
+				}),
+		[graph.steps, graph.outputDefinitions],
+	)
 }

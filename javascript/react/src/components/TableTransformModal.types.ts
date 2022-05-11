@@ -18,6 +18,11 @@ export interface TransformModalProps extends IModalProps {
 	step?: Step
 
 	/**
+	 * The step index
+	 */
+	index: number
+
+	/**
 	 * Callback fired when the step is configured and "run" is clicked, indicating
 	 * the application should execute the contructed/edited step.
 	 */

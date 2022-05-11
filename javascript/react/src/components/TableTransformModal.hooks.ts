@@ -7,19 +7,10 @@ import { readStep } from '@data-wrangling-components/core'
 import type { IModalStyleProps, IModalStyles } from '@fluentui/react'
 import type { IStyleFunctionOrObject } from '@fluentui/utilities'
 import { useThematic } from '@thematic/react'
-import flow from 'lodash-es/flow.js'
 import merge from 'lodash-es/merge.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import {
-	withInputColumnDropdown,
-	withInputTableDropdown,
-	withOutputColumnTextfield,
-	withOutputTableTextfield,
-} from '../hocs/index.js'
 import { useCreateTableName, useFormattedColumnArg } from '../hooks/index.js'
-import { selectStepComponent } from '../selectStepComponent.js'
-import type { StepComponentProps } from '../types.js'
 
 export function useHandleSaveClick(
 	step: Step | undefined,
@@ -31,28 +22,6 @@ export function useHandleSaveClick(
 			onTransformRequested?.(step, output)
 		}
 	}, [onTransformRequested, step, output])
-}
-
-export function useStepArgsComponent(
-	step: Step | undefined,
-	disabled?: boolean,
-): React.FC<StepComponentProps> | undefined {
-	const Component = useMemo(
-		() => (step ? selectStepComponent(step) : null),
-		[step],
-	)
-	const WithAllArgs = useMemo(() => {
-		if (Component) {
-			return flow(
-				withOutputTableTextfield(undefined, disabled),
-				withOutputColumnTextfield(),
-				withInputColumnDropdown(),
-				withInputTableDropdown(),
-			)(Component)
-		}
-	}, [Component, disabled])
-
-	return WithAllArgs
 }
 
 export function useInternalTableStep(

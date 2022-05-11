@@ -112,7 +112,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps>;
 // Warning: (ae-missing-release-tag) "ManageWorkflowProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ManageWorkflowProps extends Omit<TransformModalProps, 'graph'> {
+export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
     // (undocumented)
     inputs: TableContainer[];
     onSelect?: (name: string) => void;
@@ -210,8 +210,26 @@ export const StepComponent: React.FC<StepComponentProps>;
 export interface StepComponentProps {
     graph: GraphManager;
     index: number;
+    inputColumnLabel?: string;
+    inputTableLabel?: string;
     onChange: (step: Step, index: number) => void;
     onChangeOutput: (value: string | undefined) => void;
+    output?: string;
+    outputColumnLabel?: string;
+    outputTableDisabled?: boolean;
+    outputTableLabel?: string;
+    step: Step;
+}
+
+// Warning: (ae-missing-release-tag) "StepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const StepDescription: React.FC<StepDescriptionProps>;
+
+// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepDescriptionProps {
     output?: string;
     step: Step;
 }
@@ -302,6 +320,7 @@ export interface TransformModalProps extends IModalProps {
     headerText?: string;
     hideInput?: boolean;
     hideOutput?: boolean;
+    index: number;
     nextInputTable?: string;
     onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
     step?: Step;

@@ -11,7 +11,7 @@ export {
 	createDefaultHeaderCommandBar,
 	createLazyLoadingGroupHeader,
 } from './hocs/component-factories.js'
-export { useDataTable,useGraphManager } from './hooks/index.js'
+export { useDataTable, useGraphManager } from './hooks/index.js'
 
 /*
  * Exported Components
@@ -34,6 +34,8 @@ export { StepCard } from './components/StepCard.js'
 export type { StepCardProps } from './components/StepCard.types.js'
 export { StepComponent } from './components/StepComponent.js'
 export type { StepComponentProps } from './components/StepComponent.types.js'
+export { StepDescription } from './components/StepDescription.js'
+export type { StepDescriptionProps } from './components/StepDescription.types.js'
 export { StepList } from './components/StepList.js'
 export type { StepListProps } from './components/StepList.types.js'
 export { StepSelector } from './components/StepSelector.js'

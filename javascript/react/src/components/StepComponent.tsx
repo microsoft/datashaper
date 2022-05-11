@@ -10,11 +10,11 @@ import {
 	withInputColumnDropdown,
 	withInputTableDropdown,
 	withOutputColumnTextfield,
+	withOutputTableTextfield,
 } from '../hocs/index.js'
 import { selectStepComponent } from '../selectStepComponent.js'
-import { selectStepDescription } from '../selectStepDescription.js'
 import type { StepComponentProps as RealStepComponentProps } from '../types.js'
-import { Container, DescriptionContainer } from './StepComponent.styles.js'
+import { Container } from './StepComponent.styles.js'
 import type { StepComponentProps } from './StepComponent.types.js'
 
 /**
@@ -26,25 +26,41 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		output,
 		graph,
 		index,
+		inputTableLabel,
+		inputColumnLabel,
+		outputColumnLabel,
+		outputTableLabel,
+		outputTableDisabled,
 		onChange,
 		onChangeOutput,
 	}) {
-		const Component = useMemo(() => selectStepComponent(step), [step])
-		const Description = useMemo(() => selectStepDescription(step), [step])
-		const WithAllArgs = useMemo<React.ComponentType<RealStepComponentProps>>(
-			() =>
-				flow(
-					withInputColumnDropdown(),
-					withOutputColumnTextfield(),
-					withInputTableDropdown(),
-				)(Component),
-			[Component],
+		const Component = useMemo(
+			() => (step ? selectStepComponent(step) : null),
+			[step],
 		)
+		const WithAllArgs = useMemo<
+			React.ComponentType<RealStepComponentProps>
+		>(() => {
+			if (Component) {
+				return flow(
+					withOutputTableTextfield(outputTableLabel, outputTableDisabled),
+					withOutputColumnTextfield(outputColumnLabel),
+					withInputColumnDropdown(inputColumnLabel),
+					withInputTableDropdown(inputTableLabel),
+				)(Component)
+			}
+		}, [
+			Component,
+			outputTableDisabled,
+			outputTableLabel,
+			outputColumnLabel,
+			inputColumnLabel,
+			inputTableLabel,
+		])
 		const handleStepChange = useCallback(
 			(step: Step) => onChange(step, index),
 			[index, onChange],
 		)
-
 		return (
 			<Container className="step-component">
 				<WithAllArgs
@@ -54,15 +70,6 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 					onChange={handleStepChange}
 					onChangeOutput={onChangeOutput}
 				/>
-				<DescriptionContainer>
-					<Description
-						step={step}
-						output={output}
-						showInput
-						showOutput
-						showOutputColumn
-					/>
-				</DescriptionContainer>
 			</Container>
 		)
 	},

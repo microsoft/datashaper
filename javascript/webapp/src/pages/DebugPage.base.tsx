@@ -6,7 +6,7 @@ import { StepSelector, useGraphManager } from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton } from '@fluentui/react'
-import { memo, useMemo, useState } from 'react'
+import { memo, useState } from 'react'
 
 import { ControlBar } from '../components/ControlBar.js'
 import { InputTables } from '../components/InputTables.js'
@@ -18,6 +18,7 @@ import {
 	useCreateStepHandler,
 	useHandleStepOutputChanged,
 	useInputTables,
+	useStepOutputs,
 	useSteps,
 	useWorkflowDownloadUrl,
 	useWorkflowState,
@@ -51,24 +52,12 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const inputTables = useInputTables(autoType)
 	const graph = useGraphManager(undefined, inputTables)
 	const [workflow, setWorkflow] = useWorkflowState(graph)
-	const onAddFiles = useAddFilesHandler(graph)
 	const steps = useSteps(graph)
-
-	// create a parallel array of output names for the steps
-	const outputs = useMemo(
-		() =>
-			graph.steps
-				.map(s => s.id)
-				.map(id => {
-					const output = graph.outputDefinitions.find(def => def.node === id)
-					return output?.name
-				}),
-		[graph.steps, graph.outputDefinitions],
-	)
-
+	const outputs = useStepOutputs(graph)
+	const downloadUrl = useWorkflowDownloadUrl(workflow)
+	const onAddFiles = useAddFilesHandler(graph)
 	const onStepCreate = useCreateStepHandler(graph)
 	const onStepChange = useChangeStepHandler(graph)
-	const downloadUrl = useWorkflowDownloadUrl(workflow)
 	const onStepOutputChange = useHandleStepOutputChanged(graph)
 
 	return (
@@ -101,7 +90,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 						index={index}
 						key={step.id}
 						graph={graph}
-						output={outputs[index]!}
+						output={outputs[index]}
 						features={features}
 						compact={compact}
 						onStepChange={onStepChange}
