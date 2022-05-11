@@ -9,6 +9,7 @@ import type { IStyleFunctionOrObject } from '@fluentui/utilities'
 import { useThematic } from '@thematic/react'
 import merge from 'lodash-es/merge.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+
 import { useCreateTableName, useFormattedColumnArg } from '../hooks/index.js'
 
 export function useHandleSaveClick(

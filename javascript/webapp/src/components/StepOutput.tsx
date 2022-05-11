@@ -7,7 +7,7 @@ import {
 	StepDescription,
 	useDataTable,
 } from '@data-wrangling-components/react'
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 
 import { Section } from './Section.js'
 import {
@@ -24,21 +24,14 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	step,
 	index,
 	graph,
-	output,
+	output = `output-${index + 1}`,
 	features,
 	compact,
 	onStepChange,
 	onStepOutputChange,
 }) {
 	const table = useDataTable(output, graph)
-	useEffect(
-		function emitDebugStepOutput() {
-			if (!output) {
-				onStepOutputChange(step, `output-${index}`)
-			}
-		},
-		[output, index],
-	)
+
 	return (
 		<StepBlock key={`step-${index}`} className="step-block">
 			<Section title={`Step ${index + 1}`} subtitle={step.verb}>

@@ -49,7 +49,14 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 					withInputTableDropdown(inputTableLabel),
 				)(Component)
 			}
-		}, [Component])
+		}, [
+			Component,
+			outputTableDisabled,
+			outputTableLabel,
+			outputColumnLabel,
+			inputColumnLabel,
+			inputTableLabel,
+		])
 		const handleStepChange = useCallback(
 			(step: Step) => onChange(step, index),
 			[index, onChange],

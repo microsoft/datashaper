@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { memo, useMemo } from 'react'
+
 import { selectStepDescription } from '../selectStepDescription.js'
 import { Container } from './StepDescription.styles.js'
 import type { StepDescriptionProps } from './StepDescription.types.js'

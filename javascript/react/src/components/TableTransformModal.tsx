@@ -14,6 +14,7 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { memo } from 'react'
 
 import { Guidance } from './Guidance.js'
+import { StepComponent } from './StepComponent.js'
 import { StepSelector } from './StepSelector.js'
 import {
 	useHandleSaveClick,
@@ -31,7 +32,6 @@ import {
 	StepSelectorContainer,
 	Title,
 } from './TableTransformModal.styles.js'
-import { StepComponent } from './StepComponent.js'
 import type { TransformModalProps } from './TableTransformModal.types.js'
 
 export const TableTransformModal: React.FC<TransformModalProps> = memo(
@@ -52,7 +52,6 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 			graph as GraphManager,
 		)
 
-		// const StepArgs = useStepArgsComponent(internal, !!step)
 		const adaptedStyles = useModalStyles(styles, showGuidance)
 		const { output, onOutputChanged } = useStepOutputHandling(graph, step)
 		const handleSaveClick = useHandleSaveClick(
