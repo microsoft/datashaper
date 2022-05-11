@@ -52,13 +52,12 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const inputTables = useInputTables(autoType)
 	const graph = useGraphManager(undefined, inputTables)
 	const [workflow, setWorkflow] = useWorkflowState(graph)
-	const onAddFiles = useAddFilesHandler(graph)
 	const steps = useSteps(graph)
-
 	const outputs = useStepOutputs(graph)
+	const downloadUrl = useWorkflowDownloadUrl(workflow)
+	const onAddFiles = useAddFilesHandler(graph)
 	const onStepCreate = useCreateStepHandler(graph)
 	const onStepChange = useChangeStepHandler(graph)
-	const downloadUrl = useWorkflowDownloadUrl(workflow)
 	const onStepOutputChange = useHandleStepOutputChanged(graph)
 
 	return (

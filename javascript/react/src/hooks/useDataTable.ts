@@ -24,17 +24,21 @@ export function useDataTable(
 		// interface that is managing a pipeline
 		if (existingTable) {
 			setTable(existingTable)
-		} else if (id && graph) {
+		}
+
+		if (id && graph) {
 			// If a static input table is passed in, set the state to it
 			if (graph.hasInput(id)) {
 				setTable(graph.inputs.get(id)?.table)
 			}
+			// Set the current value
+			const current = graph.latest(id) ?? graph.latestForNodeId(id)
+			setTable(current?.table)
+
 			// Observe the named graph output
 			const observable = graph.output(id) ?? graph.outputForNodeId(id)
-			if (observable) {
-				const sub = observable.subscribe(t => setTable(t?.table))
-				return () => sub.unsubscribe()
-			}
+			const sub = observable?.subscribe(t => setTable(t?.table))
+			return () => sub?.unsubscribe()
 		}
 	}, [id, existingTable, graph, handleTableLoad])
 	return tbl

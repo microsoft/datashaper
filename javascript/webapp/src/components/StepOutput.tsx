@@ -33,7 +33,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	const table = useDataTable(output, graph)
 
 	return (
-		<StepBlock key={`step-${index}`} className="step-block">
+		<StepBlock className="step-block">
 			<Section title={`Step ${index + 1}`} subtitle={step.verb}>
 				<StepsColumn className="steps-column">
 					<StepComponent
