@@ -50,7 +50,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 					{table ? (
 						<TableSection className="table-section">
 							<Table
-								name={step.id}
+								name={output}
 								table={table}
 								config={columnsStyle}
 								features={features}

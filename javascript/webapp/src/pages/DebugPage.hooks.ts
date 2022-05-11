@@ -105,13 +105,15 @@ export function useHandleStepOutputChanged(
 ): (step: Step, output: string | undefined) => void {
 	return useCallback(
 		(step: Step, output: string | undefined) => {
+			// remove any existing output
+			const spec = graph.outputDefinitions.find(def => def.node === step.id)
+			if (spec) {
+				graph.removeOutput(spec.name)
+			}
+
+			// if the output is defined, add it
 			if (output) {
 				graph.addOutput({ node: step.id, name: output })
-			} else {
-				const spec = graph.outputDefinitions.find(def => def.node === step.id)
-				if (spec) {
-					graph.removeOutput(spec.name)
-				}
 			}
 		},
 		[graph],
