@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GraphManager } from '@data-wrangling-components/core'
-import index from '@data-wrangling-components/verb-guidance'
+import { default as guidanceIndex } from '@data-wrangling-components/verb-guidance'
 import {
 	Callout,
 	DirectionalHint,
@@ -19,7 +19,6 @@ import {
 	useHandleSaveClick,
 	useInternalTableStep,
 	useModalStyles,
-	useStepArgsComponent,
 	useStepOutputHandling,
 } from './TableTransformModal.hooks.js'
 import {
@@ -32,6 +31,7 @@ import {
 	StepSelectorContainer,
 	Title,
 } from './TableTransformModal.styles.js'
+import { StepComponent } from './StepComponent.js'
 import type { TransformModalProps } from './TableTransformModal.types.js'
 
 export const TableTransformModal: React.FC<TransformModalProps> = memo(
@@ -39,6 +39,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		onDismiss,
 		graph,
 		onTransformRequested,
+		index,
 		step,
 		nextInputTable,
 		styles,
@@ -51,7 +52,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 			graph as GraphManager,
 		)
 
-		const StepArgs = useStepArgsComponent(internal, !!step)
+		// const StepArgs = useStepArgsComponent(internal, !!step)
 		const adaptedStyles = useModalStyles(styles, showGuidance)
 		const { output, onOutputChanged } = useStepOutputHandling(graph, step)
 		const handleSaveClick = useHandleSaveClick(
@@ -94,11 +95,12 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 								/>
 							) : null}
 						</StepSelectorContainer>
-						{internal && StepArgs && (
+						{internal && (
 							<>
-								<StepArgs
+								<StepComponent
 									step={internal}
 									graph={graph}
+									index={index}
 									output={output}
 									onChangeOutput={onOutputChanged}
 									onChange={setInternal}
@@ -111,7 +113,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 					</StepComponentContainer>
 					{showGuidance && internal?.verb ? (
 						<GuidanceContainer>
-							<Guidance name={internal?.verb} index={index} />
+							<Guidance name={internal?.verb} index={guidanceIndex} />
 						</GuidanceContainer>
 					) : null}
 				</ContainerBody>

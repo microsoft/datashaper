@@ -26,6 +26,31 @@ export interface StepComponentProps {
 	output?: string
 
 	/**
+	 * Label for the input-table dropdown
+	 */
+	inputTableLabel?: string
+
+	/**
+	 * Label for the input table dropdown
+	 */
+	inputColumnLabel?: string
+
+	/**
+	 * The label to use for the output column field
+	 */
+	outputColumnLabel?: string
+
+	/**
+	 * The label to use for the output field
+	 */
+	outputTableLabel?: string
+
+	/**
+	 * Whether the output table name is disabled
+	 */
+	outputTableDisabled?: boolean
+
+	/**
 	 * The step onchange handler
 	 */
 	onChange: (step: Step, index: number) => void

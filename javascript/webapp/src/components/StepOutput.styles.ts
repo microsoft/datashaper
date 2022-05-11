@@ -16,7 +16,7 @@ export const StepBlock = styled.div`
 `
 
 export const StepsColumn = styled.div`
-	width: 600px;
+	width: 250px;
 `
 
 export const OutputsColumn = styled.div`

@@ -111,17 +111,18 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 					buttonId={addStepButtonId}
 				/>
 				<div>
-					{isTransformModalOpen && (
+					{isTransformModalOpen ? (
 						<TableTransformModal
 							target={editorTarget}
 							step={selectedStep}
+							index={selectedStepIndex ?? graph.steps.length}
 							onTransformRequested={onCreate}
 							graph={graph}
 							onDismiss={onDismissTransformModal}
 							styles={modalStyles}
 							{...props}
 						/>
-					)}
+					) : null}
 
 					<DialogConfirm
 						toggle={toggleDeleteModalOpen}

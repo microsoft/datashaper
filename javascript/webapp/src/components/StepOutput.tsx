@@ -2,8 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { StepComponent, useDataTable } from '@data-wrangling-components/react'
-import { memo } from 'react'
+import {
+	StepComponent,
+	StepDescription,
+	useDataTable,
+} from '@data-wrangling-components/react'
+import { memo, useEffect } from 'react'
 
 import { Section } from './Section.js'
 import {
@@ -27,6 +31,14 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	onStepOutputChange,
 }) {
 	const table = useDataTable(output, graph)
+	useEffect(
+		function emitDebugStepOutput() {
+			if (!output) {
+				onStepOutputChange(step, `output-${index}`)
+			}
+		},
+		[output, index],
+	)
 	return (
 		<StepBlock key={`step-${index}`} className="step-block">
 			<Section title={`Step ${index + 1}`} subtitle={step.verb}>
@@ -40,9 +52,10 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 						onChangeOutput={o => onStepOutputChange(step, o)}
 					/>
 				</StepsColumn>
+				<StepDescription step={step} output={output} />
 				<OutputsColumn className="outputs-column">
 					{table ? (
-						<TableSection key={`output-${index}`} className="table-section">
+						<TableSection className="table-section">
 							<Table
 								name={step.id}
 								table={table}
