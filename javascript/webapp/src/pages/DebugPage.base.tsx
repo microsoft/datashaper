@@ -59,9 +59,9 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 		() =>
 			graph.steps
 				.map(s => s.id)
-				.map(id => {
+				.map((id, index) => {
 					const output = graph.outputDefinitions.find(def => def.node === id)
-					return output?.name
+					return output?.name ?? `step-${index + 1}`
 				}),
 		[graph.steps, graph.outputDefinitions],
 	)
@@ -101,7 +101,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 						index={index}
 						key={step.id}
 						graph={graph}
-						output={outputs[index]!}
+						output={outputs[index]}
 						features={features}
 						compact={compact}
 						onStepChange={onStepChange}

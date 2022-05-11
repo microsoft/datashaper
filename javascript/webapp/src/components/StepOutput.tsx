@@ -24,7 +24,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	step,
 	index,
 	graph,
-	output = `output-${index + 1}`,
+	output,
 	features,
 	compact,
 	onStepChange,

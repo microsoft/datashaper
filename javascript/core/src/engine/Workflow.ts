@@ -101,7 +101,11 @@ export class Workflow {
 
 	public updateStep(stepInput: StepInput, index: number): Step {
 		const step = readStep(stepInput, this._steps[index - 1])
-		this._steps[index] = step
+		this._steps = [
+			...this.steps.slice(0, index),
+			step,
+			...this.steps.slice(index + 1),
+		]
 		this._onChange.next()
 		return step
 	}
