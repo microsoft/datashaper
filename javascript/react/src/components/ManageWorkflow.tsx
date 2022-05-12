@@ -5,13 +5,14 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { Step } from '@data-wrangling-components/core'
 import { DialogConfirm } from '@essex/themed-components'
-import { memo, useCallback, useState } from 'react'
+import { memo, useState } from 'react'
 
 import { useGraphManager } from '../hooks/common.js'
 import {
 	useDeleteConfirm,
 	useEditorTarget,
-	useGraphChangeListener,
+	useGraphSteps,
+	useOnCreateStep,
 	useOnDeleteStep,
 	useOnDuplicateStep,
 	useOnEditStep,
@@ -34,7 +35,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		...props
 	}) {
 		const graph = useGraphManager(workflow, inputs)
-		const [graphSteps, setGraphSteps] = useState<Step[]>(graph.steps)
 
 		//
 		// Selected Step/Index State for the component
@@ -67,20 +67,18 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			setSelectedStepIndex,
 			showTransformModal,
 		)
-		const onCreate = useCallback(
-			(step: Step, output: string | undefined) => {
-				onSave(step, output, selectedStepIndex)
-				onDismissTransformModal()
-				if (output) onSelect?.(output)
-			},
-			[onSave, onDismissTransformModal, selectedStepIndex, onSelect],
+		const onCreate = useOnCreateStep(
+			selectedStepIndex,
+			onDismissTransformModal,
+			onSave,
+			onSelect,
 		)
 		const onDuplicateClicked = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(selectedStepIndex)
 
 		// create a parallel array of output names for the steps
 		const outputs = useStepOutputs(graph)
-		useGraphChangeListener(graph, setGraphSteps, onUpdateOutput)
+		const graphSteps = useGraphSteps(graph, onUpdateOutput)
 
 		return (
 			<Container>

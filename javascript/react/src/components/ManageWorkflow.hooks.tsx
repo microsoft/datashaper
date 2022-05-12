@@ -64,6 +64,26 @@ export function useOnEditStep(
 	)
 }
 
+export function useOnCreateStep(
+	index: number | undefined,
+	dismissModal: () => void,
+	save: (
+		step: Step,
+		output: string | undefined,
+		index: number | undefined,
+	) => void,
+	selectOutput: undefined | ((name: string) => void),
+): (step: Step, output: string | undefined) => void {
+	return useCallback(
+		(step: Step, output: string | undefined) => {
+			save(step, output, index)
+			dismissModal()
+			if (output) selectOutput?.(output)
+		},
+		[save, dismissModal, index, selectOutput],
+	)
+}
+
 /**
  *
  * @param graph - The graph manager
@@ -227,20 +247,21 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 	}
 }
 
-export function useGraphChangeListener(
+export function useGraphSteps(
 	graph: GraphManager,
-	setGraphSteps: (steps: Step[]) => void,
-	onUpdateOutput?: (tables: TableContainer[]) => void,
-): void {
+	setOutput?: (tables: TableContainer[]) => void,
+): Step[] {
+	const [graphSteps, setGraphSteps] = useState<Step[]>(graph.steps)
 	useEffect(
 		function emitCurrentTableList() {
 			return graph.onChange(() => {
 				setGraphSteps(graph.steps)
-				onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
+				setOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
 			})
 		},
-		[graph, onUpdateOutput, setGraphSteps],
+		[graph, setOutput, setGraphSteps],
 	)
+	return graphSteps
 }
 
 export function useStepOutputs(graph: GraphManager): Array<string | undefined> {
