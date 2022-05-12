@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { Step } from '@data-wrangling-components/core'
 import { DialogConfirm } from '@essex/themed-components'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 import { useGraphManager } from '../hooks/common.js'
 import {

@@ -4,6 +4,7 @@
  */
 import type { Step } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
+
 import { selectStepComponent } from '../selectStepComponent.js'
 import { Container } from './StepComponent.styles.js'
 import type { StepComponentProps } from './StepComponent.types.js'

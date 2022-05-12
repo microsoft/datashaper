@@ -239,7 +239,7 @@ export function useGraphChangeListener(
 				onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
 			})
 		},
-		[graph, onUpdateOutput],
+		[graph, onUpdateOutput, setGraphSteps],
 	)
 }
 

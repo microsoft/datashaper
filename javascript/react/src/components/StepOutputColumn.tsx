@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { OutputColumnArgs } from '@data-wrangling-components/core'
+import type { OutputColumnArgs, Step } from '@data-wrangling-components/core'
 import { isOutputColumnStep } from '@data-wrangling-components/core'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
@@ -10,7 +10,6 @@ import { memo } from 'react'
 import { useTextFieldChangeHandler } from '../hooks/index.js'
 import { dropdownStyles, LeftAlignedRow } from '../styles.js'
 import type { StepComponentOutputColumnProps } from './StepOutputColumn.types.js'
-import type { Step } from '@data-wrangling-components/core'
 
 export const StepOutputColumn: React.FC<StepComponentOutputColumnProps> = memo(
 	function StepOutputColumn({ label, step, onChange }) {

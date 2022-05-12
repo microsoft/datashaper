@@ -2,19 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { InputColumnArgs,Step } from '@data-wrangling-components/core'
+import { isInputColumnStep } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import { memo } from 'react'
-import type { Step, InputColumnArgs } from '@data-wrangling-components/core'
-import { isInputColumnStep } from '@data-wrangling-components/core'
+
+import { TableColumnDropdown } from '../controls/TableColumnDropdown.js'
 import {
 	useDataTable,
 	useDropdownChangeHandler,
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '../hooks/index.js'
-import type { StepInputColumnProps } from './StepInputColumn.types.js'
-import { TableColumnDropdown } from '../controls/TableColumnDropdown.js'
 import { useColumnFilter } from './StepInputColumn.hooks.js'
+import type { StepInputColumnProps } from './StepInputColumn.types.js'
 
 export const StepInputColumn: React.FC<StepInputColumnProps> = memo(
 	function StepInputColumn({ label, step, graph, onChange }) {
