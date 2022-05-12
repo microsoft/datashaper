@@ -3,9 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GraphManager } from '@data-wrangling-components/core'
-import type { TableContainer } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export function useDataTable(
 	id: string | undefined,
@@ -13,10 +12,7 @@ export function useDataTable(
 	existingTable?: ColumnTable,
 ): ColumnTable | undefined {
 	const [tbl, setTable] = useState<ColumnTable | undefined>()
-	const handleTableLoad = useCallback(
-		(container: TableContainer | undefined) => setTable(container?.table),
-		[setTable],
-	)
+
 	useEffect(() => {
 		// if a table already exists, use it directly
 		// TODO: should we set it in the store also?
@@ -33,13 +29,13 @@ export function useDataTable(
 			}
 			// Set the current value
 			const current = graph.latest(id) ?? graph.latestForNodeId(id)
-			setTable(current?.table)
+			if (current) setTable(current?.table)
 
 			// Observe the named graph output
 			const observable = graph.output(id) ?? graph.outputForNodeId(id)
 			const sub = observable?.subscribe(t => setTable(t?.table))
 			return () => sub?.unsubscribe()
 		}
-	}, [id, existingTable, graph, handleTableLoad])
+	}, [id, existingTable, graph])
 	return tbl
 }
