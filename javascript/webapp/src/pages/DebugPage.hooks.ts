@@ -41,35 +41,35 @@ export function useSteps(graph: GraphManager): Step[] {
 export function useWorkflowState(
 	graph: GraphManager,
 ): [Workflow | undefined, (workflow: Workflow | undefined) => void] {
-	const [exampleSpec, setExampleSpec] = useState<Workflow | undefined>()
+	const [workflow, setWorkflow] = useState<Workflow | undefined>(graph.workflow)
 	return [
-		exampleSpec,
+		workflow,
 		useCallback(
-			(spec: Workflow | undefined) => {
-				setExampleSpec(spec)
-				graph.reset(spec)
+			(w: Workflow | undefined) => {
+				setWorkflow(w)
+				graph.reset(w)
 			},
-			[setExampleSpec, graph],
+			[setWorkflow, graph],
 		),
 	]
 }
 
 export function useWorkflowDownloadUrl(workflow: Workflow | undefined): string {
-	const [serialized, setSerialized] = useState<Blob>()
+	const [serialized, setSerialized] = useState<Blob>(
+		new Blob([workflowToJson(workflow)]),
+	)
 	useEffect(() => {
-		if (workflow != null) {
-			const serialize = (): Blob =>
-				new Blob([JSON.stringify(workflow.toJsonObject(), null, 4)])
-
-			setSerialized(serialize())
-			return workflow.onChange(() => setSerialized(serialize()))
-		}
+		return workflow?.onChange(() =>
+			setSerialized(new Blob([workflowToJson(workflow)])),
+		)
 	}, [workflow])
 
-	return useMemo(
-		() => (serialized ? URL.createObjectURL(serialized) : ''),
-		[serialized],
-	)
+	return useMemo(() => URL.createObjectURL(serialized), [serialized])
+}
+
+function workflowToJson(workflow: Workflow | undefined) {
+	const o = workflow?.toJsonObject() ?? {}
+	return JSON.stringify(o, null, 4)
 }
 
 /**
