@@ -5,8 +5,7 @@
 import type { ConvertArgs } from '@data-wrangling-components/core'
 import { memo } from 'react'
 
-import { withLoadedTable } from '../hocs/index.js'
-import { useTableColumnNames } from '../hooks/index.js'
+import { useTableColumnNames, useStepDataTable } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { ConvertBase } from './Convert.base.js'
 
@@ -14,8 +13,9 @@ import { ConvertBase } from './Convert.base.js'
  * Provides inputs for a Convert step.
  */
 export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
-	withLoadedTable(function Convert({ step, onChange, dataTable }) {
+	function Convert({ step, graph, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, graph, input, table)
 		const columns = useTableColumnNames(dataTable)
 		return <ConvertBase columns={columns} step={step} onChange={onChange} />
-	}),
+	},
 )

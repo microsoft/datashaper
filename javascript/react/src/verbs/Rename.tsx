@@ -16,11 +16,11 @@ import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { TableColumnDropdown } from '../controls/index.js'
-import { withLoadedTable } from '../hocs/index.js'
 import {
 	useColumnRecordDelete,
 	useSimpleDropdownOptions,
 	useTableColumnNames,
+	useStepDataTable,
 } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import {
@@ -33,7 +33,8 @@ import {
  * Provides inputs for a RenameStep.
  */
 export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
-	withLoadedTable(function Rename({ step, onChange, dataTable }) {
+	function Rename({ step, graph, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, graph, input, table)
 		const handleColumnChange = useHandleColumnChange(step, onChange)
 		const handleColumnDelete = useColumnRecordDelete(step, onChange)
 		const handleButtonClick = useHandleAddButtonClick(step, dataTable, onChange)
@@ -58,7 +59,7 @@ export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
 				</ActionButton>
 			</Container>
 		)
-	}),
+	},
 )
 
 function useColumnPairs(

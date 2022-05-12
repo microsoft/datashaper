@@ -5,17 +5,21 @@
 import type { FoldArgs } from '@data-wrangling-components/core'
 import { memo } from 'react'
 
-import { withLoadedTable } from '../hocs/index.js'
-import { useTableColumnNames } from '../hooks/index.js'
+import { useTableColumnNames, useStepDataTable } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { FoldBase } from './Fold.base.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.
  */
-export const Fold: React.FC<StepComponentProps<FoldArgs>> = memo(
-	withLoadedTable(function Fold({ step, dataTable, onChange }) {
-		const columns = useTableColumnNames(dataTable)
-		return <FoldBase step={step} onChange={onChange} columns={columns} />
-	}),
-)
+export const Fold: React.FC<StepComponentProps<FoldArgs>> = memo(function Fold({
+	step,
+	graph,
+	input,
+	table,
+	onChange,
+}) {
+	const dataTable = useStepDataTable(step, graph, input, table)
+	const columns = useTableColumnNames(dataTable)
+	return <FoldBase step={step} onChange={onChange} columns={columns} />
+})

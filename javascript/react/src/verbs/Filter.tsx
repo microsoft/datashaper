@@ -9,8 +9,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 
 import { EnumDropdown } from '../controls/index.js'
-import { withLoadedTable } from '../hocs/index.js'
-import { useDropdownChangeHandler } from '../hooks/index.js'
+import { useDropdownChangeHandler, useStepDataTable } from '../hooks/index.js'
 import { LeftAlignedRow } from '../styles.js'
 import type { StepComponentProps } from '../types.js'
 import { Container, Vertical } from './Filter.styles.js'
@@ -20,7 +19,8 @@ import { FilterFunction } from './shared/index.js'
  * Provides inputs for a Filter step.
  */
 export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
-	withLoadedTable(function Filter({ step, onChange, dataTable }) {
+	function Filter({ step, graph, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, graph, input, table)
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
 				...step,
@@ -61,7 +61,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 			step.args.criteria,
 			handleFilterChange,
 		)
-		
+
 		return (
 			<Container>
 				{filters}
@@ -91,7 +91,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 				) : null}
 			</Container>
 		)
-	}),
+	},
 )
 
 function useFilters(

@@ -6,10 +6,10 @@ import type { OrderbyArgs } from '@data-wrangling-components/core'
 import { ActionButton } from '@fluentui/react'
 import { memo } from 'react'
 
-import { withLoadedTable } from '../hocs/index.js'
 import {
 	useSimpleDropdownOptions,
 	useTableColumnNames,
+	useStepDataTable,
 } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { useAddButtonClickedHandler, useSorts } from './Orderby.hooks.js'
@@ -19,7 +19,8 @@ import { Container, icons } from './Orderby.styles.js'
  * Provides inputs for an OrderBy step.
  */
 export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
-	withLoadedTable(function Orderby({ step, onChange, dataTable }) {
+	function Orderby({ step, graph, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, graph, input, table)
 		const columns = useTableColumnNames(dataTable)
 		const columnOptions = useSimpleDropdownOptions(columns)
 		const sorts = useSorts(step, columnOptions, onChange)
@@ -41,5 +42,5 @@ export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
 				</ActionButton>
 			</Container>
 		)
-	}),
+	},
 )
