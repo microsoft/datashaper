@@ -4,18 +4,19 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { Step } from '@data-wrangling-components/core'
-import type { TableContainer } from '@essex/arquero'
 import { DialogConfirm } from '@essex/themed-components'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 import { useGraphManager } from '../hooks/common.js'
 import {
 	useDeleteConfirm,
 	useEditorTarget,
+	useGraphChangeListener,
 	useOnDeleteStep,
 	useOnDuplicateStep,
 	useOnEditStep,
 	useOnSaveStep,
+	useStepOutputs,
 	useTransformModalState,
 } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
@@ -70,33 +71,16 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			(step: Step, output: string | undefined) => {
 				onSave(step, output, selectedStepIndex)
 				onDismissTransformModal()
+				if (output) onSelect?.(output)
 			},
-			[onSave, onDismissTransformModal, selectedStepIndex],
+			[onSave, onDismissTransformModal, selectedStepIndex, onSelect],
 		)
 		const onDuplicateClicked = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(selectedStepIndex)
 
 		// create a parallel array of output names for the steps
-		const outputs = useMemo(
-			() =>
-				graph.steps
-					.map(s => s.id)
-					.map(id => {
-						const output = graph.outputDefinitions.find(def => def.node === id)
-						return output?.name
-					}),
-			[graph.steps, graph.outputDefinitions],
-		)
-
-		useEffect(
-			function emitCurrentTableList() {
-				return graph.onChange(() => {
-					setGraphSteps(graph.steps)
-					onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
-				})
-			},
-			[graph, onUpdateOutput],
-		)
+		const outputs = useStepOutputs(graph)
+		useGraphChangeListener(graph, setGraphSteps, onUpdateOutput)
 
 		return (
 			<Container>

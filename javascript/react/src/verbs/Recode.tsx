@@ -12,8 +12,11 @@ import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 import { ColumnValueDropdown } from '../controls/index.js'
-import { withLoadedTable } from '../hocs/index.js'
-import { useColumnType, useColumnValueOptions } from '../hooks/index.js'
+import {
+	useColumnType,
+	useColumnValueOptions,
+	useStepDataTable,
+} from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import {
 	useColumnValues,
@@ -27,7 +30,8 @@ import {
  * Provides inputs for a RecodeStep.
  */
 export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
-	withLoadedTable(function Recode({ step, onChange, dataTable }) {
+	function Recode({ step, graph, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, graph, input, table)
 		const values = useColumnValues(step, dataTable)
 		const dataType = useColumnType(dataTable, step.args.column)
 		const handleRecodeChange = useHandleRecodeChange(step, onChange)
@@ -56,7 +60,7 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 				</ActionButton>
 			</Container>
 		)
-	}),
+	},
 )
 
 function useRecodePairs(

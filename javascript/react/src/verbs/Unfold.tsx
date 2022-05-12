@@ -5,8 +5,7 @@
 import type { UnfoldArgs } from '@data-wrangling-components/core'
 import { memo } from 'react'
 
-import { withLoadedTable } from '../hocs/index.js'
-import { useTableColumnNames } from '../hooks/index.js'
+import { useStepDataTable, useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { UnfoldBase } from './Unfold.base.js'
 
@@ -15,8 +14,9 @@ import { UnfoldBase } from './Unfold.base.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Unfold: React.FC<StepComponentProps<UnfoldArgs>> = memo(
-	withLoadedTable(function Unfold({ step, onChange, dataTable }) {
+	function Unfold({ step, graph, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, graph, input, table)
 		const columns = useTableColumnNames(dataTable)
 		return <UnfoldBase step={step} onChange={onChange} columns={columns} />
-	}),
+	},
 )

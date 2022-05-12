@@ -5,8 +5,7 @@
 import type { MergeArgs } from '@data-wrangling-components/core'
 import { memo } from 'react'
 
-import { withLoadedTable } from '../hocs/index.js'
-import { useTableColumnNames } from '../hooks/index.js'
+import { useStepDataTable,useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { MergeBase } from './Merge.base.js'
 
@@ -15,8 +14,9 @@ import { MergeBase } from './Merge.base.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
-	withLoadedTable(function Merge({ step, onChange, dataTable }) {
+	function Merge({ step, graph, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, graph, input, table)
 		const columnNames = useTableColumnNames(dataTable)
 		return <MergeBase step={step} onChange={onChange} columns={columnNames} />
-	}),
+	},
 )

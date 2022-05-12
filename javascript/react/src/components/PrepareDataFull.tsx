@@ -5,7 +5,7 @@
 import type { TableMetadata } from '@essex/arquero'
 import { Icon } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback } from 'react'
 
 import { ManageWorkflow } from './ManageWorkflow.js'
 import {
@@ -25,14 +25,14 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 		inputs,
 		derived,
 		workflow,
+		selectedTableId,
 		outputHeaderCommandBar,
 		stepsPosition = 'bottom',
+		onSelectedTableIdChanged,
 		onUpdateOutput,
 	}) {
 		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
-		const [selectedTableId, setSelectedTableName] = useState<
-			string | undefined
-		>()
+
 		const selectedTable =
 			derived.find(t => t.id === selectedTableId) ??
 			inputs.find(t => t.id === selectedTableId)
@@ -55,7 +55,7 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 						inputs={inputs}
 						derived={derived}
 						selected={selectedTableId}
-						onSelect={setSelectedTableName}
+						onSelect={onSelectedTableIdChanged}
 					/>
 				</InputContainer>
 				<StepsTrayContainer
@@ -70,7 +70,7 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 						<ManageWorkflow
 							inputs={inputs}
 							workflow={workflow}
-							onSelect={setSelectedTableName}
+							onSelect={onSelectedTableIdChanged}
 							onUpdateOutput={onUpdateOutput}
 						/>
 					</WorkflowContainer>
