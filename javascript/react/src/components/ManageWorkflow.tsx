@@ -73,7 +73,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 				onDismissTransformModal()
 				if (output) onSelect?.(output)
 			},
-			[onSave, onDismissTransformModal, selectedStepIndex],
+			[onSave, onDismissTransformModal, selectedStepIndex, onSelect],
 		)
 		const onDuplicateClicked = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(selectedStepIndex)

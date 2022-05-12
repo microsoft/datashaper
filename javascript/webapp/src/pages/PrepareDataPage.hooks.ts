@@ -18,7 +18,7 @@ export function useTables(setSelectedTableId: (id: string) => void): {
 				setTables(prev => [...prev, ...update])
 			}
 		},
-		[setTables],
+		[setTables, setSelectedTableId],
 	)
 
 	return {

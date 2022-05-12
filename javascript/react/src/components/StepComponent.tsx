@@ -2,16 +2,37 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
-import { memo, useCallback, useMemo } from 'react'
+import type {
+	InputColumnArgs,
+	OutputColumnArgs,
+} from '@data-wrangling-components/core'
+import {
+	isInputColumnStep,
+	isInputTableStep,
+	isOutputColumnStep,
+} from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
+import { TextField } from '@fluentui/react'
+import { memo } from 'react'
 
-import { selectStepComponent } from '../selectStepComponent.js'
+import { TableColumnDropdown } from '../controls/TableColumnDropdown.js'
+import { TableDropdown } from '../controls/TableDropdown.js'
+import { useDataTable } from '../hooks/useDataTable.js'
+import { useSimpleDropdownOptions } from '../hooks/useSimpleDropdownOptions.js'
+import { useTableColumnNames } from '../hooks/useTableColumnNames.js'
+import { useTableNames } from '../hooks/useTableNames.js'
+import { dropdownStyles } from '../styles.js'
+import {
+	useColumnFilter,
+	useInputColumnChangeHandler,
+	useInputTableChangeHandler,
+	useOutputColumnChangedHandler,
+	useOutputTableChangedHandler,
+	useStepArgsComponent,
+	useStepChangeHandler,
+} from './StepComponent.hooks.js'
 import { Container } from './StepComponent.styles.js'
 import type { StepComponentProps } from './StepComponent.types.js'
-import { StepComponentOutputTable } from './StepComponentOutputTable.js'
-import { StepInputColumn } from './StepInputColumn.js'
-import { StepInputTable } from './StepInputTable.js'
-import { StepOutputColumn } from './StepOutputColumn.js'
 
 /**
  * Let's us render the Steps in a loop while memoing all the functions
@@ -30,47 +51,91 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		onChange,
 		onChangeOutput,
 	}) {
-		const StepArgs = useMemo(
-			() => (step ? selectStepComponent(step) : null),
-			[step],
+		/* Current Table Selection */
+		const tableId = step.input[NodeInput.Source]?.node
+		const table = useDataTable(tableId, graph)
+
+		/* Table Options */
+		const tables = useTableNames(graph)
+		const tableOptions = useSimpleDropdownOptions(tables)
+
+		/* Column Options */
+		const columns = useTableColumnNames(table, useColumnFilter(step, table))
+		const columnOptions = useSimpleDropdownOptions(columns)
+
+		const StepArgs = useStepArgsComponent(step)
+		const onStepChange = useStepChangeHandler(index, onChange)
+		const handleInputTableChanged = useInputTableChangeHandler(
+			step,
+			graph,
+			onStepChange,
 		)
-		const handleStepChange = useCallback(
-			(step: Step) => onChange(step, index),
-			[index, onChange],
+		const handleInputColumnChanged = useInputColumnChangeHandler(
+			step,
+			onStepChange,
 		)
+		const handleOutputColumnChanged = useOutputColumnChangedHandler(
+			step,
+			onStepChange,
+		)
+		const handleOutputTableChanged = useOutputTableChangedHandler(
+			step,
+			onChangeOutput,
+			onStepChange,
+		)
+
 		return StepArgs == null ? null : (
 			<Container className="step-component">
-				<StepInputTable
-					step={step}
-					label={inputTableLabel}
-					graph={graph}
-					onChange={handleStepChange}
-				/>
-				<StepInputColumn
-					step={step}
-					label={inputColumnLabel}
-					graph={graph}
-					onChange={handleStepChange}
-				/>
+				{/* Input Table */}
+				{isInputTableStep(step) ? (
+					<TableDropdown
+						options={tableOptions}
+						label={inputTableLabel || 'Input table'}
+						selectedKey={tableId}
+						onChange={handleInputTableChanged}
+					/>
+				) : null}
+
+				{/* Input Column */}
+				{isInputColumnStep(step) ? (
+					<TableColumnDropdown
+						required
+						options={columnOptions}
+						label={inputColumnLabel || `Column to ${step.verb}`}
+						selectedKey={(step.args as InputColumnArgs).column}
+						onChange={handleInputColumnChanged}
+					/>
+				) : null}
+
 				<StepArgs
 					step={step}
 					graph={graph}
 					output={output}
 					onChangeOutput={onChangeOutput}
-					onChange={handleStepChange}
+					onChange={onStepChange}
 				/>
-				<StepOutputColumn
-					label={outputColumnLabel}
-					step={step}
-					onChange={handleStepChange}
-				/>
-				<StepComponentOutputTable
-					step={step}
+
+				{/* Output Column */}
+				{isOutputColumnStep(step) ? (
+					<TextField
+						required
+						label={outputColumnLabel || 'New column name'}
+						placeholder={'Column name'}
+						value={(step.args as OutputColumnArgs).to}
+						styles={dropdownStyles}
+						onChange={handleOutputColumnChanged}
+					/>
+				) : null}
+
+				{/* Output Table */}
+				<TextField
+					required
 					disabled={outputTableDisabled}
-					label={outputTableLabel}
-					output={output}
-					onChange={handleStepChange}
-					onChangeOutput={onChangeOutput}
+					label={outputTableLabel || 'Output table'}
+					placeholder={'Table name'}
+					value={output ?? step.id}
+					styles={dropdownStyles}
+					onChange={handleOutputTableChanged}
 				/>
 			</Container>
 		)
