@@ -3,19 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
-import flow from 'lodash-es/flow.js'
 import { memo, useCallback, useMemo } from 'react'
-
-import {
-	withInputColumnDropdown,
-	withInputTableDropdown,
-	withOutputColumnTextfield,
-	withOutputTableTextfield,
-} from '../hocs/index.js'
 import { selectStepComponent } from '../selectStepComponent.js'
-import type { StepComponentProps as RealStepComponentProps } from '../types.js'
+import { LeftAlignedRow } from '../styles.js'
 import { Container } from './StepComponent.styles.js'
 import type { StepComponentProps } from './StepComponent.types.js'
+import { StepComponentOutputTable } from './StepComponentOutputTable.js'
+import { StepInputColumn } from './StepInputColumn.js'
+import { StepInputTable } from './StepInputTable.js'
+import { StepOutputColumn } from './StepOutputColumn.js'
 
 /**
  * Let's us render the Steps in a loop while memoing all the functions
@@ -34,42 +30,55 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		onChange,
 		onChangeOutput,
 	}) {
-		const Component = useMemo(
+		const StepArgs = useMemo(
 			() => (step ? selectStepComponent(step) : null),
 			[step],
 		)
-		const WithAllArgs = useMemo<
-			React.ComponentType<RealStepComponentProps>
-		>(() => {
-			if (Component) {
-				return flow(
-					withOutputTableTextfield(outputTableLabel, outputTableDisabled),
-					withOutputColumnTextfield(outputColumnLabel),
-					withInputColumnDropdown(inputColumnLabel),
-					withInputTableDropdown(inputTableLabel),
-				)(Component)
-			}
-		}, [
-			Component,
-			outputTableDisabled,
-			outputTableLabel,
-			outputColumnLabel,
-			inputColumnLabel,
-			inputTableLabel,
-		])
 		const handleStepChange = useCallback(
 			(step: Step) => onChange(step, index),
 			[index, onChange],
 		)
-		return (
+		return StepArgs == null ? null : (
 			<Container className="step-component">
-				<WithAllArgs
+				<LeftAlignedRow>
+					<StepInputTable
+						step={step}
+						label={inputTableLabel}
+						graph={graph}
+						onChange={handleStepChange}
+					/>
+				</LeftAlignedRow>
+				<LeftAlignedRow>
+					<StepInputColumn
+						step={step}
+						label={inputColumnLabel}
+						graph={graph}
+						onChange={handleStepChange}
+					/>
+				</LeftAlignedRow>
+				<StepArgs
 					step={step}
-					graph={graph}
 					output={output}
-					onChange={handleStepChange}
 					onChangeOutput={onChangeOutput}
+					onChange={handleStepChange}
 				/>
+				<LeftAlignedRow>
+					<StepOutputColumn
+						label={outputColumnLabel}
+						step={step}
+						onChange={handleStepChange}
+					/>
+				</LeftAlignedRow>
+				<LeftAlignedRow>
+					<StepComponentOutputTable
+						step={step}
+						disabled={outputTableDisabled}
+						label={outputTableLabel}
+						output={output}
+						onChange={handleStepChange}
+						onChangeOutput={onChangeOutput}
+					/>
+				</LeftAlignedRow>
 			</Container>
 		)
 	},

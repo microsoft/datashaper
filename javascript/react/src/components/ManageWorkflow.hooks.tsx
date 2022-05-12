@@ -4,9 +4,10 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { GraphManager, Step } from '@data-wrangling-components/core'
+import type { TableContainer } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import type { ModalState } from '../hooks/index.js'
 import {
@@ -224,4 +225,33 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 		onConfirm: onConfirmDelete,
 		onClick: onDeleteClicked,
 	}
+}
+
+export function useGraphChangeListener(
+	graph: GraphManager,
+	setGraphSteps: (steps: Step[]) => void,
+	onUpdateOutput?: (tables: TableContainer[]) => void,
+): void {
+	useEffect(
+		function emitCurrentTableList() {
+			return graph.onChange(() => {
+				setGraphSteps(graph.steps)
+				onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
+			})
+		},
+		[graph, onUpdateOutput],
+	)
+}
+
+export function useStepOutputs(graph: GraphManager): Array<string | undefined> {
+	return useMemo(
+		() =>
+			graph.steps
+				.map(s => s.id)
+				.map(id => {
+					const output = graph.outputDefinitions.find(def => def.node === id)
+					return output?.name
+				}),
+		[graph.steps, graph.outputDefinitions],
+	)
 }

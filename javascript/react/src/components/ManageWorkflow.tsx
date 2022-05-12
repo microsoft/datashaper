@@ -4,18 +4,19 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { Step } from '@data-wrangling-components/core'
-import type { TableContainer } from '@essex/arquero'
 import { DialogConfirm } from '@essex/themed-components'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 
 import { useGraphManager } from '../hooks/common.js'
 import {
 	useDeleteConfirm,
 	useEditorTarget,
+	useGraphChangeListener,
 	useOnDeleteStep,
 	useOnDuplicateStep,
 	useOnEditStep,
 	useOnSaveStep,
+	useStepOutputs,
 	useTransformModalState,
 } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
@@ -77,26 +78,17 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		const { addStepButtonId, editorTarget } = useEditorTarget(selectedStepIndex)
 
 		// create a parallel array of output names for the steps
-		const outputs = useMemo(
-			() =>
-				graph.steps
-					.map(s => s.id)
-					.map(id => {
-						const output = graph.outputDefinitions.find(def => def.node === id)
-						return output?.name
-					}),
-			[graph.steps, graph.outputDefinitions],
-		)
+		const outputs = useStepOutputs(graph)
+		useGraphChangeListener(graph, setGraphSteps, onUpdateOutput)
 
-		useEffect(
-			function emitCurrentTableList() {
-				return graph.onChange(() => {
-					setGraphSteps(graph.steps)
-					onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
-				})
-			},
-			[graph, onUpdateOutput],
-		)
+		useEffect(() => {
+			if (isTransformModalOpen) {
+				const currentIndex = selectedStepIndex ?? graphSteps.length
+				const currentOutput = outputs[currentIndex]
+				console.log('ONSELECT', currentIndex, currentOutput)
+				if (currentOutput) onSelect?.(currentOutput)
+			}
+		}, [onSelect, isTransformModalOpen, selectedStepIndex, graphSteps])
 
 		return (
 			<Container>
