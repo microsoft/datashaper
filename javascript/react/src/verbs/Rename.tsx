@@ -19,8 +19,8 @@ import { TableColumnDropdown } from '../controls/index.js'
 import {
 	useColumnRecordDelete,
 	useSimpleDropdownOptions,
-	useTableColumnNames,
 	useStepDataTable,
+	useTableColumnNames,
 } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import {

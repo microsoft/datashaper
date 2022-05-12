@@ -10,8 +10,8 @@ import { TableColumnDropdown } from '../controls/index.js'
 import {
 	useDropdownChangeHandler,
 	useSimpleDropdownOptions,
-	useTableColumnNames,
 	useStepDataTable,
+	useTableColumnNames,
 } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { useColumns } from './Spread.hooks.js'

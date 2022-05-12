@@ -8,8 +8,8 @@ import { memo } from 'react'
 
 import {
 	useSimpleDropdownOptions,
-	useTableColumnNames,
 	useStepDataTable,
+	useTableColumnNames,
 } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { useAddButtonClickedHandler, useSorts } from './Orderby.hooks.js'

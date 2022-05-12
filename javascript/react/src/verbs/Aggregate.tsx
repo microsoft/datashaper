@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { memo } from 'react'
 import type { AggregateArgs } from '@data-wrangling-components/core'
-import { useTableColumnNames, useStepDataTable } from '../hooks/index.js'
+import { memo } from 'react'
+
+import { useStepDataTable,useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { AggregateBase } from './Aggregate.base.js'
 

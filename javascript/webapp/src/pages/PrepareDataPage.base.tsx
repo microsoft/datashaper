@@ -15,7 +15,8 @@ import { Container, mgmtStyles, Wrapper } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	// state for the input tables
-	const { tables, onAddTables } = useTables()
+	const [selectedTableId, setSelectedTableId] = useState<string | undefined>()
+	const { tables, onAddTables } = useTables(setSelectedTableId)
 	const [workflow, setWorkflow] = useState<Workflow>(new Workflow())
 
 	// workflow steps/output
@@ -36,6 +37,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					inputs={tables}
 					derived={output}
 					workflow={workflow}
+					selectedTableId={selectedTableId}
+					onSelectedTableIdChanged={setSelectedTableId}
 					onUpdateOutput={setOutput}
 				/>
 			</Wrapper>

@@ -5,7 +5,7 @@
 import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
 
-export function useTables(): {
+export function useTables(setSelectedTableId: (id: string) => void): {
 	tables: TableContainer[]
 	onAddTables: (update: TableContainer[]) => void
 } {
@@ -13,7 +13,10 @@ export function useTables(): {
 
 	const onAddTables = useCallback(
 		(update: TableContainer[]) => {
-			setTables(prev => [...prev, ...update])
+			if (update.length > 0) {
+				setSelectedTableId(update[0].id)
+				setTables(prev => [...prev, ...update])
+			}
 		},
 		[setTables],
 	)

@@ -5,7 +5,7 @@
 import type { DeriveArgs } from '@data-wrangling-components/core'
 import { memo } from 'react'
 
-import { useTableColumnNames, useStepDataTable } from '../hooks/index.js'
+import { useStepDataTable,useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { DeriveBase } from './Derive.base.js'
 

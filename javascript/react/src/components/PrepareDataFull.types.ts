@@ -18,6 +18,11 @@ export interface PrepareDataFullProps {
 	derived: TableContainer[]
 
 	/**
+	 * The selected table id
+	 */
+	selectedTableId: string | undefined
+
+	/**
 	 * The data transformation workflow
 	 */
 	workflow: Workflow
@@ -31,6 +36,11 @@ export interface PrepareDataFullProps {
 	 * Step positioning option
 	 */
 	stepsPosition?: 'bottom' | 'middle'
+
+	/**
+	 * Mutator for when the selected table id changes
+	 */
+	onSelectedTableIdChanged: (value: string | undefined) => void
 
 	/**
 	 * Handler for when the output table map changes

@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { GraphManager,Step } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { Step, GraphManager } from '@data-wrangling-components/core'
 
 import { useDataTable } from '../hooks/index.js'
 
