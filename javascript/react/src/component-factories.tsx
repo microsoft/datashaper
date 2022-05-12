@@ -11,8 +11,8 @@ import type { Theme } from '@thematic/core'
 import merge from 'lodash-es/merge.js'
 import type { ReactElement } from 'react'
 
-import { CommandBar } from '../components/CommandBar.js'
-import { GroupHeader } from '../controls/index.js'
+import { CommandBar } from './components/CommandBar.js'
+import { GroupHeader } from './controls/index.js'
 
 export function createLazyLoadingGroupHeader(
 	props: IDetailsGroupDividerProps | undefined,

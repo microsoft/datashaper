@@ -10,7 +10,7 @@ export {
 	createDefaultCommandBar,
 	createDefaultHeaderCommandBar,
 	createLazyLoadingGroupHeader,
-} from './hocs/component-factories.js'
+} from './component-factories.js'
 export { useDataTable, useGraphManager } from './hooks/index.js'
 
 /*
