@@ -81,15 +81,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		const outputs = useStepOutputs(graph)
 		useGraphChangeListener(graph, setGraphSteps, onUpdateOutput)
 
-		useEffect(() => {
-			if (isTransformModalOpen) {
-				const currentIndex = selectedStepIndex ?? graphSteps.length
-				const currentOutput = outputs[currentIndex]
-				console.log('ONSELECT', currentIndex, currentOutput)
-				if (currentOutput) onSelect?.(currentOutput)
-			}
-		}, [onSelect, isTransformModalOpen, selectedStepIndex, graphSteps])
-
 		return (
 			<Container>
 				<StepList

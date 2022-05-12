@@ -5,7 +5,6 @@
 import type { Step } from '@data-wrangling-components/core'
 import { memo, useCallback, useMemo } from 'react'
 import { selectStepComponent } from '../selectStepComponent.js'
-import { LeftAlignedRow } from '../styles.js'
 import { Container } from './StepComponent.styles.js'
 import type { StepComponentProps } from './StepComponent.types.js'
 import { StepComponentOutputTable } from './StepComponentOutputTable.js'
@@ -40,45 +39,38 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		)
 		return StepArgs == null ? null : (
 			<Container className="step-component">
-				<LeftAlignedRow>
-					<StepInputTable
-						step={step}
-						label={inputTableLabel}
-						graph={graph}
-						onChange={handleStepChange}
-					/>
-				</LeftAlignedRow>
-				<LeftAlignedRow>
-					<StepInputColumn
-						step={step}
-						label={inputColumnLabel}
-						graph={graph}
-						onChange={handleStepChange}
-					/>
-				</LeftAlignedRow>
+				<StepInputTable
+					step={step}
+					label={inputTableLabel}
+					graph={graph}
+					onChange={handleStepChange}
+				/>
+				<StepInputColumn
+					step={step}
+					label={inputColumnLabel}
+					graph={graph}
+					onChange={handleStepChange}
+				/>
 				<StepArgs
 					step={step}
+					graph={graph}
 					output={output}
 					onChangeOutput={onChangeOutput}
 					onChange={handleStepChange}
 				/>
-				<LeftAlignedRow>
-					<StepOutputColumn
-						label={outputColumnLabel}
-						step={step}
-						onChange={handleStepChange}
-					/>
-				</LeftAlignedRow>
-				<LeftAlignedRow>
-					<StepComponentOutputTable
-						step={step}
-						disabled={outputTableDisabled}
-						label={outputTableLabel}
-						output={output}
-						onChange={handleStepChange}
-						onChangeOutput={onChangeOutput}
-					/>
-				</LeftAlignedRow>
+				<StepOutputColumn
+					label={outputColumnLabel}
+					step={step}
+					onChange={handleStepChange}
+				/>
+				<StepComponentOutputTable
+					step={step}
+					disabled={outputTableDisabled}
+					label={outputTableLabel}
+					output={output}
+					onChange={handleStepChange}
+					onChangeOutput={onChangeOutput}
+				/>
 			</Container>
 		)
 	},
