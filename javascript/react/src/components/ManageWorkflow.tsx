@@ -71,6 +71,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			(step: Step, output: string | undefined) => {
 				onSave(step, output, selectedStepIndex)
 				onDismissTransformModal()
+				if (output) onSelect?.(output)
 			},
 			[onSave, onDismissTransformModal, selectedStepIndex],
 		)
