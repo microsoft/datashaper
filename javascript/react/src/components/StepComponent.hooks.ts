@@ -13,7 +13,7 @@ import { columnTypes, DataType } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
-import { useCallback, useEffect,useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 
 import type {
 	DropdownChangeHandler,
@@ -57,7 +57,7 @@ export function useColumnFilter(
 	)
 }
 
-export function useInputTableChangeHandler(
+export function useInputTableChanged(
 	step: Step,
 	graph: GraphManager | undefined,
 	onChange: (step: Step) => void,
@@ -84,7 +84,7 @@ export function useInputTableChangeHandler(
 	)
 }
 
-export function useInputColumnChangeHandler(
+export function useInputColumnChanged(
 	step: Step,
 	onChange: (step: Step) => void,
 ): DropdownChangeHandler {
@@ -95,7 +95,7 @@ export function useInputColumnChangeHandler(
 	)
 }
 
-export function useOutputColumnChangedHandler(
+export function useOutputColumnChanged(
 	step: Step,
 	onChange: (step: Step) => void,
 ): TextFieldChangeHandler {
@@ -106,7 +106,7 @@ export function useOutputColumnChangedHandler(
 	)
 }
 
-export function useOutputTableChangedHandler(
+export function useOutputTableChanged(
 	step: Step,
 	onChangeOutput: (val: string) => void,
 	onChange: (step: Step) => void,

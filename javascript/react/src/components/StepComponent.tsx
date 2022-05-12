@@ -25,10 +25,10 @@ import { dropdownStyles } from '../styles.js'
 import {
 	useColumnFilter,
 	useDefaultOutputNameInitially,
-	useInputColumnChangeHandler,
-	useInputTableChangeHandler,
-	useOutputColumnChangedHandler,
-	useOutputTableChangedHandler,
+	useInputColumnChanged,
+	useInputTableChanged,
+	useOutputColumnChanged,
+	useOutputTableChanged,
 	useStepArgsComponent,
 	useStepChangeHandler,
 } from './StepComponent.hooks.js'
@@ -40,9 +40,9 @@ import type { StepComponentProps } from './StepComponent.types.js'
  */
 export const StepComponent: React.FC<StepComponentProps> = memo(
 	function StepComponent({
-		step,
+		step: s,
 		output,
-		graph,
+		graph: g,
 		index,
 		inputTableLabel,
 		inputColumnLabel,
@@ -50,82 +50,73 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		outputTableLabel,
 		outputTableDisabled,
 		onChange,
-		onChangeOutput,
+		onChangeOutput: changeOutput,
 	}) {
 		/* Current Table Selection */
-		const tableId = step.input[NodeInput.Source]?.node
-		const table = useDataTable(tableId, graph)
+		const tableId = s.input[NodeInput.Source]?.node
+		const table = useDataTable(tableId, g)
 
 		/* Table Options */
-		const tables = useTableNames(graph)
+		const tables = useTableNames(g)
 		const tableOptions = useSimpleDropdownOptions(tables)
 
 		/* Column Options */
-		const columns = useTableColumnNames(table, useColumnFilter(step, table))
+		const columns = useTableColumnNames(table, useColumnFilter(s, table))
 		const columnOptions = useSimpleDropdownOptions(columns)
 
-		const StepArgs = useStepArgsComponent(step)
-		const onStepChange = useStepChangeHandler(index, onChange)
-		const handleInputTableChanged = useInputTableChangeHandler(
-			step,
-			graph,
-			onStepChange,
-		)
-		const handleInputColumnChanged = useInputColumnChangeHandler(
-			step,
-			onStepChange,
-		)
-		const handleOutputColumnChanged = useOutputColumnChangedHandler(
-			step,
-			onStepChange,
-		)
-		const handleOutputTableChanged = useOutputTableChangedHandler(
-			step,
-			onChangeOutput,
-			onStepChange,
-		)
-		useDefaultOutputNameInitially(step, output, onChangeOutput)
+		/* The step args component */
+		const StepArgs = useStepArgsComponent(s)
+
+		/* Change Events */
+		const change = useStepChangeHandler(index, onChange)
+		const onInputTableChange = useInputTableChanged(s, g, change)
+		const onInputColumnChange = useInputColumnChanged(s, change)
+		const onOutputColumnChange = useOutputColumnChanged(s, change)
+		const onOutputTableChange = useOutputTableChanged(s, changeOutput, change)
+
+		/* Side Effects */
+		useDefaultOutputNameInitially(s, output, changeOutput)
 
 		return StepArgs == null ? null : (
 			<Container className="step-component">
 				{/* Input Table */}
-				{isInputTableStep(step) ? (
+				{isInputTableStep(s) ? (
 					<TableDropdown
 						options={tableOptions}
 						label={inputTableLabel || 'Input table'}
 						selectedKey={tableId}
-						onChange={handleInputTableChanged}
+						onChange={onInputTableChange}
 					/>
 				) : null}
 
 				{/* Input Column */}
-				{isInputColumnStep(step) ? (
+				{isInputColumnStep(s) ? (
 					<TableColumnDropdown
 						required
 						options={columnOptions}
-						label={inputColumnLabel || `Column to ${step.verb}`}
-						selectedKey={(step.args as InputColumnArgs).column}
-						onChange={handleInputColumnChanged}
+						label={inputColumnLabel || `Column to ${s.verb}`}
+						selectedKey={(s.args as InputColumnArgs).column}
+						onChange={onInputColumnChange}
 					/>
 				) : null}
 
 				<StepArgs
-					step={step}
-					graph={graph}
+					step={s}
+					graph={g}
 					output={output}
-					onChangeOutput={onChangeOutput}
-					onChange={onStepChange}
+					onChangeOutput={changeOutput}
+					onChange={change}
 				/>
 
 				{/* Output Column */}
-				{isOutputColumnStep(step) ? (
+				{isOutputColumnStep(s) ? (
 					<TextField
 						required
 						label={outputColumnLabel || 'New column name'}
 						placeholder={'Column name'}
-						value={(step.args as OutputColumnArgs).to}
+						value={(s.args as OutputColumnArgs).to}
 						styles={dropdownStyles}
-						onChange={handleOutputColumnChanged}
+						onChange={onOutputColumnChange}
 					/>
 				) : null}
 
@@ -135,9 +126,9 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 					disabled={outputTableDisabled}
 					label={outputTableLabel || 'Output table'}
 					placeholder={'Table name'}
-					value={output ?? step.id}
+					value={output ?? s.id}
 					styles={dropdownStyles}
-					onChange={handleOutputTableChanged}
+					onChange={onOutputTableChange}
 				/>
 			</Container>
 		)
