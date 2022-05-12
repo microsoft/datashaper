@@ -51,10 +51,15 @@ export function stepVerbFactory<Args>(
 			args: Args,
 		) => {
 			if (source.table) {
-				const result = columnTableStep(source.table, args)
+				let result: ColumnTable | Promise<ColumnTable> | undefined
+				try {
+					result = columnTableStep(source.table, args)
+				} catch (err) {
+					console.warn('error processing step', err)
+				}
 
 				// handle promise-based result
-				if ((result as any).then) {
+				if ((result as any)?.then) {
 					return (result as Promise<Maybe<ColumnTable>>).then(t =>
 						container(id, t),
 					)
