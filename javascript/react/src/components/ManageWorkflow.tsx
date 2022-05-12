@@ -39,75 +39,65 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		//
 		// Selected Step/Index State for the component
 		//
-		const [selectedStep, setSelectedStep] = useState<Step | undefined>()
-		const [selectedStepIndex, setSelectedStepIndex] = useState<number>()
+		const [step, setStep] = useState<Step | undefined>()
+		const [index, setIndex] = useState<number>()
 
 		//
 		// Modal view-state
 		//
 		const {
-			isOpen: isTransformModalOpen,
-			hide: onDismissTransformModal,
-			show: showTransformModal,
-		} = useTransformModalState(setSelectedStep, setSelectedStepIndex)
+			isOpen: isModalOpen,
+			hide: dismissModal,
+			show: showModal,
+		} = useTransformModalState(setStep, setIndex)
 
 		//
 		// Interaction Handlers
 		//
 		const onSave = useOnSaveStep(graph)
-		const onDelete = useOnDeleteStep(graph)
 		const {
-			onClick: onDeleteClicked,
-			toggle: toggleDeleteModalOpen,
-			isOpen: isDeleteModalOpen,
+			onClick: onDelete,
 			onConfirm: onConfirmDelete,
-		} = useDeleteConfirm(onDelete)
-		const onEditClicked = useOnEditStep(
-			setSelectedStep,
-			setSelectedStepIndex,
-			showTransformModal,
-		)
-		const onCreate = useOnCreateStep(
-			selectedStepIndex,
-			onDismissTransformModal,
-			onSave,
-			onSelect,
-		)
-		const onDuplicateClicked = useOnDuplicateStep(graph, table, onSave)
-		const { addStepButtonId, editorTarget } = useEditorTarget(selectedStepIndex)
+			toggle: toggleDeleteModal,
+			isOpen: isDeleteModalOpen,
+		} = useDeleteConfirm(useOnDeleteStep(graph))
+		const onEdit = useOnEditStep(setStep, setIndex, showModal)
+		const onCreate = useOnCreateStep(index, dismissModal, onSave, onSelect)
+		const onDuplicate = useOnDuplicateStep(graph, table, onSave)
+		const { addStepButtonId, editorTarget } = useEditorTarget(index)
 
 		// create a parallel array of output names for the steps
 		const outputs = useStepOutputs(graph)
-		const graphSteps = useGraphSteps(graph, onUpdateOutput)
+		const steps = useGraphSteps(graph, onUpdateOutput)
 
 		return (
 			<Container>
 				<StepList
-					onDeleteClicked={onDeleteClicked}
+					onDeleteClicked={onDelete}
 					onSelect={onSelect}
-					onEditClicked={onEditClicked}
-					steps={graphSteps}
+					onEditClicked={onEdit}
+					steps={steps}
 					outputs={outputs}
-					onDuplicateClicked={onDuplicateClicked}
-					onStartNewStep={showTransformModal}
+					onDuplicateClicked={onDuplicate}
+					onStartNewStep={showModal}
 					buttonId={addStepButtonId}
 				/>
 				<div>
-					{isTransformModalOpen ? (
+					{isModalOpen ? (
 						<TableTransformModal
 							target={editorTarget}
-							step={selectedStep}
-							index={selectedStepIndex ?? graph.steps.length}
+							step={step}
+							index={index ?? graph.steps.length}
 							onTransformRequested={onCreate}
 							graph={graph}
-							onDismiss={onDismissTransformModal}
+							onDismiss={dismissModal}
 							styles={modalStyles}
 							{...props}
 						/>
 					) : null}
 
 					<DialogConfirm
-						toggle={toggleDeleteModalOpen}
+						toggle={toggleDeleteModal}
 						title="Are you sure you want to delete this step?"
 						subText={
 							'You will also lose any table transformations made after this step.'
