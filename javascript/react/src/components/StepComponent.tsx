@@ -24,13 +24,13 @@ import { useTableNames } from '../hooks/useTableNames.js'
 import { dropdownStyles } from '../styles.js'
 import {
 	useColumnFilter,
+	useDefaultOutputNameInitially,
 	useInputColumnChangeHandler,
 	useInputTableChangeHandler,
 	useOutputColumnChangedHandler,
 	useOutputTableChangedHandler,
 	useStepArgsComponent,
 	useStepChangeHandler,
-	useDefaultOutputNameInitially,
 } from './StepComponent.hooks.js'
 import { Container } from './StepComponent.styles.js'
 import type { StepComponentProps } from './StepComponent.types.js'

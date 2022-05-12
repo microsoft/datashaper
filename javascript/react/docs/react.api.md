@@ -131,8 +131,10 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps>;
 export interface PrepareDataFullProps {
     derived: TableContainer[];
     inputs: TableContainer[];
+    onSelectedTableIdChanged: (value: string | undefined) => void;
     onUpdateOutput?: (tables: TableContainer[]) => void;
     outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[];
+    selectedTableId: string | undefined;
     stepsPosition?: 'bottom' | 'middle';
     workflow: Workflow;
 }
