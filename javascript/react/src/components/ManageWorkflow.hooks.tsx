@@ -125,22 +125,22 @@ export function useOnSaveStep(
 /**
  * A hook to manage state for showing the the step transformation modal
  *
- * @param setSelectedStep - A mutator for the selected step
- * @param setSelectedStepIndex - A mutator for the selected step indexw
+ * @param setStep - A mutator for the selected step
+ * @param setStepIndex - A mutator for the selected step indexw
  * @returns An object containing the isOpen state, and show/hide callbacks
  */
 export function useTransformModalState(
-	setSelectedStep: (step: Step | undefined) => void,
-	setSelectedStepIndex: (index: number | undefined) => void,
+	setStep: (step: Step | undefined) => void,
+	setStepIndex: (index: number | undefined) => void,
 ): ModalState {
 	const onDismiss = useCallback(() => {
-		setSelectedStep(undefined)
-		setSelectedStepIndex(undefined)
-	}, [setSelectedStep, setSelectedStepIndex])
+		setStep(undefined)
+		setStepIndex(undefined)
+	}, [setStep, setStepIndex])
 	return useModalState(undefined, onDismiss)
 }
 
-export function useEditorTarget(selectedStepIndex: number | undefined): {
+export function useEditorTarget(stepIndex: number | undefined): {
 	editorTarget: string
 	addStepButtonId: string
 } {
@@ -149,12 +149,12 @@ export function useEditorTarget(selectedStepIndex: number | undefined): {
 	)
 	const [editorTarget, setEditorTarget] = useState<string>(addStepButtonId)
 	useEffect(() => {
-		if (selectedStepIndex !== undefined) {
-			setEditorTarget(`.step-card-${selectedStepIndex}`)
+		if (stepIndex !== undefined) {
+			setEditorTarget(`.step-card-${stepIndex}`)
 		} else {
 			setEditorTarget(`#${addStepButtonId}`)
 		}
-	}, [addStepButtonId, selectedStepIndex])
+	}, [addStepButtonId, stepIndex])
 
 	return {
 		editorTarget,

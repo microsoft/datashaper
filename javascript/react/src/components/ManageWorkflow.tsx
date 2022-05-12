@@ -36,24 +36,18 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 	}) {
 		const graph = useGraphManager(workflow, inputs)
 
-		//
 		// Selected Step/Index State for the component
-		//
 		const [step, setStep] = useState<Step | undefined>()
 		const [index, setIndex] = useState<number>()
 
-		//
 		// Modal view-state
-		//
 		const {
 			isOpen: isModalOpen,
 			hide: dismissModal,
 			show: showModal,
 		} = useTransformModalState(setStep, setIndex)
 
-		//
 		// Interaction Handlers
-		//
 		const onSave = useOnSaveStep(graph)
 		const {
 			onClick: onDelete,
@@ -66,7 +60,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		const onDuplicate = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(index)
 
-		// create a parallel array of output names for the steps
+		// parallel array of output names for the steps
 		const outputs = useStepOutputs(graph)
 		const steps = useGraphSteps(graph, onUpdateOutput)
 
