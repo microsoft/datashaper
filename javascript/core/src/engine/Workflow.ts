@@ -97,6 +97,7 @@ export class Workflow {
 			...this.steps.slice(0, index),
 			...this.steps.slice(index + 1),
 		]
+		this._onChange.next()
 	}
 
 	public updateStep(stepInput: StepInput, index: number): Step {
