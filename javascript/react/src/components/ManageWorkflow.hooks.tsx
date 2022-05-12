@@ -64,6 +64,26 @@ export function useOnEditStep(
 	)
 }
 
+export function useOnCreateStep(
+	index: number | undefined,
+	dismissModal: () => void,
+	save: (
+		step: Step,
+		output: string | undefined,
+		index: number | undefined,
+	) => void,
+	selectOutput: undefined | ((name: string) => void),
+): (step: Step, output: string | undefined) => void {
+	return useCallback(
+		(step: Step, output: string | undefined) => {
+			save(step, output, index)
+			dismissModal()
+			if (output) selectOutput?.(output)
+		},
+		[save, dismissModal, index, selectOutput],
+	)
+}
+
 /**
  *
  * @param graph - The graph manager
@@ -105,22 +125,22 @@ export function useOnSaveStep(
 /**
  * A hook to manage state for showing the the step transformation modal
  *
- * @param setSelectedStep - A mutator for the selected step
- * @param setSelectedStepIndex - A mutator for the selected step indexw
+ * @param setStep - A mutator for the selected step
+ * @param setStepIndex - A mutator for the selected step indexw
  * @returns An object containing the isOpen state, and show/hide callbacks
  */
 export function useTransformModalState(
-	setSelectedStep: (step: Step | undefined) => void,
-	setSelectedStepIndex: (index: number | undefined) => void,
+	setStep: (step: Step | undefined) => void,
+	setStepIndex: (index: number | undefined) => void,
 ): ModalState {
 	const onDismiss = useCallback(() => {
-		setSelectedStep(undefined)
-		setSelectedStepIndex(undefined)
-	}, [setSelectedStep, setSelectedStepIndex])
+		setStep(undefined)
+		setStepIndex(undefined)
+	}, [setStep, setStepIndex])
 	return useModalState(undefined, onDismiss)
 }
 
-export function useEditorTarget(selectedStepIndex: number | undefined): {
+export function useEditorTarget(stepIndex: number | undefined): {
 	editorTarget: string
 	addStepButtonId: string
 } {
@@ -129,12 +149,12 @@ export function useEditorTarget(selectedStepIndex: number | undefined): {
 	)
 	const [editorTarget, setEditorTarget] = useState<string>(addStepButtonId)
 	useEffect(() => {
-		if (selectedStepIndex !== undefined) {
-			setEditorTarget(`.step-card-${selectedStepIndex}`)
+		if (stepIndex !== undefined) {
+			setEditorTarget(`.step-card-${stepIndex}`)
 		} else {
 			setEditorTarget(`#${addStepButtonId}`)
 		}
-	}, [addStepButtonId, selectedStepIndex])
+	}, [addStepButtonId, stepIndex])
 
 	return {
 		editorTarget,
@@ -227,20 +247,21 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 	}
 }
 
-export function useGraphChangeListener(
+export function useGraphSteps(
 	graph: GraphManager,
-	setGraphSteps: (steps: Step[]) => void,
-	onUpdateOutput?: (tables: TableContainer[]) => void,
-): void {
+	setOutput?: (tables: TableContainer[]) => void,
+): Step[] {
+	const [graphSteps, setGraphSteps] = useState<Step[]>(graph.steps)
 	useEffect(
 		function emitCurrentTableList() {
 			return graph.onChange(() => {
 				setGraphSteps(graph.steps)
-				onUpdateOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
+				setOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
 			})
 		},
-		[graph, onUpdateOutput, setGraphSteps],
+		[graph, setOutput, setGraphSteps],
 	)
+	return graphSteps
 }
 
 export function useStepOutputs(graph: GraphManager): Array<string | undefined> {
