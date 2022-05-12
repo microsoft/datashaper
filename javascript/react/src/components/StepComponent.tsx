@@ -30,6 +30,7 @@ import {
 	useOutputTableChangedHandler,
 	useStepArgsComponent,
 	useStepChangeHandler,
+	useDefaultOutputNameInitially,
 } from './StepComponent.hooks.js'
 import { Container } from './StepComponent.styles.js'
 import type { StepComponentProps } from './StepComponent.types.js'
@@ -83,6 +84,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 			onChangeOutput,
 			onStepChange,
 		)
+		useDefaultOutputNameInitially(step, output, onChangeOutput)
 
 		return StepArgs == null ? null : (
 			<Container className="step-component">

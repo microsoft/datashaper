@@ -13,7 +13,7 @@ import { columnTypes, DataType } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useEffect } from 'react'
 
 import type {
 	DropdownChangeHandler,
@@ -115,5 +115,21 @@ export function useOutputTableChangedHandler(
 		step,
 		(_s, val) => onChangeOutput(val as string),
 		onChange,
+	)
+}
+
+export function useDefaultOutputNameInitially(
+	step: Step,
+	output: string | undefined,
+	onChangeOutput: (value: string | undefined) => void,
+): void {
+	useEffect(
+		() => {
+			onChangeOutput(output ?? step.id)
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[
+			/* only on initial render */
+		],
 	)
 }
