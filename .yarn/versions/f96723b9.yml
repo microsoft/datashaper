@@ -1,0 +1,5 @@
+releases:
+  "@data-wrangling-components/react": major
+
+declined:
+  - "@data-wrangling-components/webapp"
