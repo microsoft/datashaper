@@ -8,7 +8,7 @@ import type {
 	Verb,
 	Workflow,
 } from '@data-wrangling-components/core'
-import { readStep } from '@data-wrangling-components/core'
+import { useHandleStepSave } from '@data-wrangling-components/react'
 import type { TableContainer } from '@essex/arquero'
 import { container } from '@essex/arquero'
 import { loadCSV } from 'arquero'
@@ -49,23 +49,10 @@ function workflowToJson(workflow: Workflow | undefined) {
 export function useCreateStepHandler(
 	graph: GraphManager,
 ): (verb: Verb) => void {
+	const saveStep = useHandleStepSave(graph)
 	return useCallback(
-		(verb: Verb) => {
-			const newStep = readStep({ verb })
-			graph.addStep(newStep)
-		},
-		[graph],
-	)
-}
-
-export function useChangeStepHandler(
-	graph: GraphManager,
-): (step: Step, index: number) => void {
-	return useCallback(
-		(step: Step, index: number) => {
-			graph.reconfigureStep(index, step)
-		},
-		[graph],
+		(verb: Verb) => saveStep({ verb } as Step, graph.steps.length),
+		[saveStep, graph],
 	)
 }
 

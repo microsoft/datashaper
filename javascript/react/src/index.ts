@@ -17,6 +17,7 @@ export {
 	useGraphSteps,
 	useGraphWorkflowState,
 	useHandleStepOutputChanged,
+	useHandleStepSave,
 	useStepOutputs,
 } from './hooks/index.js'
 

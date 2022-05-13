@@ -8,6 +8,7 @@ import {
 	useGraphSteps,
 	useGraphWorkflowState,
 	useHandleStepOutputChanged,
+	useHandleStepSave,
 	useStepOutputs,
 } from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
@@ -21,7 +22,6 @@ import { Section } from '../components/Section.js'
 import { StepOutput } from '../components/StepOutput.js'
 import {
 	useAddFilesHandler,
-	useChangeStepHandler,
 	useCreateStepHandler,
 	useInputTables,
 	useWorkflowDownloadUrl,
@@ -62,8 +62,8 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	) as string[]
 	const downloadUrl = useWorkflowDownloadUrl(workflow)
 	const onAddFiles = useAddFilesHandler(graph)
+	const onStepSave = useHandleStepSave(graph)
 	const onStepCreate = useCreateStepHandler(graph)
-	const onStepChange = useChangeStepHandler(graph)
 	const onStepOutputChange = useHandleStepOutputChanged(graph)
 
 	return (
@@ -99,7 +99,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 						output={outputs[index]}
 						features={features}
 						compact={compact}
-						onStepChange={onStepChange}
+						onStepChange={onStepSave}
 						onStepOutputChange={onStepOutputChange}
 					/>
 				))}

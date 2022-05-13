@@ -13,6 +13,7 @@ import type { ModalState } from '../hooks/index.js'
 import {
 	useCreateTableName,
 	useHandleStepOutputChanged,
+	useHandleStepSave,
 	useModalState,
 	useStaticValue,
 } from '../hooks/index.js'
@@ -93,22 +94,15 @@ export function useOnCreateStep(
 export function useOnSaveStep(
 	graph: GraphManager,
 ): (step: Step, output: string | undefined, index: number | undefined) => void {
+	const updateStep = useHandleStepSave(graph)
 	const updateStepOutput = useHandleStepOutputChanged(graph)
 
 	return useCallback(
 		(step: Step, output: string | undefined, index: number | undefined) => {
-			//
-			// If the step index is already present, update the existing step
-			//
-			const isExistingStep =
-				index != null && graph.numSteps > 0 && index < graph.numSteps
-			const stepResult = isExistingStep
-				? graph.reconfigureStep(index as number, step)
-				: graph.addStep(step)
-
+			const stepResult = updateStep(step, index)
 			updateStepOutput(stepResult, output)
 		},
-		[graph, updateStepOutput],
+		[graph, updateStepOutput, updateStep],
 	)
 }
 

@@ -357,6 +357,11 @@ export function useGraphWorkflowState(graph: GraphManager): [Workflow | undefine
 // @public
 export function useHandleStepOutputChanged(graph: GraphManager): (step: Step, output: string | undefined) => void;
 
+// Warning: (ae-missing-release-tag) "useHandleStepSave" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleStepSave(graph: GraphManager): (step: Step, index: number | undefined) => Step;
+
 // Warning: (ae-missing-release-tag) "useStepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
