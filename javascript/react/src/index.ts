@@ -14,7 +14,10 @@ export {
 export {
 	useDataTable,
 	useGraphManager,
+	useGraphSteps,
+	useGraphWorkflowState,
 	useHandleStepOutputChanged,
+	useStepOutputs,
 } from './hooks/index.js'
 
 /*

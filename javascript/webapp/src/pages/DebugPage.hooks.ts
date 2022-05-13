@@ -23,37 +23,6 @@ const parse = {
 	Group: identity,
 }
 
-/**
- * Gets the graph processing steps
- * @param graph - the graph manager
- * @returns
- */
-export function useSteps(graph: GraphManager): Step[] {
-	const [steps, setSteps] = useState<Step[]>([])
-	// listen for graph changes and update the steps
-	useEffect(
-		() => graph.onChange(() => setSteps(graph.steps)),
-		[graph, setSteps],
-	)
-	return steps
-}
-
-export function useWorkflowState(
-	graph: GraphManager,
-): [Workflow | undefined, (workflow: Workflow | undefined) => void] {
-	const [workflow, setWorkflow] = useState<Workflow | undefined>(graph.workflow)
-	return [
-		workflow,
-		useCallback(
-			(w: Workflow | undefined) => {
-				setWorkflow(w)
-				graph.reset(w)
-			},
-			[setWorkflow, graph],
-		),
-	]
-}
-
 export function useWorkflowDownloadUrl(workflow: Workflow | undefined): string {
 	const [serialized, setSerialized] = useState<Blob>(
 		new Blob([workflowToJson(workflow)]),
@@ -151,23 +120,4 @@ function readCsvFile(name: string, autoType: boolean): Promise<ColumnTable> {
 		autoMax: 100000,
 		autoType,
 	})
-}
-
-/**
- * create a parallel array of output names for the steps
- *
- * @param graph The graph manager
- * @returns
- */
-export function useStepOutputs(graph: GraphManager): string[] {
-	return useMemo<string[]>(
-		() =>
-			graph.steps
-				.map(s => s.id)
-				.map((id, index) => {
-					const output = graph.outputDefinitions.find(def => def.node === id)
-					return output?.name ?? `step-${index + 1}`
-				}),
-		[graph.steps, graph.outputDefinitions],
-	)
 }
