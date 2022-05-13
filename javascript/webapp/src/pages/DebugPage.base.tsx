@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { StepSelector, useGraphManager } from '@data-wrangling-components/react'
+import {
+	StepSelector,
+	useGraphManager,
+	useHandleStepOutputChanged,
+} from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
 import { IconButton } from '@fluentui/react'
@@ -16,7 +20,6 @@ import {
 	useAddFilesHandler,
 	useChangeStepHandler,
 	useCreateStepHandler,
-	useHandleStepOutputChanged,
 	useInputTables,
 	useStepOutputs,
 	useSteps,

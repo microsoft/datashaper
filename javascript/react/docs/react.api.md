@@ -342,6 +342,11 @@ export function useDataTable(id: string | undefined, graph?: GraphManager, exist
 // @public (undocumented)
 export function useGraphManager(workflow?: Workflow | undefined, inputs?: TableContainer[]): GraphManager;
 
+// Warning: (ae-missing-release-tag) "useHandleStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useHandleStepOutputChanged(graph: GraphManager): (step: Step, output: string | undefined) => void;
+
 // (No @packageDocumentation comment for this package)
 
 ```
