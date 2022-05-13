@@ -342,10 +342,30 @@ export function useDataTable(id: string | undefined, graph?: GraphManager, exist
 // @public (undocumented)
 export function useGraphManager(workflow?: Workflow | undefined, inputs?: TableContainer[]): GraphManager;
 
+// Warning: (ae-missing-release-tag) "useGraphSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useGraphSteps(graph: GraphManager): Step[];
+
+// Warning: (ae-missing-release-tag) "useGraphWorkflowState" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useGraphWorkflowState(graph: GraphManager): [Workflow | undefined, (workflow: Workflow | undefined) => void];
+
 // Warning: (ae-missing-release-tag) "useHandleStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function useHandleStepOutputChanged(graph: GraphManager): (step: Step, output: string | undefined) => void;
+
+// Warning: (ae-missing-release-tag) "useHandleStepSave" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleStepSave(graph: GraphManager): (step: Step, index: number | undefined) => Step;
+
+// Warning: (ae-missing-release-tag) "useStepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useStepOutputs(graph: GraphManager, defaultOutputName?: (index: number) => string): Array<string | undefined>;
 
 // (No @packageDocumentation comment for this package)
 

@@ -7,12 +7,13 @@ import type { GraphManager, Step } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import type { ModalState } from '../hooks/index.js'
 import {
 	useCreateTableName,
 	useHandleStepOutputChanged,
+	useHandleStepSave,
 	useModalState,
 	useStaticValue,
 } from '../hooks/index.js'
@@ -93,22 +94,15 @@ export function useOnCreateStep(
 export function useOnSaveStep(
 	graph: GraphManager,
 ): (step: Step, output: string | undefined, index: number | undefined) => void {
+	const updateStep = useHandleStepSave(graph)
 	const updateStepOutput = useHandleStepOutputChanged(graph)
 
 	return useCallback(
 		(step: Step, output: string | undefined, index: number | undefined) => {
-			//
-			// If the step index is already present, update the existing step
-			//
-			const isExistingStep =
-				index != null && graph.numSteps > 0 && index < graph.numSteps
-			const stepResult = isExistingStep
-				? graph.reconfigureStep(index as number, step)
-				: graph.addStep(step)
-
+			const stepResult = updateStep(step, index)
 			updateStepOutput(stepResult, output)
 		},
-		[graph, updateStepOutput],
+		[graph, updateStepOutput, updateStep],
 	)
 }
 
@@ -237,32 +231,16 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 	}
 }
 
-export function useGraphSteps(
+export function useGraphOutputListener(
 	graph: GraphManager,
-	setOutput?: (tables: TableContainer[]) => void,
-): Step[] {
-	const [graphSteps, setGraphSteps] = useState<Step[]>(graph.steps)
+	setOutput?: ((tables: TableContainer[]) => void) | undefined,
+): void {
 	useEffect(
-		function emitCurrentTableList() {
-			return graph.onChange(() => {
-				setGraphSteps(graph.steps)
-				setOutput?.(graph.toList().filter(t => !!t) as TableContainer[])
-			})
-		},
-		[graph, setOutput, setGraphSteps],
-	)
-	return graphSteps
-}
-
-export function useStepOutputs(graph: GraphManager): Array<string | undefined> {
-	return useMemo(
 		() =>
-			graph.steps
-				.map(s => s.id)
-				.map(id => {
-					const output = graph.outputDefinitions.find(def => def.node === id)
-					return output?.name
-				}),
-		[graph.steps, graph.outputDefinitions],
+			setOutput &&
+			graph.onChange(() =>
+				setOutput(graph.toList().filter(t => !!t) as TableContainer[]),
+			),
+		[graph, setOutput],
 	)
 }

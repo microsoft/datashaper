@@ -8,7 +8,7 @@ import type {
 	Verb,
 	Workflow,
 } from '@data-wrangling-components/core'
-import { readStep } from '@data-wrangling-components/core'
+import { useHandleStepSave } from '@data-wrangling-components/react'
 import type { TableContainer } from '@essex/arquero'
 import { container } from '@essex/arquero'
 import { loadCSV } from 'arquero'
@@ -21,37 +21,6 @@ const identity = (d: any) => d
 const parse = {
 	ID: identity,
 	Group: identity,
-}
-
-/**
- * Gets the graph processing steps
- * @param graph - the graph manager
- * @returns
- */
-export function useSteps(graph: GraphManager): Step[] {
-	const [steps, setSteps] = useState<Step[]>([])
-	// listen for graph changes and update the steps
-	useEffect(
-		() => graph.onChange(() => setSteps(graph.steps)),
-		[graph, setSteps],
-	)
-	return steps
-}
-
-export function useWorkflowState(
-	graph: GraphManager,
-): [Workflow | undefined, (workflow: Workflow | undefined) => void] {
-	const [workflow, setWorkflow] = useState<Workflow | undefined>(graph.workflow)
-	return [
-		workflow,
-		useCallback(
-			(w: Workflow | undefined) => {
-				setWorkflow(w)
-				graph.reset(w)
-			},
-			[setWorkflow, graph],
-		),
-	]
 }
 
 export function useWorkflowDownloadUrl(workflow: Workflow | undefined): string {
@@ -80,23 +49,10 @@ function workflowToJson(workflow: Workflow | undefined) {
 export function useCreateStepHandler(
 	graph: GraphManager,
 ): (verb: Verb) => void {
+	const saveStep = useHandleStepSave(graph)
 	return useCallback(
-		(verb: Verb) => {
-			const newStep = readStep({ verb })
-			graph.addStep(newStep)
-		},
-		[graph],
-	)
-}
-
-export function useChangeStepHandler(
-	graph: GraphManager,
-): (step: Step, index: number) => void {
-	return useCallback(
-		(step: Step, index: number) => {
-			graph.reconfigureStep(index, step)
-		},
-		[graph],
+		(verb: Verb) => saveStep({ verb } as Step, graph.steps.length),
+		[saveStep, graph],
 	)
 }
 
@@ -151,23 +107,4 @@ function readCsvFile(name: string, autoType: boolean): Promise<ColumnTable> {
 		autoMax: 100000,
 		autoType,
 	})
-}
-
-/**
- * create a parallel array of output names for the steps
- *
- * @param graph The graph manager
- * @returns
- */
-export function useStepOutputs(graph: GraphManager): string[] {
-	return useMemo<string[]>(
-		() =>
-			graph.steps
-				.map(s => s.id)
-				.map((id, index) => {
-					const output = graph.outputDefinitions.find(def => def.node === id)
-					return output?.name ?? `step-${index + 1}`
-				}),
-		[graph.steps, graph.outputDefinitions],
-	)
 }

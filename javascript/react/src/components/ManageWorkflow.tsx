@@ -7,17 +7,20 @@ import type { Step } from '@data-wrangling-components/core'
 import { DialogConfirm } from '@essex/themed-components'
 import { memo, useState } from 'react'
 
-import { useGraphManager } from '../hooks/common.js'
+import {
+	useGraphManager,
+	useGraphSteps,
+	useStepOutputs,
+} from '../hooks/index.js'
 import {
 	useDeleteConfirm,
 	useEditorTarget,
-	useGraphSteps,
+	useGraphOutputListener,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnDuplicateStep,
 	useOnEditStep,
 	useOnSaveStep,
-	useStepOutputs,
 	useTransformModalState,
 } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
@@ -62,7 +65,8 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 
 		// parallel array of output names for the steps
 		const outputs = useStepOutputs(graph)
-		const steps = useGraphSteps(graph, onUpdateOutput)
+		const steps = useGraphSteps(graph)
+		useGraphOutputListener(graph, onUpdateOutput)
 
 		return (
 			<Container>
