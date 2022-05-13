@@ -12,6 +12,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { ModalState } from '../hooks/index.js'
 import {
 	useCreateTableName,
+	useHandleStepOutputChanged,
 	useModalState,
 	useStaticValue,
 } from '../hooks/index.js'
@@ -92,6 +93,8 @@ export function useOnCreateStep(
 export function useOnSaveStep(
 	graph: GraphManager,
 ): (step: Step, output: string | undefined, index: number | undefined) => void {
+	const updateStepOutput = useHandleStepOutputChanged(graph)
+
 	return useCallback(
 		(step: Step, output: string | undefined, index: number | undefined) => {
 			//
@@ -103,22 +106,9 @@ export function useOnSaveStep(
 				? graph.reconfigureStep(index as number, step)
 				: graph.addStep(step)
 
-			//
-			// Set or unset the output
-			//
-			const existingOutput = graph.outputDefinitions.find(
-				d => d.node === stepResult.id,
-			)
-			if (output) {
-				graph.addOutput({
-					name: output,
-					node: stepResult.id,
-				})
-			} else if (existingOutput) {
-				graph.removeOutput(existingOutput.name)
-			}
+			updateStepOutput(stepResult, output)
 		},
-		[graph],
+		[graph, updateStepOutput],
 	)
 }
 
