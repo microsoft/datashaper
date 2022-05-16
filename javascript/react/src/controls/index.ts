@@ -3,8 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './CalendarPicker.js'
-export * from './ColumnarMenu.js'
-export * from './ColumnarMenuList.js'
 export * from './ColumnCriteriaCombobox.js'
 export * from './ColumnOrValueComboBox.js'
 export * from './ColumnSpread.js'

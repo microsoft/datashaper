@@ -38,7 +38,7 @@
 		"@essex/arquero-react": "^1.0.5",
 		"@essex/charts-react": "^1.0.4",
 		"@essex/dataflow": "^0.1.1",
-		"@essex/themed-components": "^2.2.5",
+		"@essex/themed-components": "^2.2.6",
 		"d3-format": "^3.1.0",
 		"immer": "^9.0.12",
 		"lodash-es": "^4.17.21",

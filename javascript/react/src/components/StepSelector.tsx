@@ -2,15 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ColumnarMenu, ColumnarMenuList } from '@essex/themed-components'
 import type { IContextualMenuListProps } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
-import {
-	ColumnarMenu,
-	ColumnarMenuList,
-	ContextualMenuItemSearchBox,
-} from '../controls/index.js'
+import { ContextualMenuItemSearchBox } from '../controls/index.js'
 import { useSearchableItems, useSelectedOption } from './StepSelector.hooks.js'
 import { Container, icons, SearchContainer } from './StepSelector.styles.js'
 import type { StepSelectorProps } from './StepSelector.types.js'
