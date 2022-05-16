@@ -37,7 +37,7 @@
 		"@essex/arquero": "^2.0.2",
 		"@essex/arquero-react": "^1.0.5",
 		"@essex/hooks": "^4.0.11",
-		"@essex/themed-components": "^2.2.5",
+		"@essex/themed-components": "^2.2.6",
 		"@essex/webpack-config": "^21.0.2",
 		"@fluentui/font-icons-mdl2": "^8.3.2",
 		"@fluentui/react": "^8.67.2",
