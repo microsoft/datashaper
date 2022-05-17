@@ -19,7 +19,9 @@
 		"*.jsx": "${capture}.js",
 		"*.tsx": "${capture}.ts, ${capture}.hooks.ts, ${capture}.hooks.tsx, ${capture}.stories.tsx, ${capture}.spec.tsx, ${capture}.base.ts, ${capture}.base.tsx, ${capture}.types.ts, ${capture}.styles.ts, ${capture}.styles.tsx, ${capture}.utils.ts, ${capture}.utils.tsx, ${capture}.module.scss, ${capture}.module.css, ${capture}.md",
 		"tsconfig.json": "tsconfig.*.json",
-		"package.json": "package-lock.json, yarn.lock"
+		"package.json": "LICENSE, package-lock.json, yarn.lock, .yarnrc.yml, .pnp.cjs, .pnp.loader.mjs, .eslintrc, .eslintignore, .prettierignore, .gitattributes, .gitignore",
+		"README.md": "SECURITY.md, SUPPORT.md, CODE_OF_CONDUCT.md",
+		"jest.config.js": "jest.setup.mjs"
 	},
 	"python.linting.flake8Enabled": true,
 	"python.linting.enabled": true,
