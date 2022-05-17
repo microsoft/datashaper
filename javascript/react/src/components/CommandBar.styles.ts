@@ -11,4 +11,5 @@ export const CommandBarWrapper = styled.div<{
 }>`
 	background-color: ${({ bgColor }) => bgColor};
 	color: ${({ color }) => color || 'inherit'};
+	width: 100%;
 `

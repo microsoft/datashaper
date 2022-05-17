@@ -14,3 +14,11 @@ export const color = (theme: Theme): string =>
 	theme.variant === ThemeVariant.Light
 		? theme.application().lowContrast().hex()
 		: theme.application().midHighContrast().hex()
+
+export const dropzone = {
+	container: {
+		height: 'auto',
+		borderStyle: 'none',
+		margin: 0,
+	},
+}
