@@ -79,8 +79,8 @@ function isInputColumnArray(columnsMetadata: ColumnMetadata[], columns: string[]
 
 		if(result !== -1)
 			arrayFlag = true
-		else
-			index++
+		
+		index++
 	}
 
 	return arrayFlag
