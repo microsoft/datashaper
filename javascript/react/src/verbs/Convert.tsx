@@ -5,7 +5,7 @@
 import type { ConvertArgs } from '@data-wrangling-components/core'
 import { memo } from 'react'
 
-import { useStepDataTable,useTableColumnNames, useColumnsMetadata } from '../hooks/index.js'
+import { useColumnsMetadata,useStepDataTable,useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { ConvertBase } from './Convert.base.js'
 

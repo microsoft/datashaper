@@ -11,7 +11,7 @@ export function useColumnsMetadata(
 	filter?: (name: string) => boolean,
 ): ColumnMetadata[] {
     const columns = table?.columnNames(filter) || []
-    let result: ColumnMetadata[] = []
+    const result: ColumnMetadata[] = []
 
     columns.forEach(col => {
         let type: DataType
@@ -24,7 +24,7 @@ export function useColumnsMetadata(
 
         result.push({columnName: col, type: type})
     })
-	return useMemo(() => result, [table, filter])
+	return useMemo(() => result, [table, filter, result])
 }
 
 export interface ColumnMetadata{

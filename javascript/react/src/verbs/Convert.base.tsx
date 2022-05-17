@@ -64,18 +64,18 @@ export const ConvertBase: React.FC<
 					(s.args.formatPattern = value ? value : '%Y-%m-%d'),
 			},
 		],
-		[step, columns],
+		[step, columns, columnsMetadata],
 	)
 
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
 
 function isInputColumnArray(columnsMetadata: ColumnMetadata[], columns: string[]){
-	let arrayFlag: boolean = false
-	let index: number = 0
+	let arrayFlag = false
+	let index = 0
 
 	while(!arrayFlag && index < columns.length){
-		let result: number = columnsMetadata.findIndex(element => element.columnName === columns[index] && element.type === DataType.Array)
+		const result: number = columnsMetadata.findIndex(element => element.columnName === columns[index] && element.type === DataType.Array)
 
 		if(result !== -1)
 			arrayFlag = true
