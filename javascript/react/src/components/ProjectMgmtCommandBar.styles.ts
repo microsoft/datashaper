@@ -18,7 +18,7 @@ export const color = (theme: Theme): string =>
 export const dropzone = {
 	container: {
 		height: 'auto',
-		border: ' none',
+		borderStyle: 'none',
 		margin: 0,
 	},
 }
