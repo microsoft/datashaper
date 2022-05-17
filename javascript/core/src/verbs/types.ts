@@ -109,6 +109,7 @@ export enum ParseType {
 	 */
 	Decimal = 'float',
 	String = 'string',
+	Array = 'array'
 }
 
 export enum MathOperator {

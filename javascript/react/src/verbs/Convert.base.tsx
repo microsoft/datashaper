@@ -5,10 +5,12 @@
 import type { ConvertArgs } from '@data-wrangling-components/core'
 import { ParseType } from '@data-wrangling-components/core'
 import { num } from '@data-wrangling-components/utilities'
+import { DataType } from '@essex/arquero'
 import { memo, useMemo } from 'react'
 
 import { getDateFormatPatternOptions } from '../dateFormats.js'
 import { getEnumDropdownOptions } from '../enums.js'
+import type { ColumnMetadata } from '../hooks/useColumnsMetadata.js'
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
@@ -19,9 +21,10 @@ import { inputColumnList } from '../verbForm/VerbFormFactories.js'
  */
 export const ConvertBase: React.FC<
 	StepComponentBaseProps<ConvertArgs> & {
-		columns: string[]
+		columns: string[],
+		columnsMetadata: ColumnMetadata[]
 	}
-> = memo(function ConvertBase({ step, onChange, columns }) {
+> = memo(function ConvertBase({ step, onChange, columns, columnsMetadata }) {
 	const inputs = useMemo<FormInput<ConvertArgs>[]>(
 		() => [
 			inputColumnList(step, columns, 'Columns to Convert'),
@@ -38,6 +41,13 @@ export const ConvertBase: React.FC<
 				type: FormInputType.Text,
 				current: step.args.radix ? `${step.args.radix}` : '',
 				onChange: (s, opt) => (s.args.radix = num(opt as string)),
+			},
+			{
+				label: 'Delimiter',
+				if: step.args.type === ParseType.Array || isInputColumnArray(columnsMetadata, step.args.columns),
+				type: FormInputType.Text,
+				current: step.args.delimiter ? `${step.args.delimiter}` : '',
+				onChange: (s, opt) => (s.args.delimiter = opt as string),
 			},
 			{
 				label: 'Date format pattern',
@@ -59,3 +69,19 @@ export const ConvertBase: React.FC<
 
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
+
+function isInputColumnArray(columnsMetadata: ColumnMetadata[], columns: string[]){
+	let arrayFlag: boolean = false
+	let index: number = 0
+
+	while(!arrayFlag && index < columns.length){
+		let result: number = columnsMetadata.findIndex(element => element.columnName === columns[index] && element.type === DataType.Array)
+
+		if(result !== -1)
+			arrayFlag = true
+		else
+			index++
+	}
+
+	return arrayFlag
+}
