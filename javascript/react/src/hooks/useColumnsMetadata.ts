@@ -10,21 +10,15 @@ export function useColumnsMetadata(
 	table: ColumnTable | undefined,
 	filter?: (name: string) => boolean,
 ): ColumnMetadata[] {
-    const columns = table?.columnNames(filter) || []
-    const result: ColumnMetadata[] = []
-
-    columns.forEach(col => {
-        let type: DataType
-
-        if (!table || !col) {
-			type = DataType.Unknown
-		}
-        else
-            type = columnType(table, col)
-
-        result.push({columnName: col, type: type})
-    })
-	return useMemo(() => result, [table, filter, result])
+    
+	return useMemo(() => {
+        const columns = table?.columnNames(filter) || []
+        const result: ColumnMetadata[] = columns.map(col => {
+            const type: DataType = (!table || !col) ? DataType.Unknown : columnType(table,col)
+            return {columnName: col, type: type}
+        })
+        return result
+    }, [table, filter])
 }
 
 export interface ColumnMetadata{
