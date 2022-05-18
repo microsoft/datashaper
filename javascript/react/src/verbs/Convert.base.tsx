@@ -21,7 +21,7 @@ import { inputColumnList } from '../verbForm/VerbFormFactories.js'
  */
 export const ConvertBase: React.FC<
 	StepComponentBaseProps<ConvertArgs> & {
-		columns: string[],
+		columns: string[]
 		columnsMetadata: ColumnMetadata[]
 	}
 > = memo(function ConvertBase({ step, onChange, columns, columnsMetadata }) {
@@ -44,7 +44,9 @@ export const ConvertBase: React.FC<
 			},
 			{
 				label: 'Delimiter',
-				if: step.args.type === ParseType.Array || isInputColumnArray(columnsMetadata, step.args.columns),
+				if:
+					step.args.type === ParseType.Array ||
+					isInputColumnArray(columnsMetadata, step.args.columns),
 				type: FormInputType.Text,
 				current: step.args.delimiter ? `${step.args.delimiter}` : '',
 				onChange: (s, opt) => (s.args.delimiter = opt as string),
@@ -70,18 +72,12 @@ export const ConvertBase: React.FC<
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
 
-function isInputColumnArray(columnsMetadata: ColumnMetadata[], columns: string[]){
-	let arrayFlag = false
-	let index = 0
-
-	while(!arrayFlag && index < columns.length){
-		const result: number = columnsMetadata.findIndex(element => element.columnName === columns[index] && element.type === DataType.Array)
-
-		if(result !== -1)
-			arrayFlag = true
-		
-		index++
-	}
-
-	return arrayFlag
+function isInputColumnArray(
+	columnsMetadata: ColumnMetadata[],
+	columns: string[],
+) {
+	return columns.some(column => {
+		const meta = columnsMetadata.find(meta => meta.columnName === column)
+		return meta?.type === DataType.Array
+	})
 }

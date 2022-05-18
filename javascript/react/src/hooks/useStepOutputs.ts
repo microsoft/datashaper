@@ -8,7 +8,7 @@ import { useMemo } from 'react'
 /**
  * create a parallel array of output names for the steps
  *
- * @param graph The graph manager
+ * @param graph - The graph manager
  * @returns
  */
 export function useStepOutputs(
