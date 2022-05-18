@@ -1,9 +1,0 @@
-releases:
-  "@data-wrangling-components/core": minor
-  "@data-wrangling-components/primitives": minor
-  "@data-wrangling-components/react": minor
-  "@data-wrangling-components/react-controls": minor
-  "@data-wrangling-components/react-hocs": minor
-  "@data-wrangling-components/react-hooks": minor
-  "@data-wrangling-components/react-verbs": minor
-  "@data-wrangling-components/webapp": minor

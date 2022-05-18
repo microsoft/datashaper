@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/verb-guidance",
-	"version": "0.1.13",
+	"version": "0.1.14",
 	"type": "module",
 	"main": "dist/index.js",
 	"author": "Nathan Evans <naevans@microsoft.com>",
