@@ -84,7 +84,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 					<TableDropdown
 						options={tableOptions}
 						label={inputTableLabel || 'Input table'}
-						selectedKey={tableId}
+						selectedKey={tableId ?? null}
 						onChange={onInputTableChange}
 					/>
 				) : null}
