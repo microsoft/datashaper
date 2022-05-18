@@ -102,7 +102,7 @@ export function useOnSaveStep(
 			const stepResult = updateStep(step, index)
 			updateStepOutput(stepResult, output)
 		},
-		[graph, updateStepOutput, updateStep],
+		[updateStepOutput, updateStep],
 	)
 }
 

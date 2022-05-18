@@ -10,7 +10,7 @@ import { useCallback } from 'react'
  * that each step will have a single output, which will become an invariant we expand upon
  * in the future.
  *
- * @param graph the graph manager
+ * @param graph - the graph manager
  * @returns A callback to use when the step output changes
  */
 export function useHandleStepOutputChanged(
