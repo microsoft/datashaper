@@ -132,6 +132,8 @@ export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertA
 // @public (undocumented)
 export interface ConvertArgs extends InputColumnListArgs {
     // (undocumented)
+    delimiter?: string;
+    // (undocumented)
     formatPattern?: string;
     radix?: number;
     // (undocumented)
@@ -648,6 +650,8 @@ export type OutputPortBinding = string | NamedOutputPortBinding;
 //
 // @public
 export enum ParseType {
+    // (undocumented)
+    Array = "array",
     // (undocumented)
     Boolean = "boolean",
     // (undocumented)

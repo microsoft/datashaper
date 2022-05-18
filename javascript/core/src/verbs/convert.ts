@@ -19,6 +19,8 @@ export interface ConvertArgs extends InputColumnListArgs {
 	 */
 	radix?: number
 
+	delimiter?: string
+
 	formatPattern?: string
 }
 
@@ -27,11 +29,11 @@ export interface ConvertArgs extends InputColumnListArgs {
  */
 export const convertStep: ColumnTableStep<ConvertArgs> = (
 	input,
-	{ columns, type, radix, formatPattern },
+	{ columns, type, radix, delimiter, formatPattern },
 ) => {
 	// note that this applies the specified parse to every column equally
 	const dArgs = columns.reduce((acc, cur) => {
-		acc[cur] = parseType(cur, type, radix, formatPattern)
+		acc[cur] = parseType(cur, type, radix, delimiter, formatPattern)
 		return acc
 	}, {} as any)
 	return input.derive(dArgs)
@@ -41,6 +43,7 @@ function parseType(
 	column: string,
 	type: ParseType,
 	radix?: number,
+	delimiter?: string,
 	formatPattern?: string,
 ) {
 	const parseTime = timeParse(formatPattern ?? '%Y-%m-%d')
@@ -63,6 +66,8 @@ function parseType(
 				return op.parse_int(value, radix)
 			case ParseType.Decimal:
 				return op.parse_float(value)
+			case ParseType.Array:
+				return op.split(value, delimiter, 10000000)
 			case ParseType.String: {
 				if (
 					determineType(value) === DataType.String &&
@@ -77,6 +82,9 @@ function parseType(
 					return null
 
 				if (value instanceof Date) return formatTime(value)
+
+				if(determineType(value) === DataType.Array)
+					return op.join(value, delimiter)
 
 				return value !== undefined && value !== null ? value.toString() : value
 			}

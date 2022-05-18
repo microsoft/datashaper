@@ -164,6 +164,9 @@
                     },
                     "type": "array"
                 },
+                "delimiter": {
+                    "type": "string"
+                },
                 "formatPattern": {
                     "type": "string"
                 },
@@ -581,6 +584,7 @@
         "ParseType": {
             "description": "This is a subset of data types available for parsing operations",
             "enum": [
+                "array",
                 "boolean",
                 "date",
                 "float",
