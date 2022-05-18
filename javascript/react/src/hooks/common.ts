@@ -75,7 +75,7 @@ export function useResetArgs(): (stepArgs: unknown) => object {
 			if (typeof args[key] === 'string' && key !== 'to') {
 				args[key] = ''
 			} else if (typeof args[key] === 'number') {
-				args[key] = 0
+				args[key] = undefined
 			} else if (typeof args[key] === 'boolean') {
 				args[key] = undefined
 			} else if (Array.isArray(args[key])) {
