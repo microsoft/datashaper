@@ -15,7 +15,7 @@
 		"generate_schema": "typescript-json-schema javascript/schema/tsconfig.json WorfklowJson > schema/workflow.json",
 		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"ci": "run-s build generate_schema lint jest git_is_clean",
-		"publish_packages": "yarn workspaces foreach --exclude '@data-wrangling-components/project' --exclude '@data-wrangling-components/schema' -pv npm publish --tolerate-republish --access public",
+		"publish_packages": "yarn workspaces foreach --exclude '@data-wrangling-components/project' --exclude '@data-wrangling-components/schema' --exclude '@data-wrangling-components/webapp' -pv npm publish --tolerate-republish --access public",
 		"cut_schema": "yarn node scripts/release-schema.mjs",
 		"release": "run-s publish_packages cut_schema",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
