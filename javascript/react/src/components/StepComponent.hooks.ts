@@ -15,6 +15,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
 import { useCallback, useEffect, useMemo } from 'react'
 
+import { useResetTableRelatedArgs } from '../hooks/common.js'
 import type {
 	DropdownChangeHandler,
 	TextFieldChangeHandler,
@@ -62,6 +63,8 @@ export function useInputTableChanged(
 	graph: GraphManager | undefined,
 	onChange: (step: Step) => void,
 ): DropdownChangeHandler {
+	const resetTableArgs = useResetTableRelatedArgs()
+
 	return useDropdownChangeHandler(
 		step,
 		(s, val) => {
@@ -75,6 +78,7 @@ export function useInputTableChanged(
 				// wire up the Step's input field
 				const node = outputNode ?? tableName
 				s.input[NodeInput.Source] = { node }
+				resetTableArgs(s.args)
 			} else {
 				// no value: delete the input
 				delete s.input[NodeInput.Source]

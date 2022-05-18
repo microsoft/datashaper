@@ -67,3 +67,19 @@ export function useFormattedColumnArg(): (
 		return args
 	}, [])
 }
+
+export function useResetTableRelatedArgs(): (stepArgs: unknown) => object {
+	return useCallback((stepArgs: unknown) => {
+		const args = stepArgs as Record<string, unknown>
+		Object.keys(args).forEach(key => {
+			if (typeof args[key] === 'string') {
+				args[key] = ''
+			} else if (Array.isArray(args[key])) {
+				args[key] = []
+			} else if (typeof args[key] === 'object') {
+				args[key] = {}
+			}
+		})
+		return args
+	}, [])
+}
