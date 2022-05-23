@@ -109,7 +109,7 @@ export function useHandleZipUpload(
 	return useHandleOnUploadClick(['.zip'], handler)
 }
 
-function useHandleOnUploadClick(
+export function useHandleOnUploadClick(
 	acceptedFileTypes: string[],
 	handleCollection?: (fileCollection: FileCollection) => void,
 ): () => void {
