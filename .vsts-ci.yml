@@ -92,7 +92,7 @@ stages:
             displayName: Archive WebApp
             inputs:
               targetType: 'inline'
-              script: yarn archive:client
+              script: yarn archive:webapp
 
           - task: AzureRmWebAppDeployment@4
             displayName: Deploy Webapp
