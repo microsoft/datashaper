@@ -30,5 +30,11 @@ jobs:
       - run: yarn install
         name: Install Dependencies
 
-      - run: yarn ci
+      - name: TurboRepo local server
+        uses: felixmosh/turborepo-gh-artifacts@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ secrets.TURBO_SERVER_TOKEN }}
+
+      - run: yarn ci --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
         name: Execute Tests
