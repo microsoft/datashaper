@@ -4,8 +4,6 @@ const path = require('path')
 
 module.exports = {
   "stories": [
-    path.join(__dirname, "../stories/**/*.stories.mdx"),
-    path.join(__dirname, "../stories/**/*.stories.@(js|jsx|ts|tsx)"),
     path.join(__dirname, "../src/**/*.stories.mdx"),
     path.join(__dirname, "../src/**/*.stories.@(js|jsx|ts|tsx)")
   ],

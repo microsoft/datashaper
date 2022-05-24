@@ -1,9 +1,10 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import './Button.css'
 
-/**
- * Primary UI component for user interaction
- */
-export const Button: React.FC<{
+export interface ButtonProps {
 	/**
 	 * Button contents
 	 */
@@ -24,7 +25,18 @@ export const Button: React.FC<{
 	 * Optional click handler
 	 */
 	onClick?: () => void
-}> = ({ primary, backgroundColor, size, label, ...props }) => {
+}
+
+/**
+ * Primary UI component for user interaction
+ */
+export const Button: React.FC<ButtonProps> = ({
+	primary,
+	backgroundColor,
+	size,
+	label,
+	...props
+}) => {
 	const mode = primary
 		? 'storybook-button--primary'
 		: 'storybook-button--secondary'
@@ -34,7 +46,7 @@ export const Button: React.FC<{
 			className={['storybook-button', `storybook-button--${size}`, mode].join(
 				' ',
 			)}
-			style={backgroundColor && { backgroundColor }}
+			style={backgroundColor ? { backgroundColor } : undefined}
 			{...props}
 		>
 			{label}

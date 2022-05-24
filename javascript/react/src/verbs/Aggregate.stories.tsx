@@ -1,10 +1,15 @@
-import type { StepComponentProps } from '../types.js'
-import { AggregateBase } from './Aggregate.base.js'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import type { AggregateArgs } from '@data-wrangling-components/core'
 import { FieldAggregateOperation } from '@data-wrangling-components/core'
 
+import type { StepComponentProps } from '../types.js'
+import { AggregateBase } from './Aggregate.base.js'
+
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const storyMetadata = {
 	title: 'Verbs/Aggregate Base',
 	component: AggregateBase,
 	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
@@ -17,13 +22,16 @@ export default {
 		},
 	},
 }
+export default storyMetadata
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template = (args: StepComponentProps<AggregateArgs>) => (
 	<AggregateBase {...args} columns={['symbol', 'price', 'date']} />
 )
 
-export const Primary = Template.bind({}) as any
+export const Primary = Template.bind({}) as any as {
+	args: StepComponentProps<AggregateArgs>
+}
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {

@@ -1,12 +1,23 @@
-import { Button } from './Button'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import './Header.css'
 
-export const Header: React.FC<{
+import { Button } from './Button.js'
+
+export interface HeaderProps {
 	user?: { name: string }
-	onLogin: () => void
-	onLogout: () => void
-	onCreateAccount: () => void
-}> = ({ user, onLogin, onLogout, onCreateAccount }) => (
+	onLogin?: () => void
+	onLogout?: () => void
+	onCreateAccount?: () => void
+}
+export const Header: React.FC<HeaderProps> = ({
+	user,
+	onLogin,
+	onLogout,
+	onCreateAccount,
+}) => (
 	<header>
 		<div className="wrapper">
 			<div>

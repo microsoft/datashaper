@@ -1,8 +1,12 @@
-import { DetailText } from './DetailText'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import { DetailText } from './DetailText.js'
 import type { DetailTextProps } from './DetailText.types.js'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const storyMetadata = {
 	title: 'Components/DetailText',
 	component: DetailText,
 	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
@@ -15,11 +19,12 @@ export default {
 		},
 	},
 }
+export default storyMetadata
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template = (args: DetailTextProps) => <DetailText {...args} />
 
-export const Primary = Template.bind({}) as any
+export const Primary = Template.bind({}) as any as { args: DetailTextProps }
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
