@@ -5,7 +5,7 @@
 		"_publish": "turbo run release",
 		"_ci": "SB_QUIET=true turbo run ci",
 		"_cut_schema": "yarn node scripts/release-schema.mjs",
-		"_isclean": "essex git-is-clean",
+		"_isclean": "git diff-index HEAD --quiet || git status",
 		"_pause": "sleep 3",
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
