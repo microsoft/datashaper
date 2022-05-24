@@ -1,2 +1,3 @@
 declined:
+  - "@data-wrangling-components/react"
   - "@data-wrangling-components/webapp"
