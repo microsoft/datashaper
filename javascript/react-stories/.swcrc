@@ -1,0 +1,25 @@
+{
+	"sourceMaps": true,
+	"module": {
+		"type": "commonjs"
+	},
+	"jsc": {
+		"parser": {
+			"syntax": "typescript",
+			"jsx": true
+		},
+		"transform": {
+			"react": {
+				"runtime": "automatic",
+				"useBuiltins": true
+			}
+		}
+	},
+	"env": {
+		"coreJs": "3",
+		"targets": {
+			"chrome": 100
+		},
+		"mode": "usage"
+	}
+}
