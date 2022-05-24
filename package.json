@@ -6,6 +6,7 @@
 		"_ci": "turbo run ci",
 		"_cut_schema": "yarn node scripts/release-schema.mjs",
 		"_isclean": "essex git-is-clean",
+		"_pause": "sleep 3",
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
 		"clean": "turbo run clean",
@@ -17,7 +18,7 @@
 		"prettify": "essex prettify",
 		"release": "run-s _publish _cut_schema",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode",
-		"ci": "run-s _ci _isclean"
+		"ci": "run-s _ci _pause _isclean"
 	},
 	"prettier": "@essex/prettier-config",
 	"devDependencies": {
