@@ -28,12 +28,14 @@
 		"start:client": "yarn start",
 		"build:client": "yarn build && yarn archive",
 		"archive": "essex zip --baseDir build deploy.zip '**/*'",
-		"archive:client": "yarn archive"
+		"archive:client": "yarn archive",
+		"lint": "essex lint --fix"
 	},
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",
 		"@data-wrangling-components/react": "workspace:^",
 		"@data-wrangling-components/utilities": "workspace:^",
+		"@data-wrangling-components/verb-guidance": "workspace:^",
 		"@essex/arquero": "^2.0.2",
 		"@essex/arquero-react": "^1.0.5",
 		"@essex/hooks": "^4.0.11",

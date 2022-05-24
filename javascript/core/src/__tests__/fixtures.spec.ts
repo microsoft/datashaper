@@ -13,6 +13,10 @@ import { createGraph } from '../engine/graph.js'
 import { Workflow } from '../engine/Workflow.js'
 import { createTableStore } from './createTableStore.js'
 
+// Set the root cwd to the package root.
+// this makes loading datafiles by file-url in the project more straightforward
+process.chdir('../..')
+
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')

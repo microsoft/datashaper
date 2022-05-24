@@ -1553,6 +1553,7 @@ __metadata:
   dependencies:
     "@essex/arquero": ^2.0.2
     "@essex/dataflow": ^0.1.1
+    "@essex/jest-config": ^21.0.11
     "@essex/scripts": ^22.0.1
     "@essex/tsconfig-base": ^1.0.2
     "@types/d3-time-format": ^4.0.0
@@ -1563,6 +1564,7 @@ __metadata:
     ajv: ^8.11.0
     arquero: ^4.8.8
     d3-time-format: ^4.1.0
+    jest: ^28.1.0
     lodash-es: ^4.17.21
     regenerator-runtime: ^0.13.9
     rxjs: ^7.5.5
@@ -1592,15 +1594,12 @@ __metadata:
     arquero: ^4.8.8
     eslint: ^8.15.0
     husky: ^8.0.1
-    jest: ^28.1.0
-    jest-environment-jsdom: ^28.1.0
     lint-staged: ^12.4.1
-    node-fetch: ^3.2.4
     npm-run-all: ^4.1.5
     prettier: ^2.6.2
     semver: ^7.3.7
+    turbo: ^1.2.12
     typescript: ^4.6.4
-    typescript-json-schema: ^0.53.0
   languageName: unknown
   linkType: soft
 
@@ -1667,6 +1666,7 @@ __metadata:
     "@essex/scripts": ^22.0.1
     "@essex/tsconfig-base": ^1.0.2
     typescript: ^4.6.4
+    typescript-json-schema: ^0.53.0
   languageName: unknown
   linkType: soft
 
@@ -1674,12 +1674,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/utilities@workspace:javascript/utilities"
   dependencies:
+    "@essex/jest-config": ^21.0.11
     "@essex/scripts": ^22.0.1
     "@essex/tsconfig-base": ^1.0.2
     "@essex/vite-config": ^19.0.8
     "@types/node": ^17.0.34
     "@zip.js/zip.js": ^2.4.12
     arquero: ^4.8.8
+    jest: ^28.1.0
+    jest-environment-jsdom: ^28.1.0
+    node-fetch: ^3.2.4
     regenerator-runtime: ^0.13.9
     typescript: ^4.6.4
   peerDependencies:
@@ -1707,6 +1711,7 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/react": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
+    "@data-wrangling-components/verb-guidance": "workspace:^"
     "@essex/arquero": ^2.0.2
     "@essex/arquero-react": ^1.0.5
     "@essex/hooks": ^4.0.11
@@ -1962,6 +1967,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@essex/jest-config@npm:^21.0.11":
+  version: 21.0.11
+  resolution: "@essex/jest-config@npm:21.0.11"
+  dependencies:
+    "@essex/swc-opts": ^20.0.13
+    "@swc/core": 1.2.186
+    "@swc/jest": ^0.2.21
+    "@types/jest": ^27.5.1
+    identity-obj-proxy: ^3.0.0
+    lodash: ^4.17.21
+  peerDependencies:
+    jest: ">= 26.4"
+  peerDependenciesMeta:
+    jest:
+      optional: true
+  checksum: 1de1620d8ebdf597c520d4a550b0d8239bf8fa3aca8a4de5f40b9c5084c0c30d632b68e0e435729612ee60e7d9fc9b2b633fc91b39e31ae9c26d4bb179be4a5d
+  languageName: node
+  linkType: hard
+
 "@essex/prettier-config@npm:^18.0.2":
   version: 18.0.2
   resolution: "@essex/prettier-config@npm:18.0.2"
@@ -2081,6 +2105,17 @@ __metadata:
     lodash: ^4.17.21
     tslib: ^2.4.0
   checksum: c8c3c8a9f1561786ceecb5e63fc7866be5caea87a687a493874e81218b93335a8fa5f8159ee2b9d9bf6566ea0397193803142dcd462f33e5e6c5e9908a12a9f6
+  languageName: node
+  linkType: hard
+
+"@essex/swc-opts@npm:^20.0.13":
+  version: 20.0.13
+  resolution: "@essex/swc-opts@npm:20.0.13"
+  dependencies:
+    "@swc/core": 1.2.186
+    lodash: ^4.17.21
+    tslib: ^2.4.0
+  checksum: 0705d5e66f063a0ea0e86f10136439a180a73c06a86f4e5f8b1050976cdcf91593a3b9ddb5bbcf8c4db644a549a59ac49da75ebc581775f8edd0b73d260ba437
   languageName: node
   linkType: hard
 
@@ -3045,9 +3080,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-android-arm-eabi@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-android-arm-eabi@npm:1.2.186"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
 "@swc/core-android-arm64@npm:1.2.172":
   version: 1.2.172
   resolution: "@swc/core-android-arm64@npm:1.2.172"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@swc/core-android-arm64@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-android-arm64@npm:1.2.186"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -3059,9 +3108,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-darwin-arm64@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-darwin-arm64@npm:1.2.186"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@swc/core-darwin-x64@npm:1.2.172":
   version: 1.2.172
   resolution: "@swc/core-darwin-x64@npm:1.2.172"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@swc/core-darwin-x64@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-darwin-x64@npm:1.2.186"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -3073,9 +3136,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-freebsd-x64@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-freebsd-x64@npm:1.2.186"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@swc/core-linux-arm-gnueabihf@npm:1.2.172":
   version: 1.2.172
   resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.172"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-arm-gnueabihf@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.186"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -3087,9 +3164,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-linux-arm64-gnu@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.2.186"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@swc/core-linux-arm64-musl@npm:1.2.172":
   version: 1.2.172
   resolution: "@swc/core-linux-arm64-musl@npm:1.2.172"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-arm64-musl@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-linux-arm64-musl@npm:1.2.186"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
@@ -3101,9 +3192,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-linux-x64-gnu@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-linux-x64-gnu@npm:1.2.186"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@swc/core-linux-x64-musl@npm:1.2.172":
   version: 1.2.172
   resolution: "@swc/core-linux-x64-musl@npm:1.2.172"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-x64-musl@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-linux-x64-musl@npm:1.2.186"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
@@ -3115,6 +3220,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-win32-arm64-msvc@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.2.186"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@swc/core-win32-ia32-msvc@npm:1.2.172":
   version: 1.2.172
   resolution: "@swc/core-win32-ia32-msvc@npm:1.2.172"
@@ -3122,9 +3234,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-win32-ia32-msvc@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.2.186"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "@swc/core-win32-x64-msvc@npm:1.2.172":
   version: 1.2.172
   resolution: "@swc/core-win32-x64-msvc@npm:1.2.172"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@swc/core-win32-x64-msvc@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core-win32-x64-msvc@npm:1.2.186"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -3179,6 +3305,56 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core@npm:1.2.186":
+  version: 1.2.186
+  resolution: "@swc/core@npm:1.2.186"
+  dependencies:
+    "@swc/core-android-arm-eabi": 1.2.186
+    "@swc/core-android-arm64": 1.2.186
+    "@swc/core-darwin-arm64": 1.2.186
+    "@swc/core-darwin-x64": 1.2.186
+    "@swc/core-freebsd-x64": 1.2.186
+    "@swc/core-linux-arm-gnueabihf": 1.2.186
+    "@swc/core-linux-arm64-gnu": 1.2.186
+    "@swc/core-linux-arm64-musl": 1.2.186
+    "@swc/core-linux-x64-gnu": 1.2.186
+    "@swc/core-linux-x64-musl": 1.2.186
+    "@swc/core-win32-arm64-msvc": 1.2.186
+    "@swc/core-win32-ia32-msvc": 1.2.186
+    "@swc/core-win32-x64-msvc": 1.2.186
+  dependenciesMeta:
+    "@swc/core-android-arm-eabi":
+      optional: true
+    "@swc/core-android-arm64":
+      optional: true
+    "@swc/core-darwin-arm64":
+      optional: true
+    "@swc/core-darwin-x64":
+      optional: true
+    "@swc/core-freebsd-x64":
+      optional: true
+    "@swc/core-linux-arm-gnueabihf":
+      optional: true
+    "@swc/core-linux-arm64-gnu":
+      optional: true
+    "@swc/core-linux-arm64-musl":
+      optional: true
+    "@swc/core-linux-x64-gnu":
+      optional: true
+    "@swc/core-linux-x64-musl":
+      optional: true
+    "@swc/core-win32-arm64-msvc":
+      optional: true
+    "@swc/core-win32-ia32-msvc":
+      optional: true
+    "@swc/core-win32-x64-msvc":
+      optional: true
+  bin:
+    swcx: run_swcx.js
+  checksum: da59da779ee07a6e9b23ab70c61adbb13acdcfc2ad177fb56fd817a185bad125e1cd47d083c449fbd2071a60fefd713551aefb2ab756ec53976a42637f54a285
+  languageName: node
+  linkType: hard
+
 "@swc/jest@npm:^0.2.20":
   version: 0.2.20
   resolution: "@swc/jest@npm:0.2.20"
@@ -3187,6 +3363,17 @@ __metadata:
   peerDependencies:
     "@swc/core": "*"
   checksum: 160a2d0336c416ec38ad267892ba67696c853318b207cfc9924da09a3318345bc37ca255782764ef651399cb8c0e9976ebdf90284799acb6b0c45c5d8bc4edbc
+  languageName: node
+  linkType: hard
+
+"@swc/jest@npm:^0.2.21":
+  version: 0.2.21
+  resolution: "@swc/jest@npm:0.2.21"
+  dependencies:
+    "@jest/create-cache-key-function": ^27.4.2
+  peerDependencies:
+    "@swc/core": "*"
+  checksum: 8208032fc7ccc26a9bcae744b7b7dc2d3ea313af1ea049e95dfe3c8b6abd708c6f8fd0a2cce45315e7e5627044f6c3e08363b89eb958df7d8a8693a2e45edecb
   languageName: node
   linkType: hard
 
@@ -13149,6 +13336,147 @@ __metadata:
   version: 0.0.6
   resolution: "tunnel@npm:0.0.6"
   checksum: c362948df9ad34b649b5585e54ce2838fa583aa3037091aaed66793c65b423a264e5229f0d7e9a95513a795ac2bd4cb72cda7e89a74313f182c1e9ae0b0994fa
+  languageName: node
+  linkType: hard
+
+"turbo-darwin-64@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-darwin-64@npm:1.2.12"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"turbo-darwin-arm64@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-darwin-arm64@npm:1.2.12"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"turbo-freebsd-64@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-freebsd-64@npm:1.2.12"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"turbo-freebsd-arm64@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-freebsd-arm64@npm:1.2.12"
+  conditions: os=freebsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"turbo-linux-32@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-linux-32@npm:1.2.12"
+  conditions: os=linux & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"turbo-linux-64@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-linux-64@npm:1.2.12"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"turbo-linux-arm64@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-linux-arm64@npm:1.2.12"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"turbo-linux-arm@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-linux-arm@npm:1.2.12"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"turbo-linux-mips64le@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-linux-mips64le@npm:1.2.12"
+  conditions: os=linux & cpu=mips64el
+  languageName: node
+  linkType: hard
+
+"turbo-linux-ppc64le@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-linux-ppc64le@npm:1.2.12"
+  conditions: os=linux & cpu=ppc64
+  languageName: node
+  linkType: hard
+
+"turbo-windows-32@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-windows-32@npm:1.2.12"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"turbo-windows-64@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-windows-64@npm:1.2.12"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"turbo-windows-arm64@npm:1.2.12":
+  version: 1.2.12
+  resolution: "turbo-windows-arm64@npm:1.2.12"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"turbo@npm:^1.2.12":
+  version: 1.2.12
+  resolution: "turbo@npm:1.2.12"
+  dependencies:
+    turbo-darwin-64: 1.2.12
+    turbo-darwin-arm64: 1.2.12
+    turbo-freebsd-64: 1.2.12
+    turbo-freebsd-arm64: 1.2.12
+    turbo-linux-32: 1.2.12
+    turbo-linux-64: 1.2.12
+    turbo-linux-arm: 1.2.12
+    turbo-linux-arm64: 1.2.12
+    turbo-linux-mips64le: 1.2.12
+    turbo-linux-ppc64le: 1.2.12
+    turbo-windows-32: 1.2.12
+    turbo-windows-64: 1.2.12
+    turbo-windows-arm64: 1.2.12
+  dependenciesMeta:
+    turbo-darwin-64:
+      optional: true
+    turbo-darwin-arm64:
+      optional: true
+    turbo-freebsd-64:
+      optional: true
+    turbo-freebsd-arm64:
+      optional: true
+    turbo-linux-32:
+      optional: true
+    turbo-linux-64:
+      optional: true
+    turbo-linux-arm:
+      optional: true
+    turbo-linux-arm64:
+      optional: true
+    turbo-linux-mips64le:
+      optional: true
+    turbo-linux-ppc64le:
+      optional: true
+    turbo-windows-32:
+      optional: true
+    turbo-windows-64:
+      optional: true
+    turbo-windows-arm64:
+      optional: true
+  bin:
+    turbo: bin/turbo
+  checksum: 75ad427d0165b96f9381e50e8a67f70230b8cef749f247aa38b4af5499168ca61a26a88629543b6478c0bbc8992523319a52917407b413fe988173f1a5e9ff80
   languageName: node
   linkType: hard
 

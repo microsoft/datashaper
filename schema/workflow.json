@@ -112,14 +112,7 @@
                     "type": "array"
                 },
                 "logical": {
-                    "enum": [
-                        "and",
-                        "nand",
-                        "nor",
-                        "or",
-                        "xor"
-                    ],
-                    "type": "string"
+                    "$ref": "#/definitions/BooleanOperator"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -348,14 +341,7 @@
                     "type": "array"
                 },
                 "logical": {
-                    "enum": [
-                        "and",
-                        "nand",
-                        "nor",
-                        "or",
-                        "xor"
-                    ],
-                    "type": "string"
+                    "$ref": "#/definitions/BooleanOperator"
                 }
             },
             "type": "object"
@@ -437,19 +423,22 @@
                     "type": "array"
                 },
                 "strategy": {
-                    "enum": [
-                        "anti join",
-                        "cross",
-                        "full outer",
-                        "inner",
-                        "left outer",
-                        "right outer",
-                        "semi join"
-                    ],
-                    "type": "string"
+                    "$ref": "#/definitions/JoinStrategy"
                 }
             },
             "type": "object"
+        },
+        "JoinStrategy": {
+            "enum": [
+                "anti join",
+                "cross",
+                "full outer",
+                "inner",
+                "left outer",
+                "right outer",
+                "semi join"
+            ],
+            "type": "string"
         },
         "LookupArgs": {
             "properties": {
@@ -572,11 +561,7 @@
                     "type": "string"
                 },
                 "direction": {
-                    "enum": [
-                        "asc",
-                        "desc"
-                    ],
-                    "type": "string"
+                    "$ref": "#/definitions/SortDirection"
                 }
             },
             "type": "object"
@@ -670,6 +655,13 @@
                 }
             },
             "type": "object"
+        },
+        "SortDirection": {
+            "enum": [
+                "asc",
+                "desc"
+            ],
+            "type": "string"
         },
         "SpreadArgs": {
             "properties": {
