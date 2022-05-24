@@ -20,7 +20,25 @@ module.exports = {
   },
   webpackFinal(config) {
     // resolve files ending with .ts
+    if (!config.resolve.plugins) {
+      config.resolve.plugins = []
+    }
+    // Resolve extensions from TS code
     config.resolve.plugins.push(new ResolveTypescriptPlugin())
+
+    // Need to disable this because Arrow v3 has mangled esm; 
+    // Remove this when arquero adopts Arrow v8 (https://github.com/uwdata/arquero/pull/277)
+    // config.resolve.fullySpecified = false
+
+    // run transpiler over monorepo linked projects
+    const xformDwc = { ...config.module.rules[0], include: /@data-wrangling-components/, exclude: undefined }
+    const xformEssex = { ...config.module.rules[0], include: /@essex\/(arquero|dataflow)/, exclude: undefined }
+    const importMeta = {
+      test: /\.js$/,
+      loader: require.resolve('@open-wc/webpack-import-meta-loader'),
+    }
+    config.module.rules.push(xformDwc, xformEssex, importMeta)
+
     return config
   }
 }
