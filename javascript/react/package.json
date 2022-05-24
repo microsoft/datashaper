@@ -2,6 +2,7 @@
 	"name": "@data-wrangling-components/react",
 	"version": "6.0.0",
 	"main": "src/index.ts",
+	"type": "module",
 	"publishConfig": {
 		"main": "dist/index.js",
 		"types": "dist/index.d.ts"
@@ -26,7 +27,7 @@
 		"url": "https://github.com/microsoft/data-wrangling-components/issues"
 	},
 	"scripts": {
-		"clean": "essex clean dist docs",
+		"clean": "essex clean dist docs storybook-static",
 		"build": "essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
 		"release": "yarn npm publish --tolerate-republish --access public",
