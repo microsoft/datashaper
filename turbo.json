@@ -3,11 +3,11 @@
 	"baseBranch": "origin/main",
 	"pipeline": {
 		"clean": {
-			"outputs": ["dist/", "docs/", "build/"]
+			"outputs": ["dist/", "docs/", "build/", "storybook-static/"]
 		},
 		"build": {
-			"dependsOn": [],
-			"outputs": ["dist/", "docs/", "build/"]
+			"dependsOn": ["^build"],
+			"outputs": ["dist/", "docs/", "build/", "storybook-static/"]
 		},
 		"test": {
 			"dependsOn": [],
@@ -18,7 +18,8 @@
 			"outputs": []
 		},
 		"bundle": {
-			"dependsOn": ["build"]
+			"dependsOn": ["^build"],
+			"outputs": ["build/", "storybook-static/"]
 		},
 		"ci": {
 			"dependsOn": ["build", "lint", "test", "bundle"]

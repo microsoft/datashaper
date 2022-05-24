@@ -3,10 +3,10 @@ build/
 dist/
 out/
 lib/
+storybook-static/
 coverage/
 docsTemp/
 .turbo/
-
 .swc/
 stats.json
 
