@@ -17,6 +17,12 @@ module.exports = {
     builder: 'webpack4'
   },
   webpackFinal(config) {
+    // mute build output
+    if (process.env.CI) {
+      config.stats = 'errors-only'
+      config.plugins = config.plugins.filter(({ constructor }) => constructor.name !== "ProgressPlugin")
+    }
+
     // resolve files ending with .ts
     if (!config.resolve.plugins) {
       config.resolve.plugins = []
