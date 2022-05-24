@@ -28,6 +28,9 @@ module.exports = {
 
     // Need to disable this because Arrow v3 has mangled esm; 
     // Remove this when arquero adopts Arrow v8 (https://github.com/uwdata/arquero/pull/277)
+    //
+    // Note: didn't work in WP5; using WP4 until this is resolved
+    //
     // config.resolve.fullySpecified = false
 
     // run transpiler over monorepo linked projects
