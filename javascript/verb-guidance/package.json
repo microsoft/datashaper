@@ -29,7 +29,8 @@
 		"clean": "essex clean dist docs",
 		"build:compile": "tsc --project tsconfig.build.json",
 		"start": "yarn build",
-		"build": "essex build-md-index --include ../../docs/verbs"
+		"build": "essex build-md-index --include ../../docs/verbs",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.1",

@@ -29,7 +29,8 @@
 	"scripts": {
 		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck",
-		"lint": "essex lint --fix"
+		"lint": "essex lint --fix",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",

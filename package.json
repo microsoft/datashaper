@@ -2,6 +2,10 @@
 	"name": "@data-wrangling-components/project",
 	"private": true,
 	"scripts": {
+		"_publish": "yarn workspaces foreach -piv run release",
+		"_ci": "turbo run ci",
+		"_cut_schema": "yarn node scripts/release-schema.mjs",
+		"_isclean": "essex git-is-clean",
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
 		"clean": "turbo run clean",
@@ -10,16 +14,10 @@
 		"test": "turbo run test",
 		"start": "yarn workspaces foreach -piv run start",
 		"deploy": "yarn workspaces foreach -piv run deploy",
-		"_ci_packages": "turbo run ci",
-		"git_is_clean": "essex git-is-clean",
 		"prettify": "essex prettify",
-		"generate_schema": "typescript-json-schema javascript/schema/tsconfig.json WorfklowJson > schema/workflow.json",
-		"jest": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
-		"ci": "run-s _ci_packages generate_schema git_is_clean",
-		"publish_packages": "yarn workspaces foreach --exclude '@data-wrangling-components/project' --exclude '@data-wrangling-components/schema' --exclude '@data-wrangling-components/webapp' -pv npm publish --tolerate-republish --access public",
-		"cut_schema": "yarn node scripts/release-schema.mjs",
-		"release": "run-s publish_packages cut_schema",
-		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
+		"release": "run-s _publish _cut_schema",
+		"update_sdks": "yarn dlx @yarnpkg/sdks vscode",
+		"ci": "run-s _ci _isclean"
 	},
 	"prettier": "@essex/prettier-config",
 	"devDependencies": {
@@ -39,8 +37,7 @@
 		"prettier": "^2.6.2",
 		"semver": "^7.3.7",
 		"turbo": "^1.2.12",
-		"typescript": "^4.6.4",
-		"typescript-json-schema": "^0.53.0"
+		"typescript": "^4.6.4"
 	},
 	"workspaces": [
 		"javascript/*"
