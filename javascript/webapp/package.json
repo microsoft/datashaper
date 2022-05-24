@@ -28,7 +28,8 @@
 		"start:client": "yarn start",
 		"build:client": "yarn build && yarn archive",
 		"archive": "essex zip --baseDir build deploy.zip '**/*'",
-		"archive:client": "yarn archive"
+		"archive:client": "yarn archive",
+		"lint": "essex lint --fix"
 	},
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",

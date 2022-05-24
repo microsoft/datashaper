@@ -29,7 +29,8 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
-		"build": "essex build --docs --skipExportCheck"
+		"build": "essex build --docs --skipExportCheck",
+		"lint": "essex lint --fix"
 	},
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^"

@@ -5,6 +5,7 @@ out/
 lib/
 coverage/
 docsTemp/
+.turbo/
 
 .swc/
 stats.json

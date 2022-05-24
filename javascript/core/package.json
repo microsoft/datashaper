@@ -28,6 +28,8 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
+		"lint": "essex lint --fix",
+		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"build": "essex build --docs --skipExportCheck"
 	},
 	"dependencies": {
@@ -39,6 +41,7 @@
 		"toposort": "^2.0.2"
 	},
 	"devDependencies": {
+		"@essex/jest-config": "^21.0.11",
 		"@essex/scripts": "^22.0.1",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/d3-time-format": "^4.0.0",
@@ -48,6 +51,7 @@
 		"@types/toposort": "^2.0.3",
 		"ajv": "^8.11.0",
 		"arquero": "^4.8.8",
+		"jest": "^28.1.0",
 		"regenerator-runtime": "^0.13.9",
 		"typescript": "^4.6.4"
 	},
