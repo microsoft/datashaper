@@ -10,11 +10,6 @@ module.exports = {
     "@storybook/addon-interactions"
   ],
   "framework": "@storybook/react",
-  "webpackFinal": (config) => {
-    // // console.log("CMR", config.module.rules[0])
-    // config.module.rules[0].use = { loader: require.resolve('swc-loader'), options: { parseMap: true } }
-    return config
-  },
   "core": {
     builder: 'webpack4'
   }
