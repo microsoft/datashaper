@@ -24,13 +24,9 @@ export function useProjectMgmtCommands(
 	workflow: Workflow,
 	tables: TableContainer[],
 	outputTables: TableContainer[],
-	onUpdateWorkflow: (workflow: Workflow) => void,
+	onUpdateWorkflowJson: (workflow: WorkflowObject) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
 ): ICommandBarItemProps[] {
-	const onUpdateWorkflowJson = useCallback(
-		(wf: WorkflowObject) => onUpdateWorkflow(new Workflow(wf)),
-		[onUpdateWorkflow],
-	)
 	const downloadPipeline = useDownloadWorkflow(workflow)
 	const downloadCsv = useDownloadCsv(outputTables)
 	const downloadZip = useDownloadZip(workflow, tables, outputTables)
@@ -108,6 +104,15 @@ export function useProjectMgmtCommands(
 	])
 
 	return commands
+}
+
+export function useOnUpdateWorkflowJson(
+	onUpdateWorkflow: (workflow: Workflow) => void,
+): (wf: WorkflowObject) => void {
+	return useCallback(
+		(wf: WorkflowObject) => onUpdateWorkflow(new Workflow(wf)),
+		[onUpdateWorkflow],
+	)
 }
 
 const icons = {

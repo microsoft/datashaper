@@ -1,8 +1,0 @@
-releases:
-  "@data-wrangling-components/core": major
-  "@data-wrangling-components/primitives": patch
-  "@data-wrangling-components/react": major
-  "@data-wrangling-components/react-controls": major
-  "@data-wrangling-components/react-hocs": major
-  "@data-wrangling-components/react-verbs": major
-  "@data-wrangling-components/webapp": major

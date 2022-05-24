@@ -7,10 +7,10 @@ import { ActionButton, Label } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { TableColumnDropdown } from '../controls/index.js'
-import { withLoadedTable } from '../hocs/index.js'
 import {
 	useDropdownChangeHandler,
 	useSimpleDropdownOptions,
+	useStepDataTable,
 	useTableColumnNames,
 } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
@@ -21,7 +21,8 @@ import { Container, labelStyles } from './Spread.styles.js'
  * Provides inputs for a step that needs lists of columns.
  */
 export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
-	withLoadedTable(function Spread({ step, onChange, dataTable }) {
+	function Spread({ step, graph, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, graph, input, table)
 		const columns = useColumns(step, onChange)
 
 		const handleButtonClick = useCallback(() => {
@@ -65,7 +66,7 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 				</ActionButton>
 			</Container>
 		)
-	}),
+	},
 )
 
 function next(columns: string[]): string {

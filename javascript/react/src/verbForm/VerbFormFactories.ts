@@ -44,11 +44,13 @@ export function joinInputs(
 	rightColumns: string[],
 	label = 'join',
 ): FormInput<JoinArgs>[] {
+	const selectedLeftColumn = getLeftColumn(step)
+	const selectedRightColumn = getRightColumn(step)
 	return [
 		dropdown(
 			`Input ${label} key`,
 			leftColumns,
-			getLeftColumn(step),
+			selectedLeftColumn,
 			(s, opt) => {
 				if (!s.args.on) {
 					s.args.on = []
@@ -60,7 +62,7 @@ export function joinInputs(
 		dropdown(
 			`${upperFirst(label)} table key`,
 			rightColumns,
-			getRightColumn(step),
+			selectedRightColumn,
 			(s, opt) => {
 				if (s.args.on) {
 					s.args.on[1] = opt as string

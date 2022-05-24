@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { getDefaultSettings } from '~localStorageHandler/localStorageHandler'
-
+import { getDefaultSettings } from '../localStorageHandler/index.js'
 import type { Settings } from '../models/Settings.js'
 
 export async function defaultSettings(): Promise<Settings> {

@@ -67,3 +67,23 @@ export function useFormattedColumnArg(): (
 		return args
 	}, [])
 }
+
+export function useResetArgs(): (stepArgs: unknown) => object {
+	return useCallback((stepArgs: unknown) => {
+		const args = stepArgs as Record<string, unknown>
+		Object.keys(args).forEach(key => {
+			if (typeof args[key] === 'string' && key !== 'to') {
+				args[key] = ''
+			} else if (typeof args[key] === 'number') {
+				args[key] = undefined
+			} else if (typeof args[key] === 'boolean') {
+				args[key] = undefined
+			} else if (Array.isArray(args[key])) {
+				args[key] = []
+			} else if (typeof args[key] === 'object') {
+				args[key] = {}
+			}
+		})
+		return args
+	}, [])
+}

@@ -5,7 +5,7 @@
 import { ActionButton, Label } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
-import { withLoadedTable } from '../hocs/index.js'
+import { useStepDataTable } from '../hooks/useStepDataTable.js'
 import type { StepComponentProps } from '../types.js'
 import { useOthers } from './SetOperation.hooks.js'
 import { Container, icons } from './SetOperation.styles.js'
@@ -15,7 +15,8 @@ import { Container, icons } from './SetOperation.styles.js'
  * E.g., for set operations
  */
 export const SetOperation: React.FC<StepComponentProps> = memo(
-	withLoadedTable(function SetOperation({ step, graph, onChange, dataTable }) {
+	function SetOperation({ step, graph, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, graph, input, table)
 		const others = useOthers(step, onChange, graph)
 
 		const handleButtonClick = useCallback(() => {
@@ -41,5 +42,5 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 				</ActionButton>
 			</Container>
 		)
-	}),
+	},
 )

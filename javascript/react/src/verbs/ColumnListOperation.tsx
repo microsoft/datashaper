@@ -5,8 +5,7 @@
 import type { InputColumnListArgs } from '@data-wrangling-components/core'
 import { memo } from 'react'
 
-import { withLoadedTable } from '../hocs/index.js'
-import { useTableColumnNames } from '../hooks/index.js'
+import { useStepDataTable,useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { ColumnListOperationBase } from './ColumnListOperation.base.js'
 /**
@@ -14,16 +13,15 @@ import { ColumnListOperationBase } from './ColumnListOperation.base.js'
  */
 export const ColumnListOperation: React.FC<
 	StepComponentProps<InputColumnListArgs>
-> = memo(
-	withLoadedTable(function ColumnListOperation({ dataTable, step, onChange }) {
-		const columns = useTableColumnNames(dataTable)
+> = memo(function ColumnListOperation({ step, graph, input, table, onChange }) {
+	const dataTable = useStepDataTable(step, graph, input, table)
+	const columns = useTableColumnNames(dataTable)
 
-		return (
-			<ColumnListOperationBase
-				step={step}
-				onChange={onChange}
-				columns={columns}
-			/>
-		)
-	}),
-)
+	return (
+		<ColumnListOperationBase
+			step={step}
+			onChange={onChange}
+			columns={columns}
+		/>
+	)
+})

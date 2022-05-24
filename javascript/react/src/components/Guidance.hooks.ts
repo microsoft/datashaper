@@ -25,11 +25,7 @@ export function useHandleClick(setName: NameSetter): (url: string) => void {
 			if (!url.includes(window.location.origin)) {
 				return window.open(url, '_blank')
 			}
-			const name = url
-				.split(`${window.location.origin}/`)
-				.pop()
-				?.replace('/', '.')
-				.replace(/.md/, '')
+			const name = url.split(`/`).pop()?.replace(/.md/, '')
 			if (name) {
 				setName((prev: string[]) => [...prev, name])
 			}

@@ -14,8 +14,8 @@ import {
 	useSetRecoilState,
 } from 'recoil'
 
-import { defaultSettings } from '~hooks/useSettings'
-import type { Settings } from '~models/Settings'
+import { defaultSettings } from '../hooks/useSettings.js'
+import type { Settings } from '../models/Settings.js'
 
 const currentSettings = atom<Settings>({
 	key: 'settings',
@@ -34,10 +34,7 @@ export function useSettingsSetter(): SetterOrUpdater<Settings> {
 	return useSetRecoilState(currentSettings)
 }
 
-export const useSettingsDebounced = (): [
-	Settings,
-	SetterOrUpdater<Settings>,
-] => {
+export function useSettingsDebounced(): [Settings, SetterOrUpdater<Settings>] {
 	const [settings, setSettings] = useSettings()
 	const debouncedSettings = useDebounceFn(
 		(newSettings: any) => setSettings(newSettings),

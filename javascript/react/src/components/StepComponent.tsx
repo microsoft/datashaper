@@ -2,19 +2,37 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
-import flow from 'lodash-es/flow.js'
-import { memo, useCallback, useMemo } from 'react'
-
+import type {
+	InputColumnArgs,
+	OutputColumnArgs,
+} from '@data-wrangling-components/core'
 import {
-	withInputColumnDropdown,
-	withInputTableDropdown,
-	withOutputColumnTextfield,
-} from '../hocs/index.js'
-import { selectStepComponent } from '../selectStepComponent.js'
-import { selectStepDescription } from '../selectStepDescription.js'
-import type { StepComponentProps as RealStepComponentProps } from '../types.js'
-import { Container, DescriptionContainer } from './StepComponent.styles.js'
+	isInputColumnStep,
+	isInputTableStep,
+	isOutputColumnStep,
+} from '@data-wrangling-components/core'
+import { NodeInput } from '@essex/dataflow'
+import { TextField } from '@fluentui/react'
+import { memo } from 'react'
+
+import { TableColumnDropdown } from '../controls/TableColumnDropdown.js'
+import { TableDropdown } from '../controls/TableDropdown.js'
+import { useDataTable } from '../hooks/useDataTable.js'
+import { useSimpleDropdownOptions } from '../hooks/useSimpleDropdownOptions.js'
+import { useTableColumnNames } from '../hooks/useTableColumnNames.js'
+import { useTableNames } from '../hooks/useTableNames.js'
+import { dropdownStyles } from '../styles.js'
+import {
+	useColumnFilter,
+	useDefaultOutputNameInitially,
+	useInputColumnChanged,
+	useInputTableChanged,
+	useOutputColumnChanged,
+	useOutputTableChanged,
+	useStepArgsComponent,
+	useStepChangeHandler,
+} from './StepComponent.hooks.js'
+import { Container } from './StepComponent.styles.js'
 import type { StepComponentProps } from './StepComponent.types.js'
 
 /**
@@ -22,47 +40,96 @@ import type { StepComponentProps } from './StepComponent.types.js'
  */
 export const StepComponent: React.FC<StepComponentProps> = memo(
 	function StepComponent({
-		step,
+		step: s,
 		output,
-		graph,
+		graph: g,
 		index,
+		inputTableLabel,
+		inputColumnLabel,
+		outputColumnLabel,
+		outputTableLabel,
+		outputTableDisabled,
 		onChange,
-		onChangeOutput,
+		onChangeOutput: changeOutput,
 	}) {
-		const Component = useMemo(() => selectStepComponent(step), [step])
-		const Description = useMemo(() => selectStepDescription(step), [step])
-		const WithAllArgs = useMemo<React.ComponentType<RealStepComponentProps>>(
-			() =>
-				flow(
-					withInputColumnDropdown(),
-					withOutputColumnTextfield(),
-					withInputTableDropdown(),
-				)(Component),
-			[Component],
-		)
-		const handleStepChange = useCallback(
-			(step: Step) => onChange(step, index),
-			[index, onChange],
-		)
+		/* Current Table Selection */
+		const tableId = s.input[NodeInput.Source]?.node
+		const table = useDataTable(tableId, g)
 
-		return (
+		/* Table Options */
+		const tables = useTableNames(g)
+		const tableOptions = useSimpleDropdownOptions(tables)
+
+		/* Column Options */
+		const columns = useTableColumnNames(table, useColumnFilter(s, table))
+		const columnOptions = useSimpleDropdownOptions(columns)
+
+		/* The step args component */
+		const StepArgs = useStepArgsComponent(s)
+
+		/* Change Events */
+		const change = useStepChangeHandler(index, onChange)
+		const onInputTableChange = useInputTableChanged(s, g, change)
+		const onInputColumnChange = useInputColumnChanged(s, change)
+		const onOutputColumnChange = useOutputColumnChanged(s, change)
+		const onOutputTableChange = useOutputTableChanged(s, changeOutput, change)
+
+		/* Side Effects */
+		useDefaultOutputNameInitially(s, output, changeOutput)
+
+		return StepArgs == null ? null : (
 			<Container className="step-component">
-				<WithAllArgs
-					step={step}
-					graph={graph}
-					output={output}
-					onChange={handleStepChange}
-					onChangeOutput={onChangeOutput}
-				/>
-				<DescriptionContainer>
-					<Description
-						step={step}
-						output={output}
-						showInput
-						showOutput
-						showOutputColumn
+				{/* Input Table */}
+				{isInputTableStep(s) ? (
+					<TableDropdown
+						options={tableOptions}
+						label={inputTableLabel || 'Input table'}
+						selectedKey={tableId ?? null}
+						onChange={onInputTableChange}
 					/>
-				</DescriptionContainer>
+				) : null}
+
+				{/* Input Column */}
+				{isInputColumnStep(s) ? (
+					<TableColumnDropdown
+						required
+						options={columnOptions}
+						label={inputColumnLabel || `Column to ${s.verb}`}
+						selectedKey={(s.args as InputColumnArgs).column}
+						onChange={onInputColumnChange}
+					/>
+				) : null}
+
+				<StepArgs
+					step={s}
+					graph={g}
+					output={output}
+					onChangeOutput={changeOutput}
+					onChange={change}
+				/>
+
+				{/* Output Column */}
+				{isOutputColumnStep(s) ? (
+					<TextField
+						required
+						label={outputColumnLabel || 'New column name'}
+						placeholder={'Column name'}
+						value={(s.args as OutputColumnArgs).to}
+						styles={dropdownStyles}
+						onChange={onOutputColumnChange}
+					/>
+				) : null}
+
+				{/* Output Table */}
+				<TextField
+					required
+					disabled={outputTableDisabled}
+					label={outputTableLabel || 'Output table'}
+					placeholder={'Table name'}
+					value={output ?? s.id}
+					styles={dropdownStyles}
+					onChange={onOutputTableChange}
+				/>
 			</Container>
 		)
 	},

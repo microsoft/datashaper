@@ -4,6 +4,7 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { GraphManager, Step } from '@data-wrangling-components/core'
+import type { TableContainer } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep'
 import { useCallback, useEffect, useState } from 'react'
@@ -11,6 +12,8 @@ import { useCallback, useEffect, useState } from 'react'
 import type { ModalState } from '../hooks/index.js'
 import {
 	useCreateTableName,
+	useHandleStepOutputChanged,
+	useHandleStepSave,
 	useModalState,
 	useStaticValue,
 } from '../hooks/index.js'
@@ -63,6 +66,26 @@ export function useOnEditStep(
 	)
 }
 
+export function useOnCreateStep(
+	index: number | undefined,
+	dismissModal: () => void,
+	save: (
+		step: Step,
+		output: string | undefined,
+		index: number | undefined,
+	) => void,
+	selectOutput: undefined | ((name: string) => void),
+): (step: Step, output: string | undefined) => void {
+	return useCallback(
+		(step: Step, output: string | undefined) => {
+			save(step, output, index)
+			dismissModal()
+			if (output) selectOutput?.(output)
+		},
+		[save, dismissModal, index, selectOutput],
+	)
+}
+
 /**
  *
  * @param graph - The graph manager
@@ -71,55 +94,37 @@ export function useOnEditStep(
 export function useOnSaveStep(
 	graph: GraphManager,
 ): (step: Step, output: string | undefined, index: number | undefined) => void {
+	const updateStep = useHandleStepSave(graph)
+	const updateStepOutput = useHandleStepOutputChanged(graph)
+
 	return useCallback(
 		(step: Step, output: string | undefined, index: number | undefined) => {
-			//
-			// If the step index is already present, update the existing step
-			//
-			const isExistingStep =
-				index != null && graph.numSteps > 0 && index < graph.numSteps
-			const stepResult = isExistingStep
-				? graph.reconfigureStep(index as number, step)
-				: graph.addStep(step)
-
-			//
-			// Set or unset the output
-			//
-			const existingOutput = graph.outputDefinitions.find(
-				d => d.node === stepResult.id,
-			)
-			if (output) {
-				graph.addOutput({
-					name: output,
-					node: stepResult.id,
-				})
-			} else if (existingOutput) {
-				graph.removeOutput(existingOutput.name)
-			}
+			const stepResult = updateStep(step, index)
+			updateStepOutput(stepResult, output)
 		},
-		[graph],
+		[updateStepOutput, updateStep],
 	)
 }
 
 /**
  * A hook to manage state for showing the the step transformation modal
  *
- * @param setSelectedStep - A mutator for the selected step
- * @param setSelectedStepIndex - A mutator for the selected step indexw
+ * @param setStep - A mutator for the selected step
+ * @param setStepIndex - A mutator for the selected step indexw
  * @returns An object containing the isOpen state, and show/hide callbacks
  */
 export function useTransformModalState(
-	setSelectedStep: (step: Step | undefined) => void,
-	setSelectedStepIndex: (index: number | undefined) => void,
+	setStep: (step: Step | undefined) => void,
+	setStepIndex: (index: number | undefined) => void,
 ): ModalState {
 	const onDismiss = useCallback(() => {
-		setSelectedStep(undefined)
-		setSelectedStepIndex(undefined)
-	}, [setSelectedStep, setSelectedStepIndex])
+		setStep(undefined)
+		setStepIndex(undefined)
+	}, [setStep, setStepIndex])
 	return useModalState(undefined, onDismiss)
 }
 
-export function useEditorTarget(selectedStepIndex: number | undefined): {
+export function useEditorTarget(stepIndex: number | undefined): {
 	editorTarget: string
 	addStepButtonId: string
 } {
@@ -128,12 +133,12 @@ export function useEditorTarget(selectedStepIndex: number | undefined): {
 	)
 	const [editorTarget, setEditorTarget] = useState<string>(addStepButtonId)
 	useEffect(() => {
-		if (selectedStepIndex !== undefined) {
-			setEditorTarget(`.step-card-${selectedStepIndex}`)
+		if (stepIndex !== undefined) {
+			setEditorTarget(`.step-card-${stepIndex}`)
 		} else {
 			setEditorTarget(`#${addStepButtonId}`)
 		}
-	}, [addStepButtonId, selectedStepIndex])
+	}, [addStepButtonId, stepIndex])
 
 	return {
 		editorTarget,
@@ -224,4 +229,18 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 		onConfirm: onConfirmDelete,
 		onClick: onDeleteClicked,
 	}
+}
+
+export function useGraphOutputListener(
+	graph: GraphManager,
+	setOutput?: ((tables: TableContainer[]) => void) | undefined,
+): void {
+	useEffect(
+		() =>
+			setOutput &&
+			graph.onChange(() =>
+				setOutput(graph.toList().filter(t => !!t) as TableContainer[]),
+			),
+		[graph, setOutput],
+	)
 }

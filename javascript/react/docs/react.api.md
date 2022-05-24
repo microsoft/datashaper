@@ -112,7 +112,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps>;
 // Warning: (ae-missing-release-tag) "ManageWorkflowProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ManageWorkflowProps extends Omit<TransformModalProps, 'graph'> {
+export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
     // (undocumented)
     inputs: TableContainer[];
     onSelect?: (name: string) => void;
@@ -131,8 +131,10 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps>;
 export interface PrepareDataFullProps {
     derived: TableContainer[];
     inputs: TableContainer[];
+    onSelectedTableIdChanged: (value: string | undefined) => void;
     onUpdateOutput?: (tables: TableContainer[]) => void;
     outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[];
+    selectedTableId: string | undefined;
     stepsPosition?: 'bottom' | 'middle';
     workflow: Workflow;
 }
@@ -210,8 +212,26 @@ export const StepComponent: React.FC<StepComponentProps>;
 export interface StepComponentProps {
     graph: GraphManager;
     index: number;
+    inputColumnLabel?: string;
+    inputTableLabel?: string;
     onChange: (step: Step, index: number) => void;
     onChangeOutput: (value: string | undefined) => void;
+    output?: string;
+    outputColumnLabel?: string;
+    outputTableDisabled?: boolean;
+    outputTableLabel?: string;
+    step: Step;
+}
+
+// Warning: (ae-missing-release-tag) "StepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const StepDescription: React.FC<StepDescriptionProps>;
+
+// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepDescriptionProps {
     output?: string;
     step: Step;
 }
@@ -302,6 +322,7 @@ export interface TransformModalProps extends IModalProps {
     headerText?: string;
     hideInput?: boolean;
     hideOutput?: boolean;
+    index: number;
     nextInputTable?: string;
     onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
     step?: Step;
@@ -311,10 +332,40 @@ export interface TransformModalProps extends IModalProps {
     verbs?: string[];
 }
 
+// Warning: (ae-missing-release-tag) "useDataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useDataTable(id: string | undefined, graph?: GraphManager, existingTable?: ColumnTable): ColumnTable | undefined;
+
 // Warning: (ae-missing-release-tag) "useGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useGraphManager(workflow?: Workflow | undefined, inputs?: TableContainer[]): GraphManager;
+
+// Warning: (ae-missing-release-tag) "useGraphSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useGraphSteps(graph: GraphManager): Step[];
+
+// Warning: (ae-missing-release-tag) "useGraphWorkflowState" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useGraphWorkflowState(graph: GraphManager): [Workflow | undefined, (workflow: Workflow | undefined) => void];
+
+// Warning: (ae-missing-release-tag) "useHandleStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useHandleStepOutputChanged(graph: GraphManager): (step: Step, output: string | undefined) => void;
+
+// Warning: (ae-missing-release-tag) "useHandleStepSave" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useHandleStepSave(graph: GraphManager): (step: Step, index: number | undefined) => Step;
+
+// Warning: (ae-missing-release-tag) "useStepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useStepOutputs(graph: GraphManager, defaultOutputName?: (index: number) => string): Array<string | undefined>;
 
 // (No @packageDocumentation comment for this package)
 

@@ -399,7 +399,7 @@ const NumberSpinnerInput: React.FC<{
 				min={min}
 				max={max}
 				step={spinStep}
-				value={current ? `${current}` : undefined}
+				value={current ? `${current}` : ''}
 				onChange={changeHandler}
 				disabled={disabled}
 				styles={merge({}, dropdownStyles, styles)}
