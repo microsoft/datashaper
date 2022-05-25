@@ -37,9 +37,9 @@
 		"@data-wrangling-components/core": "workspace:^"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^22.0.1",
+		"@essex/scripts": "^22.0.3",
 		"@essex/tsconfig-base": "^1.0.2",
-		"typescript": "^4.6.4",
-		"typescript-json-schema": "^0.53.0"
+		"typescript": "^4.7.2",
+		"typescript-json-schema": "^0.53.1"
 	}
 }
