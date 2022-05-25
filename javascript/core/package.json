@@ -34,8 +34,8 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
-		"@essex/arquero": "^2.0.2",
-		"@essex/dataflow": "^0.1.1",
+		"@essex/arquero": "^2.0.3",
+		"@essex/dataflow": "^0.1.2",
 		"d3-time-format": "^4.1.0",
 		"lodash-es": "^4.17.21",
 		"rxjs": "^7.5.5",

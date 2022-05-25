@@ -2750,8 +2750,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:javascript/core"
   dependencies:
-    "@essex/arquero": ^2.0.2
-    "@essex/dataflow": ^0.1.1
+    "@essex/arquero": ^2.0.3
+    "@essex/dataflow": ^0.1.2
     "@essex/jest-config": ^21.0.12
     "@essex/scripts": ^22.0.4
     "@essex/tsconfig-base": ^1.0.2
@@ -2797,7 +2797,7 @@ __metadata:
     npm-run-all: ^4.1.5
     prettier: ^2.6.2
     semver: ^7.3.7
-    turbo: ^1.2.12
+    turbo: ^1.2.13
     typescript: ^4.7.2
   languageName: unknown
   linkType: soft
@@ -2814,12 +2814,12 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
-    "@essex/arquero": ^2.0.2
-    "@essex/arquero-react": ^1.0.5
-    "@essex/charts-react": ^1.0.4
-    "@essex/dataflow": ^0.1.1
+    "@essex/arquero": ^2.0.3
+    "@essex/arquero-react": ^1.0.6
+    "@essex/charts-react": ^1.0.5
+    "@essex/dataflow": ^0.1.2
     "@essex/scripts": ^22.0.4
-    "@essex/themed-components": ^2.2.6
+    "@essex/themed-components": ^2.2.7
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/react": ^8.70.0
     "@fluentui/react-hooks": ^8.5.5
@@ -2935,11 +2935,11 @@ __metadata:
     "@data-wrangling-components/react": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
-    "@essex/arquero": ^2.0.2
-    "@essex/arquero-react": ^1.0.5
-    "@essex/hooks": ^4.0.11
+    "@essex/arquero": ^2.0.3
+    "@essex/arquero-react": ^1.0.6
+    "@essex/hooks": ^4.0.12
     "@essex/scripts": ^22.0.4
-    "@essex/themed-components": ^2.2.6
+    "@essex/themed-components": ^2.2.7
     "@essex/webpack-config": ^21.0.4
     "@fluentui/font-icons-mdl2": ^8.4.0
     "@fluentui/react": ^8.70.0
@@ -3106,12 +3106,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/arquero-react@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@essex/arquero-react@npm:1.0.5"
+"@essex/arquero-react@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@essex/arquero-react@npm:1.0.6"
   dependencies:
-    "@essex/arquero": ^2.0.2
-    "@essex/charts-react": ^1.0.4
+    "@essex/arquero": ^2.0.3
+    "@essex/charts-react": ^1.0.5
     d3-format: ^3.1.0
     lodash-es: ^4.17.21
     react-if: ^4.1.4
@@ -3124,24 +3124,24 @@ __metadata:
     arquero: ^4.8.7
     react: ">= 18"
     styled-components: ^5.3.0
-  checksum: e846827031fd5331f69d33450f7f44286fe8c11ab05a9c8cf4330795af33024e2401078ef66fef8ec67bba5749a0cb706df42865fa1d54736060aa1fba30a730
+  checksum: 63b8d5e87b31967b91dd6c0bc7f97b254f3e3ba3fa175cbe798cb39fae90f0015aaa2d65ef3bab1d02d6d3bc2a3ce19a6f884b5ccee5867b6868bd0706ca4e7e
   languageName: node
   linkType: hard
 
-"@essex/arquero@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@essex/arquero@npm:2.0.2"
+"@essex/arquero@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@essex/arquero@npm:2.0.3"
   dependencies:
     lodash-es: ^4.17.21
   peerDependencies:
     arquero: ^4.8.7
-  checksum: 77cd36270a2b57427723df8c40a1dbad919c49f0838dd46f638513c9994811031f9e7a7016cb87bb52ef54e68d16c2d116491b5d4cb03b58214f539db044a65f
+  checksum: fbcebc76699e42d4cb10cd71805317480625601ddb6c5301cbce0f347f3245586ea3ebb6f01981d1adc6cc36f77d23d06548dcc1f3ef9bac0239dc603e05fa2e
   languageName: node
   linkType: hard
 
-"@essex/charts-react@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "@essex/charts-react@npm:1.0.4"
+"@essex/charts-react@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@essex/charts-react@npm:1.0.5"
   dependencies:
     d3-format: ^3.1.0
     d3-scale: ^4.0.2
@@ -3153,18 +3153,18 @@ __metadata:
     "@thematic/d3": ^1.3.0
     "@thematic/react": ^1.3.0
     react: ">= 18"
-  checksum: f1ac4839b04611aa86b6ec83b63dcdcc73fd9347e8a9e1df780cef7380fd56ec26f03090f61632fa37a11bb3441052f50880fcbc1a26bdc2d791b5f626bca9c1
+  checksum: 9f89bb3d541d4b159fa8ad0026b8dc6a276b5e8b5228b24b933007a415ed7ce7f1e0ba70fff44eb61a7a8648516b0ff5d444419dd6fa81f9ece796e7a5d11055
   languageName: node
   linkType: hard
 
-"@essex/dataflow@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@essex/dataflow@npm:0.1.1"
+"@essex/dataflow@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@essex/dataflow@npm:0.1.2"
   dependencies:
-    "@essex/toposort": ^1.0.0
+    "@essex/toposort": ^1.0.1
     rxjs: ^7.5.5
     uuid: ^8.3.2
-  checksum: 751c05c91646425016b0623ad3448adeabb5723fbb600ef5a10d39456064082e126f813e54dab1dcf1caf80f6bccb04a75b9f6f027b8db665a5bf82f4c3b8207
+  checksum: 63998bce98ea7afd35ea00ddd41b7359f253aea1996d38fb95232019cf75156267cf0583296e38febcb4b634a92fb134775cbc3e740b74b2488cbf2cfd99eed5
   languageName: node
   linkType: hard
 
@@ -3215,18 +3215,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/hooks@npm:^4.0.11":
-  version: 4.0.11
-  resolution: "@essex/hooks@npm:4.0.11"
+"@essex/hooks@npm:^4.0.12":
+  version: 4.0.12
+  resolution: "@essex/hooks@npm:4.0.12"
   dependencies:
-    "@essex/toolbox": ^3.0.7
+    "@essex/toolbox": ^3.0.8
     lodash-es: ^4.17.21
   peerDependencies:
     "@types/node": "*"
     "@types/react": "*"
     "@types/react-dom": "*"
     react: ">= 18"
-  checksum: e9fb6df76244b3013234ee8bfe57034b6c29f7b3d44af6bc601a57839868fbe20aa90741de21db28f35c71cb77cdaa377a6a76af30b450fd0f2968ab7c44f781
+  checksum: 8a4e96234028f7e3ad9feb94d3d9941b63a52ae94b05fe08f71f3072985a6e0161d7496634d1ea9c448f79bf667ef51fbb7458a0b0fab0c059841539479b10d7
   languageName: node
   linkType: hard
 
@@ -3371,14 +3371,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/themed-components@npm:^2.2.6":
-  version: 2.2.6
-  resolution: "@essex/themed-components@npm:2.2.6"
+"@essex/themed-components@npm:^2.2.7":
+  version: 2.2.7
+  resolution: "@essex/themed-components@npm:2.2.7"
   dependencies:
-    "@essex/hooks": ^4.0.11
+    "@essex/hooks": ^4.0.12
     "@essex/react-animate-height": ^2.1.4
-    "@essex/toolbox": ^3.0.7
-    "@types/d3-array": ^3.0.2
+    "@essex/toolbox": ^3.0.8
+    "@types/d3-array": ^3.0.3
     "@types/d3-axis": ^3.0.1
     "@types/d3-brush": ^3.0.1
     "@types/d3-scale": ^4.0.2
@@ -3403,21 +3403,21 @@ __metadata:
     "@uifabric/icons": ">= 7.3.38"
     react: ">= 18"
     react-dom: ">= 18"
-  checksum: 0c4506bfaad84780efb45671bdca653874611115cb567bacc3ecd1742e9549222bbc301fc8f67f6ae16846b8859040836e3c58e5e42625b44fc61a8ca7956db0
+  checksum: 17e6f2db3ae3e51b0a3dd5c070c942a430d231223d25faea4cdf06428b344928a9bebe64c6c2592da637784e07aee8ec84bf132ea452eb3ff70cf32386709a65
   languageName: node
   linkType: hard
 
-"@essex/toolbox@npm:^3.0.7":
-  version: 3.0.7
-  resolution: "@essex/toolbox@npm:3.0.7"
-  checksum: 5dac838801eefc9ea82d282c508e855386eb9e655dbfa85a2944beb4b86d15af7125c967f19b7ea12706a17226cda38abe023d4c24684303f797076a04d657db
+"@essex/toolbox@npm:^3.0.8":
+  version: 3.0.8
+  resolution: "@essex/toolbox@npm:3.0.8"
+  checksum: 70cecf83f223a182c0a142e721f3d8689b0ec816174733e5403576d06b697bb8a8489f655479a2d358830f58fc71aef033dee6e64b2e90c6d1cb332f73bee18d
   languageName: node
   linkType: hard
 
-"@essex/toposort@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@essex/toposort@npm:1.0.0"
-  checksum: b86cf0ed7d924e03e1f7cbb553246f2145bbb8486fc81e757c9013e71080226c90701178f646d9a46ee673ae400c0ceed5d99c06980730b8d9714999aa6590d6
+"@essex/toposort@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@essex/toposort@npm:1.0.1"
+  checksum: ad9682e9804b75953bb2eca1df962510e7e80f2ac183da1db61f98d40b610fe02a60758cbd1b83048a0883fa4a895bf2e6ba42d1313a2c82448d64752481f0c7
   languageName: node
   linkType: hard
 
@@ -6072,10 +6072,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/d3-array@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@types/d3-array@npm:3.0.2"
-  checksum: 608cbdc3dcf2bbd6710a0b82e1fba0ee410002a5813b8628ea0673c3e4d6169ba39d7c136162fb7a08435411cfb78aa5cdd871196df129c744fbf3706aac116e
+"@types/d3-array@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@types/d3-array@npm:3.0.3"
+  checksum: 972c8ff009c97c9093883d7597aac7185d4e8c2832d7f25420d8312aa1ebd60182f85fe768615cbc9d73d8819add52eea7ce640e57f5b1668ef389f1dc9569bc
   languageName: node
   linkType: hard
 
@@ -20852,114 +20852,114 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-darwin-64@npm:1.2.12"
+"turbo-darwin-64@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-darwin-64@npm:1.2.13"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-darwin-arm64@npm:1.2.12"
+"turbo-darwin-arm64@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-darwin-arm64@npm:1.2.13"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-freebsd-64@npm:1.2.12"
+"turbo-freebsd-64@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-freebsd-64@npm:1.2.13"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-arm64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-freebsd-arm64@npm:1.2.12"
+"turbo-freebsd-arm64@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-freebsd-arm64@npm:1.2.13"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-32@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-32@npm:1.2.12"
+"turbo-linux-32@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-linux-32@npm:1.2.13"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-64@npm:1.2.12"
+"turbo-linux-64@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-linux-64@npm:1.2.13"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-arm64@npm:1.2.12"
+"turbo-linux-arm64@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-linux-arm64@npm:1.2.13"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-arm@npm:1.2.12"
+"turbo-linux-arm@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-linux-arm@npm:1.2.13"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"turbo-linux-mips64le@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-mips64le@npm:1.2.12"
+"turbo-linux-mips64le@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-linux-mips64le@npm:1.2.13"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
 
-"turbo-linux-ppc64le@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-linux-ppc64le@npm:1.2.12"
+"turbo-linux-ppc64le@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-linux-ppc64le@npm:1.2.13"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
-"turbo-windows-32@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-windows-32@npm:1.2.12"
+"turbo-windows-32@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-windows-32@npm:1.2.13"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-windows-64@npm:1.2.12"
+"turbo-windows-64@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-windows-64@npm:1.2.13"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:1.2.12":
-  version: 1.2.12
-  resolution: "turbo-windows-arm64@npm:1.2.12"
+"turbo-windows-arm64@npm:1.2.13":
+  version: 1.2.13
+  resolution: "turbo-windows-arm64@npm:1.2.13"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:^1.2.12":
-  version: 1.2.12
-  resolution: "turbo@npm:1.2.12"
+"turbo@npm:^1.2.13":
+  version: 1.2.13
+  resolution: "turbo@npm:1.2.13"
   dependencies:
-    turbo-darwin-64: 1.2.12
-    turbo-darwin-arm64: 1.2.12
-    turbo-freebsd-64: 1.2.12
-    turbo-freebsd-arm64: 1.2.12
-    turbo-linux-32: 1.2.12
-    turbo-linux-64: 1.2.12
-    turbo-linux-arm: 1.2.12
-    turbo-linux-arm64: 1.2.12
-    turbo-linux-mips64le: 1.2.12
-    turbo-linux-ppc64le: 1.2.12
-    turbo-windows-32: 1.2.12
-    turbo-windows-64: 1.2.12
-    turbo-windows-arm64: 1.2.12
+    turbo-darwin-64: 1.2.13
+    turbo-darwin-arm64: 1.2.13
+    turbo-freebsd-64: 1.2.13
+    turbo-freebsd-arm64: 1.2.13
+    turbo-linux-32: 1.2.13
+    turbo-linux-64: 1.2.13
+    turbo-linux-arm: 1.2.13
+    turbo-linux-arm64: 1.2.13
+    turbo-linux-mips64le: 1.2.13
+    turbo-linux-ppc64le: 1.2.13
+    turbo-windows-32: 1.2.13
+    turbo-windows-64: 1.2.13
+    turbo-windows-arm64: 1.2.13
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -20989,7 +20989,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 75ad427d0165b96f9381e50e8a67f70230b8cef749f247aa38b4af5499168ca61a26a88629543b6478c0bbc8992523319a52917407b413fe988173f1a5e9ff80
+  checksum: 8cea33c966269f2e5992cd14c4479dec4964f09989fa5172d1adf4dc3bb39a81f24a1da8da1b8bda7e0c37838589c9b57c2d95487b3823ce0c2978d3e532ca58
   languageName: node
   linkType: hard
 
