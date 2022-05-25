@@ -42,13 +42,11 @@ jobs:
       - run: yarn bundle  --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
         name: Build libs
 
-      - run: pwd
-      - run: ls
-      - run: find javascript/webapp
+      - run: find javascript/webapp/build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages
-          folder: ../javascript/webapp/build
+          folder: javascript/webapp/build
           clean: true
