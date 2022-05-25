@@ -9,6 +9,7 @@
 		"postinstall": "husky install",
 		"clean": "turbo run clean --parallel",
 		"build": "turbo run build",
+		"bundle": "turbo run bundle",
 		"lint": "turbo run lint",
 		"test": "turbo run test",
 		"start": "SB_QUIET=true turbo run start --parallel",
