@@ -19,7 +19,8 @@
 			"outputs": ["build/**", "storybook-static/**"]
 		},
 		"ci": {
-			"dependsOn": ["build", "lint", "test", "bundle"]
+			"dependsOn": ["build", "lint", "test", "bundle"],
+			"outputs": ["dist/**", "docs/**", "build/**", "storybook-static/**"]
 		},
 		"clean": {
 			"cache": false
