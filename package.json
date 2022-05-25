@@ -4,7 +4,7 @@
 	"scripts": {
 		"_publish": "turbo run release",
 		"_cut_schema": "yarn node scripts/release-schema.mjs",
-		"is_clean": "essex git-is-clean",
+		"is_clean": "git diff-index HEAD --quiet || git status",
 		"_pause": "sleep 3",
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
