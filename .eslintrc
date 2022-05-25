@@ -5,6 +5,14 @@
 {
 	"extends": "@essex/eslint-config",
 	"rules": {
+		"@essex/extensions": [
+			"error",
+			[
+				{
+					"expectedExtensions": [".js", ".css"]
+				}
+			]
+		],
 		"@typescript-eslint/no-explicit-any": "off",
 		"no-redeclare": "off",
 		"@typescript-eslint/no-redeclare": ["warn"],
