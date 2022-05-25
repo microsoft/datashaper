@@ -31,7 +31,7 @@
 		"build": "essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
 		"release": "yarn npm publish --tolerate-republish --access public",
-		"bundle": "build-storybook",
+		"bundle": "build-storybook --quiet",
 		"start": "start-storybook -p 6006",
 		"start:storybook": "yarn start"
 	},
