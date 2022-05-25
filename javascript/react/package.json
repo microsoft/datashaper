@@ -58,7 +58,7 @@
 		"@babel/preset-env": "^7.18.2",
 		"@babel/preset-react": "^7.17.12",
 		"@babel/preset-typescript": "^7.17.12",
-		"@essex/scripts": "^22.0.3",
+		"@essex/scripts": "^22.0.4",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@fluentui/react": "^8.70.0",
 		"@fluentui/react-hooks": "^8.5.5",

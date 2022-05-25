@@ -42,8 +42,8 @@
 		"toposort": "^2.0.2"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.11",
-		"@essex/scripts": "^22.0.3",
+		"@essex/jest-config": "^21.0.12",
+		"@essex/scripts": "^22.0.4",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/d3-time-format": "^4.0.0",
 		"@types/jest": "^27.5.1",
