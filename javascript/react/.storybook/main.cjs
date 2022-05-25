@@ -18,7 +18,7 @@ module.exports = {
   },
   webpackFinal(config) {
     // mute build output
-    if (process.env.CI) {
+    if (process.env.CI || process.env.SB_QUIET) {
       config.stats = 'errors-only'
       config.plugins = config.plugins.filter(({ constructor }) => constructor.name !== "ProgressPlugin")
     }

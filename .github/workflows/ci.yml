@@ -36,5 +36,6 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           server-token: ${{ secrets.TURBO_SERVER_TOKEN }}
 
-      - run: yarn ci --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
-        name: Execute Tests
+      - run: yarn ci --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
+        name: Verify
+      - run: yarn is_clean

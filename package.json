@@ -2,10 +2,9 @@
 	"name": "@data-wrangling-components/project",
 	"private": true,
 	"scripts": {
-		"_publish": "yarn workspaces foreach -piv run release",
-		"_ci": "turbo run ci",
+		"_publish": "turbo run release",
 		"_cut_schema": "yarn node scripts/release-schema.mjs",
-		"_isclean": "essex git-is-clean",
+		"is_clean": "git diff-index HEAD --quiet || git status",
 		"_pause": "sleep 3",
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
@@ -13,12 +12,12 @@
 		"build": "turbo run build",
 		"lint": "turbo run lint",
 		"test": "turbo run test",
-		"start": "yarn workspaces foreach -piv run start",
-		"deploy": "yarn workspaces foreach -piv run deploy",
+		"start": "SB_QUIET=true turbo run start",
+		"deploy": "turbo run deploy",
 		"prettify": "essex prettify",
 		"release": "run-s _publish _cut_schema",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode",
-		"ci": "run-s _ci _pause _isclean"
+		"ci": "SB_QUIET=true turbo run ci"
 	},
 	"prettier": "@essex/prettier-config",
 	"devDependencies": {
