@@ -25,9 +25,8 @@ jobs:
         name: Build libs
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.2.3
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: javascript/webapp/build
-          CLEAN: true
+          branch: gh-pages
+          folder: javascript/webapp/build
+          clean: true
