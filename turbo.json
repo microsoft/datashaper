@@ -22,13 +22,19 @@
 			"dependsOn": ["build", "lint", "test", "bundle"],
 			"outputs": ["dist/**", "docs/**", "build/**", "storybook-static/**"]
 		},
+		"prestart": {
+			"dependsOn": ["^prestart"],
+			"outputs": ["dist/**"]
+		},
+		"start": {
+			"cache": false,
+			"dependsOn": ["prestart"],
+			"outputs": []
+		},
 		"clean": {
 			"cache": false
 		},
 		"release": {
-			"cache": false
-		},
-		"start": {
 			"cache": false
 		},
 		"deploy": {

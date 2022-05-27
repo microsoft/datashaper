@@ -9,6 +9,7 @@ docsTemp/
 .turbo/
 .swc/
 stats.json
+deploy.zip
 
 # Classic node deps
 node_modules/

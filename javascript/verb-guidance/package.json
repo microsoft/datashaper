@@ -26,9 +26,8 @@
 		"types": "dist/index.d.ts"
 	},
 	"scripts": {
-		"clean": "essex clean dist docs",
-		"build:compile": "tsc --project tsconfig.build.json",
-		"start": "yarn build",
+		"clean": "essex clean dist",
+		"prestart": "yarn build",
 		"build": "essex build-md-index --include ../../docs/verbs",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},

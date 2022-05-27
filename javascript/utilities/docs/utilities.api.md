@@ -49,17 +49,17 @@ export class BaseFile extends FileWithPath {
 // Warning: (ae-missing-release-tag) "createBaseFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const createBaseFile: (content: Blob, options?: FileOptions | undefined) => BaseFile;
+export const createBaseFile: (content: Blob, options?: FileOptions) => BaseFile;
 
 // Warning: (ae-missing-release-tag) "createFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const createFile: (content: Blob, options?: Omit<FileOptions, "path"> | undefined) => File;
+export const createFile: (content: Blob, options?: Omit<FileOptions, 'path'>) => File;
 
 // Warning: (ae-missing-release-tag) "createFileWithPath" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const createFileWithPath: (content: Blob, options?: FileOptions | undefined) => FileWithPath;
+export const createFileWithPath: (content: Blob, options?: FileOptions) => FileWithPath;
 
 // Warning: (ae-missing-release-tag) "createReader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -321,7 +321,7 @@ export function loadTable(file: BaseFile, options?: CSVParseOptions): Promise<Co
 // Warning: (ae-missing-release-tag) "num" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const num: (value?: string | number | undefined) => number | undefined;
+export const num: (value?: string | number) => number | undefined;
 
 // Warning: (ae-missing-release-tag) "renameDuplicatedFiles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
