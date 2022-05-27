@@ -20,7 +20,6 @@
 		"release": "run-s clean _version_cut ci _release_packages _cut_schema",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
-	"prettier": "@essex/prettier-config",
 	"devDependencies": {
 		"@essex/eslint-config": "^20.3.5",
 		"@essex/eslint-plugin": "^20.3.7",
