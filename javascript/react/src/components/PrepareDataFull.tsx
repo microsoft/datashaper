@@ -30,6 +30,7 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 		stepsPosition = 'bottom',
 		onSelectedTableIdChanged,
 		onUpdateOutput,
+		onUpdateWorkflow,
 	}) {
 		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 
@@ -72,6 +73,7 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 							workflow={workflow}
 							onSelect={onSelectedTableIdChanged}
 							onUpdateOutput={onUpdateOutput}
+							onUpdateWorkflow={onUpdateWorkflow}
 						/>
 					</WorkflowContainer>
 				</StepsTrayContainer>

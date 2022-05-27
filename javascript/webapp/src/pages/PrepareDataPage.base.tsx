@@ -40,6 +40,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					selectedTableId={selectedTableId}
 					onSelectedTableIdChanged={setSelectedTableId}
 					onUpdateOutput={setOutput}
+					onUpdateWorkflow={setWorkflow}
 				/>
 			</Wrapper>
 		</Container>
