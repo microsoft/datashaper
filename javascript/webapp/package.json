@@ -25,6 +25,7 @@
 		"clean": "essex clean build dist lib node_modules",
 		"bundle": "essex bundle && shx cp -r public/* build/",
 		"start": "essex serve",
+		"start:webapp": "yarn start",
 		"lint": "essex lint --fix"
 	},
 	"dependencies": {
