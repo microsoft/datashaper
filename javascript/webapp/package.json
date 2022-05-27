@@ -39,7 +39,7 @@
 		"@essex/themed-components": "^2.2.7",
 		"@essex/webpack-config": "^21.0.4",
 		"@fluentui/font-icons-mdl2": "^8.4.0",
-		"@fluentui/react": "^8.70.0",
+		"@fluentui/react": "^8.71.0",
 		"@fluentui/react-hooks": "^8.5.5",
 		"@fluentui/utilities": "^8.8.3",
 		"@thematic/core": "^2.1.1",

@@ -60,7 +60,7 @@
 		"@babel/preset-typescript": "^7.17.12",
 		"@essex/scripts": "^22.0.4",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@fluentui/react": "^8.70.0",
+		"@fluentui/react": "^8.71.0",
 		"@fluentui/react-hooks": "^8.5.5",
 		"@fluentui/utilities": "^8.8.3",
 		"@mdx-js/react": "^1.6.22",
