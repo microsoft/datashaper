@@ -65,14 +65,14 @@ export function useHandleCsvUpload(
 	onUpdateTables: (tables: TableContainer[]) => void,
 ): () => void {
 	const csvHandler = useCsvHandler(onUpdateTables)
-	return useUploadFileHandler(['.csv'], csvHandler)
+	return UseHandleFilesUpload(['.csv'], csvHandler)
 }
 
 export function useHandleJsonUpload(
 	onUpdateWorkflow: (workflow: WorkflowObject) => void,
 ): () => void {
 	const jsonHandler = useJsonHandler(onUpdateWorkflow)
-	return useUploadFileHandler(['.json'], jsonHandler)
+	return UseHandleFilesUpload(['.json'], jsonHandler)
 }
 
 export function useHandleFileUpload(
@@ -106,10 +106,10 @@ export function useHandleZipUpload(
 		},
 		[csvHandler, jsonHandler, onUpdateTables],
 	)
-	return useUploadFileHandler(['.zip'], handler)
+	return UseHandleFilesUpload(['.zip'], handler)
 }
 
-export function useUploadFileHandler(
+export function UseHandleFilesUpload(
 	acceptedFileTypes: string[],
 	handleCollection?: (fileCollection: FileCollection) => void,
 ): () => void {

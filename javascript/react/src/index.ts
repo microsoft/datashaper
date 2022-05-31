@@ -19,7 +19,7 @@ export {
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useStepOutputs,
-	useUploadFileHandler,
+	UseHandleFilesUpload,
 } from './hooks/index.js'
 
 /*
