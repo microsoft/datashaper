@@ -9,7 +9,7 @@
 import type { ColumnMetadata } from '@essex/arquero';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { DropzoneOptions } from 'react-dropzone';
-import type { FileCollection } from '@data-wrangling-components/utilities';
+import { FileCollection } from '@data-wrangling-components/utilities';
 import type { FileRejection } from 'react-dropzone';
 import type { GraphManager } from '@data-wrangling-components/core';
 import type { ICommandBarProps } from '@fluentui/react';
@@ -117,6 +117,7 @@ export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'gra
     inputs: TableContainer[];
     onSelect?: (name: string) => void;
     onUpdateOutput?: (output: TableContainer[]) => void;
+    onUpdateWorkflow?: (workflow: Workflow) => void;
     workflow?: Workflow;
 }
 
@@ -133,6 +134,7 @@ export interface PrepareDataFullProps {
     inputs: TableContainer[];
     onSelectedTableIdChanged: (value: string | undefined) => void;
     onUpdateOutput?: (tables: TableContainer[]) => void;
+    onUpdateWorkflow?: (workflow: Workflow) => void;
     outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[];
     selectedTableId: string | undefined;
     stepsPosition?: 'bottom' | 'middle';
@@ -366,6 +368,11 @@ export function useHandleStepSave(graph: GraphManager): (step: Step, index: numb
 //
 // @public
 export function useStepOutputs(graph: GraphManager, defaultOutputName?: (index: number) => string): Array<string | undefined>;
+
+// Warning: (ae-missing-release-tag) "useUploadFileHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useUploadFileHandler(acceptedFileTypes: string[], handleCollection?: (fileCollection: FileCollection) => void): () => void;
 
 // (No @packageDocumentation comment for this package)
 

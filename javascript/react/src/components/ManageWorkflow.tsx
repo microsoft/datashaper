@@ -16,6 +16,7 @@ import {
 	useDeleteConfirm,
 	useEditorTarget,
 	useGraphOutputListener,
+	useGraphWorkflowListener,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnDuplicateStep,
@@ -35,6 +36,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		table,
 		onSelect,
 		onUpdateOutput,
+		onUpdateWorkflow,
 		...props
 	}) {
 		const graph = useGraphManager(workflow, inputs)
@@ -67,6 +69,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		const outputs = useStepOutputs(graph)
 		const steps = useGraphSteps(graph)
 		useGraphOutputListener(graph, onUpdateOutput)
+		useGraphWorkflowListener(graph, onUpdateWorkflow)
 
 		return (
 			<Container>

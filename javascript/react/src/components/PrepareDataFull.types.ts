@@ -46,4 +46,8 @@ export interface PrepareDataFullProps {
 	 * Handler for when the output table map changes
 	 */
 	onUpdateOutput?: (tables: TableContainer[]) => void
+	/**
+	 * Handler for when the workflow changes
+	 */
+	onUpdateWorkflow?: (workflow: Workflow) => void
 }

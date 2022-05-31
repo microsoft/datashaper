@@ -3,7 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/unbound-method */
-import type { GraphManager, Step } from '@data-wrangling-components/core'
+import type {
+	GraphManager,
+	Step,
+	Workflow,
+} from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep'
@@ -242,5 +246,15 @@ export function useGraphOutputListener(
 				setOutput(graph.toList().filter(t => !!t) as TableContainer[]),
 			),
 		[graph, setOutput],
+	)
+}
+
+export function useGraphWorkflowListener(
+	graph: GraphManager,
+	setWorkflow?: (workflow: Workflow) => void,
+): void {
+	useEffect(
+		() => setWorkflow && graph.onChange(() => setWorkflow(graph.workflow)),
+		[graph, setWorkflow],
 	)
 }
