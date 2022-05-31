@@ -354,10 +354,10 @@ export function useGraphSteps(graph: GraphManager): Step[];
 // @public (undocumented)
 export function useGraphWorkflowState(graph: GraphManager): [Workflow | undefined, (workflow: Workflow | undefined) => void];
 
-// Warning: (ae-missing-release-tag) "UseHandleFilesUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useHandleFilesUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function UseHandleFilesUpload(acceptedFileTypes: string[], handleCollection?: (fileCollection: FileCollection) => void): () => void;
+export function useHandleFilesUpload(acceptedFileTypes: string[], handleCollection?: (fileCollection: FileCollection) => void): () => void;
 
 // Warning: (ae-missing-release-tag) "useHandleStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
