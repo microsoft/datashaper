@@ -3,11 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.table_store import TableContainer
 
 
-def unorder(step: Step, store: TableStore):
+def unorder(input: TableContainer):
     """Reverts the orderby operation.
 
     :param step:
@@ -19,7 +18,7 @@ def unorder(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    input_table = store.table(step.input)
+    input_table = input.table
 
     output = input_table.sort_index()
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

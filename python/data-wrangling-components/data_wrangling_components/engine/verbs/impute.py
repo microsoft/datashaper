@@ -3,11 +3,14 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import ImputeArgs, Step
+from typing import List, Union
+
+from data_wrangling_components.table_store import TableContainer
 
 
-def impute(step: Step, store: TableStore):
+def impute(
+    input: TableContainer, columns: List[str], value: Union[str, int, float, bool]
+):
     """Fills invalid values in a column with a new value.
 
     :param step:
@@ -20,9 +23,8 @@ def impute(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = ImputeArgs(columns=step.args["columns"], value=step.args["value"])
-    input_table = store.table(step.input)
+    input_table = input.table
     output = input_table.copy()
-    for column in args.columns:
-        output[column] = output[column].fillna(args.value)
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    for column in columns:
+        output[column] = output[column].fillna(value)
+    return TableContainer(table=output)

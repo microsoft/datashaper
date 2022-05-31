@@ -3,32 +3,22 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Optional
 from urllib.parse import urlparse
 
 import pandas as pd
 
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
-
-
-@dataclass
-class FetchArgs:
-    url: str
-    delimiter: Optional[str] = ","
+from data_wrangling_components.table_store import TableContainer
 
 
 __reader_mapping = {
-    "csv": lambda args: pd.read_csv(
-        args.url, sep=args.delimiter, na_values=["undefined"]
+    "csv": lambda **kwargs: pd.read_csv(
+        kwargs["url"], sep=kwargs["delimiter"], na_values=["undefined"]
     ),
-    "json": lambda args: pd.read_json(args.url),
+    "json": lambda **kwargs: pd.read_json(kwargs["url"]),
 }
 
 
-def fetch(step: Step, store: TableStore):
+def fetch(url: str, delimiter: str = ",", **kwargs):
     """Fetch a table from a URL.
 
     :param step:
@@ -41,7 +31,6 @@ def fetch(step: Step, store: TableStore):
 
     :return: new table with the result of the operation
     """
-    args = FetchArgs(url=step.args["url"], delimiter=step.args.get("delimiter", ","))
-    file_type = urlparse(args.url).path.split(".")[-1]
-    output = __reader_mapping[file_type](args)
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    file_type = urlparse(url).path.split(".")[-1]
+    output = __reader_mapping[file_type](**{"url": url, "delimiter": delimiter})
+    return TableContainer(table=output)

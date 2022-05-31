@@ -3,27 +3,22 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass
+from typing import List
 
 from data_wrangling_components.engine.pandas.filter_df import filter_df
 from data_wrangling_components.engine.verbs.filter import _get_operator
-from data_wrangling_components.table_store import TableContainer, TableStore
+from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import (
     BooleanLogicalOperator,
     Criterion,
     FilterArgs,
     FilterCompareType,
-    OutputColumnArgs,
-    Step,
 )
 
 
-@dataclass
-class BinarizeArgs(FilterArgs, OutputColumnArgs):
-    pass
-
-
-def binarize(step: Step, store: TableStore):
+def binarize(
+    input: TableContainer, to: str, column: str, criteria: List, logical: str = "or"
+):
     """Creates a column with a 1 or 0 depending on if a value meets a criteria
 
     :param step:
@@ -36,24 +31,22 @@ def binarize(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = BinarizeArgs(
-        to=step.args["to"],
-        column=step.args["column"],
-        criteria=[
-            Criterion(
-                value=arg.get("value", None),
-                type=FilterCompareType(arg["type"]),
-                operator=_get_operator(arg["operator"]),
-            )
-            for arg in step.args["criteria"]
-        ],
-        logical=BooleanLogicalOperator(step.args.get("logical", "or")),
+    filter_criteria = [
+        Criterion(
+            value=arg.get("value", None),
+            type=FilterCompareType(arg["type"]),
+            operator=_get_operator(arg["operator"]),
+        )
+        for arg in criteria
+    ]
+    logical_operator = BooleanLogicalOperator(logical)
+
+    input_table = input.table
+
+    filter_result = filter_df(
+        input_table, FilterArgs(column, filter_criteria, logical_operator)
     )
-
-    input_table = store.table(step.input)
-
-    filter_result = filter_df(input_table, args)
     output = input_table.copy()
-    output[args.to] = filter_result.map({True: 1, False: 0}, na_action="ignore")
+    output[to] = filter_result.map({True: 1, False: 0}, na_action="ignore")
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

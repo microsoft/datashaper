@@ -89,32 +89,14 @@ class JoinStrategy(Enum):
     LeftOuter = "left outer"
     RightOuter = "right outer"
     FullOuter = "full outer"
-
-
-@dataclass
-class JoinArgs:
-    on: List[str] = field(default_factory=list)
-    strategy: JoinStrategy = JoinStrategy.Inner
-
-
-@dataclass
-class InputColumnListArgs:
-    columns: List[str]
+    AntiJoin = "anti join"
+    SemiJoin = "semi join"
+    Cross = "cross"
 
 
 @dataclass
 class InputColumnArgs:
     column: str
-
-
-@dataclass
-class OutputColumnArgs:
-    to: str
-
-
-@dataclass
-class OutputColumnsArgs:
-    to: List[str]
 
 
 class FieldAggregateOperation(Enum):
@@ -252,13 +234,3 @@ class WindowFunction(Enum):
 class OrderByInstruction:
     column: str
     direction: SortDirection
-
-
-@dataclass
-class FillArgs(OutputColumnArgs):
-    value: Union[str, int, float, bool]
-
-
-@dataclass
-class ImputeArgs(InputColumnListArgs):
-    value: Union[str, int, float, bool]

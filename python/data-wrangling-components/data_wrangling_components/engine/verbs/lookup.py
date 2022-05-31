@@ -3,18 +3,19 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass
+from typing import List
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnListArgs, JoinArgs, Step
+import pandas as pd
 
-
-@dataclass
-class LookupArgs(JoinArgs, InputColumnListArgs):
-    pass
+from data_wrangling_components.table_store import TableContainer
 
 
-def lookup(step: Step, store: TableStore):
+def lookup(
+    source: TableContainer,
+    other: TableContainer,
+    columns: List[str],
+    on: List[str] = None,
+):
     """Executes a Lookup operation (left join and drop duplicates keep last).
 
     :param step:
@@ -27,33 +28,27 @@ def lookup(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    if not isinstance(step.input, dict):
-        raise Exception("Input must be dict")
+    input_table: pd.DataFrame = source.table
+    other_table: pd.DataFrame = other.table
 
-    args = LookupArgs(
-        on=step.args.get("on", None),
-        columns=step.args["columns"],
-    )
-    input_table = store.table(step.input["source"])
-    other = store.table(step.input["other"])
-
-    if len(args.on) > 1:
-        left_column = args.on[0]
-        right_column = args.on[1]
-        other = other[[right_column] + args.columns]
+    if on is not None and len(on) > 1:
+        left_column = on[0]
+        right_column = on[1]
+        other_table = other_table[[right_column] + columns]
 
         output = input_table.merge(
-            other.drop_duplicates(subset=args.on, keep="last"),
+            other_table.drop_duplicates(subset=on, keep="last"),
             left_on=left_column,
             right_on=right_column,
             how="left",
         )
     else:
-        other = other[args.on + args.columns]
+        if on is not None:
+            other_table = other_table[on + columns]
         output = input_table.merge(
-            other.drop_duplicates(subset=args.on, keep="last"),
-            on=args.on,
+            other_table.drop_duplicates(subset=on, keep="last"),
+            on=on,
             how="left",
         )
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

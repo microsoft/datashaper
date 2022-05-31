@@ -3,11 +3,16 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import FillArgs, Step
+from typing import Union
+
+from data_wrangling_components.table_store import TableContainer
 
 
-def fill(step: Step, store: TableStore):
+def fill(
+    input: TableContainer,
+    to: str,
+    value: Union[str, int, float, bool],
+):
     """Fills a column with a value.
 
     :param step:
@@ -20,8 +25,7 @@ def fill(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = FillArgs(to=step.args["to"], value=step.args["value"])
-    input_table = store.table(step.input)
+    input_table = input.table
     output = input_table.copy()
-    output[args.to] = args.value
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    output[to] = value
+    return TableContainer(table=output)

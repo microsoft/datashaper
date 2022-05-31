@@ -5,18 +5,10 @@
 
 from typing import Dict
 
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.table_store import TableContainer
 
 
-@dataclass
-class RenameArgs:
-    columns: Dict[str, str]
-
-
-def rename(step: Step, store: TableStore):
+def rename(input: TableContainer, columns: Dict[str, str]):
     """Rename columns in a table.
 
     :param step:
@@ -29,7 +21,6 @@ def rename(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = RenameArgs(columns=step.args["columns"])
-    input_table = store.table(step.input)
-    output = input_table.rename(columns=args.columns)
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    input_table = input.table
+    output = input_table.rename(columns=columns)
+    return TableContainer(table=output)

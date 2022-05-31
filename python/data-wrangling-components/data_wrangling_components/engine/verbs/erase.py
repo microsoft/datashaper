@@ -3,32 +3,18 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Union
+from typing import List, Union
 
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnListArgs, Step
+from data_wrangling_components.table_store import TableContainer
 
 
-@dataclass
-class EraseArgs(InputColumnListArgs):
-    value: Union[str, int, float]
-
-
-def erase(step: Step, store: TableStore):
-    args = EraseArgs(
-        columns=step.args["columns"],
-        value=step.args["value"],
-    )
-
-    input_table = store.table(step.input)
-
+def erase(input: TableContainer, columns: List[str], value: Union[str, int, float]):
+    input_table = input.table
     output = input_table.copy()
 
-    for column in args.columns:
+    for column in columns:
         output[column] = output[column].apply(
-            lambda df_value: None if df_value == args.value else df_value
+            lambda df_value: None if df_value == value else df_value
         )
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

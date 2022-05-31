@@ -3,21 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Optional
-
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.table_store import TableContainer
 
 
-@dataclass
-class SampleArgs:
-    size: Optional[int] = None
-    proportion: Optional[int] = None
-
-
-def sample(step: Step, store: TableStore):
+def sample(input: TableContainer, size: int = None, proportion: int = None):
     """Creates a sample of data from a table.
 
     :param step:
@@ -30,9 +19,6 @@ def sample(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = SampleArgs(
-        size=step.args.get("size", None), proportion=step.args.get("proportion", None)
-    )
-    input_table = store.table(step.input)
-    output = input_table.sample(n=args.size, frac=args.proportion)
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    input_table = input.table
+    output = input_table.sample(n=size, frac=proportion)
+    return TableContainer(table=output)

@@ -3,55 +3,33 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from collections import defaultdict
+from typing import Dict
+
 import pandas as pd
 
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.table_store import TableContainer
 
 
-@dataclass
-class UnfoldArgs:
-    key: str
-    value: str
+def unfold(input: TableContainer, key: str, value: str):
 
-
-def unfold(step: Step, store: TableStore):
-    args = UnfoldArgs(
-        key=step.args["key"],
-        value=step.args["value"],
-    )
-
-    input_table = store.table(step.input)
+    input_table = input.table
 
     output = input_table.copy()
 
-    temp_index = -1
     new_index = []
-    id_key = output[args.key].iloc[0]
+    id_key: Dict[str, int] = defaultdict(int)
 
-    for key in output[args.key]:
-        if key == id_key:
-            temp_index += 1
-        new_index.append(temp_index)
+    for temp_key in output[key]:
+        new_index.append(id_key[temp_key])
+        id_key[temp_key] += 1
 
     output.index = new_index
 
-    output = output.pivot(columns=args.key, values=args.value)
-
+    output_temp = output.pivot(columns=key, values=value)
+    other_columns = [column for column in output.columns if column not in [key, value]]
     output = pd.concat(
-        [
-            input_table[
-                [
-                    col
-                    for col in input_table.columns
-                    if col != args.key and col != args.value
-                ]
-            ],
-            output,
-        ],
-        axis=1,
+        [output[other_columns].groupby(level=0).agg("first"), output_temp], axis=1
     )
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

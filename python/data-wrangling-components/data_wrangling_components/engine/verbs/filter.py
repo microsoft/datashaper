@@ -5,10 +5,10 @@
 
 import logging
 
-from typing import Union
+from typing import List, Union
 
 from data_wrangling_components.engine.pandas.filter_df import filter_df
-from data_wrangling_components.table_store import TableContainer, TableStore
+from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
@@ -16,7 +16,6 @@ from data_wrangling_components.types import (
     FilterArgs,
     FilterCompareType,
     NumericComparisonOperator,
-    Step,
     StringComparisonOperator,
 )
 
@@ -41,7 +40,7 @@ def _get_operator(
     raise Exception(f"[{operator}] is not a recognized comparison operator")
 
 
-def filter(step: Step, store: TableStore):
+def filter(input: TableContainer, column: str, criteria: List, logical: str = "or"):
     """Filters a table based on a condition.
 
     :param step:
@@ -54,24 +53,24 @@ def filter(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = FilterArgs(
-        column=step.args["column"],
-        criteria=[
-            Criterion(
-                value=arg.get("value", None),
-                type=FilterCompareType(arg["type"]),
-                operator=_get_operator(arg["operator"]),
-            )
-            for arg in step.args["criteria"]
-        ],
-        logical=BooleanLogicalOperator(step.args.get("logical", "or")),
-    )
-    input_table = store.table(step.input)
 
-    filter_index = filter_df(input_table, args)
+    filter_criteria = [
+        Criterion(
+            value=arg.get("value", None),
+            type=FilterCompareType(arg["type"]),
+            operator=_get_operator(arg["operator"]),
+        )
+        for arg in criteria
+    ]
+    logical_operator = BooleanLogicalOperator(logical)
+    input_table = input.table
+
+    filter_index = filter_df(
+        input_table, FilterArgs(column, filter_criteria, logical_operator)
+    )
 
     output = input_table[
         input_table.index.isin(filter_index[filter_index == True].index)
     ].reset_index(drop=True)
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

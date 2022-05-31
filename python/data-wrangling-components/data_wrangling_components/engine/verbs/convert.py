@@ -6,16 +6,15 @@
 import numbers
 
 from datetime import datetime
-from typing import Callable, Dict, Optional, Union
+from typing import Callable, Dict, List, Optional, Union
 
 import numpy as np
 import pandas as pd
 
-from dataclasses import dataclass
 from pandas.api.types import is_bool_dtype, is_numeric_dtype
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnListArgs, ParseType, Step
+from data_wrangling_components.table_store import TableContainer
+from data_wrangling_components.types import ParseType
 
 
 def convert_int(value: str, radix: int) -> Union[int, float]:
@@ -54,7 +53,7 @@ def convert_bool(value: str) -> bool:
         return True
 
 
-def convert_date_str(value: datetime, formatPattern: str) -> str:
+def convert_date_str(value: datetime, formatPattern: str) -> Union[str, float]:
     try:
         return datetime.strftime(value, formatPattern)
     except Exception:
@@ -106,27 +105,22 @@ __type_mapping: Dict[ParseType, Callable] = {
 }
 
 
-@dataclass
-class ConvertArgs(InputColumnListArgs):
-    type: ParseType
-    radix: Optional[int] = 10
-    formatPattern: Optional[str] = None
+def convert(
+    input: TableContainer,
+    columns: List[str],
+    type: str,
+    radix: Optional[int] = None,
+    formatPattern: str = "%Y-%m-%d",
+):
 
+    parse_type = ParseType(type)
 
-def convert(step: Step, store: TableStore):
-    args = ConvertArgs(
-        columns=step.args["columns"],
-        radix=step.args.get("radix", None),
-        formatPattern=step.args.get("formatPattern", "%Y-%m-%d"),
-        type=ParseType(step.args["type"]),
-    )
-
-    input_table = store.table(step.input)
+    input_table = input.table
     output = input_table.copy()
 
-    for column in args.columns:
-        output[column] = __type_mapping[args.type](
-            column=output[column], radix=args.radix, formatPattern=args.formatPattern
+    for column in columns:
+        output[column] = __type_mapping[parse_type](
+            column=output[column], radix=radix, formatPattern=formatPattern
         )
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

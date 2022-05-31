@@ -8,16 +8,10 @@ from typing import Union
 import numpy as np
 import pandas as pd
 
-from dataclasses import dataclass
 from pandas.core.groupby import DataFrameGroupBy
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import (
-    InputColumnArgs,
-    OutputColumnArgs,
-    Step,
-    WindowFunction,
-)
+from data_wrangling_components.table_store import TableContainer
+from data_wrangling_components.types import WindowFunction
 
 
 def _get_window_indexer(
@@ -61,29 +55,20 @@ __window_function_map = {
 }
 
 
-@dataclass
-class WindowArgs(InputColumnArgs, OutputColumnArgs):
-    operation: WindowFunction
+def window(input: TableContainer, column: str, to: str, operation: str):
+    window_operation = WindowFunction(operation)
 
-
-def window(step: Step, store: TableStore):
-    args = WindowArgs(
-        to=step.args["to"],
-        column=step.args["column"],
-        operation=WindowFunction(step.args["operation"]),
-    )
-
-    input_table = store.table(step.input)
-    window = __window_function_map[args.operation](input_table[args.column])
+    input_table = input.table
+    window = __window_function_map[window_operation](input_table[column])
 
     if isinstance(input_table, DataFrameGroupBy):
         # ungroup table to add new column
         output = input_table.obj.copy()
-        output[args.to] = window.reset_index()[args.column]
+        output[to] = window.reset_index()[column]
         # group again by original group by
         output = output.groupby(input_table.keys)
     else:
         output = input_table.copy()
-        output[args.to] = window
+        output[to] = window
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

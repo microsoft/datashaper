@@ -5,18 +5,10 @@
 
 from typing import List
 
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.table_store import TableContainer
 
 
-@dataclass
-class SelectArgs:
-    columns: List[str]
-
-
-def select(step: Step, store: TableStore):
+def select(input: TableContainer, columns: List[str]):
     """Selects columns of a table.
 
     Returns a new table only with the specified columns.
@@ -31,10 +23,8 @@ def select(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = SelectArgs(columns=step.args["columns"])
-
-    input_table = store.table(step.input)
+    input_table = input.table
 
     output = input_table.copy()
-    output = input_table[[column for column in args.columns]]
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    output = input_table[columns]
+    return TableContainer(table=output)

@@ -3,10 +3,9 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass
+from typing import Dict
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnArgs, OutputColumnArgs, Step
+from data_wrangling_components.table_store import TableContainer
 
 
 class RecodeMap(dict):
@@ -14,12 +13,7 @@ class RecodeMap(dict):
         return key
 
 
-@dataclass
-class RecodeArgs(InputColumnArgs, OutputColumnArgs):
-    map: RecodeMap
-
-
-def recode(step: Step, store: TableStore):
+def recode(input: TableContainer, to: str, column: str, map: Dict):
     """Maps values to new values in a column.
 
     :param step:
@@ -32,11 +26,10 @@ def recode(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = RecodeArgs(
-        to=step.args["to"], column=step.args["column"], map=RecodeMap(step.args["map"])
-    )
-    input_table = store.table(step.input)
+    map = RecodeMap(map)
+
+    input_table = input.table
 
     output = input_table.copy()
-    output[args.to] = output[args.column].map(args.map)
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    output[to] = output[column].map(map)
+    return TableContainer(table=output)

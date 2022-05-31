@@ -3,13 +3,14 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import List
+
 import pandas as pd
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.table_store import TableContainer
 
 
-def intersect(step: Step, store: TableStore):
+def intersect(source: TableContainer, others: List[TableContainer]):
     """Calculates the set intersection between two tables.
 
     :param step:
@@ -22,14 +23,12 @@ def intersect(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    if not isinstance(step.input, dict):
-        raise Exception("Input must be dict")
-    input_table = store.table(step.input["source"])
-    others = [store.table(other) for other in step.input["others"]]
+    input_table = source.table
+    others = [other.table for other in others]
     others = pd.concat(others)
 
     output = input_table.merge(others, how="left", indicator=True)
     output = output[output["_merge"] == "both"]
     output = output.drop("_merge", axis=1).reset_index(drop=True)
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

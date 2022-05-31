@@ -3,11 +3,10 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.table_store import TableContainer
 
 
-def ungroup(step: Step, store: TableStore):
+def ungroup(input: TableContainer):
     """Ungroups a table.
 
     In pandas it converts a DataFrameGroupBy into a DataFrame object.
@@ -22,6 +21,6 @@ def ungroup(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    input_table = store.table(step.input)
+    input_table = input.table
     output = input_table.obj
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

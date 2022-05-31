@@ -3,18 +3,12 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass
+from typing import List
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnListArgs, Step
-
-
-@dataclass
-class UnrollArgs(InputColumnListArgs):
-    pass
+from data_wrangling_components.table_store import TableContainer
 
 
-def unroll(step: Step, store: TableStore):
+def unroll(input: TableContainer, columns: List[str]):
     """Unroll one or more array columns into new rows.
 
     :param step:
@@ -27,7 +21,6 @@ def unroll(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = UnrollArgs(columns=step.args["columns"])
-    input_table = store.table(step.input)
-    output = input_table.explode(args.columns)
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    input_table = input.table
+    output = input_table.explode(columns)
+    return TableContainer(table=output)

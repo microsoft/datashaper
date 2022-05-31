@@ -8,8 +8,7 @@ import pytest
 
 from pandas.testing import assert_frame_equal
 
-from data_wrangling_components.pipeline import DefaultPipeline
-from data_wrangling_components.table_store import DefaultTableStore, TableContainer
+from data_wrangling_components.graph import ExecutionGraph
 
 
 FIXTURES_PATH = "schema/fixtures/cases"
@@ -27,19 +26,6 @@ def read_csv(path: str) -> pd.DataFrame:
     return df
 
 
-def read_table_store(root: str) -> DefaultTableStore:
-    table_store = DefaultTableStore()
-
-    for table in os.listdir(root):
-        df = pd.read_csv(os.path.join(root, table), na_values=["undefined"])
-        table_name = table.split(".")[0]
-        table_store.set(
-            table_name,
-            TableContainer(id=table_name, name=table_name, table=df),
-        )
-    return table_store
-
-
 def get_verb_test_specs(root: str) -> List[str]:
     subfolders: List[str] = []
     for root, _, files in os.walk(root):
@@ -55,14 +41,12 @@ def get_verb_test_specs(root: str) -> List[str]:
 )
 def test_verbs_schema_input(fixture_path: str):
     with open(os.path.join(fixture_path, "workflow.json")) as workflow:
-        pipeline = DefaultPipeline.from_json(
-            steps=json.load(workflow)["steps"], store=read_table_store(TABLE_STORE_PATH)
-        )
+        pipeline = ExecutionGraph(json.load(workflow))
 
     pipeline.run()
     for expected in os.listdir(fixture_path):
         if expected.endswith(".csv"):
-            result = pipeline.get_dataset(expected.split(".")[0])
+            result = pipeline.get(expected.split(".")[0])
             if isinstance(result, pd.DataFrame):
                 result.to_csv(
                     os.path.join(fixture_path, f"result_{expected}"), index=False

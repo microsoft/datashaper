@@ -3,15 +3,12 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnListArgs, Step
+from typing import List
+
+from data_wrangling_components.table_store import TableContainer
 
 
-class GroupByArgs(InputColumnListArgs):
-    pass
-
-
-def groupby(step: Step, store: TableStore):
+def groupby(input: TableContainer, columns: List[str]):
     """Creates a GroupBy table to be used with other operations.
 
     :param step:
@@ -24,7 +21,6 @@ def groupby(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = GroupByArgs(columns=step.args["columns"])
-    input_table = store.table(step.input)
-    output = input_table.groupby(by=args.columns)
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    input_table = input.table
+    output = input_table.groupby(by=columns)
+    return TableContainer(table=output)

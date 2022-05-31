@@ -4,20 +4,14 @@
 #
 
 from functools import partial
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, List
 
 import pandas as pd
 
-from dataclasses import dataclass
 from pandas.api.types import is_bool
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import (
-    InputColumnListArgs,
-    MergeStrategy,
-    OutputColumnArgs,
-    Step,
-)
+from data_wrangling_components.table_store import TableContainer
+from data_wrangling_components.types import MergeStrategy
 
 
 def correct_type(value: Any):
@@ -46,25 +40,20 @@ __strategy_mapping: Dict[MergeStrategy, Callable] = {
 }
 
 
-@dataclass
-class MergeArgs(InputColumnListArgs, OutputColumnArgs):
-    strategy: MergeStrategy
-    delimiter: str = ""
+def merge(
+    input: TableContainer,
+    to: str,
+    columns: List[str],
+    strategy: str,
+    delimiter: str = "",
+):
+    merge_strategy = MergeStrategy(strategy)
 
-
-def merge(step: Step, store: TableStore):
-    args = MergeArgs(
-        to=step.args["to"],
-        columns=step.args["columns"],
-        strategy=MergeStrategy(step.args["strategy"]),
-        delimiter=step.args.get("delimiter", ""),
-    )
-
-    input_table = store.table(step.input)
+    input_table = input.table
 
     output = input_table.copy()
-    output[args.to] = output[args.columns].apply(
-        partial(__strategy_mapping[args.strategy], delim=args.delimiter), axis=1
+    output[to] = output[columns].apply(
+        partial(__strategy_mapping[merge_strategy], delim=delimiter), axis=1
     )
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)

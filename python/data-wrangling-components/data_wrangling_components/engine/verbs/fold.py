@@ -5,19 +5,10 @@
 
 from typing import List, Tuple
 
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.table_store import TableContainer
 
 
-@dataclass
-class FoldArgs:
-    to: Tuple[str, str]
-    columns: List[str]
-
-
-def fold(step: Step, store: TableStore):
+def fold(input: TableContainer, to: Tuple[str, str], columns: List[str]):
     """Creates 2 columns like a key-value in the table.
 
     The first column contains the previous column name.
@@ -33,18 +24,17 @@ def fold(step: Step, store: TableStore):
 
     :return: new table with the result of the operation.
     """
-    args = FoldArgs(to=step.args["to"], columns=step.args["columns"])
-    input_table = store.table(step.input)
+    input_table = input.table
     output = input_table.melt(
-        id_vars=set(input_table.columns) - set(args.columns),
-        value_vars=args.columns,
-        var_name=args.to[0],
-        value_name=args.to[1],
+        id_vars=set(input_table.columns) - set(columns),
+        value_vars=columns,
+        var_name=to[0],
+        value_name=to[1],
     ).reset_index(drop=True)
 
-    if len(args.columns) > 1:
+    if len(columns) > 1:
         output = output.sort_values(
-            by=[col for col in input_table.columns if col not in args.columns]
+            by=[col for col in input_table.columns if col not in columns]
         ).reset_index(drop=True)
 
-    return TableContainer(id=str(step.output), name=str(step.output), table=output)
+    return TableContainer(table=output)
