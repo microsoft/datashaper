@@ -16,10 +16,10 @@ export {
 	useGraphManager,
 	useGraphSteps,
 	useGraphWorkflowState,
+	useHandleFilesUpload,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useStepOutputs,
-	useHandleFilesUpload,
 } from './hooks/index.js'
 
 /*
