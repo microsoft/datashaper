@@ -2821,6 +2821,7 @@ __metadata:
     "@essex/scripts": ^22.0.4
     "@essex/themed-components": ^2.2.7
     "@essex/tsconfig-base": ^1.0.2
+    "@fluentui/font-icons-mdl2": ^8.4.0
     "@fluentui/react": ^8.71.0
     "@fluentui/react-hooks": ^8.5.5
     "@fluentui/utilities": ^8.8.3
