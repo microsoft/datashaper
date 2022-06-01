@@ -28,7 +28,10 @@ export {
 export { CommandBar } from './components/CommandBar.js'
 export type { CommandBarProps } from './components/CommandBar.types.js'
 export { Dropzone } from './components/Dropzone.js'
-export type { DropzoneProps } from './components/Dropzone.types.js'
+export type {
+	DropzoneProps,
+	FileRejection,
+} from './components/Dropzone.types.js'
 export { Guidance } from './components/Guidance.js'
 export type { GuidanceProps } from './components/Guidance.types.js'
 export { ManageWorkflow } from './components/ManageWorkflow.js'
