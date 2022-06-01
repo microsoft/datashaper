@@ -19,7 +19,7 @@ export const spreadStep: ColumnTableStep<SpreadArgs> = (
 	{ to, column, delimiter },
 ) => {
 	const split = applySplit(input, [column], delimiter)
-	return split.spread(column, { as: to })
+	return applyDefaultSpread(split, [column], to)
 }
 
 // if a delimiter is supplied, splits the cell values of every required column in the table
@@ -37,6 +37,13 @@ function applySplit(
 		return table.derive(args)
 	}
 	return table
+}
+
+// creates a default arquero spread operation for each column
+// this ignores unique values and just creates a new column for each index value
+// note also that arquero only inspects the first valid cell, it does not find the longest array
+function applyDefaultSpread(table: ColumnTable, columns: string[], to?: string[]) {
+	return table.spread(columns, { as: to })
 }
 
 export const spread = stepVerbFactory(spreadStep)

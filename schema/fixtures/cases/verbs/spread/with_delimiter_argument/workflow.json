@@ -2,15 +2,15 @@
 	"$schema": "../../../../../workflow.json",
 	"steps": [
 		{
+			"id": "expected",
 			"verb": "spread",
-			"input": "table6",
+			"input": { "source": "table29" },
 			"args": {
-				"column": "ID",
-				"to": ["ID_X"]
-			},
-			"id": "expected"
+				"column": "arr",
+				"delimiter": ";"
+			}
 		}
 	],
-	"input": ["table6"],
+	"input": ["table29"],
 	"output": ["expected"]
 }
