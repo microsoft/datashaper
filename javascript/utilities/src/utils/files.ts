@@ -169,7 +169,7 @@ export function renameDuplicatedFiles(files: BaseFile[]): BaseFile[] {
 
 	const map = new Map<string, number>()
 	return files.map(file => {
-		const name = renameDuplicatedFileName(map, cleanName(file.name))
+		const name = renameDuplicatedFileName(map, cleanFileName(file.name))
 		return createBaseFile(file, { name })
 	})
 }
@@ -185,18 +185,11 @@ export function renameDuplicatedFileName(
 }
 
 function hasDuplicatedNames(names: string[]): boolean {
-	const fileNames: Record<string, number> = {}
-	for (const name of names) {
-		if (!fileNames[name]) {
-			fileNames[name] = 0
-		}
-		++fileNames[name]
-	}
-	const values = Object.values(fileNames)
-	return values.some(val => val > 1)
+	const uniqueNames = new Set<string>(names)
+	return uniqueNames.size < names.length
 }
 
-function cleanName(name: string): string {
+function cleanFileName(name: string): string {
 	const ext = extension(name)
 	const clean = name
 		.replace(`.${ext}`, '')
