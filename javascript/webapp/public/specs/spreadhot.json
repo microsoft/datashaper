@@ -9,7 +9,8 @@
 			"input": { "source": "data/companies2.csv" },
 			"args": {
 				"column": "Array",
-				"delimiter": ";"
+				"delimiter": ";",
+				"onehot": true
 			}
 		}
 	],
