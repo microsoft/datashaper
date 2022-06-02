@@ -60,15 +60,15 @@ export function useDownloadZip(
 			const map = new Map<string, number>()
 			const renamedTables = tables.map(t => ({
 				...t,
-				name: renameDuplicatedFileName(map, t.name || t.id  || 'table.csv'),
+				name: renameDuplicatedFileName(map, t.name || t.id || 'table.csv'),
 			}))
 			const files = renamedTables
 				.map(table => tableFile(table))
 				.filter(f => f !== null)
 			if (files.length) {
 				await fileCollection.add(files as FileWithPath[])
-				files.forEach(file => {
-					input.push(file.name)
+				tables.forEach(table => {
+					input.push(table.name || table.id)
 				})
 			}
 		}
