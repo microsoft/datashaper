@@ -36,18 +36,6 @@ __op_mapping: Dict[MathOperator, Callable] = {
 
 
 def derive(input: TableContainer, to: str, column1: str, column2: str, operator: str):
-    """Derive a new column based on other columns.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.verbs.derive.DeriveArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
     math_operator = MathOperator(operator)
 
     input_table = input.table

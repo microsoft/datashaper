@@ -9,21 +9,6 @@ from data_wrangling_components.table_store import TableContainer
 
 
 def fold(input: TableContainer, to: Tuple[str, str], columns: List[str]):
-    """Creates 2 columns like a key-value in the table.
-
-    The first column contains the previous column name.
-    The second column contains the value that was in the column.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.verbs.fold.FoldArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
     input_table = input.table
     output = input_table.melt(
         id_vars=set(input_table.columns) - set(columns),

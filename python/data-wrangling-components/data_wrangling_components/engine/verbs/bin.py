@@ -44,20 +44,6 @@ def bin(
     clamped: bool = False,
     printRange: bool = False,
 ):
-    """Executes a bin aggregate.
-
-    Effectively truncates values to a bin boundary for histograms.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.verbs.bin.BinArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
     input_table = input.table
     bin_strategy = BinStrategy(strategy)
     min_max = (

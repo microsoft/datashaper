@@ -12,9 +12,7 @@ from data_wrangling_components.table_store import TableContainer
 
 
 def unfold(input: TableContainer, key: str, value: str):
-
     input_table = input.table
-
     output = input_table.copy()
 
     new_index = []

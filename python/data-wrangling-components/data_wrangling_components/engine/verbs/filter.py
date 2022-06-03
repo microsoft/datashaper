@@ -41,19 +41,6 @@ def _get_operator(
 
 
 def filter(input: TableContainer, column: str, criteria: List, logical: str = "or"):
-    """Filters a table based on a condition.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.types.FilterArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
-
     filter_criteria = [
         Criterion(
             value=arg.get("value", None),

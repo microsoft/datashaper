@@ -19,18 +19,6 @@ __reader_mapping = {
 
 
 def fetch(url: str, delimiter: str = ",", **kwargs):
-    """Fetch a table from a URL.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.verbs.fetch.FetchArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation
-    """
     file_type = urlparse(url).path.split(".")[-1]
     output = __reader_mapping[file_type](**{"url": url, "delimiter": delimiter})
     return TableContainer(table=output)

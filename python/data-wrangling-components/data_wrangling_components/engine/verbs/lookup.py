@@ -16,18 +16,6 @@ def lookup(
     columns: List[str],
     on: List[str] = None,
 ):
-    """Executes a Lookup operation (left join and drop duplicates keep last).
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.verbs.lookup.LookupArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
     input_table: pd.DataFrame = source.table
     other_table: pd.DataFrame = other.table
 

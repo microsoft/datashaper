@@ -3,6 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 import json
+import os
 
 from collections import OrderedDict, defaultdict
 from typing import Any, Callable, Dict, List, Optional, Set, Union
@@ -36,14 +37,24 @@ class ExecutionGraph:
     __graph: Dict[str, ExecutionNode] = OrderedDict()
     __dependency_graph: Dict[str, set] = defaultdict(set)
 
-    def __init__(self, workflow):
-        with open(SCHEMA_FILE) as schema_file:
+    def __init__(
+        self, workflow: Dict, input_path: str = "", schema_path: str = SCHEMA_FILE
+    ):
+        """Creates an execution graph from the Dict provided in workflow
+
+        :param workflow: the Dict object that contains the workflow
+        :type workflow: Dict
+        :param input_path: Optional input path, if provided input
+                           tables will be loaded relative to that path, defaults to ""
+        :type input_path: str, optional
+        """
+        with open(schema_path) as schema_file:
             schema = json.load(schema_file)
         validate(workflow, schema)
 
         for input in workflow["input"]:
             self.inputs[input] = TableContainer(
-                table=pd.read_csv(f"schema/fixtures/inputs/{input}.csv")
+                table=pd.read_csv(os.path.join(input_path, f"{input}.csv"))
             )
         self.outputs = workflow["output"]
 

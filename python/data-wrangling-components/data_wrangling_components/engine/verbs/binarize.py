@@ -19,18 +19,6 @@ from data_wrangling_components.types import (
 def binarize(
     input: TableContainer, to: str, column: str, criteria: List, logical: str = "or"
 ):
-    """Creates a column with a 1 or 0 depending on if a value meets a criteria
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.verbs.binarize.BinarizeArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
     filter_criteria = [
         Criterion(
             value=arg.get("value", None),

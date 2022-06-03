@@ -13,6 +13,7 @@ from data_wrangling_components.graph import ExecutionGraph
 
 FIXTURES_PATH = "schema/fixtures/cases"
 TABLE_STORE_PATH = "schema/fixtures/inputs"
+SCHEMA_PATH = "schema/workflow.json"
 
 os.chdir("../..")
 
@@ -34,14 +35,14 @@ def get_verb_test_specs(root: str) -> List[str]:
     return subfolders
 
 
-# @pytest.mark.xfail
+@pytest.mark.xfail
 @pytest.mark.parametrize(
     "fixture_path",
     get_verb_test_specs(FIXTURES_PATH),
 )
 def test_verbs_schema_input(fixture_path: str):
     with open(os.path.join(fixture_path, "workflow.json")) as workflow:
-        pipeline = ExecutionGraph(json.load(workflow))
+        pipeline = ExecutionGraph(json.load(workflow), TABLE_STORE_PATH, SCHEMA_PATH)
 
     pipeline.run()
     for expected in os.listdir(fixture_path):

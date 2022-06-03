@@ -14,18 +14,6 @@ class RecodeMap(dict):
 
 
 def recode(input: TableContainer, to: str, column: str, map: Dict):
-    """Maps values to new values in a column.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.verbs.orderby.OrderByArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
     map = RecodeMap(map)
 
     input_table = input.table

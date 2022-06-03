@@ -37,18 +37,6 @@ def join(
     on: List[str] = None,
     strategy: str = "inner",
 ):
-    """Inner Joins two tables together.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.types.JoinArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
     join_strategy = JoinStrategy(strategy)
     input_table = source.table
     other = other.table
