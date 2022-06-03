@@ -19,7 +19,7 @@ export const ImputeBase: React.FC<
 > = memo(function ImputeBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<ImputeArgs>[]>(
 		() => [
-			inputColumnList(step, columns, 'Columns to Impute'),
+			inputColumnList(step, columns, 'Columns to impute'),
 			{
 				label: 'Fill value',
 				type: FormInputType.Text,

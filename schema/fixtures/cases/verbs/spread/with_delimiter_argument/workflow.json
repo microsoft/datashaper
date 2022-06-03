@@ -6,7 +6,7 @@
 			"verb": "spread",
 			"input": { "source": "table29" },
 			"args": {
-				"column": "arr",
+				"columns": ["arr"],
 				"delimiter": ";"
 			}
 		}

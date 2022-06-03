@@ -5,11 +5,11 @@
 import { escape, not, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 
-import type { InputColumnArgs } from './types.js'
+import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export interface SpreadArgs extends InputColumnArgs {
+export interface SpreadArgs extends InputColumnListArgs {
 	to: string[]
 	/**
 	 * Delimiter to use when converting string cell values into an array with String.split
@@ -25,12 +25,12 @@ export interface SpreadArgs extends InputColumnArgs {
 
 export const spreadStep: ColumnTableStep<SpreadArgs> = (
 	input,
-	{ to, column, delimiter, onehot },
+	{ to, columns, delimiter, onehot },
 ) => {
-	const split = applySplit(input, [column], delimiter)
+	const split = applySplit(input, columns, delimiter)
 	return onehot
-		? applyOnehotSpread(split, [column])
-		: applyDefaultSpread(split, [column], to)
+		? applyOnehotSpread(split, columns)
+		: applyDefaultSpread(split, columns, to)
 }
 
 // if a delimiter is supplied, splits the cell values of every required column in the table

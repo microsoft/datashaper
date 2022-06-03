@@ -301,7 +301,7 @@
 			"verb": "spread",
 			"input": "aggregate-2",
 			"args": {
-				"column": "Product List"
+				"columns": ["Product List"]
 			}
 		},
 		{

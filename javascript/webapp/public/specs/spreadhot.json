@@ -8,7 +8,7 @@
 			"verb": "spread",
 			"input": { "source": "data/companies2.csv" },
 			"args": {
-				"column": "Array",
+				"columns": ["Array"],
 				"delimiter": ";",
 				"onehot": true
 			}

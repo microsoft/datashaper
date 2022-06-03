@@ -27,7 +27,7 @@ export const ConvertBase: React.FC<
 > = memo(function ConvertBase({ step, onChange, columns, columnsMetadata }) {
 	const inputs = useMemo<FormInput<ConvertArgs>[]>(
 		() => [
-			inputColumnList(step, columns, 'Columns to Convert'),
+			inputColumnList(step, columns, 'Columns to convert'),
 			{
 				label: 'Data type',
 				type: FormInputType.SingleChoice,
