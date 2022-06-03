@@ -14,14 +14,7 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 		const {
 			step: { args },
 		} = props
-		const sub = createRowEntries(
-			args.columns,
-			c => ({
-				value: c,
-			}),
-			3,
-			props,
-		)
+		const sub = createRowEntries(args.columns, value => ({ value }), 3, props)
 		const rows = useMemo(() => {
 			const {
 				step: { args },
