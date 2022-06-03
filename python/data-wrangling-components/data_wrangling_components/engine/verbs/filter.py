@@ -5,10 +5,10 @@
 
 import logging
 
-from typing import Union
+from typing import List, Union
 
 from data_wrangling_components.engine.pandas.filter_df import filter_df
-from data_wrangling_components.table_store import TableContainer, TableStore
+from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import (
     BooleanComparisonOperator,
     BooleanLogicalOperator,
@@ -16,7 +16,6 @@ from data_wrangling_components.types import (
     FilterArgs,
     FilterCompareType,
     NumericComparisonOperator,
-    Step,
     StringComparisonOperator,
 )
 
@@ -41,33 +40,24 @@ def _get_operator(
     raise Exception(f"[{operator}] is not a recognized comparison operator")
 
 
-def filter(step: Step, store: TableStore):
-    """Filters a table based on a condition.
+def filter(input: TableContainer, column: str, criteria: List, logical: str = "or"):
+    filter_criteria = [
+        Criterion(
+            value=arg.get("value", None),
+            type=FilterCompareType(arg["type"]),
+            operator=_get_operator(arg["operator"]),
+        )
+        for arg in criteria
+    ]
+    logical_operator = BooleanLogicalOperator(logical)
+    input_table = input.table
 
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.types.FilterArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
-    args = FilterArgs(
-        column=step.args["column"],
-        criteria=[
-            Criterion(
-                value=arg.get("value", None),
-                type=FilterCompareType(arg["type"]),
-                operator=_get_operator(arg["operator"]),
-            )
-            for arg in step.args["criteria"]
-        ],
-        logical=BooleanLogicalOperator(step.args.get("logical", "or")),
+    filter_index = filter_df(
+        input_table, FilterArgs(column, filter_criteria, logical_operator)
     )
-    input_table = store.table(step.input)
 
-    output = filter_df(input_table, args).reset_index(drop=True)
+    output = input_table[
+        input_table.index.isin(filter_index[filter_index == True].index)
+    ].reset_index(drop=True)
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)

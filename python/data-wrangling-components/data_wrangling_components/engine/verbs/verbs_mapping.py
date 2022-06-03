@@ -3,6 +3,8 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import Callable, Dict
+
 from data_wrangling_components.engine.verbs.aggregate import aggregate
 from data_wrangling_components.engine.verbs.bin import bin
 from data_wrangling_components.engine.verbs.binarize import binarize
@@ -42,7 +44,7 @@ from data_wrangling_components.types import Verb
 
 
 # This map contains the mapping between all verbs and functions.
-functions = {
+functions: Dict[Verb, Callable] = {
     Verb.Aggregate: aggregate,
     Verb.Bin: bin,
     Verb.Binarize: binarize,

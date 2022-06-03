@@ -3,8 +3,12 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import JoinArgs, JoinStrategy, Step
+from typing import List
+
+import pandas as pd
+
+from data_wrangling_components.table_store import TableContainer
+from data_wrangling_components.types import JoinStrategy
 
 
 __strategy_mapping = {
@@ -12,43 +16,55 @@ __strategy_mapping = {
     JoinStrategy.LeftOuter: "left",
     JoinStrategy.RightOuter: "right",
     JoinStrategy.FullOuter: "outer",
+    JoinStrategy.Cross: "cross",
+    JoinStrategy.AntiJoin: "outer",
+    JoinStrategy.SemiJoin: "outer",
 }
 
 
-def join(step: Step, store: TableStore):
-    """Inner Joins two tables together.
+def __clean_result(strategy: JoinStrategy, result: pd.DataFrame, source: pd.DataFrame):
+    if strategy == JoinStrategy.AntiJoin:
+        return result[result["_merge"] == "left_only"][source.columns]
+    elif strategy == JoinStrategy.SemiJoin:
+        return result[result["_merge"] == "both"][source.columns]
+    else:
+        result = pd.concat([
+            result[result["_merge"] == "both"],
+            result[result["_merge"] == "left_only"],
+            result[result["_merge"] == "right_only"]
+        ])
+        return result.drop("_merge", axis=1)
 
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.types.JoinArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
 
-    :return: new table with the result of the operation.
-    """
-    args = JoinArgs(
-        other=step.args["other"],
-        on=step.args.get("on", None),
-        strategy=JoinStrategy(step.args.get("strategy", "inner")),
-    )
-    input_table = store.table(step.input)
-    other = store.table(args.other)
+def join(
+    source: TableContainer,
+    other: TableContainer,
+    on: List[str] = None,
+    strategy: str = "inner",
+):
+    join_strategy = JoinStrategy(strategy)
+    input_table = source.table
+    other = other.table
 
-    if len(args.on) > 1:
-        left_column = args.on[0]
-        right_column = args.on[1] if len(args.on) > 0 else None
+    if on is not None and len(on) > 1:
+        left_column = on[0]
+        right_column = on[1]
 
         output = input_table.merge(
             other,
             left_on=left_column,
             right_on=right_column,
-            how=__strategy_mapping[args.strategy],
+            how=__strategy_mapping[join_strategy],
+            suffixes=["_1", "_2"],
+            indicator=True,
         )
     else:
         output = input_table.merge(
-            other, on=args.on, how=__strategy_mapping[args.strategy]
+            other,
+            on=on,
+            how=__strategy_mapping[join_strategy],
+            suffixes=["_1", "_2"],
+            indicator=True,
         )
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=__clean_result(join_strategy, output, input_table))

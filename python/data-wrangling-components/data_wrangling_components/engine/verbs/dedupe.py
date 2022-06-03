@@ -3,31 +3,12 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass
+from typing import List
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnListArgs, Step
-
-
-@dataclass
-class DedupeArgs(InputColumnListArgs):
-    pass
+from data_wrangling_components.table_store import TableContainer
 
 
-def dedupe(step: Step, store: TableStore):
-    """Removes Duplicates from a table.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.types.SetOperationArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
-    args = DedupeArgs(columns=step.args.get("columns", None))
-    input_table = store.table(step.input)
-    output = input_table.drop_duplicates(args.columns)
-    return TableContainer(id=step.output, name=step.output, table=output)
+def dedupe(input: TableContainer, columns: List[str] = None):
+    input_table = input.table
+    output = input_table.drop_duplicates(columns)
+    return TableContainer(table=output)

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "data_wrangling_components"
-version = "0.0.4"
+version = "0.0.5"
 description = "This project provides a collection of utilities for doing lightweight data wrangling."
 authors = [
     "Nathan Evans <naevans@microsoft.com>",
@@ -8,10 +8,12 @@ authors = [
 ]
 license = "MIT"
 readme = "README.md"
+include = ["../../schema/workflow.json"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.10"
 pandas = "^1.4.1"
+jsonschema = "^4.5.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
