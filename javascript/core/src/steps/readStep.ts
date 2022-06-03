@@ -14,7 +14,7 @@ import type { Step, StepInput } from './types.js'
 
 // TEMP: this creates a more readable id by doing a simple increment for each verb type
 // since this is global it will not align across pipelines or tables.
-// however, it will soon be replaced with graph interrogation methods that let us
+// however, it will eventually be replaced with graph interrogation methods that let us
 // construct much smarter and more user friendly ids
 const uid = (() => {
 	const map = new Map<string, number>()
@@ -27,8 +27,6 @@ const uid = (() => {
 /**
  * Factory function to create new verb configs
  * with as many reasonable defaults as possible.
- * TODO: if we accepted a table (or TableStore) we could do column lookups and such
- * to preselect.
  * @param verb -
  */
 export function readStep<T extends object | void | unknown = any>(
@@ -41,6 +39,7 @@ export function readStep<T extends object | void | unknown = any>(
 		verb,
 		input: fixInputs(input, previous),
 	}
+
 	switch (verb) {
 		case Verb.Bin:
 			return {
@@ -57,6 +56,14 @@ export function readStep<T extends object | void | unknown = any>(
 		case Verb.Derive:
 		case Verb.Fill:
 		case Verb.Merge:
+			return {
+				...base,
+				args: {
+					columns: [],
+					to: 'output',
+					...(args as object),
+				} as T,
+			}
 		case Verb.Rollup:
 		case Verb.Window:
 			return {
