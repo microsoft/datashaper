@@ -9,6 +9,7 @@ const empty: () => any = () => ({})
 
 export { bin } from './bin.js'
 export { binarize } from './binarize.js'
+export { boolean } from './boolean.js'
 export { convert } from './convert.js'
 export { filter } from './filter.js'
 export { fold } from './fold.js'
@@ -20,7 +21,6 @@ export { spread } from './spread.js'
 export { unfold } from './unfold.js'
 
 export const aggregate = outputColumn
-export const boolean = outputColumn
 export const dedupe = inputColumnList
 export const derive = outputColumn
 export const erase = inputColumnList
