@@ -162,34 +162,38 @@ export async function getDataURL(file: BaseFile): Promise<string> {
 }
 
 export function renameDuplicatedFiles(files: BaseFile[]): BaseFile[] {
-	const fileNames: Record<string, number> = {}
-	const cleanName = (name: string): string => {
-		const ext = extension(name)
-		const clean = name
-			.replace(`.${ext}`, '')
-			.replace(/\([0-9]\)/g, '')
-			.trimEnd()
-		return `${clean}.${ext}`
-	}
-	const names = files.map(file => cleanName(file.name))
-	for (const name of names) {
-		if (!fileNames[name]) {
-			fileNames[name] = 0
-		}
-		++fileNames[name]
-	}
-	const values = Object.values(fileNames)
-	if (values.every(val => val === 1)) {
+	const names = files.map(file => file.name)
+	if (!hasDuplicatedNames(names)) {
 		return files
 	}
+
+	const map = new Map<string, number>()
 	return files.map(file => {
-		let name = cleanName(file.name)
-		const count = fileNames[name] || 0
-		--fileNames[name]
-		if (count > 1) {
-			const ext = extension(name)
-			name = `${name.replace(`.${ext}`, '')} (${count}).${ext}`
-		}
+		const name = renameDuplicatedFileName(map, cleanFileName(file.name))
 		return createBaseFile(file, { name })
 	})
+}
+
+export function renameDuplicatedFileName(
+	map: Map<string, number>,
+	name: string,
+): string {
+	const next = (map.get(name) || 0) + 1
+	map.set(name, next)
+	const ext = extension(name)
+	return next > 1 ? `${name.replace(`.${ext}`, '')} (${next}).${ext}` : name
+}
+
+function hasDuplicatedNames(names: string[]): boolean {
+	const uniqueNames = new Set<string>(names)
+	return uniqueNames.size < names.length
+}
+
+function cleanFileName(name: string): string {
+	const ext = extension(name)
+	const clean = name
+		.replace(`.${ext}`, '')
+		.replace(/\([0-9]\)/g, '')
+		.trimEnd()
+	return `${clean}.${ext}`
 }

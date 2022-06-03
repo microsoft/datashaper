@@ -11,6 +11,7 @@ import {
 	downloadTable,
 	FileCollection,
 	FileMimeType,
+	renameDuplicatedFileName,
 } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
@@ -56,9 +57,14 @@ export function useDownloadZip(
 		}
 
 		if (tables.length) {
-			const files = tables
+			const map = new Map<string, number>()
+			const renamedTables = tables.map(t => ({
+				...t,
+				name: renameDuplicatedFileName(map, t.name || t.id || 'table.csv'),
+			}))
+			const files = renamedTables
 				.map(table => tableFile(table))
-				.filter(f => f !== null)
+				.filter(f => f != null)
 			if (files.length) {
 				await fileCollection.add(files as FileWithPath[])
 				tables.forEach(table => {

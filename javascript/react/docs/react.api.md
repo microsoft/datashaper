@@ -10,7 +10,7 @@ import type { ColumnMetadata } from '@essex/arquero';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { DropzoneOptions } from 'react-dropzone';
 import { FileCollection } from '@data-wrangling-components/utilities';
-import type { FileRejection } from 'react-dropzone';
+import { FileRejection } from 'react-dropzone';
 import type { GraphManager } from '@data-wrangling-components/core';
 import type { ICommandBarProps } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
@@ -88,6 +88,8 @@ export interface DropzoneProps {
     // (undocumented)
     styles?: DropzoneStyles;
 }
+
+export { FileRejection }
 
 // Warning: (ae-missing-release-tag) "Guidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
