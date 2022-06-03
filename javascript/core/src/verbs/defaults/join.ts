@@ -5,9 +5,7 @@
 import type { JoinArgs } from '../join.js'
 import { JoinStrategy } from '../join.js'
 
-export const join = (): JoinArgs => {
-	return {
-		on: [],
-		strategy: JoinStrategy.Inner,
-	}
-}
+export const join = (): JoinArgs => ({
+	on: [],
+	strategy: JoinStrategy.Inner,
+})

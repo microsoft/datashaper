@@ -6,10 +6,8 @@ import type { BinArgs } from '../bin.js'
 import { BinStrategy } from '../bin.js'
 import { outputColumn } from './outputColumn.js'
 
-export const bin = (): Omit<BinArgs, 'column'> => {
-	return {
-		strategy: BinStrategy.Auto,
-		fixedcount: 10,
-		...outputColumn()
-	}
-}
+export const bin = (): Omit<BinArgs, 'column'> => ({
+	strategy: BinStrategy.Auto,
+	fixedcount: 10,
+	...outputColumn(),
+})

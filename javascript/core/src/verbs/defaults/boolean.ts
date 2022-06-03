@@ -7,10 +7,8 @@ import { BooleanOperator } from '../types.js'
 import { inputColumnList } from './inputColumnList.js'
 import { outputColumn } from './outputColumn.js'
 
-export const boolean = (): BooleanArgs => {
-	return {
-		operator: BooleanOperator.OR,
-		...inputColumnList(),
-		...outputColumn()
-	}
-}
+export const boolean = (): BooleanArgs => ({
+	operator: BooleanOperator.OR,
+	...inputColumnList(),
+	...outputColumn(),
+})

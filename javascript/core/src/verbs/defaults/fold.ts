@@ -5,9 +5,7 @@
 import type { FoldArgs } from '../fold.js'
 import { inputColumnList } from './inputColumnList.js'
 
-export const fold = (): FoldArgs => {
-	return {
-		to: ['key', 'value'],
-		...inputColumnList(),
-	}
-}
+export const fold = (): FoldArgs => ({
+	to: ['key', 'value'],
+	...inputColumnList(),
+})

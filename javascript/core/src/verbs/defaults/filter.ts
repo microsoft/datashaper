@@ -5,9 +5,7 @@
 import type { FilterArgs } from '../filter.js'
 import { BooleanOperator } from '../types.js'
 
-export const filter = (): Omit<FilterArgs, 'column'> => {
-	return {
-		criteria: [],
-		logical: BooleanOperator.OR,
-	}
-}
+export const filter = (): Omit<FilterArgs, 'column'> => ({
+	criteria: [],
+	logical: BooleanOperator.OR,
+})

@@ -5,9 +5,7 @@
 import type { LookupArgs } from '../lookup.js'
 import { inputColumnList } from './inputColumnList.js'
 
-export const lookup = (): LookupArgs => {
-	return {
-		on: [],
-		...inputColumnList(),
-	}
-}
+export const lookup = (): LookupArgs => ({
+	on: [],
+	...inputColumnList(),
+})

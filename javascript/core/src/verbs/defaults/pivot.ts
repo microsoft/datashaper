@@ -4,8 +4,6 @@
  */
 import type { PivotArgs } from '../pivot.js'
 import { FieldAggregateOperation } from '../types.js'
-export const pivot = (): Omit<PivotArgs, 'key' | 'value'> => {
-	return {
-		operation: FieldAggregateOperation.Any,
-	}
-}
+export const pivot = (): Omit<PivotArgs, 'key' | 'value'> => ({
+	operation: FieldAggregateOperation.Any,
+})

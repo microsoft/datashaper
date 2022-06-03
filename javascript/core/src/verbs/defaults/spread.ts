@@ -5,9 +5,7 @@
 import type { SpreadArgs } from '../spread.js'
 import { inputColumnList } from './inputColumnList.js'
 
-export const spread = (): SpreadArgs => {
-	return {
-		...inputColumnList(),
-		to: [],
-	}
-}
+export const spread = (): SpreadArgs => ({
+	...inputColumnList(),
+	to: [],
+})

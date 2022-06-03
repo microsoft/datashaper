@@ -7,10 +7,8 @@ import { MergeStrategy } from '../merge.js'
 import { inputColumnList } from './inputColumnList.js'
 import { outputColumn } from './outputColumn.js'
 
-export const merge = (): MergeArgs => {
-	return {
-		strategy: MergeStrategy.FirstOneWins,
-		...inputColumnList(),
-		...outputColumn(),
-	}
-}
+export const merge = (): MergeArgs => ({
+	strategy: MergeStrategy.FirstOneWins,
+	...inputColumnList(),
+	...outputColumn(),
+})

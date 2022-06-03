@@ -6,9 +6,7 @@ import type { BinarizeArgs } from '../binarize.js'
 import { filter } from './filter.js'
 import { outputColumn } from './outputColumn.js'
 
-export const binarize = (): Omit<BinarizeArgs, 'column'> => {
-	return {
-		...outputColumn(),
-		...filter(),
-	}
-}
+export const binarize = (): Omit<BinarizeArgs, 'column'> => ({
+	...outputColumn(),
+	...filter(),
+})
