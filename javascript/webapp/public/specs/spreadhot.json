@@ -1,0 +1,19 @@
+{
+	"$schema": "../../../../../../schema/workflow.json",
+	"name": "Spread with onehot",
+	"description": "",
+	"steps": [
+		{
+			"id": "spreadhot",
+			"verb": "spread",
+			"input": { "source": "data/companies2.csv" },
+			"args": {
+				"columns": ["Array"],
+				"delimiter": ";",
+				"onehot": true
+			}
+		}
+	],
+	"input": ["data/companies2.csv"],
+	"output": ["spreadhot"]
+}

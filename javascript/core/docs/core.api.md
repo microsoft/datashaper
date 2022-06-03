@@ -769,9 +769,9 @@ export const spread: (id: string) => StepNode<TableContainer<unknown>, SpreadArg
 // Warning: (ae-missing-release-tag) "SpreadArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface SpreadArgs {
-    // (undocumented)
-    column: string;
+export interface SpreadArgs extends InputColumnListArgs {
+    delimiter?: string;
+    onehot?: boolean;
     // (undocumented)
     to: string[];
 }

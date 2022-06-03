@@ -5,8 +5,8 @@
 			"verb": "spread",
 			"input": "table6",
 			"args": {
-				"column": "ID",
-				"to": ["ID_1"]
+				"columns": ["ID"],
+				"to": ["ID_X"]
 			},
 			"id": "expected"
 		}

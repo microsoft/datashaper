@@ -114,6 +114,7 @@ export function readStep<T extends object | void | unknown = any>(
 				...base,
 				args: {
 					to: [],
+					columns: [],
 					...(args as object),
 				} as T,
 			}

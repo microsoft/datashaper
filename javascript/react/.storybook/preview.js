@@ -1,3 +1,8 @@
+import { addDecorator } from '@storybook/react'
+import { ThematicFluentDecorator } from './ThematicFluentDecorator'
+
+addDecorator(ThematicFluentDecorator)
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {

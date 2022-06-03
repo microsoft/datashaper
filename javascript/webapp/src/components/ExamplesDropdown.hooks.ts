@@ -16,6 +16,7 @@ import groupby from '../../public/specs/groupby.json'
 import multistepBinarize from '../../public/specs/multistep-binarize.json'
 import sparkbar from '../../public/specs/sparkbar.json'
 import sparkline from '../../public/specs/sparkline.json'
+import spreadhot from '../../public/specs/spreadhot.json'
 import type { ExamplesDropdownProps } from './ExamplesDropdown.types.js'
 
 const specs: Array<WorkflowObject> = [
@@ -28,6 +29,7 @@ const specs: Array<WorkflowObject> = [
 	categorical as unknown as WorkflowObject,
 	dropdown as unknown as WorkflowObject,
 	groupby as unknown as WorkflowObject,
+	spreadhot as unknown as WorkflowObject,
 ]
 
 export function useExampleOptions(): IDropdownOption[] {

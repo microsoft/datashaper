@@ -1,0 +1,16 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"id": "expected",
+			"verb": "spread",
+			"input": { "source": "table29" },
+			"args": {
+				"columns": ["arr"],
+				"delimiter": ";"
+			}
+		}
+	],
+	"input": ["table29"],
+	"output": ["expected"]
+}
