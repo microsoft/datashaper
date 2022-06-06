@@ -3,9 +3,6 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from collections import defaultdict
-from typing import Dict
-
 import pandas as pd
 
 from data_wrangling_components.table_store import TableContainer
@@ -15,12 +12,9 @@ def unfold(input: TableContainer, key: str, value: str):
     input_table = input.table
     output = input_table.copy()
 
-    new_index = []
-    id_key: Dict[str, int] = defaultdict(int)
+    columns = len(output[key].unique())
 
-    for temp_key in output[key]:
-        new_index.append(id_key[temp_key])
-        id_key[temp_key] += 1
+    new_index = [index // columns for index in list(output.index)]
 
     output.index = new_index
 

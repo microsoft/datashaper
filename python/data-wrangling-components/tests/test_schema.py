@@ -35,7 +35,6 @@ def get_verb_test_specs(root: str) -> List[str]:
     return subfolders
 
 
-@pytest.mark.xfail
 @pytest.mark.parametrize(
     "fixture_path",
     get_verb_test_specs(FIXTURES_PATH),

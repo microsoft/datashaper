@@ -14,12 +14,12 @@ include = ["../../schema/workflow.json"]
 python = ">=3.8,<3.10"
 pandas = "^1.4.1"
 jsonschema = "^4.5.1"
+black = "^22.3.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 isort = "^5.10.1"
 flake8 = "^4.0.1"
-black = "^21.12b0"
 mypy = "^0.931"
 pytest-cov = "^3.0.0"
 ipykernel = "^6.7.0"

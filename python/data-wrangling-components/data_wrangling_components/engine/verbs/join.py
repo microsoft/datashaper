@@ -28,11 +28,13 @@ def __clean_result(strategy: JoinStrategy, result: pd.DataFrame, source: pd.Data
     elif strategy == JoinStrategy.SemiJoin:
         return result[result["_merge"] == "both"][source.columns]
     else:
-        result = pd.concat([
-            result[result["_merge"] == "both"],
-            result[result["_merge"] == "left_only"],
-            result[result["_merge"] == "right_only"]
-        ])
+        result = pd.concat(
+            [
+                result[result["_merge"] == "both"],
+                result[result["_merge"] == "left_only"],
+                result[result["_merge"] == "right_only"],
+            ]
+        )
         return result.drop("_merge", axis=1)
 
 
