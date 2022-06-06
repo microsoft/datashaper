@@ -10,13 +10,14 @@ import pandas as pd
 from data_wrangling_components.engine.pandas.aggregate_mapping import (
     aggregate_operation_mapping,
 )
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import FieldAggregateOperation
 
 
-def rollup(input: TableContainer, column: str, to: str, operation: str):
+def rollup(input: VerbInput, column: str, to: str, operation: str):
     aggregate_operation = FieldAggregateOperation(operation)
-    input_table = input.table
+    input_table = input.get_input()
 
     agg_result = input_table.agg(aggregate_operation_mapping[aggregate_operation])[
         column

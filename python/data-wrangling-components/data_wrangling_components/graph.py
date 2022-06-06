@@ -14,12 +14,13 @@ import pandas as pd
 from dataclasses import dataclass, field
 from jsonschema import validate
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.engine.verbs.verbs_mapping import functions
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import Verb
 
 
-SCHEMA_FILE = "schema/workflow.json"
+SCHEMA_FILE = "../../schema/workflow.json"
 
 
 @dataclass
@@ -98,9 +99,11 @@ class ExecutionGraph:
     def __resolve_inputs(self, inputs):
         if isinstance(inputs, str):
             return {
-                "input": self.inputs[inputs]
-                if inputs in self.inputs
-                else self.__graph[inputs].result
+                "input": VerbInput(
+                    input=self.inputs[inputs]
+                    if inputs in self.inputs
+                    else self.__graph[inputs].result
+                )
             }
         else:
             input_mapping = {}
@@ -118,7 +121,7 @@ class ExecutionGraph:
                         else self.__graph[input].result
                         for input in value
                     ]
-            return input_mapping
+            return {"input": VerbInput(**input_mapping)}
 
     def get(self, id: str) -> pd.DataFrame:
         container: Optional[TableContainer] = self.__graph[id].result

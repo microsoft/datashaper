@@ -3,18 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { NamedPortBinding } from '../types.js'
-import {
-	BinStrategy,
-	BooleanOperator,
-	FieldAggregateOperation,
-	JoinStrategy,
-	Verb,
-} from '../verbs/index.js'
+import * as defaults from '../verbs/defaults/index.js'
+import type { Verb } from '../verbs/index.js'
 import type { Step, StepInput } from './types.js'
 
 // TEMP: this creates a more readable id by doing a simple increment for each verb type
 // since this is global it will not align across pipelines or tables.
-// however, it will soon be replaced with graph interrogation methods that let us
+// however, it will eventually be replaced with graph interrogation methods that let us
 // construct much smarter and more user friendly ids
 const uid = (() => {
 	const map = new Map<string, number>()
@@ -24,11 +19,10 @@ const uid = (() => {
 		return `${verb} (${next})`
 	}
 })()
+
 /**
  * Factory function to create new verb configs
  * with as many reasonable defaults as possible.
- * TODO: if we accepted a table (or TableStore) we could do column lookups and such
- * to preselect.
  * @param verb -
  */
 export function readStep<T extends object | void | unknown = any>(
@@ -41,128 +35,22 @@ export function readStep<T extends object | void | unknown = any>(
 		verb,
 		input: fixInputs(input, previous),
 	}
-	switch (verb) {
-		case Verb.Bin:
-			return {
-				...base,
-				args: {
-					to: 'output',
-					strategy: BinStrategy.Auto,
-					fixedcount: 10,
-					...(args as object),
-				} as T,
-			}
-		case Verb.Aggregate:
-		case Verb.Boolean:
-		case Verb.Derive:
-		case Verb.Fill:
-		case Verb.Merge:
-		case Verb.Rollup:
-		case Verb.Window:
-			return {
-				...base,
-				args: {
-					to: 'output',
-					...(args as object),
-				} as T,
-			}
-		case Verb.Concat:
-		case Verb.Difference:
-		case Verb.Intersect:
-		case Verb.Union:
-			return {
-				...base,
-				args: {
-					others: [],
-					...(args as object),
-				} as T,
-			}
-		case Verb.Fold:
-			return {
-				...base,
-				args: {
-					to: ['key', 'value'],
-					columns: [],
-					...(args as object),
-				} as T,
-			}
-		case Verb.Convert:
-			return {
-				...base,
-				args: {
-					columns: [],
-					formatPattern: '%Y-%m-%d',
-					...(args as object),
-				} as T,
-			}
-		case Verb.Erase:
-		case Verb.Impute:
-		case Verb.Lookup:
-		case Verb.Groupby:
-		case Verb.Dedupe:
-		case Verb.Select:
-		case Verb.Unroll:
-			return {
-				...base,
-				args: {
-					columns: [],
-					...(args as object),
-				} as T,
-			}
-		case Verb.Spread:
-			return {
-				...base,
-				args: {
-					to: [],
-					columns: [],
-					...(args as object),
-				} as T,
-			}
-		case Verb.Pivot:
-			return {
-				...base,
-				args: {
-					operation: FieldAggregateOperation.Any,
-					...(args as object),
-				} as T,
-			}
-		case Verb.Join:
-			return {
-				...base,
-				args: {
-					strategy: JoinStrategy.Inner,
-					...(args as object),
-				} as T,
-			}
-		case Verb.Binarize:
-			return {
-				...base,
-				args: {
-					to: 'output',
-					criteria: [],
-					logical: BooleanOperator.OR,
-					...(args as object),
-				} as T,
-			}
-		case Verb.Filter:
-			return {
-				...base,
-				args: {
-					criteria: [],
-					logical: BooleanOperator.OR,
-					...(args as object),
-				} as T,
-			}
-		case Verb.Fetch:
-		case Verb.Onehot:
-		case Verb.Orderby:
-		case Verb.Rename:
-		case Verb.Sample:
-		case Verb.Ungroup:
-		case Verb.Unorder:
-		case Verb.Unfold:
+
+	// each verb should have default verb-specific params defined, load them up and merge into the step
+	const factories = defaults as any as Record<string, () => Partial<T>>
+	const factory = factories[verb]
+
+	if (!factory) {
+		throw new Error(`missing verb defaults [${verb}]`)
 	}
-	return base
+
+	return {
+		...base,
+		args: {
+			...factory(),
+			...(args as Partial<T>),
+		} as T,
+	}
 }
 
 function fixInputs(

@@ -7,17 +7,17 @@ from typing import List
 
 import pandas as pd
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 
 
 def lookup(
-    source: TableContainer,
-    other: TableContainer,
+    input: VerbInput,
     columns: List[str],
     on: List[str] = None,
 ):
-    input_table: pd.DataFrame = source.table
-    other_table: pd.DataFrame = other.table
+    input_table: pd.DataFrame = input.get_input()
+    other_table: pd.DataFrame = input.get_others()[0]
 
     if on is not None and len(on) > 1:
         left_column = on[0]

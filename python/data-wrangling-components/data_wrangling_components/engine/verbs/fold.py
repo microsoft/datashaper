@@ -5,21 +5,21 @@
 
 from typing import List, Tuple
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 
 
-def fold(input: TableContainer, to: Tuple[str, str], columns: List[str]):
-    input_table = input.table
-    output = input_table.melt(
-        id_vars=set(input_table.columns) - set(columns),
-        value_vars=columns,
-        var_name=to[0],
-        value_name=to[1],
-    ).reset_index(drop=True)
+def fold(input: VerbInput, to: Tuple[str, str], columns: List[str]):
+    input_table = input.get_input()
+    output = input_table.copy()
+    columns = [column for column in output.columns if column not in columns]
 
-    if len(columns) > 1:
-        output = output.sort_values(
-            by=[col for col in input_table.columns if col not in columns]
-        ).reset_index(drop=True)
+    if len(columns) > 0:
+        output = output.set_index(columns)
+    output = output.stack(dropna=False).reset_index()
+
+    output = output.rename(
+        {output.filter(regex="level_[1-9]").columns[0]: to[0], 0: to[1]}, axis=1
+    ).reset_index()[columns + [to[0], to[1]]]
 
     return TableContainer(table=output)
