@@ -7,6 +7,7 @@ from typing import List
 
 import pandas as pd
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import JoinStrategy
 
@@ -39,14 +40,13 @@ def __clean_result(strategy: JoinStrategy, result: pd.DataFrame, source: pd.Data
 
 
 def join(
-    source: TableContainer,
-    other: TableContainer,
+    input: VerbInput,
     on: List[str] = None,
     strategy: str = "inner",
 ):
     join_strategy = JoinStrategy(strategy)
-    input_table = source.table
-    other = other.table
+    input_table = input.get_input()
+    other = input.get_others()[0]
 
     if on is not None and len(on) > 1:
         left_column = on[0]

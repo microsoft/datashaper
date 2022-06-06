@@ -5,11 +5,12 @@
 
 import pandas as pd
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 
 
-def unfold(input: TableContainer, key: str, value: str):
-    input_table = input.table
+def unfold(input: VerbInput, key: str, value: str):
+    input_table = input.get_input()
     output = input_table.copy()
 
     columns = len(output[key].unique())

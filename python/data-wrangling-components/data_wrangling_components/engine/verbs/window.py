@@ -10,6 +10,7 @@ import pandas as pd
 
 from pandas.core.groupby import DataFrameGroupBy
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import WindowFunction
 
@@ -55,10 +56,10 @@ __window_function_map = {
 }
 
 
-def window(input: TableContainer, column: str, to: str, operation: str):
+def window(input: VerbInput, column: str, to: str, operation: str):
     window_operation = WindowFunction(operation)
 
-    input_table = input.table
+    input_table = input.get_input()
     window = __window_function_map[window_operation](input_table[column])
 
     if isinstance(input_table, DataFrameGroupBy):

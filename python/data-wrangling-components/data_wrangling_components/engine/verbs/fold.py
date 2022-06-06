@@ -5,11 +5,12 @@
 
 from typing import List, Tuple
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 
 
-def fold(input: TableContainer, to: Tuple[str, str], columns: List[str]):
-    input_table = input.table
+def fold(input: VerbInput, to: Tuple[str, str], columns: List[str]):
+    input_table = input.get_input()
     output = input_table.copy()
     columns = [column for column in output.columns if column not in columns]
 

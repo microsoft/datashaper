@@ -5,10 +5,11 @@
 
 from typing import Dict
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 
 
-def rename(input: TableContainer, columns: Dict[str, str]):
-    input_table = input.table
+def rename(input: VerbInput, columns: Dict[str, str]):
+    input_table = input.get_input()
     output = input_table.rename(columns=columns)
     return TableContainer(table=output)

@@ -13,6 +13,7 @@ import pandas as pd
 
 from pandas.api.types import is_bool_dtype, is_numeric_dtype
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import ParseType
 
@@ -106,7 +107,7 @@ __type_mapping: Dict[ParseType, Callable] = {
 
 
 def convert(
-    input: TableContainer,
+    input: VerbInput,
     columns: List[str],
     type: str,
     radix: Optional[int] = None,
@@ -115,7 +116,7 @@ def convert(
 
     parse_type = ParseType(type)
 
-    input_table = input.table
+    input_table = input.get_input()
     output = input_table.copy()
 
     for column in columns:

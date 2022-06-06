@@ -8,6 +8,7 @@ from typing import List
 import numpy as np
 import pandas as pd
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 
 
@@ -51,13 +52,13 @@ def __onehot_spread(input_table, columns, to, delimiter):
 
 
 def spread(
-    input: TableContainer,
+    input: VerbInput,
     columns: List[str],
     to: List[str] = None,
     delimiter: str = ",",
     onehot: bool = False,
 ):
-    input_table = input.table
+    input_table = input.get_input()
     if to is None:
         to = columns
 

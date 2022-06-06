@@ -5,6 +5,7 @@
 
 import numpy as np
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import BinStrategy
 
@@ -33,7 +34,7 @@ def __get_bucket_value(bin_edges, inds, n, clamped, min_max, value, printRange):
 
 
 def bin(
-    input: TableContainer,
+    input: VerbInput,
     to: str,
     column: str,
     strategy: str,
@@ -44,7 +45,7 @@ def bin(
     clamped: bool = False,
     printRange: bool = False,
 ):
-    input_table = input.table
+    input_table = input.get_input()
     bin_strategy = BinStrategy(strategy)
     min_max = (
         (min, max)

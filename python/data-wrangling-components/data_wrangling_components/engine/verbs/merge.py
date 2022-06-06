@@ -10,6 +10,7 @@ import pandas as pd
 
 from pandas.api.types import is_bool
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import MergeStrategy
 
@@ -41,7 +42,7 @@ __strategy_mapping: Dict[MergeStrategy, Callable] = {
 
 
 def merge(
-    input: TableContainer,
+    input: VerbInput,
     to: str,
     columns: List[str],
     strategy: str,
@@ -49,7 +50,7 @@ def merge(
 ):
     merge_strategy = MergeStrategy(strategy)
 
-    input_table = input.table
+    input_table = input.get_input()
 
     output = input_table.copy()
     output[to] = output[columns].apply(
