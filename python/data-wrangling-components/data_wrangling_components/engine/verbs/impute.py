@@ -5,13 +5,12 @@
 
 from typing import List, Union
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 
 
-def impute(
-    input: TableContainer, columns: List[str], value: Union[str, int, float, bool]
-):
-    input_table = input.table
+def impute(input: VerbInput, columns: List[str], value: Union[str, int, float, bool]):
+    input_table = input.get_input()
     output = input_table.copy()
     for column in columns:
         output[column] = output[column].fillna(value)

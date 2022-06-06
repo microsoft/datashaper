@@ -10,6 +10,7 @@ import pandas as pd
 
 from pandas.api.types import is_numeric_dtype
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import MathOperator
 
@@ -35,10 +36,10 @@ __op_mapping: Dict[MathOperator, Callable] = {
 }
 
 
-def derive(input: TableContainer, to: str, column1: str, column2: str, operator: str):
+def derive(input: VerbInput, to: str, column1: str, column2: str, operator: str):
     math_operator = MathOperator(operator)
 
-    input_table = input.table
+    input_table = input.get_input()
     output = input_table.copy()
     try:
         output[to] = __op_mapping[math_operator](output[column1], output[column2])

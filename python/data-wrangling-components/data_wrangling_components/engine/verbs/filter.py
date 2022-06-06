@@ -8,6 +8,7 @@ import logging
 from typing import List, Union
 
 from data_wrangling_components.engine.pandas.filter_df import filter_df
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import (
     BooleanComparisonOperator,
@@ -40,7 +41,7 @@ def _get_operator(
     raise Exception(f"[{operator}] is not a recognized comparison operator")
 
 
-def filter(input: TableContainer, column: str, criteria: List, logical: str = "or"):
+def filter(input: VerbInput, column: str, criteria: List, logical: str = "or"):
     filter_criteria = [
         Criterion(
             value=arg.get("value", None),
@@ -50,7 +51,7 @@ def filter(input: TableContainer, column: str, criteria: List, logical: str = "o
         for arg in criteria
     ]
     logical_operator = BooleanLogicalOperator(logical)
-    input_table = input.table
+    input_table = input.get_input()
 
     filter_index = filter_df(
         input_table, FilterArgs(column, filter_criteria, logical_operator)

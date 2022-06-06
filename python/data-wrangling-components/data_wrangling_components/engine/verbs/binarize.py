@@ -7,6 +7,7 @@ from typing import List
 
 from data_wrangling_components.engine.pandas.filter_df import filter_df
 from data_wrangling_components.engine.verbs.filter import _get_operator
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import (
     BooleanLogicalOperator,
@@ -17,7 +18,7 @@ from data_wrangling_components.types import (
 
 
 def binarize(
-    input: TableContainer, to: str, column: str, criteria: List, logical: str = "or"
+    input: VerbInput, to: str, column: str, criteria: List, logical: str = "or"
 ):
     filter_criteria = [
         Criterion(
@@ -29,7 +30,7 @@ def binarize(
     ]
     logical_operator = BooleanLogicalOperator(logical)
 
-    input_table = input.table
+    input_table = input.get_input()
 
     filter_result = filter_df(
         input_table, FilterArgs(column, filter_criteria, logical_operator)

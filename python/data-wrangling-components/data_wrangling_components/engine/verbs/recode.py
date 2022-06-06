@@ -5,6 +5,7 @@
 
 from typing import Dict
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 
 
@@ -13,10 +14,10 @@ class RecodeMap(dict):
         return key
 
 
-def recode(input: TableContainer, to: str, column: str, map: Dict):
+def recode(input: VerbInput, to: str, column: str, map: Dict):
     map = RecodeMap(map)
 
-    input_table = input.table
+    input_table = input.get_input()
 
     output = input_table.copy()
     output[to] = output[column].map(map)

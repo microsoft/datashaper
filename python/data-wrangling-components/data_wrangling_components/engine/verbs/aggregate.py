@@ -8,15 +8,16 @@ from typing import List
 from data_wrangling_components.engine.pandas.aggregate_mapping import (
     aggregate_operation_mapping,
 )
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import FieldAggregateOperation
 
 
 def aggregate(
-    input: TableContainer, to: str, groupby: List[str], column: str, operation: str
+    input: VerbInput, to: str, groupby: List[str], column: str, operation: str
 ) -> TableContainer:
     aggregate_operation = FieldAggregateOperation(operation)
-    input_table = input.table
+    input_table = input.get_input()
     output = (
         input_table[[groupby, column]]
         .groupby(groupby)

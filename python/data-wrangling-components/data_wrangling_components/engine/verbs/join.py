@@ -7,6 +7,7 @@ from typing import List
 
 import pandas as pd
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import JoinStrategy
 
@@ -28,23 +29,24 @@ def __clean_result(strategy: JoinStrategy, result: pd.DataFrame, source: pd.Data
     elif strategy == JoinStrategy.SemiJoin:
         return result[result["_merge"] == "both"][source.columns]
     else:
-        result = pd.concat([
-            result[result["_merge"] == "both"],
-            result[result["_merge"] == "left_only"],
-            result[result["_merge"] == "right_only"]
-        ])
+        result = pd.concat(
+            [
+                result[result["_merge"] == "both"],
+                result[result["_merge"] == "left_only"],
+                result[result["_merge"] == "right_only"],
+            ]
+        )
         return result.drop("_merge", axis=1)
 
 
 def join(
-    source: TableContainer,
-    other: TableContainer,
+    input: VerbInput,
     on: List[str] = None,
     strategy: str = "inner",
 ):
     join_strategy = JoinStrategy(strategy)
-    input_table = source.table
-    other = other.table
+    input_table = input.get_input()
+    other = input.get_others()[0]
 
     if on is not None and len(on) > 1:
         left_column = on[0]
