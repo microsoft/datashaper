@@ -76,6 +76,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 					<LeftAlignedRow>
 						<EnumDropdown
 							label={'Logical combination'}
+							placeholder={'Choose boolean'}
 							enumeration={BooleanOperator}
 							labels={{
 								or: 'OR',

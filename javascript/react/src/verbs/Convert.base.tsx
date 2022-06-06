@@ -30,6 +30,7 @@ export const ConvertBase: React.FC<
 			inputColumnList(step, columns, 'Columns to convert'),
 			{
 				label: 'Data type',
+				placeholder: 'Choose type',
 				required: true,
 				type: FormInputType.SingleChoice,
 				current: step.args.type,

@@ -48,10 +48,8 @@ export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
 
 		return (
 			<Container>
-				<Label>Column renames</Label>
-				<ColumnPairs>
-				{columnPairs}
-				</ColumnPairs>
+				<Label required>Column renames</Label>
+				<ColumnPairs>{columnPairs}</ColumnPairs>
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={{ iconName: 'Add' }}
@@ -157,7 +155,7 @@ const Container = styled.div`
 `
 
 const ColumnPairs = styled.div`
-display: flex;
+	display: flex;
 	flex-direction: column;
 	gap: 5px;
 `

@@ -23,6 +23,7 @@ export const DeriveBase: React.FC<
 		() => [
 			{
 				label: 'Column one',
+				placeholder: 'Choose column',
 				type: FormInputType.SingleChoice,
 				current: step.args.column1,
 				required: true,
@@ -34,10 +35,11 @@ export const DeriveBase: React.FC<
 				MathOperator,
 				step.args.operator,
 				(s, arg) => (s.args.operator = arg as MathOperator),
-				{ required: true },
+				{ required: true, placeholder: 'Choose operation' },
 			),
 			{
 				label: 'Column two',
+				placeholder: 'Choose column',
 				type: FormInputType.SingleChoice,
 				options,
 				current: step.args.column2,
