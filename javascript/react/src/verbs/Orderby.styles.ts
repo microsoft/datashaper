@@ -11,6 +11,16 @@ export const Container = styled.div`
 	gap: 8px;
 `
 
+// bundles the label and sort list for tight spacing
+export const SortsContainer = styled.div``
+
+// bundles the individual sorts 
+export const Sorts = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+`
+
 export const icons = {
 	add: { iconName: 'Add' },
 }
