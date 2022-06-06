@@ -10,7 +10,6 @@ export const LeftAlignedRow = styled.div`
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: flex-end;
-	margin-bottom: 8px;
 `
 
 /**

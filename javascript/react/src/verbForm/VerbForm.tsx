@@ -479,6 +479,4 @@ const Container = styled.div`
 	flex-direction: column;
 `
 
-const Row = styled.div`
-	margin-bottom: 8px;
-`
+const Row = styled.div``

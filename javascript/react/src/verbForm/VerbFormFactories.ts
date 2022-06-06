@@ -26,10 +26,12 @@ import { FormInputType } from './VerbForm.js'
 export function inputColumnList(
 	step: Step<InputColumnListArgs>,
 	columns: string[],
-	label = 'Columns',
+	label = 'Columns'
 ): FormInput<InputColumnListArgs> {
 	return {
+		required: true,
 		label,
+		placeholder: 'Choose columns',
 		type: FormInputType.MultiChoice,
 		options: getSimpleDropdownOptions(columns),
 		current: step.args.columns,

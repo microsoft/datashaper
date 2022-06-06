@@ -26,6 +26,7 @@ export const MergeBase: React.FC<
 				MergeStrategy,
 				step.args.strategy,
 				(s, val) => (s.args.strategy = val as MergeStrategy),
+				{ required: true }
 			),
 			{
 				label: 'Delimiter',

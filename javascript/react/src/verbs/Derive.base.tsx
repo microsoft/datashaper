@@ -41,6 +41,7 @@ export const DeriveBase: React.FC<
 				type: FormInputType.SingleChoice,
 				options,
 				current: step.args.column2,
+				required: true,
 				onChange: (s, arg) => (s.args.column2 = arg as string),
 			},
 		],

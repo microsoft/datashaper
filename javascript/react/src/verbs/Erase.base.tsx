@@ -25,6 +25,7 @@ export const EraseBase: React.FC<
 				type: FormInputType.Text,
 				current: step.args.value,
 				placeholder: 'text, number, or boolean',
+				required: true,
 				onChange: (s, val) => (s.args.value = val),
 			},
 		],

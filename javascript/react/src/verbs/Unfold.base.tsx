@@ -33,6 +33,7 @@ export const UnfoldBase: React.FC<
 				type: FormInputType.SingleChoice,
 				options,
 				current: step.args.value,
+				required: true,
 				onChange: (s, val) => (s.args.value = val as string),
 			},
 		],

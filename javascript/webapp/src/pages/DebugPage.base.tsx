@@ -13,7 +13,7 @@ import {
 } from '@data-wrangling-components/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
-import { IconButton } from '@fluentui/react'
+import { ActionButton } from '@fluentui/react'
 import { memo, useState } from 'react'
 
 import { ControlBar } from '../components/ControlBar.js'
@@ -106,13 +106,15 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 				<Commands>
 					<StepSelector onCreate={onStepCreate} showButton />
 					<Buttons>
-						<IconButton
+						<ActionButton
 							title={'Save workflow as JSON'}
 							iconProps={icons.download}
 							href={downloadUrl}
 							download={'workflow.json'}
 							type={'application/json'}
-						/>
+						>
+							Download workflow
+						</ActionButton>
 					</Buttons>
 				</Commands>
 			</Workspace>
