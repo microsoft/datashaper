@@ -20,7 +20,7 @@ from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import Verb
 
 
-SCHEMA_FILE = "schema/workflow.json"
+SCHEMA_FILE = "../../schema/workflow.json"
 
 
 @dataclass

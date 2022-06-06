@@ -8,7 +8,6 @@ authors = [
 ]
 license = "MIT"
 readme = "README.md"
-include = ["../../schema/workflow.json"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.10"
