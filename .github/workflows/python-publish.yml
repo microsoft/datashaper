@@ -2,7 +2,7 @@ name: Python-Publish-CI
 on:
   push:
     paths:
-      - 'python/pyproject.toml'
+      - 'python/data-wrangling-components/pyproject.toml'
 jobs:
   publish:
     runs-on: ubuntu-latest
