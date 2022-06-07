@@ -65,7 +65,6 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const onStepSave = useHandleStepSave(graph)
 	const onStepCreate = useCreateStepHandler(graph)
 	const onStepOutputChange = useHandleStepOutputChanged(graph)
-	console.log(workflow)
 	return (
 		<Container>
 			<Workspace className="arquero-workspace">

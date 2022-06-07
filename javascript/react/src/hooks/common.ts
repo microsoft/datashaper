@@ -2,8 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Workflow } from '@data-wrangling-components/core'
-import { createGraphManager } from '@data-wrangling-components/core'
+import type {
+	GraphManager,
+	Step,
+	Workflow,
+} from '@data-wrangling-components/core'
+import { createGraphManager,readStep  } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useMemo } from 'react'
@@ -68,22 +72,14 @@ export function useFormattedColumnArg(): (
 	}, [])
 }
 
-export function useResetArgs(): (stepArgs: unknown) => object {
-	return useCallback((stepArgs: unknown) => {
-		const args = stepArgs as Record<string, unknown>
+export function useResetArgs(): (step: Step) => Step {
+	return useCallback((step: Step) => {
+		const template = readStep(step).args as Record<string, unknown>
+		const args = step.args as Record<string, unknown>
+		// rewrite through the proxy for each arg entry
 		Object.keys(args).forEach(key => {
-			if (typeof args[key] === 'string' && key !== 'to') {
-				args[key] = ''
-			} else if (typeof args[key] === 'number') {
-				args[key] = undefined
-			} else if (typeof args[key] === 'boolean') {
-				args[key] = undefined
-			} else if (Array.isArray(args[key])) {
-				args[key] = []
-			} else if (typeof args[key] === 'object') {
-				args[key] = {}
-			}
+			args[key] = template[key]
 		})
-		return args
+		return step
 	}, [])
 }
