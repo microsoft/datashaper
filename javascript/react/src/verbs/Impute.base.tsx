@@ -22,8 +22,10 @@ export const ImputeBase: React.FC<
 			inputColumnList(step, columns, 'Columns to impute'),
 			{
 				label: 'Fill value',
+				placeholder: 'Enter a value',
 				type: FormInputType.Text,
 				current: step.args.value,
+				required: true,
 				onChange: (s, val) => (s.args.value = val as string),
 			},
 		],

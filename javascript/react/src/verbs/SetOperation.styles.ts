@@ -12,5 +12,10 @@ export const icons = {
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+`
+
+export const Tables = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
 `

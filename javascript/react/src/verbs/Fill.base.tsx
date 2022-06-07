@@ -18,7 +18,6 @@ export const FillBase: React.FC<StepComponentProps<FillArgs>> = memo(
 			() => [
 				{
 					label: 'Fill value',
-					placeholder: 'text, number, or boolean',
 					type: FormInputType.Text,
 					current: step.args.value,
 					onChange: (s, val) => (s.args.value = val as string),

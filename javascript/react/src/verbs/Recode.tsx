@@ -50,7 +50,9 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 
 		return (
 			<Container>
+				<ColumnPairs>
 				{columnPairs}
+				</ColumnPairs>
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={{ iconName: 'Add' }}
@@ -172,8 +174,12 @@ const ColumnPair: React.FC<{
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	gap: 8px;
+`
+const ColumnPairs = styled.div`
+	margin-top: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
 `
 
 const ColumnPairContainer = styled.div`

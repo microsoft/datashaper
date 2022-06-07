@@ -24,6 +24,7 @@ export const RollupBase: React.FC<StepComponentProps<RollupArgs>> = memo(
 					FieldAggregateOperation,
 					step.args.operation,
 					(s, val) => (s.args.operation = val as FieldAggregateOperation),
+					{ required: true }
 				),
 			],
 			[step],

@@ -27,7 +27,7 @@ export const BooleanLogicBase: React.FC<
 				BooleanOperator,
 				step.args.operator,
 				(s, opt) => (s.args.operator = opt as BooleanOperator),
-				{ required: true },
+				{ required: true, placeholder: 'Choose boolean' },
 				{
 					or: 'OR',
 					and: 'AND',

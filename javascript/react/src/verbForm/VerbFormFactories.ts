@@ -29,7 +29,9 @@ export function inputColumnList(
 	label = 'Columns',
 ): FormInput<InputColumnListArgs> {
 	return {
+		required: true,
 		label,
+		placeholder: 'Choose columns',
 		type: FormInputType.MultiChoice,
 		options: getSimpleDropdownOptions(columns),
 		current: step.args.columns,
@@ -57,7 +59,7 @@ export function joinInputs(
 				}
 				s.args.on[0] = opt as string
 			},
-			{ required: true },
+			{ required: true, placeholder: 'Choose column' },
 		),
 		dropdown(
 			`${upperFirst(label)} table key`,
@@ -68,6 +70,7 @@ export function joinInputs(
 					s.args.on[1] = opt as string
 				}
 			},
+			{ placeholder: 'Choose column' },
 		),
 	]
 }

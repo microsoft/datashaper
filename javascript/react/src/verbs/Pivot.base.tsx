@@ -25,6 +25,8 @@ export const PivotBase: React.FC<
 		() => [
 			{
 				label: 'Column used as key',
+				placeholder: 'Choose column',
+				required: true,
 				type: FormInputType.SingleChoice,
 				current: step.args.key,
 				options,
@@ -32,6 +34,8 @@ export const PivotBase: React.FC<
 			},
 			{
 				label: 'Column used as value',
+				placeholder: 'Choose column',
+				required: true,
 				type: FormInputType.SingleChoice,
 				current: step.args.value,
 				options,

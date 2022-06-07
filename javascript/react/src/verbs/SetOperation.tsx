@@ -8,7 +8,7 @@ import { memo, useCallback } from 'react'
 import { useStepDataTable } from '../hooks/useStepDataTable.js'
 import type { StepComponentProps } from '../types.js'
 import { useOthers } from './SetOperation.hooks.js'
-import { Container, icons } from './SetOperation.styles.js'
+import { Container, icons, Tables } from './SetOperation.styles.js'
 
 /**
  * Provides inputs to create a list of tables.
@@ -32,7 +32,7 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 		return (
 			<Container>
 				<Label>With tables</Label>
-				{others}
+				<Tables>{others}</Tables>
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={icons.add}

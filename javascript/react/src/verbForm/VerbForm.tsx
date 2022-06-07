@@ -416,6 +416,7 @@ const CheckboxInput: React.FC<{
 	step,
 	input: {
 		label,
+		required,
 		current,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
@@ -429,6 +430,7 @@ const CheckboxInput: React.FC<{
 		<Wrapper>
 			<Checkbox
 				label={label}
+				required={required}
 				checked={current}
 				onChange={changeHandler}
 				disabled={disabled}
@@ -446,6 +448,8 @@ const TextInput: React.FC<{
 	step,
 	input: {
 		label,
+		placeholder,
+		required,
 		current,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
@@ -459,6 +463,8 @@ const TextInput: React.FC<{
 		<Wrapper>
 			<TextField
 				label={label}
+				placeholder={placeholder}
+				required={required}
 				value={current}
 				onChange={changeHandler}
 				disabled={disabled}
@@ -479,6 +485,4 @@ const Container = styled.div`
 	flex-direction: column;
 `
 
-const Row = styled.div`
-	margin-bottom: 8px;
-`
+const Row = styled.div``
