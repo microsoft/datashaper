@@ -11,8 +11,8 @@ import { useCallback } from 'react'
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	return useCallback(
 		async (fc: FileCollection) => {
-			let tables = fc.list(FileType.table)
-			if (!tables.length) {
+			let tableFiles = fc.list(FileType.table)
+			if (!tableFiles.length) {
 				return
 			}
 			const regex = /metadata\.json$/i
@@ -20,16 +20,15 @@ function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 			const metadata = jsonFile ? await jsonFile.toJson() : null
 			const { input = [] } = metadata || {}
 			if (input.length) {
-				tables = tables.filter(t => input.includes(t.name))
+				tableFiles = tableFiles.filter(t => input.includes(t.name))
 			}
 			const tableContainer = []
 
-			for await (const t of tables) {
+			for await (const t of tableFiles) {
 				const { name } = t
 				const table = {
-					name,
 					table: await t.toTable(),
-					id: name, // TODO: validate which id is more appropriate
+					id: name,
 				} as TableContainer
 				tableContainer.push(table)
 			}

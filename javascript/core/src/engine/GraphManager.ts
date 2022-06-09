@@ -249,7 +249,7 @@ export class GraphManager {
 		const port = this.getNode(node).output(output)
 		this.outputObservables.set(name, port)
 		const subscription = port.subscribe(latest => {
-			this.outputCache.set(name, { ...latest, id: name, name })
+			this.outputCache.set(name, { ...latest, id: name })
 			this._onChange.next()
 		})
 		this.outputSubscriptions.set(name, subscription)

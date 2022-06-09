@@ -2750,7 +2750,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/core@workspace:javascript/core"
   dependencies:
-    "@essex/arquero": ^2.0.3
+    "@essex/arquero": ^3.0.0
     "@essex/dataflow": ^0.1.2
     "@essex/jest-config": ^21.0.12
     "@essex/scripts": ^22.0.4
@@ -2814,8 +2814,8 @@ __metadata:
     "@data-wrangling-components/core": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
-    "@essex/arquero": ^2.0.3
-    "@essex/arquero-react": ^1.0.6
+    "@essex/arquero": ^3.0.0
+    "@essex/arquero-react": ^1.1.0
     "@essex/charts-react": ^1.0.5
     "@essex/dataflow": ^0.1.2
     "@essex/scripts": ^22.0.4
@@ -2936,8 +2936,8 @@ __metadata:
     "@data-wrangling-components/react": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
-    "@essex/arquero": ^2.0.3
-    "@essex/arquero-react": ^1.0.6
+    "@essex/arquero": ^3.0.0
+    "@essex/arquero-react": ^1.1.0
     "@essex/hooks": ^4.0.12
     "@essex/scripts": ^22.0.4
     "@essex/themed-components": ^2.2.7
@@ -3107,11 +3107,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/arquero-react@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "@essex/arquero-react@npm:1.0.6"
+"@essex/arquero-react@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@essex/arquero-react@npm:1.1.0"
   dependencies:
-    "@essex/arquero": ^2.0.3
+    "@essex/arquero": ^3.0.0
     "@essex/charts-react": ^1.0.5
     d3-format: ^3.1.0
     lodash-es: ^4.17.21
@@ -3125,18 +3125,18 @@ __metadata:
     arquero: ^4.8.7
     react: ">= 18"
     styled-components: ^5.3.0
-  checksum: 63b8d5e87b31967b91dd6c0bc7f97b254f3e3ba3fa175cbe798cb39fae90f0015aaa2d65ef3bab1d02d6d3bc2a3ce19a6f884b5ccee5867b6868bd0706ca4e7e
+  checksum: 604cf74fa52eec9f0fa71be6ec0b63a41d47c4f37630a0665ca30eaa93a49149b43a1b42ddbf8ddf4e12e8bd5eea2c8f228ba904e77eac7fac92c5be8e941978
   languageName: node
   linkType: hard
 
-"@essex/arquero@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@essex/arquero@npm:2.0.3"
+"@essex/arquero@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@essex/arquero@npm:3.0.0"
   dependencies:
     lodash-es: ^4.17.21
   peerDependencies:
     arquero: ^4.8.7
-  checksum: fbcebc76699e42d4cb10cd71805317480625601ddb6c5301cbce0f347f3245586ea3ebb6f01981d1adc6cc36f77d23d06548dcc1f3ef9bac0239dc603e05fa2e
+  checksum: c49d122d5d7ed53842648f0a77a3bfceaa222ddc5103568d39383a8f7ba1e6103e04ee6bd190078c82ae5c2d6127a7a92b884660e4d1bf649ead5d5d8ef62cb4
   languageName: node
   linkType: hard
 

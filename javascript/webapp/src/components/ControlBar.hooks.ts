@@ -25,5 +25,5 @@ export function useLoadTableFiles(): (
 
 async function readTable(file: BaseFile): Promise<TableContainer> {
 	const table = await file.toTable()
-	return { name: file.name, id: file.name, table }
+	return { id: file.name, table }
 }
