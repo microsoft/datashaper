@@ -4,7 +4,7 @@
  */
 
 import { FileType } from '../../index.js'
-import { createBaseFile } from '../../utils/index.js'
+import { createBaseFile, renameDuplicatedFiles } from '../../utils/index.js'
 import { FileCollection } from '../FileCollection.js'
 
 let fileCollection
@@ -64,7 +64,7 @@ describe('FileCollection.add', () => {
 	it('should add a list of files to the FileCollection', async () => {
 		const files = [file, file]
 		await fileCollection.add(files)
-		expect(fileCollection.list()).toEqual(files)
+		expect(fileCollection.list()).toEqual(renameDuplicatedFiles(files))
 	})
 
 	it('should add a file from a url to the FileCollection', async () => {
@@ -98,7 +98,7 @@ describe('FileCollection.clear', () => {
 	it('should clear the collection', async () => {
 		const files = [file, file]
 		await fileCollection.add(files)
-		expect(fileCollection.list()).toEqual(files)
+		expect(fileCollection.list()).toEqual(renameDuplicatedFiles(files))
 		fileCollection.clear()
 		expect(fileCollection.list()).toEqual([])
 	})
