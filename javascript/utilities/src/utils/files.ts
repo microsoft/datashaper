@@ -182,8 +182,9 @@ export function renameDuplicatedFileName(
 	const next = (map.get(cleanName) || 0) + 1
 	map.set(cleanName, next)
 	const ext = extension(cleanName)
+	const basename = cleanName.replace(`.${ext}`, '')
 	return next > 1
-		? `${cleanName.replace(`.${ext}`, '')} (${next}).${ext}`
+		? `${basename} (${next}).${ext}`
 		: cleanName
 }
 
