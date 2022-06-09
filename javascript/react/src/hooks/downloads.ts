@@ -11,7 +11,6 @@ import {
 	downloadTable,
 	FileCollection,
 	FileMimeType,
-	renameDuplicatedFileName,
 } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
@@ -29,7 +28,7 @@ export function useDownloadCsv(tables: TableContainer[]): () => void {
 	return useCallback(() => {
 		for (const table of tables) {
 			if (table?.table) {
-				downloadTable(table.table, tableName(table.name || table.id))
+				downloadTable(table.table, tableName(table.id))
 			}
 		}
 	}, [tables])
@@ -48,7 +47,7 @@ export function useDownloadZip(
 
 		for (const outputTable of outputTables) {
 			if (outputTable?.table) {
-				const file = tableFile(outputTable, outputTable.name || outputTable.id)
+				const file = tableFile(outputTable, outputTable.id)
 				if (file) {
 					await fileCollection.add(file)
 					output.push(file.name)
@@ -57,18 +56,13 @@ export function useDownloadZip(
 		}
 
 		if (tables.length) {
-			const map = new Map<string, number>()
-			const renamedTables = tables.map(t => ({
-				...t,
-				name: renameDuplicatedFileName(map, t.name || t.id || 'table.csv'),
-			}))
-			const files = renamedTables
+			const files = tables
 				.map(table => tableFile(table))
 				.filter(f => f != null)
 			if (files.length) {
 				await fileCollection.add(files as FileWithPath[])
 				tables.forEach(table => {
-					input.push(table.name || table.id)
+					input.push(table.id)
 				})
 			}
 		}
@@ -102,7 +96,7 @@ function tableName(name: string) {
 function tableFile(t: TableContainer, name?: string) {
 	return t.table
 		? createFileWithPath(new Blob([t.table.toCSV()]), {
-				name: tableName(name || t.name || t.id),
+				name: tableName(name || t.id),
 		  })
 		: null
 }

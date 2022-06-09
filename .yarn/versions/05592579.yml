@@ -1,0 +1,8 @@
+releases:
+  "@data-wrangling-components/core": patch
+  "@data-wrangling-components/react": minor
+  "@data-wrangling-components/utilities": minor
+  "@data-wrangling-components/webapp": patch
+
+declined:
+  - "@data-wrangling-components/schema"

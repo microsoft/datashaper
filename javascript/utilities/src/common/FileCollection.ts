@@ -53,6 +53,7 @@ export class FileCollection {
 		}
 		const filesFromZip = await getFilesFromZip(file)
 		this._files = [...this._files, ...filesFromZip.map(f => new BaseFile(f))]
+		this._files = [...renameDuplicatedFiles(this._files)]
 	}
 
 	private async _addFile(file: FileWithPath | File): Promise<void> {
@@ -65,6 +66,7 @@ export class FileCollection {
 			return this._addFromZip(file)
 		}
 		this._files = [...this._files, new BaseFile(file as FileWithPath)]
+		this._files = [...renameDuplicatedFiles(this._files)]
 	}
 
 	private async _addFromUrl(fileUrl: string): Promise<void> {
@@ -178,7 +180,6 @@ export class FileCollection {
 	}
 
 	async toZip(zipName = 'file-collection'): Promise<void> {
-		this._files = renameDuplicatedFiles(this._files)
 		const dataURI = await toZip(this.filtered())
 		const link = document.createElement('a')
 		link.href = dataURI

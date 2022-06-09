@@ -21,7 +21,7 @@ export function useTableSelection(
 	inputs: TableContainer[],
 	derived: TableContainer[],
 	selected?: string,
-	onSelect?: (name: string) => void,
+	onSelect?: (id: string) => void,
 ): {
 	text?: string
 	items: IContextualMenuItem[]
@@ -78,7 +78,7 @@ export function useTableSelection(
  */
 export function useOutputPreview(
 	derived: TableContainer[],
-	onSelect?: (name: string) => void,
+	onSelect?: (id: string) => void,
 ): {
 	onClick:
 		| React.MouseEventHandler<
@@ -110,7 +110,7 @@ function useMenuItems(tables: TableContainer[]): IContextualMenuItem[] {
 	return useMemo(() => {
 		return tables.map(table => ({
 			key: table.id,
-			text: table.name || table.id,
+			text: table.id,
 		}))
 	}, [tables])
 }

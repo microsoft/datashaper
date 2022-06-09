@@ -5,6 +5,6 @@
 export interface TableCardProps {
 	index: number
 	tableName: string
-	isSelected: (name: string) => boolean
-	onSelect?: (name: string) => void
+	isSelected: (id: string) => boolean
+	onSelect?: (id: string) => void
 }
