@@ -32,6 +32,11 @@ export const SpreadBase: React.FC<
 				type: FormInputType.Checkbox,
 				current: step.args.onehot,
 				onChange: (s, val) => (s.args.onehot = val as boolean),
+				styles: {
+					root: {
+						marginTop: 8
+					}
+				}
 			},
 		],
 		[step, columns],

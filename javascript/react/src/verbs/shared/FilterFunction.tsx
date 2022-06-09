@@ -162,6 +162,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 			const shared = {
 				required: !suppressLabels,
 				label: suppressLabels ? undefined : 'Function',
+				placeholder: 'Choose',
 				selectedKey: criterion.operator,
 				onChange: handleOpChange,
 				styles: leftStyles,

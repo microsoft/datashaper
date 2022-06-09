@@ -3,23 +3,12 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
+from data_wrangling_components.table_store import TableContainer
 
 
-def unorder(step: Step, store: TableStore):
-    """Reverts the orderby operation.
-
-    :param step:
-        Not used in this operation.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
-    input_table = store.table(step.input)
+def unorder(input: VerbInput):
+    input_table = input.get_input()
 
     output = input_table.sort_index()
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)

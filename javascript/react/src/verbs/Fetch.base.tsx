@@ -22,6 +22,7 @@ export const FetchBase: React.FC<StepComponentProps<FetchArgs>> = memo(
 					type: FormInputType.Text,
 					placeholder: 'URL to dataset',
 					current: step.args.url,
+					required: true,
 					onChange: (s, val) => (s.args.url = val as string),
 				},
 				{

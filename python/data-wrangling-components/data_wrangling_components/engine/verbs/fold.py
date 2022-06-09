@@ -5,45 +5,21 @@
 
 from typing import List, Tuple
 
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
+from data_wrangling_components.table_store import TableContainer
 
 
-@dataclass
-class FoldArgs:
-    to: Tuple[str, str]
-    columns: List[str]
+def fold(input: VerbInput, to: Tuple[str, str], columns: List[str]):
+    input_table = input.get_input()
+    output = input_table.copy()
+    columns = [column for column in output.columns if column not in columns]
 
+    if len(columns) > 0:
+        output = output.set_index(columns)
+    output = output.stack(dropna=False).reset_index()
 
-def fold(step: Step, store: TableStore):
-    """Creates 2 columns like a key-value in the table.
+    output = output.rename(
+        {output.filter(regex="level_[1-9]").columns[0]: to[0], 0: to[1]}, axis=1
+    ).reset_index()[columns + [to[0], to[1]]]
 
-    The first column contains the previous column name.
-    The second column contains the value that was in the column.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.verbs.fold.FoldArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
-    args = FoldArgs(to=step.args["to"], columns=step.args["columns"])
-    input_table = store.table(step.input)
-    output = (
-        input_table.melt(
-            id_vars=set(input_table.columns) - set(args.columns),
-            value_vars=args.columns,
-            var_name=args.to[0],
-            value_name=args.to[1],
-        )
-        .reset_index(drop=True)
-        .sort_values(by=list(set(input_table.columns) - set(args.columns)))
-        .reset_index(drop=True)
-    )
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)

@@ -8,28 +8,23 @@ import pytest
 
 from pandas.testing import assert_frame_equal
 
-from data_wrangling_components.pipeline import DefaultPipeline
-from data_wrangling_components.table_store import DefaultTableStore, TableContainer
+from data_wrangling_components.graph import ExecutionGraph
 
 
-FIXTURES_PATH = "../../schema/fixtures/cases"
-TABLE_STORE_PATH = "../../schema/fixtures/inputs"
+FIXTURES_PATH = "schema/fixtures/cases"
+TABLE_STORE_PATH = "schema/fixtures/inputs"
+SCHEMA_PATH = "schema/workflow.json"
+
+os.chdir("../..")
 
 
-def read_table_store(root: str) -> DefaultTableStore:
-    table_store = DefaultTableStore()
+def read_csv(path: str) -> pd.DataFrame:
+    df = pd.read_csv(path, na_values=["undefined"])
 
-    for table in os.listdir(root):
-        table_name = table.split(".")[0]
-        table_store.set(
-            table_name,
-            TableContainer(
-                id=table_name,
-                name=table_name,
-                table=pd.read_csv(os.path.join(root, table)),
-            ),
-        )
-    return table_store
+    if "date" in df.columns:
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+
+    return df
 
 
 def get_verb_test_specs(root: str) -> List[str]:
@@ -40,18 +35,31 @@ def get_verb_test_specs(root: str) -> List[str]:
     return subfolders
 
 
-@pytest.mark.xfail
-@pytest.mark.parametrize("fixture_path", get_verb_test_specs(FIXTURES_PATH))
+@pytest.mark.parametrize(
+    "fixture_path",
+    get_verb_test_specs(FIXTURES_PATH),
+)
 def test_verbs_schema_input(fixture_path: str):
     with open(os.path.join(fixture_path, "workflow.json")) as workflow:
-        pipeline = DefaultPipeline.from_json(
-            steps=json.load(workflow)["steps"], store=read_table_store(TABLE_STORE_PATH)
-        )
+        pipeline = ExecutionGraph(json.load(workflow), TABLE_STORE_PATH, SCHEMA_PATH)
 
     pipeline.run()
     for expected in os.listdir(fixture_path):
         if expected.endswith(".csv"):
+            result = pipeline.get(expected.split(".")[0])
+            if isinstance(result, pd.DataFrame):
+                result.to_csv(
+                    os.path.join(fixture_path, f"result_{expected}"), index=False
+                )
+            else:
+                result.obj.to_csv(
+                    os.path.join(fixture_path, f"result_{expected}"), index=False
+                )
             assert_frame_equal(
-                pd.read_csv(os.path.join(fixture_path, expected)),
-                pipeline.get_dataset(expected.split(".")[0]),
+                read_csv(os.path.join(fixture_path, expected)),
+                read_csv(os.path.join(fixture_path, f"result_{expected}")),
+                check_like=True,
+                check_dtype=False,
+                check_column_type=False,
             )
+            os.remove(os.path.join(fixture_path, f"result_{expected}"))

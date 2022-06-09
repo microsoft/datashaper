@@ -3,30 +3,23 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import FieldAggregateOperation, Step
-
-
-@dataclass
-class PivotArgs:
-    key: str
-    value: str
-    operation: FieldAggregateOperation
+from data_wrangling_components.engine.pandas.aggregate_mapping import (
+    aggregate_operation_mapping,
+)
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
+from data_wrangling_components.table_store import TableContainer
+from data_wrangling_components.types import FieldAggregateOperation
 
 
-def pivot(step: Step, store: TableStore):
-    args = PivotArgs(
-        key=step.args["key"],
-        value=step.args["value"],
-        operation=FieldAggregateOperation(step.args["operation"]),
-    )
+def pivot(input: VerbInput, key: str, value: str, operation: str):
+    aggregate_operation = FieldAggregateOperation(operation)
 
-    input_table = store.table(step.input)
+    input_table = input.get_input()
 
     output = input_table.pivot_table(
-        values=args.value, columns=args.key, aggfunc=args.operation
+        values=value,
+        columns=key,
+        aggfunc=aggregate_operation_mapping[aggregate_operation],
     )
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)

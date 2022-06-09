@@ -23,7 +23,7 @@ export class Workflow {
 		let prev: Step | undefined
 		workflowJson?.steps.forEach(i => {
 			const step = readStep(i, prev)
-			this._steps.push(readStep(step, prev))
+			this._steps.push(step)
 			prev = step
 		})
 		workflowJson?.input?.forEach(i => this._input.add(i))

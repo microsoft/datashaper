@@ -34,6 +34,6 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 					value: args.onehot ? `yes` : 'no',
 				},
 			]
-		}, [props])
+		}, [props, sub])
 		return <VerbDescription {...props} rows={rows} />
 	})

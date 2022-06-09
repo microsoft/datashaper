@@ -7,8 +7,12 @@ import styled from 'styled-components'
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	gap: 8px;
+`
+
+export const Sorts = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
 `
 
 export const icons = {

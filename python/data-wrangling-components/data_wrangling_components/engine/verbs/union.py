@@ -3,28 +3,16 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
+
 import pandas as pd
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import SetOperationArgs, Step
+from data_wrangling_components.table_store import TableContainer
 
 
-def union(step: Step, store: TableStore):
-    """Calculates the set union between two tables.
-
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.types.SetOperationArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
-    args = SetOperationArgs(others=step.args["others"])
-    input_table = store.table(step.input)
-    others = [store.table(other) for other in args.others]
+def union(input: VerbInput):
+    input_table = input.get_input()
+    others = input.get_others()
     output = pd.concat([input_table] + others, ignore_index=True).drop_duplicates()
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)

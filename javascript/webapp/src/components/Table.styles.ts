@@ -5,11 +5,11 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-	width: 600px;
-	height: 400px;
+	width: 500px;
+	height: 300px;
 	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
 export const TableContainer = styled.div`
-	height: 364px;
+	height: 264px;
 `

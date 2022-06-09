@@ -3,39 +3,26 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass
+import pandas as pd
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import Step
-
-
-@dataclass
-class UnfoldArgs:
-    key: str
-    value: str
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
+from data_wrangling_components.table_store import TableContainer
 
 
-def unfold(step: Step, store: TableStore):
-    args = UnfoldArgs(
-        key=step.args["key"],
-        value=step.args["value"],
-    )
-
-    input_table = store.table(step.input)
-
+def unfold(input: VerbInput, key: str, value: str):
+    input_table = input.get_input()
     output = input_table.copy()
 
-    temp_index = -1
-    new_index = []
-    id_key = output[args.key].iloc[0]
+    columns = len(output[key].unique())
 
-    for key in output[args.key]:
-        if key == id_key:
-            temp_index += 1
-        new_index.append(temp_index)
+    new_index = [index // columns for index in list(output.index)]
 
     output.index = new_index
 
-    output = output.pivot(columns=args.key, values=args.value)
+    output_temp = output.pivot(columns=key, values=value)
+    other_columns = [column for column in output.columns if column not in [key, value]]
+    output = pd.concat(
+        [output[other_columns].groupby(level=0).agg("first"), output_temp], axis=1
+    )
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)

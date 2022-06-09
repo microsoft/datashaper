@@ -78,7 +78,7 @@ export function useInputTableChanged(
 				// wire up the Step's input field
 				const node = outputNode ?? tableName
 				s.input[NodeInput.Source] = { node }
-				resetArgs(s.args)
+				resetArgs(s)
 			} else {
 				// no value: delete the input
 				delete s.input[NodeInput.Source]

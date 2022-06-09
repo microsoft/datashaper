@@ -3,28 +3,25 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
+from typing import Union
+
 import numpy as np
 import pandas as pd
 
-from dataclasses import dataclass
 from pandas.core.groupby import DataFrameGroupBy
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import (
-    InputColumnArgs,
-    OutputColumnArgs,
-    Step,
-    WindowFunction,
-)
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
+from data_wrangling_components.table_store import TableContainer
+from data_wrangling_components.types import WindowFunction
 
 
 def _get_window_indexer(
     column: pd.Series, fixed_size=False
-) -> pd.api.indexers.BaseIndexer:
+) -> Union[int, pd.api.indexers.BaseIndexer]:
     if fixed_size:
         return pd.api.indexers.FixedForwardWindowIndexer(window_size=len(column))
     else:
-        return pd.api.indexers.BaseIndexer(window_size=len(column))
+        return len(column)
 
 
 __window_function_map = {
@@ -59,29 +56,20 @@ __window_function_map = {
 }
 
 
-@dataclass
-class WindowArgs(InputColumnArgs, OutputColumnArgs):
-    operation: WindowFunction
+def window(input: VerbInput, column: str, to: str, operation: str):
+    window_operation = WindowFunction(operation)
 
-
-def window(step: Step, store: TableStore):
-    args = WindowArgs(
-        to=step.args["to"],
-        column=step.args["column"],
-        operation=WindowFunction(step.args["operation"]),
-    )
-
-    input_table = store.table(step.input)
-    window = __window_function_map[args.operation](input_table[args.column])
+    input_table = input.get_input()
+    window = __window_function_map[window_operation](input_table[column])
 
     if isinstance(input_table, DataFrameGroupBy):
         # ungroup table to add new column
         output = input_table.obj.copy()
-        output[args.to] = window.reset_index()[args.column]
+        output[to] = window.reset_index()[column]
         # group again by original group by
         output = output.groupby(input_table.keys)
     else:
         output = input_table.copy()
-        output[args.to] = window
+        output[to] = window
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)

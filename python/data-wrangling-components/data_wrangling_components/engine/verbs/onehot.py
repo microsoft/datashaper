@@ -3,33 +3,16 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Optional
-
 import pandas as pd
 
-from dataclasses import dataclass
-
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnArgs, Step
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
+from data_wrangling_components.table_store import TableContainer
 
 
-@dataclass
-class OneHotArgs(InputColumnArgs):
-    prefix: Optional[str] = ""
-
-
-def onehot(step: Step, store: TableStore):
-    args = OneHotArgs(
-        column=step.args["column"],
-        prefix=step.args.get("prefix", ""),
-    )
-
-    input_table = store.table(step.input)
-
-    dummies = pd.get_dummies(
-        input_table[args.column], prefix=args.prefix, prefix_sep=""
-    )
-
+def onehot(input: VerbInput, column: str, prefix: str = ""):
+    input_table = input.get_input()
+    dummies = pd.get_dummies(input_table[column], prefix=prefix, prefix_sep="")
+    dummies.loc[input_table[column].isnull(), dummies.columns] = None
     output = pd.concat([input_table, dummies], axis=1)
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)

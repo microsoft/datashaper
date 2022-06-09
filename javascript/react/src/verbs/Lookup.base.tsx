@@ -38,6 +38,7 @@ export const LookupBase: React.FC<
 				tables,
 				step.input[NodeInput.Other]?.node,
 				(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
+				{ required: true, placeholder: 'Choose column' },
 			),
 			...joinInputs(step, leftColumns, rightColumns, 'lookup'),
 			inputColumnList(step, rightColumns, 'Columns to copy'),

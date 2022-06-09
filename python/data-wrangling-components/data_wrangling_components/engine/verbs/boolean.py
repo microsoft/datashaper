@@ -3,34 +3,19 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass
+from typing import List
 
 from data_wrangling_components.engine.pandas.filter_df import _boolean_function_map
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import (
-    BooleanLogicalOperator,
-    InputColumnListArgs,
-    OutputColumnArgs,
-    Step,
-)
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
+from data_wrangling_components.table_store import TableContainer
+from data_wrangling_components.types import BooleanLogicalOperator
 
 
-@dataclass
-class BooleanArgs(InputColumnListArgs, OutputColumnArgs):
-    operator: BooleanLogicalOperator
+def boolean(input: VerbInput, to: str, columns: List[str], operator: str):
 
-
-def boolean(step: Step, store: TableStore):
-    args = BooleanArgs(
-        to=step.args["to"],
-        columns=step.args["columns"],
-        operator=BooleanLogicalOperator(step.args["operator"]),
-    )
-
-    input_table = store.table(step.input)
-
+    logical_operator = BooleanLogicalOperator(operator)
+    input_table = input.get_input()
     output = input_table.copy()
+    output[to] = _boolean_function_map[logical_operator](output)
 
-    output[args.to] = _boolean_function_map[args.operator](output)
-
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)

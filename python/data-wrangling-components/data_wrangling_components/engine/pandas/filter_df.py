@@ -4,7 +4,7 @@
 #
 
 from functools import partial
-from typing import Callable, Dict, List, Union
+from typing import Callable, Dict, List, Tuple, Union
 from uuid import uuid4
 
 import pandas as pd
@@ -28,6 +28,21 @@ _boolean_function_map = {
         lambda x: x == 1
     ),
 }
+
+
+def __check_unknown(row: Tuple, column_indexes: List[int]) -> bool:
+    for index in column_indexes:
+        if pd.isna(row[index]) or pd.isnull(row[index]):
+            return True
+    return False
+
+
+def __correct_unknown_value(
+    df: pd.DataFrame, columns: List[str], target: str
+) -> pd.DataFrame:
+    df[target] = df[columns + [target]].apply(
+        lambda x: None if pd.isnull(x[columns]).any() else x[target], axis=1
+    )
 
 
 def __equals(
@@ -128,6 +143,15 @@ def __lte(
     return df[column] <= target
 
 
+_empty_comparisons = {
+    StringComparisonOperator.IsEmpty,
+    StringComparisonOperator.IsNotEmpty,
+    NumericComparisonOperator.IsEmpty,
+    NumericComparisonOperator.IsNotEmpty,
+    BooleanComparisonOperator.IsEmpty,
+    BooleanComparisonOperator.IsNotEmpty,
+}
+
 _operator_map: Dict[
     Union[
         StringComparisonOperator, NumericComparisonOperator, BooleanComparisonOperator
@@ -158,7 +182,7 @@ _operator_map: Dict[
 }
 
 
-def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame:
+def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.Series:
     filters: List[str] = []
     filtered_df: pd.DataFrame = df.copy()
 
@@ -169,6 +193,10 @@ def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame:
             filtered_df[filter_name] = _operator_map[criteria.operator](
                 df=df, column=args.column, target=df[criteria.value]
             )
+            if criteria.operator not in _empty_comparisons:
+                __correct_unknown_value(
+                    filtered_df, [args.column, criteria.value], filter_name
+                )
         else:
             filtered_df[filter_name] = _operator_map[criteria.operator](
                 df=df, column=args.column, target=criteria.value
@@ -178,4 +206,6 @@ def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.DataFrame:
         filtered_df[filters]
     )
 
-    return df[df.index.isin(filtered_df[filtered_df["dwc_filter_result"]].index)]
+    __correct_unknown_value(filtered_df, filters, "dwc_filter_result")
+
+    return filtered_df["dwc_filter_result"]

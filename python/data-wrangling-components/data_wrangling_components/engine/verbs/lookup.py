@@ -3,55 +3,40 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from dataclasses import dataclass
+from typing import List
 
-from data_wrangling_components.table_store import TableContainer, TableStore
-from data_wrangling_components.types import InputColumnListArgs, JoinArgs, Step
+import pandas as pd
 
-
-@dataclass
-class LookupArgs(JoinArgs, InputColumnListArgs):
-    pass
+from data_wrangling_components.engine.verbs.verb_input import VerbInput
+from data_wrangling_components.table_store import TableContainer
 
 
-def lookup(step: Step, store: TableStore):
-    """Executes a Lookup operation (left join and drop duplicates keep last).
+def lookup(
+    input: VerbInput,
+    columns: List[str],
+    on: List[str] = None,
+):
+    input_table: pd.DataFrame = input.get_input()
+    other_table: pd.DataFrame = input.get_others()[0]
 
-    :param step:
-        Parameters to execute the operation.
-        See :py:class:`~data_wrangling_components.engine.verbs.lookup.LookupArgs`.
-    :type step: Step
-    :param store:
-        Table store that contains the inputs to be used in the execution.
-    :type store: TableStore
-
-    :return: new table with the result of the operation.
-    """
-    args = LookupArgs(
-        other=step.args["other"],
-        on=step.args.get("on", None),
-        columns=step.args["columns"],
-    )
-    input_table = store.table(step.input)
-    other = store.table(args.other)
-
-    if len(args.on) > 1:
-        left_column = args.on[0]
-        right_column = args.on[1]
-        other = other[[right_column] + args.columns]
+    if on is not None and len(on) > 1:
+        left_column = on[0]
+        right_column = on[1]
+        other_table = other_table[[right_column] + columns]
 
         output = input_table.merge(
-            other.drop_duplicates(subset=args.on, keep="last"),
+            other_table.drop_duplicates(subset=on, keep="last"),
             left_on=left_column,
             right_on=right_column,
             how="left",
         )
     else:
-        other = other[args.on + args.columns]
+        if on is not None:
+            other_table = other_table[on + columns]
         output = input_table.merge(
-            other.drop_duplicates(subset=args.on, keep="last"),
-            on=args.on,
+            other_table.drop_duplicates(subset=on, keep="last"),
+            on=on,
             how="left",
         )
 
-    return TableContainer(id=step.output, name=step.output, table=output)
+    return TableContainer(table=output)
