@@ -4,6 +4,8 @@
  */
 
 import type { WorkflowObject } from '@data-wrangling-components/core'
+import type { WorfklowJson } from '@data-wrangling-components/schema'
+import { schemaValidator } from '@data-wrangling-components/schema'
 import { FileCollection, FileType } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback } from 'react'
@@ -38,7 +40,10 @@ function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	)
 }
 
-function useJsonHandler(onUpdateWorkflow?: (workflow: WorkflowObject) => void) {
+function useJsonHandler(
+	onUpdateWorkflow?: (workflow: WorkflowObject) => void,
+	onErrorHandler?: (error: string) => void,
+) {
 	return useCallback(
 		async (fc: FileCollection) => {
 			const regex = /workflow(.*)\.json$/i
@@ -52,11 +57,15 @@ function useJsonHandler(onUpdateWorkflow?: (workflow: WorkflowObject) => void) {
 				return
 			}
 			const workflow = (await json.toJson()) as WorkflowObject
+			const isValid = await schemaValidator(workflow as WorfklowJson)
+			if (!isValid) {
+				return onErrorHandler && onErrorHandler('Invalid workflow definition')
+			}
 			if (workflow && onUpdateWorkflow) {
 				onUpdateWorkflow(workflow)
 			}
 		},
-		[onUpdateWorkflow],
+		[onUpdateWorkflow, onErrorHandler],
 	)
 }
 
@@ -69,16 +78,18 @@ export function useHandleCsvUpload(
 
 export function useHandleJsonUpload(
 	onUpdateWorkflow: (workflow: WorkflowObject) => void,
+	onErrorHandler?: (error: string) => void,
 ): () => void {
-	const jsonHandler = useJsonHandler(onUpdateWorkflow)
+	const jsonHandler = useJsonHandler(onUpdateWorkflow, onErrorHandler)
 	return useHandleFilesUpload(['.json'], jsonHandler)
 }
 
 export function useHandleFileUpload(
 	onUpdateWorkflow: (workflow: WorkflowObject) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
+	onErrorHandler?: (error: string) => void,
 ): (fc: FileCollection) => void {
-	const jsonHandler = useJsonHandler(onUpdateWorkflow)
+	const jsonHandler = useJsonHandler(onUpdateWorkflow, onErrorHandler)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	return useCallback(
 		async (fc: FileCollection) => {
@@ -93,8 +104,9 @@ export function useHandleFileUpload(
 export function useHandleZipUpload(
 	onUpdateWorkflow: (workflow: WorkflowObject) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
+	onErrorHandler?: (error: string) => void,
 ): () => void {
-	const jsonHandler = useJsonHandler(onUpdateWorkflow)
+	const jsonHandler = useJsonHandler(onUpdateWorkflow, onErrorHandler)
 	const csvHandler = useCsvHandler(onUpdateTables)
 	const handler = useCallback(
 		async (fc: FileCollection) => {

@@ -20,6 +20,7 @@ import type { GroupbyArgs } from '@data-wrangling-components/core';
 import type { ImputeArgs } from '@data-wrangling-components/core';
 import type { JoinArgs } from '@data-wrangling-components/core';
 import type { LookupArgs } from '@data-wrangling-components/core';
+import type { Maybe } from '@data-wrangling-components/core';
 import type { MergeArgs } from '@data-wrangling-components/core';
 import type { OnehotArgs } from '@data-wrangling-components/core';
 import type { OrderbyArgs } from '@data-wrangling-components/core';
@@ -55,6 +56,11 @@ export interface DualInput extends BasicInput {
         other: PortBinding;
     };
 }
+
+// Warning: (ae-missing-release-tag) "schemaValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function schemaValidator(worfklowJson?: WorfklowJson): Promise<Maybe<boolean>>;
 
 // Warning: (ae-missing-release-tag) "StepJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

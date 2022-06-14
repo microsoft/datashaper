@@ -1,7 +1,6 @@
 {
 	"name": "@data-wrangling-components/schema",
 	"version": "1.2.0",
-	"private": true,
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -29,12 +28,14 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
-		"build": "essex build --docs --skipExportCheck",
+		"build": "yarn schema && essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
+		"schema": "typescript-json-schema tsconfig.json WorfklowJson > ./src/workflow.json",
 		"bundle": "typescript-json-schema tsconfig.json WorfklowJson > ../../schema/workflow.json"
 	},
 	"dependencies": {
-		"@data-wrangling-components/core": "workspace:^"
+		"@data-wrangling-components/core": "workspace:^",
+		"ajv": "^8.11.0"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.4",

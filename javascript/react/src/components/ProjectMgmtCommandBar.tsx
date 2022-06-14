@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { MessageBar, MessageBarType } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
-import { memo } from 'react'
+import { memo, useState } from 'react'
 
 import { useHandleFileUpload } from '../hooks/uploads.js'
 import { CommandBar } from './CommandBar.js'
@@ -25,6 +26,7 @@ export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps> = memo(
 		...props
 	}) {
 		const theme = useThematic()
+		const [error, setError] = useState('')
 		const onUpdateWorkflowJson = useOnUpdateWorkflowJson(onUpdateWorkflow)
 		const commands = useProjectMgmtCommands(
 			workflow,
@@ -32,22 +34,35 @@ export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps> = memo(
 			outputTables,
 			onUpdateWorkflowJson,
 			onUpdateTables,
+			setError,
 		)
 		const onDrop = useHandleFileUpload(onUpdateWorkflowJson, onUpdateTables)
 
 		return (
-			<Dropzone
-				acceptedFileTypes={['.csv', '.json', '.zip']}
-				onDrop={onDrop}
-				styles={dropzone}
-			>
-				<CommandBar
-					items={commands}
-					bgColor={bgColor(theme)}
-					color={color(theme)}
-					{...props}
-				/>
-			</Dropzone>
+			<>
+				{error ? (
+					<MessageBar
+						messageBarType={MessageBarType.error}
+						isMultiline={false}
+						onDismiss={() => setError('')}
+						dismissButtonAriaLabel="Close"
+					>
+						{error}
+					</MessageBar>
+				) : null}
+				<Dropzone
+					acceptedFileTypes={['.csv', '.json', '.zip']}
+					onDrop={onDrop}
+					styles={dropzone}
+				>
+					<CommandBar
+						items={commands}
+						bgColor={bgColor(theme)}
+						color={color(theme)}
+						{...props}
+					/>
+				</Dropzone>
+			</>
 		)
 	},
 )
