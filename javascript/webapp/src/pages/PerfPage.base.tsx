@@ -7,13 +7,12 @@ import { createLazyLoadingGroupHeader } from '@data-wrangling-components/react'
 import type { ColumnMetadata, TableMetadata } from '@essex/arquero'
 import { introspect } from '@essex/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
-import type { IColumn, IDetailsGroupDividerProps } from '@fluentui/react'
+import type { IDetailsGroupDividerProps } from '@fluentui/react'
 import { Pivot, PivotItem } from '@fluentui/react'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 
-import { useColumnCommands, useCommandBar } from './PerfPage.hooks.js'
 import { Container, Table } from './PerfPage.styles.js'
 
 /**
@@ -21,7 +20,6 @@ import { Container, Table } from './PerfPage.styles.js'
  */
 export const PerfPage: React.FC = memo(function PerfMage() {
 	const [table, setTable] = useState<ColumnTable | undefined>()
-	const [tableName, setTableName] = useState('Table1')
 	const [groupedTable, setGroupedTable] = useState<ColumnTable | undefined>()
 	const [groupedMetadata, setGroupedMetadata] = useState<
 		TableMetadata | undefined
@@ -51,9 +49,6 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		f()
 	}, [])
 
-	const commandBar = useCommandBar(table, metadata, setTable, setMetadata)
-	const columnCommands = useColumnCommands()
-
 	const customGroupHeader = useCallback(
 		(
 			meta?: ColumnMetadata,
@@ -66,18 +61,6 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 		[],
 	)
 
-	const columns = useMemo((): IColumn[] | undefined => {
-		if (!table) return undefined
-		return table.columnNames().map(x => {
-			return {
-				name: x,
-				key: x,
-				fieldName: x,
-				minWidth: 180,
-			} as IColumn
-		})
-	}, [table])
-
 	if (!table || !metadata || !groupedTable || !groupedMetadata) {
 		return null
 	}
@@ -85,30 +68,6 @@ export const PerfPage: React.FC = memo(function PerfMage() {
 	return (
 		<Container>
 			<Pivot>
-				<PivotItem style={{ width: '96vw' }} key={'table'} headerText={'table'}>
-					<Table>
-						<ArqueroTableHeader
-							table={table}
-							name={tableName}
-							commandBar={commandBar}
-							onRenameTable={name => setTableName(name)}
-						/>
-						<ArqueroDetailsList
-							table={table}
-							metadata={metadata}
-							features={{
-								smartCells: true,
-								smartHeaders: true,
-								commandBar: [columnCommands],
-							}}
-							columns={columns}
-							isSortable
-							isHeadersFixed
-							isStriped
-							showColumnBorders
-						/>
-					</Table>
-				</PivotItem>
 				<PivotItem key={'empty'} headerText={'empty'} />
 				<PivotItem key={'grouped'} headerText={'grouped'}>
 					<Table>
