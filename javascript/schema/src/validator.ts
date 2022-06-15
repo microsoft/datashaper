@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Maybe } from '@data-wrangling-components/core'
+import type { AnySchema } from 'ajv'
 import Ajv from 'ajv'
 
 import type { WorfklowJson } from './schema.js'
@@ -13,21 +13,26 @@ async function getSchema() {
 	return import('./workflow.json').then(res => (res as any)?.default ?? {})
 }
 
-export async function schemaValidator(
-	worfklowJson?: WorfklowJson,
-): Promise<Maybe<boolean>> {
-	if (!worfklowJson) {
-		return
+export class WorkflowSchema {
+	private static schema: AnySchema
+	private static ajv: Ajv
+	private static async init(): Promise<void> {
+		this.ajv = new Ajv({
+			strict: true,
+			strictSchema: true,
+			strictTypes: true,
+			strictRequired: true,
+			validateSchema: true,
+		})
+		this.schema = await getSchema()
+		this.ajv.addSchema(this.schema, 'workflowJson')
 	}
-	const schema = await getSchema()
-	const ajv = new Ajv({
-		strict: true,
-		strictSchema: true,
-		strictTypes: true,
-		strictRequired: true,
-		validateSchema: true,
-	})
-	const validateJson = ajv.compile(schema)
 
-	return validateJson(worfklowJson)
+	static async isValid(worfklowJson?: WorfklowJson): Promise<boolean> {
+		if (!this.schema) {
+			await this.init()
+		}
+		const validate = this.ajv.getSchema('workflowJson')
+		return !!validate?.(worfklowJson)
+	}
 }

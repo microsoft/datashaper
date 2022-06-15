@@ -16,6 +16,8 @@ import {
 import { bgColor, color, dropzone } from './ProjectMgmtCommandBar.styles.js'
 import type { ProjectMgmtCommandBarProps } from './ProjectMgmtCommandBar.types.js'
 
+const acceptedFileTypes = ['.csv', '.json', '.zip']
+
 export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps> = memo(
 	function ProjectMgmtCommandBar({
 		workflow,
@@ -51,7 +53,7 @@ export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps> = memo(
 					</MessageBar>
 				) : null}
 				<Dropzone
-					acceptedFileTypes={['.csv', '.json', '.zip']}
+					acceptedFileTypes={acceptedFileTypes}
 					onDrop={onDrop}
 					styles={dropzone}
 				>

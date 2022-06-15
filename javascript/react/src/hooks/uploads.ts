@@ -5,7 +5,7 @@
 
 import type { WorkflowObject } from '@data-wrangling-components/core'
 import type { WorfklowJson } from '@data-wrangling-components/schema'
-import { schemaValidator } from '@data-wrangling-components/schema'
+import { WorkflowSchema } from '@data-wrangling-components/schema'
 import { FileCollection, FileType } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback } from 'react'
@@ -57,9 +57,9 @@ function useJsonHandler(
 				return
 			}
 			const workflow = (await json.toJson()) as WorkflowObject
-			const isValid = await schemaValidator(workflow as WorfklowJson)
+			const isValid = await WorkflowSchema.isValid(workflow as WorfklowJson)
 			if (!isValid) {
-				return onErrorHandler && onErrorHandler('Invalid workflow definition')
+				return onErrorHandler?.('Invalid workflow definition')
 			}
 			if (workflow && onUpdateWorkflow) {
 				onUpdateWorkflow(workflow)
