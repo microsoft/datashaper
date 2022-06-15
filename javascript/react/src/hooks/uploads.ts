@@ -57,7 +57,7 @@ function useJsonHandler(
 				return
 			}
 			const workflow = (await json.toJson()) as WorkflowObject
-			const isValid = await WorkflowSchema.isValid(workflow as WorfklowJson)
+			const isValid = new WorkflowSchema().isValid(workflow as WorfklowJson)
 			if (!isValid) {
 				return onErrorHandler?.('Invalid workflow definition')
 			}

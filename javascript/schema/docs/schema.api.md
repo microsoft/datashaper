@@ -192,8 +192,9 @@ export interface WorfklowJson {
 //
 // @public (undocumented)
 export class WorkflowSchema {
+    constructor();
     // (undocumented)
-    static isValid(worfklowJson?: WorfklowJson): Promise<boolean>;
+    isValid(worfklowJson?: WorfklowJson): boolean;
 }
 
 // (No @packageDocumentation comment for this package)
