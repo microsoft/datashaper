@@ -14,25 +14,23 @@ async function getSchema() {
 }
 
 export class WorkflowSchema {
-	private schema: AnySchema
-	private ajv: Ajv
+	private schema!: AnySchema
+	private ajv!: Ajv
 
 	constructor() {
 		this.init()
 	}
 
 	private async init(): Promise<void> {
-		if (!this.ajv || !this.schema) {
-			this.ajv = new Ajv({
-				strict: true,
-				strictSchema: true,
-				strictTypes: true,
-				strictRequired: true,
-				validateSchema: true,
-			})
-			this.schema = await getSchema()
-			this.ajv.addSchema(this.schema, 'workflowJson')
-		}
+		this.ajv = new Ajv({
+			strict: true,
+			strictSchema: true,
+			strictTypes: true,
+			strictRequired: true,
+			validateSchema: true,
+		})
+		this.schema = await getSchema()
+		this.ajv.addSchema(this.schema, 'workflowJson')
 	}
 
 	public isValid(worfklowJson?: WorfklowJson): boolean {
