@@ -3,9 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { AnySchema } from 'ajv'
 import Ajv from 'ajv'
-
 import type { WorfklowJson } from './schema.js'
 
 async function getSchema() {
@@ -14,26 +12,23 @@ async function getSchema() {
 }
 
 export class WorkflowSchema {
-	private schema!: AnySchema
-	private ajv!: Ajv
+	private initPromise: Promise<void>
+	private ajv = new Ajv({
+		strict: true,
+		strictSchema: true,
+		strictTypes: true,
+		strictRequired: true,
+		validateSchema: true,
+	})
 
 	constructor() {
-		this.init()
-	}
-
-	private async init(): Promise<void> {
-		this.ajv = new Ajv({
-			strict: true,
-			strictSchema: true,
-			strictTypes: true,
-			strictRequired: true,
-			validateSchema: true,
+		this.initPromise = getSchema().then(schema => {
+			this.ajv.addSchema(schema, 'workflowJson')
 		})
-		this.schema = await getSchema()
-		this.ajv.addSchema(this.schema, 'workflowJson')
 	}
 
-	public isValid(worfklowJson?: WorfklowJson): boolean {
+	public async isValid(worfklowJson?: WorfklowJson): Promise<boolean> {
+		await this.initPromise
 		const validate = this.ajv.getSchema('workflowJson')
 		return !!validate?.(worfklowJson)
 	}
