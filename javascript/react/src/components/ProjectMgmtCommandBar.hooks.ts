@@ -26,15 +26,17 @@ export function useProjectMgmtCommands(
 	outputTables: TableContainer[],
 	onUpdateWorkflowJson: (workflow: WorkflowObject) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
+	onError?: (error: string) => void,
 ): ICommandBarItemProps[] {
 	const downloadPipeline = useDownloadWorkflow(workflow)
 	const downloadCsv = useDownloadCsv(outputTables)
 	const downloadZip = useDownloadZip(workflow, tables, outputTables)
-	const handleJsonUpload = useHandleJsonUpload(onUpdateWorkflowJson)
+	const handleJsonUpload = useHandleJsonUpload(onUpdateWorkflowJson, onError)
 	const handleCsvUpload = useHandleCsvUpload(onUpdateTables)
 	const handleZipUpload = useHandleZipUpload(
 		onUpdateWorkflowJson,
 		onUpdateTables,
+		onError,
 	)
 
 	const commands: ICommandBarItemProps[] = useMemo(() => {

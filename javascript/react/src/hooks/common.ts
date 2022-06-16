@@ -7,7 +7,7 @@ import type {
 	Step,
 	Workflow,
 } from '@data-wrangling-components/core'
-import { createGraphManager,readStep  } from '@data-wrangling-components/core'
+import { createGraphManager, readStep } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useMemo } from 'react'

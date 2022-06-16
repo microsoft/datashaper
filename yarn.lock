@@ -2812,6 +2812,7 @@ __metadata:
     "@babel/preset-react": ^7.17.12
     "@babel/preset-typescript": ^7.17.12
     "@data-wrangling-components/core": "workspace:^"
+    "@data-wrangling-components/schema": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
     "@essex/arquero": ^3.0.0
@@ -2882,13 +2883,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/schema@workspace:javascript/schema":
+"@data-wrangling-components/schema@workspace:^, @data-wrangling-components/schema@workspace:javascript/schema":
   version: 0.0.0-use.local
   resolution: "@data-wrangling-components/schema@workspace:javascript/schema"
   dependencies:
     "@data-wrangling-components/core": "workspace:^"
     "@essex/scripts": ^22.0.4
     "@essex/tsconfig-base": ^1.0.2
+    ajv: ^8.11.0
     typescript: ^4.7.2
     typescript-json-schema: ^0.53.1
   languageName: unknown

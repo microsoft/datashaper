@@ -188,6 +188,15 @@ export interface WorfklowJson {
     steps?: StepJson[];
 }
 
+// Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class WorkflowSchema {
+    constructor();
+    // (undocumented)
+    isValid(worfklowJson?: WorfklowJson): boolean;
+}
+
 // (No @packageDocumentation comment for this package)
 
 ```
