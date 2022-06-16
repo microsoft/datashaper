@@ -6,7 +6,6 @@
 
 /// <reference types="react" />
 
-import type { ColumnMetadata } from '@essex/arquero';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { DropzoneOptions } from 'react-dropzone';
 import { FileCollection } from '@data-wrangling-components/utilities';
@@ -14,7 +13,6 @@ import { FileRejection } from 'react-dropzone';
 import type { GraphManager } from '@data-wrangling-components/core';
 import type { ICommandBarProps } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
-import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { ReactElement } from 'react';
@@ -52,11 +50,6 @@ export function createDefaultCommandBar({ styles, ...props }: ICommandBarProps):
 //
 // @public
 export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: Theme, far?: boolean): ReactElement<ICommandBarProps, any>;
-
-// Warning: (ae-missing-release-tag) "createLazyLoadingGroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function createLazyLoadingGroupHeader(props: IDetailsGroupDividerProps | undefined, children: any, columnName?: string, columnMetadata?: ColumnMetadata | undefined): ReactElement<any, any> | null;
 
 // Warning: (ae-missing-release-tag) "Dropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
