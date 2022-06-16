@@ -7,14 +7,6 @@ import { Route, Routes } from 'react-router-dom'
 
 import { Pages } from './Pages.js'
 
-const PerfPage = lazy(() =>
-	/* webpackChunkName: "PerfPage " */ import('../pages/PerfPage.js').then(
-		module => ({
-			default: module.PerfPage,
-		}),
-	),
-)
-
 const PrepareDataPage = lazy(() =>
 	/* webpackChunkName: "PrepareDataPage " */ import(
 		'../pages/PrepareDataPage.js'
@@ -36,7 +28,6 @@ export const RouteOptions: React.FC = memo(function RouteOptions() {
 		<Routes>
 			<Route path="/" element={<PrepareDataPage />} />
 			<Route path={Pages.Prepare.path} element={<PrepareDataPage />} />
-			<Route path={Pages.Performance.path} element={<PerfPage />} />
 			<Route path={Pages.Debug.path} element={<DebugPage />} />
 		</Routes>
 	)
