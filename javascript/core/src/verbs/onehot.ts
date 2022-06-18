@@ -5,11 +5,11 @@
 import { escape, op } from 'arquero'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
-import type { InputColumnArgs } from './types.js'
+import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export interface OnehotArgs extends InputColumnArgs {
+export interface OnehotArgs extends InputColumnListArgs {
 	/**
 	 * Optional prefix for the output column names
 	 */
@@ -22,20 +22,29 @@ export interface OnehotArgs extends InputColumnArgs {
  */
 export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
-	{ column, prefix },
+	{ columns, prefix },
 ) => {
 	// note that this ignores potential grouping
 	// TODO: should this only apply to string column types?
-	const distinct = input
-		.rollup({
-			distinct: op.array_agg_distinct(column),
-		})
-		.get('distinct', 0) as any[]
+	const distinct = columns.reduce((acc: any[], column: string) => {
+		return [
+			...acc,
+			...(input
+				.rollup({
+					distinct: op.array_agg_distinct(column),
+				})
+				.get('distinct', 0)),
+		]
+	}, [] as any[])
 
-	const args = distinct.sort().reduce((acc, cur) => {
+	const args = distinct.sort().reduce((acc: Record<string, ExprObject>, cur: string) => {
 		acc[prefix ? `${prefix}${cur}` : cur] = escape((d: any) =>
-			d[column] === null ? null : d[column] === cur ? 1 : 0,
-		)
+			columns.reduce(
+				(acc, column) =>
+					acc + (d[column] === null ? 0 : d[column] === cur ? 1 : 0),
+				0,
+			),
+		) as ExprObject
 		return acc
 	}, {} as Record<string, ExprObject>)
 

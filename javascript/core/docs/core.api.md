@@ -608,7 +608,7 @@ export const onehot: (id: string) => StepNode<TableContainer<unknown>, OnehotArg
 // Warning: (ae-missing-release-tag) "OnehotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface OnehotArgs extends InputColumnArgs {
+export interface OnehotArgs extends InputColumnListArgs {
     prefix?: string;
 }
 

@@ -211,7 +211,7 @@
 			"verb": "onehot",
 			"input": "data/stocks.csv",
 			"args": {
-				"column": "Symbol",
+				"columns": ["Symbol"],
 				"prefix": "ticker-"
 			}
 		},

@@ -8,23 +8,25 @@ import { memo, useMemo } from 'react'
 import type { StepComponentProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
+import { inputColumnList } from '../verbForm/VerbFormFactories.js'
 
 /**
  * Provides inputs for a OneHot step.
  */
-export const OneHotBase: React.FC<StepComponentProps<OnehotArgs>> = memo(
-	function OneHotBase({ step, onChange }) {
-		const inputs = useMemo<FormInput<OnehotArgs>[]>(
-			() => [
-				{
-					label: 'Prefix',
-					type: FormInputType.Text,
-					current: step.args.prefix,
-					onChange: (s, val) => (s.args.prefix = val as string),
-				},
-			],
-			[step],
-		)
-		return <VerbForm inputs={inputs} step={step} onChange={onChange} />
-	},
-)
+export const OneHotBase: React.FC<
+	StepComponentProps<OnehotArgs> & { columns: string[] }
+> = memo(function OneHotBase({ step, onChange, columns }) {
+	const inputs = useMemo<FormInput<OnehotArgs>[]>(
+		() => [
+			inputColumnList(step, columns, 'Columns to onehot'),
+			{
+				label: 'Prefix',
+				type: FormInputType.Text,
+				current: step.args.prefix,
+				onChange: (s, val) => (s.args.prefix = val as string),
+			},
+		],
+		[step, columns],
+	)
+	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
+})
