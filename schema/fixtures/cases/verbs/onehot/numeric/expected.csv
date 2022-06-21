@@ -1,4 +1,4 @@
-ID,item,quantity,1,2,4
+ID,item,quantity,ID_1,ID_2,ID_4
 1,bed,45,1,0,0
 1,,78,1,0,0
 2,sofa,100,0,1,0
