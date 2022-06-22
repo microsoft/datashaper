@@ -11,38 +11,38 @@ import { stepVerbFactory } from './util/factories.js'
 
 export interface OnehotArgs extends InputColumnListArgs {
 	/**
-	 * Optional prefix for the output column names
+	 * Optional prefixes for the output column names
 	 */
-	prefix?: string
+	prefixes?: string[]
 }
 
 /**
- * Executes a  one-hot encoding. This creates a new column for each unique value in the specified column.
- * An optional prefix can be specified for the output columns, to help differentiate source columns on large tables.
+ * Executes a  one-hot encoding. This creates a new column for each unique value in the specified columns.
+ * Optional prefixes can be specified for the output columns, to help differentiate source columns on large tables.
  */
 export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
-	{ columns, prefix },
+	{ columns, prefixes = [] },
 ) => {
-	const args = columns.reduce((acc, column) => {
+	const args = columns.reduce((acc, column, index) => {
+		const prefix = prefixes[index] || `${column}_`
+
 		// note that this ignores potential grouping
 		// TODO: should this only apply to string column types?
-
 		const distinct = input
 			.rollup({
 				distinct: op.array_agg_distinct(column),
 			})
 			.get('distinct', 0) as any[]
 
-		const colArgs = distinct.sort().reduce((acc, cur) => {
-			acc[prefix ? `${prefix}${column}_${cur}` : `${column}_${cur}`] = escape(
-				(d: any) => (d[column] === null ? null : d[column] === cur ? 1 : 0),
-			)
-			return acc
-		}, {} as Record<string, ExprObject>)
+		distinct.sort().forEach(cur => {
+			acc[prefix ? `${prefix}${cur}` : `${cur}`] = escape((d: any) =>
+				d[column] === null ? null : d[column] === cur ? 1 : 0,
+			) as ExprObject
+		})
 
-		return { ...acc, ...colArgs }
-	}, {})
+		return acc
+	}, {} as Record<string, ExprObject>)
 
 	return input.derive(args)
 }

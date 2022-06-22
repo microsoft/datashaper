@@ -609,7 +609,7 @@ export const onehot: (id: string) => StepNode<TableContainer<unknown>, OnehotArg
 //
 // @public (undocumented)
 export interface OnehotArgs extends InputColumnListArgs {
-    prefix?: string;
+    prefixes?: string[];
 }
 
 // Warning: (ae-missing-release-tag) "orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -23,6 +23,14 @@ export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 				3,
 				props,
 			)
+			const prefixSub = createRowEntries(
+				args.prefixes || [],
+				c => ({
+					value: c,
+				}),
+				2,
+				props,
+			)
 			return [
 				{
 					before: `onehot column${args.columns?.length !== 1 ? 's' : ''}`,
@@ -30,8 +38,9 @@ export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 					sub,
 				},
 				{
-					before: 'with prefix',
-					value: args.prefix,
+					before: `with prefix${args.prefixes?.length !== 1 ? 'es' : ''}`,
+					value: args.prefixes?.length === 0 ? undefined : '',
+					sub: prefixSub,
 				},
 			]
 		}, [props])
