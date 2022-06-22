@@ -24,9 +24,7 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
 	{ columns, prefix },
 ) => {
-	let args = {}
-
-	columns.forEach(column => {
+	const args = columns.reduce((acc, column) => {
 		// note that this ignores potential grouping
 		// TODO: should this only apply to string column types?
 
@@ -35,16 +33,16 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 				distinct: op.array_agg_distinct(column),
 			})
 			.get('distinct', 0) as any[]
-		
+
 		const colArgs = distinct.sort().reduce((acc, cur) => {
-			acc[prefix ? `${prefix}${column}_${cur}` : `${column}_${cur}`] = escape((d: any) =>
-				d[column] === null ? null : d[column] === cur ? 1 : 0,
+			acc[prefix ? `${prefix}${column}_${cur}` : `${column}_${cur}`] = escape(
+				(d: any) => (d[column] === null ? null : d[column] === cur ? 1 : 0),
 			)
 			return acc
 		}, {} as Record<string, ExprObject>)
 
-		args = { ...args, ...colArgs }
-	})
+		return { ...acc, ...colArgs }
+	}, {})
 
 	return input.derive(args)
 }
