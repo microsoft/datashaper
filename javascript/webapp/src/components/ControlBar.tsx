@@ -10,9 +10,7 @@ import {
 	FileMimeType,
 	FileType,
 } from '@data-wrangling-components/utilities'
-import { StatsColumnType } from '@essex/arquero-react'
-import type { IDropdownOption } from '@fluentui/react'
-import { Checkbox, Dropdown } from '@fluentui/react'
+import { Checkbox } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 
 import { useLoadSpecFile, useLoadTableFiles } from './ControlBar.hooks.js'
@@ -23,17 +21,12 @@ import {
 	Description,
 	Drop,
 	DropBlock,
-	dropdownStyles,
 	Examples,
 	ExamplesContainer,
 } from './ControlBar.styles.js'
 import type { ControlBarProps } from './ControlBar.types.js'
 import { ExamplesDropdown } from './ExamplesDropdown.js'
 import { FileDrop } from './FileDrop.js'
-
-const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
-	return { key: o, text: o } as IDropdownOption
-})
 
 export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	selected,
