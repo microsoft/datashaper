@@ -38,12 +38,10 @@ const options: IDropdownOption[] = Object.values(StatsColumnType).map(o => {
 export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	selected,
 	features,
-	compact,
 	autoType,
 	onSelectSpecification,
 	onLoadFiles,
 	onFeaturesChange,
-	onCompactChange,
 	onAutoTypeChange,
 }) {
 	const loadFiles = useLoadTableFiles()
@@ -103,38 +101,6 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 		[features, onFeaturesChange],
 	)
 
-	const handleStatsColumnTypeChange = useCallback(
-		(e: any, option: IDropdownOption | undefined) => {
-			const selectedKeys = features.statsColumnTypes || []
-			const selectedTypes = option?.selected
-				? [...selectedKeys, option.key as StatsColumnType]
-				: selectedKeys.filter(key => key !== option?.key)
-
-			option &&
-				onFeaturesChange?.({
-					...features,
-					statsColumnTypes: selectedTypes,
-				})
-		},
-		[features, onFeaturesChange],
-	)
-	const handleArrayFeaturesChange = useCallback(
-		(propName: string, checked?: boolean) => {
-			onFeaturesChange?.({
-				...features,
-				[propName]: checked,
-			})
-		},
-
-		[features, onFeaturesChange],
-	)
-
-	const handleCompactChange = useCallback(
-		(_e: any, checked: boolean | undefined) =>
-			onCompactChange(checked ?? false),
-		[onCompactChange],
-	)
-
 	const handleAutoTypeChange = useCallback(
 		(_e: any, checked: boolean | undefined) =>
 			onAutoTypeChange(checked ?? false),
@@ -171,120 +137,11 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 				</Control>
 				<Control>
 					<Checkbox
-						label={'Column header stats'}
-						checked={features.statsColumnHeaders}
-						disabled={features.smartHeaders}
-						onChange={(e: any, checked) =>
-							handleFeaturesChange('statsColumnHeaders', checked)
-						}
-					/>
-					<Dropdown
-						disabled={!features.statsColumnHeaders && !features.smartHeaders}
-						onChange={handleStatsColumnTypeChange}
-						multiSelect
-						options={options}
-						selectedKeys={features.statsColumnTypes}
-						styles={dropdownStyles}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Column header histograms'}
-						checked={features.histogramColumnHeaders}
-						disabled={features.smartHeaders}
-						onChange={(e: any, checked) =>
-							handleFeaturesChange('histogramColumnHeaders', checked)
-						}
-					/>
-				</Control>
-			</ControlBlock>
-			<ControlBlock>
-				<Control>
-					<Checkbox
 						label={'Smart cells'}
 						checked={features.smartCells}
 						onChange={(e: any, checked) =>
 							handleFeaturesChange('smartCells', checked)
 						}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Number magnitude'}
-						checked={features.showNumberMagnitude}
-						disabled={features.smartCells}
-						onChange={(e: any, checked) =>
-							handleFeaturesChange('showNumberMagnitude', checked)
-						}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Boolean symbol'}
-						checked={features.showBooleanSymbol}
-						disabled={features.smartCells}
-						onChange={(e: any, checked) =>
-							handleFeaturesChange('showBooleanSymbol', checked)
-						}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Format date'}
-						checked={features.showDateFormatted}
-						disabled={features.smartCells}
-						onChange={(e: any, checked) =>
-							handleFeaturesChange('showDateFormatted', checked)
-						}
-					/>
-				</Control>
-			</ControlBlock>
-			<ControlBlock>
-				<Control>
-					<Checkbox
-						label={'Sparkbar'}
-						checked={!!features.showSparkbar}
-						disabled={features.smartCells}
-						onChange={(e: any, checked) =>
-							handleArrayFeaturesChange('showSparkbar', checked)
-						}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Sparkline'}
-						checked={!!features.showSparkline}
-						disabled={features.smartCells}
-						onChange={(e: any, checked) =>
-							handleArrayFeaturesChange('showSparkline', checked)
-						}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Categorical bar'}
-						checked={!!features.showCategoricalBar}
-						disabled={features.smartCells}
-						onChange={(e: any, checked) =>
-							handleArrayFeaturesChange('showCategoricalBar', checked)
-						}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Multivalues on dropdown'}
-						checked={!!features.showDropdown}
-						disabled={features.smartCells}
-						onChange={(e: any, checked) =>
-							handleArrayFeaturesChange('showDropdown', checked)
-						}
-					/>
-				</Control>
-				<Control>
-					<Checkbox
-						label={'Compact rows'}
-						checked={compact}
-						onChange={handleCompactChange}
 					/>
 				</Control>
 			</ControlBlock>
