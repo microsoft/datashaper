@@ -180,6 +180,10 @@ export enum BooleanOperator {
 	 * Only exactly one condition can match for the result to be true
 	 */
 	XOR = 'xor',
+	/**
+	 * All conditions must match to be true
+	 */
+	XNOR = 'xnor'
 }
 
 export enum SetOp {

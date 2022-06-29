@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "boolean",
+			"input": "table20",
+			"args": {
+				"to": "newColumn",
+				"columns": ["A", "B", "C"],
+				"operator": "xnor"
+			},
+			"id": "expected"
+		}
+	],
+	"output": ["expected"],
+	"input": ["table20"]
+}

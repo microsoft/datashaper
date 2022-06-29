@@ -145,7 +145,8 @@
                 "nand",
                 "nor",
                 "or",
-                "xor"
+                "xor",
+                "xnor"
             ],
             "type": "string"
         },

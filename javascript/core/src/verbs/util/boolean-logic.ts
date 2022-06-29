@@ -28,6 +28,8 @@ export function evaluateBoolean(
 			return nor(comparisons)
 		case BooleanOperator.NAND:
 			return nand(comparisons)
+		case BooleanOperator.XNOR:
+			return xnor(comparisons)
 		default:
 			throw new Error(`Unsupported logical operator: [${logical}]`)
 	}
@@ -155,4 +157,31 @@ export function nand(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 		return 0
 	}
 	return null
+}
+
+/**
+ * Logical XNOR.
+ * All inputs with same value will return true, otherwise returns false.
+ * If  there are nulls, this is unknown and will return null.
+ * @param comparisons
+ * @returns
+ */
+ export function xnor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
+	let nulls = 0
+
+	if(comparisons.length > 0 && comparisons[0] === null)
+		return null
+
+	for (let i = 1; i < comparisons.length; i++) {
+		if (comparisons[i] === null) {
+			nulls++
+		}
+		else if (comparisons[i] !== comparisons[0]) {
+			return 0
+		}
+	}
+	if (nulls > 0 || comparisons.length === 0) {
+		return null
+	}
+	return 1
 }
