@@ -1,4 +1,4 @@
-import { and, nand, nor, or, xor } from '../boolean-logic.js'
+import { and, nand, nor, or, xor, xnor } from '../boolean-logic.js'
 
 describe('boolean logic', () => {
 	describe('or', () => {
@@ -140,6 +140,35 @@ describe('boolean logic', () => {
 			expect(nand([1, 1, 1])).toBe(0)
 			expect(nand([0, null, 1])).toBe(1)
 			expect(nand([0, null, 0])).toBe(1)
+			expect(nand([1, null, 1])).toBeNull()
+		})
+	})
+
+	describe('xnor', () => {
+		test('empty', () => {
+			expect(xnor([])).toBeNull()
+		})
+
+		test('single value', () => {
+			expect(xnor([1])).toBe(1)
+			expect(xnor([0])).toBe(1)
+			expect(xnor([null])).toBeNull()
+		})
+
+		test('two values', () => {
+			expect(xnor([1, 0])).toBe(0)
+			expect(xnor([0, 0])).toBe(1)
+			expect(xnor([1, 1])).toBe(1)
+			expect(xnor([0, null])).toBe(null)
+			expect(nand([1, null])).toBeNull()
+		})
+
+		test('more values', () => {
+			expect(nand([1, 0, 0])).toBe(0)
+			expect(nand([0, 0, 0])).toBe(1)
+			expect(nand([1, 1, 1])).toBe(1)
+			expect(nand([0, null, 1])).toBe(null)
+			expect(nand([0, null, 0])).toBe(null)
 			expect(nand([1, null, 1])).toBeNull()
 		})
 	})
