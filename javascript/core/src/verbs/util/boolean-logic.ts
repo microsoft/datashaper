@@ -167,21 +167,16 @@ export function nand(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
  * @returns
  */
  export function xnor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
-	let nulls = 0
-
-	if(comparisons.length > 0 && comparisons[0] === null)
+	if(comparisons.length === 0)
 		return null
 
-	for (let i = 1; i < comparisons.length; i++) {
+	for (let i = 0; i < comparisons.length; i++) {
 		if (comparisons[i] === null) {
-			nulls++
+			return null
 		}
 		else if (comparisons[i] !== comparisons[0]) {
 			return 0
 		}
-	}
-	if (nulls > 0 || comparisons.length === 0) {
-		return null
 	}
 	return 1
 }
