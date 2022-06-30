@@ -31,7 +31,8 @@
 		"build": "yarn schema && essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
 		"schema": "typescript-json-schema tsconfig.json WorfklowJson > ./src/workflow.json",
-		"bundle": "typescript-json-schema tsconfig.json WorfklowJson > ../../schema/workflow.json"
+		"bundle": "typescript-json-schema tsconfig.json WorfklowJson > ../../schema/workflow.json",
+		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
 		"@data-wrangling-components/core": "workspace:^",
