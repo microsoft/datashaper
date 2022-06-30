@@ -13,7 +13,7 @@ import {
 	TextField,
 } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
-import noop from 'lodash-es/noop'
+import noop from 'lodash-es/noop.js'
 import { Fragment, memo, useMemo } from 'react'
 import { Case, Switch } from 'react-if'
 import styled from 'styled-components'

@@ -10,7 +10,7 @@ import type {
 } from '@data-wrangling-components/core'
 import type { TableContainer } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import cloneDeep from 'lodash-es/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep.js'
 import { useCallback, useEffect, useState } from 'react'
 
 import type { ModalState } from '../hooks/index.js'
