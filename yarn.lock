@@ -3827,6 +3827,7 @@ __metadata:
     "@essex/scripts": ^22.0.5
     "@essex/tsconfig-base": ^1.0.2
     ajv: ^8.11.0
+    shx: ^0.3.4
     typescript: ^4.7.4
     typescript-json-schema: ^0.53.1
   languageName: unknown
