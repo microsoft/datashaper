@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useThematic } from '@thematic/react'
-import merge from 'lodash-es/merge'
+import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
 import type { ReadOnlyTextFieldProps } from './ReadOnlyTextField.types.js'
