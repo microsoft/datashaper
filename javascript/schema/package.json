@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/schema",
-	"version": "1.3.0",
+	"version": "1.3.1",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
