@@ -1,7 +1,0 @@
-releases:
-  "@data-wrangling-components/core": patch
-  "@data-wrangling-components/react": patch
-  "@data-wrangling-components/schema": patch
-  "@data-wrangling-components/utilities": patch
-  "@data-wrangling-components/verb-guidance": patch
-  "@data-wrangling-components/webapp": patch

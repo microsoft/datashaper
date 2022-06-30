@@ -1,6 +1,6 @@
 {
 	"name": "@data-wrangling-components/react",
-	"version": "6.3.0",
+	"version": "6.4.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
