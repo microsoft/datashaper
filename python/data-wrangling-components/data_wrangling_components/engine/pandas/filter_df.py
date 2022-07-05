@@ -27,9 +27,7 @@ _boolean_function_map = {
     BooleanLogicalOperator.XNOR: lambda df: ~df.sum(axis="columns").apply(
         lambda x: x == 1
     ),
-    BooleanLogicalOperator.XOR: lambda df: df.sum(axis="columns").apply(
-        lambda x: x == 1
-    ),
+    BooleanLogicalOperator.XOR: lambda df: df.sum(axis="1")
 }
 
 
