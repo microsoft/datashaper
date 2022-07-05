@@ -15,12 +15,20 @@ describe('boolean logic', () => {
 		test('two values', () => {
 			expect(or([1, 0])).toBe(1)
 			expect(or([0, 0])).toBe(0)
+			expect(or([0, 1])).toBe(1)
+			expect(or([1,1])).toBe(1)
 			expect(or([1, null])).toBe(1)
 			expect(or([0, null])).toBeNull()
 		})
 
 		test('more values', () => {
+			expect(or([1, 1, 1])).toBe(1)
+			expect(or([1, 1, 0])).toBe(1)
 			expect(or([1, 0, 1])).toBe(1)
+			expect(or([1, 0, 0])).toBe(1)
+			expect(or([0, 1, 1])).toBe(1)
+			expect(or([0, 1, 0])).toBe(1)
+			expect(or([0, 0, 1])).toBe(1)
 			expect(or([0, 0, 0])).toBe(0)
 			expect(or([1, null, 0])).toBe(1)
 			expect(or([0, null, 1])).toBe(1)
@@ -43,14 +51,20 @@ describe('boolean logic', () => {
 			expect(and([1, 0])).toBe(0)
 			expect(and([0, 0])).toBe(0)
 			expect(and([1, 1])).toBe(1)
+			expect(and([0, 1])).toBe(0)
 			expect(and([0, null])).toBe(0)
 			expect(and([1, null])).toBeNull()
 		})
 
 		test('more values', () => {
-			expect(and([1, 0, 1])).toBe(0)
-			expect(and([0, 0, 0])).toBe(0)
 			expect(and([1, 1, 1])).toBe(1)
+			expect(and([1, 1, 0])).toBe(0)
+			expect(and([1, 0, 1])).toBe(0)
+			expect(and([1, 0, 0])).toBe(0)
+			expect(and([0, 1, 1])).toBe(0)
+			expect(and([0, 1, 0])).toBe(0)
+			expect(and([0, 0, 1])).toBe(0)
+			expect(and([0, 0, 0])).toBe(0)
 			expect(and([1, null, 0])).toBe(0)
 			expect(and([0, null, 1])).toBe(0)
 			expect(and([1, null, 1])).toBeNull()
@@ -72,15 +86,21 @@ describe('boolean logic', () => {
 			expect(xor([1, 0])).toBe(1)
 			expect(xor([0, 0])).toBe(0)
 			expect(xor([1, 1])).toBe(0)
+			expect(xor([0, 1])).toBe(1)
 			expect(xor([0, null])).toBeNull()
 			expect(xor([1, null])).toBeNull()
 		})
 
 		test('more values', () => {
+			expect(xor([1, 1, 1])).toBe(1)
+			expect(xor([1, 1, 0])).toBe(0)
+			expect(xor([1, 0, 1])).toBe(0)
 			expect(xor([1, 0, 0])).toBe(1)
+			expect(xor([0, 1, 1])).toBe(0)
+			expect(xor([0, 1, 0])).toBe(1)
+			expect(xor([0, 0, 1])).toBe(1)
 			expect(xor([0, 0, 0])).toBe(0)
-			expect(xor([1, 1, 1])).toBe(0)
-			expect(xor([1, null, 1])).toBe(0)
+			expect(xor([1, null, 1])).toBeNull()
 			expect(xor([0, null, 1])).toBeNull()
 			expect(xor([0, null, 0])).toBeNull()
 		})
@@ -99,6 +119,7 @@ describe('boolean logic', () => {
 
 		test('two values', () => {
 			expect(nor([1, 0])).toBe(0)
+			expect(nor([0, 1])).toBe(0)
 			expect(nor([0, 0])).toBe(1)
 			expect(nor([1, 1])).toBe(0)
 			expect(nor([1, null])).toBe(0)
@@ -106,9 +127,14 @@ describe('boolean logic', () => {
 		})
 
 		test('more values', () => {
-			expect(nor([1, 0, 0])).toBe(0)
-			expect(nor([0, 0, 0])).toBe(1)
 			expect(nor([1, 1, 1])).toBe(0)
+			expect(nor([1, 1, 0])).toBe(0)
+			expect(nor([1, 0, 1])).toBe(0)
+			expect(nor([1, 0, 0])).toBe(0)
+			expect(nor([0, 1, 1])).toBe(0)
+			expect(nor([0, 1, 0])).toBe(0)
+			expect(nor([0, 0, 1])).toBe(0)
+			expect(nor([0, 0, 0])).toBe(1)
 			expect(nor([1, null, 1])).toBe(0)
 			expect(nor([0, null, 1])).toBe(0)
 			expect(nor([0, null, 0])).toBeNull()
@@ -128,6 +154,7 @@ describe('boolean logic', () => {
 
 		test('two values', () => {
 			expect(nand([1, 0])).toBe(1)
+			expect(nand([0, 1])).toBe(1)
 			expect(nand([0, 0])).toBe(1)
 			expect(nand([1, 1])).toBe(0)
 			expect(nand([0, null])).toBe(1)
@@ -135,9 +162,14 @@ describe('boolean logic', () => {
 		})
 
 		test('more values', () => {
-			expect(nand([1, 0, 0])).toBe(1)
-			expect(nand([0, 0, 0])).toBe(1)
 			expect(nand([1, 1, 1])).toBe(0)
+			expect(nand([1, 1, 0])).toBe(1)
+			expect(nand([1, 0, 1])).toBe(1)
+			expect(nand([1, 0, 0])).toBe(1)
+			expect(nand([0, 1, 1])).toBe(1)
+			expect(nand([0, 1, 0])).toBe(1)
+			expect(nand([0, 0, 1])).toBe(1)
+			expect(nand([0, 0, 0])).toBe(1)
 			expect(nand([0, null, 1])).toBe(1)
 			expect(nand([0, null, 0])).toBe(1)
 			expect(nand([1, null, 1])).toBeNull()
@@ -150,13 +182,14 @@ describe('boolean logic', () => {
 		})
 
 		test('single value', () => {
-			expect(xnor([1])).toBe(1)
+			expect(xnor([1])).toBe(0)
 			expect(xnor([0])).toBe(1)
 			expect(xnor([null])).toBeNull()
 		})
 
 		test('two values', () => {
 			expect(xnor([1, 0])).toBe(0)
+			expect(xnor([0, 1])).toBe(0)
 			expect(xnor([0, 0])).toBe(1)
 			expect(xnor([1, 1])).toBe(1)
 			expect(xnor([0, null])).toBe(null)
@@ -164,12 +197,17 @@ describe('boolean logic', () => {
 		})
 
 		test('more values', () => {
+			expect(xnor([1, 1, 1])).toBe(0)
+			expect(xnor([1, 1, 0])).toBe(1)
+			expect(xnor([1, 0, 1])).toBe(1)
 			expect(xnor([1, 0, 0])).toBe(0)
+			expect(xnor([0, 1, 1])).toBe(1)
+			expect(xnor([0, 1, 0])).toBe(0)
+			expect(xnor([0, 0, 1])).toBe(0)
 			expect(xnor([0, 0, 0])).toBe(1)
-			expect(xnor([1, 1, 1])).toBe(1)
 			expect(xnor([0, null, 1])).toBe(null)
 			expect(xnor([0, null, 0])).toBe(null)
-			expect(xnor([1, null, 1])).toBeNull()
+			expect(xnor([1, null, 1])).toBe(null)
 		})
 	})
 })

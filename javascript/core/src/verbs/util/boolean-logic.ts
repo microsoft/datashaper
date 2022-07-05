@@ -89,25 +89,28 @@ export function and(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
  * @returns
  */
 export function xor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
-	let xor = 0
-	let nulls = 0
-	for (let i = 0; i < comparisons.length; i++) {
-		xor += comparisons[i]!
-		if (xor > 1) {
-			// shortcut more than one true immediately
-			return 0
-		}
-		if (comparisons[i] === null) {
-			nulls++
-		}
+	let xor = null
+
+	if(comparisons.length > 0){
+		if(comparisons[0] === null)
+			return null
+
+		xor = comparisons[0]
 	}
-	if (nulls > 0 || comparisons.length === 0) {
-		return null
+		
+	for (let i = 1; i < comparisons.length; i++){
+		if(comparisons[i] === null)
+			return null
+
+		xor = xor !== comparisons[i] ? 1 : 0
 	}
+
 	if (xor === 1) {
 		return 1
-	} else {
+	} else if(xor === 0){
 		return 0
+	}else {
+		return null
 	}
 }
 
@@ -160,23 +163,18 @@ export function nand(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 }
 
 /**
- * Logical XNOR.
- * All inputs with same value will return true, otherwise returns false.
- * If  there are nulls, this is unknown and will return null.
+ * Logical XNOR
  * @param comparisons
  * @returns
  */
  export function xnor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
-	if(comparisons.length === 0)
-		return null
+	let xorResult = xor(comparisons)
+	
+	if(xorResult === 1)
+		return 0
 
-	for (let i = 0; i < comparisons.length; i++) {
-		if (comparisons[i] === null) {
-			return null
-		}
-		else if (comparisons[i] !== comparisons[0]) {
-			return 0
-		}
-	}
-	return 1
+	if(xorResult === 0)
+		return 1
+
+	return null
 }
