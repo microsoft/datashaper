@@ -1,4 +1,4 @@
-ID,item,quantity,item_bed,item_chair,item_sofa
+ID,item,quantity,bed,chair,sofa
 1,bed,45,1,0,0
 1,,78,,,
 2,sofa,100,0,0,1

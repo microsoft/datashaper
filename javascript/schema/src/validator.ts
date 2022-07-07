@@ -4,6 +4,7 @@
  */
 
 import Ajv from 'ajv'
+
 import type { WorfklowJson } from './schema.js'
 
 async function getSchema() {

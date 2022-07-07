@@ -516,11 +516,8 @@
 					"type": "array"
 				},
 				"prefixes": {
-					"description": "Optional prefixes for the output column names",
-					"items": {
-						"type": "string"
-					},
-					"type": "array"
+					"$ref": "#/definitions/Record<string,string>",
+					"description": "Optional prefixes for the output column names"
 				}
 			},
 			"type": "object"

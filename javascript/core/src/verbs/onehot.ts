@@ -13,7 +13,7 @@ export interface OnehotArgs extends InputColumnListArgs {
 	/**
 	 * Optional prefixes for the output column names
 	 */
-	prefixes?: string[]
+	prefixes?: Record<string, string>
 }
 
 /**
@@ -22,10 +22,10 @@ export interface OnehotArgs extends InputColumnListArgs {
  */
 export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
-	{ columns, prefixes = [] },
+	{ columns, prefixes = {} },
 ) => {
-	const args = columns.reduce((acc, column, index) => {
-		const prefix = prefixes[index]?.trim() || `${column}_`
+	const args = columns.reduce((acc, column) => {
+		const prefix = prefixes[column]
 
 		// note that this ignores potential grouping
 		// TODO: should this only apply to string column types?

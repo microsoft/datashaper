@@ -3,32 +3,34 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import List
+from typing import Dict, List
 import pandas as pd
+import numpy as np
 
 from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 
 
-def __has_prefix(index: int, prefixes: List[str]):
-    try:
-        return prefixes[index] is not None and len(prefixes[index].strip()) > 0
-    except IndexError:
+def __has_prefix(column: str, prefixes: Dict[str, str]):
+    if column in prefixes:
+        return prefixes[column] is not None and len(prefixes[column].strip()) > 0
+    else:
         return False
 
 
-def __get_prefix(index: int, columns: List[str], prefixes: List[str]):
-    return prefixes[index] if __has_prefix(index, prefixes) else columns[index] + "_"
+def __get_prefix(column: str, prefixes: Dict[str, str]):
+    return prefixes[column] if __has_prefix(column, prefixes) else ""
 
 
-def onehot(input: VerbInput, columns: List[str], prefixes: List[str] = []):
+def onehot(input: VerbInput, columns: List[str], prefixes: Dict[str, str] = {}):
     input_table = input.get_input()
     input_table[columns] = input_table[columns].astype("category")
-    prefixes = [__get_prefix(index, columns, prefixes) for index in range(len(columns))]
+    prefixesList = [__get_prefix(column, prefixes) for column in columns]
 
-    dummies = pd.get_dummies(input_table[columns], prefix=prefixes, prefix_sep="")
+    dummies = pd.get_dummies(input_table[columns], prefix=prefixesList, prefix_sep="")
     for column in columns:
-        dummies.loc[input_table[column].isnull(), dummies.columns] = None
+        cols = dummies.columns.str.startswith(__get_prefix(column, prefixes))
+        dummies.loc[input_table[column].isnull(), cols] = np.nan
     output = pd.concat([input_table, dummies], axis=1)
 
     return TableContainer(table=output)
