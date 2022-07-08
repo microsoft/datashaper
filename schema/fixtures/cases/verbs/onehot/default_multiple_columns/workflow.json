@@ -1,0 +1,16 @@
+{
+	"$schema": "../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "onehot",
+			"input": "table5",
+			"args": {
+				"columns": ["item", "quantity"],
+				"prefixes": { "item": "item_", "quantity": "quantity_" }
+			},
+			"id": "expected"
+		}
+	],
+	"output": ["expected"],
+	"input": ["table5"]
+}
