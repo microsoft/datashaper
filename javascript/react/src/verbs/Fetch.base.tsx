@@ -31,6 +31,7 @@ export const FetchBase: React.FC<StepComponentProps<FetchArgs>> = memo(
 					placeholder: 'Column delimiter',
 					current: step.args.delimiter,
 					onChange: (s, val) => (s.args.delimiter = val as string),
+					advanced: true,
 				},
 				{
 					label: 'Automax',
@@ -40,6 +41,7 @@ export const FetchBase: React.FC<StepComponentProps<FetchArgs>> = memo(
 					step: 1,
 					current: step.args.autoMax,
 					onChange: (s, val) => (s.args.autoMax = num(val as string)),
+					advanced: true,
 				},
 			],
 			[step],
