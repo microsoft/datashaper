@@ -46,7 +46,7 @@ export const JoinBase: React.FC<
 				JoinStrategy,
 				step.args.strategy,
 				(s, val) => (s.args.strategy = val as JoinStrategy),
-				{ required: true, placeholder: 'Choose join' },
+				{ required: true, placeholder: 'Choose join', advanced: true },
 			),
 			...joinInputs(step, leftColumns, rightColumns),
 		],
