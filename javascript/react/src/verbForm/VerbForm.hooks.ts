@@ -27,10 +27,11 @@ export function useSortedInputs(inputs: FormInput<any>[]): {
 		() => setExpanded(prev => !prev),
 		[setExpanded],
 	)
+
 	return {
 		regular,
 		advanced,
-		showAdvanced: advanced.length > 0,
+		showAdvanced: advanced.some(input => input.if ?? true),
 		expanded,
 		onToggleAdvanced,
 	}
