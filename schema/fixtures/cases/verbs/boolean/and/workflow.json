@@ -3,7 +3,7 @@
 	"steps": [
 		{
 			"verb": "boolean",
-			"input": "table20",
+			"input": "table27",
 			"args": {
 				"to": "newColumn",
 				"columns": ["A", "B", "C"],
@@ -13,5 +13,5 @@
 		}
 	],
 	"output": ["expected"],
-	"input": ["table20"]
+	"input": ["table27"]
 }

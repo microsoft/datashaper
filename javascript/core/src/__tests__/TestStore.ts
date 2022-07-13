@@ -187,6 +187,14 @@ export class TestStore {
 			values: ['undefined', 'test1', 'null', 'test2', 'final test'],
 		})
 
+		// matrix of binary combinations for testing boolean logic
+		const table27 = table({
+			A: [1, 1, 1, 1],
+			B: [1, 1, 0, 0],
+			C: [1, 0, 0, 0],
+			D: [1, 0, 0, 0],
+		})
+
 		this.set('table1', { id: 'table1', table: table1 })
 		this.set('table2', { id: 'table2', table: table2 })
 		this.set('table3', { id: 'table3', table: table3 })
@@ -213,6 +221,7 @@ export class TestStore {
 		this.set('table24', { id: 'table24', table: table24 })
 		this.set('table25', { id: 'table25', table: table25 })
 		this.set('table26', { id: 'table26', table: table26 })
+		this.set('table27', { id: 'table27', table: table27 })
 	}
 
 	private _tables: Map<string, TableContainer> = new Map()
