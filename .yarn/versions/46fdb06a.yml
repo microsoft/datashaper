@@ -1,7 +1,7 @@
 releases:
   "@data-wrangling-components/core": minor
   "@data-wrangling-components/react": minor
+  "@data-wrangling-components/schema": minor
 
 declined:
-  - "@data-wrangling-components/schema"
   - "@data-wrangling-components/webapp"
