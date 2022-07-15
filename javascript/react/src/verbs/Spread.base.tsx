@@ -26,6 +26,7 @@ export const SpreadBase: React.FC<
 				type: FormInputType.Text,
 				current: step.args.delimiter,
 				onChange: (s, val) => (s.args.delimiter = val as string),
+				advanced: true,
 			},
 			{
 				label: 'Onehot encode values',
@@ -34,9 +35,10 @@ export const SpreadBase: React.FC<
 				onChange: (s, val) => (s.args.onehot = val as boolean),
 				styles: {
 					root: {
-						marginTop: 8
-					}
-				}
+						marginTop: 8,
+					},
+				},
+				advanced: true,
 			},
 		],
 		[step, columns],
