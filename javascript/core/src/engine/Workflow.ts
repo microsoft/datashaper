@@ -142,13 +142,16 @@ export class Workflow {
 		return () => sub.unsubscribe()
 	}
 
-	public toJsonObject(): WorkflowObject {
+	public async toJsonObject(): Promise<WorkflowObject> {
 		const output: WorkflowObject['output'] = []
 		for (const [name, binding] of this._output.entries()) {
 			output.push({ ...binding, name })
 		}
+		const wf = await fetch(
+			'https://microsoft.github.io/data-wrangling-components/schema/workflow.json',
+		).then(r => r.json())
 		return {
-			$schema: `https://microsoft.github.io/data-wrangling-components/schema/v1.json`,
+			$schema: `https://microsoft.github.io/data-wrangling-components/schema/${wf.$id}.json`,
 			name: this._name,
 			description: this._description,
 			input: [...this._input.values()],

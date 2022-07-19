@@ -16,10 +16,11 @@ import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
 
 export function useDownloadWorkflow(workflow: Workflow): () => void {
-	return useCallback(() => {
+	return useCallback(async () => {
 		if (workflow != null) {
-			const blob = toBlobJson(workflow.toJsonObject())
-			download('worfklow.json', FileMimeType.json, blob)
+			const json = await workflow.toJsonObject()
+			const blob = toBlobJson(json)
+			download('workflow.json', FileMimeType.json, blob)
 		}
 	}, [workflow])
 }
@@ -56,9 +57,7 @@ export function useDownloadZip(
 		}
 
 		if (tables.length) {
-			const files = tables
-				.map(table => tableFile(table))
-				.filter(f => f != null)
+			const files = tables.map(table => tableFile(table)).filter(f => f != null)
 			if (files.length) {
 				await fileCollection.add(files as FileWithPath[])
 				tables.forEach(table => {
@@ -74,7 +73,8 @@ export function useDownloadZip(
 		}
 
 		if (workflow) {
-			const blob = toBlobJson(workflow.toJsonObject())
+			const json = await workflow.toJsonObject()
+			const blob = toBlobJson(json)
 			const file = createFileWithPath(blob, { name: 'workflow.json' })
 			await fileCollection.add(file)
 		}

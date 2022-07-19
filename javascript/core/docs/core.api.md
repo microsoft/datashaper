@@ -1029,7 +1029,7 @@ export class Workflow {
     // (undocumented)
     get steps(): Step[];
     // (undocumented)
-    toJsonObject(): WorkflowObject;
+    toJsonObject(): Promise<WorkflowObject>;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
 }
