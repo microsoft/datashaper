@@ -21,21 +21,26 @@ describe('stepGraph', () => {
 
 	test('runs a single step with normal input/output', () => {
 		const g = createGraph(
-			new Workflow({
-				input: ['input'],
-				steps: [
-					{
-						id: 'fill1',
-						verb: Verb.Fill,
-						args: {
-							to: 'filled',
-							value: 1,
+			new Workflow(
+				{
+					$schema:
+						'https://microsoft.github.io/data-wrangling-components/schema/workflow.json',
+					input: ['input'],
+					steps: [
+						{
+							id: 'fill1',
+							verb: Verb.Fill,
+							args: {
+								to: 'filled',
+								value: 1,
+							},
+							input: 'input',
 						},
-						input: 'input',
-					},
-				],
-				output: [{ name: 'output', node: 'fill1' }],
-			}),
+					],
+					output: [{ name: 'output', node: 'fill1' }],
+				},
+				false,
+			),
 			store,
 		)
 		expect(g).toBeDefined()
@@ -47,29 +52,34 @@ describe('stepGraph', () => {
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {
 		const g = createGraph(
-			new Workflow({
-				input: ['input'],
-				steps: [
-					{
-						id: 'output-1',
-						verb: Verb.Fill,
-						input: 'input',
-						args: {
-							to: 'filled',
-							value: 1,
+			new Workflow(
+				{
+					$schema:
+						'https://microsoft.github.io/data-wrangling-components/schema/workflow.json',
+					input: ['input'],
+					steps: [
+						{
+							id: 'output-1',
+							verb: Verb.Fill,
+							input: 'input',
+							args: {
+								to: 'filled',
+								value: 1,
+							},
 						},
-					},
-					{
-						id: 'output-2',
-						verb: Verb.Fill,
-						args: {
-							to: 'filled2',
-							value: 2,
+						{
+							id: 'output-2',
+							verb: Verb.Fill,
+							args: {
+								to: 'filled2',
+								value: 2,
+							},
 						},
-					},
-				],
-				output: ['output-1', 'output-2'],
-			}),
+					],
+					output: ['output-1', 'output-2'],
+				},
+				false,
+			),
 			store,
 		)
 		expect(g).toBeDefined()

@@ -8,7 +8,8 @@ import Ajv from 'ajv'
 import type { WorkflowObject } from '../steps/types.js'
 
 const baseUrl = 'https://microsoft.github.io/data-wrangling-components/schema'
-const defaultWorkflow = 'workflow.json'
+// TODO: change to `workflow.json` when it has been deployed to the github.io page
+const defaultWorkflow = 'v1.json'
 
 async function getSchema(version: string) {
 	try {
