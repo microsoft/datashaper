@@ -7,11 +7,14 @@ import { Subject } from 'rxjs'
 import { readStep } from '../steps/readStep.js'
 import type { Step, StepInput, WorkflowObject } from '../steps/types.js'
 import type { NamedOutputPortBinding, OutputPortBinding } from '../types.js'
+import { WorkflowSchemaInstance } from './validator.js'
 
 /**
  * The workflow object manages mutable data for a workflow specification
  */
 export class Workflow {
+	private _name?: string
+	private _description?: string
 	private _steps: Step[] = []
 	private _input: Set<string> = new Set()
 	private _output: Map<string, NamedOutputPortBinding> = new Map()
@@ -19,8 +22,10 @@ export class Workflow {
 	// The global onChange handler
 	private readonly _onChange = new Subject<void>()
 
-	public constructor(workflowJson?: WorkflowObject) {
+	private init(workflowJson?: WorkflowObject) {
 		let prev: Step | undefined
+		this._name = workflowJson?.name
+		this._description = workflowJson?.description
 		workflowJson?.steps.forEach(i => {
 			const step = readStep(i, prev)
 			this._steps.push(step)
@@ -31,6 +36,20 @@ export class Workflow {
 			const binding = fixOutput(o)
 			this._output.set(binding.name, binding)
 		})
+	}
+
+	public constructor(workflowJson?: WorkflowObject, validate = true) {
+		if (workflowJson && validate) {
+			WorkflowSchemaInstance.isValid(workflowJson).then(isValid => {
+				if (!isValid) {
+					throw Error('Invalid workflow definition')
+				} else {
+					this.init(workflowJson)
+				}
+			})
+		} else {
+			this.init(workflowJson)
+		}
 	}
 
 	public get input(): Set<string> {
@@ -128,8 +147,10 @@ export class Workflow {
 		for (const [name, binding] of this._output.entries()) {
 			output.push({ ...binding, name })
 		}
-
 		return {
+			$schema: `https://microsoft.github.io/data-wrangling-components/schema/v1.json`,
+			name: this._name,
+			description: this._description,
 			input: [...this._input.values()],
 			output,
 			steps: [...this.steps],

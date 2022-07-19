@@ -10,6 +10,8 @@ import type {
 import type { Verb } from '../verbs/index.js'
 
 export interface WorkflowObject {
+	$id?: string
+	$schema?: string
 	name?: string
 	description?: string
 	input?: string[]
@@ -32,6 +34,7 @@ export interface StepInput<T extends object | void | unknown = unknown> {
 	 * The verb arguments
 	 */
 	args?: T
+	description?: string
 
 	/**
 	 * The bound inputs
@@ -60,6 +63,7 @@ export interface Step<T extends object | void | unknown = unknown> {
 	 * The verb arguments
 	 */
 	args: T
+	description?: string
 
 	/**
 	 * The bound inputs

@@ -1,4 +1,5 @@
 {
+    "$id": "1.4.1",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "AggregateArgs": {
@@ -12,7 +13,7 @@
                     "type": "string"
                 },
                 "operation": {
-                    "$ref": "#/definitions/FieldAggregateOperation",
+                    "$ref": "1.4.1#/definitions/FieldAggregateOperation",
                     "description": "Aggregate/rollup operation"
                 },
                 "to": {
@@ -32,7 +33,7 @@
                                 "source": {
                                     "anyOf": [
                                         {
-                                            "$ref": "#/definitions/NamedPortBinding"
+                                            "$ref": "1.4.1#/definitions/NamedPortBinding"
                                         },
                                         {
                                             "type": "string"
@@ -82,7 +83,7 @@
                     "type": "boolean"
                 },
                 "strategy": {
-                    "$ref": "#/definitions/BinStrategy"
+                    "$ref": "1.4.1#/definitions/BinStrategy"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -107,12 +108,12 @@
                 },
                 "criteria": {
                     "items": {
-                        "$ref": "#/definitions/Criterion"
+                        "$ref": "1.4.1#/definitions/Criterion"
                     },
                     "type": "array"
                 },
                 "logical": {
-                    "$ref": "#/definitions/BooleanOperator"
+                    "$ref": "1.4.1#/definitions/BooleanOperator"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -130,7 +131,7 @@
                     "type": "array"
                 },
                 "operator": {
-                    "$ref": "#/definitions/BooleanOperator"
+                    "$ref": "1.4.1#/definitions/BooleanOperator"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -168,7 +169,7 @@
                     "type": "number"
                 },
                 "type": {
-                    "$ref": "#/definitions/ParseType"
+                    "$ref": "1.4.1#/definitions/ParseType"
                 }
             },
             "type": "object"
@@ -199,7 +200,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "$ref": "#/definitions/FilterCompareType",
+                    "$ref": "1.4.1#/definitions/FilterCompareType",
                     "description": "Indicates whether the filter should be directly against a value,\nor against the value of another column"
                 },
                 "value": {
@@ -219,7 +220,7 @@
                     "type": "string"
                 },
                 "operator": {
-                    "$ref": "#/definitions/MathOperator"
+                    "$ref": "1.4.1#/definitions/MathOperator"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -237,7 +238,7 @@
                         "other": {
                             "anyOf": [
                                 {
-                                    "$ref": "#/definitions/NamedPortBinding"
+                                    "$ref": "1.4.1#/definitions/NamedPortBinding"
                                 },
                                 {
                                     "type": "string"
@@ -248,7 +249,7 @@
                         "source": {
                             "anyOf": [
                                 {
-                                    "$ref": "#/definitions/NamedPortBinding"
+                                    "$ref": "1.4.1#/definitions/NamedPortBinding"
                                 },
                                 {
                                     "type": "string"
@@ -336,12 +337,12 @@
                 },
                 "criteria": {
                     "items": {
-                        "$ref": "#/definitions/Criterion"
+                        "$ref": "1.4.1#/definitions/Criterion"
                     },
                     "type": "array"
                 },
                 "logical": {
-                    "$ref": "#/definitions/BooleanOperator"
+                    "$ref": "1.4.1#/definitions/BooleanOperator"
                 }
             },
             "type": "object"
@@ -407,7 +408,7 @@
         "InputColumnRecordArgs": {
             "properties": {
                 "columns": {
-                    "$ref": "#/definitions/Record<string,string>",
+                    "$ref": "1.4.1#/definitions/Record<string,string>",
                     "description": "Map of old column to new column names"
                 }
             },
@@ -423,7 +424,7 @@
                     "type": "array"
                 },
                 "strategy": {
-                    "$ref": "#/definitions/JoinStrategy"
+                    "$ref": "1.4.1#/definitions/JoinStrategy"
                 }
             },
             "type": "object"
@@ -480,7 +481,7 @@
                     "type": "string"
                 },
                 "strategy": {
-                    "$ref": "#/definitions/MergeStrategy"
+                    "$ref": "1.4.1#/definitions/MergeStrategy"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -548,7 +549,7 @@
                 "orders": {
                     "description": "List of ordering instructions to apply",
                     "items": {
-                        "$ref": "#/definitions/OrderbyInstruction"
+                        "$ref": "1.4.1#/definitions/OrderbyInstruction"
                     },
                     "type": "array"
                 }
@@ -561,7 +562,7 @@
                     "type": "string"
                 },
                 "direction": {
-                    "$ref": "#/definitions/SortDirection"
+                    "$ref": "1.4.1#/definitions/SortDirection"
                 }
             },
             "type": "object"
@@ -595,7 +596,7 @@
                     "type": "string"
                 },
                 "operation": {
-                    "$ref": "#/definitions/FieldAggregateOperation"
+                    "$ref": "1.4.1#/definitions/FieldAggregateOperation"
                 },
                 "value": {
                     "type": "string"
@@ -610,7 +611,7 @@
                     "type": "string"
                 },
                 "map": {
-                    "$ref": "#/definitions/Record<any,any>",
+                    "$ref": "1.4.1#/definitions/Record<any,any>",
                     "description": "Mapping of old value to new for the recoding.\nNote that the key must be coercable to a string for map lookup."
                 },
                 "to": {
@@ -633,7 +634,7 @@
                     "type": "string"
                 },
                 "operation": {
-                    "$ref": "#/definitions/FieldAggregateOperation",
+                    "$ref": "1.4.1#/definitions/FieldAggregateOperation",
                     "description": "Aggregate/rollup operation"
                 },
                 "to": {
@@ -720,7 +721,7 @@
                             "items": {
                                 "anyOf": [
                                     {
-                                        "$ref": "#/definitions/NamedPortBinding"
+                                        "$ref": "1.4.1#/definitions/NamedPortBinding"
                                     },
                                     {
                                         "type": "string"
@@ -732,7 +733,7 @@
                         "source": {
                             "anyOf": [
                                 {
-                                    "$ref": "#/definitions/NamedPortBinding"
+                                    "$ref": "1.4.1#/definitions/NamedPortBinding"
                                 },
                                 {
                                     "type": "string"
@@ -753,7 +754,7 @@
                     "type": "string"
                 },
                 "operation": {
-                    "$ref": "#/definitions/WindowFunction"
+                    "$ref": "1.4.1#/definitions/WindowFunction"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -779,6 +780,10 @@
     },
     "description": "The root data-wrangling specification. (Used for generating JSON Schema)",
     "properties": {
+        "$schema": {
+            "description": "The version of the schema",
+            "type": "string"
+        },
         "description": {
             "description": "A user-friendly description of the specification",
             "type": "string"
@@ -799,7 +804,7 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/NamedOutputPortBinding"
+                        "$ref": "1.4.1#/definitions/NamedOutputPortBinding"
                     },
                     {
                         "type": "string"
@@ -815,12 +820,12 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/AggregateArgs"
+                                        "$ref": "1.4.1#/definitions/AggregateArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -832,19 +837,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/BinArgs"
+                                        "$ref": "1.4.1#/definitions/BinArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -856,19 +861,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/BinarizeArgs"
+                                        "$ref": "1.4.1#/definitions/BinarizeArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -880,19 +885,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/BooleanArgs"
+                                        "$ref": "1.4.1#/definitions/BooleanArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -904,14 +909,14 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -925,19 +930,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/VariadicInput"
+                                "$ref": "1.4.1#/definitions/VariadicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/ConvertArgs"
+                                        "$ref": "1.4.1#/definitions/ConvertArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -949,19 +954,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/Partial<InputColumnListArgs>"
+                                        "$ref": "1.4.1#/definitions/Partial<InputColumnListArgs>"
                                     },
                                     "verb": {
                                         "enum": [
@@ -973,19 +978,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/DeriveArgs"
+                                        "$ref": "1.4.1#/definitions/DeriveArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -997,14 +1002,14 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1018,19 +1023,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/VariadicInput"
+                                "$ref": "1.4.1#/definitions/VariadicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/EraseArgs"
+                                        "$ref": "1.4.1#/definitions/EraseArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1042,19 +1047,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/FetchArgs"
+                                        "$ref": "1.4.1#/definitions/FetchArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1066,19 +1071,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/FillArgs"
+                                        "$ref": "1.4.1#/definitions/FillArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1090,19 +1095,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/FilterArgs"
+                                        "$ref": "1.4.1#/definitions/FilterArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1114,19 +1119,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/FoldArgs"
+                                        "$ref": "1.4.1#/definitions/FoldArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1138,19 +1143,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/InputColumnListArgs"
+                                        "$ref": "1.4.1#/definitions/InputColumnListArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1162,19 +1167,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/ImputeArgs"
+                                        "$ref": "1.4.1#/definitions/ImputeArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1186,14 +1191,14 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1207,19 +1212,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/VariadicInput"
+                                "$ref": "1.4.1#/definitions/VariadicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/JoinArgs"
+                                        "$ref": "1.4.1#/definitions/JoinArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1231,19 +1236,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/DualInput"
+                                "$ref": "1.4.1#/definitions/DualInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/LookupArgs"
+                                        "$ref": "1.4.1#/definitions/LookupArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1255,19 +1260,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/DualInput"
+                                "$ref": "1.4.1#/definitions/DualInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/MergeArgs"
+                                        "$ref": "1.4.1#/definitions/MergeArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1279,19 +1284,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/OnehotArgs"
+                                        "$ref": "1.4.1#/definitions/OnehotArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1303,19 +1308,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/OrderbyArgs"
+                                        "$ref": "1.4.1#/definitions/OrderbyArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1327,19 +1332,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/PivotArgs"
+                                        "$ref": "1.4.1#/definitions/PivotArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1351,19 +1356,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/RecodeArgs"
+                                        "$ref": "1.4.1#/definitions/RecodeArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1375,19 +1380,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/InputColumnRecordArgs"
+                                        "$ref": "1.4.1#/definitions/InputColumnRecordArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1399,19 +1404,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/RollupArgs"
+                                        "$ref": "1.4.1#/definitions/RollupArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1423,19 +1428,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/SampleArgs"
+                                        "$ref": "1.4.1#/definitions/SampleArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1447,19 +1452,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/InputColumnListArgs"
+                                        "$ref": "1.4.1#/definitions/InputColumnListArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1471,19 +1476,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/SpreadArgs"
+                                        "$ref": "1.4.1#/definitions/SpreadArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1495,19 +1500,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/UnfoldArgs"
+                                        "$ref": "1.4.1#/definitions/UnfoldArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1519,14 +1524,14 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1540,14 +1545,14 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1561,14 +1566,14 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/VariadicInput"
+                                "$ref": "1.4.1#/definitions/VariadicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
@@ -1582,19 +1587,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/InputColumnListArgs"
+                                        "$ref": "1.4.1#/definitions/InputColumnListArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1606,19 +1611,19 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/StepJsonCommon"
+                                "$ref": "1.4.1#/definitions/StepJsonCommon"
                             },
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/WindowArgs"
+                                        "$ref": "1.4.1#/definitions/WindowArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1630,7 +1635,7 @@
                                 "type": "object"
                             },
                             {
-                                "$ref": "#/definitions/BasicInput"
+                                "$ref": "1.4.1#/definitions/BasicInput"
                             }
                         ]
                     }

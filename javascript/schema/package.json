@@ -28,16 +28,13 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
-		"build": "yarn schema && essex build --docs --skipExportCheck && yarn copy-workflow-dist",
+		"build": "essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
-		"copy-workflow-dist": "shx cp ./src/workflow.json ./dist",
-		"schema": "typescript-json-schema tsconfig.json WorfklowJson > ./src/workflow.json",
-		"bundle": "typescript-json-schema tsconfig.json WorfklowJson > ../../schema/workflow.json",
+		"bundle": "typescript-json-schema tsconfig.json WorkflowJson --id $npm_package_version > ../../schema/workflow.json",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
-		"@data-wrangling-components/core": "workspace:^",
-		"ajv": "^8.11.0"
+		"@data-wrangling-components/core": "workspace:^"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.5",
