@@ -1,5 +1,5 @@
 {
-	"$schema": "../../../../../../workflow.json",
+	"$schema": "../../../../../workflow.json",
 	"steps": [
 		{
 			"verb": "merge",
@@ -12,7 +12,7 @@
 					"Name_Google"
 				],
 				"strategy": "first one wins",
-				"to": "Name",
+				"to": "NewColumn",
 				"keepOriginalColumns": true,
 				"unhot": true,
 				"prefix": "Name_"
