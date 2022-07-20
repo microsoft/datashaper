@@ -88,14 +88,12 @@ function unhotOperation(
 				j < inputTable.data()[columnName as keyof typeof obj]['data']['length'];
 				j++
 			) {
-				inputTable.data()[columnName as keyof typeof obj]['data'][
-					'' + j + ''
-				] === 0
+				inputTable.data()[columnName as keyof typeof obj]['data'][`${j}`] === 0
 					? ((inputTable.data()[columnName as keyof typeof obj]['data'][
-							'' + j + ''
+							`${j}`
 					  ] as any) = null)
 					: ((inputTable.data()[columnName as keyof typeof obj]['data'][
-							'' + j + ''
+							`${j}`
 					  ] as any) = value)
 			}
 		}
