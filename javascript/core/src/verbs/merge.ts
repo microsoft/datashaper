@@ -73,13 +73,31 @@ function unhotOperation(
 	prefix: string,
 ): void {
 	for (let i = 0; i < columns.length; i++) {
-		const index = columns[i].indexOf(prefix)
-		const value = columns[i].substring(index + prefix.length)
+		const columnName: any = columns[i] ?? null
+		const index = columnName !== null ? columnName.indexOf(prefix) : -1
+		const value =
+			index !== -1 && columnName !== null
+				? columnName.substring(index + prefix.length)
+				: null
 
-		for (let j = 0; j < inputTable.data()[columns[i]].data.length; j++) {
-			inputTable.data()[columns[i]].data[j] === 0
-				? (inputTable.data()[columns[i]].data[j] = null)
-				: (inputTable.data()[columns[i]].data[j] = value)
+		const obj = inputTable.data()
+
+		if (columnName !== null && value !== null) {
+			for (
+				let j = 0;
+				j < inputTable.data()[columnName as keyof typeof obj]['data']['length'];
+				j++
+			) {
+				inputTable.data()[columnName as keyof typeof obj]['data'][
+					'' + j + ''
+				] === 0
+					? ((inputTable.data()[columnName as keyof typeof obj]['data'][
+							'' + j + ''
+					  ] as any) = null)
+					: ((inputTable.data()[columnName as keyof typeof obj]['data'][
+							'' + j + ''
+					  ] as any) = value)
+			}
 		}
 	}
 }

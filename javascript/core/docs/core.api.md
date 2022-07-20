@@ -541,7 +541,13 @@ export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>
 export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
     delimiter?: string;
     // (undocumented)
+    keepOriginalColumns?: boolean;
+    // (undocumented)
+    prefix?: string;
+    // (undocumented)
     strategy: MergeStrategy;
+    // (undocumented)
+    unhot?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "MergeStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

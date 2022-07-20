@@ -475,16 +475,25 @@
                     },
                     "type": "array"
                 },
-                "delimiter": {
-                    "description": "This is only necessary if mergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
-                    "type": "string"
-                },
+                
                 "strategy": {
                     "$ref": "#/definitions/MergeStrategy"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
                     "type": "string"
+                },
+                "prefix": {
+                    "description": "This is only necessary if unhot is true",
+                    "type": "string"
+                },
+                "unhot": {
+                    "description": "Unhot the table with the columns received as input",
+                    "type": "boolean"
+                },
+                "keepOriginalColumns": {
+                    "description": "Leave or remove the columns used for the merge",
+                    "type": "boolean"
                 }
             },
             "type": "object"
