@@ -434,7 +434,7 @@ const CheckboxInput: React.FC<{
 				checked={current}
 				onChange={changeHandler}
 				disabled={disabled}
-				styles={merge({}, dropdownStyles, styles)}
+				styles={merge({}, checkboxStyles, styles)}
 			/>
 		</Wrapper>
 	)
@@ -477,6 +477,13 @@ const TextInput: React.FC<{
 const dropdownStyles = {
 	root: {
 		width: 220,
+	},
+}
+
+const checkboxStyles = {
+	root: {
+		width: 220,
+		paddingTop: '10px',
 	},
 }
 

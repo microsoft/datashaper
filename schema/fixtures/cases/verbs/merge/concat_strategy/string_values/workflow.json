@@ -7,7 +7,8 @@
 			"args": {
 				"columns": ["name", "description"],
 				"strategy": "concat",
-				"to": "resultColumn"
+				"to": "resultColumn",
+				"keepOriginalColumns": true
 			},
 			"id": "expected"
 		}

@@ -7,7 +7,8 @@
 			"args": {
 				"columns": ["quantity", "totalSale"],
 				"strategy": "concat",
-				"to": "resultColumn"
+				"to": "resultColumn",
+				"keepOriginalColumns": true
 			},
 			"id": "expected"
 		}

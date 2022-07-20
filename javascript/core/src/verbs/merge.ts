@@ -4,7 +4,7 @@
  */
 import type { DataType } from '@essex/arquero'
 import { columnType } from '@essex/arquero'
-import { escape } from 'arquero'
+import { escape, not } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
@@ -26,12 +26,25 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	 * If it is not supplied, the values are just mashed together.
 	 */
 	delimiter?: string
+	unhot?: boolean
+	prefix?: string
+	keepOriginalColumns?: boolean
 }
 
 export const mergeStep: ColumnTableStep<MergeArgs> = (
 	input,
-	{ columns = [], strategy, to, delimiter = '' },
+	{
+		columns = [],
+		strategy,
+		to,
+		delimiter = '',
+		unhot = false,
+		prefix = '',
+		keepOriginalColumns = false,
+	},
 ) => {
+	if (unhot) unhotOperation(input, columns, prefix)
+
 	const isSameDataTypeFlag: boolean = isSameDataType(input, columns)
 
 	// eslint-disable-next-line
@@ -49,7 +62,26 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 		}
 	})
 
-	return input.derive({ [to]: func })
+	if (keepOriginalColumns) return input.derive({ [to]: func })
+
+	return input.derive({ [to]: func }).select(not(columns))
+}
+
+function unhotOperation(
+	inputTable: ColumnTable,
+	columns: string[],
+	prefix: string,
+): void {
+	for (let i = 0; i < columns.length; i++) {
+		const index = columns[i].indexOf(prefix)
+		const value = columns[i].substring(index + prefix.length)
+
+		for (let j = 0; j < inputTable.data()[columns[i]].data.length; j++) {
+			inputTable.data()[columns[i]].data[j] === 0
+				? (inputTable.data()[columns[i]].data[j] = null)
+				: (inputTable.data()[columns[i]].data[j] = value)
+		}
+	}
 }
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {

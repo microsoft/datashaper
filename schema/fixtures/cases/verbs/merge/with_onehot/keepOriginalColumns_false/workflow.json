@@ -1,0 +1,24 @@
+{
+	"$schema": "../../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "merge",
+			"input": "table31",
+			"args": {
+				"columns": [
+					"Name_Microsoft",
+					"Name_Amazon",
+					"Name_Samsung",
+					"Name_Google"
+				],
+				"strategy": "first one wins",
+				"to": "Name",
+				"keepOriginalColumns": false,
+				"prefix": "Name_"
+			},
+			"id": "expected"
+		}
+	],
+	"output": ["expected"],
+	"input": ["table31"]
+}
