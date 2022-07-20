@@ -4,7 +4,7 @@
  */
 import type { DataType } from '@essex/arquero'
 import { columnType } from '@essex/arquero'
-import { escape, not } from 'arquero'
+import { escape, fromJSON,not } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
@@ -43,9 +43,16 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 		keepOriginalColumns = false,
 	},
 ) => {
-	if (unhot) unhotOperation(input, columns, prefix)
+	const copyTable: ColumnTable = fromJSON(input.toJSON())
 
-	const isSameDataTypeFlag: boolean = isSameDataType(input, columns)
+	if (unhot) {
+		unhotOperation(copyTable, columns, prefix)
+	}
+
+	const isSameDataTypeFlag: boolean = isSameDataType(
+		unhot ? copyTable : input,
+		columns,
+	)
 
 	// eslint-disable-next-line
 	const func: object = escape((d: any) => {
@@ -62,9 +69,14 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 		}
 	})
 
-	if (keepOriginalColumns) return input.derive({ [to]: func })
+	if (keepOriginalColumns)
+		return unhot
+			? copyTable.derive({ [to]: func })
+			: input.derive({ [to]: func })
 
-	return input.derive({ [to]: func }).select(not(columns))
+	return unhot
+		? copyTable.derive({ [to]: func }).select(not(columns))
+		: input.derive({ [to]: func }).select(not(columns))
 }
 
 function unhotOperation(
