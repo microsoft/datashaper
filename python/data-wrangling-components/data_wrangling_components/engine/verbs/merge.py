@@ -47,6 +47,9 @@ def merge(
     columns: List[str],
     strategy: str,
     delimiter: str = "",
+    keepOriginalColumns: bool = True,
+    unhot: bool = False,
+    prefix: str = ""
 ):
     merge_strategy = MergeStrategy(strategy)
 
