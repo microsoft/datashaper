@@ -14,7 +14,7 @@ const schemaDir = path.join(__dirname, '../schema')
 const schemaReleases = path.join(schemaDir, 'releases')
 const webappVersionDirectory = path.join(
 	__dirname,
-	'../javascript/webapp/public/schema',
+	'../javascript/webapp/public/schema/workflow',
 )
 
 if (!fs.existsSync(webappVersionDirectory)) {

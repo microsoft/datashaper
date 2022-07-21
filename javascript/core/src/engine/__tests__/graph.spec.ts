@@ -24,7 +24,7 @@ describe('stepGraph', () => {
 			new Workflow(
 				{
 					$schema:
-						'https://microsoft.github.io/data-wrangling-components/schema/workflow.json',
+						'https://microsoft.github.io/data-wrangling-components/schema/workflow/workflow.json',
 					input: ['input'],
 					steps: [
 						{
@@ -55,7 +55,7 @@ describe('stepGraph', () => {
 			new Workflow(
 				{
 					$schema:
-						'https://microsoft.github.io/data-wrangling-components/schema/workflow.json',
+						'https://microsoft.github.io/data-wrangling-components/schema/workflow/workflow.json',
 					input: ['input'],
 					steps: [
 						{
