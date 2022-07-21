@@ -20,9 +20,6 @@ export const NavPanel: React.FC<NavPanelProps> = memo(function NavPanel({
 				<ListItem to={'/debug'} onClick={onDismiss}>
 					Debug
 				</ListItem>
-				<ListItem to={'/performance'} onClick={onDismiss}>
-					Performance
-				</ListItem>
 			</LinkSection>
 		</Container>
 	)

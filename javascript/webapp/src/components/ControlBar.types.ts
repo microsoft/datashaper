@@ -12,8 +12,6 @@ export interface ControlBarProps {
 	onLoadFiles?: (files: TableContainer[]) => void
 	features: DetailsListFeatures
 	onFeaturesChange?: (features: DetailsListFeatures) => void
-	compact: boolean
-	onCompactChange: (auto: boolean) => void
 	autoType: boolean
 	onAutoTypeChange: (autoType: boolean) => void
 }

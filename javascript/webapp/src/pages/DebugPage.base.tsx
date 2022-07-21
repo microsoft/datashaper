@@ -74,8 +74,6 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					onLoadFiles={onAddFiles}
 					features={features}
 					onFeaturesChange={setFeatures}
-					compact={compact}
-					onCompactChange={setCompact}
 					autoType={autoType}
 					onAutoTypeChange={setAutoType}
 				/>

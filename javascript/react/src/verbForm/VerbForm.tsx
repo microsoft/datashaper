@@ -13,11 +13,11 @@ import {
 	TextField,
 } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
-import noop from 'lodash-es/noop'
+import noop from 'lodash-es/noop.js'
 import { Fragment, memo, useMemo } from 'react'
-import { Case, Switch } from 'react-if'
-import styled from 'styled-components'
+import { Case, Switch, When } from 'react-if'
 
+import { Expando } from '../controls/Expando.js'
 import {
 	useCheckboxChangeHandler,
 	useComboBoxChangeHandler,
@@ -26,7 +26,10 @@ import {
 	useSpinButtonChangeHandler,
 	useTextFieldChangeHandler,
 } from '../hooks/index.js'
+import { dropdownStyles } from '../styles.js'
 import type { StepChangeFunction } from '../types.js'
+import { useSortedInputs } from './VerbForm.hooks.js'
+import { Container, InputsBlock, Row } from './VerbForm.styles.js'
 
 export interface FormInputBase<
 	T,
@@ -56,6 +59,11 @@ export interface FormInputBase<
 	 * Whether this input is disabled
 	 */
 	disabled?: boolean
+
+	/**
+	 * Whether this input should be sorted into a collapsible advanced section
+	 */
+	advanced?: boolean
 
 	/**
 	 * An optional React component to wrap the input with
@@ -170,25 +178,52 @@ export enum FormInputType {
 	Text = 'text',
 }
 
+/**
+ * Generates a component for editing verbs based on declarative config.
+ */
 export const VerbForm: React.FC<{
 	inputs: FormInput<any>[]
 	step: Step<any>
 	onChange?: StepChangeFunction<any>
 }> = memo(function VerbInput({ inputs, step, onChange }) {
-	const rows = useMemo(
-		() =>
-			inputs.map((input, index) => (
-				<Input
-					input={input}
-					step={step}
-					onChange={onChange}
-					key={`verb-${input.label}-${index}`}
-				/>
-			)),
-		[inputs, onChange, step],
+	// split the inputs into visible and expando based on the advanced flag
+	const { regular, advanced, showAdvanced } = useSortedInputs(inputs)
+
+	const regularRows = useMemo(
+		() => mapInputs(regular, step, onChange),
+		[regular, onChange, step],
 	)
-	return <Container>{rows}</Container>
+	const advancedRows = useMemo(
+		() => mapInputs(advanced, step, onChange),
+		[advanced, onChange, step],
+	)
+
+	return (
+		<Container>
+			<InputsBlock>{regularRows}</InputsBlock>
+			<When condition={showAdvanced}>
+				<Expando label={'Advanced'}>
+					<InputsBlock>{advancedRows}</InputsBlock>
+				</Expando>
+			</When>
+		</Container>
+	)
 })
+
+function mapInputs(
+	inputs: FormInput<any>[],
+	step: Step<any>,
+	onChange?: StepChangeFunction<any>,
+) {
+	return inputs.map((input, index) => (
+		<Input
+			input={input}
+			step={step}
+			onChange={onChange}
+			key={`verb-${input.label}-${index}`}
+		/>
+	))
+}
 
 const Input: React.FC<{
 	input: FormInput<unknown>
@@ -473,16 +508,3 @@ const TextInput: React.FC<{
 		</Wrapper>
 	)
 })
-
-const dropdownStyles = {
-	root: {
-		width: 220,
-	},
-}
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-`
-
-const Row = styled.div``
