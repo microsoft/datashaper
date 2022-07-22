@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@data-wrangling-components/core'
+import styled from '@essex/styled-components'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import {
 	Checkbox,
@@ -16,7 +17,6 @@ import merge from 'lodash-es/merge.js'
 import noop from 'lodash-es/noop.js'
 import { Fragment, memo, useMemo } from 'react'
 import { Case, Switch } from 'react-if'
-import styled from 'styled-components'
 
 import {
 	useCheckboxChangeHandler,

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
 
 export const addButtonStyles = {
 	root: { padding: '0 4px 0 6px', whiteSpace: 'nowrap' },
