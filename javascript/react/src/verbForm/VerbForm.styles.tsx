@@ -4,17 +4,18 @@
  */
 import styled from '@essex/styled-components'
 
-export const Container = styled.div`
-	width: 240px;
-	display: flex;
-	align-items: center;
-`
-
-export const SearchContainer = styled.div`
-	border-bottom: 1px solid
-		${({ theme }) => theme.application().lowContrast().hex()};
-`
-
-export const icons = {
-	add: { iconName: 'Add' },
+export const dropdownStyles = {
+	root: {
+		width: 220,
+	},
 }
+
+export const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+`
+
+export const InputsBlock = styled.div``
+
+export const Row = styled.div``

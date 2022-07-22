@@ -50,6 +50,7 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 					if: step.args.strategy !== BinStrategy.Auto,
 					onChange: (s, opt) => (s.args.min = num(opt as string)),
 					current: step.args.min,
+					advanced: true,
 				},
 				{
 					label: 'Max Boundary',
@@ -57,28 +58,33 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 					if: step.args.strategy !== BinStrategy.Auto,
 					onChange: (s, opt) => (s.args.max = num(opt as string)),
 					current: step.args.max,
+					advanced: true,
 				},
 				checkbox(
 					'Clamp to min/max',
 					step.args.clamped,
 					(s, val) => (s.args.clamped = val as boolean),
-					{ if: step.args.strategy !== BinStrategy.Auto,
+					{
+						if: step.args.strategy !== BinStrategy.Auto,
 						styles: {
 							root: {
-								marginTop: 8
-							}
-						} },
+								marginTop: 8,
+							},
+						},
+						advanced: true,
+					},
 				),
 				checkbox(
 					'Print range as output',
 					step.args.printRange,
-					(s, opt) => (s.args.printRange = opt as boolean),{
+					(s, opt) => (s.args.printRange = opt as boolean),
+					{
 						styles: {
 							root: {
-								marginTop: 8
-							}
-						}
-					}
+								marginTop: 8,
+							},
+						},
+					},
 				),
 			],
 			[step],

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { FontIcon, Label,mergeStyles } from '@fluentui/react'
-import styled from 'styled-components'
+import styled from '@essex/styled-components'
+import { FontIcon, Label, mergeStyles } from '@fluentui/react'
 
 export const iconClass = mergeStyles({
 	fontSize: 20,

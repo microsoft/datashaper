@@ -21,6 +21,7 @@ export const OneHotBase: React.FC<StepComponentProps<OnehotArgs>> = memo(
 					type: FormInputType.Text,
 					current: step.args.prefix,
 					onChange: (s, val) => (s.args.prefix = val as string),
+					advanced: true,
 				},
 			],
 			[step],

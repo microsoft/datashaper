@@ -4,9 +4,9 @@
  */
 import { isOutputColumnStep } from '@data-wrangling-components/core'
 import { NodeInput } from '@essex/dataflow'
+import styled from '@essex/styled-components'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
-import styled from 'styled-components'
 
 import type { DescriptionRow, VerbDescriptionProps } from '../types.js'
 

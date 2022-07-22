@@ -5,11 +5,11 @@
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
 import type { DataType, Value } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
+import styled from '@essex/styled-components'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
-import styled from 'styled-components'
 
 import { ColumnValueDropdown } from '../controls/index.js'
 import {
@@ -50,9 +50,7 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 
 		return (
 			<Container>
-				<ColumnPairs>
-				{columnPairs}
-				</ColumnPairs>
+				<ColumnPairs>{columnPairs}</ColumnPairs>
 				<ActionButton
 					onClick={handleButtonClick}
 					iconProps={{ iconName: 'Add' }}
