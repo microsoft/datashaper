@@ -42,10 +42,6 @@ import type {
  */
 export interface WorkflowJson {
 	/**
-	 * The version of the specification
-	 */
-	$id?: string
-	/**
 	 * The schema url of the specification
 	 */
 	$schema?: string

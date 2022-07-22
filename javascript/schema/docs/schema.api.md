@@ -181,7 +181,6 @@ export interface VariadicInput extends BasicInput {
 //
 // @public
 export interface WorkflowJson {
-    $id?: string;
     $schema?: string;
     description?: string;
     input?: string[];

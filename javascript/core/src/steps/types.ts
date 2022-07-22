@@ -10,7 +10,6 @@ import type {
 import type { Verb } from '../verbs/index.js'
 
 export interface WorkflowObject {
-	$id?: string
 	$schema?: string
 	name?: string
 	description?: string

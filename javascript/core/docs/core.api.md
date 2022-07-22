@@ -1039,8 +1039,6 @@ export class Workflow {
 // @public (undocumented)
 export interface WorkflowObject {
     // (undocumented)
-    $id?: string;
-    // (undocumented)
     $schema?: string;
     // (undocumented)
     description?: string;

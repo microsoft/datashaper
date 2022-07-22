@@ -30,7 +30,7 @@
 		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
-		"bundle": "typescript-json-schema tsconfig.json WorkflowJson --id $npm_package_version > ../../schema/workflow.json",
+		"bundle": "typescript-json-schema tsconfig.json WorkflowJson > ../../schema/workflow.json",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
