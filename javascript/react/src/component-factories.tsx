@@ -2,9 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	ICommandBarProps,
-} from '@fluentui/react'
+import type { ICommandBarProps } from '@fluentui/react'
 import type { Theme } from '@thematic/core'
 import merge from 'lodash-es/merge.js'
 import type { ReactElement } from 'react'
