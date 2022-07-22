@@ -3751,8 +3751,8 @@ __metadata:
     "@data-wrangling-components/schema": "workspace:^"
     "@data-wrangling-components/utilities": "workspace:^"
     "@data-wrangling-components/verb-guidance": "workspace:^"
-    "@essex/arquero": ^3.0.0
-    "@essex/arquero-react": ^1.1.0
+    "@essex/arquero": ^3.1.0
+    "@essex/arquero-react": ^1.2.0
     "@essex/charts-react": ^1.0.5
     "@essex/dataflow": ^0.1.2
     "@essex/scripts": ^22.0.5
@@ -4069,6 +4069,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@essex/arquero-react@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@essex/arquero-react@npm:1.2.0"
+  dependencies:
+    "@essex/arquero": ^3.1.0
+    "@essex/charts-react": ^1.1.0
+    "@essex/styled-components": ^0.0.2
+    d3-format: ^3.1.0
+    lodash-es: ^4.17.21
+    react-if: ^4.1.4
+  peerDependencies:
+    "@fluentui/react": ">= 8.24.0"
+    "@fluentui/utilities": ">= 8.2.1"
+    "@thematic/core": ">= 1.3.0"
+    "@thematic/d3": ">= 1.3.0"
+    "@thematic/react": ">= 1.3.0"
+    "@types/react-is": ">= 17.0.3"
+    arquero: ">= 4.8.7"
+    react: ">= 18"
+    react-is: ">= 18.1.0"
+    styled-components: ">= 5"
+  checksum: 0e24a1a0766858a0b042995de6985e0e6a774e57afbd3856920172955e3fea92d8d72fa753e2cfdd02383b91bce914c85723c3b6e053f3b7b3ad5c0e32b48fd8
+  languageName: node
+  linkType: hard
+
 "@essex/arquero@npm:^3.0.0":
   version: 3.0.0
   resolution: "@essex/arquero@npm:3.0.0"
@@ -4077,6 +4102,17 @@ __metadata:
   peerDependencies:
     arquero: ^4.8.7
   checksum: c49d122d5d7ed53842648f0a77a3bfceaa222ddc5103568d39383a8f7ba1e6103e04ee6bd190078c82ae5c2d6127a7a92b884660e4d1bf649ead5d5d8ef62cb4
+  languageName: node
+  linkType: hard
+
+"@essex/arquero@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@essex/arquero@npm:3.1.0"
+  dependencies:
+    lodash-es: ^4.17.21
+  peerDependencies:
+    arquero: ^4.8.7
+  checksum: 65e73d4f6867635aecd9e5965efd09f59d2065cc4989a8429b76e406e9a4e580be9f628cb2a66d1a6c4846ed99cec661e1d75683bec91dcbc431ee664ba9d403
   languageName: node
   linkType: hard
 
@@ -4095,6 +4131,24 @@ __metadata:
     "@thematic/react": ^1.3.0
     react: ">= 18"
   checksum: 9f89bb3d541d4b159fa8ad0026b8dc6a276b5e8b5228b24b933007a415ed7ce7f1e0ba70fff44eb61a7a8648516b0ff5d444419dd6fa81f9ece796e7a5d11055
+  languageName: node
+  linkType: hard
+
+"@essex/charts-react@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@essex/charts-react@npm:1.1.0"
+  dependencies:
+    d3-format: ^3.1.0
+    d3-scale: ^4.0.2
+    d3-selection: ^3.0.0
+    d3-shape: ^3.1.0
+    lodash-es: ^4.17.21
+  peerDependencies:
+    "@thematic/core": ^1.3.0
+    "@thematic/d3": ^1.3.0
+    "@thematic/react": ^1.3.0
+    react: ">= 18"
+  checksum: 1e4e9d11621545f577b582e3ba159b28b2ccf6757bf92fd67588523531a7843b5ee8d8fe39ebe260b2bcb7a7c5210bbc48b48d537d184d08d8f9070c29c63538
   languageName: node
   linkType: hard
 
