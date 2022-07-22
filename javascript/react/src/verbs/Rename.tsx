@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RenameArgs, Step } from '@data-wrangling-components/core'
+import styled from '@essex/styled-components'
 import type { IDropdownOption } from '@fluentui/react'
 import {
 	ActionButton,
@@ -13,7 +14,6 @@ import {
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
-import styled from 'styled-components'
 
 import { TableColumnDropdown } from '../controls/index.js'
 import {
