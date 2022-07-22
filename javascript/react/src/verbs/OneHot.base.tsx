@@ -20,6 +20,7 @@ export const OneHotBase: React.FC<
 	const prefixInputs = useMemo(() => {
 		return step.args.columns.map(column => {
 			return {
+				advanced: true,
 				label: `Prefix for column ${column}`,
 				type: FormInputType.Text,
 				current: step.args.prefixes?.[column],
@@ -43,12 +44,9 @@ export const OneHotBase: React.FC<
 				step.args.prefixes = {}
 			} else {
 				const prefixes = setInitialPrefixes(step)
-				const cols = Object.keys(prefixes)
 				const columns = step.args.columns
-				cols.forEach(column => {
-					if (!columns.includes(column)) {
-						delete step.args.prefixes?.[column]
-					} else if (
+				columns.forEach(column => {
+					if (
 						(step.args.prefixes as Record<string, string>)[column] === undefined
 					) {
 						;(step.args.prefixes as Record<string, string>)[column] = prefixes[

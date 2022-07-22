@@ -212,7 +212,7 @@
 			"input": "data/stocks.csv",
 			"args": {
 				"columns": ["Symbol"],
-				"prefixes": ["ticker-"]
+				"prefixes": {"Symbol": "ticker-"}
 			}
 		},
 		{
