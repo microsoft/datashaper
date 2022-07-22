@@ -2,37 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnMetadata } from '@essex/arquero'
-import type {
-	ICommandBarProps,
-	IDetailsGroupDividerProps,
-} from '@fluentui/react'
+import type { ICommandBarProps } from '@fluentui/react'
 import type { Theme } from '@thematic/core'
 import merge from 'lodash-es/merge.js'
 import type { ReactElement } from 'react'
 
 import { CommandBar } from './components/CommandBar.js'
-import { GroupHeader } from './controls/index.js'
-
-export function createLazyLoadingGroupHeader(
-	props: IDetailsGroupDividerProps | undefined,
-	children: any,
-	columnName?: string,
-	columnMetadata?: ColumnMetadata | undefined,
-): ReactElement<any, any> | null {
-	if (!props || (!columnMetadata && !columnName)) {
-		return null
-	}
-	return (
-		<GroupHeader
-			props={props}
-			columnName={columnMetadata?.name || columnName}
-			lazyLoadGroups
-		>
-			{children}
-		</GroupHeader>
-	)
-}
 
 const defStyles = {
 	root: {

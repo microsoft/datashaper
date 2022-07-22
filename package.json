@@ -5,6 +5,7 @@
 		"_release_packages": "turbo run release",
 		"_cut_schema": "yarn node scripts/release-schema.mjs",
 		"_version_cut": "yarn version apply --all",
+		"_copy_versions": "yarn node scripts/copy-schemas.mjs",
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
 		"clean": "turbo run clean --parallel",
@@ -17,7 +18,7 @@
 		"prettify": "essex prettify",
 		"ci": "turbo run ci",
 		"is_clean": "git diff-index HEAD --quiet || git status",
-		"release": "run-s clean _version_cut ci _release_packages _cut_schema",
+		"release": "run-s clean _version_cut ci _release_packages _cut_schema _copy_versions",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
 	"devDependencies": {

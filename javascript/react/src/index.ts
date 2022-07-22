@@ -9,7 +9,6 @@
 export {
 	createDefaultCommandBar,
 	createDefaultHeaderCommandBar,
-	createLazyLoadingGroupHeader,
 } from './component-factories.js'
 export {
 	useDataTable,
