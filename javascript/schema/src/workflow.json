@@ -136,7 +136,7 @@
 			"type": "object"
 		},
 		"BooleanOperator": {
-			"enum": ["and", "nand", "nor", "or", "xor"],
+			"enum": ["and", "nand", "nor", "or", "xor", "xnor"],
 			"type": "string"
 		},
 		"ConvertArgs": {
@@ -518,13 +518,15 @@
 		},
 		"OnehotArgs": {
 			"properties": {
-				"column": {
-					"description": "Name of the input column for columnnar operations.",
-					"type": "string"
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
 				},
-				"prefix": {
-					"description": "Optional prefix for the output column names",
-					"type": "string"
+				"prefixes": {
+					"$ref": "#/definitions/Record<string,string>",
+					"description": "Optional prefixes for the output column names"
 				}
 			},
 			"type": "object"

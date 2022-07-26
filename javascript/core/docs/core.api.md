@@ -108,6 +108,7 @@ export enum BooleanOperator {
     NAND = "nand",
     NOR = "nor",
     OR = "or",
+    XNOR = "xnor",
     XOR = "xor"
 }
 
@@ -614,8 +615,8 @@ export const onehot: (id: string) => StepNode<TableContainer<unknown>, OnehotArg
 // Warning: (ae-missing-release-tag) "OnehotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface OnehotArgs extends InputColumnArgs {
-    prefix?: string;
+export interface OnehotArgs extends InputColumnListArgs {
+    prefixes?: Record<string, string>;
 }
 
 // Warning: (ae-missing-release-tag) "orderby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
