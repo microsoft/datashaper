@@ -4,4 +4,5 @@ releases:
   "@data-wrangling-components/schema": minor
 
 declined:
+  - "@data-wrangling-components/utilities"
   - "@data-wrangling-components/webapp"
