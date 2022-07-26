@@ -90,18 +90,15 @@ export function and(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 export function xor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 	let xor = 0
 
-	if (comparisons.length === 0)
-		return null
+	if (comparisons.length === 0) return null
 
-	for(let i = 0; i < comparisons.length; i++){
-		if(comparisons[i] === null)
-			return null
+	for (let i = 0; i < comparisons.length; i++) {
+		if (comparisons[i] === null) return null
 
-		if(comparisons[i] !== null)
-			xor = xor + comparisons[i]
+		xor = xor + (comparisons[i] === null ? 0 : comparisons[i] === 1 ? 1 : 0)
 	}
 
-	if (xor % 2 != 0 && xor != 0) {
+	if (xor % 2 !== 0 && xor !== 0) {
 		return 1
 	} else {
 		return 0
@@ -162,8 +159,8 @@ export function nand(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
  * @param comparisons
  * @returns
  */
- export function xnor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
-	let xorResult = xor(comparisons)
+export function xnor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
+	const xorResult = xor(comparisons)
 
 	return xorResult === null ? null : xorResult === 1 ? 0 : 1
 }

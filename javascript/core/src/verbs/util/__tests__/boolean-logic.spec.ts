@@ -1,4 +1,4 @@
-import { and, nand, nor, or, xor, xnor } from '../boolean-logic.js'
+import { and, nand, nor, or, xnor, xor } from '../boolean-logic.js'
 
 describe('boolean logic', () => {
 	describe('or', () => {
@@ -16,7 +16,7 @@ describe('boolean logic', () => {
 			expect(or([1, 0])).toBe(1)
 			expect(or([0, 0])).toBe(0)
 			expect(or([0, 1])).toBe(1)
-			expect(or([1,1])).toBe(1)
+			expect(or([1, 1])).toBe(1)
 			expect(or([1, null])).toBe(1)
 			expect(or([0, null])).toBeNull()
 		})
@@ -192,7 +192,7 @@ describe('boolean logic', () => {
 			expect(xnor([0, 1])).toBe(0)
 			expect(xnor([0, 0])).toBe(1)
 			expect(xnor([1, 1])).toBe(1)
-			expect(xnor([0, null])).toBe(null)
+			expect(xnor([0, null])).toBeNull()
 			expect(xnor([1, null])).toBeNull()
 		})
 
@@ -205,9 +205,9 @@ describe('boolean logic', () => {
 			expect(xnor([0, 1, 0])).toBe(0)
 			expect(xnor([0, 0, 1])).toBe(0)
 			expect(xnor([0, 0, 0])).toBe(1)
-			expect(xnor([0, null, 1])).toBe(null)
-			expect(xnor([0, null, 0])).toBe(null)
-			expect(xnor([1, null, 1])).toBe(null)
+			expect(xnor([0, null, 1])).toBeNull()
+			expect(xnor([0, null, 0])).toBeNull()
+			expect(xnor([1, null, 1])).toBeNull()
 		})
 	})
 })
