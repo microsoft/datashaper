@@ -97,7 +97,8 @@ export function xor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 		if(comparisons[i] === null)
 			return null
 
-		xor = xor + comparisons[i]
+		if(comparisons[i] !== null)
+			xor = xor + comparisons[i]
 	}
 
 	if (xor % 2 != 0 && xor != 0) {
