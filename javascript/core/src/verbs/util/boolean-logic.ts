@@ -28,6 +28,8 @@ export function evaluateBoolean(
 			return nor(comparisons)
 		case BooleanOperator.NAND:
 			return nand(comparisons)
+		case BooleanOperator.XNOR:
+			return xnor(comparisons)
 		default:
 			throw new Error(`Unsupported logical operator: [${logical}]`)
 	}
@@ -80,29 +82,23 @@ export function and(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 }
 
 /**
- * Logical XOR (exclusive OR). Only one value may be true.
- * If there is more than one true, this will be false.
+ * Logical XOR (exclusive OR). every pairwise comparison must contain one true and one false value.
  * If there are any nulls the result is unknown and will return null.
  * @param comparisons
  * @returns
  */
 export function xor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 	let xor = 0
-	let nulls = 0
+
+	if (comparisons.length === 0) return null
+
 	for (let i = 0; i < comparisons.length; i++) {
-		xor += comparisons[i]!
-		if (xor > 1) {
-			// shortcut more than one true immediately
-			return 0
-		}
-		if (comparisons[i] === null) {
-			nulls++
-		}
+		if (comparisons[i] === null) return null
+
+		xor = xor + (comparisons[i] === null ? 0 : comparisons[i] === 1 ? 1 : 0)
 	}
-	if (nulls > 0 || comparisons.length === 0) {
-		return null
-	}
-	if (xor === 1) {
+
+	if (xor % 2 !== 0 && xor !== 0) {
 		return 1
 	} else {
 		return 0
@@ -155,4 +151,16 @@ export function nand(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 		return 0
 	}
 	return null
+}
+
+/**
+ * Logical XNOR (not XOR): Every pairwise comparison must two true or two false to be true
+ * If there are any nulls the result is unknown and will return null.
+ * @param comparisons
+ * @returns
+ */
+export function xnor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
+	const xorResult = xor(comparisons)
+
+	return xorResult === null ? null : xorResult === 1 ? 0 : 1
 }

@@ -108,6 +108,7 @@ export enum BooleanOperator {
     NAND = "nand",
     NOR = "nor",
     OR = "or",
+    XNOR = "xnor",
     XOR = "xor"
 }
 

@@ -176,6 +176,7 @@ class BooleanLogicalOperator(Enum):
     NOR = "nor"
     NAND = "nand"
     XOR = "xor"
+    XNOR = "xnor"
 
 
 @dataclass
