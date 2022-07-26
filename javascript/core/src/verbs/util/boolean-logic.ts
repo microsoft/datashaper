@@ -82,35 +82,28 @@ export function and(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 }
 
 /**
- * Logical XOR (exclusive OR). Only one value may be true.
- * If there is more than one true, this will be false.
+ * Logical XOR (exclusive OR). every pairwise comparison must contain one true and one false value.
  * If there are any nulls the result is unknown and will return null.
  * @param comparisons
  * @returns
  */
 export function xor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
-	let xor = null
+	let xor = 0
 
-	if(comparisons.length > 0){
-		if(comparisons[0] === null)
-			return null
+	if (comparisons.length === 0)
+		return null
 
-		xor = comparisons[0]
-	}
-		
-	for (let i = 1; i < comparisons.length; i++){
+	for(let i = 0; i < comparisons.length; i++){
 		if(comparisons[i] === null)
 			return null
 
-		xor = xor !== comparisons[i] ? 1 : 0
+		xor = xor + comparisons[i]
 	}
 
-	if (xor === 1) {
+	if (xor % 2 != 0 && xor != 0) {
 		return 1
-	} else if(xor === 0){
+	} else {
 		return 0
-	}else {
-		return null
 	}
 }
 
@@ -163,18 +156,13 @@ export function nand(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 }
 
 /**
- * Logical XNOR
+ * Logical XNOR (not XOR): Every pairwise comparison must two true or two false to be true
+ * If there are any nulls the result is unknown and will return null.
  * @param comparisons
  * @returns
  */
  export function xnor(comparisons: (1 | 0 | null)[]): 1 | 0 | null {
 	let xorResult = xor(comparisons)
-	
-	if(xorResult === 1)
-		return 0
 
-	if(xorResult === 0)
-		return 1
-
-	return null
+	return xorResult === null ? null : xorResult === 1 ? 0 : 1
 }
