@@ -1,17 +1,17 @@
 {
-	"$schema": "https://microsoft.github.io/data-wrangling-components/schema/workflow.json",
+	"$schema": "../../../../../workflow.json",
 	"steps": [
 		{
 			"verb": "boolean",
-			"input": "table30",
+			"input": "table20",
 			"args": {
 				"to": "newColumn",
 				"columns": ["A", "B", "C"],
-				"operator": "and"
+				"operator": "xnor"
 			},
 			"id": "expected"
 		}
 	],
 	"output": ["expected"],
-	"input": ["table30"]
+	"input": ["table20"]
 }

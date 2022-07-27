@@ -5,7 +5,7 @@
 			"verb": "onehot",
 			"input": "table5",
 			"args": {
-				"column": "item"
+				"columns": ["item"]
 			},
 			"id": "expected"
 		}

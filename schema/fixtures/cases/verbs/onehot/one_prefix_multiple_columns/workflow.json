@@ -1,11 +1,12 @@
 {
-	"$schema": "https://microsoft.github.io/data-wrangling-components/schema/workflow.json",
+	"$schema": "../../../../../workflow.json",
 	"steps": [
 		{
 			"verb": "onehot",
 			"input": "table5",
 			"args": {
-				"columns": ["ID"]
+				"columns": ["item", "quantity"],
+				"prefixes": { "item": "furniture_" }
 			},
 			"id": "expected"
 		}
