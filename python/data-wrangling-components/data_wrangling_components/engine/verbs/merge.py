@@ -2,7 +2,6 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-
 import copy
 
 from functools import partial
@@ -44,7 +43,8 @@ __strategy_mapping: Dict[MergeStrategy, Callable] = {
 }
 
 def unhotOperation(input: VerbInput, columns: List[str], prefix: str):
-    input_table = input.get_input()
+    copyInput = copy.deepcopy(input)
+    input_table = copyInput.get_input()
 
     for col in columns:
         index = col.index(prefix)
@@ -54,6 +54,8 @@ def unhotOperation(input: VerbInput, columns: List[str], prefix: str):
                 input_table[col][i] = nan
             else:
                 input_table[col][i] = value
+
+    return copyInput
 
 
 def merge(
@@ -68,17 +70,24 @@ def merge(
 ):
     merge_strategy = MergeStrategy(strategy)
 
-    if(unhot == True):
-        unhotOperation(input, columns, prefix)
-
-    input_table = input.get_input()
+    input_table = unhotOperation(input, columns, prefix).get_input() if unhot else input.get_input()
 
     output = input_table.copy()
     output[to] = output[columns].apply(
         partial(__strategy_mapping[merge_strategy], delim=delimiter), axis=1
     )
 
-    #if(keepOriginalColumns == False):
-    #    output[to] = output.drop(columns, axis=1)
+    filteredList: list[str] = []
+
+    for col in output.columns:
+        try:
+            indexValue = columns.index(col)
+        except ValueError:
+            filteredList.append(col)
+
+    if(keepOriginalColumns == False):
+        output[to] = output[filteredList]
+
+    print(output)
 
     return TableContainer(table=output)
