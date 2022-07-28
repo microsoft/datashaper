@@ -4,7 +4,7 @@
  */
 import type { DataType } from '@essex/arquero'
 import { columnType } from '@essex/arquero'
-import { escape, fromJSON, not } from 'arquero'
+import { escape, from, not } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
@@ -72,7 +72,7 @@ function unhotOperation(
 	columns: string[],
 	prefix: string,
 ): ColumnTable {
-	const inputTable: ColumnTable = fromJSON(input.toJSON())
+	const inputTable: ColumnTable = from(input.objects())
 
 	for (let i = 0; i < columns.length; i++) {
 		const columnName: any = columns[i] ?? null

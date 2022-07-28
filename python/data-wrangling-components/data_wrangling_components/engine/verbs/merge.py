@@ -51,9 +51,9 @@ def unhotOperation(input: VerbInput, columns: List[str], prefix: str):
         value = col[index + len(prefix):len(col)]
         for i in range(len(input_table[col])):
             if(input_table[col][i] == 0):
-                input_table[col][i] = nan
+                input_table[col].loc[i] = nan
             else:
-                input_table[col][i] = value
+                input_table[col].loc[i] = value
 
     return copyInput
 
