@@ -40,12 +40,14 @@ export const MergeBase: React.FC<
 				type: FormInputType.Checkbox,
 				current: step.args.keepOriginalColumns,
 				onChange: (s, val) => (s.args.keepOriginalColumns = val as boolean),
+				advanced: true,
 			},
 			{
 				label: 'Unhot',
 				type: FormInputType.Checkbox,
 				current: step.args.unhot,
 				onChange: (s, val) => (s.args.unhot = val as boolean),
+				advanced: true,
 			},
 			{
 				label: 'Prefix',
@@ -53,6 +55,7 @@ export const MergeBase: React.FC<
 				if: step.args.unhot === true,
 				current: step.args.prefix,
 				onChange: (s, val) => (s.args.prefix = val as string),
+				advanced: true,
 			},
 		],
 		[step, columns],
