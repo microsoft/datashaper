@@ -4,11 +4,9 @@
  */
 
 import type { WorkflowObject } from '@data-wrangling-components/core'
-import type { WorfklowJson } from '@data-wrangling-components/schema'
-import { WorkflowSchema } from '@data-wrangling-components/schema'
 import { FileCollection, FileType } from '@data-wrangling-components/utilities'
 import type { TableContainer } from '@essex/arquero'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	return useCallback(
@@ -44,7 +42,6 @@ function useJsonHandler(
 	onUpdateWorkflow?: (workflow: WorkflowObject) => void,
 	onErrorHandler?: (error: string) => void,
 ) {
-	const validator = useMemo(() => new WorkflowSchema(), [])
 	return useCallback(
 		async (fc: FileCollection) => {
 			const regex = /workflow(.*)\.json$/i
@@ -58,15 +55,15 @@ function useJsonHandler(
 				return
 			}
 			const workflow = (await json.toJson()) as WorkflowObject
-			const isValid = await validator.isValid(workflow as WorfklowJson)
-			if (!isValid) {
-				return onErrorHandler?.('Invalid workflow definition')
-			}
 			if (workflow && onUpdateWorkflow) {
-				onUpdateWorkflow(workflow)
+				try {
+					onUpdateWorkflow(workflow)
+				} catch {
+					onErrorHandler?.('Invalid workflow definition**')
+				}
 			}
 		},
-		[onUpdateWorkflow, onErrorHandler, validator],
+		[onUpdateWorkflow, onErrorHandler],
 	)
 }
 

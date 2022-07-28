@@ -781,6 +781,10 @@
     },
     "description": "The root data-wrangling specification. (Used for generating JSON Schema)",
     "properties": {
+        "$schema": {
+            "description": "The schema url of the specification",
+            "type": "string"
+        },
         "description": {
             "description": "A user-friendly description of the specification",
             "type": "string"

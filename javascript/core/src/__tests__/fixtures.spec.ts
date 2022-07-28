@@ -73,11 +73,10 @@ function defineTestCase(parentPath: string, test: string) {
 		if (!isWorkflowJsonValid) {
 			throw new Error(`invalid workflow definition: ${workflowPath}`)
 		}
-		const schemaLinkPath = path.join(casePath, workflowJson.$schema)
-		if (!fs.existsSync(schemaLinkPath)) {
-			throw new Error(`invalid $schema link: ${workflowPath}`)
-		}
-		const graphBuilder = createGraph(new Workflow(workflowJson), tableStore)
+		const graphBuilder = createGraph(
+			new Workflow(workflowJson, false),
+			tableStore,
+		)
 
 		// check the output tables
 		await Promise.all(
