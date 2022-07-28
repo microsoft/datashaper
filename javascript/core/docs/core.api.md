@@ -788,6 +788,8 @@ export interface SpreadArgs extends InputColumnListArgs {
 // @public (undocumented)
 export interface Step<T extends object | void | unknown = unknown> {
     args: T;
+    // (undocumented)
+    description?: string;
     id: string;
     input: {
         others?: NamedPortBinding[];
@@ -800,6 +802,8 @@ export interface Step<T extends object | void | unknown = unknown> {
 // @public (undocumented)
 export interface StepInput<T extends object | void | unknown = unknown> {
     args?: T;
+    // (undocumented)
+    description?: string;
     id?: string;
     input?: string | ({
         others?: PortBinding[];
@@ -1000,7 +1004,7 @@ export enum WindowFunction {
 //
 // @public
 export class Workflow {
-    constructor(workflowJson?: WorkflowObject);
+    constructor(workflowJson?: WorkflowObject, validate?: boolean);
     // (undocumented)
     addInput(input: string): void;
     // (undocumented)
@@ -1042,6 +1046,8 @@ export class Workflow {
 // @public (undocumented)
 export interface WorkflowObject {
     // (undocumented)
+    $schema?: string;
+    // (undocumented)
     description?: string;
     // (undocumented)
     input?: string[];
@@ -1052,6 +1058,19 @@ export interface WorkflowObject {
     // (undocumented)
     steps: StepInput[];
 }
+
+// Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class WorkflowSchema {
+    // (undocumented)
+    isValid(workflowJson?: WorkflowObject): Promise<boolean>;
+}
+
+// Warning: (ae-missing-release-tag) "WorkflowSchemaInstance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const WorkflowSchemaInstance: WorkflowSchema;
 
 // (No @packageDocumentation comment for this package)
 

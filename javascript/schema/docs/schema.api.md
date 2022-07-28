@@ -177,24 +177,16 @@ export interface VariadicInput extends BasicInput {
     };
 }
 
-// Warning: (ae-missing-release-tag) "WorfklowJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorkflowJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface WorfklowJson {
+export interface WorkflowJson {
+    $schema?: string;
     description?: string;
     input?: string[];
     name?: string;
     output: Array<OutputPortBinding>;
     steps?: StepJson[];
-}
-
-// Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export class WorkflowSchema {
-    constructor();
-    // (undocumented)
-    isValid(worfklowJson?: WorfklowJson): Promise<boolean>;
 }
 
 // (No @packageDocumentation comment for this package)

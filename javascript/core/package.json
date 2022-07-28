@@ -36,6 +36,7 @@
 	"dependencies": {
 		"@essex/arquero": "^3.0.0",
 		"@essex/dataflow": "^0.1.2",
+		"ajv": "^8.11.0",
 		"d3-time-format": "^4.1.0",
 		"lodash-es": "^4.17.21",
 		"rxjs": "^7.5.5",

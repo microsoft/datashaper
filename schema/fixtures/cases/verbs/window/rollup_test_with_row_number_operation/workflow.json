@@ -1,5 +1,5 @@
 {
-	"$schema": "../../../../../workflow.json",
+	"$schema": "https://microsoft.github.io/data-wrangling-components/schema/workflow.json",
 	"input": ["table3"],
 	"steps": [
 		{
@@ -10,8 +10,7 @@
 				"to": "row",
 				"column": "ID",
 				"operation": "row_number"
-			},
-			"id": "expected"
+			}
 		}
 	],
 	"output": ["expected"]
