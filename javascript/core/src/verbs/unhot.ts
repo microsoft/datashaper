@@ -17,7 +17,7 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 
 export const unhotStep: ColumnTableStep<UnhotArgs> = (
 	input,
-	{ columns = [], to, prefix, keepOriginalColumns = false },
+	{ columns = [], to, prefix = '', keepOriginalColumns = false },
 ) => {
 	const tempTable = unhotOperation(input, columns, prefix)
 
