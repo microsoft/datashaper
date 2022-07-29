@@ -29,6 +29,14 @@ export const UnhotDescription: React.FC<StepDescriptionProps<UnhotArgs>> = memo(
 					value: args.columns?.length === 0 ? undefined : '',
 					sub,
 				},
+				{
+					before: 'with prefix',
+					value: args.prefix,
+				},
+				{
+					before: 'keep original columns',
+					value: args.keepOriginalColumns ? `yes` : 'no',
+				},
 			]
 		}, [props])
 		return <VerbDescription {...props} rows={rows} />

@@ -36,9 +36,9 @@ const groups = [
 			'fold',
 			'unfold',
 			'onehot',
+			'unhot',
 			'merge',
 			'spread',
-			'unhot',
 		],
 	},
 	{

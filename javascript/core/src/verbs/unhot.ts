@@ -5,8 +5,8 @@
 import { escape, not } from 'arquero'
 
 import type { InputColumnListArgs, OutputColumnArgs } from './types.js'
-import type { ColumnTableStep  } from './util/factories.js'
-import { stepVerbFactory } from './util/factories.js';
+import type { ColumnTableStep } from './util/factories.js'
+import { stepVerbFactory } from './util/factories.js'
 import { firstOneWinsStrategy, isSameDataType } from './util/merge-utils.js'
 import { unhotOperation } from './util/unhot-logic.js'
 
@@ -17,7 +17,7 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 
 export const unhotStep: ColumnTableStep<UnhotArgs> = (
 	input,
-	{ columns = [], to, prefix = '', keepOriginalColumns = false },
+	{ columns = [], to, prefix = undefined, keepOriginalColumns = false },
 ) => {
 	const tempTable = unhotOperation(input, columns, prefix)
 
