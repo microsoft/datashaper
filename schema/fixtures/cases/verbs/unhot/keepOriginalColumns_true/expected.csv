@@ -1,0 +1,5 @@
+ID,Name_Microsoft,Name_Amazon,Name_Samsung,Name_Google,NewColumn
+1,Microsoft,,,,Microsoft
+2,,Amazon,,,Amazon
+3,,,Samsung,,Samsung
+4,,,,Google,Google
