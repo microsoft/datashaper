@@ -36,6 +36,7 @@ from data_wrangling_components.engine.verbs.select import select
 from data_wrangling_components.engine.verbs.spread import spread
 from data_wrangling_components.engine.verbs.unfold import unfold
 from data_wrangling_components.engine.verbs.ungroup import ungroup
+from data_wrangling_components.engine.verbs.unhot import unhot
 from data_wrangling_components.engine.verbs.union import union
 from data_wrangling_components.engine.verbs.unorder import unorder
 from data_wrangling_components.engine.verbs.unroll import unroll
@@ -76,6 +77,7 @@ functions: Dict[Verb, Callable] = {
     Verb.Spread: spread,
     Verb.Unfold: unfold,
     Verb.Ungroup: ungroup,
+    Verb.Unhot: unhot,
     Verb.Union: union,
     Verb.Unorder: unorder,
     Verb.Unroll: unroll,
