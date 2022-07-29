@@ -33,6 +33,7 @@ import type { SampleArgs } from '@data-wrangling-components/core';
 import type { SelectArgs } from '@data-wrangling-components/core';
 import type { SpreadArgs } from '@data-wrangling-components/core';
 import type { UnfoldArgs } from '@data-wrangling-components/core';
+import type { UnhotArgs } from '@data-wrangling-components/core';
 import type { UnrollArgs } from '@data-wrangling-components/core';
 import type { Verb } from '@data-wrangling-components/core';
 import type { WindowArgs } from '@data-wrangling-components/core';
@@ -148,6 +149,9 @@ export type StepJson = StepJsonCommon & (({
     args?: UnfoldArgs;
 } & BasicInput) | ({
     verb: Verb.Ungroup;
+} & BasicInput) | ({
+    verb: Verb.Unhot;
+    args?: UnhotArgs;
 } & BasicInput) | ({
     verb: Verb.Union;
 } & VariadicInput) | ({
