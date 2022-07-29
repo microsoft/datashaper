@@ -35,6 +35,28 @@ export const MergeBase: React.FC<
 				current: step.args.delimiter,
 				onChange: (s, val) => (s.args.delimiter = val as string),
 			},
+			{
+				label: 'Keep original columns',
+				type: FormInputType.Checkbox,
+				current: step.args.keepOriginalColumns,
+				onChange: (s, val) => (s.args.keepOriginalColumns = val as boolean),
+				advanced: true,
+			},
+			{
+				label: 'Unhot',
+				type: FormInputType.Checkbox,
+				current: step.args.unhot,
+				onChange: (s, val) => (s.args.unhot = val as boolean),
+				advanced: true,
+			},
+			{
+				label: 'Prefix',
+				type: FormInputType.Text,
+				if: step.args.unhot === true,
+				current: step.args.prefix,
+				onChange: (s, val) => (s.args.prefix = val as string),
+				advanced: true,
+			},
 		],
 		[step, columns],
 	)

@@ -4,7 +4,7 @@
  */
 import type { DataType } from '@essex/arquero'
 import { columnType } from '@essex/arquero'
-import { escape } from 'arquero'
+import { escape, from, not } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
@@ -26,13 +26,26 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	 * If it is not supplied, the values are just mashed together.
 	 */
 	delimiter?: string
+	unhot?: boolean
+	prefix?: string
+	keepOriginalColumns?: boolean
 }
 
 export const mergeStep: ColumnTableStep<MergeArgs> = (
 	input,
-	{ columns = [], strategy, to, delimiter = '' },
+	{
+		columns = [],
+		strategy,
+		to,
+		delimiter = '',
+		unhot = false,
+		prefix = '',
+		keepOriginalColumns = false,
+	},
 ) => {
-	const isSameDataTypeFlag: boolean = isSameDataType(input, columns)
+	const tempTable = unhot ? unhotOperation(input, columns, prefix) : input
+
+	const isSameDataTypeFlag: boolean = isSameDataType(tempTable, columns)
 
 	// eslint-disable-next-line
 	const func: object = escape((d: any) => {
@@ -49,7 +62,46 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 		}
 	})
 
-	return input.derive({ [to]: func })
+	if (keepOriginalColumns) return tempTable.derive({ [to]: func })
+
+	return tempTable.derive({ [to]: func }).select(not(columns))
+}
+
+function unhotOperation(
+	input: ColumnTable,
+	columns: string[],
+	prefix: string,
+): ColumnTable {
+	const inputTable: ColumnTable = from(input.objects())
+
+	for (let i = 0; i < columns.length; i++) {
+		const columnName: any = columns[i] ?? null
+		const index = columnName !== null ? columnName.indexOf(prefix) : -1
+		const value =
+			index !== -1 && columnName !== null
+				? columnName.substring(index + prefix.length)
+				: null
+
+		const obj = inputTable.data()
+
+		if (columnName !== null && value !== null) {
+			for (
+				let j = 0;
+				j < inputTable.data()[columnName as keyof typeof obj]['data']['length'];
+				j++
+			) {
+				inputTable.data()[columnName as keyof typeof obj]['data'][`${j}`] === 0
+					? ((inputTable.data()[columnName as keyof typeof obj]['data'][
+							`${j}`
+					  ] as any) = null)
+					: ((inputTable.data()[columnName as keyof typeof obj]['data'][
+							`${j}`
+					  ] as any) = value)
+			}
+		}
+	}
+
+	return inputTable
 }
 
 function isSameDataType(inputTable: ColumnTable, columns: string[]): boolean {

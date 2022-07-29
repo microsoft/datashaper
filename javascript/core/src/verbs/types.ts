@@ -109,7 +109,7 @@ export enum ParseType {
 	 */
 	Decimal = 'float',
 	String = 'string',
-	Array = 'array'
+	Array = 'array',
 }
 
 export enum MathOperator {
@@ -136,7 +136,7 @@ export enum DateComparisonOperator {
 	Before = 'before',
 	After = 'after',
 	IsEmpty = 'is empty',
-	IsNotEmpty = 'is not empty'
+	IsNotEmpty = 'is not empty',
 }
 
 export enum StringComparisonOperator {
@@ -183,7 +183,7 @@ export enum BooleanOperator {
 	/**
 	 * Every pairwise comparison must two true or two false to be true
 	 */
-	XNOR = 'xnor'
+	XNOR = 'xnor',
 }
 
 export enum SetOp {

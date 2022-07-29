@@ -34,7 +34,7 @@ export const BooleanLogicBase: React.FC<
 					nor: 'NOR',
 					nand: 'NAND',
 					xor: 'XOR',
-					xnor: 'XNOR'
+					xnor: 'XNOR',
 				},
 			),
 		],

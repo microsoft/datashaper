@@ -26,7 +26,7 @@ import {
 	useSpinButtonChangeHandler,
 	useTextFieldChangeHandler,
 } from '../hooks/index.js'
-import { dropdownStyles } from '../styles.js'
+import { checkboxStyles,dropdownStyles } from '../styles.js'
 import type { StepChangeFunction } from '../types.js'
 import { useSortedInputs } from './VerbForm.hooks.js'
 import { Container, InputsBlock, Row } from './VerbForm.styles.js'
@@ -469,7 +469,7 @@ const CheckboxInput: React.FC<{
 				checked={current}
 				onChange={changeHandler}
 				disabled={disabled}
-				styles={merge({}, dropdownStyles, styles)}
+				styles={merge({}, checkboxStyles, styles)}
 			/>
 		</Wrapper>
 	)

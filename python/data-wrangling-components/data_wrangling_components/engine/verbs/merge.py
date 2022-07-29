@@ -2,8 +2,10 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+import copy
 
 from functools import partial
+from math import nan
 from typing import Any, Callable, Dict, List
 
 import pandas as pd
@@ -40,6 +42,21 @@ __strategy_mapping: Dict[MergeStrategy, Callable] = {
     MergeStrategy.CreateArray: lambda values, **kwargs: create_array(values, ","),
 }
 
+def unhotOperation(input: VerbInput, columns: List[str], prefix: str):
+    copyInput = copy.deepcopy(input)
+    input_table = copyInput.get_input()
+
+    for col in columns:
+        index = col.index(prefix)
+        value = col[index + len(prefix):len(col)]
+        for i in range(len(input_table[col])):
+            if(input_table[col][i] == 0):
+                input_table[col].loc[i] = nan
+            else:
+                input_table[col].loc[i] = value
+
+    return copyInput
+
 
 def merge(
     input: VerbInput,
@@ -47,14 +64,29 @@ def merge(
     columns: List[str],
     strategy: str,
     delimiter: str = "",
+    keepOriginalColumns: bool = False,
+    unhot: bool = False,
+    prefix: str = ""
 ):
     merge_strategy = MergeStrategy(strategy)
 
-    input_table = input.get_input()
+    input_table = unhotOperation(input, columns, prefix).get_input() if unhot else input.get_input()
 
     output = input_table.copy()
+    
     output[to] = output[columns].apply(
         partial(__strategy_mapping[merge_strategy], delim=delimiter), axis=1
     )
+
+    filteredList: list[str] = []
+
+    for col in output.columns:
+        try:
+            indexValue = columns.index(col)
+        except ValueError:
+            filteredList.append(col)
+
+    if(keepOriginalColumns == False):
+        output = output[filteredList]
 
     return TableContainer(table=output)

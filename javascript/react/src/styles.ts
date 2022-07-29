@@ -26,6 +26,13 @@ export const dropdownStyles = {
 	},
 }
 
+export const checkboxStyles = {
+	root: {
+		width: 220,
+		paddingTop: '10px',
+	},
+}
+
 /**
  * For side-by-side dropdowns with a 12px gap
  */
