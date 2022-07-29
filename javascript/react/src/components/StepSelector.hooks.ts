@@ -30,7 +30,16 @@ const groups = [
 	},
 	{
 		label: 'Combine columns',
-		verbs: ['boolean', 'derive', 'fold', 'unfold', 'onehot', 'merge', 'spread'],
+		verbs: [
+			'boolean',
+			'derive',
+			'fold',
+			'unfold',
+			'onehot',
+			'merge',
+			'spread',
+			'unhot',
+		],
 	},
 	{
 		label: 'Filter & Select',

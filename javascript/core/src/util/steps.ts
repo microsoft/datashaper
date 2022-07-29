@@ -75,6 +75,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	spread: [Tags.InputTable],
 	unfold: [Tags.InputTable, Tags.RowModifying],
 	ungroup: [Tags.InputTable],
+	unhot: [Tags.InputTable, Tags.OutputColumn],
 	union: [Tags.InputTable, Tags.RowModifying],
 	unorder: [Tags.InputTable],
 	unroll: [Tags.InputTable, Tags.RowModifying],

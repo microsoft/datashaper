@@ -33,6 +33,7 @@ import {
 	SetOperationDescription,
 	SpreadDescription,
 	UnfoldDescription,
+	UnhotDescription,
 	WindowDescription,
 } from './verbDescriptions/index.js'
 
@@ -68,6 +69,7 @@ const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
 	spread: SpreadDescription,
 	unfold: UnfoldDescription,
 	ungroup: NoParametersDescription,
+	unhot: UnhotDescription,
 	union: SetOperationDescription,
 	unorder: NoParametersDescription,
 	unroll: ColumnListOperationDescription,

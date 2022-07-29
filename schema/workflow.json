@@ -508,6 +508,29 @@
             ],
             "type": "string"
         },
+        "UnhotArgs": {
+            "properties": {
+                "columns": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
+                    "type": "string"
+                },
+                "prefix": {
+                    "description": "The column prefix where the unhot should be applied",
+                    "type": "string"
+                },
+                "keepOriginalColumns": {
+                    "description": "Leave or remove the columns used for the merge",
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "NamedOutputPortBinding": {
             "description": "An explicit workflow output",
             "properties": {

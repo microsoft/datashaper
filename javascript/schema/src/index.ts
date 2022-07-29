@@ -32,6 +32,7 @@ import type {
 	SelectArgs,
 	SpreadArgs,
 	UnfoldArgs,
+	UnhotArgs,
 	UnrollArgs,
 	Verb,
 	WindowArgs,
@@ -107,6 +108,7 @@ export type StepJson = StepJsonCommon &
 		| ({ verb: Verb.Spread; args?: SpreadArgs } & BasicInput)
 		| ({ verb: Verb.Unfold; args?: UnfoldArgs } & BasicInput)
 		| ({ verb: Verb.Ungroup } & BasicInput)
+		| ({ verb: Verb.Unhot; args?: UnhotArgs } & BasicInput)
 		| ({ verb: Verb.Union } & VariadicInput)
 		| ({ verb: Verb.Unorder } & BasicInput)
 		| ({ verb: Verb.Unroll; args?: UnrollArgs } & BasicInput)
