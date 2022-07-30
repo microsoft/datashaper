@@ -19,6 +19,7 @@ export { merge } from './merge.js'
 export { pivot } from './pivot.js'
 export { spread } from './spread.js'
 export { unfold } from './unfold.js'
+export { unhot } from './unhot.js'
 
 export const aggregate = outputColumn
 export const dedupe = inputColumnList

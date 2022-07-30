@@ -44,6 +44,7 @@ class Verb(Enum):
     Spread = "spread"
     Unfold = "unfold"
     Ungroup = "ungroup"
+    Unhot = "unhot"
     Union = "union"
     Unorder = "unorder"
     Unroll = "unroll"

@@ -33,6 +33,7 @@ import {
 	SetOperation,
 	Spread,
 	Unfold,
+	Unhot,
 	Window,
 } from './verbs/index.js'
 
@@ -68,6 +69,7 @@ const verb: Record<string, React.FC<StepComponentProps<any>>> = {
 	spread: Spread,
 	unfold: Unfold,
 	ungroup: NoParameters,
+	unhot: Unhot,
 	union: SetOperation,
 	unorder: NoParameters,
 	unroll: ColumnListOperation,

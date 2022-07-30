@@ -17,7 +17,7 @@ Available collapse strategies are:
 | Bill  |        | Williams |
 |       | Colin  | Jeeves   |
 
-`merge columns['first', 'middle', 'last'], strategy='first one wins', to_column='output'`:
+`merge columns['first', 'middle', 'last'], strategy='first one wins', to_column='output', keepOriginalColumns='false'`:
 
 | output |
 | ------ |
@@ -25,7 +25,7 @@ Available collapse strategies are:
 | Bill   |
 | Colin  |
 
-`merge columns['first', 'last'], strategy='last one wins', to_column='output'`:
+`merge columns['first', 'last'], strategy='last one wins', to_column='output', keepOriginalColumns='false'`:
 
 | output   |
 | -------- |
@@ -33,10 +33,19 @@ Available collapse strategies are:
 | Williams |
 | Jeeves   |
 
-`merge columns['first', 'last'], strategy='concat', to_column='output'`:
+`merge columns['first', 'last'], strategy='concat', to_column='output', keepOriginalColumns='false'`:
 
 | output        |
 | ------------- |
 | John Ray Doe  |
 | Bill Williams |
 | Colin Jeeves  |
+
+`merge columns['first', 'last'], strategy='concat', to_column='output', keepOriginalColumns='true'`:
+
+| first | middle | last     | output        |
+| ----- | ------ | -------- | ------------- |
+| John  | Ray    | Doe      | John Ray Doe  |
+| Bill  |        | Williams | Bill Williams |
+|       | Colin  | Jeeves   | Colin Jeeves  |
+

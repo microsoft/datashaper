@@ -858,6 +858,21 @@ export interface UnfoldArgs {
 // @public (undocumented)
 export const ungroup: (id: string) => StepNode<TableContainer<unknown>, void>;
 
+// Warning: (ae-missing-release-tag) "unhot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const unhot: (id: string) => StepNode<TableContainer<unknown>, UnhotArgs>;
+
+// Warning: (ae-missing-release-tag) "UnhotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
+    // (undocumented)
+    keepOriginalColumns?: boolean;
+    // (undocumented)
+    prefix?: string;
+}
+
 // Warning: (ae-missing-release-tag) "union" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -949,6 +964,8 @@ export enum Verb {
     Unfold = "unfold",
     // (undocumented)
     Ungroup = "ungroup",
+    // (undocumented)
+    Unhot = "unhot",
     // (undocumented)
     Union = "union",
     // (undocumented)

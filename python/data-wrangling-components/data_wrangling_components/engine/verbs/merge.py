@@ -2,60 +2,15 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
-import copy
-
 from functools import partial
-from math import nan
-from typing import Any, Callable, Dict, List
+from typing import List
 
-import pandas as pd
-
-from pandas.api.types import is_bool
-
+from data_wrangling_components.engine.verbs.utils.merge_utils import *
+from data_wrangling_components.engine.verbs.utils.merge_utils import __strategy_mapping
+from data_wrangling_components.engine.verbs.utils.unhot_utils import *
 from data_wrangling_components.engine.verbs.verb_input import VerbInput
 from data_wrangling_components.table_store import TableContainer
 from data_wrangling_components.types import MergeStrategy
-
-
-def correct_type(value: Any):
-    if is_bool(value):
-        return str(value).lower()
-    try:
-        return int(value) if value.is_integer() else value
-    except AttributeError:
-        return value
-
-
-def create_array(column: pd.Series, delim: str) -> str:
-    column = column.dropna().apply(lambda x: correct_type(x))
-    return delim.join(column.astype(str))
-
-
-__strategy_mapping: Dict[MergeStrategy, Callable] = {
-    MergeStrategy.FirstOneWins: lambda values, **kwargs: values.dropna().apply(
-        lambda x: correct_type(x)
-    )[0],
-    MergeStrategy.LastOneWins: lambda values, **kwargs: values.dropna().apply(
-        lambda x: correct_type(x)
-    )[-1],
-    MergeStrategy.Concat: lambda values, delim, **kwargs: create_array(values, delim),
-    MergeStrategy.CreateArray: lambda values, **kwargs: create_array(values, ","),
-}
-
-def unhotOperation(input: VerbInput, columns: List[str], prefix: str):
-    copyInput = copy.deepcopy(input)
-    input_table = copyInput.get_input()
-
-    for col in columns:
-        index = col.index(prefix)
-        value = col[index + len(prefix):len(col)]
-        for i in range(len(input_table[col])):
-            if(input_table[col][i] == 0):
-                input_table[col].loc[i] = nan
-            else:
-                input_table[col].loc[i] = value
-
-    return copyInput
 
 
 def merge(
