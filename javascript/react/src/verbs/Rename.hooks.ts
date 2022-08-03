@@ -19,7 +19,7 @@ export function useHandleColumnChange(
 			}
 			// this is the previous column mapping - remove it in case we
 			// selected a different one to rename
-			const columns: Record<string, string> = {}
+			const columns: Record<any, any> = {}
 
 			for (const key in columnList) {
 				key === previous
