@@ -14,13 +14,20 @@ export function useHandleColumnChange(
 ): (previous: string, oldName: string, newName: string) => void {
 	return useCallback(
 		(previous, oldName, newName) => {
-			const columns = {
+			const columnList = {
 				...step.args.columns,
 			}
 			// this is the previous column mapping - remove it in case we
 			// selected a different one to rename
-			delete columns[previous]
-			columns[oldName] = newName
+			const columns: Record<string, string> = {}
+
+			for (const key in columnList) {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				key === previous
+					? (columns[oldName] = newName)
+					: (columns[key] = columnList[key]!)
+			}
+
 			onChange?.({
 				...step,
 				args: {
