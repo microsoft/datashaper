@@ -16,18 +16,12 @@ import {
 } from './DataTypeField.styles.js'
 import type { DataTypeFieldProps } from './DataTypeField.types.js'
 
-/**
- * Just the comparison logic/ops for a filter.
- * Input table and source column is expected to be edited elsewhere and configured as the step input.
- * This is split out from FilterInputs to allow just the comparison logic to be reused elsewhere.
- */
 export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
-	function DataTypeField({ dataType, oldValue, onChange }) {
+	function DataTypeField({ dataType, oldValue, placeholder, onChange }) {
 		const onSelectDate = useCallback(
 			(date: Date): void => {
 				const val = coerce(date, dataType)
 				onChange(oldValue, oldValue, val)
-				setCleanLabel(false)
 			},
 			[onChange],
 		)
@@ -39,7 +33,6 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 			) => {
 				const val = coerce(newValue, dataType)
 				onChange(oldValue, oldValue, val)
-				setCleanLabel(false)
 			},
 			[onChange],
 		)
@@ -62,8 +55,6 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 			onChange(oldValue, oldValue, val)
 		}
 
-		const [cleanLabel, setCleanLabel] = useState<boolean>(false)
-
 		return (
 			<Container>
 				{dataType === DataType.Date ? (
@@ -73,7 +64,8 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 				{dataType === DataType.String ? (
 					<TextValue
 						onChange={onChangeTextFieldValue}
-						placeholder={'New value'}
+						placeholder={placeholder}
+						value={oldValue}
 					></TextValue>
 				) : null}
 
@@ -81,6 +73,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					<SpinButton
 						min={0}
 						step={1}
+						value={oldValue}
 						styles={spinStyles}
 						onChange={spinButtonOnChange}
 					/>
@@ -91,6 +84,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						defaultChecked
 						onText="True"
 						offText="False"
+						value={oldValue}
 						onChange={onToggleChange}
 					/>
 				) : null}

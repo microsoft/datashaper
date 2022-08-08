@@ -3,20 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import type {DataType, Value  } from '@essex/arquero'
-import { coerce} from '@essex/arquero';
+import type { DataType, Value } from '@essex/arquero'
+import { coerce } from '@essex/arquero'
 import styled from '@essex/styled-components'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
-import { ColumnValueDropdown } from '../controls/index.js'
-import {
-	useColumnType,
-	useColumnValueOptions,
-	useStepDataTable,
-} from '../hooks/index.js'
+import { useColumnType, useStepDataTable } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import {
 	useColumnValues,
@@ -112,15 +107,7 @@ const ColumnPair: React.FC<{
 	// coerce it to the column type for proper comparison
 	const [o, newvalue] = valuePair
 	const oldvalue = coerce(o, dataType)
-	const valueFilter = (value: Value) => {
-		if (value === oldvalue) {
-			return true
-		}
-		if (step.args.map && step.args.map[value]) {
-			return false
-		}
-		return true
-	}
+
 	const handleSourceChange = (
 		_e: React.FormEvent<HTMLDivElement>,
 		opt?: IDropdownOption<any> | undefined,
@@ -134,19 +121,13 @@ const ColumnPair: React.FC<{
 		onChange(oldvalue, oldvalue, val)
 	}
 	const handleDeleteClick = () => onDelete(oldvalue)
-	const options = useColumnValueOptions(
-		step.args.column,
-		table,
-		undefined,
-		valueFilter,
-	)
 
 	return (
 		<ColumnPairContainer>
 			<DataTypeField
 				placeholder={'Current value'}
 				dataType={dataType}
-				oldValue={newvalue}
+				oldValue={oldvalue}
 				onChange={onChange}
 			/>
 
@@ -158,7 +139,7 @@ const ColumnPair: React.FC<{
 			<DataTypeField
 				placeholder={'New Value'}
 				dataType={dataType}
-				oldValue={newvalue}
+				oldValue={oldvalue}
 				onChange={onChange}
 			/>
 
