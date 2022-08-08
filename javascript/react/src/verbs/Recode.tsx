@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import type { DataType, Value } from '@essex/arquero'
-import { coerce } from '@essex/arquero'
+import type {DataType, Value  } from '@essex/arquero'
+import { coerce} from '@essex/arquero';
 import styled from '@essex/styled-components'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
@@ -25,6 +25,7 @@ import {
 	useHandleRecodeChange,
 	useRecodeDelete,
 } from './Recode.hooks.js'
+import { DataTypeField } from './shared/DataTypeField.js'
 
 /**
  * Provides inputs for a RecodeStep.
@@ -47,6 +48,8 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 		)
 
 		const disabled = useDisabled(step, values)
+
+		console.log(step)
 
 		return (
 			<Container>
@@ -137,29 +140,28 @@ const ColumnPair: React.FC<{
 		undefined,
 		valueFilter,
 	)
+
 	return (
 		<ColumnPairContainer>
-			<ColumnValueDropdown
-				options={options}
-				label={undefined}
-				selectedKey={oldvalue}
-				onChange={handleSourceChange}
-				styles={{
-					root: {
-						width: 130,
-					},
-				}}
+			<DataTypeField
+				placeholder={'Current value'}
+				dataType={dataType}
+				oldValue={newvalue}
+				onChange={onChange}
 			/>
+
 			<Icon
 				iconName={'Forward'}
 				styles={{ root: { marginLeft: 4, marginRight: 4 } }}
 			/>
-			<TextField
-				placeholder={'New value'}
-				value={newvalue}
-				onChange={handleTextChange}
-				styles={{ root: { width: 130 } }}
+
+			<DataTypeField
+				placeholder={'New Value'}
+				dataType={dataType}
+				oldValue={newvalue}
+				onChange={onChange}
 			/>
+
 			<IconButton
 				title={'Remove this Recode'}
 				iconProps={{ iconName: 'Delete' }}
