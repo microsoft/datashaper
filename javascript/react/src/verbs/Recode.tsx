@@ -6,8 +6,7 @@ import type { RecodeArgs, Step } from '@data-wrangling-components/core'
 import type { DataType, Value } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
 import styled from '@essex/styled-components'
-import type { IDropdownOption } from '@fluentui/react'
-import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
+import { ActionButton, Icon, IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
@@ -17,7 +16,8 @@ import {
 	useColumnValues,
 	useDisabled,
 	useHandleAddButtonClick,
-	useHandleRecodeChange,
+	useHandleKeyChange,
+	useHandleValueChange,
 	useRecodeDelete,
 } from './Recode.hooks.js'
 import { DataTypeField } from './shared/DataTypeField.js'
@@ -30,15 +30,22 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 		const dataTable = useStepDataTable(step, graph, input, table)
 		const values = useColumnValues(step, dataTable)
 		const dataType = useColumnType(dataTable, step.args.column)
-		const handleRecodeChange = useHandleRecodeChange(step, onChange)
+		const handleRecodeKeyChange = useHandleKeyChange(step, onChange)
+		const handleRecodeValueChange = useHandleValueChange(step, onChange)
 		const handleRecodeDelete = useRecodeDelete(step, onChange)
-		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
+		const handleButtonClick = useHandleAddButtonClick(
+			step,
+			values,
+			dataType,
+			onChange,
+		)
 
 		const columnPairs = useRecodePairs(
 			dataTable,
 			step,
 			dataType,
-			handleRecodeChange,
+			handleRecodeKeyChange,
+			handleRecodeValueChange,
 			handleRecodeDelete,
 		)
 
@@ -65,7 +72,8 @@ function useRecodePairs(
 	table: ColumnTable | undefined,
 	step: Step<RecodeArgs>,
 	dataType: DataType,
-	onChange: (previous: Value, oldvalue: Value, newvalue: Value) => void,
+	onKeyChange: (oldKey: Value, newKey: Value) => void,
+	onValueChange: (key: Value, newValue: Value) => void,
 	onDelete: (value: Value) => void,
 ) {
 	return useMemo(() => {
@@ -80,12 +88,13 @@ function useRecodePairs(
 					valuePair={valuePair}
 					dataType={dataType}
 					key={`column-Recode-${oldvalue}-${index}`}
-					onChange={onChange}
+					onKeyChange={onKeyChange}
+					onValueChange={onValueChange}
 					onDelete={onDelete}
 				/>
 			)
 		})
-	}, [table, step, dataType, onChange, onDelete])
+	}, [table, step, dataType, onKeyChange, onValueChange, onDelete])
 }
 
 const ColumnPair: React.FC<{
@@ -93,14 +102,16 @@ const ColumnPair: React.FC<{
 	step: Step<RecodeArgs>
 	table: ColumnTable | undefined
 	dataType: DataType
-	onChange: (previous: Value, oldvalue: Value, newvalue: Value) => void
+	onKeyChange: (oldKey: Value, newKey: Value) => void
+	onValueChange: (key: Value, newValue: Value) => void
 	onDelete: (value: Value) => void
 }> = memo(function ColumnPair({
 	valuePair,
 	step,
 	table,
 	dataType,
-	onChange,
+	onKeyChange,
+	onValueChange,
 	onDelete,
 }) {
 	// the old value will always come off the map as a string key
@@ -108,27 +119,19 @@ const ColumnPair: React.FC<{
 	const [o, newvalue] = valuePair
 	const oldvalue = coerce(o, dataType)
 
-	const handleSourceChange = (
-		_e: React.FormEvent<HTMLDivElement>,
-		opt?: IDropdownOption<any> | undefined,
-	) => onChange(oldvalue, opt?.key || oldvalue, newvalue)
-	const handleTextChange = (
-		_e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
-		newValue?: string,
-	) => {
-		// this does force the new value to match the old type, preventing mappings like 0 -> false
-		const val = coerce(newValue, dataType)
-		onChange(oldvalue, oldvalue, val)
-	}
 	const handleDeleteClick = () => onDelete(oldvalue)
+
+	console.log(valuePair)
 
 	return (
 		<ColumnPairContainer>
 			<DataTypeField
 				placeholder={'Current value'}
 				dataType={dataType}
-				oldValue={oldvalue}
-				onChange={onChange}
+				value={oldvalue}
+				onKeyChange={onKeyChange}
+				isKey={true}
+				keyValue={oldvalue}
 			/>
 
 			<Icon
@@ -139,8 +142,10 @@ const ColumnPair: React.FC<{
 			<DataTypeField
 				placeholder={'New Value'}
 				dataType={dataType}
-				oldValue={oldvalue}
-				onChange={onChange}
+				keyValue={oldvalue}
+				value={newvalue}
+				onValueChange={onValueChange}
+				isKey={false}
 			/>
 
 			<IconButton

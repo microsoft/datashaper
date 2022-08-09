@@ -5,7 +5,7 @@
 import { DataType } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
 import { SpinButton } from '@fluentui/react'
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback } from 'react'
 
 import { CalendarPicker } from '../../controls/index.js'
 import {
@@ -17,13 +17,29 @@ import {
 import type { DataTypeFieldProps } from './DataTypeField.types.js'
 
 export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
-	function DataTypeField({ dataType, oldValue, placeholder, onChange }) {
+	function DataTypeField({
+		dataType,
+		keyValue,
+		value,
+		placeholder,
+		onKeyChange,
+		onValueChange,
+		isKey,
+	}) {
 		const onSelectDate = useCallback(
 			(date: Date): void => {
 				const val = coerce(date, dataType)
-				onChange(oldValue, oldValue, val)
+				isKey
+					? onKeyChange(
+							value.toISOString().split('T')[0],
+							val.toISOString().split('T')[0],
+					  )
+					: onValueChange(
+							keyValue.toISOString().split('T')[0],
+							val.toISOString().split('T')[0],
+					  )
 			},
-			[onChange],
+			[onKeyChange, onValueChange],
 		)
 
 		const onChangeTextFieldValue = useCallback(
@@ -32,40 +48,42 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 				newValue?: string,
 			) => {
 				const val = coerce(newValue, dataType)
-				onChange(oldValue, oldValue, val)
+				isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
 			},
-			[onChange],
+			[onKeyChange, onValueChange],
 		)
 
 		const spinButtonOnChange = useCallback(
 			(_event: React.SyntheticEvent<HTMLElement>, newValue?: string) => {
 				if (newValue !== undefined) {
 					const val = coerce(newValue, dataType)
-					onChange(oldValue, oldValue, val)
+					isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
 				}
 			},
-			[onChange],
+			[onKeyChange, onValueChange],
 		)
 
-		const onToggleChange = (
-			_ev: React.MouseEvent<HTMLElement>,
-			checked?: boolean,
-		) => {
-			const val = coerce(checked, dataType)
-			onChange(oldValue, oldValue, val)
-		}
+		const onToggleChange = useCallback(
+			(_ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
+				const val = coerce(checked, dataType)
+				isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
+			},
+			[onKeyChange, onValueChange],
+		)
+
+		console.log(value)
 
 		return (
 			<Container>
 				{dataType === DataType.Date ? (
-					<CalendarPicker onSelectDate={onSelectDate} cleanLabel={cleanLabel} />
+					<CalendarPicker onSelectDate={onSelectDate} value={value} />
 				) : null}
 
 				{dataType === DataType.String ? (
 					<TextValue
 						onChange={onChangeTextFieldValue}
 						placeholder={placeholder}
-						value={oldValue}
+						value={value}
 					></TextValue>
 				) : null}
 
@@ -73,7 +91,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					<SpinButton
 						min={0}
 						step={1}
-						value={oldValue}
+						value={value}
 						styles={spinStyles}
 						onChange={spinButtonOnChange}
 					/>
@@ -81,10 +99,9 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 
 				{dataType === DataType.Boolean ? (
 					<BooleanToggle
-						defaultChecked
 						onText="True"
 						offText="False"
-						value={oldValue}
+						checked={value === true ? true : false}
 						onChange={onToggleChange}
 					/>
 				) : null}

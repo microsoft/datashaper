@@ -7,7 +7,10 @@ import type { DataType } from '@essex/arquero'
 
 export interface DataTypeFieldProps {
 	dataType: DataType
-	oldValue: string
+	keyValue: string
+	value: Value
 	placeholder: string
-	onChange?: (previous: Value, oldvalue: Value, newvalue: Value) => void
+	onKeyChange?: (oldKey: Value, newKey: Value) => void
+	onValueChange?: (previous: Value, oldvalue: Value, newvalue: Value) => void
+	isKey: boolean
 }

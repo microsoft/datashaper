@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import type { Value } from '@essex/arquero'
+import type { Value } from '@essex/arquero';
+import { DataType } from '@essex/arquero'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
@@ -27,17 +28,56 @@ export function useColumnValues(
 	}, [table, step])
 }
 
-export function useHandleRecodeChange(
+export function useHandleKeyChange(
 	step: Step<RecodeArgs>,
 	onChange?: StepChangeFunction<RecodeArgs>,
-): (previous: Value, oldValue: Value, newValue: Value) => void {
+): (previousKey: Value, newKey: Value) => void {
 	return useCallback(
-		(previous, oldValue, newValue) => {
-			const map = {
+		(previousKey, newKey) => {
+			const mapList = {
 				...step.args.map,
 			}
-			delete map[previous]
-			map[oldValue] = newValue
+
+			const map: Record<string, string> = {}
+
+			for (const key in mapList) {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				key === previousKey
+					? (map[newKey] = mapList[key])
+					: (map[key] = mapList[key]!)
+			}
+
+			onChange?.({
+				...step,
+				args: {
+					...step.args,
+					map,
+				},
+			})
+		},
+		[step, onChange],
+	)
+}
+
+export function useHandleValueChange(
+	step: Step<RecodeArgs>,
+	onChange?: StepChangeFunction<RecodeArgs>,
+): (key: Value, newValue: Value) => void {
+	return useCallback(
+		(key, newValue) => {
+			const mapList = {
+				...step.args.map,
+			}
+
+			const map: Record<string, string> = {}
+
+			for (const keyElement in mapList) {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				keyElement === key.toString()
+					? (map[keyElement] = newValue)
+					: (map[keyElement] = mapList[keyElement]!)
+			}
+
 			onChange?.({
 				...step,
 				args: {
@@ -83,12 +123,18 @@ function next(step: Step<RecodeArgs>, values: Value[]): Value | undefined {
 export function useHandleAddButtonClick(
 	step: Step<RecodeArgs>,
 	values: Value[],
+	dataType: DataType,
 	onChange?: StepChangeFunction<RecodeArgs>,
 ): () => void {
 	return useCallback(() => {
-		const nextValue = next(step, values)
+		let nextValue = next(step, values)
+
 		if (nextValue !== undefined) {
 			// could be a 0 or false...
+			if (dataType === DataType.Date) {
+				nextValue = nextValue.toISOString().split('T')[0]
+			}
+
 			onChange?.({
 				...step,
 				args: {
