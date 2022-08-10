@@ -1,0 +1,7 @@
+declined:
+  - "@datashaper/core"
+  - "@datashaper/react"
+  - "@datashaper/schema"
+  - "@datashaper/utilities"
+  - "@datashaper/verb-guidance"
+  - "@datashaper/webapp"
