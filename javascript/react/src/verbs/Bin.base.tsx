@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BinArgs } from '@data-wrangling-components/core'
-import { BinStrategy } from '@data-wrangling-components/core'
-import { num } from '@data-wrangling-components/utilities'
+import type { BinArgs } from '@datashaper/core'
+import { BinStrategy } from '@datashaper/core'
+import { num } from '@datashaper/utilities'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'

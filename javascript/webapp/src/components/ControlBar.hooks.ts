@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { WorkflowObject } from '@data-wrangling-components/core'
-import type { BaseFile } from '@data-wrangling-components/utilities'
+import type { WorkflowObject } from '@datashaper/core'
+import type { BaseFile } from '@datashaper/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback } from 'react'
 

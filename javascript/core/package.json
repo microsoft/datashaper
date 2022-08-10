@@ -1,5 +1,5 @@
 {
-	"name": "@data-wrangling-components/core",
+	"name": "@datashaper/core",
 	"version": "7.1.1",
 	"type": "module",
 	"main": "src/index.ts",
@@ -21,10 +21,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/microsoft/data-wrangling-components"
+		"url": "git+https://github.com/microsoft/datashaper"
 	},
 	"bugs": {
-		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+		"url": "https://github.com/microsoft/datashaper/issues"
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",

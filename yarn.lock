@@ -3682,9 +3682,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@data-wrangling-components/core@workspace:^, @data-wrangling-components/core@workspace:javascript/core":
+"@datashaper/core@workspace:^, @datashaper/core@workspace:javascript/core":
   version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/core@workspace:javascript/core"
+  resolution: "@datashaper/core@workspace:javascript/core"
   dependencies:
     "@essex/arquero": ^3.0.0
     "@essex/dataflow": ^0.1.2
@@ -3714,9 +3714,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/project@workspace:.":
+"@datashaper/project@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/project@workspace:."
+  resolution: "@datashaper/project@workspace:."
   dependencies:
     "@essex/eslint-config": ^20.3.5
     "@essex/eslint-plugin": ^20.3.8
@@ -3738,18 +3738,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/react@workspace:^, @data-wrangling-components/react@workspace:javascript/react":
+"@datashaper/react@workspace:^, @datashaper/react@workspace:javascript/react":
   version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/react@workspace:javascript/react"
+  resolution: "@datashaper/react@workspace:javascript/react"
   dependencies:
     "@babel/core": ^7.18.6
     "@babel/plugin-proposal-optional-chaining": ^7.18.6
     "@babel/preset-env": ^7.18.6
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
-    "@data-wrangling-components/core": "workspace:^"
-    "@data-wrangling-components/utilities": "workspace:^"
-    "@data-wrangling-components/verb-guidance": "workspace:^"
+    "@datashaper/core": "workspace:^"
+    "@datashaper/utilities": "workspace:^"
+    "@datashaper/verb-guidance": "workspace:^"
     "@essex/arquero": ^3.1.0
     "@essex/arquero-react": ^1.2.0
     "@essex/charts-react": ^1.0.5
@@ -3819,11 +3819,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/schema@workspace:javascript/schema":
+"@datashaper/schema@workspace:javascript/schema":
   version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/schema@workspace:javascript/schema"
+  resolution: "@datashaper/schema@workspace:javascript/schema"
   dependencies:
-    "@data-wrangling-components/core": "workspace:^"
+    "@datashaper/core": "workspace:^"
     "@essex/scripts": ^22.0.5
     "@essex/tsconfig-base": ^1.0.2
     shx: ^0.3.4
@@ -3832,9 +3832,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/utilities@workspace:^, @data-wrangling-components/utilities@workspace:javascript/utilities":
+"@datashaper/utilities@workspace:^, @datashaper/utilities@workspace:javascript/utilities":
   version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/utilities@workspace:javascript/utilities"
+  resolution: "@datashaper/utilities@workspace:javascript/utilities"
   dependencies:
     "@essex/jest-config": ^21.0.13
     "@essex/scripts": ^22.0.5
@@ -3853,9 +3853,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/verb-guidance@workspace:^, @data-wrangling-components/verb-guidance@workspace:javascript/verb-guidance":
+"@datashaper/verb-guidance@workspace:^, @datashaper/verb-guidance@workspace:javascript/verb-guidance":
   version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/verb-guidance@workspace:javascript/verb-guidance"
+  resolution: "@datashaper/verb-guidance@workspace:javascript/verb-guidance"
   dependencies:
     "@essex/scripts": ^22.0.5
     "@essex/tsconfig-base": ^1.0.2
@@ -3866,14 +3866,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@data-wrangling-components/webapp@workspace:javascript/webapp":
+"@datashaper/webapp@workspace:javascript/webapp":
   version: 0.0.0-use.local
-  resolution: "@data-wrangling-components/webapp@workspace:javascript/webapp"
+  resolution: "@datashaper/webapp@workspace:javascript/webapp"
   dependencies:
-    "@data-wrangling-components/core": "workspace:^"
-    "@data-wrangling-components/react": "workspace:^"
-    "@data-wrangling-components/utilities": "workspace:^"
-    "@data-wrangling-components/verb-guidance": "workspace:^"
+    "@datashaper/core": "workspace:^"
+    "@datashaper/react": "workspace:^"
+    "@datashaper/utilities": "workspace:^"
+    "@datashaper/verb-guidance": "workspace:^"
     "@essex/arquero": ^3.0.0
     "@essex/arquero-react": ^1.1.0
     "@essex/hooks": ^4.0.12

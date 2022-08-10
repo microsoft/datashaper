@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { OnehotArgs, Step } from '@data-wrangling-components/core'
+import type { OnehotArgs, Step } from '@datashaper/core'
 import cloneDeep from 'lodash-es/cloneDeep'
 import { memo, useCallback, useMemo } from 'react'
 

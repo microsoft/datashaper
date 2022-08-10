@@ -7,8 +7,8 @@ import type {
 	InputColumnArgs,
 	OutputColumnArgs,
 	Step,
-} from '@data-wrangling-components/core'
-import { isNumericInputStep } from '@data-wrangling-components/core'
+} from '@datashaper/core'
+import { isNumericInputStep } from '@datashaper/core'
 import { columnTypes, DataType } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

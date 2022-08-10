@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { Guidance } from '@data-wrangling-components/react'
+import { Guidance } from '@datashaper/react'
 import { Panel, Toggle } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { UnfoldArgs } from '@data-wrangling-components/core'
+import type { UnfoldArgs } from '@datashaper/core'
 import { memo, useMemo } from 'react'
 
 import { useSimpleDropdownOptions } from '../hooks/index.js'

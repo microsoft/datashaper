@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { createDefaultHeaderCommandBar } from '@data-wrangling-components/react'
+import { createDefaultHeaderCommandBar } from '@datashaper/react'
 import { downloadCommand, visibleColumnsCommand } from '@essex/arquero-react'
 import type { IColumn } from '@fluentui/react'
 import { useThematic } from '@thematic/react'

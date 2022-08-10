@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FilterArgs } from '@data-wrangling-components/core'
-import { FilterCompareType } from '@data-wrangling-components/core'
+import type { FilterArgs } from '@datashaper/core'
+import { FilterCompareType } from '@datashaper/core'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types.js'

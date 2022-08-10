@@ -2,11 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	StepComponent,
-	StepDescription,
-	useDataTable,
-} from '@data-wrangling-components/react'
+import { StepComponent, StepDescription, useDataTable } from '@datashaper/react'
 import { memo } from 'react'
 
 import { Section } from './Section.js'

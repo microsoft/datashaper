@@ -2,15 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	InputColumnArgs,
-	OutputColumnArgs,
-} from '@data-wrangling-components/core'
+import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/core'
 import {
 	isInputColumnStep,
 	isInputTableStep,
 	isOutputColumnStep,
-} from '@data-wrangling-components/core'
+} from '@datashaper/core'
 import { NodeInput } from '@essex/dataflow'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { isOutputColumnStep } from '@data-wrangling-components/core'
+import { isOutputColumnStep } from '@datashaper/core'
 import { NodeInput } from '@essex/dataflow'
 import styled from '@essex/styled-components'
 import isNil from 'lodash-es/isNil.js'

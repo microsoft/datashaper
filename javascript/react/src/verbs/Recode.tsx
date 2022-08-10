@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RecodeArgs, Step } from '@data-wrangling-components/core'
+import type { RecodeArgs, Step } from '@datashaper/core'
 import type { DataType, Value } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
 import styled from '@essex/styled-components'

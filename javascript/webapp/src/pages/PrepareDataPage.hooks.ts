@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { renameDuplicatedFileName } from '@data-wrangling-components/utilities'
+import { renameDuplicatedFileName } from '@datashaper/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
 

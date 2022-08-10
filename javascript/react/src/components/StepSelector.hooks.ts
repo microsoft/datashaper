@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Verb } from '@data-wrangling-components/core'
-import { enumName } from '@data-wrangling-components/utilities'
+import { Verb } from '@datashaper/core'
+import { enumName } from '@datashaper/utilities'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback, useEffect, useMemo, useState } from 'react'

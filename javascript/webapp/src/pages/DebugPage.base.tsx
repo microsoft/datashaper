@@ -10,7 +10,7 @@ import {
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useStepOutputs,
-} from '@data-wrangling-components/react'
+} from '@datashaper/react'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 import { StatsColumnType } from '@essex/arquero-react'
 import { ActionButton } from '@fluentui/react'

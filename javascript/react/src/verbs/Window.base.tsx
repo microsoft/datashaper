@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { WindowArgs } from '@data-wrangling-components/core'
-import { WindowFunction } from '@data-wrangling-components/core'
+import type { WindowArgs } from '@datashaper/core'
+import { WindowFunction } from '@datashaper/core'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentProps } from '../types.js'

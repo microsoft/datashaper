@@ -1,5 +1,5 @@
 {
-	"name": "@data-wrangling-components/react",
+	"name": "@datashaper/react",
 	"version": "6.5.0",
 	"type": "module",
 	"main": "src/index.ts",
@@ -21,10 +21,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/microsoft/data-wrangling-components"
+		"url": "git+https://github.com/microsoft/datashaper"
 	},
 	"bugs": {
-		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+		"url": "https://github.com/microsoft/datashaper/issues"
 	},
 	"scripts": {
 		"clean": "essex clean dist docs storybook-static",
@@ -36,9 +36,9 @@
 		"start:storybook": "yarn start"
 	},
 	"dependencies": {
-		"@data-wrangling-components/core": "workspace:^",
-		"@data-wrangling-components/utilities": "workspace:^",
-		"@data-wrangling-components/verb-guidance": "workspace:^",
+		"@datashaper/core": "workspace:^",
+		"@datashaper/utilities": "workspace:^",
+		"@datashaper/verb-guidance": "workspace:^",
 		"@essex/arquero": "^3.1.0",
 		"@essex/arquero-react": "^1.2.0",
 		"@essex/charts-react": "^1.0.5",

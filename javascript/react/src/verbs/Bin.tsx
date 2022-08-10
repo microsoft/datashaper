@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BinArgs } from '@data-wrangling-components/core'
+import type { BinArgs } from '@datashaper/core'
 import { memo } from 'react'
 
 import type { StepComponentProps } from '../types'

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@data-wrangling-components/core'
-import { useEffect,useState } from 'react'
+import type { GraphManager, Step } from '@datashaper/core'
+import { useEffect, useState } from 'react'
 
 /**
  * Gets the graph processing steps

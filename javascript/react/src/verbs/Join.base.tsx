@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs } from '@data-wrangling-components/core'
-import { JoinStrategy } from '@data-wrangling-components/core'
+import type { JoinArgs } from '@datashaper/core'
+import { JoinStrategy } from '@datashaper/core'
 import { NodeInput } from '@essex/dataflow'
 import { memo, useMemo } from 'react'
 

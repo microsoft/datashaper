@@ -3,15 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Workflow } from '@data-wrangling-components/core'
-import type { FileWithPath } from '@data-wrangling-components/utilities'
+import type { Workflow } from '@datashaper/core'
+import type { FileWithPath } from '@datashaper/utilities'
 import {
 	createFileWithPath,
 	download,
 	downloadTable,
 	FileCollection,
 	FileMimeType,
-} from '@data-wrangling-components/utilities'
+} from '@datashaper/utilities'
 import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
 
@@ -56,9 +56,7 @@ export function useDownloadZip(
 		}
 
 		if (tables.length) {
-			const files = tables
-				.map(table => tableFile(table))
-				.filter(f => f != null)
+			const files = tables.map(table => tableFile(table)).filter(f => f != null)
 			if (files.length) {
 				await fileCollection.add(files as FileWithPath[])
 				tables.forEach(table => {

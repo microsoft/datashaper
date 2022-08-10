@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ConvertArgs } from '@data-wrangling-components/core'
-import { ParseType } from '@data-wrangling-components/core'
-import { num } from '@data-wrangling-components/utilities'
+import type { ConvertArgs } from '@datashaper/core'
+import { ParseType } from '@datashaper/core'
+import { num } from '@datashaper/utilities'
 import { DataType } from '@essex/arquero'
 import { memo, useMemo } from 'react'
 

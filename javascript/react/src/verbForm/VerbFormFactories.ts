@@ -2,12 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	InputColumnListArgs,
-	JoinArgs,
-	Step,
-} from '@data-wrangling-components/core'
-import { toggleListItem } from '@data-wrangling-components/utilities'
+import type { InputColumnListArgs, JoinArgs, Step } from '@datashaper/core'
+import { toggleListItem } from '@datashaper/utilities'
 
 import { getEnumDropdownOptions } from '../enums.js'
 import {

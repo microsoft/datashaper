@@ -2,11 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Workflow } from '@data-wrangling-components/core'
-import {
-	PrepareDataFull,
-	ProjectMgmtCommandBar,
-} from '@data-wrangling-components/react'
+import { Workflow } from '@datashaper/core'
+import { PrepareDataFull, ProjectMgmtCommandBar } from '@datashaper/react'
 import type { TableContainer } from '@essex/arquero'
 import { memo, useState } from 'react'
 

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FileCollection } from '@data-wrangling-components/utilities'
+import type { FileCollection } from '@datashaper/utilities'
 
 export interface FileDropProps {
 	onDrop?: (collection: FileCollection) => void

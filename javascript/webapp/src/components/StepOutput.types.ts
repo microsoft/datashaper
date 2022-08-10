@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager,Step } from '@data-wrangling-components/core'
+import type { GraphManager, Step } from '@datashaper/core'
 import type { DetailsListFeatures } from '@essex/arquero-react'
 
 export interface StepOutputProps {

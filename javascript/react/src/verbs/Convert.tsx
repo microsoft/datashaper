@@ -2,10 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ConvertArgs } from '@data-wrangling-components/core'
+import type { ConvertArgs } from '@datashaper/core'
 import { memo } from 'react'
 
-import { useColumnsMetadata,useStepDataTable,useTableColumnNames } from '../hooks/index.js'
+import {
+	useColumnsMetadata,
+	useStepDataTable,
+	useTableColumnNames,
+} from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { ConvertBase } from './Convert.base.js'
 
@@ -17,6 +21,13 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 		const dataTable = useStepDataTable(step, graph, input, table)
 		const columns = useTableColumnNames(dataTable)
 		const columnsMetadata = useColumnsMetadata(dataTable)
-		return <ConvertBase columns={columns} step={step} onChange={onChange} columnsMetadata={columnsMetadata}/>
+		return (
+			<ConvertBase
+				columns={columns}
+				step={step}
+				onChange={onChange}
+				columnsMetadata={columnsMetadata}
+			/>
+		)
 	},
 )

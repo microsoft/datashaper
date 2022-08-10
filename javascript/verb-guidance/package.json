@@ -1,5 +1,5 @@
 {
-	"name": "@data-wrangling-components/verb-guidance",
+	"name": "@datashaper/verb-guidance",
 	"version": "0.1.15",
 	"type": "module",
 	"main": "dist/index.js",
@@ -16,10 +16,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/microsoft/data-wrangling-components"
+		"url": "git+https://github.com/microsoft/datashaper"
 	},
 	"bugs": {
-		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+		"url": "https://github.com/microsoft/datashaper/issues"
 	},
 	"publishConfig": {
 		"main": "dist/index.js",

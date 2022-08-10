@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { GraphManager,Step } from '@data-wrangling-components/core'
+import type { GraphManager, Step } from '@datashaper/core'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 

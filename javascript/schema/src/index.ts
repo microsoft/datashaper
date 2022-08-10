@@ -36,7 +36,7 @@ import type {
 	UnrollArgs,
 	Verb,
 	WindowArgs,
-} from '@data-wrangling-components/core'
+} from '@datashaper/core'
 
 /**
  * The root data-wrangling specification. (Used for generating JSON Schema)

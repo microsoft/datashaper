@@ -148,7 +148,7 @@ export class Workflow {
 			output.push({ ...binding, name })
 		}
 		return {
-			$schema: `https://microsoft.github.io/data-wrangling-components/schema/workflow/v1.json`,
+			$schema: `https://microsoft.github.io/datashaper/schema/workflow/v1.json`,
 			name: this._name,
 			description: this._description,
 			input: [...this._input.values()],

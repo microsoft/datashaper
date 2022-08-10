@@ -1,4 +1,4 @@
-name: Data Wrangling Components CI
+name: DataShaper Components CI
 pool:
   vmImage: ubuntu-latest
 

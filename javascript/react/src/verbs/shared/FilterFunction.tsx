@@ -8,7 +8,7 @@ import {
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '@data-wrangling-components/core'
+} from '@datashaper/core'
 import { DataType } from '@essex/arquero'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton, SpinButton } from '@fluentui/react'

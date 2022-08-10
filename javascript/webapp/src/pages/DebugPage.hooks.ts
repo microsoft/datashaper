@@ -2,13 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	GraphManager,
-	Step,
-	Verb,
-	Workflow,
-} from '@data-wrangling-components/core'
-import { useHandleStepSave } from '@data-wrangling-components/react'
+import type { GraphManager, Step, Verb, Workflow } from '@datashaper/core'
+import { useHandleStepSave } from '@datashaper/react'
 import type { TableContainer } from '@essex/arquero'
 import { container } from '@essex/arquero'
 import { loadCSV } from 'arquero'
