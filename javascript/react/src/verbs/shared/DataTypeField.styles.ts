@@ -29,12 +29,14 @@ export const OrLabel = styled(Label)`
 	padding-right: 10px;
 `
 
-export const BooleanToggle = styled(Toggle)`
-	margin-top: 5px;
-`
-
 export const spinStyles = {
 	root: {
 		width: 120,
+	},
+}
+
+export const dropdownStyles = {
+	root: {
+		width: 150,
 	},
 }

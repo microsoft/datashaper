@@ -4,13 +4,14 @@
  */
 import { DataType } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
-import { SpinButton } from '@fluentui/react'
+import type { IDropdownOption} from '@fluentui/react';
+import { Dropdown,SpinButton  } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { CalendarPicker } from '../../controls/index.js'
 import {
-	BooleanToggle,
 	Container,
+	dropdownStyles,
 	spinStyles,
 	TextValue,
 } from './DataTypeField.styles.js'
@@ -26,6 +27,11 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 		onValueChange,
 		isKey,
 	}) {
+		const booleanOptions: IDropdownOption[] = [
+			{ key: 'true', text: 'true' },
+			{ key: 'false', text: 'false' },
+		]
+
 		const onSelectDate = useCallback(
 			(date: Date): void => {
 				const val = coerce(date, dataType)
@@ -55,6 +61,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 
 		const spinButtonOnChange = useCallback(
 			(_event: React.SyntheticEvent<HTMLElement>, newValue?: string) => {
+				console.log(newValue)
 				if (newValue !== undefined) {
 					const val = coerce(newValue, dataType)
 					isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
@@ -63,15 +70,18 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 			[onKeyChange, onValueChange],
 		)
 
-		const onToggleChange = useCallback(
-			(_ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
-				const val = coerce(checked, dataType)
-				isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
+		const dropDownOnChange = useCallback(
+			(
+				_e: React.FormEvent<HTMLDivElement>,
+				newValue?: IDropdownOption<any> | undefined,
+			) => {
+				if (newValue !== undefined) {
+					const val = coerce(newValue, dataType)
+					isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
+				}
 			},
 			[onKeyChange, onValueChange],
 		)
-
-		console.log(value)
 
 		return (
 			<Container>
@@ -98,11 +108,11 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 				) : null}
 
 				{dataType === DataType.Boolean ? (
-					<BooleanToggle
-						onText="True"
-						offText="False"
-						checked={value === true ? true : false}
-						onChange={onToggleChange}
+					<Dropdown
+						selectedKey={value}
+						options={booleanOptions}
+						styles={dropdownStyles}
+						onChange={dropDownOnChange}
 					/>
 				) : null}
 			</Container>

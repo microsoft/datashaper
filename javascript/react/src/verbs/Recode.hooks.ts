@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import type { Value } from '@essex/arquero';
+import type { Value } from '@essex/arquero'
 import { DataType } from '@essex/arquero'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -42,7 +42,7 @@ export function useHandleKeyChange(
 
 			for (const key in mapList) {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				key === previousKey
+				key === previousKey.toString()
 					? (map[newKey] = mapList[key])
 					: (map[key] = mapList[key]!)
 			}

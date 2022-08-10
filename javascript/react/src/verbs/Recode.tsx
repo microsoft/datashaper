@@ -121,8 +121,6 @@ const ColumnPair: React.FC<{
 
 	const handleDeleteClick = () => onDelete(oldvalue)
 
-	console.log(valuePair)
-
 	return (
 		<ColumnPairContainer>
 			<DataTypeField
