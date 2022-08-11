@@ -4,13 +4,15 @@
  */
 import type { DetailsListFeatures } from '@datashaper/react'
 import {
- StatsColumnType,	StepSelector,
+	StatsColumnType,
+	StepSelector,
 	useGraphManager,
 	useGraphSteps,
 	useGraphWorkflowState,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
-	useStepOutputs } from '@datashaper/react'
+	useStepOutputs,
+} from '@datashaper/react'
 import { ActionButton } from '@fluentui/react'
 import { memo, useState } from 'react'
 

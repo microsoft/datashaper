@@ -21,7 +21,7 @@ export interface RowsOptions {
 	/**
 	 * Map of custom formatting functions per column.
 	 */
-	format?: Record<string, (d: any) => any>
+	format?: Record<string, ((d: any) => any) | undefined>
 }
 
 /**
@@ -38,8 +38,7 @@ export function rows(table: ColumnTable, options?: RowsOptions): any[][] {
 		for (let i = 0; i < table.numCols(); i++) {
 			const name = table.columnName(i)
 			const value = table.columnAt(i)?.get(idx)
-			const namedFormat = format[name]
-			const fn = namedFormat ? namedFormat : stringify ? str : identity
+			const fn = format[name] ?? stringify ? str : identity
 			row.push(fn(value))
 		}
 		output.push(row)

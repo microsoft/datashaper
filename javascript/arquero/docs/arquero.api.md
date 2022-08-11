@@ -170,7 +170,7 @@ export function rows(table: ColumnTable, options?: RowsOptions): any[][];
 //
 // @public (undocumented)
 export interface RowsOptions {
-    format?: Record<string, (d: any) => any>;
+    format?: Record<string, ((d: any) => any) | undefined>;
     skipHeader?: boolean;
     stringify?: boolean;
 }

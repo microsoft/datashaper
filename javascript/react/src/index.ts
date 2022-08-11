@@ -28,7 +28,6 @@ export * from './components/ArqueroDetailsList/index.js'
 export type {
 	ArqueroDetailsListProps,
 	DetailsListFeatures,
-	StatsColumnType,
 } from './components/ArqueroDetailsList/types.js'
 export * from './components/ArqueroTableHeader/index.js'
 export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/types.js'
