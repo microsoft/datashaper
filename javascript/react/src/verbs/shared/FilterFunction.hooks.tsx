@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { columnTypes, DataType } from '@datashaper/arquero'
 import type { Criterion } from '@datashaper/core'
 import {
 	BooleanComparisonOperator,
@@ -9,7 +10,6 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@datashaper/core'
-import { columnTypes, DataType } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 

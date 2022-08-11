@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { TableContainer } from '@datashaper/arquero'
 import type { Workflow } from '@datashaper/core'
 import type { FileWithPath } from '@datashaper/utilities'
 import {
@@ -12,7 +13,6 @@ import {
 	FileCollection,
 	FileMimeType,
 } from '@datashaper/utilities'
-import type { TableContainer } from '@essex/arquero'
 import { useCallback, useState } from 'react'
 
 export function useDownloadWorkflow(workflow: Workflow): () => void {

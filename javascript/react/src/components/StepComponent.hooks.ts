@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { columnTypes, DataType } from '@datashaper/arquero'
 import type {
 	GraphManager,
 	InputColumnArgs,
@@ -9,7 +10,6 @@ import type {
 	Step,
 } from '@datashaper/core'
 import { isNumericInputStep } from '@datashaper/core'
-import { columnTypes, DataType } from '@essex/arquero'
 import { NodeInput } from '@essex/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'

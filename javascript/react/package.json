@@ -36,10 +36,10 @@
 		"start:storybook": "yarn start"
 	},
 	"dependencies": {
+		"@datashaper/arquero": "workspace:^",
 		"@datashaper/core": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",
-		"@essex/arquero": "^3.1.0",
 		"@essex/arquero-react": "^1.2.0",
 		"@essex/charts-react": "^1.0.5",
 		"@essex/dataflow": "^0.1.2",

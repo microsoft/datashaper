@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableContainer } from '@datashaper/arquero'
 import type { Workflow } from '@datashaper/core'
-import type { TableContainer } from '@essex/arquero'
 
 import type { TransformModalProps } from '../index.js'
 

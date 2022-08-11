@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { DataType, Value } from '@datashaper/arquero'
+import { coerce } from '@datashaper/arquero'
 import type { RecodeArgs, Step } from '@datashaper/core'
-import type { DataType, Value } from '@essex/arquero'
-import { coerce } from '@essex/arquero'
 import styled from '@essex/styled-components'
 import type { IDropdownOption } from '@fluentui/react'
 import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'

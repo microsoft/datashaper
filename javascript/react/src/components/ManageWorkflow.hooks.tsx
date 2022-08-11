@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/unbound-method */
+import type { TableContainer } from '@datashaper/arquero'
 import type { GraphManager, Step, Workflow } from '@datashaper/core'
-import type { TableContainer } from '@essex/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import { useCallback, useEffect, useState } from 'react'

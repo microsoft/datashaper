@@ -29,11 +29,11 @@
 		"lint": "essex lint --fix"
 	},
 	"dependencies": {
+		"@datashaper/arquero": "workspace:^",
 		"@datashaper/core": "workspace:^",
 		"@datashaper/react": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",
-		"@essex/arquero": "^3.0.0",
 		"@essex/arquero-react": "^1.1.0",
 		"@essex/hooks": "^4.0.12",
 		"@essex/themed-components": "^2.2.7",

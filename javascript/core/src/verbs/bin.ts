@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { fixedBinStep } from '@essex/arquero'
+import { fixedBinStep } from '@datashaper/arquero'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -45,7 +45,7 @@ export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
 	clamped?: boolean
 	/**
 	 * If true, the range for each bin will be printed as the cell value instead of the truncated numeric value.
-	 * This is useful for treating the 
+	 * This is useful for treating the
 	 */
 	printRange?: boolean
 }
@@ -102,10 +102,7 @@ function getStats(
 		min: op.min(column),
 		max: op.max(column),
 	})
-	return [
-		min || rollup.get('min', 0),
-		max || rollup.get('max', 0),
-	]
+	return [min || rollup.get('min', 0), max || rollup.get('max', 0)]
 }
 
 export const bin = stepVerbFactory(binStep)

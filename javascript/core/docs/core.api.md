@@ -10,10 +10,10 @@ import type { Graph } from '@essex/dataflow';
 import { InputNode } from '@essex/dataflow';
 import type { Node as Node_2 } from '@essex/dataflow';
 import type { Observable } from 'rxjs';
-import { SortDirection } from '@essex/arquero';
+import { SortDirection } from '@datashaper/arquero';
 import { StepNode } from '@essex/dataflow';
-import { TableContainer } from '@essex/arquero';
-import type { Value } from '@essex/arquero';
+import { TableContainer } from '@datashaper/arquero';
+import type { Value } from '@datashaper/arquero';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
