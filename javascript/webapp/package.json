@@ -34,7 +34,6 @@
 		"@datashaper/react": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",
-		"@essex/arquero-react": "^1.1.0",
 		"@essex/hooks": "^4.0.12",
 		"@essex/themed-components": "^2.2.7",
 		"@essex/webpack-config": "^21.0.5",

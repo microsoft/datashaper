@@ -2,17 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { DetailsListFeatures } from '@datashaper/react'
 import {
-	StepSelector,
+ StatsColumnType,	StepSelector,
 	useGraphManager,
 	useGraphSteps,
 	useGraphWorkflowState,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
-	useStepOutputs,
-} from '@datashaper/react'
-import type { DetailsListFeatures } from '@essex/arquero-react'
-import { StatsColumnType } from '@essex/arquero-react'
+	useStepOutputs } from '@datashaper/react'
 import { ActionButton } from '@fluentui/react'
 import { memo, useState } from 'react'
 

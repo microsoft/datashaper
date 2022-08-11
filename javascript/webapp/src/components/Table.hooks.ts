@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { createDefaultHeaderCommandBar } from '@datashaper/react'
-import { downloadCommand, visibleColumnsCommand } from '@essex/arquero-react'
+import { downloadCommand, visibleColumnsCommand } from '@datashaper/react'
 import type { IColumn } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
-import type { DetailsListFeatures } from '@essex/arquero-react'
 import { useCallback, useState } from 'react'
+
+import type { DetailsListFeatures } from './ArqueroDetailsList/types.js'
 
 export function useToggleTableFeatures(
 	features?: Partial<DetailsListFeatures>,

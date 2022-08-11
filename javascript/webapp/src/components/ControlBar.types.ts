@@ -4,7 +4,7 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import type { Workflow } from '@datashaper/core'
-import type { DetailsListFeatures } from '@essex/arquero-react'
+import type { DetailsListFeatures } from '@datashaper/react'
 
 export interface ControlBarProps {
 	selected?: Workflow

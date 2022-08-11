@@ -40,7 +40,6 @@
 		"@datashaper/core": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",
-		"@essex/arquero-react": "^1.2.0",
 		"@essex/charts-react": "^1.0.5",
 		"@essex/dataflow": "^0.1.2",
 		"@essex/styled-components": "^0.0.2",

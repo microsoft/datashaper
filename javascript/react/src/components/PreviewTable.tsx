@@ -2,13 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	ArqueroDetailsList,
-	ArqueroTableHeader,
-	StatsColumnType,
-} from '@essex/arquero-react'
+
 import { memo } from 'react'
 
+import {
+	ArqueroDetailsList,
+	StatsColumnType,
+} from './ArqueroDetailsList/index.js'
+import { ArqueroTableHeader } from './ArqueroTableHeader/index.js'
 import { DetailText } from './DetailText.js'
 import { useToggleTableFeatures } from './PreviewTable.hooks.js'
 import { Container, TextContainer } from './PreviewTable.styles.js'
