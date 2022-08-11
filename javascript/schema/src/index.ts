@@ -39,7 +39,7 @@ import type {
 } from '@datashaper/core'
 
 /**
- * The root data-wrangling specification. (Used for generating JSON Schema)
+ * The root wrangling workflow specification. (Used for generating JSON Schema)
  */
 export interface WorkflowJson {
 	/**
