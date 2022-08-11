@@ -10,7 +10,7 @@ import type {
 	Step,
 } from '@datashaper/core'
 import { isNumericInputStep } from '@datashaper/core'
-import { NodeInput } from '@essex/dataflow'
+import { NodeInput } from '@datashaper/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
 import { useCallback, useEffect, useMemo } from 'react'

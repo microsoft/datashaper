@@ -4,7 +4,7 @@
  */
 
 import type { GraphManager, Step } from '@datashaper/core'
-import { NodeInput } from '@essex/dataflow'
+import { NodeInput } from '@datashaper/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { useDataTable } from '../hooks/index.js'

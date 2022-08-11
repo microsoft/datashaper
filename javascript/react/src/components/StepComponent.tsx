@@ -8,7 +8,7 @@ import {
 	isInputTableStep,
 	isOutputColumnStep,
 } from '@datashaper/core'
-import { NodeInput } from '@essex/dataflow'
+import { NodeInput } from '@datashaper/dataflow'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 

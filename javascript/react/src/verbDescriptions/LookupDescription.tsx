@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { LookupArgs } from '@datashaper/core'
-import { NodeInput } from '@essex/dataflow'
+import { NodeInput } from '@datashaper/dataflow'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types.js'

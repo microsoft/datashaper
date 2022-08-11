@@ -4,14 +4,14 @@
 
 ```ts
 
-import { BaseNode } from '@essex/dataflow';
-import { BaseVariadicNode } from '@essex/dataflow';
-import type { Graph } from '@essex/dataflow';
-import { InputNode } from '@essex/dataflow';
-import type { Node as Node_2 } from '@essex/dataflow';
+import { BaseNode } from '@datashaper/dataflow';
+import { BaseVariadicNode } from '@datashaper/dataflow';
+import type { Graph } from '@datashaper/dataflow';
+import { InputNode } from '@datashaper/dataflow';
+import type { Node as Node_2 } from '@datashaper/dataflow';
 import type { Observable } from 'rxjs';
 import { SortDirection } from '@datashaper/arquero';
-import { StepNode } from '@essex/dataflow';
+import { StepNode } from '@datashaper/dataflow';
 import { TableContainer } from '@datashaper/arquero';
 import type { Value } from '@datashaper/arquero';
 

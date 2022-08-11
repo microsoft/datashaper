@@ -4,7 +4,7 @@
  */
 import type { JoinArgs } from '@datashaper/core'
 import { JoinStrategy } from '@datashaper/core'
-import { NodeInput } from '@essex/dataflow'
+import { NodeInput } from '@datashaper/dataflow'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'

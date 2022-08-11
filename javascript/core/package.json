@@ -35,7 +35,7 @@
 	},
 	"dependencies": {
 		"@datashaper/arquero": "workspace:^",
-		"@essex/dataflow": "^0.1.2",
+		"@datashaper/dataflow": "workspace:^",
 		"ajv": "^8.11.0",
 		"d3-time-format": "^4.1.0",
 		"lodash-es": "^4.17.21",

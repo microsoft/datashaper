@@ -4,7 +4,7 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import { container } from '@datashaper/arquero'
-import { BaseNode, NodeInput } from '@essex/dataflow'
+import { BaseNode, NodeInput } from '@datashaper/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { JoinArgsBase } from './join.js'

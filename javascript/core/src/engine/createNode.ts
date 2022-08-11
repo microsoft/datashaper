@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/arquero'
-import type { Node } from '@essex/dataflow'
+import type { Node } from '@datashaper/dataflow'
 
 import type { Step } from '../steps/index.js'
 import type { NodeFactory } from '../verbs/index.js'
