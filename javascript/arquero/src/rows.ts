@@ -38,7 +38,8 @@ export function rows(table: ColumnTable, options?: RowsOptions): any[][] {
 		for (let i = 0; i < table.numCols(); i++) {
 			const name = table.columnName(i)
 			const value = table.columnAt(i)?.get(idx)
-			const fn = format[name] ?? stringify ? str : identity
+			const formatFn = format[name]
+			const fn = formatFn ? formatFn : stringify ? str : identity
 			row.push(fn(value))
 		}
 		output.push(row)
