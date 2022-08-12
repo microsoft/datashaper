@@ -6,7 +6,7 @@ import type { TableMetadata } from '@datashaper/arquero'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { SaveMetadataFunction } from './ArqueroDetailsList/types.js'
+import type { SaveMetadataFunction } from './ArqueroDetailsList/ArqueroDetailsList.types.js'
 
 export interface PreviewTableProps {
 	table?: ColumnTable

@@ -6,8 +6,8 @@
 import { Sparkline } from '@essex/charts-react'
 import { memo } from 'react'
 
+import { getValue } from '../ArqueroDetailsList.utils.js'
 import { useCellDimensions } from '../hooks/index.js'
-import { getValue } from '../util/index.js'
 import type { ColumnCellChartProps } from './types.js'
 
 /**

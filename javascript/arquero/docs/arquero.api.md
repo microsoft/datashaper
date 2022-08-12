@@ -5,6 +5,7 @@
 ```ts
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
 
 // Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -174,6 +175,11 @@ export interface RowsOptions {
     skipHeader?: boolean;
     stringify?: boolean;
 }
+
+// Warning: (ae-missing-release-tag) "sliceTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function sliceTable(table: ColumnTable_2, offset: number, limit: number): ColumnTable_2;
 
 // Warning: (ae-missing-release-tag) "SortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

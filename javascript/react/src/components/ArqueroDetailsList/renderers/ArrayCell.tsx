@@ -4,7 +4,7 @@
  */
 import { memo, useMemo } from 'react'
 
-import { getValue } from '../util/index.js'
+import { getValue } from '../ArqueroDetailsList.utils.js'
 import type { FormattedCellProps } from './types.js'
 
 const CELL_LENGTH = 5

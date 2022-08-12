@@ -24,13 +24,13 @@ export {
 /*
  * Exported Components
  */
-export * from './components/ArqueroDetailsList/index.js'
 export type {
 	ArqueroDetailsListProps,
 	DetailsListFeatures,
-} from './components/ArqueroDetailsList/types.js'
+} from './components/ArqueroDetailsList/ArqueroDetailsList.types.js'
+export * from './components/ArqueroDetailsList/index.js'
+export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/ArqueroTableheader.types.js'
 export * from './components/ArqueroTableHeader/index.js'
-export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/types.js'
 export { CommandBar } from './components/CommandBar.js'
 export type { CommandBarProps } from './components/CommandBar.types.js'
 export { Dropzone } from './components/Dropzone.js'

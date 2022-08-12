@@ -8,7 +8,7 @@ import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
-import { categories, getValue, isEmpty } from '../util/index.js'
+import { categories, getValue, isEmpty } from '../ArqueroDetailsList.utils.js'
 import { ArrayDropdownCell } from './ArrayDropdownCell.js'
 import { CellContainer } from './CellContainer.js'
 import { EmptyCell } from './EmptyCell.js'

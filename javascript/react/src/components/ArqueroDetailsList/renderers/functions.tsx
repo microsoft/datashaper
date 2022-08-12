@@ -9,13 +9,13 @@ import type {
 	IRenderFunction,
 } from '@fluentui/react'
 
-import type { ColumnClickFunction, ColumnRenderFunction } from '../index.js'
 import type {
 	DetailsListFeatures,
 	DropdownOptionSelect,
 	MetadataClickFunction,
 	StatsColumnType,
-} from '../types.js'
+} from '../ArqueroDetailsList.types.js'
+import type { ColumnClickFunction, ColumnRenderFunction } from '../index.js'
 import { CommandBarContainer } from './CommandBarContainer.js'
 import { DefaultColumnHeader } from './DefaultColumnHeader.js'
 import { FeaturesCell } from './FeaturesCell.js'

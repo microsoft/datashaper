@@ -5,7 +5,11 @@
 import { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
-import { categories, getValue, isDistinctCategories } from '../util/index.js'
+import {
+	categories,
+	getValue,
+	isDistinctCategories,
+} from '../ArqueroDetailsList.utils.js'
 import { ArrayCell } from './ArrayCell.js'
 import { ArrayDropdownCell } from './ArrayDropdownCell.js'
 import { CategoricalBarCell, SparkbarCell, SparklineCell } from './index.js'

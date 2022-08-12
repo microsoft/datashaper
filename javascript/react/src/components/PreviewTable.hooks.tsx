@@ -4,7 +4,7 @@
  */
 import { useCallback, useState } from 'react'
 
-import type { DetailsListFeatures } from './ArqueroDetailsList/types.js'
+import type { DetailsListFeatures } from './ArqueroDetailsList/ArqueroDetailsList.types.js'
 
 export function useToggleTableFeatures(
 	features?: Partial<DetailsListFeatures>,

@@ -6,7 +6,10 @@
 import { ArqueroDetailsList } from '@datashaper/react'
 import type { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { ArqueroDetailsListProps, StatsColumnType } from '../types.js'
+import {
+	ArqueroDetailsListProps,
+	StatsColumnType,
+} from '../ArqueroDetailsList.types.js'
 
 export default {
 	title: '@essex:arquero-react/ArqueroDetailsList',

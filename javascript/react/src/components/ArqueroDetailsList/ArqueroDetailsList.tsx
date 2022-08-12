@@ -14,7 +14,11 @@ import {
 import type { RowObject } from 'arquero/dist/types/table/table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
-import { groupBuilder } from '../common/groups.js'
+import type {
+	ArqueroDetailsListProps,
+	DetailsListFeatures,
+} from './ArqueroDetailsList.types.js'
+import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
 import {
 	useColumns,
 	useDetailsHeaderRenderer,
@@ -28,8 +32,6 @@ import {
 	useSubsetTable,
 	useTableMetadata,
 } from './hooks/index.js'
-import type { ArqueroDetailsListProps, DetailsListFeatures } from './types.js'
-import { debounceFn } from './util/index.js'
 
 /**
  * Renders an arquero table using a fluent DetailsList.

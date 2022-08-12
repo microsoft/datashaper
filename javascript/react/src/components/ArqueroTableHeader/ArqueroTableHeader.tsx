@@ -6,7 +6,7 @@
 import styled from '@essex/styled-components'
 import { memo, useMemo } from 'react'
 
-import { HEIGHT } from './constants.js'
+import { HEIGHT } from './ArqueroTableHeader.constants.js'
 import {
 	useColorDefaults,
 	useColumnCounts,

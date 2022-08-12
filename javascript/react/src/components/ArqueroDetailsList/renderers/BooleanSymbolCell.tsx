@@ -7,8 +7,8 @@ import type { IColumn } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 
+import { getValue } from '../ArqueroDetailsList.utils.js'
 import { useCellDimensions } from '../hooks/index.js'
-import { getValue } from '../util/index.js'
 import type { ColumnCellProps, Dimensions } from './types.js'
 
 /**

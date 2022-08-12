@@ -8,7 +8,7 @@ import { Else, If, Then } from 'react-if'
 
 import { RenameCallout } from './RenameCallout.js'
 
-interface TableNameProps {
+export interface TableNameProps {
 	onRenameTable?: (name: string) => void
 	name?: string
 	color?: string

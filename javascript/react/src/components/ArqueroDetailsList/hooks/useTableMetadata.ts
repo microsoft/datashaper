@@ -7,7 +7,7 @@ import { introspect } from '@datashaper/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
-import type { SaveMetadataFunction } from '../types.js'
+import type { SaveMetadataFunction } from '../ArqueroDetailsList.types.js'
 /**
  * Optionally executes a series of table characterization functions.
  * @param table -

@@ -7,7 +7,7 @@ import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 
-import { getDropdownValue } from '../util/index.js'
+import { getDropdownValue } from '../ArqueroDetailsList.utils.js'
 import type { DropdownCellProps } from './types.js'
 
 /**

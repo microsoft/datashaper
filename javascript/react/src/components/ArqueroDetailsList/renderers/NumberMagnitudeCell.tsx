@@ -6,8 +6,8 @@
 import { useThematic } from '@thematic/react'
 import { memo, useMemo } from 'react'
 
+import { getValue } from '../ArqueroDetailsList.utils.js'
 import { useCellDimensions, useFormattedNumber } from '../hooks/index.js'
-import { getValue } from '../util/index.js'
 import type { MagnitudeCellProps } from './types.js'
 /**
  * Basic endering of number values.

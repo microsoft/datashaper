@@ -8,7 +8,7 @@ import { useThematic } from '@thematic/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useMemo } from 'react'
 
-import { StatsColumnType } from '../types.js'
+import { StatsColumnType } from '../ArqueroDetailsList.types.js'
 import type { RichHeaderProps } from './types.js'
 
 const pretty: Record<string, string> = {

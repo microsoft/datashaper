@@ -5,8 +5,8 @@
 
 import { memo } from 'react'
 
+import { getValue } from '../ArqueroDetailsList.utils.js'
 import { useFormattedNumber } from '../hooks/index.js'
-import { getValue } from '../util/index.js'
 import type { FormattedCellProps } from './types.js'
 
 /**

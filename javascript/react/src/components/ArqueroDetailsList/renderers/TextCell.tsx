@@ -4,7 +4,7 @@
  */
 import { memo } from 'react'
 
-import { getValue } from '../util/index.js'
+import { getValue } from '../ArqueroDetailsList.utils.js'
 import type { FormattedCellProps } from './types.js'
 
 /**

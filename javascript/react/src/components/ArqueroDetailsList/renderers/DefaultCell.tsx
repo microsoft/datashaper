@@ -6,7 +6,7 @@ import { DataType, determineType } from '@datashaper/arquero'
 import { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
-import { getValue, isEmpty } from '../util/index.js'
+import { getValue, isEmpty } from '../ArqueroDetailsList.utils.js'
 import { ArrayCell } from './ArrayCell.js'
 import {
 	BooleanTextCell,
