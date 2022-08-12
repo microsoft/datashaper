@@ -34,11 +34,17 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 
 		const onSelectDate = useCallback(
 			(date: Date): void => {
-				console.log(date)
 				const val = coerce(date, dataType)
+
 				isKey
-					? onKeyChange(value.toISOString(), val.toISOString())
-					: onValueChange(keyValue.toISOString(), val.toISOString())
+					? onKeyChange(
+							new Date(value).toISOString(),
+							new Date(val).toISOString(),
+					  )
+					: onValueChange(
+							new Date(keyValue).toISOString(),
+							new Date(val).toISOString(),
+					  )
 			},
 			[onKeyChange, onValueChange],
 		)
