@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import type { DataType, Value } from '@essex/arquero'
-import { coerce } from '@essex/arquero'
+import type { Value } from '@essex/arquero'
+import { coerce,DataType  } from '@essex/arquero'
 import styled from '@essex/styled-components'
 import { ActionButton, Icon, IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -28,8 +28,12 @@ import { DataTypeField } from './shared/DataTypeField.js'
 export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 	function Recode({ step, graph, input, table, onChange }) {
 		const dataTable = useStepDataTable(step, graph, input, table)
-		const values = useColumnValues(step, dataTable)
 		const dataType = useColumnType(dataTable, step.args.column)
+		const initialValues = useColumnValues(step, dataTable)
+		const values =
+			dataType === DataType.Date
+				? initialValues.map(e => e.toISOString())
+				: initialValues
 		const handleRecodeKeyChange = useHandleKeyChange(step, onChange)
 		const handleRecodeValueChange = useHandleValueChange(step, onChange)
 		const handleRecodeDelete = useRecodeDelete(step, onChange)
@@ -116,8 +120,13 @@ const ColumnPair: React.FC<{
 }) {
 	// the old value will always come off the map as a string key
 	// coerce it to the column type for proper comparison
-	const [o, newvalue] = valuePair
-	const oldvalue = coerce(o, dataType)
+	const [o, q] = valuePair
+	let oldvalue = coerce(o, dataType)
+	const newvalue = coerce(q, dataType)
+
+	if (dataType === DataType.Boolean) {
+		o === 'false' ? (oldvalue = false) : (oldvalue = true)
+	}
 
 	const handleDeleteClick = () => onDelete(oldvalue)
 

@@ -4,8 +4,8 @@
  */
 import { DataType } from '@essex/arquero'
 import { coerce } from '@essex/arquero'
-import type { IDropdownOption} from '@fluentui/react';
-import { Dropdown,SpinButton  } from '@fluentui/react'
+import type { IDropdownOption } from '@fluentui/react'
+import { Dropdown, SpinButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { CalendarPicker } from '../../controls/index.js'
@@ -28,22 +28,17 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 		isKey,
 	}) {
 		const booleanOptions: IDropdownOption[] = [
-			{ key: 'true', text: 'true' },
-			{ key: 'false', text: 'false' },
+			{ key: true, text: 'true' },
+			{ key: false, text: 'false' },
 		]
 
 		const onSelectDate = useCallback(
 			(date: Date): void => {
+				console.log(date)
 				const val = coerce(date, dataType)
 				isKey
-					? onKeyChange(
-							value.toISOString().split('T')[0],
-							val.toISOString().split('T')[0],
-					  )
-					: onValueChange(
-							keyValue.toISOString().split('T')[0],
-							val.toISOString().split('T')[0],
-					  )
+					? onKeyChange(value.toISOString(), val.toISOString())
+					: onValueChange(keyValue.toISOString(), val.toISOString())
 			},
 			[onKeyChange, onValueChange],
 		)
@@ -54,7 +49,9 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 				newValue?: string,
 			) => {
 				const val = coerce(newValue, dataType)
-				isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
+				isKey
+					? onKeyChange(value.toString(), val.toString())
+					: onValueChange(keyValue, val)
 			},
 			[onKeyChange, onValueChange],
 		)
@@ -76,8 +73,9 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 				newValue?: IDropdownOption<any> | undefined,
 			) => {
 				if (newValue !== undefined) {
-					const val = coerce(newValue, dataType)
-					isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
+					isKey
+						? onKeyChange(value, newValue.key)
+						: onValueChange(keyValue, newValue.key)
 				}
 			},
 			[onKeyChange, onValueChange],

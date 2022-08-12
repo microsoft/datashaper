@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import type { Value } from '@essex/arquero'
-import { DataType } from '@essex/arquero'
+import type { DataType,Value  } from '@essex/arquero'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
@@ -127,14 +126,10 @@ export function useHandleAddButtonClick(
 	onChange?: StepChangeFunction<RecodeArgs>,
 ): () => void {
 	return useCallback(() => {
-		let nextValue = next(step, values)
+		const nextValue = next(step, values)
 
 		if (nextValue !== undefined) {
 			// could be a 0 or false...
-			if (dataType === DataType.Date) {
-				nextValue = nextValue.toISOString().split('T')[0]
-			}
-
 			onChange?.({
 				...step,
 				args: {
