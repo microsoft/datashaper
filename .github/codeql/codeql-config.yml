@@ -1,4 +1,4 @@
-name: 'DWC CodeQL Configuration'
+name: 'DataShaper CodeQL Configuration'
 paths:
   - javascript/
   - python/
