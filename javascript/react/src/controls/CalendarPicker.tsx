@@ -22,7 +22,7 @@ import {
 import type { CalendarPickerProps } from './CalendarPicker.types.js'
 
 export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
-	function CalendarPicker({ onSelectDate, disabled, cleanLabel, value }) {
+	function CalendarPicker({ onSelectDate, value, disabled, cleanLabel }) {
 		const [selectedDate, setSelectedDate] = useState<Date>(value ?? new Date())
 		const [
 			showCalendar,
