@@ -50,8 +50,6 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 
 		const disabled = useDisabled(step, values)
 
-		console.log(step)
-
 		return (
 			<Container>
 				<ColumnPairs>{columnPairs}</ColumnPairs>

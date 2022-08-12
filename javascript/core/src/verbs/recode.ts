@@ -21,9 +21,16 @@ export const recodeStep: ColumnTableStep<RecodeArgs> = (
 	input,
 	{ column, to, map },
 ) => {
-	console.log(map)
+	const finalMap: Record<Value, Value> = {}
+
+	for (const key in map) {
+		const dateConversion = new Date(key)
+		const valueConversion = new Date(map[key])
+		finalMap[dateConversion.toString()] = valueConversion
+	}
+
 	input.derive({
-		[to]: escape((d: any) => op.recode(d[column], map)),
+		[to]: escape((d: any) => op.recode(d[column], finalMap)),
 	})
 }
 export const recode = stepVerbFactory(recodeStep)
