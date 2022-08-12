@@ -96,8 +96,6 @@ function useRecodePairs(
 
 const ColumnPair: React.FC<{
 	valuePair: [string, any]
-	step: Step<RecodeArgs>
-	table: ColumnTable | undefined
 	dataType: DataType
 	onKeyChange: (oldKey: Value, newKey: Value) => void
 	onValueChange: (key: Value, newValue: Value) => void

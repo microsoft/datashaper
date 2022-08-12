@@ -20,9 +20,10 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 export const recodeStep: ColumnTableStep<RecodeArgs> = (
 	input,
 	{ column, to, map },
-) =>
+) => {
+	console.log(map)
 	input.derive({
 		[to]: escape((d: any) => op.recode(d[column], map)),
 	})
-
+}
 export const recode = stepVerbFactory(recodeStep)
