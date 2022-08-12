@@ -7,7 +7,7 @@ import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStor
 import { RowGroupingTestStory } from './RowGroupingTestStory/RowGroupingTestStory.js'
 
 const meta = {
-	title: '@essex:arquero-react/ArqueroDetailsList',
+	title: 'ArqueroDetailsList',
 }
 
 export default meta

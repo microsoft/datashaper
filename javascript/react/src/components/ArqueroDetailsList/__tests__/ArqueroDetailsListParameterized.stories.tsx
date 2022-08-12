@@ -12,7 +12,7 @@ import {
 } from '../ArqueroDetailsList.types.js'
 
 export default {
-	title: '@essex:arquero-react/ArqueroDetailsList',
+	title: 'ArqueroDetailsList',
 
 	component: ArqueroDetailsList,
 	argTypes: {},

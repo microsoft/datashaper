@@ -47,7 +47,7 @@ module.exports = {
 		}
 		const xformEssex = {
 			...config.module.rules[0],
-			include: /@essex\/(arquero|dataflow|styled-components)/,
+			include: /@essex\/(styled-components)/,
 			exclude: undefined,
 		}
 		const importMeta = {
