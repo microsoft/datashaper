@@ -124,6 +124,7 @@ const ColumnPair: React.FC<{
 				dataType={dataType}
 				value={oldvalue}
 				onKeyChange={onKeyChange}
+				onValueChange={onKeyChange}
 				isKey={true}
 				keyValue={oldvalue}
 			/>
@@ -138,6 +139,7 @@ const ColumnPair: React.FC<{
 				dataType={dataType}
 				keyValue={oldvalue}
 				value={newvalue}
+				onKeyChange={onValueChange}
 				onValueChange={onValueChange}
 				isKey={false}
 			/>

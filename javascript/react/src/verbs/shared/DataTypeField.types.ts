@@ -10,7 +10,7 @@ export interface DataTypeFieldProps {
 	keyValue: string
 	value: Value
 	placeholder: string
-	onKeyChange?: (oldKey: Value, newKey: Value) => void
-	onValueChange?: (previous: Value, oldvalue: Value, newvalue: Value) => void
+	onKeyChange: (oldKey: Value, newKey: Value) => void
+	onValueChange: (key: Value, newValue: Value) => void
 	isKey: boolean
 }
