@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataType } from '@datashaper/arquero'
+import type { DataType, Value } from '@datashaper/arquero'
 import { columnType } from '@datashaper/arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type { RowObject } from 'arquero/dist/types/table/table'
@@ -28,8 +28,8 @@ export function firstOneWinsStrategy(
 	isSameDataTypeFlag: boolean,
 	singleRow: RowObject,
 	columns: string[],
-) {
-	let firstValidValue: object = singleRow[columns[0]!]
+): Value {
+	let firstValidValue: Value = singleRow[columns[0]!]
 	let foundFirstValidValue = false
 	let i = 0
 
@@ -51,8 +51,8 @@ export function lastOneWinsStrategy(
 	isSameDataTypeFlag: boolean,
 	singleRow: RowObject,
 	columns: string[],
-) {
-	let lastValidValue: object = singleRow[columns[0]!]
+): Value {
+	let lastValidValue: Value = singleRow[columns[0]!]
 
 	for (let i = 0; i < columns.length; i++) {
 		if (
@@ -66,7 +66,10 @@ export function lastOneWinsStrategy(
 	return isSameDataTypeFlag ? lastValidValue : '' + lastValidValue
 }
 
-export function arrayStrategy(singleRow: RowObject, columns: string[]) {
+export function arrayStrategy(
+	singleRow: RowObject,
+	columns: string[],
+): Value[] {
 	const concat = []
 
 	for (let i = 0; i < columns.length; i++) {
@@ -85,6 +88,6 @@ export function concatStrategy(
 	singleRow: RowObject,
 	columns: string[],
 	delimiter: string,
-) {
+): string {
 	return arrayStrategy(singleRow, columns).join(delimiter)
 }
