@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import type { DataType,Value  } from '@essex/arquero'
+import type { DataType, Value } from '@essex/arquero'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
@@ -122,7 +122,6 @@ function next(step: Step<RecodeArgs>, values: Value[]): Value | undefined {
 export function useHandleAddButtonClick(
 	step: Step<RecodeArgs>,
 	values: Value[],
-	dataType: DataType,
 	onChange?: StepChangeFunction<RecodeArgs>,
 ): () => void {
 	return useCallback(() => {

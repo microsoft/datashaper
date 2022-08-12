@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import styled from '@essex/styled-components'
-import { Label, TextField, Toggle } from '@fluentui/react'
+import { Label, TextField } from '@fluentui/react'
 
 import { narrowDropdownStyles } from '../../styles.js'
 

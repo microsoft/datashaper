@@ -23,7 +23,7 @@ import type { CalendarPickerProps } from './CalendarPicker.types.js'
 
 export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 	function CalendarPicker({ onSelectDate, disabled, cleanLabel, value }) {
-		const [selectedDate, setSelectedDate] = useState<Date>(value ?? null)
+		const [selectedDate, setSelectedDate] = useState<Date>(value ?? new Date())
 		const [
 			showCalendar,
 			{ toggle: toggleShowCalendar, setFalse: hideCalendar },

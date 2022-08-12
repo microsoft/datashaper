@@ -28,8 +28,8 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 		isKey,
 	}) {
 		const booleanOptions: IDropdownOption[] = [
-			{ key: true, text: 'true' },
-			{ key: false, text: 'false' },
+			{ key: 'true', text: 'true' },
+			{ key: 'false', text: 'false' },
 		]
 
 		const onSelectDate = useCallback(
@@ -75,7 +75,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 				if (newValue !== undefined) {
 					isKey
 						? onKeyChange(value, newValue.key)
-						: onValueChange(keyValue, newValue.key)
+						: onValueChange(keyValue, newValue.key === 'true' ? true : false)
 				}
 			},
 			[onKeyChange, onValueChange],
@@ -107,7 +107,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 
 				{dataType === DataType.Boolean ? (
 					<Dropdown
-						selectedKey={value}
+						selectedKey={value.toString()}
 						options={booleanOptions}
 						styles={dropdownStyles}
 						onChange={dropDownOnChange}

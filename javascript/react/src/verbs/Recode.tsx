@@ -4,7 +4,7 @@
  */
 import type { RecodeArgs, Step } from '@data-wrangling-components/core'
 import type { Value } from '@essex/arquero'
-import { coerce,DataType  } from '@essex/arquero'
+import { coerce, DataType } from '@essex/arquero'
 import styled from '@essex/styled-components'
 import { ActionButton, Icon, IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -37,12 +37,7 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 		const handleRecodeKeyChange = useHandleKeyChange(step, onChange)
 		const handleRecodeValueChange = useHandleValueChange(step, onChange)
 		const handleRecodeDelete = useRecodeDelete(step, onChange)
-		const handleButtonClick = useHandleAddButtonClick(
-			step,
-			values,
-			dataType,
-			onChange,
-		)
+		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
 
 		const columnPairs = useRecodePairs(
 			dataTable,
@@ -87,8 +82,6 @@ function useRecodePairs(
 			const oldvalue = coerce(o, dataType)
 			return (
 				<ColumnPair
-					step={step}
-					table={table}
 					valuePair={valuePair}
 					dataType={dataType}
 					key={`column-Recode-${oldvalue}-${index}`}
@@ -111,8 +104,6 @@ const ColumnPair: React.FC<{
 	onDelete: (value: Value) => void
 }> = memo(function ColumnPair({
 	valuePair,
-	step,
-	table,
 	dataType,
 	onKeyChange,
 	onValueChange,
