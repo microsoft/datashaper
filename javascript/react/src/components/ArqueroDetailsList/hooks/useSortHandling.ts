@@ -4,9 +4,9 @@
  */
 import { SortDirection } from '@datashaper/arquero'
 import type { IColumn } from '@fluentui/react'
+import noop from 'lodash-es/noop.js'
 import { useCallback, useState } from 'react'
 
-import { noop } from '../../functions.js'
 import type { ColumnClickFunction } from '../index.js'
 
 export interface SortParameters {

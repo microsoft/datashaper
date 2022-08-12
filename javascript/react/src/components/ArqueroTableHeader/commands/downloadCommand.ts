@@ -2,11 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { downloadTable } from '@datashaper/utilities'
 import type { ICommandBarItemProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import merge from 'lodash-es/merge.js'
-
-import { downloadTable } from '../../functions.js'
 /**
  * Constructs a download command.
  * When clicked, will save the current table to a csv.
