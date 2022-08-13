@@ -27,17 +27,56 @@ export function useColumnValues(
 	}, [table, step])
 }
 
-export function useHandleRecodeChange(
+export function useHandleKeyChange(
 	step: Step<RecodeArgs>,
 	onChange?: StepChangeFunction<RecodeArgs>,
-): (previous: Value, oldValue: Value, newValue: Value) => void {
+): (previousKey: Value, newKey: Value) => void {
 	return useCallback(
-		(previous, oldValue, newValue) => {
-			const map = {
+		(previousKey, newKey) => {
+			const mapList = {
 				...step.args.map,
 			}
-			delete map[previous]
-			map[oldValue] = newValue
+
+			const map: Record<string, string> = {}
+
+			for (const key in mapList) {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				key === previousKey.toString()
+					? (map[newKey] = mapList[key])
+					: (map[key] = mapList[key]!)
+			}
+
+			onChange?.({
+				...step,
+				args: {
+					...step.args,
+					map,
+				},
+			})
+		},
+		[step, onChange],
+	)
+}
+
+export function useHandleValueChange(
+	step: Step<RecodeArgs>,
+	onChange?: StepChangeFunction<RecodeArgs>,
+): (key: Value, newValue: Value) => void {
+	return useCallback(
+		(key, newValue) => {
+			const mapList = {
+				...step.args.map,
+			}
+
+			const map: Record<string, string> = {}
+
+			for (const keyElement in mapList) {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				keyElement === key.toString()
+					? (map[keyElement] = newValue)
+					: (map[keyElement] = mapList[keyElement]!)
+			}
+
 			onChange?.({
 				...step,
 				args: {
@@ -87,6 +126,7 @@ export function useHandleAddButtonClick(
 ): () => void {
 	return useCallback(() => {
 		const nextValue = next(step, values)
+
 		if (nextValue !== undefined) {
 			// could be a 0 or false...
 			onChange?.({
