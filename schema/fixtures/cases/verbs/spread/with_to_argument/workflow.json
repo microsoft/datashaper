@@ -1,5 +1,5 @@
 {
-	"$schema": "https://microsoft.github.io/data-wrangling-components/schema/workflow.json",
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow.json",
 	"steps": [
 		{
 			"verb": "spread",

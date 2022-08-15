@@ -1,0 +1,9 @@
+declined:
+  - "@datashaper/arquero"
+  - "@datashaper/core"
+  - "@datashaper/dataflow"
+  - "@datashaper/react"
+  - "@datashaper/schema"
+  - "@datashaper/utilities"
+  - "@datashaper/verb-guidance"
+  - "@datashaper/webapp"

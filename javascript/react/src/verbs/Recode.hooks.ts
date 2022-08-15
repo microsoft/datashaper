@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import type { Value } from '@essex/arquero'
+import type { Value } from '@datashaper/arquero'
+import type { RecodeArgs, Step } from '@datashaper/core'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'

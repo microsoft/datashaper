@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { WorkflowObject } from '@data-wrangling-components/core'
-import { FileCollection, FileType } from '@data-wrangling-components/utilities'
-import type { TableContainer } from '@essex/arquero'
+import type { TableContainer } from '@datashaper/arquero'
+import type { WorkflowObject } from '@datashaper/core'
+import { FileCollection, FileType } from '@datashaper/utilities'
 import { useCallback } from 'react'
 
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {

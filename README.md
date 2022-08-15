@@ -1,4 +1,4 @@
-# data-wrangling-components
+# datashaper
 
 This project provides a collection of web components for doing lightweight data wrangling.
 
@@ -37,7 +37,7 @@ Example joining two tables:
 
 ```
     import { table } from 'arquero'
-    import { createTableStore, createPipeline } from '@data-wrangling-components/core'
+    import { createTableStore, createPipeline } from '@datashaper/core'
 
     // id   name
     // 1    bob

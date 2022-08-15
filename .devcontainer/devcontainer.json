@@ -1,5 +1,5 @@
 {
-	"name": "Data Wrangling Components",
+	"name": "DataShaper",
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"arcanis.vscode-zipfs",

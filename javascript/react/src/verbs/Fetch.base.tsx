@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FetchArgs } from '@data-wrangling-components/core'
-import { num } from '@data-wrangling-components/utilities'
+import type { FetchArgs } from '@datashaper/core'
+import { num } from '@datashaper/utilities'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentProps } from '../types.js'

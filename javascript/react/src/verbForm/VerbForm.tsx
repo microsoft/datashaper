@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@data-wrangling-components/core'
+import type { Step } from '@datashaper/core'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import {
 	Checkbox,
@@ -26,7 +26,7 @@ import {
 	useSpinButtonChangeHandler,
 	useTextFieldChangeHandler,
 } from '../hooks/index.js'
-import { checkboxStyles,dropdownStyles } from '../styles.js'
+import { checkboxStyles, dropdownStyles } from '../styles.js'
 import type { StepChangeFunction } from '../types.js'
 import { useSortedInputs } from './VerbForm.hooks.js'
 import { Container, InputsBlock, Row } from './VerbForm.styles.js'

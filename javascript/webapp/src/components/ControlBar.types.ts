@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Workflow } from '@data-wrangling-components/core'
-import type { TableContainer } from '@essex/arquero'
-import type { DetailsListFeatures } from '@essex/arquero-react'
+import type { TableContainer } from '@datashaper/arquero'
+import type { Workflow } from '@datashaper/core'
+import type { DetailsListFeatures } from '@datashaper/react'
 
 export interface ControlBarProps {
 	selected?: Workflow

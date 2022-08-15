@@ -1,5 +1,5 @@
 {
-	"name": "@data-wrangling-components/react",
+	"name": "@datashaper/react",
 	"version": "6.5.0",
 	"type": "module",
 	"main": "src/index.ts",
@@ -21,28 +21,26 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/microsoft/data-wrangling-components"
+		"url": "git+https://github.com/microsoft/datashaper"
 	},
 	"bugs": {
-		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+		"url": "https://github.com/microsoft/datashaper/issues"
 	},
 	"scripts": {
 		"clean": "essex clean dist docs storybook-static",
 		"build": "essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
 		"release": "yarn npm publish --tolerate-republish --access public",
-		"bundle": "build-storybook --quiet",
 		"start": "start-storybook -p 6006",
 		"start:storybook": "yarn start"
 	},
 	"dependencies": {
-		"@data-wrangling-components/core": "workspace:^",
-		"@data-wrangling-components/utilities": "workspace:^",
-		"@data-wrangling-components/verb-guidance": "workspace:^",
-		"@essex/arquero": "^3.1.0",
-		"@essex/arquero-react": "^1.2.0",
+		"@datashaper/arquero": "workspace:^",
+		"@datashaper/core": "workspace:^",
+		"@datashaper/dataflow": "workspace:^",
+		"@datashaper/utilities": "workspace:^",
+		"@datashaper/verb-guidance": "workspace:^",
 		"@essex/charts-react": "^1.0.5",
-		"@essex/dataflow": "^0.1.2",
 		"@essex/styled-components": "^0.0.2",
 		"@essex/themed-components": "^2.2.7",
 		"@fluentui/font-icons-mdl2": "^8.4.2",

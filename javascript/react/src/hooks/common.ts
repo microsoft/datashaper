@@ -2,13 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	GraphManager,
-	Step,
-	Workflow,
-} from '@data-wrangling-components/core'
-import { createGraphManager, readStep } from '@data-wrangling-components/core'
-import type { TableContainer } from '@essex/arquero'
+import type { TableContainer } from '@datashaper/arquero'
+import type { GraphManager, Step, Workflow } from '@datashaper/core'
+import { createGraphManager, readStep } from '@datashaper/core'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useMemo } from 'react'
 

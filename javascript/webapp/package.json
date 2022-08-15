@@ -1,5 +1,5 @@
 {
-	"name": "@data-wrangling-components/webapp",
+	"name": "@datashaper/webapp",
 	"private": true,
 	"version": "3.3.0",
 	"main": "src/index.ts",
@@ -16,10 +16,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/microsoft/data-wrangling-components"
+		"url": "git+https://github.com/microsoft/datashaper"
 	},
 	"bugs": {
-		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+		"url": "https://github.com/microsoft/datashaper/issues"
 	},
 	"scripts": {
 		"clean": "essex clean build dist lib node_modules",
@@ -29,12 +29,11 @@
 		"lint": "essex lint --fix"
 	},
 	"dependencies": {
-		"@data-wrangling-components/core": "workspace:^",
-		"@data-wrangling-components/react": "workspace:^",
-		"@data-wrangling-components/utilities": "workspace:^",
-		"@data-wrangling-components/verb-guidance": "workspace:^",
-		"@essex/arquero": "^3.0.0",
-		"@essex/arquero-react": "^1.1.0",
+		"@datashaper/arquero": "workspace:^",
+		"@datashaper/core": "workspace:^",
+		"@datashaper/react": "workspace:^",
+		"@datashaper/utilities": "workspace:^",
+		"@datashaper/verb-guidance": "workspace:^",
 		"@essex/hooks": "^4.0.12",
 		"@essex/themed-components": "^2.2.7",
 		"@essex/webpack-config": "^21.0.5",

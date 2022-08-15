@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RecodeArgs, Step } from '@data-wrangling-components/core'
-import type { Value } from '@essex/arquero'
-import { coerce, DataType } from '@essex/arquero'
+import type { Value } from '@datashaper/arquero'
+import { coerce , DataType} from '@datashaper/arquero'
+import type { RecodeArgs, Step } from '@datashaper/core'
 import styled from '@essex/styled-components'
 import { ActionButton, Icon, IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

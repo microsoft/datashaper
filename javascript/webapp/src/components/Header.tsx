@@ -20,7 +20,7 @@ export const Header: React.FC<HeaderProps> = memo(function Header({
 				className={classNames.white}
 				onClick={onMenuClick}
 			/>
-			<Title>Data Wrangling Components</Title>
+			<Title>DataShaper</Title>
 			<Spacer />
 			<FontIcon
 				aria-label="Settings"

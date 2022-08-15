@@ -1,0 +1,32 @@
+{
+	"name": "@datashaper/dataflow",
+	"description": "Reactive, graph-based dataflows",
+	"version": "0.1.2",
+	"type": "module",
+	"main": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts"
+	},
+	"sideEffects": false,
+	"scripts": {
+		"clean": "essex clean",
+		"build": "essex build --skipExportCheck",
+		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
+		"lint": "essex lint",
+		"release": "yarn npm publish --tolerate-republish --access public"
+	},
+	"dependencies": {
+		"@essex/toposort": "^1.0.1",
+		"rxjs": "^7.5.5",
+		"uuid": "^8.3.2"
+	},
+	"devDependencies": {
+		"@essex/jest-config": "^21.0.12",
+		"@essex/scripts": "^22.0.4",
+		"@essex/tsconfig-base": "^1.0.2",
+		"@types/jest": "^27.5.1",
+		"@types/uuid": "^8.3.4",
+		"jest": "^28.1.0"
+	}
+}

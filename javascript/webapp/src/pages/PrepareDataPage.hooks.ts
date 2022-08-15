@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { renameDuplicatedFileName } from '@data-wrangling-components/utilities'
-import type { TableContainer } from '@essex/arquero'
+import type { TableContainer } from '@datashaper/arquero'
+import { renameDuplicatedFileName } from '@datashaper/utilities'
 import { useCallback, useState } from 'react'
 
 export function useTables(setSelectedTableId: (id: string) => void): {

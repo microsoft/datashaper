@@ -24,6 +24,13 @@ export {
 /*
  * Exported Components
  */
+export type {
+	ArqueroDetailsListProps,
+	DetailsListFeatures,
+} from './components/ArqueroDetailsList/ArqueroDetailsList.types.js'
+export * from './components/ArqueroDetailsList/index.js'
+export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/ArqueroTableheader.types.js'
+export * from './components/ArqueroTableHeader/index.js'
 export { CommandBar } from './components/CommandBar.js'
 export type { CommandBarProps } from './components/CommandBar.types.js'
 export { Dropzone } from './components/Dropzone.js'
@@ -31,6 +38,8 @@ export type {
 	DropzoneProps,
 	FileRejection,
 } from './components/Dropzone.types.js'
+export type { GroupHeaderProps } from './components/GroupHeader/GroupHeader.types.js'
+export { GroupHeader } from './components/GroupHeader/index.js'
 export { Guidance } from './components/Guidance.js'
 export type { GuidanceProps } from './components/Guidance.types.js'
 export { ManageWorkflow } from './components/ManageWorkflow.js'

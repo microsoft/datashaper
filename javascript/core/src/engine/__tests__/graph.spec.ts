@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@essex/arquero'
+import type { TableContainer } from '@datashaper/arquero'
 import { table } from 'arquero'
 
 import { createTableStore } from '../../__tests__/createTableStore.js'
@@ -24,7 +24,7 @@ describe('stepGraph', () => {
 			new Workflow(
 				{
 					$schema:
-						'https://microsoft.github.io/data-wrangling-components/schema/workflow/workflow.json',
+						'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 					input: ['input'],
 					steps: [
 						{
@@ -55,7 +55,7 @@ describe('stepGraph', () => {
 			new Workflow(
 				{
 					$schema:
-						'https://microsoft.github.io/data-wrangling-components/schema/workflow/workflow.json',
+						'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 					input: ['input'],
 					steps: [
 						{

@@ -36,10 +36,10 @@ import type {
 	UnrollArgs,
 	Verb,
 	WindowArgs,
-} from '@data-wrangling-components/core'
+} from '@datashaper/core'
 
 /**
- * The root data-wrangling specification. (Used for generating JSON Schema)
+ * The root wrangling workflow specification. (Used for generating JSON Schema)
  */
 export interface WorkflowJson {
 	/**

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { OrderbyArgs } from '@data-wrangling-components/core'
+import type { OrderbyArgs } from '@datashaper/core'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types.js'

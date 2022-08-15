@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@essex/arquero'
-import type { Graph, Node } from '@essex/dataflow'
-import { DefaultGraph, observableNode } from '@essex/dataflow'
+import type { TableContainer } from '@datashaper/arquero'
+import type { Graph, Node } from '@datashaper/dataflow'
+import { DefaultGraph, observableNode } from '@datashaper/dataflow'
 import type { Observable, Subscription } from 'rxjs'
 import { from, Subject } from 'rxjs'
 

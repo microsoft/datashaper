@@ -1,5 +1,5 @@
 {
-	"name": "@data-wrangling-components/core",
+	"name": "@datashaper/core",
 	"version": "7.1.1",
 	"type": "module",
 	"main": "src/index.ts",
@@ -21,10 +21,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/microsoft/data-wrangling-components"
+		"url": "git+https://github.com/microsoft/datashaper"
 	},
 	"bugs": {
-		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+		"url": "https://github.com/microsoft/datashaper/issues"
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
@@ -34,8 +34,8 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
-		"@essex/arquero": "^3.0.0",
-		"@essex/dataflow": "^0.1.2",
+		"@datashaper/arquero": "workspace:^",
+		"@datashaper/dataflow": "workspace:^",
 		"ajv": "^8.11.0",
 		"d3-time-format": "^4.1.0",
 		"lodash-es": "^4.17.21",

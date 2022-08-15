@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { MergeArgs } from '@data-wrangling-components/core'
-import { MergeStrategy } from '@data-wrangling-components/core'
+import type { MergeArgs } from '@datashaper/core'
+import { MergeStrategy } from '@datashaper/core'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Value } from '@essex/arquero'
+import type { Value } from '@datashaper/arquero'
 import { escape, op } from 'arquero'
 
 import type { InputColumnArgs, OutputColumnArgs } from './types.js'

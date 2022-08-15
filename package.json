@@ -1,5 +1,5 @@
 {
-	"name": "@data-wrangling-components/project",
+	"name": "@datashaper/project",
 	"private": true,
 	"scripts": {
 		"_release_packages": "turbo run release",

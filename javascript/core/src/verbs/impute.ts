@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Value } from '@essex/arquero'
+import type { Value } from '@datashaper/arquero'
 
 import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'

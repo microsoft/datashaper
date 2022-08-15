@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { OrderbyInstruction } from '@data-wrangling-components/core'
-import { SortDirection } from '@essex/arquero'
+import { SortDirection } from '@datashaper/arquero'
+import type { OrderbyInstruction } from '@datashaper/core'
 import type { IDropdownOption } from '@fluentui/react'
 import { useCallback } from 'react'
 

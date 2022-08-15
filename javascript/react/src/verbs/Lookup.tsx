@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { LookupArgs } from '@data-wrangling-components/core'
-import { NodeInput } from '@essex/dataflow'
+import type { LookupArgs } from '@datashaper/core'
+import { NodeInput } from '@datashaper/dataflow'
 import { memo } from 'react'
 
 import {

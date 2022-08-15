@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ArqueroDetailsList, ArqueroTableHeader } from '@essex/arquero-react'
+import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
 import type { IColumn, IDropdownOption } from '@fluentui/react'
 import { memo, useCallback, useEffect, useState } from 'react'
 

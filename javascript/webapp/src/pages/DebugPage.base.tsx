@@ -2,7 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { DetailsListFeatures } from '@datashaper/react'
 import {
+	StatsColumnType,
 	StepSelector,
 	useGraphManager,
 	useGraphSteps,
@@ -10,9 +12,7 @@ import {
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useStepOutputs,
-} from '@data-wrangling-components/react'
-import type { DetailsListFeatures } from '@essex/arquero-react'
-import { StatsColumnType } from '@essex/arquero-react'
+} from '@datashaper/react'
 import { ActionButton } from '@fluentui/react'
 import { memo, useState } from 'react'
 

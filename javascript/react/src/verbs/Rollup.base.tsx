@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RollupArgs } from '@data-wrangling-components/core'
-import { FieldAggregateOperation } from '@data-wrangling-components/core'
+import type { RollupArgs } from '@datashaper/core'
+import { FieldAggregateOperation } from '@datashaper/core'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentProps } from '../types.js'
@@ -24,7 +24,7 @@ export const RollupBase: React.FC<StepComponentProps<RollupArgs>> = memo(
 					FieldAggregateOperation,
 					step.args.operation,
 					(s, val) => (s.args.operation = val as FieldAggregateOperation),
-					{ required: true }
+					{ required: true },
 				),
 			],
 			[step],

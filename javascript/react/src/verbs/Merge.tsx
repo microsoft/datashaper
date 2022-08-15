@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { MergeArgs } from '@data-wrangling-components/core'
+import type { MergeArgs } from '@datashaper/core'
 import { memo } from 'react'
 
-import { useStepDataTable,useTableColumnNames } from '../hooks/index.js'
+import { useStepDataTable, useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { MergeBase } from './Merge.base.js'
 

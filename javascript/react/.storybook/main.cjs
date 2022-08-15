@@ -42,12 +42,12 @@ module.exports = {
 		// run transpiler over monorepo linked projects
 		const xformDwc = {
 			...config.module.rules[0],
-			include: /@data-wrangling-components/,
+			include: /@datashaper/,
 			exclude: undefined,
 		}
 		const xformEssex = {
 			...config.module.rules[0],
-			include: /@essex\/(arquero|dataflow|styled-components)/,
+			include: /@essex\/(styled-components)/,
 			exclude: undefined,
 		}
 		const importMeta = {

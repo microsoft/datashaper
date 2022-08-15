@@ -1,5 +1,5 @@
 {
-	"name": "@data-wrangling-components/schema",
+	"name": "@datashaper/schema",
 	"version": "1.4.2",
 	"type": "module",
 	"main": "src/index.ts",
@@ -21,10 +21,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/microsoft/data-wrangling-components"
+		"url": "git+https://github.com/microsoft/datashaper"
 	},
 	"bugs": {
-		"url": "https://github.com/microsoft/data-wrangling-components/issues"
+		"url": "https://github.com/microsoft/datashaper/issues"
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
@@ -34,7 +34,7 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
-		"@data-wrangling-components/core": "workspace:^"
+		"@datashaper/core": "workspace:^"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.5",

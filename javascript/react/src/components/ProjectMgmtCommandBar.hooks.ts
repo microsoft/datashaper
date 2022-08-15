@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { WorkflowObject } from '@data-wrangling-components/core'
-import { Workflow } from '@data-wrangling-components/core'
-import type { TableContainer } from '@essex/arquero'
+import type { TableContainer } from '@datashaper/arquero'
+import type { WorkflowObject } from '@datashaper/core'
+import { Workflow } from '@datashaper/core'
 import type { ICommandBarItemProps } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 

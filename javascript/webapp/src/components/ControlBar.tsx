@@ -2,14 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Workflow } from '@data-wrangling-components/core'
-import type { FileWithPath } from '@data-wrangling-components/utilities'
+import { Workflow } from '@datashaper/core'
+import type { FileWithPath } from '@datashaper/utilities'
 import {
 	FileCollection,
 	FileExtensions,
 	FileMimeType,
 	FileType,
-} from '@data-wrangling-components/utilities'
+} from '@datashaper/utilities'
 import { Checkbox } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 

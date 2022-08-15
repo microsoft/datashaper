@@ -13,7 +13,7 @@ import {
 	firstOneWinsStrategy,
 	isSameDataType,
 	lastOneWinsStrategy,
-} from './util/merge-utils.js'
+} from './util/merge.js'
 import { unhotOperation } from './util/unhot-logic.js'
 
 export enum MergeStrategy {

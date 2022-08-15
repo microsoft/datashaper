@@ -770,7 +770,7 @@
             "type": "string"
         }
     },
-    "description": "The root data-wrangling specification. (Used for generating JSON Schema)",
+    "description": "The root wrangling workflow specification. (Used for generating JSON Schema)",
     "properties": {
         "description": {
             "description": "A user-friendly description of the specification",

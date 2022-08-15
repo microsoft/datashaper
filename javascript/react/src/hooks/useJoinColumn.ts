@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs, Step } from '@data-wrangling-components/core'
+import type { JoinArgs, Step } from '@datashaper/core'
 import { useMemo } from 'react'
 
 export function useLeftColumn(step: Step<JoinArgs>): string | undefined {

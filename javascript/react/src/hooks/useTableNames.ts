@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager } from '@data-wrangling-components/core'
-import { useCallback,useEffect, useState } from 'react'
+import type { GraphManager } from '@datashaper/core'
+import { useCallback, useEffect, useState } from 'react'
 
 /**
  * Creates a list of table-names from the tables in a store

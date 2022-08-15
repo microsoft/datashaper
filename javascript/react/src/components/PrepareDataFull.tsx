@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableMetadata } from '@essex/arquero'
+import type { TableMetadata } from '@datashaper/arquero'
 import { Icon } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback } from 'react'

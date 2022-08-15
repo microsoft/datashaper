@@ -2,14 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { DataType } from '@datashaper/arquero'
 import {
 	BooleanComparisonOperator,
 	DateComparisonOperator,
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '@data-wrangling-components/core'
-import { DataType } from '@essex/arquero'
+} from '@datashaper/core'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton, SpinButton } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'

@@ -2,12 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	OrderbyArgs,
-	OrderbyInstruction,
-	Step,
-} from '@data-wrangling-components/core'
-import { SortDirection } from '@essex/arquero'
+import { SortDirection } from '@datashaper/arquero'
+import type { OrderbyArgs, OrderbyInstruction, Step } from '@datashaper/core'
 import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'

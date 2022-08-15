@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@essex/arquero'
-import { container } from '@essex/arquero'
-import type { StepFunction } from '@essex/dataflow'
-import { BaseVariadicNode, StepNode } from '@essex/dataflow'
+import type { TableContainer } from '@datashaper/arquero'
+import { container } from '@datashaper/arquero'
+import type { StepFunction } from '@datashaper/dataflow'
+import { BaseVariadicNode, StepNode } from '@datashaper/dataflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { Maybe } from '../../primitives.js'

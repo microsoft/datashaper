@@ -2,13 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Criterion } from '@data-wrangling-components/core'
+import { columnTypes, DataType } from '@datashaper/arquero'
+import type { Criterion } from '@datashaper/core'
 import {
 	BooleanComparisonOperator,
 	DateComparisonOperator,
 	NumericComparisonOperator,
-	StringComparisonOperator} from '@data-wrangling-components/core'
-import { columnTypes, DataType } from '@essex/arquero'
+	StringComparisonOperator,
+} from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
@@ -25,7 +26,7 @@ export function useIsEmpty(criterion: Criterion): boolean {
 			operator === BooleanComparisonOperator.IsEmpty ||
 			operator === BooleanComparisonOperator.IsNotEmpty ||
 			operator === DateComparisonOperator.IsEmpty ||
-			operator === DateComparisonOperator.IsNotEmpty 
+			operator === DateComparisonOperator.IsNotEmpty
 		)
 	}, [criterion])
 }
