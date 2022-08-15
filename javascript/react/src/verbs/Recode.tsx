@@ -2,29 +2,25 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataType, Value } from '@datashaper/arquero'
-import { coerce } from '@datashaper/arquero'
+import type { Value } from '@datashaper/arquero'
+import { coerce , DataType} from '@datashaper/arquero'
 import type { RecodeArgs, Step } from '@datashaper/core'
 import styled from '@essex/styled-components'
-import type { IDropdownOption } from '@fluentui/react'
-import { ActionButton, Icon, IconButton, TextField } from '@fluentui/react'
+import { ActionButton, Icon, IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
-import { ColumnValueDropdown } from '../controls/index.js'
-import {
-	useColumnType,
-	useColumnValueOptions,
-	useStepDataTable,
-} from '../hooks/index.js'
+import { useColumnType, useStepDataTable } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import {
 	useColumnValues,
 	useDisabled,
 	useHandleAddButtonClick,
-	useHandleRecodeChange,
+	useHandleKeyChange,
+	useHandleValueChange,
 	useRecodeDelete,
 } from './Recode.hooks.js'
+import { DataTypeField } from './shared/DataTypeField.js'
 
 /**
  * Provides inputs for a RecodeStep.
@@ -32,9 +28,14 @@ import {
 export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 	function Recode({ step, graph, input, table, onChange }) {
 		const dataTable = useStepDataTable(step, graph, input, table)
-		const values = useColumnValues(step, dataTable)
 		const dataType = useColumnType(dataTable, step.args.column)
-		const handleRecodeChange = useHandleRecodeChange(step, onChange)
+		const initialValues = useColumnValues(step, dataTable)
+		const values =
+			dataType === DataType.Date
+				? initialValues.map(e => e.toISOString())
+				: initialValues
+		const handleRecodeKeyChange = useHandleKeyChange(step, onChange)
+		const handleRecodeValueChange = useHandleValueChange(step, onChange)
 		const handleRecodeDelete = useRecodeDelete(step, onChange)
 		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
 
@@ -42,7 +43,8 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 			dataTable,
 			step,
 			dataType,
-			handleRecodeChange,
+			handleRecodeKeyChange,
+			handleRecodeValueChange,
 			handleRecodeDelete,
 		)
 
@@ -67,7 +69,8 @@ function useRecodePairs(
 	table: ColumnTable | undefined,
 	step: Step<RecodeArgs>,
 	dataType: DataType,
-	onChange: (previous: Value, oldvalue: Value, newvalue: Value) => void,
+	onKeyChange: (oldKey: Value, newKey: Value) => void,
+	onValueChange: (key: Value, newValue: Value) => void,
 	onDelete: (value: Value) => void,
 ) {
 	return useMemo(() => {
@@ -77,89 +80,70 @@ function useRecodePairs(
 			const oldvalue = coerce(o, dataType)
 			return (
 				<ColumnPair
-					step={step}
-					table={table}
 					valuePair={valuePair}
 					dataType={dataType}
 					key={`column-Recode-${oldvalue}-${index}`}
-					onChange={onChange}
+					onKeyChange={onKeyChange}
+					onValueChange={onValueChange}
 					onDelete={onDelete}
 				/>
 			)
 		})
-	}, [table, step, dataType, onChange, onDelete])
+	}, [table, step, dataType, onKeyChange, onValueChange, onDelete])
 }
 
 const ColumnPair: React.FC<{
 	valuePair: [string, any]
-	step: Step<RecodeArgs>
-	table: ColumnTable | undefined
 	dataType: DataType
-	onChange: (previous: Value, oldvalue: Value, newvalue: Value) => void
+	onKeyChange: (oldKey: Value, newKey: Value) => void
+	onValueChange: (key: Value, newValue: Value) => void
 	onDelete: (value: Value) => void
 }> = memo(function ColumnPair({
 	valuePair,
-	step,
-	table,
 	dataType,
-	onChange,
+	onKeyChange,
+	onValueChange,
 	onDelete,
 }) {
 	// the old value will always come off the map as a string key
 	// coerce it to the column type for proper comparison
-	const [o, newvalue] = valuePair
-	const oldvalue = coerce(o, dataType)
-	const valueFilter = (value: Value) => {
-		if (value === oldvalue) {
-			return true
-		}
-		if (step.args.map && step.args.map[value]) {
-			return false
-		}
-		return true
+	const [o, q] = valuePair
+	let oldvalue = coerce(o, dataType)
+	const newvalue = coerce(q, dataType)
+
+	if (dataType === DataType.Boolean) {
+		o === 'false' ? (oldvalue = false) : (oldvalue = true)
 	}
-	const handleSourceChange = (
-		_e: React.FormEvent<HTMLDivElement>,
-		opt?: IDropdownOption<any> | undefined,
-	) => onChange(oldvalue, opt?.key || oldvalue, newvalue)
-	const handleTextChange = (
-		_e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
-		newValue?: string,
-	) => {
-		// this does force the new value to match the old type, preventing mappings like 0 -> false
-		const val = coerce(newValue, dataType)
-		onChange(oldvalue, oldvalue, val)
-	}
+
 	const handleDeleteClick = () => onDelete(oldvalue)
-	const options = useColumnValueOptions(
-		step.args.column,
-		table,
-		undefined,
-		valueFilter,
-	)
+
 	return (
 		<ColumnPairContainer>
-			<ColumnValueDropdown
-				options={options}
-				label={undefined}
-				selectedKey={oldvalue}
-				onChange={handleSourceChange}
-				styles={{
-					root: {
-						width: 130,
-					},
-				}}
+			<DataTypeField
+				placeholder={'Current value'}
+				dataType={dataType}
+				value={oldvalue}
+				onKeyChange={onKeyChange}
+				onValueChange={onKeyChange}
+				isKey={true}
+				keyValue={oldvalue}
 			/>
+
 			<Icon
 				iconName={'Forward'}
 				styles={{ root: { marginLeft: 4, marginRight: 4 } }}
 			/>
-			<TextField
-				placeholder={'New value'}
+
+			<DataTypeField
+				placeholder={'New Value'}
+				dataType={dataType}
+				keyValue={oldvalue}
 				value={newvalue}
-				onChange={handleTextChange}
-				styles={{ root: { width: 130 } }}
+				onKeyChange={onValueChange}
+				onValueChange={onValueChange}
+				isKey={false}
 			/>
+
 			<IconButton
 				title={'Remove this Recode'}
 				iconProps={{ iconName: 'Delete' }}

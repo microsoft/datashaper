@@ -11,6 +11,7 @@ export function useColumnType(table?: ColumnTable, column?: string): DataType {
 		if (!table || !column) {
 			return DataType.Unknown
 		}
+
 		return columnType(table, column)
 	}, [table, column])
 }

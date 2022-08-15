@@ -10,7 +10,7 @@ import {
 	FocusTrapZone,
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo, useCallback,useRef, useState } from 'react'
+import { memo, useCallback, useRef, useState } from 'react'
 
 import {
 	CalendarButton,
@@ -22,8 +22,8 @@ import {
 import type { CalendarPickerProps } from './CalendarPicker.types.js'
 
 export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
-	function CalendarPicker({ onSelectDate, disabled, cleanLabel }) {
-		const [selectedDate, setSelectedDate] = useState<Date>()
+	function CalendarPicker({ onSelectDate, value, disabled, cleanLabel }) {
+		const [selectedDate, setSelectedDate] = useState<Date>(value ?? new Date())
 		const [
 			showCalendar,
 			{ toggle: toggleShowCalendar, setFalse: hideCalendar },

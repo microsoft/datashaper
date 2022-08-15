@@ -24,5 +24,4 @@ export const recodeStep: ColumnTableStep<RecodeArgs> = (
 	input.derive({
 		[to]: escape((d: any) => op.recode(d[column], map)),
 	})
-
 export const recode = stepVerbFactory(recodeStep)
