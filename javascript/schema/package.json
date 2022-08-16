@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/schema",
-	"version": "1.4.2",
+	"version": "2.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {

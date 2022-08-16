@@ -1,7 +1,0 @@
-releases:
-  "@data-wrangling-components/core": patch
-  "@data-wrangling-components/react": patch
-
-declined:
-  - "@data-wrangling-components/schema"
-  - "@data-wrangling-components/webapp"

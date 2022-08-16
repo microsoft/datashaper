@@ -108,8 +108,7 @@
 					"type": "array"
 				},
 				"logical": {
-					"enum": ["and", "nand", "nor", "or", "xor"],
-					"type": "string"
+					"$ref": "#/definitions/BooleanOperator"
 				},
 				"to": {
 					"description": "Name of the output column to receive the operation's result.",
@@ -137,7 +136,7 @@
 			"type": "object"
 		},
 		"BooleanOperator": {
-			"enum": ["and", "nand", "nor", "or", "xor"],
+			"enum": ["and", "nand", "nor", "or", "xnor", "xor"],
 			"type": "string"
 		},
 		"ConvertArgs": {
@@ -332,8 +331,7 @@
 					"type": "array"
 				},
 				"logical": {
-					"enum": ["and", "nand", "nor", "or", "xor"],
-					"type": "string"
+					"$ref": "#/definitions/BooleanOperator"
 				}
 			},
 			"type": "object"
@@ -412,19 +410,22 @@
 					"type": "array"
 				},
 				"strategy": {
-					"enum": [
-						"anti join",
-						"cross",
-						"full outer",
-						"inner",
-						"left outer",
-						"right outer",
-						"semi join"
-					],
-					"type": "string"
+					"$ref": "#/definitions/JoinStrategy"
 				}
 			},
 			"type": "object"
+		},
+		"JoinStrategy": {
+			"enum": [
+				"anti join",
+				"cross",
+				"full outer",
+				"inner",
+				"left outer",
+				"right outer",
+				"semi join"
+			],
+			"type": "string"
 		},
 		"LookupArgs": {
 			"properties": {
@@ -460,12 +461,21 @@
 					"description": "This is only necessary if mergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
 					"type": "string"
 				},
+				"keepOriginalColumns": {
+					"type": "boolean"
+				},
+				"prefix": {
+					"type": "string"
+				},
 				"strategy": {
 					"$ref": "#/definitions/MergeStrategy"
 				},
 				"to": {
 					"description": "Name of the output column to receive the operation's result.",
 					"type": "string"
+				},
+				"unhot": {
+					"type": "boolean"
 				}
 			},
 			"type": "object"
@@ -508,13 +518,15 @@
 		},
 		"OnehotArgs": {
 			"properties": {
-				"column": {
-					"description": "Name of the input column for columnnar operations.",
-					"type": "string"
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
 				},
-				"prefix": {
-					"description": "Optional prefix for the output column names",
-					"type": "string"
+				"prefixes": {
+					"$ref": "#/definitions/Record<string,string>",
+					"description": "Optional prefixes for the output column names"
 				}
 			},
 			"type": "object"
@@ -537,8 +549,7 @@
 					"type": "string"
 				},
 				"direction": {
-					"enum": ["asc", "desc"],
-					"type": "string"
+					"$ref": "#/definitions/SortDirection"
 				}
 			},
 			"type": "object"
@@ -626,10 +637,25 @@
 			},
 			"type": "object"
 		},
+		"SortDirection": {
+			"enum": ["asc", "desc"],
+			"type": "string"
+		},
 		"SpreadArgs": {
 			"properties": {
-				"column": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"delimiter": {
+					"description": "Delimiter to use when converting string cell values into an array with String.split",
 					"type": "string"
+				},
+				"onehot": {
+					"description": "Indicates that a onehot-style spread should be performed.\nThis maps all unique cell values to new columns and sets the output cell value to a binary 1/0 based on column match.\nThis is in contrast to the default spread, which just maps array values to column by index.",
+					"type": "boolean"
 				},
 				"to": {
 					"items": {
@@ -656,6 +682,27 @@
 					"type": "string"
 				},
 				"value": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"UnhotArgs": {
+			"properties": {
+				"columns": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array"
+				},
+				"keepOriginalColumns": {
+					"type": "boolean"
+				},
+				"prefix": {
+					"type": "string"
+				},
+				"to": {
+					"description": "Name of the output column to receive the operation's result.",
 					"type": "string"
 				}
 			},
@@ -731,6 +778,10 @@
 	},
 	"description": "The root wrangling workflow specification. (Used for generating JSON Schema)",
 	"properties": {
+		"$schema": {
+			"description": "The schema url of the specification",
+			"type": "string"
+		},
 		"description": {
 			"description": "A user-friendly description of the specification",
 			"type": "string"
@@ -1424,6 +1475,28 @@
 								"properties": {
 									"verb": {
 										"enum": ["ungroup"],
+										"type": "string"
+									}
+								},
+								"type": "object"
+							},
+							{
+								"$ref": "#/definitions/BasicInput"
+							}
+						]
+					},
+					{
+						"allOf": [
+							{
+								"$ref": "#/definitions/StepJsonCommon"
+							},
+							{
+								"properties": {
+									"args": {
+										"$ref": "#/definitions/UnhotArgs"
+									},
+									"verb": {
+										"enum": ["unhot"],
 										"type": "string"
 									}
 								},
