@@ -37,7 +37,6 @@
 	"dependencies": {
 		"@datashaper/arquero": "workspace:^",
 		"@datashaper/core": "workspace:^",
-		"@datashaper/dataflow": "workspace:^",
 		"@datashaper/schema": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",

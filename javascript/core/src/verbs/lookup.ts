@@ -4,9 +4,10 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import { container } from '@datashaper/arquero'
-import { BaseNode, NodeInput } from '@datashaper/dataflow'
 import type { LookupArgs } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+
+import { BaseNode, NodeInput } from '../dataflow/index.js'
 
 class LookupNode extends BaseNode<TableContainer, LookupArgs> {
 	constructor(id: string) {

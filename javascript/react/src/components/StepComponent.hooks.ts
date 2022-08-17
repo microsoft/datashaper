@@ -4,8 +4,7 @@
  */
 import { columnTypes } from '@datashaper/arquero'
 import type { GraphManager, Step } from '@datashaper/core'
-import { isNumericInputStep } from '@datashaper/core'
-import { NodeInput } from '@datashaper/dataflow'
+import { isNumericInputStep, NodeInput } from '@datashaper/core'
 import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

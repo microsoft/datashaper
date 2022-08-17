@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NodeInput } from '@datashaper/dataflow'
+import { NodeInput } from '@datashaper/core'
 import type { JoinArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 

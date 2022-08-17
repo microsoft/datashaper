@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/arquero'
-import type { Node } from '@datashaper/dataflow'
 
+import type { Node } from '../dataflow/index.js'
 import * as verbs from '../verbs/index.js'
-import type { NodeFactory,Step } from './types.js'
+import type { NodeFactory, Step } from './types.js'
 
 export function createNode(step: Step): Node<TableContainer> {
 	const records = verbs as any as Record<string, NodeFactory>

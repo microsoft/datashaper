@@ -4,11 +4,11 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import { container } from '@datashaper/arquero'
-import type { StepFunction } from '@datashaper/dataflow'
-import { BaseVariadicNode, StepNode } from '@datashaper/dataflow'
 import type { SetOp } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+import type { StepFunction } from '../../dataflow/index.js'
+import { BaseVariadicNode, StepNode } from '../../dataflow/index.js'
 import type { Maybe } from '../../primitives.js'
 import { set } from './sets.js'
 
