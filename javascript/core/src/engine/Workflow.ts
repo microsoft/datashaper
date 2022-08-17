@@ -22,34 +22,30 @@ export class Workflow {
 	// The global onChange handler
 	private readonly _onChange = new Subject<void>()
 
-	private init(workflowJson?: WorkflowObject) {
+	public constructor(workflowJson?: WorkflowObject) {
+		if (workflowJson != null) {
+			this.init(workflowJson)
+		}
+	}
+
+	private init(workflowJson: WorkflowObject) {
 		let prev: Step | undefined
-		this._name = workflowJson?.name
-		this._description = workflowJson?.description
-		workflowJson?.steps.forEach(i => {
+		this._name = workflowJson.name
+		this._description = workflowJson.description
+		workflowJson.steps.forEach(i => {
 			const step = readStep(i, prev)
 			this._steps.push(step)
 			prev = step
 		})
-		workflowJson?.input?.forEach(i => this._input.add(i))
-		workflowJson?.output?.forEach(o => {
+		workflowJson.input?.forEach(i => this._input.add(i))
+		workflowJson.output?.forEach(o => {
 			const binding = fixOutput(o)
 			this._output.set(binding.name, binding)
 		})
 	}
 
-	public constructor(workflowJson?: WorkflowObject, validate = true) {
-		if (workflowJson && validate) {
-			WorkflowSchemaInstance.isValid(workflowJson).then(isValid => {
-				if (!isValid) {
-					throw Error('Invalid workflow definition')
-				} else {
-					this.init(workflowJson)
-				}
-			})
-		} else {
-			this.init(workflowJson)
-		}
+	public static async validate(workflowJson: WorkflowObject): Promise<boolean> {
+		return WorkflowSchemaInstance.isValid(workflowJson)
 	}
 
 	public get input(): Set<string> {

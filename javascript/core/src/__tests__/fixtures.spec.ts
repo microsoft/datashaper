@@ -73,10 +73,7 @@ function defineTestCase(parentPath: string, test: string) {
 		if (!isWorkflowJsonValid) {
 			throw new Error(`invalid workflow definition: ${workflowPath}`)
 		}
-		const graphBuilder = createGraph(
-			new Workflow(workflowJson, false),
-			tableStore,
-		)
+		const graphBuilder = createGraph(new Workflow(workflowJson), tableStore)
 
 		// check the output tables
 		await Promise.all(
