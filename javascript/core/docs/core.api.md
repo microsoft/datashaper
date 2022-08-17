@@ -1021,7 +1021,7 @@ export enum WindowFunction {
 //
 // @public
 export class Workflow {
-    constructor(workflowJson?: WorkflowObject, validate?: boolean);
+    constructor(workflowJson?: WorkflowObject);
     // (undocumented)
     addInput(input: string): void;
     // (undocumented)
@@ -1056,6 +1056,8 @@ export class Workflow {
     toJsonObject(): WorkflowObject;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
+    // (undocumented)
+    static validate(workflowJson: WorkflowObject): Promise<boolean>;
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
