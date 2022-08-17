@@ -13,8 +13,8 @@ import type { Observable, Subscription } from 'rxjs'
 import { from, Subject } from 'rxjs'
 
 import type { Maybe } from '../primitives.js'
-import type { Step, StepInput } from '../steps/index.js'
 import { createNode } from './createNode.js'
+import type { Step, StepInput } from './types.js'
 import { Workflow } from './Workflow.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order

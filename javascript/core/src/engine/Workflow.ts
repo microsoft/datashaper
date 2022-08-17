@@ -8,8 +8,8 @@ import type {
 } from '@datashaper/schema'
 import { Subject } from 'rxjs'
 
-import { readStep } from '../steps/readStep.js'
-import type { Step, StepInput, WorkflowObject } from '../steps/types.js'
+import { readStep } from './readStep.js'
+import type { Step, StepInput, WorkflowObject } from './types.js'
 import { WorkflowSchemaInstance } from './validator.js'
 
 /**
