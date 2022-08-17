@@ -3,19 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Value } from '@datashaper/arquero'
+import type { ImputeArgs } from '@datashaper/schema'
 
-import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 import type { ExprFunctionMap } from './util/types.js'
-
-export interface ImputeArgs extends InputColumnListArgs {
-	/**
-	 * Value to fill in empty cells
-	 */
-	value: Value
-}
 
 export const imputeStep: ColumnTableStep<ImputeArgs> = (
 	input,

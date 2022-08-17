@@ -3,17 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { RollupArgs } from './rollup.js'
+import type { AggregateArgs } from '@datashaper/schema'
+
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 import { singleExpression } from './util/index.js'
-
-export interface AggregateArgs extends RollupArgs {
-	/**
-	 * Column to group by
-	 */
-	groupby: string
-}
 
 export const aggregateStep: ColumnTableStep<AggregateArgs> = (
 	input,

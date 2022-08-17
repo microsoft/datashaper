@@ -2,27 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DataType, determineType } from '@datashaper/arquero'
+import { determineType } from '@datashaper/arquero'
+import type { ConvertArgs } from '@datashaper/schema'
+import { DataType, ParseType } from '@datashaper/schema'
 import { escape, op } from 'arquero'
 import { isoParse, timeFormat, timeParse } from 'd3-time-format'
 
-import type { InputColumnListArgs } from './types.js'
-import { ParseType } from './types.js'
 import { bool } from './util/data-types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-
-export interface ConvertArgs extends InputColumnListArgs {
-	type: ParseType
-	/**
-	 * Optional radix to use for parsing strings into ints
-	 */
-	radix?: number
-
-	delimiter?: string
-
-	formatPattern?: string
-}
 
 /**
  * Executes an arquero string parse operation.

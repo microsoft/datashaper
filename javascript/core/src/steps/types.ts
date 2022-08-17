@@ -6,8 +6,8 @@ import type {
 	NamedPortBinding,
 	OutputPortBinding,
 	PortBinding,
-} from '../types.js'
-import type { Verb } from '../verbs/index.js'
+	Verb,
+} from '@datashaper/schema'
 
 export interface WorkflowObject {
 	$schema?: string

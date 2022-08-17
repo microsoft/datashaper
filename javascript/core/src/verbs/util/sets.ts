@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { SetOp } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
-import { SetOp } from '../types.js'
 
 export function set(
 	input: ColumnTable,

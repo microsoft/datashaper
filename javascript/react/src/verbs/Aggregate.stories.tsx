@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { AggregateArgs } from '@datashaper/core'
-import { FieldAggregateOperation } from '@datashaper/core'
+import type { AggregateArgs } from '@datashaper/schema'
+import { FieldAggregateOperation } from '@datashaper/schema'
 
 import type { StepComponentProps } from '../types.js'
 import { AggregateBase } from './Aggregate.base.js'

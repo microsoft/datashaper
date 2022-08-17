@@ -46,6 +46,7 @@
 		"arquero": "^4.8.7"
 	},
 	"dependencies": {
+		"@datashaper/schema": "workspace:^",
 		"lodash-es": "^4.17.21"
 	}
 }

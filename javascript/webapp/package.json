@@ -32,6 +32,7 @@
 		"@datashaper/arquero": "workspace:^",
 		"@datashaper/core": "workspace:^",
 		"@datashaper/react": "workspace:^",
+		"@datashaper/schema": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",
 		"@essex/hooks": "^4.0.12",

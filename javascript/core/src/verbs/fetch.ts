@@ -2,27 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import type { TableContainer } from '@datashaper/arquero'
 import { container } from '@datashaper/arquero'
 import type { InputStep } from '@datashaper/dataflow'
 import { inputNodeFactory } from '@datashaper/dataflow'
+import type { FetchArgs } from '@datashaper/schema'
 import { loadCSV, loadJSON } from 'arquero'
-
-export interface FetchArgs {
-	/**
-	 * URL where the csv file is located
-	 */
-	url: string
-	/**
-	 * Optional delimiter for csv
-	 */
-	delimiter?: string
-	/**
-	 * Optional autoMax for tables
-	 */
-	autoMax?: number
-}
 
 export const fetchStep: InputStep<TableContainer, FetchArgs> = async (
 	{ url, delimiter, autoMax },

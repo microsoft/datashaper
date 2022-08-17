@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { NamedPortBinding } from '../types.js'
+import type { NamedPortBinding, Verb } from '@datashaper/schema'
+
+import type { Step, StepInput } from '../steps/types.js'
 import * as defaults from '../verbs/defaults/index.js'
-import type { Verb } from '../verbs/index.js'
-import type { Step, StepInput } from './types.js'
 
 // TEMP: this creates a more readable id by doing a simple increment for each verb type
 // since this is global it will not align across pipelines or tables.

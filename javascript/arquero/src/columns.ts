@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { DataType } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { determineType } from './data.js'
-import { DataType } from './types.js'
 
 /**
  * Returns a map of all of the column getters for a table.

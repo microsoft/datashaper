@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { PivotArgs } from '@datashaper/core'
+import type { PivotArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
 import { useStepDataTable, useTableColumnNames } from '../hooks/index.js'

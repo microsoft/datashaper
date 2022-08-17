@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { ColumnMetadata } from '@datashaper/arquero'
+import type { ColumnMetadata } from '@datashaper/schema'
 import type {
 	IColumn,
 	IDetailsColumnProps,

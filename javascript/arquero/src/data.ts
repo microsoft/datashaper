@@ -2,13 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Value } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import isArray from 'lodash-es/isArray.js'
 import isDate from 'lodash-es/isDate.js'
 import isNaN from 'lodash-es/isNaN.js'
 import isNil from 'lodash-es/isNil.js'
-
-import type { Value } from './types.js'
-import { DataType } from './types.js'
 
 /**
  * Guess the type of a table value with more discernment than typeof

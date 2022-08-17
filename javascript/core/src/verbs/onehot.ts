@@ -2,19 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { OnehotArgs } from '@datashaper/schema'
 import { escape, op } from 'arquero'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
-import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-
-export interface OnehotArgs extends InputColumnListArgs {
-	/**
-	 * Optional prefixes for the output column names
-	 */
-	prefixes?: Record<string, string>
-}
 
 /**
  * Executes a  one-hot encoding. This creates a new column for each unique value in the specified columns.

@@ -33,9 +33,6 @@
 		"bundle": "typescript-json-schema tsconfig.json WorkflowJson > ../../schema/workflow.json",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
-	"dependencies": {
-		"@datashaper/core": "workspace:^"
-	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.5",
 		"@essex/tsconfig-base": "^1.0.2",

@@ -2,14 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { op } from 'arquero'
-
 import {
 	BooleanComparisonOperator,
 	DateComparisonOperator,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../types.js'
+} from '@datashaper/schema'
+import { op } from 'arquero'
+
 import { bool } from './data-types.js'
 
 export function compareValues(

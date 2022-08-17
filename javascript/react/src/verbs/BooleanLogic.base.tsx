@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BooleanArgs } from '@datashaper/core'
-import { BooleanOperator } from '@datashaper/core'
+import type { BooleanArgs } from '@datashaper/schema'
+import { BooleanOperator } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'

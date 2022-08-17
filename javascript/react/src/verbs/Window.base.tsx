@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { WindowArgs } from '@datashaper/core'
-import { WindowFunction } from '@datashaper/core'
+import type { WindowArgs } from '@datashaper/schema'
+import { WindowFunction } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentProps } from '../types.js'

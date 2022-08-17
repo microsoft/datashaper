@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Verb } from '@datashaper/schema'
 import difference from 'lodash-es/difference.js'
 import intersection from 'lodash-es/intersection.js'
 
 import type { Step } from '../steps/index.js'
-import type { Verb } from '../verbs/index.js'
 
 enum Tags {
 	/**

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnMetadata } from '@datashaper/arquero'
-import { DataType } from '@datashaper/arquero'
+import type { ColumnMetadata } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
