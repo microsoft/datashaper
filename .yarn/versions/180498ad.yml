@@ -1,0 +1,6 @@
+releases:
+  "@datashaper/arquero": major
+  "@datashaper/core": major
+  "@datashaper/react": patch
+  "@datashaper/schema": minor
+  "@datashaper/webapp": patch
