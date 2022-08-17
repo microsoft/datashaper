@@ -4,10 +4,11 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import { container } from '@datashaper/arquero'
-import type { InputStep } from '@datashaper/dataflow'
-import { inputNodeFactory } from '@datashaper/dataflow'
 import type { FetchArgs } from '@datashaper/schema'
 import { loadCSV, loadJSON } from 'arquero'
+
+import type { InputStep } from '../dataflow/index.js'
+import { inputNodeFactory } from '../dataflow/index.js'
 
 export const fetchStep: InputStep<TableContainer, FetchArgs> = async (
 	{ url, delimiter, autoMax },

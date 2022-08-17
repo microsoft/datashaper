@@ -3706,7 +3706,6 @@ __metadata:
   resolution: "@datashaper/core@workspace:javascript/core"
   dependencies:
     "@datashaper/arquero": "workspace:^"
-    "@datashaper/dataflow": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@essex/jest-config": ^21.0.13
     "@essex/scripts": ^22.0.5
@@ -3715,7 +3714,7 @@ __metadata:
     "@types/jest": ^27.5.2
     "@types/lodash-es": ^4.17.6
     "@types/node": ^18.0.0
-    "@types/toposort": ^2.0.3
+    "@types/uuid": ^8.3.4
     ajv: ^8.11.0
     arquero: ^4.8.8
     d3-time-format: ^4.1.0
@@ -3723,30 +3722,14 @@ __metadata:
     lodash-es: ^4.17.21
     regenerator-runtime: ^0.13.9
     rxjs: ^7.5.5
-    toposort: ^2.0.2
     typescript: ^4.7.4
+    uuid: ^8.3.2
   peerDependencies:
     "@types/node": "*"
     arquero: ^4.8.7
   peerDependenciesMeta:
     "@types/node":
       optional: true
-  languageName: unknown
-  linkType: soft
-
-"@datashaper/dataflow@workspace:^, @datashaper/dataflow@workspace:javascript/dataflow":
-  version: 0.0.0-use.local
-  resolution: "@datashaper/dataflow@workspace:javascript/dataflow"
-  dependencies:
-    "@essex/jest-config": ^21.0.12
-    "@essex/scripts": ^22.0.4
-    "@essex/toposort": ^1.0.1
-    "@essex/tsconfig-base": ^1.0.2
-    "@types/jest": ^27.5.1
-    "@types/uuid": ^8.3.4
-    jest: ^28.1.0
-    rxjs: ^7.5.5
-    uuid: ^8.3.2
   languageName: unknown
   linkType: soft
 
@@ -3785,7 +3768,6 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@datashaper/arquero": "workspace:^"
     "@datashaper/core": "workspace:^"
-    "@datashaper/dataflow": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
@@ -4350,13 +4332,6 @@ __metadata:
   version: 3.0.8
   resolution: "@essex/toolbox@npm:3.0.8"
   checksum: 70cecf83f223a182c0a142e721f3d8689b0ec816174733e5403576d06b697bb8a8489f655479a2d358830f58fc71aef033dee6e64b2e90c6d1cb332f73bee18d
-  languageName: node
-  linkType: hard
-
-"@essex/toposort@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@essex/toposort@npm:1.0.1"
-  checksum: ad9682e9804b75953bb2eca1df962510e7e80f2ac183da1db61f98d40b610fe02a60758cbd1b83048a0883fa4a895bf2e6ba42d1313a2c82448d64752481f0c7
   languageName: node
   linkType: hard
 
@@ -7889,13 +7864,6 @@ __metadata:
   version: 1.0.2
   resolution: "@types/text-encoding-utf-8@npm:1.0.2"
   checksum: a7199bb5c09448274b0f7f6535d84594bad5b492933cd6423bdcf73724c6fe6cbadb2c49bb526cb4eda3d03538a2e62a7e372dcc7688d1e5f87ac2f5c4c4410a
-  languageName: node
-  linkType: hard
-
-"@types/toposort@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@types/toposort@npm:2.0.3"
-  checksum: 018a372a899fd417d67ed85cb98bd3f15915020b865257b9e795e443bcfa0df79c6c44693ba88cbdd9e54ca872cecb91bf46764ec03c5b63968b2234804d14d2
   languageName: node
   linkType: hard
 
@@ -22390,13 +22358,6 @@ __metadata:
   version: 1.0.1
   resolution: "toidentifier@npm:1.0.1"
   checksum: 952c29e2a85d7123239b5cfdd889a0dde47ab0497f0913d70588f19c53f7e0b5327c95f4651e413c74b785147f9637b17410ac8c846d5d4a20a5a33eb6dc3a45
-  languageName: node
-  linkType: hard
-
-"toposort@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "toposort@npm:2.0.2"
-  checksum: d64c74b570391c9432873f48e231b439ee56bc49f7cb9780b505cfdf5cb832f808d0bae072515d93834dd6bceca5bb34448b5b4b408335e4d4716eaf68195dcb
   languageName: node
   linkType: hard
 

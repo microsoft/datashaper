@@ -86,7 +86,6 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	/**
 	 * Gets a map of named inputs to the current value.
-	 * @protected
 	 */
 	protected getInputValues(): Record<SocketName, Maybe<T>> {
 		const result: Record<SocketName, Maybe<T>> = {}
@@ -98,7 +97,6 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	/**
 	 * Gets a map of named inputs to any errors emitted
-	 * @protected
 	 */
 	protected getInputErrors(): Record<SocketName, unknown> {
 		const result: Record<SocketName, unknown> = {}

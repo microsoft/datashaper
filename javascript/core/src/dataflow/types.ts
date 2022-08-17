@@ -42,7 +42,7 @@ export interface Node<T, Config = unknown> {
 
 	/**
 	 * Binds variadic innput
-	 * @param bindings
+	 * @param bindings - the input bindings
 	 */
 	bindVariadic(bindings: Omit<NodeBinding<T>, 'input'>[]): void
 
@@ -81,7 +81,7 @@ export interface Node<T, Config = unknown> {
 
 	/**
 	 *
-	 * @param handler The event handler for when the binding changes
+	 * @param handler - The event handler for when the binding changes
 	 */
 	readonly onBindingsChanged: Observable<void>
 }
@@ -132,7 +132,7 @@ export interface Graph<T> {
 
 	/**
 	 * Add a node to the graph
-	 * @param node The node to register with the graph
+	 * @param node - The node to register with the graph
 	 */
 	add(node: Node<T>): void
 

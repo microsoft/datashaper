@@ -4,10 +4,11 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import { container } from '@datashaper/arquero'
-import { BaseNode, NodeInput } from '@datashaper/dataflow'
 import type { JoinArgs } from '@datashaper/schema'
 import { JoinStrategy } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+
+import { BaseNode, NodeInput } from '../dataflow/index.js'
 
 class JoinNode extends BaseNode<TableContainer, JoinArgs> {
 	constructor(id: string) {

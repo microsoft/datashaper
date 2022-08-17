@@ -3,13 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/arquero'
-import type { Node } from '@datashaper/dataflow'
 import type {
 	NamedPortBinding,
 	OutputPortBinding,
 	PortBinding,
 	Verb,
 } from '@datashaper/schema'
+
+import type { Node } from '../dataflow/index.js'
 
 export interface WorkflowObject {
 	$schema?: string
