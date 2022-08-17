@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { RollupArgs } from '@datashaper/core'
-import { FieldAggregateOperation } from '@datashaper/core'
+import type { RollupArgs } from '@datashaper/schema'
+import { FieldAggregateOperation } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentProps } from '../types.js'

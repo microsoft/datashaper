@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { BooleanOperator } from '../types.js'
+import { BooleanOperator } from '@datashaper/schema'
 
 /**
  * Evalutes a list of booleans using a logical operator.

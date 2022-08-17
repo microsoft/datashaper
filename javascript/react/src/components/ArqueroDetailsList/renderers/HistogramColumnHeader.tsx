@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Category, ColumnStats } from '@datashaper/arquero'
 import { formatIfNumber } from '@datashaper/arquero'
+import type { Category, ColumnStats } from '@datashaper/schema'
 import { Sparkbar } from '@essex/charts-react'
 import { TooltipHost } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'

@@ -2,21 +2,21 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { escape, op } from 'arquero'
-import type { Op } from 'arquero/dist/types/op/op'
-
 import type {
 	BooleanComparisonOperator,
 	Criterion,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../types.js'
+} from '@datashaper/schema'
 import {
 	BooleanOperator,
 	FieldAggregateOperation,
 	FilterCompareType,
 	WindowFunction,
-} from '../types.js'
+} from '@datashaper/schema'
+import { escape, op } from 'arquero'
+import type { Op } from 'arquero/dist/types/op/op'
+
 import { evaluateBoolean } from './boolean-logic.js'
 import { compareValues } from './compare.js'
 import { bool } from './data-types.js'

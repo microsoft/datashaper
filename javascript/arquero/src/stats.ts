@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import type { Bin, Category, ColumnStats } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { fixedBinCount } from './binning.js'
 import { determineType } from './data.js'
-import type { Bin, Category, ColumnStats } from './types.js'
-import { DataType } from './types.js'
 
 /**
  * Generates detailed column stats for a table.

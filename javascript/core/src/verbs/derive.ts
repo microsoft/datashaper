@@ -2,25 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { DeriveArgs } from '@datashaper/schema'
+import { MathOperator } from '@datashaper/schema'
 import { escape } from 'arquero'
 
-import type { OutputColumnArgs } from './types.js'
-import { MathOperator } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-
-export interface DeriveArgs extends OutputColumnArgs {
-	/**
-	 * Column on the left side of the operation
-	 */
-	column1: string
-	/**
-	 * Column on the right side of the operation
-	 */
-	column2: string
-
-	operator: MathOperator
-}
 
 /**
  * Executes an arquero derive.

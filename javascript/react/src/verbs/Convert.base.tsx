@@ -2,9 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { DataType } from '@datashaper/arquero'
-import type { ConvertArgs } from '@datashaper/core'
-import { ParseType } from '@datashaper/core'
+import type { ConvertArgs } from '@datashaper/schema'
+import { DataType, ParseType } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
 import { memo, useMemo } from 'react'
 

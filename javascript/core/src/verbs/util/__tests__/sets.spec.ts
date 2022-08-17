@@ -2,8 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { SetOp } from '@datashaper/schema'
+
 import { TestStore } from '../../../__tests__/TestStore.js'
-import { SetOp } from '../../types.js'
 import { set } from '../sets.js'
 
 describe('test for set util', () => {

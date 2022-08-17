@@ -5,30 +5,9 @@
 import type { TableContainer } from '@datashaper/arquero'
 import { container } from '@datashaper/arquero'
 import { BaseNode, NodeInput } from '@datashaper/dataflow'
+import type { JoinArgs } from '@datashaper/schema'
+import { JoinStrategy } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
-export interface JoinArgsBase {
-	/**
-	 * Column names to join with.
-	 * If only one is specified, it will use for both tables.
-	 * If none are specified, all matching column names will be used.
-	 */
-	on?: string[]
-}
-
-export interface JoinArgs extends JoinArgsBase {
-	strategy?: JoinStrategy
-}
-
-export enum JoinStrategy {
-	Inner = 'inner',
-	LeftOuter = 'left outer',
-	RightOuter = 'right outer',
-	FullOuter = 'full outer',
-	Cross = 'cross',
-	SemiJoin = 'semi join',
-	AntiJoin = 'anti join',
-}
 
 class JoinNode extends BaseNode<TableContainer, JoinArgs> {
 	constructor(id: string) {

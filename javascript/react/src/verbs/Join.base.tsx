@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs } from '@datashaper/core'
-import { JoinStrategy } from '@datashaper/core'
 import { NodeInput } from '@datashaper/dataflow'
+import type { JoinArgs } from '@datashaper/schema'
+import { JoinStrategy } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'

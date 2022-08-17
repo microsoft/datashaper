@@ -2,18 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { UnhotArgs } from '@datashaper/schema'
 import { escape, not } from 'arquero'
 
-import type { InputColumnListArgs, OutputColumnArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 import { firstOneWinsStrategy, isSameDataType } from './util/merge.js'
 import { unhotOperation } from './util/unhot-logic.js'
-
-export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
-	prefix?: string
-	keepOriginalColumns?: boolean
-}
 
 export const unhotStep: ColumnTableStep<UnhotArgs> = (
 	input,

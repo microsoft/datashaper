@@ -1,4 +1,5 @@
-import { NumericComparisonOperator } from '../../types.js'
+import { NumericComparisonOperator } from '@datashaper/schema'
+
 import { compareValues } from '../compare.js'
 
 // NOTE: most of the comparison operators are tested indirectly

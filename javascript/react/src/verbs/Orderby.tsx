@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { OrderbyArgs } from '@datashaper/core'
+import type { OrderbyArgs } from '@datashaper/schema'
 import { ActionButton, Label } from '@fluentui/react'
 import { memo } from 'react'
 

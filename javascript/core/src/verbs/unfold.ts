@@ -2,16 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { UnfoldArgs } from '@datashaper/schema'
 import { from } from 'arquero'
 import type { RowObject } from 'arquero/dist/types/table/table'
 
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-
-export interface UnfoldArgs {
-	key: string
-	value: string
-}
 
 export const unfoldStep: ColumnTableStep<UnfoldArgs> = (
 	input,

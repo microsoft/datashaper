@@ -8,7 +8,8 @@ import {
 	FilterCompareType,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '../../types.js'
+} from '@datashaper/schema'
+
 import { compare, compareAll } from '../expressions.js'
 
 describe('expressions', () => {

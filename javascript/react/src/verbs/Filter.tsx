@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Criterion, FilterArgs } from '@datashaper/core'
-import { BooleanOperator } from '@datashaper/core'
+import type { Criterion, FilterArgs } from '@datashaper/schema'
+import { BooleanOperator } from '@datashaper/schema'
 import { ActionButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'

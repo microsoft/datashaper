@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FetchArgs } from '@datashaper/core'
+import type { FetchArgs } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
 import { memo, useMemo } from 'react'
 

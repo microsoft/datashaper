@@ -4,28 +4,12 @@
 
 ```ts
 
+import type { ColumnStats } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
-
-// Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface Bin {
-    // (undocumented)
-    count: number;
-    // (undocumented)
-    min: number | string;
-}
-
-// Warning: (ae-missing-release-tag) "Category" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface Category {
-    // (undocumented)
-    count: number;
-    // (undocumented)
-    name: string;
-}
+import { DataType } from '@datashaper/schema';
+import type { TableMetadata } from '@datashaper/schema';
+import type { Value } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "coerce" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -37,52 +21,10 @@ export function coerce(value: Value, dataType: DataType): Value;
 // @public
 export function columnIndexesWithZeros(table: ColumnTable): number[];
 
-// Warning: (ae-missing-release-tag) "ColumnMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ColumnMetadata {
-    // (undocumented)
-    name: string;
-    // (undocumented)
-    stats?: ColumnStats;
-    // (undocumented)
-    type: DataType;
-}
-
 // Warning: (ae-missing-release-tag) "columnNamesWithZeros" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function columnNamesWithZeros(table: ColumnTable): string[];
-
-// Warning: (ae-missing-release-tag) "ColumnStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnStats {
-    // (undocumented)
-    bins?: Bin[];
-    // (undocumented)
-    categories?: Category[];
-    // (undocumented)
-    count: number;
-    // (undocumented)
-    distinct: number;
-    // (undocumented)
-    invalid: number;
-    // (undocumented)
-    max?: number;
-    // (undocumented)
-    mean?: number;
-    // (undocumented)
-    median?: number;
-    // (undocumented)
-    min?: number;
-    // (undocumented)
-    mode: any;
-    // (undocumented)
-    stdev?: number;
-    // (undocumented)
-    type: DataType;
-}
 
 // Warning: (ae-missing-release-tag) "columnType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -98,30 +40,6 @@ export function columnTypes(table: ColumnTable, columns?: string[]): Record<stri
 //
 // @public (undocumented)
 export function container(id: string, table?: ColumnTable): TableContainer;
-
-// Warning: (ae-missing-release-tag) "DataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum DataType {
-    // (undocumented)
-    Array = "array",
-    // (undocumented)
-    Boolean = "boolean",
-    // (undocumented)
-    Date = "date",
-    // (undocumented)
-    Number = "number",
-    // (undocumented)
-    Object = "object",
-    // (undocumented)
-    String = "string",
-    // (undocumented)
-    Text = "text",
-    // (undocumented)
-    Undefined = "undefined",
-    // (undocumented)
-    Unknown = "unknown"
-}
 
 // Warning: (ae-missing-release-tag) "determineType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -181,16 +99,6 @@ export interface RowsOptions {
 // @public
 export function sliceTable(table: ColumnTable_2, offset: number, limit: number): ColumnTable_2;
 
-// Warning: (ae-missing-release-tag) "SortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum SortDirection {
-    // (undocumented)
-    Ascending = "asc",
-    // (undocumented)
-    Descending = "desc"
-}
-
 // Warning: (ae-missing-release-tag) "stats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -205,22 +113,6 @@ export interface TableContainer<T = unknown> {
     metadata?: TableMetadata;
     table?: ColumnTable;
 }
-
-// Warning: (ae-missing-release-tag) "TableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TableMetadata {
-    // (undocumented)
-    cols: number;
-    columns: Record<string, ColumnMetadata>;
-    // (undocumented)
-    rows: number;
-}
-
-// Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export type Value = any;
 
 // (No @packageDocumentation comment for this package)
 

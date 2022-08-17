@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { ColumnMetadata, TableMetadata } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { columnTypes } from './columnTypes.js'
 import { stats } from './stats.js'
-import type { ColumnMetadata, TableMetadata } from './types.js'
 
 /**
  * Performs type inference and stats on a table/columns.

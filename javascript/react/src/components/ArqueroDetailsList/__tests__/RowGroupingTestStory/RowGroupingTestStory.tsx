@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableMetadata } from '@datashaper/arquero'
 import { introspect } from '@datashaper/arquero'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
+import type { TableMetadata } from '@datashaper/schema'
 import { Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback, useEffect, useState } from 'react'

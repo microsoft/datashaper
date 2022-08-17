@@ -3686,6 +3686,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/arquero@workspace:javascript/arquero"
   dependencies:
+    "@datashaper/schema": "workspace:^"
     "@essex/jest-config": ^21.0.12
     "@essex/scripts": ^22.0.4
     "@essex/tsconfig-base": ^1.0.2
@@ -3706,6 +3707,7 @@ __metadata:
   dependencies:
     "@datashaper/arquero": "workspace:^"
     "@datashaper/dataflow": "workspace:^"
+    "@datashaper/schema": "workspace:^"
     "@essex/jest-config": ^21.0.13
     "@essex/scripts": ^22.0.5
     "@essex/tsconfig-base": ^1.0.2
@@ -3784,6 +3786,7 @@ __metadata:
     "@datashaper/arquero": "workspace:^"
     "@datashaper/core": "workspace:^"
     "@datashaper/dataflow": "workspace:^"
+    "@datashaper/schema": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
     "@essex/charts-react": ^1.0.5
@@ -3852,11 +3855,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@datashaper/schema@workspace:javascript/schema":
+"@datashaper/schema@workspace:^, @datashaper/schema@workspace:javascript/schema":
   version: 0.0.0-use.local
   resolution: "@datashaper/schema@workspace:javascript/schema"
   dependencies:
-    "@datashaper/core": "workspace:^"
     "@essex/scripts": ^22.0.5
     "@essex/tsconfig-base": ^1.0.2
     shx: ^0.3.4
@@ -3906,6 +3908,7 @@ __metadata:
     "@datashaper/arquero": "workspace:^"
     "@datashaper/core": "workspace:^"
     "@datashaper/react": "workspace:^"
+    "@datashaper/schema": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
     "@essex/hooks": ^4.0.12

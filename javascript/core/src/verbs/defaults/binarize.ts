@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BinarizeArgs } from '../binarize.js'
+import type { BinarizeArgs } from '@datashaper/schema'
+
 import { filter } from './filter.js'
 import { outputColumn } from './outputColumn.js'
 

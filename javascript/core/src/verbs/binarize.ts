@@ -2,14 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { BinarizeArgs } from '@datashaper/schema'
 
-import type { FilterArgs } from './filter.js'
-import type { OutputColumnArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 import { compareAll } from './util/index.js'
-
-export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {}
 
 export const binarizeStep: ColumnTableStep<BinarizeArgs> = (
 	input,

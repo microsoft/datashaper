@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DeriveArgs } from '@datashaper/core'
-import { MathOperator } from '@datashaper/core'
+import type { DeriveArgs } from '@datashaper/schema'
+import { MathOperator } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import { useSimpleDropdownOptions } from '../hooks/index.js'

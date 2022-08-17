@@ -2,14 +2,15 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { columnTypes, DataType } from '@datashaper/arquero'
-import type { Criterion } from '@datashaper/core'
+import { columnTypes } from '@datashaper/arquero'
+import type { Criterion } from '@datashaper/schema'
 import {
 	BooleanComparisonOperator,
+	DataType,
 	DateComparisonOperator,
 	NumericComparisonOperator,
 	StringComparisonOperator,
-} from '@datashaper/core'
+} from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 

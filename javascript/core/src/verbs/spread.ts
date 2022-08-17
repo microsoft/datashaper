@@ -2,26 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { SpreadArgs } from '@datashaper/schema'
 import { escape, not, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 
-import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-
-export interface SpreadArgs extends InputColumnListArgs {
-	to: string[]
-	/**
-	 * Delimiter to use when converting string cell values into an array with String.split
-	 */
-	delimiter?: string
-	/**
-	 * Indicates that a onehot-style spread should be performed.
-	 * This maps all unique cell values to new columns and sets the output cell value to a binary 1/0 based on column match.
-	 * This is in contrast to the default spread, which just maps array values to column by index.
-	 */
-	onehot?: boolean
-}
 
 export const spreadStep: ColumnTableStep<SpreadArgs> = (
 	input,

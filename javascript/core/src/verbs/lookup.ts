@@ -5,12 +5,8 @@
 import type { TableContainer } from '@datashaper/arquero'
 import { container } from '@datashaper/arquero'
 import { BaseNode, NodeInput } from '@datashaper/dataflow'
+import type { LookupArgs } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-
-import type { JoinArgsBase } from './join.js'
-import type { InputColumnListArgs } from './types.js'
-
-export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {}
 
 class LookupNode extends BaseNode<TableContainer, LookupArgs> {
 	constructor(id: string) {

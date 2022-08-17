@@ -38,6 +38,7 @@
 		"@datashaper/arquero": "workspace:^",
 		"@datashaper/core": "workspace:^",
 		"@datashaper/dataflow": "workspace:^",
+		"@datashaper/schema": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",
 		"@essex/charts-react": "^1.0.5",

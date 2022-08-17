@@ -6,7 +6,7 @@ import type {
 	ColumnMetadata,
 	SortDirection,
 	TableMetadata,
-} from '@datashaper/arquero'
+} from '@datashaper/schema'
 import type {
 	IColumn,
 	IDetailsColumnProps,

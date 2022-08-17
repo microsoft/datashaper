@@ -2,11 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type {
+	NamedOutputPortBinding,
+	OutputPortBinding,
+} from '@datashaper/schema'
 import { Subject } from 'rxjs'
 
-import { readStep } from '../steps/readStep.js'
-import type { Step, StepInput, WorkflowObject } from '../steps/types.js'
-import type { NamedOutputPortBinding, OutputPortBinding } from '../types.js'
+import { readStep } from './readStep.js'
+import type { Step, StepInput, WorkflowObject } from './types.js'
 import { WorkflowSchemaInstance } from './validator.js'
 
 /**
