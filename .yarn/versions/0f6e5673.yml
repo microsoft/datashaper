@@ -1,5 +1,0 @@
-releases:
-  "@datashaper/core": major
-  "@datashaper/react": major
-  "@datashaper/schema": major
-  "@datashaper/webapp": major
