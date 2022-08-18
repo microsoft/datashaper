@@ -59,6 +59,7 @@ export const ConvertBase: React.FC<
 				type: FormInputType.ComboBox,
 				options: getDateFormatPatternOptions(),
 				placeholder: 'pattern',
+				allowFreeForm: true,
 				current: step.args.formatPattern
 					? `${step.args.formatPattern}`
 					: undefined,

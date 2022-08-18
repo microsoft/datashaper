@@ -110,6 +110,8 @@ export interface ComboBoxFormInput<T>
 	 */
 	current: string | undefined
 
+	allowFreeForm?: boolean
+
 	onInputValueChange?: (step: Step<T>, value: string | undefined) => void
 }
 
@@ -378,6 +380,7 @@ const ComboBoxInput: React.FC<{
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
 		onInputValueChange,
+		allowFreeForm,
 	},
 	onChange,
 }) {
@@ -399,6 +402,8 @@ const ComboBoxInput: React.FC<{
 				disabled={disabled}
 				onChange={changeHandler}
 				onInputValueChange={valueChangeHandler}
+				allowFreeForm={allowFreeForm}
+				autoComplete={'on'}
 			/>
 		</Wrapper>
 	)
