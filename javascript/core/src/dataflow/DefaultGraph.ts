@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import toposort from '@essex/toposort'
 import type { Subscription } from 'rxjs'
 
+import toposort from '../util/toposort.js'
 import type { Graph, Node, NodeId } from './types.js'
 
 export class DefaultGraph<T> implements Graph<T> {

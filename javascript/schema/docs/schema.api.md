@@ -4,39 +4,12 @@
 
 ```ts
 
-import type { AggregateArgs } from '@datashaper/core';
-import type { BinArgs } from '@datashaper/core';
-import type { BinarizeArgs } from '@datashaper/core';
-import type { BooleanArgs } from '@datashaper/core';
-import type { ConvertArgs } from '@datashaper/core';
-import type { DedupeArgs } from '@datashaper/core';
-import type { DeriveArgs } from '@datashaper/core';
-import type { EraseArgs } from '@datashaper/core';
-import type { FetchArgs } from '@datashaper/core';
-import type { FillArgs } from '@datashaper/core';
-import type { FilterArgs } from '@datashaper/core';
-import type { FoldArgs } from '@datashaper/core';
-import type { GroupbyArgs } from '@datashaper/core';
-import type { ImputeArgs } from '@datashaper/core';
-import type { JoinArgs } from '@datashaper/core';
-import type { LookupArgs } from '@datashaper/core';
-import type { MergeArgs } from '@datashaper/core';
-import type { OnehotArgs } from '@datashaper/core';
-import type { OrderbyArgs } from '@datashaper/core';
-import type { OutputPortBinding } from '@datashaper/core';
-import type { PivotArgs } from '@datashaper/core';
-import type { PortBinding } from '@datashaper/core';
-import type { RecodeArgs } from '@datashaper/core';
-import type { RenameArgs } from '@datashaper/core';
-import type { RollupArgs } from '@datashaper/core';
-import type { SampleArgs } from '@datashaper/core';
-import type { SelectArgs } from '@datashaper/core';
-import type { SpreadArgs } from '@datashaper/core';
-import type { UnfoldArgs } from '@datashaper/core';
-import type { UnhotArgs } from '@datashaper/core';
-import type { UnrollArgs } from '@datashaper/core';
-import type { Verb } from '@datashaper/core';
-import type { WindowArgs } from '@datashaper/core';
+// Warning: (ae-missing-release-tag) "AggregateArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface AggregateArgs extends RollupArgs {
+    groupby: string;
+}
 
 // Warning: (ae-missing-release-tag) "BasicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -47,6 +20,218 @@ export interface BasicInput {
     };
 }
 
+// Warning: (ae-missing-release-tag) "Bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Bin {
+    // (undocumented)
+    count: number;
+    // (undocumented)
+    min: number | string;
+}
+
+// Warning: (ae-missing-release-tag) "BinArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface BinArgs extends InputColumnArgs, OutputColumnArgs {
+    clamped?: boolean;
+    fixedcount?: number;
+    fixedwidth?: number;
+    max?: number;
+    min?: number;
+    printRange?: boolean;
+    // (undocumented)
+    strategy: BinStrategy;
+}
+
+// Warning: (ae-missing-release-tag) "BinarizeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface BinarizeArgs extends FilterArgs, OutputColumnArgs {
+}
+
+// Warning: (ae-missing-release-tag) "BinStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum BinStrategy {
+    // (undocumented)
+    Auto = "auto",
+    // (undocumented)
+    FixedCount = "fixed count",
+    // (undocumented)
+    FixedWidth = "fixed width"
+}
+
+// Warning: (ae-missing-release-tag) "BooleanArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface BooleanArgs extends InputColumnListArgs, OutputColumnArgs {
+    // (undocumented)
+    operator: BooleanOperator;
+}
+
+// Warning: (ae-missing-release-tag) "BooleanComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum BooleanComparisonOperator {
+    // (undocumented)
+    Equals = "equals",
+    // (undocumented)
+    IsEmpty = "is empty",
+    // (undocumented)
+    IsFalse = "is false",
+    // (undocumented)
+    IsNotEmpty = "is not empty",
+    // (undocumented)
+    IsTrue = "is true",
+    // (undocumented)
+    NotEqual = "is not equal"
+}
+
+// Warning: (ae-missing-release-tag) "BooleanOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum BooleanOperator {
+    AND = "and",
+    NAND = "nand",
+    NOR = "nor",
+    OR = "or",
+    XNOR = "xnor",
+    XOR = "xor"
+}
+
+// Warning: (ae-missing-release-tag) "Category" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Category {
+    // (undocumented)
+    count: number;
+    // (undocumented)
+    name: string;
+}
+
+// Warning: (ae-missing-release-tag) "ColumnMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ColumnMetadata {
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    stats?: ColumnStats;
+    // (undocumented)
+    type: DataType;
+}
+
+// Warning: (ae-missing-release-tag) "ColumnStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ColumnStats {
+    // (undocumented)
+    bins?: Bin[];
+    // (undocumented)
+    categories?: Category[];
+    // (undocumented)
+    count: number;
+    // (undocumented)
+    distinct: number;
+    // (undocumented)
+    invalid: number;
+    // (undocumented)
+    max?: number;
+    // (undocumented)
+    mean?: number;
+    // (undocumented)
+    median?: number;
+    // (undocumented)
+    min?: number;
+    // (undocumented)
+    mode: any;
+    // (undocumented)
+    stdev?: number;
+    // (undocumented)
+    type: DataType;
+}
+
+// Warning: (ae-missing-release-tag) "ConvertArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ConvertArgs extends InputColumnListArgs {
+    // (undocumented)
+    delimiter?: string;
+    // (undocumented)
+    formatPattern?: string;
+    radix?: number;
+    // (undocumented)
+    type: ParseType;
+}
+
+// Warning: (ae-missing-release-tag) "Criterion" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Criterion {
+    // (undocumented)
+    operator: NumericComparisonOperator | StringComparisonOperator | BooleanComparisonOperator | DateComparisonOperator;
+    type: FilterCompareType;
+    value?: Value;
+}
+
+// Warning: (ae-missing-release-tag) "DataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum DataType {
+    // (undocumented)
+    Array = "array",
+    // (undocumented)
+    Boolean = "boolean",
+    // (undocumented)
+    Date = "date",
+    // (undocumented)
+    Number = "number",
+    // (undocumented)
+    Object = "object",
+    // (undocumented)
+    String = "string",
+    // (undocumented)
+    Text = "text",
+    // (undocumented)
+    Undefined = "undefined",
+    // (undocumented)
+    Unknown = "unknown"
+}
+
+// Warning: (ae-missing-release-tag) "DateComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum DateComparisonOperator {
+    // (undocumented)
+    After = "after",
+    // (undocumented)
+    Before = "before",
+    // (undocumented)
+    Equals = "equals",
+    // (undocumented)
+    IsEmpty = "is empty",
+    // (undocumented)
+    IsNotEmpty = "is not empty",
+    // (undocumented)
+    NotEqual = "is not equal"
+}
+
+// Warning: (ae-missing-release-tag) "DedupeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type DedupeArgs = Partial<InputColumnListArgs>;
+
+// Warning: (ae-missing-release-tag) "DeriveArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DeriveArgs extends OutputColumnArgs {
+    column1: string;
+    column2: string;
+    // (undocumented)
+    operator: MathOperator;
+}
+
 // Warning: (ae-missing-release-tag) "DualInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -55,6 +240,388 @@ export interface DualInput extends BasicInput {
         source: PortBinding;
         other: PortBinding;
     };
+}
+
+// Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface EraseArgs extends InputColumnListArgs {
+    // (undocumented)
+    value: Value;
+}
+
+// Warning: (ae-missing-release-tag) "FetchArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FetchArgs {
+    autoMax?: number;
+    delimiter?: string;
+    url: string;
+}
+
+// Warning: (ae-missing-release-tag) "FieldAggregateOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum FieldAggregateOperation {
+    // (undocumented)
+    Any = "any",
+    // (undocumented)
+    Count = "count",
+    // (undocumented)
+    CountDistinct = "distinct",
+    // (undocumented)
+    CreateArray = "array_agg",
+    // (undocumented)
+    CreateArrayDistinct = "array_agg_distinct",
+    // (undocumented)
+    Invalid = "invalid",
+    // (undocumented)
+    Max = "max",
+    // (undocumented)
+    Mean = "mean",
+    // (undocumented)
+    Median = "median",
+    // (undocumented)
+    Min = "min",
+    // (undocumented)
+    Mode = "mode",
+    // (undocumented)
+    Product = "product",
+    // (undocumented)
+    StandardDeviation = "stdev",
+    // (undocumented)
+    StandardDeviationPopulation = "stdevp",
+    // (undocumented)
+    Sum = "sum",
+    // (undocumented)
+    Valid = "valid",
+    // (undocumented)
+    Variance = "variance"
+}
+
+// Warning: (ae-missing-release-tag) "FillArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FillArgs extends OutputColumnArgs {
+    value: Value;
+}
+
+// Warning: (ae-missing-release-tag) "FilterArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FilterArgs extends InputColumnArgs {
+    // (undocumented)
+    criteria: Criterion[];
+    // (undocumented)
+    logical?: BooleanOperator;
+}
+
+// Warning: (ae-missing-release-tag) "FilterCompareType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum FilterCompareType {
+    // (undocumented)
+    Column = "column",
+    // (undocumented)
+    Value = "value"
+}
+
+// Warning: (ae-missing-release-tag) "FoldArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FoldArgs extends InputColumnListArgs {
+    to?: [string, string];
+}
+
+// Warning: (ae-missing-release-tag) "GroupbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GroupbyArgs = InputColumnListArgs;
+
+// Warning: (ae-missing-release-tag) "ImputeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ImputeArgs extends InputColumnListArgs {
+    value: Value;
+}
+
+// Warning: (ae-missing-release-tag) "InputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface InputColumnArgs {
+    column: string;
+}
+
+// Warning: (ae-missing-release-tag) "InputColumnListArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface InputColumnListArgs {
+    // (undocumented)
+    columns: string[];
+}
+
+// Warning: (ae-missing-release-tag) "InputColumnRecordArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface InputColumnRecordArgs {
+    columns: Record<string, string>;
+}
+
+// Warning: (ae-missing-release-tag) "JoinArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface JoinArgs extends JoinArgsBase {
+    // (undocumented)
+    strategy?: JoinStrategy;
+}
+
+// Warning: (ae-missing-release-tag) "JoinArgsBase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface JoinArgsBase {
+    on?: string[];
+}
+
+// Warning: (ae-missing-release-tag) "JoinStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum JoinStrategy {
+    // (undocumented)
+    AntiJoin = "anti join",
+    // (undocumented)
+    Cross = "cross",
+    // (undocumented)
+    FullOuter = "full outer",
+    // (undocumented)
+    Inner = "inner",
+    // (undocumented)
+    LeftOuter = "left outer",
+    // (undocumented)
+    RightOuter = "right outer",
+    // (undocumented)
+    SemiJoin = "semi join"
+}
+
+// Warning: (ae-missing-release-tag) "LookupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {
+}
+
+// Warning: (ae-missing-release-tag) "MathOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum MathOperator {
+    // (undocumented)
+    Add = "+",
+    // (undocumented)
+    Divide = "/",
+    // (undocumented)
+    Multiply = "*",
+    // (undocumented)
+    Subtract = "-"
+}
+
+// Warning: (ae-missing-release-tag) "MergeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
+    delimiter?: string;
+    // (undocumented)
+    keepOriginalColumns?: boolean;
+    // (undocumented)
+    prefix?: string;
+    // (undocumented)
+    strategy: MergeStrategy;
+    // (undocumented)
+    unhot?: boolean;
+}
+
+// Warning: (ae-missing-release-tag) "MergeStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum MergeStrategy {
+    // (undocumented)
+    Concat = "concat",
+    // (undocumented)
+    CreateArray = "array",
+    // (undocumented)
+    FirstOneWins = "first one wins",
+    // (undocumented)
+    LastOneWins = "last one wins"
+}
+
+// Warning: (ae-missing-release-tag) "NamedOutputPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface NamedOutputPortBinding extends NamedPortBinding {
+    name: string;
+}
+
+// Warning: (ae-missing-release-tag) "NamedPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface NamedPortBinding {
+    node: string;
+    output?: string;
+}
+
+// Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum NumericComparisonOperator {
+    // (undocumented)
+    Equals = "=",
+    // (undocumented)
+    GreaterThan = ">",
+    // (undocumented)
+    GreaterThanOrEqual = ">=",
+    // (undocumented)
+    IsEmpty = "is empty",
+    // (undocumented)
+    IsNotEmpty = "is not empty",
+    // (undocumented)
+    LessThan = "<",
+    // (undocumented)
+    LessThanOrEqual = "<=",
+    // (undocumented)
+    NotEqual = "!="
+}
+
+// Warning: (ae-missing-release-tag) "OnehotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface OnehotArgs extends InputColumnListArgs {
+    prefixes?: Record<string, string>;
+}
+
+// Warning: (ae-missing-release-tag) "OrderbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface OrderbyArgs {
+    orders: OrderbyInstruction[];
+}
+
+// Warning: (ae-missing-release-tag) "OrderbyInstruction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface OrderbyInstruction {
+    // (undocumented)
+    column: string;
+    // (undocumented)
+    direction?: SortDirection;
+}
+
+// Warning: (ae-missing-release-tag) "OutputColumnArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface OutputColumnArgs {
+    to: string;
+}
+
+// Warning: (ae-missing-release-tag) "OutputPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type OutputPortBinding = string | NamedOutputPortBinding;
+
+// Warning: (ae-missing-release-tag) "ParseType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum ParseType {
+    // (undocumented)
+    Array = "array",
+    // (undocumented)
+    Boolean = "boolean",
+    // (undocumented)
+    Date = "date",
+    Decimal = "float",
+    // (undocumented)
+    Integer = "int",
+    // (undocumented)
+    String = "string"
+}
+
+// Warning: (ae-missing-release-tag) "PivotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface PivotArgs {
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    operation: FieldAggregateOperation;
+    // (undocumented)
+    value: string;
+}
+
+// Warning: (ae-missing-release-tag) "PortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PortBinding = string | NamedPortBinding;
+
+// Warning: (ae-missing-release-tag) "RecodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
+    map: Record<Value, Value>;
+}
+
+// Warning: (ae-missing-release-tag) "RenameArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type RenameArgs = InputColumnRecordArgs;
+
+// Warning: (ae-missing-release-tag) "RollupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface RollupArgs extends InputColumnArgs, OutputColumnArgs {
+    operation: FieldAggregateOperation;
+}
+
+// Warning: (ae-missing-release-tag) "SampleArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface SampleArgs {
+    proportion?: number;
+    size?: number;
+}
+
+// Warning: (ae-missing-release-tag) "SelectArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type SelectArgs = InputColumnListArgs;
+
+// Warning: (ae-missing-release-tag) "SetOp" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum SetOp {
+    // (undocumented)
+    Concat = "concat",
+    // (undocumented)
+    Difference = "difference",
+    // (undocumented)
+    Intersect = "intersect",
+    // (undocumented)
+    Union = "union"
+}
+
+// Warning: (ae-missing-release-tag) "SortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum SortDirection {
+    // (undocumented)
+    Ascending = "asc",
+    // (undocumented)
+    Descending = "desc"
+}
+
+// Warning: (ae-missing-release-tag) "SpreadArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface SpreadArgs extends InputColumnListArgs {
+    delimiter?: string;
+    onehot?: boolean;
+    // (undocumented)
+    to: string[];
 }
 
 // Warning: (ae-missing-release-tag) "StepJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -171,6 +738,69 @@ export interface StepJsonCommon {
     id?: string;
 }
 
+// Warning: (ae-missing-release-tag) "StringComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum StringComparisonOperator {
+    // (undocumented)
+    Contains = "contains",
+    // (undocumented)
+    EndsWith = "ends with",
+    // (undocumented)
+    Equals = "equals",
+    // (undocumented)
+    IsEmpty = "is empty",
+    // (undocumented)
+    IsNotEmpty = "is not empty",
+    // (undocumented)
+    NotEqual = "is not equal",
+    // (undocumented)
+    RegularExpression = "regex",
+    // (undocumented)
+    StartsWith = "starts with"
+}
+
+// Warning: (ae-missing-release-tag) "TableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TableMetadata {
+    // (undocumented)
+    cols: number;
+    columns: Record<string, ColumnMetadata>;
+    // (undocumented)
+    rows: number;
+}
+
+// Warning: (ae-missing-release-tag) "UnfoldArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface UnfoldArgs {
+    // (undocumented)
+    key: string;
+    // (undocumented)
+    value: string;
+}
+
+// Warning: (ae-missing-release-tag) "UnhotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
+    // (undocumented)
+    keepOriginalColumns?: boolean;
+    // (undocumented)
+    prefix?: string;
+}
+
+// Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UnrollArgs = InputColumnListArgs;
+
+// Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type Value = any;
+
 // Warning: (ae-missing-release-tag) "VariadicInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -179,6 +809,114 @@ export interface VariadicInput extends BasicInput {
         source: PortBinding;
         others?: PortBinding[];
     };
+}
+
+// Warning: (ae-missing-release-tag) "Verb" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum Verb {
+    // (undocumented)
+    Aggregate = "aggregate",
+    // (undocumented)
+    Bin = "bin",
+    // (undocumented)
+    Binarize = "binarize",
+    // (undocumented)
+    Boolean = "boolean",
+    // (undocumented)
+    Concat = "concat",
+    // (undocumented)
+    Convert = "convert",
+    // (undocumented)
+    Dedupe = "dedupe",
+    // (undocumented)
+    Derive = "derive",
+    // (undocumented)
+    Difference = "difference",
+    // (undocumented)
+    Erase = "erase",
+    // (undocumented)
+    Fetch = "fetch",
+    // (undocumented)
+    Fill = "fill",
+    // (undocumented)
+    Filter = "filter",
+    // (undocumented)
+    Fold = "fold",
+    // (undocumented)
+    Groupby = "groupby",
+    // (undocumented)
+    Impute = "impute",
+    // (undocumented)
+    Intersect = "intersect",
+    // (undocumented)
+    Join = "join",
+    // (undocumented)
+    Lookup = "lookup",
+    // (undocumented)
+    Merge = "merge",
+    // (undocumented)
+    Onehot = "onehot",
+    // (undocumented)
+    Orderby = "orderby",
+    // (undocumented)
+    Pivot = "pivot",
+    // (undocumented)
+    Recode = "recode",
+    // (undocumented)
+    Rename = "rename",
+    // (undocumented)
+    Rollup = "rollup",
+    // (undocumented)
+    Sample = "sample",
+    // (undocumented)
+    Select = "select",
+    // (undocumented)
+    Spread = "spread",
+    // (undocumented)
+    Unfold = "unfold",
+    // (undocumented)
+    Ungroup = "ungroup",
+    // (undocumented)
+    Unhot = "unhot",
+    // (undocumented)
+    Union = "union",
+    // (undocumented)
+    Unorder = "unorder",
+    // (undocumented)
+    Unroll = "unroll",
+    // (undocumented)
+    Window = "window"
+}
+
+// Warning: (ae-missing-release-tag) "WindowArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface WindowArgs extends InputColumnArgs, OutputColumnArgs {
+    // (undocumented)
+    operation: WindowFunction;
+}
+
+// Warning: (ae-missing-release-tag) "WindowFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum WindowFunction {
+    // (undocumented)
+    CumulativeDistribution = "cume_dist",
+    // (undocumented)
+    FillDown = "fill_down",
+    // (undocumented)
+    FillUp = "fill_up",
+    // (undocumented)
+    FirstValue = "first_value",
+    // (undocumented)
+    LastValue = "last_value",
+    // (undocumented)
+    PercentRank = "percent_rank",
+    // (undocumented)
+    Rank = "rank",
+    // (undocumented)
+    RowNumber = "row_number"
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

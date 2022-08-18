@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { SortDirection, TableMetadata } from '@datashaper/arquero'
-import { DataType } from '@datashaper/arquero'
+import type { SortDirection, TableMetadata } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import type { IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'

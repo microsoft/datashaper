@@ -2,17 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Value } from '@datashaper/arquero'
+import type { EraseArgs } from '@datashaper/schema'
 import { escape } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { InputColumnListArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-
-export interface EraseArgs extends InputColumnListArgs {
-	value: Value
-}
 
 export const eraseStep: ColumnTableStep<EraseArgs> = (
 	input: ColumnTable,

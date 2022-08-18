@@ -2,15 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { columnTypes, DataType } from '@datashaper/arquero'
-import type {
-	GraphManager,
-	InputColumnArgs,
-	OutputColumnArgs,
-	Step,
-} from '@datashaper/core'
-import { isNumericInputStep } from '@datashaper/core'
-import { NodeInput } from '@datashaper/dataflow'
+import { columnTypes } from '@datashaper/arquero'
+import type { GraphManager, Step } from '@datashaper/core'
+import { isNumericInputStep, NodeInput } from '@datashaper/core'
+import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
 import { useCallback, useEffect, useMemo } from 'react'

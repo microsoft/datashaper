@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/schema",
-	"version": "1.4.2",
+	"version": "3.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -32,9 +32,6 @@
 		"lint": "essex lint --fix",
 		"bundle": "typescript-json-schema tsconfig.json WorkflowJson > ../../schema/workflow.json",
 		"release": "yarn npm publish --tolerate-republish --access public"
-	},
-	"dependencies": {
-		"@datashaper/core": "workspace:^"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.5",

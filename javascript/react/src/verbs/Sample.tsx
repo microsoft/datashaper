@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { SampleArgs } from '@datashaper/core'
+import type { SampleArgs } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
 import { Position, SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BinarizeArgs } from '@datashaper/core'
-import { FilterCompareType } from '@datashaper/core'
+import type { BinarizeArgs } from '@datashaper/schema'
+import { FilterCompareType } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types.js'

@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnStats } from '@datashaper/arquero'
 import { formatIfNumber } from '@datashaper/arquero'
+import type { ColumnStats } from '@datashaper/schema'
 import { useThematic } from '@thematic/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useMemo } from 'react'

@@ -2,23 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SortDirection } from '@datashaper/arquero'
+import type { OrderbyArgs, OrderbyInstruction } from '@datashaper/schema'
+import { SortDirection } from '@datashaper/schema'
 import { desc } from 'arquero'
 
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-
-export interface OrderbyArgs {
-	/**
-	 * List of ordering instructions to apply
-	 */
-	orders: OrderbyInstruction[]
-}
-
-export interface OrderbyInstruction {
-	column: string
-	direction?: SortDirection
-}
 
 export const orderbyStep: ColumnTableStep<OrderbyArgs> = (input, { orders }) =>
 	// format keys in arquero-compatible format

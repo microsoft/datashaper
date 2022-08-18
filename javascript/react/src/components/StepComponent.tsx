@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/core'
 import {
 	isInputColumnStep,
 	isInputTableStep,
 	isOutputColumnStep,
 } from '@datashaper/core'
-import { NodeInput } from '@datashaper/dataflow'
+import { NodeInput } from '@datashaper/core'
+import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 

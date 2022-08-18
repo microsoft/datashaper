@@ -5,7 +5,7 @@
 
 import Ajv from 'ajv'
 
-import type { WorkflowObject } from '../steps/types.js'
+import type { WorkflowObject } from './types.js'
 
 const baseUrl = 'https://microsoft.github.io/datashaper/schema/workflow'
 // TODO: change to `workflow.json` when it has been deployed to the github.io page
@@ -34,7 +34,7 @@ export class WorkflowSchema {
 			console.warn('No $schema property found in workflow JSON')
 		}
 
-		const version = $schema?.split('schema/')?.pop() || defaultWorkflow
+		const version = $schema?.split('workflow/')?.pop() || defaultWorkflow
 		await getSchema(version).then(schema => {
 			if (!this.ajv.getSchema(version)) {
 				this.ajv.addSchema(schema, version)

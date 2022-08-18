@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { ParseType } from '@datashaper/schema'
+
 import { TestStore } from '../../__tests__/TestStore.js'
 import { convertStep } from '../convert.js'
-import { ParseType } from '../types.js'
 
 /**
  * Keep this unit test around for deep value conversion inspection

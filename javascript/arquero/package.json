@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/arquero",
-	"version": "3.1.0",
+	"version": "4.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -46,6 +46,7 @@
 		"arquero": "^4.8.7"
 	},
 	"dependencies": {
+		"@datashaper/schema": "workspace:^",
 		"lodash-es": "^4.17.21"
 	}
 }

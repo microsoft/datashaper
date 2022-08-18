@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { JoinArgs, Step } from '@datashaper/core'
+import type { Step } from '@datashaper/core'
+import type { JoinArgs } from '@datashaper/schema'
 import { useMemo } from 'react'
 
 export function useLeftColumn(step: Step<JoinArgs>): string | undefined {

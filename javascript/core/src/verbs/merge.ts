@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { MergeArgs } from '@datashaper/schema'
+import { MergeStrategy } from '@datashaper/schema'
 import { escape, not } from 'arquero'
 
-import type { InputColumnListArgs, OutputColumnArgs } from './types.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 import {
@@ -15,25 +16,6 @@ import {
 	lastOneWinsStrategy,
 } from './util/merge.js'
 import { unhotOperation } from './util/unhot-logic.js'
-
-export enum MergeStrategy {
-	FirstOneWins = 'first one wins',
-	LastOneWins = 'last one wins',
-	Concat = 'concat',
-	CreateArray = 'array',
-}
-
-export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
-	strategy: MergeStrategy
-	/**
-	 * This is only necessary if mergeStrategy.Concat is used.
-	 * If it is not supplied, the values are just mashed together.
-	 */
-	delimiter?: string
-	unhot?: boolean
-	prefix?: string
-	keepOriginalColumns?: boolean
-}
 
 export const mergeStep: ColumnTableStep<MergeArgs> = (
 	input,

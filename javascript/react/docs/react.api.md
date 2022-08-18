@@ -6,7 +6,7 @@
 
 /// <reference types="react" />
 
-import type { ColumnMetadata } from '@datashaper/arquero';
+import type { ColumnMetadata } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { DropzoneOptions } from 'react-dropzone';
 import { FileCollection } from '@datashaper/utilities';
@@ -28,12 +28,12 @@ import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
 import type { ReactElement } from 'react';
 import type { RowObject } from 'arquero/dist/types/table/table';
-import { SortDirection } from '@datashaper/arquero';
+import { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/core';
 import type { TableContainer } from '@datashaper/arquero';
-import type { TableMetadata } from '@datashaper/arquero';
+import type { TableMetadata } from '@datashaper/schema';
 import type { Theme } from '@thematic/core';
-import type { Verb } from '@datashaper/core';
+import type { Verb } from '@datashaper/schema';
 import type { Workflow } from '@datashaper/core';
 
 // Warning: (ae-missing-release-tag) "ArqueroDetailsList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { coerce, DataType } from '@datashaper/arquero'
+import { coerce } from '@datashaper/arquero'
+import { DataType } from '@datashaper/schema'
 import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown, SpinButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'

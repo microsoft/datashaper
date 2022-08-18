@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ConvertArgs } from '@datashaper/core'
+import type { ConvertArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
 import {

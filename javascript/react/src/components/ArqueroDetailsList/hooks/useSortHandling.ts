@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SortDirection } from '@datashaper/arquero'
+import { SortDirection } from '@datashaper/schema'
 import type { IColumn } from '@fluentui/react'
 import noop from 'lodash-es/noop.js'
 import { useCallback, useState } from 'react'

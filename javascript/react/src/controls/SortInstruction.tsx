@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { SortDirection } from '@datashaper/arquero'
+import { SortDirection } from '@datashaper/schema'
 import { IconButton } from '@fluentui/react'
 import { memo } from 'react'
 

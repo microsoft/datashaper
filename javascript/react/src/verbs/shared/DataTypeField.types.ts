@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataType,Value } from '@datashaper/arquero'
+import type { DataType, Value } from '@datashaper/schema'
 
 export interface DataTypeFieldProps {
 	dataType: DataType

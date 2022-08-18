@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/core",
-	"version": "7.1.1",
+	"version": "9.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -35,12 +35,12 @@
 	},
 	"dependencies": {
 		"@datashaper/arquero": "workspace:^",
-		"@datashaper/dataflow": "workspace:^",
+		"@datashaper/schema": "workspace:^",
 		"ajv": "^8.11.0",
 		"d3-time-format": "^4.1.0",
 		"lodash-es": "^4.17.21",
 		"rxjs": "^7.5.5",
-		"toposort": "^2.0.2"
+		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
 		"@essex/jest-config": "^21.0.13",
@@ -50,7 +50,7 @@
 		"@types/jest": "^27.5.2",
 		"@types/lodash-es": "^4.17.6",
 		"@types/node": "^18.0.0",
-		"@types/toposort": "^2.0.3",
+		"@types/uuid": "^8.3.4",
 		"ajv": "^8.11.0",
 		"arquero": "^4.8.8",
 		"jest": "^28.1.2",

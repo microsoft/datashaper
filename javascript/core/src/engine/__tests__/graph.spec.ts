@@ -3,11 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/arquero'
+import { Verb } from '@datashaper/schema'
 import { table } from 'arquero'
 
 import { createTableStore } from '../../__tests__/createTableStore.js'
 import { Workflow } from '../../engine/Workflow.js'
-import { Verb } from '../../index.js'
 import { createGraph } from '../graph.js'
 
 describe('stepGraph', () => {
@@ -21,26 +21,23 @@ describe('stepGraph', () => {
 
 	test('runs a single step with normal input/output', () => {
 		const g = createGraph(
-			new Workflow(
-				{
-					$schema:
-						'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
-					input: ['input'],
-					steps: [
-						{
-							id: 'fill1',
-							verb: Verb.Fill,
-							args: {
-								to: 'filled',
-								value: 1,
-							},
-							input: 'input',
+			new Workflow({
+				$schema:
+					'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
+				input: ['input'],
+				steps: [
+					{
+						id: 'fill1',
+						verb: Verb.Fill,
+						args: {
+							to: 'filled',
+							value: 1,
 						},
-					],
-					output: [{ name: 'output', node: 'fill1' }],
-				},
-				false,
-			),
+						input: 'input',
+					},
+				],
+				output: [{ name: 'output', node: 'fill1' }],
+			}),
 			store,
 		)
 		expect(g).toBeDefined()

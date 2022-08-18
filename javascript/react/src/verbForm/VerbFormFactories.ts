@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { InputColumnListArgs, JoinArgs, Step } from '@datashaper/core'
+import type { Step } from '@datashaper/core'
+import type { InputColumnListArgs, JoinArgs } from '@datashaper/schema'
 import { toggleListItem } from '@datashaper/utilities'
 
 import { getEnumDropdownOptions } from '../enums.js'
