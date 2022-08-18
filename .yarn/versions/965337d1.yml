@@ -1,7 +1,4 @@
-releases:
-  "@datashaper/core": patch
-  "@datashaper/react": patch
-
 declined:
-  - "@datashaper/schema"
+  - "@datashaper/core"
+  - "@datashaper/react"
   - "@datashaper/webapp"
