@@ -6,7 +6,7 @@
 import type { TableContainer } from '@datashaper/arquero'
 import type { GraphManager, Step, Workflow } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import cloneDeep from 'lodash-es/cloneDeep.js'
+import cloneDeep from 'lodash-es/cloneDeep'
 import { useCallback, useEffect, useState } from 'react'
 
 import type { ModalState } from '../hooks/index.js'
