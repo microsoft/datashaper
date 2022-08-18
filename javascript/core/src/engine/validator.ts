@@ -34,7 +34,7 @@ export class WorkflowSchema {
 			console.warn('No $schema property found in workflow JSON')
 		}
 
-		const version = $schema?.split('schema/')?.pop() || defaultWorkflow
+		const version = $schema?.split('workflow/')?.pop() || defaultWorkflow
 		await getSchema(version).then(schema => {
 			if (!this.ajv.getSchema(version)) {
 				this.ajv.addSchema(schema, version)

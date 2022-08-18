@@ -112,7 +112,11 @@ export function useOnUpdateWorkflowJson(
 	onUpdateWorkflow: (workflow: Workflow) => void,
 ): (wf: WorkflowObject) => void {
 	return useCallback(
-		(wf: WorkflowObject) => onUpdateWorkflow(new Workflow(wf)),
+		async (wf: WorkflowObject) => {
+			const valid = await Workflow.validate(wf)
+			if (!valid) throw Error('Invalid workflow definition')
+			return onUpdateWorkflow(new Workflow(wf))
+		},
 		[onUpdateWorkflow],
 	)
 }
