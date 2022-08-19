@@ -45,6 +45,16 @@ import type { WindowArgs } from '@datashaper/schema';
 // @public (undocumented)
 export const aggregate: (id: string) => StepNode<TableContainer<unknown>, AggregateArgs>;
 
+// Warning: (ae-missing-release-tag) "argsHasOutputColumn" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function argsHasOutputColumn(args: any): boolean;
+
+// Warning: (ae-missing-release-tag) "array" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function array<T = string>(nodes: ReadonlyArray<T>, edges: ReadonlyArray<[T, T | undefined]>): any[];
+
 // Warning: (ae-missing-release-tag) "BaseNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -119,6 +129,11 @@ export const binarize: (id: string) => StepNode<TableContainer<unknown>, Binariz
 //
 // @public (undocumented)
 export const boolean: (id: string) => StepNode<TableContainer<unknown>, BooleanArgs>;
+
+// Warning: (ae-missing-release-tag) "cloneStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function cloneStep(step: Step<unknown>, columnNames?: string[]): Step<unknown>;
 
 // Warning: (ae-missing-release-tag) "columnTransformVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -267,7 +282,6 @@ export class GraphManager {
     removeStep(index: number): void;
     reset(workflow?: Workflow): void;
     get steps(): Step[];
-    suggestOutputName(name: string): string;
     // (undocumented)
     toList(): Maybe<TableContainer>[];
     toMap(): Map<string, Maybe<TableContainer>>;
@@ -365,6 +379,16 @@ export type Maybe<T> = T | undefined;
 //
 // @public (undocumented)
 export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>;
+
+// Warning: (ae-missing-release-tag) "nextColumnName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function nextColumnName(name: string, columnNames: string[]): string;
+
+// Warning: (ae-missing-release-tag) "nextOutputName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function nextOutputName(name: string, workflow: Workflow): string;
 
 // @public
 interface Node_2<T, Config = unknown> {
@@ -602,6 +626,8 @@ export class Workflow {
     addStep(stepInput: StepInput): Step;
     // (undocumented)
     clear(): void;
+    // (undocumented)
+    clone(): Workflow;
     // (undocumented)
     hasInput(input: string): boolean;
     // (undocumented)

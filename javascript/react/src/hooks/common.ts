@@ -4,7 +4,7 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import type { GraphManager, Step, Workflow } from '@datashaper/core'
-import { createGraphManager, readStep } from '@datashaper/core'
+import { createGraphManager, nextOutputName, readStep } from '@datashaper/core'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useMemo } from 'react'
 
@@ -13,7 +13,7 @@ export function useGraphManager(
 	inputs?: TableContainer[],
 ): GraphManager {
 	const manager = useMemo(
-		() => createGraphManager(undefined, workflow),
+		() => createGraphManager(mapInputs(inputs), workflow),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[
 			/* only create on first pass */
@@ -37,6 +37,12 @@ export function useGraphManager(
 	return manager
 }
 
+function mapInputs(inputs?: TableContainer[]) {
+	const _inputs = new Map()
+	inputs?.forEach(i => _inputs.set(i.id, i))
+	return _inputs
+}
+
 /**
  * Returns a hook to generate a new table name based on the given input e.g.
  * "join" could result in "join 1" or "join 2" depending on how many collisions
@@ -48,7 +54,7 @@ export function useCreateTableName(
 	graph: GraphManager,
 ): (name: string) => string {
 	return useCallback(
-		(name: string): string => graph.suggestOutputName(name),
+		(name: string): string => nextOutputName(name, graph.workflow),
 		[graph],
 	)
 }

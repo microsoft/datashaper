@@ -8,6 +8,7 @@ import type {
 } from '@datashaper/schema'
 import { Subject } from 'rxjs'
 
+import { cloneStep } from '../util/index.js'
 import { readStep } from './readStep.js'
 import type { Step, StepInput, WorkflowObject } from './types.js'
 import { WorkflowSchemaInstance } from './validator.js'
@@ -45,6 +46,14 @@ export class Workflow {
 			const binding = fixOutput(o)
 			this._output.set(binding.name, binding)
 		})
+	}
+
+	public clone(): Workflow {
+		const clone = new Workflow()
+		clone._steps = this._steps.map(x => cloneStep(x))
+		clone._input = new Set(this._input)
+		clone._output = new Map(this._output)
+		return clone
 	}
 
 	public static async validate(workflowJson: WorkflowObject): Promise<boolean> {
@@ -147,7 +156,7 @@ export class Workflow {
 			output.push({ ...binding, name })
 		}
 		return {
-			$schema: `https://microsoft.github.io/datashaper/schema/workflow/v1.json`,
+			$schema: `https://microsoft.github.io/datashaper/schema/workflow/v3.json`,
 			name: this._name,
 			description: this._description,
 			input: [...this._input.values()],

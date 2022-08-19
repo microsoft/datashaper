@@ -3,10 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Verb } from '@datashaper/schema'
+import cloneDeep from 'lodash-es/cloneDeep.js'
 import difference from 'lodash-es/difference.js'
 import intersection from 'lodash-es/intersection.js'
 
 import type { Step } from '../engine/index.js'
+import { argsHasOutputColumn } from './args.js'
+import { nextColumnName } from './workflowSuggestion.js'
 
 enum Tags {
 	/**
@@ -155,4 +158,18 @@ export function columnTransformVerbs(
  */
 export function verbs(filter: (verb: Verb) => boolean = () => true): Verb[] {
 	return (Object.keys(TaggedVerbs) as Verb[]).filter(filter)
+}
+
+export function cloneStep(
+	step: Step<unknown>,
+	columnNames?: string[],
+): Step<unknown> {
+	const clone = cloneDeep(step) as any
+
+	if (columnNames?.length) {
+		if (argsHasOutputColumn(clone.args)) {
+			clone.args['to'] = nextColumnName(clone.args['to'] as string, columnNames)
+		}
+	}
+	return clone
 }

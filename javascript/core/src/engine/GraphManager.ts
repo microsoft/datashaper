@@ -7,6 +7,7 @@ import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 } from '@datashaper/schema'
+import isEqual from 'lodash-es/isEqual'
 import type { Observable, Subscription } from 'rxjs'
 import { from, Subject } from 'rxjs'
 
@@ -109,13 +110,16 @@ export class GraphManager {
 	 * Remove all steps, inputs, and outputs from the pipeline
 	 */
 	public reset(workflow?: Workflow): void {
+		if (this.isWorkflowEqual(workflow)) {
+			return
+		}
 		this._workflow.clear()
 		// todo: add graph clear
 		this.graph.nodes.forEach(id => this._graph.remove(id))
 
 		// if a new workflow is injected, sync it into the graph
 		if (workflow != null) {
-			this._workflow = workflow
+			this._workflow = workflow.clone()
 			this._syncWorkflowStateIntoGraph()
 		}
 		this._onChange.next()
@@ -322,26 +326,6 @@ export class GraphManager {
 	}
 
 	/**
-	 * Suggests a new table name given the root. If the root is
-	 * used, this will append numbers to the end.
-	 * e.g. "join" may result in "join 1" or "join 2" if there are
-	 * collisions
-	 *
-	 * @param name - the proposed name
-	 */
-	public suggestOutputName(name: string): string {
-		const originalName = name.replace(/( \(\d+\))/, '')
-		let derivedName = originalName
-		let count = 1
-
-		while (this._workflow.hasOutput(derivedName)) {
-			derivedName = `${originalName} (${count})`
-			count++
-		}
-		return derivedName
-	}
-
-	/**
 	 * Gets a map of the current output tables
 	 * @returns The output cache
 	 */
@@ -399,13 +383,21 @@ export class GraphManager {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}
 	}
+
+	private isWorkflowEqual(workflow?: Workflow): boolean {
+		return (
+			isEqual(workflow?.steps, this._workflow?.steps) &&
+			isEqual(workflow?.input, this._workflow?.input) &&
+			isEqual(workflow?.output, this._workflow?.output)
+		)
+	}
 }
 
 export function createGraphManager(
 	inputs?: Map<string, TableContainer> | undefined,
 	workflow?: Workflow | undefined,
 ): GraphManager {
-	return new GraphManager(inputs, workflow ?? new Workflow())
+	return new GraphManager(inputs, workflow ? workflow.clone() : new Workflow())
 }
 
 function hasDefinedInputs(step: Step): boolean {
