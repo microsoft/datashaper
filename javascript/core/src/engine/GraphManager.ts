@@ -7,7 +7,7 @@ import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 } from '@datashaper/schema'
-import { isEqual as isEqualLd } from 'lodash-es'
+import isEqual from 'lodash-es/isEqual'
 import type { Observable, Subscription } from 'rxjs'
 import { from, Subject } from 'rxjs'
 
@@ -110,7 +110,7 @@ export class GraphManager {
 	 * Remove all steps, inputs, and outputs from the pipeline
 	 */
 	public reset(workflow?: Workflow): void {
-		if (this.isEqual(workflow)) {
+		if (this.isWorkflowEqual(workflow)) {
 			return
 		}
 		this._workflow.clear()
@@ -404,11 +404,11 @@ export class GraphManager {
 		}
 	}
 
-	private isEqual(workflow?: Workflow): boolean {
+	private isWorkflowEqual(workflow?: Workflow): boolean {
 		return (
-			isEqualLd(workflow?.steps, this._workflow?.steps) &&
-			isEqualLd(workflow?.input, this._workflow?.input) &&
-			isEqualLd(workflow?.output, this._workflow?.output)
+			isEqual(workflow?.steps, this._workflow?.steps) &&
+			isEqual(workflow?.input, this._workflow?.input) &&
+			isEqual(workflow?.output, this._workflow?.output)
 		)
 	}
 }

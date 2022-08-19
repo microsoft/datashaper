@@ -1,6 +1,8 @@
 releases:
   "@datashaper/arquero": patch
-  "@datashaper/core": patch
+  "@datashaper/core": minor
   "@datashaper/react": patch
-  "@datashaper/schema": decline
   "@datashaper/webapp": patch
+
+declined:
+  - "@datashaper/schema"
