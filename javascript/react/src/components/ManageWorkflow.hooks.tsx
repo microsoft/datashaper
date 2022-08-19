@@ -5,8 +5,8 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { TableContainer } from '@datashaper/arquero'
 import type { GraphManager, Step, Workflow } from '@datashaper/core'
+import { cloneStep } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import cloneDeep from 'lodash-es/cloneDeep'
 import { useCallback, useEffect, useState } from 'react'
 
 import type { ModalState } from '../hooks/index.js'
@@ -21,25 +21,21 @@ import {
 export function useOnDuplicateStep(
 	graph: GraphManager,
 	table?: ColumnTable,
-	onSave?: (step: Step, output: string | undefined, ndex?: number) => void,
+	onSave?: (step: Step, output: string | undefined, index?: number) => void,
 ): (_step: Step) => void {
 	const createTableName = useCreateTableName(graph)
-	const argsDuplicator = useArgsDuplicator()
 
 	return useCallback(
 		(step: Step) => {
 			const outputTable = table ?? graph?.latestForNodeId(step.id)?.table
+			const clonedStep = cloneStep(step, outputTable?.columnNames())
+			clonedStep.id = ''
 			onSave?.(
-				{
-					...step,
-					id: undefined as any,
-					args: argsDuplicator(step, outputTable?.columnNames()),
-					input: cloneDeep(step.input),
-				},
+				clonedStep,
 				createTableName(graph.outputNameForNode(step.id) ?? step.id),
 			)
 		},
-		[onSave, argsDuplicator, graph, table, createTableName],
+		[onSave, graph, table, createTableName],
 	)
 }
 
@@ -48,7 +44,7 @@ export function useOnDuplicateStep(
  *
  * @param setStep - The step setter
  * @param setStepIndex - The step-index setter
- * @param showTableModal - A callback to show the table modas
+ * @param showTableModal - A callback to show the table modal
  * @returns
  */
 export function useOnEditStep(
@@ -155,52 +151,6 @@ export function useOnDeleteStep(graph: GraphManager): (index: number) => void {
 	)
 }
 
-function useArgsDuplicator(): (
-	step: Step,
-	columnNames: string[] | undefined,
-) => object {
-	const createColumnName = useCreateColumnName()
-	return useCallback(
-		(step: Step, columnNames: string[] | undefined) => {
-			const args = cloneDeep(step.args) as Record<string, unknown>
-
-			// if there's a single-column to-field, find a unique name for it
-			if (args['to'] && typeof args['to'] === 'string') {
-				args['to'] = createColumnName(args['to'] as string, columnNames)
-			}
-			return args
-		},
-		[createColumnName],
-	)
-}
-
-function useCreateColumnName(): (
-	name: string,
-	columnNames: string[] | undefined,
-) => string {
-	const verifyColumnName = useCallback(
-		(name: string, columnNames: string[] | undefined): boolean => {
-			return columnNames?.includes(name) ?? false
-		},
-		[],
-	)
-
-	return useCallback(
-		(name: string, columnNames: string[] | undefined) => {
-			const originalName = name.replace(/( \(\d+\))/, '')
-			let derivedName = originalName
-
-			let count = 1
-			while (verifyColumnName(derivedName, columnNames)) {
-				derivedName = `${originalName} (${count})`
-				count++
-			}
-			return derivedName
-		},
-		[verifyColumnName],
-	)
-}
-
 export function useDeleteConfirm(onDelete?: (args: any) => void): {
 	isOpen: boolean
 	toggle: () => void
@@ -250,7 +200,8 @@ export function useGraphWorkflowListener(
 	setWorkflow?: (workflow: Workflow) => void,
 ): void {
 	useEffect(
-		() => setWorkflow && graph.onChange(() => setWorkflow(graph.workflow)),
+		() =>
+			setWorkflow && graph.onChange(() => setWorkflow(graph.workflow.clone())),
 		[graph, setWorkflow],
 	)
 }

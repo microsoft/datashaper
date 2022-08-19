@@ -120,6 +120,11 @@ export const binarize: (id: string) => StepNode<TableContainer<unknown>, Binariz
 // @public (undocumented)
 export const boolean: (id: string) => StepNode<TableContainer<unknown>, BooleanArgs>;
 
+// Warning: (ae-missing-release-tag) "cloneStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function cloneStep(step: Step<unknown>, columnNames?: string[]): Step<unknown>;
+
 // Warning: (ae-missing-release-tag) "columnTransformVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -602,6 +607,8 @@ export class Workflow {
     addStep(stepInput: StepInput): Step;
     // (undocumented)
     clear(): void;
+    // (undocumented)
+    clone(): Workflow;
     // (undocumented)
     hasInput(input: string): boolean;
     // (undocumented)

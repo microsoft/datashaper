@@ -7,6 +7,7 @@ import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 } from '@datashaper/schema'
+import { isEqual as isEqualLd } from 'lodash-es'
 import type { Observable, Subscription } from 'rxjs'
 import { from, Subject } from 'rxjs'
 
@@ -109,13 +110,16 @@ export class GraphManager {
 	 * Remove all steps, inputs, and outputs from the pipeline
 	 */
 	public reset(workflow?: Workflow): void {
+		if (this.isEqual(workflow)) {
+			return
+		}
 		this._workflow.clear()
 		// todo: add graph clear
 		this.graph.nodes.forEach(id => this._graph.remove(id))
 
 		// if a new workflow is injected, sync it into the graph
 		if (workflow != null) {
-			this._workflow = workflow
+			this._workflow = workflow.clone()
 			this._syncWorkflowStateIntoGraph()
 		}
 		this._onChange.next()
@@ -399,13 +403,21 @@ export class GraphManager {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}
 	}
+
+	private isEqual(workflow?: Workflow): boolean {
+		return (
+			isEqualLd(workflow?.steps, this._workflow?.steps) &&
+			isEqualLd(workflow?.input, this._workflow?.input) &&
+			isEqualLd(workflow?.output, this._workflow?.output)
+		)
+	}
 }
 
 export function createGraphManager(
 	inputs?: Map<string, TableContainer> | undefined,
 	workflow?: Workflow | undefined,
 ): GraphManager {
-	return new GraphManager(inputs, workflow ?? new Workflow())
+	return new GraphManager(inputs, workflow ? workflow.clone() : new Workflow())
 }
 
 function hasDefinedInputs(step: Step): boolean {
