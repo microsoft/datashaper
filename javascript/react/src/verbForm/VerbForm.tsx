@@ -398,12 +398,13 @@ const ComboBoxInput: React.FC<{
 				placeholder={placeholder}
 				styles={dropdownStyles}
 				selectedKey={current as number | string}
+				text={allowFreeForm === true ? (current as string) : ''}
 				options={options!}
 				disabled={disabled}
 				onChange={changeHandler}
 				onInputValueChange={valueChangeHandler}
-				allowFreeForm={allowFreeForm}
-				autoComplete={'on'}
+				allowFreeform={allowFreeForm}
+				autoComplete={'off'}
 			/>
 		</Wrapper>
 	)
