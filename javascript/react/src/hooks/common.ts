@@ -3,8 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/arquero'
-import type { GraphManager, Step, Workflow } from '@datashaper/core'
-import { createGraphManager, nextOutputName, readStep } from '@datashaper/core'
+import type {
+	GraphManager,
+	Step,
+	Workflow} from '@datashaper/core';
+import {
+	createGraphManager,
+	nextOutputName,
+	nextOutputNode,
+	readStep
+} from '@datashaper/core'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useMemo } from 'react'
 
@@ -54,7 +62,7 @@ export function useCreateTableId(
 	graph: GraphManager,
 ): (name: string) => string {
 	return useCallback(
-		(name: string): string => graph.suggestOutputNode(name),
+		(name: string): string => nextOutputNode(name, graph.workflow),
 		[graph],
 	)
 }

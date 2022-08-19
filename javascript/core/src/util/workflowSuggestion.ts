@@ -39,6 +39,26 @@ export function nextOutputName(name: string, workflow: Workflow): string {
 	let derivedName = originalName
 	let count = 1
 
+	while (workflow.hasOutputName(derivedName)) {
+		derivedName = `${originalName} (${count})`
+		count++
+	}
+	return derivedName
+}
+
+/**
+ * Suggests a new table node given the root. If the root is
+ * used, this will append numbers to the end.
+ * e.g. "join" may result in "join 1" or "join 2" if there are
+ * collisions
+ *
+ * @param name - the proposed node name
+ */
+export function nextOutputNode(name: string, workflow: Workflow): string {
+	const originalName = name.replace(/( \(\d+\))/, '')
+	let derivedName = originalName
+	let count = 1
+
 	while (workflow.hasOutput(derivedName)) {
 		derivedName = `${originalName} (${count})`
 		count++
