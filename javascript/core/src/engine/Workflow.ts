@@ -44,7 +44,7 @@ export class Workflow {
 		workflowJson.input?.forEach(i => this._input.add(i))
 		workflowJson.output?.forEach(o => {
 			const binding = fixOutput(o)
-			this._output.set(binding.name, binding)
+			this._output.set(binding.node, binding)
 		})
 	}
 
@@ -91,7 +91,7 @@ export class Workflow {
 	}
 
 	public addOutput(output: NamedOutputPortBinding): void {
-		this._output.set(output.name, output)
+		this._output.set(output.node, output)
 		this._onChange.next()
 	}
 
@@ -102,6 +102,14 @@ export class Workflow {
 
 	public hasOutput(name: string): boolean {
 		return this._output.has(name)
+	}
+
+	public hasOutputName(name: string): boolean {
+		const names = []
+		for (const [, binding] of this._output.entries()) {
+			names.push(binding.name)
+		}
+		return names.includes(name)
 	}
 
 	public stepAt(index: number): Step | undefined {
@@ -152,8 +160,8 @@ export class Workflow {
 
 	public toJsonObject(): WorkflowObject {
 		const output: WorkflowObject['output'] = []
-		for (const [name, binding] of this._output.entries()) {
-			output.push({ ...binding, name })
+		for (const [, binding] of this._output.entries()) {
+			output.push({ ...binding })
 		}
 		return {
 			$schema: `https://microsoft.github.io/datashaper/schema/workflow/v3.json`,

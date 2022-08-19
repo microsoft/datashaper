@@ -6,8 +6,8 @@ import {
 	isInputColumnStep,
 	isInputTableStep,
 	isOutputColumnStep,
+	NodeInput,
 } from '@datashaper/core'
-import { NodeInput } from '@datashaper/core'
 import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
@@ -17,7 +17,7 @@ import { TableDropdown } from '../controls/TableDropdown.js'
 import { useDataTable } from '../hooks/useDataTable.js'
 import { useSimpleDropdownOptions } from '../hooks/useSimpleDropdownOptions.js'
 import { useTableColumnNames } from '../hooks/useTableColumnNames.js'
-import { useTableNames } from '../hooks/useTableNames.js'
+import { useTableDropdownOptions } from '../hooks/useTableDropdownOptions.js'
 import { dropdownStyles } from '../styles.js'
 import {
 	useColumnFilter,
@@ -54,8 +54,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		const table = useDataTable(tableId, g)
 
 		/* Table Options */
-		const tables = useTableNames(g)
-		const tableOptions = useSimpleDropdownOptions(tables)
+		const tableOptions = useTableDropdownOptions(g)
 
 		/* Column Options */
 		const columns = useTableColumnNames(table, useColumnFilter(s, table))

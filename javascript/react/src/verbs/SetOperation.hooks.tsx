@@ -7,7 +7,7 @@ import { IconButton } from '@fluentui/react'
 import { useMemo } from 'react'
 
 import { TableDropdown } from '../controls/index.js'
-import { useSimpleDropdownOptions, useTableNames } from '../hooks/index.js'
+import { useTableDropdownOptions } from '../hooks/useTableDropdownOptions.js'
 import { LeftAlignedRow } from '../styles.js'
 import { icons } from './SetOperation.styles.js'
 
@@ -16,8 +16,7 @@ export function useOthers(
 	onChange?: (step: Step) => void,
 	store?: GraphManager,
 ): (JSX.Element | null)[] {
-	const tableNames = useTableNames(store)
-	const tableOptions = useSimpleDropdownOptions(tableNames)
+	const tableOptions = useTableDropdownOptions(store)
 	return useMemo<(JSX.Element | null)[]>(() => {
 		return (step.input.others || EMPTY).map((input, index) => {
 			const other = input.node

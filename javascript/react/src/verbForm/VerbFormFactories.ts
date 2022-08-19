@@ -5,6 +5,7 @@
 import type { Step } from '@datashaper/core'
 import type { InputColumnListArgs, JoinArgs } from '@datashaper/schema'
 import { toggleListItem } from '@datashaper/utilities'
+import type { IDropdownOption } from '@fluentui/react'
 
 import { getEnumDropdownOptions } from '../enums.js'
 import {
@@ -81,6 +82,23 @@ export function dropdown<Args>(
 		label,
 		type: FormInputType.SingleChoice,
 		options: getSimpleDropdownOptions(values),
+		current,
+		onChange,
+		...opts,
+	}
+}
+
+export function tableDropdown<Args>(
+	label: string,
+	options: IDropdownOption[],
+	current: SingleChoiceFormInput<Args>['current'],
+	onChange: SingleChoiceFormInput<Args>['onChange'],
+	opts: Partial<SingleChoiceFormInput<Args>> = {},
+): FormInput<Args> {
+	return {
+		label,
+		type: FormInputType.SingleChoice,
+		options,
 		current,
 		onChange,
 		...opts,

@@ -50,6 +50,21 @@ function mapInputs(inputs?: TableContainer[]) {
  * @param graph - the graph manager
  * @returns a safe output name to use
  */
+export function useCreateTableId(
+	graph: GraphManager,
+): (name: string) => string {
+	return useCallback(
+		(name: string): string => graph.suggestOutputNode(name),
+		[graph],
+	)
+}
+/**
+ * Returns a hook to generate a new table name based on the given input e.g.
+ * "join" could result in "join 1" or "join 2" depending on how many collisions
+ *  occur.
+ * @param graph - the graph manager
+ * @returns a safe output name to use
+ */
 export function useCreateTableName(
 	graph: GraphManager,
 ): (name: string) => string {

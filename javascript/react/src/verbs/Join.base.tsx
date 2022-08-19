@@ -5,15 +5,16 @@
 import { NodeInput } from '@datashaper/core'
 import type { JoinArgs } from '@datashaper/schema'
 import { JoinStrategy } from '@datashaper/schema'
+import type { IDropdownOption } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { VerbForm } from '../verbForm/VerbForm.js'
 import {
-	dropdown,
 	enumDropdown,
 	joinInputs,
+	tableDropdown,
 } from '../verbForm/VerbFormFactories.js'
 
 /**
@@ -21,22 +22,22 @@ import {
  */
 export const JoinBase: React.FC<
 	StepComponentBaseProps<JoinArgs> & {
-		tables: string[]
+		tableOptions: IDropdownOption[]
 		leftColumns: string[]
 		rightColumns: string[]
 	}
 > = memo(function JoinBase({
 	step,
 	onChange,
-	tables,
+	tableOptions,
 	leftColumns,
 	rightColumns,
 }) {
 	const inputs = useMemo<FormInput<JoinArgs>[]>(
 		() => [
-			dropdown(
+			tableDropdown(
 				'Join table',
-				tables,
+				tableOptions,
 				step.input[NodeInput.Other]?.node,
 				(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
 				{ required: true, placeholder: 'Choose table' },
@@ -50,7 +51,7 @@ export const JoinBase: React.FC<
 			),
 			...joinInputs(step, leftColumns, rightColumns),
 		],
-		[step, leftColumns, rightColumns, tables],
+		[step, leftColumns, rightColumns, tableOptions],
 	)
 
 	return <VerbForm step={step} onChange={onChange} inputs={inputs} />

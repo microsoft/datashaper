@@ -4,15 +4,16 @@
  */
 import { NodeInput } from '@datashaper/core'
 import type { LookupArgs } from '@datashaper/schema'
+import type { IDropdownOption } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { VerbForm } from '../verbForm/VerbForm.js'
 import {
-	dropdown,
 	inputColumnList,
 	joinInputs,
+	tableDropdown,
 } from '../verbForm/VerbFormFactories.js'
 
 /**
@@ -20,22 +21,22 @@ import {
  */
 export const LookupBase: React.FC<
 	StepComponentBaseProps<LookupArgs> & {
-		tables: string[]
+		tableOptions: IDropdownOption[]
 		leftColumns: string[]
 		rightColumns: string[]
 	}
 > = memo(function LookupBase({
 	step,
 	onChange,
-	tables,
+	tableOptions,
 	leftColumns,
 	rightColumns,
 }) {
 	const inputs = useMemo<FormInput<LookupArgs>[]>(
 		() => [
-			dropdown(
+			tableDropdown(
 				'Join table',
-				tables,
+				tableOptions,
 				step.input[NodeInput.Other]?.node,
 				(s, val) => (s.input[NodeInput.Other] = { node: val as string }),
 				{ required: true, placeholder: 'Choose column' },
@@ -43,7 +44,7 @@ export const LookupBase: React.FC<
 			...joinInputs(step, leftColumns, rightColumns),
 			inputColumnList(step, rightColumns, 'Columns to copy'),
 		],
-		[step, leftColumns, rightColumns, tables],
+		[step, leftColumns, rightColumns, tableOptions],
 	)
 
 	return <VerbForm inputs={inputs} onChange={onChange} step={step} />

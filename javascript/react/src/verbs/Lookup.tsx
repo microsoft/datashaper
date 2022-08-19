@@ -6,11 +6,8 @@ import { NodeInput } from '@datashaper/core'
 import type { LookupArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import {
-	useDataTable,
-	useTableColumnNames,
-	useTableNames,
-} from '../hooks/index.js'
+import { useDataTable, useTableColumnNames } from '../hooks/index.js'
+import { useTableDropdownOptions } from '../hooks/useTableDropdownOptions.js'
 import type { StepComponentProps } from '../types.js'
 import { LookupBase } from './Lookup.base.js'
 
@@ -25,14 +22,14 @@ export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
 
 			graph,
 		)
-		const tables = useTableNames(graph)
+		const tableOptions = useTableDropdownOptions(graph)
 		const leftColumns = useTableColumnNames(leftTable)
 		const rightColumns = useTableColumnNames(rightTable)
 		return (
 			<LookupBase
 				step={step}
 				onChange={onChange}
-				tables={tables}
+				tableOptions={tableOptions}
 				leftColumns={leftColumns}
 				rightColumns={rightColumns}
 			/>

@@ -250,7 +250,7 @@ export interface Graph<T> {
 //
 // @public
 export class GraphManager {
-    constructor(_inputs: Map<string, TableContainer>, _workflow: Workflow);
+    constructor(_inputs: Map<string, TableContainer>, workflow: Workflow);
     addInput(item: TableContainer): void;
     addOutput(binding: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
@@ -632,6 +632,8 @@ export class Workflow {
     hasInput(input: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
+    // (undocumented)
+    hasOutputName(name: string): boolean;
     // (undocumented)
     get input(): Set<string>;
     // (undocumented)

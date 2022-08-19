@@ -9,9 +9,9 @@ import { cloneStep } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
 
+import { useCreateTableName } from '../hooks/common.js'
 import type { ModalState } from '../hooks/index.js'
 import {
-	useCreateTableName,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useModalState,
