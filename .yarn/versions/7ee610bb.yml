@@ -2,4 +2,5 @@ releases:
   "@datashaper/react": minor
 
 declined:
+  - "@datashaper/schema"
   - "@datashaper/webapp"
