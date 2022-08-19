@@ -1,0 +1,6 @@
+releases:
+  "@datashaper/arquero": patch
+  "@datashaper/core": patch
+  "@datashaper/react": patch
+  "@datashaper/schema": patch
+  "@datashaper/webapp": patch
