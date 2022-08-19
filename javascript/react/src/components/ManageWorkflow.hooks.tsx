@@ -9,7 +9,7 @@ import { cloneStep } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
 
-import { useCreateTableId } from '../hooks/common.js'
+import { useCreateTableName } from '../hooks/common.js'
 import type { ModalState } from '../hooks/index.js'
 import {
 	useHandleStepOutputChanged,
@@ -23,7 +23,7 @@ export function useOnDuplicateStep(
 	table?: ColumnTable,
 	onSave?: (step: Step, output: string | undefined, index?: number) => void,
 ): (_step: Step) => void {
-	const createTableName = useCreateTableId(graph)
+	const createTableName = useCreateTableName(graph)
 
 	return useCallback(
 		(step: Step) => {
