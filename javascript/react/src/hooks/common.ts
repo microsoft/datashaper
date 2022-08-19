@@ -12,8 +12,11 @@ export function useGraphManager(
 	workflow?: Workflow | undefined,
 	inputs?: TableContainer[],
 ): GraphManager {
+	const input = new Map()
+	inputs?.forEach(i => input.set(i.id, i))
+
 	const manager = useMemo(
-		() => createGraphManager(undefined, workflow),
+		() => createGraphManager(input, workflow),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[
 			/* only create on first pass */
