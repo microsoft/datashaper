@@ -8,6 +8,7 @@ import difference from 'lodash-es/difference.js'
 import intersection from 'lodash-es/intersection.js'
 
 import type { Step } from '../engine/index.js'
+import { argsHasOutputColumn } from './args.js'
 
 enum Tags {
 	/**
@@ -184,7 +185,7 @@ export function cloneStep(
 	const clone = cloneDeep(step) as any
 
 	if (columnNames?.length) {
-		if (clone.args['to'] && typeof clone.args['to'] === 'string') {
+		if (argsHasOutputColumn(clone.args)) {
 			clone.args['to'] = createColumnName(
 				clone.args['to'] as string,
 				columnNames,
