@@ -11,10 +11,13 @@ import { useEffect, useState } from 'react'
  * @returns
  */
 export function useGraphSteps(graph: GraphManager): Step[] {
-	const [steps, setSteps] = useState<Step[]>([])
+	const [steps, setSteps] = useState<Step[]>(graph.steps)
 	// listen for graph changes and update the steps
 	useEffect(
-		() => graph.onChange(() => setSteps(graph.steps)),
+		() =>
+			graph.onChange(() => {
+				setSteps(graph.steps)
+			}),
 		[graph, setSteps],
 	)
 	return steps

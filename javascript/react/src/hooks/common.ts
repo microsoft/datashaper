@@ -13,7 +13,7 @@ export function useGraphManager(
 	inputs?: TableContainer[],
 ): GraphManager {
 	const manager = useMemo(
-		() => createGraphManager(undefined, workflow),
+		() => createGraphManager(mapInputs(inputs), workflow),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[
 			/* only create on first pass */
@@ -78,4 +78,12 @@ export function useResetArgs(): (step: Step) => Step {
 		})
 		return step
 	}, [])
+}
+
+function mapInputs(inputs?: TableContainer[]) {
+	const _inputs = new Map()
+	inputs?.forEach(i => {
+		_inputs.set(i.id, i)
+	})
+	return _inputs
 }

@@ -7,6 +7,7 @@ import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 } from '@datashaper/schema'
+import { cloneDeep } from 'lodash-es'
 import type { Observable, Subscription } from 'rxjs'
 import { from, Subject } from 'rxjs'
 
@@ -40,12 +41,14 @@ export class GraphManager {
 	private readonly outputCache: Map<string, Maybe<TableContainer>> = new Map()
 	private readonly outputSubscriptions: Map<string, Subscription> = new Map()
 	private _outputNames: string[] = []
+	private _workflow: Workflow
 	private _outputDefinitions: NamedOutputPortBinding[] = []
 
 	public constructor(
 		private readonly _inputs: Map<string, TableContainer> = new Map(),
-		private _workflow: Workflow,
+		workflow: Workflow,
 	) {
+		this._workflow = cloneDeep(workflow)
 		this._syncWorkflowStateIntoGraph()
 	}
 
