@@ -5,3 +5,4 @@
 export * from './args.js'
 export * from './steps.js'
 export * from './toposort.js'
+export * from './workflowSuggestion.js'
