@@ -3,6 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export function argsHasOutputColumn(args: unknown): boolean {
+export function argsHasOutputColumn(args: any): boolean {
 	return args['to'] && typeof args['to'] === 'string'
 }
