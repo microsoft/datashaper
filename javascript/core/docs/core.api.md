@@ -272,7 +272,6 @@ export class GraphManager {
     removeStep(index: number): void;
     reset(workflow?: Workflow): void;
     get steps(): Step[];
-    suggestOutputName(name: string): string;
     // (undocumented)
     toList(): Maybe<TableContainer>[];
     toMap(): Map<string, Maybe<TableContainer>>;
@@ -370,6 +369,16 @@ export type Maybe<T> = T | undefined;
 //
 // @public (undocumented)
 export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>;
+
+// Warning: (ae-missing-release-tag) "nextColumnName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function nextColumnName(name: string, columnNames: string[]): string;
+
+// Warning: (ae-missing-release-tag) "nextOutputName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function nextOutputName(name: string, workflow: Workflow): string;
 
 // @public
 interface Node_2<T, Config = unknown> {

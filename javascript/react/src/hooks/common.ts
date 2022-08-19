@@ -4,7 +4,7 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import type { GraphManager, Step, Workflow } from '@datashaper/core'
-import { createGraphManager, readStep } from '@datashaper/core'
+import { createGraphManager, nextOutputName, readStep } from '@datashaper/core'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useMemo } from 'react'
 
@@ -54,7 +54,7 @@ export function useCreateTableName(
 	graph: GraphManager,
 ): (name: string) => string {
 	return useCallback(
-		(name: string): string => graph.suggestOutputName(name),
+		(name: string): string => nextOutputName(name, graph.workflow),
 		[graph],
 	)
 }

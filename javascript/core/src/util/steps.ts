@@ -8,6 +8,7 @@ import difference from 'lodash-es/difference.js'
 import intersection from 'lodash-es/intersection.js'
 
 import type { Step } from '../engine/index.js'
+import { nextColumnName } from './workflowSuggestion.js'
 
 enum Tags {
 	/**
@@ -158,25 +159,6 @@ export function verbs(filter: (verb: Verb) => boolean = () => true): Verb[] {
 	return (Object.keys(TaggedVerbs) as Verb[]).filter(filter)
 }
 
-function createColumnName(
-	name: string,
-	columnNames: string[] | undefined,
-): string {
-	const verifyColumnName = (
-		name: string,
-		columnNames: string[] | undefined,
-	): boolean => columnNames?.includes(name) ?? false
-	const originalName = name.replace(/( \(\d+\))/, '')
-	let derivedName = originalName
-
-	let count = 1
-	while (verifyColumnName(derivedName, columnNames)) {
-		derivedName = `${originalName} (${count})`
-		count++
-	}
-	return derivedName
-}
-
 export function cloneStep(
 	step: Step<unknown>,
 	columnNames?: string[],
@@ -185,10 +167,7 @@ export function cloneStep(
 
 	if (columnNames?.length) {
 		if (clone.args['to'] && typeof clone.args['to'] === 'string') {
-			clone.args['to'] = createColumnName(
-				clone.args['to'] as string,
-				columnNames,
-			)
+			clone.args['to'] = nextColumnName(clone.args['to'] as string, columnNames)
 		}
 	}
 	return clone
