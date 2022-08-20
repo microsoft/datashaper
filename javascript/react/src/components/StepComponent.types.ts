@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@datashaper/core'
+import type { GraphWorkflow, Step } from '@datashaper/core'
 
 export interface StepComponentProps {
 	/**
 	 * The graph manager
 	 */
-	graph: GraphManager
+	graph: GraphWorkflow
 
 	/**
 	 * The processing step

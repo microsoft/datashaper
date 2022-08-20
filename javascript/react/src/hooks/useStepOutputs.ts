@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager } from '@datashaper/core'
+import type { GraphWorkflow } from '@datashaper/core'
 import { useMemo } from 'react'
 
 /**
@@ -12,7 +12,7 @@ import { useMemo } from 'react'
  * @returns
  */
 export function useStepOutputs(
-	graph: GraphManager,
+	graph: GraphWorkflow,
 	defaultOutputName?: (index: number) => string,
 ): Array<string | undefined> {
 	return useMemo<Array<string | undefined>>(

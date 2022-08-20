@@ -3,34 +3,30 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/arquero'
-import type { GraphManager, Step, Workflow } from '@datashaper/core'
-import { createGraphManager, nextOutputName, readStep } from '@datashaper/core'
+import type { Step, Workflow } from '@datashaper/core';
+import { GraphWorkflow , nextOutputName, readStep } from '@datashaper/core'
 import isArray from 'lodash-es/isArray.js'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
-export function useGraphManager(
-	workflow?: Workflow | undefined,
+export function useGraphWorkflow(
+	workflow: Workflow | undefined,
 	inputs?: TableContainer[],
-): GraphManager {
-	const manager = useMemo(
-		() => createGraphManager(mapInputs(inputs), workflow),
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[
-			/* only create on first pass */
-		],
+): GraphWorkflow {
+	const [manager, setManager] = useState<GraphWorkflow>(
+		() => new GraphWorkflow(workflow?.toJsonObject()),
 	)
 
 	// this effect should fire when a new workflow json is uploaded
 	useEffect(
 		function resetWorkflowWhenWorkflowChanges() {
-			manager.reset(workflow)
+			setManager(new GraphWorkflow(workflow?.toJsonObject()))
 		},
-		[manager, workflow],
+		[workflow],
 	)
 
 	useEffect(
 		function syncInputs() {
-			inputs?.forEach(i => manager.addInput(i))
+			manager.inputs = mapInputs(inputs)
 		},
 		[manager, inputs],
 	)
@@ -51,10 +47,10 @@ function mapInputs(inputs?: TableContainer[]) {
  * @returns a safe output name to use
  */
 export function useCreateTableName(
-	graph: GraphManager,
+	graph: GraphWorkflow,
 ): (name: string) => string {
 	return useCallback(
-		(name: string): string => nextOutputName(name, graph.workflow),
+		(name: string): string => nextOutputName(name, graph),
 		[graph],
 	)
 }

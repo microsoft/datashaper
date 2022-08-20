@@ -4,7 +4,7 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { TableContainer } from '@datashaper/arquero'
-import type { GraphManager, Step, Workflow } from '@datashaper/core'
+import type { GraphWorkflow, Step, Workflow } from '@datashaper/core'
 import { cloneStep } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
@@ -19,7 +19,7 @@ import {
 } from '../hooks/index.js'
 
 export function useOnDuplicateStep(
-	graph: GraphManager,
+	graph: GraphWorkflow,
 	table?: ColumnTable,
 	onSave?: (step: Step, output: string | undefined, index?: number) => void,
 ): (_step: Step) => void {
@@ -88,7 +88,7 @@ export function useOnCreateStep(
  * @returns A callback to use when saving a step, either new or existing
  */
 export function useOnSaveStep(
-	graph: GraphManager,
+	graph: GraphWorkflow,
 ): (step: Step, output: string | undefined, index: number | undefined) => void {
 	const updateStep = useHandleStepSave(graph)
 	const updateStepOutput = useHandleStepOutputChanged(graph)
@@ -142,7 +142,7 @@ export function useEditorTarget(stepIndex: number | undefined): {
 	}
 }
 
-export function useOnDeleteStep(graph: GraphManager): (index: number) => void {
+export function useOnDeleteStep(graph: GraphWorkflow): (index: number) => void {
 	return useCallback(
 		(index: number) => {
 			graph.removeStep(index)
@@ -182,7 +182,7 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 }
 
 export function useGraphOutputListener(
-	graph: GraphManager,
+	graph: GraphWorkflow,
 	setOutput?: ((tables: TableContainer[]) => void) | undefined,
 ): void {
 	useEffect(
@@ -196,12 +196,11 @@ export function useGraphOutputListener(
 }
 
 export function useGraphWorkflowListener(
-	graph: GraphManager,
+	graph: GraphWorkflow,
 	setWorkflow?: (workflow: Workflow) => void,
 ): void {
 	useEffect(
-		() =>
-			setWorkflow && graph.onChange(() => setWorkflow(graph.workflow.clone())),
+		() => setWorkflow && graph.onChange(() => setWorkflow(graph.clone())),
 		[graph, setWorkflow],
 	)
 }

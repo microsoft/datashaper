@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { GraphManager, Step } from '@datashaper/core'
+import type { GraphWorkflow, Step } from '@datashaper/core'
 import { NodeInput } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -11,7 +11,7 @@ import { useDataTable } from '../hooks/index.js'
 
 export function useStepDataTable(
 	step: Step,
-	graph: GraphManager | undefined,
+	graph: GraphWorkflow | undefined,
 	input?: string | undefined,
 	table?: ColumnTable | undefined,
 ): ColumnTable | undefined {

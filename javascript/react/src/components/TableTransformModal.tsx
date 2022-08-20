@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager } from '@datashaper/core'
+import type { GraphWorkflow } from '@datashaper/core'
 import { default as guidanceIndex } from '@datashaper/verb-guidance'
 import {
 	Callout,
@@ -49,7 +49,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
 			nextInputTable,
-			graph as GraphManager,
+			graph as GraphWorkflow,
 		)
 
 		const adaptedStyles = useModalStyles(styles, showGuidance)

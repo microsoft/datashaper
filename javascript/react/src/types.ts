@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@datashaper/core'
+import type { GraphWorkflow, Step } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export type StepChangeFunction<T extends object | void | unknown = unknown> = (
@@ -81,7 +81,7 @@ export interface StepComponentProps<T extends object | void | unknown = unknown>
 	/**
 	 * TableStore to use for table lookups of step parameters.
 	 */
-	graph?: GraphManager
+	graph?: GraphWorkflow
 	/**
 	 * ColumnTable to execute the step against if no store is provided.
 	 */

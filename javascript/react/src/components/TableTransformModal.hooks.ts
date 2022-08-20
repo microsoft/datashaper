@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@datashaper/core'
+import type { GraphWorkflow, Step } from '@datashaper/core'
 import { readStep } from '@datashaper/core'
 import type { Verb } from '@datashaper/schema'
 import type { IModalStyleProps, IModalStyles } from '@fluentui/react'
@@ -28,7 +28,7 @@ export function useHandleSaveClick(
 export function useInternalTableStep(
 	step: Step | undefined,
 	_lastOutput: string | undefined,
-	graph: GraphManager,
+	graph: GraphWorkflow,
 ): {
 	internal: Step | undefined
 	handleVerbChange: (verb: Verb) => void
@@ -82,7 +82,7 @@ export function useModalStyles(
 }
 
 export function useStepOutputHandling(
-	graph: GraphManager,
+	graph: GraphWorkflow,
 	step: Step | undefined,
 ): {
 	output: string | undefined

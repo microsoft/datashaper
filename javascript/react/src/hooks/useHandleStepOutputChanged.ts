@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@datashaper/core'
+import type { GraphWorkflow, Step } from '@datashaper/core'
 import { useCallback } from 'react'
 
 /**
@@ -14,7 +14,7 @@ import { useCallback } from 'react'
  * @returns A callback to use when the step output changes
  */
 export function useHandleStepOutputChanged(
-	graph: GraphManager,
+	graph: GraphWorkflow,
 ): (step: Step, output: string | undefined) => void {
 	return useCallback(
 		(step: Step, output: string | undefined) => {

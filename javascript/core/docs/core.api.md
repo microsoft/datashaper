@@ -159,12 +159,7 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createGraph(workflow: Workflow, tables: Map<string, TableContainer>): GraphManager;
-
-// Warning: (ae-missing-release-tag) "createGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function createGraphManager(inputs?: Map<string, TableContainer> | undefined, workflow?: Workflow | undefined): GraphManager;
+export function createGraph(workflow: WorkflowObject, tables: Map<string, TableContainer>): GraphWorkflow;
 
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -246,27 +241,26 @@ export interface Graph<T> {
     validate(): void;
 }
 
-// Warning: (ae-missing-release-tag) "GraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GraphWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export class GraphManager {
-    constructor(_inputs: Map<string, TableContainer>, _workflow: Workflow);
-    addInput(item: TableContainer): void;
+export class GraphWorkflow extends Workflow {
+    constructor(workflowSpec?: WorkflowObject);
+    addInputTable(item: TableContainer): void;
     addOutput(binding: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
     // (undocumented)
-    get graph(): Graph<TableContainer>;
+    clear(): void;
     // (undocumented)
-    hasInput(name: string): boolean;
+    readonly graph: Graph<TableContainer>;
     // (undocumented)
     hasOutput(name: string): boolean;
     // (undocumented)
     get inputs(): Map<string, TableContainer>;
+    set inputs(value: Map<string, TableContainer>);
     latest(name: string): Maybe<TableContainer>;
     // (undocumented)
     latestForNodeId(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
-    get numSteps(): number;
-    onChange(handler: () => void): () => void;
     output(name: string): Maybe<TableObservable>;
     // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
@@ -274,19 +268,15 @@ export class GraphManager {
     outputForNodeId(nodeId: string, nodeOutput?: string): Maybe<TableObservable>;
     // (undocumented)
     outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
-    get outputs(): string[];
+    get outputNames(): string[];
     print(): void;
-    reconfigureStep(index: number, stepInput: StepInput<unknown>): Step;
     removeInput(inputName: string): void;
     removeOutput(name: string): void;
     removeStep(index: number): void;
-    reset(workflow?: Workflow): void;
-    get steps(): Step[];
     // (undocumented)
     toList(): Maybe<TableContainer>[];
     toMap(): Map<string, Maybe<TableContainer>>;
-    // (undocumented)
-    get workflow(): Workflow;
+    updateStep(stepInput: StepInput<unknown>, index: number): Step;
 }
 
 // Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -621,17 +611,27 @@ export class Workflow {
     // (undocumented)
     addInput(input: string): void;
     // (undocumented)
+    protected _addInput(input: string): void;
+    // (undocumented)
     addOutput(output: NamedOutputPortBinding): void;
     // (undocumented)
+    protected _addOutput(output: NamedOutputPortBinding): void;
+    // (undocumented)
     addStep(stepInput: StepInput): Step;
+    // (undocumented)
+    protected _addStep(stepInput: StepInput): Step;
     // (undocumented)
     clear(): void;
     // (undocumented)
     clone(): Workflow;
     // (undocumented)
+    protected fireOnChange(): void;
+    // (undocumented)
     hasInput(input: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
+    // (undocumented)
+    protected init(workflowJson: WorkflowObject): void;
     // (undocumented)
     get input(): Set<string>;
     // (undocumented)
@@ -639,11 +639,15 @@ export class Workflow {
     // (undocumented)
     onChange(handler: () => void): () => void;
     // (undocumented)
-    get output(): Map<string, NamedOutputPortBinding>;
+    get outputs(): Map<string, NamedOutputPortBinding>;
     // (undocumented)
     removeInput(input: string): void;
     // (undocumented)
+    protected _removeInput(input: string): void;
+    // (undocumented)
     removeOutput(name: string): void;
+    // (undocumented)
+    protected _removeOutput(name: string): void;
     // (undocumented)
     removeStep(index: number): void;
     // (undocumented)
@@ -654,6 +658,8 @@ export class Workflow {
     toJsonObject(): WorkflowObject;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
+    // (undocumented)
+    protected _updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)
     static validate(workflowJson: WorkflowObject): Promise<boolean>;
 }

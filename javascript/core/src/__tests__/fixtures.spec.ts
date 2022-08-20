@@ -10,7 +10,6 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { createGraph } from '../engine/graph.js'
-import { Workflow } from '../engine/Workflow.js'
 import { createTableStore } from './createTableStore.js'
 
 // Set the root cwd to the package root.
@@ -73,7 +72,7 @@ function defineTestCase(parentPath: string, test: string) {
 		if (!isWorkflowJsonValid) {
 			throw new Error(`invalid workflow definition: ${workflowPath}`)
 		}
-		const graphBuilder = createGraph(new Workflow(workflowJson), tableStore)
+		const graphBuilder = createGraph(workflowJson, tableStore)
 
 		// check the output tables
 		await Promise.all(

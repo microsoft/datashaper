@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager } from '@datashaper/core'
+import type { GraphWorkflow } from '@datashaper/core'
 import { useCallback, useEffect, useState } from 'react'
 
 /**
@@ -13,13 +13,13 @@ import { useCallback, useEffect, useState } from 'react'
  * @param graph -
  * @returns
  */
-export function useTableNames(graph?: GraphManager): string[] {
+export function useTableNames(graph?: GraphWorkflow): string[] {
 	const [tables, setTables] = useState<string[]>([])
 
 	const refreshInputTables = useCallback(() => {
 		const newTables = [
 			...(graph?.inputs.keys() ?? []),
-			...(graph?.outputs ?? []),
+			...(graph?.outputNames ?? []),
 		]
 		setTables(newTables)
 	}, [graph, setTables])

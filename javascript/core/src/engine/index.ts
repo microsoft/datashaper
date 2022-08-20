@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './graph.js'
-export * from './GraphManager.js'
+export * from './GraphWorkflow.js'
 export * from './readStep.js'
 export * from './types.js'
 export * from './validator.js'

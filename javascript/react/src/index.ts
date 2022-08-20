@@ -12,9 +12,8 @@ export {
 } from './component-factories.js'
 export {
 	useDataTable,
-	useGraphManager,
 	useGraphSteps,
-	useGraphWorkflowState,
+	useGraphWorkflow,
 	useHandleFilesUpload,
 	useHandleStepOutputChanged,
 	useHandleStepSave,

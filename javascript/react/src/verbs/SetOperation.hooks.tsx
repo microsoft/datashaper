@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@datashaper/core'
+import type { GraphWorkflow, Step } from '@datashaper/core'
 import { IconButton } from '@fluentui/react'
 import { useMemo } from 'react'
 
@@ -14,7 +14,7 @@ import { icons } from './SetOperation.styles.js'
 export function useOthers(
 	step: Step,
 	onChange?: (step: Step) => void,
-	store?: GraphManager,
+	store?: GraphWorkflow,
 ): (JSX.Element | null)[] {
 	const tableNames = useTableNames(store)
 	const tableOptions = useSimpleDropdownOptions(tableNames)

@@ -21,7 +21,7 @@ export class Workflow {
 	private _description?: string
 	private _steps: Step[] = []
 	private _input: Set<string> = new Set()
-	private _output: Map<string, NamedOutputPortBinding> = new Map()
+	private _outputs: Map<string, NamedOutputPortBinding> = new Map()
 
 	// The global onChange handler
 	private readonly _onChange = new Subject<void>()
@@ -32,7 +32,7 @@ export class Workflow {
 		}
 	}
 
-	private init(workflowJson: WorkflowObject) {
+	protected init(workflowJson: WorkflowObject) {
 		let prev: Step | undefined
 		this._name = workflowJson.name
 		this._description = workflowJson.description
@@ -44,7 +44,7 @@ export class Workflow {
 		workflowJson.input?.forEach(i => this._input.add(i))
 		workflowJson.output?.forEach(o => {
 			const binding = fixOutput(o)
-			this._output.set(binding.name, binding)
+			this._outputs.set(binding.name, binding)
 		})
 	}
 
@@ -52,7 +52,7 @@ export class Workflow {
 		const clone = new Workflow()
 		clone._steps = this._steps.map(x => cloneStep(x))
 		clone._input = new Set(this._input)
-		clone._output = new Map(this._output)
+		clone._outputs = new Map(this._outputs)
 		return clone
 	}
 
@@ -64,8 +64,8 @@ export class Workflow {
 		return this._input
 	}
 
-	public get output(): Map<string, NamedOutputPortBinding> {
-		return this._output
+	public get outputs(): Map<string, NamedOutputPortBinding> {
+		return this._outputs
 	}
 
 	public get steps(): Step[] {
@@ -77,13 +77,21 @@ export class Workflow {
 	}
 
 	public addInput(input: string): void {
+		this._addInput(input)
+		this.fireOnChange()
+	}
+
+	protected _addInput(input: string): void {
 		this._input.add(input)
-		this._onChange.next()
 	}
 
 	public removeInput(input: string): void {
+		this._removeInput(input)
+		this.fireOnChange()
+	}
+
+	protected _removeInput(input: string): void {
 		this._input.delete(input)
-		this._onChange.next()
 	}
 
 	public hasInput(input: string): boolean {
@@ -91,17 +99,25 @@ export class Workflow {
 	}
 
 	public addOutput(output: NamedOutputPortBinding): void {
-		this._output.set(output.name, output)
-		this._onChange.next()
+		this._addOutput(output)
+		this.fireOnChange()
+	}
+
+	protected _addOutput(output: NamedOutputPortBinding): void {
+		this._outputs.set(output.name, output)
 	}
 
 	public removeOutput(name: string): void {
-		this._output.delete(name)
-		this._onChange.next()
+		this._removeOutput(name)
+		this.fireOnChange()
+	}
+
+	protected _removeOutput(name: string) {
+		this._outputs.delete(name)
 	}
 
 	public hasOutput(name: string): boolean {
-		return this._output.has(name)
+		return this._outputs.has(name)
 	}
 
 	public stepAt(index: number): Step | undefined {
@@ -109,13 +125,18 @@ export class Workflow {
 	}
 
 	public addStep(stepInput: StepInput): Step {
+		const step = this._addStep(stepInput)
+		this.fireOnChange()
+		return step
+	}
+
+	protected _addStep(stepInput: StepInput): Step {
 		const step = readStep(
 			stepInput,
 			this._steps.length > 0 ? this.steps[this.steps.length - 1] : undefined,
 		)
 		// mutate the steps so that equality checks will detect that the steps changed (e.g. memo, hook deps)
 		this._steps = [...this.steps, step]
-		this._onChange.next()
 		return step
 	}
 
@@ -124,25 +145,30 @@ export class Workflow {
 			...this.steps.slice(0, index),
 			...this.steps.slice(index + 1),
 		]
-		this._onChange.next()
+		this.fireOnChange()
 	}
 
 	public updateStep(stepInput: StepInput, index: number): Step {
+		const step = this._updateStep(stepInput, index)
+		this.fireOnChange()
+		return step
+	}
+
+	protected _updateStep(stepInput: StepInput, index: number): Step {
 		const step = readStep(stepInput, this._steps[index - 1])
 		this._steps = [
 			...this.steps.slice(0, index),
 			step,
 			...this.steps.slice(index + 1),
 		]
-		this._onChange.next()
 		return step
 	}
 
 	public clear(): void {
 		this._steps = []
 		this._input.clear()
-		this._output.clear()
-		this._onChange.next()
+		this._outputs.clear()
+		this.fireOnChange()
 	}
 
 	public onChange(handler: () => void): () => void {
@@ -152,7 +178,7 @@ export class Workflow {
 
 	public toJsonObject(): WorkflowObject {
 		const output: WorkflowObject['output'] = []
-		for (const [name, binding] of this._output.entries()) {
+		for (const [name, binding] of this._outputs.entries()) {
 			output.push({ ...binding, name })
 		}
 		return {
@@ -163,6 +189,10 @@ export class Workflow {
 			output,
 			steps: [...this.steps],
 		}
+	}
+
+	protected fireOnChange() {
+		this._onChange.next()
 	}
 }
 

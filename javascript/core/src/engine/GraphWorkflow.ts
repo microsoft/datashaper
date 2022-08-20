@@ -7,15 +7,14 @@ import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 } from '@datashaper/schema'
-import isEqual from 'lodash-es/isEqual'
 import type { Observable, Subscription } from 'rxjs'
-import { from, Subject } from 'rxjs'
+import { from } from 'rxjs'
 
 import type { Graph, Node } from '../dataflow/index.js'
 import { DefaultGraph, observableNode } from '../dataflow/index.js'
 import type { Maybe } from '../primitives.js'
 import { createNode } from './createNode.js'
-import type { Step, StepInput } from './types.js'
+import type { Step, StepInput, WorkflowObject } from './types.js'
 import { Workflow } from './Workflow.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
@@ -27,12 +26,10 @@ export type TableObservable = Observable<Maybe<TableContainer>>
  * workflow specification synchronized with a live processing graph and provides utility methods
  * for mutating the workflow.
  */
-export class GraphManager {
+export class GraphWorkflow extends Workflow {
 	// The dataflow graph
-	private readonly _graph: Graph<TableContainer> = new DefaultGraph()
-
-	// The global onChange handler
-	private readonly _onChange = new Subject<void>()
+	public readonly graph: Graph<TableContainer> = new DefaultGraph()
+	private _inputs: Map<string, TableContainer> = new Map()
 
 	//
 	// Output tracking - observables, data cache, subscriptions
@@ -40,126 +37,76 @@ export class GraphManager {
 	private readonly outputObservables: Map<string, TableObservable> = new Map()
 	private readonly outputCache: Map<string, Maybe<TableContainer>> = new Map()
 	private readonly outputSubscriptions: Map<string, Subscription> = new Map()
-	private _outputNames: string[] = []
-	private _outputDefinitions: NamedOutputPortBinding[] = []
 
-	public constructor(
-		private readonly _inputs: Map<string, TableContainer> = new Map(),
-		private _workflow: Workflow,
-	) {
-		this._syncWorkflowStateIntoGraph()
-	}
-
-	/**
-	 * Synchronize the workflow state into the graph. Used during initialization.
-	 */
-	private _syncWorkflowStateIntoGraph() {
-		for (const i of this._inputs.keys()) {
-			this._workflow.addInput(i)
-		}
-		for (const step of this._workflow.steps) {
+	public constructor(workflowSpec?: WorkflowObject) {
+		super(workflowSpec)
+		for (const step of this.steps) {
 			this._addWorkflowStepToGraph(step)
 		}
-		for (const value of this._workflow.output.values()) {
+		for (const value of this.outputs.values()) {
 			this._bindGraphOutput(value)
 		}
-
-		this._syncOutputArrays()
-	}
-
-	private _syncOutputArrays() {
-		this._outputNames = [...this.outputObservables.keys()]
-		this._outputDefinitions = [...this._workflow.output.values()]
 	}
 
 	public get inputs(): Map<string, TableContainer> {
 		return this._inputs
 	}
 
-	public get graph(): Graph<TableContainer> {
-		return this._graph
+	public set inputs(value: Map<string, TableContainer>) {
+		this._inputs = value
+		for (const i of this._inputs.keys()) {
+			this._addInput(i)
+		}
+		this.fireOnChange()
 	}
 
-	public get workflow(): Workflow {
-		return this._workflow
-	}
-
-	/**
-	 * The number of steps in the workflow
-	 */
-	public get numSteps(): number {
-		return this._workflow.length
-	}
-
-	/**
-	 * The steps in the worfklow
-	 */
-	public get steps(): Step[] {
-		return this._workflow.steps
-	}
-
-	public hasInput(name: string): boolean {
-		return this.inputs.has(name)
-	}
-
-	public hasOutput(name: string): boolean {
+	public override hasOutput(name: string): boolean {
 		return this.outputObservables.has(name)
 	}
 
-	/**
-	 * Remove all steps, inputs, and outputs from the pipeline
-	 */
-	public reset(workflow?: Workflow): void {
-		if (this.isWorkflowEqual(workflow)) {
-			return
-		}
-		this._workflow.clear()
-		// todo: add graph clear
-		this.graph.nodes.forEach(id => this._graph.remove(id))
-
-		// if a new workflow is injected, sync it into the graph
-		if (workflow != null) {
-			this._workflow = workflow.clone()
-			this._syncWorkflowStateIntoGraph()
-		}
-		this._onChange.next()
+	public override clear() {
+		super.clear()
+		// TODO: clear graph
+		this.outputObservables.clear()
+		this.outputCache.clear()
+		this.outputSubscriptions.clear()
 	}
 
 	/**
 	 * Add a named input
 	 * @param input - the input table to add
 	 */
-	public addInput(item: TableContainer): void {
-		this._workflow.addInput(item.id)
-		this.inputs.set(item.id, item)
-		this._onChange.next()
+	public addInputTable(item: TableContainer): void {
+		this._inputs.set(item.id, item)
+		this._addInput(item.id)
+		this.fireOnChange()
 	}
 
 	/**
 	 * Removes a named input
 	 * @param inputId - The input id to remove
 	 */
-	public removeInput(inputName: string): void {
-		this._workflow.removeInput(inputName)
-		this.inputs.delete(inputName)
-		this._onChange.next()
+	public override removeInput(inputName: string): void {
+		this._inputs.delete(inputName)
+		this._removeInput(inputName)
+		this.fireOnChange()
 	}
 
 	/**
 	 * Adds a step to the pipeline
 	 * @param step - the step to add
 	 */
-	public addStep(stepInput: StepInput): Step {
-		const step = this._workflow.addStep(stepInput)
+	public override addStep(stepInput: StepInput): Step {
+		const step = this._addStep(stepInput)
 		this._addWorkflowStepToGraph(step)
-		this._onChange.next()
+		this.fireOnChange()
 		return step
 	}
 
 	private _addWorkflowStepToGraph(step: Step): void {
 		// create the graph node
 		const node = createNode(step)
-		this._graph.add(node)
+		this.graph.add(node)
 
 		// wire up the graph node
 		this._configureStep(step, node)
@@ -169,11 +116,10 @@ export class GraphManager {
 	 * Deletes steps from the given index (inclusive) to the end of the array
 	 * @param index - The index to delete after
 	 */
-	public removeStep(index: number): void {
-		const step = this._workflow.steps[index]!
-		const prevStep = index > 0 ? this._workflow.steps[index - 1] : undefined
-		const nextStep =
-			index + 1 < this.numSteps ? this._workflow.steps[index + 1] : undefined
+	public override removeStep(index: number): void {
+		const step = this.steps[index]!
+		const prevStep = index > 0 ? this.steps[index - 1] : undefined
+		const nextStep = index + 1 < this.length ? this.steps[index + 1] : undefined
 		const node = this.getNode(step.id)
 
 		// If step was auto-bound, try to wire together the prev and next steps
@@ -190,13 +136,14 @@ export class GraphManager {
 		}
 
 		// Remove step outputs from the configuration
-		const stepOutputs = this._outputDefinitions.filter(o => o.node === node.id)
+		const stepOutputs = this.outputDefinitions.filter(o => o.node === node.id)
 		stepOutputs.forEach(o => this.removeOutput(o.name))
 
 		// Remove the step from the graph
-		this._graph.remove(step.id)
-		this.workflow.removeStep(index)
-		this._onChange.next()
+		this.graph.remove(step.id)
+
+		// Remove the step from the workflow, fire onChange
+		super.removeStep(index)
 	}
 
 	/**
@@ -204,9 +151,12 @@ export class GraphManager {
 	 * @param index - The step index
 	 * @param step - The step specification
 	 */
-	public reconfigureStep(index: number, stepInput: StepInput<unknown>): Step {
-		const prevVersion = this._workflow.stepAt(index)!
-		const step = this._workflow.updateStep(stepInput, index)
+	public override updateStep(
+		stepInput: StepInput<unknown>,
+		index: number,
+	): Step {
+		const prevVersion = this.stepAt(index)!
+		const step = this._updateStep(stepInput, index)
 		const node = this.getNode(step.id)
 
 		// todo: handle rename. Add graph.rename(nodeId) method
@@ -220,7 +170,7 @@ export class GraphManager {
 		}
 
 		this._configureStep(step, node)
-		this._onChange.next()
+		this.fireOnChange()
 		return step
 	}
 
@@ -228,25 +178,23 @@ export class GraphManager {
 	 * Add an output binding
 	 * @param binding - The output binding
 	 */
-	public addOutput(binding: NamedOutputPortBinding): void {
-		this._workflow.addOutput(binding)
+	public override addOutput(binding: NamedOutputPortBinding): void {
+		this._addOutput(binding)
 		this._bindGraphOutput(binding)
-		this._syncOutputArrays()
-		this._onChange.next()
+		this.fireOnChange()
 	}
 
 	/**
 	 * Remove an output binding
 	 * @param name - the output name to remove
 	 */
-	public removeOutput(name: string): void {
-		this._workflow.removeOutput(name)
+	public override removeOutput(name: string): void {
+		this._removeOutput(name)
 		this.outputObservables.delete(name)
 		this.outputSubscriptions.get(name)?.unsubscribe()
 		this.outputSubscriptions.delete(name)
 		this.outputCache.delete(name)
-		this._syncOutputArrays()
-		this._onChange.next()
+		this.fireOnChange()
 	}
 
 	private _bindGraphOutput(binding: NamedOutputPortBinding) {
@@ -257,7 +205,7 @@ export class GraphManager {
 		this.outputObservables.set(name, port)
 		const subscription = port.subscribe(latest => {
 			this.outputCache.set(name, { ...latest, id: name })
-			this._onChange.next()
+			this.fireOnChange()
 		})
 		this.outputSubscriptions.set(name, subscription)
 	}
@@ -266,18 +214,18 @@ export class GraphManager {
 	 * Log out the steps
 	 */
 	public print(): void {
-		console.log(this._workflow.steps)
+		console.log(this.steps)
 	}
 
 	/**
 	 * Gets the output table names
 	 */
-	public get outputs(): string[] {
-		return this._outputNames
+	public get outputNames(): string[] {
+		return [...this.outputObservables.keys()]
 	}
 
 	public get outputDefinitions(): NamedOutputPortBinding[] {
-		return this._outputDefinitions
+		return [...this.outputs.values()]
 	}
 
 	/**
@@ -334,16 +282,7 @@ export class GraphManager {
 	}
 
 	public toList(): Maybe<TableContainer>[] {
-		return this.outputs.map(o => this.latest(o))
-	}
-
-	/**
-	 * Listen to changes in the Workflow graph
-	 * @param handler - The onChange handler
-	 */
-	public onChange(handler: () => void): () => void {
-		const sub = this._onChange.subscribe(handler)
-		return () => sub.unsubscribe()
+		return this.outputNames.map(o => this.latest(o))
 	}
 
 	private _configureStep(step: Step, node: Node<TableContainer>) {
@@ -364,9 +303,9 @@ export class GraphManager {
 					node.bind({ input, node: this.getNode(b.node), output: b.output })
 				}
 			}
-		} else if (this._workflow.steps.length > 0 && node.inputs.length > 0) {
+		} else if (this.steps.length > 0 && node.inputs.length > 0) {
 			// If no named input is present, try to auto-bind to the previous node
-			const prevStep = this._workflow.steps[this._workflow.steps.length - 1]!
+			const prevStep = this.steps[this.steps.length - 1]!
 			node.bind({ node: this.getNode(prevStep.id) })
 		}
 	}
@@ -376,28 +315,13 @@ export class GraphManager {
 		// bind to an input defined in the graph
 		if (graph.hasNode(id)) {
 			return graph.node(id)
-		} else if (this._workflow.hasInput(id)) {
+		} else if (this.hasInput(id)) {
 			// bind to a declared input
-			return observableNode(id, from([this.inputs.get(id)]))
+			return observableNode(id, from([this._inputs.get(id)]))
 		} else {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}
 	}
-
-	private isWorkflowEqual(workflow?: Workflow): boolean {
-		return (
-			isEqual(workflow?.steps, this._workflow?.steps) &&
-			isEqual(workflow?.input, this._workflow?.input) &&
-			isEqual(workflow?.output, this._workflow?.output)
-		)
-	}
-}
-
-export function createGraphManager(
-	inputs?: Map<string, TableContainer> | undefined,
-	workflow?: Workflow | undefined,
-): GraphManager {
-	return new GraphManager(inputs, workflow ? workflow.clone() : new Workflow())
 }
 
 function hasDefinedInputs(step: Step): boolean {

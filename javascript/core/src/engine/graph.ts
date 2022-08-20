@@ -4,9 +4,8 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 
-import type { GraphManager } from './GraphManager.js'
-import { createGraphManager } from './GraphManager.js'
-import type { Workflow } from './Workflow.js'
+import { GraphWorkflow } from './GraphWorkflow.js'
+import type { WorkflowObject } from './types.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -20,8 +19,10 @@ import type { Workflow } from './Workflow.js'
  * @returns The built reactive processing graph
  */
 export function createGraph(
-	workflow: Workflow,
+	workflow: WorkflowObject,
 	tables: Map<string, TableContainer>,
-): GraphManager {
-	return createGraphManager(tables, workflow)
+): GraphWorkflow {
+	const graph = new GraphWorkflow(workflow)
+	graph.inputs = tables
+	return graph
 }

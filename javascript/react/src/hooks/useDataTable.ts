@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager } from '@datashaper/core'
+import type { GraphWorkflow } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useEffect, useState } from 'react'
 
 export function useDataTable(
 	id: string | undefined,
-	graph?: GraphManager,
+	graph?: GraphWorkflow,
 	existingTable?: ColumnTable,
 ): ColumnTable | undefined {
 	const [tbl, setTable] = useState<ColumnTable | undefined>()

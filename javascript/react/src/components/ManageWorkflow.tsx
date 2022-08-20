@@ -8,8 +8,8 @@ import { DialogConfirm } from '@essex/themed-components'
 import { memo, useState } from 'react'
 
 import {
-	useGraphManager,
 	useGraphSteps,
+	useGraphWorkflow,
 	useStepOutputs,
 } from '../hooks/index.js'
 import {
@@ -39,7 +39,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		onUpdateWorkflow,
 		...props
 	}) {
-		const graph = useGraphManager(workflow, inputs)
+		const graph = useGraphWorkflow(workflow, inputs)
 
 		// Selected Step/Index State for the component
 		const [step, setStep] = useState<Step | undefined>()

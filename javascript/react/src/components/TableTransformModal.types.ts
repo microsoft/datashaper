@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@datashaper/core'
+import type { GraphWorkflow, Step } from '@datashaper/core'
 import type { IModalProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -65,5 +65,5 @@ export interface TransformModalProps extends IModalProps {
 	/**
 	 * Table store to verify naming to be created
 	 */
-	graph: GraphManager
+	graph: GraphWorkflow
 }

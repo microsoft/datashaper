@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { columnTypes } from '@datashaper/arquero'
-import type { GraphManager, Step } from '@datashaper/core'
+import type { GraphWorkflow, Step } from '@datashaper/core'
 import { isNumericInputStep, NodeInput } from '@datashaper/core'
 import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
@@ -56,7 +56,7 @@ export function useColumnFilter(
 
 export function useInputTableChanged(
 	step: Step,
-	graph: GraphManager | undefined,
+	graph: GraphWorkflow | undefined,
 	onChange: (step: Step) => void,
 ): DropdownChangeHandler {
 	const resetArgs = useResetArgs()
