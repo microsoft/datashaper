@@ -15,7 +15,7 @@ export function useStepOutputs(
 	graph: GraphManager,
 	defaultOutputName?: (index: number) => string,
 ): Array<string | undefined> {
-	const outputDefinitions = graph.outputDefinitions
+	const outputs = graph.outputDefinitions
 	const steps = graph.steps
 
 	return useMemo<Array<string | undefined>>(
@@ -23,9 +23,9 @@ export function useStepOutputs(
 			steps
 				.map(s => s.id)
 				.map((id, index) => {
-					const output = outputDefinitions.find(def => def.node === id)
+					const output = outputs.find(def => def.node === id)
 					return output?.name ?? defaultOutputName?.(index)
 				}),
-		[steps, outputDefinitions, defaultOutputName],
+		[steps, outputs, defaultOutputName],
 	)
 }
