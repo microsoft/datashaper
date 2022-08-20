@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/arquero'
-import type { Step, Workflow } from '@datashaper/core';
-import { GraphManager , nextOutputName, readStep } from '@datashaper/core'
+import type { Step, Workflow } from '@datashaper/core'
+import { GraphManager, nextOutputName, readStep } from '@datashaper/core'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -12,22 +12,18 @@ export function useGraphManager(
 	workflow?: Workflow | undefined,
 	inputs?: TableContainer[],
 ): GraphManager {
-	const [graph, setGraph] = useState(() => new GraphManager(workflow))
+	const [graph, setGraph] = useState(
+		() => new GraphManager(mapInputs(inputs), workflow),
+	)
 
 	// this effect should fire when a new workflow json is uploaded
 	useEffect(
 		function resetWorkflowWhenWorkflowChanges() {
-			setGraph(new GraphManager(workflow))
+			setGraph(new GraphManager(mapInputs(inputs), workflow))
 		},
-		[workflow],
+		[workflow, inputs],
 	)
 
-	useEffect(
-		function syncInputs() {
-			graph.inputs = mapInputs(inputs)
-		},
-		[graph, inputs],
-	)
 	return graph
 }
 

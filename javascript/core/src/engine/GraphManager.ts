@@ -29,7 +29,6 @@ export type TableObservable = Observable<Maybe<TableContainer>>
 export class GraphManager {
 	// The dataflow graph
 	private readonly _graph: Graph<TableContainer> = new DefaultGraph()
-	private _inputs: Map<string, TableContainer> = new Map()
 
 	// The global onChange handler
 	private readonly _onChange = new Subject<void>()
@@ -43,7 +42,10 @@ export class GraphManager {
 	private _outputNames: string[] = []
 	private _outputDefinitions: NamedOutputPortBinding[] = []
 
-	public constructor(private _workflow: Workflow = new Workflow()) {
+	public constructor(
+		private _inputs: Map<string, TableContainer>,
+		private _workflow: Workflow = new Workflow(),
+	) {
 		this._syncWorkflowStateIntoGraph()
 	}
 
@@ -71,11 +73,6 @@ export class GraphManager {
 
 	public get inputs(): Map<string, TableContainer> {
 		return this._inputs
-	}
-
-	public set inputs(value: Map<string, TableContainer>) {
-		this._inputs = value
-		this._onChange.next()
 	}
 
 	public get graph(): Graph<TableContainer> {
