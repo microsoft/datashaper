@@ -23,6 +23,6 @@ export function useStepOutputs(
 					const output = graph.outputDefinitions.find(def => def.node === id)
 					return output?.name ?? defaultOutputName?.(index)
 				}),
-		[graph.steps, graph.outputDefinitions, defaultOutputName],
+		[graph, graph.steps, graph.outputDefinitions, defaultOutputName],
 	)
 }
