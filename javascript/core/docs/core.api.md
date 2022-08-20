@@ -161,11 +161,6 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // @public
 export function createGraph(workflow: Workflow, tables: Map<string, TableContainer>): GraphManager;
 
-// Warning: (ae-missing-release-tag) "createGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function createGraphManager(inputs?: Map<string, TableContainer> | undefined, workflow?: Workflow | undefined): GraphManager;
-
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -250,7 +245,7 @@ export interface Graph<T> {
 //
 // @public
 export class GraphManager {
-    constructor(_inputs: Map<string, TableContainer>, _workflow: Workflow);
+    constructor(_workflow?: Workflow);
     addInput(item: TableContainer): void;
     addOutput(binding: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
@@ -260,6 +255,7 @@ export class GraphManager {
     hasInput(name: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
+    set inputs(value: Map<string, TableContainer>);
     // (undocumented)
     get inputs(): Map<string, TableContainer>;
     latest(name: string): Maybe<TableContainer>;
@@ -280,7 +276,6 @@ export class GraphManager {
     removeInput(inputName: string): void;
     removeOutput(name: string): void;
     removeStep(index: number): void;
-    reset(workflow?: Workflow): void;
     get steps(): Step[];
     // (undocumented)
     toList(): Maybe<TableContainer>[];

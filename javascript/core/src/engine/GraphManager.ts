@@ -7,7 +7,6 @@ import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 } from '@datashaper/schema'
-import isEqual from 'lodash-es/isEqual'
 import type { Observable, Subscription } from 'rxjs'
 import { from, Subject } from 'rxjs'
 
@@ -30,6 +29,7 @@ export type TableObservable = Observable<Maybe<TableContainer>>
 export class GraphManager {
 	// The dataflow graph
 	private readonly _graph: Graph<TableContainer> = new DefaultGraph()
+	private _inputs: Map<string, TableContainer> = new Map()
 
 	// The global onChange handler
 	private readonly _onChange = new Subject<void>()
@@ -43,10 +43,7 @@ export class GraphManager {
 	private _outputNames: string[] = []
 	private _outputDefinitions: NamedOutputPortBinding[] = []
 
-	public constructor(
-		private readonly _inputs: Map<string, TableContainer> = new Map(),
-		private _workflow: Workflow,
-	) {
+	public constructor(private _workflow: Workflow = new Workflow()) {
 		this._syncWorkflowStateIntoGraph()
 	}
 
@@ -74,6 +71,11 @@ export class GraphManager {
 
 	public get inputs(): Map<string, TableContainer> {
 		return this._inputs
+	}
+
+	public set inputs(value: Map<string, TableContainer>) {
+		this._inputs = value
+		this._onChange.next()
 	}
 
 	public get graph(): Graph<TableContainer> {
@@ -104,25 +106,6 @@ export class GraphManager {
 
 	public hasOutput(name: string): boolean {
 		return this.outputObservables.has(name)
-	}
-
-	/**
-	 * Remove all steps, inputs, and outputs from the pipeline
-	 */
-	public reset(workflow?: Workflow): void {
-		if (this.isWorkflowEqual(workflow)) {
-			return
-		}
-		this._workflow.clear()
-		// todo: add graph clear
-		this.graph.nodes.forEach(id => this._graph.remove(id))
-
-		// if a new workflow is injected, sync it into the graph
-		if (workflow != null) {
-			this._workflow = workflow.clone()
-			this._syncWorkflowStateIntoGraph()
-		}
-		this._onChange.next()
 	}
 
 	/**
@@ -383,21 +366,6 @@ export class GraphManager {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}
 	}
-
-	private isWorkflowEqual(workflow?: Workflow): boolean {
-		return (
-			isEqual(workflow?.steps, this._workflow?.steps) &&
-			isEqual(workflow?.input, this._workflow?.input) &&
-			isEqual(workflow?.output, this._workflow?.output)
-		)
-	}
-}
-
-export function createGraphManager(
-	inputs?: Map<string, TableContainer> | undefined,
-	workflow?: Workflow | undefined,
-): GraphManager {
-	return new GraphManager(inputs, workflow ? workflow.clone() : new Workflow())
 }
 
 function hasDefinedInputs(step: Step): boolean {

@@ -4,8 +4,7 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 
-import type { GraphManager } from './GraphManager.js'
-import { createGraphManager } from './GraphManager.js'
+import { GraphManager } from './GraphManager.js'
 import type { Workflow } from './Workflow.js'
 
 /**
@@ -23,5 +22,7 @@ export function createGraph(
 	workflow: Workflow,
 	tables: Map<string, TableContainer>,
 ): GraphManager {
-	return createGraphManager(tables, workflow)
+	const graph = new GraphManager(workflow)
+	graph.inputs = tables
+	return graph
 }

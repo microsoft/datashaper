@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Workflow } from '@datashaper/core'
 import type { DetailsListFeatures } from '@datashaper/react'
 import {
 	StatsColumnType,
 	StepSelector,
 	useGraphManager,
 	useGraphSteps,
-	useGraphWorkflowState,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useStepOutputs,
@@ -53,8 +53,8 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	})
 
 	const inputTables = useInputTables(autoType)
-	const graph = useGraphManager(undefined, inputTables)
-	const [workflow, setWorkflow] = useGraphWorkflowState(graph)
+	const [workflow, setWorkflow] = useState<Workflow | undefined>(undefined)
+	const graph = useGraphManager(workflow, inputTables)
 	const steps = useGraphSteps(graph)
 	const outputs = useStepOutputs(
 		graph,
@@ -65,6 +65,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 	const onStepSave = useHandleStepSave(graph)
 	const onStepCreate = useCreateStepHandler(graph)
 	const onStepOutputChange = useHandleStepOutputChanged(graph)
+
 	return (
 		<Container>
 			<Workspace className="arquero-workspace">
