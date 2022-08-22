@@ -250,14 +250,13 @@ export class GraphManager {
     addOutput(binding: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
     // (undocumented)
-    get graph(): Graph<TableContainer>;
+    readonly graph: Graph<TableContainer>;
     // (undocumented)
     hasInput(name: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
-    set inputs(value: Map<string, TableContainer>);
     // (undocumented)
-    get inputs(): Map<string, TableContainer>;
+    readonly inputs: Map<string, TableContainer>;
     latest(name: string): Maybe<TableContainer>;
     // (undocumented)
     latestForNodeId(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
@@ -276,6 +275,8 @@ export class GraphManager {
     removeInput(inputName: string): void;
     removeOutput(name: string): void;
     removeStep(index: number): void;
+    // (undocumented)
+    setInputs(inputs: Map<string, TableContainer>): void;
     get steps(): Step[];
     // (undocumented)
     toList(): Maybe<TableContainer>[];
@@ -621,6 +622,8 @@ export class Workflow {
     addStep(stepInput: StepInput): Step;
     // (undocumented)
     clear(): void;
+    // (undocumented)
+    clearInputs(): void;
     // (undocumented)
     clone(): Workflow;
     // (undocumented)

@@ -22,5 +22,7 @@ export function createGraph(
 	workflow: Workflow,
 	tables: Map<string, TableContainer>,
 ): GraphManager {
-	return new GraphManager(tables, workflow)
+	const graph = new GraphManager(workflow)
+	graph.setInputs(tables)
+	return graph
 }

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GraphManager } from '@datashaper/core'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 /**
  * Creates a list of table-names from the tables in a store
@@ -14,23 +14,22 @@ import { useCallback, useEffect, useState } from 'react'
  * @returns
  */
 export function useTableNames(graph?: GraphManager): string[] {
-	const [tables, setTables] = useState<string[]>([])
-
-	const refreshInputTables = useCallback(() => {
-		const newTables = [
-			...(graph?.inputs.keys() ?? []),
-			...(graph?.outputs ?? []),
-		]
-		setTables(newTables)
-	}, [graph, setTables])
+	const [tables, setTables] = useState<string[]>(() => getTableOptions(graph))
 
 	// Listen to input table changes
 	useEffect(
-		() => graph?.onChange(refreshInputTables),
-		[graph, refreshInputTables],
+		() =>
+			graph?.onChange(() => {
+				setTables(getTableOptions(graph))
+			}),
+		[graph],
 	)
 
-	// Initialize input tables on initial render
-	useEffect(() => refreshInputTables(), [refreshInputTables])
 	return tables
+}
+
+function getTableOptions(graph?: GraphManager): string[] {
+	const result = new Set<string>(graph?.inputs.keys())
+	graph?.outputs.forEach(o => result.add(o))
+	return [...result.values()]
 }

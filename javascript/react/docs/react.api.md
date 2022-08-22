@@ -34,7 +34,7 @@ import type { TableContainer } from '@datashaper/arquero';
 import type { TableMetadata } from '@datashaper/schema';
 import type { Theme } from '@thematic/core';
 import type { Verb } from '@datashaper/schema';
-import { Workflow } from '@datashaper/core';
+import type { Workflow } from '@datashaper/core';
 
 // Warning: (ae-missing-release-tag) "ArqueroDetailsList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

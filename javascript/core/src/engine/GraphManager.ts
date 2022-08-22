@@ -8,7 +8,7 @@ import type {
 	NamedPortBinding,
 } from '@datashaper/schema'
 import type { Observable, Subscription } from 'rxjs'
-import { from, Subject } from 'rxjs'
+import { Subject } from 'rxjs'
 
 import type { Graph, Node } from '../dataflow/index.js'
 import { DefaultGraph, observableNode } from '../dataflow/index.js'
@@ -28,7 +28,8 @@ export type TableObservable = Observable<Maybe<TableContainer>>
  */
 export class GraphManager {
 	// The dataflow graph
-	private readonly _graph: Graph<TableContainer> = new DefaultGraph()
+	public readonly graph: Graph<TableContainer> = new DefaultGraph()
+	public readonly inputs: Map<string, TableContainer> = new Map()
 
 	// The global onChange handler
 	private readonly _onChange = new Subject<void>()
@@ -36,16 +37,17 @@ export class GraphManager {
 	//
 	// Output tracking - observables, data cache, subscriptions
 	//
+	private readonly inputObservables: Map<
+		string,
+		Subject<Maybe<TableContainer>>
+	> = new Map()
 	private readonly outputObservables: Map<string, TableObservable> = new Map()
 	private readonly outputCache: Map<string, Maybe<TableContainer>> = new Map()
 	private readonly outputSubscriptions: Map<string, Subscription> = new Map()
 	private _outputNames: string[] = []
 	private _outputDefinitions: NamedOutputPortBinding[] = []
 
-	public constructor(
-		private _inputs: Map<string, TableContainer>,
-		private _workflow: Workflow = new Workflow(),
-	) {
+	public constructor(private _workflow: Workflow = new Workflow()) {
 		this._syncWorkflowStateIntoGraph()
 	}
 
@@ -53,9 +55,6 @@ export class GraphManager {
 	 * Synchronize the workflow state into the graph. Used during initialization.
 	 */
 	private _syncWorkflowStateIntoGraph() {
-		for (const i of this._inputs.keys()) {
-			this._workflow.addInput(i)
-		}
 		for (const step of this._workflow.steps) {
 			this._addWorkflowStepToGraph(step)
 		}
@@ -66,17 +65,35 @@ export class GraphManager {
 		this._syncOutputArrays()
 	}
 
+	public setInputs(inputs: Map<string, TableContainer>) {
+		// clear existing inputs
+		this._workflow.clearInputs()
+
+		// add new inputs
+		for (const i of inputs.keys()) {
+			const table = inputs.get(i) as TableContainer
+			this.inputs.set(i, table)
+			this._workflow.addInput(i)
+		}
+
+		// bind the graph processing steps to the new input observables
+		// TODO: input observable wiring should probably be managed in the DefaultGraph
+		for (const step of this.steps) {
+			this._configureStep(step, this.graph.node(step.id))
+		}
+
+		// pipe input tables into graph
+		for (const i of inputs.keys()) {
+			const table = inputs.get(i) as TableContainer
+			this.inputObservables.get(i)?.next(table)
+		}
+
+		this._onChange.next()
+	}
+
 	private _syncOutputArrays() {
 		this._outputNames = [...this.outputObservables.keys()]
 		this._outputDefinitions = [...this._workflow.output.values()]
-	}
-
-	public get inputs(): Map<string, TableContainer> {
-		return this._inputs
-	}
-
-	public get graph(): Graph<TableContainer> {
-		return this._graph
 	}
 
 	public get workflow(): Workflow {
@@ -139,7 +156,7 @@ export class GraphManager {
 	private _addWorkflowStepToGraph(step: Step): void {
 		// create the graph node
 		const node = createNode(step)
-		this._graph.add(node)
+		this.graph.add(node)
 
 		// wire up the graph node
 		this._configureStep(step, node)
@@ -174,7 +191,7 @@ export class GraphManager {
 		stepOutputs.forEach(o => this.removeOutput(o.name))
 
 		// Remove the step from the graph
-		this._graph.remove(step.id)
+		this.graph.remove(step.id)
 		this.workflow.removeStep(index)
 		this._onChange.next()
 	}
@@ -341,7 +358,8 @@ export class GraphManager {
 				} else {
 					// Bind the named input
 					const b = binding as NamedPortBinding
-					node.bind({ input, node: this.getNode(b.node), output: b.output })
+					const boundInput = this.getNode(b.node)
+					node.bind({ input, node: boundInput, output: b.output })
 				}
 			}
 		} else if (this._workflow.steps.length > 0 && node.inputs.length > 0) {
@@ -355,10 +373,16 @@ export class GraphManager {
 		const graph = this.graph
 		// bind to an input defined in the graph
 		if (graph.hasNode(id)) {
-			return graph.node(id)
+			const result = graph.node(id)
+			return result
 		} else if (this._workflow.hasInput(id)) {
-			// bind to a declared input
-			return observableNode(id, from([this.inputs.get(id)]))
+			// create a new subject that we can pipe data into
+			const source = new Subject<TableContainer | undefined>()
+			source.next(this.inputs.get(id))
+
+			// define the new graph node
+			this.inputObservables.set(id, source)
+			return observableNode(id, source)
 		} else {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}

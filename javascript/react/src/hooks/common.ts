@@ -12,16 +12,21 @@ export function useGraphManager(
 	workflow?: Workflow | undefined,
 	inputs?: TableContainer[],
 ): GraphManager {
-	const [graph, setGraph] = useState(
-		() => new GraphManager(mapInputs(inputs), workflow),
-	)
+	const [graph, setGraph] = useState(() => new GraphManager(workflow))
 
 	// this effect should fire when a new workflow json is uploaded
 	useEffect(
 		function resetWorkflowWhenWorkflowChanges() {
-			setGraph(new GraphManager(mapInputs(inputs), workflow))
+			setGraph(new GraphManager(workflow))
 		},
-		[workflow, inputs],
+		[workflow],
+	)
+
+	useEffect(
+		function syncDataTablesWhenInputsChange() {
+			graph.setInputs(mapInputs(inputs))
+		},
+		[graph, inputs],
 	)
 
 	return graph
