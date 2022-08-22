@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GraphManager } from '@datashaper/core'
+import type { Unsubscribe } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useLayoutEffect, useState } from 'react'
-import type { Subscription } from 'rxjs'
+import { useEffect, useState } from 'react'
 
 export function useDataTable(
 	id: string | undefined,
@@ -14,28 +14,36 @@ export function useDataTable(
 ): ColumnTable | undefined {
 	const [tbl, setTable] = useState<ColumnTable | undefined>(existingTable)
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (id && graph) {
-			let observableSub: Subscription | undefined
+			// listen for graph changes that may affect output
+			let unsubscribeFromOutput: Unsubscribe | undefined
 			const unsubscribeFromGraph = graph.onChange(() => {
-				// If a static input table is passed in, set the state to it
-				if (graph.hasInput(id)) {
-					const result = graph.inputs.get(id)?.table
-					setTable(result)
-					return
-				}
-				// Observe the named graph output
-				const observable = graph.output(id) ?? graph.outputForNodeId(id)
-
-				observableSub = observable?.subscribe(t => setTable(t?.table))
-			})
+				unsubscribeFromOutput = extractTableFromGraph(graph, id, setTable)
+			}, true)
 
 			// clean up both subscriptions
 			return () => {
+				unsubscribeFromOutput?.()
 				unsubscribeFromGraph()
-				observableSub?.unsubscribe()
 			}
 		}
 	}, [id, graph])
 	return tbl
+}
+
+function extractTableFromGraph(
+	graph: GraphManager,
+	id: string,
+	setTable: (table: ColumnTable | undefined) => void,
+): Unsubscribe | undefined {
+	// If a static input table is passed in, set the state to it
+	if (graph.hasInput(id)) {
+		setTable(graph.inputs.get(id)?.table)
+	} else {
+		// Observe the named graph output
+		const observable = graph.output(id) ?? graph.outputForNodeId(id)
+		const subscription = observable?.subscribe(t => setTable(t?.table))
+		return () => subscription?.unsubscribe()
+	}
 }

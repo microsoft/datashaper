@@ -337,9 +337,13 @@ export class GraphManager {
 	/**
 	 * Listen to changes in the Workflow graph
 	 * @param handler - The onChange handler
+	 * @param fireSync - Fire the onchange handler now, synchronously
 	 */
-	public onChange(handler: () => void): () => void {
+	public onChange(handler: () => void, fireSync = false): () => void {
 		const sub = this._onChange.subscribe(handler)
+		if (fireSync) {
+			handler()
+		}
 		return () => sub.unsubscribe()
 	}
 
