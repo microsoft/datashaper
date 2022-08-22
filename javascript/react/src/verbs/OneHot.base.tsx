@@ -4,7 +4,7 @@
  */
 import type { Step } from '@datashaper/core'
 import type { OnehotArgs } from '@datashaper/schema'
-import cloneDeep from 'lodash-es/cloneDeep'
+import cloneDeep from 'lodash-es/cloneDeep.js'
 import { memo, useCallback, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'
