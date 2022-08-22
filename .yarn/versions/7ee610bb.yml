@@ -4,3 +4,6 @@ releases:
 declined:
   - "@datashaper/schema"
   - "@datashaper/webapp"
+
+undecided:
+  - "@datashaper/arquero"
