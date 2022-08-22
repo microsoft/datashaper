@@ -188,7 +188,7 @@ export class GraphManager {
 
 		// Remove step outputs from the configuration
 		const stepOutputs = this._outputDefinitions.filter(o => o.node === node.id)
-		stepOutputs.forEach(o => this.removeOutput(o.name))
+		stepOutputs.forEach(o => this.removeOutput(o.node))
 
 		// Remove the step from the graph
 		this.graph.remove(step.id)
