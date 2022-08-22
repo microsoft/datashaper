@@ -250,7 +250,7 @@ export interface Graph<T> {
 //
 // @public
 export class GraphManager {
-    constructor(_inputs: Map<string, TableContainer>, workflow: Workflow);
+    constructor(_inputs: Map<string, TableContainer>, _workflow: Workflow);
     addInput(item: TableContainer): void;
     addOutput(binding: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
@@ -389,6 +389,11 @@ export function nextColumnName(name: string, columnNames: string[]): string;
 //
 // @public
 export function nextOutputName(name: string, workflow: Workflow): string;
+
+// Warning: (ae-missing-release-tag) "nextOutputNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function nextOutputNode(name: string, workflow: Workflow): string;
 
 // @public
 interface Node_2<T, Config = unknown> {
