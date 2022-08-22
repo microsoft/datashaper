@@ -86,6 +86,11 @@ export class Workflow {
 		this._onChange.next()
 	}
 
+	public clearInputs(): void {
+		this._input.clear()
+		this._onChange.next()
+	}
+
 	public hasInput(input: string): boolean {
 		return this._input.has(input)
 	}

@@ -11,7 +11,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { DropzoneOptions } from 'react-dropzone';
 import { FileCollection } from '@datashaper/utilities';
 import { FileRejection } from 'react-dropzone';
-import type { GraphManager } from '@datashaper/core';
+import { GraphManager } from '@datashaper/core';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
@@ -624,11 +624,6 @@ export function useGraphManager(workflow?: Workflow | undefined, inputs?: TableC
 //
 // @public
 export function useGraphSteps(graph: GraphManager): Step[];
-
-// Warning: (ae-missing-release-tag) "useGraphWorkflowState" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useGraphWorkflowState(graph: GraphManager): [Workflow | undefined, (workflow: Workflow | undefined) => void];
 
 // Warning: (ae-missing-release-tag) "useGroupHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

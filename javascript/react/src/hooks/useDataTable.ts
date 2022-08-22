@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GraphManager } from '@datashaper/core'
+import type { Unsubscribe } from '@datashaper/core'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useEffect, useState } from 'react'
 
@@ -11,31 +12,38 @@ export function useDataTable(
 	graph?: GraphManager,
 	existingTable?: ColumnTable,
 ): ColumnTable | undefined {
-	const [tbl, setTable] = useState<ColumnTable | undefined>()
+	const [tbl, setTable] = useState<ColumnTable | undefined>(existingTable)
 
 	useEffect(() => {
-		// if a table already exists, use it directly
-		// TODO: should we set it in the store also?
-		// the expectation here is that a table will be provided if the step component is used directly without a builder
-		// interface that is managing a pipeline
-		if (existingTable) {
-			setTable(existingTable)
-		}
-
 		if (id && graph) {
-			// If a static input table is passed in, set the state to it
-			if (graph.hasInput(id)) {
-				setTable(graph.inputs.get(id)?.table)
-			}
-			// Set the current value
-			const current = graph.latest(id) ?? graph.latestForNodeId(id)
-			if (current) setTable(current?.table)
+			// listen for graph changes that may affect output
+			let unsubscribeFromOutput: Unsubscribe | undefined
+			const unsubscribeFromGraph = graph.onChange(() => {
+				unsubscribeFromOutput = extractTableFromGraph(graph, id, setTable)
+			}, true)
 
-			// Observe the named graph output
-			const observable = graph.output(id) ?? graph.outputForNodeId(id)
-			const sub = observable?.subscribe(t => setTable(t?.table))
-			return () => sub?.unsubscribe()
+			// clean up both subscriptions
+			return () => {
+				unsubscribeFromOutput?.()
+				unsubscribeFromGraph()
+			}
 		}
-	}, [id, existingTable, graph])
+	}, [id, graph])
 	return tbl
+}
+
+function extractTableFromGraph(
+	graph: GraphManager,
+	id: string,
+	setTable: (table: ColumnTable | undefined) => void,
+): Unsubscribe | undefined {
+	// If a static input table is passed in, set the state to it
+	if (graph.hasInput(id)) {
+		setTable(graph.inputs.get(id)?.table)
+	} else {
+		// Observe the named graph output
+		const observable = graph.output(id) ?? graph.outputForNodeId(id)
+		const subscription = observable?.subscribe(t => setTable(t?.table))
+		return () => subscription?.unsubscribe()
+	}
 }

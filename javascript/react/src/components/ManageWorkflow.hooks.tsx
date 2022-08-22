@@ -188,8 +188,9 @@ export function useGraphOutputListener(
 	useEffect(
 		() =>
 			setOutput &&
-			graph.onChange(() =>
-				setOutput(graph.toList().filter(t => !!t) as TableContainer[]),
+			graph.onChange(
+				() => setOutput(graph.toList().filter(t => !!t) as TableContainer[]),
+				true,
 			),
 		[graph, setOutput],
 	)

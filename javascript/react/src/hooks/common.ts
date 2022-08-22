@@ -4,45 +4,39 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import type {
-	GraphManager,
 	Step,
 	Workflow} from '@datashaper/core';
 import {
-	createGraphManager,
+	GraphManager,
 	nextOutputName,
 	nextOutputNode,
 	readStep
 } from '@datashaper/core'
 import isArray from 'lodash-es/isArray.js'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export function useGraphManager(
 	workflow?: Workflow | undefined,
 	inputs?: TableContainer[],
 ): GraphManager {
-	const manager = useMemo(
-		() => createGraphManager(mapInputs(inputs), workflow),
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[
-			/* only create on first pass */
-		],
-	)
+	const [graph, setGraph] = useState(() => new GraphManager(workflow))
 
 	// this effect should fire when a new workflow json is uploaded
 	useEffect(
 		function resetWorkflowWhenWorkflowChanges() {
-			manager.reset(workflow)
+			setGraph(new GraphManager(workflow))
 		},
-		[manager, workflow],
+		[workflow],
 	)
 
 	useEffect(
-		function syncInputs() {
-			inputs?.forEach(i => manager.addInput(i))
+		function syncDataTablesWhenInputsChange() {
+			graph.setInputs(mapInputs(inputs))
 		},
-		[manager, inputs],
+		[graph, inputs],
 	)
-	return manager
+
+	return graph
 }
 
 function mapInputs(inputs?: TableContainer[]) {

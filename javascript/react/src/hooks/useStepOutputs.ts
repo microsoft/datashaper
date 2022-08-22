@@ -15,14 +15,17 @@ export function useStepOutputs(
 	graph: GraphManager,
 	defaultOutputName?: (index: number) => string,
 ): Array<string | undefined> {
+	const outputs = graph.outputDefinitions
+	const steps = graph.steps
+
 	return useMemo<Array<string | undefined>>(
 		() =>
-			graph.steps
+			steps
 				.map(s => s.id)
 				.map((id, index) => {
-					const output = graph.outputDefinitions.find(def => def.node === id)
+					const output = outputs.find(def => def.node === id)
 					return output?.name ?? defaultOutputName?.(index)
 				}),
-		[graph.steps, graph.outputDefinitions, defaultOutputName],
+		[steps, outputs, defaultOutputName],
 	)
 }

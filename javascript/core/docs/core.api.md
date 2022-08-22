@@ -161,11 +161,6 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // @public
 export function createGraph(workflow: Workflow, tables: Map<string, TableContainer>): GraphManager;
 
-// Warning: (ae-missing-release-tag) "createGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function createGraphManager(inputs?: Map<string, TableContainer> | undefined, workflow?: Workflow | undefined): GraphManager;
-
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -250,23 +245,23 @@ export interface Graph<T> {
 //
 // @public
 export class GraphManager {
-    constructor(_inputs: Map<string, TableContainer>, _workflow: Workflow);
+    constructor(_workflow?: Workflow);
     addInput(item: TableContainer): void;
     addOutput(binding: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
     // (undocumented)
-    get graph(): Graph<TableContainer>;
+    readonly graph: Graph<TableContainer>;
     // (undocumented)
     hasInput(name: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
     // (undocumented)
-    get inputs(): Map<string, TableContainer>;
+    readonly inputs: Map<string, TableContainer>;
     latest(name: string): Maybe<TableContainer>;
     // (undocumented)
     latestForNodeId(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
     get numSteps(): number;
-    onChange(handler: () => void): () => void;
+    onChange(handler: () => void, fireSync?: boolean): () => void;
     output(name: string): Maybe<TableObservable>;
     // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
@@ -280,7 +275,8 @@ export class GraphManager {
     removeInput(inputName: string): void;
     removeOutput(name: string): void;
     removeStep(index: number): void;
-    reset(workflow?: Workflow): void;
+    // (undocumented)
+    setInputs(inputs: Map<string, TableContainer>): void;
     get steps(): Step[];
     // (undocumented)
     toList(): Maybe<TableContainer>[];
@@ -631,6 +627,8 @@ export class Workflow {
     addStep(stepInput: StepInput): Step;
     // (undocumented)
     clear(): void;
+    // (undocumented)
+    clearInputs(): void;
     // (undocumented)
     clone(): Workflow;
     // (undocumented)
