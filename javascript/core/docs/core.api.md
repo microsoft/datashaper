@@ -386,6 +386,11 @@ export function nextColumnName(name: string, columnNames: string[]): string;
 // @public
 export function nextOutputName(name: string, workflow: Workflow): string;
 
+// Warning: (ae-missing-release-tag) "nextOutputNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function nextOutputNode(name: string, workflow: Workflow): string;
+
 // @public
 interface Node_2<T, Config = unknown> {
     bind(binding: NodeBinding<T>): void;
@@ -630,6 +635,8 @@ export class Workflow {
     hasInput(input: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
+    // (undocumented)
+    hasOutputName(name: string): boolean;
     // (undocumented)
     get input(): Set<string>;
     // (undocumented)

@@ -11,7 +11,7 @@ import { useThematic } from '@thematic/react'
 import merge from 'lodash-es/merge.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { useCreateTableName, useFormattedColumnArg } from '../hooks/index.js'
+import { useCreateTableId, useFormattedColumnArg } from '../hooks/index.js'
 
 export function useHandleSaveClick(
 	step: Step | undefined,
@@ -43,16 +43,16 @@ export function useInternalTableStep(
 		}
 	}, [step, setInternal])
 
-	const createNewTableName = useCreateTableName(graph)
+	const createNewTableId = useCreateTableId(graph)
 
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {
-			const id = createNewTableName(verb)
+			const id = createNewTableId(verb)
 			const _step = readStep({ verb, id })
 			_step.args = formattedColumnArg(_step.args)
 			setInternal(_step)
 		},
-		[setInternal, formattedColumnArg, createNewTableName],
+		[setInternal, formattedColumnArg, createNewTableId],
 	)
 
 	return { internal, handleVerbChange, setInternal }

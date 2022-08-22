@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { Step } from '@datashaper/core'
 import { DialogConfirm } from '@essex/themed-components'
-import { memo, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 import {
 	useGraphManager,
@@ -65,6 +65,15 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		const onDuplicate = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(index)
 
+		const onViewStep = useCallback(
+			(name: string) => {
+				const tableName =
+					graph.outputDefinitions.find(x => x.node === name)?.name ?? ''
+				onSelect && onSelect(tableName)
+			},
+			[onSelect, graph],
+		)
+
 		// parallel array of output names for the steps
 		const outputs = useStepOutputs(graph)
 		const steps = useGraphSteps(graph)
@@ -75,7 +84,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			<Container>
 				<StepList
 					onDeleteClicked={onDelete}
-					onSelect={onSelect}
+					onSelect={onViewStep}
 					onEditClicked={onEdit}
 					steps={steps}
 					outputs={outputs}

@@ -3,8 +3,15 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/arquero'
-import type { Step, Workflow } from '@datashaper/core'
-import { GraphManager, nextOutputName, readStep } from '@datashaper/core'
+import type {
+	Step,
+	Workflow} from '@datashaper/core';
+import {
+	GraphManager,
+	nextOutputName,
+	nextOutputNode,
+	readStep
+} from '@datashaper/core'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -38,6 +45,21 @@ function mapInputs(inputs?: TableContainer[]) {
 	return _inputs
 }
 
+/**
+ * Returns a hook to generate a new table name based on the given input e.g.
+ * "join" could result in "join 1" or "join 2" depending on how many collisions
+ *  occur.
+ * @param graph - the graph manager
+ * @returns a safe output name to use
+ */
+export function useCreateTableId(
+	graph: GraphManager,
+): (name: string) => string {
+	return useCallback(
+		(name: string): string => nextOutputNode(name, graph.workflow),
+		[graph],
+	)
+}
 /**
  * Returns a hook to generate a new table name based on the given input e.g.
  * "join" could result in "join 1" or "join 2" depending on how many collisions
