@@ -261,7 +261,7 @@ export class GraphManager {
     // (undocumented)
     latestForNodeId(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
     get numSteps(): number;
-    onChange(handler: () => void): () => void;
+    onChange(handler: () => void, fireSync?: boolean): () => void;
     output(name: string): Maybe<TableObservable>;
     // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
