@@ -19,7 +19,7 @@ export function nextColumnName(name: string, columnNames: string[]): string {
 	let derivedName = originalName
 
 	let count = 1
-	while (columnNames?.includes(name)) {
+	while (columnNames?.includes(derivedName)) {
 		derivedName = `${originalName} (${count})`
 		count++
 	}

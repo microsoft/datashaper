@@ -4,7 +4,7 @@
  */
 import type { GraphManager } from '@datashaper/core'
 import type { IDropdownOption } from '@fluentui/react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { getSimpleDropdownOptions } from './useSimpleDropdownOptions.js'
 
@@ -36,21 +36,30 @@ export function useTableDropdownOptions(
 	}, [inputNames, graph])
 }
 
-function useInputTableNames(graph?: GraphManager): string[] {
-	const [tables, setTables] = useState<string[]>([])
-
-	const refreshInputTables = useCallback(() => {
-		const newTables = [...(graph?.inputs.keys() ?? [])]
-		setTables(newTables)
-	}, [graph, setTables])
+/**
+ * Creates a dropdown list of id-names from the tables in a store
+ * TODO: for any given step, we should only show the tables created *prior* to this step,
+ * potentially via an optional filter callback on store.list.
+ * As it is, whenever the store is updated all the table dropdowns get the results.
+ * @param graph -
+ * @returns
+ */
+export function useInputTableNames(graph?: GraphManager): string[] {
+	const [tables, setTables] = useState<string[]>(() => getTableOptions(graph))
 
 	// Listen to input table changes
 	useEffect(
-		() => graph?.onChange(refreshInputTables),
-		[graph, refreshInputTables],
+		() =>
+			graph?.onChange(() => {
+				setTables(getTableOptions(graph))
+			}),
+		[graph],
 	)
 
-	// Initialize input tables on initial render
-	useEffect(() => refreshInputTables(), [refreshInputTables])
 	return tables
+}
+
+function getTableOptions(graph?: GraphManager): string[] {
+	const result = new Set<string>(graph?.inputs.keys())
+	return [...result.values()]
 }
