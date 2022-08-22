@@ -46,8 +46,10 @@ export class GraphManager {
 	private readonly outputSubscriptions: Map<string, Subscription> = new Map()
 	private _outputNames: string[] = []
 	private _outputDefinitions: NamedOutputPortBinding[] = []
+	private _workflow: Workflow
 
-	public constructor(private _workflow: Workflow = new Workflow()) {
+	public constructor(wf: Workflow = new Workflow()) {
+		this._workflow = wf.clone()
 		this._syncWorkflowStateIntoGraph()
 	}
 
