@@ -4,6 +4,7 @@
  */
 import type { Step } from '@datashaper/core'
 import type { RecodeArgs, Value } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
@@ -37,7 +38,7 @@ export function useHandleKeyChange(
 				...step.args.map,
 			}
 
-			const map: Record<string, string> = {}
+			const map: Record<Value, Value> = {}
 
 			for (const key in mapList) {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -60,6 +61,7 @@ export function useHandleKeyChange(
 
 export function useHandleValueChange(
 	step: Step<RecodeArgs>,
+	dataType: DataType,
 	onChange?: StepChangeFunction<RecodeArgs>,
 ): (key: Value, newValue: Value) => void {
 	return useCallback(
@@ -68,12 +70,13 @@ export function useHandleValueChange(
 				...step.args.map,
 			}
 
-			const map: Record<string, string> = {}
+			const map: Record<Value, Value> = {}
 
 			for (const keyElement in mapList) {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				keyElement === key.toString()
-					? (map[keyElement] = newValue)
+					? (map[keyElement] =
+							dataType === DataType.Date ? new Date(newValue) : newValue)
 					: (map[keyElement] = mapList[keyElement]!)
 			}
 
