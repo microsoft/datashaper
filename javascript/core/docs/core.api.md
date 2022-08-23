@@ -245,7 +245,7 @@ export interface Graph<T> {
 //
 // @public
 export class GraphManager {
-    constructor(_workflow?: Workflow);
+    constructor(wf?: Workflow);
     addInput(item: TableContainer): void;
     addOutput(binding: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
