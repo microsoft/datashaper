@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/core",
-	"version": "9.0.1",
+	"version": "10.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
