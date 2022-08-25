@@ -8,6 +8,7 @@
 		"types": "dist/index.d.ts"
 	},
 	"versions": {
+		"datapackage": "1.0.0",
 		"workflow": "1.5.0"
 	},
 	"sideEffects": false,
@@ -33,8 +34,9 @@
 		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
-		"bundle-workflow": "typescript-json-schema tsconfig.json WorkflowDefinition > ../../schema/workflow.json",
-		"bundle": "run-p bundle-workflow",
+		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackage > ../../schema/datapackage.json",
+		"bundle-workflow": "typescript-json-schema tsconfig.json Workflow > ../../schema/workflow.json",
+		"bundle": "run-p bundle-datapackage bundle-workflow",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
