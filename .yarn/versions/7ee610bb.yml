@@ -1,0 +1,7 @@
+releases:
+  "@datashaper/react": minor
+
+declined:
+  - "@datashaper/arquero"
+  - "@datashaper/schema"
+  - "@datashaper/webapp"
