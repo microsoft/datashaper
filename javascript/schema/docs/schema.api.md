@@ -624,10 +624,10 @@ export interface SpreadArgs extends InputColumnListArgs {
     to: string[];
 }
 
-// Warning: (ae-missing-release-tag) "StepJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StepDefinition" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export type StepJson = StepJsonCommon & (({
+export type StepDefinition = StepJsonCommon & (({
     verb: Verb.Aggregate;
     args?: AggregateArgs;
 } & BasicInput) | ({
@@ -919,16 +919,16 @@ export enum WindowFunction {
     RowNumber = "row_number"
 }
 
-// Warning: (ae-missing-release-tag) "WorkflowJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorkflowDefinition" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface WorkflowJson {
+export interface WorkflowDefinition {
     $schema?: string;
     description?: string;
     input?: string[];
     name?: string;
     output: Array<OutputPortBinding>;
-    steps?: StepJson[];
+    steps?: StepDefinition[];
 }
 
 // (No @packageDocumentation comment for this package)
