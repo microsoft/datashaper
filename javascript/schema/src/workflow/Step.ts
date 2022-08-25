@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { BasicInput, DualInput,VariadicInput } from './bindings.js'
+import type { BasicInput, DualInput, VariadicInput } from './bindings.js'
 import type {
 	AggregateArgs,
 	BinArgs,
@@ -50,7 +50,7 @@ export interface StepJsonCommon {
 /**
  * Specification for step items
  */
-export type StepDefinition = StepJsonCommon &
+export type Step = StepJsonCommon &
 	(
 		| ({ verb: Verb.Aggregate; args?: AggregateArgs } & BasicInput)
 		| ({ verb: Verb.Bin; args?: BinArgs } & BasicInput)
