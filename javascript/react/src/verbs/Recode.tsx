@@ -36,7 +36,11 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 				? initialValues.map(e => e.toISOString())
 				: initialValues
 		const handleRecodeKeyChange = useHandleKeyChange(step, onChange)
-		const handleRecodeValueChange = useHandleValueChange(step, onChange)
+		const handleRecodeValueChange = useHandleValueChange(
+			step,
+			dataType,
+			onChange,
+		)
 		const handleRecodeDelete = useRecodeDelete(step, onChange)
 		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
 
