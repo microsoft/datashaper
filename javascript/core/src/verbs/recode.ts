@@ -2,7 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import { columnType } from '@datashaper/arquero'
 import type { RecodeArgs } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import type { Value } from '@essex/arquero'
 import { escape, op } from 'arquero'
 
@@ -13,17 +15,22 @@ export const recodeStep: ColumnTableStep<RecodeArgs> = (
 	input,
 	{ column, to, map },
 ) => {
-	//TODO Datatype conditional statement and recode error with map
 	const finalMap: Record<Value, Value> = {}
 
-	for (const key in map) {
-		const dateConversion = new Date(key)
-		const valueConversion = new Date(map[key])
-		finalMap[dateConversion.toString()] = valueConversion
+	const dataType = columnType(input, column)
+
+	if (dataType === DataType.Date) {
+		for (const key in map) {
+			const dateConversion = new Date(key)
+			const valueConversion = new Date(map[key])
+			finalMap[dateConversion.toString()] = valueConversion
+		}
 	}
 
-	input.derive({
-		[to]: escape((d: any) => op.recode(d[column], finalMap)),
+	return input.derive({
+		[to]: escape((d: any) =>
+			op.recode(d[column], dataType === DataType.Date ? finalMap : map),
+		),
 	})
 }
 
