@@ -277,6 +277,12 @@ export interface GuidanceProps {
     name: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "CustomIconProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "HistoryIcon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const HistoryIcon: (props: CustomIconProps) => JSX.Element;
+
 // Warning: (ae-missing-release-tag) "ManageWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -285,7 +291,9 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps>;
 // Warning: (ae-missing-release-tag) "ManageWorkflowProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
+export interface ManageWorkflowProps extends Partial<PanelProps>, Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
+    // (undocumented)
+    historyView?: boolean;
     // (undocumented)
     inputs: TableContainer[];
     onSelect?: (name: string) => void;
@@ -298,6 +306,16 @@ export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'gra
 //
 // @public (undocumented)
 export type MetadataClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined, metadata?: ColumnMetadata) => void;
+
+// Warning: (ae-missing-release-tag) "PanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface PanelProps {
+    // (undocumented)
+    onDismissPanel?: () => void;
+    // (undocumented)
+    panelIsOpen: boolean;
+}
 
 // Warning: (ae-missing-release-tag) "PrepareDataFull" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

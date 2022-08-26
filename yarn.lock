@@ -4063,8 +4063,8 @@ __metadata:
   linkType: hard
 
 "@essex/charts-react@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@essex/charts-react@npm:1.0.5"
+  version: 1.1.0
+  resolution: "@essex/charts-react@npm:1.1.0"
   dependencies:
     d3-format: ^3.1.0
     d3-scale: ^4.0.2
@@ -4076,7 +4076,7 @@ __metadata:
     "@thematic/d3": ^1.3.0
     "@thematic/react": ^1.3.0
     react: ">= 18"
-  checksum: 9f89bb3d541d4b159fa8ad0026b8dc6a276b5e8b5228b24b933007a415ed7ce7f1e0ba70fff44eb61a7a8648516b0ff5d444419dd6fa81f9ece796e7a5d11055
+  checksum: 1e4e9d11621545f577b582e3ba159b28b2ccf6757bf92fd67588523531a7843b5ee8d8fe39ebe260b2bcb7a7c5210bbc48b48d537d184d08d8f9070c29c63538
   languageName: node
   linkType: hard
 

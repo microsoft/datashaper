@@ -4,9 +4,15 @@
  */
 import type { TableContainer } from '@datashaper/arquero'
 import { Workflow } from '@datashaper/core'
-import { PrepareDataFull, ProjectMgmtCommandBar } from '@datashaper/react'
+import {
+	ManageWorkflow,
+	PrepareDataFull,
+	ProjectMgmtCommandBar,
+} from '@datashaper/react'
+import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useState } from 'react'
 
+import { HistoryButton } from '../components/HistoryButton.js'
 import { useTables } from './PrepareDataPage.hooks.js'
 import { Container, mgmtStyles, Wrapper } from './PrepareDataPage.styles.js'
 
@@ -18,6 +24,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	// workflow steps/output
 	const [output, setOutput] = useState<TableContainer[]>([])
+	const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] =
+		useBoolean(false)
 
 	return (
 		<Container className={'prepare-data-page'}>
@@ -30,6 +38,17 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				styles={mgmtStyles}
 			/>
 			<Wrapper>
+				<HistoryButton onClick={openPanel} steps={workflow.steps.length} />
+				<ManageWorkflow
+					panelIsOpen={isOpen}
+					onDismissPanel={dismissPanel}
+					inputs={tables}
+					workflow={workflow}
+					onSelect={setSelectedTableId}
+					onUpdateOutput={setOutput}
+					onUpdateWorkflow={setWorkflow}
+					historyView={true}
+				/>
 				<PrepareDataFull
 					inputs={tables}
 					derived={output}

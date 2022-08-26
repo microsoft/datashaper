@@ -32,6 +32,7 @@ export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/Ar
 export * from './components/ArqueroTableHeader/index.js'
 export { CommandBar } from './components/CommandBar.js'
 export type { CommandBarProps } from './components/CommandBar.types.js'
+export * from './components/CustomIcons.js'
 export { Dropzone } from './components/Dropzone.js'
 export type {
 	DropzoneProps,
@@ -55,6 +56,7 @@ export { StepComponent } from './components/StepComponent.js'
 export type { StepComponentProps } from './components/StepComponent.types.js'
 export { StepDescription } from './components/StepDescription.js'
 export type { StepDescriptionProps } from './components/StepDescription.types.js'
+export type { PanelProps } from './components/StepHistoryPanel.types.js'
 export { StepList } from './components/StepList.js'
 export type { StepListProps } from './components/StepList.types.js'
 export { StepSelector } from './components/StepSelector.js'

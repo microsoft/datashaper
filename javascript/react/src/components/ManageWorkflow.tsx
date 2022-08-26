@@ -26,17 +26,21 @@ import {
 } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
+import { StepHistoryPanel } from './StepHistoryPanel.js'
 import { StepList } from './StepList.js'
 import { TableTransformModal } from './TableTransformModal.js'
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 	function ManageWorkflow({
+		panelIsOpen = false,
+		onDismissPanel,
 		workflow,
 		inputs,
 		table,
 		onSelect,
 		onUpdateOutput,
 		onUpdateWorkflow,
+		historyView = false,
 		...props
 	}) {
 		const graph = useGraphManager(workflow, inputs)
@@ -44,7 +48,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		// Selected Step/Index State for the component
 		const [step, setStep] = useState<Step | undefined>()
 		const [index, setIndex] = useState<number>()
-
 		// Modal view-state
 		const {
 			isOpen: isModalOpen,
@@ -82,16 +85,32 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 
 		return (
 			<Container>
-				<StepList
-					onDeleteClicked={onDelete}
-					onSelect={onViewStep}
-					onEditClicked={onEdit}
-					steps={steps}
-					outputs={outputs}
-					onDuplicateClicked={onDuplicate}
-					onStartNewStep={showModal}
-					buttonId={addStepButtonId}
-				/>
+				{historyView ? (
+					<StepHistoryPanel
+						panelIsOpen={panelIsOpen}
+						onDismissPanel={onDismissPanel}
+						onDeleteClicked={onDelete}
+						onSelect={onViewStep}
+						onEditClicked={onEdit}
+						steps={steps}
+						outputs={outputs}
+						onDuplicateClicked={onDuplicate}
+						onStartNewStep={showModal}
+						buttonId={addStepButtonId}
+					/>
+				) : (
+					<StepList
+						onDeleteClicked={onDelete}
+						onSelect={onViewStep}
+						onEditClicked={onEdit}
+						steps={steps}
+						outputs={outputs}
+						onDuplicateClicked={onDuplicate}
+						onStartNewStep={showModal}
+						buttonId={addStepButtonId}
+					/>
+				)}
+
 				<div>
 					{isModalOpen ? (
 						<TableTransformModal
