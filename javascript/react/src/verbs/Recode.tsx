@@ -81,7 +81,6 @@ function useRecodePairs(
 	return useMemo(() => {
 		const { map } = step.args
 		return Object.entries(map || {}).map((valuePair, index) => {
-			const [o] = valuePair
 			return (
 				<ColumnPair
 					valuePair={valuePair}
