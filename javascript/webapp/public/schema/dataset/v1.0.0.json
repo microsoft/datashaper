@@ -316,6 +316,19 @@
                     "type": "number"
                 },
                 "mode": {
+                    "anyOf": [
+                        {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        {
+                            "type": [
+                                "string",
+                                "number",
+                                "boolean"
+                            ]
+                        }
+                    ],
                     "description": "Mode"
                 },
                 "stdev": {

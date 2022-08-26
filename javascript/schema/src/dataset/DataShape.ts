@@ -31,5 +31,5 @@ export interface DataShape {
         3 4
         5 6
 	 */
-	matrix?: [number, number]
+	matrix?: [width: number, height: number]
 }

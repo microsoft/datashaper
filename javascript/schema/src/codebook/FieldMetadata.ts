@@ -21,7 +21,7 @@ export interface FieldMetadata {
 	/**
 	 * Mode
 	 */
-	mode?: any
+	mode?: string | number | boolean | Date
 	/**
 	 * Min value.
 	 * Note that this can be specified rather than computed, in which case it defines valid boundaries for the data values.

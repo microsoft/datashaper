@@ -394,7 +394,7 @@ export interface FieldMetadata {
     mean?: number;
     median?: number;
     minimum?: number;
-    mode?: any;
+    mode?: string | number | boolean | Date;
     stdev?: number;
 }
 

@@ -26,4 +26,7 @@ export type Profile =
 	 * This is the profile name for a Workflow.
 	 */
 	| 'workflow'
+	/**
+	 * Any other custom profile string can be specified by applications.
+	 */
 	| string
