@@ -9,6 +9,8 @@
 	},
 	"versions": {
 		"datapackage": "1.0.0",
+		"dataset": "1.0.0",
+		"table-schema": "1.0.0",
 		"workflow": "1.5.0"
 	},
 	"sideEffects": false,
@@ -34,6 +36,8 @@
 		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
+		"bundle-codebook": "typescript-json-schema tsconfig.json Codebook > ../../schema/codebook.json",
+		"bundle-dataset": "typescript-json-schema tsconfig.json Dataset > ../../schema/dataset.json",
 		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackage > ../../schema/datapackage.json",
 		"bundle-workflow": "typescript-json-schema tsconfig.json Workflow > ../../schema/workflow.json",
 		"bundle": "run-p bundle-datapackage bundle-workflow",

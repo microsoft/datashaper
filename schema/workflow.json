@@ -272,7 +272,7 @@
                     "type": "array"
                 },
                 "value": {
-                    "description": "A cell value in Arquero"
+                    "description": "A cell/property value of any type."
                 }
             },
             "type": "object"

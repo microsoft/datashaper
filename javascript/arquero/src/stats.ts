@@ -48,11 +48,11 @@ export function stats(
 				  }
 				: {}
 		const optt =
-			type === DataType.Text
-				? {}
-				: {
+			type === DataType.String
+				? {
 						categories: cats[`${cur}`],
 				  }
+				: {}
 		acc[cur] = {
 			...req,
 			...optn,

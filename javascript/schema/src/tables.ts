@@ -2,22 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export enum DataType {
-	Array = 'array',
-	Boolean = 'boolean',
-	Date = 'date',
-	Number = 'number',
-	String = 'string',
-	Text = 'text',
-	Object = 'object',
-	Undefined = 'undefined',
-	Unknown = 'unknown',
-}
+
+import type { Bin, Category } from './codebook/FieldMetadata.js'
+import type { DataType } from './data.js'
 
 /**
  * A cell value in Arquero
  */
-export type Value = any
 
 export interface ColumnStats {
 	type: DataType
@@ -32,16 +23,6 @@ export interface ColumnStats {
 	stdev?: number
 	bins?: Bin[]
 	categories?: Category[]
-}
-
-export interface Bin {
-	min: number | string
-	count: number
-}
-
-export interface Category {
-	name: string
-	count: number
 }
 
 /**
@@ -60,9 +41,4 @@ export interface TableMetadata {
 	 * Metadata for each column
 	 */
 	columns: Record<string, ColumnMetadata>
-}
-
-export enum SortDirection {
-	Ascending = 'asc',
-	Descending = 'desc',
 }
