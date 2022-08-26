@@ -114,6 +114,8 @@ export interface Category {
 //
 // @public
 export interface Codebook extends Resource {
+    // Warning: (ae-forgotten-export) The symbol "Field" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
     fields: Field[];
 }
@@ -162,7 +164,7 @@ export interface ColumnStats {
 
 // Warning: (ae-missing-release-tag) "Constraints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface Constraints {
     enum?: string[];
     maximum?: number;
@@ -244,8 +246,6 @@ export interface Dataset extends Resource {
     encoding?: string;
     format?: DataFormat;
     parser?: ParserOptions;
-    // (undocumented)
-    profile: 'dataset';
     rows?: number;
     // Warning: (ae-forgotten-export) The symbol "DataShape" needs to be exported by the entry point index.d.ts
     shape?: DataShape;
@@ -340,24 +340,6 @@ export interface FetchArgs {
     url: string;
 }
 
-// Warning: (ae-missing-release-tag) "Field" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface Field extends Named {
-    constraints?: Constraints;
-    example?: any;
-    exclude?: boolean;
-    format?: string;
-    inverse?: boolean;
-    mapping?: Record<any, any>;
-    metadata?: FieldMetadata;
-    nature?: VariableNature;
-    tags?: string[];
-    type?: DataType;
-    unit?: string;
-    unitDescription?: string;
-}
-
 // Warning: (ae-missing-release-tag) "FieldAggregateOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -400,15 +382,15 @@ export enum FieldAggregateOperation {
 
 // Warning: (ae-missing-release-tag) "FieldMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface FieldMetadata {
     // (undocumented)
     bins?: Bin[];
     // (undocumented)
     categories?: Category[];
-    count: number;
-    distinct: number;
-    invalid: number;
+    count?: number;
+    distinct?: number;
+    invalid?: number;
     magnitude?: number;
     maximum?: number;
     mean?: number;
@@ -645,7 +627,7 @@ export type OutputPortBinding = string | NamedOutputPortBinding;
 
 // Warning: (ae-missing-release-tag) "ParserOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface ParserOptions {
     comment?: string;
     delimiter?: string;
@@ -922,7 +904,7 @@ export interface TableMetadata {
 
 // Warning: (ae-missing-release-tag) "TypeHints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface TypeHints {
     dateFormat?: string;
     decimal?: string;

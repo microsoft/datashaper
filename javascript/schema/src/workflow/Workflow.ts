@@ -8,7 +8,7 @@ import type { Step } from './Step.js'
 
 /**
  * The root wrangling workflow specification.
- * profile: 'workflow'
+ * resource profile: 'workflow'
  */
 export interface Workflow extends Resource {
 	/**

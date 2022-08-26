@@ -6,8 +6,7 @@ import type { Named } from '../Named.js'
 import type { Resource } from './Resource.js'
 
 /**
- * Defines a Data Package, which is a collection of data resources
- * such as files and schemas.
+ * Defines a Data Package, which is a collection of data resources such as files and schemas.
  * Loosely based on the Frictionless spec, but modified where needed to meet our needs.
  * https://specs.frictionlessdata.io/data-package/
  */

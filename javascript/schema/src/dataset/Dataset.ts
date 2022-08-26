@@ -11,9 +11,12 @@ import type { TypeHints } from './TypeHints.js'
 
 /**
  * This defines the data-containing resource type.
+ * A dataset can be embedded directly using the `data` property,
+ * or it can be linked to a raw file using the `path`.
+ * If the latter, optional format and parsing options can be applied to aid interpreting the file contents.
+ * resource profile: 'dataset'
  */
 export interface Dataset extends Resource {
-	profile: 'dataset'
 	/**
 	 * Option to embed the data directly in the JSON descriptor.
 	 */

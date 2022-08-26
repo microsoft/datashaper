@@ -830,7 +830,7 @@
 			"type": "string"
 		}
 	},
-	"description": "The root wrangling workflow specification.\nprofile: 'workflow'",
+	"description": "The root wrangling workflow specification.\nresource profile: 'workflow'",
 	"properties": {
 		"$schema": {
 			"type": "string"

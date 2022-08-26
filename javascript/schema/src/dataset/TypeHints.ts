@@ -2,6 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/**
+ * Configuration values for interpreting data types when parsing a delimited file.
+ * By default, all values are read as strings - applying these type hints can derive primitive types from the strings.
+ */
 export interface TypeHints {
 	/**
 	 * Default: case-insenstive word "true".

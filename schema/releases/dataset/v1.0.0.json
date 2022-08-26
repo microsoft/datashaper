@@ -24,7 +24,7 @@
 			"type": "object"
 		},
 		"Codebook": {
-			"description": "This contains all of the field-level details for interpreting a data table,\nincluding data types, mapping, and metadata.\nTable schemas are standalone resources that can be linked from a Dataset or embedded.\nNote also that with persisted metadata and field examples, a table can often be visualized\nand described to the user without actually loading the source file.",
+			"description": "This contains all of the field-level details for interpreting a data table,\nincluding data types, mapping, and metadata.\nTable schemas are standalone resources that can be linked from a Dataset or embedded.\nNote also that with persisted metadata and field examples, a table can often be visualized\nand described to the user without actually loading the source file.\nresource profile: 'codebook'",
 			"properties": {
 				"$schema": {
 					"type": "string"
@@ -84,6 +84,7 @@
 			"type": "object"
 		},
 		"Constraints": {
+			"description": "Validation constraints for a field.",
 			"properties": {
 				"enum": {
 					"description": "Strict list of allowed values in the column.",
@@ -184,6 +185,7 @@
 			"type": "string"
 		},
 		"Field": {
+			"description": "Contains the full schema definition and metadata for a data field (usually a table column).\nThis includes the required data type, various data nature and rendering properties, potential\nvalidation rules, and mappings from a data dictionary.",
 			"properties": {
 				"constraints": {
 					"$ref": "#/definitions/Constraints",
@@ -251,6 +253,7 @@
 			"type": "object"
 		},
 		"FieldMetadata": {
+			"description": "Holds core metadata/stats for a data field.",
 			"properties": {
 				"bins": {
 					"items": {
@@ -307,6 +310,7 @@
 			"type": "object"
 		},
 		"ParserOptions": {
+			"description": "Parsing options for delimited files. This is a mix of the options from pandas and spark.",
 			"properties": {
 				"comment": {
 					"description": "Character that begins a comment. All content after this character will be considered a comment and not imported.\nDefault: none.",
@@ -415,6 +419,7 @@
 			"type": "object"
 		},
 		"TypeHints": {
+			"description": "Configuration values for interpreting data types when parsing a delimited file.\nBy default, all values are read as strings - applying these type hints can derive primitive types from the strings.",
 			"properties": {
 				"dateFormat": {
 					"description": "Default date format to use when parsing dates. The Codebook can override this at the column level.\nDefault: yyyy-MM-dd\nTODO: spark has a separate config for datetime. Do we care?",
@@ -465,7 +470,7 @@
 			"type": "string"
 		}
 	},
-	"description": "This defines the data-containing resource type.",
+	"description": "This defines the data-containing resource type.\nA dataset can be embedded directly using the `data` property,\nor it can be linked to a raw file using the `path`.\nIf the latter, optional format and parsing options can be applied to aid interpreting the file contents.\nresource profile: 'dataset'",
 	"properties": {
 		"$schema": {
 			"type": "string"
@@ -525,7 +530,6 @@
 		},
 		"profile": {
 			"description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
-			"enum": ["dataset"],
 			"type": "string"
 		},
 		"rows": {

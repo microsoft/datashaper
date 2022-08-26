@@ -2,6 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/**
+ * Base interface for sharing properties of named resources/objects.
+ */
 export interface Named {
 	/**
 	 * User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.

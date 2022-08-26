@@ -2,6 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/**
+ * Validation constraints for a field.
+ */
 export interface Constraints {
 	/**
 	 * Indicates that this field is required (not nullable).

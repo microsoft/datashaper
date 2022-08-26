@@ -2,19 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/**
+ * Holds core metadata/stats for a data field.
+ */
 export interface FieldMetadata {
 	/**
 	 * Count of valid values in the column (excluding invalid, null, etc.)
 	 */
-	count: number
+	count?: number
 	/**
 	 * Count of unique values in the column
 	 */
-	distinct: number
+	distinct?: number
 	/**
 	 * Count of invalid/null values in the column
 	 */
-	invalid: number
+	invalid?: number
 	/**
 	 * Mode
 	 */

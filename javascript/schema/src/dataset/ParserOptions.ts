@@ -2,6 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+/**
+ * Parsing options for delimited files. This is a mix of the options from pandas and spark.
+ */
 export interface ParserOptions {
 	/**
 	 * Column delimiter.
