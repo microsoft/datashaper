@@ -82,12 +82,11 @@ function useRecodePairs(
 		const { map } = step.args
 		return Object.entries(map || {}).map((valuePair, index) => {
 			const [o] = valuePair
-			const oldvalue = coerce(o, dataType)
 			return (
 				<ColumnPair
 					valuePair={valuePair}
 					dataType={dataType}
-					key={`column-Recode-${oldvalue}-${index}`}
+					key={`column-Recode-${index}`}
 					onKeyChange={onKeyChange}
 					onValueChange={onValueChange}
 					onDelete={onDelete}
@@ -113,25 +112,25 @@ const ColumnPair: React.FC<{
 	// the old value will always come off the map as a string key
 	// coerce it to the column type for proper comparison
 	const [o, q] = valuePair
-	let oldvalue = coerce(o, dataType)
-	const newvalue = coerce(q, dataType)
+	let keyValue = coerce(o, dataType)
+	const propertyValue = coerce(q, dataType)
 
 	if (dataType === DataType.Boolean) {
-		o === 'false' ? (oldvalue = false) : (oldvalue = true)
+		o === 'false' ? (keyValue = false) : (keyValue = true)
 	}
 
-	const handleDeleteClick = () => onDelete(oldvalue)
+	const handleDeleteClick = () => onDelete(keyValue)
 
 	return (
 		<ColumnPairContainer>
 			<DataTypeField
 				placeholder={'Current value'}
 				dataType={dataType}
-				value={oldvalue}
+				value={keyValue}
 				onKeyChange={onKeyChange}
 				onValueChange={onKeyChange}
 				isKey={true}
-				keyValue={oldvalue}
+				keyValue={keyValue}
 			/>
 
 			<Icon
@@ -142,8 +141,8 @@ const ColumnPair: React.FC<{
 			<DataTypeField
 				placeholder={'New Value'}
 				dataType={dataType}
-				keyValue={oldvalue}
-				value={newvalue}
+				keyValue={keyValue}
+				value={propertyValue}
 				onKeyChange={onValueChange}
 				onValueChange={onValueChange}
 				isKey={false}

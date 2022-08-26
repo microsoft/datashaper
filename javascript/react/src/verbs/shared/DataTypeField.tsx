@@ -35,7 +35,6 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 		const onSelectDate = useCallback(
 			(date: Date): void => {
 				const val = coerce(date, dataType)
-
 				isKey
 					? onKeyChange(
 							new Date(value).toISOString(),
@@ -64,7 +63,6 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 
 		const spinButtonOnChange = useCallback(
 			(_event: React.SyntheticEvent<HTMLElement>, newValue?: string) => {
-				console.log(newValue)
 				if (newValue !== undefined) {
 					const val = coerce(newValue, dataType)
 					isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
