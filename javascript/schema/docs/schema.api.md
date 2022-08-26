@@ -354,6 +354,8 @@ export interface Field extends Named {
     nature?: VariableNature;
     tags?: string[];
     type?: DataType;
+    unit?: string;
+    unitDescription?: string;
 }
 
 // Warning: (ae-missing-release-tag) "FieldAggregateOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

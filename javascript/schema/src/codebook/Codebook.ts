@@ -44,6 +44,15 @@ export interface Field extends Named {
 	 */
 	nature?: VariableNature
 	/**
+	 * QUDT code for the variable unit (i.e., meters, pounds, etc.).
+	 * https://qudt.org/2.1/vocab/unit
+	 */
+	unit?: string
+	/**
+	 * Description of the unit for friendly display.
+	 */
+	unitDescription?: string
+	/**
 	 * Indicates that values are mapped inverse to typical expectation, and may need to be displayed in the opposite direction.
 	 * Closely related to nature, particular for categorical ordinal values.
 	 */
