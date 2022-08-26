@@ -34,7 +34,7 @@ export interface TypeHints {
 	 */
 	infinity?: string[]
 	/**
-	 * Default date format to use when parsing dates. The TableSchema can override this at the column level.
+	 * Default date format to use when parsing dates. The Codebook can override this at the column level.
 	 * Default: yyyy-MM-dd
 	 * TODO: spark has a separate config for datetime. Do we care?
 	 */

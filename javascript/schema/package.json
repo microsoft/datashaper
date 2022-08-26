@@ -10,7 +10,7 @@
 	"versions": {
 		"datapackage": "1.0.0",
 		"dataset": "1.0.0",
-		"table-schema": "1.0.0",
+		"codebook": "1.0.0",
 		"workflow": "1.5.0"
 	},
 	"sideEffects": false,
@@ -40,7 +40,7 @@
 		"bundle-dataset": "typescript-json-schema tsconfig.json Dataset > ../../schema/dataset.json",
 		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackage > ../../schema/datapackage.json",
 		"bundle-workflow": "typescript-json-schema tsconfig.json Workflow > ../../schema/workflow.json",
-		"bundle": "run-p bundle-datapackage bundle-workflow",
+		"bundle": "run-p bundle-datapackage bundle-dataset bundle-codebook bundle-workflow",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
