@@ -48,9 +48,13 @@ export interface FieldMetadata {
 	 * Standard deviation.
 	 */
 	stdev?: number
-	// TODO: bins and categories are pre-computed for convenience, but do they belong here specifically?
-	// categories, for example, can be present in the data dictionary, the Category interface just captures it with counts
+	/**
+	 * Computed histogram bins for numeric fields.
+	 */
 	bins?: Bin[]
+	/**
+	 * List of unique categories for string fields.
+	 */
 	categories?: Category[]
 }
 
