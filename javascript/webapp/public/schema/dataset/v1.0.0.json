@@ -270,12 +270,14 @@
             "description": "Holds core metadata/stats for a data field.",
             "properties": {
                 "bins": {
+                    "description": "Computed histogram bins for numeric fields.",
                     "items": {
                         "$ref": "#/definitions/Bin"
                     },
                     "type": "array"
                 },
                 "categories": {
+                    "description": "List of unique categories for string fields.",
                     "items": {
                         "$ref": "#/definitions/Category"
                     },

@@ -384,9 +384,7 @@ export enum FieldAggregateOperation {
 //
 // @public
 export interface FieldMetadata {
-    // (undocumented)
     bins?: Bin[];
-    // (undocumented)
     categories?: Category[];
     count?: number;
     distinct?: number;
