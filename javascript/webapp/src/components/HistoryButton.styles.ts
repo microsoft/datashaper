@@ -7,6 +7,8 @@ export const buttonStyles = {
 	root: {
 		border: 'none',
 		float: 'right',
+		fontSize: '1rem',
+		right: '1rem',
 		backgroundColor: 'transparent',
 	},
 	flexContainer: {

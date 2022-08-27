@@ -40,4 +40,7 @@ export const panelStyles = {
 		padding: '0',
 		marginTop: '2rem',
 	},
+	headerText: {
+		fontWeight: 'bold',
+	},
 }
