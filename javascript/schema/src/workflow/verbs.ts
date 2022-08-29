@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { SortDirection, Value } from './tables.js'
+import type { Value } from '../data.js'
+import type { SortDirection } from '../enums.js'
 
 export enum Verb {
 	Aggregate = 'aggregate',
