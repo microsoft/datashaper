@@ -10,6 +10,7 @@ export type Value = any
 
 /**
  * Explicit data type of the value (i.e., for a column or property).
+ * TODO: clarify/update null/undefined
  */
 export enum DataType {
 	Array = 'array',
@@ -21,6 +22,7 @@ export enum DataType {
 	Integer = 'integer',
 	String = 'string',
 	Object = 'object',
+	Null = 'null',
 	Undefined = 'undefined',
 	Unknown = 'unknown',
 }
