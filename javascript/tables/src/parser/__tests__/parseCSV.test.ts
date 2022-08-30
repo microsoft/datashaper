@@ -49,7 +49,7 @@ describe('parse CSV', () => {
 			],
 		}
 
-		const csv = fs.readFileSync('./src/parser/csv/simple-example.csv', {
+		const csv = fs.readFileSync('./src/__tests__/data/simple-example.csv', {
 			encoding: 'utf8',
 			flag: 'r',
 		})

@@ -38,7 +38,7 @@ const defaultTable = `1,100,one
 4,400,four
 5,500,five`
 
-const tabTable = fs.readFileSync('./src/load/__tests__/delim-test.csv', {
+const tabTable = fs.readFileSync('./src/__tests__/data/delim-test.csv', {
 	encoding: 'utf8',
 	flag: 'r',
 })
