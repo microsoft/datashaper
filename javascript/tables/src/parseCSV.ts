@@ -7,27 +7,27 @@ import type { Codebook, TypeHints } from '@datashaper/schema'
 import { fromCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
+import { parseAs } from './parseTypes.js'
 import {
-	commentDefault,
-	dateFormatDefault,
-	decimalDefault,
-	delimiterDefault,
-	falseDefaults,
-	naDefaults,
-	thousandsDefault,
-	trueDefaults,
-} from './defaults.js'
-import { parseAs } from './parser.js'
+	COMMENT_DEFAULT,
+	DATE_FORMAT_DEFAULT,
+	DECIMAL_DEFAULT,
+	DELIMITER_DEFAULT,
+	FALSE_DEFAULTS,
+	NA_DEFAULTS,
+	THOUSANDS_DEFAULT,
+	TRUE_DEFAULTS,
+} from './typeHints.defaults.js'
 
 const defaultTypeHints = {
-	delimiter: delimiterDefault,
-	trueValues: trueDefaults,
-	falseValues: falseDefaults,
-	naValues: naDefaults,
-	dateFormat: dateFormatDefault,
-	thousands: thousandsDefault,
-	decimal: decimalDefault,
-	comment: commentDefault,
+	delimiter: DELIMITER_DEFAULT,
+	trueValues: TRUE_DEFAULTS,
+	falseValues: FALSE_DEFAULTS,
+	naValues: NA_DEFAULTS,
+	dateFormat: DATE_FORMAT_DEFAULT,
+	thousands: THOUSANDS_DEFAULT,
+	decimal: DECIMAL_DEFAULT,
+	comment: COMMENT_DEFAULT,
 }
 
 export interface ParseConfig {

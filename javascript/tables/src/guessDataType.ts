@@ -4,6 +4,7 @@
  */
 
 import type { TypeHints } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import isArrayLd from 'lodash-es/isArray.js'
 import isFinite from 'lodash-es/isFinite.js'
 import isPlainObject from 'lodash-es/isPlainObject.js'
@@ -11,15 +12,52 @@ import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
 
 import {
-	decimalDefault,
-	falseDefaults,
-	naDefaults,
-	thousandsDefault,
-	trueDefaults,
-} from './defaults.js'
+	DECIMAL_DEFAULT,
+	FALSE_DEFAULTS,
+	NA_DEFAULTS,
+	THOUSANDS_DEFAULT,
+	TRUE_DEFAULTS,
+} from './typeHints.defaults.js'
 import { formatNumberStr, getDate } from './util.js'
 
-export function validator(options?: TypeHints): any {
+/**
+ * Factory function to provide a type guessing function for any string value.
+ * This uses optional type hints to account for string values such as boolean and null formats.
+ * @param options
+ * @returns
+ */
+export function guessDataType(
+	options?: TypeHints,
+): (value: string) => DataType {
+	const { isNull, isBoolean, isNumber, isArray, isObject, isDate } =
+		typeGuesserFactory(options)
+	return function (value: string) {
+		if (isNull(value)) {
+			return DataType.Null
+		}
+		if (isNumber(value)) {
+			return DataType.Number
+		}
+		if (isBoolean(value)) {
+			return DataType.Boolean
+		}
+		if (isDate(value)) {
+			return DataType.Date
+		}
+		if (isArray(value)) {
+			return DataType.Array
+		}
+		if (isObject(value)) {
+			return DataType.Object
+		}
+		if (value === DataType.Undefined) {
+			return DataType.Undefined
+		}
+		return DataType.String
+	}
+}
+
+export function typeGuesserFactory(options?: TypeHints): any {
 	return {
 		isNull: isNull(options?.naValues),
 		isBoolean: isBoolean(options?.trueValues, options?.falseValues),
@@ -30,7 +68,7 @@ export function validator(options?: TypeHints): any {
 	}
 }
 
-export function isNull(naValues = naDefaults): (value: string) => boolean {
+export function isNull(naValues = NA_DEFAULTS): (value: string) => boolean {
 	const naValuesSet = new Set(naValues)
 	return function (value: string) {
 		return naValuesSet.has(value)
@@ -38,8 +76,8 @@ export function isNull(naValues = naDefaults): (value: string) => boolean {
 }
 
 export function isBoolean(
-	falseValues = falseDefaults,
-	trueValues = trueDefaults,
+	falseValues = FALSE_DEFAULTS,
+	trueValues = TRUE_DEFAULTS,
 ): (value: string) => boolean {
 	const booleanSet = new Set(
 		[...falseValues, ...trueValues].map(v => v.toLowerCase()),
@@ -51,8 +89,8 @@ export function isBoolean(
 }
 
 export function isNumber(
-	decimal = decimalDefault,
-	thousands = thousandsDefault,
+	decimal = DECIMAL_DEFAULT,
+	thousands = THOUSANDS_DEFAULT,
 ): (value: string) => boolean {
 	return function (value: string) {
 		const n = formatNumberStr(value, decimal, thousands)

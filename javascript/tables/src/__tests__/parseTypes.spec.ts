@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { typeGuesserFactory } from '../guessDataType.js'
 import {
 	parseArray,
 	parseBoolean,
@@ -10,12 +11,11 @@ import {
 	parseNumber,
 	parseObject,
 	parseString,
-} from '../parser.js'
-import { validator } from '../validators.js'
+} from '../parseTypes.js'
 
 describe('parser tests', () => {
 	describe('validate if value is null', () => {
-		let { isNull } = validator()
+		let { isNull } = typeGuesserFactory()
 		it('should return false', () => {
 			expect(isNull('No')).toBe(false)
 		})
@@ -23,7 +23,7 @@ describe('parser tests', () => {
 			expect(isNull('')).toBe(true)
 		})
 		it('should parse a custom null', () => {
-			isNull = validator({ naValues: ['none_2'] }).isNull
+			isNull = typeGuesserFactory({ naValues: ['none_2'] }).isNull
 			expect(isNull('none_2')).toBe(true)
 		})
 	})

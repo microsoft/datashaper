@@ -3,30 +3,30 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { decimalDefault, thousandsDefault } from '../defaults'
-import { validator } from '../validators'
+import { typeGuesserFactory } from '../guessDataType.js'
+import { DECIMAL_DEFAULT, THOUSANDS_DEFAULT } from '../typeHints.defaults'
 
 describe('Validators tests', () => {
 	describe('isBoolean', () => {
-		let { isBoolean } = validator()
+		let { isBoolean } = typeGuesserFactory()
 		it('should return true', () => {
 			expect(isBoolean('true')).toBe(true)
 			expect(isBoolean('FALSE')).toBe(true)
-			isBoolean = validator({ trueValues: ['yes'] }).isBoolean
+			isBoolean = typeGuesserFactory({ trueValues: ['yes'] }).isBoolean
 			expect(isBoolean('Yes')).toBe(true)
-			isBoolean = validator({ trueValues: ['T'] }).isBoolean
+			isBoolean = typeGuesserFactory({ trueValues: ['T'] }).isBoolean
 			expect(isBoolean('t')).toBe(true)
-			isBoolean = validator({ trueValues: ['Y'] }).isBoolean
+			isBoolean = typeGuesserFactory({ trueValues: ['Y'] }).isBoolean
 			expect(isBoolean('y')).toBe(true)
-			isBoolean = validator({ trueValues: ['1'] }).isBoolean
+			isBoolean = typeGuesserFactory({ trueValues: ['1'] }).isBoolean
 			expect(isBoolean('1')).toBe(true)
-			isBoolean = validator({ falseValues: ['NO'] }).isBoolean
+			isBoolean = typeGuesserFactory({ falseValues: ['NO'] }).isBoolean
 			expect(isBoolean('no')).toBe(true)
-			isBoolean = validator({ falseValues: ['F'] }).isBoolean
+			isBoolean = typeGuesserFactory({ falseValues: ['F'] }).isBoolean
 			expect(isBoolean('f')).toBe(true)
-			isBoolean = validator({ falseValues: ['n'] }).isBoolean
+			isBoolean = typeGuesserFactory({ falseValues: ['n'] }).isBoolean
 			expect(isBoolean('N')).toBe(true)
-			isBoolean = validator({ falseValues: ['0'] }).isBoolean
+			isBoolean = typeGuesserFactory({ falseValues: ['0'] }).isBoolean
 			expect(isBoolean('0')).toBe(true)
 		})
 		it('should return false', () => {
@@ -41,9 +41,9 @@ describe('Validators tests', () => {
 	})
 
 	describe('isNumber', () => {
-		let { isNumber } = validator({
-			decimal: decimalDefault,
-			thousands: thousandsDefault,
+		let { isNumber } = typeGuesserFactory({
+			decimal: DECIMAL_DEFAULT,
+			thousands: THOUSANDS_DEFAULT,
 		})
 		it('should return true', () => {
 			expect(isNumber('1.00003')).toBe(true)
@@ -51,7 +51,7 @@ describe('Validators tests', () => {
 			expect(isNumber('-98575')).toBe(true)
 			expect(isNumber('-0.333648')).toBe(true)
 			expect(isNumber('1,550,878.05')).toBe(true)
-			isNumber = validator({ decimal: ',', thousands: '.' }).isNumber
+			isNumber = typeGuesserFactory({ decimal: ',', thousands: '.' }).isNumber
 			expect(isNumber('1.550.878,05')).toBe(true)
 		})
 		it('should return false', () => {
@@ -66,7 +66,7 @@ describe('Validators tests', () => {
 	})
 
 	describe('isArray', () => {
-		const { isArray } = validator()
+		const { isArray } = typeGuesserFactory()
 		it('should return true', () => {
 			expect(isArray('[1, 2, 3]')).toBe(true)
 			expect(isArray('["a", "b", "c"]')).toBe(true)
@@ -85,7 +85,7 @@ describe('Validators tests', () => {
 	})
 
 	describe('isObject', () => {
-		const { isObject } = validator()
+		const { isObject } = typeGuesserFactory()
 		it('should return true', () => {
 			expect(isObject('{"a": 1, "b": 2}')).toBe(true)
 			expect(isObject('{"a": "false", "b": "true"}')).toBe(true)
@@ -102,7 +102,7 @@ describe('Validators tests', () => {
 	})
 
 	describe('isDate', () => {
-		const { isDate } = validator()
+		const { isDate } = typeGuesserFactory()
 		it('should return true', () => {
 			expect(isDate('2022-02-14')).toBe(true)
 			expect(isDate('2022-02-14T00:23:12')).toBe(true)
