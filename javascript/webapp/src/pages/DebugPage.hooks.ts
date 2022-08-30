@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@datashaper/arquero'
-import { container } from '@datashaper/arquero'
-import type { GraphManager, Step, Workflow } from '@datashaper/core'
 import { useHandleStepSave } from '@datashaper/react'
 import type { Verb } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
+import { container } from '@datashaper/tables'
+import type { GraphManager, Step, Workflow } from '@datashaper/workflow'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useMemo, useState } from 'react'

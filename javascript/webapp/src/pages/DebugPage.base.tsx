@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Workflow } from '@datashaper/core'
 import type { DetailsListFeatures } from '@datashaper/react'
 import {
 	StatsColumnType,
@@ -13,6 +12,7 @@ import {
 	useHandleStepSave,
 	useStepOutputs,
 } from '@datashaper/react'
+import type { Workflow } from '@datashaper/workflow'
 import { ActionButton } from '@fluentui/react'
 import { memo, useState } from 'react'
 

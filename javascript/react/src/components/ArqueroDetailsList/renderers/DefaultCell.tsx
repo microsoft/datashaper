@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { determineType } from '@datashaper/arquero'
 import { DataType } from '@datashaper/schema'
+import { determineType } from '@datashaper/tables'
 import { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 

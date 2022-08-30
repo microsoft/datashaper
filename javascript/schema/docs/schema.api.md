@@ -267,6 +267,8 @@ export enum DataType {
     // (undocumented)
     Integer = "integer",
     // (undocumented)
+    Null = "null",
+    // (undocumented)
     Number = "number",
     // (undocumented)
     Object = "object",
