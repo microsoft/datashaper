@@ -7,19 +7,10 @@ import { fromCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { guessDelimiter } from './guessDelimiter.js'
-import { validateCharacterLength } from './validators.js'
 
-export function loadTable(text: string, options?: ParserOptions): ColumnTable {
-	validateParserOptions(options)
+export function readTable(text: string, options?: ParserOptions): ColumnTable {
 	return fromCSV(text, {
 		delimiter: options?.delimiter || guessDelimiter(text),
 		...options,
 	})
-}
-
-function validateParserOptions(options?: ParserOptions) {
-	const validChar = validateCharacterLength(options?.comment, 1)
-	if (!validChar) {
-		throw new Error('Comment option should be a single character')
-	}
 }

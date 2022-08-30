@@ -4,11 +4,12 @@
 
 ```ts
 
+import type { Codebook } from '@datashaper/schema';
 import type { ColumnStats } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
 import { DataType } from '@datashaper/schema';
-import type { ParseConfig } from 'papaparse';
+import type { ParseConfig as ParseConfig_2 } from 'papaparse';
 import type { ParserOptions } from '@datashaper/schema';
 import type { TableMetadata } from '@datashaper/schema';
 import type { TypeHints } from '@datashaper/schema';
@@ -39,40 +40,15 @@ export function columnType(table: ColumnTable, column: string): DataType;
 // @public
 export function columnTypes(table: ColumnTable, columns?: string[]): Record<string, DataType>;
 
-// Warning: (ae-missing-release-tag) "commentDefault" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const commentDefault = "#";
-
 // Warning: (ae-missing-release-tag) "container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function container(id: string, table?: ColumnTable): TableContainer;
 
-// Warning: (ae-missing-release-tag) "dateFormatDefault" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const dateFormatDefault = "YYYY-MM-DD";
-
-// Warning: (ae-missing-release-tag) "decimalDefault" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const decimalDefault = ".";
-
-// Warning: (ae-missing-release-tag) "delimiterDefault" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const delimiterDefault = ",";
-
 // Warning: (ae-missing-release-tag) "determineType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function determineType(value: Value): DataType;
-
-// Warning: (ae-missing-release-tag) "falseDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const falseDefaults: string[];
 
 // Warning: (ae-missing-release-tag) "fixedBinCount" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -97,20 +73,30 @@ export function format(value: number, options?: {
 // @public
 export function formatIfNumber(value: Value): string | Value;
 
+// Warning: (ae-missing-release-tag) "formatNumberStr" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function formatNumberStr(value: string, decimal?: string, thousands?: string): string;
+
+// Warning: (ae-missing-release-tag) "getDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function getDate(value: string): Date;
+
 // Warning: (ae-missing-release-tag) "getters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function getters(table: ColumnTable): Record<string, (i: number) => any>;
 
+// Warning: (ae-missing-release-tag) "guessDataType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function guessDataType(options?: TypeHints): (value: string) => DataType;
+
 // Warning: (ae-missing-release-tag) "guessDelimiter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function guessDelimiter(text: string, config?: ParseConfig): string;
-
-// Warning: (ae-missing-release-tag) "guessType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function guessType(options?: TypeHints): (value: string) => DataType;
+export function guessDelimiter(text: string, config?: ParseConfig_2): string;
 
 // Warning: (ae-missing-release-tag) "introspect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -148,15 +134,10 @@ export function isNumber(decimal?: string, thousands?: string): (value: string) 
 // @public (undocumented)
 export function isObject(value: string): boolean;
 
-// Warning: (ae-missing-release-tag) "loadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "isValidNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function loadTable(text: string, options?: ParserOptions): ColumnTable;
-
-// Warning: (ae-missing-release-tag) "naDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const naDefaults: string[];
+export function isValidNumber(value: string): boolean;
 
 // Warning: (ae-missing-release-tag) "parseArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -165,13 +146,28 @@ export function parseArray(options?: TypeHints): (value: string) => any[] | null
 
 // Warning: (ae-missing-release-tag) "parseAs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
-export function parseAs(type?: DataType, options?: TypeHints): any;
+// @public
+export function parseAs(type?: DataType, hints?: TypeHints): Value;
 
 // Warning: (ae-missing-release-tag) "parseBoolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function parseBoolean(naValues?: string[], trueValues?: string[], falseValues?: string[]): (value: string) => boolean | null;
+
+// Warning: (ae-missing-release-tag) "ParseConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ParseConfig {
+    // (undocumented)
+    codebook?: Codebook;
+    // (undocumented)
+    typeHints?: TypeHints;
+}
+
+// Warning: (ae-missing-release-tag) "parseCSV" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function parseCSV(csv: string, options?: ParseConfig): ColumnTable;
 
 // Warning: (ae-missing-release-tag) "parseDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -197,6 +193,11 @@ export function parseString(naValues?: string[]): (value: string) => string | nu
 //
 // @public (undocumented)
 export function parseUndefined(naValues?: string[]): (value: string) => undefined | null;
+
+// Warning: (ae-missing-release-tag) "readTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function readTable(text: string, options?: ParserOptions): ColumnTable;
 
 // Warning: (ae-missing-release-tag) "rows" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -232,20 +233,10 @@ export interface TableContainer<T = unknown> {
     table?: ColumnTable;
 }
 
-// Warning: (ae-missing-release-tag) "thousandsDefault" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "typeGuesserFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const thousandsDefault = ",";
-
-// Warning: (ae-missing-release-tag) "trueDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const trueDefaults: string[];
-
-// Warning: (ae-missing-release-tag) "validator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validator(options?: TypeHints): any;
+export function typeGuesserFactory(options?: TypeHints): any;
 
 // (No @packageDocumentation comment for this package)
 
