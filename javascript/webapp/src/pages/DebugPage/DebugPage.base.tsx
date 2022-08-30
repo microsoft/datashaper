@@ -16,10 +16,10 @@ import type { Workflow } from '@datashaper/workflow'
 import { ActionButton } from '@fluentui/react'
 import { memo, useState } from 'react'
 
-import { ControlBar } from '../components/ControlBar.js'
-import { InputTables } from '../components/InputTables.js'
-import { Section } from '../components/Section.js'
-import { StepOutput } from '../components/StepOutput.js'
+import { ControlBar } from './components/ControlBar.js'
+import { InputTables } from './components/InputTables.js'
+import { Section } from './components/Section.js'
+import { StepOutput } from './components/StepOutput.js'
 import {
 	useAddFilesHandler,
 	useCreateStepHandler,

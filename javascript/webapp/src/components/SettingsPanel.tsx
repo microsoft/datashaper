@@ -10,7 +10,13 @@ import { memo, useCallback } from 'react'
 import { useGuidanceIndex } from '../hooks/index.js'
 import { useSettings } from '../states/settings.js'
 import { useName, useSetDarkMode } from './SettingsPanel.hooks.js'
-import { H3, HelpSection, SettingsSection } from './SettingsPanel.styles.js'
+import {
+	H3,
+	HelpSection,
+	LinkSection,
+	ListItem,
+	SettingsSection,
+} from './SettingsPanel.styles.js'
 import type { SettingsPanelProps } from './SettingsPanel.types.js'
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
@@ -47,6 +53,16 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = memo(
 					<H3>Help</H3>
 					<Guidance name={name} index={index} />
 				</HelpSection>
+
+				<LinkSection>
+					<H3>Navigation</H3>
+					<ListItem to={'/'} onClick={onDismiss}>
+						Home
+					</ListItem>
+					<ListItem to={'/debug'} onClick={onDismiss}>
+						Debug page
+					</ListItem>
+				</LinkSection>
 			</Panel>
 		)
 	},

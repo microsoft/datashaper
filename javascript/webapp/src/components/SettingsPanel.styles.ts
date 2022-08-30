@@ -21,3 +21,16 @@ export const HelpSection = styled.div`
 export const ListItem = styled(Link)`
 	display: block;
 `
+
+export const Heading = styled.h2`
+	margin-bottom: 10px;
+`
+
+export const LinkSection = styled.div`
+	margin-left: 10px;
+	margin-top: 20px;
+`
+
+export const Container = styled.div`
+	margin: 8px;
+`

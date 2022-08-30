@@ -13,6 +13,7 @@ import { Workflow } from '@datashaper/workflow'
 import { Checkbox } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 
+import { FileDrop } from '../FileDrop.js'
 import { useLoadSpecFile, useLoadTableFiles } from './ControlBar.hooks.js'
 import {
 	Container,
@@ -26,7 +27,6 @@ import {
 } from './ControlBar.styles.js'
 import type { ControlBarProps } from './ControlBar.types.js'
 import { ExamplesDropdown } from './ExamplesDropdown.js'
-import { FileDrop } from './FileDrop.js'
 
 export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 	selected,
