@@ -82,7 +82,6 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					<Section title="Inputs">
 						<InputTables
 							tables={inputTables}
-							config={columnsStyle}
 							features={features}
 							compact={compact}
 						/>

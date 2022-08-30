@@ -6,7 +6,6 @@ import styled from 'styled-components'
 
 export const columnsStyle = {
 	ID: {
-		width: 50,
 		iconName: 'FavoriteStarFill',
 	},
 }
