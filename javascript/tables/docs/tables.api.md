@@ -148,11 +148,6 @@ export function isNumber(decimal?: string, thousands?: string): (value: string) 
 // @public (undocumented)
 export function isObject(value: string): boolean;
 
-// Warning: (ae-missing-release-tag) "loadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function loadTable(text: string, options?: ParserOptions): ColumnTable;
-
 // Warning: (ae-missing-release-tag) "naDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -197,6 +192,11 @@ export function parseString(naValues?: string[]): (value: string) => string | nu
 //
 // @public (undocumented)
 export function parseUndefined(naValues?: string[]): (value: string) => undefined | null;
+
+// Warning: (ae-missing-release-tag) "readTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function readTable(text: string, options?: ParserOptions): ColumnTable;
 
 // Warning: (ae-missing-release-tag) "rows" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
