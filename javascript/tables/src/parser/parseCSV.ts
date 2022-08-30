@@ -30,19 +30,21 @@ const defaultTypeHints = {
 	comment: commentDefault,
 }
 
-export function parseCSV(
-	csv: string,
-	schema: Codebook,
-	typeHints: TypeHints = defaultTypeHints,
-): ColumnTable {
-	const parseConfig = schema.fields.reduce(
+export interface ParseConfig {
+	codebook?: Codebook
+	typeHints?: TypeHints
+}
+
+export function parseCSV(csv: string, options?: ParseConfig): ColumnTable {
+	const codebook = options?.codebook
+	const typeHints = options?.typeHints || defaultTypeHints
+	const parseConfig = codebook?.fields?.reduce(
 		(acc: Record<string, any>, { name, type }) => {
 			acc[name] = parseAs(type, typeHints)
 			return acc
 		},
 		{},
 	)
-
 	return fromCSV(csv, {
 		parse: parseConfig,
 	})
