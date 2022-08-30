@@ -36,10 +36,10 @@
 	},
 	"dependencies": {
 		"@datashaper/arquero": "workspace:^",
-		"@datashaper/core": "workspace:^",
 		"@datashaper/schema": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",
+		"@datashaper/workflow": "workspace:^",
 		"@essex/charts-react": "^1.0.5",
 		"@essex/styled-components": "^0.0.2",
 		"@essex/themed-components": "^2.3.2",

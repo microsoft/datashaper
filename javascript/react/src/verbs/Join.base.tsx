@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NodeInput } from '@datashaper/core'
 import type { JoinArgs } from '@datashaper/schema'
 import { JoinStrategy } from '@datashaper/schema'
+import { NodeInput } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 

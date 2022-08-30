@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { coerce } from '@datashaper/arquero'
-import type { Step } from '@datashaper/core'
 import type { RecodeArgs, Value } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
+import type { Step } from '@datashaper/workflow'
 import styled from '@essex/styled-components'
 import { ActionButton, Icon, IconButton } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

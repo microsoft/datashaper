@@ -7,8 +7,8 @@ import { Verb } from '@datashaper/schema'
 import { table } from 'arquero'
 
 import { createTableStore } from '../../__tests__/createTableStore.js'
-import { Workflow } from '../../engine/Workflow.js'
 import { createGraph } from '../graph.js'
+import { Workflow } from '../Workflow.js'
 
 describe('stepGraph', () => {
 	let store: Map<string, TableContainer>

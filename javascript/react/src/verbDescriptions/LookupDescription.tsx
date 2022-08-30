@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { NodeInput } from '@datashaper/core'
 import type { LookupArgs } from '@datashaper/schema'
+import { NodeInput } from '@datashaper/workflow'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types.js'

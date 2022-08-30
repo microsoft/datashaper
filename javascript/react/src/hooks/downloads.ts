@@ -4,7 +4,6 @@
  */
 
 import type { TableContainer } from '@datashaper/arquero'
-import type { Workflow } from '@datashaper/core'
 import type { FileWithPath } from '@datashaper/utilities'
 import {
 	createFileWithPath,
@@ -13,6 +12,7 @@ import {
 	FileCollection,
 	FileMimeType,
 } from '@datashaper/utilities'
+import type { Workflow } from '@datashaper/workflow'
 import { useCallback, useState } from 'react'
 
 export function useDownloadWorkflow(workflow: Workflow): () => void {

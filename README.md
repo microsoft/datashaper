@@ -15,7 +15,7 @@ Individual documentation for the JavaScript and Python implementations can be fo
 
 We currently have four packages:
 
-- [core](javascript/core) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables. The pipeline is essentially an implementation of async chain-of-command, executing verbs serially based on an input table context and set of step configurations.
+- [workflow](javascript/workflow) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables. The pipeline is essentially an implementation of async chain-of-command, executing verbs serially based on an input table context and set of step configurations.
 - [react](javascript/react) - this is a set of React components for each verb that you can include in web apps that enable tranformation pipeline building.
 - [utilities](javascript/utilities) - this is a set of helpers for working with files, etc., to ease building data wrangling applications.
 - [webapp](javascript/webapp) - this is an example/test webapp that includes all of the verb components and allows creation, execution, and saving of pipeline JSON files.
@@ -37,7 +37,7 @@ Example joining two tables:
 
 ```
     import { table } from 'arquero'
-    import { createTableStore, createPipeline } from '@datashaper/core'
+    import { createTableStore, createPipeline } from '@datashaper/workflow'
 
     // id   name
     // 1    bob

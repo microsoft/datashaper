@@ -4,8 +4,8 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { TableContainer } from '@datashaper/arquero'
-import type { GraphManager, Step, Workflow } from '@datashaper/core'
-import { cloneStep } from '@datashaper/core'
+import type { GraphManager, Step, Workflow } from '@datashaper/workflow'
+import { cloneStep } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
 

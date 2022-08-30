@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/arquero'
-import type { Workflow } from '@datashaper/core'
+import type { Workflow } from '@datashaper/workflow'
 import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 
 export interface PrepareDataFullProps {

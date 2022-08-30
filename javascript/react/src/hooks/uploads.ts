@@ -4,8 +4,8 @@
  */
 
 import type { TableContainer } from '@datashaper/arquero'
-import type { WorkflowObject } from '@datashaper/core'
 import { FileCollection, FileType } from '@datashaper/utilities'
+import type { WorkflowObject } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {

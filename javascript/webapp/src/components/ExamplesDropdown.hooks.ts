@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { WorkflowObject } from '@datashaper/core'
-import { Workflow } from '@datashaper/core'
+import type { WorkflowObject } from '@datashaper/workflow'
+import { Workflow } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
