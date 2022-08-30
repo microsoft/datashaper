@@ -8,6 +8,8 @@ import type { ColumnStats } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
 import { DataType } from '@datashaper/schema';
+import type { ParseConfig } from 'papaparse';
+import type { ParserOptions } from '@datashaper/schema';
 import type { TableMetadata } from '@datashaper/schema';
 import type { TypeHints } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
@@ -100,6 +102,11 @@ export function formatIfNumber(value: Value): string | Value;
 // @public
 export function getters(table: ColumnTable): Record<string, (i: number) => any>;
 
+// Warning: (ae-missing-release-tag) "guessDelimiter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function guessDelimiter(text: string, config?: ParseConfig): string;
+
 // Warning: (ae-missing-release-tag) "guessType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -141,6 +148,11 @@ export function isNumber(decimal?: string, thousands?: string): (value: string) 
 // @public (undocumented)
 export function isObject(value: string): boolean;
 
+// Warning: (ae-missing-release-tag) "loadTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function loadTable(text: string, options?: ParserOptions): ColumnTable;
+
 // Warning: (ae-missing-release-tag) "naDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -154,7 +166,7 @@ export function parseArray(options?: TypeHints): (value: string) => any[] | null
 // Warning: (ae-missing-release-tag) "parseAs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function parseAs(type?: DataType, options?: TypeHints): ((values: string) => number | null) | ((value: string) => boolean | null) | ((value: string) => object | null) | ((value: string) => string | null) | ((value: string) => null | undefined);
+export function parseAs(type?: DataType, options?: TypeHints): any;
 
 // Warning: (ae-missing-release-tag) "parseBoolean" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -233,14 +245,7 @@ export const trueDefaults: string[];
 // Warning: (ae-missing-release-tag) "validator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function validator(options?: TypeHints): {
-    isNull: (value: string) => boolean;
-    isBoolean: (value: string) => boolean;
-    isNumber: (value: string) => boolean;
-    isArray: typeof isArray;
-    isObject: typeof isObject;
-    isDate: typeof isDate;
-};
+export function validator(options?: TypeHints): any;
 
 // (No @packageDocumentation comment for this package)
 

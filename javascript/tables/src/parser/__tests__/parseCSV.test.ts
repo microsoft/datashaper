@@ -55,7 +55,7 @@ describe('parse CSV', () => {
 		})
 
 		const parsed = parseCSV(csv, codebook)
-		parsed.print()
+
 		expect(parsed.column('int')?.get(0)).toBe(100)
 		expect(parsed.column('float')?.get(0)).toBe(1.01)
 		expect(parsed.column('boolean')?.get(0)).toBe(true)

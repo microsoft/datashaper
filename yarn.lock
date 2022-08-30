@@ -3809,10 +3809,12 @@ __metadata:
     "@essex/tsconfig-base": ^1.0.2
     "@types/jest": ^27.5.1
     "@types/lodash-es": ^4.17.6
+    "@types/papaparse": ^5.3.3
     arquero: ^4.8.8
     jest: ^28.1.0
     lodash-es: ^4.17.21
     moment: ^2.29.4
+    papaparse: ^5.3.2
     typescript: ^4.7.2
   peerDependencies:
     arquero: ^4.8.7
@@ -7639,6 +7641,15 @@ __metadata:
   version: 0.4.2
   resolution: "@types/open-wc__webpack-import-meta-loader@npm:0.4.2"
   checksum: 13b7618a8c731bdfb832374f420212a2df60e794a1eaeb1d9bd4af39c2b5a40d99ea824754ff3fdcdf84d204cce248a1ee42afd7aaa7edfc5ffadc16bf319954
+  languageName: node
+  linkType: hard
+
+"@types/papaparse@npm:^5.3.3":
+  version: 5.3.4
+  resolution: "@types/papaparse@npm:5.3.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: 393523d6d7600b410c5d2cf3aaee4db2cd4e7869b889103815f44418af05a20be82bb5046817ff0566f1a435ddc8e424d2a451b945013255ad8f186e1bca2f11
   languageName: node
   linkType: hard
 
@@ -18766,6 +18777,13 @@ __metadata:
   version: 1.0.11
   resolution: "pako@npm:1.0.11"
   checksum: 1be2bfa1f807608c7538afa15d6f25baa523c30ec870a3228a89579e474a4d992f4293859524e46d5d87fd30fa17c5edf34dbef0671251d9749820b488660b16
+  languageName: node
+  linkType: hard
+
+"papaparse@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "papaparse@npm:5.3.2"
+  checksum: a5950ef931a42f6759a8d3823a43dd30f375b37a0ddea6ea5448c0c5024cd226819231958c49c24fbcdeab297c63fd1d630130b3439876ea0fd17d8a267738ae
   languageName: node
   linkType: hard
 
