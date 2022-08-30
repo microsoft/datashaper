@@ -99,7 +99,7 @@ export const ControlBar: React.FC<ControlBarProps> = memo(function ControlBar({
 			onAutoTypeChange(checked ?? false),
 		[onAutoTypeChange],
 	)
-	console.log(selected)
+
 	return (
 		<Container>
 			<ExamplesContainer>

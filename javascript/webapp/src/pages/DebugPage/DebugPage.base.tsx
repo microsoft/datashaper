@@ -45,7 +45,6 @@ const DEFAULT_STATS = [
 ]
 
 export const DebugPage: React.FC = memo(function DebugPage() {
-	const [compact, setCompact] = useState<boolean>(true)
 	const [autoType, setAutoType] = useState<boolean>(true)
 	const [features, setFeatures] = useState<DetailsListFeatures>({
 		statsColumnHeaders: true,
@@ -83,7 +82,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 						<InputTables
 							tables={inputTables}
 							features={features}
-							compact={compact}
+							compact={true}
 						/>
 					</Section>
 				</InputsSection>
@@ -95,7 +94,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 						graph={graph}
 						output={outputs[index]}
 						features={features}
-						compact={compact}
+						compact={true}
 						onStepChange={onStepSave}
 						onStepOutputChange={onStepOutputChange}
 					/>
