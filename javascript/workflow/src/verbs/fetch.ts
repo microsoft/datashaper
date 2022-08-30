@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@datashaper/arquero'
-import { container } from '@datashaper/arquero'
 import type { FetchArgs } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
+import { container } from '@datashaper/tables'
 import { loadCSV, loadJSON } from 'arquero'
 
 import type { InputStep } from '../dataflow/index.js'

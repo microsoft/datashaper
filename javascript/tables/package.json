@@ -1,5 +1,5 @@
 {
-	"name": "@datashaper/arquero",
+	"name": "@datashaper/tables",
 	"version": "4.0.1",
 	"type": "module",
 	"main": "src/index.ts",

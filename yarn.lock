@@ -3682,25 +3682,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@datashaper/arquero@workspace:^, @datashaper/arquero@workspace:javascript/arquero":
-  version: 0.0.0-use.local
-  resolution: "@datashaper/arquero@workspace:javascript/arquero"
-  dependencies:
-    "@datashaper/schema": "workspace:^"
-    "@essex/jest-config": ^21.0.12
-    "@essex/scripts": ^22.0.4
-    "@essex/tsconfig-base": ^1.0.2
-    "@types/jest": ^27.5.1
-    "@types/lodash-es": ^4.17.6
-    arquero: ^4.8.8
-    jest: ^28.1.0
-    lodash-es: ^4.17.21
-    typescript: ^4.7.2
-  peerDependencies:
-    arquero: ^4.8.7
-  languageName: unknown
-  linkType: soft
-
 "@datashaper/project@workspace:.":
   version: 0.0.0-use.local
   resolution: "@datashaper/project@workspace:."
@@ -3734,8 +3715,8 @@ __metadata:
     "@babel/preset-env": ^7.18.6
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
-    "@datashaper/arquero": "workspace:^"
     "@datashaper/schema": "workspace:^"
+    "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
@@ -3818,6 +3799,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@datashaper/tables@workspace:^, @datashaper/tables@workspace:javascript/tables":
+  version: 0.0.0-use.local
+  resolution: "@datashaper/tables@workspace:javascript/tables"
+  dependencies:
+    "@datashaper/schema": "workspace:^"
+    "@essex/jest-config": ^21.0.12
+    "@essex/scripts": ^22.0.4
+    "@essex/tsconfig-base": ^1.0.2
+    "@types/jest": ^27.5.1
+    "@types/lodash-es": ^4.17.6
+    arquero: ^4.8.8
+    jest: ^28.1.0
+    lodash-es: ^4.17.21
+    typescript: ^4.7.2
+  peerDependencies:
+    arquero: ^4.8.7
+  languageName: unknown
+  linkType: soft
+
 "@datashaper/utilities@workspace:^, @datashaper/utilities@workspace:javascript/utilities":
   version: 0.0.0-use.local
   resolution: "@datashaper/utilities@workspace:javascript/utilities"
@@ -3856,9 +3856,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/webapp@workspace:javascript/webapp"
   dependencies:
-    "@datashaper/arquero": "workspace:^"
     "@datashaper/react": "workspace:^"
     "@datashaper/schema": "workspace:^"
+    "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
@@ -3908,8 +3908,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/workflow@workspace:javascript/workflow"
   dependencies:
-    "@datashaper/arquero": "workspace:^"
     "@datashaper/schema": "workspace:^"
+    "@datashaper/tables": "workspace:^"
     "@essex/jest-config": ^21.0.13
     "@essex/scripts": ^22.0.5
     "@essex/tsconfig-base": ^1.0.2

@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { columnTypes } from '@datashaper/arquero'
 import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
+import { columnTypes } from '@datashaper/tables'
 import type { GraphManager, Step } from '@datashaper/workflow'
 import { isNumericInputStep, NodeInput } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

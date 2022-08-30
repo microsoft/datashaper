@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { columnType } from '@datashaper/arquero'
 import type { RecodeArgs, Value } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
+import { columnType } from '@datashaper/tables'
 import { escape, op } from 'arquero'
 
 import type { ColumnTableStep } from './util/factories.js'

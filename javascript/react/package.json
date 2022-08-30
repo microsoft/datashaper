@@ -35,8 +35,8 @@
 		"start:storybook": "yarn start"
 	},
 	"dependencies": {
-		"@datashaper/arquero": "workspace:^",
 		"@datashaper/schema": "workspace:^",
+		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",
 		"@datashaper/workflow": "workspace:^",

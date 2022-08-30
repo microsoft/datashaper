@@ -1,6 +1,6 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
-import type { TableContainer } from '@datashaper/arquero'
-import { container } from '@datashaper/arquero'
+import type { TableContainer } from '@datashaper/tables'
+import { container } from '@datashaper/tables'
 import Ajv from 'ajv'
 import arquero from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

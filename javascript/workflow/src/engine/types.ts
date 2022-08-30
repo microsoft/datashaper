@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@datashaper/arquero'
 import type {
 	NamedPortBinding,
 	OutputPortBinding,
 	PortBinding,
 	Verb,
 } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
 
 import type { Node } from '../dataflow/index.js'
 

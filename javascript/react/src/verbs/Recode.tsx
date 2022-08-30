@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { coerce } from '@datashaper/arquero'
 import type { RecodeArgs, Value } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
+import { coerce } from '@datashaper/tables'
 import type { Step } from '@datashaper/workflow'
 import styled from '@essex/styled-components'
 import { ActionButton, Icon, IconButton } from '@fluentui/react'

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/unbound-method */
-import type { TableContainer } from '@datashaper/arquero'
+import type { TableContainer } from '@datashaper/tables'
 import type { GraphManager, Step, Workflow } from '@datashaper/workflow'
 import { cloneStep } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'

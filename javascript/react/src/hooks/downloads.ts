@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TableContainer } from '@datashaper/arquero'
+import type { TableContainer } from '@datashaper/tables'
 import type { FileWithPath } from '@datashaper/utilities'
 import {
 	createFileWithPath,

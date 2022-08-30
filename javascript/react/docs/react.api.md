@@ -30,7 +30,7 @@ import type { ReactElement } from 'react';
 import type { RowObject } from 'arquero/dist/types/table/table';
 import { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/workflow';
-import type { TableContainer } from '@datashaper/arquero';
+import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/schema';
 import type { Theme } from '@thematic/core';
 import type { Verb } from '@datashaper/schema';

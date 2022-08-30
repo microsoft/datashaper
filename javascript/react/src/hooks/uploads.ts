@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TableContainer } from '@datashaper/arquero'
+import type { TableContainer } from '@datashaper/tables'
 import { FileCollection, FileType } from '@datashaper/utilities'
 import type { WorkflowObject } from '@datashaper/workflow'
 import { useCallback } from 'react'

@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { fixedBinStep } from '@datashaper/arquero'
 import type { BinArgs } from '@datashaper/schema'
 import { BinStrategy } from '@datashaper/schema'
+import { fixedBinStep } from '@datashaper/tables'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 

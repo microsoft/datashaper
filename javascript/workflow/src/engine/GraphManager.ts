@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@datashaper/arquero'
 import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
 import { Subject } from 'rxjs'
 

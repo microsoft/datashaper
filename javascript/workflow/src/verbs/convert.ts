@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { determineType } from '@datashaper/arquero'
 import type { ConvertArgs } from '@datashaper/schema'
 import { DataType, ParseType } from '@datashaper/schema'
+import { determineType } from '@datashaper/tables'
 import { escape, op } from 'arquero'
 import { isoParse, timeFormat, timeParse } from 'd3-time-format'
 

@@ -34,8 +34,8 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
-		"@datashaper/arquero": "workspace:^",
 		"@datashaper/schema": "workspace:^",
+		"@datashaper/tables": "workspace:^",
 		"ajv": "^8.11.0",
 		"d3-time-format": "^4.1.0",
 		"lodash-es": "^4.17.21",
