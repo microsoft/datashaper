@@ -23,6 +23,7 @@ import {
 	useStepDataTable,
 	useTableColumnNames,
 } from '../hooks/index.js'
+import { narrowerDropdownStyles } from '../styles.js'
 import type { StepComponentProps } from '../types.js'
 import {
 	useDisabled,
@@ -125,11 +126,7 @@ const ColumnPair: React.FC<{
 				label={undefined}
 				selectedKey={oldname}
 				onChange={handleColumnChange}
-				styles={{
-					root: {
-						width: 130,
-					},
-				}}
+				styles={narrowerDropdownStyles}
 			/>
 			<Icon
 				iconName={'Forward'}
@@ -139,7 +136,7 @@ const ColumnPair: React.FC<{
 				placeholder={'New name'}
 				value={newname}
 				onChange={handleTextChange}
-				styles={{ root: { width: 130 } }}
+				styles={narrowerDropdownStyles}
 			/>
 			<IconButton
 				title={'Remove this rename'}
@@ -163,6 +160,6 @@ const ColumnPairs = styled.div`
 
 const ColumnPairContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 `

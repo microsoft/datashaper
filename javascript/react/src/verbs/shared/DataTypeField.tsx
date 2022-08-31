@@ -9,7 +9,8 @@ import { Dropdown, SpinButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { CalendarPicker } from '../../controls/index.js'
-import { Container, narrowerStyles, TextValue } from './DataTypeField.styles.js'
+import { narrowerDropdownStyles } from '../../styles.js'
+import { Container, TextValue } from './DataTypeField.styles.js'
 import type { DataTypeFieldProps } from './DataTypeField.types.js'
 
 export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
@@ -91,7 +92,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						onChange={onChangeTextFieldValue}
 						placeholder={placeholder}
 						value={value}
-						styles={narrowerStyles}
+						styles={narrowerDropdownStyles}
 					></TextValue>
 				) : null}
 
@@ -100,7 +101,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						min={0}
 						step={1}
 						value={value}
-						styles={narrowerStyles}
+						styles={narrowerDropdownStyles}
 						onChange={spinButtonOnChange}
 					/>
 				) : null}
@@ -109,7 +110,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					<Dropdown
 						selectedKey={value.toString()}
 						options={booleanOptions}
-						styles={narrowerStyles}
+						styles={narrowerDropdownStyles}
 						onChange={dropDownOnChange}
 					/>
 				) : null}
