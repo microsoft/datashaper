@@ -23,15 +23,16 @@ import {
 	useSimpleDropdownOptions,
 	useTableColumnNames,
 } from '../../hooks/index.js'
-import { InputExplainer } from '../../styles.js'
+import { InputExplainer, LeftAlignedRow } from '../../styles.js'
 import { useColumnTyping, useIsEmpty } from './FilterFunction.hooks.js'
 import {
 	BooleanToggle,
 	Container,
 	FilterContainer,
+	Input,
+	InputLabel,
 	leftStyles,
 	OrLabel,
-	SideBySide,
 	spinStyles,
 	TextValue,
 } from './FilterFunction.styles.js'
@@ -160,8 +161,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 		const operatorDropdown = useMemo(() => {
 			const shared = {
-				required: !suppressLabels,
-				label: suppressLabels ? undefined : 'Function',
+				label: '',
 				placeholder: 'Choose',
 				selectedKey: criterion.operator,
 				onChange: handleOpChange,
@@ -208,9 +208,18 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 		return (
 			<Container>
-				<SideBySide>
+				<LeftAlignedRow>
 					{operatorDropdown}
-					<FilterContainer>
+					<IconButton
+						title={'Remove this criterion'}
+						iconProps={{ iconName: 'Delete' }}
+						onClick={handleDeleteClick}
+					/>
+				</LeftAlignedRow>
+
+				<FilterContainer>
+					<Input>
+						<InputLabel>value</InputLabel>
 						{type === DataType.Date ? (
 							<CalendarPicker
 								onSelectDate={onSelectDate}
@@ -246,9 +255,10 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 								disabled={isEmpty}
 							/>
 						) : null}
-
-						<OrLabel>or</OrLabel>
-
+					</Input>
+					<OrLabel>or</OrLabel>
+					<Input>
+						<InputLabel>column</InputLabel>
 						{type === DataType.Date ? (
 							<ColumnCriteriaCombobox
 								options={columnOptions}
@@ -262,14 +272,9 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 								disabled={isEmpty}
 							/>
 						)}
-					</FilterContainer>
+					</Input>
+				</FilterContainer>
 
-					<IconButton
-						title={'Remove this criterion'}
-						iconProps={{ iconName: 'Delete' }}
-						onClick={handleDeleteClick}
-					/>
-				</SideBySide>
 				{type === DataType.String ? (
 					<InputExplainer>
 						String comparisons are not case-sensitive

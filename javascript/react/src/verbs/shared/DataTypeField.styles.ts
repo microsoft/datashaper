@@ -31,7 +31,7 @@ export const OrLabel = styled(Label)`
 
 export const spinStyles = {
 	root: {
-		width: 120,
+		width: 135,
 	},
 }
 

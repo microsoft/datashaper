@@ -4,7 +4,7 @@
  */
 import type { Criterion, FilterArgs } from '@datashaper/schema'
 import { BooleanOperator } from '@datashaper/schema'
-import { ActionButton } from '@fluentui/react'
+import { ActionButton, Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 
@@ -64,6 +64,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 
 		return (
 			<Container>
+				<Label>Function</Label>
 				{filters}
 				<ActionButton
 					onClick={handleButtonClick}

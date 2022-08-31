@@ -40,8 +40,9 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 						onChange={onStepChange}
 						onChangeOutput={o => onStepOutputChange(step, o)}
 					/>
+					<StepDescription step={step} output={output} />
 				</StepsColumn>
-				<StepDescription step={step} output={output} />
+
 				<OutputsColumn className="outputs-column">
 					{table ? (
 						<TableSection className="table-section">
