@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Maybe,Verb } from '@datashaper/core'
+import type { Maybe } from '@datashaper/core'
+import type { Verb } from '@datashaper/schema'
 import { default as guidanceIndex } from '@datashaper/verb-guidance'
 import { Callout, DirectionalHint, IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'

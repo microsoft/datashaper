@@ -67,7 +67,7 @@ export interface TableTransformProps {
 	 * Table store to verify naming to be created
 	 */
 	graph: GraphManager
-	onVerbChange: (verb: Verb) => void
+	onVerbChange?: (verb: Verb) => void
 	style?: React.CSSProperties
 	onCancel?: () => void
 

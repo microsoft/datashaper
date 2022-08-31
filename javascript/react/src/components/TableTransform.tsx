@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Verb } from '@datashaper/core'
+import type { GraphManager } from '@datashaper/core'
+import type { Verb } from '@datashaper/schema'
 import { DefaultButton, IconButton, PrimaryButton } from '@fluentui/react'
 import React, { memo, useCallback } from 'react'
 
@@ -48,7 +49,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		)
 		const onCreate = useCallback(
 			(verb: Verb) => {
-				onVerbChange(verb)
+				onVerbChange?.(verb)
 				handleVerbChange(verb)
 			},
 			[handleVerbChange, onVerbChange],
