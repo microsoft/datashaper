@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { introspect } from '@datashaper/arquero'
 import type { TableMetadata } from '@datashaper/schema'
+import { introspect } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 

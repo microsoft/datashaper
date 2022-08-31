@@ -2,16 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@datashaper/arquero'
-import type {
-	Step,
-	Workflow} from '@datashaper/core';
+import type { TableContainer } from '@datashaper/tables'
+import type { Step, Workflow } from '@datashaper/workflow'
 import {
 	GraphManager,
 	nextOutputName,
 	nextOutputNode,
-	readStep
-} from '@datashaper/core'
+	readStep,
+} from '@datashaper/workflow'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useState } from 'react'
 

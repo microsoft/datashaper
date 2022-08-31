@@ -29,12 +29,12 @@
 		"lint": "essex lint --fix"
 	},
 	"dependencies": {
-		"@datashaper/arquero": "workspace:^",
-		"@datashaper/core": "workspace:^",
 		"@datashaper/react": "workspace:^",
 		"@datashaper/schema": "workspace:^",
+		"@datashaper/tables": "workspace:^",
 		"@datashaper/utilities": "workspace:^",
 		"@datashaper/verb-guidance": "workspace:^",
+		"@datashaper/workflow": "workspace:^",
 		"@essex/hooks": "^4.0.12",
 		"@essex/themed-components": "^2.4.0",
 		"@essex/webpack-config": "^21.0.5",

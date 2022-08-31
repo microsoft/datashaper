@@ -1,23 +1,34 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { dirname } from 'path'
+import path, { dirname } from 'path'
 import semver from 'semver'
+import { fileURLToPath } from 'url'
 
+// this script copies the latest built version of the schema into a releases folder with rolled up version specificity
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-
-const { version: schemaVersion } = JSON.parse(fs.readFileSync(path.join(__dirname, '../javascript/schema/package.json'), { encoding: 'utf8' }))
-
-console.log("schema version is", schemaVersion)
-const currentSchema = path.join(__dirname, '../schema/workflow.json')
 const schemaReleases = path.join(__dirname, '../schema/releases')
 
-const majorVersionFile = path.join(schemaReleases, `workflow-v${semver.major(schemaVersion)}.json`)
-const specificVersionFile = path.join(schemaReleases, `workflow-v${schemaVersion}.json`)
+const { versions } = JSON.parse(
+	fs.readFileSync(path.join(__dirname, '../javascript/schema/package.json'), {
+		encoding: 'utf8',
+	}),
+)
 
-if (fs.existsSync(specificVersionFile)) {
-	throw new Error(`workflow schema version ${schemaVersion} has already been created`)
-}
-fs.copyFileSync(currentSchema, majorVersionFile)
-fs.copyFileSync(currentSchema, specificVersionFile)
+Object.entries(versions).forEach(([name, schemaVersion]) => {
+	const currentSchema = path.join(__dirname, `../schema/${name}.json`)
+	const schemaFolder = path.join(schemaReleases, name)
+	if (!fs.existsSync(schemaFolder)) {
+		fs.mkdirSync(schemaFolder)
+	}
+	const majorVersionFile = path.join(
+		schemaFolder,
+		`v${semver.major(schemaVersion)}.json`,
+	)
+	const specificVersionFile = path.join(schemaFolder, `v${schemaVersion}.json`)
+	fs.copyFileSync(currentSchema, majorVersionFile)
+	fs.copyFileSync(currentSchema, specificVersionFile)
+})

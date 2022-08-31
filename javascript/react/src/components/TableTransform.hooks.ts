@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@datashaper/core'
-import { readStep } from '@datashaper/core'
 import type { Verb } from '@datashaper/schema'
+import type { GraphManager, Step } from '@datashaper/workflow'
+import { readStep } from '@datashaper/workflow'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useCreateTableId, useFormattedColumnArg } from '../hooks/index.js'

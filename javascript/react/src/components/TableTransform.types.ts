@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { GraphManager, Step } from '@datashaper/core'
 import type { Verb } from '@datashaper/schema'
+import type { GraphManager, Step } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export interface TableTransformProps {

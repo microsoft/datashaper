@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step } from '@datashaper/core'
+import type { Step } from '@datashaper/workflow'
 import {
 	CollapsiblePanel,
 	CollapsiblePanelContainer,

@@ -6,30 +6,43 @@ import fs from 'fs'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
+// this script copies the released schemas folder into the webapp public folder for deployment to github.io
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-
-const latestWorkflowSchema = 'workflow.json'
 const schemaDir = path.join(__dirname, '../schema')
 const schemaReleases = path.join(schemaDir, 'releases')
-const webappVersionDirectory = path.join(
-	__dirname,
-	'../javascript/webapp/public/schema/workflow',
+
+const { versions } = JSON.parse(
+	fs.readFileSync(path.join(__dirname, '../javascript/schema/package.json'), {
+		encoding: 'utf8',
+	}),
 )
 
-if (!fs.existsSync(webappVersionDirectory)) {
-	fs.mkdirSync(webappVersionDirectory)
-}
+Object.keys(versions).forEach(name => {
+	const latestSchema = `${name}.json`
 
-fs.copyFileSync(
-	path.join(schemaDir, latestWorkflowSchema),
-	path.join(webappVersionDirectory, latestWorkflowSchema),
-)
+	const releaseDirectory = path.join(schemaReleases, name)
 
-fs.readdirSync(schemaReleases).forEach(file => {
-	const renamedFile = file.replace(/workflow-/, '')
-	fs.copyFileSync(
-		path.join(schemaReleases, file),
-		path.join(webappVersionDirectory, renamedFile),
+	const webappVersionDirectory = path.join(
+		__dirname,
+		`../javascript/webapp/public/schema/${name}`,
 	)
+
+	if (!fs.existsSync(webappVersionDirectory)) {
+		fs.mkdirSync(webappVersionDirectory)
+	}
+
+	// copy the latest named schems (no version #)
+	fs.copyFileSync(
+		path.join(schemaDir, latestSchema),
+		path.join(webappVersionDirectory, latestSchema),
+	)
+
+	// copy each versioned schema into the appropriate public output folder
+	fs.readdirSync(releaseDirectory).forEach(file => {
+		fs.copyFileSync(
+			path.join(releaseDirectory, file),
+			path.join(webappVersionDirectory, file),
+		)
+	})
 })

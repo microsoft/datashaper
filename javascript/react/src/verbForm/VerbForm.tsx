@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@datashaper/core'
+import type { Step } from '@datashaper/workflow'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import {
 	Checkbox,
@@ -109,6 +109,8 @@ export interface ComboBoxFormInput<T>
 	 * The form input value or selected key (if enum)
 	 */
 	current: string | undefined
+
+	allowFreeform?: boolean
 
 	onInputValueChange?: (step: Step<T>, value: string | undefined) => void
 }
@@ -378,6 +380,7 @@ const ComboBoxInput: React.FC<{
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
 		onInputValueChange,
+		allowFreeform,
 	},
 	onChange,
 }) {
@@ -395,10 +398,13 @@ const ComboBoxInput: React.FC<{
 				placeholder={placeholder}
 				styles={dropdownStyles}
 				selectedKey={current as number | string}
+				text={allowFreeform === true ? (current as string) : ''}
 				options={options!}
 				disabled={disabled}
 				onChange={changeHandler}
 				onInputValueChange={valueChangeHandler}
+				allowFreeform={allowFreeform}
+				autoComplete={'off'}
 			/>
 		</Wrapper>
 	)

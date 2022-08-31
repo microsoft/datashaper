@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@datashaper/core'
 import type { RenameArgs } from '@datashaper/schema'
+import type { Step } from '@datashaper/workflow'
 import styled from '@essex/styled-components'
 import type { IDropdownOption } from '@fluentui/react'
 import {

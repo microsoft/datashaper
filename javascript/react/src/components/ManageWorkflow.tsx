@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/unbound-method */
-import type { Step } from '@datashaper/core'
+import type { Step } from '@datashaper/workflow'
 import { DialogConfirm } from '@essex/themed-components'
 import { memo, useCallback, useState } from 'react'
 

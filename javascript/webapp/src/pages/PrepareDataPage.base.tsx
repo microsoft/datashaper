@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@datashaper/arquero'
-import { Workflow } from '@datashaper/core'
 import {
 	ManageWorkflow,
 	PrepareDataFull,
 	ProjectMgmtCommandBar,
 } from '@datashaper/react'
+import type { TableContainer } from '@datashaper/tables'
+import { Workflow } from '@datashaper/workflow'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useState } from 'react'
 

@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@datashaper/arquero'
-import type { WorkflowObject } from '@datashaper/core'
+import type { TableContainer } from '@datashaper/tables'
 import type { BaseFile } from '@datashaper/utilities'
+import type { WorkflowObject } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
 export function useLoadSpecFile(): (file: BaseFile) => Promise<WorkflowObject> {

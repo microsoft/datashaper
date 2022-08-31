@@ -7,6 +7,12 @@
 		"main": "dist/index.js",
 		"types": "dist/index.d.ts"
 	},
+	"versions": {
+		"datapackage": "1.0.0",
+		"dataset": "1.0.0",
+		"codebook": "1.0.0",
+		"workflow": "1.5.0"
+	},
 	"sideEffects": false,
 	"author": "Nathan Evans <naevans@microsoft.com>",
 	"license": "MIT",
@@ -30,12 +36,17 @@
 		"clean": "essex clean dist docs",
 		"build": "essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
-		"bundle": "typescript-json-schema tsconfig.json WorkflowJson > ../../schema/workflow.json",
+		"bundle-codebook": "typescript-json-schema tsconfig.json Codebook > ../../schema/codebook.json",
+		"bundle-dataset": "typescript-json-schema tsconfig.json Dataset > ../../schema/dataset.json",
+		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackage > ../../schema/datapackage.json",
+		"bundle-workflow": "typescript-json-schema tsconfig.json Workflow > ../../schema/workflow.json",
+		"bundle": "run-p bundle-datapackage bundle-dataset bundle-codebook bundle-workflow",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
 		"@essex/scripts": "^22.0.5",
 		"@essex/tsconfig-base": "^1.0.2",
+		"npm-run-all": "^4.1.5",
 		"shx": "^0.3.4",
 		"typescript": "^4.7.4",
 		"typescript-json-schema": "^0.53.1"
