@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@datashaper/core'
 import type { InputColumnListArgs, JoinArgs } from '@datashaper/schema'
 import { toggleListItem } from '@datashaper/utilities'
+import type { Step } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 
 import { getEnumDropdownOptions } from '../enums.js'

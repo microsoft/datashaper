@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@datashaper/core'
 import type { OnehotArgs } from '@datashaper/schema'
+import type { Step } from '@datashaper/workflow'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import { memo, useCallback, useMemo } from 'react'
 

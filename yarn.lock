@@ -3682,57 +3682,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@datashaper/arquero@workspace:^, @datashaper/arquero@workspace:javascript/arquero":
-  version: 0.0.0-use.local
-  resolution: "@datashaper/arquero@workspace:javascript/arquero"
-  dependencies:
-    "@datashaper/schema": "workspace:^"
-    "@essex/jest-config": ^21.0.12
-    "@essex/scripts": ^22.0.4
-    "@essex/tsconfig-base": ^1.0.2
-    "@types/jest": ^27.5.1
-    "@types/lodash-es": ^4.17.6
-    arquero: ^4.8.8
-    jest: ^28.1.0
-    lodash-es: ^4.17.21
-    typescript: ^4.7.2
-  peerDependencies:
-    arquero: ^4.8.7
-  languageName: unknown
-  linkType: soft
-
-"@datashaper/core@workspace:^, @datashaper/core@workspace:javascript/core":
-  version: 0.0.0-use.local
-  resolution: "@datashaper/core@workspace:javascript/core"
-  dependencies:
-    "@datashaper/arquero": "workspace:^"
-    "@datashaper/schema": "workspace:^"
-    "@essex/jest-config": ^21.0.13
-    "@essex/scripts": ^22.0.5
-    "@essex/tsconfig-base": ^1.0.2
-    "@types/d3-time-format": ^4.0.0
-    "@types/jest": ^27.5.2
-    "@types/lodash-es": ^4.17.6
-    "@types/node": ^18.0.0
-    "@types/uuid": ^8.3.4
-    ajv: ^8.11.0
-    arquero: ^4.8.8
-    d3-time-format: ^4.1.0
-    jest: ^28.1.2
-    lodash-es: ^4.17.21
-    regenerator-runtime: ^0.13.9
-    rxjs: ^7.5.5
-    typescript: ^4.7.4
-    uuid: ^8.3.2
-  peerDependencies:
-    "@types/node": "*"
-    arquero: ^4.8.7
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-  languageName: unknown
-  linkType: soft
-
 "@datashaper/project@workspace:.":
   version: 0.0.0-use.local
   resolution: "@datashaper/project@workspace:."
@@ -3766,11 +3715,11 @@ __metadata:
     "@babel/preset-env": ^7.18.6
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
-    "@datashaper/arquero": "workspace:^"
-    "@datashaper/core": "workspace:^"
     "@datashaper/schema": "workspace:^"
+    "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
+    "@datashaper/workflow": "workspace:^"
     "@essex/charts-react": ^1.0.5
     "@essex/scripts": ^22.0.5
     "@essex/styled-components": ^0.0.2
@@ -3850,6 +3799,28 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@datashaper/tables@workspace:^, @datashaper/tables@workspace:javascript/tables":
+  version: 0.0.0-use.local
+  resolution: "@datashaper/tables@workspace:javascript/tables"
+  dependencies:
+    "@datashaper/schema": "workspace:^"
+    "@essex/jest-config": ^21.0.12
+    "@essex/scripts": ^22.0.4
+    "@essex/tsconfig-base": ^1.0.2
+    "@types/jest": ^27.5.1
+    "@types/lodash-es": ^4.17.6
+    "@types/papaparse": ^5.3.3
+    arquero: ^4.8.8
+    jest: ^28.1.0
+    lodash-es: ^4.17.21
+    moment: ^2.29.4
+    papaparse: ^5.3.2
+    typescript: ^4.7.2
+  peerDependencies:
+    arquero: ^4.8.7
+  languageName: unknown
+  linkType: soft
+
 "@datashaper/utilities@workspace:^, @datashaper/utilities@workspace:javascript/utilities":
   version: 0.0.0-use.local
   resolution: "@datashaper/utilities@workspace:javascript/utilities"
@@ -3888,12 +3859,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/webapp@workspace:javascript/webapp"
   dependencies:
-    "@datashaper/arquero": "workspace:^"
-    "@datashaper/core": "workspace:^"
     "@datashaper/react": "workspace:^"
     "@datashaper/schema": "workspace:^"
+    "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
+    "@datashaper/workflow": "workspace:^"
     "@essex/hooks": ^4.0.12
     "@essex/scripts": ^22.0.5
     "@essex/themed-components": ^2.3.2
@@ -3933,6 +3904,39 @@ __metadata:
     shx: ^0.3.4
     styled-components: ^5.3.5
     typescript: ^4.7.4
+  languageName: unknown
+  linkType: soft
+
+"@datashaper/workflow@workspace:^, @datashaper/workflow@workspace:javascript/workflow":
+  version: 0.0.0-use.local
+  resolution: "@datashaper/workflow@workspace:javascript/workflow"
+  dependencies:
+    "@datashaper/schema": "workspace:^"
+    "@datashaper/tables": "workspace:^"
+    "@essex/jest-config": ^21.0.13
+    "@essex/scripts": ^22.0.5
+    "@essex/tsconfig-base": ^1.0.2
+    "@types/d3-time-format": ^4.0.0
+    "@types/jest": ^27.5.2
+    "@types/lodash-es": ^4.17.6
+    "@types/node": ^18.0.0
+    "@types/uuid": ^8.3.4
+    ajv: ^8.11.0
+    arquero: ^4.8.8
+    d3-time-format: ^4.1.0
+    jest: ^28.1.2
+    lodash-es: ^4.17.21
+    node-fetch: ^3.2.6
+    regenerator-runtime: ^0.13.9
+    rxjs: ^7.5.5
+    typescript: ^4.7.4
+    uuid: ^8.3.2
+  peerDependencies:
+    "@types/node": "*"
+    arquero: ^4.8.7
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -7637,6 +7641,15 @@ __metadata:
   version: 0.4.2
   resolution: "@types/open-wc__webpack-import-meta-loader@npm:0.4.2"
   checksum: 13b7618a8c731bdfb832374f420212a2df60e794a1eaeb1d9bd4af39c2b5a40d99ea824754ff3fdcdf84d204cce248a1ee42afd7aaa7edfc5ffadc16bf319954
+  languageName: node
+  linkType: hard
+
+"@types/papaparse@npm:^5.3.3":
+  version: 5.3.4
+  resolution: "@types/papaparse@npm:5.3.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: 393523d6d7600b410c5d2cf3aaee4db2cd4e7869b889103815f44418af05a20be82bb5046817ff0566f1a435ddc8e424d2a451b945013255ad8f186e1bca2f11
   languageName: node
   linkType: hard
 
@@ -17903,6 +17916,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"moment@npm:^2.29.4":
+  version: 2.29.4
+  resolution: "moment@npm:2.29.4"
+  checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
+  languageName: node
+  linkType: hard
+
 "move-concurrently@npm:^1.0.1":
   version: 1.0.1
   resolution: "move-concurrently@npm:1.0.1"
@@ -18757,6 +18777,13 @@ __metadata:
   version: 1.0.11
   resolution: "pako@npm:1.0.11"
   checksum: 1be2bfa1f807608c7538afa15d6f25baa523c30ec870a3228a89579e474a4d992f4293859524e46d5d87fd30fa17c5edf34dbef0671251d9749820b488660b16
+  languageName: node
+  linkType: hard
+
+"papaparse@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "papaparse@npm:5.3.2"
+  checksum: a5950ef931a42f6759a8d3823a43dd30f375b37a0ddea6ea5448c0c5024cd226819231958c49c24fbcdeab297c63fd1d630130b3439876ea0fd17d8a267738ae
   languageName: node
   linkType: hard
 

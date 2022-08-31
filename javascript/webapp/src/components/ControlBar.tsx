@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { Workflow } from '@datashaper/core'
 import type { FileWithPath } from '@datashaper/utilities'
 import {
 	FileCollection,
@@ -10,6 +9,7 @@ import {
 	FileMimeType,
 	FileType,
 } from '@datashaper/utilities'
+import { Workflow } from '@datashaper/workflow'
 import { Checkbox } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 

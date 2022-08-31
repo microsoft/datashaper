@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TableContainer } from '@datashaper/arquero'
-import type { WorkflowObject } from '@datashaper/core'
-import { Workflow } from '@datashaper/core'
+import type { TableContainer } from '@datashaper/tables'
+import type { WorkflowObject } from '@datashaper/workflow'
+import { Workflow } from '@datashaper/workflow'
 import type { ICommandBarItemProps } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
