@@ -8,7 +8,6 @@ import { coerce } from '@datashaper/tables'
 import type { Step } from '@datashaper/workflow'
 import styled from '@essex/styled-components'
 import { ActionButton, Icon, IconButton } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
 import { useColumnType, useStepDataTable } from '../hooks/index.js'
