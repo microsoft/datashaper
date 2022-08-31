@@ -7,9 +7,8 @@ import { FontIcon, Label, mergeStyles } from '@fluentui/react'
 
 export const iconClass = mergeStyles({
 	fontSize: 20,
-	height: 25,
-	width: 25,
-	margin: '0 25px',
+	height: 20,
+	width: 20,
 })
 
 export const Container = styled.div`
@@ -19,18 +18,19 @@ export const Container = styled.div`
 export const CalendarContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 `
 
 export const CalendarButton = styled(FontIcon)`
 	display: inline;
 	float: left;
-	margin-top: 5px;
-	margin-left: 10px;
-	margin-right: 0px;
+	margin-left: 8px;
+	margin-right: 4px;
 `
 
 export const CalendarLabel = styled(Label)`
 	display: inline;
 	float: left;
-	margin-left: 10px;
+	margin-left: 8px;
+	margin-right: 3px;
 `

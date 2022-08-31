@@ -4,6 +4,7 @@
  */
 import styled from '@essex/styled-components'
 import { Label, TextField } from '@fluentui/react'
+import merge from 'lodash-es/merge.js'
 
 import { narrowDropdownStyles } from '../../styles.js'
 
@@ -29,14 +30,8 @@ export const OrLabel = styled(Label)`
 	padding-right: 10px;
 `
 
-export const spinStyles = {
+export const narrowerStyles = merge({}, narrowDropdownStyles, {
 	root: {
-		width: 135,
+		width: 99,
 	},
-}
-
-export const dropdownStyles = {
-	root: {
-		width: 150,
-	},
-}
+})

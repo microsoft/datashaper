@@ -5,15 +5,9 @@
 import { memo, Suspense } from 'react'
 
 import { useFlyoutPanelState } from '../hooks/useFlyoutPanelState.js'
-import { useNonPropagatingClickHandler } from '../hooks/useNonPropagatingClickHandler.js'
 import { Footer } from './Footer.js'
 import { Header } from './Header.js'
-import {
-	Container,
-	Content,
-	SlidingContainer,
-	StyledSpinner,
-} from './Layout.styles.js'
+import { Container, Content, StyledSpinner } from './Layout.styles.js'
 import { SettingsPanel } from './SettingsPanel.js'
 
 export const Layout: React.FC<

@@ -169,6 +169,6 @@ const ColumnPairs = styled.div`
 
 const ColumnPairContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 `
