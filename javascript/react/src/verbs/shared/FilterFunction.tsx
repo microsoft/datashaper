@@ -44,13 +44,7 @@ import type { FilterFunctionProps } from './FilterFunction.types.js'
  * This is split out from FilterInputs to allow just the comparison logic to be reused elsewhere.
  */
 export const FilterFunction: React.FC<FilterFunctionProps> = memo(
-	function FilterFunction({
-		table,
-		column,
-		criterion,
-		onChange,
-		suppressLabels = false,
-	}) {
+	function FilterFunction({ table, column, criterion, onChange }) {
 		const handleOpChange = useCallback(
 			(_e: React.FormEvent<HTMLDivElement>, opt?: IDropdownOption) => {
 				onChange &&
@@ -199,7 +193,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					labels={labels}
 				/>
 			)
-		}, [type, column, criterion, handleOpChange, suppressLabels])
+		}, [type, column, criterion, handleOpChange])
 
 		const isEmpty = useIsEmpty(criterion)
 		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])

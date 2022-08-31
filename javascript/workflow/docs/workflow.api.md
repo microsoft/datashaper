@@ -632,6 +632,8 @@ export class Workflow {
     // (undocumented)
     clone(): Workflow;
     // (undocumented)
+    get description(): string | undefined;
+    // (undocumented)
     hasInput(input: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
@@ -641,6 +643,8 @@ export class Workflow {
     get input(): Set<string>;
     // (undocumented)
     get length(): number;
+    // (undocumented)
+    get name(): string | undefined;
     // (undocumented)
     onChange(handler: () => void): () => void;
     // (undocumented)

@@ -115,7 +115,6 @@ function useFilters(
 					column={column}
 					criterion={criterion}
 					onChange={handleChange}
-					suppressLabels={index > 0}
 				/>
 			</Vertical>
 		)

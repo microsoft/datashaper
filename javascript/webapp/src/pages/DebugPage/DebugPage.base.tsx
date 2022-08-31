@@ -28,7 +28,6 @@ import {
 } from './DebugPage.hooks.js'
 import {
 	Buttons,
-	columnsStyle,
 	Commands,
 	Container,
 	icons,
