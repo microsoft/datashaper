@@ -82,7 +82,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						: onValueChange(keyValue, newValue.key === 'true' ? true : false)
 				}
 			},
-			[onKeyChange, onValueChange, dataType, isKey, value, keyValue],
+			[onKeyChange, onValueChange, isKey, value, keyValue],
 		)
 
 		return (

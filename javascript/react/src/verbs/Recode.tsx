@@ -92,7 +92,7 @@ function useRecodePairs(
 				/>
 			)
 		})
-	}, [table, step, dataType, onKeyChange, onValueChange, onDelete])
+	}, [step, dataType, onKeyChange, onValueChange, onDelete])
 }
 
 const ColumnPair: React.FC<{
