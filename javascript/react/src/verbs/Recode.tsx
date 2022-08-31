@@ -45,7 +45,6 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
 
 		const columnPairs = useRecodePairs(
-			dataTable,
 			step,
 			dataType,
 			handleRecodeKeyChange,
@@ -71,7 +70,6 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 )
 
 function useRecodePairs(
-	table: ColumnTable | undefined,
 	step: Step<RecodeArgs>,
 	dataType: DataType,
 	onKeyChange: (oldKey: Value, newKey: Value) => void,
