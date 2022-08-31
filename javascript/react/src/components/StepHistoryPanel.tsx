@@ -2,26 +2,31 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-// import { useThematic } from '@thematic/react'
+
 import type { Step } from '@datashaper/core'
 import {
 	CollapsiblePanel,
 	CollapsiblePanelContainer,
 } from '@essex/themed-components'
 import { DefaultButton, Panel } from '@fluentui/react'
-import { memo, useEffect, useRef } from 'react'
+import { useBoolean } from '@fluentui/react-hooks'
+import { capitalize } from 'lodash-es'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 
 import { StepCard } from '../index.js'
+import { useHeaderStyle, usePanelStyle } from './StepHistoryPanel.hooks.js'
 import {
 	addButtonStyles,
 	ButtonContainer,
 	Container,
 	icons,
 	PanelHeader,
-	panelStyles,
+	stepCardStyle,
+	tableTransformStyle,
 	Verb,
 } from './StepHistoryPanel.styles.js'
 import type { StepHistoryPanelProps } from './StepHistoryPanel.types.js'
+import { TableTransform } from './TableTransform.js'
 
 export const StepHistoryPanel: React.FC<StepHistoryPanelProps> = memo(
 	function StepsList({
@@ -30,14 +35,41 @@ export const StepHistoryPanel: React.FC<StepHistoryPanelProps> = memo(
 		steps,
 		outputs,
 		onDeleteClicked,
-		onEditClicked,
 		onDuplicateClicked,
 		onSelect,
 		onStartNewStep,
 		buttonId,
+		graph,
+		onCreate,
+		nextInputTable,
 	}) {
 		const ref = useRef<HTMLDivElement>(null)
-		// const theme = useThematic()
+		const [editStep, setEditStep] = useState<Step | undefined>()
+		const [showEdit, { setTrue: setShowEdit, setFalse: setHideEdit }] =
+			useBoolean(false)
+		const headerStyle = useHeaderStyle()
+		const panelStyle = usePanelStyle()
+
+		const onEdit = useCallback(
+			(step: Step) => {
+				setShowEdit()
+				setEditStep(step)
+			},
+			[setEditStep, setShowEdit],
+		)
+
+		const onCancelEdit = useCallback(() => {
+			setHideEdit()
+			setEditStep(undefined)
+		}, [setHideEdit, setEditStep])
+
+		const onTransformRequested = useCallback(
+			(step: Step, output: string | undefined, index?: number) => {
+				onCancelEdit()
+				onCreate?.(step, output, index)
+			},
+			[onCancelEdit, onCreate],
+		)
 
 		useEffect(() => {
 			const f = () => {
@@ -52,30 +84,43 @@ export const StepHistoryPanel: React.FC<StepHistoryPanelProps> = memo(
 				isOpen={panelIsOpen}
 				onDismiss={onDismissPanel}
 				closeButtonAriaLabel="Close"
-				styles={panelStyles}
+				styles={panelStyle}
 			>
 				<Container>
 					<CollapsiblePanelContainer>
 						{steps.map((step, index) => {
 							return (
 								<CollapsiblePanel
-									onRenderHeader={() => onRenderHeader(step, outputs[index])}
-									// headerStyle={{
-									// 	backgroundColor: theme.application().lowContrast().hex(),
-									// 	color: 'theme.application().highContrast().hex()
-									// }}
 									key={index}
+									headerStyle={headerStyle}
+									onRenderHeader={() => onRenderHeader(step, outputs[index])}
 								>
-									<StepCard
-										output={outputs[index]}
-										onDelete={onDeleteClicked}
-										onEdit={onEditClicked}
-										onDuplicate={onDuplicateClicked}
-										onSelect={onSelect}
-										key={index}
-										step={step}
-										index={index}
-									/>
+									{editStep?.id === step.id && showEdit ? (
+										<TableTransform
+											key={index}
+											step={step}
+											index={index}
+											graph={graph}
+											style={tableTransformStyle}
+											nextInputTable={nextInputTable}
+											onCancel={onCancelEdit}
+											onTransformRequested={(s, o) =>
+												onTransformRequested(s, o, index)
+											}
+										/>
+									) : (
+										<StepCard
+											key={index}
+											step={step}
+											index={index}
+											output={outputs[index]}
+											style={stepCardStyle}
+											onDelete={onDeleteClicked}
+											onEdit={() => onEdit(step)}
+											onDuplicate={onDuplicateClicked}
+											onSelect={onSelect}
+										/>
+									)}
 								</CollapsiblePanel>
 							)
 						})}
@@ -103,7 +148,7 @@ function onRenderHeader(step: Step, output?: string): JSX.Element {
 	return (
 		<PanelHeader>
 			<Verb>{step.verb}</Verb>
-			{output}
+			{capitalize(output)}
 		</PanelHeader>
 	)
 }

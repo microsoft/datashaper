@@ -49,7 +49,7 @@ export interface TableTransformProps {
 	 */
 	nextInputTable?: string
 
-	// target?: string
+	target?: string
 
 	/**
 	 * Indicates that the input table should be hidden or else shown and editable by the user.
@@ -68,4 +68,10 @@ export interface TableTransformProps {
 	 */
 	graph: GraphManager
 	onVerbChange: (verb: Verb) => void
+	style?: React.CSSProperties
+	onCancel?: () => void
+
+	toggleGuidance?: () => void
+	showGuidance?: boolean
+	showGuidanceButton?: boolean
 }

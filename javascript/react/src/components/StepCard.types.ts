@@ -9,7 +9,10 @@ export interface StepCardProps {
 	step: Step
 	index: number
 	output: string | undefined
-	style?: IDocumentCardStyles
+	style?: {
+		card?: IDocumentCardStyles
+		actions?: IDocumentCardStyles
+	}
 	onEdit?: (step: Step, index: number) => void
 	onDelete?: (index: number) => void
 	onDuplicate?: (step: Step) => void

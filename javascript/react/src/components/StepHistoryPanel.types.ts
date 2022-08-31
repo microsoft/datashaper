@@ -4,18 +4,22 @@
  */
 import type { Step } from '@datashaper/core'
 
+import type { TableTransformProps } from '../index.js'
+
 export interface PanelProps {
 	panelIsOpen: boolean
 	onDismissPanel?: () => void
 }
 
-export interface StepHistoryPanelProps extends PanelProps {
+export interface StepHistoryPanelProps
+	extends PanelProps,
+		Pick<TableTransformProps, 'graph' | 'nextInputTable'> {
 	steps: Step[]
 	outputs: Array<string | undefined>
 	buttonId?: string | undefined
 	onDeleteClicked?: (index: number) => void
-	onEditClicked?: (step: Step, index: number) => void
 	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
 	onStartNewStep?: () => void
+	onCreate?: (step: Step, output: string | undefined, index?: number) => void
 }

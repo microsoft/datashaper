@@ -35,12 +35,23 @@ export const Verb = styled.span`
 	text-transform: uppercase;
 `
 
-export const panelStyles = {
-	content: {
-		padding: '0',
-		marginTop: '2rem',
+export const stepCardStyle = {
+	card: {
+		root: {
+			border: 'none',
+		},
 	},
-	headerText: {
-		fontWeight: 'bold',
+	actions: {
+		root: {
+			display: 'flex',
+			justifyContent: 'space-between',
+		},
 	},
+}
+
+export const tableTransformStyle: React.CSSProperties = {
+	padding: '1rem 0',
+	display: 'flex',
+	alignItems: 'center',
+	flexDirection: 'column',
 }

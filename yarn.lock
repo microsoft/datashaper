@@ -3774,7 +3774,7 @@ __metadata:
     "@essex/charts-react": ^1.0.5
     "@essex/scripts": ^22.0.5
     "@essex/styled-components": ^0.0.2
-    "@essex/themed-components": ^2.3.2
+    "@essex/themed-components": ^2.4.0
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.4.2
     "@fluentui/react": ^8.77.3
@@ -3895,7 +3895,7 @@ __metadata:
     "@datashaper/verb-guidance": "workspace:^"
     "@essex/hooks": ^4.0.12
     "@essex/scripts": ^22.0.5
-    "@essex/themed-components": ^2.3.2
+    "@essex/themed-components": ^2.4.0
     "@essex/webpack-config": ^21.0.5
     "@fluentui/font-icons-mdl2": ^8.4.2
     "@fluentui/react": ^8.77.3
@@ -4292,9 +4292,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/themed-components@npm:^2.3.2":
-  version: 2.3.2
-  resolution: "@essex/themed-components@npm:2.3.2"
+"@essex/themed-components@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "@essex/themed-components@npm:2.4.0"
   dependencies:
     "@essex/hooks": ^4.0.12
     "@essex/react-animate-height": ^2.1.4
@@ -4324,7 +4324,7 @@ __metadata:
     "@uifabric/icons": ">= 7.3.38"
     react: ">= 18"
     react-dom: ">= 18"
-  checksum: dcd4c88c7775aa5f761df1f140e85b7333cff978e4fc605fffb5111ba6fb9e34bf1b0c217b56556ee5961332c94e7a64839d42cc6187ce7fe6998a489f61f8f2
+  checksum: ba792ee0c258de79c5171936d7cebc35ff0e11ac9b8aa1d268a60ec220513f34c8fb798374a04589bce335a9df1c3384f1a93e6c5683e04d5987fcb27ff40b36
   languageName: node
   linkType: hard
 

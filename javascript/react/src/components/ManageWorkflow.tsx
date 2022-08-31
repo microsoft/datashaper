@@ -40,6 +40,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		onSelect,
 		onUpdateOutput,
 		onUpdateWorkflow,
+		nextInputTable,
 		historyView = false,
 		...props
 	}) {
@@ -64,7 +65,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			isOpen: isDeleteModalOpen,
 		} = useDeleteConfirm(useOnDeleteStep(graph))
 		const onEdit = useOnEditStep(setStep, setIndex, showModal)
-		const onCreate = useOnCreateStep(index, dismissModal, onSave, onSelect)
+		const onCreate = useOnCreateStep(onSave, onSelect, dismissModal)
 		const onDuplicate = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(index)
 
@@ -75,6 +76,13 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 				onSelect && onSelect(tableName)
 			},
 			[onSelect, graph],
+		)
+
+		const onTransformRequested = useCallback(
+			(step: Step, output: string | undefined) => {
+				onCreate(step, output, index)
+			},
+			[index, onCreate],
 		)
 
 		// parallel array of output names for the steps
@@ -91,12 +99,14 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 						onDismissPanel={onDismissPanel}
 						onDeleteClicked={onDelete}
 						onSelect={onViewStep}
-						onEditClicked={onEdit}
 						steps={steps}
 						outputs={outputs}
 						onDuplicateClicked={onDuplicate}
 						onStartNewStep={showModal}
 						buttonId={addStepButtonId}
+						graph={graph}
+						nextInputTable={nextInputTable}
+						onCreate={onCreate}
 					/>
 				) : (
 					<StepList
@@ -117,7 +127,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 							target={editorTarget}
 							step={step}
 							index={index ?? graph.steps.length}
-							onTransformRequested={onCreate}
+							onTransformRequested={onTransformRequested}
 							graph={graph}
 							onDismiss={dismissModal}
 							styles={modalStyles}

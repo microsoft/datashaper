@@ -9,6 +9,8 @@ export const icons = {
 	info: { iconName: 'Info' },
 }
 
+export const Container = styled.div``
+
 export const StepSelectorContainer = styled.div`
 	margin-bottom: 8px;
 	display: flex;
@@ -17,5 +19,7 @@ export const StepSelectorContainer = styled.div`
 `
 
 export const ButtonContainer = styled.div`
-	margin-top: 8px;
+	margin-top: 10px;
+	gap: 1rem;
+	display: flex;
 `

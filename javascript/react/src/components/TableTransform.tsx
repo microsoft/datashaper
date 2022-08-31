@@ -3,9 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { GraphManager, Verb } from '@datashaper/core'
-import { IconButton, PrimaryButton } from '@fluentui/react'
+import { DefaultButton, IconButton, PrimaryButton } from '@fluentui/react'
 import React, { memo, useCallback } from 'react'
-import styled from 'styled-components'
 
 import { StepComponent } from './StepComponent.js'
 import { StepSelector } from './StepSelector.js'
@@ -16,6 +15,7 @@ import {
 } from './TableTransform.hooks.js'
 import {
 	ButtonContainer,
+	Container,
 	icons,
 	StepSelectorContainer,
 } from './TableTransform.styles.js'
@@ -32,6 +32,8 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		showGuidanceButton,
 		toggleGuidance,
 		onVerbChange,
+		style = {},
+		onCancel,
 	}) {
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
@@ -53,7 +55,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		)
 
 		return (
-			<Container>
+			<Container style={style}>
 				<StepSelectorContainer>
 					<StepSelector
 						placeholder="Select a verb"
@@ -80,6 +82,9 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 						/>
 						<ButtonContainer>
 							<PrimaryButton onClick={handleSaveClick}>Save</PrimaryButton>
+							{onCancel ? (
+								<DefaultButton onClick={onCancel}>Cancel</DefaultButton>
+							) : null}
 						</ButtonContainer>
 					</>
 				)}
@@ -87,5 +92,3 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		)
 	},
 )
-
-const Container = styled.div``

@@ -42,7 +42,7 @@
 		"@datashaper/verb-guidance": "workspace:^",
 		"@essex/charts-react": "^1.0.5",
 		"@essex/styled-components": "^0.0.2",
-		"@essex/themed-components": "^2.3.2",
+		"@essex/themed-components": "^2.4.0",
 		"@fluentui/font-icons-mdl2": "^8.4.2",
 		"d3-format": "^3.1.0",
 		"immer": "^9.0.14",

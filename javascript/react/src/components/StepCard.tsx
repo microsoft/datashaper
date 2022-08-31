@@ -19,7 +19,10 @@ export const StepCard: React.FC<StepCardProps> = memo(function StepCard({
 	onDelete,
 	onDuplicate,
 	onSelect,
-	style = {},
+	style = {
+		card: {},
+		actions: {},
+	},
 }) {
 	const Description = useMemo(() => selectStepDescription(step), [step])
 	const stepActions = useStepActions(
@@ -32,7 +35,7 @@ export const StepCard: React.FC<StepCardProps> = memo(function StepCard({
 	)
 
 	return (
-		<Card styles={merge(styles.card, style)}>
+		<Card styles={merge({}, styles.card, style.card)}>
 			<CardContent>
 				<Description
 					step={step}
@@ -44,7 +47,7 @@ export const StepCard: React.FC<StepCardProps> = memo(function StepCard({
 			</CardContent>
 			<DocumentCardActions
 				className={`step-card-${index}`}
-				styles={styles.actions}
+				styles={merge({}, styles.actions, style.actions)}
 				actions={stepActions}
 			/>
 		</Card>

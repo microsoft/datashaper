@@ -4,7 +4,7 @@
  */
 import styled from '@essex/styled-components'
 export const Container = styled.div`
-	width: 100%;
+	width: auto;
 	display: flex;
 	flex-direction: column;
 `
