@@ -24,7 +24,7 @@ export default function toposort<T = string>(
 export function array<T = string>(
 	nodes: ReadonlyArray<T>,
 	edges: ReadonlyArray<[T, T | undefined]>,
-) {
+): T[] {
 	let cursor = nodes.length
 	let i = cursor
 	const sorted = new Array(cursor)

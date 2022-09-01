@@ -53,7 +53,7 @@ export function argsHasOutputColumn(args: any): boolean;
 // Warning: (ae-missing-release-tag) "array" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function array<T = string>(nodes: ReadonlyArray<T>, edges: ReadonlyArray<[T, T | undefined]>): any[];
+export function array<T = string>(nodes: ReadonlyArray<T>, edges: ReadonlyArray<[T, T | undefined]>): T[];
 
 // Warning: (ae-missing-release-tag) "BaseNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
