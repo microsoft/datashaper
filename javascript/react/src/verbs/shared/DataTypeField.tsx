@@ -41,7 +41,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 							new Date(val).toISOString(),
 					  )
 			},
-			[onKeyChange, onValueChange],
+			[onKeyChange, onValueChange, dataType, isKey, value, keyValue],
 		)
 
 		const onChangeTextFieldValue = useCallback(
@@ -54,7 +54,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					? onKeyChange(value.toString(), val.toString())
 					: onValueChange(keyValue, val)
 			},
-			[onKeyChange, onValueChange],
+			[onKeyChange, onValueChange, dataType, isKey, value, keyValue],
 		)
 
 		const spinButtonOnChange = useCallback(
@@ -64,7 +64,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
 				}
 			},
-			[onKeyChange, onValueChange],
+			[onKeyChange, onValueChange, dataType, isKey, value, keyValue],
 		)
 
 		const dropDownOnChange = useCallback(
@@ -78,7 +78,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						: onValueChange(keyValue, newValue.key === 'true' ? true : false)
 				}
 			},
-			[onKeyChange, onValueChange],
+			[onKeyChange, onValueChange, isKey, value, keyValue],
 		)
 
 		return (
