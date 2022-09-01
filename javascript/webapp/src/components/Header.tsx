@@ -9,17 +9,10 @@ import { classNames, Container, Spacer, Title } from './Header.styles.js'
 import type { HeaderProps } from './Header.types.js'
 
 export const Header: React.FC<HeaderProps> = memo(function Header({
-	onMenuClick,
 	onSettingsClick,
 }) {
 	return (
 		<Container>
-			<FontIcon
-				aria-label="Menu"
-				iconName="CollapseMenu"
-				className={classNames.white}
-				onClick={onMenuClick}
-			/>
 			<Title>DataShaper</Title>
 			<Spacer />
 			<FontIcon

@@ -67,7 +67,7 @@ export class GraphManager {
 		this._syncOutputArrays()
 	}
 
-	public setInputs(inputs: Map<string, TableContainer>) {
+	public setInputs(inputs: Map<string, TableContainer>): void {
 		// clear existing inputs
 		this._workflow.clearInputs()
 

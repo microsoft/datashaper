@@ -3,20 +3,30 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import styled from '@essex/styled-components'
+import { Label } from '@fluentui/react'
 
 export const Container = styled.div`
+	margin-top: 8px;
+	margin-left: 16px;
+`
+
+export const Input = styled.div`
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 `
 
-export const Or = styled.div`
-	margin-left: 8px;
-	margin-right: 8px;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	color: ${({ theme }) => theme.application().midContrast().hex()};
+export const InputLabel = styled.div`
+	width: 84px;
+`
+
+export const OrLabel = styled(Label)`
+	display: inline;
+	font-style: italic;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-left: 1px solid
+		${({ theme }) => theme.application().lowContrast().hex()};
 `
 
 export const spinStyles = {

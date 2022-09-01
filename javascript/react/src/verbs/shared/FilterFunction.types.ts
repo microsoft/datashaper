@@ -10,5 +10,4 @@ export interface FilterFunctionProps {
 	column: string
 	criterion: Criterion
 	onChange?: (filter?: Criterion) => void
-	suppressLabels?: boolean
 }

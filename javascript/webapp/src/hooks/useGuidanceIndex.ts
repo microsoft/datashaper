@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { debugPage } from '../pages/DebugPage.js'
-import { prepareDataPage } from '../pages/PrepareDataPage.js'
+import { debugPage } from '../pages/DebugPage/DebugPage.js'
+import { prepareDataPage } from '../pages/PrepareDataPage/PrepareDataPage.js'
 
 export function useGuidanceIndex(): {
 	debugPage: string

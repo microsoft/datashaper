@@ -60,7 +60,7 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 				<ColumnPairs>{columnPairs}</ColumnPairs>
 				<ActionButton
 					onClick={handleButtonClick}
-					iconProps={{ iconName: 'Add' }}
+					iconProps={addIconProps}
 					disabled={disabled}
 				>
 					Add mapping
@@ -149,7 +149,7 @@ const ColumnPair: React.FC<{
 
 			<IconButton
 				title={'Remove this Recode'}
-				iconProps={{ iconName: 'Delete' }}
+				iconProps={deleteIconProps}
 				onClick={handleDeleteClick}
 			/>
 		</ColumnPairContainer>
@@ -169,6 +169,9 @@ const ColumnPairs = styled.div`
 
 const ColumnPairContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 `
+
+const addIconProps = { iconName: 'Add' }
+const deleteIconProps = { iconName: 'Delete' }
