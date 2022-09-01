@@ -68,7 +68,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 				{filters}
 				<ActionButton
 					onClick={handleButtonClick}
-					iconProps={{ iconName: 'Add' }}
+					iconProps={addIconProps}
 					disabled={!dataTable}
 				>
 					Add criteria
@@ -120,3 +120,5 @@ function useFilters(
 		)
 	})
 }
+
+const addIconProps = { iconName: 'Add' }

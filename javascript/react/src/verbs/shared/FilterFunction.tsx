@@ -206,7 +206,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					{operatorDropdown}
 					<IconButton
 						title={'Remove this criterion'}
-						iconProps={{ iconName: 'Delete' }}
+						iconProps={deleteIconProps}
 						onClick={handleDeleteClick}
 					/>
 				</LeftAlignedRow>
@@ -278,3 +278,5 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 		)
 	},
 )
+
+const deleteIconProps = { iconName: 'Delete' }

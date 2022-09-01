@@ -54,7 +54,7 @@ export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
 				<ColumnPairs>{columnPairs}</ColumnPairs>
 				<ActionButton
 					onClick={handleButtonClick}
-					iconProps={{ iconName: 'Add' }}
+					iconProps={addIconProps}
 					disabled={disabled}
 				>
 					Add rename
@@ -140,7 +140,7 @@ const ColumnPair: React.FC<{
 			/>
 			<IconButton
 				title={'Remove this rename'}
-				iconProps={{ iconName: 'Delete' }}
+				iconProps={deleteIconProps}
 				onClick={handleDeleteClick}
 			/>
 		</ColumnPairContainer>
@@ -163,3 +163,6 @@ const ColumnPairContainer = styled.div`
 	justify-content: flex-start;
 	align-items: center;
 `
+
+const addIconProps = { iconName: 'Add' }
+const deleteIconProps = { iconName: 'Delete' }
