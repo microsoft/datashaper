@@ -1,0 +1,13 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/datapackage/v1.json",
+	"name": "NHEFS Causal Analysis",
+	"title": "National Health Epidemiologic Followup Study",
+	"resources": [
+		{
+			"path": "nhefs/datatable.json"
+		},
+		{
+			"path": "nhefs-transformed/derived-table.json"
+		}
+	]
+}
