@@ -13,5 +13,6 @@ export const Container = styled.div`
 export const Vertical = styled.div<{ index: number }>`
 	display: flex;
 	flex-direction: column;
+	gap: 8px;
 	margin-top: ${({ index }) => (index > 0 ? 6 : 0)}px;
 `

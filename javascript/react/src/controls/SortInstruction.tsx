@@ -4,8 +4,10 @@
  */
 import { SortDirection } from '@datashaper/schema'
 import { IconButton } from '@fluentui/react'
+import merge from 'lodash-es/merge.js'
 import { memo } from 'react'
 
+import { dropdownStyles } from '../styles.js'
 import {
 	useHandleColumnChange,
 	useHandleDirectionClick,
@@ -13,6 +15,13 @@ import {
 import { Container, icons } from './SortInstruction.styles.js'
 import type { SortInstructionProps } from './SortInstruction.types.js'
 import { TableColumnDropdown } from './TableColumnDropdown.js'
+
+const narrowerStyles = merge({}, dropdownStyles, {
+	root: {
+		// subtract the sort button width from the standard dropdown width
+		width: dropdownStyles.root.width - 32,
+	},
+})
 
 /**
  * Provides a column dropdown, asc/desc toggle, and delete button for editing a table sort.
@@ -32,6 +41,7 @@ export const SortInstruction: React.FC<SortInstructionProps> = memo(
 					label={undefined}
 					selectedKey={column}
 					onChange={handleColumnChange}
+					styles={narrowerStyles}
 				/>
 				<IconButton
 					toggle

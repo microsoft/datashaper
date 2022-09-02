@@ -39,11 +39,9 @@ export const Title = styled.h1`
 `
 
 export const iconClass = mergeStyles({
-	fontSize: 25,
-	height: 25,
-	width: 25,
-	// goofy manual centering adjustment; icon appears to not center with flexbox mechanisms
-	marginTop: 3,
+	fontSize: 20,
+	height: 20,
+	width: 20,
 	cursor: 'pointer',
 })
 

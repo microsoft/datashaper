@@ -60,6 +60,14 @@ export class Workflow {
 		return WorkflowSchemaInstance.isValid(workflowJson)
 	}
 
+	public get name(): string | undefined {
+		return this._name
+	}
+
+	public get description(): string | undefined {
+		return this._description
+	}
+
 	public get input(): Set<string> {
 		return this._input
 	}

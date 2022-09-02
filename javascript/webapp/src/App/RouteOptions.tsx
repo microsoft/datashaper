@@ -9,18 +9,18 @@ import { Pages } from './Pages.js'
 
 const PrepareDataPage = lazy(() =>
 	/* webpackChunkName: "PrepareDataPage " */ import(
-		'../pages/PrepareDataPage.js'
+		'../pages/PrepareDataPage/PrepareDataPage.js'
 	).then(module => ({
 		default: module.PrepareDataPage,
 	})),
 )
 
 const DebugPage = lazy(() =>
-	/* webpackChunkName: "DebugPage " */ import('../pages/DebugPage.js').then(
-		module => ({
-			default: module.DebugPage,
-		}),
-	),
+	/* webpackChunkName: "DebugPage " */ import(
+		'../pages/DebugPage/DebugPage.js'
+	).then(module => ({
+		default: module.DebugPage,
+	})),
 )
 
 export const RouteOptions: React.FC = memo(function RouteOptions() {

@@ -16,10 +16,10 @@ import type { Workflow } from '@datashaper/workflow'
 import { ActionButton } from '@fluentui/react'
 import { memo, useState } from 'react'
 
-import { ControlBar } from '../components/ControlBar.js'
-import { InputTables } from '../components/InputTables.js'
-import { Section } from '../components/Section.js'
-import { StepOutput } from '../components/StepOutput.js'
+import { ControlBar } from './components/ControlBar.js'
+import { InputTables } from './components/InputTables.js'
+import { Section } from './components/Section.js'
+import { StepOutput } from './components/StepOutput.js'
 import {
 	useAddFilesHandler,
 	useCreateStepHandler,
@@ -28,7 +28,6 @@ import {
 } from './DebugPage.hooks.js'
 import {
 	Buttons,
-	columnsStyle,
 	Commands,
 	Container,
 	icons,
@@ -45,7 +44,6 @@ const DEFAULT_STATS = [
 ]
 
 export const DebugPage: React.FC = memo(function DebugPage() {
-	const [compact, setCompact] = useState<boolean>(true)
 	const [autoType, setAutoType] = useState<boolean>(true)
 	const [features, setFeatures] = useState<DetailsListFeatures>({
 		statsColumnHeaders: true,
@@ -82,9 +80,8 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 					<Section title="Inputs">
 						<InputTables
 							tables={inputTables}
-							config={columnsStyle}
 							features={features}
-							compact={compact}
+							compact={true}
 						/>
 					</Section>
 				</InputsSection>
@@ -96,7 +93,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 						graph={graph}
 						output={outputs[index]}
 						features={features}
-						compact={compact}
+						compact={true}
 						onStepChange={onStepSave}
 						onStepOutputChange={onStepOutputChange}
 					/>

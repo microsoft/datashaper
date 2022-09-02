@@ -41,3 +41,12 @@ export const narrowDropdownStyles = {
 		width: 135,
 	},
 }
+
+/**
+ * For very narrow side-by-sides with a delete button for example
+ */
+export const narrowerDropdownStyles = {
+	root: {
+		width: 99,
+	},
+}

@@ -8,9 +8,11 @@ import { memo } from 'react'
 import { Section } from './Section.js'
 import {
 	columnsStyle,
-	OutputsColumn,
+	OutputColumn,
 	StepBlock,
-	StepsColumn,
+	StepColumn,
+	StepConfig,
+	StepDisplay,
 	TableSection,
 } from './StepOutput.styles.js'
 import type { StepOutputProps } from './StepOutput.types.js'
@@ -31,18 +33,23 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	return (
 		<StepBlock className="step-block">
 			<Section title={`Step ${index + 1}`} subtitle={step.verb}>
-				<StepsColumn className="steps-column">
-					<StepComponent
-						step={step}
-						graph={graph}
-						index={index}
-						output={output}
-						onChange={onStepChange}
-						onChangeOutput={o => onStepOutputChange(step, o)}
-					/>
-				</StepsColumn>
-				<StepDescription step={step} output={output} />
-				<OutputsColumn className="outputs-column">
+				<StepColumn className="steps-column">
+					<StepConfig>
+						<StepComponent
+							step={step}
+							graph={graph}
+							index={index}
+							output={output}
+							onChange={onStepChange}
+							onChangeOutput={o => onStepOutputChange(step, o)}
+						/>
+					</StepConfig>
+					<StepDisplay>
+						<StepDescription step={step} output={output} />
+					</StepDisplay>
+				</StepColumn>
+
+				<OutputColumn className="outputs-column">
 					{table ? (
 						<TableSection className="table-section">
 							<Table
@@ -54,7 +61,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 							/>
 						</TableSection>
 					) : null}
-				</OutputsColumn>
+				</OutputColumn>
 			</Section>
 		</StepBlock>
 	)

@@ -88,7 +88,7 @@ export function useHandleValueChange(
 				},
 			})
 		},
-		[step, onChange],
+		[step, onChange, dataType],
 	)
 }
 

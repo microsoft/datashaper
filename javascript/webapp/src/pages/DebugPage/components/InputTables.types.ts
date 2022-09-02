@@ -9,7 +9,7 @@ import type { ColumnConfigMap } from './Table.types.js'
 
 export interface InputTablesProps {
 	tables: TableContainer[]
-	config: ColumnConfigMap
+	config?: ColumnConfigMap
 	features?: DetailsListFeatures
 	compact?: boolean
 }

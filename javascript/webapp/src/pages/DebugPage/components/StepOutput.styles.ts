@@ -6,7 +6,6 @@ import styled from 'styled-components'
 
 export const columnsStyle = {
 	ID: {
-		width: 50,
 		iconName: 'FavoriteStarFill',
 	},
 }
@@ -15,11 +14,19 @@ export const StepBlock = styled.div`
 	display: flex;
 `
 
-export const StepsColumn = styled.div`
-	width: 250px;
+export const StepColumn = styled.div`
+	display: flex;
 `
 
-export const OutputsColumn = styled.div`
+export const StepConfig = styled.div`
+	width: 280px;
+`
+
+export const StepDisplay = styled.div`
+	width: 220px;
+`
+
+export const OutputColumn = styled.div`
 	margin-left: 40px;
 	display: flex;
 	flex-direction: column;

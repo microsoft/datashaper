@@ -8,7 +8,6 @@ import { coerce } from '@datashaper/tables'
 import type { Step } from '@datashaper/workflow'
 import styled from '@essex/styled-components'
 import { ActionButton, Icon, IconButton } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
 import { useColumnType, useStepDataTable } from '../hooks/index.js'
@@ -45,7 +44,6 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 		const handleButtonClick = useHandleAddButtonClick(step, values, onChange)
 
 		const columnPairs = useRecodePairs(
-			dataTable,
 			step,
 			dataType,
 			handleRecodeKeyChange,
@@ -60,7 +58,7 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 				<ColumnPairs>{columnPairs}</ColumnPairs>
 				<ActionButton
 					onClick={handleButtonClick}
-					iconProps={{ iconName: 'Add' }}
+					iconProps={addIconProps}
 					disabled={disabled}
 				>
 					Add mapping
@@ -71,7 +69,6 @@ export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
 )
 
 function useRecodePairs(
-	table: ColumnTable | undefined,
 	step: Step<RecodeArgs>,
 	dataType: DataType,
 	onKeyChange: (oldKey: Value, newKey: Value) => void,
@@ -92,7 +89,7 @@ function useRecodePairs(
 				/>
 			)
 		})
-	}, [table, step, dataType, onKeyChange, onValueChange, onDelete])
+	}, [step, dataType, onKeyChange, onValueChange, onDelete])
 }
 
 const ColumnPair: React.FC<{
@@ -149,7 +146,7 @@ const ColumnPair: React.FC<{
 
 			<IconButton
 				title={'Remove this Recode'}
-				iconProps={{ iconName: 'Delete' }}
+				iconProps={deleteIconProps}
 				onClick={handleDeleteClick}
 			/>
 		</ColumnPairContainer>
@@ -169,6 +166,9 @@ const ColumnPairs = styled.div`
 
 const ColumnPairContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 `
+
+const addIconProps = { iconName: 'Add' }
+const deleteIconProps = { iconName: 'Delete' }

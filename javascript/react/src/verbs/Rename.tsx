@@ -23,6 +23,7 @@ import {
 	useStepDataTable,
 	useTableColumnNames,
 } from '../hooks/index.js'
+import { narrowerDropdownStyles } from '../styles.js'
 import type { StepComponentProps } from '../types.js'
 import {
 	useDisabled,
@@ -53,7 +54,7 @@ export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
 				<ColumnPairs>{columnPairs}</ColumnPairs>
 				<ActionButton
 					onClick={handleButtonClick}
-					iconProps={{ iconName: 'Add' }}
+					iconProps={addIconProps}
 					disabled={disabled}
 				>
 					Add rename
@@ -125,11 +126,7 @@ const ColumnPair: React.FC<{
 				label={undefined}
 				selectedKey={oldname}
 				onChange={handleColumnChange}
-				styles={{
-					root: {
-						width: 130,
-					},
-				}}
+				styles={narrowerDropdownStyles}
 			/>
 			<Icon
 				iconName={'Forward'}
@@ -139,11 +136,11 @@ const ColumnPair: React.FC<{
 				placeholder={'New name'}
 				value={newname}
 				onChange={handleTextChange}
-				styles={{ root: { width: 130 } }}
+				styles={narrowerDropdownStyles}
 			/>
 			<IconButton
 				title={'Remove this rename'}
-				iconProps={{ iconName: 'Delete' }}
+				iconProps={deleteIconProps}
 				onClick={handleDeleteClick}
 			/>
 		</ColumnPairContainer>
@@ -163,6 +160,9 @@ const ColumnPairs = styled.div`
 
 const ColumnPairContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 `
+
+const addIconProps = { iconName: 'Add' }
+const deleteIconProps = { iconName: 'Delete' }
