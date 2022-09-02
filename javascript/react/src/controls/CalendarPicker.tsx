@@ -10,7 +10,8 @@ import {
 	FocusTrapZone,
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo, useCallback, useRef, useState } from 'react'
+import { useThematic } from '@thematic/react'
+import { memo, useCallback, useMemo, useRef, useState } from 'react'
 
 import {
 	CalendarButton,
@@ -38,6 +39,15 @@ export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 			[hideCalendar],
 		)
 
+		const theme = useThematic()
+		const iconColors = useMemo(
+			() => ({
+				disabled: theme.application().midContrast().hex(),
+				enabled: theme.application().foreground().hex(),
+			}),
+			[theme],
+		)
+
 		return (
 			<Container>
 				<CalendarContainer ref={buttonContainerRef}>
@@ -48,8 +58,8 @@ export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 						onClick={!disabled ? toggleShowCalendar : undefined}
 						style={
 							disabled
-								? { cursor: 'default', color: 'rgb(118, 118, 118)' }
-								: { cursor: 'pointer', color: 'rgb(241, 241, 241)' }
+								? { cursor: 'default', color: iconColors.disabled }
+								: { cursor: 'pointer', color: iconColors.enabled }
 						}
 					/>
 					{selectedDate !== undefined && !cleanLabel ? (
