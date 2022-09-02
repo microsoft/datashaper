@@ -8,10 +8,10 @@ export const buttonStyles = {
 		border: 'none',
 		float: 'right',
 		fontSize: '1rem',
-		right: '1rem',
+		padding: 0,
 		backgroundColor: 'transparent',
-	},
-	flexContainer: {
-		gap: '0.5rem',
+		alignSelf: 'start',
+		width: '2rem',
+		minWidth: 'unset',
 	},
 }

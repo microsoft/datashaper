@@ -5,11 +5,10 @@
 import type { TableContainer } from '@datashaper/tables'
 import type { Workflow } from '@datashaper/workflow'
 
-import type { PanelProps, TransformModalProps } from '../index.js'
+import type { TransformModalProps } from '../index.js'
 
 export interface ManageWorkflowProps
-	extends Partial<PanelProps>,
-		Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
+	extends Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
 	/**
 	 * The workflow specification
 	 */

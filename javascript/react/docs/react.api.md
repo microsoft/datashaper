@@ -292,7 +292,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps>;
 // Warning: (ae-missing-release-tag) "ManageWorkflowProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ManageWorkflowProps extends Partial<PanelProps>, Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
+export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
     // (undocumented)
     historyView?: boolean;
     // (undocumented)
@@ -569,9 +569,15 @@ export interface TableTransformProps {
     hideInput?: boolean;
     hideOutput?: boolean;
     index: number;
+    // (undocumented)
+    isEditing?: boolean;
     nextInputTable?: string;
     // (undocumented)
-    onCancel?: () => void;
+    onDelete?: (index: number) => void;
+    // (undocumented)
+    onDuplicate?: (step: Step) => void;
+    // (undocumented)
+    onPreview?: (name: string) => void;
     onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
     // (undocumented)
     onVerbChange?: (verb: Verb) => void;

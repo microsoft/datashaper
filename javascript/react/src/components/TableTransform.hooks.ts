@@ -59,9 +59,11 @@ export function useStepOutputHandling(
 	step: Step | undefined,
 ): {
 	output: string | undefined
+	outputHasChanged: boolean
 	onOutputChanged: (name: string | undefined) => void
 } {
 	const [output, setOutput] = useState<string>()
+	const [initialOutput, setInitialOutput] = useState<string>('')
 
 	const stepOutput = graph.outputDefinitions.find(t => t.node === step?.id)
 	useEffect(
@@ -73,11 +75,21 @@ export function useStepOutputHandling(
 		[stepOutput],
 	)
 
+	useEffect(
+		function useOutputNameHasChanged() {
+			if (output) {
+				setInitialOutput(prev => (!prev ? output : prev))
+			}
+		},
+		[output, setInitialOutput],
+	)
+
 	return useMemo(
 		() => ({
 			output,
+			outputHasChanged: output !== initialOutput,
 			onOutputChanged: setOutput,
 		}),
-		[output, setOutput],
+		[output, initialOutput, setOutput],
 	)
 }

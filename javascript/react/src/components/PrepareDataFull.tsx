@@ -3,17 +3,20 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableMetadata } from '@datashaper/schema'
-import { Icon } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback } from 'react'
 
+import { HistoryButton } from './HistoryButton.js'
 import { ManageWorkflow } from './ManageWorkflow.js'
 import {
+	Aside,
+	AsideHeader,
 	Container,
 	InputContainer,
+	Main,
 	OutputContainer,
 	SectionTitle,
-	StepsTrayContainer,
+	Title,
 	WorkflowContainer,
 } from './PrepareDataFull.styles.js'
 import type { PrepareDataFullProps } from './PrepareDataFull.types.js'
@@ -48,48 +51,51 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 		)
 
 		return (
-			<Container>
-				<InputContainer>
-					<SectionTitle>Tables</SectionTitle>
-					<TableListBar
-						loading={false}
-						inputs={inputs}
-						derived={derived}
-						selected={selectedTableId}
-						onSelect={onSelectedTableIdChanged}
-					/>
-				</InputContainer>
-				<StepsTrayContainer
-					stepsPosition={stepsPosition}
-					isCollapsed={isCollapsed}
-					className="steps"
-				>
-					<SectionTitle isCollapsed={isCollapsed} onClick={toggleCollapsed}>
-						Steps <Icon iconName="ChevronDown" />
-					</SectionTitle>
-					<WorkflowContainer>
+			<Container isCollapsed={isCollapsed}>
+				<Main>
+					<InputContainer>
+						<SectionTitle>Tables</SectionTitle>
+						<TableListBar
+							loading={false}
+							inputs={inputs}
+							derived={derived}
+							selected={selectedTableId}
+							onSelect={onSelectedTableIdChanged}
+						/>
+					</InputContainer>
+					<OutputContainer stepsPosition={stepsPosition}>
+						<SectionTitle>Preview</SectionTitle>
+						<PreviewTable
+							onChangeMetadata={onUpdateMetadata}
+							headerCommandBar={outputHeaderCommandBar}
+							table={selectedTable?.table}
+							metadata={selectedTable?.metadata}
+							name={selectedTableId}
+						/>
+					</OutputContainer>
+				</Main>
+				<Aside isCollapsed={isCollapsed}>
+					<AsideHeader isCollapsed={isCollapsed}>
+						<HistoryButton onClick={toggleCollapsed} />
+						{isCollapsed ? (
+							<span>({workflow?.steps?.length || 0})</span>
+						) : (
+							<Title isCollapsed={isCollapsed}>
+								History ({workflow?.steps?.length || 0})
+							</Title>
+						)}
+					</AsideHeader>
+					<WorkflowContainer isCollapsed={isCollapsed}>
 						<ManageWorkflow
 							inputs={inputs}
 							workflow={workflow}
 							onSelect={onSelectedTableIdChanged}
 							onUpdateOutput={onUpdateOutput}
 							onUpdateWorkflow={onUpdateWorkflow}
+							historyView={true}
 						/>
 					</WorkflowContainer>
-				</StepsTrayContainer>
-				<OutputContainer
-					stepsPosition={stepsPosition}
-					isCollapsed={isCollapsed}
-				>
-					<SectionTitle>Preview</SectionTitle>
-					<PreviewTable
-						onChangeMetadata={onUpdateMetadata}
-						headerCommandBar={outputHeaderCommandBar}
-						table={selectedTable?.table}
-						metadata={selectedTable?.metadata}
-						name={selectedTableId}
-					/>
-				</OutputContainer>
+				</Aside>
 			</Container>
 		)
 	},

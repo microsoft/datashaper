@@ -5,7 +5,12 @@
 import styled from '@essex/styled-components'
 
 export const addButtonStyles = {
-	root: { padding: '0 4px 0 6px', whiteSpace: 'nowrap', width: '100%' },
+	root: {
+		padding: '0 4px 0 6px',
+		whiteSpace: 'nowrap',
+		width: '90%',
+		margin: '0 5%',
+	},
 }
 
 export const icons = {
@@ -15,43 +20,50 @@ export const icons = {
 }
 
 export const Container = styled.div`
-	display: block;
-	overflow: auto;
+	overflow: hidden;
 	padding: 0.1rem;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 90% 10%;
+	width: 100%;
+
+	> div {
+		overflow: hidden auto;
+		height: 100%;
+	}
 `
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled.section`
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 	gap: 18px;
-	margin-top: 1rem;
+	margin-bottom: 1rem;
 `
 export const PanelHeader = styled.div`
 	font-weight: 500;
 	display: flex;
 	gap: 0.5rem;
+	width: 95%;
 `
 export const Verb = styled.span`
 	text-transform: uppercase;
 `
 
-export const stepCardStyle = {
-	card: {
-		root: {
-			border: 'none',
-		},
-	},
-	actions: {
-		root: {
-			display: 'flex',
-			justifyContent: 'space-between',
-		},
-	},
-}
+export const Columns = styled.span`
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+`
 
 export const tableTransformStyle: React.CSSProperties = {
-	padding: '1rem 0',
+	padding: '1rem 0.5rem',
 	display: 'flex',
-	alignItems: 'center',
+	// alignItems: 'center',
 	flexDirection: 'column',
+	overflow: 'auto',
+	border: 'none',
 }
+
+export const ListWrapper = styled.div`
+	overflow: hidden auto;
+`

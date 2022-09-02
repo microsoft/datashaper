@@ -4,6 +4,5 @@
  */
 
 export interface HistoryButtonProps {
-	steps: number
 	onClick: () => void
 }

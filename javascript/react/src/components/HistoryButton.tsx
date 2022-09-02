@@ -11,12 +11,11 @@ import { buttonStyles } from './HistoryButton.styles.js'
 import type { HistoryButtonProps } from './HistoryButton.types.js'
 
 export const HistoryButton: React.FC<HistoryButtonProps> = memo(
-	function HistoryButton({ onClick, steps }) {
+	function HistoryButton({ onClick }) {
 		const theme = useThematic()
 		return (
 			<Button onClick={onClick} styles={buttonStyles}>
 				<HistoryIcon color={theme.application().accent().hex()} />
-				<span>History ({steps})</span>
 			</Button>
 		)
 	},

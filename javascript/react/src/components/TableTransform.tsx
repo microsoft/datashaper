@@ -3,9 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Verb } from '@datashaper/schema'
-import type { GraphManager } from '@datashaper/workflow'
-import { DefaultButton, IconButton, PrimaryButton } from '@fluentui/react'
-import React, { memo, useCallback } from 'react'
+import type { GraphManager, Step } from '@datashaper/workflow'
+import { ActionButton, IconButton } from '@fluentui/react'
+import { isEqual } from 'lodash-es'
+import React, { memo, useCallback, useMemo } from 'react'
 
 import { StepComponent } from './StepComponent.js'
 import { StepSelector } from './StepSelector.js'
@@ -17,7 +18,9 @@ import {
 import {
 	ButtonContainer,
 	Container,
+	deleteButtonStyles,
 	icons,
+	SaveButtonWrapper,
 	StepSelectorContainer,
 } from './TableTransform.styles.js'
 import type { TableTransformProps } from './TableTransform.types.js'
@@ -34,14 +37,20 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		toggleGuidance,
 		onVerbChange,
 		style = {},
-		onCancel,
+		isEditing,
+		onDelete,
+		onDuplicate,
+		onPreview,
 	}) {
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
 			nextInputTable,
 			graph as GraphManager,
 		)
-		const { output, onOutputChanged } = useStepOutputHandling(graph, step)
+		const { output, outputHasChanged, onOutputChanged } = useStepOutputHandling(
+			graph,
+			step,
+		)
 		const handleSaveClick = useHandleSaveClick(
 			internal,
 			output,
@@ -55,22 +64,28 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 			[handleVerbChange, onVerbChange],
 		)
 
+		const disableSave = useMemo((): boolean => {
+			return isEqual(step, internal) && !outputHasChanged
+		}, [step, internal, outputHasChanged])
+
 		return (
 			<Container style={style}>
-				<StepSelectorContainer>
-					<StepSelector
-						placeholder="Select a verb"
-						verb={internal?.verb}
-						onCreate={onCreate}
-					/>
-					{showGuidanceButton && internal?.verb ? (
-						<IconButton
-							onClick={toggleGuidance}
-							iconProps={icons.info}
-							checked={showGuidance}
+				{!isEditing ? (
+					<StepSelectorContainer>
+						<StepSelector
+							placeholder="Select a verb"
+							verb={internal?.verb}
+							onCreate={onCreate}
 						/>
-					) : null}
-				</StepSelectorContainer>
+						{showGuidanceButton && internal?.verb ? (
+							<IconButton
+								onClick={toggleGuidance}
+								iconProps={icons.info}
+								checked={showGuidance}
+							/>
+						) : null}
+					</StepSelectorContainer>
+				) : null}
 				{internal && (
 					<>
 						<StepComponent
@@ -82,9 +97,33 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 							onChange={setInternal}
 						/>
 						<ButtonContainer>
-							<PrimaryButton onClick={handleSaveClick}>Save</PrimaryButton>
-							{onCancel ? (
-								<DefaultButton onClick={onCancel}>Cancel</DefaultButton>
+							{onPreview ? (
+								<IconButton
+									onClick={() => onPreview(step?.id as string)}
+									iconProps={icons.preview}
+								/>
+							) : null}
+							{onDuplicate ? (
+								<IconButton
+									onClick={() => onDuplicate(step as Step)}
+									iconProps={icons.duplicate}
+								/>
+							) : null}
+							<SaveButtonWrapper>
+								<ActionButton
+									onClick={handleSaveClick}
+									iconProps={icons.checkMark}
+									disabled={disableSave}
+								>
+									Save
+								</ActionButton>
+							</SaveButtonWrapper>
+							{onDelete ? (
+								<IconButton
+									onClick={() => onDelete(index)}
+									iconProps={icons.delete}
+									styles={deleteButtonStyles}
+								/>
 							) : null}
 						</ButtonContainer>
 					</>

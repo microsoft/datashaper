@@ -2,17 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	ManageWorkflow,
-	PrepareDataFull,
-	ProjectMgmtCommandBar,
-} from '@datashaper/react'
+import { PrepareDataFull, ProjectMgmtCommandBar } from '@datashaper/react'
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
-import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useState } from 'react'
 
-import { HistoryButton } from '../components/HistoryButton.js'
 import { useTables } from './PrepareDataPage.hooks.js'
 import { Container, mgmtStyles, Wrapper } from './PrepareDataPage.styles.js'
 
@@ -24,8 +18,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	// workflow steps/output
 	const [output, setOutput] = useState<TableContainer[]>([])
-	const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] =
-		useBoolean(false)
 
 	return (
 		<Container className={'prepare-data-page'}>
@@ -38,17 +30,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				styles={mgmtStyles}
 			/>
 			<Wrapper>
-				<HistoryButton onClick={openPanel} steps={workflow.steps.length} />
-				<ManageWorkflow
-					panelIsOpen={isOpen}
-					onDismissPanel={dismissPanel}
-					inputs={tables}
-					workflow={workflow}
-					onSelect={setSelectedTableId}
-					onUpdateOutput={setOutput}
-					onUpdateWorkflow={setWorkflow}
-					historyView={true}
-				/>
 				<PrepareDataFull
 					inputs={tables}
 					derived={output}

@@ -4,12 +4,19 @@
  */
 
 import styled from '@essex/styled-components'
+import type { IButtonStyles } from '@fluentui/react'
 
 export const icons = {
 	info: { iconName: 'Info' },
+	checkMark: { iconName: 'CheckMark' },
+	preview: { iconName: 'View' },
+	duplicate: { iconName: 'DuplicateRow' },
+	delete: { iconName: 'Delete' },
 }
 
-export const Container = styled.div``
+export const Container = styled.div`
+	position: relative;
+`
 
 export const StepSelectorContainer = styled.div`
 	margin-bottom: 8px;
@@ -20,6 +27,20 @@ export const StepSelectorContainer = styled.div`
 
 export const ButtonContainer = styled.div`
 	margin-top: 10px;
-	gap: 1rem;
 	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 `
+
+export const SaveButtonWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+`
+
+export const deleteButtonStyles: IButtonStyles = {
+	root: {
+		position: 'absolute',
+		right: '1rem',
+	},
+}

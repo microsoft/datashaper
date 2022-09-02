@@ -11,11 +11,9 @@ export interface PanelProps {
 	onDismissPanel?: () => void
 }
 
-export interface StepHistoryPanelProps
-	extends PanelProps,
-		Pick<TableTransformProps, 'graph' | 'nextInputTable'> {
+export interface StepHistoryListProps
+	extends Pick<TableTransformProps, 'graph' | 'nextInputTable'> {
 	steps: Step[]
-	outputs: Array<string | undefined>
 	buttonId?: string | undefined
 	onDeleteClicked?: (index: number) => void
 	onDuplicateClicked?: (step: Step) => void

@@ -67,11 +67,22 @@ export interface TableTransformProps {
 	 * Table store to verify naming to be created
 	 */
 	graph: GraphManager
+
 	onVerbChange?: (verb: Verb) => void
+
 	style?: React.CSSProperties
-	onCancel?: () => void
 
 	toggleGuidance?: () => void
+
 	showGuidance?: boolean
+
 	showGuidanceButton?: boolean
+
+	isEditing?: boolean
+
+	onDelete?: (index: number) => void
+
+	onPreview?: (name: string) => void
+
+	onDuplicate?: (step: Step) => void
 }

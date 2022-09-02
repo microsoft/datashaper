@@ -25,7 +25,46 @@ export const SectionTitle = styled.span<{ isCollapsed?: boolean }>`
 	align-items: center;
 `
 
-export const Container = styled.div`
+export const Container = styled.div<{ isCollapsed: boolean }>`
+	height: 100%;
+	display: grid;
+	grid-template-columns: ${({ isCollapsed }) =>
+		isCollapsed ? 'calc(100% - 3.5rem) 3.5rem' : '75% 25%'};
+`
+export const Aside = styled.div<{ isCollapsed: boolean }>`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'hidden auto')};
+	box-shadow: ${({ isCollapsed }) =>
+		isCollapsed ? 'none' : '-1px 0px 10px 0px rgba(0,0,0,0.3)'};
+`
+
+export const AsideHeader = styled.div<{ isCollapsed: boolean }>`
+	width: 100%;
+	gap: ${({ isCollapsed }) => (isCollapsed ? 0 : '0.5rem')};
+	display: flex;
+	align-items: center;
+	padding: 0.5rem 0 2rem;
+	margin-left: ${({ isCollapsed }) => (isCollapsed ? '0' : '0.5rem')};
+	border-bottom: ${({ theme, isCollapsed }) =>
+		isCollapsed ? 'none' : `1px solid ${theme.application().border().hex()}`};
+`
+
+export const Title = styled.h4<{ isCollapsed: boolean }>`
+	width: 100%;
+	font-weight: 500;
+	background-color: ${({ theme }) => theme.application().background().hex()};
+	color: ${({ theme }) => theme.application().midContrast().hex()};
+	font-size: 1.5rem;
+	text-align: left;
+	padding: 0;
+	margin: 0;
+	display: ${({ isCollapsed }) => (isCollapsed ? 'none' : 'block')};
+`
+
+export const Main = styled.div`
 	display: flex;
 	flex-flow: column;
 	height: 100%;
@@ -45,15 +84,11 @@ export const InputContainer = styled.div`
 
 export const OutputContainer = styled.div<{
 	stepsPosition: string
-	isCollapsed: boolean
 }>`
 	flex: 1 1 auto;
 	display: flex;
 	padding-right: ${GAP}px;
-	max-height: ${({ isCollapsed }) =>
-		`calc(100% - ${
-			INPUT_HEIGHT + (isCollapsed ? 0 : STEPS_HEIGHT) + GAP * 4
-		}px)`};
+	max-height: calc(100% - ${INPUT_HEIGHT + STEPS_HEIGHT + GAP * 4}px);
 	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 2 : 3)};
 `
 
@@ -74,9 +109,9 @@ export const StepsTrayContainer = styled.div<{
 		display: ${({ isCollapsed }) => (isCollapsed ? 'none' : 'grid')};
 	}
 `
-export const WorkflowContainer = styled.div`
-	display: flex;
-	height: 100%;
+export const WorkflowContainer = styled.div<{ isCollapsed: boolean }>`
+	height: 92%;
 	width: 100%;
-	align-items: center;
+	position: relative;
+	visibility: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'visible')};
 `

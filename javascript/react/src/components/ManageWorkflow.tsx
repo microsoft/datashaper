@@ -26,14 +26,12 @@ import {
 } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
-import { StepHistoryPanel } from './StepHistoryPanel.js'
+import { StepHistoryList } from './StepHistoryList.js'
 import { StepList } from './StepList.js'
 import { TableTransformModal } from './TableTransformModal.js'
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 	function ManageWorkflow({
-		panelIsOpen = false,
-		onDismissPanel,
 		workflow,
 		inputs,
 		table,
@@ -94,14 +92,10 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		return (
 			<Container>
 				{historyView ? (
-					<StepHistoryPanel
-						panelIsOpen={panelIsOpen}
-						onDismissPanel={onDismissPanel}
+					<StepHistoryList
 						onDeleteClicked={onDelete}
 						onSelect={onViewStep}
 						steps={steps}
-						outputs={outputs}
-						onDuplicateClicked={onDuplicate}
 						onStartNewStep={showModal}
 						buttonId={addStepButtonId}
 						graph={graph}
