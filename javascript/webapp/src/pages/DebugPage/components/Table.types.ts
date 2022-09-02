@@ -15,7 +15,7 @@ export type ColumnConfigMap = Record<string, ColumnConfig>
 export interface TableProps {
 	name?: string
 	table: ColumnTable
-	config: ColumnConfigMap
+	config?: ColumnConfigMap
 	features?: DetailsListFeatures
 	compact?: boolean
 	onRenameTable?: (name: string) => void

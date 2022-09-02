@@ -77,7 +77,7 @@ export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 					<IconButton
 						onClick={handleHeaderClick}
 						aria-label="Emoji"
-						iconProps={{ iconName: 'AddTo' }}
+						iconProps={addToIconProps}
 					/>
 				</h2>
 			)
@@ -107,3 +107,5 @@ export const Guidance: React.FC<GuidanceProps> = memo(function Guidance({
 		</Container>
 	)
 })
+
+const addToIconProps = { iconName: 'AddTo' }

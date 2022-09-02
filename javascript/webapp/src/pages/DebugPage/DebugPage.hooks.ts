@@ -11,14 +11,6 @@ import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-const identity = (d: any) => d
-
-// default parsers to keep these columns as strings
-const parse = {
-	ID: identity,
-	Group: identity,
-}
-
 export function useWorkflowDownloadUrl(workflow: Workflow | undefined): string {
 	const [serialized, setSerialized] = useState<Blob>(
 		new Blob([workflowToJson(workflow)]),
@@ -99,7 +91,6 @@ export function useAddFilesHandler(
 
 function readCsvFile(name: string, autoType: boolean): Promise<ColumnTable> {
 	return loadCSV(name, {
-		parse,
 		autoMax: 100000,
 		autoType,
 	})

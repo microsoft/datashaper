@@ -9,12 +9,8 @@ import { Dropdown, SpinButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { CalendarPicker } from '../../controls/index.js'
-import {
-	Container,
-	dropdownStyles,
-	spinStyles,
-	TextValue,
-} from './DataTypeField.styles.js'
+import { narrowerDropdownStyles } from '../../styles.js'
+import { Container, TextValue } from './DataTypeField.styles.js'
 import type { DataTypeFieldProps } from './DataTypeField.types.js'
 
 export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
@@ -45,7 +41,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 							new Date(val).toISOString(),
 					  )
 			},
-			[onKeyChange, onValueChange],
+			[onKeyChange, onValueChange, dataType, isKey, value, keyValue],
 		)
 
 		const onChangeTextFieldValue = useCallback(
@@ -58,7 +54,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					? onKeyChange(value.toString(), val.toString())
 					: onValueChange(keyValue, val)
 			},
-			[onKeyChange, onValueChange],
+			[onKeyChange, onValueChange, dataType, isKey, value, keyValue],
 		)
 
 		const spinButtonOnChange = useCallback(
@@ -68,7 +64,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
 				}
 			},
-			[onKeyChange, onValueChange],
+			[onKeyChange, onValueChange, dataType, isKey, value, keyValue],
 		)
 
 		const dropDownOnChange = useCallback(
@@ -82,7 +78,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						: onValueChange(keyValue, newValue.key === 'true' ? true : false)
 				}
 			},
-			[onKeyChange, onValueChange],
+			[onKeyChange, onValueChange, isKey, value, keyValue],
 		)
 
 		return (
@@ -96,6 +92,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						onChange={onChangeTextFieldValue}
 						placeholder={placeholder}
 						value={value}
+						styles={narrowerDropdownStyles}
 					></TextValue>
 				) : null}
 
@@ -104,7 +101,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 						min={0}
 						step={1}
 						value={value}
-						styles={spinStyles}
+						styles={narrowerDropdownStyles}
 						onChange={spinButtonOnChange}
 					/>
 				) : null}
@@ -113,7 +110,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 					<Dropdown
 						selectedKey={value.toString()}
 						options={booleanOptions}
-						styles={dropdownStyles}
+						styles={narrowerDropdownStyles}
 						onChange={dropDownOnChange}
 					/>
 				) : null}

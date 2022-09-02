@@ -28,15 +28,3 @@ export const OrLabel = styled(Label)`
 	padding-left: 10px;
 	padding-right: 10px;
 `
-
-export const spinStyles = {
-	root: {
-		width: 120,
-	},
-}
-
-export const dropdownStyles = {
-	root: {
-		width: 150,
-	},
-}

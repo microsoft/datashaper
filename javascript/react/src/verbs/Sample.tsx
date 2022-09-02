@@ -4,14 +4,19 @@
  */
 import type { SampleArgs } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
-import { Position, SpinButton } from '@fluentui/react'
+import { SpinButton } from '@fluentui/react'
 import { format } from 'd3-format'
 import { memo } from 'react'
 
 import { useSpinButtonChangeHandler } from '../hooks/index.js'
-import { LeftAlignedRow } from '../styles.js'
 import type { StepComponentProps } from '../types.js'
-import { Container, Or, spinStyles } from './Sample.styles.js'
+import {
+	Container,
+	Input,
+	InputLabel,
+	OrLabel,
+	spinStyles,
+} from './Sample.styles.js'
 
 const whole = format('d')
 
@@ -36,10 +41,9 @@ export const Sample: React.FC<StepComponentProps<SampleArgs>> = memo(
 
 		return (
 			<Container>
-				<LeftAlignedRow>
+				<Input>
+					<InputLabel># rows</InputLabel>
 					<SpinButton
-						label={'Number of rows'}
-						labelPosition={Position.top}
 						min={0}
 						step={1}
 						disabled={!!step.args.proportion}
@@ -47,10 +51,11 @@ export const Sample: React.FC<StepComponentProps<SampleArgs>> = memo(
 						styles={spinStyles}
 						onChange={handleSizeChange}
 					/>
-					<Or>or</Or>
+				</Input>
+				<OrLabel>or</OrLabel>
+				<Input>
+					<InputLabel>percentage</InputLabel>
 					<SpinButton
-						label={'Row percentage'}
-						labelPosition={Position.top}
 						min={0}
 						max={100}
 						step={1}
@@ -61,7 +66,7 @@ export const Sample: React.FC<StepComponentProps<SampleArgs>> = memo(
 						styles={spinStyles}
 						onChange={handlePercentChange}
 					/>
-				</LeftAlignedRow>
+				</Input>
 			</Container>
 		)
 	},
