@@ -30,6 +30,7 @@ export const ButtonContainer = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+	width: 100%;
 `
 
 export const SaveButtonWrapper = styled.div`

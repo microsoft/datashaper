@@ -58,7 +58,7 @@ export const Columns = styled.span`
 export const tableTransformStyle: React.CSSProperties = {
 	padding: '1rem 0.5rem',
 	display: 'flex',
-	// alignItems: 'center',
+	alignItems: 'center',
 	flexDirection: 'column',
 	overflow: 'auto',
 	border: 'none',

@@ -11,6 +11,7 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
 	height: 90%;
+	overflow: hidden;
 `
 
 export const mgmtStyles = {

@@ -110,7 +110,7 @@ export const StepsTrayContainer = styled.div<{
 	}
 `
 export const WorkflowContainer = styled.div<{ isCollapsed: boolean }>`
-	height: 92%;
+	height: 90%;
 	width: 100%;
 	position: relative;
 	visibility: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'visible')};
