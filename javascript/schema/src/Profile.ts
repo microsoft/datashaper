@@ -13,15 +13,13 @@ export type Profile =
 	 */
 	| 'codebook'
 	/**
-	 * This is a container resource for collecting raw files, workflows, and codebooks into a full table.
-	 * At minimum it should usually contain one `sources` entry that points to a DataFile.
-	 * As schemas or pipelines are built, those resources can be added to the sources entry.
+	 * This is the profile name for a DataTable
 	 */
-	| 'data-bundle'
+	| 'datatable'
 	/**
-	 * This is the profile name for a Dataset
+	 * This is the profile for a parent resource that links a table with a workflow
 	 */
-	| 'dataset'
+	| 'derived-table'
 	/**
 	 * This is the profile name for a Workflow.
 	 */

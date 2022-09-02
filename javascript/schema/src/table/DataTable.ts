@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Codebook } from '../codebook/Codebook.js'
 import type { DataFormat } from '../data.js'
 import type { Resource } from '../datapackage/Resource.js'
 import type { DataShape } from './DataShape.js'
@@ -10,13 +9,13 @@ import type { ParserOptions } from './ParserOptions.js'
 import type { TypeHints } from './TypeHints.js'
 
 /**
- * This defines the data-containing resource type.
+ * This defines the table-containing resource type.
  * A dataset can be embedded directly using the `data` property,
  * or it can be linked to a raw file using the `path`.
  * If the latter, optional format and parsing options can be applied to aid interpreting the file contents.
- * resource profile: 'dataset'
+ * resource profile: 'datatable'
  */
-export interface Dataset extends Resource {
+export interface DataTable extends Resource {
 	/**
 	 * Option to embed the data directly in the JSON descriptor.
 	 */
@@ -47,14 +46,6 @@ export interface Dataset extends Resource {
 	 * Defaults based on pandas: https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#csv-text-files
 	 */
 	typeHints?: TypeHints
-	/**
-	 * Table schema and codebook for interpreting a data table.
-	 * Defaults are inferred from the data - e.g., detected column names are used.
-	 * If a table schema is provided and types are specified for the columns, these are used in place of any other detected types.
-	 * A schema can also be supplied via the `sources` linking property of a shared parent resource.
-	 * Precedence: detected -> parent linked -> embedded
-	 */
-	codebook?: Codebook
 	/**
 	 * Number of rows in the data.
 	 */
