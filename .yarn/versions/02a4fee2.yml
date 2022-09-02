@@ -2,6 +2,4 @@ declined:
   - "@datashaper/schema"
   - "@datashaper/tables"
   - "@datashaper/webapp"
-
-undecided:
   - "@datashaper/workflow"
