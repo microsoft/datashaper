@@ -236,11 +236,10 @@ export interface DataPackage extends Named {
     resources: Resource[];
 }
 
-// Warning: (ae-missing-release-tag) "Dataset" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface Dataset extends Resource {
-    codebook?: Codebook;
+export interface DataTable extends Resource {
     columns?: number;
     data?: any;
     encoding?: string;
