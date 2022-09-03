@@ -15,7 +15,7 @@ export function generateCodebook(table: ColumnTable): Codebook {
 	}
 
 	table.columnNames().forEach(column => {
-		const columnType = guessDataTypeByColumn(table.array(column))
+		const columnType = guessDataTypeByColumn(table.array(column) as string[])
 
 		const field = {
 			name: column,
