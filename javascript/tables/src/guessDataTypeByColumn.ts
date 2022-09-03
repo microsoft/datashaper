@@ -7,18 +7,7 @@ import { DataType } from '@datashaper/schema'
 import { guessDataType } from './guessDataType.js'
 
 export function guessDataTypeByColumn(columnValues: string[]): DataType {
-	const defaultTypeHints = {
-		delimiter: delimiterDefault,
-		trueValues: trueDefaults,
-		falseValues: falseDefaults,
-		naValues: naDefaults,
-		dateFormat: dateFormatDefault,
-		thousands: thousandsDefault,
-		decimal: decimalDefault,
-		comment: commentDefault,
-	}
-
-	const guesser = guessDataType(defaultTypeHints)
+	const guesser = guessDataType()
 
 	const mapTypes = new Map()
 
@@ -46,38 +35,3 @@ export function guessDataTypeByColumn(columnValues: string[]): DataType {
 
 	return DataType.String
 }
-
-export const naDefaults = [
-	'-1.#IND',
-	'1.#QNAN',
-	'1.#IND',
-	'-1.#QNAN',
-	'#N/A N/A',
-	'#N/A',
-	'N/A',
-	'n/a',
-	'NA',
-	'<NA>',
-	'#NA',
-	'NULL',
-	'null',
-	'NaN',
-	'-NaN',
-	'nan',
-	'-nan',
-	'',
-]
-
-export const trueDefaults = ['true']
-
-export const falseDefaults = ['false']
-
-export const decimalDefault = '.'
-
-export const thousandsDefault = ','
-
-export const commentDefault = '#'
-
-export const delimiterDefault = ','
-
-export const dateFormatDefault = 'YYYY-MM-DD'
