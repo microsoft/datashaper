@@ -6,12 +6,18 @@
 export const buttonStyles = {
 	root: {
 		border: 'none',
-		float: 'right',
 		fontSize: '1rem',
 		padding: 0,
 		backgroundColor: 'transparent',
 		alignSelf: 'start',
-		width: '2rem',
+		width: '10rem',
 		minWidth: 'unset',
+		display: 'flex',
+	},
+	flexContainer: {
+		gap: '0.5rem',
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: '100%',
 	},
 }

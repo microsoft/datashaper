@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableMetadata } from '@datashaper/schema'
+import { IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback } from 'react'
 
@@ -12,6 +13,8 @@ import {
 	Aside,
 	AsideHeader,
 	Container,
+	historyButtonStyles,
+	icons,
 	InputContainer,
 	Main,
 	OutputContainer,
@@ -62,6 +65,13 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 							selected={selectedTableId}
 							onSelect={onSelectedTableIdChanged}
 						/>
+						{isCollapsed ? (
+							<HistoryButton
+								onClick={toggleCollapsed}
+								steps={workflow?.steps?.length}
+								showText={true}
+							/>
+						) : null}
 					</InputContainer>
 					<OutputContainer stepsPosition={stepsPosition}>
 						<SectionTitle>Preview</SectionTitle>
@@ -76,14 +86,15 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 				</Main>
 				<Aside isCollapsed={isCollapsed}>
 					<AsideHeader isCollapsed={isCollapsed}>
-						<HistoryButton onClick={toggleCollapsed} />
-						{isCollapsed ? (
-							<span>({workflow?.steps?.length || 0})</span>
-						) : (
-							<Title isCollapsed={isCollapsed}>
-								History ({workflow?.steps?.length || 0})
-							</Title>
-						)}
+						<HistoryButton styles={historyButtonStyles} />
+						<Title isCollapsed={isCollapsed}>
+							History ({workflow?.steps?.length || 0})
+							<IconButton
+								iconProps={icons.cancel}
+								onClick={toggleCollapsed}
+								ariaLabel="Close"
+							/>
+						</Title>
 					</AsideHeader>
 					<WorkflowContainer isCollapsed={isCollapsed}>
 						<ManageWorkflow

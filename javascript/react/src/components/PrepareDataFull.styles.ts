@@ -9,6 +9,12 @@ const INPUT_HEIGHT = 60
 const STEPS_HEIGHT = 280
 const COLLAPSED_STEPS_HEIGHT = 50
 
+export const icons = {
+	cancel: { iconName: 'Cancel' },
+}
+
+export const historyButtonStyles = { root: { width: '2rem' } }
+
 export const SectionTitle = styled.span<{ isCollapsed?: boolean }>`
 	margin: 0 ${GAP}px 0 ${GAP}px;
 	font-weight: bold;
@@ -29,14 +35,14 @@ export const Container = styled.div<{ isCollapsed: boolean }>`
 	height: 100%;
 	display: grid;
 	grid-template-columns: ${({ isCollapsed }) =>
-		isCollapsed ? 'calc(100% - 3.5rem) 3.5rem' : '75% 25%'};
+		isCollapsed ? '100% 0' : '75% 25%'};
 `
 export const Aside = styled.div<{ isCollapsed: boolean }>`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	height: 100%;
-	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'hidden auto')};
+	overflow: hidden;
 	box-shadow: ${({ isCollapsed }) =>
 		isCollapsed ? 'none' : '-1px 0px 10px 0px rgba(0,0,0,0.3)'};
 `
@@ -62,6 +68,9 @@ export const Title = styled.h4<{ isCollapsed: boolean }>`
 	padding: 0;
 	margin: 0;
 	display: ${({ isCollapsed }) => (isCollapsed ? 'none' : 'block')};
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 `
 
 export const Main = styled.div`
@@ -110,7 +119,7 @@ export const StepsTrayContainer = styled.div<{
 	}
 `
 export const WorkflowContainer = styled.div<{ isCollapsed: boolean }>`
-	height: 90%;
+	height: calc(100% - 75px);
 	width: 100%;
 	position: relative;
 	visibility: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'visible')};

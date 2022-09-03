@@ -24,7 +24,7 @@ export const Container = styled.div`
 	padding: 0.1rem;
 	height: 100%;
 	display: grid;
-	grid-template-rows: 90% 10%;
+	grid-template-rows: calc(100% - 4rem) 4rem;
 	width: 100%;
 
 	> div {
@@ -37,7 +37,6 @@ export const ButtonContainer = styled.section`
 	display: flex;
 	align-items: flex-end;
 	gap: 18px;
-	margin-bottom: 1rem;
 `
 export const PanelHeader = styled.div`
 	font-weight: 500;
