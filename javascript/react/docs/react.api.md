@@ -22,6 +22,7 @@ import type { IDetailsHeaderProps } from '@fluentui/react';
 import type { IDetailsListProps } from '@fluentui/react';
 import type { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
+import type { IDocumentCardStyles } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
@@ -277,6 +278,12 @@ export interface GuidanceProps {
     name: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "CustomIconProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "HistoryIcon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const HistoryIcon: (props: CustomIconProps) => JSX.Element;
+
 // Warning: (ae-missing-release-tag) "ManageWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -286,6 +293,8 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps>;
 //
 // @public (undocumented)
 export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
+    // (undocumented)
+    historyView?: boolean;
     // (undocumented)
     inputs: TableContainer[];
     onSelect?: (name: string) => void;
@@ -298,6 +307,16 @@ export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'gra
 //
 // @public (undocumented)
 export type MetadataClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined, metadata?: ColumnMetadata) => void;
+
+// Warning: (ae-missing-release-tag) "PanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface PanelProps {
+    // (undocumented)
+    onDismissPanel?: () => void;
+    // (undocumented)
+    panelIsOpen: boolean;
+}
 
 // Warning: (ae-missing-release-tag) "PrepareDataFull" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -426,6 +445,11 @@ export interface StepCardProps {
     output: string | undefined;
     // (undocumented)
     step: Step;
+    // (undocumented)
+    style?: {
+        card?: IDocumentCardStyles;
+        actions?: IDocumentCardStyles;
+    };
 }
 
 // Warning: (ae-missing-release-tag) "StepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -536,6 +560,42 @@ export function tableMenuCommand(tables: TableContainer[], selectedKey?: string 
 // @public (undocumented)
 export const TableTransformModal: React.FC<TransformModalProps>;
 
+// Warning: (ae-missing-release-tag) "TableTransformProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TableTransformProps {
+    graph: GraphManager;
+    headerText?: string;
+    hideInput?: boolean;
+    hideOutput?: boolean;
+    index: number;
+    // (undocumented)
+    isEditing?: boolean;
+    nextInputTable?: string;
+    // (undocumented)
+    onDelete?: (index: number) => void;
+    // (undocumented)
+    onDuplicate?: (step: Step) => void;
+    // (undocumented)
+    onPreview?: (name: string) => void;
+    onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
+    // (undocumented)
+    onVerbChange?: (verb: Verb) => void;
+    // (undocumented)
+    showGuidance?: boolean;
+    // (undocumented)
+    showGuidanceButton?: boolean;
+    step?: Step;
+    // (undocumented)
+    style?: React.CSSProperties;
+    table?: ColumnTable;
+    // (undocumented)
+    target?: string;
+    // (undocumented)
+    toggleGuidance?: () => void;
+    verbs?: string[];
+}
+
 // Warning: (ae-missing-release-tag) "Tooltip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -549,19 +609,7 @@ export type TooltipProps = GuidanceProps;
 // Warning: (ae-missing-release-tag) "TransformModalProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface TransformModalProps extends IModalProps {
-    graph: GraphManager;
-    headerText?: string;
-    hideInput?: boolean;
-    hideOutput?: boolean;
-    index: number;
-    nextInputTable?: string;
-    onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
-    step?: Step;
-    table?: ColumnTable;
-    // (undocumented)
-    target?: string;
-    verbs?: string[];
+export interface TransformModalProps extends IModalProps, TableTransformProps {
 }
 
 // Warning: (ae-missing-release-tag) "useCellClickhandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

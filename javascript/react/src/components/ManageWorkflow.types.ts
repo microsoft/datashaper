@@ -29,4 +29,5 @@ export interface ManageWorkflowProps
 	 * Handler for when the workflow changes
 	 */
 	onUpdateWorkflow?: (workflow: Workflow) => void
+	historyView?: boolean
 }
