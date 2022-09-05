@@ -23,8 +23,8 @@ export const HistoryButton: React.FC<HistoryButtonProps> = memo(
 			<Button onClick={onClick} styles={merge({}, buttonStyles, styles)}>
 				<HistoryIcon
 					color={theme.application().accent().hex()}
-					width={'20'}
-					height={'20'}
+					width={'20px'}
+					height={'20px'}
 				/>
 				{showText ? `History ${steps ? `(${steps})` : ''}` : null}
 			</Button>

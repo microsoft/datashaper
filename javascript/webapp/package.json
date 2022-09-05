@@ -36,7 +36,7 @@
 		"@datashaper/verb-guidance": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
 		"@essex/hooks": "^4.0.12",
-		"@essex/themed-components": "^2.4.0",
+		"@essex/themed-components": "^2.5.2",
 		"@essex/webpack-config": "^21.0.5",
 		"@fluentui/font-icons-mdl2": "^8.4.2",
 		"@fluentui/react": "^8.77.3",

@@ -12,7 +12,7 @@ import { DefaultButton } from '@fluentui/react'
 import { capitalize } from 'lodash-es'
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 
-import { useHeaderStyle } from './StepHistoryList.hooks.js'
+import { useCollapsiblePanelStyles } from './StepHistoryList.hooks.js'
 import {
 	addButtonStyles,
 	ButtonContainer,
@@ -40,7 +40,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		nextInputTable,
 	}) {
 		const ref = useRef<HTMLDivElement>(null)
-		const headerStyle = useHeaderStyle()
+		const collapsiblePanelStyles = useCollapsiblePanelStyles()
 		const [isExpanded, setIsExpanded] = useState<number[]>([])
 		const onHeaderClick = useCallback(
 			(state: boolean, index: number) => {
@@ -73,7 +73,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 							<CollapsiblePanel
 								key={index}
 								onHeaderClick={s => onHeaderClick(s, index)}
-								headerStyle={headerStyle(!!isExpanded?.includes(index))}
+								styles={collapsiblePanelStyles(!!isExpanded?.includes(index))}
 								onRenderHeader={() => onRenderHeader(step)}
 							>
 								<ListWrapper>

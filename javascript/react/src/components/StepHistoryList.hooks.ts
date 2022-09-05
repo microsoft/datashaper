@@ -6,18 +6,30 @@
 import { useThematic } from '@thematic/react'
 import { useCallback } from 'react'
 
-export function useHeaderStyle(): (isExpanded: boolean) => React.CSSProperties {
+interface CollapsiblePanelStyles {
+	header?: React.CSSProperties
+	contents?: React.CSSProperties
+}
+
+export function useCollapsiblePanelStyles(): (
+	isExpanded: boolean,
+) => CollapsiblePanelStyles {
 	const theme = useThematic()
 
 	return useCallback(
 		(isExpanded: boolean) => ({
-			background: theme.application().background().hex(),
-			color: theme.application().highContrast().hex(),
-			borderTop: 'none',
-			borderBottom: isExpanded
-				? 'none'
-				: `1px solid ${theme.application().border().hex()}`,
-			padding: '8px 0',
+			header: {
+				background: theme.application().background().hex(),
+				color: theme.application().highContrast().hex(),
+				borderBottom: isExpanded
+					? 'none'
+					: `1px solid ${theme.application().border().hex()}`,
+				borderTop: `1px solid ${theme.application().border().hex()}`,
+				padding: '8px 0',
+			},
+			contents: {
+				border: 'none',
+			},
 		}),
 		[theme],
 	)
