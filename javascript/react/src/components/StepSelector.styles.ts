@@ -5,7 +5,6 @@
 import styled from '@essex/styled-components'
 
 export const Container = styled.div`
-	width: 240px;
 	display: flex;
 	align-items: center;
 `
