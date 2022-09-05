@@ -10,16 +10,6 @@ export {
 	createDefaultCommandBar,
 	createDefaultHeaderCommandBar,
 } from './component-factories.js'
-export {
-	useDataTable,
-	useGraphManager,
-	useGraphSteps,
-	useHandleFilesUpload,
-	useHandleStepOutputChanged,
-	useHandleStepSave,
-	useStepOutputs,
-} from './hooks/index.js'
-
 /*
  * Exported Components
  */
@@ -65,3 +55,13 @@ export { TableTransformModal } from './components/TableTransformModal.js'
 export type { TransformModalProps } from './components/TableTransformModal.types.js'
 export { Tooltip } from './components/Tooltip.js'
 export type { TooltipProps } from './components/Tooltip.types.js'
+export {
+	useDataTable,
+	useGraphManager,
+	useGraphSteps,
+	useHandleFilesUpload,
+	useHandleStepOutputChanged,
+	useHandleStepSave,
+	useStepOutputs,
+} from './hooks/index.js'
+export * from './transformation/usePerColumnCommands.js'
