@@ -131,6 +131,11 @@ export class GraphManager {
 	public addInput(item: TableContainer): void {
 		this._workflow.addInput(item.id)
 		this.inputs.set(item.id, item)
+		// bind the graph processing steps to the new input observables
+		// TODO: input observable wiring should probably be managed in the DefaultGraph
+		for (const step of this.steps) {
+			this._configureStep(step, this.graph.node(step.id))
+		}
 		this._onChange.next()
 	}
 
