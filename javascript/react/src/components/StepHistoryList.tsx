@@ -119,10 +119,11 @@ function onRenderHeader(step: Step): JSX.Element {
 	const { args } = step
 	const columns: string[] = (args as any).columns ||
 		(args as any).on || [(args as any).column]
+
 	return (
 		<PanelHeader>
 			<Verb>{step.verb}</Verb>
-			<Columns>{capitalize(columns?.join(', '))}</Columns>
+			<Columns>{capitalize(Object.values(columns)?.join(', '))}</Columns>
 		</PanelHeader>
 	)
 }
