@@ -117,12 +117,23 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 
 function onRenderHeader(step: Step): JSX.Element {
 	const { args } = step
-	const columns: string[] = (args as any).columns ||
+	const columnList: any = (args as any).columns ||
 		(args as any).on || [(args as any).column]
+	let columns = ''
+	try {
+		if (Array.isArray(columnList)) {
+			columns = columnList.join(', ')
+		} else if (typeof columnList === 'object') {			
+			columns = Object.values(columnList)?.join(', ')
+		}
+	} catch {
+		console.error('ColumnList type is not being currently supported', typeof columnList)
+	}
+
 	return (
 		<PanelHeader>
 			<Verb>{step.verb}</Verb>
-			<Columns>{capitalize(columns?.join(', '))}</Columns>
+			<Columns>{capitalize(columns)}</Columns>
 		</PanelHeader>
 	)
 }
