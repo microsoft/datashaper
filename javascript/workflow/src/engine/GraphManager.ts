@@ -8,7 +8,7 @@ import type {
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
-import { Subject } from 'rxjs'
+import { BehaviorSubject, Subject } from 'rxjs'
 
 import type { Graph, Node } from '../dataflow/index.js'
 import { DefaultGraph, observableNode } from '../dataflow/index.js'
@@ -131,6 +131,11 @@ export class GraphManager {
 	public addInput(item: TableContainer): void {
 		this._workflow.addInput(item.id)
 		this.inputs.set(item.id, item)
+		// bind the graph processing steps to the new input observables
+		// TODO: input observable wiring should probably be managed in the DefaultGraph
+		for (const step of this.steps) {
+			this._configureStep(step, this.graph.node(step.id))
+		}
 		this._onChange.next()
 	}
 
@@ -383,8 +388,9 @@ export class GraphManager {
 			return result
 		} else if (this._workflow.hasInput(id)) {
 			// create a new subject that we can pipe data into
-			const source = new Subject<TableContainer | undefined>()
-			source.next(this.inputs.get(id))
+			const source = new BehaviorSubject<TableContainer | undefined>(
+				this.inputs.get(id),
+			)
 
 			// define the new graph node
 			this.inputObservables.set(id, source)

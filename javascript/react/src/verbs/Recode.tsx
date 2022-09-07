@@ -115,7 +115,8 @@ const ColumnPair: React.FC<{
 		o === 'false' ? (keyValue = false) : (keyValue = true)
 	}
 
-	const handleDeleteClick = () => onDelete(keyValue)
+	const handleDeleteClick = () =>
+		onDelete(dataType === DataType.Date ? keyValue.toISOString() : keyValue)
 
 	return (
 		<ColumnPairContainer>

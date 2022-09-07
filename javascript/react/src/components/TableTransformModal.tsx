@@ -2,34 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Verb } from '@datashaper/schema'
 import { default as guidanceIndex } from '@datashaper/verb-guidance'
-import type { GraphManager } from '@datashaper/workflow'
-import {
-	Callout,
-	DirectionalHint,
-	IconButton,
-	PrimaryButton,
-} from '@fluentui/react'
+import type { Maybe } from '@datashaper/workflow'
+import { Callout, DirectionalHint, IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo } from 'react'
+import { memo, useState } from 'react'
 
 import { Guidance } from './Guidance.js'
-import { StepComponent } from './StepComponent.js'
-import { StepSelector } from './StepSelector.js'
+import { TableTransform } from './TableTransform.js'
+import { useModalStyles } from './TableTransformModal.hooks.js'
 import {
-	useHandleSaveClick,
-	useInternalTableStep,
-	useModalStyles,
-	useStepOutputHandling,
-} from './TableTransformModal.hooks.js'
-import {
-	ButtonContainer,
 	ContainerBody,
 	GuidanceContainer,
 	Header,
 	icons,
 	StepComponentContainer,
-	StepSelectorContainer,
 	Title,
 } from './TableTransformModal.styles.js'
 import type { TransformModalProps } from './TableTransformModal.types.js'
@@ -45,24 +33,12 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		styles,
 		...props
 	}) {
+		const [verb, setVerb] = useState<Maybe<Verb>>()
 		const [showGuidance, { toggle: toggleGuidance }] = useBoolean(false)
-		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
-			step,
-			nextInputTable,
-			graph as GraphManager,
-		)
-
 		const adaptedStyles = useModalStyles(styles, showGuidance)
-		const { output, onOutputChanged } = useStepOutputHandling(graph, step)
-		const handleSaveClick = useHandleSaveClick(
-			internal,
-			output,
-			onTransformRequested,
-		)
 
 		return (
 			<Callout
-				onDismissed={() => setInternal(undefined)}
 				styles={adaptedStyles}
 				directionalHint={DirectionalHint.rightBottomEdge}
 				{...props}
@@ -77,42 +53,23 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 						/>
 					)}
 				</Header>
-
 				<ContainerBody showGuidance={showGuidance}>
 					<StepComponentContainer>
-						<StepSelectorContainer>
-							<StepSelector
-								placeholder="Select a verb"
-								verb={internal?.verb}
-								onCreate={handleVerbChange}
-							/>
-							{internal?.verb ? (
-								<IconButton
-									onClick={toggleGuidance}
-									iconProps={icons.info}
-									checked={showGuidance}
-								/>
-							) : null}
-						</StepSelectorContainer>
-						{internal && (
-							<>
-								<StepComponent
-									step={internal}
-									graph={graph}
-									index={index}
-									output={output}
-									onChangeOutput={onOutputChanged}
-									onChange={setInternal}
-								/>
-								<ButtonContainer>
-									<PrimaryButton onClick={handleSaveClick}>Save</PrimaryButton>
-								</ButtonContainer>
-							</>
-						)}
+						<TableTransform
+							graph={graph}
+							onTransformRequested={onTransformRequested}
+							index={index}
+							step={step}
+							showGuidance={showGuidance}
+							toggleGuidance={toggleGuidance}
+							showGuidanceButton={true}
+							nextInputTable={nextInputTable}
+							onVerbChange={setVerb}
+						/>
 					</StepComponentContainer>
-					{showGuidance && internal?.verb ? (
+					{showGuidance && verb ? (
 						<GuidanceContainer>
-							<Guidance name={internal?.verb} index={guidanceIndex} />
+							<Guidance name={verb} index={guidanceIndex} />
 						</GuidanceContainer>
 					) : null}
 				</ContainerBody>

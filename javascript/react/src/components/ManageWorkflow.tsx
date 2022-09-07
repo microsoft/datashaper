@@ -26,6 +26,7 @@ import {
 } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
+import { StepHistoryList } from './StepHistoryList.js'
 import { StepList } from './StepList.js'
 import { TableTransformModal } from './TableTransformModal.js'
 
@@ -37,6 +38,8 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		onSelect,
 		onUpdateOutput,
 		onUpdateWorkflow,
+		nextInputTable,
+		historyView = false,
 		...props
 	}) {
 		const graph = useGraphManager(workflow, inputs)
@@ -44,7 +47,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		// Selected Step/Index State for the component
 		const [step, setStep] = useState<Step | undefined>()
 		const [index, setIndex] = useState<number>()
-
 		// Modal view-state
 		const {
 			isOpen: isModalOpen,
@@ -61,7 +63,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			isOpen: isDeleteModalOpen,
 		} = useDeleteConfirm(useOnDeleteStep(graph))
 		const onEdit = useOnEditStep(setStep, setIndex, showModal)
-		const onCreate = useOnCreateStep(index, dismissModal, onSave, onSelect)
+		const onCreate = useOnCreateStep(onSave, onSelect, dismissModal)
 		const onDuplicate = useOnDuplicateStep(graph, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(index)
 
@@ -74,6 +76,13 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			[onSelect, graph],
 		)
 
+		const onTransformRequested = useCallback(
+			(step: Step, output: string | undefined) => {
+				onCreate(step, output, index)
+			},
+			[index, onCreate],
+		)
+
 		// parallel array of output names for the steps
 		const outputs = useStepOutputs(graph)
 		const steps = useGraphSteps(graph)
@@ -82,23 +91,37 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 
 		return (
 			<Container>
-				<StepList
-					onDeleteClicked={onDelete}
-					onSelect={onViewStep}
-					onEditClicked={onEdit}
-					steps={steps}
-					outputs={outputs}
-					onDuplicateClicked={onDuplicate}
-					onStartNewStep={showModal}
-					buttonId={addStepButtonId}
-				/>
+				{historyView ? (
+					<StepHistoryList
+						onDeleteClicked={onDelete}
+						onSelect={onViewStep}
+						steps={steps}
+						onStartNewStep={showModal}
+						buttonId={addStepButtonId}
+						graph={graph}
+						nextInputTable={nextInputTable}
+						onCreate={onCreate}
+					/>
+				) : (
+					<StepList
+						onDeleteClicked={onDelete}
+						onSelect={onViewStep}
+						onEditClicked={onEdit}
+						steps={steps}
+						outputs={outputs}
+						onDuplicateClicked={onDuplicate}
+						onStartNewStep={showModal}
+						buttonId={addStepButtonId}
+					/>
+				)}
+
 				<div>
 					{isModalOpen ? (
 						<TableTransformModal
 							target={editorTarget}
 							step={step}
 							index={index ?? graph.steps.length}
-							onTransformRequested={onCreate}
+							onTransformRequested={onTransformRequested}
 							graph={graph}
 							onDismiss={dismissModal}
 							styles={modalStyles}
