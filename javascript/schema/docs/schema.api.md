@@ -232,15 +232,13 @@ export enum DataOrientation {
 export interface DataPackage extends Named {
     // (undocumented)
     $schema: string;
-    // (undocumented)
-    resources: Resource[];
+    resources: (string | Resource)[];
 }
 
-// Warning: (ae-missing-release-tag) "Dataset" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface Dataset extends Resource {
-    codebook?: Codebook;
+export interface DataTable extends Resource {
     columns?: number;
     data?: any;
     encoding?: string;
@@ -633,7 +631,7 @@ export interface ParserOptions {
     delimiter?: string;
     escape?: string;
     header?: boolean;
-    lineTerminator?: string[];
+    lineTerminator?: string;
     names?: string[];
     quoteChar?: string;
     readRows?: number;
@@ -698,7 +696,7 @@ export interface Resource extends Named {
     path?: string | string[];
     // Warning: (ae-forgotten-export) The symbol "Profile" needs to be exported by the entry point index.d.ts
     profile?: Profile;
-    sources?: Resource[];
+    sources?: (string | Resource)[];
 }
 
 // Warning: (ae-missing-release-tag) "RollupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

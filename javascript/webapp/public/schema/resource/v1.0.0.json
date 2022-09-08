@@ -1,4 +1,5 @@
 {
+	"$ref": "#/definitions/Resource",
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"definitions": {
 		"Resource": {
@@ -67,41 +68,5 @@
 			"type": "object"
 		}
 	},
-	"description": "Defines a Data Package, which is a collection of data resources such as files and schemas.\nLoosely based on the Frictionless spec, but modified where needed to meet our needs.\nhttps://specs.frictionlessdata.io/data-package/",
-	"properties": {
-		"$schema": {
-			"type": "string"
-		},
-		"description": {
-			"description": "Description of the named resource.",
-			"type": "string"
-		},
-		"id": {
-			"description": "Generated guid, immutable.\nThis can be used for stable referencing.",
-			"type": "string"
-		},
-		"name": {
-			"description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
-			"type": "string"
-		},
-		"resources": {
-			"description": "List of Resources that make up the data package.\nMay also be a list of raw strings which are paths to Resource files in the bundle.",
-			"items": {
-				"anyOf": [
-					{
-						"$ref": "#/definitions/Resource"
-					},
-					{
-						"type": "string"
-					}
-				]
-			},
-			"type": "array"
-		},
-		"title": {
-			"description": "Friendly name of the resource. Used for display only.",
-			"type": "string"
-		}
-	},
-	"type": "object"
+	"description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now."
 }

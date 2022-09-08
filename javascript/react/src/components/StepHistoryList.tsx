@@ -123,11 +123,14 @@ function onRenderHeader(step: Step): JSX.Element {
 	try {
 		if (Array.isArray(columnList)) {
 			columns = columnList.join(', ')
-		} else if (typeof columnList === 'object') {			
+		} else if (typeof columnList === 'object') {
 			columns = Object.values(columnList)?.join(', ')
 		}
 	} catch {
-		console.error('ColumnList type is not being currently supported', typeof columnList)
+		console.error(
+			'ColumnList type is not being currently supported',
+			typeof columnList,
+		)
 	}
 
 	return (

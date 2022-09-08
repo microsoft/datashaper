@@ -1,0 +1,10 @@
+{
+	"$schema": "TODO",
+	"name": "nhefs-expore",
+	"title": "NHEFS Causal Discovery",
+	"profile": "explore",
+	"path": "/explore.json",
+	"config": {
+		"TODO": "All of the config params for a casual discovery analysis"
+	}
+}
