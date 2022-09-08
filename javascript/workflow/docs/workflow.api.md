@@ -158,10 +158,10 @@ export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertA
 // @public (undocumented)
 export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 
-// Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "createWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createGraph(input: Workflow_2, tables: TableContainer[]): Workflow;
+export function createWorkflow(input: Workflow_2, tables: TableContainer[]): Workflow;
 
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

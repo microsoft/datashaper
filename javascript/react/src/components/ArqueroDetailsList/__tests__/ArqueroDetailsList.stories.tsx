@@ -12,7 +12,10 @@ const meta = {
 
 export default meta
 
-export const PerformanceStory = (args, { loaded: { stocks } }: any) => {
+export const PerformanceStory = (
+	_args: unknown,
+	{ loaded: { stocks } }: any,
+): JSX.Element => {
 	if (!stocks) {
 		return <div>Loading...</div>
 	}
@@ -24,7 +27,10 @@ PerformanceStory.story = {
 	name: 'Performance',
 }
 
-export const RowGroupingStory = (args, { loaded: { stocks } }: any) => {
+export const RowGroupingStory = (
+	_args: unknown,
+	{ loaded: { stocks } }: any,
+): JSX.Element => {
 	if (!stocks) {
 		return <div>Loading</div>
 	}
