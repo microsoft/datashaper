@@ -104,6 +104,10 @@
 					"description": "Describes the semantic or parsing format for the values.\nThis is based on JSONSchema. See https://json-schema.org/draft/2020-12/json-schema-validation.html#name-vocabularies-for-semantic-c\nTODO: JSONSchema is pretty flexible here, and we should align with it. For example, there are standard string (uri, email, ip-address, etc.)\nthat define known formats. However, you can also link out to any arbitrary schema that validates a data value.\nJSONSchema also uses the format field to describe date and time notation. Because dates are not a valid JSON type,\nthey are represented as type = string, but format = date, time, date-time, or duration.\nWe use the type in running code, so it seems appropriate to keep the expanded list, but maybe this can contain parsing\ninstructions (e.g., a pattern) for converting date/time strings into values.\nhttps://json-schema.org/draft/2020-12/json-schema-validation.html#name-defined-formats",
 					"type": "string"
 				},
+				"id": {
+					"description": "Generated guid.",
+					"type": "string"
+				},
 				"inverse": {
 					"description": "Indicates that values are mapped inverse to typical expectation, and may need to be displayed in the opposite direction.\nClosely related to nature, particular for categorical ordinal values.",
 					"type": "boolean"
@@ -235,6 +239,10 @@
 					"description": "URL to a public webpage that describes this resource.",
 					"type": "string"
 				},
+				"id": {
+					"description": "Generated guid.",
+					"type": "string"
+				},
 				"license": {
 					"description": "SPDX license string.\nhttps://spdx.org/licenses/",
 					"type": "string"
@@ -298,6 +306,10 @@
 		},
 		"homepage": {
 			"description": "URL to a public webpage that describes this resource.",
+			"type": "string"
+		},
+		"id": {
+			"description": "Generated guid.",
 			"type": "string"
 		},
 		"license": {

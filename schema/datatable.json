@@ -110,6 +110,10 @@
 					"description": "URL to a public webpage that describes this resource.",
 					"type": "string"
 				},
+				"id": {
+					"description": "Generated guid.",
+					"type": "string"
+				},
 				"license": {
 					"description": "SPDX license string.\nhttps://spdx.org/licenses/",
 					"type": "string"
@@ -223,6 +227,10 @@
 		},
 		"homepage": {
 			"description": "URL to a public webpage that describes this resource.",
+			"type": "string"
+		},
+		"id": {
+			"description": "Generated guid.",
 			"type": "string"
 		},
 		"license": {

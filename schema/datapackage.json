@@ -15,6 +15,10 @@
 					"description": "URL to a public webpage that describes this resource.",
 					"type": "string"
 				},
+				"id": {
+					"description": "Generated guid.",
+					"type": "string"
+				},
 				"license": {
 					"description": "SPDX license string.\nhttps://spdx.org/licenses/",
 					"type": "string"
@@ -63,6 +67,10 @@
 		},
 		"description": {
 			"description": "Description of the named resource.",
+			"type": "string"
+		},
+		"id": {
+			"description": "Generated guid.",
 			"type": "string"
 		},
 		"name": {
