@@ -76,6 +76,7 @@ export enum VariableNature {
 	 * Only two valid values are allowed, commonly 1 = true, 0 = false.
 	 */
 	Binary = 'binary',
+	Excluded = 'excluded',
 }
 
 /**
@@ -172,4 +173,15 @@ export enum DataNature {
 	 * An example is aggregate yearly smoking data for each US state.
 	 */
 	Panel = 'panel',
+}
+
+export interface ColumnNature {
+	mostLikelyNature: VariableNature
+	possibleNatures: VariableNature[]
+	hasMissingData?: boolean
+	isInteger?: boolean
+	isNumber?: boolean
+	isString?: boolean
+	uniqueValues?: boolean[] | string[] | number[]
+	uniquePresentValues?: boolean[] | string[] | number[]
 }
