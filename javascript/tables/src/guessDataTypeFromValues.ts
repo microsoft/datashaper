@@ -6,13 +6,14 @@ import { DataType } from '@datashaper/schema'
 
 import { guessDataType } from './guessDataType.js'
 
-export function guessDataTypeByColumn(columnValues: string[]): DataType {
+export function guessDataTypeFromValues(values: string[]): DataType {
 	const guesser = guessDataType()
 
 	const mapTypes = new Map()
 
-	columnValues.forEach(value => {
+	values.forEach(value => {
 		const dataTypeResult = guesser(value)
+		mapTypes.set(dataTypeResult, true)
 
 		if (dataTypeResult !== DataType.Null && !mapTypes.has(dataTypeResult)) {
 			mapTypes.set(dataTypeResult, true)

@@ -5,17 +5,17 @@
 import type { Codebook } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { guessDataTypeByColumn } from './guessDataTypeByColumn.js'
+import { guessDataTypeFromValues } from './guessDataTypeFromValues.js'
 
 export function generateCodebook(table: ColumnTable): Codebook {
 	const codebookResult: Codebook = {
-		$schema: '???',
+		$schema: 'http://json-schema.org/draft-07/schema#',
 		name: 'Generator',
 		fields: [],
 	}
 
 	table.columnNames().forEach(column => {
-		const columnType = guessDataTypeByColumn(table.array(column) as string[])
+		const columnType = guessDataTypeFromValues(table.array(column) as string[])
 
 		const field = {
 			name: column,

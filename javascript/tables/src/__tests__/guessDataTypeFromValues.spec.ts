@@ -5,11 +5,11 @@
 
 import { DataType } from '@datashaper/schema'
 
-import { guessDataTypeByColumn } from '../guessDataTypeByColumn.js'
+import { guessDataTypeFromValues } from '../guessDataTypeFromValues.js'
 
 describe('guess datatype by column tests', () => {
 	describe('boolean', () => {
-		const columnType = guessDataTypeByColumn([
+		const columnType = guessDataTypeFromValues([
 			'true',
 			'TRUE',
 			'True',
@@ -23,7 +23,14 @@ describe('guess datatype by column tests', () => {
 	})
 
 	describe('number', () => {
-		const columnType = guessDataTypeByColumn(['1', '2', '3', '4', null, 'n/a'])
+		const columnType = guessDataTypeFromValues([
+			'1',
+			'2',
+			'3',
+			'4',
+			null,
+			'n/a',
+		])
 
 		it('should return number', () => {
 			expect(columnType).toBe(DataType.Number)
@@ -31,7 +38,7 @@ describe('guess datatype by column tests', () => {
 	})
 
 	describe('array', () => {
-		const columnType = guessDataTypeByColumn(['<NA>', '[]', '[]', '[]'])
+		const columnType = guessDataTypeFromValues(['<NA>', '[]', '[]', '[]'])
 
 		it('should return array', () => {
 			expect(columnType).toBe(DataType.Array)
@@ -39,7 +46,7 @@ describe('guess datatype by column tests', () => {
 	})
 
 	describe('object', () => {
-		const columnType = guessDataTypeByColumn([
+		const columnType = guessDataTypeFromValues([
 			'<NA>',
 			'{"test": "1"}',
 			'NULL',
@@ -52,7 +59,7 @@ describe('guess datatype by column tests', () => {
 	})
 
 	describe('date', () => {
-		const columnType = guessDataTypeByColumn([
+		const columnType = guessDataTypeFromValues([
 			'<NA>',
 			new Date().toISOString(),
 			'3/25/2022',
@@ -65,7 +72,7 @@ describe('guess datatype by column tests', () => {
 	})
 
 	describe('string', () => {
-		const columnType = guessDataTypeByColumn([
+		const columnType = guessDataTypeFromValues([
 			'null',
 			'test',
 			'test2',
@@ -80,7 +87,7 @@ describe('guess datatype by column tests', () => {
 	})
 
 	describe('string (different types)', () => {
-		const columnType = guessDataTypeByColumn([
+		const columnType = guessDataTypeFromValues([
 			'null',
 			'test',
 			'1',
