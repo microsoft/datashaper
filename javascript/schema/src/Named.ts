@@ -14,7 +14,7 @@ export interface Named {
 	 * User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.
 	 * This should be editable, just like any other filename on a file system.
 	 */
-	name?: string
+	name: string
 	/**
 	 * Friendly name of the resource. Used for display only.
 	 */
