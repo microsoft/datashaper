@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Verb } from '@datashaper/schema'
-import type { GraphManager, Step } from '@datashaper/workflow'
+import type { Step,Workflow } from '@datashaper/workflow'
 import { readStep } from '@datashaper/workflow'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -24,7 +24,7 @@ export function useHandleSaveClick(
 export function useInternalTableStep(
 	step: Step | undefined,
 	_lastOutput: string | undefined,
-	graph: GraphManager,
+	graph: Workflow,
 ): {
 	internal: Step | undefined
 	handleVerbChange: (verb: Verb) => void
@@ -55,7 +55,7 @@ export function useInternalTableStep(
 }
 
 export function useStepOutputHandling(
-	graph: GraphManager,
+	graph: Workflow,
 	step: Step | undefined,
 ): {
 	output: string | undefined

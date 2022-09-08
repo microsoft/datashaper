@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager } from '@datashaper/workflow'
+import type { Workflow } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -16,9 +16,7 @@ import { getSimpleDropdownOptions } from './useSimpleDropdownOptions.js'
  * @param graph -
  * @returns
  */
-export function useTableDropdownOptions(
-	graph?: GraphManager,
-): IDropdownOption[] {
+export function useTableDropdownOptions(graph?: Workflow): IDropdownOption[] {
 	const inputNames = useInputTableNames(graph)
 
 	return useMemo(() => {
@@ -44,7 +42,7 @@ export function useTableDropdownOptions(
  * @param graph -
  * @returns
  */
-export function useInputTableNames(graph?: GraphManager): string[] {
+export function useInputTableNames(graph?: Workflow): string[] {
 	const [tables, setTables] = useState<string[]>(() => getTableOptions(graph))
 
 	// Listen to input table changes
@@ -59,7 +57,6 @@ export function useInputTableNames(graph?: GraphManager): string[] {
 	return tables
 }
 
-function getTableOptions(graph?: GraphManager): string[] {
-	const result = new Set<string>(graph?.inputs.keys())
-	return [...result.values()]
+function getTableOptions(graph?: Workflow): string[] {
+	return [...(graph?.inputNames ?? [])]
 }

@@ -5,7 +5,7 @@
 import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import { columnTypes } from '@datashaper/tables'
-import type { GraphManager, Step } from '@datashaper/workflow'
+import type { Step,Workflow } from '@datashaper/workflow'
 import { isNumericInputStep, NodeInput } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
@@ -56,7 +56,7 @@ export function useColumnFilter(
 
 export function useInputTableChanged(
 	step: Step,
-	graph: GraphManager | undefined,
+	graph: Workflow | undefined,
 	onChange: (step: Step) => void,
 ): DropdownChangeHandler {
 	const resetArgs = useResetArgs()

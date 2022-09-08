@@ -160,7 +160,7 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createGraph(workflow: Workflow_2, tables: Map<string, TableContainer>): GraphManager;
+export function createGraph(input: Workflow_2, tables: TableContainer[]): Workflow;
 
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -240,41 +240,6 @@ export interface Graph<T> {
     readonly outputs: NodeId[];
     remove(id: NodeId): void;
     validate(): void;
-}
-
-// Warning: (ae-missing-release-tag) "GraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export class GraphManager extends Workflow {
-    constructor(workflowJson?: Workflow_2);
-    addInputTable(item: TableContainer): void;
-    addOutput(binding: NamedOutputPortBinding): void;
-    addStep(stepInput: StepInput): Step;
-    // (undocumented)
-    readonly graph: Graph<TableContainer>;
-    // (undocumented)
-    readonly inputs: Map<string, TableContainer>;
-    latestOutput(name: string): Maybe<TableContainer>;
-    // (undocumented)
-    latestOutputForNode(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
-    // (undocumented)
-    get outputDefinitions(): NamedOutputPortBinding[];
-    // (undocumented)
-    outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
-    outputObservable(name: string): Maybe<TableObservable>;
-    // (undocumented)
-    outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableObservable>;
-    get outputs(): string[];
-    removeInput(inputName: string): void;
-    removeOutput(name: string): void;
-    removeStep(index: number): void;
-    // (undocumented)
-    setInputs(inputs: Map<string, TableContainer>): void;
-    // (undocumented)
-    toList(): Maybe<TableContainer>[];
-    toMap(): Map<string, Maybe<TableContainer>>;
-    // (undocumented)
-    updateStep(stepInput: StepInput<unknown>, index: number): Step;
 }
 
 // Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -547,7 +512,7 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 
 // Warning: (ae-missing-release-tag) "TableObservable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export type TableObservable = Observable<Maybe<TableContainer>>;
 
 // Warning: (ae-missing-release-tag) "unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -598,31 +563,33 @@ export { window_2 as window }
 
 // Warning: (ae-missing-release-tag) "Workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
+// @public (undocumented)
 export class Workflow {
-    constructor(workflowInput?: Workflow_2);
+    constructor(input?: Workflow_2);
     // (undocumented)
-    addInput(input: string): void;
+    addInputName(input: string): void;
+    addInputTable(table: TableContainer): void;
     // (undocumented)
+    addInputTables(inputs: TableContainer[]): void;
     addOutput(output: NamedOutputPortBinding): void;
-    // (undocumented)
     addStep(stepInput: StepInput): Step;
-    // (undocumented)
-    clear(): void;
-    // (undocumented)
-    clearInputs(): void;
     // (undocumented)
     clone(): Workflow;
     // (undocumented)
     get description(): string | undefined;
     // (undocumented)
-    hasInput(input: string): boolean;
+    getInputTable(name: string): Maybe<TableContainer>;
+    // (undocumented)
+    hasInputName(input: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
     // (undocumented)
     hasOutputName(name: string): boolean;
     // (undocumented)
-    get input(): Set<string>;
+    get inputNames(): Set<string>;
+    latestOutput(name: string): Maybe<TableContainer>;
+    // (undocumented)
+    latestOutputForNode(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
     // (undocumented)
     get length(): number;
     // (undocumented)
@@ -633,21 +600,28 @@ export class Workflow {
     protected readonly _onChange: Subject<void>;
     // (undocumented)
     get output(): Map<string, NamedOutputPortBinding>;
-    print(): void;
     // (undocumented)
-    removeInput(input: string): void;
+    get outputDefinitions(): NamedOutputPortBinding[];
     // (undocumented)
+    outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
+    get outputNames(): string[];
+    outputObservable(name: string): Maybe<TableObservable>;
+    // (undocumented)
+    outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableObservable>;
+    // (undocumented)
+    removeInputName(input: string): void;
     removeOutput(name: string): void;
     // (undocumented)
     removeStep(index: number): void;
-    // (undocumented)
-    stepAt(index: number): Step | undefined;
     // (undocumented)
     get steps(): Step[];
     // (undocumented)
     suggestOutputName(name: string): string;
     // (undocumented)
     toJsonObject(): Workflow_2;
+    // (undocumented)
+    toList(): Maybe<TableContainer>[];
+    toMap(): Map<string, Maybe<TableContainer>>;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Verb } from '@datashaper/schema'
-import type { GraphManager, Step } from '@datashaper/workflow'
+import type { Step,Workflow } from '@datashaper/workflow'
 import { ActionButton, IconButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
 import React, { memo, useCallback, useMemo } from 'react'
@@ -45,7 +45,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
 			nextInputTable,
-			graph as GraphManager,
+			graph as Workflow,
 		)
 		const { output, outputHasChanged, onOutputChanged } = useStepOutputHandling(
 			graph,

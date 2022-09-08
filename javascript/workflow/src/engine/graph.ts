@@ -5,7 +5,7 @@
 import type { Workflow as WorkflowInput } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 
-import { GraphManager } from './GraphManager.js'
+import { Workflow } from './Workflow.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -19,10 +19,10 @@ import { GraphManager } from './GraphManager.js'
  * @returns The built reactive processing graph
  */
 export function createGraph(
-	workflow: WorkflowInput,
-	tables: Map<string, TableContainer>,
-): GraphManager {
-	const graph = new GraphManager(workflow)
-	graph.setInputs(tables)
+	input: WorkflowInput,
+	tables: TableContainer[],
+): Workflow {
+	const graph = new Workflow(input)
+	graph.addInputTables(tables)
 	return graph
 }

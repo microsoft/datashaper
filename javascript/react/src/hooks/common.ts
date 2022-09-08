@@ -3,41 +3,37 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/tables'
-import type { Step, Workflow } from '@datashaper/workflow'
-import { GraphManager, readStep } from '@datashaper/workflow'
+import type { Step, Workflow as WorkflowJson } from '@datashaper/workflow'
+import { readStep,Workflow } from '@datashaper/workflow'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useState } from 'react'
 
 export function useGraphManager(
-	workflow?: Workflow | undefined,
+	workflow?: WorkflowJson | undefined,
 	inputs?: TableContainer[],
-): GraphManager {
+): Workflow {
 	const [graph, setGraph] = useState(
-		() => new GraphManager(workflow?.toJsonObject()),
+		() => new Workflow(workflow?.toJsonObject()),
 	)
 
 	// this effect should fire when a new workflow json is uploaded
 	useEffect(
 		function resetWorkflowWhenWorkflowChanges() {
-			setGraph(new GraphManager(workflow?.toJsonObject()))
+			setGraph(new Workflow(workflow?.toJsonObject()))
 		},
 		[workflow],
 	)
 
 	useEffect(
 		function syncDataTablesWhenInputsChange() {
-			graph.setInputs(mapInputs(inputs))
+			if (inputs) {
+				graph.addInputTables(inputs)
+			}
 		},
 		[graph, inputs],
 	)
 
 	return graph
-}
-
-function mapInputs(inputs?: TableContainer[]) {
-	const _inputs = new Map()
-	inputs?.forEach(i => _inputs.set(i.id, i))
-	return _inputs
 }
 
 /**
@@ -47,9 +43,7 @@ function mapInputs(inputs?: TableContainer[]) {
  * @param graph - the graph manager
  * @returns a safe output name to use
  */
-export function useCreateTableId(
-	graph: GraphManager,
-): (name: string) => string {
+export function useCreateTableId(graph: Workflow): (name: string) => string {
 	return useCallback(
 		(name: string): string => graph.suggestOutputName(name),
 		[graph],
@@ -63,11 +57,11 @@ export function useCreateTableId(
  * @returns a safe output name to use
  */
 export function useCreateTableName(
-	graph: GraphManager,
+	workflow: WorkflowJson,
 ): (name: string) => string {
 	return useCallback(
-		(name: string): string => graph.suggestOutputName(name),
-		[graph],
+		(name: string): string => workflow.suggestOutputName(name),
+		[workflow],
 	)
 }
 

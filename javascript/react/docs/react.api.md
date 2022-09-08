@@ -11,7 +11,6 @@ import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { DropzoneOptions } from 'react-dropzone';
 import { FileCollection } from '@datashaper/utilities';
 import { FileRejection } from 'react-dropzone';
-import { GraphManager } from '@datashaper/workflow';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
@@ -35,7 +34,7 @@ import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/schema';
 import type { Theme } from '@thematic/core';
 import type { Verb } from '@datashaper/schema';
-import type { Workflow } from '@datashaper/workflow';
+import { Workflow } from '@datashaper/workflow';
 
 // Warning: (ae-missing-release-tag) "ArqueroDetailsList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -461,7 +460,7 @@ export const StepComponent: React.FC<StepComponentProps>;
 //
 // @public (undocumented)
 export interface StepComponentProps {
-    graph: GraphManager;
+    graph: Workflow;
     index: number;
     inputColumnLabel?: string;
     inputTableLabel?: string;
@@ -564,7 +563,7 @@ export const TableTransformModal: React.FC<TransformModalProps>;
 //
 // @public (undocumented)
 export interface TableTransformProps {
-    graph: GraphManager;
+    graph: Workflow;
     headerText?: string;
     hideInput?: boolean;
     hideOutput?: boolean;
@@ -646,7 +645,7 @@ export function useColumnStyles(clickable: boolean, separator: boolean): Partial
 // Warning: (ae-missing-release-tag) "useDataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useDataTable(id: string | undefined, graph?: GraphManager, existingTable?: ColumnTable): ColumnTable | undefined;
+export function useDataTable(id: string | undefined, graph?: Workflow, existingTable?: ColumnTable): ColumnTable | undefined;
 
 // Warning: (ae-missing-release-tag) "useDetailsHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -666,12 +665,12 @@ export function useFormattedNumber(value: number | undefined, formatter?: string
 // Warning: (ae-missing-release-tag) "useGraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useGraphManager(workflow?: Workflow | undefined, inputs?: TableContainer[]): GraphManager;
+export function useGraphManager(workflow?: Workflow | undefined, inputs?: TableContainer[]): Workflow;
 
 // Warning: (ae-missing-release-tag) "useGraphSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useGraphSteps(graph: GraphManager): Step[];
+export function useGraphSteps(graph: Workflow): Step[];
 
 // Warning: (ae-missing-release-tag) "useGroupHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -686,12 +685,12 @@ export function useHandleFilesUpload(acceptedFileTypes: string[], handleCollecti
 // Warning: (ae-missing-release-tag) "useHandleStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleStepOutputChanged(graph: GraphManager): (step: Step, output: string | undefined) => void;
+export function useHandleStepOutputChanged(graph: Workflow): (step: Step, output: string | undefined) => void;
 
 // Warning: (ae-missing-release-tag) "useHandleStepSave" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useHandleStepSave(graph: GraphManager): (step: Step, index: number | undefined) => Step;
+export function useHandleStepSave(graph: Workflow): (step: Step, index: number | undefined) => Step;
 
 // Warning: (ae-missing-release-tag) "useIncrementingColumnColorScale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -726,7 +725,7 @@ export function useSortHandling(allowSorting: boolean, onColumnHeaderClick?: Col
 // Warning: (ae-missing-release-tag) "useStepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useStepOutputs(graph: GraphManager, defaultOutputName?: (index: number) => string): Array<string | undefined>;
+export function useStepOutputs(graph: Workflow, defaultOutputName?: (index: number) => string): Array<string | undefined>;
 
 // Warning: (ae-missing-release-tag) "useStripedRowsRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

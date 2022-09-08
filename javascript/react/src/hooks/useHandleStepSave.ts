@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@datashaper/workflow'
+import type { Step,Workflow } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
 export function useHandleStepSave(
-	graph: GraphManager,
+	graph: Workflow,
 ): (step: Step, index: number | undefined) => Step {
 	return useCallback(
 		(step: Step, index: number | undefined) => {
