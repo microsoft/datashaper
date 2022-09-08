@@ -6,7 +6,7 @@ import { useHandleStepSave } from '@datashaper/react'
 import type { Verb } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { container } from '@datashaper/tables'
-import type { GraphManager, Step, Workflow } from '@datashaper/workflow'
+import type { Step, Workflow } from '@datashaper/workflow'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -31,16 +31,14 @@ function workflowToJson(workflow: Workflow | undefined) {
 
 /**
  *
- * @param graph - the graph manager
+ * @param workflow - the workflow instance
  * @returns
  */
-export function useCreateStepHandler(
-	graph: GraphManager,
-): (verb: Verb) => void {
-	const saveStep = useHandleStepSave(graph)
+export function useCreateStepHandler(workflow: Workflow): (verb: Verb) => void {
+	const saveStep = useHandleStepSave(workflow)
 	return useCallback(
-		(verb: Verb) => saveStep({ verb } as Step, graph.steps.length),
-		[saveStep, graph],
+		(verb: Verb) => saveStep({ verb } as Step, workflow.steps.length),
+		[saveStep, workflow],
 	)
 }
 
@@ -74,18 +72,18 @@ export function useInputTables(autoType = false): TableContainer[] {
 
 /**
  * Gets a callback for handling adding files to the graph
- * @param graph - the input graph
+ * @param workflow - the input graph
  * @returns The graph and a callback to update the input tables
  */
 export function useAddFilesHandler(
-	graph: GraphManager,
+	workflow: Workflow,
 ): (loaded: TableContainer[]) => void {
 	// add any dropped files to the inputs
 	return useCallback(
 		(loaded: TableContainer[]) => {
-			loaded.forEach(table => graph.addInput(table))
+			loaded.forEach(table => workflow.addInputTable(table))
 		},
-		[graph],
+		[workflow],
 	)
 }
 

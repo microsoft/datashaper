@@ -52,17 +52,14 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 
 	const inputTables = useInputTables(autoType)
 	const [workflow, setWorkflow] = useState<Workflow | undefined>(undefined)
-	const graph = useWorkflow(workflow, inputTables)
-	const steps = useWorkflowSteps(graph)
-	const outputs = useStepOutputs(
-		graph,
-		(idx: number) => `step-${idx}`,
-	) as string[]
+	const wf = useWorkflow(workflow, inputTables)
+	const steps = useWorkflowSteps(wf)
+	const outputs = useStepOutputs(wf, (idx: number) => `step-${idx}`) as string[]
 	const downloadUrl = useWorkflowDownloadUrl(workflow)
-	const onAddFiles = useAddFilesHandler(graph)
-	const onStepSave = useHandleStepSave(graph)
-	const onStepCreate = useCreateStepHandler(graph)
-	const onStepOutputChange = useHandleStepOutputChanged(graph)
+	const onAddFiles = useAddFilesHandler(wf)
+	const onStepSave = useHandleStepSave(wf)
+	const onStepCreate = useCreateStepHandler(wf)
+	const onStepOutputChange = useHandleStepOutputChanged(wf)
 
 	return (
 		<Container>
@@ -90,7 +87,7 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 						step={step}
 						index={index}
 						key={step.id}
-						graph={graph}
+						workflow={wf}
 						output={outputs[index]}
 						features={features}
 						compact={true}
