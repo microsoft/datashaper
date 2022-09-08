@@ -1,6 +1,4 @@
 releases:
+  "@datashaper/react": major
   "@datashaper/webapp": patch
   "@datashaper/workflow": major
-
-undecided:
-  - "@datashaper/react"
