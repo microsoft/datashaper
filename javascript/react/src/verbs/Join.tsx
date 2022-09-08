@@ -16,17 +16,17 @@ import { JoinBase } from './Join.base.js'
  */
 export const Join: React.FC<StepComponentProps<JoinArgs>> = memo(function Join({
 	step,
-	graph,
+	workflow,
 	input,
 	onChange,
 }) {
-	const tableOptions = useTableDropdownOptions(graph)
+	const tableOptions = useTableDropdownOptions(workflow)
 
 	const leftTable = useDataTable(
 		input || step.input[NodeInput.Source]?.node,
-		graph,
+		workflow,
 	)
-	const rightTable = useDataTable(step.input[NodeInput.Other]?.node, graph)
+	const rightTable = useDataTable(step.input[NodeInput.Other]?.node, workflow)
 	const leftColumns = useTableColumnNames(leftTable)
 	const rightColumns = useTableColumnNames(rightTable)
 

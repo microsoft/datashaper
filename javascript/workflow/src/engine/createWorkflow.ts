@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Workflow as WorkflowInput } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 
-import { GraphManager } from './GraphManager.js'
-import type { Workflow } from './Workflow.js'
+import { Workflow } from './Workflow.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -18,11 +18,11 @@ import type { Workflow } from './Workflow.js'
  * @param tables - The fixed table map
  * @returns The built reactive processing graph
  */
-export function createGraph(
-	workflow: Workflow,
-	tables: Map<string, TableContainer>,
-): GraphManager {
-	const graph = new GraphManager(workflow)
-	graph.setInputs(tables)
+export function createWorkflow(
+	input: WorkflowInput,
+	tables: TableContainer[],
+): Workflow {
+	const graph = new Workflow(input)
+	graph.addInputTables(tables)
 	return graph
 }

@@ -13,8 +13,14 @@ import { ColumnListOperationBase } from './ColumnListOperation.base.js'
  */
 export const ColumnListOperation: React.FC<
 	StepComponentProps<InputColumnListArgs>
-> = memo(function ColumnListOperation({ step, graph, input, table, onChange }) {
-	const dataTable = useStepDataTable(step, graph, input, table)
+> = memo(function ColumnListOperation({
+	step,
+	workflow,
+	input,
+	table,
+	onChange,
+}) {
+	const dataTable = useStepDataTable(step, workflow, input, table)
 	const columns = useTableColumnNames(dataTable)
 
 	return (

@@ -15,9 +15,9 @@ import { Container, icons, Tables } from './SetOperation.styles.js'
  * E.g., for set operations
  */
 export const SetOperation: React.FC<StepComponentProps> = memo(
-	function SetOperation({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
-		const others = useOthers(step, onChange, graph)
+	function SetOperation({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
+		const others = useOthers(step, onChange, workflow)
 
 		const handleButtonClick = useCallback(() => {
 			onChange?.({

@@ -14,8 +14,8 @@ import { UnfoldBase } from './Unfold.base.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Unfold: React.FC<StepComponentProps<UnfoldArgs>> = memo(
-	function Unfold({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Unfold({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columns = useTableColumnNames(dataTable)
 		return <UnfoldBase step={step} onChange={onChange} columns={columns} />
 	},

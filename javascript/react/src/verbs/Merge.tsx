@@ -14,8 +14,8 @@ import { MergeBase } from './Merge.base.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
-	function Merge({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Merge({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columnNames = useTableColumnNames(dataTable)
 		return <MergeBase step={step} onChange={onChange} columns={columnNames} />
 	},

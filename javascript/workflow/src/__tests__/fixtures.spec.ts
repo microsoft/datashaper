@@ -9,9 +9,7 @@ import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-import { createGraph } from '../engine/graph.js'
-import { Workflow } from '../engine/Workflow.js'
-import { createTableStore } from './createTableStore.js'
+import { createWorkflow } from '../engine/createWorkflow.js'
 
 // Set the root cwd to the package root.
 // this makes loading datafiles by file-url in the project more straightforward
@@ -67,25 +65,24 @@ function defineTestCase(parentPath: string, test: string) {
 	it(testName, async () => {
 		// execute the dataflow
 		const workflowPath = path.join(casePath, 'workflow.json')
-		const tableStore = createTableStore(inputTables)
 		const workflowJson = await readJson(workflowPath)
 		const isWorkflowJsonValid = validateJson(workflowJson) as any
 		if (!isWorkflowJsonValid) {
 			throw new Error(`invalid workflow definition: ${workflowPath}`)
 		}
-		const graphBuilder = createGraph(new Workflow(workflowJson), tableStore)
+		const graphBuilder = createWorkflow(workflowJson, inputTables)
 
 		// check the output tables
 		await Promise.all(
 			expectedOutputTables.map(async o => {
 				const expected = await readCsv(path.join(casePath, `${o}.csv`))
 				await new Promise<void>(resolve => {
-					const result = graphBuilder.latest(o)
+					const result = graphBuilder.latestOutput(o)
 					if (result?.table) {
 						compareTables(expected, result.table, o)
 						resolve()
 					} else {
-						graphBuilder.output(o)!.subscribe(actual => {
+						graphBuilder.outputObservable(o)!.subscribe(actual => {
 							if (actual?.table) {
 								compareTables(expected, actual?.table, o)
 								resolve()

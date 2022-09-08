@@ -12,7 +12,7 @@ export interface PanelProps {
 }
 
 export interface StepHistoryListProps
-	extends Pick<TableTransformProps, 'graph' | 'nextInputTable'> {
+	extends Pick<TableTransformProps, 'workflow' | 'nextInputTable'> {
 	steps: Step[]
 	buttonId?: string | undefined
 	onDeleteClicked?: (index: number) => void
