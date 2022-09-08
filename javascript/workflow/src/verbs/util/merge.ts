@@ -2,27 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataType, Value } from '@datashaper/schema'
-import { columnType } from '@datashaper/tables'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { Value } from '@datashaper/schema'
 import type { RowObject } from 'arquero/dist/types/table/table'
-
-export function isSameDataType(
-	inputTable: ColumnTable,
-	columns: string[],
-): boolean {
-	let allTypesAreTheSame = true
-	const lastDataType: DataType = columnType(inputTable, columns[0]!)
-	let i = 1
-
-	while (allTypesAreTheSame === true && i < columns.length) {
-		const dataType: DataType = columnType(inputTable, columns[i]!)
-		allTypesAreTheSame = lastDataType === dataType
-		i++
-	}
-
-	return allTypesAreTheSame
-}
 
 export function firstOneWinsStrategy(
 	singleRow: RowObject,
