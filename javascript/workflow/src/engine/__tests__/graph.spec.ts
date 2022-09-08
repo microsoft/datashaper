@@ -8,7 +8,6 @@ import { table } from 'arquero'
 
 import { createTableStore } from '../../__tests__/createTableStore.js'
 import { createGraph } from '../graph.js'
-import { Workflow } from '../Workflow.js'
 
 describe('stepGraph', () => {
 	let store: Map<string, TableContainer>
@@ -21,7 +20,7 @@ describe('stepGraph', () => {
 
 	test('runs a single step with normal input/output', () => {
 		const g = createGraph(
-			new Workflow({
+			{
 				$schema:
 					'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 				input: ['input'],
@@ -37,11 +36,11 @@ describe('stepGraph', () => {
 					},
 				],
 				output: [{ name: 'output', node: 'fill1' }],
-			}),
+			},
 			store,
 		)
 		expect(g).toBeDefined()
-		const result = g.latest('output')
+		const result = g.latestOutput('output')
 		expect(result?.table?.numCols()).toBe(2)
 		expect(result?.table?.numRows()).toBe(4)
 		expect(g.outputs).toEqual(['output'])
@@ -49,38 +48,36 @@ describe('stepGraph', () => {
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {
 		const g = createGraph(
-			new Workflow(
-				{
-					$schema:
-						'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
-					input: ['input'],
-					steps: [
-						{
-							id: 'output-1',
-							verb: Verb.Fill,
-							input: 'input',
-							args: {
-								to: 'filled',
-								value: 1,
-							},
+			{
+				$schema:
+					'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
+				input: ['input'],
+				steps: [
+					{
+						id: 'output-1',
+						verb: Verb.Fill,
+						input: 'input',
+						args: {
+							to: 'filled',
+							value: 1,
 						},
-						{
-							id: 'output-2',
-							verb: Verb.Fill,
-							args: {
-								to: 'filled2',
-								value: 2,
-							},
+					},
+					{
+						id: 'output-2',
+						verb: Verb.Fill,
+						args: {
+							to: 'filled2',
+							value: 2,
 						},
-					],
-					output: ['output-1', 'output-2'],
-				},
-				false,
-			),
+					},
+				],
+				output: ['output-1', 'output-2'],
+			},
+
 			store,
 		)
 		expect(g).toBeDefined()
-		const result = g.latest('output-2')
+		const result = g.latestOutput('output-2')
 		expect(result).toBeDefined()
 		expect(result?.table?.numCols()).toBe(3)
 		expect(result?.table?.numRows()).toBe(4)

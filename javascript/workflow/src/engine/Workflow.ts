@@ -10,7 +10,7 @@ import { Subject } from 'rxjs'
 
 import { cloneStep } from '../util/index.js'
 import { readStep } from './readStep.js'
-import type { Step, StepInput, WorkflowObject } from './types.js'
+import type { Step, StepInput, WorkflowInput } from './types.js'
 import { WorkflowSchemaInstance } from './validator.js'
 
 /**
@@ -20,19 +20,19 @@ export class Workflow {
 	private _name?: string
 	private _description?: string
 	private _steps: Step[] = []
-	private _input: Set<string> = new Set()
+	private _inputNames: Set<string> = new Set()
 	private _output: Map<string, NamedOutputPortBinding> = new Map()
 
 	// The global onChange handler
-	private readonly _onChange = new Subject<void>()
+	protected readonly _onChange = new Subject<void>()
 
-	public constructor(workflowJson?: WorkflowObject) {
+	public constructor(workflowJson?: WorkflowInput) {
 		if (workflowJson != null) {
 			this.init(workflowJson)
 		}
 	}
 
-	private init(workflowJson: WorkflowObject) {
+	private init(workflowJson: WorkflowInput) {
 		let prev: Step | undefined
 		this._name = workflowJson.name
 		this._description = workflowJson.description
@@ -41,7 +41,7 @@ export class Workflow {
 			this._steps.push(step)
 			prev = step
 		})
-		workflowJson.input?.forEach(i => this._input.add(i))
+		workflowJson.input?.forEach(i => this._inputNames.add(i))
 		workflowJson.output?.forEach(o => {
 			const binding = fixOutput(o)
 			this._output.set(binding.node, binding)
@@ -51,12 +51,12 @@ export class Workflow {
 	public clone(): Workflow {
 		const clone = new Workflow()
 		clone._steps = this._steps.map(x => cloneStep(x))
-		clone._input = new Set(this._input)
+		clone._inputNames = new Set(this._inputNames)
 		clone._output = new Map(this._output)
 		return clone
 	}
 
-	public static async validate(workflowJson: WorkflowObject): Promise<boolean> {
+	public static async validate(workflowJson: WorkflowInput): Promise<boolean> {
 		return WorkflowSchemaInstance.isValid(workflowJson)
 	}
 
@@ -69,7 +69,7 @@ export class Workflow {
 	}
 
 	public get input(): Set<string> {
-		return this._input
+		return this._inputNames
 	}
 
 	public get output(): Map<string, NamedOutputPortBinding> {
@@ -85,22 +85,22 @@ export class Workflow {
 	}
 
 	public addInput(input: string): void {
-		this._input.add(input)
+		this._inputNames.add(input)
 		this._onChange.next()
 	}
 
 	public removeInput(input: string): void {
-		this._input.delete(input)
+		this._inputNames.delete(input)
 		this._onChange.next()
 	}
 
 	public clearInputs(): void {
-		this._input.clear()
+		this._inputNames.clear()
 		this._onChange.next()
 	}
 
 	public hasInput(input: string): boolean {
-		return this._input.has(input)
+		return this._inputNames.has(input)
 	}
 
 	public addOutput(output: NamedOutputPortBinding): void {
@@ -123,6 +123,18 @@ export class Workflow {
 			names.push(binding.name)
 		}
 		return names.includes(name)
+	}
+
+	public suggestOutputName(name: string): string {
+		const originalName = name.replace(/( \(\d+\))/, '')
+		let derivedName = originalName
+		let count = 1
+
+		while (this.hasOutput(derivedName)) {
+			derivedName = `${originalName} (${count})`
+			count++
+		}
+		return derivedName
 	}
 
 	public stepAt(index: number): Step | undefined {
@@ -161,18 +173,28 @@ export class Workflow {
 
 	public clear(): void {
 		this._steps = []
-		this._input.clear()
+		this._inputNames.clear()
 		this._output.clear()
 		this._onChange.next()
 	}
 
-	public onChange(handler: () => void): () => void {
+	public onChange(handler: () => void, fireSync?: boolean): () => void {
 		const sub = this._onChange.subscribe(handler)
+		if (fireSync) {
+			handler()
+		}
 		return () => sub.unsubscribe()
 	}
 
-	public toJsonObject(): WorkflowObject {
-		const output: WorkflowObject['output'] = []
+	/**
+	 * Log out the steps
+	 */
+	public print(): void {
+		console.log(this.steps)
+	}
+
+	public toJsonObject(): WorkflowInput {
+		const output: WorkflowInput['output'] = []
 		for (const [, binding] of this._output.entries()) {
 			output.push({ ...binding })
 		}
@@ -180,7 +202,7 @@ export class Workflow {
 			$schema: `https://microsoft.github.io/datashaper/schema/workflow/v1.json`,
 			name: this._name,
 			description: this._description,
-			input: [...this._input.values()],
+			input: [...this._inputNames.values()],
 			output,
 			steps: [...this.steps],
 		}

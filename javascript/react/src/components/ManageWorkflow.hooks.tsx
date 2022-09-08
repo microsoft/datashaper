@@ -27,7 +27,7 @@ export function useOnDuplicateStep(
 
 	return useCallback(
 		(step: Step) => {
-			const outputTable = table ?? graph?.latestForNodeId(step.id)?.table
+			const outputTable = table ?? graph?.latestOutputForNode(step.id)?.table
 			const clonedStep = cloneStep(step, outputTable?.columnNames())
 			clonedStep.id = ''
 			onSave?.(
@@ -200,8 +200,7 @@ export function useGraphWorkflowListener(
 	setWorkflow?: (workflow: Workflow) => void,
 ): void {
 	useEffect(
-		() =>
-			setWorkflow && graph.onChange(() => setWorkflow(graph.workflow.clone())),
+		() => setWorkflow && graph.onChange(() => setWorkflow(graph.clone())),
 		[graph, setWorkflow],
 	)
 }

@@ -11,9 +11,9 @@ export function useHandleStepSave(
 	return useCallback(
 		(step: Step, index: number | undefined) => {
 			const isExistingStep =
-				index != null && graph.numSteps > 0 && index < graph.numSteps
+				index != null && graph.length > 0 && index < graph.length
 			return isExistingStep
-				? graph.reconfigureStep(index as number, step)
+				? graph.updateStep(step, index as number)
 				: graph.addStep(step)
 		},
 		[graph],

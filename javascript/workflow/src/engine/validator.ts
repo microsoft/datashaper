@@ -5,7 +5,7 @@
 
 import Ajv from 'ajv'
 
-import type { WorkflowObject } from './types.js'
+import type { WorkflowInput } from './types.js'
 
 const baseUrl = 'https://microsoft.github.io/datashaper/schema/workflow'
 const defaultWorkflow = 'workflow.json'
@@ -27,7 +27,7 @@ export class WorkflowSchema {
 		validateSchema: true,
 	})
 
-	public async isValid(workflowJson?: WorkflowObject): Promise<boolean> {
+	public async isValid(workflowJson?: WorkflowInput): Promise<boolean> {
 		const { $schema } = workflowJson || {}
 		if (!$schema) {
 			console.warn('No $schema property found in workflow JSON')

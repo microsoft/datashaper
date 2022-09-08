@@ -12,7 +12,7 @@ import type { TableContainer } from '@datashaper/tables'
 
 import type { Node } from '../dataflow/index.js'
 
-export interface WorkflowObject {
+export interface WorkflowInput {
 	$schema?: string
 	name?: string
 	description?: string

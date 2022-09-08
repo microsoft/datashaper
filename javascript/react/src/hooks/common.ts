@@ -4,12 +4,7 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
-import {
-	GraphManager,
-	nextOutputName,
-	nextOutputNode,
-	readStep,
-} from '@datashaper/workflow'
+import { GraphManager, readStep } from '@datashaper/workflow'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -17,12 +12,14 @@ export function useGraphManager(
 	workflow?: Workflow | undefined,
 	inputs?: TableContainer[],
 ): GraphManager {
-	const [graph, setGraph] = useState(() => new GraphManager(workflow))
+	const [graph, setGraph] = useState(
+		() => new GraphManager(workflow?.toJsonObject()),
+	)
 
 	// this effect should fire when a new workflow json is uploaded
 	useEffect(
 		function resetWorkflowWhenWorkflowChanges() {
-			setGraph(new GraphManager(workflow))
+			setGraph(new GraphManager(workflow?.toJsonObject()))
 		},
 		[workflow],
 	)
@@ -54,7 +51,7 @@ export function useCreateTableId(
 	graph: GraphManager,
 ): (name: string) => string {
 	return useCallback(
-		(name: string): string => nextOutputNode(name, graph.workflow),
+		(name: string): string => graph.suggestOutputName(name),
 		[graph],
 	)
 }
@@ -69,7 +66,7 @@ export function useCreateTableName(
 	graph: GraphManager,
 ): (name: string) => string {
 	return useCallback(
-		(name: string): string => nextOutputName(name, graph.workflow),
+		(name: string): string => graph.suggestOutputName(name),
 		[graph],
 	)
 }

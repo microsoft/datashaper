@@ -5,7 +5,7 @@
 import type { TableContainer } from '@datashaper/tables'
 
 import { GraphManager } from './GraphManager.js'
-import type { Workflow } from './Workflow.js'
+import type { WorkflowInput } from './types.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.
@@ -19,7 +19,7 @@ import type { Workflow } from './Workflow.js'
  * @returns The built reactive processing graph
  */
 export function createGraph(
-	workflow: Workflow,
+	workflow: WorkflowInput,
 	tables: Map<string, TableContainer>,
 ): GraphManager {
 	const graph = new GraphManager(workflow)

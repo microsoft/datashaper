@@ -41,7 +41,8 @@ function extractTableFromGraph(
 		setTable(graph.inputs.get(id)?.table)
 	} else {
 		// Observe the named graph output
-		const observable = graph.output(id) ?? graph.outputForNodeId(id)
+		const observable =
+			graph.outputObservable(id) ?? graph.outputObservableForNode(id)
 		const subscription = observable?.subscribe(t => setTable(t?.table))
 		return () => subscription?.unsubscribe()
 	}
