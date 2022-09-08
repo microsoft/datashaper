@@ -1,6 +1,5 @@
 {
-	"TODO": "this is just a generic Resource, we need to publish schema independently",
-	"$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
+	"$schema": "https://microsoft.github.io/datashaper/schema/resource/v1.json",
 	"name": "nhefs-transformed",
 	"title": "NHEFS (prepared)",
 	"profile": "databundle",

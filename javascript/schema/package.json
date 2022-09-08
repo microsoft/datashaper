@@ -8,9 +8,10 @@
 		"types": "dist/index.d.ts"
 	},
 	"versions": {
+		"codebook": "1.0.0",
 		"datapackage": "1.0.0",
 		"datatable": "1.0.0",
-		"codebook": "1.0.0",
+		"resource": "1.0.0",
 		"workflow": "1.5.0"
 	},
 	"sideEffects": false,
@@ -37,10 +38,11 @@
 		"build": "essex build --docs --skipExportCheck",
 		"lint": "essex lint --fix",
 		"bundle-codebook": "typescript-json-schema tsconfig.json Codebook > ../../schema/codebook.json",
-		"bundle-datatable": "typescript-json-schema tsconfig.json DataTable > ../../schema/datatable.json",
 		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackage > ../../schema/datapackage.json",
+		"bundle-datatable": "typescript-json-schema tsconfig.json DataTable > ../../schema/datatable.json",
+		"bundle-resource": "typescript-json-schema tsconfig.json Resource > ../../schema/resource.json",
 		"bundle-workflow": "typescript-json-schema tsconfig.json Workflow > ../../schema/workflow.json",
-		"bundle": "run-p bundle-datapackage bundle-datatable bundle-codebook bundle-workflow",
+		"bundle": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-resource bundle-workflow",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
