@@ -14,16 +14,13 @@ export const unhotStep: ColumnTableStep<UnhotArgs> = (
 	input,
 	{ columns = [], to, prefix = '', keepOriginalColumns = false },
 ) => {
-	const tempTable = unhotOperation(input, columns, prefix)
-
-	// eslint-disable-next-line
-	const func: object = escape((d: any) => {
-		return firstOneWinsStrategy(d, columns)
+	// map 1/0 back to column name values
+	const mapped = unhotOperation(input, columns, prefix)
+	// merge back to a single column
+	const merged = mapped.derive({
+		[to]: escape((d: any) => firstOneWinsStrategy(d, columns)),
 	})
-
-	if (keepOriginalColumns) return tempTable.derive({ [to]: func })
-
-	return tempTable.derive({ [to]: func }).select(not(columns))
+	return keepOriginalColumns ? merged : merged.select(not(columns))
 }
 
 export const unhot = stepVerbFactory(unhotStep)
