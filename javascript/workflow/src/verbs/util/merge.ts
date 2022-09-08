@@ -25,7 +25,6 @@ export function isSameDataType(
 }
 
 export function firstOneWinsStrategy(
-	isSameDataTypeFlag: boolean,
 	singleRow: RowObject,
 	columns: string[],
 ): Value {
@@ -44,11 +43,10 @@ export function firstOneWinsStrategy(
 		i++
 	}
 
-	return isSameDataTypeFlag ? firstValidValue : '' + firstValidValue
+	return firstValidValue
 }
 
 export function lastOneWinsStrategy(
-	isSameDataTypeFlag: boolean,
 	singleRow: RowObject,
 	columns: string[],
 ): Value {
@@ -63,7 +61,7 @@ export function lastOneWinsStrategy(
 		}
 	}
 
-	return isSameDataTypeFlag ? lastValidValue : '' + lastValidValue
+	return lastValidValue
 }
 
 export function arrayStrategy(

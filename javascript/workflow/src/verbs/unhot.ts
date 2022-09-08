@@ -7,7 +7,7 @@ import { escape, not } from 'arquero'
 
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
-import { firstOneWinsStrategy, isSameDataType } from './util/merge.js'
+import { firstOneWinsStrategy } from './util/merge.js'
 import { unhotOperation } from './util/unhot-logic.js'
 
 export const unhotStep: ColumnTableStep<UnhotArgs> = (
@@ -16,11 +16,9 @@ export const unhotStep: ColumnTableStep<UnhotArgs> = (
 ) => {
 	const tempTable = unhotOperation(input, columns, prefix)
 
-	const isSameDataTypeFlag: boolean = isSameDataType(tempTable, columns)
-
 	// eslint-disable-next-line
 	const func: object = escape((d: any) => {
-		return firstOneWinsStrategy(isSameDataTypeFlag, d, columns)
+		return firstOneWinsStrategy(d, columns)
 	})
 
 	if (keepOriginalColumns) return tempTable.derive({ [to]: func })
