@@ -1,0 +1,8 @@
+releases:
+  "@datashaper/schema": patch
+  "@datashaper/tables": patch
+  "@datashaper/workflow": patch
+
+declined:
+  - "@datashaper/react"
+  - "@datashaper/webapp"

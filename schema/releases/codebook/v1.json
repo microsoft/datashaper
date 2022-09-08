@@ -281,7 +281,7 @@
 			"type": "string"
 		}
 	},
-	"description": "This contains all of the field-level details for interpreting a data table,\nincluding data types, mapping, and metadata.\nTable schemas are standalone resources that can be linked from a Dataset or embedded.\nNote also that with persisted metadata and field examples, a table can often be visualized\nand described to the user without actually loading the source file.\nresource profile: 'codebook'",
+	"description": "This contains all of the field-level details for interpreting a dataset,\nincluding data types, mapping, and metadata.\nNote that with persisted metadata and field examples, a dataset can often be visualized\nand described to the user without actually loading the source file.\nresource profile: 'codebook'",
 	"properties": {
 		"$schema": {
 			"type": "string"

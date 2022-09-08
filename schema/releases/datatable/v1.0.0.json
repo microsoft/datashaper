@@ -1,129 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"definitions": {
-		"Bin": {
-			"properties": {
-				"count": {
-					"type": "number"
-				},
-				"min": {
-					"type": ["string", "number"]
-				}
-			},
-			"type": "object"
-		},
-		"Category": {
-			"properties": {
-				"count": {
-					"type": "number"
-				},
-				"name": {
-					"type": "string"
-				}
-			},
-			"type": "object"
-		},
-		"Codebook": {
-			"description": "This contains all of the field-level details for interpreting a data table,\nincluding data types, mapping, and metadata.\nTable schemas are standalone resources that can be linked from a Dataset or embedded.\nNote also that with persisted metadata and field examples, a table can often be visualized\nand described to the user without actually loading the source file.\nresource profile: 'codebook'",
-			"properties": {
-				"$schema": {
-					"type": "string"
-				},
-				"description": {
-					"description": "Description of the named resource.",
-					"type": "string"
-				},
-				"fields": {
-					"items": {
-						"$ref": "#/definitions/Field"
-					},
-					"type": "array"
-				},
-				"homepage": {
-					"description": "URL to a public webpage that describes this resource.",
-					"type": "string"
-				},
-				"license": {
-					"description": "SPDX license string.\nhttps://spdx.org/licenses/",
-					"type": "string"
-				},
-				"name": {
-					"description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
-					"type": "string"
-				},
-				"path": {
-					"anyOf": [
-						{
-							"items": {
-								"type": "string"
-							},
-							"type": "array"
-						},
-						{
-							"type": "string"
-						}
-					],
-					"description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nTODO: frictionless also includes a pathType indicating if a file is local or remote. Is this needed?"
-				},
-				"profile": {
-					"description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
-					"type": "string"
-				},
-				"sources": {
-					"description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nTODO: should this be a direct Resource list, or should each entry be a container object that also defines the relationship?\n\nTODO: linking is a little cumbersome. It seems that a Resource should be linkable with _just_ a URL - including core required properties is redundant.\nunderstanding-json-schema/structuring.html#json-pointer) to a subschema?",
-					"items": {
-						"$ref": "#/definitions/Resource"
-					},
-					"type": "array"
-				},
-				"title": {
-					"description": "Friendly name of the resource. Used for display only.",
-					"type": "string"
-				}
-			},
-			"type": "object"
-		},
-		"Constraints": {
-			"description": "Validation constraints for a field.",
-			"properties": {
-				"enum": {
-					"description": "Strict list of allowed values in the column.",
-					"items": {
-						"type": "string"
-					},
-					"type": "array"
-				},
-				"maxLength": {
-					"description": "For strings or arrays, this is the maximum allowed length of values.",
-					"type": "number"
-				},
-				"maximum": {
-					"description": "For numbers or dates, this is the maximum allowed value.",
-					"type": "number"
-				},
-				"minLength": {
-					"description": "For strings or arrays, this is the minimum allowed length of values.",
-					"type": "number"
-				},
-				"minimum": {
-					"description": "For numbers or dates, this is the minimum allowed value.",
-					"type": "number"
-				},
-				"pattern": {
-					"description": "RegExp pattern that string values must match.",
-					"type": "string"
-				},
-				"required": {
-					"description": "Indicates that this field is required (not nullable).",
-					"type": "boolean"
-				},
-				"unique": {
-					"description": "Indicates that every value in this column must be unique.",
-					"type": "boolean"
-				}
-			},
-			"type": "object"
-		},
 		"DataFormat": {
 			"description": "Base format the data is stored within.\nThis will expand to include additional formats such as Arrow and Parquet over time.\nTODO: we've seen a number of examples in the wild using JSON Lines https://jsonlines.org/",
 			"enum": ["csv", "json"],
@@ -373,9 +250,6 @@
 			},
 			"type": "object"
 		},
-		"Record<any,any>": {
-			"type": "object"
-		},
 		"Resource": {
 			"description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
 			"properties": {
@@ -475,21 +349,12 @@
 				}
 			},
 			"type": "object"
-		},
-		"VariableNature": {
-			"description": "Describes the semantic shape of a variable.\nThis has particular effect on how we display and compare data,\nsuch as using line charts for continuous versus bar charts for categorical.\nThis mostly applies to numeric variables, but strings for instance can be categorial.",
-			"enum": ["binary", "continuous", "discrete", "nominal", "ordinal"],
-			"type": "string"
 		}
 	},
-	"description": "This defines the data-containing resource type.\nA dataset can be embedded directly using the `data` property,\nor it can be linked to a raw file using the `path`.\nIf the latter, optional format and parsing options can be applied to aid interpreting the file contents.\nresource profile: 'dataset'",
+	"description": "This defines the table-containing resource type.\nA dataset can be embedded directly using the `data` property,\nor it can be linked to a raw file using the `path`.\nIf the latter, optional format and parsing options can be applied to aid interpreting the file contents.\nresource profile: 'datatable'",
 	"properties": {
 		"$schema": {
 			"type": "string"
-		},
-		"codebook": {
-			"$ref": "#/definitions/Codebook",
-			"description": "Table schema and codebook for interpreting a data table.\nDefaults are inferred from the data - e.g., detected column names are used.\nIf a table schema is provided and types are specified for the columns, these are used in place of any other detected types.\nA schema can also be supplied via the `sources` linking property of a shared parent resource.\nPrecedence: detected -> parent linked -> embedded"
 		},
 		"columns": {
 			"description": "Number of columns in the data.",
