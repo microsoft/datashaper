@@ -24,9 +24,9 @@ export interface ParserOptions {
 	header?: boolean
 	/**
 	 * Character that indicates the end of a line (row).
-	 * Default: [\r, \r\n, \n]
+	 * Default: \r, \r\n, or \n
 	 */
-	lineTerminator?: string[]
+	lineTerminator?: string
 	/**
 	 * Character to use for quoting strings.
 	 * Default: "
@@ -34,7 +34,6 @@ export interface ParserOptions {
 	quoteChar?: string
 	/**
 	 * String to use for escaping quotes.
-	 * Note that pandas and spark differ here.
 	 * Default: none
 	 */
 	escape?: string

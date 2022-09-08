@@ -632,7 +632,7 @@ export interface ParserOptions {
     delimiter?: string;
     escape?: string;
     header?: boolean;
-    lineTerminator?: string[];
+    lineTerminator?: string;
     names?: string[];
     quoteChar?: string;
     readRows?: number;

@@ -56,7 +56,7 @@
 					"type": "string"
 				},
 				"escape": {
-					"description": "String to use for escaping quotes.\nNote that pandas and spark differ here.\nDefault: none",
+					"description": "String to use for escaping quotes.\nDefault: none",
 					"type": "string"
 				},
 				"header": {
@@ -64,11 +64,8 @@
 					"type": "boolean"
 				},
 				"lineTerminator": {
-					"description": "Character that indicates the end of a line (row).\nDefault: [\\r, \\r\\n, \\n]",
-					"items": {
-						"type": "string"
-					},
-					"type": "array"
+					"description": "Character that indicates the end of a line (row).\nDefault: \\r, \\r\\n, or \\n",
+					"type": "string"
 				},
 				"names": {
 					"description": "List of column names to use.\nIf this is not supplied, column names will be inferred from the first row of the data.",
