@@ -61,7 +61,7 @@ export class Workflow {
 			workflowInput.input?.forEach(i => this._inputNames.add(i))
 			workflowInput.output?.forEach(o => {
 				const binding = fixOutput(o)
-				this._outputPorts.set(binding.node, binding)
+				this._outputPorts.set(binding.name, binding)
 			})
 		}
 
@@ -241,27 +241,44 @@ export class Workflow {
 
 	/**
 	 * Observe an output name
-	 * @param name - The output to observe
+	 * @param name - The output to observe. If falsy, this will observe the default output of the final step.
 	 */
-	public outputObservable(name: string): Maybe<TableObservable> {
-		return this._outputs.get(name)
+	public outputObservable(name?: string): Maybe<TableObservable> {
+		if (name != null) {
+			return this._outputs.get(name)
+		} else {
+			return this.lastStepOutput()
+		}
 	}
 
 	/**
 	 * Get the latest output value
-	 * @param name - The output to retrieve
+	 * @param name - The output to retrieve.  If falsy, this will observe the default output of the final step.
 	 */
-	public latestOutput(name: string): Maybe<TableContainer> {
-		return this._outputs.get(name)?.value
+	public latestOutput(name?: string): Maybe<TableContainer> {
+		if (name != null) {
+			return this._outputs.get(name)?.value
+		} else {
+			return this.lastStepOutput()?.value
+		}
+	}
+
+	private lastStepOutput(): Maybe<TableSubject> {
+		// Returns the default output of the final node
+		const lastStepId = this.steps[this.steps.length - 1]!.id
+		const lastNode = this.getNode(lastStepId)
+		// Nodes use BehaviorSubject internally
+		return lastNode.output() as TableSubject
 	}
 
 	public outputObservableForNode(
 		nodeId: string,
 		nodeOutput?: string,
-	): Maybe<TableObservable> {
+	): Maybe<TableSubject> {
 		const output = this.outputNameForNode(nodeId, nodeOutput)
 		if (output) {
-			return this.outputObservable(output)
+			// Nodes use BehaviorSubject internally
+			return this.outputObservable(output) as TableSubject
 		}
 	}
 

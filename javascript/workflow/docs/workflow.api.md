@@ -5,6 +5,7 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
+import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
@@ -585,7 +586,7 @@ export class Workflow {
     hasOutputName(name: string): boolean;
     // (undocumented)
     get inputNames(): Set<string>;
-    latestOutput(name: string): Maybe<TableContainer>;
+    latestOutput(name?: string): Maybe<TableContainer>;
     // (undocumented)
     latestOutputForNode(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
     // (undocumented)
@@ -603,9 +604,11 @@ export class Workflow {
     // (undocumented)
     outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
     get outputNames(): string[];
-    outputObservable(name: string): Maybe<TableObservable>;
+    outputObservable(name?: string): Maybe<TableObservable>;
+    // Warning: (ae-forgotten-export) The symbol "TableSubject" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableObservable>;
+    outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableSubject>;
     // (undocumented)
     removeInputName(input: string): void;
     removeOutput(name: string): void;

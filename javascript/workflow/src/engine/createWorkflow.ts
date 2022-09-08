@@ -18,7 +18,7 @@ import { Workflow } from './Workflow.js'
  * @param tables - The fixed table map
  * @returns The built reactive processing graph
  */
-export function createGraph(
+export function createWorkflow(
 	input: WorkflowInput,
 	tables: TableContainer[],
 ): Workflow {

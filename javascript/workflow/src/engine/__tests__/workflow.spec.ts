@@ -6,23 +6,21 @@ import { Verb } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { table } from 'arquero'
 
-import { createTableStore } from '../../__tests__/createTableStore.js'
-import { createGraph } from '../graph.js'
+import { createWorkflow } from '../createWorkflow.js'
 
 describe('stepGraph', () => {
-	let store: Map<string, TableContainer>
+	let store: TableContainer[]
 
 	beforeEach(() => {
-		store = createTableStore([
-			{ id: 'input', table: table({ ID: [1, 2, 3, 4] }) },
-		])
+		store = [{ id: 'input', table: table({ ID: [1, 2, 3, 4] }) }]
 	})
 
 	test('runs a single step with normal input/output', () => {
-		const g = createGraph(
+		const g = createWorkflow(
 			{
 				$schema:
 					'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
+				name: 'test',
 				input: ['input'],
 				steps: [
 					{
@@ -43,14 +41,15 @@ describe('stepGraph', () => {
 		const result = g.latestOutput('output')
 		expect(result?.table?.numCols()).toBe(2)
 		expect(result?.table?.numRows()).toBe(4)
-		expect(g.outputs).toEqual(['output'])
+		expect(g.outputNames).toEqual(['output'])
 	})
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {
-		const g = createGraph(
+		const g = createWorkflow(
 			{
 				$schema:
 					'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
+				name: 'test',
 				input: ['input'],
 				steps: [
 					{
@@ -82,6 +81,6 @@ describe('stepGraph', () => {
 		expect(result?.table?.numCols()).toBe(3)
 		expect(result?.table?.numRows()).toBe(4)
 		expect(result?.table?.columnNames()).toEqual(['ID', 'filled', 'filled2'])
-		expect(g.outputs).toEqual(['output-1', 'output-2'])
+		expect(g.outputNames).toEqual(['output-1', 'output-2'])
 	})
 })
