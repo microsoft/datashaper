@@ -11,6 +11,8 @@ import type {
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, Subject } from 'rxjs'
+import { v4 } from 'uuid'
+import { Z_ASCII } from 'zlib'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
@@ -29,6 +31,7 @@ type TableSubject = BehaviorSubject<Maybe<TableContainer>>
 
 export class Workflow {
 	// Workflow Data Fields
+	private _id?: string
 	private _name?: string
 	private _description?: string
 	private _steps: Step[] = []
@@ -51,6 +54,7 @@ export class Workflow {
 	public constructor(input?: WorkflowInput) {
 		const readWorkflowInput = (workflowInput: WorkflowInput) => {
 			let prev: Step | undefined
+			this._id = workflowInput.id ?? v4()
 			this._name = workflowInput.name
 			this._description = workflowInput.description
 			workflowInput.steps?.forEach(i => {
@@ -83,13 +87,34 @@ export class Workflow {
 		syncWorkflowStateIntoGraph()
 	}
 
+	// #region Workflow Metadata
+	public get id(): string | undefined {
+		return this._id
+	}
+
+	public set id(input: string | undefined) {
+		this._id = input
+		this._onChange.next()
+	}
+
 	public get name(): string | undefined {
 		return this._name
+	}
+
+	public set name(input: string | undefined) {
+		this._name = input
+		this._onChange.next()
 	}
 
 	public get description(): string | undefined {
 		return this._description
 	}
+
+	public set description(input: string | undefined) {
+		this._description = input
+		this._onChange.next()
+	}
+	// #endregion
 
 	// #region Graph/Node Management
 	private addWorkflowStepToGraph(step: Step): void {
@@ -468,7 +493,8 @@ export class Workflow {
 		}
 		return {
 			$schema: `https://microsoft.github.io/datashaper/schema/workflow/v1.json`,
-			name: this._name || 'Workflow',
+			id: this._id ?? v4(),
+			name: this._name ?? 'Workflow',
 			description: this._description,
 			input: [...this._inputNames.values()],
 			output,
