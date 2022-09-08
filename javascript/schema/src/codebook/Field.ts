@@ -59,6 +59,12 @@ export interface Field extends Named {
 	 */
 	example?: any
 	/**
+	 * Provenance hints for the source of this field.
+	 * For example, categorical fields are often onehot encoded into new binary columns,
+	 * this would link back to the original categorical.
+	 */
+	derivedFrom?: string[]
+	/**
 	 * This provides a mapping between cell values and some other value.
 	 * Most commonly this is the core "data dictionary", whereby cell values are stored as numeric categories,
 	 * and the dictionary defines textual descriptions of the actual meaning.
