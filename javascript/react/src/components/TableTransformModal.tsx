@@ -25,7 +25,7 @@ import type { TransformModalProps } from './TableTransformModal.types.js'
 export const TableTransformModal: React.FC<TransformModalProps> = memo(
 	function TableTransformModal({
 		onDismiss,
-		graph,
+		workflow,
 		onTransformRequested,
 		index,
 		step,
@@ -56,7 +56,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 				<ContainerBody showGuidance={showGuidance}>
 					<StepComponentContainer>
 						<TableTransform
-							graph={graph}
+							workflow={workflow}
 							onTransformRequested={onTransformRequested}
 							index={index}
 							step={step}

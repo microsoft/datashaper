@@ -17,8 +17,8 @@ import { ConvertBase } from './Convert.base.js'
  * Provides inputs for a Convert step.
  */
 export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
-	function Convert({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Convert({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columns = useTableColumnNames(dataTable)
 		const columnsMetadata = useColumnsMetadata(dataTable)
 		return (

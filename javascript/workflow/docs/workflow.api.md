@@ -5,6 +5,7 @@
 ```ts
 
 import type { AggregateArgs } from '@datashaper/schema';
+import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
@@ -26,7 +27,6 @@ import type { NamedPortBinding } from '@datashaper/schema';
 import type { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
-import type { OutputPortBinding } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
@@ -34,11 +34,13 @@ import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
 import type { SpreadArgs } from '@datashaper/schema';
+import { Subject } from 'rxjs';
 import { TableContainer } from '@datashaper/tables';
 import type { UnfoldArgs } from '@datashaper/schema';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
+import type { Workflow as Workflow_2 } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -156,10 +158,10 @@ export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertA
 // @public (undocumented)
 export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 
-// Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "createWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createGraph(workflow: Workflow, tables: Map<string, TableContainer>): GraphManager;
+export function createWorkflow(input: Workflow_2, tables: TableContainer[]): Workflow;
 
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -239,50 +241,6 @@ export interface Graph<T> {
     readonly outputs: NodeId[];
     remove(id: NodeId): void;
     validate(): void;
-}
-
-// Warning: (ae-missing-release-tag) "GraphManager" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export class GraphManager {
-    constructor(wf?: Workflow);
-    addInput(item: TableContainer): void;
-    addOutput(binding: NamedOutputPortBinding): void;
-    addStep(stepInput: StepInput): Step;
-    // (undocumented)
-    readonly graph: Graph<TableContainer>;
-    // (undocumented)
-    hasInput(name: string): boolean;
-    // (undocumented)
-    hasOutput(name: string): boolean;
-    // (undocumented)
-    readonly inputs: Map<string, TableContainer>;
-    latest(name: string): Maybe<TableContainer>;
-    // (undocumented)
-    latestForNodeId(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
-    get numSteps(): number;
-    onChange(handler: () => void, fireSync?: boolean): () => void;
-    output(name: string): Maybe<TableObservable>;
-    // (undocumented)
-    get outputDefinitions(): NamedOutputPortBinding[];
-    // (undocumented)
-    outputForNodeId(nodeId: string, nodeOutput?: string): Maybe<TableObservable>;
-    // (undocumented)
-    outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
-    get outputs(): string[];
-    print(): void;
-    reconfigureStep(index: number, stepInput: StepInput<unknown>): Step;
-    removeInput(inputName: string): void;
-    removeOutput(name: string): void;
-    removeStep(index: number): void;
-    // (undocumented)
-    setInputs(inputs: Map<string, TableContainer>): void;
-    get steps(): Step[];
-    // (undocumented)
-    toList(): Maybe<TableContainer>[];
-    toMap(): Map<string, Maybe<TableContainer>>;
-    // (undocumented)
-    get workflow(): Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "groupby" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -380,16 +338,6 @@ export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>
 //
 // @public
 export function nextColumnName(name: string, columnNames: string[]): string;
-
-// Warning: (ae-missing-release-tag) "nextOutputName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function nextOutputName(name: string, workflow: Workflow): string;
-
-// Warning: (ae-missing-release-tag) "nextOutputNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function nextOutputNode(name: string, workflow: Workflow): string;
 
 // @public
 interface Node_2<T, Config = unknown> {
@@ -565,7 +513,7 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 
 // Warning: (ae-missing-release-tag) "TableObservable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export type TableObservable = Observable<Maybe<TableContainer>>;
 
 // Warning: (ae-missing-release-tag) "unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -616,73 +564,74 @@ export { window_2 as window }
 
 // Warning: (ae-missing-release-tag) "Workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
+// @public (undocumented)
 export class Workflow {
-    constructor(workflowJson?: WorkflowObject);
+    constructor(input?: Workflow_2);
     // (undocumented)
-    addInput(input: string): void;
+    addInputName(input: string): void;
+    addInputTable(table: TableContainer): void;
     // (undocumented)
+    addInputTables(inputs: TableContainer[]): void;
     addOutput(output: NamedOutputPortBinding): void;
-    // (undocumented)
     addStep(stepInput: StepInput): Step;
     // (undocumented)
-    clear(): void;
-    // (undocumented)
-    clearInputs(): void;
-    // (undocumented)
-    clone(): Workflow;
-    // (undocumented)
     get description(): string | undefined;
+    set description(input: string | undefined);
     // (undocumented)
-    hasInput(input: string): boolean;
+    getInputTable(name: string): Maybe<TableContainer>;
+    // (undocumented)
+    hasInputName(input: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
     // (undocumented)
     hasOutputName(name: string): boolean;
     // (undocumented)
-    get input(): Set<string>;
+    get id(): string | undefined;
+    set id(input: string | undefined);
+    // (undocumented)
+    get inputNames(): Set<string>;
+    latestOutput(name?: string): Maybe<TableContainer>;
+    // (undocumented)
+    latestOutputForNode(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
     // (undocumented)
     get length(): number;
     // (undocumented)
     get name(): string | undefined;
+    set name(input: string | undefined);
     // (undocumented)
-    onChange(handler: () => void): () => void;
+    onChange(handler: () => void, fireSync?: boolean): () => void;
+    // (undocumented)
+    protected readonly _onChange: Subject<void>;
     // (undocumented)
     get output(): Map<string, NamedOutputPortBinding>;
     // (undocumented)
-    removeInput(input: string): void;
+    get outputDefinitions(): NamedOutputPortBinding[];
     // (undocumented)
+    outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
+    get outputNames(): string[];
+    outputObservable(name?: string): Maybe<TableObservable>;
+    // Warning: (ae-forgotten-export) The symbol "TableSubject" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableSubject>;
+    // (undocumented)
+    removeInputName(input: string): void;
     removeOutput(name: string): void;
     // (undocumented)
     removeStep(index: number): void;
     // (undocumented)
-    stepAt(index: number): Step | undefined;
-    // (undocumented)
     get steps(): Step[];
     // (undocumented)
-    toJsonObject(): WorkflowObject;
+    suggestOutputName(name: string): string;
+    // (undocumented)
+    toJsonObject(): Workflow_2;
+    // (undocumented)
+    toList(): Maybe<TableContainer>[];
+    toMap(): Map<string, Maybe<TableContainer>>;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)
-    static validate(workflowJson: WorkflowObject): Promise<boolean>;
-}
-
-// Warning: (ae-missing-release-tag) "WorkflowObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface WorkflowObject {
-    // (undocumented)
-    $schema?: string;
-    // (undocumented)
-    description?: string;
-    // (undocumented)
-    input?: string[];
-    // (undocumented)
-    name?: string;
-    // (undocumented)
-    output: OutputPortBinding[];
-    // (undocumented)
-    steps: StepInput[];
+    static validate(workflowJson: Workflow_2): Promise<boolean>;
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -690,7 +639,7 @@ export interface WorkflowObject {
 // @public (undocumented)
 export class WorkflowSchema {
     // (undocumented)
-    isValid(workflowJson?: WorkflowObject): Promise<boolean>;
+    isValid(workflowJson?: Workflow_2): Promise<boolean>;
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowSchemaInstance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

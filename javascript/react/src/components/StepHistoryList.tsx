@@ -35,7 +35,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		onSelect,
 		onStartNewStep,
 		buttonId,
-		graph,
+		workflow,
 		onCreate,
 		nextInputTable,
 	}) {
@@ -81,7 +81,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 										key={index}
 										step={step}
 										index={index}
-										graph={graph}
+										workflow={workflow}
 										isEditing={true}
 										style={tableTransformStyle}
 										nextInputTable={nextInputTable}

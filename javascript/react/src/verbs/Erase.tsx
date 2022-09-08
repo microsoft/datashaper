@@ -14,8 +14,8 @@ import { EraseBase } from './Erase.base.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Erase: React.FC<StepComponentProps<EraseArgs>> = memo(
-	function Erase({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Erase({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columns = useTableColumnNames(dataTable)
 		return <EraseBase step={step} onChange={onChange} columns={columns} />
 	},

@@ -3,9 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { Workflow as WorkflowInput } from '@datashaper/schema'
 import Ajv from 'ajv'
-
-import type { WorkflowObject } from './types.js'
 
 const baseUrl = 'https://microsoft.github.io/datashaper/schema/workflow'
 const defaultWorkflow = 'workflow.json'
@@ -27,7 +26,7 @@ export class WorkflowSchema {
 		validateSchema: true,
 	})
 
-	public async isValid(workflowJson?: WorkflowObject): Promise<boolean> {
+	public async isValid(workflowJson?: WorkflowInput): Promise<boolean> {
 		const { $schema } = workflowJson || {}
 		if (!$schema) {
 			console.warn('No $schema property found in workflow JSON')

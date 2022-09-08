@@ -39,7 +39,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 	function StepComponent({
 		step: s,
 		output,
-		graph: g,
+		workflow: g,
 		index,
 		inputTableLabel,
 		inputColumnLabel,
@@ -99,7 +99,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 
 				<StepArgs
 					step={s}
-					graph={g}
+					workflow={g}
 					output={output}
 					onChangeOutput={changeOutput}
 					onChange={change}

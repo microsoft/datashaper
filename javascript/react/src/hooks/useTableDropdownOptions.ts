@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager } from '@datashaper/workflow'
+import type { Workflow } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -13,19 +13,19 @@ import { getSimpleDropdownOptions } from './useSimpleDropdownOptions.js'
  * TODO: for any given step, we should only show the tables created *prior* to this step,
  * potentially via an optional filter callback on store.list.
  * As it is, whenever the store is updated all the table dropdowns get the results.
- * @param graph -
+ * @param workflow -
  * @returns
  */
 export function useTableDropdownOptions(
-	graph?: GraphManager,
+	workflow?: Workflow,
 ): IDropdownOption[] {
-	const inputNames = useInputTableNames(graph)
+	const inputNames = useInputTableNames(workflow)
 
 	return useMemo(() => {
 		let inputOptions = getSimpleDropdownOptions(inputNames)
-		if (graph) {
+		if (workflow) {
 			inputOptions = inputOptions.concat(
-				graph?.outputDefinitions.map(a => ({
+				workflow?.outputDefinitions.map(a => ({
 					key: a.node,
 					text: a.name,
 				})),
@@ -33,7 +33,7 @@ export function useTableDropdownOptions(
 		}
 
 		return inputOptions
-	}, [inputNames, graph])
+	}, [inputNames, workflow])
 }
 
 /**
@@ -41,25 +41,26 @@ export function useTableDropdownOptions(
  * TODO: for any given step, we should only show the tables created *prior* to this step,
  * potentially via an optional filter callback on store.list.
  * As it is, whenever the store is updated all the table dropdowns get the results.
- * @param graph -
+ * @param workflow -
  * @returns
  */
-export function useInputTableNames(graph?: GraphManager): string[] {
-	const [tables, setTables] = useState<string[]>(() => getTableOptions(graph))
+export function useInputTableNames(workflow?: Workflow): string[] {
+	const [tables, setTables] = useState<string[]>(() =>
+		getTableOptions(workflow),
+	)
 
 	// Listen to input table changes
 	useEffect(
 		() =>
-			graph?.onChange(() => {
-				setTables(getTableOptions(graph))
+			workflow?.onChange(() => {
+				setTables(getTableOptions(workflow))
 			}),
-		[graph],
+		[workflow],
 	)
 
 	return tables
 }
 
-function getTableOptions(graph?: GraphManager): string[] {
-	const result = new Set<string>(graph?.inputs.keys())
-	return [...result.values()]
+function getTableOptions(workflow?: Workflow): string[] {
+	return [...(workflow?.inputNames ?? [])]
 }

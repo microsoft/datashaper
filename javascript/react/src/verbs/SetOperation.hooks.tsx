@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager, Step } from '@datashaper/workflow'
+import type { Step, Workflow } from '@datashaper/workflow'
 import { IconButton } from '@fluentui/react'
 import { useMemo } from 'react'
 
@@ -14,7 +14,7 @@ import { icons } from './SetOperation.styles.js'
 export function useOthers(
 	step: Step,
 	onChange?: (step: Step) => void,
-	store?: GraphManager,
+	store?: Workflow,
 ): (JSX.Element | null)[] {
 	const tableOptions = useTableDropdownOptions(store)
 	return useMemo<(JSX.Element | null)[]>(() => {

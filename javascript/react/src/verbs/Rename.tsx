@@ -35,8 +35,8 @@ import {
  * Provides inputs for a RenameStep.
  */
 export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
-	function Rename({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Rename({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const handleColumnChange = useHandleColumnChange(step, onChange)
 		const handleColumnDelete = useColumnRecordDelete(step, onChange)
 		const handleButtonClick = useHandleAddButtonClick(step, dataTable, onChange)
