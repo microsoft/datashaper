@@ -5,12 +5,5 @@
 	"title": "NHEFS (prepared)",
 	"profile": "databundle",
 	"path": "nhefs-transformed/databundle.json",
-	"sources": [
-		{
-			"path": "nhefs/datatable.json"
-		},
-		{
-			"path": "nhefs-transformed/workflow.json"
-		}
-	]
+	"sources": ["nhefs/datatable.json", "nhefs-transformed/workflow.json"]
 }

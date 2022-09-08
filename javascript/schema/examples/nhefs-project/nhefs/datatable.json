@@ -9,11 +9,7 @@
 	"format": "csv",
 	"layout": "micro",
 	"sources": [
-		{
-			"path": "https://raw.githubusercontent.com/ainaimi/SER_2018/master/nhefs.csv"
-		},
-		{
-			"path": "nhefs/codebook.json"
-		}
+		"https://raw.githubusercontent.com/ainaimi/SER_2018/master/nhefs.csv",
+		"nhefs/codebook.json"
 	]
 }
