@@ -188,7 +188,8 @@ export function useWorkflowOutputListener(
 		() =>
 			setOutput &&
 			workflow.onChange(
-				() => setOutput(workflow.toList().filter(t => !!t) as TableContainer[]),
+				() =>
+					setOutput(workflow.toArray().filter(t => !!t) as TableContainer[]),
 				true,
 			),
 		[workflow, setOutput],

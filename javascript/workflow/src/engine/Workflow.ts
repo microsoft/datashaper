@@ -9,8 +9,8 @@ import type {
 	Workflow as WorkflowInput,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable } from 'rxjs'
-import { BehaviorSubject, Subject } from 'rxjs'
+import type { Observable} from 'rxjs';
+import { BehaviorSubject, of , Subject } from 'rxjs'
 import { v4 } from 'uuid'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
@@ -50,7 +50,7 @@ export class Workflow {
 	// The global onChange handler
 	protected readonly _onChange = new Subject<void>()
 
-	public constructor(input?: WorkflowInput) {
+	public constructor(input?: WorkflowInput, private _strictInputs = false) {
 		const readWorkflowInput = (workflowInput: WorkflowInput) => {
 			let prev: Step | undefined
 			this._id = workflowInput.id ?? v4()
@@ -75,7 +75,7 @@ export class Workflow {
 			for (const step of this.steps) {
 				this.addWorkflowStepToGraph(step)
 			}
-			for (const value of this.output.values()) {
+			for (const value of this.outputPorts.values()) {
 				this.observeOutput(value)
 			}
 		}
@@ -164,15 +164,6 @@ export class Workflow {
 		return this._inputNames.has(input)
 	}
 
-	public addInputTables(inputs: TableContainer[]): void {
-		// add new input tables
-		for (const i of inputs) {
-			this._setInputTable(i)
-		}
-		this.configureAllSteps()
-		this._onChange.next()
-	}
-
 	public getInputTable(name: string): Maybe<TableContainer> {
 		return this._inputs.get(name)?.value
 	}
@@ -181,21 +172,66 @@ export class Workflow {
 	 * Add a named input
 	 * @param input - the input table to add
 	 */
-	public addInputTable(table: TableContainer): void {
-		this._setInputTable(table)
+	public addInputObservable(id: string, source: TableObservable): void {
+		this._assertInputName(id)
+
+		this._bindInputObservable(id, source)
+
 		this.configureAllSteps()
 		this._onChange.next()
 	}
 
-	private _setInputTable(table: TableContainer): void {
-		this.addInputName(table.id)
-		if (!this._inputs.has(table.id)) {
-			this._inputs.set(
-				table.id,
-				new BehaviorSubject<Maybe<TableContainer>>(table),
-			)
-		} else {
-			this._inputs.get(table.id)?.next(table)
+	/**
+	 * Add a named input
+	 * @param input - the input table to add
+	 */
+	public addInputObservables(values: Map<string, TableObservable>): void {
+		for (const id of values.keys()) {
+			this._assertInputName(id)
+		}
+
+		for (const [id, source] of values.entries()) {
+			this._bindInputObservable(id, source)
+		}
+
+		this.configureAllSteps()
+		this._onChange.next()
+	}
+
+	/**
+	 * Add a named input
+	 * @param input - the input table to add
+	 * @param id - the input name to bind this table to (default will be the table id)
+	 */
+	public addInputTable(table: TableContainer, id = table.id): void {
+		this.addInputObservable(id, of(table))
+	}
+
+	public addInputTables(inputs: TableContainer[]): void {
+		const map = new Map<string, Observable<Maybe<TableContainer>>>()
+		inputs.forEach(i => map.set(i.id, of(i)))
+		this.addInputObservables(map)
+	}
+
+	private _bindInputObservable(id: string, source: TableObservable): void {
+		if (this._graph.hasNode(id)) {
+			this._graph.remove(id)
+		}
+
+		const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
+		source.subscribe(s => subject.next(s))
+		this._inputs.set(id, subject)
+
+		this._graph.add(observableNode(id, source))
+	}
+
+	private _assertInputName(id: string): void {
+		if (!this.hasInputName(id)) {
+			if (this._strictInputs) {
+				throw new Error(`input name ${id} not declared`)
+			} else {
+				this.addInputName(id)
+			}
 		}
 	}
 
@@ -226,7 +262,7 @@ export class Workflow {
 		return derivedName
 	}
 
-	public get output(): Map<string, NamedOutputPortBinding> {
+	public get outputPorts(): Map<string, NamedOutputPortBinding> {
 		return this._outputPorts
 	}
 
@@ -473,16 +509,30 @@ export class Workflow {
 	 * Gets a map of the current output tables
 	 * @returns The output cache
 	 */
-	public toMap(): Map<string, Maybe<TableContainer>> {
+	public toMap(includeInputs = false): Map<string, Maybe<TableContainer>> {
 		const result = new Map<string, Maybe<TableContainer>>()
+		if (includeInputs) {
+			for (const [name, observable] of this._inputs) {
+				result.set(name, observable.value)
+			}
+		}
 		for (const [name, observable] of this._outputs) {
 			result.set(name, observable.value)
 		}
 		return result
 	}
 
-	public toList(): Maybe<TableContainer>[] {
-		return this.outputNames.map(o => this.latestOutput(o))
+	public toArray(includeInputs = false): Maybe<TableContainer>[] {
+		const result: Maybe<TableContainer>[] = []
+		if (includeInputs) {
+			for (const [, observable] of this._inputs) {
+				result.push(observable.value)
+			}
+		}
+		for (const [, observable] of this._outputs) {
+			result.push(observable.value)
+		}
+		return result
 	}
 
 	public toJsonObject(): WorkflowInput {

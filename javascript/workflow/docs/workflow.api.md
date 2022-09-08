@@ -24,7 +24,7 @@ import type { LookupArgs } from '@datashaper/schema';
 import type { MergeArgs } from '@datashaper/schema';
 import type { NamedOutputPortBinding } from '@datashaper/schema';
 import type { NamedPortBinding } from '@datashaper/schema';
-import type { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
@@ -566,10 +566,12 @@ export { window_2 as window }
 //
 // @public (undocumented)
 export class Workflow {
-    constructor(input?: Workflow_2);
+    constructor(input?: Workflow_2, _strictInputs?: boolean);
     // (undocumented)
     addInputName(input: string): void;
-    addInputTable(table: TableContainer): void;
+    addInputObservable(id: string, source: TableObservable): void;
+    addInputObservables(values: Map<string, TableObservable>): void;
+    addInputTable(table: TableContainer, id?: string): void;
     // (undocumented)
     addInputTables(inputs: TableContainer[]): void;
     addOutput(output: NamedOutputPortBinding): void;
@@ -603,8 +605,6 @@ export class Workflow {
     // (undocumented)
     protected readonly _onChange: Subject<void>;
     // (undocumented)
-    get output(): Map<string, NamedOutputPortBinding>;
-    // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
     // (undocumented)
     outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
@@ -615,6 +615,8 @@ export class Workflow {
     // (undocumented)
     outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableSubject>;
     // (undocumented)
+    get outputPorts(): Map<string, NamedOutputPortBinding>;
+    // (undocumented)
     removeInputName(input: string): void;
     removeOutput(name: string): void;
     // (undocumented)
@@ -624,9 +626,9 @@ export class Workflow {
     // (undocumented)
     suggestOutputName(name: string): string;
     // (undocumented)
-    toJsonObject(): Workflow_2;
+    toArray(): Maybe<TableContainer>[];
     // (undocumented)
-    toList(): Maybe<TableContainer>[];
+    toJsonObject(): Workflow_2;
     toMap(): Map<string, Maybe<TableContainer>>;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
