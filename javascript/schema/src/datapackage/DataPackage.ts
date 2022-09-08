@@ -12,5 +12,9 @@ import type { Resource } from './Resource.js'
  */
 export interface DataPackage extends Named {
 	$schema: string
+	/**
+	 * List of Resources that make up the data package.
+	 * May also be a list of raw strings which are paths to Resource files in the bundle.
+	 */
 	resources: (string | Resource)[]
 }

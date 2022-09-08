@@ -85,6 +85,7 @@
 			"type": "string"
 		},
 		"resources": {
+			"description": "List of Resources that make up the data package.\nMay also be a list of raw strings which are paths to Resource files in the bundle.",
 			"items": {
 				"anyOf": [
 					{

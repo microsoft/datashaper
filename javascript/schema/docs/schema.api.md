@@ -232,7 +232,6 @@ export enum DataOrientation {
 export interface DataPackage extends Named {
     // (undocumented)
     $schema: string;
-    // (undocumented)
     resources: (string | Resource)[];
 }
 
