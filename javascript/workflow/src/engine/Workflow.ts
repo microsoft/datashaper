@@ -12,7 +12,6 @@ import type { TableContainer } from '@datashaper/tables'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { v4 } from 'uuid'
-import { Z_ASCII } from 'zlib'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
