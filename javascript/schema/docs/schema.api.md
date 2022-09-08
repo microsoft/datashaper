@@ -233,7 +233,7 @@ export interface DataPackage extends Named {
     // (undocumented)
     $schema: string;
     // (undocumented)
-    resources: Resource[];
+    resources: (string | Resource)[];
 }
 
 // Warning: (ae-missing-release-tag) "DataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -697,7 +697,7 @@ export interface Resource extends Named {
     path?: string | string[];
     // Warning: (ae-forgotten-export) The symbol "Profile" needs to be exported by the entry point index.d.ts
     profile?: Profile;
-    sources?: Resource[];
+    sources?: (string | Resource)[];
 }
 
 // Warning: (ae-missing-release-tag) "RollupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

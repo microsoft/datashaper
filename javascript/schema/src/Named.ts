@@ -7,7 +7,8 @@
  */
 export interface Named {
 	/**
-	 * Generated guid.
+	 * Generated guid, immutable.
+	 * This can be used for stable referencing.
 	 */
 	id: string
 	/**

@@ -111,7 +111,7 @@
 					"type": "string"
 				},
 				"id": {
-					"description": "Generated guid.",
+					"description": "Generated guid, immutable.\nThis can be used for stable referencing.",
 					"type": "string"
 				},
 				"license": {
@@ -134,16 +134,23 @@
 							"type": "string"
 						}
 					],
-					"description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nTODO: frictionless also includes a pathType indicating if a file is local or remote. Is this needed?"
+					"description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
 				},
 				"profile": {
 					"description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
 					"type": "string"
 				},
 				"sources": {
-					"description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nTODO: should this be a direct Resource list, or should each entry be a container object that also defines the relationship?\n\nTODO: linking is a little cumbersome. It seems that a Resource should be linkable with _just_ a URL - including core required properties is redundant.\nunderstanding-json-schema/structuring.html#json-pointer) to a subschema?",
+					"description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
 					"items": {
-						"$ref": "#/definitions/Resource"
+						"anyOf": [
+							{
+								"$ref": "#/definitions/Resource"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"type": "array"
 				},
@@ -230,7 +237,7 @@
 			"type": "string"
 		},
 		"id": {
-			"description": "Generated guid.",
+			"description": "Generated guid, immutable.\nThis can be used for stable referencing.",
 			"type": "string"
 		},
 		"license": {
@@ -257,7 +264,7 @@
 					"type": "string"
 				}
 			],
-			"description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).\nTODO: frictionless also includes a pathType indicating if a file is local or remote. Is this needed?"
+			"description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
 		},
 		"profile": {
 			"description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
@@ -272,9 +279,16 @@
 			"description": "Defines the shape and structure of stored data."
 		},
 		"sources": {
-			"description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nTODO: should this be a direct Resource list, or should each entry be a container object that also defines the relationship?\n\nTODO: linking is a little cumbersome. It seems that a Resource should be linkable with _just_ a URL - including core required properties is redundant.\nunderstanding-json-schema/structuring.html#json-pointer) to a subschema?",
+			"description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
 			"items": {
-				"$ref": "#/definitions/Resource"
+				"anyOf": [
+					{
+						"$ref": "#/definitions/Resource"
+					},
+					{
+						"type": "string"
+					}
+				]
 			},
 			"type": "array"
 		},

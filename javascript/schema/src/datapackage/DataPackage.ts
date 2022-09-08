@@ -12,5 +12,5 @@ import type { Resource } from './Resource.js'
  */
 export interface DataPackage extends Named {
 	$schema: string
-	resources: Resource[]
+	resources: (string | Resource)[]
 }
