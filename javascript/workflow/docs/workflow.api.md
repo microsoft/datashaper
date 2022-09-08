@@ -576,6 +576,7 @@ export class Workflow {
     addStep(stepInput: StepInput): Step;
     // (undocumented)
     get description(): string | undefined;
+    set description(input: string | undefined);
     // (undocumented)
     getInputTable(name: string): Maybe<TableContainer>;
     // (undocumented)
@@ -585,6 +586,9 @@ export class Workflow {
     // (undocumented)
     hasOutputName(name: string): boolean;
     // (undocumented)
+    get id(): string | undefined;
+    set id(input: string | undefined);
+    // (undocumented)
     get inputNames(): Set<string>;
     latestOutput(name?: string): Maybe<TableContainer>;
     // (undocumented)
@@ -593,6 +597,7 @@ export class Workflow {
     get length(): number;
     // (undocumented)
     get name(): string | undefined;
+    set name(input: string | undefined);
     // (undocumented)
     onChange(handler: () => void, fireSync?: boolean): () => void;
     // (undocumented)
