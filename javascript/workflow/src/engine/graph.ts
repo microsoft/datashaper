@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Workflow as WorkflowInput } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 
 import { GraphManager } from './GraphManager.js'
-import type { WorkflowInput } from './types.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.

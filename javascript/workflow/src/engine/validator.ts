@@ -3,9 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { Workflow as WorkflowInput } from '@datashaper/schema'
 import Ajv from 'ajv'
-
-import type { WorkflowInput } from './types.js'
 
 const baseUrl = 'https://microsoft.github.io/datashaper/schema/workflow'
 const defaultWorkflow = 'workflow.json'

@@ -5,12 +5,13 @@
 import type {
 	NamedOutputPortBinding,
 	OutputPortBinding,
+	Workflow as WorkflowInput,
 } from '@datashaper/schema'
 import { Subject } from 'rxjs'
 
 import { cloneStep } from '../util/index.js'
 import { readStep } from './readStep.js'
-import type { Step, StepInput, WorkflowInput } from './types.js'
+import type { Step, StepInput } from './types.js'
 import { WorkflowSchemaInstance } from './validator.js'
 
 /**
@@ -26,23 +27,23 @@ export class Workflow {
 	// The global onChange handler
 	protected readonly _onChange = new Subject<void>()
 
-	public constructor(workflowJson?: WorkflowInput) {
-		if (workflowJson != null) {
-			this.init(workflowJson)
+	public constructor(workflowInput?: WorkflowInput) {
+		if (workflowInput != null) {
+			this.init(workflowInput)
 		}
 	}
 
-	private init(workflowJson: WorkflowInput) {
+	private init(workflowInput: WorkflowInput) {
 		let prev: Step | undefined
-		this._name = workflowJson.name
-		this._description = workflowJson.description
-		workflowJson.steps.forEach(i => {
-			const step = readStep(i, prev)
+		this._name = workflowInput.name
+		this._description = workflowInput.description
+		workflowInput.steps?.forEach(i => {
+			const step = readStep(i as StepInput, prev)
 			this._steps.push(step)
 			prev = step
 		})
-		workflowJson.input?.forEach(i => this._inputNames.add(i))
-		workflowJson.output?.forEach(o => {
+		workflowInput.input?.forEach(i => this._inputNames.add(i))
+		workflowInput.output?.forEach(o => {
 			const binding = fixOutput(o)
 			this._output.set(binding.node, binding)
 		})
@@ -200,11 +201,11 @@ export class Workflow {
 		}
 		return {
 			$schema: `https://microsoft.github.io/datashaper/schema/workflow/v1.json`,
-			name: this._name,
+			name: this._name || 'Workflow',
 			description: this._description,
 			input: [...this._inputNames.values()],
 			output,
-			steps: [...this.steps],
+			steps: [...this.steps] as any,
 		}
 	}
 }

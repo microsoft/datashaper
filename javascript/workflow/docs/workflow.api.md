@@ -23,10 +23,9 @@ import type { LookupArgs } from '@datashaper/schema';
 import type { MergeArgs } from '@datashaper/schema';
 import type { NamedOutputPortBinding } from '@datashaper/schema';
 import type { NamedPortBinding } from '@datashaper/schema';
-import { Observable } from 'rxjs';
+import type { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
-import type { OutputPortBinding } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
@@ -40,6 +39,7 @@ import type { UnfoldArgs } from '@datashaper/schema';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
+import type { Workflow as Workflow_2 } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -160,7 +160,7 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // Warning: (ae-missing-release-tag) "createGraph" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createGraph(workflow: WorkflowInput, tables: Map<string, TableContainer>): GraphManager;
+export function createGraph(workflow: Workflow_2, tables: Map<string, TableContainer>): GraphManager;
 
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -246,7 +246,7 @@ export interface Graph<T> {
 //
 // @public
 export class GraphManager extends Workflow {
-    constructor(workflowJson?: WorkflowInput);
+    constructor(workflowJson?: Workflow_2);
     addInputTable(item: TableContainer): void;
     addOutput(binding: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
@@ -600,7 +600,7 @@ export { window_2 as window }
 //
 // @public
 export class Workflow {
-    constructor(workflowJson?: WorkflowInput);
+    constructor(workflowInput?: Workflow_2);
     // (undocumented)
     addInput(input: string): void;
     // (undocumented)
@@ -647,29 +647,11 @@ export class Workflow {
     // (undocumented)
     suggestOutputName(name: string): string;
     // (undocumented)
-    toJsonObject(): WorkflowInput;
+    toJsonObject(): Workflow_2;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)
-    static validate(workflowJson: WorkflowInput): Promise<boolean>;
-}
-
-// Warning: (ae-missing-release-tag) "WorkflowInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface WorkflowInput {
-    // (undocumented)
-    $schema?: string;
-    // (undocumented)
-    description?: string;
-    // (undocumented)
-    input?: string[];
-    // (undocumented)
-    name?: string;
-    // (undocumented)
-    output: OutputPortBinding[];
-    // (undocumented)
-    steps: StepInput[];
+    static validate(workflowJson: Workflow_2): Promise<boolean>;
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -677,7 +659,7 @@ export interface WorkflowInput {
 // @public (undocumented)
 export class WorkflowSchema {
     // (undocumented)
-    isValid(workflowJson?: WorkflowInput): Promise<boolean>;
+    isValid(workflowJson?: Workflow_2): Promise<boolean>;
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowSchemaInstance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

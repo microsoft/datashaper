@@ -5,16 +5,17 @@
 import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
+	Workflow as WorkflowInput,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable, Subject } from 'rxjs';
+import type { Observable, Subject } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 
 import type { Graph, Node } from '../dataflow/index.js'
 import { DefaultGraph, observableNode } from '../dataflow/index.js'
 import type { Maybe } from '../primitives.js'
 import { createNode } from './createNode.js'
-import type { Step, StepInput, WorkflowInput } from './types.js'
+import type { Step, StepInput } from './types.js'
 import { Workflow } from './Workflow.js'
 
 // this could be used for (a) factory of step configs, (b) management of execution order
