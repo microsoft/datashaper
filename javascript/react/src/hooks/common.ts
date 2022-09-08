@@ -3,61 +3,61 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/tables'
-import type { Step, Workflow as WorkflowJson } from '@datashaper/workflow'
-import { readStep,Workflow } from '@datashaper/workflow'
+import type { Step } from '@datashaper/workflow'
+import { readStep, Workflow } from '@datashaper/workflow'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useState } from 'react'
 
-export function useGraphManager(
-	workflow?: WorkflowJson | undefined,
+export function useWorkflow(
+	input?: Workflow | undefined,
 	inputs?: TableContainer[],
 ): Workflow {
-	const [graph, setGraph] = useState(
-		() => new Workflow(workflow?.toJsonObject()),
+	const [workflow, setWorkflow] = useState(
+		() => new Workflow(input?.toJsonObject()),
 	)
 
 	// this effect should fire when a new workflow json is uploaded
 	useEffect(
 		function resetWorkflowWhenWorkflowChanges() {
-			setGraph(new Workflow(workflow?.toJsonObject()))
+			setWorkflow(new Workflow(input?.toJsonObject()))
 		},
-		[workflow],
+		[input],
 	)
 
 	useEffect(
 		function syncDataTablesWhenInputsChange() {
 			if (inputs) {
-				graph.addInputTables(inputs)
+				workflow.addInputTables(inputs)
 			}
 		},
-		[graph, inputs],
+		[workflow, inputs],
 	)
 
-	return graph
+	return workflow
 }
 
 /**
  * Returns a hook to generate a new table name based on the given input e.g.
  * "join" could result in "join 1" or "join 2" depending on how many collisions
  *  occur.
- * @param graph - the graph manager
+ * @param workflow - the workflow instance
  * @returns a safe output name to use
  */
-export function useCreateTableId(graph: Workflow): (name: string) => string {
+export function useCreateTableId(workflow: Workflow): (name: string) => string {
 	return useCallback(
-		(name: string): string => graph.suggestOutputName(name),
-		[graph],
+		(name: string): string => workflow.suggestOutputName(name),
+		[workflow],
 	)
 }
 /**
  * Returns a hook to generate a new table name based on the given input e.g.
  * "join" could result in "join 1" or "join 2" depending on how many collisions
  *  occur.
- * @param graph - the graph manager
+ * @param workflow - the workflow instance
  * @returns a safe output name to use
  */
 export function useCreateTableName(
-	workflow: WorkflowJson,
+	workflow: Workflow,
 ): (name: string) => string {
 	return useCallback(
 		(name: string): string => workflow.suggestOutputName(name),

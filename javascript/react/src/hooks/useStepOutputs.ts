@@ -8,15 +8,15 @@ import { useMemo } from 'react'
 /**
  * create a parallel array of output names for the steps
  *
- * @param graph - The graph manager
+ * @param workflow - The workflow instance
  * @returns
  */
 export function useStepOutputs(
-	graph: Workflow,
+	workflow: Workflow,
 	defaultOutputName?: (index: number) => string,
 ): Array<string | undefined> {
-	const outputs = graph.outputDefinitions
-	const steps = graph.steps
+	const outputs = workflow.outputDefinitions
+	const steps = workflow.steps
 
 	return useMemo<Array<string | undefined>>(
 		() =>

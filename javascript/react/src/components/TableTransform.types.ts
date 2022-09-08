@@ -4,7 +4,7 @@
  */
 
 import type { Verb } from '@datashaper/schema'
-import type { Step,Workflow } from '@datashaper/workflow'
+import type { Step, Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export interface TableTransformProps {
@@ -66,7 +66,7 @@ export interface TableTransformProps {
 	/**
 	 * Table store to verify naming to be created
 	 */
-	graph: Workflow
+	workflow: Workflow
 
 	onVerbChange?: (verb: Verb) => void
 

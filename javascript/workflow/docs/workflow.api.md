@@ -574,8 +574,6 @@ export class Workflow {
     addOutput(output: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
     // (undocumented)
-    clone(): Workflow;
-    // (undocumented)
     get description(): string | undefined;
     // (undocumented)
     getInputTable(name: string): Maybe<TableContainer>;

@@ -8,21 +8,21 @@ import { DialogConfirm } from '@essex/themed-components'
 import { memo, useCallback, useState } from 'react'
 
 import {
-	useGraphManager,
-	useGraphSteps,
 	useStepOutputs,
+	useWorkflow,
+	useWorkflowSteps,
 } from '../hooks/index.js'
 import {
 	useDeleteConfirm,
 	useEditorTarget,
-	useGraphOutputListener,
-	useGraphWorkflowListener,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnDuplicateStep,
 	useOnEditStep,
 	useOnSaveStep,
 	useTransformModalState,
+	useWorkflowListener,
+	useWorkflowOutputListener,
 } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
@@ -42,7 +42,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		historyView = false,
 		...props
 	}) {
-		const graph = useGraphManager(workflow, inputs)
+		const wf = useWorkflow(workflow, inputs)
 
 		// Selected Step/Index State for the component
 		const [step, setStep] = useState<Step | undefined>()
@@ -55,25 +55,25 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		} = useTransformModalState(setStep, setIndex)
 
 		// Interaction Handlers
-		const onSave = useOnSaveStep(graph)
+		const onSave = useOnSaveStep(wf)
 		const {
 			onClick: onDelete,
 			onConfirm: onConfirmDelete,
 			toggle: toggleDeleteModal,
 			isOpen: isDeleteModalOpen,
-		} = useDeleteConfirm(useOnDeleteStep(graph))
+		} = useDeleteConfirm(useOnDeleteStep(wf))
 		const onEdit = useOnEditStep(setStep, setIndex, showModal)
 		const onCreate = useOnCreateStep(onSave, onSelect, dismissModal)
-		const onDuplicate = useOnDuplicateStep(graph, table, onSave)
+		const onDuplicate = useOnDuplicateStep(wf, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(index)
 
 		const onViewStep = useCallback(
 			(name: string) => {
 				const tableName =
-					graph.outputDefinitions.find(x => x.node === name)?.name ?? ''
+					wf.outputDefinitions.find(x => x.node === name)?.name ?? ''
 				onSelect && onSelect(tableName)
 			},
-			[onSelect, graph],
+			[onSelect, wf],
 		)
 
 		const onTransformRequested = useCallback(
@@ -84,10 +84,10 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		)
 
 		// parallel array of output names for the steps
-		const outputs = useStepOutputs(graph)
-		const steps = useGraphSteps(graph)
-		useGraphOutputListener(graph, onUpdateOutput)
-		useGraphWorkflowListener(graph, onUpdateWorkflow)
+		const outputs = useStepOutputs(wf)
+		const steps = useWorkflowSteps(wf)
+		useWorkflowOutputListener(wf, onUpdateOutput)
+		useWorkflowListener(wf, onUpdateWorkflow)
 
 		return (
 			<Container>
@@ -98,7 +98,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 						steps={steps}
 						onStartNewStep={showModal}
 						buttonId={addStepButtonId}
-						graph={graph}
+						workflow={wf}
 						nextInputTable={nextInputTable}
 						onCreate={onCreate}
 					/>
@@ -120,9 +120,9 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 						<TableTransformModal
 							target={editorTarget}
 							step={step}
-							index={index ?? graph.steps.length}
+							index={index ?? wf.steps.length}
 							onTransformRequested={onTransformRequested}
-							graph={graph}
+							workflow={wf}
 							onDismiss={dismissModal}
 							styles={modalStyles}
 							{...props}

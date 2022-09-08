@@ -6,11 +6,11 @@ import type { DetailsListFeatures } from '@datashaper/react'
 import {
 	StatsColumnType,
 	StepSelector,
-	useGraphManager,
-	useGraphSteps,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useStepOutputs,
+	useWorkflow,
+	useWorkflowSteps,
 } from '@datashaper/react'
 import type { Workflow } from '@datashaper/workflow'
 import { ActionButton } from '@fluentui/react'
@@ -52,8 +52,8 @@ export const DebugPage: React.FC = memo(function DebugPage() {
 
 	const inputTables = useInputTables(autoType)
 	const [workflow, setWorkflow] = useState<Workflow | undefined>(undefined)
-	const graph = useGraphManager(workflow, inputTables)
-	const steps = useGraphSteps(graph)
+	const graph = useWorkflow(workflow, inputTables)
+	const steps = useWorkflowSteps(graph)
 	const outputs = useStepOutputs(
 		graph,
 		(idx: number) => `step-${idx}`,

@@ -444,10 +444,6 @@ export class Workflow {
 		return this.outputNames.map(o => this.latestOutput(o))
 	}
 
-	public clone(): Workflow {
-		return new Workflow(this.toJsonObject())
-	}
-
 	public toJsonObject(): WorkflowInput {
 		const output: WorkflowInput['output'] = []
 		for (const [, binding] of this._outputPorts.entries()) {

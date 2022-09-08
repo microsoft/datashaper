@@ -15,14 +15,14 @@ import { LookupBase } from './Lookup.base.js'
  * Provides inputs for a Lookup step.
  */
 export const Lookup: React.FC<StepComponentProps<LookupArgs>> = memo(
-	function Lookup({ step, graph, onChange }) {
-		const leftTable = useDataTable(step.input[NodeInput.Source]?.node, graph)
+	function Lookup({ step, workflow, onChange }) {
+		const leftTable = useDataTable(step.input[NodeInput.Source]?.node, workflow)
 		const rightTable = useDataTable(
 			step.input[NodeInput.Other]?.node,
 
-			graph,
+			workflow,
 		)
-		const tableOptions = useTableDropdownOptions(graph)
+		const tableOptions = useTableDropdownOptions(workflow)
 		const leftColumns = useTableColumnNames(leftTable)
 		const rightColumns = useTableColumnNames(rightTable)
 		return (

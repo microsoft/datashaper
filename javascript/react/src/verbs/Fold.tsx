@@ -14,12 +14,12 @@ import { FoldBase } from './Fold.base.js'
  */
 export const Fold: React.FC<StepComponentProps<FoldArgs>> = memo(function Fold({
 	step,
-	graph,
+	workflow,
 	input,
 	table,
 	onChange,
 }) {
-	const dataTable = useStepDataTable(step, graph, input, table)
+	const dataTable = useStepDataTable(step, workflow, input, table)
 	const columns = useTableColumnNames(dataTable)
 	return <FoldBase step={step} onChange={onChange} columns={columns} />
 })

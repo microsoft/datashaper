@@ -12,12 +12,12 @@ export {
 } from './component-factories.js'
 export {
 	useDataTable,
-	useGraphManager,
-	useGraphSteps,
 	useHandleFilesUpload,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useStepOutputs,
+	useWorkflow,
+	useWorkflowSteps,
 } from './hooks/index.js'
 
 /*
