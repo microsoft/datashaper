@@ -1,0 +1,25 @@
+{
+	"$schema": "../../../../../../schema/workflow.json",
+	"name": "Onehot-unhot",
+	"description": "",
+	"steps": [
+		{
+			"id": "onehot",
+			"verb": "onehot",
+			"input": { "source": "data/companies2.csv" },
+			"args": {
+				"columns": ["Name"]
+			}
+		},
+		{
+			"id": "unhot",
+			"verb": "unhot",
+			"input": { "source": "onehot" },
+			"args": {
+				"columns": ["Microsoft", "Nokia"]
+			}
+		}
+	],
+	"input": ["data/companies2.csv"],
+	"output": ["unhot"]
+}
