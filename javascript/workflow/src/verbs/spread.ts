@@ -11,12 +11,13 @@ import { stepVerbFactory } from './util/factories.js'
 
 export const spreadStep: ColumnTableStep<SpreadArgs> = (
 	input,
-	{ to, columns, delimiter, onehot },
+	{ to, columns, delimiter, onehot, preserveSource = false },
 ) => {
 	const split = applySplit(input, columns, delimiter)
-	return onehot
+	const spread = onehot
 		? applyOnehotSpread(split, columns)
 		: applyDefaultSpread(split, columns, to)
+	return preserveSource ? spread : spread.select(not(columns))
 }
 
 // if a delimiter is supplied, splits the cell values of every required column in the table
@@ -45,7 +46,7 @@ function applyDefaultSpread(
 	columns: string[],
 	to?: string[],
 ) {
-	return table.spread(columns, { as: to })
+	return table.spread(columns, { as: to, drop: false })
 }
 
 // applies the onehot spread, assuming column cells already contain arrays
@@ -65,8 +66,7 @@ function applyOnehotSpread(table: ColumnTable, columns: string[]): ColumnTable {
 		return acc
 	}, {} as Record<string, any>)
 
-	// note the final select: arquero's spread eliminates the original columns
-	return table.derive(args).select(not(columns))
+	return table.derive(args)
 }
 
 // for each column, collect the unique values in a hash

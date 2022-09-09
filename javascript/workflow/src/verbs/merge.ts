@@ -25,7 +25,7 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 		delimiter = '',
 		unhot = false,
 		prefix = '',
-		keepOriginalColumns = false,
+		preserveSource = false,
 	},
 ) => {
 	const tempTable = unhot ? unhotOperation(input, columns, prefix) : input
@@ -45,7 +45,7 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 		}
 	})
 
-	if (keepOriginalColumns) return tempTable.derive({ [to]: func })
+	if (preserveSource) return tempTable.derive({ [to]: func })
 
 	return tempTable.derive({ [to]: func }).select(not(columns))
 }

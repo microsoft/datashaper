@@ -1,7 +1,7 @@
-ID,item,quantity,item_bed,item_chair,item_sofa,quantity_100,quantity_45,quantity_50,quantity_78,quantity_89
-1,bed,45,1,0,0,0,1,0,0,0
-1,,78,,,,0,0,0,1,0
-2,sofa,100,0,0,1,1,0,0,0,0
-4,sofa,89,0,0,1,0,0,0,0,1
-4,chair,50,0,1,0,0,0,1,0,0
-4,,45,,,,0,1,0,0,0
+ID,item_bed,item_chair,item_sofa,quantity_100,quantity_45,quantity_50,quantity_78,quantity_89
+1,1,0,0,0,1,0,0,0
+1,,,,0,0,0,1,0
+2,0,0,1,1,0,0,0,0
+4,0,0,1,0,0,0,0,1
+4,0,1,0,0,0,1,0,0
+4,,,,0,1,0,0,0

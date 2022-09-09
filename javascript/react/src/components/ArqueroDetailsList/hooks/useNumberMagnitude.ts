@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Field } from '@datashaper/schema';
+import type { Field } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import isNil from 'lodash-es/isNil.js'
 import { useMemo } from 'react'

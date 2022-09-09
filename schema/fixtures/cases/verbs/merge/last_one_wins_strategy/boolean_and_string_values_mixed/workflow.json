@@ -8,7 +8,7 @@
 				"columns": ["y", "z"],
 				"strategy": "last one wins",
 				"to": "resultColumn",
-				"keepOriginalColumns": true
+				"preserveSource": true
 			},
 			"id": "expected"
 		}
