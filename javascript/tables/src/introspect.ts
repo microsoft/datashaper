@@ -2,11 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnMetadata, TableMetadata } from '@datashaper/schema'
+import type { Field } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import uniqueId from 'lodash-es/uniqueId.js'
 
 import { columnTypes } from './columnTypes.js'
+import { determineType } from './data.js'
 import { stats } from './stats.js'
+import type { TableMetadata } from './types.js'
 
 /**
  * Performs type inference and stats on a table/columns.
@@ -34,32 +37,35 @@ export function introspect(
 function detailedMeta(
 	table: ColumnTable,
 	columns?: string[],
-): Record<string, ColumnMetadata> {
+): Record<string, Field> {
 	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
 	const sts = stats(table.ungroup(), columns)
 	return Object.entries(sts).reduce((acc, cur) => {
 		const [name, stat] = cur
+		const type = determineType(stat.mode)
 		acc[name] = {
+			id: uniqueId(),
 			name,
-			type: stat.type,
-			stats: stat,
+			type,
+			metadata: stat,
 		}
 		return acc
-	}, {} as Record<string, ColumnMetadata>)
+	}, {} as Record<string, Field>)
 }
 
 function basicMeta(
 	table: ColumnTable,
 	columns?: string[],
-): Record<string, ColumnMetadata> {
+): Record<string, Field> {
 	// Force to get stats from ungrouped table, otherwise will get stats with grouped information and graph will not show
 	const t = columnTypes(table.ungroup(), columns)
 	return Object.entries(t).reduce((acc, cur) => {
 		const [name, type] = cur
 		acc[name] = {
+			id: uniqueId(),
 			name,
 			type,
 		}
 		return acc
-	}, {} as Record<string, ColumnMetadata>)
+	}, {} as Record<string, Field>)
 }

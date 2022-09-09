@@ -2,13 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnMetadata } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
-import isNil from 'lodash-es/isNil.js'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
 import { getValue, isEmpty } from '../ArqueroDetailsList.utils.js'
+import { useNumberMagnitude } from '../hooks/useNumberMagnitude.js'
 import { CellContainer } from './CellContainer.js'
 import { EmptyCell } from './EmptyCell.js'
 import {
@@ -27,10 +26,10 @@ import type { RichCellProps } from './types.js'
 export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	props,
 ) {
-	const { metadata, item, column, onColumnClick } = props
-	const type = metadata?.type
+	const { field, item, column, onColumnClick } = props
+	const type = field?.type
 	const value = getValue(item, column)
-	const magnitude = useNumberMagnitude(value, metadata, type)
+	const magnitude = useNumberMagnitude(value, field, type)
 
 	return (
 		<CellContainer onClick={onColumnClick} column={column}>
@@ -60,18 +59,3 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 		</CellContainer>
 	)
 })
-
-function useNumberMagnitude(
-	value: any,
-	meta?: ColumnMetadata,
-	type?: DataType,
-): number {
-	return useMemo(() => {
-		if (type !== DataType.Number || isNil(value)) {
-			return 0
-		}
-		const range = (meta?.stats?.max || 1) - (meta?.stats?.min || 0)
-		const mag = range === 0 ? 0 : (value - (meta?.stats?.min || 0)) / range
-		return mag
-	}, [type, value, meta])
-}

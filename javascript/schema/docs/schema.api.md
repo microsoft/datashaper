@@ -114,52 +114,8 @@ export interface Category {
 //
 // @public
 export interface Codebook extends Resource {
-    // Warning: (ae-forgotten-export) The symbol "Field" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     fields: Field[];
-}
-
-// Warning: (ae-missing-release-tag) "ColumnMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ColumnMetadata {
-    // (undocumented)
-    name: string;
-    // (undocumented)
-    stats?: ColumnStats;
-    // (undocumented)
-    type: DataType;
-}
-
-// Warning: (ae-missing-release-tag) "ColumnStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface ColumnStats {
-    // (undocumented)
-    bins?: Bin[];
-    // (undocumented)
-    categories?: Category[];
-    // (undocumented)
-    count: number;
-    // (undocumented)
-    distinct: number;
-    // (undocumented)
-    invalid: number;
-    // (undocumented)
-    max?: number;
-    // (undocumented)
-    mean?: number;
-    // (undocumented)
-    median?: number;
-    // (undocumented)
-    min?: number;
-    // (undocumented)
-    mode: any;
-    // (undocumented)
-    stdev?: number;
-    // (undocumented)
-    type: DataType;
 }
 
 // Warning: (ae-missing-release-tag) "Constraints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -338,6 +294,25 @@ export interface FetchArgs {
     autoMax?: number;
     delimiter?: string;
     url: string;
+}
+
+// Warning: (ae-missing-release-tag) "Field" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface Field extends Named {
+    constraints?: Constraints;
+    derivedFrom?: string[];
+    example?: any;
+    exclude?: boolean;
+    format?: string;
+    inverse?: boolean;
+    mapping?: Record<any, any>;
+    metadata?: FieldMetadata;
+    nature?: VariableNature;
+    tags?: string[];
+    type?: DataType;
+    unit?: string;
+    unitDescription?: string;
 }
 
 // Warning: (ae-missing-release-tag) "FieldAggregateOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -887,17 +862,6 @@ export enum StringComparisonOperator {
     RegularExpression = "regex",
     // (undocumented)
     StartsWith = "starts with"
-}
-
-// Warning: (ae-missing-release-tag) "TableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TableMetadata {
-    // (undocumented)
-    cols: number;
-    columns: Record<string, ColumnMetadata>;
-    // (undocumented)
-    rows: number;
 }
 
 // Warning: (ae-missing-release-tag) "TypeHints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

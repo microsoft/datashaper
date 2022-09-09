@@ -24,7 +24,7 @@ import type { LookupArgs } from '@datashaper/schema';
 import type { MergeArgs } from '@datashaper/schema';
 import type { NamedOutputPortBinding } from '@datashaper/schema';
 import type { NamedPortBinding } from '@datashaper/schema';
-import { Observable } from 'rxjs';
+import type { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
@@ -626,10 +626,10 @@ export class Workflow {
     // (undocumented)
     suggestOutputName(name: string): string;
     // (undocumented)
-    toArray(): Maybe<TableContainer>[];
+    toArray(includeInputs?: boolean): Maybe<TableContainer>[];
     // (undocumented)
     toJsonObject(): Workflow_2;
-    toMap(): Map<string, Maybe<TableContainer>>;
+    toMap(includeInputs?: boolean): Map<string, Maybe<TableContainer>>;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)

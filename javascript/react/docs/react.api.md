@@ -6,9 +6,9 @@
 
 /// <reference types="react" />
 
-import type { ColumnMetadata } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { DropzoneOptions } from 'react-dropzone';
+import type { Field } from '@datashaper/schema';
 import { FileCollection } from '@datashaper/utilities';
 import { FileRejection } from 'react-dropzone';
 import type { IColumn } from '@fluentui/react';
@@ -31,7 +31,7 @@ import type { RowObject } from 'arquero/dist/types/table/table';
 import { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
-import type { TableMetadata } from '@datashaper/schema';
+import type { TableMetadata } from '@datashaper/tables';
 import type { Theme } from '@thematic/core';
 import type { Verb } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
@@ -248,7 +248,7 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>>;
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type GroupHeaderFunction = (meta?: ColumnMetadata, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
+export type GroupHeaderFunction = (meta?: Field, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
 
 // Warning: (ae-missing-release-tag) "GroupHeaderProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -305,7 +305,7 @@ export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'wor
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type MetadataClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined, metadata?: ColumnMetadata) => void;
+export type MetadataClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined, metadata?: Field) => void;
 
 // Warning: (ae-missing-release-tag) "PanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

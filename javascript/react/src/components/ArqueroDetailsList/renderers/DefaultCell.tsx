@@ -27,9 +27,9 @@ import type { RichCellProps } from './types.js'
 export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	props,
 ) {
-	const { metadata, item, column, onColumnClick } = props
+	const { field, item, column, onColumnClick } = props
 	const value = getValue(item, column)
-	const type = metadata?.type ?? determineType(value)
+	const type = field?.type ?? determineType(value)
 
 	const handleColumnClick = useCallback(
 		(ev: React.MouseEvent<HTMLElement>) => {

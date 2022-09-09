@@ -4,4 +4,5 @@
  */
 export * from './Codebook.js'
 export * from './Constraints.js'
+export * from './Field.js'
 export * from './FieldMetadata.js'
