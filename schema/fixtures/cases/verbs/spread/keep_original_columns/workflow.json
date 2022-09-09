@@ -1,0 +1,17 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow.json",
+	"steps": [
+		{
+			"verb": "spread",
+			"input": "table6",
+			"args": {
+				"columns": ["ID"],
+				"to": ["ID_X"],
+				"keepOriginalColumns": true
+			},
+			"id": "expected"
+		}
+	],
+	"input": ["table6"],
+	"output": ["expected"]
+}

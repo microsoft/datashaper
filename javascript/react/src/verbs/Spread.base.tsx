@@ -22,6 +22,13 @@ export const SpreadBase: React.FC<
 		() => [
 			inputColumnList(step, columns, 'Columns to spread'),
 			{
+				label: 'Keep original columns',
+				type: FormInputType.Checkbox,
+				current: step.args.keepOriginalColumns,
+				onChange: (s, val) => (s.args.keepOriginalColumns = val as boolean),
+				advanced: true,
+			},
+			{
 				label: 'Split delimiter',
 				type: FormInputType.Text,
 				current: step.args.delimiter,

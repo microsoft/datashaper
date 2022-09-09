@@ -750,6 +750,8 @@ export enum SortDirection {
 // @public (undocumented)
 export interface SpreadArgs extends InputColumnListArgs {
     delimiter?: string;
+    // (undocumented)
+    keepOriginalColumns?: boolean;
     onehot?: boolean;
     // (undocumented)
     to: string[];

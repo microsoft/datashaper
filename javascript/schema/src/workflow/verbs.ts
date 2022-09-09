@@ -475,6 +475,7 @@ export interface SpreadArgs extends InputColumnListArgs {
 	 * This is in contrast to the default spread, which just maps array values to column by index.
 	 */
 	onehot?: boolean
+	keepOriginalColumns?: boolean
 }
 
 export interface UnfoldArgs {

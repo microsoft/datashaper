@@ -28,7 +28,6 @@ def __normal_spread(input_table, columns, to, delimiter):
             columns=columns,
         )
         output = pd.concat([output, new_columns], axis=1)
-        output = output.drop(column, axis=1)
 
     return output
 
@@ -42,7 +41,7 @@ def __onehot_spread(input_table, columns, to, delimiter):
 
         output = pd.concat(
             [
-                output.drop(column, axis=1),
+                output,
                 onehot,
             ],
             axis=1,
@@ -57,6 +56,7 @@ def spread(
     to: List[str] = None,
     delimiter: str = ",",
     onehot: bool = False,
+    keepOriginalColumns: bool = False,
 ):
     input_table = input.get_input()
     if to is None:
@@ -66,5 +66,8 @@ def spread(
         output = __onehot_spread(input_table, columns, to, delimiter)
     else:
         output = __normal_spread(input_table, columns, to, delimiter)
+
+    if not keepOriginalColumns:
+        output = output.drop(columns=columns)
 
     return TableContainer(table=output)

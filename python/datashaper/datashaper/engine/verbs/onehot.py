@@ -39,8 +39,7 @@ def onehot(
         dummies.loc[input_table[column].isnull(), cols] = np.nan
 
     output = pd.concat([input_table, dummies], axis=1)
-    if keepOriginalColumns:
-        clean = output
-    else:
-        clean = output.drop(columns=columns)
-    return TableContainer(table=clean)
+    if not keepOriginalColumns:
+        output = output.drop(columns=columns)
+
+    return TableContainer(table=output)
