@@ -23,7 +23,12 @@ def __get_prefix(column: str, prefixes: Dict[str, str]):
     return prefixes[column] if __has_prefix(column, prefixes) else ""
 
 
-def onehot(input: VerbInput, columns: List[str], prefixes: Dict[str, str] = {}):
+def onehot(
+    input: VerbInput,
+    columns: List[str],
+    prefixes: Dict[str, str] = {},
+    keepOriginalColumns=False,
+):
     input_table = input.get_input()
     input_table[columns] = input_table[columns].astype("category")
     prefixesList = [__get_prefix(column, prefixes) for column in columns]
@@ -32,6 +37,10 @@ def onehot(input: VerbInput, columns: List[str], prefixes: Dict[str, str] = {}):
     for column in columns:
         cols = dummies.columns.str.startswith(__get_prefix(column, prefixes))
         dummies.loc[input_table[column].isnull(), cols] = np.nan
-    output = pd.concat([input_table, dummies], axis=1)
 
-    return TableContainer(table=output)
+    output = pd.concat([input_table, dummies], axis=1)
+    if keepOriginalColumns:
+        clean = output
+    else:
+        clean = output.drop(columns=columns)
+    return TableContainer(table=clean)
