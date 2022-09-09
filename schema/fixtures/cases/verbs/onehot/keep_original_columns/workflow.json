@@ -1,0 +1,16 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow.json",
+	"steps": [
+		{
+			"verb": "onehot",
+			"input": "table5",
+			"args": {
+				"columns": ["item"],
+				"keepOriginalColumns": true
+			},
+			"id": "expected"
+		}
+	],
+	"output": ["expected"],
+	"input": ["table5"]
+}

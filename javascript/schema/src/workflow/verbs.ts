@@ -409,6 +409,7 @@ export interface OnehotArgs extends InputColumnListArgs {
 	 * Optional prefixes for the output column names
 	 */
 	prefixes?: Record<string, string>
+	keepOriginalColumns?: boolean
 }
 
 export interface OrderbyArgs {

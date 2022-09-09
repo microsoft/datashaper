@@ -591,6 +591,8 @@ export enum NumericComparisonOperator {
 //
 // @public (undocumented)
 export interface OnehotArgs extends InputColumnListArgs {
+    // (undocumented)
+    keepOriginalColumns?: boolean;
     prefixes?: Record<string, string>;
 }
 
