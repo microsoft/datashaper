@@ -8,24 +8,25 @@ import { DialogConfirm } from '@essex/themed-components'
 import { memo, useCallback, useState } from 'react'
 
 import {
-	useGraphManager,
-	useGraphSteps,
 	useStepOutputs,
+	useWorkflow,
+	useWorkflowSteps,
 } from '../hooks/index.js'
 import {
 	useDeleteConfirm,
 	useEditorTarget,
-	useGraphOutputListener,
-	useGraphWorkflowListener,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnDuplicateStep,
 	useOnEditStep,
 	useOnSaveStep,
 	useTransformModalState,
+	useWorkflowListener,
+	useWorkflowOutputListener,
 } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
+import { StepHistoryList } from './StepHistoryList.js'
 import { StepList } from './StepList.js'
 import { TableTransformModal } from './TableTransformModal.js'
 
@@ -37,14 +38,15 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		onSelect,
 		onUpdateOutput,
 		onUpdateWorkflow,
+		nextInputTable,
+		historyView = false,
 		...props
 	}) {
-		const graph = useGraphManager(workflow, inputs)
+		const wf = useWorkflow(workflow, inputs)
 
 		// Selected Step/Index State for the component
 		const [step, setStep] = useState<Step | undefined>()
 		const [index, setIndex] = useState<number>()
-
 		// Modal view-state
 		const {
 			isOpen: isModalOpen,
@@ -53,53 +55,74 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		} = useTransformModalState(setStep, setIndex)
 
 		// Interaction Handlers
-		const onSave = useOnSaveStep(graph)
+		const onSave = useOnSaveStep(wf)
 		const {
 			onClick: onDelete,
 			onConfirm: onConfirmDelete,
 			toggle: toggleDeleteModal,
 			isOpen: isDeleteModalOpen,
-		} = useDeleteConfirm(useOnDeleteStep(graph))
+		} = useDeleteConfirm(useOnDeleteStep(wf))
 		const onEdit = useOnEditStep(setStep, setIndex, showModal)
-		const onCreate = useOnCreateStep(index, dismissModal, onSave, onSelect)
-		const onDuplicate = useOnDuplicateStep(graph, table, onSave)
+		const onCreate = useOnCreateStep(onSave, onSelect, dismissModal)
+		const onDuplicate = useOnDuplicateStep(wf, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(index)
 
 		const onViewStep = useCallback(
 			(name: string) => {
 				const tableName =
-					graph.outputDefinitions.find(x => x.node === name)?.name ?? ''
+					wf.outputDefinitions.find(x => x.node === name)?.name ?? ''
 				onSelect && onSelect(tableName)
 			},
-			[onSelect, graph],
+			[onSelect, wf],
+		)
+
+		const onTransformRequested = useCallback(
+			(step: Step, output: string | undefined) => {
+				onCreate(step, output, index)
+			},
+			[index, onCreate],
 		)
 
 		// parallel array of output names for the steps
-		const outputs = useStepOutputs(graph)
-		const steps = useGraphSteps(graph)
-		useGraphOutputListener(graph, onUpdateOutput)
-		useGraphWorkflowListener(graph, onUpdateWorkflow)
+		const outputs = useStepOutputs(wf)
+		const steps = useWorkflowSteps(wf)
+		useWorkflowOutputListener(wf, onUpdateOutput)
+		useWorkflowListener(wf, onUpdateWorkflow)
 
 		return (
 			<Container>
-				<StepList
-					onDeleteClicked={onDelete}
-					onSelect={onViewStep}
-					onEditClicked={onEdit}
-					steps={steps}
-					outputs={outputs}
-					onDuplicateClicked={onDuplicate}
-					onStartNewStep={showModal}
-					buttonId={addStepButtonId}
-				/>
+				{historyView ? (
+					<StepHistoryList
+						onDeleteClicked={onDelete}
+						onSelect={onViewStep}
+						steps={steps}
+						onStartNewStep={showModal}
+						buttonId={addStepButtonId}
+						workflow={wf}
+						nextInputTable={nextInputTable}
+						onCreate={onCreate}
+					/>
+				) : (
+					<StepList
+						onDeleteClicked={onDelete}
+						onSelect={onViewStep}
+						onEditClicked={onEdit}
+						steps={steps}
+						outputs={outputs}
+						onDuplicateClicked={onDuplicate}
+						onStartNewStep={showModal}
+						buttonId={addStepButtonId}
+					/>
+				)}
+
 				<div>
 					{isModalOpen ? (
 						<TableTransformModal
 							target={editorTarget}
 							step={step}
-							index={index ?? graph.steps.length}
-							onTransformRequested={onCreate}
-							graph={graph}
+							index={index ?? wf.steps.length}
+							onTransformRequested={onTransformRequested}
+							workflow={wf}
 							onDismiss={dismissModal}
 							styles={modalStyles}
 							{...props}

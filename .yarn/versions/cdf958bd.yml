@@ -1,6 +1,0 @@
-declined:
-  - "@datashaper/react"
-  - "@datashaper/schema"
-  - "@datashaper/tables"
-  - "@datashaper/webapp"
-  - "@datashaper/workflow"

@@ -39,6 +39,7 @@ function parseType(
 
 	return escape((d: any) => {
 		const value = d[column]
+		const inputType = determineType(value)
 		switch (type) {
 			case ParseType.Boolean:
 				// arquero has no boolean operation
@@ -58,21 +59,20 @@ function parseType(
 				return op.split(value, delimiter, 10000000)
 			case ParseType.String: {
 				if (
-					determineType(value) === DataType.String &&
+					inputType === DataType.String &&
 					value.trim().toLowerCase() === 'undefined'
 				)
 					return undefined
 
 				if (
-					determineType(value) === DataType.String &&
+					inputType === DataType.String &&
 					value.trim().toLowerCase() === 'null'
 				)
 					return null
 
 				if (value instanceof Date) return formatTime(value)
 
-				if (determineType(value) === DataType.Array)
-					return op.join(value, delimiter)
+				if (inputType === DataType.Array) return op.join(value, delimiter)
 
 				return value !== undefined && value !== null ? value.toString() : value
 			}

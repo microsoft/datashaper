@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
 import styled from '@essex/styled-components'
 
 export const icons = {
 	cancel: { iconName: 'Cancel' },
-	info: { iconName: 'Info' },
 }
 
 const MAX_HEIGHT = 700
@@ -35,17 +35,6 @@ export const StepComponentContainer = styled.div`
 	width: 470px;
 	max-height: ${MAX_HEIGHT}px;
 	overflow: hidden auto;
-`
-
-export const StepSelectorContainer = styled.div`
-	margin-bottom: 8px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`
-
-export const ButtonContainer = styled.div`
-	margin-top: 8px;
 `
 
 export const GuidanceContainer = styled.div`

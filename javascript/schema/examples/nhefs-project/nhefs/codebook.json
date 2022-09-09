@@ -1,0 +1,850 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/codebook/v1.json",
+	"profile": "codebook",
+	"name": "nhefs/codebook.json",
+	"title": "NHEFS Codebook",
+	"fields": [
+		{
+			"name": "qsmk",
+			"title": "Quit Smoking",
+			"description": "QUIT SMOKING BETWEEN 1ST QUESTIONNAIRE AND 1982, 1:YES, 0:NO",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.26273787599754495,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "death",
+			"title": "Died by 1992",
+			"description": "DEATH BY 1992, 1:YES, 0:NO",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.19521178637200762,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "sbp",
+			"title": "Systolic Blood Pressure",
+			"description": "SYSTOLIC BLOOD PRESSURE IN 1982",
+			"type": "number",
+			"metadata": {
+				"count": 1552,
+				"mode": 127,
+				"min": 87,
+				"max": 229,
+				"mean": 128.70940721649492,
+				"magnitude": 229
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "dbp",
+			"title": "Diastolic Blood Pressure",
+			"description": "DIASTOLIC BLOOD PRESSURE IN 1982",
+			"type": "number",
+			"metadata": {
+				"count": 1548,
+				"mode": 80,
+				"min": 47,
+				"max": 130,
+				"mean": 77.74483204134376,
+				"magnitude": 130
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "sex",
+			"title": "Sex (Female)",
+			"description": "0: MALE 1: FEMALE",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 1,
+				"min": 0,
+				"max": 1,
+				"mean": 0.5095150399017799,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "age",
+			"title": "Age",
+			"description": "Age in 1971",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 25,
+				"min": 25,
+				"max": 74,
+				"mean": 43.91528545119704,
+				"magnitude": 74
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "income",
+			"title": "Income",
+			"description": "TOTAL FAMILY INCOME IN 1971  11:<$1000, 12: 1000-1999, 13: 2000-2999, 14: 3000-3999, 15: 4000-4999, 16: 5000-5999, 17: 6000-6999, 18: 7000-9999, 19: 10000-14999, 20: 15000-19999, 21: 20000-24999, 22: 25000+",
+			"type": "number",
+			"metadata": {
+				"count": 1567,
+				"mode": 19,
+				"min": 11,
+				"max": 22,
+				"mean": 17.947670708359887,
+				"magnitude": 22
+			},
+			"nature": "ordinal",
+			"mapping": {
+				"11": "<$1000",
+				"12": "1000-1999",
+				"13": "2000-2999",
+				"14": "3000-3999",
+				"15": "4000-4999",
+				"16": "5000-5999",
+				"17": "6000-6999",
+				"18": "7000-9999",
+				"19": "10000-14999",
+				"20": "15000-19999",
+				"21": "20000-24999",
+				"22": "25000+"
+			}
+		},
+		{
+			"name": "marital",
+			"title": "Marital Status",
+			"description": "MARITAL STATUS IN 1971  1: Under 17, 2: Married, 3: Widowed, 4: Never married, 5: Divorced, 6: Separated, 8: Unknown",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 2,
+				"min": 2,
+				"max": 8,
+				"mean": 2.5033763044812747,
+				"magnitude": 8
+			},
+			"nature": "nominal",
+			"mapping": {
+				"1": "Under 17",
+				"2": "Married",
+				"3": "Widowed",
+				"4": "Never married",
+				"5": "Divorced",
+				"6": "Separated",
+				"8": "Unknown"
+			}
+		},
+		{
+			"name": "school",
+			"title": "Highest Grade of School",
+			"description": "HIGHEST GRADE OF REGULAR SCHOOL EVER  IN 1971",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 12,
+				"min": 0,
+				"max": 17,
+				"mean": 11.135052179251096,
+				"magnitude": 17
+			},
+			"nature": "ordinal"
+		},
+		{
+			"name": "education",
+			"title": "Education",
+			"description": "AMOUNT OF EDUCATION BY 1971: 1: 8TH GRADE OR LESS, 2: HS DROPOUT, 3: HS, 4:COLLEGE DROPOUT, 5: COLLEGE OR MORE",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 3,
+				"min": 1,
+				"max": 5,
+				"mean": 2.70349907918969,
+				"magnitude": 5
+			},
+			"nature": "ordinal",
+			"mapping": {
+				"1": "8th grade or less",
+				"2": "Highschool dropout",
+				"3": "Highschool",
+				"4": "College Dropout",
+				"5": "College or more"
+			}
+		},
+		{
+			"name": "ht",
+			"title": "Height (cm)",
+			"description": "HEIGHT IN CENTIMETERS IN 1971",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 160.6875,
+				"min": 142.875,
+				"max": 198.09375,
+				"mean": 168.74096454880282,
+				"magnitude": 198.09375
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "wt71",
+			"title": "Weight (kg, 1971)",
+			"description": "WEIGHT IN KILOGRAMS  IN 1971",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 67.13,
+				"min": 36.17,
+				"max": 169.19,
+				"mean": 71.0521301411909,
+				"magnitude": 169.19
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "wt82",
+			"title": "Weight (kg, 1982)",
+			"description": "WEIGHT IN KILOGRAMS  IN 1982",
+			"type": "number",
+			"metadata": {
+				"count": 1566,
+				"mode": 72.5747792,
+				"min": 35.38020486,
+				"max": 136.53130337,
+				"mean": 73.46921932679436,
+				"magnitude": 136.53130337
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "smokeintensity",
+			"title": "Cigarettes/Day (1971)",
+			"description": "NUMBER OF CIGARETTES SMOKED PER DAY IN 1971",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 20,
+				"min": 1,
+				"max": 80,
+				"mean": 20.551258440761245,
+				"magnitude": 80
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "smokeyrs",
+			"title": "Years Smoking",
+			"description": "YEARS OF SMOKING",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 15,
+				"min": 1,
+				"max": 64,
+				"mean": 24.8710865561694,
+				"magnitude": 64
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "asthma",
+			"title": "Asthma",
+			"description": "DX ASTHMA IN 1971, 1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.048496009821976674,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "bronch",
+			"title": "Bronchitis",
+			"description": "DX CHRONIC BRONCHITIS/EMPHYSEMA IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.08532842234499687,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "tb",
+			"title": "Tuberculosis",
+			"description": "DX TUBERCULOSIS IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.014119091467157762,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "hf",
+			"title": "Heart Failure",
+			"description": "DX HEART FAILURE IN 1971, 1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.0049109883364027145,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "hbp",
+			"title": "High Blood Pressure",
+			"description": "DX HIGH BLOOD PRESSURE IN 1971, 1:EVER, 0:NEVER, 2:MISSING",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 2,
+				"min": 0,
+				"max": 2,
+				"mean": 1.0509515039901791,
+				"magnitude": 2
+			},
+			"nature": "discrete",
+			"mapping": {
+				"2": null
+			}
+		},
+		{
+			"name": "pepticulcer",
+			"title": "Peptic Ulcer",
+			"description": "DX PEPTIC ULCER IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.10374462860650709,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "colitis",
+			"title": "Colitis",
+			"description": "DX COLITIS IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.033763044812768546,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "hepatitis",
+			"title": "Hepatitis",
+			"description": "DX HEPATITIS IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.017188459177409465,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "chroniccough",
+			"title": "Chronic Cough",
+			"description": "DX CHRONIC COUGH IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.05402087170042972,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "hayfever",
+			"title": "Hay Fever",
+			"description": "DX HAY FEVER IN 1971, 1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.08962553713934923,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "diabetes",
+			"title": "Diabetes",
+			"description": "DX DIABETES IN 1971,  1:EVER, 0:NEVER, 2:MISSING",
+			"type": "integer",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"magnitude": 1
+			},
+			"nature": "binary",
+			"mapping": {
+				"2": null
+			}
+		},
+		{
+			"name": "polio",
+			"title": "Polio",
+			"description": "DX POLIO IN 1971, 1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.014119091467157788,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "tumor",
+			"title": "Tumor",
+			"description": "DX MALIGNANT TUMOR/GROWTH IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.02332719459791285,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "nervousbreak",
+			"title": "Nervous Breakdown",
+			"description": "DX NERVOUS BREAKDOWN IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.028852056476365892,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "alcoholfreq",
+			"title": "Alcohol Frequency",
+			"description": "HOW OFTEN DO YOU DRINK?  IN 1971  0: Almost every day, 1: 2-3 times/week, 2: 1-4 times/month, 3: < 12 times/year, 4: No alcohol last year, 5: Unknown",
+			"type": "integer",
+			"metadata": {
+				"count": 1629,
+				"mode": 2,
+				"min": 0,
+				"max": 5,
+				"mean": 1.9201964395334552,
+				"magnitude": 5
+			},
+			"nature": "ordinal",
+			"mapping": {
+				"0": "Almost every day",
+				"1": "2-3 times/week",
+				"2": "1-4 times/month",
+				"3": "< 12 times/year",
+				"4": "No alcohol last year",
+				"5": "Unknown"
+			},
+			"inverse": true
+		},
+		{
+			"name": "alcoholtype",
+			"title": "Preferred Drink",
+			"description": "WHICH DO YOU MOST FREQUENTLY DRINK? IN 1971  1: BEER, 2: WINE, 3: LIQUOR, 4: OTHER/UNKNOWN",
+			"type": "integer",
+			"metadata": {
+				"count": 1629,
+				"mode": 1,
+				"min": 1,
+				"max": 4,
+				"mean": 2.4757519950890092,
+				"magnitude": 4
+			},
+			"nature": "nominal",
+			"mapping": {
+				"1": "Preferred Drink:Beer",
+				"2": "Preferred Drink:Wine",
+				"3": "Preferred Drink:Liquor",
+				"4": "Preferred Drink:Other/Unknown"
+			}
+		},
+		{
+			"name": "alcoholhowmuch",
+			"title": "Alcohol Consumption Quantity",
+			"description": "WHEN YOU DRINK, HOW MUCH DO YOU DRINK?  IN 1971",
+			"type": "number",
+			"metadata": {
+				"count": 1212,
+				"mode": 2,
+				"min": 1,
+				"max": 48,
+				"mean": 3.2871287128712843,
+				"magnitude": 48
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "pica",
+			"title": "Pica",
+			"description": "DO YOU EAT DIRT OR CLAY, STARCH OR OTHER NON STANDARD FOOD?  IN 1971  1:EVER, 0:NEVER; 2:MISSING (remapped to 0)",
+			"type": "integer",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "headache",
+			"title": "Headache Medication",
+			"description": "USE HEADACHE MEDICATION IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 1,
+				"min": 0,
+				"max": 1,
+				"mean": 0.6298342541436469,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "otherpain",
+			"title": "Other Pain Medication",
+			"description": "USE OTHER PAINS MEDICATION IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.24616329036218518,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "weakheart",
+			"title": "Weak Heart Medication",
+			"description": "USE WEAK HEART MEDICATION IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.02209944751381216,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "allergies",
+			"title": "Uses Allergy Medication",
+			"description": "USE ALLERGIES MEDICATION IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.062001227747084095,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "nerves",
+			"title": "Nerves Medication",
+			"description": "USE NERVES MEDICATION IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.14426028238182925,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "lackpep",
+			"title": "Lack of PEP Medication",
+			"description": "USELACK OF PEP MEDICATION IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.05095150399017809,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "hbpmed",
+			"title": "High Blood Pressure Medication",
+			"description": "USE HIGH BLOOD PRESSURE MEDICATION IN 1971,  1:EVER, 0:NEVER, ; 2:MISSING",
+			"type": "integer",
+			"metadata": {
+				"min": 0,
+				"max": 1,
+				"magnitude": 1
+			},
+			"nature": "binary",
+			"mapping": {
+				"2": null
+			}
+		},
+		{
+			"name": "boweltrouble",
+			"title": "Bowel Trouble Medication",
+			"description": "USE BOWEL TROUBLE MEDICATION IN 1971,  1:EVER, 0:NEVER",
+			"type": "integer",
+			"metadata": {},
+			"nature": "binary",
+			"mapping": {
+				"2": null
+			}
+		},
+		{
+			"name": "wtloss",
+			"title": "Weight Loss Medication",
+			"description": "USE WEIGHT LOSS MEDICATION IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.025782688766114184,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "infection",
+			"title": "Infection Medication",
+			"description": "USE INFECTION MEDICATION IN 1971,  1:EVER, 0:NEVER",
+			"type": "number",
+			"metadata": {
+				"count": 1629,
+				"mode": 0,
+				"min": 0,
+				"max": 1,
+				"mean": 0.14794352363413135,
+				"magnitude": 1
+			},
+			"nature": "binary"
+		},
+		{
+			"name": "active",
+			"title": "Activity (inverse)",
+			"description": "IN YOUR USUAL DAY, HOW ACTIVE ARE YOU? IN 1971, 0:very active, 1:moderately active, 2:inactive",
+			"type": "integer",
+			"metadata": {
+				"count": 1629,
+				"mode": 1,
+				"min": 0,
+				"max": 2,
+				"mean": 0.6519337016574593,
+				"magnitude": 2
+			},
+			"nature": "ordinal",
+			"mapping": {
+				"0": "Very Active",
+				"1": "Moderately Active",
+				"2": "Inactive"
+			},
+			"inverse": true
+		},
+		{
+			"name": "exercise",
+			"title": "Exercise (inverse)",
+			"description": "IN RECREATION, HOW MUCH EXERCISE? IN 1971, 0:much exercise,1:moderate exercise,2:little or no exercise",
+			"type": "integer",
+			"metadata": {
+				"count": 1629,
+				"mode": 1,
+				"min": 0,
+				"max": 2,
+				"mean": 1.1952117863720086,
+				"magnitude": 2
+			},
+			"nature": "ordinal",
+			"mapping": {
+				"0": "Much exercise",
+				"1": "Moderate exercise",
+				"2": "Little or no exercise"
+			},
+			"inverse": true
+		},
+		{
+			"name": "birthcontrol",
+			"title": "Birth Control Pills",
+			"description": "BIRTH CONTROL PILLS PAST 6 MONTHS? IN 1971 1:YES, 0:NO",
+			"type": "integer",
+			"metadata": {},
+			"nature": "binary",
+			"mapping": {
+				"2": null
+			}
+		},
+		{
+			"name": "pregnancies",
+			"title": "Pregnancies",
+			"description": "TOTAL NUMBER OF PREGNANCIES? IN 1971",
+			"type": "number",
+			"metadata": {
+				"count": 726,
+				"mode": 2,
+				"min": 1,
+				"max": 15,
+				"mean": 3.691460055096413,
+				"magnitude": 15
+			},
+			"nature": "discrete"
+		},
+		{
+			"name": "cholesterol",
+			"title": "Cholesterol",
+			"description": "SERUM CHOLESTEROL (MG/100ML) IN 1971",
+			"type": "number",
+			"metadata": {
+				"count": 1613,
+				"mode": 216,
+				"min": 78,
+				"max": 416,
+				"mean": 219.97396156230644,
+				"magnitude": 416
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "price71",
+			"title": "Tobacco Price (1971)",
+			"description": "AVG TOBACCO PRICE IN STATE OF RESIDENCE 1971 (US$2008)",
+			"type": "number",
+			"metadata": {
+				"count": 1537,
+				"mode": 2.3466796875,
+				"min": 1.5065917969,
+				"max": 2.6928710938,
+				"mean": 2.1387500254307725,
+				"magnitude": 2.6928710938
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "price82",
+			"title": "Tobacco Price (1982)",
+			"description": "AVG TOBACCO PRICE IN STATE OF RESIDENCE 1982 (US$2008)",
+			"type": "number",
+			"metadata": {
+				"count": 1537,
+				"mode": 1.7973632813,
+				"min": 1.4519042969,
+				"max": 2.1030273438,
+				"mean": 1.8060954782245922,
+				"magnitude": 2.1030273438
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "tax71",
+			"title": "Tobacco Tax (1971)",
+			"description": "TOBACCO TAX IN STATE OF RESIDENCE 1971 (US$2008)",
+			"type": "number",
+			"metadata": {
+				"count": 1537,
+				"mode": 1.0498046875,
+				"min": 0.5249023438,
+				"max": 1.5224609375,
+				"mean": 1.0585808837867934,
+				"magnitude": 1.5224609375
+			},
+			"nature": "continuous"
+		},
+		{
+			"name": "tax82",
+			"title": "Tobacco Tax (1982)",
+			"description": "TOBACCO TAX IN STATE OF RESIDENCE 1982 (US$2008)",
+			"type": "number",
+			"metadata": {
+				"count": 1537,
+				"mode": 0.5718994141,
+				"min": 0.2199707031,
+				"max": 0.7479248047,
+				"mean": 0.5059827756301889,
+				"magnitude": 0.7479248047
+			},
+			"nature": "continuous"
+		}
+	],
+	"excluded": [
+		"alcoholpy",
+		"birthplace",
+		"dadth",
+		"modth",
+		"race",
+		"seqn",
+		"yrdth"
+	]
+}

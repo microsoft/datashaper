@@ -21,7 +21,7 @@ const mockTable = table({
 /**
  * ArqueroTableHeaderStory is a ArqueroTableHeader based
  */
-export const ArqueroTableHeaderStory = () => {
+export const ArqueroTableHeaderStory = (): JSX.Element => {
 	const [tableName, setTableName] = useState('Table1')
 
 	return (

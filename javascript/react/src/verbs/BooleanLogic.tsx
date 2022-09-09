@@ -13,8 +13,8 @@ import { BooleanLogicBase } from './BooleanLogic.base.js'
  * Inputs to combine column using boolean logic.
  */
 export const BooleanLogic: React.FC<StepComponentProps<BooleanArgs>> = memo(
-	function BooleanLogic({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function BooleanLogic({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columns = useTableColumnNames(dataTable)
 		return (
 			<BooleanLogicBase step={step} onChange={onChange} columns={columns} />
