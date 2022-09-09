@@ -110,10 +110,10 @@ export interface Category {
     name: string;
 }
 
-// Warning: (ae-missing-release-tag) "Codebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CodebookSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface Codebook extends Resource {
+export interface CodebookSchema extends ResourceSchema {
     // (undocumented)
     fields: Field[];
 }
@@ -182,19 +182,19 @@ export enum DataOrientation {
 }
 
 // Warning: (ae-forgotten-export) The symbol "Named" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataPackageSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface DataPackage extends Named {
+export interface DataPackageSchema extends Named {
     // (undocumented)
     $schema: string;
-    resources: (string | Resource)[];
+    resources: (string | ResourceSchema)[];
 }
 
-// Warning: (ae-missing-release-tag) "DataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataTableSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface DataTable extends Resource {
+export interface DataTableSchema extends ResourceSchema {
     columns?: number;
     data?: any;
     encoding?: string;
@@ -660,10 +660,10 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 // @public (undocumented)
 export type RenameArgs = InputColumnRecordArgs;
 
-// Warning: (ae-missing-release-tag) "Resource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ResourceSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface Resource extends Named {
+export interface ResourceSchema extends Named {
     // (undocumented)
     $schema: string;
     homepage?: string;
@@ -671,7 +671,7 @@ export interface Resource extends Named {
     path?: string | string[];
     // Warning: (ae-forgotten-export) The symbol "Profile" needs to be exported by the entry point index.d.ts
     profile?: Profile;
-    sources?: (string | Resource)[];
+    sources?: (string | ResourceSchema)[];
 }
 
 // Warning: (ae-missing-release-tag) "RollupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1036,10 +1036,10 @@ export enum WindowFunction {
     RowNumber = "row_number"
 }
 
-// Warning: (ae-missing-release-tag) "Workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface Workflow extends Resource {
+export interface WorkflowSchema extends ResourceSchema {
     input?: string[];
     output: Array<OutputPortBinding>;
     steps?: Step[];

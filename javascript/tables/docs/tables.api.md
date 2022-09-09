@@ -4,7 +4,7 @@
 
 ```ts
 
-import type { Codebook } from '@datashaper/schema';
+import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
 import { DataType } from '@datashaper/schema';
@@ -159,7 +159,7 @@ export function parseBoolean(naValues?: string[], trueValues?: string[], falseVa
 // @public (undocumented)
 export interface ParseConfig {
     // (undocumented)
-    codebook?: Codebook;
+    codebook?: CodebookSchema;
     // (undocumented)
     typeHints?: TypeHints;
 }

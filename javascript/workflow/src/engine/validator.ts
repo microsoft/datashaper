@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Workflow as WorkflowInput } from '@datashaper/schema'
+import type { WorkflowSchema as WorkflowInput } from '@datashaper/schema'
 import Ajv from 'ajv'
 
 const baseUrl = 'https://microsoft.github.io/datashaper/schema/workflow'

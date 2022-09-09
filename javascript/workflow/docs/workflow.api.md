@@ -40,7 +40,7 @@ import type { UnfoldArgs } from '@datashaper/schema';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
-import type { Workflow as Workflow_2 } from '@datashaper/schema';
+import type { WorkflowSchema as WorkflowSchema_2 } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -161,7 +161,7 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // Warning: (ae-missing-release-tag) "createWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createWorkflow(input: Workflow_2, tables: TableContainer[]): Workflow;
+export function createWorkflow(input: WorkflowSchema_2, tables: TableContainer[]): Workflow;
 
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -566,7 +566,7 @@ export { window_2 as window }
 //
 // @public (undocumented)
 export class Workflow {
-    constructor(input?: Workflow_2, _strictInputs?: boolean);
+    constructor(input?: WorkflowSchema_2, _strictInputs?: boolean);
     // (undocumented)
     addInputName(input: string): void;
     addInputObservable(id: string, source: TableObservable): void;
@@ -628,12 +628,12 @@ export class Workflow {
     // (undocumented)
     toArray(includeInputs?: boolean): Maybe<TableContainer>[];
     // (undocumented)
-    toJsonObject(): Workflow_2;
+    toJsonObject(): WorkflowSchema_2;
     toMap(includeInputs?: boolean): Map<string, Maybe<TableContainer>>;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)
-    static validate(workflowJson: Workflow_2): Promise<boolean>;
+    static validate(workflowJson: WorkflowSchema_2): Promise<boolean>;
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -641,7 +641,7 @@ export class Workflow {
 // @public (undocumented)
 export class WorkflowSchema {
     // (undocumented)
-    isValid(workflowJson?: Workflow_2): Promise<boolean>;
+    isValid(workflowJson?: WorkflowSchema_2): Promise<boolean>;
 }
 
 // Warning: (ae-missing-release-tag) "WorkflowSchemaInstance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
