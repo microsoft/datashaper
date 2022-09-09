@@ -10,6 +10,7 @@ import { guessDataTypeFromValues } from './guessDataTypeFromValues.js'
 export function generateCodebook(table: ColumnTable): Codebook {
 	const codebookResult: Codebook = {
 		$schema: 'http://json-schema.org/draft-07/schema#',
+		id: 'http://json-schema.org/draft-07/schema#',
 		name: 'Generator',
 		fields: [],
 	}
@@ -18,6 +19,7 @@ export function generateCodebook(table: ColumnTable): Codebook {
 		const columnType = guessDataTypeFromValues(table.array(column) as string[])
 
 		const field = {
+			id: 'http://json-schema.org/draft-07/schema#',
 			name: column,
 			type: columnType,
 		}
