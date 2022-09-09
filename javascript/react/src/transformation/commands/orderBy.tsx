@@ -4,9 +4,10 @@
  */
 import type { OrderbyArgs } from '@datashaper/schema'
 import { SortDirection, Verb } from '@datashaper/schema'
-import type { Step } from '@datashaper/workflow'
+import type { Step, Workflow } from '@datashaper/workflow'
 import type { ICommandBarItemProps } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
+import isMatch from 'lodash-es/isMatch.js'
 
 import type {
 	StepAddFunction,
@@ -16,7 +17,7 @@ import type {
 
 export function orderby(
 	column: string,
-	steps: Step[],
+	workflow: Workflow,
 	onAddStep: StepAddFunction,
 	onUpdateStep?: StepUpdateFunction,
 	onRemoveStep?: StepRemoveFunction,
@@ -25,70 +26,89 @@ export function orderby(
 		key: 'orderby',
 		text: 'Sort column',
 		onRender: () => {
-			const step = {} as Step<OrderbyArgs>
-			step.verb = Verb.Orderby
-			step.id = 'abcdefyh'
-			step.args = {
-				orders: [{ column, direction: SortDirection.Ascending }],
-			}
-			const entry = step?.args.orders.find(e => e.column === column)
+			const template = {
+				verb: Verb.Orderby,
+			} as Step<OrderbyArgs>
+
+			const stepIndex = workflow.steps.findIndex(step =>
+				isMatch(step as any, template as any),
+			)
+			const step = workflow.steps[stepIndex] as Step<OrderbyArgs>
+			const entry = step?.args?.orders.find(e => e.column === column)
 			const order = entry?.direction
 			const click = () => {
-				if (!steps.length) {
-					onAddStep(step, 'order-ar')
+				if (!workflow.steps.length) {
+					const id = workflow.suggestOutputName(template.verb)
+					template.id = id
+					template.args = {
+						orders: [{ column, direction: SortDirection.Ascending }],
+					}
+					onAddStep(template, template.id)
 				} else {
 					if (entry) {
 						// check the direction to decide whether we flip it or remove it
+						const entryIndex =
+							step?.args?.orders.findIndex(e => e.column === column) || 0
 						if (order === SortDirection.Ascending) {
-							const index =
-								step?.args?.orders.findIndex(e => e.column === column) || 0
 							const update = [...(step?.args?.orders || [])]
-							update[index] = {
+							update[entryIndex] = {
 								column,
 								direction: SortDirection.Descending,
 							}
 							onUpdateStep &&
-								onUpdateStep(step, {
-									...step,
-									args: {
-										...step.args,
-										orders: update,
+								onUpdateStep(
+									{
+										...step,
+										args: {
+											...step.args,
+											orders: update,
+										},
 									},
-								})
+									step.id,
+									stepIndex,
+								)
 						} else {
 							// remove it
 							const filtered = step?.args?.orders.filter(
 								e => e.column !== column,
 							)
 							if (filtered?.length === 0) {
-								onRemoveStep && onRemoveStep(step)
+								onRemoveStep && onRemoveStep(stepIndex)
 							} else {
 								onUpdateStep &&
-									onUpdateStep(step, {
-										...step,
-										args: {
-											...step.args,
-											orders: filtered,
+									onUpdateStep(
+										{
+											...step,
+											args: {
+												...step.args,
+												orders: filtered,
+											},
 										},
-									})
+										step.id,
+										stepIndex,
+									)
 							}
 						}
 					} else {
 						// brand new order
 						onUpdateStep &&
-							onUpdateStep(step, {
-								...step,
-								args: {
-									...step.args,
-									orders: [
-										...(step?.args?.orders || []),
-										{
-											column,
-											direction: SortDirection.Ascending,
-										},
-									],
+							onUpdateStep(
+								{
+									...step,
+									args: {
+										...step.args,
+										orders: [
+											...(step?.args?.orders || []),
+											{
+												column,
+												direction: SortDirection.Ascending,
+											},
+										],
+									},
 								},
-							})
+								step.id,
+								stepIndex,
+							)
 					}
 				}
 			}

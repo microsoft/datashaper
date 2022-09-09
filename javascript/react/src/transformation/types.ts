@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step, StepInput } from '@datashaper/workflow'
+import type { Step } from '@datashaper/workflow'
 
 export type StepAddFunction = (
 	step: Step<unknown>,
@@ -11,7 +11,8 @@ export type StepAddFunction = (
 	index?: number,
 ) => void
 export type StepUpdateFunction = (
-	step: Partial<StepInput>,
-	update: Partial<StepInput>,
+	step: Step<unknown>,
+	output?: string,
+	index?: number,
 ) => void
-export type StepRemoveFunction = (step: Partial<StepInput>) => void
+export type StepRemoveFunction = (index: number) => void

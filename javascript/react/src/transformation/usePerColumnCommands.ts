@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@datashaper/workflow'
+import type { Workflow } from '@datashaper/workflow'
 import { useMemo } from 'react'
 
 import { createDefaultCommandBar } from '../component-factories.js'
+import { groupby } from './commands/groupBy.js'
 import { orderby } from './commands/orderBy.js'
 import type {
 	StepAddFunction,
@@ -14,7 +15,7 @@ import type {
 } from './types.js'
 
 export function usePerColumnCommands(
-	steps: Step[],
+	workflow: Workflow,
 	onAddStep: StepAddFunction,
 	onUpdateStep?: StepUpdateFunction,
 	onRemoveStep?: StepRemoveFunction,
@@ -23,8 +24,11 @@ export function usePerColumnCommands(
 		return (props: any) => {
 			const column = props?.column.key
 			return createDefaultCommandBar({
-				items: [orderby(column, steps, onAddStep, onUpdateStep, onRemoveStep)],
+				items: [
+					orderby(column, workflow, onAddStep, onUpdateStep, onRemoveStep),
+					groupby(column, workflow, onAddStep, onUpdateStep, onRemoveStep),
+				],
 			})
 		}
-	}, [steps, onAddStep, onRemoveStep, onUpdateStep])
+	}, [workflow, onAddStep, onRemoveStep, onUpdateStep])
 }

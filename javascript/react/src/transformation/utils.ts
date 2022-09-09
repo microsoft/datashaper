@@ -9,10 +9,6 @@ import isMatch from 'lodash-es/isMatch.js'
 export function findStep<T>(
 	steps: Step[],
 	template: Partial<Step<T>>,
-): { step: Step<T> | undefined; index: number } {
-	const index = steps.findIndex(step => isMatch(step as any, template as any))
-	return {
-		step: steps[index] as Step<T>,
-		index,
-	}
+): Step | undefined {
+	return steps.find(step => isMatch(step as any, template as any))
 }
