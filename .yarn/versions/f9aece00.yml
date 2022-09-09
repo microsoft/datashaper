@@ -4,3 +4,6 @@ releases:
   "@datashaper/tables": patch
   "@datashaper/webapp": patch
   "@datashaper/workflow": minor
+
+declined:
+  - "@datashaper/utilities"
