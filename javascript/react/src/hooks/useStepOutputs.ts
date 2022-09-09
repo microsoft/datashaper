@@ -2,21 +2,21 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { GraphManager } from '@datashaper/workflow'
+import type { Workflow } from '@datashaper/workflow'
 import { useMemo } from 'react'
 
 /**
  * create a parallel array of output names for the steps
  *
- * @param graph - The graph manager
+ * @param workflow - The workflow instance
  * @returns
  */
 export function useStepOutputs(
-	graph: GraphManager,
+	workflow: Workflow,
 	defaultOutputName?: (index: number) => string,
 ): Array<string | undefined> {
-	const outputs = graph.outputDefinitions
-	const steps = graph.steps
+	const outputs = workflow.outputDefinitions
+	const steps = workflow.steps
 
 	return useMemo<Array<string | undefined>>(
 		() =>

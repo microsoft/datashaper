@@ -14,8 +14,8 @@ import { PivotBase } from './Pivot.base.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Pivot: React.FC<StepComponentProps<PivotArgs>> = memo(
-	function Pivot({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Pivot({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columns = useTableColumnNames(dataTable)
 
 		return <PivotBase step={step} onChange={onChange} columns={columns} />

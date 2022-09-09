@@ -8,7 +8,7 @@ import type { Workflow } from '@datashaper/workflow'
 import type { TransformModalProps } from '../index.js'
 
 export interface ManageWorkflowProps
-	extends Omit<Omit<TransformModalProps, 'graph'>, 'index'> {
+	extends Omit<Omit<TransformModalProps, 'workflow'>, 'index'> {
 	/**
 	 * The workflow specification
 	 */
@@ -29,4 +29,5 @@ export interface ManageWorkflowProps
 	 * Handler for when the workflow changes
 	 */
 	onUpdateWorkflow?: (workflow: Workflow) => void
+	historyView?: boolean
 }

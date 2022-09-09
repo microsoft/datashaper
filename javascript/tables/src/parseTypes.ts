@@ -8,7 +8,7 @@ import { DataType } from '@datashaper/schema'
 import toNumber from 'lodash-es/toNumber.js'
 import moment from 'moment'
 
-import { guessDataType , typeGuesserFactory } from './guessDataType.js'
+import { guessDataType, typeGuesserFactory } from './guessDataType.js'
 import {
 	DATE_FORMAT_DEFAULT,
 	DECIMAL_DEFAULT,

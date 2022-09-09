@@ -21,7 +21,6 @@ export interface Resource extends Named {
 	/**
 	 * URI-compliant path to the resource (local or remote).
 	 * If array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables).
-	 * TODO: frictionless also includes a pathType indicating if a file is local or remote. Is this needed?
 	 */
 	path?: string | string[]
 	/**
@@ -30,12 +29,9 @@ export interface Resource extends Named {
 	 * to represent complex combinations.
 	 * For example, a parent resource can have source tables, a workflow, and a table schema that all combine
 	 * to create a fully-realized, strongly typed, and transformed output table.
-	 * TODO: should this be a direct Resource list, or should each entry be a container object that also defines the relationship?
-	 *
-	 * TODO: linking is a little cumbersome. It seems that a Resource should be linkable with _just_ a URL - including core required properties is redundant.
-	 * understanding-json-schema/structuring.html#json-pointer) to a subschema?
+	 * Entire Resource objects may be embedded here, or a string path to the Resource definition JSON.
 	 */
-	sources?: Resource[]
+	sources?: (string | Resource)[]
 	/**
 	 * URL to a public webpage that describes this resource.
 	 */

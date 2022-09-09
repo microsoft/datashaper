@@ -19,8 +19,8 @@ import { FilterFunction } from './shared/index.js'
  * Provides inputs for a Filter step.
  */
 export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
-	function Filter({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Filter({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const handleButtonClick = useCallback(() => {
 			onChange?.({
 				...step,

@@ -6,7 +6,9 @@ import styled from '@essex/styled-components'
 
 export const Container = styled.div`
 	width: 97%;
-	display: grid;
+	margin: auto;
+	height: 100%;
+	overflow: hidden;
 `
 
 // HACK

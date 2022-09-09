@@ -15,7 +15,7 @@ export const RecodeDescription: React.FC<StepDescriptionProps<RecodeArgs>> =
 			const {
 				step: { args },
 			} = props
-			const entries = Object.entries(args.map || {})
+			const entries = Object.entries(args.mapping || {})
 			const sub = createRowEntries(
 				entries,
 				c => ({

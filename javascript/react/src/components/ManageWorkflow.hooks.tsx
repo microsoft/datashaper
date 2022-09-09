@@ -4,8 +4,8 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { TableContainer } from '@datashaper/tables'
-import type { GraphManager, Step, Workflow } from '@datashaper/workflow'
-import { cloneStep } from '@datashaper/workflow'
+import type { Step } from '@datashaper/workflow'
+import { cloneStep, Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -19,23 +19,23 @@ import {
 } from '../hooks/index.js'
 
 export function useOnDuplicateStep(
-	graph: GraphManager,
+	workflow: Workflow,
 	table?: ColumnTable,
 	onSave?: (step: Step, output: string | undefined, index?: number) => void,
 ): (_step: Step) => void {
-	const createTableName = useCreateTableName(graph)
+	const createTableName = useCreateTableName(workflow)
 
 	return useCallback(
 		(step: Step) => {
-			const outputTable = table ?? graph?.latestForNodeId(step.id)?.table
+			const outputTable = table ?? workflow?.latestOutputForNode(step.id)?.table
 			const clonedStep = cloneStep(step, outputTable?.columnNames())
 			clonedStep.id = ''
 			onSave?.(
 				clonedStep,
-				createTableName(graph.outputNameForNode(step.id) ?? step.id),
+				createTableName(workflow.outputNameForNode(step.id) ?? step.id),
 			)
 		},
-		[onSave, graph, table, createTableName],
+		[onSave, workflow, table, createTableName],
 	)
 }
 
@@ -63,35 +63,34 @@ export function useOnEditStep(
 }
 
 export function useOnCreateStep(
-	index: number | undefined,
-	dismissModal: () => void,
 	save: (
 		step: Step,
 		output: string | undefined,
 		index: number | undefined,
 	) => void,
 	selectOutput: undefined | ((name: string) => void),
-): (step: Step, output: string | undefined) => void {
+	dismissModal?: () => void,
+): (step: Step, output: string | undefined, index: number | undefined) => void {
 	return useCallback(
-		(step: Step, output: string | undefined) => {
+		(step: Step, output: string | undefined, index: number | undefined) => {
 			save(step, output, index)
-			dismissModal()
+			dismissModal?.()
 			if (output) selectOutput?.(output)
 		},
-		[save, dismissModal, index, selectOutput],
+		[save, dismissModal, selectOutput],
 	)
 }
 
 /**
  *
- * @param graph - The graph manager
+ * @param workflow - The workflow
  * @returns A callback to use when saving a step, either new or existing
  */
 export function useOnSaveStep(
-	graph: GraphManager,
+	workflow: Workflow,
 ): (step: Step, output: string | undefined, index: number | undefined) => void {
-	const updateStep = useHandleStepSave(graph)
-	const updateStepOutput = useHandleStepOutputChanged(graph)
+	const updateStep = useHandleStepSave(workflow)
+	const updateStepOutput = useHandleStepOutputChanged(workflow)
 
 	return useCallback(
 		(step: Step, output: string | undefined, index: number | undefined) => {
@@ -142,12 +141,12 @@ export function useEditorTarget(stepIndex: number | undefined): {
 	}
 }
 
-export function useOnDeleteStep(graph: GraphManager): (index: number) => void {
+export function useOnDeleteStep(workflow: Workflow): (index: number) => void {
 	return useCallback(
 		(index: number) => {
-			graph.removeStep(index)
+			workflow.removeStep(index)
 		},
-		[graph],
+		[workflow],
 	)
 }
 
@@ -181,28 +180,32 @@ export function useDeleteConfirm(onDelete?: (args: any) => void): {
 	}
 }
 
-export function useGraphOutputListener(
-	graph: GraphManager,
+export function useWorkflowOutputListener(
+	workflow: Workflow,
 	setOutput?: ((tables: TableContainer[]) => void) | undefined,
 ): void {
 	useEffect(
 		() =>
 			setOutput &&
-			graph.onChange(
-				() => setOutput(graph.toList().filter(t => !!t) as TableContainer[]),
+			workflow.onChange(
+				() =>
+					setOutput(workflow.toArray().filter(t => !!t) as TableContainer[]),
 				true,
 			),
-		[graph, setOutput],
+		[workflow, setOutput],
 	)
 }
 
-export function useGraphWorkflowListener(
-	graph: GraphManager,
+export function useWorkflowListener(
+	workflow: Workflow,
 	setWorkflow?: (workflow: Workflow) => void,
 ): void {
 	useEffect(
 		() =>
-			setWorkflow && graph.onChange(() => setWorkflow(graph.workflow.clone())),
-		[graph, setWorkflow],
+			setWorkflow &&
+			workflow.onChange(() =>
+				setWorkflow(new Workflow(workflow.toJsonObject())),
+			),
+		[workflow, setWorkflow],
 	)
 }

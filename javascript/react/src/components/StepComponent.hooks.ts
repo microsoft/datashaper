@@ -5,7 +5,7 @@
 import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import { columnTypes } from '@datashaper/tables'
-import type { GraphManager, Step } from '@datashaper/workflow'
+import type { Step, Workflow } from '@datashaper/workflow'
 import { isNumericInputStep, NodeInput } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
@@ -56,7 +56,7 @@ export function useColumnFilter(
 
 export function useInputTableChanged(
 	step: Step,
-	graph: GraphManager | undefined,
+	workflow: Workflow | undefined,
 	onChange: (step: Step) => void,
 ): DropdownChangeHandler {
 	const resetArgs = useResetArgs()
@@ -65,9 +65,9 @@ export function useInputTableChanged(
 		step,
 		(s, val) => {
 			if (val != null) {
-				// determine the graph node id to subscribe from
+				// determine the node id to subscribe from
 				const tableName = val as string
-				const outputNode = graph?.outputDefinitions.find(
+				const outputNode = workflow?.outputDefinitions.find(
 					o => o.name === (tableName as string),
 				)?.node
 

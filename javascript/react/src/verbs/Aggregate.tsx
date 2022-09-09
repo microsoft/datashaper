@@ -14,8 +14,8 @@ import { AggregateBase } from './Aggregate.base.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Aggregate: React.FC<StepComponentProps<AggregateArgs>> = memo(
-	function Aggregate({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Aggregate({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columns = useTableColumnNames(dataTable)
 		return <AggregateBase columns={columns} step={step} onChange={onChange} />
 	},

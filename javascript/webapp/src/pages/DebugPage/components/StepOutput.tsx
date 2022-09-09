@@ -21,14 +21,14 @@ import { Table } from './Table.js'
 export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	step,
 	index,
-	graph,
+	workflow,
 	output,
 	features,
 	compact,
 	onStepChange,
 	onStepOutputChange,
 }) {
-	const table = useDataTable(output, graph)
+	const table = useDataTable(output, workflow)
 
 	return (
 		<StepBlock className="step-block">
@@ -37,7 +37,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 					<StepConfig>
 						<StepComponent
 							step={step}
-							graph={graph}
+							workflow={workflow}
 							index={index}
 							output={output}
 							onChange={onStepChange}

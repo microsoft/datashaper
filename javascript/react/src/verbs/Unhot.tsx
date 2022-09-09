@@ -14,8 +14,8 @@ import { UnhotBase } from './Unhot.base.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Unhot: React.FC<StepComponentProps<UnhotArgs>> = memo(
-	function Unhot({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Unhot({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columnNames = useTableColumnNames(dataTable)
 		return <UnhotBase step={step} onChange={onChange} columns={columnNames} />
 	},
