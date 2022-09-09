@@ -1,4 +1,5 @@
 releases:
+  "@datashaper/schema": minor
   "@datashaper/tables": minor
 
 declined:
