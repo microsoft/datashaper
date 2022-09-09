@@ -254,7 +254,7 @@
 			"args": {
 				"column": "ID",
 				"to": "Greetings",
-				"map": {
+				"mapping": {
 					"1": 10,
 					"2": 21,
 					"3": 32,

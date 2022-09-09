@@ -621,7 +621,7 @@
                     "description": "Name of the input column for columnnar operations.",
                     "type": "string"
                 },
-                "map": {
+                "mapping": {
                     "$ref": "#/definitions/Record<any,any>",
                     "description": "Mapping of old value to new for the recoding.\nNote that the key must be coercable to a string for map lookup."
                 },

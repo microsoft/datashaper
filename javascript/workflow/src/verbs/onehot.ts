@@ -21,7 +21,6 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 		const prefix = prefixes[column]
 
 		// note that this ignores potential grouping
-		// TODO: should this only apply to string column types?
 		const distinct = input
 			.rollup({
 				distinct: op.array_agg_distinct(column),

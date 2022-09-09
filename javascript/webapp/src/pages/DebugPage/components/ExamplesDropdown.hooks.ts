@@ -14,6 +14,7 @@ import dropdown from '../../../../public/specs/dropdown.json'
 import everyOperation from '../../../../public/specs/every-operation.json'
 import groupby from '../../../../public/specs/groupby.json'
 import multistepBinarize from '../../../../public/specs/multistep-binarize.json'
+import onehotunhot from '../../../../public/specs/onehot-unhot.json'
 import sparkbar from '../../../../public/specs/sparkbar.json'
 import sparkline from '../../../../public/specs/sparkline.json'
 import spreadhot from '../../../../public/specs/spreadhot.json'
@@ -30,6 +31,7 @@ const specs: Array<WorkflowJson> = [
 	dropdown as unknown as WorkflowJson,
 	groupby as unknown as WorkflowJson,
 	spreadhot as unknown as WorkflowJson,
+	onehotunhot as unknown as WorkflowJson,
 ]
 
 export function useExampleOptions(): IDropdownOption[] {

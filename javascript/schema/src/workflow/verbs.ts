@@ -434,7 +434,7 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 	 * Mapping of old value to new for the recoding.
 	 * Note that the key must be coercable to a string for map lookup.
 	 */
-	map: Record<Value, Value>
+	mapping: Record<Value, Value>
 }
 
 export type RenameArgs = InputColumnRecordArgs
