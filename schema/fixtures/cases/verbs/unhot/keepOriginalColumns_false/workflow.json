@@ -12,7 +12,7 @@
 					"Name_Google"
 				],
 				"to": "Name",
-				"keepOriginalColumns": false,
+				"preserveSource": false,
 				"prefix": "Name_"
 			},
 			"id": "expected"

@@ -13,7 +13,7 @@
 				],
 				"strategy": "first one wins",
 				"to": "Name",
-				"keepOriginalColumns": false,
+				"preserveSource": false,
 				"unhot": true,
 				"prefix": "Name_"
 			},

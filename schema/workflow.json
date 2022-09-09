@@ -480,11 +480,11 @@
                     "description": "This is only necessary if mergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
                     "type": "string"
                 },
-                "keepOriginalColumns": {
-                    "type": "boolean"
-                },
                 "prefix": {
                     "type": "string"
+                },
+                "preserveSource": {
+                    "type": "boolean"
                 },
                 "strategy": {
                     "$ref": "#/definitions/MergeStrategy"
@@ -548,12 +548,12 @@
                     },
                     "type": "array"
                 },
-                "keepOriginalColumns": {
-                    "type": "boolean"
-                },
                 "prefixes": {
                     "$ref": "#/definitions/Record<string,string>",
                     "description": "Optional prefixes for the output column names"
+                },
+                "preserveSource": {
+                    "type": "boolean"
                 }
             },
             "type": "object"
@@ -755,11 +755,11 @@
                     "description": "Delimiter to use when converting string cell values into an array with String.split",
                     "type": "string"
                 },
-                "keepOriginalColumns": {
-                    "type": "boolean"
-                },
                 "onehot": {
                     "description": "Indicates that a onehot-style spread should be performed.\nThis maps all unique cell values to new columns and sets the output cell value to a binary 1/0 based on column match.\nThis is in contrast to the default spread, which just maps array values to column by index.",
+                    "type": "boolean"
+                },
+                "preserveSource": {
                     "type": "boolean"
                 },
                 "to": {
@@ -800,11 +800,11 @@
                     },
                     "type": "array"
                 },
-                "keepOriginalColumns": {
-                    "type": "boolean"
-                },
                 "prefix": {
                     "type": "string"
+                },
+                "preserveSource": {
+                    "type": "boolean"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",

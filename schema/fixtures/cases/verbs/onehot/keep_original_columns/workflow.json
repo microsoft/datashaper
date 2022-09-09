@@ -6,7 +6,7 @@
 			"input": "table5",
 			"args": {
 				"columns": ["item"],
-				"keepOriginalColumns": true
+				"preserveSource": true
 			},
 			"id": "expected"
 		}

@@ -35,10 +35,10 @@ export const OneHotBase: React.FC<
 		return [
 			inputColumnList(step, columns, 'Columns to onehot'),
 			{
-				label: 'Keep original columns',
+				label: 'Keep source columns',
 				type: FormInputType.Checkbox,
-				current: step.args.keepOriginalColumns,
-				onChange: (s, val) => (s.args.keepOriginalColumns = val as boolean),
+				current: step.args.preserveSource,
+				onChange: (s, val) => (s.args.preserveSource = val as boolean),
 				advanced: true,
 			},
 			...prefixInputs,

@@ -56,7 +56,7 @@ def spread(
     to: List[str] = None,
     delimiter: str = ",",
     onehot: bool = False,
-    keepOriginalColumns: bool = False,
+    preserveSource: bool = False,
 ):
     input_table = input.get_input()
     if to is None:
@@ -67,7 +67,7 @@ def spread(
     else:
         output = __normal_spread(input_table, columns, to, delimiter)
 
-    if not keepOriginalColumns:
+    if not preserveSource:
         output = output.drop(columns=columns)
 
     return TableContainer(table=output)

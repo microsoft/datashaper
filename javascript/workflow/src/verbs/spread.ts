@@ -11,13 +11,13 @@ import { stepVerbFactory } from './util/factories.js'
 
 export const spreadStep: ColumnTableStep<SpreadArgs> = (
 	input,
-	{ to, columns, delimiter, onehot, keepOriginalColumns = false },
+	{ to, columns, delimiter, onehot, preserveSource = false },
 ) => {
 	const split = applySplit(input, columns, delimiter)
 	const spread = onehot
 		? applyOnehotSpread(split, columns)
 		: applyDefaultSpread(split, columns, to)
-	return keepOriginalColumns ? spread : spread.select(not(columns))
+	return preserveSource ? spread : spread.select(not(columns))
 }
 
 // if a delimiter is supplied, splits the cell values of every required column in the table

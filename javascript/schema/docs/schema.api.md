@@ -527,9 +527,9 @@ export enum MathOperator {
 export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
     delimiter?: string;
     // (undocumented)
-    keepOriginalColumns?: boolean;
-    // (undocumented)
     prefix?: string;
+    // (undocumented)
+    preserveSource?: boolean;
     // (undocumented)
     strategy: MergeStrategy;
     // (undocumented)
@@ -591,9 +591,9 @@ export enum NumericComparisonOperator {
 //
 // @public (undocumented)
 export interface OnehotArgs extends InputColumnListArgs {
-    // (undocumented)
-    keepOriginalColumns?: boolean;
     prefixes?: Record<string, string>;
+    // (undocumented)
+    preserveSource?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "OrderbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -750,9 +750,9 @@ export enum SortDirection {
 // @public (undocumented)
 export interface SpreadArgs extends InputColumnListArgs {
     delimiter?: string;
-    // (undocumented)
-    keepOriginalColumns?: boolean;
     onehot?: boolean;
+    // (undocumented)
+    preserveSource?: boolean;
     // (undocumented)
     to: string[];
 }
@@ -932,9 +932,9 @@ export interface UnfoldArgs {
 // @public (undocumented)
 export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
     // (undocumented)
-    keepOriginalColumns?: boolean;
-    // (undocumented)
     prefix?: string;
+    // (undocumented)
+    preserveSource?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

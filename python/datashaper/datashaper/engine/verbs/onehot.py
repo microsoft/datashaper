@@ -27,7 +27,7 @@ def onehot(
     input: VerbInput,
     columns: List[str],
     prefixes: Dict[str, str] = {},
-    keepOriginalColumns=False,
+    preserveSource=False,
 ):
     input_table = input.get_input()
     input_table[columns] = input_table[columns].astype("category")
@@ -39,7 +39,7 @@ def onehot(
         dummies.loc[input_table[column].isnull(), cols] = np.nan
 
     output = pd.concat([input_table, dummies], axis=1)
-    if not keepOriginalColumns:
+    if not preserveSource:
         output = output.drop(columns=columns)
 
     return TableContainer(table=output)

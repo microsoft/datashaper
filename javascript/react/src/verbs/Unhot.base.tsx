@@ -21,10 +21,10 @@ export const UnhotBase: React.FC<
 		() => [
 			inputColumnList(step, columns),
 			{
-				label: 'Keep original columns',
+				label: 'Keep source columns',
 				type: FormInputType.Checkbox,
-				current: step.args.keepOriginalColumns,
-				onChange: (s, val) => (s.args.keepOriginalColumns = val as boolean),
+				current: step.args.preserveSource,
+				onChange: (s, val) => (s.args.preserveSource = val as boolean),
 				advanced: true,
 			},
 			{

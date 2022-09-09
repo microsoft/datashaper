@@ -15,7 +15,7 @@ import { stepVerbFactory } from './util/factories.js'
  */
 export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
-	{ columns, prefixes = {}, keepOriginalColumns = false },
+	{ columns, prefixes = {}, preserveSource = false },
 ) => {
 	const args = columns.reduce((acc, column) => {
 		const prefix = prefixes[column]
@@ -38,7 +38,7 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 
 	const onehotted = input.derive(args)
 
-	return keepOriginalColumns ? onehotted : onehotted.select(not(columns))
+	return preserveSource ? onehotted : onehotted.select(not(columns))
 }
 
 export const onehot = stepVerbFactory(onehotStep)

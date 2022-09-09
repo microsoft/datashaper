@@ -7,7 +7,7 @@
 			"args": {
 				"columns": ["ID"],
 				"to": ["ID_X"],
-				"keepOriginalColumns": true
+				"preserveSource": true
 			},
 			"id": "expected"
 		}

@@ -480,7 +480,7 @@
                     "description": "This is only necessary if mergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
                     "type": "string"
                 },
-                "keepOriginalColumns": {
+                "preserveSource": {
                     "type": "boolean"
                 },
                 "prefix": {
@@ -794,7 +794,7 @@
                     },
                     "type": "array"
                 },
-                "keepOriginalColumns": {
+                "preserveSource": {
                     "type": "boolean"
                 },
                 "prefix": {
