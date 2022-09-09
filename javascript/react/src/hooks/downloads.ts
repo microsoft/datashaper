@@ -18,7 +18,7 @@ import { useCallback, useState } from 'react'
 export function useDownloadWorkflow(workflow: Workflow): () => void {
 	return useCallback(() => {
 		if (workflow != null) {
-			const blob = toBlobJson(workflow.toJsonObject())
+			const blob = toBlobJson(workflow.toSchema())
 			download('worfklow.json', FileMimeType.json, blob)
 		}
 	}, [workflow])
@@ -72,7 +72,7 @@ export function useDownloadZip(
 		}
 
 		if (workflow) {
-			const blob = toBlobJson(workflow.toJsonObject())
+			const blob = toBlobJson(workflow.toSchema())
 			const file = createFileWithPath(blob, { name: 'workflow.json' })
 			await fileCollection.add(file)
 		}

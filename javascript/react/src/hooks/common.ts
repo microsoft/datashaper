@@ -13,13 +13,13 @@ export function useWorkflow(
 	inputs?: TableContainer[],
 ): Workflow {
 	const [workflow, setWorkflow] = useState(
-		() => new Workflow(input?.toJsonObject()),
+		() => new Workflow(input?.toSchema()),
 	)
 
 	// this effect should fire when a new workflow json is uploaded
 	useEffect(
 		function resetWorkflowWhenWorkflowChanges() {
-			setWorkflow(new Workflow(input?.toJsonObject()))
+			setWorkflow(new Workflow(input?.toSchema()))
 		},
 		[input],
 	)

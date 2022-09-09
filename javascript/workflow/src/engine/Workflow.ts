@@ -535,7 +535,7 @@ export class Workflow {
 		return result
 	}
 
-	public toJsonObject(): WorkflowSchema {
+	public toSchema(): WorkflowSchema {
 		const output: WorkflowSchema['output'] = []
 		for (const [, binding] of this._outputPorts.entries()) {
 			output.push({ ...binding })

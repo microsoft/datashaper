@@ -25,7 +25,7 @@ export function useWorkflowDownloadUrl(workflow: Workflow | undefined): string {
 }
 
 function workflowToJson(workflow: Workflow | undefined) {
-	const o = workflow?.toJsonObject() ?? {}
+	const o = workflow?.toSchema() ?? {}
 	return JSON.stringify(o, null, 4)
 }
 

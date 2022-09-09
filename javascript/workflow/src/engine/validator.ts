@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { WorkflowSchema as WorkflowInput } from '@datashaper/schema'
+import type { WorkflowSchema } from '@datashaper/schema'
 import Ajv from 'ajv'
 
 const baseUrl = 'https://microsoft.github.io/datashaper/schema/workflow'
@@ -17,7 +17,7 @@ async function getSchema(version: string) {
 	}
 }
 
-export class WorkflowSchema {
+export class WorkflowSchemaValidator {
 	private ajv = new Ajv({
 		strict: true,
 		strictSchema: true,
@@ -26,7 +26,7 @@ export class WorkflowSchema {
 		validateSchema: true,
 	})
 
-	public async isValid(workflowJson?: WorkflowInput): Promise<boolean> {
+	public async isValid(workflowJson?: WorkflowSchema): Promise<boolean> {
 		const { $schema } = workflowJson || {}
 		if (!$schema) {
 			console.warn('No $schema property found in workflow JSON')
@@ -43,5 +43,5 @@ export class WorkflowSchema {
 	}
 }
 
-export const WorkflowSchemaInstance = new WorkflowSchema()
+export const WorkflowSchemaInstance = new WorkflowSchemaValidator()
 Object.freeze(WorkflowSchemaInstance)
