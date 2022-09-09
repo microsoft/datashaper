@@ -1675,4 +1675,147 @@
                         "allOf": [
                             {
                                 "$ref": "#/definitions/StepJsonCommon"
-                      
+                            },
+                            {
+                                "properties": {
+                                    "verb": {
+                                        "enum": [
+                                            "ungroup"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/BasicInput"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepJsonCommon"
+                            },
+                            {
+                                "properties": {
+                                    "args": {
+                                        "$ref": "#/definitions/UnhotArgs"
+                                    },
+                                    "verb": {
+                                        "enum": [
+                                            "unhot"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/BasicInput"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepJsonCommon"
+                            },
+                            {
+                                "properties": {
+                                    "verb": {
+                                        "enum": [
+                                            "union"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/VariadicInput"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepJsonCommon"
+                            },
+                            {
+                                "properties": {
+                                    "verb": {
+                                        "enum": [
+                                            "unorder"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/BasicInput"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepJsonCommon"
+                            },
+                            {
+                                "properties": {
+                                    "args": {
+                                        "$ref": "#/definitions/InputColumnListArgs"
+                                    },
+                                    "verb": {
+                                        "enum": [
+                                            "unroll"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/BasicInput"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepJsonCommon"
+                            },
+                            {
+                                "properties": {
+                                    "args": {
+                                        "$ref": "#/definitions/WindowArgs"
+                                    },
+                                    "verb": {
+                                        "enum": [
+                                            "window"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/BasicInput"
+                            }
+                        ]
+                    }
+                ],
+                "description": "Specification for step items"
+            },
+            "type": "array"
+        },
+        "title": {
+            "description": "Friendly name of the resource. Used for display only.",
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+
