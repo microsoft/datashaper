@@ -9,7 +9,7 @@ import type { Profile } from '../Profile.js'
  * Any object type that extends from Resouce is expected to have a standalone schema published.
  * For project state, this can be left as generic as possible for now.
  */
-export interface Resource extends Named {
+export interface ResourceSchema extends Named {
 	$schema: string
 	/**
 	 * Defines the resource type.
@@ -31,7 +31,7 @@ export interface Resource extends Named {
 	 * to create a fully-realized, strongly typed, and transformed output table.
 	 * Entire Resource objects may be embedded here, or a string path to the Resource definition JSON.
 	 */
-	sources?: (string | Resource)[]
+	sources?: (string | ResourceSchema)[]
 	/**
 	 * URL to a public webpage that describes this resource.
 	 */

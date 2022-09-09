@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DataFormat } from '../data.js'
-import type { Resource } from '../datapackage/Resource.js'
+import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
 import type { DataShape } from './DataShape.js'
 import type { ParserOptions } from './ParserOptions.js'
 import type { TypeHints } from './TypeHints.js'
@@ -15,7 +15,7 @@ import type { TypeHints } from './TypeHints.js'
  * If the latter, optional format and parsing options can be applied to aid interpreting the file contents.
  * resource profile: 'datatable'
  */
-export interface DataTable extends Resource {
+export interface DataTableSchema extends ResourceSchema {
 	/**
 	 * Option to embed the data directly in the JSON descriptor.
 	 */

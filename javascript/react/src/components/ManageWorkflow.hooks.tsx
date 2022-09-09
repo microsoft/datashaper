@@ -203,9 +203,7 @@ export function useWorkflowListener(
 	useEffect(
 		() =>
 			setWorkflow &&
-			workflow.onChange(() =>
-				setWorkflow(new Workflow(workflow.toJsonObject())),
-			),
+			workflow.onChange(() => setWorkflow(new Workflow(workflow.toSchema()))),
 		[workflow, setWorkflow],
 	)
 }
