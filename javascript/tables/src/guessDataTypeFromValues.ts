@@ -14,20 +14,13 @@ export function guessDataTypeFromValues(values: string[]): DataType {
 	values.forEach(value => {
 		const dataTypeResult = guesser(value)
 		mapTypes.set(dataTypeResult, true)
-
-		if (dataTypeResult !== DataType.Null && !mapTypes.has(dataTypeResult)) {
-			mapTypes.set(dataTypeResult, true)
-		} else if (dataTypeResult === DataType.Null && mapTypes.size === 0) {
-			mapTypes.set(dataTypeResult, true)
-		} else if (
-			dataTypeResult !== DataType.Null &&
-			mapTypes.has(DataType.Null)
-		) {
-			mapTypes.delete(DataType.Null)
-			mapTypes.set(dataTypeResult, true)
-		}
 	})
 
+	mapTypes.delete(DataType.Null)
+
+	if (mapTypes.size === 0) {
+		return DataType.Null
+	}
 	if (mapTypes.size === 1) {
 		for (const key of mapTypes.keys()) {
 			return key
