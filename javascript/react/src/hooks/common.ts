@@ -3,74 +3,65 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/tables'
-import type { Step, Workflow } from '@datashaper/workflow'
-import {
-	GraphManager,
-	nextOutputName,
-	nextOutputNode,
-	readStep,
-} from '@datashaper/workflow'
+import type { Step } from '@datashaper/workflow'
+import { readStep, Workflow } from '@datashaper/workflow'
 import isArray from 'lodash-es/isArray.js'
 import { useCallback, useEffect, useState } from 'react'
 
-export function useGraphManager(
-	workflow?: Workflow | undefined,
+export function useWorkflow(
+	input?: Workflow | undefined,
 	inputs?: TableContainer[],
-): GraphManager {
-	const [graph, setGraph] = useState(() => new GraphManager(workflow))
+): Workflow {
+	const [workflow, setWorkflow] = useState(
+		() => new Workflow(input?.toJsonObject()),
+	)
 
 	// this effect should fire when a new workflow json is uploaded
 	useEffect(
 		function resetWorkflowWhenWorkflowChanges() {
-			setGraph(new GraphManager(workflow))
+			setWorkflow(new Workflow(input?.toJsonObject()))
 		},
-		[workflow],
+		[input],
 	)
 
 	useEffect(
 		function syncDataTablesWhenInputsChange() {
-			graph.setInputs(mapInputs(inputs))
+			if (inputs) {
+				workflow.addInputTables(inputs)
+			}
 		},
-		[graph, inputs],
+		[workflow, inputs],
 	)
 
-	return graph
-}
-
-function mapInputs(inputs?: TableContainer[]) {
-	const _inputs = new Map()
-	inputs?.forEach(i => _inputs.set(i.id, i))
-	return _inputs
+	return workflow
 }
 
 /**
  * Returns a hook to generate a new table name based on the given input e.g.
  * "join" could result in "join 1" or "join 2" depending on how many collisions
  *  occur.
- * @param graph - the graph manager
+ * @param workflow - the workflow instance
  * @returns a safe output name to use
  */
-export function useCreateTableId(
-	graph: GraphManager,
-): (name: string) => string {
+export function useCreateTableId(workflow: Workflow): (name: string) => string {
 	return useCallback(
-		(name: string): string => nextOutputNode(name, graph.workflow),
-		[graph],
+		(name: string): string => workflow.suggestOutputName(name),
+		[workflow],
 	)
 }
 /**
  * Returns a hook to generate a new table name based on the given input e.g.
  * "join" could result in "join 1" or "join 2" depending on how many collisions
  *  occur.
- * @param graph - the graph manager
+ * @param workflow - the workflow instance
  * @returns a safe output name to use
  */
 export function useCreateTableName(
-	graph: GraphManager,
+	workflow: Workflow,
 ): (name: string) => string {
 	return useCallback(
-		(name: string): string => nextOutputName(name, graph.workflow),
-		[graph],
+		(name: string): string => workflow.suggestOutputName(name),
+		[workflow],
 	)
 }
 

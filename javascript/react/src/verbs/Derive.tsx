@@ -13,8 +13,8 @@ import { DeriveBase } from './Derive.base.js'
  * Provides inputs for a Binarize step.
  */
 export const Derive: React.FC<StepComponentProps<DeriveArgs>> = memo(
-	function Derive({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Derive({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columns = useTableColumnNames(dataTable)
 		return <DeriveBase columns={columns} step={step} onChange={onChange} />
 	},
