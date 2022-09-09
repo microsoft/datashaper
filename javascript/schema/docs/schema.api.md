@@ -299,7 +299,7 @@ export interface FetchArgs {
 // Warning: (ae-missing-release-tag) "Field" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface Field extends Named {
+export interface Field extends Omit<Named, 'id'> {
     constraints?: Constraints;
     derivedFrom?: string[];
     example?: any;

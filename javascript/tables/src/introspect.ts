@@ -4,7 +4,6 @@
  */
 import type { Field } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import uniqueId from 'lodash-es/uniqueId.js'
 
 import { columnTypes } from './columnTypes.js'
 import { determineType } from './data.js'
@@ -44,7 +43,6 @@ function detailedMeta(
 		const [name, stat] = cur
 		const type = determineType(stat.mode)
 		acc[name] = {
-			id: uniqueId(),
 			name,
 			type,
 			metadata: stat,
@@ -62,7 +60,6 @@ function basicMeta(
 	return Object.entries(t).reduce((acc, cur) => {
 		const [name, type] = cur
 		acc[name] = {
-			id: uniqueId(),
 			name,
 			type,
 		}
