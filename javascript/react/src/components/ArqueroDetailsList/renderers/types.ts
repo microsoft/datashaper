@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { ColumnMetadata } from '@datashaper/schema'
+import type { Field } from '@datashaper/schema'
 import type {
 	IColumn,
 	IDetailsColumnProps,
@@ -59,7 +59,7 @@ export interface MagnitudeCellProps extends FormattedCellProps {
 }
 
 export interface RichCellProps extends FormattedCellProps {
-	metadata?: ColumnMetadata
+	field?: Field
 	onColumnClick?: ColumnClickFunction
 	onCellDropdownSelect?: DropdownOptionSelect
 }
@@ -69,7 +69,7 @@ export interface FeatureCellProps extends RichCellProps {
 }
 
 export interface RichHeaderProps extends IDetailsColumnProps {
-	metadata: ColumnMetadata
+	field: Field
 	color?: string
 	stats?: string[]
 	onClick?: MetadataClickFunction

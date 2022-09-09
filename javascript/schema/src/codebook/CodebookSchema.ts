@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Resource } from '../datapackage/Resource.js'
+import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
 import type { Field } from './Field.js'
 
 /**
@@ -12,6 +12,6 @@ import type { Field } from './Field.js'
  * and described to the user without actually loading the source file.
  * resource profile: 'codebook'
  */
-export interface Codebook extends Resource {
+export interface CodebookSchema extends ResourceSchema {
 	fields: Field[]
 }

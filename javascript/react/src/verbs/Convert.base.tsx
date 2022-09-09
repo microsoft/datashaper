@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ConvertArgs } from '@datashaper/schema'
+import type { ConvertArgs, Field } from '@datashaper/schema'
 import { DataType, ParseType } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
 import { memo, useMemo } from 'react'
 
 import { getDateFormatPatternOptions } from '../dateFormats.js'
 import { getEnumDropdownOptions } from '../enums.js'
-import type { ColumnMetadata } from '../hooks/useColumnsMetadata.js'
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
@@ -21,9 +20,9 @@ import { inputColumnList } from '../verbForm/VerbFormFactories.js'
 export const ConvertBase: React.FC<
 	StepComponentBaseProps<ConvertArgs> & {
 		columns: string[]
-		columnsMetadata: ColumnMetadata[]
+		fields: Field[]
 	}
-> = memo(function ConvertBase({ step, onChange, columns, columnsMetadata }) {
+> = memo(function ConvertBase({ step, onChange, columns, fields }) {
 	const inputs = useMemo<FormInput<ConvertArgs>[]>(
 		() => [
 			inputColumnList(step, columns, 'Columns to convert'),
@@ -47,7 +46,7 @@ export const ConvertBase: React.FC<
 				label: 'Delimiter',
 				if:
 					step.args.type === ParseType.Array ||
-					isInputColumnArray(columnsMetadata, step.args.columns),
+					isInputColumnArray(fields, step.args.columns),
 				type: FormInputType.Text,
 				current: step.args.delimiter ? `${step.args.delimiter}` : '',
 				onChange: (s, opt) => (s.args.delimiter = opt as string),
@@ -68,18 +67,15 @@ export const ConvertBase: React.FC<
 					(s.args.formatPattern = value ? value : '%Y-%m-%d'),
 			},
 		],
-		[step, columns, columnsMetadata],
+		[step, columns, fields],
 	)
 
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
 
-function isInputColumnArray(
-	columnsMetadata: ColumnMetadata[],
-	columns: string[],
-) {
+function isInputColumnArray(fields: Field[], columns: string[]) {
 	return columns.some(column => {
-		const meta = columnsMetadata.find(meta => meta.columnName === column)
+		const meta = fields.find(field => field.name === column)
 		return meta?.type === DataType.Array
 	})
 }

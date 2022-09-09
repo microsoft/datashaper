@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Resource } from '../datapackage/Resource.js'
+import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
 import type { OutputPortBinding } from './bindings.js'
 import type { Step } from './Step.js'
 
@@ -10,7 +10,7 @@ import type { Step } from './Step.js'
  * The root wrangling workflow specification.
  * resource profile: 'workflow'
  */
-export interface Workflow extends Resource {
+export interface WorkflowSchema extends ResourceSchema {
 	/**
 	 * The workflow steps
 	 */

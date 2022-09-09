@@ -638,7 +638,7 @@
         "Record<string,string>": {
             "type": "object"
         },
-        "Resource": {
+        "ResourceSchema": {
             "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
                 "$schema": {
@@ -687,7 +687,7 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "#/definitions/Resource"
+                                "$ref": "#/definitions/ResourceSchema"
                             },
                             {
                                 "type": "string"
@@ -944,7 +944,7 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/Resource"
+                        "$ref": "#/definitions/ResourceSchema"
                     },
                     {
                         "type": "string"

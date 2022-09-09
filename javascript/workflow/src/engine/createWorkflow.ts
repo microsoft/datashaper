@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Workflow as WorkflowInput } from '@datashaper/schema'
+import type { WorkflowSchema } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 
 import { Workflow } from './Workflow.js'
@@ -19,7 +19,7 @@ import { Workflow } from './Workflow.js'
  * @returns The built reactive processing graph
  */
 export function createWorkflow(
-	input: WorkflowInput,
+	input: WorkflowSchema,
 	tables: TableContainer[],
 ): Workflow {
 	const graph = new Workflow(input)
