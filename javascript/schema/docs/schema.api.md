@@ -652,7 +652,7 @@ export type PortBinding = string | NamedPortBinding;
 //
 // @public (undocumented)
 export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
-    map: Record<Value, Value>;
+    mapping: Record<Value, Value>;
 }
 
 // Warning: (ae-missing-release-tag) "RenameArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

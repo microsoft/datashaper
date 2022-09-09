@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DetailsListFeatures } from '@datashaper/react'
-import type { Step,Workflow } from '@datashaper/workflow'
+import type { Step, Workflow } from '@datashaper/workflow'
 
 export interface StepOutputProps {
 	step: Step

@@ -7,7 +7,7 @@
 			"args": {
 				"column": "name",
 				"to": "newColumn",
-				"map": {
+				"mapping": {
 					"A": "Z",
 					"B": "Y",
 					"C": "X"

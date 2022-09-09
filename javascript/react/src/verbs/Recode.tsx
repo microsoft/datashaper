@@ -76,8 +76,8 @@ function useRecodePairs(
 	onDelete: (value: Value) => void,
 ) {
 	return useMemo(() => {
-		const { map } = step.args
-		return Object.entries(map || {}).map((valuePair, index) => {
+		const { mapping } = step.args
+		return Object.entries(mapping || {}).map((valuePair, index) => {
 			return (
 				<ColumnPair
 					valuePair={valuePair}
