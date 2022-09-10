@@ -71,6 +71,8 @@ export function typeGuesserFactory(options?: TypeHints): any {
 export function isNull(naValues = NA_DEFAULTS): (value: string) => boolean {
 	const naValuesSet = new Set(naValues)
 	return function (value: string) {
+		if (value === null) return true
+
 		return naValuesSet.has(value)
 	}
 }
@@ -83,6 +85,8 @@ export function isBoolean(
 		[...falseValues, ...trueValues].map(v => v.toLowerCase()),
 	)
 	return function (value: string) {
+		if (value === null) return false
+
 		const str = value.toLowerCase()
 		return booleanSet.has(str)
 	}
@@ -93,6 +97,8 @@ export function isNumber(
 	thousands = THOUSANDS_DEFAULT,
 ): (value: string) => boolean {
 	return function (value: string) {
+		if (value === null) return false
+
 		const n = formatNumberStr(value, decimal, thousands)
 		return isFinite(toNumber(n))
 	}
@@ -117,5 +123,7 @@ export function isObject(value: string): boolean {
 }
 
 export function isDate(value: string): boolean {
+	if (value === null) return false
+
 	return moment(getDate(value)).isValid()
 }
