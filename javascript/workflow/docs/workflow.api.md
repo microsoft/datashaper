@@ -626,10 +626,10 @@ export class Workflow {
     // (undocumented)
     suggestOutputName(name: string): string;
     // (undocumented)
-    toArray(): Maybe<TableContainer>[];
+    toArray(includeInputs?: boolean): Maybe<TableContainer>[];
+    toMap(includeInputs?: boolean): Map<string, Maybe<TableContainer>>;
     // (undocumented)
-    toJsonObject(): Workflow_2;
-    toMap(): Map<string, Maybe<TableContainer>>;
+    toSchema(): WorkflowSchema;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)

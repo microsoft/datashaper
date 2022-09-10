@@ -81,7 +81,7 @@ export function formatNumberStr(value: string, decimal?: string, thousands?: str
 // Warning: (ae-missing-release-tag) "generateCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function generateCodebook(table: ColumnTable): Codebook;
+export function generateCodebook(table: ColumnTable): CodebookSchema;
 
 // Warning: (ae-missing-release-tag) "getDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
