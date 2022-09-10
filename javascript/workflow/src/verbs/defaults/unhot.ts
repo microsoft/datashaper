@@ -9,7 +9,7 @@ import { outputColumn } from './outputColumn.js'
 
 export const unhot = (): UnhotArgs => ({
 	prefix: '',
-	keepOriginalColumns: false,
+	preserveSource: false,
 	...inputColumnList(),
 	...outputColumn(),
 })

@@ -12,7 +12,7 @@ import { unhotOperation } from './util/unhot-logic.js'
 
 export const unhotStep: ColumnTableStep<UnhotArgs> = (
 	input,
-	{ columns = [], to, prefix = '', keepOriginalColumns = false },
+	{ columns = [], to, prefix = '', preserveSource = false },
 ) => {
 	// map 1/0 back to column name values
 	const mapped = unhotOperation(input, columns, prefix)
@@ -20,7 +20,7 @@ export const unhotStep: ColumnTableStep<UnhotArgs> = (
 	const merged = mapped.derive({
 		[to]: escape((d: any) => firstOneWinsStrategy(d, columns)),
 	})
-	return keepOriginalColumns ? merged : merged.select(not(columns))
+	return preserveSource ? merged : merged.select(not(columns))
 }
 
 export const unhot = stepVerbFactory(unhotStep)

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { OnehotArgs } from '@datashaper/schema'
-import { escape, op } from 'arquero'
+import { escape, not, op } from 'arquero'
 import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
 import type { ColumnTableStep } from './util/factories.js'
@@ -15,7 +15,7 @@ import { stepVerbFactory } from './util/factories.js'
  */
 export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
-	{ columns, prefixes = {} },
+	{ columns, prefixes = {}, preserveSource = false },
 ) => {
 	const args = columns.reduce((acc, column) => {
 		const prefix = prefixes[column]
@@ -36,7 +36,9 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 		return acc
 	}, {} as Record<string, ExprObject>)
 
-	return input.derive(args)
+	const onehotted = input.derive(args)
+
+	return preserveSource ? onehotted : onehotted.select(not(columns))
 }
 
 export const onehot = stepVerbFactory(onehotStep)
