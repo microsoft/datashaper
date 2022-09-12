@@ -26,7 +26,7 @@ export function getters(
 export function columnIndexesWithZeros(table: ColumnTable): number[] {
 	return table.columnNames().reduce((acc, name, idx) => {
 		const values = table.array(name)
-		if (values.some(v => v === 0)) {
+		if (values.some((v: any) => v === 0)) {
 			acc.push(idx)
 		}
 		return acc
@@ -47,7 +47,7 @@ export function columnType(table: ColumnTable, column: string): DataType {
 	const values = table.array(column)
 	let dataType = DataType.Unknown
 	// use the first valid value to guess type
-	values.some(value => {
+	values.some((value: any) => {
 		if (value !== null && value !== undefined) {
 			dataType = determineType(value)
 			return true
