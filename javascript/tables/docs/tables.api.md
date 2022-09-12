@@ -4,14 +4,14 @@
 
 ```ts
 
-import type { Codebook } from '@datashaper/schema';
-import type { ColumnStats } from '@datashaper/schema';
+import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
 import { DataType } from '@datashaper/schema';
+import type { Field } from '@datashaper/schema';
+import type { FieldMetadata } from '@datashaper/schema';
 import type { ParseConfig as ParseConfig_2 } from 'papaparse';
 import type { ParserOptions } from '@datashaper/schema';
-import type { TableMetadata } from '@datashaper/schema';
 import type { TypeHints } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
 
@@ -77,6 +77,11 @@ export function formatIfNumber(value: Value): string | Value;
 //
 // @public (undocumented)
 export function formatNumberStr(value: string, decimal?: string, thousands?: string): string;
+
+// Warning: (ae-missing-release-tag) "generateCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function generateCodebook(table: ColumnTable): CodebookSchema;
 
 // Warning: (ae-missing-release-tag) "getDate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -159,7 +164,7 @@ export function parseBoolean(naValues?: string[], trueValues?: string[], falseVa
 // @public (undocumented)
 export interface ParseConfig {
     // (undocumented)
-    codebook?: Codebook;
+    codebook?: CodebookSchema;
     // (undocumented)
     typeHints?: TypeHints;
 }
@@ -221,7 +226,7 @@ export function sliceTable(table: ColumnTable_2, offset: number, limit: number):
 // Warning: (ae-missing-release-tag) "stats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function stats(table: ColumnTable, columns?: string[]): Record<string, ColumnStats>;
+export function stats(table: ColumnTable, columns?: string[]): Record<string, FieldMetadata>;
 
 // Warning: (ae-missing-release-tag) "TableContainer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -231,6 +236,17 @@ export interface TableContainer<T = unknown> {
     id: string;
     metadata?: TableMetadata;
     table?: ColumnTable;
+}
+
+// Warning: (ae-missing-release-tag) "TableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TableMetadata {
+    // (undocumented)
+    cols: number;
+    columns: Record<string, Field>;
+    // (undocumented)
+    rows: number;
 }
 
 // Warning: (ae-missing-release-tag) "typeGuesserFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

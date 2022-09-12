@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Category, ColumnStats } from '@datashaper/schema'
+import type { Category, FieldMetadata } from '@datashaper/schema'
 import { formatIfNumber } from '@datashaper/tables'
 import { Sparkbar } from '@essex/charts-react'
 import { TooltipHost } from '@fluentui/react'
@@ -19,15 +19,15 @@ const PADDING_HEIGHT = 8
  * For strings it will be the unique counts (if categories exist).
  */
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
-	function HistogramColumnHeader({ metadata, color, ...props }) {
+	function HistogramColumnHeader({ field, color, ...props }) {
 		const { column, onClick } = props
 		const dimensions = useCellDimensions(column, false)
 
-		const categorical = metadata.type === 'string'
+		const categorical = field.type === 'string'
 
-		const bins = categorical ? metadata.stats?.categories : metadata.stats?.bins
+		const bins = categorical ? field.metadata?.categories : field.metadata?.bins
 		const values = useMemo(() => (bins || []).map(b => b.count), [bins])
-		const categories = useCategories(metadata.stats, categorical)
+		const categories = useCategories(field.metadata, categorical)
 		const title = useTooltip(categories)
 		const legend = useLegend(categories)
 		const [hover, setHover] = useState<string>()
@@ -56,7 +56,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		}, [onClick, dimensions])
 
 		// don't render a single bar
-		if (metadata.stats?.distinct === 1) {
+		if (field.metadata?.distinct === 1) {
 			return null
 		}
 
@@ -64,7 +64,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 			<>
 				{bins ? (
 					<div
-						onClick={e => onClick && bins && onClick(e, column, metadata)}
+						onClick={e => onClick && bins && onClick(e, column, field)}
 						title={title}
 						style={styles}
 					>
@@ -90,7 +90,10 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 	},
 )
 
-function useCategories(stats?: ColumnStats, categorical?: boolean): Category[] {
+function useCategories(
+	stats?: FieldMetadata,
+	categorical?: boolean,
+): Category[] {
 	return useMemo(() => {
 		if (categorical) {
 			return stats?.categories || []

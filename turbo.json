@@ -8,7 +8,8 @@
 		},
 		"test": {
 			"dependsOn": [],
-			"outputs": []
+			"outputs": [],
+			"cache": false
 		},
 		"lint": {
 			"dependsOn": [],

@@ -6,7 +6,7 @@ import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 	OutputPortBinding,
-	Workflow as WorkflowInput,
+	WorkflowSchema,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable } from 'rxjs'
@@ -50,8 +50,8 @@ export class Workflow {
 	// The global onChange handler
 	protected readonly _onChange = new Subject<void>()
 
-	public constructor(input?: WorkflowInput, private _strictInputs = false) {
-		const readWorkflowInput = (workflowInput: WorkflowInput) => {
+	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
+		const readWorkflowInput = (workflowInput: WorkflowSchema) => {
 			let prev: Step | undefined
 			this._id = workflowInput.id ?? v4()
 			this._name = workflowInput.name
@@ -535,8 +535,8 @@ export class Workflow {
 		return result
 	}
 
-	public toJsonObject(): WorkflowInput {
-		const output: WorkflowInput['output'] = []
+	public toSchema(): WorkflowSchema {
+		const output: WorkflowSchema['output'] = []
 		for (const [, binding] of this._outputPorts.entries()) {
 			output.push({ ...binding })
 		}
@@ -551,7 +551,7 @@ export class Workflow {
 		}
 	}
 
-	public static async validate(workflowJson: WorkflowInput): Promise<boolean> {
+	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
 		return WorkflowSchemaInstance.isValid(workflowJson)
 	}
 }

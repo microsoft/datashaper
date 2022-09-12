@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Workflow as WorkflowJson } from '@datashaper/schema'
+import type { WorkflowSchema } from '@datashaper/schema'
 import { Workflow } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
@@ -14,22 +14,24 @@ import dropdown from '../../../../public/specs/dropdown.json'
 import everyOperation from '../../../../public/specs/every-operation.json'
 import groupby from '../../../../public/specs/groupby.json'
 import multistepBinarize from '../../../../public/specs/multistep-binarize.json'
+import onehotunhot from '../../../../public/specs/onehot-unhot.json'
 import sparkbar from '../../../../public/specs/sparkbar.json'
 import sparkline from '../../../../public/specs/sparkline.json'
 import spreadhot from '../../../../public/specs/spreadhot.json'
 import type { ExamplesDropdownProps } from './ExamplesDropdown.types.js'
 
-const specs: Array<WorkflowJson> = [
-	aggregatedLookup as unknown as WorkflowJson,
-	binning as unknown as WorkflowJson,
-	everyOperation as unknown as WorkflowJson,
-	multistepBinarize as unknown as WorkflowJson,
-	sparkbar as unknown as WorkflowJson,
-	sparkline as unknown as WorkflowJson,
-	categorical as unknown as WorkflowJson,
-	dropdown as unknown as WorkflowJson,
-	groupby as unknown as WorkflowJson,
-	spreadhot as unknown as WorkflowJson,
+const specs: Array<WorkflowSchema> = [
+	aggregatedLookup as unknown as WorkflowSchema,
+	binning as unknown as WorkflowSchema,
+	everyOperation as unknown as WorkflowSchema,
+	multistepBinarize as unknown as WorkflowSchema,
+	sparkbar as unknown as WorkflowSchema,
+	sparkline as unknown as WorkflowSchema,
+	categorical as unknown as WorkflowSchema,
+	dropdown as unknown as WorkflowSchema,
+	groupby as unknown as WorkflowSchema,
+	spreadhot as unknown as WorkflowSchema,
+	onehotunhot as unknown as WorkflowSchema,
 ]
 
 export function useExampleOptions(): IDropdownOption[] {

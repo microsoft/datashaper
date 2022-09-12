@@ -8,7 +8,7 @@
 				"columns": ["quantity", "totalSale"],
 				"strategy": "array",
 				"to": "resultColumn",
-				"keepOriginalColumns": true
+				"preserveSource": true
 			},
 			"id": "expected"
 		}

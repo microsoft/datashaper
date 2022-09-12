@@ -20,13 +20,14 @@ export const Convert: React.FC<StepComponentProps<ConvertArgs>> = memo(
 	function Convert({ step, workflow, input, table, onChange }) {
 		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columns = useTableColumnNames(dataTable)
-		const columnsMetadata = useColumnsMetadata(dataTable)
+		// TODO: replace this with introspect
+		const fields = useColumnsMetadata(dataTable)
 		return (
 			<ConvertBase
 				columns={columns}
 				step={step}
 				onChange={onChange}
-				columnsMetadata={columnsMetadata}
+				fields={fields}
 			/>
 		)
 	},

@@ -34,8 +34,8 @@ export const UnhotDescription: React.FC<StepDescriptionProps<UnhotArgs>> = memo(
 					value: args.prefix,
 				},
 				{
-					before: 'keep original columns',
-					value: args.keepOriginalColumns ? `yes` : 'no',
+					before: 'keep source columns',
+					value: args.preserveSource ? `yes` : 'no',
 				},
 			]
 		}, [props])

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableMetadata } from '@datashaper/schema'
+import type { Field } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export interface TableContainer<T = unknown> {
@@ -27,4 +27,13 @@ export interface TableContainer<T = unknown> {
 	 * that has additional information to relay, that context can be stored here.
 	 */
 	context?: T
+}
+
+export interface TableMetadata {
+	rows: number
+	cols: number
+	/**
+	 * Metadata for each column
+	 */
+	columns: Record<string, Field>
 }

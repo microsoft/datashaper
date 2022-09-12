@@ -401,7 +401,7 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	delimiter?: string
 	unhot?: boolean
 	prefix?: string
-	keepOriginalColumns?: boolean
+	preserveSource?: boolean
 }
 
 export interface OnehotArgs extends InputColumnListArgs {
@@ -409,6 +409,7 @@ export interface OnehotArgs extends InputColumnListArgs {
 	 * Optional prefixes for the output column names
 	 */
 	prefixes?: Record<string, string>
+	preserveSource?: boolean
 }
 
 export interface OrderbyArgs {
@@ -434,7 +435,7 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 	 * Mapping of old value to new for the recoding.
 	 * Note that the key must be coercable to a string for map lookup.
 	 */
-	map: Record<Value, Value>
+	mapping: Record<Value, Value>
 }
 
 export type RenameArgs = InputColumnRecordArgs
@@ -474,6 +475,7 @@ export interface SpreadArgs extends InputColumnListArgs {
 	 * This is in contrast to the default spread, which just maps array values to column by index.
 	 */
 	onehot?: boolean
+	preserveSource?: boolean
 }
 
 export interface UnfoldArgs {
@@ -483,7 +485,7 @@ export interface UnfoldArgs {
 
 export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 	prefix?: string
-	keepOriginalColumns?: boolean
+	preserveSource?: boolean
 }
 
 export type UnrollArgs = InputColumnListArgs

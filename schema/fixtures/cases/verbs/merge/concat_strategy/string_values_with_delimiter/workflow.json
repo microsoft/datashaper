@@ -9,7 +9,7 @@
 				"strategy": "concat",
 				"to": "resultColumn",
 				"delimiter": ",",
-				"keepOriginalColumns": true
+				"preserveSource": true
 			},
 			"id": "expected"
 		}

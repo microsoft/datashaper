@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnMetadata } from '@datashaper/schema'
+import type { Field } from '@datashaper/schema'
 import type {
 	IColumn,
 	IDetailsColumnProps,
@@ -23,7 +23,7 @@ import { HistogramColumnHeader } from './HistogramColumnHeader.js'
 import { SmartCell, StatsColumnHeader } from './index.js'
 
 export const createRenderSmartCell = (
-	metadata: ColumnMetadata,
+	field: Field,
 	color?: string,
 	onColumnClick?: ColumnClickFunction,
 	onCellDropdownSelect?: DropdownOptionSelect,
@@ -34,7 +34,7 @@ export const createRenderSmartCell = (
 				item={item}
 				index={index}
 				column={column}
-				metadata={metadata}
+				field={field}
 				color={color}
 				onColumnClick={onColumnClick}
 				onCellDropdownSelect={onCellDropdownSelect}
@@ -44,7 +44,7 @@ export const createRenderSmartCell = (
 
 export const createRenderFeaturesCell = (
 	features: DetailsListFeatures,
-	metadata?: ColumnMetadata,
+	field?: Field,
 	color?: string,
 	onColumnClick?: ColumnClickFunction,
 	onCellDropdownSelect?: DropdownOptionSelect,
@@ -57,7 +57,7 @@ export const createRenderFeaturesCell = (
 				column={column}
 				onCellDropdownSelect={onCellDropdownSelect}
 				onColumnClick={onColumnClick}
-				metadata={metadata}
+				field={field}
 				color={color}
 				features={features}
 			/>
@@ -112,7 +112,7 @@ export const createRenderDefaultColumnHeader = (
 	}
 
 export const createRenderStatsColumnHeader = (
-	metadata: ColumnMetadata,
+	field: Field,
 	onClick?: MetadataClickFunction,
 	stats?: StatsColumnType[],
 ): IRenderFunction<IDetailsColumnProps> => {
@@ -123,7 +123,7 @@ export const createRenderStatsColumnHeader = (
 		return (
 			<StatsColumnHeader
 				onClick={onClick}
-				metadata={metadata}
+				field={field}
 				stats={stats}
 				{...props}
 			/>
@@ -150,7 +150,7 @@ export const createRenderCommandBarColumnHeader = (
 }
 
 export const createRenderHistogramColumnHeader = (
-	metadata: ColumnMetadata,
+	field: Field,
 	color?: string,
 	onClick?: MetadataClickFunction,
 ): IRenderFunction<IDetailsColumnProps> => {
@@ -161,7 +161,7 @@ export const createRenderHistogramColumnHeader = (
 		return (
 			<HistogramColumnHeader
 				onClick={onClick}
-				metadata={metadata}
+				field={field}
 				color={color}
 				{...props}
 			/>
