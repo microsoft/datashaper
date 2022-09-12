@@ -13,9 +13,6 @@ module.exports = {
 		'@storybook/addon-interactions',
 	],
 	framework: '@storybook/react',
-	core: {
-		builder: 'webpack4',
-	},
 	webpackFinal(config) {
 		// mute build output
 		if (process.env.CI || process.env.SB_QUIET) {
@@ -25,19 +22,16 @@ module.exports = {
 			)
 		}
 
+		if (!config.resolve) {
+			config.resolve = {}
+		}
+
 		// resolve files ending with .ts
 		if (!config.resolve.plugins) {
 			config.resolve.plugins = []
 		}
 		// Resolve extensions from TS code
 		config.resolve.plugins.push(new ResolveTypescriptPlugin())
-
-		// Need to disable this because Arrow v3 has mangled esm;
-		// Remove this when arquero adopts Arrow v8 (https://github.com/uwdata/arquero/pull/277)
-		//
-		// Note: didn't work in WP5; using WP4 until this is resolved
-		//
-		// config.resolve.fullySpecified = false
 
 		// run transpiler over monorepo linked projects
 		const xformDwc = {
@@ -47,7 +41,7 @@ module.exports = {
 		}
 		const xformEssex = {
 			...config.module.rules[0],
-			include: /@essex\/(styled-components)/,
+			include: /@essex/,
 			exclude: undefined,
 		}
 		const importMeta = {
@@ -55,7 +49,11 @@ module.exports = {
 			loader: require.resolve('@open-wc/webpack-import-meta-loader'),
 		}
 		config.module.rules.push(xformDwc, xformEssex, importMeta)
-
+		config.module.rules.push({
+			test: /\.mjs$/,
+			include: /node_modules/,
+			type: 'javascript/auto',
+		})
 		return config
 	},
 }

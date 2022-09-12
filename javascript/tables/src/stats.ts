@@ -128,7 +128,7 @@ function binning(
 			.count()
 			.orderby(cur)
 			.objects()
-			.map(d => ({
+			.map((d: any) => ({
 				min: d[cur],
 				count: d['count'],
 			}))
@@ -193,8 +193,8 @@ function categories(
 			.count()
 			.objects()
 			// sorting manually here so strings are alpha ignoring case
-			.sort((a, b) => `${a[cur]}`.localeCompare(`${b[cur]}`))
-			.map(d => ({ name: d[cur], count: d['count'] }))
+			.sort((a: any, b: any) => `${a[cur]}`.localeCompare(`${b[cur]}`))
+			.map((d: any) => ({ name: d[cur], count: d['count'] }))
 		acc[cur] = counted
 		return acc
 	}, {} as Record<string, Category[]>)

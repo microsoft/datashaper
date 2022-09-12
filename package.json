@@ -30,7 +30,7 @@
 		"@types/jest": "^27.5.2",
 		"@types/node": "^18.0.0",
 		"@types/semver": "^7.3.10",
-		"arquero": "^4.8.8",
+		"arquero": "^5.1.0",
 		"eslint": "^8.18.0",
 		"husky": "^8.0.1",
 		"lint-staged": "^13.0.3",

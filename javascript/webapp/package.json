@@ -49,7 +49,7 @@
 		"@types/lodash": "^4.14.182",
 		"@uifabric/icons": "^7.7.2",
 		"ahooks": "^3.5.1",
-		"arquero": "^4.8.8",
+		"arquero": "^5.1.0",
 		"file-loader": "^6.2.0",
 		"localforage": "^1.10.0",
 		"lodash-es": "^4.17.21",
