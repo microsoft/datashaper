@@ -13,7 +13,6 @@ import {
 
 export default {
 	title: 'ArqueroDetailsList',
-
 	component: ArqueroDetailsList,
 	argTypes: {},
 } as ComponentMeta<typeof ArqueroDetailsList>
@@ -23,8 +22,8 @@ const Template: ComponentStory<typeof ArqueroDetailsList> = (
 	{ loaded: { stocks } }: any,
 ) => <ArqueroDetailsList {...args} table={stocks} />
 
-export const ParameterizedStory = Template.bind({})
-ParameterizedStory.args = {
+export const Parameterized = Template.bind({})
+Parameterized.args = {
 	isSortable: true,
 	isHeadersFixed: false,
 	isResizable: true,

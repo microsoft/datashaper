@@ -3,21 +3,21 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ExpandoProps } from './Expando.js'
-import { Expando } from './Expando.js'
+import { Expando as ExpandoComponent } from './Expando.js'
 
 const storyMetadata = {
 	title: 'Controls/Expando',
-	component: Expando,
+	component: ExpandoComponent,
 }
 export default storyMetadata
 
 const Template = (args: ExpandoProps) => (
-	<Expando {...args}>Here is the child content!</Expando>
+	<ExpandoComponent {...args}>Here is the child content!</ExpandoComponent>
 )
 
-export const Primary = Template.bind({}) as any as { args: ExpandoProps }
+export const Expando = Template.bind({}) as any as { args: ExpandoProps }
 
-Primary.args = {
+Expando.args = {
 	label: 'More...',
 	defaultExpanded: false,
 }
