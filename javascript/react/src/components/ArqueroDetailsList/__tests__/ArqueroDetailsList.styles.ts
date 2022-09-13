@@ -22,3 +22,8 @@ export const Control = styled.div`
 export const dropdownStyles: Partial<IDropdownStyles> = {
 	dropdown: { marginTop: '4px' },
 }
+
+export const Table = styled.div`
+	margin-top: 12px;
+	height: calc(100vh - 220px);
+`

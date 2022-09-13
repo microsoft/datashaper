@@ -4,26 +4,20 @@
  */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { ArqueroDetailsList } from '@datashaper/react'
-import type { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { ComponentStory } from '@storybook/react'
 
 import {
 	ArqueroDetailsListProps,
 	StatsColumnType,
 } from '../ArqueroDetailsList.types.js'
 
-export default {
-	title: 'ArqueroDetailsList',
-	component: ArqueroDetailsList,
-	argTypes: {},
-} as ComponentMeta<typeof ArqueroDetailsList>
-
 const Template: ComponentStory<typeof ArqueroDetailsList> = (
 	args: ArqueroDetailsListProps,
 	{ loaded: { stocks } }: any,
 ) => <ArqueroDetailsList {...args} table={stocks} />
 
-export const Parameterized = Template.bind({})
-Parameterized.args = {
+export const ParameterizedStory = Template.bind({})
+ParameterizedStory.args = {
 	isSortable: true,
 	isHeadersFixed: false,
 	isResizable: true,
@@ -54,7 +48,7 @@ Parameterized.args = {
 		],
 	},
 	offset: 0,
-	limit: Infinity,
+	limit: 1000,
 	selectedColumn: 'Volume',
 	visibleColumns: [
 		'Symbol',
