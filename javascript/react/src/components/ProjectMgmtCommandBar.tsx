@@ -13,7 +13,7 @@ import {
 	useOnUpdateWorkflowJson,
 	useProjectMgmtCommands,
 } from './ProjectMgmtCommandBar.hooks.js'
-import { bgColor, color, dropzone } from './ProjectMgmtCommandBar.styles.js'
+import { background, color, dropzone } from './ProjectMgmtCommandBar.styles.js'
 import type { ProjectMgmtCommandBarProps } from './ProjectMgmtCommandBar.types.js'
 
 const acceptedFileTypes = ['.csv', '.json', '.zip']
@@ -59,7 +59,7 @@ export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps> = memo(
 				>
 					<CommandBar
 						items={commands}
-						bgColor={bgColor(theme)}
+						background={background(theme)}
 						color={color(theme)}
 						{...props}
 					/>

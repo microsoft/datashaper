@@ -5,7 +5,7 @@
 import type { Theme } from '@thematic/core'
 import { ThemeVariant } from '@thematic/core'
 
-export const bgColor = (theme: Theme): string =>
+export const background = (theme: Theme): string =>
 	theme.variant === ThemeVariant.Light
 		? theme.application().highContrast().hex()
 		: theme.application().lowContrast().hex()

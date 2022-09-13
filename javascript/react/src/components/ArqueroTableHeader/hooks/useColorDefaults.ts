@@ -7,7 +7,7 @@ import { useMemo } from 'react'
 
 export function useColorDefaults(
 	color?: string,
-	bgColor?: string,
+	background?: string,
 ): {
 	background: string
 	foreground: string
@@ -15,9 +15,9 @@ export function useColorDefaults(
 	const theme = useThematic()
 	return useMemo(
 		() => ({
-			background: bgColor || theme.application().accent().hex(),
+			background: background || theme.application().accent().hex(),
 			foreground: color || theme.application().background().hex(),
 		}),
-		[theme, bgColor, color],
+		[theme, background, color],
 	)
 }

@@ -32,7 +32,6 @@ export const ThematicFluentDecorator = (
 	const handleDarkChange = useCallback((e, v) => {
 		setDark(v)
 	}, [])
-
 	return (
 		<ThematicFluentProvider theme={thematicTheme}>
 			<ThemeProvider theme={fluentTheme}>

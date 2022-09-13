@@ -54,15 +54,15 @@ export function createDefaultHeaderCommandBar(
 		{},
 		styles,
 	)
-	const { bgColor, color } = {
-		bgColor: theme.application().accent().hex(),
+	const { background, color } = {
+		background: theme.application().accent().hex(),
 		color: theme.application().background().hex(),
 	}
 	return (
 		<CommandBar
 			{...props}
 			styles={defaultStyles}
-			bgColor={bgColor}
+			background={background}
 			color={color}
 		/>
 	)

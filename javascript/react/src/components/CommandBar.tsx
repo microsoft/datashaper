@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { CommandBar as CB } from '@fluentui/react'
+import { CommandBar as CommandBarComponent } from '@fluentui/react'
 import { memo } from 'react'
 
 import {
@@ -13,7 +13,6 @@ import {
 	useHandleOnDataReduce,
 	useOverflowButtonProps,
 } from './CommandBar.hooks.js'
-import { CommandBarWrapper } from './CommandBar.styles.js'
 import type { CommandBarProps } from './CommandBar.types.js'
 
 /**
@@ -22,27 +21,25 @@ import type { CommandBarProps } from './CommandBar.types.js'
 export const CommandBar: React.FC<CommandBarProps> = memo(function CommandBar({
 	items,
 	height,
-	bgColor,
+	background,
 	color,
 	styles,
 	...props
 }) {
-	const { foreground, background } = useColorDefaults(color, bgColor)
-	const overflowButtonProps = useOverflowButtonProps(background, foreground)
+	const { foreground, background: bg } = useColorDefaults(color, background)
+	const overflowButtonProps = useOverflowButtonProps(bg, foreground)
 	const handleOnDataReduce = useHandleOnDataReduce(foreground)
 	const handleOnDataGrown = useHandleOnDataGrown(foreground)
 	const commandStyles = useCommandStyles(styles)
-	const fixedItems = useCommands(items, background, foreground)
+	const fixedItems = useCommands(items, bg, foreground)
 	return (
-		<CommandBarWrapper bgColor={background} color={foreground}>
-			<CB
-				items={fixedItems}
-				styles={commandStyles}
-				overflowButtonProps={overflowButtonProps}
-				onDataReduced={handleOnDataReduce}
-				onDataGrown={handleOnDataGrown}
-				{...props}
-			/>
-		</CommandBarWrapper>
+		<CommandBarComponent
+			items={fixedItems}
+			styles={commandStyles}
+			overflowButtonProps={overflowButtonProps}
+			onDataReduced={handleOnDataReduce}
+			onDataGrown={handleOnDataGrown}
+			{...props}
+		/>
 	)
 })

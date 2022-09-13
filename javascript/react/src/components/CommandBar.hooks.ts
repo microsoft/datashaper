@@ -53,7 +53,7 @@ export function useCommands(
 
 export function useColorDefaults(
 	color?: string,
-	bgColor?: string,
+	background?: string,
 ): {
 	background: string
 	foreground: string
@@ -61,10 +61,10 @@ export function useColorDefaults(
 	const theme = useThematic()
 	return useMemo(
 		() => ({
-			background: bgColor || theme.application().background().hex(),
+			background: background || theme.application().background().hex(),
 			foreground: color || theme.application().foreground().hex(),
 		}),
-		[theme, bgColor, color],
+		[theme, background, color],
 	)
 }
 
