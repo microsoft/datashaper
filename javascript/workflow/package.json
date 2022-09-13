@@ -52,7 +52,7 @@
 		"@types/node": "^18.0.0",
 		"@types/uuid": "^8.3.4",
 		"ajv": "^8.11.0",
-		"arquero": "^4.8.8",
+		"arquero": "^5.1.0",
 		"jest": "^28.1.2",
 		"node-fetch": "^3.2.6",
 		"regenerator-runtime": "^0.13.9",
@@ -60,7 +60,7 @@
 	},
 	"peerDependencies": {
 		"@types/node": "*",
-		"arquero": "^4.8.7"
+		"arquero": "^5.1.0"
 	},
 	"peerDependenciesMeta": {
 		"@types/node": {

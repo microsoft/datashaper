@@ -12,21 +12,6 @@ const meta = {
 
 export default meta
 
-export const PerformanceStory = (
-	_args: unknown,
-	{ loaded: { stocks } }: any,
-): JSX.Element => {
-	if (!stocks) {
-		return <div>Loading...</div>
-	}
-
-	return <PerformanceTestStory mockTablePerformance={stocks} />
-}
-
-PerformanceStory.story = {
-	name: 'Performance',
-}
-
 export const RowGroupingStory = (
 	_args: unknown,
 	{ loaded: { stocks } }: any,
@@ -40,4 +25,19 @@ export const RowGroupingStory = (
 
 RowGroupingStory.story = {
 	name: 'Row grouping',
+}
+
+export const PerformanceStory = (
+	_args: unknown,
+	{ loaded: { stocks } }: any,
+): JSX.Element => {
+	if (!stocks) {
+		return <div>Loading...</div>
+	}
+
+	return <PerformanceTestStory mockTablePerformance={stocks} />
+}
+
+PerformanceStory.story = {
+	name: 'Performance',
 }
