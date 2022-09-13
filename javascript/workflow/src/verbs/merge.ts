@@ -12,7 +12,6 @@ import {
 	arrayStrategy,
 	concatStrategy,
 	firstOneWinsStrategy,
-	isSameDataType,
 	lastOneWinsStrategy,
 } from './util/merge.js'
 import { unhotOperation } from './util/unhot-logic.js'
@@ -26,29 +25,27 @@ export const mergeStep: ColumnTableStep<MergeArgs> = (
 		delimiter = '',
 		unhot = false,
 		prefix = '',
-		keepOriginalColumns = false,
+		preserveSource = false,
 	},
 ) => {
 	const tempTable = unhot ? unhotOperation(input, columns, prefix) : input
-
-	const isSameDataTypeFlag: boolean = isSameDataType(tempTable, columns)
 
 	// eslint-disable-next-line
 	const func: object = escape((d: any) => {
 		switch (strategy) {
 			case MergeStrategy.LastOneWins:
-				return lastOneWinsStrategy(isSameDataTypeFlag, d, columns)
+				return lastOneWinsStrategy(d, columns)
 			case MergeStrategy.Concat:
 				return concatStrategy(d, columns, delimiter)
 			case MergeStrategy.CreateArray:
 				return arrayStrategy(d, columns)
 			case MergeStrategy.FirstOneWins:
 			default:
-				return firstOneWinsStrategy(isSameDataTypeFlag, d, columns)
+				return firstOneWinsStrategy(d, columns)
 		}
 	})
 
-	if (keepOriginalColumns) return tempTable.derive({ [to]: func })
+	if (preserveSource) return tempTable.derive({ [to]: func })
 
 	return tempTable.derive({ [to]: func }).select(not(columns))
 }

@@ -3,13 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DetailsListFeatures } from '@datashaper/react'
-import type { GraphManager, Step } from '@datashaper/workflow'
+import type { Step, Workflow } from '@datashaper/workflow'
 
 export interface StepOutputProps {
 	step: Step
 	output: string
 	index: number
-	graph: GraphManager
+	workflow: Workflow
 	features: DetailsListFeatures
 	compact: boolean
 

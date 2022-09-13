@@ -26,8 +26,8 @@ import { DataTypeField } from './shared/DataTypeField.js'
  * Provides inputs for a RecodeStep.
  */
 export const Recode: React.FC<StepComponentProps<RecodeArgs>> = memo(
-	function Recode({ step, graph, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, graph, input, table)
+	function Recode({ step, workflow, input, table, onChange }) {
+		const dataTable = useStepDataTable(step, workflow, input, table)
 		const dataType = useColumnType(dataTable, step.args.column)
 		const initialValues = useColumnValues(step, dataTable)
 		const values =
@@ -76,8 +76,8 @@ function useRecodePairs(
 	onDelete: (value: Value) => void,
 ) {
 	return useMemo(() => {
-		const { map } = step.args
-		return Object.entries(map || {}).map((valuePair, index) => {
+		const { mapping } = step.args
+		return Object.entries(mapping || {}).map((valuePair, index) => {
 			return (
 				<ColumnPair
 					valuePair={valuePair}
@@ -115,7 +115,8 @@ const ColumnPair: React.FC<{
 		o === 'false' ? (keyValue = false) : (keyValue = true)
 	}
 
-	const handleDeleteClick = () => onDelete(keyValue)
+	const handleDeleteClick = () =>
+		onDelete(dataType === DataType.Date ? keyValue.toISOString() : keyValue)
 
 	return (
 		<ColumnPairContainer>

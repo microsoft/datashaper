@@ -12,15 +12,15 @@ def unhot(
     input: VerbInput,
     to: str,
     columns: List[str],
-    keepOriginalColumns: bool = False,
-    prefix: str = ""
+    preserveSource: bool = False,
+    prefix: str = "",
 ):
     merge_strategy = MergeStrategy(MergeStrategy.FirstOneWins)
 
     input_table = unhotOperation(input, columns, prefix).get_input()
 
     output = input_table.copy()
-    
+
     output[to] = output[columns].apply(
         partial(__strategy_mapping[merge_strategy]), axis=1
     )
@@ -33,7 +33,7 @@ def unhot(
         except ValueError:
             filteredList.append(col)
 
-    if(keepOriginalColumns == False):
+    if preserveSource == False:
         output = output[filteredList]
 
     return TableContainer(table=output)

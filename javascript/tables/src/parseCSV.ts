@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Codebook, TypeHints } from '@datashaper/schema'
+import type { CodebookSchema, TypeHints } from '@datashaper/schema'
 import { fromCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -27,7 +27,7 @@ const defaultTypeHints = {
 }
 
 export interface ParseConfig {
-	codebook?: Codebook
+	codebook?: CodebookSchema
 	typeHints?: TypeHints
 }
 

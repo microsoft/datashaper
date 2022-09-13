@@ -36,10 +36,10 @@ export const MergeBase: React.FC<
 				onChange: (s, val) => (s.args.delimiter = val as string),
 			},
 			{
-				label: 'Keep original columns',
+				label: 'Keep source columns',
 				type: FormInputType.Checkbox,
-				current: step.args.keepOriginalColumns,
-				onChange: (s, val) => (s.args.keepOriginalColumns = val as boolean),
+				current: step.args.preserveSource,
+				onChange: (s, val) => (s.args.preserveSource = val as boolean),
 				advanced: true,
 			},
 			{

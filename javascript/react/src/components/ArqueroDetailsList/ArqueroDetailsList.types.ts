@@ -2,11 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	ColumnMetadata,
-	SortDirection,
-	TableMetadata,
-} from '@datashaper/schema'
+import type { Field, SortDirection } from '@datashaper/schema'
+import type { TableMetadata } from '@datashaper/tables'
 import type {
 	IColumn,
 	IDetailsColumnProps,
@@ -32,7 +29,7 @@ export type DropdownOptionSelect =
 	| undefined
 
 export type GroupHeaderFunction = (
-	meta?: ColumnMetadata,
+	meta?: Field,
 	columnName?: string,
 	props?: IDetailsGroupDividerProps | undefined,
 ) => any
@@ -50,7 +47,7 @@ export type ColumnClickFunction = (
 export type MetadataClickFunction = (
 	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
 	column?: IColumn | undefined,
-	metadata?: ColumnMetadata,
+	metadata?: Field,
 ) => void
 
 export enum StatsColumnType {

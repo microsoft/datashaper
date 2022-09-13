@@ -5,4 +5,4 @@
 export * from './bindings.js'
 export * from './Step.js'
 export * from './verbs.js'
-export * from './Workflow.js'
+export * from './WorkflowSchema.js'

@@ -2,13 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnMetadata } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
-import isNil from 'lodash-es/isNil.js'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
 import { categories, getValue, isEmpty } from '../ArqueroDetailsList.utils.js'
+import { useNumberMagnitude } from '../hooks/useNumberMagnitude.js'
 import { ArrayDropdownCell } from './ArrayDropdownCell.js'
 import { CellContainer } from './CellContainer.js'
 import { EmptyCell } from './EmptyCell.js'
@@ -29,10 +28,10 @@ import type { FeatureCellProps } from './types.js'
  */
 export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 	function FeaturesCell(props) {
-		const { features, metadata, item, column, index, onColumnClick } = props
-		const type = metadata?.type
+		const { features, field, item, column, index, onColumnClick } = props
+		const type = field?.type
 		const value = getValue(item, column)
-		const magnitude = useNumberMagnitude(value, metadata, type)
+		const magnitude = useNumberMagnitude(value, field, type)
 		const histo = categories(value)
 
 		return (
@@ -90,18 +89,3 @@ export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 		)
 	},
 )
-
-function useNumberMagnitude(
-	value: any,
-	meta?: ColumnMetadata,
-	type?: DataType,
-): number {
-	return useMemo(() => {
-		if (type !== DataType.Number || isNil(value)) {
-			return 0
-		}
-		const range = (meta?.stats?.max || 1) - (meta?.stats?.min || 0)
-		const mag = (value - (meta?.stats?.min || 0)) / range
-		return mag
-	}, [type, value, meta])
-}

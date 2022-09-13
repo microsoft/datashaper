@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { DataType } from '@datashaper/schema'
-import { determineType } from '@datashaper/tables'
 import { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
@@ -27,9 +26,9 @@ import type { RichCellProps } from './types.js'
 export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	props,
 ) {
-	const { metadata, item, column, onColumnClick } = props
+	const { field, item, column, onColumnClick } = props
 	const value = getValue(item, column)
-	const type = metadata?.type ?? determineType(value)
+	const type = field?.type
 
 	const handleColumnClick = useCallback(
 		(ev: React.MouseEvent<HTMLElement>) => {

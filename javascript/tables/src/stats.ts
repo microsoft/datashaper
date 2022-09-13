@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import type { Bin, Category, ColumnStats } from '@datashaper/schema'
+import type { Bin, Category, FieldMetadata } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -19,7 +19,7 @@ import { determineType } from './data.js'
 export function stats(
 	table: ColumnTable,
 	columns?: string[],
-): Record<string, ColumnStats> {
+): Record<string, FieldMetadata> {
 	const selected = columns ? table.select(columns) : table
 	const reqStats = requiredStats(selected)
 	const optStats = optionalStats(selected, reqStats)
@@ -59,7 +59,7 @@ export function stats(
 			...optt,
 		}
 		return acc
-	}, {} as Record<string, ColumnStats>)
+	}, {} as Record<string, FieldMetadata>)
 	return results
 }
 
@@ -128,7 +128,7 @@ function binning(
 			.count()
 			.orderby(cur)
 			.objects()
-			.map(d => ({
+			.map((d: any) => ({
 				min: d[cur],
 				count: d['count'],
 			}))
@@ -193,8 +193,8 @@ function categories(
 			.count()
 			.objects()
 			// sorting manually here so strings are alpha ignoring case
-			.sort((a, b) => `${a[cur]}`.localeCompare(`${b[cur]}`))
-			.map(d => ({ name: d[cur], count: d['count'] }))
+			.sort((a: any, b: any) => `${a[cur]}`.localeCompare(`${b[cur]}`))
+			.map((d: any) => ({ name: d[cur], count: d['count'] }))
 		acc[cur] = counted
 		return acc
 	}, {} as Record<string, Category[]>)

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnStats } from '@datashaper/schema'
+import type { FieldMetadata } from '@datashaper/schema'
 import { formatIfNumber } from '@datashaper/tables'
 import { useThematic } from '@thematic/react'
 import upperFirst from 'lodash-es/upperFirst.js'
@@ -32,23 +32,23 @@ const DEFAULT_STATS: StatsColumnType[] = [
  */
 export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 	function StatsColumnHeader({
-		metadata,
+		field,
 		stats = DEFAULT_STATS,
 		column,
 		onClick,
 	}) {
 		const theme = useThematic()
 		const cells = useMemo(() => {
-			const st = (metadata.stats || {}) as any
+			const st = (field.metadata || {}) as any
 			return stats.map(stat => {
 				const value: any = st[stat]
 				return (
 					<StatCell name={stat} value={value} key={`${column.key}-${stat}`} />
 				)
 			})
-		}, [metadata, column, stats])
+		}, [field, column, stats])
 
-		const title = useTooltip(metadata.stats)
+		const title = useTooltip(field.metadata)
 
 		const styles = useMemo<React.CSSProperties>(() => {
 			return {
@@ -62,7 +62,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 
 		return (
 			<div
-				onClick={e => onClick && onClick(e, column, metadata)}
+				onClick={e => onClick && onClick(e, column, field)}
 				title={title}
 				style={styles}
 			>
@@ -102,7 +102,7 @@ const StatCell: React.FC<{ name: string; value?: number }> = ({
 	) : null
 }
 
-function useTooltip(stats?: ColumnStats): string {
+function useTooltip(stats?: FieldMetadata): string {
 	return useMemo(() => {
 		const { bins, categories, ...nobins } = stats || {}
 		return Object.entries(nobins).reduce((acc, cur, idx) => {

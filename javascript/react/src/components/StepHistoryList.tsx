@@ -35,7 +35,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		onSelect,
 		onStartNewStep,
 		buttonId,
-		graph,
+		workflow,
 		onCreate,
 		nextInputTable,
 	}) {
@@ -81,7 +81,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 										key={index}
 										step={step}
 										index={index}
-										graph={graph}
+										workflow={workflow}
 										isEditing={true}
 										style={tableTransformStyle}
 										nextInputTable={nextInputTable}
@@ -123,11 +123,14 @@ function onRenderHeader(step: Step): JSX.Element {
 	try {
 		if (Array.isArray(columnList)) {
 			columns = columnList.join(', ')
-		} else if (typeof columnList === 'object') {			
+		} else if (typeof columnList === 'object') {
 			columns = Object.values(columnList)?.join(', ')
 		}
 	} catch {
-		console.error('ColumnList type is not being currently supported', typeof columnList)
+		console.error(
+			'ColumnList type is not being currently supported',
+			typeof columnList,
+		)
 	}
 
 	return (

@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ColumnMetadata } from '@datashaper/schema'
+import type { Field } from '@datashaper/schema'
 import type {
 	ICommandBarProps,
 	IDetailsGroupDividerProps,
@@ -18,7 +18,7 @@ export function createLazyLoadingGroupHeader(
 	props: IDetailsGroupDividerProps | undefined,
 	children: any,
 	columnName?: string,
-	columnMetadata?: ColumnMetadata | undefined,
+	columnMetadata?: Field | undefined,
 ): ReactElement<any, any> | null {
 	if (!props || (!columnMetadata && !columnName)) {
 		return null

@@ -1,0 +1,6 @@
+releases:
+  "@datashaper/react": patch
+  "@datashaper/tables": patch
+  "@datashaper/utilities": patch
+  "@datashaper/webapp": patch
+  "@datashaper/workflow": patch

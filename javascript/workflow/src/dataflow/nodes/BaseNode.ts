@@ -203,6 +203,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 				;(result as Promise<void>).catch(err => this.emitError(err))
 			}
 		} catch (err) {
+			console.error('recalculation error in node ' + this.id, err)
 			this.emitError(err)
 		}
 	}

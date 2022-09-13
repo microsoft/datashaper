@@ -12,7 +12,7 @@ import type { FieldMetadata } from './FieldMetadata.js'
  * This includes the required data type, various data nature and rendering properties, potential
  * validation rules, and mappings from a data dictionary.
  */
-export interface Field extends Named {
+export interface Field extends Omit<Named, 'id'> {
 	/**
 	 * Strict type of the field. Note that columns may not mix types in their rows for most of the data formats we use.
 	 * Default: 'string'
@@ -58,6 +58,12 @@ export interface Field extends Named {
 	 * Single example of a valid data value for the field.
 	 */
 	example?: any
+	/**
+	 * Provenance hints for the source of this field.
+	 * For example, categorical fields are often onehot encoded into new binary columns,
+	 * this would link back to the original categorical.
+	 */
+	derivedFrom?: string[]
 	/**
 	 * This provides a mapping between cell values and some other value.
 	 * Most commonly this is the core "data dictionary", whereby cell values are stored as numeric categories,

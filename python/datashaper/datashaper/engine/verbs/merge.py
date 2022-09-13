@@ -19,16 +19,20 @@ def merge(
     columns: List[str],
     strategy: str,
     delimiter: str = "",
-    keepOriginalColumns: bool = False,
+    preserveSource: bool = False,
     unhot: bool = False,
-    prefix: str = ""
+    prefix: str = "",
 ):
     merge_strategy = MergeStrategy(strategy)
 
-    input_table = unhotOperation(input, columns, prefix).get_input() if unhot else input.get_input()
+    input_table = (
+        unhotOperation(input, columns, prefix).get_input()
+        if unhot
+        else input.get_input()
+    )
 
     output = input_table.copy()
-    
+
     output[to] = output[columns].apply(
         partial(__strategy_mapping[merge_strategy], delim=delimiter), axis=1
     )
@@ -41,7 +45,7 @@ def merge(
         except ValueError:
             filteredList.append(col)
 
-    if(keepOriginalColumns == False):
+    if preserveSource == False:
         output = output[filteredList]
 
     return TableContainer(table=output)

@@ -12,23 +12,23 @@ import { stepVerbFactory } from './util/factories.js'
 
 export const recodeStep: ColumnTableStep<RecodeArgs> = (
 	input,
-	{ column, to, map },
+	{ column, to, mapping },
 ) => {
 	const finalMap: Record<Value, Value> = {}
 
 	const dataType = columnType(input, column)
 
 	if (dataType === DataType.Date) {
-		for (const key in map) {
+		for (const key in mapping) {
 			const dateConversion = new Date(key)
-			const valueConversion = new Date(map[key])
+			const valueConversion = new Date(mapping[key])
 			finalMap[dateConversion.toString()] = valueConversion
 		}
 	}
 
 	return input.derive({
 		[to]: escape((d: any) =>
-			op.recode(d[column], dataType === DataType.Date ? finalMap : map),
+			op.recode(d[column], dataType === DataType.Date ? finalMap : mapping),
 		),
 	})
 }

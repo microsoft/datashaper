@@ -14,11 +14,11 @@ class RecodeMap(dict):
         return key
 
 
-def recode(input: VerbInput, to: str, column: str, map: Dict):
-    map = RecodeMap(map)
+def recode(input: VerbInput, to: str, column: str, mapping: Dict):
+    mapping = RecodeMap(mapping)
 
     input_table = input.get_input()
 
     output = input_table.copy()
-    output[to] = output[column].map(map)
+    output[to] = output[column].map(mapping)
     return TableContainer(table=output)

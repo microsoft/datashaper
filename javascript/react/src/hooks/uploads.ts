@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { WorkflowSchema } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { FileCollection, FileType } from '@datashaper/utilities'
-import type { WorkflowObject } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
@@ -39,7 +39,7 @@ function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 }
 
 function useJsonHandler(
-	onUpdateWorkflow?: (workflow: WorkflowObject) => void,
+	onUpdateWorkflow?: (workflow: WorkflowSchema) => void,
 	onErrorHandler?: (error: string) => void,
 ) {
 	return useCallback(
@@ -54,7 +54,7 @@ function useJsonHandler(
 			if (!json) {
 				return
 			}
-			const workflow = (await json.toJson()) as WorkflowObject
+			const workflow = (await json.toJson()) as WorkflowSchema
 			if (workflow && onUpdateWorkflow) {
 				try {
 					onUpdateWorkflow(workflow)
@@ -75,7 +75,7 @@ export function useHandleCsvUpload(
 }
 
 export function useHandleJsonUpload(
-	onUpdateWorkflow: (workflow: WorkflowObject) => void,
+	onUpdateWorkflow: (workflow: WorkflowSchema) => void,
 	onErrorHandler?: (error: string) => void,
 ): () => void {
 	const jsonHandler = useJsonHandler(onUpdateWorkflow, onErrorHandler)
@@ -83,7 +83,7 @@ export function useHandleJsonUpload(
 }
 
 export function useHandleFileUpload(
-	onUpdateWorkflow: (workflow: WorkflowObject) => void,
+	onUpdateWorkflow: (workflow: WorkflowSchema) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
 	onErrorHandler?: (error: string) => void,
 ): (fc: FileCollection) => void {
@@ -100,7 +100,7 @@ export function useHandleFileUpload(
 }
 
 export function useHandleZipUpload(
-	onUpdateWorkflow: (workflow: WorkflowObject) => void,
+	onUpdateWorkflow: (workflow: WorkflowSchema) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
 	onErrorHandler?: (error: string) => void,
 ): () => void {
