@@ -47,8 +47,9 @@ describe('readTable Tests', () => {
 		it('should load a large dataset', async () => {
 			const table = readTable(largeDataset, {
 				comment: '#',
+				nRows: 466890,
 			})
-			expect(table.numRows()).toBe(466891)
+			expect(table.numRows()).toBe(466890)
 		})
 
 		it('should load a large dataset with nRows prop', () => {
@@ -91,8 +92,9 @@ describe('readTable Tests', () => {
 				escapeChar: '$',
 				skipBlankLines: true,
 				comment: '#',
+				nRows: 466890,
 			})
-			expect(table.data.length).toBe(466891)
+			expect(table.data.length).toBe(466890)
 		})
 
 		it('should load a large dataset with nRows prop', () => {
