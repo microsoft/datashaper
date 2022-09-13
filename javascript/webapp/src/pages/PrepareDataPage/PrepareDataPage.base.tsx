@@ -15,7 +15,7 @@ import { useOnCreateStep } from '@datashaper/react/src/hooks/manageWorkflow.js'
 import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
-import { memo, useEffect, useState } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
 
 import { useTables } from './PrepareDataPage.hooks.js'
 import { Container, mgmtStyles, Wrapper } from './PrepareDataPage.styles.js'
@@ -26,6 +26,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const { tables: inputTables, onAddTables: onAddInputTables } =
 		useTables(setSelectedTableId)
 	const [wf, setWorkflow] = useState<Workflow>(new Workflow())
+	// workflow steps/output
+	const [output, setOutput] = useState<TableContainer[]>([])
 	const workflow = useWorkflow(wf, inputTables)
 
 	const onSave = useOnSaveStep(workflow)
@@ -45,12 +47,13 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			}
 		}
 	}, [workflow, inputNames])
-
-	// workflow steps/output
-	const [output, setOutput] = useState<TableContainer[]>([])
 	useWorkflowOutputListener(workflow, setOutput)
 	useWorkflowListener(workflow, setWorkflow)
-	console.log(inputTables)
+
+	const selectedTable = useMemo(() => {
+		return inputTables.concat(output).find(x => x.id === selectedTableId)
+	}, [inputTables, output, selectedTableId])
+
 	return (
 		<Container className={'prepare-data-page'}>
 			<ProjectMgmtCommandBar
@@ -65,11 +68,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				<PrepareDataFull
 					outputHeaderCommandBar={
 						<TableCommands
-							inputTable={
-								inputTables.find(x => x.id === selectedTableId) ||
-								output.find(x => x.id === selectedTableId)
-							}
-							wf={workflow}
+							inputTable={selectedTable}
+							workflow={workflow}
 							onAddStep={onCreate}
 						/>
 					}

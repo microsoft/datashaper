@@ -39,8 +39,10 @@ export const PreviewTable: React.FC<PreviewTableProps> = memo(
 					<Container>
 						<ArqueroTableHeader
 							commandBar={commandBar}
-							name={name}
+							// name={name}
 							table={table}
+							showColumnCount={false}
+							showRowCount={false}
 						/>
 						<ArqueroDetailsList
 							isSortable

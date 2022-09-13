@@ -19,7 +19,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 	function ArqueroTableHeader({
 		table,
 		name,
-		showRowCount = true,
+		showRowCount = true, //hide??
 		showColumnCount = true,
 		commandBar,
 		farCommandBar,
