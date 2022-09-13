@@ -4,12 +4,6 @@
  */
 import styled from 'styled-components'
 
-export const columnsStyle = {
-	ID: {
-		iconName: 'FavoriteStarFill',
-	},
-}
-
 export const StepBlock = styled.div`
 	display: flex;
 `

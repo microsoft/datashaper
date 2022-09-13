@@ -5,49 +5,13 @@
 import {
 	createDefaultHeaderCommandBar,
 	downloadCommand,
-	visibleColumnsCommand,
 } from '@datashaper/react'
 import type { IColumn } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { useCallback, useMemo } from 'react'
-import type { SetterOrUpdater } from 'recoil'
+import { useMemo } from 'react'
 
 import type { ColumnConfigMap } from './Table.types.js'
-
-export function useCommandBar(
-	table: ColumnTable,
-	visibleColumns: string[],
-	updateColumns: SetterOrUpdater<string[]>,
-): JSX.Element {
-	const theme = useThematic()
-
-	const handleColumnCheckChange = useCallback(
-		(column: string, checked: boolean) => {
-			updateColumns(previous => {
-				if (checked) {
-					// order doesn't matter here
-					return [...(previous || []), column]
-				} else {
-					return [...(previous || [])].filter(col => col !== column)
-				}
-			})
-		},
-		[updateColumns],
-	)
-
-	const items = useMemo(
-		() => [
-			visibleColumnsCommand(table, visibleColumns, handleColumnCheckChange),
-		],
-		[table, visibleColumns, handleColumnCheckChange],
-	)
-
-	return useMemo(
-		() => createDefaultHeaderCommandBar({ items }, theme),
-		[items, theme],
-	)
-}
 
 export function useFarCommandBar(table: ColumnTable): JSX.Element {
 	const theme = useThematic()
@@ -58,14 +22,16 @@ export function useFarCommandBar(table: ColumnTable): JSX.Element {
 	)
 }
 
-export function useColumns(config: ColumnConfigMap): IColumn[] {
+export function useColumns(config?: ColumnConfigMap): IColumn[] | undefined {
 	return useMemo(() => {
-		return Object.entries(config).map(([key, conf]) => ({
-			key,
-			name: key,
-			fieldName: key,
-			minWidth: conf.width,
-			iconName: conf.iconName,
-		})) as IColumn[]
+		if (config) {
+			return Object.entries(config).map(([key, conf]) => ({
+				key,
+				name: key,
+				fieldName: key,
+				minWidth: conf.width,
+				iconName: conf.iconName,
+			})) as IColumn[]
+		}
 	}, [config])
 }

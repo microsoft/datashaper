@@ -4,6 +4,7 @@
  */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { BasicStory } from './Basic.story.js'
+import { ColumnsStory } from './Columns/Columns.story.js'
 import { ParameterizedStory } from './Parameterized.story.js'
 import { PerformanceStory } from './Performance/Performance.story.js'
 import { RowGroupingStory } from './RowGrouping/RowGrouping.story.js'
@@ -15,6 +16,7 @@ const meta = {
 export default meta
 
 export const Basic = BasicStory
+export const Columns = ColumnsStory
 export const RowGrouping = RowGroupingStory
 
 export const Performance = PerformanceStory

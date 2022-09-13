@@ -43,8 +43,6 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		metadata,
 		offset = 0,
 		limit = Infinity,
-		includeAllColumns = true,
-		visibleColumns,
 		isSortable = false,
 		isStriped = false,
 		isColumnClickable = false,
@@ -79,7 +77,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
-		const subset = useSubsetTable(table, visibleColumns)
+		const subset = useSubsetTable(table, columns)
 		// sort the table internally
 		// note that this is different than the orderby of a pipeline step
 		// this is a temporary sort only for the table display
@@ -129,7 +127,6 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			table,
 			computedMetadata,
 			columns,
-			visibleColumns,
 			handleColumnHeaderClick,
 			{
 				features,
@@ -139,7 +136,6 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				onColumnClick,
 				onCellDropdownSelect,
 				isDefaultHeaderClickable,
-				includeAllColumns,
 				isColumnClickable,
 				showColumnBorders,
 				compact,

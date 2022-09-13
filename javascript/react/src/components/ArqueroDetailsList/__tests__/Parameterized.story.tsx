@@ -26,7 +26,6 @@ ParameterizedStory.args = {
 	isStriped: false,
 	isColumnClickable: true,
 	showColumnBorders: true,
-	includeAllColumns: true,
 	features: {
 		smartHeaders: false,
 		statsColumnHeaders: true,
@@ -50,15 +49,4 @@ ParameterizedStory.args = {
 	offset: 0,
 	limit: 1000,
 	selectedColumn: 'Volume',
-	visibleColumns: [
-		'Symbol',
-		'Date',
-		'Close',
-		'Volume',
-		'Open',
-		'High',
-		'Low',
-		'Week',
-		'Month',
-	],
 }

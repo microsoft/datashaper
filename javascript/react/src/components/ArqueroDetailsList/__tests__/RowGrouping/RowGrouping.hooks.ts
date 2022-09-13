@@ -7,7 +7,11 @@ import { introspect } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { useCallback, useEffect, useState } from 'react'
 
-export function useGrouping(table: ColumnTable | undefined) {
+export function useGrouping(table: ColumnTable | undefined): {
+	grouped: ColumnTable | undefined
+	metadata: TableMetadata | undefined
+	onGroupChange: (key: string, checked?: boolean) => void
+} {
 	const [grouped, setGrouped] = useState<ColumnTable | undefined>()
 	const [metadata, setMetadata] = useState<TableMetadata | undefined>()
 

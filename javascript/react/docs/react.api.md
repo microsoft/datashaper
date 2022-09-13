@@ -49,7 +49,6 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     defaultSortDirection?: SortDirection;
     // (undocumented)
     features?: DetailsListFeatures;
-    includeAllColumns?: boolean;
     isColumnClickable?: boolean;
     isHeadersFixed?: boolean;
     isResizable?: boolean;
@@ -69,7 +68,6 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     showColumnBorders?: boolean;
     // (undocumented)
     table: ColumnTable;
-    visibleColumns?: string[];
 }
 
 // Warning: (ae-missing-release-tag) "ArqueroTableHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -121,8 +119,6 @@ export interface ColumnOptions {
     compact?: boolean;
     // (undocumented)
     features?: DetailsListFeatures;
-    // (undocumented)
-    includeAllColumns?: boolean;
     // (undocumented)
     isColumnClickable?: boolean;
     // (undocumented)
@@ -630,12 +626,12 @@ export function useCellDropdownSelectHandler(clickable: boolean, onOptionSelect?
 // Warning: (ae-missing-release-tag) "useColumnNamesList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumnNamesList(table: ColumnTable, columns?: IColumn[], all?: boolean, visibleColumns?: string[]): string[];
+export function useColumnNamesList(table: ColumnTable, columns?: IColumn[]): string[];
 
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, computedMetadata?: TableMetadata, columns?: IColumn[], visibleColumns?: string[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions): IColumn[];
+export function useColumns(table: ColumnTable, computedMetadata?: TableMetadata, columns?: IColumn[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -725,7 +721,7 @@ export function useStripedRowsRenderer(striped?: boolean, columnBorders?: boolea
 // Warning: (ae-missing-release-tag) "useSubsetTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useSubsetTable(table: ColumnTable, columns?: string[]): ColumnTable;
+export function useSubsetTable(table: ColumnTable, columns?: IColumn[]): ColumnTable;
 
 // Warning: (ae-missing-release-tag) "useTableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

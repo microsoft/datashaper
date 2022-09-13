@@ -35,10 +35,3 @@ export const InputsSection = styled.div`
 export const icons = {
 	download: { iconName: 'Download' },
 }
-
-export const columnsStyle = {
-	ID: {
-		width: 50,
-		iconName: 'FavoriteStarFill',
-	},
-}

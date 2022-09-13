@@ -7,7 +7,6 @@ import { memo } from 'react'
 
 import { Section } from './Section.js'
 import {
-	columnsStyle,
 	OutputColumn,
 	StepBlock,
 	StepColumn,
@@ -55,7 +54,6 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 							<Table
 								name={output}
 								table={table}
-								config={columnsStyle}
 								features={features}
 								compact={compact}
 							/>
