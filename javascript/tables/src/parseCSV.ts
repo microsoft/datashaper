@@ -9,10 +9,8 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { parseAs } from './parseTypes.js'
 import {
-	COMMENT_DEFAULT,
 	DATE_FORMAT_DEFAULT,
 	DECIMAL_DEFAULT,
-	DELIMITER_DEFAULT,
 	FALSE_DEFAULTS,
 	NA_DEFAULTS,
 	THOUSANDS_DEFAULT,
@@ -20,14 +18,12 @@ import {
 } from './typeHints.defaults.js'
 
 const defaultTypeHints = {
-	delimiter: DELIMITER_DEFAULT,
 	trueValues: TRUE_DEFAULTS,
 	falseValues: FALSE_DEFAULTS,
 	naValues: NA_DEFAULTS,
 	dateFormat: DATE_FORMAT_DEFAULT,
 	thousands: THOUSANDS_DEFAULT,
 	decimal: DECIMAL_DEFAULT,
-	comment: COMMENT_DEFAULT,
 }
 
 export interface ParseConfig {

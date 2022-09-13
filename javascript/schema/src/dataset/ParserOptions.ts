@@ -26,7 +26,7 @@ export interface ParserOptions {
 	 * Character that indicates the end of a line (row).
 	 * Default: [\r, \r\n, \n]
 	 */
-	lineTerminator?: string[]
+	lineTerminator?: string
 	/**
 	 * Character to use for quoting strings.
 	 * Default: "
@@ -37,7 +37,7 @@ export interface ParserOptions {
 	 * Note that pandas and spark differ here.
 	 * Default: none
 	 */
-	escape?: string
+	escapeChar?: string
 	/**
 	 * Character that begins a comment. All content after this character will be considered a comment and not imported.
 	 * Default: none.
@@ -57,5 +57,5 @@ export interface ParserOptions {
 	 * Number of rows to read from the data, starting at skip_rows (honors skipBlankLines).
 	 * Default: Infinity
 	 */
-	readRows?: number
+	nRows?: number
 }
