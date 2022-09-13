@@ -7,7 +7,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
 
 import { Table } from '../ArqueroDetailsList.styles.js'
-import { useBigTable, useColumnConfig } from './Performance.hooks.js'
+import { useBigTable } from './Performance.hooks.js'
 
 export interface PerformanceProps {
 	table: ColumnTable | undefined
@@ -16,8 +16,6 @@ export interface PerformanceProps {
 export const Performance: React.FC<PerformanceProps> = memo(
 	function Performance({ table }) {
 		const { local, metadata } = useBigTable(table)
-
-		const columns = useColumnConfig(local)
 
 		if (!local || !metadata) {
 			return <div>Loading...</div>
@@ -30,14 +28,14 @@ export const Performance: React.FC<PerformanceProps> = memo(
 					table={local}
 					metadata={metadata}
 					features={{
-						smartCells: true,
 						smartHeaders: true,
+						smartCells: true,
 					}}
-					columns={columns}
 					isSortable
 					isHeadersFixed
 					isStriped
 					showColumnBorders
+					compact
 				/>
 			</Table>
 		)

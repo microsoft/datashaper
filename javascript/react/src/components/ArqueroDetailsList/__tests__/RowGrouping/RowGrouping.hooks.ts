@@ -2,33 +2,37 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useCallback, useState } from 'react'
+import type { TableMetadata } from '@datashaper/tables'
+import { introspect } from '@datashaper/tables'
+import type ColumnTable from 'arquero/dist/types/table/column-table.js'
+import { useCallback, useEffect, useState } from 'react'
 
-import type { DetailsListFeatures } from '../../ArqueroDetailsList.types.js'
+export function useGrouping(table: ColumnTable | undefined) {
+	const [grouped, setGrouped] = useState<ColumnTable | undefined>()
+	const [metadata, setMetadata] = useState<TableMetadata | undefined>()
 
-export function useToggleTableFeatures(
-	features?: Partial<DetailsListFeatures>,
-): {
-	changeTableFeatures: (feature: string) => void
-	tableFeatures: Partial<DetailsListFeatures>
-} {
-	const [tableFeatures, setTableFeatures] = useState<
-		Partial<DetailsListFeatures>
-	>(features ?? {})
+	const [groupByList, setGroupByList] = useState<string[]>([])
 
-	const changeTableFeatures = useCallback(
-		(propName: string) => {
-			const key = propName as keyof DetailsListFeatures
-			setTableFeatures({
-				...tableFeatures,
-				[key]: !tableFeatures[key],
-			})
+	useEffect(() => {
+		if (table) {
+			const local = groupByList.length > 0 ? table.groupby(groupByList) : table
+			setGrouped(local)
+			setMetadata(introspect(local, true))
+		}
+	}, [table, groupByList, setGrouped, setMetadata])
+
+	const onGroupChange = useCallback(
+		(key: string, checked?: boolean) => {
+			setGroupByList(prev =>
+				checked ? [...prev, key] : prev.filter(d => d !== key),
+			)
 		},
-		[tableFeatures, setTableFeatures],
+		[setGroupByList],
 	)
 
 	return {
-		changeTableFeatures,
-		tableFeatures,
+		grouped,
+		metadata,
+		onGroupChange,
 	}
 }

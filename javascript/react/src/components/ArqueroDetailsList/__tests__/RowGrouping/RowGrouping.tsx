@@ -3,103 +3,54 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
-import type { TableMetadata } from '@datashaper/tables'
-import { introspect } from '@datashaper/tables'
 import { Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo } from 'react'
 
 import { Table } from '../ArqueroDetailsList.styles.js'
-import { useToggleTableFeatures } from './RowGrouping.hooks.js'
+import { useGrouping } from './RowGrouping.hooks.js'
 import { ButtonContainer, GroupByToggle } from './RowGrouping.styles.js'
 
-export interface RowGrouping {
+export interface RowGroupingProps {
 	table: ColumnTable | undefined
 }
 
-export const RowGrouping: React.FC<RowGrouping> = memo(function RowGrouping({
-	table,
-}) {
-	const [groupedTable, setGroupedTable] = useState<ColumnTable | undefined>()
-	const [groupedMetadata, setGroupedMetadata] = useState<
-		TableMetadata | undefined
-	>()
+export const RowGrouping: React.FC<RowGroupingProps> = memo(
+	function RowGrouping({ table }) {
+		const { grouped, metadata, onGroupChange } = useGrouping(table)
 
-	const [groupByList, setGroupByList] = useState<string[]>([])
-
-	useEffect(() => {
-		if (table !== undefined) {
-			let tableCopy = table
-
-			if (groupByList.length > 0) tableCopy = tableCopy.groupby(groupByList)
-
-			setGroupedTable(tableCopy)
-			setGroupedMetadata(introspect(tableCopy, true))
+		if (!grouped || !metadata) {
+			return <div>Loading...</div>
 		}
-	}, [table, groupByList])
 
-	const { tableFeatures } = useToggleTableFeatures()
+		return (
+			<Table>
+				<Label>Group by: </Label>
+				<ButtonContainer>
+					<GroupByToggle
+						label="Symbol"
+						onText="On"
+						offText="Off"
+						onChange={(_e, checked) => onGroupChange('Symbol', checked)}
+					/>
+					<GroupByToggle
+						label="Month"
+						onText="On"
+						offText="Off"
+						onChange={(_e, checked) => onGroupChange('Month', checked)}
+					/>
+				</ButtonContainer>
 
-	const _onChangeSymbol = useCallback(
-		(ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
-			if (checked) {
-				setGroupByList([...groupByList, 'Symbol'])
-			} else {
-				const listCopy = groupByList.filter(e => e !== 'Symbol')
-				setGroupByList(listCopy)
-			}
-		},
-		[setGroupByList, groupByList],
-	)
-
-	const _onChangeMonth = useCallback(
-		(ev: React.MouseEvent<HTMLElement>, checked?: boolean) => {
-			if (checked) {
-				setGroupByList([...groupByList, 'Month'])
-			} else {
-				const listCopy = groupByList.filter(e => e !== 'Month')
-				setGroupByList(listCopy)
-			}
-		},
-		[setGroupByList, groupByList],
-	)
-
-	if (!groupedTable || !groupedMetadata) {
-		return <div>Loading...</div>
-	}
-
-	return (
-		<Table>
-			<Label>Group by: </Label>
-			<ButtonContainer>
-				<GroupByToggle
-					label="Symbol"
-					onText="On"
-					offText="Off"
-					onChange={_onChangeSymbol}
+				<ArqueroTableHeader table={grouped} />
+				<ArqueroDetailsList
+					isSortable
+					compact
+					showColumnBorders
+					isHeadersFixed
+					table={grouped}
+					metadata={metadata}
 				/>
-				<GroupByToggle
-					label="Month"
-					onText="On"
-					offText="Off"
-					onChange={_onChangeMonth}
-				/>
-			</ButtonContainer>
-
-			<ArqueroTableHeader table={groupedTable} />
-			<ArqueroDetailsList
-				isSortable
-				compact
-				showColumnBorders
-				isHeadersFixed
-				table={groupedTable}
-				metadata={groupedMetadata}
-				features={{
-					...tableFeatures,
-					smartCells: true,
-					smartHeaders: true,
-				}}
-			/>
-		</Table>
-	)
-})
+			</Table>
+		)
+	},
+)
