@@ -59,4 +59,15 @@ export interface StepComponentProps {
 	 * Event handler for when the output table name changes
 	 */
 	onChangeOutput: (value: string | undefined) => void
+	/**
+	 * Indicates that the input table should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.
+	 */
+	hideInput?: boolean
+
+	/**
+	 * Indicates that the output table should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.
+	 */
+	hideOutput?: boolean
 }

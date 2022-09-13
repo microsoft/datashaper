@@ -5,13 +5,13 @@
 import {
 	PrepareDataFull,
 	ProjectMgmtCommandBar,
-	useOnDeleteStep,
+	TableCommands,
 	useOnSaveStep,
-	useOnUpdateStep,
-	usePerColumnCommands,
+	useWorkflow,
 	useWorkflowListener,
 	useWorkflowOutputListener,
 } from '@datashaper/react'
+import { useOnCreateStep } from '@datashaper/react/src/hooks/manageWorkflow.js'
 import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
@@ -23,11 +23,13 @@ import { Container, mgmtStyles, Wrapper } from './PrepareDataPage.styles.js'
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	// state for the input tables
 	const [selectedTableId, setSelectedTableId] = useState<string | undefined>()
-	const { tables, onAddTables } = useTables(setSelectedTableId)
-	const [workflow, setWorkflow] = useState<Workflow>(new Workflow())
-	const onSave = useOnSaveStep(workflow, selectedTableId)
-	const onUpdate = useOnUpdateStep(workflow)
-	const onRemove = useOnDeleteStep(workflow)
+	const { tables: inputTables, onAddTables: onAddInputTables } =
+		useTables(setSelectedTableId)
+	const [wf, setWorkflow] = useState<Workflow>(new Workflow())
+	const workflow = useWorkflow(wf, inputTables)
+
+	const onSave = useOnSaveStep(workflow)
+	const onCreate = useOnCreateStep(onSave, setSelectedTableId)
 	const inputNames = useInputTableNames(workflow)
 
 	useEffect(() => {
@@ -46,29 +48,32 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	// workflow steps/output
 	const [output, setOutput] = useState<TableContainer[]>([])
-	const columnCommands = usePerColumnCommands(
-		workflow,
-		onSave,
-		onUpdate,
-		onRemove,
-	)
 	useWorkflowOutputListener(workflow, setOutput)
 	useWorkflowListener(workflow, setWorkflow)
-
+	console.log(inputTables)
 	return (
 		<Container className={'prepare-data-page'}>
 			<ProjectMgmtCommandBar
-				tables={tables}
+				tables={inputTables}
 				workflow={workflow}
 				outputTables={output}
 				onUpdateWorkflow={setWorkflow}
-				onUpdateTables={onAddTables}
+				onUpdateTables={onAddInputTables}
 				styles={mgmtStyles}
 			/>
 			<Wrapper>
 				<PrepareDataFull
-					outputHeaderCommandBar={[columnCommands]}
-					inputs={tables}
+					outputHeaderCommandBar={
+						<TableCommands
+							inputTable={
+								inputTables.find(x => x.id === selectedTableId) ||
+								output.find(x => x.id === selectedTableId)
+							}
+							wf={workflow}
+							onAddStep={onCreate}
+						/>
+					}
+					inputs={inputTables}
 					derived={output}
 					workflow={workflow}
 					selectedTableId={selectedTableId}

@@ -48,6 +48,8 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		outputTableDisabled,
 		onChange,
 		onChangeOutput: changeOutput,
+		hideInput,
+		hideOutput,
 	}) {
 		/* Current Table Selection */
 		const tableId = s.input[NodeInput.Source]?.node
@@ -55,7 +57,6 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 
 		/* Table Options */
 		const tableOptions = useTableDropdownOptions(g)
-
 		/* Column Options */
 		const columns = useTableColumnNames(table, useColumnFilter(s, table))
 		const columnOptions = useSimpleDropdownOptions(columns)
@@ -76,7 +77,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		return StepArgs == null ? null : (
 			<Container className="step-component">
 				{/* Input Table */}
-				{isInputTableStep(s) ? (
+				{!hideInput && isInputTableStep(s) ? (
 					<TableDropdown
 						required
 						options={tableOptions}
@@ -118,15 +119,17 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 				) : null}
 
 				{/* Output Table */}
-				<TextField
-					required
-					disabled={outputTableDisabled}
-					label={outputTableLabel || 'Output table'}
-					placeholder={'Table name'}
-					value={output ?? s.id}
-					styles={dropdownStyles}
-					onChange={onOutputTableChange}
-				/>
+				{!hideOutput && (
+					<TextField
+						required
+						disabled={outputTableDisabled}
+						label={outputTableLabel || 'Output table'}
+						placeholder={'Table name'}
+						value={output ?? s.id}
+						styles={dropdownStyles}
+						onChange={onOutputTableChange}
+					/>
+				)}
 			</Container>
 		)
 	},

@@ -73,4 +73,4 @@ export {
 	useWorkflowOutputListener,
 	useWorkflowSteps,
 } from './hooks/index.js'
-export { usePerColumnCommands } from './transformation/usePerColumnCommands.js'
+export { TableCommands } from './transformation/TableCommands.js'

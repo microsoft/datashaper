@@ -4,7 +4,7 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import type { Workflow } from '@datashaper/workflow'
-import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
+import type { ReactElement } from 'react'
 
 export interface PrepareDataFullProps {
 	/**
@@ -30,7 +30,7 @@ export interface PrepareDataFullProps {
 	/**
 	 * An optional command bar
 	 */
-	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
+	outputHeaderCommandBar?: ReactElement<any, any>
 
 	/**
 	 * Step positioning option

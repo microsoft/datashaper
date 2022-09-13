@@ -26,7 +26,7 @@ const statsColumnTypes = [
 export const PreviewTable: React.FC<PreviewTableProps> = memo(
 	function PreviewTable({
 		table,
-		headerCommandBar,
+		commandBar,
 		name,
 		metadata,
 		onChangeMetadata,
@@ -37,7 +37,11 @@ export const PreviewTable: React.FC<PreviewTableProps> = memo(
 			<>
 				{table ? (
 					<Container>
-						<ArqueroTableHeader name={name} table={table} />
+						<ArqueroTableHeader
+							commandBar={commandBar}
+							name={name}
+							table={table}
+						/>
 						<ArqueroDetailsList
 							isSortable
 							compact
@@ -48,7 +52,6 @@ export const PreviewTable: React.FC<PreviewTableProps> = memo(
 							features={{
 								...tableFeatures,
 								statsColumnTypes: statsColumnTypes,
-								commandBar: headerCommandBar ? headerCommandBar : undefined,
 							}}
 							table={table}
 						/>

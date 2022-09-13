@@ -85,21 +85,16 @@ export function useOnCreateStep(
  */
 export function useOnSaveStep(
 	workflow: Workflow,
-	selectedTableId?: string,
 ): (step: Step, output: string | undefined, index: number | undefined) => void {
 	const updateStep = useHandleStepSave(workflow)
 	const updateStepOutput = useHandleStepOutputChanged(workflow)
 
 	return useCallback(
 		(step: Step, output: string | undefined, index: number | undefined) => {
-			if (!step.input && selectedTableId) {
-				step.input = { source: { node: selectedTableId } }
-			}
-
 			const stepResult = updateStep(step, index)
 			updateStepOutput(stepResult, output)
 		},
-		[updateStepOutput, updateStep, selectedTableId],
+		[updateStepOutput, updateStep],
 	)
 }
 /**

@@ -78,7 +78,7 @@ export interface TableTransformProps {
 
 	showGuidanceButton?: boolean
 
-	isEditing?: boolean
+	hideStepSelector?: boolean
 
 	onDelete?: (index: number) => void
 
