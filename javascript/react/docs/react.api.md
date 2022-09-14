@@ -337,31 +337,6 @@ export interface PrepareDataFullProps {
     workflow: Workflow;
 }
 
-// Warning: (ae-missing-release-tag) "PreviewTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const PreviewTable: React.FC<PreviewTableProps>;
-
-// Warning: (ae-missing-release-tag) "PreviewTableProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface PreviewTableProps {
-    // (undocumented)
-    metadata?: TableMetadata;
-    // (undocumented)
-    name?: string;
-    // (undocumented)
-    onChangeMetadata?: SaveMetadataFunction;
-    // (undocumented)
-    outputHeaderCommandBar?: ReactElement<any, any>;
-    // (undocumented)
-    showColumnCount?: boolean;
-    // (undocumented)
-    showRowCount?: boolean;
-    // (undocumented)
-    table?: ColumnTable;
-}
-
 // Warning: (ae-missing-release-tag) "ProjectMgmtCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

@@ -4,6 +4,7 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import type { Workflow } from '@datashaper/workflow'
+import type { IColumn } from '@fluentui/react'
 import type { ReactElement } from 'react'
 
 export interface PrepareDataFullProps {
@@ -36,6 +37,12 @@ export interface PrepareDataFullProps {
 	 * Step positioning option
 	 */
 	stepsPosition?: 'bottom' | 'middle'
+
+	selectedColumn?: string
+	onColumnClick?: (
+		evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+		column?: IColumn | undefined,
+	) => void
 
 	/**
 	 * Mutator for when the selected table id changes

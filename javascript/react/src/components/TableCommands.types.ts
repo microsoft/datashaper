@@ -9,6 +9,7 @@ import type { Step, Workflow } from '@datashaper/workflow'
 export interface TableCommandsProps {
 	inputTable: TableContainer | undefined
 	workflow: Workflow
+	selectedColumn?: string
 	onAddStep?: (
 		step: Step,
 		output: string | undefined,

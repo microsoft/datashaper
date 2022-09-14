@@ -15,7 +15,8 @@ import { useOnCreateStep } from '@datashaper/react/src/hooks/manageWorkflow.js'
 import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
-import { memo, useEffect, useMemo, useState } from 'react'
+import type { IColumn } from '@fluentui/react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useTables } from './PrepareDataPage.hooks.js'
 import { Container, mgmtStyles, Wrapper } from './PrepareDataPage.styles.js'
@@ -54,6 +55,18 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		return inputTables.concat(output).find(x => x.id === selectedTableId)
 	}, [inputTables, output, selectedTableId])
 
+	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
+
+	const onColumnClick = useCallback(
+		(
+			_?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+			column?: IColumn | undefined,
+		) => {
+			setSelectedColumn(column?.name)
+		},
+		[setSelectedColumn],
+	)
+
 	return (
 		<Container className={'prepare-data-page'}>
 			<ProjectMgmtCommandBar
@@ -71,11 +84,14 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 							inputTable={selectedTable}
 							workflow={workflow}
 							onAddStep={onCreate}
+							selectedColumn={selectedColumn}
 						/>
 					}
 					inputs={inputTables}
 					derived={output}
 					workflow={workflow}
+					onColumnClick={onColumnClick}
+					selectedColumn={selectedColumn}
 					selectedTableId={selectedTableId}
 					onSelectedTableIdChanged={setSelectedTableId}
 					onUpdateOutput={setOutput}

@@ -7,6 +7,9 @@ import { IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback } from 'react'
 
+import { ArqueroDetailsList } from './ArqueroDetailsList/ArqueroDetailsList.js'
+import { ArqueroTableHeader } from './ArqueroTableHeader/ArqueroTableHeader.js'
+import { DetailText } from './DetailText.js'
 import { HistoryButton } from './HistoryButton.js'
 import { ManageWorkflow } from './ManageWorkflow.js'
 import {
@@ -19,11 +22,12 @@ import {
 	Main,
 	OutputContainer,
 	SectionTitle,
+	TableContainer,
+	TextContainer,
 	Title,
 	WorkflowContainer,
 } from './PrepareDataFull.styles.js'
 import type { PrepareDataFullProps } from './PrepareDataFull.types.js'
-import { PreviewTable } from './PreviewTable.js'
 import { TableListBar } from './TableListBar.js'
 
 export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
@@ -34,6 +38,8 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 		selectedTableId,
 		outputHeaderCommandBar,
 		stepsPosition = 'bottom',
+		selectedColumn,
+		onColumnClick,
 		onSelectedTableIdChanged,
 		onUpdateOutput,
 		onUpdateWorkflow,
@@ -75,14 +81,31 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 					</InputContainer>
 					<OutputContainer stepsPosition={stepsPosition}>
 						<SectionTitle>Preview</SectionTitle>
-						<PreviewTable
-							onChangeMetadata={onUpdateMetadata}
-							outputHeaderCommandBar={outputHeaderCommandBar}
-							table={selectedTable?.table}
-							metadata={selectedTable?.metadata}
-							showRowCount={false}
-							showColumnCount={false}
-						/>
+						{selectedTable?.table ? (
+							<TableContainer>
+								<ArqueroTableHeader
+									commandBar={outputHeaderCommandBar}
+									name={selectedTable?.id}
+									table={selectedTable?.table}
+								/>
+								<ArqueroDetailsList
+									isSortable
+									compact
+									showColumnBorders
+									isHeadersFixed
+									isColumnClickable={!!onColumnClick}
+									selectedColumn={selectedColumn}
+									onColumnClick={onColumnClick}
+									onChangeMetadata={onUpdateMetadata}
+									metadata={selectedTable?.metadata}
+									table={selectedTable?.table}
+								/>
+							</TableContainer>
+						) : (
+							<TextContainer>
+								<DetailText text="(No table selected)" />
+							</TextContainer>
+						)}
 					</OutputContainer>
 				</Main>
 				<Aside isCollapsed={isCollapsed}>
