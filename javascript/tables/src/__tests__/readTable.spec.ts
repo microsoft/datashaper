@@ -103,7 +103,7 @@ describe('readTable Tests', () => {
 		})
 
 		it('should load a large dataset with readRows prop', () => {
-			const table = readTable(text, {
+			const table = readTable(largeDataset, {
 				skipRows: 2,
 				escapeChar: '$',
 				readRows: 3,

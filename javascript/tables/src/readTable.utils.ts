@@ -36,20 +36,21 @@ export function getParser(options?: ParserOptions) {
 	}
 }
 
-function arqueroParser(text: string, options?: ParserOptions): ColumnTable {
+function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
 	const mappedOptions = mapProps(ParserType.Arquero, options) as CSVParseOptions
 	let table = fromCSV(text, mappedOptions)
-	return options?.readRows ? from([...table].slice(0, options.readRows)) : table
+	return options.readRows ? from(table.slice(0, options.readRows)) : table
 }
 
-function papaParser(text: string, options?: ParserOptions): ColumnTable {
-	if (options?.skipRows && options?.readRows) {
-		options.readRows += options.skipRows
+function papaParser(text: string, options: ParserOptions = {}): ColumnTable {
+	const opts = { ...options }
+	if (opts.skipRows && opts.readRows) {
+		opts.readRows += opts.skipRows
 	}
-	const mappedOptions = mapProps(ParserType.PapaParse, options) as ParseConfig
+	const mappedOptions = mapProps(ParserType.PapaParse, opts) as ParseConfig
 	const table = papa.parse(text, mappedOptions)
-	if (options?.skipRows) {
-		const subset = skipRows(table.data, options.skipRows)
+	if (opts.skipRows) {
+		const subset = skipRows(table.data, opts.skipRows)
 		table.data = subset
 	}
 	return from(table.data)
