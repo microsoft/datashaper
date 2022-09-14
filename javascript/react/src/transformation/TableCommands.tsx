@@ -13,8 +13,8 @@ import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 
-import { useTransformModalState } from '../components/ManageWorkflow.hooks.js'
 import { TableTransformModal } from '../components/TableTransformModal.js'
+import { useTransformModalState } from '../hooks/manageWorkflow.js'
 import { getVerbIcon } from '../verbIcons.js'
 
 const defaultVerbs = [Verb.Bin, Verb.Binarize, Verb.Filter, Verb.Aggregate]

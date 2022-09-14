@@ -12,6 +12,8 @@ export interface PreviewTableProps {
 	table?: ColumnTable
 	name?: string
 	metadata?: TableMetadata
-	commandBar?: ReactElement<any, any>
+	outputHeaderCommandBar?: ReactElement<any, any>
 	onChangeMetadata?: SaveMetadataFunction
+	showColumnCount?: boolean
+	showRowCount?: boolean
 }

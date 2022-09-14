@@ -3,29 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/unbound-method */
-import type { Step } from '@datashaper/workflow'
 import { useCallback, useEffect, useState } from 'react'
 
-import type { ModalState } from '../hooks/index.js'
 import { useModalState, useStaticValue } from '../hooks/index.js'
-
-/**
- * A hook to manage state for showing the the step transformation modal
- *
- * @param setStep - A mutator for the selected step
- * @param setStepIndex - A mutator for the selected step indexw
- * @returns An object containing the isOpen state, and show/hide callbacks
- */
-export function useTransformModalState(
-	setStep: (step: Step | undefined) => void,
-	setStepIndex: (index: number | undefined) => void,
-): ModalState {
-	const onDismiss = useCallback(() => {
-		setStep(undefined)
-		setStepIndex(undefined)
-	}, [setStep, setStepIndex])
-	return useModalState(undefined, onDismiss)
-}
 
 export function useEditorTarget(stepIndex: number | undefined): {
 	editorTarget: string

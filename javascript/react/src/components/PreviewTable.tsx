@@ -26,10 +26,12 @@ const statsColumnTypes = [
 export const PreviewTable: React.FC<PreviewTableProps> = memo(
 	function PreviewTable({
 		table,
-		commandBar,
+		outputHeaderCommandBar,
 		name,
 		metadata,
 		onChangeMetadata,
+		showColumnCount,
+		showRowCount,
 	}) {
 		const { tableFeatures } = useToggleTableFeatures()
 
@@ -38,11 +40,11 @@ export const PreviewTable: React.FC<PreviewTableProps> = memo(
 				{table ? (
 					<Container>
 						<ArqueroTableHeader
-							commandBar={commandBar}
-							// name={name}
+							commandBar={outputHeaderCommandBar}
+							name={name}
 							table={table}
-							showColumnCount={false}
-							showRowCount={false}
+							showColumnCount={showColumnCount}
+							showRowCount={showRowCount}
 						/>
 						<ArqueroDetailsList
 							isSortable

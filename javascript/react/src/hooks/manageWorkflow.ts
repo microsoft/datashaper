@@ -10,9 +10,11 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect } from 'react'
 
 import { useCreateTableName } from '../hooks/common.js'
+import type { ModalState } from '../hooks/index.js'
 import {
 	useHandleStepOutputChanged,
 	useHandleStepSave,
+	useModalState,
 } from '../hooks/index.js'
 
 export function useOnDuplicateStep(
@@ -152,4 +154,22 @@ export function useWorkflowListener(
 			workflow.onChange(() => setWorkflow(new Workflow(workflow.toSchema()))),
 		[workflow, setWorkflow],
 	)
+}
+
+/**
+ * A hook to manage state for showing the the step transformation modal
+ *
+ * @param setStep - A mutator for the selected step
+ * @param setStepIndex - A mutator for the selected step indexw
+ * @returns An object containing the isOpen state, and show/hide callbacks
+ */
+export function useTransformModalState(
+	setStep: (step: Step | undefined) => void,
+	setStepIndex: (index: number | undefined) => void,
+): ModalState {
+	const onDismiss = useCallback(() => {
+		setStep(undefined)
+		setStepIndex(undefined)
+	}, [setStep, setStepIndex])
+	return useModalState(undefined, onDismiss)
 }

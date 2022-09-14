@@ -28,7 +28,7 @@ export interface PrepareDataFullProps {
 	workflow: Workflow
 
 	/**
-	 * An optional command bar
+	 * An optional command bar for the table header
 	 */
 	outputHeaderCommandBar?: ReactElement<any, any>
 

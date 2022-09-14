@@ -77,10 +77,11 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 						<SectionTitle>Preview</SectionTitle>
 						<PreviewTable
 							onChangeMetadata={onUpdateMetadata}
-							commandBar={outputHeaderCommandBar}
+							outputHeaderCommandBar={outputHeaderCommandBar}
 							table={selectedTable?.table}
 							metadata={selectedTable?.metadata}
-							name={selectedTableId}
+							showRowCount={false}
+							showColumnCount={false}
 						/>
 					</OutputContainer>
 				</Main>

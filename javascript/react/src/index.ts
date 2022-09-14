@@ -51,6 +51,8 @@ export { StepList } from './components/StepList.js'
 export type { StepListProps } from './components/StepList.types.js'
 export { StepSelector } from './components/StepSelector.js'
 export type { StepSelectorProps } from './components/StepSelector.types.js'
+export { TableCommands } from './components/TableCommands.js'
+export type { TableCommandsProps } from './components/TableCommands.types.js'
 export { TableList } from './components/TableList.js'
 export type { TableListProps } from './components/TableList.types.js'
 export type { TableTransformProps } from './components/TableTransform.types.js'
@@ -73,4 +75,3 @@ export {
 	useWorkflowOutputListener,
 	useWorkflowSteps,
 } from './hooks/index.js'
-export { TableCommands } from './transformation/TableCommands.js'

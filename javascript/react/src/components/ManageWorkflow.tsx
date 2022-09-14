@@ -14,16 +14,13 @@ import {
 	useOnEditStep,
 	useOnSaveStep,
 	useStepOutputs,
+	useTransformModalState,
 	useWorkflow,
 	useWorkflowListener,
 	useWorkflowOutputListener,
 	useWorkflowSteps,
 } from '../hooks/index.js'
-import {
-	useDeleteConfirm,
-	useEditorTarget,
-	useTransformModalState,
-} from './ManageWorkflow.hooks.js'
+import { useDeleteConfirm, useEditorTarget } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
 import { StepHistoryList } from './StepHistoryList.js'
