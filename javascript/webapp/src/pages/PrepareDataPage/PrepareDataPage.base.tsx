@@ -16,9 +16,9 @@ import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdown
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 
-import { useTables } from './PrepareDataPage.hooks.js'
+import { useStepListener, useTables } from './PrepareDataPage.hooks.js'
 import { Container, mgmtStyles, Wrapper } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
@@ -35,19 +35,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const onCreate = useOnCreateStep(onSave, setSelectedTableId)
 	const inputNames = useInputTableNames(workflow)
 
-	useEffect(() => {
-		if (workflow.steps.length > 0) {
-			const { id } = workflow.steps[workflow.steps.length - 1]
-			setSelectedTableId(id)
-		} else {
-			if (workflow.inputNames.size > 0) {
-				const lastInputName = inputNames[workflow.inputNames.size - 1]
-				if (lastInputName) {
-					setSelectedTableId(lastInputName)
-				}
-			}
-		}
-	}, [workflow, inputNames])
+	useStepListener(workflow, setSelectedTableId, inputNames)
 	useWorkflowOutputListener(workflow, setOutput)
 	useWorkflowListener(workflow, setWorkflow)
 
@@ -58,10 +46,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 
 	const onColumnClick = useCallback(
-		(
-			_?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
-			column?: IColumn | undefined,
-		) => {
+		(_?: React.MouseEvent<HTMLElement, MouseEvent>, column?: IColumn) => {
 			setSelectedColumn(column?.name)
 		},
 		[setSelectedColumn],
