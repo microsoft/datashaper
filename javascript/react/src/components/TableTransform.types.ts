@@ -64,6 +64,12 @@ export interface TableTransformProps {
 	hideOutput?: boolean
 
 	/**
+	 * Indicates that the input column should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the transform is expected to use the selected column when the modal is launched directly from a table.
+	 */
+	hideInputColumn?: boolean
+
+	/**
 	 * Table store to verify naming to be created
 	 */
 	workflow: Workflow

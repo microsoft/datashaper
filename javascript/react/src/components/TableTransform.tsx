@@ -43,6 +43,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		onPreview,
 		hideInput,
 		hideOutput,
+		hideInputColumn,
 	}) {
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
@@ -99,6 +100,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 							onChange={setInternal}
 							hideInput={hideInput}
 							hideOutput={hideOutput}
+							hideInputColumn={hideInputColumn}
 						/>
 						<ButtonContainer>
 							{onPreview ? (

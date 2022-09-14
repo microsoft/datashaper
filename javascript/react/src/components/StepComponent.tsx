@@ -49,6 +49,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		onChange,
 		onChangeOutput: changeOutput,
 		hideInput,
+		hideInputColumn,
 		hideOutput,
 	}) {
 		/* Current Table Selection */
@@ -88,7 +89,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 				) : null}
 
 				{/* Input Column */}
-				{isInputColumnStep(s) ? (
+				{!hideInputColumn && isInputColumnStep(s) ? (
 					<TableColumnDropdown
 						required
 						options={columnOptions}

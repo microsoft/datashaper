@@ -44,7 +44,15 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 				{...props}
 			>
 				<Header>
-					<Title>{step ? step.verb.toUpperCase() : 'New step'}</Title>
+					<Title>
+						{step
+							? `${step.verb.toUpperCase()} ${
+									(step.args as any).column
+										? `${(step.args as any).column}`
+										: ''
+							  }`
+							: 'New step'}
+					</Title>
 					{onDismiss && (
 						<IconButton
 							iconProps={icons.cancel}
@@ -59,6 +67,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 							hideInput={props.hideInput}
 							hideOutput={props.hideOutput}
 							hideStepSelector={props.hideInput && props.hideOutput}
+							hideInputColumn={props.hideInput && props.hideOutput}
 							workflow={workflow}
 							onTransformRequested={onTransformRequested}
 							index={index}
