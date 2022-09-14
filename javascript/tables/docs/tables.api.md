@@ -10,7 +10,6 @@ import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-t
 import { DataType } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
 import type { FieldMetadata } from '@datashaper/schema';
-import type { ParseConfig as ParseConfig_2 } from 'papaparse';
 import type { ParserOptions } from '@datashaper/schema';
 import type { TypeHints } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
@@ -101,7 +100,7 @@ export function guessDataType(options?: TypeHints): (value: string) => DataType;
 // Warning: (ae-missing-release-tag) "guessDelimiter" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function guessDelimiter(text: string, config?: ParseConfig_2): string;
+export function guessDelimiter(text: string, config?: ParserOptions): string;
 
 // Warning: (ae-missing-release-tag) "introspect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -36,7 +36,7 @@ export interface ParserOptions {
 	 * String to use for escaping quotes.
 	 * Default: none
 	 */
-	escape?: string
+	escapeChar?: string
 	/**
 	 * Character that begins a comment. All content after this character will be considered a comment and not imported.
 	 * Default: none.
