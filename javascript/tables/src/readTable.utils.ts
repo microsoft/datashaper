@@ -39,7 +39,7 @@ export function getParser(options?: ParserOptions) {
 function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
 	const mappedOptions = mapProps(ParserType.Arquero, options) as CSVParseOptions
 	let table = fromCSV(text, mappedOptions)
-	return options.readRows ? from(table.slice(0, options.readRows)) : table
+	return options.readRows ? table.slice(0, options.readRows) : table
 }
 
 function papaParser(text: string, options: ParserOptions = {}): ColumnTable {
