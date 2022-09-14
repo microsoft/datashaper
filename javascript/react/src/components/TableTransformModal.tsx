@@ -33,7 +33,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		styles,
 		...props
 	}) {
-		const [verb, setVerb] = useState<Maybe<Verb>>()
+		const [verb, setVerb] = useState<Maybe<Verb>>(step?.verb)
 		const [showGuidance, { toggle: toggleGuidance }] = useBoolean(false)
 		const adaptedStyles = useModalStyles(styles, showGuidance)
 

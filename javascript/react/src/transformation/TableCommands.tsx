@@ -5,9 +5,10 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Verb } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Step, Workflow } from '@datashaper/workflow';
+import type { Step, Workflow } from '@datashaper/workflow'
 import { readStep } from '@datashaper/workflow'
 import { ActionButton, Icon } from '@fluentui/react'
+import type { Theme } from '@thematic/core'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
@@ -56,7 +57,7 @@ export const TableCommands: React.FC<{
 							style={{ color: 'inherit' }}
 							iconName={getVerbIcon(verb)}
 						/>
-						<span>{upperFirst(verb)}</span>
+						<VerbName>{upperFirst(verb)}</VerbName>
 					</VerbButton>
 				))}
 			</VerbsContainer>
@@ -74,8 +75,6 @@ export const TableCommands: React.FC<{
 					}}
 					workflow={workflow}
 					onDismiss={dismissModal}
-					// styles={modalStyles}
-					// {...props}
 				/>
 			) : null}
 		</Container>
@@ -89,4 +88,11 @@ const VerbsContainer = styled.div`
 const VerbButton = styled(ActionButton)`
 	color: inherit;
 	display: flex;
+	&:hover {
+		color: ${({ theme }: { theme: Theme }) =>
+			theme.application().border().hex()};
+	}
+`
+const VerbName = styled.span`
+	margin-left: 5px;
 `
