@@ -11,7 +11,6 @@
 		"codebook": "1.0.0",
 		"datapackage": "1.0.0",
 		"datatable": "1.0.0",
-		"resource": "1.0.0",
 		"workflow": "1.5.3"
 	},
 	"sideEffects": false,
@@ -40,9 +39,8 @@
 		"bundle-codebook": "typescript-json-schema tsconfig.json CodebookSchema > ../../schema/codebook.json",
 		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackageSchema > ../../schema/datapackage.json",
 		"bundle-datatable": "typescript-json-schema tsconfig.json DataTableSchema > ../../schema/datatable.json",
-		"bundle-resource": "typescript-json-schema tsconfig.json ResourceSchema > ../../schema/resource.json",
 		"bundle-workflow": "typescript-json-schema tsconfig.json WorkflowSchema > ../../schema/workflow.json",
-		"bundle": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-resource bundle-workflow",
+		"bundle": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-workflow",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
