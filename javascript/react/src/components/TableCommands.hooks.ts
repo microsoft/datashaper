@@ -17,9 +17,9 @@ import { useMemo } from 'react'
 import { createDefaultHeaderCommandBar } from '../component-factories.js'
 import { getVerbIcon } from '../verbIcons.js'
 
-const defaultVerbs = [Verb.Bin, Verb.Binarize, Verb.Filter, Verb.Aggregate]
+const mainColumnVerbs = [Verb.Bin, Verb.Binarize, Verb.Filter, Verb.Aggregate]
 
-const groups = [
+const groupedColumnVerbs = [
 	{
 		label: 'Aggregates',
 		verbs: ['pivot', 'rollup', 'unroll', 'window'],
@@ -34,19 +34,14 @@ const groups = [
 	},
 ]
 
-/**
- * Create a set of menu items using the groups to sort into sections
- * @returns
- */
-
-export function getOverflowVerbItems(
+function getOverflowVerbItems(
 	onCallStep: (
 		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 		item?: IContextualMenuItem,
 	) => void,
 	disabled: boolean,
 ): ICommandBarItemProps[] {
-	return groups.map(group => ({
+	return groupedColumnVerbs.map(group => ({
 		key: `__section-${group.label}__`,
 		itemType: ContextualMenuItemType.Section,
 		disabled,
@@ -67,14 +62,14 @@ export function getOverflowVerbItems(
 	}))
 }
 
-export function getMainVerbItems(
+function getMainVerbItems(
 	onCallStep: (
 		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 		item?: IContextualMenuItem,
 	) => void,
 	disabled: boolean,
 ): ICommandBarItemProps[] {
-	return defaultVerbs.map(verb => {
+	return mainColumnVerbs.map(verb => {
 		return {
 			key: verb,
 			text: upperFirst(verb),
@@ -86,7 +81,7 @@ export function getMainVerbItems(
 	})
 }
 
-export function useTabeCommands(
+export function useTableCommands(
 	onCallStep: (
 		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 		item?: IContextualMenuItem,

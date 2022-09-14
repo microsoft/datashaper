@@ -328,10 +328,14 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps>;
 export interface PrepareDataFullProps {
     derived: TableContainer[];
     inputs: TableContainer[];
+    // (undocumented)
+    onColumnClick?: (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined) => void;
     onSelectedTableIdChanged: (value: string | undefined) => void;
     onUpdateOutput?: (tables: TableContainer[]) => void;
     onUpdateWorkflow?: (workflow: Workflow) => void;
     outputHeaderCommandBar?: ReactElement<any, any>;
+    // (undocumented)
+    selectedColumn?: string;
     selectedTableId: string | undefined;
     stepsPosition?: 'bottom' | 'middle';
     workflow: Workflow;
@@ -440,6 +444,7 @@ export const StepComponent: React.FC<StepComponentProps>;
 // @public (undocumented)
 export interface StepComponentProps {
     hideInput?: boolean;
+    hideInputColumn?: boolean;
     hideOutput?: boolean;
     index: number;
     inputColumnLabel?: string;
@@ -527,6 +532,8 @@ export interface TableCommandsProps {
     // (undocumented)
     onAddStep?: (step: Step, output: string | undefined, index: number | undefined) => void;
     // (undocumented)
+    selectedColumn?: string;
+    // (undocumented)
     workflow: Workflow;
 }
 
@@ -563,6 +570,7 @@ export const TableTransformModal: React.FC<TransformModalProps>;
 export interface TableTransformProps {
     headerText?: string;
     hideInput?: boolean;
+    hideInputColumn?: boolean;
     hideOutput?: boolean;
     // (undocumented)
     hideStepSelector?: boolean;

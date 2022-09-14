@@ -12,7 +12,7 @@ import styled from 'styled-components'
 
 import { TableTransformModal } from '../components/TableTransformModal.js'
 import { useTransformModalState } from '../hooks/manageWorkflow.js'
-import { useTabeCommands } from './TableCommands.hooks.js'
+import { useTableCommands } from './TableCommands.hooks.js'
 import type { TableCommandsProps } from './TableCommands.types.js'
 
 export const TableCommands: React.FC<TableCommandsProps> = memo(
@@ -68,7 +68,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			],
 		)
 
-		const commands = useTabeCommands(onCallStep, !selectedColumn)
+		const commands = useTableCommands(onCallStep, !selectedColumn)
 
 		return (
 			<Container>
