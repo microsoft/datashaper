@@ -55,7 +55,7 @@
 					"description": "Column delimiter.\nDefault: ,",
 					"type": "string"
 				},
-				"escape": {
+				"escapeChar": {
 					"description": "String to use for escaping quotes.\nDefault: none",
 					"type": "string"
 				},

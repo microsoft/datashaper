@@ -4060,8 +4060,9 @@ __metadata:
     "@essex/scripts": ^22.0.7
     "@essex/tsconfig-base": ^1.0.2
     "@essex/vite-config": ^19.0.12
+    "@types/jest": ^29.0.2
     "@types/node": ^18.7.18
-    "@zip.js/zip.js": ^2.6.26
+    "@zip.js/zip.js": 2.3.18
     arquero: ^5.1.0
     jest: ^29.0.3
     jest-environment-jsdom: ^29.0.3
@@ -5642,7 +5643,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.0.0":
+"@remix-run/router@npm:1.0.0, @remix-run/router@npm:^1.0.0":
   version: 1.0.0
   resolution: "@remix-run/router@npm:1.0.0"
   checksum: 2e7543c71432c49bc0e6cab287ce561c56bf33ad91f929cdbf4c9bd08636bc676f2bf6b048a95fc1f5c74c40600ab59ce248d1de34a1acb7c2e43f567b0e96b5
@@ -8903,10 +8904,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zip.js/zip.js@npm:^2.6.26":
-  version: 2.6.26
-  resolution: "@zip.js/zip.js@npm:2.6.26"
-  checksum: 617f28a864a7da513946f43d7593057c5afc1585818e8b54981056120433ab28711b1b0bce695b308d74853d1504fe470a27ffec9c67dbf0b0a1536ce5c893a8
+"@zip.js/zip.js@npm:2.3.18":
+  version: 2.3.18
+  resolution: "@zip.js/zip.js@npm:2.3.18"
+  checksum: 749a557223ccb806c9d504c7c5f8369e809ac4556f09bb3842b791cc358c6eaf4eb7a902f2c89cf6595f448bb15d6b782b84854b45850104aab1fd1050d5e5f4
   languageName: node
   linkType: hard
 
