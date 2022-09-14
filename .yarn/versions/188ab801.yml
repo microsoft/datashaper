@@ -4,6 +4,4 @@ releases:
 
 declined:
   - "@datashaper/tables"
-
-undecided:
   - "@datashaper/workflow"
