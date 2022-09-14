@@ -606,7 +606,7 @@ export type OutputPortBinding = string | NamedOutputPortBinding;
 export interface ParserOptions {
     comment?: string;
     delimiter?: string;
-    escape?: string;
+    escapeChar?: string;
     header?: boolean;
     lineTerminator?: string;
     names?: string[];
