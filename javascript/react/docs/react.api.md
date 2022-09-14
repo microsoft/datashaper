@@ -80,7 +80,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps>;
 // @public (undocumented)
 export interface ArqueroTableHeaderProps {
     // (undocumented)
-    bgColor?: string;
+    background?: string;
     // (undocumented)
     color?: string;
     // (undocumented)
@@ -154,7 +154,7 @@ export const CommandBar: React.FC<CommandBarProps>;
 // @public (undocumented)
 export interface CommandBarProps extends ICommandBarProps {
     // (undocumented)
-    bgColor?: string;
+    background?: string;
     // (undocumented)
     color?: string;
     // (undocumented)
