@@ -17,10 +17,6 @@ export type Profile =
 	 */
 	| 'datatable'
 	/**
-	 * This is the profile for a parent resource that links a table with child sources such as codebooks and workflows
-	 */
-	| 'databundle'
-	/**
 	 * This is the profile name for a Workflow.
 	 */
 	| 'workflow'
