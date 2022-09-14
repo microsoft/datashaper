@@ -9,6 +9,8 @@ import type { ArqueroDetailsListProps } from '../../ArqueroDetailsList.types.js'
 import { Performance } from './Performance.js'
 
 export const PerformanceStory: ComponentStory<typeof ArqueroDetailsList> = (
-	_args: ArqueroDetailsListProps,
+	args: ArqueroDetailsListProps,
 	{ loaded: { stocks } }: any,
-): JSX.Element => <Performance table={stocks} />
+): JSX.Element => <Performance {...args} table={stocks} />
+
+PerformanceStory.storyName = 'Performance Test (slow!)'

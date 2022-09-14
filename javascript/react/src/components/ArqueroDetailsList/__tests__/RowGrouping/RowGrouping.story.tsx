@@ -9,6 +9,6 @@ import type { ArqueroDetailsListProps } from '../../ArqueroDetailsList.types.js'
 import { RowGrouping } from './RowGrouping.js'
 
 export const RowGroupingStory: ComponentStory<typeof ArqueroDetailsList> = (
-	_args: ArqueroDetailsListProps,
+	args: ArqueroDetailsListProps,
 	{ loaded: { stocks } }: any,
-): JSX.Element => <RowGrouping table={stocks} />
+): JSX.Element => <RowGrouping {...args} table={stocks} />

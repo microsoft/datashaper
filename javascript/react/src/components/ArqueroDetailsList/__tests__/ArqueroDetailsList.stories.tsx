@@ -3,23 +3,29 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
+import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
 import { BasicStory } from './Basic.story.js'
 import { ColumnsStory } from './Columns/Columns.story.js'
-import { ParameterizedStory } from './Parameterized.story.js'
+import { FeaturesStory } from './Features.story.js'
 import { PerformanceStory } from './Performance/Performance.story.js'
 import { RowGroupingStory } from './RowGrouping/RowGrouping.story.js'
 
 const meta = {
 	title: 'ArqueroDetailsList',
+	component: ArqueroDetailsList,
+	// default functions to undefined because storybook injects plain objects
+	args: {
+		onCellDropdownSelect: undefined,
+		onChangeMetadata: undefined,
+		onColumnClick: undefined,
+		onRenderGroupHeader: undefined,
+	},
 }
 
 export default meta
 
 export const Basic = BasicStory
+export const Features = FeaturesStory
 export const Columns = ColumnsStory
 export const RowGrouping = RowGroupingStory
-
 export const Performance = PerformanceStory
-Performance.storyName = 'Performance Test (slow!)'
-
-export const Parameterized = ParameterizedStory

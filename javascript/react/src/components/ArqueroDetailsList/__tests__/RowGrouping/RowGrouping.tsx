@@ -2,21 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { ArqueroDetailsListProps } from '@datashaper/react'
 import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
 import { Label } from '@fluentui/react'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo } from 'react'
 
 import { Table } from '../ArqueroDetailsList.styles.js'
 import { useGrouping } from './RowGrouping.hooks.js'
 import { ButtonContainer, GroupByToggle } from './RowGrouping.styles.js'
 
-export interface RowGroupingProps {
-	table: ColumnTable | undefined
-}
-
-export const RowGrouping: React.FC<RowGroupingProps> = memo(
-	function RowGrouping({ table }) {
+export const RowGrouping: React.FC<ArqueroDetailsListProps> = memo(
+	function RowGrouping({ table, ...args }) {
 		const { grouped, metadata, onGroupChange } = useGrouping(table)
 
 		if (!grouped || !metadata) {
@@ -42,14 +38,7 @@ export const RowGrouping: React.FC<RowGroupingProps> = memo(
 				</ButtonContainer>
 
 				<ArqueroTableHeader table={grouped} />
-				<ArqueroDetailsList
-					isSortable
-					compact
-					showColumnBorders
-					isHeadersFixed
-					table={grouped}
-					metadata={metadata}
-				/>
+				<ArqueroDetailsList {...args} table={grouped} metadata={metadata} />
 			</Table>
 		)
 	},
