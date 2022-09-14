@@ -8,17 +8,15 @@ import type { ComponentStory } from '@storybook/react'
 import styled from 'styled-components'
 
 import type { ArqueroTableHeaderProps } from '../../ArqueroTableheader.types.js'
-import { args } from '../ArqueroTableHeader.args.js'
 import {
 	useCheckboxes,
 	useCommandBar,
 	useFarCommandBar,
 } from './CommandBars.hooks.js'
 
-const Template: ComponentStory<typeof ArqueroTableHeaderComponent> = (
-	args: ArqueroTableHeaderProps,
-	{ loaded: { stocks } }: any,
-) => {
+export const CommandBarsStory: ComponentStory<
+	typeof ArqueroTableHeaderComponent
+> = (args: ArqueroTableHeaderProps, { loaded: { stocks } }: any) => {
 	const commandBar = useCommandBar()
 	const farCommandBar = useFarCommandBar()
 	const { near, far, checkboxes } = useCheckboxes()
@@ -44,7 +42,3 @@ const Checkboxes = styled.div`
 	display: flex;
 	gap: 32px;
 `
-
-export const CommandBarsStory = Template.bind({})
-
-CommandBarsStory.args = args

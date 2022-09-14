@@ -6,13 +6,8 @@ import { ArqueroTableHeader as ArqueroTableHeaderComponent } from '@datashaper/r
 import type { ComponentStory } from '@storybook/react'
 
 import type { ArqueroTableHeaderProps } from '../ArqueroTableheader.types.js'
-import { args } from './ArqueroTableHeader.args.js'
 
-const Template: ComponentStory<typeof ArqueroTableHeaderComponent> = (
+export const BasicStory: ComponentStory<typeof ArqueroTableHeaderComponent> = (
 	args: ArqueroTableHeaderProps,
 	{ loaded: { stocks } }: any,
 ) => <ArqueroTableHeaderComponent {...args} table={stocks} />
-
-export const BasicStory = Template.bind({})
-
-BasicStory.args = args

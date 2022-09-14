@@ -3,11 +3,27 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { ArqueroTableHeader } from '../ArqueroTableHeader.js'
 import { BasicStory } from './Basic.story.js'
 import { CommandBarsStory } from './CommandBars/CommandBars.story.js'
 
 const meta = {
 	title: 'ArqueroTableHeader',
+	component: ArqueroTableHeader,
+	args: {
+		showColumnCount: true,
+		showRowCount: true,
+		name: 'stocks.csv',
+		visibleColumns: [
+			'Symbol',
+			'Date',
+			'Close',
+			'Volumne',
+			'Open',
+			'High',
+			'Low',
+		],
+	},
 }
 
 export default meta
