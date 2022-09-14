@@ -1,11 +1,12 @@
 import { initializeIcons } from '@fluentui/font-icons-mdl2'
+import * as React from 'react'
 import { useState, useCallback, useMemo } from 'react'
 import { Toggle } from '@fluentui/react'
 import { ThemeVariant, loadById } from '@thematic/core'
 import { ApplicationStyles } from '@thematic/react'
 import { loadFluentTheme, ThematicFluentProvider } from '@thematic/fluent'
 import { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
-import { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 
 initializeIcons(undefined, { disableWarnings: true })
 /**
@@ -20,7 +21,7 @@ export const ThematicFluentDecorator = (
 	// this helps identify problems with theme application in Fluent, which looks a lot like our default essex theme
 	const thematicTheme = useMemo(
 		() =>
-			loadById('metal', {
+			loadById('autumn', {
 				variant: dark ? ThemeVariant.Dark : ThemeVariant.Light,
 			}),
 		[dark],
@@ -29,22 +30,20 @@ export const ThematicFluentDecorator = (
 		() => loadFluentTheme(thematicTheme),
 		[thematicTheme],
 	)
-	const handleDarkChange = useCallback((e, v) => {
-		setDark(v)
-	}, [])
+	const handleDarkChange = useCallback((e, v) => setDark(v), [])
+
 	return (
 		<ThematicFluentProvider theme={thematicTheme}>
 			<ThemeProvider theme={fluentTheme}>
 				<ApplicationStyles />
 				<Toggle label="Dark mode" checked={dark} onChange={handleDarkChange} />
-				<div
-					style={{
-						borderTop: `1px solid ${thematicTheme.application().faint().hex()}`,
-					}}
-				>
-					{storyFn(undefined, undefined)}
-				</div>
+				<Header>{storyFn()}</Header>
 			</ThemeProvider>
 		</ThematicFluentProvider>
 	)
 }
+
+const Header = styled.div`
+	border-top: 1px solid ${({ theme }) => theme.application().faint().hex()};
+	margin-bottom: 8px;
+`
