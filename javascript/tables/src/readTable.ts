@@ -8,7 +8,6 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { guessDelimiter } from './guessDelimiter.js'
 import { COMMENT_DEFAULT, DELIMITER_DEFAULT } from './typeHints.defaults.js'
 import { getParser, validOptions } from './readTable.utils.js'
-import type { ParseResult } from 'papaparse'
 
 const defaultParserOptions = {
 	delimiter: DELIMITER_DEFAULT,
@@ -18,7 +17,7 @@ const defaultParserOptions = {
 export function readTable(
 	text: string,
 	options: ParserOptions = defaultParserOptions,
-): ColumnTable | ParseResult<any> {
+): ColumnTable {
 	const valid = validOptions(options)
 	if (!valid) {
 		throw new Error('Some options are not valid')

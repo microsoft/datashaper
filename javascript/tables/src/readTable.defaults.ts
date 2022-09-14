@@ -9,7 +9,7 @@ export const arqueroSupportedOptions = new Set([
 	'header',
 	'comment',
 	'skipRows',
-	'nRows',
+	'readRows',
 	'converters',
 ])
 
@@ -26,14 +26,14 @@ export const papaParseSupportedOptions = new Set([
 	'escapeChar',
 	'skipBlankLines',
 	'skipRows',
-	'nRows',
+	'readRows',
 ])
 
 export const papaParsePropsMap = {
 	comment: 'comments',
 	lineTerminator: 'newline',
 	skipBlankLines: 'skipEmptyLines',
-	nRows: 'preview',
+	readRows: 'preview',
 }
 
 export const lineTerminators = new Set(['\r', '\r\n', '\n'])

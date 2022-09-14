@@ -7,32 +7,12 @@
 import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
-import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv';
 import { DataType } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
 import type { FieldMetadata } from '@datashaper/schema';
-import { ParseConfig as ParseConfig_2 } from 'papaparse';
-import { ParseResult } from 'papaparse';
 import type { ParserOptions } from '@datashaper/schema';
 import type { TypeHints } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
-
-// Warning: (ae-missing-release-tag) "allUnique" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function allUnique(values: string[]): boolean;
-
-// Warning: (ae-missing-release-tag) "arqueroPropMap" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const arqueroPropMap: {
-    skipRows: string;
-};
-
-// Warning: (ae-missing-release-tag) "arqueroSupportedOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const arqueroSupportedOptions: Set<string>;
 
 // Warning: (ae-missing-release-tag) "coerce" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -63,11 +43,6 @@ export function columnTypes(table: ColumnTable, columns?: string[]): Record<stri
 //
 // @public (undocumented)
 export function container(id: string, table?: ColumnTable): TableContainer;
-
-// Warning: (ae-missing-release-tag) "determineParserType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function determineParserType(options?: ParserOptions): ParserType;
 
 // Warning: (ae-missing-release-tag) "determineType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -112,13 +87,6 @@ export function generateCodebook(table: ColumnTable): CodebookSchema;
 // @public (undocumented)
 export function getDate(value: string): Date;
 
-// Warning: (ae-forgotten-export) The symbol "papaParser" needs to be exported by the entry point index.d.ts
-// Warning: (ae-forgotten-export) The symbol "arqueroParser" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "getParser" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function getParser(options?: ParserOptions): typeof papaParser | typeof arqueroParser;
-
 // Warning: (ae-missing-release-tag) "getters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -133,16 +101,6 @@ export function guessDataType(options?: TypeHints): (value: string) => DataType;
 //
 // @public (undocumented)
 export function guessDelimiter(text: string, config?: ParserOptions): string;
-
-// Warning: (ae-missing-release-tag) "hasArqueroOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function hasArqueroOptions(options: ParserOptions): boolean;
-
-// Warning: (ae-missing-release-tag) "hasOneChar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function hasOneChar(value: string): boolean;
 
 // Warning: (ae-missing-release-tag) "introspect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -184,51 +142,6 @@ export function isObject(value: string): boolean;
 //
 // @public (undocumented)
 export function isValidNumber(value: string): boolean;
-
-// Warning: (ae-missing-release-tag) "lineTerminatorIsValid" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function lineTerminatorIsValid(value: string): boolean;
-
-// Warning: (ae-missing-release-tag) "lineTerminators" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const lineTerminators: Set<string>;
-
-// Warning: (ae-missing-release-tag) "mapProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function mapProps(type: ParserType, options?: ParserOptions): CSVParseOptions | ParseConfig_2;
-
-// Warning: (ae-missing-release-tag) "mapToArqueroOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function mapToArqueroOptions(options?: ParserOptions): CSVParseOptions;
-
-// Warning: (ae-missing-release-tag) "mapToPapaParseOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function mapToPapaParseOptions(options?: ParserOptions): ParseConfig_2;
-
-// Warning: (ae-missing-release-tag) "nRows" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function nRows(data: any[], nRows: number): any[];
-
-// Warning: (ae-missing-release-tag) "papaParsePropsMap" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const papaParsePropsMap: {
-    comment: string;
-    lineTerminator: string;
-    skipBlankLines: string;
-    nRows: string;
-};
-
-// Warning: (ae-missing-release-tag) "papaParseSupportedOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const papaParseSupportedOptions: Set<string>;
 
 // Warning: (ae-missing-release-tag) "parseArray" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -275,16 +188,6 @@ export function parseNumber(naValues?: string[], decimal?: string, thousands?: s
 // @public (undocumented)
 export function parseObject(options?: TypeHints): (value: string) => object | null;
 
-// Warning: (ae-missing-release-tag) "ParserType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum ParserType {
-    // (undocumented)
-    Arquero = "arquero",
-    // (undocumented)
-    PapaParse = "papaParse"
-}
-
 // Warning: (ae-missing-release-tag) "parseString" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -298,7 +201,7 @@ export function parseUndefined(naValues?: string[]): (value: string) => undefine
 // Warning: (ae-missing-release-tag) "readTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function readTable(text: string, options?: ParserOptions): ColumnTable | ParseResult<any>;
+export function readTable(text: string, options?: ParserOptions): ColumnTable;
 
 // Warning: (ae-missing-release-tag) "rows" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -313,11 +216,6 @@ export interface RowsOptions {
     skipHeader?: boolean;
     stringify?: boolean;
 }
-
-// Warning: (ae-missing-release-tag) "skipRows" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function skipRows(data: any[], skipRows: number): any[];
 
 // Warning: (ae-missing-release-tag) "sliceTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -354,11 +252,6 @@ export interface TableMetadata {
 //
 // @public (undocumented)
 export function typeGuesserFactory(options?: TypeHints): any;
-
-// Warning: (ae-missing-release-tag) "validOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function validOptions(options?: ParserOptions): boolean;
 
 // (No @packageDocumentation comment for this package)
 

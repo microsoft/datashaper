@@ -11,7 +11,12 @@ const text = `first,second,third
 2,200,two
 3,300,three
 #4,400,four
-5,500,five`
+5,500,five
+6,600,six
+7,700,seven
+8,800,eight
+9,900,nine
+10,1000,ten`
 
 const altComment = `first,second,third
 1,100,one
@@ -40,20 +45,20 @@ describe('readTable Tests', () => {
 	describe('Arquero readCSV tests', () => {
 		it('should load a default data without params', () => {
 			const table = readTable(text)
-			expect(table.numRows()).toBe(4)
+			expect(table.numRows()).toBe(9)
 			expect(table.numCols()).toBe(3)
 		})
 
 		it('should load a large dataset', async () => {
 			const table = readTable(largeDataset, {
 				comment: '#',
-				nRows: 466890,
+				readRows: 466890,
 			})
 			expect(table.numRows()).toBe(466890)
 		})
 
-		it('should load a large dataset with nRows prop', () => {
-			const table = readTable(largeDataset, { nRows: 2 })
+		it('should load a large dataset with readRows prop', () => {
+			const table = readTable(largeDataset, { readRows: 2 })
 			expect(table.numRows()).toBe(2)
 		})
 
@@ -84,7 +89,7 @@ describe('readTable Tests', () => {
 				comment: '#',
 			})
 
-			expect(table.data.length).toBe(4)
+			expect(table.numRows()).toBe(9)
 		})
 
 		it('should load a large dataset', async () => {
@@ -92,18 +97,18 @@ describe('readTable Tests', () => {
 				escapeChar: '$',
 				skipBlankLines: true,
 				comment: '#',
-				nRows: 466890,
+				readRows: 466890,
 			})
-			expect(table.data.length).toBe(466890)
+			expect(table.numRows()).toBe(466890)
 		})
 
-		it('should load a large dataset with nRows prop', () => {
-			const table = readTable(largeDataset, {
+		it('should load a large dataset with readRows prop', () => {
+			const table = readTable(text, {
 				skipRows: 2,
 				escapeChar: '$',
-				nRows: 3,
+				readRows: 3,
 			})
-			expect(table.data.length).toBe(1)
+			expect(table.numRows()).toBe(3)
 		})
 
 		it('should load a table with custom delimiter', () => {
@@ -112,17 +117,17 @@ describe('readTable Tests', () => {
 				delimiter: ':',
 				escapeChar: '$',
 			})
-			expect(table.data.length).toBe(5)
+			expect(table.numRows()).toBe(5)
 		})
 
 		it('should load a table with custom delimiter expecting it to guess it', () => {
 			const table = readTable(delimiter, { comment: '$', escapeChar: '$' })
-			expect(table.data.length).toBe(4)
+			expect(table.numRows()).toBe(4)
 		})
 
 		it('should load a table skipping commented line 4 with $ as comment char', () => {
 			const table = readTable(altComment, { comment: '$', escapeChar: '$' })
-			expect(table.data[3].first).toBe('5')
+			expect(table.column('first')?.get(3)).toBe('5')
 		})
 	})
 })

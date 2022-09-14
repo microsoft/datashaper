@@ -610,8 +610,8 @@ export interface ParserOptions {
     header?: boolean;
     lineTerminator?: string;
     names?: string[];
-    nRows?: number;
     quoteChar?: string;
+    readRows?: number;
     skipBlankLines?: boolean;
     skipRows?: number;
 }

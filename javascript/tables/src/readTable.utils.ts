@@ -11,7 +11,7 @@ import {
 	lineTerminators,
 } from './readTable.defaults.js'
 import { fromCSV, from } from 'arquero'
-import { default as papa, ParseResult, type ParseConfig } from 'papaparse'
+import { default as papa, type ParseConfig } from 'papaparse'
 import { uniq } from 'lodash-es'
 import { ParserType } from './readTable.types.js'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -39,21 +39,20 @@ export function getParser(options?: ParserOptions) {
 function arqueroParser(text: string, options?: ParserOptions): ColumnTable {
 	const mappedOptions = mapProps(ParserType.Arquero, options) as CSVParseOptions
 	let table = fromCSV(text, mappedOptions)
-	if (options?.nRows) {
-		const subset = nRows([...table], options.nRows)
-		table = from(subset)
-	}
-	return table
+	return options?.readRows ? from([...table].slice(0, options.readRows)) : table
 }
 
-function papaParser(text: string, options?: ParserOptions): ParseResult<any> {
+function papaParser(text: string, options?: ParserOptions): ColumnTable {
+	if (options?.skipRows && options?.readRows) {
+		options.readRows += options.skipRows
+	}
 	const mappedOptions = mapProps(ParserType.PapaParse, options) as ParseConfig
 	const table = papa.parse(text, mappedOptions)
 	if (options?.skipRows) {
 		const subset = skipRows(table.data, options.skipRows)
 		table.data = subset
 	}
-	return table
+	return from(table.data)
 }
 
 export function hasArqueroOptions(options: ParserOptions): boolean {
@@ -146,8 +145,4 @@ const validators = {
 
 export function skipRows(data: any[], skipRows: number): any[] {
 	return data.slice(skipRows)
-}
-
-export function nRows(data: any[], nRows: number): any[] {
-	return data.slice(0, nRows)
 }

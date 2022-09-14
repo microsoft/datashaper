@@ -56,5 +56,5 @@ export interface ParserOptions {
 	 * Number of rows to read from the data, starting at skip_rows (honors skipBlankLines).
 	 * Default: Infinity
 	 */
-	nRows?: number
+	readRows?: number
 }
