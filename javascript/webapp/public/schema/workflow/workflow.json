@@ -480,11 +480,11 @@
                     "description": "This is only necessary if mergeStrategy.Concat is used.\nIf it is not supplied, the values are just mashed together.",
                     "type": "string"
                 },
-                "preserveSource": {
-                    "type": "boolean"
-                },
                 "prefix": {
                     "type": "string"
+                },
+                "preserveSource": {
+                    "type": "boolean"
                 },
                 "strategy": {
                     "$ref": "#/definitions/MergeStrategy"
@@ -551,6 +551,9 @@
                 "prefixes": {
                     "$ref": "#/definitions/Record<string,string>",
                     "description": "Optional prefixes for the output column names"
+                },
+                "preserveSource": {
+                    "type": "boolean"
                 }
             },
             "type": "object"
@@ -621,7 +624,7 @@
                     "description": "Name of the input column for columnnar operations.",
                     "type": "string"
                 },
-                "map": {
+                "mapping": {
                     "$ref": "#/definitions/Record<any,any>",
                     "description": "Mapping of old value to new for the recoding.\nNote that the key must be coercable to a string for map lookup."
                 },
@@ -638,7 +641,7 @@
         "Record<string,string>": {
             "type": "object"
         },
-        "Resource": {
+        "ResourceSchema": {
             "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
             "properties": {
                 "$schema": {
@@ -687,7 +690,7 @@
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "#/definitions/Resource"
+                                "$ref": "#/definitions/ResourceSchema"
                             },
                             {
                                 "type": "string"
@@ -756,6 +759,9 @@
                     "description": "Indicates that a onehot-style spread should be performed.\nThis maps all unique cell values to new columns and sets the output cell value to a binary 1/0 based on column match.\nThis is in contrast to the default spread, which just maps array values to column by index.",
                     "type": "boolean"
                 },
+                "preserveSource": {
+                    "type": "boolean"
+                },
                 "to": {
                     "items": {
                         "type": "string"
@@ -794,11 +800,11 @@
                     },
                     "type": "array"
                 },
-                "preserveSource": {
-                    "type": "boolean"
-                },
                 "prefix": {
                     "type": "string"
+                },
+                "preserveSource": {
+                    "type": "boolean"
                 },
                 "to": {
                     "description": "Name of the output column to receive the operation's result.",
@@ -944,7 +950,7 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/Resource"
+                        "$ref": "#/definitions/ResourceSchema"
                     },
                     {
                         "type": "string"
