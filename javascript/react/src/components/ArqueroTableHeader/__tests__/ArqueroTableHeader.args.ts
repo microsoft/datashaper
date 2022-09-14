@@ -7,6 +7,4 @@ export const args = {
 	showRowCount: true,
 	name: 'stocks.csv',
 	visibleColumns: ['Symbol', 'Date', 'Close', 'Volumne', 'Open', 'High', 'Low'],
-	// storybook injects defaults wrappers, which messes with our falsy logic
-	onRenameTable: undefined,
 }

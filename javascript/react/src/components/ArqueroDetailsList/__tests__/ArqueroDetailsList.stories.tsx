@@ -13,13 +13,6 @@ import { RowGroupingStory } from './RowGrouping/RowGrouping.story.js'
 const meta = {
 	title: 'ArqueroDetailsList',
 	component: ArqueroDetailsList,
-	// default functions to undefined because storybook injects plain objects
-	args: {
-		onCellDropdownSelect: undefined,
-		onChangeMetadata: undefined,
-		onColumnClick: undefined,
-		onRenderGroupHeader: undefined,
-	},
 }
 
 export default meta
