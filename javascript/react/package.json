@@ -97,8 +97,7 @@
 		"react-dom": "^18.2.0",
 		"resolve-typescript-plugin": "^1.2.0",
 		"styled-components": "^5.3.5",
-		"typescript": "^4.8.3",
-		"yarn": "^1.22.18"
+		"typescript": "^4.8.3"
 	},
 	"peerDependencies": {
 		"@fluentui/react": "^8.24.0",
