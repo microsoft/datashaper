@@ -25,12 +25,8 @@ const groupedColumnVerbs = [
 		verbs: ['pivot', 'rollup', 'unroll', 'window'],
 	},
 	{
-		label: 'Transform column',
-		verbs: ['convert', 'erase', 'fill', 'impute', 'recode'],
-	},
-	{
-		label: 'Combine columns',
-		verbs: ['fold', 'unfold', 'onehot', 'unhot', 'spread'],
+		label: 'Transforms',
+		verbs: ['convert', 'erase', 'fill', 'impute', 'onehot', 'spread', 'recode'],
 	},
 ]
 

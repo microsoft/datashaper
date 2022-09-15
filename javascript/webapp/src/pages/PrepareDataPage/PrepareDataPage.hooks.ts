@@ -52,5 +52,5 @@ export function useStepListener(
 				}
 			}
 		}
-	}, [workflow, inputNames])
+	}, [workflow, inputNames, setSelectedTableId])
 }

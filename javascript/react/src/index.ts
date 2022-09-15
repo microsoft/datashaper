@@ -32,6 +32,8 @@ export type { GroupHeaderProps } from './components/GroupHeader/GroupHeader.type
 export { GroupHeader } from './components/GroupHeader/index.js'
 export { Guidance } from './components/Guidance.js'
 export type { GuidanceProps } from './components/Guidance.types.js'
+export { HistoryButton } from './components/HistoryButton.js'
+export type { HistoryButtonProps } from './components/HistoryButton.types.js'
 export { ManageWorkflow } from './components/ManageWorkflow.js'
 export type { ManageWorkflowProps } from './components/ManageWorkflow.types.js'
 export { PrepareDataFull } from './components/PrepareDataFull.js'

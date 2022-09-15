@@ -42,30 +42,16 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			) => {
 				const verb = item?.key as Verb
 				const target = item?.data?.submenu ? 'groupedMenu' : verb
-				const outputName = workflow.suggestOutputName(verb)
 				const _step = readStep({
 					verb,
-					id: outputName,
-					args: { to: selectedColumn } as any,
+					args: { to: selectedColumn, column: selectedColumn } as any,
 					input: inputTable?.id,
 				})
-				if (Object.keys(_step.args).includes('columns') && selectedColumn) {
-					_step.args.columns = [selectedColumn]
-				} else {
-					_step.args.column = selectedColumn
-				}
 				setStep(_step)
 				setModalTarget(target)
 				showModal()
 			},
-			[
-				showModal,
-				setStep,
-				inputTable,
-				workflow,
-				selectedColumn,
-				setModalTarget,
-			],
+			[showModal, setStep, inputTable, selectedColumn, setModalTarget],
 		)
 
 		const commands = useTableCommands(onCallStep, !selectedColumn)

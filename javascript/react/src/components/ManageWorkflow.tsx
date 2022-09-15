@@ -13,12 +13,7 @@ import {
 	useOnDuplicateStep,
 	useOnEditStep,
 	useOnSaveStep,
-	useStepOutputs,
 	useTransformModalState,
-	useWorkflow,
-	useWorkflowListener,
-	useWorkflowOutputListener,
-	useWorkflowSteps,
 } from '../hooks/index.js'
 import { useDeleteConfirm, useEditorTarget } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
@@ -32,6 +27,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		workflow,
 		inputs,
 		table,
+		outputs,
 		onSelect,
 		onUpdateOutput,
 		onUpdateWorkflow,
@@ -39,8 +35,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		historyView = false,
 		...props
 	}) {
-		const wf = useWorkflow(workflow, inputs)
-
 		// Selected Step/Index State for the component
 		const [step, setStep] = useState<Step | undefined>()
 		const [index, setIndex] = useState<number>()
@@ -52,25 +46,25 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		} = useTransformModalState(setStep, setIndex)
 
 		// Interaction Handlers
-		const onSave = useOnSaveStep(wf)
 		const {
 			onClick: onDelete,
 			onConfirm: onConfirmDelete,
 			toggle: toggleDeleteModal,
 			isOpen: isDeleteModalOpen,
-		} = useDeleteConfirm(useOnDeleteStep(wf))
+		} = useDeleteConfirm(useOnDeleteStep(workflow))
 		const onEdit = useOnEditStep(setStep, setIndex, showModal)
+		const onSave = useOnSaveStep(workflow)
 		const onCreate = useOnCreateStep(onSave, onSelect, dismissModal)
-		const onDuplicate = useOnDuplicateStep(wf, table, onSave)
+		const onDuplicate = useOnDuplicateStep(workflow, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(index)
 
 		const onViewStep = useCallback(
 			(name: string) => {
 				const tableName =
-					wf.outputDefinitions.find(x => x.node === name)?.name ?? ''
+					workflow.outputDefinitions.find(x => x.node === name)?.name ?? ''
 				onSelect && onSelect(tableName)
 			},
-			[onSelect, wf],
+			[onSelect, workflow],
 		)
 
 		const onTransformRequested = useCallback(
@@ -80,22 +74,16 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			[index, onCreate],
 		)
 
-		// parallel array of output names for the steps
-		const outputs = useStepOutputs(wf)
-		const steps = useWorkflowSteps(wf)
-		useWorkflowOutputListener(wf, onUpdateOutput)
-		useWorkflowListener(wf, onUpdateWorkflow)
-
 		return (
 			<Container>
 				{historyView ? (
 					<StepHistoryList
 						onDeleteClicked={onDelete}
 						onSelect={onViewStep}
-						steps={steps}
+						steps={workflow.steps}
 						onStartNewStep={showModal}
 						buttonId={addStepButtonId}
-						workflow={wf}
+						workflow={workflow}
 						nextInputTable={nextInputTable}
 						onCreate={onCreate}
 					/>
@@ -104,7 +92,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 						onDeleteClicked={onDelete}
 						onSelect={onViewStep}
 						onEditClicked={onEdit}
-						steps={steps}
+						steps={workflow.steps}
 						outputs={outputs}
 						onDuplicateClicked={onDuplicate}
 						onStartNewStep={showModal}
@@ -117,9 +105,9 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 						<TableTransformModal
 							target={editorTarget}
 							step={step}
-							index={index ?? wf.steps.length}
+							index={index ?? workflow.steps.length}
 							onTransformRequested={onTransformRequested}
-							workflow={wf}
+							workflow={workflow}
 							onDismiss={dismissModal}
 							styles={modalStyles}
 							{...props}

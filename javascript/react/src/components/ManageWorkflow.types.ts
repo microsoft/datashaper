@@ -12,9 +12,10 @@ export interface ManageWorkflowProps
 	/**
 	 * The workflow specification
 	 */
-	workflow?: Workflow
+	workflow: Workflow
 
 	inputs: TableContainer[]
+	outputs: (string | undefined)[]
 
 	/**
 	 * Table selection handler
