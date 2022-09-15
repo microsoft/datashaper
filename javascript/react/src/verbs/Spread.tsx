@@ -14,6 +14,7 @@ export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
 	function Spread({ step, workflow, input, table, onChange }) {
 		const dataTable = useStepDataTable(step, workflow, input, table)
 		const columns = useTableColumnNames(dataTable)
-		return <SpreadBase step={step} onChange={onChange} columns={columns} />
+		console.log(step)
+		return <SpreadBase step={step} onChange={onChange} />
 	},
 )

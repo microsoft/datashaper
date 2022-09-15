@@ -6,7 +6,7 @@
 			"input": "table5",
 			"args": {
 				"column": "item",
-				"prefixes": { "item": "furniture_" }
+				"prefix": "furniture_"
 			},
 			"id": "expected"
 		}

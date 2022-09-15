@@ -19,11 +19,12 @@ export const convertStep: ColumnTableStep<ConvertArgs> = (
 	input,
 	{ column, type, radix, delimiter, formatPattern },
 ) => {
-	// note that this applies the specified parse to every column equally
-	const dArgs = column.reduce((acc, cur) => {
+	const dArgs = column.split().reduce((acc, cur) => {
 		acc[cur] = parseType(cur, type, radix, delimiter, formatPattern)
 		return acc
 	}, {} as any)
+
+	// note that this applies the specified parse to every column equally
 	return input.derive(dArgs)
 }
 

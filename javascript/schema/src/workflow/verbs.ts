@@ -408,7 +408,7 @@ export interface OnehotArgs extends InputColumnArgs {
 	/**
 	 * Optional prefixes for the output column names
 	 */
-	prefixes?: Record<string, string>
+	prefix?: string
 	preserveSource?: boolean
 }
 

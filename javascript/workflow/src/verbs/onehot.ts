@@ -15,11 +15,9 @@ import { stepVerbFactory } from './util/factories.js'
  */
 export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
-	{ column, prefixes = {}, preserveSource = false },
+	{ column, prefix, preserveSource = false },
 ) => {
-	const args = column.reduce((acc, col) => {
-		const prefix = prefixes[col]
-
+	const args = column.split().reduce((acc, col) => {
 		// note that this ignores potential grouping
 		const distinct = input
 			.rollup({

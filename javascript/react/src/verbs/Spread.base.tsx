@@ -16,7 +16,7 @@ export const SpreadBase: React.FC<
 	StepComponentBaseProps<SpreadArgs> & {
 		columns: string[]
 	}
-> = memo(function SpreadBase({ step, onChange, columns }) {
+> = memo(function SpreadBase({ step, onChange }) {
 	const inputs = useMemo<FormInput<SpreadArgs>[]>(
 		() => [
 			{
@@ -46,7 +46,7 @@ export const SpreadBase: React.FC<
 				advanced: true,
 			},
 		],
-		[step, columns],
+		[step],
 	)
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
