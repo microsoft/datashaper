@@ -2,7 +2,7 @@ releases:
   "@datashaper/react": minor
   "@datashaper/schema": minor
   "@datashaper/tables": minor
+  "@datashaper/workflow": minor
 
 declined:
   - "@datashaper/webapp"
-  - "@datashaper/workflow"
