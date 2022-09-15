@@ -12,7 +12,7 @@ export interface ManageWorkflowProps
 	/**
 	 * The workflow specification
 	 */
-	workflow: Workflow
+	workflow?: Workflow
 
 	inputs: TableContainer[]
 
