@@ -11,10 +11,10 @@ import type { ExprFunctionMap } from './util/types.js'
 
 export const imputeStep: ColumnTableStep<ImputeArgs> = (
 	input,
-	{ value, columns },
+	{ value, column },
 ) => {
-	const dArgs: ExprFunctionMap = columns.reduce((acc, column) => {
-		acc[column] = (_d: any, $: any) => $.value
+	const dArgs: ExprFunctionMap = column.reduce((acc, col) => {
+		acc[col] = (_d: any, $: any) => $.value
 		return acc
 	}, {} as ExprFunctionMap)
 	return input.params({ value }).impute(dArgs)

@@ -19,7 +19,6 @@ export const EraseBase: React.FC<
 > = memo(function EraseBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<EraseArgs>[]>(
 		() => [
-			inputColumnList(step, columns, 'Columns to erase'),
 			{
 				label: 'Value to be erased',
 				type: FormInputType.Text,

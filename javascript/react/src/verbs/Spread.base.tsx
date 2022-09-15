@@ -8,7 +8,6 @@ import { memo, useMemo } from 'react'
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
-import { inputColumnList } from '../verbForm/VerbFormFactories.js'
 
 /**
  * Provides inputs for a Spread step.
@@ -20,7 +19,6 @@ export const SpreadBase: React.FC<
 > = memo(function SpreadBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<SpreadArgs>[]>(
 		() => [
-			inputColumnList(step, columns, 'Columns to spread'),
 			{
 				label: 'Keep source columns',
 				type: FormInputType.Checkbox,

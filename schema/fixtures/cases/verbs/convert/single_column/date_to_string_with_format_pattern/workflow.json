@@ -6,7 +6,7 @@
 			"input": "table21",
 			"id": "expected",
 			"args": {
-				"columns": ["date"],
+				"column": "date",
 				"type": "string",
 				"formatPattern": "%B, %Y"
 			}

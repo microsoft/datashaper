@@ -33,7 +33,6 @@ export const OneHotBase: React.FC<
 
 	const inputs = useMemo<FormInput<OnehotArgs>[]>(() => {
 		return [
-			inputColumnList(step, columns, 'Columns to onehot'),
 			{
 				label: 'Keep source columns',
 				type: FormInputType.Checkbox,

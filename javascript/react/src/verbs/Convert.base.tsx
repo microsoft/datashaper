@@ -12,20 +12,17 @@ import { getEnumDropdownOptions } from '../enums.js'
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
-import { inputColumnList } from '../verbForm/VerbFormFactories.js'
 
 /**
  * Provides inputs for a Convert step.
  */
 export const ConvertBase: React.FC<
 	StepComponentBaseProps<ConvertArgs> & {
-		columns: string[]
 		fields: Field[]
 	}
 > = memo(function ConvertBase({ step, onChange, columns, fields }) {
 	const inputs = useMemo<FormInput<ConvertArgs>[]>(
 		() => [
-			inputColumnList(step, columns, 'Columns to convert'),
 			{
 				label: 'Data type',
 				placeholder: 'Choose type',

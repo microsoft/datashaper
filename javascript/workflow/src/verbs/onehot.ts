@@ -15,21 +15,21 @@ import { stepVerbFactory } from './util/factories.js'
  */
 export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
-	{ columns, prefixes = {}, preserveSource = false },
+	{ column, prefixes = {}, preserveSource = false },
 ) => {
-	const args = columns.reduce((acc, column) => {
-		const prefix = prefixes[column]
+	const args = column.reduce((acc, col) => {
+		const prefix = prefixes[col]
 
 		// note that this ignores potential grouping
 		const distinct = input
 			.rollup({
-				distinct: op.array_agg_distinct(column),
+				distinct: op.array_agg_distinct(col),
 			})
 			.get('distinct', 0) as any[]
 
 		distinct.sort().forEach(cur => {
 			acc[prefix ? `${prefix}${cur}` : `${cur}`] = escape((d: any) =>
-				d[column] === null ? null : d[column] === cur ? 1 : 0,
+				d[col] === null ? null : d[col] === cur ? 1 : 0,
 			) as ExprObject
 		})
 
@@ -38,7 +38,7 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 
 	const onehotted = input.derive(args)
 
-	return preserveSource ? onehotted : onehotted.select(not(columns))
+	return preserveSource ? onehotted : onehotted.select(not(column))
 }
 
 export const onehot = stepVerbFactory(onehotStep)
