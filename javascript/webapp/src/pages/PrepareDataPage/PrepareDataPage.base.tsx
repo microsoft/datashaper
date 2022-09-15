@@ -10,14 +10,14 @@ import {
 	ManageWorkflow,
 	ProjectMgmtCommandBar,
 	TableCommands,
+	useOnCreateStep,
+	useOnDeleteStep,
 	useOnSaveStep,
-	useStepOutputs,
 	useWorkflow,
 	useWorkflowListener,
 	useWorkflowOutputListener,
 } from '@datashaper/react'
-import { DetailText } from '@datashaper/react/src/components/DetailText.js'
-import { useOnCreateStep } from '@datashaper/react/src/hooks/manageWorkflow.js'
+import { TableListBar } from '@datashaper/react/src/components/TableListBar.js'
 import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer, TableMetadata } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
@@ -40,7 +40,6 @@ import {
 	OutputContainer,
 	PageContainer,
 	PrepareDataContainer,
-	TextContainer,
 	Title,
 	WorkflowContainer,
 } from './PrepareDataPage.styles.js'
@@ -74,8 +73,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	const onSave = useOnSaveStep(workflow)
 	const onCreate = useOnCreateStep(onSave, setSelectedTableId)
+	const onDelete = useOnDeleteStep(workflow)
 	const inputNames = useInputTableNames(workflow)
-	const outputNames = useStepOutputs(workflow)
 
 	useStepListener(workflow, setSelectedTableId, inputNames)
 	useWorkflowOutputListener(workflow, setOutputs)
@@ -104,6 +103,13 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				<Container isCollapsed={isCollapsed}>
 					<Main>
 						<ButtonContainer>
+							<TableListBar
+								loading={false}
+								inputs={inputs}
+								derived={outputs}
+								selected={selectedTableId}
+								onSelect={setSelectedTableId}
+							/>
 							<HistoryButton
 								onClick={toggleCollapsed}
 								steps={workflow?.steps?.length}
@@ -114,7 +120,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 							/>
 						</ButtonContainer>
 						<OutputContainer>
-							{selectedTable?.table ? (
+							{selectedTable?.table && (
 								<DetailsListContainer>
 									<ArqueroTableHeader
 										commandBar={
@@ -123,6 +129,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 												workflow={workflow}
 												onAddStep={onCreate}
 												selectedColumn={selectedColumn}
+												onRemoveStep={onDelete}
 											/>
 										}
 										name={selectedTable?.id}
@@ -141,10 +148,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 										table={selectedTable?.table}
 									/>
 								</DetailsListContainer>
-							) : (
-								<TextContainer>
-									<DetailText text="(Open a table to start)" />
-								</TextContainer>
 							)}
 						</OutputContainer>
 					</Main>

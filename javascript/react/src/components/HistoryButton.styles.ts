@@ -12,5 +12,6 @@ export const buttonStyles = {
 		gap: '0.5rem',
 		alignItems: 'center',
 		justifyContent: 'center',
+		width: 'max-content',
 	},
 }

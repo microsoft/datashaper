@@ -11,6 +11,8 @@ const VerbIcon: Partial<Record<Verb, string>> = {
 	[Verb.Binarize]: 'SplitObject',
 	[Verb.Filter]: 'Filter',
 	[Verb.Aggregate]: 'Merge',
+	[Verb.Join]: 'BranchMerge',
+	[Verb.Lookup]: 'BranchPullRequest',
 }
 
 export function getVerbIcon(verb: Verb): string {

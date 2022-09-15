@@ -15,4 +15,11 @@ export interface TableCommandsProps {
 		output: string | undefined,
 		index: number | undefined,
 	) => void
+	onRemoveStep?: (index: number) => void
+}
+
+export interface GroupedVerbs {
+	label: string
+	verbs: string[]
+	alwaysEnabled?: boolean
 }

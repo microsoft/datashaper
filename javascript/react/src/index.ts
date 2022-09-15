@@ -65,6 +65,7 @@ export {
 	useHandleFilesUpload,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
+	useOnCreateStep,
 	useOnDeleteStep,
 	useOnEditStep,
 	useOnSaveStep,

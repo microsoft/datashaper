@@ -9,26 +9,21 @@ import type {
 	ICommandBarProps,
 	IContextualMenuItem,
 } from '@fluentui/react'
-import { ContextualMenuItemType } from '@fluentui/react'
+import { ContextualMenuItemType, VerticalDivider } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
+import uniqueId from 'lodash-es/uniqueId.js'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { useMemo } from 'react'
 
 import { createDefaultHeaderCommandBar } from '../component-factories.js'
 import { getVerbIcon } from '../verbIcons.js'
-
-const mainColumnVerbs = [Verb.Bin, Verb.Binarize, Verb.Filter, Verb.Aggregate]
-
-const groupedColumnVerbs = [
-	{
-		label: 'Aggregates',
-		verbs: ['pivot', 'rollup', 'unroll', 'window'],
-	},
-	{
-		label: 'Transforms',
-		verbs: ['convert', 'erase', 'fill', 'impute', 'onehot', 'spread', 'recode'],
-	},
-]
+import type { GroupedVerbs } from './TableCommands.types.js'
+import {
+	groupedColumnVerbs,
+	groupedTableVerbs,
+	mainColumnVerbs,
+	mainTableVerbs,
+} from './TableCommands.utils.js'
 
 function getOverflowVerbItems(
 	onCallStep: (
@@ -36,11 +31,12 @@ function getOverflowVerbItems(
 		item?: IContextualMenuItem,
 	) => void,
 	disabled: boolean,
+	verbList: GroupedVerbs[],
+	id: string,
 ): ICommandBarItemProps[] {
-	return groupedColumnVerbs.map(group => ({
+	return verbList.map(group => ({
 		key: `__section-${group.label}__`,
 		itemType: ContextualMenuItemType.Section,
-		disabled,
 		sectionProps: {
 			topDivider: true,
 			title: group.label,
@@ -50,8 +46,8 @@ function getOverflowVerbItems(
 					key: found[1],
 					text: found[0],
 					onClick: onCallStep,
-					data: { submenu: true },
-					disabled,
+					data: { id },
+					disabled: group?.alwaysEnabled ? false : disabled,
 				}
 			}),
 		},
@@ -63,18 +59,57 @@ function getMainVerbItems(
 		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 		item?: IContextualMenuItem,
 	) => void,
+	verbList: Verb[],
 	disabled: boolean,
 ): ICommandBarItemProps[] {
-	return mainColumnVerbs.map(verb => {
-		return {
+	const items = [
+		{
+			key: 'divider' + uniqueId(),
+			id: 'divider' + uniqueId(),
+			commandBarButtonAs: VerticalDivider,
+			buttonStyles: { wrapper: { padding: '10px 0px', height: '50%' } },
+			itemType: ContextualMenuItemType.Divider,
+		} as ICommandBarItemProps,
+	]
+	verbList.forEach(verb => {
+		items.push({
 			key: verb,
 			text: upperFirst(verb),
 			id: verb,
 			iconProps: { iconName: getVerbIcon(verb) },
 			onClick: onCallStep,
 			disabled,
-		}
+		} as ICommandBarItemProps)
 	})
+
+	return items
+}
+
+export function useColumnCommands(
+	onCallStep: (
+		ev?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+		item?: IContextualMenuItem,
+	) => void,
+	disabled: boolean,
+): React.ReactElement<ICommandBarProps, any> {
+	const theme = useThematic()
+
+	return useMemo(() => {
+		const id = 'overflowColumn'
+		return createDefaultHeaderCommandBar(
+			{
+				items: getMainVerbItems(onCallStep, mainColumnVerbs, disabled),
+				overflowItems: getOverflowVerbItems(
+					onCallStep,
+					disabled,
+					groupedColumnVerbs,
+					id,
+				),
+				id,
+			},
+			theme,
+		)
+	}, [onCallStep, theme, disabled])
 }
 
 export function useTableCommands(
@@ -87,13 +122,45 @@ export function useTableCommands(
 	const theme = useThematic()
 
 	return useMemo(() => {
+		const id = 'overflowTable'
 		return createDefaultHeaderCommandBar(
 			{
-				items: getMainVerbItems(onCallStep, disabled),
-				overflowItems: getOverflowVerbItems(onCallStep, disabled),
-				id: 'groupedMenu',
+				items: getMainVerbItems(onCallStep, mainTableVerbs, disabled),
+				overflowItems: getOverflowVerbItems(
+					onCallStep,
+					disabled,
+					groupedTableVerbs,
+					id,
+				),
+				id,
 			},
 			theme,
 		)
 	}, [onCallStep, theme, disabled])
+}
+
+export function useUndoCommands(onUndoStep: () => void, disabled: boolean) {
+	const theme = useThematic()
+
+	return useMemo(() => {
+		return createDefaultHeaderCommandBar(
+			{
+				items: [
+					{
+						key: 'undo',
+						iconOnly: true,
+						iconProps: icons.undo,
+						title: 'Undo last step',
+						onClick: onUndoStep,
+						disabled,
+					},
+				],
+			},
+			theme,
+		)
+	}, [theme, onUndoStep])
+}
+
+const icons = {
+	undo: { iconName: 'Undo' },
 }

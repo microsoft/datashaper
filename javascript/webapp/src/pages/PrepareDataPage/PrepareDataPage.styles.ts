@@ -29,6 +29,7 @@ export const Main = styled.div`
 export const ButtonContainer = styled.div`
 	display: flex;
 	justify-content: end;
+	padding: 0px ${GAP}px;
 `
 
 export const DetailsListContainer = styled.div`

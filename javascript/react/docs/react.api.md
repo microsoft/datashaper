@@ -553,6 +553,8 @@ export interface TableCommandsProps {
     // (undocumented)
     onAddStep?: (step: Step, output: string | undefined, index: number | undefined) => void;
     // (undocumented)
+    onRemoveStep?: (index: number) => void;
+    // (undocumented)
     selectedColumn?: string;
     // (undocumented)
     workflow: Workflow;
@@ -713,6 +715,11 @@ export function useHandleStepSave(workflow: Workflow): (step: Step, index: numbe
 //
 // @public
 export function useIncrementingColumnColorScale(meta?: TableMetadata): () => string;
+
+// Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useOnCreateStep(save: (step: Step, output: string | undefined, index: number | undefined) => void, selectOutput: undefined | ((name: string) => void), dismissModal?: () => void): (step: Step, output: string | undefined, index: number | undefined) => void;
 
 // Warning: (ae-missing-release-tag) "useOnDeleteStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
