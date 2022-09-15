@@ -7,10 +7,6 @@ import { IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback } from 'react'
 
-import { useWorkflow } from '../hooks/common.js'
-import { useWorkflowOutputListener } from '../hooks/manageWorkflow.js'
-import { useStepOutputs } from '../hooks/useStepOutputs.js'
-import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
 import { ArqueroDetailsList } from './ArqueroDetailsList/ArqueroDetailsList.js'
 import { ArqueroTableHeader } from './ArqueroTableHeader/ArqueroTableHeader.js'
 import { DetailText } from './DetailText.js'
@@ -38,7 +34,7 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 	function PrepareDataFull({
 		inputs,
 		derived,
-		workflow: wf,
+		workflow,
 		selectedTableId,
 		outputHeaderCommandBar,
 		stepsPosition = 'bottom',
@@ -49,7 +45,6 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 		onUpdateWorkflow,
 	}) {
 		const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
-		const workflow = useWorkflow(wf, inputs)
 
 		const selectedTable =
 			derived.find(t => t.id === selectedTableId) ??
@@ -63,12 +58,6 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 			},
 			[selectedTable],
 		)
-
-		// parallel array of output names for the steps
-		const outputs = useStepOutputs(workflow)
-		const steps = useWorkflowSteps(workflow)
-		useWorkflowOutputListener(workflow, onUpdateOutput)
-		// useWorkflowListener(workflow, onUpdateWorkflow)
 
 		return (
 			<Container isCollapsed={isCollapsed}>
@@ -85,7 +74,7 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 						{isCollapsed ? (
 							<HistoryButton
 								onClick={toggleCollapsed}
-								steps={steps.length || 0}
+								steps={workflow?.steps?.length}
 								showText={true}
 							/>
 						) : null}
@@ -139,7 +128,6 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 							onUpdateOutput={onUpdateOutput}
 							onUpdateWorkflow={onUpdateWorkflow}
 							historyView={true}
-							outputs={outputs}
 						/>
 					</WorkflowContainer>
 				</Aside>
