@@ -27,7 +27,7 @@ The actions/UX for each are:
 - nhefs - click to view materialized source table with codebook applied
   - nhefs.csv - click to view raw CSV content and parsing options
   - codebook.json - click to view codebook editor
-- nhefs-transformed - click to view materialiezd symlink table with workflow editing
+- nhefs-transformed - click to view materialized symlink table with workflow editing
   - nhefs (symlink) - click to view symlinked table bundle
   - workflow.json - click to view worfklow graph editor
 - explore.json - click to view causedis interface

@@ -4,18 +4,20 @@
  */
 import type { IDropdownOption } from '@fluentui/react'
 
-export function getEnumDropdownOptions<E = unknown>(
+export function getEnumDropdownOptions<E = Record<string, string>>(
 	enumeration: E,
 	labels?: Record<string, string>,
 ): IDropdownOption[] {
-	const options = Object.entries(enumeration).map(entry => {
-		const [name, key] = entry
-		const text = (labels && labels[key]) || formatEnumName(name)
-		return {
-			key,
-			text,
-		}
-	})
+	const options = Object.entries(enumeration as Record<string, string>).map(
+		entry => {
+			const [name, key] = entry
+			const text = (labels && labels[key]) || formatEnumName(name)
+			return {
+				key,
+				text,
+			}
+		},
+	)
 	return options
 }
 
