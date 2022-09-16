@@ -8,7 +8,9 @@
 				"to": "newColumn",
 				"column": "count",
 				"strategy": "fixed width",
-				"fixedwidth": 30
+				"fixedwidth": 30,
+				"min": 10,
+				"max": 200
 			},
 			"id": "expected"
 		}

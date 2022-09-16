@@ -38,10 +38,10 @@ def bin(
     to: str,
     column: str,
     strategy: str,
+    min: int,
+    max: int,
     fixedcount: int = None,
     fixedwidth: int = None,
-    min: int = None,
-    max: int = None,
     clamped: bool = False,
     printRange: bool = False,
 ):
@@ -49,8 +49,6 @@ def bin(
     bin_strategy = BinStrategy(strategy)
     min_max = (
         (min, max)
-        if min is not None and max is not None
-        else (np.min(input_table[column]), np.max(input_table[column]))
     )
 
     if bin_strategy == BinStrategy.Auto:
