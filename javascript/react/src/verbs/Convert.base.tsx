@@ -43,10 +43,7 @@ export const ConvertBase: React.FC<
 				label: 'Delimiter',
 				if:
 					step.args.type === ParseType.Array ||
-					isInputColumnArray(
-						fields,
-						step.args.column !== undefined ? step.args.column.split(' ') : [],
-					),
+					isInputColumnArray(fields, step.args.column),
 				type: FormInputType.Text,
 				current: step.args.delimiter ? `${step.args.delimiter}` : '',
 				onChange: (s, opt) => (s.args.delimiter = opt as string),
@@ -73,9 +70,7 @@ export const ConvertBase: React.FC<
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
 
-function isInputColumnArray(fields: Field[], columns: string[]) {
-	return columns.some(column => {
-		const meta = fields.find(field => field.name === column)
-		return meta?.type === DataType.Array
-	})
+function isInputColumnArray(fields: Field[], column: string) {
+	const meta = fields.find(field => field.name === column)
+	return meta?.type === DataType.Array
 }

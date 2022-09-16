@@ -17,7 +17,7 @@ export const SpreadBase: React.FC<StepComponentBaseProps<SpreadArgs>> = memo(
 		const inputs = useMemo<FormInput<SpreadArgs>[]>(
 			() => [
 				{
-					label: 'Keep source columns',
+					label: 'Keep source column',
 					type: FormInputType.Checkbox,
 					current: step.args.preserveSource,
 					onChange: (s, val) => (s.args.preserveSource = val as boolean),

@@ -28,12 +28,11 @@ function applySplit(
 	delimiter?: string,
 ): ColumnTable {
 	if (delimiter) {
-		const args = column.split(' ').reduce((acc, col) => {
-			acc[col] = escape((d: any) => op.split(d[col], delimiter, undefined))
-			return acc
-			// TODO: expression type
-		}, {} as Record<string, any>)
-		return table.derive(args)
+		const dArgs = {
+			[column]: escape((d: any) => op.split(d[column], delimiter, undefined)),
+		}
+
+		return table.derive(dArgs)
 	}
 	return table
 }
@@ -49,18 +48,15 @@ function applyDefaultSpread(table: ColumnTable, column: string, to?: string[]) {
 function applyOnehotSpread(table: ColumnTable, column: string): ColumnTable {
 	// collect all of the unique values for each onehot column
 	const hash = createUniqueColumnValuesHash(table, column)
-	const args = column.split(' ').reduce((acc, col) => {
-		const values = hash[col]!
-		Object.keys(values)
-			.sort()
-			.forEach((value: any) => {
-				// each unique value should result in a new column
-				acc[`${col}_${value}`] = escape((d: any) => {
-					return op.includes(d[col], value, undefined) ? 1 : 0
-				})
+	const values = hash[column]!
+	const args = Object.keys(values)
+		.sort()
+		.reduce((acc, value) => {
+			acc[`${column}_${value}`] = escape((d: any) => {
+				return op.includes(d[column], value, undefined) ? 1 : 0
 			})
-		return acc
-	}, {} as Record<string, any>)
+			return acc
+		}, {} as Record<string, any>)
 
 	return table.derive(args)
 }
@@ -72,10 +68,9 @@ function createUniqueColumnValuesHash(
 ): Record<string, object> {
 	// TODO: there's probably a more efficient method than unrolling everything first
 	const unrolled = table.unroll(column)
-	const args = column.split(' ').reduce((acc, col) => {
-		acc[col] = op.object_agg(col, col)
-		return acc
-	}, {} as Record<string, object>)
+	const args = {
+		[column]: op.object_agg(column, column),
+	}
 	const collapsed = unrolled.rollup(args)
 	return collapsed.object(0) as Record<string, object>
 }
