@@ -6,7 +6,6 @@ import type { SpreadArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types.js'
-import { createRowEntries } from '../verbForm/createRowEntries.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
 
 export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
