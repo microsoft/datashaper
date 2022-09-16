@@ -52,12 +52,13 @@ def __onehot_spread(input_table, columns, to, delimiter):
 
 def spread(
     input: VerbInput,
-    columns: List[str],
+    column: str,
     to: List[str] = None,
     delimiter: str = ",",
     onehot: bool = False,
     preserveSource: bool = False,
 ):
+    columns = column.split()
     input_table = input.get_input()
     if to is None:
         to = columns

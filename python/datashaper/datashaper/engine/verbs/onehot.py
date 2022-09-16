@@ -12,30 +12,20 @@ from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.table_store import TableContainer
 
 
-def __has_prefix(column: str, prefixes: Dict[str, str]):
-    if column in prefixes:
-        return prefixes[column] is not None and len(prefixes[column].strip()) > 0
-    else:
-        return False
-
-
-def __get_prefix(column: str, prefixes: Dict[str, str]):
-    return prefixes[column] if __has_prefix(column, prefixes) else ""
-
-
 def onehot(
     input: VerbInput,
-    columns: List[str],
-    prefixes: Dict[str, str] = {},
+    column: str,
+    prefix: str = "",
     preserveSource=False,
 ):
+    columns = column.split()
     input_table = input.get_input()
     input_table[columns] = input_table[columns].astype("category")
-    prefixesList = [__get_prefix(column, prefixes) for column in columns]
+    prefixesList = [prefix]
 
     dummies = pd.get_dummies(input_table[columns], prefix=prefixesList, prefix_sep="")
     for column in columns:
-        cols = dummies.columns.str.startswith(__get_prefix(column, prefixes))
+        cols = dummies.columns.str.startswith(prefix)
         dummies.loc[input_table[column].isnull(), cols] = np.nan
 
     output = pd.concat([input_table, dummies], axis=1)
