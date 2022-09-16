@@ -53,9 +53,9 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 				throw new Error('Must supply a bin count')
 			}
 			return (
-				(args.max ??
-					Number.POSITIVE_INFINITY - args.min ??
-					Number.NEGATIVE_INFINITY) / fixedcount
+				((args.max ?? Number.POSITIVE_INFINITY) -
+					(args.min ?? Number.NEGATIVE_INFINITY)) /
+				fixedcount
 			)
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
