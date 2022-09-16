@@ -14,10 +14,7 @@ import {
 import type { RowObject } from 'arquero/dist/types/table/table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
-import type {
-	ArqueroDetailsListProps,
-	DetailsListFeatures,
-} from './ArqueroDetailsList.types.js'
+import type { ArqueroDetailsListProps } from './ArqueroDetailsList.types.js'
 import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
 import {
 	useColumns,
@@ -30,7 +27,6 @@ import {
 	useSortHandling,
 	useStripedRowsRenderer,
 	useSubsetTable,
-	useTableMetadata,
 } from './hooks/index.js'
 
 /**
@@ -51,7 +47,6 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		onColumnClick,
 		onCellDropdownSelect,
 		onRenderGroupHeader,
-		onChangeMetadata,
 		// extract props we want to set data-centric defaults for
 		selectionMode = SelectionMode.none,
 		layoutMode = DetailsListLayoutMode.fixedColumns,
@@ -102,13 +97,6 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			groupedEntries,
 		)
 
-		const computedMetadata = useTableMetadata(
-			table,
-			metadata,
-			anyStatsFeatures(features),
-			onChangeMetadata,
-		)
-
 		const isDefaultHeaderClickable = useMemo((): any => {
 			return isSortable || isColumnClickable || !!onColumnHeaderClick
 		}, [isSortable, isColumnClickable, onColumnHeaderClick])
@@ -125,7 +113,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const displayColumns = useColumns(
 			table,
-			computedMetadata,
+			metadata,
 			columns,
 			handleColumnHeaderClick,
 			{
@@ -155,7 +143,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 		const renderGroupHeader = useGroupHeaderRenderer(
 			table,
-			computedMetadata,
+			metadata,
 			onRenderGroupHeader,
 			features.lazyLoadGroups,
 		)
@@ -243,7 +231,3 @@ const DetailsWrapper = styled.div`
 		justify-content: center;
 	}
 `
-
-function anyStatsFeatures(features?: DetailsListFeatures) {
-	return Object.values(features || {}).some(v => v === true)
-}

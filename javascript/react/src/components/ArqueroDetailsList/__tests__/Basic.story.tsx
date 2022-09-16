@@ -8,6 +8,6 @@ import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
 import type { ArqueroDetailsListProps } from '../ArqueroDetailsList.types.js'
 
 export const BasicStory: ComponentStory<typeof ArqueroDetailsList> = (
-	_args: ArqueroDetailsListProps,
+	args: ArqueroDetailsListProps,
 	{ loaded: { stocks } }: any,
-): JSX.Element => <ArqueroDetailsList table={stocks} />
+): JSX.Element => <ArqueroDetailsList {...args} table={stocks} />

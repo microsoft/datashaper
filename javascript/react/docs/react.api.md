@@ -63,7 +63,6 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     // (undocumented)
     offset?: number;
     onCellDropdownSelect?: DropdownOptionSelect;
-    onChangeMetadata?: SaveMetadataFunction;
     onColumnClick?: ColumnClickFunction;
     onRenderGroupHeader?: GroupHeaderFunction;
     selectedColumn?: string;
@@ -776,11 +775,6 @@ export function useStripedRowsRenderer(striped?: boolean, columnBorders?: boolea
 //
 // @public (undocumented)
 export function useSubsetTable(table: ColumnTable, columns?: IColumn[]): ColumnTable;
-
-// Warning: (ae-missing-release-tag) "useTableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useTableMetadata(table: ColumnTable, existing?: TableMetadata, discover?: boolean, saveMetadata?: SaveMetadataFunction): TableMetadata | undefined;
 
 // Warning: (ae-missing-release-tag) "useWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

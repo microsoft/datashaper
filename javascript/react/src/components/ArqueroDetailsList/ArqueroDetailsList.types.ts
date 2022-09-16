@@ -165,18 +165,13 @@ export interface ArqueroDetailsListProps
 	 */
 	onColumnClick?: ColumnClickFunction
 	/**
-	 * Passthrough to the column click handler.
-	 * Will be applied to the column header only unless isColumnClickable === true.
+	 * If array cells are displayed with a dropdown, this will fire when a value is selected.
 	 */
 	onCellDropdownSelect?: DropdownOptionSelect
 	/**
 	 * Passthrough to the group header rendering, when using the group by verb
 	 */
 	onRenderGroupHeader?: GroupHeaderFunction
-	/**
-	 * Passthrough to the useTableMetadata hook, to update and store the metadata computed
-	 */
-	onChangeMetadata?: SaveMetadataFunction
 	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */

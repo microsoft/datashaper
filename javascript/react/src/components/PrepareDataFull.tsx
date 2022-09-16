@@ -2,10 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableMetadata } from '@datashaper/tables'
 import { IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
 
 import { ArqueroDetailsList } from './ArqueroDetailsList/ArqueroDetailsList.js'
 import { ArqueroTableHeader } from './ArqueroTableHeader/ArqueroTableHeader.js'
@@ -50,15 +49,6 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 			derived.find(t => t.id === selectedTableId) ??
 			inputs.find(t => t.id === selectedTableId)
 
-		const onUpdateMetadata = useCallback(
-			(meta: TableMetadata) => {
-				if (selectedTable) {
-					selectedTable.metadata = meta
-				}
-			},
-			[selectedTable],
-		)
-
 		return (
 			<Container isCollapsed={isCollapsed}>
 				<Main>
@@ -96,7 +86,6 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 									isColumnClickable={!!onColumnClick}
 									selectedColumn={selectedColumn}
 									onColumnClick={onColumnClick}
-									onChangeMetadata={onUpdateMetadata}
 									metadata={selectedTable?.metadata}
 									table={selectedTable?.table}
 								/>
