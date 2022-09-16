@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/verb-guidance",
-	"version": "0.1.15",
+	"version": "0.1.17",
 	"type": "module",
 	"main": "dist/index.js",
 	"author": "Nathan Evans <naevans@microsoft.com>",
