@@ -17,6 +17,7 @@ export const InputTables: React.FC<InputTablesProps> = memo(
 						key={`table-${container.id}`}
 						name={container.id}
 						table={container.table!}
+						metadata={container.metadata}
 						config={config}
 						features={features}
 						compact={compact}

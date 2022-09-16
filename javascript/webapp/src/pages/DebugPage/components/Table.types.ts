@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { DetailsListFeatures } from '@datashaper/react'
+import type { TableMetadata } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export interface ColumnConfig {
@@ -15,6 +16,7 @@ export type ColumnConfigMap = Record<string, ColumnConfig>
 export interface TableProps {
 	name?: string
 	table: ColumnTable
+	metadata?: TableMetadata
 	config?: ColumnConfigMap
 	features?: DetailsListFeatures
 	compact?: boolean

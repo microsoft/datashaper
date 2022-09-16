@@ -13,6 +13,7 @@ import type { TableProps } from './Table.types.js'
 export const Table: React.FC<TableProps> = memo(function Table({
 	name,
 	table,
+	metadata,
 	config,
 	features = {},
 	compact,
@@ -54,6 +55,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 			<TableContainer>
 				<ArqueroDetailsList
 					table={table}
+					metadata={metadata}
 					columns={columns}
 					features={features}
 					compact={compact}

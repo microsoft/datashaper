@@ -5,7 +5,7 @@
 import { useHandleStepSave } from '@datashaper/react'
 import type { Verb } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { container } from '@datashaper/tables'
+import { container, introspect } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 import { loadCSV } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -59,7 +59,8 @@ export function useInputTables(autoType = false): TableContainer[] {
 				'data/stocks.csv',
 			].map(async name => {
 				const data = await readCsvFile(name, autoType)
-				return container(name, data)
+				const meta = introspect(data, true)
+				return container(name, data, meta)
 			})
 			const loadedTables = await Promise.all(promises)
 			setTables(loadedTables)
