@@ -16,7 +16,7 @@ export const ImputeDescription: React.FC<StepDescriptionProps<ImputeArgs>> =
 				step: { args },
 			} = props
 			const sub = createRowEntries(
-				args.columns,
+				args.column.split(' '),
 				c => ({
 					value: c,
 				}),
@@ -25,8 +25,8 @@ export const ImputeDescription: React.FC<StepDescriptionProps<ImputeArgs>> =
 			)
 			return [
 				{
-					before: `impute column${args.columns?.length !== 1 ? 's' : ''}`,
-					value: args.columns.length === 0 ? undefined : '',
+					before: `impute column`,
+					value: args.column === undefined ? undefined : '',
 					sub,
 				},
 				{

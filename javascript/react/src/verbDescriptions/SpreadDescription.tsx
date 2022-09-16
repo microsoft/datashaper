@@ -14,15 +14,20 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 		const {
 			step: { args },
 		} = props
-		const sub = createRowEntries(args.columns, value => ({ value }), 3, props)
+		const sub = createRowEntries(
+			args.column.split(' '),
+			value => ({ value }),
+			3,
+			props,
+		)
 		const rows = useMemo(() => {
 			const {
 				step: { args },
 			} = props
 			return [
 				{
-					before: `column${args.columns?.length !== 1 ? 's' : ''}`,
-					value: args.columns.length === 0 ? undefined : '',
+					before: `column`,
+					value: args.column === undefined ? undefined : '',
 					sub,
 				},
 				{

@@ -17,7 +17,7 @@ export const ConvertDescription: React.FC<StepDescriptionProps<ConvertArgs>> =
 				step: { args },
 			} = props
 			const sub = createRowEntries(
-				args.columns,
+				args.column.split(' '),
 				c => ({
 					value: c,
 				}),
@@ -26,8 +26,8 @@ export const ConvertDescription: React.FC<StepDescriptionProps<ConvertArgs>> =
 			)
 			return [
 				{
-					before: `convert column${args.columns?.length !== 1 ? 's' : ''}`,
-					value: args.columns.length === 0 ? undefined : '',
+					before: `convert column`,
+					value: args.column === undefined ? undefined : '',
 					sub,
 				},
 				{

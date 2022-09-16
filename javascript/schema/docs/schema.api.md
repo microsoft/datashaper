@@ -135,7 +135,7 @@ export interface Constraints {
 // Warning: (ae-missing-release-tag) "ConvertArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ConvertArgs extends InputColumnListArgs {
+export interface ConvertArgs extends InputColumnArgs {
     // (undocumented)
     delimiter?: string;
     // (undocumented)
@@ -282,7 +282,7 @@ export interface DualInput extends BasicInput {
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface EraseArgs extends InputColumnListArgs {
+export interface EraseArgs extends InputColumnArgs {
     // (undocumented)
     value: Value;
 }
@@ -415,7 +415,7 @@ export type GroupbyArgs = InputColumnListArgs;
 // Warning: (ae-missing-release-tag) "ImputeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ImputeArgs extends InputColumnListArgs {
+export interface ImputeArgs extends InputColumnArgs {
     value: Value;
 }
 
@@ -565,8 +565,8 @@ export enum NumericComparisonOperator {
 // Warning: (ae-missing-release-tag) "OnehotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface OnehotArgs extends InputColumnListArgs {
-    prefixes?: Record<string, string>;
+export interface OnehotArgs extends InputColumnArgs {
+    prefix?: string;
     // (undocumented)
     preserveSource?: boolean;
 }
@@ -723,7 +723,7 @@ export enum SortDirection {
 // Warning: (ae-missing-release-tag) "SpreadArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface SpreadArgs extends InputColumnListArgs {
+export interface SpreadArgs extends InputColumnArgs {
     delimiter?: string;
     onehot?: boolean;
     // (undocumented)

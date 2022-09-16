@@ -16,7 +16,7 @@ export const EraseDescription: React.FC<StepDescriptionProps<EraseArgs>> = memo(
 				step: { args },
 			} = props
 			const sub = createRowEntries(
-				args.columns,
+				args.column.split(' '),
 				c => ({
 					value: c,
 				}),
@@ -25,8 +25,8 @@ export const EraseDescription: React.FC<StepDescriptionProps<EraseArgs>> = memo(
 			)
 			return [
 				{
-					before: `erase column${args.columns?.length !== 1 ? 's' : ''}`,
-					value: args.columns.length === 0 ? undefined : '',
+					before: `erase column`,
+					value: args.column === undefined ? undefined : '',
 					sub,
 				},
 				{
