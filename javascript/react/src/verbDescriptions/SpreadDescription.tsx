@@ -10,9 +10,6 @@ import { VerbDescription } from '../verbForm/VerbDescription.js'
 
 export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 	memo(function SpreadDescription(props) {
-		const {
-			step: { args },
-		} = props
 		const rows = useMemo(() => {
 			const {
 				step: { args },
