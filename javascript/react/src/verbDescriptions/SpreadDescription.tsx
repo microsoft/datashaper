@@ -14,12 +14,6 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 		const {
 			step: { args },
 		} = props
-		const sub = createRowEntries(
-			args.column !== undefined ? args.column.split(' ') : [],
-			value => ({ value }),
-			3,
-			props,
-		)
 		const rows = useMemo(() => {
 			const {
 				step: { args },
@@ -27,8 +21,7 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 			return [
 				{
 					before: `column`,
-					value: args.column === undefined ? undefined : '',
-					sub,
+					value: args.column !== undefined ? args.column : undefined,
 				},
 				{
 					before: 'split delimiter',
@@ -39,6 +32,6 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 					value: args.onehot ? `yes` : 'no',
 				},
 			]
-		}, [props, sub])
+		}, [props])
 		return <VerbDescription {...props} rows={rows} />
 	})
