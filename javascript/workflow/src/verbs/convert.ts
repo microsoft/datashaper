@@ -19,7 +19,7 @@ export const convertStep: ColumnTableStep<ConvertArgs> = (
 	input,
 	{ column, type, radix, delimiter, formatPattern },
 ) => {
-	const dArgs = column.split().reduce((acc, cur) => {
+	const dArgs = column.split(' ').reduce((acc, cur) => {
 		acc[cur] = parseType(cur, type, radix, delimiter, formatPattern)
 		return acc
 	}, {} as any)

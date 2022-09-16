@@ -13,7 +13,7 @@ export const imputeStep: ColumnTableStep<ImputeArgs> = (
 	input,
 	{ value, column },
 ) => {
-	const dArgs: ExprFunctionMap = column.split().reduce((acc, col) => {
+	const dArgs: ExprFunctionMap = column.split(' ').reduce((acc, col) => {
 		acc[col] = (_d: any, $: any) => $.value
 		return acc
 	}, {} as ExprFunctionMap)

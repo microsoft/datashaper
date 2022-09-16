@@ -17,7 +17,7 @@ export const onehotStep: ColumnTableStep<OnehotArgs> = (
 	input,
 	{ column, prefix, preserveSource = false },
 ) => {
-	const args = column.split().reduce((acc, col) => {
+	const args = column.split(' ').reduce((acc, col) => {
 		// note that this ignores potential grouping
 		const distinct = input
 			.rollup({

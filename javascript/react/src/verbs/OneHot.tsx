@@ -5,7 +5,6 @@
 import type { OnehotArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useStepDataTable, useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { OneHotBase } from './OneHot.base.js'
 

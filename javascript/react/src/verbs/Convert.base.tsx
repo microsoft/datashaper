@@ -20,7 +20,7 @@ export const ConvertBase: React.FC<
 	StepComponentBaseProps<ConvertArgs> & {
 		fields: Field[]
 	}
-> = memo(function ConvertBase({ step, onChange, columns, fields }) {
+> = memo(function ConvertBase({ step, onChange, fields }) {
 	const inputs = useMemo<FormInput<ConvertArgs>[]>(
 		() => [
 			{
@@ -43,7 +43,7 @@ export const ConvertBase: React.FC<
 				label: 'Delimiter',
 				if:
 					step.args.type === ParseType.Array ||
-					isInputColumnArray(fields, step.args.columns),
+					isInputColumnArray(fields, step.args.column.split(' ')),
 				type: FormInputType.Text,
 				current: step.args.delimiter ? `${step.args.delimiter}` : '',
 				onChange: (s, opt) => (s.args.delimiter = opt as string),
@@ -64,7 +64,7 @@ export const ConvertBase: React.FC<
 					(s.args.formatPattern = value ? value : '%Y-%m-%d'),
 			},
 		],
-		[step, columns, fields],
+		[step, fields],
 	)
 
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
