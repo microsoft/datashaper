@@ -16,7 +16,7 @@ export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 				step: { args },
 			} = props
 			const sub = createRowEntries(
-				args.column.split(' '),
+				args.column !== undefined ? args.column.split(' ') : [],
 				c => ({
 					value: c,
 				}),
@@ -24,7 +24,7 @@ export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 				props,
 			)
 			const prefixSub = createRowEntries(
-				args.prefix !== undefined ? args.prefix.split(' ') : [''],
+				args.prefix !== undefined ? args.prefix.split(' ') : [],
 				c => ({
 					value: c,
 				}),

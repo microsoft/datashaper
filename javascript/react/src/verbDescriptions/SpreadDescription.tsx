@@ -15,7 +15,7 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 			step: { args },
 		} = props
 		const sub = createRowEntries(
-			args.column.split(' '),
+			args.column !== undefined ? args.column.split(' ') : [],
 			value => ({ value }),
 			3,
 			props,

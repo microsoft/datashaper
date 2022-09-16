@@ -43,7 +43,10 @@ export const ConvertBase: React.FC<
 				label: 'Delimiter',
 				if:
 					step.args.type === ParseType.Array ||
-					isInputColumnArray(fields, step.args.column.split(' ')),
+					isInputColumnArray(
+						fields,
+						step.args.column !== undefined ? step.args.column.split(' ') : [],
+					),
 				type: FormInputType.Text,
 				current: step.args.delimiter ? `${step.args.delimiter}` : '',
 				onChange: (s, opt) => (s.args.delimiter = opt as string),
