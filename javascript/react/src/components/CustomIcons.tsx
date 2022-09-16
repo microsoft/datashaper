@@ -27,8 +27,8 @@ registerIcons({
 })
 
 const defaultIconClass = mergeStyles({
-	height: 25,
-	width: 25,
+	height: '20px',
+	width: '20px',
 })
 
 export const HistoryIcon = (props: CustomIconProps): JSX.Element => {

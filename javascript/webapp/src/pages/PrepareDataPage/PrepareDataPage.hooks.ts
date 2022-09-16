@@ -4,7 +4,8 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import { renameDuplicatedFileName } from '@datashaper/utilities'
-import { useCallback, useState } from 'react'
+import type { Workflow } from '@datashaper/workflow'
+import { useCallback, useEffect, useState } from 'react'
 
 export function useTables(setSelectedTableId: (id: string) => void): {
 	tables: TableContainer[]
@@ -32,4 +33,24 @@ export function useTables(setSelectedTableId: (id: string) => void): {
 		tables,
 		onAddTables,
 	}
+}
+
+export function useStepListener(
+	workflow: Workflow,
+	setSelectedTableId: (tableId: string) => void,
+	inputNames: string[],
+): void {
+	useEffect(() => {
+		if (workflow.steps.length > 0) {
+			const { id } = workflow.steps[workflow.steps.length - 1]
+			setSelectedTableId(id)
+		} else {
+			if (workflow.inputNames.size > 0) {
+				const lastInputName = inputNames[workflow.inputNames.size - 1]
+				if (lastInputName) {
+					setSelectedTableId(lastInputName)
+				}
+			}
+		}
+	}, [workflow, inputNames, setSelectedTableId])
 }

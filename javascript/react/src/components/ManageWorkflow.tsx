@@ -8,22 +8,19 @@ import { DialogConfirm } from '@essex/themed-components'
 import { memo, useCallback, useState } from 'react'
 
 import {
-	useStepOutputs,
-	useWorkflow,
-	useWorkflowSteps,
-} from '../hooks/index.js'
-import {
-	useDeleteConfirm,
-	useEditorTarget,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnDuplicateStep,
 	useOnEditStep,
 	useOnSaveStep,
+	useStepOutputs,
 	useTransformModalState,
+	useWorkflow,
 	useWorkflowListener,
 	useWorkflowOutputListener,
-} from './ManageWorkflow.hooks.js'
+	useWorkflowSteps,
+} from '../hooks/index.js'
+import { useDeleteConfirm, useEditorTarget } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
 import { StepHistoryList } from './StepHistoryList.js'
@@ -55,7 +52,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		} = useTransformModalState(setStep, setIndex)
 
 		// Interaction Handlers
-		const onSave = useOnSaveStep(wf)
 		const {
 			onClick: onDelete,
 			onConfirm: onConfirmDelete,
@@ -63,6 +59,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			isOpen: isDeleteModalOpen,
 		} = useDeleteConfirm(useOnDeleteStep(wf))
 		const onEdit = useOnEditStep(setStep, setIndex, showModal)
+		const onSave = useOnSaveStep(wf)
 		const onCreate = useOnCreateStep(onSave, onSelect, dismissModal)
 		const onDuplicate = useOnDuplicateStep(wf, table, onSave)
 		const { addStepButtonId, editorTarget } = useEditorTarget(index)
@@ -83,7 +80,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 			[index, onCreate],
 		)
 
-		// parallel array of output names for the steps
 		const outputs = useStepOutputs(wf)
 		const steps = useWorkflowSteps(wf)
 		useWorkflowOutputListener(wf, onUpdateOutput)

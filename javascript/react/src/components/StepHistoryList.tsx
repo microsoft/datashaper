@@ -82,7 +82,6 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 										step={step}
 										index={index}
 										workflow={workflow}
-										isEditing={true}
 										style={tableTransformStyle}
 										nextInputTable={nextInputTable}
 										onDelete={onDeleteClicked}
@@ -91,6 +90,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 										onTransformRequested={(s, o) =>
 											onTransformRequested(s, o, index)
 										}
+										hideStepSelector
 									/>
 								</ListWrapper>
 							</CollapsiblePanel>

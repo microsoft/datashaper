@@ -6,8 +6,6 @@ import styled from '@essex/styled-components'
 
 const GAP = 18
 const INPUT_HEIGHT = 60
-const STEPS_HEIGHT = 280
-const COLLAPSED_STEPS_HEIGHT = 50
 
 export const icons = {
 	cancel: { iconName: 'Cancel' },
@@ -97,30 +95,27 @@ export const OutputContainer = styled.div<{
 	flex: 1 1 auto;
 	display: flex;
 	padding-right: ${GAP}px;
-	max-height: calc(100% - ${INPUT_HEIGHT + STEPS_HEIGHT + GAP * 4}px);
+	max-height: calc(100% - ${INPUT_HEIGHT + GAP * 4}px);
 	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 2 : 3)};
 `
 
-export const StepsTrayContainer = styled.div<{
-	stepsPosition: string
-	isCollapsed: boolean
-}>`
-	display: flex;
-	min-height: ${({ isCollapsed }) =>
-		isCollapsed ? 'unset' : STEPS_HEIGHT + 'px'};
-	background-color: ${({ theme }) => theme.application().faint().hex()};
-	padding: 0;
-	order: ${({ stepsPosition }) => (stepsPosition === 'bottom' ? 3 : 2)};
-	height: ${({ isCollapsed }) =>
-		isCollapsed ? COLLAPSED_STEPS_HEIGHT + 'px' : 'auto'};
-	overflow: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'auto hidden')};
-	> div {
-		display: ${({ isCollapsed }) => (isCollapsed ? 'none' : 'grid')};
-	}
-`
 export const WorkflowContainer = styled.div<{ isCollapsed: boolean }>`
 	height: calc(100% - 75px);
 	width: 100%;
 	position: relative;
 	visibility: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'visible')};
+`
+
+export const TableContainer = styled.div`
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
+`
+
+export const TextContainer = styled.div`
+	display: flex;
+	height: 100%;
+	align-items: center;
 `

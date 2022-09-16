@@ -5,19 +5,13 @@
 
 export const buttonStyles = {
 	root: {
-		border: 'none',
 		fontSize: '1rem',
-		padding: 0,
-		backgroundColor: 'transparent',
-		alignSelf: 'start',
-		width: '10rem',
-		minWidth: 'unset',
-		display: 'flex',
+		paddingRight: '18px',
 	},
 	flexContainer: {
 		gap: '0.5rem',
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
+		width: 'max-content',
 	},
 }

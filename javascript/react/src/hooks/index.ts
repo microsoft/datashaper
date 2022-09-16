@@ -5,6 +5,7 @@
 export * from './common.js'
 export * from './downloads.js'
 export * from './fluent.js'
+export * from './manageWorkflow.js'
 export * from './uploads.js'
 export * from './useColumnRecordDelete.js'
 export * from './useColumnsMetadata.js'
