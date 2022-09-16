@@ -37,10 +37,13 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		toggleGuidance,
 		onVerbChange,
 		style = {},
-		isEditing,
+		hideStepSelector,
 		onDelete,
 		onDuplicate,
 		onPreview,
+		hideInput,
+		hideOutput,
+		hideInputColumn,
 	}) {
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
@@ -70,7 +73,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 
 		return (
 			<Container style={style}>
-				{!isEditing ? (
+				{!hideStepSelector ? (
 					<StepSelectorContainer>
 						<StepSelector
 							placeholder="Select a verb"
@@ -95,6 +98,9 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 							output={output}
 							onChangeOutput={onOutputChanged}
 							onChange={setInternal}
+							hideInput={hideInput}
+							hideOutput={hideOutput}
+							hideInputColumn={hideInputColumn}
 						/>
 						<ButtonContainer>
 							{onPreview ? (

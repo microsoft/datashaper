@@ -21,11 +21,7 @@ export const HistoryButton: React.FC<HistoryButtonProps> = memo(
 		const theme = useThematic()
 		return (
 			<ActionButton onClick={onClick} styles={merge({}, buttonStyles, styles)}>
-				<HistoryIcon
-					color={theme.application().accent().hex()}
-					width={'20px'}
-					height={'20px'}
-				/>
+				<HistoryIcon color={theme.application().accent().hex()} />
 				{showText ? `History ${steps ? `(${steps})` : ''}` : null}
 			</ActionButton>
 		)

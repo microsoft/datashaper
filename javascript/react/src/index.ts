@@ -10,16 +10,6 @@ export {
 	createDefaultCommandBar,
 	createDefaultHeaderCommandBar,
 } from './component-factories.js'
-export {
-	useDataTable,
-	useHandleFilesUpload,
-	useHandleStepOutputChanged,
-	useHandleStepSave,
-	useStepOutputs,
-	useWorkflow,
-	useWorkflowSteps,
-} from './hooks/index.js'
-
 /*
  * Exported Components
  */
@@ -42,12 +32,12 @@ export type { GroupHeaderProps } from './components/GroupHeader/GroupHeader.type
 export { GroupHeader } from './components/GroupHeader/index.js'
 export { Guidance } from './components/Guidance.js'
 export type { GuidanceProps } from './components/Guidance.types.js'
+export { HistoryButton } from './components/HistoryButton.js'
+export type { HistoryButtonProps } from './components/HistoryButton.types.js'
 export { ManageWorkflow } from './components/ManageWorkflow.js'
 export type { ManageWorkflowProps } from './components/ManageWorkflow.types.js'
 export { PrepareDataFull } from './components/PrepareDataFull.js'
 export type { PrepareDataFullProps } from './components/PrepareDataFull.types.js'
-export { PreviewTable } from './components/PreviewTable.js'
-export type { PreviewTableProps } from './components/PreviewTable.types.js'
 export { ProjectMgmtCommandBar } from './components/ProjectMgmtCommandBar.js'
 export type { ProjectMgmtCommandBarProps } from './components/ProjectMgmtCommandBar.types.js'
 export { StepCard } from './components/StepCard.js'
@@ -61,6 +51,8 @@ export { StepList } from './components/StepList.js'
 export type { StepListProps } from './components/StepList.types.js'
 export { StepSelector } from './components/StepSelector.js'
 export type { StepSelectorProps } from './components/StepSelector.types.js'
+export { TableCommands } from './components/TableCommands.js'
+export type { TableCommandsProps } from './components/TableCommands.types.js'
 export { TableList } from './components/TableList.js'
 export type { TableListProps } from './components/TableList.types.js'
 export type { TableTransformProps } from './components/TableTransform.types.js'
@@ -68,3 +60,19 @@ export { TableTransformModal } from './components/TableTransformModal.js'
 export type { TransformModalProps } from './components/TableTransformModal.types.js'
 export { Tooltip } from './components/Tooltip.js'
 export type { TooltipProps } from './components/Tooltip.types.js'
+export {
+	useDataTable,
+	useHandleFilesUpload,
+	useHandleStepOutputChanged,
+	useHandleStepSave,
+	useOnCreateStep,
+	useOnDeleteStep,
+	useOnEditStep,
+	useOnSaveStep,
+	useOnUpdateStep,
+	useStepOutputs,
+	useWorkflow,
+	useWorkflowListener,
+	useWorkflowOutputListener,
+	useWorkflowSteps,
+} from './hooks/index.js'

@@ -4,7 +4,8 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import type { Workflow } from '@datashaper/workflow'
-import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
+import type { IColumn } from '@fluentui/react'
+import type { ReactElement } from 'react'
 
 export interface PrepareDataFullProps {
 	/**
@@ -28,14 +29,20 @@ export interface PrepareDataFullProps {
 	workflow: Workflow
 
 	/**
-	 * An optional command bar
+	 * An optional command bar for the table header
 	 */
-	outputHeaderCommandBar?: IRenderFunction<IDetailsColumnProps>[]
+	outputHeaderCommandBar?: ReactElement<any, any>
 
 	/**
 	 * Step positioning option
 	 */
 	stepsPosition?: 'bottom' | 'middle'
+
+	selectedColumn?: string
+	onColumnClick?: (
+		evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+		column?: IColumn | undefined,
+	) => void
 
 	/**
 	 * Mutator for when the selected table id changes

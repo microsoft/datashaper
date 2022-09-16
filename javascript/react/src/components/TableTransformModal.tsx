@@ -33,7 +33,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		styles,
 		...props
 	}) {
-		const [verb, setVerb] = useState<Maybe<Verb>>()
+		const [verb, setVerb] = useState<Maybe<Verb>>(step?.verb)
 		const [showGuidance, { toggle: toggleGuidance }] = useBoolean(false)
 		const adaptedStyles = useModalStyles(styles, showGuidance)
 
@@ -44,7 +44,15 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 				{...props}
 			>
 				<Header>
-					<Title>{step ? 'Edit step' : 'New step'}</Title>
+					<Title>
+						{step
+							? `${step.verb.toUpperCase()} ${
+									(step.args as any).column
+										? `${(step.args as any).column}`
+										: ''
+							  }`
+							: 'New step'}
+					</Title>
 					{onDismiss && (
 						<IconButton
 							iconProps={icons.cancel}
@@ -56,15 +64,19 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 				<ContainerBody showGuidance={showGuidance}>
 					<StepComponentContainer>
 						<TableTransform
+							hideInput={props.hideInput}
+							hideOutput={props.hideOutput}
+							hideStepSelector={props.hideInput && props.hideOutput}
+							hideInputColumn={props.hideInput && props.hideOutput}
 							workflow={workflow}
 							onTransformRequested={onTransformRequested}
 							index={index}
 							step={step}
 							showGuidance={showGuidance}
 							toggleGuidance={toggleGuidance}
-							showGuidanceButton={true}
 							nextInputTable={nextInputTable}
 							onVerbChange={setVerb}
+							showGuidanceButton
 						/>
 					</StepComponentContainer>
 					{showGuidance && verb ? (

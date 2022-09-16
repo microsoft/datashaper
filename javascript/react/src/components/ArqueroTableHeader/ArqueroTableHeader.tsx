@@ -38,7 +38,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		return (
 			<Header background={bg} color={foreground}>
 				<Left>{commandBar}</Left>
-				<Middle>
+				<Middle hasFarCommandBar={!!farCommandBar}>
 					{name ? (
 						<TableName
 							onRenameTable={onRenameTable}
@@ -66,7 +66,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					) : null}
 					{groupCount ? <H3>{groupCount} groups</H3> : null}
 				</Middle>
-				<Right>{farCommandBar}</Right>
+				{farCommandBar && <Right>{farCommandBar}</Right>}
 			</Header>
 		)
 	},
@@ -75,6 +75,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 const Header = styled.div<{ background: string; color: string }>`
 	height: ${HEIGHT}px;
 	width: 100%;
+	padding: 0px 10px;
 	background-color: ${({ background }) => background};
 	color: ${({ color }) => color};
 	position: relative;
@@ -95,10 +96,11 @@ const Left = styled.div`
 	justify-content: flex-start;
 `
 
-const Middle = styled.div`
+const Middle = styled.div<{ hasFarCommandBar: boolean }>`
 	flex: 2;
 	display: flex;
-	justify-content: center;
+	justify-content: ${({ hasFarCommandBar }) =>
+		hasFarCommandBar ? 'center' : 'end'};
 	align-items: center;
 	gap: 8px;
 `
