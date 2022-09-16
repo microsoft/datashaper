@@ -58,7 +58,7 @@ def spread(
     onehot: bool = False,
     preserveSource: bool = False,
 ):
-    columns = column.split()
+    columns = [column]
     input_table = input.get_input()
     if to is None:
         to = columns

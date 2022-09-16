@@ -18,7 +18,7 @@ def onehot(
     prefix: str = "",
     preserveSource=False,
 ):
-    columns = column.split()
+    columns = [column]
     input_table = input.get_input()
     input_table[columns] = input_table[columns].astype("category")
     prefixesList = [prefix]
