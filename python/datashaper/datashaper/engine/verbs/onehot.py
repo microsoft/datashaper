@@ -18,18 +18,15 @@ def onehot(
     prefix: str = "",
     preserveSource=False,
 ):
-    columns = [column]
     input_table = input.get_input()
-    input_table[columns] = input_table[columns].astype("category")
-    prefixesList = [prefix]
+    input_table[column] = input_table[column].astype("category")
 
-    dummies = pd.get_dummies(input_table[columns], prefix=prefixesList, prefix_sep="")
-    for column in columns:
-        cols = dummies.columns.str.startswith(prefix)
-        dummies.loc[input_table[column].isnull(), cols] = np.nan
-
+    dummies = pd.get_dummies(input_table[[column]], prefix=[prefix], prefix_sep="") 
+    cols = dummies.columns.str.startswith(prefix)
+    dummies.loc[input_table[column].isnull(), cols] = np.nan
+        
     output = pd.concat([input_table, dummies], axis=1)
     if not preserveSource:
-        output = output.drop(columns=columns)
+        output = output.drop(columns=column)
 
     return TableContainer(table=output)
