@@ -28,7 +28,14 @@ export const binStep: ColumnTableStep<BinArgs> = (input, args) => {
 function binExpr(input: ColumnTable, args: BinArgs) {
 	const { column, clamped, printRange = false } = args
 	const step = computeBins(input, args)
-	return fixedBinStep(column, args.min, args.max, step, clamped, printRange)
+	return fixedBinStep(
+		column,
+		args.min ?? Number.NEGATIVE_INFINITY,
+		args.max ?? Number.POSITIVE_INFINITY,
+		step,
+		clamped,
+		printRange,
+	)
 }
 
 function computeBins(input: ColumnTable, args: BinArgs) {
