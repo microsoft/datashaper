@@ -8,7 +8,7 @@ import { BasicStory } from './Basic.story.js'
 import { CommandBarsStory } from './CommandBars/CommandBars.story.js'
 
 const meta = {
-	title: 'ArqueroTableHeader',
+	title: 'Components/ArqueroTableHeader',
 	component: ArqueroTableHeader,
 	args: {
 		showColumnCount: true,

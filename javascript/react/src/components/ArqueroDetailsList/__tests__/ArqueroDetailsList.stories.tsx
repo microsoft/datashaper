@@ -11,7 +11,7 @@ import { PerformanceStory } from './Performance/Performance.story.js'
 import { RowGroupingStory } from './RowGrouping/RowGrouping.story.js'
 
 const meta = {
-	title: 'ArqueroDetailsList',
+	title: 'Components/ArqueroDetailsList',
 	component: ArqueroDetailsList,
 }
 
