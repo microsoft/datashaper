@@ -1,0 +1,58 @@
+{
+	"$schema": "../../../../../../schema/workflow.json",
+	"name": "Aggregated lookup",
+	"description": "Uses a multi-step aggregate and filter to do a custom lookup.",
+	"steps": [
+		{
+			"id": "join-1",
+			"verb": "join",
+			"input": {
+				"source": "companies",
+				"other": "products"
+			},
+			"args": {
+				"on": ["ID"]
+			}
+		},
+		{
+			"id": "filter-1",
+			"verb": "filter",
+			"input": { "source": "join-1" },
+			"args": {
+				"column": "FY21 Sales",
+				"criteria": [
+					{
+						"value": 10000,
+						"operator": ">=",
+						"type": "value"
+					}
+				]
+			}
+		},
+		{
+			"id": "aggregate-1",
+			"verb": "aggregate",
+			"input": { "source": "filter-1" },
+			"args": {
+				"groupby": "ID",
+				"column": "FY21 Sales",
+				"operation": "sum",
+				"to": "Total sales >= 10k"
+			}
+		},
+		{
+			"id": "lookup-1",
+			"verb": "lookup",
+			"input": {
+				"source": "companies",
+				"other": "aggregate-1"
+			},
+			"args": {
+				"on": ["ID"],
+				"columns": ["Total sales >= 10k"]
+			}
+		}
+	],
+	"input": ["companies", "products"],
+	"output": ["join-1", "filter-1", "aggregate-1", "lookup-1"]
+}

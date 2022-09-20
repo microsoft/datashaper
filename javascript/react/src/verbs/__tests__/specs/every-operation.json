@@ -1,0 +1,414 @@
+{
+	"$schema": "../../../../../../schema/workflow.json",
+	"name": "Every operation",
+	"description": "Chains every available operation together for an easy look at all UX and output examples",
+	"steps": [
+		{
+			"id": "aggregate-1",
+			"verb": "aggregate",
+			"input": { "source": "products" },
+			"args": {
+				"groupby": "ID",
+				"column": "FY21 Sales",
+				"operation": "sum",
+				"to": "Total sales"
+			}
+		},
+		{
+			"id": "aggregate-2",
+			"verb": "aggregate",
+			"input": { "source": "products" },
+			"args": {
+				"groupby": "ID",
+				"column": "Product",
+				"operation": "array_agg",
+				"to": "Product List"
+			}
+		},
+		{
+			"id": "bin-1",
+			"verb": "bin",
+			"input": { "source": "products" },
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "auto",
+				"to": "Binned"
+			}
+		},
+		{
+			"id": "binarize-1",
+			"verb": "binarize",
+			"input": { "source": "products" },
+			"args": {
+				"column": "FY21 Sales",
+				"to": "FY21 Sales < 10k",
+				"criteria": [
+					{
+						"operator": "<",
+						"value": 10000
+					}
+				],
+				"logical": "or"
+			}
+		},
+		{
+			"id": "boolean-1",
+			"verb": "boolean",
+			"input": { "source": "companies2" },
+			"args": {
+				"columns": ["Name", "US"],
+				"operator": "and",
+				"to": "Name & US"
+			}
+		},
+		{
+			"id": "concat-1",
+			"verb": "concat",
+			"input": {
+				"source": "companies",
+				"others": ["companies2"]
+			}
+		},
+		{
+			"id": "convert-1",
+			"verb": "convert",
+			"input": { "source": "companies" },
+			"args": {
+				"columns": ["ID"],
+				"type": "int"
+			}
+		},
+		{
+			"id": "dedupe-1",
+			"verb": "dedupe",
+			"input": { "source": "products" },
+			"args": {
+				"columns": ["ID"]
+			}
+		},
+		{
+			"id": "derive-1",
+			"verb": "derive",
+			"input": { "source": "products" },
+			"args": {
+				"column1": "FY20 Sales",
+				"operator": "+",
+				"column2": "FY21 Sales",
+				"to": "Combined Sales"
+			}
+		},
+		{
+			"id": "difference-1",
+			"verb": "difference",
+			"input": {
+				"source": "companies",
+				"others": ["companies2"]
+			}
+		},
+		{
+			"id": "erase-1",
+			"verb": "erase",
+			"input": { "source": "products" },
+			"args": {
+				"value": 9000,
+				"columns": ["FY20 Sales", "FY21 Sales"]
+			}
+		},
+		{
+			"id": "fetch-1",
+			"verb": "fetch",
+			"args": {
+				"url": "https://vega.github.io/vega/data/seattle-weather-hourly-normals.csv"
+			}
+		},
+		{
+			"id": "fill-1",
+			"verb": "fill",
+			"input": { "source": "companies" },
+			"args": {
+				"value": 1,
+				"to": "New Column"
+			}
+		},
+		{
+			"id": "filter-1",
+			"verb": "filter",
+			"input": { "source": "companies" },
+			"args": {
+				"column": "Employees",
+				"criteria": [
+					{
+						"operator": "<=",
+						"value": 300000
+					}
+				],
+				"logical": "or"
+			}
+		},
+		{
+			"id": "fold-1",
+			"verb": "fold",
+			"input": { "source": "companies" },
+			"args": {
+				"columns": ["Name", "Employees"],
+				"to": ["key", "value"]
+			}
+		},
+		{
+			"id": "groupby-1",
+			"verb": "groupby",
+			"input": { "source": "products" },
+			"args": {
+				"columns": ["ID"]
+			}
+		},
+		{
+			"id": "impute-1",
+			"verb": "impute",
+			"input": "companies2",
+			"args": {
+				"columns": ["Name"],
+				"value": "emptyValue"
+			}
+		},
+		{
+			"id": "intersect-1",
+			"verb": "intersect",
+			"input": {
+				"source": "companies",
+				"others": ["companies2"]
+			}
+		},
+		{
+			"id": "join-1",
+			"verb": "join",
+			"input": { "source": "companies", "other": "products" },
+			"args": {
+				"on": ["ID", "ID"]
+			}
+		},
+		{
+			"id": "lookup-1",
+			"verb": "lookup",
+			"input": { "source": "companies", "other": "products" },
+			"args": {
+				"on": ["ID", "ID"],
+				"columns": ["Product"]
+			}
+		},
+		{
+			"id": "merge-1",
+			"verb": "merge",
+			"input": { "source": "products" },
+			"args": {
+				"strategy": "concat",
+				"to": "result",
+				"columns": ["FY20 Sales", "FY21 Sales"]
+			}
+		},
+		{
+			"id": "onehot-1",
+			"verb": "onehot",
+			"input": "stocks",
+			"args": {
+				"columns": ["Symbol"],
+				"prefixes": { "Symbol": "ticker-" }
+			}
+		},
+		{
+			"id": "unhot-1",
+			"verb": "unhot",
+			"input": "onehot-1",
+			"args": {
+				"to": "Symbol",
+				"columns": [
+					"ticker-AAPL",
+					"ticker-AMZN",
+					"ticker-GOOG",
+					"ticker-MSFT",
+					"ticker-ZNGA"
+				]
+			}
+		},
+		{
+			"id": "orderby-1",
+			"verb": "orderby",
+			"input": { "source": "companies" },
+			"args": {
+				"orders": [
+					{
+						"column": "Employees",
+						"direction": "asc"
+					}
+				]
+			}
+		},
+		{
+			"id": "pivot-1",
+			"verb": "pivot",
+			"input": { "source": "companies" },
+			"args": {
+				"key": "ID",
+				"value": "Name",
+				"operation": "any"
+			}
+		},
+		{
+			"id": "recode-1",
+			"verb": "recode",
+			"input": { "source": "companies" },
+			"args": {
+				"column": "ID",
+				"to": "Greetings",
+				"mapping": {
+					"1": 10,
+					"2": 21,
+					"3": 32,
+					"4": 43,
+					"5": 54
+				}
+			}
+		},
+		{
+			"id": "rename-1",
+			"verb": "rename",
+			"input": "stocks",
+			"args": {
+				"columns": {
+					"Symbol": "symbol",
+					"Date": "date",
+					"Close": "close",
+					"Volume": "volume",
+					"Open": "open",
+					"High": "high",
+					"Low": "low"
+				}
+			}
+		},
+		{
+			"id": "rollup-1",
+			"verb": "rollup",
+			"input": { "source": "products" },
+			"args": {
+				"to": "count",
+				"column": "Product",
+				"operation": "count"
+			}
+		},
+		{
+			"id": "sample-1",
+			"verb": "sample",
+			"input": { "source": "companies" },
+			"args": {
+				"size": 2
+			}
+		},
+		{
+			"id": "select-1",
+			"verb": "select",
+			"input": "stocks",
+			"args": {
+				"columns": ["Symbol", "Date", "Close", "Volume", "Open", "High", "Low"]
+			}
+		},
+		{
+			"id": "spread-1",
+			"verb": "spread",
+			"input": "aggregate-2",
+			"args": {
+				"columns": ["Product List"]
+			}
+		},
+		{
+			"id": "unfold-1",
+			"verb": "unfold",
+			"input": "fold-1",
+			"args": {
+				"key": "key",
+				"value": "value"
+			}
+		},
+		{
+			"id": "ungroup-1",
+			"verb": "ungroup",
+			"input": { "source": "companies" },
+			"args": {
+				"columns": ["Name", "Employees"]
+			}
+		},
+		{
+			"id": "union-1",
+			"verb": "union",
+			"input": {
+				"source": "companies",
+				"others": ["companies2"]
+			}
+		},
+		{
+			"id": "unorder-1",
+			"verb": "unorder",
+			"input": { "source": "companies" },
+			"args": {
+				"orders": [{ "column": "Name", "direction": "asc" }]
+			}
+		},
+		{
+			"id": "unroll-1",
+			"verb": "unroll",
+			"input": "aggregate-2",
+			"args": {
+				"columns": ["Product List"]
+			}
+		},
+		{
+			"id": "window-1",
+			"verb": "window",
+			"input": "groupby-1",
+			"args": {
+				"to": "First Product",
+				"column": "Product",
+				"operation": "first_value"
+			}
+		}
+	],
+	"input": ["companies", "companies2", "products", "stocks"],
+	"output": [
+		"aggregate-1",
+		"aggregate-2",
+		"bin-1",
+		"binarize-1",
+		"boolean-1",
+		"concat-1",
+		"convert-1",
+		"dedupe-1",
+		"derive-1",
+		"difference-1",
+		"erase-1",
+		"fetch-1",
+		"fill-1",
+		"filter-1",
+		"fold-1",
+		"groupby-1",
+		"impute-1",
+		"join-1",
+		"lookup-1",
+		"merge-1",
+		"onehot-1",
+		"orderby-1",
+		"pivot-1",
+		"recode-1",
+		"rename-1",
+		"rollup-1",
+		"sample-1",
+		"select-1",
+		"spread-1",
+		"window-1",
+		"unfold-1",
+		"ungroup-1",
+		"union-1",
+		"unorder-1",
+		"unhot-1",
+		"unroll-1",
+		"window-1"
+	]
+}
