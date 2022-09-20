@@ -15,20 +15,11 @@ const PrepareDataPage = lazy(() =>
 	})),
 )
 
-const DebugPage = lazy(() =>
-	/* webpackChunkName: "DebugPage " */ import(
-		'../pages/DebugPage/DebugPage.js'
-	).then(module => ({
-		default: module.DebugPage,
-	})),
-)
-
 export const RouteOptions: React.FC = memo(function RouteOptions() {
 	return (
 		<Routes>
 			<Route path="/" element={<PrepareDataPage />} />
 			<Route path={Pages.Prepare.path} element={<PrepareDataPage />} />
-			<Route path={Pages.Debug.path} element={<DebugPage />} />
 		</Routes>
 	)
 })
