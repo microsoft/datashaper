@@ -29,10 +29,12 @@
 	"scripts": {
 		"clean": "essex clean dist docs storybook-static",
 		"build": "essex build --docs --skipExportCheck",
+		"bundle": "yarn build:storybook",
 		"lint": "essex lint --fix",
 		"release": "yarn npm publish --tolerate-republish --access public",
-		"start": "start-storybook -p 6006 -s ../webapp/public",
-		"start:storybook": "yarn start"
+		"start": "start-storybook -p 6006",
+		"start:storybook": "yarn start",
+		"build:storybook": "build-storybook --quiet"
 	},
 	"dependencies": {
 		"@datashaper/schema": "workspace:^",

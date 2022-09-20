@@ -7,6 +7,7 @@ module.exports = {
 		path.join(__dirname, '../src/**/*.stories.mdx'),
 		path.join(__dirname, '../src/**/*.stories.@(js|jsx|ts|tsx)'),
 	],
+	staticDirs: [path.join(__dirname, '../src/__tests__/public')],
 	addons: [
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
