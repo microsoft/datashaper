@@ -4,7 +4,7 @@
  */
 import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
-import { columnTypes } from '@datashaper/tables'
+import { columnType,columnTypes  } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 import { isNumericInputStep, NodeInput } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -86,11 +86,15 @@ export function useInputTableChanged(
 
 export function useInputColumnChanged(
 	step: Step,
+	dataTable: ColumnTable,
 	onChange: (step: Step) => void,
 ): DropdownChangeHandler {
 	return useDropdownChangeHandler<InputColumnArgs>(
 		step as Step<InputColumnArgs>,
-		(s, val) => (s.args.column = val as string),
+		(s, val) => {
+			s.args.column = val as string
+			s.args.dataType = columnType(dataTable, val as string)
+		},
 		onChange,
 	)
 }
@@ -101,7 +105,9 @@ export function useOutputColumnChanged(
 ): TextFieldChangeHandler {
 	return useTextFieldChangeHandler<OutputColumnArgs>(
 		step as Step<OutputColumnArgs>,
-		(s, val) => (s.args.to = val as string),
+		(s, val) => {
+			s.args.to = val as string
+		},
 		onChange,
 	)
 }
