@@ -1,7 +1,7 @@
 {
 	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Spread with onehot",
-	"description": "",
+	"description": "Demonstrates the spread verb with a onehot flag to encode as binary columns.",
 	"steps": [
 		{
 			"id": "spreadhot",

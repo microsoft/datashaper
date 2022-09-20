@@ -389,6 +389,7 @@
 		"filter-1",
 		"fold-1",
 		"groupby-1",
+		"intersect-1",
 		"impute-1",
 		"join-1",
 		"lookup-1",

@@ -1,7 +1,7 @@
 {
 	"$schema": "../../../../../../schema/workflow.json",
 	"name": "Onehot-unhot",
-	"description": "",
+	"description": "Performs a onehot then unhot to demonstrate reversing the encoding.",
 	"steps": [
 		{
 			"id": "onehot",
@@ -21,5 +21,5 @@
 		}
 	],
 	"input": ["companies2"],
-	"output": ["unhot"]
+	"output": ["onehot", "unhot"]
 }

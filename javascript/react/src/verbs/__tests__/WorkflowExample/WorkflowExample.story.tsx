@@ -4,14 +4,15 @@
  */
 import type { ComponentStory } from '@storybook/react'
 
-import type { ExamplesProps } from './Examples.js'
-import { Examples } from './Examples.js'
+import type { WorkflowExampleProps } from './WorkflowExample.js'
+import { WorkflowExample } from './WorkflowExample.js'
 
-export const ExamplesStory: ComponentStory<typeof Examples> = (
-	_args: ExamplesProps,
+export const WorkflowExampleStory: ComponentStory<typeof WorkflowExample> = (
+	args: WorkflowExampleProps,
 	{ loaded: { companies, companies2, products, stocks } }: any,
 ): JSX.Element => (
-	<Examples
+	<WorkflowExample
+		{...args}
 		inputs={[
 			{
 				id: 'companies',
@@ -32,4 +33,3 @@ export const ExamplesStory: ComponentStory<typeof Examples> = (
 		]}
 	/>
 )
-ExamplesStory.storyName = 'Example Workflows'

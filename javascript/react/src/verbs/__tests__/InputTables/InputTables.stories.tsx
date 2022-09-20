@@ -7,6 +7,11 @@ import type { ComponentStory } from '@storybook/react'
 import type { InputTablesProps } from './InputTables.js'
 import { InputTables } from './InputTables.js'
 
+const storyMetadata = {
+	title: 'Workflows',
+}
+export default storyMetadata
+
 export const InputTablesStory: ComponentStory<typeof InputTables> = (
 	_args: InputTablesProps,
 	{ loaded: { companies, companies2, products, stocks } }: any,

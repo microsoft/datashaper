@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { StepComponent, StepDescription, useDataTable } from '@datashaper/react'
-import { memo } from 'react'
+import { introspect } from '@datashaper/tables'
+import { memo, useMemo } from 'react'
 
 import { Section } from './Section.js'
 import {
@@ -26,6 +27,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	onStepOutputChange,
 }) {
 	const table = useDataTable(output, workflow)
+	const metadata = useMemo(() => table && introspect(table, true), [table])
 	return (
 		<StepBlock className="step-block">
 			<Section title={`Step ${index + 1}`} subtitle={step.verb}>
@@ -50,6 +52,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 							<Table
 								name={output}
 								table={table}
+								metadata={metadata}
 								compact
 								features={{ smartHeaders: true, smartCells: true }}
 							/>

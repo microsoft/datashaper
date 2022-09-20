@@ -8,19 +8,6 @@ export const Container = styled.div`
 	margin-top: 12px;
 `
 
-export const Header = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 20px;
-	margin-bottom: 20px;
-`
-
-export const Dropdown = styled.div`
-	width: 200px;
-`
-
-export const Description = styled.p`
-	margin: 0;
-`
+export const Description = styled.p``
 
 export const Output = styled.div``

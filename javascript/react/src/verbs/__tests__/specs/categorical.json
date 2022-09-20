@@ -1,6 +1,6 @@
 {
 	"$schema": "../../../../../../schema/workflow.json",
-	"name": "Categorical sparkbar",
+	"name": "Sparkbar: Categorical",
 	"description": "Aggregates months into an array to demonstrate categorical Sparkbar cells",
 	"steps": [
 		{
