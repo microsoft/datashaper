@@ -52,7 +52,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     defaultSortDirection?: SortDirection;
     // (undocumented)
     features?: DetailsListFeatures;
-    isHeadersFixed?: boolean;
+    isHeaderFixed?: boolean;
     // (undocumented)
     limit?: number;
     metadata?: TableMetadata;
@@ -679,7 +679,7 @@ export function useDetailsHeaderRenderer(): IRenderFunction_2<IDetailsHeaderProp
 // Warning: (ae-missing-release-tag) "useDetailsListStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useDetailsListStyles(isHeadersFixed: boolean, features?: DetailsListFeatures, styles?: IDetailsListStyles, hasColumnClick?: boolean, compact?: boolean): IDetailsListStyles;
+export function useDetailsListStyles(isHeaderFixed: boolean, features?: DetailsListFeatures, styles?: IDetailsListStyles, hasColumnClick?: boolean, compact?: boolean): IDetailsListStyles;
 
 // Warning: (ae-missing-release-tag) "useFormattedNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -55,7 +55,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		styles,
 		defaultSortColumn,
 		defaultSortDirection,
-		isHeadersFixed = false,
+		isHeaderFixed = false,
 		compact = false,
 		resizable = true,
 		// passthrough the remainder as props
@@ -132,7 +132,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		)
 
 		const headerStyle = useDetailsListStyles(
-			isHeadersFixed,
+			isHeaderFixed,
 			features,
 			styles as IDetailsListStyles,
 			!!onColumnClick,

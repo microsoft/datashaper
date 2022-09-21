@@ -62,10 +62,10 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					selectedColumn={selectedColumn}
 					onColumnClick={handleColumnClick}
 					onCellDropdownSelect={handleCellDropdownSelect}
-					isColumnClickable
+					clickableColumns
 					sortable
 					showColumnBorders
-					isHeadersFixed
+					isHeaderFixed
 				/>
 			</TableContainer>
 		</Container>

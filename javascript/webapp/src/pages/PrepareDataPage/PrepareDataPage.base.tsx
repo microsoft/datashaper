@@ -130,8 +130,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 										sortable
 										compact
 										showColumnBorders
-										isHeadersFixed
-										isColumnClickable={!!onColumnClick}
+										isHeaderFixed
+										clickableColumns={!!onColumnClick}
 										selectedColumn={selectedColumn}
 										onColumnClick={onColumnClick}
 										// onChangeMetadata={onUpdateMetadata}
