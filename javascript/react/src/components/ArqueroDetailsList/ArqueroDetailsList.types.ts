@@ -183,7 +183,7 @@ export interface ArqueroDetailsListProps
 	/**
 	 * Resizable columns
 	 */
-	isResizable?: boolean
+	resizable?: boolean
 	/**
 	 * Default sort column
 	 */

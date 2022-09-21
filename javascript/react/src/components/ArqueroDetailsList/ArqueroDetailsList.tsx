@@ -57,7 +57,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		defaultSortDirection,
 		isHeadersFixed = false,
 		compact = false,
-		isResizable = true,
+		resizable = true,
 		// passthrough the remainder as props
 		...props
 	}) {
@@ -127,7 +127,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				isColumnClickable,
 				showColumnBorders,
 				compact,
-				isResizable,
+				resizable,
 			},
 		)
 

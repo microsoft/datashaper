@@ -53,7 +53,6 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     features?: DetailsListFeatures;
     isColumnClickable?: boolean;
     isHeadersFixed?: boolean;
-    isResizable?: boolean;
     // (undocumented)
     limit?: number;
     metadata?: TableMetadata;
@@ -62,6 +61,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     onCellDropdownSelect?: DropdownOptionSelect;
     onColumnClick?: ColumnClickFunction;
     onRenderGroupHeader?: GroupHeaderFunction;
+    resizable?: boolean;
     selectedColumn?: string;
     showColumnBorders?: boolean;
     // (undocumented)
@@ -125,11 +125,11 @@ export interface ColumnOptions {
     // (undocumented)
     isDefaultHeaderClickable?: boolean;
     // (undocumented)
-    isResizable?: boolean;
-    // (undocumented)
     onCellDropdownSelect?: DropdownOptionSelect;
     // (undocumented)
     onColumnClick?: ColumnClickFunction;
+    // (undocumented)
+    resizable?: boolean;
     // (undocumented)
     selectedColumn?: string;
     // (undocumented)
