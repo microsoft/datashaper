@@ -4,7 +4,28 @@
  */
 import type { ICheckboxProps, IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+
+export function useSelectedColumn(): {
+	selected: string | undefined
+	onColumnClick: (
+		evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+		column?: IColumn | undefined,
+	) => void
+} {
+	const [selected, setSelected] = useState<string | undefined>()
+	const onColumnClick = useCallback(
+		(
+			_evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+			column?: IColumn | undefined,
+		) => setSelected(column?.name),
+		[setSelected],
+	)
+	return {
+		selected,
+		onColumnClick,
+	}
+}
 
 export function useCheckboxConfigs(table: ColumnTable | undefined): {
 	checkboxes: ICheckboxProps[]

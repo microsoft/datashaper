@@ -151,14 +151,14 @@ export interface ArqueroDetailsListProps
 	/**
 	 * Indicates that the entire column is clickable for selection.
 	 */
-	isColumnClickable?: boolean
+	clickableColumns?: boolean
 	/**
 	 * Indicates to use borders between columns so the cells look more like a spreadsheet (row borders are always on).
 	 */
 	showColumnBorders?: boolean
 	/**
 	 * Passthrough to the column click handler.
-	 * Will be applied to the column header only unless isColumnClickable === true.
+	 * Will be applied to the column header only unless clickableColumns === true.
 	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick
 	 * and they will both fire.
 	 * TODO: maybe turn this into onColumnSelect?
@@ -173,10 +173,6 @@ export interface ArqueroDetailsListProps
 	 */
 	onRenderGroupHeader?: GroupHeaderFunction
 	/**
-	 * Key for a selected column - this is not normally an option in DetailsList
-	 */
-	selectedColumn?: string
-	/**
 	 * Fixed headers on top when scrolling
 	 */
 	isHeadersFixed?: boolean
@@ -184,6 +180,10 @@ export interface ArqueroDetailsListProps
 	 * Resizable columns
 	 */
 	resizable?: boolean
+	/**
+	 * Key for a selected column - this is not normally an option in DetailsList
+	 */
+	selectedColumn?: string
 	/**
 	 * Default sort column
 	 */

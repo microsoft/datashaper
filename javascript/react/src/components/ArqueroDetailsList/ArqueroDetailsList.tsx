@@ -41,7 +41,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		limit = Infinity,
 		sortable = false,
 		striped = false,
-		isColumnClickable = false,
+		clickableColumns = false,
 		showColumnBorders = false,
 		selectedColumn,
 		onColumnClick,
@@ -98,8 +98,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		)
 
 		const isDefaultHeaderClickable = useMemo((): any => {
-			return sortable || isColumnClickable || !!onColumnHeaderClick
-		}, [sortable, isColumnClickable, onColumnHeaderClick])
+			return sortable || clickableColumns || !!onColumnHeaderClick
+		}, [sortable, clickableColumns, onColumnHeaderClick])
 
 		const onColumnResize = useCallback(
 			(column: IColumn | undefined, newWidth: number | undefined) => {
@@ -124,7 +124,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				onColumnClick,
 				onCellDropdownSelect,
 				isDefaultHeaderClickable,
-				isColumnClickable,
+				isClickable: clickableColumns,
 				showColumnBorders,
 				compact,
 				resizable,

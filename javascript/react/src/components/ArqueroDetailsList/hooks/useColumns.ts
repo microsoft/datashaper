@@ -39,7 +39,7 @@ export interface ColumnOptions {
 	selectedColumn?: string
 	onColumnClick?: ColumnClickFunction
 	onCellDropdownSelect?: DropdownOptionSelect
-	isColumnClickable?: boolean
+	isClickable?: boolean
 	isDefaultHeaderClickable?: boolean
 	showColumnBorders?: boolean
 	compact?: boolean
@@ -68,22 +68,22 @@ export function useColumns(
 		selectedColumn,
 		onColumnClick,
 		onCellDropdownSelect,
-		isColumnClickable = false,
+		isClickable = false,
 		isDefaultHeaderClickable = false,
 		showColumnBorders = false,
 		compact = false,
 		resizable = true,
 	} = options
 
-	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
+	const handleCellClick = useCellClickhandler(isClickable, onColumnClick)
 	const handleCellDropdownSelect = useCellDropdownSelectHandler(
-		isColumnClickable,
+		isClickable,
 		onCellDropdownSelect,
 	)
 
 	const colorScale = useIncrementingColumnColorScale(computedMetadata)
 
-	const styles = useColumnStyles(isColumnClickable, showColumnBorders)
+	const styles = useColumnStyles(isClickable, showColumnBorders)
 
 	const names = useColumnNamesList(table, columns)
 	//get column width based on min value or on commandBar item passed

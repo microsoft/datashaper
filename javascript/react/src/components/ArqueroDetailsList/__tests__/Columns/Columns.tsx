@@ -9,10 +9,15 @@ import { memo } from 'react'
 import styled from 'styled-components'
 
 import { Table } from '../ArqueroDetailsList.styles.js'
-import { useCheckboxConfigs, useColumns } from './Columns.hooks.js'
+import {
+	useCheckboxConfigs,
+	useColumns,
+	useSelectedColumn,
+} from './Columns.hooks.js'
 
 export const Columns: React.FC<ArqueroDetailsListProps> = memo(
 	function Columns({ table, ...args }) {
+		const { selected, onColumnClick } = useSelectedColumn()
 		const { checkboxes } = useCheckboxConfigs(table)
 
 		const { columns } = useColumns(checkboxes)
@@ -28,7 +33,13 @@ export const Columns: React.FC<ArqueroDetailsListProps> = memo(
 						return <Checkbox key={config.label} {...config} />
 					})}
 				</FullColumnList>
-				<ArqueroDetailsList {...args} table={table} columns={columns} />
+				<ArqueroDetailsList
+					{...args}
+					table={table}
+					columns={columns}
+					selectedColumn={selected}
+					onColumnClick={onColumnClick}
+				/>
 			</Table>
 		)
 	},

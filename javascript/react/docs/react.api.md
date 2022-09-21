@@ -47,11 +47,11 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps>;
 //
 // @public (undocumented)
 export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'> {
+    clickableColumns?: boolean;
     defaultSortColumn?: string;
     defaultSortDirection?: SortDirection;
     // (undocumented)
     features?: DetailsListFeatures;
-    isColumnClickable?: boolean;
     isHeadersFixed?: boolean;
     // (undocumented)
     limit?: number;
@@ -121,7 +121,7 @@ export interface ColumnOptions {
     // (undocumented)
     features?: DetailsListFeatures;
     // (undocumented)
-    isColumnClickable?: boolean;
+    isClickable?: boolean;
     // (undocumented)
     isDefaultHeaderClickable?: boolean;
     // (undocumented)

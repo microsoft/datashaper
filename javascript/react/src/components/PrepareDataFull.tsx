@@ -83,7 +83,7 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 									compact
 									showColumnBorders
 									isHeadersFixed
-									isColumnClickable={!!onColumnClick}
+									clickableColumns={!!onColumnClick}
 									selectedColumn={selectedColumn}
 									onColumnClick={onColumnClick}
 									metadata={selectedTable?.metadata}
