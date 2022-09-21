@@ -14,6 +14,15 @@ module.exports = {
 		'@storybook/addon-interactions',
 	],
 	framework: '@storybook/react',
+	typescript: {
+		reactDocgen: 'react-docgen-typescript',
+		reactDocgenTypescriptOptions: {
+			compilerOptions: {
+				allowSyntheticDefaultImports: false,
+				esModuleInterop: false,
+			},
+		},
+	},
 	webpackFinal(config) {
 		// mute build output
 		if (process.env.CI || process.env.SB_QUIET) {
