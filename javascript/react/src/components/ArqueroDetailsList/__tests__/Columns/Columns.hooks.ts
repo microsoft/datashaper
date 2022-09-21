@@ -38,10 +38,10 @@ export function useCheckboxConfigs(table: ColumnTable | undefined): {
 				checked: checked?.includes(column),
 				onChange: (
 					_ev?: React.FormEvent<HTMLElement | HTMLInputElement>,
-					chkd?: boolean,
+					checked?: boolean,
 				) => {
 					setChecked(prev =>
-						chkd ? [...prev, column] : prev.filter(c => c !== column),
+						checked ? [...prev, column] : prev.filter(c => c !== column),
 					)
 				},
 			})) || []
