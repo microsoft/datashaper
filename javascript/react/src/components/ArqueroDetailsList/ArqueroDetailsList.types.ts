@@ -147,7 +147,7 @@ export interface ArqueroDetailsListProps
 	/**
 	 * Indicates whether to use even/odd row coloring.
 	 */
-	isStriped?: boolean
+	striped?: boolean
 	/**
 	 * Indicates that the entire column is clickable for selection.
 	 */

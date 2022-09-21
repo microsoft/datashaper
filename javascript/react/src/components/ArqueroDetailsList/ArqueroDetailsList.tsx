@@ -40,7 +40,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		offset = 0,
 		limit = Infinity,
 		sortable = false,
-		isStriped = false,
+		striped = false,
 		isColumnClickable = false,
 		showColumnBorders = false,
 		selectedColumn,
@@ -139,7 +139,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			compact,
 		)
 
-		const renderRow = useStripedRowsRenderer(isStriped, showColumnBorders)
+		const renderRow = useStripedRowsRenderer(striped, showColumnBorders)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 		const renderGroupHeader = useGroupHeaderRenderer(
 			table,

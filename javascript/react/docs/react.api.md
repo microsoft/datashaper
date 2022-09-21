@@ -54,7 +54,6 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     isColumnClickable?: boolean;
     isHeadersFixed?: boolean;
     isResizable?: boolean;
-    isStriped?: boolean;
     // (undocumented)
     limit?: number;
     metadata?: TableMetadata;
@@ -67,6 +66,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     showColumnBorders?: boolean;
     // (undocumented)
     sortable?: boolean;
+    striped?: boolean;
     // (undocumented)
     table: ColumnTable;
 }
