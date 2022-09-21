@@ -711,6 +711,11 @@ export function useHandleStepSave(workflow: Workflow): (step: Step, index: numbe
 // @public
 export function useIncrementingColumnColorScale(meta?: TableMetadata): () => string;
 
+// Warning: (ae-missing-release-tag) "useInputTableNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useInputTableNames(workflow?: Workflow): string[];
+
 // Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
