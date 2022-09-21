@@ -63,7 +63,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					onColumnClick={handleColumnClick}
 					onCellDropdownSelect={handleCellDropdownSelect}
 					isColumnClickable
-					isSortable
+					sortable
 					showColumnBorders
 					isHeadersFixed
 				/>

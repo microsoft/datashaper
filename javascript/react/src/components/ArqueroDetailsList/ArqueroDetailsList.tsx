@@ -39,7 +39,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		metadata,
 		offset = 0,
 		limit = Infinity,
-		isSortable = false,
+		sortable = false,
 		isStriped = false,
 		isColumnClickable = false,
 		showColumnBorders = false,
@@ -64,7 +64,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const [version, setVersion] = useState(0)
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(
-				isSortable,
+				sortable,
 				onColumnHeaderClick,
 				defaultSortColumn,
 				defaultSortDirection,
@@ -98,8 +98,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		)
 
 		const isDefaultHeaderClickable = useMemo((): any => {
-			return isSortable || isColumnClickable || !!onColumnHeaderClick
-		}, [isSortable, isColumnClickable, onColumnHeaderClick])
+			return sortable || isColumnClickable || !!onColumnHeaderClick
+		}, [sortable, isColumnClickable, onColumnHeaderClick])
 
 		const onColumnResize = useCallback(
 			(column: IColumn | undefined, newWidth: number | undefined) => {

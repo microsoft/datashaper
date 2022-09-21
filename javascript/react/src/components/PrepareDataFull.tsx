@@ -79,7 +79,7 @@ export const PrepareDataFull: React.FC<PrepareDataFullProps> = memo(
 									table={selectedTable?.table}
 								/>
 								<ArqueroDetailsList
-									isSortable
+									sortable
 									compact
 									showColumnBorders
 									isHeadersFixed

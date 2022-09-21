@@ -143,7 +143,7 @@ export interface ArqueroDetailsListProps
 	metadata?: TableMetadata
 	offset?: number
 	limit?: number
-	isSortable?: boolean
+	sortable?: boolean
 	/**
 	 * Indicates whether to use even/odd row coloring.
 	 */

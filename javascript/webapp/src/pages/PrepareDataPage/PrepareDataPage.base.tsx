@@ -127,7 +127,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 										table={selectedTable?.table}
 									/>
 									<ArqueroDetailsList
-										isSortable
+										sortable
 										compact
 										showColumnBorders
 										isHeadersFixed

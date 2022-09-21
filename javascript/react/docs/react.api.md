@@ -54,8 +54,6 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     isColumnClickable?: boolean;
     isHeadersFixed?: boolean;
     isResizable?: boolean;
-    // (undocumented)
-    isSortable?: boolean;
     isStriped?: boolean;
     // (undocumented)
     limit?: number;
@@ -67,6 +65,8 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     onRenderGroupHeader?: GroupHeaderFunction;
     selectedColumn?: string;
     showColumnBorders?: boolean;
+    // (undocumented)
+    sortable?: boolean;
     // (undocumented)
     table: ColumnTable;
 }
