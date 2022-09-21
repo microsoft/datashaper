@@ -4,11 +4,16 @@
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import type { TableContainer } from './types.js'
+import type { TableContainer, TableMetadata } from './types.js'
 
-export function container(id: string, table?: ColumnTable): TableContainer {
+export function container(
+	id: string,
+	table?: ColumnTable,
+	metadata?: TableMetadata,
+): TableContainer {
 	return {
 		id,
 		table,
+		metadata,
 	}
 }

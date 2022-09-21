@@ -58,7 +58,6 @@
 		"react-dom": "^18.2.0",
 		"react-error-boundary": "^3.1.4",
 		"react-is": "^18.2.0",
-		"react-router-dom": "^6.4.0",
 		"recoil": "^0.7.5",
 		"redbox-react": "^1.6.0",
 		"rxjs": "^7.5.6",

@@ -4,6 +4,7 @@
  */
 import { fetchStep } from '../fetch.js'
 
+const CSV_URL = 'javascript/workflow/src/__tests__/data/companies.csv'
 /**
  * Keep unit test for data conversion checks
  */
@@ -11,7 +12,7 @@ describe('test for fetch', () => {
 	test('fetch simple csv file and automax value set', async () => {
 		const result = await fetchStep(
 			{
-				url: 'javascript/webapp/public/data/companies.csv',
+				url: CSV_URL,
 				delimiter: ',',
 				autoMax: 10000,
 			},
@@ -50,7 +51,7 @@ describe('test for fetch', () => {
 	test('fetch simple csv file and without automax value set', async () => {
 		const result = await fetchStep(
 			{
-				url: 'javascript/webapp/public/data/companies.csv',
+				url: CSV_URL,
 				delimiter: ',',
 			},
 			'data',

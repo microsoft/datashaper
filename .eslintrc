@@ -9,7 +9,7 @@
 			"error",
 			[
 				{
-					"expectedExtensions": [".js", ".css"]
+					"expectedExtensions": [".js", ".css", ".json"]
 				}
 			]
 		],

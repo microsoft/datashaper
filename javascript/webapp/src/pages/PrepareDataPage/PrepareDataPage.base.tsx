@@ -19,7 +19,7 @@ import {
 } from '@datashaper/react'
 import { TableListBar } from '@datashaper/react/src/components/TableListBar.js'
 import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
-import type { TableContainer, TableMetadata } from '@datashaper/tables'
+import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
@@ -61,15 +61,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const selectedTable = inputs
 		.concat(outputs)
 		.find(x => x.id === selectedTableId)
-
-	const onUpdateMetadata = useCallback(
-		(meta: TableMetadata) => {
-			if (selectedTable) {
-				selectedTable.metadata = meta
-			}
-		},
-		[selectedTable],
-	)
 
 	const onSave = useOnSaveStep(workflow)
 	const onCreate = useOnCreateStep(onSave, setSelectedTableId)
@@ -136,16 +127,17 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 										table={selectedTable?.table}
 									/>
 									<ArqueroDetailsList
-										isSortable
+										sortable
 										compact
 										showColumnBorders
-										isHeadersFixed
-										isColumnClickable={!!onColumnClick}
+										isHeaderFixed
+										clickableColumns={!!onColumnClick}
 										selectedColumn={selectedColumn}
 										onColumnClick={onColumnClick}
-										onChangeMetadata={onUpdateMetadata}
+										// onChangeMetadata={onUpdateMetadata}
 										metadata={selectedTable?.metadata}
 										table={selectedTable?.table}
+										features={{ smartHeaders: true }}
 									/>
 								</DetailsListContainer>
 							)}

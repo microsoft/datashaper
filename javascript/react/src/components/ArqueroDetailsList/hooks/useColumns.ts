@@ -39,12 +39,11 @@ export interface ColumnOptions {
 	selectedColumn?: string
 	onColumnClick?: ColumnClickFunction
 	onCellDropdownSelect?: DropdownOptionSelect
-	includeAllColumns?: boolean
-	isColumnClickable?: boolean
+	isClickable?: boolean
 	isDefaultHeaderClickable?: boolean
 	showColumnBorders?: boolean
 	compact?: boolean
-	isResizable?: boolean
+	resizable?: boolean
 }
 
 /**
@@ -59,7 +58,6 @@ export function useColumns(
 	table: ColumnTable,
 	computedMetadata?: TableMetadata,
 	columns?: IColumn[],
-	visibleColumns?: string[],
 	handleColumnHeaderClick?: ColumnClickFunction,
 	options: ColumnOptions = {},
 ): IColumn[] {
@@ -70,30 +68,24 @@ export function useColumns(
 		selectedColumn,
 		onColumnClick,
 		onCellDropdownSelect,
-		includeAllColumns = false,
-		isColumnClickable = false,
+		isClickable = false,
 		isDefaultHeaderClickable = false,
 		showColumnBorders = false,
 		compact = false,
-		isResizable = true,
+		resizable = true,
 	} = options
 
-	const handleCellClick = useCellClickhandler(isColumnClickable, onColumnClick)
+	const handleCellClick = useCellClickhandler(isClickable, onColumnClick)
 	const handleCellDropdownSelect = useCellDropdownSelectHandler(
-		isColumnClickable,
+		isClickable,
 		onCellDropdownSelect,
 	)
 
 	const colorScale = useIncrementingColumnColorScale(computedMetadata)
 
-	const styles = useColumnStyles(isColumnClickable, showColumnBorders)
+	const styles = useColumnStyles(isClickable, showColumnBorders)
 
-	const names = useColumnNamesList(
-		table,
-		columns,
-		includeAllColumns,
-		visibleColumns,
-	)
+	const names = useColumnNamesList(table, columns)
 	//get column width based on min value or on commandBar item passed
 	const columnMinWidth = useCountMinWidth(features.commandBar)
 
@@ -179,7 +171,7 @@ export function useColumns(
 					compact,
 					...column.data,
 				},
-				isResizable,
+				isResizable: resizable,
 			}
 		})
 	}, [
@@ -193,7 +185,7 @@ export function useColumns(
 		handleCellClick,
 		styles,
 		compact,
-		isResizable,
+		resizable,
 		computedMetadata,
 		colorScale,
 		handleCellDropdownSelect,
