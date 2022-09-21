@@ -424,6 +424,8 @@ export interface ImputeArgs extends InputColumnListArgs {
 // @public (undocumented)
 export interface InputColumnArgs {
     column: string;
+    // (undocumented)
+    dataType?: DataType;
 }
 
 // Warning: (ae-missing-release-tag) "InputColumnListArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

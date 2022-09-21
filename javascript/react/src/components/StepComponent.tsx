@@ -68,7 +68,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		/* Change Events */
 		const change = useStepChangeHandler(index, onChange)
 		const onInputTableChange = useInputTableChanged(s, g, change)
-		const onInputColumnChange = useInputColumnChanged(s, change)
+		const onInputColumnChange = useInputColumnChanged(s, change, table)
 		const onOutputColumnChange = useOutputColumnChanged(s, change)
 		const onOutputTableChange = useOutputTableChanged(s, changeOutput, change)
 
