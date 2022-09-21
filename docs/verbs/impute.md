@@ -12,7 +12,7 @@ Fills in any invalid values with a specified value. Invalid values include NaN, 
 | 4   | Jenny |
 | 5   | null  |
 
-`impute columns['name'] with value='Doe'`:
+`impute column['name'] with value='Doe'`:
 
 | id  | name  |
 | --- | ----- |
