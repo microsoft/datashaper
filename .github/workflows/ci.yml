@@ -12,6 +12,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
 
       - uses: actions/checkout@v3
 
