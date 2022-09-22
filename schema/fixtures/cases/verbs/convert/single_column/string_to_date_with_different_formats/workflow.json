@@ -7,7 +7,8 @@
 			"id": "expected",
 			"args": {
 				"column": "date",
-				"type": "date"
+				"type": "date",
+				"to": "newColumn"
 			}
 		}
 	],
