@@ -17,10 +17,10 @@ import { stepVerbFactory } from './util/factories.js'
  */
 export const convertStep: ColumnTableStep<ConvertArgs> = (
 	input,
-	{ column, type, radix, delimiter, formatPattern },
+	{ column, type, radix, delimiter, formatPattern, to },
 ) => {
 	const dArgs = {
-		[column]: parseType(column, type, radix, delimiter, formatPattern),
+		[to]: parseType(column, type, radix, delimiter, formatPattern),
 	}
 
 	// note that this applies the specified parse to every column equally

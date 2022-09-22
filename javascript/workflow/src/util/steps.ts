@@ -47,7 +47,7 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	binarize: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	boolean: [Tags.InputTable, Tags.OutputColumn],
 	concat: [Tags.InputTable, Tags.RowModifying],
-	convert: [Tags.InputTable, Tags.InputColumn],
+	convert: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	dedupe: [Tags.InputTable, Tags.RowModifying],
 	derive: [Tags.InputTable, Tags.OutputColumn],
 	difference: [Tags.InputTable, Tags.RowModifying],
