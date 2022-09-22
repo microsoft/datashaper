@@ -8,7 +8,6 @@ import { memo, useMemo } from 'react'
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
-import { inputColumnList } from '../verbForm/VerbFormFactories.js'
 
 /**
  * Just the to/value inputs for an impute.
@@ -19,7 +18,6 @@ export const UnhotBase: React.FC<
 > = memo(function UnhotBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<UnhotArgs>[]>(
 		() => [
-			inputColumnList(step, columns),
 			{
 				label: 'Keep source columns',
 				type: FormInputType.Checkbox,

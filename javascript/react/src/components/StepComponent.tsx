@@ -4,12 +4,13 @@
  */
 import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
 import {
+	isInputColumnListStep,
 	isInputColumnStep,
 	isInputTableStep,
 	isOutputColumnStep,
 	NodeInput,
 } from '@datashaper/workflow'
-import { TextField } from '@fluentui/react'
+import { Dropdown,TextField  } from '@fluentui/react'
 import { memo } from 'react'
 
 import { TableColumnDropdown } from '../controls/TableColumnDropdown.js'
@@ -20,9 +21,11 @@ import { useTableColumnNames } from '../hooks/useTableColumnNames.js'
 import { useTableDropdownOptions } from '../hooks/useTableDropdownOptions.js'
 import { dropdownStyles } from '../styles.js'
 import {
+	getSimpleDropdownOptions,
 	useColumnFilter,
 	useDefaultOutputNameInitially,
 	useInputColumnChanged,
+	useInputColumnListChanged,
 	useInputTableChanged,
 	useOutputColumnChanged,
 	useOutputTableChanged,
@@ -69,6 +72,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		const change = useStepChangeHandler(index, onChange)
 		const onInputTableChange = useInputTableChanged(s, g, change)
 		const onInputColumnChange = useInputColumnChanged(s, change, table)
+		const onInputColumnListChange = useInputColumnListChanged(s, change)
 		const onOutputColumnChange = useOutputColumnChanged(s, change)
 		const onOutputTableChange = useOutputTableChanged(s, changeOutput, change)
 
@@ -85,6 +89,20 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 						label={inputTableLabel || 'Input table'}
 						selectedKey={tableId ?? null}
 						onChange={onInputTableChange}
+					/>
+				) : null}
+
+				{/* Input Column List */}
+				{isInputColumnListStep(s) ? (
+					<Dropdown
+						required={true}
+						label={'Columns'}
+						placeholder={'Choose columns'}
+						styles={dropdownStyles}
+						selectedKeys={s.args.columns}
+						options={getSimpleDropdownOptions(columns)}
+						onChange={onInputColumnListChange}
+						multiSelect
 					/>
 				) : null}
 

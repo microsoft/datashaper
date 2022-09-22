@@ -9,7 +9,7 @@ import { memo, useMemo } from 'react'
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
-import { enumDropdown, inputColumnList } from '../verbForm/VerbFormFactories.js'
+import { enumDropdown } from '../verbForm/VerbFormFactories.js'
 
 /**
  * Just the to/value inputs for an impute.
@@ -20,7 +20,6 @@ export const MergeBase: React.FC<
 > = memo(function MergeBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<MergeArgs>[]>(
 		() => [
-			inputColumnList(step, columns),
 			enumDropdown(
 				'Merge strategy',
 				MergeStrategy,

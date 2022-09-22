@@ -8,7 +8,6 @@ import { memo, useMemo } from 'react'
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
-import { inputColumnList } from '../verbForm/VerbFormFactories.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.
@@ -20,7 +19,6 @@ export const FoldBase: React.FC<
 > = memo(function FoldBase({ step, columns, onChange }) {
 	const inputs = useMemo<FormInput<FoldArgs>[]>(
 		() => [
-			inputColumnList(step, columns),
 			{
 				label: 'Key name to use',
 				placeholder: 'Key name to use',

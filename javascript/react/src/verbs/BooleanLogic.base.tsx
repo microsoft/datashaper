@@ -21,7 +21,6 @@ export const BooleanLogicBase: React.FC<
 > = memo(function BooleanLogicBase({ step, onChange, columns }) {
 	const inputs = useMemo<FormInput<BooleanArgs>[]>(
 		() => [
-			inputColumnList(step, columns),
 			enumDropdown(
 				'Logical operator',
 				BooleanOperator,
