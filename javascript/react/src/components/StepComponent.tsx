@@ -103,7 +103,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 						label={'Columns'}
 						placeholder={'Choose columns'}
 						styles={dropdownStyles}
-						selectedKey={(s.args as InputColumnListArgs).columns}
+						selectedKeys={(s.args as InputColumnListArgs).columns}
 						options={getSimpleDropdownOptions(columns)}
 						onChange={onInputColumnListChange}
 						multiSelect

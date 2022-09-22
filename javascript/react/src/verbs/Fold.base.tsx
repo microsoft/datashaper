@@ -12,32 +12,30 @@ import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
 /**
  * Provides inputs for a step that needs lists of columns.
  */
-export const FoldBase: React.FC<
-	StepComponentBaseProps<FoldArgs> & {
-		columns: string[]
-	}
-> = memo(function FoldBase({ step, columns, onChange }) {
-	const inputs = useMemo<FormInput<FoldArgs>[]>(
-		() => [
-			{
-				label: 'Key name to use',
-				placeholder: 'Key name to use',
-				type: FormInputType.Text,
-				required: true,
-				current: step.args.to ? step.args.to[0] : '',
-				onChange: (s, val) => (s.args.to![0] = val as string),
-			},
-			{
-				label: 'Value name to use',
-				placeholder: 'Value name to use',
-				type: FormInputType.Text,
-				required: true,
-				current: step.args.to ? step.args.to[1] : '',
-				onChange: (s, val) => (s.args.to![1] = val as string),
-			},
-		],
-		[step, columns],
-	)
+export const FoldBase: React.FC<StepComponentBaseProps<FoldArgs>> = memo(
+	function FoldBase({ step, onChange }) {
+		const inputs = useMemo<FormInput<FoldArgs>[]>(
+			() => [
+				{
+					label: 'Key name to use',
+					placeholder: 'Key name to use',
+					type: FormInputType.Text,
+					required: true,
+					current: step.args.to ? step.args.to[0] : '',
+					onChange: (s, val) => (s.args.to![0] = val as string),
+				},
+				{
+					label: 'Value name to use',
+					placeholder: 'Value name to use',
+					type: FormInputType.Text,
+					required: true,
+					current: step.args.to ? step.args.to[1] : '',
+					onChange: (s, val) => (s.args.to![1] = val as string),
+				},
+			],
+			[step],
+		)
 
-	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
-})
+		return <VerbForm inputs={inputs} step={step} onChange={onChange} />
+	},
+)
