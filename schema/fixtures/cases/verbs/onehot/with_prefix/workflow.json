@@ -5,8 +5,8 @@
 			"verb": "onehot",
 			"input": "table5",
 			"args": {
-				"columns": ["item"],
-				"prefixes": { "item": "furniture_" }
+				"column": "item",
+				"prefix": "furniture_"
 			},
 			"id": "expected"
 		}
