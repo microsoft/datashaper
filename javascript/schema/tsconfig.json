@@ -7,7 +7,8 @@
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "ES2020.BigInt"],
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true
 	},
 	"include": ["src"]
 }
