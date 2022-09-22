@@ -2,5 +2,7 @@ releases:
   "@datashaper/react": patch
   "@datashaper/schema": minor
   "@datashaper/tables": patch
+  "@datashaper/utilities": patch
+  "@datashaper/verb-guidance": patch
   "@datashaper/webapp": patch
   "@datashaper/workflow": patch
