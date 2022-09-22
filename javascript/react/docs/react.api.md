@@ -47,31 +47,28 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps>;
 //
 // @public (undocumented)
 export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'> {
+    clickableColumns?: boolean;
     defaultSortColumn?: string;
     defaultSortDirection?: SortDirection;
     // (undocumented)
     features?: DetailsListFeatures;
-    includeAllColumns?: boolean;
-    isColumnClickable?: boolean;
-    isHeadersFixed?: boolean;
-    isResizable?: boolean;
-    // (undocumented)
-    isSortable?: boolean;
-    isStriped?: boolean;
+    isHeaderFixed?: boolean;
     // (undocumented)
     limit?: number;
     metadata?: TableMetadata;
     // (undocumented)
     offset?: number;
     onCellDropdownSelect?: DropdownOptionSelect;
-    onChangeMetadata?: SaveMetadataFunction;
     onColumnClick?: ColumnClickFunction;
     onRenderGroupHeader?: GroupHeaderFunction;
+    resizable?: boolean;
     selectedColumn?: string;
     showColumnBorders?: boolean;
     // (undocumented)
+    sortable?: boolean;
+    striped?: boolean;
+    // (undocumented)
     table: ColumnTable;
-    visibleColumns?: string[];
 }
 
 // Warning: (ae-missing-release-tag) "ArqueroTableHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -84,7 +81,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps>;
 // @public (undocumented)
 export interface ArqueroTableHeaderProps {
     // (undocumented)
-    bgColor?: string;
+    background?: string;
     // (undocumented)
     color?: string;
     // (undocumented)
@@ -124,17 +121,15 @@ export interface ColumnOptions {
     // (undocumented)
     features?: DetailsListFeatures;
     // (undocumented)
-    includeAllColumns?: boolean;
-    // (undocumented)
-    isColumnClickable?: boolean;
+    isClickable?: boolean;
     // (undocumented)
     isDefaultHeaderClickable?: boolean;
-    // (undocumented)
-    isResizable?: boolean;
     // (undocumented)
     onCellDropdownSelect?: DropdownOptionSelect;
     // (undocumented)
     onColumnClick?: ColumnClickFunction;
+    // (undocumented)
+    resizable?: boolean;
     // (undocumented)
     selectedColumn?: string;
     // (undocumented)
@@ -160,7 +155,7 @@ export const CommandBar: React.FC<CommandBarProps>;
 // @public (undocumented)
 export interface CommandBarProps extends ICommandBarProps {
     // (undocumented)
-    bgColor?: string;
+    background?: string;
     // (undocumented)
     color?: string;
     // (undocumented)
@@ -659,12 +654,12 @@ export function useCellDropdownSelectHandler(clickable: boolean, onOptionSelect?
 // Warning: (ae-missing-release-tag) "useColumnNamesList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumnNamesList(table: ColumnTable, columns?: IColumn[], all?: boolean, visibleColumns?: string[]): string[];
+export function useColumnNamesList(table: ColumnTable, columns?: IColumn[]): string[];
 
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, computedMetadata?: TableMetadata, columns?: IColumn[], visibleColumns?: string[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions): IColumn[];
+export function useColumns(table: ColumnTable, computedMetadata?: TableMetadata, columns?: IColumn[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -684,7 +679,7 @@ export function useDetailsHeaderRenderer(): IRenderFunction_2<IDetailsHeaderProp
 // Warning: (ae-missing-release-tag) "useDetailsListStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useDetailsListStyles(isHeadersFixed: boolean, features?: DetailsListFeatures, styles?: IDetailsListStyles, hasColumnClick?: boolean, compact?: boolean): IDetailsListStyles;
+export function useDetailsListStyles(isHeaderFixed: boolean, features?: DetailsListFeatures, styles?: IDetailsListStyles, hasColumnClick?: boolean, compact?: boolean): IDetailsListStyles;
 
 // Warning: (ae-missing-release-tag) "useFormattedNumber" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -715,6 +710,11 @@ export function useHandleStepSave(workflow: Workflow): (step: Step, index: numbe
 //
 // @public
 export function useIncrementingColumnColorScale(meta?: TableMetadata): () => string;
+
+// Warning: (ae-missing-release-tag) "useInputTableNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useInputTableNames(workflow?: Workflow): string[];
 
 // Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -779,12 +779,7 @@ export function useStripedRowsRenderer(striped?: boolean, columnBorders?: boolea
 // Warning: (ae-missing-release-tag) "useSubsetTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useSubsetTable(table: ColumnTable, columns?: string[]): ColumnTable;
-
-// Warning: (ae-missing-release-tag) "useTableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useTableMetadata(table: ColumnTable, existing?: TableMetadata, discover?: boolean, saveMetadata?: SaveMetadataFunction): TableMetadata | undefined;
+export function useSubsetTable(table: ColumnTable, columns?: IColumn[]): ColumnTable;
 
 // Warning: (ae-missing-release-tag) "useWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

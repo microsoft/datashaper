@@ -143,40 +143,29 @@ export interface ArqueroDetailsListProps
 	metadata?: TableMetadata
 	offset?: number
 	limit?: number
-	/**
-	 * Indicates whether we should include all of the columns in the table by default.
-	 * If false, a columns array must be provided.
-	 */
-	includeAllColumns?: boolean
-	/**
-	 * List of visible columns selected from the table.
-	 * If ommitted all configured columns are shown by default.
-	 */
-	visibleColumns?: string[]
-	isSortable?: boolean
+	sortable?: boolean
 	/**
 	 * Indicates whether to use even/odd row coloring.
 	 */
-	isStriped?: boolean
+	striped?: boolean
 	/**
 	 * Indicates that the entire column is clickable for selection.
 	 */
-	isColumnClickable?: boolean
+	clickableColumns?: boolean
 	/**
 	 * Indicates to use borders between columns so the cells look more like a spreadsheet (row borders are always on).
 	 */
 	showColumnBorders?: boolean
 	/**
 	 * Passthrough to the column click handler.
-	 * Will be applied to the column header only unless isColumnClickable === true.
+	 * Will be applied to the column header only unless clickableColumns === true.
 	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick
 	 * and they will both fire.
 	 * TODO: maybe turn this into onColumnSelect?
 	 */
 	onColumnClick?: ColumnClickFunction
 	/**
-	 * Passthrough to the column click handler.
-	 * Will be applied to the column header only unless isColumnClickable === true.
+	 * If array cells are displayed with a dropdown, this will fire when a value is selected.
 	 */
 	onCellDropdownSelect?: DropdownOptionSelect
 	/**
@@ -184,21 +173,17 @@ export interface ArqueroDetailsListProps
 	 */
 	onRenderGroupHeader?: GroupHeaderFunction
 	/**
-	 * Passthrough to the useTableMetadata hook, to update and store the metadata computed
+	 * Fixed headers on top when scrolling
 	 */
-	onChangeMetadata?: SaveMetadataFunction
+	isHeaderFixed?: boolean
+	/**
+	 * Resizable columns
+	 */
+	resizable?: boolean
 	/**
 	 * Key for a selected column - this is not normally an option in DetailsList
 	 */
 	selectedColumn?: string
-	/**
-	 * Fixed headers on top when scrolling
-	 */
-	isHeadersFixed?: boolean
-	/**
-	 * Resizable columns
-	 */
-	isResizable?: boolean
 	/**
 	 * Default sort column
 	 */

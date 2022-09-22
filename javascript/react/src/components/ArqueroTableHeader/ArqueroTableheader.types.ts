@@ -15,5 +15,5 @@ export interface ArqueroTableHeaderProps {
 	visibleColumns?: string[]
 	onRenameTable?: (name: string) => void
 	color?: string
-	bgColor?: string
+	background?: string
 }

@@ -4,8 +4,9 @@
  */
 import type { Theme } from '@thematic/core'
 import { ThemeVariant } from '@thematic/core'
+import styled from 'styled-components'
 
-export const bgColor = (theme: Theme): string =>
+export const background = (theme: Theme): string =>
 	theme.variant === ThemeVariant.Light
 		? theme.application().highContrast().hex()
 		: theme.application().lowContrast().hex()
@@ -22,3 +23,9 @@ export const dropzone = {
 		margin: 0,
 	},
 }
+
+export const Wrapper = styled.div`
+	width: 100%;
+	background: ${({ theme }) => background(theme)};
+	color: ${({ theme }) => color(theme)};
+`

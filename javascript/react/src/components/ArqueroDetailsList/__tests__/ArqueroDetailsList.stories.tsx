@@ -3,41 +3,22 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
-import { PerformanceTestStory } from './PerformanceTestStory/PerformanceTestStory.js'
-import { RowGroupingTestStory } from './RowGroupingTestStory/RowGroupingTestStory.js'
+import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
+import { BasicStory } from './Basic.story.js'
+import { ColumnsStory } from './Columns/Columns.story.js'
+import { FeaturesStory } from './Features.story.js'
+import { PerformanceStory } from './Performance/Performance.story.js'
+import { RowGroupingStory } from './RowGrouping/RowGrouping.story.js'
 
 const meta = {
-	title: 'ArqueroDetailsList',
+	title: 'Components/ArqueroDetailsList',
+	component: ArqueroDetailsList,
 }
 
 export default meta
 
-export const RowGroupingStory = (
-	_args: unknown,
-	{ loaded: { stocks } }: any,
-): JSX.Element => {
-	if (!stocks) {
-		return <div>Loading</div>
-	}
-
-	return <RowGroupingTestStory mockTable={stocks} />
-}
-
-RowGroupingStory.story = {
-	name: 'Row grouping',
-}
-
-export const PerformanceStory = (
-	_args: unknown,
-	{ loaded: { stocks } }: any,
-): JSX.Element => {
-	if (!stocks) {
-		return <div>Loading...</div>
-	}
-
-	return <PerformanceTestStory mockTablePerformance={stocks} />
-}
-
-PerformanceStory.story = {
-	name: 'Performance',
-}
+export const Basic = BasicStory
+export const Features = FeaturesStory
+export const Columns = ColumnsStory
+export const RowGrouping = RowGroupingStory
+export const Performance = PerformanceStory

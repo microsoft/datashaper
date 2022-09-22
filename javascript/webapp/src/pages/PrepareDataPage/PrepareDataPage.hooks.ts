@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { TableContainer } from '@datashaper/tables'
+import { introspect } from '@datashaper/tables'
 import { renameDuplicatedFileName } from '@datashaper/utilities'
 import type { Workflow } from '@datashaper/workflow'
 import { useCallback, useEffect, useState } from 'react'
@@ -17,7 +18,12 @@ export function useTables(setSelectedTableId: (id: string) => void): {
 		(update: TableContainer[]) => {
 			if (update.length > 0) {
 				const map = new Map<string, number>()
-				const allTables = [...tables, ...update]
+				const allTables = [...tables, ...update].map(table => {
+					if (!table.metadata) {
+						table.metadata = introspect(table.table!, true)
+					}
+					return table
+				})
 				const renamedTables = allTables.map(t => ({
 					...t,
 					id: renameDuplicatedFileName(map, t.id),

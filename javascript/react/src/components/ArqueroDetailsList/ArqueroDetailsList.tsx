@@ -14,10 +14,7 @@ import {
 import type { RowObject } from 'arquero/dist/types/table/table'
 import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
-import type {
-	ArqueroDetailsListProps,
-	DetailsListFeatures,
-} from './ArqueroDetailsList.types.js'
+import type { ArqueroDetailsListProps } from './ArqueroDetailsList.types.js'
 import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
 import {
 	useColumns,
@@ -30,7 +27,6 @@ import {
 	useSortHandling,
 	useStripedRowsRenderer,
 	useSubsetTable,
-	useTableMetadata,
 } from './hooks/index.js'
 
 /**
@@ -43,17 +39,14 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		metadata,
 		offset = 0,
 		limit = Infinity,
-		includeAllColumns = true,
-		visibleColumns,
-		isSortable = false,
-		isStriped = false,
-		isColumnClickable = false,
+		sortable = false,
+		striped = false,
+		clickableColumns = false,
 		showColumnBorders = false,
 		selectedColumn,
 		onColumnClick,
 		onCellDropdownSelect,
 		onRenderGroupHeader,
-		onChangeMetadata,
 		// extract props we want to set data-centric defaults for
 		selectionMode = SelectionMode.none,
 		layoutMode = DetailsListLayoutMode.fixedColumns,
@@ -62,16 +55,16 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		styles,
 		defaultSortColumn,
 		defaultSortDirection,
-		isHeadersFixed = false,
+		isHeaderFixed = false,
 		compact = false,
-		isResizable = true,
+		resizable = true,
 		// passthrough the remainder as props
 		...props
 	}) {
 		const [version, setVersion] = useState(0)
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(
-				isSortable,
+				sortable,
 				onColumnHeaderClick,
 				defaultSortColumn,
 				defaultSortDirection,
@@ -79,7 +72,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
-		const subset = useSubsetTable(table, visibleColumns)
+		const subset = useSubsetTable(table, columns)
 		// sort the table internally
 		// note that this is different than the orderby of a pipeline step
 		// this is a temporary sort only for the table display
@@ -104,16 +97,9 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			groupedEntries,
 		)
 
-		const computedMetadata = useTableMetadata(
-			table,
-			metadata,
-			anyStatsFeatures(features),
-			onChangeMetadata,
-		)
-
 		const isDefaultHeaderClickable = useMemo((): any => {
-			return isSortable || isColumnClickable || !!onColumnHeaderClick
-		}, [isSortable, isColumnClickable, onColumnHeaderClick])
+			return sortable || clickableColumns || !!onColumnHeaderClick
+		}, [sortable, clickableColumns, onColumnHeaderClick])
 
 		const onColumnResize = useCallback(
 			(column: IColumn | undefined, newWidth: number | undefined) => {
@@ -127,9 +113,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const displayColumns = useColumns(
 			table,
-			computedMetadata,
+			metadata,
 			columns,
-			visibleColumns,
 			handleColumnHeaderClick,
 			{
 				features,
@@ -139,27 +124,26 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				onColumnClick,
 				onCellDropdownSelect,
 				isDefaultHeaderClickable,
-				includeAllColumns,
-				isColumnClickable,
+				isClickable: clickableColumns,
 				showColumnBorders,
 				compact,
-				isResizable,
+				resizable,
 			},
 		)
 
 		const headerStyle = useDetailsListStyles(
-			isHeadersFixed,
+			isHeaderFixed,
 			features,
 			styles as IDetailsListStyles,
 			!!onColumnClick,
 			compact,
 		)
 
-		const renderRow = useStripedRowsRenderer(isStriped, showColumnBorders)
+		const renderRow = useStripedRowsRenderer(striped, showColumnBorders)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 		const renderGroupHeader = useGroupHeaderRenderer(
 			table,
-			computedMetadata,
+			metadata,
 			onRenderGroupHeader,
 			features.lazyLoadGroups,
 		)
@@ -247,7 +231,3 @@ const DetailsWrapper = styled.div`
 		justify-content: center;
 	}
 `
-
-function anyStatsFeatures(features?: DetailsListFeatures) {
-	return Object.values(features || {}).some(v => v === true)
-}

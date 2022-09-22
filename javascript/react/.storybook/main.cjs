@@ -7,12 +7,22 @@ module.exports = {
 		path.join(__dirname, '../src/**/*.stories.mdx'),
 		path.join(__dirname, '../src/**/*.stories.@(js|jsx|ts|tsx)'),
 	],
+	staticDirs: [path.join(__dirname, '../src/__tests__/public')],
 	addons: [
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
 		'@storybook/addon-interactions',
 	],
 	framework: '@storybook/react',
+	typescript: {
+		reactDocgen: 'react-docgen-typescript',
+		reactDocgenTypescriptOptions: {
+			compilerOptions: {
+				allowSyntheticDefaultImports: false,
+				esModuleInterop: false,
+			},
+		},
+	},
 	webpackFinal(config) {
 		// mute build output
 		if (process.env.CI || process.env.SB_QUIET) {
@@ -54,6 +64,7 @@ module.exports = {
 			include: /node_modules/,
 			type: 'javascript/auto',
 		})
+
 		return config
 	},
 }

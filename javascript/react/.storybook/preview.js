@@ -4,20 +4,11 @@ import { loadCSV } from 'arquero'
 
 addDecorator(ThematicFluentDecorator)
 
-export const parameters = {
-	actions: { argTypesRegex: '^on[A-Z].*' },
-	controls: {
-		matchers: {
-			color: /(background|color)$/i,
-			date: /Date$/,
-		},
-	},
-}
-
 export const loaders = [
 	async () => ({
-		stocks: await loadCSV('./data/stocks.csv', {
-			autoMax: 1000000,
-		}),
+		companies: await loadCSV('./data/companies.csv'),
+		companies2: await loadCSV('./data/companies2.csv'),
+		products: await loadCSV('./data/products.csv'),
+		stocks: await loadCSV('./data/stocks.csv'),
 	}),
 ]

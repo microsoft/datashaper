@@ -42,7 +42,7 @@ export function columnTypes(table: ColumnTable, columns?: string[]): Record<stri
 // Warning: (ae-missing-release-tag) "container" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function container(id: string, table?: ColumnTable): TableContainer;
+export function container(id: string, table?: ColumnTable, metadata?: TableMetadata): TableContainer;
 
 // Warning: (ae-missing-release-tag) "determineType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

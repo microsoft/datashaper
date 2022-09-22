@@ -7,6 +7,9 @@
                     "description": "Name of the input column for columnnar operations.",
                     "type": "string"
                 },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
+                },
                 "groupby": {
                     "description": "Column to group by",
                     "type": "string"
@@ -61,6 +64,9 @@
                     "description": "Name of the input column for columnnar operations.",
                     "type": "string"
                 },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
+                },
                 "fixedcount": {
                     "description": "Fixed number of bins.\nNote that the bin placements are inclusive of the bottom boundary and exclusive of the top boundary -\nthis means there is always one extra bin for the max value when using fixed count.",
                     "type": "number"
@@ -110,6 +116,9 @@
                         "$ref": "#/definitions/Criterion"
                     },
                     "type": "array"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
                 },
                 "logical": {
                     "$ref": "#/definitions/BooleanOperator"
@@ -208,6 +217,24 @@
                 }
             },
             "type": "object"
+        },
+        "DataType": {
+            "description": "Explicit data type of the value (i.e., for a column or property).\nTODO: clarify/update null/undefined",
+            "enum": [
+                "array",
+                "boolean",
+                "date",
+                "datetime",
+                "integer",
+                "null",
+                "number",
+                "object",
+                "string",
+                "time",
+                "undefined",
+                "unknown"
+            ],
+            "type": "string"
         },
         "DeriveArgs": {
             "properties": {
@@ -340,6 +367,9 @@
                         "$ref": "#/definitions/Criterion"
                     },
                     "type": "array"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
                 },
                 "logical": {
                     "$ref": "#/definitions/BooleanOperator"
@@ -624,6 +654,9 @@
                     "description": "Name of the input column for columnnar operations.",
                     "type": "string"
                 },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
+                },
                 "mapping": {
                     "$ref": "#/definitions/Record<any,any>",
                     "description": "Mapping of old value to new for the recoding.\nNote that the key must be coercable to a string for map lookup."
@@ -711,6 +744,9 @@
                 "column": {
                     "description": "Name of the input column for columnnar operations.",
                     "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
                 },
                 "operation": {
                     "$ref": "#/definitions/FieldAggregateOperation",
@@ -855,6 +891,9 @@
                 "column": {
                     "description": "Name of the input column for columnnar operations.",
                     "type": "string"
+                },
+                "dataType": {
+                    "$ref": "#/definitions/DataType"
                 },
                 "operation": {
                     "$ref": "#/definitions/WindowFunction"

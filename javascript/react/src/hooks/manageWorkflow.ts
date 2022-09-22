@@ -4,6 +4,7 @@
  */
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { TableContainer } from '@datashaper/tables'
+import { introspect } from '@datashaper/tables'
 import type { Step } from '@datashaper/workflow'
 import { cloneStep, Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -126,11 +127,17 @@ export function useWorkflowOutputListener(
 	useEffect(
 		() =>
 			setOutput &&
-			workflow.onChange(
-				() =>
-					setOutput(workflow.toArray().filter(t => !!t) as TableContainer[]),
-				true,
-			),
+			workflow.onChange(() => {
+				const outputs = (
+					workflow.toArray().filter(t => !!t) as TableContainer[]
+				).map(table => {
+					if (!table.metadata) {
+						table.metadata = introspect(table.table!, true)
+					}
+					return table
+				})
+				setOutput(outputs)
+			}, true),
 		[workflow, setOutput],
 	)
 }

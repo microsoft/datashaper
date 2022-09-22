@@ -12,7 +12,7 @@ Combines a [groupby](./groupby.md) with a [rollup](./rollup.md) to support all-i
 | 2   | 11    |
 | 2   | 18    |
 
-`aggregate column['value'] with function='sum', groupby column['id'], to_column='output'`:
+`aggregate column['value'] with function='sum', groupby=column['id'], t_column='output'`:
 
 | id  | output |
 | --- | ------ |
