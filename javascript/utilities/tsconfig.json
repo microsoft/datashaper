@@ -1,8 +1,10 @@
 {
 	"extends": "@essex/tsconfig-base",
 	"compilerOptions": {
+		"target": "ES2021",
 		"module": "ESNext",
 		"moduleResolution": "Node",
+		"importHelpers": true,
 		"lib": ["ESNext", "DOM", "DOM.Iterable", "ES2020.BigInt"],
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true
