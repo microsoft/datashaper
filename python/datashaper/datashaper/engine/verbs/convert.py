@@ -108,7 +108,7 @@ __type_mapping: Dict[ParseType, Callable] = {
 
 def convert(
     input: VerbInput,
-    columns: List[str],
+    column: str,
     type: str,
     radix: Optional[int] = None,
     formatPattern: str = "%Y-%m-%d",
@@ -119,9 +119,8 @@ def convert(
     input_table = input.get_input()
     output = input_table.copy()
 
-    for column in columns:
-        output[column] = __type_mapping[parse_type](
-            column=output[column], radix=radix, formatPattern=formatPattern
-        )
+    output[column] = __type_mapping[parse_type](
+        column=output[column], radix=radix, formatPattern=formatPattern
+    ) 
 
     return TableContainer(table=output)

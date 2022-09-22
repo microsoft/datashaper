@@ -65,6 +65,7 @@ export {
 	useHandleFilesUpload,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
+	useInputTableNames,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnEditStep,

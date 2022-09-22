@@ -4,27 +4,24 @@
  */
 import { Spinner } from '@fluentui/react'
 import { memo, Suspense } from 'react'
-import { HashRouter } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
 import { Layout } from '../components/Layout.js'
+import { PrepareDataPage } from '../pages/PrepareDataPage/PrepareDataPage.base.js'
 import { ErrorBoundary } from './ErrorBoundary.js'
-import { RouteOptions } from './RouteOptions.js'
 import { StyleContext } from './StyleContext.js'
 
 export const App: React.FC = memo(function App() {
 	return (
 		<ErrorBoundary>
 			<RecoilRoot>
-				<HashRouter>
-					<Suspense fallback={<Spinner />}>
-						<StyleContext>
-							<Layout>
-								<RouteOptions />
-							</Layout>
-						</StyleContext>
-					</Suspense>
-				</HashRouter>
+				<Suspense fallback={<Spinner />}>
+					<StyleContext>
+						<Layout>
+							<PrepareDataPage />
+						</Layout>
+					</StyleContext>
+				</Suspense>
 			</RecoilRoot>
 		</ErrorBoundary>
 	)

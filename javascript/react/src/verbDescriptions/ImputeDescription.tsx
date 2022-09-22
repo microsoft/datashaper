@@ -6,7 +6,6 @@ import type { ImputeArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types.js'
-import { createRowEntries } from '../verbForm/createRowEntries.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
 
 export const ImputeDescription: React.FC<StepDescriptionProps<ImputeArgs>> =
@@ -15,19 +14,10 @@ export const ImputeDescription: React.FC<StepDescriptionProps<ImputeArgs>> =
 			const {
 				step: { args },
 			} = props
-			const sub = createRowEntries(
-				args.columns,
-				c => ({
-					value: c,
-				}),
-				3,
-				props,
-			)
 			return [
 				{
-					before: `impute column${args.columns?.length !== 1 ? 's' : ''}`,
-					value: args.columns.length === 0 ? undefined : '',
-					sub,
+					before: `impute column`,
+					value: args.column !== undefined ? args.column : '',
 				},
 				{
 					before: 'with value',

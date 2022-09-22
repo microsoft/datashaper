@@ -16,7 +16,7 @@ import type { DetailsListFeatures } from '../index.js'
  * @returns
  */
 export function useDetailsListStyles(
-	isHeadersFixed: boolean,
+	isHeaderFixed: boolean,
 	features?: DetailsListFeatures,
 	styles?: IDetailsListStyles,
 	hasColumnClick?: boolean,
@@ -38,7 +38,7 @@ export function useDetailsListStyles(
 				{},
 				{
 					headerWrapper: {
-						position: isHeadersFixed ? 'sticky' : 'inherit',
+						position: isHeaderFixed ? 'sticky' : 'inherit',
 						zIndex: '2',
 						top: '0',
 						background: theme.application().background().hex(),
@@ -63,6 +63,6 @@ export function useDetailsListStyles(
 				},
 				styles,
 			),
-		[theme, isFeatureEnabled, styles, isHeadersFixed, hasColumnClick, compact],
+		[theme, isFeatureEnabled, styles, isHeaderFixed, hasColumnClick, compact],
 	)
 }

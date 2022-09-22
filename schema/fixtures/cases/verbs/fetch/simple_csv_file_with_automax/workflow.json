@@ -5,7 +5,7 @@
 			"verb": "fetch",
 			"input": "table1",
 			"args": {
-				"url": "javascript/webapp/public/data/companies.csv",
+				"url": "javascript/workflow/src/__tests__/data/companies.csv",
 				"delimiter": ",",
 				"autoMax": 10000
 			},

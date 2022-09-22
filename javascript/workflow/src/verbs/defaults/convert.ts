@@ -5,10 +5,7 @@
 import type { ConvertArgs } from '@datashaper/schema'
 import { ParseType } from '@datashaper/schema'
 
-import { inputColumnList } from './inputColumnList.js'
-
-export const convert = (): ConvertArgs => ({
+export const convert = (): Omit<ConvertArgs, 'column'> => ({
 	type: ParseType.Decimal,
 	formatPattern: '%Y-%m-%d',
-	...inputColumnList(),
 })

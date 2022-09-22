@@ -6,7 +6,7 @@
 			"input": "table19",
 			"id": "expected",
 			"args": {
-				"columns": ["int_hex"],
+				"column": "int_hex",
 				"type": "int"
 			}
 		}

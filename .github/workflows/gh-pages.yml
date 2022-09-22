@@ -42,6 +42,8 @@ jobs:
       - run: yarn bundle  --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
         name: Build libs
 
+      - run: cp -R javascript/react/storybook-static javascript/webapp/build/storybook
+
       - run: find javascript/webapp/build
 
       - name: Deploy to GitHub Pages

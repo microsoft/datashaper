@@ -19,7 +19,7 @@ Converts the data of a column from one type to another. This is normally used fo
 | '22'     |
 | 'thirty' |
 
-`convert columns['age'], type=int`:
+`convert column['age'], type=int`:
 
 | age |
 | --- |

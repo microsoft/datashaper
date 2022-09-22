@@ -19,6 +19,7 @@ const pretty: Record<string, string> = {
 const CELL_HEIGHT = 14
 
 const DEFAULT_STATS: StatsColumnType[] = [
+	StatsColumnType.Type,
 	StatsColumnType.Min,
 	StatsColumnType.Max,
 	StatsColumnType.Distinct,

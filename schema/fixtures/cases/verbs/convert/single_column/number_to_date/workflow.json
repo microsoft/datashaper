@@ -6,7 +6,7 @@
 			"input": "table24",
 			"id": "expected",
 			"args": {
-				"columns": ["date"],
+				"column": "date",
 				"type": "date"
 			}
 		}

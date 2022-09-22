@@ -135,7 +135,7 @@ export interface Constraints {
 // Warning: (ae-missing-release-tag) "ConvertArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ConvertArgs extends InputColumnListArgs {
+export interface ConvertArgs extends InputColumnArgs {
     // (undocumented)
     delimiter?: string;
     // (undocumented)
@@ -144,6 +144,26 @@ export interface ConvertArgs extends InputColumnListArgs {
     // (undocumented)
     type: ParseType;
 }
+
+// Warning: (ae-missing-release-tag) "createCodebookSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createCodebookSchemaObject(input: FactoryInput<CodebookSchema>): CodebookSchema;
+
+// Warning: (ae-missing-release-tag) "createDataPackageSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createDataPackageSchemaObject(input: FactoryInput<DataPackageSchema>): DataPackageSchema;
+
+// Warning: (ae-missing-release-tag) "createDataTableSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createDataTableSchemaObject(input: FactoryInput<DataTableSchema>): DataTableSchema;
+
+// Warning: (ae-missing-release-tag) "createWorkflowSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createWorkflowSchemaObject(input: FactoryInput<WorkflowSchema>): WorkflowSchema;
 
 // Warning: (ae-missing-release-tag) "Criterion" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -282,10 +302,18 @@ export interface DualInput extends BasicInput {
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface EraseArgs extends InputColumnListArgs {
+export interface EraseArgs extends InputColumnArgs {
     // (undocumented)
     value: Value;
 }
+
+// Warning: (ae-missing-release-tag) "FactoryInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type FactoryInput<T> = Omit<T, '$schema' | 'id' | 'name'> & {
+    id?: string;
+    name?: string;
+};
 
 // Warning: (ae-missing-release-tag) "FetchArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -415,7 +443,7 @@ export type GroupbyArgs = InputColumnListArgs;
 // Warning: (ae-missing-release-tag) "ImputeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ImputeArgs extends InputColumnListArgs {
+export interface ImputeArgs extends InputColumnArgs {
     value: Value;
 }
 
@@ -477,6 +505,26 @@ export enum JoinStrategy {
     // (undocumented)
     SemiJoin = "semi join"
 }
+
+// Warning: (ae-missing-release-tag) "LATEST_CODEBOOK_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LATEST_CODEBOOK_SCHEMA: string;
+
+// Warning: (ae-missing-release-tag) "LATEST_DATAPACKAGE_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LATEST_DATAPACKAGE_SCHEMA: string;
+
+// Warning: (ae-missing-release-tag) "LATEST_DATATABLE_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LATEST_DATATABLE_SCHEMA: string;
+
+// Warning: (ae-missing-release-tag) "LATEST_WORKFLOW_SCHEMA" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const LATEST_WORKFLOW_SCHEMA: string;
 
 // Warning: (ae-missing-release-tag) "LookupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -567,8 +615,8 @@ export enum NumericComparisonOperator {
 // Warning: (ae-missing-release-tag) "OnehotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface OnehotArgs extends InputColumnListArgs {
-    prefixes?: Record<string, string>;
+export interface OnehotArgs extends InputColumnArgs {
+    prefix?: string;
     // (undocumented)
     preserveSource?: boolean;
 }
@@ -725,7 +773,7 @@ export enum SortDirection {
 // Warning: (ae-missing-release-tag) "SpreadArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface SpreadArgs extends InputColumnListArgs {
+export interface SpreadArgs extends InputColumnArgs {
     delimiter?: string;
     onehot?: boolean;
     // (undocumented)
