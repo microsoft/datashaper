@@ -310,12 +310,10 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps>;
 export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'workflow'>, 'index'> {
     // (undocumented)
     historyView?: boolean;
-    // (undocumented)
-    inputs: TableContainer[];
     onSelect?: (name: string) => void;
     onUpdateOutput?: (output: TableContainer[]) => void;
     onUpdateWorkflow?: (workflow: Workflow) => void;
-    workflow?: Workflow;
+    workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -331,30 +329,6 @@ export interface PanelProps {
     onDismissPanel?: () => void;
     // (undocumented)
     panelIsOpen: boolean;
-}
-
-// Warning: (ae-missing-release-tag) "PrepareDataFull" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const PrepareDataFull: React.FC<PrepareDataFullProps>;
-
-// Warning: (ae-missing-release-tag) "PrepareDataFullProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface PrepareDataFullProps {
-    derived: TableContainer[];
-    inputs: TableContainer[];
-    // (undocumented)
-    onColumnClick?: (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined) => void;
-    onSelectedTableIdChanged: (value: string | undefined) => void;
-    onUpdateOutput?: (tables: TableContainer[]) => void;
-    onUpdateWorkflow?: (workflow: Workflow) => void;
-    outputHeaderCommandBar?: ReactElement<any, any>;
-    // (undocumented)
-    selectedColumn?: string;
-    selectedTableId: string | undefined;
-    stepsPosition?: 'bottom' | 'middle';
-    workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "ProjectMgmtCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -1,0 +1,6 @@
+releases:
+  "@datashaper/react": major
+  "@datashaper/webapp": minor
+
+undecided:
+  - "@datashaper/utilities"

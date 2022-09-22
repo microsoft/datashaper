@@ -157,7 +157,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 						</AsideHeader>
 						<WorkflowContainer isCollapsed={isCollapsed}>
 							<ManageWorkflow
-								inputs={inputs}
 								workflow={workflow}
 								onSelect={setSelectedTableId}
 								onUpdateOutput={setOutputs}
