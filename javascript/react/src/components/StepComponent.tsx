@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
+import type {
+	InputColumnArgs,
+	InputColumnListArgs,
+	OutputColumnArgs,
+} from '@datashaper/schema'
 import {
 	isInputColumnListStep,
 	isInputColumnStep,
@@ -10,7 +14,7 @@ import {
 	isOutputColumnStep,
 	NodeInput,
 } from '@datashaper/workflow'
-import { Dropdown,TextField  } from '@fluentui/react'
+import { Dropdown, TextField } from '@fluentui/react'
 import { memo } from 'react'
 
 import { TableColumnDropdown } from '../controls/TableColumnDropdown.js'
@@ -99,7 +103,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 						label={'Columns'}
 						placeholder={'Choose columns'}
 						styles={dropdownStyles}
-						selectedKeys={s.args.columns}
+						selectedKey={(s.args as InputColumnListArgs).columns}
 						options={getSimpleDropdownOptions(columns)}
 						onChange={onInputColumnListChange}
 						multiSelect
