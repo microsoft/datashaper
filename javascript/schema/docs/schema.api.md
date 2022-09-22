@@ -110,12 +110,56 @@ export interface Category {
     name: string;
 }
 
-// Warning: (ae-missing-release-tag) "CodebookSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Codebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface CodebookSchema extends ResourceSchema {
+export interface Codebook extends Resource {
+    // Warning: (ae-forgotten-export) The symbol "Field" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
     fields: Field[];
+}
+
+// Warning: (ae-missing-release-tag) "ColumnMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ColumnMetadata {
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    stats?: ColumnStats;
+    // (undocumented)
+    type: DataType;
+}
+
+// Warning: (ae-missing-release-tag) "ColumnStats" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ColumnStats {
+    // (undocumented)
+    bins?: Bin[];
+    // (undocumented)
+    categories?: Category[];
+    // (undocumented)
+    count: number;
+    // (undocumented)
+    distinct: number;
+    // (undocumented)
+    invalid: number;
+    // (undocumented)
+    max?: number;
+    // (undocumented)
+    mean?: number;
+    // (undocumented)
+    median?: number;
+    // (undocumented)
+    min?: number;
+    // (undocumented)
+    mode: any;
+    // (undocumented)
+    stdev?: number;
+    // (undocumented)
+    type: DataType;
 }
 
 // Warning: (ae-missing-release-tag) "Constraints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -182,19 +226,19 @@ export enum DataOrientation {
 }
 
 // Warning: (ae-forgotten-export) The symbol "Named" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "DataPackageSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface DataPackageSchema extends Named {
+export interface DataPackage extends Named {
     // (undocumented)
     $schema: string;
-    resources: (string | ResourceSchema)[];
+    resources: (string | Resource)[];
 }
 
-// Warning: (ae-missing-release-tag) "DataTableSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface DataTableSchema extends ResourceSchema {
+export interface DataTable extends Resource {
     columns?: number;
     data?: any;
     encoding?: string;
@@ -294,25 +338,6 @@ export interface FetchArgs {
     autoMax?: number;
     delimiter?: string;
     url: string;
-}
-
-// Warning: (ae-missing-release-tag) "Field" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface Field extends Omit<Named, 'id'> {
-    constraints?: Constraints;
-    derivedFrom?: string[];
-    example?: any;
-    exclude?: boolean;
-    format?: string;
-    inverse?: boolean;
-    mapping?: Record<any, any>;
-    metadata?: FieldMetadata;
-    nature?: VariableNature;
-    tags?: string[];
-    type?: DataType;
-    unit?: string;
-    unitDescription?: string;
 }
 
 // Warning: (ae-missing-release-tag) "FieldAggregateOperation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -424,8 +449,6 @@ export interface ImputeArgs extends InputColumnListArgs {
 // @public (undocumented)
 export interface InputColumnArgs {
     column: string;
-    // (undocumented)
-    dataType?: DataType;
 }
 
 // Warning: (ae-missing-release-tag) "InputColumnListArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -504,9 +527,9 @@ export enum MathOperator {
 export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
     delimiter?: string;
     // (undocumented)
-    prefix?: string;
+    keepOriginalColumns?: boolean;
     // (undocumented)
-    preserveSource?: boolean;
+    prefix?: string;
     // (undocumented)
     strategy: MergeStrategy;
     // (undocumented)
@@ -569,8 +592,6 @@ export enum NumericComparisonOperator {
 // @public (undocumented)
 export interface OnehotArgs extends InputColumnListArgs {
     prefixes?: Record<string, string>;
-    // (undocumented)
-    preserveSource?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "OrderbyArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -608,7 +629,7 @@ export type OutputPortBinding = string | NamedOutputPortBinding;
 export interface ParserOptions {
     comment?: string;
     delimiter?: string;
-    escapeChar?: string;
+    escape?: string;
     header?: boolean;
     lineTerminator?: string;
     names?: string[];
@@ -656,7 +677,7 @@ export type PortBinding = string | NamedPortBinding;
 //
 // @public (undocumented)
 export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
-    mapping: Record<Value, Value>;
+    map: Record<Value, Value>;
 }
 
 // Warning: (ae-missing-release-tag) "RenameArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -664,10 +685,10 @@ export interface RecodeArgs extends InputColumnArgs, OutputColumnArgs {
 // @public (undocumented)
 export type RenameArgs = InputColumnRecordArgs;
 
-// Warning: (ae-missing-release-tag) "ResourceSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Resource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface ResourceSchema extends Named {
+export interface Resource extends Named {
     // (undocumented)
     $schema: string;
     homepage?: string;
@@ -675,7 +696,7 @@ export interface ResourceSchema extends Named {
     path?: string | string[];
     // Warning: (ae-forgotten-export) The symbol "Profile" needs to be exported by the entry point index.d.ts
     profile?: Profile;
-    sources?: (string | ResourceSchema)[];
+    sources?: (string | Resource)[];
 }
 
 // Warning: (ae-missing-release-tag) "RollupArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -728,8 +749,6 @@ export enum SortDirection {
 export interface SpreadArgs extends InputColumnListArgs {
     delimiter?: string;
     onehot?: boolean;
-    // (undocumented)
-    preserveSource?: boolean;
     // (undocumented)
     to: string[];
 }
@@ -870,6 +889,17 @@ export enum StringComparisonOperator {
     StartsWith = "starts with"
 }
 
+// Warning: (ae-missing-release-tag) "TableMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TableMetadata {
+    // (undocumented)
+    cols: number;
+    columns: Record<string, ColumnMetadata>;
+    // (undocumented)
+    rows: number;
+}
+
 // Warning: (ae-missing-release-tag) "TypeHints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -898,9 +928,9 @@ export interface UnfoldArgs {
 // @public (undocumented)
 export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
     // (undocumented)
-    prefix?: string;
+    keepOriginalColumns?: boolean;
     // (undocumented)
-    preserveSource?: boolean;
+    prefix?: string;
 }
 
 // Warning: (ae-missing-release-tag) "UnrollArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1042,10 +1072,10 @@ export enum WindowFunction {
     RowNumber = "row_number"
 }
 
-// Warning: (ae-missing-release-tag) "WorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export interface WorkflowSchema extends ResourceSchema {
+export interface Workflow extends Resource {
     input?: string[];
     output: Array<OutputPortBinding>;
     steps?: Step[];

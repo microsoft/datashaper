@@ -6,10 +6,9 @@ import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 	OutputPortBinding,
-	WorkflowSchema} from '@datashaper/schema';
-import {
-	createWorkflowSchemaObject
+	WorkflowSchema,
 } from '@datashaper/schema'
+import { createWorkflowSchemaObject } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, of, Subject } from 'rxjs'

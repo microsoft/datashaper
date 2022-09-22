@@ -34,7 +34,7 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
-		"build": "essex build --docs --skipExportCheck",
+		"build": "essex build --docs",
 		"lint": "essex lint --fix",
 		"bundle-codebook": "typescript-json-schema tsconfig.json CodebookSchema > ../../schema/codebook.json",
 		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackageSchema > ../../schema/datapackage.json",

@@ -1,0 +1,19 @@
+{
+	"sourceMaps": true,
+	"jsc": {
+		"target": "es2021",
+		"parser": {
+			"syntax": "typescript",
+			"tsx": true,
+			"decorators": true,
+			"dynamicImport": true,
+			"importAssertions": true
+		},
+		"experimental": {
+			"keepImportAssertions": true
+		},
+		"transform": {
+			"react": { "runtime": "automatic", "useBuiltins": true }
+		}
+	}
+}
