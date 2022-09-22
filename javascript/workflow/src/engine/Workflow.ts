@@ -6,12 +6,13 @@ import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 	OutputPortBinding,
-	WorkflowSchema,
+	WorkflowSchema} from '@datashaper/schema';
+import {
+	createWorkflowSchemaObject
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, of, Subject } from 'rxjs'
-import { v4 } from 'uuid'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
@@ -540,15 +541,14 @@ export class Workflow {
 		for (const [, binding] of this._outputPorts.entries()) {
 			output.push({ ...binding })
 		}
-		return {
-			$schema: `https://microsoft.github.io/datashaper/schema/workflow/v1.json`,
-			id: this._id ?? v4(),
-			name: this._name ?? 'Workflow',
+		return createWorkflowSchemaObject({
+			id: this._id,
+			name: this._name,
 			description: this._description,
 			input: [...this._inputNames.values()],
 			output,
 			steps: [...this.steps] as any,
-		}
+		})
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
