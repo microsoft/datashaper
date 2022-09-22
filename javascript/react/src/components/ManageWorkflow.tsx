@@ -15,9 +15,6 @@ import {
 	useOnSaveStep,
 	useStepOutputs,
 	useTransformModalState,
-	useWorkflow,
-	useWorkflowListener,
-	useWorkflowOutputListener,
 	useWorkflowSteps,
 } from '../hooks/index.js'
 import { useDeleteConfirm, useEditorTarget } from './ManageWorkflow.hooks.js'
@@ -29,8 +26,7 @@ import { TableTransformModal } from './TableTransformModal.js'
 
 export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 	function ManageWorkflow({
-		workflow,
-		inputs,
+		workflow: wf,
 		table,
 		onSelect,
 		onUpdateOutput,
@@ -39,8 +35,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		historyView = false,
 		...props
 	}) {
-		const wf = useWorkflow(workflow, inputs)
-
 		// Selected Step/Index State for the component
 		const [step, setStep] = useState<Step | undefined>()
 		const [index, setIndex] = useState<number>()
@@ -82,8 +76,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 
 		const outputs = useStepOutputs(wf)
 		const steps = useWorkflowSteps(wf)
-		useWorkflowOutputListener(wf, onUpdateOutput)
-		useWorkflowListener(wf, onUpdateWorkflow)
 
 		return (
 			<Container>
