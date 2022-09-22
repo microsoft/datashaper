@@ -6,16 +6,16 @@ import { v4 } from 'uuid'
 
 /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
 /* @ts-ignore */
-import pkgJson from '../package.json' assert { type: 'json' }
+import { versions } from '../versions.js'
 import type { CodebookSchema } from './codebook/CodebookSchema.js'
 import type { DataPackageSchema } from './datapackage/DataPackageSchema.js'
 import type { DataTableSchema } from './datatable/DataTableSchema.js'
 import type { WorkflowSchema } from './workflow/WorkflowSchema.js'
 
-export const LATEST_WORKFLOW_SCHEMA = `https://microsoft.github.io/datashaper/schema/workflow/v${pkgJson.versions.workflow}.json`
-export const LATEST_DATATABLE_SCHEMA = `https://microsoft.github.io/datashaper/schema/datatable/v${pkgJson.versions.datatable}.json`
-export const LATEST_DATAPACKAGE_SCHEMA = `https://microsoft.github.io/datashaper/schema/datapackage/v${pkgJson.versions.datapackage}.json`
-export const LATEST_CODEBOOK_SCHEMA = `https://microsoft.github.io/datashaper/schema/codebook/v${pkgJson.versions.codebook}.json`
+export const LATEST_WORKFLOW_SCHEMA = `https://microsoft.github.io/datashaper/schema/workflow/v${versions.workflow}.json`
+export const LATEST_DATATABLE_SCHEMA = `https://microsoft.github.io/datashaper/schema/datatable/v${versions.datatable}.json`
+export const LATEST_DATAPACKAGE_SCHEMA = `https://microsoft.github.io/datashaper/schema/datapackage/v${versions.datapackage}.json`
+export const LATEST_CODEBOOK_SCHEMA = `https://microsoft.github.io/datashaper/schema/codebook/v${versions.codebook}.json`
 
 export type FactoryInput<T> = Omit<T, '$schema' | 'id' | 'name'> & {
 	id?: string

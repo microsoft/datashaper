@@ -27,3 +27,5 @@ node_modules/
 
 # dotenv
 .env.local
+
+javascript/schema/versions.js
