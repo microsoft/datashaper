@@ -150,11 +150,12 @@
 		},
 		"ConvertArgs": {
 			"properties": {
-				"columns": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array"
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"dataType": {
+					"$ref": "#/definitions/DataType"
 				},
 				"delimiter": {
 					"type": "string"
@@ -281,11 +282,12 @@
 		},
 		"EraseArgs": {
 			"properties": {
-				"columns": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array"
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"dataType": {
+					"$ref": "#/definitions/DataType"
 				},
 				"value": {
 					"description": "A cell/property value of any type."
@@ -397,11 +399,12 @@
 		},
 		"ImputeArgs": {
 			"properties": {
-				"columns": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array"
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"dataType": {
+					"$ref": "#/definitions/DataType"
 				},
 				"value": {
 					"description": "Value to fill in empty cells"
@@ -548,15 +551,16 @@
 		},
 		"OnehotArgs": {
 			"properties": {
-				"columns": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array"
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
 				},
-				"prefixes": {
-					"$ref": "#/definitions/Record<string,string>",
-					"description": "Optional prefixes for the output column names"
+				"dataType": {
+					"$ref": "#/definitions/DataType"
+				},
+				"prefix": {
+					"description": "Optional prefixes for the output column names",
+					"type": "string"
 				},
 				"preserveSource": {
 					"type": "boolean"
@@ -747,11 +751,12 @@
 		},
 		"SpreadArgs": {
 			"properties": {
-				"columns": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array"
+				"column": {
+					"description": "Name of the input column for columnnar operations.",
+					"type": "string"
+				},
+				"dataType": {
+					"$ref": "#/definitions/DataType"
 				},
 				"delimiter": {
 					"description": "Delimiter to use when converting string cell values into an array with String.split",
