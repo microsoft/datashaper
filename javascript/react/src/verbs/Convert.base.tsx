@@ -12,20 +12,17 @@ import { getEnumDropdownOptions } from '../enums.js'
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
 import { FormInputType, VerbForm } from '../verbForm/VerbForm.js'
-import { inputColumnList } from '../verbForm/VerbFormFactories.js'
 
 /**
  * Provides inputs for a Convert step.
  */
 export const ConvertBase: React.FC<
 	StepComponentBaseProps<ConvertArgs> & {
-		columns: string[]
 		fields: Field[]
 	}
-> = memo(function ConvertBase({ step, onChange, columns, fields }) {
+> = memo(function ConvertBase({ step, onChange, fields }) {
 	const inputs = useMemo<FormInput<ConvertArgs>[]>(
 		() => [
-			inputColumnList(step, columns, 'Columns to convert'),
 			{
 				label: 'Data type',
 				placeholder: 'Choose type',
@@ -46,7 +43,7 @@ export const ConvertBase: React.FC<
 				label: 'Delimiter',
 				if:
 					step.args.type === ParseType.Array ||
-					isInputColumnArray(fields, step.args.columns),
+					isInputColumnArray(fields, step.args.column),
 				type: FormInputType.Text,
 				current: step.args.delimiter ? `${step.args.delimiter}` : '',
 				onChange: (s, opt) => (s.args.delimiter = opt as string),
@@ -67,15 +64,13 @@ export const ConvertBase: React.FC<
 					(s.args.formatPattern = value ? value : '%Y-%m-%d'),
 			},
 		],
-		[step, columns, fields],
+		[step, fields],
 	)
 
 	return <VerbForm inputs={inputs} step={step} onChange={onChange} />
 })
 
-function isInputColumnArray(fields: Field[], columns: string[]) {
-	return columns.some(column => {
-		const meta = fields.find(field => field.name === column)
-		return meta?.type === DataType.Array
-	})
+function isInputColumnArray(fields: Field[], column: string) {
+	const meta = fields.find(field => field.name === column)
+	return meta?.type === DataType.Array
 }

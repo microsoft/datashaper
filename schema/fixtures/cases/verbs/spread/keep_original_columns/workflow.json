@@ -5,7 +5,7 @@
 			"verb": "spread",
 			"input": "table6",
 			"args": {
-				"columns": ["ID"],
+				"column": "ID",
 				"to": ["ID_X"],
 				"preserveSource": true
 			},

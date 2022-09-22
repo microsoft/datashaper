@@ -17,13 +17,13 @@ import { stepVerbFactory } from './util/factories.js'
  */
 export const convertStep: ColumnTableStep<ConvertArgs> = (
 	input,
-	{ columns, type, radix, delimiter, formatPattern },
+	{ column, type, radix, delimiter, formatPattern },
 ) => {
+	const dArgs = {
+		[column]: parseType(column, type, radix, delimiter, formatPattern),
+	}
+
 	// note that this applies the specified parse to every column equally
-	const dArgs = columns.reduce((acc, cur) => {
-		acc[cur] = parseType(cur, type, radix, delimiter, formatPattern)
-		return acc
-	}, {} as any)
 	return input.derive(dArgs)
 }
 

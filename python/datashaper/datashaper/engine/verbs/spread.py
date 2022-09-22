@@ -52,7 +52,7 @@ def __onehot_spread(input_table, columns, to, delimiter):
 
 def spread(
     input: VerbInput,
-    columns: List[str],
+    column: str,
     to: List[str] = None,
     delimiter: str = ",",
     onehot: bool = False,
@@ -60,14 +60,14 @@ def spread(
 ):
     input_table = input.get_input()
     if to is None:
-        to = columns
+        to = [column]
 
     if onehot:
-        output = __onehot_spread(input_table, columns, to, delimiter)
+        output = __onehot_spread(input_table, [column], to, delimiter)
     else:
-        output = __normal_spread(input_table, columns, to, delimiter)
+        output = __normal_spread(input_table, [column], to, delimiter)
 
     if not preserveSource:
-        output = output.drop(columns=columns)
+        output = output.drop(columns=[column])
 
     return TableContainer(table=output)

@@ -7,7 +7,6 @@ import { ParseType } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types.js'
-import { createRowEntries } from '../verbForm/createRowEntries.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
 
 export const ConvertDescription: React.FC<StepDescriptionProps<ConvertArgs>> =
@@ -16,19 +15,10 @@ export const ConvertDescription: React.FC<StepDescriptionProps<ConvertArgs>> =
 			const {
 				step: { args },
 			} = props
-			const sub = createRowEntries(
-				args.columns,
-				c => ({
-					value: c,
-				}),
-				3,
-				props,
-			)
 			return [
 				{
-					before: `convert column${args.columns?.length !== 1 ? 's' : ''}`,
-					value: args.columns.length === 0 ? undefined : '',
-					sub,
+					before: `convert column`,
+					value: args.column !== undefined ? args.column : undefined,
 				},
 				{
 					before: 'to type',
