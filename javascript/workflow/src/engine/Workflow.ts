@@ -13,6 +13,7 @@ import {
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, of, Subject } from 'rxjs'
+import { v4 } from 'uuid'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
