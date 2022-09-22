@@ -9,7 +9,6 @@
 		"outDir": "lib",
 		"jsx": "react-jsx",
 		"importHelpers": true,
-		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true,
 		"skipLibCheck": true,
 		"esModuleInterop": false,

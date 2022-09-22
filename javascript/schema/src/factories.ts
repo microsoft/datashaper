@@ -4,6 +4,8 @@
  */
 import { v4 } from 'uuid'
 
+/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+/* @ts-ignore */
 import pkgJson from '../package.json' assert { type: 'json' }
 import type { CodebookSchema } from './codebook/CodebookSchema.js'
 import type { DataPackageSchema } from './datapackage/DataPackageSchema.js'
