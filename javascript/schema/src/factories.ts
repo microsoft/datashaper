@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { v4 as uuid } from 'uuid'
+import { v4 } from 'uuid'
 
 import type { CodebookSchema } from './codebook/CodebookSchema.js'
 import type { DataPackageSchema } from './datapackage/DataPackageSchema.js'
@@ -19,28 +19,6 @@ export type FactoryInput<T> = Omit<T, '$schema' | 'id' | 'name'> & {
 	name?: string
 }
 
-export function createWorkflowSchemaObject(
-	input: FactoryInput<WorkflowSchema>,
-): WorkflowSchema {
-	return {
-		$schema: LATEST_WORKFLOW_SCHEMA,
-		id: input.id ?? v4(),
-		name: input.name ?? 'Workflow',
-		...input,
-	}
-}
-
-export function createDataTableSchemaObject(
-	input: FactoryInput<DataTableSchema>,
-): DataTableSchema {
-	return {
-		$schema: LATEST_DATATABLE_SCHEMA,
-		id: input.id ?? v4(),
-		name: input.name ?? 'DataTable',
-		...input,
-	}
-}
-
 export function createDataPackageSchemaObject(
 	input: FactoryInput<DataPackageSchema>,
 ): DataPackageSchema {
@@ -52,6 +30,30 @@ export function createDataPackageSchemaObject(
 	}
 }
 
+export function createWorkflowSchemaObject(
+	input: FactoryInput<WorkflowSchema>,
+): WorkflowSchema {
+	return {
+		$schema: LATEST_WORKFLOW_SCHEMA,
+		id: input.id ?? v4(),
+		name: input.name ?? 'Workflow',
+		profile: 'workflow',
+		...input,
+	}
+}
+
+export function createDataTableSchemaObject(
+	input: FactoryInput<DataTableSchema>,
+): DataTableSchema {
+	return {
+		$schema: LATEST_DATATABLE_SCHEMA,
+		id: input.id ?? v4(),
+		name: input.name ?? 'DataTable',
+		profile: 'datatable',
+		...input,
+	}
+}
+
 export function createCodebookSchemaObject(
 	input: FactoryInput<CodebookSchema>,
 ): CodebookSchema {
@@ -59,6 +61,7 @@ export function createCodebookSchemaObject(
 		$schema: LATEST_DATATABLE_SCHEMA,
 		id: input.id ?? v4(),
 		name: input.name ?? 'Codebook',
+		profile: 'codebook',
 		...input,
 	}
 }
