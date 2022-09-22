@@ -17,7 +17,7 @@ import { stepVerbFactory } from './util/factories.js'
  */
 export const convertStep: ColumnTableStep<ConvertArgs> = (
 	input,
-	{ column, type, radix, delimiter, formatPattern, to },
+	{ column, type, radix, delimiter, to, formatPattern },
 ) => {
 	const dArgs = {
 		[to]: parseType(column, type, radix, delimiter, formatPattern),
