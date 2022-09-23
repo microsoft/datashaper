@@ -160,7 +160,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 								workflow={workflow}
 								onSelect={setSelectedTableId}
 								onUpdateOutput={setOutputs}
-								onUpdateWorkflow={setWorkflow}
 								historyView={true}
 							/>
 						</WorkflowContainer>
