@@ -23,9 +23,5 @@ export interface ManageWorkflowProps
 	 * Event handler for when the output tableset changes
 	 */
 	onUpdateOutput?: (output: TableContainer[]) => void
-	/**
-	 * Handler for when the workflow changes
-	 */
-	onUpdateWorkflow?: (workflow: Workflow) => void
 	historyView?: boolean
 }
