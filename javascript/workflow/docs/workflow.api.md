@@ -292,6 +292,11 @@ export type InputStep<T, Config> = (args: Config, id: string) => Promise<T> | T;
 // @public (undocumented)
 export const intersect: (id: string) => SetOperationNode<unknown>;
 
+// Warning: (ae-missing-release-tag) "isInputColumnListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function isInputColumnListStep(step: Step): boolean;
+
 // Warning: (ae-missing-release-tag) "isInputColumnStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
