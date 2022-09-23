@@ -6,8 +6,7 @@ import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	HistoryButton,
-	HistoryIcon,
-	ManageWorkflow,
+	HistoryPanel,
 	ProjectMgmtCommandBar,
 	TableCommands,
 	useOnCreateStep,
@@ -22,26 +21,20 @@ import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdown
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
-import { IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { useThematic } from '@thematic/react'
 import { memo, useCallback, useState } from 'react'
 
 import { useStepListener, useTables } from './PrepareDataPage.hooks.js'
 import {
-	Aside,
-	AsideHeader,
 	ButtonContainer,
 	Container,
 	DetailsListContainer,
-	icons,
 	Main,
 	mgmtStyles,
 	OutputContainer,
 	PageContainer,
 	PrepareDataContainer,
-	Title,
-	WorkflowContainer,
 } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
@@ -143,27 +136,12 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 							)}
 						</OutputContainer>
 					</Main>
-					<Aside isCollapsed={isCollapsed}>
-						<AsideHeader isCollapsed={isCollapsed}>
-							<HistoryIcon color={theme.application().accent().hex()} />
-							<Title isCollapsed={isCollapsed}>
-								History ({workflow?.steps?.length || 0})
-								<IconButton
-									iconProps={icons.cancel}
-									onClick={toggleCollapsed}
-									ariaLabel="Close"
-								/>
-							</Title>
-						</AsideHeader>
-						<WorkflowContainer isCollapsed={isCollapsed}>
-							<ManageWorkflow
-								workflow={workflow}
-								onSelect={setSelectedTableId}
-								onUpdateOutput={setOutputs}
-								historyView={true}
-							/>
-						</WorkflowContainer>
-					</Aside>
+					<HistoryPanel
+						workflow={workflow}
+						isCollapsed={isCollapsed}
+						toggleCollapsed={toggleCollapsed}
+						setSelectedTableId={setSelectedTableId}
+					/>
 				</Container>
 			</PrepareDataContainer>
 		</PageContainer>

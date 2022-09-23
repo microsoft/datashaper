@@ -1,4 +1,4 @@
 releases:
-  "@datashaper/react": patch
+  "@datashaper/react": minor
   "@datashaper/webapp": patch
   "@datashaper/workflow": patch

@@ -29,7 +29,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		workflow: wf,
 		table,
 		onSelect,
-		onUpdateOutput,
 		nextInputTable,
 		historyView = false,
 		...props
