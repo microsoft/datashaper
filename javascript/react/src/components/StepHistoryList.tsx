@@ -78,6 +78,8 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 							>
 								<ListWrapper>
 									<TableTransform
+										hideInput
+										hideOutput
 										key={index}
 										step={step}
 										index={index}
