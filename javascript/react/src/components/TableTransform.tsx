@@ -68,8 +68,12 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		)
 
 		const disableSave = useMemo((): boolean => {
-			return isEqual(step, internal) && !hideOutput && !outputHasChanged
-		}, [step, internal, outputHasChanged])
+			return (
+				isEqual(step, internal) &&
+				(!hideOutput || !!onPreview) &&
+				!outputHasChanged
+			)
+		}, [step, internal, outputHasChanged, hideOutput, onPreview])
 
 		return (
 			<Container style={style}>
