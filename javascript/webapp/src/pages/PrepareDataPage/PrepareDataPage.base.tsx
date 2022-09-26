@@ -114,7 +114,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 												onRemoveStep={onDelete}
 											/>
 										}
-										name={selectedTable?.id}
 										table={selectedTable?.table}
 									/>
 									<ArqueroDetailsList

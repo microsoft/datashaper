@@ -80,7 +80,7 @@ export const Container = styled.div<{ isCollapsed: boolean }>`
 	height: 100%;
 	display: grid;
 	grid-template-columns: ${({ isCollapsed }) =>
-		isCollapsed ? '100% 0' : '75% 25%'};
+		isCollapsed ? '100% 0' : '80% 20%'};
 `
 export const Aside = styled.div<{ isCollapsed: boolean }>`
 	display: flex;
