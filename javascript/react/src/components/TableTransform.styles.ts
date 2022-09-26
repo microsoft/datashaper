@@ -39,7 +39,7 @@ export const SaveButtonWrapper = styled.div`
 	gap: 0.5rem;
 `
 
-export const deleteButtonStyles: IButtonStyles = {
+export const rightButtonStyles: IButtonStyles = {
 	root: {
 		position: 'absolute',
 		right: '1rem',

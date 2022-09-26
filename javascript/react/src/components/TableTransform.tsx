@@ -18,8 +18,8 @@ import {
 import {
 	ButtonContainer,
 	Container,
-	deleteButtonStyles,
 	icons,
+	rightButtonStyles,
 	SaveButtonWrapper,
 	StepSelectorContainer,
 } from './TableTransform.styles.js'
@@ -77,6 +77,14 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 
 		return (
 			<Container style={style}>
+				{hideStepSelector && showGuidanceButton && internal?.verb ? (
+					<IconButton
+						onClick={toggleGuidance}
+						iconProps={icons.info}
+						checked={showGuidance}
+						styles={rightButtonStyles}
+					/>
+				) : null}
 				{!hideStepSelector ? (
 					<StepSelectorContainer>
 						<StepSelector
@@ -132,15 +140,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 								<IconButton
 									onClick={() => onDelete(index)}
 									iconProps={icons.delete}
-									styles={deleteButtonStyles}
-								/>
-							) : null}
-							{hideStepSelector && showGuidanceButton && internal?.verb ? (
-								<IconButton
-									onClick={toggleGuidance}
-									iconProps={icons.info}
-									checked={showGuidance}
-									styles={deleteButtonStyles}
+									styles={rightButtonStyles}
 								/>
 							) : null}
 						</ButtonContainer>

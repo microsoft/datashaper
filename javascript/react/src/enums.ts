@@ -36,3 +36,8 @@ function formatEnumName(name: string): string {
 	const rest = parts.slice(1).map(p => p.toLocaleLowerCase())
 	return [first, ...rest].join(' ')
 }
+
+export enum DisplayOrder {
+	FirstOnTop = 'first-on-top',
+	LastOnTop = 'last-on-top',
+}

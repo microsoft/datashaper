@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import styled from '@essex/styled-components'
-import type { Theme } from '@thematic/core'
 
 export const addButtonStyles = {
 	root: {
@@ -27,8 +26,7 @@ export const Container = styled.div`
 	display: grid;
 	grid-template-rows: calc(100% - 4rem) 4rem;
 	width: 100%;
-	border-top: 1px solid
-		${({ theme }: { theme: Theme }) => theme.application().border().hex()};
+	border-top: 1px solid ${({ theme }) => theme.application().border().hex()};
 
 	> div {
 		overflow: hidden auto;
@@ -45,7 +43,7 @@ export const PanelHeader = styled.div`
 	font-weight: 500;
 	display: flex;
 	gap: 0.5rem;
-	width: 95%;
+	width: 100%;
 `
 export const Verb = styled.b`
 	text-transform: uppercase;
@@ -55,8 +53,7 @@ export const Columns = styled.span`
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	color: ${({ theme }: { theme: Theme }) =>
-		theme.application().midContrast().hex()};
+	color: ${({ theme }) => theme.application().midContrast().hex()};
 `
 
 export const tableTransformStyle: React.CSSProperties = {
@@ -71,6 +68,9 @@ export const tableTransformStyle: React.CSSProperties = {
 
 export const ListWrapper = styled.div`
 	overflow: hidden auto;
-	border-bottom: ${({ theme }: { theme: Theme }) =>
-		theme.application().border().hex()};
+	border-bottom: ${({ theme }) => theme.application().border().hex()};
+`
+
+export const StepIndex = styled.span`
+	color: ${({ theme }) => theme.application().lowContrast().hex()};
 `

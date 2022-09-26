@@ -16,7 +16,6 @@ import {
 } from './HistoryPanel.styles.js'
 import type { HistoryPanelProps } from './HistoryPanel.types.js'
 import { ManageWorkflow } from './ManageWorkflow.js'
-import { WorkflowOrder } from './ManageWorkflow.types.js'
 
 export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 	function HistoryPanel({
@@ -25,7 +24,7 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 		setSelectedTableId,
 		workflow,
 		title = 'History',
-		order = WorkflowOrder.FirstOnTop,
+		order,
 		titleStyle,
 	}) {
 		const theme = useThematic()

@@ -5,7 +5,7 @@
 
 import type { Workflow } from '@datashaper/workflow'
 
-import type { WorkflowOrder } from './ManageWorkflow.types.js'
+import type { DisplayOrder } from '../enums.js'
 
 export interface HistoryPanelProps {
 	isCollapsed: boolean
@@ -13,6 +13,6 @@ export interface HistoryPanelProps {
 	setSelectedTableId: (tableId: string) => void
 	workflow: Workflow
 	title?: string
-	order?: WorkflowOrder
+	order?: DisplayOrder
 	titleStyle?: React.CSSProperties
 }

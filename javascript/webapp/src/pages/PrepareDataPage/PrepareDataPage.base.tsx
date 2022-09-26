@@ -134,6 +134,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					</Main>
 					<HistoryPanel
 						workflow={workflow}
+						title="Steps"
 						isCollapsed={isCollapsed}
 						toggleCollapsed={toggleCollapsed}
 						setSelectedTableId={setSelectedTableId}

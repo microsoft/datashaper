@@ -9,7 +9,6 @@ import {
 	CollapsiblePanelContainer,
 } from '@essex/themed-components'
 import { useThematic } from '@thematic/react'
-import { capitalize } from 'lodash-es'
 import { memo, useCallback, useEffect, useRef } from 'react'
 
 import {
@@ -17,6 +16,7 @@ import {
 	Container,
 	ListWrapper,
 	PanelHeader,
+	StepIndex,
 	tableTransformStyle,
 	Verb,
 } from './StepHistoryList.styles.js'
@@ -112,9 +112,9 @@ function onRenderHeader(step: Step, index: number): JSX.Element {
 	return (
 		<PanelHeader>
 			<Verb>
-				#{index + 1} {step.verb}
+				<StepIndex>#{index + 1}</StepIndex> {step.verb}
 			</Verb>
-			<Columns>{capitalize(columns)}</Columns>
+			<Columns>{columns}</Columns>
 		</PanelHeader>
 	)
 }

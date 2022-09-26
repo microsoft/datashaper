@@ -4,12 +4,8 @@
  */
 import type { Workflow } from '@datashaper/workflow'
 
+import type { DisplayOrder } from '../enums.js'
 import type { TransformModalProps } from '../index.js'
-
-export enum WorkflowOrder {
-	FirstOnTop = 'first on top',
-	LastOnTop = 'last on top',
-}
 
 export interface ManageWorkflowProps
 	extends Omit<Omit<TransformModalProps, 'workflow'>, 'index'> {
@@ -24,5 +20,5 @@ export interface ManageWorkflowProps
 	onSelect?: (name: string) => void
 
 	historyView?: boolean
-	order?: WorkflowOrder
+	order?: DisplayOrder
 }

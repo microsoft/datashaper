@@ -15,8 +15,10 @@ export const Aside = styled.div<{ isCollapsed: boolean }>`
 	align-items: center;
 	height: 100%;
 	overflow: hidden;
-	box-shadow: ${({ isCollapsed }) =>
-		isCollapsed ? 'none' : '-1px 0px 10px 0px rgba(0,0,0,0.3)'};
+	box-shadow: ${({ isCollapsed, theme }) =>
+		isCollapsed
+			? 'none'
+			: `-1px 0px 10px 0px ${theme.application().lowMidContrast().hex()}`};
 `
 
 export const AsideHeader = styled.div<{ isCollapsed: boolean }>`
@@ -44,7 +46,7 @@ export const Title = styled.span<{ isCollapsed: boolean }>`
 `
 
 export const WorkflowContainer = styled.div<{ isCollapsed: boolean }>`
-	height: calc(100% - 75px);
+	height: 100%;
 	width: 100%;
 	position: relative;
 	visibility: ${({ isCollapsed }) => (isCollapsed ? 'hidden' : 'visible')};
