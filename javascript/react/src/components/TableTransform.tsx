@@ -18,6 +18,7 @@ import {
 import {
 	ButtonContainer,
 	Container,
+	Flex,
 	icons,
 	rightButtonStyles,
 	SaveButtonWrapper,
@@ -115,32 +116,33 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 							hideInputColumn={hideInputColumn}
 						/>
 						<ButtonContainer>
-							{onPreview ? (
-								<IconButton
-									onClick={() => onPreview(step?.id as string)}
-									iconProps={icons.preview}
-								/>
-							) : null}
-							{onDuplicate ? (
-								<IconButton
-									onClick={() => onDuplicate(step as Step)}
-									iconProps={icons.duplicate}
-								/>
-							) : null}
-							<SaveButtonWrapper>
-								<ActionButton
-									onClick={handleSaveClick}
-									iconProps={icons.checkMark}
-									disabled={disableSave}
-								>
-									Save
-								</ActionButton>
-							</SaveButtonWrapper>
+							<Flex>
+								{onPreview ? (
+									<IconButton
+										onClick={() => onPreview(step?.id as string)}
+										iconProps={icons.preview}
+									/>
+								) : null}
+								{onDuplicate ? (
+									<IconButton
+										onClick={() => onDuplicate(step as Step)}
+										iconProps={icons.duplicate}
+									/>
+								) : null}
+								<SaveButtonWrapper>
+									<ActionButton
+										onClick={handleSaveClick}
+										iconProps={icons.checkMark}
+										disabled={disableSave}
+									>
+										Save
+									</ActionButton>
+								</SaveButtonWrapper>
+							</Flex>
 							{onDelete ? (
 								<IconButton
 									onClick={() => onDelete(index)}
 									iconProps={icons.delete}
-									styles={rightButtonStyles}
 								/>
 							) : null}
 						</ButtonContainer>

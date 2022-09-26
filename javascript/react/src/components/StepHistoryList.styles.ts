@@ -63,7 +63,7 @@ export const tableTransformStyle: React.CSSProperties = {
 	flexDirection: 'column',
 	overflow: 'auto',
 	border: 'none',
-	width: 'fit-content',
+	width: 'auto',
 }
 
 export const ListWrapper = styled.div`
