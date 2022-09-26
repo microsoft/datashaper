@@ -22,7 +22,6 @@ import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { useThematic } from '@thematic/react'
 import { memo, useCallback, useState } from 'react'
 
 import { useStepListener, useTables } from './PrepareDataPage.hooks.js'
@@ -38,7 +37,6 @@ import {
 } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const theme = useThematic()
 	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 	const [selectedTableId, setSelectedTableId] = useState<string | undefined>()
 
@@ -127,7 +125,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 										clickableColumns={!!onColumnClick}
 										selectedColumn={selectedColumn}
 										onColumnClick={onColumnClick}
-										// onChangeMetadata={onUpdateMetadata}
 										metadata={selectedTable?.metadata}
 										table={selectedTable?.table}
 										features={{ smartHeaders: true }}
