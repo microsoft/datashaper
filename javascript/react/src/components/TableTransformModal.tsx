@@ -7,11 +7,11 @@ import { default as guidanceIndex } from '@datashaper/verb-guidance'
 import type { Maybe } from '@datashaper/workflow'
 import { Callout, DirectionalHint, IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
+import { useThematic } from '@thematic/react'
 import { memo, useState } from 'react'
 
 import { Guidance } from './Guidance.js'
 import { TableTransform } from './TableTransform.js'
-import { useModalStyles } from './TableTransformModal.hooks.js'
 import {
 	ContainerBody,
 	GuidanceContainer,
@@ -21,6 +21,7 @@ import {
 	Title,
 } from './TableTransformModal.styles.js'
 import type { TransformModalProps } from './TableTransformModal.types.js'
+import { getModalStyles } from './TableTransformModal.utils.js'
 
 export const TableTransformModal: React.FC<TransformModalProps> = memo(
 	function TableTransformModal({
@@ -33,9 +34,10 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		styles,
 		...props
 	}) {
+		const theme = useThematic()
 		const [verb, setVerb] = useState<Maybe<Verb>>(step?.verb)
 		const [showGuidance, { toggle: toggleGuidance }] = useBoolean(false)
-		const adaptedStyles = useModalStyles(styles, showGuidance)
+		const adaptedStyles = getModalStyles(theme, styles)
 
 		return (
 			<Callout
@@ -61,7 +63,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 						/>
 					)}
 				</Header>
-				<ContainerBody showGuidance={showGuidance}>
+				<ContainerBody>
 					<StepComponentContainer>
 						<TableTransform
 							hideInput={props.hideInput}

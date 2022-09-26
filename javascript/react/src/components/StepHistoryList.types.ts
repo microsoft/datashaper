@@ -14,10 +14,8 @@ export interface PanelProps {
 export interface StepHistoryListProps
 	extends Pick<TableTransformProps, 'workflow' | 'nextInputTable'> {
 	steps: Step[]
-	buttonId?: string | undefined
 	onDeleteClicked?: (index: number) => void
 	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
-	onStartNewStep?: () => void
 	onCreate?: (step: Step, output: string | undefined, index?: number) => void
 }

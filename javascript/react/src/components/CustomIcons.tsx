@@ -7,8 +7,7 @@ import { Icon } from '@fluentui/react'
 import { mergeStyles, registerIcons } from '@fluentui/react/lib/Styling'
 
 interface CustomIconProps {
-	width?: string
-	height?: string
+	fontSize?: string
 	color?: string
 }
 
@@ -27,18 +26,16 @@ registerIcons({
 })
 
 const defaultIconClass = mergeStyles({
-	height: '20px',
-	width: '20px',
+	fontSize: '20px',
 })
 
 export const HistoryIcon = (props: CustomIconProps): JSX.Element => {
-	const { width, height, color } = props
+	const { fontSize, color } = props
 	return (
 		<Icon
 			iconName="History"
 			className={mergeStyles(defaultIconClass, {
-				width,
-				height,
+				fontSize,
 				selectors: { '.history-icon-path': { fill: color } },
 			})}
 		/>

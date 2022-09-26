@@ -20,6 +20,7 @@ import {
 import { useDeleteConfirm, useEditorTarget } from './ManageWorkflow.hooks.js'
 import { Container, modalStyles } from './ManageWorkflow.styles.js'
 import type { ManageWorkflowProps } from './ManageWorkflow.types.js'
+import { WorkflowOrder } from './ManageWorkflow.types.js'
 import { StepHistoryList } from './StepHistoryList.js'
 import { StepList } from './StepList.js'
 import { TableTransformModal } from './TableTransformModal.js'
@@ -31,6 +32,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		onSelect,
 		nextInputTable,
 		historyView = false,
+		order = WorkflowOrder.FirstOnTop,
 		...props
 	}) {
 		// Selected Step/Index State for the component
@@ -73,7 +75,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		)
 
 		const outputs = useStepOutputs(wf)
-		const steps = useWorkflowSteps(wf)
+		const steps = useWorkflowSteps(wf, order)
 
 		return (
 			<Container>
@@ -82,8 +84,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 						onDeleteClicked={onDelete}
 						onSelect={onViewStep}
 						steps={steps}
-						onStartNewStep={showModal}
-						buttonId={addStepButtonId}
 						workflow={wf}
 						nextInputTable={nextInputTable}
 						onCreate={onCreate}

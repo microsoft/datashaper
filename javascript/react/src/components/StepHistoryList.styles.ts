@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import styled from '@essex/styled-components'
+import type { Theme } from '@thematic/core'
 
 export const addButtonStyles = {
 	root: {
@@ -26,6 +27,8 @@ export const Container = styled.div`
 	display: grid;
 	grid-template-rows: calc(100% - 4rem) 4rem;
 	width: 100%;
+	border-top: 1px solid
+		${({ theme }: { theme: Theme }) => theme.application().border().hex()};
 
 	> div {
 		overflow: hidden auto;
@@ -44,7 +47,7 @@ export const PanelHeader = styled.div`
 	gap: 0.5rem;
 	width: 95%;
 `
-export const Verb = styled.span`
+export const Verb = styled.b`
 	text-transform: uppercase;
 `
 
@@ -52,6 +55,8 @@ export const Columns = styled.span`
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+	color: ${({ theme }: { theme: Theme }) =>
+		theme.application().midContrast().hex()};
 `
 
 export const tableTransformStyle: React.CSSProperties = {
@@ -61,8 +66,11 @@ export const tableTransformStyle: React.CSSProperties = {
 	flexDirection: 'column',
 	overflow: 'auto',
 	border: 'none',
+	width: 'fit-content',
 }
 
 export const ListWrapper = styled.div`
 	overflow: hidden auto;
+	border-bottom: ${({ theme }: { theme: Theme }) =>
+		theme.application().border().hex()};
 `

@@ -24,18 +24,16 @@ export const AsideHeader = styled.div<{ isCollapsed: boolean }>`
 	gap: ${({ isCollapsed }) => (isCollapsed ? 0 : '0.5rem')};
 	display: flex;
 	align-items: center;
-	padding: 0.5rem 0 2rem;
+	padding: 0.5rem 0;
 	margin-left: ${({ isCollapsed }) => (isCollapsed ? '0' : '0.5rem')};
-	border-bottom: ${({ theme, isCollapsed }) =>
-		isCollapsed ? 'none' : `1px solid ${theme.application().border().hex()}`};
 `
 
-export const Title = styled.h4<{ isCollapsed: boolean }>`
+export const Title = styled.span<{ isCollapsed: boolean }>`
 	width: 100%;
 	font-weight: 500;
 	background-color: ${({ theme }) => theme.application().background().hex()};
 	color: ${({ theme }) => theme.application().midContrast().hex()};
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	text-align: left;
 	padding: 0;
 	margin: 0;

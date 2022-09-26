@@ -135,6 +135,14 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 									styles={deleteButtonStyles}
 								/>
 							) : null}
+							{hideStepSelector && showGuidanceButton && internal?.verb ? (
+								<IconButton
+									onClick={toggleGuidance}
+									iconProps={icons.info}
+									checked={showGuidance}
+									styles={deleteButtonStyles}
+								/>
+							) : null}
 						</ButtonContainer>
 					</>
 				)}
