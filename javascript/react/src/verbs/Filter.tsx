@@ -4,11 +4,11 @@
  */
 import type { Criterion, FilterArgs } from '@datashaper/schema'
 import { BooleanOperator } from '@datashaper/schema'
+import { EnumDropdown } from '@essex/components'
 import { ActionButton, Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 
-import { EnumDropdown } from '../controls/index.js'
 import { useDropdownChangeHandler, useStepDataTable } from '../hooks/index.js'
 import { LeftAlignedRow } from '../styles.js'
 import type { StepComponentProps } from '../types.js'
