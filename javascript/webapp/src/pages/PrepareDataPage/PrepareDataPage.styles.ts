@@ -22,6 +22,7 @@ export const Main = styled.div`
 	flex-flow: column;
 	height: 100%;
 	width: 100%;
+	padding-top: 12px;
 	gap: ${GAP}px;
 	position: relative;
 `
@@ -55,7 +56,6 @@ export const PrepareDataContainer = styled.div`
 export const Container = styled.div<{ isCollapsed: boolean }>`
 	height: 100%;
 	display: grid;
-	padding-top: 12px;
 	grid-template-columns: ${({ isCollapsed }) =>
 		isCollapsed ? '100% 0' : 'calc(100% - 280px) 280px '};
 `
