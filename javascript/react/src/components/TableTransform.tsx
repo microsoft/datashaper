@@ -32,7 +32,6 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		onTransformRequested,
 		index,
 		step,
-		nextInputTable,
 		showGuidance,
 		showGuidanceButton,
 		toggleGuidance,
@@ -48,7 +47,6 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 	}) {
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
-			nextInputTable,
 			workflow as Workflow,
 		)
 		const { output, outputHasChanged, onOutputChanged } = useStepOutputHandling(

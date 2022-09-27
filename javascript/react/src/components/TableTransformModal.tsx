@@ -30,7 +30,6 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		onTransformRequested,
 		index,
 		step,
-		nextInputTable,
 		styles,
 		...props
 	}) {
@@ -76,7 +75,6 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 							step={step}
 							showGuidance={showGuidance}
 							toggleGuidance={toggleGuidance}
-							nextInputTable={nextInputTable}
 							onVerbChange={setVerb}
 							showGuidanceButton
 						/>

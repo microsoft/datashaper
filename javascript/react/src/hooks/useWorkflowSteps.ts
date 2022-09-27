@@ -14,7 +14,7 @@ import { DisplayOrder } from '../enums.js'
  */
 export function useWorkflowSteps(
 	workflow: Workflow,
-	order: DisplayOrder,
+	order = DisplayOrder.LastOnTop,
 ): Step[] {
 	const [steps, setSteps] = useState<Step[]>(orderSteps(workflow.steps, order))
 	// listen for workflow changes and update the steps

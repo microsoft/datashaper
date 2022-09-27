@@ -321,36 +321,21 @@ export const HistoryPanel: React.FC<HistoryPanelProps>;
 // @public (undocumented)
 export interface HistoryPanelProps {
     // (undocumented)
+    children?: React.ReactNode;
+    // (undocumented)
     isCollapsed: boolean;
     // (undocumented)
     order?: DisplayOrder;
     // (undocumented)
-    setSelectedTableId: (tableId: string) => void;
+    showStepCount?: boolean;
+    // (undocumented)
+    steps?: Step[];
     // (undocumented)
     title?: string;
     // (undocumented)
     titleStyle?: React.CSSProperties;
     // (undocumented)
     toggleCollapsed: () => void;
-    // (undocumented)
-    workflow: Workflow;
-}
-
-// Warning: (ae-missing-release-tag) "ManageWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const ManageWorkflow: React.FC<ManageWorkflowProps>;
-
-// Warning: (ae-missing-release-tag) "ManageWorkflowProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'workflow'>, 'index'> {
-    // (undocumented)
-    historyView?: boolean;
-    onSelect?: (name: string) => void;
-    // (undocumented)
-    order?: DisplayOrder;
-    workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -604,13 +589,12 @@ export interface TableTransformProps {
     // (undocumented)
     hideStepSelector?: boolean;
     index: number;
-    nextInputTable?: string;
     // (undocumented)
     onDelete?: (index: number) => void;
     // (undocumented)
     onDuplicate?: (step: Step) => void;
     // (undocumented)
-    onPreview?: (name: string) => void;
+    onPreview?: (name: string, verb?: string, index?: number) => void;
     onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
     // (undocumented)
     onVerbChange?: (verb: Verb) => void;
