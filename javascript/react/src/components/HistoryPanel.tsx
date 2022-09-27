@@ -25,15 +25,17 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 		workflow,
 		title = 'History',
 		order,
+		stepsCount,
 		titleStyle,
 	}) {
 		const theme = useThematic()
+
 		return (
 			<Aside isCollapsed={isCollapsed}>
 				<AsideHeader isCollapsed={isCollapsed}>
 					<HistoryIcon color={theme.application().accent().hex()} />
 					<Title style={titleStyle} isCollapsed={isCollapsed}>
-						{title} ({workflow?.steps?.length || 0})
+						{title} {stepsCount != undefined ? `(${stepsCount})` : null}
 						<IconButton
 							iconProps={icons.cancel}
 							onClick={toggleCollapsed}

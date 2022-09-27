@@ -14,5 +14,6 @@ export interface HistoryPanelProps {
 	workflow: Workflow
 	title?: string
 	order?: DisplayOrder
+	stepsCount?: number
 	titleStyle?: React.CSSProperties
 }
