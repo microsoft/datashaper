@@ -55,6 +55,7 @@ export const PrepareDataContainer = styled.div`
 export const Container = styled.div<{ isCollapsed: boolean }>`
 	height: 100%;
 	display: grid;
+	padding-top: 12px;
 	grid-template-columns: ${({ isCollapsed }) =>
 		isCollapsed ? '100% 0' : 'calc(100% - 280px) 280px '};
 `
