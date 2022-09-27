@@ -94,6 +94,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 							/>
 							<HistoryButton
 								onClick={toggleCollapsed}
+								title="Steps"
 								steps={workflow?.steps?.length}
 								showText={true}
 								styles={{
