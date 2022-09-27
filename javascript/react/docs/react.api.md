@@ -13,20 +13,21 @@ import { FileCollection } from '@datashaper/utilities';
 import { FileRejection } from 'react-dropzone';
 import type { IButtonStyles } from '@fluentui/react';
 import type { IColumn } from '@fluentui/react';
-import type { ICommandBarItemProps } from '@fluentui/react';
+import { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
-import type { IDetailsColumnStyles } from '@fluentui/react';
+import { IDetailsColumnStyles } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IDetailsHeaderProps } from '@fluentui/react';
 import type { IDetailsListProps } from '@fluentui/react';
-import type { IDetailsListStyles } from '@fluentui/react';
+import { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
 import type { IDocumentCardStyles } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
+import type { ITheme } from '@fluentui/react';
 import { default as React_2 } from 'react';
 import type { ReactElement } from 'react';
 import type { RowObject } from 'arquero/dist/types/table/table';
@@ -34,7 +35,6 @@ import { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
-import type { Theme } from '@thematic/core';
 import type { Verb } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
 
@@ -170,7 +170,7 @@ export function createDefaultCommandBar({ styles, ...props }: ICommandBarProps):
 // Warning: (ae-missing-release-tag) "createDefaultHeaderCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: Theme, far?: boolean): ReactElement<ICommandBarProps, any>;
+export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: ITheme, far?: boolean): ReactElement<ICommandBarProps, any>;
 
 // Warning: (ae-missing-release-tag) "DetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

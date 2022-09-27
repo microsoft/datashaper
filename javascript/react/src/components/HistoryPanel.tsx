@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { IconButton } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import { IconButton, useTheme } from '@fluentui/react'
 import { memo } from 'react'
 
 import { HistoryIcon } from './CustomIcons.js'
@@ -27,11 +26,11 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 		order,
 		titleStyle,
 	}) {
-		const theme = useThematic()
+		const theme = useTheme()
 		return (
 			<Aside isCollapsed={isCollapsed}>
 				<AsideHeader isCollapsed={isCollapsed}>
-					<HistoryIcon color={theme.application().accent().hex()} />
+					<HistoryIcon color={theme.palette.themePrimary} />
 					<Title style={titleStyle} isCollapsed={isCollapsed}>
 						{title} ({workflow?.steps?.length || 0})
 						<IconButton

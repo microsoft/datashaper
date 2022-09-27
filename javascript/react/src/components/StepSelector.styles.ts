@@ -10,8 +10,7 @@ export const Container = styled.div`
 `
 
 export const SearchContainer = styled.div`
-	border-bottom: 1px solid
-		${({ theme }) => theme.application().lowContrast().hex()};
+	border-bottom: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `
 
 export const icons = {

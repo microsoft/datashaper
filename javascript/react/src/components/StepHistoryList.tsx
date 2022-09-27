@@ -8,7 +8,7 @@ import {
 	CollapsiblePanel,
 	CollapsiblePanelContainer,
 } from '@essex/themed-components'
-import { useThematic } from '@thematic/react'
+import { useTheme } from '@fluentui/react'
 import { memo, useCallback, useEffect, useRef } from 'react'
 
 import {
@@ -35,7 +35,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		nextInputTable,
 	}) {
 		const ref = useRef<HTMLDivElement>(null)
-		const theme = useThematic()
+		const theme = useTheme()
 		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
 
 		const onTransformRequested = useCallback(

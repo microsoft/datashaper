@@ -9,8 +9,8 @@ import type {
 	ICommandBarStyles,
 	IIconProps,
 } from '@fluentui/react'
+import { useTheme } from '@fluentui/react'
 import type { IStyleFunctionOrObject } from '@fluentui/utilities'
-import { useThematic } from '@thematic/react'
 import merge from 'lodash-es/merge.js'
 import { useCallback, useMemo } from 'react'
 
@@ -58,11 +58,11 @@ export function useColorDefaults(
 	background: string
 	foreground: string
 } {
-	const theme = useThematic()
+	const theme = useTheme()
 	return useMemo(
 		() => ({
-			background: background || theme.application().background().hex(),
-			foreground: color || theme.application().foreground().hex(),
+			background: background || theme.palette.white,
+			foreground: color || theme.palette.neutralPrimary,
 		}),
 		[theme, background, color],
 	)

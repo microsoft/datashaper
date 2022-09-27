@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ICommandBarProps } from '@fluentui/react'
-import type { Theme } from '@thematic/core'
+import type { ICommandBarProps, ITheme } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import type { ReactElement } from 'react'
 
@@ -40,7 +39,7 @@ export function createDefaultCommandBar({
  */
 export function createDefaultHeaderCommandBar(
 	{ styles, ...props }: ICommandBarProps,
-	theme: Theme,
+	theme: ITheme,
 	far = false,
 ): ReactElement<ICommandBarProps, any> {
 	const defaultStyles = merge(
@@ -55,8 +54,8 @@ export function createDefaultHeaderCommandBar(
 		styles,
 	)
 	const { background, color } = {
-		background: theme.application().accent().hex(),
-		color: theme.application().background().hex(),
+		background: theme.palette.themePrimary,
+		color: theme.palette.white,
 	}
 	return (
 		<CommandBar

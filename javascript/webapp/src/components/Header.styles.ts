@@ -2,22 +2,21 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { mergeStyles, mergeStyleSets } from '@fluentui/react'
-import { ThemeVariant } from '@thematic/core'
+import { FontIcon } from '@fluentui/react'
 import styled from 'styled-components'
 
 // always ensure the header is dark, regardless of mode
 export const Container = styled.div`
 	padding: 4px 16px 4px 16px;
 	background: ${({ theme }) =>
-		theme.variant === ThemeVariant.Light
-			? theme.application().highContrast()
-			: theme.application().lowContrast()};
+		theme.isInverted
+			? theme.palette.neutralQuaternary
+			: theme.palette.neutralPrimary};
 	border-bottom: 1px solid
 		${({ theme }) =>
-			theme.variant === ThemeVariant.Light
-				? theme.application().midHighContrast()
-				: theme.application().lowMidContrast()};
+			theme.isInverted
+				? theme.palette.neutralTertiary
+				: theme.palette.neutralSecondary};
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -32,22 +31,20 @@ export const Title = styled.h1`
 	margin: 0;
 	padding: 0;
 	color: ${({ theme }) =>
-		theme.variant === ThemeVariant.Light
-			? theme.application().lowContrast()
-			: theme.application().midHighContrast()};
+		theme.isInverted
+			? theme.palette.neutralSecondary
+			: theme.palette.neutralTertiaryAlt};
 	width: 70%;
 `
 
-export const iconClass = mergeStyles({
-	fontSize: 20,
-	height: 20,
-	width: 20,
-	cursor: 'pointer',
-})
-
-export const classNames = mergeStyleSets({
-	white: [{ color: 'white', marginRight: 5 }, iconClass],
-})
+export const StyledFontIcon = styled(FontIcon)`
+	font-size: 20px;
+	height: 20px;
+	width: 20px;
+	cursor: pointer;
+	color: ${({ theme }) =>
+		theme.isInverted ? theme.palette.neutralPrimary : theme.palette.white};
+`
 
 export const Spacer = styled.div`
 	flex: 1;

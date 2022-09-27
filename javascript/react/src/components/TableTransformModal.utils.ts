@@ -3,9 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { IModalStyleProps, IModalStyles } from '@fluentui/react'
+import type { IModalStyleProps, IModalStyles, ITheme } from '@fluentui/react'
 import type { IStyleFunctionOrObject } from '@fluentui/utilities'
-import type { Theme } from '@thematic/core'
 import merge from 'lodash-es/merge.js'
 
 /**
@@ -14,13 +13,13 @@ import merge from 'lodash-es/merge.js'
  * @returns
  */
 export function getModalStyles(
-	theme: Theme,
+	theme: ITheme,
 	styles?: IStyleFunctionOrObject<IModalStyleProps, IModalStyles>,
 ): IStyleFunctionOrObject<IModalStyleProps, IModalStyles> {
 	return merge(
 		{
 			root: {
-				border: `1px solid ${theme.application().faint().hex()}`,
+				border: `1px solid ${theme.palette.neutralLighter}`,
 				width: 'fit-content',
 				maxHeight: 580,
 			},

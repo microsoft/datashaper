@@ -2,8 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { MessageBar, MessageBarType } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import { MessageBar, MessageBarType, useTheme } from '@fluentui/react'
 import { memo, useState } from 'react'
 
 import { useHandleFileUpload } from '../hooks/uploads.js'
@@ -32,7 +31,7 @@ export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps> = memo(
 		onUpdateTables,
 		...props
 	}) {
-		const theme = useThematic()
+		const theme = useTheme()
 		const [error, setError] = useState('')
 		const onUpdateWorkflowJson = useOnUpdateWorkflowJson(onUpdateWorkflow)
 		const commands = useProjectMgmtCommands(

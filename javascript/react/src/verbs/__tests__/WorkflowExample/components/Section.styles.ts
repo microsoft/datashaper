@@ -23,13 +23,13 @@ export const Titles = styled.div`
 export const H1 = styled.h1`
 	margin-top: 0;
 	margin-bottom: 0;
-	color: ${({ theme }) => theme.application().lowContrast().hex()};
+	color: ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `
 
 export const H2 = styled.h2`
 	margin-top: 0;
 	margin-bottom: 0;
-	color: ${({ theme }) => theme.application().accent().hex()};
+	color: ${({ theme }) => theme.palette.themePrimary};
 `
 
 export const StyledSeparator = styled(Separator)`

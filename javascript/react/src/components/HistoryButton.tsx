@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { HistoryIcon } from '@datashaper/react'
-import { ActionButton } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import { ActionButton, useTheme } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import React, { memo } from 'react'
 
@@ -19,10 +18,10 @@ export const HistoryButton: React.FC<HistoryButtonProps> = memo(
 		styles = {},
 		title = 'History',
 	}) {
-		const theme = useThematic()
+		const theme = useTheme()
 		return (
 			<ActionButton onClick={onClick} styles={merge({}, buttonStyles, styles)}>
-				<HistoryIcon color={theme.application().accent().hex()} />
+				<HistoryIcon color={theme.palette.themePrimary} />
 				{showText ? `${title} ${steps ? `(${steps})` : ''}` : null}
 			</ActionButton>
 		)

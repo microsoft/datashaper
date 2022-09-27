@@ -45,7 +45,7 @@ const Container = styled.div`
 `
 
 const Table = styled.div`
-	border: 1px solid ${({ theme }) => theme.application().accent().hex()};
+	border: 1px solid ${({ theme }) => theme.palette.themePrimary};
 	min-width: 600px;
 	flex: 1;
 `

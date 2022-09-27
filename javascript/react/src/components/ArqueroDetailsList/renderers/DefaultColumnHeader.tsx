@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IDetailsColumnProps } from '@fluentui/react'
-import { Icon } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import { Icon, useTheme } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
 import { useCellDimensions } from '../hooks/index.js'
@@ -19,7 +18,7 @@ interface DefaultColumnHeaderProps extends IDetailsColumnProps {
 
 export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 	function DefaultColumnHeader({ column, isClickable, onClick }) {
-		const theme = useThematic()
+		const theme = useTheme()
 		const { isSorted, isSortedDescending, iconName, iconClassName } = column
 		const dimensions = useCellDimensions(column)
 
@@ -31,7 +30,7 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 				justifyContent: 'space-between',
 				width: dimensions.width,
 				borderBottom: column.data?.selected
-					? `2px solid ${theme.application().accent().hex()}`
+					? `2px solid ${theme.palette.themePrimary}`
 					: `2px solid transparent`,
 			}),
 			[theme, dimensions, column, isClickable],
@@ -40,8 +39,8 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 		const textStyle = useMemo(
 			() => ({
 				color: column.data?.selected
-					? theme.application().accent().hex()
-					: theme.application().foreground().hex(),
+					? theme.palette.themePrimary
+					: theme.palette.neutralPrimary,
 				width: '100%',
 				textAlign: 'center' as const,
 				overflow: 'hidden' as const,
@@ -55,7 +54,7 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 			() => ({
 				root: {
 					fontSize: 12,
-					color: theme.application().midHighContrast().hex(),
+					color: theme.palette.neutralSecondary,
 				},
 			}),
 			[theme],

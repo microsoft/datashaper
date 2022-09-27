@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ICheckboxProps } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import { useTheme } from '@fluentui/react'
 import { useMemo, useState } from 'react'
 
 import { createDefaultHeaderCommandBar } from '../../../../component-factories.js'
@@ -45,7 +45,7 @@ export function useCheckboxes(): {
 
 export function useCommandBar(): JSX.Element {
 	// TODO: this theme is not coming from the story context correcty
-	const theme = useThematic()
+	const theme = useTheme()
 
 	const items = useMemo(
 		() => [
@@ -74,7 +74,7 @@ export function useCommandBar(): JSX.Element {
 
 export function useFarCommandBar(): JSX.Element {
 	// TODO: this theme is not coming from the story context correcty
-	const theme = useThematic()
+	const theme = useTheme()
 
 	const items = useMemo(
 		() => [

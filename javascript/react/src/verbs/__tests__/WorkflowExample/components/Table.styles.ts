@@ -7,7 +7,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
 	width: 600px;
 	height: 300px;
-	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
+	border: 1px solid ${({ theme }) => theme.palette.neutralLighter};
 `
 
 export const TableContainer = styled.div`

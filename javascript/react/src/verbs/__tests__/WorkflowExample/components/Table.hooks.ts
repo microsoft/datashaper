@@ -7,14 +7,14 @@ import {
 	downloadCommand,
 } from '@datashaper/react'
 import type { IColumn } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import { useTheme } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
 import type { ColumnConfigMap } from './Table.types.js'
 
 export function useFarCommandBar(table: ColumnTable): JSX.Element {
-	const theme = useThematic()
+	const theme = useTheme()
 	const items = useMemo(() => [downloadCommand(table)], [table])
 	return useMemo(
 		() => createDefaultHeaderCommandBar({ items }, theme, true),

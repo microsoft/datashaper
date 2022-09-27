@@ -9,8 +9,11 @@ import type {
 	ICommandBarProps,
 	IContextualMenuItem,
 } from '@fluentui/react'
-import { ContextualMenuItemType, VerticalDivider } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import {
+	ContextualMenuItemType,
+	useTheme,
+	VerticalDivider,
+} from '@fluentui/react'
 import uniqueId from 'lodash-es/uniqueId.js'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { useMemo } from 'react'
@@ -92,7 +95,7 @@ export function useColumnCommands(
 	) => void,
 	disabled: boolean,
 ): React.ReactElement<ICommandBarProps, any> {
-	const theme = useThematic()
+	const theme = useTheme()
 
 	return useMemo(() => {
 		const id = 'overflowColumn'
@@ -119,8 +122,7 @@ export function useTableCommands(
 	) => void,
 	disabled: boolean,
 ): React.ReactElement<ICommandBarProps, any> {
-	const theme = useThematic()
-
+	const theme = useTheme()
 	return useMemo(() => {
 		const id = 'overflowTable'
 		return createDefaultHeaderCommandBar(
@@ -143,8 +145,7 @@ export function useUndoCommands(
 	onUndoStep: () => void,
 	disabled: boolean,
 ): React.ReactElement<ICommandBarProps, any> {
-	const theme = useThematic()
-
+	const theme = useTheme()
 	return useMemo(() => {
 		return createDefaultHeaderCommandBar(
 			{

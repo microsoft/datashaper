@@ -4,7 +4,7 @@
  */
 import type { FieldMetadata } from '@datashaper/schema'
 import { formatIfNumber } from '@datashaper/tables'
-import { useThematic } from '@thematic/react'
+import { useTheme } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useMemo } from 'react'
 
@@ -38,7 +38,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 		column,
 		onClick,
 	}) {
-		const theme = useThematic()
+		const theme = useTheme()
 		const cells = useMemo(() => {
 			const st = (field.metadata || {}) as any
 			return stats.map(stat => {
@@ -56,7 +56,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 				height: stats.length * CELL_HEIGHT,
 				fontWeight: 'normal',
 				fontSize: 10,
-				color: theme.application().midHighContrast().hex(),
+				color: theme.palette.neutralSecondary,
 				cursor: onClick ? 'pointer' : 'inherit',
 			}
 		}, [onClick, theme, stats])
