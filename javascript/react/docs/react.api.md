@@ -194,6 +194,16 @@ export interface DetailsListFeatures {
     statsColumnTypes?: StatsColumnType[];
 }
 
+// Warning: (ae-missing-release-tag) "DisplayOrder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum DisplayOrder {
+    // (undocumented)
+    FirstOnTop = "first-on-top",
+    // (undocumented)
+    LastOnTop = "last-on-top"
+}
+
 // Warning: (ae-missing-release-tag) "downloadCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -291,6 +301,8 @@ export interface HistoryButtonProps {
     steps?: number;
     // (undocumented)
     styles?: IButtonStyles;
+    // (undocumented)
+    title?: string;
 }
 
 // Warning: (ae-forgotten-export) The symbol "CustomIconProps" needs to be exported by the entry point index.d.ts
@@ -298,6 +310,31 @@ export interface HistoryButtonProps {
 //
 // @public (undocumented)
 export const HistoryIcon: (props: CustomIconProps) => JSX.Element;
+
+// Warning: (ae-missing-release-tag) "HistoryPanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const HistoryPanel: React.FC<HistoryPanelProps>;
+
+// Warning: (ae-missing-release-tag) "HistoryPanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface HistoryPanelProps {
+    // (undocumented)
+    isCollapsed: boolean;
+    // (undocumented)
+    order?: DisplayOrder;
+    // (undocumented)
+    setSelectedTableId: (tableId: string) => void;
+    // (undocumented)
+    title?: string;
+    // (undocumented)
+    titleStyle?: React.CSSProperties;
+    // (undocumented)
+    toggleCollapsed: () => void;
+    // (undocumented)
+    workflow: Workflow;
+}
 
 // Warning: (ae-missing-release-tag) "ManageWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -311,8 +348,8 @@ export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'wor
     // (undocumented)
     historyView?: boolean;
     onSelect?: (name: string) => void;
-    onUpdateOutput?: (output: TableContainer[]) => void;
-    onUpdateWorkflow?: (workflow: Workflow) => void;
+    // (undocumented)
+    order?: DisplayOrder;
     workflow: Workflow;
 }
 
@@ -773,7 +810,7 @@ export function useWorkflowOutputListener(workflow: Workflow, setOutput?: ((tabl
 // Warning: (ae-missing-release-tag) "useWorkflowSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useWorkflowSteps(workflow: Workflow): Step[];
+export function useWorkflowSteps(workflow: Workflow, order: DisplayOrder): Step[];
 
 // Warning: (ae-missing-release-tag) "visibleColumnsCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
