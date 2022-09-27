@@ -44,7 +44,11 @@ export { StepComponent } from './components/StepComponent.js'
 export type { StepComponentProps } from './components/StepComponent.types.js'
 export { StepDescription } from './components/StepDescription.js'
 export type { StepDescriptionProps } from './components/StepDescription.types.js'
-export type { PanelProps } from './components/StepHistoryList.types.js'
+export { StepHistoryList } from './components/StepHistoryList.js'
+export type {
+	PanelProps,
+	StepHistoryListProps,
+} from './components/StepHistoryList.types.js'
 export { StepList } from './components/StepList.js'
 export type { StepListProps } from './components/StepList.types.js'
 export { StepSelector } from './components/StepSelector.js'

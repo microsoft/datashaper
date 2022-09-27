@@ -8,6 +8,7 @@ import {
 	HistoryButton,
 	HistoryPanel,
 	ProjectMgmtCommandBar,
+	StepHistoryList,
 	TableCommands,
 	useOnCreateStep,
 	useOnDeleteStep,
@@ -16,7 +17,6 @@ import {
 	useWorkflowListener,
 	useWorkflowOutputListener,
 } from '@datashaper/react'
-import { StepHistoryList } from '@datashaper/react/src/components/StepHistoryList.js'
 import { TableListBar } from '@datashaper/react/src/components/TableListBar.js'
 import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer } from '@datashaper/tables'
