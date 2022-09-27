@@ -19,10 +19,12 @@ import { useCallback, useEffect, useMemo } from 'react'
 
 import { useResetArgs } from '../hooks/common.js'
 import type {
+	DropdownChangeAllHandler,
 	DropdownChangeHandler,
 	TextFieldChangeHandler,
 } from '../hooks/fluent.js'
 import {
+	useDropdownChangeAllHandler,
 	useDropdownChangeHandler,
 	useTextFieldChangeHandler,
 } from '../hooks/fluent.js'
@@ -121,10 +123,20 @@ export function useInputColumnListChanged(
 ): DropdownChangeHandler {
 	return useDropdownChangeHandler<InputColumnListArgs>(
 		step as Step<InputColumnListArgs>,
-		(s, val) => {
-			s.args.columns = toggleListItem(s.args.columns ?? [], val as string)
-		},
+		(s, val) =>
+			(s.args.columns = toggleListItem(s.args.columns ?? [], val as string)),
 		onChange,
+	)
+}
+
+export function useInputColumnListAllChanged(
+	step: Step,
+	onChangeAll: (step: Step) => void,
+): DropdownChangeAllHandler {
+	return useDropdownChangeAllHandler<InputColumnListArgs>(
+		step as Step<InputColumnListArgs>,
+		(s, val) => (s.args.columns = val as string[]),
+		onChangeAll,
 	)
 }
 
