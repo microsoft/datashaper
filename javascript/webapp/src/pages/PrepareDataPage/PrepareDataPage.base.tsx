@@ -6,8 +6,7 @@ import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	HistoryButton,
-	HistoryIcon,
-	ManageWorkflow,
+	HistoryPanel,
 	ProjectMgmtCommandBar,
 	TableCommands,
 	useOnCreateStep,
@@ -22,30 +21,22 @@ import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdown
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
-import { IconButton } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { useThematic } from '@thematic/react'
 import { memo, useCallback, useState } from 'react'
 
 import { useStepListener, useTables } from './PrepareDataPage.hooks.js'
 import {
-	Aside,
-	AsideHeader,
 	ButtonContainer,
 	Container,
 	DetailsListContainer,
-	icons,
 	Main,
 	mgmtStyles,
 	OutputContainer,
 	PageContainer,
 	PrepareDataContainer,
-	Title,
-	WorkflowContainer,
 } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const theme = useThematic()
 	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 	const [selectedTableId, setSelectedTableId] = useState<string | undefined>()
 
@@ -103,6 +94,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 							/>
 							<HistoryButton
 								onClick={toggleCollapsed}
+								title="Steps"
 								steps={workflow?.steps?.length}
 								showText={true}
 								styles={{
@@ -123,7 +115,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 												onRemoveStep={onDelete}
 											/>
 										}
-										name={selectedTable?.id}
 										table={selectedTable?.table}
 									/>
 									<ArqueroDetailsList
@@ -134,7 +125,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 										clickableColumns={!!onColumnClick}
 										selectedColumn={selectedColumn}
 										onColumnClick={onColumnClick}
-										// onChangeMetadata={onUpdateMetadata}
 										metadata={selectedTable?.metadata}
 										table={selectedTable?.table}
 										features={{ smartHeaders: true }}
@@ -143,28 +133,13 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 							)}
 						</OutputContainer>
 					</Main>
-					<Aside isCollapsed={isCollapsed}>
-						<AsideHeader isCollapsed={isCollapsed}>
-							<HistoryIcon color={theme.application().accent().hex()} />
-							<Title isCollapsed={isCollapsed}>
-								History ({workflow?.steps?.length || 0})
-								<IconButton
-									iconProps={icons.cancel}
-									onClick={toggleCollapsed}
-									ariaLabel="Close"
-								/>
-							</Title>
-						</AsideHeader>
-						<WorkflowContainer isCollapsed={isCollapsed}>
-							<ManageWorkflow
-								workflow={workflow}
-								onSelect={setSelectedTableId}
-								onUpdateOutput={setOutputs}
-								onUpdateWorkflow={setWorkflow}
-								historyView={true}
-							/>
-						</WorkflowContainer>
-					</Aside>
+					<HistoryPanel
+						workflow={workflow}
+						title="Steps"
+						isCollapsed={isCollapsed}
+						toggleCollapsed={toggleCollapsed}
+						setSelectedTableId={setSelectedTableId}
+					/>
 				</Container>
 			</PrepareDataContainer>
 		</PageContainer>

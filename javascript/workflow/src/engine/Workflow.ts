@@ -326,6 +326,7 @@ export class Workflow {
 
 	private lastStepOutput(): Maybe<TableSubject> {
 		// Returns the default output of the final node
+		if (this.length === 0) return undefined
 		const lastStepId = this.steps[this.steps.length - 1]!.id
 		const lastNode = this.getNode(lastStepId)
 		// Nodes use BehaviorSubject internally

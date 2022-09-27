@@ -5,30 +5,26 @@
 
 import type { IModalStyleProps, IModalStyles } from '@fluentui/react'
 import type { IStyleFunctionOrObject } from '@fluentui/utilities'
-import { useThematic } from '@thematic/react'
+import type { Theme } from '@thematic/core'
 import merge from 'lodash-es/merge.js'
-import { useMemo } from 'react'
 
 /**
  * Defaults modal to have a slight border that is adapted for theme
  * @param styles
  * @returns
  */
-export function useModalStyles(
+export function getModalStyles(
+	theme: Theme,
 	styles?: IStyleFunctionOrObject<IModalStyleProps, IModalStyles>,
-	includeGuidance = false,
 ): IStyleFunctionOrObject<IModalStyleProps, IModalStyles> {
-	const theme = useThematic()
-	return useMemo(() => {
-		return merge(
-			{
-				root: {
-					border: `1px solid ${theme.application().faint().hex()}`,
-					width: includeGuidance ? 900 : 520,
-					maxHeight: 580,
-				},
+	return merge(
+		{
+			root: {
+				border: `1px solid ${theme.application().faint().hex()}`,
+				width: 'fit-content',
+				maxHeight: 580,
 			},
-			styles,
-		)
-	}, [theme, styles, includeGuidance])
+		},
+		styles,
+	)
 }

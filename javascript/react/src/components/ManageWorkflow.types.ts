@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { TableContainer } from '@datashaper/tables'
 import type { Workflow } from '@datashaper/workflow'
 
+import type { DisplayOrder } from '../enums.js'
 import type { TransformModalProps } from '../index.js'
 
 export interface ManageWorkflowProps
@@ -19,13 +19,6 @@ export interface ManageWorkflowProps
 	 */
 	onSelect?: (name: string) => void
 
-	/**
-	 * Event handler for when the output tableset changes
-	 */
-	onUpdateOutput?: (output: TableContainer[]) => void
-	/**
-	 * Handler for when the workflow changes
-	 */
-	onUpdateWorkflow?: (workflow: Workflow) => void
 	historyView?: boolean
+	order?: DisplayOrder
 }

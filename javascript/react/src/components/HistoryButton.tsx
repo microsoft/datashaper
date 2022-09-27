@@ -17,12 +17,13 @@ export const HistoryButton: React.FC<HistoryButtonProps> = memo(
 		steps = 0,
 		showText = false,
 		styles = {},
+		title = 'History',
 	}) {
 		const theme = useThematic()
 		return (
 			<ActionButton onClick={onClick} styles={merge({}, buttonStyles, styles)}>
 				<HistoryIcon color={theme.application().accent().hex()} />
-				{showText ? `History ${steps ? `(${steps})` : ''}` : null}
+				{showText ? `${title} ${steps ? `(${steps})` : ''}` : null}
 			</ActionButton>
 		)
 	},

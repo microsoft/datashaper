@@ -139,7 +139,10 @@ export function useTableCommands(
 	}, [onCallStep, theme, disabled])
 }
 
-export function useUndoCommands(onUndoStep: () => void, disabled: boolean) {
+export function useUndoCommands(
+	onUndoStep: () => void,
+	disabled: boolean,
+): React.ReactElement<ICommandBarProps, any> {
 	const theme = useThematic()
 
 	return useMemo(() => {
@@ -158,7 +161,7 @@ export function useUndoCommands(onUndoStep: () => void, disabled: boolean) {
 			},
 			theme,
 		)
-	}, [theme, onUndoStep])
+	}, [theme, onUndoStep, disabled])
 }
 
 const icons = {

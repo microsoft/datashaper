@@ -10,4 +10,5 @@ export interface HistoryButtonProps {
 	steps?: number
 	showText?: boolean
 	styles?: IButtonStyles
+	title?: string
 }

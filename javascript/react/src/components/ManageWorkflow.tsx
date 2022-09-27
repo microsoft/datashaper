@@ -7,6 +7,7 @@ import type { Step } from '@datashaper/workflow'
 import { DialogConfirm } from '@essex/themed-components'
 import { memo, useCallback, useState } from 'react'
 
+import { DisplayOrder } from '../enums.js'
 import {
 	useOnCreateStep,
 	useOnDeleteStep,
@@ -29,10 +30,9 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		workflow: wf,
 		table,
 		onSelect,
-		onUpdateOutput,
-		onUpdateWorkflow,
 		nextInputTable,
 		historyView = false,
+		order = DisplayOrder.LastOnTop,
 		...props
 	}) {
 		// Selected Step/Index State for the component
@@ -75,7 +75,7 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 		)
 
 		const outputs = useStepOutputs(wf)
-		const steps = useWorkflowSteps(wf)
+		const steps = useWorkflowSteps(wf, order)
 
 		return (
 			<Container>
@@ -84,8 +84,6 @@ export const ManageWorkflow: React.FC<ManageWorkflowProps> = memo(
 						onDeleteClicked={onDelete}
 						onSelect={onViewStep}
 						steps={steps}
-						onStartNewStep={showModal}
-						buttonId={addStepButtonId}
 						workflow={wf}
 						nextInputTable={nextInputTable}
 						onCreate={onCreate}

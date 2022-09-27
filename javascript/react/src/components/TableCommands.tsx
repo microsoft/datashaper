@@ -93,6 +93,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 						onTransformRequested={onTransformRequested}
 						workflow={workflow}
 						onDismiss={dismissModal}
+						showGuidance
 					/>
 				) : null}
 			</Container>

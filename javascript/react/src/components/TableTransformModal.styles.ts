@@ -11,11 +11,10 @@ export const icons = {
 
 const MAX_HEIGHT = 700
 
-export const ContainerBody = styled.div<{ showGuidance: boolean }>`
+export const ContainerBody = styled.div`
 	padding: 0px 12px 14px 24px;
 	display: flex;
 	justify-content: flex-start;
-	gap: 12px;
 `
 
 export const Header = styled.div`
@@ -32,7 +31,7 @@ export const Title = styled.h3`
 `
 
 export const StepComponentContainer = styled.div`
-	width: 470px;
+	width: 300px;
 	max-height: ${MAX_HEIGHT}px;
 	overflow: hidden auto;
 `

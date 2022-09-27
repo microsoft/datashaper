@@ -8,23 +8,20 @@ import {
 	CollapsiblePanel,
 	CollapsiblePanelContainer,
 } from '@essex/themed-components'
-import { DefaultButton } from '@fluentui/react'
-import { capitalize } from 'lodash-es'
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useThematic } from '@thematic/react'
+import { memo, useCallback, useEffect, useRef } from 'react'
 
-import { useCollapsiblePanelStyles } from './StepHistoryList.hooks.js'
 import {
-	addButtonStyles,
-	ButtonContainer,
 	Columns,
 	Container,
-	icons,
 	ListWrapper,
 	PanelHeader,
+	StepIndex,
 	tableTransformStyle,
 	Verb,
 } from './StepHistoryList.styles.js'
 import type { StepHistoryListProps } from './StepHistoryList.types.js'
+import { getCollapsiblePanelStyles } from './StepHistoryList.utils.js'
 import { TableTransform } from './TableTransform.js'
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
@@ -33,23 +30,13 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		onDeleteClicked,
 		onDuplicateClicked,
 		onSelect,
-		onStartNewStep,
-		buttonId,
 		workflow,
 		onCreate,
 		nextInputTable,
 	}) {
 		const ref = useRef<HTMLDivElement>(null)
-		const collapsiblePanelStyles = useCollapsiblePanelStyles()
-		const [isExpanded, setIsExpanded] = useState<number[]>([])
-		const onHeaderClick = useCallback(
-			(state: boolean, index: number) => {
-				setIsExpanded(prev =>
-					state ? [...prev, index] : prev.filter(i => i !== index),
-				)
-			},
-			[setIsExpanded],
-		)
+		const theme = useThematic()
+		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
 
 		const onTransformRequested = useCallback(
 			(step: Step, output: string | undefined, index?: number) => {
@@ -68,19 +55,21 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		return (
 			<Container>
 				<CollapsiblePanelContainer>
-					{steps.map((step, index) => {
+					{steps.map(step => {
+						const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
 						return (
 							<CollapsiblePanel
-								key={index}
-								onHeaderClick={s => onHeaderClick(s, index)}
-								styles={collapsiblePanelStyles(!!isExpanded?.includes(index))}
-								onRenderHeader={() => onRenderHeader(step)}
+								key={stepIndex}
+								styles={collapsiblePanelStyles}
+								onRenderHeader={() => onRenderHeader(step, stepIndex)}
 							>
 								<ListWrapper>
 									<TableTransform
-										key={index}
+										hideInput
+										hideOutput
+										key={stepIndex}
 										step={step}
-										index={index}
+										index={stepIndex}
 										workflow={workflow}
 										style={tableTransformStyle}
 										nextInputTable={nextInputTable}
@@ -88,7 +77,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 										onPreview={onSelect}
 										onDuplicate={onDuplicateClicked}
 										onTransformRequested={(s, o) =>
-											onTransformRequested(s, o, index)
+											onTransformRequested(s, o, stepIndex)
 										}
 										hideStepSelector
 									/>
@@ -97,25 +86,12 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 						)
 					})}
 				</CollapsiblePanelContainer>
-
-				{onStartNewStep && (
-					<ButtonContainer ref={ref}>
-						<DefaultButton
-							styles={addButtonStyles}
-							iconProps={icons.add}
-							onClick={onStartNewStep}
-							id={buttonId}
-						>
-							Add step
-						</DefaultButton>
-					</ButtonContainer>
-				)}
 			</Container>
 		)
 	},
 )
 
-function onRenderHeader(step: Step): JSX.Element {
+function onRenderHeader(step: Step, index: number): JSX.Element {
 	const { args } = step
 	const columnList: any = (args as any).columns ||
 		(args as any).on || [(args as any).column]
@@ -135,8 +111,10 @@ function onRenderHeader(step: Step): JSX.Element {
 
 	return (
 		<PanelHeader>
-			<Verb>{step.verb}</Verb>
-			<Columns>{capitalize(columns)}</Columns>
+			<Verb>
+				<StepIndex>#{index + 1}</StepIndex> {step.verb}
+			</Verb>
+			<Columns>{columns}</Columns>
 		</PanelHeader>
 	)
 }
