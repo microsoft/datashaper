@@ -325,8 +325,6 @@ export interface HistoryPanelProps {
     // (undocumented)
     isCollapsed: boolean;
     // (undocumented)
-    order?: DisplayOrder;
-    // (undocumented)
     showStepCount?: boolean;
     // (undocumented)
     steps?: Step[];
@@ -484,6 +482,27 @@ export interface StepDescriptionProps {
     step: Step;
 }
 
+// Warning: (ae-missing-release-tag) "StepHistoryList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const StepHistoryList: React.FC<StepHistoryListProps>;
+
+// Warning: (ae-missing-release-tag) "StepHistoryListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflow'> {
+    // (undocumented)
+    onDelete?: (index: number) => void;
+    // (undocumented)
+    onDuplicateClicked?: (step: Step) => void;
+    // (undocumented)
+    onSave?: (step: Step, output: string | undefined, index?: number) => void;
+    // (undocumented)
+    onSelect?: (name: string) => void;
+    // (undocumented)
+    order?: DisplayOrder;
+}
+
 // Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -594,7 +613,7 @@ export interface TableTransformProps {
     // (undocumented)
     onDuplicate?: (step: Step) => void;
     // (undocumented)
-    onPreview?: (name: string, verb?: string, index?: number) => void;
+    onPreview?: (name: string) => void;
     onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
     // (undocumented)
     onVerbChange?: (verb: Verb) => void;
@@ -794,7 +813,7 @@ export function useWorkflowOutputListener(workflow: Workflow, setOutput?: ((tabl
 // Warning: (ae-missing-release-tag) "useWorkflowSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useWorkflowSteps(workflow: Workflow, order: DisplayOrder): Step[];
+export function useWorkflowSteps(workflow: Workflow, order?: DisplayOrder): Step[];
 
 // Warning: (ae-missing-release-tag) "visibleColumnsCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
