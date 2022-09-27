@@ -12,6 +12,7 @@ import {
 import { useThematic } from '@thematic/react'
 import { memo, useEffect, useRef } from 'react'
 
+import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
 import { useDeleteConfirm } from './StepHistoryList.hooks.js'
 import {
 	Columns,
@@ -28,15 +29,16 @@ import { TableTransform } from './TableTransform.js'
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 	function StepsList({
-		steps,
 		onDelete,
 		onDuplicateClicked,
 		onSelect,
 		workflow,
 		onSave,
+		order,
 	}) {
 		const ref = useRef<HTMLDivElement>(null)
 		const theme = useThematic()
+		const steps = useWorkflowSteps(workflow, order)
 		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
 		const {
 			onClick: onDeleteClicked,

@@ -151,7 +151,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 						showStepCount
 					>
 						<StepHistoryList
-							steps={workflow.steps}
 							onDelete={onDelete}
 							onSelect={setSelectedTableId}
 							workflow={workflow}

@@ -5,13 +5,10 @@
 
 import type { Step } from '@datashaper/workflow'
 
-import type { DisplayOrder } from '../enums.js'
-
 export interface HistoryPanelProps {
 	isCollapsed: boolean
 	toggleCollapsed: () => void
 	title?: string
-	order?: DisplayOrder
 	showStepCount?: boolean
 	steps?: Step[]
 	titleStyle?: React.CSSProperties
