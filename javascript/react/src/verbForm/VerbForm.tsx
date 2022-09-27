@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@datashaper/workflow'
+import { Expando } from '@essex/components'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import {
 	Checkbox,
@@ -17,7 +18,6 @@ import noop from 'lodash-es/noop.js'
 import { Fragment, memo, useMemo } from 'react'
 import { Case, Switch, When } from 'react-if'
 
-import { Expando } from '../controls/Expando.js'
 import {
 	useCheckboxChangeHandler,
 	useComboBoxChangeHandler,
