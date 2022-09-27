@@ -12,10 +12,10 @@ export interface PanelProps {
 }
 
 export interface StepHistoryListProps
-	extends Pick<TableTransformProps, 'workflow' | 'nextInputTable'> {
+	extends Pick<TableTransformProps, 'workflow'> {
 	steps: Step[]
-	onDeleteClicked?: (index: number) => void
+	onDelete?: (index: number) => void
 	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
-	onCreate?: (step: Step, output: string | undefined, index?: number) => void
+	onSave?: (step: Step, output: string | undefined, index?: number) => void
 }

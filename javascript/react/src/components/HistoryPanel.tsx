@@ -15,18 +15,16 @@ import {
 	WorkflowContainer,
 } from './HistoryPanel.styles.js'
 import type { HistoryPanelProps } from './HistoryPanel.types.js'
-import { ManageWorkflow } from './ManageWorkflow.js'
 
 export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 	function HistoryPanel({
 		isCollapsed,
 		toggleCollapsed,
-		setSelectedTableId,
-		workflow,
 		title = 'History',
-		order,
-		stepsCount,
+		showStepCount,
+		steps,
 		titleStyle,
+		children,
 	}) {
 		const theme = useThematic()
 
@@ -35,7 +33,7 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 				<AsideHeader isCollapsed={isCollapsed}>
 					<HistoryIcon color={theme.application().accent().hex()} />
 					<Title style={titleStyle} isCollapsed={isCollapsed}>
-						{title} {stepsCount != undefined ? `(${stepsCount})` : null}
+						{title} {showStepCount ? `(${steps?.length})` : null}
 						<IconButton
 							iconProps={icons.cancel}
 							onClick={toggleCollapsed}
@@ -44,12 +42,7 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 					</Title>
 				</AsideHeader>
 				<WorkflowContainer isCollapsed={isCollapsed}>
-					<ManageWorkflow
-						order={order}
-						workflow={workflow}
-						onSelect={setSelectedTableId}
-						historyView={true}
-					/>
+					{children}
 				</WorkflowContainer>
 			</Aside>
 		)

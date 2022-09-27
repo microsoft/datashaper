@@ -44,11 +44,6 @@ export interface TableTransformProps {
 	 */
 	headerText?: string
 
-	/**
-	 * Last output table to use as input & output for column transform or as input for table transform
-	 */
-	nextInputTable?: string
-
 	target?: string
 
 	/**

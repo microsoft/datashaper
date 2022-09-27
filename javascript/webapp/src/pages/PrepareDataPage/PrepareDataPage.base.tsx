@@ -16,6 +16,7 @@ import {
 	useWorkflowListener,
 	useWorkflowOutputListener,
 } from '@datashaper/react'
+import { StepHistoryList } from '@datashaper/react/src/components/StepHistoryList.js'
 import { TableListBar } from '@datashaper/react/src/components/TableListBar.js'
 import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer } from '@datashaper/tables'
@@ -55,7 +56,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	const onSave = useOnSaveStep(workflow)
 	const onCreate = useOnCreateStep(onSave, setSelectedTableId)
-	const onDelete = useOnDeleteStep(workflow)
 	const inputNames = useInputTableNames(workflow)
 
 	useStepListener(workflow, setSelectedTableId, inputNames)
@@ -63,6 +63,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	useWorkflowListener(workflow, setWorkflow)
 
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
+
+	const onDelete = useOnDeleteStep(workflow)
 
 	const onColumnClick = useCallback(
 		(_?: React.MouseEvent<HTMLElement, MouseEvent>, column?: IColumn) => {
@@ -134,13 +136,20 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 						</OutputContainer>
 					</Main>
 					<HistoryPanel
-						workflow={workflow}
 						title="Steps"
-						stepsCount={workflow.length}
 						isCollapsed={isCollapsed}
 						toggleCollapsed={toggleCollapsed}
-						setSelectedTableId={setSelectedTableId}
-					/>
+						steps={workflow.steps}
+						showStepCount
+					>
+						<StepHistoryList
+							steps={workflow.steps}
+							onDelete={onDelete}
+							onSelect={setSelectedTableId}
+							workflow={workflow}
+							onSave={onSave}
+						/>
+					</HistoryPanel>
 				</Container>
 			</PrepareDataContainer>
 		</PageContainer>
