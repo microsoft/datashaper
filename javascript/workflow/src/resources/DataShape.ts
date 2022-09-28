@@ -56,7 +56,7 @@ export class DataShape
 		}
 	}
 
-	public loadSchema(schema: DataShapeSchema | null | undefined) {
+	public loadSchema(schema: DataShapeSchema | null | undefined): void {
 		this._matrix = schema?.matrix
 		this._nature = schema?.nature
 		this._orientation = schema?.orientation

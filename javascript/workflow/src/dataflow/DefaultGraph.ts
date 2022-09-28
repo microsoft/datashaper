@@ -11,7 +11,7 @@ export class DefaultGraph<T> implements Graph<T> {
 	private _nodes: Map<NodeId, Node<T>> = new Map()
 	private _nodeSubscriptions: Map<NodeId, Subscription> = new Map()
 
-	public clear() {
+	public clear(): void {
 		for (const sub of Object.values(this._nodeSubscriptions)) {
 			sub.unsubscribe()
 		}

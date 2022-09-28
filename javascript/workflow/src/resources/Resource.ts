@@ -67,7 +67,7 @@ export class Resource
 	public override loadSchema(
 		value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined,
 		preventOnChange = false,
-	) {
+	): void {
 		super.loadSchema(value, true)
 		this._path = value?.path
 		this._sources = value?.sources

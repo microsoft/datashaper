@@ -35,7 +35,7 @@ export class Codebook
 		})
 	}
 
-	public override loadSchema(value: CodebookSchema | null | undefined) {
+	public override loadSchema(value: CodebookSchema | null | undefined): void {
 		super.loadSchema(value)
 		this.fields = value?.fields ?? []
 		this._onChange.next()
