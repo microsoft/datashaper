@@ -211,6 +211,15 @@ export interface DataPackageSchema extends Named {
     resources: (string | ResourceSchema)[];
 }
 
+// Warning: (ae-missing-release-tag) "DataShape" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface DataShape {
+    matrix?: [width: number, height: number];
+    nature?: DataNature;
+    orientation?: DataOrientation;
+}
+
 // Warning: (ae-missing-release-tag) "DataTableSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -221,7 +230,6 @@ export interface DataTableSchema extends ResourceSchema {
     format?: DataFormat;
     parser?: ParserOptions;
     rows?: number;
-    // Warning: (ae-forgotten-export) The symbol "DataShape" needs to be exported by the entry point index.d.ts
     shape?: DataShape;
     typeHints?: TypeHints;
 }

@@ -17,11 +17,11 @@ import { v4 } from 'uuid'
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
 import type { Graph, Node } from '../dataflow/types.js'
+import { createNode } from '../engine/createNode.js'
+import { readStep } from '../engine/readStep.js'
+import type { Step, StepInput } from '../engine/types.js'
+import { WorkflowSchemaInstance } from '../engine/validator.js'
 import type { Maybe } from '../primitives.js'
-import { createNode } from './createNode.js'
-import { readStep } from './readStep.js'
-import type { Step, StepInput } from './types.js'
-import { WorkflowSchemaInstance } from './validator.js'
 
 /**
  * The workflow object manages mutable data for a workflow specification
