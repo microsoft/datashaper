@@ -11,11 +11,6 @@ export const PageContainer = styled.div`
 	height: calc(100vh - 80px);
 	position: relative;
 `
-export const mgmtStyles = {
-	root: {
-		height: 36,
-	},
-}
 
 export const Main = styled.div`
 	display: flex;

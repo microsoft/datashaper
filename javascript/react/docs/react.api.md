@@ -13,21 +13,20 @@ import { FileCollection } from '@datashaper/utilities';
 import { FileRejection } from 'react-dropzone';
 import type { IButtonStyles } from '@fluentui/react';
 import type { IColumn } from '@fluentui/react';
-import { ICommandBarItemProps } from '@fluentui/react';
+import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
 import type { IDetailsColumnProps } from '@fluentui/react';
-import { IDetailsColumnStyles } from '@fluentui/react';
+import type { IDetailsColumnStyles } from '@fluentui/react';
 import type { IDetailsGroupDividerProps } from '@fluentui/react';
 import type { IDetailsHeaderProps } from '@fluentui/react';
 import type { IDetailsListProps } from '@fluentui/react';
-import { IDetailsListStyles } from '@fluentui/react';
+import type { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
 import type { IDocumentCardStyles } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
-import type { ITheme } from '@fluentui/react';
 import { default as React_2 } from 'react';
 import type { ReactElement } from 'react';
 import type { RowObject } from 'arquero/dist/types/table/table';
@@ -144,33 +143,6 @@ export interface ColumnOptions {
 //
 // @public (undocumented)
 export type ColumnRenderFunction = (item?: any, index?: number, column?: IColumn) => any;
-
-// Warning: (ae-missing-release-tag) "CommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const CommandBar: React.FC<CommandBarProps>;
-
-// Warning: (ae-missing-release-tag) "CommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CommandBarProps extends ICommandBarProps {
-    // (undocumented)
-    background?: string;
-    // (undocumented)
-    color?: string;
-    // (undocumented)
-    height?: string;
-}
-
-// Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createDefaultCommandBar({ styles, ...props }: ICommandBarProps): ReactElement<ICommandBarProps, any>;
-
-// Warning: (ae-missing-release-tag) "createDefaultHeaderCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: ITheme, far?: boolean): ReactElement<ICommandBarProps, any>;
 
 // Warning: (ae-missing-release-tag) "DetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -368,15 +340,16 @@ export interface PanelProps {
     panelIsOpen: boolean;
 }
 
-// Warning: (ae-missing-release-tag) "ProjectMgmtCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ProjectManagementCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps>;
+export const ProjectManagementCommandBar: React.FC<ProjectManagementCommandBarProps>;
 
-// Warning: (ae-missing-release-tag) "ProjectMgmtCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ProjectManagementCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'items'> {
+export interface ProjectManagementCommandBarProps extends Omit<ICommandBarProps, 'items'> {
+    itemProps?: Partial<ICommandBarItemProps>;
     onUpdateTables: (tables: TableContainer[]) => void;
     onUpdateWorkflow: (steps: Workflow) => void;
     outputTables: TableContainer[];
@@ -726,6 +699,15 @@ export function useIncrementingColumnColorScale(meta?: TableMetadata): () => str
 //
 // @public
 export function useInputTableNames(workflow?: Workflow): string[];
+
+// Warning: (ae-missing-release-tag) "useManagementBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useManagementBarDefaults(props?: ProjectManagementCommandBarProps, colors?: {
+    color?: string;
+    background?: string;
+    border?: string;
+}): ProjectManagementCommandBarProps;
 
 // Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

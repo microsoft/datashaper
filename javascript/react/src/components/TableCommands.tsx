@@ -7,6 +7,7 @@ import type { Verb } from '@datashaper/schema'
 import type { Step } from '@datashaper/workflow'
 import { readStep } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
+import { CommandBar } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
@@ -74,13 +75,12 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 		const columnCommands = useColumnCommands(onCallStep, !selectedColumn)
 		const tableCommands = useTableCommands(onCallStep, allTablesLength <= 1)
 		const undoCommands = useUndoCommands(onUndoStep, workflow.steps.length < 1)
-
 		return (
 			<Container>
 				<VerbsContainer>
-					{undoCommands}
-					{columnCommands}
-					{tableCommands}
+					<CommandBar {...undoCommands} />
+					<CommandBar {...columnCommands} />
+					<CommandBar {...tableCommands} />
 				</VerbsContainer>
 
 				{isModalOpen ? (

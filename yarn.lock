@@ -3971,12 +3971,13 @@ __metadata:
     "@storybook/manager-webpack4": ^6.5.12
     "@storybook/react": ^6.5.12
     "@storybook/testing-library": ^0.0.13
-    "@thematic/core": ^3.0.0
-    "@thematic/d3": ^2.0.12
-    "@thematic/fluent": ^4.0.1
-    "@thematic/react": ^2.0.12
+    "@thematic/core": ^3.1.0
+    "@thematic/d3": ^2.0.13
+    "@thematic/fluent": ^4.1.0
+    "@thematic/react": ^2.1.0
     "@types/babel__core": ^7.1.19
     "@types/babel__preset-env": ^7.9.2
+    "@types/chroma-js": ^2
     "@types/d3-format": ^3.0.1
     "@types/lodash": ^4.14.185
     "@types/lodash-es": ^4.17.6
@@ -3990,6 +3991,7 @@ __metadata:
     add: ^2.0.6
     arquero: ^5.1.0
     babel-loader: ^8.2.5
+    chroma-js: ^2.4.2
     d3-format: ^3.1.0
     immer: ^9.0.15
     lodash-es: ^4.17.21
@@ -4110,10 +4112,10 @@ __metadata:
     "@fluentui/react": ^8.96.1
     "@fluentui/react-hooks": ^8.6.11
     "@fluentui/utilities": ^8.13.1
-    "@thematic/core": ^3.0.0
-    "@thematic/d3": ^2.0.12
-    "@thematic/fluent": ^4.0.1
-    "@thematic/react": ^2.0.12
+    "@thematic/core": ^3.1.0
+    "@thematic/d3": ^2.0.13
+    "@thematic/fluent": ^4.1.0
+    "@thematic/react": ^2.1.0
     "@types/lodash": ^4.14.185
     "@types/lodash-es": ^4.17.6
     "@types/node": ^18.7.18
@@ -7288,9 +7290,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@thematic/core@npm:3.0.0"
+"@thematic/core@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@thematic/core@npm:3.1.0"
   dependencies:
     "@thematic/color": ^3.0.0
     d3-scale: ^4.0.2
@@ -7304,15 +7306,15 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 422b43b44befe58b71b935bff16dd86fa9faef9a6b1659cbdfca85040deeb644eb2c6f1256bb647be73f55e13daf5233978f56d70ecf5e3731f25377d3e873b2
+  checksum: 47e812d16f53c3a2f67de135c5996e274186b5554d89cdf69da983527efbdc0bfb7e0602bae27dba0aa06bc8102f71455b05779c6396728abe98eff7413dcbee
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^2.0.12":
-  version: 2.0.12
-  resolution: "@thematic/d3@npm:2.0.12"
+"@thematic/d3@npm:^2.0.13":
+  version: 2.0.13
+  resolution: "@thematic/d3@npm:2.0.13"
   dependencies:
-    "@thematic/core": ^3.0.0
+    "@thematic/core": ^3.1.0
     d3-axis: ^3.0.0
     d3-selection: ^3.0.0
   peerDependencies:
@@ -7326,17 +7328,17 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 6e6b8860d74fadef6b299b8e006e8dcc6cea358c1099bb9b14ed6935ba6b2dc868d83bd0f5c11a65ac6e1ead82754d62c1765493be3bb77b87d70dd4530c48c6
+  checksum: 0c2888b918f3af6ac75d8e185c929998f90b8cbdf2a7343fac27ae70ac31638f7b07cfe6d57069299c330a31626465f7749fa34be13ea68e2a202742f5514bdd
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@thematic/fluent@npm:4.0.1"
+"@thematic/fluent@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@thematic/fluent@npm:4.1.0"
   dependencies:
     "@thematic/color": ^3.0.0
-    "@thematic/core": ^3.0.0
-    "@thematic/react": ^2.0.12
+    "@thematic/core": ^3.1.0
+    "@thematic/react": ^2.1.0
     ahooks: ^3.7.1
     d3-scale: ^4.0.2
   peerDependencies:
@@ -7353,16 +7355,16 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 1abfb65c767463732ae4b4cae2e51d1688630a0986f56b87868218d710ab1f7bdde38336a4f8a648798432eec4ed7401d7201c20839873ec6d691a92d6d2435f
+  checksum: ce806074e69382823c74021f9d50be97876325ef85cbdbcf40de49c2c8dc6fa7bb2d7e3579a3d50629386e2fa69183e8db1288b65119b82ad8afe7170c38773e
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:^2.0.12":
-  version: 2.0.12
-  resolution: "@thematic/react@npm:2.0.12"
+"@thematic/react@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@thematic/react@npm:2.1.0"
   dependencies:
     "@thematic/color": ^3.0.0
-    "@thematic/core": ^3.0.0
+    "@thematic/core": ^3.1.0
   peerDependencies:
     "@types/node": "*"
     "@types/react": ">= 17"
@@ -7374,7 +7376,7 @@ __metadata:
       optional: true
     react:
       optional: false
-  checksum: 0fba5f515787c24e14bab0f4f82d6b93b87be65599b70cbe4efc051e185d7f7223fb947a07be93d455e8632ee9d6678c28ac65d17a79cec922a88dc1b75d2ba1
+  checksum: 1e5f1ce7278df19d9110ae5b0d1fbc7a2b80c8c5b414df4371f48d7cb0297bccf7109d08656925630943666988e2c50a484bb60ac8d1aded1409fa351064bdfa
   languageName: node
   linkType: hard
 
@@ -7491,6 +7493,13 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: bfcadb042a41b124c4e3de4925e3be6d35b78f93f27c4535d5ff86980dc0f8bc407ed99b9b54528952dc62834d5a779392f7a12c2947dd19330eb05a6bcae15a
+  languageName: node
+  linkType: hard
+
+"@types/chroma-js@npm:^2":
+  version: 2.1.4
+  resolution: "@types/chroma-js@npm:2.1.4"
+  checksum: 24f1a1dd1c7b21548299c320bfa01e6407acb70193e567af16c28f742571fe56bb1eea0aedc41281478a175c70772a4627d5a9bf5b9cd854a7b455c38a3a5645
   languageName: node
   linkType: hard
 

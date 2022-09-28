@@ -109,3 +109,10 @@ export interface StepComponentProps<T extends object | void | unknown = unknown>
 	 */
 	onChangeOutput: (value: string | undefined) => void
 }
+
+export interface CommandBarColors {
+	color: string
+	background: string
+	border: string
+	disabled: string
+}

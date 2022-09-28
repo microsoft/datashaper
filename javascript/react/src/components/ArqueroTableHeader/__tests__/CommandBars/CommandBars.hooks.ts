@@ -2,11 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ICheckboxProps } from '@fluentui/react'
-import { useTheme } from '@fluentui/react'
+import type { ICheckboxProps, ICommandBarProps } from '@fluentui/react'
 import { useMemo, useState } from 'react'
 
-import { createDefaultHeaderCommandBar } from '../../../../component-factories.js'
+import { useHeaderCommandBarDefaults } from '../../../../hooks/useHeaderCommandBarDefaults.js'
 
 export function useCheckboxes(): {
 	near: boolean
@@ -43,10 +42,7 @@ export function useCheckboxes(): {
 	}
 }
 
-export function useCommandBar(): JSX.Element {
-	// TODO: this theme is not coming from the story context correcty
-	const theme = useTheme()
-
+export function useCommandBar(): ICommandBarProps {
 	const items = useMemo(
 		() => [
 			{
@@ -59,6 +55,7 @@ export function useCommandBar(): JSX.Element {
 			{
 				key: 'delete',
 				text: 'Delete',
+				disabled: true,
 				iconProps: {
 					iconName: 'Delete',
 				},
@@ -66,16 +63,10 @@ export function useCommandBar(): JSX.Element {
 		],
 		[],
 	)
-	return useMemo(
-		() => createDefaultHeaderCommandBar({ items }, theme),
-		[items, theme],
-	)
+	return useHeaderCommandBarDefaults({ items })
 }
 
-export function useFarCommandBar(): JSX.Element {
-	// TODO: this theme is not coming from the story context correcty
-	const theme = useTheme()
-
+export function useFarCommandBar(): ICommandBarProps {
 	const items = useMemo(
 		() => [
 			{
@@ -87,8 +78,5 @@ export function useFarCommandBar(): JSX.Element {
 		],
 		[],
 	)
-	return useMemo(
-		() => createDefaultHeaderCommandBar({ items }, theme, true),
-		[items, theme],
-	)
+	return useHeaderCommandBarDefaults({ items }, true)
 }

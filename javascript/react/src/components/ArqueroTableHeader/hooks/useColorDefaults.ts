@@ -5,19 +5,29 @@
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 
+import type { CommandBarColors } from '../../../types.js'
+
 export function useColorDefaults(
-	color?: string,
-	background?: string,
-): {
-	background: string
-	foreground: string
-} {
+	colors?: Partial<CommandBarColors>,
+): CommandBarColors {
 	const theme = useTheme()
+	const defaults = useMemo(
+		() =>
+			({
+				color: theme.palette.neutralPrimary,
+				background: theme.palette.neutralQuaternary,
+				disabled: theme.palette.neutralSecondary,
+				border: theme.palette.neutralTertiaryAlt,
+			} as CommandBarColors),
+		[theme],
+	)
 	return useMemo(
 		() => ({
-			background: background || theme.palette.themePrimary,
-			foreground: color || theme.palette.white,
+			background: colors?.background || defaults.background,
+			color: colors?.color || defaults.color,
+			disabled: colors?.disabled || defaults.disabled,
+			border: colors?.border || defaults.border,
 		}),
-		[theme, background, color],
+		[colors, defaults],
 	)
 }

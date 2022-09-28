@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Theme } from '@thematic/core'
-import { loadById, ThemeVariant } from '@thematic/core'
+import { loadById } from '@thematic/core'
 import { useDebounceFn } from 'ahooks'
 import type { SetterOrUpdater } from 'recoil'
 import {
@@ -51,7 +51,7 @@ export const themeState = selector<Theme>({
 	get: ({ get }) => {
 		const settings = get(currentSettings)
 		const theme = loadById('default', {
-			variant: settings.isDarkMode ? ThemeVariant.Dark : ThemeVariant.Light,
+			dark: settings.isDarkMode,
 		})
 		return theme
 	},

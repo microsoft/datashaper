@@ -9,16 +9,12 @@ import type {
 	ICommandBarProps,
 	IContextualMenuItem,
 } from '@fluentui/react'
-import {
-	ContextualMenuItemType,
-	useTheme,
-	VerticalDivider,
-} from '@fluentui/react'
+import { ContextualMenuItemType, VerticalDivider } from '@fluentui/react'
 import uniqueId from 'lodash-es/uniqueId.js'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { useMemo } from 'react'
 
-import { createDefaultHeaderCommandBar } from '../component-factories.js'
+import { useHeaderCommandBarDefaults } from '../hooks/useHeaderCommandBarDefaults.js'
 import { getVerbIcon } from '../verbIcons.js'
 import type { GroupedVerbs } from './TableCommands.types.js'
 import {
@@ -70,7 +66,7 @@ function getMainVerbItems(
 			key: 'divider' + uniqueId(),
 			id: 'divider' + uniqueId(),
 			commandBarButtonAs: VerticalDivider,
-			buttonStyles: { wrapper: { padding: '10px 0px', height: '50%' } },
+			buttonStyles: { wrapper: { padding: '8px 0px', height: '50%' } },
 			itemType: ContextualMenuItemType.Divider,
 		} as ICommandBarItemProps,
 	]
@@ -94,25 +90,21 @@ export function useColumnCommands(
 		item?: IContextualMenuItem,
 	) => void,
 	disabled: boolean,
-): React.ReactElement<ICommandBarProps, any> {
-	const theme = useTheme()
-
-	return useMemo(() => {
+): ICommandBarProps {
+	const base = useMemo(() => {
 		const id = 'overflowColumn'
-		return createDefaultHeaderCommandBar(
-			{
-				items: getMainVerbItems(onCallStep, mainColumnVerbs, disabled),
-				overflowItems: getOverflowVerbItems(
-					onCallStep,
-					disabled,
-					groupedColumnVerbs,
-					id,
-				),
+		return {
+			items: getMainVerbItems(onCallStep, mainColumnVerbs, disabled),
+			overflowItems: getOverflowVerbItems(
+				onCallStep,
+				disabled,
+				groupedColumnVerbs,
 				id,
-			},
-			theme,
-		)
-	}, [onCallStep, theme, disabled])
+			),
+			id,
+		}
+	}, [onCallStep, disabled])
+	return useHeaderCommandBarDefaults(base)
 }
 
 export function useTableCommands(
@@ -121,48 +113,48 @@ export function useTableCommands(
 		item?: IContextualMenuItem,
 	) => void,
 	disabled: boolean,
-): React.ReactElement<ICommandBarProps, any> {
-	const theme = useTheme()
-	return useMemo(() => {
+): ICommandBarProps {
+	const base = useMemo(() => {
 		const id = 'overflowTable'
-		return createDefaultHeaderCommandBar(
-			{
-				items: getMainVerbItems(onCallStep, mainTableVerbs, disabled),
-				overflowItems: getOverflowVerbItems(
-					onCallStep,
-					disabled,
-					groupedTableVerbs,
-					id,
-				),
+		return {
+			items: getMainVerbItems(onCallStep, mainTableVerbs, disabled),
+			overflowItems: getOverflowVerbItems(
+				onCallStep,
+				disabled,
+				groupedTableVerbs,
 				id,
-			},
-			theme,
-		)
-	}, [onCallStep, theme, disabled])
+			),
+			id,
+		}
+	}, [onCallStep, disabled])
+	return useHeaderCommandBarDefaults(base)
 }
 
 export function useUndoCommands(
 	onUndoStep: () => void,
 	disabled: boolean,
-): React.ReactElement<ICommandBarProps, any> {
-	const theme = useTheme()
-	return useMemo(() => {
-		return createDefaultHeaderCommandBar(
-			{
-				items: [
-					{
-						key: 'undo',
-						iconOnly: true,
-						iconProps: icons.undo,
-						title: 'Undo last step',
-						onClick: onUndoStep,
-						disabled,
-					},
-				],
+): ICommandBarProps {
+	const base = useMemo(
+		() => ({
+			items: [
+				{
+					key: 'undo',
+					iconOnly: true,
+					iconProps: icons.undo,
+					title: 'Undo last step',
+					onClick: onUndoStep,
+					disabled,
+				},
+			],
+			styles: {
+				root: {
+					width: 40,
+				},
 			},
-			theme,
-		)
-	}, [theme, onUndoStep, disabled])
+		}),
+		[onUndoStep, disabled],
+	)
+	return useHeaderCommandBarDefaults(base)
 }
 
 const icons = {
