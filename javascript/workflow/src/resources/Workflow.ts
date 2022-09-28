@@ -10,18 +10,19 @@ import type {
 } from '@datashaper/schema'
 import { createWorkflowSchemaObject } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable } from 'rxjs'
-import { BehaviorSubject, of, Subject } from 'rxjs'
-import { v4 } from 'uuid'
+import type { Observable, Subscription } from 'rxjs'
+import { BehaviorSubject, of } from 'rxjs'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
 import type { Graph, Node } from '../dataflow/types.js'
+import { createNode } from '../engine/createNode.js'
+import { readStep } from '../engine/readStep.js'
+import type { Step, StepInput } from '../engine/types.js'
+import { WorkflowSchemaInstance } from '../engine/validator.js'
 import type { Maybe } from '../primitives.js'
-import { createNode } from './createNode.js'
-import { readStep } from './readStep.js'
-import type { Step, StepInput } from './types.js'
-import { WorkflowSchemaInstance } from './validator.js'
+import { Resource } from './Resource.js'
+import type { SchemaResource } from './types.js'
 
 /**
  * The workflow object manages mutable data for a workflow specification
@@ -29,14 +30,19 @@ import { WorkflowSchemaInstance } from './validator.js'
 export type TableObservable = Observable<Maybe<TableContainer>>
 type TableSubject = BehaviorSubject<Maybe<TableContainer>>
 
-export class Workflow {
-	// Workflow Data Fields
-	private _id?: string
-	private _name?: string
-	private _description?: string
+export class Workflow
+	extends Resource
+	implements SchemaResource<WorkflowSchema>
+{
+	// Workflow Data FieldsF
 	private _steps: Step[] = []
 	private readonly _inputNames: Set<string> = new Set()
 	private readonly _outputPorts: Map<string, NamedOutputPortBinding> = new Map()
+
+	private _lastStepSubscription: Subscription | undefined
+	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
 
 	// Graph Workflow Details
 	// The dataflow graph
@@ -48,73 +54,19 @@ export class Workflow {
 	private readonly _inputs: Map<string, TableSubject> = new Map()
 	private readonly _outputs: Map<string, TableSubject> = new Map()
 
-	// The global onChange handler
-	protected readonly _onChange = new Subject<void>()
-
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
-		const readWorkflowInput = (workflowInput: WorkflowSchema) => {
-			let prev: Step | undefined
-			this._id = workflowInput.id ?? v4()
-			this._name = workflowInput.name
-			this._description = workflowInput.description
-			workflowInput.steps?.forEach(i => {
-				const step = readStep(i as StepInput, prev)
-				this._steps.push(step)
-				prev = step
-			})
-			workflowInput.input?.forEach(i => this._inputNames.add(i))
-			workflowInput.output?.forEach(o => {
-				const binding = fixOutput(o)
-				this._outputPorts.set(binding.name, binding)
-			})
+		super()
+		this.loadSchema(input)
+	}
+
+	private rebindDefaultOutput() {
+		if (this._lastStepSubscription) {
+			this._lastStepSubscription.unsubscribe()
 		}
-
-		/**
-		 * Synchronize the workflow state into the graph. Used during initialization.
-		 */
-		const syncWorkflowStateIntoGraph = () => {
-			for (const step of this.steps) {
-				this.addWorkflowStepToGraph(step)
-			}
-			for (const value of this.outputPorts.values()) {
-				this.observeOutput(value)
-			}
-		}
-
-		if (input != null) {
-			readWorkflowInput(input)
-		}
-		syncWorkflowStateIntoGraph()
+		this._lastStepSubscription = this.lastStepOutput()?.subscribe(value =>
+			this._defaultOutput.next(value),
+		)
 	}
-
-	// #region Workflow Metadata
-	public get id(): string | undefined {
-		return this._id
-	}
-
-	public set id(input: string | undefined) {
-		this._id = input
-		this._onChange.next()
-	}
-
-	public get name(): string | undefined {
-		return this._name
-	}
-
-	public set name(input: string | undefined) {
-		this._name = input
-		this._onChange.next()
-	}
-
-	public get description(): string | undefined {
-		return this._description
-	}
-
-	public set description(input: string | undefined) {
-		this._description = input
-		this._onChange.next()
-	}
-	// #endregion
 
 	// #region Graph/Node Management
 	private addWorkflowStepToGraph(step: Step): void {
@@ -308,7 +260,7 @@ export class Workflow {
 		if (name != null) {
 			return this._outputs.get(name)
 		} else {
-			return this.lastStepOutput()
+			return this._defaultOutput
 		}
 	}
 
@@ -320,7 +272,7 @@ export class Workflow {
 		if (name != null) {
 			return this._outputs.get(name)?.value
 		} else {
-			return this.lastStepOutput()?.value
+			return this._defaultOutput.value
 		}
 	}
 
@@ -398,6 +350,10 @@ export class Workflow {
 		// mutate the steps so that equality checks will detect that the steps changed (e.g. memo, hook deps)
 		this._steps = [...this.steps, step]
 		this.addWorkflowStepToGraph(step)
+
+		// Use this new step's output as the default output for the workflow
+		this.rebindDefaultOutput()
+
 		this._onChange.next()
 		return step
 	}
@@ -499,14 +455,6 @@ export class Workflow {
 
 	// #endregion
 
-	public onChange(handler: () => void, fireSync?: boolean): () => void {
-		const sub = this._onChange.subscribe(handler)
-		if (fireSync) {
-			handler()
-		}
-		return () => sub.unsubscribe()
-	}
-
 	/**
 	 * Gets a map of the current output tables
 	 * @returns The output cache
@@ -537,19 +485,57 @@ export class Workflow {
 		return result
 	}
 
-	public toSchema(): WorkflowSchema {
+	public override toSchema(): WorkflowSchema {
 		const output: WorkflowSchema['output'] = []
 		for (const [, binding] of this._outputPorts.entries()) {
 			output.push({ ...binding })
 		}
 		return createWorkflowSchemaObject({
-			id: this._id,
-			name: this._name,
-			description: this._description,
+			...super.toSchema(),
 			input: [...this._inputNames.values()],
 			output,
 			steps: [...this.steps] as any,
 		})
+	}
+
+	public override loadSchema(schema: WorkflowSchema | null | undefined): void {
+		super.loadSchema(schema)
+		this.readWorkflowInput(schema)
+		this.syncWorkflowStateIntoGraph()
+		this.rebindDefaultOutput()
+	}
+
+	private readWorkflowInput(schema?: WorkflowSchema | null | undefined) {
+		let prev: Step | undefined
+
+		/** remove any existing output pipe */
+		this._steps = []
+		schema?.steps?.forEach(i => {
+			const step = readStep(i as StepInput, prev)
+			this._steps.push(step)
+			prev = step
+		})
+
+		this._outputPorts.clear()
+		this._inputNames.clear()
+		schema?.input?.forEach(i => this._inputNames.add(i))
+		schema?.output?.forEach(o => {
+			const binding = fixOutput(o)
+			this._outputPorts.set(binding.name, binding)
+		})
+	}
+
+	/**
+	 * Synchronize the workflow state into the graph. Used during initialization.
+	 */
+	private syncWorkflowStateIntoGraph() {
+		this._graph.clear()
+		for (const step of this.steps) {
+			this.addWorkflowStepToGraph(step)
+		}
+		for (const value of this.outputPorts.values()) {
+			this.observeOutput(value)
+		}
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
