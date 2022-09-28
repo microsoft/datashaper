@@ -33,7 +33,6 @@ export const DetailsListContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	border: 1px solid ${({ theme }) => theme.palette.neutralLighter};
 `
 
 export const OutputContainer = styled.div`

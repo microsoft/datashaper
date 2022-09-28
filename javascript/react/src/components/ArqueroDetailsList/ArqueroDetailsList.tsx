@@ -178,7 +178,10 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		}, [columns, table, compact])
 
 		return (
-			<DetailsWrapper data-is-scrollable="true">
+			<DetailsWrapper
+				data-is-scrollable="true"
+				showColumnBorders={showColumnBorders}
+			>
 				<DetailsList
 					items={[...items]}
 					selectionMode={selectionMode}
@@ -207,13 +210,14 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	},
 )
 
-const DetailsWrapper = styled.div`
+const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
 	height: inherit;
 	position: relative;
 	max-height: inherit;
 	overflow-y: auto;
 	overflow-x: auto;
-
+	border: ${({ theme, showColumnBorders }) =>
+		showColumnBorders ? `1px solid ${theme.palette.neutralLighter}` : 'none'};
 	span.ms-DetailsHeader-cellTitle {
 		background-color: ${({ theme }) =>
 			theme.application?.().background().hex()};
