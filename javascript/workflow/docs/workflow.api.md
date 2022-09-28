@@ -201,6 +201,7 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
     // (undocumented)
     get currentOutput(): Maybe_3<TableContainer>;
     // (undocumented)
+    get id(): string;
     set id(id: string);
     // (undocumented)
     loadSchema(_schema: DataPackageSchema | null | undefined): void;
