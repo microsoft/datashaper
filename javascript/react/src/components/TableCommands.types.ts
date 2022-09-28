@@ -16,6 +16,8 @@ export interface TableCommandsProps {
 		index: number | undefined,
 	) => void
 	onRemoveStep?: (index: number) => void
+	color?: string
+	background?: string
 }
 
 export interface GroupedVerbs {

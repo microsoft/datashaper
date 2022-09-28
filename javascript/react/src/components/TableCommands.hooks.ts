@@ -90,6 +90,8 @@ export function useColumnCommands(
 		item?: IContextualMenuItem,
 	) => void,
 	disabled: boolean,
+	color?: string,
+	background?: string,
 ): ICommandBarProps {
 	const base = useMemo(() => {
 		const id = 'overflowColumn'
@@ -104,7 +106,7 @@ export function useColumnCommands(
 			id,
 		}
 	}, [onCallStep, disabled])
-	return useHeaderCommandBarDefaults(base)
+	return useHeaderCommandBarDefaults(base, false, { color, background })
 }
 
 export function useTableCommands(
@@ -113,6 +115,8 @@ export function useTableCommands(
 		item?: IContextualMenuItem,
 	) => void,
 	disabled: boolean,
+	color?: string,
+	background?: string,
 ): ICommandBarProps {
 	const base = useMemo(() => {
 		const id = 'overflowTable'
@@ -127,12 +131,14 @@ export function useTableCommands(
 			id,
 		}
 	}, [onCallStep, disabled])
-	return useHeaderCommandBarDefaults(base)
+	return useHeaderCommandBarDefaults(base, false, { color, background })
 }
 
 export function useUndoCommands(
 	onUndoStep: () => void,
 	disabled: boolean,
+	color?: string,
+	background?: string,
 ): ICommandBarProps {
 	const base = useMemo(
 		() => ({
@@ -154,7 +160,7 @@ export function useUndoCommands(
 		}),
 		[onUndoStep, disabled],
 	)
-	return useHeaderCommandBarDefaults(base)
+	return useHeaderCommandBarDefaults(base, false, { color, background })
 }
 
 const icons = {
