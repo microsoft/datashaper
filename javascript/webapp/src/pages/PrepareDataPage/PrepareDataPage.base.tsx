@@ -8,6 +8,7 @@ import {
 	HistoryButton,
 	HistoryPanel,
 	ProjectManagementCommandBar,
+	StepHistoryList,
 	TableCommands,
 	useManagementBarDefaults,
 	useOnCreateStep,
@@ -23,7 +24,8 @@ import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo, useCallback, useState } from 'react'
+import upperFirst from 'lodash-es/upperFirst.js'
+import { memo, useCallback, useMemo, useState } from 'react'
 
 import { useStepListener, useTables } from './PrepareDataPage.hooks.js'
 import {
@@ -55,14 +57,21 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	const onSave = useOnSaveStep(workflow)
 	const onCreate = useOnCreateStep(onSave, setSelectedTableId)
-	const onDelete = useOnDeleteStep(workflow)
 	const inputNames = useInputTableNames(workflow)
+
+	const tableName = useMemo(() => {
+		const stepIndex = workflow.steps.findIndex(x => x.id === selectedTableId)
+		const name = upperFirst(workflow.steps[stepIndex]?.verb)
+		return stepIndex >= 0 ? `#${stepIndex + 1} ${name}` : selectedTableId
+	}, [workflow, selectedTableId])
 
 	useStepListener(workflow, setSelectedTableId, inputNames)
 	useWorkflowOutputListener(workflow, setOutputs)
 	useWorkflowListener(workflow, setWorkflow)
 
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
+
+	const onDelete = useOnDeleteStep(workflow)
 
 	const onColumnClick = useCallback(
 		(_?: React.MouseEvent<HTMLElement, MouseEvent>, column?: IColumn) => {
@@ -75,12 +84,12 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	return (
 		<PageContainer className={'prepare-data-page'}>
 			<ProjectManagementCommandBar
+				{...managementProps}
 				tables={inputs}
 				workflow={workflow}
 				outputTables={outputs}
 				onUpdateWorkflow={setWorkflow}
 				onUpdateTables={onAddInputTables}
-				{...managementProps}
 			/>
 			<PrepareDataContainer>
 				<Container isCollapsed={isCollapsed}>
@@ -116,6 +125,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 												onRemoveStep={onDelete}
 											/>
 										}
+										name={tableName}
 										table={selectedTable?.table}
 									/>
 									<ArqueroDetailsList
@@ -135,12 +145,19 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 						</OutputContainer>
 					</Main>
 					<HistoryPanel
-						workflow={workflow}
 						title="Steps"
 						isCollapsed={isCollapsed}
 						toggleCollapsed={toggleCollapsed}
-						setSelectedTableId={setSelectedTableId}
-					/>
+						steps={workflow.steps}
+						showStepCount
+					>
+						<StepHistoryList
+							onDelete={onDelete}
+							onSelect={setSelectedTableId}
+							workflow={workflow}
+							onSave={onSave}
+						/>
+					</HistoryPanel>
 				</Container>
 			</PrepareDataContainer>
 		</PageContainer>

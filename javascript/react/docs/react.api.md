@@ -293,36 +293,19 @@ export const HistoryPanel: React.FC<HistoryPanelProps>;
 // @public (undocumented)
 export interface HistoryPanelProps {
     // (undocumented)
+    children?: React.ReactNode;
+    // (undocumented)
     isCollapsed: boolean;
     // (undocumented)
-    order?: DisplayOrder;
+    showStepCount?: boolean;
     // (undocumented)
-    setSelectedTableId: (tableId: string) => void;
+    steps?: Step[];
     // (undocumented)
     title?: string;
     // (undocumented)
     titleStyle?: React.CSSProperties;
     // (undocumented)
     toggleCollapsed: () => void;
-    // (undocumented)
-    workflow: Workflow;
-}
-
-// Warning: (ae-missing-release-tag) "ManageWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const ManageWorkflow: React.FC<ManageWorkflowProps>;
-
-// Warning: (ae-missing-release-tag) "ManageWorkflowProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'workflow'>, 'index'> {
-    // (undocumented)
-    historyView?: boolean;
-    onSelect?: (name: string) => void;
-    // (undocumented)
-    order?: DisplayOrder;
-    workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -472,6 +455,27 @@ export interface StepDescriptionProps {
     step: Step;
 }
 
+// Warning: (ae-missing-release-tag) "StepHistoryList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const StepHistoryList: React.FC<StepHistoryListProps>;
+
+// Warning: (ae-missing-release-tag) "StepHistoryListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflow'> {
+    // (undocumented)
+    onDelete?: (index: number) => void;
+    // (undocumented)
+    onDuplicateClicked?: (step: Step) => void;
+    // (undocumented)
+    onSave?: (step: Step, output: string | undefined, index?: number) => void;
+    // (undocumented)
+    onSelect?: (name: string) => void;
+    // (undocumented)
+    order?: DisplayOrder;
+}
+
 // Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -577,7 +581,6 @@ export interface TableTransformProps {
     // (undocumented)
     hideStepSelector?: boolean;
     index: number;
-    nextInputTable?: string;
     // (undocumented)
     onDelete?: (index: number) => void;
     // (undocumented)
@@ -792,7 +795,7 @@ export function useWorkflowOutputListener(workflow: Workflow, setOutput?: ((tabl
 // Warning: (ae-missing-release-tag) "useWorkflowSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useWorkflowSteps(workflow: Workflow, order: DisplayOrder): Step[];
+export function useWorkflowSteps(workflow: Workflow, order?: DisplayOrder): Step[];
 
 // Warning: (ae-missing-release-tag) "visibleColumnsCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

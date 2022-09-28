@@ -9,10 +9,19 @@ import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
 import type { BooleanArgs } from '@datashaper/schema';
+import type { CodebookSchema } from '@datashaper/schema';
+import type ColumnTable from 'arquero/dist/types/table/column-table.js';
 import type { ConvertArgs } from '@datashaper/schema';
+import { DataFormat } from '@datashaper/schema';
+import type { DataNature } from '@datashaper/schema';
+import type { DataOrientation } from '@datashaper/schema';
+import type { DataPackageSchema } from '@datashaper/schema';
+import type { DataShape as DataShape_2 } from '@datashaper/schema/dist/datatable/DataShape.js';
+import type { DataTableSchema } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
 import type { FetchArgs } from '@datashaper/schema';
+import type { Field } from '@datashaper/schema';
 import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
 import type { FoldArgs } from '@datashaper/schema';
@@ -21,15 +30,19 @@ import { InputColumnListArgs } from '@datashaper/schema';
 import { InputColumnRecordArgs } from '@datashaper/schema';
 import type { JoinArgs } from '@datashaper/schema';
 import type { LookupArgs } from '@datashaper/schema';
+import type { Maybe as Maybe_3 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
+import type { Named as Named_2 } from '@datashaper/schema';
 import type { NamedOutputPortBinding } from '@datashaper/schema';
 import type { NamedPortBinding } from '@datashaper/schema';
 import type { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
 import type { OrderbyArgs } from '@datashaper/schema';
+import type { ParserOptions as ParserOptions_2 } from '@datashaper/schema';
 import type { PivotArgs } from '@datashaper/schema';
 import type { PortBinding } from '@datashaper/schema';
 import type { RecodeArgs } from '@datashaper/schema';
+import type { ResourceSchema } from '@datashaper/schema';
 import type { RollupArgs } from '@datashaper/schema';
 import type { SampleArgs } from '@datashaper/schema';
 import type { SetOp } from '@datashaper/schema';
@@ -40,6 +53,7 @@ import type { UnfoldArgs } from '@datashaper/schema';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
+import { Workflow as Workflow_2 } from '@datashaper/workflow';
 import type { WorkflowSchema } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -137,6 +151,20 @@ export const boolean: (id: string) => StepNode<TableContainer<unknown>, BooleanA
 // @public (undocumented)
 export function cloneStep(step: Step<unknown>, columnNames?: string[]): Step<unknown>;
 
+// Warning: (ae-missing-release-tag) "Codebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class Codebook extends Resource implements SchemaResource<CodebookSchema> {
+    constructor(codebook?: CodebookSchema);
+    // (undocumented)
+    get fields(): Field[];
+    set fields(value: Field[]);
+    // (undocumented)
+    loadSchema(value: CodebookSchema | null | undefined): void;
+    // (undocumented)
+    toSchema(): CodebookSchema;
+}
+
 // Warning: (ae-missing-release-tag) "columnTransformVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -163,6 +191,74 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // @public
 export function createWorkflow(input: WorkflowSchema, tables: TableContainer[]): Workflow;
 
+// Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataPackage extends Named implements SchemaResource<DataPackageSchema> {
+    constructor(id: string, source: DataSource, workflow?: Workflow_2, codebook?: Codebook);
+    // (undocumented)
+    readonly codebook: Codebook;
+    // (undocumented)
+    get currentOutput(): Maybe_3<TableContainer>;
+    // (undocumented)
+    set id(id: string);
+    // (undocumented)
+    loadSchema(_schema: DataPackageSchema | null | undefined): void;
+    // (undocumented)
+    get output(): Observable<Maybe_3<TableContainer>>;
+    // (undocumented)
+    readonly source: DataSource;
+    // (undocumented)
+    toSchema(): DataPackageSchema;
+    // (undocumented)
+    readonly workflow: Workflow_2;
+}
+
+// Warning: (ae-missing-release-tag) "DataShape" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataShape extends Observed implements DataShape_2, SchemaResource<DataShape_2> {
+    constructor(shape?: DataShape_2);
+    // (undocumented)
+    loadSchema(schema: DataShape_2 | null | undefined): void;
+    // (undocumented)
+    get matrix(): [width: number, height: number] | undefined;
+    set matrix(value: [width: number, height: number] | undefined);
+    // (undocumented)
+    get nature(): DataNature | undefined;
+    set nature(value: DataNature | undefined);
+    // (undocumented)
+    get orientation(): DataOrientation | undefined;
+    set orientation(value: DataOrientation | undefined);
+    // (undocumented)
+    toSchema(): DataShape_2;
+}
+
+// Warning: (ae-missing-release-tag) "DataSource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class DataSource extends Resource implements SchemaResource<DataTableSchema> {
+    constructor(source: Blob, datatable?: DataTableSchema);
+    // (undocumented)
+    get currentOutput(): Maybe_3<ColumnTable>;
+    // (undocumented)
+    get data(): Blob;
+    set data(value: Blob);
+    // (undocumented)
+    get format(): DataFormat;
+    set format(value: DataFormat);
+    // (undocumented)
+    loadSchema(schema: DataTableSchema | null | undefined): void;
+    // (undocumented)
+    get output(): Observable<Maybe_3<ColumnTable>>;
+    // (undocumented)
+    readonly parser: ParserOptions;
+    // (undocumented)
+    readonly shape: DataShape;
+    // (undocumented)
+    toSchema(): DataTableSchema;
+}
+
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -174,6 +270,8 @@ export const dedupe: (id: string) => StepNode<TableContainer<unknown>, Partial<I
 export class DefaultGraph<T> implements Graph<T> {
     // (undocumented)
     add(node: Node_2<T>): void;
+    // (undocumented)
+    clear(): void;
     // (undocumented)
     hasNode(id: NodeId): boolean;
     // (undocumented)
@@ -231,6 +329,7 @@ export const fold: (id: string) => StepNode<TableContainer<unknown>, FoldArgs>;
 // @public (undocumented)
 export interface Graph<T> {
     add(node: Node_2<T>): void;
+    clear(): void;
     hasNode(id: NodeId): boolean;
     // (undocumented)
     readonly inputs: NodeId[];
@@ -339,6 +438,28 @@ export type Maybe<T> = T | undefined;
 // @public (undocumented)
 export const merge: (id: string) => StepNode<TableContainer<unknown>, MergeArgs>;
 
+// Warning: (ae-missing-release-tag) "Named" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class Named extends Observed implements Omit<Named_2, 'profile' | '$schema'>, SchemaResource<Named_2> {
+    // (undocumented)
+    get description(): string | undefined;
+    set description(value: string | undefined);
+    // (undocumented)
+    get id(): string;
+    set id(value: string);
+    // (undocumented)
+    loadSchema(schema: Named_2 | null | undefined, preventOnChange?: boolean): void;
+    // (undocumented)
+    get name(): string;
+    set name(value: string);
+    // (undocumented)
+    get title(): string | undefined;
+    set title(value: string | undefined);
+    // (undocumented)
+    toSchema(): Named_2;
+}
+
 // Warning: (ae-missing-release-tag) "nextColumnName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -414,6 +535,16 @@ export class ObservableNode<T> extends BaseNode<T, void> {
 // @public (undocumented)
 export function observableNode<T>(id: string, source: Observable<Maybe_2<T>>): ObservableNode<T>;
 
+// Warning: (ae-missing-release-tag) "Observed" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class Observed {
+    // (undocumented)
+    onChange(handler: () => void, fireSync?: boolean): Unsubscribe;
+    // (undocumented)
+    protected _onChange: Subject<void>;
+}
+
 // Warning: (ae-missing-release-tag) "onehot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -423,6 +554,45 @@ export const onehot: (id: string) => StepNode<TableContainer<unknown>, OnehotArg
 //
 // @public (undocumented)
 export const orderby: (id: string) => StepNode<TableContainer<unknown>, OrderbyArgs>;
+
+// Warning: (ae-missing-release-tag) "ParserOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class ParserOptions extends Observed implements ParserOptions_2, SchemaResource<ParserOptions_2> {
+    constructor(parserOptions?: ParserOptions_2);
+    // (undocumented)
+    set comment(value: string | undefined);
+    // (undocumented)
+    get commment(): string | undefined;
+    // (undocumented)
+    get delimiter(): string;
+    set delimiter(delimiter: string | undefined);
+    // (undocumented)
+    get escapeChar(): string | undefined;
+    set escapeChar(value: string | undefined);
+    // (undocumented)
+    get lineTerminator(): string;
+    set lineTerminator(value: string | undefined);
+    // (undocumented)
+    loadSchema(schema: ParserOptions_2 | null | undefined): void;
+    // (undocumented)
+    get names(): string[] | undefined;
+    set names(value: string[] | undefined);
+    // (undocumented)
+    get quoteChar(): string;
+    set quoteChar(value: string | undefined);
+    // (undocumented)
+    get readRows(): number;
+    set readRows(value: number | undefined);
+    // (undocumented)
+    get skipBlankLines(): boolean;
+    set skipBlankLines(value: boolean | undefined);
+    // (undocumented)
+    get skipRows(): number;
+    set skipRows(value: number | undefined);
+    // (undocumented)
+    toSchema(): ParserOptions_2;
+}
 
 // Warning: (ae-missing-release-tag) "pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -444,6 +614,28 @@ export const recode: (id: string) => StepNode<TableContainer<unknown>, RecodeArg
 // @public (undocumented)
 export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColumnRecordArgs>;
 
+// Warning: (ae-missing-release-tag) "Resource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class Resource extends Named implements Omit<ResourceSchema, '$schema' | 'profile'>, SchemaResource<Omit<ResourceSchema, '$schema' | 'profile'>> {
+    // (undocumented)
+    get homepage(): string | undefined;
+    set homepage(value: string | undefined);
+    // (undocumented)
+    get license(): string | undefined;
+    set license(value: string | undefined);
+    // (undocumented)
+    loadSchema(value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined, preventOnChange?: boolean): void;
+    // (undocumented)
+    get path(): ResourceSchema['path'];
+    set path(value: ResourceSchema['path']);
+    // (undocumented)
+    get sources(): ResourceSchema['sources'];
+    set sources(value: ResourceSchema['sources']);
+    // (undocumented)
+    toSchema(): Omit<ResourceSchema, '$schema' | 'profile'>;
+}
+
 // Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -453,6 +645,14 @@ export const rollup: (id: string) => StepNode<TableContainer<unknown>, RollupArg
 //
 // @public (undocumented)
 export const sample: (id: string) => StepNode<TableContainer<unknown>, SampleArgs>;
+
+// Warning: (ae-missing-release-tag) "SchemaResource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface SchemaResource<T> {
+    loadSchema(schema: T | null | undefined): void;
+    toSchema(): T;
+}
 
 // Warning: (ae-missing-release-tag) "select" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -570,7 +770,7 @@ export { window_2 as window }
 // Warning: (ae-missing-release-tag) "Workflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class Workflow {
+export class Workflow extends Resource implements SchemaResource<WorkflowSchema> {
     constructor(input?: WorkflowSchema, _strictInputs?: boolean);
     // (undocumented)
     addInputName(input: string): void;
@@ -582,9 +782,6 @@ export class Workflow {
     addOutput(output: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
     // (undocumented)
-    get description(): string | undefined;
-    set description(input: string | undefined);
-    // (undocumented)
     getInputTable(name: string): Maybe<TableContainer>;
     // (undocumented)
     hasInputName(input: string): boolean;
@@ -593,9 +790,6 @@ export class Workflow {
     // (undocumented)
     hasOutputName(name: string): boolean;
     // (undocumented)
-    get id(): string | undefined;
-    set id(input: string | undefined);
-    // (undocumented)
     get inputNames(): Set<string>;
     latestOutput(name?: string): Maybe<TableContainer>;
     // (undocumented)
@@ -603,12 +797,7 @@ export class Workflow {
     // (undocumented)
     get length(): number;
     // (undocumented)
-    get name(): string | undefined;
-    set name(input: string | undefined);
-    // (undocumented)
-    onChange(handler: () => void, fireSync?: boolean): () => void;
-    // (undocumented)
-    protected readonly _onChange: Subject<void>;
+    loadSchema(schema: WorkflowSchema | null | undefined): void;
     // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
     // (undocumented)

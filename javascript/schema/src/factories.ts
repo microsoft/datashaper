@@ -15,7 +15,7 @@ export const LATEST_DATATABLE_SCHEMA = `https://microsoft.github.io/datashaper/s
 export const LATEST_DATAPACKAGE_SCHEMA = `https://microsoft.github.io/datashaper/schema/datapackage/v${versions.datapackage}.json`
 export const LATEST_CODEBOOK_SCHEMA = `https://microsoft.github.io/datashaper/schema/codebook/v${versions.codebook}.json`
 
-export type FactoryInput<T> = Omit<T, '$schema' | 'id' | 'name'> & {
+export type FactoryInput<T> = Omit<T, '$schema' | 'id' | 'name' | 'profile'> & {
 	id?: string
 	name?: string
 }

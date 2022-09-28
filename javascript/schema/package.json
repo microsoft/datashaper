@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/schema",
-	"version": "6.0.0",
+	"version": "6.1.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -40,7 +40,7 @@
 		"bundle-datapackage": "typescript-json-schema tsconfig.json DataPackageSchema > ../../schema/datapackage.json",
 		"bundle-datatable": "typescript-json-schema tsconfig.json DataTableSchema > ../../schema/datatable.json",
 		"bundle-workflow": "typescript-json-schema tsconfig.json WorkflowSchema > ../../schema/workflow.json",
-		"bundle": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-workflow",
+		"bundle": "yarn node create_versions_file.js && run-p bundle-codebook bundle-datapackage bundle-datatable bundle-workflow",
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {

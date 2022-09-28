@@ -7,10 +7,13 @@ import type { Step } from '@datashaper/workflow'
 import {
 	CollapsiblePanel,
 	CollapsiblePanelContainer,
+	DialogConfirm,
 } from '@essex/themed-components'
 import { useTheme } from '@fluentui/react'
-import { memo, useCallback, useEffect, useRef } from 'react'
+import { memo, useEffect, useRef } from 'react'
 
+import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
+import { useDeleteConfirm } from './StepHistoryList.hooks.js'
 import {
 	Columns,
 	Container,
@@ -26,24 +29,23 @@ import { TableTransform } from './TableTransform.js'
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 	function StepsList({
-		steps,
-		onDeleteClicked,
+		onDelete,
 		onDuplicateClicked,
 		onSelect,
 		workflow,
-		onCreate,
-		nextInputTable,
+		onSave,
+		order,
 	}) {
 		const ref = useRef<HTMLDivElement>(null)
 		const theme = useTheme()
+		const steps = useWorkflowSteps(workflow, order)
 		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
-
-		const onTransformRequested = useCallback(
-			(step: Step, output: string | undefined, index?: number) => {
-				onCreate?.(step, output, index)
-			},
-			[onCreate],
-		)
+		const {
+			onClick: onDeleteClicked,
+			onConfirm: onConfirmDelete,
+			toggle: toggleDeleteModal,
+			isOpen: isDeleteModalOpen,
+		} = useDeleteConfirm(onDelete)
 
 		useEffect(() => {
 			const f = () => {
@@ -55,6 +57,15 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		return (
 			<Container>
 				<CollapsiblePanelContainer>
+					<DialogConfirm
+						toggle={toggleDeleteModal}
+						title="Are you sure you want to delete this step?"
+						subText={
+							'You will also lose any table transformations made after this step.'
+						}
+						show={isDeleteModalOpen}
+						onConfirm={onConfirmDelete}
+					/>
 					{steps.map(step => {
 						const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
 						return (
@@ -72,13 +83,10 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 										index={stepIndex}
 										workflow={workflow}
 										style={tableTransformStyle}
-										nextInputTable={nextInputTable}
 										onDelete={onDeleteClicked}
 										onPreview={onSelect}
 										onDuplicate={onDuplicateClicked}
-										onTransformRequested={(s, o) =>
-											onTransformRequested(s, o, stepIndex)
-										}
+										onTransformRequested={(s, o) => onSave?.(s, o, stepIndex)}
 										hideStepSelector
 									/>
 								</ListWrapper>

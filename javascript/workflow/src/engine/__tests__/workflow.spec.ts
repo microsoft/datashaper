@@ -18,6 +18,7 @@ describe('stepGraph', () => {
 	test('runs a single step with normal input/output', () => {
 		const g = createWorkflow(
 			{
+				id: 'test workflow',
 				$schema:
 					'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 				name: 'test',
@@ -47,6 +48,7 @@ describe('stepGraph', () => {
 	test('runs multiple steps with normal input/output and all intermediates', () => {
 		const g = createWorkflow(
 			{
+				id: 'test workflow',
 				$schema:
 					'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
 				name: 'test',

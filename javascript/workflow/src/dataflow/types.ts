@@ -140,6 +140,11 @@ export interface Graph<T> {
 	 * Remove a node from the grpah
 	 */
 	remove(id: NodeId): void
+
+	/**
+	 * Clears out the graph of all nodes, inputs, and outputs
+	 */
+	clear(): void
 }
 
 export enum NodeInput {

@@ -3,16 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Workflow } from '@datashaper/workflow'
-
-import type { DisplayOrder } from '../enums.js'
+import type { Step } from '@datashaper/workflow'
 
 export interface HistoryPanelProps {
 	isCollapsed: boolean
 	toggleCollapsed: () => void
-	setSelectedTableId: (tableId: string) => void
-	workflow: Workflow
 	title?: string
-	order?: DisplayOrder
+	showStepCount?: boolean
+	steps?: Step[]
 	titleStyle?: React.CSSProperties
+	children?: React.ReactNode
 }
