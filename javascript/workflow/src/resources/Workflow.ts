@@ -500,16 +500,17 @@ export class Workflow
 
 	public override loadSchema(schema: WorkflowSchema | null | undefined): void {
 		super.loadSchema(schema)
-		this.readWorkflowInput(schema ?? createWorkflowSchemaObject({ output: [] }))
+		this.readWorkflowInput(schema)
 		this.syncWorkflowStateIntoGraph()
+		this.rebindDefaultOutput()
 	}
 
-	private readWorkflowInput(schema: WorkflowSchema) {
+	private readWorkflowInput(schema?: WorkflowSchema | null | undefined) {
 		let prev: Step | undefined
 
 		/** remove any existing output pipe */
 		this._steps = []
-		schema.steps?.forEach(i => {
+		schema?.steps?.forEach(i => {
 			const step = readStep(i as StepInput, prev)
 			this._steps.push(step)
 			prev = step
@@ -517,13 +518,11 @@ export class Workflow
 
 		this._outputPorts.clear()
 		this._inputNames.clear()
-		schema.input?.forEach(i => this._inputNames.add(i))
-		schema.output?.forEach(o => {
+		schema?.input?.forEach(i => this._inputNames.add(i))
+		schema?.output?.forEach(o => {
 			const binding = fixOutput(o)
 			this._outputPorts.set(binding.name, binding)
 		})
-
-		this.rebindDefaultOutput()
 	}
 
 	/**
