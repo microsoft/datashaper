@@ -4,27 +4,21 @@
  */
 import type { DataNature, DataOrientation } from '@datashaper/schema'
 import type { DataShape as DataShapeSchema } from '@datashaper/schema/dist/datatable/DataShape.js'
-import type { Handler } from '@datashaper/workflow'
-import { Subject } from 'rxjs'
 
-import type { ObservableResource, SchemaResource } from './types.js'
+import { Observed } from './Observed.js'
+import type { SchemaResource } from './types.js'
 
 export class DataShape
-	implements
-		DataShapeSchema,
-		SchemaResource<DataShapeSchema>,
-		ObservableResource
+	extends Observed
+	implements DataShapeSchema, SchemaResource<DataShapeSchema>
 {
-	private _onChange = new Subject<void>()
-
 	private _orientation: DataOrientation | undefined
 	private _nature: DataNature | undefined
 	private _matrix: [width: number, height: number] | undefined
 
-	public constructor(dataShape: DataShapeSchema) {
-		this._orientation = dataShape.orientation
-		this._nature = dataShape.nature
-		this._matrix = dataShape.matrix
+	public constructor(shape?: DataShapeSchema) {
+		super()
+		this.loadSchema(shape)
 	}
 
 	public get orientation(): DataOrientation | undefined {
@@ -67,10 +61,5 @@ export class DataShape
 		this._nature = schema?.nature
 		this._orientation = schema?.orientation
 		this._onChange.next()
-	}
-
-	public onChange(handler: () => void): Handler {
-		const sub = this._onChange.subscribe(handler)
-		return () => sub.unsubscribe()
 	}
 }

@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ParserOptions as ParserOptionsSchema } from '@datashaper/schema'
-import { Subject } from 'rxjs'
 
-import type { ObservableResource, SchemaResource } from './types.js'
+import { Observed } from './Observed.js'
+import type { SchemaResource } from './types.js'
 
 const DEFAULT_DELIMITER = ','
 const DEFAULT_QUOTE = '"'
@@ -15,10 +15,8 @@ const DEFAULT_SKIP_ROWS = 0
 const DEFAULT_READ_ROWS = Infinity
 
 export class ParserOptions
-	implements
-		ParserOptionsSchema,
-		SchemaResource<ParserOptionsSchema>,
-		ObservableResource
+	extends Observed
+	implements ParserOptionsSchema, SchemaResource<ParserOptionsSchema>
 {
 	private _delimiter: string
 	private _names: string[] | undefined
@@ -29,20 +27,20 @@ export class ParserOptions
 	private _readRows: number
 	private _escapeChar: string | undefined
 	private _commentStart: string | undefined
-	private _onChange = new Subject<void>()
 
-	public constructor(parserOptions: ParserOptionsSchema) {
-		this._delimiter = parserOptions.delimiter ?? DEFAULT_DELIMITER
+	public constructor(parserOptions?: ParserOptionsSchema) {
+		super()
+		this._delimiter = parserOptions?.delimiter ?? DEFAULT_DELIMITER
 		this._lineTerminator =
-			parserOptions.lineTerminator ?? DEFAULT_LINE_TERMINATOR
-		this._quoteChar = parserOptions.quoteChar ?? DEFAULT_QUOTE
+			parserOptions?.lineTerminator ?? DEFAULT_LINE_TERMINATOR
+		this._quoteChar = parserOptions?.quoteChar ?? DEFAULT_QUOTE
 		this._skipBlankLines =
-			parserOptions.skipBlankLines ?? DEFAULT_SKIP_BLANK_LINES
-		this._skipRows = parserOptions.skipRows ?? DEFAULT_SKIP_ROWS
-		this._readRows = parserOptions.readRows ?? DEFAULT_READ_ROWS
-		this._names = parserOptions.names
-		this._escapeChar = parserOptions.escapeChar
-		this._commentStart = parserOptions.comment
+			parserOptions?.skipBlankLines ?? DEFAULT_SKIP_BLANK_LINES
+		this._skipRows = parserOptions?.skipRows ?? DEFAULT_SKIP_ROWS
+		this._readRows = parserOptions?.readRows ?? DEFAULT_READ_ROWS
+		this._names = parserOptions?.names
+		this._escapeChar = parserOptions?.escapeChar
+		this._commentStart = parserOptions?.comment
 	}
 
 	public get delimiter(): string {
@@ -124,11 +122,6 @@ export class ParserOptions
 	public set readRows(value: number | undefined) {
 		this._readRows = value ?? DEFAULT_READ_ROWS
 		this._onChange.next()
-	}
-
-	public onChange(handler: () => void): () => void {
-		const sub = this._onChange.subscribe(handler)
-		return () => sub.unsubscribe()
 	}
 
 	public toSchema(): ParserOptionsSchema {

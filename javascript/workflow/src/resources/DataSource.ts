@@ -2,50 +2,40 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	DataShape as DataShapeSchema,
-	DataTableSchema,
-	ParserOptions as ParserOptionsSchema,
-} from '@datashaper/schema'
+import type { DataTableSchema } from '@datashaper/schema'
 import { createDataTableSchemaObject, DataFormat } from '@datashaper/schema'
-import type { Maybe, Unsubscribe } from '@datashaper/workflow'
+import type { Maybe } from '@datashaper/workflow'
 import { all, fromCSV, fromJSON, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { Observable } from 'rxjs'
-import { BehaviorSubject, Subject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
-import type { ObservableResource, SchemaResource } from './types.js'
+import { Resource } from './Resource.js'
+import type { SchemaResource } from './types.js'
 
 export class DataSource
-	implements SchemaResource<DataTableSchema>, ObservableResource
+	extends Resource
+	implements SchemaResource<DataTableSchema>
 {
-	private readonly _onChange = new Subject<void>()
 	private readonly _output = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
-	public readonly parser: ParserOptions
-	public readonly shape: DataShape
-	private _format: DataFormat
+	public readonly parser: ParserOptions = new ParserOptions()
+	public readonly shape: DataShape = new DataShape()
+	private _format: DataFormat = DataFormat.CSV
 	private _source: Blob
 
-	public constructor(
-		source: Blob,
-		format: DataFormat,
-		shape?: DataShapeSchema,
-		parserOptions?: ParserOptionsSchema,
-	) {
+	public constructor(source: Blob, datatable?: DataTableSchema) {
+		super()
 		this._source = source
-		this._format = format
-		this.parser = new ParserOptions(parserOptions ?? {})
-		this.shape = new DataShape(shape ?? {})
-
 		const handleSubItemChange = () => {
 			this._refreshData()
 			this._onChange.next()
 		}
 		this.parser.onChange(handleSubItemChange)
 		this.shape.onChange(handleSubItemChange)
-		this._refreshData()
+
+		this.loadSchema(datatable)
 	}
 
 	private _refreshData(): void {
@@ -91,6 +81,12 @@ export class DataSource
 		return this._source
 	}
 
+	public set data(value: Blob) {
+		this._source = value
+		this._refreshData()
+		this._onChange.next()
+	}
+
 	public get currentOutput(): Maybe<ColumnTable> {
 		let table: Maybe<ColumnTable> = undefined
 		this.output?.subscribe(t => (table = t)).unsubscribe()
@@ -111,25 +107,21 @@ export class DataSource
 		return this._output
 	}
 
-	public toSchema(): DataTableSchema {
+	public override toSchema(): DataTableSchema {
 		return createDataTableSchemaObject({
+			...super.toSchema(),
 			format: this.format,
 			shape: this.shape.toSchema(),
 			parser: this.parser.toSchema(),
 		})
 	}
 
-	public loadSchema(schema: DataTableSchema | null | undefined): void {
-		console.log('load schema', schema)
+	public override loadSchema(schema: DataTableSchema | null | undefined): void {
+		super.loadSchema(schema)
 		this.format = schema?.format ?? DataFormat.CSV
 		this.parser.loadSchema(schema?.parser)
 		this.shape.loadSchema(schema?.shape)
 		this._refreshData()
 		this._onChange.next()
-	}
-
-	public onChange(cb: () => void): Unsubscribe {
-		const sub = this._onChange.subscribe(cb)
-		return () => sub.unsubscribe()
 	}
 }
