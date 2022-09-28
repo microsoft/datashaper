@@ -224,6 +224,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 						{type === DataType.String ? (
 							<TextValue
+								value={criterion.value}
 								onChange={onChangeTextFieldValue}
 								disabled={isEmpty}
 							></TextValue>
