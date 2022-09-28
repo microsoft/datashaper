@@ -65,6 +65,10 @@ export class DataPackage
 		this._onChange.next()
 	}
 
+	public override get id(): string {
+		return super.id
+	}
+
 	public override set id(id: string) {
 		super.id = id
 		// emit a TableContainer with the new name

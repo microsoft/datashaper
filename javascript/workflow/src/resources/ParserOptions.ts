@@ -79,7 +79,7 @@ export class ParserOptions
 		this._onChange.next()
 	}
 
-	public get escapeChar() {
+	public get escapeChar(): string | undefined {
 		return this._escapeChar
 	}
 
@@ -138,7 +138,7 @@ export class ParserOptions
 		}
 	}
 
-	public loadSchema(schema: ParserOptionsSchema | null | undefined) {
+	public loadSchema(schema: ParserOptionsSchema | null | undefined): void {
 		this._delimiter = schema?.delimiter ?? DEFAULT_DELIMITER
 		this._lineTerminator = schema?.lineTerminator ?? DEFAULT_LINE_TERMINATOR
 		this._quoteChar = schema?.quoteChar ?? DEFAULT_QUOTE
