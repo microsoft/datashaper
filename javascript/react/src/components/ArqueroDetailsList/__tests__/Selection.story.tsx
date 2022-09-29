@@ -28,6 +28,7 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 			showColumnBorders
 			selectedColumn={selected}
 			onColumnClick={(_e, c) => setSelected(c?.name)}
+			clickableColumns
 		/>
 	)
 }
