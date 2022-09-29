@@ -42,16 +42,10 @@ export function useDetailsListStyles(
 						zIndex: '2',
 						top: '0',
 						background: theme.palette.white,
-						borderBottom: !isFeatureEnabled
-							? `1px solid ${theme.palette.neutralLighter}`
-							: 'unset',
 						selectors: {
 							'.ms-DetailsHeader': {
 								lineHeight: compact && !isFeatureEnabled ? 'normal' : '42px',
 								height: 'auto',
-								borderBottom: !isFeatureEnabled
-									? `1px solid ${theme.palette.neutralLighter}`
-									: 'unset',
 							},
 							'.ms-DetailsHeader-cell': {
 								cursor: hasColumnClick ? 'pointer' : 'default',

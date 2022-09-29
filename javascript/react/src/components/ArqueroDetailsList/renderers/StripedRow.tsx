@@ -44,10 +44,7 @@ export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow({
 				borderRight: columnBorders
 					? `1px solid ${theme.palette.neutralLighter}`
 					: `1px solid transparent`,
-				borderTop:
-					itemIndex === 0
-						? `1px solid ${theme.palette.neutralLighter}`
-						: 'none',
+				borderTop: 'none',
 				borderBottom: compact
 					? `1px solid ${theme.palette.neutralLighter}`
 					: 'none',
