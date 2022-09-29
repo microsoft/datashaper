@@ -7,7 +7,6 @@ import type { DropzoneStyles } from './Dropzone.types.js'
 export const staticStyles = {
 	container: {
 		borderWidth: '1px',
-		background: 'red',
 		width: '100%',
 		height: '100%',
 		margin: 0,
