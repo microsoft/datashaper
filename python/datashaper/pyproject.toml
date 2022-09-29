@@ -72,6 +72,7 @@ _pydocstyle = 'pydocstyle datashaper'
 _codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespellignore --skip "**/_build/*,**/auto_examples/*"'
 _changelog = 'semversioner changelog > CHANGELOG.md'
 _apply_version = 'semversioner release'
+test = "pytest  -v tests"
 
 [[tool.poe.tasks.lint]]
 sequence = ['_flake8', '_bandit', '_codespell', '_pydocstyle']
