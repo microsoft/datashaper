@@ -88,7 +88,7 @@ export class ParserOptions
 		this._onChange.next()
 	}
 
-	public get commment(): string | undefined {
+	public get comment(): string | undefined {
 		return this._commentStart
 	}
 
