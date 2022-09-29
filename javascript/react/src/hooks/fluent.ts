@@ -13,12 +13,17 @@ import { useCallback } from 'react'
 
 import type { StepChangeFunction } from '../types.js'
 
-// #region Dropdown Change Handler
+// #region Dropdown Change Handlers
 
 export type DropdownChangeHandler = (
 	event: React.FormEvent<HTMLDivElement>,
 	option?: IDropdownOption,
 	index?: number,
+) => void
+
+export type DropdownChangeAllHandler = (
+	event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement | HTMLElement>,
+	options?: IDropdownOption[],
 ) => void
 
 /**
@@ -39,7 +44,7 @@ export function useDropdownChangeHandler<T extends object | void | unknown>(
 	])
 }
 
-export function getDropdownChangeHandler<T extends object | void | unknown>(
+function getDropdownChangeHandler<T extends object | void | unknown>(
 	step: Step<T>,
 	updateFn: (step: Step<T>, optionKey: string | number | undefined) => void,
 	onChange?: StepChangeFunction<T>,
@@ -53,6 +58,35 @@ export function getDropdownChangeHandler<T extends object | void | unknown>(
 	}
 }
 
+export function useDropdownChangeAllHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, optionKeys: (string | number)[]) => void,
+	onChange?: StepChangeFunction<T>,
+): DropdownChangeAllHandler {
+	/* eslint-disable-next-line react-hooks/exhaustive-deps */
+	return useCallback(getDropdownChangeAllHandler(step, updateFn, onChange), [
+		step,
+		onChange,
+		updateFn,
+	])
+}
+
+function getDropdownChangeAllHandler<T extends object | void | unknown>(
+	step: Step<T>,
+	updateFn: (step: Step<T>, optionKeys: (string | number)[]) => void,
+	onChange?: StepChangeFunction<T>,
+): DropdownChangeAllHandler {
+	return (_event, options) => {
+		onChange?.(
+			produce(step, draft => {
+				updateFn(
+					draft as Step<T>,
+					options ? options.map(option => option.key) : [],
+				)
+			}),
+		)
+	}
+}
 // #endregion
 
 // #region ComboBox Change Handler

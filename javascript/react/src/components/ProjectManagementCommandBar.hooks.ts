@@ -20,10 +20,11 @@ import {
 	useHandleZipUpload,
 } from '../hooks/uploads.js'
 
-export function useProjectMgmtCommands(
+export function useProjectManagementCommands(
 	workflow: Workflow,
 	tables: TableContainer[],
 	outputTables: TableContainer[],
+	itemProps: Partial<ICommandBarItemProps> = {},
 	onUpdateWorkflowJson: (workflow: WorkflowSchema) => void,
 	onUpdateTables: (tables: TableContainer[]) => void,
 	onError?: (error: string) => void,
@@ -45,6 +46,7 @@ export function useProjectMgmtCommands(
 				key: 'open',
 				text: 'Open',
 				iconProps: icons.openFile,
+				...itemProps,
 				subMenuProps: {
 					items: [
 						{
@@ -72,6 +74,7 @@ export function useProjectMgmtCommands(
 				key: 'save',
 				text: 'Save',
 				iconProps: icons.save,
+				...itemProps,
 				subMenuProps: {
 					items: [
 						{
@@ -97,6 +100,7 @@ export function useProjectMgmtCommands(
 			},
 		] as ICommandBarItemProps[]
 	}, [
+		itemProps,
 		downloadPipeline,
 		downloadCsv,
 		downloadZip,

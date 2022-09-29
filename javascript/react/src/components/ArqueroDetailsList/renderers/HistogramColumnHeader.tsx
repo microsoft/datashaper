@@ -55,18 +55,14 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 			}
 		}, [onClick, dimensions])
 
-		// don't render a single bar
-		if (field.metadata?.distinct === 1) {
-			return null
-		}
+		const enough = field.metadata?.distinct || 0
 
 		return (
-			<>
-				{bins ? (
+			<div style={styles}>
+				{enough > 1 && bins ? (
 					<div
 						onClick={e => onClick && bins && onClick(e, column, field)}
 						title={title}
-						style={styles}
 					>
 						<TooltipHost
 							content={hover}
@@ -85,7 +81,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 						</TooltipHost>
 					</div>
 				) : null}
-			</>
+			</div>
 		)
 	},
 )

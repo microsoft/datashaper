@@ -18,7 +18,7 @@ export const Aside = styled.div<{ isCollapsed: boolean }>`
 	box-shadow: ${({ isCollapsed, theme }) =>
 		isCollapsed
 			? 'none'
-			: `-1px 0px 10px 0px ${theme.application().lowMidContrast().hex()}`};
+			: `-1px 0px 10px 0px ${theme.palette.neutralTertiary}`};
 `
 
 export const AsideHeader = styled.div<{ isCollapsed: boolean }>`
@@ -33,8 +33,8 @@ export const AsideHeader = styled.div<{ isCollapsed: boolean }>`
 export const Title = styled.span<{ isCollapsed: boolean }>`
 	width: 100%;
 	font-weight: 500;
-	background-color: ${({ theme }) => theme.application().background().hex()};
-	color: ${({ theme }) => theme.application().midContrast().hex()};
+	background-color: ${({ theme }) => theme.palette.white};
+	color: ${({ theme }) => theme.palette.neutralTertiary};
 	font-size: 1.2rem;
 	text-align: left;
 	padding: 0;
@@ -57,7 +57,7 @@ export const DetailsListContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
+	border: 1px solid ${({ theme }) => theme.palette.neutralLighter};
 `
 
 export const Container = styled.div<{ isCollapsed: boolean }>`

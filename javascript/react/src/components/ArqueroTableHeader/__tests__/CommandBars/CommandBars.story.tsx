@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { ArqueroTableHeader as ArqueroTableHeaderComponent } from '@datashaper/react'
-import { Checkbox } from '@fluentui/react'
+import { Checkbox, CommandBar } from '@fluentui/react'
 import type { ComponentStory } from '@storybook/react'
 import styled from 'styled-components'
 
@@ -30,8 +30,8 @@ export const CommandBarsStory: ComponentStory<
 			<ArqueroTableHeaderComponent
 				{...args}
 				table={stocks}
-				commandBar={near ? commandBar : undefined}
-				farCommandBar={far ? farCommandBar : undefined}
+				commandBar={near ? <CommandBar {...commandBar} /> : undefined}
+				farCommandBar={far ? <CommandBar {...farCommandBar} /> : undefined}
 			/>
 		</>
 	)

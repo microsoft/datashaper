@@ -15,11 +15,19 @@ const Template: ComponentStory<typeof ArqueroDetailsList> = (
 	{ loaded: { stocks } }: any,
 ): JSX.Element => {
 	const metadata = useMemo(() => introspect(stocks, true), [stocks])
-	return <ArqueroDetailsList {...args} table={stocks} metadata={metadata} />
+	return (
+		<div style={{ height: 600 }}>
+			<ArqueroDetailsList {...args} table={stocks} metadata={metadata} />
+		</div>
+	)
 }
 
 export const FeaturesStory = Template.bind({})
 FeaturesStory.args = {
+	striped: true,
+	showColumnBorders: true,
+	selectedColumn: 'Symbol',
+	isHeaderFixed: true,
 	features: {
 		histogramColumnHeaders: true,
 		statsColumnHeaders: true,

@@ -89,14 +89,12 @@ const H3 = styled.h3<{ color?: string }>`
 	font-weight: normal;
 	font-size: 0.8em;
 	margin-right: 8px;
-	color: ${({ theme, color }) =>
-		color || theme.application().background().hex()};
+	color: ${({ theme, color }) => color || theme.palette.white};
 `
 
 const H3Editable = styled(H3)`
 	cursor: pointer;
-	border-bottom: 1px dotted
-		${({ theme }) => theme.application().background().hex()};
+	border-bottom: 1px dotted ${({ theme }) => theme.palette.white};
 `
 
 const Container = styled.div``

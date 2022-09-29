@@ -5,8 +5,7 @@
 import type { TableContainer } from '@datashaper/tables'
 import styled from '@essex/styled-components'
 import type { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
-import { DefaultButton } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import { DefaultButton, useTheme } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
@@ -58,12 +57,12 @@ const TableMenu: React.FC<{
 }
 
 function useStyles() {
-	const theme = useThematic()
+	const theme = useTheme()
 	return useMemo(
 		() => ({
 			root: {
-				background: theme.application().accent().hex(),
-				color: theme.application().background().hex(),
+				background: theme.palette.themePrimary,
+				color: theme.palette.white,
 				textAlign: 'left',
 				border: 'none',
 			},

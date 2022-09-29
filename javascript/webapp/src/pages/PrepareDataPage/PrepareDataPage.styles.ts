@@ -11,17 +11,13 @@ export const PageContainer = styled.div`
 	height: calc(100vh - 80px);
 	position: relative;
 `
-export const mgmtStyles = {
-	root: {
-		height: 36,
-	},
-}
 
 export const Main = styled.div`
 	display: flex;
 	flex-flow: column;
 	height: 100%;
 	width: 100%;
+	padding-top: 12px;
 	gap: ${GAP}px;
 	position: relative;
 `
@@ -37,7 +33,6 @@ export const DetailsListContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	border: 1px solid ${({ theme }) => theme.application().faint().hex()};
 `
 
 export const OutputContainer = styled.div`

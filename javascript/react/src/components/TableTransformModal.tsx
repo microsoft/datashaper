@@ -5,9 +5,8 @@
 import type { Verb } from '@datashaper/schema'
 import { default as guidanceIndex } from '@datashaper/verb-guidance'
 import type { Maybe } from '@datashaper/workflow'
-import { Callout, DirectionalHint, IconButton } from '@fluentui/react'
+import { Callout, DirectionalHint, IconButton, useTheme } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { useThematic } from '@thematic/react'
 import { memo, useState } from 'react'
 
 import { Guidance } from './Guidance.js'
@@ -33,7 +32,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		styles,
 		...props
 	}) {
-		const theme = useThematic()
+		const theme = useTheme()
 		const [verb, setVerb] = useState<Maybe<Verb>>(step?.verb)
 		const [showGuidance, { toggle: toggleGuidance }] = useBoolean(false)
 		const adaptedStyles = getModalStyles(theme, styles)

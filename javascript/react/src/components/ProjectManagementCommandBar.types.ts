@@ -4,9 +4,9 @@
  */
 import type { TableContainer } from '@datashaper/tables'
 import type { Workflow } from '@datashaper/workflow'
-import type { ICommandBarProps } from '@fluentui/react'
+import type { ICommandBarItemProps, ICommandBarProps } from '@fluentui/react'
 
-export interface ProjectMgmtCommandBarProps
+export interface ProjectManagementCommandBarProps
 	extends Omit<ICommandBarProps, 'items'> {
 	/**
 	 * The data transformation workflow
@@ -32,4 +32,8 @@ export interface ProjectMgmtCommandBarProps
 	 * Handler for when input tableset changes
 	 */
 	onUpdateTables: (tables: TableContainer[]) => void
+	/**
+	 * Shared props to apply to each item
+	 */
+	itemProps?: Partial<ICommandBarItemProps>
 }

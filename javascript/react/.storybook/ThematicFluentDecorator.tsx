@@ -2,7 +2,7 @@ import { initializeIcons } from '@fluentui/font-icons-mdl2'
 import * as React from 'react'
 import { useState, useCallback, useMemo } from 'react'
 import { Toggle } from '@fluentui/react'
-import { ThemeVariant, loadById } from '@thematic/core'
+import { loadById } from '@thematic/core'
 import { ApplicationStyles } from '@thematic/react'
 import { loadFluentTheme, ThematicFluentProvider } from '@thematic/fluent'
 import { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
@@ -22,7 +22,7 @@ export const ThematicFluentDecorator = (
 	const thematicTheme = useMemo(
 		() =>
 			loadById('autumn', {
-				variant: dark ? ThemeVariant.Dark : ThemeVariant.Light,
+				dark,
 			}),
 		[dark],
 	)
@@ -44,6 +44,6 @@ export const ThematicFluentDecorator = (
 }
 
 const Header = styled.div`
-	border-top: 1px solid ${({ theme }) => theme.application().faint().hex()};
-	margin-bottom: 8px;
+	border-top: 1px solid ${({ theme }) => theme.palette.neutralLighter};
+	padding-top: 20px;
 `
