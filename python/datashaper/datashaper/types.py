@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""Common types used across the datashaper codebase."""
 
 from enum import Enum
 from typing import Any, Dict, List, Union
@@ -10,6 +11,8 @@ from dataclasses import dataclass, field
 
 
 class Verb(Enum):
+    """The verbs that can be used in a pipeline."""
+
     Aggregate = "aggregate"
     Bin = "bin"
     Binarize = "binarize"
@@ -55,17 +58,23 @@ compound_verbs = {Verb.Chain, Verb.FilterAggregateLookup, Verb.MultiBinarize}
 
 
 class Bin:
+    """A data bin."""
+
     min: Union[float, str]
     count: int
 
 
 class Category:
+    """A category data class."""
+
     name: str
     count: int
 
 
 @dataclass
 class DataType(Enum):
+    """Data type of a column."""
+
     Array = "array"
     Boolean = "boolean"
     Date = "date"
@@ -81,6 +90,8 @@ class DataType(Enum):
 
 @dataclass
 class Step:
+    """A workflow processing step."""
+
     verb: Verb
     input: Union[str, Dict[str, str]]
     output: Union[str, Dict[str, str]]
@@ -88,6 +99,8 @@ class Step:
 
 
 class JoinStrategy(Enum):
+    """Table join strategies."""
+
     Inner = "inner"
     LeftOuter = "left outer"
     RightOuter = "right outer"
@@ -99,10 +112,14 @@ class JoinStrategy(Enum):
 
 @dataclass
 class InputColumnArgs:
+    """Column argument for verbs oberating on a single column."""
+
     column: str
 
 
 class FieldAggregateOperation(Enum):
+    """Aggregate operations for fields."""
+
     Any = "any"
     Count = "count"
     CountDistinct = "distinct"
@@ -123,17 +140,23 @@ class FieldAggregateOperation(Enum):
 
 
 class BinStrategy(Enum):
+    """Binning strategy to use for the binning operation."""
+
     Auto = "auto"
     FixedCount = "fixed count"
     FixedWidth = "fixed width"
 
 
 class FilterCompareType(Enum):
+    """Filter compare type."""
+
     Value = "value"
     Column = "column"
 
 
 class NumericComparisonOperator(Enum):
+    """Numeric comparison operators."""
+
     Equals = "="
     NotEqual = "!="
     LessThan = "<"
@@ -145,6 +168,8 @@ class NumericComparisonOperator(Enum):
 
 
 class StringComparisonOperator(Enum):
+    """String comparison operators."""
+
     Equals = "equals"
     NotEqual = "is not equal"
     Contains = "contains"
@@ -156,6 +181,8 @@ class StringComparisonOperator(Enum):
 
 
 class BooleanComparisonOperator(Enum):
+    """Boolean comparison operators."""
+
     Equals = "equals"
     NotEqual = "is not equal"
     IsTrue = "is true"
@@ -166,6 +193,8 @@ class BooleanComparisonOperator(Enum):
 
 @dataclass
 class Criterion:
+    """A filter criterion."""
+
     value: Any
     type: FilterCompareType
     operator: Union[
@@ -174,6 +203,8 @@ class Criterion:
 
 
 class BooleanLogicalOperator(Enum):
+    """Boolean logical operators."""
+
     OR = "or"
     AND = "and"
     NOR = "nor"
@@ -184,11 +215,15 @@ class BooleanLogicalOperator(Enum):
 
 @dataclass
 class FilterArgs(InputColumnArgs):
+    """Filter criteria for a column."""
+
     criteria: List[Criterion]
     logical: BooleanLogicalOperator = BooleanLogicalOperator.OR
 
 
 class SetOp(Enum):
+    """Set operations for the difference and intersect verbs."""
+
     Concat = "concat"
     Union = "union"
     Intersect = "intersect"
@@ -196,6 +231,8 @@ class SetOp(Enum):
 
 
 class MathOperator(Enum):
+    """Mathematical operators."""
+
     Add = "+"
     Subtract = "-"
     Multiply = "*"
@@ -204,11 +241,15 @@ class MathOperator(Enum):
 
 
 class SortDirection(Enum):
+    """Sort direction for order by."""
+
     Ascending = "asc"
     Descending = "desc"
 
 
 class ParseType(Enum):
+    """ParseType is used to specify the type of a column."""
+
     Boolean = "boolean"
     Date = "date"
     Integer = "int"
@@ -217,6 +258,8 @@ class ParseType(Enum):
 
 
 class MergeStrategy(Enum):
+    """Merge strategy for merge verb."""
+
     FirstOneWins = "first one wins"
     LastOneWins = "last one wins"
     Concat = "concat"
@@ -224,6 +267,8 @@ class MergeStrategy(Enum):
 
 
 class WindowFunction(Enum):
+    """Windowing functions for window verb."""
+
     RowNumber = "row_number"
     Rank = "rank"
     PercentRank = "percent_rank"
@@ -236,5 +281,7 @@ class WindowFunction(Enum):
 
 @dataclass
 class OrderByInstruction:
+    """Details regarding how to order a column."""
+
     column: str
     direction: SortDirection

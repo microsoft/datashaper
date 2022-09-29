@@ -1,5 +1,17 @@
-name: CI
-on: [push, pull_request]
+name: JavaScript CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - 'javascript/**/*'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.js'
+      - '**/*.mjs'
+      - '**/*.cjs'
+      - '**/*.json'
+      - .github/workflows/javascript-ci.yml
 jobs:
   build:
     runs-on: ubuntu-latest

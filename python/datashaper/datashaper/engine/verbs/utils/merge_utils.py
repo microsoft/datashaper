@@ -18,6 +18,7 @@ __strategy_mapping: Dict[MergeStrategy, Callable] = {
     MergeStrategy.CreateArray: lambda values, **kwargs: create_array(values, ","),
 }
 
+
 def correct_type(value: Any):
     if is_bool(value):
         return str(value).lower()
@@ -25,6 +26,7 @@ def correct_type(value: Any):
         return int(value) if value.is_integer() else value
     except AttributeError:
         return value
+
 
 def create_array(column: pd.Series, delim: str) -> str:
     column = column.dropna().apply(lambda x: correct_type(x))
