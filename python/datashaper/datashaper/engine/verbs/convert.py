@@ -121,6 +121,6 @@ def convert(
 
     output[column] = __type_mapping[parse_type](
         column=output[column], radix=radix, formatPattern=formatPattern
-    ) 
+    )
 
     return TableContainer(table=output)

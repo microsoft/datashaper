@@ -21,10 +21,10 @@ def onehot(
     input_table = input.get_input()
     input_table[column] = input_table[column].astype("category")
 
-    dummies = pd.get_dummies(input_table[[column]], prefix=[prefix], prefix_sep="") 
+    dummies = pd.get_dummies(input_table[[column]], prefix=[prefix], prefix_sep="")
     cols = dummies.columns.str.startswith(prefix)
     dummies.loc[input_table[column].isnull(), cols] = np.nan
-        
+
     output = pd.concat([input_table, dummies], axis=1)
     if not preserveSource:
         output = output.drop(columns=column)

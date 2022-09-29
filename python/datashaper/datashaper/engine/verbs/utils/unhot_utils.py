@@ -12,9 +12,9 @@ def unhotOperation(input: VerbInput, columns: List[str], prefix: str):
 
     for col in columns:
         index = col.index(prefix)
-        value = col[index + len(prefix):len(col)]
+        value = col[index + len(prefix) : len(col)]
         for i in range(len(input_table[col])):
-            if(input_table[col][i] == 0):
+            if input_table[col][i] == 0:
                 input_table[col].loc[i] = nan
             else:
                 input_table[col].loc[i] = value
