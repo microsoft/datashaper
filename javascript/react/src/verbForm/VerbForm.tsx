@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@datashaper/workflow'
+import { Expando, MultiDropdown } from '@essex/components'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import {
 	Checkbox,
@@ -17,11 +18,11 @@ import noop from 'lodash-es/noop.js'
 import { Fragment, memo, useMemo } from 'react'
 import { Case, Switch, When } from 'react-if'
 
-import { Expando } from '../controls/Expando.js'
 import {
 	useCheckboxChangeHandler,
 	useComboBoxChangeHandler,
 	useComboBoxInputValueChangeHandler,
+	useDropdownChangeAllHandler,
 	useDropdownChangeHandler,
 	useSpinButtonChangeHandler,
 	useTextFieldChangeHandler,
@@ -129,7 +130,10 @@ export interface TextFormInput<T> extends FormInputBase<T> {
 	current: string | undefined
 }
 
-export interface MultiChoiceFormInput<T> extends FormInputBase<T> {
+export interface MultiChoiceFormInput<
+	T,
+	OnChangeAllHandler = (step: Step<T>, optionKeys: (string | number)[]) => void,
+> extends FormInputBase<T> {
 	type: FormInputType.MultiChoice
 
 	/**
@@ -141,6 +145,7 @@ export interface MultiChoiceFormInput<T> extends FormInputBase<T> {
 	 * The form input value or selected key (if enum)
 	 */
 	current?: string[] | undefined
+	onChangeAll: OnChangeAllHandler
 }
 
 export interface CheckboxFormInput<T> extends FormInputBase<T> {
@@ -339,6 +344,7 @@ const MultiChoiceInput: React.FC<{
 		disabled,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
+		onChangeAll: allUpdater,
 	},
 	onChange,
 }) {
@@ -347,9 +353,14 @@ const MultiChoiceInput: React.FC<{
 		updater,
 		onChange,
 	)
+	const dropdownChangeAllHandler = useDropdownChangeAllHandler(
+		step,
+		allUpdater,
+		onChange,
+	)
 	return (
 		<Wrapper>
-			<Dropdown
+			<MultiDropdown
 				required={required}
 				label={label}
 				placeholder={placeholder}
@@ -358,7 +369,7 @@ const MultiChoiceInput: React.FC<{
 				options={options!}
 				disabled={disabled}
 				onChange={dropdownChangeHandler}
-				multiSelect
+				onChangeAll={dropdownChangeAllHandler}
 			/>
 		</Wrapper>
 	)

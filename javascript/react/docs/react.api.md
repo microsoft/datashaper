@@ -34,7 +34,6 @@ import { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
-import type { Theme } from '@thematic/core';
 import type { Verb } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
 
@@ -144,33 +143,6 @@ export interface ColumnOptions {
 //
 // @public (undocumented)
 export type ColumnRenderFunction = (item?: any, index?: number, column?: IColumn) => any;
-
-// Warning: (ae-missing-release-tag) "CommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const CommandBar: React.FC<CommandBarProps>;
-
-// Warning: (ae-missing-release-tag) "CommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CommandBarProps extends ICommandBarProps {
-    // (undocumented)
-    background?: string;
-    // (undocumented)
-    color?: string;
-    // (undocumented)
-    height?: string;
-}
-
-// Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createDefaultCommandBar({ styles, ...props }: ICommandBarProps): ReactElement<ICommandBarProps, any>;
-
-// Warning: (ae-missing-release-tag) "createDefaultHeaderCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: Theme, far?: boolean): ReactElement<ICommandBarProps, any>;
 
 // Warning: (ae-missing-release-tag) "DetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -351,15 +323,16 @@ export interface PanelProps {
     panelIsOpen: boolean;
 }
 
-// Warning: (ae-missing-release-tag) "ProjectMgmtCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ProjectManagementCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps>;
+export const ProjectManagementCommandBar: React.FC<ProjectManagementCommandBarProps>;
 
-// Warning: (ae-missing-release-tag) "ProjectMgmtCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ProjectManagementCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'items'> {
+export interface ProjectManagementCommandBarProps extends Omit<ICommandBarProps, 'items'> {
+    itemProps?: Partial<ICommandBarItemProps>;
     onUpdateTables: (tables: TableContainer[]) => void;
     onUpdateWorkflow: (steps: Workflow) => void;
     outputTables: TableContainer[];
@@ -559,6 +532,10 @@ export const TableCommands: React.FC<TableCommandsProps>;
 // @public (undocumented)
 export interface TableCommandsProps {
     // (undocumented)
+    background?: string;
+    // (undocumented)
+    color?: string;
+    // (undocumented)
     inputTable: TableContainer | undefined;
     // (undocumented)
     onAddStep?: (step: Step, output: string | undefined, index: number | undefined) => void;
@@ -729,6 +706,15 @@ export function useIncrementingColumnColorScale(meta?: TableMetadata): () => str
 //
 // @public
 export function useInputTableNames(workflow?: Workflow): string[];
+
+// Warning: (ae-missing-release-tag) "useManagementBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useManagementBarDefaults(props?: ProjectManagementCommandBarProps, colors?: {
+    color?: string;
+    background?: string;
+    border?: string;
+}): ProjectManagementCommandBarProps;
 
 // Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

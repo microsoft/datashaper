@@ -26,7 +26,7 @@ export const Container = styled.div`
 	display: grid;
 	grid-template-rows: calc(100% - 4rem) 4rem;
 	width: 100%;
-	border-top: 1px solid ${({ theme }) => theme.application().border().hex()};
+	border-top: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 
 	> div {
 		overflow: hidden auto;
@@ -53,7 +53,7 @@ export const Columns = styled.span`
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	color: ${({ theme }) => theme.application().midContrast().hex()};
+	color: ${({ theme }) => theme.palette.neutralTertiary};
 `
 
 export const tableTransformStyle: React.CSSProperties = {
@@ -68,9 +68,9 @@ export const tableTransformStyle: React.CSSProperties = {
 
 export const ListWrapper = styled.div`
 	overflow: hidden auto;
-	border-bottom: ${({ theme }) => theme.application().border().hex()};
+	border-bottom: ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `
 
 export const StepIndex = styled.span`
-	color: ${({ theme }) => theme.application().lowContrast().hex()};
+	color: ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `

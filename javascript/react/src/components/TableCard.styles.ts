@@ -14,7 +14,7 @@ export const icons = {
 }
 
 export const PreviewIcon = styled(Icon)`
-	color: ${({ theme }) => theme.application().accent().hex()};
+	color: ${({ theme }) => theme.palette.themePrimary};
 	align-self: center;
 `
 

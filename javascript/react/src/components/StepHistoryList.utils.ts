@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Theme } from '@thematic/core'
+import type { ITheme } from '@fluentui/react'
 
 interface CollapsiblePanelStyles {
 	header?: React.CSSProperties
@@ -11,19 +11,19 @@ interface CollapsiblePanelStyles {
 }
 
 export function getCollapsiblePanelStyles(
-	theme: Theme,
+	theme: ITheme,
 ): CollapsiblePanelStyles {
 	return {
 		header: {
-			background: theme.application().background().hex(),
-			color: theme.application().highContrast().hex(),
+			background: theme.palette.white,
+			color: theme.palette.neutralPrimary,
 			padding: '8px 0',
 			borderBottom: 'none',
 			borderTop: 'none',
 		},
 		contents: {
 			border: 'none',
-			borderBottom: `1px solid ${theme.application().border().hex()}`,
+			borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
 		},
 	}
 }

@@ -21,7 +21,7 @@ export const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background: ${({ theme }) => theme.application().faint().hex()};
+	background: ${({ theme }) => theme.palette.neutralLighter};
 	margin-bottom: 12px;
 `
 

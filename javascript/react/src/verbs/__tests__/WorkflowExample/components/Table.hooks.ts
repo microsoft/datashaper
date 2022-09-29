@@ -2,24 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	createDefaultHeaderCommandBar,
-	downloadCommand,
-} from '@datashaper/react'
-import type { IColumn } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import { downloadCommand } from '@datashaper/react'
+import type { IColumn, ICommandBarProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
+import { useHeaderCommandBarDefaults } from '../../../../hooks/useHeaderCommandBarDefaults.js'
 import type { ColumnConfigMap } from './Table.types.js'
 
-export function useFarCommandBar(table: ColumnTable): JSX.Element {
-	const theme = useThematic()
+export function useFarCommandBar(table: ColumnTable): ICommandBarProps {
 	const items = useMemo(() => [downloadCommand(table)], [table])
-	return useMemo(
-		() => createDefaultHeaderCommandBar({ items }, theme, true),
-		[items, theme],
-	)
+	return useHeaderCommandBarDefaults({ items }, true)
 }
 
 export function useColumns(config?: ColumnConfigMap): IColumn[] | undefined {

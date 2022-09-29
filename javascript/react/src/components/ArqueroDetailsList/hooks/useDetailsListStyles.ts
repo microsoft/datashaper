@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IDetailsListStyles } from '@fluentui/react'
-import { useThematic } from '@thematic/react'
+import { useTheme } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
@@ -22,7 +22,7 @@ export function useDetailsListStyles(
 	hasColumnClick?: boolean,
 	compact?: boolean,
 ): IDetailsListStyles {
-	const theme = useThematic()
+	const theme = useTheme()
 
 	const isFeatureEnabled = useMemo((): any => {
 		return (
@@ -41,17 +41,11 @@ export function useDetailsListStyles(
 						position: isHeaderFixed ? 'sticky' : 'inherit',
 						zIndex: '2',
 						top: '0',
-						background: theme.application().background().hex(),
-						borderBottom: !isFeatureEnabled
-							? `1px solid ${theme.application().faint().hex()}`
-							: 'unset',
+						background: theme.palette.white,
 						selectors: {
 							'.ms-DetailsHeader': {
 								lineHeight: compact && !isFeatureEnabled ? 'normal' : '42px',
 								height: 'auto',
-								borderBottom: !isFeatureEnabled
-									? `1px solid ${theme.application().faint().hex()}`
-									: 'unset',
 							},
 							'.ms-DetailsHeader-cell': {
 								cursor: hasColumnClick ? 'pointer' : 'default',

@@ -7,9 +7,10 @@ import {
 	ArqueroTableHeader,
 	HistoryButton,
 	HistoryPanel,
-	ProjectMgmtCommandBar,
+	ProjectManagementCommandBar,
 	StepHistoryList,
 	TableCommands,
+	useManagementBarDefaults,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnSaveStep,
@@ -32,7 +33,6 @@ import {
 	Container,
 	DetailsListContainer,
 	Main,
-	mgmtStyles,
 	OutputContainer,
 	PageContainer,
 	PrepareDataContainer,
@@ -80,15 +80,16 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		[setSelectedColumn],
 	)
 
+	const managementProps = useManagementBarDefaults()
 	return (
 		<PageContainer className={'prepare-data-page'}>
-			<ProjectMgmtCommandBar
+			<ProjectManagementCommandBar
+				{...managementProps}
 				tables={inputs}
 				workflow={workflow}
 				outputTables={outputs}
 				onUpdateWorkflow={setWorkflow}
 				onUpdateTables={onAddInputTables}
-				styles={mgmtStyles}
 			/>
 			<PrepareDataContainer>
 				<Container isCollapsed={isCollapsed}>

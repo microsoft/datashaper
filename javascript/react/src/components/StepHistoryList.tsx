@@ -9,7 +9,7 @@ import {
 	CollapsiblePanelContainer,
 	DialogConfirm,
 } from '@essex/themed-components'
-import { useThematic } from '@thematic/react'
+import { useTheme } from '@fluentui/react'
 import debug from 'debug'
 import { memo, useEffect, useRef } from 'react'
 
@@ -39,7 +39,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		order,
 	}) {
 		const ref = useRef<HTMLDivElement>(null)
-		const theme = useThematic()
+		const theme = useTheme()
 		const steps = useWorkflowSteps(workflow, order)
 		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
 		const {

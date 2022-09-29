@@ -34,6 +34,7 @@ export function inputColumnList(
 		current: step.args.columns,
 		onChange: (s, opt) =>
 			(s.args.columns = toggleListItem(s.args.columns, opt as string)),
+		onChangeAll: (s, opts) => (s.args.columns = opts as string[]),
 	}
 }
 

@@ -17,7 +17,7 @@ export const LeftAlignedRow = styled.div`
  */
 export const InputExplainer = styled.div`
 	font-size: 0.85em;
-	color: ${({ theme }) => theme.application().midHighContrast().hex()};
+	color: ${({ theme }) => theme.palette.neutralSecondary};
 `
 
 export const dropdownStyles = {

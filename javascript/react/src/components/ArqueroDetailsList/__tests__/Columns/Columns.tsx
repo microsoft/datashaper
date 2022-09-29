@@ -39,6 +39,7 @@ export const Columns: React.FC<ArqueroDetailsListProps> = memo(
 					columns={columns}
 					selectedColumn={selected}
 					onColumnClick={onColumnClick}
+					showColumnBorders
 				/>
 			</Table>
 		)
