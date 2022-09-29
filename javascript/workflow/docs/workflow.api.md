@@ -562,9 +562,8 @@ export const orderby: (id: string) => StepNode<TableContainer<unknown>, OrderbyA
 export class ParserOptions extends Observed implements ParserOptions_2, SchemaResource<ParserOptions_2> {
     constructor(parserOptions?: ParserOptions_2);
     // (undocumented)
+    get comment(): string | undefined;
     set comment(value: string | undefined);
-    // (undocumented)
-    get commment(): string | undefined;
     // (undocumented)
     get delimiter(): string;
     set delimiter(delimiter: string | undefined);

@@ -35,6 +35,7 @@
 	},
 	"dependencies": {
 		"@zip.js/zip.js": "2.3.18",
+		"debug": "^4.3.4",
 		"tslib": "^2.4.0"
 	},
 	"devDependencies": {
@@ -42,6 +43,7 @@
 		"@essex/scripts": "^22.0.8",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@essex/vite-config": "^19.0.13",
+		"@types/debug": "^4",
 		"@types/jest": "^29.0.3",
 		"@types/node": "^18.7.18",
 		"arquero": "^5.1.0",

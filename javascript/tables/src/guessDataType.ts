@@ -23,8 +23,8 @@ import { formatNumberStr, getDate } from './util.js'
 /**
  * Factory function to provide a type guessing function for any string value.
  * This uses optional type hints to account for string values such as boolean and null formats.
- * @param options
- * @returns
+ * @param options - The type hinting options
+ * @returns A function that evaluates the datatype of inputs
  */
 export function guessDataType(
 	options?: TypeHints,
