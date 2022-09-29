@@ -3,8 +3,6 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import Dict, List
-
 import numpy as np
 import pandas as pd
 

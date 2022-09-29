@@ -86,6 +86,5 @@ sequence = ['_black_check', '_isort_check']
 ignore_fail = 'return_non_zero'
 
 [tool.pydocstyle]
-convention = 'numpy'
-#match = '^(?!setup|__init__|test_).*\.py'
+match = '^(?!setup|__init__|test_).*\.py'
 match-dir = '^datashaper.*'

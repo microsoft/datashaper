@@ -58,7 +58,7 @@ def filter(input: VerbInput, column: str, criteria: List, logical: str = "or"):
     )
 
     output = input_table[
-        input_table.index.isin(filter_index[filter_index == True].index)
+        input_table.index.isin(filter_index[filter_index is True].index)
     ].reset_index(drop=True)
 
     return TableContainer(table=output)
