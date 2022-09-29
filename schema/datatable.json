@@ -12,7 +12,7 @@
 			"type": "string"
 		},
 		"DataOrientation": {
-			"description": "Indicates the orientation of the data within the file.\n\nMost CSV data files are 'values' (row-oriented).\n\nJSON files can commonly be either.\nRecords are probably more common, though require more space due to replication of keys.\nApache Arrow or Parquet are columnar.\nThis nearly aligns with pandas:\nhttps://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#json\n\nA key difference (which probably needs resolved) is that we don't yet support the notion of an index.\nSee their example for \"columns\" or \"index\" orientation, which is a nested structure.\n\nExample JSON formats:\n values: [\n     [\"colA\", \"colB\"],\n     [\"valueA1\", \"valueA2\"],\n     [\"valueA2\", \"valueB2\"]\n ]\n records:\n     [{\n         colA: valueA1,\n         colB: valueB1\n     }, {\n         colA: valueA2,\n         colB: valueB2\n     }]\n columnar: \n     {\n         colA: [valueA1, valueA2],\n         colB: [valueB1, valueB2]\n     }",
+			"description": "Indicates the orientation of the data within the file.\n\nMost CSV data files are 'values' (row-oriented).\n\nJSON files can commonly be either.\nRecords are probably more common, though require more space due to replication of keys.\nApache Arrow or Parquet are columnar.\nThis nearly aligns with pandas:\nhttps://pandas.pydata.org/pandas-docs/stable/user_guide/io.html#json\n\nA key difference (which probably needs resolved) is that we don't yet support the notion of an index.\nSee their example for \"columns\" or \"index\" orientation, which is a nested structure.\n\nExample JSON formats:\n values: [\n     [\"colA\", \"colB\"],\n     [\"valueA1\", \"valueA2\"],\n     [\"valueA2\", \"valueB2\"]\n ]\n records:\n     [\\{\n         colA: valueA1,\n         colB: valueB1\n     \\}, \\{\n         colA: valueA2,\n         colB: valueB2\n     \\}]\n columnar: \n     \\{\n         colA: [valueA1, valueA2],\n         colB: [valueB1, valueB2]\n     \\}",
 			"enum": ["array", "columnar", "records", "values"],
 			"type": "string"
 		},
@@ -20,7 +20,7 @@
 			"description": "Defines parameters for understanding the logical structure of data contents.",
 			"properties": {
 				"matrix": {
-					"description": "Defines the Row x Column layout of a raw list of values (e.g., a pandas Series).\n  For example,\n    {\n        data: [1,2,3,4,5,6],\n        shape: {\n            matrix: [3, 2]\n        }\n    }\n    is interpreted as table\n    1 2\n    3 4\n    5 6",
+					"description": "Defines the Row x Column layout of a raw list of values (e.g., a pandas Series).\n  For example,\n    \\{\n        data: [1,2,3,4,5,6],\n        shape: \\{\n            matrix: [3, 2]\n        \\}\n    \\}\n    is interpreted as table\n    1 2\n    3 4\n    5 6",
 					"items": [
 						{
 							"type": "number"
@@ -64,7 +64,7 @@
 					"type": "boolean"
 				},
 				"lineTerminator": {
-					"description": "Character that indicates the end of a line (row).\nDefault: \\r, \\r\\n, or \\n",
+					"description": "Character that indicates the end of a line (row).\nDefault: \\\\r, \\\\r\\\\n, or \\\\n",
 					"type": "string"
 				},
 				"names": {
