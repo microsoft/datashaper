@@ -26,6 +26,7 @@ export const FeaturesStory = Template.bind({})
 FeaturesStory.args = {
 	striped: true,
 	showColumnBorders: true,
+	selectedColumn: 'Symbol',
 	features: {
 		histogramColumnHeaders: true,
 		statsColumnHeaders: true,

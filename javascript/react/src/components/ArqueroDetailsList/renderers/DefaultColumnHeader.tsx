@@ -21,7 +21,6 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 		const theme = useTheme()
 		const { isSorted, isSortedDescending, iconName, iconClassName } = column
 		const dimensions = useCellDimensions(column)
-
 		const containerStyle = useMemo(
 			() => ({
 				lineHeight: column.data.compact ? COMPACT_LINE_HEIGHT : 'inherit',
@@ -29,9 +28,10 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 				display: 'flex',
 				justifyContent: 'space-between',
 				width: dimensions.width,
+				marginBottom: 4,
 				borderBottom: column.data?.selected
-					? `2px solid ${theme.palette.themePrimary}`
-					: `2px solid transparent`,
+					? `1px solid ${theme.palette.themePrimary}`
+					: `1px solid transparent`,
 			}),
 			[theme, dimensions, column, isClickable],
 		)
