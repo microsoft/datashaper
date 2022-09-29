@@ -45,5 +45,5 @@ export const ThematicFluentDecorator = (
 
 const Header = styled.div`
 	border-top: 1px solid ${({ theme }) => theme.palette.neutralLighter};
-	margin-bottom: 8px;
+	padding-top: 20px;
 `
