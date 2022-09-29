@@ -10,6 +10,7 @@ import {
 	DialogConfirm,
 } from '@essex/themed-components'
 import { useThematic } from '@thematic/react'
+import debug from 'debug'
 import { memo, useEffect, useRef } from 'react'
 
 import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
@@ -26,6 +27,7 @@ import {
 import type { StepHistoryListProps } from './StepHistoryList.types.js'
 import { getCollapsiblePanelStyles } from './StepHistoryList.utils.js'
 import { TableTransform } from './TableTransform.js'
+const log = debug('datashaper')
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 	function StepsList({
@@ -110,10 +112,11 @@ function onRenderHeader(step: Step, index: number): JSX.Element {
 		} else if (typeof columnList === 'object') {
 			columns = Object.values(columnList)?.join(', ')
 		}
-	} catch {
-		console.error(
+	} catch (e) {
+		log(
 			'ColumnList type is not being currently supported',
 			typeof columnList,
+			e,
 		)
 	}
 

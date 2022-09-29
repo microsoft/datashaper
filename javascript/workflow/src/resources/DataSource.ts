@@ -7,6 +7,7 @@ import { createDataTableSchemaObject, DataFormat } from '@datashaper/schema'
 import type { Maybe } from '@datashaper/workflow'
 import { all, fromCSV, fromJSON, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
+import debug from 'debug'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 
@@ -14,6 +15,8 @@ import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
 import type { SchemaResource } from './types.js'
+
+const log = debug('datashaper')
 
 export class DataSource
 	extends Resource
@@ -52,7 +55,7 @@ export class DataSource
 				),
 			)
 			.catch(err => {
-				console.error('error reading blob', err)
+				log('error reading blob', err)
 				throw err
 			})
 	}
