@@ -3,10 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import debug from 'debug'
+
 import { BaseFile, FileWithPath } from '../common/index.js'
 import { FileMimeType } from '../index.js'
 import type { Json } from '../types.js'
 import { FileType } from '../types.js'
+
+const log = debug('datashaper')
 
 interface FileOptions {
 	name?: string
@@ -111,8 +115,8 @@ export const createBaseFile = (
 
 export function createReader(): FileReader {
 	const reader = new FileReader()
-	reader.onabort = () => console.log('file reading was aborted')
-	reader.onerror = () => console.log('file reading has failed')
+	reader.onabort = () => log('file reading was aborted')
+	reader.onerror = () => log('file reading has failed')
 	return reader
 }
 
@@ -183,9 +187,7 @@ export function renameDuplicatedFileName(
 	map.set(cleanName, next)
 	const ext = extension(cleanName)
 	const basename = cleanName.replace(`.${ext}`, '')
-	return next > 1
-		? `${basename} (${next}).${ext}`
-		: cleanName
+	return next > 1 ? `${basename} (${next}).${ext}` : cleanName
 }
 
 function hasDuplicatedNames(names: string[]): boolean {
