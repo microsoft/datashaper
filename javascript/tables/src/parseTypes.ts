@@ -21,9 +21,9 @@ import { formatNumberStr, getDate } from './util.js'
 
 /**
  * Factory function to create a value parser based on defined data type and type hints
- * @param type
- * @param hints
- * @returns
+ * @param type - the datatype to interperet as
+ * @param hints - type hinting information
+ * @returns A parsed value
  */
 export function parseAs(type?: DataType, hints?: TypeHints): Value {
 	switch (type) {

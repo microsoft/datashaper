@@ -6,9 +6,9 @@ import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 
 /**
  * Safely applies slicing args to a table
- * @param table
- * @param offset
- * @param limit
+ * @param table - the input table
+ * @param offset - the row offset
+ * @param limit - the row limit
  * @returns
  */
 export function sliceTable(
