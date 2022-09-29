@@ -25,15 +25,15 @@ def unhot(
         partial(__strategy_mapping[merge_strategy]), axis=1
     )
 
-    filteredList: list[str] = []
+    filtered_list: list[str] = []
 
     for col in output.columns:
         try:
             columns.index(col)
         except ValueError:
-            filteredList.append(col)
+            filtered_list.append(col)
 
     if not preserveSource:
-        output = output[filteredList]
+        output = output[filtered_list]
 
     return TableContainer(table=output)
