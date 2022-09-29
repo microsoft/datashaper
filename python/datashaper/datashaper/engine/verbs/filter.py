@@ -57,8 +57,7 @@ def filter(input: VerbInput, column: str, criteria: List, logical: str = "or"):
         input_table, FilterArgs(column, filter_criteria, logical_operator)
     )
 
-    output = input_table[
-        input_table.index.isin(filter_index[filter_index is True].index)
-    ].reset_index(drop=True)
+    idx = filter_index[filter_index == True].index  # noqa: E712
+    output = input_table[input_table.index.isin(idx)].reset_index(drop=True)
 
     return TableContainer(table=output)
