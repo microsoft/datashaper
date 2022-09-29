@@ -532,6 +532,10 @@ export const TableCommands: React.FC<TableCommandsProps>;
 // @public (undocumented)
 export interface TableCommandsProps {
     // (undocumented)
+    background?: string;
+    // (undocumented)
+    color?: string;
+    // (undocumented)
     inputTable: TableContainer | undefined;
     // (undocumented)
     onAddStep?: (step: Step, output: string | undefined, index: number | undefined) => void;
