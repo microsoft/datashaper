@@ -5,5 +5,5 @@
 import styled from '@essex/styled-components'
 
 export const Text = styled.div`
-	color: ${({ theme }) => theme.application?.().midContrast().hex()};
+	color: ${({ theme }) => theme.palette.neutralTertiary};
 `

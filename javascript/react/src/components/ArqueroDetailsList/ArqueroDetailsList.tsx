@@ -219,8 +219,7 @@ const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
 	border: ${({ theme, showColumnBorders }) =>
 		showColumnBorders ? `1px solid ${theme.palette.neutralLighter}` : 'none'};
 	span.ms-DetailsHeader-cellTitle {
-		background-color: ${({ theme }) =>
-			theme.application?.().background().hex()};
+		background-color: ${({ theme }) => theme.palette.white};
 	}
 
 	.ms-List-cell {
