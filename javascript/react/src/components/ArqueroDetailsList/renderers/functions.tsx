@@ -73,8 +73,8 @@ export const createRenderColumnHeader = (
 		}
 		return (
 			<>
-				{renderers.map((r, i) =>
-					r(
+				{renderers.map((renderer, i) =>
+					renderer(
 						{
 							key: `renderer-${props.column.key}${i}`,
 							...props,

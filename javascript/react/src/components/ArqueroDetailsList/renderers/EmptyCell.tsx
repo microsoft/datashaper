@@ -13,15 +13,16 @@ import type { FormattedCellProps } from './types.js'
  */
 export const EmptyCell: React.FC<FormattedCellProps> = memo(function EmptyCell({
 	textAlign,
+	virtual = false,
 }) {
 	const theme = useTheme()
 	const style = useMemo(
 		() => ({
 			width: '100%',
 			textAlign,
-			color: theme.palette.neutralTertiaryAlt,
+			color: virtual ? 'transparent' : theme.palette.neutralTertiaryAlt,
 		}),
-		[theme, textAlign],
+		[theme, textAlign, virtual],
 	)
 	return <div style={style}>&mdash;</div>
 })

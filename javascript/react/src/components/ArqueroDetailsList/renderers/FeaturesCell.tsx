@@ -6,9 +6,15 @@ import { DataType } from '@datashaper/schema'
 import { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
-import { categories, getValue, isEmpty } from '../ArqueroDetailsList.utils.js'
+import {
+	categories,
+	getValue,
+	isBlank,
+	isEmpty,
+} from '../ArqueroDetailsList.utils.js'
 import { useNumberMagnitude } from '../hooks/useNumberMagnitude.js'
 import { ArrayDropdownCell } from './ArrayDropdownCell.js'
+import { BlankCell } from './BlankCell.js'
 import { CellContainer } from './CellContainer.js'
 import { EmptyCell } from './EmptyCell.js'
 import {
@@ -33,13 +39,20 @@ export const FeaturesCell: React.FC<FeatureCellProps> = memo(
 		const value = getValue(item, column)
 		const magnitude = useNumberMagnitude(value, field, type)
 		const histo = categories(value)
-
 		return (
 			<CellContainer onClick={onColumnClick} column={column}>
 				<Switch>
+					<Case condition={isBlank(value)}>
+						<BlankCell />
+					</Case>
 					<Case condition={isEmpty(value)}>
 						<EmptyCell
-							textAlign={type === DataType.Number ? 'right' : 'left'}
+							textAlign={
+								type === DataType.Number || type === DataType.Boolean
+									? 'right'
+									: 'left'
+							}
+							virtual={column?.data.virtual}
 						/>
 					</Case>
 					<Case condition={type === DataType.String}>

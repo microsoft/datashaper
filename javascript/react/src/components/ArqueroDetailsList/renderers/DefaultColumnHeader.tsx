@@ -38,7 +38,9 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 
 		const textStyle = useMemo(
 			() => ({
-				color: column.data?.selected
+				color: column?.data.virtual
+					? 'transparent'
+					: column.data?.selected
 					? theme.palette.themePrimary
 					: theme.palette.neutralPrimary,
 				width: '100%',

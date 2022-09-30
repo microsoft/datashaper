@@ -7,8 +7,9 @@ import { determineType } from '@datashaper/tables'
 import { memo, useCallback, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
-import { getValue, isEmpty } from '../ArqueroDetailsList.utils.js'
+import { getValue, isBlank, isEmpty } from '../ArqueroDetailsList.utils.js'
 import { ArrayCell } from './ArrayCell.js'
+import { BlankCell } from './BlankCell.js'
 import {
 	BooleanTextCell,
 	DateCell,
@@ -56,8 +57,18 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	return (
 		<div onClick={handleColumnClick} style={cellStyle}>
 			<Switch>
+				<Case condition={isBlank(value)}>
+					<BlankCell />
+				</Case>
 				<Case condition={isEmpty(value)}>
-					<EmptyCell textAlign={type === DataType.Number ? 'right' : 'left'} />
+					<EmptyCell
+						textAlign={
+							type === DataType.Number || type === DataType.Boolean
+								? 'right'
+								: 'left'
+						}
+						virtual={column?.data.virtual}
+					/>
 				</Case>
 				<Case condition={type === DataType.Boolean}>
 					<BooleanTextCell {...props} />

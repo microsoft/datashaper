@@ -5,6 +5,10 @@
 import type { IColumn } from '@fluentui/react'
 import { useMemo } from 'react'
 
+import {
+	HISTOGRAM_HEADER_COMPACT_HEIGHT,
+	HISTOGRAM_HEADER_HEIGHT,
+} from '../ArqueroDetailsList.constants.js'
 import type { Dimensions } from '../renderers/types.js'
 
 export function useCellDimensions(
@@ -15,11 +19,10 @@ export function useCellDimensions(
 		() => ({
 			width: column?.currentWidth || 0,
 			height:
-				column?.data?.compact && considerCompactMode ? COMPACT_HEIGHT : HEIGHT,
+				column?.data?.compact && considerCompactMode
+					? HISTOGRAM_HEADER_COMPACT_HEIGHT
+					: HISTOGRAM_HEADER_HEIGHT,
 		}),
 		[column, considerCompactMode],
 	)
 }
-
-const COMPACT_HEIGHT = 15
-const HEIGHT = 20

@@ -19,35 +19,22 @@ export const StripedRow: React.FC<RichRowProps> = memo(function StripedRow({
 	const theme = useTheme()
 	const { itemIndex, compact } = props
 	const customStyles = useMemo(() => {
-		if (striped && itemIndex % 2 === 0) {
-			return {
-				root: {
-					width: '100%',
-					background: theme.palette.neutralLighterAlt,
-				},
-				cell: {
-					borderRight: columnBorders
-						? `1px solid ${theme.palette.neutralLighter}`
-						: `1px solid transparent`,
-					padding: 'unset',
-				},
-				...styles,
-			}
-		}
 		return {
 			root: {
 				width: '100%',
-				borderBottom: `1px solid ${theme.palette.neutralLighter}`,
+				background:
+					striped && itemIndex % 2 === 0
+						? theme.palette.neutralLighterAlt
+						: 'none',
 			},
 			cell: {
-				padding: 'unset',
 				borderRight: columnBorders
 					? `1px solid ${theme.palette.neutralLighter}`
 					: `1px solid transparent`,
-				borderTop: 'none',
 				borderBottom: compact
 					? `1px solid ${theme.palette.neutralLighter}`
 					: 'none',
+				padding: 'unset',
 			},
 			...styles,
 		}
