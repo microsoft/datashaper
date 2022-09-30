@@ -71,7 +71,9 @@ function useVirtualRows(
 				acc[cur] = ' '
 				return acc
 			}, {} as any)
-			return new Array(count).fill(template)
+			if (count > 0) {
+				return new Array(count).fill(template)
+			}
 		}
 		return []
 	}, [table, columns, fill, features, options, size])
@@ -107,12 +109,14 @@ function useVirtualColumns(
 					virtual: true,
 				},
 			}
-			const cols = new Array(count).fill(template).map((a, i) => ({
-				key: `---virtual-${i}---`,
-				name: `---virtual-${i}---`,
-				...a,
-			})) as IColumn[]
-			return cols
+			if (count > 0) {
+				const cols = new Array(count).fill(template).map((a, i) => ({
+					key: `---virtual-${i}---`,
+					name: `---virtual-${i}---`,
+					...a,
+				})) as IColumn[]
+				return cols
+			}
 		}
 		return []
 	}, [table, columns, fill, size])
