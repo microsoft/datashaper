@@ -7,6 +7,7 @@ import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
 import { BasicStory } from './Basic.story.js'
 import { ColumnsStory } from './Columns/Columns.story.js'
 import { FeaturesStory } from './Features.story.js'
+import { FillStory } from './Fill.story.js'
 import { PerformanceStory } from './Performance/Performance.story.js'
 import { RowGroupingStory } from './RowGrouping/RowGrouping.story.js'
 import { SelectionStory } from './Selection.story.js'
@@ -20,6 +21,7 @@ export default meta
 
 export const Basic = BasicStory
 export const Features = FeaturesStory
+export const Fill = FillStory
 export const Columns = ColumnsStory
 export const Selection = SelectionStory
 export const RowGrouping = RowGroupingStory

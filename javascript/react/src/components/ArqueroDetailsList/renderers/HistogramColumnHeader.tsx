@@ -11,8 +11,6 @@ import { memo, useCallback, useMemo, useState } from 'react'
 import { useCellDimensions } from '../hooks/index.js'
 import type { RichHeaderProps } from './types.js'
 
-const PADDING_HEIGHT = 8
-
 /**
  * Renders a histogram for column values in the header.
  * For numbers it will use the bin partitioning.
@@ -50,7 +48,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 
 		const styles = useMemo(() => {
 			return {
-				height: dimensions.height + PADDING_HEIGHT,
+				height: dimensions.height,
 				cursor: onClick ? 'pointer' : 'inherit',
 			}
 		}, [onClick, dimensions])

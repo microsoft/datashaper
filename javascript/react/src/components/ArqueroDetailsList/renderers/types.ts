@@ -49,6 +49,7 @@ export interface FormattedCellProps extends ColumnCellProps {
 	 */
 	numberFormat?: string
 	color?: string
+	virtual?: boolean
 }
 
 export interface MagnitudeCellProps extends FormattedCellProps {

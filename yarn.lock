@@ -3990,6 +3990,7 @@ __metadata:
     "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.26
     add: ^2.0.6
+    ahooks: ^3.7.1
     arquero: ^5.1.0
     babel-loader: ^8.2.5
     chroma-js: ^2.4.2

@@ -28,6 +28,7 @@ FeaturesStory.args = {
 	showColumnBorders: true,
 	selectedColumn: 'Symbol',
 	isHeaderFixed: true,
+	compact: true,
 	features: {
 		histogramColumnHeaders: true,
 		statsColumnHeaders: true,

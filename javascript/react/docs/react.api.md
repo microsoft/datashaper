@@ -51,6 +51,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     defaultSortDirection?: SortDirection;
     // (undocumented)
     features?: DetailsListFeatures;
+    fill?: boolean;
     isHeaderFixed?: boolean;
     // (undocumented)
     limit?: number;
@@ -650,7 +651,7 @@ export function useColumnNamesList(table: ColumnTable, columns?: IColumn[]): str
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, computedMetadata?: TableMetadata, columns?: IColumn[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions): IColumn[];
+export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
