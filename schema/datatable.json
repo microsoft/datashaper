@@ -3,7 +3,7 @@
 	"definitions": {
 		"DataFormat": {
 			"description": "Base format the data is stored within.\nThis will expand to include additional formats such as Arrow and Parquet over time.\nTODO: we've seen a number of examples in the wild using JSON Lines https://jsonlines.org/",
-			"enum": ["csv", "json"],
+			"enum": ["arrow", "csv", "json"],
 			"type": "string"
 		},
 		"DataNature": {
