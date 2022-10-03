@@ -30,26 +30,24 @@ export class DataPackage
 	private _outputSubscription?: Subscription
 
 	public constructor(
-		id: string,
 		public readonly source: DataSource,
 		public readonly workflow = new Workflow(),
 		public readonly codebook = new Codebook(),
 	) {
 		super()
-		this.id = id
 
 		this.source.output.subscribe(table => {
-			const tableContainer: TableContainer = { id, table }
 			if (this.workflow.length > 0) {
 				this._setGraphInput()
 			} else {
-				this._output.next(tableContainer)
+				this._output.next({ id: this.id, table })
 			}
 		})
 
 		this.workflow.onChange(() => {
 			if (this._outputSubscription != null)
 				this._outputSubscription.unsubscribe()
+
 			if (this.workflow.length > 0) {
 				this._outputSubscription = this.workflow
 					.outputObservable()
