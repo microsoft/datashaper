@@ -4,7 +4,7 @@
  */
 import type { ParserOptions } from '@datashaper/schema'
 import { DataFormat } from '@datashaper/schema'
-import { fromJSON } from 'arquero'
+import { fromArrow, fromJSON } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { guessDelimiter } from './guessDelimiter.js'
@@ -28,12 +28,15 @@ export async function readTable(
 	format: DataFormat,
 	options?: ParserOptions,
 ): Promise<ColumnTable> {
-	if (format === DataFormat.JSON) {
-		return fromJSON(await input.text())
-	} else if (format === DataFormat.CSV) {
-		return readCsvTable(await input.text(), options)
-	} else {
-		throw new Error(`unknown data format: ${format}`)
+	switch (format) {
+		case DataFormat.JSON:
+			return fromJSON(await input.text())
+		case DataFormat.ARROW:
+			return fromArrow(await input.arrayBuffer())
+		case DataFormat.CSV:
+			return readCsvTable(await input.text(), options)
+		default:
+			throw new Error(`unknown data format: ${format}`)
 	}
 }
 
