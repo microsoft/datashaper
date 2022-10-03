@@ -3,19 +3,25 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
-import type { DataPackageSchema } from '@datashaper/schema'
+import type {
+	CodebookSchema,
+	DataPackageSchema,
+	DataTableSchema,
+	ResourceSchema,
+	WorkflowSchema,
+} from '@datashaper/schema'
 import { createDataPackageSchemaObject } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { introspect } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
-import { Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 import { map } from 'rxjs/operators'
 
+import { Workflow } from './Workflow.js'
 import { Codebook } from './Codebook.js'
-import type { DataSource } from './DataSource.js'
+import { DataSource } from './DataSource.js'
 import { Named } from './Named.js'
 import type { SchemaResource } from './types.js'
 
@@ -26,15 +32,17 @@ export class DataPackage
 	private readonly _output = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
+	public readonly source: DataSource = new DataSource()
+	public readonly workflow: Workflow = new Workflow()
+	public readonly codebook: Codebook = new Codebook()
 
 	private _codebook?: any
 	private _outputSubscription?: Subscription
 	private _table: Maybe<ColumnTable>
 
 	public constructor(
-		public readonly source: DataSource,
-		public readonly workflow = new Workflow(),
-		public readonly codebook = new Codebook(),
+		public dataPackage?: DataPackageSchema,
+		files?: Map<string, Blob>,
 	) {
 		super()
 
@@ -68,6 +76,50 @@ export class DataPackage
 		// Add the last table from the source to the graph
 		this._setGraphInput()
 		this._onChange.next()
+	}
+
+	private async load(dp: DataPackageSchema, files: Map<string, Blob>) {
+		const toResourceSchema = async (
+			r: string | ResourceSchema,
+		): Promise<ResourceSchema | undefined> => {
+			if (typeof r === 'string') {
+				const resourceText = await files?.get(r)?.text()
+				if (resourceText == null) return undefined
+				try {
+					return JSON.parse(resourceText)
+				} catch (e) {
+					console.error('error parsing resource ' + r, e)
+					return undefined
+				}
+			}
+			return r
+		}
+		const isWorkflow = (r: ResourceSchema): boolean =>
+			r.$schema.indexOf('/workflow/') > -1
+		const isDataTable = (r: ResourceSchema): boolean =>
+			r.$schema.indexOf('/datatable/') > -1
+		const isCodebook = (r: ResourceSchema): boolean =>
+			r.$schema.indexOf('/codebook/') > -1
+
+		for (let res of dp?.resources) {
+			const resource = await toResourceSchema(res)
+			if (!resource) continue
+			if (isWorkflow(resource)) {
+				this.workflow.loadSchema(resource as WorkflowSchema)
+			} else if (isCodebook(resource)) {
+				this.codebook.loadSchema(resource as CodebookSchema)
+			} else if (isDataTable(resource)) {
+				this.source.loadSchema(resource as DataTableSchema)
+				const { data, sources } = resource as DataTableSchema
+
+				// if data is defined, it's an embedded table
+				if (typeof data === 'string') {
+					this.source.data = new Blob([data], { type: 'text/csv' })
+				} else if (sources?.length > 0) {
+					// parse source as text
+				}
+			}
+		}
 	}
 
 	private emit(): void {
@@ -123,8 +175,9 @@ export class DataPackage
 	}
 
 	public override loadSchema(
-		_schema: DataPackageSchema | null | undefined,
+		schema: DataPackageSchema | null | undefined,
 	): void {
+		super.loadSchema(schema)
 		throw new Error('not implemented')
 	}
 }
