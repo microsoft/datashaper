@@ -138,7 +138,11 @@ export class ParserOptions
 		}
 	}
 
-	public loadSchema(schema: ParserOptionsSchema | null | undefined): void {
+	public loadSchema(
+		schema: ParserOptionsSchema | null | undefined,
+		_resources?: Map<string, Blob>,
+		quiet?: boolean,
+	): Promise<void> {
 		this._delimiter = schema?.delimiter ?? DEFAULT_DELIMITER
 		this._lineTerminator = schema?.lineTerminator ?? DEFAULT_LINE_TERMINATOR
 		this._quoteChar = schema?.quoteChar ?? DEFAULT_QUOTE
@@ -148,6 +152,9 @@ export class ParserOptions
 		this._names = schema?.names
 		this._escapeChar = schema?.escapeChar
 		this._commentStart = schema?.comment
-		this._onChange.next()
+		if (!quiet) {
+			this._onChange.next()
+		}
+		return Promise.resolve()
 	}
 }

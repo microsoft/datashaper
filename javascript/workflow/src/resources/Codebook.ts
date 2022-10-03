@@ -35,9 +35,15 @@ export class Codebook
 		})
 	}
 
-	public override loadSchema(value: CodebookSchema | null | undefined): void {
-		super.loadSchema(value)
+	public override async loadSchema(
+		value: CodebookSchema | null | undefined,
+		resources?: Map<string, Blob>,
+		quiet?: boolean,
+	): Promise<void> {
+		await super.loadSchema(value, resources, true)
 		this.fields = value?.fields ?? []
-		this._onChange.next()
+		if (!quiet) {
+			this._onChange.next()
+		}
 	}
 }

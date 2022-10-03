@@ -64,16 +64,17 @@ export class Resource
 		}
 	}
 
-	public override loadSchema(
+	public override async loadSchema(
 		value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined,
-		preventOnChange = false,
-	): void {
-		super.loadSchema(value, true)
+		resources: Map<string, Blob> | undefined,
+		quiet = false,
+	): Promise<void> {
+		await super.loadSchema(value, resources, true)
 		this._path = value?.path
 		this._sources = value?.sources
 		this._homepage = value?.homepage
 		this._license = value?.license
-		if (!preventOnChange) {
+		if (!quiet) {
 			this._onChange.next()
 		}
 	}

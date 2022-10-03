@@ -56,7 +56,7 @@ export class Workflow
 
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
-		this.loadSchema(input)
+		this.loadSchema(input, undefined, true)
 	}
 
 	private rebindDefaultOutput() {
@@ -498,11 +498,18 @@ export class Workflow
 		})
 	}
 
-	public override loadSchema(schema: WorkflowSchema | null | undefined): void {
-		super.loadSchema(schema)
+	public override async loadSchema(
+		schema: WorkflowSchema | null | undefined,
+		resources?: Map<string, Blob>,
+		quiet?: boolean,
+	): Promise<void> {
+		await super.loadSchema(schema, resources, true)
 		this.readWorkflowInput(schema)
 		this.syncWorkflowStateIntoGraph()
 		this.rebindDefaultOutput()
+		if (!quiet) {
+			this._onChange.next()
+		}
 	}
 
 	private readWorkflowInput(schema?: WorkflowSchema | null | undefined) {

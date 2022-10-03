@@ -104,12 +104,18 @@ export class DataSource
 		})
 	}
 
-	public override loadSchema(schema: DataTableSchema | null | undefined): void {
-		super.loadSchema(schema)
+	public override async loadSchema(
+		schema: DataTableSchema | null | undefined,
+		resources?: Map<string, Blob>,
+		quiet?: boolean,
+	): Promise<void> {
+		await super.loadSchema(schema, resources, true)
 		this.format = schema?.format ?? DataFormat.CSV
 		this.parser.loadSchema(schema?.parser)
 		this.shape.loadSchema(schema?.shape)
 		this._refreshData()
-		this._onChange.next()
+		if (!quiet) {
+			this._onChange.next()
+		}
 	}
 }
