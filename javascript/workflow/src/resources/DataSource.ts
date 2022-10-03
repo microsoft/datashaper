@@ -27,11 +27,10 @@ export class DataSource
 	public readonly parser: ParserOptions = new ParserOptions()
 	public readonly shape: DataShape = new DataShape()
 	private _format: DataFormat = DataFormat.CSV
-	private _source: Blob
+	private _source: Blob | undefined
 
-	public constructor(source: Blob, datatable?: DataTableSchema) {
+	public constructor(datatable?: DataTableSchema) {
 		super()
-		this._source = source
 		const handleSubItemChange = () => {
 			this._refreshData()
 			this._onChange.next()
@@ -43,29 +42,34 @@ export class DataSource
 	}
 
 	private _refreshData(): void {
-		readTable(this._source, this._format, this.parser)
-			.then(table =>
-				this._output.next(
-					// derive row numbers from the csvs
-					table.derive(
-						{
-							index: op.row_number(),
-						},
-						{ before: all() },
+		if (!this._source) {
+			this._output.next(undefined)
+			return
+		} else {
+			readTable(this._source, this._format, this.parser)
+				.then(table =>
+					this._output.next(
+						// derive row numbers from the csvs
+						table.derive(
+							{
+								index: op.row_number(),
+							},
+							{ before: all() },
+						),
 					),
-				),
-			)
-			.catch(err => {
-				log('error reading blob', err)
-				throw err
-			})
+				)
+				.catch(err => {
+					log('error reading blob', err)
+					throw err
+				})
+		}
 	}
 
-	public get data(): Blob {
+	public get data(): Blob | undefined {
 		return this._source
 	}
 
-	public set data(value: Blob) {
+	public set data(value: Blob | undefined) {
 		this._source = value
 		this._refreshData()
 		this._onChange.next()
