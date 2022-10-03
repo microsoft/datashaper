@@ -4,18 +4,19 @@
  */
 
 import type { ParserOptions } from '@datashaper/schema'
-import {
-	arqueroSupportedOptions,
-	arqueroPropMap,
-	papaParsePropsMap,
-	lineTerminators,
-} from './readTable.defaults.js'
-import { fromCSV, from } from 'arquero'
-import { default as papa, type ParseConfig } from 'papaparse'
-import { uniq } from 'lodash-es'
-import { ParserType } from './readTable.types.js'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { from,fromCSV } from 'arquero'
 import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv'
+import type ColumnTable from 'arquero/dist/types/table/column-table'
+import { uniq } from 'lodash-es'
+import { type ParseConfig,default as papa } from 'papaparse'
+
+import {
+	ARQUERO_PROPS_MAP,
+	ARQUERO_SUPPORTED_OPTS,
+	LINE_TERMINATORS,
+	PAPAPARSE_PROPS_MAP,
+} from './readTable.defaults.js'
+import { ParserType } from './readTable.types.js'
 
 export function determineParserType(options?: ParserOptions) {
 	if (!options || hasArqueroOptions(options)) {
@@ -38,7 +39,7 @@ export function getParser(options?: ParserOptions) {
 
 function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
 	const mappedOptions = mapProps(ParserType.Arquero, options) as CSVParseOptions
-	let table = fromCSV(text, mappedOptions)
+	const table = fromCSV(text, mappedOptions)
 	return options.readRows ? table.slice(0, options.readRows) : table
 }
 
@@ -58,7 +59,7 @@ function papaParser(text: string, options: ParserOptions = {}): ColumnTable {
 
 export function hasArqueroOptions(options: ParserOptions): boolean {
 	const props = Object.keys(options)
-	return props.every(p => arqueroSupportedOptions.has(p))
+	return props.every(p => ARQUERO_SUPPORTED_OPTS.has(p))
 }
 
 export function mapProps(
@@ -101,12 +102,12 @@ function mapOptions(
 }
 
 export function mapToArqueroOptions(options?: ParserOptions): CSVParseOptions {
-	const mapper = mapOptions(arqueroPropMap)
+	const mapper = mapOptions(ARQUERO_PROPS_MAP)
 	return mapper(options)
 }
 
 export function mapToPapaParseOptions(options?: ParserOptions): ParseConfig {
-	const mapper = mapOptions(papaParsePropsMap)
+	const mapper = mapOptions(PAPAPARSE_PROPS_MAP)
 	return mapper(options)
 }
 
@@ -115,7 +116,7 @@ export function hasOneChar(value: string): boolean {
 }
 
 export function lineTerminatorIsValid(value: string): boolean {
-	return lineTerminators.has(value)
+	return LINE_TERMINATORS.has(value)
 }
 
 export function allUnique(values: string[]): boolean {

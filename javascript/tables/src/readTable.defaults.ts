@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export const arqueroSupportedOptions = new Set([
+export const ARQUERO_SUPPORTED_OPTS = new Set([
 	'delimiter',
 	'names',
 	'header',
@@ -13,11 +13,11 @@ export const arqueroSupportedOptions = new Set([
 	'converters',
 ])
 
-export const arqueroPropMap = {
+export const ARQUERO_PROPS_MAP = {
 	skipRows: 'skip',
 }
 
-export const papaParseSupportedOptions = new Set([
+export const PAPAPARSE_SUPPORTED_OPTS = new Set([
 	'delimiter',
 	'header',
 	'comment',
@@ -29,11 +29,11 @@ export const papaParseSupportedOptions = new Set([
 	'readRows',
 ])
 
-export const papaParsePropsMap = {
+export const PAPAPARSE_PROPS_MAP = {
 	comment: 'comments',
 	lineTerminator: 'newline',
 	skipBlankLines: 'skipEmptyLines',
 	readRows: 'preview',
 }
 
-export const lineTerminators = new Set(['\r', '\r\n', '\n'])
+export const LINE_TERMINATORS = new Set(['\r', '\r\n', '\n'])
