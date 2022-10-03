@@ -7,56 +7,47 @@ import type { Step } from '@datashaper/workflow'
 import {
 	CollapsiblePanel,
 	CollapsiblePanelContainer,
+	DialogConfirm,
 } from '@essex/themed-components'
-import { DefaultButton } from '@fluentui/react'
-import { capitalize } from 'lodash-es'
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useTheme } from '@fluentui/react'
+import debug from 'debug'
+import { memo, useEffect, useRef } from 'react'
 
-import { useCollapsiblePanelStyles } from './StepHistoryList.hooks.js'
+import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
+import { useDeleteConfirm } from './StepHistoryList.hooks.js'
 import {
-	addButtonStyles,
-	ButtonContainer,
 	Columns,
 	Container,
-	icons,
 	ListWrapper,
 	PanelHeader,
+	StepIndex,
 	tableTransformStyle,
 	Verb,
 } from './StepHistoryList.styles.js'
 import type { StepHistoryListProps } from './StepHistoryList.types.js'
+import { getCollapsiblePanelStyles } from './StepHistoryList.utils.js'
 import { TableTransform } from './TableTransform.js'
+const log = debug('datashaper')
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 	function StepsList({
-		steps,
-		onDeleteClicked,
+		onDelete,
 		onDuplicateClicked,
 		onSelect,
-		onStartNewStep,
-		buttonId,
 		workflow,
-		onCreate,
-		nextInputTable,
+		onSave,
+		order,
 	}) {
 		const ref = useRef<HTMLDivElement>(null)
-		const collapsiblePanelStyles = useCollapsiblePanelStyles()
-		const [isExpanded, setIsExpanded] = useState<number[]>([])
-		const onHeaderClick = useCallback(
-			(state: boolean, index: number) => {
-				setIsExpanded(prev =>
-					state ? [...prev, index] : prev.filter(i => i !== index),
-				)
-			},
-			[setIsExpanded],
-		)
-
-		const onTransformRequested = useCallback(
-			(step: Step, output: string | undefined, index?: number) => {
-				onCreate?.(step, output, index)
-			},
-			[onCreate],
-		)
+		const theme = useTheme()
+		const steps = useWorkflowSteps(workflow, order)
+		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
+		const {
+			onClick: onDeleteClicked,
+			onConfirm: onConfirmDelete,
+			toggle: toggleDeleteModal,
+			isOpen: isDeleteModalOpen,
+		} = useDeleteConfirm(onDelete)
 
 		useEffect(() => {
 			const f = () => {
@@ -68,28 +59,36 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		return (
 			<Container>
 				<CollapsiblePanelContainer>
-					{steps.map((step, index) => {
+					<DialogConfirm
+						toggle={toggleDeleteModal}
+						title="Are you sure you want to delete this step?"
+						subText={
+							'You will also lose any table transformations made after this step.'
+						}
+						show={isDeleteModalOpen}
+						onConfirm={onConfirmDelete}
+					/>
+					{steps.map(step => {
+						const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
 						return (
 							<CollapsiblePanel
-								key={index}
-								onHeaderClick={s => onHeaderClick(s, index)}
-								styles={collapsiblePanelStyles(!!isExpanded?.includes(index))}
-								onRenderHeader={() => onRenderHeader(step)}
+								key={stepIndex}
+								styles={collapsiblePanelStyles}
+								onRenderHeader={() => onRenderHeader(step, stepIndex)}
 							>
 								<ListWrapper>
 									<TableTransform
-										key={index}
+										hideInput
+										hideOutput
+										key={stepIndex}
 										step={step}
-										index={index}
+										index={stepIndex}
 										workflow={workflow}
 										style={tableTransformStyle}
-										nextInputTable={nextInputTable}
 										onDelete={onDeleteClicked}
 										onPreview={onSelect}
 										onDuplicate={onDuplicateClicked}
-										onTransformRequested={(s, o) =>
-											onTransformRequested(s, o, index)
-										}
+										onTransformRequested={(s, o) => onSave?.(s, o, stepIndex)}
 										hideStepSelector
 									/>
 								</ListWrapper>
@@ -97,25 +96,12 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 						)
 					})}
 				</CollapsiblePanelContainer>
-
-				{onStartNewStep && (
-					<ButtonContainer ref={ref}>
-						<DefaultButton
-							styles={addButtonStyles}
-							iconProps={icons.add}
-							onClick={onStartNewStep}
-							id={buttonId}
-						>
-							Add step
-						</DefaultButton>
-					</ButtonContainer>
-				)}
 			</Container>
 		)
 	},
 )
 
-function onRenderHeader(step: Step): JSX.Element {
+function onRenderHeader(step: Step, index: number): JSX.Element {
 	const { args } = step
 	const columnList: any = (args as any).columns ||
 		(args as any).on || [(args as any).column]
@@ -126,17 +112,20 @@ function onRenderHeader(step: Step): JSX.Element {
 		} else if (typeof columnList === 'object') {
 			columns = Object.values(columnList)?.join(', ')
 		}
-	} catch {
-		console.error(
+	} catch (e) {
+		log(
 			'ColumnList type is not being currently supported',
 			typeof columnList,
+			e,
 		)
 	}
 
 	return (
 		<PanelHeader>
-			<Verb>{step.verb}</Verb>
-			<Columns>{capitalize(columns)}</Columns>
+			<Verb>
+				<StepIndex>#{index + 1}</StepIndex> {step.verb}
+			</Verb>
+			<Columns>{columns}</Columns>
 		</PanelHeader>
 	)
 }

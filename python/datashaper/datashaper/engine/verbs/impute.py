@@ -3,7 +3,7 @@
 # Licensed under the MIT license. See LICENSE file in the project.
 #
 
-from typing import List, Union
+from typing import Union
 
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.table_store import TableContainer

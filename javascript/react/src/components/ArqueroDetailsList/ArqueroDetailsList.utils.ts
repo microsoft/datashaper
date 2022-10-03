@@ -70,6 +70,15 @@ export function isEmpty(value: any): boolean {
 	return false
 }
 
+/**
+ * A blank cell is just whitespace
+ * @param value
+ * @returns
+ */
+export function isBlank(value: any): boolean {
+	return value === ' '
+}
+
 export function debounceFn(fn: () => void, delay = 500): () => void {
 	const timer = setTimeout(() => fn(), delay)
 	return () => clearTimeout(timer)

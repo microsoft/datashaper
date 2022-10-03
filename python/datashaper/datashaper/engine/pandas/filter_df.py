@@ -20,21 +20,30 @@ from datashaper.types import (
 
 
 _boolean_function_map = {
-    BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns") if columns != "" else df.any(axis="columns"),
-    BooleanLogicalOperator.AND: lambda df, columns: df[columns].all(axis="columns") if columns != "" else df.all(axis="columns"),
-    BooleanLogicalOperator.NOR: lambda df, columns: ~df[columns].any(axis="columns") if columns != "" else ~df.any(axis="columns"),
-    BooleanLogicalOperator.NAND: lambda df, columns: ~df[columns].all(axis="columns") if columns != "" else ~df.all(axis="columns"),
-    BooleanLogicalOperator.XNOR: lambda df, columns: df[columns].sum(axis="columns").apply(
-        lambda x: (x % 2) == 0 or x == 0 
-    ) if columns != "" else df.sum(axis="columns").apply(
-        lambda x: (x % 2) == 0 or x == 0 
-    ),
-    BooleanLogicalOperator.XOR: lambda df, columns: df[columns].sum(axis="columns").apply(
-        lambda x: (x % 2) != 0 and x != 0
-    ) if columns != "" else df.sum(axis="columns").apply(
-        lambda x: (x % 2) != 0 and x != 0
-    )
+    BooleanLogicalOperator.OR: lambda df, columns: df[columns].any(axis="columns")
+    if columns != ""
+    else df.any(axis="columns"),
+    BooleanLogicalOperator.AND: lambda df, columns: df[columns].all(axis="columns")
+    if columns != ""
+    else df.all(axis="columns"),
+    BooleanLogicalOperator.NOR: lambda df, columns: ~df[columns].any(axis="columns")
+    if columns != ""
+    else ~df.any(axis="columns"),
+    BooleanLogicalOperator.NAND: lambda df, columns: ~df[columns].all(axis="columns")
+    if columns != ""
+    else ~df.all(axis="columns"),
+    BooleanLogicalOperator.XNOR: lambda df, columns: df[columns]
+    .sum(axis="columns")
+    .apply(lambda x: (x % 2) == 0 or x == 0)
+    if columns != ""
+    else df.sum(axis="columns").apply(lambda x: (x % 2) == 0 or x == 0),
+    BooleanLogicalOperator.XOR: lambda df, columns: df[columns]
+    .sum(axis="columns")
+    .apply(lambda x: (x % 2) != 0 and x != 0)
+    if columns != ""
+    else df.sum(axis="columns").apply(lambda x: (x % 2) != 0 and x != 0),
 }
+
 
 def __check_unknown(row: Tuple, column_indexes: List[int]) -> bool:
     for index in column_indexes:
@@ -209,8 +218,7 @@ def filter_df(df: pd.DataFrame, args: FilterArgs) -> pd.Series:
             )
 
     filtered_df["dwc_filter_result"] = _boolean_function_map[args.logical](
-        filtered_df[filters],
-        ""
+        filtered_df[filters], ""
     )
 
     __correct_unknown_value(filtered_df, filters, "dwc_filter_result")

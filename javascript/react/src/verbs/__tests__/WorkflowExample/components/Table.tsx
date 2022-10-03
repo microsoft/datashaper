@@ -4,6 +4,7 @@
  */
 import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
 import type { IColumn, IDropdownOption } from '@fluentui/react'
+import { CommandBar } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 
 import { useColumns, useFarCommandBar } from './Table.hooks.js'
@@ -49,7 +50,7 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				name={name}
 				showRowCount={true}
 				showColumnCount={true}
-				farCommandBar={farCommandBar}
+				farCommandBar={<CommandBar {...farCommandBar} />}
 				onRenameTable={onRenameTable}
 			/>
 			<TableContainer>

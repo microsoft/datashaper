@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/verb-guidance",
-	"version": "0.1.17",
+	"version": "0.1.18",
 	"type": "module",
 	"main": "dist/index.js",
 	"author": "Nathan Evans <naevans@microsoft.com>",
@@ -32,7 +32,7 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"devDependencies": {
-		"@essex/scripts": "^22.0.7",
+		"@essex/scripts": "^22.0.8",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/express": "^4.17.14",
 		"@types/node": "^18.7.18",

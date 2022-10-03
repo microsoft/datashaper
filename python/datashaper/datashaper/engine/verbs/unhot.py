@@ -2,7 +2,7 @@ from functools import partial
 from typing import List
 
 from datashaper.engine.verbs.utils.merge_utils import __strategy_mapping
-from datashaper.engine.verbs.utils.unhot_utils import *
+from datashaper.engine.verbs.utils.unhot_utils import unhot_operation
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.table_store import TableContainer
 from datashaper.types import MergeStrategy
@@ -17,7 +17,7 @@ def unhot(
 ):
     merge_strategy = MergeStrategy(MergeStrategy.FirstOneWins)
 
-    input_table = unhotOperation(input, columns, prefix).get_input()
+    input_table = unhot_operation(input, columns, prefix).get_input()
 
     output = input_table.copy()
 
@@ -25,15 +25,15 @@ def unhot(
         partial(__strategy_mapping[merge_strategy]), axis=1
     )
 
-    filteredList: list[str] = []
+    filtered_list: list[str] = []
 
     for col in output.columns:
         try:
-            indexValue = columns.index(col)
+            columns.index(col)
         except ValueError:
-            filteredList.append(col)
+            filtered_list.append(col)
 
-    if preserveSource == False:
-        output = output[filteredList]
+    if not preserveSource:
+        output = output[filtered_list]
 
     return TableContainer(table=output)

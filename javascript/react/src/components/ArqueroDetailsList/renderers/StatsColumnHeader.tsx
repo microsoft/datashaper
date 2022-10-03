@@ -4,10 +4,11 @@
  */
 import type { FieldMetadata } from '@datashaper/schema'
 import { formatIfNumber } from '@datashaper/tables'
-import { useThematic } from '@thematic/react'
+import { useTheme } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useMemo } from 'react'
 
+import { STATS_HEADER_ITEM_HEIGHT } from '../ArqueroDetailsList.constants.js'
 import { StatsColumnType } from '../ArqueroDetailsList.types.js'
 import type { RichHeaderProps } from './types.js'
 
@@ -15,8 +16,6 @@ const pretty: Record<string, string> = {
 	distinct: 'unique',
 	invalid: 'empty',
 }
-
-const CELL_HEIGHT = 14
 
 const DEFAULT_STATS: StatsColumnType[] = [
 	StatsColumnType.Type,
@@ -38,11 +37,12 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 		column,
 		onClick,
 	}) {
-		const theme = useThematic()
+		const theme = useTheme()
 		const cells = useMemo(() => {
 			const st = (field.metadata || {}) as any
 			return stats.map(stat => {
-				const value: any = st[stat]
+				// data type is on the field, not the meta...
+				const value: any = stat === StatsColumnType.Type ? field.type : st[stat]
 				return (
 					<StatCell name={stat} value={value} key={`${column.key}-${stat}`} />
 				)
@@ -53,10 +53,10 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 
 		const styles = useMemo<React.CSSProperties>(() => {
 			return {
-				height: stats.length * CELL_HEIGHT,
+				height: stats.length * STATS_HEADER_ITEM_HEIGHT,
 				fontWeight: 'normal',
 				fontSize: 10,
-				color: theme.application().midHighContrast().hex(),
+				color: theme.palette.neutralSecondary,
 				cursor: onClick ? 'pointer' : 'inherit',
 			}
 		}, [onClick, theme, stats])
@@ -80,7 +80,7 @@ const StatCell: React.FC<{ name: string; value?: number }> = ({
 	return value !== undefined ? (
 		<div
 			style={{
-				height: CELL_HEIGHT,
+				height: STATS_HEADER_ITEM_HEIGHT,
 				display: 'flex',
 				justifyContent: 'space-between',
 				paddingLeft: 4,

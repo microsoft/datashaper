@@ -16,3 +16,5 @@ yarn.lock
 .git*
 .*ignore
 .*rc
+javascript/schema/create_versions_file.js
+javascript/schema/versions.js

@@ -56,10 +56,11 @@ export interface ColumnOptions {
  */
 export function useColumns(
 	table: ColumnTable,
-	computedMetadata?: TableMetadata,
+	metadata?: TableMetadata,
 	columns?: IColumn[],
 	handleColumnHeaderClick?: ColumnClickFunction,
 	options: ColumnOptions = {},
+	virtualColumns?: IColumn[],
 ): IColumn[] {
 	const {
 		features = {},
@@ -81,7 +82,7 @@ export function useColumns(
 		onCellDropdownSelect,
 	)
 
-	const colorScale = useIncrementingColumnColorScale(computedMetadata)
+	const colorScale = useIncrementingColumnColorScale(metadata)
 
 	const styles = useColumnStyles(isClickable, showColumnBorders)
 
@@ -90,15 +91,15 @@ export function useColumns(
 	const columnMinWidth = useCountMinWidth(features.commandBar)
 
 	return useMemo(() => {
-		const columnMap = reduce(columns)
-		return names.map(name => {
+		const columnMap = reduce([...(columns || []), ...(virtualColumns || [])])
+		const virtualNames = virtualColumns?.map(c => c.key) || []
+		return [...names, ...virtualNames].map(name => {
 			const column = columnMap[name] || {
 				key: name,
 				name,
 				minWidth: columnMinWidth,
 				fieldName: name,
 			}
-
 			// HACK: if we let an iconName through, the rendering messes with our layout.
 			// In order to control this we'll pass the original props to the generators,
 			// but omit from what gets sent to the top-level table.
@@ -106,7 +107,7 @@ export function useColumns(
 			// without completely recreating the details header render
 			const { iconName, ...defaults } = column
 
-			const meta = computedMetadata?.columns[name]
+			const meta = metadata?.columns[name] || { name }
 			const color =
 				meta && meta.type === DataType.Number ? colorScale() : undefined
 			const onRender =
@@ -186,18 +187,19 @@ export function useColumns(
 		styles,
 		compact,
 		resizable,
-		computedMetadata,
+		metadata,
 		colorScale,
 		handleCellDropdownSelect,
 		isDefaultHeaderClickable,
 		handleColumnHeaderClick,
 		columnMinWidth,
+		virtualColumns,
 	])
 }
 
-function reduce(columns?: IColumn[]): Record<string, IColumn> {
-	return (columns || []).reduce((acc, cur) => {
-		acc[cur.name] = cur
+function reduce(columns: IColumn[]): Record<string, IColumn> {
+	return columns.reduce((acc, cur) => {
+		acc[cur.key] = cur
 		return acc
 	}, {} as Record<string, IColumn>)
 }

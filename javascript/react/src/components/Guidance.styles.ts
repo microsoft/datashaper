@@ -11,11 +11,11 @@ export const Container = styled.div`
 	h1 {
 		margin-top: 0;
 		text-transform: uppercase;
-		color: ${({ theme }) => theme.application().lowMidContrast().hex()};
+		color: ${({ theme }) => theme.palette.neutralTertiary};
 	}
 
 	h2 {
-		color: ${({ theme }) => theme.application().midContrast().hex()};
+		color: ${({ theme }) => theme.palette.neutralTertiary};
 
 		display: flex;
 		align-items: center;
@@ -38,8 +38,7 @@ export const Container = styled.div`
 
 		td,
 		th {
-			border: 1px solid
-				${({ theme }) => theme.application().lowContrast().hex()};
+			border: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 			padding: 5px;
 			text-align: center;
 		}

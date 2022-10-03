@@ -22,6 +22,10 @@ enum Tags {
 	 */
 	InputColumn,
 	/**
+	 * Input column list
+	 */
+	InputColumnList,
+	/**
 	 * A single output column is input
 	 */
 	OutputColumn,
@@ -45,9 +49,9 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	],
 	bin: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn, Tags.NumericOnly],
 	binarize: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	boolean: [Tags.InputTable, Tags.OutputColumn],
+	boolean: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
 	concat: [Tags.InputTable, Tags.RowModifying],
-	convert: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
+	convert: [Tags.InputTable, Tags.InputColumn],
 	dedupe: [Tags.InputTable, Tags.RowModifying],
 	derive: [Tags.InputTable, Tags.OutputColumn],
 	difference: [Tags.InputTable, Tags.RowModifying],
@@ -55,13 +59,13 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	fetch: [],
 	fill: [Tags.InputTable, Tags.OutputColumn],
 	filter: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
-	fold: [Tags.InputTable, Tags.RowModifying],
-	groupby: [Tags.InputTable],
-	impute: [Tags.InputTable, Tags.InputColumn],
+	fold: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
+	groupby: [Tags.InputTable, Tags.InputColumnList],
+	impute: [Tags.InputTable],
 	intersect: [Tags.InputTable, Tags.RowModifying],
 	join: [Tags.InputTable, Tags.RowModifying],
 	lookup: [Tags.InputTable, Tags.RowModifying],
-	merge: [Tags.InputTable, Tags.OutputColumn],
+	merge: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
 	pivot: [Tags.InputTable, Tags.RowModifying],
 	onehot: [Tags.InputTable, Tags.InputColumn],
 	orderby: [Tags.InputTable],
@@ -74,19 +78,20 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 		Tags.RowModifying,
 	],
 	sample: [Tags.InputTable, Tags.RowModifying],
-	select: [Tags.InputTable],
-	spread: [Tags.InputTable, Tags.InputColumn],
+	select: [Tags.InputTable, Tags.InputColumnList],
+	spread: [Tags.InputTable],
 	unfold: [Tags.InputTable, Tags.RowModifying],
 	ungroup: [Tags.InputTable],
-	unhot: [Tags.InputTable, Tags.OutputColumn],
+	unhot: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
 	union: [Tags.InputTable, Tags.RowModifying],
 	unorder: [Tags.InputTable],
-	unroll: [Tags.InputTable, Tags.RowModifying],
+	unroll: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
 	window: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 }
 
 const INPUT_TABLE_VERBS = filterByTag(Tags.InputTable)
 const INPUT_COLUMN_VERBS = filterByTag(Tags.InputColumn)
+const INPUT_COLUMN_LIST_VERBS = filterByTag(Tags.InputColumnList)
 const OUTPUT_COLUMN_VERBS = filterByTag(Tags.OutputColumn)
 const ROW_MODIFYING_VERBS = filterByTag(Tags.RowModifying)
 const NUMERIC_VERBS = filterByTag(Tags.NumericOnly)
@@ -113,6 +118,15 @@ export function isInputTableStep(step: Step): boolean {
  */
 export function isInputColumnStep(step: Step): boolean {
 	return isTagged(step, INPUT_COLUMN_VERBS)
+}
+
+/**
+ * Indicates whether the supplied step requires a multiple input column.
+ * @param step -
+ * @returns
+ */
+export function isInputColumnListStep(step: Step): boolean {
+	return isTagged(step, INPUT_COLUMN_LIST_VERBS)
 }
 
 /**

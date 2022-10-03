@@ -20,12 +20,12 @@ export interface DataShape {
 	/**
 	 * Defines the Row x Column layout of a raw list of values (e.g., a pandas Series).
      * For example,
-        {
+        \{
             data: [1,2,3,4,5,6],
-            shape: {
+            shape: \{
                 matrix: [3, 2]
-            }
-        }
+            \}
+        \}
         is interpreted as table
         1 2
         3 4

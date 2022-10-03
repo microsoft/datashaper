@@ -5,17 +5,28 @@
 import type { Step, Workflow } from '@datashaper/workflow'
 import { useEffect, useState } from 'react'
 
+import { DisplayOrder } from '../enums.js'
+
 /**
  * Gets the workflow processing steps
  * @param workflow - the workflow intsance
  * @returns
  */
-export function useWorkflowSteps(workflow: Workflow): Step[] {
-	const [steps, setSteps] = useState<Step[]>(workflow.steps)
+export function useWorkflowSteps(
+	workflow: Workflow,
+	order = DisplayOrder.LastOnTop,
+): Step[] {
+	const [steps, setSteps] = useState<Step[]>(orderSteps(workflow.steps, order))
 	// listen for workflow changes and update the steps
 	useEffect(() => {
-		setSteps(workflow.steps)
-		workflow.onChange(() => setSteps(workflow.steps))
-	}, [workflow, setSteps])
+		workflow.onChange(() => {
+			setSteps(orderSteps(workflow.steps, order))
+		})
+	}, [workflow, order, setSteps])
 	return steps
+}
+
+function orderSteps(_steps: Step[], order: DisplayOrder): Step[] {
+	const steps = [..._steps]
+	return order === DisplayOrder.FirstOnTop ? steps : steps.reverse()
 }

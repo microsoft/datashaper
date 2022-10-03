@@ -8,9 +8,9 @@ import {
 	defaultCalendarStrings,
 	DirectionalHint,
 	FocusTrapZone,
+	useTheme,
 } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { useThematic } from '@thematic/react'
 import { memo, useCallback, useMemo, useRef, useState } from 'react'
 
 import {
@@ -39,11 +39,11 @@ export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 			[hideCalendar],
 		)
 
-		const theme = useThematic()
+		const theme = useTheme()
 		const iconColors = useMemo(
 			() => ({
-				disabled: theme.application().midContrast().hex(),
-				enabled: theme.application().foreground().hex(),
+				disabled: theme.palette.neutralTertiary,
+				enabled: theme.palette.neutralPrimary,
 			}),
 			[theme],
 		)

@@ -3,34 +3,37 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { useThematic } from '@thematic/react'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
-interface CollapsiblePanelStyles {
-	header?: React.CSSProperties
-	contents?: React.CSSProperties
-}
+import { useModalState } from '../hooks/useModalState.js'
 
-export function useCollapsiblePanelStyles(): (
-	isExpanded: boolean,
-) => CollapsiblePanelStyles {
-	const theme = useThematic()
+/* eslint-disable @typescript-eslint/unbound-method */
+export function useDeleteConfirm(onDelete?: (index: number) => void): {
+	isOpen: boolean
+	toggle: () => void
+	onClick: (index: number) => void
+	onConfirm: () => void
+} {
+	const { isOpen, show, hide, toggle } = useModalState(undefined, undefined)
+	const [deleteIndex, setDeleteIndex] = useState<number>()
 
-	return useCallback(
-		(isExpanded: boolean) => ({
-			header: {
-				background: theme.application().background().hex(),
-				color: theme.application().highContrast().hex(),
-				borderBottom: isExpanded
-					? 'none'
-					: `1px solid ${theme.application().border().hex()}`,
-				borderTop: `1px solid ${theme.application().border().hex()}`,
-				padding: '8px 0',
-			},
-			contents: {
-				border: 'none',
-			},
-		}),
-		[theme],
+	const onDeleteClicked = useCallback(
+		(index: number) => {
+			setDeleteIndex(index)
+			show()
+		},
+		[show, setDeleteIndex],
 	)
+
+	const onConfirmDelete = useCallback(() => {
+		deleteIndex !== undefined && onDelete?.(deleteIndex)
+		hide()
+	}, [hide, deleteIndex, onDelete])
+
+	return {
+		isOpen,
+		toggle,
+		onConfirm: onConfirmDelete,
+		onClick: onDeleteClicked,
+	}
 }

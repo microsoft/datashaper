@@ -17,17 +17,17 @@
 		"deploy": "turbo run deploy",
 		"prettify": "essex prettify",
 		"ci": "turbo run ci",
-		"is_clean": "git diff-index HEAD --quiet || git status",
+		"is_clean": "git diff-index HEAD --quiet",
 		"release": "run-s clean _version_cut ci _release_packages _cut_schema _copy_versions",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
 	},
 	"devDependencies": {
 		"@essex/eslint-config": "^20.3.5",
-		"@essex/eslint-plugin": "^20.3.9",
-		"@essex/jest-config": "^21.0.14",
+		"@essex/eslint-plugin": "^20.3.10",
+		"@essex/jest-config": "^21.0.15",
 		"@essex/prettier-config": "^18.0.3",
-		"@essex/scripts": "^22.0.7",
-		"@types/jest": "^29.0.2",
+		"@essex/scripts": "^22.0.8",
+		"@types/jest": "^29.0.3",
 		"@types/node": "^18.7.18",
 		"@types/semver": "^7.3.12",
 		"arquero": "^5.1.0",
@@ -37,7 +37,7 @@
 		"npm-run-all": "^4.1.5",
 		"prettier": "^2.7.1",
 		"semver": "^7.3.7",
-		"turbo": "^1.4.6",
+		"turbo": "^1.5.1",
 		"typescript": "^4.8.3"
 	},
 	"workspaces": [

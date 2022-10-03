@@ -5,9 +5,7 @@
 
 from typing import List
 
-from datashaper.engine.pandas.aggregate_mapping import (
-    aggregate_operation_mapping,
-)
+from datashaper.engine.pandas.aggregate_mapping import aggregate_operation_mapping
 from datashaper.engine.verbs.verb_input import VerbInput
 from datashaper.table_store import TableContainer
 from datashaper.types import FieldAggregateOperation

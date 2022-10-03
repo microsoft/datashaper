@@ -18,8 +18,9 @@ import {
 import {
 	ButtonContainer,
 	Container,
-	deleteButtonStyles,
+	Flex,
 	icons,
+	rightButtonStyles,
 	SaveButtonWrapper,
 	StepSelectorContainer,
 } from './TableTransform.styles.js'
@@ -31,7 +32,6 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		onTransformRequested,
 		index,
 		step,
-		nextInputTable,
 		showGuidance,
 		showGuidanceButton,
 		toggleGuidance,
@@ -47,7 +47,6 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 	}) {
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
 			step,
-			nextInputTable,
 			workflow as Workflow,
 		)
 		const { output, outputHasChanged, onOutputChanged } = useStepOutputHandling(
@@ -68,11 +67,23 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		)
 
 		const disableSave = useMemo((): boolean => {
-			return isEqual(step, internal) && !outputHasChanged
-		}, [step, internal, outputHasChanged])
+			return (
+				isEqual(step, internal) &&
+				(!hideOutput || !!onPreview) &&
+				!outputHasChanged
+			)
+		}, [step, internal, outputHasChanged, hideOutput, onPreview])
 
 		return (
 			<Container style={style}>
+				{hideStepSelector && showGuidanceButton && internal?.verb ? (
+					<IconButton
+						onClick={toggleGuidance}
+						iconProps={icons.info}
+						checked={showGuidance}
+						styles={rightButtonStyles}
+					/>
+				) : null}
 				{!hideStepSelector ? (
 					<StepSelectorContainer>
 						<StepSelector
@@ -103,32 +114,33 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 							hideInputColumn={hideInputColumn}
 						/>
 						<ButtonContainer>
-							{onPreview ? (
-								<IconButton
-									onClick={() => onPreview(step?.id as string)}
-									iconProps={icons.preview}
-								/>
-							) : null}
-							{onDuplicate ? (
-								<IconButton
-									onClick={() => onDuplicate(step as Step)}
-									iconProps={icons.duplicate}
-								/>
-							) : null}
-							<SaveButtonWrapper>
-								<ActionButton
-									onClick={handleSaveClick}
-									iconProps={icons.checkMark}
-									disabled={disableSave}
-								>
-									Save
-								</ActionButton>
-							</SaveButtonWrapper>
+							<Flex>
+								{onPreview ? (
+									<IconButton
+										onClick={() => onPreview(step?.id as string)}
+										iconProps={icons.preview}
+									/>
+								) : null}
+								{onDuplicate ? (
+									<IconButton
+										onClick={() => onDuplicate(step as Step)}
+										iconProps={icons.duplicate}
+									/>
+								) : null}
+								<SaveButtonWrapper>
+									<ActionButton
+										onClick={handleSaveClick}
+										iconProps={icons.checkMark}
+										disabled={disableSave}
+									>
+										Save
+									</ActionButton>
+								</SaveButtonWrapper>
+							</Flex>
 							{onDelete ? (
 								<IconButton
 									onClick={() => onDelete(index)}
 									iconProps={icons.delete}
-									styles={deleteButtonStyles}
 								/>
 							) : null}
 						</ButtonContainer>

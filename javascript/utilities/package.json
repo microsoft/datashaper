@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/utilities",
-	"version": "2.3.2",
+	"version": "2.3.3",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -34,14 +34,17 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
-		"@zip.js/zip.js": "2.3.18"
+		"@zip.js/zip.js": "2.3.18",
+		"debug": "^4.3.4",
+		"tslib": "^2.4.0"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.14",
-		"@essex/scripts": "^22.0.7",
+		"@essex/jest-config": "^21.0.15",
+		"@essex/scripts": "^22.0.8",
 		"@essex/tsconfig-base": "^1.0.2",
-		"@essex/vite-config": "^19.0.12",
-		"@types/jest": "^29.0.2",
+		"@essex/vite-config": "^19.0.13",
+		"@types/debug": "^4",
+		"@types/jest": "^29.0.3",
 		"@types/node": "^18.7.18",
 		"arquero": "^5.1.0",
 		"jest": "^29.0.3",

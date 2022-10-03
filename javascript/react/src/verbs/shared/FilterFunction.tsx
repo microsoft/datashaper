@@ -10,15 +10,12 @@ import {
 	NumericComparisonOperator,
 	StringComparisonOperator,
 } from '@datashaper/schema'
+import { EnumDropdown } from '@essex/components'
 import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton, SpinButton } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 
-import {
-	CalendarPicker,
-	ColumnCriteriaCombobox,
-	EnumDropdown,
-} from '../../controls/index.js'
+import { CalendarPicker, ColumnCriteriaCombobox } from '../../controls/index.js'
 import {
 	useSimpleDropdownOptions,
 	useTableColumnNames,
@@ -224,6 +221,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 						{type === DataType.String ? (
 							<TextValue
+								value={criterion.value}
 								onChange={onChangeTextFieldValue}
 								disabled={isEmpty}
 							></TextValue>

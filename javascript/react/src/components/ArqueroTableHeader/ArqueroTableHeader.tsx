@@ -28,7 +28,10 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		background,
 		color,
 	}) {
-		const { background: bg, foreground } = useColorDefaults(color, background)
+		const { background: bg, color: clr } = useColorDefaults({
+			color,
+			background,
+		})
 		const groupCount = useMemo((): any => {
 			return table.isGrouped() ? table.groups().size : 0
 		}, [table])
@@ -36,15 +39,11 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		const columnCounts = useColumnCounts(table, visibleColumns)
 		const rowCounts = useRowCounts(table)
 		return (
-			<Header background={bg} color={foreground}>
+			<Header background={bg} color={clr}>
 				<Left>{commandBar}</Left>
 				<Middle hasFarCommandBar={!!farCommandBar}>
 					{name ? (
-						<TableName
-							onRenameTable={onRenameTable}
-							name={name}
-							color={foreground}
-						/>
+						<TableName onRenameTable={onRenameTable} name={name} color={clr} />
 					) : null}
 					{showRowCount === true ? (
 						<H3>
@@ -75,7 +74,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 const Header = styled.div<{ background: string; color: string }>`
 	height: ${HEIGHT}px;
 	width: 100%;
-	padding: 0px 10px;
+	padding: 0 8px 0 0;
 	background-color: ${({ background }) => background};
 	color: ${({ color }) => color};
 	position: relative;

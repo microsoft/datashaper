@@ -115,18 +115,18 @@ export enum DataFormat {
         ["valueA2", "valueB2"]
     ]
     records:
-        [{
+        [\{
             colA: valueA1,
             colB: valueB1
-        }, {
+        \}, \{
             colA: valueA2,
             colB: valueB2
-        }]
+        \}]
     columnar: 
-        {
+        \{
             colA: [valueA1, valueA2],
             colB: [valueB1, valueB2]
-        }
+        \}
  */
 export enum DataOrientation {
 	/**

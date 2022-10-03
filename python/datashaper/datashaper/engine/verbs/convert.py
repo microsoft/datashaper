@@ -6,7 +6,7 @@
 import numbers
 
 from datetime import datetime
-from typing import Callable, Dict, List, Optional, Union
+from typing import Callable, Dict, Optional, Union
 
 import numpy as np
 import pandas as pd
@@ -79,7 +79,7 @@ def to_str(column: pd.Series, formatPattern: str) -> pd.Series:
         try:
             column_numeric = column_numeric.astype(pd.Int64Dtype)
             return column.apply(lambda x: "" if x is None else str(x))
-        except Exception:
+        except Exception:  # nosec
             pass
     if is_bool_dtype(column):
         return column.apply(lambda x: "" if pd.isna(x) else str(x).lower())
@@ -122,6 +122,6 @@ def convert(
 
     output[to] = __type_mapping[parse_type](
         column=output[column], radix=radix, formatPattern=formatPattern
-    ) 
+    )
 
     return TableContainer(table=output)

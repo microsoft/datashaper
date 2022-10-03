@@ -24,7 +24,7 @@ export interface ParserOptions {
 	header?: boolean
 	/**
 	 * Character that indicates the end of a line (row).
-	 * Default: \r, \r\n, or \n
+	 * Default: \\r, \\r\\n, or \\n
 	 */
 	lineTerminator?: string
 	/**

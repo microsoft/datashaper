@@ -3,10 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useMicrosoftConsentBanner } from '@essex/hooks'
+import { useThematicFluent } from '@thematic/fluent'
 import type { FC } from 'react'
 import { memo } from 'react'
 
-import { useTheme } from '../states/settings.js'
 import {
 	constants,
 	Container,
@@ -16,7 +16,7 @@ import {
 } from './Footer.styles.js'
 
 export const Footer: FC = memo(function Footer() {
-	const theme = useTheme()
+	const theme = useThematicFluent()
 	const CONSENT_CONF = {
 		theme: theme.variant,
 		elementId: 'cookie-banner',
@@ -32,7 +32,7 @@ export const Footer: FC = memo(function Footer() {
 				<Link
 					id={'managecookies'}
 					onClick={manageConsent}
-					style={{ color: '#3f75bf' }}
+					style={{ color: theme.palette.themePrimary }}
 				>
 					Cookies
 				</Link>

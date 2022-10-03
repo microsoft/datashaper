@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import styled from '@essex/styled-components'
 import type { IColumn, IDetailsListStyles } from '@fluentui/react'
 import {
@@ -12,7 +11,7 @@ import {
 	SelectionMode,
 } from '@fluentui/react'
 import type { RowObject } from 'arquero/dist/types/table/table'
-import { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import type { ArqueroDetailsListProps } from './ArqueroDetailsList.types.js'
 import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
@@ -28,6 +27,8 @@ import {
 	useStripedRowsRenderer,
 	useSubsetTable,
 } from './hooks/index.js'
+import { useFill } from './hooks/useFill.js'
+import { useItems } from './hooks/useItems.js'
 
 /**
  * Renders an arquero table using a fluent DetailsList.
@@ -43,6 +44,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		striped = false,
 		clickableColumns = false,
 		showColumnBorders = false,
+		fill = false,
 		selectedColumn,
 		onColumnClick,
 		onCellDropdownSelect,
@@ -61,6 +63,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// passthrough the remainder as props
 		...props
 	}) {
+		const ref = useRef(null)
+
 		const [version, setVersion] = useState(0)
 		const { sortColumn, sortDirection, handleColumnHeaderClick } =
 			useSortHandling(
@@ -79,8 +83,11 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const sorted = useSortedTable(subset, sortColumn, sortDirection)
 		// slice any potential page
 		const sliced = useSlicedTable(sorted, offset, limit)
+
 		// last, copy these items to actual JS objects for the DetailsList
-		const items = useMemo(() => sliced.objects(), [sliced])
+		const baseItems = useMemo(() => [...sliced.objects()], [sliced])
+		const virtual = useFill(sliced, columns, ref, fill, features, { compact })
+		const items = useItems(baseItems, virtual.virtualRows)
 
 		// if the table is grouped, groups the information in a way we can iterate
 		const groupedEntries = useMemo(
@@ -129,6 +136,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				compact,
 				resizable,
 			},
+			virtual.virtualColumns,
 		)
 
 		const headerStyle = useDetailsListStyles(
@@ -178,7 +186,11 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		}, [columns, table, compact])
 
 		return (
-			<DetailsWrapper data-is-scrollable="true">
+			<DetailsWrapper
+				ref={ref}
+				data-is-scrollable="true"
+				showColumnBorders={showColumnBorders}
+			>
 				<DetailsList
 					items={[...items]}
 					selectionMode={selectionMode}
@@ -207,16 +219,16 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	},
 )
 
-const DetailsWrapper = styled.div`
+const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
 	height: inherit;
 	position: relative;
 	max-height: inherit;
 	overflow-y: auto;
 	overflow-x: auto;
-
+	border: ${({ theme, showColumnBorders }) =>
+		showColumnBorders ? `1px solid ${theme.palette.neutralLighter}` : 'none'};
 	span.ms-DetailsHeader-cellTitle {
-		background-color: ${({ theme }) =>
-			theme.application?.().background().hex()};
+		background-color: ${({ theme }) => theme.palette.white};
 	}
 
 	.ms-List-cell {

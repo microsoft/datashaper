@@ -1,12 +1,20 @@
 name: Python-CI
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - 'python/**/*'
+      - '**/*.py'
+      - '**/*.toml'
+      - .github/workflows/python-ci.yml
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.8]
-        poetry-version: [1.1.12]
+        poetry-version: [1.2.1]
 
     steps:
       - uses: actions/checkout@v2
@@ -16,18 +24,27 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install poetry ${{ matrix.poetry-version }}
-        run: |
-          python -m ensurepip
-          python -m pip install --upgrade pip
-          python -m pip install poetry==${{ matrix.poetry-version }}
+      - name: Install Poetry ${{ matrix.poetry-version }}
+        uses: abatilo/actions-poetry@v2.1.6
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
 
       - name: Install dependencies
         shell: bash
         working-directory: ./python/datashaper
-        run: python -m poetry install
+        run: poetry install
 
-      - name: Test with pytest
+      - name: Check Formatting
         working-directory: ./python/datashaper
         run: |
-          python -m poetry run python -m pytest -v tests
+          poetry run poe check_format
+
+      - name: Lint
+        working-directory: ./python/datashaper
+        run: |
+          poetry run poe lint
+
+      - name: Test
+        working-directory: ./python/datashaper
+        run: |
+          poetry run poe test
