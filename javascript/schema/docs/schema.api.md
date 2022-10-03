@@ -179,6 +179,7 @@ export interface Criterion {
 //
 // @public
 export enum DataFormat {
+    ARROW = "arrow",
     CSV = "csv",
     JSON = "json"
 }

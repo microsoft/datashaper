@@ -92,6 +92,10 @@ export enum DataFormat {
 	 * Valid serialized JSON string.
 	 */
 	JSON = 'json',
+	/**
+	 * Arrow format.
+	 */
+	ARROW = 'arrow',
 }
 
 /**
