@@ -9,6 +9,7 @@ import type { TableContainer } from '@datashaper/tables'
 import { introspect } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
 import { Workflow } from '@datashaper/workflow'
+import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 import { map } from 'rxjs/operators'
@@ -28,6 +29,7 @@ export class DataPackage
 
 	private _codebook?: any
 	private _outputSubscription?: Subscription
+	private _table: Maybe<ColumnTable>
 
 	public constructor(
 		public readonly source: DataSource,
@@ -40,7 +42,8 @@ export class DataPackage
 			if (this.workflow.length > 0) {
 				this._setGraphInput()
 			} else {
-				this._output.next({ id: this.id, table })
+				this._table = table
+				this.emit()
 			}
 		})
 
@@ -51,9 +54,13 @@ export class DataPackage
 			if (this.workflow.length > 0) {
 				this._outputSubscription = this.workflow
 					.outputObservable()
-					?.subscribe(tbl => this._output.next(tbl))
+					?.subscribe(tbl => {
+						this._table = tbl?.table
+						this._output.next(tbl)
+					})
 			} else {
-				this._output.next({ id: this.id, table: this.source.currentOutput })
+				this._table = this.source.currentOutput
+				this.emit()
 			}
 			this._onChange.next()
 		})
@@ -63,6 +70,10 @@ export class DataPackage
 		this._onChange.next()
 	}
 
+	private emit(): void {
+		this._output.next({ id: this.id, table: this._table })
+	}
+
 	public override get id(): string {
 		return super.id
 	}
@@ -70,7 +81,7 @@ export class DataPackage
 	public override set id(id: string) {
 		super.id = id
 		// emit a TableContainer with the new name
-		this._output.next({ id, table: this.source.currentOutput })
+		this.emit()
 		this._onChange.next()
 	}
 
