@@ -4,18 +4,18 @@
  */
 
 import type { ParserOptions } from '@datashaper/schema'
-import { from,fromCSV } from 'arquero'
+import { from, fromCSV } from 'arquero'
 import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { uniq } from 'lodash-es'
-import { type ParseConfig,default as papa } from 'papaparse'
+import { type ParseConfig, default as papa } from 'papaparse'
 
 import {
 	ARQUERO_PROPS_MAP,
 	ARQUERO_SUPPORTED_OPTS,
 	LINE_TERMINATORS,
 	PAPAPARSE_PROPS_MAP,
-} from './readTable.defaults.js'
+} from './readTable.constants.js'
 import { ParserType } from './readTable.types.js'
 
 export function determineParserType(options?: ParserOptions) {

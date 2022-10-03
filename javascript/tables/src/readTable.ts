@@ -8,13 +8,8 @@ import { fromArrow, fromJSON } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { guessDelimiter } from './guessDelimiter.js'
+import { DEFAULT_PARSER_OPTIONS } from './readTable.constants.js'
 import { getParser, validOptions } from './readTable.utils.js'
-import { COMMENT_DEFAULT, DELIMITER_DEFAULT } from './typeHints.defaults.js'
-
-const DEFAULT_PARSER_OPTIONS: ParserOptions = {
-	delimiter: DELIMITER_DEFAULT,
-	comment: COMMENT_DEFAULT,
-}
 
 /**
  * Read an input table

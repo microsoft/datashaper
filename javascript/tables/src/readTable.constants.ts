@@ -3,6 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { ParserOptions } from '@datashaper/schema'
+
+import { COMMENT_DEFAULT, DELIMITER_DEFAULT } from './typeHints.defaults.js'
+
 export const ARQUERO_SUPPORTED_OPTS = new Set([
 	'delimiter',
 	'names',
@@ -37,3 +41,8 @@ export const PAPAPARSE_PROPS_MAP = {
 }
 
 export const LINE_TERMINATORS = new Set(['\r', '\r\n', '\n'])
+
+export const DEFAULT_PARSER_OPTIONS: ParserOptions = {
+	delimiter: DELIMITER_DEFAULT,
+	comment: COMMENT_DEFAULT,
+}
