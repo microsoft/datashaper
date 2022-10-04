@@ -18,8 +18,20 @@ import type { Workflow } from './Workflow.js'
 export class WorkflowExecutor {
 	private _workflowSubscription?: Subscription
 	private _outputTable: Maybe<ColumnTable>
+
+	/**
+	 * The output of the workflow execution, or of the input source if no
+	 * workflow is defined.
+	 */
 	public readonly output = new BehaviorSubject<Maybe<TableContainer>>(undefined)
 
+	/**
+	 * Constructs a new WorkflowExecutor instance.
+	 * @param _name - The name of the data-table, used for data-source injection and table emit.
+	 * @param source - The source table observable.
+	 * @param inputs - Other input table observables.
+	 * @param workflow - The workflow object
+	 */
 	constructor(
 		private _name: string,
 		private readonly source: BehaviorSubject<Maybe<ColumnTable>>,
