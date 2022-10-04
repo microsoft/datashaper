@@ -11,8 +11,8 @@ from pandas.testing import assert_frame_equal
 from datashaper.graph import ExecutionGraph
 
 
-FIXTURES_PATH = "schema/fixtures/cases"
-TABLE_STORE_PATH = "schema/fixtures/inputs"
+FIXTURES_PATH = "schema/fixtures/workflow"
+TABLE_STORE_PATH = "schema/fixtures/workflow_inputs"
 SCHEMA_PATH = "schema/workflow.json"
 
 os.chdir("../..")
