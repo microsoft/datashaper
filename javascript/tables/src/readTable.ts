@@ -33,6 +33,7 @@ export async function readTable(
 			return fromArrow(await input.arrayBuffer())
 		case DataFormat.CSV:
 			return fromCSV(await input.text(), options)
+		// return readCsvTable(await input.text(), options)
 		default:
 			throw new Error(`unknown data format: ${format}`)
 	}
