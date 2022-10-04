@@ -214,8 +214,10 @@ export class DataTable
 	}
 }
 
-function withRowNumbers(table: ColumnTable): ColumnTable {
-	return table.derive(
+function withRowNumbers(
+	table: ColumnTable | undefined,
+): ColumnTable | undefined {
+	return table?.derive(
 		{
 			index: op.row_number(),
 		},
