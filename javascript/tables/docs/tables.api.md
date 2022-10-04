@@ -8,6 +8,7 @@ import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
 import { DataFormat } from '@datashaper/schema';
+import type { DataShape } from '@datashaper/schema';
 import { DataType } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
 import type { FieldMetadata } from '@datashaper/schema';
@@ -204,10 +205,15 @@ export function parseUndefined(naValues?: string[]): (value: string) => undefine
 // @public (undocumented)
 export function readCsvTable(text: string, options?: ParserOptions): ColumnTable;
 
+// Warning: (ae-missing-release-tag) "readJSONTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function readJSONTable(text: string, shapeOptions?: DataShape): ColumnTable;
+
 // Warning: (ae-missing-release-tag) "readTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function readTable(input: Blob, format: DataFormat, options?: ParserOptions): Promise<ColumnTable>;
+export function readTable(input: Blob, format: DataFormat, options?: ParserOptions, shape?: DataShape): Promise<ColumnTable>;
 
 // Warning: (ae-missing-release-tag) "rows" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
