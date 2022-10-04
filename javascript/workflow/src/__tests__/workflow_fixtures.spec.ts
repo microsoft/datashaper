@@ -11,14 +11,10 @@ import { fileURLToPath } from 'url'
 
 import { createWorkflow } from '../engine/createWorkflow.js'
 
-// Set the root cwd to the package root.
-// this makes loading datafiles by file-url in the project more straightforward
-process.chdir('../..')
-
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
-const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures/workflow')
+const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow')
 
 // Json-schema validator
 const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))
@@ -95,7 +91,7 @@ function defineTestCase(parentPath: string, test: string) {
 }
 
 async function readInputTables(): Promise<TableContainer[]> {
-	const inputsPaths = path.join(SCHEMA_PATH, 'fixtures/workflow_inputs')
+	const inputsPaths = path.join(SCHEMA_PATH, 'fixtures', 'workflow_inputs')
 	const entries = fs.readdirSync(inputsPaths)
 	return Promise.all(
 		entries.map(async entry => {

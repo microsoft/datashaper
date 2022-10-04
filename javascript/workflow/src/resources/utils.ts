@@ -44,7 +44,8 @@ export async function toResourceSchema(
 
 async function parseFileContent(item: string, files?: Map<string, Blob>) {
 	// if the item is a string, look up the resource in the files map
-	const resourceText = await files?.get(item)?.text()
+	const blob = resolveRawContent(item, files)
+	const resourceText = await blob?.text()
 	if (resourceText == null) return undefined
 	try {
 		return JSON.parse(resourceText)
@@ -64,9 +65,9 @@ async function parseFileContent(item: string, files?: Map<string, Blob>) {
  */
 export function resolveRawData(
 	resource: string,
-	files: Map<string, Blob>,
+	files: Map<string, Blob> | undefined,
 ): Promise<Blob> {
-	const locallyResolved = files.get(resource)
+	const locallyResolved = resolveRawContent(resource, files)
 	if (locallyResolved) {
 		return Promise.resolve(locallyResolved)
 	} else {
@@ -74,5 +75,14 @@ export function resolveRawData(
 			throw new Error('Invalid resource URL: ' + resource)
 		}
 		return fetch(resource).then(r => r.blob())
+	}
+}
+
+function resolveRawContent(
+	resource: string,
+	files: Map<string, Blob> | undefined,
+): Blob | undefined {
+	if (files?.has(resource)) {
+		return files?.get(resource)
 	}
 }
