@@ -5,6 +5,7 @@
 import type { BinArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
+import { useStepDataTable } from '../hooks/index.js'
 import type { StepComponentProps } from '../types'
 import { BinBase } from './Bin.base.js'
 
@@ -13,9 +14,11 @@ import { BinBase } from './Bin.base.js'
  */
 export const Bin: React.FC<StepComponentProps<BinArgs>> = memo(function Bin({
 	step,
+	workflow,
+	input,
+	table,
 	onChange,
 }) {
-	step.args.min = 0
-	step.args.max = 100
-	return <BinBase step={step} onChange={onChange} />
+	const dataTable = useStepDataTable(step, workflow, input, table)
+	return <BinBase step={step} onChange={onChange} table={dataTable} />
 })
