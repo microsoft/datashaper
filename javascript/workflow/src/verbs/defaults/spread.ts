@@ -4,9 +4,6 @@
  */
 import type { SpreadArgs } from '@datashaper/schema'
 
-import { inputColumnList } from './inputColumnList.js'
-
-export const spread = (): SpreadArgs => ({
-	...inputColumnList(),
+export const spread = (): Omit<SpreadArgs, 'column'> => ({
 	to: [],
 })

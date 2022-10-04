@@ -6,6 +6,7 @@
 import { ArqueroTableHeader } from '../ArqueroTableHeader.js'
 import { BasicStory } from './Basic.story.js'
 import { CommandBarsStory } from './CommandBars/CommandBars.story.js'
+import { TableCommandsStory } from './TableCommands/TableCommands.story.js'
 
 const meta = {
 	title: 'Components/ArqueroTableHeader',
@@ -30,3 +31,4 @@ export default meta
 
 export const Basic = BasicStory
 export const CommandBars = CommandBarsStory
+export const TableCommands = TableCommandsStory

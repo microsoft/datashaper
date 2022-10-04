@@ -6,7 +6,6 @@ import type { OnehotArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../types.js'
-import { createRowEntries } from '../verbForm/createRowEntries.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
 
 export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
@@ -15,33 +14,14 @@ export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 			const {
 				step: { args },
 			} = props
-			const sub = createRowEntries(
-				args.columns,
-				c => ({
-					value: c,
-				}),
-				3,
-				props,
-			)
-			const prefixes = Object.values(args.prefixes || {})
-			const prefixSub = createRowEntries(
-				prefixes,
-				c => ({
-					value: c,
-				}),
-				2,
-				props,
-			)
 			return [
 				{
-					before: `onehot column${args.columns?.length !== 1 ? 's' : ''}`,
-					value: args.columns.length === 0 ? undefined : '',
-					sub,
+					before: `onehot column`,
+					value: args.column !== undefined ? args.column : undefined,
 				},
 				{
-					before: `with prefix${prefixes?.length !== 1 ? 'es' : ''}`,
-					value: prefixes?.length === 0 ? undefined : '',
-					sub: prefixSub,
+					before: `with prefix`,
+					value: args.prefix,
 				},
 			]
 		}, [props])

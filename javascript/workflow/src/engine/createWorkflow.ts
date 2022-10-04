@@ -5,7 +5,7 @@
 import type { WorkflowSchema } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 
-import { Workflow } from './Workflow.js'
+import { Workflow } from '../resources/Workflow.js'
 
 /**
  * This function establishes the reactive processing graph for executing transformation steps.

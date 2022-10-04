@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/workflow",
-	"version": "11.3.0",
+	"version": "12.0.1",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -38,16 +38,18 @@
 		"@datashaper/tables": "workspace:^",
 		"ajv": "^8.11.0",
 		"d3-time-format": "^4.1.0",
+		"debug": "^4.3.4",
 		"lodash-es": "^4.17.21",
 		"rxjs": "^7.5.6",
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.14",
-		"@essex/scripts": "^22.0.7",
+		"@essex/jest-config": "^21.0.15",
+		"@essex/scripts": "^22.0.8",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/d3-time-format": "^4.0.0",
-		"@types/jest": "^29.0.2",
+		"@types/debug": "^4",
+		"@types/jest": "^29.0.3",
 		"@types/lodash-es": "^4.17.6",
 		"@types/node": "^18.7.18",
 		"@types/uuid": "^8.3.4",

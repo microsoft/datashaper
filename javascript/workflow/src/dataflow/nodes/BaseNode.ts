@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import debug from 'debug'
 import type { Observable } from 'rxjs'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
@@ -11,6 +12,8 @@ import { DefaultBoundInput } from '../BoundInput.js'
 import type { Maybe } from '../primitives.js'
 import type { Node, NodeBinding, NodeId, SocketName } from '../types'
 import { NodeInput, NodeOutput } from '../types.js'
+
+const log = debug('datashaper')
 
 const DEFAULT_INPUT_NAME = NodeInput.Source
 const DEFAULT_OUTPUT_NAME = NodeOutput.Target
@@ -203,7 +206,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 				;(result as Promise<void>).catch(err => this.emitError(err))
 			}
 		} catch (err) {
-			console.error('recalculation error in node ' + this.id, err)
+			log('recalculation error in node ' + this.id, err)
 			this.emitError(err)
 		}
 	}

@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""The tablestore module contains the table store classes used by the datashaper."""
 
 from typing import Any, Dict, Generic, List, Optional, TypeVar, Union
 
@@ -15,6 +16,8 @@ from datashaper.types import Bin, Category, DataType
 
 @dataclass
 class ColumnStats:
+    """Generated column statistics."""
+
     type: DataType
     count: int
     distinct: int
@@ -31,6 +34,8 @@ class ColumnStats:
 
 @dataclass
 class ColumnMetadata:
+    """Column metadata container."""
+
     name: str
     type: DataType
     stats: ColumnStats
@@ -38,6 +43,8 @@ class ColumnMetadata:
 
 @dataclass
 class TableMetadata:
+    """Table metadata container."""
+
     rows: int
     cols: int
     columns: Dict[str, ColumnMetadata]
@@ -51,6 +58,8 @@ Table = Union[pd.DataFrame, DataFrameGroupBy]
 
 @dataclass
 class TableContainer(Generic[T]):
+    """A container for a table and its metadata."""
+
     table: Table
     metadata: Optional[TableMetadata] = None
     context: Optional[T] = None

@@ -13,3 +13,5 @@ build.js
 yarn.lock
 .*ignore
 .*rc
+create_versions_file.js
+versions.js

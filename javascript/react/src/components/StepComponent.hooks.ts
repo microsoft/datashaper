@@ -2,26 +2,41 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
+import type {
+	InputColumnArgs,
+	InputColumnListArgs,
+	OutputColumnArgs,
+} from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import { columnType, columnTypes } from '@datashaper/tables'
+import { toggleListItem } from '@datashaper/utilities'
 import type { Step, Workflow } from '@datashaper/workflow'
 import { isNumericInputStep, NodeInput } from '@datashaper/workflow'
+import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
 import { useCallback, useEffect, useMemo } from 'react'
 
 import { useResetArgs } from '../hooks/common.js'
 import type {
+	DropdownChangeAllHandler,
 	DropdownChangeHandler,
 	TextFieldChangeHandler,
 } from '../hooks/fluent.js'
 import {
+	useDropdownChangeAllHandler,
 	useDropdownChangeHandler,
 	useTextFieldChangeHandler,
 } from '../hooks/fluent.js'
 import { selectStepComponent } from '../selectStepComponent.js'
 import type { StepComponentProps } from '../types.js'
+
+export function getSimpleDropdownOptions(list: string[]): IDropdownOption[] {
+	return list.map(name => ({
+		key: name,
+		text: name.toString(),
+	}))
+}
 
 export function useStepChangeHandler(
 	index: number,
@@ -99,6 +114,29 @@ export function useInputColumnChanged(
 					: DataType.Unknown
 		},
 		onChange,
+	)
+}
+
+export function useInputColumnListChanged(
+	step: Step,
+	onChange: (step: Step) => void,
+): DropdownChangeHandler {
+	return useDropdownChangeHandler<InputColumnListArgs>(
+		step as Step<InputColumnListArgs>,
+		(s, val) =>
+			(s.args.columns = toggleListItem(s.args.columns ?? [], val as string)),
+		onChange,
+	)
+}
+
+export function useInputColumnListAllChanged(
+	step: Step,
+	onChangeAll: (step: Step) => void,
+): DropdownChangeAllHandler {
+	return useDropdownChangeAllHandler<InputColumnListArgs>(
+		step as Step<InputColumnListArgs>,
+		(s, val) => (s.args.columns = val as string[]),
+		onChangeAll,
 	)
 }
 

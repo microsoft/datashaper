@@ -5,7 +5,6 @@
 import type { MergeArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useStepDataTable, useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { MergeBase } from './Merge.base.js'
 
@@ -14,9 +13,7 @@ import { MergeBase } from './Merge.base.js'
  * Input table is expected to be edited elsewhere and configured as the step input.
  */
 export const Merge: React.FC<StepComponentProps<MergeArgs>> = memo(
-	function Merge({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
-		const columnNames = useTableColumnNames(dataTable)
-		return <MergeBase step={step} onChange={onChange} columns={columnNames} />
+	function Merge({ step, onChange }) {
+		return <MergeBase step={step} onChange={onChange} />
 	},
 )

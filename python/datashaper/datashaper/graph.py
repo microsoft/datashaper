@@ -2,6 +2,8 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project.
 #
+"""The graph module contains the graph classes used by the datashaper."""
+
 import json
 import os
 
@@ -25,6 +27,8 @@ SCHEMA_FILE = "../../schema/workflow.json"
 
 @dataclass
 class ExecutionNode:
+    """A data processing node in the execution pipeline."""
+
     node_id: str
     verb: Callable
     node_input: Union[str, Dict[str, List[str]]]
@@ -33,6 +37,8 @@ class ExecutionNode:
 
 
 class ExecutionGraph:
+    """A data processing graph."""
+
     inputs: Dict[str, TableContainer] = {}
     outputs: List[str] = []
     __graph: Dict[str, ExecutionNode] = OrderedDict()
@@ -41,7 +47,7 @@ class ExecutionGraph:
     def __init__(
         self, workflow: Dict, input_path: str = "", schema_path: str = SCHEMA_FILE
     ):
-        """Creates an execution graph from the Dict provided in workflow
+        """Create an execution graph from the Dict provided in workflow.
 
         :param workflow: the Dict object that contains the workflow
         :type workflow: Dict
@@ -124,6 +130,7 @@ class ExecutionGraph:
             return {"input": VerbInput(**input_mapping)}
 
     def get(self, id: str) -> pd.DataFrame:
+        """Get a dataframe from the graph by id."""
         container: Optional[TableContainer] = self.__graph[id].result
         if container is None:
             raise Exception("Value not calculated yet.")
@@ -131,6 +138,7 @@ class ExecutionGraph:
             return container.table
 
     def run(self):
+        """Run the execution graph."""
         visitted: Set[str] = set()
         executable_nodes = []
 
@@ -152,6 +160,7 @@ class ExecutionGraph:
                     executable_nodes.append(possible)
 
     def export(self):
+        """Export the graph into a workflow JSON object."""
         return {
             "input": [input_name for input_name in self.inputs.keys()],
             "output": self.outputs,

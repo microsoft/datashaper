@@ -8,10 +8,9 @@ import { Sparkbar } from '@essex/charts-react'
 import { TooltipHost } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 
+import { HISTOGRAM_HEADER_PADDING } from '../ArqueroDetailsList.constants.js'
 import { useCellDimensions } from '../hooks/index.js'
 import type { RichHeaderProps } from './types.js'
-
-const PADDING_HEIGHT = 8
 
 /**
  * Renders a histogram for column values in the header.
@@ -50,23 +49,19 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 
 		const styles = useMemo(() => {
 			return {
-				height: dimensions.height + PADDING_HEIGHT,
+				height: dimensions.height + HISTOGRAM_HEADER_PADDING,
 				cursor: onClick ? 'pointer' : 'inherit',
 			}
 		}, [onClick, dimensions])
 
-		// don't render a single bar
-		if (field.metadata?.distinct === 1) {
-			return null
-		}
+		const enough = field.metadata?.distinct || 0
 
 		return (
-			<>
-				{bins ? (
+			<div style={styles}>
+				{enough > 1 && bins ? (
 					<div
 						onClick={e => onClick && bins && onClick(e, column, field)}
 						title={title}
-						style={styles}
 					>
 						<TooltipHost
 							content={hover}
@@ -85,7 +80,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 						</TooltipHost>
 					</div>
 				) : null}
-			</>
+			</div>
 		)
 	},
 )

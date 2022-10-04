@@ -28,8 +28,7 @@ export const OrLabel = styled(Label)`
 	font-style: italic;
 	padding-left: 10px;
 	padding-right: 10px;
-	border-left: 1px solid
-		${({ theme }) => theme.application().lowContrast().hex()};
+	border-left: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `
 
 export const FilterContainer = styled.div`

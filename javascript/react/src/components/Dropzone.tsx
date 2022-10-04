@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { useThematic } from '@thematic/react'
+import { useTheme } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
 import { useDropzone } from './Dropzone.hooks.js'
@@ -24,7 +24,7 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 		styles = DEFAULT_STYLES,
 		children,
 	}) {
-		const thematic = useThematic()
+		const theme = useTheme()
 		const {
 			getRootProps,
 			getInputProps,
@@ -47,13 +47,12 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 			() => ({
 				...staticStyles.container,
 				opacity: isDragActive ? 0.5 : 1,
-				backgroundColor: isDragActive ? 'white' : 'transparent',
 				borderColor: isDragActive
-					? thematic.application().accent().hex()
-					: thematic.application().lowContrast().hex(),
+					? theme.palette.themePrimary
+					: theme.palette.neutralTertiary,
 				...styles.container,
 			}),
-			[styles, thematic, isDragActive],
+			[styles, theme, isDragActive],
 		)
 		const dragZone: React.CSSProperties = useMemo(
 			() => ({
@@ -65,11 +64,11 @@ export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>> = memo(
 		const dragReject: React.CSSProperties = useMemo(
 			() => ({
 				...staticStyles.dragReject,
-				backgroundColor: thematic.application().foreground().hex(),
-				color: thematic.application().background().hex(),
+				backgroundColor: theme.palette.neutralPrimary,
+				color: theme.palette.white,
 				...styles.dragReject,
 			}),
-			[thematic, styles],
+			[theme, styles],
 		)
 		const placeholderStyles: React.CSSProperties = useMemo(
 			() => ({

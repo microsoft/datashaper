@@ -5,7 +5,7 @@
 			"verb": "erase",
 			"input": "table3",
 			"args": {
-				"columns": ["item"],
+				"column": "item",
 				"value": "sofa"
 			},
 			"id": "expected"

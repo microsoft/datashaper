@@ -6,8 +6,9 @@ import { DataType } from '@datashaper/schema'
 import { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
-import { getValue, isEmpty } from '../ArqueroDetailsList.utils.js'
+import { getValue, isBlank, isEmpty } from '../ArqueroDetailsList.utils.js'
 import { useNumberMagnitude } from '../hooks/useNumberMagnitude.js'
+import { BlankCell } from './BlankCell.js'
 import { CellContainer } from './CellContainer.js'
 import { EmptyCell } from './EmptyCell.js'
 import {
@@ -34,8 +35,18 @@ export const SmartCell: React.FC<RichCellProps> = memo(function SmartCell(
 	return (
 		<CellContainer onClick={onColumnClick} column={column}>
 			<Switch>
+				<Case condition={isBlank(value)}>
+					<BlankCell />
+				</Case>
 				<Case condition={isEmpty(value)}>
-					<EmptyCell textAlign={type === DataType.Number ? 'right' : 'left'} />
+					<EmptyCell
+						textAlign={
+							type === DataType.Number || type === DataType.Boolean
+								? 'right'
+								: 'left'
+						}
+						virtual={column?.data.virtual}
+					/>
 				</Case>
 				<Case condition={type === DataType.String}>
 					<TextCell {...props} />

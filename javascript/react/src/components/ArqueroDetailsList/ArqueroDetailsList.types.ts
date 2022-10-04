@@ -157,6 +157,11 @@ export interface ArqueroDetailsListProps
 	 */
 	showColumnBorders?: boolean
 	/**
+	 * Indicates that the table should fill its container space,
+	 * including the use of pseudo columns and rows to present a "spreadsheet-like" view.
+	 */
+	fill?: boolean
+	/**
 	 * Passthrough to the column click handler.
 	 * Will be applied to the column header only unless clickableColumns === true.
 	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick

@@ -5,7 +5,6 @@
 import type { FoldArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useStepDataTable, useTableColumnNames } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import { FoldBase } from './Fold.base.js'
 
@@ -14,12 +13,7 @@ import { FoldBase } from './Fold.base.js'
  */
 export const Fold: React.FC<StepComponentProps<FoldArgs>> = memo(function Fold({
 	step,
-	workflow,
-	input,
-	table,
 	onChange,
 }) {
-	const dataTable = useStepDataTable(step, workflow, input, table)
-	const columns = useTableColumnNames(dataTable)
-	return <FoldBase step={step} onChange={onChange} columns={columns} />
+	return <FoldBase step={step} onChange={onChange} />
 })

@@ -2,13 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { InputColumnArgs, OutputColumnArgs } from '@datashaper/schema'
+import type {
+	InputColumnArgs,
+	InputColumnListArgs,
+	OutputColumnArgs,
+} from '@datashaper/schema'
 import {
+	isInputColumnListStep,
 	isInputColumnStep,
 	isInputTableStep,
 	isOutputColumnStep,
 	NodeInput,
 } from '@datashaper/workflow'
+import { MultiDropdown } from '@essex/components'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 
@@ -20,9 +26,12 @@ import { useTableColumnNames } from '../hooks/useTableColumnNames.js'
 import { useTableDropdownOptions } from '../hooks/useTableDropdownOptions.js'
 import { dropdownStyles } from '../styles.js'
 import {
+	getSimpleDropdownOptions,
 	useColumnFilter,
 	useDefaultOutputNameInitially,
 	useInputColumnChanged,
+	useInputColumnListAllChanged,
+	useInputColumnListChanged,
 	useInputTableChanged,
 	useOutputColumnChanged,
 	useOutputTableChanged,
@@ -69,6 +78,8 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		const change = useStepChangeHandler(index, onChange)
 		const onInputTableChange = useInputTableChanged(s, g, change)
 		const onInputColumnChange = useInputColumnChanged(s, change, table)
+		const onInputColumnListChange = useInputColumnListChanged(s, change)
+		const onInputColumnListChangeAll = useInputColumnListAllChanged(s, change)
 		const onOutputColumnChange = useOutputColumnChanged(s, change)
 		const onOutputTableChange = useOutputTableChanged(s, changeOutput, change)
 
@@ -85,6 +96,20 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 						label={inputTableLabel || 'Input table'}
 						selectedKey={tableId ?? null}
 						onChange={onInputTableChange}
+					/>
+				) : null}
+
+				{/* Input Column List */}
+				{isInputColumnListStep(s) ? (
+					<MultiDropdown
+						required={true}
+						label={'Columns'}
+						placeholder={'Choose columns'}
+						styles={dropdownStyles}
+						selectedKeys={(s.args as InputColumnListArgs).columns}
+						options={getSimpleDropdownOptions(columns)}
+						onChange={onInputColumnListChange}
+						onChangeAll={onInputColumnListChangeAll}
 					/>
 				) : null}
 

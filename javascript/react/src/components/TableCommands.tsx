@@ -7,6 +7,7 @@ import type { Verb } from '@datashaper/schema'
 import type { Step } from '@datashaper/workflow'
 import { readStep } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
+import { CommandBar } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
@@ -26,6 +27,8 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 		onAddStep,
 		onRemoveStep,
 		selectedColumn,
+		color,
+		background,
 	}) {
 		const [step, setStep] = useState<Step | undefined>()
 		const [index, setIndex] = useState<number>()
@@ -71,16 +74,30 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			return workflow.outputNames.length + workflow.inputNames.size
 		}, [workflow])
 
-		const columnCommands = useColumnCommands(onCallStep, !selectedColumn)
-		const tableCommands = useTableCommands(onCallStep, allTablesLength <= 1)
-		const undoCommands = useUndoCommands(onUndoStep, workflow.steps.length < 1)
-
+		const columnCommands = useColumnCommands(
+			onCallStep,
+			!selectedColumn,
+			color,
+			background,
+		)
+		const tableCommands = useTableCommands(
+			onCallStep,
+			allTablesLength <= 1,
+			color,
+			background,
+		)
+		const undoCommands = useUndoCommands(
+			onUndoStep,
+			workflow.steps.length < 1,
+			color,
+			background,
+		)
 		return (
 			<Container>
 				<VerbsContainer>
-					{undoCommands}
-					{columnCommands}
-					{tableCommands}
+					<CommandBar {...undoCommands} />
+					<CommandBar {...columnCommands} />
+					<CommandBar {...tableCommands} />
 				</VerbsContainer>
 
 				{isModalOpen ? (
@@ -93,6 +110,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 						onTransformRequested={onTransformRequested}
 						workflow={workflow}
 						onDismiss={dismissModal}
+						showGuidance
 					/>
 				) : null}
 			</Container>

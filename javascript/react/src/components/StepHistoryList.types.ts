@@ -4,7 +4,7 @@
  */
 import type { Step } from '@datashaper/workflow'
 
-import type { TableTransformProps } from '../index.js'
+import type { DisplayOrder, TableTransformProps } from '../index.js'
 
 export interface PanelProps {
 	panelIsOpen: boolean
@@ -12,12 +12,10 @@ export interface PanelProps {
 }
 
 export interface StepHistoryListProps
-	extends Pick<TableTransformProps, 'workflow' | 'nextInputTable'> {
-	steps: Step[]
-	buttonId?: string | undefined
-	onDeleteClicked?: (index: number) => void
+	extends Pick<TableTransformProps, 'workflow'> {
+	order?: DisplayOrder
+	onDelete?: (index: number) => void
 	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
-	onStartNewStep?: () => void
-	onCreate?: (step: Step, output: string | undefined, index?: number) => void
+	onSave?: (step: Step, output: string | undefined, index?: number) => void
 }

@@ -5,15 +5,11 @@
 import type { SpreadArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useStepDataTable } from '../hooks/useStepDataTable.js'
-import { useTableColumnNames } from '../hooks/useTableColumnNames.js'
 import type { StepComponentProps } from '../types.js'
 import { SpreadBase } from './Spread.base.js'
 
 export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(
-	function Spread({ step, workflow, input, table, onChange }) {
-		const dataTable = useStepDataTable(step, workflow, input, table)
-		const columns = useTableColumnNames(dataTable)
-		return <SpreadBase step={step} onChange={onChange} columns={columns} />
+	function Spread({ step, onChange }) {
+		return <SpreadBase step={step} onChange={onChange} />
 	},
 )

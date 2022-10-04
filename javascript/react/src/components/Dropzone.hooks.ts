@@ -5,11 +5,14 @@
 
 import type { FileWithPath } from '@datashaper/utilities'
 import { FileCollection, FileMimeType } from '@datashaper/utilities'
+import debug from 'debug'
 import { useCallback } from 'react'
 import type { DropzoneState as DzState } from 'react-dropzone'
 import { useDropzone as UseDz } from 'react-dropzone'
 
 import type { DropzoneProps, FileRejection } from './Dropzone.types.js'
+
+const log = debug('datashaper')
 
 export interface DropzoneState extends DzState {
 	acceptedFileTypesExt: string[]
@@ -61,7 +64,7 @@ function useHandleOnDropAccepted(
 				await fileCollection.add(files)
 				onDropAccepted?.(fileCollection)
 			} catch (e) {
-				console.error(e)
+				log('error in useHandleOnDropAccepted', e)
 			}
 		},
 		[onDropAccepted],
@@ -89,7 +92,7 @@ function useHandleOnDrop(onDrop?: (collection: FileCollection) => void) {
 				await fileCollection.add(files)
 				onDrop?.(fileCollection)
 			} catch (e) {
-				console.error(e)
+				log('error in useHandleOnDrop', e)
 			}
 		},
 		[onDrop],

@@ -23,7 +23,6 @@ export function useHandleSaveClick(
 
 export function useInternalTableStep(
 	step: Step | undefined,
-	_lastOutput: string | undefined,
 	workflow: Workflow,
 ): {
 	internal: Step | undefined

@@ -287,7 +287,7 @@ export interface BooleanArgs extends InputColumnListArgs, OutputColumnArgs {
 	operator: BooleanOperator
 }
 
-export interface ConvertArgs extends InputColumnListArgs {
+export interface ConvertArgs extends InputColumnArgs {
 	type: ParseType
 	/**
 	 * Optional radix to use for parsing strings into ints
@@ -314,7 +314,7 @@ export interface DeriveArgs extends OutputColumnArgs {
 	operator: MathOperator
 }
 
-export interface EraseArgs extends InputColumnListArgs {
+export interface EraseArgs extends InputColumnArgs {
 	value: Value
 }
 
@@ -354,7 +354,7 @@ export interface FoldArgs extends InputColumnListArgs {
 
 export type GroupbyArgs = InputColumnListArgs
 
-export interface ImputeArgs extends InputColumnListArgs {
+export interface ImputeArgs extends InputColumnArgs {
 	/**
 	 * Value to fill in empty cells
 	 */
@@ -405,11 +405,11 @@ export interface MergeArgs extends InputColumnListArgs, OutputColumnArgs {
 	preserveSource?: boolean
 }
 
-export interface OnehotArgs extends InputColumnListArgs {
+export interface OnehotArgs extends InputColumnArgs {
 	/**
 	 * Optional prefixes for the output column names
 	 */
-	prefixes?: Record<string, string>
+	prefix?: string
 	preserveSource?: boolean
 }
 
@@ -464,7 +464,7 @@ export interface SampleArgs {
 
 export type SelectArgs = InputColumnListArgs
 
-export interface SpreadArgs extends InputColumnListArgs {
+export interface SpreadArgs extends InputColumnArgs {
 	to: string[]
 	/**
 	 * Delimiter to use when converting string cell values into an array with String.split

@@ -6,7 +6,10 @@
 import type { WorkflowSchema } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { FileCollection, FileType } from '@datashaper/utilities'
+import debug from 'debug'
 import { useCallback } from 'react'
+
+const log = debug('datashaper')
 
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 	return useCallback(
@@ -137,7 +140,7 @@ export function useHandleFilesUpload(
 					}
 					handleCollection?.(fileCollection)
 				} catch (e) {
-					console.error(e)
+					log('error in useHandleFilesUpload', e)
 				}
 			}
 		}

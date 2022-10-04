@@ -5,7 +5,7 @@
 			"verb": "impute",
 			"input": "table11",
 			"args": {
-				"columns": ["y"],
+				"column": "y",
 				"value": 5000
 			},
 			"id": "expected"

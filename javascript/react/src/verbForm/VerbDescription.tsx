@@ -92,7 +92,7 @@ const Verb = styled.div`
 	font-weight: bold;
 	align-items: center;
 	width: 100%;
-	color: ${({ theme }) => theme.application().midContrast().hex()};
+	color: ${({ theme }) => theme.palette.neutralTertiary};
 `
 
 const Row = styled.div`
@@ -110,7 +110,7 @@ const KeyValue = styled.div`
 const Key = styled.div``
 
 const Unset = styled.div`
-	color: ${({ theme }) => theme.application().lowContrast().hex()};
+	color: ${({ theme }) => theme.palette.neutralTertiaryAlt};
 	&:before {
 		content: 'unset';
 	}
@@ -121,5 +121,5 @@ const Value = styled.div`
 	text-overflow: ellipsis;
 	overflow: hidden;
 	font-weight: bold;
-	color: ${({ theme }) => theme.application().midContrast().hex()};
+	color: ${({ theme }) => theme.palette.neutralTertiary};
 `

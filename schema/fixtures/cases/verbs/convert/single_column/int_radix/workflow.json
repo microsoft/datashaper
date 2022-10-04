@@ -6,7 +6,7 @@
 			"input": "table19",
 			"id": "expected",
 			"args": {
-				"columns": ["int"],
+				"column": "int",
 				"type": "int",
 				"radix": 10
 			}

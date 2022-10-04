@@ -34,7 +34,6 @@ import { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
-import type { Theme } from '@thematic/core';
 import type { Verb } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
 
@@ -52,6 +51,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     defaultSortDirection?: SortDirection;
     // (undocumented)
     features?: DetailsListFeatures;
+    fill?: boolean;
     isHeaderFixed?: boolean;
     // (undocumented)
     limit?: number;
@@ -145,33 +145,6 @@ export interface ColumnOptions {
 // @public (undocumented)
 export type ColumnRenderFunction = (item?: any, index?: number, column?: IColumn) => any;
 
-// Warning: (ae-missing-release-tag) "CommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const CommandBar: React.FC<CommandBarProps>;
-
-// Warning: (ae-missing-release-tag) "CommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CommandBarProps extends ICommandBarProps {
-    // (undocumented)
-    background?: string;
-    // (undocumented)
-    color?: string;
-    // (undocumented)
-    height?: string;
-}
-
-// Warning: (ae-missing-release-tag) "createDefaultCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createDefaultCommandBar({ styles, ...props }: ICommandBarProps): ReactElement<ICommandBarProps, any>;
-
-// Warning: (ae-missing-release-tag) "createDefaultHeaderCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createDefaultHeaderCommandBar({ styles, ...props }: ICommandBarProps, theme: Theme, far?: boolean): ReactElement<ICommandBarProps, any>;
-
 // Warning: (ae-missing-release-tag) "DetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -192,6 +165,16 @@ export interface DetailsListFeatures {
     smartHeaders?: boolean;
     statsColumnHeaders?: boolean;
     statsColumnTypes?: StatsColumnType[];
+}
+
+// Warning: (ae-missing-release-tag) "DisplayOrder" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum DisplayOrder {
+    // (undocumented)
+    FirstOnTop = "first-on-top",
+    // (undocumented)
+    LastOnTop = "last-on-top"
 }
 
 // Warning: (ae-missing-release-tag) "downloadCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -291,6 +274,8 @@ export interface HistoryButtonProps {
     steps?: number;
     // (undocumented)
     styles?: IButtonStyles;
+    // (undocumented)
+    title?: string;
 }
 
 // Warning: (ae-forgotten-export) The symbol "CustomIconProps" needs to be exported by the entry point index.d.ts
@@ -299,23 +284,29 @@ export interface HistoryButtonProps {
 // @public (undocumented)
 export const HistoryIcon: (props: CustomIconProps) => JSX.Element;
 
-// Warning: (ae-missing-release-tag) "ManageWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "HistoryPanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const ManageWorkflow: React.FC<ManageWorkflowProps>;
+export const HistoryPanel: React.FC<HistoryPanelProps>;
 
-// Warning: (ae-missing-release-tag) "ManageWorkflowProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "HistoryPanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ManageWorkflowProps extends Omit<Omit<TransformModalProps, 'workflow'>, 'index'> {
+export interface HistoryPanelProps {
     // (undocumented)
-    historyView?: boolean;
+    children?: React.ReactNode;
     // (undocumented)
-    inputs: TableContainer[];
-    onSelect?: (name: string) => void;
-    onUpdateOutput?: (output: TableContainer[]) => void;
-    onUpdateWorkflow?: (workflow: Workflow) => void;
-    workflow?: Workflow;
+    isCollapsed: boolean;
+    // (undocumented)
+    showStepCount?: boolean;
+    // (undocumented)
+    steps?: Step[];
+    // (undocumented)
+    title?: string;
+    // (undocumented)
+    titleStyle?: React.CSSProperties;
+    // (undocumented)
+    toggleCollapsed: () => void;
 }
 
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -333,39 +324,16 @@ export interface PanelProps {
     panelIsOpen: boolean;
 }
 
-// Warning: (ae-missing-release-tag) "PrepareDataFull" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ProjectManagementCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const PrepareDataFull: React.FC<PrepareDataFullProps>;
+export const ProjectManagementCommandBar: React.FC<ProjectManagementCommandBarProps>;
 
-// Warning: (ae-missing-release-tag) "PrepareDataFullProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ProjectManagementCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface PrepareDataFullProps {
-    derived: TableContainer[];
-    inputs: TableContainer[];
-    // (undocumented)
-    onColumnClick?: (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined) => void;
-    onSelectedTableIdChanged: (value: string | undefined) => void;
-    onUpdateOutput?: (tables: TableContainer[]) => void;
-    onUpdateWorkflow?: (workflow: Workflow) => void;
-    outputHeaderCommandBar?: ReactElement<any, any>;
-    // (undocumented)
-    selectedColumn?: string;
-    selectedTableId: string | undefined;
-    stepsPosition?: 'bottom' | 'middle';
-    workflow: Workflow;
-}
-
-// Warning: (ae-missing-release-tag) "ProjectMgmtCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const ProjectMgmtCommandBar: React.FC<ProjectMgmtCommandBarProps>;
-
-// Warning: (ae-missing-release-tag) "ProjectMgmtCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ProjectMgmtCommandBarProps extends Omit<ICommandBarProps, 'items'> {
+export interface ProjectManagementCommandBarProps extends Omit<ICommandBarProps, 'items'> {
+    itemProps?: Partial<ICommandBarItemProps>;
     onUpdateTables: (tables: TableContainer[]) => void;
     onUpdateWorkflow: (steps: Workflow) => void;
     outputTables: TableContainer[];
@@ -488,6 +456,27 @@ export interface StepDescriptionProps {
     step: Step;
 }
 
+// Warning: (ae-missing-release-tag) "StepHistoryList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const StepHistoryList: React.FC<StepHistoryListProps>;
+
+// Warning: (ae-missing-release-tag) "StepHistoryListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflow'> {
+    // (undocumented)
+    onDelete?: (index: number) => void;
+    // (undocumented)
+    onDuplicateClicked?: (step: Step) => void;
+    // (undocumented)
+    onSave?: (step: Step, output: string | undefined, index?: number) => void;
+    // (undocumented)
+    onSelect?: (name: string) => void;
+    // (undocumented)
+    order?: DisplayOrder;
+}
+
 // Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -544,6 +533,10 @@ export const TableCommands: React.FC<TableCommandsProps>;
 // @public (undocumented)
 export interface TableCommandsProps {
     // (undocumented)
+    background?: string;
+    // (undocumented)
+    color?: string;
+    // (undocumented)
     inputTable: TableContainer | undefined;
     // (undocumented)
     onAddStep?: (step: Step, output: string | undefined, index: number | undefined) => void;
@@ -593,7 +586,6 @@ export interface TableTransformProps {
     // (undocumented)
     hideStepSelector?: boolean;
     index: number;
-    nextInputTable?: string;
     // (undocumented)
     onDelete?: (index: number) => void;
     // (undocumented)
@@ -659,7 +651,7 @@ export function useColumnNamesList(table: ColumnTable, columns?: IColumn[]): str
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, computedMetadata?: TableMetadata, columns?: IColumn[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions): IColumn[];
+export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -715,6 +707,15 @@ export function useIncrementingColumnColorScale(meta?: TableMetadata): () => str
 //
 // @public
 export function useInputTableNames(workflow?: Workflow): string[];
+
+// Warning: (ae-missing-release-tag) "useManagementBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useManagementBarDefaults(props?: ProjectManagementCommandBarProps, colors?: {
+    color?: string;
+    background?: string;
+    border?: string;
+}): ProjectManagementCommandBarProps;
 
 // Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -799,7 +800,7 @@ export function useWorkflowOutputListener(workflow: Workflow, setOutput?: ((tabl
 // Warning: (ae-missing-release-tag) "useWorkflowSteps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useWorkflowSteps(workflow: Workflow): Step[];
+export function useWorkflowSteps(workflow: Workflow, order?: DisplayOrder): Step[];
 
 // Warning: (ae-missing-release-tag) "visibleColumnsCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

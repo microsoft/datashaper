@@ -6,7 +6,7 @@
 			"input": "table19",
 			"id": "expected",
 			"args": {
-				"columns": ["decimal"],
+				"column": "decimal",
 				"type": "float"
 			}
 		}

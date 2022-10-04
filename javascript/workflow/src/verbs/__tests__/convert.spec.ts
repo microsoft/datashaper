@@ -19,7 +19,7 @@ describe('test for convert verb', () => {
 	describe('single column', () => {
 		test('int', async () => {
 			const result = await convertStep(store.table(), {
-				columns: ['int'],
+				column: 'int',
 				type: ParseType.Integer,
 			})
 
@@ -33,7 +33,7 @@ describe('test for convert verb', () => {
 
 		test('int radix', async () => {
 			const result = await convertStep(store.table(), {
-				columns: ['int'],
+				column: 'int',
 				type: ParseType.Integer,
 				radix: 10,
 			})
@@ -47,7 +47,7 @@ describe('test for convert verb', () => {
 
 		test('int hex', async () => {
 			const result = await convertStep(store.table(), {
-				columns: ['int_hex'],
+				column: 'int_hex',
 				type: ParseType.Integer,
 			})
 
@@ -61,7 +61,7 @@ describe('test for convert verb', () => {
 
 		test('string to date with different formats', async () => {
 			const result = await convertStep(store.table('table23'), {
-				columns: ['date'],
+				column: 'date',
 				type: ParseType.Date,
 			})
 
@@ -79,7 +79,7 @@ describe('test for convert verb', () => {
 
 		test('number to date', async () => {
 			const result = await convertStep(store.table('table24'), {
-				columns: ['date'],
+				column: 'date',
 				type: ParseType.Date,
 			})
 
@@ -95,7 +95,7 @@ describe('test for convert verb', () => {
 
 		test('string null and string undefined to date', async () => {
 			const result = await convertStep(store.table('table25'), {
-				columns: ['date'],
+				column: 'date',
 				type: ParseType.Date,
 			})
 			expect(result.numCols()).toBe(2)
@@ -111,7 +111,7 @@ describe('test for convert verb', () => {
 
 		test('date to string without format pattern', async () => {
 			const result = await convertStep(store.table('table21'), {
-				columns: ['date'],
+				column: 'date',
 				type: ParseType.String,
 			})
 			expect(result.numCols()).toBe(1)
@@ -123,7 +123,7 @@ describe('test for convert verb', () => {
 
 		test('date to string with format pattern', async () => {
 			const result = await convertStep(store.table('table21'), {
-				columns: ['date'],
+				column: 'date',
 				type: ParseType.String,
 				formatPattern: '%B, %Y',
 			})
@@ -136,7 +136,7 @@ describe('test for convert verb', () => {
 
 		test('string to string with undefined and null values', async () => {
 			const result = await convertStep(store.table('table26'), {
-				columns: ['values'],
+				column: 'values',
 				type: ParseType.String,
 			})
 			expect(result.numCols()).toBe(2)
@@ -150,7 +150,7 @@ describe('test for convert verb', () => {
 
 		test('boolean to string', async () => {
 			const result = await convertStep(store.table('table14'), {
-				columns: ['z'],
+				column: 'z',
 				type: ParseType.String,
 			})
 			expect(result.numCols()).toBe(3)
@@ -162,7 +162,7 @@ describe('test for convert verb', () => {
 
 		test('number to string', async () => {
 			const result = await convertStep(store.table('table12'), {
-				columns: ['totalSale'],
+				column: 'totalSale',
 				type: ParseType.String,
 			})
 			expect(result.numCols()).toBe(4)
@@ -176,7 +176,7 @@ describe('test for convert verb', () => {
 
 		test('decimal to string', async () => {
 			const result = await convertStep(store.table('table22'), {
-				columns: ['value'],
+				column: 'value',
 				type: ParseType.String,
 			})
 			expect(result.numCols()).toBe(2)
@@ -190,7 +190,7 @@ describe('test for convert verb', () => {
 
 		test('undefined to string', async () => {
 			const result = await convertStep(store.table('table12'), {
-				columns: ['quantity'],
+				column: 'quantity',
 				type: ParseType.String,
 			})
 			expect(result.numCols()).toBe(4)
@@ -204,7 +204,7 @@ describe('test for convert verb', () => {
 
 		test('null to string', async () => {
 			const result = await convertStep(store.table('table15'), {
-				columns: ['y'],
+				column: 'y',
 				type: ParseType.String,
 			})
 			expect(result.numCols()).toBe(3)
@@ -216,7 +216,7 @@ describe('test for convert verb', () => {
 
 		test('decimal', async () => {
 			const result = await convertStep(store.table(), {
-				columns: ['decimal'],
+				column: 'decimal',
 				type: ParseType.Decimal,
 			})
 
@@ -230,7 +230,7 @@ describe('test for convert verb', () => {
 
 		test('boolean', async () => {
 			const result = await convertStep(store.table(), {
-				columns: ['boolean'],
+				column: 'boolean',
 				type: ParseType.Boolean,
 			})
 
@@ -240,26 +240,6 @@ describe('test for convert verb', () => {
 			expect(result.get('boolean', 1)).toBe(false)
 			expect(result.get('boolean', 2)).toBe(true)
 			expect(result.get('boolean', 3)).toBe(false)
-		})
-	})
-
-	describe('multi column', () => {
-		test('int', async () => {
-			const result = await convertStep(store.table(), {
-				columns: ['int', 'int_hex'],
-				type: ParseType.Integer,
-			})
-
-			expect(result.numCols()).toBe(5)
-			expect(result.numRows()).toBe(4)
-			expect(result.get('int', 0)).toBe(1)
-			expect(result.get('int', 1)).toBe(-12)
-			expect(result.get('int', 2)).toBe(40098)
-			expect(result.get('int', 3)).toBeNaN()
-			expect(result.get('int_hex', 0)).toBe(0)
-			expect(result.get('int_hex', 1)).toBe(16777215)
-			expect(result.get('int_hex', 2)).toBe(255)
-			expect(result.get('int_hex', 3)).toBeNaN()
 		})
 	})
 })

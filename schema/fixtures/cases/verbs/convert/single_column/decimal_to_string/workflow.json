@@ -6,7 +6,7 @@
 			"input": "table22",
 			"id": "expected",
 			"args": {
-				"columns": ["value"],
+				"column": "value",
 				"type": "string"
 			}
 		}

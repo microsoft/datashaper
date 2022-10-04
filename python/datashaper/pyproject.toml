@@ -4,7 +4,7 @@ version = "0.0.7"
 description = "This project provides a collection of utilities for doing lightweight data wrangling."
 authors = [
     "Nathan Evans <naevans@microsoft.com>",
-    "Andres Morales <andresmor@microsoft.com>"
+    "Andres Morales <andresmor@microsoft.com>",
 ]
 license = "MIT"
 readme = "README.md"
@@ -13,15 +13,21 @@ readme = "README.md"
 python = ">=3.8,<3.10"
 pandas = "^1.4.1"
 jsonschema = "^4.5.1"
-black = "^22.3.0"
 
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
-isort = "^5.10.1"
+[tool.poetry.group.dev.dependencies]
+bandit = "^1.7.4"
+black = "^22.3.0"
+codespell = "^2.1.0"
 flake8 = "^4.0.1"
-mypy = "^0.931"
-pytest-cov = "^3.0.0"
 ipykernel = "^6.7.0"
+isort = "^5.10.1"
+mypy = "^0.931"
+poethepoet = "^0.16.0"
+pydocstyle = "^6.1.1"
+pytest = "^5.2"
+pytest-cov = "^3.0.0"
+semversioner = "^1.3.0"
+toml = "^0.10.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -44,7 +50,6 @@ force-exclude = '''
 .*/setup\.py$
 '''
 
-
 [tool.mypy]
 check_untyped_defs = true
 ignore_missing_imports = true
@@ -54,8 +59,33 @@ warn_unused_ignores = true
 files = "datashaper"
 
 [tool.coverage.run]
-omit = [
-    "tests/*",
-    ".*",
-    "data/*"
-    ]
+omit = ["tests/*", ".*", "data/*"]
+
+[tool.poe.tasks]
+_flake8 = 'flake8 datashaper'
+_bandit = 'bandit -r datashaper'
+_black = 'black datashaper tests'
+_isort = 'isort datashaper tests'
+_black_check = 'black --check datashaper tests'
+_isort_check = 'isort --check datashaper tests'
+_pydocstyle = 'pydocstyle datashaper'
+_codespell = 'codespell dodiscover/ doc/ examples/ --ignore-words=.codespellignore --skip "**/_build/*,**/auto_examples/*"'
+_changelog = 'semversioner changelog > CHANGELOG.md'
+_apply_version = 'semversioner release'
+test = "pytest  -v tests"
+
+[[tool.poe.tasks.lint]]
+sequence = ['_flake8', '_bandit', '_codespell', '_pydocstyle']
+ignore_fail = 'return_non_zero'
+
+[[tool.poe.tasks.format]]
+sequence = ['_black', '_isort']
+ignore_fail = 'return_non_zero'
+
+[[tool.poe.tasks.check_format]]
+sequence = ['_black_check', '_isort_check']
+ignore_fail = 'return_non_zero'
+
+[tool.pydocstyle]
+match = '^(?!setup|__init__|test_).*\.py'
+match-dir = '^datashaper.*'
