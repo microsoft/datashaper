@@ -43,7 +43,7 @@ export class DataSource
 	}
 
 	private _refreshData(): void {
-		readTable(this._source, this._format, this.parser, this.shape)
+		readTable(this._source, this.toSchema())
 			.then(table =>
 				this._output.next(
 					// derive row numbers from the csvs

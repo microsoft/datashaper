@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DataShape, ParserOptions } from '@datashaper/schema'
+import type {
+	DataShape,
+	DataTableSchema,
+	ParserOptions,
+} from '@datashaper/schema'
 import { DataFormat, DataOrientation } from '@datashaper/schema'
 import { from, fromArrow, fromJSON } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -23,17 +27,16 @@ import { getParser, validOptions } from './readTable.utils.js'
  */
 export async function readTable(
 	input: Blob,
-	format: DataFormat,
-	options?: ParserOptions,
-	shape?: DataShape,
+	schema: DataTableSchema,
 ): Promise<ColumnTable> {
+	const { format, shape, parser } = schema
 	switch (format) {
 		case DataFormat.JSON:
 			return readJSONTable(await input.text(), shape)
 		case DataFormat.ARROW:
 			return fromArrow(await input.arrayBuffer())
 		case DataFormat.CSV:
-			return readCsvTable(await input.text(), options)
+			return readCsvTable(await input.text(), parser)
 		default:
 			throw new Error(`unknown data format: ${format}`)
 	}
@@ -53,7 +56,8 @@ export function readCsvTable(
 		...options,
 	})
 }
-export function readJSONTable(
+
+function readJSONTable(
 	text: string,
 	shapeOptions: DataShape = DEFAULT_DATA_SHAPE_JSON_OPTIONS,
 ): ColumnTable {

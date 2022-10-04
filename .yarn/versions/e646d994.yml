@@ -1,5 +1,5 @@
 releases:
   "@datashaper/react": patch
-  "@datashaper/tables": patch
+  "@datashaper/tables": minor
   "@datashaper/webapp": patch
   "@datashaper/workflow": patch
