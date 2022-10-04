@@ -7,7 +7,7 @@ import { BinStrategy } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
 import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import { memo, useEffect,useMemo } from 'react'
+import { memo, useEffect, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'
 import type { FormInput } from '../verbForm/VerbForm.js'
@@ -21,7 +21,7 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> & {
 	table: ColumnTable
 } = memo(function BinBase({ step, onChange, table }) {
 	useEffect(() => {
-		if (table !== undefined) {
+		if (table != null) {
 			const rollup = table.rollup({
 				min: op.min(step.args.column),
 				max: op.max(step.args.column),
@@ -36,7 +36,7 @@ export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> & {
 				},
 			})
 		}
-	}, [])
+	}, [table])
 
 	const verbInputs = useMemo<FormInput<BinArgs>[]>(
 		() => [
