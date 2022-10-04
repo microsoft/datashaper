@@ -15,5 +15,7 @@ export const Bin: React.FC<StepComponentProps<BinArgs>> = memo(function Bin({
 	step,
 	onChange,
 }) {
+	step.args.min = 0
+	step.args.max = 100
 	return <BinBase step={step} onChange={onChange} />
 })

@@ -27,19 +27,14 @@ export const binStep: ColumnTableStep<BinArgs> = (input, args) => {
  */
 function binExpr(input: ColumnTable, args: BinArgs) {
 	const { column, clamped, printRange = false } = args
-	const step = computeBins(input, args)
-	return fixedBinStep(
-		column,
-		args.min ?? Number.NEGATIVE_INFINITY,
-		args.max ?? Number.POSITIVE_INFINITY,
-		step,
-		clamped,
-		printRange,
-	)
+	const [min, max, step] = computeBins(input, args)
+	return fixedBinStep(column, min, max, step, clamped, printRange)
 }
 
 function computeBins(input: ColumnTable, args: BinArgs) {
 	const { strategy, column, fixedwidth, fixedcount } = args
+	const stats = getStats(input, column, args.min, args.max)
+	const [min, max] = stats
 	switch (strategy) {
 		case BinStrategy.Auto:
 			return input.derive({ bins: op.bins(column) }).get('bins', 0)
@@ -47,19 +42,38 @@ function computeBins(input: ColumnTable, args: BinArgs) {
 			if (!fixedwidth) {
 				throw new Error('Must supply a bin width')
 			}
-			return fixedwidth
+			return [min, max, fixedwidth]
 		case BinStrategy.FixedCount:
 			if (!fixedcount) {
 				throw new Error('Must supply a bin count')
 			}
-			return (
-				((args.max ?? Number.POSITIVE_INFINITY) -
-					(args.min ?? Number.NEGATIVE_INFINITY)) /
-				fixedcount
-			)
+			return [min, max, (max - min) / fixedcount]
 		default:
 			throw new Error(`Unsupported bin strategy ${strategy}`)
 	}
+}
+
+// compute the min/max from the table but allow user override of these bounds
+function getStats(
+	table: ColumnTable,
+	column: string,
+	min?: number,
+	max?: number,
+): [number, number] {
+	return [
+		min ||
+			table
+				.rollup({
+					min: op.min(column),
+				})
+				.get('min', 0),
+		max ||
+			table
+				.rollup({
+					max: op.max(column),
+				})
+				.get('max', 0),
+	]
 }
 
 export const bin = stepVerbFactory(binStep)
