@@ -6,7 +6,6 @@ import type { BinArgs } from '@datashaper/schema'
 import { BinStrategy } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
 import { op } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useEffect, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../types.js'
@@ -17,99 +16,99 @@ import { checkbox, enumDropdown } from '../verbForm/VerbFormFactories.js'
 /**
  * Provides inputs for a binning step.
  */
-export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> & {
-	table: ColumnTable
-} = memo(function BinBase({ step, onChange, table }) {
-	useEffect(() => {
-		if (table != null) {
-			const rollup = table.rollup({
-				min: op.min(step.args.column),
-				max: op.max(step.args.column),
-			})
+export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
+	function BinBase({ step, onChange, table }) {
+		useEffect(() => {
+			if (table != null) {
+				const rollup = table.rollup({
+					min: op.min(step.args.column),
+					max: op.max(step.args.column),
+				})
 
-			onChange({
-				...step,
-				args: {
-					...step.args,
-					min: rollup.get('min', 0),
-					max: rollup.get('max', 0),
-				},
-			})
-		}
-	}, [table])
-
-	const verbInputs = useMemo<FormInput<BinArgs>[]>(
-		() => [
-			enumDropdown(
-				'Bin strategy',
-				BinStrategy,
-				step.args.strategy,
-				(s, opt) => (s.args.strategy = opt as BinStrategy),
-				{ required: true },
-			),
-			{
-				label: 'Bin count',
-				type: FormInputType.NumberSpinner,
-				if: step.args.strategy === BinStrategy.FixedCount,
-				min: 1,
-				max: 100,
-				step: 1,
-				onChange: (s, opt) => (s.args.fixedcount = num(opt as string)),
-				current: step.args.fixedcount,
-			},
-			{
-				label: 'Bin size',
-				type: FormInputType.NumberSpinner,
-				if: step.args.strategy === BinStrategy.FixedWidth,
-				min: 1,
-				onChange: (s, opt) => (s.args.fixedwidth = num(opt as string)),
-				current: step.args.fixedwidth,
-			},
-			{
-				label: 'Min Boundary',
-				type: FormInputType.NumberSpinner,
-				if: step.args.strategy !== BinStrategy.Auto,
-				onChange: (s, opt) => (s.args.min = num(opt as string)),
-				current: step.args.min,
-				advanced: true,
-			},
-			{
-				label: 'Max Boundary',
-				type: FormInputType.NumberSpinner,
-				if: step.args.strategy !== BinStrategy.Auto,
-				onChange: (s, opt) => (s.args.max = num(opt as string)),
-				current: step.args.max,
-				advanced: true,
-			},
-			checkbox(
-				'Clamp to min/max',
-				step.args.clamped,
-				(s, val) => (s.args.clamped = val as boolean),
-				{
-					if: step.args.strategy !== BinStrategy.Auto,
-					styles: {
-						root: {
-							marginTop: 8,
-						},
+				onChange({
+					...step,
+					args: {
+						...step.args,
+						min: rollup.get('min', 0),
+						max: rollup.get('max', 0),
 					},
+				})
+			}
+		}, [table, onChange, step])
+
+		const verbInputs = useMemo<FormInput<BinArgs>[]>(
+			() => [
+				enumDropdown(
+					'Bin strategy',
+					BinStrategy,
+					step.args.strategy,
+					(s, opt) => (s.args.strategy = opt as BinStrategy),
+					{ required: true },
+				),
+				{
+					label: 'Bin count',
+					type: FormInputType.NumberSpinner,
+					if: step.args.strategy === BinStrategy.FixedCount,
+					min: 1,
+					max: 100,
+					step: 1,
+					onChange: (s, opt) => (s.args.fixedcount = num(opt as string)),
+					current: step.args.fixedcount,
+				},
+				{
+					label: 'Bin size',
+					type: FormInputType.NumberSpinner,
+					if: step.args.strategy === BinStrategy.FixedWidth,
+					min: 1,
+					onChange: (s, opt) => (s.args.fixedwidth = num(opt as string)),
+					current: step.args.fixedwidth,
+				},
+				{
+					label: 'Min Boundary',
+					type: FormInputType.NumberSpinner,
+					if: step.args.strategy !== BinStrategy.Auto,
+					onChange: (s, opt) => (s.args.min = num(opt as string)),
+					current: step.args.min,
 					advanced: true,
 				},
-			),
-			checkbox(
-				'Print range as output',
-				step.args.printRange,
-				(s, opt) => (s.args.printRange = opt as boolean),
 				{
-					styles: {
-						root: {
-							marginTop: 8,
+					label: 'Max Boundary',
+					type: FormInputType.NumberSpinner,
+					if: step.args.strategy !== BinStrategy.Auto,
+					onChange: (s, opt) => (s.args.max = num(opt as string)),
+					current: step.args.max,
+					advanced: true,
+				},
+				checkbox(
+					'Clamp to min/max',
+					step.args.clamped,
+					(s, val) => (s.args.clamped = val as boolean),
+					{
+						if: step.args.strategy !== BinStrategy.Auto,
+						styles: {
+							root: {
+								marginTop: 8,
+							},
+						},
+						advanced: true,
+					},
+				),
+				checkbox(
+					'Print range as output',
+					step.args.printRange,
+					(s, opt) => (s.args.printRange = opt as boolean),
+					{
+						styles: {
+							root: {
+								marginTop: 8,
+							},
 						},
 					},
-				},
-			),
-		],
-		[step],
-	)
+				),
+			],
+			[step],
+		)
 
-	return <VerbForm onChange={onChange} step={step} inputs={verbInputs} />
-})
+		return <VerbForm onChange={onChange} step={step} inputs={verbInputs} />
+	},
+)
