@@ -14,14 +14,14 @@ import type { Maybe } from '@datashaper/workflow'
 import { all, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import debug from 'debug'
-import type { Observable, Subscription } from 'rxjs';
-import { BehaviorSubject, EMPTY , map } from 'rxjs'
+import type { Observable, Subscription } from 'rxjs'
+import { BehaviorSubject, EMPTY, map } from 'rxjs'
 
 import { Codebook } from './Codebook.js'
-import type { DataPackage } from './DataPackage.js'
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
+import type { TableStore } from './TableStore.js'
 import type { SchemaResource } from './types.js'
 import {
 	isCodebook,
@@ -53,7 +53,7 @@ export class DataTable
 	public readonly workflow: Workflow = new Workflow()
 
 	private _workflowExecutor: WorkflowExecutor = new WorkflowExecutor(
-		this.id,
+		this.name,
 		this._source,
 		this._inputs,
 		this.workflow,
@@ -97,13 +97,13 @@ export class DataTable
 	}
 
 	// #region Class Fields
-	public override get id(): string {
-		return super.id
+	public override get name(): string {
+		return super.name
 	}
 
-	public override set id(id: string) {
-		super.id = id
-		this._workflowExecutor.id = id
+	public override set name(value: string) {
+		super.name = value
+		this._workflowExecutor.name = value
 		this._onChange.next()
 	}
 
@@ -200,16 +200,17 @@ export class DataTable
 		}
 	}
 
-	public connect(store: DataPackage): void {
+	public connect(store: TableStore): void {
 		const rebind = () => {
 			this._inputs.clear()
-			this._inputNames.forEach(name => {
-				this._inputs.set(name, store.get(name)?.output ?? EMPTY)
-			})
+			store.names.forEach(name =>
+				this._inputs.set(name, store.get(name)?.output ?? EMPTY),
+			)
 			this._workflowExecutor.wireWorkflowInput()
 		}
 
 		store.onChange(rebind)
+		rebind()
 	}
 }
 
@@ -228,7 +229,7 @@ class WorkflowExecutor {
 	public readonly output = new BehaviorSubject<Maybe<TableContainer>>(undefined)
 
 	constructor(
-		private _id: string,
+		private _name: string,
 		private readonly source: BehaviorSubject<Maybe<ColumnTable>>,
 		private readonly inputs: Map<string, Observable<Maybe<TableContainer>>>,
 		private readonly workflow: Workflow,
@@ -266,33 +267,28 @@ class WorkflowExecutor {
 	}
 
 	private emit(): void {
-		this.output.next({ id: this.id, table: this._outputTable })
+		this.output.next({ id: this.name, table: this._outputTable })
 	}
 
 	public wireWorkflowInput() {
-		if (this.source != null) {
-			this.workflow.addInputObservable(
-				this._id,
-				this.source.pipe(
-					map(table => {
-						const metadata = table && introspect(table, true)
-						return { id: this._id, table, metadata }
-					}),
-				),
-			)
-		}
-
-		// Add peer-table inputs
-		if (this.inputs.size > 0) {
-			this.workflow.addInputObservables(this.inputs)
-		}
+		const inputMap = new Map(this.inputs)
+		inputMap.set(
+			this.name,
+			this.source.pipe(
+				map(table => {
+					const metadata = table && introspect(table, true)
+					return { id: this.name, table, metadata }
+				}),
+			),
+		)
+		this.workflow.addInputObservables(inputMap)
 	}
 
-	public get id() {
-		return this._id
+	public get name() {
+		return this._name
 	}
-	public set id(id: string) {
-		this._id = id
+	public set name(value: string) {
+		this._name = value
 		this.wireWorkflowInput()
 	}
 }

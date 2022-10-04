@@ -8,6 +8,7 @@ import { createDataPackageSchemaObject } from '@datashaper/schema'
 
 import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
+import { TableStore } from './TableStore.js'
 import type { SchemaResource } from './types.js'
 import { isDataTable, toResourceSchema } from './utils.js'
 
@@ -15,7 +16,7 @@ export class DataPackage
 	extends Named
 	implements SchemaResource<DataPackageSchema>
 {
-	private _tables: Map<string, DataTable> = new Map()
+	private _tableStore: TableStore = new TableStore()
 	private _initPromise: Promise<void>
 
 	public constructor(
@@ -30,55 +31,19 @@ export class DataPackage
 		return this._initPromise
 	}
 
-	public add(table: DataTable): void {
-		this._add(table)
-		this._onChange.next()
-	}
-
-	private _add(table: DataTable): void {
-		let { name } = table
-		this._tables.set(name, table)
-		table.onChange(() => {
-			if (name !== table.name) {
-				this._tables.delete(name)
-				this._tables.set(table.name, table)
-				name = table.name
-
-				this._onChange.next()
-			}
-		})
-	}
-
-	public remove(name: string): void {
-		this._tables.delete(name)
-		this._onChange.next()
-	}
-
-	public get(name: string): DataTable | undefined {
-		return this._tables.get(name)
-	}
-
-	public get size(): number {
-		return this._tables.size
-	}
-
-	public get names(): string[] {
-		return [...this._tables.keys()]
-	}
-
 	public clear(): void {
-		this._tables.clear()
+		this._tableStore.clear()
 		this._onChange.next()
 	}
 
-	public get tables(): Map<string, DataTable> {
-		return this._tables
+	public get tableStore(): TableStore {
+		return this._tableStore
 	}
 
 	public override toSchema(): DataPackageSchema {
 		return createDataPackageSchemaObject({
 			...super.toSchema(),
-			resources: [...this._tables.values()].map(t => t.toSchema()),
+			resources: [...this._tableStore.tables.values()].map(t => t.toSchema()),
 		})
 	}
 
@@ -87,22 +52,22 @@ export class DataPackage
 		files?: Map<string, Blob>,
 		quiet?: boolean,
 	): Promise<void> {
+		this.clear()
 		await super.loadSchema(schema, files, true)
-		this._tables.clear()
 
 		if (schema?.resources) {
 			for (const r of schema?.resources ?? []) {
 				const resource = await toResourceSchema(r, files)
 				if (resource && isDataTable(resource)) {
 					const table = new DataTable(resource, files)
-					this._add(table)
+					this._tableStore.add(table)
 					await table.initialize()
 				}
 			}
 		}
 
-		for (const table of this._tables.values()) {
-			table.connect(this)
+		for (const table of this._tableStore.tables.values()) {
+			table.connect(this.tableStore)
 		}
 
 		if (!quiet) {
