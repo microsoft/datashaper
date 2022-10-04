@@ -2,13 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	DataShape,
-	ParserOptions} from '@datashaper/schema';
-import {
-	DataFormat,
-	DataOrientation
-} from '@datashaper/schema'
+import type { DataShape, ParserOptions } from '@datashaper/schema'
+import { DataFormat, DataOrientation } from '@datashaper/schema'
 import { from, fromArrow, fromJSON } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -62,8 +57,7 @@ export function readJSONTable(
 	text: string,
 	shapeOptions: DataShape = DEFAULT_DATA_SHAPE_JSON_OPTIONS,
 ): ColumnTable {
-	if (shapeOptions.orientation === DataOrientation.Columnar) {
-		return fromJSON(text, {})
-	}
-	return from(JSON.parse(text) as JSON)
+	return shapeOptions.orientation === DataOrientation.Columnar
+		? fromJSON(text, {})
+		: from(JSON.parse(text))
 }
