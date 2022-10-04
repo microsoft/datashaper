@@ -19,7 +19,7 @@ import { checkbox, enumDropdown } from '../verbForm/VerbFormFactories.js'
 export const BinBase: React.FC<StepComponentBaseProps<BinArgs>> = memo(
 	function BinBase({ step, onChange, table }) {
 		useEffect(() => {
-			if (table != null) {
+			if (table != null && onChange != null) {
 				const rollup = table.rollup({
 					min: op.min(step.args.column),
 					max: op.max(step.args.column),
