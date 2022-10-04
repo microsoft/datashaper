@@ -6,19 +6,8 @@
 		"TODO: We're referencing the datatable json definition, which should be materialized before passing into the workflow",
 		"nhefs/datatable.json"
 	],
-	"output": [
-		{
-			"node": "bin",
-			"name": "bin"
-		},
-		{
-			"node": "binarize",
-			"name": "binarize"
-		}
-	],
 	"steps": [
 		{
-			"id": "bin",
 			"args": {
 				"strategy": "auto",
 				"fixedcount": 10,
@@ -29,12 +18,11 @@
 			"verb": "bin",
 			"input": {
 				"source": {
-					"node": "nhefs.csv"
+					"node": "nhefs"
 				}
 			}
 		},
 		{
-			"id": "binarize",
 			"args": {
 				"to": "high-cholesterol",
 				"criteria": [
@@ -47,12 +35,7 @@
 				"logical": "or",
 				"column": "cholesterol"
 			},
-			"verb": "binarize",
-			"input": {
-				"source": {
-					"node": "bin"
-				}
-			}
+			"verb": "binarize"
 		}
 	]
 }

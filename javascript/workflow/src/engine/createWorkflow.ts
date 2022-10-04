@@ -18,11 +18,12 @@ import { Workflow } from '../resources/Workflow.js'
  * @param tables - The fixed table map
  * @returns The built reactive processing graph
  */
-export function createWorkflow(
+export async function createWorkflow(
 	input: WorkflowSchema,
 	tables: TableContainer[],
-): Workflow {
-	const graph = new Workflow(input)
-	graph.addInputTables(tables)
-	return graph
+): Promise<Workflow> {
+	const wf = new Workflow(input)
+	await wf.initializate()
+	wf.addInputTables(tables)
+	return wf
 }

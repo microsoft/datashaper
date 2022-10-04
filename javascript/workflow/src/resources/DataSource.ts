@@ -28,6 +28,7 @@ export class DataSource
 	public readonly shape: DataShape = new DataShape()
 	private _format: DataFormat = DataFormat.CSV
 	private _source: Blob | undefined
+	private _initPromise: Promise<void>
 
 	public constructor(datatable?: DataTableSchema) {
 		super()
@@ -38,7 +39,11 @@ export class DataSource
 		this.parser.onChange(handleSubItemChange)
 		this.shape.onChange(handleSubItemChange)
 
-		this.loadSchema(datatable)
+		this._initPromise = this.loadSchema(datatable)
+	}
+
+	public initialize(): Promise<void> {
+		return this._initPromise
 	}
 
 	private _refreshData(): void {

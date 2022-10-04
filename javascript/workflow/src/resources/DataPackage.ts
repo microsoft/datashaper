@@ -15,48 +15,94 @@ export class DataPackage
 	extends Named
 	implements SchemaResource<DataPackageSchema>
 {
-	private _tables: DataTable[] = []
+	private _tables: Map<string, DataTable> = new Map()
+	private _initPromise: Promise<void>
 
 	public constructor(
 		public dataPackage?: DataPackageSchema,
 		resources?: Map<string, Blob>,
 	) {
 		super()
-		this.loadSchema(dataPackage, resources)
+		this._initPromise = this.loadSchema(dataPackage, resources)
 	}
 
-	public addTable(table: DataTable): void {
-		this._tables.push(table)
+	public initialize(): Promise<void> {
+		return this._initPromise
+	}
+
+	public add(table: DataTable): void {
+		this._add(table)
 		this._onChange.next()
 	}
 
-	public removeTable(table: DataTable): void {
-		this._tables = this._tables.filter(t => t !== table)
+	private _add(table: DataTable): void {
+		let { name } = table
+		this._tables.set(name, table)
+		table.onChange(() => {
+			if (name !== table.name) {
+				this._tables.delete(name)
+				this._tables.set(table.name, table)
+				name = table.name
+
+				this._onChange.next()
+			}
+		})
+	}
+
+	public remove(name: string): void {
+		this._tables.delete(name)
 		this._onChange.next()
+	}
+
+	public get(name: string): DataTable | undefined {
+		return this._tables.get(name)
+	}
+
+	public get size(): number {
+		return this._tables.size
+	}
+
+	public get names(): string[] {
+		return [...this._tables.keys()]
+	}
+
+	public clear(): void {
+		this._tables.clear()
+		this._onChange.next()
+	}
+
+	public get tables(): Map<string, DataTable> {
+		return this._tables
 	}
 
 	public override toSchema(): DataPackageSchema {
 		return createDataPackageSchemaObject({
 			...super.toSchema(),
-			resources: this._tables.map(t => t.toSchema()),
+			resources: [...this._tables.values()].map(t => t.toSchema()),
 		})
 	}
 
 	public override async loadSchema(
 		schema: DataPackageSchema | null | undefined,
-		resources?: Map<string, Blob>,
+		files?: Map<string, Blob>,
 		quiet?: boolean,
 	): Promise<void> {
-		await super.loadSchema(schema, resources, true)
-		this._tables = []
+		await super.loadSchema(schema, files, true)
+		this._tables.clear()
 
 		if (schema?.resources) {
 			for (const r of schema?.resources ?? []) {
-				const resource = await toResourceSchema(r, resources)
+				const resource = await toResourceSchema(r, files)
 				if (resource && isDataTable(resource)) {
-					this._tables.push(new DataTable(resource, resources))
+					const table = new DataTable(resource, files)
+					this._add(table)
+					await table.initialize()
 				}
 			}
+		}
+
+		for (const table of this._tables.values()) {
+			table.connect(this)
 		}
 
 		if (!quiet) {

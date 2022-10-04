@@ -9,21 +9,23 @@ import type {
 } from '@datashaper/schema'
 import { createDataTableSchemaObject, DataFormat } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { introspect,readTable } from '@datashaper/tables'
+import { introspect, readTable } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
 import { all, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import debug from 'debug'
 import type { Observable, Subscription } from 'rxjs';
-import { BehaviorSubject,map  } from 'rxjs'
+import { BehaviorSubject, EMPTY , map } from 'rxjs'
 
 import { Codebook } from './Codebook.js'
+import type { DataPackage } from './DataPackage.js'
 import { DataShape } from './DataShape.js'
 import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
 import type { SchemaResource } from './types.js'
 import {
 	isCodebook,
+	isDataTable,
 	isRawData,
 	isWorkflow,
 	resolveRawData,
@@ -38,9 +40,12 @@ export class DataTable
 	implements SchemaResource<DataTableSchema>
 {
 	private readonly _source = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
+	private readonly _inputs: Map<string, Observable<Maybe<TableContainer>>> =
+		new Map()
 	private readonly _output = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
+	private _inputNames: string[] = []
 
 	public readonly parser: ParserOptions = new ParserOptions()
 	public readonly shape: DataShape = new DataShape()
@@ -50,11 +55,13 @@ export class DataTable
 	private _workflowExecutor: WorkflowExecutor = new WorkflowExecutor(
 		this.id,
 		this._source,
+		this._inputs,
 		this.workflow,
 	)
 
 	private _format: DataFormat = DataFormat.CSV
 	private _rawData: Blob | undefined
+	private _initPromise: Promise<void>
 
 	public constructor(
 		datatable?: DataTableSchema,
@@ -68,8 +75,11 @@ export class DataTable
 		// listen for workflow execution outputs
 		this._workflowExecutor.output.subscribe(tbl => this._output.next(tbl))
 
-		this.loadSchema(datatable, resources)
-		this.setWorkflowInput()
+		this._initPromise = this.loadSchema(datatable, resources)
+	}
+
+	public initialize(): Promise<void> {
+		return this._initPromise
 	}
 
 	private refreshSource = (): void => {
@@ -84,18 +94,6 @@ export class DataTable
 				})
 		}
 		this._onChange.next()
-	}
-
-	private setWorkflowInput() {
-		this.workflow.addInputObservable(
-			this.id,
-			this._source.pipe(
-				map(table => {
-					const metadata = table && introspect(table, true)
-					return { id: this.id, table, metadata }
-				}),
-			),
-		)
 	}
 
 	// #region Class Fields
@@ -157,33 +155,42 @@ export class DataTable
 
 	public override async loadSchema(
 		schema: DataTableSchema | null | undefined,
-		resources?: Map<string, Blob>,
+		files?: Map<string, Blob>,
 		quiet?: boolean,
 	): Promise<void> {
-		await super.loadSchema(schema, resources, true)
-		this.format = schema?.format ?? DataFormat.CSV
+		await super.loadSchema(schema, files, true)
+		this._inputs.clear()
+		this._inputNames = []
+		this._format = schema?.format ?? DataFormat.CSV
 		// these loads will fire onChange events
 		// which will trigger refreshSource
-		this.parser.loadSchema(schema?.parser, resources, true)
-		this.shape.loadSchema(schema?.shape, resources, true)
+		this.parser.loadSchema(schema?.parser, files, true)
+		this.shape.loadSchema(schema?.shape, files, true)
 
-		if (resources != null && schema?.sources != null) {
-			for (const res of schema?.sources ?? []) {
-				if (isRawData(res)) {
-					this.data = await resolveRawData(res as string, resources)
-					continue
-				}
-				const resource = await toResourceSchema(res, resources)
-				if (!resource) {
-					log('cannot resolve resource', res)
-					continue
-				}
-				if (isWorkflow(resource)) {
-					await this.workflow.loadSchema(resource as WorkflowSchema, resources)
-				} else if (isCodebook(resource)) {
-					await this.codebook.loadSchema(resource as CodebookSchema, resources)
-				} else {
-					log('unknown resource type', resource)
+		if (files != null && schema?.sources != null) {
+			for (const r of schema?.sources ?? []) {
+				try {
+					if (isRawData(r, files)) {
+						this.data = await resolveRawData(r as string, files)
+						continue
+					}
+					const res = await toResourceSchema(r, files)
+					if (!res) {
+						log('cannot resolve resource', r)
+						continue
+					}
+					if (isDataTable(res)) {
+						this._inputNames.push(res.name)
+					} else if (isWorkflow(res)) {
+						await this.workflow.loadSchema(res as WorkflowSchema, files)
+					} else if (isCodebook(res)) {
+						await this.codebook.loadSchema(res as CodebookSchema, files)
+					} else {
+						log('unknown resource type', res)
+					}
+				} catch (err) {
+					log('error loading resource', err)
+					throw err
 				}
 			}
 		}
@@ -191,6 +198,18 @@ export class DataTable
 		if (!quiet) {
 			this._onChange.next()
 		}
+	}
+
+	public connect(store: DataPackage): void {
+		const rebind = () => {
+			this._inputs.clear()
+			this._inputNames.forEach(name => {
+				this._inputs.set(name, store.get(name)?.output ?? EMPTY)
+			})
+			this._workflowExecutor.wireWorkflowInput()
+		}
+
+		store.onChange(rebind)
 	}
 }
 
@@ -211,6 +230,7 @@ class WorkflowExecutor {
 	constructor(
 		private _id: string,
 		private readonly source: BehaviorSubject<Maybe<ColumnTable>>,
+		private readonly inputs: Map<string, Observable<Maybe<TableContainer>>>,
 		private readonly workflow: Workflow,
 	) {
 		// When the source changes, re-wire it into the workflow's
@@ -249,16 +269,23 @@ class WorkflowExecutor {
 		this.output.next({ id: this.id, table: this._outputTable })
 	}
 
-	private wireWorkflowInput() {
-		this.workflow.addInputObservable(
-			this._id,
-			this.source.pipe(
-				map(table => {
-					const metadata = table && introspect(table, true)
-					return { id: this._id, table, metadata }
-				}),
-			),
-		)
+	public wireWorkflowInput() {
+		if (this.source != null) {
+			this.workflow.addInputObservable(
+				this._id,
+				this.source.pipe(
+					map(table => {
+						const metadata = table && introspect(table, true)
+						return { id: this._id, table, metadata }
+					}),
+				),
+			)
+		}
+
+		// Add peer-table inputs
+		if (this.inputs.size > 0) {
+			this.workflow.addInputObservables(this.inputs)
+		}
 	}
 
 	public get id() {

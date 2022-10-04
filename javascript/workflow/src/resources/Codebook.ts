@@ -13,10 +13,15 @@ export class Codebook
 	implements SchemaResource<CodebookSchema>
 {
 	private _fields: Field[] = []
+	private _initPromise: Promise<void>
 
 	public constructor(codebook?: CodebookSchema) {
 		super()
-		this.loadSchema(codebook)
+		this._initPromise = this.loadSchema(codebook)
+	}
+
+	public initialize(): Promise<void> {
+		return this._initPromise
 	}
 
 	public get fields(): Field[] {

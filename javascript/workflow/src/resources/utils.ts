@@ -3,39 +3,55 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ResourceSchema } from '@datashaper/schema'
+import fetch from 'cross-fetch'
 
 export const isWorkflow = (r: ResourceSchema): boolean =>
-	r.$schema.indexOf('/workflow/') > -1
+	r.profile === 'workflow' || r.$schema.indexOf('/workflow/') > -1
 
 export const isCodebook = (r: ResourceSchema): boolean =>
-	r.$schema.indexOf('/codebook/') > -1
+	r.profile === 'codebook' || r.$schema.indexOf('/codebook/') > -1
 
 export const isDataTable = (r: ResourceSchema): boolean =>
-	r.$schema.indexOf('/datatable/') > -1
+	r.profile === 'datatable' || r.$schema.indexOf('/datatable/') > -1
 
-export const isRawData = (r: string | ResourceSchema): boolean =>
-	typeof r === 'string' &&
-	(r.endsWith('.csv') ||
-		r.endsWith('.tsv') ||
-		r.endsWith('.json') ||
-		r.endsWith('.arrow'))
+export const isRawData = (
+	r: string | ResourceSchema,
+	files?: Map<string, Blob>,
+): boolean => {
+	if (typeof r === 'string') {
+		if (r.endsWith('.csv') || r.endsWith('.tsv') || r.endsWith('.arrow')) {
+			return true
+		}
+		if (r.endsWith('.json')) {
+			// parse and check type
+			const item = parseFileContent(r, files)
+			return Array.isArray(item)
+		}
+	} else {
+		// raw data may be specified with arrays
+		return Array.isArray(r)
+	}
+	return false
+}
 
 export async function toResourceSchema(
 	item: string | ResourceSchema,
 	files?: Map<string, Blob>,
 ): Promise<ResourceSchema | undefined> {
 	// if the item is a string, look up the resource in the files map
-	if (typeof item === 'string') {
-		const resourceText = await files?.get(item)?.text()
-		if (resourceText == null) return undefined
-		try {
-			return JSON.parse(resourceText)
-		} catch (e) {
-			console.error('error parsing resource ' + item, e)
-			return undefined
-		}
+	return typeof item === 'string' ? parseFileContent(item, files) : item
+}
+
+async function parseFileContent(item: string, files?: Map<string, Blob>) {
+	// if the item is a string, look up the resource in the files map
+	const resourceText = await files?.get(item)?.text()
+	if (resourceText == null) return undefined
+	try {
+		return JSON.parse(resourceText)
+	} catch (e) {
+		console.error('error parsing resource ' + item, e)
+		return undefined
 	}
-	return item
 }
 
 /**
@@ -51,7 +67,12 @@ export function resolveRawData(
 	files: Map<string, Blob>,
 ): Promise<Blob> {
 	const locallyResolved = files.get(resource)
-	return locallyResolved
-		? Promise.resolve(locallyResolved)
-		: fetch(resource).then(r => r.blob())
+	if (locallyResolved) {
+		return Promise.resolve(locallyResolved)
+	} else {
+		if (!resource.startsWith('http')) {
+			throw new Error('Invalid resource URL: ' + resource)
+		}
+		return fetch(resource).then(r => r.blob())
+	}
 }

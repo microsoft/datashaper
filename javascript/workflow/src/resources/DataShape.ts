@@ -15,10 +15,15 @@ export class DataShape
 	private _orientation: DataOrientation | undefined
 	private _nature: DataNature | undefined
 	private _matrix: [width: number, height: number] | undefined
+	private _initPromise: Promise<void>
 
 	public constructor(shape?: DataShapeSchema) {
 		super()
-		this.loadSchema(shape)
+		this._initPromise = this.loadSchema(shape)
+	}
+
+	public initialize(): Promise<void> {
+		return this._initPromise
 	}
 
 	public get orientation(): DataOrientation | undefined {

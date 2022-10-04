@@ -4167,11 +4167,11 @@ __metadata:
     "@types/uuid": ^8.3.4
     ajv: ^8.11.0
     arquero: ^5.1.0
+    cross-fetch: ^3.1.5
     d3-time-format: ^4.1.0
     debug: ^4.3.4
     jest: ^29.0.3
     lodash-es: ^4.17.21
-    node-fetch: ^3.2.10
     regenerator-runtime: ^0.13.9
     rxjs: ^7.5.6
     typescript: ^4.8.3
@@ -11597,6 +11597,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cross-fetch@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "cross-fetch@npm:3.1.5"
+  dependencies:
+    node-fetch: 2.6.7
+  checksum: f6b8c6ee3ef993ace6277fd789c71b6acf1b504fd5f5c7128df4ef2f125a429e29cd62dc8c127523f04a5f2fa4771ed80e3f3d9695617f441425045f505cf3bb
+  languageName: node
+  linkType: hard
+
 "cross-spawn@npm:^6.0.0, cross-spawn@npm:^6.0.5":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
@@ -18035,7 +18044,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
+"node-fetch@npm:2.6.7, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
   dependencies:
