@@ -698,6 +698,12 @@ export function useHandleStepOutputChanged(workflow: Workflow): (step: Step, out
 // @public (undocumented)
 export function useHandleStepSave(workflow: Workflow): (step: Step, index: number | undefined) => Step;
 
+// Warning: (ae-forgotten-export) The symbol "CommandBarColors" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "useHeaderCommandBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useHeaderCommandBarDefaults(props?: ICommandBarProps, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
+
 // Warning: (ae-missing-release-tag) "useIncrementingColumnColorScale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
