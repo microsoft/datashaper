@@ -62,6 +62,6 @@ function readJSONTable(
 	shapeOptions: DataShape = DEFAULT_DATA_SHAPE_JSON_OPTIONS,
 ): ColumnTable {
 	return shapeOptions.orientation === DataOrientation.Columnar
-		? fromJSON(text, {})
+		? fromJSON(text)
 		: from(JSON.parse(text))
 }
