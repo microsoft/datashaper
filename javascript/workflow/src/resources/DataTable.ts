@@ -9,13 +9,12 @@ import type {
 } from '@datashaper/schema'
 import { createDataTableSchemaObject, DataFormat } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { introspect, readTable } from '@datashaper/tables'
+import { readTable } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
-import { all, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import debug from 'debug'
-import type { Observable, Subscription } from 'rxjs'
-import { BehaviorSubject, EMPTY, map } from 'rxjs'
+import type { Observable } from 'rxjs'
+import { BehaviorSubject, EMPTY } from 'rxjs'
 
 import { Codebook } from './Codebook.js'
 import { DataShape } from './DataShape.js'
@@ -30,8 +29,10 @@ import {
 	isWorkflow,
 	resolveRawData,
 	toResourceSchema,
+	withRowNumbers,
 } from './utils.js'
 import { Workflow } from './Workflow.js'
+import { WorkflowExecutor } from './WorkflowExecutor.js'
 
 const log = debug('datashaper')
 
@@ -201,96 +202,15 @@ export class DataTable
 	}
 
 	public connect(store: TableStore): void {
-		const rebind = () => {
+		const rebindInputs = () => {
 			this._inputs.clear()
 			store.names.forEach(name =>
 				this._inputs.set(name, store.get(name)?.output ?? EMPTY),
 			)
-			this._workflowExecutor.wireWorkflowInput()
+			this._workflowExecutor.rebindWorkflowInput()
 		}
 
-		store.onChange(rebind)
-		rebind()
-	}
-}
-
-function withRowNumbers(
-	table: ColumnTable | undefined,
-): ColumnTable | undefined {
-	return table?.derive(
-		{
-			index: op.row_number(),
-		},
-		{ before: all() },
-	)
-}
-
-class WorkflowExecutor {
-	private _workflowSubscription?: Subscription
-	private _outputTable: Maybe<ColumnTable>
-	public readonly output = new BehaviorSubject<Maybe<TableContainer>>(undefined)
-
-	constructor(
-		private _name: string,
-		private readonly source: BehaviorSubject<Maybe<ColumnTable>>,
-		private readonly inputs: Map<string, Observable<Maybe<TableContainer>>>,
-		private readonly workflow: Workflow,
-	) {
-		// When the source changes, re-wire it into the workflow's
-		// input layer
-		this.source.subscribe(table => {
-			if (this.workflow.length > 0) {
-				this.wireWorkflowInput()
-			} else {
-				this._outputTable = table
-				this.emit()
-			}
-		})
-
-		// When the workflow changes, re-bind the output-table observable
-		this.workflow.onChange(() => {
-			if (this._workflowSubscription != null)
-				this._workflowSubscription.unsubscribe()
-
-			if (this.workflow.length > 0) {
-				this._workflowSubscription = this.workflow
-					.outputObservable()
-					?.subscribe(tbl => {
-						this._outputTable = tbl?.table
-						this.emit()
-					})
-			} else {
-				this._outputTable = this.source.value
-				this.emit()
-			}
-		})
-
-		this.wireWorkflowInput()
-	}
-
-	private emit(): void {
-		this.output.next({ id: this.name, table: this._outputTable })
-	}
-
-	public wireWorkflowInput() {
-		const inputMap = new Map(this.inputs)
-		inputMap.set(
-			this.name,
-			this.source.pipe(
-				map(table => {
-					const metadata = table && introspect(table, true)
-					return { id: this.name, table, metadata }
-				}),
-			),
-		)
-		this.workflow.addInputObservables(inputMap)
-	}
-
-	public get name() {
-		return this._name
-	}
-	public set name(value: string) {
-		this._name = value
-		this.wireWorkflowInput()
+		store.onChange(rebindInputs)
+		rebindInputs()
 	}
 }
