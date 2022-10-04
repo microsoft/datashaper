@@ -1,6 +1,9 @@
 import json
 import os
 
+from http.client import HTTPConnection
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from threading import Thread
 from typing import List
 
 import pandas as pd
@@ -11,11 +14,15 @@ from pandas.testing import assert_frame_equal
 from datashaper.graph import ExecutionGraph
 
 
-FIXTURES_PATH = "schema/fixtures/workflow"
-TABLE_STORE_PATH = "schema/fixtures/workflow_inputs"
-SCHEMA_PATH = "schema/workflow.json"
+FIXTURES_PATH = "fixtures/workflow"
+TABLE_STORE_PATH = "fixtures/workflow_inputs"
+SCHEMA_PATH = "workflow.json"
 
-os.chdir("../..")
+os.chdir("../../schema")
+
+server = HTTPServer(("localhost", 8080), SimpleHTTPRequestHandler)
+thread = Thread(target=server.serve_forever, daemon=True)
+thread.start()
 
 
 def read_csv(path: str) -> pd.DataFrame:
