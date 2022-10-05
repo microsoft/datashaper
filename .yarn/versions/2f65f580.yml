@@ -1,12 +1,8 @@
 releases:
   "@datashaper/react": patch
+  "@datashaper/schema": patch
   "@datashaper/tables": patch
+  "@datashaper/utilities": patch
+  "@datashaper/verb-guidance": patch
+  "@datashaper/webapp": minor
   "@datashaper/workflow": major
-
-declined:
-  - "@datashaper/schema"
-  - "@datashaper/webapp"
-
-undecided:
-  - "@datashaper/utilities"
-  - "@datashaper/verb-guidance"
