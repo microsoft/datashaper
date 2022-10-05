@@ -60,7 +60,8 @@ jobs:
       - run: yarn bundle --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
         name: Bundle
 
-      - run: |
-          yarn is_clean
-          git status
+      - run: yarn is_clean
         name: Check if repo is clean
+
+      - run: git status
+        name: Git status
