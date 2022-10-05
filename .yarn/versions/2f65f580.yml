@@ -4,4 +4,9 @@ releases:
   "@datashaper/workflow": major
 
 declined:
+  - "@datashaper/schema"
   - "@datashaper/webapp"
+
+undecided:
+  - "@datashaper/utilities"
+  - "@datashaper/verb-guidance"
