@@ -54,7 +54,9 @@ jobs:
       - run: yarn bundle
         name: Bundle
 
-      - run: git status
+      - run: |
+          git add -A 
+          git status
         name: Git status
 
       - run: yarn is_clean
