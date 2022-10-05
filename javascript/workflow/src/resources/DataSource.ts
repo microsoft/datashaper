@@ -47,7 +47,7 @@ export class DataSource
 			.then(table =>
 				this._output.next(
 					// derive row numbers from the csvs
-					table.derive(
+					table?.derive(
 						{
 							index: op.row_number(),
 						},
