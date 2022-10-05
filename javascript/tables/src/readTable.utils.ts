@@ -131,7 +131,9 @@ export function validOptions(options?: ParserOptions): boolean {
 	const props = Object.keys(options)
 	return props.every((prop: string) =>
 		(validators as any)[prop]
-			? (validators as any)[prop]((options as any)[prop])
+			? (options as any)[prop] != undefined
+				? (validators as any)[prop]((options as any)[prop])
+				: true
 			: true,
 	)
 }

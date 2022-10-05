@@ -87,7 +87,7 @@ export class DataTable
 		if (!this._rawData) {
 			this._source.next(undefined)
 		} else {
-			readTable(this._rawData, this._format, this.parser)
+			readTable(this._rawData, this)
 				.then(table => this._source.next(withRowNumbers(table)))
 				.catch(err => {
 					log('error reading blob', err)
