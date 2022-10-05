@@ -4,8 +4,9 @@
  */
 import type { DataTableSchema } from '@datashaper/schema'
 import { createDataTableSchemaObject, DataFormat } from '@datashaper/schema'
+import { readTable } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
-import { all, fromCSV, fromJSON, op } from 'arquero'
+import { all, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import debug from 'debug'
 import type { Observable } from 'rxjs'
@@ -42,7 +43,7 @@ export class DataSource
 	}
 
 	private _refreshData(): void {
-		this._readBlob()
+		readTable(this._source, this.toSchema())
 			.then(table =>
 				this._output.next(
 					// derive row numbers from the csvs
@@ -58,26 +59,6 @@ export class DataSource
 				log('error reading blob', err)
 				throw err
 			})
-	}
-
-	private async _readBlob(): Promise<ColumnTable> {
-		const format = this._format
-		const parserOptions = this.parser
-		// const layout = this._layout
-
-		switch (format) {
-			case DataFormat.JSON:
-				return fromJSON(await this._source.text(), {})
-
-			case DataFormat.CSV:
-				return fromCSV(await this._source.text(), {
-					delimiter: parserOptions?.delimiter,
-					skip: parserOptions?.skipRows,
-					// header: parserOptions?.header,
-					// TODO: make user-configurable?
-					autoMax: 10000,
-				})
-		}
 	}
 
 	public get data(): Blob {

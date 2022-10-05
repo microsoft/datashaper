@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import { readTable } from '../readTable.js'
 import fetch from 'node-fetch'
+
+import { readCsvTable } from '../readTable.js'
 
 const text = `first,second,third
 1,100,one
@@ -44,13 +45,13 @@ describe('readTable Tests', () => {
 
 	describe('Arquero readCSV tests', () => {
 		it('should load a default data without params', () => {
-			const table = readTable(text)
+			const table = readCsvTable(text)
 			expect(table.numRows()).toBe(9)
 			expect(table.numCols()).toBe(3)
 		})
 
-		it('should load a large dataset', async () => {
-			const table = readTable(largeDataset, {
+		it('should load a large dataset', () => {
+			const table = readCsvTable(largeDataset, {
 				comment: '#',
 				readRows: 466890,
 			})
@@ -58,12 +59,12 @@ describe('readTable Tests', () => {
 		})
 
 		it('should load a large dataset with readRows prop', () => {
-			const table = readTable(largeDataset, { readRows: 2 })
+			const table = readCsvTable(largeDataset, { readRows: 2 })
 			expect(table.numRows()).toBe(2)
 		})
 
 		it('should load a table with custom delimiter and names list', () => {
-			const table = readTable(delimiter, {
+			const table = readCsvTable(delimiter, {
 				header: false,
 				names: ['first', 'second', 'third'],
 				delimiter: ':',
@@ -72,19 +73,19 @@ describe('readTable Tests', () => {
 		})
 
 		it('should load a table with custom delimiter expecting it to guess it', () => {
-			const table = readTable(delimiter, { comment: '$' })
+			const table = readCsvTable(delimiter, { comment: '$' })
 			expect(table.numRows()).toBe(4)
 		})
 
 		it('should load a table skipping commented line 4 with $ as comment char', () => {
-			const table = readTable(altComment, { comment: '$' })
+			const table = readCsvTable(altComment, { comment: '$' })
 			expect(table.column('first')?.get(3)).toBe('5')
 		})
 	})
 
 	describe('Papa Parse readCSV tests', () => {
-		it('should load a table ', async () => {
-			const table = readTable(text, {
+		it('should load a table', () => {
+			const table = readCsvTable(text, {
 				escapeChar: '$',
 				comment: '#',
 			})
@@ -92,8 +93,8 @@ describe('readTable Tests', () => {
 			expect(table.numRows()).toBe(9)
 		})
 
-		it('should load a large dataset', async () => {
-			const table = readTable(largeDataset, {
+		it('should load a large dataset', () => {
+			const table = readCsvTable(largeDataset, {
 				escapeChar: '$',
 				skipBlankLines: true,
 				comment: '#',
@@ -103,7 +104,7 @@ describe('readTable Tests', () => {
 		})
 
 		it('should load a large dataset with readRows prop', () => {
-			const table = readTable(largeDataset, {
+			const table = readCsvTable(largeDataset, {
 				skipRows: 2,
 				escapeChar: '$',
 				readRows: 3,
@@ -112,7 +113,7 @@ describe('readTable Tests', () => {
 		})
 
 		it('should load a table with custom delimiter', () => {
-			const table = readTable(delimiter, {
+			const table = readCsvTable(delimiter, {
 				header: false,
 				delimiter: ':',
 				escapeChar: '$',
@@ -121,12 +122,12 @@ describe('readTable Tests', () => {
 		})
 
 		it('should load a table with custom delimiter expecting it to guess it', () => {
-			const table = readTable(delimiter, { comment: '$', escapeChar: '$' })
+			const table = readCsvTable(delimiter, { comment: '$', escapeChar: '$' })
 			expect(table.numRows()).toBe(4)
 		})
 
 		it('should load a table skipping commented line 4 with $ as comment char', () => {
-			const table = readTable(altComment, { comment: '$', escapeChar: '$' })
+			const table = readCsvTable(altComment, { comment: '$', escapeChar: '$' })
 			expect(table.column('first')?.get(3)).toBe('5')
 		})
 	})

@@ -59,6 +59,7 @@ export {
 	useHandleFilesUpload,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
+	useHeaderCommandBarDefaults,
 	useInputTableNames,
 	useManagementBarDefaults,
 	useOnCreateStep,
