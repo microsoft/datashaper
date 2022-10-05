@@ -4,11 +4,11 @@
  */
 
 import type { ParserOptions } from '@datashaper/schema'
-import { from, fromCSV } from 'arquero'
+import { fromCSV } from 'arquero'
 import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { uniq } from 'lodash-es'
-import { type ParseConfig,default as papa } from 'papaparse'
+import type { ParseConfig } from 'papaparse'
 
 import {
 	ARQUERO_PROPS_MAP,
@@ -29,8 +29,8 @@ export function determineParserType(options?: ParserOptions) {
 export function getParser(options?: ParserOptions) {
 	const type = determineParserType(options)
 	switch (type) {
-		case ParserType.PapaParse:
-			return papaParser
+		// case ParserType.PapaParse:
+		// 	return papaParser
 		case ParserType.Arquero:
 		default:
 			return arqueroParser
@@ -43,19 +43,19 @@ function arqueroParser(text: string, options: ParserOptions = {}): ColumnTable {
 	return options.readRows ? table.slice(0, options.readRows) : table
 }
 
-function papaParser(text: string, options: ParserOptions = {}): ColumnTable {
-	const opts = { ...options }
-	if (opts.skipRows && opts.readRows) {
-		opts.readRows += opts.skipRows
-	}
-	const mappedOptions = mapProps(ParserType.PapaParse, opts) as ParseConfig
-	const table = papa.parse(text, mappedOptions)
-	if (opts.skipRows) {
-		const subset = skipRows(table.data, opts.skipRows)
-		table.data = subset
-	}
-	return from(table.data)
-}
+// function papaParser(text: string, options: ParserOptions = {}): ColumnTable {
+// 	const opts = { ...options }
+// 	if (opts.skipRows && opts.readRows) {
+// 		opts.readRows += opts.skipRows
+// 	}
+// 	const mappedOptions = mapProps(ParserType.PapaParse, opts) as ParseConfig
+// 	const table = papa.parse(text, mappedOptions)
+// 	if (opts.skipRows) {
+// 		const subset = skipRows(table.data, opts.skipRows)
+// 		table.data = subset
+// 	}
+// 	return from(table.data)
+// }
 
 export function hasArqueroOptions(options: ParserOptions): boolean {
 	const props = Object.keys(options)
@@ -76,6 +76,7 @@ export function mapProps(
 		default:
 			return {
 				autoType: false,
+				header: !options?.names?.length,
 				...mapToArqueroOptions(options),
 			}
 	}

@@ -23,10 +23,10 @@ describe('readTable Utils Tests', () => {
 			const type = determineParserType({ delimiter: ';' })
 			expect(type).toBe(ParserType.Arquero)
 		})
-		it('should return Papa parse', () => {
-			const type = determineParserType({ delimiter: ';', skipBlankLines: true })
-			expect(type).toBe(ParserType.PapaParse)
-		})
+		// it('should return Papa parse', () => {
+		// 	const type = determineParserType({ delimiter: ';', skipBlankLines: true })
+		// 	expect(type).toBe(ParserType.PapaParse)
+		// })
 	})
 
 	describe('mapProps', () => {
@@ -34,7 +34,12 @@ describe('readTable Utils Tests', () => {
 			const options = { delimiter: ';', skipRows: 2 }
 			const type = determineParserType(options)
 			const mapped = mapProps(type, options)
-			const expected = { delimiter: ';', skip: 2, autoType: false }
+			const expected = {
+				delimiter: ';',
+				skip: 2,
+				header: true,
+				autoType: false,
+			}
 			expect(mapped).toEqual(expected)
 		})
 		it('should return Papa parse props', () => {
