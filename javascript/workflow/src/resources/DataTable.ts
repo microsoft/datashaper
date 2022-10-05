@@ -7,7 +7,11 @@ import type {
 	DataTableSchema,
 	WorkflowSchema,
 } from '@datashaper/schema'
-import { createDataTableSchemaObject, DataFormat } from '@datashaper/schema'
+import {
+	createDataTableSchemaObject,
+	DataFormat,
+	LATEST_DATATABLE_SCHEMA,
+} from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { readTable } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
@@ -40,6 +44,7 @@ export class DataTable
 	extends Resource
 	implements SchemaResource<DataTableSchema>
 {
+	public readonly $schema = LATEST_DATATABLE_SCHEMA
 	private readonly _source = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
 	private readonly _inputs: Map<string, Observable<Maybe<TableContainer>>> =
 		new Map()

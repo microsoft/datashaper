@@ -154,6 +154,8 @@ export function cloneStep(step: Step<unknown>, columnNames?: string[]): Step<unk
 //
 // @public (undocumented)
 export class Codebook extends Resource implements SchemaResource<CodebookSchema> {
+    // (undocumented)
+    readonly $schema: string;
     constructor(codebook?: CodebookSchema);
     // (undocumented)
     get fields(): Field[];
@@ -196,6 +198,8 @@ export function createWorkflow(input: WorkflowSchema, tables: TableContainer[]):
 //
 // @public (undocumented)
 export class DataPackage extends Named implements SchemaResource<DataPackageSchema> {
+    // (undocumented)
+    readonly $schema: string;
     constructor(dataPackage?: DataPackageSchema | undefined, resources?: Map<string, Blob>);
     // (undocumented)
     clear(): void;
@@ -239,6 +243,8 @@ export class DataShape extends Observed implements DataShape_2, SchemaResource<D
 //
 // @public (undocumented)
 export class DataTable extends Resource implements SchemaResource<DataTableSchema> {
+    // (undocumented)
+    readonly $schema: string;
     constructor(datatable?: DataTableSchema, resources?: Map<string, Blob>);
     // (undocumented)
     readonly codebook: Codebook;
@@ -786,6 +792,8 @@ export { window_2 as window }
 //
 // @public (undocumented)
 export class Workflow extends Resource implements SchemaResource<WorkflowSchema> {
+    // (undocumented)
+    readonly $schema: string;
     constructor(input?: WorkflowSchema, _strictInputs?: boolean);
     // (undocumented)
     addInputName(input: string): void;

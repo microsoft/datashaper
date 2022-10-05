@@ -3,7 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { CodebookSchema, Field } from '@datashaper/schema'
-import { createCodebookSchemaObject } from '@datashaper/schema'
+import {
+	createCodebookSchemaObject,
+	LATEST_CODEBOOK_SCHEMA,
+} from '@datashaper/schema'
 
 import { Resource } from './Resource.js'
 import type { SchemaResource } from './types.js'
@@ -12,6 +15,7 @@ export class Codebook
 	extends Resource
 	implements SchemaResource<CodebookSchema>
 {
+	public readonly $schema = LATEST_CODEBOOK_SCHEMA
 	private _fields: Field[] = []
 	private _initPromise: Promise<void>
 

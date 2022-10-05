@@ -4,7 +4,10 @@
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
 import type { DataPackageSchema } from '@datashaper/schema'
-import { createDataPackageSchemaObject } from '@datashaper/schema'
+import {
+	createDataPackageSchemaObject,
+	LATEST_DATAPACKAGE_SCHEMA,
+} from '@datashaper/schema'
 
 import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
@@ -16,6 +19,7 @@ export class DataPackage
 	extends Named
 	implements SchemaResource<DataPackageSchema>
 {
+	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
 	private _tableStore: TableStore = new TableStore()
 	private _initPromise: Promise<void>
 

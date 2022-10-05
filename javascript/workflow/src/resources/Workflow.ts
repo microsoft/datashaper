@@ -8,7 +8,10 @@ import type {
 	OutputPortBinding,
 	WorkflowSchema,
 } from '@datashaper/schema'
-import { createWorkflowSchemaObject } from '@datashaper/schema'
+import {
+	createWorkflowSchemaObject,
+	LATEST_WORKFLOW_SCHEMA,
+} from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject, of } from 'rxjs'
@@ -34,7 +37,8 @@ export class Workflow
 	extends Resource
 	implements SchemaResource<WorkflowSchema>
 {
-	// Workflow Data FieldsF
+	public readonly $schema = LATEST_WORKFLOW_SCHEMA
+	// Workflow Data Fields
 	private _steps: Step[] = []
 	private readonly _inputNames: Set<string> = new Set()
 	private readonly _outputPorts: Map<string, NamedOutputPortBinding> = new Map()
