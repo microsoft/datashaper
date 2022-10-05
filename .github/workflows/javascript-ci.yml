@@ -54,8 +54,8 @@ jobs:
       - run: yarn bundle
         name: Bundle
 
-      - run: yarn is_clean
-        name: Check if repo is clean
-
       - run: git status
         name: Git status
+
+      - run: yarn is_clean
+        name: Check if repo is clean
