@@ -11,15 +11,10 @@ import { fileURLToPath } from 'url'
 
 import { createWorkflow } from '../engine/createWorkflow.js'
 
-// Set the root cwd to the package root.
-// this makes loading datafiles by file-url in the project more straightforward
-process.chdir('../..')
-
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const SCHEMA_PATH = path.join(__dirname, '../../../../schema')
-const FIXTURES_PATH = path.join(SCHEMA_PATH, 'fixtures')
-const CATEGORIES_PATH = path.join(FIXTURES_PATH, 'cases')
+const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow')
 
 // Json-schema validator
 const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))
@@ -36,7 +31,7 @@ const validateJson = ajv.compile(schema)
  * Create top-level describes for each test category (top-level folders)
  */
 const inputTables = await readInputTables()
-doDescribe(CATEGORIES_PATH)
+doDescribe(CASES_PATH)
 
 function doDescribe(targetPath: string) {
 	const entries = fs.readdirSync(targetPath)
@@ -70,7 +65,7 @@ function defineTestCase(parentPath: string, test: string) {
 		if (!isWorkflowJsonValid) {
 			throw new Error(`invalid workflow definition: ${workflowPath}`)
 		}
-		const graphBuilder = createWorkflow(workflowJson, inputTables)
+		const graphBuilder = await createWorkflow(workflowJson, inputTables)
 
 		// check the output tables
 		await Promise.all(
@@ -96,7 +91,7 @@ function defineTestCase(parentPath: string, test: string) {
 }
 
 async function readInputTables(): Promise<TableContainer[]> {
-	const inputsPaths = path.join(FIXTURES_PATH, 'inputs')
+	const inputsPaths = path.join(SCHEMA_PATH, 'fixtures', 'workflow_inputs')
 	const entries = fs.readdirSync(inputsPaths)
 	return Promise.all(
 		entries.map(async entry => {

@@ -4,118 +4,78 @@
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
 import type { DataPackageSchema } from '@datashaper/schema'
-import { createDataPackageSchemaObject } from '@datashaper/schema'
-import type { TableContainer } from '@datashaper/tables'
-import { introspect } from '@datashaper/tables'
-import type { Maybe } from '@datashaper/workflow'
-import { Workflow } from '@datashaper/workflow'
-import type { Observable, Subscription } from 'rxjs'
-import { BehaviorSubject } from 'rxjs'
-import { map } from 'rxjs/operators'
+import {
+	createDataPackageSchemaObject,
+	LATEST_DATAPACKAGE_SCHEMA,
+} from '@datashaper/schema'
 
-import { Codebook } from './Codebook.js'
-import type { DataSource } from './DataSource.js'
+import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
+import { TableStore } from './TableStore.js'
 import type { SchemaResource } from './types.js'
+import { isDataTable, toResourceSchema } from './utils.js'
 
 export class DataPackage
 	extends Named
 	implements SchemaResource<DataPackageSchema>
 {
-	private readonly _output = new BehaviorSubject<Maybe<TableContainer>>(
-		undefined,
-	)
-
-	private _codebook?: any
-	private _outputSubscription?: Subscription
+	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
+	private _tableStore: TableStore = new TableStore()
+	private _initPromise: Promise<void>
 
 	public constructor(
-		id: string,
-		public readonly source: DataSource,
-		public readonly workflow = new Workflow(),
-		public readonly codebook = new Codebook(),
+		public dataPackage?: DataPackageSchema,
+		resources?: Map<string, Blob>,
 	) {
 		super()
-		this.id = id
+		this._initPromise = this.loadSchema(dataPackage, resources)
+	}
 
-		this.source.output.subscribe(table => {
-			const tableContainer: TableContainer = { id, table }
-			if (this.workflow.length > 0) {
-				this._setGraphInput()
-			} else {
-				this._output.next(tableContainer)
-			}
-		})
+	public initialize(): Promise<void> {
+		return this._initPromise
+	}
 
-		this.workflow.onChange(() => {
-			if (this._outputSubscription != null)
-				this._outputSubscription.unsubscribe()
-			if (this.workflow.length > 0) {
-				this._outputSubscription = this.workflow
-					.outputObservable()
-					?.subscribe(tbl => this._output.next(tbl))
-			} else {
-				this._output.next({ id: this.id, table: this.source.currentOutput })
-			}
-			this._onChange.next()
-		})
-
-		// Add the last table from the source to the graph
-		this._setGraphInput()
+	public clear(): void {
+		this._tableStore.clear()
 		this._onChange.next()
 	}
 
-	public override get id(): string {
-		return super.id
-	}
-
-	public override set id(id: string) {
-		super.id = id
-		// emit a TableContainer with the new name
-		this._output.next({ id, table: this.source.currentOutput })
-		this._onChange.next()
-	}
-
-	public get output(): Observable<Maybe<TableContainer>> {
-		return this._output
-	}
-
-	public get currentOutput(): Maybe<TableContainer> {
-		let table: Maybe<TableContainer> = undefined
-		this.output?.subscribe(t => (table = t)).unsubscribe()
-		return table
-	}
-
-	private _setGraphInput() {
-		this.workflow.addInputObservable(
-			this.id,
-			this.source.output.pipe(
-				map(table => {
-					const metadata = table && introspect(table, true)
-					return { id: this.id, table, metadata }
-				}),
-			),
-		)
+	public get tableStore(): TableStore {
+		return this._tableStore
 	}
 
 	public override toSchema(): DataPackageSchema {
-		const datafile = `${this.id}.${this.source.format}`
-		const resources: string[] = [datafile, 'datasource.json']
-		if (this.workflow.length > 0) {
-			resources.push('workflow.json')
-		}
-		if (this._codebook.fields.length > 0) {
-			resources.push('codebook.json')
-		}
 		return createDataPackageSchemaObject({
 			...super.toSchema(),
-			resources,
+			resources: [...this._tableStore.tables.values()].map(t => t.toSchema()),
 		})
 	}
 
-	public override loadSchema(
-		_schema: DataPackageSchema | null | undefined,
-	): void {
-		throw new Error('not implemented')
+	public override async loadSchema(
+		schema: DataPackageSchema | null | undefined,
+		files?: Map<string, Blob>,
+		quiet?: boolean,
+	): Promise<void> {
+		this.clear()
+		await super.loadSchema(schema, files, true)
+
+		if (schema?.resources) {
+			for (const r of schema?.resources ?? []) {
+				const resource = await toResourceSchema(r, files)
+				if (resource && isDataTable(resource)) {
+					const table = new DataTable(resource, files)
+					this._tableStore.add(table)
+					await table.initialize()
+				}
+			}
+		}
+
+		for (const table of this._tableStore.tables.values()) {
+			table.connect(this.tableStore)
+		}
+
+		if (!quiet) {
+			this._onChange.next()
+		}
 	}
 }

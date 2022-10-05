@@ -8,7 +8,10 @@ import type {
 	OutputPortBinding,
 	WorkflowSchema,
 } from '@datashaper/schema'
-import { createWorkflowSchemaObject } from '@datashaper/schema'
+import {
+	createWorkflowSchemaObject,
+	LATEST_WORKFLOW_SCHEMA,
+} from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject, of } from 'rxjs'
@@ -34,7 +37,8 @@ export class Workflow
 	extends Resource
 	implements SchemaResource<WorkflowSchema>
 {
-	// Workflow Data FieldsF
+	public readonly $schema = LATEST_WORKFLOW_SCHEMA
+	// Workflow Data Fields
 	private _steps: Step[] = []
 	private readonly _inputNames: Set<string> = new Set()
 	private readonly _outputPorts: Map<string, NamedOutputPortBinding> = new Map()
@@ -54,9 +58,15 @@ export class Workflow
 	private readonly _inputs: Map<string, TableSubject> = new Map()
 	private readonly _outputs: Map<string, TableSubject> = new Map()
 
+	private _initPromise: Promise<void>
+
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
-		this.loadSchema(input)
+		this._initPromise = this.loadSchema(input, undefined, true)
+	}
+
+	public initializate(): Promise<void> {
+		return this._initPromise
 	}
 
 	private rebindDefaultOutput() {
@@ -151,6 +161,18 @@ export class Workflow
 		this._onChange.next()
 	}
 
+	public removeInputObservable(id: string): void {
+		this._removeInputObservable(id)
+		this._onChange.next()
+	}
+
+	private _removeInputObservable(id: string): void {
+		if (this._graph.hasNode(id)) {
+			this._graph.remove(id)
+		}
+		this._inputs.delete(id)
+	}
+
 	/**
 	 * Add a named input
 	 * @param input - the input table to add
@@ -167,14 +189,10 @@ export class Workflow
 	}
 
 	private _bindInputObservable(id: string, source: TableObservable): void {
-		if (this._graph.hasNode(id)) {
-			this._graph.remove(id)
-		}
-
+		this._removeInputObservable(id)
 		const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
 		source.subscribe(s => subject.next(s))
 		this._inputs.set(id, subject)
-
 		this._graph.add(observableNode(id, source))
 	}
 
@@ -442,8 +460,10 @@ export class Workflow
 				} else {
 					// Bind the named input
 					const b = binding as NamedPortBinding
-					const boundInput = this.getNode(b.node)
-					node.bind({ input, node: boundInput, output: b.output })
+					if (this._graph.hasNode(b.node)) {
+						const boundInput = this.getNode(b.node)
+						node.bind({ input, node: boundInput, output: b.output })
+					}
 				}
 			}
 		} else if (this.length > 0 && node.inputs.length > 0) {
@@ -498,11 +518,18 @@ export class Workflow
 		})
 	}
 
-	public override loadSchema(schema: WorkflowSchema | null | undefined): void {
-		super.loadSchema(schema)
+	public override async loadSchema(
+		schema: WorkflowSchema | null | undefined,
+		resources?: Map<string, Blob>,
+		quiet?: boolean,
+	): Promise<void> {
+		await super.loadSchema(schema, resources, true)
 		this.readWorkflowInput(schema)
 		this.syncWorkflowStateIntoGraph()
 		this.rebindDefaultOutput()
+		if (!quiet) {
+			this._onChange.next()
+		}
 	}
 
 	private readWorkflowInput(schema?: WorkflowSchema | null | undefined) {

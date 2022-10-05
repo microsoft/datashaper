@@ -8,7 +8,7 @@ import { from, fromCSV } from 'arquero'
 import type { CSVParseOptions } from 'arquero/dist/types/format/from-csv'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { uniq } from 'lodash-es'
-import { type ParseConfig,default as papa } from 'papaparse'
+import { type ParseConfig, default as papa } from 'papaparse'
 
 import {
 	ARQUERO_PROPS_MAP,

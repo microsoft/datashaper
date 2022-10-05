@@ -3,7 +3,10 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { CodebookSchema, Field } from '@datashaper/schema'
-import { createCodebookSchemaObject } from '@datashaper/schema'
+import {
+	createCodebookSchemaObject,
+	LATEST_CODEBOOK_SCHEMA,
+} from '@datashaper/schema'
 
 import { Resource } from './Resource.js'
 import type { SchemaResource } from './types.js'
@@ -12,11 +15,17 @@ export class Codebook
 	extends Resource
 	implements SchemaResource<CodebookSchema>
 {
+	public readonly $schema = LATEST_CODEBOOK_SCHEMA
 	private _fields: Field[] = []
+	private _initPromise: Promise<void>
 
 	public constructor(codebook?: CodebookSchema) {
 		super()
-		this.loadSchema(codebook)
+		this._initPromise = this.loadSchema(codebook)
+	}
+
+	public initialize(): Promise<void> {
+		return this._initPromise
 	}
 
 	public get fields(): Field[] {
@@ -35,9 +44,15 @@ export class Codebook
 		})
 	}
 
-	public override loadSchema(value: CodebookSchema | null | undefined): void {
-		super.loadSchema(value)
+	public override async loadSchema(
+		value: CodebookSchema | null | undefined,
+		resources?: Map<string, Blob>,
+		quiet?: boolean,
+	): Promise<void> {
+		await super.loadSchema(value, resources, true)
 		this.fields = value?.fields ?? []
-		this._onChange.next()
+		if (!quiet) {
+			this._onChange.next()
+		}
 	}
 }

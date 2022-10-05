@@ -42,14 +42,22 @@ jobs:
       - run: yarn install
         name: Install Dependencies
 
-      - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          server-token: ${{ secrets.TURBO_SERVER_TOKEN }}
+      - run: yarn build
+        name: Build
 
-      - run: yarn ci --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
-        name: Verify
+      - run: yarn lint
+        name: Lint
+
+      - run: yarn test
+        name: Test
+
+      - run: yarn bundle
+        name: Bundle
+
       - run: |
-          yarn is_clean
+          git add -A 
           git status
+        name: Git status
+
+      - run: yarn is_clean
+        name: Check if repo is clean

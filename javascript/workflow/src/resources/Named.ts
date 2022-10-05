@@ -66,14 +66,16 @@ export class Named
 
 	public loadSchema(
 		schema: NamedSchema | null | undefined,
-		preventOnChange = false,
-	): void {
+		_resources: Map<string, Blob> | undefined,
+		quiet = false,
+	): Promise<void> {
 		this._id = schema?.id ?? v4()
 		this._name = schema?.name ?? ''
 		this._title = schema?.title
 		this._description = schema?.description
-		if (!preventOnChange) {
+		if (!quiet) {
 			this._onChange.next()
 		}
+		return Promise.resolve()
 	}
 }

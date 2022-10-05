@@ -13,4 +13,4 @@ docs/
 bot_backups/*
 .cache
 .eslintrc
-schema/workflow.json
+schema/*.json

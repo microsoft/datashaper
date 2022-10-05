@@ -4,7 +4,7 @@
  */
 import { fetchStep } from '../fetch.js'
 
-const CSV_URL = 'javascript/workflow/src/__tests__/data/companies.csv'
+const CSV_URL = 'http://localhost:8080/fixtures/workflow_inputs/companies.csv'
 /**
  * Keep unit test for data conversion checks
  */

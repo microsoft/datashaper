@@ -15,8 +15,8 @@ describe('stepGraph', () => {
 		store = [{ id: 'input', table: table({ ID: [1, 2, 3, 4] }) }]
 	})
 
-	test('runs a single step with normal input/output', () => {
-		const g = createWorkflow(
+	test('runs a single step with normal input/output', async () => {
+		const g = await createWorkflow(
 			{
 				id: 'test workflow',
 				$schema:
@@ -45,8 +45,8 @@ describe('stepGraph', () => {
 		expect(g.outputNames).toEqual(['output'])
 	})
 
-	test('runs multiple steps with normal input/output and all intermediates', () => {
-		const g = createWorkflow(
+	test('runs multiple steps with normal input/output and all intermediates', async () => {
+		const g = await createWorkflow(
 			{
 				id: 'test workflow',
 				$schema:
