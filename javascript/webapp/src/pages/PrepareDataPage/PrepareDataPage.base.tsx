@@ -14,8 +14,6 @@ import {
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnSaveStep,
-	useWorkflow,
-	useWorkflowListener,
 	useWorkflowOutputListener,
 } from '@datashaper/react'
 import { TableListBar } from '@datashaper/react/src/components/TableListBar.js'
@@ -25,7 +23,7 @@ import { Workflow } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import upperFirst from 'lodash-es/upperFirst.js'
-import { memo, useCallback, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useStepListener, useTables } from './PrepareDataPage.hooks.js'
 import {
@@ -47,10 +45,21 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const [outputs, setOutputs] = useState<TableContainer[]>([])
 
 	// state for the input tables
-	const [wf, setWorkflow] = useState<Workflow>(new Workflow())
+	const [workflow, setWorkflow] = useState<Workflow>(new Workflow())
 	// workflow steps/output
-	const workflow = useWorkflow(wf, inputs)
+	// const workflow = useWorkflow(wf, inputs)
 
+	useEffect(
+		function syncDataTablesWhenInputsChange() {
+			if (inputs) {
+				workflow.addInputTables(inputs)
+			}
+		},
+		[workflow, inputs],
+	)
+	console.log('workflow', workflow)
+	console.log('outputs', outputs)
+	console.log('inputs', inputs)
 	const selectedTable = inputs
 		.concat(outputs)
 		.find(x => x.id === selectedTableId)
@@ -65,9 +74,18 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		return stepIndex >= 0 ? `#${stepIndex + 1} ${name}` : selectedTableId
 	}, [workflow, selectedTableId])
 
-	useStepListener(workflow, setSelectedTableId, inputNames)
+	const onSelectOriginalTable = useCallback(() => {
+		if (workflow.inputNames.size > 0) {
+			const lastInputName = inputNames[workflow.inputNames.size - 1]
+			if (lastInputName) {
+				setSelectedTableId(lastInputName)
+			}
+		}
+	}, [workflow, inputNames, setSelectedTableId])
+
+	useStepListener(workflow, setSelectedTableId, onSelectOriginalTable)
 	useWorkflowOutputListener(workflow, setOutputs)
-	useWorkflowListener(workflow, setWorkflow)
+	// useWorkflowListener(workflow, setWorkflow)
 
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 
@@ -153,6 +171,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					>
 						<StepHistoryList
 							onDelete={onDelete}
+							onSelectOriginalTable={onSelectOriginalTable}
 							onSelect={setSelectedTableId}
 							workflow={workflow}
 							onSave={onSave}

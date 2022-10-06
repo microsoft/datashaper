@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ColumnarMenu } from '@essex/themed-components'
+import { ColumnarMenu } from '@essex/components'
 import { DefaultButton, Spinner, SpinnerSize } from '@fluentui/react'
 import { memo } from 'react'
 

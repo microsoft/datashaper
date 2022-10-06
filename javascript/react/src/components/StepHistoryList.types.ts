@@ -16,6 +16,7 @@ export interface StepHistoryListProps
 	order?: DisplayOrder
 	onDelete?: (index: number) => void
 	onDuplicateClicked?: (step: Step) => void
+	onSelectOriginalTable?: () => void
 	onSelect?: (name: string) => void
 	onSave?: (step: Step, output: string | undefined, index?: number) => void
 }

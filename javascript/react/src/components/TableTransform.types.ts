@@ -83,7 +83,5 @@ export interface TableTransformProps {
 
 	onDelete?: (index: number) => void
 
-	onPreview?: (name: string) => void
-
 	onDuplicate?: (step: Step) => void
 }
