@@ -27,8 +27,12 @@ function doDescribe(targetPath: string) {
 		describe(entry, () => {
 			const entryPath = path.join(targetPath, entry)
 			if (fs.existsSync(path.join(entryPath, 'datapackage.json'))) {
-				// If a workflow file exists, define a test case for it
-				defineTestCase(targetPath, entry)
+				if (!fs.existsSync(path.join(entryPath, '.skip'))) {
+					// If a workflow file exists, define a test case for it
+					defineTestCase(targetPath, entry)
+				} else {
+					console.log('Skipping test case: ', entryPath)
+				}
 			} else {
 				// Otherwise; keep describing down until we find test cases
 				doDescribe(entryPath)
