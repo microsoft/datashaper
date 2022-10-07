@@ -8,6 +8,7 @@ export function handleMaybeAsync<T>(
 	value: T | Promise<T>,
 	handler: (value: T) => void,
 ): Promise<void> | void {
+	console.log('HANDLE?', value)
 	if ((value as any).then) {
 		return (value as Promise<T>).then(v => handler(v))
 	} else {

@@ -1,0 +1,43 @@
+(node:4290) ExperimentalWarning: VM Modules is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[10:4:21.682][emittery:subscribe][undefined] Event Name: test-file-start
+	data: undefined
+[10:4:21.682][emittery:emit][undefined] Event Name: Symbol(listenerAdded)
+	data: {"eventName":"test-file-start"}
+[10:4:21.682][emittery:subscribe][undefined] Event Name: test-file-success
+	data: undefined
+[10:4:21.682][emittery:emit][undefined] Event Name: Symbol(listenerAdded)
+	data: {"eventName":"test-file-success"}
+[10:4:21.682][emittery:subscribe][undefined] Event Name: test-file-failure
+	data: undefined
+[10:4:21.682][emittery:emit][undefined] Event Name: Symbol(listenerAdded)
+	data: {"eventName":"test-file-failure"}
+[10:4:21.682][emittery:subscribe][undefined] Event Name: test-case-result
+	data: undefined
+[10:4:21.682][emittery:emit][undefined] Event Name: Symbol(listenerAdded)
+	data: {"eventName":"test-case-result"}
+[10:4:21.684][emittery:emit][undefined] Event Name: test-file-start
+	data: [{"context":{"config":{"automock":false,"cache":true,"cacheDirectory":"/tmp/jest_rs","clearMocks":false,"coveragePathIgnorePatterns":["/node_modules/"],"cwd":"/home/chtrevin/ws/datashaper/javascript/workflow","detectLeaks":false,"detectOpenHandles":false,"displayName":{"color":"white","name":"core"},"errorOnDeprecated":false,"extensionsToTreatAsEsm":[".ts",".tsx",".mts"],"fakeTimers":{"enableGlobally":false},"forceCoverageMatch":[],"globals":{},"haste":{"computeSha1":false,"enableSymlinks":false,"forceNodeFilesystemAPI":true,"throwOnModuleCollision":false},"id":"1fe161caba5ae09f9306f22508014cf9","injectGlobals":true,"moduleDirectories":["node_modules"],"moduleFileExtensions":["js","mjs","cjs","jsx","ts","tsx","json","node"],"moduleNameMapper":[["\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$","@essex/jest-config/filemock"],["\\.(css|less|scss|sass)$","/home/chtrevin/ws/datashaper/.yarn/cache/identity-obj-proxy-npm-3.0.0-080ab9ac1e-97559f8ea2.zip/node_modules/identity-obj-proxy/src/index.js"],["^lodash-es/(.*)$","/home/chtrevin/ws/datashaper/.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/$1"]],"modulePathIgnorePatterns":[],"prettierPath":"prettier","resetMocks":false,"resetModules":false,"resolver":"/home/chtrevin/ws/datashaper/.yarn/__virtual__/@essex-jest-config-virtual-81d4aab089/0/cache/@essex-jest-config-npm-21.0.15-147198a9c3-bd19340cb1.zip/node_modules/@essex/jest-config/resolver.cjs","restoreMocks":false,"rootDir":"/home/chtrevin/ws/datashaper/javascript/workflow","roots":["/home/chtrevin/ws/datashaper/javascript/workflow"],"runner":"/home/chtrevin/ws/datashaper/.yarn/cache/jest-runner-npm-29.1.2-f21e431614-717633249b.zip/node_modules/jest-runner/build/index.js","sandboxInjectedGlobals":[],"setupFiles":[],"setupFilesAfterEnv":[],"skipFilter":false,"slowTestThreshold":5,"snapshotFormat":{"escapeString":false,"printBasicPrototype":false},"snapshotSerializers":[],"testEnvironment":"/home/chtrevin/ws/datashaper/.yarn/cache/jest-environment-node-npm-29.1.2-fc465c6ad1-9af99f8ede.zip/node_modules/jest-environment-node/build/index.js","testEnvironmentOptions":{},"testLocationInResults":false,"testMatch":["**/__tests__/**/*.spec.ts"],"testPathIgnorePatterns":["/node_modules/"],"testRegex":[],"testRunner":"/home/chtrevin/ws/datashaper/.yarn/cache/jest-circus-npm-29.1.2-34037f1c9c-27893239ba.zip/node_modules/jest-circus/runner.js","transform":[["^.+\\.(t|j)sx?$","/home/chtrevin/ws/datashaper/.yarn/__virtual__/@swc-jest-virtual-123eed974f/0/cache/@swc-jest-npm-0.2.22-4a6b0339d9-c624cfcc93.zip/node_modules/@swc/jest/index.js",{"sourceMaps":true,"jsc":{"target":"es2021","parser":{"syntax":"typescript","tsx":true,"decorators":true,"dynamicImport":true,"importAssertions":true},"experimental":{"keepImportAssertions":true},"transform":{"react":{"runtime":"automatic","useBuiltins":true},"hidden":{"jest":true}}}}]],"transformIgnorePatterns":["/node_modules/","\\.pnp\\.[^\\/]+$"],"watchPathIgnorePatterns":[]},"hasteFS":{"_rootDir":"/home/chtrevin/ws/datashaper/javascript/workflow","_files":{}},"moduleMap":{"duplicates":[],"map":[["@datashaper/workflow",{"g":["package.json",1]}]],"mocks":[],"rootDir":"/home/chtrevin/ws/datashaper/javascript/workflow"},"resolver":{"_options":{"extensions":[".js",".mjs",".cjs",".jsx",".ts",".tsx",".json",".node"],"hasCoreModules":true,"moduleDirectories":["node_modules"],"moduleNameMapper":[{"moduleName":"@essex/jest-config/filemock","regex":{}},{"moduleName":"/home/chtrevin/ws/datashaper/.yarn/cache/identity-obj-proxy-npm-3.0.0-080ab9ac1e-97559f8ea2.zip/node_modules/identity-obj-proxy/src/index.js","regex":{}},{"moduleName":"/home/chtrevin/ws/datashaper/.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/$1","regex":{}}],"resolver":"/home/chtrevin/ws/datashaper/.yarn/__virtual__/@essex-jest-config-virtual-81d4aab089/0/cache/@essex-jest-config-npm-21.0.15-147198a9c3-bd19340cb1.zip/node_modules/@essex/jest-config/resolver.cjs","rootDir":"/home/chtrevin/ws/datashaper/javascript/workflow"},"_moduleMap":{"duplicates":[],"map":[["@datashaper/workflow",{"g":["package.json",1]}]],"mocks":[],"rootDir":"/home/chtrevin/ws/datashaper/javascript/workflow"},"_moduleIDCache":{},"_moduleNameCache":{},"_modulePathCache":{},"_supportsNativePlatform":false}},"duration":3106,"path":"/home/chtrevin/ws/datashaper/javascript/workflow/src/__tests__/datapackage_fixtures.spec.ts"}]
+(node:4290) ExperimentalWarning: buffer.Blob is an experimental feature. This feature could change at any time
+
+<--- Last few GCs --->
+
+[4290:0x60399b0]   378907 ms: Mark-sweep 3849.7 (4129.8) -> 3834.1 (4129.8) MB, 92.5 / 0.0 ms  (average mu = 0.361, current mu = 0.353) allocation failure scavenge might not succeed
+[4290:0x60399b0]   379050 ms: Mark-sweep 3849.9 (4129.8) -> 3834.3 (4130.1) MB, 93.6 / 0.0 ms  (average mu = 0.355, current mu = 0.349) allocation failure scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+ 1: 0xb09c10 node::Abort() [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+ 2: 0xa1c193 node::FatalError(char const*, char const*) [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+ 3: 0xcf8dbe v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+ 4: 0xcf9137 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+ 5: 0xeb09d5  [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+ 6: 0xeb14b6  [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+ 7: 0xebf9de  [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+ 8: 0xec0420 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+ 9: 0xec339e v8::internal::Heap::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+10: 0xe848da v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType, v8::internal::AllocationOrigin) [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+11: 0x11fd626 v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
+12: 0x15f2099  [/home/chtrevin/.nvm/versions/node/v16.15.0/bin/node]
