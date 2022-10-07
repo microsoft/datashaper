@@ -45,6 +45,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		const ref = useRef<HTMLDivElement>(null)
 		const theme = useTheme()
 		const steps = useWorkflowSteps(workflow, order)
+
 		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
 		const {
 			onClick: onDeleteClicked,
@@ -104,6 +105,8 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 							<CollapsiblePanel
 								key={stepIndex}
 								styles={collapsiblePanelStyles}
+								expandsWithIcon
+								onHeaderClick={() => onSelect?.(step.id)}
 								onRenderHeader={() => onRenderHeader(step, stepIndex)}
 							>
 								<ListWrapper>

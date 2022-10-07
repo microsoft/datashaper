@@ -4053,7 +4053,7 @@ __metadata:
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
     "@essex/charts-react": ^1.1.2
-    "@essex/components": ^2.6.1
+    "@essex/components": ^2.7.0
     "@essex/scripts": ^22.0.8
     "@essex/styled-components": ^0.0.4
     "@essex/tsconfig-base": ^1.0.2
@@ -4210,7 +4210,7 @@ __metadata:
     "@datashaper/utilities": "workspace:^"
     "@datashaper/verb-guidance": "workspace:^"
     "@datashaper/workflow": "workspace:^"
-    "@essex/components": ^2.6.1
+    "@essex/components": ^2.7.0
     "@essex/hooks": ^4.0.13
     "@essex/scripts": ^22.0.8
     "@essex/webpack-config": ^21.0.7
@@ -4433,9 +4433,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@essex/components@npm:^2.6.1":
-  version: 2.6.1
-  resolution: "@essex/components@npm:2.6.1"
+"@essex/components@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "@essex/components@npm:2.7.0"
   dependencies:
     "@essex/hooks": ^4.0.13
     "@essex/react-animate-height": ^2.1.4
@@ -4467,7 +4467,7 @@ __metadata:
     "@uifabric/icons": ">= 7.3.38"
     react: ">= 18"
     react-dom: ">= 18"
-  checksum: 70653ad84ee71e1b1ca86589e8e94d6fb930b659ae8b53320ca050a1c76419eae355bdc2c0d9ac7b13f5cb9a0bc9b9d428d13526e6b715931ffb58e2900dd297
+  checksum: c09629b1392d3a7ab1f16878c5f7d20b59667aea74defe7f9de969e451f8debf10994323aea030e0fd72f70c4903036cfe3dfb2c6f25a4ec71ad72f779b2da24
   languageName: node
   linkType: hard
 

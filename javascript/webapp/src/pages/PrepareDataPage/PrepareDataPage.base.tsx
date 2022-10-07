@@ -46,8 +46,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	// state for the input tables
 	const [workflow, setWorkflow] = useState<Workflow>(new Workflow())
-	// workflow steps/output
-	// const workflow = useWorkflow(wf, inputs)
 
 	useEffect(
 		function syncDataTablesWhenInputsChange() {
@@ -85,7 +83,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	useStepListener(workflow, setSelectedTableId, onSelectOriginalTable)
 	useWorkflowOutputListener(workflow, setOutputs)
-	// useWorkflowListener(workflow, setWorkflow)
 
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 

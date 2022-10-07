@@ -43,7 +43,7 @@
 		"@datashaper/verb-guidance": "workspace:^",
 		"@datashaper/workflow": "workspace:^",
 		"@essex/charts-react": "^1.1.2",
-		"@essex/components": "^2.6.1",
+		"@essex/components": "^2.7.0",
 		"@essex/styled-components": "^0.0.4",
 		"@fluentui/font-icons-mdl2": "^8.5.0",
 		"ahooks": "^3.7.1",

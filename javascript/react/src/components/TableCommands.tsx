@@ -12,6 +12,7 @@ import { memo, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 import { TableTransformModal } from '../components/TableTransformModal.js'
+import { useCreateTableId } from '../hooks/common.js'
 import { useTransformModalState } from '../hooks/manageWorkflow.js'
 import {
 	useColumnCommands,
@@ -33,7 +34,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 		const [step, setStep] = useState<Step | undefined>()
 		const [index, setIndex] = useState<number>()
 		const [modalTarget, setModalTarget] = useState<string>()
-
+		const createTableId = useCreateTableId(workflow)
 		const {
 			isOpen: isModalOpen,
 			hide: dismissModal,
@@ -63,11 +64,20 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 					args: { to: selectedColumn, column: selectedColumn } as any,
 					input: inputTable?.id,
 				})
+				const id = createTableId(verb)
+				_step.id = id
 				setStep(_step)
 				setModalTarget(target)
 				showModal()
 			},
-			[showModal, setStep, inputTable, selectedColumn, setModalTarget],
+			[
+				showModal,
+				setStep,
+				inputTable,
+				selectedColumn,
+				createTableId,
+				setModalTarget,
+			],
 		)
 
 		const allTablesLength = useMemo((): number => {
