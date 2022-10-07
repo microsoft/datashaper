@@ -5,7 +5,8 @@
 import type { ResourceSchema } from '@datashaper/schema'
 import { all, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
-import fetch from 'cross-fetch'
+
+import { fetchFile } from '../util/network.js'
 
 export const isWorkflow = (r: ResourceSchema): boolean =>
 	r.profile === 'workflow' || r.$schema.indexOf('/workflow/') > -1
@@ -76,7 +77,7 @@ export function resolveRawData(
 		if (!resource.startsWith('http')) {
 			throw new Error('Invalid resource URL: ' + resource)
 		}
-		return fetch(resource).then(r => r.blob())
+		return fetchFile(resource)
 	}
 }
 
