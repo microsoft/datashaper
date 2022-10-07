@@ -15,6 +15,7 @@
 					"input": ["nhefs"],
 					"steps": [
 						{
+							"verb": "select",
 							"args": {
 								"columns": [
 									"index",
@@ -31,7 +32,6 @@
 									"smokeyrs"
 								]
 							},
-							"verb": "select",
 							"input": {
 								"source": {
 									"node": "nhefs"
@@ -39,6 +39,7 @@
 							}
 						},
 						{
+							"verb": "rename",
 							"args": {
 								"columns": {
 									"sex": "sex",
@@ -53,19 +54,19 @@
 									"exercise": "exercise",
 									"smokeyrs": "smoke_years"
 								}
-							},
-							"verb": "rename"
+							}
 						},
 						{
+							"verb": "derive",
 							"args": {
 								"to": "smoke_intensity_change_pct",
 								"column1": "smoke_intensity_change",
 								"operator": "/",
 								"column2": "smoke_intensity_1971"
-							},
-							"verb": "derive"
+							}
 						},
 						{
+							"verb": "binarize",
 							"args": {
 								"to": "smoke_reduction_25pct",
 								"column": "smoke_intensity_change_pct",
@@ -76,10 +77,10 @@
 										"value": "-0.25"
 									}
 								]
-							},
-							"verb": "binarize"
+							}
 						},
 						{
+							"verb": "binarize",
 							"args": {
 								"to": "smoke_reduction_50pct",
 								"column": "smoke_intensity_change_pct",
@@ -90,10 +91,10 @@
 										"value": "-0.5"
 									}
 								]
-							},
-							"verb": "binarize"
+							}
 						},
 						{
+							"verb": "binarize",
 							"args": {
 								"to": "smoke_reduction_75pct",
 								"column": "smoke_intensity_change_pct",
@@ -104,10 +105,10 @@
 										"value": "-0.75"
 									}
 								]
-							},
-							"verb": "binarize"
+							}
 						},
 						{
+							"verb": "binarize",
 							"args": {
 								"to": "quit_smoking",
 								"column": "smoke_intensity_change_pct",
@@ -118,10 +119,10 @@
 										"value": "-1"
 									}
 								]
-							},
-							"verb": "binarize"
+							}
 						},
 						{
+							"verb": "binarize",
 							"args": {
 								"to": "subject_inclusion",
 								"column": "weight_change",
@@ -130,16 +131,15 @@
 										"operator": "is not empty"
 									}
 								]
-							},
-							"verb": "binarize"
+							}
 						},
 						{
+							"verb": "convert",
 							"args": {
 								"type": "float",
 								"formatPattern": "%Y-%m-%d",
 								"columns": ["weight_change"]
-							},
-							"verb": "convert"
+							}
 						}
 					]
 				}

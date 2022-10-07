@@ -112,6 +112,10 @@ export class Workflow
 		return this._inputNames
 	}
 
+	public get inputs(): Map<string, TableSubject> {
+		return this._inputs
+	}
+
 	public addInputName(input: string): void {
 		this._inputNames.add(input)
 		this._onChange.next()

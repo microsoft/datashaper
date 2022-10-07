@@ -17,8 +17,8 @@ import { readTable } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import debug from 'debug'
-import type { Observable } from 'rxjs'
-import { BehaviorSubject, EMPTY } from 'rxjs'
+import type { Observable } from 'rxjs';
+import { BehaviorSubject, EMPTY,map  } from 'rxjs'
 
 import { Codebook } from './Codebook.js'
 import { DataShape } from './DataShape.js'
@@ -209,8 +209,14 @@ export class DataTable
 	public connect(store: TableStore): void {
 		const rebindInputs = () => {
 			this._inputs.clear()
+			// Set the sibling table inputs
 			store.names.forEach(name =>
 				this._inputs.set(name, store.get(name)?.output ?? EMPTY),
+			)
+			// Set the input name from the source
+			this._inputs.set(
+				this.name,
+				this._source.pipe(map(tbl => ({ id: this.name, table: tbl }))),
 			)
 			this._workflowExecutor.rebindWorkflowInput()
 		}
