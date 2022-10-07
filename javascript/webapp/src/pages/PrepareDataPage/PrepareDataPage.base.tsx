@@ -55,9 +55,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		},
 		[workflow, inputs],
 	)
-	console.log('workflow', workflow)
-	console.log('outputs', outputs)
-	console.log('inputs', inputs)
+
 	const selectedTable = inputs
 		.concat(outputs)
 		.find(x => x.id === selectedTableId)

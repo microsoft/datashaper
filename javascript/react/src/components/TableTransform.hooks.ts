@@ -31,13 +31,14 @@ export function useInternalTableStep(
 } {
 	const [internal, setInternal] = useState<Step | undefined>()
 	const formattedColumnArg = useFormattedColumnArg()
-	const createNewTableId = useCreateTableId(workflow)
 
 	useEffect(() => {
 		if (step) {
 			setInternal(step)
 		}
 	}, [step, setInternal])
+
+	const createNewTableId = useCreateTableId(workflow)
 
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {
