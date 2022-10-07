@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/utilities",
-	"version": "2.3.5",
+	"version": "2.3.6",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {

@@ -1,7 +1,0 @@
-releases:
-  "@datashaper/react": patch
-  "@datashaper/utilities": patch
-  "@datashaper/workflow": major
-
-declined:
-  - "@datashaper/webapp"
