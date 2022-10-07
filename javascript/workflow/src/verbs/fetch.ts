@@ -5,7 +5,7 @@
 import type { FetchArgs } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { container } from '@datashaper/tables'
-import { fromCSV, fromJSON } from 'arquero'
+import { from,fromCSV } from 'arquero'
 
 import type { InputStep } from '../dataflow/index.js'
 import { inputNodeFactory } from '../dataflow/index.js'
@@ -17,11 +17,10 @@ export const fetchStep: InputStep<TableContainer, FetchArgs> = async (
 ) => {
 	const dataBlob = await fetchFile(url)
 	const content = await dataBlob.text()
+	const isJson = url.toLowerCase().endsWith('.json')
 
-	const table = url.toLowerCase().endsWith('.json')
-		? fromJSON(content, {
-				autoType: autoMax === undefined || autoMax <= 0 ? false : true,
-		  })
+	const table = isJson
+		? from(JSON.parse(content))
 		: fromCSV(content, {
 				delimiter,
 				autoMax: autoMax !== undefined ? autoMax : 0,
