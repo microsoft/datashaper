@@ -47,12 +47,9 @@ function defineTestCase(parentPath: string, test: string) {
 
 	it(testName, async () => {
 		const assets = await readDataPackageFiles(casePath)
-		const datapackageSchema = await readJson(
-			path.join(casePath, 'datapackage.json'),
-		)
 		const expected = await readJson(path.join(casePath, 'expected.json'))
 		const datapackage = new DataPackage()
-		await datapackage.loadFiles(datapackageSchema, assets)
+		await datapackage.load(assets)
 
 		expect(datapackage.tableStore.size).toEqual(expected.tables.length)
 		for (const table of expected.tables) {
