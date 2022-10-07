@@ -162,7 +162,7 @@ export class Codebook extends Resource implements SchemaResource<CodebookSchema>
     get fields(): Field[];
     set fields(value: Field[]);
     // (undocumented)
-    loadSchema(value: CodebookSchema | null | undefined, quiet?: boolean): void;
+    loadSchema(value: Maybe<CodebookSchema>, quiet?: boolean): void;
     // (undocumented)
     toSchema(): CodebookSchema;
 }
@@ -222,7 +222,7 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
 export class DataShape extends Observed implements DataShape_2, SchemaResource<DataShape_2> {
     constructor(shape?: DataShape_2);
     // (undocumented)
-    loadSchema(schema: DataShape_2 | null | undefined, quiet?: boolean): void;
+    loadSchema(schema: Maybe<DataShape_2>, quiet?: boolean): void;
     // (undocumented)
     get matrix(): [width: number, height: number] | undefined;
     set matrix(value: [width: number, height: number] | undefined);
@@ -258,7 +258,7 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     get format(): DataFormat;
     set format(value: DataFormat);
     // (undocumented)
-    loadSchema(schema: DataTableSchema | null | undefined, quiet?: boolean): void;
+    loadSchema(schema: Maybe_3<DataTableSchema>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
@@ -476,7 +476,7 @@ export class Named extends Observed implements Omit<Named_2, 'profile' | '$schem
     get id(): string;
     set id(value: string);
     // (undocumented)
-    loadSchema(schema: Named_2 | null | undefined, quiet?: boolean): void;
+    loadSchema(schema: Maybe<Named_2>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
@@ -600,7 +600,7 @@ export class ParserOptions extends Observed implements ParserOptions_2, SchemaRe
     get lineTerminator(): string;
     set lineTerminator(value: string | undefined);
     // (undocumented)
-    loadSchema(schema: ParserOptions_2 | null | undefined, quiet?: boolean): void;
+    loadSchema(schema: Maybe<ParserOptions_2>, quiet?: boolean): void;
     // (undocumented)
     get names(): string[] | undefined;
     set names(value: string[] | undefined);
@@ -651,7 +651,7 @@ export class Resource extends Named implements Omit<ResourceSchema, '$schema' | 
     get license(): string | undefined;
     set license(value: string | undefined);
     // (undocumented)
-    loadSchema(value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined, quiet?: boolean): void;
+    loadSchema(value: Maybe<Omit<ResourceSchema, '$schema' | 'profile'>>, quiet?: boolean): void;
     // (undocumented)
     get path(): ResourceSchema['path'];
     set path(value: ResourceSchema['path']);
@@ -676,7 +676,7 @@ export const sample: (id: string) => StepNode<TableContainer<unknown>, SampleArg
 //
 // @public (undocumented)
 export interface SchemaResource<T> {
-    loadSchema(schema: T | null | undefined, quiet?: boolean): void;
+    loadSchema(schema: Maybe<T>, quiet?: boolean): void;
     toSchema(): T;
 }
 
@@ -829,7 +829,7 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     get length(): number;
     // (undocumented)
-    loadSchema(schema: WorkflowSchema | null | undefined, quiet?: boolean): void;
+    loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
     // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
     // (undocumented)
