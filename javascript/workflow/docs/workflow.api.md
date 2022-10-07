@@ -8,6 +8,7 @@ import type { AggregateArgs } from '@datashaper/schema';
 import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
+import { default as Blob_2 } from 'cross-blob';
 import type { BooleanArgs } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table.js';
@@ -161,9 +162,7 @@ export class Codebook extends Resource implements SchemaResource<CodebookSchema>
     get fields(): Field[];
     set fields(value: Field[]);
     // (undocumented)
-    initialize(): Promise<void>;
-    // (undocumented)
-    loadSchema(value: CodebookSchema | null | undefined, resources?: Map<string, Blob>, quiet?: boolean): Promise<void>;
+    loadSchema(value: CodebookSchema | null | undefined, quiet?: boolean): void;
     // (undocumented)
     toSchema(): CodebookSchema;
 }
@@ -192,7 +191,7 @@ export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 // Warning: (ae-missing-release-tag) "createWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function createWorkflow(input: WorkflowSchema, tables: TableContainer[]): Promise<Workflow>;
+export function createWorkflow(input: WorkflowSchema, tables: TableContainer[]): Workflow;
 
 // Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -200,15 +199,15 @@ export function createWorkflow(input: WorkflowSchema, tables: TableContainer[]):
 export class DataPackage extends Named implements SchemaResource<DataPackageSchema> {
     // (undocumented)
     readonly $schema: string;
-    constructor(dataPackage?: DataPackageSchema | undefined, resources?: Map<string, Blob>);
+    constructor(dataPackage?: DataPackageSchema | undefined);
     // (undocumented)
     clear(): void;
     // (undocumented)
     dataPackage?: DataPackageSchema | undefined;
     // (undocumented)
-    initialize(): Promise<void>;
+    load(files: Map<string, Blob_2>, quiet?: boolean): Promise<void>;
     // (undocumented)
-    loadSchema(schema: DataPackageSchema | null | undefined, files?: Map<string, Blob>, quiet?: boolean): Promise<void>;
+    save(): Map<string, Blob_2>;
     // Warning: (ae-forgotten-export) The symbol "TableStore" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -223,9 +222,7 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
 export class DataShape extends Observed implements DataShape_2, SchemaResource<DataShape_2> {
     constructor(shape?: DataShape_2);
     // (undocumented)
-    initialize(): Promise<void>;
-    // (undocumented)
-    loadSchema(schema: DataShape_2 | null | undefined, _resources?: Map<string, Blob>, quiet?: boolean): Promise<void>;
+    loadSchema(schema: DataShape_2 | null | undefined, quiet?: boolean): void;
     // (undocumented)
     get matrix(): [width: number, height: number] | undefined;
     set matrix(value: [width: number, height: number] | undefined);
@@ -245,7 +242,7 @@ export class DataShape extends Observed implements DataShape_2, SchemaResource<D
 export class DataTable extends Resource implements SchemaResource<DataTableSchema> {
     // (undocumented)
     readonly $schema: string;
-    constructor(datatable?: DataTableSchema, resources?: Map<string, Blob>);
+    constructor(datatable?: DataTableSchema);
     // (undocumented)
     readonly codebook: Codebook;
     // (undocumented)
@@ -261,9 +258,7 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     get format(): DataFormat;
     set format(value: DataFormat);
     // (undocumented)
-    initialize(): Promise<void>;
-    // (undocumented)
-    loadSchema(schema: DataTableSchema | null | undefined, files?: Map<string, Blob>, quiet?: boolean): Promise<void>;
+    loadSchema(schema: DataTableSchema | null | undefined, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
@@ -330,6 +325,16 @@ export const erase: (id: string) => StepNode<TableContainer<unknown>, EraseArgs>
 // @public (undocumented)
 const fetch_2: (id: string) => InputNode<TableContainer<unknown>, FetchArgs>;
 export { fetch_2 as fetch }
+
+// Warning: (ae-missing-release-tag) "fetchFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function fetchFile(url: string): Promise<Blob>;
+
+// Warning: (ae-missing-release-tag) "fetchJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function fetchJson<T = any>(url: string): Promise<T>;
 
 // Warning: (ae-missing-release-tag) "fill" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -471,7 +476,7 @@ export class Named extends Observed implements Omit<Named_2, 'profile' | '$schem
     get id(): string;
     set id(value: string);
     // (undocumented)
-    loadSchema(schema: Named_2 | null | undefined, _resources: Map<string, Blob> | undefined, quiet?: boolean): Promise<void>;
+    loadSchema(schema: Named_2 | null | undefined, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
@@ -595,7 +600,7 @@ export class ParserOptions extends Observed implements ParserOptions_2, SchemaRe
     get lineTerminator(): string;
     set lineTerminator(value: string | undefined);
     // (undocumented)
-    loadSchema(schema: ParserOptions_2 | null | undefined, _resources?: Map<string, Blob>, quiet?: boolean): Promise<void>;
+    loadSchema(schema: ParserOptions_2 | null | undefined, quiet?: boolean): void;
     // (undocumented)
     get names(): string[] | undefined;
     set names(value: string[] | undefined);
@@ -646,7 +651,7 @@ export class Resource extends Named implements Omit<ResourceSchema, '$schema' | 
     get license(): string | undefined;
     set license(value: string | undefined);
     // (undocumented)
-    loadSchema(value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined, resources: Map<string, Blob> | undefined, quiet?: boolean): Promise<void>;
+    loadSchema(value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined, quiet?: boolean): void;
     // (undocumented)
     get path(): ResourceSchema['path'];
     set path(value: ResourceSchema['path']);
@@ -671,7 +676,7 @@ export const sample: (id: string) => StepNode<TableContainer<unknown>, SampleArg
 //
 // @public (undocumented)
 export interface SchemaResource<T> {
-    loadSchema(schema: T | null | undefined, resources?: Map<string, Blob>, quiet?: boolean): Promise<void>;
+    loadSchema(schema: T | null | undefined, quiet?: boolean): void;
     toSchema(): T;
 }
 
@@ -813,24 +818,24 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     hasOutputName(name: string): boolean;
     // (undocumented)
-    initializate(): Promise<void>;
-    // (undocumented)
     get inputNames(): Set<string>;
+    // Warning: (ae-forgotten-export) The symbol "TableSubject" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    get inputs(): Map<string, TableSubject>;
     latestOutput(name?: string): Maybe<TableContainer>;
     // (undocumented)
     latestOutputForNode(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
     // (undocumented)
     get length(): number;
     // (undocumented)
-    loadSchema(schema: WorkflowSchema | null | undefined, resources?: Map<string, Blob>, quiet?: boolean): Promise<void>;
+    loadSchema(schema: WorkflowSchema | null | undefined, quiet?: boolean): void;
     // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
     // (undocumented)
     outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
     get outputNames(): string[];
     outputObservable(name?: string): Maybe<TableObservable>;
-    // Warning: (ae-forgotten-export) The symbol "TableSubject" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableSubject>;
     // (undocumented)

@@ -36,7 +36,7 @@ export const isDataTable = (
 
 export const isRawData = (
 	r: string | ResourceSchema,
-	files?: Map<string, Blob>,
+	files: Map<string, Blob>,
 ): boolean => {
 	if (typeof r === 'string') {
 		if (r.endsWith('.csv') || r.endsWith('.tsv') || r.endsWith('.arrow')) {
@@ -56,13 +56,13 @@ export const isRawData = (
 
 export async function toResourceSchema(
 	item: string | ResourceSchema,
-	files?: Map<string, Blob>,
+	files: Map<string, Blob>,
 ): Promise<ResourceSchema | undefined> {
 	// if the item is a string, look up the resource in the files map
 	return typeof item === 'string' ? parseFileContent(item, files) : item
 }
 
-async function parseFileContent(item: string, files?: Map<string, Blob>) {
+async function parseFileContent(item: string, files: Map<string, Blob>) {
 	// if the item is a string, look up the resource in the files map
 	const blob = resolveRawContent(item, files)
 	const resourceText = await blob?.text()
@@ -85,7 +85,7 @@ async function parseFileContent(item: string, files?: Map<string, Blob>) {
  */
 export function resolveRawData(
 	resource: string,
-	files: Map<string, Blob> | undefined,
+	files: Map<string, Blob>,
 ): Promise<Blob> {
 	const locallyResolved = resolveRawContent(resource, files)
 	if (locallyResolved) {
@@ -100,10 +100,10 @@ export function resolveRawData(
 
 function resolveRawContent(
 	resource: string,
-	files: Map<string, Blob> | undefined,
+	files: Map<string, Blob>,
 ): Blob | undefined {
-	if (files?.has(resource)) {
-		return files?.get(resource)
+	if (files.has(resource)) {
+		return files.get(resource)
 	}
 }
 

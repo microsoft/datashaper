@@ -85,7 +85,7 @@ export class DataPackage
 	private async _loadTableSources(
 		table: DataTable,
 		schema: DataTableSchema,
-		files?: Map<string, Blob>,
+		files: Map<string, Blob>,
 	): Promise<void> {
 		if (schema?.sources != null) {
 			for (const r of schema?.sources ?? []) {
