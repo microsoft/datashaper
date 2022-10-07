@@ -115,48 +115,46 @@ export class DataPackage
 	}
 
 	public save(): Map<string, Blob> {
-		const dataPackageResources: string[] = []
+		const resources: string[] = []
 		const files = new Map<string, Blob>()
 
 		for (const table of this._tableStore.tables.values()) {
-			const dataTableSources: string[] = []
+			const asset = (name: string) => `data/${table.name}/${name}`
+
+			const sources: string[] = []
 			// Save the source data CSV/JSON
 			if (table.data != null) {
-				const dataFileName = `data/${table.name}/${table.name}.${table.format}`
+				const dataFileName = asset(`${table.name}.${table.format}`)
 				files.set(dataFileName, table.data)
-				dataTableSources.push(dataFileName)
+				sources.push(dataFileName)
 			}
 
 			// Save the Worfklow
 			if (table.workflow.length > 0) {
-				const workflowFileName = `data/${table.name}/workflow.json`
-				files.set(workflowFileName, toBlob(table.workflow.toSchema()))
-				dataTableSources.push(workflowFileName)
+				const workflowFileName = asset(`workflow.json`)
+				files.set(workflowFileName, write(table.workflow))
+				sources.push(workflowFileName)
 			}
 
 			// Save the Codebook
 			if (table.codebook.fields.length > 0) {
-				const codebookFileName = `data/${table.name}/codebook.json`
-				files.set(codebookFileName, toBlob(table.codebook.toSchema()))
-				dataTableSources.push(codebookFileName)
+				const codebookFileName = asset(`codebook.json`)
+				files.set(codebookFileName, write(table.codebook))
+				sources.push(codebookFileName)
 			}
 
 			// Save the DataTable
-			const dataTableFileName = `data/${table.name}/datatable.json`
-			files.set(
-				dataTableFileName,
-				toBlob({ ...table.toSchema(), sources: dataTableSources }),
-			)
-			dataPackageResources.push(dataTableFileName)
+			const dataTableFileName = asset(`datatable.json`)
+			files.set(dataTableFileName, write(table, { sources }))
+			resources.push(dataTableFileName)
 		}
 
-		files.set(
-			'datapackage.json',
-			toBlob({ ...this.toSchema(), resources: dataPackageResources }),
-		)
+		files.set('datapackage.json', write(this, { resources }))
 		return files
 	}
 }
 
+const write = (asset: { toSchema: () => any }, extra: any = {}): Blob =>
+	toBlob({ ...asset.toSchema(), ...extra })
 const toString = (obj: unknown): string => JSON.stringify(obj, null, 2)
 const toBlob = (obj: unknown): Blob => new Blob([toString(obj)])
