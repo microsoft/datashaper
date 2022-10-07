@@ -66,9 +66,8 @@ export class Named
 
 	public loadSchema(
 		schema: NamedSchema | null | undefined,
-		_resources: Map<string, Blob> | undefined,
 		quiet = false,
-	): Promise<void> {
+	): void {
 		this._id = schema?.id ?? v4()
 		this._name = schema?.name ?? ''
 		this._title = schema?.title
@@ -76,6 +75,5 @@ export class Named
 		if (!quiet) {
 			this._onChange.next()
 		}
-		return Promise.resolve()
 	}
 }

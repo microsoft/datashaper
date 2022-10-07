@@ -17,15 +17,10 @@ export class Codebook
 {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
 	private _fields: Field[] = []
-	private _initPromise: Promise<void>
 
 	public constructor(codebook?: CodebookSchema) {
 		super()
-		this._initPromise = this.loadSchema(codebook)
-	}
-
-	public initialize(): Promise<void> {
-		return this._initPromise
+		this.loadSchema(codebook)
 	}
 
 	public get fields(): Field[] {
@@ -44,12 +39,11 @@ export class Codebook
 		})
 	}
 
-	public override async loadSchema(
+	public override loadSchema(
 		value: CodebookSchema | null | undefined,
-		resources?: Map<string, Blob>,
 		quiet?: boolean,
-	): Promise<void> {
-		await super.loadSchema(value, resources, true)
+	): void {
+		super.loadSchema(value, true)
 		this.fields = value?.fields ?? []
 		if (!quiet) {
 			this._onChange.next()

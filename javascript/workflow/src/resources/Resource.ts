@@ -64,12 +64,11 @@ export class Resource
 		}
 	}
 
-	public override async loadSchema(
+	public override loadSchema(
 		value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined,
-		resources: Map<string, Blob> | undefined,
 		quiet = false,
-	): Promise<void> {
-		await super.loadSchema(value, resources, true)
+	): void {
+		super.loadSchema(value, true)
 		this._path = value?.path
 		this._sources = value?.sources
 		this._homepage = value?.homepage

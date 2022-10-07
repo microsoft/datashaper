@@ -140,9 +140,8 @@ export class ParserOptions
 
 	public loadSchema(
 		schema: ParserOptionsSchema | null | undefined,
-		_resources?: Map<string, Blob>,
 		quiet?: boolean,
-	): Promise<void> {
+	): void {
 		this._delimiter = schema?.delimiter ?? DEFAULT_DELIMITER
 		this._lineTerminator = schema?.lineTerminator ?? DEFAULT_LINE_TERMINATOR
 		this._quoteChar = schema?.quoteChar ?? DEFAULT_QUOTE
@@ -155,6 +154,5 @@ export class ParserOptions
 		if (!quiet) {
 			this._onChange.next()
 		}
-		return Promise.resolve()
 	}
 }

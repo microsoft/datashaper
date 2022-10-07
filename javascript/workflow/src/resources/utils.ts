@@ -2,20 +2,37 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ResourceSchema } from '@datashaper/schema'
+import type {
+	CodebookSchema,
+	DataTableSchema,
+	ResourceSchema,
+	WorkflowSchema,
+} from '@datashaper/schema'
 import { all, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 
 import { fetchFile } from '../util/network.js'
 
-export const isWorkflow = (r: ResourceSchema): boolean =>
-	r.profile === 'workflow' || r.$schema.indexOf('/workflow/') > -1
+export const isWorkflow = (
+	r: ResourceSchema | undefined,
+): r is WorkflowSchema =>
+	r == null
+		? false
+		: r.profile === 'workflow' || r.$schema.indexOf('/workflow/') > -1
 
-export const isCodebook = (r: ResourceSchema): boolean =>
-	r.profile === 'codebook' || r.$schema.indexOf('/codebook/') > -1
+export const isCodebook = (
+	r: ResourceSchema | undefined,
+): r is CodebookSchema =>
+	r == null
+		? false
+		: r.profile === 'codebook' || r.$schema.indexOf('/codebook/') > -1
 
-export const isDataTable = (r: ResourceSchema): boolean =>
-	r.profile === 'datatable' || r.$schema.indexOf('/datatable/') > -1
+export const isDataTable = (
+	r: ResourceSchema | undefined,
+): r is DataTableSchema =>
+	r == null
+		? false
+		: r.profile === 'datatable' || r.$schema?.indexOf('/datatable/') > -1
 
 export const isRawData = (
 	r: string | ResourceSchema,

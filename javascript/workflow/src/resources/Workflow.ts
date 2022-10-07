@@ -58,15 +58,9 @@ export class Workflow
 	private readonly _inputs: Map<string, TableSubject> = new Map()
 	private readonly _outputs: Map<string, TableSubject> = new Map()
 
-	private _initPromise: Promise<void>
-
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
-		this._initPromise = this.loadSchema(input, undefined, true)
-	}
-
-	public initializate(): Promise<void> {
-		return this._initPromise
+		this.loadSchema(input, true)
 	}
 
 	private rebindDefaultOutput() {
@@ -522,12 +516,11 @@ export class Workflow
 		})
 	}
 
-	public override async loadSchema(
+	public override loadSchema(
 		schema: WorkflowSchema | null | undefined,
-		resources?: Map<string, Blob>,
 		quiet?: boolean,
-	): Promise<void> {
-		await super.loadSchema(schema, resources, true)
+	): void {
+		super.loadSchema(schema, true)
 		this.readWorkflowInput(schema)
 		this.syncWorkflowStateIntoGraph()
 		this.rebindDefaultOutput()

@@ -4,6 +4,7 @@
  */
 import type { CSVFormatOptions } from 'arquero/dist/types/format/to-csv'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import Blob from 'cross-blob'
 
 /**
  * Downloads a copy of a file in the specified format
