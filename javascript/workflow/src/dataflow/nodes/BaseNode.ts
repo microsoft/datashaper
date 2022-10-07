@@ -226,7 +226,6 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param output - The output socket name
 	 */
 	protected emit = (value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void => {
-		console.log('EMIT', value)
 		this.verifyOutputSocketName(output)
 		if (value !== this._outputs.get(output)?.value) {
 			this._outputs.get(output)?.next(value)
