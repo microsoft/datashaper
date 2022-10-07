@@ -58,7 +58,6 @@ function defineTestCase(parentPath: string, test: string) {
 		.map(f => f.replace('.csv', ''))
 
 	it(testName, async () => {
-		console.log("running test case '" + testName + "'")
 		// execute the dataflow
 		const workflowPath = path.join(casePath, 'workflow.json')
 		const workflowJson = await readJson(workflowPath)
