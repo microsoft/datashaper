@@ -54,12 +54,13 @@ export class DataPackage
 		})
 	}
 
-	public async loadFiles(
-		schema: DataPackageSchema | null | undefined,
-		files?: Map<string, Blob>,
-		quiet?: boolean,
-	): Promise<void> {
+	public async load(files: Map<string, Blob>, quiet?: boolean): Promise<void> {
 		this.clear()
+		const dataPackageBlob = files.get('datapackage.json')
+		if (dataPackageBlob == null) {
+			throw new Error(`file list must contain datapackage.json`)
+		}
+		const schema = JSON.parse(await dataPackageBlob.text()) as DataPackageSchema
 		this.loadSchema(schema, true)
 
 		if (schema?.resources && files) {
@@ -113,7 +114,7 @@ export class DataPackage
 		}
 	}
 
-	public saveFiles(): Map<string, Blob> {
+	public save(): Map<string, Blob> {
 		const dataPackageResources: string[] = []
 		const files = new Map<string, Blob>()
 
