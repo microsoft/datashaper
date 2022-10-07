@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import type { Entry } from '@zip.js/zip.js'
 import {
 	BlobReader,
@@ -11,6 +10,7 @@ import {
 	ZipReader,
 	ZipWriter,
 } from '@zip.js/zip.js'
+import Blob from 'cross-blob'
 
 import { FileWithPath } from '../common/index.js'
 

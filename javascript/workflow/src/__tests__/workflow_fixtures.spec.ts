@@ -65,7 +65,7 @@ function defineTestCase(parentPath: string, test: string) {
 		if (!isWorkflowJsonValid) {
 			throw new Error(`invalid workflow definition: ${workflowPath}`)
 		}
-		const graphBuilder = await createWorkflow(workflowJson, inputTables)
+		const graphBuilder = createWorkflow(workflowJson, inputTables)
 
 		// check the output tables
 		await Promise.all(

@@ -4176,6 +4176,8 @@ __metadata:
     "@types/node": ^18.8.2
     "@zip.js/zip.js": 2.3.18
     arquero: ^5.1.0
+    cross-blob: ^3.0.1
+    cross-fetch: ^3.1.5
     debug: ^4.3.4
     jest: ^29.1.2
     jest-environment-jsdom: ^29.1.2
@@ -4269,6 +4271,7 @@ __metadata:
     "@types/uuid": ^8.3.4
     ajv: ^8.11.0
     arquero: ^5.1.0
+    cross-blob: ^3.0.1
     cross-fetch: ^3.1.5
     d3-time-format: ^4.1.0
     debug: ^4.3.4
@@ -10381,6 +10384,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"blob-polyfill@npm:^6.0.20211015":
+  version: 6.0.20211015
+  resolution: "blob-polyfill@npm:6.0.20211015"
+  checksum: 1e9f3c6451dbb8d4dbda29edbe40ea47a934fc2025f89b35b03a02ad5747836e57765715f61d9cdd80b092792ec85c5926617cadb7f32e69ca0b1a1456a2409c
+  languageName: node
+  linkType: hard
+
 "bluebird@npm:3.7.2, bluebird@npm:^3.5.5":
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
@@ -11813,6 +11823,16 @@ __metadata:
   version: 1.1.1
   resolution: "create-require@npm:1.1.1"
   checksum: a9a1503d4390d8b59ad86f4607de7870b39cad43d929813599a23714831e81c520bddf61bcdd1f8e30f05fd3a2b71ae8538e946eb2786dc65c2bbc520f692eff
+  languageName: node
+  linkType: hard
+
+"cross-blob@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "cross-blob@npm:3.0.1"
+  dependencies:
+    blob-polyfill: ^6.0.20211015
+    fetch-blob: ^3.1.4
+  checksum: f589bea1ee0113ad307396318252f95ef50eb66cced4473e785835ca26f4dc0a89cec7ba418136104cc8207e212c744a3997ac3b2c96f7ed63ac39feef540a85
   languageName: node
   linkType: hard
 

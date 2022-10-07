@@ -54,11 +54,16 @@ module.exports = {
 			include: /@essex/,
 			exclude: undefined,
 		}
+		const xformFetchBlob = {
+			...config.module.rules[0],
+			include: /fetch-blob/,
+			exclude: undefined,
+		}
 		const importMeta = {
 			test: /\.js$/,
 			loader: require.resolve('@open-wc/webpack-import-meta-loader'),
 		}
-		config.module.rules.push(xformDwc, xformEssex, importMeta)
+		config.module.rules.push(xformDwc, xformEssex, xformFetchBlob, importMeta)
 		config.module.rules.push({
 			test: /\.mjs$/,
 			include: /node_modules/,

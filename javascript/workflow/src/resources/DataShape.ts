@@ -5,6 +5,7 @@
 import type { DataNature, DataOrientation } from '@datashaper/schema'
 import type { DataShape as DataShapeSchema } from '@datashaper/schema/dist/datatable/DataShape.js'
 
+import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
 import type { SchemaResource } from './types.js'
 
@@ -15,15 +16,10 @@ export class DataShape
 	private _orientation: DataOrientation | undefined
 	private _nature: DataNature | undefined
 	private _matrix: [width: number, height: number] | undefined
-	private _initPromise: Promise<void>
 
 	public constructor(shape?: DataShapeSchema) {
 		super()
-		this._initPromise = this.loadSchema(shape)
-	}
-
-	public initialize(): Promise<void> {
-		return this._initPromise
+		this.loadSchema(shape)
 	}
 
 	public get orientation(): DataOrientation | undefined {
@@ -61,17 +57,12 @@ export class DataShape
 		}
 	}
 
-	public loadSchema(
-		schema: DataShapeSchema | null | undefined,
-		_resources?: Map<string, Blob>,
-		quiet?: boolean,
-	): Promise<void> {
+	public loadSchema(schema: Maybe<DataShapeSchema>, quiet?: boolean): void {
 		this._matrix = schema?.matrix
 		this._nature = schema?.nature
 		this._orientation = schema?.orientation
 		if (!quiet) {
 			this._onChange.next()
 		}
-		return Promise.resolve()
 	}
 }
