@@ -139,7 +139,7 @@ export class DataTable
 	}
 
 	public override loadSchema(
-		schema: DataTableSchema | null | undefined,
+		schema: Maybe<DataTableSchema>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(schema, true)

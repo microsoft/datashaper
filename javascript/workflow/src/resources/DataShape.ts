@@ -5,6 +5,7 @@
 import type { DataNature, DataOrientation } from '@datashaper/schema'
 import type { DataShape as DataShapeSchema } from '@datashaper/schema/dist/datatable/DataShape.js'
 
+import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
 import type { SchemaResource } from './types.js'
 
@@ -56,10 +57,7 @@ export class DataShape
 		}
 	}
 
-	public loadSchema(
-		schema: DataShapeSchema | null | undefined,
-		quiet?: boolean,
-	): void {
+	public loadSchema(schema: Maybe<DataShapeSchema>, quiet?: boolean): void {
 		this._matrix = schema?.matrix
 		this._nature = schema?.nature
 		this._orientation = schema?.orientation

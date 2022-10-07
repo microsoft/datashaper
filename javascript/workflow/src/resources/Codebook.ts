@@ -8,6 +8,7 @@ import {
 	LATEST_CODEBOOK_SCHEMA,
 } from '@datashaper/schema'
 
+import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
 import type { SchemaResource } from './types.js'
 
@@ -40,7 +41,7 @@ export class Codebook
 	}
 
 	public override loadSchema(
-		value: CodebookSchema | null | undefined,
+		value: Maybe<CodebookSchema>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(value, true)

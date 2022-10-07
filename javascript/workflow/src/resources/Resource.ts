@@ -4,6 +4,7 @@
  */
 import type { ResourceSchema } from '@datashaper/schema'
 
+import type { Maybe } from '../primitives.js'
 import { Named } from './Named.js'
 import type { SchemaResource } from './types.js'
 
@@ -65,7 +66,7 @@ export class Resource
 	}
 
 	public override loadSchema(
-		value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined,
+		value: Maybe<Omit<ResourceSchema, '$schema' | 'profile'>>,
 		quiet = false,
 	): void {
 		super.loadSchema(value, true)

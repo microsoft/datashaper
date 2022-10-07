@@ -517,7 +517,7 @@ export class Workflow
 	}
 
 	public override loadSchema(
-		schema: WorkflowSchema | null | undefined,
+		schema: Maybe<WorkflowSchema>,
 		quiet?: boolean,
 	): void {
 		super.loadSchema(schema, true)

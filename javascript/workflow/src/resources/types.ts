@@ -3,6 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { Maybe } from '../primitives.js'
+
 export interface SchemaResource<T> {
 	/**
 	 * Save the resource out to a schema object
@@ -14,5 +16,5 @@ export interface SchemaResource<T> {
 	 * @param schema - the schema object to load
 	 * @param quiet - prevent change events from bubbling. Default=false
 	 */
-	loadSchema(schema: T | null | undefined, quiet?: boolean): void
+	loadSchema(schema: Maybe<T>, quiet?: boolean): void
 }

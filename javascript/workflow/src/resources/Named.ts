@@ -5,6 +5,7 @@
 import type { Named as NamedSchema } from '@datashaper/schema'
 import { v4 } from 'uuid'
 
+import type { Maybe } from '../primitives.js'
 import { Observed } from './Observed.js'
 import type { SchemaResource } from './types.js'
 
@@ -64,10 +65,7 @@ export class Named
 		}
 	}
 
-	public loadSchema(
-		schema: NamedSchema | null | undefined,
-		quiet = false,
-	): void {
+	public loadSchema(schema: Maybe<NamedSchema>, quiet = false): void {
 		this._id = schema?.id ?? v4()
 		this._name = schema?.name ?? ''
 		this._title = schema?.title
