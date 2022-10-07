@@ -474,6 +474,8 @@ export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflo
     // (undocumented)
     onSelect?: (name: string) => void;
     // (undocumented)
+    onSelectOriginalTable?: () => void;
+    // (undocumented)
     order?: DisplayOrder;
 }
 
@@ -590,8 +592,6 @@ export interface TableTransformProps {
     onDelete?: (index: number) => void;
     // (undocumented)
     onDuplicate?: (step: Step) => void;
-    // (undocumented)
-    onPreview?: (name: string) => void;
     onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
     // (undocumented)
     onVerbChange?: (verb: Verb) => void;
