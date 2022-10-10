@@ -66,16 +66,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		return stepIndex >= 0 ? `#${stepIndex + 1} ${name}` : selectedTableId
 	}, [workflow, selectedTableId])
 
-	const onSelectOriginalTable = useCallback(() => {
-		if (workflow.inputNames.size > 0) {
-			const lastInputName = inputNames[workflow.inputNames.size - 1]
-			if (lastInputName) {
-				setSelectedTableId(lastInputName)
-			}
-		}
-	}, [workflow, inputNames, setSelectedTableId])
-
-	useStepListener(workflow, setSelectedTableId, onSelectOriginalTable)
+	useStepListener(workflow, setSelectedTableId, inputNames)
 	useWorkflowOutputListener(workflow, setOutputs)
 	useInputListener(workflow, inputs)
 
@@ -161,7 +152,6 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					>
 						<StepHistoryList
 							onDelete={onDelete}
-							onSelectOriginalTable={onSelectOriginalTable}
 							onSelect={setSelectedTableId}
 							workflow={workflow}
 							onSave={onSave}

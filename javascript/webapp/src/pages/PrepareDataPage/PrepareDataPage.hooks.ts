@@ -44,16 +44,21 @@ export function useTables(setSelectedTableId: (id: string) => void): {
 export function useStepListener(
 	workflow: Workflow,
 	setSelectedTableId: (tableId: string) => void,
-	onSelectOriginalTable: () => void,
+	inputNames: string[],
 ): void {
 	useEffect(() => {
 		if (workflow.steps.length > 0) {
 			const { id } = workflow.steps[workflow.steps.length - 1]
 			setSelectedTableId(id)
 		} else {
-			onSelectOriginalTable()
+			if (workflow.inputNames.size > 0) {
+				const lastInputName = inputNames[workflow.inputNames.size - 1]
+				if (lastInputName) {
+					setSelectedTableId(lastInputName)
+				}
+			}
 		}
-	}, [workflow, onSelectOriginalTable, setSelectedTableId])
+	}, [workflow, inputNames, setSelectedTableId])
 }
 
 export function useInputListener(

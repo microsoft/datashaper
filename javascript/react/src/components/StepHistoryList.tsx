@@ -37,7 +37,6 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		onDelete,
 		onDuplicateClicked,
 		onSelect,
-		onSelectOriginalTable,
 		workflow,
 		onSave,
 		order,
@@ -45,6 +44,16 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		const ref = useRef<HTMLDivElement>(null)
 		const theme = useTheme()
 		const steps = useWorkflowSteps(workflow, order)
+
+		const onSelectOriginalTable = useCallback(() => {
+			if (workflow.inputNames.size > 0) {
+				const names = [...workflow.inputNames]
+				const lastInputName = names[names.length - 1]
+				if (lastInputName) {
+					onSelect?.(lastInputName)
+				}
+			}
+		}, [workflow, onSelect])
 
 		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
 		const {
