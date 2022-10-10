@@ -201,11 +201,15 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
     readonly $schema: string;
     constructor(dataPackage?: DataPackageSchema | undefined);
     // (undocumented)
+    addPersistable(persistable: Persistable): void;
+    // (undocumented)
     clear(): void;
     // (undocumented)
     dataPackage?: DataPackageSchema | undefined;
     // (undocumented)
     load(files: Map<string, Blob_2>, quiet?: boolean): Promise<void>;
+    // (undocumented)
+    removePersistable(name: string): void;
     // (undocumented)
     save(): Promise<Map<string, Blob_2>>;
     // Warning: (ae-forgotten-export) The symbol "TableStore" needs to be exported by the entry point index.d.ts
@@ -622,13 +626,10 @@ export class ParserOptions extends Observed implements ParserOptions_2, SchemaRe
 
 // Warning: (ae-missing-release-tag) "Persistable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface Persistable {
-    // (undocumented)
     load(data: Blob): Promise<void>;
-    // (undocumented)
     name: string;
-    // (undocumented)
     save(): Promise<Blob>;
 }
 
