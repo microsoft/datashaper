@@ -207,7 +207,7 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
     // (undocumented)
     load(files: Map<string, Blob_2>, quiet?: boolean): Promise<void>;
     // (undocumented)
-    save(): Map<string, Blob_2>;
+    save(): Promise<Map<string, Blob_2>>;
     // Warning: (ae-forgotten-export) The symbol "TableStore" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -618,6 +618,18 @@ export class ParserOptions extends Observed implements ParserOptions_2, SchemaRe
     set skipRows(value: number | undefined);
     // (undocumented)
     toSchema(): ParserOptions_2;
+}
+
+// Warning: (ae-missing-release-tag) "Persistable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface Persistable {
+    // (undocumented)
+    load(data: Blob): Promise<void>;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    save(): Promise<Blob>;
 }
 
 // Warning: (ae-missing-release-tag) "pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

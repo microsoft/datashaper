@@ -14,7 +14,7 @@ import debug from 'debug'
 import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
 import { TableStore } from './TableStore.js'
-import type { SchemaResource } from './types.js'
+import type { Persistable, SchemaResource } from './types.js'
 import {
 	isCodebook,
 	isDataTable,
@@ -32,10 +32,24 @@ export class DataPackage
 {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
 	private _tableStore: TableStore = new TableStore()
+	private _persistables: Persistable[] = []
 
 	public constructor(public dataPackage?: DataPackageSchema) {
 		super()
 		this.loadSchema(dataPackage)
+	}
+
+	public addPersistable(persistable: Persistable) {
+		if (this._persistables.some(p => p.name === persistable.name)) {
+			throw new Error(`duplicate persistable name: ${persistable.name}`)
+		}
+		this._persistables.push(persistable)
+		this._onChange.next()
+	}
+
+	public removePersistable(name: string) {
+		this._persistables = this._persistables.filter(p => p.name !== name)
+		this._onChange.next()
 	}
 
 	public clear(): void {
@@ -52,6 +66,51 @@ export class DataPackage
 			...super.toSchema(),
 			resources: [...this._tableStore.tables.values()].map(t => t.toSchema()),
 		})
+	}
+
+	public async save(): Promise<Map<string, Blob>> {
+		const resources: string[] = []
+		const files = new Map<string, Blob>()
+
+		for (const table of this._tableStore.tables.values()) {
+			const asset = (name: string) => `data/${table.name}/${name}`
+
+			const sources: string[] = []
+			// Save the source data CSV/JSON
+			if (table.data != null) {
+				const dataFileName = asset(`${table.name}.${table.format}`)
+				files.set(dataFileName, table.data)
+				sources.push(dataFileName)
+			}
+
+			// Save the Worfklow
+			if (table.workflow.length > 0) {
+				const workflowFileName = asset(`workflow.json`)
+				files.set(workflowFileName, write(table.workflow))
+				sources.push(workflowFileName)
+			}
+
+			// Save the Codebook
+			if (table.codebook.fields.length > 0) {
+				const codebookFileName = asset(`codebook.json`)
+				files.set(codebookFileName, write(table.codebook))
+				sources.push(codebookFileName)
+			}
+
+			// Save the DataTable
+			const dataTableFileName = asset(`datatable.json`)
+			files.set(dataTableFileName, write(table, { sources }))
+			resources.push(dataTableFileName)
+		}
+
+		// Save individual data files
+		for (const p of this._persistables) {
+			const data = await p.save()
+			files.set(`apps/${p.name}`, data)
+		}
+
+		files.set('datapackage.json', write(this, { resources }))
+		return files
 	}
 
 	public async load(files: Map<string, Blob>, quiet?: boolean): Promise<void> {
@@ -77,6 +136,24 @@ export class DataPackage
 		for (const table of this._tableStore.tables.values()) {
 			table.connect(this.tableStore)
 		}
+
+		// Load Applications
+		for (const file of [...files.keys()].filter(k => k.startsWith('apps/'))) {
+			const blob = files.get(file)
+			const persistable = this._persistables.find(
+				p => p.name === file.replace('apps/', ''),
+			)
+			if (blob && persistable) {
+				await persistable.load(blob)
+			} else {
+				console.error(
+					`could not load file ${file}; blob present? ${
+						blob != null
+					} persistable present? ${persistable != null}`,
+				)
+			}
+		}
+
 		if (!quiet) {
 			this._onChange.next()
 		}
@@ -112,45 +189,6 @@ export class DataPackage
 				}
 			}
 		}
-	}
-
-	public save(): Map<string, Blob> {
-		const resources: string[] = []
-		const files = new Map<string, Blob>()
-
-		for (const table of this._tableStore.tables.values()) {
-			const asset = (name: string) => `data/${table.name}/${name}`
-
-			const sources: string[] = []
-			// Save the source data CSV/JSON
-			if (table.data != null) {
-				const dataFileName = asset(`${table.name}.${table.format}`)
-				files.set(dataFileName, table.data)
-				sources.push(dataFileName)
-			}
-
-			// Save the Worfklow
-			if (table.workflow.length > 0) {
-				const workflowFileName = asset(`workflow.json`)
-				files.set(workflowFileName, write(table.workflow))
-				sources.push(workflowFileName)
-			}
-
-			// Save the Codebook
-			if (table.codebook.fields.length > 0) {
-				const codebookFileName = asset(`codebook.json`)
-				files.set(codebookFileName, write(table.codebook))
-				sources.push(codebookFileName)
-			}
-
-			// Save the DataTable
-			const dataTableFileName = asset(`datatable.json`)
-			files.set(dataTableFileName, write(table, { sources }))
-			resources.push(dataTableFileName)
-		}
-
-		files.set('datapackage.json', write(this, { resources }))
-		return files
 	}
 }
 

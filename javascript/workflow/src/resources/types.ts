@@ -18,3 +18,11 @@ export interface SchemaResource<T> {
 	 */
 	loadSchema(schema: Maybe<T>, quiet?: boolean): void
 }
+
+export interface Persistable {
+	name: string
+
+	save(): Promise<Blob>
+
+	load(data: Blob): Promise<void>
+}
