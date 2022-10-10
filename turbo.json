@@ -17,7 +17,12 @@
 		},
 		"bundle": {
 			"dependsOn": ["^build", "build"],
-			"outputs": ["build/**", "storybook-static/**"]
+			"outputs": [
+				"build/**",
+				"storybook-static/**",
+				"versions.js",
+				"versions.d.ts"
+			]
 		},
 		"ci": {
 			"dependsOn": ["build", "lint", "test", "bundle"],
