@@ -15,7 +15,7 @@ import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
 import { PersistableStore } from './PersistableStore.js'
 import { TableStore } from './TableStore.js'
-import type { Persistable, SchemaResource } from './types.js'
+import type { SchemaResource } from './types.js'
 import {
 	isCodebook,
 	isDataTable,
