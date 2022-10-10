@@ -55,3 +55,17 @@ export function useStepListener(
 		}
 	}, [workflow, onSelectOriginalTable, setSelectedTableId])
 }
+
+export function useInputListener(
+	workflow: Workflow,
+	inputs: TableContainer[],
+): void {
+	useEffect(
+		function syncDataTablesWhenInputsChange() {
+			if (inputs) {
+				workflow.addInputTables(inputs)
+			}
+		},
+		[workflow, inputs],
+	)
+}
