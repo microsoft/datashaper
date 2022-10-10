@@ -25,6 +25,7 @@ import {
 } from './utils.js'
 
 const log = debug('datashaper')
+const PLUGIN_FILE_PREFIX = `app/`
 
 export class DataPackage
 	extends Named
@@ -106,7 +107,7 @@ export class DataPackage
 		// Save individual data files
 		for (const p of this._persistables) {
 			const data = await p.save()
-			files.set(`apps/${p.name}`, data)
+			files.set(`${PLUGIN_FILE_PREFIX}${p.name}`, data)
 		}
 
 		files.set('datapackage.json', write(this, { resources }))
@@ -138,10 +139,12 @@ export class DataPackage
 		}
 
 		// Load Applications
-		for (const file of [...files.keys()].filter(k => k.startsWith('apps/'))) {
+		for (const file of [...files.keys()].filter(k =>
+			k.startsWith(PLUGIN_FILE_PREFIX),
+		)) {
 			const blob = files.get(file)
 			const persistable = this._persistables.find(
-				p => p.name === file.replace('apps/', ''),
+				p => p.name === file.replace(PLUGIN_FILE_PREFIX, ''),
 			)
 			if (blob && persistable) {
 				await persistable.load(blob)
