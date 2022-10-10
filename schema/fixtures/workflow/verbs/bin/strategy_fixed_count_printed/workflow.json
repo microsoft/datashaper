@@ -9,7 +9,9 @@
 				"column": "count",
 				"strategy": "fixed count",
 				"fixedcount": 5,
-				"printRange": true
+				"printRange": true,
+				"min": 10,
+				"max": 200
 			},
 			"id": "expected"
 		}
