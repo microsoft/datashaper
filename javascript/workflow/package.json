@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/workflow",
-	"version": "13.0.0",
+	"version": "14.0.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -37,6 +37,7 @@
 		"@datashaper/schema": "workspace:^",
 		"@datashaper/tables": "workspace:^",
 		"ajv": "^8.11.0",
+		"cross-blob": "^3.0.1",
 		"cross-fetch": "^3.1.5",
 		"d3-time-format": "^4.1.0",
 		"debug": "^4.3.4",

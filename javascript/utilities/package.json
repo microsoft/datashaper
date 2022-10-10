@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/utilities",
-	"version": "2.3.5",
+	"version": "2.3.6",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -35,6 +35,8 @@
 	},
 	"dependencies": {
 		"@zip.js/zip.js": "2.3.18",
+		"cross-blob": "^3.0.1",
+		"cross-fetch": "^3.1.5",
 		"debug": "^4.3.4",
 		"tslib": "^2.4.0"
 	},

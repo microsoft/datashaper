@@ -3,6 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import Blob from 'cross-blob'
+
 import { BaseFile, FileWithPath } from '../../common/index.js'
 import { guessFileType, isDsvFile, isJsonFile, isZipFile } from '..'
 import {

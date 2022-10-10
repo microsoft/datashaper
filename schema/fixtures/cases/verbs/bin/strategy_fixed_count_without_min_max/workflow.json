@@ -7,10 +7,8 @@
 			"args": {
 				"to": "newColumn",
 				"column": "count",
-				"strategy": "fixed width",
-				"fixedwidth": 30,
-				"min": 10,
-				"max": 200
+				"strategy": "fixed count",
+				"fixedcount": 5
 			},
 			"id": "expected"
 		}

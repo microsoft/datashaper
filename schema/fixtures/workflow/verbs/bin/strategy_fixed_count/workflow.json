@@ -8,7 +8,9 @@
 				"to": "newColumn",
 				"column": "count",
 				"strategy": "fixed count",
-				"fixedcount": 5
+				"fixedcount": 5,
+				"min": 10,
+				"max": 200
 			},
 			"id": "expected"
 		}

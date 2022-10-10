@@ -8,6 +8,7 @@ import {
 	LATEST_CODEBOOK_SCHEMA,
 } from '@datashaper/schema'
 
+import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
 import type { SchemaResource } from './types.js'
 
@@ -17,15 +18,10 @@ export class Codebook
 {
 	public readonly $schema = LATEST_CODEBOOK_SCHEMA
 	private _fields: Field[] = []
-	private _initPromise: Promise<void>
 
 	public constructor(codebook?: CodebookSchema) {
 		super()
-		this._initPromise = this.loadSchema(codebook)
-	}
-
-	public initialize(): Promise<void> {
-		return this._initPromise
+		this.loadSchema(codebook)
 	}
 
 	public get fields(): Field[] {
@@ -44,12 +40,11 @@ export class Codebook
 		})
 	}
 
-	public override async loadSchema(
-		value: CodebookSchema | null | undefined,
-		resources?: Map<string, Blob>,
+	public override loadSchema(
+		value: Maybe<CodebookSchema>,
 		quiet?: boolean,
-	): Promise<void> {
-		await super.loadSchema(value, resources, true)
+	): void {
+		super.loadSchema(value, true)
 		this.fields = value?.fields ?? []
 		if (!quiet) {
 			this._onChange.next()

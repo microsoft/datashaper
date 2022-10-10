@@ -2,11 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	CodebookSchema,
-	DataTableSchema,
-	WorkflowSchema,
-} from '@datashaper/schema'
+import type { DataTableSchema } from '@datashaper/schema'
 import {
 	createDataTableSchemaObject,
 	DataFormat,
@@ -18,7 +14,7 @@ import type { Maybe } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import debug from 'debug'
 import type { Observable } from 'rxjs'
-import { BehaviorSubject, EMPTY } from 'rxjs'
+import { BehaviorSubject, EMPTY, map } from 'rxjs'
 
 import { Codebook } from './Codebook.js'
 import { DataShape } from './DataShape.js'
@@ -26,15 +22,7 @@ import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
 import type { TableStore } from './TableStore.js'
 import type { SchemaResource } from './types.js'
-import {
-	isCodebook,
-	isDataTable,
-	isRawData,
-	isWorkflow,
-	resolveRawData,
-	toResourceSchema,
-	withRowNumbers,
-} from './utils.js'
+import { withRowNumbers } from './utils.js'
 import { Workflow } from './Workflow.js'
 import { WorkflowExecutor } from './WorkflowExecutor.js'
 
@@ -51,7 +39,6 @@ export class DataTable
 	private readonly _output = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
-	private _inputNames: string[] = []
 
 	public readonly parser: ParserOptions = new ParserOptions()
 	public readonly shape: DataShape = new DataShape()
@@ -67,12 +54,8 @@ export class DataTable
 
 	private _format: DataFormat = DataFormat.CSV
 	private _rawData: Blob | undefined
-	private _initPromise: Promise<void>
 
-	public constructor(
-		datatable?: DataTableSchema,
-		resources?: Map<string, Blob>,
-	) {
+	public constructor(datatable?: DataTableSchema) {
 		super()
 		this.parser.onChange(this.refreshSource)
 		this.shape.onChange(this.refreshSource)
@@ -81,11 +64,7 @@ export class DataTable
 		// listen for workflow execution outputs
 		this._workflowExecutor.output.subscribe(tbl => this._output.next(tbl))
 
-		this._initPromise = this.loadSchema(datatable, resources)
-	}
-
-	public initialize(): Promise<void> {
-		return this._initPromise
+		this.loadSchema(datatable)
 	}
 
 	private refreshSource = (): void => {
@@ -159,47 +138,17 @@ export class DataTable
 		})
 	}
 
-	public override async loadSchema(
-		schema: DataTableSchema | null | undefined,
-		files?: Map<string, Blob>,
+	public override loadSchema(
+		schema: Maybe<DataTableSchema>,
 		quiet?: boolean,
-	): Promise<void> {
-		await super.loadSchema(schema, files, true)
+	): void {
+		super.loadSchema(schema, true)
 		this._inputs.clear()
-		this._inputNames = []
 		this._format = schema?.format ?? DataFormat.CSV
 		// these loads will fire onChange events
 		// which will trigger refreshSource
-		this.parser.loadSchema(schema?.parser, files, true)
-		this.shape.loadSchema(schema?.shape, files, true)
-
-		if (files != null && schema?.sources != null) {
-			for (const r of schema?.sources ?? []) {
-				try {
-					if (isRawData(r, files)) {
-						this.data = await resolveRawData(r as string, files)
-						continue
-					}
-					const res = await toResourceSchema(r, files)
-					if (!res) {
-						log('cannot resolve resource', r)
-						continue
-					}
-					if (isDataTable(res)) {
-						this._inputNames.push(res.name)
-					} else if (isWorkflow(res)) {
-						await this.workflow.loadSchema(res as WorkflowSchema, files)
-					} else if (isCodebook(res)) {
-						await this.codebook.loadSchema(res as CodebookSchema, files)
-					} else {
-						log('unknown resource type', res)
-					}
-				} catch (err) {
-					log('error loading resource', err)
-					throw err
-				}
-			}
-		}
+		this.parser.loadSchema(schema?.parser, true)
+		this.shape.loadSchema(schema?.shape, true)
 
 		if (!quiet) {
 			this._onChange.next()
@@ -209,8 +158,14 @@ export class DataTable
 	public connect(store: TableStore): void {
 		const rebindInputs = () => {
 			this._inputs.clear()
+			// Set the sibling table inputs
 			store.names.forEach(name =>
 				this._inputs.set(name, store.get(name)?.output ?? EMPTY),
+			)
+			// Set the input name from the source
+			this._inputs.set(
+				this.name,
+				this._source.pipe(map(tbl => ({ id: this.name, table: tbl }))),
 			)
 			this._workflowExecutor.rebindWorkflowInput()
 		}

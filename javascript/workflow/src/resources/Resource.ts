@@ -4,6 +4,7 @@
  */
 import type { ResourceSchema } from '@datashaper/schema'
 
+import type { Maybe } from '../primitives.js'
 import { Named } from './Named.js'
 import type { SchemaResource } from './types.js'
 
@@ -64,12 +65,11 @@ export class Resource
 		}
 	}
 
-	public override async loadSchema(
-		value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined,
-		resources: Map<string, Blob> | undefined,
+	public override loadSchema(
+		value: Maybe<Omit<ResourceSchema, '$schema' | 'profile'>>,
 		quiet = false,
-	): Promise<void> {
-		await super.loadSchema(value, resources, true)
+	): void {
+		super.loadSchema(value, true)
 		this._path = value?.path
 		this._sources = value?.sources
 		this._homepage = value?.homepage

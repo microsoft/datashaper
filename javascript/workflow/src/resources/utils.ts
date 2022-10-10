@@ -2,23 +2,41 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ResourceSchema } from '@datashaper/schema'
+import type {
+	CodebookSchema,
+	DataTableSchema,
+	ResourceSchema,
+	WorkflowSchema,
+} from '@datashaper/schema'
 import { all, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
-import fetch from 'cross-fetch'
 
-export const isWorkflow = (r: ResourceSchema): boolean =>
-	r.profile === 'workflow' || r.$schema.indexOf('/workflow/') > -1
+import { fetchFile } from '../util/network.js'
 
-export const isCodebook = (r: ResourceSchema): boolean =>
-	r.profile === 'codebook' || r.$schema.indexOf('/codebook/') > -1
+export const isWorkflow = (
+	r: ResourceSchema | undefined,
+): r is WorkflowSchema =>
+	r == null
+		? false
+		: r.profile === 'workflow' || r.$schema.indexOf('/workflow/') > -1
 
-export const isDataTable = (r: ResourceSchema): boolean =>
-	r.profile === 'datatable' || r.$schema.indexOf('/datatable/') > -1
+export const isCodebook = (
+	r: ResourceSchema | undefined,
+): r is CodebookSchema =>
+	r == null
+		? false
+		: r.profile === 'codebook' || r.$schema.indexOf('/codebook/') > -1
+
+export const isDataTable = (
+	r: ResourceSchema | undefined,
+): r is DataTableSchema =>
+	r == null
+		? false
+		: r.profile === 'datatable' || r.$schema?.indexOf('/datatable/') > -1
 
 export const isRawData = (
 	r: string | ResourceSchema,
-	files?: Map<string, Blob>,
+	files: Map<string, Blob>,
 ): boolean => {
 	if (typeof r === 'string') {
 		if (r.endsWith('.csv') || r.endsWith('.tsv') || r.endsWith('.arrow')) {
@@ -38,13 +56,13 @@ export const isRawData = (
 
 export async function toResourceSchema(
 	item: string | ResourceSchema,
-	files?: Map<string, Blob>,
+	files: Map<string, Blob>,
 ): Promise<ResourceSchema | undefined> {
 	// if the item is a string, look up the resource in the files map
 	return typeof item === 'string' ? parseFileContent(item, files) : item
 }
 
-async function parseFileContent(item: string, files?: Map<string, Blob>) {
+async function parseFileContent(item: string, files: Map<string, Blob>) {
 	// if the item is a string, look up the resource in the files map
 	const blob = resolveRawContent(item, files)
 	const resourceText = await blob?.text()
@@ -67,7 +85,7 @@ async function parseFileContent(item: string, files?: Map<string, Blob>) {
  */
 export function resolveRawData(
 	resource: string,
-	files: Map<string, Blob> | undefined,
+	files: Map<string, Blob>,
 ): Promise<Blob> {
 	const locallyResolved = resolveRawContent(resource, files)
 	if (locallyResolved) {
@@ -76,16 +94,16 @@ export function resolveRawData(
 		if (!resource.startsWith('http')) {
 			throw new Error('Invalid resource URL: ' + resource)
 		}
-		return fetch(resource).then(r => r.blob())
+		return fetchFile(resource)
 	}
 }
 
 function resolveRawContent(
 	resource: string,
-	files: Map<string, Blob> | undefined,
+	files: Map<string, Blob>,
 ): Blob | undefined {
-	if (files?.has(resource)) {
-		return files?.get(resource)
+	if (files.has(resource)) {
+		return files.get(resource)
 	}
 }
 
