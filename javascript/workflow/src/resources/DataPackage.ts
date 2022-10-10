@@ -51,6 +51,10 @@ export class DataPackage
 		return this._tableStore
 	}
 
+	public get persistableStore(): PersistableStore {
+		return this._persistableStore
+	}
+
 	public override toSchema(): DataPackageSchema {
 		return createDataPackageSchemaObject({
 			...super.toSchema(),

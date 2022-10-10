@@ -201,15 +201,15 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
     readonly $schema: string;
     constructor(dataPackage?: DataPackageSchema | undefined);
     // (undocumented)
-    addPersistable(persistable: Persistable): void;
-    // (undocumented)
     clear(): void;
     // (undocumented)
     dataPackage?: DataPackageSchema | undefined;
     // (undocumented)
     load(files: Map<string, Blob_2>, quiet?: boolean): Promise<void>;
+    // Warning: (ae-forgotten-export) The symbol "PersistableStore" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    removePersistable(name: string): void;
+    get persistableStore(): PersistableStore;
     // (undocumented)
     save(): Promise<Map<string, Blob_2>>;
     // Warning: (ae-forgotten-export) The symbol "TableStore" needs to be exported by the entry point index.d.ts
