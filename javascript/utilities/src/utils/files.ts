@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import fetch from 'cross-fetch'
 import debug from 'debug'
 
 import { BaseFile, FileWithPath } from '../common/index.js'
@@ -70,8 +71,21 @@ export function isSupportedFile(fileName = ''): boolean {
 	return supportedExtensions.includes(ext)
 }
 
+/**
+ * @deprecated - use @datashaper/workflow fetchFile, fetchJson instead.
+ * @param url - the resource url
+ * @returns
+ */
 export async function fetchFile(url: string): Promise<Blob> {
-	return fetch(url).then(response => response.blob())
+	log('utils fetching file', url)
+	try {
+		const response = await fetch(url)
+		log(`utils fetched file [${response.status}]`, url)
+		return response.blob()
+	} catch (e) {
+		log('utils error fetching file', url, e)
+		throw e
+	}
 }
 
 export function guessFileType(name: string): string {

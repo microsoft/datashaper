@@ -5,9 +5,8 @@
 			"verb": "fetch",
 			"input": "table1",
 			"args": {
-				"url": "javascript/workflow/src/__tests__/data/companies.csv",
-				"delimiter": ",",
-				"autoMax": 10000
+				"url": "http://localhost:8080/fixtures/workflow_inputs/companies.csv",
+				"delimiter": ","
 			},
 			"id": "expected"
 		}

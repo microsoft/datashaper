@@ -8,6 +8,7 @@ import type { AggregateArgs } from '@datashaper/schema';
 import { BehaviorSubject } from 'rxjs';
 import type { BinArgs } from '@datashaper/schema';
 import type { BinarizeArgs } from '@datashaper/schema';
+import { default as Blob_2 } from 'cross-blob';
 import type { BooleanArgs } from '@datashaper/schema';
 import type { CodebookSchema } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table.js';
@@ -53,7 +54,6 @@ import type { UnfoldArgs } from '@datashaper/schema';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
-import { Workflow as Workflow_2 } from '@datashaper/workflow';
 import type { WorkflowSchema } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -155,12 +155,14 @@ export function cloneStep(step: Step<unknown>, columnNames?: string[]): Step<unk
 //
 // @public (undocumented)
 export class Codebook extends Resource implements SchemaResource<CodebookSchema> {
+    // (undocumented)
+    readonly $schema: string;
     constructor(codebook?: CodebookSchema);
     // (undocumented)
     get fields(): Field[];
     set fields(value: Field[]);
     // (undocumented)
-    loadSchema(value: CodebookSchema | null | undefined): void;
+    loadSchema(value: Maybe<CodebookSchema>, quiet?: boolean): void;
     // (undocumented)
     toSchema(): CodebookSchema;
 }
@@ -195,24 +197,23 @@ export function createWorkflow(input: WorkflowSchema, tables: TableContainer[]):
 //
 // @public (undocumented)
 export class DataPackage extends Named implements SchemaResource<DataPackageSchema> {
-    constructor(id: string, source: DataSource, workflow?: Workflow_2, codebook?: Codebook);
     // (undocumented)
-    readonly codebook: Codebook;
+    readonly $schema: string;
+    constructor(dataPackage?: DataPackageSchema | undefined);
     // (undocumented)
-    get currentOutput(): Maybe_3<TableContainer>;
+    clear(): void;
     // (undocumented)
-    get id(): string;
-    set id(id: string);
+    dataPackage?: DataPackageSchema | undefined;
     // (undocumented)
-    loadSchema(_schema: DataPackageSchema | null | undefined): void;
+    load(files: Map<string, Blob_2>, quiet?: boolean): Promise<void>;
     // (undocumented)
-    get output(): Observable<Maybe_3<TableContainer>>;
+    save(): Map<string, Blob_2>;
+    // Warning: (ae-forgotten-export) The symbol "TableStore" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    readonly source: DataSource;
+    get tableStore(): TableStore;
     // (undocumented)
     toSchema(): DataPackageSchema;
-    // (undocumented)
-    readonly workflow: Workflow_2;
 }
 
 // Warning: (ae-missing-release-tag) "DataShape" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -221,7 +222,7 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
 export class DataShape extends Observed implements DataShape_2, SchemaResource<DataShape_2> {
     constructor(shape?: DataShape_2);
     // (undocumented)
-    loadSchema(schema: DataShape_2 | null | undefined): void;
+    loadSchema(schema: Maybe<DataShape_2>, quiet?: boolean): void;
     // (undocumented)
     get matrix(): [width: number, height: number] | undefined;
     set matrix(value: [width: number, height: number] | undefined);
@@ -235,29 +236,44 @@ export class DataShape extends Observed implements DataShape_2, SchemaResource<D
     toSchema(): DataShape_2;
 }
 
-// Warning: (ae-missing-release-tag) "DataSource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "DataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class DataSource extends Resource implements SchemaResource<DataTableSchema> {
-    constructor(source: Blob, datatable?: DataTableSchema);
+export class DataTable extends Resource implements SchemaResource<DataTableSchema> {
     // (undocumented)
-    get currentOutput(): Maybe_3<ColumnTable>;
+    readonly $schema: string;
+    constructor(datatable?: DataTableSchema);
     // (undocumented)
-    get data(): Blob;
-    set data(value: Blob);
+    readonly codebook: Codebook;
+    // (undocumented)
+    connect(store: TableStore): void;
+    // (undocumented)
+    get currentOutput(): Maybe_3<TableContainer>;
+    // (undocumented)
+    get currentSource(): Maybe_3<ColumnTable>;
+    // (undocumented)
+    get data(): Blob | undefined;
+    set data(value: Blob | undefined);
     // (undocumented)
     get format(): DataFormat;
     set format(value: DataFormat);
     // (undocumented)
-    loadSchema(schema: DataTableSchema | null | undefined): void;
+    loadSchema(schema: Maybe_3<DataTableSchema>, quiet?: boolean): void;
     // (undocumented)
-    get output(): Observable<Maybe_3<ColumnTable>>;
+    get name(): string;
+    set name(value: string);
+    // (undocumented)
+    get output(): Observable<Maybe_3<TableContainer>>;
     // (undocumented)
     readonly parser: ParserOptions;
     // (undocumented)
     readonly shape: DataShape;
     // (undocumented)
+    get source(): Observable<Maybe_3<ColumnTable>>;
+    // (undocumented)
     toSchema(): DataTableSchema;
+    // (undocumented)
+    readonly workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -309,6 +325,16 @@ export const erase: (id: string) => StepNode<TableContainer<unknown>, EraseArgs>
 // @public (undocumented)
 const fetch_2: (id: string) => InputNode<TableContainer<unknown>, FetchArgs>;
 export { fetch_2 as fetch }
+
+// Warning: (ae-missing-release-tag) "fetchFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function fetchFile(url: string): Promise<Blob>;
+
+// Warning: (ae-missing-release-tag) "fetchJson" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function fetchJson<T = any>(url: string): Promise<T>;
 
 // Warning: (ae-missing-release-tag) "fill" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -450,7 +476,7 @@ export class Named extends Observed implements Omit<Named_2, 'profile' | '$schem
     get id(): string;
     set id(value: string);
     // (undocumented)
-    loadSchema(schema: Named_2 | null | undefined, preventOnChange?: boolean): void;
+    loadSchema(schema: Maybe<Named_2>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
@@ -574,7 +600,7 @@ export class ParserOptions extends Observed implements ParserOptions_2, SchemaRe
     get lineTerminator(): string;
     set lineTerminator(value: string | undefined);
     // (undocumented)
-    loadSchema(schema: ParserOptions_2 | null | undefined): void;
+    loadSchema(schema: Maybe<ParserOptions_2>, quiet?: boolean): void;
     // (undocumented)
     get names(): string[] | undefined;
     set names(value: string[] | undefined);
@@ -625,7 +651,7 @@ export class Resource extends Named implements Omit<ResourceSchema, '$schema' | 
     get license(): string | undefined;
     set license(value: string | undefined);
     // (undocumented)
-    loadSchema(value: Omit<ResourceSchema, '$schema' | 'profile'> | null | undefined, preventOnChange?: boolean): void;
+    loadSchema(value: Maybe<Omit<ResourceSchema, '$schema' | 'profile'>>, quiet?: boolean): void;
     // (undocumented)
     get path(): ResourceSchema['path'];
     set path(value: ResourceSchema['path']);
@@ -650,7 +676,7 @@ export const sample: (id: string) => StepNode<TableContainer<unknown>, SampleArg
 //
 // @public (undocumented)
 export interface SchemaResource<T> {
-    loadSchema(schema: T | null | undefined): void;
+    loadSchema(schema: Maybe<T>, quiet?: boolean): void;
     toSchema(): T;
 }
 
@@ -771,6 +797,8 @@ export { window_2 as window }
 //
 // @public (undocumented)
 export class Workflow extends Resource implements SchemaResource<WorkflowSchema> {
+    // (undocumented)
+    readonly $schema: string;
     constructor(input?: WorkflowSchema, _strictInputs?: boolean);
     // (undocumented)
     addInputName(input: string): void;
@@ -791,27 +819,31 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     hasOutputName(name: string): boolean;
     // (undocumented)
     get inputNames(): Set<string>;
+    // Warning: (ae-forgotten-export) The symbol "TableSubject" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    get inputs(): Map<string, TableSubject>;
     latestOutput(name?: string): Maybe<TableContainer>;
     // (undocumented)
     latestOutputForNode(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
     // (undocumented)
     get length(): number;
     // (undocumented)
-    loadSchema(schema: WorkflowSchema | null | undefined): void;
+    loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
     // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
     // (undocumented)
     outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
     get outputNames(): string[];
     outputObservable(name?: string): Maybe<TableObservable>;
-    // Warning: (ae-forgotten-export) The symbol "TableSubject" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableSubject>;
     // (undocumented)
     get outputPorts(): Map<string, NamedOutputPortBinding>;
     // (undocumented)
     removeInputName(input: string): void;
+    // (undocumented)
+    removeInputObservable(id: string): void;
     removeOutput(name: string): void;
     // (undocumented)
     removeStep(index: number): void;

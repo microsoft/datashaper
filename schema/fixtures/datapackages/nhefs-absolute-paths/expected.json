@@ -1,0 +1,11 @@
+{
+	"tables": [
+		{
+			"name": "nhefs"
+		},
+		{
+			"name": "nhefs-transformed",
+			"workflowLength": 2
+		}
+	]
+}
