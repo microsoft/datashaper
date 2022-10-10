@@ -59,7 +59,7 @@ function defineTestCase(parentPath: string, test: string) {
 			expect(found?.currentOutput?.table?.numRows()).toBeGreaterThan(0)
 			expect(found?.currentOutput?.table?.numCols()).toBeGreaterThan(0)
 		}
-		await checkPersisted(datapackage.save(), expected)
+		await checkPersisted(await datapackage.save(), expected)
 	})
 }
 
