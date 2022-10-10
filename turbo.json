@@ -16,7 +16,7 @@
 			"outputs": []
 		},
 		"bundle": {
-			"dependsOn": ["^build"],
+			"dependsOn": ["^build", "build"],
 			"outputs": ["build/**", "storybook-static/**"]
 		},
 		"ci": {
