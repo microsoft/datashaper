@@ -13,6 +13,7 @@ import debug from 'debug'
 
 import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
+import { PersistableStore } from './PersistableStore.js'
 import { TableStore } from './TableStore.js'
 import type { Persistable, SchemaResource } from './types.js'
 import {
@@ -33,28 +34,16 @@ export class DataPackage
 {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
 	private _tableStore: TableStore = new TableStore()
-	private _persistables: Persistable[] = []
+	private _persistableStore: PersistableStore = new PersistableStore()
 
 	public constructor(public dataPackage?: DataPackageSchema) {
 		super()
 		this.loadSchema(dataPackage)
 	}
 
-	public addPersistable(persistable: Persistable) {
-		if (this._persistables.some(p => p.name === persistable.name)) {
-			throw new Error(`duplicate persistable name: ${persistable.name}`)
-		}
-		this._persistables.push(persistable)
-		this._onChange.next()
-	}
-
-	public removePersistable(name: string) {
-		this._persistables = this._persistables.filter(p => p.name !== name)
-		this._onChange.next()
-	}
-
 	public clear(): void {
 		this._tableStore.clear()
+		this._persistableStore.clear()
 		this._onChange.next()
 	}
 
@@ -105,7 +94,7 @@ export class DataPackage
 		}
 
 		// Save individual data files
-		for (const p of this._persistables) {
+		for (const p of this._persistableStore.persistables.values()) {
 			const data = await p.save()
 			files.set(`${PLUGIN_FILE_PREFIX}${p.name}`, data)
 		}
@@ -143,8 +132,8 @@ export class DataPackage
 			k.startsWith(PLUGIN_FILE_PREFIX),
 		)) {
 			const blob = files.get(file)
-			const persistable = this._persistables.find(
-				p => p.name === file.replace(PLUGIN_FILE_PREFIX, ''),
+			const persistable = this._persistableStore.get(
+				file.replace(PLUGIN_FILE_PREFIX, ''),
 			)
 			if (blob && persistable) {
 				await persistable.load(blob)
