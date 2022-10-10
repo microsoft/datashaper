@@ -15,7 +15,6 @@ export interface StepHistoryListProps
 	extends Pick<TableTransformProps, 'workflow'> {
 	order?: DisplayOrder
 	onDelete?: (index: number) => void
-	onDuplicateClicked?: (step: Step) => void
 	onSelect?: (name: string) => void
 	onSave?: (step: Step, output: string | undefined, index?: number) => void
 }

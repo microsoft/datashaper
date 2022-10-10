@@ -14,8 +14,6 @@ import {
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnSaveStep,
-	useWorkflow,
-	useWorkflowListener,
 	useWorkflowOutputListener,
 } from '@datashaper/react'
 import { TableListBar } from '@datashaper/react/src/components/TableListBar.js'
@@ -27,7 +25,11 @@ import { useBoolean } from '@fluentui/react-hooks'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo, useState } from 'react'
 
-import { useStepListener, useTables } from './PrepareDataPage.hooks.js'
+import {
+	useInputListener,
+	useStepListener,
+	useTables,
+} from './PrepareDataPage.hooks.js'
 import {
 	ButtonContainer,
 	Container,
@@ -41,15 +43,14 @@ import {
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 	const [selectedTableId, setSelectedTableId] = useState<string | undefined>()
+	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 
 	const { tables: inputs, onAddTables: onAddInputTables } =
 		useTables(setSelectedTableId)
 	const [outputs, setOutputs] = useState<TableContainer[]>([])
 
 	// state for the input tables
-	const [wf, setWorkflow] = useState<Workflow>(new Workflow())
-	// workflow steps/output
-	const workflow = useWorkflow(wf, inputs)
+	const [workflow, setWorkflow] = useState<Workflow>(new Workflow())
 
 	const selectedTable = inputs
 		.concat(outputs)
@@ -67,9 +68,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	useStepListener(workflow, setSelectedTableId, inputNames)
 	useWorkflowOutputListener(workflow, setOutputs)
-	useWorkflowListener(workflow, setWorkflow)
-
-	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
+	useInputListener(workflow, inputs)
 
 	const onDelete = useOnDeleteStep(workflow)
 

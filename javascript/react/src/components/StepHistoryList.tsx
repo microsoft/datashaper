@@ -8,16 +8,19 @@ import {
 	CollapsiblePanel,
 	CollapsiblePanelContainer,
 	DialogConfirm,
-} from '@essex/themed-components'
-import { useTheme } from '@fluentui/react'
+} from '@essex/components'
+import { DefaultButton, useTheme } from '@fluentui/react'
 import debug from 'debug'
-import { memo, useEffect, useRef } from 'react'
+import { memo, useCallback, useEffect, useRef } from 'react'
 
 import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
 import { useDeleteConfirm } from './StepHistoryList.hooks.js'
 import {
+	ButtonContainer,
+	buttonStyles,
 	Columns,
 	Container,
+	icons,
 	ListWrapper,
 	PanelHeader,
 	StepIndex,
@@ -30,17 +33,21 @@ import { TableTransform } from './TableTransform.js'
 const log = debug('datashaper')
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
-	function StepsList({
-		onDelete,
-		onDuplicateClicked,
-		onSelect,
-		workflow,
-		onSave,
-		order,
-	}) {
+	function StepsList({ onDelete, onSelect, workflow, onSave, order }) {
 		const ref = useRef<HTMLDivElement>(null)
 		const theme = useTheme()
 		const steps = useWorkflowSteps(workflow, order)
+
+		const onSelectOriginalTable = useCallback(() => {
+			if (workflow.inputNames.size > 0) {
+				const names = [...workflow.inputNames]
+				const lastInputName = names[names.length - 1]
+				if (lastInputName) {
+					onSelect?.(lastInputName)
+				}
+			}
+		}, [workflow, onSelect])
+
 		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
 		const {
 			onClick: onDeleteClicked,
@@ -56,6 +63,11 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 			f()
 		}, [steps])
 
+		const onSelectLatest = useCallback(() => {
+			const latestId = steps[0]?.id
+			onSelect && latestId && onSelect(latestId)
+		}, [onSelect, steps])
+
 		return (
 			<Container>
 				<CollapsiblePanelContainer>
@@ -68,12 +80,35 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 						show={isDeleteModalOpen}
 						onConfirm={onConfirmDelete}
 					/>
+					<ButtonContainer>
+						{onSelectOriginalTable && (
+							<DefaultButton
+								disabled={!steps.length}
+								iconProps={icons.preview}
+								style={buttonStyles}
+								onClick={onSelectOriginalTable}
+							>
+								Original
+							</DefaultButton>
+						)}
+
+						<DefaultButton
+							disabled={!steps.length}
+							iconProps={icons.preview}
+							style={buttonStyles}
+							onClick={onSelectLatest}
+						>
+							Latest
+						</DefaultButton>
+					</ButtonContainer>
 					{steps.map(step => {
 						const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
 						return (
 							<CollapsiblePanel
 								key={stepIndex}
 								styles={collapsiblePanelStyles}
+								expandsWithIcon
+								onHeaderClick={() => onSelect?.(step.id)}
 								onRenderHeader={() => onRenderHeader(step, stepIndex)}
 							>
 								<ListWrapper>
@@ -86,8 +121,6 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 										workflow={workflow}
 										style={tableTransformStyle}
 										onDelete={onDeleteClicked}
-										onPreview={onSelect}
-										onDuplicate={onDuplicateClicked}
 										onTransformRequested={(s, o) => onSave?.(s, o, stepIndex)}
 										hideStepSelector
 									/>
