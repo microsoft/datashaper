@@ -22,19 +22,21 @@ export const BinBase: React.FC<
 > = memo(function BinBase({ step, onChange, table }) {
 	useEffect(() => {
 		if (table != null && onChange != null) {
-			const rollup = table.rollup({
-				min: op.min(step.args.column),
-				max: op.max(step.args.column),
-			})
+			if (step.args.min == null && step.args.max == null) {
+				const rollup = table.rollup({
+					min: op.min(step.args.column),
+					max: op.max(step.args.column),
+				})
 
-			onChange({
-				...step,
-				args: {
-					...step.args,
-					min: rollup.get('min', 0),
-					max: rollup.get('max', 0),
-				},
-			})
+				onChange({
+					...step,
+					args: {
+						...step.args,
+						min: rollup.get('min', 0),
+						max: rollup.get('max', 0),
+					},
+				})
+			}
 		}
 	}, [table, onChange, step])
 
