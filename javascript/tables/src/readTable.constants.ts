@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { DataShape, ParserOptions } from '@datashaper/schema';
+import type { DataShape, ParserOptions } from '@datashaper/schema'
 import { DataOrientation } from '@datashaper/schema'
 
 import { COMMENT_DEFAULT, DELIMITER_DEFAULT } from './typeHints.defaults.js'

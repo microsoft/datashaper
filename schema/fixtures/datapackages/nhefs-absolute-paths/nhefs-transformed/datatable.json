@@ -4,5 +4,5 @@
 	"title": "NHEFS (prepared)",
 	"profile": "datatable",
 	"path": "nhefs-transformed/datatable.json",
-	"sources": ["nhefs/datatable.json", "nhefs-transformed/workflow.json"]
+	"sources": ["nhefs-transformed/workflow.json"]
 }

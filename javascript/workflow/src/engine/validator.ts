@@ -6,14 +6,16 @@
 import type { WorkflowSchema } from '@datashaper/schema'
 import Ajv from 'ajv'
 
+import { fetchJson } from '../util/network.js'
+
 const baseUrl = 'https://microsoft.github.io/datashaper/schema/workflow'
 const defaultWorkflow = 'workflow.json'
 
 async function getSchema(version: string) {
 	try {
-		return await fetch(`${baseUrl}/${version}`).then(res => res.json())
+		return await fetchJson(`${baseUrl}/${version}`)
 	} catch {
-		return await fetch(`${baseUrl}/${defaultWorkflow}`).then(res => res.json())
+		return await fetchJson(`${baseUrl}/${defaultWorkflow}`)
 	}
 }
 

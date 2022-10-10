@@ -8,7 +8,7 @@ import type {
 	ParserOptions,
 } from '@datashaper/schema'
 import { DataFormat, DataOrientation } from '@datashaper/schema'
-import { from, fromArrow, fromJSON } from 'arquero'
+import { from, fromArrow, fromCSV, fromJSON } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import { guessDelimiter } from './guessDelimiter.js'
@@ -21,14 +21,16 @@ import { getParser, validOptions } from './readTable.utils.js'
 /**
  * Read an input table
  * @param input - The input blob
- * @param format - The data format of the table (e.g. JSON, CSV, Arrow)
- * @param options - The parsing options when using CSV
+ * @param schema - The dataTableSchema with format, shape and parser of the table
  * @returns
  */
 export async function readTable(
-	input: Blob,
+	input: Blob | undefined,
 	schema: DataTableSchema,
-): Promise<ColumnTable> {
+): Promise<ColumnTable | undefined> {
+	if (input == null) {
+		return Promise.resolve(undefined)
+	}
 	const { format, shape, parser } = schema
 	switch (format) {
 		case DataFormat.JSON:
@@ -36,7 +38,9 @@ export async function readTable(
 		case DataFormat.ARROW:
 			return fromArrow(await input.arrayBuffer())
 		case DataFormat.CSV:
-			return readCsvTable(await input.text(), parser)
+			return fromCSV(await input.text(), parser)
+		// TODO: use our internal parser when
+		// return readCsvTable(await input.text(), parser)
 		default:
 			throw new Error(`unknown data format: ${format}`)
 	}

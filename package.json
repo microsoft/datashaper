@@ -12,11 +12,14 @@
 		"build": "turbo run build",
 		"bundle": "turbo run bundle",
 		"lint": "turbo run lint",
-		"test": "turbo run test",
+		"test": "start-server-and-test \"yarn start_test_server\" 8080 \"yarn _exec_tests\"",
+		"start_test_server": "http-server -c-1 -p 8080 schema",
+		"_exec_tests": "turbo run test",
 		"start": "SB_QUIET=true turbo run start --parallel",
 		"deploy": "turbo run deploy",
 		"prettify": "essex prettify",
-		"ci": "turbo run ci",
+		"ci": "start-server-and-test \"yarn start_test_server\" 8080 \"yarn _exec_ci\"",
+		"_exec_ci": "turbo run ci",
 		"is_clean": "git diff-index HEAD --quiet",
 		"release": "run-s clean _version_cut ci _release_packages _cut_schema _copy_versions",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
@@ -27,21 +30,23 @@
 		"@essex/jest-config": "^21.0.15",
 		"@essex/prettier-config": "^18.0.3",
 		"@essex/scripts": "^22.0.8",
-		"@types/jest": "^29.0.3",
-		"@types/node": "^18.7.18",
+		"@types/jest": "^29.1.1",
+		"@types/node": "^18.8.2",
 		"@types/semver": "^7.3.12",
 		"arquero": "^5.1.0",
-		"eslint": "^8.23.1",
+		"eslint": "^8.24.0",
+		"http-server": "^14.1.1",
 		"husky": "^8.0.1",
 		"lint-staged": "^13.0.3",
 		"npm-run-all": "^4.1.5",
 		"prettier": "^2.7.1",
-		"semver": "^7.3.7",
-		"turbo": "^1.5.1",
-		"typescript": "^4.8.3"
+		"semver": "^7.3.8",
+		"start-server-and-test": "^1.14.0",
+		"turbo": "^1.5.5",
+		"typescript": "^4.8.4"
 	},
 	"workspaces": [
 		"javascript/*"
 	],
-	"packageManager": "yarn@3.2.3"
+	"packageManager": "yarn@3.2.4"
 }

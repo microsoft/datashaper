@@ -22,7 +22,7 @@ export function createWorkflow(
 	input: WorkflowSchema,
 	tables: TableContainer[],
 ): Workflow {
-	const graph = new Workflow(input)
-	graph.addInputTables(tables)
-	return graph
+	const wf = new Workflow(input)
+	wf.addInputTables(tables)
+	return wf
 }
