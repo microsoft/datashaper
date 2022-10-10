@@ -33,14 +33,7 @@ import { TableTransform } from './TableTransform.js'
 const log = debug('datashaper')
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
-	function StepsList({
-		onDelete,
-		onDuplicateClicked,
-		onSelect,
-		workflow,
-		onSave,
-		order,
-	}) {
+	function StepsList({ onDelete, onSelect, workflow, onSave, order }) {
 		const ref = useRef<HTMLDivElement>(null)
 		const theme = useTheme()
 		const steps = useWorkflowSteps(workflow, order)
@@ -128,7 +121,6 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 										workflow={workflow}
 										style={tableTransformStyle}
 										onDelete={onDeleteClicked}
-										onDuplicate={onDuplicateClicked}
 										onTransformRequested={(s, o) => onSave?.(s, o, stepIndex)}
 										hideStepSelector
 									/>

@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Verb } from '@datashaper/schema'
-import type { Step, Workflow } from '@datashaper/workflow'
+import type { Workflow } from '@datashaper/workflow'
 import { ActionButton, IconButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
 import React, { memo, useCallback, useMemo } from 'react'
@@ -39,7 +39,6 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		style = {},
 		hideStepSelector,
 		onDelete,
-		onDuplicate,
 		hideInput,
 		hideOutput,
 		hideInputColumn,
@@ -110,12 +109,6 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 						/>
 						<ButtonContainer>
 							<Flex>
-								{onDuplicate ? (
-									<IconButton
-										onClick={() => onDuplicate(step as Step)}
-										iconProps={icons.duplicate}
-									/>
-								) : null}
 								<SaveButtonWrapper>
 									<ActionButton
 										onClick={handleSaveClick}

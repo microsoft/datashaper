@@ -9,7 +9,6 @@ import type { IButtonStyles } from '@fluentui/react'
 export const icons = {
 	info: { iconName: 'Info' },
 	checkMark: { iconName: 'CheckMark' },
-	duplicate: { iconName: 'DuplicateRow' },
 	delete: { iconName: 'Delete' },
 }
 
