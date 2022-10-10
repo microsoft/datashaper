@@ -59,13 +59,13 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			) => {
 				const verb = item?.key as Verb
 				const target = item?.data?.id ? item?.data?.id : verb
+				const id = createTableId(verb)
 				const _step = readStep({
+					id,
 					verb,
 					args: { to: selectedColumn, column: selectedColumn } as any,
 					input: inputTable?.id,
 				})
-				const id = createTableId(verb)
-				_step.id = id
 				setStep(_step)
 				setModalTarget(target)
 				showModal()
