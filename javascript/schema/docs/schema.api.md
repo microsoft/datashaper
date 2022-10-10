@@ -135,7 +135,7 @@ export interface Constraints {
 // Warning: (ae-missing-release-tag) "ConvertArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface ConvertArgs extends InputColumnArgs {
+export interface ConvertArgs extends InputColumnArgs, OutputColumnArgs {
     // (undocumented)
     delimiter?: string;
     // (undocumented)

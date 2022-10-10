@@ -1,6 +1,6 @@
-ID,item,quantity,totalSale
-1,bed,45,54000
-2,pillow,,7800
-3,,100,230000
-4,chair,89,20470
-5,stool,50,5000
+ID,item,quantity,totalSale,newColumn
+1,bed,45,54000,54000
+2,pillow,,7800,7800
+3,,100,230000,230000
+4,chair,89,20470,20470
+5,stool,50,5000,5000

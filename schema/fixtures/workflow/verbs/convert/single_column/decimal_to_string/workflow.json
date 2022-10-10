@@ -7,7 +7,8 @@
 			"id": "expected",
 			"args": {
 				"column": "value",
-				"type": "string"
+				"type": "string",
+				"to": "newColumn"
 			}
 		}
 	],
