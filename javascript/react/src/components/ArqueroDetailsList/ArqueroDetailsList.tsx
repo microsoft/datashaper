@@ -221,7 +221,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
 	height: inherit;
-	position: relative;
+
 	max-height: inherit;
 	overflow-y: auto;
 	overflow-x: auto;

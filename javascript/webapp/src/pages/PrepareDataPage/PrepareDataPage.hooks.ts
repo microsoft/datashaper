@@ -2,11 +2,17 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import {
+	useHeaderCommandBarDefaults,
+	useWorkflowSteps,
+} from '@datashaper/react'
 import type { TableContainer } from '@datashaper/tables'
 import { introspect } from '@datashaper/tables'
 import { renameDuplicatedFileName } from '@datashaper/utilities'
 import type { Workflow } from '@datashaper/workflow'
-import { useCallback, useEffect, useState } from 'react'
+import type { ICommandBarProps } from '@fluentui/react'
+import { useBoolean } from '@fluentui/react-hooks'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 export function useTables(setSelectedTableId: (id: string) => void): {
 	tables: TableContainer[]
@@ -73,4 +79,36 @@ export function useInputListener(
 		},
 		[workflow, inputs],
 	)
+}
+
+export function useHistory(workflow: Workflow): {
+	historyProps: ICommandBarProps
+	isCollapsed: boolean
+	toggleCollapsed: () => void
+} {
+	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
+	const steps = useWorkflowSteps(workflow)
+	const baseProps = useMemo(
+		() =>
+			({
+				items: [
+					{
+						key: 'history',
+						text: `(${steps.length})`,
+						iconProps: {
+							iconName: 'Clock',
+						},
+						// disabled: steps.length === 0,
+						onClick: () => toggleCollapsed(),
+					},
+				],
+			} as ICommandBarProps),
+		[steps, toggleCollapsed],
+	)
+	const historyProps = useHeaderCommandBarDefaults(baseProps, true)
+	return {
+		historyProps,
+		isCollapsed,
+		toggleCollapsed,
+	}
 }

@@ -77,7 +77,6 @@ const Header = styled.div<{ background: string; color: string }>`
 	padding: 0 8px 0 0;
 	background-color: ${({ background }) => background};
 	color: ${({ color }) => color};
-	position: relative;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;

@@ -15,10 +15,6 @@ export const Aside = styled.div<{ isCollapsed: boolean }>`
 	align-items: center;
 	height: 100%;
 	overflow: hidden;
-	box-shadow: ${({ isCollapsed, theme }) =>
-		isCollapsed
-			? 'none'
-			: `-1px 0px 10px 0px ${theme.palette.neutralTertiary}`};
 `
 
 export const AsideHeader = styled.div<{ isCollapsed: boolean }>`

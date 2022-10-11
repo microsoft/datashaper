@@ -23,28 +23,25 @@ export const StyleContext: React.FC<
 	const fluentTheme = useMemo(() => loadFluentTheme(theme), [theme])
 
 	return (
-		<div className={'style-context'}>
+		<>
 			<GlobalStyle />
-			<ThematicFluentProvider theme={theme}>
+
+			<ThematicFluentProvider theme={theme} className="fluent-theme-provider">
 				<ApplicationStyles />
 				<ThemeProvider theme={fluentTheme}>{children}</ThemeProvider>
 			</ThematicFluentProvider>
-		</div>
+		</>
 	)
 })
 
 const GlobalStyle = createGlobalStyle`
-	html {
-		height: 100%;
+	* {
+		box-sizing: border-box;
 	}
-	body {
-		height: 100%;
+	html, body, .fluent-theme-provider {
 		margin: 0;
 		padding: 0;
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-			'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-			sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
+		height: 100%;
+		width: 100%;
 	}
 ` as any

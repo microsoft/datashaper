@@ -4,52 +4,34 @@
  */
 import styled from 'styled-components'
 
-const GAP = 18
-const INPUT_HEIGHT = 60
-
 export const PageContainer = styled.div`
-	height: calc(100vh - 80px);
-	position: relative;
-`
-
-export const Main = styled.div`
-	display: flex;
-	flex-flow: column;
 	height: 100%;
 	width: 100%;
-	padding-top: 12px;
-	gap: ${GAP}px;
-	position: relative;
-`
-
-export const ButtonContainer = styled.div`
-	display: flex;
-	justify-content: end;
-	padding: 0px ${GAP}px;
-`
-
-export const DetailsListContainer = styled.div`
-	overflow: auto;
 	display: flex;
 	flex-direction: column;
-	height: 100%;
-`
-
-export const OutputContainer = styled.div`
-	flex: 1 1 auto;
-	display: flex;
-	padding: 0px ${GAP}px;
-	max-height: calc(100% - ${INPUT_HEIGHT + GAP * 4}px);
 `
 
 export const PrepareDataContainer = styled.div`
-	height: 90%;
+	display: grid;
+	height: 100%;
 	overflow: hidden;
+	grid-template-columns: 200px calc(100vh - 200px);
 `
 
-export const Container = styled.div<{ isCollapsed: boolean }>`
-	height: 100%;
+export const EditorContainer = styled.div<{ isCollapsed: boolean }>`
 	display: grid;
+	width: 100%;
+	height: 100%;
 	grid-template-columns: ${({ isCollapsed }) =>
-		isCollapsed ? '100% 0' : 'calc(100% - 280px) 280px '};
+		isCollapsed ? 'calc(100vw - 200px) 0' : 'calc(100vw - 480px) 280px'};
+`
+
+export const DetailsListContainer = styled.div`
+	height: calc(100vh - 110px);
+	width: 100%;
+`
+
+export const DetailsListRowsContainer = styled.div`
+	height: calc(100% - 18px);
+	width: 100%;
 `
