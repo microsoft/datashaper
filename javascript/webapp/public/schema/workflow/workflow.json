@@ -178,6 +178,10 @@
                     "description": "Optional radix to use for parsing strings into ints",
                     "type": "number"
                 },
+                "to": {
+                    "description": "Name of the output column to receive the operation's result.",
+                    "type": "string"
+                },
                 "type": {
                     "$ref": "#/definitions/ParseType"
                 }

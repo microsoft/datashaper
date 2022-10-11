@@ -8,7 +8,8 @@
 			"args": {
 				"column": "date",
 				"type": "string",
-				"formatPattern": "%B, %Y"
+				"formatPattern": "%B, %Y",
+				"to": "newColumn"
 			}
 		}
 	],

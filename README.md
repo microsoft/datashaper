@@ -13,12 +13,12 @@ Individual documentation for the JavaScript and Python implementations can be fo
 
 We currently have six primary JavaScript packages:
 
-- [react](javascript/react) - this is a set of React components for each verb that you can include in web apps that enable tranformation pipeline building.
-- [schema](javascript/schema) - this is a set of core types and associated JSONSchema definitions for formalizing our data package and resource models (including the definitions for table parsing, Codebooks, and Workflows).
-- [tables](javascript/tables) - this is the primary set of utilities for loading and parsing data tables, using Arquero under the hood.
-- [utilities](javascript/utilities) - this is a set of helpers for working with files, etc., to ease building data wrangling applications.
+- [react](javascript/react/docs/markdown/index.md) - this is a set of React components for each verb that you can include in web apps that enable tranformation pipeline building.
+- [schema](javascript/schema/docs/markdown/index.md) - this is a set of core types and associated JSONSchema definitions for formalizing our data package and resource models (including the definitions for table parsing, Codebooks, and Workflows).
+- [tables](javascript/tables/docs/markdown/index.md) - this is the primary set of utilities for loading and parsing data tables, using Arquero under the hood.
+- [utilities](javascript/utilities/docs/markdown/index.md) - this is a set of helpers for working with files, etc., to ease building data wrangling applications.
 - [webapp](javascript/webapp) - this is the deployable DataShaper that includes all of the verb components and allows creation, execution, and saving of pipeline JSON files.
-- [workflow](javascript/workflow) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables.
+- [workflow](javascript/workflow/docs/markdown/index.md) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables.
 
 ## Building
 

@@ -30,6 +30,7 @@ def read_csv(path: str) -> pd.DataFrame:
 
     if "date" in df.columns:
         df["date"] = pd.to_datetime(df["date"], errors="coerce")
+        df["newColumn"] = pd.to_datetime(df["newColumn"], errors="coerce")
 
     return df
 

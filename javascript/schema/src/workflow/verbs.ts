@@ -287,7 +287,7 @@ export interface BooleanArgs extends InputColumnListArgs, OutputColumnArgs {
 	operator: BooleanOperator
 }
 
-export interface ConvertArgs extends InputColumnArgs {
+export interface ConvertArgs extends InputColumnArgs, OutputColumnArgs {
 	type: ParseType
 	/**
 	 * Optional radix to use for parsing strings into ints

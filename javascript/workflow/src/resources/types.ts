@@ -18,3 +18,25 @@ export interface SchemaResource<T> {
 	 */
 	loadSchema(schema: Maybe<T>, quiet?: boolean): void
 }
+
+/**
+ * A resource that can be persisted to a file
+ */
+export interface Persistable {
+	/**
+	 * The custom name to use, will be persisted under `apps/` folder.
+	 * This may specify a sub-path: e.g. (`my-fancy-app/data.json`)
+	 */
+	name: string
+
+	/**
+	 * Save the persistable data into a blob
+	 */
+	save(): Promise<Blob>
+
+	/**
+	 * Read persisted data from a blob
+	 * @param data - The data blob
+	 */
+	load(data: Blob): Promise<void>
+}
