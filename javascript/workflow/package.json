@@ -47,8 +47,8 @@
 		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
-		"@essex/jest-config": "^21.0.15",
-		"@essex/scripts": "^22.0.8",
+		"@essex/jest-config": "^21.0.16",
+		"@essex/scripts": "^22.1.0",
 		"@essex/tsconfig-base": "^1.0.2",
 		"@types/d3-time-format": "^4.0.0",
 		"@types/debug": "^4.1.7",
