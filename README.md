@@ -17,7 +17,7 @@ We currently have six primary JavaScript packages:
 - [schema](javascript/schema/docs/markdown/index.md) - this is a set of core types and associated JSONSchema definitions for formalizing our data package and resource models (including the definitions for table parsing, Codebooks, and Workflows).
 - [tables](javascript/tables/docs/markdown/index.md) - this is the primary set of utilities for loading and parsing data tables, using Arquero under the hood.
 - [utilities](javascript/utilities/docs/markdown/index.md) - this is a set of helpers for working with files, etc., to ease building data wrangling applications.
-- [webapp](javascript/webapp/docs/markdown/index.md) - this is the deployable DataShaper that includes all of the verb components and allows creation, execution, and saving of pipeline JSON files.
+- [webapp](javascript/webapp/docs) - this is the deployable DataShaper that includes all of the verb components and allows creation, execution, and saving of pipeline JSON files.
 - [workflow](javascript/workflow/docs/markdown/index.md) - this is the primary engine for pipeline execution. It includes low-level operational primitives to execute a wide variety of relational algebra transformations over Arquero tables.
 
 ## Building
