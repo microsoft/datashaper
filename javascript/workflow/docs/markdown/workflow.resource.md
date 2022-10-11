@@ -7,11 +7,11 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Resource extends Named implements Omit<ResourceSchema, '$schema' | 'profile'>, SchemaResource<Omit<ResourceSchema, '$schema' | 'profile'>> 
+export declare class Resource extends Named implements Omit<ResourceSchema, '$schema' | 'profile'>, SchemaResource<Omit<ResourceSchema, '$schema' | 'profile' | 'sources'>> 
 ```
 <b>Extends:</b> [Named](./workflow.named.md)
 
-<b>Implements:</b> Omit&lt;ResourceSchema, '$schema' \| 'profile'&gt;, [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;Omit&lt;ResourceSchema, '$schema' \| 'profile'&gt;&gt;
+<b>Implements:</b> Omit&lt;ResourceSchema, '$schema' \| 'profile'&gt;, [SchemaResource](./workflow.schemaresource.md)<!-- -->&lt;Omit&lt;ResourceSchema, '$schema' \| 'profile' \| 'sources'&gt;&gt;
 
 ## Properties
 
@@ -20,7 +20,6 @@ export declare class Resource extends Named implements Omit<ResourceSchema, '$sc
 |  [homepage](./workflow.resource.homepage.md) |  | string \| undefined |  |
 |  [license](./workflow.resource.license.md) |  | string \| undefined |  |
 |  [path](./workflow.resource.path.md) |  | ResourceSchema\['path'\] |  |
-|  [sources](./workflow.resource.sources.md) |  | ResourceSchema\['sources'\] |  |
 
 ## Methods
 

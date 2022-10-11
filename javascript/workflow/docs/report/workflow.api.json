@@ -8728,7 +8728,7 @@
             },
             {
               "kind": "Content",
-              "text": ", '$schema' | 'profile'>>"
+              "text": ", '$schema' | 'profile' | 'sources'>>"
             },
             {
               "kind": "Content",
@@ -8919,49 +8919,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "path",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Resource#sources:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get sources(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ResourceSchema",
-                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "['sources']"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n\nset sources(value: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ResourceSchema",
-                  "canonicalReference": "@datashaper/schema!ResourceSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "['sources']);"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "sources",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
