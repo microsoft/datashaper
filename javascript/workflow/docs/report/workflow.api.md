@@ -656,7 +656,7 @@ export const rename: (id: string) => StepNode<TableContainer<unknown>, InputColu
 // Warning: (ae-missing-release-tag) "Resource" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export class Resource extends Named implements Omit<ResourceSchema, '$schema' | 'profile'>, SchemaResource<Omit<ResourceSchema, '$schema' | 'profile'>> {
+export class Resource extends Named implements Omit<ResourceSchema, '$schema' | 'profile'>, SchemaResource<Omit<ResourceSchema, '$schema' | 'profile' | 'sources'>> {
     // (undocumented)
     get homepage(): string | undefined;
     set homepage(value: string | undefined);
@@ -668,9 +668,6 @@ export class Resource extends Named implements Omit<ResourceSchema, '$schema' | 
     // (undocumented)
     get path(): ResourceSchema['path'];
     set path(value: ResourceSchema['path']);
-    // (undocumented)
-    get sources(): ResourceSchema['sources'];
-    set sources(value: ResourceSchema['sources']);
     // (undocumented)
     toSchema(): Omit<ResourceSchema, '$schema' | 'profile'>;
 }
