@@ -12,10 +12,9 @@ export class Resource
 	extends Named
 	implements
 		Omit<ResourceSchema, '$schema' | 'profile'>,
-		SchemaResource<Omit<ResourceSchema, '$schema' | 'profile'>>
+		SchemaResource<Omit<ResourceSchema, '$schema' | 'profile' | 'sources'>>
 {
 	private _path: ResourceSchema['path']
-	private _sources: ResourceSchema['sources']
 	private _homepage: string | undefined
 	private _license: string | undefined
 
@@ -25,15 +24,6 @@ export class Resource
 
 	public set path(value: ResourceSchema['path']) {
 		this._path = value
-		this._onChange.next()
-	}
-
-	public get sources(): ResourceSchema['sources'] {
-		return this._sources
-	}
-
-	public set sources(value: ResourceSchema['sources']) {
-		this._sources = value
 		this._onChange.next()
 	}
 
@@ -59,7 +49,6 @@ export class Resource
 		return {
 			...super.toSchema(),
 			path: this.path,
-			sources: this.sources,
 			homepage: this.homepage,
 			license: this.license,
 		}
@@ -71,7 +60,6 @@ export class Resource
 	): void {
 		super.loadSchema(value, true)
 		this._path = value?.path
-		this._sources = value?.sources
 		this._homepage = value?.homepage
 		this._license = value?.license
 		if (!quiet) {
