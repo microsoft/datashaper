@@ -34,7 +34,7 @@
 		},
 		"start": {
 			"cache": false,
-			"dependsOn": ["prestart"],
+			"dependsOn": ["prestart", "^build"],
 			"outputs": []
 		},
 		"clean": {
