@@ -4,7 +4,7 @@
  */
 import styled from '@essex/styled-components'
 
-export const buttonStyles = { width: '100%' }
+export const buttonStyles = { width: 100 }
 
 export const icons = {
 	preview: { iconName: 'View' },
@@ -14,40 +14,47 @@ export const icons = {
 }
 
 export const Container = styled.div`
-	overflow: hidden;
-	height: 100%;
-	display: grid;
-	grid-template-rows: calc(100% - 4rem) 4rem;
 	width: 100%;
-
-	> div {
-		overflow: hidden auto;
-		height: 100%;
-	}
+	height: 100%;
 `
 
 export const ButtonContainer = styled.div`
+	padding: 8px;
 	display: flex;
+	justify-content: space-around;
+	border-bottom: 1px solid ${({ theme }) => theme.palette.neutralQuaternaryAlt};
 `
+
+export const StepsContainer = styled.div`
+	overflow: auto;
+	height: 100%;
+`
+
 export const PanelHeader = styled.div`
-	font-weight: 500;
 	display: flex;
-	gap: 0.5rem;
-	width: 100%;
+	gap: 4px;
+	align-items: center;
 `
-export const Verb = styled.b`
+
+export const StepIndex = styled.span`
+	color: ${({ theme }) => theme.palette.neutralTertiary};
+	font-size: 12px;
+`
+
+export const Verb = styled.span`
 	text-transform: uppercase;
+	font-weight: bold;
+	color: ${({ theme }) => theme.palette.neutralSecondary};
 `
 
 export const Columns = styled.span`
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	color: ${({ theme }) => theme.palette.neutralTertiary};
+	color: ${({ theme }) => theme.palette.neutralSecondaryAlt};
 `
 
 export const tableTransformStyle: React.CSSProperties = {
-	padding: '1rem 0.5rem',
 	display: 'flex',
 	alignItems: 'center',
 	flexDirection: 'column',
@@ -55,12 +62,3 @@ export const tableTransformStyle: React.CSSProperties = {
 	border: 'none',
 	width: 'auto',
 }
-
-export const ListWrapper = styled.div`
-	overflow: hidden auto;
-	border-bottom: ${({ theme }) => theme.palette.neutralTertiaryAlt};
-`
-
-export const StepIndex = styled.span`
-	color: ${({ theme }) => theme.palette.neutralTertiaryAlt};
-`

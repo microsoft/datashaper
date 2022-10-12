@@ -12,10 +12,8 @@ export const PageContainer = styled.div`
 `
 
 export const PrepareDataContainer = styled.div`
-	display: grid;
+	display: flex;
 	height: 100%;
-	overflow: hidden;
-	grid-template-columns: 200px calc(100vh - 200px);
 `
 
 export const EditorContainer = styled.div<{ isCollapsed: boolean }>`
@@ -27,8 +25,9 @@ export const EditorContainer = styled.div<{ isCollapsed: boolean }>`
 `
 
 export const DetailsListContainer = styled.div`
-	height: calc(100vh - 110px);
 	width: 100%;
+	height: calc(100vh - 110px);
+	border-right: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `
 
 export const DetailsListRowsContainer = styled.div`

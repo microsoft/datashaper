@@ -131,8 +131,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 							</DetailsListRowsContainer>
 						</DetailsListContainer>
 						<HistoryPanel
-							title="Steps"
-							isCollapsed={isCollapsed}
+							title="Workflow steps"
 							toggleCollapsed={toggleCollapsed}
 							steps={workflow.steps}
 							showStepCount

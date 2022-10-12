@@ -17,13 +17,13 @@ export function getCollapsiblePanelStyles(
 		header: {
 			background: theme.palette.white,
 			color: theme.palette.neutralPrimary,
-			padding: '8px 0',
+			padding: '4px 0',
 			borderBottom: 'none',
 			borderTop: 'none',
 		},
 		contents: {
 			border: 'none',
-			borderBottom: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+			borderBottom: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
 		},
 	}
 }

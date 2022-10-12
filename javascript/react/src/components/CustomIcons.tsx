@@ -12,7 +12,10 @@ interface CustomIconProps {
 }
 
 const defaultIconClass = mergeStyles({
-	fontSize: 20,
+	fontSize: 16,
+	width: 16,
+	height: 16,
+	lineHeight: 16,
 })
 
 export const HistoryIcon = (props: CustomIconProps): JSX.Element => {

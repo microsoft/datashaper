@@ -9,7 +9,7 @@ export const ListContainer = styled.div`
 	flex-direction: column;
 	justify-content: flex-start;
 	width: 200px;
-	minwidth: 200px;
+	min-width: 200px;
 	height: 100%;
 	gap: 24px;
 	border-right: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};

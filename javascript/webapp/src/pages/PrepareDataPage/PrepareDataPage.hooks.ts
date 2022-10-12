@@ -86,7 +86,7 @@ export function useHistory(workflow: Workflow): {
 	isCollapsed: boolean
 	toggleCollapsed: () => void
 } {
-	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
+	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(false)
 	const steps = useWorkflowSteps(workflow)
 	const baseProps = useMemo(
 		() =>
