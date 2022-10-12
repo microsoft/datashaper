@@ -74,7 +74,6 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 const Header = styled.div<{ background: string; color: string }>`
 	height: ${HEIGHT}px;
 	width: 100%;
-	padding: 0 8px 0 0;
 	background-color: ${({ background }) => background};
 	color: ${({ color }) => color};
 	box-sizing: border-box;
@@ -100,6 +99,7 @@ const Middle = styled.div<{ hasFarCommandBar: boolean }>`
 	justify-content: ${({ hasFarCommandBar }) =>
 		hasFarCommandBar ? 'center' : 'end'};
 	align-items: center;
+	padding: 0 8px;
 	gap: 8px;
 `
 const Right = styled.div`
