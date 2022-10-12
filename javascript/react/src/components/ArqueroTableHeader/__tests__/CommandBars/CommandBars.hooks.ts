@@ -60,6 +60,14 @@ export function useCommandBar(): ICommandBarProps {
 					iconName: 'Delete',
 				},
 			},
+			{
+				key: 'checked',
+				text: 'Checked',
+				checked: true,
+				iconProps: {
+					iconName: 'CheckboxComposite',
+				},
+			},
 		],
 		[],
 	)

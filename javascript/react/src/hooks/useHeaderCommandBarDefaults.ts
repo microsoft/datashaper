@@ -85,11 +85,12 @@ function useItems(
 		[colors, theme],
 	)
 	const backgroundHovered = useMemo(
-		() =>
-			background
-				? chroma(background).darken().hex()
-				: theme.palette.neutralQuaternaryAlt,
-		[background, theme],
+		() => chroma(background).darken().hex(),
+		[background],
+	)
+	const checked = useMemo(
+		() => colors?.checked || chroma(background).darken().hex(),
+		[colors, background],
 	)
 	const styles = useMemo(
 		() => ({
@@ -105,6 +106,9 @@ function useItems(
 				rootExpandedHovered: {
 					background: backgroundHovered,
 					color,
+				},
+				rootChecked: {
+					background: checked,
 				},
 				label: {
 					color,
@@ -126,7 +130,7 @@ function useItems(
 				},
 			},
 		}),
-		[color, background, backgroundHovered, disabled],
+		[color, background, backgroundHovered, checked, disabled],
 	)
 	return useMemo(
 		() => items.map(item => merge({}, styles, item)),

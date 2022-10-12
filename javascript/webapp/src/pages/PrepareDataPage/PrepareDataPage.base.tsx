@@ -5,10 +5,10 @@
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
-	HistoryPanel,
 	ProjectManagementCommandBar,
 	StepHistoryList,
 	TableCommands,
+	ToolPanel,
 	useManagementBarDefaults,
 	useOnCreateStep,
 	useOnDeleteStep,
@@ -36,6 +36,7 @@ import {
 	EditorContainer,
 	PageContainer,
 	PrepareDataContainer,
+	StepsListContainer,
 } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
@@ -77,7 +78,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	)
 
 	const managementProps = useManagementBarDefaults()
-	const { historyProps, isCollapsed, toggleCollapsed } = useHistory(workflow)
+	const { historyCommandProps, isOpen, historyPanelProps } =
+		useHistory(workflow)
 	return (
 		<PageContainer className={'prepare-data-page'}>
 			<ProjectManagementCommandBar
@@ -97,7 +99,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 					onSelect={setSelectedTableId}
 				/>
 				{selectedTable?.table && (
-					<EditorContainer isCollapsed={isCollapsed}>
+					<EditorContainer isOpen={isOpen}>
 						<DetailsListContainer>
 							<ArqueroTableHeader
 								commandBar={
@@ -109,7 +111,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 										onRemoveStep={onDelete}
 									/>
 								}
-								farCommandBar={<CommandBar {...historyProps} />}
+								farCommandBar={<CommandBar {...historyCommandProps} />}
 								name={tableName}
 								table={selectedTable?.table}
 							/>
@@ -130,19 +132,16 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 								/>
 							</DetailsListRowsContainer>
 						</DetailsListContainer>
-						<HistoryPanel
-							title="Workflow steps"
-							toggleCollapsed={toggleCollapsed}
-							steps={workflow.steps}
-							showStepCount
-						>
-							<StepHistoryList
-								onDelete={onDelete}
-								onSelect={setSelectedTableId}
-								workflow={workflow}
-								onSave={onSave}
-							/>
-						</HistoryPanel>
+						<StepsListContainer>
+							<ToolPanel {...historyPanelProps}>
+								<StepHistoryList
+									onDelete={onDelete}
+									onSelect={setSelectedTableId}
+									workflow={workflow}
+									onSave={onSave}
+								/>
+							</ToolPanel>
+						</StepsListContainer>
 					</EditorContainer>
 				)}
 			</PrepareDataContainer>

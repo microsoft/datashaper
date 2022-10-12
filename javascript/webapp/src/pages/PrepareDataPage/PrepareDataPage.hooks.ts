@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { ToolPanelProps } from '@datashaper/react'
 import {
 	useHeaderCommandBarDefaults,
 	useWorkflowSteps,
@@ -82,13 +83,13 @@ export function useInputListener(
 }
 
 export function useHistory(workflow: Workflow): {
-	historyProps: ICommandBarProps
-	isCollapsed: boolean
-	toggleCollapsed: () => void
+	historyCommandProps: ICommandBarProps
+	historyPanelProps: ToolPanelProps
+	isOpen: boolean
 } {
-	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(false)
+	const [isOpen, { toggle: onDismissHistoryPanel }] = useBoolean(false)
 	const steps = useWorkflowSteps(workflow)
-	const baseProps = useMemo(
+	const commandProps = useMemo(
 		() =>
 			({
 				items: [
@@ -98,17 +99,27 @@ export function useHistory(workflow: Workflow): {
 						iconProps: {
 							iconName: 'Clock',
 						},
-						// disabled: steps.length === 0,
-						onClick: () => toggleCollapsed(),
+						checked: isOpen,
+						onClick: () => onDismissHistoryPanel(),
 					},
 				],
 			} as ICommandBarProps),
-		[steps, toggleCollapsed],
+		[steps, isOpen, onDismissHistoryPanel],
 	)
-	const historyProps = useHeaderCommandBarDefaults(baseProps, true)
+	const historyCommandProps = useHeaderCommandBarDefaults(commandProps, true)
+	const historyPanelProps = useMemo(
+		() => ({
+			headerText: `Workflow steps (${steps.length})`,
+			headerIconProps: {
+				iconName: 'History',
+			},
+			onDismiss: onDismissHistoryPanel,
+		}),
+		[onDismissHistoryPanel, steps],
+	)
 	return {
-		historyProps,
-		isCollapsed,
-		toggleCollapsed,
+		historyCommandProps,
+		isOpen,
+		historyPanelProps,
 	}
 }

@@ -18,6 +18,7 @@ export function useColorDefaults(
 				background: theme.palette.neutralQuaternary,
 				disabled: theme.palette.neutralSecondary,
 				border: theme.palette.neutralTertiaryAlt,
+				checked: theme.palette.neutralQuaternaryAlt,
 			} as CommandBarColors),
 		[theme],
 	)
@@ -27,6 +28,7 @@ export function useColorDefaults(
 			color: colors?.color || defaults.color,
 			disabled: colors?.disabled || defaults.disabled,
 			border: colors?.border || defaults.border,
+			checked: colors?.checked || defaults.checked,
 		}),
 		[colors, defaults],
 	)
