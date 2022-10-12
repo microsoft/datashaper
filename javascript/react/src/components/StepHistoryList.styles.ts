@@ -25,10 +25,7 @@ export const ButtonContainer = styled.div`
 	border-bottom: 1px solid ${({ theme }) => theme.palette.neutralQuaternaryAlt};
 `
 
-export const StepsContainer = styled.div`
-	overflow: auto;
-	height: 100%;
-`
+export const StepsContainer = styled.div``
 
 export const PanelHeader = styled.div`
 	display: flex;
