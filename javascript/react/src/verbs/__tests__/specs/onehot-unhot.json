@@ -8,7 +8,7 @@
 			"verb": "onehot",
 			"input": { "source": "companies2" },
 			"args": {
-				"columns": ["Name"]
+				"column": "Name"
 			}
 		},
 		{
