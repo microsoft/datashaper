@@ -15,9 +15,22 @@
 					"input": ["nhefs"],
 					"steps": [
 						{
+							"verb": "window",
+							"args": {
+								"operation": "row_number",
+								"to": "index"
+							},
+							"input": {
+								"source": {
+									"node": "nhefs"
+								}
+							}
+						},
+						{
 							"verb": "select",
 							"args": {
 								"columns": [
+									"index",
 									"sex",
 									"age",
 									"race",
@@ -30,11 +43,6 @@
 									"exercise",
 									"smokeyrs"
 								]
-							},
-							"input": {
-								"source": {
-									"node": "nhefs"
-								}
 							}
 						},
 						{

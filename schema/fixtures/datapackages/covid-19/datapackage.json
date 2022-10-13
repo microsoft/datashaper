@@ -15,8 +15,21 @@
 					"input": ["covid19_small_data"],
 					"steps": [
 						{
+							"verb": "window",
+							"args": {
+								"operation": "row_number",
+								"to": "index"
+							},
+							"input": {
+								"source": {
+									"node": "covid19_small_data"
+								}
+							}
+						},
+						{
 							"args": {
 								"columns": [
+									"index",
 									"age",
 									"ChronicDiseaseQ",
 									"gender_binary",
@@ -25,12 +38,7 @@
 									"diabetes"
 								]
 							},
-							"verb": "select",
-							"input": {
-								"source": {
-									"node": "covid19_small_data"
-								}
-							}
+							"verb": "select"
 						},
 						{
 							"args": {
@@ -563,6 +571,7 @@
 						{
 							"args": {
 								"columns": [
+									"index",
 									"age",
 									"chronic_disease",
 									"gender",
@@ -583,6 +592,7 @@
 						{
 							"args": {
 								"columns": [
+									"index",
 									"diabetes_hypertension",
 									"subject_inclusion",
 									"chronic_disease",
