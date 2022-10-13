@@ -25,13 +25,13 @@ export declare class DataPackage extends Named implements SchemaResource<DataPac
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.datapackage._schema.md) | <code>readonly</code> | string |  |
 |  [dataPackage?](./workflow.datapackage.datapackage.md) |  | DataPackageSchema \| undefined | <i>(Optional)</i> |
-|  [persistableStore](./workflow.datapackage.persistablestore.md) | <code>readonly</code> | PersistableStore |  |
 |  [tableStore](./workflow.datapackage.tablestore.md) | <code>readonly</code> | TableStore |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [addResourceHandler(handler)](./workflow.datapackage.addresourcehandler.md) |  | Registers a new handler for processing resources. |
 |  [clear()](./workflow.datapackage.clear.md) |  |  |
 |  [load(files, quiet)](./workflow.datapackage.load.md) |  |  |
 |  [save()](./workflow.datapackage.save.md) |  |  |

@@ -3,6 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import type { ResourceSchema } from '@datashaper/schema'
+
 import type { Maybe } from '../primitives.js'
 
 export interface SchemaResource<T> {
@@ -19,24 +21,28 @@ export interface SchemaResource<T> {
 	loadSchema(schema: Maybe<T>, quiet?: boolean): void
 }
 
-/**
- * A resource that can be persisted to a file
- */
-export interface Persistable {
+export interface ResourceHandler {
 	/**
-	 * The custom name to use, will be persisted under `apps/` folder.
-	 * This may specify a sub-path: e.g. (`my-fancy-app/data.json`)
+	 * Determine if the resource-handler can handle a given resource.
+	 * It is suggested that implementers check `resource.profile` to determine this.
+	 *
+	 * @param resource - the resource being loaded
+	 * @param files - the files in the packages
+	 * @returns true if the resource-handler can handle the resource
 	 */
-	name: string
+	canLoad(resource: ResourceSchema, files: Map<string, Blob>): boolean
 
 	/**
-	 * Save the persistable data into a blob
+	 * Load a specific resource
+	 * @param data - a data resource being loaded
+	 * @param files - the data files in the package
 	 */
-	save(): Promise<Blob>
+	load(data: ResourceSchema, files: Map<string, Blob>): Promise<void>
 
 	/**
-	 * Read persisted data from a blob
-	 * @param data - The data blob
+	 * Save custom resources into the files map.
+	 * @param files - the data files in the package
+	 * @returns the list of top-level resources to write into datapackage.json::resources
 	 */
-	load(data: Blob): Promise<void>
+	save(files: Map<string, Blob>): Promise<string[]>
 }

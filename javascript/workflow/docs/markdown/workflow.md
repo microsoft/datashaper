@@ -68,7 +68,7 @@
 |  [Graph](./workflow.graph.md) |  |
 |  [Node\_2](./workflow.node_2.md) | A graph processing node |
 |  [NodeBinding](./workflow.nodebinding.md) | A binding for a value being emitted from a node |
-|  [Persistable](./workflow.persistable.md) | A resource that can be persisted to a file |
+|  [ResourceHandler](./workflow.resourcehandler.md) |  |
 |  [SchemaResource](./workflow.schemaresource.md) |  |
 |  [Step](./workflow.step.md) |  |
 |  [StepInput](./workflow.stepinput.md) |  |
