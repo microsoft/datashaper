@@ -3,7 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
-import type { DataPackageSchema, DataTableSchema } from '@datashaper/schema'
+import type {
+	DataPackageSchema,
+	DataTableSchema,
+	ResourceSchema,
+} from '@datashaper/schema'
 import {
 	createDataPackageSchemaObject,
 	LATEST_DATAPACKAGE_SCHEMA,
@@ -13,9 +17,8 @@ import debug from 'debug'
 
 import { DataTable } from './DataTable.js'
 import { Named } from './Named.js'
-import { PersistableStore } from './PersistableStore.js'
 import { TableStore } from './TableStore.js'
-import type { SchemaResource } from './types.js'
+import type { ResourceHandler, SchemaResource } from './types.js'
 import {
 	isCodebook,
 	isDataTable,
@@ -26,7 +29,7 @@ import {
 } from './utils.js'
 
 const log = debug('datashaper')
-const PLUGIN_FILE_PREFIX = `app/`
+const DATA_FILE_PREFIX = `data/`
 
 export class DataPackage
 	extends Named
@@ -34,7 +37,10 @@ export class DataPackage
 {
 	public readonly $schema = LATEST_DATAPACKAGE_SCHEMA
 	private _tableStore: TableStore = new TableStore()
-	private _persistableStore: PersistableStore = new PersistableStore()
+	/**
+	 * A map of profile-name to resource hnadler
+	 */
+	private _resourceHandlers: ResourceHandler[] = []
 
 	public constructor(public dataPackage?: DataPackageSchema) {
 		super()
@@ -43,7 +49,6 @@ export class DataPackage
 
 	public clear(): void {
 		this._tableStore.clear()
-		this._persistableStore.clear()
 		this._onChange.next()
 	}
 
@@ -51,8 +56,13 @@ export class DataPackage
 		return this._tableStore
 	}
 
-	public get persistableStore(): PersistableStore {
-		return this._persistableStore
+	/**
+	 * Registers a new handler for processing resources.
+	 *
+	 * @param handler - the resource handler
+	 */
+	public addResourceHandler(handler: ResourceHandler): void {
+		this._resourceHandlers.push(handler)
 	}
 
 	public override toSchema(): DataPackageSchema {
@@ -97,10 +107,9 @@ export class DataPackage
 			resources.push(dataTableFileName)
 		}
 
-		// Save individual data files
-		for (const p of this._persistableStore.persistables.values()) {
-			const data = await p.save()
-			files.set(`${PLUGIN_FILE_PREFIX}${p.name}`, data)
+		for (const handler of this._resourceHandlers) {
+			const customResources = await handler.save(files)
+			resources.push(...customResources)
 		}
 
 		files.set('datapackage.json', write(this, { resources }))
@@ -119,10 +128,15 @@ export class DataPackage
 		if (schema?.resources && files) {
 			for (const r of schema?.resources ?? []) {
 				const resource = await toResourceSchema(r, files)
+				if (!resource) {
+					continue
+				}
 				if (isDataTable(resource)) {
 					const table = new DataTable(resource)
 					await this._loadTableSources(table, resource, files)
 					this._tableStore.add(table)
+				} else {
+					await this._tryLoadCustomResource(resource, files)
 				}
 			}
 		}
@@ -131,27 +145,30 @@ export class DataPackage
 			table.connect(this.tableStore)
 		}
 
-		// Load Applications
-		for (const file of [...files.keys()].filter(k =>
-			k.startsWith(PLUGIN_FILE_PREFIX),
+		// Load custom resource files
+		for (const file of [...files.keys()].filter(
+			k => !k.startsWith(DATA_FILE_PREFIX),
 		)) {
-			const blob = files.get(file)
-			const persistable = this._persistableStore.get(
-				file.replace(PLUGIN_FILE_PREFIX, ''),
-			)
-			if (blob && persistable) {
-				await persistable.load(blob)
-			} else {
-				console.error(
-					`could not load file ${file}; blob present? ${
-						blob != null
-					} persistable present? ${persistable != null}`,
-				)
+			if (file.endsWith('.json')) {
+				const resource = await toResourceSchema(file, files)
+				if (resource) {
+					await this._tryLoadCustomResource(resource, files)
+				}
 			}
 		}
 
 		if (!quiet) {
 			this._onChange.next()
+		}
+	}
+
+	private async _tryLoadCustomResource(
+		resource: ResourceSchema,
+		files: Map<string, Blob>,
+	): Promise<void> {
+		const handler = this._resourceHandlers.find(h => h.canLoad(resource, files))
+		if (handler) {
+			await handler.load(resource, files)
 		}
 	}
 
