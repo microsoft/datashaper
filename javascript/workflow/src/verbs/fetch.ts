@@ -5,7 +5,7 @@
 import type { FetchArgs } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { container } from '@datashaper/tables'
-import { from,fromCSV } from 'arquero'
+import { from, fromCSV } from 'arquero'
 
 import type { InputStep } from '../dataflow/index.js'
 import { inputNodeFactory } from '../dataflow/index.js'
