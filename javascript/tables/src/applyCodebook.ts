@@ -21,18 +21,20 @@ export function applyCodebook(
 		return acc
 	}, {} as Record<string, object>)
 
-	table = table.derive(args)
+	const applied = table.derive(args)
 
 	if (applyMapping) {
 		const fieldList = codebook.fields.filter(element => element.mapping != null)
-		fieldList.map(field => {
-			table = table.derive({
-				[field.name]: escape((d: any) =>
-					op.recode(d[field.name], field.mapping ? field.mapping : {}),
-				),
-			})
-		})
+
+		const args2 = fieldList.reduce((acc, cur) => {
+			acc[cur.name] = escape((d: any) =>
+				op.recode(d[cur.name], cur.mapping ? cur.mapping : {}),
+			)
+			return acc
+		}, {} as Record<string, object>)
+
+		return applied.derive(args2)
 	}
 
-	return table
+	return applied
 }

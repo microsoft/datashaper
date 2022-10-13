@@ -20,24 +20,25 @@ export function unapplyCodebook(
 		return acc
 	}, {} as Record<string, object>)
 
-	table = table.derive(args)
+	const applied = table.derive(args)
 
 	if (applyMapping) {
 		const fieldList = codebook.fields.filter(element => element.mapping != null)
 
-		fieldList.map(field => {
+		const args2 = fieldList.reduce((acc, cur) => {
 			const finalMap: Record<any, any> = {}
 
-			for (const key in field.mapping) {
-				const value = field.mapping[key]
+			for (const key in cur.mapping) {
+				const value = cur.mapping[key]
 				finalMap[value] = key
 			}
 
-			table = table.derive({
-				[field.name]: escape((d: any) => op.recode(d[field.name], finalMap)),
-			})
-		})
+			acc[cur.name] = escape((d: any) => op.recode(d[cur.name], finalMap))
+			return acc
+		}, {} as Record<string, object>)
+
+		return applied.derive(args2)
 	}
 
-	return table
+	return applied
 }
