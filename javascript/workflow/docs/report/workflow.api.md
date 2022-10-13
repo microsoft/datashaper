@@ -200,16 +200,13 @@ export class DataPackage extends Named implements SchemaResource<DataPackageSche
     // (undocumented)
     readonly $schema: string;
     constructor(dataPackage?: DataPackageSchema | undefined);
+    addResourceHandler(handler: ResourceHandler): void;
     // (undocumented)
     clear(): void;
     // (undocumented)
     dataPackage?: DataPackageSchema | undefined;
     // (undocumented)
     load(files: Map<string, Blob_2>, quiet?: boolean): Promise<void>;
-    // Warning: (ae-forgotten-export) The symbol "PersistableStore" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    get persistableStore(): PersistableStore;
     // (undocumented)
     save(): Promise<Map<string, Blob_2>>;
     // Warning: (ae-forgotten-export) The symbol "TableStore" needs to be exported by the entry point index.d.ts
@@ -639,15 +636,6 @@ export class ParserOptions extends Observed implements ParserOptions_2, SchemaRe
     toSchema(): ParserOptions_2;
 }
 
-// Warning: (ae-missing-release-tag) "Persistable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface Persistable {
-    load(data: Blob): Promise<void>;
-    name: string;
-    save(): Promise<Blob>;
-}
-
 // Warning: (ae-missing-release-tag) "pivot" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -685,6 +673,15 @@ export class Resource extends Named implements Omit<ResourceSchema, '$schema' | 
     set path(value: ResourceSchema['path']);
     // (undocumented)
     toSchema(): Omit<ResourceSchema, '$schema' | 'profile'>;
+}
+
+// Warning: (ae-missing-release-tag) "ResourceHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ResourceHandler {
+    canLoad(resource: ResourceSchema, files: Map<string, Blob>): boolean;
+    load(data: ResourceSchema, files: Map<string, Blob>): Promise<void>;
+    save(files: Map<string, Blob>): Promise<string[]>;
 }
 
 // Warning: (ae-missing-release-tag) "rollup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
