@@ -8,8 +8,9 @@ import fs from 'fs'
 
 import { applyCodebook } from '../applyCodebook.js'
 import { generateCodebook } from '../generateCodebook.js'
+import { unapplyCodebook } from '../unapplyCodebook.js'
 
-describe('Apply codebook tests', () => {
+describe('unapply codebook tests', () => {
 	describe('codebook test without mapping', () => {
 		const csv = fs.readFileSync('./src/__tests__/data/simple-example.csv', {
 			encoding: 'utf8',
@@ -29,7 +30,7 @@ describe('Apply codebook tests', () => {
 	})
 
 	describe('codebook test with mapping', () => {
-		const csv = fs.readFileSync('./src/__tests__/data/mapping-test.csv', {
+		const csv = fs.readFileSync('./src/__tests__/data/mapping-test-2.csv', {
 			encoding: 'utf8',
 			flag: 'r',
 		})
@@ -62,25 +63,25 @@ describe('Apply codebook tests', () => {
 
 		element2.mapping = mappingElements2
 
-		const resultTable = applyCodebook(parsed, codebookResult, true)
+		const resultTable = unapplyCodebook(parsed, codebookResult, true)
 
 		it('should return a column table with mapping values', () => {
 			expect(resultTable.numRows()).toBe(7)
 			expect(resultTable.numCols()).toBe(3)
-			expect(resultTable.get('diagnosis', 0)).toBe('heart disease')
-			expect(resultTable.get('diagnosis', 1)).toBe('heart disease')
-			expect(resultTable.get('diagnosis', 2)).toBe('diabetes type I')
-			expect(resultTable.get('diagnosis', 3)).toBe('diabetes type III')
-			expect(resultTable.get('diagnosis', 4)).toBe('diabetes type I')
-			expect(resultTable.get('diagnosis', 5)).toBe('diabetes type II')
-			expect(resultTable.get('diagnosis', 6)).toBe('diabetes type III')
-			expect(resultTable.get('test', 0)).toBe('Test1')
-			expect(resultTable.get('test', 1)).toBe('Test1')
-			expect(resultTable.get('test', 2)).toBe('Test2')
-			expect(resultTable.get('test', 3)).toBe('Test4')
-			expect(resultTable.get('test', 4)).toBe('Test2')
-			expect(resultTable.get('test', 5)).toBe('Test3')
-			expect(resultTable.get('test', 6)).toBe('Test4')
+			expect(resultTable.get('diagnosis', 0)).toBe('0')
+			expect(resultTable.get('diagnosis', 1)).toBe('0')
+			expect(resultTable.get('diagnosis', 2)).toBe('1')
+			expect(resultTable.get('diagnosis', 3)).toBe('3')
+			expect(resultTable.get('diagnosis', 4)).toBe('1')
+			expect(resultTable.get('diagnosis', 5)).toBe('2')
+			expect(resultTable.get('diagnosis', 6)).toBe('3')
+			expect(resultTable.get('test', 0)).toBe('0')
+			expect(resultTable.get('test', 1)).toBe('0')
+			expect(resultTable.get('test', 2)).toBe('1')
+			expect(resultTable.get('test', 3)).toBe('3')
+			expect(resultTable.get('test', 4)).toBe('1')
+			expect(resultTable.get('test', 5)).toBe('2')
+			expect(resultTable.get('test', 6)).toBe('3')
 		})
 	})
 })
