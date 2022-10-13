@@ -3,9 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { CodebookSchema } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import { escape, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
 import { parseAs } from './parseTypes.js'
 
@@ -16,10 +16,10 @@ export function applyCodebook(
 ): ColumnTable {
 	const args = table.columnNames().reduce((acc, cur) => {
 		const field = codebook.fields.find(element => element.name === cur)
-		const parser = parseAs(field.type)
+		const parser = parseAs(field != null ? field.type : DataType.String)
 		acc[cur] = escape((d: any) => parser(d[cur]))
 		return acc
-	}, {} as Record<string, ExprObject>)
+	}, {} as Record<string, object>)
 
 	table = table.derive(args)
 
@@ -28,7 +28,7 @@ export function applyCodebook(
 		fieldList.map(field => {
 			table = table.derive({
 				[field.name]: escape((d: any) =>
-					op.recode(d[field.name], field.mapping),
+					op.recode(d[field.name], field.mapping ? field.mapping : {}),
 				),
 			})
 		})

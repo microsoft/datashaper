@@ -6,7 +6,6 @@ import type { CodebookSchema } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import { escape, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { ExprObject } from 'arquero/dist/types/table/transformable'
 
 import { parseAs } from './parseTypes.js'
 
@@ -16,11 +15,10 @@ export function unapplyCodebook(
 	applyMapping: boolean,
 ): ColumnTable {
 	const args = table.columnNames().reduce((acc, cur) => {
-		const field = codebook.fields.find(element => element.name === cur)
 		const parser = parseAs(DataType.String)
 		acc[cur] = escape((d: any) => parser(d[cur]))
 		return acc
-	}, {} as Record<string, ExprObject>)
+	}, {} as Record<string, object>)
 
 	table = table.derive(args)
 
