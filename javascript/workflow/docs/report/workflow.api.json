@@ -5737,7 +5737,7 @@
         {
           "kind": "Function",
           "canonicalReference": "@datashaper/workflow!isInputColumnListStep:function(1)",
-          "docComment": "/**\n * Indicates whether the supplied step requires a multiple input column.\n *\n * @param step - \n *\n * @returns \n */\n",
+          "docComment": "/**\n * Indicates whether the supplied step requires multiple input columns.\n *\n * @param step - \n *\n * @returns \n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -5778,6 +5778,51 @@
             }
           ],
           "name": "isInputColumnListStep"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/workflow!isInputColumnRecordStep:function(1)",
+          "docComment": "/**\n * Indicates whether the supplied step requires a map of input columns.\n *\n * @param step - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function isInputColumnRecordStep(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "isInputColumnRecordStep"
         },
         {
           "kind": "Function",
@@ -5823,6 +5868,96 @@
             }
           ],
           "name": "isInputColumnStep"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/workflow!isInputKeyValueStep:function(1)",
+          "docComment": "/**\n * Indicates whether the supplied step requires an input key and value column.\n *\n * @param step - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function isInputKeyValueStep(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "isInputKeyValueStep"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/workflow!isInputTableListStep:function(1)",
+          "docComment": "/**\n * Indicates whether this step requires more than one input table.\n *\n * @param step - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function isInputTableListStep(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "isInputTableListStep"
         },
         {
           "kind": "Function",
@@ -10096,12 +10231,12 @@
             },
             {
               "kind": "Content",
-              "text": "<unknown>, "
+              "text": "<unknown>, import(\"@datashaper/schema\")."
             },
             {
               "kind": "Reference",
-              "text": "UnfoldArgs",
-              "canonicalReference": "@datashaper/schema!UnfoldArgs:interface"
+              "text": "InputKeyValueArgs",
+              "canonicalReference": "@datashaper/schema!InputKeyValueArgs:interface"
             },
             {
               "kind": "Content",

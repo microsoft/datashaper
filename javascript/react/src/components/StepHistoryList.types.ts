@@ -2,19 +2,29 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step } from '@datashaper/workflow'
+import type { Step, Workflow } from '@datashaper/workflow'
+import type { CSSProperties } from 'react'
 
-import type { DisplayOrder, TableTransformProps } from '../index.js'
+import type { DisplayOrder } from '../enums.js'
+import type { StepHeaderStyles } from './StepHeader.types.js'
 
-export interface PanelProps {
-	panelIsOpen: boolean
-	onDismissPanel?: () => void
+export interface StepHistoryStyles {
+	root?: CSSProperties
+	buttonContainer?: CSSProperties
+	stepsContainer?: CSSProperties
+	stepHeaders?: StepHeaderStyles
 }
 
-export interface StepHistoryListProps
-	extends Pick<TableTransformProps, 'workflow'> {
+export interface StepHistoryListProps {
+	workflow: Workflow
 	order?: DisplayOrder
+	/**
+	 * Indicates whether the original/latest buttons will be shown.
+	 * Note that they will have no effect if you do not supply an onSelect handler too.
+	 */
+	showSelectButtons?: boolean
 	onDelete?: (index: number) => void
 	onSelect?: (name: string) => void
 	onSave?: (step: Step, output: string | undefined, index?: number) => void
+	styles?: StepHistoryStyles
 }

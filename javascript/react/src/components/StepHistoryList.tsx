@@ -6,43 +6,36 @@
 import type { Step } from '@datashaper/workflow'
 import { CollapsiblePanel, DialogConfirm } from '@essex/components'
 import { DefaultButton, useTheme } from '@fluentui/react'
-import debug from 'debug'
-import { memo, useCallback, useEffect, useRef } from 'react'
+import { memo } from 'react'
 
 import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
-import { useDeleteConfirm } from './StepHistoryList.hooks.js'
+import { StepHeader } from './StepHeader.js'
+import type { StepHeaderStyles } from './StepHeader.types.js'
+import { useDeleteConfirm, useTableHandlers } from './StepHistoryList.hooks.js'
 import {
 	ButtonContainer,
 	buttonStyles,
-	Columns,
 	Container,
 	icons,
-	PanelHeader,
-	StepIndex,
 	StepsContainer,
 	tableTransformStyle,
-	Verb,
 } from './StepHistoryList.styles.js'
 import type { StepHistoryListProps } from './StepHistoryList.types.js'
 import { getCollapsiblePanelStyles } from './StepHistoryList.utils.js'
 import { TableTransform } from './TableTransform.js'
-const log = debug('datashaper')
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
-	function StepsList({ onDelete, onSelect, workflow, onSave, order }) {
-		const ref = useRef<HTMLDivElement>(null)
+	function StepsList({
+		workflow,
+		showSelectButtons = true,
+		order,
+		onDelete,
+		onSelect,
+		onSave,
+		styles,
+	}) {
 		const theme = useTheme()
 		const steps = useWorkflowSteps(workflow, order)
-
-		const onSelectOriginalTable = useCallback(() => {
-			if (workflow.inputNames.size > 0) {
-				const names = [...workflow.inputNames]
-				const lastInputName = names[names.length - 1]
-				if (lastInputName) {
-					onSelect?.(lastInputName)
-				}
-			}
-		}, [workflow, onSelect])
 
 		const collapsiblePanelStyles = getCollapsiblePanelStyles(theme)
 		const {
@@ -52,20 +45,14 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 			isOpen: isDeleteModalOpen,
 		} = useDeleteConfirm(onDelete)
 
-		useEffect(() => {
-			const f = () => {
-				ref?.current?.scrollIntoView(false)
-			}
-			f()
-		}, [steps])
-
-		const onSelectLatest = useCallback(() => {
-			const latestId = steps[0]?.id
-			onSelect && latestId && onSelect(latestId)
-		}, [onSelect, steps])
+		const { onSelectOriginalTable, onSelectLatest } = useTableHandlers(
+			workflow,
+			steps,
+			onSelect,
+		)
 
 		return (
-			<Container>
+			<Container style={styles?.root}>
 				<DialogConfirm
 					toggle={toggleDeleteModal}
 					title="Are you sure you want to delete this step?"
@@ -75,28 +62,30 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 					show={isDeleteModalOpen}
 					onConfirm={onConfirmDelete}
 				/>
-				<ButtonContainer>
-					{onSelectOriginalTable && (
+				{showSelectButtons && (
+					<ButtonContainer style={styles?.buttonContainer}>
+						{onSelectOriginalTable && (
+							<DefaultButton
+								disabled={!steps.length}
+								iconProps={icons.preview}
+								style={buttonStyles}
+								onClick={onSelectOriginalTable}
+							>
+								Original
+							</DefaultButton>
+						)}
+
 						<DefaultButton
 							disabled={!steps.length}
 							iconProps={icons.preview}
 							style={buttonStyles}
-							onClick={onSelectOriginalTable}
+							onClick={onSelectLatest}
 						>
-							Original
+							Latest
 						</DefaultButton>
-					)}
-
-					<DefaultButton
-						disabled={!steps.length}
-						iconProps={icons.preview}
-						style={buttonStyles}
-						onClick={onSelectLatest}
-					>
-						Latest
-					</DefaultButton>
-				</ButtonContainer>
-				<StepsContainer>
+					</ButtonContainer>
+				)}
+				<StepsContainer style={styles?.stepsContainer}>
 					{steps.map(step => {
 						const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
 						return (
@@ -105,7 +94,9 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 								styles={collapsiblePanelStyles}
 								expandsWithIcon
 								onHeaderClick={() => onSelect?.(step.id)}
-								onRenderHeader={() => onRenderHeader(step, stepIndex)}
+								onRenderHeader={() =>
+									onRenderHeader(step, stepIndex, styles?.stepHeaders)
+								}
 							>
 								<TableTransform
 									hideInput
@@ -128,30 +119,10 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 	},
 )
 
-function onRenderHeader(step: Step, index: number): JSX.Element {
-	const { args } = step
-	const columnList: any = (args as any).columns ||
-		(args as any).on || [(args as any).column]
-	let columns = ''
-	try {
-		if (Array.isArray(columnList)) {
-			columns = columnList.join(', ')
-		} else if (typeof columnList === 'object') {
-			columns = Object.values(columnList)?.join(', ')
-		}
-	} catch (e) {
-		log(
-			'ColumnList type is not being currently supported',
-			typeof columnList,
-			e,
-		)
-	}
-
-	return (
-		<PanelHeader>
-			<StepIndex>#{index + 1}</StepIndex>
-			<Verb>{step.verb}</Verb>
-			<Columns>{columns}</Columns>
-		</PanelHeader>
-	)
+function onRenderHeader(
+	step: Step,
+	index: number,
+	styles?: StepHeaderStyles,
+): JSX.Element {
+	return <StepHeader step={step} index={index} styles={styles} />
 }

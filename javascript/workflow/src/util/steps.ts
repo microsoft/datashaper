@@ -18,6 +18,10 @@ enum Tags {
 	 */
 	InputTable,
 	/**
+	 * More than one input table is required (e.g., set operations).
+	 */
+	InputTableList,
+	/**
 	 * A single input column is input
 	 */
 	InputColumn,
@@ -25,6 +29,14 @@ enum Tags {
 	 * Input column list
 	 */
 	InputColumnList,
+	/**
+	 * The column inputs are a map of string -> string
+	 */
+	InputColumnRecord,
+	/**
+	 * A key and value input column are required
+	 */
+	InputKeyValue,
 	/**
 	 * A single output column is input
 	 */
@@ -50,27 +62,27 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	bin: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn, Tags.NumericOnly],
 	binarize: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 	boolean: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
-	concat: [Tags.InputTable, Tags.RowModifying],
+	concat: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
 	convert: [Tags.InputTable, Tags.InputColumn],
-	dedupe: [Tags.InputTable, Tags.RowModifying],
+	dedupe: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
 	derive: [Tags.InputTable, Tags.OutputColumn],
-	difference: [Tags.InputTable, Tags.RowModifying],
+	difference: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
 	erase: [Tags.InputTable, Tags.RowModifying, Tags.InputColumn],
 	fetch: [],
 	fill: [Tags.InputTable, Tags.OutputColumn],
 	filter: [Tags.InputTable, Tags.InputColumn, Tags.RowModifying],
 	fold: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
 	groupby: [Tags.InputTable, Tags.InputColumnList],
-	impute: [Tags.InputTable],
-	intersect: [Tags.InputTable, Tags.RowModifying],
-	join: [Tags.InputTable, Tags.RowModifying],
-	lookup: [Tags.InputTable, Tags.RowModifying],
+	impute: [Tags.InputTable, Tags.InputColumn],
+	intersect: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
+	join: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
+	lookup: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
 	merge: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
-	pivot: [Tags.InputTable, Tags.RowModifying],
+	pivot: [Tags.InputTable, Tags.RowModifying, Tags.InputKeyValue],
 	onehot: [Tags.InputTable, Tags.InputColumn],
 	orderby: [Tags.InputTable],
 	recode: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
-	rename: [Tags.InputTable],
+	rename: [Tags.InputTable, Tags.InputColumnRecord],
 	rollup: [
 		Tags.InputTable,
 		Tags.InputColumn,
@@ -79,19 +91,22 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	],
 	sample: [Tags.InputTable, Tags.RowModifying],
 	select: [Tags.InputTable, Tags.InputColumnList],
-	spread: [Tags.InputTable],
-	unfold: [Tags.InputTable, Tags.RowModifying],
+	spread: [Tags.InputTable, Tags.InputColumn],
+	unfold: [Tags.InputTable, Tags.RowModifying, Tags.InputKeyValue],
 	ungroup: [Tags.InputTable],
 	unhot: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
-	union: [Tags.InputTable, Tags.RowModifying],
+	union: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
 	unorder: [Tags.InputTable],
 	unroll: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
 	window: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 }
 
 const INPUT_TABLE_VERBS = filterByTag(Tags.InputTable)
+const INPUT_TABLE_LIST_VERBS = filterByTag(Tags.InputTableList)
 const INPUT_COLUMN_VERBS = filterByTag(Tags.InputColumn)
 const INPUT_COLUMN_LIST_VERBS = filterByTag(Tags.InputColumnList)
+const INPUT_COLUMN_RECORD_VERBS = filterByTag(Tags.InputColumnRecord)
+const INPUT_KEY_VALUE_VERBS = filterByTag(Tags.InputKeyValue)
 const OUTPUT_COLUMN_VERBS = filterByTag(Tags.OutputColumn)
 const ROW_MODIFYING_VERBS = filterByTag(Tags.RowModifying)
 const NUMERIC_VERBS = filterByTag(Tags.NumericOnly)
@@ -112,6 +127,15 @@ export function isInputTableStep(step: Step): boolean {
 }
 
 /**
+ * Indicates whether this step requires more than one input table.
+ * @param step -
+ * @returns
+ */
+export function isInputTableListStep(step: Step): boolean {
+	return isTagged(step, INPUT_TABLE_LIST_VERBS)
+}
+
+/**
  * Indicates whether the supplied step requires a single input column.
  * @param step -
  * @returns
@@ -121,12 +145,30 @@ export function isInputColumnStep(step: Step): boolean {
 }
 
 /**
- * Indicates whether the supplied step requires a multiple input column.
+ * Indicates whether the supplied step requires multiple input columns.
  * @param step -
  * @returns
  */
 export function isInputColumnListStep(step: Step): boolean {
 	return isTagged(step, INPUT_COLUMN_LIST_VERBS)
+}
+
+/**
+ * Indicates whether the supplied step requires a map of input columns.
+ * @param step -
+ * @returns
+ */
+export function isInputColumnRecordStep(step: Step): boolean {
+	return isTagged(step, INPUT_COLUMN_RECORD_VERBS)
+}
+
+/**
+ * Indicates whether the supplied step requires an input key and value column.
+ * @param step -
+ * @returns
+ */
+export function isInputKeyValueStep(step: Step): boolean {
+	return isTagged(step, INPUT_KEY_VALUE_VERBS)
 }
 
 /**

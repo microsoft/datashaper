@@ -4,7 +4,7 @@
 
 ## isInputColumnListStep() function
 
-Indicates whether the supplied step requires a multiple input column.
+Indicates whether the supplied step requires multiple input columns.
 
 <b>Signature:</b>
 

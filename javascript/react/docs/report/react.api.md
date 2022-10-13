@@ -7,6 +7,7 @@
 /// <reference types="react" />
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { CSSProperties } from 'react';
 import type { DropzoneOptions } from 'react-dropzone';
 import type { Field } from '@datashaper/schema';
 import { FileCollection } from '@datashaper/utilities';
@@ -313,16 +314,6 @@ export interface HistoryPanelProps {
 // @public (undocumented)
 export type MetadataClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined, metadata?: Field) => void;
 
-// Warning: (ae-missing-release-tag) "PanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface PanelProps {
-    // (undocumented)
-    onDismissPanel?: () => void;
-    // (undocumented)
-    panelIsOpen: boolean;
-}
-
 // Warning: (ae-missing-release-tag) "ProjectManagementCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -463,7 +454,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps>;
 // Warning: (ae-missing-release-tag) "StepHistoryListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflow'> {
+export interface StepHistoryListProps {
     // (undocumented)
     onDelete?: (index: number) => void;
     // (undocumented)
@@ -472,6 +463,13 @@ export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflo
     onSelect?: (name: string) => void;
     // (undocumented)
     order?: DisplayOrder;
+    showSelectButtons?: boolean;
+    // Warning: (ae-forgotten-export) The symbol "StepHistoryStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    styles?: StepHistoryStyles;
+    // (undocumented)
+    workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

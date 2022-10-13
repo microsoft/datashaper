@@ -5121,6 +5121,77 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!InputKeyValueArgs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface InputKeyValueArgs "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "InputKeyValueArgs",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!InputKeyValueArgs#key:member",
+              "docComment": "/**\n * Key column for the operation\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "key",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!InputKeyValueArgs#value:member",
+              "docComment": "/**\n * Value column for the operation\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "value: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "value",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
           "canonicalReference": "@datashaper/schema!JoinArgs:interface",
           "docComment": "",
           "excerptTokens": [
@@ -7050,40 +7121,22 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface PivotArgs "
+              "text": "export interface PivotArgs extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "InputKeyValueArgs",
+              "canonicalReference": "@datashaper/schema!InputKeyValueArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
           "releaseTag": "Public",
           "name": "PivotArgs",
           "preserveMemberOrder": false,
           "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!PivotArgs#key:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "key: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "key",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!PivotArgs#operation:member",
@@ -7111,36 +7164,14 @@
                 "startIndex": 1,
                 "endIndex": 2
               }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!PivotArgs#value:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "value: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "value",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
             }
           ],
-          "extendsTokenRanges": []
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
         },
         {
           "kind": "TypeAlias",
@@ -8747,7 +8778,7 @@
             {
               "kind": "Reference",
               "text": "UnfoldArgs",
-              "canonicalReference": "@datashaper/schema!UnfoldArgs:interface"
+              "canonicalReference": "@datashaper/schema!UnfoldArgs:type"
             },
             {
               "kind": "Content",
@@ -9344,75 +9375,30 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!UnfoldArgs:interface",
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/schema!UnfoldArgs:type",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface UnfoldArgs "
+              "text": "export declare type UnfoldArgs = "
+            },
+            {
+              "kind": "Reference",
+              "text": "InputKeyValueArgs",
+              "canonicalReference": "@datashaper/schema!InputKeyValueArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
             }
           ],
           "releaseTag": "Public",
           "name": "UnfoldArgs",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!UnfoldArgs#key:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "key: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "key",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!UnfoldArgs#value:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "value: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "value",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
         },
         {
           "kind": "Interface",

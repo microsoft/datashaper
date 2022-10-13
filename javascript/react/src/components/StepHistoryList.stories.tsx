@@ -2,14 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { container } from '@datashaper/tables'
+
 import { Workflow } from '@datashaper/workflow'
 import type { ComponentStory } from '@storybook/react'
-import { useMemo } from 'react'
 
+import { DisplayOrder } from '../enums.js'
 import { useWorkflow } from '../hooks/common.js'
-import { StepHistoryList } from '../index.js'
-import schema from '../verbs/__tests__/specs/aggregated-lookup.json'
+import schema from '../verbs/__tests__/specs/every-operation.json'
+import { StepHistoryList } from './StepHistoryList.js'
 import type { StepHistoryListProps } from './StepHistoryList.types.js'
 
 const storyMetadata = {
@@ -18,16 +18,18 @@ const storyMetadata = {
 }
 export default storyMetadata
 
+const workflow = new Workflow(schema)
+
 const Template: ComponentStory<typeof StepHistoryList> = (
 	args: StepHistoryListProps,
-	{ loaded: { companies, products } }: any,
+	{ loaded: { companies, companies2, products, stocks } }: any,
 ): JSX.Element => {
-	const workflow = useMemo(() => new Workflow(schema), [schema])
 	const wf = useWorkflow(workflow, [
-		container('companies', companies),
-		container('products', products),
+		{ id: 'companies', table: companies },
+		{ id: 'companies2', table: companies2 },
+		{ id: 'products', table: products },
+		{ id: 'stocks', table: stocks },
 	])
-
 	return (
 		<div
 			style={{
@@ -43,3 +45,22 @@ const Template: ComponentStory<typeof StepHistoryList> = (
 }
 
 export const Primary = Template.bind({})
+
+export const Customized = Template.bind({})
+Customized.args = {
+	order: DisplayOrder.FirstOnTop,
+	styles: {
+		buttonContainer: {
+			background: 'azure',
+			borderBottom: '2px solid teal',
+		},
+		stepHeaders: {
+			verb: {
+				color: 'orange',
+			},
+			details: {
+				color: 'teal',
+			},
+		},
+	},
+}

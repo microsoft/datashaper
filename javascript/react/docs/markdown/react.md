@@ -68,7 +68,6 @@
 |  [GuidanceProps](./react.guidanceprops.md) |  |
 |  [HistoryButtonProps](./react.historybuttonprops.md) |  |
 |  [HistoryPanelProps](./react.historypanelprops.md) |  |
-|  [PanelProps](./react.panelprops.md) |  |
 |  [ProjectManagementCommandBarProps](./react.projectmanagementcommandbarprops.md) |  |
 |  [SortParameters](./react.sortparameters.md) |  |
 |  [StepCardProps](./react.stepcardprops.md) |  |

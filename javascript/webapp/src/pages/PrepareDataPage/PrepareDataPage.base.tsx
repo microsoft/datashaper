@@ -5,6 +5,7 @@
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
+	DisplayOrder,
 	ProjectManagementCommandBar,
 	StepHistoryList,
 	TableCommands,
@@ -139,6 +140,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 									onSelect={setSelectedTableId}
 									workflow={workflow}
 									onSave={onSave}
+									order={DisplayOrder.FirstOnTop}
 								/>
 							</ToolPanel>
 						</StepsListContainer>

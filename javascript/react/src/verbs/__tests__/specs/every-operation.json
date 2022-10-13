@@ -300,7 +300,7 @@
 			"verb": "sample",
 			"input": { "source": "companies" },
 			"args": {
-				"size": 2
+				"proportion": 0.5
 			}
 		},
 		{

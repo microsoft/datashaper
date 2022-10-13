@@ -45,8 +45,11 @@
 |  [fetchJson(url)](./workflow.fetchjson.md) |  |
 |  [handleMaybeAsync(value, handler)](./workflow.handlemaybeasync.md) |  |
 |  [inputNodeFactory(compute)](./workflow.inputnodefactory.md) |  |
-|  [isInputColumnListStep(step)](./workflow.isinputcolumnliststep.md) | Indicates whether the supplied step requires a multiple input column. |
+|  [isInputColumnListStep(step)](./workflow.isinputcolumnliststep.md) | Indicates whether the supplied step requires multiple input columns. |
+|  [isInputColumnRecordStep(step)](./workflow.isinputcolumnrecordstep.md) | Indicates whether the supplied step requires a map of input columns. |
 |  [isInputColumnStep(step)](./workflow.isinputcolumnstep.md) | Indicates whether the supplied step requires a single input column. |
+|  [isInputKeyValueStep(step)](./workflow.isinputkeyvaluestep.md) | Indicates whether the supplied step requires an input key and value column. |
+|  [isInputTableListStep(step)](./workflow.isinputtableliststep.md) | Indicates whether this step requires more than one input table. |
 |  [isInputTableStep(step)](./workflow.isinputtablestep.md) | Indicates whether this step requires an input table. |
 |  [isNumericInputStep(step)](./workflow.isnumericinputstep.md) | Indicates whether this step can only operate on numeric values. |
 |  [isOutputColumnStep(step)](./workflow.isoutputcolumnstep.md) | Indicates whether the supplied step requires a single output column. |

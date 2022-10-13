@@ -27,30 +27,6 @@ export const ButtonContainer = styled.div`
 
 export const StepsContainer = styled.div``
 
-export const PanelHeader = styled.div`
-	display: flex;
-	gap: 4px;
-	align-items: center;
-`
-
-export const StepIndex = styled.span`
-	color: ${({ theme }) => theme.palette.neutralTertiary};
-	font-size: 12px;
-`
-
-export const Verb = styled.span`
-	text-transform: uppercase;
-	font-weight: bold;
-	color: ${({ theme }) => theme.palette.neutralSecondary};
-`
-
-export const Columns = styled.span`
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-	color: ${({ theme }) => theme.palette.neutralSecondaryAlt};
-`
-
 export const tableTransformStyle: React.CSSProperties = {
 	display: 'flex',
 	alignItems: 'center',

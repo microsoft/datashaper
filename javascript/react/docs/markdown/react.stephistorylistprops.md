@@ -7,9 +7,8 @@
 <b>Signature:</b>
 
 ```typescript
-export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflow'> 
+export interface StepHistoryListProps 
 ```
-<b>Extends:</b> Pick&lt;[TableTransformProps](./react.tabletransformprops.md)<!-- -->, 'workflow'&gt;
 
 ## Properties
 
@@ -19,4 +18,7 @@ export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflo
 |  [onSave?](./react.stephistorylistprops.onsave.md) |  | (step: Step, output: string \| undefined, index?: number) =&gt; void | <i>(Optional)</i> |
 |  [onSelect?](./react.stephistorylistprops.onselect.md) |  | (name: string) =&gt; void | <i>(Optional)</i> |
 |  [order?](./react.stephistorylistprops.order.md) |  | [DisplayOrder](./react.displayorder.md) | <i>(Optional)</i> |
+|  [showSelectButtons?](./react.stephistorylistprops.showselectbuttons.md) |  | boolean | <i>(Optional)</i> Indicates whether the original/latest buttons will be shown. Note that they will have no effect if you do not supply an onSelect handler too. |
+|  [styles?](./react.stephistorylistprops.styles.md) |  | StepHistoryStyles | <i>(Optional)</i> |
+|  [workflow](./react.stephistorylistprops.workflow.md) |  | Workflow |  |
 

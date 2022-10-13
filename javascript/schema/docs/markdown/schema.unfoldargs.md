@@ -2,18 +2,12 @@
 
 [Home](./index.md) &gt; [@datashaper/schema](./schema.md) &gt; [UnfoldArgs](./schema.unfoldargs.md)
 
-## UnfoldArgs interface
+## UnfoldArgs type
 
 <b>Signature:</b>
 
 ```typescript
-export interface UnfoldArgs 
+export declare type UnfoldArgs = InputKeyValueArgs;
 ```
-
-## Properties
-
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [key](./schema.unfoldargs.key.md) |  | string |  |
-|  [value](./schema.unfoldargs.value.md) |  | string |  |
+<b>References:</b> [InputKeyValueArgs](./schema.inputkeyvalueargs.md)
 

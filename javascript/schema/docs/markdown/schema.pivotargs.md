@@ -7,14 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-export interface PivotArgs 
+export interface PivotArgs extends InputKeyValueArgs 
 ```
+<b>Extends:</b> [InputKeyValueArgs](./schema.inputkeyvalueargs.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [key](./schema.pivotargs.key.md) |  | string |  |
 |  [operation](./schema.pivotargs.operation.md) |  | [FieldAggregateOperation](./schema.fieldaggregateoperation.md) |  |
-|  [value](./schema.pivotargs.value.md) |  | string |  |
 

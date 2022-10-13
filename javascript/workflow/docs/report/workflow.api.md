@@ -29,6 +29,7 @@ import type { FoldArgs } from '@datashaper/schema';
 import type { ImputeArgs } from '@datashaper/schema';
 import { InputColumnListArgs } from '@datashaper/schema';
 import { InputColumnRecordArgs } from '@datashaper/schema';
+import { InputKeyValueArgs } from '@datashaper/schema';
 import type { JoinArgs } from '@datashaper/schema';
 import type { LookupArgs } from '@datashaper/schema';
 import type { Maybe as Maybe_3 } from '@datashaper/workflow';
@@ -50,7 +51,6 @@ import type { SetOp } from '@datashaper/schema';
 import type { SpreadArgs } from '@datashaper/schema';
 import { Subject } from 'rxjs';
 import { TableContainer } from '@datashaper/tables';
-import type { UnfoldArgs } from '@datashaper/schema';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
@@ -427,10 +427,25 @@ export const intersect: (id: string) => SetOperationNode<unknown>;
 // @public
 export function isInputColumnListStep(step: Step): boolean;
 
+// Warning: (ae-missing-release-tag) "isInputColumnRecordStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function isInputColumnRecordStep(step: Step): boolean;
+
 // Warning: (ae-missing-release-tag) "isInputColumnStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export function isInputColumnStep(step: Step): boolean;
+
+// Warning: (ae-missing-release-tag) "isInputKeyValueStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function isInputKeyValueStep(step: Step): boolean;
+
+// Warning: (ae-missing-release-tag) "isInputTableListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function isInputTableListStep(step: Step): boolean;
 
 // Warning: (ae-missing-release-tag) "isInputTableStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -760,7 +775,7 @@ export type TableObservable = Observable<Maybe<TableContainer>>;
 // Warning: (ae-missing-release-tag) "unfold" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const unfold: (id: string) => StepNode<TableContainer<unknown>, UnfoldArgs>;
+export const unfold: (id: string) => StepNode<TableContainer<unknown>, InputKeyValueArgs>;
 
 // Warning: (ae-missing-release-tag) "ungroup" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
