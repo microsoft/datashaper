@@ -18,7 +18,6 @@
 							"verb": "select",
 							"args": {
 								"columns": [
-									"index",
 									"sex",
 									"age",
 									"race",

@@ -8,8 +8,6 @@ import type {
 	ResourceSchema,
 	WorkflowSchema,
 } from '@datashaper/schema'
-import { all, op } from 'arquero'
-import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 
 import { fetchFile } from '../util/network.js'
 
@@ -105,15 +103,4 @@ function resolveRawContent(
 	if (files.has(resource)) {
 		return files.get(resource)
 	}
-}
-
-export function withRowNumbers(
-	table: ColumnTable | undefined,
-): ColumnTable | undefined {
-	return table?.derive(
-		{
-			index: op.row_number(),
-		},
-		{ before: all() },
-	)
 }
