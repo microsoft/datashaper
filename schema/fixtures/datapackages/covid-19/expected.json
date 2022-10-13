@@ -2,7 +2,7 @@
 	"tables": [
 		{
 			"name": "covid19_small_data",
-			"workflowLength": 54
+			"workflowLength": 55
 		}
 	]
 }
