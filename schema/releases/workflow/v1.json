@@ -437,6 +437,19 @@
 			},
 			"type": "object"
 		},
+		"InputKeyValueArgs": {
+			"properties": {
+				"key": {
+					"description": "Key column for the operation",
+					"type": "string"
+				},
+				"value": {
+					"description": "Value column for the operation",
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
 		"JoinArgs": {
 			"properties": {
 				"on": {
@@ -614,12 +627,14 @@
 		"PivotArgs": {
 			"properties": {
 				"key": {
+					"description": "Key column for the operation",
 					"type": "string"
 				},
 				"operation": {
 					"$ref": "#/definitions/FieldAggregateOperation"
 				},
 				"value": {
+					"description": "Value column for the operation",
 					"type": "string"
 				}
 			},
@@ -787,17 +802,6 @@
 			"properties": {
 				"id": {
 					"description": "A unique identifier for this step",
-					"type": "string"
-				}
-			},
-			"type": "object"
-		},
-		"UnfoldArgs": {
-			"properties": {
-				"key": {
-					"type": "string"
-				},
-				"value": {
 					"type": "string"
 				}
 			},
@@ -1614,7 +1618,7 @@
 							{
 								"properties": {
 									"args": {
-										"$ref": "#/definitions/UnfoldArgs"
+										"$ref": "#/definitions/InputKeyValueArgs"
 									},
 									"verb": {
 										"enum": ["unfold"],
