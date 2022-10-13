@@ -1,0 +1,18 @@
+{
+	"$schema": "../../../../../../workflow.json",
+	"steps": [
+		{
+			"verb": "convert",
+			"input": "table21",
+			"id": "expected",
+			"args": {
+				"column": "date",
+				"type": "string",
+				"formatPattern": "%B, %Y",
+				"to": "newColumn"
+			}
+		}
+	],
+	"output": ["expected"],
+	"input": ["table21"]
+}

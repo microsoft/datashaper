@@ -1,0 +1,20 @@
+{
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow.json",
+	"steps": [
+		{
+			"verb": "bin",
+			"input": "table9",
+			"args": {
+				"to": "newColumn",
+				"column": "count",
+				"strategy": "fixed width",
+				"fixedwidth": 30,
+				"min": 10,
+				"max": 200
+			},
+			"id": "expected"
+		}
+	],
+	"output": ["expected"],
+	"input": ["table9"]
+}

@@ -82,8 +82,4 @@ export interface TableTransformProps {
 	hideStepSelector?: boolean
 
 	onDelete?: (index: number) => void
-
-	onPreview?: (name: string) => void
-
-	onDuplicate?: (step: Step) => void
 }

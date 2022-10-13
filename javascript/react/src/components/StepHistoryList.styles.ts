@@ -4,16 +4,10 @@
  */
 import styled from '@essex/styled-components'
 
-export const addButtonStyles = {
-	root: {
-		padding: '0 4px 0 6px',
-		whiteSpace: 'nowrap',
-		width: '90%',
-		margin: '0 5%',
-	},
-}
+export const buttonStyles = { width: '100%' }
 
 export const icons = {
+	preview: { iconName: 'View' },
 	add: { iconName: 'Add' },
 	chevronRight: { iconName: 'ChevronRight' },
 	chevronDown: { iconName: 'ChevronDown' },
@@ -21,12 +15,10 @@ export const icons = {
 
 export const Container = styled.div`
 	overflow: hidden;
-	padding: 0.1rem;
 	height: 100%;
 	display: grid;
 	grid-template-rows: calc(100% - 4rem) 4rem;
 	width: 100%;
-	border-top: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 
 	> div {
 		overflow: hidden auto;
@@ -34,10 +26,8 @@ export const Container = styled.div`
 	}
 `
 
-export const ButtonContainer = styled.section`
+export const ButtonContainer = styled.div`
 	display: flex;
-	align-items: flex-end;
-	gap: 18px;
 `
 export const PanelHeader = styled.div`
 	font-weight: 500;

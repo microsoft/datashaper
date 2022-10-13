@@ -3,14 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Entry } from '@zip.js/zip.js'
+import type * as zip from '@zip.js/zip.js'
 
 import { FileWithPath } from '../../common/index.js'
 import { getBlobFromEntry, getFileFromEntry, toZip } from '../zip.js'
 
 describe('gets the blob of a zip.Entry', () => {
 	it('getBlobFromEntry', async () => {
-		const entry = { filename: 'foo.txt' } as Entry
+		const entry = { filename: 'foo.txt' } as zip.Entry
 		const result = await getBlobFromEntry(entry)
 		expect(result).toBeInstanceOf(Blob)
 	})
@@ -18,7 +18,7 @@ describe('gets the blob of a zip.Entry', () => {
 
 describe('returns a FileWithPath instance from a Entry', () => {
 	it('getFileFromEntry', async () => {
-		const entry = { filename: 'foo.txt' } as Entry
+		const entry = { filename: 'foo.txt' } as zip.Entry
 		const result = await getFileFromEntry(entry)
 		expect(result).toBeInstanceOf(FileWithPath)
 	})

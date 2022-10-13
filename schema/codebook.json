@@ -1,0 +1,385 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "Bin": {
+            "properties": {
+                "count": {
+                    "type": "number"
+                },
+                "min": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "Category": {
+            "properties": {
+                "count": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Constraints": {
+            "description": "Validation constraints for a field.",
+            "properties": {
+                "enum": {
+                    "description": "Strict list of allowed values in the column.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "maxLength": {
+                    "description": "For strings or arrays, this is the maximum allowed length of values.",
+                    "type": "number"
+                },
+                "maximum": {
+                    "description": "For numbers or dates, this is the maximum allowed value.",
+                    "type": "number"
+                },
+                "minLength": {
+                    "description": "For strings or arrays, this is the minimum allowed length of values.",
+                    "type": "number"
+                },
+                "minimum": {
+                    "description": "For numbers or dates, this is the minimum allowed value.",
+                    "type": "number"
+                },
+                "pattern": {
+                    "description": "RegExp pattern that string values must match.",
+                    "type": "string"
+                },
+                "required": {
+                    "description": "Indicates that this field is required (not nullable).",
+                    "type": "boolean"
+                },
+                "unique": {
+                    "description": "Indicates that every value in this column must be unique.",
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "DataType": {
+            "description": "Explicit data type of the value (i.e., for a column or property).\nTODO: clarify/update null/undefined",
+            "enum": [
+                "array",
+                "boolean",
+                "date",
+                "datetime",
+                "integer",
+                "null",
+                "number",
+                "object",
+                "string",
+                "time",
+                "undefined",
+                "unknown"
+            ],
+            "type": "string"
+        },
+        "Field": {
+            "description": "Contains the full schema definition and metadata for a data field (usually a table column).\nThis includes the required data type, various data nature and rendering properties, potential\nvalidation rules, and mappings from a data dictionary.",
+            "properties": {
+                "constraints": {
+                    "$ref": "#/definitions/Constraints",
+                    "description": "Validation constraints for the values in the field to adhere to."
+                },
+                "derivedFrom": {
+                    "description": "Provenance hints for the source of this field.\nFor example, categorical fields are often onehot encoded into new binary columns,\nthis would link back to the original categorical.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "Description of the named resource.",
+                    "type": "string"
+                },
+                "example": {
+                    "description": "Single example of a valid data value for the field."
+                },
+                "exclude": {
+                    "description": "Indicates that this field from the dataset should be excluded from computations and display.",
+                    "type": "boolean"
+                },
+                "format": {
+                    "description": "Describes the semantic or parsing format for the values.\nThis is based on JSONSchema. See https://json-schema.org/draft/2020-12/json-schema-validation.html#name-vocabularies-for-semantic-c\nTODO: JSONSchema is pretty flexible here, and we should align with it. For example, there are standard string (uri, email, ip-address, etc.)\nthat define known formats. However, you can also link out to any arbitrary schema that validates a data value.\nJSONSchema also uses the format field to describe date and time notation. Because dates are not a valid JSON type,\nthey are represented as type = string, but format = date, time, date-time, or duration.\nWe use the type in running code, so it seems appropriate to keep the expanded list, but maybe this can contain parsing\ninstructions (e.g., a pattern) for converting date/time strings into values.\nhttps://json-schema.org/draft/2020-12/json-schema-validation.html#name-defined-formats",
+                    "type": "string"
+                },
+                "inverse": {
+                    "description": "Indicates that values are mapped inverse to typical expectation, and may need to be displayed in the opposite direction.\nClosely related to nature, particular for categorical ordinal values.",
+                    "type": "boolean"
+                },
+                "mapping": {
+                    "$ref": "#/definitions/Record<any,any>",
+                    "description": "This provides a mapping between cell values and some other value.\nMost commonly this is the core \"data dictionary\", whereby cell values are stored as numeric categories,\nand the dictionary defines textual descriptions of the actual meaning.\nIf numeric, the keys are usually categorical ordinal or nominal.\nString keys are often commonly used (for example, medical data often use short alphanumeric codes to represent diagnostic strings)."
+                },
+                "metadata": {
+                    "$ref": "#/definitions/FieldMetadata",
+                    "description": "Detailed statistical metadata for the field.\nAlso convenient way to persist so expensive recomputing can be avoided."
+                },
+                "name": {
+                    "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
+                    "type": "string"
+                },
+                "nature": {
+                    "$ref": "#/definitions/VariableNature",
+                    "description": "Data nature. This is primarily applicable to numbers, which have different characters that define how we should display them in charts.\ndefault: continuous\nTODO: there is a large block of nature-related content in CauseDis. is some of this transient application state? how much do we need to carry in a schema?"
+                },
+                "tags": {
+                    "description": "Optional descriptive tags for the field.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "description": "Friendly name of the resource. Used for display only.",
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/DataType",
+                    "description": "Strict type of the field. Note that columns may not mix types in their rows for most of the data formats we use.\nDefault: 'string'"
+                },
+                "unit": {
+                    "description": "QUDT code for the variable unit (i.e., meters, pounds, etc.).\nhttps://qudt.org/2.1/vocab/unit",
+                    "type": "string"
+                },
+                "unitDescription": {
+                    "description": "Description of the unit for friendly display.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "FieldMetadata": {
+            "description": "Holds core metadata/stats for a data field.",
+            "properties": {
+                "bins": {
+                    "description": "Computed histogram bins for numeric fields.",
+                    "items": {
+                        "$ref": "#/definitions/Bin"
+                    },
+                    "type": "array"
+                },
+                "categories": {
+                    "description": "List of unique categories for string fields.",
+                    "items": {
+                        "$ref": "#/definitions/Category"
+                    },
+                    "type": "array"
+                },
+                "count": {
+                    "description": "Count of valid values in the column (excluding invalid, null, etc.)",
+                    "type": "number"
+                },
+                "distinct": {
+                    "description": "Count of unique values in the column",
+                    "type": "number"
+                },
+                "invalid": {
+                    "description": "Count of invalid/null values in the column",
+                    "type": "number"
+                },
+                "magnitude": {
+                    "description": "Magnitude of the data, i.e., the absolute difference between the min and max values.",
+                    "type": "number"
+                },
+                "maximum": {
+                    "description": "Max value.\nNote that this can be specified rather than computed, in which case it defines valid boundaries for the data values.",
+                    "type": "number"
+                },
+                "mean": {
+                    "description": "Mean.",
+                    "type": "number"
+                },
+                "median": {
+                    "description": "Median.",
+                    "type": "number"
+                },
+                "minimum": {
+                    "description": "Min value.\nNote that this can be specified rather than computed, in which case it defines valid boundaries for the data values.",
+                    "type": "number"
+                },
+                "mode": {
+                    "anyOf": [
+                        {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        {
+                            "type": [
+                                "string",
+                                "number",
+                                "boolean"
+                            ]
+                        }
+                    ],
+                    "description": "Mode"
+                },
+                "stdev": {
+                    "description": "Standard deviation.",
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "Record<any,any>": {
+            "type": "object"
+        },
+        "ResourceSchema": {
+            "description": "Parent class for any resource type understood by the system.\nAny object type that extends from Resouce is expected to have a standalone schema published.\nFor project state, this can be left as generic as possible for now.",
+            "properties": {
+                "$schema": {
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description of the named resource.",
+                    "type": "string"
+                },
+                "homepage": {
+                    "description": "URL to a public webpage that describes this resource.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Generated guid, immutable.\nThis can be used for stable referencing.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "SPDX license string.\nhttps://spdx.org/licenses/",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
+                    "type": "string"
+                },
+                "path": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
+                },
+                "profile": {
+                    "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+                    "type": "string"
+                },
+                "sources": {
+                    "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/ResourceSchema"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "description": "Friendly name of the resource. Used for display only.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "VariableNature": {
+            "description": "Describes the semantic shape of a variable.\nThis has particular effect on how we display and compare data,\nsuch as using line charts for continuous versus bar charts for categorical.\nThis mostly applies to numeric variables, but strings for instance can be categorial.",
+            "enum": [
+                "binary",
+                "continuous",
+                "discrete",
+                "nominal",
+                "ordinal"
+            ],
+            "type": "string"
+        }
+    },
+    "description": "This contains all of the field-level details for interpreting a dataset,\nincluding data types, mapping, and metadata.\nNote that with persisted metadata and field examples, a dataset can often be visualized\nand described to the user without actually loading the source file.\nresource profile: 'codebook'",
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "description": {
+            "description": "Description of the named resource.",
+            "type": "string"
+        },
+        "fields": {
+            "items": {
+                "$ref": "#/definitions/Field"
+            },
+            "type": "array"
+        },
+        "homepage": {
+            "description": "URL to a public webpage that describes this resource.",
+            "type": "string"
+        },
+        "id": {
+            "description": "Generated guid, immutable.\nThis can be used for stable referencing.",
+            "type": "string"
+        },
+        "license": {
+            "description": "SPDX license string.\nhttps://spdx.org/licenses/",
+            "type": "string"
+        },
+        "name": {
+            "description": "User-specified name. This will serve as the local id (i.e., like a filename.) and should be URI-compatible.\nThis should be editable, just like any other filename on a file system.",
+            "type": "string"
+        },
+        "path": {
+            "anyOf": [
+                {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "description": "URI-compliant path to the resource (local or remote).\nIf array-valued, this points to a list of files that comprise the dataset (e.g., for splitting very large tables)."
+        },
+        "profile": {
+            "description": "Defines the resource type.\nKnown resource types should have accommpanying processors and rendering components.\nUnknown resource types can be interrogated to determine if the format is understandable by an existing component.\nNote that this could be inferred from $schema, but a simple string here is easier to deal with in code.",
+            "type": "string"
+        },
+        "sources": {
+            "description": "List of resources that underly this resource.\nThis gives us the ability to create hierarchical or linked structures\nto represent complex combinations.\nFor example, a parent resource can have source tables, a workflow, and a table schema that all combine\nto create a fully-realized, strongly typed, and transformed output table.\nEntire Resource objects may be embedded here, or a string path to the Resource definition JSON.",
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/ResourceSchema"
+                    },
+                    {
+                        "type": "string"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "title": {
+            "description": "Friendly name of the resource. Used for display only.",
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+

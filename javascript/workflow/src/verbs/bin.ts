@@ -60,11 +60,20 @@ function getStats(
 	min?: number,
 	max?: number,
 ): [number, number] {
-	const rollup = table.rollup({
-		min: op.min(column),
-		max: op.max(column),
-	})
-	return [min || rollup.get('min', 0), max || rollup.get('max', 0)]
+	return [
+		min ||
+			table
+				.rollup({
+					min: op.min(column),
+				})
+				.get('min', 0),
+		max ||
+			table
+				.rollup({
+					max: op.max(column),
+				})
+				.get('max', 0),
+	]
 }
 
 export const bin = stepVerbFactory(binStep)

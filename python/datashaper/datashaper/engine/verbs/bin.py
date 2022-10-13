@@ -38,10 +38,10 @@ def bin(
     to: str,
     column: str,
     strategy: str,
-    fixedcount: int = None,
-    fixedwidth: int = None,
     min: int = None,
     max: int = None,
+    fixedcount: int = None,
+    fixedwidth: int = None,
     clamped: bool = False,
     printRange: bool = False,
 ):

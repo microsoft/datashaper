@@ -1,0 +1,4 @@
+x,y,z,newColumn
+A,,true,
+B,true,false,true
+A,false,true,false

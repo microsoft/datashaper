@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Verb } from '@datashaper/schema'
-import type { Step, Workflow } from '@datashaper/workflow'
+import type { Workflow } from '@datashaper/workflow'
 import { ActionButton, IconButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
 import React, { memo, useCallback, useMemo } from 'react'
@@ -39,8 +39,6 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		style = {},
 		hideStepSelector,
 		onDelete,
-		onDuplicate,
-		onPreview,
 		hideInput,
 		hideOutput,
 		hideInputColumn,
@@ -67,12 +65,8 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 		)
 
 		const disableSave = useMemo((): boolean => {
-			return (
-				isEqual(step, internal) &&
-				(!hideOutput || !!onPreview) &&
-				!outputHasChanged
-			)
-		}, [step, internal, outputHasChanged, hideOutput, onPreview])
+			return isEqual(step, internal) && !hideOutput && !outputHasChanged
+		}, [step, internal, outputHasChanged, hideOutput])
 
 		return (
 			<Container style={style}>
@@ -115,18 +109,6 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 						/>
 						<ButtonContainer>
 							<Flex>
-								{onPreview ? (
-									<IconButton
-										onClick={() => onPreview(step?.id as string)}
-										iconProps={icons.preview}
-									/>
-								) : null}
-								{onDuplicate ? (
-									<IconButton
-										onClick={() => onDuplicate(step as Step)}
-										iconProps={icons.duplicate}
-									/>
-								) : null}
 								<SaveButtonWrapper>
 									<ActionButton
 										onClick={handleSaveClick}
