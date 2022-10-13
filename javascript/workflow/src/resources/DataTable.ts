@@ -22,7 +22,6 @@ import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
 import type { TableStore } from './TableStore.js'
 import type { SchemaResource } from './types.js'
-import { withRowNumbers } from './utils.js'
 import { Workflow } from './Workflow.js'
 import { WorkflowExecutor } from './WorkflowExecutor.js'
 
@@ -72,7 +71,7 @@ export class DataTable
 			this._source.next(undefined)
 		} else {
 			readTable(this._rawData, this)
-				.then(table => this._source.next(withRowNumbers(table)))
+				.then(t => this._source.next(t))
 				.catch(err => {
 					log('error reading blob', err)
 					throw err

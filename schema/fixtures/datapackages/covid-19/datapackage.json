@@ -17,7 +17,6 @@
 						{
 							"args": {
 								"columns": [
-									"index",
 									"age",
 									"ChronicDiseaseQ",
 									"gender_binary",
@@ -564,7 +563,6 @@
 						{
 							"args": {
 								"columns": [
-									"index",
 									"age",
 									"chronic_disease",
 									"gender",
@@ -585,7 +583,6 @@
 						{
 							"args": {
 								"columns": [
-									"index",
 									"diabetes_hypertension",
 									"subject_inclusion",
 									"chronic_disease",
