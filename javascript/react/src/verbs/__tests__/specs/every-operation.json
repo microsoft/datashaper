@@ -74,7 +74,7 @@
 			"verb": "convert",
 			"input": { "source": "companies" },
 			"args": {
-				"columns": ["ID"],
+				"column": "ID",
 				"type": "int"
 			}
 		},
@@ -111,7 +111,7 @@
 			"input": { "source": "products" },
 			"args": {
 				"value": 9000,
-				"columns": ["FY20 Sales", "FY21 Sales"]
+				"column": "FY20 Sales"
 			}
 		},
 		{
@@ -167,7 +167,7 @@
 			"verb": "impute",
 			"input": "companies2",
 			"args": {
-				"columns": ["Name"],
+				"column": "Name",
 				"value": "emptyValue"
 			}
 		},
@@ -211,7 +211,7 @@
 			"verb": "onehot",
 			"input": "stocks",
 			"args": {
-				"columns": ["Symbol"],
+				"column": "Symbol",
 				"prefixes": { "Symbol": "ticker-" }
 			}
 		},
@@ -300,7 +300,7 @@
 			"verb": "sample",
 			"input": { "source": "companies" },
 			"args": {
-				"size": 2
+				"proportion": 0.5
 			}
 		},
 		{
@@ -316,7 +316,7 @@
 			"verb": "spread",
 			"input": "aggregate-2",
 			"args": {
-				"columns": ["Product List"]
+				"column": "Product List"
 			}
 		},
 		{
@@ -331,10 +331,7 @@
 		{
 			"id": "ungroup-1",
 			"verb": "ungroup",
-			"input": { "source": "companies" },
-			"args": {
-				"columns": ["Name", "Employees"]
-			}
+			"input": { "source": "companies" }
 		},
 		{
 			"id": "union-1",

@@ -6,7 +6,6 @@
 import type { Step } from '@datashaper/workflow'
 
 export interface HistoryPanelProps {
-	isCollapsed: boolean
 	toggleCollapsed: () => void
 	title?: string
 	showStepCount?: boolean

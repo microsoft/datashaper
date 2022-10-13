@@ -66,6 +66,17 @@ export interface InputColumnRecordArgs {
 	columns: Record<string, string>
 }
 
+export interface InputKeyValueArgs {
+	/**
+	 * Key column for the operation
+	 */
+	key: string
+	/**
+	 * Value column for the operation
+	 */
+	value: string
+}
+
 export interface OutputColumnArgs {
 	/**
 	 * Name of the output column to receive the operation's result.
@@ -425,9 +436,7 @@ export interface OrderbyInstruction {
 	direction?: SortDirection
 }
 
-export interface PivotArgs {
-	key: string
-	value: string
+export interface PivotArgs extends InputKeyValueArgs {
 	operation: FieldAggregateOperation
 }
 
@@ -479,10 +488,7 @@ export interface SpreadArgs extends InputColumnArgs {
 	preserveSource?: boolean
 }
 
-export interface UnfoldArgs {
-	key: string
-	value: string
-}
+export type UnfoldArgs = InputKeyValueArgs
 
 export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 	prefix?: string

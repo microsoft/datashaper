@@ -68,7 +68,6 @@
 |  [GuidanceProps](./react.guidanceprops.md) |  |
 |  [HistoryButtonProps](./react.historybuttonprops.md) |  |
 |  [HistoryPanelProps](./react.historypanelprops.md) |  |
-|  [PanelProps](./react.panelprops.md) |  |
 |  [ProjectManagementCommandBarProps](./react.projectmanagementcommandbarprops.md) |  |
 |  [SortParameters](./react.sortparameters.md) |  |
 |  [StepCardProps](./react.stepcardprops.md) |  |
@@ -80,6 +79,7 @@
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
 |  [TableListProps](./react.tablelistprops.md) |  |
 |  [TableTransformProps](./react.tabletransformprops.md) |  |
+|  [ToolPanelProps](./react.toolpanelprops.md) |  |
 |  [TransformModalProps](./react.transformmodalprops.md) |  |
 
 ## Variables
@@ -104,6 +104,7 @@
 |  [TableCommands](./react.tablecommands.md) |  |
 |  [TableList](./react.tablelist.md) |  |
 |  [TableTransformModal](./react.tabletransformmodal.md) |  |
+|  [ToolPanel](./react.toolpanel.md) |  |
 |  [Tooltip](./react.tooltip.md) |  |
 
 ## Type Aliases

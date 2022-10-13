@@ -3,13 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { IconButton, useTheme } from '@fluentui/react'
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 
 import { HistoryIcon } from './CustomIcons.js'
 import {
 	Aside,
 	AsideHeader,
-	icons,
 	Title,
 	WorkflowContainer,
 } from './HistoryPanel.styles.js'
@@ -17,7 +16,6 @@ import type { HistoryPanelProps } from './HistoryPanel.types.js'
 
 export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 	function HistoryPanel({
-		isCollapsed,
 		toggleCollapsed,
 		title = 'History',
 		showStepCount,
@@ -25,24 +23,37 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 		titleStyle,
 		children,
 	}) {
-		const theme = useTheme()
+		const closeIconProps = useCloseIconProps()
 		return (
-			<Aside isCollapsed={isCollapsed}>
-				<AsideHeader isCollapsed={isCollapsed}>
-					<HistoryIcon color={theme.palette.themePrimary} />
-					<Title style={titleStyle} isCollapsed={isCollapsed}>
+			<Aside>
+				<AsideHeader>
+					<HistoryIcon />
+					<Title style={titleStyle}>
 						{title} {showStepCount ? `(${steps?.length})` : null}
 						<IconButton
-							iconProps={icons.cancel}
+							iconProps={closeIconProps}
 							onClick={toggleCollapsed}
 							ariaLabel="Close"
 						/>
 					</Title>
 				</AsideHeader>
-				<WorkflowContainer isCollapsed={isCollapsed}>
-					{children}
-				</WorkflowContainer>
+				<WorkflowContainer>{children}</WorkflowContainer>
 			</Aside>
 		)
 	},
 )
+
+function useCloseIconProps() {
+	const theme = useTheme()
+	return useMemo(
+		() => ({
+			iconName: 'Cancel',
+			styles: {
+				root: {
+					color: theme.palette.neutralPrimary,
+				},
+			},
+		}),
+		[theme],
+	)
+}

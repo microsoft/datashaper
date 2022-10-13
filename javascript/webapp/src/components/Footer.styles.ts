@@ -4,20 +4,18 @@
  */
 import styled from 'styled-components'
 
-export const FooterEl = styled.footer`
+export const Container = styled.footer`
 	width: 100%;
-`
-
-export const Container = styled.div`
-	width: 500px;
-	height: 20px;
+	height: 32px;
 	font-size: 12px;
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
+	gap: 18px;
 	align-items: center;
-	align-content: center;
-	justify-content: space-between;
-	margin: auto;
+	color: ${({ theme }) => theme.palette.neutralTertiary};
+	background: ${({ theme }) => theme.palette.neutralLight};
+	border-top: 1px solid ${({ theme }) => theme.palette.neutralTertiaryAlt};
 `
 
 export const constants = {

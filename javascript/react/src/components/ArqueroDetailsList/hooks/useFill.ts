@@ -96,25 +96,29 @@ function useVirtualColumns(
 			// TODO: this 20 is hard-coded padding in cellTitle
 			const totalFullWidth = totalMinWidth + totalCount * HEADER_WIDTH_PADDING
 			const averageMinWidth = totalMinWidth / totalCount
-			const count = size
-				? Math.ceil(
-						(size.width - totalFullWidth) /
-							(averageMinWidth + HEADER_WIDTH_PADDING),
-				  )
-				: 0
+			const fillWidth = size.width - totalFullWidth
+			const count = Math.ceil(
+				fillWidth / (averageMinWidth + HEADER_WIDTH_PADDING),
+			)
 			const template = {
 				fieldName: '',
-				minWidth: averageMinWidth,
 				data: {
 					virtual: true,
 				},
 			}
 			if (count > 0) {
-				const cols = new Array(count).fill(template).map((a, i) => ({
-					key: `---virtual-${i}---`,
-					name: `---virtual-${i}---`,
-					...a,
-				})) as IColumn[]
+				let remaining = fillWidth
+				const cols = new Array(count).fill(template).map((a, i) => {
+					remaining -= averageMinWidth + HEADER_WIDTH_PADDING
+					return {
+						key: `---virtual-${i}---`,
+						name: `---virtual-${i}---`,
+						// precisely fill the width by trimming the last column
+						minWidth:
+							remaining < 0 ? averageMinWidth + remaining : averageMinWidth,
+						...a,
+					}
+				}) as IColumn[]
 				return cols
 			}
 		}

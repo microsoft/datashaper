@@ -5,43 +5,42 @@
 import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
-	HistoryButton,
-	HistoryPanel,
+	DisplayOrder,
 	ProjectManagementCommandBar,
 	StepHistoryList,
 	TableCommands,
+	ToolPanel,
 	useManagementBarDefaults,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnSaveStep,
 	useWorkflowOutputListener,
 } from '@datashaper/react'
-import { TableListBar } from '@datashaper/react/src/components/TableListBar.js'
 import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
 import type { IColumn } from '@fluentui/react'
-import { useBoolean } from '@fluentui/react-hooks'
+import { CommandBar } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo, useState } from 'react'
 
+import { TableList } from './components/TableList.js'
 import {
+	useHistory,
 	useInputListener,
 	useStepListener,
 	useTables,
 } from './PrepareDataPage.hooks.js'
 import {
-	ButtonContainer,
-	Container,
 	DetailsListContainer,
-	Main,
-	OutputContainer,
+	DetailsListRowsContainer,
+	EditorContainer,
 	PageContainer,
 	PrepareDataContainer,
+	StepsListContainer,
 } from './PrepareDataPage.styles.js'
 
 export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
-	const [isCollapsed, { toggle: toggleCollapsed }] = useBoolean(true)
 	const [selectedTableId, setSelectedTableId] = useState<string | undefined>()
 	const [selectedColumn, setSelectedColumn] = useState<string | undefined>()
 
@@ -80,6 +79,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	)
 
 	const managementProps = useManagementBarDefaults()
+	const { historyCommandProps, isOpen, historyPanelProps } =
+		useHistory(workflow)
 	return (
 		<PageContainer className={'prepare-data-page'}>
 			<ProjectManagementCommandBar
@@ -91,73 +92,60 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 				onUpdateTables={onAddInputTables}
 			/>
 			<PrepareDataContainer>
-				<Container isCollapsed={isCollapsed}>
-					<Main>
-						<ButtonContainer>
-							<TableListBar
-								loading={false}
-								inputs={inputs}
-								derived={outputs}
-								selected={selectedTableId}
-								onSelect={setSelectedTableId}
-							/>
-							<HistoryButton
-								onClick={toggleCollapsed}
-								title="Steps"
-								steps={workflow?.steps?.length}
-								showText={true}
-								styles={{
-									root: { visibility: !isCollapsed ? 'hidden' : 'visible' },
-								}}
-							/>
-						</ButtonContainer>
-						<OutputContainer>
-							{selectedTable?.table && (
-								<DetailsListContainer>
-									<ArqueroTableHeader
-										commandBar={
-											<TableCommands
-												inputTable={selectedTable}
-												workflow={workflow}
-												onAddStep={onCreate}
-												selectedColumn={selectedColumn}
-												onRemoveStep={onDelete}
-											/>
-										}
-										name={tableName}
-										table={selectedTable?.table}
-									/>
-									<ArqueroDetailsList
-										sortable
-										compact
-										showColumnBorders
-										isHeaderFixed
-										clickableColumns={!!onColumnClick}
+				<TableList
+					loading={false}
+					inputs={inputs}
+					derived={outputs}
+					selected={selectedTableId}
+					onSelect={setSelectedTableId}
+				/>
+				{selectedTable?.table && (
+					<EditorContainer isOpen={isOpen}>
+						<DetailsListContainer>
+							<ArqueroTableHeader
+								commandBar={
+									<TableCommands
+										inputTable={selectedTable}
+										workflow={workflow}
+										onAddStep={onCreate}
 										selectedColumn={selectedColumn}
-										onColumnClick={onColumnClick}
-										metadata={selectedTable?.metadata}
-										table={selectedTable?.table}
-										features={{ smartHeaders: true }}
+										onRemoveStep={onDelete}
 									/>
-								</DetailsListContainer>
-							)}
-						</OutputContainer>
-					</Main>
-					<HistoryPanel
-						title="Steps"
-						isCollapsed={isCollapsed}
-						toggleCollapsed={toggleCollapsed}
-						steps={workflow.steps}
-						showStepCount
-					>
-						<StepHistoryList
-							onDelete={onDelete}
-							onSelect={setSelectedTableId}
-							workflow={workflow}
-							onSave={onSave}
-						/>
-					</HistoryPanel>
-				</Container>
+								}
+								farCommandBar={<CommandBar {...historyCommandProps} />}
+								name={tableName}
+								table={selectedTable?.table}
+							/>
+							<DetailsListRowsContainer>
+								<ArqueroDetailsList
+									sortable
+									compact
+									showColumnBorders
+									isHeaderFixed
+									fill
+									striped
+									clickableColumns={!!onColumnClick}
+									selectedColumn={selectedColumn}
+									onColumnClick={onColumnClick}
+									metadata={selectedTable?.metadata}
+									table={selectedTable?.table}
+									features={{ smartHeaders: true }}
+								/>
+							</DetailsListRowsContainer>
+						</DetailsListContainer>
+						<StepsListContainer>
+							<ToolPanel {...historyPanelProps}>
+								<StepHistoryList
+									onDelete={onDelete}
+									onSelect={setSelectedTableId}
+									workflow={workflow}
+									onSave={onSave}
+									order={DisplayOrder.FirstOnTop}
+								/>
+							</ToolPanel>
+						</StepsListContainer>
+					</EditorContainer>
+				)}
 			</PrepareDataContainer>
 		</PageContainer>
 	)

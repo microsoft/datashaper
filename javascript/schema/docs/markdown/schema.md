@@ -70,6 +70,7 @@
 |  [InputColumnArgs](./schema.inputcolumnargs.md) |  |
 |  [InputColumnListArgs](./schema.inputcolumnlistargs.md) | Base interface for a number of operations that work on a column list. |
 |  [InputColumnRecordArgs](./schema.inputcolumnrecordargs.md) |  |
+|  [InputKeyValueArgs](./schema.inputkeyvalueargs.md) |  |
 |  [JoinArgs](./schema.joinargs.md) |  |
 |  [JoinArgsBase](./schema.joinargsbase.md) |  |
 |  [LookupArgs](./schema.lookupargs.md) |  |
@@ -90,7 +91,6 @@
 |  [SpreadArgs](./schema.spreadargs.md) |  |
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
 |  [TypeHints](./schema.typehints.md) | Configuration values for interpreting data types when parsing a delimited file. By default, all values are read as strings - applying these type hints can derive primitive types from the strings. |
-|  [UnfoldArgs](./schema.unfoldargs.md) |  |
 |  [UnhotArgs](./schema.unhotargs.md) |  |
 |  [VariadicInput](./schema.variadicinput.md) | Multi-input, single output step I/O |
 |  [WindowArgs](./schema.windowargs.md) |  |
@@ -117,6 +117,7 @@
 |  [RenameArgs](./schema.renameargs.md) |  |
 |  [SelectArgs](./schema.selectargs.md) |  |
 |  [Step](./schema.step.md) | Specification for step items |
+|  [UnfoldArgs](./schema.unfoldargs.md) |  |
 |  [UnrollArgs](./schema.unrollargs.md) |  |
 |  [Value](./schema.value.md) | A cell/property value of any type. |
 

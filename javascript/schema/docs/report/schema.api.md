@@ -479,6 +479,14 @@ export interface InputColumnRecordArgs {
     columns: Record<string, string>;
 }
 
+// Warning: (ae-missing-release-tag) "InputKeyValueArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface InputKeyValueArgs {
+    key: string;
+    value: string;
+}
+
 // Warning: (ae-missing-release-tag) "JoinArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -704,13 +712,9 @@ export enum ParseType {
 // Warning: (ae-missing-release-tag) "PivotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface PivotArgs {
-    // (undocumented)
-    key: string;
+export interface PivotArgs extends InputKeyValueArgs {
     // (undocumented)
     operation: FieldAggregateOperation;
-    // (undocumented)
-    value: string;
 }
 
 // Warning: (ae-missing-release-tag) "PortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -952,12 +956,7 @@ export interface TypeHints {
 // Warning: (ae-missing-release-tag) "UnfoldArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface UnfoldArgs {
-    // (undocumented)
-    key: string;
-    // (undocumented)
-    value: string;
-}
+export type UnfoldArgs = InputKeyValueArgs;
 
 // Warning: (ae-missing-release-tag) "UnhotArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

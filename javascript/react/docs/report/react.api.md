@@ -7,6 +7,7 @@
 /// <reference types="react" />
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
+import type { CSSProperties } from 'react';
 import type { DropzoneOptions } from 'react-dropzone';
 import type { Field } from '@datashaper/schema';
 import { FileCollection } from '@datashaper/utilities';
@@ -24,6 +25,7 @@ import type { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
 import type { IDocumentCardStyles } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
+import type { IIconProps } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
@@ -296,8 +298,6 @@ export interface HistoryPanelProps {
     // (undocumented)
     children?: React.ReactNode;
     // (undocumented)
-    isCollapsed: boolean;
-    // (undocumented)
     showStepCount?: boolean;
     // (undocumented)
     steps?: Step[];
@@ -313,16 +313,6 @@ export interface HistoryPanelProps {
 //
 // @public (undocumented)
 export type MetadataClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined, metadata?: Field) => void;
-
-// Warning: (ae-missing-release-tag) "PanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface PanelProps {
-    // (undocumented)
-    onDismissPanel?: () => void;
-    // (undocumented)
-    panelIsOpen: boolean;
-}
 
 // Warning: (ae-missing-release-tag) "ProjectManagementCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -464,7 +454,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps>;
 // Warning: (ae-missing-release-tag) "StepHistoryListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflow'> {
+export interface StepHistoryListProps {
     // (undocumented)
     onDelete?: (index: number) => void;
     // (undocumented)
@@ -473,6 +463,13 @@ export interface StepHistoryListProps extends Pick<TableTransformProps, 'workflo
     onSelect?: (name: string) => void;
     // (undocumented)
     order?: DisplayOrder;
+    showSelectButtons?: boolean;
+    // Warning: (ae-forgotten-export) The symbol "StepHistoryStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    styles?: StepHistoryStyles;
+    // (undocumented)
+    workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -603,6 +600,34 @@ export interface TableTransformProps {
     toggleGuidance?: () => void;
     verbs?: string[];
     workflow: Workflow;
+}
+
+// Warning: (ae-missing-release-tag) "ToolPanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const ToolPanel: React.FC<React.PropsWithChildren<ToolPanelProps>>;
+
+// Warning: (ae-missing-release-tag) "ToolPanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ToolPanelProps {
+    // (undocumented)
+    closeIconProps?: IIconProps;
+    // (undocumented)
+    hasCloseButton?: boolean;
+    // (undocumented)
+    headerIconProps?: IIconProps;
+    // (undocumented)
+    headerText?: string;
+    // (undocumented)
+    onDismiss?: () => void;
+    // (undocumented)
+    styles?: {
+        root?: React_2.CSSProperties;
+        header?: React_2.CSSProperties;
+        title?: React_2.CSSProperties;
+        content?: React_2.CSSProperties;
+    };
 }
 
 // Warning: (ae-missing-release-tag) "Tooltip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

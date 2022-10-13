@@ -2,11 +2,18 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { ToolPanelProps } from '@datashaper/react'
+import {
+	useHeaderCommandBarDefaults,
+	useWorkflowSteps,
+} from '@datashaper/react'
 import type { TableContainer } from '@datashaper/tables'
 import { introspect } from '@datashaper/tables'
 import { renameDuplicatedFileName } from '@datashaper/utilities'
 import type { Workflow } from '@datashaper/workflow'
-import { useCallback, useEffect, useState } from 'react'
+import type { ICommandBarProps } from '@fluentui/react'
+import { useBoolean } from '@fluentui/react-hooks'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 export function useTables(setSelectedTableId: (id: string) => void): {
 	tables: TableContainer[]
@@ -73,4 +80,46 @@ export function useInputListener(
 		},
 		[workflow, inputs],
 	)
+}
+
+export function useHistory(workflow: Workflow): {
+	historyCommandProps: ICommandBarProps
+	historyPanelProps: ToolPanelProps
+	isOpen: boolean
+} {
+	const [isOpen, { toggle: onDismissHistoryPanel }] = useBoolean(false)
+	const steps = useWorkflowSteps(workflow)
+	const commandProps = useMemo(
+		() =>
+			({
+				items: [
+					{
+						key: 'history',
+						text: `(${steps.length})`,
+						iconProps: {
+							iconName: 'Clock',
+						},
+						checked: isOpen,
+						onClick: () => onDismissHistoryPanel(),
+					},
+				],
+			} as ICommandBarProps),
+		[steps, isOpen, onDismissHistoryPanel],
+	)
+	const historyCommandProps = useHeaderCommandBarDefaults(commandProps, true)
+	const historyPanelProps = useMemo(
+		() => ({
+			headerText: `Workflow steps (${steps.length})`,
+			headerIconProps: {
+				iconName: 'History',
+			},
+			onDismiss: onDismissHistoryPanel,
+		}),
+		[onDismissHistoryPanel, steps],
+	)
+	return {
+		historyCommandProps,
+		isOpen,
+		historyPanelProps,
+	}
 }

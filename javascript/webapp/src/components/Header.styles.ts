@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 // always ensure the header is dark, regardless of mode
 export const Container = styled.div`
-	padding: 4px 16px 4px 16px;
+	padding: 0 16px 0 16px;
 	background: ${({ theme }) =>
 		theme.isInverted
 			? theme.palette.neutralQuaternary
@@ -21,7 +21,7 @@ export const Container = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	align-content: center;
+	height: 42px;
 `
 
 export const Title = styled.h1`
@@ -34,18 +34,13 @@ export const Title = styled.h1`
 		theme.isInverted
 			? theme.palette.neutralSecondary
 			: theme.palette.neutralTertiaryAlt};
-	width: 70%;
 `
 
 export const StyledFontIcon = styled(FontIcon)`
-	font-size: 20px;
-	height: 20px;
-	width: 20px;
+	font-size: 18px;
+	height: 18px;
+	width: 18px;
 	cursor: pointer;
 	color: ${({ theme }) =>
 		theme.isInverted ? theme.palette.neutralPrimary : theme.palette.white};
-`
-
-export const Spacer = styled.div`
-	flex: 1;
 `

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-unfold: (id: string) => import("../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, UnfoldArgs>
+unfold: (id: string) => import("../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, import("@datashaper/schema").InputKeyValueArgs>
 ```

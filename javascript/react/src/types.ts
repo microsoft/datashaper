@@ -115,4 +115,5 @@ export interface CommandBarColors {
 	background: string
 	border: string
 	disabled: string
+	checked: string
 }
