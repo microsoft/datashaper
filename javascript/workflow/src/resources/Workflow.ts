@@ -13,8 +13,8 @@ import {
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable, Subscription } from 'rxjs'
-import { BehaviorSubject, of } from 'rxjs'
+import type { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, map , of } from 'rxjs'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
@@ -31,7 +31,6 @@ import type { SchemaResource } from './types.js'
  * The workflow object manages mutable data for a workflow specification
  */
 export type TableObservable = Observable<Maybe<TableContainer>>
-type TableSubject = BehaviorSubject<Maybe<TableContainer>>
 
 export class Workflow
 	extends Resource
@@ -39,14 +38,14 @@ export class Workflow
 {
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
 	// Workflow Data Fields
-	private _steps: Step[] = []
-	private readonly _inputNames: Set<string> = new Set()
-	private readonly _outputPorts: Map<string, NamedOutputPortBinding> = new Map()
-
-	private _lastStepSubscription: Subscription | undefined
-	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
-		undefined,
-	)
+	private readonly _steps: BehaviorSubject<Step[]> = new BehaviorSubject<
+		Step[]
+	>([])
+	private readonly _inputNames: BehaviorSubject<string[]> = new BehaviorSubject<
+		string[]
+	>([])
+	private readonly _outputPorts: BehaviorSubject<NamedOutputPortBinding[]> =
+		new BehaviorSubject<NamedOutputPortBinding[]>([])
 
 	// Graph Workflow Details
 	// The dataflow graph
@@ -55,8 +54,14 @@ export class Workflow
 	//
 	// Output tracking - observables, data cache, subscriptions
 	//
-	private readonly _inputs: Map<string, TableSubject> = new Map()
-	private readonly _outputs: Map<string, TableSubject> = new Map()
+	private readonly _tables: Map<
+		string,
+		BehaviorSubject<Maybe<TableContainer>>
+	> = new Map()
+	private _lastStepSubscription: Subscription | undefined
+	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
 
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
@@ -79,6 +84,37 @@ export class Workflow
 		this.configureStep(step, node)
 	}
 
+	/**
+	 * Observe an output name
+	 * @param name - The output to observe. If falsy, this will observe the default output of the final step.
+	 * If no observable is ready yet, a new observable will be created
+	 */
+	public read(name?: string): Maybe<TableContainer> {
+		return this._read(name).value
+	}
+
+	/**
+	 * Observe an output name
+	 * @param name - The output to observe. If falsy, this will observe the default output of the final step.
+	 * If no observable is ready yet, a new observable will be created
+	 */
+	public read$(name?: string): Observable<Maybe<TableContainer>> {
+		return this._read(name)
+	}
+
+	private _read(name?: string) {
+		if (name === undefined) {
+			return this._defaultOutput
+		}
+		if (!this._tables.has(name)) {
+			this._tables.set(
+				name,
+				new BehaviorSubject<Maybe<TableContainer>>(undefined),
+			)
+		}
+		return this._tables.get(name)!
+	}
+
 	private getNode(id: string): Node<TableContainer> {
 		const graph = this._graph
 		// bind to an input defined in the graph
@@ -86,15 +122,7 @@ export class Workflow
 			const result = graph.node(id)
 			return result
 		} else if (this.hasInputName(id)) {
-			// create a new subject that we can pipe data into
-			if (!this._inputs.has(id)) {
-				this._inputs.set(
-					id,
-					new BehaviorSubject<Maybe<TableContainer>>(undefined),
-				)
-			}
-			const source = this._inputs.get(id)!
-			return observableNode(id, source)
+			return observableNode(id, this.read$(id))
 		} else {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}
@@ -102,31 +130,32 @@ export class Workflow
 	// #endregion
 
 	// #region Inputs
-	public get inputNames(): Set<string> {
+	public get inputNames(): string[] {
+		return this._inputNames.value
+	}
+
+	public get inputNames$(): Observable<string[]> {
 		return this._inputNames
 	}
 
-	public get inputs(): Map<string, TableSubject> {
-		return this._inputs
-	}
-
 	public addInputName(input: string): void {
-		this._inputNames.add(input)
+		if (this.hasInputName(input)) {
+			return
+		}
+		this._inputNames.next([...this._inputNames.value, input])
 		this._onChange.next()
 	}
 
 	public removeInputName(input: string): void {
-		this._inputNames.delete(input)
-		this._inputs.delete(input)
+		if (!this.hasInputName(input)) {
+			return
+		}
+		this._inputNames.next([...this._inputNames.value].filter(i => i !== input))
 		this._onChange.next()
 	}
 
 	public hasInputName(input: string): boolean {
-		return this._inputNames.has(input)
-	}
-
-	public getInputTable(name: string): Maybe<TableContainer> {
-		return this._inputs.get(name)?.value
+		return this.inputNames.some(i => i === input)
 	}
 
 	/**
@@ -168,7 +197,7 @@ export class Workflow
 		if (this._graph.hasNode(id)) {
 			this._graph.remove(id)
 		}
-		this._inputs.delete(id)
+		this._tables.delete(id)
 	}
 
 	/**
@@ -190,7 +219,7 @@ export class Workflow
 		this._removeInputObservable(id)
 		const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
 		source.subscribe(s => subject.next(s))
-		this._inputs.set(id, subject)
+		this._tables.set(id, subject)
 		this._graph.add(observableNode(id, source))
 	}
 
@@ -207,16 +236,8 @@ export class Workflow
 	// #endregion
 
 	// #region Outputs
-	public hasOutput(name: string): boolean {
-		return this._outputPorts.has(name)
-	}
-
 	public hasOutputName(name: string): boolean {
-		const names = []
-		for (const [, binding] of this._outputPorts.entries()) {
-			names.push(binding.name)
-		}
-		return names.includes(name)
+		return this.outputNames.some(i => i === name)
 	}
 
 	public suggestOutputName(name: string): string {
@@ -224,14 +245,18 @@ export class Workflow
 		let derivedName = originalName
 		let count = 1
 
-		while (this.hasOutput(derivedName)) {
+		while (this.hasOutputName(derivedName)) {
 			derivedName = `${originalName} (${count})`
 			count++
 		}
 		return derivedName
 	}
 
-	public get outputPorts(): Map<string, NamedOutputPortBinding> {
+	public get outputPorts(): NamedOutputPortBinding[] {
+		return this._outputPorts.value
+	}
+
+	public get outputPorts$(): Observable<NamedOutputPortBinding[]> {
 		return this._outputPorts
 	}
 
@@ -239,13 +264,14 @@ export class Workflow
 	 * Gets the output table names
 	 */
 	public get outputNames(): string[] {
-		// todo: memoize
-		return [...this._outputPorts.keys()]
+		return this.outputPorts.map(p => p.name)
 	}
 
-	public get outputDefinitions(): NamedOutputPortBinding[] {
-		// todo: memoize
-		return [...this._outputPorts.values()]
+	/**
+	 * Gets the output table names
+	 */
+	public get outputNames$(): Observable<string[]> {
+		return this._outputPorts.pipe(map(ports => ports.map(p => p.name)))
 	}
 
 	/**
@@ -253,7 +279,10 @@ export class Workflow
 	 * @param binding - The output binding
 	 */
 	public addOutput(output: NamedOutputPortBinding): void {
-		this._outputPorts.set(output.node, output)
+		if (this.hasOutputName(output.name)) {
+			throw new Error('new output name must be unique')
+		}
+		this._outputPorts.next([...this._outputPorts.value, output])
 		this.observeOutput(output)
 		this._onChange.next()
 	}
@@ -263,62 +292,28 @@ export class Workflow
 	 * @param name - the output name to remove
 	 */
 	public removeOutput(name: string): void {
-		this._outputPorts.delete(name)
-		this._outputs.delete(name)
+		this._outputPorts.next(this.outputPorts.filter(t => t.name !== name))
+		this._tables.delete(name)
 		this._onChange.next()
 	}
 
-	/**
-	 * Observe an output name
-	 * @param name - The output to observe. If falsy, this will observe the default output of the final step.
-	 */
-	public outputObservable(name?: string): Maybe<TableObservable> {
-		if (name != null) {
-			return this._outputs.get(name)
-		} else {
-			return this._defaultOutput
-		}
-	}
-
-	/**
-	 * Get the latest output value
-	 * @param name - The output to retrieve.  If falsy, this will observe the default output of the final step.
-	 */
-	public latestOutput(name?: string): Maybe<TableContainer> {
-		if (name != null) {
-			return this._outputs.get(name)?.value
-		} else {
-			return this._defaultOutput.value
-		}
-	}
-
-	private lastStepOutput(): Maybe<TableSubject> {
+	private lastStepOutput(): Maybe<BehaviorSubject<Maybe<TableContainer>>> {
+		const steps = this.steps
 		// Returns the default output of the final node
-		if (this.length === 0) return undefined
-		const lastStepId = this.steps[this.steps.length - 1]!.id
+		if (steps.length === 0) return undefined
+		const lastStepId = steps[steps.length - 1]!.id
 		const lastNode = this.getNode(lastStepId)
 		// Nodes use BehaviorSubject internally
-		return lastNode.output() as TableSubject
+		return lastNode.output() as BehaviorSubject<Maybe<TableContainer>>
 	}
 
-	public outputObservableForNode(
+	public nodeOutput(
 		nodeId: string,
-		nodeOutput?: string,
-	): Maybe<TableSubject> {
-		const output = this.outputNameForNode(nodeId, nodeOutput)
+		port?: string,
+	): Maybe<Observable<Maybe<TableContainer>>> {
+		const output = this.outputNameForNode(nodeId, port)
 		if (output) {
-			// Nodes use BehaviorSubject internally
-			return this.outputObservable(output) as TableSubject
-		}
-	}
-
-	public latestOutputForNode(
-		nodeId: string,
-		nodeOutput?: string,
-	): Maybe<TableContainer> {
-		const output = this.outputNameForNode(nodeId, nodeOutput)
-		if (output) {
-			return this.latestOutput(output)
+			return this.read$(output)
 		}
 	}
 
@@ -326,32 +321,28 @@ export class Workflow
 		nodeId: string,
 		nodeOutput?: string,
 	): string | undefined {
-		return this.outputDefinitions.find(
+		return this.outputPorts.find(
 			def => def.node === nodeId && def.output === nodeOutput,
 		)?.name
-	}
-
-	private observeOutput({
-		name,
-		output,
-		node: nodeId,
-	}: NamedOutputPortBinding) {
-		// BaseNode uses BehaviorSubject internally, which saves us some work
-		const port = this.getNode(nodeId).output(output) as BehaviorSubject<
-			Maybe<TableContainer>
-		>
-		this._outputs.set(name, port)
 	}
 
 	// #endregion
 
 	// #region Steps
 	public get steps(): Step[] {
+		return this._steps.value
+	}
+
+	public get steps$(): BehaviorSubject<Step[]> {
 		return this._steps
 	}
 
 	public get length(): number {
-		return this._steps.length
+		return this._steps.value.length
+	}
+
+	public get length$(): Observable<number> {
+		return this._steps.pipe(map(steps => steps.length))
 	}
 
 	/**
@@ -359,12 +350,13 @@ export class Workflow
 	 * @param step - the step to add
 	 */
 	public addStep(stepInput: StepInput): Step {
+		const steps = this._steps.value
 		const step = readStep(
 			stepInput,
-			this._steps.length > 0 ? this.steps[this.steps.length - 1] : undefined,
+			steps.length > 0 ? steps[steps.length - 1] : undefined,
 		)
 		// mutate the steps so that equality checks will detect that the steps changed (e.g. memo, hook deps)
-		this._steps = [...this.steps, step]
+		this._steps.next([...steps, step])
 		this.addWorkflowStepToGraph(step)
 
 		// Use this new step's output as the default output for the workflow
@@ -375,9 +367,10 @@ export class Workflow
 	}
 
 	public removeStep(index: number): void {
-		const step = this.steps[index]!
-		const prevStep = index > 0 ? this.steps[index - 1] : undefined
-		const nextStep = index + 1 < this.length ? this.steps[index + 1] : undefined
+		const steps = this.steps
+		const step = steps[index]!
+		const prevStep = index > 0 ? steps[index - 1] : undefined
+		const nextStep = index + 1 < this.length ? steps[index + 1] : undefined
 		const node = this.getNode(step.id)
 
 		// If step was auto-bound, try to wire together the prev and next steps
@@ -394,30 +387,26 @@ export class Workflow
 		}
 
 		// Remove step outputs from the configuration
-		const stepOutputs = this.outputDefinitions.filter(o => o.node === node.id)
+		const stepOutputs = this.outputPorts.filter(o => o.node === node.id)
 		stepOutputs.forEach(o => this.removeOutput(o.node))
 
 		// Remove the step from the graph
 		this._graph.remove(step.id)
 
-		this._steps = [
-			...this.steps.slice(0, index),
-			...this.steps.slice(index + 1),
-		]
-		this._onChange.next()
-
+		this._steps.next([...steps.slice(0, index), ...steps.slice(index + 1)])
 		this._onChange.next()
 	}
 
 	public updateStep(stepInput: StepInput, index: number): Step {
-		const prevVersion = this.steps[index]!
-		const step = readStep(stepInput, this._steps[index - 1])
+		const steps = this.steps
+		const prevVersion = steps[index]!
+		const step = readStep(stepInput, steps[index - 1])
 		const node = this.getNode(step.id)
-		this._steps = [
-			...this.steps.slice(0, index),
+		this._steps.next([
+			...steps.slice(0, index),
 			step,
-			...this.steps.slice(index + 1),
-		]
+			...steps.slice(index + 1),
+		])
 
 		// todo: handle rename. Add graph.rename(nodeId) method
 		if (prevVersion.id !== step.id) {
@@ -480,12 +469,9 @@ export class Workflow
 	public toMap(includeInputs = false): Map<string, Maybe<TableContainer>> {
 		const result = new Map<string, Maybe<TableContainer>>()
 		if (includeInputs) {
-			for (const [name, observable] of this._inputs) {
+			for (const [name, observable] of this._tables) {
 				result.set(name, observable.value)
 			}
-		}
-		for (const [name, observable] of this._outputs) {
-			result.set(name, observable.value)
 		}
 		return result
 	}
@@ -493,25 +479,18 @@ export class Workflow
 	public toArray(includeInputs = false): Maybe<TableContainer>[] {
 		const result: Maybe<TableContainer>[] = []
 		if (includeInputs) {
-			for (const [, observable] of this._inputs) {
+			for (const [, observable] of this._tables) {
 				result.push(observable.value)
 			}
-		}
-		for (const [, observable] of this._outputs) {
-			result.push(observable.value)
 		}
 		return result
 	}
 
 	public override toSchema(): WorkflowSchema {
-		const output: WorkflowSchema['output'] = []
-		for (const [, binding] of this._outputPorts.entries()) {
-			output.push({ ...binding })
-		}
 		return createWorkflowSchemaObject({
 			...super.toSchema(),
-			input: [...this._inputNames.values()],
-			output,
+			input: [...this.inputNames],
+			output: [...this.outputPorts],
 			steps: [...this.steps] as any,
 		})
 	}
@@ -531,22 +510,14 @@ export class Workflow
 
 	private readWorkflowInput(schema?: WorkflowSchema | null | undefined) {
 		let prev: Step | undefined
-
-		/** remove any existing output pipe */
-		this._steps = []
-		schema?.steps?.forEach(i => {
+		const newSteps = schema?.steps?.map(i => {
 			const step = readStep(i as StepInput, prev)
-			this._steps.push(step)
 			prev = step
+			return step
 		})
-
-		this._outputPorts.clear()
-		this._inputNames.clear()
-		schema?.input?.forEach(i => this._inputNames.add(i))
-		schema?.output?.forEach(o => {
-			const binding = fixOutput(o)
-			this._outputPorts.set(binding.name, binding)
-		})
+		this._steps.next(newSteps ?? [])
+		this._inputNames.next(unique(schema?.input ?? []))
+		this._outputPorts.next(schema?.output?.map(o => fixOutput(o)) ?? [])
 	}
 
 	/**
@@ -557,9 +528,20 @@ export class Workflow
 		for (const step of this.steps) {
 			this.addWorkflowStepToGraph(step)
 		}
-		for (const value of this.outputPorts.values()) {
-			this.observeOutput(value)
+		for (const port of this.outputPorts.values()) {
+			this.observeOutput(port)
 		}
+	}
+
+	private observeOutput({
+		name,
+		output,
+		node: nodeId,
+	}: NamedOutputPortBinding) {
+		const node = this.getNode(nodeId)
+		// BaseNode uses BehaviorSubject internally, which saves us some work
+		const val = node.output(output) as BehaviorSubject<Maybe<TableContainer>>
+		this._tables.set(name, val)
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
@@ -581,4 +563,8 @@ function hasDefinedInputs(step: Step): boolean {
 
 function hasPossibleInputs(node: Node<unknown>) {
 	return node.inputs.length > 0
+}
+
+function unique<T>(arr: T[]): T[] {
+	return [...new Set(arr).values()]
 }

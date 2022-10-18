@@ -4125,6 +4125,7 @@ __metadata:
     immer: ^9.0.15
     lodash-es: ^4.17.21
     markdown-to-jsx: ^7.1.7
+    observable-hooks: ^4.2.1
     react: ^18.2.0
     react-dom: ^18.2.0
     react-dropzone: ^12.1.0
@@ -18913,6 +18914,17 @@ __metadata:
   version: 1.0.5
   resolution: "objectorarray@npm:1.0.5"
   checksum: 8fd776aa495d113e217837f4adc1d53e63f656498237094d25f84c3e2c038b34b71d6fd85c4b60c7ae5f558790e5042426a400fae3eac35f297e11be12643a78
+  languageName: node
+  linkType: hard
+
+"observable-hooks@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "observable-hooks@npm:4.2.1"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+    rxjs: ">=6.0.0"
+  checksum: 2390fb3010d2249278e2280b9e87b565ea051eb810da393f2ef0886ed9415ab40e372f3d848e405b446b82684b6cf9cdec733e2afd84140bbd708d24a08a3094
   languageName: node
   linkType: hard
 

@@ -35,9 +35,7 @@ export class DataTable
 	private readonly _source = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
 	private readonly _inputs: Map<string, Observable<Maybe<TableContainer>>> =
 		new Map()
-	private readonly _output = new BehaviorSubject<Maybe<TableContainer>>(
-		undefined,
-	)
+	private readonly _output: BehaviorSubject<Maybe<TableContainer>>
 
 	public readonly parser: ParserOptions = new ParserOptions()
 	public readonly shape: DataShape = new DataShape()
@@ -61,8 +59,7 @@ export class DataTable
 		this.workflow.onChange(() => this._onChange.next())
 
 		// listen for workflow execution outputs
-		this._workflowExecutor.output.subscribe(tbl => this._output.next(tbl))
-
+		this._output = this._workflowExecutor.output
 		this.loadSchema(datatable)
 	}
 

@@ -49,7 +49,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			[onAddStep, dismissModal, index],
 		)
 		const onUndoStep = useCallback(() => {
-			onRemoveStep && onRemoveStep(workflow.steps.length - 1)
+			onRemoveStep?.(workflow.length - 1)
 		}, [onRemoveStep, workflow])
 
 		const onCallStep = useCallback(
@@ -80,9 +80,10 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			],
 		)
 
-		const allTablesLength = useMemo((): number => {
-			return workflow.outputNames.length + workflow.inputNames.size
-		}, [workflow])
+		const allTablesLength = useMemo(
+			(): number => workflow.outputNames.length + workflow.inputNames.length,
+			[workflow],
+		)
 
 		const columnCommands = useColumnCommands(
 			onCallStep,
@@ -98,7 +99,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 		)
 		const undoCommands = useUndoCommands(
 			onUndoStep,
-			workflow.steps.length < 1,
+			workflow.length < 1,
 			color,
 			background,
 		)
@@ -116,7 +117,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 						hideOutput
 						target={`#${modalTarget}`}
 						step={step}
-						index={index ?? workflow.steps.length}
+						index={index ?? workflow.length}
 						onTransformRequested={onTransformRequested}
 						workflow={workflow}
 						onDismiss={dismissModal}
