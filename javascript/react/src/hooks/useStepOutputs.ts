@@ -4,6 +4,7 @@
  */
 import type { Workflow } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
+import { useMemo } from 'react'
 import { map } from 'rxjs'
 
 /**
@@ -16,8 +17,8 @@ export function useStepOutputs(
 	workflow: Workflow,
 	defaultOutputName?: (index: number) => string,
 ): Array<string | undefined> {
-	return (
-		useObservableState(
+	const observable = useMemo(
+		() =>
 			workflow.steps$.pipe(
 				map(steps =>
 					steps
@@ -28,8 +29,10 @@ export function useStepOutputs(
 						}),
 				),
 			),
-		) ?? EMPTY
+		[workflow, defaultOutputName],
 	)
+
+	return useObservableState(observable) ?? EMPTY
 }
 
 const EMPTY: string[] = []

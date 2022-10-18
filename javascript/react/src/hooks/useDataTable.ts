@@ -5,6 +5,7 @@
 import type { Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useObservableState } from 'observable-hooks'
+import { useMemo } from 'react'
 import { from, map } from 'rxjs'
 
 export function useDataTable(
@@ -12,7 +13,9 @@ export function useDataTable(
 	workflow?: Workflow,
 	existingTable?: ColumnTable,
 ): ColumnTable | undefined {
-	const observable =
-		workflow?.read$(id).pipe(map(t => t?.table)) ?? from([existingTable])
+	const observable = useMemo(
+		() => workflow?.read$(id).pipe(map(t => t?.table)) ?? from([existingTable]),
+		[workflow, id, existingTable],
+	)
 	return useObservableState(observable, () => existingTable)
 }

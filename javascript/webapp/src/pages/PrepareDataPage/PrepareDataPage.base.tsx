@@ -49,7 +49,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 	const [outputs, setOutputs] = useState<TableContainer[]>([])
 
 	// state for the input tables
-	const [workflow, setWorkflow] = useState<Workflow>(new Workflow())
+	const [workflow, setWorkflow] = useState<Workflow>(() => new Workflow())
 
 	const selectedTable = inputs
 		.concat(outputs)
