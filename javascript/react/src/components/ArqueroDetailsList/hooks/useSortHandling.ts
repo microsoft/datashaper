@@ -21,7 +21,7 @@ export function useSortHandling(
 	allowSorting: boolean,
 	onColumnHeaderClick: ColumnClickFunction = noop,
 	defaultSortColumn?: string,
-	defaultSortDirection?: SortDirection,
+	defaultSortDirection: SortDirection = SortDirection.Ascending,
 ): SortParameters {
 	const [sortColumn, setSortColumn] = useState<string | undefined>(
 		defaultSortColumn,

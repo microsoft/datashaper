@@ -29,6 +29,8 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 			selectedColumn={selected}
 			onColumnClick={(_e, c) => setSelected(c?.name)}
 			clickableColumns
+			sortable
+			defaultSortColumn="Date"
 		/>
 	)
 }

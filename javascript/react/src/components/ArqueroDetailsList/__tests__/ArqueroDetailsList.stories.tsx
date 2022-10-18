@@ -24,5 +24,6 @@ export const Features = FeaturesStory
 export const Fill = FillStory
 export const Columns = ColumnsStory
 export const Selection = SelectionStory
+Selection.storyName = 'Selection & sorting'
 export const RowGrouping = RowGroupingStory
 export const Performance = PerformanceStory
