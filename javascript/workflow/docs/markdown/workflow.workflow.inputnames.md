@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get inputNames(): Set<string>;
+get inputNames(): string[];
 ```

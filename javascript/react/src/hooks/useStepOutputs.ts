@@ -23,9 +23,7 @@ export function useStepOutputs(
 					steps
 						.map(s => s.id)
 						.map((id, index) => {
-							const output = workflow.outputDefinitions.find(
-								def => def.node === id,
-							)
+							const output = workflow.outputPorts.find(def => def.node === id)
 							return output?.name ?? defaultOutputName?.(index)
 						}),
 				),

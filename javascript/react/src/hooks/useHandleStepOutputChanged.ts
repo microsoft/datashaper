@@ -19,7 +19,7 @@ export function useHandleStepOutputChanged(
 	return useCallback(
 		(step: Step, output: string | undefined) => {
 			// remove any existing output
-			const spec = workflow.outputDefinitions.find(def => def.node === step.id)
+			const spec = workflow.outputPorts.find(def => def.node === step.id)
 			if (spec) {
 				workflow.removeOutput(spec.name)
 			}

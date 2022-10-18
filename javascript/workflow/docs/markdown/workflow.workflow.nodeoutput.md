@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-nodeOutput(nodeId: string, port?: string): Maybe<BehaviorSubject<Maybe<TableContainer>>>;
+nodeOutput(nodeId: string, port?: string): Maybe<Observable<Maybe<TableContainer>>>;
 ```
 
 ## Parameters
@@ -19,5 +19,5 @@ nodeOutput(nodeId: string, port?: string): Maybe<BehaviorSubject<Maybe<TableCont
 
 <b>Returns:</b>
 
-[Maybe](./workflow.maybe.md)<!-- -->&lt;BehaviorSubject&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt;&gt;
+[Maybe](./workflow.maybe.md)<!-- -->&lt;Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt;&gt;
 

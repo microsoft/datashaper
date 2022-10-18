@@ -82,7 +82,7 @@ export function useInputTableChanged(
 			if (val != null) {
 				// determine the node id to subscribe from
 				const tableName = val as string
-				const outputNode = workflow?.outputDefinitions.find(
+				const outputNode = workflow?.outputPorts.find(
 					o => o.name === (tableName as string),
 				)?.node
 

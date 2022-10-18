@@ -834,25 +834,29 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     hasInputName(input: string): boolean;
     // (undocumented)
-    hasOutput(name: string): boolean;
-    // (undocumented)
     hasOutputName(name: string): boolean;
     // (undocumented)
-    get inputNames(): Set<string>;
+    get inputNames$(): Observable<string[]>;
+    // (undocumented)
+    get inputNames(): string[];
+    // (undocumented)
+    get length$(): Observable<number>;
     // (undocumented)
     get length(): number;
     // (undocumented)
     loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
     // (undocumented)
-    nodeOutput(nodeId: string, port?: string): Maybe<BehaviorSubject<Maybe<TableContainer>>>;
-    // (undocumented)
-    get outputDefinitions(): NamedOutputPortBinding[];
+    nodeOutput(nodeId: string, port?: string): Maybe<Observable<Maybe<TableContainer>>>;
     // (undocumented)
     outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
+    get outputNames$(): Observable<string[]>;
     get outputNames(): string[];
     // (undocumented)
-    get outputPorts(): Map<string, NamedOutputPortBinding>;
-    read(name?: string): BehaviorSubject<Maybe<TableContainer>>;
+    get outputPorts$(): Observable<NamedOutputPortBinding[]>;
+    // (undocumented)
+    get outputPorts(): NamedOutputPortBinding[];
+    read$(name?: string): Observable<Maybe<TableContainer>>;
+    read(name?: string): Maybe<TableContainer>;
     // (undocumented)
     removeInputName(input: string): void;
     // (undocumented)
@@ -860,6 +864,8 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     removeOutput(name: string): void;
     // (undocumented)
     removeStep(index: number): void;
+    // (undocumented)
+    get steps$(): BehaviorSubject<Step[]>;
     // (undocumented)
     get steps(): Step[];
     // (undocumented)
