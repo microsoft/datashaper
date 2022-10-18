@@ -43,11 +43,6 @@ export class Workflow
 	private readonly _inputNames: Set<string> = new Set()
 	private readonly _outputPorts: Map<string, NamedOutputPortBinding> = new Map()
 
-	private _lastStepSubscription: Subscription | undefined
-	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
-		undefined,
-	)
-
 	// Graph Workflow Details
 	// The dataflow graph
 	private readonly _graph: Graph<TableContainer> = new DefaultGraph()
@@ -57,6 +52,10 @@ export class Workflow
 	//
 	private readonly _inputs: Map<string, TableSubject> = new Map()
 	private readonly _outputs: Map<string, TableSubject> = new Map()
+	private _lastStepSubscription: Subscription | undefined
+	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
+	)
 
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
@@ -331,18 +330,6 @@ export class Workflow
 		)?.name
 	}
 
-	private observeOutput({
-		name,
-		output,
-		node: nodeId,
-	}: NamedOutputPortBinding) {
-		// BaseNode uses BehaviorSubject internally, which saves us some work
-		const port = this.getNode(nodeId).output(output) as BehaviorSubject<
-			Maybe<TableContainer>
-		>
-		this._outputs.set(name, port)
-	}
-
 	// #endregion
 
 	// #region Steps
@@ -557,8 +544,11 @@ export class Workflow
 		for (const step of this.steps) {
 			this.addWorkflowStepToGraph(step)
 		}
-		for (const value of this.outputPorts.values()) {
-			this.observeOutput(value)
+		for (const { name, output, node: nodeId } of this.outputPorts.values()) {
+			const node = this.getNode(nodeId)
+			// BaseNode uses BehaviorSubject internally, which saves us some work
+			const val = node.output(output) as BehaviorSubject<Maybe<TableContainer>>
+			this._outputs.set(name, val)
 		}
 	}
 
