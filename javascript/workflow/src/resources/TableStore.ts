@@ -10,7 +10,7 @@ import { Observed } from './Observed.js'
 
 export class TableStore extends Observed {
 	private _tables: Map<string, DataTable> = new Map()
-	private _tablesObservable = new BehaviorSubject<DataTable[]>([])
+	public tablesObservable = new BehaviorSubject<DataTable[]>([])
 
 	public add(table: DataTable): void {
 		let { name } = table
@@ -48,12 +48,8 @@ export class TableStore extends Observed {
 		this._emitTables()
 	}
 
-	public get tables(): BehaviorSubject<DataTable[]> {
-		return this._tablesObservable
-	}
-
 	private _emitTables(): void {
-		this._tablesObservable.next([...this._tables.values()])
+		this.tablesObservable.next([...this._tables.values()])
 		this._onChange.next()
 	}
 }
