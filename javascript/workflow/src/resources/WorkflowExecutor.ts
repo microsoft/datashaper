@@ -55,7 +55,7 @@ export class WorkflowExecutor {
 				this._workflowSubscription.unsubscribe()
 
 			if (this.workflow.length > 0) {
-				this._workflowSubscription = this.workflow.table()?.subscribe(tbl => {
+				this._workflowSubscription = this.workflow.read()?.subscribe(tbl => {
 					this._outputTable = tbl?.table
 					this.emit()
 				})

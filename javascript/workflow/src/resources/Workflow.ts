@@ -82,7 +82,7 @@ export class Workflow
 	 * @param name - The output to observe. If falsy, this will observe the default output of the final step.
 	 * If no observable is ready yet, a new observable will be created
 	 */
-	public table(name?: string): BehaviorSubject<Maybe<TableContainer>> {
+	public read(name?: string): BehaviorSubject<Maybe<TableContainer>> {
 		if (name === undefined) {
 			return this._defaultOutput
 		}
@@ -102,7 +102,7 @@ export class Workflow
 			const result = graph.node(id)
 			return result
 		} else if (this.hasInputName(id)) {
-			return observableNode(id, this.table(id))
+			return observableNode(id, this.read(id))
 		} else {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}
@@ -282,7 +282,7 @@ export class Workflow
 	): Maybe<BehaviorSubject<Maybe<TableContainer>>> {
 		const output = this.outputNameForNode(nodeId, port)
 		if (output) {
-			return this.table(output)
+			return this.read(output)
 		}
 	}
 
