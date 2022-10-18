@@ -13,6 +13,6 @@ export function useDataTable(
 	existingTable?: ColumnTable,
 ): ColumnTable | undefined {
 	const observable =
-		workflow?.table(id).pipe(map(t => t?.table)) ?? from([existingTable])
+		workflow?.read(id).pipe(map(t => t?.table)) ?? from([existingTable])
 	return useObservableState(observable, () => existingTable)
 }

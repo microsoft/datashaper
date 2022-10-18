@@ -17,7 +17,6 @@ import type { Workflow } from './Workflow.js'
  */
 export class WorkflowExecutor {
 	private _workflowSubscription?: Subscription
-	private _outputTable: Maybe<ColumnTable>
 
 	/**
 	 * The output of the workflow execution, or of the input source if no
@@ -44,8 +43,7 @@ export class WorkflowExecutor {
 			if (this.workflow.length > 0) {
 				this.rebindWorkflowInput()
 			} else {
-				this._outputTable = table
-				this.emit()
+				this.output.next({ table, id: this._name })
 			}
 		})
 
@@ -55,21 +53,15 @@ export class WorkflowExecutor {
 				this._workflowSubscription.unsubscribe()
 
 			if (this.workflow.length > 0) {
-				this._workflowSubscription = this.workflow.read()?.subscribe(tbl => {
-					this._outputTable = tbl?.table
-					this.emit()
-				})
+				this._workflowSubscription = this.workflow
+					.read()
+					?.subscribe(tbl => this.output.next(tbl))
 			} else {
-				this._outputTable = this.source.value
-				this.emit()
+				this.output.next({ table: this.source.value, id: this._name })
 			}
 		})
 
 		this.rebindWorkflowInput()
-	}
-
-	private emit(): void {
-		this.output.next({ id: this.name, table: this._outputTable })
 	}
 
 	public rebindWorkflowInput(): void {

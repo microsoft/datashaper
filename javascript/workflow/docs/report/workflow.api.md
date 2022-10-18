@@ -832,8 +832,6 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     addOutput(output: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
     // (undocumented)
-    getInputTable(name: string): Maybe<TableContainer>;
-    // (undocumented)
     hasInputName(input: string): boolean;
     // (undocumented)
     hasOutput(name: string): boolean;
@@ -841,27 +839,20 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     hasOutputName(name: string): boolean;
     // (undocumented)
     get inputNames(): Set<string>;
-    // Warning: (ae-forgotten-export) The symbol "TableSubject" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    get inputs(): Map<string, TableSubject>;
-    latestOutput(name?: string): Maybe<TableContainer>;
-    // (undocumented)
-    latestOutputForNode(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
     // (undocumented)
     get length(): number;
     // (undocumented)
     loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
     // (undocumented)
+    nodeOutput(nodeId: string, port?: string): Maybe<BehaviorSubject<Maybe<TableContainer>>>;
+    // (undocumented)
     get outputDefinitions(): NamedOutputPortBinding[];
     // (undocumented)
     outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
     get outputNames(): string[];
-    outputObservable(name?: string): Maybe<TableObservable>;
-    // (undocumented)
-    outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableSubject>;
     // (undocumented)
     get outputPorts(): Map<string, NamedOutputPortBinding>;
+    read(name?: string): BehaviorSubject<Maybe<TableContainer>>;
     // (undocumented)
     removeInputName(input: string): void;
     // (undocumented)
