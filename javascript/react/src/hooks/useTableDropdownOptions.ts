@@ -62,5 +62,5 @@ export function useInputTableNames(workflow?: Workflow): string[] {
 }
 
 function getTableOptions(workflow?: Workflow): string[] {
-	return [...(workflow?.inputNames ?? [])]
+	return workflow?.inputNames ?? []
 }

@@ -72,12 +72,12 @@ function defineTestCase(parentPath: string, test: string) {
 			expectedOutputTables.map(async o => {
 				const expected = await readCsv(path.join(casePath, `${o}.csv`))
 				await new Promise<void>(resolve => {
-					const result = graphBuilder.read(o)?.value
+					const result = graphBuilder.read(o)
 					if (result?.table) {
 						compareTables(expected, result.table, o)
 						resolve()
 					} else {
-						graphBuilder.read(o)!.subscribe(actual => {
+						graphBuilder.read$(o)!.subscribe(actual => {
 							if (actual?.table) {
 								compareTables(expected, actual?.table, o)
 								resolve()

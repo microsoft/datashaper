@@ -54,7 +54,7 @@ export class WorkflowExecutor {
 
 			if (this.workflow.length > 0) {
 				this._workflowSubscription = this.workflow
-					.read()
+					.read$()
 					?.subscribe(tbl => this.output.next(tbl))
 			} else {
 				this.output.next({ table: this.source.value, id: this._name })

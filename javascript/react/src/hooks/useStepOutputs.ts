@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Workflow } from '@datashaper/workflow'
-import { useMemo } from 'react'
+import { useObservableState } from 'observable-hooks'
+import { map } from 'rxjs'
 
 /**
  * create a parallel array of output names for the steps
@@ -15,17 +16,22 @@ export function useStepOutputs(
 	workflow: Workflow,
 	defaultOutputName?: (index: number) => string,
 ): Array<string | undefined> {
-	const outputs = workflow.outputDefinitions
-	const steps = workflow.steps
-
-	return useMemo<Array<string | undefined>>(
-		() =>
-			steps
-				.map(s => s.id)
-				.map((id, index) => {
-					const output = outputs.find(def => def.node === id)
-					return output?.name ?? defaultOutputName?.(index)
-				}),
-		[steps, outputs, defaultOutputName],
+	return (
+		useObservableState(
+			workflow.steps$.pipe(
+				map(steps =>
+					steps
+						.map(s => s.id)
+						.map((id, index) => {
+							const output = workflow.outputDefinitions.find(
+								def => def.node === id,
+							)
+							return output?.name ?? defaultOutputName?.(index)
+						}),
+				),
+			),
+		) ?? EMPTY
 	)
 }
+
+const EMPTY: string[] = []
