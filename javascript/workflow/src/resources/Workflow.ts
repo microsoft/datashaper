@@ -13,8 +13,8 @@ import {
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import type { Observable, Subscription } from 'rxjs';
-import { BehaviorSubject, map , of } from 'rxjs'
+import type { Observable, Subscription } from 'rxjs'
+import { BehaviorSubject, map, of } from 'rxjs'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
@@ -279,8 +279,8 @@ export class Workflow
 	 * @param binding - The output binding
 	 */
 	public addOutput(output: NamedOutputPortBinding): void {
-		if (this.hasOutputName(output.name)) {
-			throw new Error('new output name must be unique')
+		if (this.hasOutputName(output.name) || this.hasInputName(output.name)) {
+			throw new Error('new output name must be unique among outputs & inputs')
 		}
 		this._outputPorts.next([...this._outputPorts.value, output])
 		this.observeOutput(output)
