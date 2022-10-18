@@ -4198,7 +4198,7 @@ __metadata:
     "@types/debug": ^4.1.7
     "@types/jest": ^29.2.0
     "@types/node": ^18.11.0
-    "@zip.js/zip.js": 2.6.48
+    "@zip.js/zip.js": 2.3.18
     arquero: ^5.1.0
     cross-blob: ^3.0.2
     cross-fetch: ^3.1.5
@@ -9137,10 +9137,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zip.js/zip.js@npm:2.6.48":
-  version: 2.6.48
-  resolution: "@zip.js/zip.js@npm:2.6.48"
-  checksum: ac11a51877025e223811a69f6e0f1167c6719ba7c941f1bfc345b99983af9277676510d2e774d59fa7d34d3f827a27eef2980018c896a03870142d50aa89dbe1
+"@zip.js/zip.js@npm:2.3.18":
+  version: 2.3.18
+  resolution: "@zip.js/zip.js@npm:2.3.18"
+  checksum: 749a557223ccb806c9d504c7c5f8369e809ac4556f09bb3842b791cc358c6eaf4eb7a902f2c89cf6595f448bb15d6b782b84854b45850104aab1fd1050d5e5f4
   languageName: node
   linkType: hard
 

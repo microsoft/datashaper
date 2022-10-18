@@ -34,7 +34,7 @@
 		"release": "yarn npm publish --tolerate-republish --access public"
 	},
 	"dependencies": {
-		"@zip.js/zip.js": "2.6.48",
+		"@zip.js/zip.js": "2.3.18",
 		"cross-blob": "^3.0.2",
 		"cross-fetch": "^3.1.5",
 		"debug": "^4.3.4",
