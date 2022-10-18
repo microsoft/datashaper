@@ -27,7 +27,7 @@ export function useOnDuplicateStep(
 
 	return useCallback(
 		(step: Step) => {
-			const outputTable = table ?? workflow?.latestOutputForNode(step.id)?.table
+			const outputTable = table ?? workflow?.table(step.id)?.value?.table
 			const clonedStep = cloneStep(step, outputTable?.columnNames())
 			clonedStep.id = ''
 			onSave?.(

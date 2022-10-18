@@ -50,8 +50,7 @@ export class Workflow
 	//
 	// Output tracking - observables, data cache, subscriptions
 	//
-	private readonly _inputs: Map<string, TableSubject> = new Map()
-	private readonly _outputs: Map<string, TableSubject> = new Map()
+	private readonly _tables: Map<string, TableSubject> = new Map()
 	private _lastStepSubscription: Subscription | undefined
 	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
@@ -78,6 +77,24 @@ export class Workflow
 		this.configureStep(step, node)
 	}
 
+	/**
+	 * Observe an output name
+	 * @param name - The output to observe. If falsy, this will observe the default output of the final step.
+	 * If no observable is ready yet, a new observable will be created
+	 */
+	public table(name?: string): BehaviorSubject<Maybe<TableContainer>> {
+		if (name === undefined) {
+			return this._defaultOutput
+		}
+		if (!this._tables.has(name)) {
+			this._tables.set(
+				name,
+				new BehaviorSubject<Maybe<TableContainer>>(undefined),
+			)
+		}
+		return this._tables.get(name)!
+	}
+
 	private getNode(id: string): Node<TableContainer> {
 		const graph = this._graph
 		// bind to an input defined in the graph
@@ -85,15 +102,7 @@ export class Workflow
 			const result = graph.node(id)
 			return result
 		} else if (this.hasInputName(id)) {
-			// create a new subject that we can pipe data into
-			if (!this._inputs.has(id)) {
-				this._inputs.set(
-					id,
-					new BehaviorSubject<Maybe<TableContainer>>(undefined),
-				)
-			}
-			const source = this._inputs.get(id)!
-			return observableNode(id, source)
+			return observableNode(id, this.table(id))
 		} else {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}
@@ -105,10 +114,6 @@ export class Workflow
 		return this._inputNames
 	}
 
-	public get inputs(): Map<string, TableSubject> {
-		return this._inputs
-	}
-
 	public addInputName(input: string): void {
 		this._inputNames.add(input)
 		this._onChange.next()
@@ -116,16 +121,11 @@ export class Workflow
 
 	public removeInputName(input: string): void {
 		this._inputNames.delete(input)
-		this._inputs.delete(input)
 		this._onChange.next()
 	}
 
 	public hasInputName(input: string): boolean {
 		return this._inputNames.has(input)
-	}
-
-	public getInputTable(name: string): Maybe<TableContainer> {
-		return this._inputs.get(name)?.value
 	}
 
 	/**
@@ -167,7 +167,7 @@ export class Workflow
 		if (this._graph.hasNode(id)) {
 			this._graph.remove(id)
 		}
-		this._inputs.delete(id)
+		this._tables.delete(id)
 	}
 
 	/**
@@ -189,7 +189,7 @@ export class Workflow
 		this._removeInputObservable(id)
 		const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
 		source.subscribe(s => subject.next(s))
-		this._inputs.set(id, subject)
+		this._tables.set(id, subject)
 		this._graph.add(observableNode(id, source))
 	}
 
@@ -263,32 +263,8 @@ export class Workflow
 	 */
 	public removeOutput(name: string): void {
 		this._outputPorts.delete(name)
-		this._outputs.delete(name)
+		this._tables.delete(name)
 		this._onChange.next()
-	}
-
-	/**
-	 * Observe an output name
-	 * @param name - The output to observe. If falsy, this will observe the default output of the final step.
-	 */
-	public outputObservable(name?: string): Maybe<TableObservable> {
-		if (name != null) {
-			return this._outputs.get(name)
-		} else {
-			return this._defaultOutput
-		}
-	}
-
-	/**
-	 * Get the latest output value
-	 * @param name - The output to retrieve.  If falsy, this will observe the default output of the final step.
-	 */
-	public latestOutput(name?: string): Maybe<TableContainer> {
-		if (name != null) {
-			return this._outputs.get(name)?.value
-		} else {
-			return this._defaultOutput.value
-		}
 	}
 
 	private lastStepOutput(): Maybe<TableSubject> {
@@ -300,24 +276,13 @@ export class Workflow
 		return lastNode.output() as TableSubject
 	}
 
-	public outputObservableForNode(
+	public nodeOutput(
 		nodeId: string,
-		nodeOutput?: string,
-	): Maybe<TableSubject> {
-		const output = this.outputNameForNode(nodeId, nodeOutput)
+		port?: string,
+	): Maybe<BehaviorSubject<Maybe<TableContainer>>> {
+		const output = this.outputNameForNode(nodeId, port)
 		if (output) {
-			// Nodes use BehaviorSubject internally
-			return this.outputObservable(output) as TableSubject
-		}
-	}
-
-	public latestOutputForNode(
-		nodeId: string,
-		nodeOutput?: string,
-	): Maybe<TableContainer> {
-		const output = this.outputNameForNode(nodeId, nodeOutput)
-		if (output) {
-			return this.latestOutput(output)
+			return this.table(output)
 		}
 	}
 
@@ -467,12 +432,9 @@ export class Workflow
 	public toMap(includeInputs = false): Map<string, Maybe<TableContainer>> {
 		const result = new Map<string, Maybe<TableContainer>>()
 		if (includeInputs) {
-			for (const [name, observable] of this._inputs) {
+			for (const [name, observable] of this._tables) {
 				result.set(name, observable.value)
 			}
-		}
-		for (const [name, observable] of this._outputs) {
-			result.set(name, observable.value)
 		}
 		return result
 	}
@@ -480,12 +442,9 @@ export class Workflow
 	public toArray(includeInputs = false): Maybe<TableContainer>[] {
 		const result: Maybe<TableContainer>[] = []
 		if (includeInputs) {
-			for (const [, observable] of this._inputs) {
+			for (const [, observable] of this._tables) {
 				result.push(observable.value)
 			}
-		}
-		for (const [, observable] of this._outputs) {
-			result.push(observable.value)
 		}
 		return result
 	}
@@ -544,12 +503,20 @@ export class Workflow
 		for (const step of this.steps) {
 			this.addWorkflowStepToGraph(step)
 		}
-		for (const { name, output, node: nodeId } of this.outputPorts.values()) {
-			const node = this.getNode(nodeId)
-			// BaseNode uses BehaviorSubject internally, which saves us some work
-			const val = node.output(output) as BehaviorSubject<Maybe<TableContainer>>
-			this._outputs.set(name, val)
+		for (const port of this.outputPorts.values()) {
+			this.observeOutput(port)
 		}
+	}
+
+	private observeOutput({
+		name,
+		output,
+		node: nodeId,
+	}: NamedOutputPortBinding) {
+		const node = this.getNode(nodeId)
+		// BaseNode uses BehaviorSubject internally, which saves us some work
+		const val = node.output(output) as BehaviorSubject<Maybe<TableContainer>>
+		this._tables.set(name, val)
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {

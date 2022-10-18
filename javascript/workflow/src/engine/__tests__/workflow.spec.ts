@@ -39,7 +39,7 @@ describe('stepGraph', () => {
 			store,
 		)
 		expect(g).toBeDefined()
-		const result = g.latestOutput('output')
+		const result = g.table('output')?.value
 		expect(result?.table?.numCols()).toBe(2)
 		expect(result?.table?.numRows()).toBe(4)
 		expect(g.outputNames).toEqual(['output'])
@@ -78,7 +78,7 @@ describe('stepGraph', () => {
 			store,
 		)
 		expect(g).toBeDefined()
-		const result = g.latestOutput('output-2')
+		const result = g.table('output-2')?.value
 		expect(result).toBeDefined()
 		expect(result?.table?.numCols()).toBe(3)
 		expect(result?.table?.numRows()).toBe(4)
