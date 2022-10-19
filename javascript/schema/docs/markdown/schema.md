@@ -57,8 +57,10 @@
 |  [DataPackageSchema](./schema.datapackageschema.md) | Defines a Data Package, which is a collection of data resources such as files and schemas. Loosely based on the Frictionless spec, but modified where needed to meet our needs. https://specs.frictionlessdata.io/data-package/ |
 |  [DataShape](./schema.datashape.md) | Defines parameters for understanding the logical structure of data contents. |
 |  [DataTableSchema](./schema.datatableschema.md) | This defines the table-containing resource type. A dataset can be embedded directly using the <code>data</code> property, or it can be linked to a raw file using the <code>path</code>. If the latter, optional format and parsing options can be applied to aid interpreting the file contents. resource profile: 'datatable' |
+|  [DecodeArgs](./schema.decodeargs.md) |  |
 |  [DeriveArgs](./schema.deriveargs.md) |  |
 |  [DualInput](./schema.dualinput.md) | Dual-input, single-output step I/O |
+|  [EncodeArgs](./schema.encodeargs.md) |  |
 |  [EraseArgs](./schema.eraseargs.md) |  |
 |  [FetchArgs](./schema.fetchargs.md) |  |
 |  [Field](./schema.field.md) | Contains the full schema definition and metadata for a data field (usually a table column). This includes the required data type, various data nature and rendering properties, potential validation rules, and mappings from a data dictionary. |

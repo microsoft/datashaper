@@ -282,6 +282,13 @@ export enum DateComparisonOperator {
     NotEqual = "is not equal"
 }
 
+// Warning: (ae-missing-release-tag) "DecodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface DecodeArgs {
+    unapplyMapping: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "DedupeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -305,6 +312,13 @@ export interface DualInput extends BasicInput {
         source: PortBinding;
         other: PortBinding;
     };
+}
+
+// Warning: (ae-missing-release-tag) "EncodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface EncodeArgs {
+    applyMapping: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -833,6 +847,12 @@ export type Step = StepJsonCommon & (({
 } & BasicInput) | ({
     verb: Verb.Difference;
 } & VariadicInput) | ({
+    verb: Verb.Decode;
+    args?: DecodeArgs;
+} & BasicInput) | ({
+    verb: Verb.Encode;
+    args?: EncodeArgs;
+} & BasicInput) | ({
     verb: Verb.Erase;
     args?: EraseArgs;
 } & BasicInput) | ({
@@ -1016,11 +1036,15 @@ export enum Verb {
     // (undocumented)
     Convert = "convert",
     // (undocumented)
+    Decode = "decode",
+    // (undocumented)
     Dedupe = "dedupe",
     // (undocumented)
     Derive = "derive",
     // (undocumented)
     Difference = "difference",
+    // (undocumented)
+    Encode = "encode",
     // (undocumented)
     Erase = "erase",
     // (undocumented)

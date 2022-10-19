@@ -21,7 +21,7 @@ export const EncodeBase: React.FC<StepComponentBaseProps<EncodeArgs>> =
 				checkbox(
 					'Apply mapping',
 					step.args.applyMapping,
-					(s, val) => (step.args.applyMapping = val as boolean),
+					(s, val) => (s.args.applyMapping = val as boolean),
 					{
 						styles: {
 							root: {

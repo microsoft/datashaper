@@ -19,7 +19,9 @@ import type { DataOrientation } from '@datashaper/schema';
 import type { DataPackageSchema } from '@datashaper/schema';
 import type { DataShape as DataShape_2 } from '@datashaper/schema/dist/datatable/DataShape.js';
 import type { DataTableSchema } from '@datashaper/schema';
+import type { DecodeArgs } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
+import type { EncodeArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
 import type { FetchArgs } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
@@ -277,6 +279,11 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     readonly workflow: Workflow;
 }
 
+// Warning: (ae-missing-release-tag) "decode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const decode: (id: string) => StepNode<TableContainer<unknown>, DecodeArgs>;
+
 // Warning: (ae-missing-release-tag) "dedupe" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -315,6 +322,11 @@ export const derive: (id: string) => StepNode<TableContainer<unknown>, DeriveArg
 //
 // @public (undocumented)
 export const difference: (id: string) => SetOperationNode<unknown>;
+
+// Warning: (ae-missing-release-tag) "encode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const encode: (id: string) => StepNode<TableContainer<unknown>, EncodeArgs>;
 
 // Warning: (ae-missing-release-tag) "erase" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

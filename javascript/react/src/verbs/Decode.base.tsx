@@ -16,12 +16,12 @@ import { checkbox } from '../verbForm/VerbFormFactories.js'
  */
 export const DecodeBase: React.FC<StepComponentBaseProps<DecodeArgs>> =
 	function DecodeBase({ step, onChange }) {
-		const verbInputs = useMemo<FormInput<EncodeArgs>[]>(
+		const verbInputs = useMemo<FormInput<DecodeArgs>[]>(
 			() => [
 				checkbox(
 					'Unapply mapping',
 					step.args.unapplyMapping,
-					(s, val) => (step.args.unapplyMapping = val as boolean),
+					(s, val) => (s.args.unapplyMapping = val as boolean),
 					{
 						styles: {
 							root: {
