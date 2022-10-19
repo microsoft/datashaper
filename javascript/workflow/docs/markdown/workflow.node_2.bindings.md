@@ -2,16 +2,12 @@
 
 [Home](./index.md) &gt; [@datashaper/workflow](./workflow.md) &gt; [Node\_2](./workflow.node_2.md) &gt; [bindings](./workflow.node_2.bindings.md)
 
-## Node\_2.bindings() method
+## Node\_2.bindings property
 
 Gets all input bindings
 
 <b>Signature:</b>
 
 ```typescript
-bindings(): NodeBinding<T>[];
+readonly bindings: NodeBinding<T>[];
 ```
-<b>Returns:</b>
-
-[NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt;\[\]
-

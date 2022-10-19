@@ -19,14 +19,20 @@ export class DefaultGraph<T> implements Graph<T> {
 		this._nodes.clear()
 	}
 
+	/**
+	 * Get a list of NodeIDs
+	 */
 	public get nodes(): NodeId[] {
 		return [...this._nodes.keys()]
 	}
 
+	/**
+	 * Get the input layer of the graph. This is determined by finding all the nodes without any bound inputs
+	 */
 	public get inputs(): NodeId[] {
 		return this.nodes.filter(id => {
 			const node = this._nodes.get(id)
-			return node && node.bindingsCount === 0
+			return node && node.bindings.length === 0
 		})
 	}
 
@@ -35,7 +41,7 @@ export class DefaultGraph<T> implements Graph<T> {
 		this.nodes.forEach(n => {
 			const node = this._nodes.get(n)
 			if (node) {
-				for (const binding of node.bindings()) {
+				for (const binding of node.bindings) {
 					nodeIds.delete(binding.node.id)
 				}
 			}
@@ -60,12 +66,12 @@ export class DefaultGraph<T> implements Graph<T> {
 			this._nodes.set(node.id, node)
 
 			// add the bound nodes
-			node.bindings().forEach(b => this.add(b.node))
+			node.bindings.forEach(b => this.add(b.node))
 
 			// when bindings change, add those nodes
-			const subscription = node.onBindingsChanged.subscribe(() => {
-				node.bindings().forEach(b => this.add(b.node))
-			})
+			const subscription = node.bindings$.subscribe(bindings =>
+				bindings.forEach(b => this.add(b.node)),
+			)
 			this._nodeSubscriptions.set(node.id, subscription)
 		}
 	}
@@ -75,7 +81,7 @@ export class DefaultGraph<T> implements Graph<T> {
 		for (const innerNodeId of this._nodes.keys()) {
 			const node = this._nodes.get(innerNodeId)
 			if (node) {
-				for (const binding of node?.bindings() || []) {
+				for (const binding of node?.bindings || []) {
 					if (binding.node.id === removeId) {
 						node?.unbind(binding.input)
 					}
@@ -98,7 +104,7 @@ export class DefaultGraph<T> implements Graph<T> {
 		this.nodes.forEach(id => {
 			const node = this._nodes.get(id)
 			if (node) {
-				node.bindings().forEach(binding => {
+				node.bindings.forEach(binding => {
 					edges.push([binding.node.id, id])
 				})
 			}

@@ -329,21 +329,6 @@ export interface EraseArgs extends InputColumnArgs {
 	value: Value
 }
 
-export interface FetchArgs {
-	/**
-	 * URL where the csv file is located
-	 */
-	url: string
-	/**
-	 * Optional delimiter for csv
-	 */
-	delimiter?: string
-	/**
-	 * Optional autoMax for tables
-	 */
-	autoMax?: number
-}
-
 export interface FillArgs extends OutputColumnArgs {
 	/**
 	 * Value to fill in the new column

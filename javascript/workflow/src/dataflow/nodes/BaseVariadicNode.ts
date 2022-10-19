@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Maybe } from '../../primitives.js'
 import { DefaultBoundInput } from '../BoundInput.js'
-import type { Maybe } from '../primitives.js'
 import type { NodeBinding, SocketName } from '../types.js'
 import { BaseNode } from './BaseNode.js'
 
@@ -21,8 +21,8 @@ export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
 			this._disposeVariadicInputs()
 		}
 
-		const boundInputs = inputs.map(i => {
-			const bi = new DefaultBoundInput(i)
+		const boundInputs = inputs.map((i, index) => {
+			const bi = new DefaultBoundInput(`variadic-${index}`, i)
 			bi.onValueChange(() => this.recalculate())
 			return bi
 		})

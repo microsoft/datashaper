@@ -8,7 +8,7 @@ import { deriveBoolean } from './util/expressions.js'
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export const booleanStep: ColumnTableStep<BooleanArgs> = (
+const booleanStep: ColumnTableStep<BooleanArgs> = (
 	input,
 	{ columns = [], operator, to },
 ) => input.derive({ [to]: deriveBoolean(columns, operator) })

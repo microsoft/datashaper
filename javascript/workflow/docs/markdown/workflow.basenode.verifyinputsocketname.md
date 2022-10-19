@@ -9,7 +9,7 @@ Verifies that an input socket name is known
 <b>Signature:</b>
 
 ```typescript
-protected verifyInputSocketName(name: SocketName): void;
+protected verifyInputSocketName(name: SocketName): SocketName;
 ```
 
 ## Parameters
@@ -20,5 +20,5 @@ protected verifyInputSocketName(name: SocketName): void;
 
 <b>Returns:</b>
 
-void
+[SocketName](./workflow.socketname.md)
 

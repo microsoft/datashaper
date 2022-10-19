@@ -2,20 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { handleMaybeAsync } from '../primitives.js'
 import { BaseNode } from './BaseNode.js'
 
-export type StepFunction<T, Args> = (source: T, args: Args) => Promise<T> | T
+export type StepFunction<T, Args> = (source: T, args: Args) => T
 
 export class StepNode<T, Args> extends BaseNode<T, Args> {
-	constructor(private _step: StepFunction<T, Args>) {
+	private _step: StepFunction<T, Args>
+
+	constructor(step: StepFunction<T, Args>) {
 		super()
+		this._step = step.bind(this)
 	}
-	protected doRecalculate(): Promise<void> | void {
+	protected doRecalculate(): void {
 		const source = this.inputValue()
 		if (source != null && this.config != null) {
 			const output = this._step(source, this.config)
-			return handleMaybeAsync(output, v => this.emit(v))
+			this.emit(output)
 		} else {
 			this.emit(undefined)
 		}

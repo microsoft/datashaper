@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-protected doRecalculate(): Promise<void> | void;
+protected doRecalculate(): void;
 ```
 <b>Returns:</b>
 
-Promise&lt;void&gt; \| void
+void
 
