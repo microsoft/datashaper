@@ -832,36 +832,31 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     addOutput(output: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
     // (undocumented)
-    getInputTable(name: string): Maybe<TableContainer>;
-    // (undocumented)
     hasInputName(input: string): boolean;
-    // (undocumented)
-    hasOutput(name: string): boolean;
     // (undocumented)
     hasOutputName(name: string): boolean;
     // (undocumented)
-    get inputNames(): Set<string>;
-    // Warning: (ae-forgotten-export) The symbol "TableSubject" needs to be exported by the entry point index.d.ts
-    //
+    get inputNames$(): Observable<string[]>;
     // (undocumented)
-    get inputs(): Map<string, TableSubject>;
-    latestOutput(name?: string): Maybe<TableContainer>;
+    get inputNames(): string[];
     // (undocumented)
-    latestOutputForNode(nodeId: string, nodeOutput?: string): Maybe<TableContainer>;
+    get length$(): Observable<number>;
     // (undocumented)
     get length(): number;
     // (undocumented)
     loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
     // (undocumented)
-    get outputDefinitions(): NamedOutputPortBinding[];
+    nodeOutput(nodeId: string, port?: string): Maybe<Observable<Maybe<TableContainer>>>;
     // (undocumented)
     outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
+    get outputNames$(): Observable<string[]>;
     get outputNames(): string[];
-    outputObservable(name?: string): Maybe<TableObservable>;
     // (undocumented)
-    outputObservableForNode(nodeId: string, nodeOutput?: string): Maybe<TableSubject>;
+    get outputPorts$(): Observable<NamedOutputPortBinding[]>;
     // (undocumented)
-    get outputPorts(): Map<string, NamedOutputPortBinding>;
+    get outputPorts(): NamedOutputPortBinding[];
+    read$(name?: string): Observable<Maybe<TableContainer>>;
+    read(name?: string): Maybe<TableContainer>;
     // (undocumented)
     removeInputName(input: string): void;
     // (undocumented)
@@ -869,6 +864,8 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     removeOutput(name: string): void;
     // (undocumented)
     removeStep(index: number): void;
+    // (undocumented)
+    get steps$(): BehaviorSubject<Step[]>;
     // (undocumented)
     get steps(): Step[];
     // (undocumented)

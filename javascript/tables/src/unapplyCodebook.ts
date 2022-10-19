@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { CodebookSchema } from '@datashaper/schema'
+import type { DataTableSchema } from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import { escape, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -13,9 +14,13 @@ export function unapplyCodebook(
 	table: ColumnTable,
 	codebook: CodebookSchema,
 	applyMapping: boolean,
+	dataTableSchema?: DataTableSchema,
 ): ColumnTable {
 	const args = table.columnNames().reduce((acc, cur) => {
-		const parser = parseAs(DataType.String)
+		const parser =
+			dataTableSchema != null && dataTableSchema.typeHints != null
+				? parseAs(DataType.String, dataTableSchema.typeHints)
+				: parseAs(DataType.String)
 		acc[cur] = escape((d: any) => parser(d[cur]))
 		return acc
 	}, {} as Record<string, object>)

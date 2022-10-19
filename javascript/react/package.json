@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/react",
-	"version": "14.2.1",
+	"version": "14.2.2",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -53,6 +53,7 @@
 		"immer": "^9.0.15",
 		"lodash-es": "^4.17.21",
 		"markdown-to-jsx": "^7.1.7",
+		"observable-hooks": "^4.2.1",
 		"react-dropzone": "^12.1.0",
 		"react-if": "^4.1.4",
 		"rxjs": "^7.5.7",

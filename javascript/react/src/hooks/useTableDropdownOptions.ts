@@ -25,9 +25,9 @@ export function useTableDropdownOptions(
 		let inputOptions = getSimpleDropdownOptions(inputNames)
 		if (workflow) {
 			inputOptions = inputOptions.concat(
-				workflow?.outputDefinitions.map(a => ({
-					key: a.node,
-					text: a.name,
+				workflow?.outputNames.map(a => ({
+					key: a,
+					text: a,
 				})),
 			)
 		}
@@ -62,5 +62,5 @@ export function useInputTableNames(workflow?: Workflow): string[] {
 }
 
 function getTableOptions(workflow?: Workflow): string[] {
-	return [...(workflow?.inputNames ?? [])]
+	return workflow?.inputNames ?? []
 }

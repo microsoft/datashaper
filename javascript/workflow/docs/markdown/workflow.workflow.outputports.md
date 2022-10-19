@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get outputPorts(): Map<string, NamedOutputPortBinding>;
+get outputPorts(): NamedOutputPortBinding[];
 ```

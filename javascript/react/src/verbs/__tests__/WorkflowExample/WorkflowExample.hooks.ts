@@ -35,7 +35,7 @@ function workflowToJson(workflow: Workflow | undefined) {
 export function useCreateStepHandler(workflow: Workflow): (verb: Verb) => void {
 	const saveStep = useHandleStepSave(workflow)
 	return useCallback(
-		(verb: Verb) => saveStep({ verb } as Step, workflow.steps.length),
+		(verb: Verb) => saveStep({ verb } as Step, workflow.length),
 		[saveStep, workflow],
 	)
 }

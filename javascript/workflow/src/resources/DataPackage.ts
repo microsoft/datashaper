@@ -68,7 +68,7 @@ export class DataPackage
 	public override toSchema(): DataPackageSchema {
 		return createDataPackageSchemaObject({
 			...super.toSchema(),
-			resources: [...this._tableStore.tables.values()].map(t => t.toSchema()),
+			resources: this._tableStore.tables.map(t => t.toSchema()),
 		})
 	}
 
@@ -76,7 +76,7 @@ export class DataPackage
 		const resources: string[] = []
 		const files = new Map<string, Blob>()
 
-		for (const table of this._tableStore.tables.values()) {
+		for (const table of this._tableStore.tables) {
 			const asset = (name: string) => `data/${table.name}/${name}`
 
 			const sources: string[] = []
@@ -141,7 +141,7 @@ export class DataPackage
 			}
 		}
 
-		for (const table of this._tableStore.tables.values()) {
+		for (const table of this._tableStore.tables) {
 			table.connect(this.tableStore)
 		}
 

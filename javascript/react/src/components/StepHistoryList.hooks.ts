@@ -16,8 +16,8 @@ export function useTableHandlers(
 	onSelectLatest: () => void
 } {
 	const onSelectOriginalTable = useCallback(() => {
-		if (workflow.inputNames.size > 0) {
-			const names = [...workflow.inputNames]
+		if (workflow.inputNames.length > 0) {
+			const names = workflow.inputNames
 			const lastInputName = names[names.length - 1]
 			if (lastInputName) {
 				onSelect?.(lastInputName)
@@ -26,7 +26,7 @@ export function useTableHandlers(
 	}, [workflow, onSelect])
 	const onSelectLatest = useCallback(() => {
 		const latestId = steps[0]?.id
-		onSelect && latestId && onSelect(latestId)
+		latestId && onSelect?.(latestId)
 	}, [onSelect, steps])
 	return {
 		onSelectOriginalTable,

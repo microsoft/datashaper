@@ -11222,67 +11222,6 @@
             },
             {
               "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!Workflow#getInputTable:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "getInputTable(name: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Maybe",
-                  "canonicalReference": "@datashaper/workflow!Maybe:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 7
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "name",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "getInputTable"
-            },
-            {
-              "kind": "Method",
               "canonicalReference": "@datashaper/workflow!Workflow#hasInputName:member(1)",
               "docComment": "",
               "excerptTokens": [
@@ -11327,53 +11266,6 @@
               ],
               "isOptional": false,
               "name": "hasInputName"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!Workflow#hasOutput:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "hasOutput(name: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "name",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "hasOutput"
             },
             {
               "kind": "Method",
@@ -11432,13 +11324,8 @@
                   "text": "get inputNames(): "
                 },
                 {
-                  "kind": "Reference",
-                  "text": "Set",
-                  "canonicalReference": "!Set:interface"
-                },
-                {
                   "kind": "Content",
-                  "text": "<string>"
+                  "text": "string[]"
                 },
                 {
                   "kind": "Content",
@@ -11451,37 +11338,28 @@
               "name": "inputNames",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "isStatic": false,
               "isProtected": false
             },
             {
               "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Workflow#inputs:member",
+              "canonicalReference": "@datashaper/workflow!Workflow#inputNames$:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "get inputs(): "
+                  "text": "get inputNames$(): "
                 },
                 {
                   "kind": "Reference",
-                  "text": "Map",
-                  "canonicalReference": "!Map:interface"
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
                 },
                 {
                   "kind": "Content",
-                  "text": "<string, "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableSubject",
-                  "canonicalReference": "@datashaper/workflow!~TableSubject:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
+                  "text": "<string[]>"
                 },
                 {
                   "kind": "Content",
@@ -11491,151 +11369,13 @@
               "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "inputs",
+              "name": "inputNames$",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 5
+                "endIndex": 3
               },
               "isStatic": false,
               "isProtected": false
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!Workflow#latestOutput:member(1)",
-              "docComment": "/**\n * Get the latest output value\n *\n * @param name - The output to retrieve. If falsy, this will observe the default output of the final step.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "latestOutput(name?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Maybe",
-                  "canonicalReference": "@datashaper/workflow!Maybe:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 7
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "name",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
-              "isOptional": false,
-              "name": "latestOutput"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!Workflow#latestOutputForNode:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "latestOutputForNode(nodeId: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", nodeOutput?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Maybe",
-                  "canonicalReference": "@datashaper/workflow!Maybe:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 9
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "nodeId",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "nodeOutput",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
-                  "isOptional": true
-                }
-              ],
-              "isOptional": false,
-              "name": "latestOutputForNode"
             },
             {
               "kind": "Property",
@@ -11662,6 +11402,40 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#length$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get length$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<number>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "length$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
               },
               "isStatic": false,
               "isProtected": false
@@ -11744,38 +11518,99 @@
               "name": "loadSchema"
             },
             {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Workflow#outputDefinitions:member",
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Workflow#nodeOutput:member(1)",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "get outputDefinitions(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "NamedOutputPortBinding",
-                  "canonicalReference": "@datashaper/schema!NamedOutputPortBinding:interface"
+                  "text": "nodeOutput(nodeId: "
                 },
                 {
                   "kind": "Content",
-                  "text": "[]"
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", port?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>>"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "outputDefinitions",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
               "isStatic": false,
-              "isProtected": false
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 13
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "nodeId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "port",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "name": "nodeOutput"
             },
             {
               "kind": "Method",
@@ -11870,13 +11705,124 @@
               "isProtected": false
             },
             {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!Workflow#outputObservable:member(1)",
-              "docComment": "/**\n * Observe an output name\n *\n * @param name - The output to observe. If falsy, this will observe the default output of the final step.\n */\n",
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#outputNames$:member",
+              "docComment": "/**\n * Gets the output table names\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "outputObservable(name?: "
+                  "text": "get outputNames$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "outputNames$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#outputPorts:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get outputPorts(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NamedOutputPortBinding",
+                  "canonicalReference": "@datashaper/schema!NamedOutputPortBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "outputPorts",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#outputPorts$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get outputPorts$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NamedOutputPortBinding",
+                  "canonicalReference": "@datashaper/schema!NamedOutputPortBinding:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "outputPorts$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Workflow#read:member(1)",
+              "docComment": "/**\n * Observe an output name\n *\n * @param name - The output to observe. If falsy, this will observe the default output of the final step. If no observable is ready yet, a new observable will be created\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "read(name?: "
                 },
                 {
                   "kind": "Content",
@@ -11897,8 +11843,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "TableObservable",
-                  "canonicalReference": "@datashaper/workflow!TableObservable:type"
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
@@ -11928,24 +11874,16 @@
                 }
               ],
               "isOptional": false,
-              "name": "outputObservable"
+              "name": "read"
             },
             {
               "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!Workflow#outputObservableForNode:member(1)",
-              "docComment": "",
+              "canonicalReference": "@datashaper/workflow!Workflow#read$:member(1)",
+              "docComment": "/**\n * Observe an output name\n *\n * @param name - The output to observe. If falsy, this will observe the default output of the final step. If no observable is ready yet, a new observable will be created\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "outputObservableForNode(nodeId: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", nodeOutput?: "
+                  "text": "read$(name?: "
                 },
                 {
                   "kind": "Content",
@@ -11954,6 +11892,15 @@
                 {
                   "kind": "Content",
                   "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
                 },
                 {
                   "kind": "Reference",
@@ -11966,12 +11913,12 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "TableSubject",
-                  "canonicalReference": "@datashaper/workflow!~TableSubject:type"
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
                 },
                 {
                   "kind": "Content",
-                  "text": ">"
+                  "text": ">>"
                 },
                 {
                   "kind": "Content",
@@ -11980,7 +11927,7 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 5,
+                "startIndex": 3,
                 "endIndex": 9
               },
               "releaseTag": "Public",
@@ -11988,67 +11935,16 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "nodeId",
+                  "parameterName": "name",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "nodeOutput",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
                   },
                   "isOptional": true
                 }
               ],
               "isOptional": false,
-              "name": "outputObservableForNode"
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!Workflow#outputPorts:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get outputPorts(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Map",
-                  "canonicalReference": "!Map:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "NamedOutputPortBinding",
-                  "canonicalReference": "@datashaper/schema!NamedOutputPortBinding:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "outputPorts",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              },
-              "isStatic": false,
-              "isProtected": false
+              "name": "read$"
             },
             {
               "kind": "Method",
@@ -12268,6 +12164,49 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#steps$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get steps$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BehaviorSubject",
+                  "canonicalReference": "rxjs!BehaviorSubject:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Step",
+                  "canonicalReference": "@datashaper/workflow!Step:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "steps$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
               },
               "isStatic": false,
               "isProtected": false
