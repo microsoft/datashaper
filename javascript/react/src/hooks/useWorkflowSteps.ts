@@ -4,6 +4,7 @@
  */
 import type { Step, Workflow } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
+import { useMemo } from 'react'
 import { map } from 'rxjs'
 
 import { DisplayOrder } from '../enums.js'
@@ -19,10 +20,11 @@ export function useWorkflowSteps(
 	workflow: Workflow,
 	order = DisplayOrder.LastOnTop,
 ): Step[] {
-	return (
-		useObservableState(workflow.steps$.pipe(map(s => orderSteps(s, order)))) ??
-		EMPTY
+	const observable = useMemo(
+		() => workflow.steps$.pipe(map(s => orderSteps(s, order))),
+		[workflow, order],
 	)
+	return useObservableState(observable) ?? EMPTY
 }
 
 function orderSteps(input: Step[], order: DisplayOrder): Step[] {
