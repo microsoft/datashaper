@@ -92,7 +92,6 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 							<CollapsiblePanel
 								key={stepIndex}
 								styles={collapsiblePanelStyles}
-								expandsWithIcon
 								onHeaderClick={() => onSelect?.(step.id)}
 								onRenderHeader={() =>
 									onRenderHeader(step, stepIndex, styles?.stepHeaders)
