@@ -77,15 +77,17 @@ export function array<T = string>(nodes: ReadonlyArray<T>, edges: ReadonlyArray<
 export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     constructor(inputs?: SocketName[], outputs?: SocketName[]);
     // (undocumented)
-    bind(binding: NodeBinding<T>): void;
+    bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void;
     // (undocumented)
     binding(name?: SocketName): Maybe_2<NodeBinding<T>>;
     // (undocumented)
-    bindings(): NodeBinding<T>[];
+    get bindings$(): Observable<NodeBinding<T>[]>;
     // (undocumented)
-    get bindingsCount(): number;
+    get bindings(): NodeBinding<T>[];
     // (undocumented)
-    bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
+    protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
+    // (undocumented)
+    get config$(): Observable<Maybe_2<Config>>;
     // Warning: (ae-forgotten-export) The symbol "Maybe" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -97,6 +99,8 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     protected getInputErrors(): Record<SocketName, unknown>;
     protected getInputValues(): Record<SocketName, Maybe_2<T>>;
     // (undocumented)
+    protected hasBoundInput(name: SocketName): boolean;
+    // (undocumented)
     get id(): NodeId;
     set id(value: NodeId);
     // (undocumented)
@@ -106,17 +110,15 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected inputValue(name?: SocketName): Maybe_2<T>;
     // (undocumented)
-    get onBindingsChanged(): Observable<void>;
+    output$(name?: SocketName): Observable<Maybe_2<T>>;
     // (undocumented)
-    output(name?: SocketName): Observable<Maybe_2<T>>;
+    output(name?: SocketName): Maybe_2<T>;
     // (undocumented)
     readonly outputs: SocketName[];
-    // (undocumented)
-    outputValue(name?: SocketName): Maybe_2<T>;
     protected recalculate: () => void;
     // (undocumented)
     unbind(name: SocketName): void;
-    protected verifyInputSocketName(name: SocketName): void;
+    protected verifyInputSocketName(name: SocketName): SocketName;
     protected verifyOutputSocketName(name: SocketName): void;
 }
 
@@ -292,11 +294,9 @@ export class DefaultGraph<T> implements Graph<T> {
     clear(): void;
     // (undocumented)
     hasNode(id: NodeId): boolean;
-    // (undocumented)
     get inputs(): NodeId[];
     // (undocumented)
     node(id: NodeId): Node_2<T>;
-    // (undocumented)
     get nodes(): NodeId[];
     // (undocumented)
     get outputs(): NodeId[];
@@ -510,19 +510,17 @@ export function nextColumnName(name: string, columnNames: string[]): string;
 
 // @public
 interface Node_2<T, Config = unknown> {
-    bind(binding: NodeBinding<T>): void;
+    bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void;
     binding(input?: SocketName): Maybe_2<NodeBinding<T>>;
-    bindings(): NodeBinding<T>[];
-    readonly bindingsCount: number;
-    bindVariadic(bindings: Omit<NodeBinding<T>, 'input'>[]): void;
+    readonly bindings$: Observable<NodeBinding<T>[]>;
+    readonly bindings: NodeBinding<T>[];
+    readonly config$: Observable<Maybe_2<Config>>;
     config: Maybe_2<Config>;
     readonly id: NodeId;
     readonly inputs: SocketName[];
-    // (undocumented)
-    readonly onBindingsChanged: Observable<void>;
-    output(name?: SocketName): Observable<Maybe_2<T>>;
+    output$(name?: SocketName): Observable<Maybe_2<T>>;
+    output(name?: SocketName): Maybe_2<T>;
     readonly outputs: SocketName[];
-    outputValue(name?: SocketName): Maybe_2<T>;
     unbind(name?: SocketName): void;
 }
 export { Node_2 as Node }
@@ -803,6 +801,11 @@ export const unroll: (id: string) => StepNode<TableContainer<unknown>, InputColu
 //
 // @public (undocumented)
 export type Unsubscribe = Handler;
+
+// Warning: (ae-missing-release-tag) "VariadicNodeBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type VariadicNodeBinding<T> = Omit<NodeBinding<T>, 'input'>[];
 
 // Warning: (ae-missing-release-tag) "verbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

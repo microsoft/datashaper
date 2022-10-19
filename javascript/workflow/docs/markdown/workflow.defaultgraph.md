@@ -15,8 +15,8 @@ export declare class DefaultGraph<T> implements Graph<T>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [inputs](./workflow.defaultgraph.inputs.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] |  |
-|  [nodes](./workflow.defaultgraph.nodes.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] |  |
+|  [inputs](./workflow.defaultgraph.inputs.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] | Get the input layer of the graph. This is determined by finding all the nodes without any bound inputs |
+|  [nodes](./workflow.defaultgraph.nodes.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] | Get a list of NodeIDs |
 |  [outputs](./workflow.defaultgraph.outputs.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] |  |
 
 ## Methods

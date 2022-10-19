@@ -128,4 +128,5 @@
 |  [StepFunction](./workflow.stepfunction.md) |  |
 |  [TableObservable](./workflow.tableobservable.md) | The workflow object manages mutable data for a workflow specification |
 |  [Unsubscribe](./workflow.unsubscribe.md) |  |
+|  [VariadicNodeBinding](./workflow.variadicnodebinding.md) |  |
 

@@ -2,14 +2,10 @@
 
 [Home](./index.md) &gt; [@datashaper/workflow](./workflow.md) &gt; [BaseNode](./workflow.basenode.md) &gt; [bindings](./workflow.basenode.bindings.md)
 
-## BaseNode.bindings() method
+## BaseNode.bindings property
 
 <b>Signature:</b>
 
 ```typescript
-bindings(): NodeBinding<T>[];
+get bindings(): NodeBinding<T>[];
 ```
-<b>Returns:</b>
-
-[NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt;\[\]
-

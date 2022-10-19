@@ -297,14 +297,14 @@ export class Workflow
 		this._onChange.next()
 	}
 
-	private lastStepOutput(): Maybe<BehaviorSubject<Maybe<TableContainer>>> {
+	private lastStepOutput(): Maybe<Observable<Maybe<TableContainer>>> {
 		const steps = this.steps
 		// Returns the default output of the final node
 		if (steps.length === 0) return undefined
 		const lastStepId = steps[steps.length - 1]!.id
 		const lastNode = this.getNode(lastStepId)
 		// Nodes use BehaviorSubject internally
-		return lastNode.output() as BehaviorSubject<Maybe<TableContainer>>
+		return lastNode.output$() as Observable<Maybe<TableContainer>>
 	}
 
 	public nodeOutput(
@@ -414,7 +414,7 @@ export class Workflow
 		}
 
 		// todo: add node.clearBindings() to dataflow node
-		for (const binding of node.bindings()) {
+		for (const binding of node.bindings) {
 			node.unbind(binding.input)
 		}
 
@@ -441,7 +441,7 @@ export class Workflow
 				// Bind variadic input
 				if (input === 'others') {
 					const vBind = binding as NamedPortBinding[]
-					node.bindVariadic(
+					node.bind(
 						vBind.map(b => ({ node: this.getNode(b.node), output: b.output })),
 					)
 				} else {
@@ -540,7 +540,7 @@ export class Workflow
 	}: NamedOutputPortBinding) {
 		const node = this.getNode(nodeId)
 		// BaseNode uses BehaviorSubject internally, which saves us some work
-		const val = node.output(output) as BehaviorSubject<Maybe<TableContainer>>
+		const val = node.output$(output) as BehaviorSubject<Maybe<TableContainer>>
 		this._tables.set(name, val)
 	}
 

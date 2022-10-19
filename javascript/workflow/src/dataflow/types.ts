@@ -8,6 +8,7 @@ import type { Maybe } from './primitives.js'
 
 export type NodeId = string
 export type SocketName = string | symbol
+export type VariadicNodeBinding<T> = Omit<NodeBinding<T>, 'input'>[]
 
 /**
  * A graph processing node
@@ -20,11 +21,6 @@ export interface Node<T, Config = unknown> {
 	readonly id: NodeId
 
 	/**
-	 * The node's mutable configuration
-	 */
-	config: Maybe<Config>
-
-	/**
 	 * Named input sockets
 	 */
 	readonly inputs: SocketName[]
@@ -35,16 +31,30 @@ export interface Node<T, Config = unknown> {
 	readonly outputs: SocketName[]
 
 	/**
-	 * Binds an input socket to an upstream node
-	 * @param name - the name of the input socket
+	 * The node's mutable configuration
 	 */
-	bind(binding: NodeBinding<T>): void
+	config: Maybe<Config>
 
 	/**
-	 * Binds variadic innput
-	 * @param bindings - the input bindings
+	 * A configuration observable
 	 */
-	bindVariadic(bindings: Omit<NodeBinding<T>, 'input'>[]): void
+	readonly config$: Observable<Maybe<Config>>
+
+	/**
+	 * Gets all input bindings
+	 */
+	readonly bindings: NodeBinding<T>[]
+
+	/**
+	 * An observable of the input bindings
+	 */
+	readonly bindings$: Observable<NodeBinding<T>[]>
+
+	/**
+	 * Binds an input socket to an upstream node
+	 * @param binding - the node binding to apply. If an array, binds variadic input
+	 */
+	bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void
 
 	/**
 	 * Clear an input socket
@@ -58,32 +68,16 @@ export interface Node<T, Config = unknown> {
 	binding(input?: SocketName): Maybe<NodeBinding<T>>
 
 	/**
-	 * Gets all input bindings
-	 */
-	bindings(): NodeBinding<T>[]
-
-	/**
-	 * The number of bound inputs
-	 */
-	readonly bindingsCount: number
-
-	/**
 	 * Gets an output socket
 	 * @param name - The name of the output socket. If undefined, this will use the implicit default output socket.
 	 */
-	output(name?: SocketName): Observable<Maybe<T>>
+	output$(name?: SocketName): Observable<Maybe<T>>
 
 	/**
 	 * Gets a current output value
 	 * @param name - The output name. If undefined, this will use the implicit default output socket.
 	 */
-	outputValue(name?: SocketName): Maybe<T>
-
-	/**
-	 *
-	 * @param handler - The event handler for when the binding changes
-	 */
-	readonly onBindingsChanged: Observable<void>
+	output(name?: SocketName): Maybe<T>
 }
 
 /**

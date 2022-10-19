@@ -4,6 +4,8 @@
 
 ## DefaultGraph.inputs property
 
+Get the input layer of the graph. This is determined by finding all the nodes without any bound inputs
+
 <b>Signature:</b>
 
 ```typescript
