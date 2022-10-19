@@ -4,7 +4,7 @@
  */
 import debug from 'debug'
 import type { Observable } from 'rxjs'
-import { BehaviorSubject, Subject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
 import type { BoundInput } from '../BoundInput.js'
@@ -22,13 +22,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region fields
 
 	protected _id = uuid()
-	private _config: Maybe<Config>
-
-	// inputs
-	private _inputs: Map<SocketName, BoundInput<T>> = new Map()
-	private _bindingsChanged = new Subject<void>()
-
-	// outputs
+	private _config = new BehaviorSubject<Maybe<Config>>(undefined)
+	private _inputs = new BehaviorSubject<BoundInput<T>[]>([])
 	private _outputs: Map<SocketName, BehaviorSubject<Maybe<T>>> = new Map()
 
 	// #endregion fields
@@ -54,16 +49,16 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	}
 
 	public get config(): Maybe<Config> {
+		return this._config.value
+	}
+
+	public get config$(): Observable<Maybe<Config>> {
 		return this._config
 	}
 
 	public set config(value: Maybe<Config>) {
-		this._config = value
+		this._config.next(value)
 		void this.recalculate()
-	}
-
-	public get onBindingsChanged(): Observable<void> {
-		return this._bindingsChanged
 	}
 
 	// #endregion field accessors
@@ -74,12 +69,12 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		return this._inputs.get(name)?.binding
 	}
 
-	public bindings(): NodeBinding<T>[] {
-		return [...this._inputs.values()].map(i => i.binding)
+	public get bindings$(): Observable<NodeBinding<T>[]> {
+		return this._inputs
 	}
 
-	public get bindingsCount(): number {
-		return this._inputs.size
+	public get bindings(): NodeBinding<T>[] {
+		return this._inputs.values()
 	}
 
 	protected inputValue(name: SocketName = DEFAULT_INPUT_NAME): Maybe<T> {
@@ -130,33 +125,40 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	// #region bind/unbind logic
 
-	public bind(binding: NodeBinding<T>): void {
-		const name = binding.input ?? DEFAULT_INPUT_NAME
-		this.verifyInputSocketName(name)
-		// uninstall any existing upstream socket connection
-		if (this._inputs.has(name)) {
-			this.unbind(name)
+	public bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void {
+		if (Array.isArray(binding)) {
+			this.bindVariadic(binding)
+		} else {
+			const name = this.verifyInputSocketName(
+				binding.input ?? DEFAULT_INPUT_NAME,
+			)
+			// uninstall any existing upstream socket connection
+			if (this._inputs.has(name)) {
+				this.unbind(name)
+			}
+			// subscribe to the new input
+			const input: BoundInput<T> = new DefaultBoundInput(name, binding)
+			this._inputs.next([
+				...this._inputs.value.filter(i => i.name !== name),
+				input,
+			])
+
+			input.onValueChange(() => this.recalculate())
+			this.recalculate()
 		}
-		// subscribe to the new input
-		const input: BoundInput<T> = new DefaultBoundInput(binding)
-		this._inputs.set(name, input)
-		input.onValueChange(() => this.recalculate())
-		this.recalculate()
-		this._bindingsChanged.next()
 	}
 
-	public bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void {
-		throw new Error('not supported')
+	protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void {
+		throw new Error('variadic input not supported')
 	}
 
 	public unbind(name: SocketName): void {
 		this.verifyInputSocketName(name)
 		if (this._inputs.has(name)) {
 			// unsubscribe from updates
-			this._inputs.get(name)?.dispose()
-			this._inputs.delete(name)
+			this._inputs.value.find(i => i.name === name)?.dispose()
+			this._inputs.next(this._inputs.value.filter(i => i.name !== name))
 			void this.recalculate()
-			this._bindingsChanged.next()
 		} else {
 			throw new Error(`no socket installed at "${String(name)}"`)
 		}
@@ -170,13 +172,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Verifies that an input socket name is known
 	 * @param name - The input socket name
 	 */
-	protected verifyInputSocketName(name: SocketName): void {
-		if (name === DEFAULT_INPUT_NAME) {
-			return
-		}
-		if (!this.inputs.some(s => s === name)) {
+	protected verifyInputSocketName(name: SocketName): SocketName {
+		if (name !== DEFAULT_INPUT_NAME && !this.inputs.some(s => s === name)) {
 			throw new Error(`unknown input socket name "${String(name)}"`)
 		}
+		return name
 	}
 
 	/**

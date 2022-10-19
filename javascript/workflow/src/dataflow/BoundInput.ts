@@ -6,7 +6,7 @@ import type { Subscription } from 'rxjs'
 import { Subject } from 'rxjs'
 
 import type { Maybe } from './primitives.js'
-import type { NodeBinding } from './types.js'
+import type { NodeBinding, SocketName } from './types.js'
 
 export interface BoundInput<T> {
 	readonly binding: NodeBinding<T>
@@ -24,8 +24,11 @@ export class DefaultBoundInput<T> implements BoundInput<T> {
 	private _bindingSubscription: Subscription
 	private _valueChangeSubscription: Subscription | undefined
 
-	constructor(public readonly binding: NodeBinding<T>) {
-		this._bindingSubscription = binding.node.output(binding.output).subscribe({
+	constructor(
+		public readonly name: SocketName,
+		public readonly binding: NodeBinding<T>,
+	) {
+		this._bindingSubscription = binding.node.output$(binding.output).subscribe({
 			next: v => {
 				this._error = undefined
 				this._current = v

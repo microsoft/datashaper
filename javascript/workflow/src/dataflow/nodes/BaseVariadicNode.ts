@@ -21,8 +21,8 @@ export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
 			this._disposeVariadicInputs()
 		}
 
-		const boundInputs = inputs.map(i => {
-			const bi = new DefaultBoundInput(i)
+		const boundInputs = inputs.map((i, index) => {
+			const bi = new DefaultBoundInput(`variadic-${index}`, i)
 			bi.onValueChange(() => this.recalculate())
 			return bi
 		})

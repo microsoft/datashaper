@@ -20,11 +20,6 @@ export interface Node<T, Config = unknown> {
 	readonly id: NodeId
 
 	/**
-	 * The node's mutable configuration
-	 */
-	config: Maybe<Config>
-
-	/**
 	 * Named input sockets
 	 */
 	readonly inputs: SocketName[]
@@ -33,6 +28,26 @@ export interface Node<T, Config = unknown> {
 	 * Named output sockets, in addition to the implicit default output socket
 	 */
 	readonly outputs: SocketName[]
+
+	/**
+	 * The node's mutable configuration
+	 */
+	config: Maybe<Config>
+
+	/**
+	 * A configuration observable
+	 */
+	readonly config$: Observable<Maybe<Config>>
+
+	/**
+	 * Gets all input bindings
+	 */
+	readonly bindings: NodeBinding<T>[]
+
+	/**
+	 * An observable of the input bindings
+	 */
+	readonly bindings$: Observable<NodeBinding<T>[]>
 
 	/**
 	 * Binds an input socket to an upstream node
@@ -50,21 +65,6 @@ export interface Node<T, Config = unknown> {
 	 * Retrieves an existing input binding by id
 	 */
 	binding(input?: SocketName): Maybe<NodeBinding<T>>
-
-	/**
-	 * Gets all input bindings
-	 */
-	bindings: NodeBinding<T>[]
-
-	/**
-	 * An observable of the input bindings
-	 */
-	bindings$: Observable<NodeBinding<T>[]>
-
-	/**
-	 * The number of bound inputs
-	 */
-	readonly bindingsCount: number
 
 	/**
 	 * Gets an output socket
