@@ -241,6 +241,15 @@
             ],
             "type": "string"
         },
+        "DecodeArgs": {
+            "properties": {
+                "unapplyMapping": {
+                    "description": "Unapply codebook mapping",
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "DeriveArgs": {
             "properties": {
                 "column1": {
@@ -291,6 +300,15 @@
                         }
                     },
                     "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "EncodeArgs": {
+            "properties": {
+                "applyMapping": {
+                    "description": "Apply codebook mapping",
+                    "type": "boolean"
                 }
             },
             "type": "object"
@@ -1222,6 +1240,54 @@
                             },
                             {
                                 "$ref": "#/definitions/VariadicInput"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepJsonCommon"
+                            },
+                            {
+                                "properties": {
+                                    "args": {
+                                        "$ref": "#/definitions/DecodeArgs"
+                                    },
+                                    "verb": {
+                                        "enum": [
+                                            "decode"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/BasicInput"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/StepJsonCommon"
+                            },
+                            {
+                                "properties": {
+                                    "args": {
+                                        "$ref": "#/definitions/EncodeArgs"
+                                    },
+                                    "verb": {
+                                        "enum": [
+                                            "encode"
+                                        ],
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            {
+                                "$ref": "#/definitions/BasicInput"
                             }
                         ]
                     },
