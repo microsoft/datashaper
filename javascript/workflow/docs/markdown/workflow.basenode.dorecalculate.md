@@ -9,9 +9,9 @@ Abstract logic for performing the node recalculation
 <b>Signature:</b>
 
 ```typescript
-protected abstract doRecalculate(): Promise<void> | void;
+protected abstract doRecalculate(): void;
 ```
 <b>Returns:</b>
 
-Promise&lt;void&gt; \| void
+void
 

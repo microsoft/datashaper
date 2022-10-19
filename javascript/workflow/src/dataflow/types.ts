@@ -4,7 +4,7 @@
  */
 import type { Observable } from 'rxjs'
 
-import type { Maybe } from './primitives.js'
+import type { Maybe } from './../primitives.js'
 
 export type NodeId = string
 export type SocketName = string | symbol

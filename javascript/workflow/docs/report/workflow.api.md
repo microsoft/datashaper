@@ -21,7 +21,6 @@ import type { DataShape as DataShape_2 } from '@datashaper/schema/dist/datatable
 import type { DataTableSchema } from '@datashaper/schema';
 import type { DeriveArgs } from '@datashaper/schema';
 import type { EraseArgs } from '@datashaper/schema';
-import type { FetchArgs } from '@datashaper/schema';
 import type { Field } from '@datashaper/schema';
 import type { FillArgs } from '@datashaper/schema';
 import type { FilterArgs } from '@datashaper/schema';
@@ -32,7 +31,7 @@ import { InputColumnRecordArgs } from '@datashaper/schema';
 import { InputKeyValueArgs } from '@datashaper/schema';
 import type { JoinArgs } from '@datashaper/schema';
 import type { LookupArgs } from '@datashaper/schema';
-import type { Maybe as Maybe_3 } from '@datashaper/workflow';
+import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
 import type { Named as Named_2 } from '@datashaper/schema';
 import type { NamedOutputPortBinding } from '@datashaper/schema';
@@ -79,7 +78,7 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void;
     // (undocumented)
-    binding(name?: SocketName): Maybe_2<NodeBinding<T>>;
+    binding(name?: SocketName): Maybe<NodeBinding<T>>;
     // (undocumented)
     get bindings$(): Observable<NodeBinding<T>[]>;
     // (undocumented)
@@ -87,17 +86,15 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
     // (undocumented)
-    get config$(): Observable<Maybe_2<Config>>;
-    // Warning: (ae-forgotten-export) The symbol "Maybe" needs to be exported by the entry point index.d.ts
-    //
+    get config$(): Observable<Maybe<Config>>;
     // (undocumented)
-    get config(): Maybe_2<Config>;
-    set config(value: Maybe_2<Config>);
-    protected abstract doRecalculate(): Promise<void> | void;
-    protected emit: (value: Maybe_2<T>, output?: NodeOutput) => void;
+    get config(): Maybe<Config>;
+    set config(value: Maybe<Config>);
+    protected abstract doRecalculate(): void;
+    protected emit: (value: Maybe<T>, output?: NodeOutput) => void;
     protected emitError: (error: unknown) => void;
     protected getInputErrors(): Record<SocketName, unknown>;
-    protected getInputValues(): Record<SocketName, Maybe_2<T>>;
+    protected getInputValues(): Record<SocketName, Maybe<T>>;
     // (undocumented)
     protected hasBoundInput(name: SocketName): boolean;
     // (undocumented)
@@ -108,11 +105,11 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     readonly inputs: SocketName[];
     // (undocumented)
-    protected inputValue(name?: SocketName): Maybe_2<T>;
+    protected inputValue(name?: SocketName): Maybe<T>;
     // (undocumented)
-    output$(name?: SocketName): Observable<Maybe_2<T>>;
+    output$(name?: SocketName): Observable<Maybe<T>>;
     // (undocumented)
-    output(name?: SocketName): Maybe_2<T>;
+    output(name?: SocketName): Maybe<T>;
     // (undocumented)
     readonly outputs: SocketName[];
     protected recalculate: () => void;
@@ -130,7 +127,7 @@ export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
     // (undocumented)
     bindVariadic(inputs: Omit<NodeBinding<T>, 'input'>[]): void;
     // (undocumented)
-    protected getVariadicInputValues(): Maybe_2<T>[];
+    protected getVariadicInputValues(): Maybe<T>[];
 }
 
 // Warning: (ae-missing-release-tag) "bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -251,9 +248,9 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     // (undocumented)
     connect(store: TableStore): void;
     // (undocumented)
-    get currentOutput(): Maybe_3<TableContainer>;
+    get currentOutput(): Maybe_2<TableContainer>;
     // (undocumented)
-    get currentSource(): Maybe_3<ColumnTable>;
+    get currentSource(): Maybe_2<ColumnTable>;
     // (undocumented)
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
@@ -261,18 +258,18 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     get format(): DataFormat;
     set format(value: DataFormat);
     // (undocumented)
-    loadSchema(schema: Maybe_3<DataTableSchema>, quiet?: boolean): void;
+    loadSchema(schema: Maybe_2<DataTableSchema>, quiet?: boolean): void;
     // (undocumented)
     get name(): string;
     set name(value: string);
     // (undocumented)
-    get output(): Observable<Maybe_3<TableContainer>>;
+    get output(): Observable<Maybe_2<TableContainer>>;
     // (undocumented)
     readonly parser: ParserOptions;
     // (undocumented)
     readonly shape: DataShape;
     // (undocumented)
-    get source(): Observable<Maybe_3<ColumnTable>>;
+    get source(): Observable<Maybe_2<ColumnTable>>;
     // (undocumented)
     toSchema(): DataTableSchema;
     // (undocumented)
@@ -320,12 +317,6 @@ export const difference: (id: string) => SetOperationNode<unknown>;
 //
 // @public (undocumented)
 export const erase: (id: string) => StepNode<TableContainer<unknown>, EraseArgs>;
-
-// Warning: (ae-missing-release-tag) "fetch" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-const fetch_2: (id: string) => InputNode<TableContainer<unknown>, FetchArgs>;
-export { fetch_2 as fetch }
 
 // Warning: (ae-missing-release-tag) "fetchFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -375,11 +366,6 @@ export interface Graph<T> {
 // @public (undocumented)
 export const groupby: (id: string) => StepNode<TableContainer<unknown>, InputColumnListArgs>;
 
-// Warning: (ae-missing-release-tag) "handleMaybeAsync" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function handleMaybeAsync<T>(value: T | Promise<T>, handler: (value: T) => void): Promise<void> | void;
-
 // Warning: (ae-missing-release-tag) "Handler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -394,25 +380,6 @@ export type HandlerOf<T> = (input: T) => void;
 //
 // @public (undocumented)
 export const impute: (id: string) => StepNode<TableContainer<unknown>, ImputeArgs>;
-
-// Warning: (ae-missing-release-tag) "InputNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export class InputNode<T, Config> extends BaseNode<T, Config> {
-    constructor(_computeFn: InputStep<T, Config>);
-    // (undocumented)
-    protected doRecalculate(): void | Promise<void>;
-}
-
-// Warning: (ae-missing-release-tag) "inputNodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function inputNodeFactory<T, Args>(compute: InputStep<T, Args>): (id: string) => InputNode<T, Args>;
-
-// Warning: (ae-missing-release-tag) "InputStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type InputStep<T, Config> = (args: Config, id: string) => Promise<T> | T;
 
 // Warning: (ae-missing-release-tag) "intersect" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -511,15 +478,15 @@ export function nextColumnName(name: string, columnNames: string[]): string;
 // @public
 interface Node_2<T, Config = unknown> {
     bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void;
-    binding(input?: SocketName): Maybe_2<NodeBinding<T>>;
+    binding(input?: SocketName): Maybe<NodeBinding<T>>;
     readonly bindings$: Observable<NodeBinding<T>[]>;
     readonly bindings: NodeBinding<T>[];
-    readonly config$: Observable<Maybe_2<Config>>;
-    config: Maybe_2<Config>;
+    readonly config$: Observable<Maybe<Config>>;
+    config: Maybe<Config>;
     readonly id: NodeId;
     readonly inputs: SocketName[];
-    output$(name?: SocketName): Observable<Maybe_2<T>>;
-    output(name?: SocketName): Maybe_2<T>;
+    output$(name?: SocketName): Observable<Maybe<T>>;
+    output(name?: SocketName): Maybe<T>;
     readonly outputs: SocketName[];
     unbind(name?: SocketName): void;
 }
@@ -566,7 +533,7 @@ export enum NodeOutput {
 //
 // @public (undocumented)
 export class ObservableNode<T> extends BaseNode<T, void> {
-    constructor(source: Observable<Maybe_2<T>>);
+    constructor(source: Observable<Maybe<T>>);
     // (undocumented)
     protected doRecalculate(): void;
 }
@@ -574,7 +541,7 @@ export class ObservableNode<T> extends BaseNode<T, void> {
 // Warning: (ae-missing-release-tag) "observableNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function observableNode<T>(id: string, source: Observable<Maybe_2<T>>): ObservableNode<T>;
+export function observableNode<T>(id: string, source: Observable<Maybe<T>>): ObservableNode<T>;
 
 // Warning: (ae-missing-release-tag) "Observed" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -732,7 +699,7 @@ export interface Step<T extends object | void | unknown = unknown> {
 // Warning: (ae-missing-release-tag) "StepFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type StepFunction<T, Args> = (source: T, args: Args) => Promise<T> | T;
+export type StepFunction<T, Args> = (source: T, args: Args) => T;
 
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -752,9 +719,9 @@ export interface StepInput<T extends object | void | unknown = unknown> {
 //
 // @public (undocumented)
 export class StepNode<T, Args> extends BaseNode<T, Args> {
-    constructor(_step: StepFunction<T, Args>);
+    constructor(step: StepFunction<T, Args>);
     // (undocumented)
-    protected doRecalculate(): Promise<void> | void;
+    protected doRecalculate(): void;
 }
 
 // Warning: (ae-missing-release-tag) "stepNodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

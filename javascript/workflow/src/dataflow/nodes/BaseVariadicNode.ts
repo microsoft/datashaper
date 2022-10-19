@@ -2,8 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { Maybe } from '../../primitives.js'
 import { DefaultBoundInput } from '../BoundInput.js'
-import type { Maybe } from '../primitives.js'
 import type { NodeBinding, SocketName } from '../types.js'
 import { BaseNode } from './BaseNode.js'
 

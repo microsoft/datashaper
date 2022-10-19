@@ -15,7 +15,6 @@
 |  [DataShape](./workflow.datashape.md) |  |
 |  [DataTable](./workflow.datatable.md) |  |
 |  [DefaultGraph](./workflow.defaultgraph.md) |  |
-|  [InputNode](./workflow.inputnode.md) |  |
 |  [Named](./workflow.named.md) |  |
 |  [ObservableNode](./workflow.observablenode.md) |  |
 |  [Observed](./workflow.observed.md) |  |
@@ -43,8 +42,6 @@
 |  [createWorkflow(input, tables)](./workflow.createworkflow.md) | <p>This function establishes the reactive processing graph for executing transformation steps.</p><p>A graph is constructed using each step definition as a node. Any table definitions they export are registered into the tableContainer. Any inputs that are defined but not accounted for in the graph will be wired to the TableContainer using the observable pattern.</p> |
 |  [fetchFile(url)](./workflow.fetchfile.md) |  |
 |  [fetchJson(url)](./workflow.fetchjson.md) |  |
-|  [handleMaybeAsync(value, handler)](./workflow.handlemaybeasync.md) |  |
-|  [inputNodeFactory(compute)](./workflow.inputnodefactory.md) |  |
 |  [isInputColumnListStep(step)](./workflow.isinputcolumnliststep.md) | Indicates whether the supplied step requires multiple input columns. |
 |  [isInputColumnRecordStep(step)](./workflow.isinputcolumnrecordstep.md) | Indicates whether the supplied step requires a map of input columns. |
 |  [isInputColumnStep(step)](./workflow.isinputcolumnstep.md) | Indicates whether the supplied step requires a single input column. |
@@ -87,7 +84,6 @@
 |  [derive](./workflow.derive.md) |  |
 |  [difference](./workflow.difference.md) |  |
 |  [erase](./workflow.erase.md) |  |
-|  [fetch\_2](./workflow.fetch_2.md) |  |
 |  [fill](./workflow.fill.md) |  |
 |  [filter](./workflow.filter.md) |  |
 |  [fold](./workflow.fold.md) |  |
@@ -120,7 +116,6 @@
 |  [CopyWithPartial](./workflow.copywithpartial.md) |  |
 |  [Handler](./workflow.handler.md) | Function callback for general activity listener. |
 |  [HandlerOf](./workflow.handlerof.md) |  |
-|  [InputStep](./workflow.inputstep.md) |  |
 |  [Maybe](./workflow.maybe.md) |  |
 |  [NodeFactory](./workflow.nodefactory.md) |  |
 |  [NodeId](./workflow.nodeid.md) |  |

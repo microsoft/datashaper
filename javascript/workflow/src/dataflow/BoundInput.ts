@@ -5,7 +5,7 @@
 import type { Subscription } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 
-import type { Maybe } from './primitives.js'
+import type { Maybe } from '../primitives.js'
 import type { NodeBinding, SocketName } from './types.js'
 
 export interface BoundInput<T> {

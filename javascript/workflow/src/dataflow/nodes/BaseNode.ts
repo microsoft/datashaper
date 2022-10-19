@@ -7,9 +7,9 @@ import type { Observable } from 'rxjs'
 import { BehaviorSubject, map } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
+import type { Maybe } from '../../primitives.js'
 import type { BoundInput } from '../BoundInput.js'
 import { DefaultBoundInput } from '../BoundInput.js'
-import type { Maybe } from '../primitives.js'
 import type { Node, NodeBinding, NodeId, SocketName } from '../types'
 import { NodeInput, NodeOutput } from '../types.js'
 
@@ -200,10 +200,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected recalculate = (): void => {
 		try {
-			const result = this.doRecalculate()
-			if ((result as Promise<void>)?.then) {
-				;(result as Promise<void>).catch(err => this.emitError(err))
-			}
+			this.doRecalculate()
 		} catch (err) {
 			log('recalculation error in node ' + this.id, err)
 			this.emitError(err)
@@ -213,7 +210,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	/**
 	 * Abstract logic for performing the node recalculation
 	 */
-	protected abstract doRecalculate(): Promise<void> | void
+	protected abstract doRecalculate(): void
 
 	// #endregion
 

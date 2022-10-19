@@ -860,13 +860,8 @@
                   "text": "protected abstract doRecalculate(): "
                 },
                 {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
                   "kind": "Content",
-                  "text": "<void> | void"
+                  "text": "void"
                 },
                 {
                   "kind": "Content",
@@ -876,7 +871,7 @@
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "releaseTag": "Public",
               "isProtected": true,
@@ -4590,55 +4585,6 @@
           }
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/workflow!fetch_2:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "fetch: "
-            },
-            {
-              "kind": "Content",
-              "text": "(id: string) => import(\"../dataflow/index.js\")."
-            },
-            {
-              "kind": "Reference",
-              "text": "InputNode",
-              "canonicalReference": "@datashaper/workflow!InputNode:class"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<unknown>, "
-            },
-            {
-              "kind": "Reference",
-              "text": "FetchArgs",
-              "canonicalReference": "@datashaper/schema!FetchArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "fetch_2",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 8
-          }
-        },
-        {
           "kind": "Function",
           "canonicalReference": "@datashaper/workflow!fetchFile:function(1)",
           "docComment": "",
@@ -5338,93 +5284,6 @@
           }
         },
         {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/workflow!handleMaybeAsync:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function handleMaybeAsync<T>(value: "
-            },
-            {
-              "kind": "Content",
-              "text": "T | "
-            },
-            {
-              "kind": "Reference",
-              "text": "Promise",
-              "canonicalReference": "!Promise:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<T>"
-            },
-            {
-              "kind": "Content",
-              "text": ", handler: "
-            },
-            {
-              "kind": "Content",
-              "text": "(value: T) => void"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "Promise",
-              "canonicalReference": "!Promise:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<void> | void"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 7,
-            "endIndex": 9
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "value",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "handler",
-              "parameterTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
-              },
-              "isOptional": false
-            }
-          ],
-          "typeParameters": [
-            {
-              "typeParameterName": "T",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            }
-          ],
-          "name": "handleMaybeAsync"
-        },
-        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/workflow!Handler:type",
           "docComment": "/**\n * Function callback for general activity listener.\n */\n",
@@ -5534,280 +5393,6 @@
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 8
-          }
-        },
-        {
-          "kind": "Class",
-          "canonicalReference": "@datashaper/workflow!InputNode:class",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare class InputNode<T, Config> extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "BaseNode",
-              "canonicalReference": "@datashaper/workflow!BaseNode:class"
-            },
-            {
-              "kind": "Content",
-              "text": "<T, Config>"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "typeParameters": [
-            {
-              "typeParameterName": "T",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            },
-            {
-              "typeParameterName": "Config",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            }
-          ],
-          "name": "InputNode",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "Constructor",
-              "canonicalReference": "@datashaper/workflow!InputNode:constructor(1)",
-              "docComment": "/**\n * Constructs a new instance of the `InputNode` class\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "constructor(_computeFn: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "InputStep",
-                  "canonicalReference": "@datashaper/workflow!InputStep:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<T, Config>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ");"
-                }
-              ],
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "_computeFn",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 3
-                  },
-                  "isOptional": false
-                }
-              ]
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!InputNode#doRecalculate:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "protected doRecalculate(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<void>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              },
-              "releaseTag": "Public",
-              "isProtected": true,
-              "overloadIndex": 1,
-              "parameters": [],
-              "isOptional": false,
-              "name": "doRecalculate"
-            }
-          ],
-          "extendsTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          },
-          "implementsTokenRanges": []
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/workflow!inputNodeFactory:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function inputNodeFactory<T, Args>(compute: "
-            },
-            {
-              "kind": "Reference",
-              "text": "InputStep",
-              "canonicalReference": "@datashaper/workflow!InputStep:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<T, Args>"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(id: string) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "InputNode",
-              "canonicalReference": "@datashaper/workflow!InputNode:class"
-            },
-            {
-              "kind": "Content",
-              "text": "<T, Args>"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 4,
-            "endIndex": 7
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "compute",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isOptional": false
-            }
-          ],
-          "typeParameters": [
-            {
-              "typeParameterName": "T",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            },
-            {
-              "typeParameterName": "Args",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            }
-          ],
-          "name": "inputNodeFactory"
-        },
-        {
-          "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/workflow!InputStep:type",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare type InputStep<T, Config> = "
-            },
-            {
-              "kind": "Content",
-              "text": "(args: Config, id: string) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "Promise",
-              "canonicalReference": "!Promise:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<T> | T"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "InputStep",
-          "typeParameters": [
-            {
-              "typeParameterName": "T",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            },
-            {
-              "typeParameterName": "Config",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            }
-          ],
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 4
           }
         },
         {
@@ -9866,16 +9451,7 @@
             },
             {
               "kind": "Content",
-              "text": "(source: T, args: Args) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "Promise",
-              "canonicalReference": "!Promise:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<T> | T"
+              "text": "(source: T, args: Args) => T"
             },
             {
               "kind": "Content",
@@ -9910,7 +9486,7 @@
           ],
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 4
+            "endIndex": 2
           }
         },
         {
@@ -10180,7 +9756,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "constructor(_step: "
+                  "text": "constructor(step: "
                 },
                 {
                   "kind": "Reference",
@@ -10201,7 +9777,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "_step",
+                  "parameterName": "step",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
@@ -10220,13 +9796,8 @@
                   "text": "protected doRecalculate(): "
                 },
                 {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
                   "kind": "Content",
-                  "text": "<void> | void"
+                  "text": "void"
                 },
                 {
                   "kind": "Content",
@@ -10236,7 +9807,7 @@
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "releaseTag": "Public",
               "isProtected": true,
