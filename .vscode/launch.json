@@ -1,0 +1,21 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug Jest Tests",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceFolder}/javascript/workflow",
+			"skipFiles": ["<node_internals>/**"],
+			"runtimeExecutable": "yarn",
+			"runtimeArgs": ["run", "--inspect-brk", "jest", "--runInBand"],
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"env": {
+				"NODE_OPTIONS": "--experimental-vm-modules",
+				"DEBUG": "datashaper"
+			},
+			"port": 9229
+		}
+	]
+}
