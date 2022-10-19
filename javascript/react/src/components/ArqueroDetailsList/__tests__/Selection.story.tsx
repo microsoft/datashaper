@@ -18,19 +18,19 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 	const metadata = useMemo(() => introspect(stocks, false), [stocks])
 	return (
 		<ArqueroDetailsList
-			{...args}
-			table={stocks}
-			metadata={metadata}
 			features={{
 				statsColumnHeaders: true,
 				statsColumnTypes: [StatsColumnType.Type],
 			}}
 			showColumnBorders
-			selectedColumn={selected}
-			onColumnClick={(_e, c) => setSelected(c?.name)}
 			clickableColumns
 			sortable
 			defaultSortColumn="Date"
+			{...args}
+			table={stocks}
+			metadata={metadata}
+			selectedColumn={selected}
+			onColumnClick={(_e, c) => setSelected(c?.name)}
 		/>
 	)
 }
