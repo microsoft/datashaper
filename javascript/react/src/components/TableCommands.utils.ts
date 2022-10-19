@@ -39,6 +39,15 @@ export const groupedTableVerbs: GroupedVerbs[] = [
 	{
 		label: 'Transform table',
 		alwaysEnabled: true,
-		verbs: ['groupby', 'ungroup', 'orderby', 'unorder', 'sample', 'select'],
+		verbs: [
+			'decode',
+			'encode',
+			'groupby',
+			'ungroup',
+			'orderby',
+			'unorder',
+			'sample',
+			'select',
+		],
 	},
 ]

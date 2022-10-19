@@ -9,8 +9,10 @@ import type {
 	BinarizeArgs,
 	BooleanArgs,
 	ConvertArgs,
+	DecodeArgs,
 	DedupeArgs,
 	DeriveArgs,
+	EncodeArgs,
 	EraseArgs,
 	FetchArgs,
 	FillArgs,
@@ -61,6 +63,8 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Dedupe; args?: DedupeArgs } & BasicInput)
 		| ({ verb: Verb.Derive; args?: DeriveArgs } & BasicInput)
 		| ({ verb: Verb.Difference } & VariadicInput)
+		| ({ verb: Verb.Decode; args?: DecodeArgs } & BasicInput)
+		| ({ verb: Verb.Encode; args?: EncodeArgs } & BasicInput)
 		| ({ verb: Verb.Erase; args?: EraseArgs } & BasicInput)
 		| ({ verb: Verb.Fetch; args?: FetchArgs } & BasicInput)
 		| ({ verb: Verb.Fill; args?: FillArgs } & BasicInput)

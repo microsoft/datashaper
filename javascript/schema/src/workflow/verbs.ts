@@ -15,6 +15,8 @@ export enum Verb {
 	Dedupe = 'dedupe',
 	Derive = 'derive',
 	Difference = 'difference',
+	Decode = 'decode',
+	Encode = 'encode',
 	Erase = 'erase',
 	Fetch = 'fetch',
 	Fill = 'fill',
@@ -327,6 +329,20 @@ export interface DeriveArgs extends OutputColumnArgs {
 
 export interface EraseArgs extends InputColumnArgs {
 	value: Value
+}
+
+export interface EncodeArgs {
+	/**
+	 * Apply codebook mapping
+	 */
+	applyMapping: boolean
+}
+
+export interface DecodeArgs {
+	/**
+	 * Unapply codebook mapping
+	 */
+	unapplyMapping: boolean
 }
 
 export interface FetchArgs {
