@@ -3374,104 +3374,6 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!FetchArgs:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface FetchArgs "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "FetchArgs",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!FetchArgs#autoMax:member",
-              "docComment": "/**\n * Optional autoMax for tables\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "autoMax?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "number"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "autoMax",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!FetchArgs#delimiter:member",
-              "docComment": "/**\n * Optional delimiter for csv\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "delimiter?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "delimiter",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!FetchArgs#url:member",
-              "docComment": "/**\n * URL where the csv file is located\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "url: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "url",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
           "canonicalReference": "@datashaper/schema!Field:interface",
           "docComment": "/**\n * Contains the full schema definition and metadata for a data field (usually a table column). This includes the required data type, various data nature and rendering properties, potential validation rules, and mappings from a data dictionary.\n */\n",
           "excerptTokens": [
@@ -8264,33 +8166,6 @@
             },
             {
               "kind": "Reference",
-              "text": "Verb.Fetch",
-              "canonicalReference": "@datashaper/schema!Verb.Fetch:member"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    args?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "FetchArgs",
-              "canonicalReference": "@datashaper/schema!FetchArgs:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n} & "
-            },
-            {
-              "kind": "Reference",
-              "text": "BasicInput",
-              "canonicalReference": "@datashaper/schema!BasicInput:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ") | ({\n    verb: "
-            },
-            {
-              "kind": "Reference",
               "text": "Verb.Fill",
               "canonicalReference": "@datashaper/schema!Verb.Fill:member"
             },
@@ -8937,7 +8812,7 @@
           "name": "Step",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 207
+            "endIndex": 201
           }
         },
         {
