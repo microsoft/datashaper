@@ -52,7 +52,7 @@ export function stepVerbFactory<Args>(
 			args: Args,
 		) {
 			if (source.table) {
-				let result: ColumnTable | Promise<ColumnTable> | undefined
+				let result: ColumnTable | undefined
 				try {
 					result = columnTableStep(source.table, args)
 				} catch (err) {
