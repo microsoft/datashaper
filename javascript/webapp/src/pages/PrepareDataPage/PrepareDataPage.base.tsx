@@ -9,7 +9,6 @@ import {
 	ProjectManagementCommandBar,
 	StepHistoryList,
 	TableCommands,
-	ToolPanel,
 	useManagementBarDefaults,
 	useOnCreateStep,
 	useOnDeleteStep,
@@ -19,6 +18,7 @@ import {
 import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
+import { ToolPanel } from '@essex/components'
 import type { IColumn } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
