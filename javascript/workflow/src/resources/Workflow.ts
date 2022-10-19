@@ -478,8 +478,8 @@ export class Workflow
 
 	public toArray(includeInputs = false): Maybe<TableContainer>[] {
 		const result: Maybe<TableContainer>[] = []
-		if (includeInputs) {
-			for (const [, observable] of this._tables) {
+		for (const [name, observable] of this._tables) {
+			if (!this.inputNames.includes(name) || includeInputs) {
 				result.push(observable.value)
 			}
 		}
