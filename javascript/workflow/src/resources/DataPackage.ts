@@ -22,7 +22,6 @@ import type { ResourceHandler, SchemaResource } from './types.js'
 import {
 	isCodebook,
 	isDataTable,
-	isRawData,
 	isWorkflow,
 	resolveRawData,
 	toResourceSchema,
@@ -180,9 +179,12 @@ export class DataPackage
 		if (table.path != null) {
 			if (typeof table.path === 'string') {
 				table.data = await resolveRawData(table.path, files)
-			} else if (Array.isArray(table.path)) {
+			} else if (Array.isArray(table.path) && table.path.length > 0) {
 				// TODO: handle multipart sources
-				table.data = await resolveRawData(table.path[0], files)
+				const firstPath = table.path[0]
+				if (firstPath != null) {
+					table.data = await resolveRawData(firstPath, files)
+				}
 			}
 		}
 		if (schema?.sources != null) {
