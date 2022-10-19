@@ -177,13 +177,19 @@ export class DataPackage
 		schema: DataTableSchema,
 		files: Map<string, Blob>,
 	): Promise<void> {
+		if (table.path != null) {
+			if (typeof table.path === 'string') {
+				table.data = await resolveRawData(table.path, files)
+			} else if (Array.isArray(table.path)) {
+				// TODO: handle multipart sources
+				table.data = await resolveRawData(table.path[0], files)
+			}
+		}
 		if (schema?.sources != null) {
 			for (const r of schema?.sources ?? []) {
 				try {
-					if (isRawData(r, files)) {
-						table.data = await resolveRawData(r as string, files)
-						continue
-					}
+					// TODO: if it's a string, it's a nested data-table
+					// we don't handle those yet
 					const res = await toResourceSchema(r, files)
 					if (!res) {
 						log('cannot resolve resource', r)

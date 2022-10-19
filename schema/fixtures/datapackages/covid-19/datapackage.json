@@ -6,10 +6,10 @@
 			"$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
 			"profile": "datatable",
 			"name": "covid19_small_data",
+			"path": "https://raw.githubusercontent.com/stccenter/COVID-19/master/prediction/patiant-level%20fatality/data/small%20records.csv",
 			"format": "csv",
 			"layout": "micro",
 			"sources": [
-				"https://raw.githubusercontent.com/stccenter/COVID-19/master/prediction/patiant-level%20fatality/data/small%20records.csv",
 				{
 					"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v1.json",
 					"input": ["covid19_small_data"],
