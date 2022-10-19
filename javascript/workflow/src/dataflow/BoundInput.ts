@@ -46,7 +46,7 @@ export class DefaultBoundInput<T> implements BoundInput<T> {
 	}
 
 	public get current(): Maybe<T> {
-		return this._current
+		return this._current.value
 	}
 
 	public get error(): unknown {
