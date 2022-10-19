@@ -27,6 +27,8 @@ import type { Maybe } from '../primitives.js'
 import { Resource } from './Resource.js'
 import type { SchemaResource } from './types.js'
 
+const DEFAULT_INPUT = '__DEFAULT_INPUT__'
+
 /**
  * The workflow object manages mutable data for a workflow specification
  */
@@ -58,21 +60,25 @@ export class Workflow
 		string,
 		BehaviorSubject<Maybe<TableContainer>>
 	> = new Map()
-	private _lastStepSubscription: Subscription | undefined
+	private readonly _tableSubscriptions: Map<string, Subscription> = new Map()
+	private _defaultOutputSubscription: Subscription | undefined
 	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
+	private _defaultInputSubscription: Subscription | undefined
+	private readonly _defaultInput = new BehaviorSubject<Maybe<TableContainer>>()
 
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
 		this.loadSchema(input, true)
+		this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput))
 	}
 
 	private rebindDefaultOutput() {
-		if (this._lastStepSubscription) {
-			this._lastStepSubscription.unsubscribe()
+		if (this._defaultOutputSubscription) {
+			this._defaultOutputSubscription.unsubscribe()
 		}
-		this._lastStepSubscription = this.lastStepOutput()?.subscribe(value =>
+		this._defaultOutputSubscription = this.lastStepOutput()?.subscribe(value =>
 			this._defaultOutput.next(value),
 		)
 	}
@@ -119,8 +125,7 @@ export class Workflow
 		const graph = this._graph
 		// bind to an input defined in the graph
 		if (graph.hasNode(id)) {
-			const result = graph.node(id)
-			return result
+			return graph.node(id)
 		} else if (this.hasInputName(id)) {
 			return observableNode(id, this.read$(id))
 		} else {
@@ -162,9 +167,11 @@ export class Workflow
 	 * Add a named input
 	 * @param input - the input table to add
 	 */
-	public addInputObservable(id: string, source: TableObservable): void {
+	public addInputObservable(
+		source: TableObservable,
+		id?: string | undefined,
+	): void {
 		this._assertInputName(id)
-
 		this._bindInputObservable(id, source)
 
 		this.configureAllSteps()
@@ -197,6 +204,10 @@ export class Workflow
 		if (this._graph.hasNode(id)) {
 			this._graph.remove(id)
 		}
+		if (this._tableSubscriptions.has(id)) {
+			this._tableSubscriptions.get(id)?.unsubscribe()
+			this._graph.remove(id)
+		}
 		this._tables.delete(id)
 	}
 
@@ -205,8 +216,8 @@ export class Workflow
 	 * @param input - the input table to add
 	 * @param id - the input name to bind this table to (default will be the table id)
 	 */
-	public addInputTable(table: TableContainer, id = table.id): void {
-		this.addInputObservable(id, of(table))
+	public addInputTable(table: TableContainer, id: string | undefined): void {
+		this.addInputObservable(of(table), id)
 	}
 
 	public addInputTables(inputs: TableContainer[]): void {
@@ -215,16 +226,38 @@ export class Workflow
 		this.addInputObservables(map)
 	}
 
-	private _bindInputObservable(id: string, source: TableObservable): void {
-		this._removeInputObservable(id)
-		const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
-		source.subscribe(s => subject.next(s))
-		this._tables.set(id, subject)
-		this._graph.add(observableNode(id, source))
+	private _bindInputObservable(
+		id: string | undefined,
+		source: TableObservable,
+	): void {
+		const bindDefaultInput = () => {
+			if (this._defaultInputSubscription != null) {
+				this._defaultInputSubscription.unsubscribe()
+			}
+			this._defaultInputSubscription = source.subscribe(value =>
+				this._defaultInput.next(value),
+			)
+		}
+
+		const bindNamedInput = () => {
+			this._removeInputObservable(id)
+			const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
+			const subscription = source.subscribe(s => subject.next(s))
+			this._tables.set(id, subject)
+			this._tableSubscriptions.set(id, subscription)
+			this._graph.add(observableNode(id, subject))
+		}
+
+		if (id === undefined) {
+			bindDefaultInput()
+		} else {
+			bindNamedInput()
+		}
 	}
 
-	private _assertInputName(id: string): void {
-		if (!this.hasInputName(id)) {
+	private _assertInputName(id: string | undefined): void {
+		// if id is undefined, we're binding the default input
+		if (id !== undefined && !this.hasInputName(id)) {
 			if (this._strictInputs) {
 				throw new Error(`input name ${id} not declared`)
 			} else {
@@ -434,9 +467,9 @@ export class Workflow
 
 	private configureStep(step: Step, node: Node<TableContainer>) {
 		node.config = step.args
+		const stepIdx = this.steps.indexOf(step)
 
-		// if any inputs nodes are in the graph, bind them
-		if (hasDefinedInputs(step)) {
+		const bindDefinedInputs = () => {
 			for (const [input, binding] of Object.entries(step.input)) {
 				// Bind variadic input
 				if (input === 'others') {
@@ -453,10 +486,27 @@ export class Workflow
 					}
 				}
 			}
-		} else if (this.length > 0 && node.inputs.length > 0) {
-			// If no named input is present, try to auto-bind to the previous node
-			const prevStep = this.steps[this.length - 1]!
+		}
+
+		const bindDefaultInput = () => {
+			const inputNode = this._graph.node(DEFAULT_INPUT)
+			node.bind({ node: inputNode })
+		}
+
+		const bindPreviousStepOutput = () => {
+			const prevStep = this.steps[stepIdx - 1]
 			node.bind({ node: this.getNode(prevStep.id) })
+		}
+
+		// if any inputs nodes are in the graph, bind them
+		if (hasDefinedInputs(step)) {
+			bindDefinedInputs()
+		} else if (stepIdx === 0) {
+			bindDefaultInput()
+		} else if (stepIdx > 0) {
+			bindPreviousStepOutput()
+		} else {
+			throw new Error(`cannot bind step input: idx=${stepIdx}`)
 		}
 	}
 
@@ -525,6 +575,7 @@ export class Workflow
 	 */
 	private syncWorkflowStateIntoGraph() {
 		this._graph.clear()
+		this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput))
 		for (const step of this.steps) {
 			this.addWorkflowStepToGraph(step)
 		}

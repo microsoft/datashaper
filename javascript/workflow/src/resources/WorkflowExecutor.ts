@@ -39,6 +39,7 @@ export class WorkflowExecutor {
 	) {
 		// When the source changes, re-wire it into the workflow's
 		// input layer
+		this.workflow.addInputObservable(source)
 		this.source.subscribe(table => {
 			if (this.workflow.length > 0) {
 				this.rebindWorkflowInput()

@@ -36,15 +36,9 @@ export interface Node<T, Config = unknown> {
 
 	/**
 	 * Binds an input socket to an upstream node
-	 * @param name - the name of the input socket
+	 * @param binding - the node binding to apply. If an array, binds variadic input
 	 */
-	bind(binding: NodeBinding<T>): void
-
-	/**
-	 * Binds variadic innput
-	 * @param bindings - the input bindings
-	 */
-	bindVariadic(bindings: Omit<NodeBinding<T>, 'input'>[]): void
+	bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void
 
 	/**
 	 * Clear an input socket
@@ -60,7 +54,12 @@ export interface Node<T, Config = unknown> {
 	/**
 	 * Gets all input bindings
 	 */
-	bindings(): NodeBinding<T>[]
+	bindings: NodeBinding<T>[]
+
+	/**
+	 * An observable of the input bindings
+	 */
+	bindings$: Observable<NodeBinding<T>[]>
 
 	/**
 	 * The number of bound inputs
@@ -71,19 +70,13 @@ export interface Node<T, Config = unknown> {
 	 * Gets an output socket
 	 * @param name - The name of the output socket. If undefined, this will use the implicit default output socket.
 	 */
-	output(name?: SocketName): Observable<Maybe<T>>
+	output$(name?: SocketName): Observable<Maybe<T>>
 
 	/**
 	 * Gets a current output value
 	 * @param name - The output name. If undefined, this will use the implicit default output socket.
 	 */
-	outputValue(name?: SocketName): Maybe<T>
-
-	/**
-	 *
-	 * @param handler - The event handler for when the binding changes
-	 */
-	readonly onBindingsChanged: Observable<void>
+	output(name?: SocketName): Maybe<T>
 }
 
 /**

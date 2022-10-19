@@ -116,12 +116,12 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	// #region outputs
 
-	public output(name: SocketName = DEFAULT_OUTPUT_NAME): Observable<Maybe<T>> {
+	public output$(name: SocketName = DEFAULT_OUTPUT_NAME): Observable<Maybe<T>> {
 		this.verifyOutputSocketName(name)
 		return this._outputs.get(name) as Observable<Maybe<T>>
 	}
 
-	public outputValue(name: SocketName = DEFAULT_OUTPUT_NAME): Maybe<T> {
+	public output(name: SocketName = DEFAULT_OUTPUT_NAME): Maybe<T> {
 		this.verifyOutputSocketName(name)
 		return this._outputs.get(name)?.value
 	}
