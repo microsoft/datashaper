@@ -549,11 +549,7 @@
                     "type": "string"
                 },
                 "node": {
-                    "description": "The id of the node to bind to",
-                    "type": "string"
-                },
-                "output": {
-                    "description": "The named output of the node to bind with. If not defined, this will\nbe the default output \"target\"",
+                    "description": "The id of the input node to bind to",
                     "type": "string"
                 }
             },
@@ -563,11 +559,7 @@
             "description": "An explicit step input binding",
             "properties": {
                 "node": {
-                    "description": "The id of the node to bind to",
-                    "type": "string"
-                },
-                "output": {
-                    "description": "The named output of the node to bind with. If not defined, this will\nbe the default output \"target\"",
+                    "description": "The id of the input node to bind to",
                     "type": "string"
                 }
             },
