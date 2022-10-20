@@ -74,9 +74,9 @@ export function array<T = string>(nodes: ReadonlyArray<T>, edges: ReadonlyArray<
 //
 // @public (undocumented)
 export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
-    constructor(inputs?: SocketName[], outputs?: SocketName[]);
+    constructor(inputs?: SocketName[]);
     // (undocumented)
-    bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void;
+    bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void;
     // (undocumented)
     binding(name?: SocketName): Maybe<NodeBinding<T>>;
     // (undocumented)
@@ -84,14 +84,14 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     get bindings(): NodeBinding<T>[];
     // (undocumented)
-    protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
+    protected bindVariadic(_inputs: VariadicNodeBinding<T>): void;
     // (undocumented)
     get config$(): Observable<Maybe<Config>>;
     // (undocumented)
     get config(): Maybe<Config>;
     set config(value: Maybe<Config>);
     protected abstract doRecalculate(): void;
-    protected emit: (value: Maybe<T>, output?: NodeOutput) => void;
+    protected emit: (value: Maybe<T>) => void;
     protected emitError: (error: unknown) => void;
     protected getInputErrors(): Record<SocketName, unknown>;
     protected getInputValues(): Record<SocketName, Maybe<T>>;
@@ -107,25 +107,22 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected inputValue(name?: SocketName): Maybe<T>;
     // (undocumented)
-    output$(name?: SocketName): Observable<Maybe<T>>;
+    get output$(): Observable<Maybe<T>>;
     // (undocumented)
-    output(name?: SocketName): Maybe<T>;
-    // (undocumented)
-    readonly outputs: SocketName[];
+    get output(): Maybe<T>;
     protected recalculate: () => void;
     // (undocumented)
     unbind(name: SocketName): void;
     protected verifyInputSocketName(name: SocketName): SocketName;
-    protected verifyOutputSocketName(name: SocketName): void;
 }
 
 // Warning: (ae-missing-release-tag) "BaseVariadicNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
-    constructor(inputs?: SocketName[], outputs?: SocketName[]);
+    constructor(inputs?: SocketName[]);
     // (undocumented)
-    bindVariadic(inputs: Omit<NodeBinding<T>, 'input'>[]): void;
+    bindVariadic(inputs: VariadicNodeBinding<T>): void;
     // (undocumented)
     protected getVariadicInputValues(): Maybe<T>[];
 }
@@ -485,9 +482,8 @@ interface Node_2<T, Config = unknown> {
     config: Maybe<Config>;
     readonly id: NodeId;
     readonly inputs: SocketName[];
-    output$(name?: SocketName): Observable<Maybe<T>>;
-    output(name?: SocketName): Maybe<T>;
-    readonly outputs: SocketName[];
+    readonly output$: Observable<Maybe<T>>;
+    readonly output: Maybe<T>;
     unbind(name?: SocketName): void;
 }
 export { Node_2 as Node }
@@ -498,7 +494,6 @@ export { Node_2 as Node }
 export interface NodeBinding<T> {
     input?: SocketName;
     node: Node_2<T>;
-    output?: SocketName;
 }
 
 // Warning: (ae-missing-release-tag) "NodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -816,9 +811,9 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
     // (undocumented)
-    nodeOutput(nodeId: string, port?: string): Maybe<Observable<Maybe<TableContainer>>>;
+    nodeOutput(nodeId: string): Maybe<Observable<Maybe<TableContainer>>>;
     // (undocumented)
-    outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
+    outputNameForNode(nodeId: string): string | undefined;
     get outputNames$(): Observable<string[]>;
     get outputNames(): string[];
     // (undocumented)

@@ -11,8 +11,8 @@ export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
 	private _disposeVariadicInputs: Maybe<() => void>
 	private _getVariadicInputs: Maybe<() => Maybe<T>[]>
 
-	public constructor(inputs: SocketName[] = [], outputs: SocketName[] = []) {
-		super(inputs, outputs)
+	public constructor(inputs: SocketName[] = []) {
+		super(inputs)
 	}
 
 	public override bindVariadic(inputs: VariadicNodeBinding<T>): void {

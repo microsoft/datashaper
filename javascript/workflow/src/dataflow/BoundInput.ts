@@ -28,7 +28,7 @@ export class DefaultBoundInput<T> implements BoundInput<T> {
 		public readonly name: SocketName,
 		public readonly binding: NodeBinding<T>,
 	) {
-		this._bindingSubscription = binding.node.output$(binding.output).subscribe({
+		this._bindingSubscription = binding.node.output$.subscribe({
 			next: v => {
 				this._error = undefined
 				this._current.next(v)

@@ -15,7 +15,7 @@ export declare abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Co
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(inputs, outputs)](./workflow.basevariadicnode._constructor_.md) |  | Constructs a new instance of the <code>BaseVariadicNode</code> class |
+|  [(constructor)(inputs)](./workflow.basevariadicnode._constructor_.md) |  | Constructs a new instance of the <code>BaseVariadicNode</code> class |
 
 ## Methods
 

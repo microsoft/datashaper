@@ -15,7 +15,7 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(inputs, outputs)](./workflow.basenode._constructor_.md) |  | Constructs a new instance of the <code>BaseNode</code> class |
+|  [(constructor)(inputs)](./workflow.basenode._constructor_.md) |  | Constructs a new instance of the <code>BaseNode</code> class |
 
 ## Properties
 
@@ -26,11 +26,12 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 |  [bindings$](./workflow.basenode.bindings_.md) | <code>readonly</code> | Observable&lt;[NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt;\[\]&gt; |  |
 |  [config](./workflow.basenode.config.md) |  | [Maybe](./workflow.maybe.md)<!-- -->&lt;Config&gt; |  |
 |  [config$](./workflow.basenode.config_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;Config&gt;&gt; |  |
-|  [emit](./workflow.basenode.emit.md) | <code>protected</code> | (value: [Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;, output?: [NodeOutput](./workflow.nodeoutput.md)<!-- -->) =&gt; void | Emits a new value into the named output socket |
+|  [emit](./workflow.basenode.emit.md) | <code>protected</code> | (value: [Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;) =&gt; void | Emits a new value into the named output socket |
 |  [emitError](./workflow.basenode.emiterror.md) | <code>protected</code> | (error: unknown) =&gt; void | Emits a downstream error |
 |  [id](./workflow.basenode.id.md) |  | [NodeId](./workflow.nodeid.md) |  |
 |  [inputs](./workflow.basenode.inputs.md) | <code>readonly</code> | [SocketName](./workflow.socketname.md)<!-- -->\[\] |  |
-|  [outputs](./workflow.basenode.outputs.md) | <code>readonly</code> | [SocketName](./workflow.socketname.md)<!-- -->\[\] |  |
+|  [output](./workflow.basenode.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt; |  |
+|  [output$](./workflow.basenode.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;&gt; |  |
 |  [recalculate](./workflow.basenode.recalculate.md) | <code>protected</code> | () =&gt; void | Calculate the value of this processing node. This may be invoked even if this processing node is not fully configured. recalulate() should account for this |
 
 ## Methods
@@ -45,9 +46,6 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 |  [getInputValues()](./workflow.basenode.getinputvalues.md) | <code>protected</code> | Gets a map of named inputs to the current value. |
 |  [hasBoundInput(name)](./workflow.basenode.hasboundinput.md) | <code>protected</code> |  |
 |  [inputValue(name)](./workflow.basenode.inputvalue.md) | <code>protected</code> |  |
-|  [output(name)](./workflow.basenode.output.md) |  |  |
-|  [output$(name)](./workflow.basenode.output_.md) |  |  |
 |  [unbind(name)](./workflow.basenode.unbind.md) |  |  |
 |  [verifyInputSocketName(name)](./workflow.basenode.verifyinputsocketname.md) | <code>protected</code> | Verifies that an input socket name is known |
-|  [verifyOutputSocketName(name)](./workflow.basenode.verifyoutputsocketname.md) | <code>protected</code> | Verifies that an output socket name is known |
 

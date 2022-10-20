@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
+protected bindVariadic(_inputs: VariadicNodeBinding<T>): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  \_inputs | Omit&lt;[NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt;, 'input'&gt;\[\] |  |
+|  \_inputs | [VariadicNodeBinding](./workflow.variadicnodebinding.md)<!-- -->&lt;T&gt; |  |
 
 <b>Returns:</b>
 

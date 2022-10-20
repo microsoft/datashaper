@@ -17,12 +17,11 @@ import type {
 	SocketName,
 	VariadicNodeBinding,
 } from '../types'
-import { NodeInput, NodeOutput } from '../types.js'
+import { NodeInput } from '../types.js'
 
 const log = debug('datashaper')
 
 const DEFAULT_INPUT_NAME = NodeInput.Source
-const DEFAULT_OUTPUT_NAME = NodeOutput.Target
 
 export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region fields
@@ -30,19 +29,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	protected _id = uuid()
 	private _config = new BehaviorSubject<Maybe<Config>>(undefined)
 	private _inputs = new BehaviorSubject<BoundInput<T>[]>([])
-	private _outputs: Map<SocketName, BehaviorSubject<Maybe<T>>> = new Map()
+	private _output = new BehaviorSubject<Maybe<T>>(undefined)
 
 	// #endregion fields
 
-	public constructor(
-		public readonly inputs: SocketName[] = [],
-		public readonly outputs: SocketName[] = [],
-	) {
-		// create new subjects for each output socket
-		;[...outputs, DEFAULT_OUTPUT_NAME].forEach(o => {
-			this._outputs.set(o, new BehaviorSubject<Maybe<T>>(undefined))
-		})
-	}
+	public constructor(public readonly inputs: SocketName[] = []) {}
 
 	// #region field accessors
 
@@ -108,16 +99,14 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	// #endregion inputs
 
-	// #region outputs
+	// #region output
 
-	public output$(name: SocketName = DEFAULT_OUTPUT_NAME): Observable<Maybe<T>> {
-		this.verifyOutputSocketName(name)
-		return this._outputs.get(name) as Observable<Maybe<T>>
+	public get output$(): Observable<Maybe<T>> {
+		return this._output
 	}
 
-	public output(name: SocketName = DEFAULT_OUTPUT_NAME): Maybe<T> {
-		this.verifyOutputSocketName(name)
-		return this._outputs.get(name)?.value
+	public get output(): Maybe<T> {
+		return this._output.value
 	}
 
 	// #endregion outputs
@@ -184,18 +173,6 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		return name
 	}
 
-	/**
-	 * Verifies that an output socket name is known
-	 * @param name - The input socket name
-	 */
-	protected verifyOutputSocketName(name: SocketName): void {
-		if (name === DEFAULT_OUTPUT_NAME) {
-			return
-		} else if (!this.outputs.some(s => s === name)) {
-			throw new Error(`unknown output socket name "${String(name)}"`)
-		}
-	}
-
 	// #endregion
 
 	// #region recalculation
@@ -227,10 +204,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param value - The output value
 	 * @param output - The output socket name
 	 */
-	protected emit = (value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void => {
-		this.verifyOutputSocketName(output)
-		if (value !== this._outputs.get(output)?.value) {
-			this._outputs.get(output)?.next(value)
+	protected emit = (value: Maybe<T>): void => {
+		if (value !== this.output) {
+			this._output.next(value)
 		}
 	}
 
@@ -239,7 +215,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param name - The input socket name
 	 */
 	protected emitError = (error: unknown): void => {
-		this._outputs.forEach(o => o.error(error))
+		this._output.error(error)
 	}
 
 	// #endregion
