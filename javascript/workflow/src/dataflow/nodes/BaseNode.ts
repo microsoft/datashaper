@@ -4,7 +4,7 @@
  */
 import debug from 'debug'
 import type { Observable } from 'rxjs'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, map } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
 import type { Maybe } from '../../primitives.js'
@@ -223,7 +223,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected emit = (value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void => {
 		this.verifyOutputSocketName(output)
-		if (value !== this._outputs.get(output)?.value) {
+		if (value !== this.output(output)) {
 			this._outputs.get(output)?.next(value)
 		}
 	}
