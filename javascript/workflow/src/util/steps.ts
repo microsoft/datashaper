@@ -7,7 +7,7 @@ import cloneDeep from 'lodash-es/cloneDeep.js'
 import difference from 'lodash-es/difference.js'
 import intersection from 'lodash-es/intersection.js'
 
-import type { Step } from '../engine/index.js'
+import type { Step } from '../resources/index.js'
 import { argsHasOutputColumn } from './args.js'
 import { nextColumnName } from './workflowSuggestion.js'
 
