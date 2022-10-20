@@ -471,23 +471,6 @@
             },
             "type": "object"
         },
-        "FetchArgs": {
-            "properties": {
-                "autoMax": {
-                    "description": "Optional autoMax for tables",
-                    "type": "number"
-                },
-                "delimiter": {
-                    "description": "Optional delimiter for csv",
-                    "type": "string"
-                },
-                "url": {
-                    "description": "URL where the csv file is located",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "Field": {
             "description": "Contains the full schema definition and metadata for a data field (usually a table column).\nThis includes the required data type, various data nature and rendering properties, potential\nvalidation rules, and mappings from a data dictionary.",
             "properties": {
