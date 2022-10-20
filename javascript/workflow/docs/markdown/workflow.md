@@ -68,6 +68,7 @@
 |  [SchemaResource](./workflow.schemaresource.md) |  |
 |  [Step](./workflow.step.md) |  |
 |  [StepInput](./workflow.stepinput.md) |  |
+|  [TableExportOptions](./workflow.tableexportoptions.md) |  |
 
 ## Variables
 

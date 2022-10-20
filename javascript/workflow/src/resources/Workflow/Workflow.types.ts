@@ -64,3 +64,9 @@ export interface Step<T extends object | void | unknown = unknown> {
 }
 
 export type NodeFactory = (id: string) => Node<TableContainer>
+
+export interface TableExportOptions {
+	includeInputs?: boolean
+	includeDefaultInput?: boolean
+	includeDefaultOutput?: boolean
+}

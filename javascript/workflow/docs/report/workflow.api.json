@@ -9353,6 +9353,104 @@
           "name": "stepNodeFactory"
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/workflow!TableExportOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface TableExportOptions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "TableExportOptions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!TableExportOptions#includeDefaultInput:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "includeDefaultInput?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "includeDefaultInput",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!TableExportOptions#includeDefaultOutput:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "includeDefaultOutput?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "includeDefaultOutput",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/workflow!TableExportOptions#includeInputs:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "includeInputs?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "includeInputs",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/workflow!TableObservable:type",
           "docComment": "/**\n * The workflow object manages mutable data for a workflow specification\n */\n",
@@ -11424,11 +11522,12 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "toArray(includeInputs?: "
+                  "text": "toArray({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "boolean"
+                  "kind": "Reference",
+                  "text": "TableExportOptions",
+                  "canonicalReference": "@datashaper/workflow!TableExportOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -11467,7 +11566,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "includeInputs",
+                  "parameterName": "{ includeDefaultInput, includeDefaultOutput, includeInputs, }",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
@@ -11485,11 +11584,12 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "toMap(includeInputs?: "
+                  "text": "toMap({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "boolean"
+                  "kind": "Reference",
+                  "text": "TableExportOptions",
+                  "canonicalReference": "@datashaper/workflow!TableExportOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -11537,7 +11637,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "includeInputs",
+                  "parameterName": "{ includeDefaultInput, includeDefaultOutput, includeInputs, }",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
