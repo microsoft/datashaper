@@ -18,7 +18,7 @@ import { BehaviorSubject, map, of } from 'rxjs'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
-import type { Graph, Node } from '../dataflow/types.js'
+import type { Graph, Node, SocketName } from '../dataflow/types.js'
 import { createNode } from '../engine/createNode.js'
 import { readStep } from '../engine/readStep.js'
 import type { Step, StepInput } from '../engine/types.js'
@@ -417,7 +417,7 @@ export class Workflow
 	}
 
 	private configureAllSteps() {
-		// bind the graph processing steps to the new input observables
+		// bind the processing steps to the new input observables
 		// TODO: input observable wiring should probably be managed in the DefaultGraph
 		for (const step of this.steps) {
 			this.configureStep(step, this._graph.node(step.id))
@@ -426,26 +426,30 @@ export class Workflow
 
 	private configureStep(step: Step, node: Node<TableContainer>) {
 		node.config = step.args
+		const stepIndex = this.steps.findIndex(s => s.id === step.id)
 
-		// if any inputs nodes are in the graph, bind them
+		// if any defined inputs are present, try to bind them
 		if (hasDefinedInputs(step)) {
 			for (const [input, binding] of Object.entries(step.input)) {
 				// Bind variadic input
-				if (input === 'others') {
-					const vBind = binding as NamedPortBinding[]
-					node.bind(vBind.map(b => ({ node: this.getNode(b.node) })))
-				} else {
+				if (isVariadic(input, binding)) {
+					node.bind(binding.map(b => ({ node: this.getNode(b.node) })))
+				} else if (this._graph.hasNode(binding.node)) {
 					// Bind the named input
-					const b = binding as NamedPortBinding
-					if (this._graph.hasNode(b.node)) {
-						node.bind({ input, node: this.getNode(b.node) })
-					}
+					node.bind({ input, node: this.getNode(binding.node) })
 				}
 			}
-		} else if (this.length > 0 && node.inputs.length > 0) {
+		} else if (stepIndex > 0) {
 			// If no named input is present, try to auto-bind to the previous node
-			const prevStep = this.steps[this.length - 1]!
+			const prevStep = this.steps[stepIndex - 1]!
 			node.bind({ node: this.getNode(prevStep.id) })
+		}
+
+		function isVariadic(
+			input: SocketName,
+			binding: NamedPortBinding | NamedPortBinding[],
+		): binding is NamedPortBinding[] {
+			return input === 'others'
 		}
 	}
 
