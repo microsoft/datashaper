@@ -55,7 +55,7 @@ export class Workflow
 	//
 	private readonly _tableSubscriptions: Map<string, Subscription> = new Map()
 	private readonly _tables = new Map<string, TableSubject>()
-	private _lastStepSubscription: Subscription | undefined
+	private _defaultOutputSubscription: Subscription | undefined
 	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
@@ -71,9 +71,20 @@ export class Workflow
 	}
 
 	private rebindDefaultOutput() {
-		this._lastStepSubscription?.unsubscribe()
-		this._lastStepSubscription = this.lastStepOutput()?.subscribe(value =>
-			this._defaultOutput.next(value),
+		const defaultOutputObservable = (): Maybe<
+			Observable<Maybe<TableContainer>>
+		> => {
+			const steps = this.steps
+			// Returns the default output of the final node
+			if (steps.length === 0) return this._defaultInput
+			const lastStepId = steps[steps.length - 1]!.id
+			const lastNode = this.getNode(lastStepId)
+			// Nodes use BehaviorSubject internally
+			return lastNode.output$ as Observable<Maybe<TableContainer>>
+		}
+		this._defaultOutputSubscription?.unsubscribe()
+		this._defaultOutputSubscription = defaultOutputObservable()?.subscribe(
+			value => this._defaultOutput.next(value),
 		)
 	}
 
@@ -105,9 +116,6 @@ export class Workflow
 	private _read(name?: string) {
 		if (name == null) {
 			return this._defaultOutput
-		}
-		if (!name) {
-			throw new Error('read table name must be defined')
 		}
 		if (!this._tables.has(name)) {
 			this._tables.set(
@@ -309,16 +317,6 @@ export class Workflow
 		this._onChange.next()
 	}
 
-	private lastStepOutput(): Maybe<Observable<Maybe<TableContainer>>> {
-		const steps = this.steps
-		// Returns the default output of the final node
-		if (steps.length === 0) return undefined
-		const lastStepId = steps[steps.length - 1]!.id
-		const lastNode = this.getNode(lastStepId)
-		// Nodes use BehaviorSubject internally
-		return lastNode.output$ as Observable<Maybe<TableContainer>>
-	}
-
 	public nodeOutput(nodeId: string): Maybe<Observable<Maybe<TableContainer>>> {
 		const output = this.outputNameForNode(nodeId)
 		if (output) {
@@ -398,6 +396,7 @@ export class Workflow
 		this._graph.remove(step.id)
 
 		this._steps.next([...steps.slice(0, index), ...steps.slice(index + 1)])
+		this.rebindDefaultOutput()
 		this._onChange.next()
 	}
 
@@ -516,38 +515,35 @@ export class Workflow
 		schema: Maybe<WorkflowSchema>,
 		quiet?: boolean,
 	): void {
+		const readWorkflowInput = () => {
+			let prev: Step | undefined
+			const newSteps = schema?.steps?.map(i => {
+				const step = readStep(i as StepInput, prev)
+				prev = step
+				return step
+			})
+			this._steps.next(newSteps ?? [])
+			this._inputNames.next(unique(schema?.input ?? []))
+			this._outputPorts.next(schema?.output?.map(resolveOutput) ?? [])
+		}
+
+		const syncWorkflowStateIntoGraph = () => {
+			this._graph.clear()
+			this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput))
+			for (const step of this.steps) {
+				this.addWorkflowStepToGraph(step)
+			}
+			for (const port of this.outputPorts.values()) {
+				this.observeOutput(port)
+			}
+		}
+
 		super.loadSchema(schema, true)
-		this.readWorkflowInput(schema)
-		this.syncWorkflowStateIntoGraph()
+		readWorkflowInput()
+		syncWorkflowStateIntoGraph()
 		this.rebindDefaultOutput()
 		if (!quiet) {
 			this._onChange.next()
-		}
-	}
-
-	private readWorkflowInput(schema?: WorkflowSchema | null | undefined) {
-		let prev: Step | undefined
-		const newSteps = schema?.steps?.map(i => {
-			const step = readStep(i as StepInput, prev)
-			prev = step
-			return step
-		})
-		this._steps.next(newSteps ?? [])
-		this._inputNames.next(unique(schema?.input ?? []))
-		this._outputPorts.next(schema?.output?.map(resolveOutput) ?? [])
-	}
-
-	/**
-	 * Synchronize the workflow state into the graph. Used during initialization.
-	 */
-	private syncWorkflowStateIntoGraph() {
-		this._graph.clear()
-		this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput))
-		for (const step of this.steps) {
-			this.addWorkflowStepToGraph(step)
-		}
-		for (const port of this.outputPorts.values()) {
-			this.observeOutput(port)
 		}
 	}
 
