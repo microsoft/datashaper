@@ -63,6 +63,7 @@ export class Workflow
 	private readonly _defaultInput = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
 	)
+	private _disposables: Array<() => void> = []
 
 	public constructor(input?: WorkflowSchema, private _strictInputs = false) {
 		super()
@@ -71,10 +72,14 @@ export class Workflow
 	}
 
 	public dispose() {
-		this._defaultOutputSubscription?.unsubscribe()
 		this._defaultInputSubscription?.unsubscribe()
+		this._defaultInputSubscription = undefined
+		this._defaultOutputSubscription?.unsubscribe()
+		this._defaultOutputSubscription = undefined
 		this._tableSubscriptions.forEach(s => s.unsubscribe())
+		this._tableSubscriptions.clear()
 		this._graph.clear()
+		this._disposables.forEach(d => d())
 	}
 
 	private rebindDefaultOutput() {
@@ -556,8 +561,13 @@ export class Workflow
 
 	private observeOutput({ name, node: nodeId }: NamedOutputPortBinding) {
 		const node = this.getNode(nodeId)
-		// BaseNode uses BehaviorSubject internally, which saves us some work
-		this._tables.set(name, node.output$ as TableSubject)
+		if (!this._tables.has(name)) {
+			// BaseNode uses BehaviorSubject internally, which saves us some work
+			this._tables.set(name, node.output$ as TableSubject)
+		} else {
+			const s = node.output$.subscribe(it => this._tables.get(name)?.next(it))
+			this._disposables.push(() => s.unsubscribe())
+		}
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
