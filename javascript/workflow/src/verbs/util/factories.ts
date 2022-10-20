@@ -8,7 +8,7 @@ import { container } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { StepFunction } from '../../dataflow/index.js'
-import { BaseVariadicNode, StepNode } from '../../dataflow/index.js'
+import { BaseNode, StepNode } from '../../dataflow/index.js'
 import type { Maybe } from '../../primitives.js'
 import { set } from './sets.js'
 
@@ -19,7 +19,7 @@ export type ColumnTableTransformer<T> = (
 	args: T,
 ) => ColumnTable
 
-export class SetOperationNode<Args = unknown> extends BaseVariadicNode<
+export class SetOperationNode<Args = unknown> extends BaseNode<
 	TableContainer,
 	Args
 > {

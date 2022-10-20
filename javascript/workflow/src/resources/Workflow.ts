@@ -304,26 +304,18 @@ export class Workflow
 		const lastStepId = steps[steps.length - 1]!.id
 		const lastNode = this.getNode(lastStepId)
 		// Nodes use BehaviorSubject internally
-		return lastNode.output$() as Observable<Maybe<TableContainer>>
+		return lastNode.output$ as Observable<Maybe<TableContainer>>
 	}
 
-	public nodeOutput(
-		nodeId: string,
-		port?: string,
-	): Maybe<Observable<Maybe<TableContainer>>> {
-		const output = this.outputNameForNode(nodeId, port)
+	public nodeOutput(nodeId: string): Maybe<Observable<Maybe<TableContainer>>> {
+		const output = this.outputNameForNode(nodeId)
 		if (output) {
 			return this.read$(output)
 		}
 	}
 
-	public outputNameForNode(
-		nodeId: string,
-		nodeOutput?: string,
-	): string | undefined {
-		return this.outputPorts.find(
-			def => def.node === nodeId && def.output === nodeOutput,
-		)?.name
+	public outputNameForNode(nodeId: string): string | undefined {
+		return this.outputPorts.find(def => def.node === nodeId)?.name
 	}
 
 	// #endregion
@@ -441,15 +433,12 @@ export class Workflow
 				// Bind variadic input
 				if (input === 'others') {
 					const vBind = binding as NamedPortBinding[]
-					node.bind(
-						vBind.map(b => ({ node: this.getNode(b.node), output: b.output })),
-					)
+					node.bind(vBind.map(b => ({ node: this.getNode(b.node) })))
 				} else {
 					// Bind the named input
 					const b = binding as NamedPortBinding
 					if (this._graph.hasNode(b.node)) {
-						const boundInput = this.getNode(b.node)
-						node.bind({ input, node: boundInput, output: b.output })
+						node.bind({ input, node: this.getNode(b.node) })
 					}
 				}
 			}
@@ -533,14 +522,10 @@ export class Workflow
 		}
 	}
 
-	private observeOutput({
-		name,
-		output,
-		node: nodeId,
-	}: NamedOutputPortBinding) {
+	private observeOutput({ name, node: nodeId }: NamedOutputPortBinding) {
 		const node = this.getNode(nodeId)
 		// BaseNode uses BehaviorSubject internally, which saves us some work
-		const val = node.output$(output) as BehaviorSubject<Maybe<TableContainer>>
+		const val = node.output$ as BehaviorSubject<Maybe<TableContainer>>
 		this._tables.set(name, val)
 	}
 

@@ -6069,7 +6069,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!NamedPortBinding#node:member",
-              "docComment": "/**\n * The id of the node to bind to\n */\n",
+              "docComment": "/**\n * The id of the input node to bind to\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6088,33 +6088,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "node",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!NamedPortBinding#output:member",
-              "docComment": "/**\n * The named output of the node to bind with. If not defined, this will be the default output \"target\"\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "output?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "output",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

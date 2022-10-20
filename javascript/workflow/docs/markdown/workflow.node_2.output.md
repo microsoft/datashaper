@@ -2,23 +2,12 @@
 
 [Home](./index.md) &gt; [@datashaper/workflow](./workflow.md) &gt; [Node\_2](./workflow.node_2.md) &gt; [output](./workflow.node_2.output.md)
 
-## Node\_2.output() method
+## Node\_2.output property
 
 Gets a current output value
 
 <b>Signature:</b>
 
 ```typescript
-output(name?: SocketName): Maybe<T>;
+readonly output: Maybe<T>;
 ```
-
-## Parameters
-
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  name | [SocketName](./workflow.socketname.md) | <i>(Optional)</i> The output name. If undefined, this will use the implicit default output socket. |
-
-<b>Returns:</b>
-
-[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;
-

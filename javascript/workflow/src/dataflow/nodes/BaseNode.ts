@@ -3,49 +3,45 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import debug from 'debug'
-import type { Observable } from 'rxjs'
-import { BehaviorSubject, map } from 'rxjs'
+import type { Observable, Subscription } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
 import type { Maybe } from '../../primitives.js'
-import type { BoundInput } from '../BoundInput.js'
-import { DefaultBoundInput } from '../BoundInput.js'
-import type { Node, NodeBinding, NodeId, SocketName } from '../types'
-import { NodeInput, NodeOutput } from '../types.js'
+import type {
+	Node,
+	NodeBinding,
+	NodeId,
+	SocketName,
+	VariadicNodeBinding,
+} from '../types'
+import { NodeInput } from '../types.js'
 
 const log = debug('datashaper')
 
 const DEFAULT_INPUT_NAME = NodeInput.Source
-const DEFAULT_OUTPUT_NAME = NodeOutput.Target
 
 export abstract class BaseNode<T, Config> implements Node<T, Config> {
-	// #region fields
+	public id: NodeId = uuid()
 
-	protected _id = uuid()
+	// Observable Outputs
 	private _config = new BehaviorSubject<Maybe<Config>>(undefined)
-	private _inputs = new BehaviorSubject<BoundInput<T>[]>([])
-	private _outputs: Map<SocketName, BehaviorSubject<Maybe<T>>> = new Map()
+	private _output = new BehaviorSubject<Maybe<T>>(undefined)
+	private _bindings = new BehaviorSubject<NodeBinding<T>[]>([])
 
-	// #endregion fields
+	// Input Subscriptions
+	private _inputValues = new Map<SocketName, BehaviorSubject<Maybe<T>>>()
+	private _inputErrors = new Map<SocketName, BehaviorSubject<unknown>>()
+	private _inputSubscriptions = new Map<SocketName, Subscription>()
 
-	public constructor(
-		public readonly inputs: SocketName[] = [],
-		public readonly outputs: SocketName[] = [],
-	) {
-		// create new subjects for each output socket
-		;[...outputs, DEFAULT_OUTPUT_NAME].forEach(o => {
-			this._outputs.set(o, new BehaviorSubject<Maybe<T>>(undefined))
-		})
-	}
+	// Variadic Inputs
+	private _disposeVariadicInputs: Maybe<() => void>
+	private _getVariadicInputs: Maybe<() => Maybe<T>[]>
 
-	// #region field accessors
+	public constructor(public readonly inputs: SocketName[] = []) {}
 
-	public get id(): NodeId {
-		return this._id
-	}
-
-	public set id(value: NodeId) {
-		this._id = value
+	public get config$(): Observable<Maybe<Config>> {
+		return this._config
 	}
 
 	public get config(): Maybe<Config> {
@@ -57,29 +53,26 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		void this.recalculate()
 	}
 
-	public get config$(): Observable<Maybe<Config>> {
-		return this._config
-	}
-
 	// #endregion field accessors
 
 	// #region inputs
 
 	public binding(name: SocketName = DEFAULT_INPUT_NAME): Maybe<NodeBinding<T>> {
-		return this._inputs.value.find(i => i.name === name)?.binding
+		name = this.verifyInputSocketName(name)
+		return this._bindings.value.find(i => i.input === name)
 	}
 
 	public get bindings$(): Observable<NodeBinding<T>[]> {
-		return this._inputs.pipe(map(inputs => inputs.map(i => i.binding)))
+		return this._bindings
 	}
 
 	public get bindings(): NodeBinding<T>[] {
-		return this._inputs.value.map(i => i.binding)
+		return this._bindings.value
 	}
 
 	protected inputValue(name: SocketName = DEFAULT_INPUT_NAME): Maybe<T> {
-		this.verifyInputSocketName(name)
-		return this._inputs.value.find(i => i.name === name)?.current
+		name = this.verifyInputSocketName(name)
+		return this._inputValues.get(name)?.value
 	}
 
 	/**
@@ -87,8 +80,14 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected getInputValues(): Record<SocketName, Maybe<T>> {
 		const result: Record<SocketName, Maybe<T>> = {}
-		this._inputs.value.forEach(i => (result[i.name] = i.current))
+		for (const input of this.inputs) {
+			result[input] = this._inputValues.get(input)?.value
+		}
 		return result
+	}
+
+	protected getVariadicInputValues(): Maybe<T>[] {
+		return this._getVariadicInputs?.() ?? []
 	}
 
 	/**
@@ -96,71 +95,117 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected getInputErrors(): Record<SocketName, unknown> {
 		const result: Record<SocketName, unknown> = {}
-		this._inputs.value.forEach(i => (result[i.name] = i.error))
+		for (const input of this.inputs) {
+			result[input] = this._inputErrors.get(input)?.value
+		}
 		return result
 	}
 
 	// #endregion inputs
 
-	// #region outputs
+	// #region output
 
-	public output$(name: SocketName = DEFAULT_OUTPUT_NAME): Observable<Maybe<T>> {
-		this.verifyOutputSocketName(name)
-		return this._outputs.get(name) as Observable<Maybe<T>>
+	public get output$(): Observable<Maybe<T>> {
+		return this._output
 	}
 
-	public output(name: SocketName = DEFAULT_OUTPUT_NAME): Maybe<T> {
-		this.verifyOutputSocketName(name)
-		return this._outputs.get(name)?.value
+	public get output(): Maybe<T> {
+		return this._output.value
 	}
 
 	// #endregion outputs
 
 	// #region bind/unbind logic
 
-	public bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void {
-		if (Array.isArray(binding)) {
-			this.bindVariadic(binding)
-		} else {
-			const name = this.verifyInputSocketName(
-				binding.input ?? DEFAULT_INPUT_NAME,
+	public bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void {
+		const bindVariadic = (binding: VariadicNodeBinding<T>) => {
+			this._disposeVariadicInputs?.()
+
+			// empty array of initial inputs
+			const values: Maybe<T>[] = binding.map(() => undefined)
+			const subs = binding.map((i, index) =>
+				i.node.output$.subscribe(v => {
+					values[index] = v
+					this.recalculate()
+				}),
 			)
-			// uninstall any existing upstream socket connection
-			if (this.hasBoundInput(name)) {
-				this.unbind(name)
+
+			// provide class-level access to the current values
+			this._disposeVariadicInputs = () => subs.forEach(s => s.unsubscribe())
+			this._getVariadicInputs = () => values
+		}
+
+		const bindSingleInput = (binding: NodeBinding<T>) => {
+			const addBinding = () => {
+				this._bindings.next([
+					...this.bindings.filter(i => i.input !== input),
+					binding,
+				])
+			}
+			const lazilyAddInputObservable = () => {
+				if (!this._inputValues.has(input)) {
+					this._inputValues.set(input, new BehaviorSubject<Maybe<T>>(undefined))
+					this._inputErrors.set(input, new BehaviorSubject<unknown>(undefined))
+				}
+			}
+			const listenToInput = () => {
+				this._inputSubscriptions.set(
+					input,
+					binding.node.output$.subscribe({
+						next: value => {
+							this._inputValues.get(input)?.next(value)
+							this._inputErrors.get(input)?.next(undefined)
+							this.recalculate()
+						},
+						error: (error: unknown) => {
+							this._inputValues.get(input)?.next(undefined)
+							this._inputErrors.get(input)?.next(error)
+							this?.recalculate()
+						},
+					}),
+				)
 			}
 
-			// subscribe to the new input
-			const input: BoundInput<T> = new DefaultBoundInput(name, binding)
-			this._inputs.next([
-				...this._inputs.value.filter(i => i.name !== name),
-				input,
-			])
+			const input = this.verifyInputSocketName(binding.input)
+			this.unbindSilent(input)
 
-			input.onValueChange(() => this.recalculate())
-			this.recalculate()
+			addBinding()
+			lazilyAddInputObservable()
+			listenToInput()
 		}
+
+		if (Array.isArray(binding)) {
+			bindVariadic(binding)
+		} else {
+			bindSingleInput(binding)
+		}
+		this.recalculate()
 	}
 
 	protected hasBoundInput(name: SocketName): boolean {
-		const existing = this._inputs.value.find(i => i.name === name)
+		const existing = this.bindings.find(
+			i =>
+				i.input === name || (isDefaultInput(i.input) && isDefaultInput(name)),
+		)
 		return existing != null
 	}
 
-	protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void {
-		throw new Error('variadic input not supported')
-	}
-
 	public unbind(name: SocketName): void {
-		this.verifyInputSocketName(name)
+		name = this.verifyInputSocketName(name)
 		if (this.hasBoundInput(name)) {
-			// unsubscribe from updates
-			this._inputs.value.find(i => i.name === name)?.dispose()
-			this._inputs.next(this._inputs.value.filter(i => i.name !== name))
-			void this.recalculate()
+			this.unbindSilent(name)
+			this.recalculate()
 		} else {
 			throw new Error(`no socket installed at "${String(name)}"`)
 		}
+	}
+
+	private unbindSilent(name: SocketName): void {
+		if (this._bindings.value.some(i => i.input === name)) {
+			this._bindings.next(this._bindings.value.filter(i => i.input !== name))
+		}
+		this._inputSubscriptions.get(name)?.unsubscribe()
+		this._inputSubscriptions.delete(name)
 	}
 
 	// #endregion
@@ -171,23 +216,13 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Verifies that an input socket name is known
 	 * @param name - The input socket name
 	 */
-	protected verifyInputSocketName(name: SocketName): SocketName {
-		if (name !== DEFAULT_INPUT_NAME && !this.inputs.some(s => s === name)) {
+	protected verifyInputSocketName(name?: SocketName): SocketName {
+		if (isDefaultInput(name)) {
+			return DEFAULT_INPUT_NAME
+		} else if (!this.inputs.some(s => s === name)) {
 			throw new Error(`unknown input socket name "${String(name)}"`)
 		}
 		return name
-	}
-
-	/**
-	 * Verifies that an output socket name is known
-	 * @param name - The input socket name
-	 */
-	protected verifyOutputSocketName(name: SocketName): void {
-		if (name === DEFAULT_OUTPUT_NAME) {
-			return
-		} else if (!this.outputs.some(s => s === name)) {
-			throw new Error(`unknown output socket name "${String(name)}"`)
-		}
 	}
 
 	// #endregion
@@ -221,10 +256,9 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param value - The output value
 	 * @param output - The output socket name
 	 */
-	protected emit = (value: Maybe<T>, output = DEFAULT_OUTPUT_NAME): void => {
-		this.verifyOutputSocketName(output)
-		if (value !== this._outputs.get(output)?.value) {
-			this._outputs.get(output)?.next(value)
+	protected emit = (value: Maybe<T>): void => {
+		if (value !== this.output) {
+			this._output.next(value)
 		}
 	}
 
@@ -233,8 +267,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * @param name - The input socket name
 	 */
 	protected emitError = (error: unknown): void => {
-		this._outputs.forEach(o => o.error(error))
+		this._output.error(error)
 	}
 
 	// #endregion
 }
+
+export const isDefaultInput = (name?: SocketName): name is undefined =>
+	name === undefined || name === DEFAULT_INPUT_NAME

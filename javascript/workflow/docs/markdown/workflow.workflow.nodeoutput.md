@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-nodeOutput(nodeId: string, port?: string): Maybe<Observable<Maybe<TableContainer>>>;
+nodeOutput(nodeId: string): Maybe<Observable<Maybe<TableContainer>>>;
 ```
 
 ## Parameters
@@ -15,7 +15,6 @@ nodeOutput(nodeId: string, port?: string): Maybe<Observable<Maybe<TableContainer
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  nodeId | string |  |
-|  port | string | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
