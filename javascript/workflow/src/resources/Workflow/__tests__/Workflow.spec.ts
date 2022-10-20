@@ -224,10 +224,26 @@ describe('The Workflow Resource', () => {
 		expect(wf.outputNames[0]).toBe('intermediate')
 
 		// default table + intermediate
-		expect(wf.toArray()).toHaveLength(2)
-		expect(wf.toArray(true).map(t => t?.id)).toHaveLength(3)
-		expect([...wf.toMap().keys()]).toHaveLength(2)
-		expect([...wf.toMap(true).keys()]).toHaveLength(3)
+		expect(wf.toArray()).toHaveLength(1)
+		expect(
+			wf
+				.toArray({
+					includeDefaultInput: true,
+					includeInputs: true,
+					includeDefaultOutput: true,
+				})
+				.map(t => t?.id),
+		).toHaveLength(3)
+		expect([...wf.toMap().keys()]).toHaveLength(1)
+		expect([
+			...wf
+				.toMap({
+					includeDefaultInput: true,
+					includeInputs: true,
+					includeDefaultOutput: true,
+				})
+				.keys(),
+		]).toHaveLength(3)
 	})
 
 	it('emits a default tablecontainer with id = name', () => {
