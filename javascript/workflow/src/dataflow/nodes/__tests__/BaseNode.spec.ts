@@ -27,17 +27,10 @@ describe('BaseNode', () => {
 		expect(() => sum.unbind(Input.LHS)).toThrow(/no socket installed at "lhs"/)
 	})
 
-	it('will throw an error when retriving an unknown output socket', () => {
-		const two = new ValueNode(2)
-		expect(() => two.output('derp')).toThrow(
-			/unknown output socket name "derp"/,
-		)
-	})
-
 	it('can define a value node', () => {
 		const two = new ValueNode(2)
 		let value = null
-		two.output$().subscribe(v => {
+		two.output$.subscribe(v => {
 			value = v
 		})
 		expect(value).toBe(2)
@@ -48,10 +41,10 @@ describe('BaseNode', () => {
 		const three = new ValueNode(3)
 
 		const sum = new AddNode()
-		expect(sum.output()).toBeUndefined()
+		expect(sum.output).toBeUndefined()
 		sum.bind({ input: Input.LHS, node: two })
 		sum.bind({ input: Input.RHS, node: three })
-		expect(sum.output()).toBe(5)
+		expect(sum.output).toBe(5)
 	})
 
 	it('can rewire an expression', () => {
@@ -61,10 +54,10 @@ describe('BaseNode', () => {
 
 		sum.bind({ input: Input.LHS, node: two })
 		sum.bind({ input: Input.RHS, node: three })
-		expect(sum.output()).toBe(5)
+		expect(sum.output).toBe(5)
 
 		sum.bind({ input: Input.LHS, node: three })
-		expect(sum.output()).toBe(6)
+		expect(sum.output).toBe(6)
 	})
 
 	it('can define a nested mathematical expression', () => {
@@ -79,17 +72,17 @@ describe('BaseNode', () => {
 		subtraction.bind({ input: Input.LHS, node: sum })
 		subtraction.bind({ input: Input.RHS, node: one })
 
-		expect(subtraction.output()).toBe(4)
+		expect(subtraction.output).toBe(4)
 
 		const mult = new MultiplyNode()
 		mult.bind({ input: Input.LHS, node: subtraction })
 		mult.bind({ input: Input.RHS, node: two })
-		expect(mult.output()).toBe(8)
+		expect(mult.output).toBe(8)
 
 		const div = new DivideNode()
 		div.bind({ input: Input.LHS, node: mult })
 		div.bind({ input: Input.RHS, node: two })
-		expect(div.output()).toBe(4)
+		expect(div.output).toBe(4)
 	})
 
 	it('can react to value changes', () => {
@@ -99,11 +92,11 @@ describe('BaseNode', () => {
 
 		sum.bind({ input: Input.LHS, node: two })
 		sum.bind({ input: Input.RHS, node: three })
-		expect(sum.output()).toBe(5)
+		expect(sum.output).toBe(5)
 
 		// trigger a config-based recompute
 		two.config = 3
-		expect(sum.output()).toBe(6)
+		expect(sum.output).toBe(6)
 	})
 
 	it('will emit errors when recalculate throws', () => {
@@ -114,7 +107,7 @@ describe('BaseNode', () => {
 		div.bind({ input: Input.RHS, node: zero })
 
 		let caught: Error | undefined
-		div.output$().subscribe({
+		div.output$.subscribe({
 			next: value => {
 				console.log("shouldn't get here", value)
 			},
