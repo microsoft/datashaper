@@ -234,6 +234,8 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
     // (undocumented)
+    dispose(): void;
+    // (undocumented)
     get format(): DataFormat;
     set format(value: DataFormat);
     // (undocumented)
@@ -782,6 +784,8 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     addStep(stepInput: StepInput): Step;
     // (undocumented)
     set defaultInput(source: TableObservable);
+    // (undocumented)
+    dispose(): void;
     // (undocumented)
     hasInputName(input: string): boolean;
     // (undocumented)

@@ -41,6 +41,7 @@ export declare class DataTable extends Resource implements SchemaResource<DataTa
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [connect(store)](./workflow.datatable.connect.md) |  |  |
+|  [dispose()](./workflow.datatable.dispose.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.datatable.loadschema.md) |  |  |
 |  [toSchema()](./workflow.datatable.toschema.md) |  |  |
 

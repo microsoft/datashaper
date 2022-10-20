@@ -47,6 +47,7 @@ export declare class Workflow extends Resource implements SchemaResource<Workflo
 |  [addInputTables(inputs)](./workflow.workflow.addinputtables.md) |  |  |
 |  [addOutput(output)](./workflow.workflow.addoutput.md) |  | Add an output binding |
 |  [addStep(stepInput)](./workflow.workflow.addstep.md) |  | Adds a step to the pipeline |
+|  [dispose()](./workflow.workflow.dispose.md) |  |  |
 |  [hasInputName(input)](./workflow.workflow.hasinputname.md) |  |  |
 |  [hasOutputName(name)](./workflow.workflow.hasoutputname.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.workflow.loadschema.md) |  |  |
