@@ -4,7 +4,7 @@
  */
 import type { Maybe } from '../../primitives.js'
 import { DefaultBoundInput } from '../BoundInput.js'
-import type { NodeBinding, SocketName } from '../types.js'
+import type { SocketName, VariadicNodeBinding } from '../types.js'
 import { BaseNode } from './BaseNode.js'
 
 export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
@@ -15,7 +15,7 @@ export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
 		super(inputs, outputs)
 	}
 
-	public override bindVariadic(inputs: Omit<NodeBinding<T>, 'input'>[]): void {
+	public override bindVariadic(inputs: VariadicNodeBinding<T>): void {
 		// unsubcribe to old variadic inputs
 		if (this._disposeVariadicInputs) {
 			this._disposeVariadicInputs()

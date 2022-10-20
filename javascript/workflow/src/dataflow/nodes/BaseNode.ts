@@ -10,7 +10,13 @@ import { v4 as uuid } from 'uuid'
 import type { Maybe } from '../../primitives.js'
 import type { BoundInput } from '../BoundInput.js'
 import { DefaultBoundInput } from '../BoundInput.js'
-import type { Node, NodeBinding, NodeId, SocketName } from '../types'
+import type {
+	Node,
+	NodeBinding,
+	NodeId,
+	SocketName,
+	VariadicNodeBinding,
+} from '../types'
 import { NodeInput, NodeOutput } from '../types.js'
 
 const log = debug('datashaper')
@@ -118,7 +124,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	// #region bind/unbind logic
 
-	public bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void {
+	public bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void {
 		if (Array.isArray(binding)) {
 			this.bindVariadic(binding)
 		} else {
@@ -147,7 +153,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		return existing != null
 	}
 
-	protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void {
+	protected bindVariadic(_inputs: VariadicNodeBinding<T>): void {
 		throw new Error('variadic input not supported')
 	}
 
