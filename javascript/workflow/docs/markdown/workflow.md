@@ -37,6 +37,7 @@
 |  [array(nodes, edges)](./workflow.array.md) |  |
 |  [cloneStep(step, columnNames)](./workflow.clonestep.md) |  |
 |  [columnTransformVerbs(filter)](./workflow.columntransformverbs.md) | These are steps that specifically operate on an input/output column only. In other words, they do not cause a change in the number of rows in a table, such as an aggregate or filter would, and only replace or add one column. |
+|  [createNode(step)](./workflow.createnode.md) |  |
 |  [fetchFile(url)](./workflow.fetchfile.md) |  |
 |  [fetchJson(url)](./workflow.fetchjson.md) |  |
 |  [isInputColumnListStep(step)](./workflow.isinputcolumnliststep.md) | Indicates whether the supplied step requires multiple input columns. |
@@ -47,10 +48,12 @@
 |  [isInputTableStep(step)](./workflow.isinputtablestep.md) | Indicates whether this step requires an input table. |
 |  [isNumericInputStep(step)](./workflow.isnumericinputstep.md) | Indicates whether this step can only operate on numeric values. |
 |  [isOutputColumnStep(step)](./workflow.isoutputcolumnstep.md) | Indicates whether the supplied step requires a single output column. |
+|  [isValidWorkflowSchema(workflowJson)](./workflow.isvalidworkflowschema.md) |  |
 |  [join(id)](./workflow.join.md) |  |
 |  [lookup(id)](./workflow.lookup.md) |  |
 |  [nextColumnName(name, columnNames)](./workflow.nextcolumnname.md) | Suggests a new column name given the list passed. If the name is used, this will append numbers to the end. e.g. "column" may result in "column 1" or "column 2" if there are collisions |
 |  [observableNode(id, source)](./workflow.observablenode.md) |  |
+|  [readStep({ verb, args, id, input }, previous)](./workflow.readstep.md) | Factory function to create new verb configs with as many reasonable defaults as possible. |
 |  [stepNodeFactory(stepFunction)](./workflow.stepnodefactory.md) |  |
 |  [verbs(filter)](./workflow.verbs.md) | Returns all verbs, subject to optional filter. |
 

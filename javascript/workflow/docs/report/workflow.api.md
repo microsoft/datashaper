@@ -170,6 +170,11 @@ export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertA
 // @public (undocumented)
 export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 
+// Warning: (ae-missing-release-tag) "createNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createNode(step: Step): Node_2<TableContainer>;
+
 // Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -404,6 +409,11 @@ export function isNumericInputStep(step: Step): boolean;
 // @public
 export function isOutputColumnStep(step: Step): boolean;
 
+// Warning: (ae-missing-release-tag) "isValidWorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function isValidWorkflowSchema(workflowJson?: WorkflowSchema): Promise<boolean>;
+
 // Warning: (ae-forgotten-export) The symbol "JoinNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "join" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -581,6 +591,11 @@ export class ParserOptions extends Observed implements ParserOptions_2, SchemaRe
 //
 // @public (undocumented)
 export const pivot: (id: string) => StepNode<TableContainer<unknown>, PivotArgs>;
+
+// Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function readStep<T extends object | void | unknown = any>({ verb, args, id, input }: StepInput<T>, previous?: Step | undefined): Step<T>;
 
 // Warning: (ae-missing-release-tag) "recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
