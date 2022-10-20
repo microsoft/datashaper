@@ -12,18 +12,12 @@
 			"sources": [
 				{
 					"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v1.json",
-					"input": ["covid19_small_data"],
 					"steps": [
 						{
 							"verb": "window",
 							"args": {
 								"operation": "row_number",
 								"to": "index"
-							},
-							"input": {
-								"source": {
-									"node": "covid19_small_data"
-								}
 							}
 						},
 						{

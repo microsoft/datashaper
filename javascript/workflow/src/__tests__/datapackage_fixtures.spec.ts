@@ -56,8 +56,8 @@ function defineTestCase(parentPath: string, test: string) {
 			const found = datapackage.tableStore.get(table.name)
 			expect(found).toBeDefined()
 			expect(found?.workflow.length).toEqual(table.workflowLength ?? 0)
-			expect(found?.currentOutput?.table?.numRows()).toBeGreaterThan(0)
-			expect(found?.currentOutput?.table?.numCols()).toBeGreaterThan(0)
+			expect(found?.output?.table?.numRows()).toBeGreaterThan(0)
+			expect(found?.output?.table?.numCols()).toBeGreaterThan(0)
 		}
 		await checkPersisted(await datapackage.save(), expected)
 	})

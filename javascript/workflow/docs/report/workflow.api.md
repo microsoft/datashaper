@@ -170,10 +170,10 @@ export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertA
 // @public (undocumented)
 export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 
-// Warning: (ae-missing-release-tag) "createWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "createNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export function createWorkflow(input: WorkflowSchema, tables: TableContainer[]): Workflow;
+// @public (undocumented)
+export function createNode(step: Step): Node_2<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -231,12 +231,10 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     // (undocumented)
     connect(store: TableStore): void;
     // (undocumented)
-    get currentOutput(): Maybe_2<TableContainer>;
-    // (undocumented)
-    get currentSource(): Maybe_2<ColumnTable>;
-    // (undocumented)
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
+    // (undocumented)
+    dispose(): void;
     // (undocumented)
     get format(): DataFormat;
     set format(value: DataFormat);
@@ -246,13 +244,17 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     get name(): string;
     set name(value: string);
     // (undocumented)
-    get output(): Observable<Maybe_2<TableContainer>>;
+    get output$(): Observable<Maybe_2<TableContainer>>;
+    // (undocumented)
+    get output(): Maybe_2<TableContainer>;
     // (undocumented)
     readonly parser: ParserOptions;
     // (undocumented)
     readonly shape: DataShape;
     // (undocumented)
-    get source(): Observable<Maybe_2<ColumnTable>>;
+    get source$(): Observable<Maybe_2<ColumnTable>>;
+    // (undocumented)
+    get source(): Maybe_2<ColumnTable>;
     // (undocumented)
     toSchema(): DataTableSchema;
     // (undocumented)
@@ -406,6 +408,11 @@ export function isNumericInputStep(step: Step): boolean;
 //
 // @public
 export function isOutputColumnStep(step: Step): boolean;
+
+// Warning: (ae-missing-release-tag) "isValidWorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function isValidWorkflowSchema(workflowJson?: WorkflowSchema): Promise<boolean>;
 
 // Warning: (ae-forgotten-export) The symbol "JoinNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "join" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -771,15 +778,19 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     readonly $schema: string;
     constructor(input?: WorkflowSchema, _strictInputs?: boolean);
+    addInput(source: TableObservable, id: string): void;
     // (undocumented)
     addInputName(input: string): void;
-    addInputObservable(id: string, source: TableObservable): void;
-    addInputObservables(values: Map<string, TableObservable>): void;
-    addInputTable(table: TableContainer, id?: string): void;
+    addInputs(values: Map<string, TableObservable>): void;
+    addInputTable(table: TableContainer, id: string): void;
     // (undocumented)
     addInputTables(inputs: TableContainer[]): void;
     addOutput(output: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
+    // (undocumented)
+    set defaultInput(source: TableObservable);
+    // (undocumented)
+    dispose(): void;
     // (undocumented)
     hasInputName(input: string): boolean;
     // (undocumented)
@@ -828,19 +839,6 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)
     static validate(workflowJson: WorkflowSchema): Promise<boolean>;
-}
-
-// Warning: (ae-missing-release-tag) "WorkflowSchemaInstance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const WorkflowSchemaInstance: WorkflowSchemaValidator;
-
-// Warning: (ae-missing-release-tag) "WorkflowSchemaValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export class WorkflowSchemaValidator {
-    // (undocumented)
-    isValid(workflowJson?: WorkflowSchema): Promise<boolean>;
 }
 
 // (No @packageDocumentation comment for this package)

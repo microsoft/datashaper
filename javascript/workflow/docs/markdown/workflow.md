@@ -21,7 +21,6 @@
 |  [Resource](./workflow.resource.md) |  |
 |  [StepNode](./workflow.stepnode.md) |  |
 |  [Workflow](./workflow.workflow.md) |  |
-|  [WorkflowSchemaValidator](./workflow.workflowschemavalidator.md) |  |
 
 ## Enumerations
 
@@ -38,7 +37,7 @@
 |  [array(nodes, edges)](./workflow.array.md) |  |
 |  [cloneStep(step, columnNames)](./workflow.clonestep.md) |  |
 |  [columnTransformVerbs(filter)](./workflow.columntransformverbs.md) | These are steps that specifically operate on an input/output column only. In other words, they do not cause a change in the number of rows in a table, such as an aggregate or filter would, and only replace or add one column. |
-|  [createWorkflow(input, tables)](./workflow.createworkflow.md) | <p>This function establishes the reactive processing graph for executing transformation steps.</p><p>A graph is constructed using each step definition as a node. Any table definitions they export are registered into the tableContainer. Any inputs that are defined but not accounted for in the graph will be wired to the TableContainer using the observable pattern.</p> |
+|  [createNode(step)](./workflow.createnode.md) |  |
 |  [fetchFile(url)](./workflow.fetchfile.md) |  |
 |  [fetchJson(url)](./workflow.fetchjson.md) |  |
 |  [isInputColumnListStep(step)](./workflow.isinputcolumnliststep.md) | Indicates whether the supplied step requires multiple input columns. |
@@ -49,6 +48,7 @@
 |  [isInputTableStep(step)](./workflow.isinputtablestep.md) | Indicates whether this step requires an input table. |
 |  [isNumericInputStep(step)](./workflow.isnumericinputstep.md) | Indicates whether this step can only operate on numeric values. |
 |  [isOutputColumnStep(step)](./workflow.isoutputcolumnstep.md) | Indicates whether the supplied step requires a single output column. |
+|  [isValidWorkflowSchema(workflowJson)](./workflow.isvalidworkflowschema.md) |  |
 |  [join(id)](./workflow.join.md) |  |
 |  [lookup(id)](./workflow.lookup.md) |  |
 |  [nextColumnName(name, columnNames)](./workflow.nextcolumnname.md) | Suggests a new column name given the list passed. If the name is used, this will append numbers to the end. e.g. "column" may result in "column 1" or "column 2" if there are collisions |
@@ -107,7 +107,6 @@
 |  [unorder](./workflow.unorder.md) |  |
 |  [unroll](./workflow.unroll.md) |  |
 |  [window\_2](./workflow.window_2.md) |  |
-|  [WorkflowSchemaInstance](./workflow.workflowschemainstance.md) |  |
 
 ## Type Aliases
 

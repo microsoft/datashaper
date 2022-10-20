@@ -9,7 +9,7 @@ import {
 	LATEST_DATATABLE_SCHEMA,
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import { readTable } from '@datashaper/tables'
+import { introspect, readTable } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import debug from 'debug'
@@ -22,8 +22,7 @@ import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
 import type { TableStore } from './TableStore.js'
 import type { SchemaResource } from './types.js'
-import { Workflow } from './Workflow.js'
-import { WorkflowExecutor } from './WorkflowExecutor.js'
+import { Workflow } from './Workflow/Workflow.js'
 
 const log = debug('datashaper')
 
@@ -33,34 +32,40 @@ export class DataTable
 {
 	public readonly $schema = LATEST_DATATABLE_SCHEMA
 	private readonly _source = new BehaviorSubject<Maybe<ColumnTable>>(undefined)
-	private readonly _inputs: Map<string, Observable<Maybe<TableContainer>>> =
-		new Map()
-	private readonly _output: BehaviorSubject<Maybe<TableContainer>>
-
-	public readonly parser: ParserOptions = new ParserOptions()
-	public readonly shape: DataShape = new DataShape()
-	public readonly codebook: Codebook = new Codebook()
-	public readonly workflow: Workflow = new Workflow()
-
-	private _workflowExecutor: WorkflowExecutor = new WorkflowExecutor(
-		this.name,
-		this._source,
-		this._inputs,
-		this.workflow,
+	private readonly _inputs = new Map<
+		string,
+		Observable<Maybe<TableContainer>>
+	>()
+	private readonly _output = new BehaviorSubject<Maybe<TableContainer>>(
+		undefined,
 	)
+
+	public readonly parser = new ParserOptions()
+	public readonly shape = new DataShape()
+	public readonly codebook = new Codebook()
+	public readonly workflow = new Workflow()
+
+	private disposables: Array<() => void> = []
 
 	private _format: DataFormat = DataFormat.CSV
 	private _rawData: Blob | undefined
 
 	public constructor(datatable?: DataTableSchema) {
 		super()
-		this.parser.onChange(this.refreshSource)
-		this.shape.onChange(this.refreshSource)
-		this.workflow.onChange(() => this._onChange.next())
+		this.disposables.push(this.parser.onChange(this.refreshSource))
+		this.disposables.push(this.shape.onChange(this.refreshSource))
+		this.disposables.push(this.workflow.onChange(() => this._onChange.next()))
 
-		// listen for workflow execution outputs
-		this._output = this._workflowExecutor.output
+		const sub = this.workflow.read$()?.subscribe(tbl => this._output.next(tbl))
+		this.disposables.push(() => sub?.unsubscribe())
+
 		this.loadSchema(datatable)
+		this.rebindWorkflowInput()
+	}
+
+	public dispose(): void {
+		this.disposables.forEach(d => d())
+		this.workflow.dispose()
 	}
 
 	private refreshSource = (): void => {
@@ -84,7 +89,7 @@ export class DataTable
 
 	public override set name(value: string) {
 		super.name = value
-		this._workflowExecutor.name = value
+		this.rebindWorkflowInput()
 		this._onChange.next()
 	}
 
@@ -107,23 +112,21 @@ export class DataTable
 	}
 	// #endregion
 
-	// #region Outputs
-	public get source(): Observable<Maybe<ColumnTable>> {
+	public get source$(): Observable<Maybe<ColumnTable>> {
 		return this._source
 	}
 
-	public get currentSource(): Maybe<ColumnTable> {
+	public get source(): Maybe<ColumnTable> {
 		return this._source.value
 	}
 
-	public get output(): Observable<Maybe<TableContainer>> {
+	public get output$(): Observable<Maybe<TableContainer>> {
 		return this._output
 	}
 
-	public get currentOutput(): Maybe<TableContainer> {
+	public get output(): Maybe<TableContainer> {
 		return this._output.value
 	}
-	// #endregion
 
 	public override toSchema(): DataTableSchema {
 		return createDataTableSchemaObject({
@@ -156,17 +159,33 @@ export class DataTable
 			this._inputs.clear()
 			// Set the sibling table inputs
 			store.names.forEach(name =>
-				this._inputs.set(name, store.get(name)?.output ?? EMPTY),
+				this._inputs.set(
+					name,
+					store.get(name)?.output$ ?? (EMPTY as Observable<any>),
+				),
 			)
 			// Set the input name from the source
 			this._inputs.set(
 				this.name,
 				this._source.pipe(map(tbl => ({ id: this.name, table: tbl }))),
 			)
-			this._workflowExecutor.rebindWorkflowInput()
+			this.rebindWorkflowInput()
 		}
 
 		store.onChange(rebindInputs)
 		rebindInputs()
+	}
+
+	private rebindWorkflowInput() {
+		// Set the Default Input
+		this.workflow.defaultInput = this.source$.pipe(
+			map(table => ({
+				table,
+				id: this.name,
+				// TODO: let parsing layer deal with this
+				metadata: table && introspect(table, true),
+			})),
+		)
+		this.workflow.addInputs(this._inputs)
 	}
 }

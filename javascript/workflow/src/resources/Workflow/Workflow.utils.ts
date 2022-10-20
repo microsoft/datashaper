@@ -2,10 +2,63 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { NamedPortBinding, Verb } from '@datashaper/schema'
 
-import * as defaults from '../verbs/defaults/index.js'
-import type { Step, StepInput } from './types.js'
+import type { NamedPortBinding, Verb, WorkflowSchema } from '@datashaper/schema'
+import type { TableContainer } from '@datashaper/tables'
+import Ajv from 'ajv'
+
+import type { Node } from '../../dataflow/index.js'
+import { fetchJson } from '../../util/network.js'
+import * as defaults from '../../verbs/defaults/index.js'
+import * as verbs from '../../verbs/index.js'
+import type { NodeFactory, Step, StepInput } from './Workflow.types.js'
+
+const baseUrl = 'https://microsoft.github.io/datashaper/schema/workflow'
+const defaultWorkflow = 'workflow.json'
+
+async function getSchema(version: string) {
+	try {
+		return await fetchJson(`${baseUrl}/${version}`)
+	} catch {
+		return await fetchJson(`${baseUrl}/${defaultWorkflow}`)
+	}
+}
+const ajv = new Ajv({
+	strict: true,
+	strictSchema: true,
+	strictTypes: true,
+	strictRequired: true,
+	validateSchema: true,
+})
+
+export async function isValidWorkflowSchema(
+	workflowJson?: WorkflowSchema,
+): Promise<boolean> {
+	const { $schema } = workflowJson || {}
+	if (!$schema) {
+		console.warn('No $schema property found in workflow JSON')
+	}
+
+	const version = $schema?.split('workflow/')?.pop() || defaultWorkflow
+	await getSchema(version).then(schema => {
+		if (!ajv.getSchema(version)) {
+			ajv.addSchema(schema, version)
+		}
+	})
+	const validate = ajv.getSchema(version)
+	return !!validate?.(workflowJson)
+}
+
+export function createNode(step: Step): Node<TableContainer> {
+	const records = verbs as any as Record<string, NodeFactory>
+	const factory = records[step.verb]
+	if (!factory) {
+		throw new Error(`unknown verb ${step.verb}`)
+	}
+	const node = factory(step.id)
+	node.config = step.args
+	return node
+}
 
 // TEMP: this creates a more readable id by doing a simple increment for each verb type
 // since this is global it will not align across pipelines or tables.
@@ -33,7 +86,7 @@ export function readStep<T extends object | void | unknown = any>(
 		id: id || uid(verb),
 		args,
 		verb,
-		input: fixInputs(input, previous),
+		input: resolveInputs(input, previous),
 	}
 
 	// each verb should have default verb-specific params defined, load them up and merge into the step
@@ -53,7 +106,7 @@ export function readStep<T extends object | void | unknown = any>(
 	}
 }
 
-function fixInputs(
+function resolveInputs(
 	input: StepInput['input'],
 	previous: Step | undefined,
 ): Step['input'] {
