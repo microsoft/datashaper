@@ -3780,40 +3780,6 @@
               "name": "hasNode"
             },
             {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!DefaultGraph#inputs:member",
-              "docComment": "/**\n * Get the input layer of the graph. This is determined by finding all the nodes without any bound inputs\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get inputs(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "NodeId",
-                  "canonicalReference": "@datashaper/workflow!NodeId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "inputs",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
               "kind": "Method",
               "canonicalReference": "@datashaper/workflow!DefaultGraph#node:member(1)",
               "docComment": "",
@@ -3893,40 +3859,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "nodes",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!DefaultGraph#outputs:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get outputs(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "NodeId",
-                  "canonicalReference": "@datashaper/workflow!NodeId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "outputs",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
@@ -4576,38 +4508,6 @@
               "name": "hasNode"
             },
             {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/workflow!Graph#inputs:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly inputs: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "NodeId",
-                  "canonicalReference": "@datashaper/workflow!NodeId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "inputs",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
               "kind": "MethodSignature",
               "canonicalReference": "@datashaper/workflow!Graph#node:member(1)",
               "docComment": "/**\n * Retrieves a node by id.\n *\n * @param id - the node identifier\n *\n * @throws\n *\n * - if the id is not found\n */\n",
@@ -4685,38 +4585,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "nodes",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/workflow!Graph#outputs:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly outputs: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "NodeId",
-                  "canonicalReference": "@datashaper/workflow!NodeId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "outputs",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3

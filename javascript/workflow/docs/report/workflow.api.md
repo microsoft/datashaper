@@ -274,12 +274,9 @@ export class DefaultGraph<T> implements Graph<T> {
     clear(): void;
     // (undocumented)
     hasNode(id: NodeId): boolean;
-    get inputs(): NodeId[];
     // (undocumented)
     node(id: NodeId): Node_2<T>;
     get nodes(): NodeId[];
-    // (undocumented)
-    get outputs(): NodeId[];
     // (undocumented)
     remove(removeId: NodeId): void;
     // (undocumented)
@@ -333,13 +330,9 @@ export interface Graph<T> {
     add(node: Node_2<T>): void;
     clear(): void;
     hasNode(id: NodeId): boolean;
-    // (undocumented)
-    readonly inputs: NodeId[];
     node(id: NodeId): Node_2<T>;
     // (undocumented)
     readonly nodes: NodeId[];
-    // (undocumented)
-    readonly outputs: NodeId[];
     remove(id: NodeId): void;
     validate(): void;
 }
