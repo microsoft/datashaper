@@ -170,11 +170,6 @@ export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertA
 // @public (undocumented)
 export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 
-// Warning: (ae-missing-release-tag) "createWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function createWorkflow(input: WorkflowSchema, tables: TableContainer[]): Workflow;
-
 // Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -587,11 +582,6 @@ export class ParserOptions extends Observed implements ParserOptions_2, SchemaRe
 // @public (undocumented)
 export const pivot: (id: string) => StepNode<TableContainer<unknown>, PivotArgs>;
 
-// Warning: (ae-missing-release-tag) "readStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function readStep<T extends object | void | unknown = any>({ verb, args, id, input }: StepInput<T>, previous?: Step | undefined): Step<T>;
-
 // Warning: (ae-missing-release-tag) "recode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -834,19 +824,6 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)
     static validate(workflowJson: WorkflowSchema): Promise<boolean>;
-}
-
-// Warning: (ae-missing-release-tag) "WorkflowSchemaInstance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const WorkflowSchemaInstance: WorkflowSchemaValidator;
-
-// Warning: (ae-missing-release-tag) "WorkflowSchemaValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export class WorkflowSchemaValidator {
-    // (undocumented)
-    isValid(workflowJson?: WorkflowSchema): Promise<boolean>;
 }
 
 // (No @packageDocumentation comment for this package)
