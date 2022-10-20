@@ -231,10 +231,6 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     // (undocumented)
     connect(store: TableStore): void;
     // (undocumented)
-    get currentOutput(): Maybe_2<TableContainer>;
-    // (undocumented)
-    get currentSource(): Maybe_2<ColumnTable>;
-    // (undocumented)
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
     // (undocumented)
@@ -246,13 +242,17 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     get name(): string;
     set name(value: string);
     // (undocumented)
-    get output(): Observable<Maybe_2<TableContainer>>;
+    get output$(): Observable<Maybe_2<TableContainer>>;
+    // (undocumented)
+    get output(): Maybe_2<TableContainer>;
     // (undocumented)
     readonly parser: ParserOptions;
     // (undocumented)
     readonly shape: DataShape;
     // (undocumented)
-    get source(): Observable<Maybe_2<ColumnTable>>;
+    get source$(): Observable<Maybe_2<ColumnTable>>;
+    // (undocumented)
+    get source(): Maybe_2<ColumnTable>;
     // (undocumented)
     toSchema(): DataTableSchema;
     // (undocumented)
@@ -771,15 +771,17 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     readonly $schema: string;
     constructor(input?: WorkflowSchema, _strictInputs?: boolean);
+    addInput(source: TableObservable, id: string): void;
     // (undocumented)
     addInputName(input: string): void;
-    addInputObservable(id: string, source: TableObservable): void;
-    addInputObservables(values: Map<string, TableObservable>): void;
-    addInputTable(table: TableContainer, id?: string): void;
+    addInputs(values: Map<string, TableObservable>): void;
+    addInputTable(table: TableContainer, id: string): void;
     // (undocumented)
     addInputTables(inputs: TableContainer[]): void;
     addOutput(output: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
+    // (undocumented)
+    set defaultInput(source: TableObservable);
     // (undocumented)
     hasInputName(input: string): boolean;
     // (undocumented)

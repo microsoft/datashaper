@@ -3042,92 +3042,6 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!DataTable#currentOutput:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get currentOutput(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Maybe",
-                  "canonicalReference": "@datashaper/workflow!Maybe:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "currentOutput",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!DataTable#currentSource:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get currentSource(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Maybe",
-                  "canonicalReference": "@datashaper/workflow!Maybe:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ColumnTable",
-                  "canonicalReference": "arquero!default:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "currentSource",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              },
-              "isStatic": false,
-              "isProtected": false
-            },
-            {
-              "kind": "Property",
               "canonicalReference": "@datashaper/workflow!DataTable#data:member",
               "docComment": "",
               "excerptTokens": [
@@ -3325,6 +3239,49 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableContainer",
+                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "output",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataTable#output$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get output$(): "
+                },
+                {
+                  "kind": "Reference",
                   "text": "Observable",
                   "canonicalReference": "rxjs!Observable:class"
                 },
@@ -3358,7 +3315,7 @@
               "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "output",
+              "name": "output$",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 7
@@ -3437,6 +3394,49 @@
                 },
                 {
                   "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ColumnTable",
+                  "canonicalReference": "arquero!default:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "source",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!DataTable#source$:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get source$(): "
+                },
+                {
+                  "kind": "Reference",
                   "text": "Observable",
                   "canonicalReference": "rxjs!Observable:class"
                 },
@@ -3470,7 +3470,7 @@
               "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "source",
+              "name": "source$",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 7
@@ -9896,6 +9896,70 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!Workflow#addInput:member(1)",
+              "docComment": "/**\n * Add a named input\n *\n * @param input - the input table to add\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "addInput(source: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableObservable",
+                  "canonicalReference": "@datashaper/workflow!TableObservable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", id: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "source",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "id",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "addInput"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "@datashaper/workflow!Workflow#addInputName:member(1)",
               "docComment": "",
               "excerptTokens": [
@@ -9943,76 +10007,12 @@
             },
             {
               "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!Workflow#addInputObservable:member(1)",
+              "canonicalReference": "@datashaper/workflow!Workflow#addInputs:member(1)",
               "docComment": "/**\n * Add a named input\n *\n * @param input - the input table to add\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "addInputObservable(id: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", source: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableObservable",
-                  "canonicalReference": "@datashaper/workflow!TableObservable:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "id",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "source",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "addInputObservable"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!Workflow#addInputObservables:member(1)",
-              "docComment": "/**\n * Add a named input\n *\n * @param input - the input table to add\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "addInputObservables(values: "
+                  "text": "addInputs(values: "
                 },
                 {
                   "kind": "Reference",
@@ -10064,7 +10064,7 @@
                 }
               ],
               "isOptional": false,
-              "name": "addInputObservables"
+              "name": "addInputs"
             },
             {
               "kind": "Method",
@@ -10082,7 +10082,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ", id?: "
+                  "text": ", id: "
                 },
                 {
                   "kind": "Content",
@@ -10124,7 +10124,7 @@
                     "startIndex": 3,
                     "endIndex": 4
                   },
-                  "isOptional": true
+                  "isOptional": false
                 }
               ],
               "isOptional": false,
@@ -10278,6 +10278,36 @@
               ],
               "isOptional": false,
               "name": "addStep"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#defaultInput:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "set defaultInput(source: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableObservable",
+                  "canonicalReference": "@datashaper/workflow!TableObservable:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "defaultInput",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",

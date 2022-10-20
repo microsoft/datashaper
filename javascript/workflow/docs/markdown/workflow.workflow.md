@@ -24,6 +24,7 @@ export declare class Workflow extends Resource implements SchemaResource<Workflo
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.workflow._schema.md) | <code>readonly</code> | string |  |
+|  [defaultInput](./workflow.workflow.defaultinput.md) |  | [TableObservable](./workflow.tableobservable.md) |  |
 |  [inputNames](./workflow.workflow.inputnames.md) | <code>readonly</code> | string\[\] |  |
 |  [inputNames$](./workflow.workflow.inputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [length](./workflow.workflow.length.md) | <code>readonly</code> | number |  |
@@ -39,9 +40,9 @@ export declare class Workflow extends Resource implements SchemaResource<Workflo
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [addInput(source, id)](./workflow.workflow.addinput.md) |  | Add a named input |
 |  [addInputName(input)](./workflow.workflow.addinputname.md) |  |  |
-|  [addInputObservable(id, source)](./workflow.workflow.addinputobservable.md) |  | Add a named input |
-|  [addInputObservables(values)](./workflow.workflow.addinputobservables.md) |  | Add a named input |
+|  [addInputs(values)](./workflow.workflow.addinputs.md) |  | Add a named input |
 |  [addInputTable(table, id)](./workflow.workflow.addinputtable.md) |  | Add a named input |
 |  [addInputTables(inputs)](./workflow.workflow.addinputtables.md) |  |  |
 |  [addOutput(output)](./workflow.workflow.addoutput.md) |  | Add an output binding |

@@ -9,7 +9,7 @@ Add a named input
 <b>Signature:</b>
 
 ```typescript
-addInputTable(table: TableContainer, id?: string): void;
+addInputTable(table: TableContainer, id: string): void;
 ```
 
 ## Parameters
@@ -17,7 +17,7 @@ addInputTable(table: TableContainer, id?: string): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  table | TableContainer |  |
-|  id | string | <i>(Optional)</i> the input name to bind this table to (default will be the table id) |
+|  id | string | the input name to bind this table to (default will be the table id) |
 
 <b>Returns:</b>
 

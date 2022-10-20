@@ -25,15 +25,15 @@ export declare class DataTable extends Resource implements SchemaResource<DataTa
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.datatable._schema.md) | <code>readonly</code> | string |  |
 |  [codebook](./workflow.datatable.codebook.md) | <code>readonly</code> | [Codebook](./workflow.codebook.md) |  |
-|  [currentOutput](./workflow.datatable.currentoutput.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
-|  [currentSource](./workflow.datatable.currentsource.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;ColumnTable&gt; |  |
 |  [data](./workflow.datatable.data.md) |  | Blob \| undefined |  |
 |  [format](./workflow.datatable.format.md) |  | DataFormat |  |
 |  [name](./workflow.datatable.name.md) |  | string |  |
-|  [output](./workflow.datatable.output.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |
+|  [output](./workflow.datatable.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt; |  |
+|  [output$](./workflow.datatable.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;TableContainer&gt;&gt; |  |
 |  [parser](./workflow.datatable.parser.md) | <code>readonly</code> | [ParserOptions](./workflow.parseroptions.md) |  |
 |  [shape](./workflow.datatable.shape.md) | <code>readonly</code> | [DataShape](./workflow.datashape.md) |  |
-|  [source](./workflow.datatable.source.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;ColumnTable&gt;&gt; |  |
+|  [source](./workflow.datatable.source.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;ColumnTable&gt; |  |
+|  [source$](./workflow.datatable.source_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;ColumnTable&gt;&gt; |  |
 |  [workflow](./workflow.datatable.workflow.md) | <code>readonly</code> | [Workflow](./workflow.workflow.md) |  |
 
 ## Methods

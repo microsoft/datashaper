@@ -160,14 +160,20 @@ export class Workflow
 		return this.inputNames.some(i => i === input)
 	}
 
+	public set defaultInput(source: TableObservable) {
+		this._defaultInputSubscription?.unsubscribe()
+		this._defaultInputSubscription = source.subscribe(value =>
+			this._defaultInput.next(value),
+		)
+		this.configureAllSteps()
+		this._onChange.next()
+	}
+
 	/**
 	 * Add a named input
 	 * @param input - the input table to add
 	 */
-	public addInputObservable(
-		source: TableObservable,
-		id?: string | undefined,
-	): void {
+	public addInput(source: TableObservable, id: string): void {
 		this._assertInputName(id)
 		this._bindInputObservable(id, source)
 
@@ -179,7 +185,7 @@ export class Workflow
 	 * Add a named input
 	 * @param input - the input table to add
 	 */
-	public addInputObservables(values: Map<string, TableObservable>): void {
+	public addInputs(values: Map<string, TableObservable>): void {
 		for (const id of values.keys()) {
 			this._assertInputName(id)
 		}
@@ -193,11 +199,11 @@ export class Workflow
 	}
 
 	public removeInputObservable(id: string): void {
-		this._removeInputObservable(id)
+		this._removeInputObservableSilent(id)
 		this._onChange.next()
 	}
 
-	private _removeInputObservable(id: string): void {
+	private _removeInputObservableSilent(id: string): void {
 		this._graph.remove(id)
 		this._tableSubscriptions.get(id)?.unsubscribe()
 		this._tableSubscriptions.delete(id)
@@ -209,43 +215,23 @@ export class Workflow
 	 * @param input - the input table to add
 	 * @param id - the input name to bind this table to (default will be the table id)
 	 */
-	public addInputTable(table: TableContainer, id: string | undefined): void {
-		this.addInputObservable(of(table), id)
+	public addInputTable(table: TableContainer, id: string): void {
+		this.addInput(of(table), id)
 	}
 
 	public addInputTables(inputs: TableContainer[]): void {
 		const map = new Map<string, Observable<Maybe<TableContainer>>>()
 		inputs.forEach(i => map.set(i.id, of(i)))
-		this.addInputObservables(map)
+		this.addInputs(map)
 	}
 
-	private _bindInputObservable(
-		id: string | undefined,
-		source: TableObservable,
-	): void {
-		const isDefaultInput = (id: string | undefined): id is undefined =>
-			id == null
-		const bindDefaultInput = () => {
-			this._defaultInputSubscription?.unsubscribe()
-			this._defaultInputSubscription = source.subscribe(value =>
-				this._defaultInput.next(value),
-			)
-		}
-
-		const bindNamedInput = (id: string) => {
-			this._removeInputObservable(id)
-			const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
-			const subscription = source.subscribe(s => subject.next(s))
-			this._tables.set(id, subject)
-			this._tableSubscriptions.set(id, subscription)
-			this._graph.add(observableNode(id, subject))
-		}
-
-		if (isDefaultInput(id)) {
-			bindDefaultInput()
-		} else {
-			bindNamedInput(id)
-		}
+	private _bindInputObservable(id: string, source: TableObservable): void {
+		this._removeInputObservableSilent(id)
+		const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
+		const subscription = source.subscribe(s => subject.next(s))
+		this._tables.set(id, subject)
+		this._tableSubscriptions.set(id, subscription)
+		this._graph.add(observableNode(id, subject))
 	}
 
 	private _assertInputName(id: string | undefined): void {
