@@ -4,7 +4,7 @@
 
 ## NodeBinding.node property
 
-The node to bind
+The source node to bind data from
 
 <b>Signature:</b>
 

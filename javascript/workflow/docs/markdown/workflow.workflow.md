@@ -49,8 +49,8 @@ export declare class Workflow extends Resource implements SchemaResource<Workflo
 |  [hasInputName(input)](./workflow.workflow.hasinputname.md) |  |  |
 |  [hasOutputName(name)](./workflow.workflow.hasoutputname.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.workflow.loadschema.md) |  |  |
-|  [nodeOutput(nodeId, port)](./workflow.workflow.nodeoutput.md) |  |  |
-|  [outputNameForNode(nodeId, nodeOutput)](./workflow.workflow.outputnamefornode.md) |  |  |
+|  [nodeOutput(nodeId)](./workflow.workflow.nodeoutput.md) |  |  |
+|  [outputNameForNode(nodeId)](./workflow.workflow.outputnamefornode.md) |  |  |
 |  [read(name)](./workflow.workflow.read.md) |  | Observe an output name |
 |  [read$(name)](./workflow.workflow.read_.md) |  | Observe an output name |
 |  [removeInputName(input)](./workflow.workflow.removeinputname.md) |  |  |

@@ -17,6 +17,5 @@ export interface NodeBinding<T>
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [input?](./workflow.nodebinding.input.md) |  | [SocketName](./workflow.socketname.md) | <i>(Optional)</i> The named input on the target node (otherwise default) |
-|  [node](./workflow.nodebinding.node.md) |  | Node&lt;T&gt; | The node to bind |
-|  [output?](./workflow.nodebinding.output.md) |  | [SocketName](./workflow.socketname.md) | <i>(Optional)</i> The named output on the source node (otherwise default) |
+|  [node](./workflow.nodebinding.node.md) |  | Node&lt;T&gt; | The source node to bind data from |
 
