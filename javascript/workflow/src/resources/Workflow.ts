@@ -111,10 +111,11 @@ export class Workflow
 		const graph = this._graph
 		// bind to an input defined in the graph
 		if (graph.hasNode(id)) {
-			const result = graph.node(id)
-			return result
+			return graph.node(id)
 		} else if (this.hasInputName(id)) {
-			return observableNode(id, this.read$(id))
+			const result = observableNode(id, this.read$(id))
+			graph.add(result)
+			return result
 		} else {
 			throw new Error(`unknown node id or declared input: "${id}"`)
 		}
@@ -131,19 +132,17 @@ export class Workflow
 	}
 
 	public addInputName(input: string): void {
-		if (this.hasInputName(input)) {
-			return
+		if (!this.hasInputName(input)) {
+			this._inputNames.next([...this.inputNames, input])
+			this._onChange.next()
 		}
-		this._inputNames.next([...this._inputNames.value, input])
-		this._onChange.next()
 	}
 
 	public removeInputName(input: string): void {
 		if (!this.hasInputName(input)) {
-			return
+			this._inputNames.next([...this.inputNames].filter(i => i !== input))
+			this._onChange.next()
 		}
-		this._inputNames.next([...this._inputNames.value].filter(i => i !== input))
-		this._onChange.next()
 	}
 
 	public hasInputName(input: string): boolean {
@@ -332,20 +331,20 @@ export class Workflow
 	 * @param step - the step to add
 	 */
 	public addStep(stepInput: StepInput): Step {
-		const steps = this._steps.value
-		const step = readStep(
+		const steps = this.steps
+		const newStep = readStep(
 			stepInput,
 			steps.length > 0 ? steps[steps.length - 1] : undefined,
 		)
 		// mutate the steps so that equality checks will detect that the steps changed (e.g. memo, hook deps)
-		this._steps.next([...steps, step])
-		this.addWorkflowStepToGraph(step)
+		this._steps.next([...steps, newStep])
+		this.addWorkflowStepToGraph(newStep)
 
 		// Use this new step's output as the default output for the workflow
 		this.rebindDefaultOutput()
 
 		this._onChange.next()
-		return step
+		return newStep
 	}
 
 	public removeStep(index: number): void {
@@ -451,11 +450,12 @@ export class Workflow
 	 */
 	public toMap(includeInputs = false): Map<string, Maybe<TableContainer>> {
 		const result = new Map<string, Maybe<TableContainer>>()
-		if (includeInputs) {
-			for (const [name, observable] of this._tables) {
+		for (const [name, observable] of this._tables) {
+			if (!this.inputNames.includes(name) || includeInputs) {
 				result.set(name, observable.value)
 			}
 		}
+
 		return result
 	}
 
@@ -519,8 +519,7 @@ export class Workflow
 	private observeOutput({ name, node: nodeId }: NamedOutputPortBinding) {
 		const node = this.getNode(nodeId)
 		// BaseNode uses BehaviorSubject internally, which saves us some work
-		const val = node.output$ as BehaviorSubject<Maybe<TableContainer>>
-		this._tables.set(name, val)
+		this._tables.set(name, node.output$ as TableSubject)
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
