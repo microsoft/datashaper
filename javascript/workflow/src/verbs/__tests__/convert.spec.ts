@@ -17,8 +17,8 @@ describe('test for convert verb', () => {
 	})
 
 	describe('single column', () => {
-		test('int', async () => {
-			const result = await convertStep(store.table(), {
+		test('int', () => {
+			const result = convertStep(store.table(), {
 				column: 'int',
 				to: 'newColumn',
 				type: ParseType.Integer,
@@ -32,8 +32,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 3)).toBeNaN()
 		})
 
-		test('int radix', async () => {
-			const result = await convertStep(store.table(), {
+		test('int radix', () => {
+			const result = convertStep(store.table(), {
 				column: 'int',
 				to: 'newColumn',
 				type: ParseType.Integer,
@@ -47,8 +47,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 3)).toBeNaN()
 		})
 
-		test('int hex', async () => {
-			const result = await convertStep(store.table(), {
+		test('int hex', () => {
+			const result = convertStep(store.table(), {
 				column: 'int_hex',
 				to: 'newColumn',
 				type: ParseType.Integer,
@@ -62,8 +62,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 3)).toBeNaN()
 		})
 
-		test('string to date with different formats', async () => {
-			const result = await convertStep(store.table('table23'), {
+		test('string to date with different formats', () => {
+			const result = convertStep(store.table('table23'), {
 				column: 'date',
 				to: 'newColumn',
 				type: ParseType.Date,
@@ -81,8 +81,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 4)).toBeNull()
 		})
 
-		test('number to date', async () => {
-			const result = await convertStep(store.table('table24'), {
+		test('number to date', () => {
+			const result = convertStep(store.table('table24'), {
 				column: 'date',
 				to: 'newColumn',
 				type: ParseType.Date,
@@ -98,8 +98,8 @@ describe('test for convert verb', () => {
 			compareDate(result.get('newColumn', 2), d3)
 		})
 
-		test('string null and string undefined to date', async () => {
-			const result = await convertStep(store.table('table25'), {
+		test('string null and string undefined to date', () => {
+			const result = convertStep(store.table('table25'), {
 				column: 'date',
 				to: 'newColumn',
 				type: ParseType.Date,
@@ -115,8 +115,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 4)).toBeNull()
 		})
 
-		test('date to string without format pattern', async () => {
-			const result = await convertStep(store.table('table21'), {
+		test('date to string without format pattern', () => {
+			const result = convertStep(store.table('table21'), {
 				column: 'date',
 				to: 'newColumn',
 				type: ParseType.String,
@@ -128,8 +128,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 2)).toBe('2022-03-28')
 		})
 
-		test('date to string with format pattern', async () => {
-			const result = await convertStep(store.table('table21'), {
+		test('date to string with format pattern', () => {
+			const result = convertStep(store.table('table21'), {
 				column: 'date',
 				to: 'newColumn',
 				type: ParseType.String,
@@ -142,8 +142,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 2)).toBe('March, 2022')
 		})
 
-		test('string to string with undefined and null values', async () => {
-			const result = await convertStep(store.table('table26'), {
+		test('string to string with undefined and null values', () => {
+			const result = convertStep(store.table('table26'), {
 				column: 'values',
 				to: 'newColumn',
 				type: ParseType.String,
@@ -157,8 +157,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 4)).toBe('final test')
 		})
 
-		test('boolean to string', async () => {
-			const result = await convertStep(store.table('table14'), {
+		test('boolean to string', () => {
+			const result = convertStep(store.table('table14'), {
 				column: 'z',
 				to: 'newColumn',
 				type: ParseType.String,
@@ -170,8 +170,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 2)).toBe('false')
 		})
 
-		test('number to string', async () => {
-			const result = await convertStep(store.table('table12'), {
+		test('number to string', () => {
+			const result = convertStep(store.table('table12'), {
 				column: 'totalSale',
 				to: 'newColumn',
 				type: ParseType.String,
@@ -185,8 +185,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 4)).toBe('5000')
 		})
 
-		test('decimal to string', async () => {
-			const result = await convertStep(store.table('table22'), {
+		test('decimal to string', () => {
+			const result = convertStep(store.table('table22'), {
 				column: 'value',
 				to: 'newColumn',
 				type: ParseType.String,
@@ -200,8 +200,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 4)).toBe('78.25')
 		})
 
-		test('undefined to string', async () => {
-			const result = await convertStep(store.table('table12'), {
+		test('undefined to string', () => {
+			const result = convertStep(store.table('table12'), {
 				column: 'quantity',
 				to: 'newColumn',
 				type: ParseType.String,
@@ -215,8 +215,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 4)).toBe('50')
 		})
 
-		test('null to string', async () => {
-			const result = await convertStep(store.table('table15'), {
+		test('null to string', () => {
+			const result = convertStep(store.table('table15'), {
 				column: 'y',
 				to: 'newColumn',
 				type: ParseType.String,
@@ -228,8 +228,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 2)).toBe('false')
 		})
 
-		test('decimal', async () => {
-			const result = await convertStep(store.table(), {
+		test('decimal', () => {
+			const result = convertStep(store.table(), {
 				column: 'decimal',
 				to: 'newColumn',
 				type: ParseType.Decimal,
@@ -243,8 +243,8 @@ describe('test for convert verb', () => {
 			expect(result.get('newColumn', 3)).toBeNaN()
 		})
 
-		test('boolean', async () => {
-			const result = await convertStep(store.table(), {
+		test('boolean', () => {
+			const result = convertStep(store.table(), {
 				column: 'boolean',
 				to: 'newColumn',
 				type: ParseType.Boolean,

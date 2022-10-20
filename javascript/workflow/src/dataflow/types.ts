@@ -4,10 +4,11 @@
  */
 import type { Observable } from 'rxjs'
 
-import type { Maybe } from './primitives.js'
+import type { Maybe } from './../primitives.js'
 
 export type NodeId = string
 export type SocketName = string | symbol
+export type VariadicNodeBinding<T> = Omit<NodeBinding<T>, 'input'>[]
 
 /**
  * A graph processing node
@@ -53,7 +54,7 @@ export interface Node<T, Config = unknown> {
 	 * Binds an input socket to an upstream node
 	 * @param binding - the node binding to apply. If an array, binds variadic input
 	 */
-	bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void
+	bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void
 
 	/**
 	 * Clear an input socket

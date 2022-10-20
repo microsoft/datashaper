@@ -7,9 +7,9 @@ import type { Observable } from 'rxjs'
 import { BehaviorSubject } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
+import type { Maybe } from '../../primitives.js'
 import type { BoundInput } from '../BoundInput.js'
 import { DefaultBoundInput } from '../BoundInput.js'
-import type { Maybe } from '../primitives.js'
 import type { Node, NodeBinding, NodeId, SocketName } from '../types'
 import { NodeInput, NodeOutput } from '../types.js'
 
@@ -52,13 +52,13 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		return this._config.value
 	}
 
-	public get config$(): Observable<Maybe<Config>> {
-		return this._config
-	}
-
 	public set config(value: Maybe<Config>) {
 		this._config.next(value)
 		void this.recalculate()
+	}
+
+	public get config$(): Observable<Maybe<Config>> {
+		return this._config
 	}
 
 	// #endregion field accessors
@@ -66,20 +66,20 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region inputs
 
 	public binding(name: SocketName = DEFAULT_INPUT_NAME): Maybe<NodeBinding<T>> {
-		return this._inputs.get(name)?.binding
+		return this._inputs.value.find(i => i.name === name)?.binding
 	}
 
 	public get bindings$(): Observable<NodeBinding<T>[]> {
-		return this._inputs
+		return this._inputs.pipe(map(inputs => inputs.map(i => i.binding)))
 	}
 
 	public get bindings(): NodeBinding<T>[] {
-		return this._inputs.values()
+		return this._inputs.value.map(i => i.binding)
 	}
 
 	protected inputValue(name: SocketName = DEFAULT_INPUT_NAME): Maybe<T> {
 		this.verifyInputSocketName(name)
-		return this._inputs.get(name)?.current
+		return this._inputs.value.find(i => i.name === name)?.current
 	}
 
 	/**
@@ -87,9 +87,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected getInputValues(): Record<SocketName, Maybe<T>> {
 		const result: Record<SocketName, Maybe<T>> = {}
-		for (const key of this._inputs.keys()) {
-			result[key] = this._inputs.get(key)?.current
-		}
+		this._inputs.value.forEach(i => (result[i.name] = i.current))
 		return result
 	}
 
@@ -98,12 +96,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected getInputErrors(): Record<SocketName, unknown> {
 		const result: Record<SocketName, unknown> = {}
-		for (const key in this._inputs.keys()) {
-			const error = this._inputs.get(key)?.error
-			if (error) {
-				result[key] = error
-			}
-		}
+		this._inputs.value.forEach(i => (result[i.name] = i.error))
 		return result
 	}
 
@@ -133,9 +126,10 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 				binding.input ?? DEFAULT_INPUT_NAME,
 			)
 			// uninstall any existing upstream socket connection
-			if (this._inputs.has(name)) {
+			if (this.hasBoundInput(name)) {
 				this.unbind(name)
 			}
+
 			// subscribe to the new input
 			const input: BoundInput<T> = new DefaultBoundInput(name, binding)
 			this._inputs.next([
@@ -148,13 +142,18 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 		}
 	}
 
+	protected hasBoundInput(name: SocketName): boolean {
+		const existing = this._inputs.value.find(i => i.name === name)
+		return existing != null
+	}
+
 	protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void {
 		throw new Error('variadic input not supported')
 	}
 
 	public unbind(name: SocketName): void {
 		this.verifyInputSocketName(name)
-		if (this._inputs.has(name)) {
+		if (this.hasBoundInput(name)) {
 			// unsubscribe from updates
 			this._inputs.value.find(i => i.name === name)?.dispose()
 			this._inputs.next(this._inputs.value.filter(i => i.name !== name))
@@ -201,10 +200,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected recalculate = (): void => {
 		try {
-			const result = this.doRecalculate()
-			if ((result as Promise<void>)?.then) {
-				;(result as Promise<void>).catch(err => this.emitError(err))
-			}
+			this.doRecalculate()
 		} catch (err) {
 			log('recalculation error in node ' + this.id, err)
 			this.emitError(err)
@@ -214,7 +210,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	/**
 	 * Abstract logic for performing the node recalculation
 	 */
-	protected abstract doRecalculate(): Promise<void> | void
+	protected abstract doRecalculate(): void
 
 	// #endregion
 

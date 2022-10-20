@@ -3,12 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Subscription } from 'rxjs'
-import { Subject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 
-import type { Maybe } from './primitives.js'
+import type { Maybe } from '../primitives.js'
 import type { NodeBinding, SocketName } from './types.js'
 
 export interface BoundInput<T> {
+	readonly name: SocketName
 	readonly binding: NodeBinding<T>
 	readonly current: Maybe<T>
 	readonly error: unknown
@@ -18,9 +19,8 @@ export interface BoundInput<T> {
 }
 
 export class DefaultBoundInput<T> implements BoundInput<T> {
-	private _current: T | undefined
+	private _current = new BehaviorSubject<Maybe<T>>(undefined)
 	private _error: unknown
-	private _valueChanged: Subject<void> = new Subject<void>()
 	private _bindingSubscription: Subscription
 	private _valueChangeSubscription: Subscription | undefined
 
@@ -31,24 +31,22 @@ export class DefaultBoundInput<T> implements BoundInput<T> {
 		this._bindingSubscription = binding.node.output$(binding.output).subscribe({
 			next: v => {
 				this._error = undefined
-				this._current = v
-				this._valueChanged.next()
+				this._current.next(v)
 			},
 			error: e => {
 				this._error = e
-				this._current = undefined
-				this._valueChanged.next()
+				this._current.next(undefined)
 			},
 		})
 	}
 
 	public onValueChange(handler: () => void): void {
-		const subscription = this._valueChanged.subscribe(handler)
+		const subscription = this._current.subscribe(handler)
 		this._valueChangeSubscription = subscription
 	}
 
 	public get current(): Maybe<T> {
-		return this._current
+		return this._current.value
 	}
 
 	public get error(): unknown {

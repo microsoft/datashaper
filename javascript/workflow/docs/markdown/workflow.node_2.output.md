@@ -4,21 +4,21 @@
 
 ## Node\_2.output() method
 
-Gets an output socket
+Gets a current output value
 
 <b>Signature:</b>
 
 ```typescript
-output(name?: SocketName): Observable<Maybe<T>>;
+output(name?: SocketName): Maybe<T>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  name | [SocketName](./workflow.socketname.md) | <i>(Optional)</i> The name of the output socket. If undefined, this will use the implicit default output socket. |
+|  name | [SocketName](./workflow.socketname.md) | <i>(Optional)</i> The output name. If undefined, this will use the implicit default output socket. |
 
 <b>Returns:</b>
 
-Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;&gt;
+[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;
 

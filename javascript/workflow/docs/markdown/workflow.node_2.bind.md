@@ -9,14 +9,14 @@ Binds an input socket to an upstream node
 <b>Signature:</b>
 
 ```typescript
-bind(binding: NodeBinding<T>): void;
+bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  binding | [NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt; |  |
+|  binding | [NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt; \| [VariadicNodeBinding](./workflow.variadicnodebinding.md)<!-- -->&lt;T&gt; | the node binding to apply. If an array, binds variadic input |
 
 <b>Returns:</b>
 
