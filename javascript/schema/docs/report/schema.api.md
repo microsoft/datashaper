@@ -604,7 +604,6 @@ export interface NamedOutputPortBinding extends NamedPortBinding {
 // @public
 export interface NamedPortBinding {
     node: string;
-    output?: string;
 }
 
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

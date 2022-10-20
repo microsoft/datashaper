@@ -4,7 +4,7 @@
 
 ## NamedPortBinding.node property
 
-The id of the node to bind to
+The id of the input node to bind to
 
 <b>Signature:</b>
 
