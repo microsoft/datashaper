@@ -3058,6 +3058,34 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!DecodeArgs#codebook:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "codebook: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CodebookSchema",
+                  "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "codebook",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!DecodeArgs#unapplyMapping:member",
               "docComment": "/**\n * Unapply codebook mapping\n */\n",
               "excerptTokens": [
@@ -3350,6 +3378,34 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "applyMapping",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!EncodeArgs#codebook:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "codebook: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CodebookSchema",
+                  "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "codebook",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

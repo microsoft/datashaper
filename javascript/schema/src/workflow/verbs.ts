@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { CodebookSchema } from '../codebook/CodebookSchema.js'
 import type { DataType, Value } from '../data.js'
 import type { SortDirection } from '../enums.js'
 
@@ -336,6 +337,8 @@ export interface EncodeArgs {
 	 * Apply codebook mapping
 	 */
 	applyMapping: boolean
+
+	codebook: CodebookSchema
 }
 
 export interface DecodeArgs {
@@ -343,6 +346,8 @@ export interface DecodeArgs {
 	 * Unapply codebook mapping
 	 */
 	unapplyMapping: boolean
+
+	codebook: CodebookSchema
 }
 
 export interface FetchArgs {

@@ -15,4 +15,5 @@ export interface EncodeArgs
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [applyMapping](./schema.encodeargs.applymapping.md) |  | boolean | Apply codebook mapping |
+|  [codebook](./schema.encodeargs.codebook.md) |  | [CodebookSchema](./schema.codebookschema.md) |  |
 

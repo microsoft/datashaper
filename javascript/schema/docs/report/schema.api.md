@@ -286,6 +286,8 @@ export enum DateComparisonOperator {
 //
 // @public (undocumented)
 export interface DecodeArgs {
+    // (undocumented)
+    codebook: CodebookSchema;
     unapplyMapping: boolean;
 }
 
@@ -319,6 +321,8 @@ export interface DualInput extends BasicInput {
 // @public (undocumented)
 export interface EncodeArgs {
     applyMapping: boolean;
+    // (undocumented)
+    codebook: CodebookSchema;
 }
 
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

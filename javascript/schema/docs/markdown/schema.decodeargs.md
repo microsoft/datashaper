@@ -14,5 +14,6 @@ export interface DecodeArgs
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [codebook](./schema.decodeargs.codebook.md) |  | [CodebookSchema](./schema.codebookschema.md) |  |
 |  [unapplyMapping](./schema.decodeargs.unapplymapping.md) |  | boolean | Unapply codebook mapping |
 
