@@ -23,7 +23,11 @@ import type { Maybe } from '../../primitives.js'
 import { Resource } from '../Resource.js'
 import type { SchemaResource } from '../types.js'
 import type { Step, StepInput } from './Workflow.types.js'
-import { createNode, isValidWorkflowSchema,readStep  } from './Workflow.utils.js'
+import {
+	createNode,
+	isValidWorkflowSchema,
+	readStep,
+} from './Workflow.utils.js'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 
@@ -69,7 +73,7 @@ export class Workflow
 		this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput))
 	}
 
-	public dispose() {
+	public dispose(): void {
 		this._defaultInputSubscription?.unsubscribe()
 		this._defaultInputSubscription = undefined
 		this._defaultOutputSubscription?.unsubscribe()
@@ -94,7 +98,7 @@ export class Workflow
 		}
 		this._defaultOutputSubscription?.unsubscribe()
 		this._defaultOutputSubscription = defaultOutputObservable()?.subscribe(
-			value => this._defaultOutput.next(value),
+			value => this._defaultOutput.next({ ...value, id: this.name }),
 		)
 	}
 
@@ -565,14 +569,21 @@ export class Workflow
 	}
 
 	private observeOutput({ name, node: nodeId }: NamedOutputPortBinding) {
-		const node = this.getNode(nodeId)
-		if (!this._tables.has(name)) {
-			// BaseNode uses BehaviorSubject internally, which saves us some work
-			this._tables.set(name, node.output$ as TableSubject)
-		} else {
-			const s = node.output$.subscribe(it => this._tables.get(name)?.next(it))
-			this._disposables.push(() => s.unsubscribe())
+		const lazyCreateOutputTable = () => {
+			if (!this._tables.has(name)) {
+				this._tables.set(
+					name,
+					new BehaviorSubject<Maybe<TableContainer>>(undefined),
+				)
+			}
+			return this._tables.get(name) as BehaviorSubject<Maybe<TableContainer>>
 		}
+
+		const outputTable = lazyCreateOutputTable()
+		const sub = this.getNode(nodeId).output$.subscribe(it =>
+			outputTable.next(it && { ...it, id: name }),
+		)
+		this._disposables.push(() => sub.unsubscribe())
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {

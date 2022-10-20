@@ -26,7 +26,6 @@ describe('The Workflow Resource', () => {
 			input: ['input'],
 			steps: [
 				{
-					id: 'fill1',
 					verb: Verb.Fill,
 					args: {
 						to: 'filled',
@@ -35,15 +34,55 @@ describe('The Workflow Resource', () => {
 					input: 'input',
 				},
 			],
-			output: [{ name: 'output', node: 'fill1' }],
+			output: [],
 		})
 		g.addInputTables([{ id: 'input', table: table({ ID: [1, 2, 3, 4] }) }])
 
 		expect(g).toBeDefined()
-		const result = g.read('output')
+		const result = g.read()
 		expect(result?.table?.numCols()).toBe(2)
 		expect(result?.table?.numRows()).toBe(4)
-		expect(g.outputNames).toEqual(['output'])
+		expect(g.outputNames).toEqual([])
+	})
+
+	test('runs a single step with named output', () => {
+		const g = new Workflow({
+			id: 'test workflow',
+			$schema:
+				'https://microsoft.github.io/datashaper/schema/workflow/workflow.json',
+			name: 'test',
+			input: ['input'],
+			steps: [
+				{
+					id: 'filled',
+					verb: Verb.Fill,
+					args: {
+						to: 'filled',
+						value: 1,
+					},
+					input: 'input',
+				},
+			],
+			output: [],
+		})
+		g.addInputTables([{ id: 'input', table: table({ ID: [1, 2, 3, 4] }) }])
+		g.addOutput({ name: 'filled-read', node: 'filled' })
+
+		expect(g).toBeDefined()
+		expect(g.outputNames).toEqual(['filled-read'])
+
+		// read default output
+		const defaultOut = g.read()
+		expect(defaultOut?.id).toBe('test')
+		expect(defaultOut?.table?.numCols()).toBe(2)
+		expect(defaultOut?.table?.numRows()).toBe(4)
+
+		// read named output
+		const namedOut = g.read('filled-read')
+		expect(namedOut?.id).toBe('filled-read')
+		expect(namedOut).toBeDefined()
+		expect(namedOut?.table?.numCols()).toBe(2)
+		expect(namedOut?.table?.numRows()).toBe(4)
 	})
 
 	test('runs multiple steps with normal input/output and all intermediates', () => {
@@ -64,7 +103,6 @@ describe('The Workflow Resource', () => {
 					},
 				},
 				{
-					id: 'output-2',
 					verb: Verb.Fill,
 					args: {
 						to: 'filled2',
@@ -72,16 +110,17 @@ describe('The Workflow Resource', () => {
 					},
 				},
 			],
-			output: ['output-1', 'output-2'],
+			output: ['output-1'],
 		})
 		g.addInputTables([{ id: 'input', table: table({ ID: [1, 2, 3, 4] }) }])
+
 		expect(g).toBeDefined()
-		const result = g.read('output-2')
+		const result = g.read()
 		expect(result).toBeDefined()
 		expect(result?.table?.numCols()).toBe(3)
 		expect(result?.table?.numRows()).toBe(4)
 		expect(result?.table?.columnNames()).toEqual(['ID', 'filled', 'filled2'])
-		expect(g.outputNames).toEqual(['output-1', 'output-2'])
+		expect(g.outputNames).toEqual(['output-1'])
 	})
 
 	it('will pipe through default input of no steps are defined', () => {
@@ -120,34 +159,6 @@ describe('The Workflow Resource', () => {
 		expect(output?.table).toBeDefined()
 	})
 
-	it('can read intermediate steps', () => {
-		const wf = new Workflow()
-		wf.addStep({
-			verb: Verb.Bin,
-			id: 'bin-1',
-			args: {
-				column: 'price',
-				to: 'price_bin',
-				fixedcount: 4,
-				min: 25,
-				max: 500,
-			},
-		})
-		wf.addStep({
-			verb: Verb.Fill,
-			args: {
-				to: 'derp',
-				value: 'x',
-			},
-		})
-		wf.addOutput({ name: 'intermediate', node: 'bin-1' })
-		const binRead = wf.read$('intermediate')
-		wf.defaultInput = from([tInput])
-		let val: TableContainer | undefined
-		binRead.subscribe(v => (val = v))
-		expect(val).toBeDefined()
-	})
-
 	it('can read intermediate steps, (with early read)', () => {
 		const wf = new Workflow()
 		const binRead = wf.read$('intermediate')
@@ -177,5 +188,54 @@ describe('The Workflow Resource', () => {
 
 		// doesn't blow up
 		wf.dispose()
+	})
+
+	it('can read intermediate steps', () => {
+		const wf = new Workflow()
+		wf.name = 'test_workflow'
+		wf.addStep({
+			verb: Verb.Bin,
+			id: 'bin-1',
+			args: {
+				column: 'price',
+				to: 'price_bin',
+				fixedcount: 4,
+				min: 25,
+				max: 500,
+			},
+		})
+		wf.addStep({
+			verb: Verb.Fill,
+			args: {
+				to: 'derp',
+				value: 'x',
+			},
+		})
+		wf.defaultInput = from([tInput])
+
+		wf.addOutput({ name: 'intermediate', node: 'bin-1' })
+		const intermediateRead = wf.read$('intermediate')
+		let val: TableContainer | undefined
+		intermediateRead.subscribe(v => (val = v))
+		expect(val).toBeDefined()
+		expect(val?.id).toBe('intermediate')
+
+		expect(wf.outputNames).toHaveLength(1)
+		expect(wf.outputNames[0]).toBe('intermediate')
+
+		// default table + intermediate
+		expect(wf.toArray()).toHaveLength(2)
+		expect(wf.toArray(true).map(t => t?.id)).toHaveLength(3)
+		expect([...wf.toMap().keys()]).toHaveLength(2)
+		expect([...wf.toMap(true).keys()]).toHaveLength(3)
+	})
+
+	it('emits a default tablecontainer with id = name', () => {
+		const wf = new Workflow()
+		wf.name = 'wf_output'
+		wf.defaultInput = from([tInput])
+
+		const table = wf.read()
+		expect(table?.id).toBe('wf_output')
 	})
 })
