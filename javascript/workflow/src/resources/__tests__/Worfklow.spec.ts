@@ -73,8 +73,8 @@ describe('The Workflow Resource', () => {
 				value: 'x',
 			},
 		})
-		wf.addOutput({ name: 'bin-1', node: 'bin-1' })
-		const binRead = wf.read$('bin-1')
+		wf.addOutput({ name: 'intermediate', node: 'bin-1' })
+		const binRead = wf.read$('intermediate')
 		wf.defaultInput = from([tInput])
 		let val: TableContainer | undefined
 		binRead.subscribe(v => (val = v))
@@ -83,7 +83,7 @@ describe('The Workflow Resource', () => {
 
 	it('can read intermediate steps, (with early read)', () => {
 		const wf = new Workflow()
-		const binRead = wf.read$('bin-1')
+		const binRead = wf.read$('intermediate')
 		wf.addStep({
 			verb: Verb.Bin,
 			id: 'bin-1',
@@ -102,7 +102,7 @@ describe('The Workflow Resource', () => {
 				value: 'x',
 			},
 		})
-		wf.addOutput({ name: 'bin-1', node: 'bin-1' })
+		wf.addOutput({ name: 'intermediate', node: 'bin-1' })
 		wf.defaultInput = from([tInput])
 		let val: TableContainer | undefined
 		binRead.subscribe(v => (val = v))
