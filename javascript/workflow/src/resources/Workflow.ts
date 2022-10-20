@@ -195,13 +195,9 @@ export class Workflow
 	}
 
 	private _removeInputObservable(id: string): void {
-		if (this._graph.hasNode(id)) {
-			this._graph.remove(id)
-		}
-		if (this._tableSubscriptions.has(id)) {
-			this._tableSubscriptions.get(id)?.unsubscribe()
-			this._graph.remove(id)
-		}
+		this._graph.remove(id)
+		this._tableSubscriptions.get(id)?.unsubscribe()
+		this._tableSubscriptions.delete(id)
 		this._tables.delete(id)
 	}
 
@@ -220,17 +216,20 @@ export class Workflow
 		this.addInputObservables(map)
 	}
 
-	private _bindInputObservable(id: string, source: TableObservable): void {
+	private _bindInputObservable(
+		id: string | undefined,
+		source: TableObservable,
+	): void {
+		const isDefaultInput = (id: string | undefined): id is undefined =>
+			id === undefined
 		const bindDefaultInput = () => {
-			if (this._defaultInputSubscription != null) {
-				this._defaultInputSubscription.unsubscribe()
-			}
+			this._defaultInputSubscription?.unsubscribe()
 			this._defaultInputSubscription = source.subscribe(value =>
 				this._defaultInput.next(value),
 			)
 		}
 
-		const bindNamedInput = () => {
+		const bindNamedInput = (id: string) => {
 			this._removeInputObservable(id)
 			const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
 			const subscription = source.subscribe(s => subject.next(s))
@@ -239,10 +238,10 @@ export class Workflow
 			this._graph.add(observableNode(id, subject))
 		}
 
-		if (id === undefined) {
+		if (isDefaultInput(id)) {
 			bindDefaultInput()
 		} else {
-			bindNamedInput()
+			bindNamedInput(id)
 		}
 	}
 
