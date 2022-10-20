@@ -90,8 +90,6 @@ export interface NodeBinding<T> {
 
 export interface Graph<T> {
 	readonly nodes: NodeId[]
-	readonly inputs: NodeId[]
-	readonly outputs: NodeId[]
 
 	/**
 	 * Determines if the graph contains a node by id

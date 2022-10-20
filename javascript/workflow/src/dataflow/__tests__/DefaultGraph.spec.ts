@@ -25,13 +25,6 @@ describe('DefaultGraph', () => {
 		expect(graph.nodes).toContain(two.id)
 		expect(graph.nodes).toContain(three.id)
 		graph.validate()
-
-		expect(graph.outputs).toHaveLength(1)
-		expect(graph.outputs).toContain(add.id)
-
-		expect(graph.inputs).toHaveLength(2)
-		expect(graph.inputs).toContain(two.id)
-		expect(graph.inputs).toContain(three.id)
 	})
 
 	it('can register nodes already bound to nodes being registered', () => {

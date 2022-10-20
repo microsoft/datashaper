@@ -18,7 +18,7 @@ import { BehaviorSubject, map, of } from 'rxjs'
 
 import { DefaultGraph } from '../dataflow/DefaultGraph.js'
 import { observableNode } from '../dataflow/index.js'
-import type { Graph, Node, SocketName } from '../dataflow/types.js'
+import type { Node, SocketName } from '../dataflow/types.js'
 import { createNode } from '../engine/createNode.js'
 import { readStep } from '../engine/readStep.js'
 import type { Step, StepInput } from '../engine/types.js'
@@ -31,6 +31,7 @@ import type { SchemaResource } from './types.js'
  * The workflow object manages mutable data for a workflow specification
  */
 export type TableObservable = Observable<Maybe<TableContainer>>
+type TableSubject = BehaviorSubject<Maybe<TableContainer>>
 
 export class Workflow
 	extends Resource
@@ -38,26 +39,19 @@ export class Workflow
 {
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
 	// Workflow Data Fields
-	private readonly _steps: BehaviorSubject<Step[]> = new BehaviorSubject<
-		Step[]
-	>([])
-	private readonly _inputNames: BehaviorSubject<string[]> = new BehaviorSubject<
-		string[]
-	>([])
-	private readonly _outputPorts: BehaviorSubject<NamedOutputPortBinding[]> =
-		new BehaviorSubject<NamedOutputPortBinding[]>([])
+	private readonly _steps = new BehaviorSubject<Step[]>([])
+	private readonly _inputNames = new BehaviorSubject<string[]>([])
+	private readonly _outputPorts = new BehaviorSubject<NamedOutputPortBinding[]>(
+		[],
+	)
 
-	// Graph Workflow Details
 	// The dataflow graph
-	private readonly _graph: Graph<TableContainer> = new DefaultGraph()
+	private readonly _graph = new DefaultGraph<TableContainer>()
 
 	//
 	// Output tracking - observables, data cache, subscriptions
 	//
-	private readonly _tables: Map<
-		string,
-		BehaviorSubject<Maybe<TableContainer>>
-	> = new Map()
+	private readonly _tables = new Map<string, TableSubject>()
 	private _lastStepSubscription: Subscription | undefined
 	private readonly _defaultOutput = new BehaviorSubject<Maybe<TableContainer>>(
 		undefined,
@@ -69,9 +63,7 @@ export class Workflow
 	}
 
 	private rebindDefaultOutput() {
-		if (this._lastStepSubscription) {
-			this._lastStepSubscription.unsubscribe()
-		}
+		this._lastStepSubscription?.unsubscribe()
 		this._lastStepSubscription = this.lastStepOutput()?.subscribe(value =>
 			this._defaultOutput.next(value),
 		)
@@ -194,9 +186,7 @@ export class Workflow
 	}
 
 	private _removeInputObservable(id: string): void {
-		if (this._graph.hasNode(id)) {
-			this._graph.remove(id)
-		}
+		this._graph.remove(id)
 		this._tables.delete(id)
 	}
 
@@ -447,8 +437,8 @@ export class Workflow
 
 		function isVariadic(
 			input: SocketName,
-			binding: NamedPortBinding | NamedPortBinding[],
-		): binding is NamedPortBinding[] {
+			_binding: NamedPortBinding | NamedPortBinding[],
+		): _binding is NamedPortBinding[] {
 			return input === 'others'
 		}
 	}
@@ -510,7 +500,7 @@ export class Workflow
 		})
 		this._steps.next(newSteps ?? [])
 		this._inputNames.next(unique(schema?.input ?? []))
-		this._outputPorts.next(schema?.output?.map(o => fixOutput(o)) ?? [])
+		this._outputPorts.next(schema?.output?.map(resolveOutput) ?? [])
 	}
 
 	/**
@@ -538,7 +528,7 @@ export class Workflow
 	}
 }
 
-function fixOutput(output: OutputPortBinding): NamedOutputPortBinding {
+function resolveOutput(output: OutputPortBinding): NamedOutputPortBinding {
 	if (typeof output === 'string') {
 		return { name: output as string, node: output as string }
 	} else {
