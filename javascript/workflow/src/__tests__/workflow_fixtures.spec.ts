@@ -9,7 +9,7 @@ import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-import { createWorkflow } from '../engine/createWorkflow.js'
+import { Workflow } from '../resources/index.js'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -65,19 +65,20 @@ function defineTestCase(parentPath: string, test: string) {
 		if (!isWorkflowJsonValid) {
 			throw new Error(`invalid workflow definition: ${workflowPath}`)
 		}
-		const graphBuilder = createWorkflow(workflowJson, inputTables)
+		const workflow = new Workflow(workflowJson)
+		workflow.addInputTables(inputTables)
 
 		// check the output tables
 		await Promise.all(
 			expectedOutputTables.map(async o => {
 				const expected = await readCsv(path.join(casePath, `${o}.csv`))
 				await new Promise<void>(resolve => {
-					const result = graphBuilder.read(o)
+					const result = workflow.read(o)
 					if (result?.table) {
 						compareTables(expected, result.table, o)
 						resolve()
 					} else {
-						graphBuilder.read$(o)!.subscribe(actual => {
+						workflow.read$(o)!.subscribe(actual => {
 							if (actual?.table) {
 								compareTables(expected, actual?.table, o)
 								resolve()

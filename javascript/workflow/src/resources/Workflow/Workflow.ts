@@ -16,16 +16,14 @@ import type { TableContainer } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
 import { BehaviorSubject, map, of } from 'rxjs'
 
-import { DefaultGraph } from '../dataflow/DefaultGraph.js'
-import { observableNode } from '../dataflow/index.js'
-import type { Node, SocketName } from '../dataflow/types.js'
-import { createNode } from '../engine/createNode.js'
-import { readStep } from '../engine/readStep.js'
-import type { Step, StepInput } from '../engine/types.js'
-import { WorkflowSchemaInstance } from '../engine/validator.js'
-import type { Maybe } from '../primitives.js'
-import { Resource } from './Resource.js'
-import type { SchemaResource } from './types.js'
+import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
+import { observableNode } from '../../dataflow/index.js'
+import type { Node, SocketName } from '../../dataflow/types.js'
+import type { Maybe } from '../../primitives.js'
+import { Resource } from '../Resource.js'
+import type { SchemaResource } from '../types.js'
+import type { Step, StepInput } from './Workflow.types.js'
+import { createNode, isValidWorkflowSchema,readStep  } from './Workflow.utils.js'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 
@@ -495,21 +493,28 @@ export class Workflow
 	 */
 	public toMap(includeInputs = false): Map<string, Maybe<TableContainer>> {
 		const result = new Map<string, Maybe<TableContainer>>()
+		result.set('default', this._defaultOutput.value)
+		if (includeInputs) {
+			result.set('defaultInput', this._defaultInput.value)
+		}
 		for (const [name, observable] of this._tables) {
 			if (!this.inputNames.includes(name) || includeInputs) {
 				result.set(name, observable.value)
 			}
 		}
-
 		return result
 	}
 
 	public toArray(includeInputs = false): Maybe<TableContainer>[] {
-		const result: Maybe<TableContainer>[] = []
+		const result: Maybe<TableContainer>[] = [this._defaultOutput.value]
+
 		for (const [name, observable] of this._tables) {
 			if (!this.inputNames.includes(name) || includeInputs) {
 				result.push(observable.value)
 			}
+		}
+		if (includeInputs) {
+			result.push(this._defaultInput.value)
 		}
 		return result
 	}
@@ -571,7 +576,7 @@ export class Workflow
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
-		return WorkflowSchemaInstance.isValid(workflowJson)
+		return isValidWorkflowSchema(workflowJson)
 	}
 }
 

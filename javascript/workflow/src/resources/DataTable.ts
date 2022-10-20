@@ -22,7 +22,7 @@ import { ParserOptions } from './ParserOptions.js'
 import { Resource } from './Resource.js'
 import type { TableStore } from './TableStore.js'
 import type { SchemaResource } from './types.js'
-import { Workflow } from './Workflow.js'
+import { Workflow } from './Workflow/Workflow.js'
 
 const log = debug('datashaper')
 
