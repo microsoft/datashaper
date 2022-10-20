@@ -131,8 +131,8 @@ export function useWorkflowOutputListener(
 				const outputs = (
 					workflow.toArray().filter(t => !!t) as TableContainer[]
 				).map(table => {
-					if (!table.metadata) {
-						table.metadata = introspect(table.table!, true)
+					if (table.table && !table.metadata) {
+						table.metadata = introspect(table.table, true)
 					}
 					return table
 				})
