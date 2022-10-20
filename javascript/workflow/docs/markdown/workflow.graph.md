@@ -14,9 +14,7 @@ export interface Graph<T>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [inputs](./workflow.graph.inputs.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] |  |
 |  [nodes](./workflow.graph.nodes.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] |  |
-|  [outputs](./workflow.graph.outputs.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] |  |
 
 ## Methods
 
