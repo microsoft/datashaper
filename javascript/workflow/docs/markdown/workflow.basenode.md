@@ -21,7 +21,6 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_id](./workflow.basenode._id.md) | <code>protected</code> | string |  |
 |  [bindings](./workflow.basenode.bindings.md) | <code>readonly</code> | [NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt;\[\] |  |
 |  [bindings$](./workflow.basenode.bindings_.md) | <code>readonly</code> | Observable&lt;[NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt;\[\]&gt; |  |
 |  [config](./workflow.basenode.config.md) |  | [Maybe](./workflow.maybe.md)<!-- -->&lt;Config&gt; |  |

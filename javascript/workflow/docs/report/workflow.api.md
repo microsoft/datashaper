@@ -98,10 +98,7 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     protected hasBoundInput(name: SocketName): boolean;
     // (undocumented)
-    get id(): NodeId;
-    set id(value: NodeId);
-    // (undocumented)
-    protected _id: string;
+    id: NodeId;
     // (undocumented)
     readonly inputs: SocketName[];
     // (undocumented)

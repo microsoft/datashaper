@@ -408,35 +408,6 @@
           "preserveMemberOrder": false,
           "members": [
             {
-              "kind": "Property",
-              "canonicalReference": "@datashaper/workflow!BaseNode#_id:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "protected _id: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "_id",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": true
-            },
-            {
               "kind": "Constructor",
               "canonicalReference": "@datashaper/workflow!BaseNode:constructor(1)",
               "docComment": "/**\n * Constructs a new instance of the `BaseNode` class\n */\n",
@@ -1043,7 +1014,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "get id(): "
+                  "text": "id: "
                 },
                 {
                   "kind": "Reference",
@@ -1052,16 +1023,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ";\n\nset id(value: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "NodeId",
-                  "canonicalReference": "@datashaper/workflow!NodeId:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ");"
+                  "text": ";"
                 }
               ],
               "isReadonly": false,
