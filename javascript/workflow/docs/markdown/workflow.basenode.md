@@ -40,10 +40,10 @@ export declare abstract class BaseNode<T, Config> implements Node<T, Config>
 |  --- | --- | --- |
 |  [bind(binding)](./workflow.basenode.bind.md) |  |  |
 |  [binding(name)](./workflow.basenode.binding.md) |  |  |
-|  [bindVariadic(\_inputs)](./workflow.basenode.bindvariadic.md) | <code>protected</code> |  |
 |  [doRecalculate()](./workflow.basenode.dorecalculate.md) | <code>protected</code> | Abstract logic for performing the node recalculation |
 |  [getInputErrors()](./workflow.basenode.getinputerrors.md) | <code>protected</code> | Gets a map of named inputs to any errors emitted |
 |  [getInputValues()](./workflow.basenode.getinputvalues.md) | <code>protected</code> | Gets a map of named inputs to the current value. |
+|  [getVariadicInputValues()](./workflow.basenode.getvariadicinputvalues.md) | <code>protected</code> |  |
 |  [hasBoundInput(name)](./workflow.basenode.hasboundinput.md) | <code>protected</code> |  |
 |  [inputValue(name)](./workflow.basenode.inputvalue.md) | <code>protected</code> |  |
 |  [unbind(name)](./workflow.basenode.unbind.md) |  |  |

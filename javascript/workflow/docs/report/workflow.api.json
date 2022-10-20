@@ -674,58 +674,6 @@
               "isProtected": false
             },
             {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!BaseNode#bindVariadic:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "protected bindVariadic(_inputs: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "VariadicNodeBinding",
-                  "canonicalReference": "@datashaper/workflow!VariadicNodeBinding:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<T>"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
-              },
-              "releaseTag": "Public",
-              "isProtected": true,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "_inputs",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 3
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "bindVariadic"
-            },
-            {
               "kind": "Property",
               "canonicalReference": "@datashaper/workflow!BaseNode#config:member",
               "docComment": "",
@@ -1004,6 +952,41 @@
               "parameters": [],
               "isOptional": false,
               "name": "getInputValues"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@datashaper/workflow!BaseNode#getVariadicInputValues:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected getVariadicInputValues(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Maybe",
+                  "canonicalReference": "@datashaper/workflow!Maybe:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": true,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "name": "getVariadicInputValues"
             },
             {
               "kind": "Method",
@@ -1340,7 +1323,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "protected verifyInputSocketName(name: "
+                  "text": "protected verifyInputSocketName(name?: "
                 },
                 {
                   "kind": "Reference",
@@ -1376,7 +1359,7 @@
                     "startIndex": 1,
                     "endIndex": 2
                   },
-                  "isOptional": false
+                  "isOptional": true
                 }
               ],
               "isOptional": false,
@@ -1389,188 +1372,6 @@
               "endIndex": 3
             }
           ]
-        },
-        {
-          "kind": "Class",
-          "canonicalReference": "@datashaper/workflow!BaseVariadicNode:class",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare abstract class BaseVariadicNode<T, Config> extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "BaseNode",
-              "canonicalReference": "@datashaper/workflow!BaseNode:class"
-            },
-            {
-              "kind": "Content",
-              "text": "<T, Config>"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "typeParameters": [
-            {
-              "typeParameterName": "T",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            },
-            {
-              "typeParameterName": "Config",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              }
-            }
-          ],
-          "name": "BaseVariadicNode",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "Constructor",
-              "canonicalReference": "@datashaper/workflow!BaseVariadicNode:constructor(1)",
-              "docComment": "/**\n * Constructs a new instance of the `BaseVariadicNode` class\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "constructor(inputs?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "SocketName",
-                  "canonicalReference": "@datashaper/workflow!SocketName:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ");"
-                }
-              ],
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "inputs",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 3
-                  },
-                  "isOptional": true
-                }
-              ]
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!BaseVariadicNode#bindVariadic:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "bindVariadic(inputs: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "VariadicNodeBinding",
-                  "canonicalReference": "@datashaper/workflow!VariadicNodeBinding:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<T>"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "inputs",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 3
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "name": "bindVariadic"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "@datashaper/workflow!BaseVariadicNode#getVariadicInputValues:member(1)",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "protected getVariadicInputValues(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Maybe",
-                  "canonicalReference": "@datashaper/workflow!Maybe:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<T>[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "releaseTag": "Public",
-              "isProtected": true,
-              "overloadIndex": 1,
-              "parameters": [],
-              "isOptional": false,
-              "name": "getVariadicInputValues"
-            }
-          ],
-          "extendsTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          },
-          "implementsTokenRanges": []
         },
         {
           "kind": "Variable",
@@ -5226,6 +5027,46 @@
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 4
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/workflow!isDefaultInput:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "isDefaultInput: "
+            },
+            {
+              "kind": "Content",
+              "text": "(name?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "SocketName",
+              "canonicalReference": "@datashaper/workflow!SocketName:type"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Reference",
+              "text": "name",
+              "canonicalReference": "@datashaper/workflow!~name"
+            },
+            {
+              "kind": "Content",
+              "text": " is undefined"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "isDefaultInput",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 6
           }
         },
         {

@@ -9,7 +9,6 @@
 |  Class | Description |
 |  --- | --- |
 |  [BaseNode](./workflow.basenode.md) |  |
-|  [BaseVariadicNode](./workflow.basevariadicnode.md) |  |
 |  [Codebook](./workflow.codebook.md) |  |
 |  [DataPackage](./workflow.datapackage.md) |  |
 |  [DataShape](./workflow.datashape.md) |  |
@@ -90,6 +89,7 @@
 |  [groupby](./workflow.groupby.md) |  |
 |  [impute](./workflow.impute.md) |  |
 |  [intersect](./workflow.intersect.md) |  |
+|  [isDefaultInput](./workflow.isdefaultinput.md) |  |
 |  [merge](./workflow.merge.md) |  |
 |  [onehot](./workflow.onehot.md) |  |
 |  [orderby](./workflow.orderby.md) |  |
