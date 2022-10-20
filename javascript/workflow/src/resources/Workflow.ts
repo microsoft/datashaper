@@ -103,8 +103,11 @@ export class Workflow
 	}
 
 	private _read(name?: string) {
-		if (name === undefined) {
+		if (name == null) {
 			return this._defaultOutput
+		}
+		if (!name) {
+			throw new Error('read table name must be defined')
 		}
 		if (!this._tables.has(name)) {
 			this._tables.set(
@@ -221,7 +224,7 @@ export class Workflow
 		source: TableObservable,
 	): void {
 		const isDefaultInput = (id: string | undefined): id is undefined =>
-			id === undefined
+			id == null
 		const bindDefaultInput = () => {
 			this._defaultInputSubscription?.unsubscribe()
 			this._defaultInputSubscription = source.subscribe(value =>
@@ -462,8 +465,7 @@ export class Workflow
 			}
 		}
 		const bindDefaultInput = () => {
-			const inputNode = this._graph.node(DEFAULT_INPUT)
-			node.bind({ node: inputNode })
+			node.bind({ node: this._graph.node(DEFAULT_INPUT) })
 		}
 
 		const bindPreviousStepOutput = () => {

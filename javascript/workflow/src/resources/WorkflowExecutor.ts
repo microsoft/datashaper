@@ -37,22 +37,16 @@ export class WorkflowExecutor {
 		private readonly inputs: Map<string, Observable<Maybe<TableContainer>>>,
 		private readonly workflow: Workflow,
 	) {
-		// When the source changes, re-wire it into the workflow's
-		// input layer
-		this.workflow.addInputObservable(source)
+		this.rebindWorkflowInput()
 		this.source.subscribe(table => {
-			if (this.workflow.length > 0) {
-				this.rebindWorkflowInput()
-			} else {
+			if (this.workflow.length === 0) {
 				this.output.next({ table, id: this._name })
 			}
 		})
 
 		// When the workflow changes, re-bind the output-table observable
 		this.workflow.onChange(() => {
-			if (this._workflowSubscription != null)
-				this._workflowSubscription.unsubscribe()
-
+			this._workflowSubscription?.unsubscribe()
 			if (this.workflow.length > 0) {
 				this._workflowSubscription = this.workflow
 					.read$()
@@ -61,22 +55,6 @@ export class WorkflowExecutor {
 				this.output.next({ table: this.source.value, id: this._name })
 			}
 		})
-
-		this.rebindWorkflowInput()
-	}
-
-	public rebindWorkflowInput(): void {
-		const inputMap = new Map(this.inputs)
-		inputMap.set(
-			this.name,
-			this.source.pipe(
-				map(table => {
-					const metadata = table && introspect(table, true)
-					return { id: this.name, table, metadata }
-				}),
-			),
-		)
-		this.workflow.addInputObservables(inputMap)
 	}
 
 	public get name(): string {
@@ -85,5 +63,21 @@ export class WorkflowExecutor {
 	public set name(value: string) {
 		this._name = value
 		this.rebindWorkflowInput()
+	}
+
+	private rebindWorkflowInput() {
+		// Set the Default Input
+		this.workflow.addInputObservable(
+			this.source.pipe(
+				map(table => ({
+					table,
+					id: this._name,
+					// TODO: let parsing layer deal with this
+					metadata: table && introspect(table, true),
+				})),
+			),
+			undefined,
+		)
+		this.workflow.addInputObservables(this.inputs)
 	}
 }
