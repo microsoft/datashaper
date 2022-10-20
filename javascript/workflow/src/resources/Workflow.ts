@@ -70,6 +70,13 @@ export class Workflow
 		this._graph.add(observableNode(DEFAULT_INPUT, this._defaultInput))
 	}
 
+	public dispose() {
+		this._defaultOutputSubscription?.unsubscribe()
+		this._defaultInputSubscription?.unsubscribe()
+		this._tableSubscriptions.forEach(s => s.unsubscribe())
+		this._graph.clear()
+	}
+
 	private rebindDefaultOutput() {
 		const defaultOutputObservable = (): Maybe<
 			Observable<Maybe<TableContainer>>

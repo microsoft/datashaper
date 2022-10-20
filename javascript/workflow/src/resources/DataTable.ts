@@ -13,7 +13,7 @@ import { introspect, readTable } from '@datashaper/tables'
 import type { Maybe } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import debug from 'debug'
-import type { Observable, Subscription } from 'rxjs'
+import type { Observable } from 'rxjs'
 import { BehaviorSubject, EMPTY, map } from 'rxjs'
 
 import { Codebook } from './Codebook.js'
@@ -45,21 +45,27 @@ export class DataTable
 	public readonly codebook = new Codebook()
 	public readonly workflow = new Workflow()
 
-	private _workflowSubscription?: Subscription
+	private disposables: Array<() => void> = []
 
 	private _format: DataFormat = DataFormat.CSV
 	private _rawData: Blob | undefined
 
 	public constructor(datatable?: DataTableSchema) {
 		super()
-		this.parser.onChange(this.refreshSource)
-		this.shape.onChange(this.refreshSource)
-		this.workflow.onChange(() => this._onChange.next())
+		this.disposables.push(this.parser.onChange(this.refreshSource))
+		this.disposables.push(this.shape.onChange(this.refreshSource))
+		this.disposables.push(this.workflow.onChange(() => this._onChange.next()))
 
-		// listen for workflow execution outputs
+		const sub = this.workflow.read$()?.subscribe(tbl => this._output.next(tbl))
+		this.disposables.push(() => sub?.unsubscribe())
+
 		this.loadSchema(datatable)
-		this.observeDataChanges()
 		this.rebindWorkflowInput()
+	}
+
+	public dispose(): void {
+		this.disposables.forEach(d => d())
+		this.workflow.dispose()
 	}
 
 	private refreshSource = (): void => {
@@ -74,25 +80,6 @@ export class DataTable
 				})
 		}
 		this._onChange.next()
-	}
-	private observeDataChanges = () => {
-		this._source.subscribe(table => {
-			// If the workflow is empty, emit the table directly
-			if (this.workflow.length === 0) {
-				this._output.next({ table, id: this.name })
-			}
-		})
-		// When the workflow changes, re-bind the output-table observable
-		this.workflow.onChange(() => {
-			this._workflowSubscription?.unsubscribe()
-			if (this.workflow.length > 0) {
-				this._workflowSubscription = this.workflow
-					.read$()
-					?.subscribe(tbl => this._output.next(tbl))
-			} else {
-				this._output.next({ table: this._source.value, id: this.name })
-			}
-		})
 	}
 
 	// #region Class Fields
