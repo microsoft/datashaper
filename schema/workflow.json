@@ -1624,30 +1624,6 @@
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/FetchArgs"
-                                    },
-                                    "verb": {
-                                        "enum": [
-                                            "fetch"
-                                        ],
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            {
-                                "$ref": "#/definitions/BasicInput"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/StepJsonCommon"
-                            },
-                            {
-                                "properties": {
-                                    "args": {
                                         "$ref": "#/definitions/FillArgs"
                                     },
                                     "verb": {

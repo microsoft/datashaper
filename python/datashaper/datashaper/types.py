@@ -24,7 +24,6 @@ class Verb(Enum):
     Derive = "derive"
     Difference = "difference"
     Erase = "erase"
-    Fetch = "fetch"
     Fill = "fill"
     Filter = "filter"
     FilterAggregateLookup = "filter-aggregate-lookup"

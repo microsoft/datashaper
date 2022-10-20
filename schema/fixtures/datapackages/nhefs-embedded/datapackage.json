@@ -6,10 +6,10 @@
 			"$schema": "https://microsoft.github.io/datashaper/schema/datatable/v1.json",
 			"profile": "datatable",
 			"name": "nhefs",
+			"path": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv",
 			"format": "csv",
 			"layout": "micro",
 			"sources": [
-				"https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/1268/20/nhefs.csv",
 				{
 					"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v1.json",
 					"input": ["nhefs"],

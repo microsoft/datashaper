@@ -4,7 +4,6 @@
  */
 import type {
 	DeriveArgs,
-	FetchArgs,
 	InputColumnArgs,
 	InputColumnListArgs,
 	InputColumnRecordArgs,
@@ -41,8 +40,6 @@ export function deriveDetails(step: Step): string | undefined {
 			return `from ${(args as DeriveArgs).column1} & ${
 				(args as DeriveArgs).column2
 			}`
-		case Verb.Fetch:
-			return (args as FetchArgs).url
 		case Verb.Orderby:
 			return (args as OrderbyArgs).orders.map(o => o.column).join(',')
 		case Verb.Sample:

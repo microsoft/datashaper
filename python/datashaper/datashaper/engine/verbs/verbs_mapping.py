@@ -15,7 +15,6 @@ from datashaper.engine.verbs.dedupe import dedupe
 from datashaper.engine.verbs.derive import derive
 from datashaper.engine.verbs.difference import difference
 from datashaper.engine.verbs.erase import erase
-from datashaper.engine.verbs.fetch import fetch
 from datashaper.engine.verbs.fill import fill
 from datashaper.engine.verbs.filter import filter
 from datashaper.engine.verbs.fold import fold
@@ -56,7 +55,6 @@ functions: Dict[Verb, Callable] = {
     Verb.Derive: derive,
     Verb.Difference: difference,
     Verb.Erase: erase,
-    Verb.Fetch: fetch,
     Verb.Fill: fill,
     Verb.Filter: filter,
     Verb.Fold: fold,

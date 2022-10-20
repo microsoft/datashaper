@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-output(name?: SocketName): Observable<Maybe<T>>;
+output(name?: SocketName): Maybe<T>;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ output(name?: SocketName): Observable<Maybe<T>>;
 
 <b>Returns:</b>
 
-Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;&gt;
+[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;
 

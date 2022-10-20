@@ -4,6 +4,8 @@
 
 ## DefaultGraph.nodes property
 
+Get a list of NodeIDs
+
 <b>Signature:</b>
 
 ```typescript

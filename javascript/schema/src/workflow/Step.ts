@@ -14,7 +14,6 @@ import type {
 	DeriveArgs,
 	EncodeArgs,
 	EraseArgs,
-	FetchArgs,
 	FillArgs,
 	FilterArgs,
 	FoldArgs,
@@ -66,7 +65,6 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Decode; args?: DecodeArgs } & BasicInput)
 		| ({ verb: Verb.Encode; args?: EncodeArgs } & BasicInput)
 		| ({ verb: Verb.Erase; args?: EraseArgs } & BasicInput)
-		| ({ verb: Verb.Fetch; args?: FetchArgs } & BasicInput)
 		| ({ verb: Verb.Fill; args?: FillArgs } & BasicInput)
 		| ({ verb: Verb.Filter; args?: FilterArgs } & BasicInput)
 		| ({ verb: Verb.Fold; args?: FoldArgs } & BasicInput)

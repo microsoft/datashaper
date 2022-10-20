@@ -11,7 +11,7 @@
 		"codebook": "1.0.0",
 		"datapackage": "1.0.0",
 		"datatable": "1.0.0",
-		"workflow": "1.5.3"
+		"workflow": "2.0.0"
 	},
 	"sideEffects": false,
 	"author": "Nathan Evans <naevans@microsoft.com>",

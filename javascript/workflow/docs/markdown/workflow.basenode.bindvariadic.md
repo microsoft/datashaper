@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
+protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
 ```
 
 ## Parameters

@@ -9,12 +9,12 @@ Constructs a new instance of the `StepNode` class
 <b>Signature:</b>
 
 ```typescript
-constructor(_step: StepFunction<T, Args>);
+constructor(step: StepFunction<T, Args>);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  \_step | [StepFunction](./workflow.stepfunction.md)<!-- -->&lt;T, Args&gt; |  |
+|  step | [StepFunction](./workflow.stepfunction.md)<!-- -->&lt;T, Args&gt; |  |
 

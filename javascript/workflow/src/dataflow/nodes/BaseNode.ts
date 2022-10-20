@@ -4,12 +4,12 @@
  */
 import debug from 'debug'
 import type { Observable } from 'rxjs'
-import { BehaviorSubject, Subject } from 'rxjs'
+import { BehaviorSubject, map } from 'rxjs'
 import { v4 as uuid } from 'uuid'
 
+import type { Maybe } from '../../primitives.js'
 import type { BoundInput } from '../BoundInput.js'
 import { DefaultBoundInput } from '../BoundInput.js'
-import type { Maybe } from '../primitives.js'
 import type { Node, NodeBinding, NodeId, SocketName } from '../types'
 import { NodeInput, NodeOutput } from '../types.js'
 
@@ -22,13 +22,8 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region fields
 
 	protected _id = uuid()
-	private _config: Maybe<Config>
-
-	// inputs
-	private _inputs: Map<SocketName, BoundInput<T>> = new Map()
-	private _bindingsChanged = new Subject<void>()
-
-	// outputs
+	private _config = new BehaviorSubject<Maybe<Config>>(undefined)
+	private _inputs = new BehaviorSubject<BoundInput<T>[]>([])
 	private _outputs: Map<SocketName, BehaviorSubject<Maybe<T>>> = new Map()
 
 	// #endregion fields
@@ -54,16 +49,16 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	}
 
 	public get config(): Maybe<Config> {
-		return this._config
+		return this._config.value
 	}
 
 	public set config(value: Maybe<Config>) {
-		this._config = value
+		this._config.next(value)
 		void this.recalculate()
 	}
 
-	public get onBindingsChanged(): Observable<void> {
-		return this._bindingsChanged
+	public get config$(): Observable<Maybe<Config>> {
+		return this._config
 	}
 
 	// #endregion field accessors
@@ -71,20 +66,20 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	// #region inputs
 
 	public binding(name: SocketName = DEFAULT_INPUT_NAME): Maybe<NodeBinding<T>> {
-		return this._inputs.get(name)?.binding
+		return this._inputs.value.find(i => i.name === name)?.binding
 	}
 
-	public bindings(): NodeBinding<T>[] {
-		return [...this._inputs.values()].map(i => i.binding)
+	public get bindings$(): Observable<NodeBinding<T>[]> {
+		return this._inputs.pipe(map(inputs => inputs.map(i => i.binding)))
 	}
 
-	public get bindingsCount(): number {
-		return this._inputs.size
+	public get bindings(): NodeBinding<T>[] {
+		return this._inputs.value.map(i => i.binding)
 	}
 
 	protected inputValue(name: SocketName = DEFAULT_INPUT_NAME): Maybe<T> {
 		this.verifyInputSocketName(name)
-		return this._inputs.get(name)?.current
+		return this._inputs.value.find(i => i.name === name)?.current
 	}
 
 	/**
@@ -92,9 +87,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected getInputValues(): Record<SocketName, Maybe<T>> {
 		const result: Record<SocketName, Maybe<T>> = {}
-		for (const key of this._inputs.keys()) {
-			result[key] = this._inputs.get(key)?.current
-		}
+		this._inputs.value.forEach(i => (result[i.name] = i.current))
 		return result
 	}
 
@@ -103,12 +96,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected getInputErrors(): Record<SocketName, unknown> {
 		const result: Record<SocketName, unknown> = {}
-		for (const key in this._inputs.keys()) {
-			const error = this._inputs.get(key)?.error
-			if (error) {
-				result[key] = error
-			}
-		}
+		this._inputs.value.forEach(i => (result[i.name] = i.error))
 		return result
 	}
 
@@ -116,12 +104,12 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	// #region outputs
 
-	public output(name: SocketName = DEFAULT_OUTPUT_NAME): Observable<Maybe<T>> {
+	public output$(name: SocketName = DEFAULT_OUTPUT_NAME): Observable<Maybe<T>> {
 		this.verifyOutputSocketName(name)
 		return this._outputs.get(name) as Observable<Maybe<T>>
 	}
 
-	public outputValue(name: SocketName = DEFAULT_OUTPUT_NAME): Maybe<T> {
+	public output(name: SocketName = DEFAULT_OUTPUT_NAME): Maybe<T> {
 		this.verifyOutputSocketName(name)
 		return this._outputs.get(name)?.value
 	}
@@ -130,33 +118,46 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 
 	// #region bind/unbind logic
 
-	public bind(binding: NodeBinding<T>): void {
-		const name = binding.input ?? DEFAULT_INPUT_NAME
-		this.verifyInputSocketName(name)
-		// uninstall any existing upstream socket connection
-		if (this._inputs.has(name)) {
-			this.unbind(name)
+	public bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void {
+		if (Array.isArray(binding)) {
+			this.bindVariadic(binding)
+		} else {
+			const name = this.verifyInputSocketName(
+				binding.input ?? DEFAULT_INPUT_NAME,
+			)
+			// uninstall any existing upstream socket connection
+			if (this.hasBoundInput(name)) {
+				this.unbind(name)
+			}
+
+			// subscribe to the new input
+			const input: BoundInput<T> = new DefaultBoundInput(name, binding)
+			this._inputs.next([
+				...this._inputs.value.filter(i => i.name !== name),
+				input,
+			])
+
+			input.onValueChange(() => this.recalculate())
+			this.recalculate()
 		}
-		// subscribe to the new input
-		const input: BoundInput<T> = new DefaultBoundInput(binding)
-		this._inputs.set(name, input)
-		input.onValueChange(() => this.recalculate())
-		this.recalculate()
-		this._bindingsChanged.next()
 	}
 
-	public bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void {
-		throw new Error('not supported')
+	protected hasBoundInput(name: SocketName): boolean {
+		const existing = this._inputs.value.find(i => i.name === name)
+		return existing != null
+	}
+
+	protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void {
+		throw new Error('variadic input not supported')
 	}
 
 	public unbind(name: SocketName): void {
 		this.verifyInputSocketName(name)
-		if (this._inputs.has(name)) {
+		if (this.hasBoundInput(name)) {
 			// unsubscribe from updates
-			this._inputs.get(name)?.dispose()
-			this._inputs.delete(name)
+			this._inputs.value.find(i => i.name === name)?.dispose()
+			this._inputs.next(this._inputs.value.filter(i => i.name !== name))
 			void this.recalculate()
-			this._bindingsChanged.next()
 		} else {
 			throw new Error(`no socket installed at "${String(name)}"`)
 		}
@@ -170,13 +171,11 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 * Verifies that an input socket name is known
 	 * @param name - The input socket name
 	 */
-	protected verifyInputSocketName(name: SocketName): void {
-		if (name === DEFAULT_INPUT_NAME) {
-			return
-		}
-		if (!this.inputs.some(s => s === name)) {
+	protected verifyInputSocketName(name: SocketName): SocketName {
+		if (name !== DEFAULT_INPUT_NAME && !this.inputs.some(s => s === name)) {
 			throw new Error(`unknown input socket name "${String(name)}"`)
 		}
+		return name
 	}
 
 	/**
@@ -201,10 +200,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	 */
 	protected recalculate = (): void => {
 		try {
-			const result = this.doRecalculate()
-			if ((result as Promise<void>)?.then) {
-				;(result as Promise<void>).catch(err => this.emitError(err))
-			}
+			this.doRecalculate()
 		} catch (err) {
 			log('recalculation error in node ' + this.id, err)
 			this.emitError(err)
@@ -214,7 +210,7 @@ export abstract class BaseNode<T, Config> implements Node<T, Config> {
 	/**
 	 * Abstract logic for performing the node recalculation
 	 */
-	protected abstract doRecalculate(): Promise<void> | void
+	protected abstract doRecalculate(): void
 
 	// #endregion
 

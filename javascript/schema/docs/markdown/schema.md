@@ -62,7 +62,6 @@
 |  [DualInput](./schema.dualinput.md) | Dual-input, single-output step I/O |
 |  [EncodeArgs](./schema.encodeargs.md) |  |
 |  [EraseArgs](./schema.eraseargs.md) |  |
-|  [FetchArgs](./schema.fetchargs.md) |  |
 |  [Field](./schema.field.md) | Contains the full schema definition and metadata for a data field (usually a table column). This includes the required data type, various data nature and rendering properties, potential validation rules, and mappings from a data dictionary. |
 |  [FieldMetadata](./schema.fieldmetadata.md) | Holds core metadata/stats for a data field. |
 |  [FillArgs](./schema.fillargs.md) |  |
