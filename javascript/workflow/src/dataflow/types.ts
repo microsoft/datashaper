@@ -26,11 +26,6 @@ export interface Node<T, Config = unknown> {
 	readonly inputs: SocketName[]
 
 	/**
-	 * Named output sockets, in addition to the implicit default output socket
-	 */
-	readonly outputs: SocketName[]
-
-	/**
 	 * The node's mutable configuration
 	 */
 	config: Maybe<Config>
@@ -68,16 +63,14 @@ export interface Node<T, Config = unknown> {
 	binding(input?: SocketName): Maybe<NodeBinding<T>>
 
 	/**
-	 * Gets an output socket
-	 * @param name - The name of the output socket. If undefined, this will use the implicit default output socket.
+	 * Gets the output value stream
 	 */
-	output$(name?: SocketName): Observable<Maybe<T>>
+	readonly output$: Observable<Maybe<T>>
 
 	/**
 	 * Gets a current output value
-	 * @param name - The output name. If undefined, this will use the implicit default output socket.
 	 */
-	output(name?: SocketName): Maybe<T>
+	readonly output: Maybe<T>
 }
 
 /**
@@ -85,7 +78,7 @@ export interface Node<T, Config = unknown> {
  */
 export interface NodeBinding<T> {
 	/**
-	 * The node to bind
+	 * The source node to bind data from
 	 */
 	node: Node<T>
 
@@ -93,17 +86,10 @@ export interface NodeBinding<T> {
 	 * The named input on the target node (otherwise default)
 	 */
 	input?: SocketName
-
-	/**
-	 * The named output on the source node (otherwise default)
-	 */
-	output?: SocketName
 }
 
 export interface Graph<T> {
 	readonly nodes: NodeId[]
-	readonly inputs: NodeId[]
-	readonly outputs: NodeId[]
 
 	/**
 	 * Determines if the graph contains a node by id

@@ -76,9 +76,9 @@ export function array<T = string>(nodes: ReadonlyArray<T>, edges: ReadonlyArray<
 //
 // @public (undocumented)
 export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
-    constructor(inputs?: SocketName[], outputs?: SocketName[]);
+    constructor(inputs?: SocketName[]);
     // (undocumented)
-    bind(binding: NodeBinding<T> | Omit<NodeBinding<T>, 'input'>[]): void;
+    bind(binding: NodeBinding<T> | VariadicNodeBinding<T>): void;
     // (undocumented)
     binding(name?: SocketName): Maybe<NodeBinding<T>>;
     // (undocumented)
@@ -86,50 +86,33 @@ export abstract class BaseNode<T, Config> implements Node_2<T, Config> {
     // (undocumented)
     get bindings(): NodeBinding<T>[];
     // (undocumented)
-    protected bindVariadic(_inputs: Omit<NodeBinding<T>, 'input'>[]): void;
-    // (undocumented)
     get config$(): Observable<Maybe<Config>>;
     // (undocumented)
     get config(): Maybe<Config>;
     set config(value: Maybe<Config>);
     protected abstract doRecalculate(): void;
-    protected emit: (value: Maybe<T>, output?: NodeOutput) => void;
+    protected emit: (value: Maybe<T>) => void;
     protected emitError: (error: unknown) => void;
     protected getInputErrors(): Record<SocketName, unknown>;
     protected getInputValues(): Record<SocketName, Maybe<T>>;
     // (undocumented)
+    protected getVariadicInputValues(): Maybe<T>[];
+    // (undocumented)
     protected hasBoundInput(name: SocketName): boolean;
     // (undocumented)
-    get id(): NodeId;
-    set id(value: NodeId);
-    // (undocumented)
-    protected _id: string;
+    id: NodeId;
     // (undocumented)
     readonly inputs: SocketName[];
     // (undocumented)
     protected inputValue(name?: SocketName): Maybe<T>;
     // (undocumented)
-    output$(name?: SocketName): Observable<Maybe<T>>;
+    get output$(): Observable<Maybe<T>>;
     // (undocumented)
-    output(name?: SocketName): Maybe<T>;
-    // (undocumented)
-    readonly outputs: SocketName[];
+    get output(): Maybe<T>;
     protected recalculate: () => void;
     // (undocumented)
     unbind(name: SocketName): void;
-    protected verifyInputSocketName(name: SocketName): SocketName;
-    protected verifyOutputSocketName(name: SocketName): void;
-}
-
-// Warning: (ae-missing-release-tag) "BaseVariadicNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export abstract class BaseVariadicNode<T, Config> extends BaseNode<T, Config> {
-    constructor(inputs?: SocketName[], outputs?: SocketName[]);
-    // (undocumented)
-    bindVariadic(inputs: Omit<NodeBinding<T>, 'input'>[]): void;
-    // (undocumented)
-    protected getVariadicInputValues(): Maybe<T>[];
+    protected verifyInputSocketName(name?: SocketName): SocketName;
 }
 
 // Warning: (ae-missing-release-tag) "bin" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -189,10 +172,10 @@ export const convert: (id: string) => StepNode<TableContainer<unknown>, ConvertA
 // @public (undocumented)
 export type CopyWithPartial<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 
-// Warning: (ae-missing-release-tag) "createWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "createNode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
-export function createWorkflow(input: WorkflowSchema, tables: TableContainer[]): Workflow;
+// @public (undocumented)
+export function createNode(step: Step): Node_2<TableContainer>;
 
 // Warning: (ae-missing-release-tag) "DataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -250,12 +233,10 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     // (undocumented)
     connect(store: TableStore): void;
     // (undocumented)
-    get currentOutput(): Maybe_2<TableContainer>;
-    // (undocumented)
-    get currentSource(): Maybe_2<ColumnTable>;
-    // (undocumented)
     get data(): Blob | undefined;
     set data(value: Blob | undefined);
+    // (undocumented)
+    dispose(): void;
     // (undocumented)
     get format(): DataFormat;
     set format(value: DataFormat);
@@ -265,13 +246,17 @@ export class DataTable extends Resource implements SchemaResource<DataTableSchem
     get name(): string;
     set name(value: string);
     // (undocumented)
-    get output(): Observable<Maybe_2<TableContainer>>;
+    get output$(): Observable<Maybe_2<TableContainer>>;
+    // (undocumented)
+    get output(): Maybe_2<TableContainer>;
     // (undocumented)
     readonly parser: ParserOptions;
     // (undocumented)
     readonly shape: DataShape;
     // (undocumented)
-    get source(): Observable<Maybe_2<ColumnTable>>;
+    get source$(): Observable<Maybe_2<ColumnTable>>;
+    // (undocumented)
+    get source(): Maybe_2<ColumnTable>;
     // (undocumented)
     toSchema(): DataTableSchema;
     // (undocumented)
@@ -298,12 +283,9 @@ export class DefaultGraph<T> implements Graph<T> {
     clear(): void;
     // (undocumented)
     hasNode(id: NodeId): boolean;
-    get inputs(): NodeId[];
     // (undocumented)
     node(id: NodeId): Node_2<T>;
     get nodes(): NodeId[];
-    // (undocumented)
-    get outputs(): NodeId[];
     // (undocumented)
     remove(removeId: NodeId): void;
     // (undocumented)
@@ -362,13 +344,9 @@ export interface Graph<T> {
     add(node: Node_2<T>): void;
     clear(): void;
     hasNode(id: NodeId): boolean;
-    // (undocumented)
-    readonly inputs: NodeId[];
     node(id: NodeId): Node_2<T>;
     // (undocumented)
     readonly nodes: NodeId[];
-    // (undocumented)
-    readonly outputs: NodeId[];
     remove(id: NodeId): void;
     validate(): void;
 }
@@ -397,6 +375,11 @@ export const impute: (id: string) => StepNode<TableContainer<unknown>, ImputeArg
 //
 // @public (undocumented)
 export const intersect: (id: string) => SetOperationNode<unknown>;
+
+// Warning: (ae-missing-release-tag) "isDefaultInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isDefaultInput: (name?: SocketName) => name is undefined;
 
 // Warning: (ae-missing-release-tag) "isInputColumnListStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -437,6 +420,11 @@ export function isNumericInputStep(step: Step): boolean;
 //
 // @public
 export function isOutputColumnStep(step: Step): boolean;
+
+// Warning: (ae-missing-release-tag) "isValidWorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function isValidWorkflowSchema(workflowJson?: WorkflowSchema): Promise<boolean>;
 
 // Warning: (ae-forgotten-export) The symbol "JoinNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "join" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -497,9 +485,8 @@ interface Node_2<T, Config = unknown> {
     config: Maybe<Config>;
     readonly id: NodeId;
     readonly inputs: SocketName[];
-    output$(name?: SocketName): Observable<Maybe<T>>;
-    output(name?: SocketName): Maybe<T>;
-    readonly outputs: SocketName[];
+    readonly output$: Observable<Maybe<T>>;
+    readonly output: Maybe<T>;
     unbind(name?: SocketName): void;
 }
 export { Node_2 as Node }
@@ -510,7 +497,6 @@ export { Node_2 as Node }
 export interface NodeBinding<T> {
     input?: SocketName;
     node: Node_2<T>;
-    output?: SocketName;
 }
 
 // Warning: (ae-missing-release-tag) "NodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -741,6 +727,18 @@ export class StepNode<T, Args> extends BaseNode<T, Args> {
 // @public (undocumented)
 export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (id: string) => StepNode<T, Args>;
 
+// Warning: (ae-missing-release-tag) "TableExportOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TableExportOptions {
+    // (undocumented)
+    includeDefaultInput?: boolean;
+    // (undocumented)
+    includeDefaultOutput?: boolean;
+    // (undocumented)
+    includeInputs?: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "TableObservable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -804,15 +802,19 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     readonly $schema: string;
     constructor(input?: WorkflowSchema, _strictInputs?: boolean);
+    addInput(source: TableObservable, id: string): void;
     // (undocumented)
     addInputName(input: string): void;
-    addInputObservable(id: string, source: TableObservable): void;
-    addInputObservables(values: Map<string, TableObservable>): void;
-    addInputTable(table: TableContainer, id?: string): void;
+    addInputs(values: Map<string, TableObservable>): void;
+    addInputTable(table: TableContainer, id: string): void;
     // (undocumented)
     addInputTables(inputs: TableContainer[]): void;
     addOutput(output: NamedOutputPortBinding): void;
     addStep(stepInput: StepInput): Step;
+    // (undocumented)
+    set defaultInput(source: TableObservable);
+    // (undocumented)
+    dispose(): void;
     // (undocumented)
     hasInputName(input: string): boolean;
     // (undocumented)
@@ -828,9 +830,9 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
     // (undocumented)
-    nodeOutput(nodeId: string, port?: string): Maybe<Observable<Maybe<TableContainer>>>;
+    nodeOutput(nodeId: string): Maybe<Observable<Maybe<TableContainer>>>;
     // (undocumented)
-    outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
+    outputNameForNode(nodeId: string): string | undefined;
     get outputNames$(): Observable<string[]>;
     get outputNames(): string[];
     // (undocumented)
@@ -853,27 +855,14 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     suggestOutputName(name: string): string;
     // (undocumented)
-    toArray(includeInputs?: boolean): Maybe<TableContainer>[];
-    toMap(includeInputs?: boolean): Map<string, Maybe<TableContainer>>;
+    toArray({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Maybe<TableContainer>[];
+    toMap({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Map<string, Maybe<TableContainer>>;
     // (undocumented)
     toSchema(): WorkflowSchema;
     // (undocumented)
     updateStep(stepInput: StepInput, index: number): Step;
     // (undocumented)
     static validate(workflowJson: WorkflowSchema): Promise<boolean>;
-}
-
-// Warning: (ae-missing-release-tag) "WorkflowSchemaInstance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const WorkflowSchemaInstance: WorkflowSchemaValidator;
-
-// Warning: (ae-missing-release-tag) "WorkflowSchemaValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export class WorkflowSchemaValidator {
-    // (undocumented)
-    isValid(workflowJson?: WorkflowSchema): Promise<boolean>;
 }
 
 // (No @packageDocumentation comment for this package)

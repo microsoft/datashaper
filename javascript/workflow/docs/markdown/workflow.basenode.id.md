@@ -7,7 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get id(): NodeId;
-
-set id(value: NodeId);
+id: NodeId;
 ```

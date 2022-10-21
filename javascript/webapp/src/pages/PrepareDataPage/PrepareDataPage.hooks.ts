@@ -26,8 +26,8 @@ export function useTables(setSelectedTableId: (id: string) => void): {
 			if (update.length > 0) {
 				const map = new Map<string, number>()
 				const allTables = [...tables, ...update].map(table => {
-					if (!table.metadata) {
-						table.metadata = introspect(table.table!, true)
+					if (table.table != null && !table.metadata) {
+						table.metadata = introspect(table.table, true)
 					}
 					return table
 				})

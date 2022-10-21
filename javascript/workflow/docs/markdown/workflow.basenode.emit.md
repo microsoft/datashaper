@@ -9,5 +9,5 @@ Emits a new value into the named output socket
 <b>Signature:</b>
 
 ```typescript
-protected emit: (value: Maybe<T>, output?: NodeOutput) => void;
+protected emit: (value: Maybe<T>) => void;
 ```

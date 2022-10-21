@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-toArray(includeInputs?: boolean): Maybe<TableContainer>[];
+toArray({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Maybe<TableContainer>[];
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  includeInputs | boolean | <i>(Optional)</i> |
+|  { includeDefaultInput, includeDefaultOutput, includeInputs, } | [TableExportOptions](./workflow.tableexportoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

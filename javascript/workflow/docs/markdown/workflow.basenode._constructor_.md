@@ -9,7 +9,7 @@ Constructs a new instance of the `BaseNode` class
 <b>Signature:</b>
 
 ```typescript
-constructor(inputs?: SocketName[], outputs?: SocketName[]);
+constructor(inputs?: SocketName[]);
 ```
 
 ## Parameters
@@ -17,5 +17,4 @@ constructor(inputs?: SocketName[], outputs?: SocketName[]);
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  inputs | [SocketName](./workflow.socketname.md)<!-- -->\[\] | <i>(Optional)</i> |
-|  outputs | [SocketName](./workflow.socketname.md)<!-- -->\[\] | <i>(Optional)</i> |
 

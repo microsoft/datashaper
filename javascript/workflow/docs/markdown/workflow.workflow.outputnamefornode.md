@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
+outputNameForNode(nodeId: string): string | undefined;
 ```
 
 ## Parameters
@@ -15,7 +15,6 @@ outputNameForNode(nodeId: string, nodeOutput?: string): string | undefined;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  nodeId | string |  |
-|  nodeOutput | string | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

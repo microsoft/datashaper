@@ -9,14 +9,14 @@ Gets a map of the current output tables
 <b>Signature:</b>
 
 ```typescript
-toMap(includeInputs?: boolean): Map<string, Maybe<TableContainer>>;
+toMap({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Map<string, Maybe<TableContainer>>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  includeInputs | boolean | <i>(Optional)</i> |
+|  { includeDefaultInput, includeDefaultOutput, includeInputs, } | [TableExportOptions](./workflow.tableexportoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

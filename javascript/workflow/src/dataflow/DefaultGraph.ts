@@ -26,29 +26,6 @@ export class DefaultGraph<T> implements Graph<T> {
 		return [...this._nodes.keys()]
 	}
 
-	/**
-	 * Get the input layer of the graph. This is determined by finding all the nodes without any bound inputs
-	 */
-	public get inputs(): NodeId[] {
-		return this.nodes.filter(id => {
-			const node = this._nodes.get(id)
-			return node && node.bindings.length === 0
-		})
-	}
-
-	public get outputs(): NodeId[] {
-		const nodeIds = new Set<NodeId>(this.nodes)
-		this.nodes.forEach(n => {
-			const node = this._nodes.get(n)
-			if (node) {
-				for (const binding of node.bindings) {
-					nodeIds.delete(binding.node.id)
-				}
-			}
-		})
-		return [...nodeIds.values()]
-	}
-
 	public hasNode(id: NodeId): boolean {
 		return this._nodes.has(id)
 	}
@@ -77,21 +54,23 @@ export class DefaultGraph<T> implements Graph<T> {
 	}
 
 	public remove(removeId: NodeId): void {
-		// clear the node from any connections
-		for (const innerNodeId of this._nodes.keys()) {
-			const node = this._nodes.get(innerNodeId)
-			if (node) {
-				for (const binding of node?.bindings || []) {
-					if (binding.node.id === removeId) {
-						node?.unbind(binding.input)
+		if (this.hasNode(removeId)) {
+			// clear the node from any connections
+			for (const innerNodeId of this._nodes.keys()) {
+				const node = this._nodes.get(innerNodeId)
+				if (node) {
+					for (const binding of node?.bindings || []) {
+						if (binding.node.id === removeId) {
+							node?.unbind(binding.input)
+						}
 					}
 				}
 			}
-		}
 
-		// remove the node internally
-		this._nodes.delete(removeId)
-		this._nodeSubscriptions.delete(removeId)
+			// remove the node internally
+			this._nodes.delete(removeId)
+			this._nodeSubscriptions.delete(removeId)
+		}
 	}
 
 	public validate(): void {
