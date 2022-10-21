@@ -422,6 +422,7 @@ export interface StepComponentProps {
     index: number;
     inputColumnLabel?: string;
     inputTableLabel?: string;
+    metadata?: TableMetadata;
     onChange: (step: Step, index: number) => void;
     onChangeOutput: (value: string | undefined) => void;
     output?: string;
@@ -533,6 +534,8 @@ export interface TableCommandsProps {
     // (undocumented)
     inputTable: TableContainer | undefined;
     // (undocumented)
+    metadata?: TableMetadata;
+    // (undocumented)
     onAddStep?: (step: Step, output: string | undefined, index: number | undefined) => void;
     // (undocumented)
     onRemoveStep?: (index: number) => void;
@@ -580,6 +583,8 @@ export interface TableTransformProps {
     // (undocumented)
     hideStepSelector?: boolean;
     index: number;
+    // (undocumented)
+    metadata?: TableMetadata;
     // (undocumented)
     onDelete?: (index: number) => void;
     onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;

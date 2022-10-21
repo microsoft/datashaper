@@ -1,7 +1,7 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
+import { createSchemaValidator } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { container } from '@datashaper/tables'
-import Ajv from 'ajv'
 import arquero from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import fs from 'fs'
@@ -18,13 +18,7 @@ const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow')
 
 // Json-schema validator
 const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))
-const ajv = new Ajv({
-	strict: true,
-	strictSchema: true,
-	strictTypes: true,
-	strictRequired: true,
-	validateSchema: true,
-})
+const ajv = createSchemaValidator()
 const validateJson = ajv.compile(schema)
 
 /**

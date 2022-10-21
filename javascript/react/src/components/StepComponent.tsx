@@ -49,6 +49,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		step: s,
 		output,
 		workflow: g,
+		metadata,
 		index,
 		inputTableLabel,
 		inputColumnLabel,
@@ -127,6 +128,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 				<StepArgs
 					step={s}
 					workflow={g}
+					metadata={metadata}
 					output={output}
 					onChangeOutput={changeOutput}
 					onChange={change}

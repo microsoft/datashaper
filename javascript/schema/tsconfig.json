@@ -10,5 +10,6 @@
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": false
 	},
-	"include": ["src"]
+	"include": ["src"],
+	"exclude": ["**/__tests__/**/*"]
 }

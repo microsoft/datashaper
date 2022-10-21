@@ -48,7 +48,6 @@
 |  [isInputTableStep(step)](./workflow.isinputtablestep.md) | Indicates whether this step requires an input table. |
 |  [isNumericInputStep(step)](./workflow.isnumericinputstep.md) | Indicates whether this step can only operate on numeric values. |
 |  [isOutputColumnStep(step)](./workflow.isoutputcolumnstep.md) | Indicates whether the supplied step requires a single output column. |
-|  [isValidWorkflowSchema(workflowJson)](./workflow.isvalidworkflowschema.md) |  |
 |  [join(id)](./workflow.join.md) |  |
 |  [lookup(id)](./workflow.lookup.md) |  |
 |  [nextColumnName(name, columnNames)](./workflow.nextcolumnname.md) | Suggests a new column name given the list passed. If the name is used, this will append numbers to the end. e.g. "column" may result in "column 1" or "column 2" if there are collisions |
@@ -80,9 +79,11 @@
 |  [boolean](./workflow.boolean.md) |  |
 |  [concat](./workflow.concat.md) |  |
 |  [convert](./workflow.convert.md) |  |
+|  [decode](./workflow.decode.md) |  |
 |  [dedupe](./workflow.dedupe.md) |  |
 |  [derive](./workflow.derive.md) |  |
 |  [difference](./workflow.difference.md) |  |
+|  [encode](./workflow.encode.md) |  |
 |  [erase](./workflow.erase.md) |  |
 |  [fill](./workflow.fill.md) |  |
 |  [filter](./workflow.filter.md) |  |

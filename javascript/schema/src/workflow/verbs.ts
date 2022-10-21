@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { CodebookSchema } from '../codebook/CodebookSchema.js'
 import type { DataType, Value } from '../data.js'
 import type { SortDirection } from '../enums.js'
 
@@ -15,6 +16,8 @@ export enum Verb {
 	Dedupe = 'dedupe',
 	Derive = 'derive',
 	Difference = 'difference',
+	Decode = 'decode',
+	Encode = 'encode',
 	Erase = 'erase',
 	Fetch = 'fetch',
 	Fill = 'fill',
@@ -329,6 +332,27 @@ export interface EraseArgs extends InputColumnArgs {
 	value: Value
 }
 
+export interface EncodeDecodeArgs {
+	strategy: CodebookStrategy
+
+	codebook: CodebookSchema
+}
+
+export interface FetchArgs {
+	/**
+	 * URL where the csv file is located
+	 */
+	url: string
+	/**
+	 * Optional delimiter for csv
+	 */
+	delimiter?: string
+	/**
+	 * Optional autoMax for tables
+	 */
+	autoMax?: number
+}
+
 export interface FillArgs extends OutputColumnArgs {
 	/**
 	 * Value to fill in the new column
@@ -378,6 +402,12 @@ export enum JoinStrategy {
 	Cross = 'cross',
 	SemiJoin = 'semi join',
 	AntiJoin = 'anti join',
+}
+
+export enum CodebookStrategy {
+	DataTypeOnly = 'data type only',
+	MappingOnly = 'mapping only',
+	DataTypeAndMapping = 'data type and mapping',
 }
 
 export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {}

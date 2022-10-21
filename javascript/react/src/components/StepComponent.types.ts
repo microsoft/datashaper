@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 
 export interface StepComponentProps {
@@ -14,6 +15,11 @@ export interface StepComponentProps {
 	 * The processing step
 	 */
 	step: Step
+
+	/**
+	 * TableMetadata
+	 */
+	metadata?: TableMetadata
 
 	/**
 	 * The step index

@@ -3,6 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
+import { CodebookStrategy } from '@datashaper/schema'
 import { fromCSV } from 'arquero'
 import fs from 'fs'
 
@@ -21,7 +22,11 @@ describe('unapply codebook tests', () => {
 
 		const codebookResult = generateCodebook(parsed)
 
-		const resultTable = applyCodebook(parsed, codebookResult, false)
+		const resultTable = applyCodebook(
+			parsed,
+			codebookResult,
+			CodebookStrategy.DataTypeOnly,
+		)
 
 		it('should return a column table', () => {
 			expect(resultTable.numRows()).toBe(10)
@@ -63,7 +68,11 @@ describe('unapply codebook tests', () => {
 
 		element2.mapping = mappingElements2
 
-		const resultTable = unapplyCodebook(parsed, codebookResult, true)
+		const resultTable = unapplyCodebook(
+			parsed,
+			codebookResult,
+			CodebookStrategy.DataTypeAndMapping,
+		)
 
 		it('should return a column table with mapping values', () => {
 			expect(resultTable.numRows()).toBe(7)

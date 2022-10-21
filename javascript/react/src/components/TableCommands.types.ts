@@ -3,13 +3,14 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { TableContainer } from '@datashaper/tables'
+import type { TableContainer, TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 
 export interface TableCommandsProps {
 	inputTable: TableContainer | undefined
 	workflow: Workflow
 	selectedColumn?: string
+	metadata?: TableMetadata
 	onAddStep?: (
 		step: Step,
 		output: string | undefined,

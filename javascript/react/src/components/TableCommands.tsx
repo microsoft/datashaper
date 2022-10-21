@@ -26,6 +26,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 		inputTable,
 		workflow,
 		onAddStep,
+		metadata,
 		onRemoveStep,
 		selectedColumn,
 		color,
@@ -103,6 +104,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			color,
 			background,
 		)
+
 		return (
 			<Container>
 				<VerbsContainer>
@@ -120,6 +122,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 						index={index ?? workflow.length}
 						onTransformRequested={onTransformRequested}
 						workflow={workflow}
+						metadata={metadata}
 						onDismiss={dismissModal}
 						showGuidance
 					/>

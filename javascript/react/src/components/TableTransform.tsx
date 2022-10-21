@@ -30,6 +30,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 	function TableTransform({
 		workflow,
 		onTransformRequested,
+		metadata,
 		index,
 		step,
 		showGuidance,
@@ -99,6 +100,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 						<StepComponent
 							step={internal}
 							workflow={workflow}
+							metadata={metadata}
 							index={index}
 							output={output}
 							onChangeOutput={onOutputChanged}
