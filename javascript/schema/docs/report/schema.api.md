@@ -118,6 +118,18 @@ export interface CodebookSchema extends ResourceSchema {
     fields: Field[];
 }
 
+// Warning: (ae-missing-release-tag) "CodebookStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum CodebookStrategy {
+    // (undocumented)
+    DataTypeAndMapping = "data type and mapping",
+    // (undocumented)
+    DataTypeOnly = "data type only",
+    // (undocumented)
+    MappingOnly = "mapping only"
+}
+
 // Warning: (ae-missing-release-tag) "Constraints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -282,15 +294,6 @@ export enum DateComparisonOperator {
     NotEqual = "is not equal"
 }
 
-// Warning: (ae-missing-release-tag) "DecodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DecodeArgs {
-    // (undocumented)
-    codebook: CodebookSchema;
-    unapplyMapping: boolean;
-}
-
 // Warning: (ae-missing-release-tag) "DedupeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -316,13 +319,14 @@ export interface DualInput extends BasicInput {
     };
 }
 
-// Warning: (ae-missing-release-tag) "EncodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EncodeDecodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface EncodeArgs {
-    applyMapping: boolean;
+export interface EncodeDecodeArgs {
     // (undocumented)
     codebook: CodebookSchema;
+    // (undocumented)
+    strategy: CodebookStrategy;
 }
 
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -851,10 +855,10 @@ export type Step = StepJsonCommon & (({
     verb: Verb.Difference;
 } & VariadicInput) | ({
     verb: Verb.Decode;
-    args?: DecodeArgs;
+    args?: EncodeDecodeArgs;
 } & BasicInput) | ({
     verb: Verb.Encode;
-    args?: EncodeArgs;
+    args?: EncodeDecodeArgs;
 } & BasicInput) | ({
     verb: Verb.Erase;
     args?: EraseArgs;

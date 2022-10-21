@@ -255,6 +255,14 @@
             },
             "type": "object"
         },
+        "CodebookStrategy": {
+            "enum": [
+                "data type and mapping",
+                "data type only",
+                "mapping only"
+            ],
+            "type": "string"
+        },
         "Constraints": {
             "description": "Validation constraints for a field.",
             "properties": {
@@ -378,18 +386,6 @@
             ],
             "type": "string"
         },
-        "DecodeArgs": {
-            "properties": {
-                "codebook": {
-                    "$ref": "#/definitions/CodebookSchema"
-                },
-                "unapplyMapping": {
-                    "description": "Unapply codebook mapping",
-                    "type": "boolean"
-                }
-            },
-            "type": "object"
-        },
         "DeriveArgs": {
             "properties": {
                 "column1": {
@@ -444,14 +440,13 @@
             },
             "type": "object"
         },
-        "EncodeArgs": {
+        "EncodeDecodeArgs": {
             "properties": {
-                "applyMapping": {
-                    "description": "Apply codebook mapping",
-                    "type": "boolean"
-                },
                 "codebook": {
                     "$ref": "#/definitions/CodebookSchema"
+                },
+                "strategy": {
+                    "$ref": "#/definitions/CodebookStrategy"
                 }
             },
             "type": "object"
@@ -1527,7 +1522,7 @@
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/DecodeArgs"
+                                        "$ref": "#/definitions/EncodeDecodeArgs"
                                     },
                                     "verb": {
                                         "enum": [
@@ -1551,7 +1546,7 @@
                             {
                                 "properties": {
                                     "args": {
-                                        "$ref": "#/definitions/EncodeArgs"
+                                        "$ref": "#/definitions/EncodeDecodeArgs"
                                     },
                                     "verb": {
                                         "enum": [

@@ -197,11 +197,12 @@
             },
             {
               "kind": "Content",
-              "text": ", applyMapping: "
+              "text": ", strategy: "
             },
             {
-              "kind": "Content",
-              "text": "boolean"
+              "kind": "Reference",
+              "text": "CodebookStrategy",
+              "canonicalReference": "@datashaper/schema!CodebookStrategy:enum"
             },
             {
               "kind": "Content",
@@ -250,7 +251,7 @@
               "isOptional": false
             },
             {
-              "parameterName": "applyMapping",
+              "parameterName": "strategy",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
@@ -3165,11 +3166,12 @@
             },
             {
               "kind": "Content",
-              "text": ", applyMapping: "
+              "text": ", strategy: "
             },
             {
-              "kind": "Content",
-              "text": "boolean"
+              "kind": "Reference",
+              "text": "CodebookStrategy",
+              "canonicalReference": "@datashaper/schema!CodebookStrategy:enum"
             },
             {
               "kind": "Content",
@@ -3218,7 +3220,7 @@
               "isOptional": false
             },
             {
-              "parameterName": "applyMapping",
+              "parameterName": "strategy",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-encode: (id: string) => import("../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, EncodeArgs>
+encode: (id: string) => import("../index.js").StepNode<import("@datashaper/tables").TableContainer<unknown>, EncodeDecodeArgs>
 ```

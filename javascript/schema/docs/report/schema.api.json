@@ -1201,6 +1201,85 @@
           ]
         },
         {
+          "kind": "Enum",
+          "canonicalReference": "@datashaper/schema!CodebookStrategy:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum CodebookStrategy "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CodebookStrategy",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!CodebookStrategy.DataTypeAndMapping:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "DataTypeAndMapping = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"data type and mapping\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "DataTypeAndMapping"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!CodebookStrategy.DataTypeOnly:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "DataTypeOnly = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"data type only\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "DataTypeOnly"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!CodebookStrategy.MappingOnly:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "MappingOnly = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"mapping only\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "MappingOnly"
+            }
+          ]
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!Constraints:interface",
           "docComment": "/**\n * Validation constraints for a field.\n */\n",
@@ -3043,78 +3122,6 @@
           ]
         },
         {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!DecodeArgs:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface DecodeArgs "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "DecodeArgs",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!DecodeArgs#codebook:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "codebook: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "CodebookSchema",
-                  "canonicalReference": "@datashaper/schema!CodebookSchema:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "codebook",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!DecodeArgs#unapplyMapping:member",
-              "docComment": "/**\n * Unapply codebook mapping\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "unapplyMapping: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "unapplyMapping",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/schema!DedupeArgs:type",
           "docComment": "",
@@ -3344,48 +3351,21 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!EncodeArgs:interface",
+          "canonicalReference": "@datashaper/schema!EncodeDecodeArgs:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface EncodeArgs "
+              "text": "export interface EncodeDecodeArgs "
             }
           ],
           "releaseTag": "Public",
-          "name": "EncodeArgs",
+          "name": "EncodeDecodeArgs",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!EncodeArgs#applyMapping:member",
-              "docComment": "/**\n * Apply codebook mapping\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "applyMapping: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "applyMapping",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!EncodeArgs#codebook:member",
+              "canonicalReference": "@datashaper/schema!EncodeDecodeArgs#codebook:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -3406,6 +3386,34 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "codebook",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!EncodeDecodeArgs#strategy:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "strategy: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CodebookStrategy",
+                  "canonicalReference": "@datashaper/schema!CodebookStrategy:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "strategy",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -8363,8 +8371,8 @@
             },
             {
               "kind": "Reference",
-              "text": "DecodeArgs",
-              "canonicalReference": "@datashaper/schema!DecodeArgs:interface"
+              "text": "EncodeDecodeArgs",
+              "canonicalReference": "@datashaper/schema!EncodeDecodeArgs:interface"
             },
             {
               "kind": "Content",
@@ -8390,8 +8398,8 @@
             },
             {
               "kind": "Reference",
-              "text": "EncodeArgs",
-              "canonicalReference": "@datashaper/schema!EncodeArgs:interface"
+              "text": "EncodeDecodeArgs",
+              "canonicalReference": "@datashaper/schema!EncodeDecodeArgs:interface"
             },
             {
               "kind": "Content",

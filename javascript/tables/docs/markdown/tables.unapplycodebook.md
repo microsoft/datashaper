@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function unapplyCodebook(table: ColumnTable, codebook: CodebookSchema, applyMapping: boolean, dataTableSchema?: DataTableSchema): ColumnTable;
+export declare function unapplyCodebook(table: ColumnTable, codebook: CodebookSchema, strategy: CodebookStrategy, dataTableSchema?: DataTableSchema): ColumnTable;
 ```
 
 ## Parameters
@@ -16,7 +16,7 @@ export declare function unapplyCodebook(table: ColumnTable, codebook: CodebookSc
 |  --- | --- | --- |
 |  table | ColumnTable |  |
 |  codebook | CodebookSchema |  |
-|  applyMapping | boolean |  |
+|  strategy | CodebookStrategy |  |
 |  dataTableSchema | DataTableSchema | <i>(Optional)</i> |
 
 <b>Returns:</b>

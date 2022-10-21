@@ -3606,8 +3606,8 @@
             },
             {
               "kind": "Reference",
-              "text": "DecodeArgs",
-              "canonicalReference": "@datashaper/schema!DecodeArgs:interface"
+              "text": "EncodeDecodeArgs",
+              "canonicalReference": "@datashaper/schema!EncodeDecodeArgs:interface"
             },
             {
               "kind": "Content",
@@ -4136,8 +4136,8 @@
             },
             {
               "kind": "Reference",
-              "text": "EncodeArgs",
-              "canonicalReference": "@datashaper/schema!EncodeArgs:interface"
+              "text": "EncodeDecodeArgs",
+              "canonicalReference": "@datashaper/schema!EncodeDecodeArgs:interface"
             },
             {
               "kind": "Content",
