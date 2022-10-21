@@ -7,8 +7,8 @@ import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-
-import { getSchemaValidator } from '../resources/Workflow/Workflow.utils.js'
+import { createSchemaValidator } from '@datashaper/schema'
+import { Workflow } from '../resources/index.js'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -17,7 +17,7 @@ const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow')
 
 // Json-schema validator
 const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))
-const ajv = getSchemaValidator()
+const ajv = createSchemaValidator()
 const validateJson = ajv.compile(schema)
 
 /**

@@ -35,7 +35,7 @@ import type { LookupArgs } from '@datashaper/schema';
 import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
 import type { Named as Named_2 } from '@datashaper/schema';
-import type { NamedOutputPortBinding } from '@datashaper/schema';
+import { NamedOutputPortBinding } from '@datashaper/schema';
 import type { NamedPortBinding } from '@datashaper/schema';
 import type { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
@@ -54,7 +54,7 @@ import { TableContainer } from '@datashaper/tables';
 import type { UnhotArgs } from '@datashaper/schema';
 import type { Verb } from '@datashaper/schema';
 import type { WindowArgs } from '@datashaper/schema';
-import type { WorkflowSchema } from '@datashaper/schema';
+import { WorkflowSchema } from '@datashaper/schema';
 
 // Warning: (ae-missing-release-tag) "aggregate" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -419,11 +419,6 @@ export function isNumericInputStep(step: Step): boolean;
 //
 // @public
 export function isOutputColumnStep(step: Step): boolean;
-
-// Warning: (ae-missing-release-tag) "isValidWorkflowSchema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function isValidWorkflowSchema(workflowJson?: WorkflowSchema): Promise<boolean>;
 
 // Warning: (ae-forgotten-export) The symbol "JoinNode" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "join" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

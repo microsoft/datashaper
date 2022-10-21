@@ -4,6 +4,8 @@
 
 ```ts
 
+import Ajv from 'ajv';
+
 // Warning: (ae-missing-release-tag) "AggregateArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -171,6 +173,11 @@ export function createDataPackageSchemaObject(input: FactoryInput<DataPackageSch
 //
 // @public (undocumented)
 export function createDataTableSchemaObject(input: FactoryInput<DataTableSchema>): DataTableSchema;
+
+// Warning: (ae-missing-release-tag) "createSchemaValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createSchemaValidator(): Ajv;
 
 // Warning: (ae-missing-release-tag) "createWorkflowSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

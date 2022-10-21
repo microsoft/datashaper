@@ -3,51 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { NamedPortBinding, Verb, WorkflowSchema } from '@datashaper/schema'
+import type { NamedPortBinding, Verb } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
-import Ajv from 'ajv'
 
 import type { Node } from '../../dataflow/index.js'
-import { fetchJson } from '../../util/network.js'
 import * as defaults from '../../verbs/defaults/index.js'
 import * as verbs from '../../verbs/index.js'
 import type { NodeFactory, Step, StepInput } from './Workflow.types.js'
-
-let validator: Ajv | undefined
-
-export function getSchemaValidator() {
-	if (validator == null) {
-		validator = new Ajv({
-			strict: true,
-			strictSchema: true,
-			strictTypes: true,
-			strictRequired: true,
-			validateSchema: true,
-			allowUnionTypes: true,
-			allowDate: true,
-		})
-	}
-	return validator
-}
-
-export async function isValidWorkflowSchema(
-	workflowJson?: WorkflowSchema,
-): Promise<boolean> {
-	const ajv = getSchemaValidator()
-
-	const { $schema } = workflowJson || {}
-	if ($schema == null) {
-		console.warn('No $schema property found in workflow JSON')
-		return true
-	}
-
-	if (!ajv.schemas[$schema]) {
-		const schemaJson = await fetchJson($schema)
-		ajv.addSchema(schemaJson, $schema)
-	}
-	const validate = ajv.getSchema($schema)
-	return !!validate?.(workflowJson)
-}
 
 export function createNode(step: Step): Node<TableContainer> {
 	const records = verbs as any as Record<string, NodeFactory>

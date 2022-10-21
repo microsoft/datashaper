@@ -2,7 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
+import {
+	createSchemaValidator,
 	NamedOutputPortBinding,
 	NamedPortBinding,
 	OutputPortBinding,
@@ -20,14 +21,11 @@ import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
 import type { Node, SocketName } from '../../dataflow/types.js'
 import type { Maybe } from '../../primitives.js'
+import { fetchJson } from '../../util/network.js'
 import { Resource } from '../Resource.js'
 import type { SchemaResource } from '../types.js'
 import type { Step, StepInput, TableExportOptions } from './Workflow.types.js'
-import {
-	createNode,
-	isValidWorkflowSchema,
-	readStep,
-} from './Workflow.utils.js'
+import { createNode, readStep } from './Workflow.utils.js'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 
@@ -41,6 +39,7 @@ export class Workflow
 	extends Resource
 	implements SchemaResource<WorkflowSchema>
 {
+	private static readonly validator = createSchemaValidator()
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
 	// Workflow Data Fields
 	private readonly _steps = new BehaviorSubject<Step[]>([])
@@ -600,7 +599,18 @@ export class Workflow
 	}
 
 	public static async validate(workflowJson: WorkflowSchema): Promise<boolean> {
-		return isValidWorkflowSchema(workflowJson)
+		const { $schema } = workflowJson || {}
+		if ($schema == null) {
+			console.warn('No $schema property found in workflow JSON')
+			return true
+		}
+
+		if (!Workflow.validator.schemas[$schema]) {
+			const schemaJson = await fetchJson($schema)
+			Workflow.validator.addSchema(schemaJson, $schema)
+		}
+		const validate = Workflow.validator.getSchema($schema)
+		return !!validate?.(workflowJson)
 	}
 }
 

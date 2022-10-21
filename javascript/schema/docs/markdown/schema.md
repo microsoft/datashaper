@@ -38,6 +38,7 @@
 |  [createCodebookSchemaObject(input)](./schema.createcodebookschemaobject.md) |  |
 |  [createDataPackageSchemaObject(input)](./schema.createdatapackageschemaobject.md) |  |
 |  [createDataTableSchemaObject(input)](./schema.createdatatableschemaobject.md) |  |
+|  [createSchemaValidator()](./schema.createschemavalidator.md) |  |
 |  [createWorkflowSchemaObject(input)](./schema.createworkflowschemaobject.md) |  |
 
 ## Interfaces

@@ -5381,56 +5381,6 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/workflow!isValidWorkflowSchema:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function isValidWorkflowSchema(workflowJson?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "WorkflowSchema",
-              "canonicalReference": "@datashaper/schema!WorkflowSchema:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "Promise",
-              "canonicalReference": "!Promise:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<boolean>"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 5
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "workflowJson",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "isValidWorkflowSchema"
-        },
-        {
-          "kind": "Function",
           "canonicalReference": "@datashaper/workflow!join:function(1)",
           "docComment": "",
           "excerptTokens": [

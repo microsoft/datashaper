@@ -1,5 +1,11 @@
-import Ajv from 'ajv'
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+/* eslint-ignore */
+import { createSchemaValidator } from '../validator.js'
 import { createRequire } from 'module'
+import type Ajv from 'ajv'
 const require = createRequire(import.meta.url)
 
 const CODEBOOK_SCHEMA_PATH = '../../../../schema/codebook.json'
@@ -8,18 +14,7 @@ const DATATABLE_SCHEMA_PATH = '../../../../schema/datatable.json'
 const WORKFLOW_SCHEMA_PATH = '../../../../schema/workflow.json'
 
 describe('Generated JSON Schemas', () => {
-	let validator: Ajv
-	beforeAll(() => {
-		validator = new Ajv({
-			strict: true,
-			strictSchema: true,
-			strictTypes: true,
-			strictRequired: true,
-			validateSchema: true,
-			allowUnionTypes: true,
-			allowDate: true,
-		})
-	})
+	let validator: Ajv = createSchemaValidator()
 
 	it('codebook schema can be validated', () => {
 		validator.compile(require(CODEBOOK_SCHEMA_PATH))

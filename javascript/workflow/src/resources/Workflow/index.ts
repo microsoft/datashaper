@@ -4,8 +4,4 @@
  */
 export * from './Workflow.js'
 export * from './Workflow.types.js'
-export {
-	createNode,
-	isValidWorkflowSchema,
-	readStep,
-} from './Workflow.utils.js'
+export { createNode, readStep } from './Workflow.utils.js'
