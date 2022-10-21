@@ -2,14 +2,14 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import {
-	createSchemaValidator,
+import type {
 	NamedOutputPortBinding,
 	NamedPortBinding,
 	OutputPortBinding,
 	WorkflowSchema,
 } from '@datashaper/schema'
 import {
+	createSchemaValidator,
 	createWorkflowSchemaObject,
 	LATEST_WORKFLOW_SCHEMA,
 } from '@datashaper/schema'

@@ -1,4 +1,5 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
+import { createSchemaValidator } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { container } from '@datashaper/tables'
 import arquero from 'arquero'
@@ -7,7 +8,7 @@ import fs from 'fs'
 import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { createSchemaValidator } from '@datashaper/schema'
+
 import { Workflow } from '../resources/index.js'
 
 // Static data paths.
