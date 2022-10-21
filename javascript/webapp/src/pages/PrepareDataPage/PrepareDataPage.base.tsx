@@ -65,11 +65,19 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		return stepIndex >= 0 ? `#${stepIndex + 1} ${name}` : selectedTableId
 	}, [workflow, selectedTableId])
 
+	const deleteStepFromWorkflow = useOnDeleteStep(workflow)
+
 	useStepListener(workflow, setSelectedTableId, inputNames)
 	useWorkflowOutputListener(workflow, setOutputs)
 	useInputListener(workflow, inputs)
 
-	const onDelete = useOnDeleteStep(workflow)
+	const onDeleteStep = useCallback(
+		(index: number) => {
+			deleteStepFromWorkflow(index)
+			setSelectedTableId(outputs[index - 1]?.id)
+		},
+		[workflow, inputs, outputs],
+	)
 
 	const onColumnClick = useCallback(
 		(_?: React.MouseEvent<HTMLElement, MouseEvent>, column?: IColumn) => {
@@ -109,7 +117,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 										workflow={workflow}
 										onAddStep={onCreate}
 										selectedColumn={selectedColumn}
-										onRemoveStep={onDelete}
+										onRemoveStep={onDeleteStep}
 									/>
 								}
 								farCommandBar={<CommandBar {...historyCommandProps} />}
@@ -136,7 +144,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 						<StepsListContainer>
 							<ToolPanel {...historyPanelProps}>
 								<StepHistoryList
-									onDelete={onDelete}
+									onDelete={onDeleteStep}
 									onSelect={setSelectedTableId}
 									workflow={workflow}
 									onSave={onSave}
