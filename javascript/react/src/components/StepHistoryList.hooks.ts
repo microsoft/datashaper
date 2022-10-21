@@ -11,26 +11,28 @@ import { useModalState } from '../hooks/useModalState.js'
 export function useTableHandlers(
 	workflow: Workflow,
 	steps: Step[],
-	order: DisplayOrder,
+	order: DisplayOrder | undefined,
 	onSelect?: (name: string) => void,
 ): {
 	onSelectOriginalTable: () => void
 	onSelectLatest: () => void
 } {
+	order = order ?? DisplayOrder.FirstOnTop
+
 	const onSelectOriginalTable = useCallback(() => {
 		if (workflow.inputNames.length > 0) {
 			const names = workflow.inputNames
-			const lastIdx = order === DisplayOrder.FirstOnTop ? names.length - 1 : 0
-			const lastInputName = names[lastIdx]
+			const lastInputName = names[names.length - 1]
 			if (lastInputName) {
 				onSelect?.(lastInputName)
 			}
 		}
 	}, [workflow, onSelect])
 	const onSelectLatest = useCallback(() => {
-		const latestId = steps[steps.length - 1]?.id
+		const lastStepIdx = order === DisplayOrder.FirstOnTop ? steps.length - 1 : 0
+		const latestId = steps[lastStepIdx]?.id
 		latestId && onSelect?.(latestId)
-	}, [onSelect, steps])
+	}, [onSelect, steps, order])
 	return {
 		onSelectOriginalTable,
 		onSelectLatest,
