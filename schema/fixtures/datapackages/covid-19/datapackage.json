@@ -11,7 +11,7 @@
 			"layout": "micro",
 			"sources": [
 				{
-					"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v1.json",
+					"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
 					"steps": [
 						{
 							"verb": "window",
