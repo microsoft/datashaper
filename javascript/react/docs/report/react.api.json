@@ -4663,6 +4663,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepComponentProps#metadata:member",
+              "docComment": "/**\n * TableMetadata\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "metadata?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableMetadata",
+                  "canonicalReference": "@datashaper/tables!TableMetadata:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "metadata",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!StepComponentProps#onChange:member",
               "docComment": "/**\n * The step onchange handler\n */\n",
               "excerptTokens": [

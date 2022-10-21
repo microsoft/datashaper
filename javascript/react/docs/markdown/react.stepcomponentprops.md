@@ -20,6 +20,7 @@ export interface StepComponentProps
 |  [index](./react.stepcomponentprops.index.md) |  | number | The step index |
 |  [inputColumnLabel?](./react.stepcomponentprops.inputcolumnlabel.md) |  | string | <i>(Optional)</i> Label for the input table dropdown |
 |  [inputTableLabel?](./react.stepcomponentprops.inputtablelabel.md) |  | string | <i>(Optional)</i> Label for the input-table dropdown |
+|  [metadata?](./react.stepcomponentprops.metadata.md) |  | TableMetadata | <i>(Optional)</i> TableMetadata |
 |  [onChange](./react.stepcomponentprops.onchange.md) |  | (step: Step, index: number) =&gt; void | The step onchange handler |
 |  [onChangeOutput](./react.stepcomponentprops.onchangeoutput.md) |  | (value: string \| undefined) =&gt; void | Event handler for when the output table name changes |
 |  [output?](./react.stepcomponentprops.output.md) |  | string | <i>(Optional)</i> The output table name |

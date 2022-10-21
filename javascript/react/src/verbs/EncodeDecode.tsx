@@ -19,7 +19,7 @@ export const EncodeDecode: React.FC<StepComponentProps<EncodeDecodeArgs>> =
 
 		useEffect(() => {
 			if (metadata != null && onChange != null) {
-				if (step.args.codebook == null) {
+				if (step.args.codebook == null && codebook != null) {
 					onChange({
 						...step,
 						args: {
@@ -29,7 +29,7 @@ export const EncodeDecode: React.FC<StepComponentProps<EncodeDecodeArgs>> =
 					})
 				}
 			}
-		}, [metadata, onChange, step])
+		}, [metadata, onChange, step, codebook])
 
 		return <EncodeDecodeBase step={step} onChange={onChange} />
 	})

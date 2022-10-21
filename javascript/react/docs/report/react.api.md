@@ -422,6 +422,7 @@ export interface StepComponentProps {
     index: number;
     inputColumnLabel?: string;
     inputTableLabel?: string;
+    metadata?: TableMetadata;
     onChange: (step: Step, index: number) => void;
     onChangeOutput: (value: string | undefined) => void;
     output?: string;
