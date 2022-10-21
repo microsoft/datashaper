@@ -299,23 +299,6 @@
 			},
 			"type": "object"
 		},
-		"FetchArgs": {
-			"properties": {
-				"autoMax": {
-					"description": "Optional autoMax for tables",
-					"type": "number"
-				},
-				"delimiter": {
-					"description": "Optional delimiter for csv",
-					"type": "string"
-				},
-				"url": {
-					"description": "URL where the csv file is located",
-					"type": "string"
-				}
-			},
-			"type": "object"
-		},
 		"FieldAggregateOperation": {
 			"description": "This is the subset of aggregate functions that can operate\non a single field so we don't accommodate additional args.\nSee https://uwdata.github.io/arquero/api/op#aggregate-functions",
 			"enum": [
@@ -542,11 +525,7 @@
 					"type": "string"
 				},
 				"node": {
-					"description": "The id of the node to bind to",
-					"type": "string"
-				},
-				"output": {
-					"description": "The named output of the node to bind with. If not defined, this will\nbe the default output \"target\"",
+					"description": "The id of the input node to bind to",
 					"type": "string"
 				}
 			},
@@ -556,11 +535,7 @@
 			"description": "An explicit step input binding",
 			"properties": {
 				"node": {
-					"description": "The id of the node to bind to",
-					"type": "string"
-				},
-				"output": {
-					"description": "The named output of the node to bind with. If not defined, this will\nbe the default output \"target\"",
+					"description": "The id of the input node to bind to",
 					"type": "string"
 				}
 			},
@@ -1185,28 +1160,6 @@
 									},
 									"verb": {
 										"enum": ["erase"],
-										"type": "string"
-									}
-								},
-								"type": "object"
-							},
-							{
-								"$ref": "#/definitions/BasicInput"
-							}
-						]
-					},
-					{
-						"allOf": [
-							{
-								"$ref": "#/definitions/StepJsonCommon"
-							},
-							{
-								"properties": {
-									"args": {
-										"$ref": "#/definitions/FetchArgs"
-									},
-									"verb": {
-										"enum": ["fetch"],
 										"type": "string"
 									}
 								},
