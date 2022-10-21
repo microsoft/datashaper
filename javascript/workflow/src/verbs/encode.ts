@@ -3,16 +3,16 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { EncodeArgs } from '@datashaper/schema'
+import type { EncodeDecodeArgs } from '@datashaper/schema'
 import { applyCodebook } from '@datashaper/tables'
 
 import type { ColumnTableStep } from './util/factories.js'
 import { stepVerbFactory } from './util/factories.js'
 
-export const encodeStep: ColumnTableStep<EncodeArgs> = (
+export const encodeStep: ColumnTableStep<EncodeDecodeArgs> = (
 	input,
-	{ applyMapping, codebook },
+	{ strategy, codebook },
 ) => {
-	return applyCodebook(input, codebook, applyMapping)
+	return applyCodebook(input, codebook, strategy)
 }
 export const encode = stepVerbFactory(encodeStep)

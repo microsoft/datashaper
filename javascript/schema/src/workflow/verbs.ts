@@ -332,20 +332,8 @@ export interface EraseArgs extends InputColumnArgs {
 	value: Value
 }
 
-export interface EncodeArgs {
-	/**
-	 * Apply codebook mapping
-	 */
-	applyMapping: boolean
-
-	codebook: CodebookSchema
-}
-
-export interface DecodeArgs {
-	/**
-	 * Unapply codebook mapping
-	 */
-	unapplyMapping: boolean
+export interface EncodeDecodeArgs {
+	strategy: CodebookStrategy
 
 	codebook: CodebookSchema
 }
@@ -414,6 +402,12 @@ export enum JoinStrategy {
 	Cross = 'cross',
 	SemiJoin = 'semi join',
 	AntiJoin = 'anti join',
+}
+
+export enum CodebookStrategy {
+	DataTypeOnly = 'data type only',
+	MappingOnly = 'mapping only',
+	DataTypeAndMapping = 'data type and mapping',
 }
 
 export interface LookupArgs extends JoinArgsBase, InputColumnListArgs {}
