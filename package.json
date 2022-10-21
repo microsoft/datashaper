@@ -16,8 +16,7 @@
 		"start": "SB_QUIET=true turbo run start --parallel",
 		"deploy": "turbo run deploy",
 		"prettify": "essex prettify",
-		"ci": "start-server-and-test \"yarn start_test_server\" 8080 \"yarn _exec_ci\"",
-		"_exec_ci": "turbo run ci",
+		"ci": "turbo run ci",
 		"is_clean": "git diff-index HEAD --quiet",
 		"release": "run-s clean _version_cut ci _release_packages _cut_schema _copy_versions",
 		"update_sdks": "yarn dlx @yarnpkg/sdks vscode"
