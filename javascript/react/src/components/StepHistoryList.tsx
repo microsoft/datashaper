@@ -48,6 +48,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		const { onSelectOriginalTable, onSelectLatest } = useTableHandlers(
 			workflow,
 			steps,
+			order,
 			onSelect,
 		)
 
