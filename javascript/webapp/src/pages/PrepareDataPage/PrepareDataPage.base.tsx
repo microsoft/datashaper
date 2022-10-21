@@ -107,6 +107,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 									<TableCommands
 										inputTable={selectedTable}
 										workflow={workflow}
+										metadata={selectedTable.metadata}
 										onAddStep={onCreate}
 										selectedColumn={selectedColumn}
 										onRemoveStep={onDelete}
