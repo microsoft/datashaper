@@ -715,6 +715,18 @@ export class StepNode<T, Args> extends BaseNode<T, Args> {
 // @public (undocumented)
 export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (id: string) => StepNode<T, Args>;
 
+// Warning: (ae-missing-release-tag) "TableExportOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface TableExportOptions {
+    // (undocumented)
+    includeDefaultInput?: boolean;
+    // (undocumented)
+    includeDefaultOutput?: boolean;
+    // (undocumented)
+    includeInputs?: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "TableObservable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -831,8 +843,8 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     suggestOutputName(name: string): string;
     // (undocumented)
-    toArray(includeInputs?: boolean): Maybe<TableContainer>[];
-    toMap(includeInputs?: boolean): Map<string, Maybe<TableContainer>>;
+    toArray({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Maybe<TableContainer>[];
+    toMap({ includeDefaultInput, includeDefaultOutput, includeInputs, }?: TableExportOptions): Map<string, Maybe<TableContainer>>;
     // (undocumented)
     toSchema(): WorkflowSchema;
     // (undocumented)

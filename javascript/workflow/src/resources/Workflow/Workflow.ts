@@ -22,7 +22,7 @@ import type { Node, SocketName } from '../../dataflow/types.js'
 import type { Maybe } from '../../primitives.js'
 import { Resource } from '../Resource.js'
 import type { SchemaResource } from '../types.js'
-import type { Step, StepInput } from './Workflow.types.js'
+import type { Step, StepInput, TableExportOptions } from './Workflow.types.js'
 import {
 	createNode,
 	isValidWorkflowSchema,
@@ -495,10 +495,17 @@ export class Workflow
 	 * Gets a map of the current output tables
 	 * @returns The output cache
 	 */
-	public toMap(includeInputs = false): Map<string, Maybe<TableContainer>> {
+	public toMap({
+		includeDefaultInput,
+		includeDefaultOutput,
+		includeInputs,
+	}: TableExportOptions = {}): Map<string, Maybe<TableContainer>> {
 		const result = new Map<string, Maybe<TableContainer>>()
-		result.set('default', this._defaultOutput.value)
-		if (includeInputs) {
+
+		if (includeDefaultOutput) {
+			result.set('default', this._defaultOutput.value)
+		}
+		if (includeDefaultInput) {
 			result.set('defaultInput', this._defaultInput.value)
 		}
 		for (const [name, observable] of this._tables) {
@@ -509,15 +516,21 @@ export class Workflow
 		return result
 	}
 
-	public toArray(includeInputs = false): Maybe<TableContainer>[] {
-		const result: Maybe<TableContainer>[] = [this._defaultOutput.value]
-
+	public toArray({
+		includeDefaultInput,
+		includeDefaultOutput,
+		includeInputs,
+	}: TableExportOptions = {}): Maybe<TableContainer>[] {
+		const result: Maybe<TableContainer>[] = []
+		if (includeDefaultOutput) {
+			result.push(this._defaultOutput.value)
+		}
 		for (const [name, observable] of this._tables) {
 			if (!this.inputNames.includes(name) || includeInputs) {
 				result.push(observable.value)
 			}
 		}
-		if (includeInputs) {
+		if (includeDefaultInput) {
 			result.push(this._defaultInput.value)
 		}
 		return result
