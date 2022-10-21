@@ -15,14 +15,16 @@ import type { NodeFactory, Step, StepInput } from './Workflow.types.js'
 
 let validator: Ajv | undefined
 
-function getValidator() {
+export function getSchemaValidator() {
 	if (validator == null) {
 		validator = new Ajv({
 			strict: true,
 			strictSchema: true,
+			strictTypes: true,
 			strictRequired: true,
 			validateSchema: true,
 			allowUnionTypes: true,
+			allowDate: true,
 		})
 	}
 	return validator
@@ -31,7 +33,7 @@ function getValidator() {
 export async function isValidWorkflowSchema(
 	workflowJson?: WorkflowSchema,
 ): Promise<boolean> {
-	const ajv = getValidator()
+	const ajv = getSchemaValidator()
 
 	const { $schema } = workflowJson || {}
 	if ($schema == null) {

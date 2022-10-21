@@ -1,7 +1,6 @@
 /* eslint-disable jest/expect-expect, jest/valid-title */
 import type { TableContainer } from '@datashaper/tables'
 import { container } from '@datashaper/tables'
-import Ajv from 'ajv'
 import arquero from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import fs from 'fs'
@@ -9,7 +8,7 @@ import fsp from 'fs/promises'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-import { Workflow } from '../resources/index.js'
+import { getSchemaValidator } from '../resources/Workflow/Workflow.utils.js'
 
 // Static data paths.
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -18,13 +17,7 @@ const CASES_PATH = path.join(SCHEMA_PATH, 'fixtures', 'workflow')
 
 // Json-schema validator
 const schema = await readJson(path.join(SCHEMA_PATH, 'workflow.json'))
-const ajv = new Ajv({
-	strict: true,
-	strictSchema: true,
-	strictTypes: true,
-	strictRequired: true,
-	validateSchema: true,
-})
+const ajv = getSchemaValidator()
 const validateJson = ajv.compile(schema)
 
 /**
