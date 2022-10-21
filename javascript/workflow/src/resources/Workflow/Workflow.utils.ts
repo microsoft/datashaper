@@ -13,39 +13,37 @@ import * as defaults from '../../verbs/defaults/index.js'
 import * as verbs from '../../verbs/index.js'
 import type { NodeFactory, Step, StepInput } from './Workflow.types.js'
 
-const baseUrl = 'https://microsoft.github.io/datashaper/schema/workflow'
-const defaultWorkflow = 'workflow.json'
+let validator: Ajv | undefined
 
-async function getSchema(version: string) {
-	try {
-		return await fetchJson(`${baseUrl}/${version}`)
-	} catch {
-		return await fetchJson(`${baseUrl}/${defaultWorkflow}`)
+function getValidator() {
+	if (validator == null) {
+		validator = new Ajv({
+			strict: true,
+			strictSchema: true,
+			strictRequired: true,
+			validateSchema: true,
+			allowUnionTypes: true,
+		})
 	}
+	return validator
 }
-const ajv = new Ajv({
-	strict: true,
-	strictSchema: true,
-	strictTypes: true,
-	strictRequired: true,
-	validateSchema: true,
-})
 
 export async function isValidWorkflowSchema(
 	workflowJson?: WorkflowSchema,
 ): Promise<boolean> {
+	const ajv = getValidator()
+
 	const { $schema } = workflowJson || {}
-	if (!$schema) {
+	if ($schema == null) {
 		console.warn('No $schema property found in workflow JSON')
+		return true
 	}
 
-	const version = $schema?.split('workflow/')?.pop() || defaultWorkflow
-	await getSchema(version).then(schema => {
-		if (!ajv.getSchema(version)) {
-			ajv.addSchema(schema, version)
-		}
-	})
-	const validate = ajv.getSchema(version)
+	if (!ajv.schemas[$schema]) {
+		const schemaJson = await fetchJson($schema)
+		ajv.addSchema(schemaJson, $schema)
+	}
+	const validate = ajv.getSchema($schema)
 	return !!validate?.(workflowJson)
 }
 
