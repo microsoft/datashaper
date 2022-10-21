@@ -25,7 +25,7 @@ export function useTableHandlers(
 		}
 	}, [workflow, onSelect])
 	const onSelectLatest = useCallback(() => {
-		const latestId = steps[0]?.id
+		const latestId = steps[steps.length - 1]?.id
 		latestId && onSelect?.(latestId)
 	}, [onSelect, steps])
 	return {
