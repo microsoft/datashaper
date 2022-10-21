@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { CodebookSchema, DataTableSchema } from '@datashaper/schema'
-import { CodebookStrategy,DataType } from '@datashaper/schema'
+import { CodebookStrategy, DataType } from '@datashaper/schema'
 import { escape, op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -15,7 +15,7 @@ export function unapplyCodebook(
 	strategy: CodebookStrategy,
 	dataTableSchema?: DataTableSchema,
 ): ColumnTable {
-	let applied = null
+	let applied = table
 
 	if (
 		strategy === CodebookStrategy.DataTypeOnly ||

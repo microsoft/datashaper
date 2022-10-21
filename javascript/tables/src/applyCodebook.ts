@@ -15,7 +15,7 @@ export function applyCodebook(
 	strategy: CodebookStrategy,
 	dataTableSchema?: DataTableSchema,
 ): ColumnTable {
-	let applied = null
+	let applied = table
 
 	if (
 		strategy === CodebookStrategy.DataTypeOnly ||
