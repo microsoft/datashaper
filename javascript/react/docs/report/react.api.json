@@ -5887,6 +5887,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!TableCommandsProps#metadata:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "metadata?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableMetadata",
+                  "canonicalReference": "@datashaper/tables!TableMetadata:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "metadata",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!TableCommandsProps#onAddStep:member",
               "docComment": "",
               "excerptTokens": [
@@ -6464,6 +6492,34 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "index",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!TableTransformProps#metadata:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "metadata?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableMetadata",
+                  "canonicalReference": "@datashaper/tables!TableMetadata:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "metadata",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

@@ -20,6 +20,7 @@ export interface TableTransformProps
 |  [hideOutput?](./react.tabletransformprops.hideoutput.md) |  | boolean | <i>(Optional)</i> Indicates that the output table should be hidden or else shown and editable by the user. It may be desirable to hide this if the transform is expected to do an inline replacement of the input table. |
 |  [hideStepSelector?](./react.tabletransformprops.hidestepselector.md) |  | boolean | <i>(Optional)</i> |
 |  [index](./react.tabletransformprops.index.md) |  | number | The step index |
+|  [metadata?](./react.tabletransformprops.metadata.md) |  | TableMetadata | <i>(Optional)</i> |
 |  [onDelete?](./react.tabletransformprops.ondelete.md) |  | (index: number) =&gt; void | <i>(Optional)</i> |
 |  [onTransformRequested?](./react.tabletransformprops.ontransformrequested.md) |  | (step: Step, output: string \| undefined, index?: number) =&gt; void | <i>(Optional)</i> Callback fired when the step is configured and "run" is clicked, indicating the application should execute the contructed/edited step. |
 |  [onVerbChange?](./react.tabletransformprops.onverbchange.md) |  | (verb: Verb) =&gt; void | <i>(Optional)</i> |
