@@ -3,14 +3,17 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import Ajv from 'ajv'
+import addFormats from 'ajv-formats'
 
 export function createSchemaValidator(): Ajv {
-	return new Ajv({
+	const result = new Ajv({
 		strict: true,
 		strictSchema: true,
 		strictTypes: true,
 		strictRequired: true,
 		validateSchema: true,
 		allowUnionTypes: true,
-	}).addFormat('date-time', true)
+	})
+	addFormats(result)
+	return result
 }
