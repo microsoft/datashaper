@@ -39,8 +39,11 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           server-token: ${{ secrets.TURBO_SERVER_TOKEN }}
 
+      - run: yarn build  --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
+        name: build
+
       - run: yarn bundle  --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_SERVER_TOKEN }}" --team="essex"
-        name: Build libs
+        name: bundle
 
       - run: cp -R javascript/react/storybook-static javascript/webapp/build/storybook
 
