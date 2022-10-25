@@ -4,23 +4,9 @@
  */
 
 import type { NamedPortBinding, Verb } from '@datashaper/schema'
-import type { TableContainer } from '@datashaper/tables'
 
-import type { Node } from '../../dataflow/index.js'
 import * as defaults from '../../verbs/defaults/index.js'
-import * as verbs from '../../verbs/index.js'
-import type { NodeFactory, Step, StepInput } from './Workflow.types.js'
-
-export function createNode(step: Step): Node<TableContainer> {
-	const records = verbs as any as Record<string, NodeFactory>
-	const factory = records[step.verb]
-	if (!factory) {
-		throw new Error(`unknown verb ${step.verb}`)
-	}
-	const node = factory(step.id)
-	node.config = step.args
-	return node
-}
+import type { Step, StepInput } from './types.js'
 
 // TEMP: this creates a more readable id by doing a simple increment for each verb type
 // since this is global it will not align across pipelines or tables.
