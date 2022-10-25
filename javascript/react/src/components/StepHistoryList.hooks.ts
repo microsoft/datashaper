@@ -58,7 +58,7 @@ export function useDeleteConfirm(onDelete?: (index: number) => void): {
 	)
 
 	const onConfirmDelete = useCallback(() => {
-		deleteIndex !== undefined && onDelete?.(deleteIndex)
+		deleteIndex != null && deleteIndex >= 0 && onDelete?.(deleteIndex)
 		hide()
 	}, [hide, deleteIndex, onDelete])
 

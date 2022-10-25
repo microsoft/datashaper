@@ -17,7 +17,7 @@ export const SpreadDescription: React.FC<StepDescriptionProps<SpreadArgs>> =
 			return [
 				{
 					before: `column`,
-					value: args.column !== undefined ? args.column : undefined,
+					value: args.column,
 				},
 				{
 					before: 'split delimiter',

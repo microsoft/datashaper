@@ -17,7 +17,7 @@ export const OneHotDescription: React.FC<StepDescriptionProps<OnehotArgs>> =
 			return [
 				{
 					before: `onehot column`,
-					value: args.column !== undefined ? args.column : undefined,
+					value: args.column,
 				},
 				{
 					before: `with prefix`,
