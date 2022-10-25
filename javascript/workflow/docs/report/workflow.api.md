@@ -493,11 +493,6 @@ export interface NodeBinding<T> {
     node: Node_2<T>;
 }
 
-// Warning: (ae-missing-release-tag) "NodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type NodeFactory = (id: string) => Node_2<TableContainer>;
-
 // Warning: (ae-missing-release-tag) "NodeId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -676,7 +671,7 @@ export const spread: (id: string) => StepNode<TableContainer<unknown>, SpreadArg
 
 // Warning: (ae-missing-release-tag) "Step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface Step<T extends object | void | unknown = unknown> {
     args: T;
     // (undocumented)
@@ -695,7 +690,7 @@ export type StepFunction<T, Args> = (source: T, args: Args) => T;
 
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface StepInput<T extends object | void | unknown = unknown> {
     args?: T;
     // (undocumented)
@@ -723,13 +718,10 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 
 // Warning: (ae-missing-release-tag) "TableExportOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface TableExportOptions {
-    // (undocumented)
     includeDefaultInput?: boolean;
-    // (undocumented)
     includeDefaultOutput?: boolean;
-    // (undocumented)
     includeInputs?: boolean;
 }
 

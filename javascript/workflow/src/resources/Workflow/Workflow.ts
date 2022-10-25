@@ -24,8 +24,9 @@ import type { Maybe } from '../../primitives.js'
 import { fetchJson } from '../../util/network.js'
 import { Resource } from '../Resource.js'
 import type { SchemaResource } from '../types.js'
-import type { Step, StepInput, TableExportOptions } from './Workflow.types.js'
-import { createNode, readStep } from './Workflow.utils.js'
+import { createNode } from './createNode.js'
+import { readStep } from './readStep.js'
+import type { Step, StepInput,TableExportOptions } from './types.js'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 

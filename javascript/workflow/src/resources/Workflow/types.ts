@@ -2,11 +2,32 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+
 import type { NamedPortBinding, PortBinding, Verb } from '@datashaper/schema'
-import type { TableContainer } from '@datashaper/tables'
 
-import type { Node } from '../../dataflow/types.js'
+/**
+ * Options for exporting data-tables within Workflow instances.w
+ */
+export interface TableExportOptions {
+	/**
+	 * Whether to include input tables in the result.
+	 */
+	includeInputs?: boolean
 
+	/**
+	 * Whether to include the default input table in the result.
+	 */
+	includeDefaultInput?: boolean
+
+	/**
+	 * Whether to include the default output table in the result.
+	 */
+	includeDefaultOutput?: boolean
+}
+
+/**
+ * Step input data for parsing workflow schemas
+ */
 export interface StepInput<T extends object | void | unknown = unknown> {
 	/**
 	 * A unique identifier for this step
@@ -36,6 +57,9 @@ export interface StepInput<T extends object | void | unknown = unknown> {
 		  } & Record<string, PortBinding>)
 }
 
+/**
+ * Resolved step data, used in living workflows
+ */
 export interface Step<T extends object | void | unknown = unknown> {
 	/**
 	 * A unique identifier for this step
@@ -43,7 +67,7 @@ export interface Step<T extends object | void | unknown = unknown> {
 	id: string
 
 	/**
-	 * The verb being executed
+	 * The verb being execute
 	 */
 	verb: Verb
 
@@ -61,12 +85,4 @@ export interface Step<T extends object | void | unknown = unknown> {
 	input: {
 		others?: NamedPortBinding[]
 	} & Record<string, NamedPortBinding>
-}
-
-export type NodeFactory = (id: string) => Node<TableContainer>
-
-export interface TableExportOptions {
-	includeInputs?: boolean
-	includeDefaultInput?: boolean
-	includeDefaultOutput?: boolean
 }

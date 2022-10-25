@@ -4,6 +4,8 @@
 
 ## StepInput interface
 
+Step input data for parsing workflow schemas
+
 <b>Signature:</b>
 
 ```typescript
