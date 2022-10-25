@@ -29,9 +29,9 @@ export const Columns: React.FC<ArqueroDetailsListProps> = memo(
 		return (
 			<Table>
 				<FullColumnList>
-					{checkboxes?.map(config => {
-						return <Checkbox key={config.label} {...config} />
-					})}
+					{checkboxes?.map(config => (
+						<Checkbox key={config.label} {...config} />
+					))}
 				</FullColumnList>
 				<ArqueroDetailsList
 					{...args}
