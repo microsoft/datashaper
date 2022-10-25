@@ -25,7 +25,7 @@ export const EncodeDecodeBase: React.FC<
 				CodebookStrategy,
 				step.args.strategy,
 				(s, opt) => (s.args.strategy = opt as CodebookStrategy),
-				{ required: true },
+				{ required: true, placeholder: 'Choose strategy' },
 			),
 		],
 		[step],
