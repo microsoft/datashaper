@@ -62,7 +62,7 @@ export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 								: { cursor: 'pointer', color: iconColors.enabled }
 						}
 					/>
-					{selectedDate !== undefined && !cleanLabel ? (
+					{selectedDate != null && !cleanLabel ? (
 						<CalendarLabel>
 							{!cleanLabel ? selectedDate?.toLocaleDateString() : ''}
 						</CalendarLabel>

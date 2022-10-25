@@ -34,7 +34,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 		const handleFilterChange = useCallback(
 			(criterion: Criterion | undefined, index: number) => {
 				const criteria = [...step.args.criteria]
-				if (criterion === undefined) {
+				if (criterion == null) {
 					criteria.splice(index, 1)
 				} else {
 					criteria[index] = criterion

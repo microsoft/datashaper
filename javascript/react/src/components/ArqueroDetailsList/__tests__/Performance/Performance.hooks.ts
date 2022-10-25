@@ -20,7 +20,7 @@ export function useBigTable(input: ColumnTable | undefined): {
 	const [metadata, setMetadata] = useState<TableMetadata | undefined>()
 
 	useEffect(() => {
-		if (input !== undefined) {
+		if (input != null) {
 			let tableCopy = input
 			// make sure we have a large enough number of rows to impact rendering perf
 			for (let i = 0; i < 10; i++) {

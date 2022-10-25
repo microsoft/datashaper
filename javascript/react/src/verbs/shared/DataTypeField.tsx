@@ -59,7 +59,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 
 		const spinButtonOnChange = useCallback(
 			(_event: React.SyntheticEvent<HTMLElement>, newValue?: string) => {
-				if (newValue !== undefined) {
+				if (newValue != null) {
 					const val = coerce(newValue, dataType)
 					isKey ? onKeyChange(value, val) : onValueChange(keyValue, val)
 				}
@@ -72,7 +72,7 @@ export const DataTypeField: React.FC<DataTypeFieldProps> = memo(
 				_e: React.FormEvent<HTMLDivElement>,
 				newValue?: IDropdownOption<any> | undefined,
 			) => {
-				if (newValue !== undefined) {
+				if (newValue != null) {
 					isKey
 						? onKeyChange(value, newValue.key)
 						: onValueChange(keyValue, newValue.key === 'true' ? true : false)
