@@ -3,13 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Step } from '@datashaper/workflow'
-
 export interface HistoryPanelProps {
 	toggleCollapsed: () => void
 	title?: string
 	showStepCount?: boolean
-	steps?: Step[]
+	numSteps?: number
 	titleStyle?: React.CSSProperties
 	children?: React.ReactNode
 }

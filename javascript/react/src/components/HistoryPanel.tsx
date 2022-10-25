@@ -19,7 +19,7 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 		toggleCollapsed,
 		title = 'History',
 		showStepCount,
-		steps,
+		numSteps,
 		titleStyle,
 		children,
 	}) {
@@ -29,7 +29,7 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = memo(
 				<AsideHeader>
 					<HistoryIcon />
 					<Title style={titleStyle}>
-						{title} {showStepCount ? `(${steps?.length})` : null}
+						{title} {showStepCount ? `(${numSteps})` : null}
 						<IconButton
 							iconProps={closeIconProps}
 							onClick={toggleCollapsed}
