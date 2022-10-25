@@ -7,7 +7,7 @@ import type { TableContainer, TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 
 export interface TableCommandsProps {
-	inputTable: TableContainer | undefined
+	inputTable?: TableContainer | undefined
 	workflow: Workflow
 	selectedColumn?: string
 	metadata?: TableMetadata

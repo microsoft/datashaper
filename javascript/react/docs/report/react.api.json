@@ -3222,6 +3222,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!HistoryPanelProps#numSteps:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "numSteps?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "numSteps",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!HistoryPanelProps#showStepCount:member",
               "docComment": "",
               "excerptTokens": [
@@ -3245,38 +3272,6 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!HistoryPanelProps#steps:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "steps?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "steps",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
               }
             },
             {
@@ -5860,7 +5855,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "inputTable: "
+                  "text": "inputTable?: "
                 },
                 {
                   "kind": "Reference",
@@ -5877,7 +5872,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "inputTable",
               "propertyTypeTokenRange": {

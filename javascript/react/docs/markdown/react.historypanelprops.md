@@ -15,8 +15,8 @@ export interface HistoryPanelProps
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [children?](./react.historypanelprops.children.md) |  | React.ReactNode | <i>(Optional)</i> |
+|  [numSteps?](./react.historypanelprops.numsteps.md) |  | number | <i>(Optional)</i> |
 |  [showStepCount?](./react.historypanelprops.showstepcount.md) |  | boolean | <i>(Optional)</i> |
-|  [steps?](./react.historypanelprops.steps.md) |  | Step\[\] | <i>(Optional)</i> |
 |  [title?](./react.historypanelprops.title.md) |  | string | <i>(Optional)</i> |
 |  [titleStyle?](./react.historypanelprops.titlestyle.md) |  | React.CSSProperties | <i>(Optional)</i> |
 |  [toggleCollapsed](./react.historypanelprops.togglecollapsed.md) |  | () =&gt; void |  |
