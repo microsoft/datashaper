@@ -16,7 +16,7 @@ export interface TableCommandsProps
 |  --- | --- | --- | --- |
 |  [background?](./react.tablecommandsprops.background.md) |  | string | <i>(Optional)</i> |
 |  [color?](./react.tablecommandsprops.color.md) |  | string | <i>(Optional)</i> |
-|  [inputTable](./react.tablecommandsprops.inputtable.md) |  | TableContainer \| undefined |  |
+|  [inputTable?](./react.tablecommandsprops.inputtable.md) |  | TableContainer \| undefined | <i>(Optional)</i> |
 |  [metadata?](./react.tablecommandsprops.metadata.md) |  | TableMetadata | <i>(Optional)</i> |
 |  [onAddStep?](./react.tablecommandsprops.onaddstep.md) |  | (step: Step, output: string \| undefined, index: number \| undefined) =&gt; void | <i>(Optional)</i> |
 |  [onRemoveStep?](./react.tablecommandsprops.onremovestep.md) |  | (index: number) =&gt; void | <i>(Optional)</i> |

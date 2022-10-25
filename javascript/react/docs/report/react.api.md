@@ -297,9 +297,9 @@ export interface HistoryPanelProps {
     // (undocumented)
     children?: React.ReactNode;
     // (undocumented)
-    showStepCount?: boolean;
+    numSteps?: number;
     // (undocumented)
-    steps?: Step[];
+    showStepCount?: boolean;
     // (undocumented)
     title?: string;
     // (undocumented)
@@ -532,7 +532,7 @@ export interface TableCommandsProps {
     // (undocumented)
     color?: string;
     // (undocumented)
-    inputTable: TableContainer | undefined;
+    inputTable?: TableContainer | undefined;
     // (undocumented)
     metadata?: TableMetadata;
     // (undocumented)

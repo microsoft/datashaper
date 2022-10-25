@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-inputTable: TableContainer | undefined;
+inputTable?: TableContainer | undefined;
 ```
