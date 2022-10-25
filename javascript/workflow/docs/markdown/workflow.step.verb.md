@@ -4,7 +4,7 @@
 
 ## Step.verb property
 
-The verb being executed
+The verb being execute
 
 <b>Signature:</b>
 

@@ -6508,49 +6508,6 @@
         },
         {
           "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/workflow!NodeFactory:type",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare type NodeFactory = "
-            },
-            {
-              "kind": "Content",
-              "text": "(id: string) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "Node",
-              "canonicalReference": "@datashaper/workflow!Node:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TableContainer",
-              "canonicalReference": "@datashaper/tables!TableContainer:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "NodeFactory",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 6
-          }
-        },
-        {
-          "kind": "TypeAlias",
           "canonicalReference": "@datashaper/workflow!NodeId:type",
           "docComment": "",
           "excerptTokens": [
@@ -8729,7 +8686,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/workflow!Step:interface",
-          "docComment": "",
+          "docComment": "/**\n * Resolved step data, used in living workflows\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -8907,7 +8864,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/workflow!Step#verb:member",
-              "docComment": "/**\n * The verb being executed\n */\n",
+              "docComment": "/**\n * The verb being execute\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8987,7 +8944,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/workflow!StepInput:interface",
-          "docComment": "",
+          "docComment": "/**\n * Step input data for parsing workflow schemas\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -9403,7 +9360,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "@datashaper/workflow!TableExportOptions:interface",
-          "docComment": "",
+          "docComment": "/**\n * Options for exporting data-tables within Workflow instances.w\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -9417,7 +9374,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/workflow!TableExportOptions#includeDefaultInput:member",
-              "docComment": "",
+              "docComment": "/**\n * Whether to include the default input table in the result.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9444,7 +9401,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/workflow!TableExportOptions#includeDefaultOutput:member",
-              "docComment": "",
+              "docComment": "/**\n * Whether to include the default output table in the result.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9471,7 +9428,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/workflow!TableExportOptions#includeInputs:member",
-              "docComment": "",
+              "docComment": "/**\n * Whether to include input tables in the result.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

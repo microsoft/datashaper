@@ -65,9 +65,9 @@
 |  [NodeBinding](./workflow.nodebinding.md) | A binding for a value being emitted from a node |
 |  [ResourceHandler](./workflow.resourcehandler.md) |  |
 |  [SchemaResource](./workflow.schemaresource.md) |  |
-|  [Step](./workflow.step.md) |  |
-|  [StepInput](./workflow.stepinput.md) |  |
-|  [TableExportOptions](./workflow.tableexportoptions.md) |  |
+|  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
+|  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |
+|  [TableExportOptions](./workflow.tableexportoptions.md) | Options for exporting data-tables within Workflow instances.w |
 
 ## Variables
 
@@ -118,7 +118,6 @@
 |  [Handler](./workflow.handler.md) | Function callback for general activity listener. |
 |  [HandlerOf](./workflow.handlerof.md) |  |
 |  [Maybe](./workflow.maybe.md) |  |
-|  [NodeFactory](./workflow.nodefactory.md) |  |
 |  [NodeId](./workflow.nodeid.md) |  |
 |  [SocketName](./workflow.socketname.md) |  |
 |  [StepFunction](./workflow.stepfunction.md) |  |
