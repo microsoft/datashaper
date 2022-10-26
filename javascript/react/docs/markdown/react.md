@@ -61,6 +61,7 @@
 |  --- | --- |
 |  [ArqueroDetailsListProps](./react.arquerodetailslistprops.md) |  |
 |  [ArqueroTableHeaderProps](./react.arquerotableheaderprops.md) |  |
+|  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
 |  [ColumnOptions](./react.columnoptions.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
 |  [DropzoneProps](./react.dropzoneprops.md) |  |

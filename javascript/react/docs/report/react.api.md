@@ -68,6 +68,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     // (undocumented)
     sortable?: boolean;
     striped?: boolean;
+    style?: CSSProperties;
     // (undocumented)
     table: ColumnTable;
 }
@@ -98,9 +99,19 @@ export interface ArqueroTableHeaderProps {
     // (undocumented)
     showRowCount?: boolean;
     // (undocumented)
+    styles?: ArqueroTableHeaderStyles;
+    // (undocumented)
     table: ColumnTable;
     // (undocumented)
     visibleColumns?: string[];
+}
+
+// Warning: (ae-missing-release-tag) "ArqueroTableHeaderStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ArqueroTableHeaderStyles {
+    // (undocumented)
+    root?: CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "checkedItemsCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -532,6 +543,8 @@ export interface TableCommandsProps {
     // (undocumented)
     color?: string;
     // (undocumented)
+    commandBarProps?: Partial<ICommandBarProps>;
+    // (undocumented)
     inputTable?: TableContainer | undefined;
     // (undocumented)
     metadata?: TableMetadata;
@@ -697,7 +710,7 @@ export function useHandleStepSave(workflow: Workflow): (step: Step, index: numbe
 // Warning: (ae-missing-release-tag) "useHeaderCommandBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHeaderCommandBarDefaults(props?: ICommandBarProps, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
+export function useHeaderCommandBarDefaults(props?: Partial<ICommandBarProps>, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
 
 // Warning: (ae-missing-release-tag) "useIncrementingColumnColorScale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

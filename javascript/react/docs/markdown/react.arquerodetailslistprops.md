@@ -32,5 +32,6 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
 |  [showColumnBorders?](./react.arquerodetailslistprops.showcolumnborders.md) |  | boolean | <i>(Optional)</i> Indicates to use borders between columns so the cells look more like a spreadsheet (row borders are always on). |
 |  [sortable?](./react.arquerodetailslistprops.sortable.md) |  | boolean | <i>(Optional)</i> |
 |  [striped?](./react.arquerodetailslistprops.striped.md) |  | boolean | <i>(Optional)</i> Indicates whether to use even/odd row coloring. |
+|  [style?](./react.arquerodetailslistprops.style.md) |  | CSSProperties | <i>(Optional)</i> Style to pass to the container. Use the regular DetailsList.styles prop for deeper customization of the table itself. |
 |  [table](./react.arquerodetailslistprops.table.md) |  | ColumnTable |  |
 
