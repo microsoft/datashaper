@@ -90,6 +90,8 @@ function useIconStyles() {
 	return useMemo(
 		() => ({
 			root: {
+				position: 'absolute' as const,
+				right: 8,
 				fontSize: 12,
 				color: theme.palette.neutralSecondary,
 			},
