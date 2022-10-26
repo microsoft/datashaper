@@ -9,8 +9,6 @@ import type {
 	ICommandBarStyles,
 	IStyleFunctionOrObject,
 } from '@fluentui/react'
-import { useTheme } from '@fluentui/react'
-import chroma from 'chroma-js'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
@@ -47,10 +45,7 @@ function useBaseProps(
 	styles?: IStyleFunctionOrObject<ICommandBarStyleProps, ICommandBarStyles>,
 ): Partial<ICommandBarProps> {
 	const { color, background } = useColorDefaults(colors)
-	const backgroundHovered = useMemo(
-		() => chroma(background).darken().hex(),
-		[background],
-	)
+	const buttonStyles = useDefaultButtonStyles(colors)
 	return useMemo(
 		() => ({
 			styles: merge(
@@ -68,33 +63,10 @@ function useBaseProps(
 				styles,
 			),
 			overflowButtonProps: {
-				styles: {
-					root: {
-						background,
-					},
-					rootHovered: {
-						background: backgroundHovered,
-					},
-					rootExpanded: {
-						background: backgroundHovered,
-					},
-					rootExpandedHovered: {
-						background: backgroundHovered,
-					},
-					rootPressed: {
-						background: backgroundHovered,
-						color,
-					},
-					iconPressed: {
-						color,
-					},
-					menuIcon: {
-						color,
-					},
-				},
+				styles: buttonStyles,
 			},
 		}),
-		[styles, far, color, background, backgroundHovered],
+		[styles, far, color, background, buttonStyles],
 	)
 }
 
@@ -102,79 +74,71 @@ function useItems(
 	items: ICommandBarItemProps[] = [],
 	colors?: Partial<CommandBarColors>,
 ): ICommandBarItemProps[] {
-	const theme = useTheme()
-	const color = useMemo(
-		() => colors?.color || theme.palette.neutralPrimaryAlt,
-		[colors, theme],
+	const buttonStyles = useDefaultButtonStyles(colors)
+	return useMemo(
+		() => items.map(item => merge({}, { buttonStyles }, item)),
+		[items, buttonStyles],
 	)
-	const disabled = useMemo(
-		() => colors?.disabled || theme.palette.neutralTertiary,
-		[colors, theme],
-	)
-	const background = useMemo(
-		() => colors?.background || theme.palette.neutralQuaternary,
-		[colors, theme],
-	)
-	const backgroundHovered = useMemo(
-		() => chroma(background).darken().hex(),
-		[background],
-	)
-	const checked = useMemo(
-		() => colors?.checked || chroma(background).darken().hex(),
-		[colors, background],
-	)
-	const styles = useMemo(
+}
+
+function useDefaultButtonStyles(colors?: Partial<CommandBarColors>) {
+	const defaults = useColorDefaults(colors)
+	const { color, background, disabled, hovered, checked } = defaults
+	return useMemo(
 		() => ({
-			buttonStyles: {
-				root: {
-					background,
-					color,
-				},
-				rootHovered: {
-					background: backgroundHovered,
-					color,
-				},
-				rootExpandedHovered: {
-					background: backgroundHovered,
-					color,
-				},
-				rootExpanded: {
-					background: backgroundHovered,
-				},
-				rootPressed: {
-					background: backgroundHovered,
-					color,
-				},
-				rootChecked: {
-					background: checked,
-				},
-				iconPressed: {
-					color,
-				},
-				label: {
-					color,
-				},
-				labelDisabled: {
-					color: disabled,
-				},
-				icon: {
-					color,
-				},
-				iconHovered: {
-					color,
-				},
-				menuIcon: {
-					color,
-				},
-				menuIconHovered: {
-					color,
-				},
+			root: {
+				background,
+				color,
+			},
+			rootDisabled: {
+				color: disabled,
+			},
+			rootHovered: {
+				background: hovered,
+				color,
+			},
+			rootExpandedHovered: {
+				background: hovered,
+				color,
+			},
+			rootExpanded: {
+				background: hovered,
+			},
+			rootPressed: {
+				background: hovered,
+				color,
+			},
+			rootChecked: {
+				background: checked,
+			},
+			label: {
+				color,
+			},
+			labelDisabled: {
+				color: disabled,
+			},
+			icon: {
+				color,
+			},
+			iconDisabled: {
+				color: disabled,
+			},
+			iconHovered: {
+				color,
+			},
+			iconPressed: {
+				color,
+			},
+			menuIcon: {
+				color,
+			},
+			menuIconHovered: {
+				color,
+			},
+			menuIconDisabled: {
+				color: disabled,
 			},
 		}),
-		[color, background, backgroundHovered, checked, disabled],
-	)
-	return useMemo(
-		() => items.map(item => merge({}, styles, item)),
-		[items, styles],
+		[color, background, hovered, checked, disabled],
 	)
 }
