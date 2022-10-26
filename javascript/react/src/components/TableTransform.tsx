@@ -52,11 +52,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 			workflow,
 			step,
 		)
-		const handleSaveClick = useHandleSaveClick(
-			internal,
-			output,
-			onTransformRequested,
-		)
+		const handleSaveClick = useHandleSaveClick(internal, onTransformRequested)
 		const onCreate = useCallback(
 			(verb: Verb) => {
 				onVerbChange?.(verb)

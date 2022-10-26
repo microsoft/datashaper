@@ -60,17 +60,13 @@ export function useOnEditStep(
 }
 
 export function useOnCreateStep(
-	save: (
-		step: Step,
-		output: string | undefined,
-		index: number | undefined,
-	) => void,
+	save: (step: Step, index: number | undefined) => void,
 	selectOutput: undefined | ((name: string) => void),
 	dismissModal?: () => void,
 ): (step: Step, output: string | undefined, index: number | undefined) => void {
 	return useCallback(
 		(step: Step, output: string | undefined, index: number | undefined) => {
-			save(step, output, index)
+			save(step, index)
 			dismissModal?.()
 			if (output) selectOutput?.(output)
 		},

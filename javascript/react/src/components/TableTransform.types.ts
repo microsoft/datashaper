@@ -28,11 +28,7 @@ export interface TableTransformProps {
 	 * Callback fired when the step is configured and "run" is clicked, indicating
 	 * the application should execute the contructed/edited step.
 	 */
-	onTransformRequested?: (
-		step: Step,
-		output: string | undefined,
-		index?: number,
-	) => void
+	onTransformRequested?: (step: Step, index?: number) => void
 
 	/**
 	 * Optional list of transform verbs to present to the user.

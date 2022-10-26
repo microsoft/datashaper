@@ -458,7 +458,7 @@ export interface StepHistoryListProps {
     // (undocumented)
     onDelete?: (index: number) => void;
     // (undocumented)
-    onSave?: (step: Step, output: string | undefined, index?: number) => void;
+    onSave?: (step: Step, index?: number) => void;
     // (undocumented)
     onSelect?: (name: string) => void;
     // (undocumented)
@@ -587,7 +587,7 @@ export interface TableTransformProps {
     metadata?: TableMetadata;
     // (undocumented)
     onDelete?: (index: number) => void;
-    onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
+    onTransformRequested?: (step: Step, index?: number) => void;
     // (undocumented)
     onVerbChange?: (verb: Verb) => void;
     // (undocumented)
@@ -721,7 +721,7 @@ export function useManagementBarDefaults(props?: ProjectManagementCommandBarProp
 // Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useOnCreateStep(save: (step: Step, output: string | undefined, index: number | undefined) => void, selectOutput: undefined | ((name: string) => void), dismissModal?: () => void): (step: Step, output: string | undefined, index: number | undefined) => void;
+export function useOnCreateStep(save: (step: Step, index: number | undefined) => void, selectOutput: undefined | ((name: string) => void), dismissModal?: () => void): (step: Step, output: string | undefined, index: number | undefined) => void;
 
 // Warning: (ae-missing-release-tag) "useOnDeleteStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
