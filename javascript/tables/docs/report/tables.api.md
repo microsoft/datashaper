@@ -5,6 +5,7 @@
 ```ts
 
 import type { CodebookSchema } from '@datashaper/schema';
+import { CodebookStrategy } from '@datashaper/schema';
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { default as ColumnTable_2 } from 'arquero/dist/types/table/column-table.js';
 import type { DataTableSchema } from '@datashaper/schema';
@@ -14,6 +15,11 @@ import type { FieldMetadata } from '@datashaper/schema';
 import type { ParserOptions } from '@datashaper/schema';
 import type { TypeHints } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
+
+// Warning: (ae-missing-release-tag) "applyCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function applyCodebook(table: ColumnTable, codebook: CodebookSchema, strategy: CodebookStrategy, dataTableSchema?: DataTableSchema): ColumnTable;
 
 // Warning: (ae-missing-release-tag) "coerce" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -258,6 +264,11 @@ export interface TableMetadata {
 //
 // @public (undocumented)
 export function typeGuesserFactory(options?: TypeHints): any;
+
+// Warning: (ae-missing-release-tag) "unapplyCodebook" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function unapplyCodebook(table: ColumnTable, codebook: CodebookSchema, strategy: CodebookStrategy, dataTableSchema?: DataTableSchema): ColumnTable;
 
 // (No @packageDocumentation comment for this package)
 

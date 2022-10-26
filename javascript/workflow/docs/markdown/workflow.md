@@ -9,13 +9,11 @@
 |  Class | Description |
 |  --- | --- |
 |  [BaseNode](./workflow.basenode.md) |  |
-|  [BaseVariadicNode](./workflow.basevariadicnode.md) |  |
 |  [Codebook](./workflow.codebook.md) |  |
 |  [DataPackage](./workflow.datapackage.md) |  |
 |  [DataShape](./workflow.datashape.md) |  |
 |  [DataTable](./workflow.datatable.md) |  |
 |  [DefaultGraph](./workflow.defaultgraph.md) |  |
-|  [InputNode](./workflow.inputnode.md) |  |
 |  [Named](./workflow.named.md) |  |
 |  [ObservableNode](./workflow.observablenode.md) |  |
 |  [Observed](./workflow.observed.md) |  |
@@ -23,7 +21,6 @@
 |  [Resource](./workflow.resource.md) |  |
 |  [StepNode](./workflow.stepnode.md) |  |
 |  [Workflow](./workflow.workflow.md) |  |
-|  [WorkflowSchemaValidator](./workflow.workflowschemavalidator.md) |  |
 
 ## Enumerations
 
@@ -40,11 +37,9 @@
 |  [array(nodes, edges)](./workflow.array.md) |  |
 |  [cloneStep(step, columnNames)](./workflow.clonestep.md) |  |
 |  [columnTransformVerbs(filter)](./workflow.columntransformverbs.md) | These are steps that specifically operate on an input/output column only. In other words, they do not cause a change in the number of rows in a table, such as an aggregate or filter would, and only replace or add one column. |
-|  [createWorkflow(input, tables)](./workflow.createworkflow.md) | <p>This function establishes the reactive processing graph for executing transformation steps.</p><p>A graph is constructed using each step definition as a node. Any table definitions they export are registered into the tableContainer. Any inputs that are defined but not accounted for in the graph will be wired to the TableContainer using the observable pattern.</p> |
+|  [createNode(step)](./workflow.createnode.md) |  |
 |  [fetchFile(url)](./workflow.fetchfile.md) |  |
 |  [fetchJson(url)](./workflow.fetchjson.md) |  |
-|  [handleMaybeAsync(value, handler)](./workflow.handlemaybeasync.md) |  |
-|  [inputNodeFactory(compute)](./workflow.inputnodefactory.md) |  |
 |  [isInputColumnListStep(step)](./workflow.isinputcolumnliststep.md) | Indicates whether the supplied step requires multiple input columns. |
 |  [isInputColumnRecordStep(step)](./workflow.isinputcolumnrecordstep.md) | Indicates whether the supplied step requires a map of input columns. |
 |  [isInputColumnStep(step)](./workflow.isinputcolumnstep.md) | Indicates whether the supplied step requires a single input column. |
@@ -70,8 +65,9 @@
 |  [NodeBinding](./workflow.nodebinding.md) | A binding for a value being emitted from a node |
 |  [ResourceHandler](./workflow.resourcehandler.md) |  |
 |  [SchemaResource](./workflow.schemaresource.md) |  |
-|  [Step](./workflow.step.md) |  |
-|  [StepInput](./workflow.stepinput.md) |  |
+|  [Step](./workflow.step.md) | Resolved step data, used in living workflows |
+|  [StepInput](./workflow.stepinput.md) | Step input data for parsing workflow schemas |
+|  [TableExportOptions](./workflow.tableexportoptions.md) | Options for exporting data-tables within Workflow instances.w |
 
 ## Variables
 
@@ -83,17 +79,19 @@
 |  [boolean](./workflow.boolean.md) |  |
 |  [concat](./workflow.concat.md) |  |
 |  [convert](./workflow.convert.md) |  |
+|  [decode](./workflow.decode.md) |  |
 |  [dedupe](./workflow.dedupe.md) |  |
 |  [derive](./workflow.derive.md) |  |
 |  [difference](./workflow.difference.md) |  |
+|  [encode](./workflow.encode.md) |  |
 |  [erase](./workflow.erase.md) |  |
-|  [fetch\_2](./workflow.fetch_2.md) |  |
 |  [fill](./workflow.fill.md) |  |
 |  [filter](./workflow.filter.md) |  |
 |  [fold](./workflow.fold.md) |  |
 |  [groupby](./workflow.groupby.md) |  |
 |  [impute](./workflow.impute.md) |  |
 |  [intersect](./workflow.intersect.md) |  |
+|  [isDefaultInput](./workflow.isdefaultinput.md) |  |
 |  [merge](./workflow.merge.md) |  |
 |  [onehot](./workflow.onehot.md) |  |
 |  [orderby](./workflow.orderby.md) |  |
@@ -111,7 +109,6 @@
 |  [unorder](./workflow.unorder.md) |  |
 |  [unroll](./workflow.unroll.md) |  |
 |  [window\_2](./workflow.window_2.md) |  |
-|  [WorkflowSchemaInstance](./workflow.workflowschemainstance.md) |  |
 
 ## Type Aliases
 
@@ -120,12 +117,11 @@
 |  [CopyWithPartial](./workflow.copywithpartial.md) |  |
 |  [Handler](./workflow.handler.md) | Function callback for general activity listener. |
 |  [HandlerOf](./workflow.handlerof.md) |  |
-|  [InputStep](./workflow.inputstep.md) |  |
 |  [Maybe](./workflow.maybe.md) |  |
-|  [NodeFactory](./workflow.nodefactory.md) |  |
 |  [NodeId](./workflow.nodeid.md) |  |
 |  [SocketName](./workflow.socketname.md) |  |
 |  [StepFunction](./workflow.stepfunction.md) |  |
 |  [TableObservable](./workflow.tableobservable.md) | The workflow object manages mutable data for a workflow specification |
 |  [Unsubscribe](./workflow.unsubscribe.md) |  |
+|  [VariadicNodeBinding](./workflow.variadicnodebinding.md) |  |
 

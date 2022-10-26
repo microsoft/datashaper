@@ -2,9 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { DetailsListFeatures } from '@datashaper/react'
 import type { TableMetadata } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+
+import type { DetailsListFeatures } from '../../../../components/ArqueroDetailsList/ArqueroDetailsList.types.js'
 
 export interface ColumnConfig {
 	width?: number

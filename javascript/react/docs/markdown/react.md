@@ -79,7 +79,6 @@
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
 |  [TableListProps](./react.tablelistprops.md) |  |
 |  [TableTransformProps](./react.tabletransformprops.md) |  |
-|  [ToolPanelProps](./react.toolpanelprops.md) |  |
 |  [TransformModalProps](./react.transformmodalprops.md) |  |
 
 ## Variables
@@ -104,7 +103,6 @@
 |  [TableCommands](./react.tablecommands.md) |  |
 |  [TableList](./react.tablelist.md) |  |
 |  [TableTransformModal](./react.tabletransformmodal.md) |  |
-|  [ToolPanel](./react.toolpanel.md) |  |
 |  [Tooltip](./react.tooltip.md) |  |
 
 ## Type Aliases

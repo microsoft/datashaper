@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get source(): Observable<Maybe<ColumnTable>>;
+get source(): Maybe<ColumnTable>;
 ```

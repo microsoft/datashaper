@@ -3,7 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type ColumnTable from 'arquero/dist/types/table/column-table'
-import type { ReactElement } from 'react'
+import type { CSSProperties, ReactElement } from 'react'
+
+export interface ArqueroTableHeaderStyles {
+	root?: CSSProperties
+}
 
 export interface ArqueroTableHeaderProps {
 	table: ColumnTable
@@ -16,4 +20,5 @@ export interface ArqueroTableHeaderProps {
 	onRenameTable?: (name: string) => void
 	color?: string
 	background?: string
+	styles?: ArqueroTableHeaderStyles
 }

@@ -40,7 +40,6 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 					<div style={textStyle} title={column.name}>
 						{column.name}
 					</div>
-					å
 					<When condition={isSorted}>
 						<Icon
 							iconName={isSortedDescending ? 'SortDown' : 'SortUp'}
@@ -54,7 +53,6 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 )
 
 function useContainerStyle(column: IColumn, isClickable: boolean) {
-	const theme = useTheme()
 	const dimensions = useCellDimensions(column)
 	return useMemo(
 		() => ({
@@ -63,12 +61,8 @@ function useContainerStyle(column: IColumn, isClickable: boolean) {
 			display: 'flex',
 			justifyContent: 'space-between',
 			width: dimensions.width,
-			marginBottom: 4,
-			borderBottom: column.data?.selected
-				? `1px solid ${theme.palette.themePrimary}`
-				: `1px solid transparent`,
 		}),
-		[theme, dimensions, column, isClickable],
+		[dimensions, column, isClickable],
 	)
 }
 

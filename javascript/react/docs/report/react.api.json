@@ -3222,6 +3222,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!HistoryPanelProps#numSteps:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "numSteps?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "numSteps",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!HistoryPanelProps#showStepCount:member",
               "docComment": "",
               "excerptTokens": [
@@ -3245,38 +3272,6 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!HistoryPanelProps#steps:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "steps?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "steps",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
               }
             },
             {
@@ -4663,6 +4658,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepComponentProps#metadata:member",
+              "docComment": "/**\n * TableMetadata\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "metadata?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableMetadata",
+                  "canonicalReference": "@datashaper/tables!TableMetadata:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "metadata",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!StepComponentProps#onChange:member",
               "docComment": "/**\n * The step onchange handler\n */\n",
               "excerptTokens": [
@@ -5832,7 +5855,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "inputTable: "
+                  "text": "inputTable?: "
                 },
                 {
                   "kind": "Reference",
@@ -5849,12 +5872,40 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "inputTable",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!TableCommandsProps#metadata:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "metadata?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableMetadata",
+                  "canonicalReference": "@datashaper/tables!TableMetadata:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "metadata",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
               }
             },
             {
@@ -6443,6 +6494,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!TableTransformProps#metadata:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "metadata?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TableMetadata",
+                  "canonicalReference": "@datashaper/tables!TableMetadata:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "metadata",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!TableTransformProps#onDelete:member",
               "docComment": "",
               "excerptTokens": [
@@ -6785,268 +6864,6 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!ToolPanel:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "ToolPanel: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "React.PropsWithChildren",
-              "canonicalReference": "@types/react!~React.PropsWithChildren:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ToolPanelProps",
-              "canonicalReference": "@datashaper/react!ToolPanelProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "ToolPanel",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 7
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!ToolPanelProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface ToolPanelProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ToolPanelProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ToolPanelProps#closeIconProps:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "closeIconProps?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "IIconProps",
-                  "canonicalReference": "@fluentui/react!IIconProps:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "closeIconProps",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ToolPanelProps#hasCloseButton:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "hasCloseButton?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "hasCloseButton",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ToolPanelProps#headerIconProps:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "headerIconProps?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "IIconProps",
-                  "canonicalReference": "@fluentui/react!IIconProps:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "headerIconProps",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ToolPanelProps#headerText:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "headerText?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "headerText",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ToolPanelProps#onDismiss:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onDismiss?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "() => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onDismiss",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ToolPanelProps#styles:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "styles?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "{\n        root?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "React.CSSProperties",
-                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        header?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "React.CSSProperties",
-                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        title?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "React.CSSProperties",
-                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        content?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "React.CSSProperties",
-                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n    }"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "styles",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 10
               }
             }
           ],

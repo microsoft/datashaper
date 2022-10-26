@@ -1,8 +1,7 @@
 {
-	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v1.json",
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
 	"name": "nhefs-transformed/workflow.json",
 	"title": "NHEFS Workflow",
-	"input": ["nhefs"],
 	"steps": [
 		{
 			"args": {
@@ -14,9 +13,7 @@
 			},
 			"verb": "bin",
 			"input": {
-				"source": {
-					"node": "nhefs"
-				}
+				"source": "nhefs"
 			}
 		},
 		{

@@ -11,8 +11,8 @@ import type {
 	ConvertArgs,
 	DedupeArgs,
 	DeriveArgs,
+	EncodeDecodeArgs,
 	EraseArgs,
-	FetchArgs,
 	FillArgs,
 	FilterArgs,
 	FoldArgs,
@@ -61,8 +61,9 @@ export type Step = StepJsonCommon &
 		| ({ verb: Verb.Dedupe; args?: DedupeArgs } & BasicInput)
 		| ({ verb: Verb.Derive; args?: DeriveArgs } & BasicInput)
 		| ({ verb: Verb.Difference } & VariadicInput)
+		| ({ verb: Verb.Decode; args?: EncodeDecodeArgs } & BasicInput)
+		| ({ verb: Verb.Encode; args?: EncodeDecodeArgs } & BasicInput)
 		| ({ verb: Verb.Erase; args?: EraseArgs } & BasicInput)
-		| ({ verb: Verb.Fetch; args?: FetchArgs } & BasicInput)
 		| ({ verb: Verb.Fill; args?: FillArgs } & BasicInput)
 		| ({ verb: Verb.Filter; args?: FilterArgs } & BasicInput)
 		| ({ verb: Verb.Fold; args?: FoldArgs } & BasicInput)

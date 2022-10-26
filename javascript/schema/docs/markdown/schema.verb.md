@@ -20,9 +20,11 @@ export declare enum Verb
 |  Boolean | <code>&quot;boolean&quot;</code> |  |
 |  Concat | <code>&quot;concat&quot;</code> |  |
 |  Convert | <code>&quot;convert&quot;</code> |  |
+|  Decode | <code>&quot;decode&quot;</code> |  |
 |  Dedupe | <code>&quot;dedupe&quot;</code> |  |
 |  Derive | <code>&quot;derive&quot;</code> |  |
 |  Difference | <code>&quot;difference&quot;</code> |  |
+|  Encode | <code>&quot;encode&quot;</code> |  |
 |  Erase | <code>&quot;erase&quot;</code> |  |
 |  Fetch | <code>&quot;fetch&quot;</code> |  |
 |  Fill | <code>&quot;fill&quot;</code> |  |

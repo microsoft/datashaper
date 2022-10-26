@@ -26,7 +26,17 @@ const groups = [
 	},
 	{
 		label: 'Transform column',
-		verbs: ['bin', 'binarize', 'convert', 'erase', 'fill', 'impute', 'recode'],
+		verbs: [
+			'bin',
+			'binarize',
+			'convert',
+			'decode',
+			'encode',
+			'erase',
+			'fill',
+			'impute',
+			'recode',
+		],
 	},
 	{
 		label: 'Combine columns',

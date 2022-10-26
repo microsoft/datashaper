@@ -19,7 +19,6 @@ export const Template: ComponentStory<typeof ArqueroDetailsList> = (
 			style={{
 				width: 1000,
 				height: 600,
-				border: '1px solid orange',
 			}}
 		>
 			<ArqueroDetailsList {...args} table={companies2} metadata={metadata} />

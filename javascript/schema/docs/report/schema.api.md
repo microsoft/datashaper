@@ -4,6 +4,8 @@
 
 ```ts
 
+import Ajv from 'ajv';
+
 // Warning: (ae-missing-release-tag) "AggregateArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -118,6 +120,18 @@ export interface CodebookSchema extends ResourceSchema {
     fields: Field[];
 }
 
+// Warning: (ae-missing-release-tag) "CodebookStrategy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum CodebookStrategy {
+    // (undocumented)
+    DataTypeAndMapping = "data type and mapping",
+    // (undocumented)
+    DataTypeOnly = "data type only",
+    // (undocumented)
+    MappingOnly = "mapping only"
+}
+
 // Warning: (ae-missing-release-tag) "Constraints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -159,6 +173,11 @@ export function createDataPackageSchemaObject(input: FactoryInput<DataPackageSch
 //
 // @public (undocumented)
 export function createDataTableSchemaObject(input: FactoryInput<DataTableSchema>): DataTableSchema;
+
+// Warning: (ae-missing-release-tag) "createSchemaValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createSchemaValidator(): Ajv;
 
 // Warning: (ae-missing-release-tag) "createWorkflowSchemaObject" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -305,6 +324,16 @@ export interface DualInput extends BasicInput {
         source: PortBinding;
         other: PortBinding;
     };
+}
+
+// Warning: (ae-missing-release-tag) "EncodeDecodeArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface EncodeDecodeArgs {
+    // (undocumented)
+    codebook: CodebookSchema;
+    // (undocumented)
+    strategy: CodebookStrategy;
 }
 
 // Warning: (ae-missing-release-tag) "EraseArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -613,7 +642,6 @@ export interface NamedOutputPortBinding extends NamedPortBinding {
 // @public
 export interface NamedPortBinding {
     node: string;
-    output?: string;
 }
 
 // Warning: (ae-missing-release-tag) "NumericComparisonOperator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -833,11 +861,14 @@ export type Step = StepJsonCommon & (({
 } & BasicInput) | ({
     verb: Verb.Difference;
 } & VariadicInput) | ({
+    verb: Verb.Decode;
+    args?: EncodeDecodeArgs;
+} & BasicInput) | ({
+    verb: Verb.Encode;
+    args?: EncodeDecodeArgs;
+} & BasicInput) | ({
     verb: Verb.Erase;
     args?: EraseArgs;
-} & BasicInput) | ({
-    verb: Verb.Fetch;
-    args?: FetchArgs;
 } & BasicInput) | ({
     verb: Verb.Fill;
     args?: FillArgs;
@@ -1016,11 +1047,15 @@ export enum Verb {
     // (undocumented)
     Convert = "convert",
     // (undocumented)
+    Decode = "decode",
+    // (undocumented)
     Dedupe = "dedupe",
     // (undocumented)
     Derive = "derive",
     // (undocumented)
     Difference = "difference",
+    // (undocumented)
+    Encode = "encode",
     // (undocumented)
     Erase = "erase",
     // (undocumented)

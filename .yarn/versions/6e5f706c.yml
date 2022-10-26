@@ -1,0 +1,3 @@
+releases:
+  "@datashaper/react": minor
+  "@datashaper/webapp": patch

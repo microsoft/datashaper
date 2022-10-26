@@ -48,6 +48,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		const { onSelectOriginalTable, onSelectLatest } = useTableHandlers(
 			workflow,
 			steps,
+			order,
 			onSelect,
 		)
 
@@ -90,9 +91,8 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 						const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
 						return (
 							<CollapsiblePanel
-								key={stepIndex}
+								key={step.id}
 								styles={collapsiblePanelStyles}
-								expandsWithIcon
 								onHeaderClick={() => onSelect?.(step.id)}
 								onRenderHeader={() =>
 									onRenderHeader(step, stepIndex, styles?.stepHeaders)
@@ -101,7 +101,6 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 								<TableTransform
 									hideInput
 									hideOutput
-									key={stepIndex}
 									step={step}
 									index={stepIndex}
 									workflow={workflow}

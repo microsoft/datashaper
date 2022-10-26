@@ -77,7 +77,7 @@ const StatCell: React.FC<{ name: string; value?: number }> = ({
 	name,
 	value,
 }) => {
-	return value !== undefined ? (
+	return value != null ? (
 		<div
 			style={{
 				height: STATS_HEADER_ITEM_HEIGHT,

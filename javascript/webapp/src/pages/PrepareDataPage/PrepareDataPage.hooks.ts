@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ToolPanelProps } from '@datashaper/react'
 import {
 	useHeaderCommandBarDefaults,
 	useWorkflowSteps,
@@ -11,6 +10,7 @@ import type { TableContainer } from '@datashaper/tables'
 import { introspect } from '@datashaper/tables'
 import { renameDuplicatedFileName } from '@datashaper/utilities'
 import type { Workflow } from '@datashaper/workflow'
+import type { ToolPanelProps } from '@essex/components'
 import type { ICommandBarProps } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -26,8 +26,8 @@ export function useTables(setSelectedTableId: (id: string) => void): {
 			if (update.length > 0) {
 				const map = new Map<string, number>()
 				const allTables = [...tables, ...update].map(table => {
-					if (!table.metadata) {
-						table.metadata = introspect(table.table!, true)
+					if (table.table != null && !table.metadata) {
+						table.metadata = introspect(table.table, true)
 					}
 					return table
 				})

@@ -16,6 +16,5 @@ export interface NamedPortBinding
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [node](./schema.namedportbinding.node.md) |  | string | The id of the node to bind to |
-|  [output?](./schema.namedportbinding.output.md) |  | string | <i>(Optional)</i> The named output of the node to bind with. If not defined, this will be the default output "target" |
+|  [node](./schema.namedportbinding.node.md) |  | string | The id of the input node to bind to |
 

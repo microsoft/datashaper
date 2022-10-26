@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
 import type { IColumn, IDropdownOption } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
 import { memo, useCallback, useState } from 'react'
 
+import { ArqueroDetailsList } from '../../../../components/ArqueroDetailsList/ArqueroDetailsList.js'
+import { ArqueroTableHeader } from '../../../../components/ArqueroTableHeader/ArqueroTableHeader.js'
 import { useColumns, useFarCommandBar } from './Table.hooks.js'
 import { Container, TableContainer } from './Table.styles.js'
 import type { TableProps } from './Table.types.js'

@@ -8,7 +8,7 @@ import { container } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 import type { StepFunction } from '../../dataflow/index.js'
-import { BaseVariadicNode, StepNode } from '../../dataflow/index.js'
+import { BaseNode, StepNode } from '../../dataflow/index.js'
 import type { Maybe } from '../../primitives.js'
 import { set } from './sets.js'
 
@@ -19,7 +19,7 @@ export type ColumnTableTransformer<T> = (
 	args: T,
 ) => ColumnTable
 
-export class SetOperationNode<Args = unknown> extends BaseVariadicNode<
+export class SetOperationNode<Args = unknown> extends BaseNode<
 	TableContainer,
 	Args
 > {
@@ -46,27 +46,20 @@ export function stepVerbFactory<Args>(
 	columnTableStep: ColumnTableStep<Args>,
 ): (id: string) => StepNode<TableContainer, Args> {
 	return (id: string) => {
-		const step: TableContainerStep<Args> = (
+		const step: TableContainerStep<Args> = function step(
+			this: StepNode<TableContainer, Args>,
 			source: TableContainer<unknown>,
 			args: Args,
-		) => {
+		) {
 			if (source.table) {
-				let result: ColumnTable | Promise<ColumnTable> | undefined
+				let result: ColumnTable | undefined
 				try {
 					result = columnTableStep(source.table, args)
 				} catch (err) {
 					console.warn('error processing step', err)
+					this.emitError(err)
 				}
-
-				// handle promise-based result
-				if ((result as any)?.then) {
-					return (result as Promise<Maybe<ColumnTable>>).then(t =>
-						container(id, t),
-					)
-				} else {
-					// handle synchronous result
-					return container(id, result as Maybe<ColumnTable>)
-				}
+				return container(id, result as Maybe<ColumnTable>)
 			} else {
 				// handle source.table ==null
 				return container(id)
@@ -77,6 +70,7 @@ export function stepVerbFactory<Args>(
 		return result
 	}
 }
+
 export function setOperationNodeFactory(
 	op: SetOp,
 ): (id: string) => SetOperationNode {

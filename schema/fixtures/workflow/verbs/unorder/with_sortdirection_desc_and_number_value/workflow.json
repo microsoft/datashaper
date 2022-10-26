@@ -1,20 +1,24 @@
 {
-	"$schema": "https://microsoft.github.io/datashaper/schema/workflow.json",
+	"$schema": "https://microsoft.github.io/datashaper/schema/workflow/v2.json",
 	"steps": [
 		{
 			"id": "ordered",
 			"verb": "orderby",
 			"input": "table7",
 			"args": {
-				"orders": [{ "column": "quantity", "direction": "desc" }]
+				"orders": [
+					{
+						"column": "quantity",
+						"direction": "desc"
+					}
+				]
 			},
 			"output": "ordered"
 		},
 		{
 			"id": "expected",
 			"verb": "unorder",
-			"input": "ordered",
-			"id": "expected"
+			"input": "ordered"
 		}
 	],
 	"input": ["table7"],

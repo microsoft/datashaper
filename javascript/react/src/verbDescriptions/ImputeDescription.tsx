@@ -17,7 +17,7 @@ export const ImputeDescription: React.FC<StepDescriptionProps<ImputeArgs>> =
 			return [
 				{
 					before: `impute column`,
-					value: args.column !== undefined ? args.column : '',
+					value: args.column ?? '',
 				},
 				{
 					before: 'with value',

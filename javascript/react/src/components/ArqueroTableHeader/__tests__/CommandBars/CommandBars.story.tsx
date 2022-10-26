@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ArqueroTableHeader as ArqueroTableHeaderComponent } from '@datashaper/react'
 import { Checkbox, CommandBar } from '@fluentui/react'
 import type { ComponentStory } from '@storybook/react'
 import styled from 'styled-components'
 
+import { ArqueroTableHeader } from '../../ArqueroTableHeader.js'
 import type { ArqueroTableHeaderProps } from '../../ArqueroTableheader.types.js'
 import {
 	useCheckboxes,
@@ -14,9 +14,10 @@ import {
 	useFarCommandBar,
 } from './CommandBars.hooks.js'
 
-export const CommandBarsStory: ComponentStory<
-	typeof ArqueroTableHeaderComponent
-> = (args: ArqueroTableHeaderProps, { loaded: { stocks } }: any) => {
+export const CommandBarsStory: ComponentStory<typeof ArqueroTableHeader> = (
+	args: ArqueroTableHeaderProps,
+	{ loaded: { stocks } }: any,
+) => {
 	const commandBar = useCommandBar()
 	const farCommandBar = useFarCommandBar()
 	const { near, far, checkboxes } = useCheckboxes()
@@ -27,7 +28,7 @@ export const CommandBarsStory: ComponentStory<
 					<Checkbox key={checkbox.label} {...checkbox} />
 				))}
 			</Checkboxes>
-			<ArqueroTableHeaderComponent
+			<ArqueroTableHeader
 				{...args}
 				table={stocks}
 				commandBar={near ? <CommandBar {...commandBar} /> : undefined}

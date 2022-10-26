@@ -23,8 +23,7 @@ export const TableList: React.FC<TableListProps> = memo(function TablesList({
 				return (
 					<TableCard
 						tableName={table.id}
-						index={index}
-						key={index}
+						key={table.id ?? index}
 						isSelected={isSelected}
 						onSelect={onSelect}
 					/>

@@ -8,6 +8,7 @@
 
 |  Function | Description |
 |  --- | --- |
+|  [applyCodebook(table, codebook, strategy, dataTableSchema)](./tables.applycodebook.md) |  |
 |  [coerce(value, dataType)](./tables.coerce.md) | Ensure an incoming value matches its datatype. For example, if user input is from a textfield, parse it. |
 |  [columnIndexesWithZeros(table)](./tables.columnindexeswithzeros.md) | Returns a list of column indices that contain at least one 0. |
 |  [columnNamesWithZeros(table)](./tables.columnnameswithzeros.md) | Returns a list of column names that contain at least one 0. |
@@ -48,6 +49,7 @@
 |  [sliceTable(table, offset, limit)](./tables.slicetable.md) | Safely applies slicing args to a table |
 |  [stats(table, columns)](./tables.stats.md) | Generates detailed column stats for a table. |
 |  [typeGuesserFactory(options)](./tables.typeguesserfactory.md) |  |
+|  [unapplyCodebook(table, codebook, strategy, dataTableSchema)](./tables.unapplycodebook.md) |  |
 
 ## Interfaces
 

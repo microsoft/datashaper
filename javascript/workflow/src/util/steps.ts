@@ -7,7 +7,7 @@ import cloneDeep from 'lodash-es/cloneDeep.js'
 import difference from 'lodash-es/difference.js'
 import intersection from 'lodash-es/intersection.js'
 
-import type { Step } from '../engine/index.js'
+import type { Step } from '../resources/index.js'
 import { argsHasOutputColumn } from './args.js'
 import { nextColumnName } from './workflowSuggestion.js'
 
@@ -67,6 +67,8 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	dedupe: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
 	derive: [Tags.InputTable, Tags.OutputColumn],
 	difference: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
+	decode: [Tags.InputTable],
+	encode: [Tags.InputTable],
 	erase: [Tags.InputTable, Tags.RowModifying, Tags.InputColumn],
 	fetch: [],
 	fill: [Tags.InputTable, Tags.OutputColumn],

@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { downloadCommand } from '@datashaper/react'
 import type { IColumn, ICommandBarProps } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
+import { downloadCommand } from '../../../../components/ArqueroTableHeader/index.js'
 import { useHeaderCommandBarDefaults } from '../../../../hooks/useHeaderCommandBarDefaults.js'
 import type { ColumnConfigMap } from './Table.types.js'
 

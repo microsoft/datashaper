@@ -16,12 +16,14 @@ export interface Node<T, Config = unknown>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [bindingsCount](./workflow.node_2.bindingscount.md) | <code>readonly</code> | number | The number of bound inputs |
+|  [bindings](./workflow.node_2.bindings.md) | <code>readonly</code> | [NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt;\[\] | Gets all input bindings |
+|  [bindings$](./workflow.node_2.bindings_.md) | <code>readonly</code> | Observable&lt;[NodeBinding](./workflow.nodebinding.md)<!-- -->&lt;T&gt;\[\]&gt; | An observable of the input bindings |
 |  [config](./workflow.node_2.config.md) |  | [Maybe](./workflow.maybe.md)<!-- -->&lt;Config&gt; | The node's mutable configuration |
+|  [config$](./workflow.node_2.config_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;Config&gt;&gt; | A configuration observable |
 |  [id](./workflow.node_2.id.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md) | A unique identifier for this node |
 |  [inputs](./workflow.node_2.inputs.md) | <code>readonly</code> | [SocketName](./workflow.socketname.md)<!-- -->\[\] | Named input sockets |
-|  [onBindingsChanged](./workflow.node_2.onbindingschanged.md) | <code>readonly</code> | Observable&lt;void&gt; |  |
-|  [outputs](./workflow.node_2.outputs.md) | <code>readonly</code> | [SocketName](./workflow.socketname.md)<!-- -->\[\] | Named output sockets, in addition to the implicit default output socket |
+|  [output](./workflow.node_2.output.md) | <code>readonly</code> | [Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt; | Gets a current output value |
+|  [output$](./workflow.node_2.output_.md) | <code>readonly</code> | Observable&lt;[Maybe](./workflow.maybe.md)<!-- -->&lt;T&gt;&gt; | Gets the output value stream |
 
 ## Methods
 
@@ -29,9 +31,5 @@ export interface Node<T, Config = unknown>
 |  --- | --- |
 |  [bind(binding)](./workflow.node_2.bind.md) | Binds an input socket to an upstream node |
 |  [binding(input)](./workflow.node_2.binding.md) | Retrieves an existing input binding by id |
-|  [bindings()](./workflow.node_2.bindings.md) | Gets all input bindings |
-|  [bindVariadic(bindings)](./workflow.node_2.bindvariadic.md) | Binds variadic innput |
-|  [output(name)](./workflow.node_2.output.md) | Gets an output socket |
-|  [outputValue(name)](./workflow.node_2.outputvalue.md) | Gets a current output value |
 |  [unbind(name)](./workflow.node_2.unbind.md) | Clear an input socket |
 

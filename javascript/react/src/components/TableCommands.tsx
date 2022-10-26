@@ -26,10 +26,12 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 		inputTable,
 		workflow,
 		onAddStep,
+		metadata,
 		onRemoveStep,
 		selectedColumn,
 		color,
 		background,
+		commandBarProps,
 	}) {
 		const [step, setStep] = useState<Step | undefined>()
 		const [index, setIndex] = useState<number>()
@@ -90,19 +92,23 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			!selectedColumn,
 			color,
 			background,
+			commandBarProps,
 		)
 		const tableCommands = useTableCommands(
 			onCallStep,
 			allTablesLength <= 1,
 			color,
 			background,
+			commandBarProps,
 		)
 		const undoCommands = useUndoCommands(
 			onUndoStep,
 			workflow.length < 1,
 			color,
 			background,
+			commandBarProps,
 		)
+
 		return (
 			<Container>
 				<VerbsContainer>
@@ -120,6 +126,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 						index={index ?? workflow.length}
 						onTransformRequested={onTransformRequested}
 						workflow={workflow}
+						metadata={metadata}
 						onDismiss={dismissModal}
 						showGuidance
 					/>

@@ -15,9 +15,7 @@ export declare class DefaultGraph<T> implements Graph<T>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [inputs](./workflow.defaultgraph.inputs.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] |  |
-|  [nodes](./workflow.defaultgraph.nodes.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] |  |
-|  [outputs](./workflow.defaultgraph.outputs.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] |  |
+|  [nodes](./workflow.defaultgraph.nodes.md) | <code>readonly</code> | [NodeId](./workflow.nodeid.md)<!-- -->\[\] | Get a list of NodeIDs |
 
 ## Methods
 

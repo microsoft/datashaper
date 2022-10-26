@@ -4,12 +4,9 @@
 	"title": "NHEFS",
 	"profile": "datatable",
 	"description": "File parsing options for the nhefs.csv source file. Note that the defaults are sufficient.",
-	"path": "nhefs.csv",
+	"path": "https://raw.githubusercontent.com/ainaimi/SER_2018/master/nhefs.csv",
 	"homepage": "https://wwwn.cdc.gov/nchs/nhanes/nhefs/default.aspx/",
 	"format": "csv",
 	"layout": "micro",
-	"sources": [
-		"https://raw.githubusercontent.com/ainaimi/SER_2018/master/nhefs.csv",
-		"nhefs/codebook.json"
-	]
+	"sources": ["nhefs/codebook.json"]
 }

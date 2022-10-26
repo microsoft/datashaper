@@ -5,17 +5,16 @@
 import { DocumentCardTitle, TooltipHost } from '@fluentui/react'
 import { memo } from 'react'
 
-import { Card,icons, PreviewIcon, styles } from './TableCard.styles.js'
+import { Card, icons, PreviewIcon, styles } from './TableCard.styles.js'
 import type { TableCardProps } from './TableCard.types.js'
 
 export const TableCard: React.FC<TableCardProps> = memo(function TableCard({
-	index,
 	tableName,
 	isSelected,
 	onSelect,
 }) {
 	return (
-		<TooltipHost key={index} content={'Preview table'}>
+		<TooltipHost content={'Preview table'}>
 			<Card
 				isSelected={isSelected(tableName)}
 				onClick={() => onSelect?.(tableName)}

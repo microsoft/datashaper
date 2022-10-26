@@ -9,16 +9,16 @@ Verifies that an input socket name is known
 <b>Signature:</b>
 
 ```typescript
-protected verifyInputSocketName(name: SocketName): void;
+protected verifyInputSocketName(name?: SocketName): SocketName;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  name | [SocketName](./workflow.socketname.md) | The input socket name |
+|  name | [SocketName](./workflow.socketname.md) | <i>(Optional)</i> The input socket name |
 
 <b>Returns:</b>
 
-void
+[SocketName](./workflow.socketname.md)
 

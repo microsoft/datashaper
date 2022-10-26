@@ -4,7 +4,7 @@
  */
 import type { Observable } from 'rxjs'
 
-import type { Maybe } from '../primitives.js'
+import type { Maybe } from '../../primitives.js'
 import { BaseNode } from './BaseNode.js'
 
 export class ObservableNode<T> extends BaseNode<T, void> {

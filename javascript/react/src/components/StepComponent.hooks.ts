@@ -109,7 +109,7 @@ export function useInputColumnChanged(
 		(s, val) => {
 			s.args.column = val as string
 			s.args.dataType =
-				dataTable !== undefined
+				dataTable != null
 					? columnType(dataTable, val as string)
 					: DataType.Unknown
 		},

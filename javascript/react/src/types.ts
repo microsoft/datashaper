@@ -2,6 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type { TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
@@ -92,6 +93,11 @@ export interface StepComponentProps<T extends object | void | unknown = unknown>
 	 * but the input to the actual step is an intermediate table.
 	 */
 	input?: string
+
+	/**
+	 * TableMetadata
+	 */
+	metadata?: TableMetadata
 
 	/**
 	 * The optional output table name; this information isn't stored on the step, so it has to

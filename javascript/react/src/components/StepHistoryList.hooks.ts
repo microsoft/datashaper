@@ -5,16 +5,20 @@
 import type { Step, Workflow } from '@datashaper/workflow'
 import { useCallback, useState } from 'react'
 
+import { DisplayOrder } from '../enums.js'
 import { useModalState } from '../hooks/useModalState.js'
 
 export function useTableHandlers(
 	workflow: Workflow,
 	steps: Step[],
+	order: DisplayOrder | undefined,
 	onSelect?: (name: string) => void,
 ): {
 	onSelectOriginalTable: () => void
 	onSelectLatest: () => void
 } {
+	order = order ?? DisplayOrder.FirstOnTop
+
 	const onSelectOriginalTable = useCallback(() => {
 		if (workflow.inputNames.length > 0) {
 			const names = workflow.inputNames
@@ -25,9 +29,10 @@ export function useTableHandlers(
 		}
 	}, [workflow, onSelect])
 	const onSelectLatest = useCallback(() => {
-		const latestId = steps[0]?.id
+		const lastStepIdx = order === DisplayOrder.FirstOnTop ? steps.length - 1 : 0
+		const latestId = steps[lastStepIdx]?.id
 		latestId && onSelect?.(latestId)
-	}, [onSelect, steps])
+	}, [onSelect, steps, order])
 	return {
 		onSelectOriginalTable,
 		onSelectLatest,
@@ -53,7 +58,7 @@ export function useDeleteConfirm(onDelete?: (index: number) => void): {
 	)
 
 	const onConfirmDelete = useCallback(() => {
-		deleteIndex !== undefined && onDelete?.(deleteIndex)
+		deleteIndex != null && deleteIndex >= 0 && onDelete?.(deleteIndex)
 		hide()
 	}, [hide, deleteIndex, onDelete])
 

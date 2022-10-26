@@ -10,15 +10,9 @@ export type OutputPortBinding = string | NamedOutputPortBinding
  */
 export interface NamedPortBinding {
 	/**
-	 * The id of the node to bind to
+	 * The id of the input node to bind to
 	 */
 	node: string
-
-	/**
-	 * The named output of the node to bind with. If not defined, this will
-	 * be the default output "target"
-	 */
-	output?: string
 }
 
 /**
