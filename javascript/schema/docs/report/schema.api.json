@@ -6274,64 +6274,6 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!NamedOutputPortBinding:interface",
-          "docComment": "/**\n * An explicit workflow output\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface NamedOutputPortBinding extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "NamedPortBinding",
-              "canonicalReference": "@datashaper/schema!NamedPortBinding:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "NamedOutputPortBinding",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!NamedOutputPortBinding#name:member",
-              "docComment": "/**\n * The output table name\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "name: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "name",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
           "canonicalReference": "@datashaper/schema!NamedPortBinding:interface",
           "docComment": "/**\n * An explicit step input binding\n */\n",
           "excerptTokens": [
@@ -6807,36 +6749,6 @@
             }
           ],
           "extendsTokenRanges": []
-        },
-        {
-          "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/schema!OutputPortBinding:type",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare type OutputPortBinding = "
-            },
-            {
-              "kind": "Content",
-              "text": "string | "
-            },
-            {
-              "kind": "Reference",
-              "text": "NamedOutputPortBinding",
-              "canonicalReference": "@datashaper/schema!NamedOutputPortBinding:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "OutputPortBinding",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          }
         },
         {
           "kind": "Interface",
@@ -11056,22 +10968,8 @@
                   "text": "output: "
                 },
                 {
-                  "kind": "Reference",
-                  "text": "Array",
-                  "canonicalReference": "!Array:interface"
-                },
-                {
                   "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "OutputPortBinding",
-                  "canonicalReference": "@datashaper/schema!OutputPortBinding:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
+                  "text": "string[]"
                 },
                 {
                   "kind": "Content",
@@ -11084,7 +10982,7 @@
               "name": "output",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 5
+                "endIndex": 2
               }
             },
             {

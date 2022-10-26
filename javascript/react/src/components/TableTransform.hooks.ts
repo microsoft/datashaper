@@ -63,15 +63,13 @@ export function useStepOutputHandling(
 } {
 	const [output, setOutput] = useState<string>()
 	const [initialOutput, setInitialOutput] = useState<string>('')
-
-	const stepOutput = workflow.outputPorts.find(t => t.node === step?.id)
 	useEffect(
 		function useExistingOutputName() {
-			if (stepOutput?.name) {
-				setOutput(stepOutput.name)
+			if (step?.id && workflow.hasOutputName(step.id)) {
+				setOutput(step.id)
 			}
 		},
-		[stepOutput],
+		[workflow, step],
 	)
 
 	useEffect(

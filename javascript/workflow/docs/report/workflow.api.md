@@ -35,7 +35,6 @@ import type { LookupArgs } from '@datashaper/schema';
 import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
 import type { Named as Named_2 } from '@datashaper/schema';
-import type { NamedOutputPortBinding } from '@datashaper/schema';
 import type { NamedPortBinding } from '@datashaper/schema';
 import type { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
@@ -795,7 +794,7 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     addInputTable(table: TableContainer, id: string): void;
     // (undocumented)
     addInputTables(inputs: TableContainer[]): void;
-    addOutput(output: NamedOutputPortBinding): void;
+    addOutput(name: string): void;
     addStep(stepInput: StepInput): Step;
     // (undocumented)
     set defaultInput(source: TableObservable);
@@ -816,15 +815,9 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
     // (undocumented)
-    nodeOutput(nodeId: string): Maybe<Observable<Maybe<TableContainer>>>;
-    // (undocumented)
-    outputNameForNode(nodeId: string): string | undefined;
     get outputNames$(): Observable<string[]>;
+    // (undocumented)
     get outputNames(): string[];
-    // (undocumented)
-    get outputPorts$(): Observable<NamedOutputPortBinding[]>;
-    // (undocumented)
-    get outputPorts(): NamedOutputPortBinding[];
     read$(name?: string): Observable<Maybe<TableContainer>>;
     read(name?: string): Maybe<TableContainer>;
     // (undocumented)

@@ -686,7 +686,7 @@ export function useHandleFilesUpload(acceptedFileTypes: string[], handleCollecti
 // Warning: (ae-missing-release-tag) "useHandleStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHandleStepOutputChanged(workflow: Workflow): (step: Step, output: string | undefined) => void;
+export function useHandleStepOutputChanged(workflow: Workflow): (step: Step) => void;
 
 // Warning: (ae-missing-release-tag) "useHandleStepSave" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -736,12 +736,12 @@ export function useOnEditStep(setStep: (step: Step) => void, setStepIndex: (inde
 // Warning: (ae-missing-release-tag) "useOnSaveStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useOnSaveStep(workflow: Workflow): (step: Step, output: string | undefined, index: number | undefined) => void;
+export function useOnSaveStep(workflow: Workflow): (step: Step, index: number | undefined) => void;
 
 // Warning: (ae-missing-release-tag) "useOnUpdateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useOnUpdateStep(workflow: Workflow): (step: Step, output: string | undefined, index: number | undefined) => void;
+export function useOnUpdateStep(workflow: Workflow): (step: Step, index: number | undefined) => void;
 
 // Warning: (ae-missing-release-tag) "useReifiedTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -771,7 +771,7 @@ export function useSortHandling(allowSorting: boolean, onColumnHeaderClick?: Col
 // Warning: (ae-missing-release-tag) "useStepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useStepOutputs(workflow: Workflow, defaultOutputName?: (index: number) => string): Array<string | undefined>;
+export function useStepOutputs(workflow: Workflow): Array<string | undefined>;
 
 // Warning: (ae-missing-release-tag) "useStripedRowsRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -7953,7 +7953,7 @@
             },
             {
               "kind": "Content",
-              "text": ", output: string | undefined) => void"
+              "text": ") => void"
             },
             {
               "kind": "Content",
@@ -8543,7 +8543,7 @@
             },
             {
               "kind": "Content",
-              "text": ", output: string | undefined, index: number | undefined) => void"
+              "text": ", index: number | undefined) => void"
             },
             {
               "kind": "Content",
@@ -8597,7 +8597,7 @@
             },
             {
               "kind": "Content",
-              "text": ", output: string | undefined, index: number | undefined) => void"
+              "text": ", index: number | undefined) => void"
             },
             {
               "kind": "Content",
@@ -9040,14 +9040,6 @@
             },
             {
               "kind": "Content",
-              "text": ", defaultOutputName?: "
-            },
-            {
-              "kind": "Content",
-              "text": "(index: number) => string"
-            },
-            {
-              "kind": "Content",
               "text": "): "
             },
             {
@@ -9065,8 +9057,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 7
+            "startIndex": 3,
+            "endIndex": 5
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -9078,14 +9070,6 @@
                 "endIndex": 2
               },
               "isOptional": false
-            },
-            {
-              "parameterName": "defaultOutputName",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": true
             }
           ],
           "name": "useStepOutputs"

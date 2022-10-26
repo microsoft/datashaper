@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ResourceSchema } from '../datapackage/ResourceSchema.js'
-import type { OutputPortBinding } from './bindings.js'
 import type { Step } from './Step.js'
 
 /**
@@ -24,5 +23,5 @@ export interface WorkflowSchema extends ResourceSchema {
 	/**
 	 * The output bindings
 	 */
-	output: Array<OutputPortBinding>
+	output: string[]
 }

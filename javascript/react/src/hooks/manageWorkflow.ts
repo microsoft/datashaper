@@ -30,10 +30,7 @@ export function useOnDuplicateStep(
 			const outputTable = table ?? workflow?.read(step.id)?.table
 			const clonedStep = cloneStep(step, outputTable?.columnNames())
 			clonedStep.id = ''
-			onSave?.(
-				clonedStep,
-				createTableName(workflow.outputNameForNode(step.id) ?? step.id),
-			)
+			onSave?.(clonedStep, createTableName(step.id))
 		},
 		[onSave, workflow, table, createTableName],
 	)
@@ -88,14 +85,14 @@ export function useOnCreateStep(
  */
 export function useOnSaveStep(
 	workflow: Workflow,
-): (step: Step, output: string | undefined, index: number | undefined) => void {
+): (step: Step, index: number | undefined) => void {
 	const updateStep = useHandleStepSave(workflow)
 	const updateStepOutput = useHandleStepOutputChanged(workflow)
 
 	return useCallback(
-		(step: Step, output: string | undefined, index: number | undefined) => {
+		(step: Step, index: number | undefined) => {
 			const stepResult = updateStep(step, index)
-			updateStepOutput(stepResult, output)
+			updateStepOutput(stepResult)
 		},
 		[updateStepOutput, updateStep],
 	)
@@ -107,14 +104,14 @@ export function useOnSaveStep(
  */
 export function useOnUpdateStep(
 	workflow: Workflow,
-): (step: Step, output: string | undefined, index: number | undefined) => void {
+): (step: Step, index: number | undefined) => void {
 	const updateStep = useHandleStepSave(workflow)
 	const updateStepOutput = useHandleStepOutputChanged(workflow)
 
 	return useCallback(
-		(step: Step, output: string | undefined, index: number | undefined) => {
+		(step: Step, index: number | undefined) => {
 			const stepResult = updateStep(step, index)
-			updateStepOutput(stepResult, output)
+			updateStepOutput(stepResult)
 		},
 		[updateStepOutput, updateStep],
 	)
