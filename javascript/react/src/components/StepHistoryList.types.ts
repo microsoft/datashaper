@@ -25,6 +25,6 @@ export interface StepHistoryListProps {
 	showSelectButtons?: boolean
 	onDelete?: (index: number) => void
 	onSelect?: (name: string) => void
-	onSave?: (step: Step, output: string | undefined, index?: number) => void
+	onSave?: (step: Step, index?: number) => void
 	styles?: StepHistoryStyles
 }

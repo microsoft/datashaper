@@ -22,7 +22,7 @@ export interface TableTransformProps
 |  [index](./react.tabletransformprops.index.md) |  | number | The step index |
 |  [metadata?](./react.tabletransformprops.metadata.md) |  | TableMetadata | <i>(Optional)</i> |
 |  [onDelete?](./react.tabletransformprops.ondelete.md) |  | (index: number) =&gt; void | <i>(Optional)</i> |
-|  [onTransformRequested?](./react.tabletransformprops.ontransformrequested.md) |  | (step: Step, output: string \| undefined, index?: number) =&gt; void | <i>(Optional)</i> Callback fired when the step is configured and "run" is clicked, indicating the application should execute the contructed/edited step. |
+|  [onTransformRequested?](./react.tabletransformprops.ontransformrequested.md) |  | (step: Step, index?: number) =&gt; void | <i>(Optional)</i> Callback fired when the step is configured and "run" is clicked, indicating the application should execute the contructed/edited step. |
 |  [onVerbChange?](./react.tabletransformprops.onverbchange.md) |  | (verb: Verb) =&gt; void | <i>(Optional)</i> |
 |  [showGuidance?](./react.tabletransformprops.showguidance.md) |  | boolean | <i>(Optional)</i> |
 |  [showGuidanceButton?](./react.tabletransformprops.showguidancebutton.md) |  | boolean | <i>(Optional)</i> |

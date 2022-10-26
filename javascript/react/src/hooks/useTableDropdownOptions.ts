@@ -4,7 +4,9 @@
  */
 import type { Workflow } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
-import { useEffect, useMemo, useState } from 'react'
+import { useObservableState } from 'observable-hooks'
+import { useMemo } from 'react'
+import { from } from 'rxjs'
 
 import { getSimpleDropdownOptions } from './useSimpleDropdownOptions.js'
 
@@ -45,22 +47,9 @@ export function useTableDropdownOptions(
  * @returns
  */
 export function useInputTableNames(workflow?: Workflow): string[] {
-	const [tables, setTables] = useState<string[]>(() =>
-		getTableOptions(workflow),
-	)
-
-	// Listen to input table changes
-	useEffect(
-		() =>
-			workflow?.onChange(() => {
-				setTables(getTableOptions(workflow))
-			}),
+	const observable = useMemo(
+		() => workflow?.inputNames$ ?? from([]),
 		[workflow],
 	)
-
-	return tables
-}
-
-function getTableOptions(workflow?: Workflow): string[] {
-	return workflow?.inputNames ?? []
+	return useObservableState(observable, () => [])
 }

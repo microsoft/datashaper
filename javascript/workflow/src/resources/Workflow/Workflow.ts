@@ -2,12 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type {
-	NamedOutputPortBinding,
-	NamedPortBinding,
-	OutputPortBinding,
-	WorkflowSchema,
-} from '@datashaper/schema'
+import type { NamedPortBinding, WorkflowSchema } from '@datashaper/schema'
 import {
 	createSchemaValidator,
 	createWorkflowSchemaObject,
@@ -15,7 +10,7 @@ import {
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
-import { BehaviorSubject, map, of } from 'rxjs'
+import { BehaviorSubject, map, mergeWith, of } from 'rxjs'
 
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
@@ -26,7 +21,7 @@ import { Resource } from '../Resource.js'
 import type { SchemaResource } from '../types.js'
 import { createNode } from './createNode.js'
 import { readStep } from './readStep.js'
-import type { Step, StepInput,TableExportOptions } from './types.js'
+import type { Step, StepInput, TableExportOptions } from './types.js'
 
 const DEFAULT_INPUT = '__DEFAULT_INPUT__'
 
@@ -44,10 +39,14 @@ export class Workflow
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
 	// Workflow Data Fields
 	private readonly _steps = new BehaviorSubject<Step[]>([])
+	private readonly _numSteps = this._steps.pipe(map(steps => steps.length))
 	private readonly _inputNames = new BehaviorSubject<string[]>([])
-	private readonly _outputPorts = new BehaviorSubject<NamedOutputPortBinding[]>(
-		[],
-	)
+	private readonly _outputNames = new BehaviorSubject<string[]>([])
+	private readonly _allTableNames = this._outputNames
+		.pipe(mergeWith(this._inputNames))
+		.pipe(
+			map(() => unique(this._outputNames.value.concat(this._inputNames.value))),
+		)
 
 	// The dataflow graph
 	private readonly _graph = new DefaultGraph<TableContainer>()
@@ -156,6 +155,23 @@ export class Workflow
 	// #endregion
 
 	// #region Inputs
+
+	/**
+	 * Get an observable of the names of all declared inputs and outputs.
+	 * This does not include the default input or default output tables.
+	 */
+	public get allTableNames$(): Observable<string[]> {
+		return this._allTableNames
+	}
+
+	/**
+	 * Get the names of all declared inputs and outputs.
+	 * This does not include the default input or default output tables.
+	 */
+	public get allTableNames(): string[] {
+		return unique(this.inputNames.concat(this.outputNames))
+	}
+
 	public get inputNames(): string[] {
 		return this._inputNames.value
 	}
@@ -286,38 +302,24 @@ export class Workflow
 		return derivedName
 	}
 
-	public get outputPorts(): NamedOutputPortBinding[] {
-		return this._outputPorts.value
-	}
-
-	public get outputPorts$(): Observable<NamedOutputPortBinding[]> {
-		return this._outputPorts
-	}
-
-	/**
-	 * Gets the output table names
-	 */
 	public get outputNames(): string[] {
-		return this.outputPorts.map(p => p.name)
+		return this._outputNames.value
 	}
 
-	/**
-	 * Gets the output table names
-	 */
 	public get outputNames$(): Observable<string[]> {
-		return this._outputPorts.pipe(map(ports => ports.map(p => p.name)))
+		return this._outputNames
 	}
 
 	/**
 	 * Add an output binding
 	 * @param binding - The output binding
 	 */
-	public addOutput(output: NamedOutputPortBinding): void {
-		if (this.hasOutputName(output.name) || this.hasInputName(output.name)) {
+	public addOutput(name: string): void {
+		if (this.hasOutputName(name) || this.hasInputName(name)) {
 			throw new Error('new output name must be unique among outputs & inputs')
 		}
-		this._outputPorts.next([...this._outputPorts.value, output])
-		this.observeOutput(output)
+		this._outputNames.next([...this._outputNames.value, name])
+		this.observeOutput(name)
 		this._onChange.next()
 	}
 
@@ -326,20 +328,9 @@ export class Workflow
 	 * @param name - the output name to remove
 	 */
 	public removeOutput(name: string): void {
-		this._outputPorts.next(this.outputPorts.filter(t => t.name !== name))
+		this._outputNames.next(this.outputNames.filter(t => t !== name))
 		this._tables.delete(name)
 		this._onChange.next()
-	}
-
-	public nodeOutput(nodeId: string): Maybe<Observable<Maybe<TableContainer>>> {
-		const output = this.outputNameForNode(nodeId)
-		if (output) {
-			return this.read$(output)
-		}
-	}
-
-	public outputNameForNode(nodeId: string): string | undefined {
-		return this.outputPorts.find(def => def.node === nodeId)?.name
 	}
 
 	// #endregion
@@ -358,7 +349,7 @@ export class Workflow
 	}
 
 	public get length$(): Observable<number> {
-		return this._steps.pipe(map(steps => steps.length))
+		return this._numSteps
 	}
 
 	/**
@@ -403,8 +394,8 @@ export class Workflow
 		}
 
 		// Remove step outputs from the configuration
-		const stepOutputs = this.outputPorts.filter(o => o.node === node.id)
-		stepOutputs.forEach(o => this.removeOutput(o.node))
+		const stepOutputs = this.outputNames.filter(o => o === node.id)
+		stepOutputs.forEach(o => this.removeOutput(o))
 
 		// Remove the step from the graph
 		this._graph.remove(step.id)
@@ -540,7 +531,7 @@ export class Workflow
 		return createWorkflowSchemaObject({
 			...super.toSchema(),
 			input: [...this.inputNames],
-			output: [...this.outputPorts],
+			output: [...this.outputNames],
 			steps: [...this.steps] as any,
 		})
 	}
@@ -558,7 +549,7 @@ export class Workflow
 			})
 			this._steps.next(newSteps ?? [])
 			this._inputNames.next(unique(schema?.input ?? []))
-			this._outputPorts.next(schema?.output?.map(resolveOutput) ?? [])
+			this._outputNames.next(schema?.output ?? [])
 		}
 
 		const syncWorkflowStateIntoGraph = () => {
@@ -567,7 +558,7 @@ export class Workflow
 			for (const step of this.steps) {
 				this.addWorkflowStepToGraph(step)
 			}
-			for (const port of this.outputPorts.values()) {
+			for (const port of this.outputNames.values()) {
 				this.observeOutput(port)
 			}
 		}
@@ -581,7 +572,7 @@ export class Workflow
 		}
 	}
 
-	private observeOutput({ name, node: nodeId }: NamedOutputPortBinding) {
+	private observeOutput(name: string) {
 		const lazyCreateOutputTable = () => {
 			if (!this._tables.has(name)) {
 				this._tables.set(
@@ -593,7 +584,7 @@ export class Workflow
 		}
 
 		const outputTable = lazyCreateOutputTable()
-		const sub = this.getNode(nodeId).output$.subscribe(it =>
+		const sub = this.getNode(name).output$.subscribe(it =>
 			outputTable.next(it && { ...it, id: name }),
 		)
 		this._disposables.push(() => sub.unsubscribe())
@@ -612,14 +603,6 @@ export class Workflow
 		}
 		const validate = Workflow.validator.getSchema($schema)
 		return !!validate?.(workflowJson)
-	}
-}
-
-function resolveOutput(output: OutputPortBinding): NamedOutputPortBinding {
-	if (typeof output === 'string') {
-		return { name: output as string, node: output as string }
-	} else {
-		return output as NamedOutputPortBinding
 	}
 }
 

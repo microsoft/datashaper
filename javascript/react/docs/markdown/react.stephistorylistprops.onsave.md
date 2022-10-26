@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-onSave?: (step: Step, output: string | undefined, index?: number) => void;
+onSave?: (step: Step, index?: number) => void;
 ```

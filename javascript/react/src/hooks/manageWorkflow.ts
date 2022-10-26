@@ -30,10 +30,7 @@ export function useOnDuplicateStep(
 			const outputTable = table ?? workflow?.read(step.id)?.table
 			const clonedStep = cloneStep(step, outputTable?.columnNames())
 			clonedStep.id = ''
-			onSave?.(
-				clonedStep,
-				createTableName(workflow.outputNameForNode(step.id) ?? step.id),
-			)
+			onSave?.(clonedStep, createTableName(step.id))
 		},
 		[onSave, workflow, table, createTableName],
 	)
@@ -63,17 +60,13 @@ export function useOnEditStep(
 }
 
 export function useOnCreateStep(
-	save: (
-		step: Step,
-		output: string | undefined,
-		index: number | undefined,
-	) => void,
+	save: (step: Step, index: number | undefined) => void,
 	selectOutput: undefined | ((name: string) => void),
 	dismissModal?: () => void,
 ): (step: Step, output: string | undefined, index: number | undefined) => void {
 	return useCallback(
 		(step: Step, output: string | undefined, index: number | undefined) => {
-			save(step, output, index)
+			save(step, index)
 			dismissModal?.()
 			if (output) selectOutput?.(output)
 		},
@@ -88,14 +81,14 @@ export function useOnCreateStep(
  */
 export function useOnSaveStep(
 	workflow: Workflow,
-): (step: Step, output: string | undefined, index: number | undefined) => void {
+): (step: Step, index: number | undefined) => void {
 	const updateStep = useHandleStepSave(workflow)
 	const updateStepOutput = useHandleStepOutputChanged(workflow)
 
 	return useCallback(
-		(step: Step, output: string | undefined, index: number | undefined) => {
+		(step: Step, index: number | undefined) => {
 			const stepResult = updateStep(step, index)
-			updateStepOutput(stepResult, output)
+			updateStepOutput(stepResult)
 		},
 		[updateStepOutput, updateStep],
 	)
@@ -107,14 +100,14 @@ export function useOnSaveStep(
  */
 export function useOnUpdateStep(
 	workflow: Workflow,
-): (step: Step, output: string | undefined, index: number | undefined) => void {
+): (step: Step, index: number | undefined) => void {
 	const updateStep = useHandleStepSave(workflow)
 	const updateStepOutput = useHandleStepOutputChanged(workflow)
 
 	return useCallback(
-		(step: Step, output: string | undefined, index: number | undefined) => {
+		(step: Step, index: number | undefined) => {
 			const stepResult = updateStep(step, index)
-			updateStepOutput(stepResult, output)
+			updateStepOutput(stepResult)
 		},
 		[updateStepOutput, updateStep],
 	)

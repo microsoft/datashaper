@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function useOnSaveStep(workflow: Workflow): (step: Step, output: string | undefined, index: number | undefined) => void;
+export declare function useOnSaveStep(workflow: Workflow): (step: Step, index: number | undefined) => void;
 ```
 
 ## Parameters
@@ -18,7 +18,7 @@ export declare function useOnSaveStep(workflow: Workflow): (step: Step, output: 
 
 <b>Returns:</b>
 
-(step: Step, output: string \| undefined, index: number \| undefined) =&gt; void
+(step: Step, index: number \| undefined) =&gt; void
 
 A callback to use when saving a step, either new or existing
 

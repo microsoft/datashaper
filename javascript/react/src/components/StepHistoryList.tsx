@@ -106,7 +106,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 									workflow={workflow}
 									style={tableTransformStyle}
 									onDelete={onDeleteClicked}
-									onTransformRequested={(s, o) => onSave?.(s, o, stepIndex)}
+									onTransformRequested={s => onSave?.(s, stepIndex)}
 									hideStepSelector
 								/>
 							</CollapsiblePanel>

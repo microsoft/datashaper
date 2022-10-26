@@ -809,20 +809,6 @@
 			"enum": ["array", "concat", "first one wins", "last one wins"],
 			"type": "string"
 		},
-		"NamedOutputPortBinding": {
-			"description": "An explicit workflow output",
-			"properties": {
-				"name": {
-					"description": "The output table name",
-					"type": "string"
-				},
-				"node": {
-					"description": "The id of the input node to bind to",
-					"type": "string"
-				}
-			},
-			"type": "object"
-		},
 		"NamedPortBinding": {
 			"description": "An explicit step input binding",
 			"properties": {
@@ -1206,14 +1192,7 @@
 		"output": {
 			"description": "The output bindings",
 			"items": {
-				"anyOf": [
-					{
-						"$ref": "#/definitions/NamedOutputPortBinding"
-					},
-					{
-						"type": "string"
-					}
-				]
+				"type": "string"
 			},
 			"type": "array"
 		},

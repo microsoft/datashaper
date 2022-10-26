@@ -15,19 +15,16 @@ import { useCallback } from 'react'
  */
 export function useHandleStepOutputChanged(
 	workflow: Workflow,
-): (step: Step, output: string | undefined) => void {
+): (step: Step) => void {
 	return useCallback(
-		(step: Step, output: string | undefined) => {
+		(step: Step) => {
 			// remove any existing output
-			const spec = workflow.outputPorts.find(def => def.node === step.id)
-			if (spec) {
-				workflow.removeOutput(spec.name)
+			if (workflow.hasOutputName(step.id)) {
+				workflow.removeOutput(step.id)
 			}
 
 			// if the output is defined, add it
-			if (output) {
-				workflow.addOutput({ node: step.id, name: output })
-			}
+			workflow.addOutput(step.id)
 		},
 		[workflow],
 	)

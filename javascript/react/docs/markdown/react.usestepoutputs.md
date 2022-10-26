@@ -9,7 +9,7 @@ create a parallel array of output names for the steps
 <b>Signature:</b>
 
 ```typescript
-export declare function useStepOutputs(workflow: Workflow, defaultOutputName?: (index: number) => string): Array<string | undefined>;
+export declare function useStepOutputs(workflow: Workflow): Array<string | undefined>;
 ```
 
 ## Parameters
@@ -17,7 +17,6 @@ export declare function useStepOutputs(workflow: Workflow, defaultOutputName?: (
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  workflow | Workflow | The workflow instance |
-|  defaultOutputName | (index: number) =&gt; string | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

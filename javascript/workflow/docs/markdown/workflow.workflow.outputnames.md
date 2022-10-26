@@ -4,8 +4,6 @@
 
 ## Workflow.outputNames property
 
-Gets the output table names
-
 <b>Signature:</b>
 
 ```typescript
