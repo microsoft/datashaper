@@ -2,12 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ICommandBarItemProps, ICommandBarProps } from '@fluentui/react'
+import type {
+	ICommandBarItemProps,
+	ICommandBarProps,
+	ICommandBarStyleProps,
+	ICommandBarStyles,
+	IStyleFunctionOrObject,
+} from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import chroma from 'chroma-js'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
+import { DEFAULT_HEIGHT } from '../components/ArqueroTableHeader/ArqueroTableHeader.constants.js'
 import { useColorDefaults } from '../components/ArqueroTableHeader/hooks/useColorDefaults.js'
 import type { CommandBarColors } from '../types.js'
 
@@ -19,11 +26,11 @@ import type { CommandBarColors } from '../types.js'
  * @returns
  */
 export function useHeaderCommandBarDefaults(
-	props?: ICommandBarProps,
+	props?: Partial<ICommandBarProps>,
 	far = false,
 	colors?: Partial<CommandBarColors>,
 ): ICommandBarProps {
-	const base = useBaseProps(far, colors)
+	const base = useBaseProps(far, colors, props?.styles)
 	const items = useItems(props?.items, colors)
 	return useMemo(
 		() =>
@@ -37,21 +44,25 @@ export function useHeaderCommandBarDefaults(
 function useBaseProps(
 	far: boolean,
 	colors?: Partial<CommandBarColors>,
+	styles?: IStyleFunctionOrObject<ICommandBarStyleProps, ICommandBarStyles>,
 ): Partial<ICommandBarProps> {
 	const { color, background } = useColorDefaults(colors)
 	return useMemo(
 		() => ({
-			styles: {
-				root: {
-					height: 36,
-					padding: 0,
-					display: 'flex',
-					justifyContent: far ? 'flex-end' : 'flex-start',
-					width: '100%',
-					color,
-					background,
+			styles: merge(
+				{
+					root: {
+						height: DEFAULT_HEIGHT,
+						padding: 0,
+						display: 'flex',
+						justifyContent: far ? 'flex-end' : 'flex-start',
+						width: '100%',
+						color,
+						background,
+					},
 				},
-			},
+				styles,
+			),
 			overflowButtonProps: {
 				styles: {
 					root: {
@@ -63,7 +74,7 @@ function useBaseProps(
 				},
 			},
 		}),
-		[far, color, background],
+		[styles, far, color, background],
 	)
 }
 

@@ -225,8 +225,6 @@ const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
 	max-height: inherit;
 	overflow-y: auto;
 	overflow-x: auto;
-	border: ${({ theme, showColumnBorders }) =>
-		showColumnBorders ? `1px solid ${theme.palette.neutralLighter}` : 'none'};
 	span.ms-DetailsHeader-cellTitle {
 		background-color: ${({ theme }) => theme.palette.white};
 	}

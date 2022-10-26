@@ -10,6 +10,7 @@ import type {
 	IContextualMenuItem,
 } from '@fluentui/react'
 import { ContextualMenuItemType, VerticalDivider } from '@fluentui/react'
+import merge from 'lodash-es/merge.js'
 import uniqueId from 'lodash-es/uniqueId.js'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { useMemo } from 'react'
@@ -66,7 +67,7 @@ function getMainVerbItems(
 			key: 'divider' + uniqueId(),
 			id: 'divider' + uniqueId(),
 			commandBarButtonAs: VerticalDivider,
-			buttonStyles: { wrapper: { padding: '8px 0px', height: '50%' } },
+			buttonStyles: { wrapper: { padding: '8px 0px', height: '100%' } },
 			itemType: ContextualMenuItemType.Divider,
 		} as ICommandBarItemProps,
 	]
@@ -92,20 +93,24 @@ export function useColumnCommands(
 	disabled: boolean,
 	color?: string,
 	background?: string,
+	baseProps?: Partial<ICommandBarProps>,
 ): ICommandBarProps {
 	const base = useMemo(() => {
 		const id = 'overflowColumn'
-		return {
-			items: getMainVerbItems(onCallStep, mainColumnVerbs, disabled),
-			overflowItems: getOverflowVerbItems(
-				onCallStep,
-				disabled,
-				groupedColumnVerbs,
+		return merge(
+			{
+				items: getMainVerbItems(onCallStep, mainColumnVerbs, disabled),
+				overflowItems: getOverflowVerbItems(
+					onCallStep,
+					disabled,
+					groupedColumnVerbs,
+					id,
+				),
 				id,
-			),
-			id,
-		}
-	}, [onCallStep, disabled])
+			},
+			baseProps,
+		)
+	}, [onCallStep, disabled, baseProps])
 	return useHeaderCommandBarDefaults(base, false, { color, background })
 }
 
@@ -117,20 +122,24 @@ export function useTableCommands(
 	disabled: boolean,
 	color?: string,
 	background?: string,
+	baseProps?: Partial<ICommandBarProps>,
 ): ICommandBarProps {
 	const base = useMemo(() => {
 		const id = 'overflowTable'
-		return {
-			items: getMainVerbItems(onCallStep, mainTableVerbs, disabled),
-			overflowItems: getOverflowVerbItems(
-				onCallStep,
-				disabled,
-				groupedTableVerbs,
+		return merge(
+			{
+				items: getMainVerbItems(onCallStep, mainTableVerbs, disabled),
+				overflowItems: getOverflowVerbItems(
+					onCallStep,
+					disabled,
+					groupedTableVerbs,
+					id,
+				),
 				id,
-			),
-			id,
-		}
-	}, [onCallStep, disabled])
+			},
+			baseProps,
+		)
+	}, [onCallStep, disabled, baseProps])
 	return useHeaderCommandBarDefaults(base, false, { color, background })
 }
 
@@ -139,26 +148,31 @@ export function useUndoCommands(
 	disabled: boolean,
 	color?: string,
 	background?: string,
+	baseProps?: Partial<ICommandBarProps>,
 ): ICommandBarProps {
 	const base = useMemo(
-		() => ({
-			items: [
+		() =>
+			merge(
 				{
-					key: 'undo',
-					iconOnly: true,
-					iconProps: icons.undo,
-					title: 'Undo last step',
-					onClick: onUndoStep,
-					disabled,
+					items: [
+						{
+							key: 'undo',
+							iconOnly: true,
+							iconProps: icons.undo,
+							title: 'Undo last step',
+							onClick: onUndoStep,
+							disabled,
+						},
+					],
+					styles: {
+						root: {
+							width: 40,
+						},
+					},
 				},
-			],
-			styles: {
-				root: {
-					width: 40,
-				},
-			},
-		}),
-		[onUndoStep, disabled],
+				baseProps,
+			),
+		[onUndoStep, disabled, baseProps],
 	)
 	return useHeaderCommandBarDefaults(base, false, { color, background })
 }

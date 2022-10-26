@@ -2,12 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ArqueroDetailsListProps } from '@datashaper/react'
-import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
 import { Label } from '@fluentui/react'
 import { memo } from 'react'
 
-import { Table } from '../ArqueroDetailsList.styles.js'
+import { ArqueroTableHeader } from '../../../ArqueroTableHeader/ArqueroTableHeader.js'
+import { ArqueroDetailsList } from '../../ArqueroDetailsList.js'
+import type { ArqueroDetailsListProps } from '../../ArqueroDetailsList.types.js'
+import { Table } from '../ArqueroDetailsListStories.styles.js'
 import { useGrouping } from './RowGrouping.hooks.js'
 import { ButtonContainer, GroupByToggle } from './RowGrouping.styles.js'
 

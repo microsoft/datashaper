@@ -2,10 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { StepComponent, StepDescription, useDataTable } from '@datashaper/react'
 import { introspect } from '@datashaper/tables'
 import { memo, useMemo } from 'react'
 
+import { StepComponent } from '../../../../components/StepComponent.js'
+import { StepDescription } from '../../../../components/StepDescription.js'
+import { useDataTable } from '../../../../hooks/useDataTable.js'
 import { Section } from './Section.js'
 import {
 	OutputColumn,

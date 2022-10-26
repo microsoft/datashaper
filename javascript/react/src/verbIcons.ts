@@ -8,7 +8,7 @@ import { Verb } from '@datashaper/schema'
 const defaultIcon = 'LightningBolt'
 const VerbIcon: Partial<Record<Verb, string>> = {
 	[Verb.Bin]: 'ReportDocument',
-	[Verb.Binarize]: 'SplitObject',
+	[Verb.Binarize]: 'Contrast',
 	[Verb.Filter]: 'Filter',
 	[Verb.Aggregate]: 'Merge',
 	[Verb.Join]: 'BranchMerge',

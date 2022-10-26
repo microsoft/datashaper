@@ -2,11 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ArqueroDetailsListProps } from '@datashaper/react'
-import { ArqueroDetailsList, ArqueroTableHeader } from '@datashaper/react'
 import { memo } from 'react'
 
-import { Table } from '../ArqueroDetailsList.styles.js'
+import { ArqueroTableHeader } from '../../../ArqueroTableHeader/ArqueroTableHeader.js'
+import { ArqueroDetailsList } from '../../ArqueroDetailsList.js'
+import type { ArqueroDetailsListProps } from '../../ArqueroDetailsList.types.js'
+import { Table } from '../ArqueroDetailsListStories.styles.js'
 import { useBigTable } from './Performance.hooks.js'
 
 export const Performance: React.FC<ArqueroDetailsListProps> = memo(
