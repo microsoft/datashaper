@@ -10455,6 +10455,69 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#allTableNames:member",
+              "docComment": "/**\n * Get the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get allTableNames(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "allTableNames",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@datashaper/workflow!Workflow#allTableNames$:member",
+              "docComment": "/**\n * Get an observable of the names of all declared inputs and outputs. This does not include the default input or default output tables.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get allTableNames$(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Observable",
+                  "canonicalReference": "rxjs!Observable:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "allTableNames$",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "@datashaper/workflow!Workflow#defaultInput:member",
               "docComment": "",
               "excerptTokens": [

@@ -796,6 +796,8 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     addInputTables(inputs: TableContainer[]): void;
     addOutput(name: string): void;
     addStep(stepInput: StepInput): Step;
+    get allTableNames$(): Observable<string[]>;
+    get allTableNames(): string[];
     // (undocumented)
     set defaultInput(source: TableObservable);
     // (undocumented)

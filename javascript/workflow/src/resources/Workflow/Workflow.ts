@@ -10,7 +10,7 @@ import {
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
-import { BehaviorSubject, map, of } from 'rxjs'
+import { BehaviorSubject, map, mergeWith,of  } from 'rxjs'
 
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'
@@ -39,8 +39,14 @@ export class Workflow
 	public readonly $schema = LATEST_WORKFLOW_SCHEMA
 	// Workflow Data Fields
 	private readonly _steps = new BehaviorSubject<Step[]>([])
+	private readonly _numSteps = this._steps.pipe(map(steps => steps.length))
 	private readonly _inputNames = new BehaviorSubject<string[]>([])
 	private readonly _outputNames = new BehaviorSubject<string[]>([])
+	private readonly _allTableNames = this._outputNames
+		.pipe(mergeWith(this._inputNames))
+		.pipe(
+			map(() => unique(this._outputNames.value.concat(this._inputNames.value))),
+		)
 
 	// The dataflow graph
 	private readonly _graph = new DefaultGraph<TableContainer>()
@@ -149,6 +155,23 @@ export class Workflow
 	// #endregion
 
 	// #region Inputs
+
+	/**
+	 * Get an observable of the names of all declared inputs and outputs.
+	 * This does not include the default input or default output tables.
+	 */
+	public get allTableNames$(): Observable<string[]> {
+		return this._allTableNames
+	}
+
+	/**
+	 * Get the names of all declared inputs and outputs.
+	 * This does not include the default input or default output tables.
+	 */
+	public get allTableNames(): string[] {
+		return unique(this.inputNames.concat(this.outputNames))
+	}
+
 	public get inputNames(): string[] {
 		return this._inputNames.value
 	}
@@ -326,7 +349,7 @@ export class Workflow
 	}
 
 	public get length$(): Observable<number> {
-		return this._steps.pipe(map(steps => steps.length))
+		return this._numSteps
 	}
 
 	/**
