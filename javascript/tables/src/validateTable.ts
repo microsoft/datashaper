@@ -4,11 +4,11 @@
  */
 import type {
 	CodebookSchema,
-	ColumnError,	Field,
-	ValidationResult} from '@datashaper/schema';
-import {
-	DataType,
+	ColumnError,
+	Field,
+	ValidationResult,
 } from '@datashaper/schema'
+import { DataType } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export function validateTable(
@@ -30,13 +30,10 @@ export function validateTable(
 				const requiredResult = checkRequiredConstraint(columnValues as string[])
 				if (!requiredResult) {
 					flag = true
-					const columnError: ColumnError = {
-						columnName: field.name,
-						rule: 'required',
-					}
-
 					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(columnError)
+						validationResult.columnErrors.push(
+							createColumnErrorObject(field.name, 'required'),
+						)
 				}
 			}
 
@@ -45,13 +42,11 @@ export function validateTable(
 				const uniqueResult = checkUniqueConstraint(columnValues as string[])
 				if (!uniqueResult) {
 					flag = true
-					const columnError: ColumnError = {
-						columnName: field.name,
-						rule: 'unique',
-					}
 
 					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(columnError)
+						validationResult.columnErrors.push(
+							createColumnErrorObject(field.name, 'unique'),
+						)
 				}
 			}
 
@@ -72,13 +67,11 @@ export function validateTable(
 				)
 				if (!minLengthResult) {
 					flag = true
-					const columnError: ColumnError = {
-						columnName: field.name,
-						rule: 'minLength',
-					}
 
 					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(columnError)
+						validationResult.columnErrors.push(
+							createColumnErrorObject(field.name, 'minLength'),
+						)
 				}
 			}
 
@@ -99,13 +92,11 @@ export function validateTable(
 				)
 				if (!maxLengthResult) {
 					flag = true
-					const columnError: ColumnError = {
-						columnName: field.name,
-						rule: 'maxLength',
-					}
 
 					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(columnError)
+						validationResult.columnErrors.push(
+							createColumnErrorObject(field.name, 'maxLength'),
+						)
 				}
 			}
 
@@ -126,13 +117,11 @@ export function validateTable(
 				)
 				if (!minimumResult) {
 					flag = true
-					const columnError: ColumnError = {
-						columnName: field.name,
-						rule: 'minimum',
-					}
 
 					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(columnError)
+						validationResult.columnErrors.push(
+							createColumnErrorObject(field.name, 'minimum'),
+						)
 				}
 			}
 
@@ -153,13 +142,11 @@ export function validateTable(
 				)
 				if (!maximumResult) {
 					flag = true
-					const columnError: ColumnError = {
-						columnName: field.name,
-						rule: 'maximum',
-					}
 
 					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(columnError)
+						validationResult.columnErrors.push(
+							createColumnErrorObject(field.name, 'maximum'),
+						)
 				}
 			}
 
@@ -176,13 +163,11 @@ export function validateTable(
 				)
 				if (!patternResult) {
 					flag = true
-					const columnError: ColumnError = {
-						columnName: field.name,
-						rule: 'pattern',
-					}
 
 					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(columnError)
+						validationResult.columnErrors.push(
+							createColumnErrorObject(field.name, 'pattern'),
+						)
 				}
 			}
 
@@ -199,19 +184,26 @@ export function validateTable(
 				)
 				if (!enumResult) {
 					flag = true
-					const columnError: ColumnError = {
-						columnName: field.name,
-						rule: 'enum',
-					}
 
 					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(columnError)
+						validationResult.columnErrors.push(
+							createColumnErrorObject(field.name, 'enum'),
+						)
 				}
 			}
 		}
 	})
 
 	return validationResult
+}
+
+function createColumnErrorObject(name: string, message: string): ColumnError {
+	const columnError: ColumnError = {
+		columnName: name,
+		rule: message,
+	}
+
+	return columnError
 }
 
 function checkRequiredConstraint(values: string[]): boolean {
