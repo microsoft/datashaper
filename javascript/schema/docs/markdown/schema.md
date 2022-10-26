@@ -53,6 +53,7 @@
 |  [BooleanArgs](./schema.booleanargs.md) |  |
 |  [Category](./schema.category.md) |  |
 |  [CodebookSchema](./schema.codebookschema.md) | This contains all of the field-level details for interpreting a dataset, including data types, mapping, and metadata. Note that with persisted metadata and field examples, a dataset can often be visualized and described to the user without actually loading the source file. resource profile: 'codebook' |
+|  [ColumnError](./schema.columnerror.md) |  |
 |  [Constraints](./schema.constraints.md) | Validation constraints for a field. |
 |  [ConvertArgs](./schema.convertargs.md) |  |
 |  [Criterion](./schema.criterion.md) |  |
@@ -95,6 +96,7 @@
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
 |  [TypeHints](./schema.typehints.md) | Configuration values for interpreting data types when parsing a delimited file. By default, all values are read as strings - applying these type hints can derive primitive types from the strings. |
 |  [UnhotArgs](./schema.unhotargs.md) |  |
+|  [ValidationResult](./schema.validationresult.md) |  |
 |  [VariadicInput](./schema.variadicinput.md) | Multi-input, single output step I/O |
 |  [WindowArgs](./schema.windowargs.md) |  |
 |  [WorkflowSchema](./schema.workflowschema.md) | The root wrangling workflow specification. resource profile: 'workflow' |

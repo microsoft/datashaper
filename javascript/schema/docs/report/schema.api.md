@@ -132,6 +132,16 @@ export enum CodebookStrategy {
     MappingOnly = "mapping only"
 }
 
+// Warning: (ae-missing-release-tag) "ColumnError" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ColumnError {
+    // (undocumented)
+    columnName: string;
+    // (undocumented)
+    rule: string;
+}
+
 // Warning: (ae-missing-release-tag) "Constraints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -1003,6 +1013,14 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 //
 // @public (undocumented)
 export type UnrollArgs = InputColumnListArgs;
+
+// Warning: (ae-missing-release-tag) "ValidationResult" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ValidationResult {
+    // (undocumented)
+    columnErrors?: ColumnError[];
+}
 
 // Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
