@@ -60,6 +60,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		isHeaderFixed = false,
 		compact = false,
 		resizable = true,
+		style,
 		// passthrough the remainder as props
 		...props
 	}) {
@@ -190,6 +191,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				ref={ref}
 				data-is-scrollable="true"
 				showColumnBorders={showColumnBorders}
+				style={style}
 			>
 				<DetailsList
 					items={[...items]}
@@ -221,7 +223,6 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
 	height: inherit;
-
 	max-height: inherit;
 	overflow-y: auto;
 	overflow-x: auto;

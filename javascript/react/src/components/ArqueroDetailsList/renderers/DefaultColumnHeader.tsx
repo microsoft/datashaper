@@ -28,12 +28,8 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 				display: 'flex',
 				justifyContent: 'space-between',
 				width: dimensions.width,
-				marginBottom: 4,
-				borderBottom: column.data?.selected
-					? `1px solid ${theme.palette.themePrimary}`
-					: `1px solid transparent`,
 			}),
-			[theme, dimensions, column, isClickable],
+			[dimensions, column, isClickable],
 		)
 
 		const textStyle = useMemo(

@@ -15,6 +15,11 @@ import { SelectionStory } from './Selection.story.js'
 const meta = {
 	title: 'Components/ArqueroDetailsList',
 	component: ArqueroDetailsList,
+	args: {
+		style: {
+			border: '1px solid orange',
+		},
+	},
 }
 
 export default meta
