@@ -16,7 +16,7 @@ export interface ParserOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [comment?](./schema.parseroptions.comment.md) |  | string | <i>(Optional)</i> Character that begins a comment. All content after this character will be considered a comment and not imported. Default: none. |
+|  [comment?](./schema.parseroptions.comment.md) |  | string | <i>(Optional)</i> Character that denotes a comment. Lines that begin with this character are ignored. Default: none. |
 |  [delimiter?](./schema.parseroptions.delimiter.md) |  | string | <i>(Optional)</i> Column delimiter. Default: , |
 |  [escapeChar?](./schema.parseroptions.escapechar.md) |  | string | <i>(Optional)</i> String to use for escaping quotes. Default: none |
 |  [header?](./schema.parseroptions.header.md) |  | boolean | <i>(Optional)</i> Indicates that the first row of the file contains column header names. If false, <code>names</code> should be supplied, otherwise incrementing numbers will be assigned as header names. Default: true |

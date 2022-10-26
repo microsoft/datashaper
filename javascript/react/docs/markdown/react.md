@@ -22,7 +22,7 @@
 |  [useCellDimensions(column, considerCompactMode)](./react.usecelldimensions.md) |  |
 |  [useCellDropdownSelectHandler(clickable, onOptionSelect)](./react.usecelldropdownselecthandler.md) |  |
 |  [useColumnNamesList(table, columns)](./react.usecolumnnameslist.md) | Creates a list of column names for the table. If there are no columns supplied it will use the list from the table itself. Otherwise it will use the provided columns under the assumption the user has configured them as desired. |
-|  [useColumns(table, metadata, columns, handleColumnHeaderClick, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
+|  [useColumns(table, metadata, columns, onColumnHeaderClick, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
 |  [useColumnStyles(clickable, separator)](./react.usecolumnstyles.md) |  |
 |  [useDataTable(id, workflow, existingTable)](./react.usedatatable.md) |  |
 |  [useDetailsHeaderRenderer()](./react.usedetailsheaderrenderer.md) | Overrides the default details header rendering so we can inject customization |
@@ -45,7 +45,7 @@
 |  [useSlicedTable(table, offset, limit)](./react.useslicedtable.md) |  |
 |  [useSortedGroups(table, column, sort, entries)](./react.usesortedgroups.md) | Sort top level group headers if the table is grouped, there isn't any column sorted or if the respective column is sorted |
 |  [useSortedTable(table, column, sort)](./react.usesortedtable.md) |  |
-|  [useSortHandling(allowSorting, onColumnHeaderClick, defaultSortColumn, defaultSortDirection)](./react.usesorthandling.md) |  |
+|  [useSortHandling(allowSorting, defaultSortColumn, defaultSortDirection)](./react.usesorthandling.md) |  |
 |  [useStepOutputs(workflow, defaultOutputName)](./react.usestepoutputs.md) | create a parallel array of output names for the steps |
 |  [useStripedRowsRenderer(striped, columnBorders)](./react.usestripedrowsrenderer.md) |  |
 |  [useSubsetTable(table, columns)](./react.usesubsettable.md) |  |

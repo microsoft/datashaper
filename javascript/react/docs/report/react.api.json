@@ -1316,16 +1316,7 @@
             },
             {
               "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "MouseEvent",
-              "canonicalReference": "!MouseEvent:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "> | undefined, column?: "
+              "text": ">, column?: "
             },
             {
               "kind": "Reference",
@@ -1345,7 +1336,7 @@
           "name": "ColumnClickFunction",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 10
+            "endIndex": 8
           }
         },
         {
@@ -1466,6 +1457,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "isDefaultHeaderClickable",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ColumnOptions#isSortable:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isSortable?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "isSortable",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -3929,12 +3947,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!SortParameters#handleColumnHeaderClick:member",
+              "canonicalReference": "@datashaper/react!SortParameters#onSort:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "handleColumnHeaderClick: "
+                  "text": "onSort: "
                 },
                 {
                   "kind": "Reference",
@@ -3949,7 +3967,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "handleColumnHeaderClick",
+              "name": "onSort",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -7414,7 +7432,16 @@
             },
             {
               "kind": "Content",
-              "text": ", handleColumnHeaderClick?: "
+              "text": ", onColumnHeaderClick?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnClickFunction",
+              "canonicalReference": "@datashaper/react!ColumnClickFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", onSort?: "
             },
             {
               "kind": "Reference",
@@ -7462,8 +7489,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 15,
-            "endIndex": 17
+            "startIndex": 17,
+            "endIndex": 19
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -7493,7 +7520,7 @@
               "isOptional": true
             },
             {
-              "parameterName": "handleColumnHeaderClick",
+              "parameterName": "onColumnHeaderClick",
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 9
@@ -7501,7 +7528,7 @@
               "isOptional": true
             },
             {
-              "parameterName": "options",
+              "parameterName": "onSort",
               "parameterTypeTokenRange": {
                 "startIndex": 10,
                 "endIndex": 11
@@ -7509,10 +7536,18 @@
               "isOptional": true
             },
             {
-              "parameterName": "virtualColumns",
+              "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 12,
-                "endIndex": 14
+                "endIndex": 13
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "virtualColumns",
+              "parameterTypeTokenRange": {
+                "startIndex": 14,
+                "endIndex": 16
               },
               "isOptional": true
             }
@@ -9099,15 +9134,6 @@
             },
             {
               "kind": "Content",
-              "text": ", onColumnHeaderClick?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "ColumnClickFunction",
-              "canonicalReference": "@datashaper/react!ColumnClickFunction:type"
-            },
-            {
-              "kind": "Content",
               "text": ", defaultSortColumn?: "
             },
             {
@@ -9138,8 +9164,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 9,
-            "endIndex": 10
+            "startIndex": 7,
+            "endIndex": 8
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -9153,7 +9179,7 @@
               "isOptional": false
             },
             {
-              "parameterName": "onColumnHeaderClick",
+              "parameterName": "defaultSortColumn",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
@@ -9161,18 +9187,10 @@
               "isOptional": true
             },
             {
-              "parameterName": "defaultSortColumn",
+              "parameterName": "defaultSortDirection",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
-              },
-              "isOptional": true
-            },
-            {
-              "parameterName": "defaultSortDirection",
-              "parameterTypeTokenRange": {
-                "startIndex": 7,
-                "endIndex": 8
               },
               "isOptional": true
             }

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type ColumnClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined) => void;
+export declare type ColumnClickFunction = (evt?: React.MouseEvent<HTMLElement>, column?: IColumn | undefined) => void;
 ```

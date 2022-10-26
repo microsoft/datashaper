@@ -6855,7 +6855,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ParserOptions#comment:member",
-              "docComment": "/**\n * Character that begins a comment. All content after this character will be considered a comment and not imported. Default: none.\n */\n",
+              "docComment": "/**\n * Character that denotes a comment. Lines that begin with this character are ignored. Default: none.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9446,7 +9446,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!TypeHints#infinity:member",
-              "docComment": "/**\n * Strings to parse as negative and positive infinity. Default: case insensitive \"-inf\" and \"inf\".\n */\n",
+              "docComment": "/**\n * Strings to parse as negative and positive infinity. Default: case insensitive [\"-inf\", \"inf\"].\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9454,7 +9454,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "string[]"
+                  "text": "[string, string]"
                 },
                 {
                   "kind": "Content",
