@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export type PortBinding = string | NamedPortBinding
-export type OutputPortBinding = string | NamedOutputPortBinding
 
 /**
  * An explicit step input binding
@@ -13,16 +12,6 @@ export interface NamedPortBinding {
 	 * The id of the input node to bind to
 	 */
 	node: string
-}
-
-/**
- * An explicit workflow output
- */
-export interface NamedOutputPortBinding extends NamedPortBinding {
-	/**
-	 * The output table name
-	 */
-	name: string
 }
 
 /**

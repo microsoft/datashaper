@@ -8,7 +8,9 @@ import type { Step } from '@datashaper/workflow'
 import { readStep } from '@datashaper/workflow'
 import type { IContextualMenuItem } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
+import { useObservableState } from 'observable-hooks'
 import { memo, useCallback, useMemo, useState } from 'react'
+import { map } from 'rxjs'
 import styled from 'styled-components'
 
 import { TableTransformModal } from '../components/TableTransformModal.js'
@@ -44,7 +46,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 
 		const onTransformRequested = useCallback(
 			(_step: Step) => {
-				onAddStep && onAddStep(_step, _step?.id, index)
+				onAddStep?.(_step, _step?.id, index)
 				dismissModal()
 			},
 			[onAddStep, dismissModal, index],
@@ -81,10 +83,11 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			],
 		)
 
-		const allTablesLength = useMemo(
-			(): number => workflow.outputNames.length + workflow.inputNames.length,
+		const allTablesLengthObservable = useMemo(
+			() => workflow.allTableNames$.pipe(map(tables => tables.length)),
 			[workflow],
 		)
+		const allTablesLength = useObservableState(allTablesLengthObservable, 0)
 
 		const columnCommands = useColumnCommands(
 			onCallStep,

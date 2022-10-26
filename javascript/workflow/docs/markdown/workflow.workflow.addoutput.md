@@ -9,14 +9,14 @@ Add an output binding
 <b>Signature:</b>
 
 ```typescript
-addOutput(output: NamedOutputPortBinding): void;
+addOutput(name: string): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  output | NamedOutputPortBinding |  |
+|  name | string |  |
 
 <b>Returns:</b>
 

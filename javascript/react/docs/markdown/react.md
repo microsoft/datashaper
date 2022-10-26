@@ -46,7 +46,7 @@
 |  [useSortedGroups(table, column, sort, entries)](./react.usesortedgroups.md) | Sort top level group headers if the table is grouped, there isn't any column sorted or if the respective column is sorted |
 |  [useSortedTable(table, column, sort)](./react.usesortedtable.md) |  |
 |  [useSortHandling(allowSorting, onColumnHeaderClick, defaultSortColumn, defaultSortDirection)](./react.usesorthandling.md) |  |
-|  [useStepOutputs(workflow, defaultOutputName)](./react.usestepoutputs.md) | create a parallel array of output names for the steps |
+|  [useStepOutputs(workflow)](./react.usestepoutputs.md) | create a parallel array of output names for the steps |
 |  [useStripedRowsRenderer(striped, columnBorders)](./react.usestripedrowsrenderer.md) |  |
 |  [useSubsetTable(table, columns)](./react.usesubsettable.md) |  |
 |  [useWorkflow(input, inputs)](./react.useworkflow.md) |  |

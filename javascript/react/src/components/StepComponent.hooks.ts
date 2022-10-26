@@ -10,7 +10,7 @@ import type {
 import { DataType } from '@datashaper/schema'
 import { columnType, columnTypes } from '@datashaper/tables'
 import { toggleListItem } from '@datashaper/utilities'
-import type { Step, Workflow } from '@datashaper/workflow'
+import type { Step } from '@datashaper/workflow'
 import { isNumericInputStep, NodeInput } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -71,24 +71,16 @@ export function useColumnFilter(
 
 export function useInputTableChanged(
 	step: Step,
-	workflow: Workflow | undefined,
 	onChange: (step: Step) => void,
 ): DropdownChangeHandler {
 	const resetArgs = useResetArgs()
 
 	return useDropdownChangeHandler(
 		step,
-		(s, val) => {
+		(s: Step, val: string | number | undefined) => {
 			if (val != null) {
-				// determine the node id to subscribe from
-				const tableName = val as string
-				const outputNode = workflow?.outputPorts.find(
-					o => o.name === (tableName as string),
-				)?.node
-
 				// wire up the Step's input field
-				const node = outputNode ?? tableName
-				s.input[NodeInput.Source] = { node }
+				s.input[NodeInput.Source] = { node: val as string }
 				resetArgs(s)
 			} else {
 				// no value: delete the input

@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function useOnCreateStep(save: (step: Step, output: string | undefined, index: number | undefined) => void, selectOutput: undefined | ((name: string) => void), dismissModal?: () => void): (step: Step, output: string | undefined, index: number | undefined) => void;
+export declare function useOnCreateStep(save: (step: Step, index: number | undefined) => void, selectOutput: undefined | ((name: string) => void), dismissModal?: () => void): (step: Step, output: string | undefined, index: number | undefined) => void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  save | (step: Step, output: string \| undefined, index: number \| undefined) =&gt; void |  |
+|  save | (step: Step, index: number \| undefined) =&gt; void |  |
 |  selectOutput | undefined \| ((name: string) =&gt; void) |  |
 |  dismissModal | () =&gt; void | <i>(Optional)</i> |
 

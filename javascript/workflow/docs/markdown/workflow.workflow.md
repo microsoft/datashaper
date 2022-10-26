@@ -24,15 +24,15 @@ export declare class Workflow extends Resource implements SchemaResource<Workflo
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [$schema](./workflow.workflow._schema.md) | <code>readonly</code> | string |  |
+|  [allTableNames](./workflow.workflow.alltablenames.md) | <code>readonly</code> | string\[\] | Get the names of all declared inputs and outputs. This does not include the default input or default output tables. |
+|  [allTableNames$](./workflow.workflow.alltablenames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; | Get an observable of the names of all declared inputs and outputs. This does not include the default input or default output tables. |
 |  [defaultInput](./workflow.workflow.defaultinput.md) |  | [TableObservable](./workflow.tableobservable.md) |  |
 |  [inputNames](./workflow.workflow.inputnames.md) | <code>readonly</code> | string\[\] |  |
 |  [inputNames$](./workflow.workflow.inputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [length](./workflow.workflow.length.md) | <code>readonly</code> | number |  |
 |  [length$](./workflow.workflow.length_.md) | <code>readonly</code> | Observable&lt;number&gt; |  |
-|  [outputNames](./workflow.workflow.outputnames.md) | <code>readonly</code> | string\[\] | Gets the output table names |
-|  [outputNames$](./workflow.workflow.outputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; | Gets the output table names |
-|  [outputPorts](./workflow.workflow.outputports.md) | <code>readonly</code> | NamedOutputPortBinding\[\] |  |
-|  [outputPorts$](./workflow.workflow.outputports_.md) | <code>readonly</code> | Observable&lt;NamedOutputPortBinding\[\]&gt; |  |
+|  [outputNames](./workflow.workflow.outputnames.md) | <code>readonly</code> | string\[\] |  |
+|  [outputNames$](./workflow.workflow.outputnames_.md) | <code>readonly</code> | Observable&lt;string\[\]&gt; |  |
 |  [steps](./workflow.workflow.steps.md) | <code>readonly</code> | [Step](./workflow.step.md)<!-- -->\[\] |  |
 |  [steps$](./workflow.workflow.steps_.md) | <code>readonly</code> | BehaviorSubject&lt;[Step](./workflow.step.md)<!-- -->\[\]&gt; |  |
 
@@ -45,14 +45,12 @@ export declare class Workflow extends Resource implements SchemaResource<Workflo
 |  [addInputs(values)](./workflow.workflow.addinputs.md) |  | Add a named input |
 |  [addInputTable(table, id)](./workflow.workflow.addinputtable.md) |  | Add a named input |
 |  [addInputTables(inputs)](./workflow.workflow.addinputtables.md) |  |  |
-|  [addOutput(output)](./workflow.workflow.addoutput.md) |  | Add an output binding |
+|  [addOutput(name)](./workflow.workflow.addoutput.md) |  | Add an output binding |
 |  [addStep(stepInput)](./workflow.workflow.addstep.md) |  | Adds a step to the pipeline |
 |  [dispose()](./workflow.workflow.dispose.md) |  |  |
 |  [hasInputName(input)](./workflow.workflow.hasinputname.md) |  |  |
 |  [hasOutputName(name)](./workflow.workflow.hasoutputname.md) |  |  |
 |  [loadSchema(schema, quiet)](./workflow.workflow.loadschema.md) |  |  |
-|  [nodeOutput(nodeId)](./workflow.workflow.nodeoutput.md) |  |  |
-|  [outputNameForNode(nodeId)](./workflow.workflow.outputnamefornode.md) |  |  |
 |  [read(name)](./workflow.workflow.read.md) |  | Observe an output name |
 |  [read$(name)](./workflow.workflow.read_.md) |  | Observe an output name |
 |  [removeInputName(input)](./workflow.workflow.removeinputname.md) |  |  |

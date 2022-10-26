@@ -9,5 +9,5 @@ The output bindings
 <b>Signature:</b>
 
 ```typescript
-output: Array<OutputPortBinding>;
+output: string[];
 ```
