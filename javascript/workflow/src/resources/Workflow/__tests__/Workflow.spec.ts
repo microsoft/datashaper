@@ -66,10 +66,10 @@ describe('The Workflow Resource', () => {
 			output: [],
 		})
 		g.addInputTables([{ id: 'input', table: table({ ID: [1, 2, 3, 4] }) }])
-		g.addOutput({ name: 'filled-read', node: 'filled' })
+		g.addOutput('filled')
 
 		expect(g).toBeDefined()
-		expect(g.outputNames).toEqual(['filled-read'])
+		expect(g.outputNames).toEqual(['filled'])
 
 		// read default output
 		const defaultOut = g.read()
@@ -78,8 +78,8 @@ describe('The Workflow Resource', () => {
 		expect(defaultOut?.table?.numRows()).toBe(4)
 
 		// read named output
-		const namedOut = g.read('filled-read')
-		expect(namedOut?.id).toBe('filled-read')
+		const namedOut = g.read('filled')
+		expect(namedOut?.id).toBe('filled')
 		expect(namedOut).toBeDefined()
 		expect(namedOut?.table?.numCols()).toBe(2)
 		expect(namedOut?.table?.numRows()).toBe(4)
@@ -164,7 +164,7 @@ describe('The Workflow Resource', () => {
 		const binRead = wf.read$('intermediate')
 		wf.addStep({
 			verb: Verb.Bin,
-			id: 'bin-1',
+			id: 'intermediate',
 			args: {
 				column: 'price',
 				to: 'price_bin',
@@ -180,7 +180,7 @@ describe('The Workflow Resource', () => {
 				value: 'x',
 			},
 		})
-		wf.addOutput({ name: 'intermediate', node: 'bin-1' })
+		wf.addOutput('intermediate')
 		wf.defaultInput = from([tInput])
 		let val: TableContainer | undefined
 		binRead.subscribe(v => (val = v))
@@ -195,7 +195,7 @@ describe('The Workflow Resource', () => {
 		wf.name = 'test_workflow'
 		wf.addStep({
 			verb: Verb.Bin,
-			id: 'bin-1',
+			id: 'intermediate',
 			args: {
 				column: 'price',
 				to: 'price_bin',
@@ -213,7 +213,7 @@ describe('The Workflow Resource', () => {
 		})
 		wf.defaultInput = from([tInput])
 
-		wf.addOutput({ name: 'intermediate', node: 'bin-1' })
+		wf.addOutput('intermediate')
 		const intermediateRead = wf.read$('intermediate')
 		let val: TableContainer | undefined
 		intermediateRead.subscribe(v => (val = v))
