@@ -4,7 +4,7 @@
  */
 import { DataType } from '@datashaper/schema'
 import { determineType } from '@datashaper/tables'
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
 import { getValue, isBlank, isEmpty } from '../ArqueroDetailsList.utils.js'

@@ -67,7 +67,7 @@ function getMainVerbItems(
 			key: 'divider' + uniqueId(),
 			id: 'divider' + uniqueId(),
 			commandBarButtonAs: VerticalDivider,
-			buttonStyles: { wrapper: { padding: '8px 0px', height: '100%' } },
+			buttonStyles: { wrapper: { padding: '8px 2px', height: '100%' } },
 			itemType: ContextualMenuItemType.Divider,
 		} as ICommandBarItemProps,
 	]

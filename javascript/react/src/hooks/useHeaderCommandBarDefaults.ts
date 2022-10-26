@@ -47,6 +47,10 @@ function useBaseProps(
 	styles?: IStyleFunctionOrObject<ICommandBarStyleProps, ICommandBarStyles>,
 ): Partial<ICommandBarProps> {
 	const { color, background } = useColorDefaults(colors)
+	const backgroundHovered = useMemo(
+		() => chroma(background).darken().hex(),
+		[background],
+	)
 	return useMemo(
 		() => ({
 			styles: merge(
@@ -68,13 +72,29 @@ function useBaseProps(
 					root: {
 						background,
 					},
+					rootHovered: {
+						background: backgroundHovered,
+					},
+					rootExpanded: {
+						background: backgroundHovered,
+					},
+					rootExpandedHovered: {
+						background: backgroundHovered,
+					},
+					rootPressed: {
+						background: backgroundHovered,
+						color,
+					},
+					iconPressed: {
+						color,
+					},
 					menuIcon: {
 						color,
 					},
 				},
 			},
 		}),
-		[styles, far, color, background],
+		[styles, far, color, background, backgroundHovered],
 	)
 }
 
@@ -88,7 +108,7 @@ function useItems(
 		[colors, theme],
 	)
 	const disabled = useMemo(
-		() => colors?.color || theme.palette.neutralTertiary,
+		() => colors?.disabled || theme.palette.neutralTertiary,
 		[colors, theme],
 	)
 	const background = useMemo(
@@ -118,8 +138,18 @@ function useItems(
 					background: backgroundHovered,
 					color,
 				},
+				rootExpanded: {
+					background: backgroundHovered,
+				},
+				rootPressed: {
+					background: backgroundHovered,
+					color,
+				},
 				rootChecked: {
 					background: checked,
+				},
+				iconPressed: {
+					color,
 				},
 				label: {
 					color,
