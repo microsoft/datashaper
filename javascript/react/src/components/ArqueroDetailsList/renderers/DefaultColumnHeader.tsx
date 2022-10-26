@@ -16,10 +16,17 @@ export interface DefaultColumnHeaderProps extends IDetailsColumnProps {
 	isClickable: boolean
 	onClick?: ColumnClickFunction
 	isSortable?: boolean
+	onSort?: ColumnClickFunction
 }
 
 export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
-	function DefaultColumnHeader({ column, isClickable, onClick, isSortable }) {
+	function DefaultColumnHeader({
+		column,
+		isClickable,
+		onClick,
+		isSortable,
+		onSort,
+	}) {
 		const {
 			isSorted,
 			isSortedDescending,
@@ -28,8 +35,8 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 			isIconOnly,
 		} = column
 
-		const containerStyle = useContainerStyle(column, isClickable)
-		const textStyle = useTextStyle(column)
+		const containerStyle = useContainerStyle(column)
+		const textStyle = useTextStyle(column, isClickable)
 		const iconStyles = useIconStyles()
 
 		const [hovered, setHovered] = useState<boolean>(false)
@@ -37,33 +44,43 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 		const handleMouseOut = useCallback(() => setHovered(false), [setHovered])
 		return (
 			/* eslint-disable jsx-a11y/mouse-events-have-key-events */
-			<div
-				onClick={e => onClick && onClick(e, column)}
-				style={containerStyle}
-				onMouseOver={handleMouseOver}
-				onMouseOut={handleMouseOut}
-			>
+			<div style={containerStyle}>
 				<When condition={iconName}>
 					<Icon className={iconClassName} iconName={iconName} />
 				</When>
 				<When condition={!isIconOnly}>
-					<div style={textStyle} title={column.name}>
+					<div
+						onClick={e => onClick && onClick(e, column)}
+						style={textStyle}
+						title={column.name}
+					>
 						{column.name}
 					</div>
 					<When condition={isSortable}>
-						<If condition={isSorted}>
-							<Then>
-								<Icon
-									iconName={isSortedDescending ? 'SortDown' : 'SortUp'}
-									styles={iconStyles}
-								/>
-							</Then>
-							<Else>
-								<When condition={hovered}>
-									<Icon iconName={'Sort'} styles={iconStyles} />
-								</When>
-							</Else>
-						</If>
+						<div
+							onMouseOver={handleMouseOver}
+							onMouseOut={handleMouseOut}
+							style={{ width: 12 }}
+						>
+							<If condition={isSorted}>
+								<Then>
+									<Icon
+										onClick={e => onSort && onSort(e, column)}
+										iconName={isSortedDescending ? 'SortDown' : 'SortUp'}
+										styles={iconStyles}
+									/>
+								</Then>
+								<Else>
+									<When condition={hovered}>
+										<Icon
+											onClick={e => onSort && onSort(e, column)}
+											iconName={'Sort'}
+											styles={iconStyles}
+										/>
+									</When>
+								</Else>
+							</If>
+						</div>
 					</When>
 				</When>
 			</div>
@@ -71,24 +88,24 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 	},
 )
 
-function useContainerStyle(column: IColumn, isClickable: boolean) {
+function useContainerStyle(column: IColumn) {
 	const dimensions = useCellDimensions(column)
 	return useMemo(
 		() => ({
 			lineHeight: column.data.compact ? COMPACT_LINE_HEIGHT : 'inherit',
-			cursor: isClickable ? 'pointer' : 'inherit',
 			display: 'flex',
 			justifyContent: 'space-between',
 			width: dimensions.width,
 		}),
-		[dimensions, column, isClickable],
+		[dimensions, column],
 	)
 }
 
-function useTextStyle(column: IColumn) {
+function useTextStyle(column: IColumn, isClickable: boolean) {
 	const theme = useTheme()
 	return useMemo(
 		() => ({
+			cursor: isClickable ? 'pointer' : 'inherit',
 			color: column?.data.virtual
 				? 'transparent'
 				: column.data?.selected
@@ -100,7 +117,7 @@ function useTextStyle(column: IColumn) {
 			whiteSpace: 'nowrap' as const,
 			textOverflow: 'ellipsis' as const,
 		}),
-		[theme, column],
+		[theme, column, isClickable],
 	)
 }
 
@@ -109,6 +126,7 @@ function useIconStyles() {
 	return useMemo(
 		() => ({
 			root: {
+				cursor: 'pointer',
 				position: 'absolute' as const,
 				right: 8,
 				fontSize: 12,

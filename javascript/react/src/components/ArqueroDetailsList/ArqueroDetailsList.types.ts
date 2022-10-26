@@ -41,7 +41,7 @@ export type SaveMetadataFunction = (
 ) => void
 
 export type ColumnClickFunction = (
-	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+	evt?: React.MouseEvent<HTMLElement>,
 	column?: IColumn | undefined,
 ) => void
 

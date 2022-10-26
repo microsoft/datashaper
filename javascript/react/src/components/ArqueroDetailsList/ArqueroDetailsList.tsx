@@ -67,13 +67,11 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const ref = useRef(null)
 
 		const [version, setVersion] = useState(0)
-		const { sortColumn, sortDirection, handleColumnHeaderClick } =
-			useSortHandling(
-				sortable,
-				onColumnHeaderClick,
-				defaultSortColumn,
-				defaultSortDirection,
-			)
+		const { sortColumn, sortDirection, onSort } = useSortHandling(
+			sortable,
+			defaultSortColumn,
+			defaultSortDirection,
+		)
 
 		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
@@ -123,7 +121,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			table,
 			metadata,
 			columns,
-			handleColumnHeaderClick,
+			onColumnHeaderClick,
+			onSort,
 			{
 				features,
 				sortColumn,

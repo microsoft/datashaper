@@ -4,7 +4,6 @@
  */
 import { SortDirection } from '@datashaper/schema'
 import type { IColumn } from '@fluentui/react'
-import noop from 'lodash-es/noop.js'
 import { useCallback, useState } from 'react'
 
 import type { ColumnClickFunction } from '../index.js'
@@ -14,12 +13,11 @@ export interface SortParameters {
 	sortDirection?: SortDirection
 	defaultSortColumn?: string
 	defaultSortDirection?: SortDirection
-	handleColumnHeaderClick: ColumnClickFunction
+	onSort: ColumnClickFunction
 }
 
 export function useSortHandling(
 	allowSorting: boolean,
-	onColumnHeaderClick: ColumnClickFunction = noop,
 	defaultSortColumn?: string,
 	defaultSortDirection: SortDirection = SortDirection.Ascending,
 ): SortParameters {
@@ -29,9 +27,9 @@ export function useSortHandling(
 	const [sortDirection, setSortDirection] = useState<SortDirection | undefined>(
 		defaultSortDirection,
 	)
-	const handleColumnHeaderClick = useCallback(
+	const onSort = useCallback(
 		(
-			evt: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+			_evt: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
 			column?: IColumn,
 		) => {
 			if (allowSorting) {
@@ -46,20 +44,13 @@ export function useSortHandling(
 				}
 				setSortColumn(column?.fieldName)
 			}
-			onColumnHeaderClick(evt, column)
 		},
-		[
-			allowSorting,
-			onColumnHeaderClick,
-			setSortColumn,
-			setSortDirection,
-			sortDirection,
-		],
+		[allowSorting, setSortColumn, setSortDirection, sortDirection],
 	)
 
 	return {
 		sortColumn,
 		sortDirection,
-		handleColumnHeaderClick,
+		onSort,
 	}
 }

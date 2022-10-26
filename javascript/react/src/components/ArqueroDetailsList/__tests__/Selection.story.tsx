@@ -3,8 +3,9 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { introspect } from '@datashaper/tables'
+import type { IColumn } from '@fluentui/react'
 import type { ComponentStory } from '@storybook/react'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
 import type { ArqueroDetailsListProps } from '../ArqueroDetailsList.types.js'
@@ -16,6 +17,11 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 ): JSX.Element => {
 	const [selected, setSelected] = useState<string | undefined>()
 	const metadata = useMemo(() => introspect(stocks, false), [stocks])
+	const handleClick = useCallback(
+		(_e?: any, c?: IColumn) =>
+			setSelected(prev => (c?.key === prev ? undefined : c?.key)),
+		[setSelected],
+	)
 	return (
 		<ArqueroDetailsList
 			features={{
@@ -30,7 +36,8 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 			table={stocks}
 			metadata={metadata}
 			selectedColumn={selected}
-			onColumnClick={(_e, c) => setSelected(c?.name)}
+			onColumnClick={handleClick}
+			onColumnHeaderClick={handleClick}
 		/>
 	)
 }
