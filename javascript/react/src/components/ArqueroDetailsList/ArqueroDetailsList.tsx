@@ -133,6 +133,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				onCellDropdownSelect,
 				isDefaultHeaderClickable,
 				isClickable: clickableColumns,
+				isSortable: sortable,
 				showColumnBorders,
 				compact,
 				resizable,

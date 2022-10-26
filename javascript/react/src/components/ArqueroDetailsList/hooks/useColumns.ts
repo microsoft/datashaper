@@ -41,6 +41,7 @@ export interface ColumnOptions {
 	onCellDropdownSelect?: DropdownOptionSelect
 	isClickable?: boolean
 	isDefaultHeaderClickable?: boolean
+	isSortable?: boolean
 	showColumnBorders?: boolean
 	compact?: boolean
 	resizable?: boolean
@@ -70,6 +71,7 @@ export function useColumns(
 		onColumnClick,
 		onCellDropdownSelect,
 		isClickable = false,
+		isSortable = false,
 		isDefaultHeaderClickable = false,
 		showColumnBorders = false,
 		compact = false,
@@ -130,6 +132,7 @@ export function useColumns(
 				createRenderDefaultColumnHeader(
 					column,
 					isDefaultHeaderClickable,
+					isSortable,
 					handleColumnHeaderClick,
 				),
 			]
@@ -194,6 +197,7 @@ export function useColumns(
 		handleColumnHeaderClick,
 		columnMinWidth,
 		virtualColumns,
+		isSortable,
 	])
 }
 

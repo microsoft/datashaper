@@ -95,6 +95,7 @@ export const createRenderColumnHeader = (
 export const createRenderDefaultColumnHeader = (
 	originalProps: Partial<IColumn>,
 	isClickable: boolean,
+	isSortable: boolean,
 	handleColumnHeaderClick?: ColumnClickFunction,
 ): IRenderFunction<IDetailsColumnProps> =>
 	function renderDefaultColumnHeader(props?, defaultRender?) {
@@ -106,6 +107,7 @@ export const createRenderDefaultColumnHeader = (
 			<DefaultColumnHeader
 				{...p}
 				isClickable={isClickable}
+				isSortable={isSortable}
 				onClick={handleColumnHeaderClick}
 			/>
 		)

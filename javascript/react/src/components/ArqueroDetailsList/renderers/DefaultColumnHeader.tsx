@@ -4,8 +4,8 @@
  */
 import type { IColumn, IDetailsColumnProps } from '@fluentui/react'
 import { Icon, useTheme } from '@fluentui/react'
-import { memo, useMemo } from 'react'
-import { When } from 'react-if'
+import { memo, useCallback, useMemo, useState } from 'react'
+import { Else, If, Then, When } from 'react-if'
 
 import { useCellDimensions } from '../hooks/index.js'
 import type { ColumnClickFunction } from '../index.js'
@@ -15,10 +15,11 @@ const COMPACT_LINE_HEIGHT = 2
 export interface DefaultColumnHeaderProps extends IDetailsColumnProps {
 	isClickable: boolean
 	onClick?: ColumnClickFunction
+	isSortable?: boolean
 }
 
 export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
-	function DefaultColumnHeader({ column, isClickable, onClick }) {
+	function DefaultColumnHeader({ column, isClickable, onClick, isSortable }) {
 		const {
 			isSorted,
 			isSortedDescending,
@@ -31,8 +32,17 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 		const textStyle = useTextStyle(column)
 		const iconStyles = useIconStyles()
 
+		const [hovered, setHovered] = useState<boolean>(false)
+		const handleMouseOver = useCallback(() => setHovered(true), [setHovered])
+		const handleMouseOut = useCallback(() => setHovered(false), [setHovered])
 		return (
-			<div onClick={e => onClick && onClick(e, column)} style={containerStyle}>
+			/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+			<div
+				onClick={e => onClick && onClick(e, column)}
+				style={containerStyle}
+				onMouseOver={handleMouseOver}
+				onMouseOut={handleMouseOut}
+			>
 				<When condition={iconName}>
 					<Icon className={iconClassName} iconName={iconName} />
 				</When>
@@ -40,11 +50,20 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 					<div style={textStyle} title={column.name}>
 						{column.name}
 					</div>
-					<When condition={isSorted}>
-						<Icon
-							iconName={isSortedDescending ? 'SortDown' : 'SortUp'}
-							styles={iconStyles}
-						/>
+					<When condition={isSortable}>
+						<If condition={isSorted}>
+							<Then>
+								<Icon
+									iconName={isSortedDescending ? 'SortDown' : 'SortUp'}
+									styles={iconStyles}
+								/>
+							</Then>
+							<Else>
+								<When condition={hovered}>
+									<Icon iconName={'Sort'} styles={iconStyles} />
+								</When>
+							</Else>
+						</If>
 					</When>
 				</When>
 			</div>
