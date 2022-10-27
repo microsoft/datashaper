@@ -12,7 +12,7 @@ import { generateCodebook } from '../generateCodebook.js'
 import { validateTable } from '../validateTable.js'
 
 describe('validate table tests', () => {
-	describe('validate table test for required constraint', () => {
+	describe('validate table test for required constraint without including error instances', () => {
 		const csv = fs.readFileSync('./src/__tests__/data/companies-2.csv', {
 			encoding: 'utf8',
 			flag: 'r',
@@ -32,6 +32,7 @@ describe('validate table tests', () => {
 		const validationResult: ValidationResult = validateTable(
 			parsed,
 			codebookResult,
+			false,
 		)
 
 		it('should return a validation result object', () => {
@@ -41,7 +42,39 @@ describe('validate table tests', () => {
 		})
 	})
 
-	describe('validate table test for unique constraint', () => {
+	describe('validate table test for required constraint with including error instances', () => {
+		const csv = fs.readFileSync('./src/__tests__/data/companies-2.csv', {
+			encoding: 'utf8',
+			flag: 'r',
+		})
+
+		const parsed = fromCSV(csv, { autoType: false })
+
+		const codebookResult = generateCodebook(parsed)
+
+		const element = codebookResult.fields.find(element => element.name === 'US')
+		const usConstraints: Constraints = {
+			required: true,
+		}
+
+		element.constraints = usConstraints
+
+		const validationResult: ValidationResult = validateTable(
+			parsed,
+			codebookResult,
+			true,
+		)
+
+		it('should return a validation result object', () => {
+			expect(validationResult.errors).toHaveLength(1)
+			expect(validationResult.errors[0].name).toBe('US')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.Required)
+			expect(validationResult.errors[0].indexes[0]).toBe(0)
+			expect(validationResult.errors[0].indexes[1]).toBe(4)
+		})
+	})
+
+	describe('validate table test for unique constraint without including error instances', () => {
 		const csv = fs.readFileSync('./src/__tests__/data/companies.csv', {
 			encoding: 'utf8',
 			flag: 'r',
@@ -61,12 +94,81 @@ describe('validate table tests', () => {
 		const validationResult: ValidationResult = validateTable(
 			parsed,
 			codebookResult,
+			false,
 		)
 
 		it('should return a validation result object', () => {
 			expect(validationResult.errors).toHaveLength(1)
 			expect(validationResult.errors[0].name).toBe('US')
 			expect(validationResult.errors[0].rule).toBe(ErrorCode.Unique)
+		})
+	})
+
+	describe('validate table test for unique constraint with including error instances', () => {
+		const csv = fs.readFileSync('./src/__tests__/data/companies.csv', {
+			encoding: 'utf8',
+			flag: 'r',
+		})
+
+		const parsed = fromCSV(csv, { autoType: false })
+
+		const codebookResult = generateCodebook(parsed)
+
+		const element = codebookResult.fields.find(element => element.name === 'US')
+		const usConstraints: Constraints = {
+			unique: true,
+		}
+
+		element.constraints = usConstraints
+
+		const validationResult: ValidationResult = validateTable(
+			parsed,
+			codebookResult,
+			true,
+		)
+
+		it('should return a validation result object', () => {
+			expect(validationResult.errors).toHaveLength(1)
+			expect(validationResult.errors[0].name).toBe('US')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.Unique)
+			expect(validationResult.errors[0].indexes[0]).toBe(1)
+			expect(validationResult.errors[0].indexes[1]).toBe(2)
+			expect(validationResult.errors[0].indexes[2]).toBe(3)
+		})
+	})
+
+	describe('validate table test for minLength constraint', () => {
+		const csv = fs.readFileSync('./src/__tests__/data/companies.csv', {
+			encoding: 'utf8',
+			flag: 'r',
+		})
+
+		const parsed = fromCSV(csv, { autoType: false })
+
+		const codebookResult = generateCodebook(parsed)
+
+		const element = codebookResult.fields.find(
+			element => element.name === 'Name',
+		)
+		const nameConstraints: Constraints = {
+			minLength: 6,
+			enum: ['Microsoft', 'Apple', 'Google'],
+		}
+
+		element.constraints = nameConstraints
+
+		const validationResult: ValidationResult = validateTable(
+			parsed,
+			codebookResult,
+			false,
+		)
+
+		it('should return a validation result object', () => {
+			expect(validationResult.errors).toHaveLength(2)
+			expect(validationResult.errors[0].name).toBe('Name')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.MinLength)
+			expect(validationResult.errors[1].name).toBe('Name')
+			expect(validationResult.errors[1].rule).toBe(ErrorCode.Enum)
 		})
 	})
 
@@ -93,6 +195,7 @@ describe('validate table tests', () => {
 		const validationResult: ValidationResult = validateTable(
 			parsed,
 			codebookResult,
+			false,
 		)
 
 		it('should return a validation result object', () => {
@@ -124,46 +227,13 @@ describe('validate table tests', () => {
 		const validationResult: ValidationResult = validateTable(
 			parsed,
 			codebookResult,
+			false,
 		)
 
 		it('should return a validation result object', () => {
 			expect(validationResult.errors).toHaveLength(1)
 			expect(validationResult.errors[0].name).toBe('ID')
 			expect(validationResult.errors[0].rule).toBe(ErrorCode.Maximum)
-		})
-	})
-
-	describe('validate table test for minLength constraint', () => {
-		const csv = fs.readFileSync('./src/__tests__/data/companies.csv', {
-			encoding: 'utf8',
-			flag: 'r',
-		})
-
-		const parsed = fromCSV(csv, { autoType: false })
-
-		const codebookResult = generateCodebook(parsed)
-
-		const element = codebookResult.fields.find(
-			element => element.name === 'Name',
-		)
-		const nameConstraints: Constraints = {
-			minLength: 6,
-			enum: ['Microsoft', 'Apple', 'Google'],
-		}
-
-		element.constraints = nameConstraints
-
-		const validationResult: ValidationResult = validateTable(
-			parsed,
-			codebookResult,
-		)
-
-		it('should return a validation result object', () => {
-			expect(validationResult.errors).toHaveLength(2)
-			expect(validationResult.errors[0].name).toBe('Name')
-			expect(validationResult.errors[0].rule).toBe(ErrorCode.MinLength)
-			expect(validationResult.errors[1].name).toBe('Name')
-			expect(validationResult.errors[1].rule).toBe(ErrorCode.Enum)
 		})
 	})
 
@@ -190,6 +260,7 @@ describe('validate table tests', () => {
 		const validationResult: ValidationResult = validateTable(
 			parsed,
 			codebookResult,
+			false,
 		)
 
 		it('should return a validation result object', () => {
@@ -232,6 +303,7 @@ describe('validate table tests', () => {
 		const validationResult: ValidationResult = validateTable(
 			parsed,
 			codebookResult,
+			false,
 		)
 
 		it('should return a validation result object', () => {
@@ -273,6 +345,7 @@ describe('validate table tests', () => {
 		const validationResult: ValidationResult = validateTable(
 			parsed,
 			codebookResult,
+			false,
 		)
 
 		it('should return a validation result object', () => {

@@ -14,6 +14,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 export function validateTable(
 	table: ColumnTable,
 	codebook: CodebookSchema,
+	includeInstances: boolean,
 ): ValidationResult {
 	const validationResult: ValidationResult = {
 		errors: [],
@@ -26,22 +27,42 @@ export function validateTable(
 
 			//required constraint
 			if (constraints.required) {
-				const requiredResult = checkRequiredConstraint(columnValues as string[])
-				if (!requiredResult) {
+				const requiredResult = checkRequiredConstraint(
+					columnValues as string[],
+					includeInstances,
+				)
+				const [isRequired, instances] = requiredResult
+
+				if (!isRequired) {
 					if (validationResult.errors != null)
 						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Required),
+							createFieldErrorObject(
+								field.name,
+								ErrorCode.Required,
+								includeInstances,
+								instances,
+							),
 						)
 				}
 			}
 
 			//unique constraint
 			if (constraints.unique) {
-				const uniqueResult = checkUniqueConstraint(columnValues as string[])
-				if (!uniqueResult) {
+				const uniqueResult = checkUniqueConstraint(
+					columnValues as string[],
+					includeInstances,
+				)
+				const [isUnique, instances] = uniqueResult
+
+				if (!isUnique) {
 					if (validationResult.errors != null)
 						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Unique),
+							createFieldErrorObject(
+								field.name,
+								ErrorCode.Unique,
+								includeInstances,
+								instances,
+							),
 						)
 				}
 			}
@@ -58,11 +79,19 @@ export function validateTable(
 						: field.type === DataType.String
 						? (columnValues as string[])
 						: [],
+					includeInstances,
 				)
-				if (!minLengthResult) {
+				const [isMinLength, instances] = minLengthResult
+
+				if (!isMinLength) {
 					if (validationResult.errors != null)
 						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.MinLength),
+							createFieldErrorObject(
+								field.name,
+								ErrorCode.MinLength,
+								includeInstances,
+								instances,
+							),
 						)
 				}
 			}
@@ -83,7 +112,12 @@ export function validateTable(
 				if (!maxLengthResult) {
 					if (validationResult.errors != null)
 						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.MaxLength),
+							createFieldErrorObject(
+								field.name,
+								ErrorCode.MaxLength,
+								false,
+								[],
+							),
 						)
 				}
 			}
@@ -105,7 +139,7 @@ export function validateTable(
 				if (!minimumResult) {
 					if (validationResult.errors != null)
 						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Minimum),
+							createFieldErrorObject(field.name, ErrorCode.Minimum, false, []),
 						)
 				}
 			}
@@ -127,7 +161,7 @@ export function validateTable(
 				if (!maximumResult) {
 					if (validationResult.errors != null)
 						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Maximum),
+							createFieldErrorObject(field.name, ErrorCode.Maximum, false, []),
 						)
 				}
 			}
@@ -141,7 +175,7 @@ export function validateTable(
 				if (!patternResult) {
 					if (validationResult.errors != null)
 						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Pattern),
+							createFieldErrorObject(field.name, ErrorCode.Pattern, false, []),
 						)
 				}
 			}
@@ -155,7 +189,7 @@ export function validateTable(
 				if (!enumResult) {
 					if (validationResult.errors != null)
 						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Enum),
+							createFieldErrorObject(field.name, ErrorCode.Enum, false, []),
 						)
 				}
 			}
@@ -165,17 +199,37 @@ export function validateTable(
 	return validationResult
 }
 
-function createFieldErrorObject(name: string, message: ErrorCode): FieldError {
+function createFieldErrorObject(
+	name: string,
+	message: ErrorCode,
+	includeInstances: boolean,
+	instances: number[],
+): FieldError {
 	const fieldError: FieldError = {
 		name: name,
 		rule: message,
 	}
 
+	if (includeInstances) {
+		fieldError.indexes = instances
+	}
+
 	return fieldError
 }
 
-function checkRequiredConstraint(values: string[]): boolean {
-	return values.every(requiredRule)
+function checkRequiredConstraint(
+	values: string[],
+	includeInstances: boolean,
+): [boolean, number[]] {
+	if (!includeInstances) return [values.every(requiredRule), []]
+
+	const resultIndexes: number[] = []
+
+	values.map((value: string, index: number) => {
+		if (!requiredRule(value)) resultIndexes.push(index)
+	})
+
+	return resultIndexes.length != 0 ? [false, resultIndexes] : [true, []]
 }
 
 function requiredRule(element: string): boolean {
@@ -185,20 +239,38 @@ function requiredRule(element: string): boolean {
 	return true
 }
 
-function checkUniqueConstraint(values: string[]): boolean {
-	const uniqueValues = [...new Set(values)]
-	return values.length === uniqueValues.length
+function checkUniqueConstraint(
+	values: string[],
+	includeInstances: boolean,
+): [boolean, number[]] {
+	const uniqueValues = new Set<string>()
+	const resultIndexes: number[] = []
+
+	values.map((value: string, index: number) => {
+		if (uniqueValues.has(value)) {
+			if (includeInstances) resultIndexes.push(index)
+		} else uniqueValues.add(value)
+	})
+
+	return [values.length === uniqueValues.size, resultIndexes]
 }
 
 function checkMinLengthConstraint(
 	minLength: number,
 	values: string[] | Array<any>[],
-): boolean {
+	includeInstances: boolean,
+): [boolean, number[]] {
+	const resultIndexes: number[] = []
+
 	for (let i = 0; i < values.length; i++) {
-		if (values[i] != null && values[i]!.length < minLength) return false
+		if (values[i] != null && values[i]!.length < minLength) {
+			if (!includeInstances) return [false, []]
+
+			resultIndexes.push(i)
+		}
 	}
 
-	return true
+	return resultIndexes.length != 0 ? [false, resultIndexes] : [true, []]
 }
 
 function checkMaxLengthConstraint(
