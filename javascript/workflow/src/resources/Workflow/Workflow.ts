@@ -495,6 +495,8 @@ export class Workflow
 		includeInputs,
 	}: TableExportOptions = {}): Map<string, Maybe<TableContainer>> {
 		const result = new Map<string, Maybe<TableContainer>>()
+		const addTable = (name: string) =>
+			result.set(name, this._tables.get(name)!.value)
 
 		if (includeDefaultOutput) {
 			result.set('default', this._defaultOutput.value)
@@ -502,11 +504,10 @@ export class Workflow
 		if (includeDefaultInput) {
 			result.set('defaultInput', this._defaultInput.value)
 		}
-		for (const [name, observable] of this._tables) {
-			if (!this.inputNames.includes(name) || includeInputs) {
-				result.set(name, observable.value)
-			}
+		if (includeInputs) {
+			this.inputNames.forEach(addTable)
 		}
+		this.outputNames.forEach(addTable)
 		return result
 	}
 
@@ -516,16 +517,18 @@ export class Workflow
 		includeInputs,
 	}: TableExportOptions = {}): Maybe<TableContainer>[] {
 		const result: Maybe<TableContainer>[] = []
-		if (includeDefaultOutput) {
-			result.push(this._defaultOutput.value)
-		}
-		for (const [name, observable] of this._tables) {
-			if (!this.inputNames.includes(name) || includeInputs) {
-				result.push(observable.value)
-			}
-		}
+		const addTable = (name: string) =>
+			result.push(this._tables.get(name)!.value)
 		if (includeDefaultInput) {
 			result.push(this._defaultInput.value)
+		}
+		if (includeInputs) {
+			this.inputNames.forEach(addTable)
+		}
+		this.outputNames.forEach(addTable)
+
+		if (includeDefaultOutput) {
+			result.push(this._defaultOutput.value)
 		}
 		return result
 	}
