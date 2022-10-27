@@ -14,11 +14,13 @@ export function useColorDefaults(
 	const defaults = useMemo(
 		() =>
 			({
-				color: theme.palette.neutralPrimary,
+				color: theme.palette.neutralPrimaryAlt,
 				background: theme.palette.neutralQuaternary,
-				disabled: theme.palette.neutralSecondary,
+				disabled: theme.palette.neutralSecondaryAlt,
 				border: theme.palette.neutralTertiaryAlt,
-				checked: theme.palette.neutralQuaternaryAlt,
+				checked: theme.palette.neutralTertiaryAlt,
+				hovered: theme.palette.neutralTertiary,
+				pressed: theme.palette.neutralQuaternaryAlt,
 			} as CommandBarColors),
 		[theme],
 	)
@@ -29,6 +31,8 @@ export function useColorDefaults(
 			disabled: colors?.disabled || defaults.disabled,
 			border: colors?.border || defaults.border,
 			checked: colors?.checked || defaults.checked,
+			hovered: colors?.hovered || defaults.hovered,
+			pressed: colors?.pressed || defaults.pressed,
 		}),
 		[colors, defaults],
 	)

@@ -2,11 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { HistoryIcon } from '@datashaper/react'
 import { ActionButton, useTheme } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import React, { memo } from 'react'
 
+import { HistoryIcon } from './CustomIcons.js'
 import { buttonStyles } from './HistoryButton.styles.js'
 import type { HistoryButtonProps } from './HistoryButton.types.js'
 

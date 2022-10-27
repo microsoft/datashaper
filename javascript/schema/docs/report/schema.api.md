@@ -966,7 +966,7 @@ export interface TypeHints {
     dateFormat?: string;
     decimal?: string;
     falseValues?: string[];
-    infinity?: string[];
+    infinity?: [string, string];
     naValues?: string[];
     thousands?: string;
     trueValues?: string[];

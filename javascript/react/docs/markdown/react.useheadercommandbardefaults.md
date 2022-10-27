@@ -9,14 +9,14 @@ Helper to create the props necessary for the default inverted management bar. Ba
 <b>Signature:</b>
 
 ```typescript
-export declare function useHeaderCommandBarDefaults(props?: ICommandBarProps, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
+export declare function useHeaderCommandBarDefaults(props?: Partial<ICommandBarProps>, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  props | ICommandBarProps | <i>(Optional)</i> |
+|  props | Partial&lt;ICommandBarProps&gt; | <i>(Optional)</i> |
 |  far | boolean | <i>(Optional)</i> |
 |  colors | Partial&lt;CommandBarColors&gt; | <i>(Optional)</i> |
 

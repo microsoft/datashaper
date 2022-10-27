@@ -4,10 +4,10 @@
 
 ## TypeHints.infinity property
 
-Strings to parse as negative and positive infinity. Default: case insensitive "-inf" and "inf".
+Strings to parse as negative and positive infinity. Default: case insensitive \["-inf", "inf"\].
 
 <b>Signature:</b>
 
 ```typescript
-infinity?: string[];
+infinity?: [string, string];
 ```

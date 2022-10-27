@@ -10,7 +10,7 @@ import {
 } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import type { Observable, Subscription } from 'rxjs'
-import { BehaviorSubject, map, mergeWith,of  } from 'rxjs'
+import { BehaviorSubject, map, mergeWith, of } from 'rxjs'
 
 import { DefaultGraph } from '../../dataflow/DefaultGraph.js'
 import { observableNode } from '../../dataflow/index.js'

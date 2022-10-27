@@ -41,6 +41,7 @@ export interface ColumnOptions {
 	onCellDropdownSelect?: DropdownOptionSelect
 	isClickable?: boolean
 	isDefaultHeaderClickable?: boolean
+	isSortable?: boolean
 	showColumnBorders?: boolean
 	compact?: boolean
 	resizable?: boolean
@@ -58,7 +59,8 @@ export function useColumns(
 	table: ColumnTable,
 	metadata?: TableMetadata,
 	columns?: IColumn[],
-	handleColumnHeaderClick?: ColumnClickFunction,
+	onColumnHeaderClick?: ColumnClickFunction,
+	onSort?: ColumnClickFunction,
 	options: ColumnOptions = {},
 	virtualColumns?: IColumn[],
 ): IColumn[] {
@@ -70,6 +72,7 @@ export function useColumns(
 		onColumnClick,
 		onCellDropdownSelect,
 		isClickable = false,
+		isSortable = false,
 		isDefaultHeaderClickable = false,
 		showColumnBorders = false,
 		compact = false,
@@ -130,7 +133,9 @@ export function useColumns(
 				createRenderDefaultColumnHeader(
 					column,
 					isDefaultHeaderClickable,
-					handleColumnHeaderClick,
+					isSortable,
+					onColumnHeaderClick,
+					onSort,
 				),
 			]
 
@@ -161,7 +166,6 @@ export function useColumns(
 			return {
 				onRender,
 				onRenderHeader: createRenderColumnHeader(headerRenderers),
-				onColumnClick,
 				isSorted:
 					!!sortDirection && column.fieldName === sortColumn ? true : false,
 				isSortedDescending: sortDirection === 'desc',
@@ -182,7 +186,6 @@ export function useColumns(
 		sortColumn,
 		sortDirection,
 		selectedColumn,
-		onColumnClick,
 		handleCellClick,
 		styles,
 		compact,
@@ -191,9 +194,11 @@ export function useColumns(
 		colorScale,
 		handleCellDropdownSelect,
 		isDefaultHeaderClickable,
-		handleColumnHeaderClick,
+		onColumnHeaderClick,
+		onSort,
 		columnMinWidth,
 		virtualColumns,
+		isSortable,
 	])
 }
 

@@ -68,6 +68,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     // (undocumented)
     sortable?: boolean;
     striped?: boolean;
+    style?: CSSProperties;
     // (undocumented)
     table: ColumnTable;
 }
@@ -98,9 +99,19 @@ export interface ArqueroTableHeaderProps {
     // (undocumented)
     showRowCount?: boolean;
     // (undocumented)
+    styles?: ArqueroTableHeaderStyles;
+    // (undocumented)
     table: ColumnTable;
     // (undocumented)
     visibleColumns?: string[];
+}
+
+// Warning: (ae-missing-release-tag) "ArqueroTableHeaderStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ArqueroTableHeaderStyles {
+    // (undocumented)
+    root?: CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "checkedItemsCommand" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -111,7 +122,7 @@ export function checkedItemsCommand(list: string[], checked?: string[], onCheckC
 // Warning: (ae-missing-release-tag) "ColumnClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type ColumnClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined) => void;
+export type ColumnClickFunction = (evt?: React.MouseEvent<HTMLElement>, column?: IColumn | undefined) => void;
 
 // Warning: (ae-missing-release-tag) "ColumnOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -125,6 +136,8 @@ export interface ColumnOptions {
     isClickable?: boolean;
     // (undocumented)
     isDefaultHeaderClickable?: boolean;
+    // (undocumented)
+    isSortable?: boolean;
     // (undocumented)
     onCellDropdownSelect?: DropdownOptionSelect;
     // (undocumented)
@@ -344,7 +357,7 @@ export interface SortParameters {
     // (undocumented)
     defaultSortDirection?: SortDirection;
     // (undocumented)
-    handleColumnHeaderClick: ColumnClickFunction;
+    onSort: ColumnClickFunction;
     // (undocumented)
     sortColumn?: string;
     // (undocumented)
@@ -532,6 +545,8 @@ export interface TableCommandsProps {
     // (undocumented)
     color?: string;
     // (undocumented)
+    commandBarProps?: Partial<ICommandBarProps>;
+    // (undocumented)
     inputTable?: TableContainer | undefined;
     // (undocumented)
     metadata?: TableMetadata;
@@ -646,7 +661,7 @@ export function useColumnNamesList(table: ColumnTable, columns?: IColumn[]): str
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], handleColumnHeaderClick?: ColumnClickFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
+export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnHeaderClick?: ColumnClickFunction, onSort?: ColumnClickFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -697,7 +712,7 @@ export function useHandleStepSave(workflow: Workflow): (step: Step, index: numbe
 // Warning: (ae-missing-release-tag) "useHeaderCommandBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useHeaderCommandBarDefaults(props?: ICommandBarProps, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
+export function useHeaderCommandBarDefaults(props?: Partial<ICommandBarProps>, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
 
 // Warning: (ae-missing-release-tag) "useIncrementingColumnColorScale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -766,7 +781,7 @@ export function useSortedTable(table: ColumnTable, column?: string, sort?: SortD
 // Warning: (ae-missing-release-tag) "useSortHandling" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useSortHandling(allowSorting: boolean, onColumnHeaderClick?: ColumnClickFunction, defaultSortColumn?: string, defaultSortDirection?: SortDirection): SortParameters;
+export function useSortHandling(allowSorting: boolean, defaultSortColumn?: string, defaultSortDirection?: SortDirection): SortParameters;
 
 // Warning: (ae-missing-release-tag) "useStepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

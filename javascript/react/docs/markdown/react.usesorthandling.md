@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function useSortHandling(allowSorting: boolean, onColumnHeaderClick?: ColumnClickFunction, defaultSortColumn?: string, defaultSortDirection?: SortDirection): SortParameters;
+export declare function useSortHandling(allowSorting: boolean, defaultSortColumn?: string, defaultSortDirection?: SortDirection): SortParameters;
 ```
 
 ## Parameters
@@ -15,7 +15,6 @@ export declare function useSortHandling(allowSorting: boolean, onColumnHeaderCli
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  allowSorting | boolean |  |
-|  onColumnHeaderClick | [ColumnClickFunction](./react.columnclickfunction.md) | <i>(Optional)</i> |
 |  defaultSortColumn | string | <i>(Optional)</i> |
 |  defaultSortDirection | SortDirection | <i>(Optional)</i> |
 
