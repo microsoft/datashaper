@@ -3,7 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Constraints , ValidationResult } from '@datashaper/schema'
+import type { Constraints, ValidationResult } from '@datashaper/schema'
+import { ErrorCode } from '@datashaper/schema'
 import { fromCSV } from 'arquero'
 import fs from 'fs'
 
@@ -21,14 +22,12 @@ describe('validate table tests', () => {
 
 		const codebookResult = generateCodebook(parsed)
 
-		const element2 = codebookResult.fields.find(
-			element => element.name === 'US',
-		)
+		const element = codebookResult.fields.find(element => element.name === 'US')
 		const usConstraints: Constraints = {
 			required: true,
 		}
 
-		element2.constraints = usConstraints
+		element.constraints = usConstraints
 
 		const validationResult: ValidationResult = validateTable(
 			parsed,
@@ -36,9 +35,9 @@ describe('validate table tests', () => {
 		)
 
 		it('should return a validation result object', () => {
-			expect(validationResult.columnErrors).toHaveLength(1)
-			expect(validationResult.columnErrors[0].columnName).toBe('US')
-			expect(validationResult.columnErrors[0].rule).toBe('required')
+			expect(validationResult.errors).toHaveLength(1)
+			expect(validationResult.errors[0].name).toBe('US')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.Required)
 		})
 	})
 
@@ -52,14 +51,12 @@ describe('validate table tests', () => {
 
 		const codebookResult = generateCodebook(parsed)
 
-		const element2 = codebookResult.fields.find(
-			element => element.name === 'US',
-		)
+		const element = codebookResult.fields.find(element => element.name === 'US')
 		const usConstraints: Constraints = {
 			unique: true,
 		}
 
-		element2.constraints = usConstraints
+		element.constraints = usConstraints
 
 		const validationResult: ValidationResult = validateTable(
 			parsed,
@@ -67,9 +64,9 @@ describe('validate table tests', () => {
 		)
 
 		it('should return a validation result object', () => {
-			expect(validationResult.columnErrors).toHaveLength(1)
-			expect(validationResult.columnErrors[0].columnName).toBe('US')
-			expect(validationResult.columnErrors[0].rule).toBe('unique')
+			expect(validationResult.errors).toHaveLength(1)
+			expect(validationResult.errors[0].name).toBe('US')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.Unique)
 		})
 	})
 
@@ -84,6 +81,7 @@ describe('validate table tests', () => {
 		const codebookResult = generateCodebook(parsed)
 
 		const element = codebookResult.fields.find(element => element.name === 'ID')
+
 		const idConstraints: Constraints = {
 			required: true,
 			unique: true,
@@ -98,9 +96,9 @@ describe('validate table tests', () => {
 		)
 
 		it('should return a validation result object', () => {
-			expect(validationResult.columnErrors).toHaveLength(1)
-			expect(validationResult.columnErrors[0].columnName).toBe('ID')
-			expect(validationResult.columnErrors[0].rule).toBe('minimum')
+			expect(validationResult.errors).toHaveLength(1)
+			expect(validationResult.errors[0].name).toBe('ID')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.Minimum)
 		})
 	})
 
@@ -129,9 +127,9 @@ describe('validate table tests', () => {
 		)
 
 		it('should return a validation result object', () => {
-			expect(validationResult.columnErrors).toHaveLength(1)
-			expect(validationResult.columnErrors[0].columnName).toBe('ID')
-			expect(validationResult.columnErrors[0].rule).toBe('maximum')
+			expect(validationResult.errors).toHaveLength(1)
+			expect(validationResult.errors[0].name).toBe('ID')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.Maximum)
 		})
 	})
 
@@ -145,7 +143,7 @@ describe('validate table tests', () => {
 
 		const codebookResult = generateCodebook(parsed)
 
-		const element2 = codebookResult.fields.find(
+		const element = codebookResult.fields.find(
 			element => element.name === 'Name',
 		)
 		const nameConstraints: Constraints = {
@@ -153,7 +151,7 @@ describe('validate table tests', () => {
 			enum: ['Microsoft', 'Apple', 'Google'],
 		}
 
-		element2.constraints = nameConstraints
+		element.constraints = nameConstraints
 
 		const validationResult: ValidationResult = validateTable(
 			parsed,
@@ -161,9 +159,11 @@ describe('validate table tests', () => {
 		)
 
 		it('should return a validation result object', () => {
-			expect(validationResult.columnErrors).toHaveLength(1)
-			expect(validationResult.columnErrors[0].columnName).toBe('Name')
-			expect(validationResult.columnErrors[0].rule).toBe('minLength')
+			expect(validationResult.errors).toHaveLength(2)
+			expect(validationResult.errors[0].name).toBe('Name')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.MinLength)
+			expect(validationResult.errors[1].name).toBe('Name')
+			expect(validationResult.errors[1].rule).toBe(ErrorCode.Enum)
 		})
 	})
 
@@ -193,9 +193,11 @@ describe('validate table tests', () => {
 		)
 
 		it('should return a validation result object', () => {
-			expect(validationResult.columnErrors).toHaveLength(1)
-			expect(validationResult.columnErrors[0].columnName).toBe('Name')
-			expect(validationResult.columnErrors[0].rule).toBe('maxLength')
+			expect(validationResult.errors).toHaveLength(2)
+			expect(validationResult.errors[0].name).toBe('Name')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.MaxLength)
+			expect(validationResult.errors[1].name).toBe('Name')
+			expect(validationResult.errors[1].rule).toBe(ErrorCode.Enum)
 		})
 	})
 
@@ -210,6 +212,7 @@ describe('validate table tests', () => {
 		const codebookResult = generateCodebook(parsed)
 
 		const element = codebookResult.fields.find(element => element.name === 'ID')
+
 		const idConstraints: Constraints = {
 			required: true,
 			unique: true,
@@ -232,9 +235,9 @@ describe('validate table tests', () => {
 		)
 
 		it('should return a validation result object', () => {
-			expect(validationResult.columnErrors).toHaveLength(1)
-			expect(validationResult.columnErrors[0].columnName).toBe('Name')
-			expect(validationResult.columnErrors[0].rule).toBe('enum')
+			expect(validationResult.errors).toHaveLength(1)
+			expect(validationResult.errors[0].name).toBe('Name')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.Enum)
 		})
 	})
 
@@ -261,6 +264,7 @@ describe('validate table tests', () => {
 			element => element.name === 'Name',
 		)
 		const nameConstraints: Constraints = {
+			maxLength: 5,
 			enum: ['Microsoft', 'Apple', 'Google'],
 		}
 
@@ -272,11 +276,13 @@ describe('validate table tests', () => {
 		)
 
 		it('should return a validation result object', () => {
-			expect(validationResult.columnErrors).toHaveLength(2)
-			expect(validationResult.columnErrors[0].columnName).toBe('ID')
-			expect(validationResult.columnErrors[0].rule).toBe('minimum')
-			expect(validationResult.columnErrors[1].columnName).toBe('Name')
-			expect(validationResult.columnErrors[1].rule).toBe('enum')
+			expect(validationResult.errors).toHaveLength(3)
+			expect(validationResult.errors[0].name).toBe('ID')
+			expect(validationResult.errors[0].rule).toBe(ErrorCode.Minimum)
+			expect(validationResult.errors[1].name).toBe('Name')
+			expect(validationResult.errors[1].rule).toBe(ErrorCode.MaxLength)
+			expect(validationResult.errors[2].name).toBe('Name')
+			expect(validationResult.errors[2].rule).toBe(ErrorCode.Enum)
 		})
 	})
 })

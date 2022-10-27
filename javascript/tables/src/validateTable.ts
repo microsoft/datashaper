@@ -4,11 +4,11 @@
  */
 import type {
 	CodebookSchema,
-	ColumnError,
 	Field,
+	FieldError,
 	ValidationResult,
 } from '@datashaper/schema'
-import { DataType } from '@datashaper/schema'
+import { DataType, ErrorCode } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export function validateTable(
@@ -16,44 +16,38 @@ export function validateTable(
 	codebook: CodebookSchema,
 ): ValidationResult {
 	const validationResult: ValidationResult = {
-		columnErrors: [],
+		errors: [],
 	}
 
 	codebook.fields.forEach((field: Field) => {
-		const columnValues = table.array(field.name)
-		let flag = false
 		if (field.constraints != null) {
 			const constraints = field.constraints
+			const columnValues = table.array(field.name)
 
 			//required constraint
-			if (!flag && constraints.required != null && constraints.required) {
+			if (constraints.required) {
 				const requiredResult = checkRequiredConstraint(columnValues as string[])
 				if (!requiredResult) {
-					flag = true
-					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(
-							createColumnErrorObject(field.name, 'required'),
+					if (validationResult.errors != null)
+						validationResult.errors.push(
+							createFieldErrorObject(field.name, ErrorCode.Required),
 						)
 				}
 			}
 
 			//unique constraint
-			if (!flag && constraints.unique != null && constraints.unique) {
+			if (constraints.unique) {
 				const uniqueResult = checkUniqueConstraint(columnValues as string[])
 				if (!uniqueResult) {
-					flag = true
-
-					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(
-							createColumnErrorObject(field.name, 'unique'),
+					if (validationResult.errors != null)
+						validationResult.errors.push(
+							createFieldErrorObject(field.name, ErrorCode.Unique),
 						)
 				}
 			}
 
 			//minLength constraint - for string and arrays only
 			if (
-				!flag &&
-				constraints.minLength != null &&
 				constraints.minLength &&
 				(field.type === DataType.Array || field.type === DataType.String)
 			) {
@@ -66,19 +60,15 @@ export function validateTable(
 						: [],
 				)
 				if (!minLengthResult) {
-					flag = true
-
-					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(
-							createColumnErrorObject(field.name, 'minLength'),
+					if (validationResult.errors != null)
+						validationResult.errors.push(
+							createFieldErrorObject(field.name, ErrorCode.MinLength),
 						)
 				}
 			}
 
 			//maxLength constraint - for string and arrays only
 			if (
-				!flag &&
-				constraints.maxLength != null &&
 				constraints.maxLength &&
 				(field.type === DataType.Array || field.type === DataType.String)
 			) {
@@ -91,19 +81,15 @@ export function validateTable(
 						: [],
 				)
 				if (!maxLengthResult) {
-					flag = true
-
-					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(
-							createColumnErrorObject(field.name, 'maxLength'),
+					if (validationResult.errors != null)
+						validationResult.errors.push(
+							createFieldErrorObject(field.name, ErrorCode.MaxLength),
 						)
 				}
 			}
 
 			//minimum constraint - for numbers or dates only
 			if (
-				!flag &&
-				constraints.minimum != null &&
 				constraints.minimum &&
 				(field.type === DataType.Number || field.type === DataType.Date)
 			) {
@@ -114,21 +100,18 @@ export function validateTable(
 						: field.type === DataType.Date
 						? (columnValues as Date[])
 						: [],
+					field.type,
 				)
 				if (!minimumResult) {
-					flag = true
-
-					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(
-							createColumnErrorObject(field.name, 'minimum'),
+					if (validationResult.errors != null)
+						validationResult.errors.push(
+							createFieldErrorObject(field.name, ErrorCode.Minimum),
 						)
 				}
 			}
 
 			//maximum constraint - for numbers or dates only
 			if (
-				!flag &&
-				constraints.maximum != null &&
 				constraints.maximum &&
 				(field.type === DataType.Number || field.type === DataType.Date)
 			) {
@@ -139,55 +122,40 @@ export function validateTable(
 						: field.type === DataType.Date
 						? (columnValues as Date[])
 						: [],
+					field.type,
 				)
 				if (!maximumResult) {
-					flag = true
-
-					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(
-							createColumnErrorObject(field.name, 'maximum'),
+					if (validationResult.errors != null)
+						validationResult.errors.push(
+							createFieldErrorObject(field.name, ErrorCode.Maximum),
 						)
 				}
 			}
 
 			//pattern constraint - for strings only
-			if (
-				!flag &&
-				constraints.pattern != null &&
-				constraints.pattern &&
-				field.type === DataType.String
-			) {
+			if (constraints.pattern && field.type === DataType.String) {
 				const patternResult = checkPatternConstraint(
 					constraints.pattern,
 					columnValues as string[],
 				)
 				if (!patternResult) {
-					flag = true
-
-					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(
-							createColumnErrorObject(field.name, 'pattern'),
+					if (validationResult.errors != null)
+						validationResult.errors.push(
+							createFieldErrorObject(field.name, ErrorCode.Pattern),
 						)
 				}
 			}
 
 			//enum constraint - for strings only
-			if (
-				!flag &&
-				constraints.enum != null &&
-				constraints.enum &&
-				field.type === DataType.String
-			) {
+			if (constraints.enum && field.type === DataType.String) {
 				const enumResult = checkEnumConstraint(
 					constraints.enum,
 					columnValues as string[],
 				)
 				if (!enumResult) {
-					flag = true
-
-					if (validationResult.columnErrors != null)
-						validationResult.columnErrors.push(
-							createColumnErrorObject(field.name, 'enum'),
+					if (validationResult.errors != null)
+						validationResult.errors.push(
+							createFieldErrorObject(field.name, ErrorCode.Enum),
 						)
 				}
 			}
@@ -197,24 +165,22 @@ export function validateTable(
 	return validationResult
 }
 
-function createColumnErrorObject(name: string, message: string): ColumnError {
-	const columnError: ColumnError = {
-		columnName: name,
+function createFieldErrorObject(name: string, message: ErrorCode): FieldError {
+	const fieldError: FieldError = {
+		name: name,
 		rule: message,
 	}
 
-	return columnError
+	return fieldError
 }
 
 function checkRequiredConstraint(values: string[]): boolean {
-	for (let i = 0; i < values.length; i++) {
-		if (
-			values[i] == null ||
-			values[i] == undefined ||
-			(values[i] as string).length == 0
-		)
-			return false
-	}
+	return values.every(requiredRule)
+}
+
+function requiredRule(element: string): boolean {
+	if (element == null || element == undefined || element.length == 0)
+		return false
 
 	return true
 }
@@ -249,9 +215,15 @@ function checkMaxLengthConstraint(
 function checkMinimumConstraint(
 	minimum: number,
 	values: number[] | Date[],
+	dataType: DataType,
 ): boolean {
 	for (let i = 0; i < values.length; i++) {
-		if (values[i] != null && values[i]! < minimum) return false
+		if (
+			values[i] != null && dataType == DataType.Date
+				? values[i]!.valueOf()
+				: values[i]! < minimum
+		)
+			return false
 	}
 
 	return true
@@ -260,9 +232,15 @@ function checkMinimumConstraint(
 function checkMaximumConstraint(
 	maximum: number,
 	values: number[] | Date[],
+	dataType: DataType,
 ): boolean {
 	for (let i = 0; i < values.length; i++) {
-		if (values[i] != null && values[i]! > maximum) return false
+		if (
+			values[i] != null && dataType == DataType.Date
+				? values[i]!.valueOf()
+				: values[i]! > maximum
+		)
+			return false
 	}
 
 	return true

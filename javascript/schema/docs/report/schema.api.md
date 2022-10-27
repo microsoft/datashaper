@@ -132,16 +132,6 @@ export enum CodebookStrategy {
     MappingOnly = "mapping only"
 }
 
-// Warning: (ae-missing-release-tag) "ColumnError" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ColumnError {
-    // (undocumented)
-    columnName: string;
-    // (undocumented)
-    rule: string;
-}
-
 // Warning: (ae-missing-release-tag) "Constraints" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -354,6 +344,28 @@ export interface EraseArgs extends InputColumnArgs {
     value: Value;
 }
 
+// Warning: (ae-missing-release-tag) "ErrorCode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum ErrorCode {
+    // (undocumented)
+    Enum = "enum constraint",
+    // (undocumented)
+    Maximum = "maximum length constraint",
+    // (undocumented)
+    MaxLength = "max length constraint",
+    // (undocumented)
+    Minimum = "minimum length constraint",
+    // (undocumented)
+    MinLength = "min length constraint",
+    // (undocumented)
+    Pattern = "pattern constraint",
+    // (undocumented)
+    Required = "required constraint",
+    // (undocumented)
+    Unique = "unique constraint"
+}
+
 // Warning: (ae-missing-release-tag) "FactoryInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -428,6 +440,18 @@ export enum FieldAggregateOperation {
     Valid = "valid",
     // (undocumented)
     Variance = "variance"
+}
+
+// Warning: (ae-missing-release-tag) "FieldError" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FieldError {
+    // (undocumented)
+    indexes?: number[];
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    rule: ErrorCode;
 }
 
 // Warning: (ae-missing-release-tag) "FieldMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1019,7 +1043,7 @@ export type UnrollArgs = InputColumnListArgs;
 // @public (undocumented)
 export interface ValidationResult {
     // (undocumented)
-    columnErrors?: ColumnError[];
+    errors?: FieldError[];
 }
 
 // Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
