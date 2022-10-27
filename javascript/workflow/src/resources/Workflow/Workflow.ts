@@ -135,6 +135,9 @@ export class Workflow
 				name,
 				new BehaviorSubject<Maybe<TableContainer>>(undefined),
 			)
+			if (name && this._graph.hasNode(name)) {
+				this.observeOutput(name)
+			}
 		}
 		return this._tables.get(name)!
 	}
