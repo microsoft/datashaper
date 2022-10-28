@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IColumn } from '@fluentui/react'
+import type { IColumn, IIconStyles } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
@@ -47,7 +47,7 @@ export function useTextStyle(
 	)
 }
 
-export function useIconStyles(): { root: React.CSSProperties } {
+export function useIconStyles(): IIconStyles {
 	const theme = useTheme()
 	return useMemo(
 		() => ({
