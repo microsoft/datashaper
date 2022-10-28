@@ -5,5 +5,5 @@
 import type { FieldError } from './FieldError.js'
 
 export interface ValidationResult {
-	errors?: FieldError[]
+	errors: FieldError[]
 }
