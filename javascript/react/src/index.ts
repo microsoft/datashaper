@@ -11,7 +11,7 @@ export type {
 	DetailsListFeatures,
 } from './components/ArqueroDetailsList/ArqueroDetailsList.types.js'
 export * from './components/ArqueroDetailsList/index.js'
-export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/ArqueroTableheader.types.js'
+export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/ArqueroTableheader.types1.js'
 export * from './components/ArqueroTableHeader/index.js'
 export * from './components/CustomIcons.js'
 export { Dropzone } from './components/Dropzone.js'
