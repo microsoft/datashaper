@@ -14,12 +14,12 @@ export declare enum ErrorCode
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  Enum | <code>&quot;enum constraint&quot;</code> |  |
-|  Maximum | <code>&quot;maximum length constraint&quot;</code> |  |
-|  MaxLength | <code>&quot;max length constraint&quot;</code> |  |
-|  Minimum | <code>&quot;minimum length constraint&quot;</code> |  |
-|  MinLength | <code>&quot;min length constraint&quot;</code> |  |
-|  Pattern | <code>&quot;pattern constraint&quot;</code> |  |
-|  Required | <code>&quot;required constraint&quot;</code> |  |
-|  Unique | <code>&quot;unique constraint&quot;</code> |  |
+|  Enum | <code>&quot;enum&quot;</code> |  |
+|  Maximum | <code>&quot;maximum length&quot;</code> |  |
+|  MaxLength | <code>&quot;max length&quot;</code> |  |
+|  Minimum | <code>&quot;minimum length&quot;</code> |  |
+|  MinLength | <code>&quot;min length&quot;</code> |  |
+|  Pattern | <code>&quot;pattern&quot;</code> |  |
+|  Required | <code>&quot;required&quot;</code> |  |
+|  Unique | <code>&quot;unique&quot;</code> |  |
 

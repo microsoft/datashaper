@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function validateRequired(element: string): boolean;
+export declare function validateRequired(element: unknown): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  element | string |  |
+|  element | unknown |  |
 
 <b>Returns:</b>
 

@@ -335,7 +335,7 @@ export function validatePatternConstraint(pattern: string): (values: unknown, in
 // Warning: (ae-missing-release-tag) "validateRequired" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function validateRequired(element: string): boolean;
+export function validateRequired(element: unknown): boolean;
 
 // Warning: (ae-missing-release-tag) "validateRequiredConstraint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

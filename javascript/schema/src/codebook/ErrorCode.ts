@@ -3,12 +3,12 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export enum ErrorCode {
-	Required = 'required constraint',
-	Unique = 'unique constraint',
-	MinLength = 'min length constraint',
-	MaxLength = 'max length constraint',
-	Minimum = 'minimum length constraint',
-	Maximum = 'maximum length constraint',
-	Pattern = 'pattern constraint',
-	Enum = 'enum constraint',
+	Required = 'required',
+	Unique = 'unique',
+	MinLength = 'min length',
+	MaxLength = 'max length',
+	Minimum = 'minimum length',
+	Maximum = 'maximum length',
+	Pattern = 'pattern',
+	Enum = 'enum',
 }

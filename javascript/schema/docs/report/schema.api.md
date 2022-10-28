@@ -349,21 +349,21 @@ export interface EraseArgs extends InputColumnArgs {
 // @public (undocumented)
 export enum ErrorCode {
     // (undocumented)
-    Enum = "enum constraint",
+    Enum = "enum",
     // (undocumented)
-    Maximum = "maximum length constraint",
+    Maximum = "maximum length",
     // (undocumented)
-    MaxLength = "max length constraint",
+    MaxLength = "max length",
     // (undocumented)
-    Minimum = "minimum length constraint",
+    Minimum = "minimum length",
     // (undocumented)
-    MinLength = "min length constraint",
+    MinLength = "min length",
     // (undocumented)
-    Pattern = "pattern constraint",
+    Pattern = "pattern",
     // (undocumented)
-    Required = "required constraint",
+    Required = "required",
     // (undocumented)
-    Unique = "unique constraint"
+    Unique = "unique"
 }
 
 // Warning: (ae-missing-release-tag) "FactoryInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

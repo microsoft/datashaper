@@ -13,7 +13,7 @@ export function validateRequiredConstraint(): (
 		values: unknown,
 		includeInstances: boolean,
 	): ValidationTestResult {
-		const valuesCasted = values as string[]
+		const valuesCasted = values as []
 
 		if (!includeInstances) {
 			return {
@@ -37,11 +37,8 @@ export function validateRequiredConstraint(): (
 	}
 }
 
-export function validateRequired(element: string): boolean {
-	if (element == null || element == undefined || element.length == 0)
-		return false
-
-	return true
+export function validateRequired(element: unknown): boolean {
+	return element !== null && element !== undefined
 }
 
 export function validateUniqueConstraint(): (
@@ -59,9 +56,8 @@ export function validateUniqueConstraint(): (
 		valuesCasted.map((value: string, index: number) => {
 			if (uniqueValues.has(value)) {
 				if (includeInstances) resultIndexes.push(index)
-			} else {
-				uniqueValues.add(value)
 			}
+			uniqueValues.add(value)
 		})
 
 		return {
@@ -281,8 +277,9 @@ export function validatePatternConstraint(
 }
 
 export function validatePattern(pattern: string): (value: string) => boolean {
+	const re = new RegExp(pattern)
+
 	return function validatePattern(value: string) {
-		const re = new RegExp(pattern)
 		return re.test(value)
 	}
 }
@@ -318,7 +315,9 @@ export function validateEnumConstraint(
 }
 
 export function validateEnum(enumList: string[]): (value: string) => boolean {
+	const uniqueSet = new Set(enumList)
+
 	return function validateEnum(value: string) {
-		return enumList.includes(value)
+		return uniqueSet.has(value)
 	}
 }

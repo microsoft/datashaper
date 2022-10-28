@@ -3534,7 +3534,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"enum constraint\""
+                  "text": "\"enum\""
                 }
               ],
               "initializerTokenRange": {
@@ -3555,7 +3555,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"maximum length constraint\""
+                  "text": "\"maximum length\""
                 }
               ],
               "initializerTokenRange": {
@@ -3576,7 +3576,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"max length constraint\""
+                  "text": "\"max length\""
                 }
               ],
               "initializerTokenRange": {
@@ -3597,7 +3597,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"minimum length constraint\""
+                  "text": "\"minimum length\""
                 }
               ],
               "initializerTokenRange": {
@@ -3618,7 +3618,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"min length constraint\""
+                  "text": "\"min length\""
                 }
               ],
               "initializerTokenRange": {
@@ -3639,7 +3639,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"pattern constraint\""
+                  "text": "\"pattern\""
                 }
               ],
               "initializerTokenRange": {
@@ -3660,7 +3660,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"required constraint\""
+                  "text": "\"required\""
                 }
               ],
               "initializerTokenRange": {
@@ -3681,7 +3681,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "\"unique constraint\""
+                  "text": "\"unique\""
                 }
               ],
               "initializerTokenRange": {
