@@ -39,7 +39,7 @@ export function checkedItemsCommand(
 			_item?: IContextualMenuItem,
 		) => {
 			ev?.preventDefault()
-			return onCheckChange && onCheckChange(name, !hash[name], index)
+			return onCheckChange?.(name, !hash[name], index)
 		},
 	}))
 	return merge(

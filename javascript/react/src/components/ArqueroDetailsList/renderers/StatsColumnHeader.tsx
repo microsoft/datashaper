@@ -51,7 +51,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 
 		return (
 			<div
-				onClick={e => onClick && onClick(e, column, field)}
+				onClick={e => onClick?.(e, column, field)}
 				title={title}
 				style={styles}
 			>
