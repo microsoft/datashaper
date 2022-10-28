@@ -66,22 +66,34 @@ function validateColumn(
 	if (constraints.unique) {
 		validators.push(validateUniqueConstraint())
 	}
-	if (constraints.minLength) {
+	if (
+		constraints.minLength &&
+		(dataType == DataType.String || dataType == DataType.Array)
+	) {
 		validators.push(validateMinLengthConstraint(constraints.minLength))
 	}
-	if (constraints.maxLength) {
+	if (
+		constraints.maxLength &&
+		(dataType == DataType.String || dataType == DataType.Array)
+	) {
 		validators.push(validateMaxLengthConstraint(constraints.maxLength))
 	}
-	if (constraints.minimum) {
+	if (
+		constraints.minimum &&
+		(dataType == DataType.Number || dataType == DataType.Date)
+	) {
 		validators.push(validateMinimumConstraint(constraints.minimum, dataType))
 	}
-	if (constraints.maximum) {
+	if (
+		constraints.maximum &&
+		(dataType == DataType.Number || dataType == DataType.Date)
+	) {
 		validators.push(validateMaximumConstraint(constraints.maximum, dataType))
 	}
-	if (constraints.pattern) {
+	if (constraints.pattern && dataType == DataType.String) {
 		validators.push(validatePatternConstraint(constraints.pattern))
 	}
-	if (constraints.enum) {
+	if (constraints.enum && dataType == DataType.String) {
 		validators.push(validateEnumConstraint(constraints.enum))
 	}
 
