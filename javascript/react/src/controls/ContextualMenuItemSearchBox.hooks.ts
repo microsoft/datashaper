@@ -6,6 +6,8 @@ import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
+
 export function useSearch(
 	items: IContextualMenuItem[],
 	onSearch: (results: IContextualMenuItem[]) => void,
@@ -48,7 +50,7 @@ function useSearchChange(
 					const subitems =
 						item.sectionProps?.items.filter(subitem =>
 							match(subitem, newValue),
-						) || []
+						) || EMPTY_ARRAY
 					filtered.push({
 						...item,
 						sectionProps: {

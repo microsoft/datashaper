@@ -8,6 +8,8 @@ import { memo, useMemo } from 'react'
 
 import { getValue } from '../ArqueroDetailsList.utils.js'
 import { useCellDimensions, useFormattedNumber } from '../hooks/index.js'
+import { useTextAlignStyle } from './hooks.js'
+import { useBarColor } from './NumberMagnitudeCell.hooks.js'
 import type { MagnitudeCellProps } from './types.js'
 /**
  * Basic endering of number values.
@@ -22,22 +24,17 @@ export const NumberMagnitudeCell: React.FC<MagnitudeCellProps> = memo(
 		magnitude = 0,
 	}) {
 		const theme = useThematic()
-		const barColor = useMemo(
-			() => color || theme.rect().fill().hex(),
-			[theme, color],
-		)
+		const barColor = useBarColor(color)
 		const value = getValue(item, column)
 		const printed = useFormattedNumber(value, numberFormat)
 		const dimensions = useCellDimensions(column)
 		const { width, height } = dimensions
 		const textFill = useMemo(() => theme.text().fill().hex(), [theme])
 		const size = magnitude * width
+		const style = useTextAlignStyle(textAlign)
+
 		return (
-			<div
-				style={{
-					textAlign,
-				}}
-			>
+			<div style={style}>
 				<svg width={width} height={height}>
 					<rect width={size} height={height} x={width - size} fill={barColor} />
 					<text

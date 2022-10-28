@@ -1,0 +1,155 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type { SortDirection } from '@datashaper/schema'
+import type { TableMetadata } from '@datashaper/tables'
+import type { IColumn } from '@fluentui/react'
+import type ColumnTable from 'arquero/dist/types/table/column-table.js'
+import type { RowObject } from 'arquero/dist/types/table/table'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+
+import type {
+	DetailsListFeatures,
+	GroupHeaderFunction,
+} from './ArqueroDetailsList.types.js'
+import { debounceFn , groupBuilder } from './ArqueroDetailsList.utils.js'
+import { useGroupHeaderRenderer, useSortedGroups } from './hooks/index.js'
+import { useFill } from './hooks/useFill.js'
+import { useItems } from './hooks/useItems.js'
+
+export function useVirtualizedItems(
+	table: ColumnTable,
+	columns: IColumn[] | undefined,
+	features: DetailsListFeatures,
+	fill: boolean,
+	compact: boolean,
+) {
+	const ref = useRef(null)
+	const baseItems = useMemo(() => [...table.objects()], [table])
+	const virtual = useFill(table, columns, ref, fill, features, { compact })
+	const items = useItems(baseItems, virtual.virtualRows)
+
+	return {
+		items,
+		virtual,
+		ref,
+	}
+}
+
+export function useGroups(
+	table: ColumnTable,
+	sliced: ColumnTable,
+	items: any[],
+	sortDirection: SortDirection | undefined,
+	features: DetailsListFeatures,
+	sortColumn: string | undefined,
+) {
+	// if the table is grouped, groups the information in a way we can iterate
+	const groupedEntries = useGroupedEntries(table, sliced)
+	// sorts first level group headers
+	const sortedGroups = useSortedGroups(
+		table,
+		sortColumn,
+		sortDirection,
+		groupedEntries,
+	)
+
+	return useMemo(() => {
+		if (!sliced.isGrouped()) {
+			return undefined
+		}
+
+		const existingGroups = sliced.groups()
+		const totalLevelCount = existingGroups.names.length
+
+		return sortedGroups?.map((row: RowObject) => {
+			const initialLevel = 0
+			return groupBuilder(
+				row,
+				existingGroups,
+				initialLevel,
+				totalLevelCount,
+				items,
+				sortDirection,
+				features.lazyLoadGroups,
+				sortColumn,
+			)
+		})
+	}, [sliced, sortedGroups, items, sortColumn, sortDirection, features])
+}
+
+/**
+ * If the table is grouped, groups the information in a way we can iterate
+ */
+function useGroupedEntries(table: ColumnTable, sliced: ColumnTable) {
+	return useMemo(
+		() =>
+			table.isGrouped() ? sliced.objects({ grouped: 'entries' }) : undefined,
+		[sliced, table],
+	)
+}
+
+/**
+ * As in FluentUI documentation, when updating item we can update the list items with a spread operator.
+ * since when adding a new column we're changing the columns prop too, this approach doesn't work for that.
+ * a workaround found in the issues suggest to use this version property to use as comparison to force re-render
+ */
+export function useVersion(
+	table: ColumnTable,
+	columns: IColumn[] | undefined,
+	compact: boolean,
+): [number, React.Dispatch<React.SetStateAction<number>>] {
+	const [version, setVersion] = useState(0)
+	useEffect(() => {
+		setVersion(prev => prev + 1)
+	}, [columns, table, compact])
+	return [version, setVersion]
+}
+
+export function useOnColumnResizeHandler(
+	setVersion: React.Dispatch<React.SetStateAction<number>>,
+) {
+	return useCallback(
+		(column: IColumn | undefined, newWidth: number | undefined) => {
+			const set = () => setVersion(prev => prev + 1)
+			if (column?.currentWidth !== newWidth) {
+				debounceFn(set)
+			}
+		},
+		[setVersion],
+	)
+}
+
+/**
+ * Ensures every key is unique
+ */
+export function useGetKey() {
+	return useCallback((_: any, index?: number) => {
+		return (index as number).toString()
+	}, [])
+}
+
+export function useGroupProps(
+	table: ColumnTable,
+	metadata: TableMetadata | undefined,
+	onRenderGroupHeader: GroupHeaderFunction | undefined,
+	features: DetailsListFeatures,
+) {
+	const renderGroupHeader = useGroupHeaderRenderer(
+		table,
+		metadata,
+		onRenderGroupHeader,
+		features.lazyLoadGroups,
+	)
+	return useMemo(
+		() => ({
+			onRenderHeader: renderGroupHeader,
+		}),
+		[renderGroupHeader],
+	)
+}
+
+export function useListProps(version: number) {
+	return useMemo(() => ({ version }), [version])
+}

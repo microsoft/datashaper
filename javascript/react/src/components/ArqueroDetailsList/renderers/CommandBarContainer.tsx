@@ -2,32 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import styled from '@essex/styled-components'
-import type { IDetailsColumnProps, IRenderFunction } from '@fluentui/react'
 import { memo } from 'react'
 
-interface CommandBarContainerProps {
-	props: IDetailsColumnProps
-	renderers: IRenderFunction<IDetailsColumnProps>[]
-}
+import { Container } from './CommandBarContainer.styles.js'
+import type { CommandBarContainerProps } from './CommandBarContainer.types.js'
+export type { CommandBarContainerProps } from './CommandBarContainer.types.js'
 
 export const CommandBarContainer: React.FC<CommandBarContainerProps> = memo(
 	function CommandBarContainer({ props, renderers }) {
 		return (
 			<Container className="header-command-bar">
 				{renderers.map((renderer, i) => (
-					<Command key={i}>{renderer(props)}</Command>
+					<div key={i}>{renderer(props)}</div>
 				))}
 			</Container>
 		)
 	},
 )
-
-const Command = styled.div``
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	border-top: 1px solid ${({ theme }) => theme.palette.neutralLighter};
-	border-bottom: 1px solid ${({ theme }) => theme.palette.neutralLighter};
-`

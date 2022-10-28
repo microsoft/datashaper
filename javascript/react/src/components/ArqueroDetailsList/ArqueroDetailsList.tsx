@@ -2,33 +2,36 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import styled from '@essex/styled-components'
-import type { IColumn, IDetailsListStyles } from '@fluentui/react'
+import type { IDetailsListStyles } from '@fluentui/react'
 import {
 	ConstrainMode,
 	DetailsList,
 	DetailsListLayoutMode,
 	SelectionMode,
 } from '@fluentui/react'
-import type { RowObject } from 'arquero/dist/types/table/table'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useMemo } from 'react'
 
+import {
+	useGetKey,
+	useGroupProps,
+	useGroups,
+	useListProps,
+	useOnColumnResizeHandler,
+	useVersion,
+	useVirtualizedItems,
+} from './ArqueroDetailsList.hooks.js'
+import { DetailsWrapper } from './ArqueroDetailsList.styles.js'
 import type { ArqueroDetailsListProps } from './ArqueroDetailsList.types.js'
-import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
 import {
 	useColumns,
 	useDetailsHeaderRenderer,
 	useDetailsListStyles,
-	useGroupHeaderRenderer,
 	useSlicedTable,
-	useSortedGroups,
 	useSortedTable,
 	useSortHandling,
 	useStripedRowsRenderer,
 	useSubsetTable,
 } from './hooks/index.js'
-import { useFill } from './hooks/useFill.js'
-import { useItems } from './hooks/useItems.js'
 
 /**
  * Renders an arquero table using a fluent DetailsList.
@@ -64,9 +67,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		// passthrough the remainder as props
 		...props
 	}) {
-		const ref = useRef(null)
-
-		const [version, setVersion] = useState(0)
+		const [version, setVersion] = useVersion(table, columns, compact)
 		const { sortColumn, sortDirection, onSort } = useSortHandling(
 			sortable,
 			defaultSortColumn,
@@ -84,38 +85,19 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		const sliced = useSlicedTable(sorted, offset, limit)
 
 		// last, copy these items to actual JS objects for the DetailsList
-		const baseItems = useMemo(() => [...sliced.objects()], [sliced])
-		const virtual = useFill(sliced, columns, ref, fill, features, { compact })
-		const items = useItems(baseItems, virtual.virtualRows)
-
-		// if the table is grouped, groups the information in a way we can iterate
-		const groupedEntries = useMemo(
-			() =>
-				table.isGrouped() ? sliced.objects({ grouped: 'entries' }) : undefined,
-			[sliced, table],
+		const { virtual, items, ref } = useVirtualizedItems(
+			sliced,
+			columns,
+			features,
+			fill,
+			compact,
 		)
 
-		// sorts first level group headers
-		const sortedGroups = useSortedGroups(
-			table,
-			sortColumn,
-			sortDirection,
-			groupedEntries,
-		)
-
-		const isDefaultHeaderClickable = useMemo((): any => {
+		const isDefaultHeaderClickable = useMemo<boolean>(() => {
 			return sortable || clickableColumns || !!onColumnHeaderClick
 		}, [sortable, clickableColumns, onColumnHeaderClick])
 
-		const onColumnResize = useCallback(
-			(column: IColumn | undefined, newWidth: number | undefined) => {
-				const set = () => setVersion(prev => prev + 1)
-				if (column?.currentWidth !== newWidth) {
-					debounceFn(set)
-				}
-			},
-			[setVersion],
-		)
+		const onColumnResize = useOnColumnResizeHandler(setVersion)
 
 		const displayColumns = useColumns(
 			table,
@@ -150,41 +132,20 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const renderRow = useStripedRowsRenderer(striped, showColumnBorders)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
-		const renderGroupHeader = useGroupHeaderRenderer(
+		const groups = useGroups(
+			table,
+			sliced,
+			items,
+			sortDirection,
+			features,
+			sortColumn,
+		)
+		const groupProps = useGroupProps(
 			table,
 			metadata,
 			onRenderGroupHeader,
-			features.lazyLoadGroups,
+			features,
 		)
-
-		const groups = useMemo(() => {
-			if (!sliced.isGrouped()) {
-				return undefined
-			}
-
-			const existingGroups = sliced.groups()
-			const totalLevelCount = existingGroups.names.length
-
-			return sortedGroups?.map((row: RowObject) => {
-				const initialLevel = 0
-				return groupBuilder(
-					row,
-					existingGroups,
-					initialLevel,
-					totalLevelCount,
-					items,
-					sortDirection,
-					features.lazyLoadGroups,
-					sortColumn,
-				)
-			})
-		}, [sliced, sortedGroups, items, sortColumn, sortDirection, features])
-		// as in FluentUI documentation, when updating item we can update the list items with a spread operator.
-		// since when adding a new column we're changing the columns prop too, this approach doesn't work for that.
-		// a workaround found in the issues suggest to use this version property to use as comparison to force re-render
-		useEffect(() => {
-			setVersion(prev => prev + 1)
-		}, [columns, table, compact])
 
 		return (
 			<DetailsWrapper
@@ -198,12 +159,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					selectionMode={selectionMode}
 					layoutMode={layoutMode}
 					groups={groups}
-					getKey={(_: any, index?: number) => {
-						return (index as number).toString()
-					}} //To be sure that every key is unique
-					groupProps={{
-						onRenderHeader: renderGroupHeader,
-					}}
+					getKey={useGetKey()}
+					groupProps={groupProps}
 					columns={displayColumns}
 					constrainMode={ConstrainMode.unconstrained}
 					onRenderRow={renderRow}
@@ -211,34 +168,10 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 					onColumnResize={onColumnResize}
 					compact={compact}
 					{...props}
-					listProps={{
-						version,
-					}}
+					listProps={useListProps(version)}
 					styles={headerStyle}
 				/>
 			</DetailsWrapper>
 		)
 	},
 )
-
-const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
-	height: inherit;
-	max-height: inherit;
-	overflow-y: auto;
-	overflow-x: auto;
-	span.ms-DetailsHeader-cellTitle {
-		background-color: ${({ theme }) => theme.palette.white};
-	}
-
-	.ms-List-cell {
-		min-height: unset;
-	}
-
-	.ms-CommandBar {
-		padding: unset;
-	}
-
-	.ms-OverflowSet {
-		justify-content: center;
-	}
-`

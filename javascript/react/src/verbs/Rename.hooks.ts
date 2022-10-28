@@ -7,6 +7,7 @@ import type { Step } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 
+import { EMPTY_OBJECT } from '../empty.js'
 import type { StepChangeFunction } from '../types.js'
 
 export function useHandleColumnChange(
@@ -81,6 +82,7 @@ export function useDisabled(
 		return true
 	}
 	return (
-		table.columnNames().length === Object.keys(step.args.columns || {}).length
+		table.columnNames().length ===
+		Object.keys(step.args.columns || EMPTY_OBJECT).length
 	)
 }

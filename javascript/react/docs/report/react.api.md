@@ -637,21 +637,11 @@ export type TooltipProps = GuidanceProps;
 export interface TransformModalProps extends IModalProps, TableTransformProps {
 }
 
-// Warning: (ae-missing-release-tag) "useCellClickhandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useCellClickhandler(clickable: boolean, onColumnClick?: ColumnClickFunction): ColumnClickFunction | undefined;
-
 // Warning: (ae-forgotten-export) The symbol "Dimensions" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useCellDimensions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useCellDimensions(column?: IColumn, considerCompactMode?: boolean): Dimensions;
-
-// Warning: (ae-missing-release-tag) "useCellDropdownSelectHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useCellDropdownSelectHandler(clickable: boolean, onOptionSelect?: DropdownOptionSelect): DropdownOptionSelect | undefined;
 
 // Warning: (ae-missing-release-tag) "useColumnNamesList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -786,7 +776,7 @@ export function useSortHandling(allowSorting: boolean, defaultSortColumn?: strin
 // Warning: (ae-missing-release-tag) "useStepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useStepOutputs(workflow: Workflow): Array<string | undefined>;
+export function useStepOutputs(workflow: Workflow): string[];
 
 // Warning: (ae-missing-release-tag) "useStripedRowsRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -11,6 +11,7 @@ import set from 'lodash-es/set.js'
 import { useCallback, useMemo } from 'react'
 
 import { SortInstruction } from '../controls/index.js'
+import { EMPTY_ARRAY } from '../empty.js'
 
 export function useSorts(
 	step: Step<OrderbyArgs>,
@@ -18,7 +19,7 @@ export function useSorts(
 	onChange?: (step: Step<OrderbyArgs>) => void,
 ): JSX.Element[] {
 	return useMemo(() => {
-		return (step.args.orders || []).map((order, index) => {
+		return (step.args.orders || EMPTY_ARRAY).map((order, index) => {
 			const handleSortChange = (order: OrderbyInstruction) => {
 				const update = { ...step }
 				set(update, `args.orders[${index}]`, order)
@@ -54,7 +55,7 @@ export function useAddButtonClickedHandler(
 			...step,
 			args: {
 				...step.args,
-				orders: [...(step.args.orders || []), newSort(dataTable)],
+				orders: [...(step.args.orders || EMPTY_ARRAY), newSort(dataTable)],
 			},
 		})
 	}, [step, dataTable, onChange])

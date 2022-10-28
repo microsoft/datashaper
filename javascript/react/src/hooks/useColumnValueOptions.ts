@@ -8,6 +8,7 @@ import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
 import { useSimpleDropdownOptions } from './useSimpleDropdownOptions.js'
 
 export function useColumnValueOptions(
@@ -18,7 +19,7 @@ export function useColumnValueOptions(
 ): IDropdownOption[] {
 	const vals = useMemo(() => {
 		if (!column || !table || !column || column.trim().length === 0) {
-			return []
+			return EMPTY_ARRAY
 		}
 		const getFallback = () => {
 			const columnNamesArray: string[] = table
@@ -32,10 +33,10 @@ export function useColumnValueOptions(
 					})
 					.get(column, 0)
 
-				return result ?? []
+				return result ?? EMPTY_ARRAY
 			}
 
-			return []
+			return EMPTY_ARRAY
 		}
 		const list = values ? values : getFallback()
 		return filter ? list.filter(filter) : list

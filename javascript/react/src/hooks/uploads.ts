@@ -9,6 +9,8 @@ import { FileCollection, FileType } from '@datashaper/utilities'
 import debug from 'debug'
 import { useCallback } from 'react'
 
+import { EMPTY_OBJECT } from '../empty.js'
+
 const log = debug('datashaper')
 
 function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
@@ -21,7 +23,7 @@ function useCsvHandler(onUpdateTables: (tables: TableContainer[]) => void) {
 			const regex = /metadata\.json$/i
 			const jsonFile = fc.list(FileType.json).find(f => regex.test(f.name))
 			const metadata = jsonFile ? await jsonFile.toJson() : null
-			const { input = [] } = metadata || {}
+			const { input = [] } = metadata || EMPTY_OBJECT
 			if (input.length) {
 				tableFiles = tableFiles.filter(t => input.includes(t.name))
 			}

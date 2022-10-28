@@ -18,9 +18,7 @@
 |  [checkedItemsCommand(list, checked, onCheckChange, props)](./react.checkeditemscommand.md) | Constructs a command for listing out items with checks |
 |  [downloadCommand(table, downloadFilename, props)](./react.downloadcommand.md) | Constructs a download command. When clicked, will save the current table to a csv. |
 |  [tableMenuCommand(tables, selectedKey, onChange, props)](./react.tablemenucommand.md) | Displays a table name along with a dropdown menu for selection of different tables. |
-|  [useCellClickhandler(clickable, onColumnClick)](./react.usecellclickhandler.md) |  |
 |  [useCellDimensions(column, considerCompactMode)](./react.usecelldimensions.md) |  |
-|  [useCellDropdownSelectHandler(clickable, onOptionSelect)](./react.usecelldropdownselecthandler.md) |  |
 |  [useColumnNamesList(table, columns)](./react.usecolumnnameslist.md) | Creates a list of column names for the table. If there are no columns supplied it will use the list from the table itself. Otherwise it will use the provided columns under the assumption the user has configured them as desired. |
 |  [useColumns(table, metadata, columns, onColumnHeaderClick, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
 |  [useColumnStyles(clickable, separator)](./react.usecolumnstyles.md) |  |

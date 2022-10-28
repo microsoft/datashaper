@@ -11,7 +11,7 @@ import { useObservableState } from 'observable-hooks'
  * @param workflow - The workflow instance
  * @returns
  */
-export function useStepOutputs(workflow: Workflow): Array<string | undefined> {
+export function useStepOutputs(workflow: Workflow): string[] {
 	return useObservableState(workflow.outputNames$) ?? EMPTY
 }
 

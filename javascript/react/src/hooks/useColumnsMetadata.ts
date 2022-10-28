@@ -8,12 +8,14 @@ import { columnType } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
+
 export function useColumnsMetadata(
 	table: ColumnTable | undefined,
 	filter?: (name: string) => boolean,
 ): Field[] {
 	return useMemo(() => {
-		const columns = table?.columnNames(filter) || []
+		const columns = table?.columnNames(filter) || EMPTY_ARRAY
 		const result: Field[] = columns.map(col => {
 			const type: DataType =
 				!table || !col ? DataType.Unknown : columnType(table, col)

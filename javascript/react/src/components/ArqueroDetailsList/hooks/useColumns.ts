@@ -9,6 +9,7 @@ import type { IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
+import { EMPTY_ARRAY,emptyArray } from '../../../empty.js'
 import type {
 	ColumnClickFunction,
 	DetailsListFeatures,
@@ -24,8 +25,6 @@ import {
 	createRenderStatsColumnHeader,
 } from '../renderers/index.js'
 import {
-	useCellClickhandler,
-	useCellDropdownSelectHandler,
 	useColumnNamesList,
 	useColumnStyles,
 	useIncrementingColumnColorScale,
@@ -79,23 +78,23 @@ export function useColumns(
 		resizable = true,
 	} = options
 
-	const handleCellClick = useCellClickhandler(isClickable, onColumnClick)
-	const handleCellDropdownSelect = useCellDropdownSelectHandler(
-		isClickable,
-		onCellDropdownSelect,
-	)
+	const handleCellClick = isClickable ? onColumnClick : undefined
+	const handleCellDropdownSelect = isClickable
+		? onCellDropdownSelect
+		: undefined
 
 	const colorScale = useIncrementingColumnColorScale(metadata)
-
 	const styles = useColumnStyles(isClickable, showColumnBorders)
-
 	const names = useColumnNamesList(table, columns)
 	//get column width based on min value or on commandBar item passed
 	const columnMinWidth = useCountMinWidth(features.commandBar)
 
 	return useMemo(() => {
-		const columnMap = reduce([...(columns || []), ...(virtualColumns || [])])
-		const virtualNames = virtualColumns?.map(c => c.key) || []
+		const columnMap = reduce([
+			...(columns || EMPTY_ARRAY),
+			...(virtualColumns || EMPTY_ARRAY),
+		])
+		const virtualNames = virtualColumns?.map(c => c.key) || emptyArray()
 		return [...names, ...virtualNames].map(name => {
 			const column = columnMap[name] || {
 				key: name,
@@ -111,8 +110,7 @@ export function useColumns(
 			const { iconName, ...defaults } = column
 
 			const meta = metadata?.columns[name] || { name }
-			const color =
-				meta && meta.type === DataType.Number ? colorScale() : undefined
+			const color = meta?.type === DataType.Number ? colorScale() : undefined
 			const onRender =
 				features.smartCells && meta
 					? createRenderSmartCell(

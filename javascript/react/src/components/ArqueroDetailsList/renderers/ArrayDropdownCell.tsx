@@ -3,11 +3,13 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { IDropdownOption } from '@fluentui/react'
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 
+import { EMPTY_ARRAY } from '../../../empty.js'
 import { getDropdownValue } from '../ArqueroDetailsList.utils.js'
+import { usePlaceholderValues } from './ArrayDropdownCell.hooks.js'
+import { dropdownStyles } from './ArrayDropdownCell.styles.js'
 import type { DropdownCellProps } from './types.js'
 
 /**
@@ -15,12 +17,8 @@ import type { DropdownCellProps } from './types.js'
  */
 export const ArrayDropdownCell: React.FC<DropdownCellProps> = memo(
 	function ArrayDropdownCell({ item, column, onCellDropdownSelect, rowIndex }) {
-		const values = getDropdownValue(item, rowIndex, column) || []
-		const placeholderValues =
-			values
-				.slice(0, 10)
-				.map((value: IDropdownOption) => value.text)
-				.join(', ') || 'Open to see the values'
+		const values = getDropdownValue(item, rowIndex, column) || EMPTY_ARRAY
+		const placeholderValues = usePlaceholderValues(values)
 
 		return (
 			<Dropdown
@@ -32,5 +30,3 @@ export const ArrayDropdownCell: React.FC<DropdownCellProps> = memo(
 		)
 	},
 )
-
-const dropdownStyles = { root: { width: '85%' } }

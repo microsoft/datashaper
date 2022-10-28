@@ -5,9 +5,14 @@
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
+
 export function useTableColumnNames(
 	table: ColumnTable | undefined,
 	filter?: (name: string) => boolean,
 ): string[] {
-	return useMemo(() => table?.columnNames(filter) || [], [table, filter])
+	return useMemo(
+		() => table?.columnNames(filter) || EMPTY_ARRAY,
+		[table, filter],
+	)
 }

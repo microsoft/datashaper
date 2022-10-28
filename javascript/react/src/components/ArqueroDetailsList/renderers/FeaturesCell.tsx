@@ -17,6 +17,7 @@ import { ArrayDropdownCell } from './ArrayDropdownCell.js'
 import { BlankCell } from './BlankCell.js'
 import { CellContainer } from './CellContainer.js'
 import { EmptyCell } from './EmptyCell.js'
+import type { FeatureCellProps } from './FeaturesCell.types.js'
 import {
 	BooleanSymbolCell,
 	CategoricalBarCell,
@@ -27,7 +28,7 @@ import {
 	SparklineCell,
 	TextCell,
 } from './index.js'
-import type { FeatureCellProps } from './types.js'
+export type { FeatureCellProps } from './FeaturesCell.types.js'
 
 /**
  * Chooses what to render based on the features prop

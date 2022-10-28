@@ -2,9 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './useCellClickHandler.js'
 export * from './useCellDimensions.js'
-export * from './useCellDropdownSelectHandler.js'
 export * from './useColumnNamesList.js'
 export * from './useColumns.js'
 export * from './useColumnStyles.js'

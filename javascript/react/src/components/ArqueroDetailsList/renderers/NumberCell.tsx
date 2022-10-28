@@ -7,6 +7,7 @@ import { memo } from 'react'
 
 import { getValue } from '../ArqueroDetailsList.utils.js'
 import { useFormattedNumber } from '../hooks/index.js'
+import { useTextAlignStyle } from './hooks.js'
 import type { FormattedCellProps } from './types.js'
 
 /**
@@ -16,14 +17,7 @@ export const NumberCell: React.FC<FormattedCellProps> = memo(
 	function NumberCell({ item, column, textAlign = 'right', numberFormat }) {
 		const value = getValue(item, column)
 		const printed = useFormattedNumber(value, numberFormat)
-		return (
-			<div
-				style={{
-					textAlign,
-				}}
-			>
-				{printed}
-			</div>
-		)
+		const style = useTextAlignStyle(textAlign)
+		return <div style={style}>{printed}</div>
 	},
 )

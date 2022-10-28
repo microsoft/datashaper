@@ -5,6 +5,7 @@
 import type { RecodeArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
+import { EMPTY_OBJECT } from '../empty.js'
 import type { StepDescriptionProps } from '../types.js'
 import { createRowEntries } from '../verbForm/createRowEntries.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
@@ -15,7 +16,7 @@ export const RecodeDescription: React.FC<StepDescriptionProps<RecodeArgs>> =
 			const {
 				step: { args },
 			} = props
-			const entries = Object.entries(args.mapping || {})
+			const entries = Object.entries(args.mapping || EMPTY_OBJECT)
 			const sub = createRowEntries(
 				entries,
 				c => ({

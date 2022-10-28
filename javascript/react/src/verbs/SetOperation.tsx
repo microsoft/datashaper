@@ -5,6 +5,7 @@
 import { ActionButton, Label } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
 import { useStepDataTable } from '../hooks/useStepDataTable.js'
 import type { StepComponentProps } from '../types.js'
 import { useOthers } from './SetOperation.hooks.js'
@@ -24,7 +25,7 @@ export const SetOperation: React.FC<StepComponentProps> = memo(
 				...step,
 				input: {
 					...step.input,
-					others: [...(step.input.others || []), { node: '' }] as any,
+					others: [...(step.input.others || EMPTY_ARRAY), { node: '' }] as any,
 				},
 			})
 		}, [step, onChange])

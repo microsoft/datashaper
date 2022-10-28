@@ -5,6 +5,7 @@
 import type { RenameArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
+import { EMPTY_OBJECT } from '../empty.js'
 import type { StepDescriptionProps } from '../types.js'
 import { createRowEntries } from '../verbForm/createRowEntries.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
@@ -15,7 +16,7 @@ export const RenameDescription: React.FC<StepDescriptionProps<RenameArgs>> =
 			const {
 				step: { args },
 			} = props
-			const entries = Object.entries(args.columns || {})
+			const entries = Object.entries(args.columns || EMPTY_OBJECT)
 			const sub = createRowEntries(
 				entries,
 				c => ({

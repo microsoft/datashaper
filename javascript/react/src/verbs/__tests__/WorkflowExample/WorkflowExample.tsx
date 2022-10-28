@@ -5,7 +5,7 @@
 import type { WorkflowSchema } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
 import { DisplayOrder } from '../../../enums.js'
 import { useWorkflow } from '../../../hooks/common.js'
@@ -28,10 +28,7 @@ export const WorkflowExample: React.FC<WorkflowExampleProps> = memo(
 		const workflow = useMemo(() => new Workflow(schema), [schema])
 		const wf = useWorkflow(workflow, tables)
 		const steps = useWorkflowSteps(wf, DisplayOrder.FirstOnTop)
-		const outputs = useStepOutputs(
-			wf,
-			useCallback((idx: number) => `step-${idx}`, []),
-		) as string[]
+		const outputs = useStepOutputs(wf) as string[]
 		const onStepSave = useHandleStepSave(wf)
 		const onStepOutputChange = useHandleStepOutputChanged(wf)
 		return (

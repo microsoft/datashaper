@@ -4,12 +4,13 @@
  */
 import { DataType } from '@datashaper/schema'
 import { determineType } from '@datashaper/tables'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
 import { getValue, isBlank, isEmpty } from '../ArqueroDetailsList.utils.js'
 import { ArrayCell } from './ArrayCell.js'
 import { BlankCell } from './BlankCell.js'
+import { useCellStyle } from './DefaultCell.hooks.js'
 import {
 	BooleanTextCell,
 	DateCell,
@@ -32,19 +33,7 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	const value = getValue(item, column)
 	const type = field?.type || determineType(value)
 
-	const cellStyle = useMemo(() => {
-		const style: React.CSSProperties = {
-			width: '100%',
-		}
-		if (onColumnClick) {
-			style.cursor = 'pointer'
-		}
-		if (column?.data?.selected) {
-			style.fontWeight = 'bold'
-		}
-		return style
-	}, [onColumnClick, column])
-
+	const cellStyle = useCellStyle(column, onColumnClick)
 	return (
 		<div style={cellStyle}>
 			<Switch>
