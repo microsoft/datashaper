@@ -212,7 +212,7 @@ function validateRequiredConstraint(
 		})
 
 		return {
-			pass: resultIndexes.length != 0,
+			fail: resultIndexes.length != 0,
 			indexes: resultIndexes,
 		}
 	}
