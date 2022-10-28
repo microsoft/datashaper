@@ -17,6 +17,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
 import { useCallback, useEffect, useMemo } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
 import { useResetArgs } from '../hooks/common.js'
 import type {
 	DropdownChangeAllHandler,
@@ -116,7 +117,10 @@ export function useInputColumnListChanged(
 	return useDropdownChangeHandler<InputColumnListArgs>(
 		step as Step<InputColumnListArgs>,
 		(s, val) =>
-			(s.args.columns = toggleListItem(s.args.columns ?? [], val as string)),
+			(s.args.columns = toggleListItem(
+				s.args.columns ?? EMPTY_ARRAY,
+				val as string,
+			)),
 		onChange,
 	)
 }

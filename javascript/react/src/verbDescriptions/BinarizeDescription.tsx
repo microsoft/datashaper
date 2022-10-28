@@ -6,6 +6,7 @@ import type { BinarizeArgs } from '@datashaper/schema'
 import { FilterCompareType } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
 import type { StepDescriptionProps } from '../types.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
 
@@ -20,7 +21,7 @@ export const BinarizeDescription: React.FC<StepDescriptionProps<BinarizeArgs>> =
 					before: 'where',
 					value: args?.column,
 					after: 'row value',
-					sub: (args.criteria || []).map(criterion => ({
+					sub: (args.criteria || EMPTY_ARRAY).map(criterion => ({
 						value: `${criterion.operator || ''} ${criterion.value || ''}`,
 						after:
 							criterion.type === FilterCompareType.Column ? 'row value' : '',

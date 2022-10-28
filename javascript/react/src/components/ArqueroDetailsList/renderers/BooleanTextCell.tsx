@@ -5,6 +5,7 @@
 import { memo } from 'react'
 
 import { getValue } from '../ArqueroDetailsList.utils.js'
+import { useTextAlignStyle } from './hooks.js'
 import type { FormattedCellProps } from './types.js'
 
 /**
@@ -13,14 +14,8 @@ import type { FormattedCellProps } from './types.js'
 export const BooleanTextCell: React.FC<FormattedCellProps> = memo(
 	function TextCell({ item, column, textAlign = 'right' }) {
 		const value = !!getValue(item, column)
-		return (
-			<div
-				style={{
-					textAlign,
-				}}
-			>
-				{value.toString()}
-			</div>
-		)
+		const style = useTextAlignStyle(textAlign)
+
+		return <div style={style}>{value.toString()}</div>
 	},
 )

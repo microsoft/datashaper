@@ -6,6 +6,7 @@ import type { FilterArgs } from '@datashaper/schema'
 import { FilterCompareType } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
 import type { StepDescriptionProps } from '../types.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
 
@@ -19,7 +20,7 @@ export const FilterDescription: React.FC<StepDescriptionProps<FilterArgs>> =
 				{
 					before: 'where',
 					value: args.column,
-					sub: (args.criteria || []).map(criterion => ({
+					sub: (args.criteria || EMPTY_ARRAY).map(criterion => ({
 						value: `${criterion.operator || ''} ${criterion.value || ''}`,
 						after:
 							criterion.type === FilterCompareType.Column ? 'row value' : '',

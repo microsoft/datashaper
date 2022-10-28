@@ -5,6 +5,8 @@
 import { memo } from 'react'
 
 import { getValue } from '../ArqueroDetailsList.utils.js'
+import { useDateString } from './DateCell.hooks.js'
+import { useTextAlignStyle } from './hooks.js'
 import type { FormattedCellProps } from './types.js'
 
 /**
@@ -16,13 +18,7 @@ export const DateCell: React.FC<FormattedCellProps> = memo(function DateCell({
 	textAlign = 'right',
 }) {
 	const value = getValue(item, column)
-	return (
-		<div
-			style={{
-				textAlign,
-			}}
-		>
-			{value && (value as Date).toLocaleString()}
-		</div>
-	)
+	const style = useTextAlignStyle(textAlign)
+	const text = useDateString(value)
+	return <div style={style}>{text}</div>
 })

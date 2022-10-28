@@ -6,7 +6,7 @@ import type { Verb } from '@datashaper/schema'
 import type { Workflow } from '@datashaper/workflow'
 import { ActionButton, IconButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
-import React, { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 
 import { StepComponent } from './StepComponent.js'
 import { StepSelector } from './StepSelector.js'

@@ -10,6 +10,7 @@ import styled from '@essex/styled-components'
 import { ActionButton, Icon, IconButton } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
+import { EMPTY_OBJECT } from '../empty.js'
 import { useColumnType, useStepDataTable } from '../hooks/index.js'
 import type { StepComponentProps } from '../types.js'
 import {
@@ -77,7 +78,7 @@ function useRecodePairs(
 ) {
 	return useMemo(() => {
 		const { mapping } = step.args
-		return Object.entries(mapping || {}).map((valuePair, index) => {
+		return Object.entries(mapping || EMPTY_OBJECT).map((valuePair, index) => {
 			return (
 				<ColumnPair
 					valuePair={valuePair}

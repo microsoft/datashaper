@@ -5,6 +5,7 @@
 import { memo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
+import { EMPTY_ARRAY } from '../../../empty.js'
 import {
 	categories,
 	getValue,
@@ -23,7 +24,7 @@ const DROPDOWN_MAX = 15
 export const SmartArrayCell: React.FC<RichCellProps> = memo(
 	function SmartArrayCell(props) {
 		const { item, column, index } = props
-		const values = getValue(item, column) || []
+		const values = getValue(item, column) || EMPTY_ARRAY
 		const cellWidth = column?.currentWidth || 0
 		const histo = categories(values) as Record<string, number>
 		const histoLength = Object.keys(histo).length

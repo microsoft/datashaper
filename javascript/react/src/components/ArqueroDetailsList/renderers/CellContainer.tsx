@@ -2,55 +2,22 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import styled from '@essex/styled-components'
-import type { IColumn } from '@fluentui/react'
-import { memo, useCallback, useMemo } from 'react'
+import { memo } from 'react'
 
-import type { ColumnClickFunction } from '../index.js'
+import { useCellStyle, useHandleColumnClick } from './CellContainer.hooks.js'
+import { Container } from './CellContainer.styles.js'
+import type { CellContainerProps } from './CellContainer.types.js'
+export type { CellContainerProps } from './CellContainer.types.js'
 
-interface CellContainerProps {
-	onClick?: ColumnClickFunction
-	column?: IColumn
-}
+export const CellContainer: React.FC<CellContainerProps> = memo(
+	function CellContainer({ onClick, column, children }) {
+		const handleColumnClick = useHandleColumnClick(column, onClick)
+		const cellStyle = useCellStyle(column, onClick)
 
-export const CellContainer: React.FC<
-	React.PropsWithChildren<CellContainerProps>
-> = memo(function CellContainer({ onClick, column, children }) {
-	const handleColumnClick = useCallback(
-		(ev: React.MouseEvent<HTMLElement>) => {
-			column && onClick && onClick(ev, column)
-		},
-		[column, onClick],
-	)
-
-	const cellStyle = useMemo(() => {
-		const style: React.CSSProperties = {}
-
-		if (onClick) {
-			style.cursor = 'pointer'
-		}
-
-		if (column?.data?.selected) {
-			style.fontWeight = 'bold'
-		}
-		return style
-	}, [onClick, column])
-
-	return (
-		<Container onClick={handleColumnClick} style={cellStyle}>
-			{children}
-		</Container>
-	)
-})
-
-const Container = styled.div`
-	display: flex;
-	align-items: center;
-	height: 100%;
-	width: inherit;
-	> * {
-		&:first-child {
-			padding: 6px 8px 6px 12px;
-		}
-	}
-`
+		return (
+			<Container onClick={handleColumnClick} style={cellStyle}>
+				{children}
+			</Container>
+		)
+	},
+)

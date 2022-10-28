@@ -9,6 +9,7 @@ import { ActionButton, Label } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useCallback } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
 import { useDropdownChangeHandler, useStepDataTable } from '../hooks/index.js'
 import { LeftAlignedRow } from '../styles.js'
 import type { StepComponentProps } from '../types.js'
@@ -26,7 +27,7 @@ export const Filter: React.FC<StepComponentProps<FilterArgs>> = memo(
 				...step,
 				args: {
 					...step.args,
-					criteria: [...(step.args.criteria || []), {} as Criterion],
+					criteria: [...(step.args.criteria || EMPTY_ARRAY), {} as Criterion],
 				},
 			})
 		}, [step, onChange])

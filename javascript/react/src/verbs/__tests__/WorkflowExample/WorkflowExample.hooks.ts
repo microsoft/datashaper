@@ -8,6 +8,7 @@ import { container, introspect } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { EMPTY_OBJECT } from '../../../empty.js'
 import { useHandleStepSave } from '../../../hooks/useHandleStepSave.js'
 
 export function useWorkflowDownloadUrl(workflow: Workflow | undefined): string {
@@ -24,7 +25,7 @@ export function useWorkflowDownloadUrl(workflow: Workflow | undefined): string {
 }
 
 function workflowToJson(workflow: Workflow | undefined) {
-	const o = workflow?.toSchema() ?? {}
+	const o = workflow?.toSchema() ?? EMPTY_OBJECT
 	return JSON.stringify(o, null, 4)
 }
 

@@ -5,6 +5,7 @@
 import type { FoldArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
+import { EMPTY_ARRAY } from '../empty.js'
 import type { StepDescriptionProps } from '../types.js'
 import { createRowEntries } from '../verbForm/createRowEntries.js'
 import { VerbDescription } from '../verbForm/VerbDescription.js'
@@ -16,7 +17,7 @@ export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>> = memo(
 				step: { args },
 			} = props
 			const sub = createRowEntries(
-				args.columns || [],
+				args.columns || EMPTY_ARRAY,
 				c => ({
 					value: c,
 				}),
@@ -25,7 +26,9 @@ export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>> = memo(
 			)
 			return [
 				{
-					before: `column${(args.columns || []).length !== 1 ? 's' : ''}`,
+					before: `column${
+						(args.columns || EMPTY_ARRAY).length !== 1 ? 's' : ''
+					}`,
 					value: args.columns.length === 0 ? undefined : '',
 					sub,
 				},

@@ -28,7 +28,6 @@ import type { IDropdownOption } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
-import { default as React_2 } from 'react';
 import type { ReactElement } from 'react';
 import type { RowObject } from 'arquero/dist/types/table/table';
 import { SortDirection } from '@datashaper/schema';
@@ -274,7 +273,7 @@ export interface GuidanceProps {
 // Warning: (ae-missing-release-tag) "HistoryButton" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const HistoryButton: React_2.FC<HistoryButtonProps>;
+export const HistoryButton: React.FC<HistoryButtonProps>;
 
 // Warning: (ae-missing-release-tag) "HistoryButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -637,21 +636,11 @@ export type TooltipProps = GuidanceProps;
 export interface TransformModalProps extends IModalProps, TableTransformProps {
 }
 
-// Warning: (ae-missing-release-tag) "useCellClickhandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useCellClickhandler(clickable: boolean, onColumnClick?: ColumnClickFunction): ColumnClickFunction | undefined;
-
 // Warning: (ae-forgotten-export) The symbol "Dimensions" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useCellDimensions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useCellDimensions(column?: IColumn, considerCompactMode?: boolean): Dimensions;
-
-// Warning: (ae-missing-release-tag) "useCellDropdownSelectHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useCellDropdownSelectHandler(clickable: boolean, onOptionSelect?: DropdownOptionSelect): DropdownOptionSelect | undefined;
 
 // Warning: (ae-missing-release-tag) "useColumnNamesList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -786,12 +775,12 @@ export function useSortHandling(allowSorting: boolean, defaultSortColumn?: strin
 // Warning: (ae-missing-release-tag) "useStepOutputs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useStepOutputs(workflow: Workflow): Array<string | undefined>;
+export function useStepOutputs(workflow: Workflow): string[];
 
 // Warning: (ae-missing-release-tag) "useStripedRowsRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useStripedRowsRenderer(striped?: boolean, columnBorders?: boolean): IRenderFunction_2<IDetailsRowProps>;
+export function useStripedRowsRenderer(striped: boolean, columnBorders: boolean): IRenderFunction_2<IDetailsRowProps>;
 
 // Warning: (ae-missing-release-tag) "useSubsetTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

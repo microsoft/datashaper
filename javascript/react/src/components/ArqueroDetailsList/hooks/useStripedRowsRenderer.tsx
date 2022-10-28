@@ -14,20 +14,18 @@ import { StripedRow } from '../renderers/index.js'
  * @returns
  */
 export function useStripedRowsRenderer(
-	striped = false,
-	columnBorders = false,
+	striped: boolean,
+	columnBorders: boolean,
 ): IRenderFunction<IDetailsRowProps> {
 	return useCallback(
-		(props?) => {
+		(props: IDetailsRowProps | undefined) => {
 			if (!props) {
 				return null
 			}
+			// passing along compact is resulting in inf. loop in ArqueroDetailsList story (Fill Story)
+			const { compact, ...rest } = props
 			return (
-				<StripedRow
-					{...props}
-					striped={striped}
-					columnBorders={columnBorders}
-				/>
+				<StripedRow {...rest} striped={striped} columnBorders={columnBorders} />
 			)
 		},
 		[striped, columnBorders],

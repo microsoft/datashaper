@@ -6,6 +6,8 @@ import type { ICheckboxProps, IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { useCallback, useMemo, useState } from 'react'
 
+import { EMPTY_ARRAY } from '../../../../empty.js'
+
 export function useSelectedColumn(): {
 	selected: string | undefined
 	onColumnClick: (
@@ -30,7 +32,9 @@ export function useSelectedColumn(): {
 export function useCheckboxConfigs(table: ColumnTable | undefined): {
 	checkboxes: ICheckboxProps[]
 } {
-	const [checked, setChecked] = useState<string[]>(table?.columnNames() || [])
+	const [checked, setChecked] = useState<string[]>(
+		table?.columnNames() || EMPTY_ARRAY,
+	)
 	const checkboxes = useMemo(() => {
 		return (
 			table?.columnNames().map(column => ({
@@ -44,7 +48,7 @@ export function useCheckboxConfigs(table: ColumnTable | undefined): {
 						checked ? [...prev, column] : prev.filter(c => c !== column),
 					)
 				},
-			})) || []
+			})) || EMPTY_ARRAY
 		)
 	}, [table, checked, setChecked])
 

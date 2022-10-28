@@ -9,6 +9,7 @@ import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useMemo } from 'react'
 
+import { EMPTY_OBJECT } from '../empty.js'
 import type { StepChangeFunction } from '../types.js'
 
 export function useColumnValues(
@@ -150,5 +151,5 @@ export function useDisabled(step: Step<RecodeArgs>, values: Value[]): boolean {
 	if (values.length === 0 || !step.args.column) {
 		return true
 	}
-	return values.length === Object.keys(step.args.mapping || {}).length
+	return values.length === Object.keys(step.args.mapping || EMPTY_OBJECT).length
 }

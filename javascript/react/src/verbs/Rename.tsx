@@ -17,6 +17,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
 import { TableColumnDropdown } from '../controls/index.js'
+import { EMPTY_OBJECT } from '../empty.js'
 import {
 	useColumnRecordDelete,
 	useSimpleDropdownOptions,
@@ -72,7 +73,7 @@ function useColumnPairs(
 ) {
 	return useMemo(() => {
 		const { columns } = step.args
-		return Object.entries(columns || {}).map((column, index) => {
+		return Object.entries(columns || EMPTY_OBJECT).map((column, index) => {
 			const [oldname] = column
 			return (
 				<ColumnPair

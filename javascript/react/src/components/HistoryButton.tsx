@@ -4,7 +4,7 @@
  */
 import { ActionButton, useTheme } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 import { HistoryIcon } from './CustomIcons.js'
 import { buttonStyles } from './HistoryButton.styles.js'

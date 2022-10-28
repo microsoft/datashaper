@@ -41,7 +41,7 @@ export const TableName: React.FC<TableNameProps> = memo(function TableName({
 		(newName?: string) => {
 			// if the user enters an empty value, save the previous value
 			const incomingName = (!newName ? name : newName) as string
-			onRenameTable && onRenameTable(incomingName)
+			onRenameTable?.(incomingName)
 			setIsEditing(false)
 			setEditedName(incomingName)
 		},

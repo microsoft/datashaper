@@ -64,7 +64,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					type: FilterCompareType.Value,
 					value: date,
 				}
-				onChange && onChange(update)
+				onChange?.(update)
 				setCleanLabel(false)
 			},
 			[criterion, onChange],

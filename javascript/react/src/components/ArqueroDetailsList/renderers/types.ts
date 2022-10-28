@@ -12,14 +12,24 @@ import type {
 
 import type {
 	ColumnClickFunction,
-	DetailsListFeatures,
 	DropdownOptionSelect,
 	MetadataClickFunction,
 } from '../index.js'
 
-export type Dimensions = {
+export interface Dimensions {
 	width: number
 	height: number
+}
+
+export interface FormattedCellProps extends ColumnCellProps {
+	textAlign?: 'left' | 'center' | 'right'
+	/**
+	 * d3-format compatible format specifier for numbers
+	 * https://github.com/d3/d3-format
+	 */
+	numberFormat?: string
+	color?: string
+	virtual?: boolean
 }
 
 /**
@@ -41,17 +51,6 @@ export interface ColumnCellChartProps extends ColumnCellProps {
 	categories?: Record<string | number, number>
 }
 
-export interface FormattedCellProps extends ColumnCellProps {
-	textAlign?: 'left' | 'center' | 'right'
-	/**
-	 * d3-format compatible format specifier for numbers
-	 * https://github.com/d3/d3-format
-	 */
-	numberFormat?: string
-	color?: string
-	virtual?: boolean
-}
-
 export interface MagnitudeCellProps extends FormattedCellProps {
 	/**
 	 * Value from 0-1 indicating relative magnitude within the column
@@ -63,10 +62,6 @@ export interface RichCellProps extends FormattedCellProps {
 	field?: Field
 	onColumnClick?: ColumnClickFunction
 	onCellDropdownSelect?: DropdownOptionSelect
-}
-
-export interface FeatureCellProps extends RichCellProps {
-	features: DetailsListFeatures
 }
 
 export interface RichHeaderProps extends IDetailsColumnProps {

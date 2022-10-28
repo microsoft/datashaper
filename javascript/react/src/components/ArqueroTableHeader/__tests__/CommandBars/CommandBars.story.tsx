@@ -7,7 +7,7 @@ import type { ComponentStory } from '@storybook/react'
 import styled from 'styled-components'
 
 import { ArqueroTableHeader } from '../../ArqueroTableHeader.js'
-import type { ArqueroTableHeaderProps } from '../../ArqueroTableheader.types.js'
+import type { ArqueroTableHeaderProps } from '../../ArqueroTableHeader.types.js'
 import {
 	useCheckboxes,
 	useCommandBar,

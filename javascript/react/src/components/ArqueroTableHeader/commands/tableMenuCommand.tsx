@@ -44,7 +44,7 @@ const TableMenu: React.FC<{
 			items: tables.map(table => ({
 				key: table.id,
 				text: table.id,
-				onClick: () => onChange && onChange(table.id),
+				onClick: () => onChange?.(table.id),
 			})) as IContextualMenuItem[],
 		}
 	}, [tables, onChange])

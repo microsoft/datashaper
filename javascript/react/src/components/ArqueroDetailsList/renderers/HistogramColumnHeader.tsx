@@ -2,14 +2,20 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Category, FieldMetadata } from '@datashaper/schema'
-import { formatIfNumber } from '@datashaper/tables'
 import { Sparkbar } from '@essex/charts-react'
 import { TooltipHost } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 
-import { HISTOGRAM_HEADER_PADDING } from '../ArqueroDetailsList.constants.js'
+import { EMPTY_ARRAY } from '../../../empty.js'
 import { useCellDimensions } from '../hooks/index.js'
+import {
+	useCalloutProps,
+	useCategories,
+	useHandleBarHoverHandler,
+	useLegend,
+	useStyles,
+	useTooltip,
+} from './HistogramColumnHeader.hooks.js'
 import type { RichHeaderProps } from './types.js'
 
 /**
@@ -25,49 +31,33 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const categorical = field.type === 'string'
 
 		const bins = categorical ? field.metadata?.categories : field.metadata?.bins
-		const values = useMemo(() => (bins || []).map(b => b.count), [bins])
+		const values = useMemo(
+			() => (bins ?? EMPTY_ARRAY).map(b => b.count),
+			[bins],
+		)
 		const categories = useCategories(field.metadata, categorical)
 		const title = useTooltip(categories)
 		const legend = useLegend(categories)
 		const [hover, setHover] = useState<string>()
 		const [id, setId] = useState<string>()
-		const handleBarHover = useCallback(
-			(e: MouseEvent) => {
-				const { target, type } = e
-				const index = (target as any).dataset.index
-				const id = (target as any).id
-				if (type === 'mouseover' && index >= 0) {
-					setHover(legend[index] || '')
-					setId(id)
-				} else {
-					setHover(undefined)
-					setId(undefined)
+		const handleBarHover = useHandleBarHoverHandler(legend, setId, setHover)
+		const styles = useStyles(dimensions, Boolean(onClick))
+		const enough = field.metadata?.distinct || 0
+		const calloutProps = useCalloutProps(id)
+		const handleOnClick = useCallback(
+			(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+				if (bins) {
+					onClick?.(e, column, field)
 				}
 			},
-			[legend, setHover, setId],
+			[column, field, bins, onClick],
 		)
-
-		const styles = useMemo(() => {
-			return {
-				height: dimensions.height + HISTOGRAM_HEADER_PADDING,
-				cursor: onClick ? 'pointer' : 'inherit',
-			}
-		}, [onClick, dimensions])
-
-		const enough = field.metadata?.distinct || 0
 
 		return (
 			<div style={styles}>
 				{enough > 1 && bins ? (
-					<div
-						onClick={e => onClick && bins && onClick(e, column, field)}
-						title={title}
-					>
-						<TooltipHost
-							content={hover}
-							id={id}
-							calloutProps={{ gapSpace: 5, target: `#${id}` }}
-						>
+					<div onClick={handleOnClick} title={title}>
+						<TooltipHost content={hover} id={id} calloutProps={calloutProps}>
 							<Sparkbar
 								categorical={categorical}
 								data={values}
@@ -84,30 +74,3 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		)
 	},
 )
-
-function useCategories(
-	stats?: FieldMetadata,
-	categorical?: boolean,
-): Category[] {
-	return useMemo(() => {
-		if (categorical) {
-			return stats?.categories || []
-		}
-		return (stats?.bins || []).map(b => ({ name: `${b.min}`, count: b.count }))
-	}, [stats, categorical])
-}
-
-function useTooltip(categories: Category[]): string {
-	return useMemo(() => {
-		return categories.reduce((acc, cur, idx) => {
-			const { name, count } = cur
-			return acc + (idx > 0 ? '\n' : '') + `${formatIfNumber(name)}: ${count}`
-		}, '')
-	}, [categories])
-}
-
-function useLegend(categories: Category[]): string[] {
-	return useMemo(() => {
-		return categories.map(cat => `${formatIfNumber(cat.name)}: ${cat.count}`)
-	}, [categories])
-}

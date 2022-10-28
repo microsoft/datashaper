@@ -5,6 +5,8 @@
 import type { ICommandBarItemProps, IContextualMenuItem } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 
+import { EMPTY_ARRAY } from '../../../empty.js'
+
 /**
  * Constructs a command for listing out items with checks
  * @param list - full list of items to display
@@ -23,7 +25,7 @@ export function checkedItemsCommand(
 	) => boolean | void,
 	props?: Partial<ICommandBarItemProps>,
 ): ICommandBarItemProps {
-	const hash = (checked || []).reduce((acc, cur) => {
+	const hash = (checked || EMPTY_ARRAY).reduce((acc, cur) => {
 		acc[cur] = true
 		return acc
 	}, {} as Record<string, boolean>)
@@ -37,7 +39,7 @@ export function checkedItemsCommand(
 			_item?: IContextualMenuItem,
 		) => {
 			ev?.preventDefault()
-			return onCheckChange && onCheckChange(name, !hash[name], index)
+			return onCheckChange?.(name, !hash[name], index)
 		},
 	}))
 	return merge(
