@@ -14,9 +14,5 @@
 		"esModuleInterop": false,
 		"isolatedModules": true
 	},
-	"include": [, "../webapp/src/hooks/useManagementBarDefaults.ts"
-		"src",
-		"../webapp/src/hooks/uploads.ts",
-		"../webapp/src/common/Dropzone.tsx"
-	]
+	"include": ["src"]
 }

@@ -13,7 +13,7 @@ import { memo, useCallback, useMemo, useState } from 'react'
 import { map } from 'rxjs'
 import styled from 'styled-components'
 
-import { TableTransformModal } from '../components/TableTransformModal.js'
+import { TableTransformModal } from './internal/TableTransformModal.js'
 import { useCreateTableId } from '../hooks/common.js'
 import { useTransformModalState } from '../hooks/manageWorkflow.js'
 import {

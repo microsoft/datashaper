@@ -9,7 +9,7 @@ import { DefaultButton, useTheme } from '@fluentui/react'
 import { memo } from 'react'
 
 import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
-import { StepHeader } from './StepHeader.js'
+import { StepHeader } from './internal/StepHeader.js'
 import type { StepHeaderStyles } from './StepHeader.types.js'
 import { useDeleteConfirm, useTableHandlers } from './StepHistoryList.hooks.js'
 import {

@@ -5,10 +5,10 @@
 import { memo } from 'react'
 
 import { DetailText } from './internal/DetailText.js'
-import { TableCard } from './TableCard.js'
+import { TableCard } from './internal/TableCard.js'
 import { useIsTableSelected } from './TableList.hooks.js'
 import type { TableListProps } from './TableList.types.js'
-import { ListContainer } from './TableListBar.styles.js'
+import { ListContainer } from './TableList.styles.js'
 
 export const TableList: React.FC<TableListProps> = memo(function TablesList({
 	tables,

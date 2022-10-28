@@ -5,10 +5,10 @@
 import styled from '@essex/styled-components'
 
 export const ListContainer = styled.div`
-	flex: 1;
 	display: flex;
-	flex-direction: column;
-	overflow-y: auto;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
 	width: 100%;
-	row-gap: 6px;
+	gap: 18px;
 `

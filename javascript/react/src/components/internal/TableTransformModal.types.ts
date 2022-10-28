@@ -4,6 +4,6 @@
  */
 import type { IModalProps } from '@fluentui/react'
 
-import type { TableTransformProps } from '../index.js'
+import type { TableTransformProps } from '../TableTransform.types.js'
 
 export interface TransformModalProps extends IModalProps, TableTransformProps {}
