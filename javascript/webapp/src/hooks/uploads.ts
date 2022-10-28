@@ -2,14 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import type { WorkflowSchema } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { FileCollection, FileType } from '@datashaper/utilities'
 import debug from 'debug'
 import { useCallback } from 'react'
 
-const EMPTY_OBJECT = Object.freeze({})
+const EMPTY_OBJECT = Object.freeze({}) as any
 
 const log = debug('datashaper')
 
