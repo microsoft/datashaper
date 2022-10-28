@@ -14,7 +14,7 @@ export function useBooleanCircleAttrs(
 	dimensions: Dimensions,
 	item?: any,
 	column?: IColumn,
-): React.CSSProperties {
+): React.SVGProps<SVGCircleElement> {
 	const theme = useThematic()
 	return useMemo(() => {
 		const value = !!getValue(item, column)

@@ -28,7 +28,6 @@ import type { IDropdownOption } from '@fluentui/react';
 import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
-import { default as React_2 } from 'react';
 import type { ReactElement } from 'react';
 import type { RowObject } from 'arquero/dist/types/table/table';
 import { SortDirection } from '@datashaper/schema';
@@ -274,7 +273,7 @@ export interface GuidanceProps {
 // Warning: (ae-missing-release-tag) "HistoryButton" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const HistoryButton: React_2.FC<HistoryButtonProps>;
+export const HistoryButton: React.FC<HistoryButtonProps>;
 
 // Warning: (ae-missing-release-tag) "HistoryButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -781,7 +780,7 @@ export function useStepOutputs(workflow: Workflow): string[];
 // Warning: (ae-missing-release-tag) "useStripedRowsRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useStripedRowsRenderer(striped?: boolean, columnBorders?: boolean): IRenderFunction_2<IDetailsRowProps>;
+export function useStripedRowsRenderer(striped: boolean, columnBorders: boolean): IRenderFunction_2<IDetailsRowProps>;
 
 // Warning: (ae-missing-release-tag) "useSubsetTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

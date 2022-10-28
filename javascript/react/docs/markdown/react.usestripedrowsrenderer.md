@@ -7,15 +7,15 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function useStripedRowsRenderer(striped?: boolean, columnBorders?: boolean): IRenderFunction<IDetailsRowProps>;
+export declare function useStripedRowsRenderer(striped: boolean, columnBorders: boolean): IRenderFunction<IDetailsRowProps>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  striped | boolean | <i>(Optional)</i> |
-|  columnBorders | boolean | <i>(Optional)</i> |
+|  striped | boolean |  |
+|  columnBorders | boolean |  |
 
 <b>Returns:</b>
 
