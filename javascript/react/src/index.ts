@@ -32,8 +32,6 @@ export type { TableCommandsProps } from './components/TableCommands.types.js'
 export { TableList } from './components/TableList.js'
 export type { TableListProps } from './components/TableList.types.js'
 export type { TableTransformProps } from './components/TableTransform.types.js'
-export { Tooltip } from './components/Tooltip.js'
-export type { TooltipProps } from './components/Tooltip.types.js'
 export { DisplayOrder } from './enums.js'
 export {
 	useDataTable,
@@ -41,13 +39,13 @@ export {
 	useHandleStepSave,
 	useHeaderCommandBarDefaults,
 	useInputTableNames,
-	useTableDropdownOptions,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnEditStep,
 	useOnSaveStep,
 	useOnUpdateStep,
 	useStepOutputs,
+	useTableDropdownOptions,
 	useWorkflow,
 	useWorkflowListener,
 	useWorkflowOutputListener,
