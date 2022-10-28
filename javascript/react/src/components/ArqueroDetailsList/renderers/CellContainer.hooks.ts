@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IColumn } from '@fluentui/react'
-import type React from 'react';
+import type React from 'react'
 import { useCallback, useMemo } from 'react'
 
 import type { CellContainerProps } from './CellContainer.types.js'
@@ -11,7 +11,7 @@ import type { CellContainerProps } from './CellContainer.types.js'
 export function useHandleColumnClick(
 	column: IColumn | undefined,
 	onClick: CellContainerProps['onClick'],
-) {
+): (ev: React.MouseEvent<HTMLElement>) => void {
 	return useCallback(
 		(ev: React.MouseEvent<HTMLElement>) => {
 			column && onClick?.(ev, column)
@@ -35,5 +35,5 @@ export function useCellStyle(
 			style.fontWeight = 'bold'
 		}
 		return style
-	}, [onClick])
+	}, [onClick, column?.data?.selected])
 }

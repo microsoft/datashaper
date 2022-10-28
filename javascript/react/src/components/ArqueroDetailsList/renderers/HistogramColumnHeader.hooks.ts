@@ -45,7 +45,7 @@ export function useHandleBarHoverHandler(
 	legend: string[],
 	setId: (id: string | undefined) => void,
 	setHover: (target: string | undefined) => void,
-) {
+): (e: MouseEvent) => void {
 	return useCallback(
 		(e: MouseEvent) => {
 			const { target, type } = e
@@ -63,7 +63,10 @@ export function useHandleBarHoverHandler(
 	)
 }
 
-export function useStyles(dimensions: Dimensions, hasOnClickHandler: boolean) {
+export function useStyles(
+	dimensions: Dimensions,
+	hasOnClickHandler: boolean,
+): React.CSSProperties {
 	return useMemo(() => {
 		return {
 			height: dimensions.height + HISTOGRAM_HEADER_PADDING,

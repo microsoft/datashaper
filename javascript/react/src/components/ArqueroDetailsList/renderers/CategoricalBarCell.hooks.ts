@@ -4,6 +4,8 @@
  */
 import { useMemo } from 'react'
 
-export function useValues(categories: Record<string | number, number>) {
+export function useValues(
+	categories: Record<string | number, number>,
+): number[] {
 	return useMemo(() => Object.values(categories), [categories])
 }

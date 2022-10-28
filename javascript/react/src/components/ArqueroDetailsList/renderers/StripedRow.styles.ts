@@ -2,6 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type {
+	IDetailsRowStyleProps,
+	IDetailsRowStyles,
+	IStyleFunctionOrObject,
+} from '@fluentui/react'
 import { useThematicFluent } from '@thematic/fluent'
 import { useMemo } from 'react'
 
@@ -13,7 +18,10 @@ export function useStyles({
 	columnBorders,
 	compact,
 	styles,
-}: RichRowProps) {
+}: RichRowProps): IStyleFunctionOrObject<
+	IDetailsRowStyleProps,
+	IDetailsRowStyles
+> {
 	const theme = useThematicFluent()
 	return useMemo(() => {
 		return {

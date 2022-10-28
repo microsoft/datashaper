@@ -4,7 +4,11 @@
  */
 import type { SortDirection } from '@datashaper/schema'
 import type { TableMetadata } from '@datashaper/tables'
-import type { IColumn } from '@fluentui/react'
+import type {
+	IColumn,
+	IDetailsGroupRenderProps,
+	IListProps,
+} from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import type { RowObject } from 'arquero/dist/types/table/table'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -13,7 +17,7 @@ import type {
 	DetailsListFeatures,
 	GroupHeaderFunction,
 } from './ArqueroDetailsList.types.js'
-import { debounceFn , groupBuilder } from './ArqueroDetailsList.utils.js'
+import { debounceFn, groupBuilder } from './ArqueroDetailsList.utils.js'
 import { useGroupHeaderRenderer, useSortedGroups } from './hooks/index.js'
 import { useFill } from './hooks/useFill.js'
 import { useItems } from './hooks/useItems.js'
@@ -24,7 +28,11 @@ export function useVirtualizedItems(
 	features: DetailsListFeatures,
 	fill: boolean,
 	compact: boolean,
-) {
+): {
+	ref: React.MutableRefObject<HTMLDivElement | null>
+	items: any[]
+	virtual: ReturnType<typeof useFill>
+} {
 	const ref = useRef(null)
 	const baseItems = useMemo(() => [...table.objects()], [table])
 	const virtual = useFill(table, columns, ref, fill, features, { compact })
@@ -44,7 +52,7 @@ export function useGroups(
 	sortDirection: SortDirection | undefined,
 	features: DetailsListFeatures,
 	sortColumn: string | undefined,
-) {
+): undefined | Array<ReturnType<typeof groupBuilder>> {
 	// if the table is grouped, groups the information in a way we can iterate
 	const groupedEntries = useGroupedEntries(table, sliced)
 	// sorts first level group headers
@@ -82,7 +90,10 @@ export function useGroups(
 /**
  * If the table is grouped, groups the information in a way we can iterate
  */
-function useGroupedEntries(table: ColumnTable, sliced: ColumnTable) {
+function useGroupedEntries(
+	table: ColumnTable,
+	sliced: ColumnTable,
+): object[] | undefined {
 	return useMemo(
 		() =>
 			table.isGrouped() ? sliced.objects({ grouped: 'entries' }) : undefined,
@@ -109,7 +120,7 @@ export function useVersion(
 
 export function useOnColumnResizeHandler(
 	setVersion: React.Dispatch<React.SetStateAction<number>>,
-) {
+): (column: IColumn | undefined, newWidth: number | undefined) => void {
 	return useCallback(
 		(column: IColumn | undefined, newWidth: number | undefined) => {
 			const set = () => setVersion(prev => prev + 1)
@@ -124,7 +135,7 @@ export function useOnColumnResizeHandler(
 /**
  * Ensures every key is unique
  */
-export function useGetKey() {
+export function useGetKey(): (_: any, index?: number) => string {
 	return useCallback((_: any, index?: number) => {
 		return (index as number).toString()
 	}, [])
@@ -135,21 +146,16 @@ export function useGroupProps(
 	metadata: TableMetadata | undefined,
 	onRenderGroupHeader: GroupHeaderFunction | undefined,
 	features: DetailsListFeatures,
-) {
-	const renderGroupHeader = useGroupHeaderRenderer(
+): IDetailsGroupRenderProps {
+	const onRenderHeader = useGroupHeaderRenderer(
 		table,
 		metadata,
 		onRenderGroupHeader,
 		features.lazyLoadGroups,
 	)
-	return useMemo(
-		() => ({
-			onRenderHeader: renderGroupHeader,
-		}),
-		[renderGroupHeader],
-	)
+	return useMemo(() => ({ onRenderHeader }), [onRenderHeader])
 }
 
-export function useListProps(version: number) {
+export function useListProps(version: number): IListProps<any> {
 	return useMemo(() => ({ version }), [version])
 }

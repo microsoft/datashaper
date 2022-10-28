@@ -4,7 +4,7 @@
  */
 import { Sparkbar } from '@essex/charts-react'
 import { TooltipHost } from '@fluentui/react'
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import { useCellDimensions } from '../hooks/index.js'
@@ -50,7 +50,7 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 					onClick?.(e, column, field)
 				}
 			},
-			[column, field, bins],
+			[column, field, bins, onClick],
 		)
 
 		return (

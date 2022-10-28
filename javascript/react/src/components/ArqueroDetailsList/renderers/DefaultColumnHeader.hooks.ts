@@ -11,7 +11,7 @@ import { useCellDimensions } from '../hooks/index.js'
 
 const COMPACT_LINE_HEIGHT = 2
 
-export function useContainerStyle(column: IColumn) {
+export function useContainerStyle(column: IColumn): React.CSSProperties {
 	const dimensions = useCellDimensions(column)
 	return useMemo(
 		() => ({
@@ -24,7 +24,10 @@ export function useContainerStyle(column: IColumn) {
 	)
 }
 
-export function useTextStyle(column: IColumn, isClickable: boolean) {
+export function useTextStyle(
+	column: IColumn,
+	isClickable: boolean,
+): React.CSSProperties {
 	const theme = useTheme()
 	return useMemo(
 		() => ({
@@ -44,7 +47,7 @@ export function useTextStyle(column: IColumn, isClickable: boolean) {
 	)
 }
 
-export function useIconStyles() {
+export function useIconStyles(): { root: React.CSSProperties } {
 	const theme = useTheme()
 	return useMemo(
 		() => ({
@@ -63,7 +66,7 @@ export function useIconStyles() {
 export function useDelegatedColumnClickHandler(
 	column: IColumn | undefined,
 	delegate: ColumnClickFunction | undefined,
-) {
+): (e: React.MouseEvent<HTMLElement, MouseEvent>) => void {
 	return useCallback(
 		(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
 			delegate?.(e, column)

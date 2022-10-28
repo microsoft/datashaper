@@ -5,6 +5,6 @@
 
 import { useMemo } from 'react'
 
-export function useDateString(value: Date | undefined) {
+export function useDateString(value: Date | undefined): string | undefined {
 	return useMemo(() => value?.toDateString(), [value])
 }

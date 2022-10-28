@@ -6,7 +6,7 @@
 import { useThematic } from '@thematic/react'
 import { useMemo } from 'react'
 
-export function useBarColor(color: string | undefined) {
+export function useBarColor(color: string | undefined): string {
 	const theme = useThematic()
 	return useMemo(() => color || theme.rect().fill().hex(), [theme, color])
 }
