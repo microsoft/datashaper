@@ -13,12 +13,12 @@ import {
 	useDownloadCsv,
 	useDownloadWorkflow,
 	useDownloadZip,
-} from '../hooks/downloads.js'
+} from '../../hooks/downloads.js'
 import {
 	useHandleCsvUpload,
 	useHandleJsonUpload,
 	useHandleZipUpload,
-} from '../hooks/uploads.js'
+} from '../../hooks/uploads.js'
 
 export function useProjectManagementCommands(
 	workflow: Workflow,

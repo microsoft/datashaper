@@ -9,7 +9,7 @@ import { FileCollection, FileType } from '@datashaper/utilities'
 import debug from 'debug'
 import { useCallback } from 'react'
 
-import { EMPTY_OBJECT } from '../empty.js'
+const EMPTY_OBJECT = Object.freeze({})
 
 const log = debug('datashaper')
 

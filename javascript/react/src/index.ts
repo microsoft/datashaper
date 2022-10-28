@@ -13,13 +13,8 @@ export type {
 export * from './components/ArqueroDetailsList/index.js'
 export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/ArqueroTableHeader.types.js'
 export * from './components/ArqueroTableHeader/index.js'
-export { Dropzone } from './components/Dropzone.js'
-export type {
-	DropzoneProps,
-	FileRejection,
-} from './components/Dropzone.types.js'
-export { ProjectManagementCommandBar } from './components/ProjectManagementCommandBar.js'
-export type { ProjectManagementCommandBarProps } from './components/ProjectManagementCommandBar.types.js'
+export { Guidance } from './components/Guidance.js'
+export type { GuidanceProps } from './components/Guidance.types.js'
 export { StepCard } from './components/StepCard.js'
 export type { StepCardProps } from './components/StepCard.types.js'
 export { StepComponent } from './components/StepComponent.js'
@@ -44,12 +39,11 @@ export type { TooltipProps } from './components/Tooltip.types.js'
 export { DisplayOrder } from './enums.js'
 export {
 	useDataTable,
-	useHandleFilesUpload,
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useHeaderCommandBarDefaults,
 	useInputTableNames,
-	useManagementBarDefaults,
+	useTableDropdownOptions,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnEditStep,

@@ -8,7 +8,7 @@ import chroma from 'chroma-js'
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
-import type { ProjectManagementCommandBarProps } from '../components/ProjectManagementCommandBar.types.js'
+import type { ProjectManagementCommandBarProps } from '../components/common/ProjectManagementCommandBar.types.js'
 /**
  * Helper to create the props necessary for the default inverted management bar.
  * Basic colors can be customized, but note that if you do not want an always-inverted
