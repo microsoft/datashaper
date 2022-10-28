@@ -1046,6 +1046,18 @@ export interface ValidationResult {
     errors?: FieldError[];
 }
 
+// Warning: (ae-missing-release-tag) "ValidationTestResult" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ValidationTestResult {
+    // (undocumented)
+    fail: boolean;
+    // (undocumented)
+    indexes: number[];
+    // (undocumented)
+    rule: ErrorCode;
+}
+
 // Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

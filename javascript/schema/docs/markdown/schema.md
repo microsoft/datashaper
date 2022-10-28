@@ -98,6 +98,7 @@
 |  [TypeHints](./schema.typehints.md) | Configuration values for interpreting data types when parsing a delimited file. By default, all values are read as strings - applying these type hints can derive primitive types from the strings. |
 |  [UnhotArgs](./schema.unhotargs.md) |  |
 |  [ValidationResult](./schema.validationresult.md) |  |
+|  [ValidationTestResult](./schema.validationtestresult.md) |  |
 |  [VariadicInput](./schema.variadicinput.md) | Multi-input, single output step I/O |
 |  [WindowArgs](./schema.windowargs.md) |  |
 |  [WorkflowSchema](./schema.workflowschema.md) | The root wrangling workflow specification. resource profile: 'workflow' |

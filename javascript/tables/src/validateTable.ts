@@ -4,7 +4,9 @@
  */
 import type {
 	CodebookSchema,
+	Constraints,
 	Field,
+	FieldError,
 	ValidationResult,
 	ValidationTestResult,
 } from '@datashaper/schema'
@@ -21,173 +23,21 @@ export function validateTable(
 	}
 
 	codebook.fields.forEach((field: Field) => {
-		if (field.constraints != null) {
+		if (field.constraints != null && field.type != null) {
 			const constraints = field.constraints
 			const columnValues = table.array(field.name)
 
-			//required constraint
-			if (constraints.required) {
-				const requiredResult: ValidationTestResult = validateRequiredConstraint(
-					columnValues as string[],
-					includeInstances,
-				)
-
-				if (requiredResult.fail) {
-					if (validationResult.errors != null)
-						validationResult.errors.push({
-							name: field.name,
-							rule: ErrorCode.Required,
-							indexes: requiredResult.indexes,
-						})
-				}
-			}
-
-			//unique constraint
-			if (constraints.unique) {
-				const uniqueResult: ValidationTestResult = validateUniqueConstraint(
-					columnValues as string[],
-					includeInstances,
-				)
-
-				if (uniqueResult.fail) {
-					if (validationResult.errors != null)
-						validationResult.errors.push({
-							name: field.name,
-							rule: ErrorCode.Unique,
-							indexes: uniqueResult.indexes,
-						})
-				}
-			}
-
-			//minLength constraint - for string and arrays only
-			if (
-				constraints.minLength &&
-				(field.type === DataType.Array || field.type === DataType.String)
-			) {
-				const minLengthResult: ValidationTestResult =
-					validateMinLengthConstraint(constraints.minLength)(
-						field.type === DataType.Array
-							? (columnValues as Array<any>[])
-							: field.type === DataType.String
-							? (columnValues as string[])
-							: [],
-						includeInstances,
-					)
-
-				if (minLengthResult.fail) {
-					if (validationResult.errors != null)
-						validationResult.errors.push({
-							name: field.name,
-							rule: ErrorCode.MinLength,
-							indexes: minLengthResult.indexes,
-						})
-				}
-			}
-
-			//maxLength constraint - for string and arrays only
-			if (
-				constraints.maxLength &&
-				(field.type === DataType.Array || field.type === DataType.String)
-			) {
-				const maxLengthResult: ValidationTestResult =
-					validateMaxLengthConstraint(constraints.maxLength)(
-						field.type === DataType.Array
-							? (columnValues as Array<any>[])
-							: field.type === DataType.String
-							? (columnValues as string[])
-							: [],
-						includeInstances,
-					)
-				if (maxLengthResult.fail) {
-					if (validationResult.errors != null)
-						validationResult.errors.push({
-							name: field.name,
-							rule: ErrorCode.MaxLength,
-							indexes: maxLengthResult.indexes,
-						})
-				}
-			}
-
-			//minimum constraint - for numbers or dates only
-			if (
-				constraints.minimum &&
-				(field.type === DataType.Number || field.type === DataType.Date)
-			) {
-				const minimumResult: ValidationTestResult = validateMinimumConstraint(
-					constraints.minimum,
-					field.type,
-				)(
-					field.type === DataType.Number
-						? (columnValues as number[])
-						: field.type === DataType.Date
-						? (columnValues as Date[])
-						: [],
-					includeInstances,
-				)
-				if (minimumResult.fail) {
-					if (validationResult.errors != null)
-						validationResult.errors.push({
-							name: field.name,
-							rule: ErrorCode.Minimum,
-							indexes: minimumResult.indexes,
-						})
-				}
-			}
-
-			//maximum constraint - for numbers or dates only
-			if (
-				constraints.maximum &&
-				(field.type === DataType.Number || field.type === DataType.Date)
-			) {
-				const maximumResult: ValidationTestResult = validateMaximumConstraint(
-					constraints.maximum,
-					field.type,
-				)(
-					field.type === DataType.Number
-						? (columnValues as number[])
-						: field.type === DataType.Date
-						? (columnValues as Date[])
-						: [],
-					includeInstances,
-				)
-				if (maximumResult.fail) {
-					if (validationResult.errors != null)
-						validationResult.errors.push({
-							name: field.name,
-							rule: ErrorCode.Maximum,
-							indexes: maximumResult.indexes,
-						})
-				}
-			}
-
-			//pattern constraint - for strings only
-			if (constraints.pattern && field.type === DataType.String) {
-				const patternResult: ValidationTestResult = validatePatternConstraint(
-					constraints.pattern,
-				)(columnValues as string[], includeInstances)
-				if (patternResult.fail) {
-					if (validationResult.errors != null)
-						validationResult.errors.push({
-							name: field.name,
-							rule: ErrorCode.Pattern,
-							indexes: patternResult.indexes,
-						})
-				}
-			}
-
-			//enum constraint - for strings only
-			if (constraints.enum && field.type === DataType.String) {
-				const enumResult: ValidationTestResult = validateEnumConstraint(
-					constraints.enum,
-				)(columnValues as string[], includeInstances)
-				if (enumResult.fail) {
-					if (validationResult.errors != null)
-						validationResult.errors.push({
-							name: field.name,
-							rule: ErrorCode.Enum,
-							indexes: enumResult.indexes,
-						})
-				}
+			const results: ValidationResult = validateColumn(
+				columnValues,
+				field.name,
+				field.type,
+				constraints,
+				includeInstances,
+			)
+			if (results.errors != null && validationResult.errors != null) {
+				results.errors.map((result: FieldError) => {
+					validationResult.errors!.push(result!)
+				})
 			}
 		}
 	})
@@ -195,25 +45,86 @@ export function validateTable(
 	return validationResult
 }
 
-function validateRequiredConstraint(
+function validateColumn(
+	values: any[],
+	name: string,
+	dataType: DataType,
+	constraints: Constraints,
+	includeInstances: boolean,
+): ValidationResult {
+	const results: ValidationResult = {
+		errors: [],
+	}
+	const validators: ((
+		values: any[],
+		includeInstances: boolean,
+	) => ValidationTestResult)[] = []
+
+	if (constraints.required) {
+		validators.push(validateRequiredConstraint())
+	}
+	if (constraints.unique) {
+		validators.push(validateUniqueConstraint())
+	}
+	if (constraints.minLength) {
+		validators.push(validateMinLengthConstraint(constraints.minLength))
+	}
+	if (constraints.maxLength) {
+		validators.push(validateMaxLengthConstraint(constraints.maxLength))
+	}
+	if (constraints.minimum) {
+		validators.push(validateMinimumConstraint(constraints.minimum, dataType))
+	}
+	if (constraints.maximum) {
+		validators.push(validateMaximumConstraint(constraints.maximum, dataType))
+	}
+	if (constraints.pattern) {
+		validators.push(validatePatternConstraint(constraints.pattern))
+	}
+	if (constraints.enum) {
+		validators.push(validateEnumConstraint(constraints.enum))
+	}
+
+	validators.forEach(validator => {
+		const result: ValidationTestResult = validator(values, includeInstances)
+		if (result.fail && results.errors != null) {
+			results.errors.push({
+				name: name,
+				rule: result.rule,
+				indexes: result.indexes,
+			})
+		}
+	})
+
+	return results
+}
+
+function validateRequiredConstraint(): (
 	values: string[],
 	includeInstances: boolean,
-): ValidationTestResult {
-	if (!includeInstances) {
-		return {
-			fail: !values.every(validateRequired),
-			indexes: [],
-		}
-	} else {
-		const resultIndexes: number[] = []
+) => ValidationTestResult {
+	return function validateRequiredConstraint(
+		values: string[],
+		includeInstances: boolean,
+	): ValidationTestResult {
+		if (!includeInstances) {
+			return {
+				fail: !values.every(validateRequired),
+				indexes: [],
+				rule: ErrorCode.Required,
+			}
+		} else {
+			const resultIndexes: number[] = []
 
-		values.map((value: string, index: number) => {
-			if (!validateRequired(value)) resultIndexes.push(index)
-		})
+			values.map((value: string, index: number) => {
+				if (!validateRequired(value)) resultIndexes.push(index)
+			})
 
-		return {
-			fail: resultIndexes.length != 0,
-			indexes: resultIndexes,
+			return {
+				fail: resultIndexes.length != 0,
+				indexes: resultIndexes,
+				rule: ErrorCode.Required,
+			}
 		}
 	}
 }
@@ -225,22 +136,31 @@ function validateRequired(element: string): boolean {
 	return true
 }
 
-function validateUniqueConstraint(
+function validateUniqueConstraint(): (
 	values: string[],
 	includeInstances: boolean,
-): ValidationTestResult {
-	const uniqueValues = new Set<string>()
-	const resultIndexes: number[] = []
+) => ValidationTestResult {
+	return function validateUniqueConstraint(
+		values: string[],
+		includeInstances: boolean,
+	): ValidationTestResult {
+		const uniqueValues = new Set<string>()
+		const resultIndexes: number[] = []
 
-	values.map((value: string, index: number) => {
-		if (uniqueValues.has(value)) {
-			if (includeInstances) resultIndexes.push(index)
-		} else {
-			uniqueValues.add(value)
+		values.map((value: string, index: number) => {
+			if (uniqueValues.has(value)) {
+				if (includeInstances) resultIndexes.push(index)
+			} else {
+				uniqueValues.add(value)
+			}
+		})
+
+		return {
+			fail: values.length !== uniqueValues.size,
+			indexes: resultIndexes,
+			rule: ErrorCode.Unique,
 		}
-	})
-
-	return { fail: values.length !== uniqueValues.size, indexes: resultIndexes }
+	}
 }
 
 function validateMinLengthConstraint(
@@ -262,11 +182,13 @@ function validateMinLengthConstraint(
 			return {
 				fail: resultIndexes.length !== 0,
 				indexes: resultIndexes,
+				rule: ErrorCode.MinLength,
 			}
 		} else {
 			return {
 				fail: values.every(validate),
 				indexes: resultIndexes,
+				rule: ErrorCode.MinLength,
 			}
 		}
 	}
@@ -299,11 +221,13 @@ function validateMaxLengthConstraint(
 			return {
 				fail: resultIndexes.length !== 0,
 				indexes: resultIndexes,
+				rule: ErrorCode.MaxLength,
 			}
 		} else {
 			return {
 				fail: values.every(validate),
 				indexes: resultIndexes,
+				rule: ErrorCode.MaxLength,
 			}
 		}
 	}
@@ -337,11 +261,13 @@ function validateMinimumConstraint(
 			return {
 				fail: resultIndexes.length !== 0,
 				indexes: resultIndexes,
+				rule: ErrorCode.Minimum,
 			}
 		} else {
 			return {
 				fail: values.every(validate),
 				indexes: resultIndexes,
+				rule: ErrorCode.Minimum,
 			}
 		}
 	}
@@ -378,11 +304,13 @@ function validateMaximumConstraint(
 			return {
 				fail: resultIndexes.length !== 0,
 				indexes: resultIndexes,
+				rule: ErrorCode.Maximum,
 			}
 		} else {
 			return {
 				fail: values.every(validate),
 				indexes: resultIndexes,
+				rule: ErrorCode.Maximum,
 			}
 		}
 	}
@@ -415,11 +343,13 @@ function validatePatternConstraint(
 			return {
 				fail: resultIndexes.length !== 0,
 				indexes: resultIndexes,
+				rule: ErrorCode.Pattern,
 			}
 		} else {
 			return {
 				fail: values.every(validate),
 				indexes: resultIndexes,
+				rule: ErrorCode.Pattern,
 			}
 		}
 	}
@@ -448,11 +378,13 @@ function validateEnumConstraint(
 			return {
 				fail: resultIndexes.length !== 0,
 				indexes: resultIndexes,
+				rule: ErrorCode.Enum,
 			}
 		} else {
 			return {
 				fail: values.every(validate),
 				indexes: resultIndexes,
+				rule: ErrorCode.Enum,
 			}
 		}
 	}
