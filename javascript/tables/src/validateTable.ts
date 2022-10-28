@@ -57,7 +57,7 @@ export function validateTable(
 }
 
 function validateColumn(
-	values: any[],
+	values: unknown,
 	name: string,
 	dataType: DataType,
 	constraints: Constraints,
@@ -67,7 +67,7 @@ function validateColumn(
 		errors: [],
 	}
 	const validators: ((
-		values: any[],
+		values: unknown,
 		includeInstances: boolean,
 	) => ValidationTestResult)[] = []
 
@@ -81,13 +81,17 @@ function validateColumn(
 		constraints.minLength &&
 		(dataType == DataType.String || dataType == DataType.Array)
 	) {
-		validators.push(validateMinLengthConstraint(constraints.minLength))
+		validators.push(
+			validateMinLengthConstraint(constraints.minLength, dataType),
+		)
 	}
 	if (
 		constraints.maxLength &&
 		(dataType == DataType.String || dataType == DataType.Array)
 	) {
-		validators.push(validateMaxLengthConstraint(constraints.maxLength))
+		validators.push(
+			validateMaxLengthConstraint(constraints.maxLength, dataType),
+		)
 	}
 	if (
 		constraints.minimum &&

@@ -1031,7 +1031,7 @@ export type UnrollArgs = InputColumnListArgs;
 // @public (undocumented)
 export interface ValidationResult {
     // (undocumented)
-    errors?: FieldError[];
+    errors: FieldError[];
 }
 
 // Warning: (ae-missing-release-tag) "ValidationTestResult" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

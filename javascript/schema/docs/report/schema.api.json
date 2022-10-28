@@ -9920,7 +9920,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "errors?: "
+                  "text": "errors: "
                 },
                 {
                   "kind": "Reference",
@@ -9937,7 +9937,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": true,
+              "isOptional": false,
               "releaseTag": "Public",
               "name": "errors",
               "propertyTypeTokenRange": {

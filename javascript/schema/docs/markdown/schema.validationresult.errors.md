@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-errors?: FieldError[];
+errors: FieldError[];
 ```

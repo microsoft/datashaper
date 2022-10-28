@@ -14,5 +14,5 @@ export interface ValidationResult
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [errors?](./schema.validationresult.errors.md) |  | [FieldError](./schema.fielderror.md)<!-- -->\[\] | <i>(Optional)</i> |
+|  [errors](./schema.validationresult.errors.md) |  | [FieldError](./schema.fielderror.md)<!-- -->\[\] |  |
 

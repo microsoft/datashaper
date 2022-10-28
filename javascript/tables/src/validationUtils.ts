@@ -6,23 +6,25 @@ import type { ValidationTestResult } from '@datashaper/schema'
 import { DataType, ErrorCode } from '@datashaper/schema'
 
 export function validateRequiredConstraint(): (
-	values: string[],
+	values: unknown,
 	includeInstances: boolean,
 ) => ValidationTestResult {
 	return function validateRequiredConstraint(
-		values: string[],
+		values: unknown,
 		includeInstances: boolean,
 	): ValidationTestResult {
+		const valuesCasted = values as string[]
+
 		if (!includeInstances) {
 			return {
-				fail: !values.every(validateRequired),
+				fail: !valuesCasted.every(validateRequired),
 				indexes: [],
 				rule: ErrorCode.Required,
 			}
 		} else {
 			const resultIndexes: number[] = []
 
-			values.map((value: string, index: number) => {
+			valuesCasted.map((value: string, index: number) => {
 				if (!validateRequired(value)) resultIndexes.push(index)
 			})
 
@@ -43,17 +45,18 @@ export function validateRequired(element: string): boolean {
 }
 
 export function validateUniqueConstraint(): (
-	values: string[],
+	values: unknown,
 	includeInstances: boolean,
 ) => ValidationTestResult {
 	return function validateUniqueConstraint(
-		values: string[],
+		values: unknown,
 		includeInstances: boolean,
 	): ValidationTestResult {
 		const uniqueValues = new Set<string>()
 		const resultIndexes: number[] = []
+		const valuesCasted = values as string[]
 
-		values.map((value: string, index: number) => {
+		valuesCasted.map((value: string, index: number) => {
 			if (uniqueValues.has(value)) {
 				if (includeInstances) resultIndexes.push(index)
 			} else {
@@ -62,7 +65,7 @@ export function validateUniqueConstraint(): (
 		})
 
 		return {
-			fail: values.length !== uniqueValues.size,
+			fail: valuesCasted.length !== uniqueValues.size,
 			indexes: resultIndexes,
 			rule: ErrorCode.Unique,
 		}
@@ -71,18 +74,21 @@ export function validateUniqueConstraint(): (
 
 export function validateMinLengthConstraint(
 	minLength: number,
-): (
-	values: string[] | Array<any>[],
-	includeInstances: boolean,
-) => ValidationTestResult {
+	dataType: DataType,
+): (values: unknown, includeInstances: boolean) => ValidationTestResult {
 	const validate = validateMinLength(minLength)
 	return function validateMinLengthConstraint(
-		values: string[] | Array<any>[],
+		values: unknown,
 		includeInstances: boolean,
 	): ValidationTestResult {
 		const resultIndexes: number[] = []
+		const valuesCasted =
+			dataType === DataType.String
+				? (values as string[])
+				: (values as Array<any>[])
+
 		if (includeInstances) {
-			values.forEach((value: string | Array<any>, index: number) => {
+			valuesCasted.forEach((value: string | Array<any>, index: number) => {
 				if (!validate(value)) resultIndexes.push(index)
 			})
 			return {
@@ -92,7 +98,9 @@ export function validateMinLengthConstraint(
 			}
 		} else {
 			return {
-				fail: values.every(validate),
+				fail: !(dataType === DataType.String
+					? (values as string[]).every(validate)
+					: (values as Array<any>[]).every(validate)),
 				indexes: resultIndexes,
 				rule: ErrorCode.MinLength,
 			}
@@ -110,18 +118,21 @@ export function validateMinLength(
 
 export function validateMaxLengthConstraint(
 	maxLength: number,
-): (
-	values: string[] | Array<any>[],
-	includeInstances: boolean,
-) => ValidationTestResult {
+	dataType: DataType,
+): (values: unknown, includeInstances: boolean) => ValidationTestResult {
 	const validate = validateMaxLength(maxLength)
 	return function validateMaxLengthConstraint(
-		values: string[] | Array<any>[],
+		values: unknown,
 		includeInstances: boolean,
 	): ValidationTestResult {
 		const resultIndexes: number[] = []
+		const valuesCasted =
+			dataType === DataType.String
+				? (values as string[])
+				: (values as Array<any>[])
+
 		if (includeInstances) {
-			values.forEach((value: string | Array<any>, index: number) => {
+			valuesCasted.forEach((value: string | Array<any>, index: number) => {
 				if (!validate(value)) resultIndexes.push(index)
 			})
 			return {
@@ -131,7 +142,9 @@ export function validateMaxLengthConstraint(
 			}
 		} else {
 			return {
-				fail: values.every(validate),
+				fail: !(dataType === DataType.String
+					? (values as string[]).every(validate)
+					: (values as Array<any>[]).every(validate)),
 				indexes: resultIndexes,
 				rule: ErrorCode.MaxLength,
 			}
@@ -150,18 +163,18 @@ export function validateMaxLength(
 export function validateMinimumConstraint(
 	minimum: number,
 	dataType: DataType,
-): (
-	values: number[] | Date[],
-	includeInstances: boolean,
-) => ValidationTestResult {
+): (values: unknown, includeInstances: boolean) => ValidationTestResult {
 	const validate = validateMinimum(minimum, dataType)
 	return function validateMinimumConstraint(
-		values: number[] | Date[],
+		values: unknown,
 		includeInstances: boolean,
 	): ValidationTestResult {
 		const resultIndexes: number[] = []
+		const valuesCasted =
+			dataType === DataType.Number ? (values as number[]) : (values as Date[])
+
 		if (includeInstances) {
-			values.forEach((value: number | Date, index: number) => {
+			valuesCasted.forEach((value: number | Date, index: number) => {
 				if (!validate(value)) resultIndexes.push(index)
 			})
 			return {
@@ -171,7 +184,9 @@ export function validateMinimumConstraint(
 			}
 		} else {
 			return {
-				fail: values.every(validate),
+				fail: !(dataType === DataType.Number
+					? (values as number[]).every(validate)
+					: (values as Date[]).every(validate)),
 				indexes: resultIndexes,
 				rule: ErrorCode.Minimum,
 			}
@@ -193,18 +208,18 @@ export function validateMinimum(
 export function validateMaximumConstraint(
 	maximum: number,
 	dataType: DataType,
-): (
-	values: number[] | Date[],
-	includeInstances: boolean,
-) => ValidationTestResult {
+): (values: unknown, includeInstances: boolean) => ValidationTestResult {
 	const validate = validateMaximum(maximum, dataType)
 	return function validateMaximumConstraint(
-		values: number[] | Date[],
+		values: unknown,
 		includeInstances: boolean,
 	): ValidationTestResult {
 		const resultIndexes: number[] = []
+		const valuesCasted =
+			dataType === DataType.Number ? (values as number[]) : (values as Date[])
+
 		if (includeInstances) {
-			values.forEach((value: number | Date, index: number) => {
+			valuesCasted.forEach((value: number | Date, index: number) => {
 				if (!validate(value)) resultIndexes.push(index)
 			})
 			return {
@@ -214,7 +229,9 @@ export function validateMaximumConstraint(
 			}
 		} else {
 			return {
-				fail: values.every(validate),
+				fail: !(dataType === DataType.Number
+					? (values as number[]).every(validate)
+					: (values as Date[]).every(validate)),
 				indexes: resultIndexes,
 				rule: ErrorCode.Maximum,
 			}
@@ -235,15 +252,17 @@ export function validateMaximum(
 
 export function validatePatternConstraint(
 	pattern: string,
-): (values: string[], includeInstances: boolean) => ValidationTestResult {
+): (values: unknown, includeInstances: boolean) => ValidationTestResult {
 	const validate = validatePattern(pattern)
 	return function validatePatternConstraint(
-		values: string[],
+		values: unknown,
 		includeInstances: boolean,
 	): ValidationTestResult {
 		const resultIndexes: number[] = []
+		const valuesCasted = values as string[]
+
 		if (includeInstances) {
-			values.forEach((value: string, index: number) => {
+			valuesCasted.forEach((value: string, index: number) => {
 				if (!validate(value)) resultIndexes.push(index)
 			})
 			return {
@@ -253,7 +272,7 @@ export function validatePatternConstraint(
 			}
 		} else {
 			return {
-				fail: values.every(validate),
+				fail: !valuesCasted.every(validate),
 				indexes: resultIndexes,
 				rule: ErrorCode.Pattern,
 			}
@@ -270,15 +289,17 @@ export function validatePattern(pattern: string): (value: string) => boolean {
 
 export function validateEnumConstraint(
 	enumList: string[],
-): (values: string[], includeInstances: boolean) => ValidationTestResult {
+): (values: unknown, includeInstances: boolean) => ValidationTestResult {
 	const validate = validateEnum(enumList)
 	return function validateEnumConstraint(
-		values: string[],
+		values: unknown,
 		includeInstances: boolean,
 	): ValidationTestResult {
 		const resultIndexes: number[] = []
+		const valuesCasted = values as string[]
+
 		if (includeInstances) {
-			values.forEach((value: string, index: number) => {
+			valuesCasted.forEach((value: string, index: number) => {
 				if (!validate(value)) resultIndexes.push(index)
 			})
 			return {
@@ -288,7 +309,7 @@ export function validateEnumConstraint(
 			}
 		} else {
 			return {
-				fail: values.every(validate),
+				fail: !valuesCasted.every(validate),
 				indexes: resultIndexes,
 				rule: ErrorCode.Enum,
 			}
