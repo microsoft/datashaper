@@ -27,13 +27,11 @@
 |  [useDetailsListStyles(isHeaderFixed, features, styles, hasColumnClick, compact)](./react.usedetailsliststyles.md) | Create a DetailsHeader style with enough height to handle the options we've turned on. Each one requires a small amount of vertical space that stacks up. |
 |  [useFormattedNumber(value, formatter)](./react.useformattednumber.md) |  |
 |  [useGroupHeaderRenderer(table, computedMetadata, groupHeaderFunction, lazyLoadGroups)](./react.usegroupheaderrenderer.md) | Overrides the default group header rendering so we can inject customization |
-|  [useHandleFilesUpload(acceptedFileTypes, handleCollection)](./react.usehandlefilesupload.md) |  |
 |  [useHandleStepOutputChanged(workflow)](./react.usehandlestepoutputchanged.md) | This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future. |
 |  [useHandleStepSave(workflow)](./react.usehandlestepsave.md) |  |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
 |  [useIncrementingColumnColorScale(meta)](./react.useincrementingcolumncolorscale.md) | Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table. |
 |  [useInputTableNames(workflow)](./react.useinputtablenames.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
-|  [useManagementBarDefaults(props, colors)](./react.usemanagementbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
 |  [useOnCreateStep(save, selectOutput, dismissModal)](./react.useoncreatestep.md) |  |
 |  [useOnDeleteStep(workflow)](./react.useondeletestep.md) |  |
 |  [useOnEditStep(setStep, setStepIndex, showTableModal)](./react.useoneditstep.md) | A hook to get the onEditStep callback |
@@ -47,6 +45,7 @@
 |  [useStepOutputs(workflow)](./react.usestepoutputs.md) | create a parallel array of output names for the steps |
 |  [useStripedRowsRenderer(striped, columnBorders)](./react.usestripedrowsrenderer.md) |  |
 |  [useSubsetTable(table, columns)](./react.usesubsettable.md) |  |
+|  [useTableDropdownOptions(workflow)](./react.usetabledropdownoptions.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
 |  [useWorkflow(input, inputs)](./react.useworkflow.md) |  |
 |  [useWorkflowListener(workflow, setWorkflow)](./react.useworkflowlistener.md) |  |
 |  [useWorkflowOutputListener(workflow, setOutput)](./react.useworkflowoutputlistener.md) |  |
@@ -62,8 +61,7 @@
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
 |  [ColumnOptions](./react.columnoptions.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
-|  [DropzoneProps](./react.dropzoneprops.md) |  |
-|  [ProjectManagementCommandBarProps](./react.projectmanagementcommandbarprops.md) |  |
+|  [GuidanceProps](./react.guidanceprops.md) |  |
 |  [SortParameters](./react.sortparameters.md) |  |
 |  [StepCardProps](./react.stepcardprops.md) |  |
 |  [StepComponentProps](./react.stepcomponentprops.md) |  |
@@ -74,7 +72,6 @@
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
 |  [TableListProps](./react.tablelistprops.md) |  |
 |  [TableTransformProps](./react.tabletransformprops.md) |  |
-|  [TransformModalProps](./react.transformmodalprops.md) |  |
 
 ## Variables
 
@@ -82,8 +79,7 @@
 |  --- | --- |
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
-|  [Dropzone](./react.dropzone.md) |  |
-|  [ProjectManagementCommandBar](./react.projectmanagementcommandbar.md) |  |
+|  [Guidance](./react.guidance.md) |  |
 |  [StepCard](./react.stepcard.md) |  |
 |  [StepComponent](./react.stepcomponent.md) | Let's us render the Steps in a loop while memoing all the functions |
 |  [StepDescription](./react.stepdescription.md) | Let's us render the Steps in a loop while memoing all the functions |
@@ -92,7 +88,6 @@
 |  [StepSelector](./react.stepselector.md) | Creates a custom step selection dropdown. If "showButton" is true, a + icon will appear next to the dropdown, and onChange will only fire when it is clicked. |
 |  [TableCommands](./react.tablecommands.md) |  |
 |  [TableList](./react.tablelist.md) |  |
-|  [TableTransformModal](./react.tabletransformmodal.md) |  |
 |  [Tooltip](./react.tooltip.md) |  |
 
 ## Type Aliases

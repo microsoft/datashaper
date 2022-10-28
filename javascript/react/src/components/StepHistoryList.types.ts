@@ -6,7 +6,7 @@ import type { Step, Workflow } from '@datashaper/workflow'
 import type { CSSProperties } from 'react'
 
 import type { DisplayOrder } from '../enums.js'
-import type { StepHeaderStyles } from './StepHeader.types.js'
+import type { StepHeaderStyles } from './internal/StepHeader.types.js'
 
 export interface StepHistoryStyles {
 	root?: CSSProperties

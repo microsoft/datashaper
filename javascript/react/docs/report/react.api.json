@@ -2391,353 +2391,6 @@
           }
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!Dropzone:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "Dropzone: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "React.PropsWithChildren",
-              "canonicalReference": "@types/react!~React.PropsWithChildren:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "DropzoneProps",
-              "canonicalReference": "@datashaper/react!DropzoneProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">>"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "Dropzone",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 7
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!DropzoneProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface DropzoneProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "DropzoneProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DropzoneProps#acceptedFileTypes:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "acceptedFileTypes: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "acceptedFileTypes",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DropzoneProps#disabled:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "disabled?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "disabled",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DropzoneProps#dropzoneOptions:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "dropzoneOptions?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Omit",
-                  "canonicalReference": "!Omit:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DropzoneOptions",
-                  "canonicalReference": "react-dropzone!DropzoneOptions:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", 'onDrop' | 'onDropRejected' | 'onDropAccepted'>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "dropzoneOptions",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DropzoneProps#onDrop:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onDrop?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(collection: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "FileCollection",
-                  "canonicalReference": "@datashaper/utilities!FileCollection:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onDrop",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DropzoneProps#onDropAccepted:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onDropAccepted?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(collection: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "FileCollection",
-                  "canonicalReference": "@datashaper/utilities!FileCollection:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onDropAccepted",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DropzoneProps#onDropRejected:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onDropRejected?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(message: string, files?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "FileRejection",
-                  "canonicalReference": "react-dropzone!FileRejection:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onDropRejected",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DropzoneProps#placeholder:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "placeholder?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "placeholder",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DropzoneProps#showPlaceholder:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showPlaceholder?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showPlaceholder",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DropzoneProps#styles:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "styles?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DropzoneStyles",
-                  "canonicalReference": "@datashaper/react!DropzoneStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "styles",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/react!GroupHeaderFunction:type",
           "docComment": "",
@@ -2779,6 +2432,118 @@
             "startIndex": 1,
             "endIndex": 6
           }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/react!Guidance:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "Guidance: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FC",
+              "canonicalReference": "@types/react!~React.FC:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "GuidanceProps",
+              "canonicalReference": "@datashaper/react!GuidanceProps:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            }
+          ],
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "Guidance",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/react!GuidanceProps:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface GuidanceProps "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "GuidanceProps",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!GuidanceProps#index:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "index: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, string>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "index",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!GuidanceProps#name:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "name",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "TypeAlias",
@@ -2849,291 +2614,6 @@
             "startIndex": 1,
             "endIndex": 12
           }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!ProjectManagementCommandBar:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "ProjectManagementCommandBar: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ProjectManagementCommandBarProps",
-              "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "ProjectManagementCommandBar",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface ProjectManagementCommandBarProps extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "Omit",
-              "canonicalReference": "!Omit:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "ICommandBarProps",
-              "canonicalReference": "@fluentui/react!ICommandBarProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", 'items'>"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ProjectManagementCommandBarProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps#itemProps:member",
-              "docComment": "/**\n * Shared props to apply to each item\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "itemProps?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Partial",
-                  "canonicalReference": "!Partial:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ICommandBarItemProps",
-                  "canonicalReference": "@fluentui/react!ICommandBarItemProps:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "itemProps",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 5
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps#onUpdateTables:member",
-              "docComment": "/**\n * Handler for when input tableset changes\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onUpdateTables: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(tables: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "onUpdateTables",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps#onUpdateWorkflow:member",
-              "docComment": "/**\n * Handler for when the workflow changes\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onUpdateWorkflow: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(steps: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Workflow",
-                  "canonicalReference": "@datashaper/workflow!Workflow:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "onUpdateWorkflow",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps#outputTables:member",
-              "docComment": "/**\n * The output data table\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "outputTables: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "outputTables",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps#tables:member",
-              "docComment": "/**\n * The input data tables\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "tables: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "tables",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps#workflow:member",
-              "docComment": "/**\n * The data transformation workflow\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "workflow: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Workflow",
-                  "canonicalReference": "@datashaper/workflow!Workflow:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "workflow",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 5
-            }
-          ]
         },
         {
           "kind": "TypeAlias",
@@ -5743,42 +5223,6 @@
           "name": "tableMenuCommand"
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!TableTransformModal:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableTransformModal: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TransformModalProps",
-              "canonicalReference": "@datashaper/react!TransformModalProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableTransformModal",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/react!TableTransformProps:interface",
           "docComment": "",
@@ -6392,49 +5836,6 @@
             "startIndex": 1,
             "endIndex": 2
           }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!TransformModalProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface TransformModalProps extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "IModalProps",
-              "canonicalReference": "@fluentui/react!IModalProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "TableTransformProps",
-              "canonicalReference": "@datashaper/react!TableTransformProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "TransformModalProps",
-          "preserveMemberOrder": false,
-          "members": [],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            },
-            {
-              "startIndex": 3,
-              "endIndex": 4
-            }
-          ]
         },
         {
           "kind": "Function",
@@ -7204,75 +6605,6 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/react!useHandleFilesUpload:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useHandleFilesUpload(acceptedFileTypes: "
-            },
-            {
-              "kind": "Content",
-              "text": "string[]"
-            },
-            {
-              "kind": "Content",
-              "text": ", handleCollection?: "
-            },
-            {
-              "kind": "Content",
-              "text": "(fileCollection: "
-            },
-            {
-              "kind": "Reference",
-              "text": "FileCollection",
-              "canonicalReference": "@datashaper/utilities!FileCollection:class"
-            },
-            {
-              "kind": "Content",
-              "text": ") => void"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "() => void"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 7,
-            "endIndex": 8
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "acceptedFileTypes",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "handleCollection",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 6
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "useHandleFilesUpload"
-        },
-        {
-          "kind": "Function",
           "canonicalReference": "@datashaper/react!useHandleStepOutputChanged:function(1)",
           "docComment": "/**\n * This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future.\n *\n * @param workflow - the workflow instance\n *\n * @returns A callback to use when the step output changes\n */\n",
           "excerptTokens": [
@@ -7578,68 +6910,6 @@
             }
           ],
           "name": "useInputTableNames"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/react!useManagementBarDefaults:function(1)",
-          "docComment": "/**\n * Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal.\n *\n * @returns \n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useManagementBarDefaults(props?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "ProjectManagementCommandBarProps",
-              "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", colors?: "
-            },
-            {
-              "kind": "Content",
-              "text": "{\n    color?: string;\n    background?: string;\n    border?: string;\n}"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "ProjectManagementCommandBarProps",
-              "canonicalReference": "@datashaper/react!ProjectManagementCommandBarProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 6
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "props",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": true
-            },
-            {
-              "parameterName": "colors",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "useManagementBarDefaults"
         },
         {
           "kind": "Function",
@@ -8552,6 +7822,56 @@
             }
           ],
           "name": "useSubsetTable"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useTableDropdownOptions:function(1)",
+          "docComment": "/**\n * Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created *prior* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results.\n *\n * @param workflow - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useTableDropdownOptions(workflow?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Workflow",
+              "canonicalReference": "@datashaper/workflow!Workflow:class"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IDropdownOption",
+              "canonicalReference": "@fluentui/react!IDropdownOption:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "workflow",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useTableDropdownOptions"
         },
         {
           "kind": "Function",

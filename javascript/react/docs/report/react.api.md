@@ -8,10 +8,7 @@
 
 import type ColumnTable from 'arquero/dist/types/table/column-table';
 import type { CSSProperties } from 'react';
-import type { DropzoneOptions } from 'react-dropzone';
 import type { Field } from '@datashaper/schema';
-import { FileCollection } from '@datashaper/utilities';
-import { FileRejection } from 'react-dropzone';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
@@ -24,7 +21,6 @@ import type { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
 import type { IDocumentCardStyles } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
-import type { IModalProps } from '@fluentui/react';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
 import type { ReactElement } from 'react';
@@ -199,65 +195,30 @@ export function downloadCommand(table: ColumnTable, downloadFilename?: string, p
 // @public (undocumented)
 export type DropdownOptionSelect = ((event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption<any> | undefined, index?: number | undefined) => void) | undefined;
 
-// Warning: (ae-missing-release-tag) "Dropzone" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const Dropzone: React.FC<React.PropsWithChildren<DropzoneProps>>;
-
-// Warning: (ae-missing-release-tag) "DropzoneProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface DropzoneProps {
-    // (undocumented)
-    acceptedFileTypes: string[];
-    // (undocumented)
-    disabled?: boolean;
-    // (undocumented)
-    dropzoneOptions?: Omit<DropzoneOptions, 'onDrop' | 'onDropRejected' | 'onDropAccepted'>;
-    // (undocumented)
-    onDrop?: (collection: FileCollection) => void;
-    // (undocumented)
-    onDropAccepted?: (collection: FileCollection) => void;
-    // (undocumented)
-    onDropRejected?: (message: string, files?: FileRejection[]) => void;
-    // (undocumented)
-    placeholder?: string;
-    // (undocumented)
-    showPlaceholder?: boolean;
-    // Warning: (ae-forgotten-export) The symbol "DropzoneStyles" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    styles?: DropzoneStyles;
-}
-
-export { FileRejection }
-
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type GroupHeaderFunction = (meta?: Field, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
 
+// Warning: (ae-missing-release-tag) "Guidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const Guidance: React.FC<GuidanceProps>;
+
+// Warning: (ae-missing-release-tag) "GuidanceProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GuidanceProps {
+    // (undocumented)
+    index: Record<string, string>;
+    // (undocumented)
+    name: string;
+}
+
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type MetadataClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined, metadata?: Field) => void;
-
-// Warning: (ae-missing-release-tag) "ProjectManagementCommandBar" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const ProjectManagementCommandBar: React.FC<ProjectManagementCommandBarProps>;
-
-// Warning: (ae-missing-release-tag) "ProjectManagementCommandBarProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ProjectManagementCommandBarProps extends Omit<ICommandBarProps, 'items'> {
-    itemProps?: Partial<ICommandBarItemProps>;
-    onUpdateTables: (tables: TableContainer[]) => void;
-    onUpdateWorkflow: (steps: Workflow) => void;
-    outputTables: TableContainer[];
-    tables: TableContainer[];
-    workflow: Workflow;
-}
 
 // Warning: (ae-missing-release-tag) "SaveMetadataFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -498,11 +459,6 @@ export interface TableListProps {
 // @public
 export function tableMenuCommand(tables: TableContainer[], selectedKey?: string | undefined, onChange?: (id: string) => void, props?: Partial<ICommandBarItemProps>): ICommandBarItemProps;
 
-// Warning: (ae-missing-release-tag) "TableTransformModal" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TableTransformModal: React.FC<TransformModalProps>;
-
 // Warning: (ae-missing-release-tag) "TableTransformProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -542,17 +498,10 @@ export interface TableTransformProps {
 // @public (undocumented)
 export const Tooltip: React.FC<TooltipProps>;
 
-// Warning: (ae-forgotten-export) The symbol "GuidanceProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "TooltipProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type TooltipProps = GuidanceProps;
-
-// Warning: (ae-missing-release-tag) "TransformModalProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TransformModalProps extends IModalProps, TableTransformProps {
-}
 
 // Warning: (ae-forgotten-export) The symbol "Dimensions" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useCellDimensions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -600,11 +549,6 @@ export function useFormattedNumber(value: number | undefined, formatter?: string
 // @public
 export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata?: TableMetadata, groupHeaderFunction?: GroupHeaderFunction, lazyLoadGroups?: boolean): IRenderFunction<IDetailsGroupDividerProps>;
 
-// Warning: (ae-missing-release-tag) "useHandleFilesUpload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useHandleFilesUpload(acceptedFileTypes: string[], handleCollection?: (fileCollection: FileCollection) => void): () => void;
-
 // Warning: (ae-missing-release-tag) "useHandleStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -630,15 +574,6 @@ export function useIncrementingColumnColorScale(meta?: TableMetadata): () => str
 //
 // @public
 export function useInputTableNames(workflow?: Workflow): string[];
-
-// Warning: (ae-missing-release-tag) "useManagementBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useManagementBarDefaults(props?: ProjectManagementCommandBarProps, colors?: {
-    color?: string;
-    background?: string;
-    border?: string;
-}): ProjectManagementCommandBarProps;
 
 // Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -704,6 +639,11 @@ export function useStripedRowsRenderer(striped: boolean, columnBorders: boolean)
 //
 // @public (undocumented)
 export function useSubsetTable(table: ColumnTable, columns?: IColumn[]): ColumnTable;
+
+// Warning: (ae-missing-release-tag) "useTableDropdownOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useTableDropdownOptions(workflow?: Workflow): IDropdownOption[];
 
 // Warning: (ae-missing-release-tag) "useWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

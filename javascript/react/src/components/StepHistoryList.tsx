@@ -10,7 +10,7 @@ import { memo } from 'react'
 
 import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
 import { StepHeader } from './internal/StepHeader.js'
-import type { StepHeaderStyles } from './StepHeader.types.js'
+import type { StepHeaderStyles } from './internal/StepHeader.types.js'
 import { useDeleteConfirm, useTableHandlers } from './StepHistoryList.hooks.js'
 import {
 	ButtonContainer,
