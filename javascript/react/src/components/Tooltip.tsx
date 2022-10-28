@@ -6,7 +6,7 @@ import { IconButton } from '@fluentui/react'
 import { useBoolean, useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
 
-import { Guidance } from './Guidance.js'
+import { Guidance } from './internal/Guidance.js'
 import { Callout, Container, icons } from './Tooltip.styles.js'
 import type { TooltipProps } from './Tooltip.types.js'
 

@@ -12,7 +12,6 @@ import type { DropzoneOptions } from 'react-dropzone';
 import type { Field } from '@datashaper/schema';
 import { FileCollection } from '@datashaper/utilities';
 import { FileRejection } from 'react-dropzone';
-import type { IButtonStyles } from '@fluentui/react';
 import type { IColumn } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { ICommandBarProps } from '@fluentui/react';
@@ -233,92 +232,10 @@ export interface DropzoneProps {
 
 export { FileRejection }
 
-// Warning: (ae-missing-release-tag) "GroupHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>>;
-
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type GroupHeaderFunction = (meta?: Field, columnName?: string, props?: IDetailsGroupDividerProps | undefined) => any;
-
-// Warning: (ae-missing-release-tag) "GroupHeaderProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface GroupHeaderProps {
-    // (undocumented)
-    columnName?: string;
-    // (undocumented)
-    lazyLoadGroups: boolean;
-    // (undocumented)
-    props: IDetailsGroupDividerProps;
-}
-
-// Warning: (ae-missing-release-tag) "Guidance" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const Guidance: React.FC<GuidanceProps>;
-
-// Warning: (ae-missing-release-tag) "GuidanceProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface GuidanceProps {
-    // (undocumented)
-    index: Record<string, string>;
-    // (undocumented)
-    name: string;
-}
-
-// Warning: (ae-missing-release-tag) "HistoryButton" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const HistoryButton: React.FC<HistoryButtonProps>;
-
-// Warning: (ae-missing-release-tag) "HistoryButtonProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface HistoryButtonProps {
-    // (undocumented)
-    onClick?: () => void;
-    // (undocumented)
-    showText?: boolean;
-    // (undocumented)
-    steps?: number;
-    // (undocumented)
-    styles?: IButtonStyles;
-    // (undocumented)
-    title?: string;
-}
-
-// Warning: (ae-forgotten-export) The symbol "CustomIconProps" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "HistoryIcon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const HistoryIcon: (props: CustomIconProps) => JSX.Element;
-
-// Warning: (ae-missing-release-tag) "HistoryPanel" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const HistoryPanel: React.FC<HistoryPanelProps>;
-
-// Warning: (ae-missing-release-tag) "HistoryPanelProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface HistoryPanelProps {
-    // (undocumented)
-    children?: React.ReactNode;
-    // (undocumented)
-    numSteps?: number;
-    // (undocumented)
-    showStepCount?: boolean;
-    // (undocumented)
-    title?: string;
-    // (undocumented)
-    titleStyle?: React.CSSProperties;
-    // (undocumented)
-    toggleCollapsed: () => void;
-}
 
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -625,6 +542,7 @@ export interface TableTransformProps {
 // @public (undocumented)
 export const Tooltip: React.FC<TooltipProps>;
 
+// Warning: (ae-forgotten-export) The symbol "GuidanceProps" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "TooltipProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

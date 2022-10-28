@@ -63,10 +63,6 @@
 |  [ColumnOptions](./react.columnoptions.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
 |  [DropzoneProps](./react.dropzoneprops.md) |  |
-|  [GroupHeaderProps](./react.groupheaderprops.md) |  |
-|  [GuidanceProps](./react.guidanceprops.md) |  |
-|  [HistoryButtonProps](./react.historybuttonprops.md) |  |
-|  [HistoryPanelProps](./react.historypanelprops.md) |  |
 |  [ProjectManagementCommandBarProps](./react.projectmanagementcommandbarprops.md) |  |
 |  [SortParameters](./react.sortparameters.md) |  |
 |  [StepCardProps](./react.stepcardprops.md) |  |
@@ -87,11 +83,6 @@
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
 |  [Dropzone](./react.dropzone.md) |  |
-|  [GroupHeader](./react.groupheader.md) |  |
-|  [Guidance](./react.guidance.md) |  |
-|  [HistoryButton](./react.historybutton.md) |  |
-|  [HistoryIcon](./react.historyicon.md) |  |
-|  [HistoryPanel](./react.historypanel.md) |  |
 |  [ProjectManagementCommandBar](./react.projectmanagementcommandbar.md) |  |
 |  [StepCard](./react.stepcard.md) |  |
 |  [StepComponent](./react.stepcomponent.md) | Let's us render the Steps in a loop while memoing all the functions |

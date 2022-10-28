@@ -13,20 +13,11 @@ export type {
 export * from './components/ArqueroDetailsList/index.js'
 export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/ArqueroTableHeader.types.js'
 export * from './components/ArqueroTableHeader/index.js'
-export * from './components/CustomIcons.js'
 export { Dropzone } from './components/Dropzone.js'
 export type {
 	DropzoneProps,
 	FileRejection,
 } from './components/Dropzone.types.js'
-export type { GroupHeaderProps } from './components/GroupHeader/GroupHeader.types.js'
-export { GroupHeader } from './components/GroupHeader/index.js'
-export { Guidance } from './components/Guidance.js'
-export type { GuidanceProps } from './components/Guidance.types.js'
-export { HistoryButton } from './components/HistoryButton.js'
-export type { HistoryButtonProps } from './components/HistoryButton.types.js'
-export { HistoryPanel } from './components/HistoryPanel.js'
-export type { HistoryPanelProps } from './components/HistoryPanel.types.js'
 export { ProjectManagementCommandBar } from './components/ProjectManagementCommandBar.js'
 export type { ProjectManagementCommandBarProps } from './components/ProjectManagementCommandBar.types.js'
 export { StepCard } from './components/StepCard.js'

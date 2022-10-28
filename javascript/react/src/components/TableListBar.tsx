@@ -6,7 +6,7 @@ import { ColumnarMenu } from '@essex/components'
 import { DefaultButton, Spinner, SpinnerSize } from '@fluentui/react'
 import { memo } from 'react'
 
-import { DetailText } from './DetailText.js'
+import { DetailText } from './internal/DetailText.js'
 import { useOutputPreview, useTableSelection } from './TableListBar.hooks.js'
 import {
 	icons,

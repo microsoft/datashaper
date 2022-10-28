@@ -9,5 +9,3 @@
 ```typescript
 export declare type TooltipProps = GuidanceProps;
 ```
-<b>References:</b> [GuidanceProps](./react.guidanceprops.md)
-

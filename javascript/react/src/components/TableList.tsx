@@ -4,7 +4,7 @@
  */
 import { memo } from 'react'
 
-import { DetailText } from './DetailText.js'
+import { DetailText } from './internal/DetailText.js'
 import { TableCard } from './TableCard.js'
 import { useIsTableSelected } from './TableList.hooks.js'
 import type { TableListProps } from './TableList.types.js'

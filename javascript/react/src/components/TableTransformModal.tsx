@@ -9,7 +9,7 @@ import { Callout, DirectionalHint, IconButton, useTheme } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useState } from 'react'
 
-import { Guidance } from './Guidance.js'
+import { Guidance } from './internal/Guidance.js'
 import { TableTransform } from './TableTransform.js'
 import {
 	ContainerBody,
