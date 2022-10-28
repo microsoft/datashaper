@@ -5,8 +5,8 @@
 import type {
 	CodebookSchema,
 	Field,
-	FieldError,
 	ValidationResult,
+	ValidationTestResult,
 } from '@datashaper/schema'
 import { DataType, ErrorCode } from '@datashaper/schema'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -27,43 +27,35 @@ export function validateTable(
 
 			//required constraint
 			if (constraints.required) {
-				const requiredResult = checkRequiredConstraint(
+				const requiredResult: ValidationTestResult = validateRequiredConstraint(
 					columnValues as string[],
 					includeInstances,
 				)
-				const [isRequired, instances] = requiredResult
 
-				if (!isRequired) {
+				if (requiredResult.fail) {
 					if (validationResult.errors != null)
-						validationResult.errors.push(
-							createFieldErrorObject(
-								field.name,
-								ErrorCode.Required,
-								includeInstances,
-								instances,
-							),
-						)
+						validationResult.errors.push({
+							name: field.name,
+							rule: ErrorCode.Required,
+							indexes: requiredResult.indexes,
+						})
 				}
 			}
 
 			//unique constraint
 			if (constraints.unique) {
-				const uniqueResult = checkUniqueConstraint(
+				const uniqueResult: ValidationTestResult = validateUniqueConstraint(
 					columnValues as string[],
 					includeInstances,
 				)
-				const [isUnique, instances] = uniqueResult
 
-				if (!isUnique) {
+				if (uniqueResult.fail) {
 					if (validationResult.errors != null)
-						validationResult.errors.push(
-							createFieldErrorObject(
-								field.name,
-								ErrorCode.Unique,
-								includeInstances,
-								instances,
-							),
-						)
+						validationResult.errors.push({
+							name: field.name,
+							rule: ErrorCode.Unique,
+							indexes: uniqueResult.indexes,
+						})
 				}
 			}
 
@@ -72,27 +64,23 @@ export function validateTable(
 				constraints.minLength &&
 				(field.type === DataType.Array || field.type === DataType.String)
 			) {
-				const minLengthResult = checkMinLengthConstraint(
-					constraints.minLength,
-					field.type === DataType.Array
-						? (columnValues as Array<any>[])
-						: field.type === DataType.String
-						? (columnValues as string[])
-						: [],
-					includeInstances,
-				)
-				const [isMinLength, instances] = minLengthResult
+				const minLengthResult: ValidationTestResult =
+					validateMinLengthConstraint(constraints.minLength)(
+						field.type === DataType.Array
+							? (columnValues as Array<any>[])
+							: field.type === DataType.String
+							? (columnValues as string[])
+							: [],
+						includeInstances,
+					)
 
-				if (!isMinLength) {
+				if (minLengthResult.fail) {
 					if (validationResult.errors != null)
-						validationResult.errors.push(
-							createFieldErrorObject(
-								field.name,
-								ErrorCode.MinLength,
-								includeInstances,
-								instances,
-							),
-						)
+						validationResult.errors.push({
+							name: field.name,
+							rule: ErrorCode.MinLength,
+							indexes: minLengthResult.indexes,
+						})
 				}
 			}
 
@@ -101,24 +89,22 @@ export function validateTable(
 				constraints.maxLength &&
 				(field.type === DataType.Array || field.type === DataType.String)
 			) {
-				const maxLengthResult = checkMaxLengthConstraint(
-					constraints.maxLength,
-					field.type === DataType.Array
-						? (columnValues as Array<any>[])
-						: field.type === DataType.String
-						? (columnValues as string[])
-						: [],
-				)
-				if (!maxLengthResult) {
+				const maxLengthResult: ValidationTestResult =
+					validateMaxLengthConstraint(constraints.maxLength)(
+						field.type === DataType.Array
+							? (columnValues as Array<any>[])
+							: field.type === DataType.String
+							? (columnValues as string[])
+							: [],
+						includeInstances,
+					)
+				if (maxLengthResult.fail) {
 					if (validationResult.errors != null)
-						validationResult.errors.push(
-							createFieldErrorObject(
-								field.name,
-								ErrorCode.MaxLength,
-								false,
-								[],
-							),
-						)
+						validationResult.errors.push({
+							name: field.name,
+							rule: ErrorCode.MaxLength,
+							indexes: maxLengthResult.indexes,
+						})
 				}
 			}
 
@@ -127,20 +113,24 @@ export function validateTable(
 				constraints.minimum &&
 				(field.type === DataType.Number || field.type === DataType.Date)
 			) {
-				const minimumResult = checkMinimumConstraint(
+				const minimumResult: ValidationTestResult = validateMinimumConstraint(
 					constraints.minimum,
+					field.type,
+				)(
 					field.type === DataType.Number
 						? (columnValues as number[])
 						: field.type === DataType.Date
 						? (columnValues as Date[])
 						: [],
-					field.type,
+					includeInstances,
 				)
-				if (!minimumResult) {
+				if (minimumResult.fail) {
 					if (validationResult.errors != null)
-						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Minimum, false, []),
-						)
+						validationResult.errors.push({
+							name: field.name,
+							rule: ErrorCode.Minimum,
+							indexes: minimumResult.indexes,
+						})
 				}
 			}
 
@@ -149,48 +139,54 @@ export function validateTable(
 				constraints.maximum &&
 				(field.type === DataType.Number || field.type === DataType.Date)
 			) {
-				const maximumResult = checkMaximumConstraint(
+				const maximumResult: ValidationTestResult = validateMaximumConstraint(
 					constraints.maximum,
+					field.type,
+				)(
 					field.type === DataType.Number
 						? (columnValues as number[])
 						: field.type === DataType.Date
 						? (columnValues as Date[])
 						: [],
-					field.type,
+					includeInstances,
 				)
-				if (!maximumResult) {
+				if (maximumResult.fail) {
 					if (validationResult.errors != null)
-						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Maximum, false, []),
-						)
+						validationResult.errors.push({
+							name: field.name,
+							rule: ErrorCode.Maximum,
+							indexes: maximumResult.indexes,
+						})
 				}
 			}
 
 			//pattern constraint - for strings only
 			if (constraints.pattern && field.type === DataType.String) {
-				const patternResult = checkPatternConstraint(
+				const patternResult: ValidationTestResult = validatePatternConstraint(
 					constraints.pattern,
-					columnValues as string[],
-				)
-				if (!patternResult) {
+				)(columnValues as string[], includeInstances)
+				if (patternResult.fail) {
 					if (validationResult.errors != null)
-						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Pattern, false, []),
-						)
+						validationResult.errors.push({
+							name: field.name,
+							rule: ErrorCode.Pattern,
+							indexes: patternResult.indexes,
+						})
 				}
 			}
 
 			//enum constraint - for strings only
 			if (constraints.enum && field.type === DataType.String) {
-				const enumResult = checkEnumConstraint(
+				const enumResult: ValidationTestResult = validateEnumConstraint(
 					constraints.enum,
-					columnValues as string[],
-				)
-				if (!enumResult) {
+				)(columnValues as string[], includeInstances)
+				if (enumResult.fail) {
 					if (validationResult.errors != null)
-						validationResult.errors.push(
-							createFieldErrorObject(field.name, ErrorCode.Enum, false, []),
-						)
+						validationResult.errors.push({
+							name: field.name,
+							rule: ErrorCode.Enum,
+							indexes: enumResult.indexes,
+						})
 				}
 			}
 		}
@@ -199,140 +195,271 @@ export function validateTable(
 	return validationResult
 }
 
-function createFieldErrorObject(
-	name: string,
-	message: ErrorCode,
-	includeInstances: boolean,
-	instances: number[],
-): FieldError {
-	const fieldError: FieldError = {
-		name: name,
-		rule: message,
-	}
-
-	if (includeInstances) {
-		fieldError.indexes = instances
-	}
-
-	return fieldError
-}
-
-function checkRequiredConstraint(
+function validateRequiredConstraint(
 	values: string[],
 	includeInstances: boolean,
-): [boolean, number[]] {
-	if (!includeInstances) return [values.every(requiredRule), []]
+): ValidationTestResult {
+	if (!includeInstances) {
+		return {
+			fail: !values.every(validateRequired),
+			indexes: [],
+		}
+	} else {
+		const resultIndexes: number[] = []
 
-	const resultIndexes: number[] = []
+		values.map((value: string, index: number) => {
+			if (!validateRequired(value)) resultIndexes.push(index)
+		})
 
-	values.map((value: string, index: number) => {
-		if (!requiredRule(value)) resultIndexes.push(index)
-	})
-
-	return resultIndexes.length != 0 ? [false, resultIndexes] : [true, []]
+		return {
+			pass: resultIndexes.length != 0,
+			indexes: resultIndexes,
+		}
+	}
 }
 
-function requiredRule(element: string): boolean {
+function validateRequired(element: string): boolean {
 	if (element == null || element == undefined || element.length == 0)
 		return false
 
 	return true
 }
 
-function checkUniqueConstraint(
+function validateUniqueConstraint(
 	values: string[],
 	includeInstances: boolean,
-): [boolean, number[]] {
+): ValidationTestResult {
 	const uniqueValues = new Set<string>()
 	const resultIndexes: number[] = []
 
 	values.map((value: string, index: number) => {
 		if (uniqueValues.has(value)) {
 			if (includeInstances) resultIndexes.push(index)
-		} else uniqueValues.add(value)
+		} else {
+			uniqueValues.add(value)
+		}
 	})
 
-	return [values.length === uniqueValues.size, resultIndexes]
+	return { fail: values.length !== uniqueValues.size, indexes: resultIndexes }
 }
 
-function checkMinLengthConstraint(
+function validateMinLengthConstraint(
 	minLength: number,
+): (
 	values: string[] | Array<any>[],
 	includeInstances: boolean,
-): [boolean, number[]] {
-	const resultIndexes: number[] = []
-
-	for (let i = 0; i < values.length; i++) {
-		if (values[i] != null && values[i]!.length < minLength) {
-			if (!includeInstances) return [false, []]
-
-			resultIndexes.push(i)
+) => ValidationTestResult {
+	const validate = validateMinLength(minLength)
+	return function validateMinLengthConstraint(
+		values: string[] | Array<any>[],
+		includeInstances: boolean,
+	): ValidationTestResult {
+		const resultIndexes: number[] = []
+		if (includeInstances) {
+			values.forEach((value: string | Array<any>, index: number) => {
+				if (!validate(value)) resultIndexes.push(index)
+			})
+			return {
+				fail: resultIndexes.length !== 0,
+				indexes: resultIndexes,
+			}
+		} else {
+			return {
+				fail: values.every(validate),
+				indexes: resultIndexes,
+			}
 		}
 	}
-
-	return resultIndexes.length != 0 ? [false, resultIndexes] : [true, []]
 }
 
-function checkMaxLengthConstraint(
+function validateMinLength(
+	minLength: number,
+): (value: Array<any> | string) => boolean {
+	return function validateMinLength(value: Array<any> | string) {
+		return value.length >= minLength
+	}
+}
+
+function validateMaxLengthConstraint(
 	maxLength: number,
+): (
 	values: string[] | Array<any>[],
-): boolean {
-	for (let i = 0; i < values.length; i++) {
-		if (values[i] != null && values[i]!.length > maxLength) return false
+	includeInstances: boolean,
+) => ValidationTestResult {
+	const validate = validateMaxLength(maxLength)
+	return function validateMaxLengthConstraint(
+		values: string[] | Array<any>[],
+		includeInstances: boolean,
+	): ValidationTestResult {
+		const resultIndexes: number[] = []
+		if (includeInstances) {
+			values.forEach((value: string | Array<any>, index: number) => {
+				if (!validate(value)) resultIndexes.push(index)
+			})
+			return {
+				fail: resultIndexes.length !== 0,
+				indexes: resultIndexes,
+			}
+		} else {
+			return {
+				fail: values.every(validate),
+				indexes: resultIndexes,
+			}
+		}
 	}
-
-	return true
 }
 
-function checkMinimumConstraint(
+function validateMaxLength(
+	maxLength: number,
+): (value: Array<any> | string) => boolean {
+	return function validateMaxLength(value: Array<any> | string) {
+		return value.length <= maxLength
+	}
+}
+
+function validateMinimumConstraint(
 	minimum: number,
-	values: number[] | Date[],
 	dataType: DataType,
-): boolean {
-	for (let i = 0; i < values.length; i++) {
-		if (
-			values[i] != null && dataType == DataType.Date
-				? values[i]!.valueOf()
-				: values[i]! < minimum
-		)
-			return false
+): (
+	values: number[] | Date[],
+	includeInstances: boolean,
+) => ValidationTestResult {
+	const validate = validateMinimum(minimum, dataType)
+	return function validateMinimumConstraint(
+		values: number[] | Date[],
+		includeInstances: boolean,
+	): ValidationTestResult {
+		const resultIndexes: number[] = []
+		if (includeInstances) {
+			values.forEach((value: number | Date, index: number) => {
+				if (!validate(value)) resultIndexes.push(index)
+			})
+			return {
+				fail: resultIndexes.length !== 0,
+				indexes: resultIndexes,
+			}
+		} else {
+			return {
+				fail: values.every(validate),
+				indexes: resultIndexes,
+			}
+		}
 	}
-
-	return true
 }
 
-function checkMaximumConstraint(
+function validateMinimum(
+	minimum: number,
+	dataType: DataType,
+): (value: Date | number) => boolean {
+	return function validateMinimum(value: Date | number) {
+		return dataType == DataType.Date
+			? value.valueOf() >= minimum
+			: value >= minimum
+	}
+}
+
+function validateMaximumConstraint(
 	maximum: number,
-	values: number[] | Date[],
 	dataType: DataType,
-): boolean {
-	for (let i = 0; i < values.length; i++) {
-		if (
-			values[i] != null && dataType == DataType.Date
-				? values[i]!.valueOf()
-				: values[i]! > maximum
-		)
-			return false
+): (
+	values: number[] | Date[],
+	includeInstances: boolean,
+) => ValidationTestResult {
+	const validate = validateMaximum(maximum, dataType)
+	return function validateMaximumConstraint(
+		values: number[] | Date[],
+		includeInstances: boolean,
+	): ValidationTestResult {
+		const resultIndexes: number[] = []
+		if (includeInstances) {
+			values.forEach((value: number | Date, index: number) => {
+				if (!validate(value)) resultIndexes.push(index)
+			})
+			return {
+				fail: resultIndexes.length !== 0,
+				indexes: resultIndexes,
+			}
+		} else {
+			return {
+				fail: values.every(validate),
+				indexes: resultIndexes,
+			}
+		}
 	}
-
-	return true
 }
 
-function checkPatternConstraint(pattern: string, values: string[]): boolean {
-	const re = new RegExp(pattern)
-
-	for (let i = 0; i < values.length; i++) {
-		if (values[i] != null && !re.test(values[i] as string)) return false
+function validateMaximum(
+	maximum: number,
+	dataType: DataType,
+): (value: Date | number) => boolean {
+	return function validateMaximum(value: Date | number) {
+		return dataType == DataType.Date
+			? value.valueOf() <= maximum
+			: value <= maximum
 	}
-
-	return true
 }
 
-function checkEnumConstraint(enumList: string[], values: string[]): boolean {
-	for (let i = 0; i < values.length; i++) {
-		if (values[i] != null && !enumList.includes(values[i] as string))
-			return false
+function validatePatternConstraint(
+	pattern: string,
+): (values: string[], includeInstances: boolean) => ValidationTestResult {
+	const validate = validatePattern(pattern)
+	return function validatePatternConstraint(
+		values: string[],
+		includeInstances: boolean,
+	): ValidationTestResult {
+		const resultIndexes: number[] = []
+		if (includeInstances) {
+			values.forEach((value: string, index: number) => {
+				if (!validate(value)) resultIndexes.push(index)
+			})
+			return {
+				fail: resultIndexes.length !== 0,
+				indexes: resultIndexes,
+			}
+		} else {
+			return {
+				fail: values.every(validate),
+				indexes: resultIndexes,
+			}
+		}
 	}
+}
 
-	return true
+function validatePattern(pattern: string): (value: string) => boolean {
+	return function validatePattern(value: string) {
+		const re = new RegExp(pattern)
+		return re.test(value)
+	}
+}
+
+function validateEnumConstraint(
+	enumList: string[],
+): (values: string[], includeInstances: boolean) => ValidationTestResult {
+	const validate = validateEnum(enumList)
+	return function validateEnumConstraint(
+		values: string[],
+		includeInstances: boolean,
+	): ValidationTestResult {
+		const resultIndexes: number[] = []
+		if (includeInstances) {
+			values.forEach((value: string, index: number) => {
+				if (!validate(value)) resultIndexes.push(index)
+			})
+			return {
+				fail: resultIndexes.length !== 0,
+				indexes: resultIndexes,
+			}
+		} else {
+			return {
+				fail: values.every(validate),
+				indexes: resultIndexes,
+			}
+		}
+	}
+}
+
+function validateEnum(enumList: string[]): (value: string) => boolean {
+	return function validateEnum(value: string) {
+		return enumList.includes(value)
+	}
 }
