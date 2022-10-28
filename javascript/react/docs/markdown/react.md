@@ -88,7 +88,6 @@
 |  [StepSelector](./react.stepselector.md) | Creates a custom step selection dropdown. If "showButton" is true, a + icon will appear next to the dropdown, and onChange will only fire when it is clicked. |
 |  [TableCommands](./react.tablecommands.md) |  |
 |  [TableList](./react.tablelist.md) |  |
-|  [Tooltip](./react.tooltip.md) |  |
 
 ## Type Aliases
 
@@ -100,5 +99,4 @@
 |  [GroupHeaderFunction](./react.groupheaderfunction.md) |  |
 |  [MetadataClickFunction](./react.metadataclickfunction.md) |  |
 |  [SaveMetadataFunction](./react.savemetadatafunction.md) |  |
-|  [TooltipProps](./react.tooltipprops.md) |  |
 

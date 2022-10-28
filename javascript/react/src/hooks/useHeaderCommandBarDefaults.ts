@@ -13,8 +13,8 @@ import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
 import { DEFAULT_HEIGHT } from '../components/ArqueroTableHeader/ArqueroTableHeader.constants.js'
-import { useColorDefaults } from '../components/ArqueroTableHeader/hooks/useColorDefaults.js'
 import type { CommandBarColors } from '../types.js'
+import { useCommandBarColorDefaults } from './useCommandBarColorDefaults.js'
 
 /**
  * Helper to create the props necessary for the default inverted management bar.
@@ -44,7 +44,7 @@ function useBaseProps(
 	colors?: Partial<CommandBarColors>,
 	styles?: IStyleFunctionOrObject<ICommandBarStyleProps, ICommandBarStyles>,
 ): Partial<ICommandBarProps> {
-	const { color, background } = useColorDefaults(colors)
+	const { color, background } = useCommandBarColorDefaults(colors)
 	const buttonStyles = useDefaultButtonStyles(colors)
 	return useMemo(
 		() => ({
@@ -82,7 +82,7 @@ function useItems(
 }
 
 function useDefaultButtonStyles(colors?: Partial<CommandBarColors>) {
-	const defaults = useColorDefaults(colors)
+	const defaults = useCommandBarColorDefaults(colors)
 	const { color, background, disabled, hovered, checked } = defaults
 	return useMemo(
 		() => ({

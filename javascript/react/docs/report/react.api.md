@@ -493,16 +493,6 @@ export interface TableTransformProps {
     workflow: Workflow;
 }
 
-// Warning: (ae-missing-release-tag) "Tooltip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const Tooltip: React.FC<TooltipProps>;
-
-// Warning: (ae-missing-release-tag) "TooltipProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type TooltipProps = GuidanceProps;
-
 // Warning: (ae-forgotten-export) The symbol "Dimensions" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useCellDimensions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
