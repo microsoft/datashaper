@@ -34,9 +34,9 @@ export interface TypeHints {
 	decimal?: string
 	/**
 	 * Strings to parse as negative and positive infinity.
-	 * Default: case insensitive "-inf" and "inf".
+	 * Default: case insensitive ["-inf", "inf"].
 	 */
-	infinity?: string[]
+	infinity?: [string, string]
 	/**
 	 * Default date format to use when parsing dates. The Codebook can override this at the column level.
 	 * Default: yyyy-MM-dd

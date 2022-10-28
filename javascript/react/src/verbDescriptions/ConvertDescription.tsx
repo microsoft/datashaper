@@ -18,7 +18,7 @@ export const ConvertDescription: React.FC<StepDescriptionProps<ConvertArgs>> =
 			return [
 				{
 					before: `convert column`,
-					value: args.column !== undefined ? args.column : undefined,
+					value: args.column,
 				},
 				{
 					before: 'to type',

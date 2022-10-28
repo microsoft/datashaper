@@ -122,4 +122,6 @@ export interface CommandBarColors {
 	border: string
 	disabled: string
 	checked: string
+	hovered: string
+	pressed: string
 }

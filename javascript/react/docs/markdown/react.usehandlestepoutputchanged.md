@@ -9,7 +9,7 @@ This hooks handles managing a step's output within the workflow. This hook assum
 <b>Signature:</b>
 
 ```typescript
-export declare function useHandleStepOutputChanged(workflow: Workflow): (step: Step, output: string | undefined) => void;
+export declare function useHandleStepOutputChanged(workflow: Workflow): (step: Step) => void;
 ```
 
 ## Parameters
@@ -20,7 +20,7 @@ export declare function useHandleStepOutputChanged(workflow: Workflow): (step: S
 
 <b>Returns:</b>
 
-(step: Step, output: string \| undefined) =&gt; void
+(step: Step) =&gt; void
 
 A callback to use when the step output changes
 

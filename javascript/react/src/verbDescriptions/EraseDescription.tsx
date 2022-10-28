@@ -17,7 +17,7 @@ export const EraseDescription: React.FC<StepDescriptionProps<EraseArgs>> = memo(
 			return [
 				{
 					before: `erase column`,
-					value: args.column !== undefined ? args.column : undefined,
+					value: args.column,
 				},
 				{
 					before: 'with value',

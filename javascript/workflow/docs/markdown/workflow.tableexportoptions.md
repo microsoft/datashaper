@@ -4,6 +4,8 @@
 
 ## TableExportOptions interface
 
+Options for exporting data-tables within Workflow instances.w
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,7 +16,7 @@ export interface TableExportOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [includeDefaultInput?](./workflow.tableexportoptions.includedefaultinput.md) |  | boolean | <i>(Optional)</i> |
-|  [includeDefaultOutput?](./workflow.tableexportoptions.includedefaultoutput.md) |  | boolean | <i>(Optional)</i> |
-|  [includeInputs?](./workflow.tableexportoptions.includeinputs.md) |  | boolean | <i>(Optional)</i> |
+|  [includeDefaultInput?](./workflow.tableexportoptions.includedefaultinput.md) |  | boolean | <i>(Optional)</i> Whether to include the default input table in the result. |
+|  [includeDefaultOutput?](./workflow.tableexportoptions.includedefaultoutput.md) |  | boolean | <i>(Optional)</i> Whether to include the default output table in the result. |
+|  [includeInputs?](./workflow.tableexportoptions.includeinputs.md) |  | boolean | <i>(Optional)</i> Whether to include input tables in the result. |
 

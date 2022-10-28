@@ -31,11 +31,11 @@ export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>> = memo(
 				},
 				{
 					before: 'into key column',
-					value: args.to !== undefined ? args.to[0] : '',
+					value: args.to != null ? args.to[0] : '',
 				},
 				{
 					before: 'into value column',
-					value: args.to !== undefined ? args.to[1] : '',
+					value: args.to != null ? args.to[1] : '',
 				},
 			]
 		}, [props])

@@ -35,7 +35,6 @@ import type { LookupArgs } from '@datashaper/schema';
 import type { Maybe as Maybe_2 } from '@datashaper/workflow';
 import type { MergeArgs } from '@datashaper/schema';
 import type { Named as Named_2 } from '@datashaper/schema';
-import type { NamedOutputPortBinding } from '@datashaper/schema';
 import type { NamedPortBinding } from '@datashaper/schema';
 import type { Observable } from 'rxjs';
 import type { OnehotArgs } from '@datashaper/schema';
@@ -493,11 +492,6 @@ export interface NodeBinding<T> {
     node: Node_2<T>;
 }
 
-// Warning: (ae-missing-release-tag) "NodeFactory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type NodeFactory = (id: string) => Node_2<TableContainer>;
-
 // Warning: (ae-missing-release-tag) "NodeId" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -676,7 +670,7 @@ export const spread: (id: string) => StepNode<TableContainer<unknown>, SpreadArg
 
 // Warning: (ae-missing-release-tag) "Step" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface Step<T extends object | void | unknown = unknown> {
     args: T;
     // (undocumented)
@@ -695,7 +689,7 @@ export type StepFunction<T, Args> = (source: T, args: Args) => T;
 
 // Warning: (ae-missing-release-tag) "StepInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface StepInput<T extends object | void | unknown = unknown> {
     args?: T;
     // (undocumented)
@@ -723,13 +717,10 @@ export function stepNodeFactory<T, Args>(stepFunction: StepFunction<T, Args>): (
 
 // Warning: (ae-missing-release-tag) "TableExportOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public (undocumented)
+// @public
 export interface TableExportOptions {
-    // (undocumented)
     includeDefaultInput?: boolean;
-    // (undocumented)
     includeDefaultOutput?: boolean;
-    // (undocumented)
     includeInputs?: boolean;
 }
 
@@ -803,8 +794,10 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     addInputTable(table: TableContainer, id: string): void;
     // (undocumented)
     addInputTables(inputs: TableContainer[]): void;
-    addOutput(output: NamedOutputPortBinding): void;
+    addOutput(name: string): void;
     addStep(stepInput: StepInput): Step;
+    get allTableNames$(): Observable<string[]>;
+    get allTableNames(): string[];
     // (undocumented)
     set defaultInput(source: TableObservable);
     // (undocumented)
@@ -824,15 +817,9 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     // (undocumented)
     loadSchema(schema: Maybe<WorkflowSchema>, quiet?: boolean): void;
     // (undocumented)
-    nodeOutput(nodeId: string): Maybe<Observable<Maybe<TableContainer>>>;
-    // (undocumented)
-    outputNameForNode(nodeId: string): string | undefined;
     get outputNames$(): Observable<string[]>;
+    // (undocumented)
     get outputNames(): string[];
-    // (undocumented)
-    get outputPorts$(): Observable<NamedOutputPortBinding[]>;
-    // (undocumented)
-    get outputPorts(): NamedOutputPortBinding[];
     read$(name?: string): Observable<Maybe<TableContainer>>;
     read(name?: string): Maybe<TableContainer>;
     // (undocumented)

@@ -123,7 +123,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 		const spinButtonOnChange = useCallback(
 			(_event: React.SyntheticEvent<HTMLElement>, newValue?: string) => {
-				if (newValue !== undefined) {
+				if (newValue != null) {
 					const update = {
 						...criterion,
 						type: FilterCompareType.Value,

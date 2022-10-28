@@ -664,13 +664,6 @@ export interface Named {
     title?: string;
 }
 
-// Warning: (ae-missing-release-tag) "NamedOutputPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export interface NamedOutputPortBinding extends NamedPortBinding {
-    name: string;
-}
-
 // Warning: (ae-missing-release-tag) "NamedPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -732,11 +725,6 @@ export interface OrderbyInstruction {
 export interface OutputColumnArgs {
     to: string;
 }
-
-// Warning: (ae-missing-release-tag) "OutputPortBinding" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type OutputPortBinding = string | NamedOutputPortBinding;
 
 // Warning: (ae-missing-release-tag) "ParserOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1012,7 +1000,7 @@ export interface TypeHints {
     dateFormat?: string;
     decimal?: string;
     falseValues?: string[];
-    infinity?: string[];
+    infinity?: [string, string];
     naValues?: string[];
     thousands?: string;
     trueValues?: string[];
@@ -1201,7 +1189,7 @@ export enum WindowFunction {
 // @public
 export interface WorkflowSchema extends ResourceSchema {
     input?: string[];
-    output: Array<OutputPortBinding>;
+    output: string[];
     steps?: Step[];
 }
 

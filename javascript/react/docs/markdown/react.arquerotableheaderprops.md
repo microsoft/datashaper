@@ -22,6 +22,7 @@ export interface ArqueroTableHeaderProps
 |  [onRenameTable?](./react.arquerotableheaderprops.onrenametable.md) |  | (name: string) =&gt; void | <i>(Optional)</i> |
 |  [showColumnCount?](./react.arquerotableheaderprops.showcolumncount.md) |  | boolean | <i>(Optional)</i> |
 |  [showRowCount?](./react.arquerotableheaderprops.showrowcount.md) |  | boolean | <i>(Optional)</i> |
+|  [styles?](./react.arquerotableheaderprops.styles.md) |  | [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) | <i>(Optional)</i> |
 |  [table](./react.arquerotableheaderprops.table.md) |  | ColumnTable |  |
 |  [visibleColumns?](./react.arquerotableheaderprops.visiblecolumns.md) |  | string\[\] | <i>(Optional)</i> |
 

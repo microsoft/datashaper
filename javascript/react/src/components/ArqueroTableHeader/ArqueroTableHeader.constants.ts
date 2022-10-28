@@ -3,4 +3,4 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-export const HEIGHT = 36
+export const DEFAULT_HEIGHT = 36

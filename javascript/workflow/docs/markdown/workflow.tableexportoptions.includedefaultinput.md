@@ -4,6 +4,8 @@
 
 ## TableExportOptions.includeDefaultInput property
 
+Whether to include the default input table in the result.
+
 <b>Signature:</b>
 
 ```typescript

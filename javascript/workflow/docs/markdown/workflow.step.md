@@ -4,6 +4,8 @@
 
 ## Step interface
 
+Resolved step data, used in living workflows
+
 <b>Signature:</b>
 
 ```typescript
@@ -18,5 +20,5 @@ export interface Step<T extends object | void | unknown = unknown>
 |  [description?](./workflow.step.description.md) |  | string | <i>(Optional)</i> |
 |  [id](./workflow.step.id.md) |  | string | A unique identifier for this step |
 |  [input](./workflow.step.input.md) |  | { others?: NamedPortBinding\[\]; } &amp; Record&lt;string, NamedPortBinding&gt; | The bound inputs Key = Input Socket Name Value = Socket Binding to other node |
-|  [verb](./workflow.step.verb.md) |  | Verb | The verb being executed |
+|  [verb](./workflow.step.verb.md) |  | Verb | The verb being execute |
 

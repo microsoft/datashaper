@@ -91,7 +91,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 						const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
 						return (
 							<CollapsiblePanel
-								key={stepIndex}
+								key={step.id}
 								styles={collapsiblePanelStyles}
 								onHeaderClick={() => onSelect?.(step.id)}
 								onRenderHeader={() =>
@@ -101,13 +101,12 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 								<TableTransform
 									hideInput
 									hideOutput
-									key={stepIndex}
 									step={step}
 									index={stepIndex}
 									workflow={workflow}
 									style={tableTransformStyle}
 									onDelete={onDeleteClicked}
-									onTransformRequested={(s, o) => onSave?.(s, o, stepIndex)}
+									onTransformRequested={s => onSave?.(s, stepIndex)}
 									hideStepSelector
 								/>
 							</CollapsiblePanel>

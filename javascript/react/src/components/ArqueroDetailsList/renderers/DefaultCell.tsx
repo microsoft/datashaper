@@ -4,7 +4,7 @@
  */
 import { DataType } from '@datashaper/schema'
 import { determineType } from '@datashaper/tables'
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { Case, Default, Switch } from 'react-if'
 
 import { getValue, isBlank, isEmpty } from '../ArqueroDetailsList.utils.js'
@@ -32,15 +32,6 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	const value = getValue(item, column)
 	const type = field?.type || determineType(value)
 
-	const handleColumnClick = useCallback(
-		(ev: React.MouseEvent<HTMLElement>) => {
-			column &&
-				onColumnClick &&
-				onColumnClick(ev, column?.data?.selected ? undefined : column)
-		},
-		[column, onColumnClick],
-	)
-
 	const cellStyle = useMemo(() => {
 		const style: React.CSSProperties = {
 			width: '100%',
@@ -55,7 +46,7 @@ export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	}, [onColumnClick, column])
 
 	return (
-		<div onClick={handleColumnClick} style={cellStyle}>
+		<div style={cellStyle}>
 			<Switch>
 				<Case condition={isBlank(value)}>
 					<BlankCell />

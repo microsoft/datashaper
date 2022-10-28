@@ -118,7 +118,7 @@ function next(step: Step<RecodeArgs>, values: Value[]): Value | undefined {
 		if (!step.args.mapping) {
 			return true
 		}
-		return step.args.mapping[value] === undefined
+		return step.args.mapping[value] == null
 	})
 }
 
@@ -130,7 +130,7 @@ export function useHandleAddButtonClick(
 	return useCallback(() => {
 		const nextValue = next(step, values)
 
-		if (nextValue !== undefined) {
+		if (nextValue != null) {
 			// could be a 0 or false...
 			onChange?.({
 				...step,

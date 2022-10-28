@@ -17,10 +17,8 @@ export const CellContainer: React.FC<
 	React.PropsWithChildren<CellContainerProps>
 > = memo(function CellContainer({ onClick, column, children }) {
 	const handleColumnClick = useCallback(
-		(ev: React.MouseEvent<HTMLElement, MouseEvent>) => {
-			column &&
-				onClick &&
-				onClick(ev, column?.data?.selected ? undefined : column)
+		(ev: React.MouseEvent<HTMLElement>) => {
+			column && onClick && onClick(ev, column)
 		},
 		[column, onClick],
 	)

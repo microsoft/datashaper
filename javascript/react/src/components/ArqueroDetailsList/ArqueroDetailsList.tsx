@@ -60,19 +60,18 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		isHeaderFixed = false,
 		compact = false,
 		resizable = true,
+		style,
 		// passthrough the remainder as props
 		...props
 	}) {
 		const ref = useRef(null)
 
 		const [version, setVersion] = useState(0)
-		const { sortColumn, sortDirection, handleColumnHeaderClick } =
-			useSortHandling(
-				sortable,
-				onColumnHeaderClick,
-				defaultSortColumn,
-				defaultSortDirection,
-			)
+		const { sortColumn, sortDirection, onSort } = useSortHandling(
+			sortable,
+			defaultSortColumn,
+			defaultSortDirection,
+		)
 
 		// first subset the table using the visible columns
 		// this will prevent any further operations on columns we aren't going to show
@@ -122,7 +121,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			table,
 			metadata,
 			columns,
-			handleColumnHeaderClick,
+			onColumnHeaderClick,
+			onSort,
 			{
 				features,
 				sortColumn,
@@ -132,6 +132,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				onCellDropdownSelect,
 				isDefaultHeaderClickable,
 				isClickable: clickableColumns,
+				isSortable: sortable,
 				showColumnBorders,
 				compact,
 				resizable,
@@ -190,6 +191,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				ref={ref}
 				data-is-scrollable="true"
 				showColumnBorders={showColumnBorders}
+				style={style}
 			>
 				<DetailsList
 					items={[...items]}
@@ -221,12 +223,9 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
 	height: inherit;
-
 	max-height: inherit;
 	overflow-y: auto;
 	overflow-x: auto;
-	border: ${({ theme, showColumnBorders }) =>
-		showColumnBorders ? `1px solid ${theme.palette.neutralLighter}` : 'none'};
 	span.ms-DetailsHeader-cellTitle {
 		background-color: ${({ theme }) => theme.palette.white};
 	}

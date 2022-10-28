@@ -38,7 +38,7 @@ export interface ParserOptions {
 	 */
 	escapeChar?: string
 	/**
-	 * Character that begins a comment. All content after this character will be considered a comment and not imported.
+	 * Character that denotes a comment. Lines that begin with this character are ignored.
 	 * Default: none.
 	 */
 	comment?: string

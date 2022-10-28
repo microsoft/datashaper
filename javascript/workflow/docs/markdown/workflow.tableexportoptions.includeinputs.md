@@ -4,6 +4,8 @@
 
 ## TableExportOptions.includeInputs property
 
+Whether to include input tables in the result.
+
 <b>Signature:</b>
 
 ```typescript

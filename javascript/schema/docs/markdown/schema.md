@@ -81,7 +81,6 @@
 |  [LookupArgs](./schema.lookupargs.md) |  |
 |  [MergeArgs](./schema.mergeargs.md) |  |
 |  [Named](./schema.named.md) | Base interface for sharing properties of named resources/objects. |
-|  [NamedOutputPortBinding](./schema.namedoutputportbinding.md) | An explicit workflow output |
 |  [NamedPortBinding](./schema.namedportbinding.md) | An explicit step input binding |
 |  [OnehotArgs](./schema.onehotargs.md) |  |
 |  [OrderbyArgs](./schema.orderbyargs.md) |  |
@@ -119,7 +118,6 @@
 |  [DedupeArgs](./schema.dedupeargs.md) |  |
 |  [FactoryInput](./schema.factoryinput.md) |  |
 |  [GroupbyArgs](./schema.groupbyargs.md) |  |
-|  [OutputPortBinding](./schema.outputportbinding.md) |  |
 |  [PortBinding](./schema.portbinding.md) |  |
 |  [RenameArgs](./schema.renameargs.md) |  |
 |  [SelectArgs](./schema.selectargs.md) |  |

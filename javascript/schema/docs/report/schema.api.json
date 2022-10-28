@@ -6557,64 +6557,6 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/schema!NamedOutputPortBinding:interface",
-          "docComment": "/**\n * An explicit workflow output\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface NamedOutputPortBinding extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "NamedPortBinding",
-              "canonicalReference": "@datashaper/schema!NamedPortBinding:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "NamedOutputPortBinding",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/schema!NamedOutputPortBinding#name:member",
-              "docComment": "/**\n * The output table name\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "name: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "name",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
           "canonicalReference": "@datashaper/schema!NamedPortBinding:interface",
           "docComment": "/**\n * An explicit step input binding\n */\n",
           "excerptTokens": [
@@ -7092,36 +7034,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/schema!OutputPortBinding:type",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare type OutputPortBinding = "
-            },
-            {
-              "kind": "Content",
-              "text": "string | "
-            },
-            {
-              "kind": "Reference",
-              "text": "NamedOutputPortBinding",
-              "canonicalReference": "@datashaper/schema!NamedOutputPortBinding:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "OutputPortBinding",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 3
-          }
-        },
-        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/schema!ParserOptions:interface",
           "docComment": "/**\n * Parsing options for delimited files. This is a mix of the options from pandas and spark.\n */\n",
@@ -7138,7 +7050,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!ParserOptions#comment:member",
-              "docComment": "/**\n * Character that begins a comment. All content after this character will be considered a comment and not imported. Default: none.\n */\n",
+              "docComment": "/**\n * Character that denotes a comment. Lines that begin with this character are ignored. Default: none.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9729,7 +9641,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!TypeHints#infinity:member",
-              "docComment": "/**\n * Strings to parse as negative and positive infinity. Default: case insensitive \"-inf\" and \"inf\".\n */\n",
+              "docComment": "/**\n * Strings to parse as negative and positive infinity. Default: case insensitive [\"-inf\", \"inf\"].\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9737,7 +9649,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "string[]"
+                  "text": "[string, string]"
                 },
                 {
                   "kind": "Content",
@@ -11487,22 +11399,8 @@
                   "text": "output: "
                 },
                 {
-                  "kind": "Reference",
-                  "text": "Array",
-                  "canonicalReference": "!Array:interface"
-                },
-                {
                   "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "OutputPortBinding",
-                  "canonicalReference": "@datashaper/schema!OutputPortBinding:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
+                  "text": "string[]"
                 },
                 {
                   "kind": "Content",
@@ -11515,7 +11413,7 @@
               "name": "output",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 5
+                "endIndex": 2
               }
             },
             {

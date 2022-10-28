@@ -11,14 +11,13 @@ import { useCreateTableId, useFormattedColumnArg } from '../hooks/index.js'
 
 export function useHandleSaveClick(
 	step: Step | undefined,
-	output: string | undefined,
-	onTransformRequested?: (step: Step, outputName: string | undefined) => void,
+	onTransformRequested?: (step: Step) => void,
 ): () => void {
 	return useCallback(() => {
 		if (step) {
-			onTransformRequested?.(step, output)
+			onTransformRequested?.(step)
 		}
-	}, [onTransformRequested, step, output])
+	}, [onTransformRequested, step])
 }
 
 export function useInternalTableStep(
@@ -63,15 +62,13 @@ export function useStepOutputHandling(
 } {
 	const [output, setOutput] = useState<string>()
 	const [initialOutput, setInitialOutput] = useState<string>('')
-
-	const stepOutput = workflow.outputPorts.find(t => t.node === step?.id)
 	useEffect(
 		function useExistingOutputName() {
-			if (stepOutput?.name) {
-				setOutput(stepOutput.name)
+			if (step?.id && workflow.hasOutputName(step.id)) {
+				setOutput(step.id)
 			}
 		},
-		[stepOutput],
+		[workflow, step],
 	)
 
 	useEffect(

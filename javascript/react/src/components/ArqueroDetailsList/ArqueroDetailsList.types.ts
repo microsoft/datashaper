@@ -13,6 +13,7 @@ import type {
 	IRenderFunction,
 } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
+import type { CSSProperties } from 'react'
 
 export type ColumnRenderFunction = (
 	item?: any,
@@ -40,7 +41,7 @@ export type SaveMetadataFunction = (
 ) => void
 
 export type ColumnClickFunction = (
-	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
+	evt?: React.MouseEvent<HTMLElement>,
 	column?: IColumn | undefined,
 ) => void
 
@@ -197,4 +198,9 @@ export interface ArqueroDetailsListProps
 	 * Resizable sort direction
 	 */
 	defaultSortDirection?: SortDirection
+	/**
+	 * Style to pass to the container.
+	 * Use the regular DetailsList.styles prop for deeper customization of the table itself.
+	 */
+	style?: CSSProperties
 }

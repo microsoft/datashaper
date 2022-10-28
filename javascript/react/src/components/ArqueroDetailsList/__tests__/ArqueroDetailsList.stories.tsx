@@ -15,6 +15,11 @@ import { SelectionStory } from './Selection.story.js'
 const meta = {
 	title: 'Components/ArqueroDetailsList',
 	component: ArqueroDetailsList,
+	args: {
+		style: {
+			border: '1px solid orange',
+		},
+	},
 }
 
 export default meta
@@ -24,5 +29,6 @@ export const Features = FeaturesStory
 export const Fill = FillStory
 export const Columns = ColumnsStory
 export const Selection = SelectionStory
+Selection.storyName = 'Selection & sorting'
 export const RowGrouping = RowGroupingStory
 export const Performance = PerformanceStory

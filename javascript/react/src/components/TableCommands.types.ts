@@ -2,9 +2,9 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
 import type { TableContainer, TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
+import type { ICommandBarProps } from '@fluentui/react'
 
 export interface TableCommandsProps {
 	inputTable?: TableContainer | undefined
@@ -19,6 +19,7 @@ export interface TableCommandsProps {
 	onRemoveStep?: (index: number) => void
 	color?: string
 	background?: string
+	commandBarProps?: Partial<ICommandBarProps>
 }
 
 export interface GroupedVerbs {

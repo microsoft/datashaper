@@ -6,7 +6,7 @@
 import styled from '@essex/styled-components'
 import { memo, useMemo } from 'react'
 
-import { HEIGHT } from './ArqueroTableHeader.constants.js'
+import { DEFAULT_HEIGHT } from './ArqueroTableHeader.constants.js'
 import {
 	useColorDefaults,
 	useColumnCounts,
@@ -27,6 +27,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		onRenameTable,
 		background,
 		color,
+		styles,
 	}) {
 		const { background: bg, color: clr } = useColorDefaults({
 			color,
@@ -39,7 +40,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		const columnCounts = useColumnCounts(table, visibleColumns)
 		const rowCounts = useRowCounts(table)
 		return (
-			<Header background={bg} color={clr}>
+			<Container background={bg} color={clr} style={styles?.root}>
 				<Left>{commandBar}</Left>
 				<Middle hasFarCommandBar={!!farCommandBar}>
 					{name ? (
@@ -66,17 +67,16 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 					{groupCount ? <H3>{groupCount} groups</H3> : null}
 				</Middle>
 				{farCommandBar && <Right>{farCommandBar}</Right>}
-			</Header>
+			</Container>
 		)
 	},
 )
 
-const Header = styled.div<{ background: string; color: string }>`
-	height: ${HEIGHT}px;
+const Container = styled.div<{ background: string; color: string }>`
+	height: ${DEFAULT_HEIGHT}px;
 	width: 100%;
 	background-color: ${({ background }) => background};
 	color: ${({ color }) => color};
-	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

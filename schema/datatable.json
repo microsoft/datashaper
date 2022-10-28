@@ -60,7 +60,7 @@
             "description": "Parsing options for delimited files. This is a mix of the options from pandas and spark.",
             "properties": {
                 "comment": {
-                    "description": "Character that begins a comment. All content after this character will be considered a comment and not imported.\nDefault: none.",
+                    "description": "Character that denotes a comment. Lines that begin with this character are ignored.\nDefault: none.",
                     "type": "string"
                 },
                 "delimiter": {
@@ -189,10 +189,17 @@
                     "type": "array"
                 },
                 "infinity": {
-                    "description": "Strings to parse as negative and positive infinity.\nDefault: case insensitive \"-inf\" and \"inf\".",
-                    "items": {
-                        "type": "string"
-                    },
+                    "description": "Strings to parse as negative and positive infinity.\nDefault: case insensitive [\"-inf\", \"inf\"].",
+                    "items": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "maxItems": 2,
+                    "minItems": 2,
                     "type": "array"
                 },
                 "naValues": {

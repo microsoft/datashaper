@@ -4,8 +4,6 @@
  */
 import type { Workflow } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
-import { useMemo } from 'react'
-import { map } from 'rxjs'
 
 /**
  * create a parallel array of output names for the steps
@@ -13,26 +11,8 @@ import { map } from 'rxjs'
  * @param workflow - The workflow instance
  * @returns
  */
-export function useStepOutputs(
-	workflow: Workflow,
-	defaultOutputName?: (index: number) => string,
-): Array<string | undefined> {
-	const observable = useMemo(
-		() =>
-			workflow.steps$.pipe(
-				map(steps =>
-					steps
-						.map(s => s.id)
-						.map((id, index) => {
-							const output = workflow.outputPorts.find(def => def.node === id)
-							return output?.name ?? defaultOutputName?.(index)
-						}),
-				),
-			),
-		[workflow, defaultOutputName],
-	)
-
-	return useObservableState(observable) ?? EMPTY
+export function useStepOutputs(workflow: Workflow): Array<string | undefined> {
+	return useObservableState(workflow.outputNames$) ?? EMPTY
 }
 
 const EMPTY: string[] = []

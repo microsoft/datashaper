@@ -43,7 +43,7 @@ export const StepList: React.FC<StepListProps> = memo(function StepsList({
 						onEdit={onEditClicked}
 						onDuplicate={onDuplicateClicked}
 						onSelect={onSelect}
-						key={index}
+						key={step.id}
 						step={step}
 						index={index}
 					/>

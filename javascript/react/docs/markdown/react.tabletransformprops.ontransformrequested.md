@@ -9,5 +9,5 @@ Callback fired when the step is configured and "run" is clicked, indicating the 
 <b>Signature:</b>
 
 ```typescript
-onTransformRequested?: (step: Step, output: string | undefined, index?: number) => void;
+onTransformRequested?: (step: Step, index?: number) => void;
 ```

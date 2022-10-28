@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ArqueroDetailsListProps } from '@datashaper/react'
-import { ArqueroDetailsList } from '@datashaper/react'
 import { Checkbox } from '@fluentui/react'
 import { memo } from 'react'
 import styled from 'styled-components'
 
-import { Table } from '../ArqueroDetailsList.styles.js'
+import { ArqueroDetailsList } from '../../ArqueroDetailsList.js'
+import type { ArqueroDetailsListProps } from '../../ArqueroDetailsList.types.js'
+import { Table } from '../ArqueroDetailsListStories.styles.js'
 import {
 	useCheckboxConfigs,
 	useColumns,
@@ -29,9 +29,9 @@ export const Columns: React.FC<ArqueroDetailsListProps> = memo(
 		return (
 			<Table>
 				<FullColumnList>
-					{checkboxes?.map(config => {
-						return <Checkbox key={config.label} {...config} />
-					})}
+					{checkboxes?.map(config => (
+						<Checkbox key={config.label} {...config} />
+					))}
 				</FullColumnList>
 				<ArqueroDetailsList
 					{...args}

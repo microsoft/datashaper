@@ -47,14 +47,14 @@ export function useCommandBar(): ICommandBarProps {
 		() => [
 			{
 				key: 'add',
-				text: 'Add',
+				text: 'Normal',
 				iconProps: {
 					iconName: 'Add',
 				},
 			},
 			{
 				key: 'delete',
-				text: 'Delete',
+				text: 'Disabled',
 				disabled: true,
 				iconProps: {
 					iconName: 'Delete',
