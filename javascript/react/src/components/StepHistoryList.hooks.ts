@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step, Workflow } from '@datashaper/workflow'
+import type { Workflow } from '@datashaper/workflow'
 import { useCallback, useState } from 'react'
 
 import { DisplayOrder } from '../enums.js'
@@ -10,29 +10,25 @@ import { useModalState } from '../hooks/useModalState.js'
 
 export function useTableHandlers(
 	workflow: Workflow,
-	steps: Step[],
-	order: DisplayOrder | undefined,
+	order: DisplayOrder,
 	onSelect?: (name: string) => void,
 ): {
 	onSelectOriginalTable: () => void
 	onSelectLatest: () => void
 } {
-	order = order ?? DisplayOrder.FirstOnTop
-
 	const onSelectOriginalTable = useCallback(() => {
 		if (workflow.inputNames.length > 0) {
-			const names = workflow.inputNames
-			const lastInputName = names[names.length - 1]
-			if (lastInputName) {
-				onSelect?.(lastInputName)
-			}
+			// select the first input table
+			onSelect?.(workflow.inputNames[0]!)
 		}
 	}, [workflow, onSelect])
 	const onSelectLatest = useCallback(() => {
+		const steps = workflow.steps
 		const lastStepIdx = order === DisplayOrder.FirstOnTop ? steps.length - 1 : 0
 		const latestId = steps[lastStepIdx]?.id
 		latestId && onSelect?.(latestId)
-	}, [onSelect, steps, order])
+	}, [onSelect, workflow, order])
+
 	return {
 		onSelectOriginalTable,
 		onSelectLatest,

@@ -9,6 +9,7 @@ import { CollapsiblePanel, DialogConfirm } from '@essex/components'
 import { DefaultButton, useTheme } from '@fluentui/react'
 import { memo } from 'react'
 
+import { DisplayOrder } from '../enums.js'
 import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
 import { StepHeader } from './StepHeader.js'
 import type { StepHeaderStyles } from './StepHeader.types.js'
@@ -29,7 +30,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 	function StepHistoryList({
 		workflow,
 		showSelectButtons = true,
-		order,
+		order = DisplayOrder.FirstOnTop,
 		onDelete,
 		onSelect,
 		onSave,
@@ -49,7 +50,6 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 
 		const { onSelectOriginalTable, onSelectLatest } = useTableHandlers(
 			workflow,
-			steps,
 			order,
 			onSelect,
 		)
