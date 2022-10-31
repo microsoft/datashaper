@@ -16,13 +16,19 @@ import { deriveDetails } from './StepHeader.utils.js'
 export const StepHeader: React.FC<StepHeaderProps> = memo(function StepHeader({
 	step,
 	index,
+	selected,
 	styles,
 }) {
 	const columns = deriveDetails(step)
 	return (
 		<Container style={styles?.root}>
 			<Index style={styles?.index}>#{index + 1}</Index>
-			<VerbContainer style={styles?.verb}>{step.id}</VerbContainer>
+			<VerbContainer
+				style={selected ? styles?.selected : styles?.name}
+				selected={selected}
+			>
+				{step.id}
+			</VerbContainer>
 			<Details style={styles?.details}>{columns}</Details>
 		</Container>
 	)

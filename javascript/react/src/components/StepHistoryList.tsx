@@ -32,6 +32,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 		onDelete,
 		onSelect,
 		onSave,
+		selectedKey,
 		styles,
 	}) {
 		const theme = useTheme()
@@ -95,7 +96,12 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 								styles={collapsiblePanelStyles}
 								onHeaderClick={() => onSelect?.(step.id)}
 								onRenderHeader={() =>
-									onRenderHeader(step, stepIndex, styles?.stepHeaders)
+									onRenderHeader(
+										step,
+										stepIndex,
+										selectedKey === step.id,
+										styles?.stepHeaders,
+									)
 								}
 							>
 								<TableTransform
@@ -121,7 +127,10 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 function onRenderHeader(
 	step: Step,
 	index: number,
+	selected = false,
 	styles?: StepHeaderStyles,
 ): JSX.Element {
-	return <StepHeader step={step} index={index} styles={styles} />
+	return (
+		<StepHeader step={step} index={index} selected={selected} styles={styles} />
+	)
 }

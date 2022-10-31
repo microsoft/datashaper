@@ -21,10 +21,11 @@ export const Index = styled.div`
 	min-width: 20px;
 `
 
-export const Verb = styled.div`
+export const Verb = styled.div<{ selected?: boolean }>`
 	text-transform: uppercase;
 	font-weight: bold;
-	color: ${({ theme }) => theme.palette.neutralSecondary};
+	color: ${({ selected, theme }) =>
+		selected ? theme.palette.themePrimary : theme.palette.neutralSecondary};
 	white-space: nowrap;
 `
 

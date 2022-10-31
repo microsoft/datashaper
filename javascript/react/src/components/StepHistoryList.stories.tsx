@@ -5,6 +5,7 @@
 
 import { Workflow } from '@datashaper/workflow'
 import type { ComponentStory } from '@storybook/react'
+import { useCallback, useState } from 'react'
 
 import { DisplayOrder } from '../enums.js'
 import { useWorkflow } from '../hooks/common.js'
@@ -30,6 +31,11 @@ const Template: ComponentStory<typeof StepHistoryList> = (
 		{ id: 'products', table: products },
 		{ id: 'stocks', table: stocks },
 	])
+	const [selected, setSelected] = useState<string | undefined>()
+	const handleSelect = useCallback(
+		(id: string) => setSelected(prev => (prev === id ? undefined : id)),
+		[setSelected],
+	)
 	return (
 		<div
 			style={{
@@ -39,7 +45,12 @@ const Template: ComponentStory<typeof StepHistoryList> = (
 				border: '1px solid orange',
 			}}
 		>
-			<StepHistoryList {...args} workflow={wf} />
+			<StepHistoryList
+				{...args}
+				workflow={wf}
+				selectedKey={selected}
+				onSelect={handleSelect}
+			/>
 		</div>
 	)
 }
@@ -55,8 +66,11 @@ Customized.args = {
 			borderBottom: '2px solid teal',
 		},
 		stepHeaders: {
-			verb: {
+			name: {
 				color: 'orange',
+			},
+			selected: {
+				color: 'crimson',
 			},
 			details: {
 				color: 'teal',
