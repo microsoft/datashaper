@@ -7,5 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
+get defaultInput$(): TableObservable;
+
 set defaultInput$(source: TableObservable);
 ```

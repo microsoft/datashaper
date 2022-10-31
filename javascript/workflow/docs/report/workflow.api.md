@@ -803,12 +803,12 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     addStep(stepInput: StepInput): Step;
     get allTableNames$(): Observable<string[]>;
     get allTableNames(): string[];
-    set defaultInput$(source: TableObservable);
     // (undocumented)
     get defaultInput$(): TableObservable;
-    set defaultInput(source: Maybe<TableContainer>);
+    set defaultInput$(source: TableObservable);
     // (undocumented)
     get defaultInput(): Maybe<TableContainer>;
+    set defaultInput(source: Maybe<TableContainer>);
     // (undocumented)
     dispose(): void;
     // (undocumented)

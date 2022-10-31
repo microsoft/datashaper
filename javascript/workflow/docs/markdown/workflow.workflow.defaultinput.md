@@ -7,5 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
+get defaultInput(): Maybe<TableContainer>;
+
 set defaultInput(source: Maybe<TableContainer>);
 ```
