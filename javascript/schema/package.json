@@ -34,10 +34,9 @@
 	},
 	"scripts": {
 		"clean": "essex clean dist docs",
-		"_create_versions_file": "node create_versions_file.js",
 		"_transpile": "essex build --docs",
 		"_bundle_schemas": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-workflow",
-		"build": "run-p _create_versions_file _transpile _bundle_schemas",
+		"build": "run-p _transpile _bundle_schemas",
 		"lint": "essex lint --fix",
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"bundle-codebook": "typescript-json-schema tsconfig.json CodebookSchema > ../../schema/codebook.json",

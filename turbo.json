@@ -2,8 +2,12 @@
 	"$schema": "https://turborepo.org/schema.json",
 	"baseBranch": "origin/main",
 	"pipeline": {
+		"generate:versions": {
+			"dependsOn": ["^generate:versions"],
+			"outputs": ["schema/versions.js", "schema/versions.d.ts"]
+		},
 		"build": {
-			"dependsOn": ["^build"],
+			"dependsOn": ["generate:versions", "^build"],
 			"outputs": ["dist/**", "docs/**"]
 		},
 		"test": {
@@ -19,9 +23,7 @@
 			"dependsOn": ["^build", "build"],
 			"outputs": [
 				"build/**",
-				"storybook-static/**",
-				"versions.js",
-				"versions.d.ts"
+				"storybook-static/**"
 			]
 		},
 		"ci": {
