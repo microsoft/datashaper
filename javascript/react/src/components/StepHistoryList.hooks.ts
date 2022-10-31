@@ -19,7 +19,7 @@ export function useTableHandlers(
 	const onSelectOriginalTable = useCallback(() => {
 		if (workflow.inputNames.length > 0) {
 			// select the first input table
-			onSelect?.(workflow.inputNames[0])
+			onSelect?.(workflow.inputNames[0]!)
 		}
 	}, [workflow, onSelect])
 	const onSelectLatest = useCallback(() => {
