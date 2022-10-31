@@ -120,10 +120,12 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 								</SaveButtonWrapper>
 							</Flex>
 							{onDelete ? (
-								<IconButton
+								<ActionButton
 									onClick={() => onDelete(index)}
 									iconProps={icons.delete}
-								/>
+								>
+									Delete
+								</ActionButton>
 							) : null}
 						</ButtonContainer>
 					</>
