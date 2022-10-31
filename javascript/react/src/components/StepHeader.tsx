@@ -22,7 +22,7 @@ export const StepHeader: React.FC<StepHeaderProps> = memo(function StepHeader({
 	return (
 		<Container style={styles?.root}>
 			<Index style={styles?.index}>#{index + 1}</Index>
-			<VerbContainer style={styles?.verb}>{step.verb}</VerbContainer>
+			<VerbContainer style={styles?.verb}>{step.id}</VerbContainer>
 			<Details style={styles?.details}>{columns}</Details>
 		</Container>
 	)
