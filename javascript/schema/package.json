@@ -33,7 +33,7 @@
 		"url": "https://github.com/microsoft/datashaper/issues"
 	},
 	"scripts": {
-		"clean": "essex clean dist docs",
+		"clean": "essex clean dist docs versions.js versions.d.ts",
 		"_transpile": "essex build --docs",
 		"_bundle_schemas": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-workflow",
 		"build": "run-p _transpile _bundle_schemas",
