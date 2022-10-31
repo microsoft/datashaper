@@ -4,6 +4,7 @@
  */
 
 import type { Step } from '@datashaper/workflow'
+import { isNoArgsStep } from '@datashaper/workflow'
 import { CollapsiblePanel, DialogConfirm } from '@essex/components'
 import { DefaultButton, useTheme } from '@fluentui/react'
 import { memo } from 'react'
@@ -25,7 +26,7 @@ import { getCollapsiblePanelStyles } from './StepHistoryList.utils.js'
 import { TableTransform } from './TableTransform.js'
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
-	function StepsList({
+	function StepHistoryList({
 		workflow,
 		showSelectButtons = true,
 		order,
@@ -90,6 +91,10 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 				<StepsContainer style={styles?.stepsContainer}>
 					{steps.map(step => {
 						const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
+						const handleSave =
+							isNoArgsStep(step) || !onSave
+								? undefined
+								: (s: Step) => onSave(s, stepIndex)
 						return (
 							<CollapsiblePanel
 								key={step.id}
@@ -112,7 +117,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 									workflow={workflow}
 									style={tableTransformStyle}
 									onDelete={onDeleteClicked}
-									onTransformRequested={s => onSave?.(s, stepIndex)}
+									onTransformRequested={handleSave}
 									hideStepSelector
 								/>
 							</CollapsiblePanel>

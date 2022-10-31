@@ -57,6 +57,13 @@ const Template: ComponentStory<typeof StepHistoryList> = (
 
 export const Primary = Template.bind({})
 
+export const SaveDelete = Template.bind({})
+SaveDelete.storyName = 'Save & delete buttons'
+SaveDelete.args = {
+	onSave: s => console.log('save', s),
+	onDelete: s => console.log('delete', s),
+}
+
 export const Customized = Template.bind({})
 Customized.args = {
 	order: DisplayOrder.FirstOnTop,

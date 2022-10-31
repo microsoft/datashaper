@@ -46,6 +46,7 @@
 |  [isInputKeyValueStep(step)](./workflow.isinputkeyvaluestep.md) | Indicates whether the supplied step requires an input key and value column. |
 |  [isInputTableListStep(step)](./workflow.isinputtableliststep.md) | Indicates whether this step requires more than one input table. |
 |  [isInputTableStep(step)](./workflow.isinputtablestep.md) | Indicates whether this step requires an input table. |
+|  [isNoArgsStep(step)](./workflow.isnoargsstep.md) | Indicates whether this step accepts arguments |
 |  [isNumericInputStep(step)](./workflow.isnumericinputstep.md) | Indicates whether this step can only operate on numeric values. |
 |  [isOutputColumnStep(step)](./workflow.isoutputcolumnstep.md) | Indicates whether the supplied step requires a single output column. |
 |  [join(id)](./workflow.join.md) |  |
