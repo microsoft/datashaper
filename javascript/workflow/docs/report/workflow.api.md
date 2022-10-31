@@ -409,6 +409,11 @@ export function isInputTableListStep(step: Step): boolean;
 // @public
 export function isInputTableStep(step: Step): boolean;
 
+// Warning: (ae-missing-release-tag) "isNoArgsStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function isNoArgsStep(step: Step): boolean;
+
 // Warning: (ae-missing-release-tag) "isNumericInputStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

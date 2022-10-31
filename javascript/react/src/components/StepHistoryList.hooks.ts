@@ -43,7 +43,7 @@ export function useTableHandlers(
 export function useDeleteConfirm(onDelete?: (index: number) => void): {
 	isOpen: boolean
 	toggle: () => void
-	onClick: (index: number) => void
+	onClick?: (index: number) => void
 	onConfirm: () => void
 } {
 	const { isOpen, show, hide, toggle } = useModalState(undefined, undefined)
@@ -66,6 +66,6 @@ export function useDeleteConfirm(onDelete?: (index: number) => void): {
 		isOpen,
 		toggle,
 		onConfirm: onConfirmDelete,
-		onClick: onDeleteClicked,
+		onClick: onDelete ? onDeleteClicked : undefined,
 	}
 }
