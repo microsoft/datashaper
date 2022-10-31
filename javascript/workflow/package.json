@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/workflow",
-	"version": "19.0.2",
+	"version": "19.1.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
