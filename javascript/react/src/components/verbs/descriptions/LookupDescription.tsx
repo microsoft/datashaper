@@ -7,7 +7,7 @@ import { NodeInput } from '@datashaper/workflow'
 import { memo, useMemo } from 'react'
 
 import type { StepDescriptionProps } from '../../../types.js'
-import { createRowEntries } from '../createRowEntries.js'
+import { createRowEntries } from '../../StepDescription/createRowEntries.js'
 import { VerbDescription } from './VerbDescription.js'
 
 export const LookupDescription: React.FC<StepDescriptionProps<LookupArgs>> =

@@ -11,7 +11,7 @@ import {
 	useDropdownChangeHandler,
 } from '../../../../hooks/index.js'
 import type { StepChangeFunction } from '../../../../types.js'
-import { dropdownStyles } from '../../../styles.js'
+import { dropdownStyles } from '../styles.js'
 import type { MultiChoiceFormInput } from './MultiChoiceInput.types.js'
 
 export const MultiChoiceInput: React.FC<{

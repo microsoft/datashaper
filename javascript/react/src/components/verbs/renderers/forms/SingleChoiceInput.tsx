@@ -8,7 +8,7 @@ import { Fragment, memo } from 'react'
 
 import { useDropdownChangeHandler } from '../../../../hooks/index.js'
 import type { StepChangeFunction } from '../../../../types.js'
-import { dropdownStyles } from '../../../styles.js'
+import { dropdownStyles } from '../styles.js'
 import type { SingleChoiceFormInput } from './SingleChoiceInput.types.js'
 
 export const SingleChoiceInput: React.FC<{

@@ -9,7 +9,7 @@ import { Dropdown, SpinButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { CalendarPicker } from '../../../controls/index.js'
-import { narrowerDropdownStyles } from '../../../styles.js'
+import { narrowerDropdownStyles } from '../styles.js'
 import { Container, TextValue } from './DataTypeField.styles.js'
 import type { DataTypeFieldProps } from './DataTypeField.types.js'
 

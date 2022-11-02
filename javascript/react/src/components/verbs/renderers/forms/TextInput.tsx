@@ -9,7 +9,7 @@ import { Fragment, memo } from 'react'
 
 import { useTextFieldChangeHandler } from '../../../../hooks/index.js'
 import type { StepChangeFunction } from '../../../../types.js'
-import { dropdownStyles } from '../../../styles.js'
+import { dropdownStyles } from '../styles.js'
 import type { TextFormInput } from './TextInput.types.js'
 
 export const TextInput: React.FC<{

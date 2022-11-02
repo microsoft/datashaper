@@ -9,7 +9,7 @@ import { Fragment, memo } from 'react'
 
 import { useSpinButtonChangeHandler } from '../../../../hooks/index.js'
 import type { StepChangeFunction } from '../../../../types.js'
-import { dropdownStyles } from '../../../styles.js'
+import { dropdownStyles } from '../styles.js'
 import type { NumberSpinnerFormInput } from './NumberSpinnerInput.types.js'
 
 export const NumberSpinnerInput: React.FC<{

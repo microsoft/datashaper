@@ -2,16 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FoldArgs } from '@datashaper/schema'
+import type { UnhotArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
 import type { StepDescriptionProps } from '../../../types.js'
-import { createRowEntries } from '../createRowEntries.js'
+import { createRowEntries } from '../../StepDescription/createRowEntries.js'
 import { VerbDescription } from './VerbDescription.js'
 
-export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>> = memo(
-	function FoldDescription(props) {
+export const UnhotDescription: React.FC<StepDescriptionProps<UnhotArgs>> = memo(
+	function UnhotDescription(props) {
 		const rows = useMemo(() => {
 			const {
 				step: { args },
@@ -21,24 +21,22 @@ export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>> = memo(
 				c => ({
 					value: c,
 				}),
-				3,
+				1,
 				props,
 			)
 			return [
 				{
-					before: `column${
-						(args.columns || EMPTY_ARRAY).length !== 1 ? 's' : ''
-					}`,
-					value: args.columns.length === 0 ? undefined : '',
+					before: `column${args.columns?.length !== 1 ? 's' : ''}`,
+					value: args.columns?.length === 0 ? undefined : '',
 					sub,
 				},
 				{
-					before: 'into key column',
-					value: args.to != null ? args.to[0] : '',
+					before: 'with prefix',
+					value: args.prefix,
 				},
 				{
-					before: 'into value column',
-					value: args.to != null ? args.to[1] : '',
+					before: 'keep source columns',
+					value: args.preserveSource ? `yes` : 'no',
 				},
 			]
 		}, [props])
