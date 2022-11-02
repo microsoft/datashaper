@@ -6,7 +6,7 @@ import type { UnfoldArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
 import { useColumnNames, useStepDataTable } from '../../../../hooks/index.js'
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { UnfoldBase } from './Unfold.base.js'
 
 /**

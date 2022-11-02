@@ -5,7 +5,7 @@
 import type { BooleanArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { BooleanLogicBase } from './BooleanLogic.base.js'
 
 /**

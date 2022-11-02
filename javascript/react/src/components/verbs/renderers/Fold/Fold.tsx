@@ -5,7 +5,7 @@
 import type { FoldArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { FoldBase } from './Fold.base.js'
 
 /**

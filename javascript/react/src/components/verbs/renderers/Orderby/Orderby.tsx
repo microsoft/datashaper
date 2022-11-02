@@ -11,7 +11,7 @@ import {
 	useSimpleDropdownOptions,
 	useStepDataTable,
 } from '../../../../hooks/index.js'
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { useAddButtonClickedHandler, useSorts } from './Orderby.hooks.js'
 import { Container, icons, Sorts } from './Orderby.styles.js'
 

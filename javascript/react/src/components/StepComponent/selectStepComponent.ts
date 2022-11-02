@@ -4,7 +4,7 @@
  */
 import type { Step } from '@datashaper/workflow'
 
-import type { StepComponentProps } from '../../types.js'
+import type { StepComponentProps } from '../verbs/index.js'
 import {
 	Aggregate,
 	Bin,

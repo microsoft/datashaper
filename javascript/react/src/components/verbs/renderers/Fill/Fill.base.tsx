@@ -5,8 +5,8 @@
 import type { FillArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
 import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
+import type { StepComponentProps } from '../types.js'
 
 /**
  * Provides inputs for a Fill step.

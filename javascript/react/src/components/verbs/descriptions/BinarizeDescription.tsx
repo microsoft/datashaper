@@ -7,7 +7,7 @@ import { FilterCompareType } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
-import type { StepDescriptionProps } from '../../../types.js'
+import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
 
 export const BinarizeDescription: React.FC<StepDescriptionProps<BinarizeArgs>> =

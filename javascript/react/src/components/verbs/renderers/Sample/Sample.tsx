@@ -9,7 +9,7 @@ import { format } from 'd3-format'
 import { memo } from 'react'
 
 import { useSpinButtonChangeHandler } from '../../../../hooks/index.js'
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import {
 	Container,
 	Input,

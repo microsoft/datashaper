@@ -7,7 +7,7 @@ import styled from '@essex/styled-components'
 import isNil from 'lodash-es/isNil.js'
 import { memo, useMemo } from 'react'
 
-import type { DescriptionRow, VerbDescriptionProps } from '../../../types.js'
+import type { DescriptionRow, VerbDescriptionProps } from './types.js'
 
 function VerbDescriptionFn<T extends object | void>({
 	step,

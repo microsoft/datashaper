@@ -7,7 +7,6 @@ import { BinStrategy } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
 import { memo, useMemo } from 'react'
 
-import type { StepComponentBaseProps } from '../../../../types.js'
 import {
 	type FormInput,
 	checkbox,
@@ -15,6 +14,7 @@ import {
 	FormInputType,
 	VerbForm,
 } from '../forms/index.js'
+import type { StepComponentBaseProps } from '../types.js'
 
 /**
  * Provides inputs for a binning step.

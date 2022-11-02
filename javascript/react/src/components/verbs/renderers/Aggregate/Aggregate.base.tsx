@@ -6,13 +6,13 @@ import type { AggregateArgs } from '@datashaper/schema'
 import { FieldAggregateOperation } from '@datashaper/schema'
 import { useMemo } from 'react'
 
-import type { StepComponentBaseProps } from '../../../../types.js'
 import {
 	type FormInput,
 	dropdown,
 	enumDropdown,
 	VerbForm,
 } from '../forms/index.js'
+import type { StepComponentBaseProps } from '../types.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

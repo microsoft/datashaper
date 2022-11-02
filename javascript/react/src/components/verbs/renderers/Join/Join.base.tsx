@@ -8,7 +8,6 @@ import { NodeInput } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
-import type { StepComponentBaseProps } from '../../../../types.js'
 import {
 	type FormInput,
 	enumDropdown,
@@ -16,6 +15,7 @@ import {
 	tableDropdown,
 	VerbForm,
 } from '../forms/index.js'
+import type { StepComponentBaseProps } from '../types.js'
 
 /**
  * Provides inputs for a Join step.

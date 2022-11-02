@@ -11,7 +11,7 @@ import {
 	useTableDropdownOptions,
 	useWorkflowDataTable,
 } from '../../../../hooks/index.js'
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { JoinBase } from './Join.base.js'
 
 /**

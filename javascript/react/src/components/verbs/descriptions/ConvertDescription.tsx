@@ -6,7 +6,7 @@ import type { ConvertArgs } from '@datashaper/schema'
 import { ParseType } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepDescriptionProps } from '../../../types.js'
+import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
 
 export const ConvertDescription: React.FC<StepDescriptionProps<ConvertArgs>> =

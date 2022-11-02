@@ -5,7 +5,7 @@
 import type { MergeArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { MergeBase } from './Merge.base.js'
 
 /**

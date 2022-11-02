@@ -6,8 +6,8 @@ import type { RollupArgs } from '@datashaper/schema'
 import { FieldAggregateOperation } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
 import { type FormInput, enumDropdown, VerbForm } from '../forms/index.js'
+import type { StepComponentProps } from '../types.js'
 
 /**
  * Just the column/op inputs for an rollup.

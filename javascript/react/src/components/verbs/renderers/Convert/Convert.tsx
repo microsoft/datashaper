@@ -9,7 +9,7 @@ import {
 	useColumnsMetadata,
 	useStepDataTable,
 } from '../../../../hooks/index.js'
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { ConvertBase } from './Convert.base.js'
 
 /**

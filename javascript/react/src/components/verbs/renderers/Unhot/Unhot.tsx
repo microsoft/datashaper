@@ -5,7 +5,7 @@
 import type { UnhotArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { UnhotBase } from './Unhot.base.js'
 
 /**

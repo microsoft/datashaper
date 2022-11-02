@@ -6,8 +6,8 @@ import type { EncodeDecodeArgs } from '@datashaper/schema'
 import { CodebookStrategy } from '@datashaper/schema'
 import { useMemo } from 'react'
 
-import type { StepComponentBaseProps } from '../../../../types.js'
 import { type FormInput, enumDropdown, VerbForm } from '../forms/index.js'
+import type { StepComponentBaseProps } from '../types.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

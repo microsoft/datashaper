@@ -4,7 +4,7 @@
  */
 import { memo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 
 /**
  * Provides inputs for an ungroup step.

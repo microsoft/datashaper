@@ -7,7 +7,7 @@ import { op } from 'arquero'
 import { memo, useEffect } from 'react'
 
 import { useStepDataTable } from '../../../../hooks/index.js'
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { BinBase } from './Bin.base.js'
 
 /**

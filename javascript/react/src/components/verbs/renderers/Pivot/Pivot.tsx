@@ -6,7 +6,7 @@ import type { PivotArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
 import { useColumnNames, useStepDataTable } from '../../../../hooks/index.js'
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { PivotBase } from './Pivot.base.js'
 
 /**

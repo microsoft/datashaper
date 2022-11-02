@@ -5,7 +5,7 @@
 import type { EncodeDecodeArgs } from '@datashaper/schema'
 import { memo, useEffect } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { EncodeDecodeBase } from './EncodeDecode.base.js'
 import { useCodebookContent } from './EncodeDecode.hooks.js'
 

@@ -6,8 +6,8 @@ import type { UnfoldArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import { useSimpleDropdownOptions } from '../../../../hooks/index.js'
-import type { StepComponentBaseProps } from '../../../../types.js'
 import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
+import type { StepComponentBaseProps } from '../types.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

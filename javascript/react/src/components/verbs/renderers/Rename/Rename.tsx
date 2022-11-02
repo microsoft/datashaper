@@ -23,9 +23,9 @@ import {
 	useSimpleDropdownOptions,
 	useStepDataTable,
 } from '../../../../hooks/index.js'
-import type { StepComponentProps } from '../../../../types.js'
 import { TableColumnDropdown } from '../../../controls/index.js'
 import { narrowerDropdownStyles } from '../styles.js'
+import type { StepComponentProps } from '../types.js'
 import {
 	useDisabled,
 	useHandleAddButtonClick,

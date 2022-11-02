@@ -7,13 +7,13 @@ import { MathOperator } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import { useSimpleDropdownOptions } from '../../../../hooks/index.js'
-import type { StepComponentBaseProps } from '../../../../types.js'
 import {
 	type FormInput,
 	enumDropdown,
 	FormInputType,
 	VerbForm,
 } from '../forms/index.js'
+import type { StepComponentBaseProps } from '../types.js'
 
 /**
  * Provides inputs for a Binarize step.

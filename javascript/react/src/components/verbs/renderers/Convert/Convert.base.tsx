@@ -8,9 +8,9 @@ import { num } from '@datashaper/utilities'
 import { memo, useMemo } from 'react'
 
 import { getEnumDropdownOptions } from '../../../../enums.js'
-import type { StepComponentBaseProps } from '../../../../types.js'
 import { getDateFormatPatternOptions } from '../../../dateFormats.js'
 import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
+import type { StepComponentBaseProps } from '../types.js'
 
 /**
  * Provides inputs for a Convert step.

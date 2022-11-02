@@ -5,7 +5,7 @@
 import type { EraseArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { EraseBase } from './Erase.base.js'
 
 /**

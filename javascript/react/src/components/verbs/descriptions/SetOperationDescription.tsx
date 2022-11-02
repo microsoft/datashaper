@@ -6,8 +6,8 @@ import type { Step } from '@datashaper/workflow'
 import { memo, useMemo } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
-import type { StepDescriptionProps } from '../../../types.js'
 import { createRowEntries } from '../../StepDescription/createRowEntries.js'
+import type { StepDescriptionProps } from './types.js'
 import { VerbDescription } from './VerbDescription.js'
 
 export const SetOperationDescription: React.FC<StepDescriptionProps<void>> =

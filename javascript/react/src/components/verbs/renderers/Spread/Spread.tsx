@@ -5,7 +5,7 @@
 import type { SpreadArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { SpreadBase } from './Spread.base.js'
 
 export const Spread: React.FC<StepComponentProps<SpreadArgs>> = memo(

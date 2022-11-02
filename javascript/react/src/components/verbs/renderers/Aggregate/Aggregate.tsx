@@ -6,7 +6,7 @@ import type { AggregateArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
 import { useColumnNames, useStepDataTable } from '../../../../hooks/index.js'
-import type { StepComponentProps } from '../../../../types.js'
+import type { StepComponentProps } from '../types.js'
 import { AggregateBase } from './Aggregate.base.js'
 
 /*

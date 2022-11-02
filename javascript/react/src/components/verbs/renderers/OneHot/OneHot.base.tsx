@@ -7,8 +7,8 @@ import type { Step } from '@datashaper/workflow'
 import cloneDeep from 'lodash-es/cloneDeep.js'
 import { memo, useCallback, useMemo } from 'react'
 
-import type { StepComponentBaseProps } from '../../../../types.js'
 import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
+import type { StepComponentBaseProps } from '../types.js'
 
 /**
  * Provides inputs for a OneHot step.

@@ -4,8 +4,8 @@
  */
 import { memo } from 'react'
 
-import type { StepComponentProps } from '../../../../types.js'
 import { Filter } from '../Filter/index.js'
+import type { StepComponentProps } from '../types.js'
 
 /**
  * Provides inputs for a Binarize step.
