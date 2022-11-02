@@ -93,8 +93,6 @@ export interface ArqueroTableHeaderProps {
     // (undocumented)
     name?: string;
     // (undocumented)
-    onRenameTable?: (name: string) => void;
-    // (undocumented)
     showColumnCount?: boolean;
     // (undocumented)
     showRowCount?: boolean;

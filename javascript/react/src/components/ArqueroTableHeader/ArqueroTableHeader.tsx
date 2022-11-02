@@ -26,7 +26,6 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		commandBar,
 		farCommandBar,
 		visibleColumns,
-		onRenameTable,
 		background,
 		color,
 		styles,
@@ -45,9 +44,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 			<Container background={bg} color={clr} style={styles?.root}>
 				<Left>{commandBar}</Left>
 				<Middle hasFarCommandBar={!!farCommandBar}>
-					{name ? (
-						<TableName onRenameTable={onRenameTable} name={name} color={clr} />
-					) : null}
+					{name ? <TableName name={name} color={clr} /> : null}
 					{showRowCount === true ? (
 						<H3>
 							{`${rowCounts.visible} row${rowCounts.visible !== 1 ? 's' : ''}${

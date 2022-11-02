@@ -4,7 +4,6 @@
  */
 import type { Step } from '@datashaper/workflow'
 
-import type { StepDescriptionProps } from '../../types.js'
 import {
 	AggregateDescription,
 	BinarizeDescription,
@@ -34,7 +33,8 @@ import {
 	UnfoldDescription,
 	UnhotDescription,
 	WindowDescription,
-} from './verbDescriptions/index.js'
+} from '../verbs/descriptions/index.js'
+import type { StepDescriptionProps } from '../verbs/index.js'
 
 const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
 	aggregate: AggregateDescription,

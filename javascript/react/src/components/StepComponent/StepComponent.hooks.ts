@@ -27,7 +27,7 @@ import {
 	useOnResetStepArgs,
 	useTextFieldChangeHandler,
 } from '../../hooks/index.js'
-import type { StepComponentProps } from '../../types.js'
+import type { StepComponentProps } from '../verbs/index.js'
 import { selectStepComponent } from './selectStepComponent.js'
 
 export function getSimpleDropdownOptions(list: string[]): IDropdownOption[] {

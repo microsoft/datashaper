@@ -4,7 +4,7 @@
  */
 import type { Step } from '@datashaper/workflow'
 
-import type { StepComponentProps } from '../../types.js'
+import type { StepComponentProps } from '../verbs/index.js'
 import {
 	Aggregate,
 	Bin,
@@ -34,7 +34,7 @@ import {
 	Unfold,
 	Unhot,
 	Window,
-} from '../verbs/index.js'
+} from '../verbs/renderers/index.js'
 
 const verb: Record<string, React.FC<StepComponentProps<any>>> = {
 	aggregate: Aggregate,
