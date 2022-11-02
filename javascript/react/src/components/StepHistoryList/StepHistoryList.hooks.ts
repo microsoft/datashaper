@@ -5,12 +5,10 @@
 import type { Workflow } from '@datashaper/workflow'
 import { useCallback, useState } from 'react'
 
-import { DisplayOrder } from '../../enums.js'
 import { useModalState } from '../../hooks/fluent/useModalState.js'
 
 export function useTableHandlers(
 	workflow: Workflow,
-	order: DisplayOrder,
 	onSelect?: (name: string) => void,
 ): {
 	onSelectOriginalTable: () => void
@@ -24,10 +22,9 @@ export function useTableHandlers(
 	}, [workflow, onSelect])
 	const onSelectLatest = useCallback(() => {
 		const steps = workflow.steps
-		const lastStepIdx = order === DisplayOrder.FirstOnTop ? steps.length - 1 : 0
-		const latestId = steps[lastStepIdx]?.id
-		latestId && onSelect?.(latestId)
-	}, [onSelect, workflow, order])
+		const latestId = steps[steps.length - 1]!.id
+		onSelect?.(latestId)
+	}, [onSelect, workflow])
 
 	return {
 		onSelectOriginalTable,
