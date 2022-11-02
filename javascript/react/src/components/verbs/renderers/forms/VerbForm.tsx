@@ -7,7 +7,7 @@ import { Expando } from '@essex/components'
 import { memo, useMemo } from 'react'
 import { Case, Switch, When } from 'react-if'
 
-import type { StepChangeFunction } from '../../../types.js'
+import type { StepChangeFunction } from '../../../../types.js'
 import { CheckboxInput } from './CheckboxInput.js'
 import type { CheckboxFormInput } from './CheckboxInput.types.js'
 import { ComboBoxInput } from './ComboBoxInput.js'

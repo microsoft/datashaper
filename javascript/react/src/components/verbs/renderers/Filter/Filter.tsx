@@ -16,7 +16,7 @@ import {
 } from '../../../../hooks/index.js'
 import type { StepComponentProps } from '../../../../types.js'
 import { LeftAlignedRow } from '../../../styles.js'
-import { FilterFunction } from '../../shared/index.js'
+import { FilterFunction } from '../shared/index.js'
 import { Container, Vertical } from './Filter.styles.js'
 
 /**

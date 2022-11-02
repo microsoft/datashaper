@@ -14,7 +14,7 @@ import {
 	enumDropdown,
 	FormInputType,
 	VerbForm,
-} from '../../verbForm/index.js'
+} from '../forms/index.js'
 
 /**
  * Provides inputs for a binning step.

@@ -7,11 +7,7 @@ import { memo, useMemo } from 'react'
 
 import { useSimpleDropdownOptions } from '../../../../hooks/index.js'
 import type { StepComponentBaseProps } from '../../../../types.js'
-import {
-	type FormInput,
-	FormInputType,
-	VerbForm,
-} from '../../verbForm/index.js'
+import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

@@ -18,9 +18,12 @@ import { memo, useCallback, useMemo, useState } from 'react'
 import {
 	useColumnNames,
 	useSimpleDropdownOptions,
-} from '../../../hooks/index.js'
-import { CalendarPicker, ColumnCriteriaComboBox } from '../../controls/index.js'
-import { InputExplainer, LeftAlignedRow } from '../../styles.js'
+} from '../../../../hooks/index.js'
+import {
+	CalendarPicker,
+	ColumnCriteriaComboBox,
+} from '../../../controls/index.js'
+import { InputExplainer, LeftAlignedRow } from '../../../styles.js'
 import { useColumnTyping, useIsEmpty } from './FilterFunction.hooks.js'
 import {
 	BooleanToggle,

@@ -7,9 +7,9 @@ import { Position, SpinButton } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { Fragment, memo } from 'react'
 
-import { useSpinButtonChangeHandler } from '../../../hooks/index.js'
-import type { StepChangeFunction } from '../../../types.js'
-import { dropdownStyles } from '../../styles.js'
+import { useSpinButtonChangeHandler } from '../../../../hooks/index.js'
+import type { StepChangeFunction } from '../../../../types.js'
+import { dropdownStyles } from '../../../styles.js'
 import type { NumberSpinnerFormInput } from './NumberSpinnerInput.types.js'
 
 export const NumberSpinnerInput: React.FC<{

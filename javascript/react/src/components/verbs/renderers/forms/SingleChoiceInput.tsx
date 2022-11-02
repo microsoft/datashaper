@@ -6,9 +6,9 @@ import type { Step } from '@datashaper/workflow'
 import { Dropdown } from '@fluentui/react'
 import { Fragment, memo } from 'react'
 
-import { useDropdownChangeHandler } from '../../../hooks/index.js'
-import type { StepChangeFunction } from '../../../types.js'
-import { dropdownStyles } from '../../styles.js'
+import { useDropdownChangeHandler } from '../../../../hooks/index.js'
+import type { StepChangeFunction } from '../../../../types.js'
+import { dropdownStyles } from '../../../styles.js'
 import type { SingleChoiceFormInput } from './SingleChoiceInput.types.js'
 
 export const SingleChoiceInput: React.FC<{

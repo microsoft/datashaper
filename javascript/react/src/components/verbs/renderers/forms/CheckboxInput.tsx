@@ -7,9 +7,9 @@ import { Checkbox } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { Fragment, memo } from 'react'
 
-import { useCheckboxChangeHandler } from '../../../hooks/index.js'
-import type { StepChangeFunction } from '../../../types.js'
-import { checkboxStyles } from '../../styles.js'
+import { useCheckboxChangeHandler } from '../../../../hooks/index.js'
+import type { StepChangeFunction } from '../../../../types.js'
+import { checkboxStyles } from '../../../styles.js'
 import type { CheckboxFormInput } from './CheckboxInput.types.js'
 
 export const CheckboxInput: React.FC<{

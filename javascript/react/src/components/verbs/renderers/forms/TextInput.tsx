@@ -7,9 +7,9 @@ import { TextField } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { Fragment, memo } from 'react'
 
-import { useTextFieldChangeHandler } from '../../../hooks/index.js'
-import type { StepChangeFunction } from '../../../types.js'
-import { dropdownStyles } from '../../styles.js'
+import { useTextFieldChangeHandler } from '../../../../hooks/index.js'
+import type { StepChangeFunction } from '../../../../types.js'
+import { dropdownStyles } from '../../../styles.js'
 import type { TextFormInput } from './TextInput.types.js'
 
 export const TextInput: React.FC<{

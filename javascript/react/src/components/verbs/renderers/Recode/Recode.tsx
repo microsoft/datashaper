@@ -13,7 +13,7 @@ import { memo, useMemo } from 'react'
 import { EMPTY_OBJECT } from '../../../../empty.js'
 import { useColumnType, useStepDataTable } from '../../../../hooks/index.js'
 import type { StepComponentProps } from '../../../../types.js'
-import { DataTypeField } from '../../shared/DataTypeField.js'
+import { DataTypeField } from '../shared/index.js'
 import {
 	useColumnValues,
 	useDisabled,
