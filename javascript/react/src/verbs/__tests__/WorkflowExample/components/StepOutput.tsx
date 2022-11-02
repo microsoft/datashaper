@@ -5,10 +5,10 @@
 import { introspect } from '@datashaper/tables'
 import { memo, useMemo } from 'react'
 
-import { StepComponent } from '../../../../components/StepComponent/StepComponent.js'
-import { StepDescription } from '../../../../components/StepDescription/index.js'
-import { useDataTable } from '../../../../hooks/useDataTable.js'
-import { Section } from './Section.js'
+import { useDataTable } from '../../../../../hooks/useDataTable.js'
+import { StepComponent } from '../../../../StepComponent/StepComponent.js'
+import { StepDescription } from '../../../../StepDescription/index.js'
+import { Section } from './Section.js.js'
 import {
 	OutputColumn,
 	StepBlock,
@@ -16,9 +16,9 @@ import {
 	StepConfig,
 	StepDisplay,
 	TableSection,
-} from './StepOutput.styles.js'
-import type { StepOutputProps } from './StepOutput.types.js'
-import { Table } from './Table.js'
+} from './StepOutput.styles.js.js'
+import type { StepOutputProps } from './StepOutput.types.js.js'
+import { Table } from './Table.js.js'
 
 export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	step,

@@ -34,7 +34,7 @@ import {
 	Unfold,
 	Unhot,
 	Window,
-} from '../../verbs/index.js'
+} from '../verbs/index.js'
 
 const verb: Record<string, React.FC<StepComponentProps<any>>> = {
 	aggregate: Aggregate,

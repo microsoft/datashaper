@@ -6,7 +6,7 @@ import type { IComboBoxOption } from '@fluentui/react'
 import { SelectableOptionMenuItemType } from '@fluentui/react'
 import { useMemo } from 'react'
 
-import { getDateFormatPatternOptions } from '../../../dateFormats.js'
+import { getDateFormatPatternOptions } from '../../dateFormats.js'
 
 export function useOptions(): IComboBoxOption[] {
 	return useMemo<IComboBoxOption[]>(

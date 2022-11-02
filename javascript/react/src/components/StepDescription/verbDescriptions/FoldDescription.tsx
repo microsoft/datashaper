@@ -5,9 +5,9 @@
 import type { FoldArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
-import { createRowEntries } from '../../../createRowEntries.js'
 import { EMPTY_ARRAY } from '../../../empty.js'
 import type { StepDescriptionProps } from '../../../types.js'
+import { createRowEntries } from '../../createRowEntries.js'
 import { VerbDescription } from './VerbDescription.js'
 
 export const FoldDescription: React.FC<StepDescriptionProps<FoldArgs>> = memo(
