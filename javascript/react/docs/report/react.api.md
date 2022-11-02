@@ -172,21 +172,6 @@ export type ComboBoxChangeHandler = (event: React.FormEvent<IComboBox>, option: 
 // @public (undocumented)
 export type ComboBoxInputValueChangeHandler = (value?: string | undefined) => void;
 
-// Warning: (ae-missing-release-tag) "CustomIconProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface CustomIconProps {
-    // (undocumented)
-    color?: string;
-    // (undocumented)
-    fontSize?: number;
-}
-
-// Warning: (ae-missing-release-tag) "defaultIconClass" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const defaultIconClass: string;
-
 // Warning: (ae-missing-release-tag) "DetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -273,11 +258,6 @@ export interface GuidanceProps {
     // (undocumented)
     name: string;
 }
-
-// Warning: (ae-missing-release-tag) "HistoryIcon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const HistoryIcon: React.FC<CustomIconProps>;
 
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

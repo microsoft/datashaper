@@ -4,7 +4,6 @@
  */
 export * from './ArqueroDetailsList/index.js'
 export * from './ArqueroTableHeader/index.js'
-export * from './CustomIcons/index.js'
 export * from './Guidance/index.js'
 export * from './StepCard/index.js'
 export * from './StepComponent/index.js'
