@@ -34,7 +34,7 @@ import {
 	UnfoldDescription,
 	UnhotDescription,
 	WindowDescription,
-} from '../../verbDescriptions/index.js'
+} from './verbDescriptions/index.js'
 
 const descriptions: Record<string, React.FC<StepDescriptionProps<any>>> = {
 	aggregate: AggregateDescription,
