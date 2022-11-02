@@ -8,7 +8,7 @@ import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { from, map } from 'rxjs'
 
-export function useDataTable(
+export function useWorkflowDataTable(
 	id: string | undefined,
 	workflow?: Workflow,
 	existingTable?: ColumnTable,

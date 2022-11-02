@@ -9,7 +9,7 @@
 export * from './components/index.js'
 export { DisplayOrder } from './enums.js'
 export {
-	useDataTable,
+	useWorkflowDataTable as useDataTable,
 	useHandleStepOutputChanged,
 	useHeaderCommandBarDefaults,
 	useInputTableNames,

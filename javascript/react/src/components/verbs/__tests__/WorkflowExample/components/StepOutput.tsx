@@ -5,7 +5,7 @@
 import { introspect } from '@datashaper/tables'
 import { memo, useMemo } from 'react'
 
-import { useDataTable } from '../../../../../hooks/useDataTable.js'
+import { useWorkflowDataTable } from '../../../../../hooks/workflow/useWorkflowDataTable.js'
 import { StepComponent } from '../../../../StepComponent/StepComponent.js'
 import { StepDescription } from '../../../../StepDescription/index.js'
 import { Section } from './Section.js'
@@ -28,7 +28,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 	onStepChange,
 	onStepOutputChange,
 }) {
-	const table = useDataTable(output, workflow)
+	const table = useWorkflowDataTable(output, workflow)
 	const metadata = useMemo(() => table && introspect(table, true), [table])
 	return (
 		<StepBlock className="step-block">

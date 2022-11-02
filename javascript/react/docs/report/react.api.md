@@ -540,7 +540,7 @@ export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns
 // @public (undocumented)
 export function useColumnStyles(clickable: boolean, separator: boolean): Partial<IDetailsColumnStyles>;
 
-// Warning: (ae-missing-release-tag) "useDataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "useWorkflowDataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useDataTable(id: string | undefined, workflow?: Workflow, existingTable?: ColumnTable): ColumnTable | undefined;

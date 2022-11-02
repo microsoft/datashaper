@@ -7,7 +7,7 @@ import type { Step, Workflow } from '@datashaper/workflow'
 import { NodeInput } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { useDataTable } from '../index.js'
+import { useWorkflowDataTable } from '../index.js'
 
 export function useStepDataTable(
 	step: Step,
@@ -15,7 +15,7 @@ export function useStepDataTable(
 	input?: string | undefined,
 	table?: ColumnTable | undefined,
 ): ColumnTable | undefined {
-	return useDataTable(
+	return useWorkflowDataTable(
 		input || step.input[NodeInput.Source]?.node,
 		workflow,
 		table,

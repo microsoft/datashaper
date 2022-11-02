@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function useDataTable(id: string | undefined, workflow?: Workflow, existingTable?: ColumnTable): ColumnTable | undefined;
+export declare function useWorkflowDataTable(id: string | undefined, workflow?: Workflow, existingTable?: ColumnTable): ColumnTable | undefined;
 ```
 
 ## Parameters

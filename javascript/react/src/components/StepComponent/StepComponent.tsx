@@ -19,7 +19,7 @@ import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 
 import { useColumnNames } from '../../hooks/columns/useColumnNames.js'
-import { useDataTable } from '../../hooks/useDataTable.js'
+import { useWorkflowDataTable } from '../../hooks/index.js'
 import { useSimpleDropdownOptions } from '../../hooks/useSimpleDropdownOptions.js'
 import { useTableDropdownOptions } from '../../hooks/useTableDropdownOptions.js'
 import { dropdownStyles } from '../../styles.js'
@@ -64,7 +64,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 	}) {
 		/* Current Table Selection */
 		const tableId = s.input[NodeInput.Source]?.node
-		const table = useDataTable(tableId, g)
+		const table = useWorkflowDataTable(tableId, g)
 
 		/* Table Options */
 		const tableOptions = useTableDropdownOptions(g)
