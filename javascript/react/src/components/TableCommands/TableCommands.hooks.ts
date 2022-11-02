@@ -16,7 +16,6 @@ import upperFirst from 'lodash-es/upperFirst.js'
 import { useMemo } from 'react'
 
 import { useHeaderCommandBarDefaults } from '../../hooks/useHeaderCommandBarDefaults.js'
-import { getVerbIcon } from '../../verbIcons.js'
 import type { GroupedVerbs } from './TableCommands.types.js'
 import {
 	groupedColumnVerbs,
@@ -24,6 +23,7 @@ import {
 	mainColumnVerbs,
 	mainTableVerbs,
 } from './TableCommands.utils.js'
+import { getVerbIcon } from './verbIcons.js'
 
 function getOverflowVerbItems(
 	onCallStep: (
