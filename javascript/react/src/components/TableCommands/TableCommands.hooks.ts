@@ -4,6 +4,7 @@
  */
 
 import { Verb } from '@datashaper/schema'
+import type { Step } from '@datashaper/workflow'
 import type {
 	ICommandBarItemProps,
 	ICommandBarProps,
@@ -13,9 +14,14 @@ import { ContextualMenuItemType, VerticalDivider } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import uniqueId from 'lodash-es/uniqueId.js'
 import upperFirst from 'lodash-es/upperFirst.js'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 
-import { useHeaderCommandBarDefaults } from '../../hooks/index.js'
+import type {
+	ModalState} from '../../hooks/index.js';
+import {
+	useHeaderCommandBarDefaults,
+	useModalState,
+} from '../../hooks/index.js'
 import type { GroupedVerbs } from './TableCommands.types.js'
 import {
 	groupedColumnVerbs,
@@ -175,6 +181,17 @@ export function useUndoCommands(
 		[onUndoStep, disabled, baseProps],
 	)
 	return useHeaderCommandBarDefaults(base, false, { color, background })
+}
+
+export function useTransformModalState(
+	setStep: (step: Step | undefined) => void,
+	setStepIndex: (index: number | undefined) => void,
+): ModalState {
+	const onDismiss = useCallback(() => {
+		setStep(undefined)
+		setStepIndex(undefined)
+	}, [setStep, setStepIndex])
+	return useModalState(undefined, onDismiss)
 }
 
 const icons = {

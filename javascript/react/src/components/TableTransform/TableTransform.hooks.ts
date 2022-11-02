@@ -8,7 +8,7 @@ import { readStep } from '@datashaper/workflow'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import {
-	useFormattedColumnArg,
+	useOnSetStepColumnArg,
 	useSuggestedTableName,
 } from '../../hooks/index.js'
 
@@ -33,7 +33,7 @@ export function useInternalTableStep(
 	setInternal: (step?: Step) => void
 } {
 	const [internal, setInternal] = useState<Step | undefined>()
-	const formattedColumnArg = useFormattedColumnArg()
+	const formattedColumnArg = useOnSetStepColumnArg()
 
 	useEffect(() => {
 		if (step) {

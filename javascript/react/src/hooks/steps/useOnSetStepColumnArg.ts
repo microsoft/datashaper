@@ -5,17 +5,15 @@
 import isArray from 'lodash-es/isArray.js'
 import { useCallback } from 'react'
 
-export function useFormattedColumnArg(): (
+export function useOnSetStepColumnArg(): (
 	stepArgs: unknown,
 	newName?: string,
 ) => object {
 	return useCallback((stepArgs: unknown, newName = 'New column') => {
 		const args = stepArgs as Record<string, unknown>
-		Object.keys(args).forEach(key => {
-			if (key === 'to' && !isArray(args[key])) {
-				args[key] = newName
-			}
-		})
+		if (args['to'] && !isArray(args['to'])) {
+			args['to'] = newName
+		}
 		return args
 	}, [])
 }

@@ -6802,51 +6802,6 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/react!useInputTableNames:function(1)",
-          "docComment": "/**\n * Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created *prior* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results.\n *\n * @param workflow - \n *\n * @returns \n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useInputTableNames(workflow?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Workflow",
-              "canonicalReference": "@datashaper/workflow!Workflow:class"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "string[]"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 4
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "workflow",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "useInputTableNames"
-        },
-        {
-          "kind": "Function",
           "canonicalReference": "@datashaper/react!useOnCreateStep:function(1)",
           "docComment": "",
           "excerptTokens": [
@@ -8073,6 +8028,51 @@
             }
           ],
           "name": "useWorkflowDataTable"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useWorkflowInputTableNames:function(1)",
+          "docComment": "/**\n * Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created *prior* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results.\n *\n * @param workflow - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useWorkflowInputTableNames(workflow?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Workflow",
+              "canonicalReference": "@datashaper/workflow!Workflow:class"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "workflow",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useWorkflowInputTableNames"
         },
         {
           "kind": "Function",

@@ -13,11 +13,11 @@ import { memo, useCallback, useMemo, useState } from 'react'
 import { map } from 'rxjs'
 import styled from 'styled-components'
 
-import { useTransformModalState } from '../../hooks/useTransformModalState.js'
 import { useSuggestedTableName } from '../../hooks/workflow/useSuggestedTableName.js'
 import {
 	useColumnCommands,
 	useTableCommands,
+	useTransformModalState,
 	useUndoCommands,
 } from './TableCommands.hooks.js'
 import type { TableCommandsProps } from './TableCommands.types.js'

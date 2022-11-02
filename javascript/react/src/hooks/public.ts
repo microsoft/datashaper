@@ -4,7 +4,6 @@
  */
 export {
 	useHeaderCommandBarDefaults,
-	useInputTableNames,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnEditStep,
@@ -16,6 +15,7 @@ export {
 	useTableDropdownOptions,
 	useWorkflow,
 	useWorkflowDataTable,
+	useWorkflowInputTableNames,
 	useWorkflowListener,
 	useWorkflowOutputListener,
 	useWorkflowSteps,

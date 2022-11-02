@@ -6,8 +6,11 @@ import type { JoinArgs } from '@datashaper/schema'
 import { NodeInput } from '@datashaper/workflow'
 import { memo } from 'react'
 
-import { useColumnNames, useWorkflowDataTable } from '../../../hooks/index.js'
-import { useTableDropdownOptions } from '../../../hooks/useTableDropdownOptions.js'
+import {
+	useColumnNames,
+	useTableDropdownOptions,
+	useWorkflowDataTable,
+} from '../../../hooks/index.js'
 import type { StepComponentProps } from '../../../types.js'
 import { JoinBase } from './Join.base.js'
 

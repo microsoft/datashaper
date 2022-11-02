@@ -5,6 +5,7 @@
 export { useSuggestedTableName } from './useSuggestedTableName.js'
 export { useWorkflow } from './useWorkflow.js'
 export { useWorkflowDataTable } from './useWorkflowDataTable.js'
+export { useWorkflowInputTableNames } from './useWorkflowInputTableNames.js'
 export { useWorkflowListener } from './useWorkflowListener.js'
 export { useWorkflowOutputListener } from './useWorkflowOutputListener.js'
 export { useWorkflowSteps } from './useWorkflowSteps.js'

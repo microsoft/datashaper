@@ -28,7 +28,6 @@
 |  [useGroupHeaderRenderer(table, computedMetadata, groupHeaderFunction, lazyLoadGroups)](./react.usegroupheaderrenderer.md) | Overrides the default group header rendering so we can inject customization |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
 |  [useIncrementingColumnColorScale(meta)](./react.useincrementingcolumncolorscale.md) | Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table. |
-|  [useInputTableNames(workflow)](./react.useinputtablenames.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
 |  [useOnCreateStep(save, selectOutput, dismissModal)](./react.useoncreatestep.md) |  |
 |  [useOnDeleteStep(workflow)](./react.useondeletestep.md) |  |
 |  [useOnEditStep(setStep, setStepIndex, showTableModal)](./react.useoneditstep.md) | A hook to get the onEditStep callback |
@@ -47,6 +46,7 @@
 |  [useTableDropdownOptions(workflow)](./react.usetabledropdownoptions.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
 |  [useWorkflow(input, inputs)](./react.useworkflow.md) |  |
 |  [useWorkflowDataTable(id, workflow, existingTable)](./react.useworkflowdatatable.md) |  |
+|  [useWorkflowInputTableNames(workflow)](./react.useworkflowinputtablenames.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
 |  [useWorkflowListener(workflow, setWorkflow)](./react.useworkflowlistener.md) |  |
 |  [useWorkflowOutputListener(workflow, setOutput)](./react.useworkflowoutputlistener.md) |  |
 |  [useWorkflowSteps(workflow, order)](./react.useworkflowsteps.md) | Gets the workflow processing steps |

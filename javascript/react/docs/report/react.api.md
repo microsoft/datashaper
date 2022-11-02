@@ -571,11 +571,6 @@ export function useHeaderCommandBarDefaults(props?: Partial<ICommandBarProps>, f
 // @public
 export function useIncrementingColumnColorScale(meta?: TableMetadata): () => string;
 
-// Warning: (ae-missing-release-tag) "useInputTableNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useInputTableNames(workflow?: Workflow): string[];
-
 // Warning: (ae-missing-release-tag) "useOnCreateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -665,6 +660,11 @@ export function useWorkflow(input?: Workflow | undefined, inputs?: TableContaine
 //
 // @public (undocumented)
 export function useWorkflowDataTable(id: string | undefined, workflow?: Workflow, existingTable?: ColumnTable): ColumnTable | undefined;
+
+// Warning: (ae-missing-release-tag) "useWorkflowInputTableNames" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useWorkflowInputTableNames(workflow?: Workflow): string[];
 
 // Warning: (ae-missing-release-tag) "useWorkflowListener" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
