@@ -42,6 +42,9 @@ jobs:
       - run: yarn install
         name: Install Dependencies
 
+      - run: yarn generate:versions
+        name: Versions
+
       - run: yarn build
         name: Build
 

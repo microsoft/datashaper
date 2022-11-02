@@ -6,6 +6,7 @@
 		"_cut_schema": "yarn node scripts/release-schema.mjs",
 		"_version_cut": "yarn version apply --all",
 		"_copy_versions": "yarn node scripts/copy-schemas.mjs",
+		"generate:versions": "yarn node scripts/create_versions_file.mjs",
 		"preinstall": "npx only-allow yarn",
 		"postinstall": "husky install",
 		"clean": "turbo run clean --parallel",
