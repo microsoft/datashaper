@@ -8,7 +8,7 @@ import { Workflow } from '@datashaper/workflow'
 import { memo, useMemo } from 'react'
 
 import { DisplayOrder } from '../../../../enums.js'
-import { useWorkflow } from '../../../../hooks/steps/useOnSetStepColumnArg.js'
+import { useWorkflow } from '../../../../hooks/index.js'
 import { useOnStepOutputChanged } from '../../../../hooks/steps/useOnStepOutputChanged.js'
 import { useOnStepSave } from '../../../../hooks/steps/useOnStepSave.js'
 import { useStepOutputs } from '../../../../hooks/steps/useStepOutputs.js'
