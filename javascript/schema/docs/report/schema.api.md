@@ -344,6 +344,28 @@ export interface EraseArgs extends InputColumnArgs {
     value: Value;
 }
 
+// Warning: (ae-missing-release-tag) "ErrorCode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum ErrorCode {
+    // (undocumented)
+    Enum = "enum",
+    // (undocumented)
+    Maximum = "maximum length",
+    // (undocumented)
+    MaxLength = "max length",
+    // (undocumented)
+    Minimum = "minimum length",
+    // (undocumented)
+    MinLength = "min length",
+    // (undocumented)
+    Pattern = "pattern",
+    // (undocumented)
+    Required = "required",
+    // (undocumented)
+    Unique = "unique"
+}
+
 // Warning: (ae-missing-release-tag) "FactoryInput" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -418,6 +440,18 @@ export enum FieldAggregateOperation {
     Valid = "valid",
     // (undocumented)
     Variance = "variance"
+}
+
+// Warning: (ae-missing-release-tag) "FieldError" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FieldError {
+    // (undocumented)
+    indexes?: number[];
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    rule: ErrorCode;
 }
 
 // Warning: (ae-missing-release-tag) "FieldMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -991,6 +1025,26 @@ export interface UnhotArgs extends InputColumnListArgs, OutputColumnArgs {
 //
 // @public (undocumented)
 export type UnrollArgs = InputColumnListArgs;
+
+// Warning: (ae-missing-release-tag) "ValidationResult" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ValidationResult {
+    // (undocumented)
+    errors: FieldError[];
+}
+
+// Warning: (ae-missing-release-tag) "ValidationTestResult" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ValidationTestResult {
+    // (undocumented)
+    fail: boolean;
+    // (undocumented)
+    indexes: number[];
+    // (undocumented)
+    rule: ErrorCode;
+}
 
 // Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

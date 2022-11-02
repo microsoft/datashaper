@@ -4093,6 +4093,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepHistoryListProps#selectedKey:member",
+              "docComment": "/**\n * Id of the selected step\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "selectedKey?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "selectedKey",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!StepHistoryListProps#showSelectButtons:member",
               "docComment": "/**\n * Indicates whether the original/latest buttons will be shown. Note that they will have no effect if you do not supply an onSelect handler too.\n */\n",
               "excerptTokens": [

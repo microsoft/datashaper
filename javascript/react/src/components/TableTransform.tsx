@@ -108,20 +108,24 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 						<ButtonContainer>
 							<Flex>
 								<SaveButtonWrapper>
-									<ActionButton
-										onClick={handleSaveClick}
-										iconProps={icons.checkMark}
-										disabled={disableSave}
-									>
-										Save
-									</ActionButton>
+									{handleSaveClick ? (
+										<ActionButton
+											onClick={handleSaveClick}
+											iconProps={icons.checkMark}
+											disabled={disableSave}
+										>
+											Save
+										</ActionButton>
+									) : null}
 								</SaveButtonWrapper>
 							</Flex>
 							{onDelete ? (
-								<IconButton
+								<ActionButton
 									onClick={() => onDelete(index)}
 									iconProps={icons.delete}
-								/>
+								>
+									Delete
+								</ActionButton>
 							) : null}
 						</ButtonContainer>
 					</>

@@ -4,10 +4,12 @@
  */
 
 import type { Step } from '@datashaper/workflow'
+import { isNoArgsStep } from '@datashaper/workflow'
 import { CollapsiblePanel, DialogConfirm } from '@essex/components'
 import { DefaultButton, useTheme } from '@fluentui/react'
 import { memo } from 'react'
 
+import { DisplayOrder } from '../enums.js'
 import { useWorkflowSteps } from '../hooks/useWorkflowSteps.js'
 import { StepHeader } from './internal/StepHeader.js'
 import type { StepHeaderStyles } from './internal/StepHeader.types.js'
@@ -25,13 +27,14 @@ import { getCollapsiblePanelStyles } from './StepHistoryList.utils.js'
 import { TableTransform } from './TableTransform.js'
 
 export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
-	function StepsList({
+	function StepHistoryList({
 		workflow,
 		showSelectButtons = true,
-		order,
+		order = DisplayOrder.FirstOnTop,
 		onDelete,
 		onSelect,
 		onSave,
+		selectedKey,
 		styles,
 	}) {
 		const theme = useTheme()
@@ -47,7 +50,6 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 
 		const { onSelectOriginalTable, onSelectLatest } = useTableHandlers(
 			workflow,
-			steps,
 			order,
 			onSelect,
 		)
@@ -89,13 +91,22 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 				<StepsContainer style={styles?.stepsContainer}>
 					{steps.map(step => {
 						const stepIndex = workflow.steps.findIndex(s => s.id === step.id)
+						const handleSave =
+							isNoArgsStep(step) || !onSave
+								? undefined
+								: (s: Step) => onSave(s, stepIndex)
 						return (
 							<CollapsiblePanel
 								key={step.id}
 								styles={collapsiblePanelStyles}
 								onHeaderClick={() => onSelect?.(step.id)}
 								onRenderHeader={() =>
-									onRenderHeader(step, stepIndex, styles?.stepHeaders)
+									onRenderHeader(
+										step,
+										stepIndex,
+										selectedKey === step.id,
+										styles?.stepHeaders,
+									)
 								}
 							>
 								<TableTransform
@@ -106,7 +117,7 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 									workflow={workflow}
 									style={tableTransformStyle}
 									onDelete={onDeleteClicked}
-									onTransformRequested={s => onSave?.(s, stepIndex)}
+									onTransformRequested={handleSave}
 									hideStepSelector
 								/>
 							</CollapsiblePanel>
@@ -121,7 +132,10 @@ export const StepHistoryList: React.FC<StepHistoryListProps> = memo(
 function onRenderHeader(
 	step: Step,
 	index: number,
+	selected = false,
 	styles?: StepHeaderStyles,
 ): JSX.Element {
-	return <StepHeader step={step} index={index} styles={styles} />
+	return (
+		<StepHeader step={step} index={index} selected={selected} styles={styles} />
+	)
 }

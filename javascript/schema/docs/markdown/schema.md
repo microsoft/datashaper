@@ -17,6 +17,7 @@
 |  [DataOrientation](./schema.dataorientation.md) | <p>Indicates the orientation of the data within the file.</p><p>Most CSV data files are 'values' (row-oriented).</p><p>JSON files can commonly be either. Records are probably more common, though require more space due to replication of keys. Apache Arrow or Parquet are columnar. This nearly aligns with pandas: https://pandas.pydata.org/pandas-docs/stable/user\_guide/io.html\#json</p><p>A key difference (which probably needs resolved) is that we don't yet support the notion of an index. See their example for "columns" or "index" orientation, which is a nested structure.</p><p>Example JSON formats: values: \[ \["colA", "colB"\], \["valueA1", "valueA2"\], \["valueA2", "valueB2"\] \] records: \[{ colA: valueA1, colB: valueB1 }<!-- -->, { colA: valueA2, colB: valueB2 }<!-- -->\] columnar: { colA: \[valueA1, valueA2\], colB: \[valueB1, valueB2\] }</p> |
 |  [DataType](./schema.datatype.md) | Explicit data type of the value (i.e., for a column or property). TODO: clarify/update null/undefined |
 |  [DateComparisonOperator](./schema.datecomparisonoperator.md) |  |
+|  [ErrorCode](./schema.errorcode.md) |  |
 |  [FieldAggregateOperation](./schema.fieldaggregateoperation.md) | This is the subset of aggregate functions that can operate on a single field so we don't accommodate additional args. See https://uwdata.github.io/arquero/api/op\#aggregate-functions |
 |  [FilterCompareType](./schema.filtercomparetype.md) |  |
 |  [JoinStrategy](./schema.joinstrategy.md) |  |
@@ -65,6 +66,7 @@
 |  [EraseArgs](./schema.eraseargs.md) |  |
 |  [FetchArgs](./schema.fetchargs.md) |  |
 |  [Field](./schema.field.md) | Contains the full schema definition and metadata for a data field (usually a table column). This includes the required data type, various data nature and rendering properties, potential validation rules, and mappings from a data dictionary. |
+|  [FieldError](./schema.fielderror.md) |  |
 |  [FieldMetadata](./schema.fieldmetadata.md) | Holds core metadata/stats for a data field. |
 |  [FillArgs](./schema.fillargs.md) |  |
 |  [FilterArgs](./schema.filterargs.md) |  |
@@ -94,6 +96,8 @@
 |  [StepJsonCommon](./schema.stepjsoncommon.md) | Common step properties |
 |  [TypeHints](./schema.typehints.md) | Configuration values for interpreting data types when parsing a delimited file. By default, all values are read as strings - applying these type hints can derive primitive types from the strings. |
 |  [UnhotArgs](./schema.unhotargs.md) |  |
+|  [ValidationResult](./schema.validationresult.md) |  |
+|  [ValidationTestResult](./schema.validationtestresult.md) |  |
 |  [VariadicInput](./schema.variadicinput.md) | Multi-input, single output step I/O |
 |  [WindowArgs](./schema.windowargs.md) |  |
 |  [WorkflowSchema](./schema.workflowschema.md) | The root wrangling workflow specification. resource profile: 'workflow' |

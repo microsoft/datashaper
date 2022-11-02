@@ -12,12 +12,13 @@ import { useCreateTableId, useFormattedColumnArg } from '../hooks/index.js'
 export function useHandleSaveClick(
 	step: Step | undefined,
 	onTransformRequested?: (step: Step) => void,
-): () => void {
-	return useCallback(() => {
+): (() => void) | undefined {
+	const save = useCallback(() => {
 		if (step) {
 			onTransformRequested?.(step)
 		}
 	}, [onTransformRequested, step])
+	return onTransformRequested ? save : undefined
 }
 
 export function useInternalTableStep(

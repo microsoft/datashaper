@@ -1,7 +1,6 @@
 import { Verb } from '@datashaper/schema'
 import type { TableContainer } from '@datashaper/tables'
 import { table } from 'arquero'
-import { from } from 'rxjs'
 
 import { Workflow } from '../Workflow.js'
 
@@ -125,7 +124,7 @@ describe('The Workflow Resource', () => {
 
 	it('will pipe through default input of no steps are defined', () => {
 		const wf = new Workflow()
-		wf.defaultInput = from([tInput])
+		wf.defaultInput = tInput
 		const output = wf.read()
 		expect(output).toBeDefined()
 		expect(output?.table).toBeDefined()
@@ -153,7 +152,7 @@ describe('The Workflow Resource', () => {
 				value: 'x',
 			},
 		})
-		wf.defaultInput = from([tInput])
+		wf.defaultInput = tInput
 		const output = wf.read()
 		expect(output).toBeDefined()
 		expect(output?.table).toBeDefined()
@@ -181,7 +180,7 @@ describe('The Workflow Resource', () => {
 			},
 		})
 		wf.addOutput('intermediate')
-		wf.defaultInput = from([tInput])
+		wf.defaultInput = tInput
 		let val: TableContainer | undefined
 		binRead.subscribe(v => (val = v))
 		expect(val).toBeDefined()
@@ -211,7 +210,7 @@ describe('The Workflow Resource', () => {
 				value: 'x',
 			},
 		})
-		wf.defaultInput = from([tInput])
+		wf.defaultInput = tInput
 
 		wf.addOutput('intermediate')
 		const intermediateRead = wf.read$('intermediate')
@@ -249,7 +248,7 @@ describe('The Workflow Resource', () => {
 	it('emits a default tablecontainer with id = name', () => {
 		const wf = new Workflow()
 		wf.name = 'wf_output'
-		wf.defaultInput = from([tInput])
+		wf.defaultInput = tInput
 
 		const table = wf.read()
 		expect(table?.id).toBe('wf_output')

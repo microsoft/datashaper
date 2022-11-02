@@ -353,6 +353,7 @@ export interface StepHistoryListProps {
     onSelect?: (name: string) => void;
     // (undocumented)
     order?: DisplayOrder;
+    selectedKey?: string;
     showSelectButtons?: boolean;
     // Warning: (ae-forgotten-export) The symbol "StepHistoryStyles" needs to be exported by the entry point index.d.ts
     //

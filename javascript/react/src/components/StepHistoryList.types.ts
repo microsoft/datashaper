@@ -23,6 +23,10 @@ export interface StepHistoryListProps {
 	 * Note that they will have no effect if you do not supply an onSelect handler too.
 	 */
 	showSelectButtons?: boolean
+	/**
+	 * Id of the selected step
+	 */
+	selectedKey?: string
 	onDelete?: (index: number) => void
 	onSelect?: (name: string) => void
 	onSave?: (step: Step, index?: number) => void

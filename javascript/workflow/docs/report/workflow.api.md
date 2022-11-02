@@ -409,6 +409,11 @@ export function isInputTableListStep(step: Step): boolean;
 // @public
 export function isInputTableStep(step: Step): boolean;
 
+// Warning: (ae-missing-release-tag) "isNoArgsStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function isNoArgsStep(step: Step): boolean;
+
 // Warning: (ae-missing-release-tag) "isNumericInputStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -799,7 +804,11 @@ export class Workflow extends Resource implements SchemaResource<WorkflowSchema>
     get allTableNames$(): Observable<string[]>;
     get allTableNames(): string[];
     // (undocumented)
-    set defaultInput(source: TableObservable);
+    get defaultInput$(): TableObservable;
+    set defaultInput$(source: TableObservable);
+    // (undocumented)
+    get defaultInput(): Maybe<TableContainer>;
+    set defaultInput(source: Maybe<TableContainer>);
     // (undocumented)
     dispose(): void;
     // (undocumented)
