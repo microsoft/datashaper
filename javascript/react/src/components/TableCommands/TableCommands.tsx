@@ -13,7 +13,7 @@ import { memo, useCallback, useMemo, useState } from 'react'
 import { map } from 'rxjs'
 import styled from 'styled-components'
 
-import { useSuggestedTableName } from '../../hooks/workflow/useSuggestedTableName.js'
+import { useSuggestedTableName } from '../../hooks/tables/useSuggestedTableName.js'
 import {
 	useColumnCommands,
 	useTableCommands,

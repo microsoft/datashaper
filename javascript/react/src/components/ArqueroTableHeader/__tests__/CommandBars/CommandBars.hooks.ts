@@ -5,7 +5,7 @@
 import type { ICheckboxProps, ICommandBarProps } from '@fluentui/react'
 import { useMemo, useState } from 'react'
 
-import { useHeaderCommandBarDefaults } from '../../../../hooks/useHeaderCommandBarDefaults.js'
+import { useHeaderCommandBarDefaults } from '../../../../hooks/index.js'
 
 export function useCheckboxes(): {
 	near: boolean
