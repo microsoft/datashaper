@@ -50,6 +50,22 @@
 |  [stats(table, columns)](./tables.stats.md) | Generates detailed column stats for a table. |
 |  [typeGuesserFactory(options)](./tables.typeguesserfactory.md) |  |
 |  [unapplyCodebook(table, codebook, strategy, dataTableSchema)](./tables.unapplycodebook.md) |  |
+|  [validateEnum(enumList)](./tables.validateenum.md) |  |
+|  [validateEnumConstraint(enumList)](./tables.validateenumconstraint.md) |  |
+|  [validateMaximum(maximum, dataType)](./tables.validatemaximum.md) |  |
+|  [validateMaximumConstraint(maximum, dataType)](./tables.validatemaximumconstraint.md) |  |
+|  [validateMaxLength(maxLength)](./tables.validatemaxlength.md) |  |
+|  [validateMaxLengthConstraint(maxLength, dataType)](./tables.validatemaxlengthconstraint.md) |  |
+|  [validateMinimum(minimum, dataType)](./tables.validateminimum.md) |  |
+|  [validateMinimumConstraint(minimum, dataType)](./tables.validateminimumconstraint.md) |  |
+|  [validateMinLength(minLength)](./tables.validateminlength.md) |  |
+|  [validateMinLengthConstraint(minLength, dataType)](./tables.validateminlengthconstraint.md) |  |
+|  [validatePattern(pattern)](./tables.validatepattern.md) |  |
+|  [validatePatternConstraint(pattern)](./tables.validatepatternconstraint.md) |  |
+|  [validateRequired(element)](./tables.validaterequired.md) |  |
+|  [validateRequiredConstraint()](./tables.validaterequiredconstraint.md) |  |
+|  [validateTable(table, codebook, includeInstances)](./tables.validatetable.md) |  |
+|  [validateUniqueConstraint()](./tables.validateuniqueconstraint.md) |  |
 
 ## Interfaces
 

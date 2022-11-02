@@ -3510,6 +3510,190 @@
           ]
         },
         {
+          "kind": "Enum",
+          "canonicalReference": "@datashaper/schema!ErrorCode:enum",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum ErrorCode "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ErrorCode",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ErrorCode.Enum:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Enum = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"enum\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Enum"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ErrorCode.Maximum:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Maximum = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"maximum length\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Maximum"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ErrorCode.MaxLength:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "MaxLength = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"max length\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "MaxLength"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ErrorCode.Minimum:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Minimum = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"minimum length\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Minimum"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ErrorCode.MinLength:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "MinLength = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"min length\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "MinLength"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ErrorCode.Pattern:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Pattern = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"pattern\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Pattern"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ErrorCode.Required:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Required = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"required\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Required"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@datashaper/schema!ErrorCode.Unique:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "Unique = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"unique\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "Unique"
+            }
+          ]
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/schema!FactoryInput:type",
           "docComment": "",
@@ -4426,6 +4610,105 @@
               "name": "Variance"
             }
           ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!FieldError:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface FieldError "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "FieldError",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!FieldError#indexes:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "indexes?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "indexes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!FieldError#name:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "name",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!FieldError#rule:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "rule: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ErrorCode",
+                  "canonicalReference": "@datashaper/schema!ErrorCode:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "rule",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -9615,6 +9898,154 @@
             "startIndex": 1,
             "endIndex": 2
           }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!ValidationResult:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ValidationResult "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ValidationResult",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!ValidationResult#errors:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "errors: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FieldError",
+                  "canonicalReference": "@datashaper/schema!FieldError:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "errors",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/schema!ValidationTestResult:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ValidationTestResult "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ValidationTestResult",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!ValidationTestResult#fail:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fail: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "fail",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!ValidationTestResult#indexes:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "indexes: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "indexes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!ValidationTestResult#rule:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "rule: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ErrorCode",
+                  "canonicalReference": "@datashaper/schema!ErrorCode:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "rule",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "TypeAlias",
