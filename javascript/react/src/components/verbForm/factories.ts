@@ -13,12 +13,10 @@ import {
 	getRightColumn,
 	getSimpleDropdownOptions,
 } from '../../hooks/index.js'
-import type {
-	CheckboxFormInput,
-	FormInput,
-	SingleChoiceFormInput,
-} from './VerbForm.js'
-import { FormInputType } from './VerbForm.js'
+import type { CheckboxFormInput } from './CheckboxInput.types.js'
+import type { SingleChoiceFormInput } from './SingleChoiceInput.types.js'
+import type { FormInput} from './types.js';
+import { FormInputType } from './types.js'
 
 export function inputColumnList(
 	step: Step<InputColumnListArgs>,

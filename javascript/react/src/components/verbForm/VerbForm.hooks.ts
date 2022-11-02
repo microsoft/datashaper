@@ -4,7 +4,7 @@
  */
 import { useCallback, useMemo, useState } from 'react'
 
-import type { FormInput } from './VerbForm.js'
+import type { FormInput } from './types.js'
 
 /**
  * Sort the inputs into regular and advanced groups

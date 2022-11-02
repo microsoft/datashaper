@@ -6,8 +6,11 @@ import type { SpreadArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../../../types.js'
-import type { FormInput } from '../../verbForm/VerbForm.js'
-import { FormInputType, VerbForm } from '../../verbForm/VerbForm.js'
+import {
+	type FormInput,
+	FormInputType,
+	VerbForm,
+} from '../../verbForm/index.js'
 
 /**
  * Provides inputs for a Spread step.

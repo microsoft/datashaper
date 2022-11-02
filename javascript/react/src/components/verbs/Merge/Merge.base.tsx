@@ -7,9 +7,12 @@ import { MergeStrategy } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../../../types.js'
-import type { FormInput } from '../../verbForm/VerbForm.js'
-import { FormInputType, VerbForm } from '../../verbForm/VerbForm.js'
-import { enumDropdown } from '../../verbForm/VerbFormFactories.js'
+import {
+	type FormInput,
+	enumDropdown,
+	FormInputType,
+	VerbForm,
+} from '../../verbForm/index.js'
 
 /**
  * Just the to/value inputs for an impute.

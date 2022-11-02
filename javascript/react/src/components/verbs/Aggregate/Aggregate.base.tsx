@@ -7,9 +7,12 @@ import { FieldAggregateOperation } from '@datashaper/schema'
 import { useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../../../types.js'
-import type { FormInput } from '../../verbForm/VerbForm.js'
-import { VerbForm } from '../../verbForm/VerbForm.js'
-import { dropdown, enumDropdown } from '../../verbForm/VerbFormFactories.js'
+import {
+	type FormInput,
+	dropdown,
+	enumDropdown,
+	VerbForm,
+} from '../../verbForm/index.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

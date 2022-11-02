@@ -8,9 +8,13 @@ import { num } from '@datashaper/utilities'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../../../types.js'
-import type { FormInput } from '../../verbForm/VerbForm.js'
-import { FormInputType, VerbForm } from '../../verbForm/VerbForm.js'
-import { checkbox, enumDropdown } from '../../verbForm/VerbFormFactories.js'
+import {
+	type FormInput,
+	checkbox,
+	enumDropdown,
+	FormInputType,
+	VerbForm,
+} from '../../verbForm/index.js'
 
 /**
  * Provides inputs for a binning step.

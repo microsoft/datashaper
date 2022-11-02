@@ -7,9 +7,7 @@ import { WindowFunction } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentProps } from '../../../types.js'
-import type { FormInput } from '../../verbForm/VerbForm.js'
-import { VerbForm } from '../../verbForm/VerbForm.js'
-import { enumDropdown } from '../../verbForm/VerbFormFactories.js'
+import { type FormInput, enumDropdown,VerbForm } from '../../verbForm/index.js'
 
 /**
  * Just the column/op inputs for an rollup.

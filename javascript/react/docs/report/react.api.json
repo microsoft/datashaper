@@ -1181,6 +1181,58 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/react!CheckboxChangeHandler:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type CheckboxChangeHandler = "
+            },
+            {
+              "kind": "Content",
+              "text": "(event?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FormEvent",
+              "canonicalReference": "@types/react!~React.FormEvent:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLInputElement",
+              "canonicalReference": "!HTMLInputElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">, checked?: boolean) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CheckboxChangeHandler",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          }
+        },
+        {
           "kind": "Function",
           "canonicalReference": "@datashaper/react!checkedItemsCommand:function(1)",
           "docComment": "/**\n * Constructs a command for listing out items with checks\n *\n * @param list - full list of items to display\n *\n * @param checked - subset of items to display with checkbox\n *\n * @param onCheckChange - \n *\n * @param props - any override ICommandBarItemProps to overlay on the command\n *\n * @returns \n */\n",
@@ -1716,6 +1768,83 @@
           "typeTokenRange": {
             "startIndex": 1,
             "endIndex": 4
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/react!ComboBoxChangeHandler:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type ComboBoxChangeHandler = "
+            },
+            {
+              "kind": "Content",
+              "text": "(event: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FormEvent",
+              "canonicalReference": "@types/react!~React.FormEvent:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "IComboBox",
+              "canonicalReference": "@fluentui/react!IComboBox:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">, option: "
+            },
+            {
+              "kind": "Reference",
+              "text": "IComboBoxOption",
+              "canonicalReference": "@fluentui/react!IComboBoxOption:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined, index: number | undefined, value?: string | undefined) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ComboBoxChangeHandler",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/react!ComboBoxInputValueChangeHandler:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type ComboBoxInputValueChangeHandler = "
+            },
+            {
+              "kind": "Content",
+              "text": "(value?: string | undefined) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ComboBoxInputValueChangeHandler",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
           }
         },
         {
@@ -2433,6 +2562,128 @@
         },
         {
           "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/react!DropdownChangeAllHandler:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type DropdownChangeAllHandler = "
+            },
+            {
+              "kind": "Content",
+              "text": "(event: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.MouseEvent",
+              "canonicalReference": "@types/react!~React.MouseEvent:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLAnchorElement",
+              "canonicalReference": "!HTMLAnchorElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLButtonElement",
+              "canonicalReference": "!HTMLButtonElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">, options?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "IDropdownOption",
+              "canonicalReference": "@fluentui/react!IDropdownOption:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DropdownChangeAllHandler",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 12
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/react!DropdownChangeHandler:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type DropdownChangeHandler = "
+            },
+            {
+              "kind": "Content",
+              "text": "(event: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FormEvent",
+              "canonicalReference": "@types/react!~React.FormEvent:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLDivElement",
+              "canonicalReference": "!HTMLDivElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">, option?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "IDropdownOption",
+              "canonicalReference": "@fluentui/react!IDropdownOption:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", index?: number) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DropdownChangeHandler",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          }
+        },
+        {
+          "kind": "TypeAlias",
           "canonicalReference": "@datashaper/react!DropdownOptionSelect:type",
           "docComment": "",
           "excerptTokens": [
@@ -2482,6 +2733,171 @@
             "startIndex": 1,
             "endIndex": 8
           }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!getLeftColumn:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function getLeftColumn(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "JoinArgs",
+              "canonicalReference": "@datashaper/schema!JoinArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "getLeftColumn"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!getRightColumn:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function getRightColumn(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "JoinArgs",
+              "canonicalReference": "@datashaper/schema!JoinArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "getRightColumn"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!getSimpleDropdownOptions:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function getSimpleDropdownOptions(list: "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IDropdownOption",
+              "canonicalReference": "@fluentui/react!IDropdownOption:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "list",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "getSimpleDropdownOptions"
         },
         {
           "kind": "TypeAlias",
@@ -2745,6 +3161,134 @@
           }
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/react!ModalState:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ModalState "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ModalState",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@datashaper/react!ModalState#hide:member(1)",
+              "docComment": "/**\n * A callback to hide the modal\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hide(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "hide"
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ModalState#isOpen:member",
+              "docComment": "/**\n * Whether the modal is open or not\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isOpen: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isOpen",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@datashaper/react!ModalState#show:member(1)",
+              "docComment": "/**\n * A callback to present the modal\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "show(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "show"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@datashaper/react!ModalState#toggle:member(1)",
+              "docComment": "/**\n * A callback to toggle modol visibility\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toggle(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "toggle"
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/react!SaveMetadataFunction:type",
           "docComment": "",
@@ -2941,6 +3485,49 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/react!SpinButtonChangeHandler:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type SpinButtonChangeHandler = "
+            },
+            {
+              "kind": "Content",
+              "text": "(event: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.SyntheticEvent",
+              "canonicalReference": "@types/react!~React.SyntheticEvent:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">, newValue?: string) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "SpinButtonChangeHandler",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 6
+          }
         },
         {
           "kind": "Enum",
@@ -5128,145 +5715,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!TableList:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableList: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TableListProps",
-              "canonicalReference": "@datashaper/react!TableListProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableList",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!TableListProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface TableListProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "TableListProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableListProps#onSelect:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onSelect?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(name: string) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onSelect",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableListProps#selected:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "selected?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "selected",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableListProps#tables:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "tables: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableContainer",
-                  "canonicalReference": "@datashaper/tables!TableContainer:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "tables",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
           "kind": "Function",
           "canonicalReference": "@datashaper/react!tableMenuCommand:function(1)",
           "docComment": "/**\n * Displays a table name along with a dropdown menu for selection of different tables.\n *\n * @returns \n */\n",
@@ -5968,6 +6416,58 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/react!TextFieldChangeHandler:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type TextFieldChangeHandler = "
+            },
+            {
+              "kind": "Content",
+              "text": "(event: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.FormEvent",
+              "canonicalReference": "@types/react!~React.FormEvent:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLInputElement",
+              "canonicalReference": "!HTMLInputElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLTextAreaElement",
+              "canonicalReference": "!HTMLTextAreaElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">, newValue?: string) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "TextFieldChangeHandler",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
+          }
+        },
+        {
           "kind": "Function",
           "canonicalReference": "@datashaper/react!useCellDimensions:function(1)",
           "docComment": "",
@@ -6028,6 +6528,188 @@
             }
           ],
           "name": "useCellDimensions"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useCheckboxChangeHandler:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useCheckboxChangeHandler<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object | void | unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ">(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", updateFn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>, newValue: boolean | undefined) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StepChangeFunction",
+              "canonicalReference": "@datashaper/react!StepChangeFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "CheckboxChangeHandler",
+              "canonicalReference": "@datashaper/react!CheckboxChangeHandler:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 13,
+            "endIndex": 14
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "updateFn",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useCheckboxChangeHandler"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useColumnNames:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useColumnNames(table: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ", filter?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(name: string) => boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "table",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "filter",
+              "parameterTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useColumnNames"
         },
         {
           "kind": "Function",
@@ -6257,6 +6939,76 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/react!useColumnsMetadata:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useColumnsMetadata(table: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ", filter?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(name: string) => boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Field",
+              "canonicalReference": "@datashaper/schema!Field:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "table",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "filter",
+              "parameterTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useColumnsMetadata"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/react!useColumnStyles:function(1)",
           "docComment": "",
           "excerptTokens": [
@@ -6328,6 +7080,477 @@
             }
           ],
           "name": "useColumnStyles"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useColumnType:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useColumnType(table?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", column?: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "DataType",
+              "canonicalReference": "@datashaper/schema!DataType:enum"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "table",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "column",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useColumnType"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useColumnValueOptions:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useColumnValueOptions(column: "
+            },
+            {
+              "kind": "Content",
+              "text": "string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ", table: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ", values?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": "[]"
+            },
+            {
+              "kind": "Content",
+              "text": ", filter?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(value: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Value",
+              "canonicalReference": "@datashaper/schema!Value:type"
+            },
+            {
+              "kind": "Content",
+              "text": ") => boolean"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IDropdownOption",
+              "canonicalReference": "@fluentui/react!IDropdownOption:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 13,
+            "endIndex": 15
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "column",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "table",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "values",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "filter",
+              "parameterTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 12
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useColumnValueOptions"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useComboBoxChangeHandler:function(1)",
+          "docComment": "/**\n * Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useComboBoxChangeHandler<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object | void | unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ">(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", updateFn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>, optionKey: string | number | undefined, value: string | undefined) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StepChangeFunction",
+              "canonicalReference": "@datashaper/react!StepChangeFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ComboBoxChangeHandler",
+              "canonicalReference": "@datashaper/react!ComboBoxChangeHandler:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 13,
+            "endIndex": 14
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "updateFn",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useComboBoxChangeHandler"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useComboBoxInputValueChangeHandler:function(1)",
+          "docComment": "/**\n * Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useComboBoxInputValueChangeHandler<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object | void | unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ">(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", updateFn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>, value: string | undefined) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StepChangeFunction",
+              "canonicalReference": "@datashaper/react!StepChangeFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ComboBoxInputValueChangeHandler",
+              "canonicalReference": "@datashaper/react!ComboBoxInputValueChangeHandler:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 13,
+            "endIndex": 14
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "updateFn",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useComboBoxInputValueChangeHandler"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useCommandBarColorDefaults:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useCommandBarColorDefaults(colors?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Partial",
+              "canonicalReference": "!Partial:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "CommandBarColors",
+              "canonicalReference": "@datashaper/react!CommandBarColors:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "CommandBarColors",
+              "canonicalReference": "@datashaper/react!CommandBarColors:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "colors",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useCommandBarColorDefaults"
         },
         {
           "kind": "Function",
@@ -6480,6 +7703,240 @@
             }
           ],
           "name": "useDetailsListStyles"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useDropdownChangeAllHandler:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useDropdownChangeAllHandler<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object | void | unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ">(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", updateFn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>, optionKeys: (string | number)[]) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StepChangeFunction",
+              "canonicalReference": "@datashaper/react!StepChangeFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "DropdownChangeAllHandler",
+              "canonicalReference": "@datashaper/react!DropdownChangeAllHandler:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 13,
+            "endIndex": 14
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "updateFn",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useDropdownChangeAllHandler"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useDropdownChangeHandler:function(1)",
+          "docComment": "/**\n * Creates a callback handler for changing the step based on a dropdown value. This only handles basic cases where the dropdown option key can be set on the step using an object path.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useDropdownChangeHandler<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object | void | unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ">(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", updateFn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>, optionKey: string | number | undefined) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StepChangeFunction",
+              "canonicalReference": "@datashaper/react!StepChangeFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "DropdownChangeHandler",
+              "canonicalReference": "@datashaper/react!DropdownChangeHandler:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 13,
+            "endIndex": 14
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "updateFn",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useDropdownChangeHandler"
         },
         {
           "kind": "Function",
@@ -6802,6 +8259,125 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/react!useLeftColumn:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useLeftColumn(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "JoinArgs",
+              "canonicalReference": "@datashaper/schema!JoinArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useLeftColumn"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useModalState:function(1)",
+          "docComment": "/**\n * A hook to consolidate view-state for modals\n *\n * @param onHide - callback to be called when the modal is dismissed\n *\n * @returns The modal state\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useModalState(onShow?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(() => void) | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ", onHide?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(() => void) | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ModalState",
+              "canonicalReference": "@datashaper/react!ModalState:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "onShow",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "onHide",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useModalState"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/react!useOnCreateStep:function(1)",
           "docComment": "",
           "excerptTokens": [
@@ -6941,6 +8517,190 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/react!useOnDeleteStepColumn:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useOnDeleteStepColumn(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "InputColumnRecordArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnRecordArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StepChangeFunction",
+              "canonicalReference": "@datashaper/react!StepChangeFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "InputColumnRecordArgs",
+              "canonicalReference": "@datashaper/schema!InputColumnRecordArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(column: string) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 11,
+            "endIndex": 12
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 10
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useOnDeleteStepColumn"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useOnDuplicateStep:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useOnDuplicateStep(workflow: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Workflow",
+              "canonicalReference": "@datashaper/workflow!Workflow:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", table?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", onSave?: "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", output: string | undefined, index?: number) => void"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(_step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 9,
+            "endIndex": 12
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "workflow",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "table",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "onSave",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 8
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useOnDuplicateStep"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/react!useOnEditStep:function(1)",
           "docComment": "/**\n * A hook to get the onEditStep callback\n *\n * @param setStep - The step setter\n *\n * @param setStepIndex - The step-index setter\n *\n * @param showTableModal - A callback to show the table modal\n *\n * @returns \n */\n",
           "excerptTokens": [
@@ -7035,6 +8795,47 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/react!useOnResetStepArgs:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useOnResetStepArgs(): "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "useOnResetStepArgs"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/react!useOnSaveStep:function(1)",
           "docComment": "/**\n * @param workflow - The workflow\n *\n * @returns A callback to use when saving a step, either new or existing\n */\n",
           "excerptTokens": [
@@ -7086,6 +8887,33 @@
             }
           ],
           "name": "useOnSaveStep"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useOnSetStepColumnArg:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useOnSetStepColumnArg(): "
+            },
+            {
+              "kind": "Content",
+              "text": "(stepArgs: unknown, newName?: string) => object"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "useOnSetStepColumnArg"
         },
         {
           "kind": "Function",
@@ -7299,6 +9127,113 @@
             }
           ],
           "name": "useReifiedTable"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useRightColumn:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useRightColumn(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "JoinArgs",
+              "canonicalReference": "@datashaper/schema!JoinArgs:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useRightColumn"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useSimpleDropdownOptions:function(1)",
+          "docComment": "/**\n * Make a basic set of string options from an array\n *\n * @param list - \n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useSimpleDropdownOptions(list: "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "IDropdownOption",
+              "canonicalReference": "@fluentui/react!IDropdownOption:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "list",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useSimpleDropdownOptions"
         },
         {
           "kind": "Function",
@@ -7641,6 +9576,231 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/react!useSpinButtonChangeHandler:function(1)",
+          "docComment": "/**\n * Enforces numeric values for a SpinButton onChange.\n *\n * @param step - the step object\n *\n * @param updateFn - the update function\n *\n * @param onChange - the onchange handler\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useSpinButtonChangeHandler<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object | void | unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ">(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", updateFn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>, newValue: string | undefined) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StepChangeFunction",
+              "canonicalReference": "@datashaper/react!StepChangeFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "SpinButtonChangeHandler",
+              "canonicalReference": "@datashaper/react!SpinButtonChangeHandler:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 13,
+            "endIndex": 14
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "updateFn",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useSpinButtonChangeHandler"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useStepDataTable:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useStepDataTable(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", workflow: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Workflow",
+              "canonicalReference": "@datashaper/workflow!Workflow:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ", input?: "
+            },
+            {
+              "kind": "Content",
+              "text": "string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ", table?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 11,
+            "endIndex": 13
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "workflow",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "input",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "table",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 10
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useStepDataTable"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/react!useStepOutputs:function(1)",
           "docComment": "/**\n * create a parallel array of output names for the steps\n *\n * @param workflow - The workflow instance\n *\n * @returns \n */\n",
           "excerptTokens": [
@@ -7827,6 +9987,51 @@
         },
         {
           "kind": "Function",
+          "canonicalReference": "@datashaper/react!useSuggestedTableName:function(1)",
+          "docComment": "/**\n * Returns a hook to generate a new table name based on the given input e.g. \"join\" could result in \"join 1\" or \"join 2\" depending on how many collisions occur.\n *\n * @param workflow - the workflow instance\n *\n * @returns a safe output name to use\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useSuggestedTableName(workflow: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Workflow",
+              "canonicalReference": "@datashaper/workflow!Workflow:class"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(name: string) => string"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "workflow",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useSuggestedTableName"
+        },
+        {
+          "kind": "Function",
           "canonicalReference": "@datashaper/react!useTableDropdownOptions:function(1)",
           "docComment": "/**\n * Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created *prior* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results.\n *\n * @param workflow - \n *\n * @returns \n */\n",
           "excerptTokens": [
@@ -7874,6 +10079,123 @@
             }
           ],
           "name": "useTableDropdownOptions"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useTextFieldChangeHandler:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useTextFieldChangeHandler<T extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object | void | unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ">(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": ", updateFn: "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>, updated: string | undefined) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ", onChange?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "StepChangeFunction",
+              "canonicalReference": "@datashaper/react!StepChangeFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "TextFieldChangeHandler",
+              "canonicalReference": "@datashaper/react!TextFieldChangeHandler:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 13,
+            "endIndex": 14
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "step",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "updateFn",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "onChange",
+              "parameterTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "useTextFieldChangeHandler"
         },
         {
           "kind": "Function",

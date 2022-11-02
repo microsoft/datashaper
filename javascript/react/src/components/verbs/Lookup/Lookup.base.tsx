@@ -8,14 +8,13 @@ import type { IDropdownOption } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../../../types.js'
-import type { FormInput } from '../../verbForm/VerbForm.js'
-import { VerbForm } from '../../verbForm/VerbForm.js'
 import {
+	type FormInput,
 	inputColumnList,
 	joinInputs,
 	tableDropdown,
-} from '../../verbForm/VerbFormFactories.js'
-
+	VerbForm,
+} from '../../verbForm/index.js'
 /**
  * Provides inputs for a Lookup step.
  */

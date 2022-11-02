@@ -8,9 +8,12 @@ import { memo, useMemo } from 'react'
 
 import { useSimpleDropdownOptions } from '../../../hooks/index.js'
 import type { StepComponentBaseProps } from '../../../types.js'
-import type { FormInput } from '../../verbForm/VerbForm.js'
-import { FormInputType, VerbForm } from '../../verbForm/VerbForm.js'
-import { enumDropdown } from '../../verbForm/VerbFormFactories.js'
+import {
+	type FormInput,
+	enumDropdown,
+	FormInputType,
+	VerbForm,
+} from '../../verbForm/index.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.
