@@ -5,4 +5,4 @@
 
 export * from './components/index.js'
 export { DisplayOrder } from './enums.js'
-export * from './hooks/public.js'
+export * from './hooks/index.js'

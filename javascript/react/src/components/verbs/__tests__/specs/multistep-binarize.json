@@ -1,12 +1,14 @@
 {
-	"$schema": "../../../../../../schema/workflow.json",
+	"$schema": "../../../../../../../schema/workflow.json",
 	"name": "Multi-criteria binarize",
 	"description": "Use multiple criteria chained together to create a boolean condition OR for a single binarized output column.",
 	"steps": [
 		{
 			"id": "binarize",
 			"verb": "binarize",
-			"input": { "source": "companies" },
+			"input": {
+				"source": "companies"
+			},
 			"args": {
 				"column": "Employees",
 				"to": "Smallest and Largest",

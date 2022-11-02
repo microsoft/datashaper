@@ -1,5 +1,5 @@
 {
-	"$schema": "../../../../../../schema/workflow.json",
+	"$schema": "../../../../../../../schema/workflow.json",
 	"name": "Aggregated lookup",
 	"description": "Uses a multi-step aggregate and filter to do a custom lookup.",
 	"steps": [
@@ -17,7 +17,9 @@
 		{
 			"id": "filter-1",
 			"verb": "filter",
-			"input": { "source": "join-1" },
+			"input": {
+				"source": "join-1"
+			},
 			"args": {
 				"column": "FY21 Sales",
 				"criteria": [
@@ -32,7 +34,9 @@
 		{
 			"id": "aggregate-1",
 			"verb": "aggregate",
-			"input": { "source": "filter-1" },
+			"input": {
+				"source": "filter-1"
+			},
 			"args": {
 				"groupby": "ID",
 				"column": "FY21 Sales",

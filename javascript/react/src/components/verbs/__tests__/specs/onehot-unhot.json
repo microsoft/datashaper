@@ -1,12 +1,14 @@
 {
-	"$schema": "../../../../../../schema/workflow.json",
+	"$schema": "../../../../../../../schema/workflow.json",
 	"name": "Onehot-unhot",
 	"description": "Performs a onehot then unhot to demonstrate reversing the encoding.",
 	"steps": [
 		{
 			"id": "onehot",
 			"verb": "onehot",
-			"input": { "source": "companies2" },
+			"input": {
+				"source": "companies2"
+			},
 			"args": {
 				"column": "Name"
 			}
@@ -14,7 +16,9 @@
 		{
 			"id": "unhot",
 			"verb": "unhot",
-			"input": { "source": "onehot" },
+			"input": {
+				"source": "onehot"
+			},
 			"args": {
 				"columns": ["Microsoft", "Nokia"]
 			}

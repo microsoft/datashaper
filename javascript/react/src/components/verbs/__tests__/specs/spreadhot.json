@@ -1,12 +1,14 @@
 {
-	"$schema": "../../../../../../schema/workflow.json",
+	"$schema": "../../../../../../../schema/workflow.json",
 	"name": "Spread with onehot",
 	"description": "Demonstrates the spread verb with a onehot flag to encode as binary columns.",
 	"steps": [
 		{
 			"id": "spreadhot",
 			"verb": "spread",
-			"input": { "source": "companies2" },
+			"input": {
+				"source": "companies2"
+			},
 			"args": {
 				"column": "Array",
 				"delimiter": ";",

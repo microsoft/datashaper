@@ -1,12 +1,14 @@
 {
-	"$schema": "../../../../../../schema/workflow.json",
+	"$schema": "../../../../../../../schema/workflow.json",
 	"name": "Binning",
 	"description": "Shows how different binning strategies and clamping work.",
 	"steps": [
 		{
 			"id": "bin-1",
 			"verb": "bin",
-			"input": { "source": "products" },
+			"input": {
+				"source": "products"
+			},
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "auto",
@@ -16,7 +18,9 @@
 		{
 			"id": "bin-2",
 			"verb": "bin",
-			"input": { "source": "products" },
+			"input": {
+				"source": "products"
+			},
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
@@ -27,7 +31,9 @@
 		{
 			"id": "bin-3",
 			"verb": "bin",
-			"input": { "source": "products" },
+			"input": {
+				"source": "products"
+			},
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed count",
@@ -38,7 +44,9 @@
 		{
 			"id": "bin-4",
 			"verb": "bin",
-			"input": { "source": "products" },
+			"input": {
+				"source": "products"
+			},
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
@@ -51,7 +59,9 @@
 		{
 			"id": "bin-4-print",
 			"verb": "bin",
-			"input": { "source": "products" },
+			"input": {
+				"source": "products"
+			},
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
@@ -65,7 +75,9 @@
 		{
 			"id": "bin-5",
 			"verb": "bin",
-			"input": { "source": "products" },
+			"input": {
+				"source": "products"
+			},
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
@@ -79,7 +91,9 @@
 		{
 			"id": "bin-5-print",
 			"verb": "bin",
-			"input": { "source": "products" },
+			"input": {
+				"source": "products"
+			},
 			"args": {
 				"column": "FY21 Sales",
 				"strategy": "fixed width",
