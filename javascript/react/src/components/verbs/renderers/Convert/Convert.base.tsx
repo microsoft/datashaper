@@ -7,8 +7,8 @@ import { DataType, ParseType } from '@datashaper/schema'
 import { num } from '@datashaper/utilities'
 import { memo, useMemo } from 'react'
 
-import { getEnumDropdownOptions } from '../../../../enums.js'
 import { getDateFormatPatternOptions } from '../../../dateFormats.js'
+import { getEnumDropdownOptions } from '../../enums.js'
 import { type FormInput, FormInputType, VerbForm } from '../forms/index.js'
 import type { StepComponentBaseProps } from '../types.js'
 
