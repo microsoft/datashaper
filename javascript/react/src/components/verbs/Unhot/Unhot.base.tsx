@@ -6,11 +6,7 @@ import type { UnhotArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../../../types.js'
-import {
-	type FormInput,
-	FormInputType,
-	VerbForm,
-} from '../../verbForm/index.js'
+import { type FormInput, FormInputType, VerbForm } from '../verbForm/index.js'
 
 /**
  * Just the to/value inputs for an impute.

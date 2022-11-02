@@ -13,7 +13,7 @@ import {
 	enumDropdown,
 	FormInputType,
 	VerbForm,
-} from '../../verbForm/index.js'
+} from '../verbForm/index.js'
 
 /**
  * Provides inputs for a Binarize step.

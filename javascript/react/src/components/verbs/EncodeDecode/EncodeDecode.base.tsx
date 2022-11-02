@@ -7,7 +7,7 @@ import { CodebookStrategy } from '@datashaper/schema'
 import { useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../../../types.js'
-import { type FormInput, enumDropdown,VerbForm } from '../../verbForm/index.js'
+import { type FormInput, enumDropdown, VerbForm } from '../verbForm/index.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

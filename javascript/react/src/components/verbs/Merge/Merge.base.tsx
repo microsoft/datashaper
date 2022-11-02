@@ -12,7 +12,7 @@ import {
 	enumDropdown,
 	FormInputType,
 	VerbForm,
-} from '../../verbForm/index.js'
+} from '../verbForm/index.js'
 
 /**
  * Just the to/value inputs for an impute.

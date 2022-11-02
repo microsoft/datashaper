@@ -12,7 +12,7 @@ import {
 	dropdown,
 	enumDropdown,
 	VerbForm,
-} from '../../verbForm/index.js'
+} from '../verbForm/index.js'
 
 /**
  * Just the group/column/op inputs for an aggregation.

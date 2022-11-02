@@ -7,7 +7,7 @@ import { BooleanOperator } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../../../types.js'
-import { type FormInput, enumDropdown,VerbForm } from '../../verbForm/index.js'
+import { type FormInput, enumDropdown, VerbForm } from '../verbForm/index.js'
 
 /**
  * Inputs to combine column using boolean logic.

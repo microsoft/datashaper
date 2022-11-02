@@ -10,11 +10,7 @@ import { memo, useMemo } from 'react'
 import { getEnumDropdownOptions } from '../../../enums.js'
 import type { StepComponentBaseProps } from '../../../types.js'
 import { getDateFormatPatternOptions } from '../../dateFormats.js'
-import {
-	type FormInput,
-	FormInputType,
-	VerbForm,
-} from '../../verbForm/index.js'
+import { type FormInput, FormInputType, VerbForm } from '../verbForm/index.js'
 
 /**
  * Provides inputs for a Convert step.

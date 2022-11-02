@@ -7,15 +7,15 @@ import { toggleListItem } from '@datashaper/utilities'
 import type { Step } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 
-import { getEnumDropdownOptions } from '../../enums.js'
+import { getEnumDropdownOptions } from '../../../enums.js'
 import {
 	getLeftColumn,
 	getRightColumn,
 	getSimpleDropdownOptions,
-} from '../../hooks/index.js'
+} from '../../../hooks/index.js'
 import type { CheckboxFormInput } from './CheckboxInput.types.js'
 import type { SingleChoiceFormInput } from './SingleChoiceInput.types.js'
-import type { FormInput} from './types.js';
+import type { FormInput } from './types.js'
 import { FormInputType } from './types.js'
 
 export function inputColumnList(

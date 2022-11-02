@@ -6,11 +6,7 @@ import type { FoldArgs } from '@datashaper/schema'
 import { memo, useMemo } from 'react'
 
 import type { StepComponentBaseProps } from '../../../types.js'
-import {
-	type FormInput,
-	FormInputType,
-	VerbForm,
-} from '../../verbForm/index.js'
+import { type FormInput, FormInputType, VerbForm } from '../verbForm/index.js'
 
 /**
  * Provides inputs for a step that needs lists of columns.

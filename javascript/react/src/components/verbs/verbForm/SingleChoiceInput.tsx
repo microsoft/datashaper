@@ -3,22 +3,19 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@datashaper/workflow'
-import { MultiDropdown } from '@essex/components'
+import { Dropdown } from '@fluentui/react'
 import { Fragment, memo } from 'react'
 
-import {
-	useDropdownChangeAllHandler,
-	useDropdownChangeHandler,
-} from '../../hooks/index.js'
-import type { StepChangeFunction } from '../../types.js'
-import { dropdownStyles } from '../styles.js'
-import type { MultiChoiceFormInput } from './MultiChoiceInput.types.js'
+import { useDropdownChangeHandler } from '../../../hooks/index.js'
+import type { StepChangeFunction } from '../../../types.js'
+import { dropdownStyles } from '../../styles.js'
+import type { SingleChoiceFormInput } from './SingleChoiceInput.types.js'
 
-export const MultiChoiceInput: React.FC<{
-	input: MultiChoiceFormInput<unknown>
+export const SingleChoiceInput: React.FC<{
+	input: SingleChoiceFormInput<unknown>
 	step: Step<unknown>
 	onChange?: StepChangeFunction<unknown>
-}> = memo(function MultiChoiceInput({
+}> = memo(function SingleChoiceInput({
 	step,
 	input: {
 		label,
@@ -29,7 +26,6 @@ export const MultiChoiceInput: React.FC<{
 		disabled,
 		wrapper: Wrapper = Fragment,
 		onChange: updater,
-		onChangeAll: allUpdater,
 	},
 	onChange,
 }) {
@@ -38,23 +34,17 @@ export const MultiChoiceInput: React.FC<{
 		updater,
 		onChange,
 	)
-	const dropdownChangeAllHandler = useDropdownChangeAllHandler(
-		step,
-		allUpdater,
-		onChange,
-	)
 	return (
 		<Wrapper>
-			<MultiDropdown
+			<Dropdown
 				required={required}
 				label={label}
+				disabled={disabled}
 				placeholder={placeholder}
 				styles={dropdownStyles}
-				selectedKeys={current}
+				selectedKey={current as number | string}
 				options={options!}
-				disabled={disabled}
 				onChange={dropdownChangeHandler}
-				onChangeAll={dropdownChangeAllHandler}
 			/>
 		</Wrapper>
 	)

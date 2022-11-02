@@ -10,9 +10,9 @@ import { Fragment, memo } from 'react'
 import {
 	useComboBoxChangeHandler,
 	useComboBoxInputValueChangeHandler,
-} from '../../hooks/index.js'
-import type { StepChangeFunction } from '../../types.js'
-import { dropdownStyles } from '../styles.js'
+} from '../../../hooks/index.js'
+import type { StepChangeFunction } from '../../../types.js'
+import { dropdownStyles } from '../../styles.js'
 import type { ComboBoxFormInput } from './ComboBoxInput.types.js'
 
 export const ComboBoxInput: React.FC<{

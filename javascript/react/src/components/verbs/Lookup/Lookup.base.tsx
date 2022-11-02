@@ -14,7 +14,7 @@ import {
 	joinInputs,
 	tableDropdown,
 	VerbForm,
-} from '../../verbForm/index.js'
+} from '../verbForm/index.js'
 /**
  * Provides inputs for a Lookup step.
  */
