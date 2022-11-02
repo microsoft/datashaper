@@ -5,7 +5,7 @@
 import { ComboBox, SelectableOptionMenuItemType } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
-import { narrowDropdownStyles } from '../../../styles.js'
+import { narrowDropdownStyles } from '../../styles.js'
 import type { ColumnCriteriaComboBoxProps } from './ColumnCriteriaComboBox.types.js'
 
 /**

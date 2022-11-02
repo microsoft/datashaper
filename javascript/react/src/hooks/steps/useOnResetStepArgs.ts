@@ -6,7 +6,7 @@ import type { Step } from '@datashaper/workflow'
 import { readStep } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
-export function useResetArgs(): (step: Step) => Step {
+export function useOnResetStepArgs(): (step: Step) => Step {
 	return useCallback((step: Step) => {
 		const template = readStep(step).args as Record<string, unknown>
 		const args = step.args as Record<string, unknown>

@@ -5,7 +5,7 @@
 import { ComboBox } from '@fluentui/react'
 import { memo } from 'react'
 
-import { dropdownStyles } from '../../../styles.js'
+import { dropdownStyles } from '../../styles.js'
 import { useOptions } from './DateFormatPatternComboBox.hooks.js'
 import type { DateFormatPatternComboBoxProps } from './DateFormatPatternComboBox.types.js'
 /**

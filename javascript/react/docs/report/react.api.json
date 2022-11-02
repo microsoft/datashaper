@@ -6331,89 +6331,6 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/react!useDataTable:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useWorkflowDataTable(id: "
-            },
-            {
-              "kind": "Content",
-              "text": "string | undefined"
-            },
-            {
-              "kind": "Content",
-              "text": ", workflow?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Workflow",
-              "canonicalReference": "@datashaper/workflow!Workflow:class"
-            },
-            {
-              "kind": "Content",
-              "text": ", existingTable?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "ColumnTable",
-              "canonicalReference": "arquero!default:class"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Reference",
-              "text": "ColumnTable",
-              "canonicalReference": "arquero!default:class"
-            },
-            {
-              "kind": "Content",
-              "text": " | undefined"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 7,
-            "endIndex": 9
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "id",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            },
-            {
-              "parameterName": "workflow",
-              "parameterTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "isOptional": true
-            },
-            {
-              "parameterName": "existingTable",
-              "parameterTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
-              },
-              "isOptional": true
-            }
-          ],
-          "name": "useDataTable"
-        },
-        {
-          "kind": "Function",
           "canonicalReference": "@datashaper/react!useDetailsHeaderRenderer:function(1)",
           "docComment": "/**\n * Overrides the default details header rendering so we can inject customization\n *\n * @returns \n */\n",
           "excerptTokens": [
@@ -6732,60 +6649,6 @@
             }
           ],
           "name": "useGroupHeaderRenderer"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/react!useHandleStepOutputChanged:function(1)",
-          "docComment": "/**\n * This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future.\n *\n * @param workflow - the workflow instance\n *\n * @returns A callback to use when the step output changes\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useHandleStepOutputChanged(workflow: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Workflow",
-              "canonicalReference": "@datashaper/workflow!Workflow:class"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(step: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ") => void"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 6
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "workflow",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "useHandleStepOutputChanged"
         },
         {
           "kind": "Function",
@@ -7268,6 +7131,60 @@
             }
           ],
           "name": "useOnSaveStep"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useOnStepOutputChanged:function(1)",
+          "docComment": "/**\n * This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future.\n *\n * @param workflow - the workflow instance\n *\n * @returns A callback to use when the step output changes\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useOnStepOutputChanged(workflow: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Workflow",
+              "canonicalReference": "@datashaper/workflow!Workflow:class"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "workflow",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useOnStepOutputChanged"
         },
         {
           "kind": "Function",
@@ -8073,6 +7990,89 @@
             }
           ],
           "name": "useWorkflow"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useWorkflowDataTable:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useWorkflowDataTable(id: "
+            },
+            {
+              "kind": "Content",
+              "text": "string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ", workflow?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Workflow",
+              "canonicalReference": "@datashaper/workflow!Workflow:class"
+            },
+            {
+              "kind": "Content",
+              "text": ", existingTable?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnTable",
+              "canonicalReference": "arquero!default:class"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 7,
+            "endIndex": 9
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "id",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "workflow",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "existingTable",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "useWorkflowDataTable"
         },
         {
           "kind": "Function",

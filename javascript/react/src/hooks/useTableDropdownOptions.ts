@@ -8,7 +8,7 @@ import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { from } from 'rxjs'
 
-import { getSimpleDropdownOptions } from './useSimpleDropdownOptions.js'
+import { getSimpleDropdownOptions } from './fluent/useSimpleDropdownOptions.js'
 
 /**
  * Creates a dropdown list of id-names from the tables in a store

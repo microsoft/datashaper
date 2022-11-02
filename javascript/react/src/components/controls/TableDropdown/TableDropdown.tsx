@@ -5,7 +5,7 @@
 import { Dropdown } from '@fluentui/react'
 import { memo } from 'react'
 
-import { dropdownStyles } from '../../../styles.js'
+import { dropdownStyles } from '../../styles.js'
 import type { TableDropdownProps } from './TableDropdown.types.js'
 
 /**

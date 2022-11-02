@@ -19,12 +19,12 @@ import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 
 import { useColumnNames } from '../../hooks/columns/useColumnNames.js'
+import { useSimpleDropdownOptions } from '../../hooks/fluent/useSimpleDropdownOptions.js'
 import { useWorkflowDataTable } from '../../hooks/index.js'
-import { useSimpleDropdownOptions } from '../../hooks/useSimpleDropdownOptions.js'
 import { useTableDropdownOptions } from '../../hooks/useTableDropdownOptions.js'
-import { dropdownStyles } from '../../styles.js'
 import { TableColumnDropdown } from '../controls/TableColumnDropdown/TableColumnDropdown.js'
 import { TableDropdown } from '../controls/TableDropdown/TableDropdown.js'
+import { dropdownStyles } from '../styles.js'
 import {
 	getSimpleDropdownOptions,
 	useColumnFilter,

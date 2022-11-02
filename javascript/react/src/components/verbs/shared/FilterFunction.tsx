@@ -19,8 +19,8 @@ import {
 	useColumnNames,
 	useSimpleDropdownOptions,
 } from '../../../hooks/index.js'
-import { InputExplainer, LeftAlignedRow } from '../../../styles.js'
 import { CalendarPicker, ColumnCriteriaComboBox } from '../../controls/index.js'
+import { InputExplainer, LeftAlignedRow } from '../../styles.js'
 import { useColumnTyping, useIsEmpty } from './FilterFunction.hooks.js'
 import {
 	BooleanToggle,

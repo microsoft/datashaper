@@ -27,8 +27,8 @@ import {
 	useSpinButtonChangeHandler,
 	useTextFieldChangeHandler,
 } from '../../hooks/index.js'
-import { checkboxStyles, dropdownStyles } from '../../styles.js'
 import type { StepChangeFunction } from '../../types.js'
+import { checkboxStyles, dropdownStyles } from '../styles.js'
 import { useSortedInputs } from './VerbForm.hooks.js'
 import { Container, InputsBlock, Row } from './VerbForm.styles.js'
 

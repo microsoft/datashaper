@@ -2,10 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Step,Workflow } from '@datashaper/workflow'
+import type { Step, Workflow } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
-import { useHandleStepOutputChanged, useOnStepSave } from '../index.js'
+import { useOnStepOutputChanged, useOnStepSave } from '../index.js'
 
 /**
  *
@@ -16,7 +16,7 @@ export function useOnSaveStep(
 	workflow: Workflow,
 ): (step: Step, index: number | undefined) => void {
 	const updateStep = useOnStepSave(workflow)
-	const updateStepOutput = useHandleStepOutputChanged(workflow)
+	const updateStepOutput = useOnStepOutputChanged(workflow)
 
 	return useCallback(
 		(step: Step, index: number | undefined) => {

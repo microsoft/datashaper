@@ -540,11 +540,6 @@ export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns
 // @public (undocumented)
 export function useColumnStyles(clickable: boolean, separator: boolean): Partial<IDetailsColumnStyles>;
 
-// Warning: (ae-missing-release-tag) "useWorkflowDataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useDataTable(id: string | undefined, workflow?: Workflow, existingTable?: ColumnTable): ColumnTable | undefined;
-
 // Warning: (ae-missing-release-tag) "useDetailsHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -564,11 +559,6 @@ export function useFormattedNumber(value: number | undefined, formatter?: string
 //
 // @public
 export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata?: TableMetadata, groupHeaderFunction?: GroupHeaderFunction, lazyLoadGroups?: boolean): IRenderFunction<IDetailsGroupDividerProps>;
-
-// Warning: (ae-missing-release-tag) "useHandleStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export function useHandleStepOutputChanged(workflow: Workflow): (step: Step) => void;
 
 // Warning: (ae-forgotten-export) The symbol "CommandBarColors" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useHeaderCommandBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -605,6 +595,11 @@ export function useOnEditStep(setStep: (step: Step) => void, setStepIndex: (inde
 //
 // @public (undocumented)
 export function useOnSaveStep(workflow: Workflow): (step: Step, index: number | undefined) => void;
+
+// Warning: (ae-missing-release-tag) "useOnStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function useOnStepOutputChanged(workflow: Workflow): (step: Step) => void;
 
 // Warning: (ae-missing-release-tag) "useOnStepSave" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -665,6 +660,11 @@ export function useTableDropdownOptions(workflow?: Workflow): IDropdownOption[];
 //
 // @public (undocumented)
 export function useWorkflow(input?: Workflow | undefined, inputs?: TableContainer[]): Workflow;
+
+// Warning: (ae-missing-release-tag) "useWorkflowDataTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useWorkflowDataTable(id: string | undefined, workflow?: Workflow, existingTable?: ColumnTable): ColumnTable | undefined;
 
 // Warning: (ae-missing-release-tag) "useWorkflowListener" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

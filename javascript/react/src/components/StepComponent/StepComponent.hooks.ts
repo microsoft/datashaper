@@ -24,7 +24,7 @@ import {
 	type TextFieldChangeHandler,
 	useDropdownChangeAllHandler,
 	useDropdownChangeHandler,
-	useResetArgs,
+	useOnResetStepArgs,
 	useTextFieldChangeHandler,
 } from '../../hooks/index.js'
 import type { StepComponentProps } from '../../types.js'
@@ -72,7 +72,7 @@ export function useInputTableChanged(
 	step: Step,
 	onChange: (step: Step) => void,
 ): DropdownChangeHandler {
-	const resetArgs = useResetArgs()
+	const resetArgs = useOnResetStepArgs()
 
 	return useDropdownChangeHandler(
 		step,

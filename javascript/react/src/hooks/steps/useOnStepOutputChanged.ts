@@ -13,7 +13,7 @@ import { useCallback } from 'react'
  * @param workflow - the workflow instance
  * @returns A callback to use when the step output changes
  */
-export function useHandleStepOutputChanged(
+export function useOnStepOutputChanged(
 	workflow: Workflow,
 ): (step: Step) => void {
 	return useCallback(

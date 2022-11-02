@@ -6,7 +6,7 @@ import type { Step } from '@datashaper/workflow'
 import type { Workflow } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
-import { useHandleStepOutputChanged, useOnStepSave } from '../index.js'
+import { useOnStepOutputChanged, useOnStepSave } from '../index.js'
 
 /**
  *
@@ -17,7 +17,7 @@ export function useOnUpdateStep(
 	workflow: Workflow,
 ): (step: Step, index: number | undefined) => void {
 	const updateStep = useOnStepSave(workflow)
-	const updateStepOutput = useHandleStepOutputChanged(workflow)
+	const updateStepOutput = useOnStepOutputChanged(workflow)
 
 	return useCallback(
 		(step: Step, index: number | undefined) => {

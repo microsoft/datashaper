@@ -24,6 +24,10 @@ export {
 } from './useDropdownChangeHandler.js'
 export { type ModalState, useModalState } from './useModalState.js'
 export {
+	getSimpleDropdownOptions,
+	useSimpleDropdownOptions,
+} from './useSimpleDropdownOptions.js'
+export {
 	type SpinButtonChangeHandler,
 	useSpinButtonChangeHandler,
 } from './useSpinButtonChangeHandler.js'

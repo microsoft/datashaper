@@ -5,7 +5,7 @@
 import styled from '@essex/styled-components'
 import { Label, TextField } from '@fluentui/react'
 
-import { narrowDropdownStyles } from '../../../styles.js'
+import { narrowDropdownStyles } from '../../styles.js'
 
 export const Container = styled.div`
 	display: flex;

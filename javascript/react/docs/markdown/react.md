@@ -22,12 +22,10 @@
 |  [useColumnNamesList(table, columns)](./react.usecolumnnameslist.md) | Creates a list of column names for the table. If there are no columns supplied it will use the list from the table itself. Otherwise it will use the provided columns under the assumption the user has configured them as desired. |
 |  [useColumns(table, metadata, columns, onColumnHeaderClick, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
 |  [useColumnStyles(clickable, separator)](./react.usecolumnstyles.md) |  |
-|  [useDataTable(id, workflow, existingTable)](./react.usedatatable.md) |  |
 |  [useDetailsHeaderRenderer()](./react.usedetailsheaderrenderer.md) | Overrides the default details header rendering so we can inject customization |
 |  [useDetailsListStyles(isHeaderFixed, features, styles, hasColumnClick, compact)](./react.usedetailsliststyles.md) | Create a DetailsHeader style with enough height to handle the options we've turned on. Each one requires a small amount of vertical space that stacks up. |
 |  [useFormattedNumber(value, formatter)](./react.useformattednumber.md) |  |
 |  [useGroupHeaderRenderer(table, computedMetadata, groupHeaderFunction, lazyLoadGroups)](./react.usegroupheaderrenderer.md) | Overrides the default group header rendering so we can inject customization |
-|  [useHandleStepOutputChanged(workflow)](./react.usehandlestepoutputchanged.md) | This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future. |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
 |  [useIncrementingColumnColorScale(meta)](./react.useincrementingcolumncolorscale.md) | Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table. |
 |  [useInputTableNames(workflow)](./react.useinputtablenames.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
@@ -35,6 +33,7 @@
 |  [useOnDeleteStep(workflow)](./react.useondeletestep.md) |  |
 |  [useOnEditStep(setStep, setStepIndex, showTableModal)](./react.useoneditstep.md) | A hook to get the onEditStep callback |
 |  [useOnSaveStep(workflow)](./react.useonsavestep.md) |  |
+|  [useOnStepOutputChanged(workflow)](./react.useonstepoutputchanged.md) | This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future. |
 |  [useOnStepSave(workflow)](./react.useonstepsave.md) |  |
 |  [useOnUpdateStep(workflow)](./react.useonupdatestep.md) |  |
 |  [useReifiedTable(table)](./react.usereifiedtable.md) |  |
@@ -47,6 +46,7 @@
 |  [useSubsetTable(table, columns)](./react.usesubsettable.md) |  |
 |  [useTableDropdownOptions(workflow)](./react.usetabledropdownoptions.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
 |  [useWorkflow(input, inputs)](./react.useworkflow.md) |  |
+|  [useWorkflowDataTable(id, workflow, existingTable)](./react.useworkflowdatatable.md) |  |
 |  [useWorkflowListener(workflow, setWorkflow)](./react.useworkflowlistener.md) |  |
 |  [useWorkflowOutputListener(workflow, setOutput)](./react.useworkflowoutputlistener.md) |  |
 |  [useWorkflowSteps(workflow, order)](./react.useworkflowsteps.md) | Gets the workflow processing steps |

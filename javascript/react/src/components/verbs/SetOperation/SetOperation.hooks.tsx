@@ -7,8 +7,8 @@ import { IconButton } from '@fluentui/react'
 import { useMemo } from 'react'
 
 import { useTableDropdownOptions } from '../../../hooks/useTableDropdownOptions.js'
-import { LeftAlignedRow } from '../../../styles.js'
 import { TableDropdown } from '../../controls/index.js'
+import { LeftAlignedRow } from '../../styles.js'
 import { icons } from './SetOperation.styles.js'
 
 export function useOthers(
