@@ -6,16 +6,14 @@ import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	DisplayOrder,
-	ProjectManagementCommandBar,
 	StepHistoryList,
 	TableCommands,
-	useManagementBarDefaults,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnSaveStep,
+	useWorkflowInputTableNames,
 	useWorkflowOutputListener,
 } from '@datashaper/react'
-import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
@@ -24,6 +22,8 @@ import { CommandBar } from '@fluentui/react'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo, useState } from 'react'
 
+import { ProjectManagementCommandBar } from '../../components/common/ProjectManagementCommandBar.js'
+import { useManagementBarDefaults } from '../../hooks/useManagementBarDefaults.js'
 import { TableList } from './components/TableList.js'
 import {
 	useHistory,
@@ -58,7 +58,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	const onSave = useOnSaveStep(workflow)
 	const onCreate = useOnCreateStep(onSave, setSelectedTableId)
-	const inputNames = useInputTableNames(workflow)
+	const inputNames = useWorkflowInputTableNames(workflow)
 
 	const tableName = useMemo(() => {
 		const stepIndex = workflow.steps.findIndex(x => x.id === selectedTableId)

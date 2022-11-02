@@ -4,7 +4,7 @@
  */
 import type { ComponentStory } from '@storybook/react'
 
-import { TableCommands } from '../../../TableCommands.js'
+import { TableCommands } from '../../../TableCommands/TableCommands.js'
 import { ArqueroTableHeader } from '../../ArqueroTableHeader.js'
 import type { ArqueroTableHeaderProps } from '../../ArqueroTableHeader.types.js'
 import { useParameters } from './TableCommands.hooks.js'

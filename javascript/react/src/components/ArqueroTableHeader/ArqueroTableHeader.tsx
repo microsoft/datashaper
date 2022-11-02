@@ -5,6 +5,8 @@
 
 import { memo, useMemo } from 'react'
 
+import { useCommandBarColorDefaults } from '../../hooks/index.js'
+import { useColumnCounts, useRowCounts } from './ArqueroTableHeader.hooks.js'
 import {
 	Container,
 	H3,
@@ -12,11 +14,6 @@ import {
 	Middle,
 	Right,
 } from './ArqueroTableHeader.styles.js'
-import {
-	useColorDefaults,
-	useColumnCounts,
-	useRowCounts,
-} from './hooks/index.js'
 import type { ArqueroTableHeaderProps } from './index.js'
 import { TableName } from './TableName.js'
 
@@ -34,7 +31,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		color,
 		styles,
 	}) {
-		const { background: bg, color: clr } = useColorDefaults({
+		const { background: bg, color: clr } = useCommandBarColorDefaults({
 			color,
 			background,
 		})

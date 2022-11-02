@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-HistoryIcon: (props: CustomIconProps) => JSX.Element
+HistoryIcon: React.FC<CustomIconProps>
 ```

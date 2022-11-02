@@ -4198,7 +4198,6 @@ __metadata:
     "@thematic/react": ^2.1.0
     "@types/babel__core": ^7.1.19
     "@types/babel__preset-env": ^7.9.2
-    "@types/chroma-js": ^2.1.4
     "@types/d3-format": ^3.0.1
     "@types/debug": ^4.1.7
     "@types/lodash": ^4.14.186
@@ -4214,7 +4213,6 @@ __metadata:
     ahooks: ^3.7.2
     arquero: ^5.1.0
     babel-loader: ^8.2.5
-    chroma-js: ^2.4.2
     d3-format: ^3.1.0
     debug: ^4.3.4
     immer: ^9.0.16
@@ -4223,7 +4221,6 @@ __metadata:
     observable-hooks: ^4.2.1
     react: ^18.2.0
     react-dom: ^18.2.0
-    react-dropzone: ^12.1.0
     react-if: ^4.1.4
     resolve-typescript-plugin: ^1.2.0
     rxjs: ^7.5.7
@@ -4350,6 +4347,8 @@ __metadata:
     "@thematic/d3": ^2.0.13
     "@thematic/fluent": ^4.1.0
     "@thematic/react": ^2.1.0
+    "@types/chroma-js": ^2
+    "@types/debug": ^4.1.7
     "@types/lodash": ^4.14.186
     "@types/lodash-es": ^4.17.6
     "@types/node": ^18.11.5
@@ -4361,12 +4360,15 @@ __metadata:
     "@uifabric/icons": ^7.9.4
     ahooks: ^3.7.2
     arquero: ^5.1.0
+    chroma-js: 2.4.2
+    debug: ^4.3.4
     file-loader: ^6.2.0
     localforage: ^1.10.0
     lodash-es: ^4.17.21
     raw-loader: ^4.0.2
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-dropzone: ^12.1.0
     react-error-boundary: ^3.1.4
     react-is: ^18.2.0
     recoil: ^0.7.6
@@ -7773,7 +7775,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chroma-js@npm:^2.1.4":
+"@types/chroma-js@npm:^2":
   version: 2.1.4
   resolution: "@types/chroma-js@npm:2.1.4"
   checksum: 24f1a1dd1c7b21548299c320bfa01e6407acb70193e567af16c28f742571fe56bb1eea0aedc41281478a175c70772a4627d5a9bf5b9cd854a7b455c38a3a5645
@@ -11198,7 +11200,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chroma-js@npm:^2.4.2":
+"chroma-js@npm:2.4.2, chroma-js@npm:^2.4.2":
   version: 2.4.2
   resolution: "chroma-js@npm:2.4.2"
   checksum: cf9884c02d406286e4370599bcd1afbf089384407df46b3a69edfedcba7bb99e8f959a5cfdbfec750b305c441c06ca40cd1f70ba3a6c2ce739ac09a92520ddae

@@ -1,0 +1,34 @@
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
+import type { FillArgs } from '@datashaper/schema'
+import { memo, useMemo } from 'react'
+
+import type { StepComponentProps } from '../../../types.js'
+import {
+	type FormInput,
+	FormInputType,
+	VerbForm,
+} from '../../verbForm/index.js'
+
+/**
+ * Provides inputs for a Fill step.
+ */
+export const FillBase: React.FC<StepComponentProps<FillArgs>> = memo(
+	function Fill({ step, onChange }) {
+		const inputs = useMemo<FormInput<FillArgs>[]>(
+			() => [
+				{
+					label: 'Fill value',
+					type: FormInputType.Text,
+					current: step.args.value,
+					onChange: (s, val) => (s.args.value = val as string),
+				},
+			],
+			[step],
+		)
+
+		return <VerbForm inputs={inputs} step={step} onChange={onChange} />
+	},
+)
