@@ -1,5 +1,0 @@
-releases:
-  "@datashaper/react": patch
-
-declined:
-  - "@datashaper/webapp"

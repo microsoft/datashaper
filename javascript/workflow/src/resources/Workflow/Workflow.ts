@@ -201,11 +201,25 @@ export class Workflow
 		return this.inputNames.some(i => i === input)
 	}
 
-	public set defaultInput(source: TableObservable) {
+	public get defaultInput$(): TableObservable {
+		return this._defaultInput
+	}
+
+	public set defaultInput$(source: TableObservable) {
 		this._defaultInputSubscription?.unsubscribe()
 		this._defaultInputSubscription = source.subscribe(value =>
 			this._defaultInput.next(value),
 		)
+		this.configureAllSteps()
+		this._onChange.next()
+	}
+
+	public get defaultInput(): Maybe<TableContainer> {
+		return this._defaultInput.value
+	}
+
+	public set defaultInput(source: Maybe<TableContainer>) {
+		this._defaultInput.next(source)
 		this.configureAllSteps()
 		this._onChange.next()
 	}

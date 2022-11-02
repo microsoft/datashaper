@@ -4,7 +4,7 @@
 	"description": "Chains every available operation together for an easy look at all UX and output examples",
 	"steps": [
 		{
-			"id": "aggregate-1",
+			"id": "aggregate",
 			"verb": "aggregate",
 			"input": {
 				"source": "products"
@@ -17,7 +17,7 @@
 			}
 		},
 		{
-			"id": "aggregate-2",
+			"id": "aggregate (1)",
 			"verb": "aggregate",
 			"input": {
 				"source": "products"
@@ -30,7 +30,7 @@
 			}
 		},
 		{
-			"id": "bin-1",
+			"id": "bin",
 			"verb": "bin",
 			"input": {
 				"source": "products"
@@ -42,7 +42,7 @@
 			}
 		},
 		{
-			"id": "binarize-1",
+			"id": "binarize",
 			"verb": "binarize",
 			"input": {
 				"source": "products"
@@ -60,7 +60,7 @@
 			}
 		},
 		{
-			"id": "boolean-1",
+			"id": "boolean",
 			"verb": "boolean",
 			"input": {
 				"source": "companies2"
@@ -72,7 +72,7 @@
 			}
 		},
 		{
-			"id": "concat-1",
+			"id": "concat",
 			"verb": "concat",
 			"input": {
 				"source": "companies",
@@ -80,7 +80,7 @@
 			}
 		},
 		{
-			"id": "convert-1",
+			"id": "convert",
 			"verb": "convert",
 			"input": {
 				"source": "companies"
@@ -91,7 +91,7 @@
 			}
 		},
 		{
-			"id": "dedupe-1",
+			"id": "dedupe",
 			"verb": "dedupe",
 			"input": {
 				"source": "products"
@@ -101,7 +101,7 @@
 			}
 		},
 		{
-			"id": "derive-1",
+			"id": "derive (1)",
 			"verb": "derive",
 			"input": {
 				"source": "products"
@@ -114,7 +114,7 @@
 			}
 		},
 		{
-			"id": "difference-1",
+			"id": "difference",
 			"verb": "difference",
 			"input": {
 				"source": "companies",
@@ -122,7 +122,7 @@
 			}
 		},
 		{
-			"id": "erase-1",
+			"id": "erase",
 			"verb": "erase",
 			"input": {
 				"source": "products"
@@ -133,7 +133,7 @@
 			}
 		},
 		{
-			"id": "fill-1",
+			"id": "fill",
 			"verb": "fill",
 			"input": {
 				"source": "companies"
@@ -144,7 +144,7 @@
 			}
 		},
 		{
-			"id": "filter-1",
+			"id": "filter",
 			"verb": "filter",
 			"input": {
 				"source": "companies"
@@ -161,7 +161,7 @@
 			}
 		},
 		{
-			"id": "fold-1",
+			"id": "fold",
 			"verb": "fold",
 			"input": {
 				"source": "companies"
@@ -172,7 +172,7 @@
 			}
 		},
 		{
-			"id": "groupby-1",
+			"id": "groupby",
 			"verb": "groupby",
 			"input": {
 				"source": "products"
@@ -182,7 +182,7 @@
 			}
 		},
 		{
-			"id": "impute-1",
+			"id": "impute",
 			"verb": "impute",
 			"input": "companies2",
 			"args": {
@@ -191,7 +191,7 @@
 			}
 		},
 		{
-			"id": "intersect-1",
+			"id": "intersect",
 			"verb": "intersect",
 			"input": {
 				"source": "companies",
@@ -199,7 +199,7 @@
 			}
 		},
 		{
-			"id": "join-1",
+			"id": "join",
 			"verb": "join",
 			"input": {
 				"source": "companies",
@@ -210,7 +210,7 @@
 			}
 		},
 		{
-			"id": "lookup-1",
+			"id": "lookup",
 			"verb": "lookup",
 			"input": {
 				"source": "companies",
@@ -222,7 +222,7 @@
 			}
 		},
 		{
-			"id": "merge-1",
+			"id": "merge",
 			"verb": "merge",
 			"input": {
 				"source": "products"
@@ -234,7 +234,7 @@
 			}
 		},
 		{
-			"id": "onehot-1",
+			"id": "onehot",
 			"verb": "onehot",
 			"input": "stocks",
 			"args": {
@@ -245,9 +245,9 @@
 			}
 		},
 		{
-			"id": "unhot-1",
+			"id": "unhot",
 			"verb": "unhot",
-			"input": "onehot-1",
+			"input": "onehot",
 			"args": {
 				"to": "Symbol",
 				"columns": [
@@ -260,7 +260,7 @@
 			}
 		},
 		{
-			"id": "orderby-1",
+			"id": "orderby",
 			"verb": "orderby",
 			"input": {
 				"source": "companies"
@@ -275,7 +275,7 @@
 			}
 		},
 		{
-			"id": "pivot-1",
+			"id": "pivot",
 			"verb": "pivot",
 			"input": {
 				"source": "companies"
@@ -287,7 +287,7 @@
 			}
 		},
 		{
-			"id": "recode-1",
+			"id": "recode",
 			"verb": "recode",
 			"input": {
 				"source": "companies"
@@ -305,7 +305,7 @@
 			}
 		},
 		{
-			"id": "rename-1",
+			"id": "rename",
 			"verb": "rename",
 			"input": "stocks",
 			"args": {
@@ -321,7 +321,7 @@
 			}
 		},
 		{
-			"id": "rollup-1",
+			"id": "rollup",
 			"verb": "rollup",
 			"input": {
 				"source": "products"
@@ -333,7 +333,7 @@
 			}
 		},
 		{
-			"id": "sample-1",
+			"id": "sample",
 			"verb": "sample",
 			"input": {
 				"source": "companies"
@@ -343,7 +343,7 @@
 			}
 		},
 		{
-			"id": "select-1",
+			"id": "select",
 			"verb": "select",
 			"input": "stocks",
 			"args": {
@@ -351,31 +351,31 @@
 			}
 		},
 		{
-			"id": "spread-1",
+			"id": "spread",
 			"verb": "spread",
-			"input": "aggregate-2",
+			"input": "aggregate (1)",
 			"args": {
 				"column": "Product List"
 			}
 		},
 		{
-			"id": "unfold-1",
+			"id": "unfold",
 			"verb": "unfold",
-			"input": "fold-1",
+			"input": "fold",
 			"args": {
 				"key": "key",
 				"value": "value"
 			}
 		},
 		{
-			"id": "ungroup-1",
+			"id": "ungroup",
 			"verb": "ungroup",
 			"input": {
 				"source": "companies"
 			}
 		},
 		{
-			"id": "union-1",
+			"id": "union",
 			"verb": "union",
 			"input": {
 				"source": "companies",
@@ -383,7 +383,7 @@
 			}
 		},
 		{
-			"id": "unorder-1",
+			"id": "unorder",
 			"verb": "unorder",
 			"input": {
 				"source": "companies"
@@ -398,17 +398,17 @@
 			}
 		},
 		{
-			"id": "unroll-1",
+			"id": "unroll",
 			"verb": "unroll",
-			"input": "aggregate-2",
+			"input": "aggregate (1)",
 			"args": {
 				"columns": ["Product List"]
 			}
 		},
 		{
-			"id": "window-1",
+			"id": "window",
 			"verb": "window",
-			"input": "groupby-1",
+			"input": "groupby",
 			"args": {
 				"to": "First Product",
 				"column": "Product",
@@ -418,42 +418,42 @@
 	],
 	"input": ["companies", "companies2", "products", "stocks"],
 	"output": [
-		"aggregate-1",
-		"aggregate-2",
-		"bin-1",
-		"binarize-1",
-		"boolean-1",
-		"concat-1",
-		"convert-1",
-		"dedupe-1",
-		"derive-1",
-		"difference-1",
-		"erase-1",
-		"fill-1",
-		"filter-1",
-		"fold-1",
-		"groupby-1",
-		"intersect-1",
-		"impute-1",
-		"join-1",
-		"lookup-1",
-		"merge-1",
-		"onehot-1",
-		"orderby-1",
-		"pivot-1",
-		"recode-1",
-		"rename-1",
-		"rollup-1",
-		"sample-1",
-		"select-1",
-		"spread-1",
-		"window-1",
-		"unfold-1",
-		"ungroup-1",
-		"union-1",
-		"unorder-1",
-		"unhot-1",
-		"unroll-1",
-		"window-1"
+		"aggregate",
+		"aggregate (1)",
+		"bin",
+		"binarize",
+		"boolean",
+		"concat",
+		"convert",
+		"dedupe",
+		"derive (1)",
+		"difference",
+		"erase",
+		"fill",
+		"filter",
+		"fold",
+		"groupby",
+		"intersect",
+		"impute",
+		"join",
+		"lookup",
+		"merge",
+		"onehot",
+		"orderby",
+		"pivot",
+		"recode",
+		"rename",
+		"rollup",
+		"sample",
+		"select",
+		"spread",
+		"window",
+		"unfold",
+		"ungroup",
+		"union",
+		"unorder",
+		"unhot",
+		"unroll",
+		"window"
 	]
 }

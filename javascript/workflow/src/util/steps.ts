@@ -49,6 +49,10 @@ enum Tags {
 	 * This verb can only operate on numeric input columns
 	 */
 	NumericOnly,
+	/**
+	 * This verb accepts no arguments.
+	 */
+	NoArgs,
 }
 
 // TODO: this could be cleaner with a bitwise operator
@@ -95,10 +99,10 @@ const TaggedVerbs: Record<Verb, Tags[]> = {
 	select: [Tags.InputTable, Tags.InputColumnList],
 	spread: [Tags.InputTable, Tags.InputColumn],
 	unfold: [Tags.InputTable, Tags.RowModifying, Tags.InputKeyValue],
-	ungroup: [Tags.InputTable],
+	ungroup: [Tags.InputTable, Tags.NoArgs],
 	unhot: [Tags.InputTable, Tags.OutputColumn, Tags.InputColumnList],
 	union: [Tags.InputTable, Tags.InputTableList, Tags.RowModifying],
-	unorder: [Tags.InputTable],
+	unorder: [Tags.InputTable, Tags.NoArgs],
 	unroll: [Tags.InputTable, Tags.RowModifying, Tags.InputColumnList],
 	window: [Tags.InputTable, Tags.InputColumn, Tags.OutputColumn],
 }
@@ -112,6 +116,7 @@ const INPUT_KEY_VALUE_VERBS = filterByTag(Tags.InputKeyValue)
 const OUTPUT_COLUMN_VERBS = filterByTag(Tags.OutputColumn)
 const ROW_MODIFYING_VERBS = filterByTag(Tags.RowModifying)
 const NUMERIC_VERBS = filterByTag(Tags.NumericOnly)
+const NOARGS_VERBS = filterByTag(Tags.NoArgs)
 
 function filterByTag(tag: Tags) {
 	return Object.keys(TaggedVerbs).filter(key => {
@@ -189,6 +194,15 @@ export function isOutputColumnStep(step: Step): boolean {
  */
 export function isNumericInputStep(step: Step): boolean {
 	return isTagged(step, NUMERIC_VERBS)
+}
+
+/**
+ * Indicates whether this step accepts arguments
+ * @param step -
+ * @returns
+ */
+export function isNoArgsStep(step: Step): boolean {
+	return isTagged(step, NOARGS_VERBS)
 }
 
 function isTagged(step: Step, verbs: Verb[]): boolean {

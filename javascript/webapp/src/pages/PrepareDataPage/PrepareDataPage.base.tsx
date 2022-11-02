@@ -79,7 +79,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 			}
 			setSelectedTableId(outputs[index - 1]?.id)
 		},
-		[workflow, inputs, outputs],
+		[workflow, outputs, deleteStepFromWorkflow],
 	)
 
 	const onColumnClick = useCallback(

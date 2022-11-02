@@ -11,22 +11,28 @@ export const Container = styled.div`
 	display: flex;
 	gap: 4px;
 	align-items: center;
+	justify-content: flex-start;
 `
 
-export const Index = styled.span`
-	color: ${({ theme }) => theme.palette.neutralTertiary};
+export const Index = styled.div`
+	color: ${({ theme }) => theme.palette.neutralTertiaryAlt};
 	font-size: 12px;
+	text-align: right;
+	min-width: 20px;
 `
 
-export const Verb = styled.span`
+export const Verb = styled.div<{ selected?: boolean }>`
 	text-transform: uppercase;
 	font-weight: bold;
-	color: ${({ theme }) => theme.palette.neutralSecondary};
+	color: ${({ selected, theme }) =>
+		selected ? theme.palette.themePrimary : theme.palette.neutralSecondary};
+	white-space: nowrap;
 `
 
-export const Details = styled.span`
+export const Details = styled.div`
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+	text-align: left;
 	color: ${({ theme }) => theme.palette.neutralSecondaryAlt};
 `

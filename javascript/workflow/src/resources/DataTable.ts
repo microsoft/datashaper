@@ -178,7 +178,7 @@ export class DataTable
 
 	private rebindWorkflowInput() {
 		// Set the Default Input
-		this.workflow.defaultInput = this.source$.pipe(
+		this.workflow.defaultInput$ = this.source$.pipe(
 			map(table => ({
 				table,
 				id: this.name,
