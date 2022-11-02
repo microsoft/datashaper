@@ -6,7 +6,7 @@ import type { Step, Workflow } from '@datashaper/workflow'
 import { IconButton } from '@fluentui/react'
 import { useMemo } from 'react'
 
-import { TableDropdown } from '../../controls/index.js'
+import { TableDropdown } from '../../components/controls/index.js'
 import { useTableDropdownOptions } from '../../hooks/useTableDropdownOptions.js'
 import { LeftAlignedRow } from '../../styles.js'
 import { icons } from './SetOperation.styles.js'

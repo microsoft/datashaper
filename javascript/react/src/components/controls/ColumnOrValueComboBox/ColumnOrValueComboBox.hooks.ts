@@ -6,10 +6,10 @@ import type { IComboBoxOption } from '@fluentui/react'
 import { SelectableOptionMenuItemType } from '@fluentui/react'
 import { useMemo } from 'react'
 
-import type { ColumnOrValueComboboxProps } from './ColumnOrValueCombobox.types.js'
+import type { ColumnOrValueComboBoxProps } from './ColumnOrValueComboBox.types.js'
 
 export function useOptions(
-	options: ColumnOrValueComboboxProps['options'],
+	options: ColumnOrValueComboBoxProps['options'],
 ): IComboBoxOption[] {
 	return useMemo(() => [HEADER, ...options], [options])
 }

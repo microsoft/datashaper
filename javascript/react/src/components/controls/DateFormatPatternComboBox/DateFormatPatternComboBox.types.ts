@@ -4,7 +4,7 @@
  */
 import type { IComboBoxProps } from '@fluentui/react'
 
-export interface DateFormatPatternComboboxProps
+export interface DateFormatPatternComboBoxProps
 	extends Partial<IComboBoxProps> {
 	columnName?: string
 }

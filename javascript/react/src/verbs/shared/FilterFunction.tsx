@@ -15,7 +15,10 @@ import type { IComboBoxOption, IDropdownOption } from '@fluentui/react'
 import { IconButton, SpinButton } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 
-import { CalendarPicker, ColumnCriteriaCombobox } from '../../controls/index.js'
+import {
+	CalendarPicker,
+	ColumnCriteriaComboBox,
+} from '../../components/controls/index.js'
 import {
 	useSimpleDropdownOptions,
 	useTableColumnNames,
@@ -252,13 +255,13 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 					<Input>
 						<InputLabel>column</InputLabel>
 						{type === DataType.Date ? (
-							<ColumnCriteriaCombobox
+							<ColumnCriteriaComboBox
 								options={columnOptions}
 								onChange={handleDateComboBoxChange}
 								disabled={isEmpty}
 							/>
 						) : (
-							<ColumnCriteriaCombobox
+							<ColumnCriteriaComboBox
 								options={columnOptions}
 								onChange={handleComboBoxChange}
 								disabled={isEmpty}

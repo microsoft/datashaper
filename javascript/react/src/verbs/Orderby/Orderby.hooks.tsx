@@ -10,7 +10,7 @@ import type ColumnTable from 'arquero/dist/types/table/column-table'
 import set from 'lodash-es/set.js'
 import { useCallback, useMemo } from 'react'
 
-import { SortInstruction } from '../../controls/index.js'
+import { SortInstruction } from '../../components/controls/index.js'
 import { EMPTY_ARRAY } from '../../empty.js'
 
 export function useSorts(

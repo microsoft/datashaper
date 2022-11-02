@@ -7,7 +7,7 @@ import type { IContextualMenuListProps } from '@fluentui/react'
 import { IconButton } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
-import { ContextualMenuItemSearchBox } from '../../controls/index.js'
+import { ContextualMenuItemSearchBox } from '../controls/index.js'
 import { useSearchableItems, useSelectedOption } from './StepSelector.hooks.js'
 import { Container, icons, SearchContainer } from './StepSelector.styles.js'
 import type { StepSelectorProps } from './StepSelector.types.js'

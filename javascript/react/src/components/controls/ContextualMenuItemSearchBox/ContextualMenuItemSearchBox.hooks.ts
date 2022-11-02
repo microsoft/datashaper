@@ -6,7 +6,7 @@ import type { IContextualMenuItem } from '@fluentui/react'
 import { ContextualMenuItemType } from '@fluentui/react'
 import { useCallback } from 'react'
 
-import { EMPTY_ARRAY } from '../../empty.js'
+import { EMPTY_ARRAY } from '../../../empty.js'
 
 export function useSearch(
 	items: IContextualMenuItem[],

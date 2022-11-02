@@ -18,13 +18,13 @@ import { MultiDropdown } from '@essex/components'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 
-import { TableColumnDropdown } from '../../controls/TableColumnDropdown/TableColumnDropdown.js'
-import { TableDropdown } from '../../controls/TableDropdown/TableDropdown.js'
 import { useDataTable } from '../../hooks/useDataTable.js'
 import { useSimpleDropdownOptions } from '../../hooks/useSimpleDropdownOptions.js'
 import { useTableColumnNames } from '../../hooks/useTableColumnNames.js'
 import { useTableDropdownOptions } from '../../hooks/useTableDropdownOptions.js'
 import { dropdownStyles } from '../../styles.js'
+import { TableColumnDropdown } from '../controls/TableColumnDropdown/TableColumnDropdown.js'
+import { TableDropdown } from '../controls/TableDropdown/TableDropdown.js'
 import {
 	getSimpleDropdownOptions,
 	useColumnFilter,

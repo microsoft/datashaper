@@ -16,7 +16,7 @@ import {
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { memo, useMemo } from 'react'
 
-import { TableColumnDropdown } from '../../controls/index.js'
+import { TableColumnDropdown } from '../../components/controls/index.js'
 import { EMPTY_OBJECT } from '../../empty.js'
 import {
 	useColumnRecordDelete,

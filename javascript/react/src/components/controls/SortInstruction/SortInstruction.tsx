@@ -7,7 +7,7 @@ import { IconButton } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { memo } from 'react'
 
-import { dropdownStyles } from '../../styles.js'
+import { dropdownStyles } from '../../../styles.js'
 import { TableColumnDropdown } from '../TableColumnDropdown/TableColumnDropdown.js'
 import {
 	useHandleColumnChange,

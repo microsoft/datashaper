@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { IComboBoxOption, IComboBoxProps } from '@fluentui/react'
-
-export interface ColumnOrValueComboboxProps extends Partial<IComboBoxProps> {
+export interface ColumnCriteriaComboBoxProps extends Partial<IComboBoxProps> {
 	options: IComboBoxOption[]
 }
