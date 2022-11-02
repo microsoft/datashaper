@@ -8,11 +8,11 @@ import { Workflow } from '@datashaper/workflow'
 import { memo, useMemo } from 'react'
 
 import { DisplayOrder } from '../../../../enums.js'
+import { useOnStepSave } from '../../../../hooks/steps/useOnStepSave.js'
+import { useStepOutputs } from '../../../../hooks/steps/useStepOutputs.js'
 import { useWorkflow } from '../../../../hooks/useFormattedColumnArg.js'
 import { useHandleStepOutputChanged } from '../../../../hooks/useHandleStepOutputChanged.js'
-import { useHandleStepSave } from '../../../../hooks/useHandleStepSave.js'
-import { useStepOutputs } from '../../../../hooks/useStepOutputs.js'
-import { useWorkflowSteps } from '../../../../hooks/useWorkflowSteps.js'
+import { useWorkflowSteps } from '../../../../hooks/workflow/useWorkflowSteps.js'
 import { StepOutput } from './components/StepOutput.js'
 import { useInputTables } from './WorkflowExample.hooks.js'
 import { Container, Description, Output } from './WorkflowExample.styles.js'
@@ -29,7 +29,7 @@ export const WorkflowExample: React.FC<WorkflowExampleProps> = memo(
 		const wf = useWorkflow(workflow, tables)
 		const steps = useWorkflowSteps(wf, DisplayOrder.FirstOnTop)
 		const outputs = useStepOutputs(wf) as string[]
-		const onStepSave = useHandleStepSave(wf)
+		const onStepSave = useOnStepSave(wf)
 		const onStepOutputChange = useHandleStepOutputChanged(wf)
 		return (
 			<Container>

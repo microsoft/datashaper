@@ -5,7 +5,7 @@
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 
-import type { CommandBarColors } from '../types.js'
+import type { CommandBarColors } from '../../types.js'
 
 export function useCommandBarColorDefaults(
 	colors?: Partial<CommandBarColors>,

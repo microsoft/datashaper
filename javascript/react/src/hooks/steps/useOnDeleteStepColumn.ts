@@ -6,9 +6,9 @@ import type { InputColumnRecordArgs } from '@datashaper/schema'
 import type { Step } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
-import type { StepChangeFunction } from '../types.js'
+import type { StepChangeFunction } from '../../types.js'
 
-export function useColumnRecordDelete(
+export function useOnDeleteStepColumn(
 	step: Step<InputColumnRecordArgs>,
 	onChange?: StepChangeFunction<InputColumnRecordArgs>,
 ): (column: string) => void {

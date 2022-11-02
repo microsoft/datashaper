@@ -5,7 +5,7 @@
 import type { UnfoldArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useStepDataTable, useTableColumnNames } from '../../../hooks/index.js'
+import { useColumnNames,useStepDataTable } from '../../../hooks/index.js'
 import type { StepComponentProps } from '../../../types.js'
 import { UnfoldBase } from './Unfold.base.js'
 
@@ -16,7 +16,7 @@ import { UnfoldBase } from './Unfold.base.js'
 export const Unfold: React.FC<StepComponentProps<UnfoldArgs>> = memo(
 	function Unfold({ step, workflow, input, table, onChange }) {
 		const dataTable = useStepDataTable(step, workflow, input, table)
-		const columns = useTableColumnNames(dataTable)
+		const columns = useColumnNames(dataTable)
 		return <UnfoldBase step={step} onChange={onChange} columns={columns} />
 	},
 )

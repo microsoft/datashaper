@@ -22,6 +22,7 @@ export {
 	type DropdownChangeHandler,
 	useDropdownChangeHandler,
 } from './useDropdownChangeHandler.js'
+export { type ModalState, useModalState } from './useModalState.js'
 export {
 	type SpinButtonChangeHandler,
 	useSpinButtonChangeHandler,

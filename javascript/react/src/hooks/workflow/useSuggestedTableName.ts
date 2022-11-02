@@ -12,7 +12,7 @@ import { useCallback } from 'react'
  * @param workflow - the workflow instance
  * @returns a safe output name to use
  */
-export function useCreateTableName(
+export function useSuggestedTableName(
 	workflow: Workflow,
 ): (name: string) => string {
 	return useCallback(

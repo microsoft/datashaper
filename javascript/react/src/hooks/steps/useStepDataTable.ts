@@ -7,7 +7,7 @@ import type { Step, Workflow } from '@datashaper/workflow'
 import { NodeInput } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-import { useDataTable } from '../hooks/index.js'
+import { useDataTable } from '../index.js'
 
 export function useStepDataTable(
 	step: Step,

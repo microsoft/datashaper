@@ -15,7 +15,7 @@ import uniqueId from 'lodash-es/uniqueId.js'
 import upperFirst from 'lodash-es/upperFirst.js'
 import { useMemo } from 'react'
 
-import { useHeaderCommandBarDefaults } from '../../hooks/useHeaderCommandBarDefaults.js'
+import { useHeaderCommandBarDefaults } from '../../hooks/index.js'
 import type { GroupedVerbs } from './TableCommands.types.js'
 import {
 	groupedColumnVerbs,

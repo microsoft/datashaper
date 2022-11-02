@@ -16,8 +16,8 @@ import { IconButton, SpinButton } from '@fluentui/react'
 import { memo, useCallback, useMemo, useState } from 'react'
 
 import {
+	useColumnNames,
 	useSimpleDropdownOptions,
-	useTableColumnNames,
 } from '../../../hooks/index.js'
 import { InputExplainer, LeftAlignedRow } from '../../../styles.js'
 import { CalendarPicker, ColumnCriteriaComboBox } from '../../controls/index.js'
@@ -194,7 +194,7 @@ export const FilterFunction: React.FC<FilterFunctionProps> = memo(
 
 		const isEmpty = useIsEmpty(criterion)
 		const handleDeleteClick = useCallback(() => onChange?.(), [onChange])
-		const columns = useTableColumnNames(table, columnFilter)
+		const columns = useColumnNames(table, columnFilter)
 		const columnOptions = useSimpleDropdownOptions(columns)
 
 		return (

@@ -7,8 +7,8 @@ import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { map } from 'rxjs'
 
-import { EMPTY_ARRAY } from '../empty.js'
-import { DisplayOrder } from '../enums.js'
+import { EMPTY_ARRAY } from '../../empty.js'
+import { DisplayOrder } from '../../enums.js'
 
 /**
  * Gets the workflow processing steps

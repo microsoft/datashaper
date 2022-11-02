@@ -9,7 +9,7 @@ import type { Step, Workflow } from '@datashaper/workflow'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { EMPTY_OBJECT } from '../../../../empty.js'
-import { useHandleStepSave } from '../../../../hooks/useHandleStepSave.js'
+import { useOnStepSave } from '../../../../hooks/steps/useOnStepSave.js'
 
 export function useWorkflowDownloadUrl(workflow: Workflow | undefined): string {
 	const [serialized, setSerialized] = useState<Blob>(
@@ -35,7 +35,7 @@ function workflowToJson(workflow: Workflow | undefined) {
  * @returns
  */
 export function useCreateStepHandler(workflow: Workflow): (verb: Verb) => void {
-	const saveStep = useHandleStepSave(workflow)
+	const saveStep = useOnStepSave(workflow)
 	return useCallback(
 		(verb: Verb) => saveStep({ verb } as Step, workflow.length),
 		[saveStep, workflow],

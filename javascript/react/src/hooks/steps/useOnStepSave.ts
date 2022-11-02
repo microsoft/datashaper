@@ -5,7 +5,7 @@
 import type { Step, Workflow } from '@datashaper/workflow'
 import { useCallback } from 'react'
 
-export function useHandleStepSave(
+export function useOnStepSave(
 	workflow: Workflow,
 ): (step: Step, index: number | undefined) => Step {
 	return useCallback(

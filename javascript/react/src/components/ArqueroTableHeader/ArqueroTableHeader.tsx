@@ -5,7 +5,7 @@
 
 import { memo, useMemo } from 'react'
 
-import { useCommandBarColorDefaults } from '../../hooks/useCommandBarColorDefaults.js'
+import { useCommandBarColorDefaults } from '../../hooks/index.js'
 import { useColumnCounts, useRowCounts } from './ArqueroTableHeader.hooks.js'
 import {
 	Container,

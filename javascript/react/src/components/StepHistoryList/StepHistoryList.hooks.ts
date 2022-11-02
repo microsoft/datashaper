@@ -6,7 +6,7 @@ import type { Workflow } from '@datashaper/workflow'
 import { useCallback, useState } from 'react'
 
 import { DisplayOrder } from '../../enums.js'
-import { useModalState } from '../../hooks/useModalState.js'
+import { useModalState } from '../../hooks/fluent/useModalState.js'
 
 export function useTableHandlers(
 	workflow: Workflow,

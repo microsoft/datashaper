@@ -6,7 +6,7 @@ import type { JoinArgs } from '@datashaper/schema'
 import { NodeInput } from '@datashaper/workflow'
 import { memo } from 'react'
 
-import { useDataTable, useTableColumnNames } from '../../../hooks/index.js'
+import { useColumnNames,useDataTable } from '../../../hooks/index.js'
 import { useTableDropdownOptions } from '../../../hooks/useTableDropdownOptions.js'
 import type { StepComponentProps } from '../../../types.js'
 import { JoinBase } from './Join.base.js'
@@ -27,8 +27,8 @@ export const Join: React.FC<StepComponentProps<JoinArgs>> = memo(function Join({
 		workflow,
 	)
 	const rightTable = useDataTable(step.input[NodeInput.Other]?.node, workflow)
-	const leftColumns = useTableColumnNames(leftTable)
-	const rightColumns = useTableColumnNames(rightTable)
+	const leftColumns = useColumnNames(leftTable)
+	const rightColumns = useColumnNames(rightTable)
 
 	return (
 		<JoinBase

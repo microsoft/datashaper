@@ -6,7 +6,7 @@ import { ActionButton, Label } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
 import { EMPTY_ARRAY } from '../../../empty.js'
-import { useStepDataTable } from '../../../hooks/useStepDataTable.js'
+import { useStepDataTable } from '../../../hooks/steps/useStepDataTable.js'
 import type { StepComponentProps } from '../../../types.js'
 import { useOthers } from './SetOperation.hooks.js'
 import { Container, icons, Tables } from './SetOperation.styles.js'

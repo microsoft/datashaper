@@ -28,7 +28,6 @@
 |  [useFormattedNumber(value, formatter)](./react.useformattednumber.md) |  |
 |  [useGroupHeaderRenderer(table, computedMetadata, groupHeaderFunction, lazyLoadGroups)](./react.usegroupheaderrenderer.md) | Overrides the default group header rendering so we can inject customization |
 |  [useHandleStepOutputChanged(workflow)](./react.usehandlestepoutputchanged.md) | This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future. |
-|  [useHandleStepSave(workflow)](./react.usehandlestepsave.md) |  |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
 |  [useIncrementingColumnColorScale(meta)](./react.useincrementingcolumncolorscale.md) | Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table. |
 |  [useInputTableNames(workflow)](./react.useinputtablenames.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
@@ -36,6 +35,7 @@
 |  [useOnDeleteStep(workflow)](./react.useondeletestep.md) |  |
 |  [useOnEditStep(setStep, setStepIndex, showTableModal)](./react.useoneditstep.md) | A hook to get the onEditStep callback |
 |  [useOnSaveStep(workflow)](./react.useonsavestep.md) |  |
+|  [useOnStepSave(workflow)](./react.useonstepsave.md) |  |
 |  [useOnUpdateStep(workflow)](./react.useonupdatestep.md) |  |
 |  [useReifiedTable(table)](./react.usereifiedtable.md) |  |
 |  [useSlicedTable(table, offset, limit)](./react.useslicedtable.md) |  |

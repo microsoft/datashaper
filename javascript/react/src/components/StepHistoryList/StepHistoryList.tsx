@@ -10,7 +10,7 @@ import { DefaultButton, useTheme } from '@fluentui/react'
 import { memo } from 'react'
 
 import { DisplayOrder } from '../../enums.js'
-import { useWorkflowSteps } from '../../hooks/useWorkflowSteps.js'
+import { useWorkflowSteps } from '../../hooks/workflow/useWorkflowSteps.js'
 import type { StepHeaderStyles } from '../StepHeader/index.js'
 import { StepHeader } from '../StepHeader/index.js'
 import { TableTransform } from '../TableTransform/index.js'

@@ -7,7 +7,10 @@ import type { Step, Workflow } from '@datashaper/workflow'
 import { readStep } from '@datashaper/workflow'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { useCreateTableId, useFormattedColumnArg } from '../../hooks/index.js'
+import {
+	useFormattedColumnArg,
+	useSuggestedTableName,
+} from '../../hooks/index.js'
 
 export function useHandleSaveClick(
 	step: Step | undefined,
@@ -38,7 +41,7 @@ export function useInternalTableStep(
 		}
 	}, [step, setInternal])
 
-	const createNewTableId = useCreateTableId(workflow)
+	const createNewTableId = useSuggestedTableName(workflow)
 
 	const handleVerbChange = useCallback(
 		(verb: Verb) => {

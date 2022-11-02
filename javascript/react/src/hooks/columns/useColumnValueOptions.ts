@@ -8,8 +8,8 @@ import { op } from 'arquero'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
-import { EMPTY_ARRAY } from '../empty.js'
-import { useSimpleDropdownOptions } from './useSimpleDropdownOptions.js'
+import { EMPTY_ARRAY } from '../../empty.js'
+import { useSimpleDropdownOptions } from '../useSimpleDropdownOptions.js'
 
 export function useColumnValueOptions(
 	column: string | undefined,

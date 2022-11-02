@@ -8,7 +8,7 @@ import { columnType } from '@datashaper/tables'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
-import { EMPTY_ARRAY } from '../empty.js'
+import { EMPTY_ARRAY } from '../../empty.js'
 
 export function useColumnsMetadata(
 	table: ColumnTable | undefined,

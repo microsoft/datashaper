@@ -570,11 +570,6 @@ export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata?: Ta
 // @public
 export function useHandleStepOutputChanged(workflow: Workflow): (step: Step) => void;
 
-// Warning: (ae-missing-release-tag) "useHandleStepSave" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useHandleStepSave(workflow: Workflow): (step: Step, index: number | undefined) => Step;
-
 // Warning: (ae-forgotten-export) The symbol "CommandBarColors" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useHeaderCommandBarDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -610,6 +605,11 @@ export function useOnEditStep(setStep: (step: Step) => void, setStepIndex: (inde
 //
 // @public (undocumented)
 export function useOnSaveStep(workflow: Workflow): (step: Step, index: number | undefined) => void;
+
+// Warning: (ae-missing-release-tag) "useOnStepSave" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useOnStepSave(workflow: Workflow): (step: Step, index: number | undefined) => Step;
 
 // Warning: (ae-missing-release-tag) "useOnUpdateStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

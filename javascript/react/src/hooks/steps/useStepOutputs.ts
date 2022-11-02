@@ -5,6 +5,8 @@
 import type { Workflow } from '@datashaper/workflow'
 import { useObservableState } from 'observable-hooks'
 
+import { EMPTY_ARRAY } from '../../empty.js'
+
 /**
  * create a parallel array of output names for the steps
  *
@@ -12,7 +14,5 @@ import { useObservableState } from 'observable-hooks'
  * @returns
  */
 export function useStepOutputs(workflow: Workflow): string[] {
-	return useObservableState(workflow.outputNames$) ?? EMPTY
+	return useObservableState(workflow.outputNames$) ?? EMPTY_ARRAY
 }
-
-const EMPTY: string[] = []

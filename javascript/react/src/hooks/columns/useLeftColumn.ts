@@ -13,11 +13,3 @@ export function useLeftColumn(step: Step<JoinArgs>): string | undefined {
 export function getLeftColumn(step: Step<JoinArgs>): string | undefined {
 	return step.args.on && step.args.on.length > 0 ? step.args.on[0] : undefined
 }
-
-export function useRightColumn(step: Step<JoinArgs>): string | undefined {
-	return useMemo(() => getRightColumn(step), [step])
-}
-
-export function getRightColumn(step: Step<JoinArgs>): string | undefined {
-	return step.args.on && step.args.on.length > 1 ? step.args.on[1] : undefined
-}

@@ -12,8 +12,8 @@ import type {
 import merge from 'lodash-es/merge.js'
 import { useMemo } from 'react'
 
-import { DEFAULT_HEIGHT } from '../components/ArqueroTableHeader/ArqueroTableHeader.constants.js'
-import type { CommandBarColors } from '../types.js'
+import { DEFAULT_HEIGHT } from '../../components/ArqueroTableHeader/ArqueroTableHeader.constants.js'
+import type { CommandBarColors } from '../../types.js'
 import { useCommandBarColorDefaults } from './useCommandBarColorDefaults.js'
 
 /**

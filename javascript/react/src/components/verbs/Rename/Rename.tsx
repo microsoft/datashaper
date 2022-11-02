@@ -18,10 +18,10 @@ import { memo, useMemo } from 'react'
 
 import { EMPTY_OBJECT } from '../../../empty.js'
 import {
-	useColumnRecordDelete,
+	useColumnNames,
+	useOnDeleteStepColumn,
 	useSimpleDropdownOptions,
 	useStepDataTable,
-	useTableColumnNames,
 } from '../../../hooks/index.js'
 import { narrowerDropdownStyles } from '../../../styles.js'
 import type { StepComponentProps } from '../../../types.js'
@@ -39,7 +39,7 @@ export const Rename: React.FC<StepComponentProps<RenameArgs>> = memo(
 	function Rename({ step, workflow, input, table, onChange }) {
 		const dataTable = useStepDataTable(step, workflow, input, table)
 		const handleColumnChange = useHandleColumnChange(step, onChange)
-		const handleColumnDelete = useColumnRecordDelete(step, onChange)
+		const handleColumnDelete = useOnDeleteStepColumn(step, onChange)
 		const handleButtonClick = useHandleAddButtonClick(step, dataTable, onChange)
 		const columnPairs = useColumnPairs(
 			dataTable,
@@ -117,7 +117,7 @@ const ColumnPair: React.FC<{
 		onChange(oldname, oldname, newValue ?? '')
 	}
 	const handleDeleteClick = () => onDelete(oldname)
-	const columns = useTableColumnNames(table, columnFilter)
+	const columns = useColumnNames(table, columnFilter)
 	const options = useSimpleDropdownOptions(columns)
 
 	return (

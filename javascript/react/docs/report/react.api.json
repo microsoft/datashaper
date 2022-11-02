@@ -6789,65 +6789,6 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/react!useHandleStepSave:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useHandleStepSave(workflow: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Workflow",
-              "canonicalReference": "@datashaper/workflow!Workflow:class"
-            },
-            {
-              "kind": "Content",
-              "text": "): "
-            },
-            {
-              "kind": "Content",
-              "text": "(step: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", index: number | undefined) => "
-            },
-            {
-              "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 7
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [
-            {
-              "parameterName": "workflow",
-              "parameterTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isOptional": false
-            }
-          ],
-          "name": "useHandleStepSave"
-        },
-        {
-          "kind": "Function",
           "canonicalReference": "@datashaper/react!useHeaderCommandBarDefaults:function(1)",
           "docComment": "/**\n * Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal.\n *\n * @returns \n */\n",
           "excerptTokens": [
@@ -7327,6 +7268,65 @@
             }
           ],
           "name": "useOnSaveStep"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useOnStepSave:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useOnStepSave(workflow: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Workflow",
+              "canonicalReference": "@datashaper/workflow!Workflow:class"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "(step: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", index: number | undefined) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "Step",
+              "canonicalReference": "@datashaper/workflow!Step:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "workflow",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useOnStepSave"
         },
         {
           "kind": "Function",

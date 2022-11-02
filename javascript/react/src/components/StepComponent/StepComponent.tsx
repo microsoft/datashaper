@@ -18,9 +18,9 @@ import { MultiDropdown } from '@essex/components'
 import { TextField } from '@fluentui/react'
 import { memo } from 'react'
 
+import { useColumnNames } from '../../hooks/columns/useColumnNames.js'
 import { useDataTable } from '../../hooks/useDataTable.js'
 import { useSimpleDropdownOptions } from '../../hooks/useSimpleDropdownOptions.js'
-import { useTableColumnNames } from '../../hooks/useTableColumnNames.js'
 import { useTableDropdownOptions } from '../../hooks/useTableDropdownOptions.js'
 import { dropdownStyles } from '../../styles.js'
 import { TableColumnDropdown } from '../controls/TableColumnDropdown/TableColumnDropdown.js'
@@ -69,7 +69,7 @@ export const StepComponent: React.FC<StepComponentProps> = memo(
 		/* Table Options */
 		const tableOptions = useTableDropdownOptions(g)
 		/* Column Options */
-		const columns = useTableColumnNames(table, useColumnFilter(s, table))
+		const columns = useColumnNames(table, useColumnFilter(s, table))
 		const columnOptions = useSimpleDropdownOptions(columns)
 
 		/* The step args component */

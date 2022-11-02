@@ -5,7 +5,7 @@
 import type { AggregateArgs } from '@datashaper/schema'
 import { memo } from 'react'
 
-import { useStepDataTable, useTableColumnNames } from '../../../hooks/index.js'
+import { useColumnNames,useStepDataTable } from '../../../hooks/index.js'
 import type { StepComponentProps } from '../../../types.js'
 import { AggregateBase } from './Aggregate.base.js'
 
@@ -16,7 +16,7 @@ import { AggregateBase } from './Aggregate.base.js'
 export const Aggregate: React.FC<StepComponentProps<AggregateArgs>> = memo(
 	function Aggregate({ step, workflow, input, table, onChange }) {
 		const dataTable = useStepDataTable(step, workflow, input, table)
-		const columns = useTableColumnNames(dataTable)
+		const columns = useColumnNames(dataTable)
 		return <AggregateBase columns={columns} step={step} onChange={onChange} />
 	},
 )

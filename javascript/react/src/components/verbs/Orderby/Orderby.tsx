@@ -7,9 +7,9 @@ import { ActionButton, Label } from '@fluentui/react'
 import { memo } from 'react'
 
 import {
+	useColumnNames,
 	useSimpleDropdownOptions,
 	useStepDataTable,
-	useTableColumnNames,
 } from '../../../hooks/index.js'
 import type { StepComponentProps } from '../../../types.js'
 import { useAddButtonClickedHandler, useSorts } from './Orderby.hooks.js'
@@ -21,7 +21,7 @@ import { Container, icons, Sorts } from './Orderby.styles.js'
 export const Orderby: React.FC<StepComponentProps<OrderbyArgs>> = memo(
 	function Orderby({ step, workflow, input, table, onChange }) {
 		const dataTable = useStepDataTable(step, workflow, input, table)
-		const columns = useTableColumnNames(dataTable)
+		const columns = useColumnNames(dataTable)
 		const columnOptions = useSimpleDropdownOptions(columns)
 		const sorts = useSorts(step, columnOptions, onChange)
 		const handleButtonClick = useAddButtonClickedHandler(
