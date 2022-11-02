@@ -970,33 +970,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ArqueroTableHeaderProps#onRenameTable:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onRenameTable?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(name: string) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onRenameTable",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!ArqueroTableHeaderProps#showColumnCount:member",
               "docComment": "",
               "excerptTokens": [
