@@ -7,14 +7,14 @@ import { IconButton } from '@fluentui/react'
 import merge from 'lodash-es/merge.js'
 import { memo } from 'react'
 
-import { dropdownStyles } from '../styles.js'
+import { dropdownStyles } from '../../styles.js'
+import { TableColumnDropdown } from '../TableColumnDropdown/TableColumnDropdown.js'
 import {
 	useHandleColumnChange,
 	useHandleDirectionClick,
 } from './SortInstruction.hooks.js'
 import { Container, icons } from './SortInstruction.styles.js'
 import type { SortInstructionProps } from './SortInstruction.types.js'
-import { TableColumnDropdown } from './TableColumnDropdown.js'
 
 const narrowerStyles = merge({}, dropdownStyles, {
 	root: {

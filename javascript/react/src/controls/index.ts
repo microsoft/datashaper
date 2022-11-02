@@ -2,13 +2,13 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export * from './CalendarPicker.js'
-export * from './ColumnCriteriaCombobox.js'
-export * from './ColumnOrValueComboBox.js'
-export * from './ColumnSpread.js'
-export * from './ColumnValueDropdown.js'
-export * from './ContextualMenuItemSearchBox.js'
-export * from './DateFormatPatternCombobox.js'
-export * from './SortInstruction.js'
-export * from './TableColumnDropdown.js'
-export * from './TableDropdown.js'
+export * from './CalendarPicker/index.js'
+export * from './ColumnCriteriaCombobox/index.js'
+export * from './ColumnOrValueCombobox/index.js'
+export * from './ColumnSpread/index.js'
+export * from './ColumnValueDropdown/index.js'
+export * from './ContextualMenuItemSearchBox/index.js'
+export * from './DateFormatPatternCombobox/index.js'
+export * from './SortInstruction/index.js'
+export * from './TableColumnDropdown/index.js'
+export * from './TableDropdown/index.js'

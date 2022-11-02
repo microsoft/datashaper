@@ -13,6 +13,7 @@ import {
 import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useCallback, useMemo, useRef, useState } from 'react'
 
+import type { CalendarPickerProps } from '../CalendarPicker/index.js'
 import {
 	CalendarButton,
 	CalendarContainer,
@@ -20,7 +21,6 @@ import {
 	Container,
 	iconClass,
 } from './CalendarPicker.styles.js'
-import type { CalendarPickerProps } from './CalendarPicker.types.js'
 
 export const CalendarPicker: React.FC<CalendarPickerProps> = memo(
 	function CalendarPicker({ onSelectDate, value, disabled, cleanLabel }) {

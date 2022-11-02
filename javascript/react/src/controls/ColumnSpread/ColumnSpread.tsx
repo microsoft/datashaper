@@ -5,9 +5,9 @@
 import { IconButton, TextField } from '@fluentui/react'
 import { memo } from 'react'
 
-import { dropdownStyles } from '../styles.js'
+import { dropdownStyles } from '../../styles.js'
 import { useHandleColumnChange } from './ColumnSpread.hooks.js'
-import { Container,icons } from './ColumnSpread.styles.js'
+import { Container, icons } from './ColumnSpread.styles.js'
 import type { ColumnSpreadProps } from './ColumnSpread.types.js'
 
 /**

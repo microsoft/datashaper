@@ -4,6 +4,6 @@
  */
 import type { IComboBoxOption, IComboBoxProps } from '@fluentui/react'
 
-export interface ColumnOrValueComboBoxProps extends Partial<IComboBoxProps> {
+export interface ColumnOrValueComboboxProps extends Partial<IComboBoxProps> {
 	options: IComboBoxOption[]
 }
