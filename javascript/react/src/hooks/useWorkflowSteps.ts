@@ -7,9 +7,8 @@ import { useObservableState } from 'observable-hooks'
 import { useMemo } from 'react'
 import { map } from 'rxjs'
 
+import { EMPTY_ARRAY } from '../empty.js'
 import { DisplayOrder } from '../enums.js'
-
-const EMPTY: Step[] = []
 
 /**
  * Gets the workflow processing steps
@@ -24,7 +23,7 @@ export function useWorkflowSteps(
 		() => workflow.steps$.pipe(map(s => orderSteps(s, order))),
 		[workflow, order],
 	)
-	return useObservableState(observable) ?? EMPTY
+	return useObservableState(observable) ?? EMPTY_ARRAY
 }
 
 function orderSteps(input: Step[], order: DisplayOrder): Step[] {

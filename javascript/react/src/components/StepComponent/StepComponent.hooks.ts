@@ -18,17 +18,15 @@ import type React from 'react'
 import { useCallback, useEffect, useMemo } from 'react'
 
 import { EMPTY_ARRAY } from '../../empty.js'
-import { useResetArgs } from '../../hooks/common.js'
-import type {
-	DropdownChangeAllHandler,
-	DropdownChangeHandler,
-	TextFieldChangeHandler,
-} from '../../hooks/fluent.js'
 import {
+	type DropdownChangeAllHandler,
+	type DropdownChangeHandler,
+	type TextFieldChangeHandler,
 	useDropdownChangeAllHandler,
 	useDropdownChangeHandler,
+	useResetArgs,
 	useTextFieldChangeHandler,
-} from '../../hooks/fluent.js'
+} from '../../hooks/index.js'
 import type { StepComponentProps } from '../../types.js'
 import { selectStepComponent } from './selectStepComponent.js'
 

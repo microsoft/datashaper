@@ -10,13 +10,13 @@ import { cloneStep, Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback, useEffect } from 'react'
 
-import { useCreateTableName } from '../hooks/common.js'
 import type { ModalState } from '../hooks/index.js'
 import {
 	useHandleStepOutputChanged,
 	useHandleStepSave,
 	useModalState,
 } from '../hooks/index.js'
+import { useCreateTableName } from './useCreateTableName.js'
 
 export function useOnDuplicateStep(
 	workflow: Workflow,
