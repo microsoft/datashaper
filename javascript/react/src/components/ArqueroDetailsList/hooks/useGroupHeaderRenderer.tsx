@@ -10,7 +10,7 @@ import type {
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useCallback } from 'react'
 
-import { GroupHeader } from '../../internal/GroupHeader.js'
+import { GroupHeader } from '../GroupHeader.js'
 import type { GroupHeaderFunction } from '../index.js'
 
 /**

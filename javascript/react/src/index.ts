@@ -6,32 +6,7 @@
 /*
  * Exported Components
  */
-export type {
-	ArqueroDetailsListProps,
-	DetailsListFeatures,
-} from './components/ArqueroDetailsList/ArqueroDetailsList.types.js'
-export * from './components/ArqueroDetailsList/index.js'
-export type { ArqueroTableHeaderProps } from './components/ArqueroTableHeader/ArqueroTableHeader.types.js'
-export * from './components/ArqueroTableHeader/index.js'
-export { Guidance } from './components/Guidance.js'
-export type { GuidanceProps } from './components/Guidance.types.js'
-export { StepCard } from './components/StepCard.js'
-export type { StepCardProps } from './components/StepCard.types.js'
-export { StepComponent } from './components/StepComponent.js'
-export type { StepComponentProps } from './components/StepComponent.types.js'
-export { StepDescription } from './components/StepDescription.js'
-export type { StepDescriptionProps } from './components/StepDescription.types.js'
-export { StepHistoryList } from './components/StepHistoryList.js'
-export type { StepHistoryListProps } from './components/StepHistoryList.types.js'
-export { StepList } from './components/StepList.js'
-export type { StepListProps } from './components/StepList.types.js'
-export { StepSelector } from './components/StepSelector.js'
-export type { StepSelectorProps } from './components/StepSelector.types.js'
-export { TableCommands } from './components/TableCommands.js'
-export type { TableCommandsProps } from './components/TableCommands.types.js'
-export { TableList } from './components/TableList.js'
-export type { TableListProps } from './components/TableList.types.js'
-export type { TableTransformProps } from './components/TableTransform.types.js'
+export * from './components/index.js'
 export { DisplayOrder } from './enums.js'
 export {
 	useDataTable,

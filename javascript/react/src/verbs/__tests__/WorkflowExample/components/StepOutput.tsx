@@ -5,7 +5,7 @@
 import { introspect } from '@datashaper/tables'
 import { memo, useMemo } from 'react'
 
-import { StepComponent } from '../../../../components/StepComponent.js'
+import { StepComponent } from '../../../../components/StepComponent/StepComponent.js'
 import { StepDescription } from '../../../../components/StepDescription.js'
 import { useDataTable } from '../../../../hooks/useDataTable.js'
 import { Section } from './Section.js'

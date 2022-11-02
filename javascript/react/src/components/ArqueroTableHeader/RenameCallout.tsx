@@ -2,16 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import styled from '@essex/styled-components'
-import { DirectionalHint, FocusTrapCallout, TextField } from '@fluentui/react'
+import { DirectionalHint, TextField } from '@fluentui/react'
 import { memo, useCallback } from 'react'
 
-export interface RenameCalloutProps {
-	onSend: (name?: string) => void
-	onChange: (evt: any, value?: string) => void
-	editedName: string
-	name?: string
-}
+import { FocusCallout } from './RenameCallout.styles.js'
+import type { RenameCalloutProps } from './RenameCallout.types.js'
 
 /**
  * Renders the callout with a field to rename the table (and autofocus to the input)
@@ -44,9 +39,3 @@ export const RenameCallout: React.FC<RenameCalloutProps> = memo(
 		)
 	},
 )
-
-const FocusCallout = styled(FocusTrapCallout)`
-	width: 320;
-	max-width: 90%;
-	padding: 10px;
-`

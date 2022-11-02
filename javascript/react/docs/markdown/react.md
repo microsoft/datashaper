@@ -60,6 +60,7 @@
 |  [ArqueroTableHeaderProps](./react.arquerotableheaderprops.md) |  |
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
 |  [ColumnOptions](./react.columnoptions.md) |  |
+|  [CustomIconProps](./react.customiconprops.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
 |  [GuidanceProps](./react.guidanceprops.md) |  |
 |  [SortParameters](./react.sortparameters.md) |  |
@@ -79,7 +80,9 @@
 |  --- | --- |
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
+|  [defaultIconClass](./react.defaulticonclass.md) |  |
 |  [Guidance](./react.guidance.md) |  |
+|  [HistoryIcon](./react.historyicon.md) |  |
 |  [StepCard](./react.stepcard.md) |  |
 |  [StepComponent](./react.stepcomponent.md) | Let's us render the Steps in a loop while memoing all the functions |
 |  [StepDescription](./react.stepdescription.md) | Let's us render the Steps in a loop while memoing all the functions |
@@ -88,6 +91,7 @@
 |  [StepSelector](./react.stepselector.md) | Creates a custom step selection dropdown. If "showButton" is true, a + icon will appear next to the dropdown, and onChange will only fire when it is clicked. |
 |  [TableCommands](./react.tablecommands.md) |  |
 |  [TableList](./react.tablelist.md) |  |
+|  [TableTransform](./react.tabletransform.md) |  |
 
 ## Type Aliases
 

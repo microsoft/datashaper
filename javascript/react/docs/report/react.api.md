@@ -153,6 +153,21 @@ export interface ColumnOptions {
 // @public (undocumented)
 export type ColumnRenderFunction = (item?: any, index?: number, column?: IColumn) => any;
 
+// Warning: (ae-missing-release-tag) "CustomIconProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CustomIconProps {
+    // (undocumented)
+    color?: string;
+    // (undocumented)
+    fontSize?: number;
+}
+
+// Warning: (ae-missing-release-tag) "defaultIconClass" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const defaultIconClass: string;
+
 // Warning: (ae-missing-release-tag) "DetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -214,6 +229,11 @@ export interface GuidanceProps {
     // (undocumented)
     name: string;
 }
+
+// Warning: (ae-missing-release-tag) "HistoryIcon" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const HistoryIcon: React.FC<CustomIconProps>;
 
 // Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -459,6 +479,11 @@ export interface TableListProps {
 //
 // @public
 export function tableMenuCommand(tables: TableContainer[], selectedKey?: string | undefined, onChange?: (id: string) => void, props?: Partial<ICommandBarItemProps>): ICommandBarItemProps;
+
+// Warning: (ae-missing-release-tag) "TableTransform" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const TableTransform: React.FC<TableTransformProps>;
 
 // Warning: (ae-missing-release-tag) "TableTransformProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
