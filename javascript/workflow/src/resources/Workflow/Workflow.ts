@@ -130,16 +130,11 @@ export class Workflow
 		if (name == null) {
 			return this._defaultOutput
 		}
-		if (!this._tables.has(name)) {
-			this._tables.set(
-				name,
-				new BehaviorSubject<Maybe<TableContainer>>(undefined),
-			)
-			if (name && this._graph.hasNode(name)) {
-				this.observeOutput(name)
-			}
+		const [result, created] = this._ensureTable(name)
+		if (created && name && this._graph.hasNode(name)) {
+			this.observeOutput(name)
 		}
-		return this._tables.get(name)!
+		return result
 	}
 
 	private getNode(id: string): Node<TableContainer> {
@@ -262,7 +257,8 @@ export class Workflow
 		this._graph.remove(id)
 		this._tableSubscriptions.get(id)?.unsubscribe()
 		this._tableSubscriptions.delete(id)
-		this._tables.delete(id)
+		// leave the client read subjects alone, but clear out the current value
+		this._tables.get(id)?.next(undefined)
 	}
 
 	/**
@@ -282,11 +278,25 @@ export class Workflow
 
 	private _bindInputObservable(id: string, source: TableObservable): void {
 		this._removeInputObservableSilent(id)
-		const subject = new BehaviorSubject<Maybe<TableContainer>>(undefined)
+		const [subject] = this._ensureTable(id)
 		const subscription = source.subscribe(s => subject.next(s))
 		this._tables.set(id, subject)
 		this._tableSubscriptions.set(id, subscription)
 		this._graph.add(observableNode(id, subject))
+	}
+
+	private _ensureTable(
+		id: string,
+	): [BehaviorSubject<Maybe<TableContainer>>, boolean] {
+		let created = false
+		if (!this._tables.has(id)) {
+			this._tables.set(
+				id,
+				new BehaviorSubject<Maybe<TableContainer>>(undefined),
+			)
+			created = true
+		}
+		return [this._tables.get(id)!, created]
 	}
 
 	private _assertInputName(id: string | undefined): void {

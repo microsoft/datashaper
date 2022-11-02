@@ -12,7 +12,7 @@ export function useColumnNames(
 	filter?: (name: string) => boolean,
 ): string[] {
 	return useMemo(
-		() => table?.columnNames(filter) || EMPTY_ARRAY,
+		() => table?.columnNames(filter) ?? EMPTY_ARRAY,
 		[table, filter],
 	)
 }
