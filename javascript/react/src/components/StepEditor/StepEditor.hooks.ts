@@ -17,20 +17,6 @@ export function useHandleSaveClick(
 	return onTransformRequested ? save : undefined
 }
 
-export function useInternalTableStep(
-	step: Step | undefined,
-): [Step | undefined, (step?: Step) => void] {
-	const [internal, setInternal] = useState<Step | undefined>()
-
-	useEffect(() => {
-		if (step) {
-			setInternal(step)
-		}
-	}, [step, setInternal])
-
-	return [internal, setInternal]
-}
-
 export function useStepOutputHandling(
 	workflow: Workflow,
 	step: Step | undefined,
