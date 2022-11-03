@@ -11,6 +11,7 @@ export const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
 	overflow-x: auto;
 	span.ms-DetailsHeader-cellTitle {
 		background-color: ${({ theme }) => theme.palette.white};
+		padding-left: 10px;
 	}
 
 	.ms-List-cell {
