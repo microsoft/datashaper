@@ -18,12 +18,12 @@ import {
 	icons,
 	StepComponentContainer,
 	Title,
-} from './TableTransformModal.styles.js'
-import type { TransformModalProps } from './TableTransformModal.types.js'
-import { getModalStyles } from './TableTransformModal.utils.js'
+} from './StepEditorModal.styles.js'
+import type { StepEditorModalProps } from './StepEditorModal.types.js'
+import { getModalStyles } from './StepEditorModal.utils.js'
 
-export const TableTransformModal: React.FC<TransformModalProps> = memo(
-	function TableTransformModal({
+export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
+	function StepEditorModal({
 		onDismiss,
 		workflow,
 		metadata,
@@ -65,10 +65,8 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 				<ContainerBody>
 					<StepComponentContainer>
 						<StepStackItem
-							hideInput={props.hideInput}
-							hideOutput={props.hideOutput}
-							hideStepSelector={props.hideInput && props.hideOutput}
-							hideInputColumn={props.hideInput && props.hideOutput}
+							hideStepSelector
+							hideInputColumn
 							workflow={workflow}
 							metadata={metadata}
 							onSave={onSave}

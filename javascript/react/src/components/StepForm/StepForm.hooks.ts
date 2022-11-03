@@ -11,7 +11,7 @@ import { DataType } from '@datashaper/schema'
 import { columnType, columnTypes } from '@datashaper/tables'
 import { toggleListItem } from '@datashaper/utilities'
 import type { Step } from '@datashaper/workflow'
-import { isNumericInputStep, NodeInput } from '@datashaper/workflow'
+import { isNumericInputStep } from '@datashaper/workflow'
 import type { IDropdownOption } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import type React from 'react'
@@ -24,7 +24,6 @@ import {
 	type TextFieldChangeHandler,
 	useDropdownChangeAllHandler,
 	useDropdownChangeHandler,
-	useOnResetStepArgs,
 	useTextFieldChangeHandler,
 } from '../../hooks/index.js'
 import type { StepComponentProps } from '../verbs/index.js'
@@ -65,28 +64,6 @@ export function useColumnFilter(
 			return isNumericInputStep(step) ? typeMap[name] === DataType.Number : true
 		},
 		[typeMap, step],
-	)
-}
-
-export function useInputTableChanged(
-	step: Step,
-	onChange: (step: Step) => void,
-): DropdownChangeHandler {
-	const resetArgs = useOnResetStepArgs()
-
-	return useDropdownChangeHandler(
-		step,
-		(s: Step, val: string | number | undefined) => {
-			if (val != null) {
-				// wire up the Step's input field
-				s.input[NodeInput.Source] = { node: val as string }
-				resetArgs(s)
-			} else {
-				// no value: delete the input
-				delete s.input[NodeInput.Source]
-			}
-		},
-		onChange,
 	)
 }
 
@@ -143,18 +120,6 @@ export function useOutputColumnChanged(
 		(s, val) => {
 			s.args.to = val as string
 		},
-		onChange,
-	)
-}
-
-export function useOutputTableChanged(
-	step: Step,
-	onChangeOutput: (val: string) => void,
-	onChange: (step: Step) => void,
-): TextFieldChangeHandler {
-	return useTextFieldChangeHandler(
-		step,
-		(_s, val) => onChangeOutput(val as string),
 		onChange,
 	)
 }

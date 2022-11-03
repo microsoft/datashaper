@@ -10,7 +10,6 @@ import type {
 import {
 	isInputColumnListStep,
 	isInputColumnStep,
-	isInputTableStep,
 	isOutputColumnStep,
 	NodeInput,
 } from '@datashaper/workflow'
@@ -20,12 +19,8 @@ import { memo } from 'react'
 
 import { useColumnNames } from '../../hooks/columns/useColumnNames.js'
 import { useSimpleDropdownOptions } from '../../hooks/fluent/useSimpleDropdownOptions.js'
-import {
-	useTableDropdownOptions,
-	useWorkflowDataTable,
-} from '../../hooks/index.js'
+import { useWorkflowDataTable } from '../../hooks/index.js'
 import { TableColumnDropdown } from '../controls/TableColumnDropdown/TableColumnDropdown.js'
-import { TableDropdown } from '../controls/TableDropdown/TableDropdown.js'
 import { dropdownStyles } from '../styles.js'
 import {
 	getSimpleDropdownOptions,
@@ -34,9 +29,7 @@ import {
 	useInputColumnChanged,
 	useInputColumnListAllChanged,
 	useInputColumnListChanged,
-	useInputTableChanged,
 	useOutputColumnChanged,
-	useOutputTableChanged,
 	useStepArgsComponent,
 	useStepChangeHandler,
 } from './StepForm.hooks.js'
@@ -52,23 +45,16 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	workflow: g,
 	metadata,
 	index,
-	inputTableLabel,
 	inputColumnLabel,
 	outputColumnLabel,
-	outputTableLabel,
-	outputTableDisabled,
 	onChange,
 	onChangeOutput: changeOutput,
-	hideInput,
 	hideInputColumn,
-	hideOutput,
 }) {
 	/* Current Table Selection */
 	const tableId = s.input[NodeInput.Source]?.node
 	const table = useWorkflowDataTable(tableId, g)
 
-	/* Table Options */
-	const tableOptions = useTableDropdownOptions(g)
 	/* Column Options */
 	const columns = useColumnNames(table, useColumnFilter(s, table))
 	const columnOptions = useSimpleDropdownOptions(columns)
@@ -78,29 +64,16 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 
 	/* Change Events */
 	const change = useStepChangeHandler(index, onChange)
-	const onInputTableChange = useInputTableChanged(s, change)
 	const onInputColumnChange = useInputColumnChanged(s, change, table)
 	const onInputColumnListChange = useInputColumnListChanged(s, change)
 	const onInputColumnListChangeAll = useInputColumnListAllChanged(s, change)
 	const onOutputColumnChange = useOutputColumnChanged(s, change)
-	const onOutputTableChange = useOutputTableChanged(s, changeOutput, change)
 
 	/* Side Effects */
 	useDefaultOutputNameInitially(s, output, changeOutput)
 
 	return StepArgs == null ? null : (
 		<Container className="step-component">
-			{/* Input Table */}
-			{!hideInput && isInputTableStep(s) ? (
-				<TableDropdown
-					required
-					options={tableOptions}
-					label={inputTableLabel || 'Input table'}
-					selectedKey={tableId ?? null}
-					onChange={onInputTableChange}
-				/>
-			) : null}
-
 			{/* Input Column List */}
 			{isInputColumnListStep(s) ? (
 				<MultiDropdown
@@ -146,19 +119,6 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 					onChange={onOutputColumnChange}
 				/>
 			) : null}
-
-			{/* Output Table */}
-			{!hideOutput && (
-				<TextField
-					required
-					disabled={outputTableDisabled}
-					label={outputTableLabel || 'Output table'}
-					placeholder={'Table name'}
-					value={output ?? s.id}
-					styles={dropdownStyles}
-					onChange={onOutputTableChange}
-				/>
-			)}
 		</Container>
 	)
 })

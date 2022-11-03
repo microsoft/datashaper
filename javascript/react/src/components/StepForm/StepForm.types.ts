@@ -32,11 +32,6 @@ export interface StepFormProps {
 	output?: string
 
 	/**
-	 * Label for the input-table dropdown
-	 */
-	inputTableLabel?: string
-
-	/**
 	 * Label for the input table dropdown
 	 */
 	inputColumnLabel?: string
@@ -47,14 +42,10 @@ export interface StepFormProps {
 	outputColumnLabel?: string
 
 	/**
-	 * The label to use for the output field
+	 * Indicates that the input column should be hidden or else shown and editable by the user.
+	 * It may be desirable to hide this if the transform is expected to use the selected column when the modal is launched directly from a table.
 	 */
-	outputTableLabel?: string
-
-	/**
-	 * Whether the output table name is disabled
-	 */
-	outputTableDisabled?: boolean
+	hideInputColumn?: boolean
 
 	/**
 	 * The step onchange handler
@@ -65,20 +56,4 @@ export interface StepFormProps {
 	 * Event handler for when the output table name changes
 	 */
 	onChangeOutput: (value: string | undefined) => void
-	/**
-	 * Indicates that the input table should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.
-	 */
-	hideInput?: boolean
-
-	/**
-	 * Indicates that the output table should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.
-	 */
-	hideOutput?: boolean
-	/**
-	 * Indicates that the input column should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the transform is expected to use the selected column when the modal is launched directly from a table.
-	 */
-	hideInputColumn?: boolean
 }

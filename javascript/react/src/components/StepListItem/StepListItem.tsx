@@ -40,8 +40,6 @@ export const StepStackItem: React.FC<StepStackItemProps> = memo(
 		style = {},
 		hideStepSelector,
 		onDelete,
-		hideInput,
-		hideOutput,
 		hideInputColumn,
 	}) {
 		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
@@ -62,8 +60,8 @@ export const StepStackItem: React.FC<StepStackItemProps> = memo(
 		)
 
 		const disableSave = useMemo<boolean>(
-			() => isEqual(step, internal) && !hideOutput && !outputHasChanged,
-			[step, internal, outputHasChanged, hideOutput],
+			() => isEqual(step, internal) && !outputHasChanged,
+			[step, internal, outputHasChanged],
 		)
 
 		return (
@@ -102,8 +100,6 @@ export const StepStackItem: React.FC<StepStackItemProps> = memo(
 							output={output}
 							onChangeOutput={onOutputChanged}
 							onChange={setInternal}
-							hideInput={hideInput}
-							hideOutput={hideOutput}
 							hideInputColumn={hideInputColumn}
 						/>
 						<ButtonContainer>

@@ -38,18 +38,6 @@ export interface StepStackItemProps {
 	target?: string
 
 	/**
-	 * Indicates that the input table should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.
-	 */
-	hideInput?: boolean
-
-	/**
-	 * Indicates that the output table should be hidden or else shown and editable by the user.
-	 * It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.
-	 */
-	hideOutput?: boolean
-
-	/**
 	 * Indicates that the input column should be hidden or else shown and editable by the user.
 	 * It may be desirable to hide this if the transform is expected to use the selected column when the modal is launched directly from a table.
 	 */

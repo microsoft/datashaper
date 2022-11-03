@@ -110,8 +110,6 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 							}
 						>
 							<StepStackItem
-								hideInput
-								hideOutput
 								step={step}
 								index={stepIndex}
 								workflow={workflow}

@@ -554,11 +554,6 @@ export function useOnDuplicateStep(workflow: Workflow, table?: ColumnTable, onSa
 // @public
 export function useOnEditStep(setStep: (step: Step) => void, setStepIndex: (index: number) => void, showTableModal: () => void): (step: Step, index: number) => void;
 
-// Warning: (ae-missing-release-tag) "useOnResetStepArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useOnResetStepArgs(): (step: Step) => Step;
-
 // Warning: (ae-missing-release-tag) "useOnSaveStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
