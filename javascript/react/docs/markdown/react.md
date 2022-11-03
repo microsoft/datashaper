@@ -48,9 +48,7 @@
 |  [useOnDeleteStepColumn(step, onChange)](./react.useondeletestepcolumn.md) |  |
 |  [useOnDuplicateStep(workflow, table, onSave)](./react.useonduplicatestep.md) |  |
 |  [useOnEditStep(setStep, setStepIndex, showTableModal)](./react.useoneditstep.md) | A hook to get the onEditStep callback |
-|  [useOnResetStepArgs()](./react.useonresetstepargs.md) |  |
 |  [useOnSaveStep(workflow)](./react.useonsavestep.md) |  |
-|  [useOnSetStepColumnArg()](./react.useonsetstepcolumnarg.md) |  |
 |  [useOnStepOutputChanged(workflow)](./react.useonstepoutputchanged.md) | This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future. |
 |  [useOnStepSave(workflow)](./react.useonstepsave.md) |  |
 |  [useOnUpdateStep(workflow)](./react.useonupdatestep.md) |  |
@@ -86,17 +84,13 @@
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
 |  [ColumnOptions](./react.columnoptions.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
+|  [GroupedVerbs](./react.groupedverbs.md) |  |
 |  [GuidanceProps](./react.guidanceprops.md) |  |
 |  [ModalState](./react.modalstate.md) |  |
 |  [SortParameters](./react.sortparameters.md) |  |
-|  [StepCardProps](./react.stepcardprops.md) |  |
-|  [StepComponentProps](./react.stepcomponentprops.md) |  |
-|  [StepDescriptionProps](./react.stepdescriptionprops.md) |  |
-|  [StepHistoryListProps](./react.stephistorylistprops.md) |  |
+|  [StepHistoryStyles](./react.stephistorystyles.md) |  |
 |  [StepListProps](./react.steplistprops.md) |  |
-|  [StepSelectorProps](./react.stepselectorprops.md) |  |
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
-|  [TableTransformProps](./react.tabletransformprops.md) |  |
 
 ## Variables
 
@@ -105,14 +99,8 @@
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
 |  [Guidance](./react.guidance.md) |  |
-|  [StepCard](./react.stepcard.md) |  |
-|  [StepComponent](./react.stepcomponent.md) | Let's us render the Steps in a loop while memoing all the functions |
-|  [StepDescription](./react.stepdescription.md) | Let's us render the Steps in a loop while memoing all the functions |
-|  [StepHistoryList](./react.stephistorylist.md) |  |
 |  [StepList](./react.steplist.md) |  |
-|  [StepSelector](./react.stepselector.md) | Creates a custom step selection dropdown. If "showButton" is true, a + icon will appear next to the dropdown, and onChange will only fire when it is clicked. |
 |  [TableCommands](./react.tablecommands.md) |  |
-|  [TableTransform](./react.tabletransform.md) |  |
 
 ## Type Aliases
 

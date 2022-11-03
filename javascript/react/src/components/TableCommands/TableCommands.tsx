@@ -14,6 +14,7 @@ import { map } from 'rxjs'
 import styled from 'styled-components'
 
 import { useSuggestedTableName } from '../../hooks/tables/useSuggestedTableName.js'
+import { StepEditorModal } from './StepEditorModal.js'
 import {
 	useColumnCommands,
 	useTableCommands,
@@ -21,7 +22,6 @@ import {
 	useUndoCommands,
 } from './TableCommands.hooks.js'
 import type { TableCommandsProps } from './TableCommands.types.js'
-import { TableTransformModal } from './TableTransformModal.js'
 
 export const TableCommands: React.FC<TableCommandsProps> = memo(
 	function TableCommands({
@@ -45,7 +45,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			show: showModal,
 		} = useTransformModalState(setStep, setIndex)
 
-		const onTransformRequested = useCallback(
+		const onSave = useCallback(
 			(_step: Step) => {
 				onAddStep?.(_step, _step?.id, index)
 				dismissModal()
@@ -121,17 +121,14 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 				</VerbsContainer>
 
 				{isModalOpen ? (
-					<TableTransformModal
-						hideInput
-						hideOutput
+					<StepEditorModal
 						target={`#${modalTarget}`}
 						step={step}
 						index={index ?? workflow.length}
-						onTransformRequested={onTransformRequested}
+						onSave={onSave}
 						workflow={workflow}
 						metadata={metadata}
 						onDismiss={dismissModal}
-						showGuidance
 					/>
 				) : null}
 			</Container>

@@ -22,7 +22,6 @@ import type { IDetailsHeaderProps } from '@fluentui/react';
 import type { IDetailsListProps } from '@fluentui/react';
 import type { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
-import type { IDocumentCardStyles } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { InputColumnRecordArgs } from '@datashaper/schema';
 import type { IRenderFunction } from '@fluentui/react';
@@ -35,7 +34,6 @@ import type { Step } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
 import type { Value } from '@datashaper/schema';
-import type { Verb } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
 
 // Warning: (ae-missing-release-tag) "ArqueroDetailsList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -239,6 +237,18 @@ export function getRightColumn(step: Step<JoinArgs>): string | undefined;
 // @public (undocumented)
 export function getSimpleDropdownOptions(list: string[]): IDropdownOption[];
 
+// Warning: (ae-missing-release-tag) "GroupedVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GroupedVerbs {
+    // (undocumented)
+    alwaysEnabled?: boolean;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    verbs: string[];
+}
+
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -326,100 +336,20 @@ export enum StatsColumnType {
     Type = "type"
 }
 
-// Warning: (ae-missing-release-tag) "StepCard" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StepHistoryStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const StepCard: React.FC<StepCardProps>;
-
-// Warning: (ae-missing-release-tag) "StepCardProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepCardProps {
+export interface StepHistoryStyles {
     // (undocumented)
-    index: number;
+    buttonContainer?: CSSProperties;
     // (undocumented)
-    onDelete?: (index: number) => void;
-    // (undocumented)
-    onDuplicate?: (step: Step) => void;
-    // (undocumented)
-    onEdit?: (step: Step, index: number) => void;
-    // (undocumented)
-    onSelect?: (name: string) => void;
-    // (undocumented)
-    output: string | undefined;
-    // (undocumented)
-    step: Step;
-    // (undocumented)
-    style?: {
-        card?: IDocumentCardStyles;
-        actions?: IDocumentCardStyles;
-    };
-}
-
-// Warning: (ae-missing-release-tag) "StepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const StepComponent: React.FC<StepComponentProps>;
-
-// Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepComponentProps {
-    hideInput?: boolean;
-    hideInputColumn?: boolean;
-    hideOutput?: boolean;
-    index: number;
-    inputColumnLabel?: string;
-    inputTableLabel?: string;
-    metadata?: TableMetadata;
-    onChange: (step: Step, index: number) => void;
-    onChangeOutput: (value: string | undefined) => void;
-    output?: string;
-    outputColumnLabel?: string;
-    outputTableDisabled?: boolean;
-    outputTableLabel?: string;
-    step: Step;
-    workflow: Workflow;
-}
-
-// Warning: (ae-missing-release-tag) "StepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const StepDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepDescriptionProps {
-    output?: string;
-    step: Step;
-}
-
-// Warning: (ae-missing-release-tag) "StepHistoryList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const StepHistoryList: React.FC<StepHistoryListProps>;
-
-// Warning: (ae-missing-release-tag) "StepHistoryListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepHistoryListProps {
-    // (undocumented)
-    onDelete?: (index: number) => void;
-    // (undocumented)
-    onSave?: (step: Step, index?: number) => void;
-    // (undocumented)
-    onSelect?: (name: string) => void;
-    // (undocumented)
-    order?: DisplayOrder;
-    selectedKey?: string;
-    showSelectButtons?: boolean;
-    // Warning: (ae-forgotten-export) The symbol "StepHistoryStyles" needs to be exported by the entry point index.d.ts
+    root?: CSSProperties;
+    // Warning: (ae-forgotten-export) The symbol "StepHeaderStyles" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    styles?: StepHistoryStyles;
+    stepHeaders?: StepHeaderStyles;
     // (undocumented)
-    workflow: Workflow;
+    stepsContainer?: CSSProperties;
 }
 
 // Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -432,40 +362,19 @@ export const StepList: React.FC<StepListProps>;
 // @public (undocumented)
 export interface StepListProps {
     // (undocumented)
-    buttonId?: string | undefined;
+    onDelete?: (index: number) => void;
     // (undocumented)
-    onDeleteClicked?: (index: number) => void;
-    // (undocumented)
-    onDuplicateClicked?: (step: Step) => void;
-    // (undocumented)
-    onEditClicked?: (step: Step, index: number) => void;
+    onSave?: (step: Step, index?: number) => void;
     // (undocumented)
     onSelect?: (name: string) => void;
     // (undocumented)
-    onStartNewStep?: () => void;
+    order?: DisplayOrder;
+    selectedKey?: string;
+    showSelectButtons?: boolean;
     // (undocumented)
-    outputs: Array<string | undefined>;
+    styles?: StepHistoryStyles;
     // (undocumented)
-    steps: Step[];
-}
-
-// Warning: (ae-missing-release-tag) "StepSelector" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const StepSelector: React.FC<StepSelectorProps>;
-
-// Warning: (ae-missing-release-tag) "StepSelectorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepSelectorProps {
-    // (undocumented)
-    onCreate?: (verb: Verb) => void;
-    // (undocumented)
-    placeholder?: string;
-    // (undocumented)
-    showButton?: boolean;
-    // (undocumented)
-    verb?: Verb;
+    workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "TableCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -501,45 +410,6 @@ export interface TableCommandsProps {
 //
 // @public
 export function tableMenuCommand(tables: TableContainer[], selectedKey?: string | undefined, onChange?: (id: string) => void, props?: Partial<ICommandBarItemProps>): ICommandBarItemProps;
-
-// Warning: (ae-missing-release-tag) "TableTransform" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TableTransform: React.FC<TableTransformProps>;
-
-// Warning: (ae-missing-release-tag) "TableTransformProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TableTransformProps {
-    headerText?: string;
-    hideInput?: boolean;
-    hideInputColumn?: boolean;
-    hideOutput?: boolean;
-    // (undocumented)
-    hideStepSelector?: boolean;
-    index: number;
-    // (undocumented)
-    metadata?: TableMetadata;
-    // (undocumented)
-    onDelete?: (index: number) => void;
-    onTransformRequested?: (step: Step, index?: number) => void;
-    // (undocumented)
-    onVerbChange?: (verb: Verb) => void;
-    // (undocumented)
-    showGuidance?: boolean;
-    // (undocumented)
-    showGuidanceButton?: boolean;
-    step?: Step;
-    // (undocumented)
-    style?: React.CSSProperties;
-    table?: ColumnTable;
-    // (undocumented)
-    target?: string;
-    // (undocumented)
-    toggleGuidance?: () => void;
-    verbs?: string[];
-    workflow: Workflow;
-}
 
 // Warning: (ae-missing-release-tag) "TextFieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -684,20 +554,10 @@ export function useOnDuplicateStep(workflow: Workflow, table?: ColumnTable, onSa
 // @public
 export function useOnEditStep(setStep: (step: Step) => void, setStepIndex: (index: number) => void, showTableModal: () => void): (step: Step, index: number) => void;
 
-// Warning: (ae-missing-release-tag) "useOnResetStepArgs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useOnResetStepArgs(): (step: Step) => Step;
-
 // Warning: (ae-missing-release-tag) "useOnSaveStep" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function useOnSaveStep(workflow: Workflow): (step: Step, index: number | undefined) => void;
-
-// Warning: (ae-missing-release-tag) "useOnSetStepColumnArg" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useOnSetStepColumnArg(): (stepArgs: unknown, newName?: string) => object;
 
 // Warning: (ae-missing-release-tag) "useOnStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

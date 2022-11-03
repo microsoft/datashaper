@@ -2780,6 +2780,104 @@
           "name": "getSimpleDropdownOptions"
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/react!GroupedVerbs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface GroupedVerbs "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "GroupedVerbs",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!GroupedVerbs#alwaysEnabled:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "alwaysEnabled?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "alwaysEnabled",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!GroupedVerbs#label:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "label: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "label",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!GroupedVerbs#verbs:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "verbs: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "verbs",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/react!GroupHeaderFunction:type",
           "docComment": "",
@@ -3600,67 +3698,32 @@
           ]
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!StepCard:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "StepCard: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "StepCardProps",
-              "canonicalReference": "@datashaper/react!StepCardProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "StepCard",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/react!StepCardProps:interface",
+          "canonicalReference": "@datashaper/react!StepHistoryStyles:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface StepCardProps "
+              "text": "export interface StepHistoryStyles "
             }
           ],
           "releaseTag": "Public",
-          "name": "StepCardProps",
+          "name": "StepHistoryStyles",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepCardProps#index:member",
+              "canonicalReference": "@datashaper/react!StepHistoryStyles#buttonContainer:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "index: "
+                  "text": "buttonContainer?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "number"
+                  "kind": "Reference",
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
                 },
                 {
                   "kind": "Content",
@@ -3668,9 +3731,9 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
-              "name": "index",
+              "name": "buttonContainer",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -3678,16 +3741,17 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepCardProps#onDelete:member",
+              "canonicalReference": "@datashaper/react!StepHistoryStyles#root:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "onDelete?: "
+                  "text": "root?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "(index: number) => void"
+                  "kind": "Reference",
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
                 },
                 {
                   "kind": "Content",
@@ -3697,7 +3761,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "onDelete",
+              "name": "root",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -3705,25 +3769,17 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepCardProps#onDuplicate:member",
+              "canonicalReference": "@datashaper/react!StepHistoryStyles#stepHeaders:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "onDuplicate?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(step: "
+                  "text": "stepHeaders?: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
+                  "text": "StepHeaderStyles",
+                  "canonicalReference": "@datashaper/react!StepHeaderStyles:interface"
                 },
                 {
                   "kind": "Content",
@@ -3733,33 +3789,25 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "onDuplicate",
+              "name": "stepHeaders",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 4
+                "endIndex": 2
               }
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepCardProps#onEdit:member",
+              "canonicalReference": "@datashaper/react!StepHistoryStyles#stepsContainer:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "onEdit?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(step: "
+                  "text": "stepsContainer?: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", index: number) => void"
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
                 },
                 {
                   "kind": "Content",
@@ -3769,993 +3817,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "onEdit",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepCardProps#onSelect:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onSelect?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(name: string) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onSelect",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepCardProps#output:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "output: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string | undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "output",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepCardProps#step:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "step: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "step",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepCardProps#style:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "style?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "{\n        card?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "IDocumentCardStyles",
-                  "canonicalReference": "@fluentui/react!IDocumentCardStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        actions?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "IDocumentCardStyles",
-                  "canonicalReference": "@fluentui/react!IDocumentCardStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n    }"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "style",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 6
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!StepComponent:var",
-          "docComment": "/**\n * Let's us render the Steps in a loop while memoing all the functions\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "StepComponent: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "StepComponentProps",
-              "canonicalReference": "@datashaper/react!StepComponentProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "StepComponent",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!StepComponentProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface StepComponentProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "StepComponentProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#hideInput:member",
-              "docComment": "/**\n * Indicates that the input table should be hidden or else shown and editable by the user. It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "hideInput?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "hideInput",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#hideInputColumn:member",
-              "docComment": "/**\n * Indicates that the input column should be hidden or else shown and editable by the user. It may be desirable to hide this if the transform is expected to use the selected column when the modal is launched directly from a table.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "hideInputColumn?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "hideInputColumn",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#hideOutput:member",
-              "docComment": "/**\n * Indicates that the output table should be hidden or else shown and editable by the user. It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "hideOutput?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "hideOutput",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#index:member",
-              "docComment": "/**\n * The step index\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "index: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "number"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "index",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#inputColumnLabel:member",
-              "docComment": "/**\n * Label for the input table dropdown\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "inputColumnLabel?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "inputColumnLabel",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#inputTableLabel:member",
-              "docComment": "/**\n * Label for the input-table dropdown\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "inputTableLabel?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "inputTableLabel",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#metadata:member",
-              "docComment": "/**\n * TableMetadata\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "metadata?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableMetadata",
-                  "canonicalReference": "@datashaper/tables!TableMetadata:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "metadata",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#onChange:member",
-              "docComment": "/**\n * The step onchange handler\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onChange: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(step: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", index: number) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "onChange",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#onChangeOutput:member",
-              "docComment": "/**\n * Event handler for when the output table name changes\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onChangeOutput: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(value: string | undefined) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "onChangeOutput",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#output:member",
-              "docComment": "/**\n * The output table name\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "output?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "output",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#outputColumnLabel:member",
-              "docComment": "/**\n * The label to use for the output column field\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "outputColumnLabel?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "outputColumnLabel",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#outputTableDisabled:member",
-              "docComment": "/**\n * Whether the output table name is disabled\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "outputTableDisabled?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "outputTableDisabled",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#outputTableLabel:member",
-              "docComment": "/**\n * The label to use for the output field\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "outputTableLabel?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "outputTableLabel",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#step:member",
-              "docComment": "/**\n * The processing step\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "step: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "step",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepComponentProps#workflow:member",
-              "docComment": "/**\n * The workflow instance\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "workflow: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Workflow",
-                  "canonicalReference": "@datashaper/workflow!Workflow:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "workflow",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!StepDescription:var",
-          "docComment": "/**\n * Let's us render the Steps in a loop while memoing all the functions\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "StepDescription: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "StepDescriptionProps",
-              "canonicalReference": "@datashaper/react!StepDescriptionProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "StepDescription",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!StepDescriptionProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface StepDescriptionProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "StepDescriptionProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepDescriptionProps#output:member",
-              "docComment": "/**\n * The output table name\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "output?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "output",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepDescriptionProps#step:member",
-              "docComment": "/**\n * The processing step\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "step: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "step",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!StepHistoryList:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "StepHistoryList: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "StepHistoryListProps",
-              "canonicalReference": "@datashaper/react!StepHistoryListProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "StepHistoryList",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!StepHistoryListProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface StepHistoryListProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "StepHistoryListProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepHistoryListProps#onDelete:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onDelete?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(index: number) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onDelete",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepHistoryListProps#onSave:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onSave?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(step: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", index?: number) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onSave",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepHistoryListProps#onSelect:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onSelect?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(name: string) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onSelect",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepHistoryListProps#order:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "order?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "DisplayOrder",
-                  "canonicalReference": "@datashaper/react!DisplayOrder:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "order",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepHistoryListProps#selectedKey:member",
-              "docComment": "/**\n * Id of the selected step\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "selectedKey?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "selectedKey",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepHistoryListProps#showSelectButtons:member",
-              "docComment": "/**\n * Indicates whether the original/latest buttons will be shown. Note that they will have no effect if you do not supply an onSelect handler too.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showSelectButtons?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showSelectButtons",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepHistoryListProps#styles:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "styles?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "StepHistoryStyles",
-                  "canonicalReference": "@datashaper/react!StepHistoryStyles:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "styles",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepHistoryListProps#workflow:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "workflow: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Workflow",
-                  "canonicalReference": "@datashaper/workflow!Workflow:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "workflow",
+              "name": "stepsContainer",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4816,39 +3878,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepListProps#buttonId:member",
+              "canonicalReference": "@datashaper/react!StepListProps#onDelete:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "buttonId?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string | undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "buttonId",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepListProps#onDeleteClicked:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onDeleteClicked?: "
+                  "text": "onDelete?: "
                 },
                 {
                   "kind": "Content",
@@ -4862,7 +3897,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "onDeleteClicked",
+              "name": "onDelete",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4870,12 +3905,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepListProps#onDuplicateClicked:member",
+              "canonicalReference": "@datashaper/react!StepListProps#onSave:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "onDuplicateClicked?: "
+                  "text": "onSave?: "
                 },
                 {
                   "kind": "Content",
@@ -4888,7 +3923,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ") => void"
+                  "text": ", index?: number) => void"
                 },
                 {
                   "kind": "Content",
@@ -4898,43 +3933,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "onDuplicateClicked",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepListProps#onEditClicked:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onEditClicked?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(step: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", index: number) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onEditClicked",
+              "name": "onSave",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 4
@@ -4969,16 +3968,17 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepListProps#onStartNewStep:member",
+              "canonicalReference": "@datashaper/react!StepListProps#order:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "onStartNewStep?: "
+                  "text": "order?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "() => void"
+                  "kind": "Reference",
+                  "text": "DisplayOrder",
+                  "canonicalReference": "@datashaper/react!DisplayOrder:enum"
                 },
                 {
                   "kind": "Content",
@@ -4988,7 +3988,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "onStartNewStep",
+              "name": "order",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4996,165 +3996,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepListProps#outputs:member",
-              "docComment": "",
+              "canonicalReference": "@datashaper/react!StepListProps#selectedKey:member",
+              "docComment": "/**\n * Id of the selected step\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "outputs: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Array",
-                  "canonicalReference": "!Array:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string | undefined>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "outputs",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepListProps#steps:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "steps: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "steps",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              }
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!StepSelector:var",
-          "docComment": "/**\n * Creates a custom step selection dropdown. If \"showButton\" is true, a + icon will appear next to the dropdown, and onChange will only fire when it is clicked.\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "StepSelector: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "StepSelectorProps",
-              "canonicalReference": "@datashaper/react!StepSelectorProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "StepSelector",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!StepSelectorProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface StepSelectorProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "StepSelectorProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepSelectorProps#onCreate:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onCreate?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(verb: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Verb",
-                  "canonicalReference": "@datashaper/schema!Verb:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onCreate",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepSelectorProps#placeholder:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "placeholder?: "
+                  "text": "selectedKey?: "
                 },
                 {
                   "kind": "Content",
@@ -5168,7 +4015,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "placeholder",
+              "name": "selectedKey",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5176,12 +4023,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepSelectorProps#showButton:member",
-              "docComment": "",
+              "canonicalReference": "@datashaper/react!StepListProps#showSelectButtons:member",
+              "docComment": "/**\n * Indicates whether the original/latest buttons will be shown. Note that they will have no effect if you do not supply an onSelect handler too.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "showButton?: "
+                  "text": "showSelectButtons?: "
                 },
                 {
                   "kind": "Content",
@@ -5195,7 +4042,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "showButton",
+              "name": "showSelectButtons",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5203,17 +4050,17 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepSelectorProps#verb:member",
+              "canonicalReference": "@datashaper/react!StepListProps#styles:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "verb?: "
+                  "text": "styles?: "
                 },
                 {
                   "kind": "Reference",
-                  "text": "Verb",
-                  "canonicalReference": "@datashaper/schema!Verb:enum"
+                  "text": "StepHistoryStyles",
+                  "canonicalReference": "@datashaper/react!StepHistoryStyles:interface"
                 },
                 {
                   "kind": "Content",
@@ -5223,7 +4070,35 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "verb",
+              "name": "styles",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepListProps#workflow:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "workflow: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Workflow",
+                  "canonicalReference": "@datashaper/workflow!Workflow:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "workflow",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5669,595 +4544,6 @@
             }
           ],
           "name": "tableMenuCommand"
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!TableTransform:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "TableTransform: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.FC",
-              "canonicalReference": "@types/react!~React.FC:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "TableTransformProps",
-              "canonicalReference": "@datashaper/react!TableTransformProps:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">"
-            }
-          ],
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "TableTransform",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          }
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "@datashaper/react!TableTransformProps:interface",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface TableTransformProps "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "TableTransformProps",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#headerText:member",
-              "docComment": "/**\n * Optional header text to display on the modal\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "headerText?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "headerText",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#hideInput:member",
-              "docComment": "/**\n * Indicates that the input table should be hidden or else shown and editable by the user. It may be desirable to hide this if the modal is launched directly from a table, which would make display redundant.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "hideInput?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "hideInput",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#hideInputColumn:member",
-              "docComment": "/**\n * Indicates that the input column should be hidden or else shown and editable by the user. It may be desirable to hide this if the transform is expected to use the selected column when the modal is launched directly from a table.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "hideInputColumn?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "hideInputColumn",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#hideOutput:member",
-              "docComment": "/**\n * Indicates that the output table should be hidden or else shown and editable by the user. It may be desirable to hide this if the transform is expected to do an inline replacement of the input table.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "hideOutput?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "hideOutput",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#hideStepSelector:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "hideStepSelector?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "hideStepSelector",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#index:member",
-              "docComment": "/**\n * The step index\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "index: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "number"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "index",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#metadata:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "metadata?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TableMetadata",
-                  "canonicalReference": "@datashaper/tables!TableMetadata:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "metadata",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#onDelete:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onDelete?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(index: number) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onDelete",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#onTransformRequested:member",
-              "docComment": "/**\n * Callback fired when the step is configured and \"run\" is clicked, indicating the application should execute the contructed/edited step.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onTransformRequested?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(step: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", index?: number) => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onTransformRequested",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#onVerbChange:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onVerbChange?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(verb: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Verb",
-                  "canonicalReference": "@datashaper/schema!Verb:enum"
-                },
-                {
-                  "kind": "Content",
-                  "text": ") => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onVerbChange",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 4
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#showGuidance:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showGuidance?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showGuidance",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#showGuidanceButton:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "showGuidanceButton?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "showGuidanceButton",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#step:member",
-              "docComment": "/**\n * Optional step for controlled component if pre-built config is planned.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "step?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Step",
-                  "canonicalReference": "@datashaper/workflow!Step:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "step",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#style:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "style?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "React.CSSProperties",
-                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "style",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#table:member",
-              "docComment": "/**\n * Table to build the transform from.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "table?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ColumnTable",
-                  "canonicalReference": "arquero!default:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "table",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#target:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "target?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "target",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#toggleGuidance:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "toggleGuidance?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "() => void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "toggleGuidance",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#verbs:member",
-              "docComment": "/**\n * Optional list of transform verbs to present to the user. If not supplied, all verbs for the desired operation (table or column) will be presented.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "verbs?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "verbs",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!TableTransformProps#workflow:member",
-              "docComment": "/**\n * Table store to verify naming to be created\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "workflow: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Workflow",
-                  "canonicalReference": "@datashaper/workflow!Workflow:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "workflow",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            }
-          ],
-          "extendsTokenRanges": []
         },
         {
           "kind": "TypeAlias",
@@ -8639,47 +6925,6 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/react!useOnResetStepArgs:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useOnResetStepArgs(): "
-            },
-            {
-              "kind": "Content",
-              "text": "(step: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ") => "
-            },
-            {
-              "kind": "Reference",
-              "text": "Step",
-              "canonicalReference": "@datashaper/workflow!Step:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 5
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [],
-          "name": "useOnResetStepArgs"
-        },
-        {
-          "kind": "Function",
           "canonicalReference": "@datashaper/react!useOnSaveStep:function(1)",
           "docComment": "/**\n * @param workflow - The workflow\n *\n * @returns A callback to use when saving a step, either new or existing\n */\n",
           "excerptTokens": [
@@ -8731,33 +6976,6 @@
             }
           ],
           "name": "useOnSaveStep"
-        },
-        {
-          "kind": "Function",
-          "canonicalReference": "@datashaper/react!useOnSetStepColumnArg:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useOnSetStepColumnArg(): "
-            },
-            {
-              "kind": "Content",
-              "text": "(stepArgs: unknown, newName?: string) => object"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [],
-          "name": "useOnSetStepColumnArg"
         },
         {
           "kind": "Function",
