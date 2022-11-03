@@ -11,7 +11,7 @@ import { memo } from 'react'
 
 import { DisplayOrder } from '../../enums.js'
 import { useWorkflowSteps } from '../../hooks/workflow/useWorkflowSteps.js'
-import { StepStackItem } from '../StepListItem/index.js'
+import { StepListItem } from '../StepListItem/index.js'
 import { StepHeader } from './StepHeader.js'
 import type { StepHeaderStyles } from './StepHeader.types.js'
 import { useDeleteConfirm, useTableHandlers } from './StepList.hooks.js'
@@ -109,7 +109,7 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 								)
 							}
 						>
-							<StepStackItem
+							<StepListItem
 								step={step}
 								index={stepIndex}
 								workflow={workflow}

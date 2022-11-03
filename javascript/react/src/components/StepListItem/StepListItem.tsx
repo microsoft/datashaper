@@ -23,10 +23,10 @@ import {
 	SaveButtonWrapper,
 	StepSelectorContainer,
 } from './StepListItem.styles.js'
-import type { StepStackItemProps } from './StepListItem.types.js'
+import type { StepListItemProps } from './StepListItem.types.js'
 import { StepSelector } from './StepSelector.js'
 
-export const StepStackItem: React.FC<StepStackItemProps> = memo(
+export const StepListItem: React.FC<StepListItemProps> = memo(
 	function StepStackItem({
 		workflow,
 		onSave,
