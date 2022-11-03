@@ -49,7 +49,6 @@
 |  [useOnDuplicateStep(workflow, table, onSave)](./react.useonduplicatestep.md) |  |
 |  [useOnEditStep(setStep, setStepIndex, showTableModal)](./react.useoneditstep.md) | A hook to get the onEditStep callback |
 |  [useOnSaveStep(workflow)](./react.useonsavestep.md) |  |
-|  [useOnSetStepColumnArg()](./react.useonsetstepcolumnarg.md) |  |
 |  [useOnStepOutputChanged(workflow)](./react.useonstepoutputchanged.md) | This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future. |
 |  [useOnStepSave(workflow)](./react.useonstepsave.md) |  |
 |  [useOnUpdateStep(workflow)](./react.useonupdatestep.md) |  |

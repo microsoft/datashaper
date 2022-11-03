@@ -116,7 +116,6 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 								style={tableTransformStyle}
 								onDelete={handleDelete}
 								onSave={handleSave}
-								hideStepSelector
 							/>
 						</CollapsiblePanel>
 					)

@@ -2,12 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Verb } from '@datashaper/schema'
-import type { Workflow } from '@datashaper/workflow'
 import { ActionButton, IconButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
+import { EMPTY_OBJECT } from '../../empty.js'
 import { StepForm } from '../StepForm/StepForm.js'
 import {
 	useHandleSaveClick,
@@ -21,10 +20,8 @@ import {
 	icons,
 	rightButtonStyles,
 	SaveButtonWrapper,
-	StepSelectorContainer,
 } from './StepListItem.styles.js'
 import type { StepListItemProps } from './StepListItem.types.js'
-import { StepSelector } from './StepSelector.js'
 
 export const StepListItem: React.FC<StepListItemProps> = memo(
 	function StepStackItem({
@@ -36,29 +33,16 @@ export const StepListItem: React.FC<StepListItemProps> = memo(
 		showGuidance,
 		showGuidanceButton,
 		toggleGuidance,
-		onVerbChange,
-		style = {},
-		hideStepSelector,
+		style = EMPTY_OBJECT,
 		onDelete,
 		hideInputColumn,
 	}) {
-		const { internal, setInternal, handleVerbChange } = useInternalTableStep(
-			step,
-			workflow as Workflow,
-		)
+		const [internal, setInternal] = useInternalTableStep(step)
 		const { output, outputHasChanged, onOutputChanged } = useStepOutputHandling(
 			workflow,
 			step,
 		)
 		const handleSaveClick = useHandleSaveClick(internal, onSave)
-		const onCreate = useCallback(
-			(verb: Verb) => {
-				onVerbChange?.(verb)
-				handleVerbChange(verb)
-			},
-			[handleVerbChange, onVerbChange],
-		)
-
 		const disableSave = useMemo<boolean>(
 			() => isEqual(step, internal) && !outputHasChanged,
 			[step, internal, outputHasChanged],
@@ -66,29 +50,13 @@ export const StepListItem: React.FC<StepListItemProps> = memo(
 
 		return (
 			<Container style={style}>
-				{hideStepSelector && showGuidanceButton && internal?.verb ? (
+				{showGuidanceButton && internal?.verb ? (
 					<IconButton
 						onClick={toggleGuidance}
 						iconProps={icons.info}
 						checked={showGuidance}
 						styles={rightButtonStyles}
 					/>
-				) : null}
-				{!hideStepSelector ? (
-					<StepSelectorContainer>
-						<StepSelector
-							placeholder="Select a verb"
-							verb={internal?.verb}
-							onCreate={onCreate}
-						/>
-						{showGuidanceButton && internal?.verb ? (
-							<IconButton
-								onClick={toggleGuidance}
-								iconProps={icons.info}
-								checked={showGuidance}
-							/>
-						) : null}
-					</StepSelectorContainer>
 				) : null}
 				{internal && (
 					<>

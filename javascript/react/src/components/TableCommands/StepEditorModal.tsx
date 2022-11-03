@@ -2,12 +2,10 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Verb } from '@datashaper/schema'
 import { default as guidanceIndex } from '@datashaper/verb-guidance'
-import type { Maybe } from '@datashaper/workflow'
 import { Callout, DirectionalHint, IconButton, useTheme } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { memo, useState } from 'react'
+import { memo } from 'react'
 
 import { Guidance } from '../Guidance/Guidance.js'
 import { StepListItem } from '../StepListItem/StepListItem.js'
@@ -34,7 +32,6 @@ export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
 		...props
 	}) {
 		const theme = useTheme()
-		const [verb, setVerb] = useState<Maybe<Verb>>(step?.verb)
 		const [showGuidance, { toggle: toggleGuidance }] = useBoolean(false)
 		const adaptedStyles = getModalStyles(theme, styles)
 
@@ -65,7 +62,6 @@ export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
 				<ContainerBody>
 					<StepComponentContainer>
 						<StepListItem
-							hideStepSelector
 							hideInputColumn
 							workflow={workflow}
 							metadata={metadata}
@@ -74,13 +70,12 @@ export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
 							step={step}
 							showGuidance={showGuidance}
 							toggleGuidance={toggleGuidance}
-							onVerbChange={setVerb}
 							showGuidanceButton
 						/>
 					</StepComponentContainer>
-					{showGuidance && verb ? (
+					{showGuidance && step?.verb ? (
 						<GuidanceContainer>
-							<Guidance name={verb} index={guidanceIndex} />
+							<Guidance name={step?.verb} index={guidanceIndex} />
 						</GuidanceContainer>
 					) : null}
 				</ContainerBody>

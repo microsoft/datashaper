@@ -2,15 +2,8 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Verb } from '@datashaper/schema'
 import type { Step, Workflow } from '@datashaper/workflow'
-import { readStep } from '@datashaper/workflow'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-
-import {
-	useOnSetStepColumnArg,
-	useSuggestedTableName,
-} from '../../hooks/index.js'
 
 export function useHandleSaveClick(
 	step: Step | undefined,
@@ -26,14 +19,8 @@ export function useHandleSaveClick(
 
 export function useInternalTableStep(
 	step: Step | undefined,
-	workflow: Workflow,
-): {
-	internal: Step | undefined
-	handleVerbChange: (verb: Verb) => void
-	setInternal: (step?: Step) => void
-} {
+): [Step | undefined, (step?: Step) => void] {
 	const [internal, setInternal] = useState<Step | undefined>()
-	const formattedColumnArg = useOnSetStepColumnArg()
 
 	useEffect(() => {
 		if (step) {
@@ -41,19 +28,7 @@ export function useInternalTableStep(
 		}
 	}, [step, setInternal])
 
-	const createNewTableId = useSuggestedTableName(workflow)
-
-	const handleVerbChange = useCallback(
-		(verb: Verb) => {
-			const id = createNewTableId(verb)
-			const _step = readStep({ verb, id })
-			_step.args = formattedColumnArg(_step.args)
-			setInternal(_step)
-		},
-		[setInternal, formattedColumnArg, createNewTableId],
-	)
-
-	return { internal, handleVerbChange, setInternal }
+	return [internal, setInternal]
 }
 
 export function useStepOutputHandling(

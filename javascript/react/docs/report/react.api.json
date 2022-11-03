@@ -6979,33 +6979,6 @@
         },
         {
           "kind": "Function",
-          "canonicalReference": "@datashaper/react!useOnSetStepColumnArg:function(1)",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare function useOnSetStepColumnArg(): "
-            },
-            {
-              "kind": "Content",
-              "text": "(stepArgs: unknown, newName?: string) => object"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "returnTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          },
-          "releaseTag": "Public",
-          "overloadIndex": 1,
-          "parameters": [],
-          "name": "useOnSetStepColumnArg"
-        },
-        {
-          "kind": "Function",
           "canonicalReference": "@datashaper/react!useOnStepOutputChanged:function(1)",
           "docComment": "/**\n * This hooks handles managing a step's output within the workflow. This hook assumes that each step will have a single output, which will become an invariant we expand upon in the future.\n *\n * @param workflow - the workflow instance\n *\n * @returns A callback to use when the step output changes\n */\n",
           "excerptTokens": [

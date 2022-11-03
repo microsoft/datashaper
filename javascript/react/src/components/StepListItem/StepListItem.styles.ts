@@ -15,14 +15,6 @@ export const icons = {
 export const Container = styled.div`
 	position: relative;
 `
-
-export const StepSelectorContainer = styled.div`
-	margin-bottom: 8px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`
-
 export const ButtonContainer = styled.div`
 	margin-top: 10px;
 	display: flex;
@@ -31,18 +23,15 @@ export const ButtonContainer = styled.div`
 	gap: 0.5rem;
 	width: 100%;
 `
-
 export const SaveButtonWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 `
-
 export const Flex = styled.div`
 	align-items: center;
 	display: flex;
 `
-
 export const rightButtonStyles: IButtonStyles = {
 	root: {
 		position: 'absolute',

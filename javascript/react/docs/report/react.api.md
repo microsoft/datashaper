@@ -559,11 +559,6 @@ export function useOnEditStep(setStep: (step: Step) => void, setStepIndex: (inde
 // @public (undocumented)
 export function useOnSaveStep(workflow: Workflow): (step: Step, index: number | undefined) => void;
 
-// Warning: (ae-missing-release-tag) "useOnSetStepColumnArg" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useOnSetStepColumnArg(): (stepArgs: unknown, newName?: string) => object;
-
 // Warning: (ae-missing-release-tag) "useOnStepOutputChanged" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public

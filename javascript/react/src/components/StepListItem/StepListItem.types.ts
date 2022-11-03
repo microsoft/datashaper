@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Verb } from '@datashaper/schema'
 import type { TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
@@ -50,8 +49,6 @@ export interface StepListItemProps {
 
 	metadata?: TableMetadata
 
-	onVerbChange?: (verb: Verb) => void
-
 	style?: React.CSSProperties
 
 	toggleGuidance?: () => void
@@ -59,8 +56,6 @@ export interface StepListItemProps {
 	showGuidance?: boolean
 
 	showGuidanceButton?: boolean
-
-	hideStepSelector?: boolean
 
 	/**
 	 * Callback fired when the step is configured and "run" is clicked, indicating
