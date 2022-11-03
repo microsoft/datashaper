@@ -3,4 +3,4 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 export * from './descriptions/index.js'
-export * from './renderers/index.js'
+export * from './forms/index.js'

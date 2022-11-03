@@ -34,7 +34,7 @@ export function useVirtualizedItems(
 	virtual: ReturnType<typeof useFill>
 } {
 	const ref = useRef(null)
-	const baseItems = useMemo(() => [...table.objects()], [table])
+	const baseItems = useMemo<object[]>(() => [...table.objects()], [table])
 	const virtual = useFill(table, columns, ref, fill, features, { compact })
 	const items = useItems(baseItems, virtual.virtualRows)
 
