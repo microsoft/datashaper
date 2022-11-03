@@ -8,7 +8,7 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { memo } from 'react'
 
 import { Guidance } from '../Guidance/Guidance.js'
-import { StepListItem } from '../StepListItem/StepListItem.js'
+import { StepEditor } from '../StepEditor/StepEditor.js'
 import {
 	ContainerBody,
 	GuidanceContainer,
@@ -61,7 +61,7 @@ export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
 				</Header>
 				<ContainerBody>
 					<StepComponentContainer>
-						<StepListItem
+						<StepEditor
 							hideInputColumn
 							workflow={workflow}
 							metadata={metadata}

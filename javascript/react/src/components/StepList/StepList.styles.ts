@@ -11,6 +11,7 @@ export const icons = {
 	add: { iconName: 'Add' },
 	chevronRight: { iconName: 'ChevronRight' },
 	chevronDown: { iconName: 'ChevronDown' },
+	info: { iconName: 'Info' },
 }
 
 export const Container = styled.div`

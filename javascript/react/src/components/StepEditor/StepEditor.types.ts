@@ -6,7 +6,7 @@
 import type { TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 
-export interface StepListItemProps {
+export interface StepEditorProps {
 	/**
 	 * Table store to verify naming to be created
 	 */
