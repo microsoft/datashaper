@@ -364,33 +364,6 @@ export interface StepFormProps {
     workflow: Workflow;
 }
 
-// Warning: (ae-missing-release-tag) "StepHistoryList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const StepHistoryList: React.FC<StepHistoryListProps>;
-
-// Warning: (ae-missing-release-tag) "StepHistoryListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepHistoryListProps {
-    // (undocumented)
-    onDelete?: (index: number) => void;
-    // (undocumented)
-    onSave?: (step: Step, index?: number) => void;
-    // (undocumented)
-    onSelect?: (name: string) => void;
-    // (undocumented)
-    order?: DisplayOrder;
-    selectedKey?: string;
-    showSelectButtons?: boolean;
-    // Warning: (ae-forgotten-export) The symbol "StepHistoryStyles" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
-    styles?: StepHistoryStyles;
-    // (undocumented)
-    workflow: Workflow;
-}
-
 // Warning: (ae-missing-release-tag) "StepSelector" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -408,6 +381,33 @@ export interface StepSelectorProps {
     showButton?: boolean;
     // (undocumented)
     verb?: Verb;
+}
+
+// Warning: (ae-missing-release-tag) "StepStack" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const StepStack: React.FC<StepStackProps>;
+
+// Warning: (ae-missing-release-tag) "StepStackProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepStackProps {
+    // (undocumented)
+    onDelete?: (index: number) => void;
+    // (undocumented)
+    onSave?: (step: Step, index?: number) => void;
+    // (undocumented)
+    onSelect?: (name: string) => void;
+    // (undocumented)
+    order?: DisplayOrder;
+    selectedKey?: string;
+    showSelectButtons?: boolean;
+    // Warning: (ae-forgotten-export) The symbol "StepHistoryStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    styles?: StepHistoryStyles;
+    // (undocumented)
+    workflow: Workflow;
 }
 
 // Warning: (ae-missing-release-tag) "TableCommands" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

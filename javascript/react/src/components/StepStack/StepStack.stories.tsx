@@ -10,19 +10,19 @@ import { useCallback, useState } from 'react'
 import { DisplayOrder } from '../../enums.js'
 import { useWorkflow } from '../../hooks/index.js'
 import schema from '../verbs/__tests__/specs/every-operation.json'
-import { StepHistoryList } from './StepHistoryList.js'
-import type { StepHistoryListProps } from './StepHistoryList.types.js'
+import { StepStack } from './StepStack.js'
+import type { StepStackProps } from './StepStack.types.js'
 
 const storyMetadata = {
 	title: 'Components/StepHistoryList',
-	component: StepHistoryList,
+	component: StepStack,
 }
 export default storyMetadata
 
 const workflow = new Workflow(schema)
 
-const Template: ComponentStory<typeof StepHistoryList> = (
-	args: StepHistoryListProps,
+const Template: ComponentStory<typeof StepStack> = (
+	args: StepStackProps,
 	{ loaded: { companies, companies2, products, stocks } }: any,
 ): JSX.Element => {
 	const wf = useWorkflow(workflow, [
@@ -45,7 +45,7 @@ const Template: ComponentStory<typeof StepHistoryList> = (
 				border: '1px solid orange',
 			}}
 		>
-			<StepHistoryList
+			<StepStack
 				{...args}
 				workflow={wf}
 				selectedKey={selected}

@@ -91,8 +91,8 @@
 |  [SortParameters](./react.sortparameters.md) |  |
 |  [StepDescriptionProps](./react.stepdescriptionprops.md) |  |
 |  [StepFormProps](./react.stepformprops.md) |  |
-|  [StepHistoryListProps](./react.stephistorylistprops.md) |  |
 |  [StepSelectorProps](./react.stepselectorprops.md) |  |
+|  [StepStackProps](./react.stepstackprops.md) |  |
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
 |  [TableTransformProps](./react.tabletransformprops.md) |  |
 
@@ -105,8 +105,8 @@
 |  [Guidance](./react.guidance.md) |  |
 |  [StepDescription](./react.stepdescription.md) | Let's us render the Steps in a loop while memoing all the functions |
 |  [StepForm](./react.stepform.md) | Let's us render the Steps in a loop while memoing all the functions |
-|  [StepHistoryList](./react.stephistorylist.md) |  |
 |  [StepSelector](./react.stepselector.md) | Creates a custom step selection dropdown. If "showButton" is true, a + icon will appear next to the dropdown, and onChange will only fire when it is clicked. |
+|  [StepStack](./react.stepstack.md) |  |
 |  [TableCommands](./react.tablecommands.md) |  |
 |  [TableTransform](./react.tabletransform.md) |  |
 
