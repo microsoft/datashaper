@@ -6,7 +6,7 @@ import { DefaultButton } from '@fluentui/react'
 import { memo, useEffect, useRef } from 'react'
 
 import { StepCard } from '../../index.js'
-import { DetailText } from '../DetailText/index.js'
+import { DetailText } from './DetailText.js'
 import {
 	addButtonStyles,
 	ButtonContainer,
