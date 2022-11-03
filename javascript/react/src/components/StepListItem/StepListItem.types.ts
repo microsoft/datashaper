@@ -5,13 +5,12 @@
 
 import type { TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
-import type ColumnTable from 'arquero/dist/types/table/column-table'
 
 export interface StepListItemProps {
 	/**
-	 * Table to build the transform from.
+	 * Table store to verify naming to be created
 	 */
-	table?: ColumnTable
+	workflow: Workflow
 
 	/**
 	 * Optional step for controlled component if pre-built config is planned.
@@ -24,28 +23,10 @@ export interface StepListItemProps {
 	index: number
 
 	/**
-	 * Optional list of transform verbs to present to the user.
-	 * If not supplied, all verbs for the desired operation (table or column) will be presented.
-	 */
-	verbs?: string[]
-
-	/**
-	 * Optional header text to display on the modal
-	 */
-	headerText?: string
-
-	target?: string
-
-	/**
 	 * Indicates that the input column should be hidden or else shown and editable by the user.
 	 * It may be desirable to hide this if the transform is expected to use the selected column when the modal is launched directly from a table.
 	 */
 	hideInputColumn?: boolean
-
-	/**
-	 * Table store to verify naming to be created
-	 */
-	workflow: Workflow
 
 	metadata?: TableMetadata
 
