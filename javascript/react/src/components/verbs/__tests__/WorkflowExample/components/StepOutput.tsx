@@ -6,8 +6,8 @@ import { introspect } from '@datashaper/tables'
 import { memo, useMemo } from 'react'
 
 import { useWorkflowDataTable } from '../../../../../hooks/workflow/useWorkflowDataTable.js'
-import { StepComponent } from '../../../../StepComponent/StepComponent.js'
 import { StepDescription } from '../../../../StepDescription/index.js'
+import { StepForm } from '../../../../StepForm/StepForm.js'
 import { Section } from './Section.js'
 import {
 	OutputColumn,
@@ -35,7 +35,7 @@ export const StepOutput: React.FC<StepOutputProps> = memo(function StepOutput({
 			<Section title={`Step ${index + 1}`} subtitle={step.verb}>
 				<StepColumn className="steps-column">
 					<StepConfig>
-						<StepComponent
+						<StepForm
 							step={step}
 							workflow={workflow}
 							index={index}

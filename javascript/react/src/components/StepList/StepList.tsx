@@ -35,20 +35,18 @@ export const StepList: React.FC<StepListProps> = memo(function StepsList({
 
 	return (
 		<Container>
-			{steps.map((step, index) => {
-				return (
-					<StepCard
-						output={outputs[index]}
-						onDelete={onDeleteClicked}
-						onEdit={onEditClicked}
-						onDuplicate={onDuplicateClicked}
-						onSelect={onSelect}
-						key={step.id}
-						step={step}
-						index={index}
-					/>
-				)
-			})}
+			{steps.map((step, index) => (
+				<StepCard
+					output={outputs[index]}
+					onDelete={onDeleteClicked}
+					onEdit={onEditClicked}
+					onDuplicate={onDuplicateClicked}
+					onSelect={onSelect}
+					key={step.id}
+					step={step}
+					index={index}
+				/>
+			))}
 
 			{onStartNewStep && (
 				<ButtonContainer ref={ref}>

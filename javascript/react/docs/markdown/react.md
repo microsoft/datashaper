@@ -90,8 +90,8 @@
 |  [ModalState](./react.modalstate.md) |  |
 |  [SortParameters](./react.sortparameters.md) |  |
 |  [StepCardProps](./react.stepcardprops.md) |  |
-|  [StepComponentProps](./react.stepcomponentprops.md) |  |
 |  [StepDescriptionProps](./react.stepdescriptionprops.md) |  |
+|  [StepFormProps](./react.stepformprops.md) |  |
 |  [StepHistoryListProps](./react.stephistorylistprops.md) |  |
 |  [StepListProps](./react.steplistprops.md) |  |
 |  [StepSelectorProps](./react.stepselectorprops.md) |  |
@@ -106,8 +106,8 @@
 |  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
 |  [Guidance](./react.guidance.md) |  |
 |  [StepCard](./react.stepcard.md) |  |
-|  [StepComponent](./react.stepcomponent.md) | Let's us render the Steps in a loop while memoing all the functions |
 |  [StepDescription](./react.stepdescription.md) | Let's us render the Steps in a loop while memoing all the functions |
+|  [StepForm](./react.stepform.md) | Let's us render the Steps in a loop while memoing all the functions |
 |  [StepHistoryList](./react.stephistorylist.md) |  |
 |  [StepList](./react.steplist.md) |  |
 |  [StepSelector](./react.stepselector.md) | Creates a custom step selection dropdown. If "showButton" is true, a + icon will appear next to the dropdown, and onChange will only fire when it is clicked. |

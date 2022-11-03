@@ -8,7 +8,7 @@ import { ActionButton, IconButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
 import { memo, useCallback, useMemo } from 'react'
 
-import { StepComponent } from '../StepComponent/StepComponent.js'
+import { StepForm } from '../StepForm/StepForm.js'
 import { StepSelector } from '../StepSelector/StepSelector.js'
 import {
 	useHandleSaveClick,
@@ -93,7 +93,7 @@ export const TableTransform: React.FC<TableTransformProps> = memo(
 				) : null}
 				{internal && (
 					<>
-						<StepComponent
+						<StepForm
 							step={internal}
 							workflow={workflow}
 							metadata={metadata}

@@ -356,15 +356,28 @@ export interface StepCardProps {
     };
 }
 
-// Warning: (ae-missing-release-tag) "StepComponent" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export const StepComponent: React.FC<StepComponentProps>;
+export const StepDescription: React.FC<StepDescriptionProps>;
 
-// Warning: (ae-missing-release-tag) "StepComponentProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepComponentProps {
+export interface StepDescriptionProps {
+    output?: string;
+    step: Step;
+}
+
+// Warning: (ae-missing-release-tag) "StepForm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const StepForm: React.FC<StepFormProps>;
+
+// Warning: (ae-missing-release-tag) "StepFormProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepFormProps {
     hideInput?: boolean;
     hideInputColumn?: boolean;
     hideOutput?: boolean;
@@ -380,19 +393,6 @@ export interface StepComponentProps {
     outputTableLabel?: string;
     step: Step;
     workflow: Workflow;
-}
-
-// Warning: (ae-missing-release-tag) "StepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const StepDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepDescriptionProps {
-    output?: string;
-    step: Step;
 }
 
 // Warning: (ae-missing-release-tag) "StepHistoryList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
