@@ -11,9 +11,9 @@ import { memo } from 'react'
 
 import { DisplayOrder } from '../../enums.js'
 import { useWorkflowSteps } from '../../hooks/workflow/useWorkflowSteps.js'
-import type { StepHeaderStyles } from '../StepHeader/index.js'
-import { StepHeader } from '../StepHeader/index.js'
-import { TableTransform } from '../TableTransform/index.js'
+import { StepStackItem } from '../StepStackItem/index.js'
+import { StepHeader } from './StepHeader.js'
+import type { StepHeaderStyles } from './StepHeader.types.js'
 import { useDeleteConfirm, useTableHandlers } from './StepStack.hooks.js'
 import {
 	ButtonContainer,
@@ -107,7 +107,7 @@ export const StepStack: React.FC<StepStackProps> = memo(function StepStack({
 								)
 							}
 						>
-							<TableTransform
+							<StepStackItem
 								hideInput
 								hideOutput
 								step={step}

@@ -10,7 +10,7 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useState } from 'react'
 
 import { Guidance } from '../Guidance/Guidance.js'
-import { TableTransform } from '../TableTransform/TableTransform.js'
+import { StepStackItem } from '../StepStackItem/StepStackItem.js'
 import {
 	ContainerBody,
 	GuidanceContainer,
@@ -64,7 +64,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 				</Header>
 				<ContainerBody>
 					<StepComponentContainer>
-						<TableTransform
+						<StepStackItem
 							hideInput={props.hideInput}
 							hideOutput={props.hideOutput}
 							hideStepSelector={props.hideInput && props.hideOutput}

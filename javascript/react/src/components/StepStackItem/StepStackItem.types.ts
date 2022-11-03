@@ -8,7 +8,7 @@ import type { TableMetadata } from '@datashaper/tables'
 import type { Step, Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 
-export interface TableTransformProps {
+export interface StepStackItemProps {
 	/**
 	 * Table to build the transform from.
 	 */

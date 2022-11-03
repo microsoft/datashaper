@@ -34,7 +34,6 @@ import type { Step } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
 import type { Value } from '@datashaper/schema';
-import type { Verb } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
 
 // Warning: (ae-missing-release-tag) "ArqueroDetailsList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -325,64 +324,6 @@ export enum StatsColumnType {
     Type = "type"
 }
 
-// Warning: (ae-missing-release-tag) "StepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const StepDescription: React.FC<StepDescriptionProps>;
-
-// Warning: (ae-missing-release-tag) "StepDescriptionProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepDescriptionProps {
-    output?: string;
-    step: Step;
-}
-
-// Warning: (ae-missing-release-tag) "StepForm" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const StepForm: React.FC<StepFormProps>;
-
-// Warning: (ae-missing-release-tag) "StepFormProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepFormProps {
-    hideInput?: boolean;
-    hideInputColumn?: boolean;
-    hideOutput?: boolean;
-    index: number;
-    inputColumnLabel?: string;
-    inputTableLabel?: string;
-    metadata?: TableMetadata;
-    onChange: (step: Step, index: number) => void;
-    onChangeOutput: (value: string | undefined) => void;
-    output?: string;
-    outputColumnLabel?: string;
-    outputTableDisabled?: boolean;
-    outputTableLabel?: string;
-    step: Step;
-    workflow: Workflow;
-}
-
-// Warning: (ae-missing-release-tag) "StepSelector" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const StepSelector: React.FC<StepSelectorProps>;
-
-// Warning: (ae-missing-release-tag) "StepSelectorProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepSelectorProps {
-    // (undocumented)
-    onCreate?: (verb: Verb) => void;
-    // (undocumented)
-    placeholder?: string;
-    // (undocumented)
-    showButton?: boolean;
-    // (undocumented)
-    verb?: Verb;
-}
-
 // Warning: (ae-missing-release-tag) "StepStack" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -443,45 +384,6 @@ export interface TableCommandsProps {
 //
 // @public
 export function tableMenuCommand(tables: TableContainer[], selectedKey?: string | undefined, onChange?: (id: string) => void, props?: Partial<ICommandBarItemProps>): ICommandBarItemProps;
-
-// Warning: (ae-missing-release-tag) "TableTransform" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const TableTransform: React.FC<TableTransformProps>;
-
-// Warning: (ae-missing-release-tag) "TableTransformProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface TableTransformProps {
-    headerText?: string;
-    hideInput?: boolean;
-    hideInputColumn?: boolean;
-    hideOutput?: boolean;
-    // (undocumented)
-    hideStepSelector?: boolean;
-    index: number;
-    // (undocumented)
-    metadata?: TableMetadata;
-    // (undocumented)
-    onDelete?: (index: number) => void;
-    onTransformRequested?: (step: Step, index?: number) => void;
-    // (undocumented)
-    onVerbChange?: (verb: Verb) => void;
-    // (undocumented)
-    showGuidance?: boolean;
-    // (undocumented)
-    showGuidanceButton?: boolean;
-    step?: Step;
-    // (undocumented)
-    style?: React.CSSProperties;
-    table?: ColumnTable;
-    // (undocumented)
-    target?: string;
-    // (undocumented)
-    toggleGuidance?: () => void;
-    verbs?: string[];
-    workflow: Workflow;
-}
 
 // Warning: (ae-missing-release-tag) "TextFieldChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
