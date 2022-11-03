@@ -12,7 +12,7 @@ export interface ActionButtonProps extends IButtonProps {
 	/**
 	 * The type of button to render. Default='action'
 	 */
-	type?: 'action' | 'default'
+	type?: 'action' | 'default' | 'icon'
 
 	/**
 	 * The onclick handler. If undefined, no button is rendered

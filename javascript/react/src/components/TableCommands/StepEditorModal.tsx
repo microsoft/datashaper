@@ -45,6 +45,7 @@ export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
 				<Header>
 					<Title>{title}</Title>
 					<Action
+						type="icon"
 						onClick={onDismiss}
 						iconProps={icons.cancel}
 						ariaLabel="Close popup modal"
