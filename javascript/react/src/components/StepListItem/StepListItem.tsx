@@ -61,9 +61,10 @@ export const StepStackItem: React.FC<StepStackItemProps> = memo(
 			[handleVerbChange, onVerbChange],
 		)
 
-		const disableSave = useMemo((): boolean => {
-			return isEqual(step, internal) && !hideOutput && !outputHasChanged
-		}, [step, internal, outputHasChanged, hideOutput])
+		const disableSave = useMemo<boolean>(
+			() => isEqual(step, internal) && !hideOutput && !outputHasChanged,
+			[step, internal, outputHasChanged, hideOutput],
+		)
 
 		return (
 			<Container style={style}>
