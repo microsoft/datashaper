@@ -152,6 +152,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 									onSelect={setSelectedTableId}
 									workflow={workflow}
 									onSave={onSave}
+									selectedKey={selectedTableId}
 									order={DisplayOrder.FirstOnTop}
 								/>
 							</ToolPanel>
