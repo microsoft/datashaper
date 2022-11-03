@@ -26,7 +26,7 @@ import {
 	useDropdownChangeHandler,
 	useTextFieldChangeHandler,
 } from '../../hooks/index.js'
-import type { StepComponentProps } from '../verbs/index.js'
+import type { StepFormProps } from '../verbs/index.js'
 import { selectStepForm } from './selectStepForm.js'
 
 export function getSimpleDropdownOptions(list: string[]): IDropdownOption[] {
@@ -45,7 +45,7 @@ export function useStepChangeHandler(
 
 export function useStepArgsComponent(
 	step: Step,
-): React.FC<StepComponentProps<unknown>> | null {
+): React.FC<StepFormProps<unknown>> | null {
 	return useMemo(() => (step ? selectStepForm(step) : null), [step])
 }
 

@@ -12,16 +12,15 @@ import type { StepChangeFunction } from '../../../types.js'
  * For reusable subcomponents that are combined in one interface
  * to manipulate a step.
  */
-export interface StepSubcomponentProps<
-	T extends object | void | unknown = unknown,
-> extends StepComponentProps<T> {
+export interface StepSubformProps<T extends object | void | unknown = unknown>
+	extends StepFormProps<T> {
 	label?: string
 }
 
 /**
  * Basic props for a dump-component (not store/arquero attached)
  */
-export interface StepComponentBaseProps<
+export interface StepFormBaseProps<
 	T extends object | void | unknown = unknown,
 > {
 	step: Step<T>
@@ -31,8 +30,8 @@ export interface StepComponentBaseProps<
 	onChange?: StepChangeFunction<T>
 }
 
-export interface StepComponentProps<T extends object | void | unknown = unknown>
-	extends StepComponentBaseProps<T> {
+export interface StepFormProps<T extends object | void | unknown = unknown>
+	extends StepFormBaseProps<T> {
 	/**
 	 * TableStore to use for table lookups of step parameters.
 	 */
