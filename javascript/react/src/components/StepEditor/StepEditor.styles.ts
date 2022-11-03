@@ -5,11 +5,6 @@
 
 import styled from '@essex/styled-components'
 
-export const icons = {
-	checkMark: { iconName: 'CheckMark' },
-	delete: { iconName: 'Delete' },
-}
-
 export const Container = styled.div`
 	position: relative;
 `
@@ -20,11 +15,6 @@ export const ButtonContainer = styled.div`
 	justify-content: space-between;
 	gap: 0.5rem;
 	width: 100%;
-`
-export const SaveButtonWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
 `
 export const Flex = styled.div`
 	align-items: center;

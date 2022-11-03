@@ -2,24 +2,19 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ActionButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
 import { memo, useMemo } from 'react'
 
 import { EMPTY_OBJECT } from '../../empty.js'
 import { StepForm } from '../StepForm/StepForm.js'
+import { DeleteButton } from './DeleteButton.js'
+import { SaveButton } from './SaveButton.js'
 import {
 	useHandleSaveClick,
 	useInternalTableStep,
 	useStepOutputHandling,
 } from './StepEditor.hooks.js'
-import {
-	ButtonContainer,
-	Container,
-	Flex,
-	icons,
-	SaveButtonWrapper,
-} from './StepEditor.styles.js'
+import { ButtonContainer, Container, Flex } from './StepEditor.styles.js'
 import type { StepEditorProps } from './StepEditor.types.js'
 
 export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
@@ -59,23 +54,9 @@ export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
 					/>
 					<ButtonContainer>
 						<Flex>
-							<SaveButtonWrapper>
-								{handleSaveClick ? (
-									<ActionButton
-										onClick={handleSaveClick}
-										iconProps={icons.checkMark}
-										disabled={disableSave}
-									>
-										Save
-									</ActionButton>
-								) : null}
-							</SaveButtonWrapper>
+							<SaveButton onClick={handleSaveClick} disabled={disableSave} />
 						</Flex>
-						{onDelete ? (
-							<ActionButton onClick={onDelete} iconProps={icons.delete}>
-								Delete
-							</ActionButton>
-						) : null}
+						<DeleteButton onClick={onDelete} />
 					</ButtonContainer>
 				</>
 			)}

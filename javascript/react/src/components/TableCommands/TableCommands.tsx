@@ -129,7 +129,6 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 						workflow={workflow}
 						metadata={metadata}
 						onDismiss={dismissModal}
-						showGuidance
 					/>
 				) : null}
 			</Container>
