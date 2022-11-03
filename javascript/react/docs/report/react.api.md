@@ -237,6 +237,18 @@ export function getRightColumn(step: Step<JoinArgs>): string | undefined;
 // @public (undocumented)
 export function getSimpleDropdownOptions(list: string[]): IDropdownOption[];
 
+// Warning: (ae-missing-release-tag) "GroupedVerbs" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface GroupedVerbs {
+    // (undocumented)
+    alwaysEnabled?: boolean;
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    verbs: string[];
+}
+
 // Warning: (ae-missing-release-tag) "GroupHeaderFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -324,15 +336,31 @@ export enum StatsColumnType {
     Type = "type"
 }
 
-// Warning: (ae-missing-release-tag) "StepStack" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StepHistoryStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const StepStack: React.FC<StepStackProps>;
+export interface StepHistoryStyles {
+    // (undocumented)
+    buttonContainer?: CSSProperties;
+    // (undocumented)
+    root?: CSSProperties;
+    // Warning: (ae-forgotten-export) The symbol "StepHeaderStyles" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    stepHeaders?: StepHeaderStyles;
+    // (undocumented)
+    stepsContainer?: CSSProperties;
+}
 
-// Warning: (ae-missing-release-tag) "StepStackProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export interface StepStackProps {
+export const StepList: React.FC<StepListProps>;
+
+// Warning: (ae-missing-release-tag) "StepListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface StepListProps {
     // (undocumented)
     onDelete?: (index: number) => void;
     // (undocumented)
@@ -343,8 +371,6 @@ export interface StepStackProps {
     order?: DisplayOrder;
     selectedKey?: string;
     showSelectButtons?: boolean;
-    // Warning: (ae-forgotten-export) The symbol "StepHistoryStyles" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     styles?: StepHistoryStyles;
     // (undocumented)

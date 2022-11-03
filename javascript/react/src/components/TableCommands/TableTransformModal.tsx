@@ -10,7 +10,7 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { memo, useState } from 'react'
 
 import { Guidance } from '../Guidance/Guidance.js'
-import { StepStackItem } from '../StepStackItem/StepStackItem.js'
+import { StepStackItem } from '../StepListItem/StepListItem.js'
 import {
 	ContainerBody,
 	GuidanceContainer,

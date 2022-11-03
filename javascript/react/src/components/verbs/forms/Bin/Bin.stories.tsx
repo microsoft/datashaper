@@ -5,7 +5,7 @@
 import type { BinArgs } from '@datashaper/schema'
 import { BinStrategy } from '@datashaper/schema'
 
-import type { StepComponentProps } from '../types.js.js'
+import type { StepComponentProps } from '../types.js'
 import { BinBase } from './Bin.base.js'
 
 const storyMetadata = {

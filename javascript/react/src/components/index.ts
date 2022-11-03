@@ -5,5 +5,5 @@
 export * from './ArqueroDetailsList/index.js'
 export * from './ArqueroTableHeader/index.js'
 export * from './Guidance/index.js'
-export * from './StepStack/index.js'
+export * from './StepList/index.js'
 export * from './TableCommands/index.js'

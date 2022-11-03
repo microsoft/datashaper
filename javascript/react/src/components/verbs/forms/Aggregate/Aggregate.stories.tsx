@@ -5,7 +5,7 @@
 import type { AggregateArgs } from '@datashaper/schema'
 import { FieldAggregateOperation } from '@datashaper/schema'
 
-import type { StepComponentProps } from '../types.js.js'
+import type { StepComponentProps } from '../types.js'
 import { AggregateBase } from './Aggregate.base.js'
 
 const storyMetadata = {

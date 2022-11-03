@@ -4,7 +4,6 @@
  */
 import type { Step } from '@datashaper/workflow'
 
-import type { StepComponentProps } from '../verbs/index.js'
 import {
 	Aggregate,
 	Bin,
@@ -34,7 +33,8 @@ import {
 	Unfold,
 	Unhot,
 	Window,
-} from '../verbs/renderers/index.js'
+} from '../verbs/forms/index.js'
+import type { StepComponentProps } from '../verbs/index.js'
 
 const verb: Record<string, React.FC<StepComponentProps<any>>> = {
 	aggregate: Aggregate,
@@ -80,7 +80,7 @@ const verb: Record<string, React.FC<StepComponentProps<any>>> = {
  * Given a Step definition, returns the correct React component function.
  * @param step -
  */
-export function selectStepComponent(
+export function selectStepForm(
 	step: Step<unknown>,
 ): React.FC<StepComponentProps<unknown>> {
 	const result = verb[step.verb]

@@ -11,10 +11,10 @@ import { memo } from 'react'
 
 import { DisplayOrder } from '../../enums.js'
 import { useWorkflowSteps } from '../../hooks/workflow/useWorkflowSteps.js'
-import { StepStackItem } from '../StepStackItem/index.js'
+import { StepStackItem } from '../StepListItem/index.js'
 import { StepHeader } from './StepHeader.js'
 import type { StepHeaderStyles } from './StepHeader.types.js'
-import { useDeleteConfirm, useTableHandlers } from './StepStack.hooks.js'
+import { useDeleteConfirm, useTableHandlers } from './StepList.hooks.js'
 import {
 	ButtonContainer,
 	buttonStyles,
@@ -22,11 +22,11 @@ import {
 	icons,
 	StepsContainer,
 	tableTransformStyle,
-} from './StepStack.styles.js'
-import type { StepStackProps } from './StepStack.types.js'
-import { getCollapsiblePanelStyles } from './StepStack.utils.js'
+} from './StepList.styles.js'
+import type { StepListProps } from './StepList.types.js'
+import { getCollapsiblePanelStyles } from './StepList.utils.js'
 
-export const StepStack: React.FC<StepStackProps> = memo(function StepStack({
+export const StepList: React.FC<StepListProps> = memo(function StepStack({
 	workflow,
 	showSelectButtons = true,
 	order = DisplayOrder.FirstOnTop,

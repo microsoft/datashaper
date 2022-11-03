@@ -9,12 +9,11 @@ import { isEqual } from 'lodash-es'
 import { memo, useCallback, useMemo } from 'react'
 
 import { StepForm } from '../StepForm/StepForm.js'
-import { StepSelector } from './StepSelector.js'
 import {
 	useHandleSaveClick,
 	useInternalTableStep,
 	useStepOutputHandling,
-} from './StepStackItem.hooks.js'
+} from './StepListItem.hooks.js'
 import {
 	ButtonContainer,
 	Container,
@@ -23,8 +22,9 @@ import {
 	rightButtonStyles,
 	SaveButtonWrapper,
 	StepSelectorContainer,
-} from './StepStackItem.styles.js'
-import type { StepStackItemProps } from './StepStackItem.types.js'
+} from './StepListItem.styles.js'
+import type { StepStackItemProps } from './StepListItem.types.js'
+import { StepSelector } from './StepSelector.js'
 
 export const StepStackItem: React.FC<StepStackItemProps> = memo(
 	function TableTransform({

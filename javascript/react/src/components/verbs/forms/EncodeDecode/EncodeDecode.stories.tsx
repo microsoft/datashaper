@@ -5,7 +5,7 @@
 import type { EncodeDecodeArgs } from '@datashaper/schema'
 import { CodebookStrategy } from '@datashaper/schema'
 
-import type { StepComponentProps } from '../types.js.js'
+import type { StepComponentProps } from '../types.js'
 import { EncodeDecodeBase } from './EncodeDecode.base.js'
 
 const storyMetadata = {

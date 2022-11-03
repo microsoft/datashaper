@@ -86,10 +86,12 @@
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
 |  [ColumnOptions](./react.columnoptions.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
+|  [GroupedVerbs](./react.groupedverbs.md) |  |
 |  [GuidanceProps](./react.guidanceprops.md) |  |
 |  [ModalState](./react.modalstate.md) |  |
 |  [SortParameters](./react.sortparameters.md) |  |
-|  [StepStackProps](./react.stepstackprops.md) |  |
+|  [StepHistoryStyles](./react.stephistorystyles.md) |  |
+|  [StepListProps](./react.steplistprops.md) |  |
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
 
 ## Variables
@@ -99,7 +101,7 @@
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
 |  [Guidance](./react.guidance.md) |  |
-|  [StepStack](./react.stepstack.md) |  |
+|  [StepList](./react.steplist.md) |  |
 |  [TableCommands](./react.tablecommands.md) |  |
 
 ## Type Aliases

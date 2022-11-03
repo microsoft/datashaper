@@ -2780,6 +2780,104 @@
           "name": "getSimpleDropdownOptions"
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/react!GroupedVerbs:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface GroupedVerbs "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "GroupedVerbs",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!GroupedVerbs#alwaysEnabled:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "alwaysEnabled?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "alwaysEnabled",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!GroupedVerbs#label:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "label: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "label",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!GroupedVerbs#verbs:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "verbs: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "verbs",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "@datashaper/react!GroupHeaderFunction:type",
           "docComment": "",
@@ -3600,13 +3698,142 @@
           ]
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@datashaper/react!StepStack:var",
+          "kind": "Interface",
+          "canonicalReference": "@datashaper/react!StepHistoryStyles:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "StepStack: "
+              "text": "export interface StepHistoryStyles "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "StepHistoryStyles",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepHistoryStyles#buttonContainer:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "buttonContainer?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "buttonContainer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepHistoryStyles#root:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "root?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "root",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepHistoryStyles#stepHeaders:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stepHeaders?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StepHeaderStyles",
+                  "canonicalReference": "@datashaper/react!StepHeaderStyles:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "stepHeaders",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!StepHistoryStyles#stepsContainer:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stepsContainer?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CSSProperties",
+                  "canonicalReference": "@types/react!~React.CSSProperties:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "stepsContainer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@datashaper/react!StepList:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "StepList: "
             },
             {
               "kind": "Reference",
@@ -3619,8 +3846,8 @@
             },
             {
               "kind": "Reference",
-              "text": "StepStackProps",
-              "canonicalReference": "@datashaper/react!StepStackProps:interface"
+              "text": "StepListProps",
+              "canonicalReference": "@datashaper/react!StepListProps:interface"
             },
             {
               "kind": "Content",
@@ -3629,7 +3856,7 @@
           ],
           "isReadonly": true,
           "releaseTag": "Public",
-          "name": "StepStack",
+          "name": "StepList",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 5
@@ -3637,21 +3864,21 @@
         },
         {
           "kind": "Interface",
-          "canonicalReference": "@datashaper/react!StepStackProps:interface",
+          "canonicalReference": "@datashaper/react!StepListProps:interface",
           "docComment": "",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface StepStackProps "
+              "text": "export interface StepListProps "
             }
           ],
           "releaseTag": "Public",
-          "name": "StepStackProps",
+          "name": "StepListProps",
           "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepStackProps#onDelete:member",
+              "canonicalReference": "@datashaper/react!StepListProps#onDelete:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -3678,7 +3905,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepStackProps#onSave:member",
+              "canonicalReference": "@datashaper/react!StepListProps#onSave:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -3714,7 +3941,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepStackProps#onSelect:member",
+              "canonicalReference": "@datashaper/react!StepListProps#onSelect:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -3741,7 +3968,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepStackProps#order:member",
+              "canonicalReference": "@datashaper/react!StepListProps#order:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -3769,7 +3996,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepStackProps#selectedKey:member",
+              "canonicalReference": "@datashaper/react!StepListProps#selectedKey:member",
               "docComment": "/**\n * Id of the selected step\n */\n",
               "excerptTokens": [
                 {
@@ -3796,7 +4023,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepStackProps#showSelectButtons:member",
+              "canonicalReference": "@datashaper/react!StepListProps#showSelectButtons:member",
               "docComment": "/**\n * Indicates whether the original/latest buttons will be shown. Note that they will have no effect if you do not supply an onSelect handler too.\n */\n",
               "excerptTokens": [
                 {
@@ -3823,7 +4050,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepStackProps#styles:member",
+              "canonicalReference": "@datashaper/react!StepListProps#styles:member",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -3851,7 +4078,7 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!StepStackProps#workflow:member",
+              "canonicalReference": "@datashaper/react!StepListProps#workflow:member",
               "docComment": "",
               "excerptTokens": [
                 {

@@ -4,6 +4,6 @@
  */
 import type { IModalProps } from '@fluentui/react'
 
-import type { StepStackItemProps } from '../StepStackItem/index.js'
+import type { StepStackItemProps } from '../StepListItem/index.js'
 
 export interface TransformModalProps extends IModalProps, StepStackItemProps {}

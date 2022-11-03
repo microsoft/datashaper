@@ -15,7 +15,7 @@ export interface StepHistoryStyles {
 	stepHeaders?: StepHeaderStyles
 }
 
-export interface StepStackProps {
+export interface StepListProps {
 	workflow: Workflow
 	order?: DisplayOrder
 	/**
