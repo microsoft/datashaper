@@ -6,11 +6,12 @@
 import type { Step } from '@datashaper/workflow'
 import { isNoArgsStep } from '@datashaper/workflow'
 import { CollapsiblePanel, DialogConfirm } from '@essex/components'
-import { DefaultButton, useTheme } from '@fluentui/react'
+import { useTheme } from '@fluentui/react'
 import { memo } from 'react'
 
 import { DisplayOrder } from '../../enums.js'
 import { useWorkflowSteps } from '../../hooks/workflow/useWorkflowSteps.js'
+import { Action } from '../controls/index.js'
 import { StepEditor } from '../StepEditor/index.js'
 import { StepHeader } from './StepHeader.js'
 import type { StepHeaderStyles } from './StepHeader.types.js'
@@ -65,25 +66,25 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 			/>
 			{showSelectButtons && (
 				<ButtonContainer style={styles?.buttonContainer}>
-					{onSelectOriginalTable && (
-						<DefaultButton
-							disabled={!steps.length}
-							iconProps={icons.preview}
-							style={buttonStyles}
-							onClick={onSelectOriginalTable}
-						>
-							Original
-						</DefaultButton>
-					)}
+					<Action
+						type="default"
+						disabled={!steps.length}
+						iconProps={icons.preview}
+						style={buttonStyles}
+						onClick={onSelectOriginalTable}
+					>
+						Original
+					</Action>
 
-					<DefaultButton
+					<Action
+						type="default"
 						disabled={!steps.length}
 						iconProps={icons.preview}
 						style={buttonStyles}
 						onClick={onSelectLatest}
 					>
 						Latest
-					</DefaultButton>
+					</Action>
 				</ButtonContainer>
 			)}
 			<StepsContainer style={styles?.stepsContainer}>

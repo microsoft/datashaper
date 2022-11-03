@@ -8,4 +8,5 @@ import type { StepEditorProps } from '../StepEditor/index.js'
 
 export interface StepEditorModalProps extends IModalProps, StepEditorProps {
 	target?: string
+	onDismiss?: () => void
 }

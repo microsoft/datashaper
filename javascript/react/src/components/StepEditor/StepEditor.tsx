@@ -3,12 +3,11 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@datashaper/workflow'
-import type { IButtonProps } from '@fluentui/react'
-import { ActionButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
 import { memo, useMemo, useState } from 'react'
 
 import { EMPTY_OBJECT } from '../../empty.js'
+import { Action } from '../controls/index.js'
 import { StepForm } from '../StepForm/StepForm.js'
 import {
 	useHandleSaveClick,
@@ -48,9 +47,9 @@ export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
 						metadata={metadata}
 						index={index}
 						output={output}
-						onChangeOutput={onOutputChanged}
-						onChange={setInternal}
 						hideInputColumn={hideInputColumn}
+						onChange={setInternal}
+						onChangeOutput={onOutputChanged}
 					/>
 					<Actions>
 						<Action onClick={onSave} disabled={noSave} iconProps={icons.save}>
@@ -64,11 +63,4 @@ export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
 			)}
 		</Container>
 	)
-})
-
-const Action: React.FC<IButtonProps> = memo(function MaybeButton({
-	onClick,
-	...props
-}) {
-	return onClick ? <ActionButton {...props} onClick={onClick} /> : null
 })

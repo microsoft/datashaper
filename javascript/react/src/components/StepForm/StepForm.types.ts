@@ -17,29 +17,19 @@ export interface StepFormProps {
 	step: Step
 
 	/**
-	 * TableMetadata
-	 */
-	metadata?: TableMetadata
-
-	/**
 	 * The step index
 	 */
 	index: number
 
 	/**
+	 * TableMetadata
+	 */
+	metadata?: TableMetadata
+
+	/**
 	 * The output table name
 	 */
 	output?: string
-
-	/**
-	 * Label for the input table dropdown
-	 */
-	inputColumnLabel?: string
-
-	/**
-	 * The label to use for the output column field
-	 */
-	outputColumnLabel?: string
 
 	/**
 	 * Indicates that the input column should be hidden or else shown and editable by the user.
