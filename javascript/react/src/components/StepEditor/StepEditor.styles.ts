@@ -4,10 +4,8 @@
  */
 
 import styled from '@essex/styled-components'
-import type { IButtonStyles } from '@fluentui/react'
 
 export const icons = {
-	info: { iconName: 'Info' },
 	checkMark: { iconName: 'CheckMark' },
 	delete: { iconName: 'Delete' },
 }
@@ -32,9 +30,3 @@ export const Flex = styled.div`
 	align-items: center;
 	display: flex;
 `
-export const rightButtonStyles: IButtonStyles = {
-	root: {
-		position: 'absolute',
-		right: '1rem',
-	},
-}

@@ -32,12 +32,6 @@ export interface StepEditorProps {
 
 	style?: React.CSSProperties
 
-	toggleGuidance?: () => void
-
-	showGuidance?: boolean
-
-	showGuidanceButton?: boolean
-
 	/**
 	 * Callback fired when the step is configured and "run" is clicked, indicating
 	 * the application should execute the contructed/edited step.

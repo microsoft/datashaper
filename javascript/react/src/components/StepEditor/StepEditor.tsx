@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import { ActionButton, IconButton } from '@fluentui/react'
+import { ActionButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
 import { memo, useMemo } from 'react'
 
@@ -18,7 +18,6 @@ import {
 	Container,
 	Flex,
 	icons,
-	rightButtonStyles,
 	SaveButtonWrapper,
 } from './StepEditor.styles.js'
 import type { StepEditorProps } from './StepEditor.types.js'
@@ -29,9 +28,6 @@ export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
 	metadata,
 	index,
 	step,
-	showGuidance,
-	showGuidanceButton,
-	toggleGuidance,
 	style = EMPTY_OBJECT,
 	onDelete,
 	hideInputColumn,
@@ -49,14 +45,6 @@ export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
 
 	return (
 		<Container style={style}>
-			{showGuidanceButton && internal?.verb ? (
-				<IconButton
-					onClick={toggleGuidance}
-					iconProps={icons.info}
-					checked={showGuidance}
-					styles={rightButtonStyles}
-				/>
-			) : null}
 			{internal && (
 				<>
 					<StepForm

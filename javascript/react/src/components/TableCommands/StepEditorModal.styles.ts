@@ -7,6 +7,7 @@ import styled from '@essex/styled-components'
 
 export const icons = {
 	cancel: { iconName: 'Cancel' },
+	info: { iconName: 'Info' },
 }
 
 const MAX_HEIGHT = 700

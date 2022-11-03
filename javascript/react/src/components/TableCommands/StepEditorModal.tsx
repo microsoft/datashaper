@@ -68,11 +68,15 @@ export const StepEditorModal: React.FC<StepEditorModalProps> = memo(
 							onSave={onSave}
 							index={index}
 							step={step}
-							showGuidance={showGuidance}
-							toggleGuidance={toggleGuidance}
-							showGuidanceButton
 						/>
 					</StepComponentContainer>
+					{step?.verb ? (
+						<IconButton
+							onClick={toggleGuidance}
+							iconProps={icons.info}
+							checked={showGuidance}
+						/>
+					) : null}
 					{showGuidance && step?.verb ? (
 						<GuidanceContainer>
 							<Guidance name={step?.verb} index={guidanceIndex} />
