@@ -6,28 +6,18 @@
 import styled from '@essex/styled-components'
 
 export const icons = {
-	checkMark: { iconName: 'CheckMark' },
+	save: { iconName: 'CheckMark' },
 	delete: { iconName: 'Delete' },
 }
 
 export const Container = styled.div`
 	position: relative;
 `
-export const ButtonContainer = styled.div`
+export const Actions = styled.div`
 	margin-top: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 0.5rem;
 	width: 100%;
-`
-export const Flex = styled.div`
-	align-items: center;
-	display: flex;
-`
-
-export const SaveButtonWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
 `
