@@ -89,11 +89,9 @@
 |  [GuidanceProps](./react.guidanceprops.md) |  |
 |  [ModalState](./react.modalstate.md) |  |
 |  [SortParameters](./react.sortparameters.md) |  |
-|  [StepCardProps](./react.stepcardprops.md) |  |
 |  [StepDescriptionProps](./react.stepdescriptionprops.md) |  |
 |  [StepFormProps](./react.stepformprops.md) |  |
 |  [StepHistoryListProps](./react.stephistorylistprops.md) |  |
-|  [StepListProps](./react.steplistprops.md) |  |
 |  [StepSelectorProps](./react.stepselectorprops.md) |  |
 |  [TableCommandsProps](./react.tablecommandsprops.md) |  |
 |  [TableTransformProps](./react.tabletransformprops.md) |  |
@@ -105,11 +103,9 @@
 |  [ArqueroDetailsList](./react.arquerodetailslist.md) | Renders an arquero table using a fluent DetailsList. |
 |  [ArqueroTableHeader](./react.arquerotableheader.md) |  |
 |  [Guidance](./react.guidance.md) |  |
-|  [StepCard](./react.stepcard.md) |  |
 |  [StepDescription](./react.stepdescription.md) | Let's us render the Steps in a loop while memoing all the functions |
 |  [StepForm](./react.stepform.md) | Let's us render the Steps in a loop while memoing all the functions |
 |  [StepHistoryList](./react.stephistorylist.md) |  |
-|  [StepList](./react.steplist.md) |  |
 |  [StepSelector](./react.stepselector.md) | Creates a custom step selection dropdown. If "showButton" is true, a + icon will appear next to the dropdown, and onChange will only fire when it is clicked. |
 |  [TableCommands](./react.tablecommands.md) |  |
 |  [TableTransform](./react.tabletransform.md) |  |

@@ -22,7 +22,6 @@ import type { IDetailsHeaderProps } from '@fluentui/react';
 import type { IDetailsListProps } from '@fluentui/react';
 import type { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
-import type { IDocumentCardStyles } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
 import type { InputColumnRecordArgs } from '@datashaper/schema';
 import type { IRenderFunction } from '@fluentui/react';
@@ -326,36 +325,6 @@ export enum StatsColumnType {
     Type = "type"
 }
 
-// Warning: (ae-missing-release-tag) "StepCard" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const StepCard: React.FC<StepCardProps>;
-
-// Warning: (ae-missing-release-tag) "StepCardProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepCardProps {
-    // (undocumented)
-    index: number;
-    // (undocumented)
-    onDelete?: (index: number) => void;
-    // (undocumented)
-    onDuplicate?: (step: Step) => void;
-    // (undocumented)
-    onEdit?: (step: Step, index: number) => void;
-    // (undocumented)
-    onSelect?: (name: string) => void;
-    // (undocumented)
-    output: string | undefined;
-    // (undocumented)
-    step: Step;
-    // (undocumented)
-    style?: {
-        card?: IDocumentCardStyles;
-        actions?: IDocumentCardStyles;
-    };
-}
-
 // Warning: (ae-missing-release-tag) "StepDescription" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -420,33 +389,6 @@ export interface StepHistoryListProps {
     styles?: StepHistoryStyles;
     // (undocumented)
     workflow: Workflow;
-}
-
-// Warning: (ae-missing-release-tag) "StepList" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const StepList: React.FC<StepListProps>;
-
-// Warning: (ae-missing-release-tag) "StepListProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface StepListProps {
-    // (undocumented)
-    buttonId?: string | undefined;
-    // (undocumented)
-    onDeleteClicked?: (index: number) => void;
-    // (undocumented)
-    onDuplicateClicked?: (step: Step) => void;
-    // (undocumented)
-    onEditClicked?: (step: Step, index: number) => void;
-    // (undocumented)
-    onSelect?: (name: string) => void;
-    // (undocumented)
-    onStartNewStep?: () => void;
-    // (undocumented)
-    outputs: Array<string | undefined>;
-    // (undocumented)
-    steps: Step[];
 }
 
 // Warning: (ae-missing-release-tag) "StepSelector" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
