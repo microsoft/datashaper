@@ -22,10 +22,12 @@ export function useStripedRowsRenderer(
 			if (!props) {
 				return null
 			}
-			// passing along compact is resulting in inf. loop in ArqueroDetailsList story (Fill Story)
-			const { compact, ...rest } = props
 			return (
-				<StripedRow {...rest} striped={striped} columnBorders={columnBorders} />
+				<StripedRow
+					{...props}
+					striped={striped}
+					columnBorders={columnBorders}
+				/>
 			)
 		},
 		[striped, columnBorders],

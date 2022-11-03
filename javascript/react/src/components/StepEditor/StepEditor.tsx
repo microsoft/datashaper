@@ -3,23 +3,23 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@datashaper/workflow'
+import type { IButtonProps } from '@fluentui/react'
+import { ActionButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
 import { memo, useMemo, useState } from 'react'
 
 import { EMPTY_OBJECT } from '../../empty.js'
 import { StepForm } from '../StepForm/StepForm.js'
-import { DeleteButton } from './DeleteButton.js'
-import { SaveButton } from './SaveButton.js'
 import {
 	useHandleSaveClick,
 	useStepOutputHandling,
 } from './StepEditor.hooks.js'
-import { ButtonContainer, Container, Flex } from './StepEditor.styles.js'
+import { Actions, Container, icons } from './StepEditor.styles.js'
 import type { StepEditorProps } from './StepEditor.types.js'
 
 export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
 	workflow,
-	onSave,
+	onSave: execSave,
 	metadata,
 	index,
 	step,
@@ -32,8 +32,8 @@ export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
 		workflow,
 		step,
 	)
-	const handleSaveClick = useHandleSaveClick(internal, onSave)
-	const disableSave = useMemo<boolean>(
+	const onSave = useHandleSaveClick(internal, execSave)
+	const noSave = useMemo<boolean>(
 		() => isEqual(step, internal) && !outputHasChanged,
 		[step, internal, outputHasChanged],
 	)
@@ -52,14 +52,23 @@ export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
 						onChange={setInternal}
 						hideInputColumn={hideInputColumn}
 					/>
-					<ButtonContainer>
-						<Flex>
-							<SaveButton onClick={handleSaveClick} disabled={disableSave} />
-						</Flex>
-						<DeleteButton onClick={onDelete} />
-					</ButtonContainer>
+					<Actions>
+						<Action onClick={onSave} disabled={noSave} iconProps={icons.save}>
+							Save
+						</Action>
+						<Action onClick={onDelete} iconProps={icons.delete}>
+							Delete
+						</Action>
+					</Actions>
 				</>
 			)}
 		</Container>
 	)
+})
+
+const Action: React.FC<IButtonProps> = memo(function MaybeButton({
+	onClick,
+	...props
+}) {
+	return onClick ? <ActionButton {...props} onClick={onClick} /> : null
 })
