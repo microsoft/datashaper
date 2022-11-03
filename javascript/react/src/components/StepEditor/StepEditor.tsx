@@ -3,18 +3,24 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { Step } from '@datashaper/workflow'
+import type { IButtonProps } from '@fluentui/react';
+import { ActionButton } from '@fluentui/react'
 import { isEqual } from 'lodash-es'
 import { memo, useMemo, useState } from 'react'
 
 import { EMPTY_OBJECT } from '../../empty.js'
 import { StepForm } from '../StepForm/StepForm.js'
-import { DeleteButton } from './DeleteButton.js'
-import { SaveButton } from './SaveButton.js'
 import {
 	useHandleSaveClick,
 	useStepOutputHandling,
 } from './StepEditor.hooks.js'
-import { ButtonContainer, Container, Flex } from './StepEditor.styles.js'
+import {
+	ButtonContainer,
+	Container,
+	Flex,
+	icons,
+	SaveButtonWrapper,
+} from './StepEditor.styles.js'
 import type { StepEditorProps } from './StepEditor.types.js'
 
 export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
@@ -54,12 +60,29 @@ export const StepEditor: React.FC<StepEditorProps> = memo(function StepEditor({
 					/>
 					<ButtonContainer>
 						<Flex>
-							<SaveButton onClick={handleSaveClick} disabled={disableSave} />
+							<SaveButtonWrapper>
+								<MaybeButton
+									onClick={handleSaveClick}
+									disabled={disableSave}
+									iconProps={icons.checkMark}
+								>
+									Save
+								</MaybeButton>
+							</SaveButtonWrapper>
 						</Flex>
-						<DeleteButton onClick={onDelete} />
+						<MaybeButton onClick={onDelete} iconProps={icons.delete}>
+							Delete
+						</MaybeButton>
 					</ButtonContainer>
 				</>
 			)}
 		</Container>
 	)
+})
+
+const MaybeButton: React.FC<IButtonProps> = memo(function MaybeButton({
+	onClick,
+	...props
+}) {
+	return onClick ? <ActionButton {...props} onClick={onClick} /> : null
 })
