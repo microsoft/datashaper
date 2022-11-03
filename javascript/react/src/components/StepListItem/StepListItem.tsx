@@ -27,9 +27,9 @@ import type { StepStackItemProps } from './StepListItem.types.js'
 import { StepSelector } from './StepSelector.js'
 
 export const StepStackItem: React.FC<StepStackItemProps> = memo(
-	function TableTransform({
+	function StepStackItem({
 		workflow,
-		onTransformRequested,
+		onSave,
 		metadata,
 		index,
 		step,
@@ -52,7 +52,7 @@ export const StepStackItem: React.FC<StepStackItemProps> = memo(
 			workflow,
 			step,
 		)
-		const handleSaveClick = useHandleSaveClick(internal, onTransformRequested)
+		const handleSaveClick = useHandleSaveClick(internal, onSave)
 		const onCreate = useCallback(
 			(verb: Verb) => {
 				onVerbChange?.(verb)
@@ -121,10 +121,7 @@ export const StepStackItem: React.FC<StepStackItemProps> = memo(
 								</SaveButtonWrapper>
 							</Flex>
 							{onDelete ? (
-								<ActionButton
-									onClick={() => onDelete(index)}
-									iconProps={icons.delete}
-								>
+								<ActionButton onClick={onDelete} iconProps={icons.delete}>
 									Delete
 								</ActionButton>
 							) : null}

@@ -25,12 +25,6 @@ export interface StepStackItemProps {
 	index: number
 
 	/**
-	 * Callback fired when the step is configured and "run" is clicked, indicating
-	 * the application should execute the contructed/edited step.
-	 */
-	onTransformRequested?: (step: Step, index?: number) => void
-
-	/**
 	 * Optional list of transform verbs to present to the user.
 	 * If not supplied, all verbs for the desired operation (table or column) will be presented.
 	 */
@@ -80,5 +74,14 @@ export interface StepStackItemProps {
 
 	hideStepSelector?: boolean
 
-	onDelete?: (index: number) => void
+	/**
+	 * Callback fired when the step is configured and "run" is clicked, indicating
+	 * the application should execute the contructed/edited step.
+	 */
+	onSave?: (step: Step) => void
+
+	/**
+	 * Callback fired when the delete button is clicked.
+	 */
+	onDelete?: () => void
 }

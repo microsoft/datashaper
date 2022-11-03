@@ -27,7 +27,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 		onDismiss,
 		workflow,
 		metadata,
-		onTransformRequested,
+		onSave,
 		index,
 		step,
 		styles,
@@ -71,7 +71,7 @@ export const TableTransformModal: React.FC<TransformModalProps> = memo(
 							hideInputColumn={props.hideInput && props.hideOutput}
 							workflow={workflow}
 							metadata={metadata}
-							onTransformRequested={onTransformRequested}
+							onSave={onSave}
 							index={index}
 							step={step}
 							showGuidance={showGuidance}

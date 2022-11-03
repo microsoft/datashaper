@@ -93,6 +93,8 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 						isNoArgsStep(step) || !onSave
 							? undefined
 							: (s: Step) => onSave(s, stepIndex)
+					const handleDelete =
+						onDeleteClicked && (() => onDeleteClicked(stepIndex))
 					return (
 						<CollapsiblePanel
 							key={step.id}
@@ -114,8 +116,8 @@ export const StepList: React.FC<StepListProps> = memo(function StepStack({
 								index={stepIndex}
 								workflow={workflow}
 								style={tableTransformStyle}
-								onDelete={onDeleteClicked}
-								onTransformRequested={handleSave}
+								onDelete={handleDelete}
+								onSave={handleSave}
 								hideStepSelector
 							/>
 						</CollapsiblePanel>

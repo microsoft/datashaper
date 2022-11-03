@@ -45,7 +45,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 			show: showModal,
 		} = useTransformModalState(setStep, setIndex)
 
-		const onTransformRequested = useCallback(
+		const onSave = useCallback(
 			(_step: Step) => {
 				onAddStep?.(_step, _step?.id, index)
 				dismissModal()
@@ -127,7 +127,7 @@ export const TableCommands: React.FC<TableCommandsProps> = memo(
 						target={`#${modalTarget}`}
 						step={step}
 						index={index ?? workflow.length}
-						onTransformRequested={onTransformRequested}
+						onSave={onSave}
 						workflow={workflow}
 						metadata={metadata}
 						onDismiss={dismissModal}
