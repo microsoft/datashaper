@@ -19,7 +19,6 @@ import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import type { IColumn } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
-import upperCase from 'lodash-es/upperCase.js'
 import { memo, useCallback, useMemo, useState } from 'react'
 
 import { ProjectManagementCommandBar } from '../../components/common/ProjectManagementCommandBar.js'
