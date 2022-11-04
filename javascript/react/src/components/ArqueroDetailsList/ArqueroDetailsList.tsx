@@ -151,7 +151,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			<DetailsWrapper
 				ref={ref}
 				data-is-scrollable="true"
-				showColumnBorders={showColumnBorders}
+				compact={compact}
 				style={style}
 			>
 				<DetailsList

@@ -11,9 +11,9 @@ import {
 	BASE_HEADER_HEIGHT,
 	COMPACT_ROW_HEIGHT,
 	DEFAULT_COLUMN_WIDTH,
+	DEFAULT_ROW_HEIGHT,
 	HEADER_WIDTH_PADDING,
 	HISTOGRAM_HEADER_HEIGHT,
-	ROW_HEIGHT,
 	STATS_HEADER_ITEM_HEIGHT,
 } from '../ArqueroDetailsList.constants.js'
 import type { DetailsListFeatures } from '../ArqueroDetailsList.types.js'
@@ -59,11 +59,12 @@ function useVirtualRows(
 	const virtualRows = useMemo(() => {
 		const headerHeight = computeHeaderHeight(features)
 		const rowHeight =
-			table.numRows() * (options.compact ? COMPACT_ROW_HEIGHT : ROW_HEIGHT)
+			table.numRows() *
+			(options.compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT)
 		const totalHeight = headerHeight + rowHeight
 		if (size && fill) {
 			const remainder = size.height - totalHeight
-			const per = options.compact ? COMPACT_ROW_HEIGHT : ROW_HEIGHT
+			const per = options.compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT
 			const count = Math.ceil(remainder / per)
 			const keys = columns ? columns.map(c => c.key) : table.columnNames()
 			const template = keys.reduce((acc, cur) => {

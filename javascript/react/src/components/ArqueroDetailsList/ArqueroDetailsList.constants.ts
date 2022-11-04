@@ -2,11 +2,16 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-export const ROW_HEIGHT = 42
 /**
- * Hard-coded in the fluent DetailsList rows (IList actually)
+ * Hard-coded in the fluent DetailsList rows.
+ * https://github.com/microsoft/fluentui/blob/547d0184dbf41e4b42ffb13f6db2dac0fd85f70a/packages/react/src/components/DetailsList/DetailsRow.styles.ts#L40
+ */
+export const DEFAULT_ROW_HEIGHT = 42
+/**
+ * Hard-coded in the fluent DetailsList rows
  */
 export const COMPACT_ROW_HEIGHT = 32
+
 /**
  * Hard-coded in the fluent DetailsList cell header
  */

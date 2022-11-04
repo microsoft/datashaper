@@ -4,7 +4,12 @@
  */
 import styled from '@essex/styled-components'
 
-export const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
+import {
+	COMPACT_ROW_HEIGHT,
+	DEFAULT_ROW_HEIGHT,
+} from './ArqueroDetailsList.constants.js'
+
+export const DetailsWrapper = styled.div<{ compact: boolean }>`
 	height: inherit;
 	max-height: inherit;
 	overflow-y: auto;
@@ -15,7 +20,10 @@ export const DetailsWrapper = styled.div<{ showColumnBorders: boolean }>`
 	}
 
 	.ms-List-cell {
-		min-height: unset;
+		min-height: ${({ compact }) =>
+			compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT}px;
+		height: ${({ compact }) =>
+			compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT}px;
 	}
 
 	.ms-CommandBar {
