@@ -45,8 +45,6 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 	workflow: g,
 	metadata,
 	index,
-	inputColumnLabel,
-	outputColumnLabel,
 	onChange,
 	onChangeOutput: changeOutput,
 	hideInputColumn,
@@ -93,7 +91,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 				<TableColumnDropdown
 					required
 					options={columnOptions}
-					label={inputColumnLabel || `Column to ${s.verb}`}
+					label={`Column to ${s.verb}`}
 					selectedKey={(s.args as InputColumnArgs).column}
 					onChange={onInputColumnChange}
 				/>
@@ -112,7 +110,7 @@ export const StepForm: React.FC<StepFormProps> = memo(function StepForm({
 			{isOutputColumnStep(s) ? (
 				<TextField
 					required
-					label={outputColumnLabel || 'New column name'}
+					label={'New column name'}
 					placeholder={'Column name'}
 					value={(s.args as OutputColumnArgs).to}
 					styles={dropdownStyles}

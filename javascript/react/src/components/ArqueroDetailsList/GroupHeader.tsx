@@ -54,7 +54,7 @@ export const GroupHeader: React.FC<React.PropsWithChildren<GroupHeaderProps>> =
 					iconProps={{
 						iconName: group?.isCollapsed ? 'ChevronRight' : 'ChevronDown',
 					}}
-				></LevelButton>
+				/>
 				<If condition={!!children}>
 					<Then>{children}</Then>
 					<Else>
