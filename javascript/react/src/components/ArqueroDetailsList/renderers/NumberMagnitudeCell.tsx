@@ -39,8 +39,8 @@ export const NumberMagnitudeCell: React.FC<MagnitudeCellProps> = memo(
 					<rect width={size} height={height} x={width - size} fill={barColor} />
 					<text
 						fill={textFill}
-						y={height / 2 + 1}
-						x={width - 2}
+						y={height / 2 + 1.5} // 1.5 to center within even-number height
+						x={width - 3}
 						dominantBaseline={'middle'}
 						textAnchor={'end'}
 					>
