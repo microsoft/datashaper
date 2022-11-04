@@ -16,7 +16,7 @@ export interface SortParameters
 |  --- | --- | --- | --- |
 |  [defaultSortColumn?](./react.sortparameters.defaultsortcolumn.md) |  | string | <i>(Optional)</i> |
 |  [defaultSortDirection?](./react.sortparameters.defaultsortdirection.md) |  | SortDirection | <i>(Optional)</i> |
-|  [onSort](./react.sortparameters.onsort.md) |  | [ColumnClickFunction](./react.columnclickfunction.md) |  |
+|  [onSort](./react.sortparameters.onsort.md) |  | [ColumnSelectFunction](./react.columnselectfunction.md) |  |
 |  [sortColumn?](./react.sortparameters.sortcolumn.md) |  | string | <i>(Optional)</i> |
 |  [sortDirection?](./react.sortparameters.sortdirection.md) |  | SortDirection | <i>(Optional)</i> |
 

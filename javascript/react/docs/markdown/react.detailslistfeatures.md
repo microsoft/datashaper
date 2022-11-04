@@ -17,8 +17,6 @@ export interface DetailsListFeatures
 |  [commandBar?](./react.detailslistfeatures.commandbar.md) |  | IRenderFunction&lt;IDetailsColumnProps&gt;\[\] | <i>(Optional)</i> Receive elements to render in the column header as commands, passing the column details to be used in the component |
 |  [histogramColumnHeaders?](./react.detailslistfeatures.histogramcolumnheaders.md) |  | boolean | <i>(Optional)</i> Include histograms in the headers of numeric columns. |
 |  [lazyLoadGroups?](./react.detailslistfeatures.lazyloadgroups.md) |  | boolean | <i>(Optional)</i> Collapse most groups so we can lazy load them. Default as true |
-|  [onHistogramColumnHeaderClick?](./react.detailslistfeatures.onhistogramcolumnheaderclick.md) |  | [MetadataClickFunction](./react.metadataclickfunction.md) | <i>(Optional)</i> If histogramColumnHeaders is true the user can pass a custom function to the click event |
-|  [onStatsColumnHeaderClick?](./react.detailslistfeatures.onstatscolumnheaderclick.md) |  | [MetadataClickFunction](./react.metadataclickfunction.md) | <i>(Optional)</i> If statsColumnHeaders is true the user can pass a custom function to the click event |
 |  [showBooleanSymbol?](./react.detailslistfeatures.showbooleansymbol.md) |  | boolean | <i>(Optional)</i> Without smartCells, if datatype is boolean, shows a symbol |
 |  [showCategoricalBar?](./react.detailslistfeatures.showcategoricalbar.md) |  | boolean | <i>(Optional)</i> Without smartCells, if datatype is array, shows a categorical bar |
 |  [showDateFormatted?](./react.detailslistfeatures.showdateformatted.md) |  | boolean | <i>(Optional)</i> Without smartCells, if datatype is date, shows the date formatted |

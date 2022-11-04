@@ -4,10 +4,10 @@
  */
 import type { IColumn } from '@fluentui/react'
 
-import type { ColumnClickFunction } from '../index.js'
+import type { ColumnSelectFunction } from '../index.js'
 
 export interface CellContainerProps {
-	onClick?: ColumnClickFunction
+	onClick?: ColumnSelectFunction
 	column?: IColumn
 	children?: React.ReactNode
 }

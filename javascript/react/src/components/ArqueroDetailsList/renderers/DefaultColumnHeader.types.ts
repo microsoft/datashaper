@@ -4,10 +4,10 @@
  */
 import type { IDetailsColumnProps } from '@fluentui/react'
 
-import type { ColumnClickFunction } from '../index.js'
+import type { ColumnSelectFunction } from '../index.js'
 
 export interface DefaultColumnHeaderProps extends IDetailsColumnProps {
-	onSelect?: ColumnClickFunction
+	onSelect?: ColumnSelectFunction
 	isSortable?: boolean
-	onSort?: ColumnClickFunction
+	onSort?: ColumnSelectFunction
 }

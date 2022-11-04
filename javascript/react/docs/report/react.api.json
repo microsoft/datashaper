@@ -529,8 +529,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ColumnClickFunction",
-                  "canonicalReference": "@datashaper/react!ColumnClickFunction:type"
+                  "text": "ColumnSelectFunction",
+                  "canonicalReference": "@datashaper/react!ColumnSelectFunction:type"
                 },
                 {
                   "kind": "Content",
@@ -1313,58 +1313,6 @@
           "name": "checkedItemsCommand"
         },
         {
-          "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/react!ColumnClickFunction:type",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare type ColumnClickFunction = "
-            },
-            {
-              "kind": "Content",
-              "text": "(evt?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.MouseEvent",
-              "canonicalReference": "@types/react!~React.MouseEvent:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "HTMLElement",
-              "canonicalReference": "!HTMLElement:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ">, column?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "IColumn",
-              "canonicalReference": "@fluentui/react!IColumn:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " | undefined) => void"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "ColumnClickFunction",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 8
-          }
-        },
-        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/react!ColumnOptions:interface",
           "docComment": "",
@@ -1428,33 +1376,6 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "features",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ColumnOptions#isSortable:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "isSortable?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "isSortable",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -1571,6 +1492,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ColumnOptions#sortable:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "sortable?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "sortable",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!ColumnOptions#sortColumn:member",
               "docComment": "",
               "excerptTokens": [
@@ -1659,6 +1607,58 @@
           "typeTokenRange": {
             "startIndex": 1,
             "endIndex": 4
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@datashaper/react!ColumnSelectFunction:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type ColumnSelectFunction = "
+            },
+            {
+              "kind": "Content",
+              "text": "(evt?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "React.MouseEvent",
+              "canonicalReference": "@types/react!~React.MouseEvent:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">, column?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "IColumn",
+              "canonicalReference": "@fluentui/react!IColumn:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ColumnSelectFunction",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 8
           }
         },
         {
@@ -1842,62 +1842,6 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "lazyLoadGroups",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#onHistogramColumnHeaderClick:member",
-              "docComment": "/**\n * If histogramColumnHeaders is true the user can pass a custom function to the click event\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onHistogramColumnHeaderClick?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "MetadataClickFunction",
-                  "canonicalReference": "@datashaper/react!MetadataClickFunction:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onHistogramColumnHeaderClick",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!DetailsListFeatures#onStatsColumnHeaderClick:member",
-              "docComment": "/**\n * If statsColumnHeaders is true the user can pass a custom function to the click event\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onStatsColumnHeaderClick?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "MetadataClickFunction",
-                  "canonicalReference": "@datashaper/react!MetadataClickFunction:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onStatsColumnHeaderClick",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -2951,76 +2895,6 @@
           "extendsTokenRanges": []
         },
         {
-          "kind": "TypeAlias",
-          "canonicalReference": "@datashaper/react!MetadataClickFunction:type",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare type MetadataClickFunction = "
-            },
-            {
-              "kind": "Content",
-              "text": "(evt?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "React.MouseEvent",
-              "canonicalReference": "@types/react!~React.MouseEvent:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "HTMLElement",
-              "canonicalReference": "!HTMLElement:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
-              "text": "MouseEvent",
-              "canonicalReference": "!MouseEvent:interface"
-            },
-            {
-              "kind": "Content",
-              "text": "> | undefined, column?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "IColumn",
-              "canonicalReference": "@fluentui/react!IColumn:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " | undefined, metadata?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "Field",
-              "canonicalReference": "@datashaper/schema!Field:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ") => void"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "MetadataClickFunction",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 12
-          }
-        },
-        {
           "kind": "Interface",
           "canonicalReference": "@datashaper/react!ModalState:interface",
           "docComment": "",
@@ -3271,8 +3145,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "ColumnClickFunction",
-                  "canonicalReference": "@datashaper/react!ColumnClickFunction:type"
+                  "text": "ColumnSelectFunction",
+                  "canonicalReference": "@datashaper/react!ColumnSelectFunction:type"
                 },
                 {
                   "kind": "Content",
@@ -4867,8 +4741,8 @@
             },
             {
               "kind": "Reference",
-              "text": "ColumnClickFunction",
-              "canonicalReference": "@datashaper/react!ColumnClickFunction:type"
+              "text": "ColumnSelectFunction",
+              "canonicalReference": "@datashaper/react!ColumnSelectFunction:type"
             },
             {
               "kind": "Content",
@@ -4876,8 +4750,8 @@
             },
             {
               "kind": "Reference",
-              "text": "ColumnClickFunction",
-              "canonicalReference": "@datashaper/react!ColumnClickFunction:type"
+              "text": "ColumnSelectFunction",
+              "canonicalReference": "@datashaper/react!ColumnSelectFunction:type"
             },
             {
               "kind": "Content",

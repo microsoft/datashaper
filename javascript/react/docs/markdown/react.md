@@ -107,15 +107,14 @@
 |  Type Alias | Description |
 |  --- | --- |
 |  [CheckboxChangeHandler](./react.checkboxchangehandler.md) |  |
-|  [ColumnClickFunction](./react.columnclickfunction.md) |  |
 |  [ColumnRenderFunction](./react.columnrenderfunction.md) |  |
+|  [ColumnSelectFunction](./react.columnselectfunction.md) |  |
 |  [ComboBoxChangeHandler](./react.comboboxchangehandler.md) |  |
 |  [ComboBoxInputValueChangeHandler](./react.comboboxinputvaluechangehandler.md) |  |
 |  [DropdownChangeAllHandler](./react.dropdownchangeallhandler.md) |  |
 |  [DropdownChangeHandler](./react.dropdownchangehandler.md) |  |
 |  [DropdownOptionSelect](./react.dropdownoptionselect.md) |  |
 |  [GroupHeaderFunction](./react.groupheaderfunction.md) |  |
-|  [MetadataClickFunction](./react.metadataclickfunction.md) |  |
 |  [SaveMetadataFunction](./react.savemetadatafunction.md) |  |
 |  [SpinButtonChangeHandler](./react.spinbuttonchangehandler.md) |  |
 |  [TextFieldChangeHandler](./react.textfieldchangehandler.md) |  |

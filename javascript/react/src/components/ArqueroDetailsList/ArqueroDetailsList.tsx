@@ -108,7 +108,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				sortDirection,
 				selectedColumn,
 				onCellDropdownSelect,
-				isSortable: sortable,
+				sortable,
 				showColumnBorders,
 				compact,
 				resizable,

@@ -6,7 +6,7 @@ import type { IColumn, IIconStyles } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
-import type { ColumnClickFunction } from '../ArqueroDetailsList.types.js'
+import type { ColumnSelectFunction } from '../ArqueroDetailsList.types.js'
 import { useCellDimensions } from '../hooks/index.js'
 
 export function useContainerStyle(column: IColumn): React.CSSProperties {
@@ -62,7 +62,7 @@ export function useIconStyles(): IIconStyles {
 
 export function useDelegatedColumnClickHandler(
 	column: IColumn | undefined,
-	delegate: ColumnClickFunction | undefined,
+	delegate: ColumnSelectFunction | undefined,
 ): (e: React.MouseEvent<HTMLElement, MouseEvent>) => void {
 	return useCallback(
 		(e: React.MouseEvent<HTMLElement, MouseEvent>) => {

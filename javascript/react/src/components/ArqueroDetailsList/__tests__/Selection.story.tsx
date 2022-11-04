@@ -16,7 +16,7 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 	{ loaded: { stocks } }: any,
 ): JSX.Element => {
 	const [selected, setSelected] = useState<string | undefined>()
-	const metadata = useMemo(() => introspect(stocks, false), [stocks])
+	const metadata = useMemo(() => introspect(stocks, true), [stocks])
 	const handleSelect = useCallback(
 		(_e?: any, c?: IColumn) =>
 			setSelected(prev => (c?.key === prev ? undefined : c?.key)),
@@ -27,6 +27,7 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 			features={{
 				statsColumnHeaders: true,
 				statsColumnTypes: [StatsColumnType.Type],
+				histogramColumnHeaders: true,
 			}}
 			showColumnBorders
 			sortable

@@ -58,7 +58,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     // (undocumented)
     offset?: number;
     onCellDropdownSelect?: DropdownOptionSelect;
-    onColumnSelect?: ColumnClickFunction;
+    onColumnSelect?: ColumnSelectFunction;
     onRenderGroupHeader?: GroupHeaderFunction;
     resizable?: boolean;
     selectedColumn?: string;
@@ -120,11 +120,6 @@ export type CheckboxChangeHandler = (event?: React.FormEvent<HTMLElement | HTMLI
 // @public
 export function checkedItemsCommand(list: string[], checked?: string[], onCheckChange?: (name: string, checked: boolean, index: number) => boolean | void, props?: Partial<ICommandBarItemProps>): ICommandBarItemProps;
 
-// Warning: (ae-missing-release-tag) "ColumnClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type ColumnClickFunction = (evt?: React.MouseEvent<HTMLElement>, column?: IColumn | undefined) => void;
-
 // Warning: (ae-missing-release-tag) "ColumnOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -134,8 +129,6 @@ export interface ColumnOptions {
     // (undocumented)
     features?: DetailsListFeatures;
     // (undocumented)
-    isSortable?: boolean;
-    // (undocumented)
     onCellDropdownSelect?: DropdownOptionSelect;
     // (undocumented)
     resizable?: boolean;
@@ -143,6 +136,8 @@ export interface ColumnOptions {
     selectedColumn?: string;
     // (undocumented)
     showColumnBorders?: boolean;
+    // (undocumented)
+    sortable?: boolean;
     // (undocumented)
     sortColumn?: string;
     // (undocumented)
@@ -153,6 +148,11 @@ export interface ColumnOptions {
 //
 // @public (undocumented)
 export type ColumnRenderFunction = (item?: any, index?: number, column?: IColumn) => any;
+
+// Warning: (ae-missing-release-tag) "ColumnSelectFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ColumnSelectFunction = (evt?: React.MouseEvent<HTMLElement>, column?: IColumn | undefined) => void;
 
 // Warning: (ae-missing-release-tag) "ComboBoxChangeHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -171,8 +171,6 @@ export interface DetailsListFeatures {
     commandBar?: IRenderFunction<IDetailsColumnProps>[];
     histogramColumnHeaders?: boolean;
     lazyLoadGroups?: boolean;
-    onHistogramColumnHeaderClick?: MetadataClickFunction;
-    onStatsColumnHeaderClick?: MetadataClickFunction;
     showBooleanSymbol?: boolean;
     showCategoricalBar?: boolean;
     showDateFormatted?: boolean;
@@ -263,11 +261,6 @@ export interface GuidanceProps {
     name: string;
 }
 
-// Warning: (ae-missing-release-tag) "MetadataClickFunction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type MetadataClickFunction = (evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined, column?: IColumn | undefined, metadata?: Field) => void;
-
 // Warning: (ae-missing-release-tag) "ModalState" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -292,7 +285,7 @@ export interface SortParameters {
     // (undocumented)
     defaultSortDirection?: SortDirection;
     // (undocumented)
-    onSort: ColumnClickFunction;
+    onSort: ColumnSelectFunction;
     // (undocumented)
     sortColumn?: string;
     // (undocumented)
@@ -435,7 +428,7 @@ export function useColumnNamesList(table: ColumnTable, columns?: IColumn[]): str
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnClickFunction, onSort?: ColumnClickFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
+export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnSelectFunction, onSort?: ColumnSelectFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnsMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

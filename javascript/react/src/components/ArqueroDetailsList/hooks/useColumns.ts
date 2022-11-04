@@ -11,7 +11,7 @@ import { useMemo } from 'react'
 
 import { EMPTY_ARRAY, emptyArray } from '../../../empty.js'
 import type {
-	ColumnClickFunction,
+	ColumnSelectFunction,
 	DetailsListFeatures,
 	DropdownOptionSelect,
 } from '../index.js'
@@ -37,7 +37,7 @@ export interface ColumnOptions {
 	sortDirection?: SortDirection
 	selectedColumn?: string
 	onCellDropdownSelect?: DropdownOptionSelect
-	isSortable?: boolean
+	sortable?: boolean
 	showColumnBorders?: boolean
 	compact?: boolean
 	resizable?: boolean
@@ -55,8 +55,8 @@ export function useColumns(
 	table: ColumnTable,
 	metadata?: TableMetadata,
 	columns?: IColumn[],
-	onColumnSelect?: ColumnClickFunction,
-	onSort?: ColumnClickFunction,
+	onColumnSelect?: ColumnSelectFunction,
+	onSort?: ColumnSelectFunction,
 	options: ColumnOptions = {},
 	virtualColumns?: IColumn[],
 ): IColumn[] {
@@ -66,7 +66,7 @@ export function useColumns(
 		sortDirection,
 		selectedColumn,
 		onCellDropdownSelect,
-		isSortable = false,
+		sortable = false,
 		showColumnBorders = false,
 		compact = false,
 		resizable = true,
@@ -119,7 +119,7 @@ export function useColumns(
 			const headerRenderers = [
 				createRenderDefaultColumnHeader(
 					column,
-					isSortable,
+					sortable,
 					onColumnSelect,
 					onSort,
 				),
@@ -134,18 +134,14 @@ export function useColumns(
 				headerRenderers.push(
 					createRenderStatsColumnHeader(
 						meta,
-						features.onStatsColumnHeaderClick,
+						onColumnSelect,
 						features.statsColumnTypes,
 					),
 				)
 			}
 			if ((features.smartHeaders || features.histogramColumnHeaders) && meta) {
 				headerRenderers.push(
-					createRenderHistogramColumnHeader(
-						meta,
-						color,
-						features.onHistogramColumnHeaderClick,
-					),
+					createRenderHistogramColumnHeader(meta, color, onColumnSelect),
 				)
 			}
 
@@ -182,7 +178,7 @@ export function useColumns(
 		onCellDropdownSelect,
 		columnMinWidth,
 		virtualColumns,
-		isSortable,
+		sortable,
 	])
 }
 

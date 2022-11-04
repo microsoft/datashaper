@@ -5,22 +5,22 @@
 import type { IColumn } from '@fluentui/react'
 import { useMemo } from 'react'
 
-import type { ColumnClickFunction } from '../ArqueroDetailsList.types.js'
+import type { ColumnSelectFunction } from '../ArqueroDetailsList.types.js'
 
 export function useCellStyle(
 	column: IColumn | undefined,
-	onColumnClick: ColumnClickFunction | undefined,
+	onSelect: ColumnSelectFunction | undefined,
 ): React.CSSProperties {
 	return useMemo(() => {
 		const style: React.CSSProperties = {
 			width: '100%',
 		}
-		if (onColumnClick) {
+		if (onSelect) {
 			style.cursor = 'pointer'
 		}
 		if (column?.data?.selected) {
 			style.fontWeight = 'bold'
 		}
 		return style
-	}, [onColumnClick, column])
+	}, [onSelect, column])
 }

@@ -9,5 +9,5 @@ Fires a column-wide select event for all columns, including headers. If you need
 <b>Signature:</b>
 
 ```typescript
-onColumnSelect?: ColumnClickFunction;
+onColumnSelect?: ColumnSelectFunction;
 ```

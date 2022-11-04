@@ -40,15 +40,9 @@ export type SaveMetadataFunction = (
 	table: ColumnTable,
 ) => void
 
-export type ColumnClickFunction = (
+export type ColumnSelectFunction = (
 	evt?: React.MouseEvent<HTMLElement>,
 	column?: IColumn | undefined,
-) => void
-
-export type MetadataClickFunction = (
-	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
-	column?: IColumn | undefined,
-	metadata?: Field,
 ) => void
 
 export enum StatsColumnType {
@@ -74,17 +68,9 @@ export interface DetailsListFeatures {
 	 */
 	histogramColumnHeaders?: boolean
 	/**
-	 * If histogramColumnHeaders is true the user can pass a custom function to the click event
-	 */
-	onHistogramColumnHeaderClick?: MetadataClickFunction
-	/**
 	 * Include stats in the headers of columns.
 	 */
 	statsColumnHeaders?: boolean
-	/**
-	 * If statsColumnHeaders is true the user can pass a custom function to the click event
-	 */
-	onStatsColumnHeaderClick?: MetadataClickFunction
 	/**
 	 * If statsColumnHeaders or smartHeaders is true the user can pass which stats he wants
 	 */
@@ -162,7 +148,7 @@ export interface ArqueroDetailsListProps
 	 * Fires a column-wide select event for all columns, including headers.
 	 * If you need custom behavior, use the built-in table-level onColumnHeaderClick and per-column onClick
 	 */
-	onColumnSelect?: ColumnClickFunction
+	onColumnSelect?: ColumnSelectFunction
 	/**
 	 * If array cells are displayed with a dropdown, this will fire when a value is selected.
 	 */

@@ -29,11 +29,11 @@ import type { RichCellProps } from './types.js'
 export const DefaultCell: React.FC<RichCellProps> = memo(function DefaultCell(
 	props,
 ) {
-	const { field, item, column, onColumnClick } = props
+	const { field, item, column, onSelect } = props
 	const value = getValue(item, column)
 	const type = field?.type || determineType(value)
 
-	const cellStyle = useCellStyle(column, onColumnClick)
+	const cellStyle = useCellStyle(column, onSelect)
 	return (
 		<div style={cellStyle}>
 			<Switch>
