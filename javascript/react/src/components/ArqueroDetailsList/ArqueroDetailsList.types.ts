@@ -150,10 +150,6 @@ export interface ArqueroDetailsListProps
 	 */
 	striped?: boolean
 	/**
-	 * Indicates that the entire column is clickable for selection.
-	 */
-	clickableColumns?: boolean
-	/**
 	 * Indicates to use borders between columns so the cells look more like a spreadsheet (row borders are always on).
 	 */
 	showColumnBorders?: boolean
@@ -163,13 +159,10 @@ export interface ArqueroDetailsListProps
 	 */
 	fill?: boolean
 	/**
-	 * Passthrough to the column click handler.
-	 * Will be applied to the column header only unless clickableColumns === true.
-	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick
-	 * and they will both fire.
-	 * TODO: maybe turn this into onColumnSelect?
+	 * Fires a column-wide select event for all columns, including headers.
+	 * If you need custom behavior, use the built-in table-level onColumnHeaderClick and per-column onClick
 	 */
-	onColumnClick?: ColumnClickFunction
+	onColumnSelect?: ColumnClickFunction
 	/**
 	 * If array cells are displayed with a dropdown, this will fire when a value is selected.
 	 */

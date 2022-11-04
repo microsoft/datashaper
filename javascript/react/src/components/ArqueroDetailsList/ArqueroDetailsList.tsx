@@ -9,7 +9,7 @@ import {
 	DetailsListLayoutMode,
 	SelectionMode,
 } from '@fluentui/react'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 
 import { COMPACT_ROW_HEIGHT } from './ArqueroDetailsList.constants.js'
 import {
@@ -46,18 +46,16 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		limit = Infinity,
 		sortable = false,
 		striped = false,
-		clickableColumns = false,
 		showColumnBorders = false,
 		fill = false,
 		selectedColumn,
-		onColumnClick,
+		onColumnSelect,
 		onCellDropdownSelect,
 		onRenderGroupHeader,
 		// extract props we want to set data-centric defaults for
 		selectionMode = SelectionMode.none,
 		layoutMode = DetailsListLayoutMode.fixedColumns,
 		columns,
-		onColumnHeaderClick,
 		styles,
 		defaultSortColumn,
 		defaultSortDirection,
@@ -96,27 +94,20 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			compactRowHeight,
 		)
 
-		const isDefaultHeaderClickable = useMemo<boolean>(() => {
-			return sortable || clickableColumns || !!onColumnHeaderClick
-		}, [sortable, clickableColumns, onColumnHeaderClick])
-
 		const onColumnResize = useOnColumnResizeHandler(setVersion)
 
 		const displayColumns = useColumns(
 			table,
 			metadata,
 			columns,
-			onColumnHeaderClick,
+			onColumnSelect,
 			onSort,
 			{
 				features,
 				sortColumn,
 				sortDirection,
 				selectedColumn,
-				onColumnClick,
 				onCellDropdownSelect,
-				isDefaultHeaderClickable,
-				isClickable: clickableColumns,
 				isSortable: sortable,
 				showColumnBorders,
 				compact,
@@ -129,7 +120,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			isHeaderFixed,
 			features,
 			styles as IDetailsListStyles,
-			!!onColumnClick,
+			!!onColumnSelect,
 			compact,
 		)
 

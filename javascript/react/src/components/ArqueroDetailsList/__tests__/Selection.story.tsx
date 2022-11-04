@@ -17,7 +17,7 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 ): JSX.Element => {
 	const [selected, setSelected] = useState<string | undefined>()
 	const metadata = useMemo(() => introspect(stocks, false), [stocks])
-	const handleClick = useCallback(
+	const handleSelect = useCallback(
 		(_e?: any, c?: IColumn) =>
 			setSelected(prev => (c?.key === prev ? undefined : c?.key)),
 		[setSelected],
@@ -29,15 +29,13 @@ export const SelectionStory: ComponentStory<typeof ArqueroDetailsList> = (
 				statsColumnTypes: [StatsColumnType.Type],
 			}}
 			showColumnBorders
-			clickableColumns
 			sortable
 			defaultSortColumn="Date"
 			{...args}
 			table={stocks}
 			metadata={metadata}
 			selectedColumn={selected}
-			onColumnClick={handleClick}
-			onColumnHeaderClick={handleClick}
+			onColumnSelect={handleSelect}
 		/>
 	)
 }

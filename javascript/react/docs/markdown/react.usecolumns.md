@@ -9,7 +9,7 @@ Overlays a number of special features onto the IColumn objects for a table. This
 <b>Signature:</b>
 
 ```typescript
-export declare function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnHeaderClick?: ColumnClickFunction, onSort?: ColumnClickFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
+export declare function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnClickFunction, onSort?: ColumnClickFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
 ```
 
 ## Parameters
@@ -19,7 +19,7 @@ export declare function useColumns(table: ColumnTable, metadata?: TableMetadata,
 |  table | ColumnTable |  |
 |  metadata | TableMetadata | <i>(Optional)</i> |
 |  columns | IColumn\[\] | <i>(Optional)</i> |
-|  onColumnHeaderClick | [ColumnClickFunction](./react.columnclickfunction.md) | <i>(Optional)</i> |
+|  onColumnSelect | [ColumnClickFunction](./react.columnclickfunction.md) | <i>(Optional)</i> |
 |  onSort | [ColumnClickFunction](./react.columnclickfunction.md) | <i>(Optional)</i> |
 |  options | [ColumnOptions](./react.columnoptions.md) | <i>(Optional)</i> |
 |  virtualColumns | IColumn\[\] | <i>(Optional)</i> |

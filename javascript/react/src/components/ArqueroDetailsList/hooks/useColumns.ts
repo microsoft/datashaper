@@ -9,7 +9,7 @@ import type { IColumn } from '@fluentui/react'
 import type ColumnTable from 'arquero/dist/types/table/column-table'
 import { useMemo } from 'react'
 
-import { EMPTY_ARRAY,emptyArray } from '../../../empty.js'
+import { EMPTY_ARRAY, emptyArray } from '../../../empty.js'
 import type {
 	ColumnClickFunction,
 	DetailsListFeatures,
@@ -36,10 +36,7 @@ export interface ColumnOptions {
 	sortColumn?: string
 	sortDirection?: SortDirection
 	selectedColumn?: string
-	onColumnClick?: ColumnClickFunction
 	onCellDropdownSelect?: DropdownOptionSelect
-	isClickable?: boolean
-	isDefaultHeaderClickable?: boolean
 	isSortable?: boolean
 	showColumnBorders?: boolean
 	compact?: boolean
@@ -58,7 +55,7 @@ export function useColumns(
 	table: ColumnTable,
 	metadata?: TableMetadata,
 	columns?: IColumn[],
-	onColumnHeaderClick?: ColumnClickFunction,
+	onColumnSelect?: ColumnClickFunction,
 	onSort?: ColumnClickFunction,
 	options: ColumnOptions = {},
 	virtualColumns?: IColumn[],
@@ -68,23 +65,15 @@ export function useColumns(
 		sortColumn,
 		sortDirection,
 		selectedColumn,
-		onColumnClick,
 		onCellDropdownSelect,
-		isClickable = false,
 		isSortable = false,
-		isDefaultHeaderClickable = false,
 		showColumnBorders = false,
 		compact = false,
 		resizable = true,
 	} = options
 
-	const handleCellClick = isClickable ? onColumnClick : undefined
-	const handleCellDropdownSelect = isClickable
-		? onCellDropdownSelect
-		: undefined
-
 	const colorScale = useIncrementingColumnColorScale(metadata)
-	const styles = useColumnStyles(isClickable, showColumnBorders)
+	const styles = useColumnStyles(!!onColumnSelect, showColumnBorders)
 	const names = useColumnNamesList(table, columns)
 	//get column width based on min value or on commandBar item passed
 	const columnMinWidth = useCountMinWidth(features.commandBar)
@@ -116,23 +105,22 @@ export function useColumns(
 					? createRenderSmartCell(
 							meta,
 							color,
-							handleCellClick,
-							handleCellDropdownSelect,
+							onColumnSelect,
+							onCellDropdownSelect,
 					  )
 					: createRenderFeaturesCell(
 							features,
 							meta,
 							color,
-							handleCellClick,
-							handleCellDropdownSelect,
+							onColumnSelect,
+							onCellDropdownSelect,
 					  )
 
 			const headerRenderers = [
 				createRenderDefaultColumnHeader(
 					column,
-					isDefaultHeaderClickable,
 					isSortable,
-					onColumnHeaderClick,
+					onColumnSelect,
 					onSort,
 				),
 			]
@@ -184,16 +172,14 @@ export function useColumns(
 		sortColumn,
 		sortDirection,
 		selectedColumn,
-		handleCellClick,
 		styles,
 		compact,
 		resizable,
 		metadata,
 		colorScale,
-		handleCellDropdownSelect,
-		isDefaultHeaderClickable,
-		onColumnHeaderClick,
 		onSort,
+		onColumnSelect,
+		onCellDropdownSelect,
 		columnMinWidth,
 		virtualColumns,
 		isSortable,

@@ -7,8 +7,7 @@ import type { IDetailsColumnProps } from '@fluentui/react'
 import type { ColumnClickFunction } from '../index.js'
 
 export interface DefaultColumnHeaderProps extends IDetailsColumnProps {
-	isClickable: boolean
-	onClick?: ColumnClickFunction
+	onSelect?: ColumnClickFunction
 	isSortable?: boolean
 	onSort?: ColumnClickFunction
 }

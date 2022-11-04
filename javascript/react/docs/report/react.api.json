@@ -246,16 +246,16 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ArqueroDetailsListProps#clickableColumns:member",
-              "docComment": "/**\n * Indicates that the entire column is clickable for selection.\n */\n",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListProps#compactRowHeight:member",
+              "docComment": "/**\n * If compact = true, override the default height. FluentUI hard-codes the compact height, so this gives us a way to customize how dense the rows are. Note that if compact = false (the default), this has no effect.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "clickableColumns?: "
+                  "text": "compactRowHeight?: "
                 },
                 {
                   "kind": "Content",
-                  "text": "boolean"
+                  "text": "number"
                 },
                 {
                   "kind": "Content",
@@ -265,7 +265,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "clickableColumns",
+              "name": "compactRowHeight",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -520,12 +520,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ArqueroDetailsListProps#onColumnClick:member",
-              "docComment": "/**\n * Passthrough to the column click handler. Will be applied to the column header only unless clickableColumns === true. Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick and they will both fire. TODO: maybe turn this into onColumnSelect?\n */\n",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListProps#onColumnSelect:member",
+              "docComment": "/**\n * Fires a column-wide select event for all columns, including headers. If you need custom behavior, use the built-in table-level onColumnHeaderClick and per-column onClick\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "onColumnClick?: "
+                  "text": "onColumnSelect?: "
                 },
                 {
                   "kind": "Reference",
@@ -540,7 +540,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "onColumnClick",
+              "name": "onColumnSelect",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -1435,60 +1435,6 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ColumnOptions#isClickable:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "isClickable?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "isClickable",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ColumnOptions#isDefaultHeaderClickable:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "isDefaultHeaderClickable?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "isDefaultHeaderClickable",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/react!ColumnOptions#isSortable:member",
               "docComment": "",
               "excerptTokens": [
@@ -1537,34 +1483,6 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "onCellDropdownSelect",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/react!ColumnOptions#onColumnClick:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "onColumnClick?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ColumnClickFunction",
-                  "canonicalReference": "@datashaper/react!ColumnClickFunction:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "onColumnClick",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -4945,7 +4863,7 @@
             },
             {
               "kind": "Content",
-              "text": ", onColumnHeaderClick?: "
+              "text": ", onColumnSelect?: "
             },
             {
               "kind": "Reference",
@@ -5033,7 +4951,7 @@
               "isOptional": true
             },
             {
-              "parameterName": "onColumnHeaderClick",
+              "parameterName": "onColumnSelect",
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 9
@@ -7929,6 +7847,14 @@
             },
             {
               "kind": "Content",
+              "text": ", compactRowHeight: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
               "text": "): "
             },
             {
@@ -7955,8 +7881,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 9
+            "startIndex": 7,
+            "endIndex": 11
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -7974,6 +7900,14 @@
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "compactRowHeight",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
               },
               "isOptional": false
             }

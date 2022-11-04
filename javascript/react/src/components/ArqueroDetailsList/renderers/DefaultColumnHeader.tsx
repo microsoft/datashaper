@@ -18,13 +18,7 @@ import type { DefaultColumnHeaderProps } from './DefaultColumnHeader.types.js'
 export type { DefaultColumnHeaderProps } from './DefaultColumnHeader.types.js'
 
 export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
-	function DefaultColumnHeader({
-		column,
-		isClickable,
-		onClick,
-		isSortable,
-		onSort,
-	}) {
+	function DefaultColumnHeader({ column, onSelect, isSortable, onSort }) {
 		const {
 			isSorted,
 			isSortedDescending,
@@ -34,12 +28,12 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 		} = column
 
 		const containerStyle = useContainerStyle(column)
-		const textStyle = useTextStyle(column, isClickable)
+		const textStyle = useTextStyle(column, !!onSelect)
 		const iconStyles = useIconStyles()
 		const [hovered, { setTrue: setHoverTrue, setFalse: setHoverFalse }] =
 			useBoolean(false)
 		const onSortClick = useDelegatedColumnClickHandler(column, onSort)
-		const onColumnClick = useDelegatedColumnClickHandler(column, onClick)
+		const onColumnClick = useDelegatedColumnClickHandler(column, onSelect)
 
 		return (
 			/* eslint-disable jsx-a11y/mouse-events-have-key-events */

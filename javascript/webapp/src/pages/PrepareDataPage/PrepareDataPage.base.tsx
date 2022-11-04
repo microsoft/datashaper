@@ -82,7 +82,7 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		[workflow, outputs, deleteStepFromWorkflow],
 	)
 
-	const onColumnClick = useCallback(
+	const onColumnSelect = useCallback(
 		(_?: React.MouseEvent<HTMLElement, MouseEvent>, column?: IColumn) => {
 			setSelectedColumn(prev =>
 				prev === column?.name ? undefined : column?.name,
@@ -138,10 +138,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 									isHeaderFixed
 									fill
 									striped
-									clickableColumns={!!onColumnClick}
 									selectedColumn={selectedColumn}
-									onColumnClick={onColumnClick}
-									onColumnHeaderClick={onColumnClick}
+									onColumnSelect={onColumnSelect}
 									metadata={selectedTable?.metadata}
 									table={selectedTable?.table}
 									features={{ smartHeaders: true }}

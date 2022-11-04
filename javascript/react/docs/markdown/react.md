@@ -25,7 +25,7 @@
 |  [useCheckboxChangeHandler(step, updateFn, onChange)](./react.usecheckboxchangehandler.md) |  |
 |  [useColumnNames(table, filter)](./react.usecolumnnames.md) |  |
 |  [useColumnNamesList(table, columns)](./react.usecolumnnameslist.md) | Creates a list of column names for the table. If there are no columns supplied it will use the list from the table itself. Otherwise it will use the provided columns under the assumption the user has configured them as desired. |
-|  [useColumns(table, metadata, columns, onColumnHeaderClick, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
+|  [useColumns(table, metadata, columns, onColumnSelect, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
 |  [useColumnsMetadata(table, filter)](./react.usecolumnsmetadata.md) |  |
 |  [useColumnStyles(clickable, separator)](./react.usecolumnstyles.md) |  |
 |  [useColumnType(table, column)](./react.usecolumntype.md) |  |
@@ -62,7 +62,7 @@
 |  [useSpinButtonChangeHandler(step, updateFn, onChange)](./react.usespinbuttonchangehandler.md) | Enforces numeric values for a SpinButton onChange. |
 |  [useStepDataTable(step, workflow, input, table)](./react.usestepdatatable.md) |  |
 |  [useStepOutputs(workflow)](./react.usestepoutputs.md) | create a parallel array of output names for the steps |
-|  [useStripedRowsRenderer(striped, columnBorders)](./react.usestripedrowsrenderer.md) |  |
+|  [useStripedRowsRenderer(striped, columnBorders, compactRowHeight)](./react.usestripedrowsrenderer.md) |  |
 |  [useSubsetTable(table, columns)](./react.usesubsettable.md) |  |
 |  [useSuggestedTableName(workflow)](./react.usesuggestedtablename.md) | Returns a hook to generate a new table name based on the given input e.g. "join" could result in "join 1" or "join 2" depending on how many collisions occur. |
 |  [useTableDropdownOptions(workflow)](./react.usetabledropdownoptions.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |

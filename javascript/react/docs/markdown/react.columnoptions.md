@@ -16,11 +16,8 @@ export interface ColumnOptions
 |  --- | --- | --- | --- |
 |  [compact?](./react.columnoptions.compact.md) |  | boolean | <i>(Optional)</i> |
 |  [features?](./react.columnoptions.features.md) |  | [DetailsListFeatures](./react.detailslistfeatures.md) | <i>(Optional)</i> |
-|  [isClickable?](./react.columnoptions.isclickable.md) |  | boolean | <i>(Optional)</i> |
-|  [isDefaultHeaderClickable?](./react.columnoptions.isdefaultheaderclickable.md) |  | boolean | <i>(Optional)</i> |
 |  [isSortable?](./react.columnoptions.issortable.md) |  | boolean | <i>(Optional)</i> |
 |  [onCellDropdownSelect?](./react.columnoptions.oncelldropdownselect.md) |  | [DropdownOptionSelect](./react.dropdownoptionselect.md) | <i>(Optional)</i> |
-|  [onColumnClick?](./react.columnoptions.oncolumnclick.md) |  | [ColumnClickFunction](./react.columnclickfunction.md) | <i>(Optional)</i> |
 |  [resizable?](./react.columnoptions.resizable.md) |  | boolean | <i>(Optional)</i> |
 |  [selectedColumn?](./react.columnoptions.selectedcolumn.md) |  | string | <i>(Optional)</i> |
 |  [showColumnBorders?](./react.columnoptions.showcolumnborders.md) |  | boolean | <i>(Optional)</i> |

@@ -45,7 +45,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps>;
 //
 // @public (undocumented)
 export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'> {
-    clickableColumns?: boolean;
+    compactRowHeight?: number;
     defaultSortColumn?: string;
     defaultSortDirection?: SortDirection;
     // (undocumented)
@@ -58,7 +58,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     // (undocumented)
     offset?: number;
     onCellDropdownSelect?: DropdownOptionSelect;
-    onColumnClick?: ColumnClickFunction;
+    onColumnSelect?: ColumnClickFunction;
     onRenderGroupHeader?: GroupHeaderFunction;
     resizable?: boolean;
     selectedColumn?: string;
@@ -134,15 +134,9 @@ export interface ColumnOptions {
     // (undocumented)
     features?: DetailsListFeatures;
     // (undocumented)
-    isClickable?: boolean;
-    // (undocumented)
-    isDefaultHeaderClickable?: boolean;
-    // (undocumented)
     isSortable?: boolean;
     // (undocumented)
     onCellDropdownSelect?: DropdownOptionSelect;
-    // (undocumented)
-    onColumnClick?: ColumnClickFunction;
     // (undocumented)
     resizable?: boolean;
     // (undocumented)
@@ -441,7 +435,7 @@ export function useColumnNamesList(table: ColumnTable, columns?: IColumn[]): str
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnHeaderClick?: ColumnClickFunction, onSort?: ColumnClickFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
+export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnClickFunction, onSort?: ColumnClickFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnsMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -627,7 +621,7 @@ export function useStepOutputs(workflow: Workflow): string[];
 // Warning: (ae-missing-release-tag) "useStripedRowsRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useStripedRowsRenderer(striped: boolean, columnBorders: boolean): IRenderFunction_2<IDetailsRowProps>;
+export function useStripedRowsRenderer(striped: boolean, columnBorders: boolean, compactRowHeight: number): IRenderFunction_2<IDetailsRowProps>;
 
 // Warning: (ae-missing-release-tag) "useSubsetTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

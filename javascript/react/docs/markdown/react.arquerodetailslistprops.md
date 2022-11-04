@@ -15,7 +15,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [clickableColumns?](./react.arquerodetailslistprops.clickablecolumns.md) |  | boolean | <i>(Optional)</i> Indicates that the entire column is clickable for selection. |
+|  [compactRowHeight?](./react.arquerodetailslistprops.compactrowheight.md) |  | number | <i>(Optional)</i> If compact = true, override the default height. FluentUI hard-codes the compact height, so this gives us a way to customize how dense the rows are. Note that if compact = false (the default), this has no effect. |
 |  [defaultSortColumn?](./react.arquerodetailslistprops.defaultsortcolumn.md) |  | string | <i>(Optional)</i> Default sort column |
 |  [defaultSortDirection?](./react.arquerodetailslistprops.defaultsortdirection.md) |  | SortDirection | <i>(Optional)</i> Resizable sort direction |
 |  [features?](./react.arquerodetailslistprops.features.md) |  | [DetailsListFeatures](./react.detailslistfeatures.md) | <i>(Optional)</i> |
@@ -25,7 +25,7 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
 |  [metadata?](./react.arquerodetailslistprops.metadata.md) |  | TableMetadata | <i>(Optional)</i> Optional metadata to use for column smart features. Use this if you need to cache expensive stats computes separately to prevent recompute on remounting. |
 |  [offset?](./react.arquerodetailslistprops.offset.md) |  | number | <i>(Optional)</i> |
 |  [onCellDropdownSelect?](./react.arquerodetailslistprops.oncelldropdownselect.md) |  | [DropdownOptionSelect](./react.dropdownoptionselect.md) | <i>(Optional)</i> If array cells are displayed with a dropdown, this will fire when a value is selected. |
-|  [onColumnClick?](./react.arquerodetailslistprops.oncolumnclick.md) |  | [ColumnClickFunction](./react.columnclickfunction.md) | <i>(Optional)</i> Passthrough to the column click handler. Will be applied to the column header only unless clickableColumns === true. Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick and they will both fire. TODO: maybe turn this into onColumnSelect? |
+|  [onColumnSelect?](./react.arquerodetailslistprops.oncolumnselect.md) |  | [ColumnClickFunction](./react.columnclickfunction.md) | <i>(Optional)</i> Fires a column-wide select event for all columns, including headers. If you need custom behavior, use the built-in table-level onColumnHeaderClick and per-column onClick |
 |  [onRenderGroupHeader?](./react.arquerodetailslistprops.onrendergroupheader.md) |  | [GroupHeaderFunction](./react.groupheaderfunction.md) | <i>(Optional)</i> Passthrough to the group header rendering, when using the group by verb |
 |  [resizable?](./react.arquerodetailslistprops.resizable.md) |  | boolean | <i>(Optional)</i> Resizable columns |
 |  [selectedColumn?](./react.arquerodetailslistprops.selectedcolumn.md) |  | string | <i>(Optional)</i> Key for a selected column - this is not normally an option in DetailsList |
