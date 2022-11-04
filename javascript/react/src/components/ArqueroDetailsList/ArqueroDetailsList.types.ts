@@ -199,6 +199,12 @@ export interface ArqueroDetailsListProps
 	 */
 	defaultSortDirection?: SortDirection
 	/**
+	 * If compact = true, override the default height.
+	 * FluentUI hard-codes the compact height, so this gives us a way to customize how dense the rows are.
+	 * Note that if compact = false (the default), this has no effect.
+	 */
+	compactRowHeight?: number
+	/**
 	 * Style to pass to the container.
 	 * Use the regular DetailsList.styles prop for deeper customization of the table itself.
 	 */

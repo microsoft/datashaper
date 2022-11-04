@@ -10,10 +10,7 @@ import type {
 import { useThematicFluent } from '@thematic/fluent'
 import { useMemo } from 'react'
 
-import {
-	COMPACT_ROW_HEIGHT,
-	DEFAULT_ROW_HEIGHT,
-} from '../ArqueroDetailsList.constants.js'
+import { DEFAULT_ROW_HEIGHT } from '../ArqueroDetailsList.constants.js'
 import type { RichRowProps } from './types.js'
 
 export function useStyles({
@@ -21,6 +18,7 @@ export function useStyles({
 	itemIndex,
 	columnBorders,
 	compact,
+	compactRowHeight,
 	styles,
 }: RichRowProps): IStyleFunctionOrObject<
 	IDetailsRowStyleProps,
@@ -30,8 +28,8 @@ export function useStyles({
 	return useMemo(() => {
 		return {
 			root: {
-				minHeight: compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT,
-				height: compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT,
+				minHeight: compact ? compactRowHeight : DEFAULT_ROW_HEIGHT,
+				height: compact ? compactRowHeight : DEFAULT_ROW_HEIGHT,
 				width: '100%',
 				background:
 					striped && itemIndex % 2 === 0
@@ -39,8 +37,8 @@ export function useStyles({
 						: 'none',
 			},
 			cell: {
-				minHeight: compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT,
-				height: compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT,
+				minHeight: compact ? compactRowHeight : DEFAULT_ROW_HEIGHT,
+				height: compact ? compactRowHeight : DEFAULT_ROW_HEIGHT,
 				borderRight: columnBorders
 					? `1px solid ${theme.palette.neutralLighter}`
 					: `1px solid transparent`,
@@ -51,5 +49,13 @@ export function useStyles({
 			},
 			...styles,
 		}
-	}, [theme, striped, columnBorders, styles, itemIndex, compact])
+	}, [
+		theme,
+		striped,
+		columnBorders,
+		styles,
+		itemIndex,
+		compact,
+		compactRowHeight,
+	])
 }

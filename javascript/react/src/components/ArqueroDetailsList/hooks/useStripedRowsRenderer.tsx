@@ -16,6 +16,7 @@ import { StripedRow } from '../renderers/index.js'
 export function useStripedRowsRenderer(
 	striped: boolean,
 	columnBorders: boolean,
+	compactRowHeight: number,
 ): IRenderFunction<IDetailsRowProps> {
 	return useCallback(
 		(props: IDetailsRowProps | undefined) => {
@@ -27,9 +28,10 @@ export function useStripedRowsRenderer(
 					{...props}
 					striped={striped}
 					columnBorders={columnBorders}
+					compactRowHeight={compactRowHeight}
 				/>
 			)
 		},
-		[striped, columnBorders],
+		[striped, columnBorders, compactRowHeight],
 	)
 }

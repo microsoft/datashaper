@@ -9,18 +9,15 @@ import { useCallback, useMemo } from 'react'
 import type { ColumnClickFunction } from '../ArqueroDetailsList.types.js'
 import { useCellDimensions } from '../hooks/index.js'
 
-const COMPACT_LINE_HEIGHT = 2
-
 export function useContainerStyle(column: IColumn): React.CSSProperties {
 	const dimensions = useCellDimensions(column)
 	return useMemo(
 		() => ({
-			lineHeight: column.data.compact ? COMPACT_LINE_HEIGHT : 'inherit',
 			display: 'flex',
 			justifyContent: 'space-between',
 			width: dimensions.width,
 		}),
-		[dimensions, column],
+		[dimensions],
 	)
 }
 
@@ -32,7 +29,7 @@ export function useTextStyle(
 	return useMemo(
 		() => ({
 			cursor: isClickable ? 'pointer' : 'inherit',
-			color: column?.data.virtual
+			color: column.data?.virtual
 				? 'transparent'
 				: column.data?.selected
 				? theme.palette.themePrimary

@@ -11,6 +11,7 @@ import {
 } from '@fluentui/react'
 import { memo, useMemo } from 'react'
 
+import { COMPACT_ROW_HEIGHT } from './ArqueroDetailsList.constants.js'
 import {
 	useGetKey,
 	useGroupProps,
@@ -63,6 +64,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		isHeaderFixed = false,
 		compact = false,
 		resizable = true,
+		compactRowHeight = COMPACT_ROW_HEIGHT,
 		style,
 		// passthrough the remainder as props
 		...props
@@ -91,6 +93,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			features,
 			fill,
 			compact,
+			compactRowHeight,
 		)
 
 		const isDefaultHeaderClickable = useMemo<boolean>(() => {
@@ -130,7 +133,11 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			compact,
 		)
 
-		const renderRow = useStripedRowsRenderer(striped, showColumnBorders)
+		const renderRow = useStripedRowsRenderer(
+			striped,
+			showColumnBorders,
+			compactRowHeight,
+		)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 		const groups = useGroups(
 			table,
@@ -152,6 +159,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 				ref={ref}
 				data-is-scrollable="true"
 				compact={compact}
+				compactRowHeight={compactRowHeight}
 				style={style}
 			>
 				<DetailsList

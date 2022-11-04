@@ -4,12 +4,12 @@
  */
 import styled from '@essex/styled-components'
 
-import {
-	COMPACT_ROW_HEIGHT,
-	DEFAULT_ROW_HEIGHT,
-} from './ArqueroDetailsList.constants.js'
+import { DEFAULT_ROW_HEIGHT } from './ArqueroDetailsList.constants.js'
 
-export const DetailsWrapper = styled.div<{ compact: boolean }>`
+export const DetailsWrapper = styled.div<{
+	compact: boolean
+	compactRowHeight: number
+}>`
 	height: inherit;
 	max-height: inherit;
 	overflow-y: auto;
@@ -20,10 +20,10 @@ export const DetailsWrapper = styled.div<{ compact: boolean }>`
 	}
 
 	.ms-List-cell {
-		min-height: ${({ compact }) =>
-			compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT}px;
-		height: ${({ compact }) =>
-			compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT}px;
+		min-height: ${({ compact, compactRowHeight }) =>
+			compact ? compactRowHeight : DEFAULT_ROW_HEIGHT}px;
+		height: ${({ compact, compactRowHeight }) =>
+			compact ? compactRowHeight : DEFAULT_ROW_HEIGHT}px;
 	}
 
 	.ms-CommandBar {

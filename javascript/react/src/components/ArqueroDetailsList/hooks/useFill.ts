@@ -9,7 +9,6 @@ import { useMemo } from 'react'
 
 import {
 	BASE_HEADER_HEIGHT,
-	COMPACT_ROW_HEIGHT,
 	DEFAULT_COLUMN_WIDTH,
 	DEFAULT_ROW_HEIGHT,
 	HEADER_WIDTH_PADDING,
@@ -26,6 +25,7 @@ export function useFill(
 	features: DetailsListFeatures,
 	options: {
 		compact: boolean
+		compactRowHeight: number
 	},
 ): {
 	virtualColumns: IColumn[]
@@ -53,18 +53,20 @@ function useVirtualRows(
 	columns: IColumn[] | undefined,
 	fill: boolean,
 	features: DetailsListFeatures,
-	options: any,
+	options: { compact: boolean; compactRowHeight: number },
 	size: { width: number; height: number } | undefined,
 ) {
 	const virtualRows = useMemo(() => {
 		const headerHeight = computeHeaderHeight(features)
 		const rowHeight =
 			table.numRows() *
-			(options.compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT)
+			(options.compact ? options.compactRowHeight : DEFAULT_ROW_HEIGHT)
 		const totalHeight = headerHeight + rowHeight
 		if (size && fill) {
 			const remainder = size.height - totalHeight
-			const per = options.compact ? COMPACT_ROW_HEIGHT : DEFAULT_ROW_HEIGHT
+			const per = options.compact
+				? options.compactRowHeight
+				: DEFAULT_ROW_HEIGHT
 			const count = Math.ceil(remainder / per)
 			const keys = columns ? columns.map(c => c.key) : table.columnNames()
 			const template = keys.reduce((acc, cur) => {
