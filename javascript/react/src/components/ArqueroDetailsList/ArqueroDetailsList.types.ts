@@ -40,15 +40,9 @@ export type SaveMetadataFunction = (
 	table: ColumnTable,
 ) => void
 
-export type ColumnClickFunction = (
+export type ColumnSelectFunction = (
 	evt?: React.MouseEvent<HTMLElement>,
 	column?: IColumn | undefined,
-) => void
-
-export type MetadataClickFunction = (
-	evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
-	column?: IColumn | undefined,
-	metadata?: Field,
 ) => void
 
 export enum StatsColumnType {
@@ -74,17 +68,9 @@ export interface DetailsListFeatures {
 	 */
 	histogramColumnHeaders?: boolean
 	/**
-	 * If histogramColumnHeaders is true the user can pass a custom function to the click event
-	 */
-	onHistogramColumnHeaderClick?: MetadataClickFunction
-	/**
 	 * Include stats in the headers of columns.
 	 */
 	statsColumnHeaders?: boolean
-	/**
-	 * If statsColumnHeaders is true the user can pass a custom function to the click event
-	 */
-	onStatsColumnHeaderClick?: MetadataClickFunction
 	/**
 	 * If statsColumnHeaders or smartHeaders is true the user can pass which stats he wants
 	 */
@@ -150,10 +136,6 @@ export interface ArqueroDetailsListProps
 	 */
 	striped?: boolean
 	/**
-	 * Indicates that the entire column is clickable for selection.
-	 */
-	clickableColumns?: boolean
-	/**
 	 * Indicates to use borders between columns so the cells look more like a spreadsheet (row borders are always on).
 	 */
 	showColumnBorders?: boolean
@@ -163,13 +145,10 @@ export interface ArqueroDetailsListProps
 	 */
 	fill?: boolean
 	/**
-	 * Passthrough to the column click handler.
-	 * Will be applied to the column header only unless clickableColumns === true.
-	 * Note that if the entire column is not clickable, this is duplicative of the built-in onColumnHeaderClick
-	 * and they will both fire.
-	 * TODO: maybe turn this into onColumnSelect?
+	 * Fires a column-wide select event for all columns, including headers.
+	 * If you need custom behavior, use the built-in table-level onColumnHeaderClick and per-column onClick
 	 */
-	onColumnClick?: ColumnClickFunction
+	onColumnSelect?: ColumnSelectFunction
 	/**
 	 * If array cells are displayed with a dropdown, this will fire when a value is selected.
 	 */
@@ -198,6 +177,12 @@ export interface ArqueroDetailsListProps
 	 * Resizable sort direction
 	 */
 	defaultSortDirection?: SortDirection
+	/**
+	 * If compact = true, override the default height.
+	 * FluentUI hard-codes the compact height, so this gives us a way to customize how dense the rows are.
+	 * Note that if compact = false (the default), this has no effect.
+	 */
+	compactRowHeight?: number
 	/**
 	 * Style to pass to the container.
 	 * Use the regular DetailsList.styles prop for deeper customization of the table itself.

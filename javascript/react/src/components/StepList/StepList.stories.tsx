@@ -66,7 +66,7 @@ SaveDelete.args = {
 
 export const Customized = Template.bind({})
 Customized.args = {
-	order: DisplayOrder.FirstOnTop,
+	order: DisplayOrder.LastOnTop,
 	styles: {
 		buttonContainer: {
 			background: 'azure',

@@ -10,11 +10,7 @@ import type {
 	IDetailsRowProps,
 } from '@fluentui/react'
 
-import type {
-	ColumnClickFunction,
-	DropdownOptionSelect,
-	MetadataClickFunction,
-} from '../index.js'
+import type { ColumnSelectFunction, DropdownOptionSelect } from '../index.js'
 
 export interface Dimensions {
 	width: number
@@ -60,7 +56,7 @@ export interface MagnitudeCellProps extends FormattedCellProps {
 
 export interface RichCellProps extends FormattedCellProps {
 	field?: Field
-	onColumnClick?: ColumnClickFunction
+	onSelect?: ColumnSelectFunction
 	onCellDropdownSelect?: DropdownOptionSelect
 }
 
@@ -68,10 +64,11 @@ export interface RichHeaderProps extends IDetailsColumnProps {
 	field: Field
 	color?: string
 	stats?: string[]
-	onClick?: MetadataClickFunction
+	onSelect?: ColumnSelectFunction
 }
 
 export interface RichRowProps extends IDetailsRowProps {
 	striped?: boolean
 	columnBorders?: boolean
+	compactRowHeight: number
 }

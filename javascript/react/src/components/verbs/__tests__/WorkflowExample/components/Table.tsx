@@ -52,7 +52,6 @@ export const Table: React.FC<TableProps> = memo(function Table({
 				showRowCount={true}
 				showColumnCount={true}
 				farCommandBar={<CommandBar {...farCommandBar} />}
-				onRenameTable={onRenameTable}
 			/>
 			<TableContainer>
 				<ArqueroDetailsList
@@ -62,9 +61,8 @@ export const Table: React.FC<TableProps> = memo(function Table({
 					features={features}
 					compact={compact}
 					selectedColumn={selectedColumn}
-					onColumnClick={handleColumnClick}
+					onColumnSelect={handleColumnClick}
 					onCellDropdownSelect={handleCellDropdownSelect}
-					clickableColumns
 					sortable
 					showColumnBorders
 					isHeaderFixed

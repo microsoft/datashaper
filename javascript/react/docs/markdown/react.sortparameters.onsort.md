@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-onSort: ColumnClickFunction;
+onSort: ColumnSelectFunction;
 ```

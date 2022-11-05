@@ -12,7 +12,7 @@ import { useTextAlignStyle } from './hooks.js'
 import { useBarColor } from './NumberMagnitudeCell.hooks.js'
 import type { MagnitudeCellProps } from './types.js'
 /**
- * Basic endering of number values.
+ * Basic rendering of number values.
  */
 export const NumberMagnitudeCell: React.FC<MagnitudeCellProps> = memo(
 	function NumberMagnitudeCell({
@@ -31,7 +31,7 @@ export const NumberMagnitudeCell: React.FC<MagnitudeCellProps> = memo(
 		const { width, height } = dimensions
 		const textFill = useMemo(() => theme.text().fill().hex(), [theme])
 		const size = magnitude * width
-		const style = useTextAlignStyle(textAlign)
+		const style = useTextAlignStyle(textAlign, overrides)
 
 		return (
 			<div style={style}>
@@ -39,8 +39,8 @@ export const NumberMagnitudeCell: React.FC<MagnitudeCellProps> = memo(
 					<rect width={size} height={height} x={width - size} fill={barColor} />
 					<text
 						fill={textFill}
-						y={height / 2 + 1}
-						x={width - 2}
+						y={height / 2 + 1.5} // 1.5 to center within even-number height
+						x={width - 3}
 						dominantBaseline={'middle'}
 						textAnchor={'end'}
 					>
@@ -51,3 +51,9 @@ export const NumberMagnitudeCell: React.FC<MagnitudeCellProps> = memo(
 		)
 	},
 )
+
+// centers the svg vertically
+const overrides = {
+	paddingTop: 7,
+	paddingBottom: 5,
+}

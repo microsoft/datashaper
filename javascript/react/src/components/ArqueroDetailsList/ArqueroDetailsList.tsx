@@ -9,8 +9,9 @@ import {
 	DetailsListLayoutMode,
 	SelectionMode,
 } from '@fluentui/react'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 
+import { COMPACT_ROW_HEIGHT } from './ArqueroDetailsList.constants.js'
 import {
 	useGetKey,
 	useGroupProps,
@@ -45,24 +46,23 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 		limit = Infinity,
 		sortable = false,
 		striped = false,
-		clickableColumns = false,
 		showColumnBorders = false,
 		fill = false,
 		selectedColumn,
-		onColumnClick,
+		onColumnSelect,
 		onCellDropdownSelect,
 		onRenderGroupHeader,
 		// extract props we want to set data-centric defaults for
 		selectionMode = SelectionMode.none,
 		layoutMode = DetailsListLayoutMode.fixedColumns,
 		columns,
-		onColumnHeaderClick,
 		styles,
 		defaultSortColumn,
 		defaultSortDirection,
 		isHeaderFixed = false,
 		compact = false,
 		resizable = true,
+		compactRowHeight = COMPACT_ROW_HEIGHT,
 		style,
 		// passthrough the remainder as props
 		...props
@@ -91,11 +91,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			features,
 			fill,
 			compact,
+			compactRowHeight,
 		)
-
-		const isDefaultHeaderClickable = useMemo<boolean>(() => {
-			return sortable || clickableColumns || !!onColumnHeaderClick
-		}, [sortable, clickableColumns, onColumnHeaderClick])
 
 		const onColumnResize = useOnColumnResizeHandler(setVersion)
 
@@ -103,18 +100,15 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			table,
 			metadata,
 			columns,
-			onColumnHeaderClick,
+			onColumnSelect,
 			onSort,
 			{
 				features,
 				sortColumn,
 				sortDirection,
 				selectedColumn,
-				onColumnClick,
 				onCellDropdownSelect,
-				isDefaultHeaderClickable,
-				isClickable: clickableColumns,
-				isSortable: sortable,
+				sortable,
 				showColumnBorders,
 				compact,
 				resizable,
@@ -126,11 +120,15 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			isHeaderFixed,
 			features,
 			styles as IDetailsListStyles,
-			!!onColumnClick,
+			!!onColumnSelect,
 			compact,
 		)
 
-		const renderRow = useStripedRowsRenderer(striped, showColumnBorders)
+		const renderRow = useStripedRowsRenderer(
+			striped,
+			showColumnBorders,
+			compactRowHeight,
+		)
 		const renderDetailsHeader = useDetailsHeaderRenderer()
 		const groups = useGroups(
 			table,
@@ -151,7 +149,8 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 			<DetailsWrapper
 				ref={ref}
 				data-is-scrollable="true"
-				showColumnBorders={showColumnBorders}
+				compact={compact}
+				compactRowHeight={compactRowHeight}
 				style={style}
 			>
 				<DetailsList

@@ -10,13 +10,13 @@ import { EMPTY_ARRAY } from '../../../../empty.js'
 
 export function useSelectedColumn(): {
 	selected: string | undefined
-	onColumnClick: (
+	onSelect: (
 		evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
 		column?: IColumn | undefined,
 	) => void
 } {
 	const [selected, setSelected] = useState<string | undefined>()
-	const onColumnClick = useCallback(
+	const onSelect = useCallback(
 		(
 			_evt?: React.MouseEvent<HTMLElement, MouseEvent> | undefined,
 			column?: IColumn | undefined,
@@ -25,7 +25,7 @@ export function useSelectedColumn(): {
 	)
 	return {
 		selected,
-		onColumnClick,
+		onSelect,
 	}
 }
 
@@ -65,7 +65,14 @@ export function useColumns(checkboxes: ICheckboxProps[]): {
 				key: label!,
 				name: label!,
 				fieldName: label!,
-				minWidth: 120,
+				minWidth: 100,
+				// add some icons so we can confirm alignment in the headers
+				iconName:
+					label === 'Symbol'
+						? 'FavoriteStarFill'
+						: label === 'Date'
+						? 'Calendar'
+						: undefined,
 			}))
 	}, [checkboxes])
 

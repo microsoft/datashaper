@@ -28,6 +28,7 @@ export function useVirtualizedItems(
 	features: DetailsListFeatures,
 	fill: boolean,
 	compact: boolean,
+	compactRowHeight: number,
 ): {
 	ref: React.MutableRefObject<HTMLDivElement | null>
 	items: any[]
@@ -35,7 +36,10 @@ export function useVirtualizedItems(
 } {
 	const ref = useRef(null)
 	const baseItems = useMemo<object[]>(() => [...table.objects()], [table])
-	const virtual = useFill(table, columns, ref, fill, features, { compact })
+	const virtual = useFill(table, columns, ref, fill, features, {
+		compact,
+		compactRowHeight,
+	})
 	const items = useItems(baseItems, virtual.virtualRows)
 
 	return {

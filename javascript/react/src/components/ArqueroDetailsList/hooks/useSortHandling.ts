@@ -6,14 +6,14 @@ import { SortDirection } from '@datashaper/schema'
 import type { IColumn } from '@fluentui/react'
 import { useCallback, useState } from 'react'
 
-import type { ColumnClickFunction } from '../index.js'
+import type { ColumnSelectFunction } from '../index.js'
 
 export interface SortParameters {
 	sortColumn?: string
 	sortDirection?: SortDirection
 	defaultSortColumn?: string
 	defaultSortDirection?: SortDirection
-	onSort: ColumnClickFunction
+	onSort: ColumnSelectFunction
 }
 
 export function useSortHandling(

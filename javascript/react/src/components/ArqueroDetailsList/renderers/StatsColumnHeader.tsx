@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useTheme } from '@fluentui/react'
-import { memo, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 
 import { EMPTY_OBJECT } from '../../../empty.js'
 import { STATS_HEADER_ITEM_HEIGHT } from '../ArqueroDetailsList.constants.js'
@@ -23,7 +23,7 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 		field,
 		stats = DEFAULT_STATS,
 		column,
-		onClick,
+		onSelect,
 	}) {
 		const theme = useTheme()
 		const cells = useMemo(() => {
@@ -45,16 +45,17 @@ export const StatsColumnHeader: React.FC<RichHeaderProps> = memo(
 				fontWeight: 'normal',
 				fontSize: 10,
 				color: theme.palette.neutralSecondary,
-				cursor: onClick ? 'pointer' : 'inherit',
+				cursor: onSelect ? 'pointer' : 'inherit',
 			}
-		}, [onClick, theme, stats])
+		}, [onSelect, theme, stats])
+
+		const handleOnClick = useCallback(
+			(e: React.MouseEvent<HTMLElement, MouseEvent>) => onSelect?.(e, column),
+			[column, onSelect],
+		)
 
 		return (
-			<div
-				onClick={e => onClick?.(e, column, field)}
-				title={title}
-				style={styles}
-			>
+			<div onClick={handleOnClick} title={title} style={styles}>
 				{cells}
 			</div>
 		)
