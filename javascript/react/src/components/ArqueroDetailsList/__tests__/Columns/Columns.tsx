@@ -40,6 +40,8 @@ export const Columns: React.FC<ArqueroDetailsListProps> = memo(
 					selectedColumn={selected}
 					onColumnSelect={onSelect}
 					showColumnBorders
+					sortable
+					defaultSortColumn="Date"
 				/>
 			</Table>
 		)

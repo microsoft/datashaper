@@ -65,7 +65,14 @@ export function useColumns(checkboxes: ICheckboxProps[]): {
 				key: label!,
 				name: label!,
 				fieldName: label!,
-				minWidth: 120,
+				minWidth: 100,
+				// add some icons so we can confirm alignment in the headers
+				iconName:
+					label === 'Symbol'
+						? 'FavoriteStarFill'
+						: label === 'Date'
+						? 'Calendar'
+						: undefined,
 			}))
 	}, [checkboxes])
 

@@ -8,6 +8,6 @@ import type { ColumnSelectFunction } from '../index.js'
 
 export interface DefaultColumnHeaderProps extends IDetailsColumnProps {
 	onSelect?: ColumnSelectFunction
-	isSortable?: boolean
+	sortable?: boolean
 	onSort?: ColumnSelectFunction
 }

@@ -39,6 +39,7 @@ export function useTextStyle(
 			overflow: 'hidden' as const,
 			whiteSpace: 'nowrap' as const,
 			textOverflow: 'ellipsis' as const,
+			paddingLeft: 7, // this splits the icon margin to center the label
 		}),
 		[theme, column, isClickable],
 	)
@@ -50,9 +51,8 @@ export function useIconStyles(): IIconStyles {
 		() => ({
 			root: {
 				cursor: 'pointer',
-				position: 'absolute' as const,
-				right: 8,
 				fontSize: 12,
+				width: 14, // to match the default icon on the left
 				color: theme.palette.neutralSecondary,
 			},
 		}),

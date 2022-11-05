@@ -93,7 +93,7 @@ export const createRenderColumnHeader = (
  */
 export const createRenderDefaultColumnHeader = (
 	originalProps: Partial<IColumn>,
-	isSortable: boolean,
+	sortable: boolean,
 	onSelect?: ColumnSelectFunction,
 	onSort?: ColumnSelectFunction,
 ): IRenderFunction<IDetailsColumnProps> =>
@@ -105,7 +105,7 @@ export const createRenderDefaultColumnHeader = (
 		return (
 			<DefaultColumnHeader
 				{...p}
-				isSortable={isSortable}
+				sortable={sortable}
 				onSelect={onSelect}
 				onSort={onSort}
 			/>
