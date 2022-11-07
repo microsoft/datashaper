@@ -39,6 +39,7 @@ import {
 export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	function ArqueroDetailsList({
 		table,
+		validationResult,
 		features = {},
 		metadata,
 		offset = 0,
