@@ -12,10 +12,9 @@ import type {
 import type {
 	DetailsListFeatures,
 	DropdownOptionSelect,
-	MetadataClickFunction,
 	StatsColumnType,
 } from '../ArqueroDetailsList.types.js'
-import type { ColumnClickFunction, ColumnRenderFunction } from '../index.js'
+import type { ColumnRenderFunction, ColumnSelectFunction } from '../index.js'
 import { CommandBarContainer } from './CommandBarContainer.js'
 import { DefaultColumnHeader } from './DefaultColumnHeader.js'
 import { FeaturesCell } from './FeaturesCell.js'
@@ -25,7 +24,7 @@ import { SmartCell, StatsColumnHeader } from './index.js'
 export const createRenderSmartCell = (
 	field: Field,
 	color?: string,
-	onColumnClick?: ColumnClickFunction,
+	onSelect?: ColumnSelectFunction,
 	onCellDropdownSelect?: DropdownOptionSelect,
 ): ColumnRenderFunction =>
 	function renderSmartCell(item?: any, index?: number, column?: IColumn) {
@@ -36,7 +35,7 @@ export const createRenderSmartCell = (
 				column={column}
 				field={field}
 				color={color}
-				onColumnClick={onColumnClick}
+				onSelect={onSelect}
 				onCellDropdownSelect={onCellDropdownSelect}
 			/>
 		)
@@ -46,7 +45,7 @@ export const createRenderFeaturesCell = (
 	features: DetailsListFeatures,
 	field?: Field,
 	color?: string,
-	onColumnClick?: ColumnClickFunction,
+	onSelect?: ColumnSelectFunction,
 	onCellDropdownSelect?: DropdownOptionSelect,
 ): ColumnRenderFunction =>
 	function renderDropdownCell(item?: any, index?: number, column?: IColumn) {
@@ -56,7 +55,7 @@ export const createRenderFeaturesCell = (
 				item={item}
 				column={column}
 				onCellDropdownSelect={onCellDropdownSelect}
-				onColumnClick={onColumnClick}
+				onSelect={onSelect}
 				field={field}
 				color={color}
 				features={features}
@@ -94,10 +93,9 @@ export const createRenderColumnHeader = (
  */
 export const createRenderDefaultColumnHeader = (
 	originalProps: Partial<IColumn>,
-	isClickable: boolean,
-	isSortable: boolean,
-	onColumnHeaderClick?: ColumnClickFunction,
-	onSort?: ColumnClickFunction,
+	sortable: boolean,
+	onSelect?: ColumnSelectFunction,
+	onSort?: ColumnSelectFunction,
 ): IRenderFunction<IDetailsColumnProps> =>
 	function renderDefaultColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
@@ -107,9 +105,8 @@ export const createRenderDefaultColumnHeader = (
 		return (
 			<DefaultColumnHeader
 				{...p}
-				isClickable={isClickable}
-				isSortable={isSortable}
-				onClick={onColumnHeaderClick}
+				sortable={sortable}
+				onSelect={onSelect}
 				onSort={onSort}
 			/>
 		)
@@ -117,7 +114,7 @@ export const createRenderDefaultColumnHeader = (
 
 export const createRenderStatsColumnHeader = (
 	field: Field,
-	onClick?: MetadataClickFunction,
+	onSelect?: ColumnSelectFunction,
 	stats?: StatsColumnType[],
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderStatsColumnHeader(props?, defaultRender?) {
@@ -126,7 +123,7 @@ export const createRenderStatsColumnHeader = (
 		}
 		return (
 			<StatsColumnHeader
-				onClick={onClick}
+				onSelect={onSelect}
 				field={field}
 				stats={stats}
 				{...props}
@@ -156,7 +153,7 @@ export const createRenderCommandBarColumnHeader = (
 export const createRenderHistogramColumnHeader = (
 	field: Field,
 	color?: string,
-	onClick?: MetadataClickFunction,
+	onSelect?: ColumnSelectFunction,
 ): IRenderFunction<IDetailsColumnProps> => {
 	return function renderHistogramColumnHeader(props?, defaultRender?) {
 		if (!props || !defaultRender) {
@@ -164,7 +161,7 @@ export const createRenderHistogramColumnHeader = (
 		}
 		return (
 			<HistogramColumnHeader
-				onClick={onClick}
+				onSelect={onSelect}
 				field={field}
 				color={color}
 				{...props}

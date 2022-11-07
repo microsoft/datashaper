@@ -1,6 +1,6 @@
 {
 	"name": "@datashaper/schema",
-	"version": "8.0.1",
+	"version": "8.1.0",
 	"type": "module",
 	"main": "src/index.ts",
 	"publishConfig": {
@@ -33,11 +33,10 @@
 		"url": "https://github.com/microsoft/datashaper/issues"
 	},
 	"scripts": {
-		"clean": "essex clean dist docs",
-		"_create_versions_file": "node create_versions_file.js",
+		"clean": "essex clean dist docs versions.js versions.d.ts",
 		"_transpile": "essex build --docs",
 		"_bundle_schemas": "run-p bundle-codebook bundle-datapackage bundle-datatable bundle-workflow",
-		"build": "run-p _create_versions_file _transpile _bundle_schemas",
+		"build": "run-p _transpile _bundle_schemas",
 		"lint": "essex lint --fix",
 		"test": "NODE_OPTIONS=--experimental-vm-modules yarn node $(yarn bin jest) --runInBand",
 		"bundle-codebook": "typescript-json-schema tsconfig.json CodebookSchema > ../../schema/codebook.json",

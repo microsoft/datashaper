@@ -5,6 +5,8 @@
 
 import { memo, useMemo } from 'react'
 
+import { useCommandBarColorDefaults } from '../../hooks/index.js'
+import { useColumnCounts, useRowCounts } from './ArqueroTableHeader.hooks.js'
 import {
 	Container,
 	H3,
@@ -12,11 +14,6 @@ import {
 	Middle,
 	Right,
 } from './ArqueroTableHeader.styles.js'
-import {
-	useColorDefaults,
-	useColumnCounts,
-	useRowCounts,
-} from './hooks/index.js'
 import type { ArqueroTableHeaderProps } from './index.js'
 import { TableName } from './TableName.js'
 
@@ -29,12 +26,11 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 		commandBar,
 		farCommandBar,
 		visibleColumns,
-		onRenameTable,
 		background,
 		color,
 		styles,
 	}) {
-		const { background: bg, color: clr } = useColorDefaults({
+		const { background: bg, color: clr } = useCommandBarColorDefaults({
 			color,
 			background,
 		})
@@ -48,9 +44,7 @@ export const ArqueroTableHeader: React.FC<ArqueroTableHeaderProps> = memo(
 			<Container background={bg} color={clr} style={styles?.root}>
 				<Left>{commandBar}</Left>
 				<Middle hasFarCommandBar={!!farCommandBar}>
-					{name ? (
-						<TableName onRenameTable={onRenameTable} name={name} color={clr} />
-					) : null}
+					{name ? <TableName name={name} color={clr} /> : null}
 					{showRowCount === true ? (
 						<H3>
 							{`${rowCounts.visible} row${rowCounts.visible !== 1 ? 's' : ''}${

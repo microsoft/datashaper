@@ -17,7 +17,7 @@ import {
 
 export const Columns: React.FC<ArqueroDetailsListProps> = memo(
 	function Columns({ table, ...args }) {
-		const { selected, onColumnClick } = useSelectedColumn()
+		const { selected, onSelect } = useSelectedColumn()
 		const { checkboxes } = useCheckboxConfigs(table)
 
 		const { columns } = useColumns(checkboxes)
@@ -38,8 +38,10 @@ export const Columns: React.FC<ArqueroDetailsListProps> = memo(
 					table={table}
 					columns={columns}
 					selectedColumn={selected}
-					onColumnClick={onColumnClick}
+					onColumnSelect={onSelect}
 					showColumnBorders
+					sortable
+					defaultSortColumn="Date"
 				/>
 			</Table>
 		)

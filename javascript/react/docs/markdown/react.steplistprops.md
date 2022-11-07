@@ -14,12 +14,12 @@ export interface StepListProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [buttonId?](./react.steplistprops.buttonid.md) |  | string \| undefined | <i>(Optional)</i> |
-|  [onDeleteClicked?](./react.steplistprops.ondeleteclicked.md) |  | (index: number) =&gt; void | <i>(Optional)</i> |
-|  [onDuplicateClicked?](./react.steplistprops.onduplicateclicked.md) |  | (step: Step) =&gt; void | <i>(Optional)</i> |
-|  [onEditClicked?](./react.steplistprops.oneditclicked.md) |  | (step: Step, index: number) =&gt; void | <i>(Optional)</i> |
+|  [onDelete?](./react.steplistprops.ondelete.md) |  | (index: number) =&gt; void | <i>(Optional)</i> |
+|  [onSave?](./react.steplistprops.onsave.md) |  | (step: Step, index?: number) =&gt; void | <i>(Optional)</i> |
 |  [onSelect?](./react.steplistprops.onselect.md) |  | (name: string) =&gt; void | <i>(Optional)</i> |
-|  [onStartNewStep?](./react.steplistprops.onstartnewstep.md) |  | () =&gt; void | <i>(Optional)</i> |
-|  [outputs](./react.steplistprops.outputs.md) |  | Array&lt;string \| undefined&gt; |  |
-|  [steps](./react.steplistprops.steps.md) |  | Step\[\] |  |
+|  [order?](./react.steplistprops.order.md) |  | [DisplayOrder](./react.displayorder.md) | <i>(Optional)</i> |
+|  [selectedKey?](./react.steplistprops.selectedkey.md) |  | string | <i>(Optional)</i> Id of the selected step |
+|  [showSelectButtons?](./react.steplistprops.showselectbuttons.md) |  | boolean | <i>(Optional)</i> Indicates whether the original/latest buttons will be shown. Note that they will have no effect if you do not supply an onSelect handler too. |
+|  [styles?](./react.steplistprops.styles.md) |  | [StepHistoryStyles](./react.stephistorystyles.md) | <i>(Optional)</i> |
+|  [workflow](./react.steplistprops.workflow.md) |  | Workflow |  |
 

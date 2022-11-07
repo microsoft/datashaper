@@ -17,7 +17,6 @@ export interface ArqueroTableHeaderProps {
 	commandBar?: ReactElement<any, any>
 	farCommandBar?: ReactElement<any, any>
 	visibleColumns?: string[]
-	onRenameTable?: (name: string) => void
 	color?: string
 	background?: string
 	styles?: ArqueroTableHeaderStyles

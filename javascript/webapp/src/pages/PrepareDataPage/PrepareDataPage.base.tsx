@@ -6,24 +6,23 @@ import {
 	ArqueroDetailsList,
 	ArqueroTableHeader,
 	DisplayOrder,
-	ProjectManagementCommandBar,
-	StepHistoryList,
+	StepList,
 	TableCommands,
-	useManagementBarDefaults,
 	useOnCreateStep,
 	useOnDeleteStep,
 	useOnSaveStep,
+	useWorkflowInputTableNames,
 	useWorkflowOutputListener,
 } from '@datashaper/react'
-import { useInputTableNames } from '@datashaper/react/src/hooks/useTableDropdownOptions.js'
 import type { TableContainer } from '@datashaper/tables'
 import { Workflow } from '@datashaper/workflow'
 import { ToolPanel } from '@essex/components'
 import type { IColumn } from '@fluentui/react'
 import { CommandBar } from '@fluentui/react'
-import upperFirst from 'lodash-es/upperFirst.js'
 import { memo, useCallback, useMemo, useState } from 'react'
 
+import { ProjectManagementCommandBar } from '../../components/common/ProjectManagementCommandBar.js'
+import { useManagementBarDefaults } from '../../hooks/useManagementBarDefaults.js'
 import { TableList } from './components/TableList.js'
 import {
 	useHistory,
@@ -58,12 +57,13 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 
 	const onSave = useOnSaveStep(workflow)
 	const onCreate = useOnCreateStep(onSave, setSelectedTableId)
-	const inputNames = useInputTableNames(workflow)
+	const inputNames = useWorkflowInputTableNames(workflow)
 
 	const tableName = useMemo(() => {
 		const stepIndex = workflow.steps.findIndex(x => x.id === selectedTableId)
-		const name = upperFirst(workflow.steps[stepIndex]?.verb)
-		return stepIndex >= 0 ? `#${stepIndex + 1} ${name}` : selectedTableId
+		const step = workflow.steps[stepIndex]
+		const name = (step?.id || step?.verb)?.toLocaleUpperCase()
+		return stepIndex >= 0 ? name : selectedTableId
 	}, [workflow, selectedTableId])
 
 	const deleteStepFromWorkflow = useOnDeleteStep(workflow)
@@ -82,9 +82,11 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 		[workflow, outputs, deleteStepFromWorkflow],
 	)
 
-	const onColumnClick = useCallback(
+	const onColumnSelect = useCallback(
 		(_?: React.MouseEvent<HTMLElement, MouseEvent>, column?: IColumn) => {
-			setSelectedColumn(column?.name)
+			setSelectedColumn(prev =>
+				prev === column?.name ? undefined : column?.name,
+			)
 		},
 		[setSelectedColumn],
 	)
@@ -136,9 +138,8 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 									isHeaderFixed
 									fill
 									striped
-									clickableColumns={!!onColumnClick}
 									selectedColumn={selectedColumn}
-									onColumnClick={onColumnClick}
+									onColumnSelect={onColumnSelect}
 									metadata={selectedTable?.metadata}
 									table={selectedTable?.table}
 									features={{ smartHeaders: true }}
@@ -147,12 +148,13 @@ export const PrepareDataPage: React.FC = memo(function PrepareDataPage() {
 						</DetailsListContainer>
 						<StepsListContainer>
 							<ToolPanel {...historyPanelProps}>
-								<StepHistoryList
+								<StepList
 									onDelete={onDeleteStep}
 									onSelect={setSelectedTableId}
 									workflow={workflow}
 									onSave={onSave}
-									order={DisplayOrder.FirstOnTop}
+									selectedKey={selectedTableId}
+									order={DisplayOrder.LastOnTop}
 								/>
 							</ToolPanel>
 						</StepsListContainer>

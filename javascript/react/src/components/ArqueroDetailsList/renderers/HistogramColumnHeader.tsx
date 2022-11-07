@@ -25,7 +25,7 @@ import type { RichHeaderProps } from './types.js'
  */
 export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 	function HistogramColumnHeader({ field, color, ...props }) {
-		const { column, onClick } = props
+		const { column, onSelect } = props
 		const dimensions = useCellDimensions(column, false)
 
 		const categorical = field.type === 'string'
@@ -41,16 +41,12 @@ export const HistogramColumnHeader: React.FC<RichHeaderProps> = memo(
 		const [hover, setHover] = useState<string>()
 		const [id, setId] = useState<string>()
 		const handleBarHover = useHandleBarHoverHandler(legend, setId, setHover)
-		const styles = useStyles(dimensions, Boolean(onClick))
+		const styles = useStyles(dimensions, Boolean(onSelect))
 		const enough = field.metadata?.distinct || 0
 		const calloutProps = useCalloutProps(id)
 		const handleOnClick = useCallback(
-			(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-				if (bins) {
-					onClick?.(e, column, field)
-				}
-			},
-			[column, field, bins, onClick],
+			(e: React.MouseEvent<HTMLElement, MouseEvent>) => onSelect?.(e, column),
+			[column, onSelect],
 		)
 
 		return (

@@ -6,21 +6,18 @@ import type { IColumn, IIconStyles } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useCallback, useMemo } from 'react'
 
-import type { ColumnClickFunction } from '../ArqueroDetailsList.types.js'
+import type { ColumnSelectFunction } from '../ArqueroDetailsList.types.js'
 import { useCellDimensions } from '../hooks/index.js'
-
-const COMPACT_LINE_HEIGHT = 2
 
 export function useContainerStyle(column: IColumn): React.CSSProperties {
 	const dimensions = useCellDimensions(column)
 	return useMemo(
 		() => ({
-			lineHeight: column.data.compact ? COMPACT_LINE_HEIGHT : 'inherit',
 			display: 'flex',
 			justifyContent: 'space-between',
 			width: dimensions.width,
 		}),
-		[dimensions, column],
+		[dimensions],
 	)
 }
 
@@ -32,7 +29,7 @@ export function useTextStyle(
 	return useMemo(
 		() => ({
 			cursor: isClickable ? 'pointer' : 'inherit',
-			color: column?.data.virtual
+			color: column.data?.virtual
 				? 'transparent'
 				: column.data?.selected
 				? theme.palette.themePrimary
@@ -42,6 +39,7 @@ export function useTextStyle(
 			overflow: 'hidden' as const,
 			whiteSpace: 'nowrap' as const,
 			textOverflow: 'ellipsis' as const,
+			paddingLeft: 7, // this splits the icon margin to center the label
 		}),
 		[theme, column, isClickable],
 	)
@@ -53,9 +51,8 @@ export function useIconStyles(): IIconStyles {
 		() => ({
 			root: {
 				cursor: 'pointer',
-				position: 'absolute' as const,
-				right: 8,
 				fontSize: 12,
+				width: 14, // to match the default icon on the left
 				color: theme.palette.neutralSecondary,
 			},
 		}),
@@ -65,7 +62,7 @@ export function useIconStyles(): IIconStyles {
 
 export function useDelegatedColumnClickHandler(
 	column: IColumn | undefined,
-	delegate: ColumnClickFunction | undefined,
+	delegate: ColumnSelectFunction | undefined,
 ): (e: React.MouseEvent<HTMLElement, MouseEvent>) => void {
 	return useCallback(
 		(e: React.MouseEvent<HTMLElement, MouseEvent>) => {

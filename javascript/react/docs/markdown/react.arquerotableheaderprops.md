@@ -19,7 +19,6 @@ export interface ArqueroTableHeaderProps
 |  [commandBar?](./react.arquerotableheaderprops.commandbar.md) |  | ReactElement&lt;any, any&gt; | <i>(Optional)</i> |
 |  [farCommandBar?](./react.arquerotableheaderprops.farcommandbar.md) |  | ReactElement&lt;any, any&gt; | <i>(Optional)</i> |
 |  [name?](./react.arquerotableheaderprops.name.md) |  | string | <i>(Optional)</i> |
-|  [onRenameTable?](./react.arquerotableheaderprops.onrenametable.md) |  | (name: string) =&gt; void | <i>(Optional)</i> |
 |  [showColumnCount?](./react.arquerotableheaderprops.showcolumncount.md) |  | boolean | <i>(Optional)</i> |
 |  [showRowCount?](./react.arquerotableheaderprops.showrowcount.md) |  | boolean | <i>(Optional)</i> |
 |  [styles?](./react.arquerotableheaderprops.styles.md) |  | [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) | <i>(Optional)</i> |

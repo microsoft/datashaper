@@ -1,0 +1,119 @@
+{
+	"$schema": "../../../../../../../schema/workflow.json",
+	"name": "Binning",
+	"description": "Shows how different binning strategies and clamping work.",
+	"steps": [
+		{
+			"id": "bin-1",
+			"verb": "bin",
+			"input": {
+				"source": "products"
+			},
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "auto",
+				"to": "Binned1"
+			}
+		},
+		{
+			"id": "bin-2",
+			"verb": "bin",
+			"input": {
+				"source": "products"
+			},
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "fixed width",
+				"to": "Binned2",
+				"fixedwidth": 100000
+			}
+		},
+		{
+			"id": "bin-3",
+			"verb": "bin",
+			"input": {
+				"source": "products"
+			},
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "fixed count",
+				"to": "Binned3",
+				"fixedcount": 100
+			}
+		},
+		{
+			"id": "bin-4",
+			"verb": "bin",
+			"input": {
+				"source": "products"
+			},
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "fixed width",
+				"to": "Binned4",
+				"fixedwidth": 100000,
+				"min": 20000,
+				"max": 1000000
+			}
+		},
+		{
+			"id": "bin-4-print",
+			"verb": "bin",
+			"input": {
+				"source": "products"
+			},
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "fixed width",
+				"to": "Binned4 Print",
+				"fixedwidth": 100000,
+				"min": 20000,
+				"max": 1000000,
+				"printRange": true
+			}
+		},
+		{
+			"id": "bin-5",
+			"verb": "bin",
+			"input": {
+				"source": "products"
+			},
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "fixed width",
+				"to": "Binned5",
+				"fixedwidth": 100000,
+				"min": 20000,
+				"max": 1000000,
+				"clamped": true
+			}
+		},
+		{
+			"id": "bin-5-print",
+			"verb": "bin",
+			"input": {
+				"source": "products"
+			},
+			"args": {
+				"column": "FY21 Sales",
+				"strategy": "fixed width",
+				"to": "Binned5 Print",
+				"fixedwidth": 100000,
+				"min": 20000,
+				"max": 1000000,
+				"clamped": true,
+				"printRange": true
+			}
+		}
+	],
+	"input": ["products"],
+	"output": [
+		"bin-1",
+		"bin-2",
+		"bin-3",
+		"bin-4",
+		"bin-4-print",
+		"bin-5",
+		"bin-5-print"
+	]
+}

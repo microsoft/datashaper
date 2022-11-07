@@ -1,0 +1,65 @@
+{
+	"$schema": "../../../../../../../schema/workflow.json",
+	"name": "Dropdown",
+	"description": "Aggregates daily data to monthly averages to demonstrate automatic Dropdowns.",
+	"steps": [
+		{
+			"id": "output-table-0",
+			"verb": "derive",
+			"input": {
+				"source": "stocks"
+			},
+			"args": {
+				"to": "Month Key",
+				"column1": "Symbol",
+				"operator": "+",
+				"column2": "Month"
+			}
+		},
+		{
+			"id": "output-table-1",
+			"verb": "aggregate",
+			"input": {
+				"source": "output-table-0"
+			},
+			"args": {
+				"to": "Monthly Average",
+				"groupby": "Month Key",
+				"column": "Close",
+				"operation": "mean"
+			}
+		},
+		{
+			"id": "output-table-2",
+			"verb": "lookup",
+			"input": {
+				"source": "output-table-1",
+				"other": "output-table-0"
+			},
+			"args": {
+				"columns": ["Symbol"],
+				"on": ["Month Key"]
+			}
+		},
+		{
+			"id": "output-table-3",
+			"verb": "aggregate",
+			"input": {
+				"source": "output-table-2"
+			},
+			"args": {
+				"to": "Monthly List",
+				"groupby": "Symbol",
+				"column": "Monthly Average",
+				"operation": "array_agg"
+			}
+		}
+	],
+	"input": ["stocks"],
+	"output": [
+		"output-table-0",
+		"output-table-1",
+		"output-table-2",
+		"output-table-3"
+	]
+}

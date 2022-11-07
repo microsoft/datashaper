@@ -8,7 +8,7 @@ import { Workflow } from '@datashaper/workflow'
 import type ColumnTable from 'arquero/dist/types/table/column-table.js'
 import { useMemo, useState } from 'react'
 
-import { useWorkflow } from '../../../../hooks/common.js'
+import { useWorkflow } from '../../../../hooks/index.js'
 export function useParameters(inputs: ColumnTable[]): {
 	workflow: Workflow
 } {
