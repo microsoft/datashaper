@@ -29,7 +29,6 @@
 |  [useColumnsMetadata(table, filter)](./react.usecolumnsmetadata.md) |  |
 |  [useColumnStyles(clickable, separator)](./react.usecolumnstyles.md) |  |
 |  [useColumnType(table, column)](./react.usecolumntype.md) |  |
-|  [useColumnValidation(validationResult, name)](./react.usecolumnvalidation.md) |  |
 |  [useColumnValueOptions(column, table, values, filter)](./react.usecolumnvalueoptions.md) |  |
 |  [useComboBoxChangeHandler(step, updateFn, onChange)](./react.usecomboboxchangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |
 |  [useComboBoxInputValueChangeHandler(step, updateFn, onChange)](./react.usecomboboxinputvaluechangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |
@@ -39,8 +38,10 @@
 |  [useDropdownChangeAllHandler(step, updateFn, onChange)](./react.usedropdownchangeallhandler.md) |  |
 |  [useDropdownChangeHandler(step, updateFn, onChange)](./react.usedropdownchangehandler.md) | Creates a callback handler for changing the step based on a dropdown value. This only handles basic cases where the dropdown option key can be set on the step using an object path. |
 |  [useFormattedNumber(value, formatter)](./react.useformattednumber.md) |  |
+|  [useGetColumnValidationErrors(validationResult)](./react.usegetcolumnvalidationerrors.md) |  |
 |  [useGroupHeaderRenderer(table, computedMetadata, groupHeaderFunction, lazyLoadGroups)](./react.usegroupheaderrenderer.md) | Overrides the default group header rendering so we can inject customization |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
+|  [useIconProps(validationResult)](./react.useiconprops.md) |  |
 |  [useIncrementingColumnColorScale(meta)](./react.useincrementingcolumncolorscale.md) | Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table. |
 |  [useLeftColumn(step)](./react.useleftcolumn.md) |  |
 |  [useModalState(onShow, onHide)](./react.usemodalstate.md) | A hook to consolidate view-state for modals |
@@ -68,6 +69,7 @@
 |  [useSuggestedTableName(workflow)](./react.usesuggestedtablename.md) | Returns a hook to generate a new table name based on the given input e.g. "join" could result in "join 1" or "join 2" depending on how many collisions occur. |
 |  [useTableDropdownOptions(workflow)](./react.usetabledropdownoptions.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
 |  [useTextFieldChangeHandler(step, updateFn, onChange)](./react.usetextfieldchangehandler.md) |  |
+|  [useValidationIconProps(iconProps, validationResult)](./react.usevalidationiconprops.md) |  |
 |  [useWorkflow(input, inputs)](./react.useworkflow.md) |  |
 |  [useWorkflowDataTable(id, workflow, existingTable)](./react.useworkflowdatatable.md) |  |
 |  [useWorkflowInputTableNames(workflow)](./react.useworkflowinputtablenames.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |

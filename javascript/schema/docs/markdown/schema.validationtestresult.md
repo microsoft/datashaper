@@ -14,7 +14,7 @@ export interface ValidationTestResult
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [fail?](./schema.validationtestresult.fail.md) |  | boolean | <i>(Optional)</i> |
-|  [indexes?](./schema.validationtestresult.indexes.md) |  | number\[\] | <i>(Optional)</i> |
-|  [rule?](./schema.validationtestresult.rule.md) |  | [ErrorCode](./schema.errorcode.md) | <i>(Optional)</i> |
+|  [fail](./schema.validationtestresult.fail.md) |  | boolean |  |
+|  [indexes](./schema.validationtestresult.indexes.md) |  | number\[\] |  |
+|  [rule](./schema.validationtestresult.rule.md) |  | [ErrorCode](./schema.errorcode.md) |  |
 

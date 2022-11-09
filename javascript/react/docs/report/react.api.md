@@ -23,6 +23,7 @@ import type { IDetailsListProps } from '@fluentui/react';
 import type { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
+import type { IIconStyles } from '@fluentui/react';
 import type { InputColumnRecordArgs } from '@datashaper/schema';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
@@ -448,11 +449,6 @@ export function useColumnStyles(clickable: boolean, separator: boolean): Partial
 // @public (undocumented)
 export function useColumnType(table?: ColumnTable, column?: string): DataType;
 
-// Warning: (ae-missing-release-tag) "useColumnValidation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function useColumnValidation(validationResult: ValidationResult, name: string): ValidationResult;
-
 // Warning: (ae-missing-release-tag) "useColumnValueOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -499,6 +495,11 @@ export function useDropdownChangeHandler<T extends object | void | unknown>(step
 // @public (undocumented)
 export function useFormattedNumber(value: number | undefined, formatter?: string): string;
 
+// Warning: (ae-missing-release-tag) "useGetColumnValidationErrors" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useGetColumnValidationErrors(validationResult?: ValidationResult): string;
+
 // Warning: (ae-missing-release-tag) "useGroupHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -508,6 +509,11 @@ export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata?: Ta
 //
 // @public
 export function useHeaderCommandBarDefaults(props?: Partial<ICommandBarProps>, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
+
+// Warning: (ae-missing-release-tag) "useIconProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useIconProps(validationResult?: ValidationResult): any;
 
 // Warning: (ae-missing-release-tag) "useIncrementingColumnColorScale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -643,6 +649,11 @@ export function useTableDropdownOptions(workflow?: Workflow): IDropdownOption[];
 //
 // @public (undocumented)
 export function useTextFieldChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, updated: string | undefined) => void, onChange?: StepChangeFunction<T>): TextFieldChangeHandler;
+
+// Warning: (ae-missing-release-tag) "useValidationIconProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useValidationIconProps(iconProps: IIconStyles, validationResult?: ValidationResult): any;
 
 // Warning: (ae-missing-release-tag) "useWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

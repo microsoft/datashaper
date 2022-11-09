@@ -10001,7 +10001,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "fail?: "
+                  "text": "fail: "
                 },
                 {
                   "kind": "Content",
@@ -10013,7 +10013,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": true,
+              "isOptional": false,
               "releaseTag": "Public",
               "name": "fail",
               "propertyTypeTokenRange": {
@@ -10028,7 +10028,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "indexes?: "
+                  "text": "indexes: "
                 },
                 {
                   "kind": "Content",
@@ -10040,7 +10040,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": true,
+              "isOptional": false,
               "releaseTag": "Public",
               "name": "indexes",
               "propertyTypeTokenRange": {
@@ -10055,7 +10055,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "rule?: "
+                  "text": "rule: "
                 },
                 {
                   "kind": "Reference",
@@ -10068,7 +10068,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": true,
+              "isOptional": false,
               "releaseTag": "Public",
               "name": "rule",
               "propertyTypeTokenRange": {
