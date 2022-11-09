@@ -5,7 +5,7 @@
 import type { ErrorCode } from './ErrorCode.js'
 
 export interface ValidationTestResult {
-	fail: boolean
-	indexes: number[]
-	rule: ErrorCode
+	fail?: boolean
+	indexes?: number[]
+	rule?: ErrorCode
 }

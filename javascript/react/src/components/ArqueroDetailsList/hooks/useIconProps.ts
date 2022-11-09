@@ -3,7 +3,6 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { ValidationResult } from '@datashaper/schema'
-import type { IIconStyles } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { useMemo } from 'react'
 
