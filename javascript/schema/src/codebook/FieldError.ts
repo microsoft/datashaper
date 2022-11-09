@@ -4,9 +4,11 @@
  */
 
 import type { ErrorCode } from './ErrorCode.js'
+import type { ValidationTestResult } from './ValidationTestResult.js'
 
 export interface FieldError {
 	name: string
 	indexes?: number[]
 	rule: ErrorCode
+	callbackFunction?: () => ValidationTestResult
 }

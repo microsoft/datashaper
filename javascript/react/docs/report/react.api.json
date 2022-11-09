@@ -764,6 +764,34 @@
                 "startIndex": 1,
                 "endIndex": 2
               }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/react!ArqueroDetailsListProps#validationResult:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "validationResult?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ValidationResult",
+                  "canonicalReference": "@datashaper/schema!ValidationResult:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "validationResult",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
             }
           ],
           "extendsTokenRanges": [
@@ -4715,6 +4743,15 @@
             },
             {
               "kind": "Content",
+              "text": ", validationResult?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationResult",
+              "canonicalReference": "@datashaper/schema!ValidationResult:interface"
+            },
+            {
+              "kind": "Content",
               "text": ", metadata?: "
             },
             {
@@ -4794,8 +4831,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 17,
-            "endIndex": 19
+            "startIndex": 19,
+            "endIndex": 21
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -4809,7 +4846,7 @@
               "isOptional": false
             },
             {
-              "parameterName": "metadata",
+              "parameterName": "validationResult",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
@@ -4817,23 +4854,23 @@
               "isOptional": true
             },
             {
-              "parameterName": "columns",
+              "parameterName": "metadata",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
-                "endIndex": 7
+                "endIndex": 6
               },
               "isOptional": true
             },
             {
-              "parameterName": "onColumnSelect",
+              "parameterName": "columns",
               "parameterTypeTokenRange": {
-                "startIndex": 8,
+                "startIndex": 7,
                 "endIndex": 9
               },
               "isOptional": true
             },
             {
-              "parameterName": "onSort",
+              "parameterName": "onColumnSelect",
               "parameterTypeTokenRange": {
                 "startIndex": 10,
                 "endIndex": 11
@@ -4841,7 +4878,7 @@
               "isOptional": true
             },
             {
-              "parameterName": "options",
+              "parameterName": "onSort",
               "parameterTypeTokenRange": {
                 "startIndex": 12,
                 "endIndex": 13
@@ -4849,10 +4886,18 @@
               "isOptional": true
             },
             {
-              "parameterName": "virtualColumns",
+              "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 14,
-                "endIndex": 16
+                "endIndex": 15
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "virtualColumns",
+              "parameterTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 18
               },
               "isOptional": true
             }
@@ -5064,6 +5109,68 @@
             }
           ],
           "name": "useColumnType"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@datashaper/react!useColumnValidation:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function useColumnValidation(validationResult: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationResult",
+              "canonicalReference": "@datashaper/schema!ValidationResult:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", name: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValidationResult",
+              "canonicalReference": "@datashaper/schema!ValidationResult:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "validationResult",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "name",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "useColumnValidation"
         },
         {
           "kind": "Function",

@@ -25,10 +25,11 @@
 |  [useCheckboxChangeHandler(step, updateFn, onChange)](./react.usecheckboxchangehandler.md) |  |
 |  [useColumnNames(table, filter)](./react.usecolumnnames.md) |  |
 |  [useColumnNamesList(table, columns)](./react.usecolumnnameslist.md) | Creates a list of column names for the table. If there are no columns supplied it will use the list from the table itself. Otherwise it will use the provided columns under the assumption the user has configured them as desired. |
-|  [useColumns(table, metadata, columns, onColumnSelect, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
+|  [useColumns(table, validationResult, metadata, columns, onColumnSelect, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
 |  [useColumnsMetadata(table, filter)](./react.usecolumnsmetadata.md) |  |
 |  [useColumnStyles(clickable, separator)](./react.usecolumnstyles.md) |  |
 |  [useColumnType(table, column)](./react.usecolumntype.md) |  |
+|  [useColumnValidation(validationResult, name)](./react.usecolumnvalidation.md) |  |
 |  [useColumnValueOptions(column, table, values, filter)](./react.usecolumnvalueoptions.md) |  |
 |  [useComboBoxChangeHandler(step, updateFn, onChange)](./react.usecomboboxchangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |
 |  [useComboBoxInputValueChangeHandler(step, updateFn, onChange)](./react.usecomboboxinputvaluechangehandler.md) | Creates a callback handler for changing the step based on a combobox value. This only handles basic cases where the combobox option key can be set on the step using an object path. |

@@ -33,6 +33,7 @@ import { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
+import type { ValidationResult } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
 
@@ -69,6 +70,8 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     style?: CSSProperties;
     // (undocumented)
     table: ColumnTable;
+    // (undocumented)
+    validationResult?: ValidationResult;
 }
 
 // Warning: (ae-missing-release-tag) "ArqueroTableHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -428,7 +431,7 @@ export function useColumnNamesList(table: ColumnTable, columns?: IColumn[]): str
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnSelectFunction, onSort?: ColumnSelectFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
+export function useColumns(table: ColumnTable, validationResult?: ValidationResult, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnSelectFunction, onSort?: ColumnSelectFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnsMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -444,6 +447,11 @@ export function useColumnStyles(clickable: boolean, separator: boolean): Partial
 //
 // @public (undocumented)
 export function useColumnType(table?: ColumnTable, column?: string): DataType;
+
+// Warning: (ae-missing-release-tag) "useColumnValidation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useColumnValidation(validationResult: ValidationResult, name: string): ValidationResult;
 
 // Warning: (ae-missing-release-tag) "useColumnValueOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

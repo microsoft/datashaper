@@ -46,7 +46,7 @@ export function validateTable(
 				includeInstances,
 			)
 			if (results.errors != null && validationResult.errors != null) {
-				results.errors.map((result: FieldError) => {
+				results.errors.forEach((result: FieldError) => {
 					validationResult.errors!.push(result!)
 				})
 			}
@@ -79,7 +79,7 @@ function validateColumn(
 	}
 	if (
 		constraints.minLength &&
-		(dataType == DataType.String || dataType == DataType.Array)
+		(dataType === DataType.String || dataType === DataType.Array)
 	) {
 		validators.push(
 			validateMinLengthConstraint(constraints.minLength, dataType),
@@ -87,7 +87,7 @@ function validateColumn(
 	}
 	if (
 		constraints.maxLength &&
-		(dataType == DataType.String || dataType == DataType.Array)
+		(dataType === DataType.String || dataType === DataType.Array)
 	) {
 		validators.push(
 			validateMaxLengthConstraint(constraints.maxLength, dataType),
@@ -95,20 +95,20 @@ function validateColumn(
 	}
 	if (
 		constraints.minimum &&
-		(dataType == DataType.Number || dataType == DataType.Date)
+		(dataType === DataType.Number || dataType === DataType.Date)
 	) {
 		validators.push(validateMinimumConstraint(constraints.minimum, dataType))
 	}
 	if (
 		constraints.maximum &&
-		(dataType == DataType.Number || dataType == DataType.Date)
+		(dataType === DataType.Number || dataType === DataType.Date)
 	) {
 		validators.push(validateMaximumConstraint(constraints.maximum, dataType))
 	}
-	if (constraints.pattern && dataType == DataType.String) {
+	if (constraints.pattern && dataType === DataType.String) {
 		validators.push(validatePatternConstraint(constraints.pattern))
 	}
-	if (constraints.enum && dataType == DataType.String) {
+	if (constraints.enum && dataType === DataType.String) {
 		validators.push(validateEnumConstraint(constraints.enum))
 	}
 
@@ -119,6 +119,7 @@ function validateColumn(
 				name: name,
 				rule: result.rule,
 				indexes: result.indexes,
+				callbackFunction: validator,
 			})
 		}
 	})

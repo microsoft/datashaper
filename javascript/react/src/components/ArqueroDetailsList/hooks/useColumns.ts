@@ -2,7 +2,11 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { SortDirection } from '@datashaper/schema'
+import type {
+	FieldError,
+	SortDirection,
+	ValidationResult,
+} from '@datashaper/schema'
 import { DataType } from '@datashaper/schema'
 import type { TableMetadata } from '@datashaper/tables'
 import type { IColumn } from '@fluentui/react'
@@ -53,6 +57,7 @@ export interface ColumnOptions {
  */
 export function useColumns(
 	table: ColumnTable,
+	validationResult?: ValidationResult,
 	metadata?: TableMetadata,
 	columns?: IColumn[],
 	onColumnSelect?: ColumnSelectFunction,
@@ -91,6 +96,12 @@ export function useColumns(
 				minWidth: columnMinWidth,
 				fieldName: name,
 			}
+
+			const errors =
+				validationResult !== undefined
+					? getColumnValidation(validationResult, name)
+					: { errors: [] }
+
 			// HACK: if we let an iconName through, the rendering messes with our layout.
 			// In order to control this we'll pass the original props to the generators,
 			// but omit from what gets sent to the top-level table.
@@ -107,6 +118,7 @@ export function useColumns(
 							color,
 							onColumnSelect,
 							onCellDropdownSelect,
+							errors,
 					  )
 					: createRenderFeaturesCell(
 							features,
@@ -114,12 +126,14 @@ export function useColumns(
 							color,
 							onColumnSelect,
 							onCellDropdownSelect,
+							errors,
 					  )
 
 			const headerRenderers = [
 				createRenderDefaultColumnHeader(
 					column,
 					sortable,
+					errors,
 					onColumnSelect,
 					onSort,
 				),
@@ -179,6 +193,7 @@ export function useColumns(
 		columnMinWidth,
 		virtualColumns,
 		sortable,
+		validationResult,
 	])
 }
 
@@ -187,4 +202,19 @@ function reduce(columns: IColumn[]): Record<string, IColumn> {
 		acc[cur.key] = cur
 		return acc
 	}, {} as Record<string, IColumn>)
+}
+
+function getColumnValidation(
+	validationResult: ValidationResult,
+	name: string,
+): ValidationResult {
+	const filteredErrors: FieldError[] = validationResult.errors.filter(
+		e => e.name === name,
+	)
+
+	const validationResultFiltered: ValidationResult = {
+		errors: filteredErrors,
+	}
+
+	return validationResultFiltered
 }

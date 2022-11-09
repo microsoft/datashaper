@@ -99,6 +99,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const displayColumns = useColumns(
 			table,
+			validationResult,
 			metadata,
 			columns,
 			onColumnSelect,
