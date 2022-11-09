@@ -3,8 +3,8 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import type { FieldError, ValidationTestResult } from '@datashaper/schema'
-import type { ITooltipHostStyles} from '@fluentui/react/lib/Tooltip';
-import {TooltipHost } from '@fluentui/react/lib/Tooltip'
+import type { ITooltipHostStyles } from '@fluentui/react/lib/Tooltip'
+import { TooltipHost } from '@fluentui/react/lib/Tooltip'
 import { useId } from '@fluentui/react-hooks'
 import { memo } from 'react'
 
@@ -64,7 +64,6 @@ export const ValidationCell: React.FC<FormattedCellProps> = memo(
 							</ToolTipContainer>
 						)
 					}
-
 					return null
 				})}
 

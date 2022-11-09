@@ -7,7 +7,7 @@ import type { IIconStyles } from '@fluentui/react'
 import { useThematic } from '@thematic/react'
 import { useMemo } from 'react'
 
-export function useIconProps(validationResult: ValidationResult): IIconStyles {
+export function useIconProps(validationResult?: ValidationResult): IIconStyles {
 	const theme = useThematic()
 	return useMemo(
 		() => ({

@@ -7,7 +7,7 @@ import type { IIconStyles } from '@fluentui/react'
 
 export function useValidationIconProps(
 	iconProps: IIconStyles,
-	validationResult: ValidationResult,
+	validationResult?: ValidationResult,
 ): any {
 	return {
 		styles: iconProps,

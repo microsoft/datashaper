@@ -4636,7 +4636,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "() => "
+                  "text": "(values: unknown, includeInstances: boolean) => "
                 },
                 {
                   "kind": "Reference",

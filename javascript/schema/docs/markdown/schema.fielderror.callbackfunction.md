@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-callbackFunction?: () => ValidationTestResult;
+callbackFunction?: (values: unknown, includeInstances: boolean) => ValidationTestResult;
 ```
