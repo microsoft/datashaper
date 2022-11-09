@@ -41,31 +41,33 @@ export const ValidationCell: React.FC<FormattedCellProps> = memo(
 
 		return (
 			<Container style={style}>
-				{validationResult.errors.map((e: FieldError, index: number) => {
-					const result: ValidationTestResult = e.callbackFunction(
-						[value],
-						false,
-					)
+				{validationResult !== undefined &&
+					validationResult.errors.map((e: FieldError, index: number) => {
+						const result: ValidationTestResult = {}
 
-					if (result.fail) {
-						return (
-							<ToolTipContainer key={index}>
-								<TooltipHost
-									content={result.rule}
-									id={tooltipId}
-									calloutProps={calloutProps}
-									styles={hostStyles}
-								>
-									<LeftIcon
-										aria-describedby={tooltipId}
-										{...validationIconProps}
-									/>
-								</TooltipHost>
-							</ToolTipContainer>
-						)
-					}
-					return null
-				})}
+						if (e.callbackFunction !== undefined) {
+							result = e.callbackFunction([value], false)
+						}
+
+						if (result.fail) {
+							return (
+								<ToolTipContainer key={index}>
+									<TooltipHost
+										content={result.rule}
+										id={tooltipId}
+										calloutProps={calloutProps}
+										styles={hostStyles}
+									>
+										<LeftIcon
+											aria-describedby={tooltipId}
+											{...validationIconProps}
+										/>
+									</TooltipHost>
+								</ToolTipContainer>
+							)
+						}
+						return null
+					})}
 
 				<ValueContainer>{value.toString()}</ValueContainer>
 			</Container>
