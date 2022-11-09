@@ -2,7 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { FieldError, ValidationTestResult } from '@datashaper/schema'
+import type {
+	FieldError,
+	ValidationTestResult
+} from '@datashaper/schema'
+import {
+	ErrorCode} from '@datashaper/schema';
 import type { ITooltipHostStyles } from '@fluentui/react/lib/Tooltip'
 import { TooltipHost } from '@fluentui/react/lib/Tooltip'
 import { useId } from '@fluentui/react-hooks'
@@ -43,7 +48,11 @@ export const ValidationCell: React.FC<FormattedCellProps> = memo(
 			<Container style={style}>
 				{validationResult !== undefined &&
 					validationResult.errors.map((e: FieldError, index: number) => {
-						const result: ValidationTestResult = {}
+						const result: ValidationTestResult = {
+							fail: false,
+							indexes: [],
+							rule: ErrorCode.Required,
+						}
 
 						if (e.callbackFunction !== undefined) {
 							result = e.callbackFunction([value], false)

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-indexes: number[];
+indexes?: number[];
 ```

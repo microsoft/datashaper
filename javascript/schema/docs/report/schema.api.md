@@ -1041,11 +1041,11 @@ export interface ValidationResult {
 // @public (undocumented)
 export interface ValidationTestResult {
     // (undocumented)
-    fail: boolean;
+    fail?: boolean;
     // (undocumented)
-    indexes: number[];
+    indexes?: number[];
     // (undocumented)
-    rule: ErrorCode;
+    rule?: ErrorCode;
 }
 
 // Warning: (ae-missing-release-tag) "Value" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-rule: ErrorCode;
+rule?: ErrorCode;
 ```
