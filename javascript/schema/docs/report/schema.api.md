@@ -447,6 +447,8 @@ export enum FieldAggregateOperation {
 // @public (undocumented)
 export interface FieldError {
     // (undocumented)
+    callbackFunction?: () => ValidationTestResult;
+    // (undocumented)
     indexes?: number[];
     // (undocumented)
     name: string;

@@ -10,5 +10,8 @@ export interface FieldError {
 	name: string
 	indexes?: number[]
 	rule: ErrorCode
-	callbackFunction?: () => ValidationTestResult
+	callbackFunction?: (
+		values: unknown,
+		includeInstances: boolean,
+	) => ValidationTestResult
 }
