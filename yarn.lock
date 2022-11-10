@@ -1791,13 +1791,13 @@ __metadata:
     "@essex/components": ^3.1.0
     "@essex/scripts": ^22.1.0
     "@essex/tsconfig-base": ^1.0.2
-    "@fluentui/react": ^8.98.7
-    "@fluentui/react-hooks": ^8.6.12
-    "@fluentui/utilities": ^8.13.2
+    "@fluentui/react": ^8.101.0
+    "@fluentui/react-hooks": ^8.6.13
+    "@fluentui/utilities": ^8.13.3
     "@monaco-editor/react": ^4.4.6
     "@types/debug": ^4.1.7
     "@types/node": ^18.11.5
-    "@types/react": ^18.0.23
+    "@types/react": ^18.0.25
     "@types/react-dom": ^18.0.7
     "@types/styled-components": ^5.1.26
     add: ^2.0.6
@@ -1866,10 +1866,10 @@ __metadata:
     "@essex/scripts": ^22.1.0
     "@essex/styled-components": ^0.0.4
     "@essex/tsconfig-base": ^1.0.2
-    "@fluentui/font-icons-mdl2": ^8.5.2
-    "@fluentui/react": ^8.98.7
-    "@fluentui/react-hooks": ^8.6.12
-    "@fluentui/utilities": ^8.13.2
+    "@fluentui/font-icons-mdl2": ^8.5.3
+    "@fluentui/react": ^8.101.0
+    "@fluentui/react-hooks": ^8.6.13
+    "@fluentui/utilities": ^8.13.3
     "@mdx-js/react": ^1.6.22
     "@open-wc/webpack-import-meta-loader": ^0.4.7
     "@storybook/addon-actions": ^6.5.13
@@ -1881,10 +1881,10 @@ __metadata:
     "@storybook/manager-webpack4": ^6.5.13
     "@storybook/react": ^6.5.13
     "@storybook/testing-library": ^0.0.13
-    "@thematic/core": ^3.1.0
-    "@thematic/d3": ^2.0.13
-    "@thematic/fluent": ^4.1.0
-    "@thematic/react": ^2.1.0
+    "@thematic/core": ^3.1.1
+    "@thematic/d3": ^2.0.14
+    "@thematic/fluent": ^4.1.1
+    "@thematic/react": ^2.1.1
     "@types/babel__core": ^7.1.19
     "@types/babel__preset-env": ^7.9.2
     "@types/d3-format": ^3.0.1
@@ -1893,7 +1893,7 @@ __metadata:
     "@types/lodash-es": ^4.17.6
     "@types/node": ^18.11.5
     "@types/open-wc__webpack-import-meta-loader": ^0.4.2
-    "@types/react": ^18.0.23
+    "@types/react": ^18.0.25
     "@types/react-dom": ^18.0.7
     "@types/react-is": ^17.0.3
     "@types/react-router-dom": ^5.3.3
@@ -2028,25 +2028,25 @@ __metadata:
     "@essex/hooks": ^4.0.13
     "@essex/scripts": ^22.1.0
     "@essex/webpack-config": ^21.0.8
-    "@fluentui/font-icons-mdl2": ^8.5.2
-    "@fluentui/react": ^8.98.7
-    "@fluentui/react-hooks": ^8.6.12
-    "@fluentui/utilities": ^8.13.2
-    "@thematic/core": ^3.1.0
-    "@thematic/d3": ^2.0.13
-    "@thematic/fluent": ^4.1.0
-    "@thematic/react": ^2.1.0
+    "@fluentui/font-icons-mdl2": ^8.5.3
+    "@fluentui/react": ^8.101.0
+    "@fluentui/react-hooks": ^8.6.13
+    "@fluentui/utilities": ^8.13.3
+    "@thematic/core": ^3.1.1
+    "@thematic/d3": ^2.0.14
+    "@thematic/fluent": ^4.1.1
+    "@thematic/react": ^2.1.1
     "@types/chroma-js": ^2
     "@types/debug": ^4.1.7
     "@types/lodash": ^4.14.186
     "@types/lodash-es": ^4.17.6
     "@types/node": ^18.11.5
-    "@types/react": ^18.0.23
+    "@types/react": ^18.0.25
     "@types/react-dom": ^18.0.7
     "@types/react-is": ^17.0.3
     "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.26
-    "@uifabric/icons": ^7.9.4
+    "@uifabric/icons": ^7.9.5
     ahooks: ^3.7.2
     arquero: ^5.1.0
     chroma-js: 2.4.2
@@ -2594,7 +2594,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/font-icons-mdl2@npm:^8.5.2, @fluentui/font-icons-mdl2@npm:^8.5.3":
+"@fluentui/font-icons-mdl2@npm:^8.5.3":
   version: 8.5.3
   resolution: "@fluentui/font-icons-mdl2@npm:8.5.3"
   dependencies:
@@ -2658,7 +2658,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react-hooks@npm:^8.6.12, @fluentui/react-hooks@npm:^8.6.13":
+"@fluentui/react-hooks@npm:^8.6.13":
   version: 8.6.13
   resolution: "@fluentui/react-hooks@npm:8.6.13"
   dependencies:
@@ -2698,7 +2698,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react@npm:^8.98.7":
+"@fluentui/react@npm:^8.101.0":
   version: 8.101.0
   resolution: "@fluentui/react@npm:8.101.0"
   dependencies:
@@ -2780,7 +2780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/utilities@npm:^8.13.1, @fluentui/utilities@npm:^8.13.2, @fluentui/utilities@npm:^8.13.3":
+"@fluentui/utilities@npm:^8.13.1, @fluentui/utilities@npm:^8.13.3":
   version: 8.13.3
   resolution: "@fluentui/utilities@npm:8.13.3"
   dependencies:
@@ -5110,7 +5110,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:^3.1.0, @thematic/core@npm:^3.1.1":
+"@thematic/core@npm:^3.1.1":
   version: 3.1.1
   resolution: "@thematic/core@npm:3.1.1"
   dependencies:
@@ -5130,7 +5130,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^2.0.13":
+"@thematic/d3@npm:^2.0.14":
   version: 2.0.14
   resolution: "@thematic/d3@npm:2.0.14"
   dependencies:
@@ -5152,7 +5152,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:^4.1.0":
+"@thematic/fluent@npm:^4.1.1":
   version: 4.1.1
   resolution: "@thematic/fluent@npm:4.1.1"
   dependencies:
@@ -5179,7 +5179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:^2.1.0, @thematic/react@npm:^2.1.1":
+"@thematic/react@npm:^2.1.1":
   version: 2.1.1
   resolution: "@thematic/react@npm:2.1.1"
   dependencies:
@@ -5868,7 +5868,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.23":
+"@types/react@npm:*, @types/react@npm:^18.0.25":
   version: 18.0.25
   resolution: "@types/react@npm:18.0.25"
   dependencies:
@@ -6228,7 +6228,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uifabric/icons@npm:^7.9.4":
+"@uifabric/icons@npm:^7.9.5":
   version: 7.9.5
   resolution: "@uifabric/icons@npm:7.9.5"
   dependencies:
