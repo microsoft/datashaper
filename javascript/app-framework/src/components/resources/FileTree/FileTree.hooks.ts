@@ -21,7 +21,7 @@ import { useDataTables } from '../../../hooks/useDataTables.js'
 import { removeExtension } from '../../../util/index.js'
 import type { OpenTableHandler } from '../../tables/ImportTable/ImportTable.types.js'
 import { TABLE_TYPES, ZIP_TYPES } from './FileTree.constants.js'
-import type { AddTableHandler,ExampleIndex, FileDefinition  } from './FileTree.types.js'
+import type { AddTableHandler, FileDefinition } from './FileTree.types.js'
 import { createCommandBar, openProps, saveProps } from './groupTables.js'
 
 export function useOnOpenTable(
@@ -70,7 +70,7 @@ function useAddTable(): AddTableHandler {
 }
 
 export function useFileManagementCommands(
-	examples: ExampleIndex,
+	examples: FileDefinition[],
 	expanded: boolean,
 	onOpenFileRequested: (acceptedFiles: string[]) => Promise<BaseFile>,
 	setFile: (file: BaseFile) => void,

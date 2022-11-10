@@ -13,7 +13,7 @@ export interface FileTreeProps {
 	selectedFileId?: string
 	expanded: boolean
 	toggleExpanded: () => void
-	examples?: ExampleIndex
+	examples?: FileDefinition[]
 	appResources: ResourceTreeData[]
 }
 
@@ -30,10 +30,6 @@ export type AddTableHandler = (
 	fileType: DataFormat,
 	shape: DataShape,
 ) => void
-
-export interface ExampleIndex {
-	examples: FileDefinition[]
-}
 
 export interface FileDefinition {
 	name: string
