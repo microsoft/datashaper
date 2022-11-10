@@ -1,0 +1,14 @@
+releases:
+  "@datashaper/app-framework": patch
+  "@datashaper/react": patch
+  "@datashaper/schema": patch
+  "@datashaper/stories": patch
+
+declined:
+  - "@datashaper/webapp"
+
+undecided:
+  - "@datashaper/tables"
+  - "@datashaper/utilities"
+  - "@datashaper/verb-guidance"
+  - "@datashaper/workflow"
