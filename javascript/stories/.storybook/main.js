@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-assignment */
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 const ResolveTypescriptPlugin = require('resolve-typescript-plugin')
 const path = require('path')
 
 module.exports = {
-	stories: [
-		path.join(__dirname, '../src/**/*.stories.mdx'),
-		path.join(__dirname, '../src/**/*.stories.@(js|jsx|ts|tsx)'),
-	],
-	staticDirs: [path.join(__dirname, '../src/__tests__/public')],
+	stories: ['../../*/src/**/*.stories.@(mdx|js|jsx|ts|tsx)'],
+	staticDirs: [path.join(__dirname, '../../react/src/__tests__/public')],
 	addons: [
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
@@ -34,6 +34,12 @@ module.exports = {
 
 		if (!config.resolve) {
 			config.resolve = {}
+		}
+
+		config.resolve.alias = {
+			...(config.resolve.alias || {}),
+			'styled-components': require.resolve('styled-components'),
+			hsluv: require.resolve('hsluv'),
 		}
 
 		// resolve files ending with .ts

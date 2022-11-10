@@ -1851,11 +1851,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/react@workspace:javascript/react"
   dependencies:
-    "@babel/core": ^7.19.6
-    "@babel/plugin-proposal-optional-chaining": ^7.18.9
-    "@babel/preset-env": ^7.19.4
-    "@babel/preset-react": ^7.18.6
-    "@babel/preset-typescript": ^7.18.6
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"
     "@datashaper/utilities": "workspace:^"
@@ -1867,41 +1862,25 @@ __metadata:
     "@essex/styled-components": ^0.0.4
     "@essex/tsconfig-base": ^1.0.2
     "@fluentui/font-icons-mdl2": ^8.5.3
-    "@fluentui/react": ^8.101.0
-    "@fluentui/react-hooks": ^8.6.13
-    "@fluentui/utilities": ^8.13.3
-    "@mdx-js/react": ^1.6.22
-    "@open-wc/webpack-import-meta-loader": ^0.4.7
-    "@storybook/addon-actions": ^6.5.13
-    "@storybook/addon-docs": ^6.5.13
-    "@storybook/addon-essentials": ^6.5.13
-    "@storybook/addon-interactions": ^6.5.13
-    "@storybook/addon-links": ^6.5.13
-    "@storybook/builder-webpack4": ^6.5.13
-    "@storybook/manager-webpack4": ^6.5.13
-    "@storybook/react": ^6.5.13
-    "@storybook/testing-library": ^0.0.13
-    "@thematic/core": ^3.1.1
-    "@thematic/d3": ^2.0.14
-    "@thematic/fluent": ^4.1.1
-    "@thematic/react": ^2.1.1
-    "@types/babel__core": ^7.1.19
-    "@types/babel__preset-env": ^7.9.2
+    "@fluentui/react": ^8.98.7
+    "@fluentui/react-hooks": ^8.6.12
+    "@fluentui/utilities": ^8.13.2
+    "@thematic/core": ^3.1.0
+    "@thematic/d3": ^2.0.13
+    "@thematic/fluent": ^4.1.0
+    "@thematic/react": ^2.1.0
     "@types/d3-format": ^3.0.1
     "@types/debug": ^4.1.7
     "@types/lodash": ^4.14.186
     "@types/lodash-es": ^4.17.6
     "@types/node": ^18.11.5
-    "@types/open-wc__webpack-import-meta-loader": ^0.4.2
-    "@types/react": ^18.0.25
+    "@types/react": ^18.0.23
     "@types/react-dom": ^18.0.7
     "@types/react-is": ^17.0.3
-    "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.26
     add: ^2.0.6
     ahooks: ^3.7.2
     arquero: ^5.1.0
-    babel-loader: ^8.2.5
     d3-format: ^3.1.0
     debug: ^4.3.4
     immer: ^9.0.16
@@ -1911,7 +1890,6 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-if: ^4.1.4
-    resolve-typescript-plugin: ^1.2.0
     rxjs: ^7.5.7
     styled-components: ^5.3.6
     tslib: ^2.4.0
@@ -1947,6 +1925,49 @@ __metadata:
     typescript: ^4.8.4
     typescript-json-schema: ^0.54.0
     uuid: ^9.0.0
+  languageName: unknown
+  linkType: soft
+
+"@datashaper/stories@workspace:javascript/stories":
+  version: 0.0.0-use.local
+  resolution: "@datashaper/stories@workspace:javascript/stories"
+  dependencies:
+    "@babel/core": ^7.19.6
+    "@babel/plugin-proposal-optional-chaining": ^7.18.9
+    "@babel/preset-env": ^7.19.4
+    "@babel/preset-react": ^7.18.6
+    "@babel/preset-typescript": ^7.18.6
+    "@datashaper/react": "workspace:^"
+    "@datashaper/webapp": "workspace:^"
+    "@essex/scripts": ^22.1.0
+    "@essex/tsconfig-base": ^1.0.2
+    "@fluentui/font-icons-mdl2": ^8.5.2
+    "@fluentui/react": ^8.98.7
+    "@fluentui/react-hooks": ^8.6.12
+    "@fluentui/utilities": ^8.13.2
+    "@mdx-js/react": ^1.6.22
+    "@open-wc/webpack-import-meta-loader": ^0.4.7
+    "@storybook/addon-actions": ^6.5.13
+    "@storybook/addon-docs": ^6.5.13
+    "@storybook/addon-essentials": ^6.5.13
+    "@storybook/addon-interactions": ^6.5.13
+    "@storybook/addon-links": ^6.5.13
+    "@storybook/builder-webpack4": ^6.5.13
+    "@storybook/manager-webpack4": ^6.5.13
+    "@storybook/react": ^6.5.13
+    "@storybook/testing-library": ^0.0.13
+    "@thematic/core": ^3.1.0
+    "@thematic/d3": ^2.0.13
+    "@thematic/fluent": ^4.1.0
+    "@thematic/react": ^2.1.0
+    "@types/open-wc__webpack-import-meta-loader": ^0.4.2
+    arquero: ^5.1.0
+    babel-loader: ^8.2.5
+    hsluv: ^1.0.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    resolve-typescript-plugin: ^1.2.0
+    styled-components: ^5.3.5
   languageName: unknown
   linkType: soft
 
@@ -2014,7 +2035,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@datashaper/webapp@workspace:javascript/webapp":
+"@datashaper/webapp@workspace:^, @datashaper/webapp@workspace:javascript/webapp":
   version: 0.0.0-use.local
   resolution: "@datashaper/webapp@workspace:javascript/webapp"
   dependencies:
@@ -2594,7 +2615,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/font-icons-mdl2@npm:^8.5.3":
+"@fluentui/font-icons-mdl2@npm:^8.5.2, @fluentui/font-icons-mdl2@npm:^8.5.3":
   version: 8.5.3
   resolution: "@fluentui/font-icons-mdl2@npm:8.5.3"
   dependencies:
@@ -2658,7 +2679,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react-hooks@npm:^8.6.13":
+"@fluentui/react-hooks@npm:^8.6.12, @fluentui/react-hooks@npm:^8.6.13":
   version: 8.6.13
   resolution: "@fluentui/react-hooks@npm:8.6.13"
   dependencies:
@@ -2698,7 +2719,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/react@npm:^8.101.0":
+"@fluentui/react@npm:^8.101.0, @fluentui/react@npm:^8.98.7":
   version: 8.101.0
   resolution: "@fluentui/react@npm:8.101.0"
   dependencies:
@@ -2780,7 +2801,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluentui/utilities@npm:^8.13.1, @fluentui/utilities@npm:^8.13.3":
+"@fluentui/utilities@npm:^8.13.1, @fluentui/utilities@npm:^8.13.2, @fluentui/utilities@npm:^8.13.3":
   version: 8.13.3
   resolution: "@fluentui/utilities@npm:8.13.3"
   dependencies:
@@ -5110,7 +5131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/core@npm:^3.1.1":
+"@thematic/core@npm:^3.1.0, @thematic/core@npm:^3.1.1":
   version: 3.1.1
   resolution: "@thematic/core@npm:3.1.1"
   dependencies:
@@ -5130,7 +5151,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/d3@npm:^2.0.14":
+"@thematic/d3@npm:^2.0.13, @thematic/d3@npm:^2.0.14":
   version: 2.0.14
   resolution: "@thematic/d3@npm:2.0.14"
   dependencies:
@@ -5152,7 +5173,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/fluent@npm:^4.1.1":
+"@thematic/fluent@npm:^4.1.0, @thematic/fluent@npm:^4.1.1":
   version: 4.1.1
   resolution: "@thematic/fluent@npm:4.1.1"
   dependencies:
@@ -5179,7 +5200,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thematic/react@npm:^2.1.1":
+"@thematic/react@npm:^2.1.0, @thematic/react@npm:^2.1.1":
   version: 2.1.1
   resolution: "@thematic/react@npm:2.1.1"
   dependencies:
@@ -5249,7 +5270,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/babel__core@npm:^7.1.14, @types/babel__core@npm:^7.1.19":
+"@types/babel__core@npm:^7.1.14":
   version: 7.1.20
   resolution: "@types/babel__core@npm:7.1.20"
   dependencies:
@@ -5268,13 +5289,6 @@ __metadata:
   dependencies:
     "@babel/types": ^7.0.0
   checksum: 20effbbb5f8a3a0211e95959d06ae70c097fb6191011b73b38fe86deebefad8e09ee014605e0fd3cdaedc73d158be555866810e9166e1f09e4cfd880b874dcb0
-  languageName: node
-  linkType: hard
-
-"@types/babel__preset-env@npm:^7.9.2":
-  version: 7.9.2
-  resolution: "@types/babel__preset-env@npm:7.9.2"
-  checksum: a905ed92a3f602384966153e74a94790425e98af54e392a7fcfb5c5ded2f2a58c49a9fa64a0cb506fbffb8169ad25b56ea87983c812a4fb880f0716668c8c085
   languageName: node
   linkType: hard
 
@@ -5868,7 +5882,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.25":
+"@types/react@npm:*, @types/react@npm:^18.0.23, @types/react@npm:^18.0.25":
   version: 18.0.25
   resolution: "@types/react@npm:18.0.25"
   dependencies:
@@ -19240,7 +19254,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^5.3.6":
+"styled-components@npm:^5.3.5, styled-components@npm:^5.3.6":
   version: 5.3.6
   resolution: "styled-components@npm:5.3.6"
   dependencies:
