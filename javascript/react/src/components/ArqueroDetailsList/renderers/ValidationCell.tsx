@@ -24,15 +24,18 @@ import {
 /**
  * Basic rendering of text values.
  */
+
+const hostStyles: Partial<ITooltipHostStyles> = {
+	root: { display: 'inline-block' },
+}
+const calloutProps = { gapSpace: 0 }
+
 export const ValidationCell: React.FC<FormattedCellProps> = memo(
 	function TextCell({ item, column, textAlign = 'left', validationResult }) {
 		const value = getValue(item, column)
 		const style = useTextAlignStyle(textAlign)
-		const hostStyles: Partial<ITooltipHostStyles> = {
-			root: { display: 'inline-block' },
-		}
+
 		const tooltipId = useId('tooltip')
-		const calloutProps = { gapSpace: 0 }
 
 		const iconProps = useIconProps(validationResult)
 		const validationIconProps = useValidationIconProps(

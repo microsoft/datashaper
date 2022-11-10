@@ -31,7 +31,6 @@ export const ColumnValidationStory: ComponentStory<
 		element => element.name === 'Name',
 	)
 	const nameConstraints: Constraints = {
-		maxLength: 5,
 		enum: ['Microsoft', 'Apple', 'Google'],
 	}
 
