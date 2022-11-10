@@ -94,6 +94,7 @@
 		"@types/react": "^18.0.23",
 		"@types/react-dom": "^18.0.7",
 		"@types/react-is": "^17.0.3",
+		"@types/react-router-dom": "^5.3.3",
 		"@types/styled-components": "^5.1.26",
 		"add": "^2.0.6",
 		"arquero": "^5.1.0",
