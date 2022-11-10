@@ -1,0 +1,15 @@
+node_modules/
+storybook-static/
+docs/
+docsTemp/
+build/
+dist/
+lib/
+coverage/
+public/
+.cache/
+node_modules/
+build.js
+yarn.lock
+.*ignore
+.*rc
