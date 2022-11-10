@@ -14,7 +14,7 @@ export const Content = styled.article`
 	max-height: 100%;
 	max-width: 100%;
 `
-export function useFileTreeStyle() {
+export function useFileTreeStyle(): React.CSSProperties {
 	const theme = useTheme()
 	return useMemo(
 		() => ({
