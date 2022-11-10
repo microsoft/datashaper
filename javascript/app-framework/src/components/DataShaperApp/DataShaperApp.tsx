@@ -4,34 +4,15 @@
  */
 import { useBoolean } from '@fluentui/react-hooks'
 import { useDebounceFn } from 'ahooks'
-import { type AllotmentHandle,Allotment } from 'allotment'
+import { type AllotmentHandle, Allotment } from 'allotment'
 import { memo, useCallback, useRef } from 'react'
 
-import type {
-	FileDefinition,
-	ResourceTreeData} from '../resources/index.js';
-import {
-	FileTree
-} from '../resources/index.js'
-import { Content,useFileTreeStyle } from './DataShaperApp.styles.js'
+import { FileTree } from '../resources/index.js'
+import { Content, useFileTreeStyle } from './DataShaperApp.styles.js'
+import type { DataShaperAppProps } from './DataShaperApp.types.js'
 
 const PANE_EXPANDED_SIZE = 300
 const PANE_COLLAPSED_SIZE = 60
-
-export interface DataShaperAppProps {
-	examples?: FileDefinition[]
-
-	/**
-	 * The application resources to render in the file tree.
-	 * TODO: this should be handled internally
-	 */
-	appResources: ResourceTreeData
-	/**
-	 * The child node to render
-	 * TODO: handle this internally
-	 */
-	children: React.ReactNode
-}
 
 const emptyArray = Object.freeze([]) as any
 
@@ -43,8 +24,8 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 	}) {
 		const fileTreeStyle = useFileTreeStyle()
 		const ref = useRef<AllotmentHandle | null>(null)
-		const [expanded, { toggle: toggleExpanded }] = useBoolean(true)
 
+		const [expanded, { toggle: toggleExpanded }] = useBoolean(true)
 		const onToggle = useCallback(() => {
 			if (expanded) {
 				ref?.current?.resize([60])
@@ -56,7 +37,7 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 
 		const changeWidth = useCallback(
 			(sizes: number[]) => {
-				const [menuSize] = sizes
+				const menuSize = sizes[0] ?? 0
 				if ((menuSize < 150 && expanded) || (menuSize > 150 && !expanded)) {
 					toggleExpanded()
 				}

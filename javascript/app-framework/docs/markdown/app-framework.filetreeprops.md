@@ -16,7 +16,7 @@ export interface FileTreeProps
 |  --- | --- | --- | --- |
 |  [appResources](./app-framework.filetreeprops.appresources.md) |  | [ResourceTreeData](./app-framework.resourcetreedata.md)<!-- -->\[\] |  |
 |  [className?](./app-framework.filetreeprops.classname.md) |  | string | <i>(Optional)</i> |
-|  [examples?](./app-framework.filetreeprops.examples.md) |  | [ExampleIndex](./app-framework.exampleindex.md) | <i>(Optional)</i> |
+|  [examples?](./app-framework.filetreeprops.examples.md) |  | [FileDefinition](./app-framework.filedefinition.md)<!-- -->\[\] | <i>(Optional)</i> |
 |  [expanded](./app-framework.filetreeprops.expanded.md) |  | boolean |  |
 |  [selectedFileId?](./app-framework.filetreeprops.selectedfileid.md) |  | string | <i>(Optional)</i> |
 |  [style?](./app-framework.filetreeprops.style.md) |  | React.CSSProperties | <i>(Optional)</i> |
