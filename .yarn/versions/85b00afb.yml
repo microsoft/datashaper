@@ -3,12 +3,10 @@ releases:
   "@datashaper/react": patch
   "@datashaper/schema": patch
   "@datashaper/stories": patch
+  "@datashaper/tables": patch
+  "@datashaper/utilities": patch
+  "@datashaper/verb-guidance": patch
+  "@datashaper/workflow": patch
 
 declined:
   - "@datashaper/webapp"
-
-undecided:
-  - "@datashaper/tables"
-  - "@datashaper/utilities"
-  - "@datashaper/verb-guidance"
-  - "@datashaper/workflow"
