@@ -14,7 +14,7 @@ export interface FileTreeProps
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [appLinks](./app-framework.filetreeprops.applinks.md) |  | [ResourceTreeData](./app-framework.resourcetreedata.md)<!-- -->\[\] |  |
+|  [appResources](./app-framework.filetreeprops.appresources.md) |  | [ResourceTreeData](./app-framework.resourcetreedata.md)<!-- -->\[\] |  |
 |  [className?](./app-framework.filetreeprops.classname.md) |  | string | <i>(Optional)</i> |
 |  [examples?](./app-framework.filetreeprops.examples.md) |  | [ExampleIndex](./app-framework.exampleindex.md) | <i>(Optional)</i> |
 |  [expanded](./app-framework.filetreeprops.expanded.md) |  | boolean |  |

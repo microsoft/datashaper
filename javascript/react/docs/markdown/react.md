@@ -83,6 +83,7 @@
 |  [ArqueroTableHeaderProps](./react.arquerotableheaderprops.md) |  |
 |  [ArqueroTableHeaderStyles](./react.arquerotableheaderstyles.md) |  |
 |  [ColumnOptions](./react.columnoptions.md) |  |
+|  [CommandBarColors](./react.commandbarcolors.md) |  |
 |  [DetailsListFeatures](./react.detailslistfeatures.md) |  |
 |  [GroupedVerbs](./react.groupedverbs.md) |  |
 |  [GuidanceProps](./react.guidanceprops.md) |  |

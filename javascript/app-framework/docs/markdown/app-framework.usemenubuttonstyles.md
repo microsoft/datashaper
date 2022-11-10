@@ -7,13 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function useMenuButtonStyles(): {
-    root: {
-        background: string;
-    };
-};
+export declare function useMenuButtonStyles(): IButtonStyles;
 ```
 <b>Returns:</b>
 
-{ root: { background: string; }; }
+IButtonStyles
 

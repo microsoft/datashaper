@@ -1325,12 +1325,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#appLinks:member",
+              "canonicalReference": "@datashaper/app-framework!FileTreeProps#appResources:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "appLinks: "
+                  "text": "appResources: "
                 },
                 {
                   "kind": "Reference",
@@ -1349,7 +1349,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "appLinks",
+              "name": "appResources",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
@@ -3282,8 +3282,9 @@
               "text": "export declare function useMenuButtonStyles(): "
             },
             {
-              "kind": "Content",
-              "text": "{\n    root: {\n        background: string;\n    };\n}"
+              "kind": "Reference",
+              "text": "IButtonStyles",
+              "canonicalReference": "@fluentui/react!IButtonStyles:interface"
             },
             {
               "kind": "Content",

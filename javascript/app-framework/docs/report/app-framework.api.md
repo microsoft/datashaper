@@ -16,6 +16,7 @@ import { DataPackage } from '@datashaper/workflow';
 import type { DataShape } from '@datashaper/schema/dist/datatable/DataShape.js';
 import type { DataTable } from '@datashaper/workflow';
 import { FunctionComponent } from 'react';
+import type { IButtonStyles } from '@fluentui/react';
 import { IChoiceGroupProps } from '@fluentui/react';
 import type { IChoiceGroupStyleProps } from '@fluentui/react';
 import type { IChoiceGroupStyles } from '@fluentui/react';
@@ -156,7 +157,7 @@ export const FileTree: React.FC<FileTreeProps>;
 // @public (undocumented)
 export interface FileTreeProps {
     // (undocumented)
-    appLinks: ResourceTreeData[];
+    appResources: ResourceTreeData[];
     // (undocumented)
     className?: string;
     // (undocumented)
@@ -395,11 +396,7 @@ export function useDataTableSource(pkg: DataTable | undefined): Maybe<ColumnTabl
 // Warning: (ae-missing-release-tag) "useMenuButtonStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useMenuButtonStyles(): {
-    root: {
-        background: string;
-    };
-};
+export function useMenuButtonStyles(): IButtonStyles;
 
 // Warning: (ae-missing-release-tag) "usePersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
