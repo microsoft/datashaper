@@ -41,7 +41,7 @@
 		"@essex/charts-react": "^1.1.2",
 		"@essex/components": "^3.1.0",
 		"@essex/styled-components": "^0.0.4",
-		"@fluentui/font-icons-mdl2": "^8.5.2",
+		"@fluentui/font-icons-mdl2": "^8.5.3",
 		"ahooks": "^3.7.2",
 		"d3-format": "^3.1.0",
 		"debug": "^4.3.4",

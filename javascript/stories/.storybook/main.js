@@ -39,6 +39,7 @@ module.exports = {
 		config.resolve.alias = {
 			...(config.resolve.alias || {}),
 			'styled-components': require.resolve('styled-components'),
+			hsluv: require.resolve('hsluv'),
 		}
 
 		// resolve files ending with .ts

@@ -1,0 +1,4 @@
+declined:
+  - "@datashaper/app-framework"
+  - "@datashaper/react"
+  - "@datashaper/stories"
