@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-assignment */
+/*!
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project.
+ */
 const ResolveTypescriptPlugin = require('resolve-typescript-plugin')
 const path = require('path')
 
