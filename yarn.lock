@@ -1794,29 +1794,42 @@ __metadata:
     "@fluentui/react": ^8.101.0
     "@fluentui/react-hooks": ^8.6.13
     "@fluentui/utilities": ^8.13.3
+    "@fluentui/web-components": ^2.5.8
+    "@microsoft/fast-element": ^1.11.0
+    "@microsoft/fast-foundation": ^2.47.0
+    "@microsoft/fast-react-wrapper": ^0.3.15
     "@monaco-editor/react": ^4.4.6
     "@types/debug": ^4.1.7
+    "@types/lodash-es": ^4.17.6
     "@types/node": ^18.11.5
     "@types/react": ^18.0.25
     "@types/react-dom": ^18.0.7
+    "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.26
     add: ^2.0.6
     ahooks: ^3.7.2
     arquero: ^5.1.0
     babel-loader: ^8.2.5
     debug: ^4.3.4
+    lodash-es: ^4.17.21
     observable-hooks: ^4.2.1
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-router-dom: ^6.3.0
     resolve-typescript-plugin: ^1.2.0
     rxjs: ^7.5.7
     styled-components: ^5.3.6
     tslib: ^2.4.0
     typescript: ^4.8.4
+    yarn: ^1.22.19
   peerDependencies:
     "@fluentui/react": ^8.24.0
     "@fluentui/react-hooks": ^8.2.4
     "@fluentui/utilities": ^8.2.1
+    "@thematic/core": "*"
+    "@thematic/d3": "*"
+    "@thematic/fluent": "*"
+    "@thematic/react": "*"
     arquero: ^5.1.0
     react: ^17.0.2
     styled-components: ^5.3.0
@@ -2816,6 +2829,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fluentui/web-components@npm:^2.5.8":
+  version: 2.5.8
+  resolution: "@fluentui/web-components@npm:2.5.8"
+  dependencies:
+    "@microsoft/fast-colors": ^5.3.0
+    "@microsoft/fast-element": ^1.11.0
+    "@microsoft/fast-foundation": ^2.47.0
+    "@microsoft/fast-web-utilities": ^5.4.0
+    tslib: ^1.13.0
+  checksum: 0522789e377605051be9285fb006ce83eceb565cfae8b0a91081b0ce938976e1a01f4c9d72b11972f0761938116c2566b0656fe4019fd98e1ed6b2882ede2d8f
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1, @gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -3407,6 +3433,53 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@microsoft/fast-colors@npm:^5.3.0":
+  version: 5.3.1
+  resolution: "@microsoft/fast-colors@npm:5.3.1"
+  checksum: ff87f402faadb4b5aeee3d27762566c11807f927cd4012b8bbc7f073ca68de0e2197f95330ff5dfd7038f4b4f0e2f51b11feb64c5d570f5c598d37850a5daf60
+  languageName: node
+  linkType: hard
+
+"@microsoft/fast-element@npm:^1.11.0":
+  version: 1.11.0
+  resolution: "@microsoft/fast-element@npm:1.11.0"
+  checksum: 1fab25a7956cd40e0b51d7bbd01b57e620e140634abac83826b51ceac5b5c2ac4b1343e1e2253bf319a8f6f7a8391a2465e3b88d8a906029b17e05a6dfdd462c
+  languageName: node
+  linkType: hard
+
+"@microsoft/fast-foundation@npm:^2.47.0":
+  version: 2.47.0
+  resolution: "@microsoft/fast-foundation@npm:2.47.0"
+  dependencies:
+    "@microsoft/fast-element": ^1.11.0
+    "@microsoft/fast-web-utilities": ^5.4.1
+    tabbable: ^5.2.0
+    tslib: ^1.13.0
+  checksum: 065a70bf7399f068a876c9b78d9c2e3474fe764cb9865635a55474b47020329f6f0a7f5e2aba6abe9076e7fe6868028852b7460e6c099d5b669fa5c4a8613762
+  languageName: node
+  linkType: hard
+
+"@microsoft/fast-react-wrapper@npm:^0.3.15":
+  version: 0.3.15
+  resolution: "@microsoft/fast-react-wrapper@npm:0.3.15"
+  dependencies:
+    "@microsoft/fast-element": ^1.11.0
+    "@microsoft/fast-foundation": ^2.47.0
+  peerDependencies:
+    react: ">=16.9.0"
+  checksum: d00f2979eb061c3a1ec2e0b724cb054eb51a1010826e35d4add3d3f4acc4d855859bb176c46f15b49b3c3b1f10c156a255e39cf1402eed52bc28fc8bd5b80af9
+  languageName: node
+  linkType: hard
+
+"@microsoft/fast-web-utilities@npm:^5.4.0, @microsoft/fast-web-utilities@npm:^5.4.1":
+  version: 5.4.1
+  resolution: "@microsoft/fast-web-utilities@npm:5.4.1"
+  dependencies:
+    exenv-es6: ^1.1.1
+  checksum: 303e87847f962944f474e3716c3eb305668243916ca9e0719e26bb9a32346144bc958d915c103776b3e552cea0f0f6233f839fad66adfdf96a8436b947288ca7
+  languageName: node
+  linkType: hard
+
 "@microsoft/load-themed-styles@npm:^1.10.26":
   version: 1.10.295
   resolution: "@microsoft/load-themed-styles@npm:1.10.295"
@@ -3608,6 +3681,13 @@ __metadata:
     webpack-plugin-serve:
       optional: true
   checksum: 48d8b2813dfba7d482e58a2b0161b79e3a5d608603f1a3c34d709ecc2e6e08f8b14f79934c57849d06f153eb327f18e3d8e1539f978e40ca91539c342f27b8ae
+  languageName: node
+  linkType: hard
+
+"@remix-run/router@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@remix-run/router@npm:1.0.3"
+  checksum: 7e535f3c24bf6b0a48aff3de70ee74e5402fe93105aa9bd01f275d5d8f5a9a8a7cadec08d18cf5544d4f24bc9d7a091abc1c9d4ea8efb2893e9077f104a51459
   languageName: node
   linkType: hard
 
@@ -11039,6 +11119,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"exenv-es6@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "exenv-es6@npm:1.1.1"
+  checksum: 7f2aa12025e6f06c48dc286f380cf3183bb19c6017b36d91695034a3e5124a7235c4f8ff24ca2eb88ae801322f0f99605cedfcfd996a5fcbba7669320e2a448e
+  languageName: node
+  linkType: hard
+
 "exit@npm:^0.1.2":
   version: 0.1.2
   resolution: "exit@npm:0.1.2"
@@ -17351,6 +17438,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-router-dom@npm:^6.3.0":
+  version: 6.4.3
+  resolution: "react-router-dom@npm:6.4.3"
+  dependencies:
+    "@remix-run/router": 1.0.3
+    react-router: 6.4.3
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 67a44d8dc45761a1c88793cac73839bb657168ef61b9473eb39b186b4a3ea1472454fd96f8997dc541cb1e79a723d62f9503cbc9179b63b8f1d634ed6d2b079a
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.4.3":
+  version: 6.4.3
+  resolution: "react-router@npm:6.4.3"
+  dependencies:
+    "@remix-run/router": 1.0.3
+  peerDependencies:
+    react: ">=16.8"
+  checksum: b89c0495c6837b1457915c08c5acc4eb7a2e9e3fae0420faf9bfc6311ecdfe78627cc1034c0e975bccd9aeeb70d1dcc5021322779dd3053d94c47e37339d77eb
+  languageName: node
+  linkType: hard
+
 "react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
@@ -19363,6 +19474,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tabbable@npm:^5.2.0":
+  version: 5.3.3
+  resolution: "tabbable@npm:5.3.3"
+  checksum: 1aa56e1bb617cc10616c407f4e756f0607f3e2d30f9803664d70b85db037ca27e75918ed1c71443f3dc902e21dc9f991ce4b52d63a538c9b69b3218d3babcd70
+  languageName: node
+  linkType: hard
+
 "table-layout@npm:^1.0.2":
   version: 1.0.2
   resolution: "table-layout@npm:1.0.2"
@@ -19841,7 +19959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.10.0, tslib@npm:^1.8.1, tslib@npm:^1.9.3":
+"tslib@npm:^1.10.0, tslib@npm:^1.13.0, tslib@npm:^1.8.1, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
@@ -21326,6 +21444,16 @@ __metadata:
     y18n: ^5.0.5
     yargs-parser: ^21.1.1
   checksum: 47da1b0d854fa16d45a3ded57b716b013b2179022352a5f7467409da5a04a1eef5b3b3d97a2dfc13e8bbe5f2ffc0afe3bc6a4a72f8254e60f5a4bd7947138643
+  languageName: node
+  linkType: hard
+
+"yarn@npm:^1.22.19":
+  version: 1.22.19
+  resolution: "yarn@npm:1.22.19"
+  bin:
+    yarn: bin/yarn.js
+    yarnpkg: bin/yarn.js
+  checksum: b43d2cc5fee7e933beb12a8aee7dfceca9e9ef2dd17c5d04d15a12ab7bec5f5744ea34a07b86e013da7f291a18c4e1ad8f70e150f5ed2f4666e6723c7f0a8452
   languageName: node
   linkType: hard
 
