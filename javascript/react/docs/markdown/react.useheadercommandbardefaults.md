@@ -18,7 +18,7 @@ export declare function useHeaderCommandBarDefaults(props?: Partial<ICommandBarP
 |  --- | --- | --- |
 |  props | Partial&lt;ICommandBarProps&gt; | <i>(Optional)</i> |
 |  far | boolean | <i>(Optional)</i> |
-|  colors | Partial&lt;CommandBarColors&gt; | <i>(Optional)</i> |
+|  colors | Partial&lt;[CommandBarColors](./react.commandbarcolors.md)<!-- -->&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -10,21 +10,31 @@ import type { ArqueroDetailsListProps } from '@datashaper/react';
 import type { BaseFile } from '@datashaper/utilities';
 import type ColumnTable from 'arquero/dist/types/table/column-table.js';
 import { Context } from 'react';
-import type { DataOrientation } from '@datashaper/schema';
+import type { DataFormat } from '@datashaper/schema';
+import { DataOrientation } from '@datashaper/schema';
 import { DataPackage } from '@datashaper/workflow';
+import type { DataShape } from '@datashaper/schema/dist/datatable/DataShape.js';
 import type { DataTable } from '@datashaper/workflow';
 import { FunctionComponent } from 'react';
+import type { IButtonStyles } from '@fluentui/react';
 import { IChoiceGroupProps } from '@fluentui/react';
 import type { IChoiceGroupStyleProps } from '@fluentui/react';
 import type { IChoiceGroupStyles } from '@fluentui/react';
 import type { ICommandBarItemProps } from '@fluentui/react';
 import type { IStyleFunctionOrObject } from '@fluentui/react';
 import { ITextFieldProps } from '@fluentui/react';
+import type { ITooltipHostProps } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
+import type { ParserOptions } from '@datashaper/schema';
 import type { ResourceHandler } from '@datashaper/workflow';
 import type { ResourceSchema } from '@datashaper/schema';
 import { StyledComponent } from 'styled-components';
 import type { TableContainer } from '@datashaper/tables';
+
+// Warning: (ae-missing-release-tag) "AddTableHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AddTableHandler = (parser: ParserOptions, file: BaseFile, table: TableContainer, fileType: DataFormat, shape: DataShape) => void;
 
 // Warning: (ae-missing-release-tag) "AppResourceHandler" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -102,6 +112,78 @@ export class DefaultPersistenceService implements PersistenceService {
     save(projectName?: string): Promise<void>;
 }
 
+// Warning: (ae-missing-release-tag) "ExampleIndex" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ExampleIndex {
+    // (undocumented)
+    examples: FileDefinition[];
+}
+
+// Warning: (ae-missing-release-tag) "FileDefinition" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FileDefinition {
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    url: string;
+}
+
+// Warning: (ae-missing-release-tag) "FileName" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const FileName: React.FC<FileNameProps>;
+
+// Warning: (ae-missing-release-tag) "FileNameProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FileNameProps {
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    path?: string;
+    // (undocumented)
+    setName: (name: string) => void;
+}
+
+// Warning: (ae-missing-release-tag) "FileTree" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const FileTree: React.FC<FileTreeProps>;
+
+// Warning: (ae-missing-release-tag) "FileTreeProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FileTreeProps {
+    // (undocumented)
+    appResources: ResourceTreeData[];
+    // (undocumented)
+    className?: string;
+    // (undocumented)
+    examples?: ExampleIndex;
+    // (undocumented)
+    expanded: boolean;
+    // (undocumented)
+    selectedFileId?: string;
+    // (undocumented)
+    style?: React.CSSProperties;
+    // (undocumented)
+    toggleExpanded: () => void;
+}
+
+// Warning: (ae-missing-release-tag) "FileTreeTypes" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface FileTreeTypes {
+    // (undocumented)
+    className?: string;
+    // (undocumented)
+    selectedFileId?: string;
+    // (undocumented)
+    style?: React.CSSProperties;
+}
+
 // Warning: (ae-missing-release-tag) "HeadersOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -126,6 +208,16 @@ export interface JsonEditorProps {
     // (undocumented)
     onChange: (content: string | undefined) => void;
 }
+
+// Warning: (ae-missing-release-tag) "loadCsvTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function loadCsvTable(file: BaseFile, options?: ParserOptions): Promise<ColumnTable>;
+
+// Warning: (ae-missing-release-tag) "loadJsonTable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function loadJsonTable(file: BaseFile, orientation: DataOrientation): Promise<ColumnTable>;
 
 // Warning: (ae-missing-release-tag) "OtherTextField" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -205,6 +297,21 @@ export interface RawTableViewerProps {
     dataTable: DataTable;
 }
 
+// Warning: (ae-missing-release-tag) "removeExtension" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function removeExtension(fileName: string): string;
+
+// Warning: (ae-missing-release-tag) "ResourceTreeData" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface ResourceTreeData {
+    children?: ResourceTreeData[];
+    icon?: string;
+    route: string;
+    title: string;
+}
+
 // Warning: (ae-missing-release-tag) "TableDelimiterOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -251,6 +358,11 @@ export const TableStoreProvider: React.FC<{
     children: JSX.Element;
 }>;
 
+// Warning: (ae-missing-release-tag) "Tooltip" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const Tooltip: React.FC<React.PropsWithChildren<ITooltipHostProps>>;
+
 // Warning: (ae-missing-release-tag) "useDataPackage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -284,11 +396,7 @@ export function useDataTableSource(pkg: DataTable | undefined): Maybe<ColumnTabl
 // Warning: (ae-missing-release-tag) "useMenuButtonStyles" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function useMenuButtonStyles(): {
-    root: {
-        background: string;
-    };
-};
+export function useMenuButtonStyles(): IButtonStyles;
 
 // Warning: (ae-missing-release-tag) "usePersistenceService" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

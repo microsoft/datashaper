@@ -21,6 +21,9 @@
 
 |  Function | Description |
 |  --- | --- |
+|  [loadCsvTable(file, options)](./app-framework.loadcsvtable.md) |  |
+|  [loadJsonTable(file, orientation)](./app-framework.loadjsontable.md) |  |
+|  [removeExtension(fileName)](./app-framework.removeextension.md) |  |
 |  [useDataPackage()](./app-framework.usedatapackage.md) |  |
 |  [useDatasetMenuItems(selected, onClick)](./app-framework.usedatasetmenuitems.md) |  |
 |  [useDataTable(name)](./app-framework.usedatatable.md) |  |
@@ -36,11 +39,17 @@
 |  --- | --- |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
+|  [ExampleIndex](./app-framework.exampleindex.md) |  |
+|  [FileDefinition](./app-framework.filedefinition.md) |  |
+|  [FileNameProps](./app-framework.filenameprops.md) |  |
+|  [FileTreeProps](./app-framework.filetreeprops.md) |  |
+|  [FileTreeTypes](./app-framework.filetreetypes.md) |  |
 |  [JsonEditorProps](./app-framework.jsoneditorprops.md) |  |
 |  [ParserOptionsEditorProps](./app-framework.parseroptionseditorprops.md) |  |
 |  [PersistenceService](./app-framework.persistenceservice.md) | The Persistence Service available in the application. This service is responsible for saving and loading data packages. |
 |  [RawTableProps](./app-framework.rawtableprops.md) |  |
 |  [RawTableViewerProps](./app-framework.rawtableviewerprops.md) |  |
+|  [ResourceTreeData](./app-framework.resourcetreedata.md) | Data attached to resource-tree nodes |
 |  [TableEditorProps](./app-framework.tableeditorprops.md) |  |
 |  [ViewOptionsProps](./app-framework.viewoptionsprops.md) |  |
 |  [WorkflowEditorProps](./app-framework.workfloweditorprops.md) |  |
@@ -54,6 +63,8 @@
 |  [Container](./app-framework.container.md) |  |
 |  [DataPackageContext](./app-framework.datapackagecontext.md) |  |
 |  [DataSourceEditor](./app-framework.datasourceeditor.md) |  |
+|  [FileName](./app-framework.filename.md) |  |
+|  [FileTree](./app-framework.filetree.md) |  |
 |  [HeadersOption](./app-framework.headersoption.md) |  |
 |  [JsonEditor](./app-framework.jsoneditor.md) |  |
 |  [OtherTextField](./app-framework.othertextfield.md) |  |
@@ -69,7 +80,14 @@
 |  [TableLayoutOptions](./app-framework.tablelayoutoptions.md) |  |
 |  [TablePreview](./app-framework.tablepreview.md) |  |
 |  [TableStoreProvider](./app-framework.tablestoreprovider.md) |  |
+|  [Tooltip](./app-framework.tooltip.md) |  |
 |  [viewOptions](./app-framework.viewoptions.md) |  |
 |  [ViewOptions](./app-framework.viewoptions.md) |  |
 |  [WorkflowEditor](./app-framework.workfloweditor.md) |  |
+
+## Type Aliases
+
+|  Type Alias | Description |
+|  --- | --- |
+|  [AddTableHandler](./app-framework.addtablehandler.md) |  |
 
