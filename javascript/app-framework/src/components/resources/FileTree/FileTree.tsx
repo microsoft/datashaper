@@ -24,12 +24,9 @@ import {
 	tooltipStyles,
 	useCommandbarStyles,
 } from './FileTree.styles.js'
-import type { ExampleIndex, FileTreeProps } from './FileTree.types.js'
+import type { FileTreeProps } from './FileTree.types.js'
 import { TreeItems } from './TreeItems.js'
 
-const EMPTY_INDEX: ExampleIndex = Object.freeze({
-	examples: [],
-})
 const emptyArray: any[] = Object.freeze([]) as any
 
 export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
@@ -37,7 +34,7 @@ export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
 	className,
 	expanded,
 	toggleExpanded,
-	examples = EMPTY_INDEX,
+	examples = emptyArray,
 	appResources = emptyArray,
 }) {
 	const [file, setFile] = useState<BaseFile | undefined>()

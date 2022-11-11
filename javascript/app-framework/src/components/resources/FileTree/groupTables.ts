@@ -12,11 +12,7 @@ import type {
 } from '@fluentui/react'
 
 import { icons } from './FileTree.styles.js'
-import type {
-	ExampleIndex,
-	FileDefinition,
-	ResourceTreeData,
-} from './FileTree.types.js'
+import type { FileDefinition, ResourceTreeData } from './FileTree.types.js'
 
 function qs(args: Record<string, string>): string {
 	return Object.entries(args)
@@ -112,7 +108,7 @@ function bundleNode(
 }
 
 export function openProps(
-	examples: ExampleIndex,
+	examples: FileDefinition[],
 	onClickExample: (example: FileDefinition) => void,
 	onClickUploadTable: () => void,
 	onClickUploadZip: () => void,
@@ -134,7 +130,7 @@ export function openProps(
 			key: 'examples',
 			text: 'Example',
 			subMenuProps: {
-				items: examples.examples.map(example => ({
+				items: examples.map(example => ({
 					key: example.name,
 					text: example.name,
 					onClick: () => onClickExample(example),

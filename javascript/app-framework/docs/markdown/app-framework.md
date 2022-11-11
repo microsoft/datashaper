@@ -39,7 +39,6 @@
 |  --- | --- |
 |  [CodebookEditorProps](./app-framework.codebookeditorprops.md) |  |
 |  [DataSourceEditorProps](./app-framework.datasourceeditorprops.md) |  |
-|  [ExampleIndex](./app-framework.exampleindex.md) |  |
 |  [FileDefinition](./app-framework.filedefinition.md) |  |
 |  [FileNameProps](./app-framework.filenameprops.md) |  |
 |  [FileTreeProps](./app-framework.filetreeprops.md) |  |
@@ -62,6 +61,7 @@
 |  [CodebookEditor](./app-framework.codebookeditor.md) |  |
 |  [Container](./app-framework.container.md) |  |
 |  [DataPackageContext](./app-framework.datapackagecontext.md) |  |
+|  [DataShaperApp](./app-framework.datashaperapp.md) |  |
 |  [DataSourceEditor](./app-framework.datasourceeditor.md) |  |
 |  [FileName](./app-framework.filename.md) |  |
 |  [FileTree](./app-framework.filetree.md) |  |

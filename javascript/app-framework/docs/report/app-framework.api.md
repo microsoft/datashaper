@@ -88,6 +88,12 @@ export const Container: StyledComponent<"div", any, {}, never>;
 // @public (undocumented)
 export const DataPackageContext: Context<DataPackage>;
 
+// Warning: (ae-forgotten-export) The symbol "DataShaperAppProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "DataShaperApp" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const DataShaperApp: React.FC<DataShaperAppProps>;
+
 // Warning: (ae-missing-release-tag) "DataSourceEditor" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -110,14 +116,6 @@ export class DefaultPersistenceService implements PersistenceService {
     load(pkg: BaseFile): Promise<void>;
     // (undocumented)
     save(projectName?: string): Promise<void>;
-}
-
-// Warning: (ae-missing-release-tag) "ExampleIndex" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface ExampleIndex {
-    // (undocumented)
-    examples: FileDefinition[];
 }
 
 // Warning: (ae-missing-release-tag) "FileDefinition" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -161,7 +159,7 @@ export interface FileTreeProps {
     // (undocumented)
     className?: string;
     // (undocumented)
-    examples?: ExampleIndex;
+    examples?: FileDefinition[];
     // (undocumented)
     expanded: boolean;
     // (undocumented)

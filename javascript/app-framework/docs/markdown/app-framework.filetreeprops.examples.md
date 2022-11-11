@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-examples?: ExampleIndex;
+examples?: FileDefinition[];
 ```
