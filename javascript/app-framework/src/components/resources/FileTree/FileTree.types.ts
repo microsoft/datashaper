@@ -14,7 +14,7 @@ export interface FileTreeProps {
 	expanded: boolean
 	toggleExpanded: () => void
 	examples?: ExampleIndex
-	appLinks: ResourceTreeData[]
+	appResources: ResourceTreeData[]
 }
 
 export interface FileTreeTypes {

@@ -6,5 +6,5 @@ import type { FileTreeProps } from './FileTree.types.js'
 
 export interface TreeItemsProps {
 	expanded: boolean
-	appLinks: FileTreeProps['appLinks']
+	appLinks: FileTreeProps['appResources']
 }
