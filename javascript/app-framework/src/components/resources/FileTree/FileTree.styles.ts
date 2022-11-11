@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { IStyle } from '@fluentui/react'
+import type { ICommandBarStyles, IStyle } from '@fluentui/react'
 import {
 	CommandBar,
 	CommandBarButton,
@@ -81,7 +81,7 @@ export const icons = {
 	closeExpandedView: { iconName: 'DoubleChevronLeft12' },
 }
 
-export function useCommandbarStyles() {
+export function useCommandbarStyles(): ICommandBarStyles {
 	const theme = useTheme()
 	return useMemo(
 		() => ({

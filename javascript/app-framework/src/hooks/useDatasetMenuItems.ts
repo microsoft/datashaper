@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { ICommandBarItemProps } from '@fluentui/react'
+import type { IButtonStyles, ICommandBarItemProps } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
 
@@ -37,7 +37,7 @@ export function useDatasetMenuItems(
 	)
 }
 
-export function useMenuButtonStyles() {
+export function useMenuButtonStyles(): IButtonStyles {
 	const theme = useTheme()
 	return useMemo(
 		() => ({

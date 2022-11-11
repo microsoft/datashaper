@@ -2,7 +2,12 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-
+import type {
+	ArqueroTableHeaderStyles,
+	CommandBarColors,
+	TableCommandsProps,
+} from '@datashaper/react'
+import type { ToolPanelStyles } from '@essex/components'
 import type { ITheme } from '@fluentui/react'
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
@@ -36,7 +41,7 @@ export const buttonStyles = {
 	},
 }
 
-export function useTableHeaderColors() {
+export function useTableHeaderColors(): Partial<CommandBarColors> {
 	const theme = useTheme()
 	return useMemo(
 		() => ({
@@ -47,7 +52,7 @@ export function useTableHeaderColors() {
 	)
 }
 
-export function useTableHeaderStyles() {
+export function useTableHeaderStyles(): ArqueroTableHeaderStyles {
 	const colors = useTableHeaderColors()
 	return useMemo(
 		() => ({
@@ -60,7 +65,7 @@ export function useTableHeaderStyles() {
 	)
 }
 
-export function useTableCommandProps() {
+export function useTableCommandProps(): Partial<TableCommandsProps> {
 	const colors = useTableHeaderColors()
 	return useMemo(
 		() => ({
@@ -77,7 +82,7 @@ export function useTableCommandProps() {
 	)
 }
 
-export function useToolPanelStyles() {
+export function useToolPanelStyles(): ToolPanelStyles {
 	const colors = useTableHeaderColors()
 	return useMemo(
 		() => ({
