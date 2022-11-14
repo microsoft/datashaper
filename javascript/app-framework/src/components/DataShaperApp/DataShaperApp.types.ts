@@ -11,7 +11,7 @@ export interface DataShaperAppProps {
 	 * The application resources to render in the file tree.
 	 * TODO: this should be handled internally
 	 */
-	appResources: ResourceTreeData
+	appResources: ResourceTreeData[]
 	/**
 	 * The child node to render
 	 * TODO: handle this internally
