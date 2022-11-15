@@ -7,11 +7,19 @@ import type {
 	ValidationResult,
 	ValidationTestResult,
 } from '@datashaper/schema'
+import { useMemo } from 'react'
 
 export function useValidationRenderer(
 	value: any,
 	validationResult?: ValidationResult,
 ): ValidationTestResult[] {
+	return useMemo(
+		() => getResults(value, validationResult),
+		[value, validationResult],
+	)
+}
+
+const getResults = (value: any, validationResult?: ValidationResult) => {
 	const resultTestValidationList: ValidationTestResult[] = []
 
 	validationResult.errors.map((e: FieldError) => {

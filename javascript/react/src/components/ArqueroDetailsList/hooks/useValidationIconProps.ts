@@ -4,16 +4,19 @@
  */
 import type { ValidationResult } from '@datashaper/schema'
 import type { IIconStyles } from '@fluentui/react'
+import { useMemo } from 'react'
 
 export function useValidationIconProps(
 	iconProps: IIconStyles,
 	validationResult?: ValidationResult,
 ): any {
-	return {
-		styles: iconProps,
-		iconName:
-			validationResult !== undefined && validationResult.errors.length > 0
-				? 'Warning'
-				: null,
-	}
+	return useMemo(() => {
+		return {
+			styles: iconProps,
+			iconName:
+				validationResult !== undefined && validationResult.errors.length > 0
+					? 'Warning'
+					: null,
+		}
+	}, [iconProps, validationResult])
 }
