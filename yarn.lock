@@ -1779,7 +1779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@datashaper/app-framework@workspace:javascript/app-framework":
+"@datashaper/app-framework@workspace:^, @datashaper/app-framework@workspace:javascript/app-framework":
   version: 0.0.0-use.local
   resolution: "@datashaper/app-framework@workspace:javascript/app-framework"
   dependencies:
@@ -1820,6 +1820,7 @@ __metadata:
     observable-hooks: ^4.2.1
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-if: ^4.1.4
     resolve-typescript-plugin: ^1.2.0
     rxjs: ^7.5.7
     styled-components: ^5.3.6
@@ -2058,6 +2059,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@datashaper/webapp@workspace:javascript/webapp"
   dependencies:
+    "@datashaper/app-framework": "workspace:^"
     "@datashaper/react": "workspace:^"
     "@datashaper/schema": "workspace:^"
     "@datashaper/tables": "workspace:^"
@@ -2088,6 +2090,7 @@ __metadata:
     "@types/styled-components": ^5.1.26
     "@uifabric/icons": ^7.9.5
     ahooks: ^3.7.2
+    allotment: ^1.17.0
     arquero: ^5.1.0
     chroma-js: 2.4.2
     debug: ^4.3.4

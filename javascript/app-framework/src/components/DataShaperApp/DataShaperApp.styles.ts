@@ -5,15 +5,7 @@
 
 import { useTheme } from '@fluentui/react'
 import { useMemo } from 'react'
-import styled from 'styled-components'
 
-export const Content = styled.article`
-	flex: 1;
-	display: flex;
-	overflow: hidden;
-	max-height: 100%;
-	max-width: 100%;
-`
 export function useFileTreeStyle(): React.CSSProperties {
 	const theme = useTheme()
 	return useMemo(

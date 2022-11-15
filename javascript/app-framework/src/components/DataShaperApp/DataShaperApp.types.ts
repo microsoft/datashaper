@@ -8,27 +8,20 @@ import type { FileDefinition, ResourceTreeData } from '../resources/index.js'
 
 export interface DataShaperAppProps {
 	/**
-	 * CSS ID Property
-	 */
-	id?: string
-
-	/**
 	 * CSS Classname
 	 */
 	className?: string
 
 	/**
-	 * CSS Inline Style
+	 * Examples to provide
 	 */
-	style?: React.CSSProperties
-
 	examples?: FileDefinition[]
 
 	/**
 	 * The application resources to render in the file tree.
 	 * TODO: this should be handled internally
 	 */
-	appResources: ResourceTreeData[]
+	appResources?: ResourceTreeData[]
 	/**
 	 * The child node to render
 	 * TODO: handle this internally
@@ -38,10 +31,15 @@ export interface DataShaperAppProps {
 	/**
 	 * The currently selected route
 	 */
-	selectedRoute?: string
+	selectedKey?: string
 
 	/**
 	 * Handle selection of a resource tree item
 	 */
 	onSelect?: (resource: ResourceTreeData) => void
+
+	/**
+	 * Custom resource renderers
+	 */
+	handlers?: Record<string, React.ComponentType<{ args: string[] }>>
 }

@@ -29,6 +29,7 @@
 		"lint": "essex lint --fix"
 	},
 	"dependencies": {
+		"@datashaper/app-framework": "workspace:^",
 		"@datashaper/react": "workspace:^",
 		"@datashaper/schema": "workspace:^",
 		"@datashaper/tables": "workspace:^",
@@ -49,6 +50,7 @@
 		"@types/lodash": "^4.14.188",
 		"@uifabric/icons": "^7.9.5",
 		"ahooks": "^3.7.2",
+		"allotment": "^1.17.0",
 		"arquero": "^5.1.0",
 		"chroma-js": "2.4.2",
 		"debug": "^4.3.4",
