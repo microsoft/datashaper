@@ -18,7 +18,9 @@ export interface FileTreeProps
 |  [className?](./app-framework.filetreeprops.classname.md) |  | string | <i>(Optional)</i> |
 |  [examples?](./app-framework.filetreeprops.examples.md) |  | [FileDefinition](./app-framework.filedefinition.md)<!-- -->\[\] | <i>(Optional)</i> |
 |  [expanded](./app-framework.filetreeprops.expanded.md) |  | boolean |  |
+|  [onSelect?](./app-framework.filetreeprops.onselect.md) |  | (resource: [ResourceTreeData](./app-framework.resourcetreedata.md)<!-- -->) =&gt; void | <i>(Optional)</i> |
 |  [selectedFileId?](./app-framework.filetreeprops.selectedfileid.md) |  | string | <i>(Optional)</i> |
+|  [selectedRoute?](./app-framework.filetreeprops.selectedroute.md) |  | string | <i>(Optional)</i> |
 |  [style?](./app-framework.filetreeprops.style.md) |  | React.CSSProperties | <i>(Optional)</i> |
 |  [toggleExpanded](./app-framework.filetreeprops.toggleexpanded.md) |  | () =&gt; void |  |
 

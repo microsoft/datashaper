@@ -1430,6 +1430,42 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!FileTreeProps#onSelect:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onSelect?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(resource: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceTreeData",
+                  "canonicalReference": "@datashaper/app-framework!ResourceTreeData:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "onSelect",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/app-framework!FileTreeProps#selectedFileId:member",
               "docComment": "",
               "excerptTokens": [
@@ -1450,6 +1486,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "selectedFileId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/app-framework!FileTreeProps#selectedRoute:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "selectedRoute?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "selectedRoute",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
