@@ -23,7 +23,6 @@ export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 		[onSelect],
 	)
 
-	console.log('ITEMS', items)
 	return (
 		<TreeView>
 			{items.map((i: ResourceTreeData) => (
