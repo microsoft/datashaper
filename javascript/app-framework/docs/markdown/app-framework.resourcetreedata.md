@@ -18,6 +18,6 @@ export interface ResourceTreeData
 |  --- | --- | --- | --- |
 |  [children?](./app-framework.resourcetreedata.children.md) |  | [ResourceTreeData](./app-framework.resourcetreedata.md)<!-- -->\[\] | <i>(Optional)</i> Child node Data |
 |  [icon?](./app-framework.resourcetreedata.icon.md) |  | string | <i>(Optional)</i> The icon to use in the file tree |
-|  [route](./app-framework.resourcetreedata.route.md) |  | string | The unique node idw |
+|  [key](./app-framework.resourcetreedata.key.md) |  | string | The unique node key |
 |  [title](./app-framework.resourcetreedata.title.md) |  | string | The node text to use. Default=id |
 

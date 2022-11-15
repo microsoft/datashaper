@@ -1493,12 +1493,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!FileTreeProps#selectedRoute:member",
+              "canonicalReference": "@datashaper/app-framework!FileTreeProps#selectedKey:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "selectedRoute?: "
+                  "text": "selectedKey?: "
                 },
                 {
                   "kind": "Content",
@@ -1512,7 +1512,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "selectedRoute",
+              "name": "selectedKey",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -2678,12 +2678,12 @@
             },
             {
               "kind": "PropertySignature",
-              "canonicalReference": "@datashaper/app-framework!ResourceTreeData#route:member",
-              "docComment": "/**\n * The unique node idw\n */\n",
+              "canonicalReference": "@datashaper/app-framework!ResourceTreeData#key:member",
+              "docComment": "/**\n * The unique node key\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "route: "
+                  "text": "key: "
                 },
                 {
                   "kind": "Content",
@@ -2697,7 +2697,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "route",
+              "name": "key",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
