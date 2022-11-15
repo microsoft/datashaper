@@ -7,21 +7,20 @@ import { memo, useCallback } from 'react'
 
 import { Tooltip } from '../../util/index.js'
 import { ItemIcon, tooltipStyles, TreeItem } from './FileTree.styles.js'
-import { useCurrentPath } from './TreeItems.hooks.js'
 import type { TreeNodeProps } from './TreeNode.types.js'
 
 export const TreeNode: React.FC<TreeNodeProps> = memo(function TreeNode({
 	node,
 	selected,
 	onSelectItem,
+	selectedRoute,
 	expanded,
 }) {
-	const currentPath = useCurrentPath()
 	const treeItemStyle = { textAlign: !expanded ? 'center' : 'inherit' }
 	const itemIconStyle = { marginRight: expanded ? '10px' : '23px' }
 
 	const children = node.children?.map(child => {
-		const selected = child.route === currentPath
+		const selected = child.route === selectedRoute
 		return (
 			<TreeNode
 				expanded={expanded}

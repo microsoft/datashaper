@@ -31,6 +31,7 @@ export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 					key={i.route}
 					node={i}
 					selected={i.route === selectedRoute}
+					selectedRoute={selectedRoute}
 					onSelectItem={handleSelect}
 				/>
 			))}
@@ -41,6 +42,7 @@ export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 					key={i.route}
 					node={i}
 					selected={selectedRoute?.includes(i.route)}
+					selectedRoute={selectedRoute}
 					onSelectItem={handleSelect}
 				/>
 			))}
