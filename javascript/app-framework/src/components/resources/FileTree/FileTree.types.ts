@@ -15,6 +15,8 @@ export interface FileTreeProps {
 	toggleExpanded: () => void
 	examples?: FileDefinition[]
 	appResources: ResourceTreeData[]
+	selectedRoute?: string
+	onSelect?: (resource: ResourceTreeData) => void
 }
 
 export interface FileTreeTypes {

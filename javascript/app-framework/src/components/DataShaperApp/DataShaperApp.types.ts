@@ -2,9 +2,26 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
+import type React from 'react'
+
 import type { FileDefinition, ResourceTreeData } from '../resources/index.js'
 
 export interface DataShaperAppProps {
+	/**
+	 * CSS ID Property
+	 */
+	id?: string
+
+	/**
+	 * CSS Classname
+	 */
+	className?: string
+
+	/**
+	 * CSS Inline Style
+	 */
+	style?: React.CSSProperties
+
 	examples?: FileDefinition[]
 
 	/**
@@ -17,4 +34,14 @@ export interface DataShaperAppProps {
 	 * TODO: handle this internally
 	 */
 	children: React.ReactNode
+
+	/**
+	 * The currently selected route
+	 */
+	selectedRoute?: string
+
+	/**
+	 * Handle selection of a resource tree item
+	 */
+	onSelect?: (resource: ResourceTreeData) => void
 }

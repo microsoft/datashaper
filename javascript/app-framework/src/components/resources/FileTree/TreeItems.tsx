@@ -3,25 +3,26 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { Separator } from '@fluentui/react'
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 
 import { TreeView } from './FileTree.styles.js'
 import type { ResourceTreeData } from './FileTree.types.js'
-import {
-	useCurrentPath,
-	useOnSelectItem,
-	useTreeItems,
-} from './TreeItems.hooks.js'
+import { useTreeItems } from './TreeItems.hooks.js'
 import type { TreeItemsProps } from './TreeItems.types.js'
 import { TreeNode } from './TreeNode.js'
 
 export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 	expanded,
 	appLinks,
+	selectedRoute,
+	onSelect,
 }) {
 	const items = useTreeItems()
-	const currentPath = useCurrentPath()
-	const onSelectItem = useOnSelectItem()
+	const handleSelect = useCallback(
+		(item: ResourceTreeData) => onSelect?.(item),
+		[onSelect],
+	)
+
 	return (
 		<TreeView>
 			{items.map((i: ResourceTreeData) => (
@@ -29,8 +30,8 @@ export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 					expanded={expanded}
 					key={i.route}
 					node={i}
-					selected={i.route === currentPath}
-					onSelectItem={onSelectItem}
+					selected={i.route === selectedRoute}
+					onSelectItem={handleSelect}
 				/>
 			))}
 			{items.length > 0 ? <Separator /> : null}
@@ -39,8 +40,8 @@ export const TreeItems: React.FC<TreeItemsProps> = memo(function TreeItems({
 					expanded={expanded}
 					key={i.route}
 					node={i}
-					selected={currentPath.includes(i.route)}
-					onSelectItem={onSelectItem}
+					selected={selectedRoute?.includes(i.route)}
+					onSelectItem={handleSelect}
 				/>
 			))}
 		</TreeView>
