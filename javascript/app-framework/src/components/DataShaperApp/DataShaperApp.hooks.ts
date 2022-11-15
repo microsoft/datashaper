@@ -10,7 +10,7 @@ export function useOnToggle(
 	ref: React.MutableRefObject<AllotmentHandle | null>,
 	expanded: boolean,
 	toggleExpanded: () => void,
-) {
+): () => void {
 	return useCallback(() => {
 		if (expanded) {
 			ref?.current?.resize([60])
