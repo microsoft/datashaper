@@ -4,7 +4,7 @@
  */
 import 'allotment/dist/style.css'
 
-import { type ResourceTreeData,DataShaperApp } from '@datashaper/app-framework'
+import { type ResourceTreeData, DataShaperApp } from '@datashaper/app-framework'
 import { Spinner } from '@fluentui/react'
 import { memo, Suspense, useCallback, useState } from 'react'
 import { RecoilRoot } from 'recoil'
@@ -32,7 +32,6 @@ export const App: React.FC = memo(function App() {
 							>
 								<div></div>
 							</DataShaperApp>
-							{/* <PrepareDataPage /> */}
 						</Layout>
 					</StyleContext>
 				</Suspense>
