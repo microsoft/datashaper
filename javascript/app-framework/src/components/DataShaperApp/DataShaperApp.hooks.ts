@@ -18,7 +18,7 @@ export function useOnToggle(
 			ref?.current?.reset()
 		}
 		toggleExpanded()
-	}, [expanded, toggleExpanded])
+	}, [ref, expanded, toggleExpanded])
 }
 
 export function useOnChangeWidth(

@@ -5,15 +5,7 @@
 import { useBoolean } from '@fluentui/react-hooks'
 import { type AllotmentHandle, Allotment } from 'allotment'
 import { memo, useRef } from 'react'
-import { Else, If, Switch,Then } from 'react-if'
 
-import {
-	CodebookEditor,
-	DataSourceEditor,
-	RawTableViewer,
-	TableEditor,
-	WorkflowEditor,
-} from '../editors/index.js'
 import { FileTree } from '../resources/index.js'
 import { ContentSelector } from './ContentSelector.js'
 import {
