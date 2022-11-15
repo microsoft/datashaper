@@ -113,7 +113,7 @@ export function openProps(
 	onClickUploadTable: () => void,
 	onClickUploadZip: () => void,
 ): IContextualMenuItem[] {
-	return [
+	const result: IContextualMenuItem[] = [
 		{
 			key: 'csv',
 			text: 'CSV File',
@@ -126,7 +126,9 @@ export function openProps(
 			iconProps: icons.project,
 			onClick: onClickUploadZip,
 		},
-		{
+	]
+	if (examples.length > 0) {
+		result.push({
 			key: 'examples',
 			text: 'Example',
 			subMenuProps: {
@@ -136,8 +138,9 @@ export function openProps(
 					onClick: () => onClickExample(example),
 				})),
 			},
-		},
-	]
+		})
+	}
+	return result
 }
 
 export function saveProps(

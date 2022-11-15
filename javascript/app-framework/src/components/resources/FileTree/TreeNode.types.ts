@@ -8,5 +8,6 @@ export interface TreeNodeProps {
 	node: ResourceTreeData
 	expanded: boolean
 	selected?: boolean
+	selectedRoute?: string
 	onSelectItem: (item: ResourceTreeData) => void
 }

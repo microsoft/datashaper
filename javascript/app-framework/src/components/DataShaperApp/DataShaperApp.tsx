@@ -18,9 +18,14 @@ const emptyArray = Object.freeze([]) as any
 
 export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 	function DataShaperApp({
+		id,
+		className,
+		style,
 		examples = emptyArray,
 		children,
 		appResources = emptyArray,
+		selectedRoute,
+		onSelect,
 	}) {
 		const fileTreeStyle = useFileTreeStyle()
 		const ref = useRef<AllotmentHandle | null>(null)
@@ -53,7 +58,7 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 		)
 
 		return (
-			<Content>
+			<Content id={id} style={style} className={className}>
 				<Allotment
 					onChange={onChangeWidth}
 					proportionalLayout={false}
@@ -71,6 +76,8 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 							style={fileTreeStyle}
 							appResources={appResources}
 							examples={examples}
+							selectedRoute={selectedRoute}
+							onSelect={onSelect}
 						/>
 					</Allotment.Pane>
 					<Allotment.Pane>{children}</Allotment.Pane>

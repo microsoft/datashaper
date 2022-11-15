@@ -26,6 +26,7 @@ import { ITextFieldProps } from '@fluentui/react';
 import type { ITooltipHostProps } from '@fluentui/react';
 import type { Maybe } from '@datashaper/workflow';
 import type { ParserOptions } from '@datashaper/schema';
+import type { default as React_2 } from 'react';
 import type { ResourceHandler } from '@datashaper/workflow';
 import type { ResourceSchema } from '@datashaper/schema';
 import { StyledComponent } from 'styled-components';
@@ -163,7 +164,11 @@ export interface FileTreeProps {
     // (undocumented)
     expanded: boolean;
     // (undocumented)
+    onSelect?: (resource: ResourceTreeData) => void;
+    // (undocumented)
     selectedFileId?: string;
+    // (undocumented)
+    selectedRoute?: string;
     // (undocumented)
     style?: React.CSSProperties;
     // (undocumented)

@@ -3,8 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 import { useObservableState } from 'observable-hooks'
-import { useCallback, useMemo } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useMemo } from 'react'
 import { map } from 'rxjs'
 
 import { useDataPackage } from '../../../hooks/useDataPackage.js'
@@ -18,17 +17,4 @@ export function useTreeItems(): ResourceTreeData[] {
 		[pkg],
 	)
 	return useObservableState(observable, () => [])
-}
-
-export function useCurrentPath(): string {
-	const location = useLocation()
-	return useMemo(() => `${location.pathname}${location.search}`, [location])
-}
-
-export function useOnSelectItem(): ({ route }: ResourceTreeData) => void {
-	const navigate = useNavigate()
-	return useCallback(
-		({ route }: ResourceTreeData) => navigate(`${route}`),
-		[navigate],
-	)
 }

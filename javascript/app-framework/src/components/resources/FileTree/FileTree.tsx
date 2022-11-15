@@ -36,6 +36,8 @@ export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
 	toggleExpanded,
 	examples = emptyArray,
 	appResources = emptyArray,
+	selectedRoute,
+	onSelect,
 }) {
 	const [file, setFile] = useState<BaseFile | undefined>()
 	const onOpenFileRequested = useOnOpenFileRequested()
@@ -80,7 +82,12 @@ export const FileTree: React.FC<FileTreeProps> = memo(function FileTree({
 					</>
 				)}
 
-				<TreeItems expanded={expanded} appLinks={appResources} />
+				<TreeItems
+					expanded={expanded}
+					appLinks={appResources}
+					selectedRoute={selectedRoute}
+					onSelect={onSelect}
+				/>
 			</MenuContainer>
 			<Tooltip
 				directionalHint={DirectionalHint.rightCenter}
