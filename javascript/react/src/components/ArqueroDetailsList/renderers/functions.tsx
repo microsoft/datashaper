@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Field } from '@datashaper/schema'
+import type { Field, ValidationResult } from '@datashaper/schema'
 import type {
 	IColumn,
 	IDetailsColumnProps,
@@ -26,6 +26,7 @@ export const createRenderSmartCell = (
 	color?: string,
 	onSelect?: ColumnSelectFunction,
 	onCellDropdownSelect?: DropdownOptionSelect,
+	validationResult?: ValidationResult,
 ): ColumnRenderFunction =>
 	function renderSmartCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -37,6 +38,7 @@ export const createRenderSmartCell = (
 				color={color}
 				onSelect={onSelect}
 				onCellDropdownSelect={onCellDropdownSelect}
+				validationResult={validationResult}
 			/>
 		)
 	}
@@ -47,6 +49,7 @@ export const createRenderFeaturesCell = (
 	color?: string,
 	onSelect?: ColumnSelectFunction,
 	onCellDropdownSelect?: DropdownOptionSelect,
+	validationResult?: ValidationResult,
 ): ColumnRenderFunction =>
 	function renderDropdownCell(item?: any, index?: number, column?: IColumn) {
 		return (
@@ -59,6 +62,7 @@ export const createRenderFeaturesCell = (
 				field={field}
 				color={color}
 				features={features}
+				validationResult={validationResult}
 			/>
 		)
 	}
@@ -94,6 +98,7 @@ export const createRenderColumnHeader = (
 export const createRenderDefaultColumnHeader = (
 	originalProps: Partial<IColumn>,
 	sortable: boolean,
+	validationResult?: ValidationResult,
 	onSelect?: ColumnSelectFunction,
 	onSort?: ColumnSelectFunction,
 ): IRenderFunction<IDetailsColumnProps> =>
@@ -108,6 +113,7 @@ export const createRenderDefaultColumnHeader = (
 				sortable={sortable}
 				onSelect={onSelect}
 				onSort={onSort}
+				validationResult={validationResult}
 			/>
 		)
 	}

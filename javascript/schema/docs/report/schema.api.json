@@ -4627,6 +4627,38 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@datashaper/schema!FieldError#callbackFunction:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "callbackFunction?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(values: unknown, includeInstances: boolean) => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ValidationTestResult",
+                  "canonicalReference": "@datashaper/schema!ValidationTestResult:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "callbackFunction",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@datashaper/schema!FieldError#indexes:member",
               "docComment": "",
               "excerptTokens": [

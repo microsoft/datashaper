@@ -3,7 +3,7 @@
  * Licensed under the MIT license. See LICENSE file in the project.
  */
 
-import type { Field } from '@datashaper/schema'
+import type { Field, ValidationResult } from '@datashaper/schema'
 import type {
 	IColumn,
 	IDetailsColumnProps,
@@ -26,6 +26,7 @@ export interface FormattedCellProps extends ColumnCellProps {
 	numberFormat?: string
 	color?: string
 	virtual?: boolean
+	validationResult?: ValidationResult
 }
 
 /**
@@ -58,6 +59,7 @@ export interface RichCellProps extends FormattedCellProps {
 	field?: Field
 	onSelect?: ColumnSelectFunction
 	onCellDropdownSelect?: DropdownOptionSelect
+	validationResult?: ValidationResult
 }
 
 export interface RichHeaderProps extends IDetailsColumnProps {

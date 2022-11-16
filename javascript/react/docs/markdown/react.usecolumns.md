@@ -9,7 +9,7 @@ Overlays a number of special features onto the IColumn objects for a table. This
 <b>Signature:</b>
 
 ```typescript
-export declare function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnSelectFunction, onSort?: ColumnSelectFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
+export declare function useColumns(table: ColumnTable, validationResult?: ValidationResult, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnSelectFunction, onSort?: ColumnSelectFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ export declare function useColumns(table: ColumnTable, metadata?: TableMetadata,
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  table | ColumnTable |  |
+|  validationResult | ValidationResult | <i>(Optional)</i> |
 |  metadata | TableMetadata | <i>(Optional)</i> |
 |  columns | IColumn\[\] | <i>(Optional)</i> |
 |  onColumnSelect | [ColumnSelectFunction](./react.columnselectfunction.md) | <i>(Optional)</i> |

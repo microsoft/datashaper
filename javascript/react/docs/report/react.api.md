@@ -23,6 +23,7 @@ import type { IDetailsListProps } from '@fluentui/react';
 import type { IDetailsListStyles } from '@fluentui/react';
 import type { IDetailsRowProps } from '@fluentui/react';
 import type { IDropdownOption } from '@fluentui/react';
+import type { IIconStyles } from '@fluentui/react';
 import type { InputColumnRecordArgs } from '@datashaper/schema';
 import type { IRenderFunction } from '@fluentui/react';
 import type { IRenderFunction as IRenderFunction_2 } from '@fluentui/utilities';
@@ -33,6 +34,8 @@ import { SortDirection } from '@datashaper/schema';
 import type { Step } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
+import type { ValidationResult } from '@datashaper/schema';
+import type { ValidationTestResult } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
 
@@ -69,6 +72,8 @@ export interface ArqueroDetailsListProps extends Omit<IDetailsListProps, 'items'
     style?: CSSProperties;
     // (undocumented)
     table: ColumnTable;
+    // (undocumented)
+    validationResult?: ValidationResult;
 }
 
 // Warning: (ae-missing-release-tag) "ArqueroTableHeader" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -448,7 +453,7 @@ export function useColumnNamesList(table: ColumnTable, columns?: IColumn[]): str
 // Warning: (ae-missing-release-tag) "useColumns" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
-export function useColumns(table: ColumnTable, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnSelectFunction, onSort?: ColumnSelectFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
+export function useColumns(table: ColumnTable, validationResult?: ValidationResult, metadata?: TableMetadata, columns?: IColumn[], onColumnSelect?: ColumnSelectFunction, onSort?: ColumnSelectFunction, options?: ColumnOptions, virtualColumns?: IColumn[]): IColumn[];
 
 // Warning: (ae-missing-release-tag) "useColumnsMetadata" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -510,6 +515,11 @@ export function useDropdownChangeHandler<T extends object | void | unknown>(step
 // @public (undocumented)
 export function useFormattedNumber(value: number | undefined, formatter?: string): string;
 
+// Warning: (ae-missing-release-tag) "useGetColumnValidationErrors" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useGetColumnValidationErrors(validationResult?: ValidationResult): string;
+
 // Warning: (ae-missing-release-tag) "useGroupHeaderRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -519,6 +529,11 @@ export function useGroupHeaderRenderer(table: ColumnTable, computedMetadata?: Ta
 //
 // @public
 export function useHeaderCommandBarDefaults(props?: Partial<ICommandBarProps>, far?: boolean, colors?: Partial<CommandBarColors>): ICommandBarProps;
+
+// Warning: (ae-missing-release-tag) "useIconProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useIconProps(validationResult?: ValidationResult): any;
 
 // Warning: (ae-missing-release-tag) "useIncrementingColumnColorScale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -654,6 +669,16 @@ export function useTableDropdownOptions(workflow?: Workflow): IDropdownOption[];
 //
 // @public (undocumented)
 export function useTextFieldChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, updated: string | undefined) => void, onChange?: StepChangeFunction<T>): TextFieldChangeHandler;
+
+// Warning: (ae-missing-release-tag) "useValidationIconProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useValidationIconProps(iconProps: IIconStyles, validationResult?: ValidationResult): any;
+
+// Warning: (ae-missing-release-tag) "useValidationRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useValidationRenderer(value: any, validationResult?: ValidationResult): ValidationTestResult[];
 
 // Warning: (ae-missing-release-tag) "useWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
