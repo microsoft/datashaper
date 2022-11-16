@@ -20,14 +20,16 @@ export interface ContentSelectorProps {
 	args?: string[]
 	handlers?: Record<string, React.ComponentType<{ args: string[] }>>
 }
+
+const emptyArray = Object.freeze([]) as any
 export const ContentSelector: React.FC<ContentSelectorProps> = memo(
 	function ContentSelector({ handler, args, handlers }) {
 		if (handler != null) {
 			const defaultHandler = DEFAULT_HANDLERS[handler]
-			if (args == null || args.length === 0) {
-				throw new Error('no table name provided')
-			}
 			if (defaultHandler != null) {
+				if (args == null || args.length === 0) {
+					throw new Error('no table name provided')
+				}
 				return (
 					<DataTableHandler
 						renderer={defaultHandler}
@@ -37,7 +39,7 @@ export const ContentSelector: React.FC<ContentSelectorProps> = memo(
 			} else if (handlers != null) {
 				const CustomHandler = handlers[handler]
 				if (CustomHandler != null) {
-					return <CustomHandler args={args} />
+					return <CustomHandler args={args ?? emptyArray} />
 				}
 			}
 			return <div>Could not render content for handler type {handler}.</div>
