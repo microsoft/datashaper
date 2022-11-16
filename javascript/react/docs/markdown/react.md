@@ -70,6 +70,7 @@
 |  [useTableDropdownOptions(workflow)](./react.usetabledropdownoptions.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
 |  [useTextFieldChangeHandler(step, updateFn, onChange)](./react.usetextfieldchangehandler.md) |  |
 |  [useValidationIconProps(iconProps, validationResult)](./react.usevalidationiconprops.md) |  |
+|  [useValidationRenderer(value, validationResult)](./react.usevalidationrenderer.md) |  |
 |  [useWorkflow(input, inputs)](./react.useworkflow.md) |  |
 |  [useWorkflowDataTable(id, workflow, existingTable)](./react.useworkflowdatatable.md) |  |
 |  [useWorkflowInputTableNames(workflow)](./react.useworkflowinputtablenames.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |

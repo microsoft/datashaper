@@ -22,11 +22,13 @@ export function useValidationRenderer(
 const getResults = (value: any, validationResult?: ValidationResult) => {
 	const resultTestValidationList: ValidationTestResult[] = []
 
-	validationResult.errors.map((e: FieldError) => {
-		if (e.callbackFunction !== undefined) {
-			resultTestValidationList.push(e.callbackFunction([value], false))
-		}
-	})
+	if (validationResult !== undefined) {
+		validationResult.errors.map((e: FieldError) => {
+			if (e.callbackFunction !== undefined) {
+				resultTestValidationList.push(e.callbackFunction([value], false))
+			}
+		})
+	}
 
 	return resultTestValidationList
 }

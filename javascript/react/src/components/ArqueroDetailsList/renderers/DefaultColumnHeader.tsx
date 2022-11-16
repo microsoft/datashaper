@@ -66,7 +66,13 @@ export const DefaultColumnHeader: React.FC<DefaultColumnHeaderProps> = memo(
 		return (
 			/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 			<div style={containerStyle}>
-				<When condition={iconName && validationResult.errors.length === 0}>
+				<When
+					condition={
+						iconName &&
+						validationResult !== undefined &&
+						validationResult.errors.length === 0
+					}
+				>
 					<LeftIcon className={iconClassName} iconName={iconName} />
 				</When>
 

@@ -35,6 +35,7 @@ import type { Step } from '@datashaper/workflow';
 import type { TableContainer } from '@datashaper/tables';
 import type { TableMetadata } from '@datashaper/tables';
 import type { ValidationResult } from '@datashaper/schema';
+import type { ValidationTestResult } from '@datashaper/schema';
 import type { Value } from '@datashaper/schema';
 import { Workflow } from '@datashaper/workflow';
 
@@ -673,6 +674,11 @@ export function useTextFieldChangeHandler<T extends object | void | unknown>(ste
 //
 // @public (undocumented)
 export function useValidationIconProps(iconProps: IIconStyles, validationResult?: ValidationResult): any;
+
+// Warning: (ae-missing-release-tag) "useValidationRenderer" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function useValidationRenderer(value: any, validationResult?: ValidationResult): ValidationTestResult[];
 
 // Warning: (ae-missing-release-tag) "useWorkflow" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
