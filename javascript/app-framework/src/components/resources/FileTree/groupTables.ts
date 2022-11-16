@@ -14,14 +14,14 @@ import type {
 import { icons } from './FileTree.styles.js'
 import type { FileDefinition, ResourceTreeData } from './FileTree.types.js'
 
-function qs(args: Record<string, string>): string {
-	return Object.entries(args)
-		.map(([key, value]) => `${key}=${value}`)
-		.join('&')
-}
-
-function wrangleUrl(args: { table: string; resource: Profile }): string {
-	return `/wrangle?${qs(args)}`
+function generateKey({
+	table,
+	resource,
+}: {
+	table: string
+	resource: Profile
+}): string {
+	return `table.${resource}|${table}`
 }
 
 /**
@@ -50,7 +50,7 @@ export function groupTables(tables: DataTable[]): ResourceTreeData[] {
 
 function resourceNode(table: DataTable): ResourceTreeData {
 	return {
-		route: wrangleUrl({
+		key: generateKey({
 			table: table.name,
 			resource: 'datasource',
 		}),
@@ -61,7 +61,7 @@ function resourceNode(table: DataTable): ResourceTreeData {
 
 function datasourceNode(table: DataTable): ResourceTreeData {
 	return {
-		route: wrangleUrl({
+		key: generateKey({
 			table: table.name,
 			resource: 'source',
 		}),
@@ -72,7 +72,7 @@ function datasourceNode(table: DataTable): ResourceTreeData {
 
 function workflowNode(table: DataTable): ResourceTreeData {
 	return {
-		route: wrangleUrl({
+		key: generateKey({
 			table: table.name,
 			resource: 'workflow',
 		}),
@@ -83,7 +83,7 @@ function workflowNode(table: DataTable): ResourceTreeData {
 
 function codebookNode(table: DataTable): ResourceTreeData {
 	return {
-		route: wrangleUrl({
+		key: generateKey({
 			table: table.name,
 			resource: 'codebook',
 		}),
@@ -97,7 +97,7 @@ function bundleNode(
 	children: ResourceTreeData[],
 ): ResourceTreeData {
 	return {
-		route: wrangleUrl({
+		key: generateKey({
 			table: table.name,
 			resource: 'bundle',
 		}),

@@ -40,6 +40,7 @@
 		"debug": "^4.3.4",
 		"lodash-es": "^4.17.21",
 		"observable-hooks": "^4.2.1",
+		"react-if": "^4.1.4",
 		"rxjs": "^7.5.7",
 		"tslib": "^2.4.1",
 		"yarn": "^1.22.19"

@@ -1,0 +1,25 @@
+{
+	"name": "Companies",
+	"resources": [
+		{
+			"profile": "datatable",
+			"name": "companies",
+			"path": "data/companies.csv"
+		},
+		{
+			"profile": "datatable",
+			"name": "companies2",
+			"path": "data/companies2.csv"
+		},
+		{
+			"profile": "datatable",
+			"name": "products",
+			"path": "data/products.csv"
+		},
+		{
+			"profile": "datatable",
+			"name": "stocks",
+			"path": "data/stocks.csv"
+		}
+	]
+}

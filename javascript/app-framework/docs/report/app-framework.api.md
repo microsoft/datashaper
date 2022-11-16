@@ -168,7 +168,7 @@ export interface FileTreeProps {
     // (undocumented)
     selectedFileId?: string;
     // (undocumented)
-    selectedRoute?: string;
+    selectedKey?: string;
     // (undocumented)
     style?: React.CSSProperties;
     // (undocumented)
@@ -311,7 +311,7 @@ export function removeExtension(fileName: string): string;
 export interface ResourceTreeData {
     children?: ResourceTreeData[];
     icon?: string;
-    route: string;
+    key: string;
     title: string;
 }
 

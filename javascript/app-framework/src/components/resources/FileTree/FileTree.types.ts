@@ -15,7 +15,7 @@ export interface FileTreeProps {
 	toggleExpanded: () => void
 	examples?: FileDefinition[]
 	appResources: ResourceTreeData[]
-	selectedRoute?: string
+	selectedKey?: string
 	onSelect?: (resource: ResourceTreeData) => void
 }
 
@@ -43,9 +43,9 @@ export interface FileDefinition {
  */
 export interface ResourceTreeData {
 	/**
-	 * The unique node idw
+	 * The unique node key
 	 */
-	route: string
+	key: string
 
 	/**
 	 * The node text to use. Default=id

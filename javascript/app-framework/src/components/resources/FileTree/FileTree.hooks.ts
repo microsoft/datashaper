@@ -124,9 +124,10 @@ export function useFileManagementCommands(
 		)
 	}, [examples, onClickExample, onClickUploadTable, onClickUploadZip])
 
-	const onSaveCommands = useMemo(() => {
-		return saveProps(onClickDownloadZip)
-	}, [onClickDownloadZip])
+	const onSaveCommands = useMemo(
+		() => saveProps(onClickDownloadZip),
+		[onClickDownloadZip],
+	)
 
 	const theme = useTheme()
 	const commands = useMemo<ICommandBarItemProps[]>(

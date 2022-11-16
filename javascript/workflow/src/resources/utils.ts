@@ -89,9 +89,6 @@ export function resolveRawData(
 	if (locallyResolved) {
 		return Promise.resolve(locallyResolved)
 	} else {
-		if (!resource.startsWith('http')) {
-			throw new Error('Invalid resource URL: ' + resource)
-		}
 		return fetchFile(resource)
 	}
 }
