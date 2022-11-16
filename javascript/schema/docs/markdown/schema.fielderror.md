@@ -14,6 +14,7 @@ export interface FieldError
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [callbackFunction?](./schema.fielderror.callbackfunction.md) |  | (values: unknown, includeInstances: boolean) =&gt; [ValidationTestResult](./schema.validationtestresult.md) | <i>(Optional)</i> |
 |  [indexes?](./schema.fielderror.indexes.md) |  | number\[\] | <i>(Optional)</i> |
 |  [name](./schema.fielderror.name.md) |  | string |  |
 |  [rule](./schema.fielderror.rule.md) |  | [ErrorCode](./schema.errorcode.md) |  |

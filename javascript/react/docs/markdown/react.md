@@ -25,7 +25,7 @@
 |  [useCheckboxChangeHandler(step, updateFn, onChange)](./react.usecheckboxchangehandler.md) |  |
 |  [useColumnNames(table, filter)](./react.usecolumnnames.md) |  |
 |  [useColumnNamesList(table, columns)](./react.usecolumnnameslist.md) | Creates a list of column names for the table. If there are no columns supplied it will use the list from the table itself. Otherwise it will use the provided columns under the assumption the user has configured them as desired. |
-|  [useColumns(table, metadata, columns, onColumnSelect, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
+|  [useColumns(table, validationResult, metadata, columns, onColumnSelect, onSort, options, virtualColumns)](./react.usecolumns.md) | Overlays a number of special features onto the IColumn objects for a table. This includes overridden renderers to support our sorting, selection, and data visualization. |
 |  [useColumnsMetadata(table, filter)](./react.usecolumnsmetadata.md) |  |
 |  [useColumnStyles(clickable, separator)](./react.usecolumnstyles.md) |  |
 |  [useColumnType(table, column)](./react.usecolumntype.md) |  |
@@ -38,8 +38,10 @@
 |  [useDropdownChangeAllHandler(step, updateFn, onChange)](./react.usedropdownchangeallhandler.md) |  |
 |  [useDropdownChangeHandler(step, updateFn, onChange)](./react.usedropdownchangehandler.md) | Creates a callback handler for changing the step based on a dropdown value. This only handles basic cases where the dropdown option key can be set on the step using an object path. |
 |  [useFormattedNumber(value, formatter)](./react.useformattednumber.md) |  |
+|  [useGetColumnValidationErrors(validationResult)](./react.usegetcolumnvalidationerrors.md) |  |
 |  [useGroupHeaderRenderer(table, computedMetadata, groupHeaderFunction, lazyLoadGroups)](./react.usegroupheaderrenderer.md) | Overrides the default group header rendering so we can inject customization |
 |  [useHeaderCommandBarDefaults(props, far, colors)](./react.useheadercommandbardefaults.md) | Helper to create the props necessary for the default inverted management bar. Basic colors can be customized, but note that if you do not want an always-inverted bar like that used in the DataShaper webapp, you may want to just tweak the Fluent styles as normal. |
+|  [useIconProps(validationResult)](./react.useiconprops.md) |  |
 |  [useIncrementingColumnColorScale(meta)](./react.useincrementingcolumncolorscale.md) | Creates a thematic nominal color scale function that auto-increments for the numeric columns in a table. |
 |  [useLeftColumn(step)](./react.useleftcolumn.md) |  |
 |  [useModalState(onShow, onHide)](./react.usemodalstate.md) | A hook to consolidate view-state for modals |
@@ -67,6 +69,8 @@
 |  [useSuggestedTableName(workflow)](./react.usesuggestedtablename.md) | Returns a hook to generate a new table name based on the given input e.g. "join" could result in "join 1" or "join 2" depending on how many collisions occur. |
 |  [useTableDropdownOptions(workflow)](./react.usetabledropdownoptions.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |
 |  [useTextFieldChangeHandler(step, updateFn, onChange)](./react.usetextfieldchangehandler.md) |  |
+|  [useValidationIconProps(iconProps, validationResult)](./react.usevalidationiconprops.md) |  |
+|  [useValidationRenderer(value, validationResult)](./react.usevalidationrenderer.md) |  |
 |  [useWorkflow(input, inputs)](./react.useworkflow.md) |  |
 |  [useWorkflowDataTable(id, workflow, existingTable)](./react.useworkflowdatatable.md) |  |
 |  [useWorkflowInputTableNames(workflow)](./react.useworkflowinputtablenames.md) | Creates a dropdown list of id-names from the tables in a store TODO: for any given step, we should only show the tables created \*prior\* to this step, potentially via an optional filter callback on store.list. As it is, whenever the store is updated all the table dropdowns get the results. |

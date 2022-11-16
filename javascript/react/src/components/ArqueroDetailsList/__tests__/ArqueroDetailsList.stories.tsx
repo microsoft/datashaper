@@ -6,6 +6,7 @@
 import { ArqueroDetailsList } from '../ArqueroDetailsList.js'
 import { BasicStory } from './Basic.story.js'
 import { ColumnsStory } from './Columns/Columns.story.js'
+import { ColumnValidationStory } from './ColumnValidation.story.js'
 import { FeaturesStory } from './Features.story.js'
 import { FillStory } from './Fill.story.js'
 import { MicroStory } from './Micro.story.js'
@@ -35,3 +36,4 @@ export const Selection = SelectionStory
 Selection.storyName = 'Selection & sorting'
 export const RowGrouping = RowGroupingStory
 export const Performance = PerformanceStory
+export const ColumnValidation = ColumnValidationStory

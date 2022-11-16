@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft. All rights reserved.
  * Licensed under the MIT license. See LICENSE file in the project.
  */
-import type { Field, SortDirection } from '@datashaper/schema'
+import type { Field, SortDirection, ValidationResult } from '@datashaper/schema'
 import type { TableMetadata } from '@datashaper/tables'
 import type {
 	IColumn,
@@ -121,6 +121,7 @@ export interface DetailsListFeatures {
 export interface ArqueroDetailsListProps
 	extends Omit<IDetailsListProps, 'items'> {
 	table: ColumnTable
+	validationResult?: ValidationResult
 	features?: DetailsListFeatures
 	/**
 	 * Optional metadata to use for column smart features.

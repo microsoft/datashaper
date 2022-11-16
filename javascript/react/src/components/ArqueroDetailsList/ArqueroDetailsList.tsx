@@ -40,6 +40,7 @@ import {
 export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 	function ArqueroDetailsList({
 		table,
+		validationResult,
 		features = {},
 		metadata,
 		offset = 0,
@@ -98,6 +99,7 @@ export const ArqueroDetailsList: React.FC<ArqueroDetailsListProps> = memo(
 
 		const displayColumns = useColumns(
 			table,
+			validationResult,
 			metadata,
 			columns,
 			onColumnSelect,
