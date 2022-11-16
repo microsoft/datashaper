@@ -168,6 +168,26 @@ export type ComboBoxChangeHandler = (event: React.FormEvent<IComboBox>, option: 
 // @public (undocumented)
 export type ComboBoxInputValueChangeHandler = (value?: string | undefined) => void;
 
+// Warning: (ae-missing-release-tag) "CommandBarColors" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface CommandBarColors {
+    // (undocumented)
+    background: string;
+    // (undocumented)
+    border: string;
+    // (undocumented)
+    checked: string;
+    // (undocumented)
+    color: string;
+    // (undocumented)
+    disabled: string;
+    // (undocumented)
+    hovered: string;
+    // (undocumented)
+    pressed: string;
+}
+
 // Warning: (ae-missing-release-tag) "DetailsListFeatures" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -464,7 +484,6 @@ export function useComboBoxChangeHandler<T extends object | void | unknown>(step
 // @public
 export function useComboBoxInputValueChangeHandler<T extends object | void | unknown>(step: Step<T>, updateFn: (step: Step<T>, value: string | undefined) => void, onChange?: StepChangeFunction<T>): ComboBoxInputValueChangeHandler;
 
-// Warning: (ae-forgotten-export) The symbol "CommandBarColors" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "useCommandBarColorDefaults" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)

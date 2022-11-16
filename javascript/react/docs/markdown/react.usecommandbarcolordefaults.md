@@ -14,9 +14,9 @@ export declare function useCommandBarColorDefaults(colors?: Partial<CommandBarCo
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  colors | Partial&lt;CommandBarColors&gt; | <i>(Optional)</i> |
+|  colors | Partial&lt;[CommandBarColors](./react.commandbarcolors.md)<!-- -->&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
-CommandBarColors
+[CommandBarColors](./react.commandbarcolors.md)
 
