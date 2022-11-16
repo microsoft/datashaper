@@ -28,13 +28,17 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 		appResources = emptyArray,
 		selectedKey,
 		handlers,
+		frontPage,
 		onSelect,
 	}) {
 		const fileTreeStyle = useFileTreeStyle()
 		const ref = useRef<AllotmentHandle | null>(null)
-		const [expanded, { toggle: toggleExpanded }] = useBoolean(true)
+		const [
+			expanded,
+			{ toggle: toggleExpanded, setTrue: expand, setFalse: collapse },
+		] = useBoolean(true)
 		const onToggle = useOnToggle(ref, expanded, toggleExpanded)
-		const onChangeWidth = useOnChangeWidth(expanded, toggleExpanded)
+		const onChangeWidth = useOnChangeWidth(expanded, collapse, expand)
 		const { handler, args } = useHandlerArgs(selectedKey)
 
 		return (
@@ -61,7 +65,12 @@ export const DataShaperApp: React.FC<DataShaperAppProps> = memo(
 					/>
 				</Allotment.Pane>
 				<Allotment.Pane>
-					<ContentSelector handler={handler} args={args} handlers={handlers} />
+					<ContentSelector
+						frontPage={frontPage}
+						handler={handler}
+						args={args}
+						handlers={handlers}
+					/>
 				</Allotment.Pane>
 			</Allotment>
 		)

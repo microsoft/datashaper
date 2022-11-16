@@ -19,12 +19,18 @@ export interface ContentSelectorProps {
 	handler?: string
 	args?: string[]
 	handlers?: Record<string, React.ComponentType<{ args: string[] }>>
+	frontPage?: React.ComponentType
 }
 
 const emptyArray = Object.freeze([]) as any
 export const ContentSelector: React.FC<ContentSelectorProps> = memo(
-	function ContentSelector({ handler, args, handlers }) {
-		if (handler != null) {
+	function ContentSelector({ handler, args, handlers, frontPage: FrontPage }) {
+		if (handler == null) {
+			if (FrontPage != null) {
+				return <FrontPage />
+			}
+			return null
+		} else {
 			const defaultHandler = DEFAULT_HANDLERS[handler]
 			if (defaultHandler != null) {
 				if (args == null || args.length === 0) {
@@ -44,7 +50,6 @@ export const ContentSelector: React.FC<ContentSelectorProps> = memo(
 			}
 			return <div>Could not render content for handler type {handler}.</div>
 		}
-		return null
 	},
 )
 

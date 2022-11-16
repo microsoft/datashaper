@@ -39,6 +39,11 @@ export interface DataShaperAppProps {
 	onSelect?: (resource: ResourceTreeData) => void
 
 	/**
+	 * The default component to render when no resource is selected
+	 */
+	frontPage?: React.ComponentType
+
+	/**
 	 * Custom resource renderers
 	 */
 	handlers?: Record<string, React.ComponentType<{ args: string[] }>>

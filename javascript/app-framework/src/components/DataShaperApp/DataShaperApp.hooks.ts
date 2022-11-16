@@ -6,6 +6,9 @@ import { useDebounceFn } from 'ahooks'
 import type { AllotmentHandle } from 'allotment'
 import { useCallback, useMemo } from 'react'
 
+const BREAK_WIDTH = 150
+const COLLAPSED_WIDTH = 60
+
 export function useOnToggle(
 	ref: React.MutableRefObject<AllotmentHandle | null>,
 	expanded: boolean,
@@ -13,7 +16,7 @@ export function useOnToggle(
 ): () => void {
 	return useCallback(() => {
 		if (expanded) {
-			ref?.current?.resize([60])
+			ref?.current?.resize([COLLAPSED_WIDTH])
 		} else {
 			ref?.current?.reset()
 		}
@@ -23,16 +26,21 @@ export function useOnToggle(
 
 export function useOnChangeWidth(
 	expanded: boolean,
-	toggleExpanded: () => void,
+	collapse: () => void,
+	expand: () => void,
 ): (sizes: number[]) => void {
 	const changeWidth = useCallback(
 		(sizes: number[]) => {
-			const menuSize = sizes[0] ?? 0
-			if ((menuSize < 150 && expanded) || (menuSize > 150 && !expanded)) {
-				toggleExpanded()
+			if (sizes.length > 0) {
+				const menuSize = sizes[0] as number
+				if (menuSize < BREAK_WIDTH && expanded) {
+					collapse()
+				} else if (menuSize >= BREAK_WIDTH && !expanded) {
+					expand()
+				}
 			}
 		},
-		[expanded, toggleExpanded],
+		[expanded, collapse, expand],
 	)
 
 	return useDebounceFn(
